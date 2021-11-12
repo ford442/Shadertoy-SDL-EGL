@@ -8,8 +8,7 @@
 #include <emscripten/emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
-
-Uint8 * stm;
+Uint8 *stm;
 static EGLDisplay display;
 static EGLContext contextegl;
 static EGLSurface surface;
@@ -18,13 +17,10 @@ static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-
 static void renderFrame(){
-  
 glClearColor(0.0,1.0,0.0,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 }
-
 static void strt(){
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -41,7 +37,7 @@ EGL_DEPTH_SIZE,24,
 EGL_NONE
 };
 SDL_GL_SetAttribute( SDL_GL_RED_SIZE,5);
-SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE,5);
+SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE,6);
 SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE,5);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_RED_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_GREEN_SIZE,8);
@@ -49,23 +45,19 @@ SDL_GL_SetAttribute( SDL_GL_ACCUM_BLUE_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER,1);
-attr.alpha=1;
-attr.stencil=1;
-attr.depth=1;
-attr.antialias=0;
-attr.premultipliedAlpha=0;
-attr.preserveDrawingBuffer=0;
+attr.alpha=true;
+attr.stencil=true;
+attr.depth=true;
+attr.antialias=false;
+attr.premultipliedAlpha=false;
+attr.preserveDrawingBuffer=false;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 emscripten_webgl_init_context_attributes(&attr);
-  
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
-
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
-  
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-  
 eglInitialize(display,&major,&minor);
-
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
@@ -73,23 +65,16 @@ EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
-  
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-
 if(contextegl==EGL_NO_CONTEXT){
 }
 else{
-  
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
-  
+emscripten_webgl_make_context_current(ctx);
 eglMakeCurrent(display,surface,surface,contextegl);
-  
 glClearColor(0.0,0.0,0.0,0.0);
 glClear(GL_COLOR_BUFFER_BIT);
 }}
-  
-emscripten_webgl_make_context_current(ctx);
-
 int width=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int height=width;
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_OPENGL);
@@ -156,8 +141,7 @@ plt();
 }
 void str(){
 strt();
-}
-}
+}}
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
