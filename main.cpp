@@ -145,7 +145,7 @@ strt();
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
-const shaderWebBackground={};(()=>{'use strict';const t=(a,b)=>{b.initHalfFloatRGBATexture(b.width,b.height);a.texParameteri(a.TEXTURE_2D,
+const shaderWebBackground={};const t=(a,b)=>{b.initHalfFloatRGBATexture(b.width,b.height);a.texParameteri(a.TEXTURE_2D,
 a.TEXTURE_MIN_FILTER,a.LINEAR);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_MAG_FILTER,
 a.LINEAR);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_WRAP_S,a.CLAMP_TO_EDGE);a.texParameteri(a.TEXTURE_2D,
 a.TEXTURE_WRAP_T,a.CLAMP_TO_EDGE)},x=(a,b)=>{console.warn("shader-web-background cannot shade, adding fallback CSS classes");
