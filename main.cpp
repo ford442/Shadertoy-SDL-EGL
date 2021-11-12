@@ -145,7 +145,6 @@ strt();
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
-// -- https://xemantic.github.io/shader-web-background/
 const shaderWebBackground={};(()=>{'use strict';const t=(a,b)=>{b.initHalfFloatRGBATexture(b.width,b.height);a.texParameteri(a.TEXTURE_2D,
 a.TEXTURE_MIN_FILTER,a.LINEAR);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_MAG_FILTER,
 a.LINEAR);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_WRAP_S,a.CLAMP_TO_EDGE);a.texParameteri(a.TEXTURE_2D,
@@ -236,7 +235,6 @@ this.h=Y(this);this.g=Y(this)}i(a){const b=this.gl;b.bindFramebuffer(b.FRAMEBUFF
 this.j);b.framebufferTexture2D(b.FRAMEBUFFER,b.COLOR_ATTACHMENT0,b.TEXTURE_2D,this.g,
 0);a();b.framebufferTexture2D(b.FRAMEBUFFER,b.COLOR_ATTACHMENT0,b.TEXTURE_2D,null,
 0);b.bindFramebuffer(b.FRAMEBUFFER,null)}};})()
-//# sourceMappingURL=shader-web-background.min.js.map
 });
 return 1;
 }
