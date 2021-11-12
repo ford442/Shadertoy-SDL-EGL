@@ -223,7 +223,7 @@ if(!a.getShaderParameter(c,a.COMPILE_STATUS)){const l=String(a.getShaderInfoLog(
 a.deleteShader(c);b="Cannot compile shader - "+b+": "+l;console.log(b);console.log(X(d));
 throw Error(b);}return c}
 class I{constructor(a,b){this.canvas=a;const c=(l,f)=>{if(!l)throw Error(f);return l};
-let d=SDL2.ctx;if(d)this.h=new W(d,c);else if(d=a.getContext("webgl",
+let d=ctx;if(d)this.h=new W(d,c);else if(d=a.getContext("webgl",
 b))this.h=new V(d,c);c(d,"webgl context not supported on supplied canvas element: "+
 a);this.gl=d;a=d.createBuffer();d.bindBuffer(d.ARRAY_BUFFER,a);d.bufferData(d.ARRAY_BUFFER,
 new Float32Array(O),d.STATIC_DRAW);d.bindBuffer(d.ARRAY_BUFFER,null);this.j=a;this.buffers=
