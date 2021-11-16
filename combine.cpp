@@ -99,26 +99,26 @@ EGL_NONE
 };
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_STENCIL_SIZE,8,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
+EGL_ALPHA_SIZE,16,
+EGL_STENCIL_SIZE,16,
 EGL_DEPTH_SIZE,24,
 EGL_NONE
 };
-SDL_GL_SetAttribute( SDL_GL_RED_SIZE,5);
-SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE,6);
-SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE,5);
+SDL_GL_SetAttribute( SDL_GL_RED_SIZE,8);
+SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE,8);
+SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_RED_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_GREEN_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_BLUE_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER,1);
-attr.alpha=true;
-attr.stencil=true;
-attr.depth=true;
+attr.alpha=false;
+attr.stencil=false;
+attr.depth=false;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
