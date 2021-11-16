@@ -63,7 +63,6 @@ document.getElementById('btn7').style="background-color:red;position:absolute;di
 document.getElementById('shut').innerHTML=2;
 document.getElementById('di').click();
 });
-/
 
 var openFile=function(event){
 var input=event.target;
