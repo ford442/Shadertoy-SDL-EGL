@@ -216,7 +216,6 @@ strt();
 
 static char* read_file_into_str(const char *filename) {
 long length = 0;
-auto  *result = 0;
 FILE *file = fopen(filename, "r");
 if(file) {
 int status = fseek(file, 0, SEEK_END);
@@ -230,7 +229,7 @@ if(status != 0) {
 fclose(file);
 return NULL;
 }
-result = malloc((length+1) * sizeof(char));
+auto result = malloc((length+1) * sizeof(char));
 if(result) {
 size_t actual_length = fread(result, sizeof(char), length , file);
 result[actual_length++] = '\0';
