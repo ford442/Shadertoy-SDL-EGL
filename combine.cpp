@@ -308,8 +308,10 @@ texture_files[i] = NULL;
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
-program_source = static_cast<char>(EM_ASM({return FS.readFile('shader1.glsl',{ encoding: 'utf8' });}));
-default_fragment_shader = program_source;
+void* ssrc = (EM_ASM({return FS.readFile('shader1.glsl',{ encoding: 'utf8' });}));
+program_source = static_cast<char>&ssrc;
+
+  default_fragment_shader = program_source;
 select_gles3();
 return 1;
 }
