@@ -308,7 +308,7 @@ texture_files[i] = NULL;
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
-auto srcc = EM_ASM({return FS.readFile('shader1.glsl',{ encoding: 'utf8' });});
+auto char srcc = EM_ASM({return FS.readFile('shader1.glsl',{ encoding: 'utf8' });});
 program_source = srcc;
 default_fragment_shader = program_source;
 select_gles3();
