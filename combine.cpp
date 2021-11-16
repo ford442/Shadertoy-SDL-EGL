@@ -43,6 +43,7 @@ static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 SDL_Window *win;
 SDL_GLContext *glCtx;
+            program_source = read_file_into_str(optarg);
 
 static void select_gles3() {
 common_shader_header = common_shader_header_gles3;
@@ -304,14 +305,11 @@ const char* texture_files[4];
 for (int i=0; i<4; ++i) {
 texture_files[i] = NULL;
 char ssrc='/shader1.glsl';
-program_source = read_file_into_str(ssrc);
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
-void* ssrc = (EM_ASM({return FS.readFile('shader1.glsl',{ encoding: 'utf8' });}));
-program_source = static_cast<char>&ssrc;
-
-  default_fragment_shader = program_source;
+program_source = read_file_into_str(ssrc);
+default_fragment_shader = program_source;
 select_gles3();
 return 1;
 }
