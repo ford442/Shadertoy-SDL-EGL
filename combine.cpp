@@ -214,7 +214,7 @@ void str(){
 strt();
 }}
 
-/*
+
 static char* read_file_into_str(const char *filename) {
 char *result = NULL;
 long length = 0;
@@ -241,7 +241,6 @@ return result;
 }
 return NULL;
 }
-*/
 
 int main(){
 EM_ASM({
@@ -303,8 +302,9 @@ int window_y = -1;
 int temp_val = 0;
 const char* texture_files[4];
 for (int i=0; i<4; ++i) {
-texture_files[i] = NULL; 
-
+texture_files[i] = NULL;
+char ssrc='/shader1.glsl';
+program_source = read_file_into_str(ssrc);
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
