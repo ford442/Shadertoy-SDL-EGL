@@ -216,7 +216,7 @@ strt();
 
 static char* read_file_into_str(const char *filename) {
 long length = 0;
-char *result = NULL;
+auto  *result = NULL;
 FILE *file = fopen(filename, "r");
 if(file) {
 int status = fseek(file, 0, SEEK_END);
