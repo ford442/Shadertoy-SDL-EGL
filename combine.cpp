@@ -303,7 +303,7 @@ int temp_val = 0;
 const char* texture_files[4];
 for (int i=0; i<4; ++i) {
 texture_files[i] = NULL;
-char ssrc='/shader1.glsl';
+const char ssrc='/shader1.glsl';
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
