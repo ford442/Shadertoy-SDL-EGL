@@ -303,8 +303,8 @@ int window_y = -1;
 int temp_val = 0;
 const char* texture_files[4];
 for (int i=0; i<4; ++i) {
-texture_files[i] = NULL; int (* ...
-}
+texture_files[i] = NULL; 
+
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
