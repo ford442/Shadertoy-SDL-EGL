@@ -43,7 +43,6 @@ static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 SDL_Window *win;
 SDL_GLContext *glCtx;
-            program_source = read_file_into_str(optarg);
 
 static void select_gles3() {
 common_shader_header = common_shader_header_gles3;
@@ -296,8 +295,8 @@ console.log('File: shader4.glsl.');
 }}
 ff4.send(null);
 });
-  
 });
+
 int window_x = -1;
 int window_y = -1;
 int temp_val = 0;
