@@ -1,11 +1,11 @@
 
-var openFile=function(event){
-var input=event.target;
-var reader=new FileReader();
+let openFile=function(event){
+let input=event.target;
+let reader=new FileReader();
 reader.onload=function(){
-var arrayBuffer=reader.result;
-var fil=new Uint8ClampedArray(arrayBuffer);
-var filnm="/shader1.glsl";
+let arrayBuffer=reader.result;
+let fil=new Uint8ClampedArray(arrayBuffer);
+let filnm="/shader1.glsl";
 FS.writeFile(filnm,fil);
 console.log('File: '+input.files[0].name);
 };
