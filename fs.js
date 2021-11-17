@@ -1,5 +1,5 @@
 
-function openFile(event){
+document.getElementById('cue').addEventListener('onchange',function(event){
 let input=event.target;
 let reader=new FileReader();
 reader.onload=function(){
