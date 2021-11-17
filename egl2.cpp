@@ -12,10 +12,10 @@
 #include <stdbool.h>
 #include "config.h"
 
-static const char* common_shader_header = common_shader_header_gles3;
-static const char* vertex_shader_body = vertex_shader_body_gles3;
-static const char* fragment_shader_header = fragment_shader_header_gles3;
-static const char* fragment_shader_footer = fragment_shader_footer_gles3;
+static char const *common_shader_header = common_shader_header_gles3;
+static char const *vertex_shader_body = vertex_shader_body_gles3;
+static char const *fragment_shader_header = fragment_shader_header_gles3;
+static char const *fragment_shader_footer = fragment_shader_footer_gles3;
 
 static GLuint shader_program;
 static GLint attrib_position;
