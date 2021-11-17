@@ -8,6 +8,7 @@
 #include <emscripten/emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
+#include "SDL2/SDL_config.h"
 
 Uint8 * stm;
 static EGLDisplay display;
