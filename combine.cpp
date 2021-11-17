@@ -245,14 +245,6 @@ return NULL;
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
-});
-int window_x = -1;
-int window_y = -1;
-int temp_val = 0;
-const char* texture_files[4];
-for (int i=0; i<4; ++i) {
-texture_files[i] = NULL;
-}
 var openFile=function(event){
 var input=event.target;
 var reader=new FileReader();
@@ -265,6 +257,12 @@ console.log('File: '+input.files[0].name);
 };
 reader.readAsArrayBuffer(input.files[0]);
 };
+});
+int temp_val = 0;
+const char* texture_files[4];
+for (int i=0; i<4; ++i) {
+texture_files[i] = NULL;
+}
 const char* ssrc = "/shader1.glsl";
 char *program_source = NULL;
 int selected_option = -1;
