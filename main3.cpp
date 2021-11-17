@@ -7,15 +7,15 @@
 #include <GLES3/gl3.h>
 #include <emscripten/emscripten.h>
 #include <emscripten/html5.h>
-#include <SDL2/SDL.h>
 #include "SDL2/SDL_config.h"
+#include <SDL2/SDL.h>
 
-Uint8 * stm;
+static SDL_AudioDeviceID dev;
+
 static EGLDisplay display;
 static EGLContext contextegl;
 static EGLSurface surface;
 static EmscriptenWebGLContextAttributes attr;
-static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
@@ -157,8 +157,7 @@ plt();
 }
 void str(){
 strt();
-}
-}
+}}
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
