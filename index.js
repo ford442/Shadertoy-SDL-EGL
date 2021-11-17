@@ -1,4 +1,5 @@
-MyModule =
+// MyModule =
+Module = 
 {
 canvas: (function() {
 var aCanvas = document.getElementById('canvas');
@@ -6,4 +7,4 @@ var aCanvas = document.getElementById('canvas');
 return aCanvas;
 })(),
 };
-const OccViewerModuleInitialized = createModule(MyModule);
+// const OccViewerModuleInitialized = createModule(MyModule);
