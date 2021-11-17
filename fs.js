@@ -1,5 +1,5 @@
 
-let openFile=function(event){
+function openFile(event){
 let input=event.target;
 let reader=new FileReader();
 reader.onload=function(){
