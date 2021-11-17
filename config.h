@@ -9,12 +9,20 @@
 static const char options_string[] = "?fw:h:s:l0:1:2:3:x:y:k:";
 
 static struct option long_options[] = {
+    {"width", required_argument, 0, 'w'},
+    {"height", required_argument, 0, 'h'},
+    {"window_x", required_argument, 0, 'x'},
+    {"window_y", required_argument, 0, 'y'},
+    {"height", required_argument, 0, 'h'},
+    {"fullscreen", no_argument, 0, 'f'},
     {"source", required_argument, 0, 's'},
+    {"legacy", no_argument, 0, 'l'},
     {"texture0", required_argument, 0, '0'},
     {"texture1", required_argument, 0, '1'},
     {"texture2", required_argument, 0, '2'},
     {"texture3", required_argument, 0, '3'},
     {"keyboard", required_argument, 0, 'k'},
+    {"help", no_argument, 0, '?'},
     {0, 0, 0, 0}
 };
 
@@ -22,7 +30,32 @@ static struct option long_options[] = {
  * Settings for OpenGL ES 2.0 with GLSL 100 (legacy) and OpenGL ES 3.0 with GLSL 300 ES
  */
 
+// OpenGL ES 2.0 / GLSL 100
 
+static const char common_shader_header_gles2[] =
+    "#version 100\n"
+    "precision highp float;";
+
+static const char vertex_shader_body_gles2[] =
+    "attribute vec4 iPosition;"
+    "void main(){gl_Position=iPosition;}";
+
+static const char fragment_shader_header_gles2[] =
+    "uniform vec3 iResolution;"
+    "uniform float iGlobalTime;" // legacy
+    "uniform float iTime;"
+    "uniform float iChannelTime[4];"
+    "uniform vec4 iMouse;"
+    "uniform vec4 iDate;"
+    "uniform float iSampleRate;"
+    "uniform vec3 iChannelResolution[4];"
+    "uniform sampler2D iChannel0;"
+    "uniform sampler2D iChannel1;"
+    "uniform sampler2D iChannel2;"
+    "uniform sampler2D iChannel3;\n";
+
+static const char fragment_shader_footer_gles2[] =
+    "\nvoid main(){mainImage(gl_FragColor,gl_FragCoord.xy);}";
 
 // OpenGL ES 3.0 / GLSL 300 es
 
