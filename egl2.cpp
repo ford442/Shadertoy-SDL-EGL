@@ -12,10 +12,12 @@
 #include <stdbool.h>
 #include "config.h"
 
-static char const *common_shader_header = common_shader_header_gles3;
-static char const *vertex_shader_body = vertex_shader_body_gles3;
-static char const *fragment_shader_header = fragment_shader_header_gles3;
-static char const *fragment_shader_footer = fragment_shader_footer_gles3;
+static void select_gles3() {
+common_shader_header = common_shader_header_gles3;
+vertex_shader_body = vertex_shader_body_gles3;
+fragment_shader_header = fragment_shader_header_gles3;
+fragment_shader_footer = fragment_shader_footer_gles3;
+}
 
 static GLuint shader_program;
 static GLint attrib_position;
@@ -64,7 +66,7 @@ SDL_Window *win;
 SDL_GLContext *glCtx;
 
 static void renderFrame(){
-abstime = SDL_GetTicks() / 1000;
+float abstime = SDL_GetTicks() / 1000;
 static const GLfloat vertices[] = {
 -1.0f, -1.0f,
 1.0f, -1.0f,
@@ -110,6 +112,7 @@ return NULL;
 }
 
 static void strt(){
+select_gles3();
 GLuint vtx, frag;
 const char *sources[4];
 char* log;
