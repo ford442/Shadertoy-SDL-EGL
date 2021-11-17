@@ -12,7 +12,7 @@ tst2: main3.cpp  Makefile
 -sUSE_WEBGL2=1 -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -ffast-math -sSUPPORT_LONGJMP=0 -flto -DNDEBUG -sASSERTIONS=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 -O3 -o egl2.js -std=c++17 -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
---extern-post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
+--extern-post-js index.js --post-js filesys.js --post-js fs.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
 
 
 
