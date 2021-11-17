@@ -12,13 +12,6 @@
 #include <stdbool.h>
 #include "config.h"
 
-static void select_gles3() {
-common_shader_header = common_shader_header_gles3;
-vertex_shader_body = vertex_shader_body_gles3;
-fragment_shader_header = fragment_shader_header_gles3;
-fragment_shader_footer = fragment_shader_footer_gles3;
-}
-
 static GLuint shader_program;
 static GLint attrib_position;
 static GLint sampler_channel[4];
@@ -33,10 +26,17 @@ static GLint uniform_srate;
 static GLfloat viewportSizeX = 0.0;
 static GLfloat viewportSizeY = 0.0;
 
+static const char* common_shader_header = common_shader_header_gles3;
+static const char* vertex_shader_body = vertex_shader_body_gles3;
+static const char* fragment_shader_header = fragment_shader_header_gles3;
+static const char* fragment_shader_footer = fragment_shader_footer_gles3;
+
+static void select_gles3() {
 common_shader_header = common_shader_header_gles3;
 vertex_shader_body = vertex_shader_body_gles3;
 fragment_shader_header = fragment_shader_header_gles3;
 fragment_shader_footer = fragment_shader_footer_gles3;
+}
 
 static GLuint compile_shader(GLenum type, GLsizei nsources, const char **sources){
 GLuint shader;
