@@ -68,7 +68,7 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
-float cllr = SDL_GetTicks() / 100000;
+float cllr = SDL_GetTicks() / 20000;
 glClear(GL_COLOR_BUFFER_BIT);
 glClearColor(cllr, 0.0f, 1.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
