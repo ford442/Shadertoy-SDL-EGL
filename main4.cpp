@@ -137,6 +137,45 @@ int width=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML
 int height=width;
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_OPENGL);
 glCtx=&contextegl;
+sources[0] = common_shader_header;
+sources[1] = vertex_shader_body;
+vtx = compile_shader(GL_VERTEX_SHADER, 2, sources);
+sources[0] = common_shader_header;
+sources[1] = fragment_shader_header;
+sources[2] = default_fragment_shader;
+sources[3] = fragment_shader_footer;
+frag = compile_shader(GL_FRAGMENT_SHADER, 4, sources);
+shader_program = glCreateProgram();
+glAttachShader(shader_program, vtx);
+glAttachShader(shader_program, frag);
+glLinkProgram(shader_program);
+glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+if (!success) {
+glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
+if (len > 1) {
+log = malloc(len);
+glGetProgramInfoLog(shader_program, len, &len, log);
+fprintf(stderr, "%s\n\n", log);
+free(log);
+}
+die("Error linking shader program.\n");
+}
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
+glUseProgram(shader_program);
+glValidateProgram(shader_program);
+attrib_position = glGetAttribLocation(shader_program, "iPosition");
+sampler_channel[0] = glGetUniformLocation(shader_program, "iChannel0");
+sampler_channel[1] = glGetUniformLocation(shader_program, "iChannel1");
+sampler_channel[2] = glGetUniformLocation(shader_program, "iChannel2");
+sampler_channel[3] = glGetUniformLocation(shader_program, "iChannel3");
+uniform_cres = glGetUniformLocation(shader_program, "iChannelResolution");
+uniform_ctime = glGetUniformLocation(shader_program, "iChannelTime");
+uniform_date = glGetUniformLocation(shader_program, "iDate");
+uniform_gtime = glGetUniformLocation(shader_program, "iGlobalTime");
+uniform_time = glGetUniformLocation(shader_program, "iTime");
+uniform_res = glGetUniformLocation(shader_program, "iResolution");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
