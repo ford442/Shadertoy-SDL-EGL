@@ -7,7 +7,7 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
-#include <emscripten/emscripten.h>
+#include <emscripten.h>
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
@@ -103,26 +103,8 @@ return result;
 return NULL;
 }
 
-static void shdd(){
-EM_ASM({
-console.log("fileReader init.");
-var openFile=function(event){
-var input=event.target;
-var reader=new FileReader();
-reader.onload=function(){
-var arrayBuffer=reader.result;
-var fil=new Uint8ClampedArray(arrayBuffer);
-var filnm="/"+input.files[0].name;
-FS.writeFile(filnm,fil);
-console.log('File: '+input.files[0].name);
-};
-reader.readAsArrayBuffer(input.files[0]);
-};
-document.getElementById("cue").addEventListener("onChange",function(){
-openFile(event);
-});
-});
-}
+
+
 
 static void strt(){
 GLuint vtx, frag;
@@ -287,9 +269,24 @@ extern "C" {
 void pl(){
 plt();
 }
-void shdr(){
-shdd();
-}
+EM_JS(void,flll,(),{
+console.log("fileReader init.");
+var openFile=function(event){
+var input=event.target;
+var reader=new FileReader();
+reader.onload=function(){
+var arrayBuffer=reader.result;
+var fil=new Uint8ClampedArray(arrayBuffer);
+var filnm="/"+input.files[0].name;
+FS.writeFile(filnm,fil);
+console.log('File: '+input.files[0].name);
+};
+reader.readAsArrayBuffer(input.files[0]);
+};
+document.getElementById("cue").addEventListener("onChange",function(){
+openFile(event);
+});
+});
 void str(){
 strt();
 }}
@@ -297,7 +294,7 @@ int main(){
 EM_ASM({
 FS.mkdir('/');
 FS.mkdir('/snd');
-shdd();
+flll();
 });
 return 1;
 }
