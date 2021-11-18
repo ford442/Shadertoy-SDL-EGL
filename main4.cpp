@@ -150,15 +150,7 @@ glAttachShader(shader_program, vtx);
 glAttachShader(shader_program, frag);
 glLinkProgram(shader_program);
 glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-if (!success) {
-glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
-if (len > 1) {
-log = malloc(len);
-glGetProgramInfoLog(shader_program, len, &len, log);
-free(log);
-}
-SDL_Log("Error linking shader program.\n");
-}
+
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
