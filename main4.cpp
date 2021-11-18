@@ -289,7 +289,7 @@ int main(){
 EM_ASM({
 FS.mkdir('/');
 FS.mkdir('/snd');
-flll();
 });
+flll();
 return 1;
 }
