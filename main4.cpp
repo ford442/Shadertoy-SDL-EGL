@@ -74,6 +74,32 @@ glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
+static char* read_file_into_str(const char *filename) {
+char *result = NULL;
+long length = 0;
+FILE *file = fopen(filename, "r");
+if(file) {
+int status = fseek(file, 0, SEEK_END);
+if(status != 0) {
+fclose(file);
+return NULL;
+}
+length = ftell(file);
+status = fseek(file, 0, SEEK_SET);
+if(status != 0) {
+fclose(file);
+return NULL;
+}
+result = static_cast<char*>(malloc((length+1) * sizeof(char)));
+if(result) {
+size_t actual_length = fread(result, sizeof(char), length , file);
+result[actual_length++] = '\0';
+} 
+fclose(file);
+return result;
+}
+return NULL;
+}
 static void strt(){
 GLuint vtx, frag;
 const char *sources[4];
@@ -92,7 +118,6 @@ int selected_index = 0;
 program_source = read_file_into_str(ssrc);
 default_fragment_shader = program_source;
 select_gles3();
-
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
@@ -241,32 +266,6 @@ plt();
 void str(){
 strt();
 }}
-static char* read_file_into_str(const char *filename) {
-char *result = NULL;
-long length = 0;
-FILE *file = fopen(filename, "r");
-if(file) {
-int status = fseek(file, 0, SEEK_END);
-if(status != 0) {
-fclose(file);
-return NULL;
-}
-length = ftell(file);
-status = fseek(file, 0, SEEK_SET);
-if(status != 0) {
-fclose(file);
-return NULL;
-}
-result = static_cast<char*>(malloc((length+1) * sizeof(char)));
-if(result) {
-size_t actual_length = fread(result, sizeof(char), length , file);
-result[actual_length++] = '\0';
-} 
-fclose(file);
-return result;
-}
-return NULL;
-}
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
