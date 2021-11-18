@@ -10,11 +10,15 @@ document.getElementById("di").click();
 bz.postMessage({
 data:222
 });});
+function pll(){
+Module.ccall("pl");
+};
+
 let fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
 let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/sample.wav',fill);
-Module.ccall("pl");
+  pll();
 });
 
 document.getElementById("circle").width=window.innerWidth;
