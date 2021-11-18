@@ -67,10 +67,10 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
-float cllr = (SDL_GetTicks() * 0.01)/8;
-float cllb = (SDL_GetTicks() * 0.001)/8;
+float cllr = (SDL_GetTicks() * 0.01)/3;
+float cllb = (SDL_GetTicks() * 0.001)/3;
 glClearColor(cllb, 0.0f, cllr, 1.0);
-// glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 4, GL_FLOAT, GL_FALSE, 0, vertices);
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
