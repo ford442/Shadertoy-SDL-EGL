@@ -68,7 +68,7 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
-float cllr = SDL_GetTicks() / (SDL_GetTicks() - 750);
+float cllr = SDL_GetTicks() / 100000;
 glClear(GL_COLOR_BUFFER_BIT);
 glClearColor(cllr, 0.0f, 1.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
@@ -102,9 +102,6 @@ return result;
 }
 return NULL;
 }
-
-
-
 
 static void strt(){
 GLuint vtx, frag;
