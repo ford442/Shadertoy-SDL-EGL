@@ -12,10 +12,7 @@
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
 #include "config.h"
-
-
 static SDL_AudioDeviceID dev;
-
 static EGLDisplay display;
 static EGLContext contextegl;
 static EGLSurface surface;
@@ -23,12 +20,10 @@ static EmscriptenWebGLContextAttributes attr;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-
 static const char* common_shader_header = common_shader_header_gles3;
 static const char* vertex_shader_body = vertex_shader_body_gles3;
 static const char* fragment_shader_header = fragment_shader_header_gles3;
 static const char* fragment_shader_footer = fragment_shader_footer_gles3;
-
 static GLuint shader_program;
 static GLint attrib_position;
 static GLint sampler_channel[4];
@@ -40,14 +35,12 @@ static GLint uniform_time;
 static GLint uniform_mouse;
 static GLint uniform_res;
 static GLint uniform_srate;
-
 static void select_gles3() {
 common_shader_header = common_shader_header_gles3;
 vertex_shader_body = vertex_shader_body_gles3;
 fragment_shader_header = fragment_shader_header_gles3;
 fragment_shader_footer = fragment_shader_footer_gles3;
 }
-
 static GLuint compile_shader(GLenum type, GLsizei nsources, const char **sources){
 GLuint shader;
 GLint success, len;
@@ -83,7 +76,6 @@ glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
-
 static void strt(){
 GLuint vtx, frag;
 const char *sources[4];
@@ -103,9 +95,9 @@ EGL_STENCIL_SIZE,8,
 EGL_DEPTH_SIZE,24,
 EGL_NONE
 };
-SDL_GL_SetAttribute( SDL_GL_RED_SIZE,5);
-SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE,5);
-SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE,5);
+SDL_GL_SetAttribute( SDL_GL_RED_SIZE,8);
+SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE,8);
+SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_RED_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_GREEN_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_BLUE_SIZE,8);
@@ -119,16 +111,11 @@ attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
 emscripten_webgl_init_context_attributes(&attr);
-  
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
-
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
-  
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-  
 eglInitialize(display,&major,&minor);
-
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
@@ -136,23 +123,16 @@ EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
-  
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-
 if(contextegl==EGL_NO_CONTEXT){
 }
 else{
-  
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
-  
 eglMakeCurrent(display,surface,surface,contextegl);
-  
-glClearColor(0.0,0.0,0.0,0.0);
+glClearColor(0.0,1.0,0.0,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 }}
-  
 emscripten_webgl_make_context_current(ctx);
-
 int width=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int height=width;
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_OPENGL);
@@ -160,6 +140,7 @@ glCtx=&contextegl;
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
+SDL_Init(SDL_INIT_TIMER);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
@@ -218,9 +199,47 @@ plt();
 void str(){
 strt();
 }}
+static char* read_file_into_str(const char *filename) {
+char *result = NULL;
+long length = 0;
+FILE *file = fopen(filename, "r");
+if(file) {
+int status = fseek(file, 0, SEEK_END);
+if(status != 0) {
+fclose(file);
+return NULL;
+}
+length = ftell(file);
+status = fseek(file, 0, SEEK_SET);
+if(status != 0) {
+fclose(file);
+return NULL;
+}
+result = static_cast<char*>(malloc((length+1) * sizeof(char)));
+if(result) {
+size_t actual_length = fread(result, sizeof(char), length , file);
+result[actual_length++] = '\0';
+} 
+fclose(file);
+return result;
+}
+return NULL;
+}
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
 });
+int temp_val = 0;
+const char* texture_files[4];
+for (int i=0; i<4; ++i) {
+texture_files[i] = NULL;
+}
+const char* ssrc = "/shader1.glsl";
+char *program_source = NULL;
+int selected_option = -1;
+int selected_index = 0;
+program_source = read_file_into_str(ssrc);
+default_fragment_shader = program_source;
+select_gles3();
 return 1;
 }
