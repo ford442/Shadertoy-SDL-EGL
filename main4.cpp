@@ -46,15 +46,13 @@ GLuint shader;
 GLint success, len;
 GLsizei i, srclens[nsources];
 char *log;
-for (i = 0; i < nsources; ++i)
+for (i = 0; i < nsources; ++i){
 srclens[i] = (GLsizei)strlen(sources[i]);
+}
 shader = glCreateShader(type);
 glShaderSource(shader, nsources, sources, srclens);
 glCompileShader(shader);
 glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-if (!success) {
-printf("Error compiling shader.\n");
-}
 return shader;
 }
 float abstime;
