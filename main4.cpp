@@ -30,7 +30,6 @@ static GLint sampler_channel[4];
 static GLint uniform_cres;
 static GLint uniform_ctime;
 static GLint uniform_date;
-static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_mouse;
 static GLint uniform_res;
@@ -68,9 +67,9 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
- // float cllr = (SDL_GetTicks() * 0.01)/2;
-// float cllb = (SDL_GetTicks() * 0.001)/2;
-// glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+float cllr = (SDL_GetTicks() * 0.01)/8;
+float cllb = (SDL_GetTicks() * 0.001)/8;
+glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 4, GL_FLOAT, GL_FALSE, 0, vertices);
@@ -149,12 +148,12 @@ EGL_NONE
 };
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_STENCIL_SIZE,8,
-EGL_DEPTH_SIZE,24,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_DEPTH_SIZE,32,
 EGL_NONE
 };
 SDL_GL_SetAttribute( SDL_GL_RED_SIZE,8);
