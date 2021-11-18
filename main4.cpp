@@ -54,9 +54,8 @@ glCompileShader(shader);
 glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 return shader;
 }
-float abstime;
 static void renderFrame(){
-abstime = SDL_GetTicks() / 1000;
+float abstime = SDL_GetTicks() / 1000;
 static const GLfloat vertices[] = {
 -1.0f, -1.0f,
 1.0f, -1.0f,
@@ -67,8 +66,15 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
-float cllr = (SDL_GetTicks() * 0.01)/3;
+  
+float cllr = (SDL_GetTicks() * 0.01)/5;
 float cllb = (SDL_GetTicks() * 0.001)/3;
+if ( cllr >= 0.95){
+cllr = cllr / 2;
+}
+if ( cllb >= 0.95){
+cllb = cllb / 2;
+}
 glClearColor(cllb, 0.0f, cllr, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
