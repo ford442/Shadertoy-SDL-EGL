@@ -158,7 +158,7 @@ glGetProgramInfoLog(shader_program, len, &len, log);
 fprintf(stderr, "%s\n\n", log);
 free(log);
 }
-die("Error linking shader program.\n");
+fprintf("Error linking shader program.\n");
 }
 glDeleteShader(vtx);
 glDeleteShader(frag);
