@@ -155,10 +155,9 @@ glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
 if (len > 1) {
 log = malloc(len);
 glGetProgramInfoLog(shader_program, len, &len, log);
-printf(stderr, "%s\n\n", log);
 free(log);
 }
-printf("Error linking shader program.\n");
+SDL_Log("Error linking shader program.\n");
 }
 glDeleteShader(vtx);
 glDeleteShader(frag);
