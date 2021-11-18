@@ -34,14 +34,11 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_srate;
-
 static void select_gles3() {
 common_shader_header = common_shader_header_gles3;
 vertex_shader_body = vertex_shader_body_gles3;
 fragment_shader_header = fragment_shader_header_gles3;
 fragment_shader_footer = fragment_shader_footer_gles3;
-gles_major = 3;
-gles_minor = 0;
 }
 static GLuint compile_shader(GLenum type, GLsizei nsources, const char **sources){
 GLuint shader;
@@ -105,13 +102,11 @@ return result;
 }
 return NULL;
 }
-
 static void strt(){
 GLuint vtx, frag;
 const char *sources[4];
 const char *log;
 GLint success, len;
-
 int temp_val = 0;
 const char* texture_files[4];
 for (int i=0; i<4; ++i) {
