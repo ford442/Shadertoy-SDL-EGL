@@ -68,8 +68,8 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
-float cllr = SDL_GetTicks() * 0.01;
-float cllb = SDL_GetTicks() * 0.001;
+float cllr = (SDL_GetTicks() * 0.01)/2;
+float cllb = (SDL_GetTicks() * 0.001)/2;
 glClearColor(cllr, 0.0f, cllb, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
