@@ -100,6 +100,24 @@ return result;
 }
 return NULL;
 }
+
+static void shdd(){
+EM_ASM({
+var openFile=function(event){
+var input=event.target;
+var reader=new FileReader();
+reader.onload=function(){
+var arrayBuffer=reader.result;
+var fil=new Uint8ClampedArray(arrayBuffer);
+var filnm="/"+input.files[0].name;
+FS.writeFile(filnm,fil);
+console.log('File: '+input.files[0].name);
+};
+reader.readAsArrayBuffer(input.files[0]);
+};
+});
+}
+
 static void strt(){
 GLuint vtx, frag;
 const char *sources[4];
@@ -263,6 +281,9 @@ extern "C" {
 void pl(){
 plt();
 }
+void shdr(){
+shdd();
+}
 void str(){
 strt();
 }}
@@ -270,6 +291,7 @@ int main(){
 EM_ASM({
 FS.mkdir('/');
 FS.mkdir('/snd');
+shdr();
 });
 return 1;
 }
