@@ -169,8 +169,6 @@ if(contextegl==EGL_NO_CONTEXT){
 else{
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-glClearColor(0.0,1.0,0.0,1.0);
-glClear(GL_COLOR_BUFFER_BIT);
 }}
 emscripten_webgl_make_context_current(ctx);
 int width=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -189,14 +187,14 @@ shader_program = glCreateProgram();
 glAttachShader(shader_program, vtx);
 glAttachShader(shader_program, frag);
 glLinkProgram(shader_program);
-glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+// glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-// glUseProgram(shader_program);
+glUseProgram(shader_program);
 glValidateProgram(shader_program);
-// attrib_position = glGetAttribLocation(shader_program, "iPosition");
+attrib_position = glGetAttribLocation(shader_program, "iPosition");
 sampler_channel[0] = glGetUniformLocation(shader_program, "iChannel0");
 sampler_channel[1] = glGetUniformLocation(shader_program, "iChannel1");
 sampler_channel[2] = glGetUniformLocation(shader_program, "iChannel2");
