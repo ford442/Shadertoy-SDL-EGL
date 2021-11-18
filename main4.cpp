@@ -79,7 +79,7 @@ glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 static void strt(){
 GLuint vtx, frag;
 const char *sources[4];
-char const *log;
+const char *log;
 GLint success, len;
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
