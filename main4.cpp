@@ -139,7 +139,7 @@ static const char *ttxt =
 "vec3 col = vec3(r,g,b);"   
 "fragColor = vec4(col, 1.0);"
 "}";
-program_source = read_file_into_str(ssrc);
+program_source = ttxt;
 default_fragment_shader = program_source;
 select_gles3();
 static const EGLint attribut_list[]={
