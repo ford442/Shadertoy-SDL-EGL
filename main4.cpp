@@ -118,6 +118,27 @@ const char* ssrc = "/shader1.glsl";
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
+static const char *ttxt = 
+"vec2 fluid(vec2 uv1){"
+"vec2 uv = uv1;"
+"float t = iTime;"
+"for (float i = 1.; i < 15.; i++)"
+"{"
+"uv.x -= (t+sin(t+uv.y*i/1.5))/i;"
+"uv.y -= cos(uv.x*i/1.5)/i;"
+"}"
+"return uv;"
+"}"
+"void mainImage( out vec4 fragColor, in vec2 fragCoord )"
+"{"
+"vec2 uv = fragCoord/iResolution.xy*10.;"
+"uv = fluid(uv);"
+"float r = abs(sin(uv.x))+.5;"
+"float g =abs(sin(uv.x+2.+iTime*.2))-.2;"
+"float b = abs(sin(uv.x+4.));"   
+"vec3 col = vec3(r,g,b);"   
+"fragColor = vec4(col, 1.0);"
+"}";
 program_source = read_file_into_str(ssrc);
 default_fragment_shader = program_source;
 select_gles3();
