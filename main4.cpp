@@ -71,10 +71,11 @@ glUniform1f(uniform_time, abstime);
  // float cllr = (SDL_GetTicks() * 0.01)/2;
 // float cllb = (SDL_GetTicks() * 0.001)/2;
 // glClearColor(cllr, 0.0f, cllb, 1.0);
-// glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 4, GL_FLOAT, GL_FALSE, 0, vertices);
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
 char *result = NULL;
