@@ -118,7 +118,7 @@ const char* ssrc = "/shader1.glsl";
 char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
-static const char *ttxt = 
+char *ttxt = 
 "vec2 fluid(vec2 uv1){"
 "vec2 uv = uv1;"
 "float t = iTime;"
