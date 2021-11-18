@@ -71,8 +71,8 @@ glUniform1f(uniform_time, abstime);
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
-glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+// glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+// glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 static char* read_file_into_str(const char *filename) {
 char *result = NULL;
@@ -215,7 +215,7 @@ glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
 glValidateProgram(shader_program);
-attrib_position = glGetAttribLocation(shader_program, "iPosition");
+// attrib_position = glGetAttribLocation(shader_program, "iPosition");
 sampler_channel[0] = glGetUniformLocation(shader_program, "iChannel0");
 sampler_channel[1] = glGetUniformLocation(shader_program, "iChannel1");
 sampler_channel[2] = glGetUniformLocation(shader_program, "iChannel2");
