@@ -103,6 +103,7 @@ return NULL;
 
 static void shdd(){
 EM_ASM({
+console.log("fileReader init.");
 var openFile=function(event){
 var input=event.target;
 var reader=new FileReader();
