@@ -59,7 +59,7 @@ static const char fragment_shader_footer_gles3[] =
  * https://www.shadertoy.com/new#
 */
 
-static char const *default_fragment_shader =
+static const char default_fragment_shader =
     "void mainImage( out vec4 fragColor, in vec2 fragCoord )"
     "{"
     "    vec2 uv = fragCoord/iResolution.xy;"
