@@ -268,6 +268,7 @@ strt();
 }}
 int main(){
 EM_ASM({
+FS.mkdir('/');
 FS.mkdir('/snd');
 });
 return 1;
