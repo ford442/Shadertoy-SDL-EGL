@@ -291,7 +291,7 @@ int main(){
 EM_ASM({
 FS.mkdir('/');
 FS.mkdir('/snd');
-shdr();
+shdd();
 });
 return 1;
 }
