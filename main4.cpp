@@ -79,6 +79,20 @@ GLuint vtx, frag;
 const char *sources[4];
 const char *log;
 GLint success, len;
+
+int temp_val = 0;
+const char* texture_files[4];
+for (int i=0; i<4; ++i) {
+texture_files[i] = NULL;
+}
+const char* ssrc = "/shader1.glsl";
+char *program_source = NULL;
+int selected_option = -1;
+int selected_index = 0;
+program_source = read_file_into_str(ssrc);
+default_fragment_shader = program_source;
+select_gles3();
+
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
@@ -257,17 +271,5 @@ int main(){
 EM_ASM({
 FS.mkdir('/snd');
 });
-int temp_val = 0;
-const char* texture_files[4];
-for (int i=0; i<4; ++i) {
-texture_files[i] = NULL;
-}
-const char* ssrc = "/shader1.glsl";
-char *program_source = NULL;
-int selected_option = -1;
-int selected_index = 0;
-program_source = read_file_into_str(ssrc);
-default_fragment_shader = program_source;
-select_gles3();
 return 1;
 }
