@@ -116,8 +116,10 @@ console.log('File: '+input.files[0].name);
 };
 reader.readAsArrayBuffer(input.files[0]);
 };
+document.getElementById("cue").addEventListener("onChange",function(){
+openFile(event);
 });
-}
+});
 
 static void strt(){
 GLuint vtx, frag;
