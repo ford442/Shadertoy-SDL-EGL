@@ -70,7 +70,7 @@ if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
  // float cllr = (SDL_GetTicks() * 0.01)/2;
 // float cllb = (SDL_GetTicks() * 0.001)/2;
-glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+// glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 4, GL_FLOAT, GL_FALSE, 0, vertices);
@@ -209,7 +209,7 @@ shader_program = glCreateProgram();
 glAttachShader(shader_program, vtx);
 glAttachShader(shader_program, frag);
 glLinkProgram(shader_program);
-// glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 
 glDeleteShader(vtx);
 glDeleteShader(frag);
@@ -231,6 +231,8 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER);
+glClearColor(0.0f, 0.4f, 0.0f, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
