@@ -68,7 +68,15 @@ if(uniform_gtime >= 0)
 glUniform1f(uniform_gtime, abstime);
 if(uniform_time >= 0)
 glUniform1f(uniform_time, abstime);
+glClearColor(1.0f, 1.0f, 1.0f, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
+glClearColor(0.0f, 1.0f, 0.0f, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
+glClearColor(1.0f, 0.0f, 0.0f, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
+glClearColor(1.0f, 0.0f, 1.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
 // glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
