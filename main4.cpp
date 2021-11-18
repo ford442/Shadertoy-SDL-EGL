@@ -74,7 +74,7 @@ glUniform1f(uniform_time, abstime);
 // glClear(GL_COLOR_BUFFER_BIT);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 4, GL_FLOAT, GL_FALSE, 0, vertices);
-glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+glDrawArrays(GL_TRIANGLE_STRIP, 0, vertices);
 }
 static char* read_file_into_str(const char *filename) {
 char *result = NULL;
