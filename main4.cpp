@@ -114,6 +114,7 @@ texture_files[i] = NULL;
 }
 const char* ssrc = "/shader1.glsl";
 static char const *program_source = NULL;
+select_gles3();
 int selected_option = -1;
 int selected_index = 0;
 static char const *ttxt = 
@@ -139,7 +140,6 @@ static char const *ttxt =
 "}";
 program_source = ttxt;
 default_fragment_shader = program_source;
-select_gles3();
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
@@ -168,7 +168,7 @@ attr.stencil=0;
 attr.depth=0;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
-attr.preserveDrawingBuffer=1;
+attr.preserveDrawingBuffer=0;
 emscripten_webgl_init_context_attributes(&attr);
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 EGLConfig eglconfig=NULL;
@@ -207,7 +207,6 @@ glAttachShader(shader_program, vtx);
 glAttachShader(shader_program, frag);
 glLinkProgram(shader_program);
 glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -285,24 +284,6 @@ extern "C" {
 void pl(){
 plt();
 }
-EM_JS(void,flll,(),{
-console.log("fileReader init.");
-var openFile=function(event){
-var input=event.target;
-var reader=new FileReader();
-reader.onload=function(){
-var arrayBuffer=reader.result;
-var fil=new Uint8ClampedArray(arrayBuffer);
-var filnm="/"+input.files[0].name;
-FS.writeFile(filnm,fil);
-console.log('File: '+input.files[0].name);
-};
-reader.readAsArrayBuffer(input.files[0]);
-};
-document.getElementById("cue").addEventListener("onChange",function(){
-openFile(event);
-});
-});
 void str(){
 strt();
 }}
@@ -311,6 +292,5 @@ EM_ASM({
 FS.mkdir('/');
 FS.mkdir('/snd');
 });
-flll();
 return 1;
 }
