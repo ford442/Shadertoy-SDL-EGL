@@ -24,6 +24,23 @@ static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
 
+static const char* common_shader_header = common_shader_header_gles3;
+static const char* vertex_shader_body = vertex_shader_body_gles3;
+static const char* fragment_shader_header = fragment_shader_header_gles3;
+static const char* fragment_shader_footer = fragment_shader_footer_gles3;
+
+static GLuint shader_program;
+static GLint attrib_position;
+static GLint sampler_channel[4];
+static GLint uniform_cres;
+static GLint uniform_ctime;
+static GLint uniform_date;
+static GLint uniform_gtime;
+static GLint uniform_time;
+static GLint uniform_mouse;
+static GLint uniform_res;
+static GLint uniform_srate;
+
 static void select_gles3() {
 common_shader_header = common_shader_header_gles3;
 vertex_shader_body = vertex_shader_body_gles3;
