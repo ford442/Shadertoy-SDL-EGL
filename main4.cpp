@@ -21,7 +21,6 @@ static struct option long_options[] = {
     {"texture3", required_argument, 0, '3'},
     {0, 0, 0, 0}
 };
-// OpenGL ES 3.0 / GLSL 300 es
 static const char common_shader_header_gles3[] =
     "#version 300 es \n"
     "precision highp float; \n";
@@ -45,10 +44,6 @@ static const char fragment_shader_header_gles3[] =
     "out vec4 fragColor; \n";
 static const char fragment_shader_footer_gles3[] =
     "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-/*
- * Standard ShaderToy Shader
- * https://www.shadertoy.com/new#
-*/
 static const char default_fragment_shader[] =
     "\n void mainImage( out vec4 fragColor, in vec2 fragCoord )"
     "{"
@@ -169,7 +164,6 @@ static const char program_source[] =
 "fragColor = vec4(col, 1.0);",
 "} \n"
 };
-program_source = ttxt;
 default_fragment_shader = program_source;
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
