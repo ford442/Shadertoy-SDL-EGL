@@ -7,7 +7,6 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
-#include <emscripten.h>
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
@@ -99,7 +98,7 @@ static char *program_source = NULL;
 select_gles3();
 int selected_option = -1;
 int selected_index = 0;
-static char const *ttxt = 
+static char *ttxt = 
 "vec2 fluid(vec2 uv1){"
 "vec2 uv = uv1;"
 "float t = iTime;"
