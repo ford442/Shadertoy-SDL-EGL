@@ -209,12 +209,7 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER);
 float abstime = SDL_GetTicks() / 1000;
-static const GLfloat vertices[] = {
--1.0f, -1.0f,
-1.0f, -1.0f,
--1.0f, 1.0f,
-1.0f, 1.0f,
-};
+static const GLfloat vertices[] = {-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f,};
 if(uniform_gtime >= 0){
 glUniform1f(uniform_gtime, abstime);
 }
