@@ -103,9 +103,6 @@ static void renderFrame(){
 glClearColor(1.0f, 1.0f, 1.0f, 0.0);
 glClear(GL_COLOR_BUFFER_BIT);
 float abstime = SDL_GetTicks() / 1000.0;
-if(uniform_time >= 0){
-glUniform1f(uniform_time, abstime);
-}
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 glFlush();
 eglSwapBuffers(display,surface);
