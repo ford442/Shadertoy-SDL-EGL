@@ -213,7 +213,7 @@ GLuint vbo;
 glGenBuffers(1, &vbo);
 static const GLfloat vertices[] = {-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f,};
 glBindBuffer(GL_ARRAY_BUFFER, vbo);
-glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER, sizeof(void*), vertices, GL_STATIC_DRAW);
 GLuint vao;
 glGenVertexArrays(1, &vao);
 glBindVertexArray(vao);
