@@ -14,7 +14,6 @@ static struct option long_options[] = {
     {"texture1", required_argument, 0, '1'},
     {"texture2", required_argument, 0, '2'},
     {"texture3", required_argument, 0, '3'},
-    {"keyboard", required_argument, 0, 'k'},
     {0, 0, 0, 0}
 };
 
@@ -59,7 +58,7 @@ static const char fragment_shader_footer_gles3[] =
  * https://www.shadertoy.com/new#
 */
 
-static char const *default_fragment_shader =
+static char *default_fragment_shader =
     "void mainImage( out vec4 fragColor, in vec2 fragCoord )"
     "{"
     "    vec2 uv = fragCoord/iResolution.xy;"
