@@ -45,12 +45,26 @@ static const char fragment_shader_header_gles3[] =
 static const char fragment_shader_footer_gles3[] =
     "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
 static const char default_fragment_shader[] =
-    "\n void mainImage( out vec4 fragColor, in vec2 fragCoord )"
-    "{"
-    "vec2 uv = fragCoord/iResolution.xy;"
-    "vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));"
-    "fragColor = vec4(col,1.0);"
-    "} \n";
+"vec2 fluid(vec2 uv1){"
+"vec2 uv = uv1;"
+"float t = iTime;"
+"for (float i = 1.; i < 15.; i++)"
+"{"
+"uv.x -= (t+sin(t+uv.y*i/1.5))/i;"
+"uv.y -= cos(uv.x*i/1.5)/i;"
+"}"
+"return uv;"
+"}"
+"void mainImage( out vec4 fragColor, in vec2 fragCoord )"
+"{"
+"vec2 uv = fragCoord/iResolution.xy*10.;"
+"uv = fluid(uv);"
+"float r = abs(sin(uv.x))+.5;"
+"float g =abs(sin(uv.x+2.+iTime*.2))-.2;"
+"float b = abs(sin(uv.x+4.));"
+"vec3 col = vec3(r,g,b);"
+"fragColor = vec4(col, 1.0);"
+"} \n";
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -86,7 +100,6 @@ glShaderSource(shader, nsources, sources, srclens);
 glCompileShader(shader);
 return shader;
 }
-
 static void renderFrame(){
 glClearColor(1.0f, 1.0f, 1.0f, 0.0);
 glClear(GL_COLOR_BUFFER_BIT);
@@ -101,7 +114,6 @@ glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 glFlush();
 eglSwapBuffers(display,surface);
 }
-
 static char* read_file_into_str(const char *filename) {
 char *result = NULL;
 long length = 0;
@@ -141,28 +153,6 @@ texture_files[i] = NULL;
 const char* ssrc = "/shader1.glsl";
 int selected_option = -1;
 int selected_index = 0;
-static const char program_source[] =
-"vec2 fluid(vec2 uv1){"
-"vec2 uv = uv1;"
-"float t = iTime;"
-"for (float i = 1.; i < 15.; i++)"
-"{"
-"uv.x -= (t+sin(t+uv.y*i/1.5))/i;"
-"uv.y -= cos(uv.x*i/1.5)/i;"
-"}"
-"return uv;"
-"}"
-"void mainImage( out vec4 fragColor, in vec2 fragCoord )"
-"{"
-"vec2 uv = fragCoord/iResolution.xy*10.;"
-"uv = fluid(uv);"
-"float r = abs(sin(uv.x))+.5;"
-"float g =abs(sin(uv.x+2.+iTime*.2))-.2;"
-"float b = abs(sin(uv.x+4.));"
-"vec3 col = vec3(r,g,b);"
-"fragColor = vec4(col, 1.0);"
-"} \n";
-default_fragment_shader = program_source;
 static const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
