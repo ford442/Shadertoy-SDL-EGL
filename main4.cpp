@@ -209,7 +209,14 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER);
 float abstime = SDL_GetTicks() / 1000;
+GLuint vbo;
+glGenBuffers(1, &vbo);
 static const GLfloat vertices[] = {-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f,};
+glBindBuffer(GL_ARRAY_BUFFER, vbo);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+GLuint vao;
+glGenVertexArrays(1, &vao);
+glBindVertexArray(vao);
 if(uniform_gtime >= 0){
 glUniform1f(uniform_gtime, abstime);
 }
@@ -217,7 +224,7 @@ if(uniform_time >= 0){
 glUniform1f(uniform_time, abstime);
 }
 glEnableVertexAttribArray(attrib_position);
-glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 1, vertices);
+glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 glClearColor(0.0f, 0.8f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
