@@ -55,6 +55,7 @@ return shader;
 }
 static void renderFrame(){
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
