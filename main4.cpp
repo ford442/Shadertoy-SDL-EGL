@@ -33,12 +33,6 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_srate;
-static void select_gles3() {
-common_shader_header = common_shader_header_gles3;
-vertex_shader_body = vertex_shader_body_gles3;
-fragment_shader_header = fragment_shader_header_gles3;
-fragment_shader_footer = fragment_shader_footer_gles3;
-}
 static GLuint compile_shader(GLenum type, GLsizei nsources, const char **sources){
 GLuint shader;
 GLint success, len;
@@ -50,10 +44,12 @@ srclens[i] = (GLsizei)strlen(sources[i]);
 shader = glCreateShader(type);
 glShaderSource(shader, nsources, sources, srclens);
 glCompileShader(shader);
-glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 return shader;
 }
+
 static void renderFrame(){
+glClearColor(1.0f, 1.0f, 1.0f, 0.0);
+glClear(GL_COLOR_BUFFER_BIT);
 float abstime = SDL_GetTicks() / 1000.0;
 if(uniform_gtime >= 0){
 glUniform1f(uniform_gtime, abstime);
@@ -65,6 +61,7 @@ glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 glFlush();
 eglSwapBuffers(display,surface);
 }
+
 static char* read_file_into_str(const char *filename) {
 char *result = NULL;
 long length = 0;
@@ -103,7 +100,6 @@ texture_files[i] = NULL;
 }
 const char* ssrc = "/shader1.glsl";
 static char *program_source = NULL;
-select_gles3();
 int selected_option = -1;
 int selected_index = 0;
 static char *ttxt = 
