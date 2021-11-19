@@ -95,7 +95,7 @@ for (int i=0; i<4; ++i) {
 texture_files[i] = NULL;
 }
 const char* ssrc = "/shader1.glsl";
-static char const *program_source = NULL;
+static char *program_source = NULL;
 select_gles3();
 int selected_option = -1;
 int selected_index = 0;
