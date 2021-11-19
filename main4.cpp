@@ -44,13 +44,14 @@ static const char fragment_shader_header_gles3[] =
     "out vec4 fragColor; \n";
 static const char fragment_shader_footer_gles3[] =
     "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-static const char default_fragment_shader[] =
-    "\n void mainImage( out vec4 fragColor, in vec2 fragCoord )"
-    "{"
-    "vec2 uv = fragCoord/iResolution.xy;"
-    "vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));"
-    "fragColor = vec4(col,1.0);"
-    "} \n";
+static const char default_fragment_shader[] ={
+    "\n void mainImage( out vec4 fragColor, in vec2 fragCoord )",
+    "{",
+    "vec2 uv = fragCoord/iResolution.xy;",
+    "vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));",
+    "fragColor = vec4(col,1.0);",
+    "} \n"
+    };
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
