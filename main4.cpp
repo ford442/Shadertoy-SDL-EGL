@@ -102,7 +102,7 @@ const char* ssrc = "/shader1.glsl";
 static char *program_source = NULL;
 int selected_option = -1;
 int selected_index = 0;
-static char *ttxt = 
+static char *ttxt[] = 
 "vec2 fluid(vec2 uv1){"
 "vec2 uv = uv1;"
 "float t = iTime;"
@@ -122,7 +122,7 @@ static char *ttxt =
 "float b = abs(sin(uv.x+4.));"   
 "vec3 col = vec3(r,g,b);"   
 "fragColor = vec4(col, 1.0);"
-"}";
+"} \n";
 program_source = ttxt;
 default_fragment_shader = program_source;
 static const EGLint attribut_list[]={
@@ -219,7 +219,6 @@ glBufferData(GL_ARRAY_BUFFER, sizeof(void*), vertices, GL_STATIC_DRAW);
 GLuint vao;
 glGenVertexArrays(1, &vao);
 glBindVertexArray(vao);
-
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 glClearColor(0.0f, 0.8f, 0.0f, 1.0);
