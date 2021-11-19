@@ -217,7 +217,7 @@ if(uniform_time >= 0){
 glUniform1f(uniform_time, abstime);
 }
 glEnableVertexAttribArray(attrib_position);
-glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 1, vertices);
 glClearColor(0.0f, 0.8f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
