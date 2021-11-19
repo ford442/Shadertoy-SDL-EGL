@@ -54,8 +54,14 @@ glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 return shader;
 }
 static void renderFrame(){
+if(uniform_gtime >= 0){
+glUniform1f(uniform_gtime, abstime);
+}
+if(uniform_time >= 0){
+glUniform1f(uniform_time, abstime);
+}
 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-glClear(GL_COLOR_BUFFER_BIT);
+glFlush();
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
@@ -217,12 +223,7 @@ glBufferData(GL_ARRAY_BUFFER, sizeof(void*), vertices, GL_STATIC_DRAW);
 GLuint vao;
 glGenVertexArrays(1, &vao);
 glBindVertexArray(vao);
-if(uniform_gtime >= 0){
-glUniform1f(uniform_gtime, abstime);
-}
-if(uniform_time >= 0){
-glUniform1f(uniform_time, abstime);
-}
+
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 glClearColor(0.0f, 0.8f, 0.0f, 1.0);
