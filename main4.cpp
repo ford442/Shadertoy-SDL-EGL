@@ -54,6 +54,7 @@ glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 return shader;
 }
 static void renderFrame(){
+float abstime = SDL_GetTicks() / 1000.0;
 if(uniform_gtime >= 0){
 glUniform1f(uniform_gtime, abstime);
 }
@@ -214,7 +215,6 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER);
-float abstime = SDL_GetTicks() / 1000;
 GLuint vbo;
 glGenBuffers(1, &vbo);
 static const GLfloat vertices[] = {-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f,};
