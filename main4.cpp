@@ -31,7 +31,6 @@ static const char vertex_shader_body_gles3[] =
     "} \n";
 static const char fragment_shader_header_gles3[] =
     "uniform vec3 iResolution;"
-    "uniform float iGlobalTime;" // legacy
     "uniform float iTime;"
     "uniform float iChannelTime[4];"
     "uniform vec4 iMouse;"
@@ -104,9 +103,6 @@ static void renderFrame(){
 glClearColor(1.0f, 1.0f, 1.0f, 0.0);
 glClear(GL_COLOR_BUFFER_BIT);
 float abstime = SDL_GetTicks() / 1000.0;
-if(uniform_gtime >= 0){
-glUniform1f(uniform_gtime, abstime);
-}
 if(uniform_time >= 0){
 glUniform1f(uniform_time, abstime);
 }
