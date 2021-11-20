@@ -81,6 +81,7 @@ static GLint uniform_res;
 static GLint uniform_srate;
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
+
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 GLint success,len;
@@ -92,8 +93,20 @@ srclens[i]=(GLsizei)strlen(sources[i]);
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
+glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
+if (!success){
+glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
+if (len>1){
+log=malloc(len);
+glGetShaderInfoLog(shader,len,NULL,log);
+fprintf(stderr,"%s\n\n",log);
+free(log);
+}
+SDL_Log("Error compiling shader.");
+}
 return shader;
 }
+
 static void renderFrame(){
   /*
 float cllr=(SDL_GetTicks()*0.01)/5;
@@ -218,6 +231,17 @@ shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
+glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+if (!success){
+glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
+if (len>1){
+log=malloc(len);
+glGetProgramInfoLog(shader_program,len,&len,log);
+fprintf(stderr,"%s\n\n",log);
+free(log);
+}
+SDL_Log("Error linking shader program.");
+}
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
