@@ -123,10 +123,10 @@ alph=0.7;
 }
 glClearColor(cllb,0.0f,cllr,alph);
 */
-float ttime=SDL_GetTicks()/1000;
-glUniform1f(uniform_time,ttime);
+// float ttime=SDL_GetTicks()/1000;
+// glUniform1f(uniform_time,ttime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-glClear(GL_COLOR_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
