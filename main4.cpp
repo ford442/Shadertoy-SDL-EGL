@@ -86,6 +86,8 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_srate;
+static GLfloat viewportSizeX=0.0;
+static GLfloat viewportSizeY=0.0;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 GLint success,len;
@@ -100,6 +102,7 @@ glCompileShader(shader);
 return shader;
 }
 static void renderFrame(){
+  /*
 float cllr=(SDL_GetTicks()*0.01)/5;
 float cllb=(SDL_GetTicks()*0.001)/3;
 float alph=1.0;
@@ -113,8 +116,9 @@ alph=0.7;
 }
 glClearColor(cllb,0.0f,cllr,alph);
 glClear(GL_COLOR_BUFFER_BIT);
+*/
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-glFlush();
+// glFlush();
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
@@ -149,6 +153,8 @@ const char *sources[4];
 const char *log;
 GLint success,len;
 int temp_val=0;
+int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+int w=h;
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
@@ -249,6 +255,10 @@ glGenVertexArrays(1,&vao);
 glBindVertexArray(vao);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
+glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+glViewport(0,0,w,h);
+viewportSizeX=w;
+viewportSizeY=h;
 glClearColor(0.0f,0.8f,0.0f,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 SDL_Init(SDL_INIT_TIMER);
