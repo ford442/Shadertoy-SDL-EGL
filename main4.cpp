@@ -98,7 +98,7 @@ glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
 if (!success){
 glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
 if (len>1){
-log=malloc(len);
+log=static_cast<char*>(malloc(len));
 glGetShaderInfoLog(shader,len,NULL,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
@@ -238,7 +238,7 @@ glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 if (!success){
 glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
 if (len>1){
-log=malloc(len);
+log=static_cast<char*>(malloc(len));
 glGetProgramInfoLog(shader_program,len,&len,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
