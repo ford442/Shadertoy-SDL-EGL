@@ -1,3 +1,5 @@
+#include <algorithm.h>
+#include <vector.h>
 #include <string.h>
 #include <stdarg.h>
 #include <stdbool.h>
