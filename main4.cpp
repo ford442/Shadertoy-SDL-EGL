@@ -218,8 +218,6 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-int w=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-int h=w;
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,SDL_WINDOW_OPENGL);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
