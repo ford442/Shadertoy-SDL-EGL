@@ -12,7 +12,7 @@ tst2: main4.cpp  Makefile
 -sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sMALLOC='emmalloc' -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -ffast-math -sSUPPORT_LONGJMP=0 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sASSERTIONS=0 \
 -O3 -o egl4.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
---extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js shader-web-background.min.js -sSUPPORT_BIG_ENDIAN=1
+--extern-post-js index.js --post-js filesys.js --post-js ccall.js --extern-post-js shader-web-background.min.js -sSUPPORT_BIG_ENDIAN=1
 
 tst3: main4.cpp  Makefile
 	emcc main4.cpp -sFULL_ES2=0 -g -sFULL_ES3=0 --closure 0 -sGL_TESTING=0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
@@ -26,7 +26,7 @@ tst3b: main5.cpp  Makefile
 -sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sMALLOC='emmalloc' -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -ffast-math -sSUPPORT_LONGJMP=0 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sASSERTIONS=0 \
 -O3 -o egl5b.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
---extern-post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1 --post-js shader-web-background.min.js
+--extern-post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1 --extern-post-js shader-web-background.min.js
 
 tst4: js.c  Makefile
 	emcc js.c -sFULL_ES2=0 -sFULL_ES3=0 --closure 0 -sGL_TESTING=0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
