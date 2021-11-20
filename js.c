@@ -7,6 +7,7 @@
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
+#include <emscripten/emscripten.h>
 
 static SDL_AudioDeviceID dev;
 
@@ -18,10 +19,12 @@ SDL_PauseAudioDevice(dev,SDL_TRUE);
 SDL_CloseAudioDevice(dev);
 dev=0;
 }}
+
 static void qu(int rc){
 SDL_Quit();
 exit(rc);
 }
+
 static void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
@@ -30,6 +33,7 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
+
 static void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
 int lft;
@@ -46,6 +50,7 @@ wave.pos=0;
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
+
 static void plt(){
 char flnm[1024];
 SDL_SetMainReady();
@@ -61,6 +66,7 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 }
+
 extern "C" {
 void pl(){
 plt();
