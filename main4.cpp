@@ -1,6 +1,6 @@
-#include <algorithm.h>
-#include <vector.h>
-#include <string.h>
+#include <algorithm>
+#include <vector>
+#include <string>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <math.h>
