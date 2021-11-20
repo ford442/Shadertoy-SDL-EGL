@@ -239,7 +239,7 @@ if (!success){
 glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
 if (len>1){
 log=static_cast<char*>(malloc(len));
-glGetProgramInfoLog(shader_program,len,&len,log);
+// glGetProgramInfoLog(shader_program,len,&len,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
 }
