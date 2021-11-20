@@ -14,6 +14,7 @@
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
 
+float abstime=SDL_GetTicks()/1000.0;
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -97,7 +98,7 @@ glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
 if (!success){
 glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
 if (len>1){
-log=static_cast<char*>(malloc(len));
+log=malloc(len);
 glGetShaderInfoLog(shader,len,NULL,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
@@ -122,6 +123,8 @@ alph=0.7;
 }
 glClearColor(cllb,0.0f,cllr,alph);
 */
+  
+glUniform1f(uniform_time, SDL_GetTicks());
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
@@ -155,7 +158,7 @@ return NULL;
 static void strt(){
 GLuint vtx,frag;
 const char *sources[4];
-char *log;
+const char *log;
 GLint success,len;
 int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -168,11 +171,11 @@ const char* ssrc="/shader1.glsl";
 int selected_option=-1;
 int selected_index=0;
 static const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
 static const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
@@ -235,7 +238,7 @@ glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 if (!success){
 glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
 if (len>1){
-log=static_cast<char*>(malloc(len));
+log=malloc(len);
 glGetProgramInfoLog(shader_program,len,&len,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
@@ -261,14 +264,11 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-GLuint vbo;
-glGenBuffers(1,&vbo);
 static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
+
+glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_STREAM_DRAW);
+
 glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
-GLuint vao;
-glGenVertexArrays(1,&vao);
-glBindVertexArray(vao);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
@@ -278,7 +278,6 @@ viewportSizeY=h;
 glClearColor(0.0f,0.8f,0.0f,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 SDL_Init(SDL_INIT_TIMER);
-float abstime=SDL_GetTicks()/1000.0;
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
@@ -300,7 +299,7 @@ qu(2);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 static void SDLCALL bfr(void *unused,Uint8 * stm,int len){
-Uint8 *wptr;
+Uint8* wptr;
 int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
