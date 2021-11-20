@@ -97,7 +97,7 @@ glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
 if (!success){
 glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
 if (len>1){
-log=malloc(len);
+log=static_cast<char*>(malloc(len));
 glGetShaderInfoLog(shader,len,NULL,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
@@ -155,7 +155,7 @@ return NULL;
 static void strt(){
 GLuint vtx,frag;
 const char *sources[4];
-const char *log;
+char *log;
 GLint success,len;
 int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -235,7 +235,7 @@ glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 if (!success){
 glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
 if (len>1){
-log=malloc(len);
+log=static_cast<char*>(malloc(len));
 glGetProgramInfoLog(shader_program,len,&len,log);
 fprintf(stderr,"%s\n\n",log);
 free(log);
