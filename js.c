@@ -10,9 +10,6 @@
 
 static SDL_AudioDeviceID dev;
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
-
-emscripten_set_main_loop((void (*)())renderFrame,0,0);
-}
 static void cls_aud(){
 if(dev!=0){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
