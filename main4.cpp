@@ -10,17 +10,7 @@
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
-#include <getopt.h>
 
-static const char options_string[] = "?fw:h:s:l0:1:2:3:x:y:k:";
-static struct option long_options[] = {
-{"source", required_argument, 0, 's'},
-{"texture0", required_argument, 0, '0'},
-{"texture1", required_argument, 0, '1'},
-{"texture2", required_argument, 0, '2'},
-{"texture3", required_argument, 0, '3'},
-{0, 0, 0, 0}
-};
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -115,10 +105,10 @@ cllb=cllb/2;
 alph=0.7;
 }
 glClearColor(cllb,0.0f,cllr,alph);
-glClear(GL_COLOR_BUFFER_BIT);
 */
+glClear(GL_COLOR_BUFFER_BIT);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-// glFlush();
+glFlush();
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
@@ -168,10 +158,10 @@ EGL_NONE
 };
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
 EGL_NONE
 };
 SDL_GL_SetAttribute( SDL_GL_RED_SIZE,8);
@@ -181,9 +171,9 @@ SDL_GL_SetAttribute( SDL_GL_ACCUM_RED_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_GREEN_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ACCUM_BLUE_SIZE,8);
 SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE,8);
-SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE,24);
+SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE,16);
 SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER,1);
-attr.alpha=1;
+attr.alpha=0;
 attr.stencil=0;
 attr.depth=0;
 attr.antialias=0;
