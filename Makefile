@@ -36,5 +36,5 @@ tst4: js.c  Makefile
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
 
 
-all: tst1 tst2 tst3 tst4
+all:  tst2 tst3 tst4
 	echo 'Built 1ink.us Shaders.'
