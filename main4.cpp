@@ -1,4 +1,4 @@
-#include <string>
+#include <string.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <math.h>
@@ -7,6 +7,7 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
+#include <GLES3/gl3ext.h>
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
