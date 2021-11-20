@@ -106,9 +106,8 @@ alph=0.7;
 }
 glClearColor(cllb,0.0f,cllr,alph);
 */
-glClear(GL_COLOR_BUFFER_BIT);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-glFlush();
+glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
