@@ -241,7 +241,7 @@ if (len>1){
 log=static_cast<char*>(malloc(len));
 // glGetProgramInfoLog(shader_program,len,&len,log);
 fprintf(stderr,"%s\n\n",log);
-free(log);
+// free(log);
 }
 SDL_Log("Error linking shader program.");
 }
