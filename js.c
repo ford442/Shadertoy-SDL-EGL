@@ -1,76 +1,4 @@
-#include <string.h>
-#include <stdarg.h>
-#include <stdbool.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <emscripten/html5.h>
-#include "SDL2/SDL_config.h"
-#include <SDL2/SDL.h>
-#include <emscripten/emscripten.h>
-
-static SDL_AudioDeviceID dev;
-
-static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-
-static void cls_aud(){
-if(dev!=0){
-SDL_PauseAudioDevice(dev,SDL_TRUE);
-SDL_CloseAudioDevice(dev);
-dev=0;
-}}
-
-static void qu(int rc){
-SDL_Quit();
-exit(rc);
-}
-
-static void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
-if(!dev){
-SDL_FreeWAV(wave.snd);
-qu(2);
-}
-SDL_PauseAudioDevice(dev,SDL_FALSE);
-}
-
-static void SDLCALL bfr(void *unused,Uint8* stm,int len){
-Uint8* wptr;
-int lft;
-wptr=wave.snd+wave.pos;
-lft=wave.slen-wave.pos;
-while (lft<=len){
-SDL_memcpy(stm,wptr,lft);
-stm+=lft;
-len-=lft;
-wptr=wave.snd;
-lft=wave.slen;
-wave.pos=0;
-}
-SDL_memcpy(stm,wptr,len);
-wave.pos+=len;
-}
-
-static void plt(){
-char flnm[1024];
-SDL_SetMainReady();
-if (SDL_Init(SDL_INIT_AUDIO)<0){
-qu(1);
-SDL_Log("SDL failed to init.");
-}
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
-qu(1);
-}
-wave.pos=0;
-wave.spec.callback=bfr;
-opn_aud();
-}
-
-extern "C" {
-void pl(){
-plt();
-}
+#include <emscripten.h>
 EM_JS(void,ma,(),{
 const shaderWebBackground={};(()=>{'use strict';const t=(a,b)=>{b.initHalfFloatRGBATexture(b.width,b.height);a.texParameteri(a.TEXTURE_2D,
 a.TEXTURE_MIN_FILTER,a.LINEAR);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_MAG_FILTER,
@@ -161,13 +89,8 @@ null}l(){this.h&&this.gl.deleteTexture(this.h);this.g&&this.gl.deleteTexture(thi
 this.h=Y(this);this.g=Y(this)}i(a){const b=this.gl;b.bindFramebuffer(b.FRAMEBUFFER,
 this.j);b.framebufferTexture2D(b.FRAMEBUFFER,b.COLOR_ATTACHMENT0,b.TEXTURE_2D,this.g,
 0);a();b.framebufferTexture2D(b.FRAMEBUFFER,b.COLOR_ATTACHMENT0,b.TEXTURE_2D,null,
-0);b.bindFramebuffer(b.FRAMEBUFFER,null)}};})()
-});
-}
+0);b.bindFramebuffer(b.FRAMEBUFFER,null)}};})()});
 int main(){
-EM_ASM({
-FS.mkdir('/snd');
-});
 ma();
 return 1;
 }
