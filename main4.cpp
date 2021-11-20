@@ -85,16 +85,16 @@ static GLfloat viewportSizeY=0.0;
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
-GLint success,len;
+// GLint success,len;
 GLsizei i,srclens[nsources];
-char *log;
+// char *log;
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
-glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
+/* glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
 if (!success){
 glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
 if (len>1){
@@ -104,7 +104,7 @@ fprintf(stderr,"%s\n\n",log);
 free(log);
 }
 SDL_Log("Error compiling shader.");
-}
+} */
 return shader;
 }
 
@@ -123,8 +123,8 @@ alph=0.7;
 }
 glClearColor(cllb,0.0f,cllr,alph);
 */
-  
-glUniform1f(uniform_time, SDL_GetTicks());
+float ttime=SDL_GetTicks()/1000;
+glUniform1f(uniform_time,ttime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
@@ -158,8 +158,8 @@ return NULL;
 static void strt(){
 GLuint vtx,frag;
 const char *sources[4];
-const char *log;
-GLint success,len;
+// const char *log;
+// GLint success,len;
 int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int w=h;
@@ -218,9 +218,9 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-int width=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-int height=width;
-win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_OPENGL);
+int w=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+int h=w;
+win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,SDL_WINDOW_OPENGL);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -234,7 +234,7 @@ shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+/* glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 if (!success){
 glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
 if (len>1){
@@ -245,6 +245,7 @@ fprintf(stderr,"%s\n\n",log);
 }
 SDL_Log("Error linking shader program.");
 }
+*/
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -257,7 +258,7 @@ sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_cres=glGetUniformLocation(shader_program,"iChannelResolution");
 uniform_ctime=glGetUniformLocation(shader_program,"iChannelTime");
-uniform_date=glGetUniformLocation(shader_program,"iDate");
+// uniform_date=glGetUniformLocation(shader_program,"iDate");
 uniform_gtime=glGetUniformLocation(shader_program,"iGlobalTime");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
@@ -265,9 +266,6 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
-
-glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_STREAM_DRAW);
-
 glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
