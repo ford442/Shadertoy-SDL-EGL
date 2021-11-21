@@ -125,8 +125,8 @@ cllr=cllr/3.5;
 if (cllb>=0.85){
 cllb=cllb/3;
 }
-cllr=cllr-(0.05*ttime);
-cllb=cllb+(0.01*ttime);
+cllr=cllr-(0.05*abstime);
+cllb=cllb+(0.01*abstime);
 glClearColor(cllb,0.0f,cllr,1.0);
 // glUniform1f(uniform_time,abstime);
 glGenBuffers(1,&vbo);
