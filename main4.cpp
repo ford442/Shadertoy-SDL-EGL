@@ -109,11 +109,16 @@ return shader;
 }
 GLuint vbo;
 GLuint vao;
+static const GLfloat vertices[]={
+-1.0f,-1.0f,
+1.0f,-1.0f,
+-1.0f,1.0f,
+1.0f,1.0f
+};
 static void renderFrame(){
-float ttime=SDL_GetTicks()/1000;
+glClear(GL_COLOR_BUFFER_BIT);
 float cllr=(SDL_GetTicks()*0.01)/5;
 float cllb=(SDL_GetTicks()*0.001)/3;
-float alph=1.0-(.01*ttime);
 if (cllr>=0.95){
 cllr=cllr/3.5;
 }
@@ -122,14 +127,8 @@ cllb=cllb/3;
 }
 cllr=cllr-(0.05*ttime);
 cllb=cllb+(0.01*ttime);
-glClearColor(cllb,0.0f,cllr,alph);
-// glUniform1f(uniform_time,ttime);
-static const GLfloat vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
-};
+glClearColor(cllb,0.0f,cllr,1.0);
+// glUniform1f(uniform_time,abstime);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
@@ -138,7 +137,6 @@ glBindVertexArray(vao);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
@@ -244,6 +242,8 @@ shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
+glUseProgram(shader_program);
+glValidateProgram(shader_program);
 /* glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
 if (!success){
 glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
@@ -259,8 +259,6 @@ SDL_Log("Error linking shader program.");
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-glUseProgram(shader_program);
-glValidateProgram(shader_program);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -275,7 +273,6 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 glViewport(0,0,w,h);
 viewportSizeX=w;
