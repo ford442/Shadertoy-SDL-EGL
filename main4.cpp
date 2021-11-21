@@ -107,7 +107,8 @@ SDL_Log("Error compiling shader.");
 } */
 return shader;
 }
-
+GLuint vbo;
+GLuint vao;
 static void renderFrame(){
   /*
 float cllr=(SDL_GetTicks()*0.01)/5;
@@ -125,6 +126,21 @@ glClearColor(cllb,0.0f,cllr,alph);
 */
 // float ttime=SDL_GetTicks()/1000;
 // glUniform1f(uniform_time,ttime);
+
+
+static const GLfloat vertices[]={
+-1.0f,-1.0f,
+1.0f,-1.0f,
+-1.0f,1.0f,
+1.0f,1.0f
+};
+glGenBuffers(1,&vbo);
+glBindBuffer(GL_ARRAY_BUFFER,vbo);
+glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
+glGenVertexArrays(1,&vao);
+glBindVertexArray(vao);
+glEnableVertexAttribArray(attrib_position);
+glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 // glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
@@ -263,16 +279,7 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
-GLuint vbo;
-glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
-GLuint vao;
-glGenVertexArrays(1,&vao);
-glBindVertexArray(vao);
-glEnableVertexAttribArray(attrib_position);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
+
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 glViewport(0,0,w,h);
 viewportSizeX=w;
