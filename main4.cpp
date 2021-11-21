@@ -4,8 +4,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <EGL/eglext.h>
 #include <GLES3/gl3.h>
+#include <EGL/egl.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
@@ -78,7 +78,6 @@ static GLint uniform_res;
 static GLint uniform_srate;
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
-
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 // GLint success,len;
