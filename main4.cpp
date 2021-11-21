@@ -12,7 +12,6 @@
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
 
-float abstime=SDL_GetTicks()/1000.0;
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -126,7 +125,6 @@ cllb=cllb/3;
 cllr=cllr-(0.05*abstime);
 cllb=cllb+(0.01*abstime);
 glClearColor(cllb,0.0f,cllr,1.0);
-// glUniform1f(uniform_time,abstime);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
@@ -278,6 +276,8 @@ viewportSizeY=h;
 glClearColor(0.0f,0.8f,0.0f,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 SDL_Init(SDL_INIT_TIMER);
+float abstime=SDL_GetTicks()/1000.0;
+glUniform1f(uniform_time,abstime);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
