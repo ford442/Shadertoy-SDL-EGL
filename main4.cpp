@@ -11,7 +11,7 @@
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
-
+float abstime;
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -276,7 +276,7 @@ viewportSizeY=h;
 glClearColor(0.0f,0.8f,0.0f,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 SDL_Init(SDL_INIT_TIMER);
-float abstime=SDL_GetTicks()/1000.0;
+abstime=SDL_GetTicks()/1000.0;
 glUniform1f(uniform_time,abstime);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
