@@ -4,7 +4,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
 #include <emscripten.h>
@@ -133,7 +132,7 @@ glBindVertexArray(vao);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-eglSwapBuffers(display,surface);
+// eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
 char *result=NULL;
@@ -177,15 +176,16 @@ const char* ssrc="/shader1.glsl";
 int selected_option=-1;
 int selected_index=0;
 static const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
 static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 SDL_GL_SetAttribute( SDL_GL_RED_SIZE,8);
@@ -214,7 +214,7 @@ if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 if(contextegl==EGL_NO_CONTEXT){
