@@ -111,26 +111,19 @@ GLuint vbo;
 GLuint vao;
 static void renderFrame(){
 float ttime=SDL_GetTicks()/1000;
-
 float cllr=(SDL_GetTicks()*0.01)/5;
 float cllb=(SDL_GetTicks()*0.001)/3;
-float alph=1.0;
+float alph=1.0-(.01*ttime);
 if (cllr>=0.95){
 cllr=cllr/3.5;
-alph=0.3;
-cllb=cllb+(cllb/ttime);
 }
 if (cllb>=0.85){
 cllb=cllb/3;
-alph=0.7-cllr;
 }
 cllr=cllr-(0.05*ttime);
 cllb=cllb+(0.01*ttime);
 glClearColor(cllb,0.0f,cllr,alph);
-
 // glUniform1f(uniform_time,ttime);
-
-
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
@@ -145,7 +138,7 @@ glBindVertexArray(vao);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-// glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
