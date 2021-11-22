@@ -108,17 +108,20 @@ SDL_Log("Error compiling shader.");
 return shader;
 }
 static void renderFrame(){
-GLuint vbo;
+GLuint vbo,vbu;
 float abstime;
 uniform_gtime=abstime;
 uniform_time=abstime;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-glBindVertexArray(vbo);
-glUseProgram(shader_program);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
+glGenBuffers(1, &vbo);
+glBindBuffer(GL_ARRAY_BUFFER, vbo);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+glGenVertexArrays(1,&vbu);
+glBindVertexArray(vbu);
+glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
-glBindBuffer(GL_ARRAY_BUFFER,vbo );
+glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
