@@ -32,7 +32,7 @@ static const char fragment_shader_header_gles3[] =
 "out vec4 fragColor; \n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-static const char *default_fragment_shader[]=
+static const char *default_fragment_shader=
 "vec2 fold = vec2(-0.5, -0.5);"
 "vec2 translate = vec2(1.5);"
 "float scale = 1.25;"
