@@ -161,7 +161,7 @@ static const char *default_fragment_shader=
 char *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
 
-program_source=(char*)read_file_into_str(fileloc);
+program_source=read_file_into_str(fileloc);
 default_fragment_shader=program_source;
 SDL_Log("Got Shader: %s",fileloc);
 SDL_Log("Shader: %s",default_fragment_shader);
