@@ -8,7 +8,6 @@
 #include <EGL/egl.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
 
 static const char common_shader_header_gles3[] =
@@ -218,7 +217,7 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-SDL_Init(SDL_INIT_VIDEO);
+// SDL_Init(SDL_INIT_VIDEO);
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
@@ -262,10 +261,10 @@ SDL_Init(SDL_INIT_TIMER);
 float abstime=SDL_GetTicks()/1000;
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
-glViewport(0,0,w,h);
-viewportSizeX=w;
-viewportSizeY=h;
-glActiveTexture(GL_TEXTURE0);
+// glViewport(0,0,w,h);
+// viewportSizeX=w;
+// viewportSizeY=h;
+// glActiveTexture(GL_TEXTURE0);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
