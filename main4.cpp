@@ -135,7 +135,7 @@ eglSwapBuffers(display,surface);
 static void strt(){
 char *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
-static char *default_fragment_shader=
+static const char *default_fragment_shader=
 "NULL"
 "NULL";
 program_source=(char*)read_file_into_str(fileloc);
@@ -195,7 +195,7 @@ sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
-sources[2]=&default_fragment_shader;
+sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
