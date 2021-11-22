@@ -156,9 +156,9 @@ return result;
 return NULL;
 }
 static void strt(){
-char *program_source=NULL;
+static const char *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
-program_source = read_file_into_str(fileloc);
+program_source=read_file_into_str(fileloc);
 default_fragment_shader=program_source;
 GLuint vtx,frag,vbo;
 const char *sources[4];
