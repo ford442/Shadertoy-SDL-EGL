@@ -160,9 +160,8 @@ static const char *default_fragment_shader=
 "}";
 char const *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
-
 program_source=read_file_into_str(fileloc);
-default_fragment_shader=program_source;
+// default_fragment_shader=program_source;
 SDL_Log("Got Shader: %s",fileloc);
 SDL_Log("Shader: %s",default_fragment_shader);
 GLuint vtx,frag,vbo;
