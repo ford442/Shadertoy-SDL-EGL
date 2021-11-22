@@ -116,6 +116,7 @@ return shader;
 }
 GLuint vbo,vbu;
 static void renderFrame(){
+static GLint uniform_time=SDL_GetTicks()/1000.0;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1, &vbo);
