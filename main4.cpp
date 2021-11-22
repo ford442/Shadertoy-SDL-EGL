@@ -10,7 +10,7 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 
-static char* read_file_into_str(const char *filename) {
+static const char* read_file_into_str(const char *filename) {
 char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
