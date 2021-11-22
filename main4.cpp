@@ -158,7 +158,7 @@ static const char *default_fragment_shader=
 "h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
 "fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
 "}";
-char *program_source=NULL;
+char const *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
 
 program_source=read_file_into_str(fileloc);
