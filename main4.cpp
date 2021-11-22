@@ -59,9 +59,7 @@ static const char fragment_shader_header_gles3[] =
 "out vec4 fragColor; \n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-const char *fileloc=
-"/shader/shader1.toy";
-const char *default_fragment_shader=read_file_into_str(fileloc);
+
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -123,7 +121,9 @@ glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
 static void strt(){
-
+const char *fileloc=
+"/shader/shader1.toy";
+const char *default_fragment_shader=read_file_into_str(fileloc);
 GLuint vtx,frag,vbo;
 const char *sources[4];
 // const char *log;
