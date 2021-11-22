@@ -101,20 +101,16 @@ SDL_Log("Error compiling shader.");
 return shader;
 }
 static void renderFrame(){
-  float abstime=SDL_GetTicks()/1000.0;
-
-  static const GLfloat vertices[]={
+float abstime=SDL_GetTicks()/1000.0;
+static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
 1.0f,1.0f
 };
-//   if(uniform_gtime >= 0){
-  //      glUniform1f(uniform_gtime, abstime);}
-    if(uniform_time >= 0){
-        glUniform1f(uniform_time, abstime);}
-      glClearColor(0.0f, 0.0f, 0.0f, 1.0);
-
+uniform_gtime=abstime;
+uniform_time=abstime;
+glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
   /*
 float cllr=(SDL_GetTicks()*0.01)/5;
