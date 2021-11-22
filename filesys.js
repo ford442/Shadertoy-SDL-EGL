@@ -21,7 +21,7 @@ FS.mkdir('/');
 FS.mkdir('/snd');
 let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-  pll();
+pll();
 });
 
 document.getElementById("circle").width=window.innerWidth;
