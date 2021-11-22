@@ -35,7 +35,6 @@ return result;
 }
 return NULL;
 }
-
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -134,6 +133,7 @@ eglSwapBuffers(display,surface);
 }
 static void strt(){
 const char *fileloc="/shader/shader1.toy";
+static const char *default_fragment_shader[]="NULL";
 static const char *default_fragment_shader=read_file_into_str(fileloc);
 SDL_Log("Got Shader: %s",fileloc);
 SDL_Log("Shader: %s",read_file_into_str(fileloc));
