@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <GLES3/gl3.h>
 #include <EGL/egl.h>
-#include <EGL/eglext.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
@@ -76,7 +75,6 @@ static GLint uniform_date;
 static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
-static GLint uniform_srate;
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
@@ -103,16 +101,21 @@ SDL_Log("Error compiling shader.");
 } */
 return shader;
 }
-GLuint vbo;
-GLuint vao;
-static const GLfloat vertices[]={
+static void renderFrame(){
+  static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
 1.0f,1.0f
 };
-static void renderFrame(){
+   if(uniform_gtime >= 0)
+        glUniform1f(uniform_gtime, abstime);
+    if(uniform_time >= 0)
+        glUniform1f(uniform_time, abstime);
+      glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+
 glClear(GL_COLOR_BUFFER_BIT);
+  /*
 float cllr=(SDL_GetTicks()*0.01)/5;
 float cllb=(SDL_GetTicks()*0.001)/3;
 if (cllr>=0.95){
@@ -124,15 +127,18 @@ cllb=cllb/3;
 cllr=cllr-(0.05*abstime);
 cllb=cllb+(0.01*abstime);
 glClearColor(cllb,0.0f,cllr,1.0);
+*/
+GLuint vbo;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(void*),vertices,GL_STATIC_DRAW);
+GLuint vao;
 glGenVertexArrays(1,&vao);
 glBindVertexArray(vao);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,vertices);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-// eglSwapBuffers(display,surface);
+eglSwapBuffers(display,surface);
 }
 static char* read_file_into_str(const char *filename) {
 char *result=NULL;
@@ -163,8 +169,8 @@ return NULL;
 static void strt(){
 GLuint vtx,frag;
 const char *sources[4];
-// const char *log;
-// GLint success,len;
+const char *log;
+GLint success,len;
 int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int w=h;
@@ -181,7 +187,7 @@ EGL_NONE
 };
 static const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
@@ -239,23 +245,11 @@ shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-glUseProgram(shader_program);
-glValidateProgram(shader_program);
-/* glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-if (!success){
-glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &len);
-if (len>1){
-log=static_cast<char*>(malloc(len));
-// glGetProgramInfoLog(shader_program,len,&len,log);
-fprintf(stderr,"%s\n\n",log);
-// free(log);
-}
-SDL_Log("Error linking shader program.");
-}
-*/
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
+glUseProgram(shader_program);
+glValidateProgram(shader_program);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -263,7 +257,7 @@ sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_cres=glGetUniformLocation(shader_program,"iChannelResolution");
 uniform_ctime=glGetUniformLocation(shader_program,"iChannelTime");
-// uniform_date=glGetUniformLocation(shader_program,"iDate");
+uniform_date=glGetUniformLocation(shader_program,"iDate");
 uniform_gtime=glGetUniformLocation(shader_program,"iGlobalTime");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
@@ -278,7 +272,7 @@ glClearColor(0.0f,0.8f,0.0f,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 SDL_Init(SDL_INIT_TIMER);
 abstime=SDL_GetTicks()/1000.0;
-glUniform1f(uniform_time,abstime);
+glActiveTexture(GL_TEXTURE0);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
