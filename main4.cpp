@@ -133,14 +133,14 @@ EGL_NONE
 };
 static void strt(){
 static const char *default_fragment_shader=
-"/n #define time iTime"
-"/n #define R iResolution.xy"
+"#define time iTime /n"
+"#define R iResolution.xy /n"
 "void mainImage(out vec4 fragC, in vec2 fC){"
 "vec2 pos = (fC.xy/R.xy) * 10. - 5.;"
 "pos.x *= R.x / R.y;"
 "float s = .25, f = .0, k = f;"
 "vec3 p = vec3(pos, sin(time * .4) * .5 - .5)* s; "   
-"for( int i=0; i< 10; i++ ){p = abs(p)/dot(p,p)- 1.65;k = length(p) ;p = p*k+k;}"
+"for( int i=0; i< 10; i++ ){p = abs(p)/dot(p,p)- 1.65;k = length(p) ;p = p*k+k;} /n"
 "f = dot(p,p)* s;fragC= vec4(f*.5, f *1.2, f * 5., 1.);}";
 char const *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
