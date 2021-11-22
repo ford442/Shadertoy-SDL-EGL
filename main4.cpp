@@ -133,7 +133,7 @@ eglSwapBuffers(display,surface);
 }
 
 static void strt(){
-const char *program_source=NULL;
+static char *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
 static char *default_fragment_shader=
 "NULL"
