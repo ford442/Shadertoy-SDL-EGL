@@ -107,9 +107,8 @@ SDL_Log("Error compiling shader.");
 } */
 return shader;
 }
-static void renderFrame(){
 GLuint vbo,vbu;
-float abstime;
+static void renderFrame(){
 uniform_gtime=SDL_GetTicks()/1000;
 uniform_time=SDL_GetTicks()/1000;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
