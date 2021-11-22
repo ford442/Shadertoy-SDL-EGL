@@ -33,26 +33,23 @@ static const char fragment_shader_header_gles3[] =
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
 static const char default_fragment_shader[]=
-"vec2 fluid(vec2 uv1){"
-"vec2 uv=uv1;"
-"float t=iTime;"
-"for (float i=1.0;i<15.;i++)"
+"void mainImage(out vec4 fragColor,in vec2 fragCoord)"
 "{"
-"uv.x -= (t+sin(t+uv.y*i/1.5))/i;"
-"uv.y -= cos(uv.x*i/1.5)/i;"
-"}"
-"return uv;"
-"}"
-"void mainImage(out vec4 fragColor, in vec2 fragCoord)"
-"{"
-"vec2 uv=fragCoord/iResolution.xy*10.0;"
-"uv=fluid(uv);"
-"float r=abs(sin(uv.x))+0.5;"
-"float g=abs(sin(uv.x+2.+iTime*0.2))-0.2;"
-"float b=abs(sin(uv.x+4.0));"
-"vec3 col=vec3(r,g,b);"
-"fragColor=vec4(col, 1.0);"
-"} \n";
+"vec2 p=fragCoord/iResolution.x;"
+"vec2 uv=p*0.1;"
+"vec3 colA=texture(iChannel0,uv).xyz;"
+"float textureResolution=iChannelResolution[0].x;"
+"uv=uv*textureResolution+0.5;"
+"vec2 iuv=floor(uv);"
+"vec2 fuv=fract(uv);"
+"v=iuv+fuv*fuv*(3.0-2.0*fuv);"
+"uv=(uv-0.5)/textureResolution;"
+"vec3 colB=texture(iChannel0,uv).xyz;"
+"float f=sin(3.1415927*p.x+0.7*iTime);"
+"vec3 col=(f>=0.0) ? colA : colB;"
+"col*=smoothstep(0.0,0.01,abs(f-0.0));"
+"fragColor=vec4(col,1.0);"
+"}";
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -108,8 +105,6 @@ return shader;
 }
 GLuint vbo,vbu;
 static void renderFrame(){
-uniform_gtime=SDL_GetTicks()/1000;
-uniform_time=SDL_GetTicks()/1000;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1, &vbo);
@@ -122,7 +117,6 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
-glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 static char* read_file_into_str(const char *filename) {
 char *result=NULL;
