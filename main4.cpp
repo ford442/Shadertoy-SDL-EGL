@@ -10,6 +10,7 @@
 #include <emscripten/html5.h>
 #include "SDL2/SDL_config.h"
 #include <SDL2/SDL.h>
+
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -78,8 +79,6 @@ static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 static GLuint shader;
-GLuint vbo;
-float abstime;
 
 // GLint success,len;
 GLsizei i,srclens[nsources];
@@ -104,6 +103,8 @@ SDL_Log("Error compiling shader.");
 return shader;
 }
 static void renderFrame(){
+GLuint vbo;
+float abstime;
 uniform_gtime=abstime;
 uniform_time=abstime;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
@@ -209,7 +210,8 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,SDL_WINDOW_OPENGL);
+SDL_Init(SDL_INIT_VIDEO);
+win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
