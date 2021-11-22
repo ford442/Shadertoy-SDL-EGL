@@ -61,7 +61,7 @@ static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
 char *fileloc=
 "/shader/shader1.toy";
-static const char default_fragment_shader[]=read_file_into_str(fileloc);
+static const char default_fragment_shader=read_file_into_str(fileloc);
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
