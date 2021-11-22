@@ -156,12 +156,15 @@ return result;
 return NULL;
 }
 static void strt(){
+char *program_source=NULL;
+char *fileloc="/shader/shader1.toy";
+program_source = read_file_into_str(fileloc);
+default_fragment_shader=program_source;
 GLuint vtx,frag,vbo;
 const char *sources[4];
 // const char *log;
 // GLint success,len;
 // int temp_val=0;
-
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
@@ -327,9 +330,5 @@ void str(){
 strt();
 }}
 int main(){
-EM_ASM({
-FS.mkdir("/snd");
-FS.mkdir("/shader");
-});
 return 1;
 }
