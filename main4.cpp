@@ -133,7 +133,7 @@ eglSwapBuffers(display,surface);
 }
 static void strt(){
 const char *fileloc="/shader/shader1.toy";
-static const char default_fragment_shader[]="NULL";
+static const char* default_fragment_shader[]="NULL";
 const char *strr=read_file_into_str(fileloc);
 default_fragment_shader=strr;
 SDL_Log("Got Shader: %s",fileloc);
@@ -174,7 +174,6 @@ if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 if(contextegl==EGL_NO_CONTEXT){
@@ -184,7 +183,6 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-// SDL_Init(SDL_INIT_VIDEO);
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int w=h;
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
