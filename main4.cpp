@@ -77,14 +77,14 @@ static GLint uniform_time;
 static GLint uniform_res;
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
 1.0f,1.0f
 };
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint shader;
 // GLint success,len;
 GLsizei i,srclens[nsources];
 // char *log;
@@ -226,12 +226,11 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 float abstime=SDL_GetTicks()/1000.0;
-
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData( GL_ARRAY_BUFFER, sizeof(float) * 5 * 4, pFullscreenQuadVertices, GL_STATIC_DRAW );
-glBindBuffer( GL_ARRAY_BUFFER, 0 );
-glGenVertexArrays(1, &vbo);
+glBufferData(GL_ARRAY_BUFFER,sizeof(float)*5*4,vbo,GL_STATIC_DRAW);
+glBindBuffer(GL_ARRAY_BUFFER,0);
+glGenVertexArrays(1,&vbo);
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
