@@ -79,7 +79,12 @@ static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 static GLuint shader;
-
+static const GLfloat vertices[]={
+-1.0f,-1.0f,
+1.0f,-1.0f,
+-1.0f,1.0f,
+1.0f,1.0f
+};
 // GLint success,len;
 GLsizei i,srclens[nsources];
 // char *log;
@@ -221,12 +226,7 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 float abstime=SDL_GetTicks()/1000.0;
-static const GLfloat vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
-};
+
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData( GL_ARRAY_BUFFER, sizeof(float) * 5 * 4, pFullscreenQuadVertices, GL_STATIC_DRAW );
