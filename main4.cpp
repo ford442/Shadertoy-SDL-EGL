@@ -158,15 +158,13 @@ static const char *default_fragment_shader=
 "h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
 "fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
 "}";
-// char *program_source=NULL;
-// char *fileloc="/shader/shader1.toy";
-// static const char *default_fragment_shader=
-// "NULL"
-// "NULL";
-// program_source=(char*)read_file_into_str(fileloc);
-// default_fragment_shader=program_source;
-// SDL_Log("Got Shader: %s",fileloc);
-// SDL_Log("Shader: %s",read_file_into_str(fileloc));
+char *program_source=NULL;
+char *fileloc="/shader/shader1.toy";
+
+program_source=(char*)read_file_into_str(fileloc);
+default_fragment_shader=program_source;
+SDL_Log("Got Shader: %s",fileloc);
+SDL_Log("Shader: %s",default_fragment_shader);
 GLuint vtx,frag,vbo;
 const char *sources[4];
 // const char *log;
