@@ -108,10 +108,10 @@ static void renderFrame(){
 -1.0f,1.0f,
 1.0f,1.0f
 };
-   if(uniform_gtime >= 0)
-        glUniform1f(uniform_gtime, abstime);
-    if(uniform_time >= 0)
-        glUniform1f(uniform_time, abstime);
+//   if(uniform_gtime >= 0){
+  //      glUniform1f(uniform_gtime, abstime);}
+    if(uniform_time >= 0){
+        glUniform1f(uniform_time, abstime);}
       glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 
 glClear(GL_COLOR_BUFFER_BIT);
