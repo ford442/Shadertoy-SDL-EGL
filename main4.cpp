@@ -108,8 +108,8 @@ static const GLfloat vertices[]={
 -1.0f,1.0f,
 1.0f,1.0f
 };
-uniform_gtime=&abstime;
-uniform_time=&abstime;
+uniform_gtime=abstime;
+uniform_time=abstime;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
   /*
@@ -127,7 +127,7 @@ glClearColor(cllb,0.0f,cllr,1.0);
 */
 GLuint vbo;
 glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,&vbo);
+glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(void*),&vertices,GL_STATIC_DRAW);
 GLuint vao;
 glGenVertexArrays(1,&vao);
@@ -167,6 +167,7 @@ static void strt(){
 GLuint vtx,frag;
 const char *sources[4];
 const char *log;
+float abstime;
 GLint success,len;
 int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
