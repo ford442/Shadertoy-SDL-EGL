@@ -154,9 +154,9 @@ return NULL;
 static void strt(){
 GLuint vtx,frag,vbo;
 const char *sources[4];
-const char *log;
-GLint success,len;
-int temp_val=0;
+// const char *log;
+// GLint success,len;
+// int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int w=h;
 const char* texture_files[4];
@@ -164,8 +164,8 @@ for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
 const char* ssrc="/shader1.glsl";
-int selected_option=-1;
-int selected_index=0;
+// int selected_option=-1;
+// int selected_index=0;
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
@@ -228,7 +228,7 @@ sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-float abstime=SDL_GetTicks()/1000.0;
+float abstime=SDL_GetTicks()/1000;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
@@ -259,13 +259,11 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
-glUniform1f(uniform_time, abstime);
-glUniform1f(uniform_gtime, abstime);
+glUniform1f(uniform_time,abstime);
+glUniform1f(uniform_gtime,abstime);
 glViewport(0,0,w,h);
 viewportSizeX=w;
 viewportSizeY=h;
-glClearColor(0.0f,0.8f,0.0f,1.0);
-glClear(GL_COLOR_BUFFER_BIT);
 SDL_Init(SDL_INIT_TIMER);
 glActiveTexture(GL_TEXTURE0);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
