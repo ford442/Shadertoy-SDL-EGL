@@ -77,7 +77,9 @@ static GLint uniform_res;
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLuint shader;
+static GLuint shader;
+static GLuint vbo;
+
 // GLint success,len;
 GLsizei i,srclens[nsources];
 // char *log;
@@ -101,39 +103,15 @@ SDL_Log("Error compiling shader.");
 return shader;
 }
 static void renderFrame(){
-float abstime=SDL_GetTicks()/1000.0;
-static const GLfloat vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
-};
 uniform_gtime=abstime;
 uniform_time=abstime;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
-glClear(GL_COLOR_BUFFER_BIT);
-  /*
-float cllr=(SDL_GetTicks()*0.01)/5;
-float cllb=(SDL_GetTicks()*0.001)/3;
-if (cllr>=0.95){
-cllr=cllr/3.5;
-}
-if (cllb>=0.85){
-cllb=cllb/3;
-}
-cllr=cllr-(0.05*abstime);
-cllb=cllb+(0.01*abstime);
-glClearColor(cllb,0.0f,cllr,1.0);
-*/
-GLuint vbo;
-glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(void*),&vertices,GL_STATIC_DRAW);
-GLuint vao;
-glGenVertexArrays(1,&vao);
-glBindVertexArray(vao);
-glEnableVertexAttribArray(attrib_position);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+glBindVertexArray(vbo);
+glUseProgram(shader_program);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,&vertices);
+glEnableVertexAttribArray(attrib_position);
+glBindBuffer(GL_ARRAY_BUFFER,vbo );
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
@@ -190,6 +168,8 @@ EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
+EGL_STENCIL_SIZE,8,
+EGL_DEPTH_SIZE,24,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
@@ -203,8 +183,8 @@ SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
-attr.stencil=0;
-attr.depth=0;
+attr.stencil=1;
+attr.depth=1;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
@@ -238,6 +218,18 @@ sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
+float abstime=SDL_GetTicks()/1000.0;
+static const GLfloat vertices[]={
+-1.0f,-1.0f,
+1.0f,-1.0f,
+-1.0f,1.0f,
+1.0f,1.0f
+};
+glGenBuffers(1,&vbo);
+glBindBuffer(GL_ARRAY_BUFFER,vbo);
+glBufferData( GL_ARRAY_BUFFER, sizeof(float) * 5 * 4, pFullscreenQuadVertices, GL_STATIC_DRAW );
+glBindBuffer( GL_ARRAY_BUFFER, 0 );
+glGenVertexArrays(1, &vbo);
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
