@@ -228,7 +228,7 @@ sources[3]=fragment_shader_footer;
 float abstime=SDL_GetTicks()/1000.0;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(float)*5*4,vbo,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vbo),vbo,GL_STATIC_DRAW);
 glBindBuffer(GL_ARRAY_BUFFER,0);
 glGenVertexArrays(1,&vbo);
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
