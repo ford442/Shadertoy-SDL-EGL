@@ -131,10 +131,11 @@ glUniform1f(uniform_gtime,abstime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
+
 static void strt(){
 const char *fileloc="/shader/shader1.toy";
-static const char* default_fragment_shader[]="NULL";
-const char *strr=read_file_into_str(fileloc);
+static const char default_fragment_shader[]="NULL";
+const char *strr=(char*)read_file_into_str(fileloc);
 default_fragment_shader=strr;
 SDL_Log("Got Shader: %s",fileloc);
 SDL_Log("Shader: %s",read_file_into_str(fileloc));
@@ -147,7 +148,6 @@ const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
