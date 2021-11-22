@@ -9,7 +9,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
-static const char *read_file_into_str(const char *filename) {
+static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
@@ -35,15 +35,15 @@ return result;
 }
 return NULL;
 }
-static const char common_shader_header_gles3[] =
+static const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n";
-static const char vertex_shader_body_gles3[] =
+static const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
-static const char fragment_shader_header_gles3[] =
+static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform float iChannelTime[4];"
@@ -86,7 +86,6 @@ static const GLfloat vertices[]={
 -1.0f,1.0f,
 1.0f,1.0f
 };
-
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 static GLuint shader;
 GLsizei i,srclens[nsources];
@@ -134,7 +133,6 @@ EGL_NONE
 };
 static void strt(){
 static const char *default_fragment_shader=
-  
 "#define PI 3.14159265359"
 "#define E 2.7182818284"
 "float height(vec2 uv){"
@@ -180,7 +178,6 @@ static const char *default_fragment_shader=
 "fragColor.r = 1.0-pow(cos(rayPos.y*1.0+cos(iTime*1.0)), 2.0);"
 "fragColor.g = 1.0-pow(cos(rayPos.y*1.0+cos(iTime*2.0)), 2.0);"
 "fragColor.b = 1.0-pow(cos(rayPos.y*1.0+cos(iTime*3.0)), 2.0);}";
-
 // char *program_source=NULL;
 // char *fileloc="/shader/shader1.toy";
 // static const char *default_fragment_shader=
