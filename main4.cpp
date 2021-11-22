@@ -89,53 +89,6 @@ static const GLfloat vertices[]={
 -1.0f,1.0f,
 1.0f,1.0f
 };
-
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
-GLsizei i,srclens[nsources];
-for (i=0;i<nsources;++i){
-srclens[i]=(GLsizei)strlen(sources[i]);
-}
-shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
-glCompileShader(shader);
-
-return shader;
-}
-GLuint vbo,vbu;
-static void renderFrame(){
-double abstime=(double)SDL_GetTicks()/1000;
-glClearColor(0.0f, 0.0f, 0.0f, 1.0);
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-glGenBuffers(1, &vbo);
-glBindBuffer(GL_ARRAY_BUFFER, vbo);
-glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-glGenVertexArrays(1,&vbu);
-glBindVertexArray(vbu);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
-glEnableVertexAttribArray(attrib_position);
-glUseProgram(shader_program);
-glUniform1f(uniform_time,abstime);
-glUniform1f(uniform_gtime,abstime);
-glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-eglSwapBuffers(display,surface);
-}
-static void strt(){
-const char *fileloc=
-"/shader/shader1.toy";
-const char *default_fragment_shader=read_file_into_str(fileloc);
-GLuint vtx,frag,vbo;
-const char *sources[4];
-// const char *log;
-// GLint success,len;
-// int temp_val=0;
-const char* texture_files[4];
-for (int i=0;i<4;++i) {
-texture_files[i]=NULL;
-}
-const char* ssrc="/shader1.glsl";
-// int selected_option=-1;
-// int selected_index=0;
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
@@ -152,6 +105,50 @@ EGL_DEPTH_SIZE,24,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint shader;
+GLsizei i,srclens[nsources];
+for (i=0;i<nsources;++i){
+srclens[i]=(GLsizei)strlen(sources[i]);
+}
+shader=glCreateShader(type);
+glShaderSource(shader,nsources,sources,srclens);
+glCompileShader(shader);
+return shader;
+}
+GLuint vbo,vbu;
+static void renderFrame(){
+double abstime=(double)SDL_GetTicks()/1000;
+glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+glGenBuffers(1,&vbo);
+glBindBuffer(GL_ARRAY_BUFFER,vbo);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glGenVertexArrays(1,&vbu);
+glBindVertexArray(vbu);
+glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
+glEnableVertexAttribArray(attrib_position);
+glUseProgram(shader_program);
+glUniform1f(uniform_time,abstime);
+glUniform1f(uniform_gtime,abstime);
+glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+eglSwapBuffers(display,surface);
+}
+static void strt(){
+const char* fileloc=
+"/shader/shader1.toy";
+const char *default_fragment_shader=read_file_into_str(fileloc);
+SDL_Log("Got Shader: /n",default_fragment_shader);
+GLuint vtx,frag,vbo;
+const char *sources[4];
+// const char *log;
+// GLint success,len;
+// int temp_val=0;
+const char* texture_files[4];
+for (int i=0;i<4;++i) {
+texture_files[i]=NULL;
+}
+
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
