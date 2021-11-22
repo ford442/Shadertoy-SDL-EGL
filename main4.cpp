@@ -36,32 +36,28 @@ static const char default_fragment_shader[]=
 "vec2 fold = vec2(-0.5, -0.5);"
 "vec2 translate = vec2(1.5);"
 "float scale = 1.25;"
-
 "vec3 hsv(float h,float s,float v) {"
-	"return mix(vec3(3.1),clamp((abs(fract(h+vec3(3.,2.,1.)/3.)*6.-3.)-1.),0.,1.),s)*v;"
+"return mix(vec3(3.1),clamp((abs(fract(h+vec3(3.,2.,1.)/3.)*6.-3.)-1.),0.,1.),s)*v;"
 "}"
-
 "vec2 rotate(vec2 p, float a){"
-"	return vec2(p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a));"
+"return vec2(p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a));"
 "}"
-
 "void mainImage( out vec4 fragColor, in vec2 fragCoord ) {"
-"	vec2 p = -1.0 + 2.0*fragCoord.xy/iResolution.xy;"
-"	p.x *= iResolution.x/iResolution.y;"
-"	p *= 0.182;"
-"	float x = p.y;"
-"	p = abs(mod(p, 4.0) - 2.0);"
-"	for(int i = 28; i > 0; i--){"
-"		p = abs(p - fold) + fold;"
-"		p = p*scale - translate;"
-"		p = rotate(p, 3.14159/(0.10+sin(iTime*0.0005+float(i)*0.5000001)*0.4999+0.5+(10./iTime)+sin(iTime)/100.));"
-"	}"
-"	float i = x*x + atan(p.y, p.x) + iTime*0.02;"
-"	float h = floor(i*4.0)/8.0 + 1.107;"
-"	h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
-"	fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
+"vec2 p = -1.0 + 2.0*fragCoord.xy/iResolution.xy;"
+"p.x *= iResolution.x/iResolution.y;"
+"p *= 0.182;"
+"float x = p.y;"
+"p = abs(mod(p, 4.0) - 2.0);"
+"for(int i = 28; i > 0; i--){"
+"p = abs(p - fold) + fold;"
+"p = p*scale - translate;"
+"p = rotate(p, 3.14159/(0.10+sin(iTime*0.0005+float(i)*0.5000001)*0.4999+0.5+(10./iTime)+sin(iTime)/100.));"
+"}"
+"float i = x*x + atan(p.y, p.x) + iTime*0.02;"
+"float h = floor(i*4.0)/8.0 + 1.107;"
+"h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
+"fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
 "}";
-
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -117,7 +113,7 @@ return shader;
 }
 GLuint vbo,vbu;
 static void renderFrame(){
-float abstime=(float)SDL_GetTicks()/1000;
+double abstime=(double)SDL_GetTicks()/1000;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1, &vbo);
