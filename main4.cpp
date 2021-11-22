@@ -78,7 +78,8 @@ static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 static GLuint shader;
-static GLuint vbo;
+GLuint vbo;
+float abstime;
 
 // GLint success,len;
 GLsizei i,srclens[nsources];
@@ -145,7 +146,6 @@ static void strt(){
 GLuint vtx,frag;
 const char *sources[4];
 const char *log;
-float abstime;
 GLint success,len;
 int temp_val=0;
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
