@@ -33,25 +33,33 @@ static const char fragment_shader_header_gles3[] =
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
 static const char default_fragment_shader[]=
-"vec2 fluid(vec2 uv1){"
- "vec2 uv = uv1;"
- "float t = iTime;"
- "for (float i = 1.; i < 15.; i++)"
- " {"
-  "  uv.x -= (t+sin(t+uv.y*i/1.5))/i;"
-  "  uv.y -= cos(uv.x*i/1.5)/i;"
-  "}"
- " return uv;"
+"vec2 fold = vec2(-0.5, -0.5);"
+"vec2 translate = vec2(1.5);"
+"float scale = 1.25;"
+
+"vec3 hsv(float h,float s,float v) {"
+	"return mix(vec3(3.1),clamp((abs(fract(h+vec3(3.,2.,1.)/3.)*6.-3.)-1.),0.,1.),s)*v;"
 "}"
-"void mainImage( out vec4 fragColor, in vec2 fragCoord )"
-"{"
- "vec2 uv = fragCoord/iResolution.xy*10.;"
- "uv = fluid(uv);"
- "float r = abs(sin(uv.x))+.5;"
- "float g =abs(sin(uv.x+2.+iTime*.2))-.2;"
- "float b = abs(sin(uv.x+4.));   "
- "vec3 col = vec3(r,g,b);   "
- " fragColor = vec4(col, 1.0);"
+
+"vec2 rotate(vec2 p, float a){"
+"	return vec2(p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a));"
+"}"
+
+"void mainImage( out vec4 fragColor, in vec2 fragCoord ) {"
+"	vec2 p = -1.0 + 2.0*fragCoord.xy/iResolution.xy;"
+"	p.x *= iResolution.x/iResolution.y;"
+"	p *= 0.182;"
+"	float x = p.y;"
+"	p = abs(mod(p, 4.0) - 2.0);"
+"	for(int i = 28; i > 0; i--){"
+"		p = abs(p - fold) + fold;"
+"		p = p*scale - translate;"
+"		p = rotate(p, 3.14159/(0.10+sin(iTime*0.0005+float(i)*0.5000001)*0.4999+0.5+(10./iTime)+sin(iTime)/100.));"
+"	}"
+"	float i = x*x + atan(p.y, p.x) + iTime*0.02;"
+"	float h = floor(i*4.0)/8.0 + 1.107;"
+"	h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
+"	fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
 "}";
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
