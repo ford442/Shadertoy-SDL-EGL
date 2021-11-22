@@ -10,6 +10,33 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 
+static char* read_file_into_str(const char *filename) {
+char *result=NULL;
+long length=0;
+FILE *file=fopen(filename,"r");
+if(file){
+int status=fseek(file,0,SEEK_END);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+length=ftell(file);
+status=fseek(file,0,SEEK_SET);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+result=static_cast<char*>(malloc((length+1)*sizeof(char)));
+if(result){
+size_t actual_length=fread(result,sizeof(char),length,file);
+result[actual_length++]={'\0'};
+} 
+fclose(file);
+return result;
+}
+return NULL;
+}
+
 static const char common_shader_header_gles3[] =
 "#version 300 es \n"
 "precision highp float; \n";
@@ -32,32 +59,9 @@ static const char fragment_shader_header_gles3[] =
 "out vec4 fragColor; \n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-static const char *default_fragment_shader=
-"vec2 fold = vec2(-0.5, -0.5);"
-"vec2 translate = vec2(1.5);"
-"float scale = 1.25;"
-"vec3 hsv(float h,float s,float v) {"
-"return mix(vec3(3.1),clamp((abs(fract(h+vec3(3.,2.,1.)/3.)*6.-3.)-1.),0.,1.),s)*v;"
-"}"
-"vec2 rotate(vec2 p, float a){"
-"return vec2(p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a));"
-"}"
-"void mainImage( out vec4 fragColor, in vec2 fragCoord ) {"
-"vec2 p = -1.0 + 2.0*fragCoord.xy/iResolution.xy;"
-"p.x *= iResolution.x/iResolution.y;"
-"p *= 0.182;"
-"float x = p.y;"
-"p = abs(mod(p, 4.0) - 2.0);"
-"for(int i = 28; i > 0; i--){"
-"p = abs(p - fold) + fold;"
-"p = p*scale - translate;"
-"p = rotate(p, 3.14159/(0.10+sin(iTime*0.0005+float(i)*0.5000001)*0.4999+0.5+(10./iTime)+sin(iTime)/100.));"
-"}"
-"float i = x*x + atan(p.y, p.x) + iTime*0.02;"
-"float h = floor(i*4.0)/8.0 + 1.107;"
-"h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
-"fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
-"}";
+char *fileloc=
+"/shader/shader1.toy";
+static const char default_fragment_shader[]=read_file_into_str(fileloc);
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -87,28 +91,17 @@ static const GLfloat vertices[]={
 -1.0f,1.0f,
 1.0f,1.0f
 };
+
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 static GLuint shader;
-// GLint success,len;
 GLsizei i,srclens[nsources];
-// char *log;
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
-/* glGetShaderiv(shader,GL_COMPILE_STATUS,&success);
-if (!success){
-glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
-if (len>1){
-log=static_cast<char*>(malloc(len));
-glGetShaderInfoLog(shader,len,NULL,log);
-fprintf(stderr,"%s\n\n",log);
-free(log);
-}
-SDL_Log("Error compiling shader.");
-} */
+
 return shader;
 }
 GLuint vbo,vbu;
@@ -129,37 +122,8 @@ glUniform1f(uniform_gtime,abstime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
-static char* read_file_into_str(const char *filename) {
-char *result=NULL;
-long length=0;
-FILE *file=fopen(filename,"r");
-if(file){
-int status=fseek(file,0,SEEK_END);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-length=ftell(file);
-status=fseek(file,0,SEEK_SET);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-result=static_cast<char*>(malloc((length+1)*sizeof(char)));
-if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
-result[actual_length++]={'\0'};
-} 
-fclose(file);
-return result;
-}
-return NULL;
-}
 static void strt(){
-// static const char *program_source=NULL;
-char *fileloc="/shader/shader1.toy";
-// program_source=read_file_into_str(fileloc);
-default_fragment_shader=read_file_into_str(fileloc);
+
 GLuint vtx,frag,vbo;
 const char *sources[4];
 // const char *log;
