@@ -9,13 +9,6 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
-static const char default_fragment_shader[] =
-"\n void mainImage( out vec4 fragColor, in vec2 fragCoord )"
-"{"
-"vec2 uv = fragCoord/iResolution.xy;"
-"vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));"
-"fragColor = vec4(col,1.0);"
-"} \n";
 static const char *read_file_into_str(const char *filename) {
 char *result=NULL;
 long length=0;
@@ -141,7 +134,7 @@ eglSwapBuffers(display,surface);
 }
 static void strt(){
 const char *fileloc="/shader/shader1.toy";
-default_fragment_shader=(char*)read_file_into_str(fileloc);
+static const char default_fragment_shader[]=(char*)read_file_into_str(fileloc);
 SDL_Log("Got Shader: %s",fileloc);
 SDL_Log("Shader: %s",default_fragment_shader);
 GLuint vtx,frag,vbo;
