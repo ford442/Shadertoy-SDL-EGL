@@ -135,11 +135,11 @@ glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
 static void strt(){
-const char* fileloc=
+const char *fileloc=
 "/shader/shader1.toy";
-const char *default_fragment_shader=read_file_into_str(fileloc);
-printf("Got Shader: /n",fileloc);
-printf("Shader: /n",*default_fragment_shader);
+static char *default_fragment_shader[]=read_file_into_str(fileloc);
+SDL_Log("Got Shader: %s",fileloc);
+SDL_Log("Shader: %s",*default_fragment_shader);
 GLuint vtx,frag,vbo;
 const char *sources[4];
 // const char *log;
