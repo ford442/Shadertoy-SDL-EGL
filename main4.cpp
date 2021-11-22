@@ -144,7 +144,7 @@ return result;
 return NULL;
 }
 static void strt(){
-GLuint vtx,frag;
+GLuint vtx,frag,vbo;
 const char *sources[4];
 const char *log;
 GLint success,len;
