@@ -9,7 +9,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
-static const char default_fragment_shader[] =
+static char default_fragment_shader[] =
 "\n void mainImage( out vec4 fragColor, in vec2 fragCoord )"
 "{"
 "vec2 uv = fragCoord/iResolution.xy;"
