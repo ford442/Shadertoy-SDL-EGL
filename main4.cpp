@@ -10,7 +10,7 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 
-static const char read_file_into_str(const char filename) {
+static const char *read_file_into_str(const char *filename) {
 char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
@@ -59,9 +59,9 @@ static const char fragment_shader_header_gles3[] =
 "out vec4 fragColor; \n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-const char fileloc=
+const char *fileloc=
 "/shader/shader1.toy";
-const char default_fragment_shader=read_file_into_str(fileloc);
+const char *default_fragment_shader=read_file_into_str(fileloc);
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
