@@ -61,8 +61,7 @@ static const char default_fragment_shader[]=
 "	h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
 "	fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
 "}";
-int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-int w=h;
+
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -227,6 +226,8 @@ eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
 // SDL_Init(SDL_INIT_VIDEO);
+int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+int w=h;
 win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
