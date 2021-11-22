@@ -61,6 +61,8 @@ static const char default_fragment_shader[]=
 "	h += smoothstep(-0.1, 0.8, mod(i*2.0/5.0, 1.0/4.0)*900.0)/0.010 - 0.5;"
 "	fragColor=vec4(hsv(h, 1.0, smoothstep(-3.0, 3.0, length(p)*1.0)), 2);"
 "}";
+int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+int w=h;
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -165,8 +167,7 @@ const char *sources[4];
 // const char *log;
 // GLint success,len;
 // int temp_val=0;
-int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-int w=h;
+
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
