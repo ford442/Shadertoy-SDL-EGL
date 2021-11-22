@@ -156,10 +156,10 @@ return result;
 return NULL;
 }
 static void strt(){
-static const char *program_source=NULL;
+// static const char *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
-program_source=read_file_into_str(fileloc);
-default_fragment_shader=program_source;
+// program_source=read_file_into_str(fileloc);
+default_fragment_shader=read_file_into_str(fileloc);
 GLuint vtx,frag,vbo;
 const char *sources[4];
 // const char *log;
