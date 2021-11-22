@@ -116,7 +116,7 @@ return shader;
 }
 GLuint vbo,vbu;
 static void renderFrame(){
-static GLint uniform_time=SDL_GetTicks()/1000.0;
+float abstime=SDL_GetTicks()/1000;
 glClearColor(0.0f, 0.0f, 0.0f, 1.0);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1, &vbo);
@@ -127,6 +127,9 @@ glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
+glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+glUniform1f(uniform_time,abstime);
+glUniform1f(uniform_gtime,abstime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
@@ -262,11 +265,7 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 SDL_Init(SDL_INIT_TIMER);
-float abstime=SDL_GetTicks()/1000;
-glUniform1f(uniform_time,abstime);
-glUniform1f(uniform_gtime,abstime);
 // glViewport(0,0,w,h);
 // viewportSizeX=w;
 // viewportSizeY=h;
