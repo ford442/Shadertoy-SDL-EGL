@@ -27,9 +27,9 @@ if(status!=0){
 fclose(file);
 return NULL;
 }
-result=(char*)malloc(length*sizeof(char));
+result=malloc((length+1)*sizeof(char));
 if(result){
-size_t actual_length=fread(result,sizeof(char),length*4,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 } 
 fclose(file);
