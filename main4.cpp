@@ -288,9 +288,6 @@ extern "C" {
 void pl(){
 plt();
 }
-void read(){
-rd();
-}
 void str(){
 strt();
 }}
