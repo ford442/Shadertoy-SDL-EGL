@@ -136,6 +136,7 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
+glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
@@ -242,7 +243,6 @@ uniform_gtime=glGetUniformLocation(shader_program,"iGlobalTime");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
