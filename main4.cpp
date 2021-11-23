@@ -21,8 +21,8 @@ if(status!=0){
 fclose(file);
 return NULL;
 }
+length=ftell(file)*4;
 status=fseek(file,0,SEEK_SET);
-length=ftell(file);
 if(status!=0){
 fclose(file);
 return NULL;
