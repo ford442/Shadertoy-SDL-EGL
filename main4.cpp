@@ -136,7 +136,7 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
-if(mouseLPressed=1.0){
+if(mouseLPressed==1.0){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
