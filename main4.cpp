@@ -116,10 +116,10 @@ int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x, &y);
-mouseX=x;
-mouseY=viewportSizeY-y;
 if((buttons&SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0;
+mouseX=x;
+mouseY=viewportSizeY-y;
 }else{
 mouseLPressed=0.0;
 }
