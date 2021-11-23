@@ -85,12 +85,10 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_mouse;
-
 static GLfloat mouseX = 0.0;
 static GLfloat mouseY = 0.0;
 static GLfloat mouseLPressed = 0.0;
 static GLfloat mouseRPressed = 0.0;
-
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint vbo,vbu;
@@ -120,14 +118,13 @@ SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x;
 mouseY=viewportSizeY-y;
-glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 if((buttons&SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0;
 }else{
 mouseLPressed=0.0;
 }
 double abstime=(double)SDL_GetTicks()/1000;
-glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+glClearColor(0.0f,0.0f,0.0f,1.0);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
@@ -243,7 +240,8 @@ uniform_date=glGetUniformLocation(shader_program,"iDate");
 uniform_gtime=glGetUniformLocation(shader_program,"iGlobalTime");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
-uniform_mouse = glGetUniformLocation(shader_program, "iMouse");
+uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
+glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
