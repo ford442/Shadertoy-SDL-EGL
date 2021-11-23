@@ -27,7 +27,7 @@ if(status!=0){
 fclose(file);
 return NULL;
 }
-result=(char*)malloc(length+1*sizeof(char));
+result=static_cast<char*>(malloc((length+1)*sizeof(char)));
 if(result){
 size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
