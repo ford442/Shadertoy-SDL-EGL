@@ -174,7 +174,7 @@ static const char *default_fragment_shader=
 " \n #ifdef specular \n "
 "if (dot(norm, lamp.direction) > 0.0)col+= lamp.color*lamp.intensity*specint*pow(max(0.0, dot(reflect(pl, norm), normalize(pos - campos))), specshin);"
 " \n #endif \n "
-"return col; } vec3 lampsShading(vec3 norm, vec3 pos, vec3 ocol, int objnr) { vec3 col=vec3(0.); for (int l=0; l<3; l++) col+= lampShading(lamps[l], norm, pos, ocol, objnr, l); return col; } vec3 GetCameraRayDir(vec2 vWindow, vec3 vCameraDir, float fov) { vec3 vForward=normalize(vCameraDir); vec3 vRight=normalize(cross(vec3(0.0, 1.0, 0.0), vForward)); vec3 vUp=normalize(cross(vForward, vRight)); vec3 vDir=normalize(vWindow.x * vRight + vWindow.y * vUp + vForward * fov); return vDir; } void setCamera() { vec2 "iMouse2;"
+"return col; } vec3 lampsShading(vec3 norm, vec3 pos, vec3 ocol, int objnr) { vec3 col=vec3(0.); for (int l=0; l<3; l++) col+= lampShading(lamps[l], norm, pos, ocol, objnr, l); return col; } vec3 GetCameraRayDir(vec2 vWindow, vec3 vCameraDir, float fov) { vec3 vForward=normalize(vCameraDir); vec3 vRight=normalize(cross(vec3(0.0, 1.0, 0.0), vForward)); vec3 vUp=normalize(cross(vForward, vRight)); vec3 vDir=normalize(vWindow.x * vRight + vWindow.y * vUp + vForward * fov); return vDir; } void setCamera() { vec2 iMouse2;"
 " \n #ifdef captmode \n "
 "iMouse2=vec2(0.5, 0.05);"
 " \n #else \n "
