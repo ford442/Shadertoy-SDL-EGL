@@ -116,10 +116,10 @@ int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x, &y);
-if((buttons&SDL_BUTTON_LMASK)!=0){
-mouseLPressed=1.0;
 mouseX=x;
 mouseY=viewportSizeY-y;
+if((buttons&SDL_BUTTON_LMASK)!=0){
+mouseLPressed=1.0;
 }else{
 mouseLPressed=0.0;
 }
@@ -136,7 +136,9 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
+if(MouseButtonPressed=1.0){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
+}
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
