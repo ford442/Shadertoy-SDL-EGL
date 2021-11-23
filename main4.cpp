@@ -14,7 +14,7 @@ using std::string;
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
-FILE *file=fopen(filename,"rb");
+FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
 if(status!=0){
@@ -27,7 +27,7 @@ if(status!=0){
 fclose(file);
 return NULL;
 }
-result=static_cast<char*>(malloc((length+1)*sizeof(char)));
+result=(char*)malloc(length,sizeof(char));
 if(result){
 size_t actual_length=fread(result,sizeof(char),length*4,file);
 result[actual_length++]={'\0'};
