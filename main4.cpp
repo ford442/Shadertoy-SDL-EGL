@@ -133,10 +133,10 @@ EGL_NONE
 };
 static void strt(){
 static const char *default_fragment_shader=
-"\n #define time  iTime \n"
-"#define R iResolution.xy \n"
-"void mainImage( out vec4 fragC, in vec2 fC){vec2 pos = (fC.xy/R.xy) * 10. - 5.; pos.x *= R.x / R.y;float s = .25, f = .0, k = f;vec3 p = vec3(pos, sin(time * .4) * .5 - .5)* s;    for( int i=0; i< 10; i++ ){p = abs(p)/dot(p,p)- 1.65;k = length(p) ;p = p*k+k;}f = dot(p,p)* s;fragC= vec4(f*.5, f *1.2, f * 5., 1.);}";
-char const *program_source=NULL;
+"\n #define PI 3.14159265359 \n"
+"\n #define E 2.7182818284 \n"
+"float height(vec2 uv) { float r = length(uv); if(r > 1.0) return 10.0; float sum = 0.0; for(int i = 0 ; i < 12; i++) { { float awesome = pow(clamp(1.0-acos(cos((7.0*atan(uv.y, uv.x)-r*PI*4.0*cos(float(i)+iTime))+ cos(iTime))), 0.0, 1.0), PI); sum = (sum+awesome); } } return -sum; } vec2 flower(vec3 p, vec3 d) { float zoom = 1.0; vec2 uv = p.xz*zoom/2.0; uv.x *= iResolution.x/iResolution.y; uv = vec2(uv.x*cos(iTime)-uv.y*sin(iTime), uv.x*sin(iTime)+uv.y*cos(iTime)); vec2 uv2 = uv + vec2(.01/iResolution.x,  0.0); vec2 uv3 = uv + vec2(0.0,  .01/iResolution.y); vec3 p1 = vec3(uv, height(uv)).xzy; vec3 p2 = vec3(uv2, height(uv2)).xzy; vec3 p3 = vec3(uv3, height(uv3)).xzy; vec3 n = normalize(cross(p3-p1, p2-p1)); return vec2(dot(p-p1, n), p1.y); } void mainImage( out vec4 fragColor, in vec2 fragCoord ) { vec2 uv = fragCoord.xy / iResolution.xy*2.0-1.0; vec3 origin = vec3(0.0, 1.0, 0.0); vec3 rayOrigin = vec3(0.0, 1.5, .25); vec3 rayPos = rayOrigin.xyz; vec3 up = vec3(0.0, 1.0, 0.0); vec3 mainDir = normalize(origin-rayPos); vec3 right = normalize(cross(up, mainDir)); up = normalize(cross(right, mainDir)); vec3 rayDir = normalize(mainDir-up*uv.y+right*uv.x); for(float t = 0.0; t < 100.0; t += 2.5) { vec2 dist = flower(rayPos, rayDir); rayPos += .1*rayDir; if( rayPos.y - dist.y < 0.0) break; else if(length(rayPos-rayOrigin) >= 10.0 ) { fragColor = vec4(1.0); return; } } vec2 sum = flower(rayPos, rayDir); fragColor.r = 1.0-pow(cos(rayPos.y*1.0+cos(iTime*1.0)), 2.0); fragColor.g = 1.0-pow(cos(rayPos.y*1.0+cos(iTime*2.0)), 2.0); fragColor.b = 1.0-pow(cos(rayPos.y*1.0+cos(iTime*3.0)), 2.0); }";
+  char const *program_source=NULL;
 char *fileloc="/shader/shader1.toy";
 program_source=read_file_into_str(fileloc);
 // default_fragment_shader=program_source;
