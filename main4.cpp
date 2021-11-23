@@ -14,7 +14,7 @@ using std::string;
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
-FILE *file=fopen(filename,"r");
+FILE *file=fopen(filename,"rb");
 if(file){
 int status=fseek(file,0,SEEK_END);
 if(status!=0){
