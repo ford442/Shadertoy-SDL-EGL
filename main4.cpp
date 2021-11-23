@@ -85,10 +85,10 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_mouse;
-static GLfloat mouseX = 0.0;
-static GLfloat mouseY = 0.0;
-static GLfloat mouseLPressed = 0.0;
-static GLfloat mouseRPressed = 0.0;
+static GLfloat mouseX=0.0;
+static GLfloat mouseY=0.0;
+static GLfloat mouseLPressed=0.0;
+static GLfloat mouseRPressed=0.0;
 static GLfloat viewportSizeX=0.0;
 static GLfloat viewportSizeY=0.0;
 static GLuint vbo,vbu;
@@ -118,7 +118,7 @@ SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x;
 mouseY=viewportSizeY-y;
-if((buttons&SDL_BUTTON_LMASK)!=0){
+if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0;
 }else{
 mouseLPressed=0.0;
@@ -136,7 +136,9 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
+if(mouseLPressed==1.0){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
+}
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
