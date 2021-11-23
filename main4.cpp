@@ -159,6 +159,7 @@ EGL_NONE
 };
 
 static void strt(){
+SDL_Init(SDL_INIT_EVENTS);
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
