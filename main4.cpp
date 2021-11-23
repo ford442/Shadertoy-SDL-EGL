@@ -16,18 +16,18 @@ char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
 if(file){
-int status=fseek(file,0,SEEK_END);
+int status=fseek(file,0L,SEEK_END);
 if(status!=0){
 fclose(file);
 return NULL;
 }
 length=ftell(file);
-status=fseek(file,0,SEEK_SET);
+status=fseek(file,0L,SEEK_SET);
 if(status!=0){
 fclose(file);
 return NULL;
 }
-result=(char*)malloc(length,sizeof(char));
+result=(char*)malloc(length*sizeof(char));
 if(result){
 size_t actual_length=fread(result,sizeof(char),length*4,file);
 result[actual_length++]={'\0'};
