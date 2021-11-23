@@ -21,12 +21,12 @@ if(status!=0){
 fclose(file);
 return NULL;
 }
-length=ftell(file);
 status=fseek(file,0,SEEK_SET);
 if(status!=0){
 fclose(file);
 return NULL;
 }
+length=ftell(file);
 result=static_cast<char*>(malloc((length+1)*sizeof(char)));
 if(result){
 size_t actual_length=fread(result,sizeof(char),length,file);
