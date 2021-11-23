@@ -146,7 +146,7 @@ static void strt(){
 
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
-static const char default_fragment_shader=program_source;
+string default_fragment_shader=program_source;
 
 SDL_Log("Got Shader: %s",fileloc);
 SDL_Log("Shader: %s",default_fragment_shader);
