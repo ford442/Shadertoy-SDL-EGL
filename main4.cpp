@@ -141,16 +141,11 @@ EGL_DEPTH_SIZE,24,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
-const char* default_fragment_shader;
-static void rd(){
-char *fileloc="/shader/shader1.toy";
-string program_source=read_file_into_str(fileloc);
-default_fragment_shader=program_source.c_str();
-SDL_Log("Got Shader: %s",fileloc);
-SDL_Log("Shader: %s",default_fragment_shader);
-}
 
 static void strt(){
+char *fileloc="/shader/shader1.toy";
+string program_source=read_file_into_str(fileloc);
+const char* default_fragment_shader=program_source.c_str();
 GLuint vtx,frag,vbo;
 const char *sources[4];
 const char* texture_files[4];
