@@ -35,6 +35,8 @@ document.getElementById('btn2').addEventListener('click',function(){
 document.getElementById("ihig").innerHTML=window.innerHeight;
 document.getElementById("circle").height=window.innerHeight;
 document.getElementById("circle").width=window.innerWidth;
+document.getElementById("canvas").height=window.innerHeight;
+document.getElementById("canvas").width=window.innerHeight;
 document.getElementById('btn3').style.border="5px solid green";
 document.getElementById('btn2').style.border="5px solid red";
 document.getElementById('btn2').style.background="red";
