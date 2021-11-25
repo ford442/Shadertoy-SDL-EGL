@@ -12,6 +12,8 @@
 #include <SDL2/SDL.h>
 using std::string;
 
+Uint8 *stm;
+
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
@@ -152,13 +154,13 @@ EGL_NONE
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,16,
-EGL_STENCIL_SIZE,16,
-EGL_DEPTH_SIZE,24,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_BUFFER_SIZE,64,
 EGL_NONE
 };
 
@@ -172,14 +174,14 @@ const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
 attr.stencil=1;
@@ -209,7 +211,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int w=h;
-win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
+win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -274,8 +276,8 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static void SDLCALL bfr(void *unused,Uint8 * stm,int len){
-Uint8* wptr;
+static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
+Uint8 *wptr;
 int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
