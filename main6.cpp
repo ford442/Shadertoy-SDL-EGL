@@ -38,31 +38,6 @@ return result;
 return NULL;
 }
 
-static const char common_shader_header_gles3[]=
-"#version 300 es \n"
-"precision highp float; \n";
-static const char vertex_shader_body_gles3[]=
-"layout(location=0) in vec4 iPosition;"
-"void main(){"
-"gl_Position=iPosition;"
-"} \n";
-
-static const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform float iChannelTime[4];"
-"uniform vec4 iMouse;"
-"uniform vec4 iDate;"
-"uniform vec3 iChannelResolution[4];"
-"uniform sampler2D iChannel0;"
-"uniform sampler2D iChannel1;"
-"uniform sampler2D iChannel2;"
-"uniform sampler2D iChannel3;"
-"out vec4 fragColor; \n";
-
-static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -71,10 +46,6 @@ static EmscriptenWebGLContextAttributes attr;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
 static GLint attrib_position;
 static GLint sampler_channel[4];
@@ -165,9 +136,28 @@ EGL_NONE
 
 
 static void strt(){
+  
+  
+user_common_shader=
+  
+static const char common_shader_header_gles3[]=
+{"#version 300 es \n precision highp float; \n "},{user_common_shader},{" /n "};
+static const char vertex_shader_body_gles3[]="layout(location=0) in vec4 iPosition;void main(){gl_Position=iPosition;} \n ";
+static const char fragment_shader_header_gles3[]="uniform vec3 iResolution;uniform float iTime;uniform float iChannelTime[4];uniform vec4 iMouse;uniform vec4 iDate;uniform vec3 iChannelResolution[4];uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor; \n";
+static const char fragment_shader_footer_gles3[]="\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n ";
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
+  
 char *fileloc="/shader/shader1.toy";
+
 string program_source=read_file_into_str(fileloc);
+  
+  
+  
 const char* default_fragment_shader=program_source.c_str();
+  
 GLuint vtx,frag,vbo;
 const char *sources[4];
 const char* texture_files[4];
