@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <GLES3/gl3.h>
 #include <EGL/egl.h>
+#include <EGL/eglext.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
@@ -144,25 +145,24 @@ eglSwapBuffers(display,surface);
 }
 
 static const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
 
 static const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_STENCIL_SIZE,8,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
+EGL_ALPHA_SIZE,16,
+EGL_STENCIL_SIZE,16,
 EGL_DEPTH_SIZE,24,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
 static void strt(){
-SDL_Init(SDL_INIT_EVENTS);
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
@@ -172,13 +172,13 @@ const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
@@ -249,11 +249,11 @@ glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-SDL_Init(SDL_INIT_TIMER);
-// glViewport(0,0,w,h);
+SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
+glViewport(0,0,w,h);
 viewportSizeX=w;
 viewportSizeY=h;
-// glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE0);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
