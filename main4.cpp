@@ -43,7 +43,7 @@ return NULL;
 
 static const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float; \n";
+"precision highp long double; \n";
 static const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
@@ -52,8 +52,8 @@ static const char vertex_shader_body_gles3[]=
 
 static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform float iChannelTime[4];"
+"uniform long double iTime;"
+"uniform long double iChannelTime[4];"
 "uniform vec4 iMouse;"
 "uniform vec4 iDate;"
 "uniform vec3 iChannelResolution[4];"
@@ -88,12 +88,12 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_mouse;
-static GLfloat mouseX=0.0;
-static GLfloat mouseY=0.0;
-static GLfloat mouseLPressed=0.0;
-static GLfloat mouseRPressed=0.0;
-static GLfloat viewportSizeX=0.0;
-static GLfloat viewportSizeY=0.0;
+static GLfloat mouseX=0.0f;
+static GLfloat mouseY=0.0f;
+static GLfloat mouseLPressed=0.0f;
+static GLfloat mouseRPressed=0.0f;
+static GLfloat viewportSizeX=0.0f;
+static GLfloat viewportSizeY=0.0f;
 static GLuint vbo,vbu;
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
@@ -122,12 +122,12 @@ buttons=SDL_GetMouseState(&x, &y);
 mouseX=x;
 mouseY=viewportSizeY-y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
-mouseLPressed=1.0;
+mouseLPressed=1.0f;
 }else{
-mouseLPressed=0.0;
+mouseLPressed=0.0f;
 }
 double abstime=(double)SDL_GetTicks()/1000;
-glClearColor(0.0f,0.0f,0.0f,1.0);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
@@ -139,7 +139,7 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
-if(mouseLPressed==1.0){
+if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
@@ -247,7 +247,7 @@ uniform_gtime=glGetUniformLocation(shader_program,"iGlobalTime");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+glUniform3f(uniform_res,(long double)w,(long double)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
