@@ -1,3 +1,6 @@
+#include <float.h>
+#include <vector>
+#include <algorithm>
 #include <string>
 #include <stdarg.h>
 #include <stdbool.h>
@@ -6,10 +9,13 @@
 #include <stdlib.h>
 #include <GLES3/gl3.h>
 #include <EGL/egl.h>
+#include <EGL/eglext.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 using std::string;
+
+Uint8 *stm;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -38,6 +44,32 @@ return result;
 return NULL;
 }
 
+static const char common_shader_header_gles3[]=
+"#version 300 es \n"
+"precision highp float; \n";
+
+static const char vertex_shader_body_gles3[]=
+"layout(location=0) in vec4 iPosition;"
+"void main(){"
+"gl_Position=iPosition;"
+"} \n";
+
+static const char fragment_shader_header_gles3[]=
+"uniform vec3 iResolution;"
+"uniform float iTime;"
+"uniform float iChannelTime[4];"
+"uniform vec4 iMouse;"
+"uniform vec4 iDate;"
+"uniform vec3 iChannelResolution[4];"
+"uniform sampler2D iChannel0;"
+"uniform sampler2D iChannel1;"
+"uniform sampler2D iChannel2;"
+"uniform sampler2D iChannel3;"
+"out vec4 fragColor; \n";
+
+static const char fragment_shader_footer_gles3[]=
+"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
+
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
@@ -46,6 +78,10 @@ static EmscriptenWebGLContextAttributes attr;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
 static GLint attrib_position;
 static GLint sampler_channel[4];
@@ -56,12 +92,12 @@ static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_mouse;
-static GLfloat mouseX=0.0;
-static GLfloat mouseY=0.0;
-static GLfloat mouseLPressed=0.0;
-static GLfloat mouseRPressed=0.0;
-static GLfloat viewportSizeX=0.0;
-static GLfloat viewportSizeY=0.0;
+static GLfloat mouseX=0.0f;
+static GLfloat mouseY=0.0f;
+static GLfloat mouseLPressed=0.0f;
+static GLfloat mouseRPressed=0.0f;
+static GLfloat viewportSizeX=0.0f;
+static GLfloat viewportSizeY=0.0f;
 static GLuint vbo,vbu;
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
@@ -90,12 +126,12 @@ buttons=SDL_GetMouseState(&x, &y);
 mouseX=x;
 mouseY=viewportSizeY-y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
-mouseLPressed=1.0;
+mouseLPressed=1.0f;
 }else{
-mouseLPressed=0.0;
+mouseLPressed=0.0f;
 }
-double abstime=(double)SDL_GetTicks()/1000;
-glClearColor(0.0f,0.0f,0.0f,1.0);
+float abstime=(float)SDL_GetTicks()/1000.0f;
+glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
@@ -107,7 +143,8 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
-if(mouseLPressed==1.0){
+glUniform1f(uniform_ctime,abstime);
+if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
@@ -115,63 +152,41 @@ eglSwapBuffers(display,surface);
 }
 
 static const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
 
 static const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_STENCIL_SIZE,8,
-EGL_DEPTH_SIZE,24,
-EGL_BUFFER_SIZE,32,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_BUFFER_SIZE,64,
 EGL_NONE
 };
 
-
-
-
 static void strt(){
-  
-  
-user_common_shader=
-  
-static const char common_shader_header_gles3[]=
-{"#version 300 es \n precision highp float; \n "},{user_common_shader},{" /n "};
-static const char vertex_shader_body_gles3[]="layout(location=0) in vec4 iPosition;void main(){gl_Position=iPosition;} \n ";
-static const char fragment_shader_header_gles3[]="uniform vec3 iResolution;uniform float iTime;uniform float iChannelTime[4];uniform vec4 iMouse;uniform vec4 iDate;uniform vec3 iChannelResolution[4];uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor; \n";
-static const char fragment_shader_footer_gles3[]="\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n ";
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-  
 char *fileloc="/shader/shader1.toy";
-
 string program_source=read_file_into_str(fileloc);
-  
-  
-  
 const char* default_fragment_shader=program_source.c_str();
-  
 GLuint vtx,frag,vbo;
 const char *sources[4];
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
 attr.stencil=1;
@@ -201,9 +216,11 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 int w=h;
-win=SDL_CreateWindow("pm",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
+win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
-sources[0]=common_shader_header;
+
+  
+  sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
 sources[0]=common_shader_header;
@@ -238,6 +255,7 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+glUniform3f(uniform_cres,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
@@ -266,8 +284,8 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static void SDLCALL bfr(void *unused,Uint8 * stm,int len){
-Uint8* wptr;
+static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
+Uint8 *wptr;
 int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
