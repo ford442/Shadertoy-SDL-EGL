@@ -1,4 +1,4 @@
-#include <float>
+#include <float.h>
 #include <vector>
 #include <algorythm>
 #include <string>
