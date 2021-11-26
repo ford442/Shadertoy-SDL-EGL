@@ -1,6 +1,6 @@
 #include <float.h>
 #include <vector>
-#include <algorithm.h>
+#include <algorithm>
 #include <string>
 #include <stdarg.h>
 #include <stdbool.h>
