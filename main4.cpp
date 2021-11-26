@@ -126,7 +126,7 @@ mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-double abstime=(double)SDL_GetTicks()/1000;
+long double abstime=(long double)SDL_GetTicks()/1000;
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1,&vbo);
@@ -139,6 +139,7 @@ glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
+glUniform1f(uniform_ctime,abstime);
 if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
@@ -248,6 +249,7 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+glUniform3f(uniform_cres,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
