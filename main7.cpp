@@ -7,9 +7,9 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <GLES3/gl3.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#include <GLES3/gl3.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
