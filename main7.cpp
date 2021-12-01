@@ -121,6 +121,7 @@ static void renderFrame(){
 int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
+glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x;
 mouseY=viewportSizeY-y;
@@ -144,7 +145,6 @@ if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
 glUseProgram(shader_program);
-glClear(GL_COLOR_BUFFER_BIT);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
