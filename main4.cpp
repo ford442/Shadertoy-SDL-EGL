@@ -138,6 +138,7 @@ glUniform1f(uniform_ctime,abstime);
 if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
+glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
