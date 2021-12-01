@@ -130,7 +130,6 @@ mouseLPressed=1.0f;
 mouseLPressed=0.0f;
 }
 double abstime=(double)SDL_GetTicks()/1000.0f;
-glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
@@ -139,7 +138,7 @@ glGenVertexArrays(1,&vbu);
 glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
-glUseProgram(shader_program);
+// glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
 glUniform1f(uniform_ctime,abstime);
@@ -260,7 +259,8 @@ SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 glViewport(0,0,w,h);
 viewportSizeX=w;
 viewportSizeY=h;
-glActiveTexture(GL_TEXTURE0);
+// glActiveTexture(GL_TEXTURE0);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
