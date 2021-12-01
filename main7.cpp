@@ -132,6 +132,8 @@ mouseLPressed=0.0f;
 }
 double abstime=(double)SDL_GetTicks()/1000.0f;
 
+glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
+glEnableVertexAttribArray(attrib_position);
   glUseProgram(shader_program);
 
 glUniform1f(uniform_time,abstime);
@@ -261,8 +263,6 @@ glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glGenVertexArrays(1,&vbu);
 glBindVertexArray(vbu);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
-glEnableVertexAttribArray(attrib_position);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
