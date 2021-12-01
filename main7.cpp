@@ -129,7 +129,7 @@ mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-float abstime=(float)SDL_GetTicks()/1000.0f;
+double abstime=(double)SDL_GetTicks()/1000.0f;
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 glGenBuffers(1,&vbo);
@@ -238,7 +238,7 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-glValidateProgram(shader_program);
+// glValidateProgram(shader_program);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
