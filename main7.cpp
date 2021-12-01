@@ -131,7 +131,11 @@ mouseLPressed=1.0f;
 mouseLPressed=0.0f;
 }
 double abstime=(double)SDL_GetTicks()/1000.0f;
-
+  glGenBuffers(1,&vbo);
+glBindBuffer(GL_ARRAY_BUFFER,vbo);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glGenVertexArrays(1,&vbu);
+glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
   glUseProgram(shader_program);
@@ -220,11 +224,7 @@ sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glBindBuffer(GL_ARRAY_BUFFER,0);
-glGenVertexArrays(1,&vbo);
+
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
@@ -258,11 +258,7 @@ viewportSizeX=w;
 viewportSizeY=h;
 // glActiveTexture(GL_TEXTURE0);
 glClearColor(0.0f,0.0f,0.0f,1.0f);
-  glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glGenVertexArrays(1,&vbu);
-glBindVertexArray(vbu);
+
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
