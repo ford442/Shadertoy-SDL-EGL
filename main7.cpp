@@ -98,13 +98,7 @@ static GLfloat mouseRPressed=0.0f;
 static GLfloat viewportSizeX=0.0f;
 static GLfloat viewportSizeY=0.0f;
 static GLuint vbo,vbu;
-static const GLfloat vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
-};
-
+static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 static GLuint shader;
 GLsizei i,srclens[nsources];
@@ -132,14 +126,6 @@ mouseLPressed=0.0f;
 double abstime=(double)SDL_GetTicks()/1000.0f;
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glGenVertexArrays(1,&vbu);
-glBindVertexArray(vbu);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
-glEnableVertexAttribArray(attrib_position);
-glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glUniform1f(uniform_gtime,abstime);
 glUniform1f(uniform_ctime,abstime);
@@ -224,11 +210,8 @@ sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glBindBuffer(GL_ARRAY_BUFFER,0);
-glGenVertexArrays(1,&vbo);
+ 
+// glGenVertexArrays(1,&vbo);
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
@@ -237,8 +220,16 @@ glLinkProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
+glGenBuffers(1,&vbo);
+glBindBuffer(GL_ARRAY_BUFFER,vbo);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glBindBuffer(GL_ARRAY_BUFFER,0);
+glGenVertexArrays(1,&vbu);
+glBindVertexArray(vbu);
+glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
+glEnableVertexAttribArray(attrib_position);  
 glUseProgram(shader_program);
-glValidateProgram(shader_program);
+// glValidateProgram(shader_program);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -253,14 +244,14 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 glUniform3f(uniform_cres,(float)w,(float)h,0.0f);
-SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
-SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
-SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 glViewport(0,0,w,h);
 viewportSizeX=w;
 viewportSizeY=h;
-glActiveTexture(GL_TEXTURE0);
+// glActiveTexture(GL_TEXTURE0);
+SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
+SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
+SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
