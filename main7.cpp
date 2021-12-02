@@ -97,7 +97,6 @@ static GLfloat mouseLPressed=0.0f;
 static GLfloat mouseRPressed=0.0f;
 static GLfloat viewportSizeX=0.0f;
 static GLfloat viewportSizeY=0.0f;
-static GLuint vbo,vbu;
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
@@ -119,6 +118,7 @@ return shader;
 
 static void renderFrame(){
 int x, y;
+GLuint vbo,vbu;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
@@ -168,10 +168,10 @@ EGL_NONE
 };
 
 static void strt(){
+GLuint vtx,frag;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-GLuint vtx,frag,vbo;
 const char *sources[4];
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
