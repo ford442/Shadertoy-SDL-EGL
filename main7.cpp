@@ -130,7 +130,7 @@ mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-float abstime=(float)(round(SDL_GetTicks()/100)*10);
+float abstime=(float)(round(SDL_GetTicks()/100));
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
