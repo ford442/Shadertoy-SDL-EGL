@@ -94,16 +94,27 @@ glCompileShader(shader);
 return shader;
 }
 
+static GLfloat mouseX=0.0f;
+static GLfloat mouseY=0.0f;
+static GLfloat mouseLPressed=0.0f;
+static GLfloat mouseRPressed=0.0f;
+static GLfloat viewportSizeX=0.0f;
+static GLfloat viewportSizeY=0.0f;
+GLuint VBO, VAO;
+
 static void renderFrame(){
 int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
+glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
 if((buttons & SDL_BUTTON_LMASK)!=0){
-// mouseLPressed=1.0f;
+mouseLPressed=1.0f;
+glClearColor(1.0f,0.0f,0.0f,1.0f);
 }else{
-// mouseLPressed=0.0f;
+mouseLPressed=0.0f;
+glClearColor(1.0f,0.0f,1.0f,1.0f);
 }
 float abstime=(float)(round(SDL_GetTicks()/100));
 
@@ -112,8 +123,7 @@ GLfloat vertices[] = {
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
 };
-
-GLuint VBO, VAO;
+         
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
 glBindVertexArray(VAO);
