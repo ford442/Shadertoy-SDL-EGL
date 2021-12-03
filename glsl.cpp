@@ -79,7 +79,7 @@ static GLuint shader_program;
 // static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLuint shader;
+static GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 SDL_Log("GL Shader: %s",sources[i]);
@@ -200,14 +200,18 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+         
 shader_program=glCreateProgram();
+         
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
+         
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
+         
 SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
