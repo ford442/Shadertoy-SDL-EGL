@@ -113,7 +113,6 @@ static void renderFrame(){
 int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
-glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
 if((buttons & SDL_BUTTON_LMASK)!=0){
@@ -124,9 +123,6 @@ mouseLPressed=0.0f;
 glClearColor(1.0f,0.0f,1.0f,1.0f);
 }
 float abstime=(float)(round(SDL_GetTicks()/100));
-
-
-         
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
 glBindVertexArray(VAO);
@@ -138,7 +134,7 @@ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * s
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES, 0, 3);
-   glClear(GL_COLOR_BUFFER_BIT);
+ //  glClear(GL_COLOR_BUFFER_BIT);
 
 eglSwapBuffers(display,surface);      
 }
@@ -235,7 +231,7 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 glViewport(0,0,w,h);
-glClearColor(0.0f,0.0f,0.0f,1.0f);
+glClearColor(0.0f,1.0f,0.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 
