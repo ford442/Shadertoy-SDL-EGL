@@ -98,9 +98,9 @@ SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
 if((buttons & SDL_BUTTON_LMASK)!=0){
-mouseLPressed=1.0f;
+// mouseLPressed=1.0f;
 }else{
-mouseLPressed=0.0f;
+// mouseLPressed=0.0f;
 }
 float abstime=(float)(round(SDL_GetTicks()/100));
 glGenBuffers(1,&vbo);
