@@ -87,6 +87,9 @@ srclens[i]=(GLsizei)strlen(sources[i]);
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
+  
+SDL_Log("GL Shader: %c",shader);
+
 return shader;
 }
 
