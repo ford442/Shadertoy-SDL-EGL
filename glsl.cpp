@@ -61,7 +61,7 @@ static const char fragment_shader_header_gles3[]=
 "#version 300 es                 \n"
 "precision mediump float;        \n"
 "in vec4 color;                  \n"
-"out vec4 outColor;              \n"
+"out vec4 outColor;              \n";
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
