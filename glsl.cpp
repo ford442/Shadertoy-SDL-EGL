@@ -135,6 +135,8 @@ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * s
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES, 0, 3);
+         glClear(GL_COLOR_BUFFER_BIT);
+
 eglSwapBuffers(display,surface);
 }
 
