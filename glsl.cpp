@@ -51,8 +51,7 @@ static const char vertex_shader_body_gles3[]=
 "} \n";
 
 static const char fragment_shader_header_gles3[]=
-"/n in vec4 color;"
-"out vec4 fragColor; \n";
+"/n precision highp float;in vec4 color;out vec4 fragColor; \n";
 
 static const char fragment_shader_footer_gles3[]=
 " \n";
