@@ -111,8 +111,6 @@ glBindVertexArray(vbu);
 glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(0);
 glUseProgram(shader_program);
-if(mouseLPressed==1.0f){
-}
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
