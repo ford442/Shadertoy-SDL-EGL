@@ -82,7 +82,7 @@ static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
-  SDL_Log("GL Shader: %c",sources[i]);
+  SDL_Log("GL Shader: %s",sources[i]);
 
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
