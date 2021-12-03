@@ -47,7 +47,7 @@ static const char common_shader_header_gles3[]=
 
 static const char vertex_shader_body_gles3[]=
 "/n void main(){"
-"gl_Position=0;"
+"gl_Position=0.0f;"
 "} \n";
 
 static const char fragment_shader_header_gles3[]=
