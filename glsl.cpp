@@ -100,7 +100,14 @@ static GLfloat mouseLPressed=0.0f;
 static GLfloat mouseRPressed=0.0f;
 static GLfloat viewportSizeX=0.0f;
 static GLfloat viewportSizeY=0.0f;
+
 GLuint VBO, VAO;
+
+static GLfloat vertices[] = {
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
+};
 
 static void renderFrame(){
 int x, y;
@@ -118,11 +125,7 @@ glClearColor(1.0f,0.0f,1.0f,1.0f);
 }
 float abstime=(float)(round(SDL_GetTicks()/100));
 
-GLfloat vertices[] = {
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
-};
+
          
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
@@ -135,9 +138,9 @@ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * s
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES, 0, 3);
-         glClear(GL_COLOR_BUFFER_BIT);
 
-eglSwapBuffers(display,surface);
+eglSwapBuffers(display,surface);         glClear(GL_COLOR_BUFFER_BIT);
+
 }
 
 static const EGLint attribut_list[]={
