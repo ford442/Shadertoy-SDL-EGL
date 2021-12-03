@@ -88,7 +88,7 @@ shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
   
-SDL_Log("GL Shader: %c",shader);
+SDL_Log("GL Shader: %s",shader);
 
 return shader;
 }
