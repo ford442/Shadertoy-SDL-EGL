@@ -47,7 +47,6 @@ return NULL;
 
 static const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float; \n";
 
 static const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
@@ -59,6 +58,7 @@ static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform vec4 iMouse;"
+"in vec4 color;"
 "out vec4 fragColor; \n";
 
 static const char fragment_shader_footer_gles3[]=
