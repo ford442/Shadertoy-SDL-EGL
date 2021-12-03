@@ -55,7 +55,7 @@ static const char fragment_shader_header_gles3[]=
 "out vec4 fragColor; \n";
 
 static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
+" \n";
 
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
