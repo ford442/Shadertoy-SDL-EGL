@@ -74,7 +74,7 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-GLuint shader_program;
+static GLuint shader_program;
 
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
