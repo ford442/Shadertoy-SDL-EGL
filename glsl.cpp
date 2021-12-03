@@ -46,18 +46,22 @@ static const char common_shader_header_gles3[]=
 "#version 300 es\n";
 
 static const char vertex_shader_body_gles3[]=
-"layout (location = 0) in vec3 aPos;\n"
-"layout (location = 1) in vec3 aColor;\n"
-"out vec3 ourColor;\n"
-"void main()\n"
-"{\n"
-"gl_Position = vec4(aPos, 1.0);\n"
-"ourColor = aColor;\n"
-"}\0";
+"in vec3 v_pos;                 \n"
+"in vec4 v_col;                 \n"
+"out vec4 color;                \n"
+"uniform mat4 projection;       \n"
+"uniform mat4 view;             \n"
+"void main()                    \n"
+"{                              \n"
+"color = v_col;                 \n"
+"gl_Position = projection * view * vec4(v_pos, 1.0); \n"
+"}                              \n\0";
 
 static const char fragment_shader_header_gles3[]=
-"out vec4 FragColor;\n"
-"in vec3 ourColor;\n";
+"#version 300 es                 \n"
+"precision mediump float;        \n"
+"in vec4 color;                  \n"
+"out vec4 outColor;              \n"
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
