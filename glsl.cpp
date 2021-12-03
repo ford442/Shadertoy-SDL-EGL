@@ -79,7 +79,7 @@ static const GLfloat vertices[]={
 };
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
+GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
