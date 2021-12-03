@@ -76,26 +76,18 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
 
-static const GLfloat vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
-};
+// static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
-  SDL_Log("GL Shader: %s",sources[i]);
-
+SDL_Log("GL Shader: %s",sources[i]);
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
-  
-
 return shader;
 }
 
@@ -112,13 +104,13 @@ if((buttons & SDL_BUTTON_LMASK)!=0){
 }
 float abstime=(float)(round(SDL_GetTicks()/100));
 
-float vertices[] = {
+GLfloat vertices[] = {
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
 };
 
-unsigned int VBO, VAO;
+GLuint VBO, VAO;
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
 glBindVertexArray(VAO);
