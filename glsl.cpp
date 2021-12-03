@@ -1,4 +1,3 @@
-
 #include <float.h>
 #include <vector>
 #include <algorithm>
@@ -15,8 +14,6 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 using std::string;
-
-Uint8 *stm;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -49,15 +46,11 @@ static const char common_shader_header_gles3[]=
 "#version 300 es \n"
 
 static const char vertex_shader_body_gles3[]=
-"layout(location=0) in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
 
 static const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform vec4 iMouse;"
 "in vec4 color;"
 "out vec4 fragColor; \n";
 
@@ -77,17 +70,7 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
-static GLint attrib_position;
-static GLint uniform_cres;
-static GLint uniform_time;
-static GLint uniform_res;
-static GLint uniform_mouse;
-static GLfloat mouseX=0.0f;
-static GLfloat mouseY=0.0f;
-static GLfloat mouseLPressed=0.0f;
-static GLfloat mouseRPressed=0.0f;
-static GLfloat viewportSizeX=0.0f;
-static GLfloat viewportSizeY=0.0f;
+
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
@@ -114,8 +97,6 @@ Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
-mouseX=x;
-mouseY=viewportSizeY-y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 }else{
@@ -130,9 +111,7 @@ glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
-glUniform1f(uniform_time,abstime);
 if(mouseLPressed==1.0f){
-glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
@@ -221,25 +200,14 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-attrib_position=glGetAttribLocation(shader_program,"iPosition");
-uniform_time=glGetUniformLocation(shader_program,"iTime");
-uniform_res=glGetUniformLocation(shader_program,"iResolution");
-uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)w,(float)h,0.0f);
-glUniform3f(uniform_cres,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 glViewport(0,0,w,h);
-viewportSizeX=w;
-viewportSizeY=h;
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
-
-
-
 
 extern "C" {
 void str(){
