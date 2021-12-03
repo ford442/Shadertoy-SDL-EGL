@@ -43,7 +43,7 @@ return NULL;
 }
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n"
+"#version 300 es \n";
 
 static const char vertex_shader_body_gles3[]=
 "void main(){"
@@ -108,8 +108,8 @@ glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glGenVertexArrays(1,&vbu);
 glBindVertexArray(vbu);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
-glEnableVertexAttribArray(attrib_position);
+glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,0,0);
+glEnableVertexAttribArray(0);
 glUseProgram(shader_program);
 if(mouseLPressed==1.0f){
 }
