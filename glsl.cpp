@@ -43,18 +43,24 @@ return NULL;
 }
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n";
+"#version 300 es\n";
 
 static const char vertex_shader_body_gles3[]=
-"void main(){"
-"gl_Position=0.0f;"
-"} \n";
+"layout (location = 0) in vec3 aPos;\n"
+"layout (location = 1) in vec3 aColor;\n"
+"out vec3 ourColor;\n"
+"void main()\n"
+"{\n"
+"gl_Position = vec4(aPos, 1.0);\n"
+"ourColor = aColor;\n"
+"}\0";
 
 static const char fragment_shader_header_gles3[]=
-"precision highp float;in vec4 color;out vec4 fragColor; \n";
+"out vec4 FragColor;\n"
+"in vec3 ourColor;\n";
 
 static const char fragment_shader_footer_gles3[]=
-"";
+"\n\0";
 
 static SDL_AudioDeviceID dev;
 static EGLDisplay display;
