@@ -127,8 +127,8 @@ vertices[1]=-1.0f;
 vertices[13]=1.0f;
 vertices[10]=0.0f;
 vertices[11]=1.0f;
-auto white=abstime-(round(abstime/500)*500);
-white=(abstime/white)/100;
+float white=abstime-(round(abstime/500)*500);
+white=white/500;
 vertices[3]=white;
 }else{
 mouseLPressed=0.0f;
