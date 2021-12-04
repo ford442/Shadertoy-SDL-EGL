@@ -116,8 +116,10 @@ buttons=SDL_GetMouseState(&x, &y);
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 glClearColor(1.0f,0.0f,0.0f,1.0f);
+vertices[7] =-1.0f;
 }else{
 mouseLPressed=0.0f;
+vertices[7] =-0.5f;
 glClearColor(1.0f,0.0f,1.0f,1.0f);
 }
 float abstime=(float)(round(SDL_GetTicks()/100));
