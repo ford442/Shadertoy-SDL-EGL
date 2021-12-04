@@ -131,6 +131,7 @@ ink[0]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
+numm=floor(white*10);
 sides=numm;
 mouseLPressed=1.0f;
 ink[2]=1.0f;
