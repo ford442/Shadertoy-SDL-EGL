@@ -47,6 +47,7 @@ return NULL;
 static const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n";
+
 static const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
@@ -56,10 +57,8 @@ static const char vertex_shader_body_gles3[]=
 static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
-"uniform float iChannelTime[4];"
 "uniform vec4 iMouse;"
 "uniform vec4 iDate;"
-"uniform vec3 iChannelResolution[4];"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
@@ -85,9 +84,6 @@ static GLuint shader_program;
 static GLint attrib_position;
 static GLint sampler_channel[4];
 static GLint uniform_cres;
-static GLint uniform_ctime;
-static GLint uniform_date;
-static GLint uniform_gtime;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_mouse;
@@ -115,22 +111,21 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-
+static GLuint vbo,vbu;
 static void renderFrame(){
-int x, y;
-GLuint vbo,vbu;
+int x,y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
-buttons=SDL_GetMouseState(&x, &y);
-mouseX=x;
-mouseY=viewportSizeY-y;
+buttons=SDL_GetMouseState(&x,&y);
+mouseX=x/viewportSizeX;
+mouseY=y/viewportSizeY;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-float abstime=(float)(round(SDL_GetTicks()/100));
+double abstime=(double)(round(SDL_GetTicks()/1000));
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
@@ -140,8 +135,6 @@ glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
-glUniform1f(uniform_gtime,abstime);
-glUniform1f(uniform_ctime,abstime);
 if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
@@ -237,10 +230,6 @@ sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
-uniform_cres=glGetUniformLocation(shader_program,"iChannelResolution");
-uniform_ctime=glGetUniformLocation(shader_program,"iChannelTime");
-uniform_date=glGetUniformLocation(shader_program,"iDate");
-uniform_gtime=glGetUniformLocation(shader_program,"iGlobalTime");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
@@ -250,10 +239,9 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-glViewport(0,0,w,h);
 viewportSizeX=w;
 viewportSizeY=h;
-glClearColor(0.0f,0.0f,0.0f,1.0f);
+glClearColor(1.0f,1.0f,1.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
