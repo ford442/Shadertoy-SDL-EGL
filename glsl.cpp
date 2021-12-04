@@ -78,6 +78,13 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
+static GLint attrib_position;
+static GLfloat mouseX=0.0f;
+static GLfloat mouseY=0.0f;
+static GLfloat mouseLPressed=0.0f;
+static GLfloat mouseRPressed=0.0f;
+static GLfloat viewportSizeX=0.0f;
+static GLfloat viewportSizeY=0.0f;
 
 // static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
@@ -94,14 +101,6 @@ glCompileShader(shader);
 return shader;
 }
 
-static GLfloat mouseX=0.0f;
-static GLfloat mouseY=0.0f;
-static GLfloat mouseLPressed=0.0f;
-static GLfloat mouseRPressed=0.0f;
-static GLfloat viewportSizeX=0.0f;
-static GLfloat viewportSizeY=0.0f;
-
-GLuint VBO, VAO;
 
 static GLfloat vertices[] = {
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
@@ -110,6 +109,7 @@ static GLfloat vertices[] = {
 };
 
 static void renderFrame(){
+GLuint VBO, VAO;
 int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
@@ -128,14 +128,12 @@ glGenBuffers(1, &VBO);
 glBindVertexArray(VAO);
 glBindBuffer(GL_ARRAY_BUFFER, VBO);
 glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-glEnableVertexAttribArray(0);
-glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+// glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+// glEnableVertexAttribArray(0);
+glVertexAttribPointer(attrib_position, 3, GL_FLOAT, GL_FALSE, ));
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES, 0, 3);
- //  glClear(GL_COLOR_BUFFER_BIT);
-
 eglSwapBuffers(display,surface);      
 }
 
@@ -158,6 +156,7 @@ EGL_NONE
 };
 
 static void strt(){
+attrib_position=0;
 GLuint vtx,frag;
 char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
