@@ -46,7 +46,8 @@ return NULL;
 
 static const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float; \n";
+"precision highp float; \n"
+"precision highp int; \n";
 
 static const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
@@ -58,7 +59,6 @@ static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform vec4 iMouse;"
-"uniform vec4 iDate;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
@@ -83,7 +83,6 @@ static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
 static GLint attrib_position;
 static GLint sampler_channel[4];
-static GLint uniform_cres;
 static GLint uniform_time;
 static GLint uniform_res;
 static GLint uniform_mouse;
