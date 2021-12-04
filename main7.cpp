@@ -80,27 +80,27 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-static GLuint shader_program;
-static GLint attrib_position;
-static GLint sampler_channel[4];
-static GLint uniform_time;
-static GLint uniform_res;
-static GLint uniform_mouse;
-static GLfloat mouseX=0.0f;
-static GLfloat mouseY=0.0f;
-static GLfloat mouseLPressed=0.0f;
-static GLfloat mouseRPressed=0.0f;
-static GLfloat viewportSizeX=0.0f;
-static GLfloat viewportSizeY=0.0f;
-static const GLfloat vertices[]={
+static GLuint64 shader_program;
+static GLint64 attrib_position;
+static GLint64 sampler_channel[4];
+static GLint64 uniform_time;
+static GLint64 uniform_res;
+static GLint64 uniform_mouse;
+static GLdouble mouseX=0.0f;
+static GLdouble mouseY=0.0f;
+static GLdouble mouseLPressed=0.0f;
+static GLdouble mouseRPressed=0.0f;
+static GLdouble viewportSizeX=0.0f;
+static GLdouble viewportSizeY=0.0f;
+static const GLdouble vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
 1.0f,1.0f
 };
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
+static GLuint64 compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint64 shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -110,7 +110,7 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-static GLuint vbo,vbu;
+static GLuint64 vbo,vbu;
 static void renderFrame(){
 int x,y;
 Uint32 buttons;
@@ -160,7 +160,7 @@ EGL_NONE
 };
 
 static void strt(){
-GLuint vtx,frag;
+GLuint64 vtx,frag;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
