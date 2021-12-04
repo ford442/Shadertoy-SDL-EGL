@@ -132,7 +132,6 @@ white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 numm=floor(white*10);
-sides=numm;
 mouseLPressed=1.0f;
 ink[2]=1.0f;
 vertices[7]=-1.0f;
@@ -144,11 +143,7 @@ vertices[3]=white;
 vertices[0]=vertices[0]-white;
 vertices[1]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
-numm=floor(white*10);
-vertices[numm*6]=vertices[numm*2]-white;
 }else{
-numm=round(white*10);
-sides=10;
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
 vertices[1]=-0.5f;
@@ -161,7 +156,6 @@ vertices[1]=-0.5f;
 vertices[2]=0.0f;
 ink[2]=0.0f;
 ink[0]=ink[0]-(white/100);
-vertices[numm*6]=vertices[sides*2]-white;
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
 glGenVertexArrays(1,&VAO);
@@ -174,7 +168,7 @@ glEnableVertexAttribArray(0);
 glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
-glDrawArrays(GL_TRIANGLE_STRIP,0,sides);
+glDrawArrays(GL_TRIANGLE_STRIP,0,10);
 eglSwapBuffers(display,surface);      
 }
 
