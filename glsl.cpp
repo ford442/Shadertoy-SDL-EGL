@@ -114,9 +114,9 @@ Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
-mouseX=&x;
-mouseY=&y;
-ink[1]=1.0f-mouseX;
+mouseX=x/viewportSizeX;
+mouseY=y/viewportSizeY;
+ink[1]=mouseX;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=1.0f;
@@ -230,6 +230,8 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
+viewportSizeX=w;
+viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
