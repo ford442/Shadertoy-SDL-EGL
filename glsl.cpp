@@ -130,9 +130,10 @@ ink[1]=mouseX;
 ink[0]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
+int numm=round(white*10);
 if((buttons & SDL_BUTTON_LMASK)!=0){
 if(mouseX>=0.5){
-sides=round(white*10);
+sides=numm;
 }else{
 sides=3;
 };         
@@ -160,7 +161,7 @@ vertices[1]=-0.5f;
 vertices[2]=0.0f;
 ink[2]=0.0f;
 ink[0]=ink[0]-(white/100);
-vertices[round(white*10)]=vertices[(sides*3)-1]-(white);
+vertices[numm]=vertices[(sides*2)-1]-(white);
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
 glGenVertexArrays(1,&VAO);
