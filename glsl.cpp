@@ -47,21 +47,19 @@ static const char common_shader_header_gles3[]=
 "#version 300 es\n";
 
 static const char vertex_shader_body_gles3[]=
-"in vec3 v_pos;                 \n"
-"in vec4 v_col;                 \n"
-"out vec4 color;                \n"
-"uniform mat4 projection;       \n"
-"uniform mat4 view;             \n"
-"void main()                    \n"
-"{                              \n"
-"color = v_col;                 \n"
-"gl_Position = projection * view * vec4(v_pos, 1.0); \n"
+"layout (location = 0) in vec3 aPos;"
+"layout (location = 1) in vec3 aColor;"
+"out vec3 ourColor;"
+"void main()"
+"{"
+"gl_Position = vec4(aPos, 1.0);"
+"ourColor = aColor;"
 "}                              \n\0";
 
 static const char fragment_shader_header_gles3[]=
 "precision mediump float;        \n"
-"in vec4 color;                  \n"
-"out vec4 outColor;              \n";
+"in vec3 ourColor;                  \n"
+"out vec4 FragColor;              \n";
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
@@ -80,7 +78,6 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static GLuint shader_program;
-static GLint attrib_position;
 static GLfloat mouseX=0.0f;
 static GLfloat mouseY=0.0f;
 static GLfloat mouseLPressed=0.0f;
