@@ -13,6 +13,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
+
 using std::string;
 
 static const char *read_file_into_str(const char *filename){
@@ -73,6 +74,7 @@ static EmscriptenWebGLContextAttributes attr;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
+
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -101,7 +103,6 @@ glCompileShader(shader);
 return shader;
 }
 
-
 static GLfloat vertices[] = {
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
@@ -128,10 +129,10 @@ glGenBuffers(1, &VBO);
 glBindVertexArray(VAO);
 glBindBuffer(GL_ARRAY_BUFFER, VBO);
 glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-// glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-// glEnableVertexAttribArray(0);
-glVertexAttribPointer(attrib_position,3,GL_FLOAT,GL_FALSE,0,0);
-glEnableVertexAttribArray(attrib_position);
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+glEnableVertexAttribArray(0);
+glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,0);
+glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES, 0, 3);
 eglSwapBuffers(display,surface);      
@@ -156,16 +157,12 @@ EGL_NONE
 };
 
 static void strt(){
-attrib_position=0;
 GLuint vtx,frag;
 char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 const char *sources[4];
-const char* texture_files[4];
-for (int i=0;i<4;++i) {
-texture_files[i]=NULL;
-}
+
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
@@ -176,8 +173,8 @@ SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
-attr.stencil=0;
-attr.depth=0;
+attr.stencil=1;
+attr.depth=1;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
@@ -213,23 +210,18 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-         
 shader_program=glCreateProgram();
-         
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-         
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-         
 SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-glViewport(0,0,w,h);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
@@ -238,6 +230,7 @@ extern "C" {
 void str(){
 strt();
 }}
+
 int main(){
 EM_ASM({
 FS.mkdir("/shader");
