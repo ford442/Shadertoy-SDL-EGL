@@ -132,7 +132,7 @@ white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 if(mouseX>=0.5){
-sides=round(mouseY/10);
+sides=round(mouseY*10);
 }else{
 sides=3;
 };         
