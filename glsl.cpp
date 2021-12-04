@@ -113,7 +113,7 @@ int sides=3;
 static void renderFrame(){
 GLuint VBO,VAO;
 float white;
-int x,y;
+int x,y,ones;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
@@ -121,6 +121,11 @@ float abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
+if(mouseX>=0.5){
+ones=6;
+}else{
+ones=3;
+};
 ink[1]=mouseX;
 ink[0]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
@@ -164,7 +169,7 @@ glEnableVertexAttribArray(0);
 glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
-glDrawArrays(GL_TRIANGLES,0,sides);
+glDrawArrays(GL_TRIANGLES,ones,sides);
 eglSwapBuffers(display,surface);      
 }
 
