@@ -116,7 +116,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x;
 mouseY=y;
-ink[1]=mouseX;
+ink[1]=1.0f-mouseX;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=1.0f;
