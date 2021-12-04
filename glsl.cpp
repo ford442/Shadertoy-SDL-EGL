@@ -106,6 +106,9 @@ static void renderFrame(){
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
+         0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
+        -0.2f, -0.2f, 0.2f,  0.0f, 1.0f, 0.3f,
+         0.7f,  0.7f, 0.0f,  0.4f, 0.0f, 1.0f
 };
 GLuint VBO,VAO;
 float white;
@@ -122,14 +125,6 @@ ink[0]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
-vertices[] = {
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
-         0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.2f, -0.2f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.7f,  0.7f, 0.0f,  0.4f, 0.0f, 1.0f
-};
 if(mouseX>=0.5){
 sides=6;
 }else{
