@@ -100,20 +100,16 @@ glCompileShader(shader);
 return shader;
 }
 
-static GLfloat vertices[] = {
+static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
+static void renderFrame(){
+         GLfloat vertices[] = {
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
-         0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.2f, -0.2f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.7f,  0.7f, 0.0f,  0.4f, 0.0f, 1.0f
 };
-static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
-int sides=3;
-static void renderFrame(){
 GLuint VBO,VAO;
 float white;
-int x,y,ones;
+int x,y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
@@ -121,16 +117,24 @@ float abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
-if(mouseX>=0.5){
-ones=3;
-}else{
-ones=0;
-};
 ink[1]=mouseX;
 ink[0]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
+vertices[] = {
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
+         0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
+        -0.2f, -0.2f, 0.2f,  0.0f, 1.0f, 0.3f,
+         0.7f,  0.7f, 0.0f,  0.4f, 0.0f, 1.0f
+};
+if(mouseX>=0.5){
+sides=6;
+}else{
+sides=3;
+};         
 mouseLPressed=1.0f;
 ink[2]=1.0f;
 vertices[7]=-1.0f;
@@ -142,9 +146,7 @@ vertices[3]=white;
 vertices[0]=vertices[0]-(white*0.01);
 vertices[1]=vertices[1]-(white*0.01);
 vertices[2]=vertices[2]-(white*0.01);
-sides=6;
 }else{
-sides=3;
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
 vertices[1]=-0.5f;
@@ -169,7 +171,7 @@ glEnableVertexAttribArray(0);
 glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
-glDrawArrays(GL_TRIANGLE_STRIP,ones,sides);
+glDrawArrays(GL_TRIANGLE_STRIP,0,sides);
 eglSwapBuffers(display,surface);      
 }
 
