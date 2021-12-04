@@ -132,11 +132,7 @@ white=abstime-(floor(abstime/1000)*1000);
 white=1000/white;
 numm=floor(white*10);
 if((buttons & SDL_BUTTON_LMASK)!=0){
-if(mouseX>=0.5){
 sides=numm;
-}else{
-sides=3;
-};         
 mouseLPressed=1.0f;
 ink[2]=1.0f;
 vertices[7]=-1.0f;
@@ -148,7 +144,9 @@ vertices[3]=white;
 vertices[0]=vertices[0]-(white);
 vertices[1]=vertices[1]-(white);
 vertices[2]=vertices[2]-(white);
+vertices[numm*6]=vertices[(sides*2)-1]-(white);
 }else{
+sides=10;
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
 vertices[1]=-0.5f;
