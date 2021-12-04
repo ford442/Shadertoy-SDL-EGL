@@ -108,15 +108,17 @@ static GLfloat vertices[] = {
 
 static void renderFrame(){
 GLuint VBO, VAO;
+GLfloat ink={1.0f,0.0f,1.0f,1.0f};
 int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
+ink[1]=ink[1]-x;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-glClearColor(0.0f,1.0f,0.0f,1.0f);
-vertices[7] =-1.0f;
+ink={0.0f,1.0f,0.0f,1.0f};
+vertices[7] =-0.25f;
 vertices[10] =0.0f;
 vertices[11] =1.0f;
 }else{
@@ -124,8 +126,9 @@ mouseLPressed=0.0f;
 vertices[7] =-0.5f;
 vertices[10] =1.0f;
 vertices[11] =0.0f;
-glClearColor(1.0f,0.0f,1.0f,1.0f);
+ink={1.0f,0.0f,1.0f,1.0f};
 }
+glClearColor(ink);
 float abstime=(float)(round(SDL_GetTicks()/100));
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
