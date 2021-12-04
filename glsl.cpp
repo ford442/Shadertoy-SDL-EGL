@@ -118,7 +118,7 @@ static void renderFrame(){
 GLsizei sides;
 GLuint VBO,VAO;
 float white;
-int x,y;
+int x,y,numm;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
@@ -130,7 +130,7 @@ ink[1]=mouseX;
 ink[0]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
-int numm=round(white*10);
+numm=round(white*10);
 if((buttons & SDL_BUTTON_LMASK)!=0){
 if(mouseX>=0.5){
 sides=numm;
@@ -145,9 +145,9 @@ vertices[13]=1.0f;
 vertices[10]=0.0f;
 vertices[11]=1.0f;
 vertices[3]=white;
-vertices[0]=vertices[0]-(white*0.01);
-vertices[1]=vertices[1]-(white*0.01);
-vertices[2]=vertices[2]-(white*0.01);
+vertices[0]=vertices[0]-(white);
+vertices[1]=vertices[1]-(white);
+vertices[2]=vertices[2]-(white);
 }else{
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
