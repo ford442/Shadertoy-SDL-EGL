@@ -105,7 +105,7 @@ static GLfloat vertices[] = {
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
 };
-static GLuint ink={1.0f,0.0f,1.0f,1.0f};
+static GLfloat ink[]={1.0f,0.0f,1.0f,1.0f};
 
 static void renderFrame(){
 GLuint VBO, VAO;
