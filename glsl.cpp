@@ -143,8 +143,8 @@ vertices[3]=1.0f;
 ink[2]=0.0f;
 }
 vertices[0]=vertices[0]-(white*0.1);
-vertices[1]=vertices[0]-(white*0.1);
-vertices[2]=vertices[0]-(white*0.1);
+vertices[1]=vertices[1]-(white*0.1);
+vertices[2]=vertices[2]-(white*0.1);
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
