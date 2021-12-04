@@ -90,8 +90,8 @@ static GLclampf mouseX=0.0f;
 static GLclampf mouseY=0.0f;
 static GLclampf mouseLPressed=0.0f;
 static GLclampf mouseRPressed=0.0f;
-static GLclampf viewportSizeX=0.0f;
-static GLclampf viewportSizeY=0.0f;
+static GLfloat viewportSizeX=0.0f;
+static GLfloat viewportSizeY=0.0f;
 static const GLclampf vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
@@ -160,7 +160,7 @@ EGL_NONE
 };
 
 static void strt(){
-GLuint64 vtx,frag;
+GLuint vtx,frag;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
