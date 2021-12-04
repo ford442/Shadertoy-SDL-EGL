@@ -141,10 +141,10 @@ vertices[13]=1.0f;
 vertices[10]=0.0f;
 vertices[11]=1.0f;
 vertices[3]=white;
-vertices[0]=vertices[0]-(white);
-vertices[1]=vertices[1]-(white);
-vertices[2]=vertices[2]-(white);
-vertices[numm*6]=vertices[(sides*2)-1]-(white);
+vertices[0]=vertices[0]-white;
+vertices[1]=vertices[1]-white;
+vertices[2]=vertices[2]-white;
+vertices[numm*6]=vertices[numm*2]-white;
 }else{
 sides=10;
 mouseLPressed=0.0f;
@@ -159,7 +159,7 @@ vertices[1]=-0.5f;
 vertices[2]=0.0f;
 ink[2]=0.0f;
 ink[0]=ink[0]-(white/100);
-vertices[numm]=vertices[(sides*2)-1]-(white);
+vertices[numm*6]=vertices[sides*2]-white;
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
 glGenVertexArrays(1,&VAO);
