@@ -113,7 +113,7 @@ int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
-float abstime=(float)SDL_GetTicks();
+float abstime=(float)(round(SDL_GetTicks()/100));
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
@@ -141,7 +141,6 @@ vertices[3]=1.0f;
 ink[2]=0.0f;
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
-float abstime=(float)(round(SDL_GetTicks()/100));
 glGenVertexArrays(1, &VAO);
 glGenBuffers(1, &VBO);
 glBindVertexArray(VAO);
