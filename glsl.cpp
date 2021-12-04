@@ -109,12 +109,14 @@ static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
 
 static void renderFrame(){
 GLuint VBO, VAO;
-float x, y;
+GLint x, y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x, &y);
-ink[1]=x;
+mouseX=x;
+mouseY=y;
+ink[1]=mouseX;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=1.0f;
