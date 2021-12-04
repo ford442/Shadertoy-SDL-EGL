@@ -121,11 +121,14 @@ ink[0]=mouseY;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=1.0f;
-vertices[7] =-1.0f;
-vertices[1] =-1.0f;
-vertices[13] =1.0f;
-vertices[10] =0.0f;
-vertices[11] =1.0f;
+vertices[7]=-1.0f;
+vertices[1]=-1.0f;
+vertices[13]=1.0f;
+vertices[10]=0.0f;
+vertices[11]=1.0f;
+auto white=abstime-(round(abstime/500)*500);
+white=(abstime/white)/100;
+vertices[3]=white;
 }else{
 mouseLPressed=0.0f;
 vertices[7] =-0.5f;
@@ -133,6 +136,7 @@ vertices[1] =-0.5f;
 vertices[13] =0.5f;
 vertices[10] =1.0f;
 vertices[11] =0.0f;
+vertices[3]=1.0f;
 ink[2]=0.0f;
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
