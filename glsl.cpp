@@ -122,14 +122,14 @@ if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=1.0f;
 vertices[7] =-1.0f;
-vertices[2] =-1.0f;
+vertices[1] =-1.0f;
 vertices[13] =1.0f;
 vertices[10] =0.0f;
 vertices[11] =1.0f;
 }else{
 mouseLPressed=0.0f;
 vertices[7] =-0.5f;
-vertices[2] =-0.5f;
+vertices[1] =-0.5f;
 vertices[13] =0.5f;
 vertices[10] =1.0f;
 vertices[11] =0.0f;
@@ -175,7 +175,6 @@ char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 const char *sources[4];
-
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
