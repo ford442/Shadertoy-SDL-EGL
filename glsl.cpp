@@ -106,8 +106,12 @@ static GLfloat vertices[]={
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
          0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.2f, -0.2f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.7f,  0.7f, 0.0f,  0.4f, 0.0f, 1.0f
+        -0.23f, -0.27f, 0.2f,  0.0f, 1.0f, 0.3f,
+         0.73f,  0.77f, 0.0f,  0.4f, 0.0f, 1.0f 
+         0.13f, -0.17f, 0.1f,  1.0f, 0.0f, 1.0f,
+        -0.2f, -0.9f, 0.2f,  0.0f, 1.0f, 0.3f,
+         0.7f,  0.9f, 0.0f,  0.9f, 0.0f, 1.0f
+         0.7f,  0.7f, 0.9f,  0.4f, 0.9f, 1.0f
 };
 
 static void renderFrame(){
@@ -128,7 +132,7 @@ white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 if(mouseX>=0.5){
-sides=6;
+sides=round(mouseY/10);
 }else{
 sides=3;
 };         
@@ -156,6 +160,7 @@ vertices[1]=-0.5f;
 vertices[2]=0.0f;
 ink[2]=0.0f;
 ink[0]=ink[0]-(white/100);
+vertices[sides]=vertices[sides-1]-(white/100);
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
 glGenVertexArrays(1,&VAO);
