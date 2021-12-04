@@ -169,7 +169,7 @@ glEnableVertexAttribArray(0);
 glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
-glDrawArrays(GL_TRIANGLES,ones,sides);
+glDrawArrays(GL_TRIANGLE_STRIP,ones,sides);
 eglSwapBuffers(display,surface);      
 }
 
