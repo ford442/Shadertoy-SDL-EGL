@@ -86,13 +86,13 @@ static GLint64 sampler_channel[4];
 static GLint64 uniform_time;
 static GLint64 uniform_res;
 static GLint64 uniform_mouse;
-static GLclampd mouseX=0.0f;
-static GLclampd mouseY=0.0f;
-static GLclampd mouseLPressed=0.0f;
-static GLclampd mouseRPressed=0.0f;
-static GLclampd viewportSizeX=0.0f;
-static GLclampd viewportSizeY=0.0f;
-static const GLclampd vertices[]={
+static GLclampf mouseX=0.0f;
+static GLclampf mouseY=0.0f;
+static GLclampf mouseLPressed=0.0f;
+static GLclampf mouseRPressed=0.0f;
+static GLclampf viewportSizeX=0.0f;
+static GLclampf viewportSizeY=0.0f;
+static const GLclampf vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
@@ -124,7 +124,7 @@ mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-GLclampd abstime=(double)SDL_GetTicks()/1000;
+GLclampf abstime=(double)SDL_GetTicks()/1000;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
