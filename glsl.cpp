@@ -101,8 +101,10 @@ return shader;
 }
 
 static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
+GLsizei sides;
+
 static void renderFrame(){
-         GLfloat vertices[] = {
+GLfloat vertices[] = {
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
