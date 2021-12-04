@@ -44,7 +44,9 @@ return NULL;
 }
 
 static const char common_shader_header_gles3[]=
-"#version 300 es\n";
+"#version 300 es\n"
+"precision highp float;\n"
+"precision highp int;\n";
 
 static const char vertex_shader_body_gles3[]=
 "layout (location = 0) in vec3 aPos;"
@@ -54,12 +56,11 @@ static const char vertex_shader_body_gles3[]=
 "{"
 "gl_Position = vec4(aPos, 1.0);"
 "ourColor = aColor;"
-"}                              \n\0";
+"}\n\0";
 
 static const char fragment_shader_header_gles3[]=
-"precision highp float;        \n"
-"in vec3 ourColor;                  \n"
-"out vec4 FragColor;              \n";
+"in vec3 ourColor;\n"
+"out vec4 FragColor;\n";
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
@@ -116,12 +117,12 @@ static GLfloat vertices[]={
 
 static void renderFrame(){
 GLuint VBO,VAO;
-float white;
-int x,y;
+GLclampf white;
+GLint x,y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
-float abstime=SDL_GetTicks();
+double abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
@@ -180,13 +181,13 @@ EGL_NONE
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
+EGL_ALPHA_SIZE,16,
+EGL_STENCIL_SIZE,16,
+EGL_DEPTH_SIZE,16,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
@@ -196,13 +197,13 @@ char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 const char *sources[4];
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
