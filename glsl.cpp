@@ -122,9 +122,9 @@ buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
 if(mouseX>=0.5){
-ones=6;
-}else{
 ones=3;
+}else{
+ones=0;
 };
 ink[1]=mouseX;
 ink[0]=mouseY;
