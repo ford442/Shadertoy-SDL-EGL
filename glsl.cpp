@@ -160,7 +160,7 @@ vertices[1]=-0.5f;
 vertices[2]=0.0f;
 ink[2]=0.0f;
 ink[0]=ink[0]-(white/100);
-vertices[sides]=vertices[sides-1]-(white/100);
+vertices[sides*3]=vertices[(sides*3)-1]-(white/100);
 }
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
 glGenVertexArrays(1,&VAO);
