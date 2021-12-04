@@ -131,9 +131,9 @@ vertices[11]=1.0f;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 vertices[3]=white;
-vertices[0]=white*0.1;
-vertices[1]=white*0.1;
-vertices[2]=white*0.1;
+vertices[0]=vertices[0]-(white*0.01);
+vertices[1]=vertices[1]-(white*0.01);
+vertices[2]=vertices[2]-(white*0.01);
 }else{
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
