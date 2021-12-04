@@ -108,7 +108,7 @@ static GLfloat vertices[] = {
 
 static void renderFrame(){
 GLuint VBO, VAO;
-GLfloat ink[]={1.0f,0.0f,1.0f,1.0f};
+GLfloat ink[4]={1.0f,0.0f,1.0f,1.0f};
 int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
