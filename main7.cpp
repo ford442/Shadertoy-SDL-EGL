@@ -80,12 +80,12 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-static GLuint64 shader_program;
-static GLint64 attrib_position;
-static GLint64 sampler_channel[4];
-static GLint64 uniform_time;
-static GLint64 uniform_res;
-static GLint64 uniform_mouse;
+static GLuint shader_program;
+static GLint attrib_position;
+static GLint sampler_channel[4];
+static GLint uniform_time;
+static GLint uniform_res;
+static GLint uniform_mouse;
 static GLclampf mouseX=0.0f;
 static GLclampf mouseY=0.0f;
 static GLclampf mouseLPressed=0.0f;
@@ -99,8 +99,8 @@ static const GLclampf vertices[]={
 1.0f,1.0f
 };
 
-static GLuint64 compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint64 shader;
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -110,7 +110,7 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-static GLuint64 vbo,vbu;
+static GLuint vbo,vbu;
 static void renderFrame(){
 int x,y;
 Uint32 buttons;
@@ -124,7 +124,7 @@ mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-GLint64 abstime=(double)SDL_GetTicks()/1000;
+GLint abstime=(double)SDL_GetTicks()/1000;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
