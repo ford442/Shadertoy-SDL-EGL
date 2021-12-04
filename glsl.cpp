@@ -113,7 +113,7 @@ int x, y;
 Uint32 buttons;
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
-float abstime=(float)(round(SDL_GetTicks()/100));
+float abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
