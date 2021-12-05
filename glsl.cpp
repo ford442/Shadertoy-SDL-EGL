@@ -119,9 +119,10 @@ static GLfloat vertices[2160]={};
 
 static void renderFrame(){
 GLuint VBO,VAO;
-GLclampf white;
-GLint x,y,a;
+double white;
+int x,y;
 double siz;
+int a;
 Uint32 buttons;
 siz=0.42;
 for(a=0;a<361;a++){
@@ -129,8 +130,8 @@ vertices[a*6]=siz*cos(a);
 vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=0.0f;
 vertices[(a*6)+3]=a/360; 
-vertices[(a*6)+4]=0.5f; 
-vertices[(a*6)+5]=0.5f; 
+vertices[(a*6)+4]=0.0f; 
+vertices[(a*6)+5]=1.0f; 
 };
                   
 SDL_PumpEvents();
