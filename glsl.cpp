@@ -214,7 +214,7 @@ EGL_NONE
 
 static void strt(){
 int ii;
-for(ii=0;ii<2161;ii++;){
+for(ii=0;ii<2161;ii++){
 vertices[ii]=0.0f;
 }
 GLuint vtx,frag;
