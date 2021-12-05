@@ -134,14 +134,15 @@ if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=white;
 vertices[7]=1.0f-mouseX;
-vertices[1]=mouseY;
+vertices[1]=1.0f-mouseY;
 vertices[13]=1.0f-mouseX;
 vertices[10]=0.0f-white;
 vertices[11]=1.0f-mouseY;
 vertices[2]=white;
+vertices[8]=vertices[11];
 vertices[32]=white;
 vertices[38]=white/1.1f;
-vertices[0]=vertices[4]-white;
+vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
 }else{
