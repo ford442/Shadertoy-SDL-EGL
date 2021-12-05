@@ -127,15 +127,7 @@ float b;
 Uint32 buttons;
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
-for(a=0;a<361;a++){
-b=(float)a/360;
-vertices[a*6]=siz*cos(a);
-vertices[(a*6)+1]=siz*sin(a);
-vertices[(a*6)+2]=0.1f;
-vertices[(a*6)+3]=b;
-vertices[(a*6)+4]=0.0f;
-vertices[(a*6)+5]=1.0f-b;
-};
+
 SDL_PumpEvents();
 double abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
@@ -146,6 +138,15 @@ ink[1]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
+         for(a=0;a<361;a++){
+b=(float)a/360;
+vertices[a*6]=siz*cos(a);
+vertices[(a*6)+1]=siz*sin(a);
+vertices[(a*6)+2]=white;
+vertices[(a*6)+3]=b;
+vertices[(a*6)+4]=0.0f;
+vertices[(a*6)+5]=1.0f-b;
+};
 mouseLPressed=1.0f;
 ink[2]=white;
 siz=0.77;
