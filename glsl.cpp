@@ -133,7 +133,7 @@ vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=0.0f;
 vertices[(a*6)+3]=b; 
 vertices[(a*6)+4]=0.0f; 
-vertices[(a*6)+5]=1.0f; 
+vertices[(a*6)+5]=1.0f-b; 
 };
                   
 SDL_PumpEvents();
@@ -149,6 +149,7 @@ white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 ink[2]=white;
+siz=0.77;
 vertices[7]=1.0f-mouseX;
 vertices[1]=1.0f-mouseY;
 vertices[13]=1.0f-mouseX;
@@ -161,6 +162,9 @@ vertices[38]=white/1.1f;
 vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
+for(a=0;a>(mouseX*100);a++){
+vertices[(a*6)+2]=vertices[(a*6)+2]+white;
+}
 }else{
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
