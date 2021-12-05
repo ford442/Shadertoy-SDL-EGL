@@ -120,8 +120,9 @@ static GLfloat vertices[2160]={};
 static void renderFrame(){
 GLuint VBO,VAO;
 GLclampf white;
-GLint x,y,a;
+GLint x,y,a,siz;
 Uint32 buttons;
+siz=0.42;
 for(a=0;a<361;a++){
 vertices[a*6]=siz*cos(a); 
 vertices[(a*6)+1]=siz*sin(a);
