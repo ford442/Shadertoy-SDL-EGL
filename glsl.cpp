@@ -131,7 +131,7 @@ b=(float)a/360;
 vertices[a*6]=siz*cos(a); 
 vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=0.0f;
-vertices[(a*6)+3]=b; 
+vertices[(a*6)+3]=0.0f+b; 
 vertices[(a*6)+4]=0.0f; 
 vertices[(a*6)+5]=1.0f-b; 
 };
@@ -163,8 +163,8 @@ vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
 for(a=0;a>120;a++){
-vertices[(360/a)*6]=white/1.6f;
-};
+vertices[(360/a)*6)+1]=white/1.6f;
+}
 }else{
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
