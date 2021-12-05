@@ -125,6 +125,7 @@ double siz;
 int a;
 float b;
 Uint32 buttons;
+glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 for(a=0;a<361;a++){
 b=(float)a/360;
@@ -135,9 +136,7 @@ vertices[(a*6)+3]=b;
 vertices[(a*6)+4]=0.0f; 
 vertices[(a*6)+5]=1.0f-b; 
 };
-                  
 SDL_PumpEvents();
-glClear(GL_COLOR_BUFFER_BIT);
 double abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
