@@ -122,14 +122,16 @@ GLuint VBO,VAO;
 double white;
 int x,y;
 double siz;
-float a;
+int a;
+float b;
 Uint32 buttons;
 siz=0.42;
 for(a=0;a<361;a++){
+b=(float)a/360;
 vertices[a*6]=siz*cos(a); 
 vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=0.0f;
-vertices[(a*6)+3]=a/360; 
+vertices[(a*6)+3]=b; 
 vertices[(a*6)+4]=0.0f; 
 vertices[(a*6)+5]=1.0f; 
 };
