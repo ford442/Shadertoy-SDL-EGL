@@ -163,7 +163,7 @@ vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
 for(a=0;a>(mouseX*100);a++){
-vertices[(a*6)+2]=vertices[(a*6)+2]+white;
+vertices[(a*6)+1]=white;
 }
 }else{
 mouseLPressed=0.0f;
