@@ -201,6 +201,7 @@ EGL_NONE
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT_KHR,
 EGL_RED_SIZE,16,
 EGL_GREEN_SIZE,16,
 EGL_BLUE_SIZE,16,
@@ -212,7 +213,6 @@ EGL_NONE
 };
 
 static void strt(){
-EGLTime startTime;
 
 int ii;
 for(ii=0;ii<2161;ii++){
@@ -278,6 +278,7 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
+EGLTime startTime=EGL_FOREVER;
 SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
