@@ -161,9 +161,6 @@ vertices[38]=white/1.1f;
 vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
-for(a=260;a<280;a++){
-vertices[a*6]=vertices[360*(int)white];
-}
 }else{
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
