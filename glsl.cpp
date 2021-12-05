@@ -213,6 +213,10 @@ EGL_NONE
 };
 
 static void strt(){
+int ii;
+for(ii=0;ii<2161;ii++;){
+vertices[ii]=0.0f;
+}
 GLuint vtx,frag;
 char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
