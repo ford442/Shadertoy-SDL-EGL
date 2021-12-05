@@ -244,7 +244,7 @@ EGLint config_size,major,minor;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
-if(eglBindAPI(EGL_OPENGL_ES3_API)!=EGL_TRUE){
+if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
