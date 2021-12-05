@@ -278,14 +278,20 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-EGLTime startTime=EGL_FOREVER;
 SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
+         EGLTime startTime=EGL_FOREVER;
+
+SDL_Log("SDL_Time: %u",SDL_GetTicks());
+SDL_Log("EGL_Time: %llu",startTime);
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
+         
+SDL_Log("SDL_Time: %u",SDL_GetTicks());
+SDL_Log("EGL_Time: %llu",startTime);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
