@@ -120,7 +120,8 @@ static GLfloat vertices[2160]={};
 static void renderFrame(){
 GLuint VBO,VAO;
 GLclampf white;
-GLint x,y,a,siz;
+GLint x,y,a;
+double siz;
 Uint32 buttons;
 siz=0.42;
 for(a=0;a<361;a++){
