@@ -157,10 +157,10 @@ vertices[2]=vertices[2]-white;
 }else{
 for(a=0;a<361;a++){
 b=(float)a/360;
-vertices[a*6]=(siz*cos(a))-white;
+vertices[a*6]=siz*cos(a);
 vertices[(a*6)+1]=siz*sin(a);
-vertices[(a*6)+2]=0.3f;
-vertices[(a*6)+3]=b;
+vertices[(a*6)+2]=b;
+vertices[(a*6)+3]=1.0f;
 vertices[(a*6)+4]=0.0f;
 vertices[(a*6)+5]=1.0f-b;
 };
@@ -168,14 +168,14 @@ mouseLPressed=0.0f;
 vertices[7]=-0.5f;
 vertices[1]=-0.5f;
 vertices[13]=0.5f;
-vertices[10]=1.0f;
+vertices[10]=1.0f-white;
 vertices[11]=0.0f;
 vertices[3]=1.0f;
 vertices[0]=0.5f;
 vertices[1]=-0.5f;
 vertices[2]=0.0f;
 ink[2]=0.0f;
-ink[0]=ink[1]-(white/100);
+ink[0]=white/100;
 }
 
 glClearColor(ink[0],ink[1],ink[2],ink[3]);
