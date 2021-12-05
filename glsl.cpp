@@ -163,7 +163,7 @@ vertices[38]=white/1.1f;
 vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
-for(a=0;a>361;a++){
+for(a=white*360;a>361;a++){
 vertices[(a*6)]=vertices[(a+4)*6];
 vertices[(a*6)+1]=vertices[((a+4)*6)+1];
 }
