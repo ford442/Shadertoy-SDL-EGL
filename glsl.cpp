@@ -281,7 +281,7 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-         EGLTime startTime=20*1000000*1000;
+         EGLTime startTime=20*1000000000;
 
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
