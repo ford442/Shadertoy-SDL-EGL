@@ -129,12 +129,12 @@ glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 for(a=0;a<361;a++){
 b=(float)a/360;
-vertices[a*6]=siz*cos(a); 
+vertices[a*6]=siz*cos(a);
 vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=0.1f;
-vertices[(a*6)+3]=b; 
-vertices[(a*6)+4]=0.0f; 
-vertices[(a*6)+5]=1.0f-b; 
+vertices[(a*6)+3]=b;
+vertices[(a*6)+4]=0.0f;
+vertices[(a*6)+5]=1.0f-b;
 };
 SDL_PumpEvents();
 double abstime=SDL_GetTicks();
@@ -162,7 +162,7 @@ vertices[0]=vertices[32]-white;
 vertices[3]=vertices[1]-white;
 vertices[2]=vertices[2]-white;
 for(a=0;a<360;a++){
-vertices[(a*white)]=vertices[(a+4)*white];
+vertices[(a*(int)(white*10))]=vertices[(a+4)];
 }
 }else{
 mouseLPressed=0.0f;
