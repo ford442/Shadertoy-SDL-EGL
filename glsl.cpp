@@ -244,7 +244,7 @@ EGLint config_size,major,minor;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
-if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
+if(eglBindAPI(EGL_OPENGL_ES3_API)!=EGL_TRUE){
 }
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -281,8 +281,7 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-         EGLTime startTime=20*1000000000;
-
+EGLTime startTime=20000000000;
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
 viewportSizeX=w;
