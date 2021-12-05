@@ -129,7 +129,7 @@ for(a=0;a<361;a++){
 vertices[a*6]=siz*cos(a); 
 vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=0.0f;
-vertices[(a*6)+3]=(float)a/360; 
+vertices[(a*6)+3]=(float)360/a; 
 vertices[(a*6)+4]=0.0f; 
 vertices[(a*6)+5]=1.0f; 
 };
