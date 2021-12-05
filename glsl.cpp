@@ -15,7 +15,7 @@
 #include <SDL2/SDL.h>
 
 using std::string;
-typedef khronos_time_ns_t EGLTime;
+typedef khronos_utime_nanoseconds_t EGLTime;
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
