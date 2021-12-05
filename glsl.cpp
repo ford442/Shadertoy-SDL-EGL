@@ -102,7 +102,7 @@ return shader;
 }
 
 static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
-static GLfloat vertices[]={
+/* static GLfloat vertices[]={
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
@@ -114,12 +114,23 @@ static GLfloat vertices[]={
          0.7f,  0.9f, 0.0f,  0.9f, 0.0f, 1.0f,
          0.7f,  0.7f, 0.9f,  0.4f, 0.9f, 1.0f
 };
+*/
+static GLfloat vertices[2160]={};
 
 static void renderFrame(){
 GLuint VBO,VAO;
 GLclampf white;
-GLint x,y;
+GLint x,y,a;
 Uint32 buttons;
+for(a=0;a<361;a++){
+vertices[a*6]=siz*cos(a); 
+vertices[(a*6)+1]=siz*sin(a);
+vertices[(a*6)+2]=0.0f;
+vertices[(a*6)+3]=360/a; 
+vertices[(a*6)+4]=0.5f; 
+vertices[(a*6)+5]=0.5f; 
+}
+                  
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 double abstime=SDL_GetTicks();
