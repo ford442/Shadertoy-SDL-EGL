@@ -15,7 +15,7 @@
 #include <SDL2/SDL.h>
 
 using std::string;
-typedef khronos_utime_nanoseconds_t EGLTime;
+typedef khronos_time_ns_t EGLTime;
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
@@ -281,7 +281,7 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-EGLTime startTime=20000000000;
+EGLTime startTime;
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
 viewportSizeX=w;
