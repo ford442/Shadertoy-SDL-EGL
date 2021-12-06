@@ -18,6 +18,8 @@
 #include <time.h>
 
 using namespace std;
+using namespace std::chrono;
+
 using std::string;
 steady_clock::time_point t1;
 
