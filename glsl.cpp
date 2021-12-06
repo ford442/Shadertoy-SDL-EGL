@@ -290,13 +290,13 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
          
-auto current_time=std::chrono::system_clock::now();
+auto current_time=(double)std::chrono::system_clock::now();
 double NowTime=std::chrono::duration<double>(current_time);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 sleep(1);
 cout << "Elapsed time in nanoseconds A: "<< NowTime << " ns." << endl;
 sleep(1);
-auto current_timeb=std::chrono::system_clock::now();
+auto current_timeb=(double)std::chrono::system_clock::now();
 double NowTimeB=std::chrono::duration<double>(current_timeb);
 cout << "Elapsed time in nanoseconds B: "<< NowTimeB << " ns." << endl;
 double difff=NowTimeB-NowTimeA;
