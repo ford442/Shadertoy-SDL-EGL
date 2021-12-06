@@ -21,7 +21,8 @@ using namespace std;
 using std::string;
 
 typedef khronos_utime_nanoseconds_t EGLTime;
-
+EGLTime startTime;
+double start,end,abstime;
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
@@ -134,7 +135,8 @@ Uint32 buttons;
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-double abstime=chrono::duration_cast<chrono::nanoseconds>(end - start).count()/1000000;
+end=chrono::steady_clock::now();
+abstime=chrono::duration_cast<chrono::nanoseconds>(end - start).count()/1000000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
@@ -286,19 +288,15 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-EGLTime startTime;
-auto start = chrono::steady_clock::now();
+start=chrono::steady_clock::now();
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
 sleep(3);
-auto end = chrono::steady_clock::now();
-cout << "Elapsed time in nanoseconds: "<< chrono::duration_cast<chrono::nanoseconds>(end - start).count()<< " ns" << endl;
+auto testend=chrono::steady_clock::now();
+cout << "Elapsed time in nanoseconds: "<< chrono::duration_cast<chrono::nanoseconds>(testend - start).count()<< " ns" << endl;
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-         
-SDL_Log("SDL_Time: %u",SDL_GetTicks());
-SDL_Log("EGL_Time: %llu",startTime);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
