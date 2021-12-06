@@ -23,6 +23,7 @@ using namespace std;
 using std::string;
 using namespace std::chrono;
 double abstime,startD,endD;
+steady_clock::time_point t1;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -136,10 +137,11 @@ static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-         
-// auto timeNow=std::chrono::duration<double>(current_time.time_since_epoch());
-// double msNow=timeNow.count();
-abstime=SDL_GetTicks();
+steady_clock::time_point t2=steady_clock::now();
+duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
+double outTimeA=time_spana.count();
+// abstime=SDL_GetTicks();
+abstime=outTimeA/1000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
@@ -290,15 +292,8 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-steady_clock::time_point t1 = steady_clock::now();
-SDL_Log("SDL_Time: %u",SDL_GetTicks());
-sleep(1);
-steady_clock::time_point t2=steady_clock::now();
-duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
-double outTimeA=time_spana.count();
-SDL_Log("System Timer: %f",outTimeA);
-sleep(1);
-steady_clock::time_point t3=steady_clock::now();
+t1 = steady_clock::now();
+         
 duration<double> time_spanb=duration_cast<duration<double>>(t3 - t1);
 double outTimeB=time_spanb.count();
 SDL_Log("System Timer: %f",outTimeB);
