@@ -141,7 +141,7 @@ steady_clock::time_point t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
 double outTimeA=time_spana.count();
 // abstime=SDL_GetTicks();
-abstime=outTimeA/1000;
+abstime=outTimeA*1000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
@@ -296,7 +296,6 @@ t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-SDL_Log("SDL_Time: %u",SDL_GetTicks());
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 
