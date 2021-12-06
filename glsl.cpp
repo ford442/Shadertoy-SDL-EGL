@@ -14,15 +14,11 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include <chrono>
 #include <unistd.h>
 #include <time.h>
-#include <ratio>
 
 using namespace std;
 using std::string;
-using namespace std::chrono;
-double abstime,startD,endD;
 steady_clock::time_point t1;
 
 static const char *read_file_into_str(const char *filename){
