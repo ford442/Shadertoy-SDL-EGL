@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 #include <time.h>
 
+using namespace std;
 using std::string;
 using namespace std::chrono;
 
