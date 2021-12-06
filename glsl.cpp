@@ -23,7 +23,8 @@ using std::string;
 typedef khronos_utime_nanoseconds_t EGLTime;
 EGLTime startTime;
 
-double start,abstime;
+double abstime;
+long long start;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
