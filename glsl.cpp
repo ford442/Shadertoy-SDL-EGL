@@ -21,8 +21,8 @@
 
 using namespace std;
 using std::string;
-
-double abstime,start,enda,endTime;
+auto current_time = std::chrono::system_clock::now();
+double abstime,startD,endD;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -136,9 +136,10 @@ static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-double ntime=chrono::duration<double>(chrono::steady_clock::now());
-auto ftime=chrono::duration<double>(ntime - start);
-abstime=ftime.count()/1000000;
+         
+auto timeNow=std::chrono::duration<double>(current_time.time_since_epoch());
+double msNow=timeNow.count();
+abstime=SDL_GetTicks()/1000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
@@ -289,11 +290,12 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-start=chrono::steady_clock::now();
+current_time=std::chrono::system_clock::now();
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
-auto testend=chrono::steady_clock::now();
-double testout=chrono::duration<double>(testend - start);
-cout << "Elapsed time in nanoseconds: "<< testout.count() << " ns" << endl;
+auto duration_in_seconds=std::chrono::duration<double>(current_time.time_since_epoch());
+double testout=chrono::duration<double>(testend-start);
+startD=testout.count();
+cout << "Elapsed time in nanoseconds: "<< testout.count() << " ns. Or, in double float: " startD << endl;
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
