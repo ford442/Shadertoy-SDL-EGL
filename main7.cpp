@@ -32,25 +32,25 @@ EmscriptenWebGLContextAttributes attr;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
+
 GLuint shader_program;
-GLuint vtx,frag;
 GLuint vbo,vbu;
 GLint attrib_position;
 GLint sampler_channel[4];
 GLint uniform_time;
 GLint uniform_res;
 GLint uniform_mouse;
-GLclampf mouseX=0.0f;
-GLclampf mouseY=0.0f;
-GLclampf mouseLPressed=0.0f;
-GLclampf mouseRPressed=0.0f;
-GLfloat viewportSizeX=0.0f;
-GLfloat viewportSizeY=0.0f;
-double abstime;
+static GLfloat mouseX=0.0f;
+static GLfloat mouseY=0.0f;
+static GLfloat mouseLPressed=0.0f;
+static GLfloat mouseRPressed=0.0f;
+static GLclampf viewportSizeX=0.0f;
+static GLclampf viewportSizeY=0.0f;
+static double abstime;
 int x,y;
 Uint32 buttons;
 double outTimeA;
-const GLclampf vertices[]={
+GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
@@ -174,6 +174,8 @@ EGL_NONE
 };
 
 static void strt(){
+  GLuint vtx,frag;
+
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
