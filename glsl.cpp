@@ -21,10 +21,6 @@ using namespace std;
 using namespace std::chrono;
 using std::string;
 
-
-
-
-
 EGLDisplay display;
 EGLContext contextegl;
 EGLSurface surface;
@@ -141,7 +137,6 @@ mouseLPressed=1.0f;
 ink[2]=white;
 siz=0.77;
 vertices[7]=1.0f-mouseX;
-vertices[12]=vertices[7]+(mouseX*0.1f);
 vertices[1]=1.0f-mouseY;
 vertices[13]=1.0f-mouseX;
 vertices[10]=0.0f-white;
