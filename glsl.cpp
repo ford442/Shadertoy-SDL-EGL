@@ -16,6 +16,8 @@
 #include <iostream>
 #include <chrono>
 #include <unistd.h>
+#include <ctime>
+#include <ratio>
 
 using namespace std;
 using std::string;
