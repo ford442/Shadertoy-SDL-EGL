@@ -298,7 +298,6 @@ viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
-SDL_Log("SDL_Time: %llu",chrono::duration<chrono::nanoseconds>(testend - start).count());
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 
