@@ -292,14 +292,7 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-t1 = steady_clock::now();
-         
-duration<double> time_spanb=duration_cast<duration<double>>(t3 - t1);
-double outTimeB=time_spanb.count();
-SDL_Log("System Timer: %f",outTimeB);
-double difff=outTimeB-outTimeA;
-cout << "Time difference in nanoseconds: "<< difff << " ns." << endl;
-         
+t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
