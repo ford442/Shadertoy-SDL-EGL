@@ -296,6 +296,11 @@ SDL_Log("SDL_Time: %u",SDL_GetTicks());
 auto duration_in_seconds=std::chrono::duration<double>(current_time.time_since_epoch());
 double NowTime=duration_in_seconds.count();
 cout << "Elapsed time in nanoseconds: "<< NowTime << " ns." << endl;
+                  sleep(1);
+auto duration_in_secondsb=std::chrono::duration<double>(current_time.time_since_epoch());
+NowTime=duration_in_secondsb.count();
+cout << "Elapsed time in nanoseconds: "<< NowTime << " ns." << endl;
+
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
