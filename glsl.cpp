@@ -21,7 +21,6 @@
 
 using namespace std;
 using std::string;
-auto current_time = std::chrono::system_clock::now();
 double abstime,startD,endD;
 
 static const char *read_file_into_str(const char *filename){
@@ -290,9 +289,9 @@ SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
-current_time=std::chrono::system_clock::now();
+auto current_time=std::chrono::system_clock::now();
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
-         sleep(1);
+sleep(1);
 auto duration_in_seconds=std::chrono::duration<double>(current_time.time_since_epoch());
 double NowTime=duration_in_seconds.count();
 cout << "Elapsed time in nanoseconds: "<< NowTime << " ns." << endl;
