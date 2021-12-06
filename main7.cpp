@@ -136,7 +136,7 @@ steady_clock::time_point t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
 double outTimeA=time_spana.count();
 // abstime=SDL_GetTicks();
-abstime=outTimeA*100;
+abstime=outTimeA;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
