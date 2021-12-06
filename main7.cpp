@@ -119,9 +119,11 @@ glCompileShader(shader);
 return shader;
 }
 static GLuint vbo,vbu;
+static int x,y;
+static Uint32 buttons;
+static double outTimeA;
 static void renderFrame(){
-int x,y;
-Uint32 buttons;
+  
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
@@ -134,8 +136,7 @@ mouseLPressed=0.0f;
 }
 steady_clock::time_point t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
-double outTimeA=time_spana.count();
-// abstime=SDL_GetTicks();
+outTimeA=time_spana.count();
 abstime=outTimeA;
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
