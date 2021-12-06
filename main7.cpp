@@ -19,10 +19,47 @@
 
 using namespace std;
 using namespace std::chrono;
-
 using std::string;
+
 steady_clock::time_point t1;
 Uint8 *stm;
+
+SDL_AudioDeviceID dev;
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EmscriptenWebGLContextAttributes attr;
+struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+SDL_Window *win;
+SDL_GLContext *glCtx;
+GLuint shader_program;
+GLuint vtx,frag;
+GLuint vbo,vbu;
+GLint attrib_position;
+GLint sampler_channel[4];
+GLint uniform_time;
+GLint uniform_res;
+GLint uniform_mouse;
+GLclampf mouseX=0.0f;
+GLclampf mouseY=0.0f;
+GLclampf mouseLPressed=0.0f;
+GLclampf mouseRPressed=0.0f;
+GLfloat viewportSizeX=0.0f;
+GLfloat viewportSizeY=0.0f;
+double abstime;
+int x,y;
+Uint32 buttons;
+double outTimeA;
+const GLclampf vertices[]={
+-1.0f,-1.0f,
+1.0f,-1.0f,
+-1.0f,1.0f,
+1.0f,1.0f
+};
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -75,38 +112,6 @@ static const char fragment_shader_header_gles3[]=
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
 
-static SDL_AudioDeviceID dev;
-static EGLDisplay display;
-static EGLContext contextegl;
-static EGLSurface surface;
-static EmscriptenWebGLContextAttributes attr;
-static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-SDL_Window *win;
-SDL_GLContext *glCtx;
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-GLuint shader_program;
-GLint attrib_position;
-GLint sampler_channel[4];
-GLint uniform_time;
-GLint uniform_res;
-GLint uniform_mouse;
-GLclampf mouseX=0.0f;
-GLclampf mouseY=0.0f;
-GLclampf mouseLPressed=0.0f;
-GLclampf mouseRPressed=0.0f;
-GLfloat viewportSizeX=0.0f;
-GLfloat viewportSizeY=0.0f;
-GLfloat abstime;
-const GLclampf vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
-};
-
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 GLsizei i,srclens[nsources];
@@ -119,18 +124,15 @@ glCompileShader(shader);
 return shader;
 }
 
-GLuint vbo,vbu;
-int x,y;
-Uint32 buttons;
-double outTimeA;
 static void renderFrame(){
-SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
+SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
+glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }else{
 mouseLPressed=0.0f;
 }
@@ -147,9 +149,6 @@ glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
-if(mouseLPressed==1.0f){
-glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
-}
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
 }
@@ -174,7 +173,6 @@ EGL_NONE
 };
 
 static void strt(){
-GLuint vtx,frag;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
