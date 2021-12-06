@@ -171,13 +171,13 @@ vertices[a*6]=siz*cos(a);
 vertices[(a*6)+1]=siz*sin(a);
 vertices[(a*6)+2]=b;
 vertices[(a*6)+3]=1.0f;
-vertices[(a*6)+4]=0.0f;
+vertices[(a*6)+4]=white;
 vertices[(a*6)+5]=1.0f-b;
 };
 mouseLPressed=0.0f;
 vertices[7]=-0.5f;
 vertices[1]=-0.5f;
-vertices[13]=0.5f;
+vertices[13]=0.7f;
 vertices[10]=1.0f-white;
 vertices[11]=white;
 vertices[3]=1.0f;
@@ -200,7 +200,7 @@ glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(flo
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES,0,360);
-eglSwapBuffers(display,surface);      
+eglSwapBuffers(display,surface);
 }
 
 static const EGLint attribut_list[]={
