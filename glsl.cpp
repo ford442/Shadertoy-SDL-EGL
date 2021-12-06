@@ -296,12 +296,12 @@ sleep(1);
 steady_clock::time_point t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
 double outTimeA=time_spana.count();
-SDL_Log("System Timer: %s",outTimeA);
+SDL_Log("System Timer: %f",outTimeA);
 sleep(1);
 steady_clock::time_point t3=steady_clock::now();
 duration<double> time_spanb=duration_cast<duration<double>>(t3 - t1);
 double outTimeB=time_spanb.count();
-SDL_Log("System Timer: %s",outTimeB);
+SDL_Log("System Timer: %f",outTimeB);
 double difff=outTimeB-outTimeA;
 cout << "Time difference in nanoseconds: "<< difff << " ns." << endl;
          
