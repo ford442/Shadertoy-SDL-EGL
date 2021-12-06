@@ -134,7 +134,7 @@ static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-double ntime=<double>chrono::steady_clock::now();
+double ntime=(double)chrono::steady_clock::now();
 auto ftime=chrono::duration<double>(ntime - start);
 abstime=fime.count()/1000000;
 buttons=SDL_GetMouseState(&x, &y);
