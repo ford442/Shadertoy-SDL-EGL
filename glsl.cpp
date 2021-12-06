@@ -24,7 +24,8 @@ typedef khronos_utime_nanoseconds_t EGLTime;
 EGLTime startTime;
 
 double abstime;
-long long start;
+unsigned long long starta;
+unsigned long long enda;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -293,15 +294,13 @@ SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 start=chrono::steady_clock::now();
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
-SDL_Log("EGL_Time: %llu",startTime);
-sleep(3);
 auto testend=chrono::steady_clock::now();
-cout << "Elapsed time in nanoseconds: "<< chrono::duration_cast<chrono::nanoseconds>(testend - start).count()<< " ns" << endl;
+cout << "Elapsed time in nanoseconds: "<< chrono::duration<chrono::nanoseconds>(testend - start).count()<< " ns" << endl;
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
-SDL_Log("EGL_Time: %llu",startTime);
+SDL_Log("SDL_Time: %llu",chrono::duration<chrono::nanoseconds>(testend - start).count());
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 
