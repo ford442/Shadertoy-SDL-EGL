@@ -16,7 +16,7 @@
 #include <iostream>
 #include <chrono>
 #include <unistd.h>
-#include <time>
+#include <time.h>
 #include <ratio>
 
 using namespace std;
