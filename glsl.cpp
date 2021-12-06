@@ -16,11 +16,12 @@
 #include <iostream>
 #include <chrono>
 #include <unistd.h>
-#include <ctime>
+#include <time>
 #include <ratio>
 
 using namespace std;
 using std::string;
+using namespace std::chrono;
 double abstime,startD,endD;
 
 static const char *read_file_into_str(const char *filename){
@@ -290,16 +291,20 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
          
-auto current_time=(double)std::chrono::system_clock::now();
+steady_clock::time_point t1 = steady_clock::now();
 double NowTimeA=std::chrono::duration<double>(current_time);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 sleep(1);
-cout << "Elapsed time in nanoseconds A: "<< NowTime << " ns." << endl;
+steady_clock::time_point t2=steady_clock::now();
+duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
+double outTimeA=time_spana.count();
+SDL_LOG("System Timer: %s",outTimeA);
 sleep(1);
-auto current_timeb=(double)std::chrono::system_clock::now();
-double NowTimeB=std::chrono::duration<double>(current_timeb);
-cout << "Elapsed time in nanoseconds B: "<< NowTimeB << " ns." << endl;
-double difff=NowTimeB-NowTimeA;
+steady_clock::time_point t3=steady_clock::now();
+duration<double> time_spanb=duration_cast<duration<double>>(t3 - t1);
+double outTimeB=time_spanb.count();
+SDL_LOG("System Timer: %s",outTimeB);
+double difff=outTimeB-outTimeA;
 cout << "Time difference in nanoseconds: "<< difff << " ns." << endl;
          
 viewportSizeX=w;
