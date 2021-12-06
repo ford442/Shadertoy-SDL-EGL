@@ -19,9 +19,10 @@
 
 using namespace std;
 using namespace std::chrono;
+
 Uint8 *stm;
-static SDL_AudioDeviceID dev;
-static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+SDL_AudioDeviceID dev;
+struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 using std::string;
 steady_clock::time_point t1;
@@ -86,6 +87,7 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
+
 static GLuint shader_program;
 static GLfloat mouseX=0.0f;
 static GLfloat mouseY=0.0f;
@@ -98,7 +100,7 @@ static GLfloat abstime;
 // static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
+GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 SDL_Log("GL Shader: %s",sources[i]);
@@ -110,7 +112,7 @@ glCompileShader(shader);
 return shader;
 }
 
-static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
+GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
 /* static GLfloat vertices[]={
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
@@ -124,7 +126,7 @@ static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
          0.7f,  0.7f, 0.9f,  0.4f, 0.9f, 1.0f
 };
 */
-static GLfloat vertices[2160]={};
+GLfloat vertices[2160]={};
 GLuint VBO,VAO;
 double white;
 int x,y;
