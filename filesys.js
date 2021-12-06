@@ -17,7 +17,6 @@ Module.ccall("pl");
 
 let fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
-FS.mkdir('/snd');
 let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 pll();
