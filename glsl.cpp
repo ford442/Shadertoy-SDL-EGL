@@ -75,12 +75,10 @@ static const char fragment_shader_header_gles3[]=
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
 
-static SDL_AudioDeviceID dev;
 static EGLDisplay display;
 static EGLContext contextegl;
 static EGLSurface surface;
 static EmscriptenWebGLContextAttributes attr;
-static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
 
