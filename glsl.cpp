@@ -296,10 +296,9 @@ SDL_Log("SDL_Time: %u",SDL_GetTicks());
 auto duration_in_seconds=std::chrono::duration<double>(current_time.time_since_epoch());
 double NowTime=duration_in_seconds.count();
 cout << "Elapsed time in nanoseconds: "<< NowTime << " ns." << endl;
-                  sleep(1);
+sleep(1);
 auto duration_in_secondsb=std::chrono::duration<double>(current_time.time_since_epoch());
-NowTime=duration_in_secondsb.count();
-cout << "Elapsed time in nanoseconds: "<< NowTime << " ns." << endl;
+cout << "Elapsed time in nanoseconds: "<< duration_in_secondsb.count() << " ns." << endl;
 
 viewportSizeX=w;
 viewportSizeY=h;
