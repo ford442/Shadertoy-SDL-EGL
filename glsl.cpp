@@ -140,7 +140,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
 auto ntime=chrono::steady_clock::now();
-startTime=result=static_cast<int>(chrono::duration_cast<chrono::nanoseconds>(ntime - start).count()/1000000);
+startTime=chrono::duration<chrono::nanoseconds>(ntime - start).count()/1000000);
 abstime=startTime;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
