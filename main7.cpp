@@ -13,12 +13,14 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
+#include <iostream>
+#include <unistd.h>
 #include <time.h>
 
 using namespace std;
-using std::string;
 using namespace std::chrono;
 
+using std::string;
 steady_clock::time_point t1;
 Uint8 *stm;
 
