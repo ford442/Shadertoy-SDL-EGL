@@ -16,6 +16,7 @@
 #include <time.h>
 
 using std::string;
+using namespace std::chrono;
 
 steady_clock::time_point t1;
 Uint8 *stm;
