@@ -87,20 +87,20 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-static GLuint shader_program;
-static GLint attrib_position;
-static GLint sampler_channel[4];
-static GLint uniform_time;
-static GLint uniform_res;
-static GLint uniform_mouse;
-static GLclampf mouseX=0.0f;
-static GLclampf mouseY=0.0f;
-static GLclampf mouseLPressed=0.0f;
-static GLclampf mouseRPressed=0.0f;
-static GLfloat viewportSizeX=0.0f;
-static GLfloat viewportSizeY=0.0f;
-static GLfloat abstime;
-static const GLclampf vertices[]={
+GLuint shader_program;
+GLint attrib_position;
+GLint sampler_channel[4];
+GLint uniform_time;
+GLint uniform_res;
+GLint uniform_mouse;
+GLclampf mouseX=0.0f;
+GLclampf mouseY=0.0f;
+GLclampf mouseLPressed=0.0f;
+GLclampf mouseRPressed=0.0f;
+GLfloat viewportSizeX=0.0f;
+GLfloat viewportSizeY=0.0f;
+GLfloat abstime;
+const GLclampf vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
@@ -108,7 +108,7 @@ static const GLclampf vertices[]={
 };
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
+GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -118,12 +118,12 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-static GLuint vbo,vbu;
-static int x,y;
-static Uint32 buttons;
-static double outTimeA;
+
+GLuint vbo,vbu;
+int x,y;
+Uint32 buttons;
+double outTimeA;
 static void renderFrame(){
-  
 SDL_PumpEvents();
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
