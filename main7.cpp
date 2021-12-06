@@ -33,13 +33,13 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
 
-GLuint shader_program;
-GLuint vbo,vbu;
-GLint attrib_position;
-GLint sampler_channel[4];
-GLint uniform_time;
-GLint uniform_res;
-GLint uniform_mouse;
+static GLuint shader_program;
+static GLuint vbo,vbu;
+static GLint attrib_position;
+static GLint sampler_channel[4];
+static GLint uniform_time;
+static GLint uniform_res;
+static GLint uniform_mouse;
 static GLfloat mouseX=0.0f;
 static GLfloat mouseY=0.0f;
 static GLfloat mouseLPressed=0.0f;
@@ -47,10 +47,9 @@ static GLfloat mouseRPressed=0.0f;
 static GLclampf viewportSizeX=0.0f;
 static GLclampf viewportSizeY=0.0f;
 static double abstime;
-int x,y;
 Uint32 buttons;
 double outTimeA;
-GLfloat vertices[]={
+static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
 -1.0f,1.0f,
@@ -126,11 +125,13 @@ return shader;
 }
 
 static void renderFrame(){
+int x, y;
+Uint32 buttons;
 glClear(GL_COLOR_BUFFER_BIT);
 SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x,&y);
-mouseX=x/viewportSizeX;
-mouseY=y/viewportSizeY;
+mouseX=x;
+mouseY=viewportSizeY-y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
@@ -174,8 +175,7 @@ EGL_NONE
 };
 
 static void strt(){
-  GLuint vtx,frag;
-
+GLuint vtx,frag;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
