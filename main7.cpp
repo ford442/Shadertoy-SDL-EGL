@@ -149,7 +149,7 @@ glUniform1f(uniform_time,abstime);
 if(mouseLPressed==1.0f){
 glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
 }
-glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+glDrawArrays(GL_TRIANGLES,0,4);
 eglSwapBuffers(display,surface);
 }
 
@@ -161,6 +161,7 @@ EGL_NONE
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
@@ -248,7 +249,7 @@ glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
+SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
