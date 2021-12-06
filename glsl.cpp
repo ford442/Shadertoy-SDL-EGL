@@ -76,10 +76,10 @@ static const char fragment_shader_header_gles3[]=
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
 
-static EGLDisplay display;
-static EGLContext contextegl;
-static EGLSurface surface;
-static EmscriptenWebGLContextAttributes attr;
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EmscriptenWebGLContextAttributes attr;
 SDL_Window *win;
 SDL_GLContext *glCtx;
 
@@ -88,14 +88,14 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-static GLuint shader_program;
-static GLfloat mouseX=0.0f;
-static GLfloat mouseY=0.0f;
-static GLfloat mouseLPressed=0.0f;
-static GLfloat mouseRPressed=0.0f;
-static GLfloat viewportSizeX=0.0f;
-static GLfloat viewportSizeY=0.0f;
-static GLfloat abstime;
+GLuint shader_program;
+GLfloat mouseX=0.0f;
+GLfloat mouseY=0.0f;
+GLfloat mouseLPressed=0.0f;
+GLfloat mouseRPressed=0.0f;
+GLfloat viewportSizeX=0.0f;
+GLfloat viewportSizeY=0.0f;
+GLfloat abstime;
 
 // static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
@@ -113,24 +113,12 @@ return shader;
 }
 
 GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
-/* static GLfloat vertices[]={
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
-         0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.23f, -0.27f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.73f,  0.77f, 0.0f,  0.4f, 0.0f, 1.0f,
-         0.13f, -0.17f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.2f, -0.9f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.7f,  0.9f, 0.0f,  0.9f, 0.0f, 1.0f,
-         0.7f,  0.7f, 0.9f,  0.4f, 0.9f, 1.0f
-};
-*/
+
 GLfloat vertices[2160]={};
 GLuint VBO,VAO;
 double white;
 int x,y;
-double siz;
+double siz,outTimeA;
 int a;
 float b;
 Uint32 buttons;
@@ -141,8 +129,7 @@ siz=0.42;
 SDL_PumpEvents();
 steady_clock::time_point t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
-double outTimeA=time_spana.count();
-// abstime=SDL_GetTicks();
+outTimeA=time_spana.count();
 abstime=outTimeA*1000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
