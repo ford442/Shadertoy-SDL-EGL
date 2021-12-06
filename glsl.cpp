@@ -20,12 +20,7 @@
 using namespace std;
 using std::string;
 
-typedef khronos_utime_nanoseconds_t EGLTime;
-EGLTime startTime;
-
-double abstime;
-unsigned long long start;
-unsigned long long enda;
+double abstime,start,enda;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -295,7 +290,8 @@ SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 start=chrono::steady_clock::now();
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 auto testend=chrono::steady_clock::now();
-cout << "Elapsed time in nanoseconds: "<< chrono::duration<chrono::nanoseconds>(testend - start).count()<< " ns" << endl;
+double testout=chrono::duration<double>(testend - start);
+cout << "Elapsed time in nanoseconds: "<< testout.count() << " ns" << endl;
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
