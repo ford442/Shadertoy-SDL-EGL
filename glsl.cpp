@@ -19,12 +19,12 @@
 
 using namespace std;
 using namespace std::chrono;
-Uint8 *stm;
+static Uint8 *stm;
 static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 using std::string;
-steady_clock::time_point t1;
+static steady_clock::time_point t1;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -94,11 +94,9 @@ static GLfloat mouseRPressed=0.0f;
 static GLfloat viewportSizeX=0.0f;
 static GLfloat viewportSizeY=0.0f;
 static GLfloat abstime;
-
-// static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
+static GLuint shader;
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 SDL_Log("GL Shader: %s",sources[i]);
@@ -109,29 +107,14 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-
-static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
-/* static GLfloat vertices[]={
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   
-         0.1f, -0.1f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.23f, -0.27f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.73f,  0.77f, 0.0f,  0.4f, 0.0f, 1.0f,
-         0.13f, -0.17f, 0.1f,  1.0f, 0.0f, 1.0f,
-        -0.2f, -0.9f, 0.2f,  0.0f, 1.0f, 0.3f,
-         0.7f,  0.9f, 0.0f,  0.9f, 0.0f, 1.0f,
-         0.7f,  0.7f, 0.9f,  0.4f, 0.9f, 1.0f
-};
-*/
-static GLfloat vertices[2160]={};
-GLuint VBO,VAO;
-double white;
-int x,y;
-double siz;
-int a;
-float b;
-Uint32 buttons;
+static double ink[]={1.0f,0.0f,0.0f,1.0f};
+static double vertices[2160]={};
+static GLuint VBO,VAO;
+static double white;
+static int x,y,a;
+static double siz;
+static float b;
+static Uint32 buttons;
 
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
@@ -140,7 +123,6 @@ SDL_PumpEvents();
 steady_clock::time_point t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
 double outTimeA=time_spana.count();
-// abstime=SDL_GetTicks();
 abstime=outTimeA*1000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
@@ -154,6 +136,7 @@ mouseLPressed=1.0f;
 ink[2]=white;
 siz=0.77;
 vertices[7]=1.0f-mouseX;
+vertices[12]=vertices[7]+(mouseX*0.1f);
 vertices[1]=1.0f-mouseY;
 vertices[13]=1.0f-mouseX;
 vertices[10]=0.0f-white;
