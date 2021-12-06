@@ -19,12 +19,39 @@
 
 using namespace std;
 using namespace std::chrono;
-static Uint8 *stm;
-static SDL_AudioDeviceID dev;
-static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-
 using std::string;
-static steady_clock::time_point t1;
+
+
+
+
+
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EmscriptenWebGLContextAttributes attr;
+SDL_Window *win;
+SDL_GLContext *glCtx;
+
+GLuint shader_program;
+GLfloat mouseX=0.0f;
+GLfloat mouseY=0.0f;
+GLfloat mouseLPressed=0.0f;
+GLfloat mouseRPressed=0.0f;
+GLfloat viewportSizeX=0.0f;
+GLfloat viewportSizeY=0.0f;
+double abstime;
+double ink[]={1.0f,0.0f,0.0f,1.0f};
+double vertices[2160]={};
+GLuint VBO,VAO;
+double white;
+int x,y,a;
+double siz;
+float b;
+Uint32 buttons;
+Uint8 *stm;
+static SDL_AudioDeviceID dev;
+struct{SDL_AudioSpec spec;Uint8 *snd;Uint32 slen;int pos;}wave;
+steady_clock::time_point t1;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -75,28 +102,14 @@ static const char fragment_shader_header_gles3[]=
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
 
-static EGLDisplay display;
-static EGLContext contextegl;
-static EGLSurface surface;
-static EmscriptenWebGLContextAttributes attr;
-SDL_Window *win;
-SDL_GLContext *glCtx;
-
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-static GLuint shader_program;
-static GLfloat mouseX=0.0f;
-static GLfloat mouseY=0.0f;
-static GLfloat mouseLPressed=0.0f;
-static GLfloat mouseRPressed=0.0f;
-static GLfloat viewportSizeX=0.0f;
-static GLfloat viewportSizeY=0.0f;
-static GLfloat abstime;
-static GLuint shader;
+
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 SDL_Log("GL Shader: %s",sources[i]);
@@ -107,14 +120,6 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-static double ink[]={1.0f,0.0f,0.0f,1.0f};
-static double vertices[2160]={};
-static GLuint VBO,VAO;
-static double white;
-static int x,y,a;
-static double siz;
-static float b;
-static Uint32 buttons;
 
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
