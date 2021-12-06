@@ -13,8 +13,11 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
+#include <time.h>
+
 using std::string;
 
+steady_clock::time_point t1;
 Uint8 *stm;
 
 static const char *read_file_into_str(const char *filename){
@@ -92,6 +95,7 @@ static GLclampf mouseLPressed=0.0f;
 static GLclampf mouseRPressed=0.0f;
 static GLfloat viewportSizeX=0.0f;
 static GLfloat viewportSizeY=0.0f;
+static GLfloat abstime;
 static const GLclampf vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
@@ -124,8 +128,11 @@ mouseLPressed=1.0f;
 }else{
 mouseLPressed=0.0f;
 }
-GLfloat abstime=(double)SDL_GetTicks()/1000;
-glGenBuffers(1,&vbo);
+steady_clock::time_point t2=steady_clock::now();
+duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
+double outTimeA=time_spana.count();
+// abstime=SDL_GetTicks();
+abstime=outTimeA*1000;glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glGenVertexArrays(1,&vbu);
@@ -237,6 +244,7 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
+t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(1.0f,1.0f,1.0f,1.0f);
