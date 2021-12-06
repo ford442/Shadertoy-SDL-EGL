@@ -24,7 +24,7 @@ typedef khronos_utime_nanoseconds_t EGLTime;
 EGLTime startTime;
 
 double abstime;
-unsigned long long starta;
+unsigned long long start;
 unsigned long long enda;
 
 static const char *read_file_into_str(const char *filename){
