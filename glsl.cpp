@@ -22,7 +22,7 @@ using std::string;
 
 typedef khronos_utime_nanoseconds_t EGLTime;
 EGLTime startTime;
-double start,end,abstime;
+double start,ends,abstime;
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
@@ -123,8 +123,6 @@ static GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
 };
 */
 static GLfloat vertices[2160]={};
-
-static void renderFrame(){
 GLuint VBO,VAO;
 double white;
 int x,y;
@@ -132,10 +130,12 @@ double siz;
 int a;
 float b;
 Uint32 buttons;
+static void renderFrame(){
+
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-end=chrono::steady_clock::now();
+ends=chrono::steady_clock::now();
 abstime=chrono::duration_cast<chrono::nanoseconds>(end - start).count()/1000000;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
