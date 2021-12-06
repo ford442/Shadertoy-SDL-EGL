@@ -20,7 +20,7 @@
 using namespace std;
 using std::string;
 
-double abstime,start,enda;
+double abstime,start,enda,endTime;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -134,7 +134,7 @@ static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-auto ntime=chrono::steady_clock::now();
+double ntime=<double>chrono::steady_clock::now();
 auto ftime=chrono::duration<double>(ntime - start);
 abstime=fime.count()/1000000;
 buttons=SDL_GetMouseState(&x, &y);
