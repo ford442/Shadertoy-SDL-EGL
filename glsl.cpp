@@ -179,12 +179,12 @@ vertices[7]=-0.5f;
 vertices[1]=-0.5f;
 vertices[13]=0.5f;
 vertices[10]=1.0f-white;
-vertices[11]=0.0f;
+vertices[11]=white;
 vertices[3]=1.0f;
 vertices[0]=0.5f;
 vertices[1]=-0.5f;
 vertices[2]=0.0f;
-ink[2]=0.0f;
+ink[2]=white;
 ink[0]=white/100;
 }
 
