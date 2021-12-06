@@ -133,13 +133,13 @@ double siz;
 int a;
 float b;
 Uint32 buttons;
-static void renderFrame(){
 
+static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
 auto ntime=chrono::steady_clock::now();
-startTime=chrono::duration_cast<chrono::nanoseconds>(ntime - start).count()/1000000;
+startTime=(double)chrono::duration_cast<chrono::nanoseconds>(ntime - start).count()/1000000;
 abstime=(double)startTime;
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
@@ -149,7 +149,6 @@ ink[1]=mouseY;
 white=abstime-(round(abstime/1000)*1000);
 white=1000/white;
 if((buttons & SDL_BUTTON_LMASK)!=0){
-
 mouseLPressed=1.0f;
 ink[2]=white;
 siz=0.77;
