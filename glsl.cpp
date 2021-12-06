@@ -291,7 +291,7 @@ SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
          
 auto current_time=(double)std::chrono::system_clock::now();
-double NowTime=std::chrono::duration<double>(current_time);
+double NowTimeA=std::chrono::duration<double>(current_time);
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 sleep(1);
 cout << "Elapsed time in nanoseconds A: "<< NowTime << " ns." << endl;
