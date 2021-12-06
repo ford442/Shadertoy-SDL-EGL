@@ -139,7 +139,7 @@ SDL_PumpEvents();
          
 auto timeNow=std::chrono::duration<double>(current_time.time_since_epoch());
 double msNow=timeNow.count();
-abstime=SDL_GetTicks()/1000;
+abstime=SDL_GetTicks();
 buttons=SDL_GetMouseState(&x, &y);
 mouseX=x/viewportSizeX;
 mouseY=y/viewportSizeY;
