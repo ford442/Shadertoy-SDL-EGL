@@ -199,7 +199,7 @@ glEnableVertexAttribArray(0);
 glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
 glEnableVertexAttribArray(1);
 glUseProgram(shader_program);
-glDrawArrays(GL_TRIANGLE_STRIP,0,360);
+glDrawArrays(GL_TRIANGLES,0,360);
 eglSwapBuffers(display,surface);      
 }
 
@@ -290,7 +290,7 @@ glUseProgram(shader_program);
 SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
-SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
+SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
