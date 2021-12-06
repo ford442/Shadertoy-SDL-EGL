@@ -13,9 +13,15 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
+#include <iostream>
+#include <chrono>
+#include <unistd.h>
 
+using namespace std;
 using std::string;
+
 typedef khronos_utime_nanoseconds_t EGLTime;
+
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
 long length=0;
@@ -282,8 +288,12 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_TIMER|SDL_INIT_EVENTS);
 EGLTime startTime;
+auto start = chrono::steady_clock::now();
 SDL_Log("SDL_Time: %u",SDL_GetTicks());
 SDL_Log("EGL_Time: %llu",startTime);
+auto start = chrono::steady_clock::now();
+sleep(3);
+cout << "Elapsed time in nanoseconds: "<< chrono::duration_cast<chrono::nanoseconds>(end - start).count()<< " ns" << endl;
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(0.0f,1.0f,0.0f,1.0f);
