@@ -205,13 +205,13 @@ EGL_NONE
 static void strt(){
 GLuint vtx,frag,fragA;
 char *fileloc="/shader/shader1.toy";
-SDL_Log("Get Shader Image");
-char *filelocA="/shader/shader1.bfa";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-SDL_Log("Get Shader BufferA");
-string program_sourceA=read_file_into_strA(filelocA);
+SDL_Log("Get Shader Image");
+char *filelocA="/shader/shader1.bfa";
+string program_sourceA=read_file_into_str(filelocA);
 const char* default_fragment_shaderA=program_sourceA.c_str();
+SDL_Log("Get Shader BufferA");
 const char *sources[4];
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
@@ -258,9 +258,9 @@ win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED
 glCtx=&contextegl;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
+SDL_Log("Compile Vertex Shader Begin");
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-  SDL_Log("Compile Vertex Shader");
-
+SDL_Log("Compile Vertex Shader End");
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
