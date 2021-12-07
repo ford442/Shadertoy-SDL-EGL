@@ -183,7 +183,7 @@ const char* default_fragment_shader=program_source.c_str();
 SDL_Log("Get Shader Image");
 
 const char *sources[4];
-const char* texture_files[4];
+const char *texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
@@ -241,6 +241,7 @@ shader_program=glCreateProgram();
 SDL_Log("Create Shader Program");
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
+glLinkProgram(shader_program);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
@@ -256,7 +257,6 @@ shader_programA=glCreateProgram();
 SDL_Log("Create Shader ProgramA");
 glAttachShader(shader_programA,vtx);
 glAttachShader(shader_programA,fragA);
-glLinkProgram(shader_program);
 glLinkProgram(shader_programA);
 glDeleteShader(vtx);
 glDeleteShader(fragA);
