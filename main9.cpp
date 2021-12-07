@@ -126,7 +126,7 @@ return shader;
 
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
-int x, y;
+int x,y;
 Uint32 buttons;
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
@@ -143,11 +143,10 @@ steady_clock::time_point t2=steady_clock::now();
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 outTimeA=time_spana.count();
 abstime=outTimeA;
-
 glUniform1f(uniform_time,(float)abstime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
-SDL_PumpEvents();
+// SDL_PumpEvents();
 }
 
 static const EGLint attribut_list[]={
