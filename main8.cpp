@@ -151,6 +151,7 @@ glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUniform1f(uniform_time,abstime);
 glUseProgram(shader_programA);
+glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
