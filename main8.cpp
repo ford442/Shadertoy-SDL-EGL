@@ -181,10 +181,7 @@ char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 SDL_Log("Get Shader Image");
-char *filelocA="/shader/shader1.bfa";
-string program_sourceA=read_file_into_str(filelocA);
-const char* default_fragment_shaderA=program_sourceA.c_str();
-SDL_Log("Get Shader BufferA");
+
 const char *sources[4];
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
@@ -240,8 +237,6 @@ sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Fragment Shader");
-  
-  
 shader_program=glCreateProgram();
 SDL_Log("Create Shader Program");
 glAttachShader(shader_program,vtx);
@@ -250,6 +245,10 @@ glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
 SDL_Log("Use Program");
+char *filelocA="/shader/shader1.bfa";
+string program_sourceA=read_file_into_str(filelocA);
+const char* default_fragment_shaderA=program_sourceA.c_str();
+SDL_Log("Get Shader BufferA");
 sources[2]=default_fragment_shaderA;
 fragA=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Second Fragment Shader");
