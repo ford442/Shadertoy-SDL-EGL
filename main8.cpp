@@ -37,18 +37,25 @@ static GLuint shader_program,shader_programA;
 static GLuint vbo,vbu;
 static GLint attrib_position;
 static GLint sampler_channel[4];
-static GLint uniform_time;
-static GLint uniform_res;
-static GLint uniform_mouse;
-static GLfloat mouseX=0.0f;
-static GLfloat mouseY=0.0f;
-static GLfloat mouseLPressed=0.0f;
-static GLfloat mouseRPressed=0.0f;
+GLfloat uniform_time;
+GLfloat uniform_ftime;
+GLint uniform_frame;
+GLfloat uniform_fps;
+GLfloat uniform_srate;
+int f;
+GLfloat uniform_res;
+GLfloat uniform_mouse;
+GLfloat mouseX=0.0f;
+GLfloat mouseY=0.0f;
+GLfloat mouseLPressed=0.0f;
+GLfloat mouseRPressed=0.0f;
 static GLclampf viewportSizeX=0.0f;
 static GLclampf viewportSizeY=0.0f;
-static double abstime;
+GLfloat abstime;
 Uint32 buttons;
 double outTimeA;
+double fTime;
+double fps;
 static const GLfloat vertices[]={
 -1.0f,-1.0f,
 1.0f,-1.0f,
@@ -97,6 +104,10 @@ static const char vertex_shader_body_gles3[]=
 static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
+"uniform float iTimeDelta;"
+"uniform float iSampleRate;"
+"uniform int iFrame;"
+"uniform float iFrameRate;"
 "uniform float iChannelTime[4];"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
@@ -126,6 +137,8 @@ return shader;
 }
 
 static void renderFrame(){
+f++;
+glUniform1i(uniform_frame,f);
 int x, y;
 Uint32 buttons;
 glClear(GL_COLOR_BUFFER_BIT);
@@ -135,7 +148,7 @@ mouseX=x;
 mouseY=viewportSizeY-y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
+glUniform4f(uniform_mouse,mouseX,mouseY,0.0f,0.0f);
 }else{
 mouseLPressed=0.0f;
 }
@@ -151,6 +164,10 @@ glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUniform1f(uniform_time,abstime);
+fTime=outTimeA/f;
+glUniform1f(uniform_ftime,fTime);
+fps=60/fTime;
+glUniform1f(uniform_fps,fps);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
@@ -238,22 +255,23 @@ frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Fragment Shader");
 char *filelocA="/shader/shader1.bfa";
 string program_sourceA=read_file_into_str(filelocA);
-const char* default_fragment_shaderA=program_sourceA.c_str();
+/*
+  const char* default_fragment_shaderA=program_sourceA.c_str();
 SDL_Log("Get Shader BufferA");
 sources[2]=default_fragment_shaderA;
 fragA=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Second Fragment Shader");
+*/
 shader_program=glCreateProgram();
 SDL_Log("Create Shader Program");
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
-glAttachShader(shader_program,fragA);
+// glAttachShader(shader_program,fragA);
 glLinkProgram(shader_program);
-// glDeleteShader(frag);
-glReleaseShaderCompiler();
-glUseProgram(shader_program);
-// glDeleteShader(vtx);
+glDeleteShader(frag);
+glDeleteShader(vtx);
 // glDeleteShader(fragA);
+glReleaseShaderCompiler();
 glUseProgram(shader_program);
 SDL_Log("Use Program");
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
@@ -262,18 +280,30 @@ sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
+uniform_ftime=glGetUniformLocation(shader_program,"iTimeDelta");
+uniform_frame=glGetUniformLocation(shader_program,"iFrame");
+uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
+uniform_time=glGetUniformLocation(shader_program,"iChannelTime[0]");
+uniform_time=glGetUniformLocation(shader_program,"iChannelTime[1]");
+uniform_time=glGetUniformLocation(shader_program,"iChannelTime[2]");
+uniform_time=glGetUniformLocation(shader_program,"iChannelTime[3]");
+uniform_date=glGetUniformLocation(shader_program,"iDate");
+uniform_srate=glGetUniformLocation(shader_program,"iSampleRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+float rate=44100.0f;
+glUniform3f(uniform_res,(float)w,(float)h,1.0f);
+glUniform1f(uniform_srate,rate);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
-t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(1.0f,1.0f,1.0f,1.0f);
 SDL_Log("Start Render Loop");
+f=0;
+t1=steady_clock::now();
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
