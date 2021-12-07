@@ -83,34 +83,6 @@ return result;
 return NULL;
 }
 
-static const char *read_file_into_strA(const char *filename){
-char *result=NULL;
-long length=0;
-FILE *file=fopen(filename,"r");
-if(file){
-int status=fseek(file,0,SEEK_END);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-length=ftell(file);
-status=fseek(file,0,SEEK_SET);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-result=static_cast<char*>(malloc((length+1)*sizeof(char)));
-if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
-result[actual_length++]={'\0'};
-} 
-fclose(file);
-return result;
-}
-return NULL;
-}
-
-
 static const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
@@ -141,7 +113,7 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-static GLuint shader;
+GLuint shader;
 GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -208,10 +180,10 @@ char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 SDL_Log("Get Shader Image");
-char *filelocA="/shader/shader1.bfa";
-string program_sourceA=read_file_into_str(filelocA);
-const char* default_fragment_shaderA=program_sourceA.c_str();
-SDL_Log("Get Shader BufferA");
+// char *filelocA="/shader/shader1.bfa";
+// string program_sourceA=read_file_into_str(filelocA);
+// const char* default_fragment_shaderA=program_sourceA.c_str();
+SDL_Log("Skip Shader BufferA");
 const char *sources[4];
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
@@ -267,9 +239,9 @@ sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Fragment Shader");
-sources[2]=default_fragment_shaderA;
-fragA=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-SDL_Log("Compile Second Fragment Shader");
+// sources[2]=default_fragment_shaderA;
+// fragA=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+SDL_Log("Skip Second Fragment Shader");
 shader_program=glCreateProgram();
 SDL_Log("Create Shader Program");
 glAttachShader(shader_program,vtx);
