@@ -240,26 +240,28 @@ sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Fragment Shader");
+  
+  
+shader_program=glCreateProgram();
+SDL_Log("Create Shader Program");
+glAttachShader(shader_program,vtx);
+glAttachShader(shader_program,frag);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
+glUseProgram(shader_program);
+SDL_Log("Use Program");
 sources[2]=default_fragment_shaderA;
 fragA=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 SDL_Log("Compile Second Fragment Shader");
-shader_program=glCreateProgram();
-SDL_Log("Create Shader Program");
 shader_programA=glCreateProgram();
 SDL_Log("Create Shader ProgramA");
-
-glAttachShader(shader_program,vtx);
 glAttachShader(shader_programA,vtx);
-glAttachShader(shader_program,frag);
 glAttachShader(shader_programA,fragA);
 glLinkProgram(shader_program);
 glLinkProgram(shader_programA);
 glDeleteShader(vtx);
-glDeleteShader(frag);
 glDeleteShader(fragA);
 glReleaseShaderCompiler();
-glUseProgram(shader_program);
-SDL_Log("Use Program");
 glUseProgram(shader_programA);
 SDL_Log("Use Program A");
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
