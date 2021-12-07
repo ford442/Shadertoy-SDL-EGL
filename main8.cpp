@@ -96,7 +96,7 @@ static const char vertex_shader_body_gles3[]=
 
 static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform double iTime;"
+"uniform float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -175,15 +175,10 @@ EGL_NONE
 };
 
 static void strt(){
-GLuint vtx,frag,fragA;
+GLuint vtx,frag;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-SDL_Log("Get Shader Image");
-// char *filelocA="/shader/shader1.bfa";
-// string program_sourceA=read_file_into_str(filelocA);
-// const char* default_fragment_shaderA=program_sourceA.c_str();
-SDL_Log("Skip Shader BufferA");
 const char *sources[4];
 const char* texture_files[4];
 for (int i=0;i<4;++i) {
@@ -230,30 +225,20 @@ win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED
 glCtx=&contextegl;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
-SDL_Log("Compile Vertex Shader Begin");
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-SDL_Log("Compile Vertex Shader End");
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-SDL_Log("Compile Fragment Shader");
-// sources[2]=default_fragment_shaderA;
-// fragA=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-SDL_Log("Skip Second Fragment Shader");
 shader_program=glCreateProgram();
-SDL_Log("Create Shader Program");
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
-glAttachShader(shader_program,fragA);
 glLinkProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
-glDeleteShader(fragA);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-SDL_Log("Use Program");
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -271,7 +256,6 @@ t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
 glClearColor(1.0f,1.0f,1.0f,1.0f);
-SDL_Log("Start Render Loop");
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
