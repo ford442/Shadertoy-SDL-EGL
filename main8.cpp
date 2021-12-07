@@ -37,6 +37,7 @@ static GLuint shader_program,shader_programA;
 static GLuint vbo,vbu;
 static GLint attrib_position;
 static GLint sampler_channel[4];
+GLfloat uniform_date;
 GLfloat uniform_time;
 GLfloat uniform_ftime;
 GLint uniform_frame;
