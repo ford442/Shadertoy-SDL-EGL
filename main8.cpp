@@ -252,7 +252,6 @@ glLinkProgram(shader_program);
 // glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-SDL_Log("Use Program");
 // glDeleteShader(vtx);
 // glDeleteShader(fragA);
 glUseProgram(shader_program);
