@@ -38,7 +38,7 @@ static GLuint vbo,vbu;
 static GLint attrib_position;
 static GLint sampler_channel[4];
 GLfloat uniform_date;
-GLint uniform_time;
+static GLint uniform_time;
 GLint uniform_ftime;
 int uniform_frame;
 GLfloat uniform_fps;
