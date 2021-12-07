@@ -125,21 +125,22 @@ return shader;
 }
 
 static void renderFrame(){
+glClear(GL_COLOR_BUFFER_BIT);
 int x, y;
 Uint32 buttons;
-glClear(GL_COLOR_BUFFER_BIT);
-SDL_PumpEvents();
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=x;
 mouseY=viewportSizeY-y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-glUniform4f(uniform_mouse,mouseX,mouseY,mouseLPressed,mouseRPressed);
+const float cMouseX=x;
+const float cMouseY=y;
+glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
 }
 steady_clock::time_point t2=steady_clock::now();
-duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
+duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 outTimeA=time_spana.count();
 abstime=outTimeA;
 glGenBuffers(1,&vbo);
@@ -153,6 +154,7 @@ glUseProgram(shader_program);
 glUniform1f(uniform_time,abstime);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
+SDL_PumpEvents();
 }
 
 static const EGLint attribut_list[]={
@@ -194,9 +196,9 @@ SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
-attr.stencil=0;
-attr.depth=0;
-attr.antialias=0;
+attr.stencil=1;
+attr.depth=1;
+attr.antialias=1;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
 emscripten_webgl_init_context_attributes(&attr);
@@ -253,8 +255,8 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
-viewportSizeX=w;
-viewportSizeY=h;
+viewportSizeX=(float)w;
+viewportSizeY=(float)h;
 glClearColor(1.0f,1.0f,1.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
