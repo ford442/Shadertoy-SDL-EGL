@@ -158,13 +158,14 @@ static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
+EGL_ALPHA_SIZE,16,
+EGL_STENCIL_SIZE,16,
+EGL_DEPTH_SIZE,16,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
@@ -178,19 +179,19 @@ const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
 attr.stencil=1;
 attr.depth=1;
-attr.antialias=1;
+attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
 emscripten_webgl_init_context_attributes(&attr);
@@ -232,8 +233,7 @@ glLinkProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-  glUseProgram(shader_program);
-
+glUseProgram(shader_program);
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
@@ -241,8 +241,7 @@ glGenVertexArrays(1,&vbu);
 glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
-  
-  attrib_position=glGetAttribLocation(shader_program,"iPosition");
+attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
