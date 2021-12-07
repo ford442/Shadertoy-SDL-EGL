@@ -96,7 +96,7 @@ static const char vertex_shader_body_gles3[]=
 
 static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform double iTime;"
+"uniform float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
