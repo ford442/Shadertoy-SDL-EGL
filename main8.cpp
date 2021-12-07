@@ -83,6 +83,34 @@ return result;
 return NULL;
 }
 
+static const char *read_file_into_strA(const char *filename){
+char *result=NULL;
+long length=0;
+FILE *file=fopen(filename,"r");
+if(file){
+int status=fseek(file,0,SEEK_END);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+length=ftell(file);
+status=fseek(file,0,SEEK_SET);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+result=static_cast<char*>(malloc((length+1)*sizeof(char)));
+if(result){
+size_t actual_length=fread(result,sizeof(char),length,file);
+result[actual_length++]={'\0'};
+} 
+fclose(file);
+return result;
+}
+return NULL;
+}
+
+
 static const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
@@ -182,7 +210,7 @@ char *filelocA="/shader/shader1.bfa";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 SDL_Log("Get Shader BufferA");
-string program_sourceA=read_file_into_str(filelocA);
+string program_sourceA=read_file_into_strA(filelocA);
 const char* default_fragment_shaderA=program_sourceA.c_str();
 const char *sources[4];
 const char* texture_files[4];
