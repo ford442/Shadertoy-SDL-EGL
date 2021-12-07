@@ -97,6 +97,7 @@ static const char vertex_shader_body_gles3[]=
 static const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
+"uniform float iChannelTime[4];"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -268,6 +269,10 @@ sampler_channel[1]=glGetUniformLocation(shader_programA,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_programA,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_programA,"iChannel3");
 uniform_time=glGetUniformLocation(shader_programA,"iTime");
+uniform_time0=glGetUniformLocation(shader_programA,"iChannelTime[0]");
+uniform_time1=glGetUniformLocation(shader_programA,"iChannelTime[1]");
+uniform_time2=glGetUniformLocation(shader_programA,"iChannelTime[2]");
+uniform_time3=glGetUniformLocation(shader_programA,"iChannelTime[3]");
 uniform_res=glGetUniformLocation(shader_programA,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_programA,"iMouse");
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
@@ -279,6 +284,10 @@ sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
+uniform_time0=glGetUniformLocation(shader_program,"iChannelTime[0]");
+uniform_time1=glGetUniformLocation(shader_program,"iChannelTime[1]");
+uniform_time2=glGetUniformLocation(shader_program,"iChannelTime[2]");
+uniform_time3=glGetUniformLocation(shader_program,"iChannelTime[3]");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)w,(float)h,0.0f);
