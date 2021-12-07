@@ -52,7 +52,7 @@ GLfloat mouseLPressed=0.0f;
 GLfloat mouseRPressed=0.0f;
 static GLclampf viewportSizeX=0.0f;
 static GLclampf viewportSizeY=0.0f;
-double abstime;
+static double abstime;
 Uint32 buttons;
 double outTimeA;
 double fTime;
@@ -138,8 +138,8 @@ return shader;
 }
 
 static void renderFrame(){
-f++;
-glUniform1i(uniform_frame,f);
+// f++;
+// glUniform1i(uniform_frame,f);
 int x, y;
 Uint32 buttons;
 glClear(GL_COLOR_BUFFER_BIT);
@@ -165,10 +165,10 @@ glBindVertexArray(vbu);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 glUniform1f(uniform_time,abstime);
-fTime=outTimeA/f;
-glUniform1f(uniform_ftime,fTime);
-fps=60/fTime;
-glUniform1f(uniform_fps,fps);
+// fTime=outTimeA/f;
+// glUniform1f(uniform_ftime,fTime);
+// fps=60/fTime;
+// glUniform1f(uniform_fps,fps);
 glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
