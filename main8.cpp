@@ -182,7 +182,6 @@ char *fileloc="/shader/shader1.toy";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 SDL_Log("Get Shader Image");
-
 const char *sources[4];
 const char *texture_files[4];
 for (int i=0;i<4;++i) {
@@ -264,6 +263,15 @@ glDeleteShader(fragA);
 glReleaseShaderCompiler();
 glUseProgram(shader_programA);
 SDL_Log("Use Program A");
+attrib_position=glGetAttribLocation(shader_programA,"iPosition");
+sampler_channel[0]=glGetUniformLocation(shader_programA,"iChannel0");
+sampler_channel[1]=glGetUniformLocation(shader_programA,"iChannel1");
+sampler_channel[2]=glGetUniformLocation(shader_programA,"iChannel2");
+sampler_channel[3]=glGetUniformLocation(shader_programA,"iChannel3");
+uniform_time=glGetUniformLocation(shader_programA,"iTime");
+uniform_res=glGetUniformLocation(shader_programA,"iResolution");
+uniform_mouse=glGetUniformLocation(shader_programA,"iMouse");
+glUniform3f(uniform_res,(float)w,(float)h,0.0f);
 glUseProgram(shader_program);
 SDL_Log("Use Program");
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
