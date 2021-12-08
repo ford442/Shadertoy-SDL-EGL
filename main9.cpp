@@ -34,7 +34,7 @@ SDL_Window *win;
 SDL_GLContext *glCtx;
 
 static GLuint shader_program;
-static GLuint vbo,vbu;
+static GLuint VBO,VBU;
 static GLint attrib_position;
 static GLint sampler_channel[4];
 GLfloat uniform_time;
@@ -46,14 +46,11 @@ GLfloat mouseLPressed=0.0f;
 GLfloat mouseRPressed=0.0f;
 GLclampf viewportSizeX=0.0f;
 GLclampf viewportSizeY=0.0f;
-double abstime;
 Uint32 buttons;
 double outTimeA;
 const GLfloat vertices[]={
--1.0f,-1.0f,
-1.0f,-1.0f,
--1.0f,1.0f,
-1.0f,1.0f
+-1.0f,-1.0f,  1.0f,-1.0f,
+-1.0f,1.0f,  1.0f,1.0f
 };
 
 static const char *read_file_into_str(const char *filename){
@@ -124,17 +121,17 @@ glCompileShader(shader);
 return shader;
 }
 
-static void renderFrame(){
-glClear(GL_COLOR_BUFFER_BIT);
 int x,y;
 Uint32 buttons;
+static void renderFrame(){
+glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
 mouseY=(float)(viewportSizeY-y);
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-const float cMouseX=(float)x;
-const float cMouseY=(float)y;
+static const float cMouseX=(float)x;
+static const float cMouseY=(float)viewportSizeY-y;
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
@@ -142,30 +139,28 @@ mouseLPressed=0.0f;
 steady_clock::time_point t2=steady_clock::now();
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 outTimeA=time_spana.count();
-abstime=outTimeA;
-glUniform1f(uniform_time,(float)abstime);
+glUniform1f(uniform_time,(float)outTimeA);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 eglSwapBuffers(display,surface);
-// SDL_PumpEvents();
 }
 
 static const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
 
 static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,16,
-EGL_STENCIL_SIZE,16,
-EGL_DEPTH_SIZE,16,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_BUFFER_SIZE,64,
 EGL_NONE
 };
 
@@ -182,11 +177,11 @@ texture_files[i]=NULL;
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
+// SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
+// SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
 attr.stencil=1;
@@ -234,11 +229,11 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-glGenBuffers(1,&vbo);
-glBindBuffer(GL_ARRAY_BUFFER,vbo);
+glGenBuffers(1,&VBO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glGenVertexArrays(1,&vbu);
-glBindVertexArray(vbu);
+glGenVertexArrays(1,&VBU);
+glBindVertexArray(VBU);
 glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
