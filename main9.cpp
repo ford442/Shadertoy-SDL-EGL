@@ -47,7 +47,7 @@ GLfloat mouseRPressed=0.0f;
 GLclampf viewportSizeX=0.0f;
 GLclampf viewportSizeY=0.0f;
 Uint32 buttons;
-double outTimeA;
+long double outTimeA;
 const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
 static const char *read_file_into_str(const char *filename){
@@ -118,22 +118,22 @@ glCompileShader(shader);
 return shader;
 }
 
-int x,y;
+Uint32 x,y;
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
-mouseX=(float)x;
-mouseY=(float)(viewportSizeY-y);
+mouseX=(float)x/viewportSizeX;
+mouseY=(float)y/viewportSizeY;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-static const float cMouseX=(float)x;
-static const float cMouseY=(float)viewportSizeY-y;
+static const float cMouseX=mouseX;
+static const float cMouseY=mouseY;
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
 }
 steady_clock::time_point t2=steady_clock::now();
-duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
+duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glDrawArrays(GL_TRIANGLE_STRIP,0,4);
@@ -290,7 +290,7 @@ SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
 static void plt(){
-char flnm[1024];
+char flnm[16];
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
