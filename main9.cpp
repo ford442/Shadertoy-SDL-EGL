@@ -118,7 +118,7 @@ glCompileShader(shader);
 return shader;
 }
 
-Uint32 x,y;
+int x,y;
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
