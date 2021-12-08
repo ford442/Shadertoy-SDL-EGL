@@ -48,10 +48,7 @@ GLclampf viewportSizeX=0.0f;
 GLclampf viewportSizeY=0.0f;
 Uint32 buttons;
 double outTimeA;
-const GLfloat vertices[]={
--1.0f,-1.0f,  1.0f,-1.0f,
--1.0f,1.0f,  1.0f,1.0f
-};
+const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -144,13 +141,13 @@ eglSwapBuffers(display,surface);
 }
 
 static const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
 
 static const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_RED_SIZE,32,
@@ -173,9 +170,9 @@ const char* texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
@@ -183,8 +180,8 @@ SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
 // SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
-attr.stencil=1;
-attr.depth=1;
+attr.stencil=0;
+attr.depth=0;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
