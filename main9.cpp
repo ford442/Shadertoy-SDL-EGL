@@ -38,6 +38,8 @@ GLfloat mouseLPressed=0.0f;
 GLfloat mouseRPressed=0.0f;
 int x,y;
 static int frame;
+EGLDisplay display;
+EGLSurface surface;
 
 typedef struct{
 float XYZW[4];
@@ -122,8 +124,6 @@ frame++;
 static void strt(){
 int h,w;
 GLuint VBO,VAO,EBO,vtx,frag;
-EGLDisplay display;
-EGLSurface surface;
 EGLContext contextegl;
 EmscriptenWebGLContextAttributes attr;
 SDL_Window *win;
