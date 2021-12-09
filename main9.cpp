@@ -158,7 +158,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 // glDrawArrays(GL_TRIANGLE_STRIP,0,6);
-glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,(GLvoid*)0);
+glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 }
 
@@ -252,6 +252,11 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
+glEnableClientState(GL_VERTEX_ARRAY);
+glEnableClientState(GL_COLOR_ARRAY);
+glEnableClientState(GL_INDEX_ARRAY);
+glEnableClientState(GL_NORMAL_ARRAY);
+
 glGenVertexArrays(1,&VAO);
 glBindVertexArray(VAO);
 glGenBuffers(1,&VBO);
@@ -260,6 +265,8 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glVertexAttribPointer(0,4,GL_FLOAT,GL_FALSE,VertexSize,0);
 // glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,VertexSize,(GLvoid*)RgbOffset);
 glEnableVertexAttribArray(0);
+glVertexPointer(4,GL_FLOAT,0,vertices);
+
 // glEnableVertexAttribArray(1);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
