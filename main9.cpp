@@ -34,7 +34,7 @@ SDL_Window *win;
 SDL_GLContext *glCtx;
 
 static GLuint shader_program;
-static GLuint VBO,VBU;
+static GLuint VBO,VAO,EBO;
 static GLint attrib_position;
 static GLint sampler_channel[4];
 GLfloat uniform_time;
@@ -48,7 +48,21 @@ GLclampf viewportSizeX=0.0f;
 GLclampf viewportSizeY=0.0f;
 Uint32 buttons;
 long double outTimeA;
-const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
+
+const GLfloat vertices[]={
+-1.0,-1.0,0.0,0.0,
+-1.0,1.0,0.0,1.0,
+1.0,-1.0,1.0,0.0,
+1.0,-1.0,1.0,0.0,
+-1.0,1.0,0.0,1.0,
+1.0,1.0,1.0,1.0
+};
+
+GLubyte Indices[] = {0,1,2,3,4,5,6};
+
+const size_t BufferSize=sizeof(Vertices);
+const size_t VertexSize=sizeof(Vertices[0]);
+const size_t RgbOffset=sizeof(Vertices[0].XYZW);
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -120,7 +134,7 @@ return shader;
 
 int x,y;
 static void renderFrame(){
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x/viewportSizeX;
 mouseY=(float)y/viewportSizeY;
@@ -136,7 +150,9 @@ steady_clock::time_point t2=steady_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
-glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+// glDrawArrays(GL_TRIANGLE_STRIP,0,6);
+glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,(GLvoid*)0);
+
 eglSwapBuffers(display,surface);
 }
 
@@ -184,8 +200,8 @@ SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
-attr.stencil=0;
-attr.depth=0;
+attr.stencil=1;
+attr.depth=1;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
@@ -230,13 +246,23 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
+
+glGenVertexArrays(1,&VAO);
+glBindVertexArray(VAO);
+  
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glGenVertexArrays(1,&VBU);
-glBindVertexArray(VBU);
-glVertexAttribPointer(attrib_position,2,GL_FLOAT,GL_FALSE,0,0);
-glEnableVertexAttribArray(attrib_position);
+
+glVertexAttribPointer(0,4,GL_FLOAT,GL_FALSE,VertexSize,0);
+glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,VertexSize,(GLvoid*)RgbOffset);
+glEnableVertexAttribArray(0);
+glEnableVertexAttribArray(1);
+  
+glGenBuffers(1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
+  
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -253,7 +279,12 @@ SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 viewportSizeX=(float)w;
 viewportSizeY=(float)h;
+glViewport(0,0,viewportSizeX,viewportSizeY);
+
 glClearColor(1.0f,1.0f,1.0f,1.0f);
+glEnable(GL_DEPTH_TEST);  
+glDepthMask(GL_FALSE);  
+glDepthFunc(GL_LESS);  
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
