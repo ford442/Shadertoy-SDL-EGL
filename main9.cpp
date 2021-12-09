@@ -251,6 +251,9 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
+glGenBuffers(1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
 
 glGenVertexArrays(1,&VAO);
 glBindVertexArray(VAO);
@@ -262,10 +265,7 @@ glVertexAttribPointer(0,4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(0);
 
 // glEnableVertexAttribArray(1);
-glGenBuffers(1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-  
+
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
