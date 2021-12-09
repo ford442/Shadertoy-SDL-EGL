@@ -140,8 +140,8 @@ return shader;
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
-mouseX=(float)x;
-mouseY=(float)y;
+mouseX=viewportSizeX-(float)x;
+mouseY=viewportSizeY-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 const float cMouseX=mouseX;
@@ -274,7 +274,6 @@ glUniform3f(uniform_res,(float)w,(float)h,1.0f);
 viewportSizeX=(float)w;
 viewportSizeY=(float)h;
 glViewport(0,0,viewportSizeX,viewportSizeY);
-  
 glEnable(GL_DEPTH_TEST);  
 glDepthMask(GL_FALSE);  
 glDepthFunc(GL_LESS);  
