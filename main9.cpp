@@ -143,8 +143,8 @@ int x,y;
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
-mouseX=(float)x;
-mouseY=1.0f-(float)y;
+mouseX=(float)x/viewportSizeX;
+mouseY=1.0f-(float)y/viewportSizeY;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 const float cMouseX=mouseX;
@@ -269,7 +269,7 @@ sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)w,(float)h,0.0f);
+glUniform3f(uniform_res,(float)w,(float)h,1.0f);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
