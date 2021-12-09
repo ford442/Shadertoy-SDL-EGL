@@ -62,7 +62,7 @@ GLubyte Indices[] = {0,1,2,3,4,5,6};
 
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
-const size_t RgbOffset=sizeof(vertices[0].XYZW);
+const size_t RgbOffset=sizeof(vertices[0]*4);
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
