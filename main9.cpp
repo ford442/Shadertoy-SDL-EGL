@@ -147,8 +147,8 @@ mouseX=(float)x;
 mouseY=1.0f-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-static const float cMouseX=mouseX;
-static const float cMouseY=mouseY;
+const float cMouseX=mouseX;
+const float cMouseY=mouseY;
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
