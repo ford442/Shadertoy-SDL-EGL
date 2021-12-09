@@ -1,12 +1,11 @@
-#include <float.h>
+#include <cfloat>
 #include <vector>
 #include <algorithm>
 #include <string>
-#include <stdarg.h>
-#include <stdbool.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -14,8 +13,7 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include <unistd.h>
-#include <time.h>
+#include <ctime>
 
 using namespace std;
 using namespace std::chrono;
