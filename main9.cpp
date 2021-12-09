@@ -44,8 +44,8 @@ GLfloat mouseX=0.0f;
 GLfloat mouseY=0.0f;
 GLfloat mouseLPressed=0.0f;
 GLfloat mouseRPressed=0.0f;
-GLclampf viewportSizeX=0.0f;
-GLclampf viewportSizeY=0.0f;
+GLfloat viewportSizeX=0.0f;
+GLfloat viewportSizeY=0.0f;
 Uint32 buttons;
 long double outTimeA;
 
