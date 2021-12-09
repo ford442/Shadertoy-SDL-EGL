@@ -49,22 +49,23 @@ GLclampf viewportSizeY=0.0f;
 Uint32 buttons;
 long double outTimeA;
 
-typedef struct
-{
-  float XYZW[4];
-  float RGBA[4];
-} Vertex;
+typedef struct{
+float XYZW[4];
+float RGBA[4];
+}Vertex;
 
 Vertex vertices[]={
-  {-1.0,-1.0,0.0,1.0},
-  {-1.0,1.0,0.0,1.0},
-  {1.0,-1.0,1.0,1.0},
-  {1.0,-1.0,1.0,1.0},
-  {-1.0,1.0,0.0,1.0},
-  {1.0,1.0,1.0,1.0}
+{-1.0,-1.0,0.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,1.0,1.0,1.0}
 };
 
-GLubyte Indices[] = {0,1,2,3,4,5};
+GLubyte Indices[]={
+0,1,2,3,4,5
+};
 
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
@@ -156,7 +157,6 @@ steady_clock::time_point t2=steady_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
-// glDrawArrays(GL_TRIANGLE_STRIP,0,6);
 glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 }
@@ -254,18 +254,13 @@ glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-
 glGenVertexArrays(1,&VAO);
 glBindVertexArray(VAO);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glVertexAttribPointer(0,4,GL_FLOAT,GL_FALSE,VertexSize,0);
-// glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,VertexSize,(GLvoid*)RgbOffset);
 glEnableVertexAttribArray(0);
-
-// glEnableVertexAttribArray(1);
-
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -283,7 +278,6 @@ t1=steady_clock::now();
 viewportSizeX=(float)w;
 viewportSizeY=(float)h;
 glViewport(0,0,viewportSizeX,viewportSizeY);
-
 glClearColor(1.0f,1.0f,1.0f,1.0f);
 glEnable(GL_DEPTH_TEST);  
 glDepthMask(GL_FALSE);  
