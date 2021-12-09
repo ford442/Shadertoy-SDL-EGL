@@ -252,10 +252,6 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-glEnableClientState(GL_VERTEX_ARRAY);
-glEnableClientState(GL_COLOR_ARRAY);
-glEnableClientState(GL_INDEX_ARRAY);
-glEnableClientState(GL_NORMAL_ARRAY);
 
 glGenVertexArrays(1,&VAO);
 glBindVertexArray(VAO);
