@@ -140,7 +140,7 @@ return shader;
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
-mouseX=viewportSizeX-(float)x;
+mouseX=(float)x;
 mouseY=viewportSizeY-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
