@@ -1,5 +1,3 @@
-#include <cfloat>
-#include <vector>
 #include <algorithm>
 #include <string>
 #include <cstdarg>
@@ -19,53 +17,27 @@ using namespace std;
 using namespace std::chrono;
 using std::string;
 
+struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+
 steady_clock::time_point t1;
 SDL_AudioDeviceID dev;
-EGLDisplay display;
-EGLContext contextegl;
-EGLSurface surface;
-EmscriptenWebGLContextAttributes attr;
-struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-SDL_Window *win;
-SDL_GLContext *glCtx;
-static GLuint shader_program;
-static GLuint VBO,VAO,EBO;
-static GLint attrib_position;
-static GLint sampler_channel[4];
+GLuint shader_program;
+GLint attrib_position;
+GLint sampler_channel[4];
 GLfloat uniform_time;
 GLint uniform_frame;
 GLfloat uniform_res;
 GLfloat uniform_mouse;
-GLfloat mouseX=0.0f;
-GLfloat mouseY=0.0f;
-GLfloat mouseLPressed=0.0f;
-GLfloat mouseRPressed=0.0f;
 GLfloat viewportSizeX=0.0f;
 GLfloat viewportSizeY=0.0f;
 Uint32 buttons;
 long double outTimeA;
-int frame,x,y,h,w;
-typedef struct{
-float XYZW[4];
-float RGBA[4];
-}Vertex;
-
-Vertex vertices[]={
-{-1.0,-1.0,0.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,1.0,1.0,1.0}
-};
-
-GLubyte Indices[]={
-0,1,2,3,4,5
-};
-
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
-const size_t RgbOffset=sizeof(vertices[0].XYZW);
+GLfloat mouseX=0.0f;
+GLfloat mouseY=0.0f;
+GLfloat mouseLPressed=0.0f;
+GLfloat mouseRPressed=0.0f;
+int x,y;
+static int frame;
 
 static const char *read_file(const char *filename){
 char *result=NULL;
@@ -93,35 +65,6 @@ return result;
 }
 return NULL;
 }
-
-static const char common_shader_header_gles3[]=
-"#version 300 es \n"
-"precision highp float; \n"
-"precision highp int; \n";
-
-static const char vertex_shader_body_gles3[]=
-"layout(location=0) in vec4 iPosition;"
-"void main(){"
-"gl_Position=iPosition;"
-"} \n";
-
-static const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;"
-"uniform sampler2D iChannel1;"
-"uniform sampler2D iChannel2;"
-"uniform sampler2D iChannel3;"
-"out vec4 fragColor; \n";
-
-static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
@@ -158,12 +101,77 @@ eglSwapBuffers(display,surface);
 frame++;
 }
 
-static const EGLint attribut_list[]={
+static void strt(){
+int h,w;
+GLuint VBO,VAO,EBO,vtx,frag;
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EmscriptenWebGLContextAttributes attr;
+SDL_Window *win;
+SDL_GLContext *glCtx;
+typedef struct{
+float XYZW[4];
+float RGBA[4];
+}Vertex;
+
+Vertex vertices[]={
+{-1.0,-1.0,0.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,1.0,1.0,1.0}
+};
+
+GLubyte Indices[]={
+0,1,2,3,4,5
+};
+
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
+const size_t RgbOffset=sizeof(vertices[0].XYZW);
+  
+const char common_shader_header_gles3[]=
+"#version 300 es \n"
+"precision highp float; \n"
+"precision highp int; \n";
+
+const char vertex_shader_body_gles3[]=
+"layout(location=0) in vec4 iPosition;"
+"void main(){"
+"gl_Position=iPosition;"
+"} \n";
+
+const char fragment_shader_header_gles3[]=
+"uniform vec3 iResolution;"
+"uniform float iTime;"
+"uniform vec4 iMouse;"
+"uniform sampler2D iChannel0;"
+"uniform sampler2D iChannel1;"
+"uniform sampler2D iChannel2;"
+"uniform sampler2D iChannel3;"
+"out vec4 fragColor; \n";
+
+const char fragment_shader_footer_gles3[]=
+"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
+
+const char* common_shader_header=common_shader_header_gles3;
+const char* vertex_shader_body=vertex_shader_body_gles3;
+const char* fragment_shader_header=fragment_shader_header_gles3;
+const char* fragment_shader_footer=fragment_shader_footer_gles3;
+  
+const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
+  
+EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_NONE};
 
-static const EGLint attribute_list[]={
+const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -178,8 +186,8 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-static void strt(){
-GLuint vtx,frag;
+h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+w=h;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
@@ -217,10 +225,6 @@ eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
-EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_NONE};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 if(contextegl==EGL_NO_CONTEXT){
 }
@@ -229,8 +233,7 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-w=h;
+
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
@@ -280,7 +283,7 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
-glClearColor(1.0f,1.0f,1.0f,1.0f);
+glClearColor(0.0f,1.0f,0.0f,1.0f);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
