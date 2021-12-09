@@ -209,7 +209,7 @@ attr.depth=1;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
-attr.lowLatency=1;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 emscripten_webgl_init_context_attributes(&attr);
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 EGLConfig eglconfig=NULL;
