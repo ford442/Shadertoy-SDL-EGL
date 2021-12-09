@@ -261,7 +261,6 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glVertexAttribPointer(0,4,GL_FLOAT,GL_FALSE,VertexSize,0);
 // glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,VertexSize,(GLvoid*)RgbOffset);
 glEnableVertexAttribArray(0);
-glVertexPointer(4,GL_FLOAT,0,vertices);
 
 // glEnableVertexAttribArray(1);
 glGenBuffers(1,&EBO);
