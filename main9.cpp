@@ -22,8 +22,6 @@ using namespace std::chrono;
 using std::string;
 
 steady_clock::time_point t1;
-Uint8 *stm;
-
 SDL_AudioDeviceID dev;
 EGLDisplay display;
 EGLContext contextegl;
@@ -32,12 +30,12 @@ EmscriptenWebGLContextAttributes attr;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-
 static GLuint shader_program;
 static GLuint VBO,VAO,EBO;
 static GLint attrib_position;
 static GLint sampler_channel[4];
 GLfloat uniform_time;
+GLint uniform_frame;
 GLfloat uniform_res;
 GLfloat uniform_mouse;
 GLfloat mouseX=0.0f;
@@ -48,7 +46,7 @@ GLfloat viewportSizeX=0.0f;
 GLfloat viewportSizeY=0.0f;
 Uint32 buttons;
 long double outTimeA;
-
+int frame,x,y,h,w;
 typedef struct{
 float XYZW[4];
 float RGBA[4];
@@ -71,7 +69,7 @@ const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 const size_t RgbOffset=sizeof(vertices[0].XYZW);
 
-static const char *read_file_into_str(const char *filename){
+static const char *read_file(const char *filename){
 char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
@@ -139,7 +137,6 @@ glCompileShader(shader);
 return shader;
 }
 
-int x,y;
 static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
@@ -157,8 +154,10 @@ steady_clock::time_point t2=steady_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
+glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
+frame++;
 }
 
 static const EGLint attribut_list[]={
@@ -177,14 +176,14 @@ EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_STENCIL_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
 static void strt(){
 GLuint vtx,frag;
 char *fileloc="/shader/shader1.toy";
-string program_source=read_file_into_str(fileloc);
+string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 const char *sources[4];
 const char* texture_files[4];
@@ -210,6 +209,7 @@ attr.depth=1;
 attr.antialias=0;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
+attr.lowLatency=1;
 emscripten_webgl_init_context_attributes(&attr);
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 EGLConfig eglconfig=NULL;
@@ -231,8 +231,8 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-int h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-int w=h;
+h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+w=h;
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
@@ -267,21 +267,23 @@ sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
+uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)w,(float)h,1.0f);
+viewportSizeX=(float)w;
+viewportSizeY=(float)h;
+glViewport(0,0,viewportSizeX,viewportSizeY);
+  
+glEnable(GL_DEPTH_TEST);  
+glDepthMask(GL_FALSE);  
+glDepthFunc(GL_LESS);  
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
-viewportSizeX=(float)w;
-viewportSizeY=(float)h;
-glViewport(0,0,viewportSizeX,viewportSizeY);
 glClearColor(1.0f,1.0f,1.0f,1.0f);
-glEnable(GL_DEPTH_TEST);  
-glDepthMask(GL_FALSE);  
-glDepthFunc(GL_LESS);  
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
