@@ -39,6 +39,24 @@ GLfloat mouseRPressed=0.0f;
 int x,y;
 static int frame;
 
+typedef struct{
+float XYZW[4];
+float RGBA[4];
+}Vertex;
+
+Vertex vertices[]={
+{-1.0,-1.0,0.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,1.0,1.0,1.0}
+};
+
+GLubyte Indices[]={
+0,1,2,3,4,5
+};
+
 static const char *read_file(const char *filename){
 char *result=NULL;
 long length=0;
@@ -105,28 +123,11 @@ static void strt(){
 int h,w;
 GLuint VBO,VAO,EBO,vtx,frag;
 EGLDisplay display;
-EGLContext contextegl;
 EGLSurface surface;
+EGLContext contextegl;
 EmscriptenWebGLContextAttributes attr;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-typedef struct{
-float XYZW[4];
-float RGBA[4];
-}Vertex;
-
-Vertex vertices[]={
-{-1.0,-1.0,0.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,1.0,1.0,1.0}
-};
-
-GLubyte Indices[]={
-0,1,2,3,4,5
-};
 
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
