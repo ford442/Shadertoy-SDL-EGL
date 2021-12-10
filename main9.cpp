@@ -207,7 +207,7 @@ SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
 attr.stencil=1;
 attr.depth=1;
-attr.antialias=0;
+attr.antialias=1;
 attr.premultipliedAlpha=0;
 attr.preserveDrawingBuffer=0;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
