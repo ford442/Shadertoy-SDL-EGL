@@ -254,7 +254,7 @@ glReleaseShaderCompiler();
 glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_DRAW);
 glGenVertexArrays(1,&VAO);
 glBindVertexArray(VAO);
 glGenBuffers(1,&VBO);
