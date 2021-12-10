@@ -41,19 +41,17 @@ static int frame;
 EGLDisplay display;
 EGLSurface surface;
 
-// typedef struct{float XYZW[4];float RGBA[4];}Vertex;
+struct{GLfloat XYZW[4];}Vertex;
 
-GLfloat vertices[]={
--1.0,-1.0,0.0,1.0,
--1.0,1.0,0.0,1.0,
-1.0,-1.0,1.0,1.0,
-1.0,-1.0,1.0,1.0,
--1.0,1.0,0.0,1.0,
-1.0,1.0,1.0,1.0
+Vertex vertices[]={
+{-1.0,-1.0,0.0,1.0},
+{-1.0,1.0,0.0,1.0},
+{1.0,-1.0,1.0,1.0}, 
+{1.0,1.0,1.0,1.0}
 };
 
 GLubyte Indices[]={
-0,1,2,3,4,5
+0,1,2,2,1,3
 };
 
 static const char *read_file(const char *filename){
