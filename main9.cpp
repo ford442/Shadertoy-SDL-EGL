@@ -267,7 +267,7 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 viewportSizeX=(float)w;
 viewportSizeY=(float)h;
-glUniform3f(uniform_res,viewportSizeX,viewportSizeY;
+glUniform3f(uniform_res,viewportSizeX,viewportSizeY);
 glViewport(0,0,viewportSizeX,viewportSizeY);
 glEnable(GL_DEPTH_TEST);  
 glDepthMask(GL_FALSE);  
