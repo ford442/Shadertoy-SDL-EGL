@@ -130,7 +130,6 @@ attr.depth=true;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=true;
-attr.lowLatency=true;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
   
 const size_t BufferSize=sizeof(vertices);
