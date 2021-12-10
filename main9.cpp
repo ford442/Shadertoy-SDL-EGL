@@ -94,7 +94,7 @@ return shader;
 }
 
 static void renderFrame(){
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
 mouseY=viewportSizeY-(float)y;
@@ -120,13 +120,23 @@ static void strt(){
 int h,w;
 GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
-EmscriptenWebGLContextAttributes attr;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-
+EmscriptenWebGLContextAttributes attr;
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=true;
+attr.stencil=true;
+attr.depth=true;
+attr.antialias=false;
+attr.premultipliedAlpha=false;
+attr.preserveDrawingBuffer=true;
+attr.lowlatency=true;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.preferLowPowerToHighPerformance=false;
+  
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
-  
+
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
@@ -204,14 +214,7 @@ SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-attr.alpha=1;
-attr.stencil=0;
-attr.depth=1;
-attr.antialias=0;
-attr.premultipliedAlpha=0;
-attr.preserveDrawingBuffer=0;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-emscripten_webgl_init_context_attributes(&attr);
+  
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
