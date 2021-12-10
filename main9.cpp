@@ -44,12 +44,12 @@ EGLSurface surface;
 // typedef struct{float XYZW[4];float RGBA[4];}Vertex;
 
 GLfloat vertices[]={
-{-1.0,-1.0,0.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,1.0,1.0,1.0}
+-1.0,-1.0,0.0,1.0,
+-1.0,1.0,0.0,1.0,
+1.0,-1.0,1.0,1.0,
+1.0,-1.0,1.0,1.0,
+-1.0,1.0,0.0,1.0,
+1.0,1.0,1.0,1.0
 };
 
 GLubyte Indices[]={
@@ -128,7 +128,6 @@ SDL_GLContext *glCtx;
 
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
-const size_t RgbOffset=sizeof(vertices[0].XYZW);
   
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
