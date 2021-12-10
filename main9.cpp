@@ -41,12 +41,9 @@ static int frame;
 EGLDisplay display;
 EGLSurface surface;
 
-typedef struct{
-float XYZW[4];
-float RGBA[4];
-}Vertex;
+// typedef struct{float XYZW[4];float RGBA[4];}Vertex;
 
-Vertex vertices[]={
+GLfloat vertices[]={
 {-1.0f,-1.0f,0.0f,1.0f},
 {-1.0f,1.0f,0f.0f,1.0f},
 {1.0f,-1.0f,1f.0f,1.0f},
