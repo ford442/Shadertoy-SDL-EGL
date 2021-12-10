@@ -47,12 +47,12 @@ float RGBA[4];
 }Vertex;
 
 Vertex vertices[]={
-{-1.0,-1.0,0.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,1.0,1.0,1.0}
+{-1.0f,-1.0f,0.0f,1.0f},
+{-1.0f,1.0f,0f.0f,1.0f},
+{1.0f,-1.0f,1f.0f,1.0f},
+{1.0f,-1.0f,1f.0f,1.0f},
+{-1.0f,1.0f,0f.0f,1.0f},
+{1.0f,1.0f,1.0f,1.0f}
 };
 
 GLubyte Indices[]={
@@ -234,7 +234,6 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
 emscripten_webgl_make_context_current(ctx);
-
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,0);
 glCtx=&contextegl;
 sources[0]=common_shader_header;
