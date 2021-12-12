@@ -16,7 +16,7 @@
 using namespace std;
 using namespace std::chrono;
 using std::string;
-
+Uint8 *stm;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 steady_clock::time_point t1;
@@ -94,7 +94,7 @@ return shader;
 }
 
 static void renderFrame(){
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
 mouseY=viewportSizeY-(float)y;
@@ -271,8 +271,9 @@ viewportSizeY=(float)h;
 glUniform3f(uniform_res,viewportSizeX,viewportSizeY,1.0f);
 glViewport(0,0,viewportSizeX,viewportSizeY);
 glEnable(GL_DEPTH_TEST);  
-glDepthMask(GL_FALSE);  
-glDepthFunc(GL_LESS);  
+glDepthMask(GL_FALSE);
+glDepthFunc(GL_LESS);
+glEnable(GL_BLEND);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
