@@ -41,6 +41,82 @@ static int frame;
 EGLDisplay display;
 EGLSurface surface;
 
+
+int h,w;
+GLuint VBO,VAO,EBO,vtx,frag;
+EGLContext contextegl;
+SDL_Window *win;
+SDL_GLContext *glCtx;
+EmscriptenWebGLContextAttributes attr;
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=true;
+attr.stencil=true;
+attr.depth=true;
+attr.antialias=false;
+attr.premultipliedAlpha=false;
+attr.preserveDrawingBuffer=false;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+  
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
+
+const char common_shader_header_gles3[]=
+"#version 300 es \n"
+"precision highp float; \n"
+"precision highp int; \n";
+
+const char vertex_shader_body_gles3[]=
+"layout(location=0) in vec4 iPosition;"
+"void main(){"
+"gl_Position=iPosition;"
+"} \n";
+
+const char fragment_shader_header_gles3[]=
+"uniform vec3 iResolution;"
+"uniform float iTime;"
+"uniform vec4 iMouse;"
+"uniform sampler2D iChannel0;"
+"uniform sampler2D iChannel1;"
+"uniform sampler2D iChannel2;"
+"uniform sampler2D iChannel3;"
+"out vec4 fragColor; \n";
+
+const char fragment_shader_footer_gles3[]=
+"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
+
+const char* common_shader_header=common_shader_header_gles3;
+const char* vertex_shader_body=vertex_shader_body_gles3;
+const char* fragment_shader_header=fragment_shader_header_gles3;
+const char* fragment_shader_footer=fragment_shader_footer_gles3;
+  
+const EGLint attribut_list[]={
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_NONE
+};
+  
+EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_NONE};
+
+const EGLint attribute_list[]={
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_BUFFER_SIZE,32,
+EGL_NONE
+};
+
+h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+w=h;
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 
 Vertex vertices[]={
@@ -117,80 +193,6 @@ frame++;
 }
 
 static void strt(){
-int h,w;
-GLuint VBO,VAO,EBO,vtx,frag;
-EGLContext contextegl;
-SDL_Window *win;
-SDL_GLContext *glCtx;
-EmscriptenWebGLContextAttributes attr;
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=true;
-attr.stencil=true;
-attr.depth=true;
-attr.antialias=false;
-attr.premultipliedAlpha=false;
-attr.preserveDrawingBuffer=true;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-  
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
-
-const char common_shader_header_gles3[]=
-"#version 300 es \n"
-"precision highp float; \n"
-"precision highp int; \n";
-
-const char vertex_shader_body_gles3[]=
-"layout(location=0) in vec4 iPosition;"
-"void main(){"
-"gl_Position=iPosition;"
-"} \n";
-
-const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;"
-"uniform sampler2D iChannel1;"
-"uniform sampler2D iChannel2;"
-"uniform sampler2D iChannel3;"
-"out vec4 fragColor; \n";
-
-const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
-
-const char* common_shader_header=common_shader_header_gles3;
-const char* vertex_shader_body=vertex_shader_body_gles3;
-const char* fragment_shader_header=fragment_shader_header_gles3;
-const char* fragment_shader_footer=fragment_shader_footer_gles3;
-  
-const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-EGL_NONE
-};
-  
-EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_NONE};
-
-const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_BUFFER_SIZE,32,
-EGL_NONE
-};
-
-h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-w=h;
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
