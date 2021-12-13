@@ -67,7 +67,7 @@ const char fragment_shader_header_gles3[]=
 "out highp vec4 fragColor; \n";
 
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
@@ -99,8 +99,6 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-
-
 typedef struct{GLfloat XYZW[4];}Vertex;
 
 Vertex vertices[]={
@@ -110,9 +108,7 @@ Vertex vertices[]={
 {1.0,1.0,1.0,1.0}
 };
 
-GLubyte Indices[]={
-0,1,2,2,1,3
-};
+GLubyte Indices[]={0,1,2,2,1,3};
 
 static const char *read_file(const char *filename){
 char *result=NULL;
