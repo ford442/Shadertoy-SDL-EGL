@@ -57,9 +57,9 @@ const char vertex_shader_body_gles3[]=
 "} \n";
 
 const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform vec4 iMouse;"
+"uniform highp vec3 iResolution;"
+"uniform highp float iTime;"
+"uniform highp vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
