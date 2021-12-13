@@ -42,7 +42,6 @@ EGLDisplay display;
 EGLSurface surface;
 
 
-int h,w;
 GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
 SDL_Window *win;
@@ -180,7 +179,8 @@ frame++;
 }
 
 static void strt(){
-  
+  int h,w;
+
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
