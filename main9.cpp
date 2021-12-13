@@ -41,14 +41,12 @@ static int frame;
 EGLDisplay display;
 EGLSurface surface;
 
-
 GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp vec4; \n"
 "precision highp float; \n"
 "precision highp int; \n";
 
