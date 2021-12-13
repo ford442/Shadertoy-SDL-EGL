@@ -44,11 +44,10 @@ EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
 GLuint shader;
-GLsizei i,srclens[nsources];
 int h,w;
 Uint8 *wptr;
 int lft;
-GLsizei nsources;
+GLsizei nsources,i;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -132,7 +131,8 @@ return NULL;
 }
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-for (i=0;i<nsources;++i){
+GLsizei srclens[nsources];
+for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
 shader=glCreateShader(type);
