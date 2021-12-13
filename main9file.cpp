@@ -13,6 +13,9 @@
 #include <iostream>
 #include <ctime>
 
+using namespace std;
+using namespace std::chrono;
+
 Uint8 *stm;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1;
