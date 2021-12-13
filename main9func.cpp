@@ -26,6 +26,8 @@ GLfloat uniform_mouse;
 GLfloat viewportSizeX=0.0f;
 GLfloat viewportSizeY=0.0f;
 static int frame;
+EGLDisplay display;
+EGLSurface surface;
 
 GLubyte Indices[]={0,1,2,2,1,3};
 
@@ -97,8 +99,6 @@ frame++;
 }
 
 static void strt(){
-EGLDisplay display;
-EGLSurface surface;
 GLuint shader_program;
 GLint attrib_position;
 GLint sampler_channel[4];
