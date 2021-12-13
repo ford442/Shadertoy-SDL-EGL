@@ -64,7 +64,7 @@ const char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out vec4 fragColor; \n";
+"out highp vec4 fragColor; \n";
 
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor, gl_FragCoord.xy);} \n";
