@@ -100,8 +100,7 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-w=h;
+
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 
@@ -179,8 +178,9 @@ frame++;
 }
 
 static void strt(){
-  int h,w;
-
+int h,w;
+h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+w=h;
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
