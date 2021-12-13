@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <string>
+#include <cstring>
 #include <cstdarg>
 #include <cmath>
 #include <cstdio>
@@ -13,34 +13,92 @@
 #include <iostream>
 #include <ctime>
 
-using namespace std;
-using namespace std::chrono;
-using std::string;
-Uint8 *stm;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-
 steady_clock::time_point t1;
 SDL_AudioDeviceID dev;
-GLuint shader_program;
-GLint attrib_position;
-GLint sampler_channel[4];
 GLfloat uniform_time;
 GLint uniform_frame;
 GLfloat uniform_res;
 GLfloat uniform_mouse;
 GLfloat viewportSizeX=0.0f;
 GLfloat viewportSizeY=0.0f;
-Uint32 buttons;
-long double outTimeA;
-GLfloat mouseX=0.0f;
-GLfloat mouseY=0.0f;
-GLfloat mouseLPressed=0.0f;
-GLfloat mouseRPressed=0.0f;
-GLint x,y;
 static int frame;
+
+GLubyte Indices[]={0,1,2,2,1,3};
+
+static const char *read_file(const char *filename){
+char *result=NULL;
+long length=0;
+FILE *file=fopen(filename,"r");
+if(file){
+int status=fseek(file,0,SEEK_END);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+length=ftell(file);
+status=fseek(file,0,SEEK_SET);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+result=static_cast<char*>(malloc((length+1)*sizeof(char)));
+if(result){
+size_t actual_length=fread(result,sizeof(char),length,file);
+result[actual_length++]={'\0'};
+} 
+fclose(file);
+return result;
+}
+return NULL;
+}
+
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+GLuint shader;
+GLsizei i,srclens[nsources];
+for (i=0;i<nsources;++i){
+srclens[i]=(GLsizei)strlen(sources[i]);
+}
+shader=glCreateShader(type);
+glShaderSource(shader,nsources,sources,srclens);
+glCompileShader(shader);
+return shader;
+}
+
+static void renderFrame(){
+GLfloat mouseX;
+GLfloat mouseY;
+Uint32 buttons;
+GLfloat mouseLPressed;
+GLfloat mouseRPressed;
+GLint x,y;
+buttons=SDL_GetMouseState(&x,&y);
+mouseX=(float)x;
+mouseY=viewportSizeY-(float)y;
+if((buttons & SDL_BUTTON_LMASK)!=0){
+mouseLPressed=1.0f;
+const float cMouseX=mouseX;
+const float cMouseY=mouseY;
+glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+}else{
+mouseLPressed=0.0f;
+}
+steady_clock::time_point t2=steady_clock::now();
+duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
+long double outTimeA=time_spana.count();
+glUniform1f(uniform_time,(float)outTimeA);
+glUniform1i(uniform_frame,frame);
+glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
+eglSwapBuffers(display,surface);
+frame++;
+}
+
+static void strt(){
 EGLDisplay display;
 EGLSurface surface;
-
+GLuint shader_program;
+GLint attrib_position;
+GLint sampler_channel[4];
 GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
 SDL_Window *win;
@@ -108,70 +166,6 @@ Vertex vertices[]={
 {1.0,1.0,1.0,1.0}
 };
 
-GLubyte Indices[]={0,1,2,2,1,3};
-
-static const char *read_file(const char *filename){
-char *result=NULL;
-long length=0;
-FILE *file=fopen(filename,"r");
-if(file){
-int status=fseek(file,0,SEEK_END);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-length=ftell(file);
-status=fseek(file,0,SEEK_SET);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-result=static_cast<char*>(malloc((length+1)*sizeof(char)));
-if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
-result[actual_length++]={'\0'};
-} 
-fclose(file);
-return result;
-}
-return NULL;
-}
-
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLuint shader;
-GLsizei i,srclens[nsources];
-for (i=0;i<nsources;++i){
-srclens[i]=(GLsizei)strlen(sources[i]);
-}
-shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
-glCompileShader(shader);
-return shader;
-}
-
-static void renderFrame(){
-buttons=SDL_GetMouseState(&x,&y);
-mouseX=(float)x;
-mouseY=viewportSizeY-(float)y;
-if((buttons & SDL_BUTTON_LMASK)!=0){
-mouseLPressed=1.0f;
-const float cMouseX=mouseX;
-const float cMouseY=mouseY;
-glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
-}else{
-mouseLPressed=0.0f;
-}
-steady_clock::time_point t2=steady_clock::now();
-duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
-outTimeA=time_spana.count();
-glUniform1f(uniform_time,(float)outTimeA);
-glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
-eglSwapBuffers(display,surface);
-frame++;
-}
-
-static void strt(){
 int h,w;
 h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 w=h;
