@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <string>
+#include <cstring>
 #include <cstdarg>
 #include <cmath>
 #include <cstdio>
@@ -15,11 +15,10 @@
 
 using namespace std;
 using namespace std::chrono;
-using std::string;
-Uint8 *stm;
+char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-
 steady_clock::time_point t1;
+steady_clock::time_point t2;
 SDL_AudioDeviceID dev;
 GLuint shader_program;
 GLint attrib_position;
@@ -28,62 +27,62 @@ GLfloat uniform_time;
 GLint uniform_frame;
 GLfloat uniform_res;
 GLfloat uniform_mouse;
-GLfloat viewportSizeX=0.0f;
-GLfloat viewportSizeY=0.0f;
+GLfloat viewportSizeX;
+GLfloat viewportSizeY;
 Uint32 buttons;
 long double outTimeA;
-GLfloat mouseX=0.0f;
-GLfloat mouseY=0.0f;
-GLfloat mouseLPressed=0.0f;
-GLfloat mouseRPressed=0.0f;
+GLfloat mouseX;
+GLfloat mouseY;
+GLfloat mouseLPressed;
+GLfloat mouseRPressed;
 GLint x,y;
 static int frame;
 EGLDisplay display;
 EGLSurface surface;
-
 GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
+GLuint shader;
+GLsizei i,srclens[nsources];
+const float cMouseX;
+const float cMouseY;
+int h,w;
+Uint8 *wptr;
+int lft;
+
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
 "precision highp int; \n";
-
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
-
 const char fragment_shader_header_gles3[]=
 "uniform highp vec3 iResolution;"
 "uniform highp float iTime;"
-"uniform highp vec4 iMouse;"
+"uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 "out highp vec4 fragColor; \n";
-
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
-
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
-  
 const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
-  
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
-
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -98,18 +97,14 @@ EGL_DEPTH_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
-
 typedef struct{GLfloat XYZW[4];}Vertex;
-
 Vertex vertices[]={
 {-1.0,-1.0,0.0,1.0},
 {-1.0,1.0,0.0,1.0},
 {1.0,-1.0,1.0,1.0}, 
 {1.0,1.0,1.0,1.0}
 };
-
 GLubyte Indices[]={0,1,2,2,1,3};
-
 static const char *read_file(const char *filename){
 char *result=NULL;
 long length=0;
@@ -138,8 +133,6 @@ return NULL;
 }
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLuint shader;
-GLsizei i,srclens[nsources];
 for (i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
@@ -155,13 +148,13 @@ mouseX=(float)x;
 mouseY=viewportSizeY-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-const float cMouseX=mouseX;
-const float cMouseY=mouseY;
+cMouseX=mouseX;
+cMouseY=mouseY;
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
 }
-steady_clock::time_point t2=steady_clock::now();
+t2=steady_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
@@ -172,7 +165,6 @@ frame++;
 }
 
 static void strt(){
-int h,w;
 h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 w=h;
 EmscriptenWebGLContextAttributes attr;
@@ -299,8 +291,6 @@ qu(2);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
-Uint8 *wptr;
-int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
@@ -315,7 +305,6 @@ SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
 static void plt(){
-char flnm[16];
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
