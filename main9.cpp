@@ -48,6 +48,12 @@ SDL_Window *win;
 SDL_GLContext *glCtx;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
+"precision highp mat2; \n"
+"precision highp mat3; \n"
+"precision highp mat4; \n"
+"precision highp vec2; \n"
+"precision highp vec3; \n"
+"precision highp vec4; \n"
 "precision highp float; \n"
 "precision highp int; \n";
 
