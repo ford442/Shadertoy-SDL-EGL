@@ -47,19 +47,6 @@ GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-EmscriptenWebGLContextAttributes attr;
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=true;
-attr.stencil=true;
-attr.depth=true;
-attr.antialias=false;
-attr.premultipliedAlpha=false;
-attr.preserveDrawingBuffer=false;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-  
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
-
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
@@ -193,6 +180,20 @@ frame++;
 }
 
 static void strt(){
+  
+EmscriptenWebGLContextAttributes attr;
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=true;
+attr.stencil=true;
+attr.depth=true;
+attr.antialias=false;
+attr.premultipliedAlpha=false;
+attr.preserveDrawingBuffer=false;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+  
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
+
 char *fileloc="/shader/shader1.toy";
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
