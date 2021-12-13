@@ -15,7 +15,7 @@
 
 using namespace std;
 using namespace std::chrono;
-using std::string;
+
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1;
 SDL_AudioDeviceID dev;
