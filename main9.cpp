@@ -45,11 +45,10 @@ SDL_Window *win;
 SDL_GLContext *glCtx;
 GLuint shader;
 GLsizei i,srclens[nsources];
-const float cMouseX;
-const float cMouseY;
 int h,w;
 Uint8 *wptr;
 int lft;
+GLsizei nsources;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -148,8 +147,8 @@ mouseX=(float)x;
 mouseY=viewportSizeY-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
-cMouseX=mouseX;
-cMouseY=mouseY;
+const float cMouseX=mouseX;
+const float cMouseY=mouseY;
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
