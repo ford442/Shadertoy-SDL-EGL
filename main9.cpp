@@ -15,44 +15,33 @@
 
 using namespace std;
 using namespace std::chrono;
+
 char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-steady_clock::time_point t1;
-steady_clock::time_point t2;
+steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint shader_program;
-GLint attrib_position;
-GLint sampler_channel[4];
-GLfloat uniform_time;
-GLint uniform_frame;
-GLfloat uniform_res;
-GLfloat uniform_mouse;
-GLfloat viewportSizeX;
-GLfloat viewportSizeY;
+GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader;
+GLint attrib_position,sampler_channel[4],uniform_frame,x,y;
+GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeX,viewportSizeY,mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
 long double outTimeA;
-GLfloat mouseX;
-GLfloat mouseY;
-GLfloat mouseLPressed;
-GLfloat mouseRPressed;
-GLint x,y;
-static int frame;
 EGLDisplay display;
 EGLSurface surface;
-GLuint VBO,VAO,EBO,vtx,frag;
 EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-GLuint shader;
-int h,w;
+int h,w,lft,frame;
 Uint8 *wptr;
-int lft;
 GLsizei nsources,i;
+EGLint config_size,major,minor;
+EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
 "precision highp int; \n";
+"precision highp uint; \n";
+"precision highp double; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
@@ -86,11 +75,11 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_STENCIL_SIZE,32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_STENCIL_SIZE,8,
 EGL_DEPTH_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
@@ -103,6 +92,12 @@ Vertex vertices[]={
 {1.0,1.0,1.0,1.0}
 };
 GLubyte Indices[]={0,1,2,2,1,3};
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
+char *fileloc="/shader/shader1.toy";
+const char *sources[4];
+const char *texture_files[4];
+
 static const char *read_file(const char *filename){
 char *result=NULL;
 long length=0;
@@ -163,15 +158,7 @@ eglSwapBuffers(display,surface);
 frame++;
 }
 
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
-char *fileloc="/shader/shader1.toy";
-EGLConfig eglconfig=NULL;
-EGLint config_size,major,minor;
-
 static void strt(){
-const char *sources[4];
-const char *texture_files[4];
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
@@ -188,18 +175,17 @@ attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
-SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -257,6 +243,7 @@ viewportSizeY=(float)h;
 glUniform3f(uniform_res,viewportSizeX,viewportSizeY,1.0f);
 glViewport(0,0,viewportSizeX,viewportSizeY);
 glEnable(GL_DEPTH_TEST);  
+glEnable(GL_STENCIL_TEST);  
 glDepthMask(GL_FALSE);
 glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
