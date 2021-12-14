@@ -66,8 +66,8 @@ static const char vertex_shader_body_gles3[]=
 "}\n\0";
 
 static const char fragment_shader_header_gles3[]=
-"in vec3 ourColor;\n"
-"out vec4 FragColor;\n";
+"in highp vec3 ourColor;\n"
+"out highp vec4 FragColor;\n";
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
