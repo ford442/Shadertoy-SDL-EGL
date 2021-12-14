@@ -61,9 +61,9 @@ static const char common_shader_header_gles3[]=
 "precision highp int;\n";
 
 static const char vertex_shader_body_gles3[]=
-"layout (location = 0) in highp vec3 aPos;"
-"layout (location = 1) in highp vec3 aColor;"
-"out highp vec3 ourColor;"
+"layout (location = 0) in vec3 aPos;"
+"layout (location = 1) in vec3 aColor;"
+"out vec3 ourColor;"
 "void main()"
 "{"
 "gl_Position = highp vec4(aPos, 1.0);"
@@ -71,11 +71,11 @@ static const char vertex_shader_body_gles3[]=
 "}\n\0";
 
 static const char fragment_shader_header_gles3[]=
-"uniform highp vec3 iResolution;"
-"uniform highp float iTime;"
+"uniform vec3 iResolution;"
+"uniform float iTime;"
 "uniform vec4 iMouse;"
-"in highp vec3 ourColor;\n"
-"out highp vec4 FragColor;\n";
+"in vec3 ourColor;\n"
+"out vec4 FragColor;\n";
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
