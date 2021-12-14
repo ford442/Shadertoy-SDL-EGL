@@ -1,12 +1,8 @@
-#include <float.h>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <stdarg.h>
-#include <stdbool.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cmath>
+#include <cstdio>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -14,8 +10,7 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include <unistd.h>
-#include <time.h>
+#include <ctime>
 
 using namespace std;
 using namespace std::chrono;
@@ -26,6 +21,12 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 using std::string;
 steady_clock::time_point t1;
+steady_clock::time_point t2;
+GLfloat uniform_time;
+GLint uniform_frame;
+GLfloat uniform_res;
+GLfloat uniform_mouse;
+
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -60,18 +61,21 @@ static const char common_shader_header_gles3[]=
 "precision highp int;\n";
 
 static const char vertex_shader_body_gles3[]=
-"layout (location = 0) in vec3 aPos;"
-"layout (location = 1) in vec3 aColor;"
-"out vec3 ourColor;"
+"layout (location = 0) in highp vec3 aPos;"
+"layout (location = 1) in highp vec3 aColor;"
+"out highp vec3 ourColor;"
 "void main()"
 "{"
-"gl_Position = vec4(aPos, 1.0);"
+"gl_Position = highp vec4(aPos, 1.0);"
 "ourColor = aColor;"
 "}\n\0";
 
 static const char fragment_shader_header_gles3[]=
-"in vec3 ourColor;\n"
-"out vec4 FragColor;\n";
+"uniform highp vec3 iResolution;"
+"uniform highp float iTime;"
+"uniform vec4 iMouse;"
+"in highp vec3 ourColor;\n"
+"out highp vec4 FragColor;\n";
 
 static const char fragment_shader_footer_gles3[]=
 "\n\0";
@@ -89,19 +93,18 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 GLuint shader_program;
-GLfloat mouseX=0.0f;
-GLfloat mouseY=0.0f;
-GLfloat mouseLPressed=0.0f;
-GLfloat mouseRPressed=0.0f;
-GLfloat viewportSizeX=0.0f;
-GLfloat viewportSizeY=0.0f;
+GLfloat mouseX;
+GLfloat mouseY;
+GLfloat mouseLPressed;
+GLfloat mouseRPressed;
+GLfloat viewportSizeX;
+GLfloat viewportSizeY;
 GLfloat abstime;
-
-// static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
+GLuint shader;
+GLsizei i;
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLuint shader;
-GLsizei i,srclens[nsources];
+GLsizei srclens[nsources];
 for (i=0;i<nsources;++i){
 SDL_Log("GL Shader: %s",sources[i]);
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -127,7 +130,7 @@ static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-steady_clock::time_point t2=steady_clock::now();
+t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
 outTimeA=time_spana.count();
 abstime=outTimeA*1000;
@@ -178,17 +181,6 @@ ink[2]=white;
 ink[0]=white/100;
 }
 
-glClearColor(ink[0],ink[1],ink[2],ink[3]);
-glGenVertexArrays(1,&VAO);
-glGenBuffers(1,&VBO);
-glBindVertexArray(VAO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)0);
-glEnableVertexAttribArray(0);
-glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
-glEnableVertexAttribArray(1);
-glUseProgram(shader_program);
 glDrawArrays(GL_TRIANGLES,0,360);
 eglSwapBuffers(display,surface);
 }
@@ -212,16 +204,17 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-static void strt(){
 int ii;
+GLuint vtx,frag;
+const char *sources[4];
+
+static void strt(){
 for(ii=0;ii<2161;ii++){
 vertices[ii]=0.0f;
 }
-GLuint vtx,frag;
 char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-const char *sources[4];
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
@@ -284,7 +277,29 @@ SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 viewportSizeX=w;
 viewportSizeY=h;
-glClearColor(0.0f,1.0f,0.0f,1.0f);
+uniform_time=glGetUniformLocation(shader_program,"iTime");
+uniform_frame=glGetUniformLocation(shader_program,"iFrame");
+uniform_res=glGetUniformLocation(shader_program,"iResolution");
+uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
+viewportSizeX=(float)w;
+viewportSizeY=(float)h;
+glUniform3f(uniform_res,viewportSizeX,viewportSizeY,1.0f);
+glViewport(0,0,viewportSizeX,viewportSizeY);
+glEnable(GL_DEPTH_TEST);  
+glDepthMask(GL_FALSE);
+glDepthFunc(GL_LESS);
+glEnable(GL_BLEND);
+glClearColor(ink[0],ink[1],ink[2],ink[3]);
+glGenVertexArrays(1,&VAO);
+glGenBuffers(1,&VBO);
+glBindVertexArray(VAO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)0);
+glEnableVertexAttribArray(0);
+glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void*)(3*sizeof(float)));
+glEnableVertexAttribArray(1);
+glUseProgram(shader_program);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 
@@ -306,9 +321,9 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
 Uint8 *wptr;
 int lft;
+static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
@@ -322,8 +337,8 @@ wave.pos=0;
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
+char flnm[16];
 static void plt(){
-char flnm[1024];
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
