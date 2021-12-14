@@ -162,11 +162,7 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
-const char *sources[4];
-const char *texture_files[4];
-for (int i=0;i<4;++i) {
-texture_files[i]=NULL;
-}
+
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
@@ -174,6 +170,11 @@ EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
 
 static void strt(){
+const char *sources[4];
+const char *texture_files[4];
+for (int i=0;i<4;++i) {
+texture_files[i]=NULL;
+}
 h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 w=h;
 EmscriptenWebGLContextAttributes attr;
