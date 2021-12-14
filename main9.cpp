@@ -40,14 +40,13 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
 "precision highp int; \n";
-"precision highp uint; \n";
-"precision highp double; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
 const char fragment_shader_header_gles3[]=
+"#define vec3 highp vec3"
 "uniform highp vec3 iResolution;"
 "uniform highp float iTime;"
 "uniform vec4 iMouse;"
