@@ -39,22 +39,20 @@ EGLConfig eglconfig=NULL;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float; \n"
-"precision highp int; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
 const char fragment_shader_header_gles3[]=
-"precision highp vec3; \n";
-"uniform highp vec3 iResolution;"
-"uniform highp float iTime;"
+"uniform vec3 iResolution;"
+"uniform float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out highp vec4 fragColor; \n";
+"out vec4 fragColor; \n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
@@ -220,7 +218,7 @@ glReleaseShaderCompiler();
 glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
 glGenVertexArrays(1,&VAO);
 glBindVertexArray(VAO);
 glGenBuffers(1,&VBO);
