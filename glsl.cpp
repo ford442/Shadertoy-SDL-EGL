@@ -66,7 +66,7 @@ static const char vertex_shader_body_gles3[]=
 "out vec3 ourColor;"
 "void main()"
 "{"
-"gl_Position = highp vec4(aPos, 1.0);"
+"gl_Position = vec4(aPos, 1.0);"
 "ourColor = aColor;"
 "}\n\0";
 
