@@ -38,7 +38,7 @@ EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float; \n"
+"precision highp float; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
