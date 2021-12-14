@@ -46,7 +46,7 @@ const char vertex_shader_body_gles3[]=
 "gl_Position=iPosition;"
 "} \n";
 const char fragment_shader_header_gles3[]=
-"#define vec3 highp vec3"
+"precision highp vec3; \n";
 "uniform highp vec3 iResolution;"
 "uniform highp float iTime;"
 "uniform vec4 iMouse;"
