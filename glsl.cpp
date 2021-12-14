@@ -1,12 +1,8 @@
-#include <float.h>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <stdarg.h>
-#include <stdbool.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cmath>
+#include <cstdio>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -14,8 +10,7 @@
 #include <emscripten/html5.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include <unistd.h>
-#include <time.h>
+#include <ctime>
 
 using namespace std;
 using namespace std::chrono;
@@ -26,6 +21,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 using std::string;
 steady_clock::time_point t1;
+steady_clock::time_point t2;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -97,8 +93,6 @@ GLfloat viewportSizeX=0.0f;
 GLfloat viewportSizeY=0.0f;
 GLfloat abstime;
 
-// static const GLfloat vertices[]={-1.0f,-1.0f,1.0f,-1.0f,-1.0f,1.0f,1.0f,1.0f};
-
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLuint shader;
 GLsizei i,srclens[nsources];
@@ -127,7 +121,7 @@ static void renderFrame(){
 glClear(GL_COLOR_BUFFER_BIT);
 siz=0.42;
 SDL_PumpEvents();
-steady_clock::time_point t2=steady_clock::now();
+t2=steady_clock::now();
 duration<double> time_spana=duration_cast<duration<double>>(t2 - t1);
 outTimeA=time_spana.count();
 abstime=outTimeA*1000;
@@ -202,34 +196,37 @@ static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,16,
-EGL_STENCIL_SIZE,16,
-EGL_DEPTH_SIZE,16,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_STENCIL_SIZE,8,
+EGL_DEPTH_SIZE,8,
+EGL_BUFFER_SIZE,8,
 EGL_NONE
 };
-
-static void strt(){
 int ii;
+GLuint vtx,frag;
+char *fileloc="/shader/shader1.glsl";
+static void strt(){
 for(ii=0;ii<2161;ii++){
 vertices[ii]=0.0f;
 }
-GLuint vtx,frag;
-char *fileloc="/shader/shader1.glsl";
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 const char *sources[4];
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
+SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 attr.alpha=1;
 attr.stencil=1;
@@ -306,9 +303,9 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
 Uint8 *wptr;
 int lft;
+static void SDLCALL bfr(void *unused,Uint8 *stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
@@ -322,8 +319,8 @@ wave.pos=0;
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
+char flnm[16];
 static void plt(){
-char flnm[1024];
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
