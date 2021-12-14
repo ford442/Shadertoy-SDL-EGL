@@ -71,9 +71,6 @@ static const char vertex_shader_body_gles3[]=
 "}\n\0";
 
 static const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform vec4 iMouse;"
 "in vec3 ourColor;\n"
 "out vec4 FragColor;\n";
 
