@@ -162,6 +162,16 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
+const char *sources[4];
+const char *texture_files[4];
+for (int i=0;i<4;++i) {
+texture_files[i]=NULL;
+}
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
+char *fileloc="/shader/shader1.toy";
+EGLConfig eglconfig=NULL;
+EGLint config_size,major,minor;
 
 static void strt(){
 h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -175,18 +185,8 @@ attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-  
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
-
-char *fileloc="/shader/shader1.toy";
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-const char *sources[4];
-const char* texture_files[4];
-for (int i=0;i<4;++i) {
-texture_files[i]=NULL;
-}
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
@@ -200,10 +200,7 @@ SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-  
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
-EGLConfig eglconfig=NULL;
-EGLint config_size,major,minor;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
