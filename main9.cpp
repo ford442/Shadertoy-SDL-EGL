@@ -47,8 +47,6 @@ const char vertex_shader_body_gles3[]=
 "} \n";
 const char fragment_shader_header_gles3[]=
 "#define GL_FRAGMENT_PRECISION_HIGH 1 \n"
-"precision highp sampler2d;"
-"precision highp samplerCube;"
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform vec4 iMouse;"
