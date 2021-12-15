@@ -40,10 +40,9 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#define GL_FRAGMENT_PRECISION_HIGH 1 \n"
 "precision highp float;"
-"precision highp int;"
-"precision highp sampler2D; \n";
+"precision highp int; \n";
 const char vertex_shader_body_gles3[]=
-"layout(location=0) in vec4 iPosition;"
+"layout(location=0)in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
