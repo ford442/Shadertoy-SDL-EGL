@@ -22,7 +22,7 @@ steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader;
 GLint attrib_position,sampler_channel[4],uniform_frame,x,y;
-GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeX,viewportSizeY,mouseX,mouseY,mouseLPressed,mouseRPressed;
+GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeS,mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
 long double outTimeA;
 EGLDisplay display;
@@ -30,7 +30,8 @@ EGLSurface surface;
 EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-int h,w,lft,frame;
+GLsizei S;
+int lft,frame;
 Uint8 *wptr;
 GLsizei nsources,i;
 EGLint config_size,major,minor;
@@ -38,7 +39,11 @@ EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float; \n";
+"#define GL_FRAGMENT_PRECISION_HIGH 1 \n"
+"precision highp float;"
+"precision highp int;"
+"precision highp samplerCube;";
+"precision highp sampler2D; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
 "void main(){"
@@ -136,7 +141,7 @@ return shader;
 static void renderFrame(){
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
-mouseY=viewportSizeY-(float)y;
+mouseY=viewportSizeS-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 const float cMouseX=mouseX;
@@ -159,8 +164,7 @@ static void strt(){
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
 }
-h=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-w=h;
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
@@ -235,10 +239,9 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-viewportSizeX=(float)w;
-viewportSizeY=(float)h;
-glUniform3f(uniform_res,viewportSizeX,viewportSizeY,1.0f);
-glViewport(0,0,viewportSizeX,viewportSizeY);
+viewportSizeS=(float)S;
+glUniform3f(uniform_res,viewportSizeS,viewportSizeS,0.0f);
+glViewport(0,0,viewportSizeS,viewportSizeS);
 glEnable(GL_DEPTH_TEST);  
 glEnable(GL_STENCIL_TEST);  
 glDepthMask(GL_FALSE);
