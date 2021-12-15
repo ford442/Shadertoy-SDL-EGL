@@ -42,7 +42,7 @@ const char common_shader_header_gles3[]=
 "#define GL_FRAGMENT_PRECISION_HIGH 1 \n"
 "precision highp float;"
 "precision highp int;"
-"precision highp samplerCube;";
+"precision highp samplerCube;"
 "precision highp sampler2D; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0) in vec4 iPosition;"
