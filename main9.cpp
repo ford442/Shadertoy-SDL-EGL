@@ -37,7 +37,7 @@ EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
-"#version 320 es \n"
+"#version 300 es \n"
 "precision highp float;"
 "precision highp int; \n";
 const char vertex_shader_body_gles3[]=
