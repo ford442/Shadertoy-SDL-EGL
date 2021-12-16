@@ -53,7 +53,7 @@ const char fragment_shader_header_gles3[]=
 "in highp vec3 ourColor;"
 "out highp vec4 FragColor;\n";
 const char fragment_shader_footer_gles3[]=
-"";
+"\n\0";
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
