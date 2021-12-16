@@ -37,16 +37,23 @@ EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
-"#version 300 es \n";
-
+"#version 300 es\n"
+"precision highp float;"
+"precision highp int;\n";
 const char vertex_shader_body_gles3[]=
-"in vec2 vertPos;out vec4 color;const vec4 white=vec4(1.0);const vec4 funkyColor=vec4(0.33);void main(){color=white;gl_Position=vec4(vertPos,0.0,1.0);} \n";
-
+"layout(location=0)in vec3 aPos;"
+"layout(location=1)in vec3 aColor;"
+"out vec3 ourColor;"
+"void main()"
+"{"
+"gl_Position=vec4(aPos,1.0);"
+"ourColor=aColor;"
+"}\n\0";
 const char fragment_shader_header_gles3[]=
-" \n";
-
+"in highp vec3 ourColor;"
+"out highp vec4 FragColor;\n";
 const char fragment_shader_footer_gles3[]=
-" \n";
+"\n\0";
 
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
