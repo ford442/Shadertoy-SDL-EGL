@@ -150,6 +150,7 @@ outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLE_STRIP,3,GL_UNSIGNED_BYTE,Indices);
+glFinish();
 eglSwapBuffers(display,surface);
 frame++;
 }
@@ -253,7 +254,7 @@ SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT);
-emscripten_set_main_loop((void (*)())renderFrame,0,0);
+emscripten_set_main_loop((void (*)())renderFrame,40,1);
 }
 static void cls_aud(){
 if(dev!=0){
