@@ -77,7 +77,7 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
+EGL_ALPHA_SIZE,0,
 EGL_STENCIL_SIZE,0,
 EGL_DEPTH_SIZE,0,
 EGL_BUFFER_SIZE,32,
@@ -150,7 +150,6 @@ outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_BYTE,Indices);
-glFinish();
 eglSwapBuffers(display,surface);
 frame++;
 }
@@ -162,7 +161,7 @@ texture_files[i]=NULL;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=true;
+attr.alpha=false;
 attr.stencil=false;
 attr.depth=false;
 attr.antialias=false;
@@ -179,7 +178,8 @@ SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
