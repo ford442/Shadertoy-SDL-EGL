@@ -169,7 +169,7 @@ char *fileloc="/shader/shader1.toy";
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
 
-EM_JS(char,graf,(),{return document.getElementById("frag").innerHTML;});
+EM_JS(std::string,graf,(),{return document.getElementById("frag").innerHTML;});
 
 static void strt(){
 const char *sources[4];
