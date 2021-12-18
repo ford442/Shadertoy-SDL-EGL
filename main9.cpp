@@ -84,13 +84,10 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={
-{-1.0,-1.0,0.0,1.0},
-{-1.0,1.0,0.0,1.0},
-{1.0,-1.0,1.0,1.0}, 
-{1.0,1.0,1.0,1.0}
-};
-GLubyte Indices[]={0,1,2,2,1,3};
+// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
+
+Vertex vertices[]={{-1.0,-1.0},{3.0,-1.0},{-1.0,3.0}};
+GLubyte Indices[]={0,1,2};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
@@ -152,7 +149,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
@@ -225,7 +222,7 @@ glBindVertexArray(VAO);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(0,4,GL_FLOAT,GL_TRUE,VertexSize,0);
+glVertexAttribPointer(0,2,GL_FLOAT,GL_TRUE,VertexSize,0);
 glEnableVertexAttribArray(0);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
