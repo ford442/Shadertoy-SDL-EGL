@@ -39,7 +39,7 @@ EGLConfig eglconfig=NULL;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
-"precision mediump sampler3D;"
+"precision highp sampler3D;"
 "precision highp int; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
@@ -48,13 +48,13 @@ const char vertex_shader_body_gles3[]=
 "} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform float iTime;"
+"uniform highp float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out vec4 fragColor; \n";
+"out highp vec4 fragColor; \n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
@@ -83,7 +83,7 @@ EGL_DEPTH_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
-typedef struct{GLfloat XYZW[4];}Vertex;
+typedef struct{GLfloat XYZW[2];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 
 Vertex vertices[]={{-1.0,-1.0},{3.0,-1.0},{-1.0,3.0}};
@@ -149,7 +149,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLE_STRIP,3,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLE,3,GL_UNSIGNED_BYTE,Indices);
 glFinish();
 eglSwapBuffers(display,surface);
 frame++;
@@ -162,7 +162,7 @@ texture_files[i]=NULL;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=false;
+attr.alpha=true;
 attr.stencil=false;
 attr.depth=false;
 attr.antialias=false;
