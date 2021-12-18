@@ -186,7 +186,7 @@ attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-auto frgg=EM_ASM({return document.getElementById("frag").innerHTML;})
+auto frgg=EM_ASM({return document.getElementById("frag").innerHTML;});
 string program_source=frgg;
 const char* default_fragment_shader=program_source.c_str();
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
@@ -255,7 +255,7 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 viewportSizeX=(float)w;
 viewportSizeY=(float)h;
-glUniform3f(uniform_res,viewportSizeX,viewportSizeY,1.0f);
+glUniform3f(uniform_res,viewportSizeX,viewportSizeY,0.0f);
 glViewport(0,0,viewportSizeX,viewportSizeY);
 glEnable(GL_DEPTH_TEST);  
 glDepthMask(GL_FALSE);
