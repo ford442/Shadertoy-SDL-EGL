@@ -169,7 +169,8 @@ char *fileloc="/shader/shader1.toy";
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
 
-EM_JS(std::string,graf,(),{return document.getElementById("frag").innerHTML;});
+EM_JS(char*,graf,(),{return document.getElementById("frag").innerHTML;});
+string program_source=graf();
 
 static void strt(){
 const char *sources[4];
@@ -188,7 +189,6 @@ attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-string program_source=graf();
 SDL_Log("GRAF: %s",program_source.c_str());
 const char* default_fragment_shader=program_source.c_str();
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
