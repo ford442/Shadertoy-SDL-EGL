@@ -170,7 +170,7 @@ EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
 
 EM_JS(char*,graf,(),{return document.getElementById("frag").innerHTML;});
-char* program_source=graf();
+static const char* program_source=graf();
 
 static void strt(){
 const char *sources[4];
