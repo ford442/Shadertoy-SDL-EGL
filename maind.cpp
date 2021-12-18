@@ -186,7 +186,7 @@ attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-auto frgg=EM_ASM({return document.getElementById("frag").innerHTML;});
+char frgg=EM_ASM({return document.getElementById("frag").innerHTML;});
 string program_source=frgg;
 const char* default_fragment_shader=program_source.c_str();
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
