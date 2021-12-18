@@ -169,6 +169,8 @@ char *fileloc="/shader/shader1.toy";
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
 
+EM_JS(char,graf,(),{return document.getElementById("frag").innerHTML;});
+
 static void strt(){
 const char *sources[4];
 const char *texture_files[4];
@@ -186,8 +188,7 @@ attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-char frgg=EM_ASM({return document.getElementById("frag").innerHTML;});
-string program_source=frgg;
+string program_source=graf();
 const char* default_fragment_shader=program_source.c_str();
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
