@@ -246,8 +246,8 @@ glViewport(0,0,viewportSizeS,viewportSizeS);
 glEnable(GL_BLEND);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glHint(FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx,'EXT_color_buffer_float');
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+emscripten_webgl_enable_extension(ctx,GL_EXT_color_buffer_float);
 
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
