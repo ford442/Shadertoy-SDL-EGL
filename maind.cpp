@@ -189,6 +189,7 @@ attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 string program_source=graf();
+SDL_Log("GRAF: %s",program_source);
 const char* default_fragment_shader=program_source.c_str();
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
