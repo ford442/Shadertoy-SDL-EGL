@@ -149,7 +149,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLE_STRIP,3,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
