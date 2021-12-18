@@ -169,8 +169,8 @@ char *fileloc="/shader/shader1.toy";
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor;
 
-EM_JS(basic_string<char>,graf,(),{return document.getElementById("frag").innerHTML;});
-string program_source=graf();
+EM_JS(char*,graf,(),{return document.getElementById("frag").innerHTML;});
+char program_source=graf();
 
 static void strt(){
 const char *sources[4];
