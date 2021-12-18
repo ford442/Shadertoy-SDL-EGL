@@ -240,11 +240,11 @@ glViewport(0,0,viewportSizeS,viewportSizeS);
 // glEnable(GL_STENCIL_TEST);  
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LEQUAL);
-glEnable(GL_BLEND);
-glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// glEnable(GL_BLEND);
+// glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
@@ -252,7 +252,7 @@ SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
