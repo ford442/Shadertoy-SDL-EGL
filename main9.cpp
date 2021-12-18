@@ -239,7 +239,7 @@ viewportSizeS=(float)S;
 glUniform3f(uniform_res,viewportSizeS,viewportSizeS,0.0f);
 glViewport(0,0,viewportSizeS,viewportSizeS);
 glEnable(GL_DEPTH_TEST);  
-glEnable(GL_STENCIL_TEST);  
+// glEnable(GL_STENCIL_TEST);  
 glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
