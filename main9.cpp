@@ -39,6 +39,7 @@ EGLConfig eglconfig=NULL;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
+"precision mediump sampler3D;"
 "precision highp int; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
@@ -242,8 +243,12 @@ glViewport(0,0,viewportSizeS,viewportSizeS);
 // glEnable(GL_STENCIL_TEST);  
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LEQUAL);
-// glEnable(GL_BLEND);
-
+glEnable(GL_BLEND);
+glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glHint(FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+emscripten_webgl_enable_EXT_color_buffer_float(ctx)
+  
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
