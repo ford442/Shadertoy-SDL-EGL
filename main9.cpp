@@ -255,7 +255,7 @@ SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT);
-emscripten_set_main_loop((void (*)())renderFrame,0,1);
+emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
 if(dev!=0){
