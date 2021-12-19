@@ -39,8 +39,9 @@ EGLConfig eglconfig=NULL;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
-"precision highp sampler3D;"
-"precision highp int; \n";
+// "precision highp sampler3D;"
+// "precision highp sampler2D;"
+// "precision highp int; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
 "void main(){"
@@ -48,13 +49,13 @@ const char vertex_shader_body_gles3[]=
 "} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform highp float iTime;"
+"uniform float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out highp vec4 fragColor; \n";
+"out vec4 fragColor; \n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
@@ -74,20 +75,20 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
 EGL_ALPHA_SIZE,0,
 EGL_STENCIL_SIZE,0,
 EGL_DEPTH_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
-typedef struct{GLfloat XYZW[2];}Vertex;
-// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
+typedef struct{GLfloat XYZW[4];}Vertex;
+ Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 
-Vertex vertices[]={{-1.0,-1.0},{3.0,-1.0},{-1.0,3.0}};
-GLubyte Indices[]={0,1,2};
+// Vertex vertices[]={{-1.0,-1.0},{3.0,-1.0},{-1.0,3.0}};
+GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
@@ -149,7 +150,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,(float)outTimeA);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
@@ -170,16 +171,16 @@ attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
@@ -223,7 +224,7 @@ glBindVertexArray(VAO);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(0,2,GL_FLOAT,GL_TRUE,VertexSize,0);
+glVertexAttribPointer(0,4,GL_FLOAT,GL_TRUE,VertexSize,0);
 glEnableVertexAttribArray(0);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
