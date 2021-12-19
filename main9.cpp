@@ -38,7 +38,7 @@ EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float;"
+"precision highp float;";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 // "precision highp int; \n";
