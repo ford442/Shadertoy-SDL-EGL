@@ -41,7 +41,7 @@ const char common_shader_header_gles3[]=
 "precision highp float;";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
-// "precision highp int; \n";
+"precision highp int; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
 "void main(){"
@@ -85,9 +85,7 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 typedef struct{GLfloat XYZW[4];}Vertex;
- Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-
-// Vertex vertices[]={{-1.0,-1.0},{3.0,-1.0},{-1.0,3.0}};
+Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
@@ -238,15 +236,11 @@ uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 viewportSizeS=(float)S;
 glUniform3f(uniform_res,viewportSizeS,viewportSizeS,0.0f);
 glViewport(0,0,viewportSizeS,viewportSizeS);
-// glEnable(GL_DEPTH_TEST);  
-// glEnable(GL_STENCIL_TEST);  
-// glDepthMask(GL_FALSE);
-// glDepthFunc(GL_LEQUAL);
+
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
-glEnable(GL_DITHER); 
-glCullFace(GL_FRONT_AND_BACK);
+ // glEnable(GL_DITHER); 
  
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
