@@ -38,7 +38,7 @@ EGLConfig eglconfig=NULL;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
-"precision highp float;";
+"precision highp float;"
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 "precision highp int; \n";
@@ -240,7 +240,7 @@ glViewport(0,0,viewportSizeS,viewportSizeS);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
- // glEnable(GL_DITHER); 
+glDisable(GL_DITHER); 
  
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
