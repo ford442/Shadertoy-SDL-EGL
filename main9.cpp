@@ -49,13 +49,13 @@ const char vertex_shader_body_gles3[]=
 "} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform float iTime;"
+"uniform highp float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out vec4 fragColor; \n";
+"out highp vec4 fragColor; \n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
@@ -75,10 +75,10 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,0,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
 EGL_STENCIL_SIZE,0,
 EGL_DEPTH_SIZE,0,
 EGL_BUFFER_SIZE,32,
@@ -160,7 +160,7 @@ texture_files[i]=NULL;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=false;
+attr.alpha=true;
 attr.stencil=false;
 attr.depth=false;
 attr.antialias=false;
@@ -169,14 +169,14 @@ attr.preserveDrawingBuffer=false;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,16);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
@@ -245,7 +245,7 @@ glDisable(GL_DITHER);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
- 
+enableExtensionsByDefault(false);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
