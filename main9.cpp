@@ -244,8 +244,8 @@ glViewport(0,0,viewportSizeS,viewportSizeS);
 // glDepthFunc(GL_LEQUAL);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
- glFrontFace(GL_CW);
-// glEnable(GL_DITHER); 
+glFrontFace(GL_CW);
+glEnable(GL_DITHER); 
 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
