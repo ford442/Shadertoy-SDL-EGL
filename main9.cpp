@@ -166,6 +166,8 @@ attr.depth=false;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
+attr.enableExtensionsByDefault=false;
+
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 string program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
@@ -245,7 +247,6 @@ glDisable(GL_DITHER);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-enableExtensionsByDefault(false);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
