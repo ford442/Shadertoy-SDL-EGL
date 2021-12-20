@@ -246,10 +246,12 @@ glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
 glEnable(GL_DITHER); 
-
+glCullFace(GL_FRONT_AND_BACK);
+ 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+ 
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
