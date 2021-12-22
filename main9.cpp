@@ -21,7 +21,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader;
-GLint attrib_position,sampler_channel[4],uniform_frame,x,y,S;
+GLint attrib_position,sampler_channel[4],uniform_frame,x,y;
 GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeS,mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
 long double outTimeA;
@@ -32,7 +32,7 @@ SDL_Window *win;
 SDL_GLContext *glCtx;
 int lft,frame;
 Uint8 *wptr;
-GLsizei nsources,i;
+GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 
