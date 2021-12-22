@@ -236,7 +236,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 viewportSizeS=(float)S;
-glUniform3i(uniform_res,(int)S,(int)S,0.0f);
+glUniform3f(uniform_res,(float)S,(float)S,0.0f);
 glViewport(0,0,S,S);
 
 glEnable(GL_BLEND);
