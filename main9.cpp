@@ -152,8 +152,11 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
+
+string program_source;
+
 static void comp(){
-string program_source=read_file(fileloc);
+program_source=read_file(fileloc);
 }
 
 static void strt(){
