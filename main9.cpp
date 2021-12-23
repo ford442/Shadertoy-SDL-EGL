@@ -159,7 +159,7 @@ frame++;
 }
 
 static void gets(){
-static program_source=read_file(fileloc);
+program_source=read_file(fileloc);
 }
 
 static void comp(){
