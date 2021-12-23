@@ -7,6 +7,10 @@ document.getElementById('btn9').addEventListener('click',function(){
 Module.ccall('compile');
 });
 
+document.getElementById('btn10').addEventListener('click',function(){
+Module.ccall('getShader');
+});
+
 document.getElementById('btn7').addEventListener('click',function(){
 document.getElementById("contain2").height=1440;
 document.getElementById("contain2").width=1440;
