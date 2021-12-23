@@ -36,7 +36,7 @@ Uint8 *wptr;
 GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-// static string program_source;
+static string program_source;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -159,7 +159,7 @@ frame++;
 }
 
 static void gets(){
-static const string program_source=read_file(fileloc);
+static program_source=read_file(fileloc);
 }
 
 static void comp(){
