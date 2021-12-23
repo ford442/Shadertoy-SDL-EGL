@@ -119,7 +119,7 @@ return result;
 return NULL;
 }
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,char **sources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
