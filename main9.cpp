@@ -21,7 +21,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint VBO,VAO,EBO,vtx,frag,shader,buttons;
-static GLuint shader_program;
+// static GLuint shader_program;
 GLint uniform_time,uniform_res,uniform_mouse,attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA,F;
 // Uint32 buttons;
@@ -36,7 +36,7 @@ Uint8 *wptr;
 GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-static string program_source;
+// static string program_source;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -159,7 +159,7 @@ frame++;
 }
 
 static void gets(){
-program_source=read_file(fileloc);
+static const string program_source=read_file(fileloc);
 }
 
 static void comp(){
@@ -172,7 +172,7 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-shader_program=glCreateProgram();
+static const GLuint shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
