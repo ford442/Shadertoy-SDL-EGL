@@ -153,6 +153,11 @@ eglSwapBuffers(display,surface);
 frame++;
 }
 
+static void comp(){
+string program_source=read_file(fileloc);
+const char* default_fragment_shader=program_source.c_str();
+}
+
 static void strt(){
 for (int i=0;i<4;++i) {
 texture_files[i]=NULL;
@@ -167,10 +172,7 @@ attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
 attr.enableExtensionsByDefault=false;
-
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-string program_source=read_file(fileloc);
-const char* default_fragment_shader=program_source.c_str();
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
@@ -238,12 +240,10 @@ uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 viewportSizeS=(float)S;
 glUniform3f(uniform_res,(float)S,(float)S,1.0f);
 glViewport(0,0,S,S);
-
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
 glDisable(GL_DITHER); 
- 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -311,6 +311,9 @@ plt();
 }
 void str(){
 strt();
+}
+void compile(){
+comp();
 }}
 int main(){
 EM_ASM({
