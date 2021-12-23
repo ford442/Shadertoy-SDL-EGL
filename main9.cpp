@@ -163,6 +163,7 @@ static const string program_source=read_file(fileloc);
 }
 
 static void comp(){
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -240,7 +241,6 @@ SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
