@@ -24,7 +24,6 @@ GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader;
 GLint attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
 GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeS,mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA;
 Uint32 buttons;
-// long double outTimeA;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -152,10 +151,10 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
-
+char* default_fragment_shader;
 static void comp(){
 string program_source=read_file(fileloc);
-const char* default_fragment_shader=program_source.c_str();
+default_fragment_shader=program_source.c_str();
 }
 
 static void strt(){
