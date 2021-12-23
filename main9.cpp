@@ -20,7 +20,8 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader,buttons;
+GLuint VBO,VAO,EBO,vtx,frag,shader,buttons;
+static GLuint shader_program;
 GLint uniform_time,uniform_res,uniform_mouse,attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA,F;
 // Uint32 buttons;
@@ -59,10 +60,12 @@ const char fragment_shader_header_gles3[]=
 "out highp vec4 fragColor; \n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
+
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
+
 const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
@@ -85,6 +88,7 @@ EGL_DEPTH_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
@@ -92,7 +96,7 @@ const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
-const char *texture_files[4];
+// const char *texture_files[4];
 char *result=NULL;
 long length=0;
 
@@ -154,9 +158,27 @@ eglSwapBuffers(display,surface);
 frame++;
 }
 
+static void gets(){
+program_source=read_file(fileloc);
+const char* default_fragment_shader=program_source.c_str();
+}
 
 static void comp(){
-program_source=read_file(fileloc);
+sources[0]=common_shader_header;
+sources[1]=vertex_shader_body;
+vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+sources[0]=common_shader_header;
+sources[1]=fragment_shader_header;
+sources[2]=default_fragment_shader;
+sources[3]=fragment_shader_footer;
+frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+shader_program=glCreateProgram();
+glAttachShader(shader_program,vtx);
+glAttachShader(shader_program,frag);
+glLinkProgram(shader_program);
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
 }
 
 static void strt(){
@@ -202,22 +224,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
 glCtx=&contextegl;
-const char* default_fragment_shader=program_source.c_str();
-sources[0]=common_shader_header;
-sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-sources[0]=common_shader_header;
-sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
-sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-shader_program=glCreateProgram();
-glAttachShader(shader_program,vtx);
-glAttachShader(shader_program,frag);
-glLinkProgram(shader_program);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
+
 glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -314,7 +321,11 @@ strt();
 }
 void compile(){
 comp();
+}
+void getShader(){
+gets();
 }}
+
 int main(){
 EM_ASM({
 FS.mkdir("/snd");
