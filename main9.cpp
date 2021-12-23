@@ -20,10 +20,10 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader;
-GLint attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
-GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeS,mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA;
-Uint32 buttons;
+GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader,buttons;
+GLint uniform_time,uniform_res,uniform_mouse,attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
+GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA,F;
+// Uint32 buttons;
 // long double outTimeA;
 EGLDisplay display;
 EGLSurface surface;
@@ -35,6 +35,7 @@ Uint8 *wptr;
 GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
+string program_source;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -134,7 +135,7 @@ return shader;
 static void renderFrame(){
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
-mouseY=viewportSizeS-(float)y;
+mouseY=F-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 const float cMouseX=mouseX;
@@ -146,24 +147,22 @@ mouseLPressed=0.0f;
 t2=steady_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
-glUniform1f(uniform_time,(float)outTimeA);
+glUniform1f(uniform_time,outTimeA);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_SHORT,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
 
-string program_source;
 
 static void comp(){
 program_source=read_file(fileloc);
 }
 
 static void strt(){
-for (int i=0;i<4;++i) {
-texture_files[i]=NULL;
-}
+// for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+F=(float)S;
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=false;
@@ -239,8 +238,7 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-viewportSizeS=(float)S;
-glUniform3f(uniform_res,(float)S,(float)S,1.0f);
+glUniform3f(uniform_res,F,F,1.0f);
 glViewport(0,0,S,S);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
