@@ -36,7 +36,7 @@ Uint8 *wptr;
 GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-string program_source;
+static string program_source;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
