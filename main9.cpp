@@ -152,10 +152,10 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
-const char* default_fragment_shader;
 static void comp(){
 string program_source=read_file(fileloc);
-default_fragment_shader=program_source.c_str();
+const char* default_fragment_shader=program_source.c_str();
+sources[2]=default_fragment_shader;
 }
 
 static void strt(){
@@ -205,9 +205,7 @@ glCtx=&contextegl;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 shader_program=glCreateProgram();
