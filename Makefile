@@ -34,7 +34,7 @@ droid: maind.cpp  Makefile
 -sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=128mb -sSINGLE_FILE=1 \
 -O2 -o droid.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str","_read"]' -sEXPORTED_RUNTIME_METHODS=ccall \
---extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js
+--extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=1
 
 
 tst6: main9func.cpp  Makefile
