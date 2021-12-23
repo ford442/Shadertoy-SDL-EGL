@@ -35,18 +35,18 @@ GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 
-const char common_shader_header_gles3[]=
+char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 "precision highp int; \n";
-const char vertex_shader_body_gles3[]=
+char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
-const char fragment_shader_header_gles3[]=
+char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform highp float iTime;"
 "uniform vec4 iMouse;"
@@ -55,13 +55,13 @@ const char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 "out highp vec4 fragColor; \n";
-const char fragment_shader_footer_gles3[]=
+char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
-const char* common_shader_header=common_shader_header_gles3;
-const char* vertex_shader_body=vertex_shader_body_gles3;
-const char* fragment_shader_header=fragment_shader_header_gles3;
-const char* fragment_shader_footer=fragment_shader_footer_gles3;
-const EGLint attribut_list[]={
+char* common_shader_header=common_shader_header_gles3;
+char* vertex_shader_body=vertex_shader_body_gles3;
+char* fragment_shader_header=fragment_shader_header_gles3;
+char* fragment_shader_footer=fragment_shader_footer_gles3;
+EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
@@ -69,7 +69,7 @@ EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
-const EGLint attribute_list[]={
+EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -86,15 +86,15 @@ EGL_NONE
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
+size_t BufferSize=sizeof(vertices);
+size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
-const char *sources[4];
-const char *texture_files[4];
+char *sources[4];
+char *texture_files[4];
 char *result=NULL;
 long length=0;
 
-static const char *read_file(const char *filename){
+static char *read_file(char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
