@@ -21,7 +21,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint VBO,VAO,EBO,vtx,frag,shader,buttons;
-// static GLuint shader_program;
+GLuint shader_program;
 GLint uniform_time,uniform_res,uniform_mouse,attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA,F;
 // Uint32 buttons;
@@ -163,7 +163,52 @@ static const string program_source=read_file(fileloc);
 }
 
 static void comp(){
+
+}
+
+static void strt(){
+// for (int i=0;i<4;++i) {texture_files[i]=NULL;}
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+F=(float)S;
+EmscriptenWebGLContextAttributes attr;
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=false;
+attr.stencil=false;
+attr.depth=false;
+attr.antialias=false;
+attr.premultipliedAlpha=false;
+attr.preserveDrawingBuffer=false;
+attr.enableExtensionsByDefault=false;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
+// SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
+SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
+eglInitialize(display,&major,&minor);
+if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
+if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
+}
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+if(contextegl==EGL_NO_CONTEXT){
+}
+else{
+surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
+}}
+emscripten_webgl_make_context_current(ctx);
+win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
+glCtx=&contextegl;
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -212,51 +257,6 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
-}
-
-static void strt(){
-// for (int i=0;i<4;++i) {texture_files[i]=NULL;}
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-F=(float)S;
-EmscriptenWebGLContextAttributes attr;
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=false;
-attr.stencil=false;
-attr.depth=false;
-attr.antialias=false;
-attr.premultipliedAlpha=false;
-attr.preserveDrawingBuffer=false;
-attr.enableExtensionsByDefault=false;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
-SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
-SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&major,&minor);
-if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
-if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
-}
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-if(contextegl==EGL_NO_CONTEXT){
-}
-else{
-surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-}}
-emscripten_webgl_make_context_current(ctx);
-win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
-glCtx=&contextegl;
-
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
