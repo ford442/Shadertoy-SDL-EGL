@@ -24,6 +24,7 @@ GLuint shader_program,VBO,VAO,EBO,vtx,frag,shader;
 GLint attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
 GLfloat uniform_time,uniform_res,uniform_mouse,viewportSizeS,mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA;
 Uint32 buttons;
+// long double outTimeA;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -35,18 +36,18 @@ GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 
-char common_shader_header_gles3[]=
+const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 "precision highp int; \n";
-char vertex_shader_body_gles3[]=
+const char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
 "} \n";
-char fragment_shader_header_gles3[]=
+const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform highp float iTime;"
 "uniform vec4 iMouse;"
@@ -55,13 +56,13 @@ char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 "out highp vec4 fragColor; \n";
-char fragment_shader_footer_gles3[]=
+const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
-char* common_shader_header=common_shader_header_gles3;
-char* vertex_shader_body=vertex_shader_body_gles3;
-char* fragment_shader_header=fragment_shader_header_gles3;
-char* fragment_shader_footer=fragment_shader_footer_gles3;
-EGLint attribut_list[]={
+const char* common_shader_header=common_shader_header_gles3;
+const char* vertex_shader_body=vertex_shader_body_gles3;
+const char* fragment_shader_header=fragment_shader_header_gles3;
+const char* fragment_shader_footer=fragment_shader_footer_gles3;
+const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
@@ -69,7 +70,7 @@ EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
-EGLint attribute_list[]={
+const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -86,15 +87,15 @@ EGL_NONE
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
-size_t BufferSize=sizeof(vertices);
-size_t VertexSize=sizeof(vertices[0]);
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
-char *sources[4];
-char *texture_files[4];
+const char *sources[4];
+const char *texture_files[4];
 char *result=NULL;
 long length=0;
 
-static char *read_file(char *filename){
+static const char *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -119,7 +120,7 @@ return result;
 return NULL;
 }
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,char **sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -151,7 +152,7 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
-char* default_fragment_shader;
+const char* default_fragment_shader;
 static void comp(){
 string program_source=read_file(fileloc);
 default_fragment_shader=program_source.c_str();
