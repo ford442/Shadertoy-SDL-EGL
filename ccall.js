@@ -4,7 +4,7 @@ Module.ccall('str');
 });
 
 document.getElementById('btn9').addEventListener('click',function(){
-Module.ccall('read');
+Module.ccall('compile');
 });
 
 document.getElementById('btn7').addEventListener('click',function(){
