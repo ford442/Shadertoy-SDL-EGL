@@ -154,22 +154,6 @@ frame++;
 }
 static void comp(){
 string program_source=read_file(fileloc);
-const char* default_fragment_shader=program_source.c_str();
-sources[0]=common_shader_header;
-sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-sources[0]=common_shader_header;
-sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
-sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-shader_program=glCreateProgram();
-glAttachShader(shader_program,vtx);
-glAttachShader(shader_program,frag);
-glLinkProgram(shader_program);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
 }
 
 static void strt(){
@@ -179,7 +163,7 @@ texture_files[i]=NULL;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=true;
+attr.alpha=false;
 attr.stencil=false;
 attr.depth=false;
 attr.antialias=false;
@@ -216,7 +200,22 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
 glCtx=&contextegl;
-
+const char* default_fragment_shader=program_source.c_str();
+sources[0]=common_shader_header;
+sources[1]=vertex_shader_body;
+vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+sources[0]=common_shader_header;
+sources[1]=fragment_shader_header;
+sources[2]=default_fragment_shader;
+sources[3]=fragment_shader_footer;
+frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+shader_program=glCreateProgram();
+glAttachShader(shader_program,vtx);
+glAttachShader(shader_program,frag);
+glLinkProgram(shader_program);
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
 glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
