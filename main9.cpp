@@ -21,7 +21,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,buttons,uniform_frame,uniform_time,uniform_res,uniform_mouse,shader_program;
-GLuint x,y;
+GLint x,y;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA,F;
 // Uint32 buttons;
 // long double outTimeA;
