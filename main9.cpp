@@ -83,7 +83,6 @@ EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
-EGL_STENCIL_SIZE,32,
 EGL_DEPTH_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
@@ -139,7 +138,7 @@ return shader;
 static void renderFrame(){
 buttons=SDL_GetMouseState(&x,&y);
 mouseX=(float)x;
-mouseY=F-(float)y;
+mouseY=(float)S-(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 const float cMouseX=mouseX;
@@ -170,7 +169,6 @@ static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-F=EM_ASM_FLOAT({return document.getElementById('pmhig').innerHTML;});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
@@ -184,10 +182,10 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
-// SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
@@ -246,7 +244,7 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,F,F,1.0f);
+glUniform3f(uniform_res,(float)S,(float)S,1.0f);
 glViewport(0,0,S,S);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
