@@ -168,11 +168,9 @@ static void comp(){
 
 static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
-auto num=EM_ASM({return document.getElementById('pmhig').innerHTML;});
-S=num;
-  F=num;
-// S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-// F=EM_ASM({return document.getElementById('pmhig').innerHTML;});
+
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+F=EM_ASM_FLOAT({return document.getElementById('pmhig').innerHTML;});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
