@@ -20,9 +20,8 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 steady_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint VBO,VAO,EBO,vtx,frag,shader,buttons;
-GLuint shader_program;
-GLint uniform_time,uniform_res,uniform_mouse,attrib_position,sampler_channel[4],uniform_frame,x,y,frame;
+GLuint VBO,VAO,EBO,vtx,frag,shader,buttons,uniform_frame,uniform_time,uniform_res,uniform_mouse,shader_program;
+GLint attrib_position,sampler_channel[4],x,y,frame;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed,outTimeA,F;
 // Uint32 buttons;
 // long double outTimeA;
@@ -42,7 +41,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
 // "precision highp sampler3D;"
-// "precision highp sampler2D;"
+"precision highp sampler2D;"
 "precision highp int; \n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in vec4 iPosition;"
@@ -51,7 +50,7 @@ const char vertex_shader_body_gles3[]=
 "} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform highp float iTime;"
+"uniform float iTime;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -83,8 +82,8 @@ EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
-EGL_STENCIL_SIZE,0,
-EGL_DEPTH_SIZE,0,
+EGL_STENCIL_SIZE,32,
+EGL_DEPTH_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
@@ -172,9 +171,9 @@ S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=false;
-attr.stencil=false;
-attr.depth=false;
+attr.alpha=true;
+attr.stencil=true;
+attr.depth=true;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
@@ -188,8 +187,8 @@ SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
 // SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,0);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
