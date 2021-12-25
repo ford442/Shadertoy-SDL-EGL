@@ -20,8 +20,9 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,uniform_frame,uniform_time,uniform_res,uniform_mouse,shader_program;
+GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 GLint x,y;
+static GLuint shader_program;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
 long double Ttime;
@@ -158,10 +159,27 @@ frame++;
 
 static void gets(){
 program_source=read_file(fileloc);
+  const char* default_fragment_shader=program_source.c_str();
+
 }
 
 static void comp(){
 
+sources[0]=common_shader_header;
+sources[1]=vertex_shader_body;
+vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+sources[0]=common_shader_header;
+sources[1]=fragment_shader_header;
+sources[2]=default_fragment_shader;
+sources[3]=fragment_shader_footer;
+frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+static const GLuint shader_program=glCreateProgram();
+glAttachShader(shader_program,vtx);
+glAttachShader(shader_program,frag);
+glLinkProgram(shader_program);
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
 }
 
 static void strt(){
@@ -206,22 +224,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
 glCtx=&contextegl;
-const char* default_fragment_shader=program_source.c_str();
-sources[0]=common_shader_header;
-sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-sources[0]=common_shader_header;
-sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
-sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-static const GLuint shader_program=glCreateProgram();
-glAttachShader(shader_program,vtx);
-glAttachShader(shader_program,frag);
-glLinkProgram(shader_program);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
+  
 glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -252,6 +255,7 @@ glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
