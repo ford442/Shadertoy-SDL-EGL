@@ -24,7 +24,7 @@ GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,unif
 GLint x,y;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
-long double time;
+long double Ttime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -147,8 +147,8 @@ mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
-time=time_spana.count();
-glUniform1f(uniform_time,time);
+Ttime=time_spana.count();
+glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
