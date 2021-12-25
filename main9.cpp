@@ -244,7 +244,6 @@ uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)S,(float)S,(float)S);
 glViewport(0,0,S,S);
 glEnable(GL_BLEND);
-glEnable(GL_FRAMEBUFFER_SRGB);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
 glDisable(GL_DITHER); 
