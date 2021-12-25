@@ -162,10 +162,10 @@ static void gets(){
 
 }
  EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
- emscripten_webgl_init_context_attributes(&attr);
 
 
 static void comp(){
+  emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
 attr.stencil=false;
 attr.depth=true;
