@@ -159,11 +159,11 @@ frame++;
 
 static void gets(){
 program_source=read_file(fileloc);
-  const char* default_fragment_shader=program_source.c_str();
 
 }
 
 static void comp(){
+  const char* default_fragment_shader=program_source.c_str();
 
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
