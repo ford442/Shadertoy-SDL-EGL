@@ -18,7 +18,7 @@ using namespace std::chrono;
 
 char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-steady_clock::high_resolution_clock::time_point t1,t2;
+high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,uniform_frame,uniform_time,uniform_res,uniform_mouse,shader_program;
 GLint x,y;
@@ -145,7 +145,7 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }else{
 mouseLPressed=0.0f;
 }
-t2=steady_clock::high_resolution_clock::now();
+t2=high_resolution_clock::now();
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 outTimeA=time_spana.count();
 glUniform1f(uniform_time,outTimeA);
@@ -256,7 +256,7 @@ SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
-t1=steady_clock::high_resolution_clock::now();
+t1=high_resolution_clock::now();
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
