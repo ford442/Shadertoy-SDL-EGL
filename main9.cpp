@@ -24,7 +24,7 @@ GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,unif
 GLint x,y;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
-Gluint Ttime;
+GLuint Ttime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -146,7 +146,7 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-duration<Gluint>time_spana=duration_cast<duration<Gluint>>(t2-t1);
+duration<GLuint>time_spana=duration_cast<duration<GLuint>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
