@@ -156,9 +156,9 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
+ EmscriptenWebGLContextAttributes attr;
 
 static void gets(){
- EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
 attr.stencil=false;
