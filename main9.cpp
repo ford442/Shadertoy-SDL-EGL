@@ -20,7 +20,7 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint shader,frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 GLint x,y;
 GLuint shader_program;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
@@ -36,7 +36,9 @@ Uint8 *wptr;
 GLsizei nsources,i,S;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-static string program_source;
+string program_source;
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -70,10 +72,12 @@ const EGLint attribut_list[]={
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE
 };
+
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
+
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -84,7 +88,8 @@ EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_BUFFER_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_BUFFER_SIZE,64,
 EGL_NONE
 };
 
@@ -129,7 +134,7 @@ GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
-GLuint shader=glCreateShader(type);
+shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
@@ -156,18 +161,15 @@ glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
- EmscriptenWebGLContextAttributes attr;
 
 static void gets(){
 
 }
- EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-
 
 static void comp(){
-  emscripten_webgl_init_context_attributes(&attr);
+emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
-attr.stencil=false;
+attr.stencil=true;
 attr.depth=true;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
@@ -182,13 +184,12 @@ SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-// SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
+SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,64);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
@@ -201,11 +202,11 @@ else{
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }}
-  
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
 glCtx=&contextegl;
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
@@ -228,9 +229,7 @@ glReleaseShaderCompiler();
 static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-
-  win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
-
+win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,0);
 glUseProgram(shader_program);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -252,21 +251,21 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)S,(float)S,(float)S);
-glViewport(0,0,S,S);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
 glDisable(GL_DITHER); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glViewport(0,0,S,S);
+
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
-t1=high_resolution_clock::now();
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+t1=high_resolution_clock::now();
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
