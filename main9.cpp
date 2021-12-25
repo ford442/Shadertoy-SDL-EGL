@@ -129,10 +129,10 @@ GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
-shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
-glCompileShader(shader);
-return shader;
+::shader=glCreateShader(type);
+glShaderSource(::shader,nsources,sources,srclens);
+glCompileShader(::shader);
+return ::shader;
 }
 
 static void renderFrame(){
