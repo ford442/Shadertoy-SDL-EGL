@@ -159,7 +159,11 @@ frame++;
  EmscriptenWebGLContextAttributes attr;
 
 static void gets(){
-emscripten_webgl_init_context_attributes(&attr);
+
+}
+ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+static void comp(){
+ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
 attr.stencil=false;
 attr.depth=true;
@@ -183,9 +187,6 @@ SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 
-}
- EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-static void comp(){
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
