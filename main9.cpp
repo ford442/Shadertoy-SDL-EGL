@@ -184,9 +184,9 @@ SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 
 }
-
+ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static void comp(){
- EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
+ctx=emscripten_webgl_create_context("#canvas",&attr);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
