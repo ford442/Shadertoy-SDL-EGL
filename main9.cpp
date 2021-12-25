@@ -20,7 +20,7 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,uniform_frame,uniform_time,uniform_res,uniform_mouse,shader_program;
+GLuint attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,uniform_frame,uniform_time,uniform_res,uniform_mouse,shader_program;
 GLint x,y;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
@@ -30,7 +30,7 @@ EGLSurface surface;
 EGLContext contextegl;
 SDL_Window *win;
 SDL_GLContext *glCtx;
-int lft;
+int lft,frame;
 Uint8 *wptr;
 GLsizei nsources,i,S;
 EGLint config_size,major,minor;
@@ -165,13 +165,12 @@ static void comp(){
 
 static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
-
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 EmscriptenWebGLContextAttributes attr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
 attr.stencil=false;
-attr.depth=false;
+attr.depth=true;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
@@ -245,12 +244,16 @@ uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)S,(float)S,1.0f);
 glViewport(0,0,S,S);
 glEnable(GL_BLEND);
+glEnable(GL_DEPTH_TEST);
 glEnable(GL_CULL_FACE); 
+glEnable(GL_LINE_SMOOTH); 
+glEnable(GL_POINT_SMOOTH); 
 glFrontFace(GL_CW);
 glDisable(GL_DITHER); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
@@ -258,7 +261,7 @@ SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 t1=high_resolution_clock::now();
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
 static void cls_aud(){
