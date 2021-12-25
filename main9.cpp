@@ -20,7 +20,7 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,shader,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 GLint x,y;
 GLuint shader_program;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
@@ -129,10 +129,10 @@ GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
-::shader=glCreateShader(type);
-glShaderSource(::shader,nsources,sources,srclens);
-glCompileShader(::shader);
-return ::shader;
+GLuint shader=glCreateShader(type);
+glShaderSource(shader,nsources,sources,srclens);
+glCompileShader(shader);
+return shader;
 }
 
 static void renderFrame(){
