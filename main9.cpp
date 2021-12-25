@@ -22,7 +22,7 @@ high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
 GLuint frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 GLint x,y;
-GLuint shader_program;
+static GLuint shader_program;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
 long double Ttime;
@@ -162,8 +162,10 @@ static void gets(){
 
 }
  EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-static void comp(){
  emscripten_webgl_init_context_attributes(&attr);
+
+
+static void comp(){
 attr.alpha=true;
 attr.stencil=false;
 attr.depth=true;
