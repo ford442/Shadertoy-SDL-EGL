@@ -87,8 +87,8 @@ EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
+// EGL_DEPTH_SIZE,32,
+// EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,64,
 EGL_NONE
 };
@@ -169,8 +169,8 @@ static void gets(){
 static void comp(){
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=true;
-attr.stencil=true;
-attr.depth=true;
+attr.stencil=false;
+attr.depth=false;
 attr.antialias=false;
 attr.premultipliedAlpha=false;
 attr.preserveDrawingBuffer=false;
@@ -184,8 +184,8 @@ SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
+// SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
+// SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,64);
 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
@@ -265,7 +265,7 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
