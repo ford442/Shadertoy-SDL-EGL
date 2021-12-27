@@ -153,7 +153,6 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
@@ -283,7 +282,7 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,tex2d[0
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1],v0);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2],v0);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
-glBindFramebuffer(GL_FRAMEBUFFER,v0);
+// glBindFramebuffer(GL_FRAMEBUFFER,v0);
   
 // static const GLenum att1[]={GL_NONE,GL_COLOR_ATTACHMENT1};
   
