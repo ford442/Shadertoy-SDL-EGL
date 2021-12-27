@@ -15,8 +15,8 @@ tst2: main7.cpp  Makefile
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0
 
 tst5: main9.cpp  Makefile
-	emcc main9.cpp -sFULL_ES2=0 -sFULL_ES3=1 --closure 1 -g0 -sGL_TESTING=1 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
--sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
+	emcc main9.cpp -sFULL_ES2=0 -sFULL_ES3=1 --closure 1 -g0 -sGL_TESTING=0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
+-sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sPRINTF_LONG_DOUBLE=0 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -ffast-math -sSUPPORT_LONGJMP=0 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 -O3 -o egl16.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str","_read","_compile","_getShader"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0
