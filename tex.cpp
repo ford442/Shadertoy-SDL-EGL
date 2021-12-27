@@ -89,7 +89,7 @@ EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,24,
+EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
@@ -155,15 +155,8 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-
-/* glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
-glBindTexture(GL_TEXTURE_2D,tex2d[0]);
-glBindTexture(GL_TEXTURE_2D,tex2d[1]);
-glBindTexture(GL_TEXTURE_2D,tex2d[2]);
-glBindTexture(GL_TEXTURE_2D,tex2d[3]); */
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glDrawBuffers(v4,attt);
-// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,v0);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
@@ -195,9 +188,9 @@ SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
+// SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
 SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
@@ -219,6 +212,9 @@ emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
 glCtx=&contextegl;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
+glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
 program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
