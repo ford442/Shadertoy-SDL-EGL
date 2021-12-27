@@ -155,8 +155,9 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
 /* glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
 glBindTexture(GL_TEXTURE_2D,tex2d[1]);
 glBindTexture(GL_TEXTURE_2D,tex2d[2]);
