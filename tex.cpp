@@ -152,9 +152,8 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-  		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fb);
-		glClear(GL_COLOR_BUFFER_BIT);
-
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
