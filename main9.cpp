@@ -242,7 +242,7 @@ glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,v0);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
 glEnableVertexAttribArray(attrib_position);
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
