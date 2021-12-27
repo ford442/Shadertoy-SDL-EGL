@@ -152,7 +152,7 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
@@ -234,12 +234,12 @@ static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,SDL_WINDOW_FOREIGN|SDL_WINDOW_BORDERLESS|SDL_WINDOW_OPENGL);
 glUseProgram(shader_program);
-glGenBuffers(1,&EBO);
+glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-glGenVertexArrays(1,&VAO);
+glGenVertexArrays(v1,&VAO);
 glBindVertexArray(VAO);
-glGenBuffers(1,&VBO);
+glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glEnableVertexAttribArray(attrib_position);
@@ -276,7 +276,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 	
 glBindTexture(GL_TEXTURE_2D,v0);
   
-glGenFramebuffers(1, &FBO);
+glGenFramebuffers(v1, &FBO);
 glBindFramebuffer(GL_FRAMEBUFFER,FBO);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,tex2d[0],v0);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1],v0);
@@ -284,7 +284,7 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
   
-static const GLenum att1[]={GL_NONE,GL_COLOR_ATTACHMENT1};
+// static const GLenum att1[]={GL_NONE,GL_COLOR_ATTACHMENT1};
   
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
@@ -300,7 +300,6 @@ glUniform1i(sampler_channel[0],tex2d[0]);
 glUniform1i(sampler_channel[1],tex2d[1]);
 glUniform1i(sampler_channel[2],tex2d[2]);
 glUniform1i(sampler_channel[3],tex2d[3]);
-// glEnable(GL_TEXTURE_2D);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
@@ -309,7 +308,7 @@ glDepthMask(GL_FALSE);
 glDisable(GL_DEPTH_TEST); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glViewport(0,0,S,S);
+glViewport(v0,v0,S,S);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
