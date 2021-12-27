@@ -38,7 +38,8 @@ EGLConfig eglconfig=NULL;
 string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-GLint v0=0,v2=2,v4=4,v6=6;
+GLint v0=0,v1=1,v2=2,v4=4,v6=6;
+
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
