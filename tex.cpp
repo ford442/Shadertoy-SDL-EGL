@@ -1,7 +1,7 @@
-#include <algorithm>
+// #include <algorithm>
 #include <cstring>
 #include <cstdarg>
-#include <cmath>
+// #include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <EGL/egl.h>
@@ -155,15 +155,14 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
+/* glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
 glBindTexture(GL_TEXTURE_2D,tex2d[1]);
 glBindTexture(GL_TEXTURE_2D,tex2d[2]);
-glBindTexture(GL_TEXTURE_2D,tex2d[3]);
+glBindTexture(GL_TEXTURE_2D,tex2d[3]); */
 glDrawBuffers(v4,attt);
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,v0);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,v0);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
@@ -174,7 +173,6 @@ frame++;
 }
 
 static void gets(){
-
 }
 
 static void comp(){
@@ -310,12 +308,13 @@ glDisable(GL_DEPTH_TEST);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
+glActiveTexture(GL_TEXTURE0);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
