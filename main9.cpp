@@ -39,6 +39,7 @@ EGLConfig eglconfig=NULL;
 string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+GLint v0=0,v1=1,v2=2,v4=4,v6=6;
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
@@ -83,13 +84,13 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-// EGL_DEPTH_SIZE,32,
-// EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_DEPTH_SIZE,24,
+EGL_STENCIL_SIZE,8,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
@@ -157,36 +158,35 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 }
 
 static void gets(){
-
 }
 
 static void comp(){
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=true;
-attr.stencil=false;
-attr.depth=false;
-attr.antialias=false;
-attr.premultipliedAlpha=false;
-attr.preserveDrawingBuffer=false;
-attr.enableExtensionsByDefault=false;
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_FALSE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-// SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
-// SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,64);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
+SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
@@ -213,12 +213,12 @@ program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
@@ -233,16 +233,16 @@ static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,SDL_WINDOW_FOREIGN|SDL_WINDOW_BORDERLESS|SDL_WINDOW_OPENGL);
 glUseProgram(shader_program);
-glGenBuffers(1,&EBO);
+glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-glGenVertexArrays(1,&VAO);
+glGenVertexArrays(v1,&VAO);
 glBindVertexArray(VAO);
-glGenBuffers(1,&VBO);
+glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
-glVertexAttribPointer(attrib_position,4,GL_FLOAT,GL_TRUE,VertexSize,0);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,v0);
 glEnableVertexAttribArray(attrib_position);
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -256,16 +256,18 @@ glUniform3f(uniform_res,(float)S,(float)S,(float)S);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
-glDisable(GL_DITHER); 
+glDisable(GL_DITHER);
+glDepthMask(GL_FALSE);
+glDisable(GL_DEPTH_TEST); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glViewport(0,0,S,S);
+glViewport(v0,v0,S,S);
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
