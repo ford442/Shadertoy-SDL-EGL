@@ -40,6 +40,11 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 GLint v0=0,v1=1,v2=2,v4=4,v6=6;
 
+static const GLenum att0[]={GL_NONE,GL_COLOR_ATTACHMENT0};
+static const GLenum att1[]={GL_NONE,GL_COLOR_ATTACHMENT1};
+static const GLenum att2[]={GL_NONE,GL_COLOR_ATTACHMENT2};
+static const GLenum att3[]={GL_NONE,GL_COLOR_ATTACHMENT3};
+
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
@@ -157,13 +162,13 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,FBO);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
-glDrawBuffers(v4,GL_COLOR_ATTACHMENT0);
+glDrawBuffers(v4,att0);
 glBindTexture(GL_TEXTURE_2D,tex2d[1]);
-glDrawBuffers(v4,GL_COLOR_ATTACHMENT1);
+glDrawBuffers(v4,att1);
 glBindTexture(GL_TEXTURE_2D,tex2d[2]);
-glDrawBuffers(v4,GL_COLOR_ATTACHMENT2);
+glDrawBuffers(v4,att2);
 glBindTexture(GL_TEXTURE_2D,tex2d[3]);
-glDrawBuffers(v4,GL_COLOR_ATTACHMENT3);
+glDrawBuffers(v4,att3);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,v0);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
@@ -255,7 +260,6 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
-
 glGenTextures(v4,tex2d);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
 glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
@@ -263,30 +267,25 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-
 glBindTexture(GL_TEXTURE_2D,tex2d[1]);
 glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	
 glBindTexture(GL_TEXTURE_2D,tex2d[2]);
 glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	
 glBindTexture(GL_TEXTURE_2D,tex2d[3]);
 glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	
 glBindTexture(GL_TEXTURE_2D,v0);
-  
 glGenFramebuffers(v1, &FBO);
 glBindFramebuffer(GL_FRAMEBUFFER,FBO);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,tex2d[0],v0);
@@ -294,9 +293,6 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2],v0);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
-  
-// static const GLenum att1[]={GL_NONE,GL_COLOR_ATTACHMENT1};
-  
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
