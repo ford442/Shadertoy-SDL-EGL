@@ -316,7 +316,7 @@ SDL_Init(SDL_INIT_EVENTS);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-emscripten_set_main_loop((void (*)())renderFrame,0,0);
+emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 static void cls_aud(){
 if(dev!=0){
