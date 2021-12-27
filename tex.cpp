@@ -20,7 +20,7 @@ char flnm[16];
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2;
 SDL_AudioDeviceID dev;
-GLuint fb,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4],VBO,VAO,EBO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 GLint x,y;
 GLfloat mouseX,mouseY,mouseLPressed,mouseRPressed;
 Uint32 buttons;
@@ -38,7 +38,7 @@ EGLConfig eglconfig=NULL;
 string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-
+GLint v0=0,v2=2,v4=4,v6=6;
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
@@ -82,13 +82,13 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_DEPTH_SIZE,24,
+EGL_STENCIL_SIZE,8,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
@@ -152,6 +152,9 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
+  		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fb);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
@@ -168,24 +171,24 @@ static void gets(){
 static void comp(){
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=true;
-attr.depth=true;
-attr.antialias=false;
-attr.premultipliedAlpha=false;
-attr.preserveDrawingBuffer=false;
-attr.enableExtensionsByDefault=false;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_FALSE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,64);
+SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,8);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
+SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
 SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
 SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
@@ -243,7 +246,46 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,4,GL_FLOAT,GL_TRUE,VertexSize,0);
 
+glGenTextures(v4,tex2d);
+glBindTexture(GL_TEXTURE_2D,tex2d[0]);
+glTexImage2D(GL_TEXTURE_2D,v0,GL_SRGB8_ALPHA8,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+
+glBindTexture(GL_TEXTURE_2D,tex2d[1]);
+glTexImage2D(GL_TEXTURE_2D,v0,GL_SRGB8_ALPHA8,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	
+glBindTexture(GL_TEXTURE_2D,tex2d[2]);
+glTexImage2D(GL_TEXTURE_2D,v0,GL_SRGB8_ALPHA8,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	
+glBindTexture(GL_TEXTURE_2D,tex2d[3]);
+glTexImage2D(GL_TEXTURE_2D,v0,GL_SRGB8_ALPHA8,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	
+glBindTexture(GL_TEXTURE_2D,v0);
   
+glGenFramebuffers(1, &FBO);
+glBindFramebuffer(GL_FRAMEBUFFER,FBO);
+glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,tex2d[0],v0);
+glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1],v0);
+glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2],v0);
+glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
+glBindFramebuffer(GL_FRAMEBUFFER,v0);
+  
+static const GLenum att1[]={GL_NONE,GL_COLOR_ATTACHMENT1};
   
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
@@ -255,6 +297,11 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)S,(float)S,(float)S);
+glUniform1i(sampler_channel[0],tex2d[0]);
+glUniform1i(sampler_channel[1],tex2d[1]);
+glUniform1i(sampler_channel[2],tex2d[2]);
+glUniform1i(sampler_channel[3],tex2d[3]);
+glEnable(GL_TEXTURE_2D);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
@@ -269,7 +316,7 @@ SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void (*)())renderFrame,0,0);
 }
