@@ -33,6 +33,7 @@ SDL_GLContext *glCtx;
 int lft;
 Uint8 *wptr;
 GLsizei nsources,i,S;
+GLsizei s4=4;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 string program_source;
@@ -159,7 +160,7 @@ mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glDrawBuffers(v4,attt);
+glDrawBuffers(s4,attt);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
