@@ -306,7 +306,6 @@ glDepthMask(GL_FALSE);
 glDisable(GL_DEPTH_TEST); 
 glDisable(GL_SCISSOR_TEST); 
 glDisable(GL_STENCIL_TEST); 
-glDisable(MULTISAMPLE); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
