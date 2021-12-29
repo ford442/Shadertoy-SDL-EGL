@@ -28,7 +28,7 @@ long double Ttime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
-SDL_Window *win;
+// SDL_Window *win;
 // SDL_GLContext *glCtx;
 // int lft;
 // Uint8 *wptr;
