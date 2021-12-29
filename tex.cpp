@@ -77,6 +77,7 @@ EGL_NONE
 
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
 
@@ -85,6 +86,8 @@ const EGLint attribute_list[]={
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
@@ -201,12 +204,13 @@ if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE &
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-if(contextegl==EGL_NO_CONTEXT){
-}
-else{
+// if(contextegl==EGL_NO_CONTEXT){
+// }
+// else{
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-}}
+}
+// }
 // emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
