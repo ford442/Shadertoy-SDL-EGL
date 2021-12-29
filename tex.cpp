@@ -237,10 +237,14 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
+ 
+ SDL_Log("STRT");
+  
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,SDL_WINDOW_OPENGL);
 // win=SDL_CreateWindow("Shadertoy",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,S,S,SDL_WINDOW_FOREIGN|SDL_WINDOW_BORDERLESS|SDL_WINDOW_OPENGL);
+ SDL_Log("SHAD");
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -252,7 +256,9 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
+  SDL_Log("TEX");
 glGenTextures(v4,tex2d);
+
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
 glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
@@ -278,6 +284,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 glBindTexture(GL_TEXTURE_2D,v0);
+   SDL_Log("FB");
+
 glGenFramebuffers(v1, &FBO);
 glBindFramebuffer(GL_FRAMEBUFFER,FBO);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,tex2d[0],v0);
@@ -285,6 +293,8 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2],v0);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
+    SDL_Log("UNI");
+
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -299,6 +309,8 @@ glUniform1i(sampler_channel[0],tex2d[0]);
 glUniform1i(sampler_channel[1],tex2d[1]);
 glUniform1i(sampler_channel[2],tex2d[2]);
 glUniform1i(sampler_channel[3],tex2d[3]);
+    SDL_Log("GL");
+
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
@@ -309,8 +321,14 @@ glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+    SDL_Log("view");
+
 glViewport(v0,v0,S,S);
+    SDL_Log("tex");
+
 glActiveTexture(GL_TEXTURE0);
+    SDL_Log("begin");
+
 SDL_SetWindowTitle(win,"1ink.us - Shadertoy");
 SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
 SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
