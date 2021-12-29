@@ -92,7 +92,7 @@ EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,16,
+EGL_DEPTH_SIZE,24,
 EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
@@ -158,7 +158,7 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glDrawBuffers(v4,attt);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
@@ -191,7 +191,7 @@ SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
 SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
+SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,24);
 SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
 // SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
@@ -304,6 +304,9 @@ glFrontFace(GL_CW);
 glDisable(GL_DITHER); 
 glDepthMask(GL_FALSE);
 glDisable(GL_DEPTH_TEST); 
+glDisable(GL_SCISSOR_TEST); 
+glDisable(GL_STENCIL_TEST); 
+glDisable(MULTISAMPLE); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
