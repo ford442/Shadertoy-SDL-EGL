@@ -148,8 +148,8 @@ return shader;
 
 static void renderFrame(){
 buttons=SDL_GetMouseState(&x,&y);
-mouseX=(float)x;
-mouseY=(float)S-(float)y;
+mouseX=(float)S-(float)x;
+mouseY=(float)y;
 if((buttons & SDL_BUTTON_LMASK)!=0){
 mouseLPressed=1.0f;
 const float cMouseX=mouseX;
@@ -160,7 +160,7 @@ mouseLPressed=0.0f;
 }
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glDrawBuffers(4,attt);
+// glDrawBuffers(4,attt);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
