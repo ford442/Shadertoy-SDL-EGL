@@ -1,6 +1,7 @@
 #include <cstring>
 #include <cstdarg>
 #include <cstdlib>
+#include <cstdio>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
