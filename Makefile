@@ -22,11 +22,11 @@ tst5: main9.cpp  Makefile
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0
 
 
-tst8: tex.cpp  Makefile
-	emcc tex.cpp -sFULL_ES3=1 --closure 1 -g0 -sGL_TESTING=1 -sUSE_SDL=0 -sEXPORT_NAME='createModule' -sMODULARIZE=0 \
+tst8: egl4.cpp  Makefile
+	emcc egl4.cpp -sFULL_ES3=1 --closure 1 -g0 -sGL_TESTING=1 -sUSE_SDL=0 -sEXPORT_NAME='createModule' -sMODULARIZE=0 \
 -sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -ffast-math -O3 \
- -o egl17.js -sEXPORTED_FUNCTIONS='["_main","_str","_read","_compile","_getShader"]' -sEXPORTED_RUNTIME_METHODS=ccall \
+ -o sh1.js -sEXPORTED_FUNCTIONS='["_main","_str","_read","_compile","_getShader"]' -sEXPORTED_RUNTIME_METHODS=ccall \
  --post-js filesysNoSDL.js --post-js ccall.js --post-js fs.js --extern-post-js startUp.js --extern-pre-js setUp.js
 
 load: glsl_loader.cpp  Makefile
