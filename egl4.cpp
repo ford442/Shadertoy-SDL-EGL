@@ -263,7 +263,15 @@ glDepthMask(GL_FALSE);
 glDisable(GL_DEPTH_TEST); 
 glDisable(GL_SCISSOR_TEST); 
 glDisable(GL_STENCIL_TEST); 
-glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+  
+glEnable(GL_LIGHTING);
+glEnable(GL_LIGHT1);
+glEnable(GL_NORMALIZE);
+glMatrixMode(GL_COLOR);
+glLightModeli(GL_LIGHT_MODEL_TWO_SIDED, GL_TRUE);
+  
+  
+glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
 // glActiveTexture(GL_TEXTURE0);
