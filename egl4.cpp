@@ -15,7 +15,7 @@ using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
 GLuint FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-GLuint EBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime;
 EGLDisplay display;
 EGLSurface surface;
@@ -60,7 +60,7 @@ const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_FLOAT,
+EGL_GL_COLORSPACE_KHR,EGL_COLORSPACE_FLOAT,
 EGL_NONE
 };
 
