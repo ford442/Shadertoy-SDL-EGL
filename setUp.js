@@ -22,5 +22,5 @@ document.getElementById("btn10").click();
 setTimeout(function(){
 document.getElementById("btn9").click();
 },2000);
-setTimeout(function(){document.getElementById("btn").click();},2500);
+setTimeout(function(){document.getElementById("btn").click();},4500);
 };
