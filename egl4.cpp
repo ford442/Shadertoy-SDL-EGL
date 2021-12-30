@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <cstring>
 #include <cstdarg>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <EGL/egl.h>
