@@ -194,8 +194,8 @@ glReleaseShaderCompiler();
 static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-glActiveTexture(GL_TEXTURE0);
-glUseProgram(shader_program);
+glUseProgram(shader_program);glActiveTexture(GL_TEXTURE0);
+
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
