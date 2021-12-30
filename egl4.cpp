@@ -196,7 +196,6 @@ static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
-glActiveTexture(GL_TEXTURE0);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
@@ -254,6 +253,7 @@ glUniform1i(sampler_channel[0],tex2d[0]);
 glUniform1i(sampler_channel[1],tex2d[1]);
 glUniform1i(sampler_channel[2],tex2d[2]);
 glUniform1i(sampler_channel[3],tex2d[3]);
+glActiveTexture(GL_TEXTURE0);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
