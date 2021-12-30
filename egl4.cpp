@@ -68,11 +68,11 @@ EGL_NONE
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_LINEAR_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_LINEAR_EXT,
 EGL_NONE};
 
 const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_LINEAR_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_LINEAR_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -173,7 +173,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
