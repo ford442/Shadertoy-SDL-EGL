@@ -192,10 +192,9 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
- 
-  
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+glActiveTexture(GL_TEXTURE0);
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -265,7 +264,6 @@ glDisable(GL_STENCIL_TEST);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
-glActiveTexture(GL_TEXTURE0);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
