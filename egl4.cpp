@@ -173,7 +173,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 program_source=read_file(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
