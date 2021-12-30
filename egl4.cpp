@@ -60,7 +60,7 @@ const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_EXT,EGL_GL_COLORSPACE_LINEAR_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_LINEAR,
 EGL_NONE
 };
 
