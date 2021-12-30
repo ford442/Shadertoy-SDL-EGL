@@ -1,6 +1,6 @@
  #include <cstring>
 #include <cstdarg>
-// #include <cstdio>
+ #include <cstdio>
 #include <cstdlib>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
