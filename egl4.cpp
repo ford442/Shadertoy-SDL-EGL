@@ -1,13 +1,12 @@
-// #include <cstring>
-// #include <cstdarg>
-// #include <cstdio>
-// #include <cstdlib>
+#include <cstring>
+#include <cstdarg>
+#include <cstdlib>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
- #include <iostream>
+#include <iostream>
 #include <ctime>
 
 using namespace std;
