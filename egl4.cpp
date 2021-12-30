@@ -60,30 +60,29 @@ const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_LINEAR_KHR,
 EGL_NONE
 };
 
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_NONE};
 
 const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,8,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,64,
+EGL_GREEN_SIZE,64,
+EGL_BLUE_SIZE,64,
+EGL_ALPHA_SIZE,64,
+EGL_DEPTH_SIZE,64,
+EGL_STENCIL_SIZE,64,
+EGL_BUFFER_SIZE,128,
 EGL_NONE
 };
 
@@ -193,6 +192,8 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
+ 
+  
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
@@ -253,18 +254,18 @@ glUniform1i(sampler_channel[0],tex2d[0]);
 glUniform1i(sampler_channel[1],tex2d[1]);
 glUniform1i(sampler_channel[2],tex2d[2]);
 glUniform1i(sampler_channel[3],tex2d[3]);
-glActiveTexture(GL_TEXTURE0);
 glEnable(GL_BLEND);
-glEnable(GL_CULL_FACE);
+glEnable(GL_CULL_FACE); 
 glFrontFace(GL_CW);
-glDisable(GL_DITHER);
+glDisable(GL_DITHER); 
 glDepthMask(GL_FALSE);
-glDisable(GL_DEPTH_TEST);
-glDisable(GL_SCISSOR_TEST);
-glDisable(GL_STENCIL_TEST);
+glDisable(GL_DEPTH_TEST); 
+glDisable(GL_SCISSOR_TEST); 
+glDisable(GL_STENCIL_TEST); 
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
+glActiveTexture(GL_TEXTURE0);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
