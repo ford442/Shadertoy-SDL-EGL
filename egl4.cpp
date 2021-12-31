@@ -265,8 +265,8 @@ glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER); 
 // glDepthMask(GL_FALSE);
- glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10.0); 
   glDisable(GL_DEPTH_TEST); 
+  glEnable(GL_SCISSOR_TEST); 
 glScissor(0,0,S,S);
 glDisable(GL_STENCIL_TEST);  
   
