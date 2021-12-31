@@ -267,6 +267,7 @@ glDisable(GL_DITHER);
 glDisable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
+glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
