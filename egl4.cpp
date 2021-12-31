@@ -38,7 +38,7 @@ const char common_shader_header_gles3[]=
 "precision highp float;"
 "precision highp sampler3D;"
 "precision highp sampler2D;"
-"precision highp int; \n";
+"precision highp int;\n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;"
 "void main(){"
@@ -52,7 +52,7 @@ const char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out highp vec4 fragColor; \n";
+"out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 
@@ -171,8 +171,8 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
-// emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 program_source=read_file(fileloc);
@@ -206,11 +206,10 @@ glBindVertexArray(VAO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
+glEnableVertexAttribArray(attrib_position);
 glGenTextures(v4,tex2d);
-  glActiveTexture(GL_TEXTURE0);
-
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
 glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
@@ -261,15 +260,14 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 glEnable(GL_BLEND);
-glEnable(GL_CULL_FACE); 
+glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-glDisable(GL_DITHER); 
+glDisable(GL_DITHER);
 // glDepthMask(GL_FALSE);
-  glDisable(GL_DEPTH_TEST); 
-  glEnable(GL_SCISSOR_TEST); 
+glDisable(GL_DEPTH_TEST);
+glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
-glDisable(GL_STENCIL_TEST);  
-  
+glDisable(GL_STENCIL_TEST);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
