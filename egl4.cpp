@@ -267,7 +267,7 @@ glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-glDepthMask(GL_FALSE);
+// glDepthMask(GL_FALSE);
 glDisable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
