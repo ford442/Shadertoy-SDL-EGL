@@ -211,7 +211,7 @@ glEnableVertexAttribArray(attrib_position);
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
-glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA16F,S,S,v0,GL_RGBA16F,GL_UNSIGNED_BYTE,nullptr);
+glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA32UI,S,S,v0,GL_RGBA32UI,GL_UNSIGNED_BYTE,nullptr);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
