@@ -36,12 +36,7 @@ struct timespec req={0,4000000};
 
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
-const char8_t common_shader_header_gles3[]=u8
-"#version 300 es \n"
-"precision highp float;"
-"precision highp sampler3D;"
-"precision highp sampler2D;"
-"precision highp int;\n";
+const char8_t common_shader_header_gles3[]=u8"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp int;\n";
 
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;"
