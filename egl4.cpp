@@ -36,7 +36,7 @@ struct timespec req={0,4000000};
 
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
-const char8_t common_shader_header_gles3[]=
+const char8_t common_shader_header_gles3[]=u8
 "#version 300 es \n"
 "precision highp float;"
 "precision highp sampler3D;"
@@ -61,7 +61,7 @@ const char fragment_shader_header_gles3[]=
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 
-const char* common_shader_header=common_shader_header_gles3;
+const char8_t* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
