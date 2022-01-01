@@ -51,7 +51,7 @@ GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char8_t fileloc[20]=u8"/shader/shader1.toy";
-const char8_t *sources[4];
+char8_t *sources[4];
 char8_t *result=NULL;
 long length=0;
 static const char8_t *read_file(const char *filename){
