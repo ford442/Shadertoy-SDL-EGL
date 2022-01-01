@@ -16,8 +16,6 @@
 using namespace std;
 using namespace std::chrono;
 
-char8_t test;
-
 high_resolution_clock::time_point t1,t2;
 GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
@@ -38,17 +36,18 @@ struct timespec req={0,4000000};
 
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
-const char common_shader_header_gles3[]=
+const char8_t common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
 "precision highp sampler3D;"
 "precision highp sampler2D;"
 "precision highp int;\n";
+
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;"
 "void main(){"
 "gl_Position=iPosition;"
-"} \n";
+"}\n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
@@ -58,8 +57,9 @@ const char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 "out highp vec4 fragColor;\n";
+
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
