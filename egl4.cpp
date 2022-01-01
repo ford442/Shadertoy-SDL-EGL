@@ -35,9 +35,9 @@ struct timespec rem;
 struct timespec req={0,4000000};
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
  char8_t common_shader_header[114]=u8"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp int;\n";
- char8_t vertex_shader_body=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
- char8_t fragment_shader_header=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
- char8_t fragment_shader_footer=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+ char8_t vertex_shader_body[79]=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+ char8_t fragment_shader_header[204]=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+ char8_t fragment_shader_footer[54]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={EGL_CONTEXT_CLIENT_VERSION,3,EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,EGL_NONE};
