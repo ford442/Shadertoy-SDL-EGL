@@ -27,7 +27,7 @@ GLsizei nsources,i,S;
 GLsizei s4=4;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-GLchar program_source;
+char8_t program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 GLint v0=0,v1=1,v2=2,v4=4,v6=6;
