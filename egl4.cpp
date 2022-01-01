@@ -102,7 +102,7 @@ const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 // const char *texture_files[4];
-char *result=NULL;
+char8_t *result=NULL;
 long length=0;
 
 static const char8_t *read_file(const char *filename){
