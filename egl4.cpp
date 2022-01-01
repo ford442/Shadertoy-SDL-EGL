@@ -41,7 +41,7 @@ const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char const *fileloc="/shader/shader1.toy";
 const char *sources[4];
-char *result=NULL;
+char8_t *result=NULL;
 long length=0;
 
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
@@ -104,7 +104,7 @@ EGL_NONE
 
 
 
-static const char *read_file(const char *filename){
+static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -118,9 +118,9 @@ if(status!=0){
 fclose(file);
 return NULL;
 }
-result=static_cast<char*>(malloc((length+1)*sizeof(char)));
+result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 } 
 fclose(file);
