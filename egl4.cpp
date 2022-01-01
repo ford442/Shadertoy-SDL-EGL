@@ -38,8 +38,8 @@ static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_A
  char8_t vertex_shader_body_gles3[]=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
  char8_t fragment_shader_header_gles3[]=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
  char8_t fragment_shader_footer_gles3[]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
- char8_t common_shader_header[114]=common_shader_header_gles3;
- char8_t vertex_shader_body[79]=vertex_shader_body_gles3;
+ char8_t common_shader_header=&common_shader_header_gles3;
+ char8_t vertex_shader_body=&vertex_shader_body_gles3;
  char8_t fragment_shader_header=fragment_shader_header_gles3;
  char8_t fragment_shader_footer=fragment_shader_footer_gles3;
 const EGLint attribut_list[]={EGL_NONE};
