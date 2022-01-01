@@ -3,6 +3,7 @@
 #include <cstdarg>
 #include <cmath>
 #include <cstdio>
+#include <cstdint>
 #include <cstdlib>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
@@ -30,8 +31,9 @@ string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 GLint v0=0,v1=1,v2=2,v4=4,v6=6;
-const timespec ns=(useconds_t)4000000;
-
+const struct timespec ns;
+ns.tv_sec=0;
+ns.tv_nsec=4000000;
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
 const char common_shader_header_gles3[]=
