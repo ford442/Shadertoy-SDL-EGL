@@ -67,7 +67,7 @@ if(result){size_t actual_length=fread(result,sizeof(char8_t),length,file);result
 return NULL;
 }
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char8_t *sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar *sources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){srclens[i]=(GLsizei)sizeof(sources[i]);}
 shader=glCreateShader(type);
