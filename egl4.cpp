@@ -49,7 +49,7 @@ size_t BufferSize=sizeof(vertices);
 size_t VertexSize=sizeof(vertices[0]);
 char8_t fileloc[20]=u8"/shader/shader1.toy";
 char8_t sources[4];
-char8_t result=NULL;
+char8_t *result=NULL;
 long length=0;
 
 static char8_t read_file(char *filename){
