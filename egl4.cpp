@@ -37,7 +37,8 @@ static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_A
 const char8_t common_shader_header_gles3[]=u8"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp int;\n";
 const char8_t vertex_shader_body_gles3[]=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char8_t fragment_shader_header_gles3[]=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
-const char8_t fragment_shader_footer_gles3[]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n const char8_t* common_shader_header=common_shader_header_gles3;
+const char8_t fragment_shader_footer_gles3[]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+const char8_t* common_shader_header=common_shader_header_gles3;
 const char8_t* vertex_shader_body=vertex_shader_body_gles3;
 const char8_t* fragment_shader_header=fragment_shader_header_gles3;
 const char8_t* fragment_shader_footer=fragment_shader_footer_gles3;
