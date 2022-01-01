@@ -189,7 +189,7 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10)*4;});
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10)*8;});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
