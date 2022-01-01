@@ -71,7 +71,7 @@ static GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar *sources)
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){srclens[i]=(GLsizei)sizeof(sources[i]);}
 shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
+glShaderSource(shader,nsources,&sources,srclens);
 glCompileShader(shader);
 return shader;
 }
