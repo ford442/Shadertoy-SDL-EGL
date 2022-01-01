@@ -147,8 +147,8 @@ nanosleep(&req,&rem);
 
 static void gets(){
 EM_ASM({
-document.getElementById("canvas").height=document.getElementById('pmhig').innerHTML*2;
-document.getElementById("canvas").width=document.getElementById('pmhig').innerHTML*2;
+document.getElementById("canvas").height=document.getElementById('pmhig').innerHTML,10)*4;
+document.getElementById("canvas").width=document.getElementById('pmhig').innerHTML,10)*4;
 });
 }
 
@@ -193,7 +193,7 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10)*2;});
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10)*32;});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
