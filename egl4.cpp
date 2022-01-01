@@ -55,7 +55,7 @@ char8_t sources[4];
 char8_t result=NULL;
 long length=0;
 
-static char8_t read_file( char *filename){
+static char8_t read_file(char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -63,7 +63,7 @@ if(status!=0){fclose(file);return NULL;}
 length=ftell(file);
 status=fseek(file,0,SEEK_SET);
 if(status!=0){fclose(file);return NULL;}
-result=static_cast<char8_t>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char8_t>(malloc((length+1)sizeof(char8_t)));
 if(result){
  size_t actual_length=fread(result,sizeof(char8_t),length,file);
  result[actual_length++]={'\0'};};
