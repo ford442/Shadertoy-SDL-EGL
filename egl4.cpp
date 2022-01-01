@@ -62,29 +62,29 @@ const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_LINEAR_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_LINEAR_KHR,
 EGL_NONE
 };
 
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 EGL_NONE};
 
 const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,16,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,16,
+EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
@@ -153,9 +153,9 @@ static void gets(){
 
 static void comp(){
 emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=16;
+attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
-attr.depth=32;
+attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
@@ -171,8 +171,8 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
-emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 program_source=read_file(fileloc);
@@ -263,18 +263,18 @@ glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
-glEnable(GL_BLEND);
+// glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER);
 // glDepthMask(GL_FALSE);
-glDisable(GL_DEPTH_TEST);
+// glDisable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
 glDisable(GL_SCISSOR_TEST);
-glEnable(GL_STENCIL_TEST);
-glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glEnable(GL_STENCIL_TEST);
+// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
