@@ -16,8 +16,6 @@
 using namespace std;
 using namespace std::chrono;
 
-char8_t test;
-
 high_resolution_clock::time_point t1,t2;
 GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
@@ -101,8 +99,7 @@ const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
-// const char *texture_files[4];
-char8_t *result=NULL;
+\char8_t *result=NULL;
 long length=0;
 
 static const char8_t *read_file(const char *filename){
@@ -180,7 +177,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 //program_source=read_file(fileloc);
-const char* default_fragment_shader=read_file(fileloc);
+const char* default_fragment_shader=(char*)read_file(fileloc);
 //const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
