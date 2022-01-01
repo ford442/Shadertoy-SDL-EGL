@@ -34,6 +34,16 @@ GLint v0=0,v1=1,v2=2,v4=4,v6=6;
 struct timespec rem;
 struct timespec req={0,4000000};
 
+typedef struct{GLfloat XYZW[4];}Vertex;
+Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
+GLubyte Indices[]={0,1,2,2,1,3};
+const size_t BufferSize=sizeof(vertices);
+const size_t VertexSize=sizeof(vertices[0]);
+char *fileloc="/shader/shader1.toy";
+const char *sources[4];
+char8_t *result=NULL;
+long length=0;
+
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
 const char common_shader_header_gles3[]=
@@ -92,15 +102,7 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-GLubyte Indices[]={0,1,2,2,1,3};
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
-char *fileloc="/shader/shader1.toy";
-const char *sources[4];
-\char8_t *result=NULL;
-long length=0;
+
 
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
