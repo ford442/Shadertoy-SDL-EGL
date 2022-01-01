@@ -147,8 +147,8 @@ nanosleep(&req,&rem);
 
 static void gets(){
 EM_ASM({
-document.getElementById("canvas").height=document.getElementById('pmhig').innerHTML,10)*4;
-document.getElementById("canvas").width=document.getElementById('pmhig').innerHTML,10)*4;
+document.getElementById("canvas").height=parseInt(document.getElementById('pmhig').innerHTML,10)*4;
+document.getElementById("canvas").width=parseInt(document.getElementById('pmhig').innerHTML,10)*4;
 });
 }
 
