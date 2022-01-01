@@ -30,6 +30,9 @@ string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 GLint v0=0,v1=1,v2=2,v4=4,v6=6;
+timespec ns;
+ns.tv_sec=0.004;
+ns.tv_nsec=4000000;
 
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
@@ -146,7 +149,7 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
-nanosleep(4000000,nullptr);
+nanosleep(ns,nullptr);
 }
 
 static void gets(){
