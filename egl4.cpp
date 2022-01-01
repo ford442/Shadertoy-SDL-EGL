@@ -51,8 +51,8 @@ GLubyte Indices[]={0,1,2,2,1,3};
  size_t BufferSize=sizeof(vertices);
  size_t VertexSize=sizeof(vertices[0]);
 char8_t fileloc[20]=u8"/shader/shader1.toy";
-char8_t *sources[4];
-char8_t *result=NULL;
+char8_t sources[4];
+char8_t result=NULL;
 long length=0;
 
 static char8_t read_file( char *filename){
@@ -63,7 +63,7 @@ if(status!=0){fclose(file);return NULL;}
 length=ftell(file);
 status=fseek(file,0,SEEK_SET);
 if(status!=0){fclose(file);return NULL;}
-// result=static_cast<char8_t>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char8_t>(malloc((length+1)*sizeof(char8_t)));
 if(result){
  size_t actual_length=fread(result,sizeof(char8_t),length,file);
  result[actual_length++]={'\0'};};
