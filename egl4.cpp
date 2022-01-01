@@ -99,7 +99,7 @@ Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.
 GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
-string *fileloc="/shader/shader1.toy";
+char8_t *fileloc="/shader/shader1.toy";
 const char *sources[4];
 // const char *texture_files[4];
 char *result=NULL;
@@ -181,7 +181,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-program_source=read_file(fileloc);
+program_source=read_file("/shader/shader1.toy");
 const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
