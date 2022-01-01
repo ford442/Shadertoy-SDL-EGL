@@ -200,7 +200,7 @@ glReleaseShaderCompiler();
 
 static void strt(){
 // for (int i=0;i<4;++i) {texture_files[i]=NULL;}
-S=2*EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
