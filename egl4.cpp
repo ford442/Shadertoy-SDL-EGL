@@ -17,7 +17,7 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
-GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+EGLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime;
 EGLDisplay display;
