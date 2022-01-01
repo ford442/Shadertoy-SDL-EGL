@@ -55,7 +55,7 @@ char8_t *sources[4];
 char8_t *result=NULL;
 long length=0;
 
-static char8_t *read_file(const char *filename){
+static char8_t read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
