@@ -17,7 +17,7 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
-EGLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime;
 EGLDisplay display;
@@ -30,7 +30,7 @@ EGLConfig eglconfig=NULL;
 string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-GLint v0=0,v1=1,v2=2,v4=4,v6=6;
+EGLint v0=0,v1=1,v2=2,v4=4,v6=6;
 struct timespec rem;
 struct timespec req={0,4000000};
 
