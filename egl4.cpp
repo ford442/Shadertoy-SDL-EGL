@@ -30,7 +30,7 @@ string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 GLint v0=0,v1=1,v2=2,v4=4,v6=6;
-timespec ns=4000000;
+timespec ns=(int32)4000000;
 
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 
