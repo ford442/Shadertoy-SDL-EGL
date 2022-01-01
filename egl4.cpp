@@ -146,6 +146,10 @@ nanosleep(&req,&rem);
 }
 
 static void gets(){
+EM_ASM({
+document.getElementById("canvas").height=document.getElementById('pmhig').innerHTML*16;
+document.getElementById("canvas").width=document.getElementById('pmhig').innerHTML*16;
+});
 }
 
 static void comp(){
@@ -260,18 +264,23 @@ glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-// glDepthMask(GL_FALSE);
+glDepthMask(GL_FALSE);
 glDisable(GL_DEPTH_TEST);
-// glEnable(GL_SCISSOR_TEST);
-// glScissor(0,0,S,S);
+glEnable(GL_SCISSOR_TEST);
+glScissor(0,0,S,S);
 glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glViewport(v0,v0,S,S);
+glViewport(v0,v0,S,S);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
+  
+EM_ASM({
+document.getElementById("canvas").height=document.getElementById('pmhig').innerHTML;
+document.getElementById("canvas").width=document.getElementById('pmhig').innerHTML;
+});
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 
