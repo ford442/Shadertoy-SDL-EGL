@@ -146,6 +146,7 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
+nanosleep(4000000);
 }
 
 static void gets(){
@@ -263,18 +264,18 @@ glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
-// glEnable(GL_BLEND);
+glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-// glDepthMask(GL_FALSE);
-// glDisable(GL_DEPTH_TEST);
+glDepthMask(GL_FALSE);
+glDisable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
 glDisable(GL_SCISSOR_TEST);
-// glEnable(GL_STENCIL_TEST);
-// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glDisable(GL_STENCIL_TEST);
+glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glViewport(v0,v0,S,S);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
