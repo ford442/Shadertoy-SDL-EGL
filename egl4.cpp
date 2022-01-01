@@ -34,28 +34,28 @@ GLint v0=0,v1=1,v2=2,v4=4,v6=6;
 struct timespec rem;
 struct timespec req={0,4000000};
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
-const char8_t common_shader_header_gles3[]=u8"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp int;\n";
-const char8_t vertex_shader_body_gles3[]=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
-const char8_t fragment_shader_header_gles3[]=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
-const char8_t fragment_shader_footer_gles3[]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
-const char8_t* common_shader_header=common_shader_header_gles3;
-const char8_t* vertex_shader_body=vertex_shader_body_gles3;
-const char8_t* fragment_shader_header=fragment_shader_header_gles3;
-const char8_t* fragment_shader_footer=fragment_shader_footer_gles3;
+ char8_t common_shader_header_gles3[]=u8"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp int;\n";
+ char8_t vertex_shader_body_gles3[]=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+ char8_t fragment_shader_header_gles3[]=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+ char8_t fragment_shader_footer_gles3[]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+ char8_t* common_shader_header=common_shader_header_gles3;
+ char8_t* vertex_shader_body=vertex_shader_body_gles3;
+ char8_t* fragment_shader_header=fragment_shader_header_gles3;
+ char8_t* fragment_shader_footer=fragment_shader_footer_gles3;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={EGL_CONTEXT_CLIENT_VERSION,3,EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,EGL_NONE};
 const EGLint attribute_list[]={EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,EGL_RED_SIZE,32,EGL_GREEN_SIZE,32,EGL_BLUE_SIZE,32,EGL_ALPHA_SIZE,32,EGL_DEPTH_SIZE,32,EGL_STENCIL_SIZE,32,EGL_BUFFER_SIZE,32,EGL_NONE};
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
-const size_t BufferSize=sizeof(vertices);
-const size_t VertexSize=sizeof(vertices[0]);
+ size_t BufferSize=sizeof(vertices);
+ size_t VertexSize=sizeof(vertices[0]);
 char8_t fileloc[20]=u8"/shader/shader1.toy";
 char8_t *sources[4];
 char8_t *result=NULL;
 long length=0;
 
-static char8_t read_file(const char *filename){
+static char8_t read_file( char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -68,7 +68,7 @@ if(result){size_t actual_length=fread(result,sizeof(char8_t),length,file);result
 return NULL;
 }
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar *sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources, GLchar *sources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){srclens[i]=(GLsizei)sizeof(sources[i]);}
 shader=glCreateShader(type);
