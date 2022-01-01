@@ -10,7 +10,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
-#include <time.h>
+#include <ctime>
 
 using namespace std;
 using namespace std::chrono;
@@ -146,7 +146,7 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
-nanosleep(4000000);
+nanosleep(4000000,nullptr);
 }
 
 static void gets(){
