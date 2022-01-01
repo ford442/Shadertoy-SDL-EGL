@@ -27,10 +27,9 @@ GLsizei nsources,i,S;
 GLsizei s4=4;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-string program_source;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EGLint v0=0,v1=1,v2=2,v4=4,v6=6;
+EGLint v0=0,v1=1,v2=2,v4=4,v6=6,v32=32;
 struct timespec rem;
 struct timespec req={0,4000000};
 
@@ -74,35 +73,28 @@ const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_LINEAR_KHR,
-EGL_NONE
-};
+const EGLint attribut_list[]={EGL_NONE};
 
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 EGL_NONE};
 
 const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,v32,
+EGL_GREEN_SIZE,v32,
+EGL_BLUE_SIZE,v32,
+EGL_ALPHA_SIZE,v32,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v32,
+EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
-
-
 
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
@@ -178,9 +170,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 }
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-//program_source=read_file(fileloc);
 const char* default_fragment_shader=(char*)read_file(fileloc);
-//const char* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -200,7 +190,7 @@ glReleaseShaderCompiler();
 
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-glUseProgram(&shader_program);
+glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
