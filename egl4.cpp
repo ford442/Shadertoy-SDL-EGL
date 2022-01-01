@@ -33,103 +33,42 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 GLint v0=0,v1=1,v2=2,v4=4,v6=6;
 struct timespec rem;
 struct timespec req={0,4000000};
-
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
-
 const char8_t common_shader_header_gles3[]=u8"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp int;\n";
-
-const char vertex_shader_body_gles3[]=
-"layout(location=0)in highp vec4 iPosition;"
-"void main(){"
-"gl_Position=iPosition;"
-"}\n";
-const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;"
-"uniform float iTime;"
-"uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;"
-"uniform sampler2D iChannel1;"
-"uniform sampler2D iChannel2;"
-"uniform sampler2D iChannel3;"
-"out highp vec4 fragColor;\n";
-
-const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
-
-const char8_t* common_shader_header=common_shader_header_gles3;
-const char* vertex_shader_body=vertex_shader_body_gles3;
-const char* fragment_shader_header=fragment_shader_header_gles3;
-const char* fragment_shader_footer=fragment_shader_footer_gles3;
-
-const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_LINEAR_KHR,
-EGL_NONE
-};
-
-EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-EGL_NONE};
-
-const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,32,
-EGL_NONE
-};
-
+const char8_t vertex_shader_body_gles3[]=u8"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+const char8_t fragment_shader_header_gles3[]=u8"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+const char8_t fragment_shader_footer_gles3[]=u8"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n const char8_t* common_shader_header=common_shader_header_gles3;
+const char8_t* vertex_shader_body=vertex_shader_body_gles3;
+const char8_t* fragment_shader_header=fragment_shader_header_gles3;
+const char8_t* fragment_shader_footer=fragment_shader_footer_gles3;
+const EGLint attribut_list[]={EGL_NONE};
+EGLint anEglCtxAttribs2[]={EGL_CONTEXT_CLIENT_VERSION,3,EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,EGL_NONE};
+const EGLint attribute_list[]={EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,EGL_RED_SIZE,32,EGL_GREEN_SIZE,32,EGL_BLUE_SIZE,32,EGL_ALPHA_SIZE,32,EGL_DEPTH_SIZE,32,EGL_STENCIL_SIZE,32,EGL_BUFFER_SIZE,32,EGL_NONE};
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char8_t fileloc[20]=u8"/shader/shader1.toy";
-const char *sources[4];
-// const char *texture_files[4];
-char *result=NULL;
+const char8_t *sources[4];
+char8_t *result=NULL;
 long length=0;
-
-static const char *read_file(const char *filename){
+static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
-if(status!=0){
-fclose(file);
-return NULL;
-}
+if(status!=0){fclose(file);return NULL;}
 length=ftell(file);
 status=fseek(file,0,SEEK_SET);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-result=static_cast<char*>(malloc((length+1)*sizeof(char)));
-if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
-result[actual_length++]={'\0'};
-} 
-fclose(file);
-return result;
-}
+if(status!=0){fclose(file);return NULL;}
+result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
+if(result){size_t actual_length=fread(result,sizeof(char8_t),length,file);result[actual_length++]={'\0'};}fclose(file);return result;}
 return NULL;
 }
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char8_t **sources){
 GLsizei srclens[nsources];
-for(i=0;i<nsources;++i){
-srclens[i]=(GLsizei)strlen(sources[i]);
-}
+for(i=0;i<nsources;++i){srclens[i]=(GLsizei)strlen(sources[i]);}
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
@@ -166,18 +105,14 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 eglInitialize(display,&major,&minor);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
-if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
-}
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
-// emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 program_source=read_file("/shader/shader1.toy");
-const char* default_fragment_shader=program_source.c_str();
+const char8_t* default_fragment_shader=program_source.c_str();
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -196,7 +131,6 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
-// for (int i=0;i<4;++i) {texture_files[i]=NULL;}
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
