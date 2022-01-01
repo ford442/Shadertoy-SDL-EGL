@@ -146,10 +146,7 @@ nanosleep(&req,&rem);
 }
 
 static void gets(){
-EM_ASM({
-document.getElementById("canvas").height=parseInt(document.getElementById('pmhig').innerHTML,10)*2;
-document.getElementById("canvas").width=parseInt(document.getElementById('pmhig').innerHTML,10)*2;
-});
+
 }
 
 static void comp(){
@@ -193,7 +190,7 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10)*2;});
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -276,11 +273,6 @@ glViewport(v0,v0,S,S);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-  
-EM_ASM({
-document.getElementById("canvas").height=document.getElementById('pmhig').innerHTML;
-document.getElementById("canvas").width=document.getElementById('pmhig').innerHTML;
-});
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 
