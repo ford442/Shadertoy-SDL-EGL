@@ -38,7 +38,7 @@ Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.
 GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
-char const *fileloc="/shader/shader1.toy";
+char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
@@ -146,10 +146,7 @@ nanosleep(&req,&rem);
 }
 
 static void gets(){
-EM_ASM({
-document.getElementById("canvas").height=parseInt(document.getElementById('pmhig').innerHTML,10);
-document.getElementById("canvas").width=parseInt(document.getElementById('pmhig').innerHTML,10);
-});
+
 }
 
 static void comp(){
@@ -276,10 +273,7 @@ glViewport(v0,v0,S,S);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-EM_ASM({
-document.getElementById("canvas").height=parseInt(document.getElementById('pmhig').innerHTML,10);
-document.getElementById("canvas").width=parseInt(document.getElementById('pmhig').innerHTML,10);
-});
+
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 
