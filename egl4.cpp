@@ -39,7 +39,7 @@ Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.
 GLubyte Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
-char *fileloc="/shader/shader1.toy";
+char const *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
