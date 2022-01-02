@@ -146,6 +146,13 @@ nanosleep(&req,&rem);
 }
 
 static void gets(){
+}
+
+static void comp(){
+}
+
+static void strt(){
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -167,11 +174,6 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
-}
-
-static void comp(){
-
-
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
@@ -189,10 +191,6 @@ glLinkProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-}
-
-static void strt(){
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
