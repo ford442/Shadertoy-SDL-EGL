@@ -1,6 +1,5 @@
 
 document.getElementById('btn').addEventListener('click',function(){
-document.getElementById("pmhig").innerHTML=Math.round(window.innerHeight);
 Module.ccall('str');
 });
 
