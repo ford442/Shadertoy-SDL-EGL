@@ -7,7 +7,6 @@ data:222
 document.getElementById('btn2').addEventListener('click',function(){
 let hi=Math.round(window.innerHeight);
 let wi=Math.round(window.innerWidth);
-document.getElementById('pmhig').innerHTML=hi;
 document.getElementById("ihig").innerHTML=hi;
 document.getElementById("iwid").innerHTML=wi;
 document.getElementById("circle").width=wi;
