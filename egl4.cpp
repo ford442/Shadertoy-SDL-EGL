@@ -142,7 +142,7 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 }
 
 static void gets(){
