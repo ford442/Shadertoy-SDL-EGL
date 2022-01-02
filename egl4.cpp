@@ -158,6 +158,9 @@ attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 ctx=emscripten_webgl_create_context("#canvas",&attr);
@@ -169,7 +172,7 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }
-emscripten_webgl_make_context_current(ctx);
+// emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
@@ -190,6 +193,8 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
+  emscripten_webgl_make_context_current(ctx);
+
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
