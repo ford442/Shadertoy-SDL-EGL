@@ -31,7 +31,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v32=32;
 struct timespec rem;
-struct timespec req={0,4000000};
+struct timespec req={0,8000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
@@ -142,14 +142,10 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 }
 
 static void gets(){
-
-}
-
-static void comp(){
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -170,8 +166,11 @@ eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
+emscripten_webgl_make_context_current(ctx);
+}
 
-  emscripten_webgl_make_context_current(ctx);
+static void comp(){
+
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 const char* default_fragment_shader=(char*)read_file(fileloc);
