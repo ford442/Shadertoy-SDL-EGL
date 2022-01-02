@@ -51,5 +51,8 @@ document.getElementById('btn6').style="background-color:yellow;position:absolute
 document.getElementById('btn').style="background-color:red;position:absolute;display:block;left:3%;top:23%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById('btn7').style="background-color:red;position:absolute;display:block;left:3%;top:63%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById('pmhig').innerHTML=1440;
-document.getElementById('di').click();
+});
+document.getElementById('btn10').addEventListener('click',function(){
+document.getElementById("canvas").height=window.innerHeight;
+document.getElementById("canvas").width=window.innerHeight;
 });
