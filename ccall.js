@@ -16,7 +16,7 @@ document.getElementById('btn3').style="background-color:red;position:absolute;di
 document.getElementById('btn6').style="background-color:yellow;position:absolute;display:block;left:3%;top:53%;z-index:999997;border:5px solid green;border-radius:50%;";
 document.getElementById('btn').style="background-color:red;position:absolute;display:block;left:3%;top:23%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById('btn7').style="background-color:red;position:absolute;display:block;left:3%;top:63%;z-index:999997;border:5px solid red;border-radius:50%;";
-document.getElementById('pmhig').innerHTML=4320;
+document.getElementById('pmhig').innerHTML=width=window.innerHeight*2;
 Module.ccall("str");
 });
 
