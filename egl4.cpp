@@ -240,7 +240,7 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,&F,&F,&F);
+glUniform3f(uniform_res,F,F,F);
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
