@@ -162,17 +162,19 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 ctx=emscripten_webgl_create_context("#canvas",&attr);
-eglInitialize(display,&major,&minor);
+
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+emscripten_webgl_make_context_current(ctx);
+
+eglInitialize(display,3,0);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
-if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
-}
+if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 }
-// emscripten_webgl_make_context_current(ctx);
+  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
@@ -193,8 +195,6 @@ glReleaseShaderCompiler();
 }
 
 static void strt(){
-  emscripten_webgl_make_context_current(ctx);
-
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
