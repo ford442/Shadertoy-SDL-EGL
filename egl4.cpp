@@ -73,28 +73,6 @@ const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-const EGLint attribut_list[]={EGL_NONE};
-
-EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_NONE};
-
-const EGLint attribute_list[]={
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_RED_SIZE,v32,
-EGL_GREEN_SIZE,v32,
-EGL_BLUE_SIZE,v32,
-EGL_ALPHA_SIZE,v32,
-EGL_DEPTH_SIZE,v32,
-EGL_STENCIL_SIZE,v32,
-EGL_BUFFER_SIZE,v32,
-EGL_NONE
-};
 
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
@@ -153,6 +131,31 @@ static void comp(){
 
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+  
+const EGLint attribut_list[]={EGL_NONE};
+
+EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_NONE};
+
+const EGLint attribute_list[]={
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_RED_SIZE,v32,
+EGL_GREEN_SIZE,v32,
+EGL_BLUE_SIZE,v32,
+EGL_ALPHA_SIZE,v32,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v32,
+EGL_BUFFER_SIZE,v32,
+EGL_WIDTH,S,
+EGL_HEIGHT,S,
+EGL_NONE
+};
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -173,7 +176,6 @@ eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-glViewport(v0,v0,S,S);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 const char* default_fragment_shader=(char*)read_file(fileloc);
@@ -268,6 +270,8 @@ glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
 glDisable(GL_SCISSOR_TEST);
 glEnable(GL_STENCIL_TEST);
+  glViewport(v0,v0,S,S);
+
 glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
