@@ -267,12 +267,6 @@ emscripten_set_main_loop((void(*)())renderFrame,0,0);
 extern "C" {
 void str(){
 strt();
-}
-void compile(){
-comp();
-}
-void getShader(){
-gets();
 }}
 int main(){
 EM_ASM({
