@@ -120,7 +120,7 @@ static void gets(){
 static void comp(){
 }
 static void strt(){
-F=EM_ASM({return parseInt(window.innerHeight,10);});
+F=(1.0f*EM_ASM({return window.innerHeight;}));
 S=(int)F;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
