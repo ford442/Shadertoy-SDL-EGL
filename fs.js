@@ -11,6 +11,4 @@ FS.writeFile('/shader/shader1.toy',fil);
 }}
 ff.send(null);
 console.log('Wrote 1 shader to filesystem.');
-}}
-ff4.send(null);
 });
