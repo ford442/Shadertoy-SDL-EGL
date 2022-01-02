@@ -29,7 +29,7 @@ EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EGLint v0=0,v1=1,v2=2,v4=4,v6=6,v32=32;
+EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v32=32;
 struct timespec rem;
 struct timespec req={0,4000000};
 
@@ -167,7 +167,7 @@ ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 emscripten_webgl_make_context_current(ctx);
 
-eglInitialize(display,3,0);
+eglInitialize(display,v3,v0);
 if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
