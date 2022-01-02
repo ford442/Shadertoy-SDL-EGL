@@ -33,6 +33,7 @@ EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v32=32;
 struct timespec rem;
 struct timespec req={0,25000000};
 GLfloat F=1.0f;
+GLfloat F0=0.0f;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
@@ -121,7 +122,7 @@ S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
 const EGLint attribute_list[]={
@@ -247,7 +248,7 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glViewport(v0,v0,S,S);
+glViewport(0,0,S,S);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
@@ -257,9 +258,9 @@ glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
 glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST);
-glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+glBlendEquationSeparate(GL_MIN,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glClearColor(0.0f,F,0.0f,F);
+glClearColor(F0,F,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
