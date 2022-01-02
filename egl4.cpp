@@ -19,7 +19,7 @@ using namespace std::chrono;
 high_resolution_clock::time_point t1,t2;
 GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime;
+long double Ttime,F;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -120,7 +120,8 @@ static void gets(){
 static void comp(){
 }
 static void strt(){
-S=EM_ASM_INT({return parseInt(window.innerHeight,10);});
+F=EM_ASM({return parseInt(window.innerHeight,10);});
+S=(int)F;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
