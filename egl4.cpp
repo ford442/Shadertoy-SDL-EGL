@@ -19,7 +19,7 @@ using namespace std::chrono;
 high_resolution_clock::time_point t1,t2;
 GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,F;
+long double Ttime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -32,7 +32,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v32=32;
 struct timespec rem;
 struct timespec req={0,25000000};
-
+GLfloat F;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
