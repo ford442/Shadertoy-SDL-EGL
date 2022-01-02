@@ -31,7 +31,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v32=32;
 struct timespec rem;
-struct timespec req={0,16000000};
+struct timespec req={0,25000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
