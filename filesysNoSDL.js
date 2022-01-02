@@ -53,5 +53,5 @@ document.getElementById('btn7').style="background-color:red;position:absolute;di
 document.getElementById('pmhig').innerHTML=1440;
 });
 document.getElementById('btn10').addEventListener('click',function(){
-document.getElementById("canvas").style="position:absolute;top:0px;left:0px;height100vh;width:100vh;";
+document.getElementById("canvas").style="position:absolute;top:0;left:0;height100vh;width:100vh;image-rendering:auto;";
 });
