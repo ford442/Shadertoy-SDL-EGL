@@ -115,13 +115,10 @@ eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
 }
-static void gets(){
-}
-static void comp(){
-}
+
 static void strt(){
-F=(1.0f*EM_ASM({return window.innerHeight;}));
-S=(int)F;
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+F=(float)S;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
