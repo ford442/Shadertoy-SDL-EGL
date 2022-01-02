@@ -159,15 +159,18 @@ attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
-if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
-if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){};
+eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-}
+
   emscripten_webgl_make_context_current(ctx);
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
