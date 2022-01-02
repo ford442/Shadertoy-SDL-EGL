@@ -1,5 +1,6 @@
 let bz=new BroadcastChannel('bez');
 document.getElementById('btn').addEventListener('click',function(){
+document.getElementById('pmhig').innerHTML=window.innerHeight;
 bz.postMessage({
 data:222
 });});
