@@ -55,4 +55,9 @@ document.getElementById('pmhig').innerHTML=1440;
 document.getElementById('btn10').addEventListener('click',function(){
 document.getElementById("canvas").height=window.innerHeight;
 document.getElementById("canvas").width=window.innerHeight;
-});
+document.getElementById("contain2").height=window.innerHeight;
+document.getElementById("contain2").width=window.innerHeight;
+document.getElementById("canvas").height=window.innerHeight;
+document.getElementById("canvas").width=window.innerHeight;
+document.getElementById("wrap").height=window.innerHeight;
+document.getElementById("wrap").width=window.innerHeight;});
