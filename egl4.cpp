@@ -42,9 +42,7 @@ char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
-
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
@@ -67,13 +65,10 @@ const char fragment_shader_header_gles3[]=
 "out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
-
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
-
-
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
@@ -98,7 +93,6 @@ return result;
 }
 return NULL;
 }
-
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
@@ -109,7 +103,6 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-
 static void renderFrame(){
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -122,23 +115,17 @@ eglSwapBuffers(display,surface);
 frame++;
 nanosleep(&req,&rem);
 }
-
 static void gets(){
 }
-
 static void comp(){
 }
-
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-  
 const EGLint attribut_list[]={EGL_NONE};
-
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
-
 const EGLint attribute_list[]={
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -152,8 +139,6 @@ EGL_ALPHA_SIZE,v32,
 EGL_DEPTH_SIZE,v32,
 EGL_STENCIL_SIZE,v32,
 EGL_BUFFER_SIZE,v32,
-EGL_WIDTH,S,
-EGL_HEIGHT,S,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -205,6 +190,7 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
 glEnableVertexAttribArray(attrib_position);
+/*
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
@@ -246,6 +232,7 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2],v0);
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
+*/
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
@@ -256,31 +243,29 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,(float)S,(float)S,(float)S);
+/*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
+*/
+glViewport(v0,v0,S,S);
 glEnable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-// glDepthMask(GL_FALSE);
 glEnable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,S,S);
 glDisable(GL_SCISSOR_TEST);
 glEnable(GL_STENCIL_TEST);
-  glViewport(v0,v0,S,S);
-
 glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glClearColor(0.0f,1.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
-
 extern "C" {
 void str(){
 strt();
@@ -291,7 +276,6 @@ comp();
 void getShader(){
 gets();
 }}
-
 int main(){
 EM_ASM({
 FS.mkdir("/shader");
