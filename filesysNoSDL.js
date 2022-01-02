@@ -1,5 +1,10 @@
 let bz=new BroadcastChannel('bez');
 document.getElementById('btn').addEventListener('click',function(){
+bz.postMessage({
+data:222
+});});
+
+document.getElementById('btn2').addEventListener('click',function(){
 let hi=Math.round(window.innerHeight);
 let wi=Math.round(window.innerWidth);
 document.getElementById('pmhig').innerHTML=hi;
@@ -8,15 +13,12 @@ document.getElementById("iwid").innerHTML=wi;
 document.getElementById("circle").width=wi;
 document.getElementById("circle").height=hi;
 document.getElementById("di").click();
-bz.postMessage({
-data:222
-});});
-
-document.getElementById('btn2').addEventListener('click',function(){
-document.getElementById("circle").height=window.innerHeight;
-document.getElementById("circle").width=window.innerWidth;
-// document.getElementById("canvas").height=window.innerHeight;
-// document.getElementById("canvas").width=window.innerHeight;
+document.getElementById("canvas").height=hi;
+document.getElementById("canvas").width=hi;
+document.getElementById("wrap").height=hi;
+document.getElementById("wrap").width=hi;
+document.getElementById("contain2").height=hi;
+document.getElementById("contain2").width=hi;
 document.getElementById('btn3').style.border="5px solid green";
 document.getElementById('btn2').style.border="5px solid red";
 document.getElementById('btn2').style.background="red";
