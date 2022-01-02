@@ -120,7 +120,7 @@ static void gets(){
 static void comp(){
 }
 static void strt(){
-S=EM_ASM_INT({return parseInt(document.getElementById('canvas').height,10);});
+S=EM_ASM_INT({return parseInt(window.innerHeight,10);});
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
