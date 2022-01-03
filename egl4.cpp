@@ -204,7 +204,7 @@ glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(shader_color);
 
 glBindVertexArray(VAO);
-glVertexAttribPointer(attribute_position,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,0);
+glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
 
 
