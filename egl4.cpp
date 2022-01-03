@@ -17,9 +17,10 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
-GLuint EBO,FBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime;
+GLuint EBO,FBO,tex2d[4],shader_program,shader,frame;
+GLuint attribute_pos,sampler_channel[4],shader_color;
+GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_dtime,uniform_fps,uniform_res,uniform_mouse;
+long double Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -34,6 +35,7 @@ struct timespec rem;
 struct timespec req={0,25000000};
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
+GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
@@ -45,31 +47,33 @@ char8_t *result=NULL;
 long length=0;
 static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 const char common_shader_header_gles3[]=
-"#version 300 es \n"
+"#version 300 es\n"
 "precision highp float;"
 "precision highp sampler3D;"
 "precision highp sampler2D;"
 "precision highp int;\n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;"
-"void main(){"
-"gl_Position=iPosition;"
-"} \n";
+"void main(){gl_Position=iPosition}\n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform vec4 iMouse;"
+"uniform float iTimeDelta;"
+"uniform float iFrameRate;"
+"uniform int iFrame;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 "out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
 const char* fragment_shader_footer=fragment_shader_footer_gles3;
+
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
@@ -105,12 +109,18 @@ glCompileShader(shader);
 return shader;
 }
 static void renderFrame(){
+t3=t2;
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+duration<long double>time_spanb=duration_cast<duration<long double>>(t2-t3);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
+Dtime=time_spanb.count();
+fps=1.0f/Dtime;
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
+glUniform1f(uniform_dtime,Dtime);
+glUniform1f(uniform_fps,fps);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
@@ -178,17 +188,25 @@ glLinkProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-glUseProgram(shader_program);
+  
 glGenBuffers(v1,&EBO);
+glGenVertexArrays(v1,&VAO);
+glGenBuffers(v1,&VBO);
+
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-glGenVertexArrays(v1,&VAO);
-glBindVertexArray(VAO);
-glGenBuffers(v1,&VBO);
+
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
-glEnableVertexAttribArray(attrib_position);
+
+glBindVertexArray(VAO);
+glVertexAttribPointer(attribute_pos,v4,GL_FLOAT,GL_TRUE,VertexSize,v0);
+glEnableVertexAttribArray(attribute_pos);
+glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float) * 7,v0);
+glEnableVertexAttribArray(shader_color);
+
+glUseProgram(shader_program);
+
 /*
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
@@ -232,7 +250,7 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
 */
-attrib_position=glGetAttribLocation(shader_program,"iPosition");
+attribute_pos=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
@@ -241,6 +259,9 @@ uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
+uniform_dtime=glGetUniformLocation(shader_program,"iDeltaTime");
+uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
+shader_color=glGetUniformLocation(shader_program,"fragColor");
 glUniform3f(uniform_res,F,F,F);
 /*
 glUniform1i(sampler_channel[0],v0);
@@ -248,18 +269,20 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glViewport(v0,v0,S,S);
+// glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-glEnable(GL_DITHER);
-glEnable(GL_DEPTH_TEST);
-// glDepthMask(GL_FALSE);  
-glEnable(GL_SCISSOR_TEST);
-glScissor(v0,v0,S,S);
-glDisable(GL_SCISSOR_TEST);
+glDisable(GL_DITHER);
+// glEnable(GL_DEPTH_TEST);
+ // glDepthFunc(GL_ALWAYS);
+ //  glEnable(GL_SCISSOR_TEST);
+// glScissor(v0,v0,S,S);
+// glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_STENCIL_TEST);
-glClearColor(F0,F,F0,F);
+glClearColor(F0,F0,F0,F);
+glClearDepth(F);
+glClearStencil(F0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
