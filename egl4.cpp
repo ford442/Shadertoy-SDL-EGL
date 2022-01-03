@@ -17,7 +17,7 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint EBO,FBO,tex2d[4],shader_program,shader,frame;
+GLuint VCO,EBO,FBO,tex2d[4],shader_program,shader,frame;
 GLuint attribute_position,sampler_channel[4],shader_color;
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_dtime,uniform_fps,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
@@ -114,11 +114,11 @@ duration<long double>time_spanb=duration_cast<duration<long double>>(t2-t3);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 Dtime=time_spanb.count();
-// fps=1.0f/Dtime;
+fps=1.0f/Dtime;
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-// glUniform1f(uniform_dtime,Dtime);
-// glUniform1f(uniform_fps,fps);
+glUniform1f(uniform_dtime,Dtime);
+glUniform1f(uniform_fps,fps);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
@@ -189,6 +189,7 @@ glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
 glGenVertexArrays(v1,&VAO);
+glGenVertexArrays(v1,&VCO);
 glGenBuffers(v1,&VBO);
 glGenBuffers(v1,&EBO);
 
@@ -198,10 +199,11 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
-glBindVertexArray(VAO);
-
+glBindVertexArray(VCO);
 glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(shader_color);
+ 
+glBindVertexArray(VAO);
 glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
 
@@ -280,8 +282,8 @@ glDisable(GL_DITHER);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
-// glClearDepthf(F);
-// glClearStencil(F0);
+glClearDepthf(F);
+glClearStencil(F0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
