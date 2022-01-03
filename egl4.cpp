@@ -200,11 +200,11 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
 glBindVertexArray(VAO);
 
+glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,0);
+glEnableVertexAttribArray(shader_color);
 glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
 
-glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,0);
-glEnableVertexAttribArray(shader_color);
 
 /*
 glGenTextures(v4,tex2d);
