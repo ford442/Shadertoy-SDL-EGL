@@ -202,8 +202,8 @@ glBindVertexArray(VAO);
 glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_TRUE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
 
-// glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_TRUE,sizeof(float)*7,0);
-// glEnableVertexAttribArray(shader_color);
+glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_TRUE,sizeof(float)*7,0);
+glEnableVertexAttribArray(shader_color);
 
 /*
 glGenTextures(v4,tex2d);
