@@ -200,11 +200,11 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
 glBindVertexArray(VCO);
-glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,0);
+glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_FALSE,VertexSize,GL_FALSE);
 glEnableVertexAttribArray(shader_color);
 
 glBindVertexArray(VAO);
-glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
 glEnableVertexAttribArray(attribute_position);
 
 
