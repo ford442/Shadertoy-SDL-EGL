@@ -60,6 +60,7 @@ const char vertex_shader_body_gles3[]=
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
+"uniform float iTimeDelta;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -117,7 +118,7 @@ Dtime=time_spanb.count();
 // fps=1.0f/Dtime;
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-// glUniform1f(uniform_dtime,Dtime);
+glUniform1f(uniform_dtime,Dtime);
 // glUniform1f(uniform_fps,fps);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
@@ -188,9 +189,9 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-glGenBuffers(v1,&EBO);
 glGenVertexArrays(v1,&VAO);
 glGenBuffers(v1,&VBO);
+glGenBuffers(v1,&EBO);
 
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
@@ -201,9 +202,9 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glBindVertexArray(VAO);
 glVertexAttribPointer(attribute_pos,v4,GL_FLOAT,GL_TRUE,VertexSize,&v0);
 glEnableVertexAttribArray(attribute_pos);
-glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float) * 7,&v0);
+ 
+glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float)*7,&v0);
 glEnableVertexAttribArray(shader_color);
-
 
 /*
 glGenTextures(v4,tex2d);
@@ -254,6 +255,7 @@ sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
+uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
