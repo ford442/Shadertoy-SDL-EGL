@@ -39,9 +39,17 @@ GLfloat F0=0.0f;
 GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
+Vertex colors[]={{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}};
+Vertex normals[]={{0.0,0.0,1.0},{0.0,0.0,1.0},{0.0,0.0,1.0},{0.0,0.0,1.0}};
 GLuint Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
+const size_t ColorsSize=sizeof(colors);
+const size_t NormalsSize=sizeof(normals);
+const size_t IndicesSize=sizeof(Indices);
 const size_t VertexSize=sizeof(vertices[0]);
+const size_t ColorSize=sizeof(colors[0]);
+const size_t NormalSize=sizeof(normals[0]);
+const size_t IndexSize=sizeof(Indices[0]);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
@@ -190,28 +198,45 @@ shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
+glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-glUseProgram(shader_program);
 glGenVertexArrays(v1,&VAO);
-glGenVertexArrays(v1,&VCO);
+glGenVertexArrays(v1,&CAO);
+glGenVertexArrays(v1,&ECO);
+glGenVertexArrays(v1,&NCO);
 glGenBuffers(v1,&VBO);
 glGenBuffers(v1,&EBO);
-
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-
-glBindVertexArray(VCO);
-glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
-glEnableVertexAttribArray(shader_color);
+glGenBuffers(v1,&CBO);
+glGenBuffers(v1,&NBO);
 
 glBindVertexArray(VAO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,BufferSize,vertices,GL_STATIC_DRAW);
 glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
+
+glBindVertexArray(VCO);
+glBindBuffer(GL_ARRAY_BUFFER,CBO);
+glBufferData(GL_ARRAY_BUFFER,ColorsSize,colors,GL_STATIC_DRAW);
+glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,ColorSize,0);
+glEnableVertexAttribArray(shader_color);
+ 
+glBindVertexArray(NCO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,NBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,NormalsSize,normals,GL_STATIC_DRAW);
+glVertexAttribPointer(shader_normals,v3,GL_FLOAT,GL_FALSE,NormalSize,0);
+glEnableVertexAttribArray(shader_normals);
+
+glBindVertexArray(ECO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,IndicesSize,Indices,GL_STATIC_DRAW);
+glVertexAttribPointer(shader_indice,v1,GL_UNSIGNED_INT,GL_FALSE,IndexSize,0);
+glEnableVertexAttribArray(shader_indice);
+
+glBindVertexArray(v0);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,v0);
 
 /*
 glGenTextures(v4,tex2d);
