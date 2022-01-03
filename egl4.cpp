@@ -202,8 +202,8 @@ glBindVertexArray(VAO);
 glVertexAttribPointer(attribute_pos,v4,GL_FLOAT,GL_TRUE,VertexSize,&v0);
 glEnableVertexAttribArray(attribute_pos);
  
-glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float)*7,&v0);
-glEnableVertexAttribArray(shader_color);
+// glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float)*7,&v0);
+// glEnableVertexAttribArray(shader_color);
 
 /*
 glGenTextures(v4,tex2d);
@@ -259,7 +259,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 // uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
-shader_color=glGetUniformLocation(shader_program,"fragColor");
+// shader_color=glGetUniformLocation(shader_program,"fragColor");
 glUniform3f(uniform_res,F,F,F);
 /*
 glUniform1i(sampler_channel[0],v0);
