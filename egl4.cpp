@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
+#include <cstdbool>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -131,11 +132,11 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
-const EGLint attribut_list[]={EGL_NONE};
+const EGLint attribut_list[]={EGL_NONE,EGL_NONE};
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_NONE};
+EGL_NONE,EGL_NONE};
 const EGLint attribute_list[]={
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -149,7 +150,7 @@ EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
-EGL_NONE
+EGL_NONE,EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
