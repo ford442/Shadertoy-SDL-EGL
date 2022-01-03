@@ -166,7 +166,7 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
-eglChooseConfig(display,attribute_list,&eglconfig,&config_size,&v1);
+eglChooseConfig(display,attribute_list,&eglconfig,&config_size,v1);
 eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
