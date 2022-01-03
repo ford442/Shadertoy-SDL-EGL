@@ -18,7 +18,7 @@ using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint EBO,FBO,tex2d[4],shader_program,shader,frame;
-GLuint attribute_pos,sampler_channel[4],shader_color;
+GLuint attribute_position,sampler_channel[4],shader_color;
 GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_dtime,uniform_fps,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLDisplay display;
@@ -199,8 +199,8 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
 glBindVertexArray(VAO);
-glVertexAttribPointer(attribute_pos,v4,GL_FLOAT,GL_TRUE,VertexSize,&v0);
-glEnableVertexAttribArray(attribute_pos);
+glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_TRUE,VertexSize,&v0);
+glEnableVertexAttribArray(attribute_position);
  
 // glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float)*7,&v0);
 // glEnableVertexAttribArray(shader_color);
@@ -248,7 +248,7 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
 */
-attribute_pos=glGetAttribLocation(shader_program,"iPosition");
+attribute_position=glGetAttribLocation(shader_program,"iPosition");
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
