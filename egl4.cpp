@@ -60,6 +60,7 @@ const char vertex_shader_body_gles3[]=
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
+"uniform float iTimeDelta;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -131,7 +132,7 @@ S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,v3,
+EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
 const EGLint attribute_list[]={
@@ -140,13 +141,13 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_RED_SIZE,v32,
-EGL_GREEN_SIZE,v32,
-EGL_BLUE_SIZE,v32,
-EGL_ALPHA_SIZE,v32,
-EGL_DEPTH_SIZE,v32,
-EGL_STENCIL_SIZE,v32,
-EGL_BUFFER_SIZE,v32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,8,
+EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -159,11 +160,11 @@ attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=v2;
-attr.minorVersion=v0;
+attr.majorVersion=2;
+attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
+eglInitialize(display,3,0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
@@ -257,7 +258,7 @@ sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
-// uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
+uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
