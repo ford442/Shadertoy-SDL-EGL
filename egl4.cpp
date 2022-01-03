@@ -61,6 +61,7 @@ const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform float iTimeDelta;"
+"uniform float iFrameRate;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -201,11 +202,11 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
 glBindVertexArray(VCO);
-glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,VertexSize,GL_FALSE);
+glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(shader_color);
 
 glBindVertexArray(VAO);
-glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,GL_FALSE);
+glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
 
 
@@ -262,7 +263,7 @@ uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-// uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
+uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 shader_color=glGetUniformLocation(shader_program,"fragColor");
 glUniform3f(uniform_res,F,F,F);
 /*
