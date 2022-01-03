@@ -188,7 +188,7 @@ glLinkProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-  
+glUseProgram(shader_program);
 glGenBuffers(v1,&EBO);
 glGenVertexArrays(v1,&VAO);
 glGenBuffers(v1,&VBO);
@@ -205,7 +205,6 @@ glEnableVertexAttribArray(attribute_pos);
 glVertexAttribPointer(shader_color,v4,GL_UNSIGNED_BYTE,GL_TRUE,sizeof(float) * 7,&v0);
 glEnableVertexAttribArray(shader_color);
 
-glUseProgram(shader_program);
 
 /*
 glGenTextures(v4,tex2d);
