@@ -223,19 +223,19 @@ glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glBufferData(GL_ARRAY_BUFFER,ColorsSize,colors,GL_STATIC_DRAW);
 glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,ColorSize,0);
 glEnableVertexAttribArray(shader_color);
- 
-glBindVertexArray(NCO);
-glBindBuffer(GL_ARRAY_BUFFER,NBO);
-glBufferData(GL_ARRAY_BUFFER,NormalsSize,normals,GL_STATIC_DRAW);
-glVertexAttribPointer(shader_normals,v3,GL_FLOAT,GL_FALSE,NormalSize,0);
-glEnableVertexAttribArray(shader_normals);
+
 
 glBindVertexArray(ECO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,IndicesSize,Indices,GL_STATIC_DRAW);
 glVertexAttribPointer(shader_indice,v1,GL_UNSIGNED_INT,GL_FALSE,IndexSize,0);
 glEnableVertexAttribArray(shader_indice);
-
+ 
+glBindVertexArray(NCO);
+glBindBuffer(GL_ARRAY_BUFFER,NBO);
+glBufferData(GL_ARRAY_BUFFER,NormalsSize,normals,GL_STATIC_DRAW);
+glVertexAttribPointer(shader_normals,v3,GL_FLOAT,GL_FALSE,NormalSize,0);
+glEnableVertexAttribArray(shader_normals);
 /*
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
