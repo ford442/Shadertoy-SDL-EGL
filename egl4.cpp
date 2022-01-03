@@ -51,24 +51,23 @@ const char common_shader_header_gles3[]=
 "precision highp float;"
 "precision highp sampler3D;"
 "precision highp sampler2D;"
-"precision highp int; \n";
+"precision highp int;\n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;"
-"void main(){gl_Position=iPosition} \n";
+"void main(){"
+"gl_Position=iPosition;"
+"} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
 "uniform vec4 iMouse;"
-"uniform float iTimeDelta;"
-"uniform float iFrameRate;"
-"uniform int iFrame;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out highp vec4 fragColor; \n";
+"out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
