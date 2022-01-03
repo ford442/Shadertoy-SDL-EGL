@@ -237,7 +237,6 @@ glVertexAttribPointer(shader_indice,v1,GL_UNSIGNED_INT,GL_FALSE,IndexSize,0);
 glEnableVertexAttribArray(shader_indice);
 
 glBindVertexArray(v0);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,v0);
 
 /*
 glGenTextures(v4,tex2d);
