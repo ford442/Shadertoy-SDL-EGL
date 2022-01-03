@@ -158,11 +158,11 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=2;
-attr.minorVersion=0;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
@@ -208,7 +208,6 @@ glEnableVertexAttribArray(shader_color);
 glBindVertexArray(VAO);
 glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
-
 
 /*
 glGenTextures(v4,tex2d);
