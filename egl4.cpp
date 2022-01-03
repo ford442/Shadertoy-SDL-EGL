@@ -38,7 +38,7 @@ GLfloat F0=0.0f;
 GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-GLubyte Indices[]={0,1,2,2,1,3};
+GLuint Indices[]={0,1,2,2,1,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
@@ -122,7 +122,7 @@ glUniform1i(uniform_frame,frame);
 glUniform1f(uniform_dtime,Dtime);
 glUniform1f(uniform_fps,fps);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_INT,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
@@ -202,11 +202,11 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
 glBindVertexArray(VCO);
-glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
+glVertexAttribPointer(shader_color,v4,GLclampf,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(shader_color);
 
 glBindVertexArray(VAO);
-glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
+glVertexAttribPointer(attribute_position,v4,GLclampf,GL_FALSE,VertexSize,0);
 glEnableVertexAttribArray(attribute_position);
 
 
