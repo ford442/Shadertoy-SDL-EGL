@@ -122,11 +122,11 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
-const EGLint attribut_list[]={EGL_NONE,EGL_NONE};
+const EGLint attribut_list[]={EGL_NONE,};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_NONE,EGL_NONE};
+EGL_NONE,};
 const EGLint attribute_list[]={
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -140,7 +140,7 @@ EGL_ALPHA_SIZE,v32,
 EGL_DEPTH_SIZE,v32,
 EGL_STENCIL_SIZE,v32,
 EGL_BUFFER_SIZE,v32,
-EGL_NONE,EGL_NONE
+EGL_NONE,
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
@@ -249,12 +249,14 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,F,F,F);
+
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
+
 // glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
