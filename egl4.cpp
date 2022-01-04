@@ -257,12 +257,12 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glViewport(v0,v0,S,S);
+// glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glEnable(GL_DITHER);
-glEnable(GL_DEPTH_TEST);
+// glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_FALSE);  
 glEnable(GL_SCISSOR_TEST);
 glScissor(v0,v0,S,S);
