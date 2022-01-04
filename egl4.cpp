@@ -19,7 +19,7 @@ using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint VBO,EBO,CBO,NBO,tex2d[4],shader_program,shader,frame;
-GLuint attribute_position,sampler_channel[4],shader_color,shader_normals,shader_indice;
+GLuint attrib_position,sampler_channel[4],shader_color,shader_normals,shader_indice;
 GLuint VCO,CCO,ECO,NCO,vtx,frag,uniform_frame,uniform_time;
 GLuint uniform_dtime,uniform_fps,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
@@ -212,18 +212,11 @@ glGenBuffers(v1,&EBO);
 glGenBuffers(v1,&CBO);
 glGenBuffers(v1,&NBO);
 
-glBindVertexArray(VCO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,BufferSize,vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(attribute_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
-glEnableVertexAttribArray(attribute_position);
-
 glBindVertexArray(CCO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glBufferData(GL_ARRAY_BUFFER,ColorsSize,colors,GL_STATIC_DRAW);
 glVertexAttribPointer(shader_color,v4,GL_FLOAT,GL_FALSE,ColorSize,0);
 glEnableVertexAttribArray(shader_color);
-
 
 glBindVertexArray(ECO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -236,6 +229,12 @@ glBindBuffer(GL_ARRAY_BUFFER,NBO);
 glBufferData(GL_ARRAY_BUFFER,NormalsSize,normals,GL_STATIC_DRAW);
 glVertexAttribPointer(shader_normals,v3,GL_FLOAT,GL_FALSE,NormalSize,0);
 glEnableVertexAttribArray(shader_normals);
+ 
+glBindVertexArray(VCO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,BufferSize,vertices,GL_STATIC_DRAW);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_FALSE,VertexSize,0);
+glEnableVertexAttribArray(attrib_position);
 /*
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
