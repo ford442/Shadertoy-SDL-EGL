@@ -267,7 +267,7 @@ glEnable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(v0,v0,S,S);
 glDisable(GL_SCISSOR_TEST);
-glDisable(GL_MULTISAMPLE);
+glDisable(GL_NORMALIZE);
 // glEnable(GL_STENCIL_TEST);
 glClearColor(F0,F,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
