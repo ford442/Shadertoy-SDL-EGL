@@ -36,7 +36,7 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-Vertex colors[]={{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}};
+Vertex colors[]={{0.0,0.0,0.0,1.0},{0.0,0.0,0.0,1.0},{0.0,0.0,0.0,1.0},{0.0,0.0,0.0,1.0}};
 GLubyte Indices[]={0,1,2,2,1,3};
 const size_t ColorsSize=sizeof(colors);
 const size_t BufferSize=sizeof(vertices);
@@ -122,11 +122,11 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
-const EGLint attribut_list[]={EGL_NONE};
+const EGLint attribut_list[]={EGL_NONE,EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_NONE};
+EGL_NONE,EGL_NONE};
 const EGLint attribute_list[]={
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -140,7 +140,7 @@ EGL_ALPHA_SIZE,v32,
 EGL_DEPTH_SIZE,v32,
 EGL_STENCIL_SIZE,v32,
 EGL_BUFFER_SIZE,v32,
-EGL_NONE
+EGL_NONE,EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
@@ -187,19 +187,14 @@ glGenBuffers(v1,&CBO);
 glBindVertexArray(CCO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glBufferData(GL_ARRAY_BUFFER,ColorsSize,colors,GL_STATIC_DRAW);
-
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-
 glGenVertexArrays(v1,&VAO);
 glBindVertexArray(VAO);
-  
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
 glEnableVertexAttribArray(attrib_position);
 
@@ -272,6 +267,7 @@ glEnable(GL_DEPTH_TEST);
 glEnable(GL_SCISSOR_TEST);
 glScissor(v0,v0,S,S);
 glDisable(GL_SCISSOR_TEST);
+glDisable(GL_MULTISAMPLE);
 // glEnable(GL_STENCIL_TEST);
 glClearColor(F0,F,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
