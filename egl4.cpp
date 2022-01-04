@@ -17,8 +17,8 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
-GLuint EBO,FBO,CBO,CCO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-GLuint VBO,VAO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+GLuint VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime;
 EGLDisplay display;
 EGLSurface surface;
@@ -178,35 +178,21 @@ glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
 glUseProgram(shader_program);
-
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-
 glGenBuffers(v1,&CBO);
 glBindVertexArray(CCO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glBufferData(GL_ARRAY_BUFFER,ColorsSize,colors,GL_STATIC_DRAW);
-
-glBindVertexArray(NCO);
-glBindBuffer(GL_ARRAY_BUFFER,NBO);
-glBufferData(GL_ARRAY_BUFFER,NormalsSize,normals,GL_STATIC_DRAW);
-glVertexAttribPointer(shader_normals,v3,GL_FLOAT,GL_FALSE,NormalSize,0);
-glEnableVertexAttribArray(shader_normals);
-
-
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-
 glGenVertexArrays(v1,&VAO);
 glBindVertexArray(VAO);
-  
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
 glEnableVertexAttribArray(attrib_position);
 
