@@ -246,8 +246,6 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
 */
   
-
-  
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
@@ -268,13 +266,13 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 
-// glViewport(v0,v0,S,S);
-glDisable(GL_BLEND);
+glViewport(v0,v0,S,S);
+// glDisable(GL_BLEND);
 // glEnable(GL_CULL_FACE);
-// glEnable(GL_CULL_FACE);
-// glFrontFace(GL_CW);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-// glEnable(GL_SAMPLER);
+glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_FALSE);  
 glEnable(GL_SCISSOR_TEST);
