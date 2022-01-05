@@ -41,7 +41,6 @@ GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
-// Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,3,3,2,1};
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -158,7 +157,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
