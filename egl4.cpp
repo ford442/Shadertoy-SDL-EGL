@@ -38,10 +38,9 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
-Vertex colors[]={{0.0,0.0,0.0,1.0}};
-GLubyte Indices[]={0,1,3,2,4,5,7,6};
-const size_t ColorsSize=sizeof(colors);
+// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
+Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
+GLubyte Indices[]={0,1,2,3};
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
@@ -116,7 +115,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,v8,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,v4,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
@@ -188,6 +187,8 @@ glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
+  
+attrib_position=glGetAttribLocation(shader_program,"iPosition");
 
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -244,7 +245,6 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
 */
   
-  attrib_position=glGetAttribLocation(shader_program,"iPosition");
 
   
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
