@@ -107,8 +107,8 @@ return NULL;
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
 for(a=0;a<361;a++){
 b=(float)a/360;
-vertices[a][0]=siz*cos(a);
-vertices[a][1]=siz*sin(a);
+vertices[a][0]=cos(a);
+vertices[a][1]=sin(a);
 vertices[a][2]=b;
 vertices[a][3]=1.0f;const size_t BufferSize=sizeof(vertices);
 Indices[a]=a;
