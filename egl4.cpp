@@ -259,7 +259,7 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glViewport(v0,v0,S,S);
+// glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
 // glEnable(GL_CULL_FACE);
 // glFrontFace(GL_CW);
