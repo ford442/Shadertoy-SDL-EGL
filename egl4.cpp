@@ -38,7 +38,7 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat fps;
 
-typedef struct{GLfloat XYZ[3];}Vertex;
+typedef struct{GLfloat XYZW[3];}Vertex;
  Vertex vertices[]={{-1.0,-1.0,1.0},{1.0,-1.0,1.0},{1.0,1.0,1.0},{-1.0,1.0,1.0}};
  GLubyte Indices[]={0,1,3,3,2,1};
 // Vertex vertices[]={{-1.0,-1.0,1.0},{0.0,-1.0,1.0},{1.0,-1.0,1.0},{1.0,0.0,1.0},{1.0,1.0,1.0},{0.0,1.0,1.0},{-1.0,1.0,1.0},{-1.0,0.0,1.0},{0.0,0.0,1.0}};
