@@ -40,10 +40,9 @@ GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
-GLfloat vertices[360][4];
+GLfloat vertices[1440];
 //  GLubyte Indices[]={0,1,3,3,2,1};
 GLubyte Indices[360];
-
 // const size_t VertexSize=sizeof((float)*4);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -131,13 +130,13 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
-  for(a=0;a<361;a++){
+for(a=0;a<361;a++){
 b=(float)a/360;
-vertices[a][0]=cos(a);
-vertices[a][1]=sin(a);
-vertices[a][2]=b;
-vertices[a][3]=1.0f;
-  // const size_t BufferSize=sizeof(vertices);
+vertices[a*4]=siz*cos(a);
+vertices[(a*4)+1]=siz*sin(a);
+vertices[(a*4)+2]=b;
+vertices[(a*4)+3]=1.0f;
+// const size_t BufferSize=sizeof(vertices);
 Indices[a]=a;
 }
 const EGLint attribut_list[]={EGL_NONE};
