@@ -40,7 +40,7 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
 Vertex colors[]={{0.0,0.0,0.0,1.0}};
-GLubyte Indices[]={0,1,2,3,4,5,6,7};
+GLubyte Indices[]={0,1,3,2,4,5,7,6};
 const size_t ColorsSize=sizeof(colors);
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
