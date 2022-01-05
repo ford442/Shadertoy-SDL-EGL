@@ -272,7 +272,7 @@ glViewport(v0,v0,S,S);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-glEnable(GL_SAMPLER);
+// glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_FALSE);  
 glEnable(GL_SCISSOR_TEST);
