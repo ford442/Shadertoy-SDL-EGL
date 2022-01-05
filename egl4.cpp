@@ -116,7 +116,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,v8,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,v8,GL_UNSIGNED_INT,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
