@@ -37,7 +37,7 @@ GLfloat F0=0.0f;
 GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
-GLubyte Indices[]={0,2,3,0,2,1};
+GLubyte Indices[]={0,1,3,3,2,1};
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
