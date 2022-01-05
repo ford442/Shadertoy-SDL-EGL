@@ -198,7 +198,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,VertexSize,GL_FALSE);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,0);
 glEnableVertexAttribArray(attrib_position);
 
 /*
