@@ -38,12 +38,10 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat fps;
 
-
-
 typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
 // GLubyte Indices[]={0,1,3,3,2,1};
-Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{0.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,0.0,1.0,1.0},{1.0,1.0,1.0,1.0},{0.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0},{-1.0,0.0,1.0,1.0},{0.0,0.0,1.0,1.0}};
+Vertex vertices[]={{-1.0,-1.0,1.0},{0.0,-1.0,1.0},{1.0,-1.0,1.0},{1.0,0.0,1.0},{1.0,1.0,1.0},{0.0,1.0,1.0},{-1.0,1.0,1.0},{-1.0,0.0,1.0},{0.0,0.0,1.0}};
 GLubyte Indices[]={8,0,1,8,1,2,8,2,3,8,3,4,8,4,5,8,5,6,8,6,7,8,7,0};
 // const size_t VertexSize=sizeof((float)*4);
 char *fileloc="/shader/shader1.toy";
@@ -203,7 +201,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,0);
+glVertexAttribPointer(attrib_position,v3,GL_FLOAT,GL_TRUE,0,0);
 glEnableVertexAttribArray(attrib_position);
 
 /*
