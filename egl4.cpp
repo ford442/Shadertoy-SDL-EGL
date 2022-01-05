@@ -270,7 +270,7 @@ glUniform1i(sampler_channel[3],v0);
 // glDisable(GL_BLEND);
 // glEnable(GL_CULL_FACE);
 glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
+// glFrontFace(GL_CW);
 glDisable(GL_DITHER);
 // glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
