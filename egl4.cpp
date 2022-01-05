@@ -14,8 +14,10 @@
 #include <emscripten/html5.h>
 #include <iostream>
 #include <ctime>
+
 using namespace std;
 using namespace std::chrono;
+
 high_resolution_clock::time_point t1,t2,t3;
 GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
@@ -35,9 +37,13 @@ struct timespec req={0,25000000};
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat fps;
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
-GLubyte Indices[]={0,1,3,3,2,1};
+ GLubyte Indices[]={0,1,3,3,2,1};
+// Vertex vertices[]={{-1.0,-1.0,1.0},{0.0,-1.0,1.0},{1.0,-1.0,1.0},{1.0,0.0,1.0},{1.0,1.0,1.0},{0.0,1.0,1.0},{-1.0,1.0,1.0},{-1.0,0.0,1.0},{0.0,0.0,1.0}};
+// GLubyte Indices[]={8,0,1,8,1,2,8,2,3,8,3,4,8,4,5,8,5,6,8,6,7,8,7,0};
+// const size_t VertexSize=sizeof((float)*4);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
@@ -119,6 +125,7 @@ eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
 }
+
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
@@ -241,6 +248,8 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
 */
   
+
+  
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
@@ -253,23 +262,26 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,F,F,F);
+
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-// glViewport(v0,v0,S,S);
+
+glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
+// glEnable(GL_CULL_FACE);
 // glEnable(GL_CULL_FACE);
 // glFrontFace(GL_CW);
 glDisable(GL_DITHER);
 // glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_FALSE);  
-// glEnable(GL_SCISSOR_TEST);
-// glScissor(v0,v0,S,S);
-// glDisable(GL_SCISSOR_TEST);
+glEnable(GL_SCISSOR_TEST);
+glScissor(v0,v0,S,S);
+glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_STENCIL_TEST);
 glClearColor(F0,F,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
