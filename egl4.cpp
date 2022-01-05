@@ -105,14 +105,7 @@ return result;
 return NULL;
 }
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-for(a=0;a<361;a++){
-b=(float)a/360;
-vertices[a][0]=cos(a);
-vertices[a][1]=sin(a);
-vertices[a][2]=b;
-vertices[a][3]=1.0f;const size_t BufferSize=sizeof(vertices);
-Indices[a]=a;
-}
+
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -138,6 +131,15 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
+  for(a=0;a<361;a++){
+b=(float)a/360;
+vertices[a][0]=cos(a);
+vertices[a][1]=sin(a);
+vertices[a][2]=b;
+vertices[a][3]=1.0f;
+  // const size_t BufferSize=sizeof(vertices);
+Indices[a]=a;
+}
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
