@@ -45,17 +45,7 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 // GLubyte Indices[]={0,1,3,3,2,1};
 Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{0.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,0.0,1.0,1.0},
 {1.0,1.0,1.0,1.0},{0.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0},{-1.0,0.0,1.0,1.0},{0.0,0.0,1.0,1.0}};
-GLubyte Indices[]={
-9,0,1,
-9,1,2,
-9,2,3,
-9,3,4,
-9,4,5,
-9,5,6,
-9,6,7,
-9,7,8,
-9,8,0
-};
+GLubyte Indices[]={8,0,1,8,1,2,8,2,3,8,3,4,8,4,5,8,5,6,8,6,7,8,7,0};
 // const size_t VertexSize=sizeof((float)*4);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -133,7 +123,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,27,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,24,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
