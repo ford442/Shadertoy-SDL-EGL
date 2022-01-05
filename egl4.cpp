@@ -18,10 +18,10 @@
 using namespace std;
 using namespace std::chrono;
 
-high_resolution_clock::time_point t1,t2;
+high_resolution_clock::time_point t1,t2,t3;
 GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-GLuint VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime;
+GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+long double Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -35,7 +35,8 @@ EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32;
 struct timespec rem;
 struct timespec req={0,25000000};
 GLfloat F=1.0f;
-GLfloat F0=0.0f;
+GLfloat F0=0.0f;GLfloat fps;
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
@@ -62,6 +63,10 @@ const char vertex_shader_body_gles3[]=
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
+"uniform float iTimeDelta;"
+"uniform float iFrameRate;"
+"uniform vec4 iDate;"
+"uniform int iFrame;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
@@ -250,7 +255,10 @@ sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
+uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
+uniform_date=glGetUniformLocation(shader_program,"iDate");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
+uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,F,F,F);
