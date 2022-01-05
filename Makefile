@@ -22,9 +22,9 @@ tst5: main9.cpp  Makefile
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0
 
 tst8: egl4.cpp  Makefile
-	em++ egl4.cpp -std=gnu++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
+	em++ egl4.cpp -std=gnu++2b -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
 -sUSE_WEBGL2=1 -sENVIRONMENT=web -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
+-DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
 -o sh1.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
