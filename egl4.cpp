@@ -188,8 +188,7 @@ glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-  
-  
+
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
@@ -267,11 +266,11 @@ glUniform1i(sampler_channel[3],v0);
 
 // glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
-glEnable(GL_CULL_FACE);
 // glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
+// glEnable(GL_CULL_FACE);
+// glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-glEnable(GL_SAMPLER);
+// glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_FALSE);  
 glEnable(GL_SCISSOR_TEST);
