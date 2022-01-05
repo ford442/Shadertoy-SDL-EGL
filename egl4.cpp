@@ -39,10 +39,8 @@ GLfloat F0=0.0f;
 GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
-GLfloat vertices[1440]={};
-//  GLubyte Indices[]={0,1,3,3,2,1};
-GLubyte Indices[360];
+Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
+GLubyte Indices[]={0,1,3,3,2,1};
 // const size_t VertexSize=sizeof((float)*4);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -120,7 +118,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,360,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
@@ -129,15 +127,6 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
-for(a=0;a<361;a++){
-b=(float)a/360;
-vertices[a*4]=cos(a);
-vertices[(a*4)+1]=sin(a);
-vertices[(a*4)+2]=b;
-vertices[(a*4)+3]=1.0f;
-// const size_t BufferSize=sizeof(vertices);
-Indices[a]=a;
-}
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
