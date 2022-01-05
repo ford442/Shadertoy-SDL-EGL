@@ -48,7 +48,7 @@ char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
+// static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "precision highp float;"
@@ -63,9 +63,9 @@ const char vertex_shader_body_gles3[]=
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
-"uniform float iTimeDelta;"
-"uniform float iFrameRate;"
-"uniform vec4 iDate;"
+// "uniform float iTimeDelta;"
+// "uniform float iFrameRate;"
+// "uniform vec4 iDate;"
 // "uniform int iFrame;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
