@@ -40,11 +40,11 @@ GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
-Vertex vertices[360][4];
+GLfloat vertices[360][4];
 //  GLubyte Indices[]={0,1,3,3,2,1};
 GLubyte Indices[360];
 
-const size_t VertexSize=sizeof(vertices[0]);
+const size_t VertexSize=sizeof((float)*4);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
