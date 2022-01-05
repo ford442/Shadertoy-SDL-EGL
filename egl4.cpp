@@ -40,7 +40,7 @@ GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 // Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
-GLfloat vertices[1440];
+GLfloat vertices[1440]={};
 //  GLubyte Indices[]={0,1,3,3,2,1};
 GLubyte Indices[360];
 // const size_t VertexSize=sizeof((float)*4);
@@ -104,7 +104,6 @@ return result;
 return NULL;
 }
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -121,7 +120,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,360,GL_UNSIGNED_INT,Indices);
+glDrawElements(GL_TRIANGLES,360,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
