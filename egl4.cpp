@@ -40,7 +40,7 @@ GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
-GLubyte Indices[]={0,1,3,3,2,1};
+GLubyte Indices[]={0,2,3,0,2,1};
 // Vertex vertices[]={{-1.0,-1.0,1.0},{0.0,-1.0,1.0},{1.0,-1.0,1.0},{1.0,0.0,1.0},{1.0,1.0,1.0},{0.0,1.0,1.0},{-1.0,1.0,1.0},{-1.0,0.0,1.0},{0.0,0.0,1.0}};
 // GLubyte Indices[]={8,0,1,8,1,2,8,2,3,8,3,4,8,4,5,8,5,6,8,6,7,8,7,0};
 // const size_t VertexSize=sizeof((float)*4);
@@ -270,13 +270,13 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 
-// glViewport(v0,v0,S,S);
+glViewport(v0,v0,S,S);
 glDisable(GL_BLEND);
 // glEnable(GL_CULL_FACE);
-// glEnable(GL_CULL_FACE);
-// glFrontFace(GL_CW);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
 glDisable(GL_DITHER);
-// glEnable(GL_SAMPLER);
+glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_FALSE);  
 glEnable(GL_SCISSOR_TEST);
