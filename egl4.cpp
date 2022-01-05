@@ -43,14 +43,7 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[360][4];
 //  GLubyte Indices[]={0,1,3,3,2,1};
 GLubyte Indices[360];
-for(a=0;a<361;a++){
-b=(float)a/360;
-vertices[a][0]=siz*cos(a);
-vertices[a][1]=siz*sin(a);
-vertices[a][2]=b;
-vertices[a][3]=1.0f;const size_t BufferSize=sizeof(vertices);
-indices[a]=a;
-}
+
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -112,6 +105,14 @@ return result;
 return NULL;
 }
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+for(a=0;a<361;a++){
+b=(float)a/360;
+vertices[a][0]=siz*cos(a);
+vertices[a][1]=siz*sin(a);
+vertices[a][2]=b;
+vertices[a][3]=1.0f;const size_t BufferSize=sizeof(vertices);
+indices[a]=a;
+}
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
