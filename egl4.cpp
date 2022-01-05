@@ -66,7 +66,7 @@ const char fragment_shader_header_gles3[]=
 "uniform float iTimeDelta;"
 "uniform float iFrameRate;"
 "uniform vec4 iDate;"
-"uniform int iFrame;"
+// "uniform int iFrame;"
 "uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
