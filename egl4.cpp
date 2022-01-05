@@ -31,18 +31,26 @@ EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32;
+EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
 struct timespec req={0,25000000};
 GLfloat F=1.0f;
-GLfloat F0=0.0f;GLfloat fps;
+GLfloat F0=0.0f;
+GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
-Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
-GLubyte Indices[]={0,1,3,3,2,1};
-const size_t BufferSize=sizeof(vertices);
+// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0}};
+Vertex vertices[360][4];
+//  GLubyte Indices[]={0,1,3,3,2,1};
+GLubyte Indices[360];
+for(a=0;a<361;a++){
+b=(float)a/360;
+vertices[a][0]=siz*cos(a);
+vertices[a][1]=siz*sin(a);
+vertices[a][2]=b;
+vertices[a][3]=1.0f;const size_t BufferSize=sizeof(vertices);
+indices[a]=a;
+}
 const size_t VertexSize=sizeof(vertices[0]);
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
