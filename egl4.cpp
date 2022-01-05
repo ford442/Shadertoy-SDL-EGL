@@ -8,6 +8,8 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
