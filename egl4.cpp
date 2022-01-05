@@ -111,7 +111,7 @@ vertices[a][0]=siz*cos(a);
 vertices[a][1]=siz*sin(a);
 vertices[a][2]=b;
 vertices[a][3]=1.0f;const size_t BufferSize=sizeof(vertices);
-indices[a]=a;
+Indices[a]=a;
 }
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
