@@ -40,7 +40,7 @@ GLfloat Fm1=-1.0f;
 GLfloat fps;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 // Vertex vertices[]={{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
 GLubyte Indices[]={0,1,3,3,2,1};
 char *fileloc="/shader/shader1.toy";
