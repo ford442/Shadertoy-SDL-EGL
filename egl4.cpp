@@ -14,10 +14,8 @@
 #include <emscripten/html5.h>
 #include <iostream>
 #include <ctime>
-
 using namespace std;
 using namespace std::chrono;
-
 high_resolution_clock::time_point t1,t2,t3;
 GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
@@ -38,7 +36,6 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
-
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 GLubyte Indices[]={0,1,3,3,2,1};
@@ -123,7 +120,6 @@ eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
 }
-
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 F=(float)S;
@@ -201,7 +197,6 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,0);
 glEnableVertexAttribArray(attrib_position);
-
 /*
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
@@ -245,7 +240,6 @@ glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2
 glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
 glBindFramebuffer(GL_FRAMEBUFFER,v0);
 */
-  
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
@@ -258,18 +252,16 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,F,F,F);
-
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-
 // glDisable(GL_BLEND);
 // glEnable(GL_CULL_FACE);
-// glEnable(GL_CULL_FACE);
-// glFrontFace(GL_CW);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
 glDisable(GL_DITHER);
 // glEnable(GL_SAMPLER);
 // glEnable(GL_DEPTH_TEST);
@@ -277,7 +269,7 @@ glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 glScissor(v0,v0,S,S);
 glDisable(GL_SCISSOR_TEST);
-glViewport(v0,v0,S,S);
+// glViewport(v0,v0,S,S);
 
 // glEnable(GL_STENCIL_TEST);
 glClearColor(F0,F,F0,F);
