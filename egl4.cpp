@@ -31,15 +31,16 @@ EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v32=32;
+EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32;
 struct timespec rem;
 struct timespec req={0,25000000};
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
 typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
-Vertex colors[]={{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}};
-GLubyte Indices[]={0,1,2,2,1,3};
+// Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0}};
+Vertex vertices[]={{-1.0,-1.0,0.0,1.0},{1.0,-1.0,0.0,1.0},{1.0,1.0,0.0,1.0},{-1.0,1.0,0.0,1.0},{-1.0,-1.0,1.0,1.0},{1.0,-1.0,1.0,1.0},{1.0,1.0,1.0,1.0},{-1.0,1.0,1.0,1.0}};
+Vertex colors[]={{0.0,0.0,0.0,1.0}};
+GLubyte Indices[]={0,1,2,3,4,5,6,7};
 const size_t ColorsSize=sizeof(colors);
 const size_t BufferSize=sizeof(vertices);
 const size_t VertexSize=sizeof(vertices[0]);
@@ -115,7 +116,7 @@ duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
 glUniform1i(uniform_frame,frame);
-glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
+glDrawElements(GL_TRIANGLES,v8,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
@@ -137,9 +138,7 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-  
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-
 EGL_RED_SIZE,v32,
 EGL_GREEN_SIZE,v32,
 EGL_BLUE_SIZE,v32,
