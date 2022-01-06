@@ -50,9 +50,8 @@ const char common_shader_header_gles3[]=
 // "precision highp sampler2D;";
 // "precision highp int;\n";
 const char vertex_shader_body_gles3[]=
-"layout(location=0)in highp vec4 iPosition;"
-"void main(){"
-"gl_Position=iPosition;";
+"layout(location=0)in lowp vec4 iPosition;void main(){gl_Position=iPosition;"
+"} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
@@ -161,7 +160,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
