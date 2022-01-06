@@ -52,7 +52,7 @@ const char common_shader_header_gles3[]=
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;"
 "void main(){"
-"gl_Position=iPosition;"
+"gl_Position=iPosition;";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
 "uniform float iTime;"
