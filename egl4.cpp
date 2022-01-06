@@ -50,11 +50,11 @@ const char common_shader_header_gles3[]=
 // "precision highp sampler2D;";
 // "precision highp int;\n";
 const char vertex_shader_body_gles3[]=
-"layout(location=0)in lowp vec4 iPosition;void main(){gl_Position=iPosition;"
+"\nlayout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;"
 "} \n";
 const char fragment_shader_header_gles3[]=
 "uniform vec3 iResolution;"
-"uniform highp float iTime;"
+"uniform float iTime;"
 // "uniform float iTimeDelta;"
 // "uniform float iFrameRate;"
 // "uniform vec4 iDate;"
