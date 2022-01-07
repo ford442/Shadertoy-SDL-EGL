@@ -49,14 +49,14 @@ char8_t *result=NULL;
 long length=0;
 // static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;\n";
+"#version 300 es \n precision highp float;precision highp int; \n";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 // "precision lowp int;\n";
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 const char fragment_shader_header_gles3[]=
-"uniform highp vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
