@@ -35,7 +35,9 @@ struct timespec req={0,25000000};
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
-GLfloat fps;
+GLfloat F2=2.0f;
+GLfloat Fm2=-2.0f;
+GLfloat fps,FS;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 GLubyte Indices[]={0,1,3,3,2,1};
@@ -43,16 +45,12 @@ char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-// static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;\n;";
-// "precision highp sampler3D;"
-// "precision highp sampler2D;"
-// "precision highp int;\n";
+"#version 300 es \n precision highp float;precision highp int;\n";
 const char vertex_shader_body_gles3[]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;} \n";
+"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+"uniform highp vec3 iResolution;uniform float iTime;uniform lowp vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
@@ -95,7 +93,7 @@ return shader;
 }
 static void renderFrame(){
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
@@ -103,11 +101,10 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,v6,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
-// nanosleep(&req,&rem);
 }
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-// F=(float)S;
+FS=(float)S;
 const EGLint attribut_list[]={EGL_NONE};
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
@@ -133,12 +130,12 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
-attr.depth=EM_TRUE;
+attr.stencil=EM_FALSE;
+attr.depth=EM_FALSE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
@@ -174,86 +171,27 @@ glReleaseShaderCompiler();
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STREAM_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_READ);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_COPY);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,0);
 glEnableVertexAttribArray(attrib_position);
-/*
-glGenTextures(v4,tex2d);
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,tex2d[0]);
-glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,tex2d[1]);
-glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE2);
-glBindTexture(GL_TEXTURE_2D,tex2d[2]);
-glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE3);
-glBindTexture(GL_TEXTURE_2D,tex2d[3]);
-glTexImage2D(GL_TEXTURE_2D,v0,GL_RGBA,S,S,v0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-glGenerateMipmap(GL_TEXTURE_2D);
-glBindTexture(GL_TEXTURE_2D,v0);
-glGenFramebuffers(v1,&FBO);
-glBindFramebuffer(GL_FRAMEBUFFER,FBO);
-glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,tex2d[0],v0);
-glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D,tex2d[1],v0);
-glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_TEXTURE_2D,tex2d[2],v0);
-glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_TEXTURE_2D,tex2d[3],v0);
-glBindFramebuffer(GL_FRAMEBUFFER,v0);
-*/
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
-// uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
-// uniform_date=glGetUniformLocation(shader_program,"iDate");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
-// uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)S,(float)S,(float)S);
-/*
-glUniform1i(sampler_channel[0],v0);
-glUniform1i(sampler_channel[1],v0);
-glUniform1i(sampler_channel[2],v0);
-glUniform1i(sampler_channel[3],v0);
-*/
-// glEnable(GL_SAMPLER);
-
+glUniform3f(uniform_res,FS,FS,FS);
+glViewport(0,0,S,S);
 glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
-glScissor(v0,v0,S,S);
-glDisable(GL_SCISSOR_TEST);
-// glDisable(GL_STENCIL_TEST);
-// glDisable(GL_DEPTH_TEST);
 glClearColor(F0,F0,F0,F);
-// glClearDepthf(F);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
