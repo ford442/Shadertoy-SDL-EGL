@@ -240,7 +240,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 // uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)S,(float)S,(float)S,);
+glUniform3f(uniform_res,(float)S,(float)S,(float)S);
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
@@ -248,11 +248,11 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 // glEnable(GL_SAMPLER);
-glViewport(0,0,S,S);
+// glViewport(0,0,S,S);
 glDisable(GL_DITHER);
-// glEnable(GL_SCISSOR_TEST);
-// glScissor(v0,v0,S,S);
-// glDisable(GL_SCISSOR_TEST);
+ glEnable(GL_SCISSOR_TEST);
+ glScissor(v0,v0,S,S);
+ glDisable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glClearColor(F0,F0,F0,F);
