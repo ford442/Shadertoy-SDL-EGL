@@ -40,8 +40,8 @@ GLfloat Fm2=-2.0f;
 
 GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
-// Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
-Vertex vertices[]={{Fm2,Fm2,F2,F2},{F2,Fm2,F2,F2},{F2,F2,F2,F2},{Fm2,F2,F2,F2}};
+Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+// Vertex vertices[]={{Fm2,Fm2,F2,F2},{F2,Fm2,F2,F2},{F2,F2,F2,F2},{Fm2,F2,F2,F2}};
 GLubyte Indices[]={0,1,3,3,2,1};
 char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -240,7 +240,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 // uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,F,F,F);
+glUniform3f(uniform_res,(float)S,(float)S,(float)S,);
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
