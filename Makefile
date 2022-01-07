@@ -28,6 +28,13 @@ tst8: egl4.cpp  Makefile
 -o sh1.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
+tst8b: egl4b.cpp  Makefile
+	em++ egl4b.cpp -std=gnu++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
+-sUSE_WEBGL2=1 -sENVIRONMENT=web -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
+-DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
+-o sh1.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
+--extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
+
 load: glsl_loader.cpp  Makefile
 	emcc glsl_loader.cpp -sFULL_ES2=1 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
 -sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sMALLOC='emmalloc' -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
