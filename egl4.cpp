@@ -50,7 +50,7 @@ const char common_shader_header_gles3[]=
 const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 const char fragment_shader_header_gles3[]=
-"uniform highp vec3 iResolution;uniform float iTime;uniform lowp vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+"uniform highp vec3 iResolution;uniform highp float iTime;uniform highp vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 const char* common_shader_header=common_shader_header_gles3;
@@ -177,7 +177,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_COPY);
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,0);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_FALSE,0,0);
 glEnableVertexAttribArray(attrib_position);
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
