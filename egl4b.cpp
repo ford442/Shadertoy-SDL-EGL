@@ -16,10 +16,10 @@
 #include <ctime>
 using namespace std;
 using namespace std::chrono;
-high_resolution_clock::time_point t1,t2,t3;
-GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,Dtime;
+register high_resolution_clock::time_point t1,t2,t3;
+register GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+register GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+register long double Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
