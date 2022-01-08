@@ -16,10 +16,10 @@
 #include <ctime>
 using namespace std;
 using namespace std::chrono;
-register high_resolution_clock::time_point t1,t2,t3;
-register GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-register GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-register long double Ttime,Dtime;
+high_resolution_clock::time_point t1,t2,t3;
+GLuint tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+GLuint uniform_dtime,uniform_fps,uniform_date,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+long double Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -40,9 +40,6 @@ static GLfloat Fm2=-2.0f;
 
 GLfloat fps;
 static typedef struct{GLfloat XYZW[4];}Vertex;
-static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
-// Vertex vertices[]={{Fm2,Fm2,F2,F2},{F2,Fm2,F2,F2},{F2,F2,F2,F2},{Fm2,F2,F2,F2}};
-static GLubyte Indices[]={0,1,3,3,2,1};
 static char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
@@ -63,6 +60,29 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
+static const EGLint attribut_list[]={EGL_NONE};
+static EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,v3,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_NONE};
+static const EGLint attribute_list[]={
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_RED_SIZE,v32,
+EGL_GREEN_SIZE,v32,
+EGL_BLUE_SIZE,v32,
+EGL_ALPHA_SIZE,v32,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v32,
+EGL_BUFFER_SIZE,v32,
+EGL_NONE
+};
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
@@ -110,32 +130,11 @@ frame++;
 // nanosleep(&req,&rem);
 }
 void strt(){
+  
+register static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+register static GLubyte Indices[]={0,1,3,3,2,1};
+register GLuint EBO,VBO,CBO,VCO,ECO,CCO;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-// F=(float)S;
-static const EGLint attribut_list[]={EGL_NONE};
-static EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,v3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_NONE};
-static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,v32,
-EGL_GREEN_SIZE,v32,
-EGL_BLUE_SIZE,v32,
-EGL_ALPHA_SIZE,v32,
-EGL_DEPTH_SIZE,v32,
-EGL_STENCIL_SIZE,v32,
-EGL_BUFFER_SIZE,v32,
-EGL_NONE
-};
-// emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
