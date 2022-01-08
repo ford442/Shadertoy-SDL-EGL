@@ -39,11 +39,11 @@ static GLfloat F2=2.0f;
 static GLfloat Fm2=-2.0f;
 
 GLfloat fps;
-static typedef struct{GLfloat XYZW[4];}Vertex;
-static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+typedef struct{GLfloat XYZW[4];}Vertex;
+static const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 // Vertex vertices[]={{Fm2,Fm2,F2,F2},{F2,Fm2,F2,F2},{F2,F2,F2,F2},{Fm2,F2,F2,F2}};
-static GLubyte Indices[]={0,1,3,3,2,1};
-static char *fileloc="/shader/shader1.toy";
+static const GLubyte Indices[]={0,1,3,3,2,1};
+static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
