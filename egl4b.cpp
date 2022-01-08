@@ -24,7 +24,7 @@ EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
 GLsizei nsources,i,S;
-GLsizei s4=4;
+static GLsizei s4=4;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
@@ -32,18 +32,18 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
 struct timespec req={0,25000000};
-GLfloat F=1.0f;
-GLfloat F0=0.0f;
-GLfloat Fm1=-1.0f;
-GLfloat F2=2.0f;
-GLfloat Fm2=-2.0f;
+static GLfloat F=1.0f;
+static GLfloat F0=0.0f;
+static GLfloat Fm1=-1.0f;
+static GLfloat F2=2.0f;
+static GLfloat Fm2=-2.0f;
 
 GLfloat fps;
-typedef struct{GLfloat XYZW[4];}Vertex;
+static typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 // Vertex vertices[]={{Fm2,Fm2,F2,F2},{F2,Fm2,F2,F2},{F2,F2,F2,F2},{Fm2,F2,F2,F2}};
 static GLubyte Indices[]={0,1,3,3,2,1};
-char *fileloc="/shader/shader1.toy";
+static char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
@@ -97,7 +97,7 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-static void renderFrame(){
+void renderFrame(){
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
@@ -109,11 +109,11 @@ eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
 }
-static void strt(){
+void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 // F=(float)S;
 static const EGLint attribut_list[]={EGL_NONE};
-EGLint anEglCtxAttribs2[]={
+static EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -158,7 +158,7 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-const char* default_fragment_shader=(char*)read_file(fileloc);
+static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -261,7 +261,7 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
-extern "C" {
+static extern "C" {
 void str(){
 strt();
 }}
