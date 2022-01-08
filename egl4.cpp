@@ -128,7 +128,7 @@ EGL_STENCIL_SIZE,v32,
 EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
-emscripten_webgl_init_context_attributes(&attr);
+// emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_FALSE;
