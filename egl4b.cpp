@@ -131,8 +131,8 @@ frame++;
 }
 void strt(){
   
-register static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
-register static GLubyte Indices[]={0,1,3,3,2,1};
+register  Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+register  GLubyte Indices[]={0,1,3,3,2,1};
 register GLuint EBO,VBO,CBO,VCO,ECO,CCO;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 attr.alpha=EM_TRUE;
