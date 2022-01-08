@@ -39,7 +39,7 @@ static GLfloat F2=2.0f;
 static GLfloat Fm2=-2.0f;
 
 GLfloat fps;
-static typedef struct{GLfloat XYZW[4];}Vertex;
+typedef struct{GLfloat XYZW[4];}Vertex;
 static char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
