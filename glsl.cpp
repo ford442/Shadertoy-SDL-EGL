@@ -20,8 +20,8 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 using std::string;
-steady_clock::time_point t1;
-steady_clock::time_point t2;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
 
 static const char *read_file_into_str(const char *filename){
 char *result=NULL;
@@ -56,14 +56,8 @@ static const char common_shader_header_gles3[]=
 "precision highp int;\n";
 
 static const char vertex_shader_body_gles3[]=
-"layout (location = 0) in vec3 aPos;"
-"layout (location = 1) in vec3 aColor;"
-"out vec3 ourColor;"
-"void main()"
-"{"
-"gl_Position = vec4(aPos, 1.0);"
-"ourColor = aColor;"
-"}\n\0";
+"layout(location=0)in vec3 aPos;layout(location=1)in vec3 aColor;"
+"out vec3 ourColor;void main(){gl_Position=vec4(aPos,1.0);ourColor=aColor;}\n\0";
 
 static const char fragment_shader_header_gles3[]=
 "in highp vec3 ourColor;\n"
@@ -107,12 +101,11 @@ return shader;
 }
 
 GLfloat ink[]={1.0f,0.0f,0.0f,1.0f};
-
 GLfloat vertices[2160]={};
 GLuint VBO,VAO;
-double white;
+long double white;
 int x,y;
-double siz,outTimeA;
+long double siz,outTimeA;
 int a;
 float b;
 Uint32 buttons;
@@ -188,21 +181,25 @@ eglSwapBuffers(display,surface);
 }
 
 static const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
 EGL_NONE
 };
 
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_STENCIL_SIZE,8,
-EGL_DEPTH_SIZE,8,
-EGL_BUFFER_SIZE,8,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_RED_SIZE,v32,
+EGL_GREEN_SIZE,v32,
+EGL_BLUE_SIZE,v32,
+EGL_ALPHA_SIZE,v32,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v32,
+EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
 int ii;
@@ -215,25 +212,17 @@ vertices[ii]=0.0f;
 string program_source=read_file_into_str(fileloc);
 const char* default_fragment_shader=program_source.c_str();
 const char *sources[4];
-SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
-SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,32);
-SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL,1);
-SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,1);
-SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-attr.alpha=1;
-attr.stencil=1;
-attr.depth=1;
-attr.antialias=0;
-attr.premultipliedAlpha=0;
-attr.preserveDrawingBuffer=0;
+attr.alpha=EM_TRUE;
+attr.stencil=EM_FALSE;
+attr.depth=EM_FALSE;
+attr.antialias=EM_FALSE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
 emscripten_webgl_init_context_attributes(&attr);
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=emscripten_webgl_create_context("#canvas",&attr);
 EGLConfig eglconfig=NULL;
@@ -244,7 +233,9 @@ if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE &
 if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_CLIENT_VERSION,v3,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 if(contextegl==EGL_NO_CONTEXT){
@@ -274,9 +265,6 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glUseProgram(shader_program);
-SDL_SetWindowTitle(win,"1ink.us - GLSL 300 es");
-SDL_Log("GL_VERSION: %s",glGetString(GL_VERSION));
-SDL_Log("GLSL_VERSION: %s",glGetString(GL_SHADING_LANGUAGE_VERSION));
 SDL_Init(SDL_INIT_EVENTS);
 t1=steady_clock::now();
 viewportSizeX=w;
