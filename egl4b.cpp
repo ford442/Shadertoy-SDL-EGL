@@ -257,10 +257,10 @@ t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 extern "C" {
-void str(){
+static void str(){
 strt();
 }}
-static int main(){
+int main(){
 EM_ASM({
 FS.mkdir("/shader");
 });
