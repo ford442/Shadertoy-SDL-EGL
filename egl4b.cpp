@@ -254,13 +254,13 @@ glViewport(0,0,S,S);
 glClearColor(F0,F0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,40,0);
+emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 extern "C" {
 void str(){
 strt();
 }}
-int main(){
+static int main(){
 EM_ASM({
 FS.mkdir("/shader");
 });
