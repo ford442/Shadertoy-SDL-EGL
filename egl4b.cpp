@@ -48,14 +48,14 @@ static char8_t *result=NULL;
 static long length=0;
 // static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;\n";
+"#version 300 es \n precision mediump float;precision lowp int;\n";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 // "precision lowp int;\n";
 static const char vertex_shader_body_gles3[]=
-"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 static const char fragment_shader_header_gles3[]=
-"uniform highp vec3 iResolution;uniform float iTime;uniform lowp vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -110,15 +110,14 @@ frame++;
 }
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-// F=(float)S;
 static const EGLint attribut_list[]={EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
 static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -246,16 +245,11 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-// glEnable(GL_SAMPLER);
 glViewport(0,0,S,S);
 glDisable(GL_DITHER);
-// glEnable(GL_SCISSOR_TEST);
-// glScissor(v0,v0,S,S);
-// glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_DEPTH_TEST);
 glClearColor(F0,F0,F0,F);
-// glClearDepthf(F0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
