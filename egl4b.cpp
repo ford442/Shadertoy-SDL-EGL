@@ -16,19 +16,19 @@
 #include <ctime>
 using namespace std;
 using namespace std::chrono;
-high_resolution_clock::time_point t1,t2,t3;
-GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,Dtime;
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
-GLsizei nsources,i,S;
+static high_resolution_clock::time_point t1,t2,t3;
+static GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+static long double Ttime,Dtime;
+static EGLDisplay display;
+static EGLSurface surface;
+static EGLContext contextegl;
+static GLsizei nsources,i,S;
 static GLsizei s4=4;
-EGLint config_size,major,minor;
-EGLConfig eglconfig=NULL;
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+static EGLint config_size,major,minor;
+static EGLConfig eglconfig=NULL;
+static EmscriptenWebGLContextAttributes attr;
+static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
 struct timespec req={0,25000000};
@@ -38,14 +38,14 @@ static GLfloat Fm1=-1.0f;
 static GLfloat F2=2.0f;
 static GLfloat Fm2=-2.0f;
 
-GLfloat fps;
+static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{Fm1,Fm1,Fm1,Fm1},{F,Fm1,Fm1,Fm1},{F,F,Fm1,Fm1},{Fm1,F,Fm1,Fm1},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,Fm1,F}};
-GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+static Vertex vertices[]={{Fm1,Fm1,Fm1,Fm1},{F,Fm1,Fm1,Fm1},{F,F,Fm1,Fm1},{Fm1,F,Fm1,Fm1},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,Fm1,F}};
+static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
-const char *sources[4];
-char8_t *result=NULL;
-long length=0;
+static const char *sources[4];
+static char8_t *result=NULL;
+static long length=0;
 // static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;\n";
@@ -63,9 +63,9 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 static const char8_t *read_file(const char *filename){
-FILE *file=fopen(filename,"r");
+static FILE *file=fopen(filename,"r");
 if(file){
-int status=fseek(file,0,SEEK_END);
+static int status=fseek(file,0,SEEK_END);
 if(status!=0){
 fclose(file);
 return NULL;
@@ -78,7 +78,7 @@ return NULL;
 }
 result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+static size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 } 
 fclose(file);
@@ -87,7 +87,7 @@ return result;
 return NULL;
 }
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLsizei srclens[nsources];
+static GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
@@ -96,7 +96,7 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-void renderFrame(){
+static void renderFrame(){
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
@@ -108,11 +108,11 @@ eglSwapBuffers(display,surface);
 frame++;
 // nanosleep(&req,&rem);
 }
-void strt(){
+static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 // F=(float)S;
 static const EGLint attribut_list[]={EGL_NONE};
-static EGLint anEglCtxAttribs2[]={
+static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
