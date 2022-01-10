@@ -257,7 +257,7 @@ t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 extern "C" {
-static void str(){
+void str(){
 strt();
 }}
 int main(){
