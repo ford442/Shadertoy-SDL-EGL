@@ -110,8 +110,7 @@ frame++;
 }
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-static const EGLint attribut_list[]={EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_LINEAR_KHR,
-EGL_NONE};
+static const EGLint attribut_list[]={EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
