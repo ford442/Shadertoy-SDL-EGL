@@ -48,14 +48,14 @@ static char8_t *result=NULL;
 static long length=0;
 // static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es\n precision mediump int;precision mediump  float;\n";
+"#version 300 es\n precision mediump int;precision highp float;\n";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 // "precision lowp int;\n";
 static const char vertex_shader_body_gles3[]=
-"layout(location=0)in mediump vec4 iPosition;void main(){gl_Position=iPosition;} \n";
+"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 static const char fragment_shader_header_gles3[]=
-"uniform mediump  vec3 iResolution;uniform mediump  float iTime;uniform mediump  vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out mediump  vec4 fragColor;\n";
+"uniform lowp vec3 iResolution;uniform highp float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -247,13 +247,13 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 glViewport(0,0,S,S);
-glDisable(GL_DITHER);
-glDisable(GL_STENCIL_TEST);
-glDisable(GL_DEPTH_TEST);
+// glDisable(GL_DITHER);
+// glDisable(GL_STENCIL_TEST);
+// glDisable(GL_DEPTH_TEST);
 glClearColor(F0,F0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop((void(*)())renderFrame,40,0);
 }
 extern "C" {
 void str(){
