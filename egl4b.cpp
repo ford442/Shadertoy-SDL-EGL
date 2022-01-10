@@ -11,7 +11,7 @@
 #define __gl2_h_
 #include <GLES2/gl2ext.h>
 #include <emscripten.h>
-#include <emscripten/html5.h>
+#include <emscripten/html5_webgl.h>
 #include <iostream>
 #include <ctime>
 using namespace std;
