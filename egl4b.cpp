@@ -255,7 +255,7 @@ glDisable(GL_DITHER);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_DEPTH_TEST);
 glClearColor(F0,F0,F0,F);
-glClearDepthf(F0);
+// glClearDepthf(F0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
