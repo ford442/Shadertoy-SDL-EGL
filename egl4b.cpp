@@ -37,7 +37,6 @@ static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
 static GLfloat F2=2.0f;
 static GLfloat Fm2=-2.0f;
-
 static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,Fm1,Fm1},{F,Fm1,Fm1,Fm1},{F,F,Fm1,Fm1},{Fm1,F,Fm1,Fm1},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
@@ -111,7 +110,7 @@ frame++;
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 static const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_FLOAT_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_FLOAT_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
