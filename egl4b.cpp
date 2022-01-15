@@ -11,7 +11,7 @@
 #define __gl2_h_
 #include <GLES2/gl2ext.h>
 #include <emscripten.h>
-#include <emscripten/html5_webgl.h>
+#include <emscripten/html5.h>
 #include <iostream>
 #include <ctime>
 using namespace std;
@@ -35,8 +35,6 @@ struct timespec req={0,25000000};
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
-static GLfloat F2=2.0f;
-static GLfloat Fm2=-2.0f;
 static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,Fm1,Fm1},{F,Fm1,Fm1,Fm1},{F,F,Fm1,Fm1},{Fm1,F,Fm1,Fm1},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
@@ -105,22 +103,21 @@ glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
 frame++;
-// nanosleep(&req,&rem);
 }
 static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 static const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
 static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -141,13 +138,13 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
