@@ -31,7 +31,7 @@ static EmscriptenWebGLContextAttributes attr;
 static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
-struct timespec req={0,750000000};
+struct timespec req={0,150000000};
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
@@ -158,7 +158,7 @@ static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-  // nanosleep(&req,&rem);
+  nanosleep(&req,&rem);
 
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
@@ -171,7 +171,7 @@ shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-  // nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 
 glUseProgram(shader_program);
 glDeleteShader(vtx);
@@ -251,12 +251,13 @@ glUniform1i(sampler_channel[3],v0);
 */
 glViewport(0,0,S,S);
 glDisable(GL_DITHER);
+glEnable(GL_BLEND);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glClearColor(F0,F0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop((void(*)())renderFrame,60,0);
 }
 extern "C" {
 void str(){
