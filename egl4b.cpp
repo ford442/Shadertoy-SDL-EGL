@@ -123,12 +123,12 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,8,
+EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
@@ -187,14 +187,13 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
   
-    /*
+/*
 glGenBuffers(1,&CBO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(colors),colors,GL_DYNAMIC_READ);
-  glEnableVertexAttribArray(1);
+glEnableVertexAttribArray(1);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,0,(void*)0);
-
 
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
@@ -257,7 +256,7 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 glViewport(0,0,S,S);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 glEnable(GL_BLEND);
 // glDisable(GL_STENCIL_TEST);
 // glEnable(GL_DEPTH_TEST);
