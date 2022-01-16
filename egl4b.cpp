@@ -261,7 +261,7 @@ glDisable(GL_DITHER);
 glEnable(GL_BLEND);
 // glDisable(GL_STENCIL_TEST);
 glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
+glDepthFunc(GL_GREATER);
 glClearColor(F0,F0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
