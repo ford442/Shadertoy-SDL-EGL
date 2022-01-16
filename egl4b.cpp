@@ -53,7 +53,7 @@ static const char common_shader_header_gles3[]=
 static const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;layout(location=1)in highp vec4 vertexColor;void main(){gl_Position=iPosition;} \n";
 static const char fragment_shader_header_gles3[]=
-"uniform highp vec3 iResolution;uniform highp float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+"out vec3 color;uniform highp vec3 iResolution;uniform highp float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;in vec4 fragmentColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n fragColor=vertexColor;void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 static const char* common_shader_header=common_shader_header_gles3;
