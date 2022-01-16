@@ -38,7 +38,7 @@ static GLfloat Fm1=-1.0f;
 static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,Fm1,Fm1},{F,Fm1,Fm1,Fm1},{F,F,Fm1,Fm1},{Fm1,F,Fm1,Fm1},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
-static Vertex colors[]={{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F}};
+// static Vertex colors[]={{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F}};
 static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 static const char *sources[4];
@@ -51,11 +51,11 @@ static const char common_shader_header_gles3[]=
 // "precision highp sampler2D;"
 // "precision lowp int;\n";
 static const char vertex_shader_body_gles3[]=
-"layout(location=0)in highp vec4 iPosition;layout(location=1)in highp vec4 vertexColor;void main(){gl_Position=iPosition;} \n";
+"layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 static const char fragment_shader_header_gles3[]=
-"out vec3 color;uniform highp vec3 iResolution;uniform highp float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;in vec4 fragmentColor;\n";
+"uniform highp vec3 iResolution;uniform highp float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragmentColor;\n";
 static const char fragment_shader_footer_gles3[]=
-"\n fragColor=vertexColor;void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -178,21 +178,24 @@ glReleaseShaderCompiler();
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STREAM_DRAW);
-glGenBuffers(v1,&VBO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
-glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-glGenBuffers(1,&CBO);
-glBindBuffer(GL_ARRAY_BUFFER,CBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(colors),colors,GL_DYNAMIC_READ);
-glEnableVertexAttribArray(1);
-glBindBuffer(GL_ARRAY_BUFFER,CBO);
-glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,0,(void*)0);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_DRAW);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glEnableVertexAttribArray(0);
-  /*
+glGenBuffers(v1,&VBO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
+  
+    /*
+glGenBuffers(1,&CBO);
+glBindBuffer(GL_ARRAY_BUFFER,CBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(colors),colors,GL_DYNAMIC_READ);
+  glEnableVertexAttribArray(1);
+glBindBuffer(GL_ARRAY_BUFFER,CBO);
+glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,0,(void*)0);
+
+
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
