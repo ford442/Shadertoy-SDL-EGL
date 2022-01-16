@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
+#include <glm/glm.hpp>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -37,7 +38,7 @@ static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
 static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
-static Vertex vertices[]={{Fm1,Fm1,Fm1,Fm1},{F,Fm1,Fm1,Fm1},{F,F,Fm1,Fm1},{Fm1,F,Fm1,Fm1},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+static Vertex vertices[]={{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,Fm1,F},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 // static Vertex colors[]={{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F}};
 static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
@@ -256,12 +257,12 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 glViewport(0,0,S,S);
-// glDisable(GL_DITHER);
+glEnable(GL_DITHER);
 glEnable(GL_BLEND);
 // glDisable(GL_STENCIL_TEST);
 // glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glDepthMask(1);
+// glDepthFunc(GL_LESS);
+// glDepthMask(1);
 glClearColor(F0,F0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT);
 t1=high_resolution_clock::now();
