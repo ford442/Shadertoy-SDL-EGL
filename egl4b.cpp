@@ -159,21 +159,18 @@ static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
- nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
- nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
@@ -182,20 +179,20 @@ attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STREAM_DRAW);
-glGenVertexArrays(v1,&VCO);
-glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-glEnableVertexAttribArray(0);
 glGenBuffers(1,&CBO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(colors),colors,GL_DYNAMIC_READ);
 glEnableVertexAttribArray(1);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,0,(void*)0);
-/*
+glGenVertexArrays(v1,&VCO);
+glBindVertexArray(VCO);
+glEnableVertexAttribArray(0);
+  /*
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
