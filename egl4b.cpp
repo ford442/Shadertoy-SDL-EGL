@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
-#include <glm/glm.hpp>
+#include </usr/include/glm/glm.hpp>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
