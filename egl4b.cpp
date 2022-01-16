@@ -96,7 +96,7 @@ return shader;
 }
 static void renderFrame(){
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
@@ -260,9 +260,9 @@ glViewport(0,0,S,S);
 glDisable(GL_DITHER);
 glEnable(GL_BLEND);
 // glDisable(GL_STENCIL_TEST);
-glEnable(GL_DEPTH_TEST);
+// glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
-  glDepthMask(1);
+//   glDepthMask(1);
 glClearColor(F0,F0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
