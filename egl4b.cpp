@@ -5,15 +5,16 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-#define __gl2_h_
-#include <GLES2/gl2ext.h>
-#include <GLES3/gl3.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
 #include <ctime>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <GLES3/gl3.h>
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
+
 using namespace std;
 using namespace std::chrono;
 static high_resolution_clock::time_point t1,t2,t3;
