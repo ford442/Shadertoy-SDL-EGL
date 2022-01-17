@@ -5,12 +5,11 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
-#include </usr/include/glm/glm.hpp>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#include <GLES3/gl3.h>
 #define __gl2_h_
 #include <GLES2/gl2ext.h>
+#include <GLES3/gl3.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
@@ -97,7 +96,7 @@ return shader;
 }
 static void renderFrame(){
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,Ttime);
@@ -107,6 +106,8 @@ eglSwapBuffers(display,surface);
 frame++;
 }
 static void strt(){
+  eglBindAPI(EGL_OPENGL_ES_API);
+
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 static const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -150,7 +151,6 @@ ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-eglBindAPI(EGL_OPENGL_ES_API);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
@@ -257,14 +257,17 @@ glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
 glViewport(0,0,S,S);
+glEnable(GL_CULL_FACE));
+glCullFace(GL_BACK));
 glEnable(GL_DITHER);
 glEnable(GL_BLEND);
-// glDisable(GL_STENCIL_TEST);
-// glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
-// glDepthMask(1);
+glEnable(GL_DEPTH_TEST);
+glDepthMask(GL_TRUE));
+glDepthFunc(GL_LEQUAL);
+glDepthMask(F);
+glClearDepth(F);
 glClearColor(F0,F0,F0,F);
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,60,0);
 }
