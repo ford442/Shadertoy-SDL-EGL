@@ -47,14 +47,14 @@ static char8_t *result=NULL;
 static long length=0;
 // static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es\n precision highp int;precision highp float;\n";
+"#version 300 es\n precision mediump int;precision highp float;\n";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 // "precision lowp int;\n";
 static const char vertex_shader_body_gles3[]=
 "layout(location=0)in highp vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 static const char fragment_shader_header_gles3[]=
-"uniform highp vec3 iResolution;uniform highp float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
+"uniform highp vec3 iResolution;uniform highp float iTime;uniform lowp vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out highp vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -124,7 +124,7 @@ EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
@@ -264,7 +264,7 @@ glEnable(GL_DITHER);
 glEnable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 glDepthMask(GL_TRUE);
-glDepthFunc(GL_LEQUAL);
+glDepthFunc(GL_LESS);
 glDepthMask(F);
 glClearDepthf(F);
 glClearColor(F0,F0,F0,F);
