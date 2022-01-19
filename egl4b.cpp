@@ -9,11 +9,12 @@
 #include <emscripten/html5.h>
 #include <iostream>
 #include <ctime>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
 #include <GLES3/gl3.h>
 #define __gl2_h_
 #include <GLES2/gl2ext.h>
+#include </usr/include/glm/glm.hpp>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -47,14 +48,14 @@ static char8_t *result=NULL;
 static long length=0;
 // static const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es\n precision mediump float;\n";
+"#version 300 es\n precision highp float;precision highp int;\n";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 // "precision lowp int;\n";
 static const char vertex_shader_body_gles3[]=
-"layout(location=0)in  vec4 iPosition;void main(){gl_Position=iPosition;} \n";
+"layout(location=0)in mediump vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 static const char fragment_shader_header_gles3[]=
-"uniform  vec3 iResolution;uniform  float iTime;uniform  vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out  vec4 fragColor;\n";
+"uniform mediump vec3 iResolution;uniform float iTime;uniform mediump vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -260,8 +261,8 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glEnable(GL_CULL_FACE);
-glCullFace(GL_BACK);
+// glEnable(GL_CULL_FACE);
+// glCullFace(GL_BACK);
 glEnable(GL_DITHER);
 glEnable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
