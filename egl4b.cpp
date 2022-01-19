@@ -188,10 +188,6 @@ glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_COPY);
 glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-glGenRenderbuffers(v1,&DBO);
-glBindRenderbuffer(GL_RENDERBUFFER,DBO);
-glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT,S,S);
-glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,DBO);
 /*
 glGenBuffers(1,&CBO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
