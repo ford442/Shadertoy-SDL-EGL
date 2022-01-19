@@ -18,9 +18,8 @@
 
 using namespace std;
 using namespace std::chrono;
-static high_resolution_clock::time_point t1,t2,t3;
-static GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
-static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+static GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,attrib_position,sampler_channel[4];
+static GLuint VCO,ECO,CCO,vtx,frag;
 static long double Ttime,Dtime;
 static EGLDisplay display;
 static EGLSurface surface;
@@ -37,7 +36,6 @@ struct timespec req={0,150000000};
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
-static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,Fm1,F},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
 // static Vertex colors[]={{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F}};
@@ -91,15 +89,9 @@ glCompileShader(shader);
 return shader;
 }
 static void renderFrame(){
-t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-duration<long double>time_spana=duration_cast<duration<long double>>(t2-t1);
-Ttime=time_spana.count();
-glUniform1f(uniform_time,Ttime);
-glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 eglSwapBuffers(display,surface);
-frame++;
 }
 static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
@@ -188,7 +180,6 @@ glGenRenderbuffers(v1,&DBO);
 glBindRenderbuffer(GL_RENDERBUFFER,DBO);
 glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT,S,S);
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,DBO);
-glUniform3f(uniform_res,(float)S,(float)S,(float)S);
 glEnable(GL_DITHER);
 glEnable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
@@ -199,7 +190,6 @@ glClearDepthf(F);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 extern "C" {
