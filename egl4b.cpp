@@ -1,3 +1,12 @@
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include <GLES3/gl3.h>
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include </usr/include/glm/glm.hpp>
+#include <iostream>
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -5,19 +14,11 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#include <iostream>
 #include <ctime>
-#include <GLES3/gl3.h>
-#define __gl2_h_
-#include <GLES2/gl2ext.h>
-#include </usr/include/glm/glm.hpp>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
 
 using namespace std;
 using namespace std::chrono;
+
 static high_resolution_clock::time_point t1,t2,t3;
 static GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
