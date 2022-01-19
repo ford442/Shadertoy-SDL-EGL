@@ -18,7 +18,7 @@
 using namespace std;
 using namespace std::chrono;
 static high_resolution_clock::time_point t1,t2,t3;
-static GLuint EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+static GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 static long double Ttime,Dtime;
 static EGLDisplay display;
@@ -188,7 +188,10 @@ glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-  
+glGenRenderbuffers(1,&DBO);
+glBindRenderbuffer(GL_RENDERBUFFER,DBO);
+glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT,S,S);
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,DBO);
 /*
 glGenBuffers(1,&CBO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
@@ -257,7 +260,6 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glViewport(0,0,S,S);
 glEnable(GL_CULL_FACE);
 glCullFace(GL_BACK);
 glEnable(GL_DITHER);
@@ -268,9 +270,10 @@ glDepthFunc(GL_LESS);
 glDepthMask(F);
 glClearDepthf(F);
 glClearColor(F0,F0,F0,F);
+glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,60,0);
+emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 extern "C" {
 void str(){
