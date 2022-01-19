@@ -13,7 +13,7 @@ ff.onload=function(oEvent){
 var arrayBuffer=ff.response;
 if(arrayBuffer){
 var fil=new Uint8ClampedArray(arrayBuffer);
-FS.writeFile('/shader/shader.frag,fil);
+FS.writeFile('/shader/shader.frag',fil);
 }}
 ff.send(null);
 ff2.open("GET",pth2,true);
