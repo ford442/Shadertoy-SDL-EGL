@@ -258,7 +258,7 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-// glEnable(GL_CULL_FACE);
+glDisable(GL_CULL_FACE);
 // glCullFace(GL_BACK);
 glEnable(GL_DITHER);
 glEnable(GL_BLEND);
