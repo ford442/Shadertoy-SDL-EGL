@@ -110,6 +110,18 @@ frame++;
 }
 static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_FALSE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 static const EGLint attribut_list[]={ 
@@ -137,18 +149,7 @@ EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
-attr.depth=EM_TRUE;
-attr.antialias=EM_FALSE;
-attr.premultipliedAlpha=EM_FALSE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=v2;
-attr.minorVersion=v0;
+
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
