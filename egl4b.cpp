@@ -42,7 +42,7 @@ static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
 static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
-static Vertex vertices[]={{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,Fm1,F},{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F}};
+static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 // static Vertex colors[]={{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F}};
 static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
