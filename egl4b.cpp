@@ -266,7 +266,7 @@ glEnable(GL_DITHER);
 glEnable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 glDepthMask(GL_TRUE);
-glDepthFunc(ALWAYS);
+glDepthFunc(GL_ALWAYS);
 glDepthMask(F);
 glClearDepthf(F);
 glClearColor(F0,F0,F0,F);
