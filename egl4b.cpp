@@ -114,7 +114,7 @@ static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 static const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -262,7 +262,7 @@ glUniform1i(sampler_channel[3],v0);
 */
 // glDisable(GL_CULL_FACE);
 // glCullFace(GL_BACK);
-// glEnable(GL_DITHER);
+glEnable(GL_DITHER);
 // glEnable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_TRUE);
