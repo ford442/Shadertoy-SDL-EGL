@@ -2,12 +2,9 @@
 document.getElementById('btn').addEventListener('click',function(){
 Module.ccall('str');
 });
-
 document.getElementById('btn10').addEventListener('click',function(){
 document.getElementById("canvas").style="height100vh;width:100vh;image-rendering:auto;";
-// document.getElementById('pmhig').innerHTML=window.innerHeight;
 });
-
 document.getElementById('btn7').addEventListener('click',function(){
 document.getElementById("canvas").height=window.innerHeight*1.5;
 document.getElementById("canvas").width=window.innerHeight*1.5;
@@ -20,4 +17,3 @@ document.getElementById('btn7').style="background-color:red;position:absolute;di
 document.getElementById('pmhig').innerHTML=window.innerHeight*1.5;
 Module.ccall("str");
 });
-
