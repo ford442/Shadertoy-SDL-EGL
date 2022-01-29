@@ -2,7 +2,7 @@
 document.getElementById('btn').addEventListener('click',function(){
 Module.ccall('str');
   setTimeout(function(){
-},14000);
+},4000);
 
 });
 
