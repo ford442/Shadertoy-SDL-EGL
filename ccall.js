@@ -1,9 +1,6 @@
 
 document.getElementById('btn').addEventListener('click',function(){
 Module.ccall('str');
-  setTimeout(function(){
-},4000);
-
 });
 
 document.getElementById('btn10').addEventListener('click',function(){
