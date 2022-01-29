@@ -1,8 +1,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <GLES3/gl3.h>
-#define __gl2_h_
-#include <GLES2/gl2ext.h>
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #define GLM_ENABLE_EXPERIMENTAL
@@ -148,8 +147,8 @@ attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=v2;
-attr.minorVersion=v0;
+attr.majorVersion=2;
+attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
