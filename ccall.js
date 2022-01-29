@@ -5,7 +5,7 @@ Module.ccall('str');
 
 document.getElementById('btn10').addEventListener('click',function(){
 document.getElementById("canvas").style="height100vh;width:100vh;image-rendering:auto;";
-// document.getElementById('pmhig').innerHTML=width=window.innerHeight;
+// document.getElementById('pmhig').innerHTML=window.innerHeight;
 });
 
 document.getElementById('btn7').addEventListener('click',function(){
