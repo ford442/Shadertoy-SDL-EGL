@@ -4,8 +4,6 @@
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#define GLM_ENABLE_EXPERIMENTAL
-#include </usr/include/glm/glm.hpp>
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -42,7 +40,6 @@ static GLfloat Fm1=-1.0f;
 static GLfloat fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-// static Vertex colors[]={{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F},{F0,F0,F0,F}};
 static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 static const char *sources[4];
@@ -122,7 +119,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE};
 static const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
  EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
