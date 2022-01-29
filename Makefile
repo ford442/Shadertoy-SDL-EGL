@@ -29,8 +29,8 @@ tst8: egl4.cpp  Makefile
 --extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js -sOFFSCREEN_FRAMEBUFFER=1
 
 tst8b: egl4b.cpp  Makefile
-	em++ egl4b.cpp -std=c++2b -O3 -sFULL_ES2=0 -sFULL_ES3=1 -sGL_TESTING=1 \
--sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sOFFSCREEN_FRAMEBUFFER=1 \
+	em++ egl4b.cpp -std=c++2b -O3 -sFULL_ES2=0 -sFULL_ES3=1 \
+-sUSE_WEBGL2=1-sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sOFFSCREEN_FRAMEBUFFER=1 \
 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
 -o sh1t.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
