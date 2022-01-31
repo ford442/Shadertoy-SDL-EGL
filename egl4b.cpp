@@ -109,7 +109,7 @@ frame++;
 }
 static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=EM_ASM_INT({return document.getElementById('pmhig').innerHTML;});
 static const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
@@ -171,20 +171,18 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
-glGenBuffers(v1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_READ);
+
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
@@ -192,7 +190,9 @@ glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_COPY);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
 glEnableVertexAttribArray(attrib_position);
-
+glGenBuffers(v1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_READ);
 /*
 glGenBuffers(1,&CBO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
