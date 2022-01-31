@@ -98,7 +98,7 @@ return shader;
 }
 static void renderFrame(){
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,(float)Ttime);
@@ -188,8 +188,8 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_COPY);
-glVertexAttribPointer(v0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-glEnableVertexAttribArray(v0);
+glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
+glEnableVertexAttribArray(0);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_READ);
