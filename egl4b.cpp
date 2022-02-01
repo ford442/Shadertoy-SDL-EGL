@@ -109,7 +109,9 @@ frame++;
 }
 static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+static double client_w,client_h;
+emscripten_get_element_css_size("#canvas",&client_w,&client_h);
+S=(int)client_h;
 static const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
@@ -274,6 +276,7 @@ glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
+
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
