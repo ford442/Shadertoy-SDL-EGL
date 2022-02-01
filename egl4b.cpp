@@ -98,7 +98,7 @@ return shader;
 }
 static void renderFrame(){
 t2=steady_clock::now();
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 glUniform1f(uniform_time,(float)Ttime);
@@ -277,7 +277,6 @@ glDisable(GL_SCISSOR_TEST);
 glDisable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
-
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
