@@ -168,7 +168,7 @@ static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
