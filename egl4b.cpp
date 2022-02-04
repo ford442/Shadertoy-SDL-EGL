@@ -110,7 +110,7 @@ frame++;
 }
 static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+*S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 // static double client_w,client_h;
 // emscripten_get_element_css_size("#canvas",&client_w,&client_h);
 // S=(int)client_h;
