@@ -34,7 +34,7 @@ static EmscriptenWebGLContextAttributes attr;
 static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
-struct timespec req={0,15000000};
+struct timespec req={0,8500000};
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
@@ -164,6 +164,7 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
@@ -174,29 +175,29 @@ glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
-  
-  static const char* default_fragment_shader=(char*)read_file(fileloc);
+static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-glEnableVertexAttribArray(attrib_position);
+  
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
+glEnableVertexAttribArray(attrib_position);
 
 /*
 glGenBuffers(1,&CBO);
