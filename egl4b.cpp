@@ -193,9 +193,9 @@ glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 
-attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
 glEnableVertexAttribArray(0);
+attrib_position=glGetAttribLocation(shader_program,"iPosition");
 
 /*
 glGenBuffers(1,&CBO);
