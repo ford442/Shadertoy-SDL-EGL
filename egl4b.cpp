@@ -188,9 +188,9 @@ glReleaseShaderCompiler();
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
-glEnableVertexAttribArray(attrib_position);
+glEnableVertexAttribArray(0);
+glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
   
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
