@@ -169,14 +169,11 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-  glGenVertexArrays(v1,&VCO);
+glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
-  glGenBuffers(v1,&VBO);
+glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glBindVertexArray(0);
-
-
 
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
