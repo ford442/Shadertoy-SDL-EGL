@@ -27,7 +27,7 @@ static EGLDisplay display;
 static EGLSurface surface;
 static EGLContext contextegl;
 static GLsizei nsources,i;
-static GLsizei *S;
+static GLsizei S;
 static GLsizei s4=4;
 static EGLint config_size,major,minor;
 static EGLConfig eglconfig=NULL;
@@ -110,7 +110,7 @@ frame++;
 }
 static void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
-*S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 // static double client_w,client_h;
 // emscripten_get_element_css_size("#canvas",&client_w,&client_h);
 // S=(int)client_h;
@@ -260,7 +260,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 // uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,(float)*S,(float)*S,(float)*S);
+glUniform3f(uniform_res,(float)S,(float)S,(float)S);
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
@@ -279,7 +279,7 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
-glViewport(0,0,*S,*S);
+glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
