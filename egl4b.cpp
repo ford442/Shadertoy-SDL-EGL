@@ -143,7 +143,7 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
@@ -164,7 +164,18 @@ surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-static const char* default_fragment_shader=(char*)read_file(fileloc);
+attrib_position=glGetAttribLocation(shader_program,"iPosition");
+glGenBuffers(v1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
+glGenVertexArrays(v1,&VCO);
+glBindVertexArray(VCO);
+glGenBuffers(v1,&VBO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+
+  
+  static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -184,17 +195,8 @@ glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-attrib_position=glGetAttribLocation(shader_program,"iPosition");
-glGenBuffers(v1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_STATIC_DRAW);
-glGenVertexArrays(v1,&VCO);
-glBindVertexArray(VCO);
-glGenBuffers(v1,&VBO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-glVertexAttribPointer(0,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-glEnableVertexAttribArray(0);
+glEnableVertexAttribArray(attrib_position);
+glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
 
 /*
 glGenBuffers(1,&CBO);
@@ -264,7 +266,7 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glDisable(GL_CULL_FACE);
+// glDisable(GL_CULL_FACE);
 // glCullFace(GL_BACK);
 glDisable(GL_DITHER);
 // glEnable(GL_BLEND);
@@ -273,8 +275,8 @@ glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_GREATER);
 // glDepthMask(F);
 // glClearDepthf(F);
-glDisable(GL_SCISSOR_TEST);
-glDisable(GL_STENCIL_TEST);
+// glDisable(GL_SCISSOR_TEST);
+// glDisable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
