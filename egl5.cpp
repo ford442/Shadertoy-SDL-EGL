@@ -293,7 +293,7 @@ strt();
 }}
 int main(){
 EM_ASM({
-FS.mkdir("/shader");
+FS.mkdir('/shader');
 });
 return 1;
 }
