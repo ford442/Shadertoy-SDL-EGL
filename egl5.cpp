@@ -29,7 +29,6 @@ EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
 GLsizei nsources,i;
-GLsizei S;
 GLsizei s4=4;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
@@ -123,7 +122,7 @@ y=e->clientY;
 }}
 return 0;
 }
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+GLsizei S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 
 void renderFrame(){
 eglSwapBuffers(display,surface);
