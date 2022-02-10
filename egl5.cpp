@@ -42,6 +42,14 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
+
+GLfloat mouseX;
+GLfloat mouseY;
+GLfloat mouseLPressed;
+GLfloat mouseRPressed;
+GLfloat viewportSizeX;
+GLfloat viewportSizeY;
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
@@ -99,17 +107,46 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
+
+static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
+printf("%s,screen: (%ld,%ld),client: (%ld,%ld),%s%s%s%s button: %hu,buttons: %hu,movement: (%ld,%ld),target: (%ld,%ld)\n",emscripten_event_type_to_string(eventType),e->screenX,e->screenY,e->clientX,e->clientY,e->ctrlKey ? " CTRL" : "",e->shiftKey ? " SHIFT" : "",e->altKey ? " ALT" : "",e->metaKey ? " META" : "",e->button,e->buttons,e->movementX,e->movementY,e->targetX,e->targetY);
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_CLICK)gotClick=1;
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+mouseLPressed=1.0f;
+gotMouseDown=1;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+mouseLPressed=0.0f;
+gotMouseUp=1;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+gotMouseMove=1;
+x=e->clientX;
+y=e->clientY;
+}}
+return 0;
+}
+
 void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
+ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
+ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
+ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
+mouseX=x/S;
+mouseY=y/S;
 glUniform1f(uniform_time,(float)Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 frame++;
 }
+
+static EMSCRIPTEN_RESULT ret;
+
 void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
