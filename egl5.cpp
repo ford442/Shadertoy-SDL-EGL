@@ -135,6 +135,11 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=x/S;
 mouseY=y/S;
+if(mouseLPressed==1.0f){
+const float cMouseX=mouseX;
+const float cMouseY=mouseY;
+glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+}
 glUniform1f(uniform_time,(float)Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
