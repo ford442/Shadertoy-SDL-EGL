@@ -122,8 +122,7 @@ y=e->clientY;
 }}
 return 0;
 }
-GLsizei S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-
+GLsizei S=600;
 void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=steady_clock::now();
@@ -152,6 +151,7 @@ frame++;
 
 
 void strt(){
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 // double client_w,client_h;
 // emscripten_get_element_css_size("#canvas",&client_w,&client_h);
