@@ -42,8 +42,8 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
-
-GLfloat mouseX, mouseY,x,y;
+GLint x,y;
+GLfloat mouseX, mouseY;
 GLfloat mouseLPressed;
 GLfloat mouseRPressed;
 GLfloat viewportSizeX;
