@@ -43,11 +43,12 @@ GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
 
-GLfloat mouseX mouseY,x,y;
+GLfloat mouseX, mouseY,x,y;
 GLfloat mouseLPressed;
 GLfloat mouseRPressed;
 GLfloat viewportSizeX;
 GLfloat viewportSizeY;
+static EMSCRIPTEN_RESULT ret;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -140,7 +141,6 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 frame++;
 }
 
-static EMSCRIPTEN_RESULT ret;
 
 void strt(){
 eglBindAPI(EGL_OPENGL_ES_API);
