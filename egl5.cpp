@@ -41,12 +41,11 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
-GLint x,y;
-GLfloat mouseX, mouseY;
-GLfloat mouseLPressed;
-GLfloat mouseRPressed;
-GLfloat viewportSizeX;
-GLfloat viewportSizeY;
+GLint x=0;
+GLint y=0;
+GLfloat mouseX=0.0f;
+GLfloat mouseY=0.0f;
+GLfloat mouseLPressed=0.0f;
 static EMSCRIPTEN_RESULT ret;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
