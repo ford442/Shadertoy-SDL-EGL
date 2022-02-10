@@ -43,8 +43,7 @@ GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
 
-GLfloat mouseX;
-GLfloat mouseY;
+GLfloat mouseX mouseY,x,y;
 GLfloat mouseLPressed;
 GLfloat mouseRPressed;
 GLfloat viewportSizeX;
@@ -111,17 +110,13 @@ return shader;
 static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 printf("%s,screen: (%ld,%ld),client: (%ld,%ld),%s%s%s%s button: %hu,buttons: %hu,movement: (%ld,%ld),target: (%ld,%ld)\n",emscripten_event_type_to_string(eventType),e->screenX,e->screenY,e->clientX,e->clientY,e->ctrlKey ? " CTRL" : "",e->shiftKey ? " SHIFT" : "",e->altKey ? " ALT" : "",e->metaKey ? " META" : "",e->button,e->buttons,e->movementX,e->movementY,e->targetX,e->targetY);
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_CLICK)gotClick=1;
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 mouseLPressed=1.0f;
-gotMouseDown=1;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 mouseLPressed=0.0f;
-gotMouseUp=1;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-gotMouseMove=1;
 x=e->clientX;
 y=e->clientY;
 }}
