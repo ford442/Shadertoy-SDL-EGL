@@ -125,6 +125,7 @@ return 0;
 }
 
 void renderFrame(){
+  
 eglSwapBuffers(display,surface);
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -133,8 +134,8 @@ Ttime=time_spana.count();
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-mouseX=x/S;
-mouseY=y/S;
+mouseX=(float)S-(float)x;
+mouseY=(float)y;
 if(mouseLPressed==1.0f){
 const float cMouseX=mouseX;
 const float cMouseY=mouseY;
