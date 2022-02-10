@@ -137,7 +137,7 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 // mouseY=(float)y;
 if(mouseLPressed==1.0f){
 EM_ASM({console.log("S = "+$0);},S);
-EM_ASM({console.log("x = "+$0);},x);
+// EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
 const float cMouseX=mouseX;
 const float cMouseY=mouseY;
