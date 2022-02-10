@@ -128,13 +128,14 @@ t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=(float)S-(float)x;
 mouseY=(float)y;
 if(mouseLPressed==1.0f){
- EM_ASM({console.log("S = "+$0);},S);
+// EM_ASM({console.log("S = "+$0);},S);
 // EM_ASM({console.log("x = "+$0);},x);
 // EM_ASM({console.log("mouseX = "+$0);},mouseX);
 const float cMouseX=mouseX;
