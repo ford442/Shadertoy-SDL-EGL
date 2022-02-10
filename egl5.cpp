@@ -141,7 +141,7 @@ EM_ASM({console.log("mouseX = "+$0);},mouseX);
 const float cMouseX=mouseX;
 const float cMouseY=mouseY;
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
-glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+// glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
 glUniform1f(uniform_time,(float)Ttime);
 glUniform1i(uniform_frame,frame);
