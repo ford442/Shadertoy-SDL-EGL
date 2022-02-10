@@ -133,15 +133,15 @@ Ttime=time_spana.count();
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-// mouseX=(float)S-(float)x;
-// mouseY=(float)y;
+mouseX=(float)S-(float)x;
+mouseY=(float)y;
 if(mouseLPressed==1.0f){
 EM_ASM({console.log("S = "+$0);},S);
-// EM_ASM({console.log("x = "+$0);},x);
-EM_ASM({console.log("mouseX = "+$0);},mouseX);
+EM_ASM({console.log("x = "+$0);},x);
+// EM_ASM({console.log("mouseX = "+$0);},mouseX);
 const float cMouseX=mouseX;
 const float cMouseY=mouseY;
-EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
+// EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 
 // glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
