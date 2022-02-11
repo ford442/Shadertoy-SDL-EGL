@@ -42,6 +42,13 @@ tst9: egl5.cpp  Makefile
 -o sh9.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
+sdl: sdl.cpp  Makefile
+	em++ sdl.cpp -std=c++2b -O2 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 \
+-sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
+-DNDEBUG -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
+-o sdl.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+--extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
+
 tst8c: glsl_loader2.cpp  Makefile
 	em++ glsl_loader2.cpp -std=c++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
 -sUSE_WEBGL2=1 -sENVIRONMENT=web -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
