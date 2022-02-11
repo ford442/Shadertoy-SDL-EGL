@@ -47,7 +47,7 @@ sdl: sdl.cpp  Makefile
 -sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -DNDEBUG -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
 -o sdl.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
+--extern-post-js filesys.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
 tst8c: glsl_loader2.cpp  Makefile
 	em++ glsl_loader2.cpp -std=c++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
