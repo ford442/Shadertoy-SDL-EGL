@@ -27,7 +27,7 @@ document.getElementById("circle").height=window.innerHeight;
 document.getElementById("contain2").width=window.innerHeight;
 document.getElementById("contain2").height=window.innerHeight;
 document.getElementById('btn3').addEventListener('click',function(){
-window.open('./flac/1ink.1ink');
+window.open('./flac/');
 });
 document.getElementById('btn2').addEventListener('click',function(){
 document.getElementById("ihig").innerHTML=window.innerHeight;
