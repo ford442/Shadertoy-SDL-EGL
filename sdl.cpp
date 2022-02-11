@@ -16,9 +16,17 @@
 #include <cstdint>
 #include <cstdlib>
 #include <ctime>
+#include <SDL2/SDL.h>
 
 using namespace std;
 using namespace std::chrono;
+
+//  SDL
+static SDL_AudioDeviceID dev;
+static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+
+
+
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
@@ -136,12 +144,12 @@ mouseY=(float)y/S;
 if(mouseLPressed==1.0f){
 // EM_ASM({console.log("S = "+$0);},S);
 // EM_ASM({console.log("x = "+$0);},x);
-EM_ASM({console.log("mouseX = "+$0);},mouseX);
+// EM_ASM({console.log("mouseX = "+$0);},mouseX);
 const float cMouseX=mouseX;
 const float cMouseY=mouseY;
-EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
-glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+// EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 }
+glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 glUniform1f(uniform_time,(float)Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
@@ -151,9 +159,6 @@ frame++;
 void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
-// double client_w,client_h;
-// emscripten_get_element_css_size("#canvas",&client_w,&client_h);
-// S=(int)client_h;
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
@@ -172,7 +177,7 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
@@ -322,12 +327,67 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
+static void cls_aud(){
+if(dev!=0){
+SDL_PauseAudioDevice(dev,SDL_TRUE);
+SDL_CloseAudioDevice(dev);
+dev=0;
+}}
+static void qu(int rc){
+SDL_Quit();
+exit(rc);
+}
+static void opn_aud(){
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
+if(!dev){
+SDL_FreeWAV(wave.snd);
+qu(2);
+}
+SDL_PauseAudioDevice(dev,SDL_FALSE);
+}
+static void SDLCALL bfr(void *unused,Uint8* stm,int len){
+Uint8* wptr;
+int lft;
+wptr=wave.snd+wave.pos;
+lft=wave.slen-wave.pos;
+while (lft<=len){
+SDL_memcpy(stm,wptr,lft);
+stm+=lft;
+len-=lft;
+wptr=wave.snd;
+lft=wave.slen;
+wave.pos=0;
+}
+SDL_memcpy(stm,wptr,len);
+wave.pos+=len;
+}
+static void plt(){
+cls_aud();
+char flnm[24];
+SDL_FreeWAV(wave.snd);
+SDL_Quit();
+SDL_SetMainReady();
+if (SDL_Init(SDL_INIT_AUDIO)<0){
+qu(1);
+}
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
+qu(1);
+}
+wave.pos=0;
+wave.spec.callback=bfr;
+opn_aud();
+}
 extern "C" {
 void str(){
 strt();
+}
+void pl(){
+plt();
 }}
 int main(){
 EM_ASM({
+FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
 return 1;
