@@ -41,10 +41,10 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
-GLint x=0;
-GLint y=0;
-GLfloat mouseX=0.0f;
-GLfloat mouseY=0.0f;
+GLfloat x;
+GLfloat y;
+GLfloat mouseX;
+GLfloat mouseY;
 GLfloat mouseLPressed=0.0f;
 static EMSCRIPTEN_RESULT ret;
 
