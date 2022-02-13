@@ -25,9 +25,6 @@ using namespace std::chrono;
 static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
-
-
-
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
@@ -129,7 +126,7 @@ y=e->clientY;
 return 0;
 }
 GLsizei S;
-void renderFrame(){
+static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -139,14 +136,14 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callb
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-mouseX=(float)x/S;
-mouseY=(float)y/S;
 if(mouseLPressed==1.0f){
 // EM_ASM({console.log("S = "+$0);},S);
 // EM_ASM({console.log("x = "+$0);},x);
 // EM_ASM({console.log("mouseX = "+$0);},mouseX);
-static const float cMouseX=mouseX;
-static const float cMouseY=mouseY;
+float cMouseX=mouseX;
+float cMouseY=mouseY;
+mouseX=(float)x/S;
+mouseY=(float)y/S;
 // EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
@@ -156,7 +153,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 frame++;
 }
 
-void strt(){
+static void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
@@ -228,12 +225,12 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
