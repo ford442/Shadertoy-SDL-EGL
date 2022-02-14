@@ -156,7 +156,6 @@ EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 EM_ASM({console.log("y = "+$0);},y);
 EM_ASM({console.log("mouseY = "+$0);},mouseY);
 EM_ASM({console.log("cMouseY = "+$0);},cMouseY);
-}
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
