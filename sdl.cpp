@@ -139,11 +139,11 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 if(mouseLPressed==1.0f){
 GLfloat mouseX=(GLfloat)x/S;
 GLfloat mouseY=(GLfloat)y/S;
-GLfloat cMouseX;
-GLfloat cMouseY;
+static GLfloat cMouseX;
+static GLfloat cMouseY;
 if(clickLoc==1){
-const float Mx=mouseX;
-const float My=mouseY;
+static const float Mx=mouseX;
+static const float My=mouseY;
 cMouseX=Mx;
 cMouseY=My;
 clickLoc=0;
