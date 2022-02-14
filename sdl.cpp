@@ -139,10 +139,10 @@ clickLoc=0;
 }
   
 EM_ASM({console.log("          y = "+$0);},y);
-EM_ASM({console.log("          mousey = "+$0);},mouseX);
+EM_ASM({console.log("          mouseY = "+$0);},mouseY);
 EM_ASM({console.log("          my = "+$0);},mY);
   EM_ASM({console.log("x = "+$0);},x);
-EM_ASM({console.log("mouseX = "+$0);},mouseY);
+EM_ASM({console.log("mouseX = "+$0);},mouseX);
 EM_ASM({console.log("mX = "+$0);},mX);
 glUniform4f(uniform_mouse,mouseX,mouseY,mX,mY);
 }else{
@@ -163,7 +163,7 @@ ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=1.0f-(x/S);
-mouseY=y/S;
+mouseY=(S-y)/S;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
