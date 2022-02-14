@@ -120,6 +120,7 @@ mouseLPressed=1.0f;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 mouseLPressed=0.0f;
+clickLoc=1;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -161,6 +162,7 @@ iFrame++;
 
 static void strt(){
 iFrame=0;
+clickLoc=1;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
