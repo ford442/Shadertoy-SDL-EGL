@@ -145,13 +145,8 @@ float cMouseX=mouseX;
 float cMouseY=mouseY;
 mouseX=(float)x/S;
 mouseY=(float)y/S;
- 
-EM_ASM({console.log("S = "+$0);},S);
- EM_ASM({console.log("x = "+$0);},x);
-EM_ASM({console.log("mouseX = "+$0);},mouseX);
- EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
-glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
+glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 glUniform1f(uniform_time,(GLfloat)Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
