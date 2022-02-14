@@ -48,8 +48,8 @@ GLfloat Fm1=-1.0f;
 GLfloat fps;
 GLfloat x;
 GLfloat y;
-GLfloat mouseX;
-GLfloat mouseY;
+static float mouseX;
+static float mouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
 
@@ -141,10 +141,10 @@ if(mouseLPressed==1.0f){
 // EM_ASM({console.log("S = "+$0);},S);
 // EM_ASM({console.log("x = "+$0);},x);
 // EM_ASM({console.log("mouseX = "+$0);},mouseX);
-GLfloat cMouseX=mouseX;
-GLfloat cMouseY=mouseY;
-mouseX=(GLfloat)x/S;
-mouseY=(GLfloat)y/S;
+float cMouseX=mouseX;
+float cMouseY=mouseY;
+mouseX=(float)x/S;
+mouseY=(float)y/S;
 // EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
