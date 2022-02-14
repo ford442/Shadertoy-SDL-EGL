@@ -51,8 +51,6 @@ static int x;
 static int y;
  GLfloat mouseX;
  GLfloat mouseY;
- GLfloat cMouseX;
- GLfloat cMouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
 static GLsizei S;
@@ -139,19 +137,19 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callb
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-mouseX=(float)x/S;
-mouseY=(float)y/S;
+mouseX=(GLfloat)x/S;
+mouseY=(GLfloat)y/S;
 if(mouseLPressed==1.0f){
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
 if(clickLoc==1){
-cMouseX=mouseX;
-cMouseY=mouseY;
+static float cMouseX=mouseX;
+static float cMouseY=mouseY;
 clickLoc=0;
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 }
-glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+glUniform4f(uniform_mouse,mouseX,mouseY,(GLfloat)cMouseX,(GLfloat)cMouseY);
 }
 frame=iFrame;
 glUniform1f(uniform_time,(GLfloat)Ttime);
