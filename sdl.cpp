@@ -51,7 +51,7 @@ static GLfloat x;
 static GLfloat y;
 static GLfloat mouseX;
 static GLfloat mouseY;
-static GLfloat cMouseY;
+static GLfloat cMouseX;
 static GLfloat cMouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
