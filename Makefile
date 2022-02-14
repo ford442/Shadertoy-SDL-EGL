@@ -49,6 +49,13 @@ sdl: sdl.cpp  Makefile
 -o sdl.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --extern-post-js filesys.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
+sdlb: sdl.cpp  Makefile
+	em++ sdl.cpp -std=gnu++2b -O2 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sGL_TESTING=1 \
+-sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
+-DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=384mb -sMALLOC="emmalloc" \
+-o sdlb.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+--extern-post-js filesys.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
+
 tst8c: glsl_loader2.cpp  Makefile
 	em++ glsl_loader2.cpp -std=c++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
 -sUSE_WEBGL2=1 -sENVIRONMENT=web -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
@@ -139,6 +146,8 @@ tst4: js.c  Makefile
 -O3 -o js1.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
 
+tst: sdl sdl2
+	echo 'Built 1ink.us shadertoy wasm with SDL WAV audio a/b.'
 
 all:  tst2 tst3 tst3b
 	echo 'Built 1ink.us Shaders.'
