@@ -129,9 +129,11 @@ return 0;
 }
 
 
-static void uniforms(const GLfloat xx,const GLfloat yy,GLfloat time,GLuint fram){
+static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==1.0f){
-glUniform4f(uniform_mouse,mouseX,mouseY,xx,yy);
+const GLfloat xxx=xx;
+const GLfloat yyy=yy;
+glUniform4f(uniform_mouse,mouseX,mouseY,xxx,yyy);
 }
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
