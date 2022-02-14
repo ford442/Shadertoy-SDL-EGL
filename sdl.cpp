@@ -133,8 +133,8 @@ if(mouseLPressed==1.0f){
 if(clickLoc==1){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mX=xxx;
-mY=yyy;
+mX=xxx*S;
+mY=yyy*S;
 clickLoc=0;
 }
 EM_ASM({console.log("          y = "+$0);},y);
@@ -143,7 +143,7 @@ EM_ASM({console.log("          my = "+$0);},mY);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
 EM_ASM({console.log("mX = "+$0);},mX);
-glUniform4f(uniform_mouse,xx,yy,mX,mY);
+glUniform4f(uniform_mouse,(S*xx),(S*yy),mX,mY);
 }else{
 clickLoc=1;
 }
