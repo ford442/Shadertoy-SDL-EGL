@@ -49,11 +49,14 @@ static GLfloat Fm1=-1.0f;
 static GLfloat fps;
 static float x;
 static float y;
-static  GLfloat mouseX;
+static GLfloat mouseX;
 static GLfloat mouseY;
+static GLfloat cMouseX;
+static GLfloat cMouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
 static GLsizei S;
+static GLsizei clickLoc;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -141,8 +144,11 @@ if(mouseLPressed==1.0f){
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
-static float cMouseX=mouseX;
-static float cMouseY=mouseY;
+if(clickLoc==1){
+cMouseX=mouseX;
+cMouseY=mouseY;
+clockLoc=0;
+}
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
