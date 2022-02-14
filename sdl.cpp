@@ -144,8 +144,8 @@ if(mouseLPressed==1.0f){
  EM_ASM({console.log("S = "+$0);},S);
  EM_ASM({console.log("x = "+$0);},x);
  EM_ASM({console.log("mouseX = "+$0);},mouseX);
-float cMouseX=mouseX;
-float cMouseY=mouseY;
+ cMouseX=mouseX;
+ cMouseY=mouseY;
 mouseX=(float)x/S;
 mouseY=(float)y/S;
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
