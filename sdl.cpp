@@ -34,8 +34,8 @@ static long int iFrame;
 static EGLDisplay display;
 static EGLSurface surface;
 static EGLContext contextegl;
-GLsizei nsources,i;
-GLsizei s4=4;
+static GLsizei nsources,i;
+static GLsizei s4=4;
 static EGLint config_size,major,minor;
 static EGLConfig eglconfig=NULL;
 static EmscriptenWebGLContextAttributes attr;
@@ -66,19 +66,19 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
-const char common_shader_header_gles3[]=
+static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;\n";
-const char vertex_shader_body_gles3[]=
+static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-const char fragment_shader_header_gles3[]=
+static const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
-const char fragment_shader_footer_gles3[]=
+static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-const char* common_shader_header=common_shader_header_gles3;
-const char* vertex_shader_body=vertex_shader_body_gles3;
-const char* fragment_shader_header=fragment_shader_header_gles3;
-const char* fragment_shader_footer=fragment_shader_footer_gles3;
-const char8_t *read_file(const char *filename){
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
+static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
