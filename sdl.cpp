@@ -127,15 +127,17 @@ y=e->clientY;
 }}
 return 0;
 }
-
+GLfloat mX,mY;
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==1.0f){
-if (clickLoc==1){
+if(clickLoc==1){
 static const GLfloat xxx=xx;
 static const GLfloat yyy=yy;
+mX=xxx;
+mY=yyy;
 clickLoc=0;
 }
-glUniform4f(uniform_mouse,mouseX,mouseY,xxx,yyy);
+glUniform4f(uniform_mouse,mouseX,mouseY,mX,mY);
 }else{
 clickLoc=1;
 }
