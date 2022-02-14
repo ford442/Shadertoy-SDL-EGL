@@ -131,7 +131,7 @@ return 0;
 
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==1.0f){
-glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+glUniform4f(uniform_mouse,mouseX,mouseY,xx,yy);
 }
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
@@ -149,13 +149,6 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=x/S;
 mouseY=y/S;
-EM_ASM({console.log("S = "+$0);},S);
-EM_ASM({console.log("x = "+$0);},x);
-EM_ASM({console.log("mouseX = "+$0);},mouseX);
-EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
-EM_ASM({console.log("y = "+$0);},y);
-EM_ASM({console.log("mouseY = "+$0);},mouseY);
-EM_ASM({console.log("cMouseY = "+$0);},cMouseY);
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
