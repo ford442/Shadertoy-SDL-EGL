@@ -128,11 +128,10 @@ y=e->clientY;
 return 0;
 }
 
-
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==1.0f){
-const GLfloat xxx=xx;
-const GLfloat yyy=yy;
+static const GLfloat xxx=xx;
+static const GLfloat yyy=yy;
 glUniform4f(uniform_mouse,mouseX,mouseY,xxx,yyy);
 }
 glUniform1f(uniform_time,time);
