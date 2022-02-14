@@ -43,7 +43,7 @@ tst9: egl5.cpp  Makefile
 --extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
 sdl: sdl.cpp  Makefile
-	em++ sdl.cpp -std=gnu++2b -O2 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sGL_TESTING=1 \
+	em++ sdl.cpp -std=gnu++2b -O2 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sGL_TESTING=1 \
 -sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=384mb -sMALLOC="emmalloc" \
 -o sdl.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
