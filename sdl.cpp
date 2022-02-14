@@ -322,7 +322,7 @@ glUniform1i(sampler_channel[3],v0);
 */
 // glEnable(GL_CULL_FACE);
 // glCullFace(GL_FRONT);
-glDisable(GL_DITHER);
+glEnable(GL_DITHER);
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
