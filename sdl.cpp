@@ -141,8 +141,8 @@ GLfloat mouseY=(GLfloat)y/S;
 static GLfloat cMouseX;
 static GLfloat cMouseY;
 if(clickLoc==1){
-static const float Mx=mouseX;
-static const float My=mouseY;
+const float Mx=mouseX;
+const float My=mouseY;
 cMouseX=Mx;
 cMouseY=My;
 clickLoc=0;
