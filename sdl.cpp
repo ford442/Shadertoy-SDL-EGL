@@ -22,59 +22,55 @@ using namespace std;
 using namespace std::chrono;
 
 //  SDL
-static SDL_AudioDeviceID dev;
+SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
-static high_resolution_clock::time_point t1,t2,t3;
+high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 static float Ttime,Dtime;
 static long int iFrame;
 // static unsigned long int Ttime,Dtime;
-EGLDisplay display;
-EGLSurface surface;
+static EGLDisplay display;
+static EGLSurface surface;
 static EGLContext contextegl;
 GLsizei nsources,i;
 GLsizei s4=4;
-EGLint config_size,major,minor;
-EGLConfig eglconfig=NULL;
+static EGLint config_size,major,minor;
+static EGLConfig eglconfig=NULL;
 static EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
+static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
 struct timespec req={0,8500000};
-GLfloat F=1.0f;
-GLfloat F0=0.0f;
-GLfloat Fm1=-1.0f;
-GLfloat fps;
- GLfloat x;
- GLfloat y;
- GLfloat mouseX;
- GLfloat mouseY;
- GLfloat cMouseX;
- GLfloat cMouseY;
+static GLfloat F=1.0f;
+static GLfloat F0=0.0f;
+static GLfloat Fm1=-1.0f;
+static GLfloat fps;
+static float x;
+static float y;
+static  GLfloat mouseX;
+static GLfloat mouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
+static GLsizei S;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
+static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 const char common_shader_header_gles3[]=
-"#version 300 es\n precision highp float; \n";
-// "precision highp sampler3D;"
-// "precision highp sampler2D;"
-
+"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;} \n\0";
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 const char fragment_shader_header_gles3[]=
-"uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
+"\n uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -103,8 +99,8 @@ return result;
 }
 return NULL;
 }
-GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLsizei srclens[nsources];
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
@@ -128,7 +124,6 @@ y=e->clientY;
 }}
 return 0;
 }
-GLsizei S;
 
 static void renderFrame(){
 eglSwapBuffers(display,surface);
@@ -140,15 +135,15 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callb
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
+mouseX=x/S;
+mouseY=y/S;
 if(mouseLPressed==1.0f){
- EM_ASM({console.log("S = "+$0);},S);
- EM_ASM({console.log("x = "+$0);},x);
- EM_ASM({console.log("mouseX = "+$0);},mouseX);
-const float cMouseX=mouseX;
-const float cMouseY=mouseY;
-  EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
-mouseX=(float)x/S;
-mouseY=(float)y/S;
+EM_ASM({console.log("S = "+$0);},S);
+EM_ASM({console.log("x = "+$0);},x);
+EM_ASM({console.log("mouseX = "+$0);},mouseX);
+static const float cMouseX=mouseX;
+static const float cMouseY=mouseY;
+EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
 frame=iFrame;
@@ -158,14 +153,14 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 }
 
-void strt(){
+static void strt(){
 iFrame=0;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
-const EGLint attribut_list[]={ 
+static const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
-const EGLint anEglCtxAttribs2[]={
+static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
@@ -173,7 +168,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
-const EGLint attribute_list[]={
+static const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -221,7 +216,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-const char* default_fragment_shader=(char*)read_file(fileloc);
+static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
