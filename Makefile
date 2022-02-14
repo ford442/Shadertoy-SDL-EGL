@@ -95,7 +95,6 @@ tst7: main9file.cpp  Makefile
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0
 
 
-
 tst+: main7.cpp  Makefile
 	em++ main7.cpp -std=c++20 -sFULL_ES2=0 -sFULL_ES3=0 --closure 0 -sGL_TESTING=0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
 -sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sMALLOC='emmalloc' -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
@@ -145,9 +144,6 @@ tst4: js.c  Makefile
 -ffast-math -sSUPPORT_LONGJMP=0 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 -O3 -o js1.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
-
-tst: sdl sdl2
-	echo 'Built 1ink.us shadertoy wasm with SDL WAV audio a/b.'
 
 all:  tst2 tst3 tst3b
 	echo 'Built 1ink.us Shaders.'
