@@ -22,7 +22,7 @@ using namespace std;
 using namespace std::chrono;
 
 //  SDL
-SDL_AudioDeviceID dev;
+static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
@@ -141,8 +141,8 @@ if(mouseLPressed==1.0f){
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
-static const float cMouseX=mouseX;
-static const float cMouseY=mouseY;
+static float cMouseX=mouseX;
+static float cMouseY=mouseY;
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
