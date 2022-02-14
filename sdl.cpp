@@ -116,7 +116,6 @@ mouseLPressed=1.0f;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 mouseLPressed=0.0f;
-clickLoc=1;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -149,11 +148,13 @@ cMouseY=My;
 clickLoc=0;
 EM_ASM({console.log("NEW cMouseX = "+$0);},cMouseX);
 }
-
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
+EM_ASM({console.log("y = "+$0);},y);
+EM_ASM({console.log("mouseY = "+$0);},mouseY);
+EM_ASM({console.log("cMouseY = "+$0);},cMouseY);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
 glUniform1f(uniform_time,(GLfloat)Ttime);
