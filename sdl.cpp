@@ -140,12 +140,14 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=(GLfloat)x/S;
 mouseY=(GLfloat)y/S;
 if(mouseLPressed==1.0f){
+static float cMouseX;
+static float cMouseY;
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
 if(clickLoc==1){
-static float cMouseX=mouseX;
-static float cMouseY=mouseY;
+cMouseX=mouseX;
+cMouseY=mouseY;
 clickLoc=0;
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 }
