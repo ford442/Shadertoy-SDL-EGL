@@ -29,7 +29,7 @@ high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 // double Ttime,Dtime;
-unsigned long int Ttime,Dtime;
+static unsigned long int Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
