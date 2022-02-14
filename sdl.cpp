@@ -155,7 +155,7 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
 frame=iFrame;
 glUniform1f(uniform_time,(GLfloat)Ttime);
-glUniform1i(uniform_frame,(GLuint)iFrame;
+glUniform1i(uniform_frame,(GLuint)iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 }
