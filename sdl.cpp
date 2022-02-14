@@ -147,7 +147,7 @@ EM_ASM({console.log("mouseX = "+$0);},mouseX);
 if(clickLoc==1){
 cMouseX=mouseX;
 cMouseY=mouseY;
-clockLoc=0;
+clickLoc=0;
 }
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
