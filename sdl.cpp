@@ -29,6 +29,7 @@ static high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 static float Ttime,Dtime;
+static long int iFrame;
 // static unsigned long int Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
@@ -46,10 +47,12 @@ GLfloat F=1.0f;
 GLfloat F0=0.0f;
 GLfloat Fm1=-1.0f;
 GLfloat fps;
-GLfloat x;
-GLfloat y;
- float mouseX;
- float mouseY;
+static GLfloat x;
+static GLfloat y;
+static GLfloat mouseX;
+static GLfloat mouseY;
+static GLfloat cMouseY;
+static GLfloat cMouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
 
@@ -145,15 +148,17 @@ float cMouseX=mouseX;
 float cMouseY=mouseY;
 mouseX=(float)x/S;
 mouseY=(float)y/S;
-}
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
+}
+frame=iFrame;
 glUniform1f(uniform_time,(GLfloat)Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-frame++;
+iFrame++;
 }
 
- void strt(){
+void strt(){
+iFrame=0;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
