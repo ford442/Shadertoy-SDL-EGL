@@ -243,12 +243,12 @@ glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
 // nanosleep(&req,&rem);
 attrib_position=0;
-glBindAttribLocation(shader_program,attrib_position,"iPosition");
+glBindAttribLocation(shader_program,attrib_position,"location");
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-attrib_position=glGetAttribLocation(shader_program,"iPosition");
+attrib_position=glGetAttribLocation(shader_program,"location");
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
 
