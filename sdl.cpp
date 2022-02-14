@@ -131,13 +131,12 @@ GLfloat mX,mY;
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==1.0f){
 if(clickLoc==1){
-static const GLfloat xxx=xx;
-static const GLfloat yyy=yy;
+const GLfloat xxx=xx;
+const GLfloat yyy=yy;
 mX=xxx;
 mY=yyy;
 clickLoc=0;
 }
-  
 EM_ASM({console.log("          y = "+$0);},y);
 EM_ASM({console.log("          mouseY = "+$0);},mouseY);
 EM_ASM({console.log("          my = "+$0);},mY);
@@ -162,7 +161,7 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callb
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-mouseX=1.0f-(x/S);
+mouseX=x/S;
 mouseY=(S-y)/S;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
