@@ -142,11 +142,14 @@ GLfloat mouseY=(GLfloat)y/S;
 GLfloat cMouseX;
 GLfloat cMouseY;
 if(clickLoc==1){
-cMouseX=mouseX;
-cMouseY=mouseY;
+const float Mx=mouseX;
+const float My=mouseY;
+cMouseX=Mx;
+cMouseY=My;
 clickLoc=0;
 EM_ASM({console.log("NEW cMouseX = "+$0);},cMouseX);
 }
+
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
