@@ -133,8 +133,8 @@ if(mouseLPressed==1.0f){
 if(clickLoc==1){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mX=xxx*S;
-mY=yyy*S;
+mX=S-(xxx*S);
+mY=S-(yyy*S);
 clickLoc=0;
 }
 EM_ASM({console.log("          y = "+$0);},y);
