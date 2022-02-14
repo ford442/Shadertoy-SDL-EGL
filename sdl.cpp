@@ -26,7 +26,7 @@ static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
+GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 static float Ttime,Dtime;
 static long int iFrame;
@@ -36,7 +36,7 @@ static EGLSurface surface;
 static EGLContext contextegl;
 static GLsizei nsources,i;
 static GLsizei s4=4;
-static EGLint config_size,major,minor;
+static EGLint config_size,major,minor,attrib_position;
 static EGLConfig eglconfig=NULL;
 static EmscriptenWebGLContextAttributes attr;
 static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
@@ -49,10 +49,10 @@ static GLfloat Fm1=-1.0f;
 static GLfloat fps;
 static int x;
 static int y;
-static GLfloat mouseX;
-static GLfloat mouseY;
-static GLfloat cMouseX;
-static GLfloat cMouseY;
+ GLfloat mouseX;
+ GLfloat mouseY;
+ GLfloat cMouseX;
+ GLfloat cMouseY;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
 static GLsizei S;
@@ -155,7 +155,7 @@ glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
 frame=iFrame;
 glUniform1f(uniform_time,(GLfloat)Ttime);
-glUniform1i(uniform_frame,frame);
+glUniform1i(uniform_frame,(GLuint)iFrame;
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 }
@@ -166,7 +166,7 @@ clickLoc=1;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -240,6 +240,8 @@ glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
 // nanosleep(&req,&rem);
+attrib_position=0;
+glBindAttribLocation(shader_program,attrib_position,"iPosition");
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
