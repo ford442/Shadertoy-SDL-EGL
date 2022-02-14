@@ -47,8 +47,8 @@ static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
 static GLfloat fps;
-static float x;
-static float y;
+static int x;
+static int y;
 static GLfloat mouseX;
 static GLfloat mouseY;
 static GLfloat cMouseX;
@@ -141,6 +141,8 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=x/S;
 mouseY=y/S;
+EM_ASM({console.log("x = "+$0);},x);
+EM_ASM({console.log("mouseX = "+$0);},mouseX);
 if(mouseLPressed==1.0f){
 EM_ASM({console.log("S = "+$0);},S);
 EM_ASM({console.log("x = "+$0);},x);
@@ -149,8 +151,8 @@ if(clickLoc==1){
 cMouseX=mouseX;
 cMouseY=mouseY;
 clickLoc=0;
-}
 EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
+}
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
 frame=iFrame;
