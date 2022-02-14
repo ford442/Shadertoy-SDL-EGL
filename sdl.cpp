@@ -138,9 +138,9 @@ mY=yyy;
 clickLoc=0;
 }
   
-EM_ASM({console.log("y = "+$0);},y);
-EM_ASM({console.log("mousey = "+$0);},mouseX);
-EM_ASM({console.log("my = "+$0);},mY);
+EM_ASM({console.log("          y = "+$0);},y);
+EM_ASM({console.log("          mousey = "+$0);},mouseX);
+EM_ASM({console.log("          my = "+$0);},mY);
   EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseY);
 EM_ASM({console.log("mX = "+$0);},mX);
