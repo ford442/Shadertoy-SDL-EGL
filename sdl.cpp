@@ -127,7 +127,7 @@ y=e->clientY;
 }}
 return 0;
 }
-GLfloat mX,mY;
+static GLfloat mX,mY;
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==1.0f){
 if(clickLoc==1){
@@ -140,7 +140,7 @@ clickLoc=0;
 EM_ASM({console.log("          y = "+$0);},y);
 EM_ASM({console.log("          mouseY = "+$0);},mouseY);
 EM_ASM({console.log("          my = "+$0);},mY);
-  EM_ASM({console.log("x = "+$0);},x);
+EM_ASM({console.log("x = "+$0);},x);
 EM_ASM({console.log("mouseX = "+$0);},mouseX);
 EM_ASM({console.log("mX = "+$0);},mX);
 glUniform4f(uniform_mouse,mouseX,mouseY,mX,mY);
