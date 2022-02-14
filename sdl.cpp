@@ -25,19 +25,19 @@ using namespace std::chrono;
 static SDL_AudioDeviceID dev;
 static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
-high_resolution_clock::time_point t1,t2,t3;
+static high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 static float Ttime,Dtime;
 // static unsigned long int Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
-EGLContext contextegl;
+static EGLContext contextegl;
 GLsizei nsources,i;
 GLsizei s4=4;
 EGLint config_size,major,minor;
 EGLConfig eglconfig=NULL;
-EmscriptenWebGLContextAttributes attr;
+static EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
 struct timespec rem;
@@ -50,7 +50,7 @@ GLfloat x;
 GLfloat y;
 GLfloat mouseX;
 GLfloat mouseY;
-GLfloat mouseLPressed=0.0f;
+static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -112,7 +112,6 @@ return shader;
 }
 
 static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
-// printf("%s,screen: (%ld,%ld),client: (%ld,%ld),%s%s%s%s button: %hu,buttons: %hu,movement: (%ld,%ld),target: (%ld,%ld)\n",emscripten_event_type_to_string(eventType),e->screenX,e->screenY,e->clientX,e->clientY,e->ctrlKey ? " CTRL" : "",e->shiftKey ? " SHIFT" : "",e->altKey ? " ALT" : "",e->metaKey ? " META" : "",e->button,e->buttons,e->movementX,e->movementY,e->targetX,e->targetY);
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 mouseLPressed=1.0f;
