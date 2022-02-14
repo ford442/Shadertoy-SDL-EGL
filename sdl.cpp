@@ -28,7 +28,8 @@ static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,attrib_position,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-double Ttime,Dtime;
+// double Ttime,Dtime;
+unsigned long int Ttime,Dtime;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -61,7 +62,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 const char common_shader_header_gles3[]=
-"#version 300 es\n precision mediump float; \n";
+"#version 300 es\n precision highp float; \n";
 // "precision highp sampler3D;"
 // "precision highp sampler2D;"
 
@@ -126,6 +127,7 @@ y=e->clientY;
 return 0;
 }
 GLsizei S;
+
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=steady_clock::now();
@@ -140,20 +142,20 @@ if(mouseLPressed==1.0f){
 // EM_ASM({console.log("S = "+$0);},S);
 // EM_ASM({console.log("x = "+$0);},x);
 // EM_ASM({console.log("mouseX = "+$0);},mouseX);
-float cMouseX=mouseX;
-float cMouseY=mouseY;
-mouseX=(float)x/S;
-mouseY=(float)y/S;
+GLfloat cMouseX=mouseX;
+GLfloat cMouseY=mouseY;
+mouseX=(GLfloat)x/S;
+mouseY=(GLfloat)y/S;
 // EM_ASM({console.log("cMouseX = "+$0);},cMouseX);
 glUniform4f(uniform_mouse,mouseX,mouseY,cMouseX,cMouseY);
 }
-glUniform1f(uniform_time,(float)Ttime);
+glUniform1f(uniform_time,(GLfloat)Ttime);
 glUniform1i(uniform_frame,frame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 frame++;
 }
 
-static void strt(){
+ void strt(){
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
@@ -307,10 +309,12 @@ glUniform1i(sampler_channel[1],v0);
 glUniform1i(sampler_channel[2],v0);
 glUniform1i(sampler_channel[3],v0);
 */
-glEnable(GL_CULL_FACE);
-glCullFace(GL_FRONT);
-glEnable(GL_DITHER);
+// glEnable(GL_CULL_FACE);
+// glCullFace(GL_FRONT);
+glDisable(GL_DITHER);
 glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_DEPTH_TEST);
 // glDepthMask(GL_TRUE);
 glDepthFunc(GL_LESS);
