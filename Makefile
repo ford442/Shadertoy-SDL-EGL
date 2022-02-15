@@ -47,7 +47,7 @@ sdl: sdl.cpp  Makefile
 -sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=256mb -sMALLOC="emmalloc" \
 -o sdl.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---post-js filesys.js --post-js ccall.js --post-js fs.js --pre-js setUp.js
+--post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
 sdlb: sdl.cpp  Makefile
 	em++ sdl.cpp -std=gnu++2b -O2 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sGL_TESTING=1 \
