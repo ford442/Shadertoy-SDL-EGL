@@ -55,7 +55,8 @@ static GLfloat x;
 static GLfloat y;
 static float mouseLPressed;
 static EMSCRIPTEN_RESULT ret;
-static GLsizei S;
+static int S;
+static GLfloat Size;
 static GLsizei clickLoc;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -71,7 +72,7 @@ static const char common_shader_header_gles3[]=
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
+"\n uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -108,7 +109,7 @@ for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
 shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
+glShaderSource(shader,nsuniformources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
@@ -133,11 +134,11 @@ if(mouseLPressed==1.0f){
 if(clickLoc==1){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mX=S-(xxx*S);
-mY=S-(yyy*S);
+mX=S-(xxx*Size);
+mY=S-(yyy*Size);
 clickLoc=0;
 }
-glUniform4f(uniform_mouse,(S*xx),(S*yy),mX,mY);
+glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
 clickLoc=1;
 }
@@ -155,8 +156,8 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callb
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-mouseX=x/S;
-mouseY=(S-y)/S;
+mouseX=x/Size;
+mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
@@ -166,6 +167,7 @@ static void strt(){
 iFrame=0;
 clickLoc=1;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -313,7 +315,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 // uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform2f(uniform_res,(float)S,(float)S);
+glUniform3f(uniform_res,Size,Size,1.0f);
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
