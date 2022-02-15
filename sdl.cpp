@@ -72,7 +72,7 @@ static const char common_shader_header_gles3[]=
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
+"\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -315,7 +315,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 // uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,Size,Size,1.0f);
+glUniform2f(uniform_res,Size,Size);
 /*
 glUniform1i(sampler_channel[0],v0);
 glUniform1i(sampler_channel[1],v0);
