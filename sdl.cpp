@@ -22,47 +22,47 @@ using namespace std;
 using namespace std::chrono;
 
 //  SDL
-static SDL_AudioDeviceID dev;
-static struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+SDL_AudioDeviceID dev;
+struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
-static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-static float Ttime,Dtime;
-static long int iFrame;
-// static unsigned long int Ttime,Dtime;
-static EGLDisplay display;
-static EGLSurface surface;
-static EGLContext contextegl;
-static GLsizei nsources,i;
+GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+float Ttime,Dtime;
+long iFrame;
+
 static GLsizei s4=4;
-static EGLint config_size,major,minor,attrib_position;
-static EGLConfig eglconfig=NULL;
-static EmscriptenWebGLContextAttributes attr;
-static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v32=32,a,b;
-struct timespec rem;
-struct timespec req={0,8500000};
+static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
-static GLfloat fps;
 static GLfloat mouseX;
 static GLfloat mouseY;
 static GLfloat cMouseX;
 static GLfloat cMouseY;
 static GLfloat x;
 static GLfloat y;
-static float mouseLPressed;
-static EMSCRIPTEN_RESULT ret;
+static EM_BOOL mouseLPressed;
 static int S;
 static GLfloat Size;
-static GLsizei clickLoc;
+static EM_BOOL clickLoc;
 
+EGLDisplay display;
+EGLSurface surface;
+EGLContext contextegl;
+GLsizei nsources,i;
+GLfloat fps;
+EGLint config_size,major,minor,attrib_position;
+EGLConfig eglconfig=NULL;
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+struct timespec rem;
+struct timespec req={0,8500000};
+EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-const char *fileloc="/shader/shader1.toy";
+static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
@@ -117,10 +117,10 @@ return shader;
 static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-mouseLPressed=1.0f;
+mouseLPressed=true;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-mouseLPressed=0.0f;
+mouseLPressed=false;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -130,17 +130,17 @@ return 0;
 }
 static GLfloat mX,mY;
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
-if(mouseLPressed==1.0f){
-if(clickLoc==1){
+if(mouseLPressed==true){
+if(clickLoc==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
 mX=S-(xxx*Size);
 mY=S-(yyy*Size);
-clickLoc=0;
+clickLoc=false;
 }
 glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
-clickLoc=1;
+clickLoc=true;
 }
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
@@ -165,7 +165,7 @@ iFrame++;
 
 static void strt(){
 iFrame=0;
-clickLoc=1;
+clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
@@ -173,8 +173,8 @@ static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,0,
+EGL_CONTEXT_CLIENT_VERSION,v3,
+EGL_CONTEXT_MINOR_VERSION_KHR,v0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -188,13 +188,13 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,8,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,v8,
+EGL_GREEN_SIZE,v8,
+EGL_BLUE_SIZE,v8,
+EGL_ALPHA_SIZE,v8,
+EGL_DEPTH_SIZE,v24,
+EGL_STENCIL_SIZE,v8,
+EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -208,8 +208,8 @@ attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_DEFAULT;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=2;
-attr.minorVersion=0;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#canvas",&attr);
 // emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -238,14 +238,13 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 shader_program=glCreateProgram();
 glAttachShader(shader_program,vtx);
 glAttachShader(shader_program,frag);
 glLinkProgram(shader_program);
-// nanosleep(&req,&rem);
-attrib_position=0;
-glBindAttribLocation(shader_program,0,"iPosition");
+attrib_position=v0;
+glBindAttribLocation(shader_program,v0,"iPosition");
 glUseProgram(shader_program);
 glDeleteShader(vtx);
 glDeleteShader(frag);
@@ -341,17 +340,17 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
-static void cls_aud(){
+void cls_aud(){
 if(dev!=0){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 SDL_CloseAudioDevice(dev);
 dev=0;
 }}
-static void qu(int rc){
+void qu(int rc){
 SDL_Quit();
 exit(rc);
 }
-static void opn_aud(){
+void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
@@ -359,7 +358,7 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static void SDLCALL bfr(void *unused,Uint8* stm,int len){
+void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
 int lft;
 wptr=wave.snd+wave.pos;
@@ -375,9 +374,9 @@ wave.pos=0;
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
-static void plt(){
+void plt(){
 cls_aud();
-char flnm[24];
+static char flnm[24];
 SDL_FreeWAV(wave.snd);
 SDL_Quit();
 SDL_SetMainReady();
