@@ -111,11 +111,11 @@ bufa: main8.cpp  Makefile
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0
 
 b3: b3.cpp  Makefile
-	emcc b3.cpp -sFULL_ES2=0 -sFULL_ES3=0 --closure 0 -sGL_TESTING=0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
--sUSE_WEBGL2=1 -flto=thin -sENVIRONMENT=web -sMALLOC='emmalloc' -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--ffast-math -sSUPPORT_LONGJMP=0 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
--O3 -o eb3001.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
---extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs.js -sSUPPORT_BIG_ENDIAN=0 --extern-post-js cl-gpu.js
+	em++ b3.cpp -std=gnu++2b --closure 0 -O2 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sGL_TESTING=1 \
+-sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
+-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=256mb -sMALLOC="emmalloc" \
+-o b3001.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+--post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-post-js cl-gpu.js
 
 glsl: glsl.cpp  Makefile
 	emcc glsl.cpp -sFULL_ES2=0 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 -sUSE_SDL=2  \
