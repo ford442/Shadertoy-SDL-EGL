@@ -400,7 +400,6 @@ let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 let canvas=document.getElementById("bcanvas");
 let contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
-// let contx=canvas.getContext('2d',{alpha:true,desynchronized:false});
 const g=new GPU({canvas:canvas,webGl:contx});
 let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
