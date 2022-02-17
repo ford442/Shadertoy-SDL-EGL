@@ -399,8 +399,6 @@ const canvas=document.getElementById("bcanvas");
 const contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
 const v=document.getElementById("mv");
 let d=S();if(d)d();d=S();function S(){
-  const alph=0.7;
-
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 const g=new GPU({canvas:canvas,webGl:contx});
@@ -411,9 +409,9 @@ const t=g.createKernel(function(v,alf){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2],alf];}).setTactic("speed").setPipeline(true).setOutput(o);
 const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],alf);}).setTactic("speed").setGraphical(true).setOutput(o);
-let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v,alph),0);r(t($,alph));
-$.set(t(v,alph),0);r(t($,alph));$.set(t(v,alph),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
-function M(){if(T){return;}r(t($,alph));$.set(t(v,alph),0);let mq=((ms*f)/R);let k=Math.floor(mq);
+let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
+$.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
+function M(){if(T){return;}r(t($));$.set(t(v),0);let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
 T=true;t.destroy();r.destroy();g.destroy();S();};return()=>{T=true;};}
