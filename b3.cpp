@@ -423,6 +423,9 @@ strt();
 }
 void pl(){
 plt();
+}
+void b3(){
+ma();
 }}
 
 int main(){
@@ -430,7 +433,5 @@ EM_ASM({
 FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
-usleep(1000000);
-ma();
 return 1;
 }
