@@ -136,7 +136,7 @@ if(clickLoc==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
 mX=xxx*Size;
-mY=yyy*Size
+mY=yyy*Size;
 clickLoc=false;
 }
 glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
