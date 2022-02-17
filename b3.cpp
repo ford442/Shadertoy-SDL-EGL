@@ -395,9 +395,9 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let alph=document.getElementById("alf").innerHTML;
-let canvas=document.getElementById("bcanvas");
-let contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
+const alph=document.getElementById("alf").innerHTML;
+const canvas=document.getElementById("bcanvas");
+const contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
 const v=document.getElementById("mv");
 let d=S();if(d)d();d=S();function S(){
 let w$=document.getElementById('iwid').innerHTML;
