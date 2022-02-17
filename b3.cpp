@@ -57,6 +57,7 @@ EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctxb;
 struct timespec rem;
 struct timespec req={0,8500000};
 EMSCRIPTEN_RESULT ret;
