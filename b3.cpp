@@ -429,6 +429,7 @@ EM_ASM({
 FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
+usleep(1000000);
 ma();
 return 1;
 }
