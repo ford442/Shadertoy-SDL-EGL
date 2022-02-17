@@ -396,6 +396,8 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 const bcanvas=document.getElementById("bcanvas");
+const bcanvasb=document.getElementById("bcanvasb");
+const dupctx=bcanvasb.getContext('2d',{alpha:true});
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
 let d=S();if(d)d();d=S();function S(){
@@ -411,7 +413,8 @@ const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],(1.0-((p[0]+p[1]+p[2])/3)));}).setTactic("speed").setGraphical(true).setOutput(o);
 let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
 $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
-function M(){if(T){return;}r(t($));$.set(t(v),0);let mq=((ms*f)/R);let k=Math.floor(mq);
+function M(){if(T){return;}r(t($));$.set(t(v),0);dupctx.drawImage(bcanvas,0,0);
+let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
 T=true;t.destroy();r.destroy();g.destroy();S();};return()=>{T=true;};}
