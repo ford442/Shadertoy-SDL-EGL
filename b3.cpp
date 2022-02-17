@@ -400,7 +400,7 @@ const contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pre
 const v=document.getElementById("mv");
 const alph=document.getElementById("alf").innerHTYML;
 let d=S();if(d)d();d=S();function S(){
-let w$=doalfcument.getElementById('iwid').innerHTML;
+let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 const g=new GPU({canvas:canvas,webGl:contx});
 let Rn=document.getElementById("frate").innerHTML;
