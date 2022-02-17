@@ -161,6 +161,9 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
+emscripten_webgl_make_context_current(ctx);
+glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
+emscripten_webgl_make_context_current(ctxb);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 }
@@ -213,6 +216,7 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
+ctxb=emscripten_webgl_create_context("#scanvasb",&attr);
 // emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
