@@ -57,10 +57,10 @@ document.getElementById('btn').style="background-color:red;position:absolute;dis
 });
 
 document.getElementById('btn6').addEventListener('click',function(){
-document.getElementById("bcanvas").style="background-color:rgba(1,1,1,1);z-index:999992;height:100vh;width:100vh;position:absolute;top:0;text-align:center;";
-let midl=Math.round((window.innerWidth*0.5)-(window.innerHeight*0.5));
-document.getElementById("contain2").style="pointer-events:none;height:"+window.innerHeight+"px;width:"+window.innerHeight+"px;position:absolute;top:0px;left:"+midl+"px;";
-document.getElementById("scanvas").style="position:absolute;top:0;background-color:rgba(1,1,1,0);z-index:999993;image-rendering:auto;width:"+window.innerHeight+"px;height:"+window.innerHeight+"px;opacity:0.5;";
+let midl=(window.innerWidth*0.5)-(window.innerHeight*0.5);
+document.getElementById("contain2").style="pointer-events:none;z-index:999993;height:"+window.innerHeight+"px;width:"+window.innerHeight+"px;text-align:center;position:absolute;top:0;left:"+midl+";right:"+midl+";";
+document.getElementById("bcanvas").style="background-color:rgba(1,1,1,0);z-index:999992;height:100vh;width:100vh;position:absolute;top:0;text-align:center;";
+document.getElementById("scanvas").style="position:absolute;top:0;background-color:rgba(1,1,1,0);z-index:999993;image-rendering:auto;text-align:center;width:"+window.innerHeight+"px;height:"+window.innerHeight+"px;opacity:0.3;";
 document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById("circle").height=window.innerHeight;
 document.getElementById("circle").width=window.innerWidth;
