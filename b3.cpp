@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <SDL2/SDL.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace std::chrono;
