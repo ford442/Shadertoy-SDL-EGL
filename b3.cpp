@@ -28,8 +28,8 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-float Ttime,Dtime;
-long iFrame;
+double Ttime,Dtime;
+int iFrame;
 
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
@@ -129,13 +129,14 @@ y=e->clientY;
 return 0;
 }
 static GLfloat mX,mY;
+
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mX=S-(xxx*Size);
-mY=S-(yyy*Size);
+mX=xxx*Size;
+mY=yyy*Size
 clickLoc=false;
 }
 glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
