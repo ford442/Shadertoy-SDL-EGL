@@ -69,7 +69,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;precision mediump sampler3D;precision mediump sampler2D;\n";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -399,16 +399,16 @@ let d=S();if(d)d();d=S();function S(){
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 let canvas=document.getElementById("bcanvas");
-let contx=canvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx=canvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:false,powerPreference:'default',majorVersion:2,minorVersion:0,desynchronized:true});
 const g=new GPU({canvas:canvas,webGl:contx});
 let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
 let W=new WebAssembly.Memory({initial:m});let o=[w$,h$];
 const v=document.getElementById("mv");
 const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2]];}).setTactic("speed").setPipeline(true).setOutput(o);
+return[P[0],P[1],P[2],0.5];}).setTactic("balanced").setPipeline(true).setOutput(o);
 const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2]);}).setTactic("speed").setGraphical(true).setOutput(o);
+this.color(p[0],p[1],p[2],0.5);}).setTactic("balanced").setGraphical(true).setOutput(o);
 let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
 $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
 function M(){if(T){return;}r(t($));$.set(t(v),0);let mq=((ms*f)/R);let k=Math.floor(mq);
