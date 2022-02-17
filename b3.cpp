@@ -410,7 +410,7 @@ const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];}).setTactic("speed").setPipeline(true).setOutput(o);
 const r=g.createKernel(function(f,alf){const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],alf);}).setTactic("speed").setGraphical(true).setOutput(o);
-let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
+let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($),alph);
 $.set(t(v),0);r(t($),alph);$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
 function M(){if(T){return;}r(t($),alph);$.set(t(v),0);let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
