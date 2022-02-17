@@ -395,17 +395,18 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
+  let alph=document.getElementById("alf").innerHTML;
+let canvas=document.getElementById("bcanvas");
+let contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
+const v=document.getElementById("mv");
+
 let d=S();if(d)d();d=S();function S(){
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
-let canvas=document.getElementById("bcanvas");
-let alph=document.getElementById("alf").innerHTML;
-let contx=canvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
 const g=new GPU({canvas:canvas,webGl:contx});
 let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
 let W=new WebAssembly.Memory({initial:m});let o=[w$,h$];
-const v=document.getElementById("mv");
 const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2],alph];}).setTactic("speed").setPipeline(true).setOutput(o);
 const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
