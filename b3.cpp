@@ -29,7 +29,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-float Ttime,Dtime;
+double Ttime,Dtime;
 int iFrame;
 
 static GLsizei s4=4;
@@ -414,7 +414,7 @@ let W=new WebAssembly.Memory({initial:m});let o=[w$,h$];
 const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setOutput(o);
 const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],(1.0-(((((p[0]+p[1]+p[2])-0.3)/0.4)*4)+3)));}).setTactic("precision").setGraphical(true).setOutput(o);
+this.color(p[0],p[1],p[2],(1.0-(((p[0]+p[1]+p[2])/3))));}).setTactic("precision").setGraphical(true).setOutput(o);
 let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
 $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
 function M(){if(T){return;}r(t($));$.set(t(v),0); // dupctx.drawImage(bcanvas,0,0);dupEctx.drawImage(scanvas,0,0);
