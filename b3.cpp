@@ -397,11 +397,11 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 const bcanvas=document.getElementById("bcanvas");
-const scanvas=document.getElementById("scanvas");
-const scanvasb=document.getElementById("scanvasb");
-const bcanvasb=document.getElementById("bcanvasb");
-const dupctx=bcanvasb.getContext('2d',{alpha:true});
-const dupEctx=scanvasb.getContext('2d',{alpha:true});
+// const scanvas=document.getElementById("scanvas");
+// const scanvasb=document.getElementById("scanvasb");
+// const bcanvasb=document.getElementById("bcanvasb");
+// const dupctx=bcanvasb.getContext('2d',{alpha:true});
+// const dupEctx=scanvasb.getContext('2d',{alpha:true});
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
 let d=S();if(d)d();d=S();function S(){
