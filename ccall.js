@@ -22,8 +22,8 @@ Module.ccall("str");
 });
 
 document.getElementById('btn77').addEventListener('click',function(){
-document.getElementById("canvas").height=2880;
-document.getElementById("canvas").width=2880;
+document.getElementById("scanvas").height=2880;
+document.getElementById("scanvas").width=2880;
 document.getElementById('btn4').style="background-color:grey;position:absolute;display:block;left:3%;top:33%;z-index:999997;border:5px solid green;border-radius:50%;";
 document.getElementById('btn5').style="background-color:pink;position:absolute;display:block;left:3%;top:43%;z-index:999997;border:5px solid green;border-radius:50%;";
 document.getElementById('btn3').style="background-color:red;position:absolute;display:block;left:3%;top:13%;z-index:999997;border:5px solid red;border-radius:50%;";
