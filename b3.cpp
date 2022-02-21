@@ -29,9 +29,8 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-double Ttime,Dtime;
-int iFrame;
-
+long long double Ttime,Dtime;
+EGLint iFrame;
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 static GLfloat F=1.0f;
@@ -47,6 +46,7 @@ static EM_BOOL mouseLPressed;
 static int S;
 static GLfloat Size;
 static EM_BOOL clickLoc;
+static GLfloat mX,mY;
 
 EGLDisplay display;
 EGLSurface surface;
@@ -129,9 +129,8 @@ y=e->clientY;
 }}
 return 0;
 }
-static GLfloat mX,mY;
 
-static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,GLuint fram){
+static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -206,10 +205,10 @@ attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
-attr.preserveDrawingBuffer=EM_TRUE;
+attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_DEFAULT;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
@@ -361,9 +360,9 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
+static Uint8* wptr;
+static int lft;
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
-Uint8* wptr;
-int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
