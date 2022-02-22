@@ -403,7 +403,7 @@ const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pr
 const v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.5625)*2.5))];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+return[P[0],P[1],P[2],(1.0-((((P[0]+P[1]+P[2])/3)-0.5625)*2.5))];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
