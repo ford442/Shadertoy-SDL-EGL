@@ -405,14 +405,14 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.625)*3)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.5625)*2.5)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 let Rn=document.getElementById("frate").innerHTML;
 w$=document.getElementById('iwid').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
-let l=(1920*1080*4);let m=((l/65536)+1);m=Math.floor(m);
+let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -426,6 +426,8 @@ let $4=new Uint8ClampedArray(W2.buffer,0,l);
 let $5=new Uint8ClampedArray(W2.buffer,0,l);
 let $6=new Uint8ClampedArray(W2.buffer,0,l);
 $1.set(t(v),0);
+$2.set(t(v),0);
+$3.set(t(v),0);
 Rn=Math.round(Rn/2);
 let T=false;let ms=1;let R=16;let f=(1000/Rn);
 let $F=1;
@@ -433,27 +435,27 @@ function M(){
 if(T)
 {return;
 }
-if ($F=1){
+if ($F==1){
 r(t($1));
 $4.set(t(v),0);
 $F=2;
-}else if($F=2){
+}else if($F==2){
 r(t($2));
 $5.set(t(v),0);
 $F=3;
-}else if($F=3){
+}else if($F==3){
 r(t($3));
 $5.set(t(v),0);
 $F=4;
-}else if($F=4){
+}else if($F==4){
 r(t($4));
 $6.set(t(v),0);
 $F=5;
-}else if($F=5){
+}else if($F==5){
 r(t($5));
 $1.set(t(v),0);
 $F=6;
-}else if($F=6){
+}else if($F==6){
 r(t($2));
 $2.set(t(v),0);
 $F=1;
