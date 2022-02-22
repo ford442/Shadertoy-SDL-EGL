@@ -396,25 +396,6 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 
-});
-
-extern "C" {
-
-void str(){
-strt();
-}
-void pl(){
-plt();
-}
-void b3(){
-ma();
-}}
-
-int main(){
-EM_ASM({
-FS.mkdir('/snd');
-FS.mkdir('/shader');
-
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
@@ -442,6 +423,25 @@ t.setOutput(o);
 r.setOutput(o);
 T=true;
 S();};return()=>{T=true;};}
+});
+
+extern "C" {
+
+void str(){
+strt();
+}
+void pl(){
+plt();
+}
+void b3(){
+ma();
+}}
+
+int main(){
+EM_ASM({
+FS.mkdir('/snd');
+FS.mkdir('/shader');
+
 });
 return 1;
 }
