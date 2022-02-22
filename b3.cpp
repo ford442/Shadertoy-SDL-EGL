@@ -412,7 +412,7 @@ w$=document.getElementById('iwid').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
-let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
+let l=(1920*1080*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -436,34 +436,30 @@ if ($F=1){
 r(t($1));
 $4.set(t(v),0);
 $F=2;
-}
-if ($F=2){
+}else if ($F=2){
 r(t($2));
 $5.set(t(v),0);
 $F=3;
-}
-if ($F=3){
+}else if ($F=3){
 r(t($3));
 $5.set(t(v),0);
 $F=4;
-}
-if ($F=4){
+}else if ($F=4){
 r(t($4));
 $6.set(t(v),0);
 $F=5;
-}
-if ($F=5){
+}else if ($F=5){
 r(t($5));
 $1.set(t(v),0);
 $F=6;
-}
-if ($F=6){
+}else if ($F=6){
 r(t($2));
 $2.set(t(v),0);
 $F=1;
 }
 let mq=((ms*f)/R);let k=Math.floor(mq);
-let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
+let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;
+setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
