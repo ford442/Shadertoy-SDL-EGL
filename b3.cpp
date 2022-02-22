@@ -396,7 +396,7 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -407,15 +407,15 @@ return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setDynamicOut
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.75)*4)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
+let Rn=document.getElementById("frate").innerHTML;
+let W=new WebAssembly.Memory({initial:m});
+let $=new Uint8ClampedArray(W.buffer,0,l);
 w$=document.getElementById('iwid').innerHTML;
-h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
-let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
-let W=new WebAssembly.Memory({initial:m});
-let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
+$.set(t(v),0);r(t($));
 $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
 function M(){if(T){return;}r(t($));$.set(t(v),0);
 let mq=((ms*f)/R);let k=Math.floor(mq);
