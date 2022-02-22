@@ -420,9 +420,9 @@ let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){ 
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
-var o=[w$,h$];
-t.setOutput(o);
-r.setOutput(o);
+var no=[w$,h$];
+t.setOutput(no);
+r.setOutput(no);
 T=true;
 S();};return()=>{T=true;};}
 });
