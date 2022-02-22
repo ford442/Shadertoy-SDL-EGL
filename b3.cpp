@@ -396,8 +396,8 @@ opn_aud();
 
 EM_JS(void,ma,(),{
   
-let w$=document.getElementById('iwid').innerHTML;
-let h$=document.getElementById('ihig').innerHTML;
+var w$=document.getElementById('iwid').innerHTML;
+var h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 
 const bcanvas=document.getElementById("bcanvas");
@@ -411,6 +411,9 @@ this.color(p[0],p[1],p[2],(1.0-((p[0]+p[1]+p[2])/3)));}).setTactic("precision").
 
 
 let d=S();if(d)d();d=S();function S(){
+  
+var w$=document.getElementById('iwid').innerHTML;
+var h$=document.getElementById('ihig').innerHTML;
 let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);
 let m=((l/65536)+1);
@@ -422,8 +425,8 @@ function M(){if(T){return;}r(t($));$.set(t(v),0);
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
-w$=document.getElementById('iwid').innerHTML;
-h$=document.getElementById('ihig').innerHTML;
+var w$=document.getElementById('iwid').innerHTML;
+var h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
