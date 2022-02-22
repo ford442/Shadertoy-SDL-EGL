@@ -424,13 +424,14 @@ $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn
 function M(){if(T){return;}r(t($));$.set(t(v),0);
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
-document.getElementById("di").onclick=function(){
+document.getElementById("di").onclick=function(){ 
+  T=true;
+
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
-  T=true;
 
 S();};return()=>{T=true;};}
 });
