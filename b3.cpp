@@ -396,7 +396,7 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
