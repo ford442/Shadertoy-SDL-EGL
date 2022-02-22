@@ -395,7 +395,12 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-  const bcanvas=document.getElementById("bcanvas");
+  
+let w$=document.getElementById('iwid').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
+  let o=[w$,h$];
+
+const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
@@ -406,11 +411,11 @@ this.color(p[0],p[1],p[2],(1.0-((p[0]+p[1]+p[2])/3)));}).setTactic("precision").
 
 
 let d=S();if(d)d();d=S();function S(){
-let w$=document.getElementById('iwid').innerHTML;
-let h$=document.getElementById('ihig').innerHTML;
 let Rn=document.getElementById("frate").innerHTML;
-let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
-let W=new WebAssembly.Memory({initial:m});let o=[w$,h$];
+let l=(w$*h$*4);
+let m=((l/65536)+1);
+m=Math.floor(m);
+let W=new WebAssembly.Memory({initial:m});
 let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
 $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
 function M(){if(T){return;}r(t($));$.set(t(v),0);
