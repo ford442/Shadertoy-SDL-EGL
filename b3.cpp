@@ -405,7 +405,7 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.5)*2)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.75)*4)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
