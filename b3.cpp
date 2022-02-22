@@ -409,6 +409,9 @@ this.color(p[0],p[1],p[2],(1.0-((p[0]+p[1]+p[2])/3)));}).setTactic("precision").
 let d=S();if(d)d();d=S();function S(){
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
+var no=[w$,h$];
+t.setOutput(no);
+r.setOutput(no);
 let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
 let W=new WebAssembly.Memory({initial:m});
@@ -418,11 +421,6 @@ function M(){if(T){return;}r(t($));$.set(t(v),0);
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){ 
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
-var no=[w$,h$];
-t.setOutput(no);
-r.setOutput(no);
 T=true;
 S();};return()=>{T=true;};}
 });
