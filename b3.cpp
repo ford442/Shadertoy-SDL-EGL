@@ -394,6 +394,9 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
+
+extern "C" {
+  
 void ma(){
 EM_ASM({
 // EM_JS(void,ma,(),{
@@ -425,8 +428,6 @@ r.setOutput(o);
 T=true;S();};return()=>{T=true;};}
 });
 }
-
-extern "C" {
 void str(){
 strt();
 }
