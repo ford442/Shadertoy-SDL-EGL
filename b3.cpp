@@ -395,6 +395,11 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
+const g=new GPU({canvas:bcanvas,webGl:contx});
+const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
+return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
+this.color(p[0],p[1],p[2],(1.0-((p[0]+p[1]+p[2])/3)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -402,26 +407,22 @@ const v=document.getElementById("mv");
 let d=S();if(d)d();d=S();function S(){
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
-const g=new GPU({canvas:bcanvas,webGl:contx});
 let Rn=document.getElementById("frate").innerHTML;
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
 let W=new WebAssembly.Memory({initial:m});let o=[w$,h$];
-const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],(1.0-((p[0]+p[1]+p[2])/3)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let $=new Uint8ClampedArray(W.buffer,0,l);$.set(t(v),0);r(t($));
 $.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
 function M(){if(T){return;}r(t($));$.set(t(v),0);
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
-T=true;
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
+  T=true;
+
 S();};return()=>{T=true;};}
 });
 
