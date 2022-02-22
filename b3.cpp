@@ -394,7 +394,6 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
-
 EM_JS(void,ma,(),{
 var w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
@@ -416,24 +415,52 @@ r.setOutput(o);
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
+let W3=new WebAssembly.Memory({initial:m});
+let W4=new WebAssembly.Memory({initial:m});
+let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
+let $3=new Uint8ClampedArray(W2.buffer,0,l);
+let $4=new Uint8ClampedArray(W2.buffer,0,l);
+let $5=new Uint8ClampedArray(W2.buffer,0,l);
+let $6=new Uint8ClampedArray(W2.buffer,0,l);
 $1.set(t(v),0);
-$2.set(t(v),0);
 let T=false;let ms=1;let R=16;let f=(1000/Rn);
-let frmm=1;
+let $F=1;
 function M(){
 if(T)
 {return;
 }
-if (frmm=1){
+if ($F=1){
 r(t($1));
-$2.set(t(v),0);
-frmm=2;
-}else{
+$4.set(t(v),0);
+$F=2;
+}
+if ($F=2){
 r(t($2));
+$5.set(t(v),0);
+$F=3;
+}
+if ($F=3){
+r(t($3));
+$5.set(t(v),0);
+$F=4;
+}
+if ($F=4){
+r(t($4));
+$6.set(t(v),0);
+$F=5;
+}
+if ($F=5){
+r(t($5));
 $1.set(t(v),0);
-frmm=1;
+$F=6;
+}
+if ($F=6){
+r(t($2));
+$2.set(t(v),0);
+$F=1;
 }
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
@@ -441,8 +468,6 @@ document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
 });
-
-
 
 extern "C" {
 
