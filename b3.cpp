@@ -397,7 +397,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 
 });
-}
+
 extern "C" {
 
 void str(){
@@ -435,13 +435,13 @@ function M(){if(T){return;}r(t($));$.set(t(v),0);
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
-let w$=document.getElementById('iwid').innerHTML;
-let h$=document.getElementById('ihig').innerHTML;
+w$=document.getElementById('iwid').innerHTML;
+h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
-T=true;S();};return()=>{T=true;};}
-  
+T=true;
+S();};return()=>{T=true;};}
 });
 return 1;
 }
