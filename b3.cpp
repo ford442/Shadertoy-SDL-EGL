@@ -398,7 +398,7 @@ EM_JS(void,ma,(),{
   
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
-  let o=[w$,h$];
+var o=[w$,h$];
 
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -424,7 +424,7 @@ let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
-o=[w$,h$];
+var o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
   T=true;
