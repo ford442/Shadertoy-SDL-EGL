@@ -394,6 +394,7 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
+
 EM_JS(void,ma,(),{
 var w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
@@ -405,7 +406,7 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.8)*5)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+this.color(p[0],p[1],p[2],(1.0-((((p[0]+p[1]+p[2])/3)-0.875)*8)));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 let Rn=document.getElementById("frate").innerHTML;
 w$=document.getElementById('iwid').innerHTML;
@@ -413,17 +414,34 @@ o=[w$,h$];
 t.setOutput(o);
 r.setOutput(o);
 let l=(w$*h$*4);let m=((l/65536)+1);m=Math.floor(m);
-let W=new WebAssembly.Memory({initial:m});
-let $=new Uint8ClampedArray(W.buffer,0,l);
-$.set(t(v),0);r(t($));
-$.set(t(v),0);r(t($));$.set(t(v),0);let T=false;let ms=1;let R=16;let f=(1000/Rn);
-function M(){if(T){return;}r(t($));$.set(t(v),0);
+let W1=new WebAssembly.Memory({initial:m});
+let W2=new WebAssembly.Memory({initial:m});
+let $1=new Uint8ClampedArray(W1.buffer,0,l);
+let $2=new Uint8ClampedArray(W2.buffer,0,l);
+$1.set(t(v),0);
+$2.set(t(v),0);
+let T=false;let ms=1;let R=16;let f=(1000/Rn);
+let frmm=1;
+function M(){
+if(T)
+{return;
+}
+if (frmm=1){
+r(t($1));
+$2.set(t(v),0);
+frmm=2;
+}else{
+r(t($2));
+$1.set(t(v),0);
+frmm=1;
+}
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},R);}M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
 });
+
 
 
 extern "C" {
