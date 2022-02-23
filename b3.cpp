@@ -407,7 +407,7 @@ const float va=1.0-((((a+b+c)/3)-0.7542)*4);
 return va;
 }
                        
-const g=new GPU({canvas:bcanvas,webGl:contx,functions:[customAdder]});
+const g=new GPU({canvas:bcanvas,webGl:contx,functions:[ave]});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2],ave(P[0],P[1],P[2])];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
