@@ -430,7 +430,7 @@ let $8=new Uint8ClampedArray(W2.buffer,0,l);
 $1.set(t(v),0);
 $2.set(t(v),0);
 $3.set(t(v),0);
-Rn=Math.round(Rn/2);
+Rn=Math.round(Rn);
 let T=false;let ms=1;let R=16;let f=(1000/Rn);
 let $F=1;
 function M(){
