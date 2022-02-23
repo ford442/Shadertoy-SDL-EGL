@@ -472,7 +472,7 @@ $F=1;
 }
 let mq=((ms*f)/R);let k=Math.floor(mq);
 let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;
-M();}
+setTimeout(function(){M();},4);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
