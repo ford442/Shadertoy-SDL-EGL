@@ -435,19 +435,19 @@ if(T)
 }
 if ($F==1){
 r(t($1));
-$4.set(t(v),0);
+$5.set(t(v),0);
 $F=2;
 }else if($F==2){
 r(t($2));
-$5.set(t(v),0);
+$6.set(t(v),0);
 $F=3;
 }else if($F==3){
 r(t($3));
-$5.set(t(v),0);
+$7.set(t(v),0);
 $F=4;
 }else if($F==4){
 r(t($4));
-$6.set(t(v),0);
+$8.set(t(v),0);
 $F=5;
 }else if($F==5){
 r(t($5));
@@ -456,6 +456,14 @@ $F=6;
 }else if($F==6){
 r(t($2));
 $2.set(t(v),0);
+$F=7;
+}else if($F==7){
+r(t($2));
+$3.set(t(v),0);
+$F=8;
+}else if($F==8){
+r(t($2));
+$4.set(t(v),0);
 $F=1;
 }
 let mq=((ms*f)/R);let k=Math.floor(mq);
