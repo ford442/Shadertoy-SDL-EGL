@@ -405,13 +405,11 @@ const v=document.getElementById("mv");
 function ave(a,b,c){
 const va=1.0-((((a+b+c)/3)-0.7542)*4);
 return va;
-}
+}  
                        
-const g=new GPU({canvas:bcanvas,webGl:contx,functions:[ave]});
-var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2],ave(P[0],P[1],P[2])];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+const g=new GPU({canvas:bcanvas,webGl:contx,functions:[ave],nativeFunctions:[{name:'aver',source:`float aver(float a,float b,float c){return 1.0-((((a+b+c)/3)-0.7542)*4);});
+var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];return[P[0],P[1],P[2],aver(P[0],P[1],P[2])];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 let Rn=document.getElementById("frate").innerHTML;
 w$=document.getElementById('iwid').innerHTML;
