@@ -395,7 +395,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-const aveg='float aveg(int a,int b,int c){return (1.0-(((((float)a+(float)b+(float)c)/3.0)-0.7542)*4.0));}';
+const aveg='float aveg(int a,int b,int c){return 1.0;}';
 var w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
