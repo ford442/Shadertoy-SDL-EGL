@@ -403,7 +403,7 @@ const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pr
 const v=document.getElementById("mv");
   
 function ave(a,b,c){
-const float va=1.0-((((a+b+c)/3)-0.7542)*4);
+const va=1.0-((((a+b+c)/3)-0.7542)*4);
 return va;
 }
                        
