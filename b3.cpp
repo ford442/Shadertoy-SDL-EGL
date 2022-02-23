@@ -395,14 +395,16 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
+const aveg='float aver(int a,int b,int c){return 1.0-(((((float)a+(float)b+(float)c)/3.0)-0.7542)*4.0);}';
 var w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
-const g=new GPU({canvas:bcanvas,webGl:contx,nativeFunctions:[{name:'aver',source:'float aver(int a,int b,int c){return 1.0-(((((float)a+(float)b+(float)c)/3.0)-0.7542)*4.0);}'}]});
-var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];return[P[0],P[1],P[2],aver(P[0],P[1],P[2])];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+const g=new GPU({canvas:bcanvas,webGl:contx});
+g.addNativeFunction('aveg',aveg,{returnType:'Number'});
+var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];return[P[0],P[1],P[2],aveg(P[0],P[1],P[2])];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 let Rn=document.getElementById("frate").innerHTML;
