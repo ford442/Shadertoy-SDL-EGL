@@ -396,7 +396,91 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
-EM_JS(void,ma,(),{var EM_JS(void,ma,(),{var w$,h$,0,t,r,d,Rn,l,m,W1,W2,W3,W4,W5,W6,W7,W8,$1,$2,$3,$4,$5,$6,$7,$8,t,ms,R,$F,mq,k,y;w$=document.getElementById('iwid').innerHTML;h$=document.getElementById('ihig').innerHTML;o=[w$,h$];const bcanvas=document.getElementById("bcanvas");const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});const v=document.getElementById("mv");const g=new GPU({canvas:bcanvas,webGl:contx});t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);d=S();if(d)d();d=S();function S(){Rn=document.getElementById("frate").innerHTML;w$=document.getElementById('iwid').innerHTML;o=[w$,h$];t.setOutput(o);r.setOutput(o);l=($w*$h*4);m=((l/65536)+1);m=Math.floor(m);W1=new WebAssembly.Memory({initial:m});W2=new WebAssembly.Memory({initial:m});W3=new WebAssembly.Memory({initial:m});W4=new WebAssembly.Memory({initial:m});W5=new WebAssembly.Memory({initial:m});W6=new WebAssembly.Memory({initial:m});W7=new WebAssembly.Memory({initial:m});W8=new WebAssembly.Memory({initial:m});$1=new Uint8ClampedArray(W1.buffer,0,l);$2=new Uint8ClampedArray(W2.buffer,0,l);$3=new Uint8ClampedArray(W2.buffer,0,l);$4=new Uint8ClampedArray(W2.buffer,0,l);$5=new Uint8ClampedArray(W2.buffer,0,l);$6=new Uint8ClampedArray(W2.buffer,0,l);$7=new Uint8ClampedArray(W2.buffer,0,l);$8=new Uint8ClampedArray(W2.buffer,0,l);$1.set(t(v),0);$2.set(t(v),0);$3.set(t(v),0);T=false;ms=1;R=16;f=(1000/Rn);$F=1;function M(){if(T){return;}if ($F==1){r(t($1));$5.set(t(v),0);$F=2;}else if($F==2){r(t($2));$6.set(t(v),0);$F=3;}else if($F==3){r(t($3));$7.set(t(v),0);$F=4;}else if($F==4){r(t($4));$8.set(t(v),0);$F=5;}else if($F==5){r(t($5));$1.set(t(v),0);$F=6;}else if($F==6){r(t($2));$2.set(t(v),0);$F=7;}else if($F==7){r(t($2));$3.set(t(v),0);$F=8;}else if($F==8){r(t($2));$4.set(t(v),0);$F=1;}mq=((ms*f)/R);k=Math.floor(mq);y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},16.666);}M();document.getElementById("di").onclick=function(){T=true;S();};return()=>{T=true;};}});w$,h$,0,t,r,d,Rn,l,m,W1,W2,W3,W4,W5,W6,W7,W8,$1,$2,$3,$4,$5,$6,$7,$8,t,ms,R,$F,mq,k,y;w$=document.getElementById('iwid').innerHTML; h$=document.getElementById('ihig').innerHTML; o=[w$,h$]; const bcanvas=document.getElementById("bcanvas"); const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false}); const v=document.getElementById("mv"); const g=new GPU({canvas:bcanvas,webGl:contx}); t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o); r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o); d=S();if(d)d();d=S();function S(){ Rn=document.getElementById("frate").innerHTML; w$=document.getElementById('iwid').innerHTML; o=[w$,h$]; t.setOutput(o); r.setOutput(o); l=($w*$h*4);m=((l/65536)+1);m=Math.floor(m); W1=new WebAssembly.Memory({initial:m}); W2=new WebAssembly.Memory({initial:m}); W3=new WebAssembly.Memory({initial:m}); W4=new WebAssembly.Memory({initial:m}); W5=new WebAssembly.Memory({initial:m}); W6=new WebAssembly.Memory({initial:m}); W7=new WebAssembly.Memory({initial:m}); W8=new WebAssembly.Memory({initial:m}); $1=new Uint8ClampedArray(W1.buffer,0,l); $2=new Uint8ClampedArray(W2.buffer,0,l); $3=new Uint8ClampedArray(W2.buffer,0,l); $4=new Uint8ClampedArray(W2.buffer,0,l); $5=new Uint8ClampedArray(W2.buffer,0,l); $6=new Uint8ClampedArray(W2.buffer,0,l); $7=new Uint8ClampedArray(W2.buffer,0,l); $8=new Uint8ClampedArray(W2.buffer,0,l); $1.set(t(v),0); $2.set(t(v),0); $3.set(t(v),0); T=false;ms=1;R=16;f=(1000/Rn); $F=1; function M(){ if(T) {return; } if ($F==1){ r(t($1)); $5.set(t(v),0); $F=2; }else if($F==2){ r(t($2));$6.set(t(v),0);$F=3;}else if($F==3){r(t($3));$7.set(t(v),0);$F=4;}else if($F==4){r(t($4));$8.set(t(v),0);$F=5;}else if($F==5){r(t($5));$1.set(t(v),0);$F=6;}else if($F==6){r(t($2));$2.set(t(v),0);$F=7;}else if($F==7){r(t($2));$3.set(t(v),0);$F=8;}else if($F==8){r(t($2));$4.set(t(v),0);$F=1;}mq=((ms*f)/R);k=Math.floor(mq);y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;setTimeout(function(){M();},16.666);}M();document.getElementById("di").onclick=function(){T=true;S();};return()=>{T=true;};} });
+
+EM_JS(void,ma,(),{
+var w$,h$,0,t,r,d,Rn,l,m,W1,W2,W3,W4,W5,W6,W7,W8,$1,$2,$3,$4,$5,$6,$7,$8,T,ms,R,$F,mq,k,y;
+w$=document.getElementById('iwid').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
+o=[w$,h$];
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const v=document.getElementById("mv");
+const g=new GPU({canvas:bcanvas,webGl:contx});
+t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+let d=S();if(d)d();d=S();function S(){
+let Rn=document.getElementById("frate").innerHTML;
+w$=document.getElementById('iwid').innerHTML;
+o=[w$,h$];
+t.setOutput(o);
+r.setOutput(o);
+let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
+let W1=new WebAssembly.Memory({initial:m});
+let W2=new WebAssembly.Memory({initial:m});
+let W3=new WebAssembly.Memory({initial:m});
+let W4=new WebAssembly.Memory({initial:m});
+let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
+let $1=new Uint8ClampedArray(W1.buffer,0,l);
+let $2=new Uint8ClampedArray(W2.buffer,0,l);
+let $3=new Uint8ClampedArray(W2.buffer,0,l);
+let $4=new Uint8ClampedArray(W2.buffer,0,l);
+let $5=new Uint8ClampedArray(W2.buffer,0,l);
+let $6=new Uint8ClampedArray(W2.buffer,0,l);
+let $7=new Uint8ClampedArray(W2.buffer,0,l);
+let $8=new Uint8ClampedArray(W2.buffer,0,l);
+$1.set(t(v),0);
+$2.set(t(v),0);
+$3.set(t(v),0);
+let T=false;let ms=1;let R=16;let f=(1000/Rn);
+let $F=1;
+function M(){
+if(T)
+{return;
+}
+if ($F==1){
+r(t($1));
+$5.set(t(v),0);
+$F=2;
+}else if($F==2){
+r(t($2));
+$6.set(t(v),0);
+$F=3;
+}else if($F==3){
+r(t($3));
+$7.set(t(v),0);
+$F=4;
+}else if($F==4){
+r(t($4));
+$8.set(t(v),0);
+$F=5;
+}else if($F==5){
+r(t($5));
+$1.set(t(v),0);
+$F=6;
+}else if($F==6){
+r(t($2));
+$2.set(t(v),0);
+$F=7;
+}else if($F==7){
+r(t($2));
+$3.set(t(v),0);
+$F=8;
+}else if($F==8){
+r(t($2));
+$4.set(t(v),0);
+$F=1;
+}
+let mq=((ms*f)/R);let k=Math.floor(mq);
+let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;
+setTimeout(function(){M();},16.666);}
+M();
+document.getElementById("di").onclick=function(){
+T=true;
+S();};return()=>{T=true;};}
+});
 
 extern "C" {
 
