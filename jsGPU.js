@@ -1,5 +1,5 @@
 
-const S=document.getElementById('pmhig').innerHTML;
+const S=Math.round(document.getElementById('pmhig').innerHTML);
 let o=[S,S];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{
