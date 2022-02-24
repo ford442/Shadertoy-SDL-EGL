@@ -332,26 +332,28 @@ glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_DEPTH_TEST);
+// glDepthMask(GL_TRUE);
 glDepthFunc(GL_LESS);
+// glDepthMask(F);
+// glClearDepthf(F);
+// glDisable(GL_SCISSOR_TEST);
+// glDisable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
-
 void cls_aud(){
 if(dev!=0){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 SDL_CloseAudioDevice(dev);
 dev=0;
 }}
-
 void qu(int rc){
 SDL_Quit();
 exit(rc);
 }
-
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
@@ -362,7 +364,6 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 static Uint8* wptr;
 static int lft;
-
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
@@ -406,8 +407,10 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
-r.setOutput(o);
-t.setOutput(o);
+var $nw=document.getElementById('iwid').innerHTML;
+var no=[$nw,h$];
+r.setOutput(no);
+t.setOutput(no);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -430,71 +433,51 @@ $2.set(t(v),0);
 $3.set(t(v),0);
 $4.set(t(v),0);
 let T=false;
-var $F=1;
+let $F=1;
 function M(){
-if(T){return;}
-setTimeout(function(){
-if($F==8){
+if(T)
+{return;
+}if($F==8){
 r(t($2));
-}
-if($F==7){
-r(t($2));
-}
-if($F==6){
-r(t($2));
-}
-if($F==5){
-r(t($5));
-}
-if($F==4){
-r(t($4));
-}
-if($F==3){
-r(t($3));
-}
-if($F==2){
-r(t($2));
-}
-if ($F==1){
-r(t($1));
-}
-},8.333);
-setTimeout(function(){
-if($F==8){
 $4.set(t(v),0);
 $F=1;
 }
 if($F==7){
+r(t($2));
 $3.set(t(v),0);
 $F=8;
 }
 if($F==6){
+r(t($2));
 $2.set(t(v),0);
 $F=7;
 }
 if($F==5){
+r(t($5));
 $1.set(t(v),0);
 $F=6;
 }
 if($F==4){
+r(t($4));
 $8.set(t(v),0);
 $F=5;
 }
 if($F==3){
+r(t($3));
 $7.set(t(v),0);
 $F=4;
 }
 if($F==2){
+r(t($2));
 $6.set(t(v),0);
 $F=3;
 }
-if ($F==1){
+if($F==1){
+r(t($1));
 $5.set(t(v),0);
 $F=2;
 }
-M();
-},8.333);
-}
+setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
