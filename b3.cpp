@@ -410,6 +410,7 @@ let d=S();if(d)d();d=S();function S(){
 let Rn=document.getElementById("frate").innerHTML;
 o=[w$,h$];
 t.setOutput(o);
+r.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
