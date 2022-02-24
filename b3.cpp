@@ -476,7 +476,7 @@ void pl(){
 plt();
 }
 void b3(){
-ma();
+jsPlay();
 }}
 
 int main(){
