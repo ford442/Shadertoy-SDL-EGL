@@ -81,8 +81,6 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-
-
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
@@ -150,47 +148,6 @@ glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
 
-EM_JS(void,jsPlay,(),{
-});
-
-EM_JS(void,jsFrame,(),{
-if(Frme==1){
-r(t($1));
-$5.set(t(v),0);
-Frme=2;
-}
-if(Frm==2){
-r(t($2));
-$6.set(t(v),0);
-Frme=3;
-}
-if(Frm==3){
-r(t($3));
-$7.set(t(v),0);
-Frme=4;
-}
-if(Frm==4){
-r(t($4));
-$8.set(t(v),0);
-Frme=5;
-}
-if(Frm==5){
-r(t($5));
-$1.set(t(v),0);
-}
-if(Frm==6){
-r(t($6));
-$2.set(t(v),0);
-}
-if(Frm==7){
-r(t($7));
-$3.set(t(v),0);
-}
-if(Frm==8){
-r(t($8));
-$4.set(t(v),0);
-}});
-
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=steady_clock::now();
@@ -207,7 +164,6 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 nanosleep(&req,&rem);
-jsFrame();
 iFrame++;
 }
 
@@ -254,12 +210,12 @@ attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_DEFAULT;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -440,7 +396,93 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
+EM_JS(void,ma,(),{
+var w$=document.getElementById('iwid').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
+var o=[w$,h$];
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const v=document.getElementById("mv");
+const g=new GPU({canvas:bcanvas,webGl:contx});
+var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+let d=S();if(d)d();d=S();function S(){
+let Rn=document.getElementById("frate").innerHTML;
+w$=document.getElementById('iwid').innerHTML;
+o=[w$,h$];
+t.setOutput(o);
+r.setOutput(o);
+let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
+let W1=new WebAssembly.Memory({initial:m});
+let W2=new WebAssembly.Memory({initial:m});
+let W3=new WebAssembly.Memory({initial:m});
+let W4=new WebAssembly.Memory({initial:m});
+let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
+let $1=new Uint8ClampedArray(W1.buffer,0,l);
+let $2=new Uint8ClampedArray(W2.buffer,0,l);
+let $3=new Uint8ClampedArray(W2.buffer,0,l);
+let $4=new Uint8ClampedArray(W2.buffer,0,l);
+let $5=new Uint8ClampedArray(W2.buffer,0,l);
+let $6=new Uint8ClampedArray(W2.buffer,0,l);
+let $7=new Uint8ClampedArray(W2.buffer,0,l);
+let $8=new Uint8ClampedArray(W2.buffer,0,l);
+$1.set(t(v),0);
+$2.set(t(v),0);
+$3.set(t(v),0);
+Rn=Math.round(Rn);
+let T=false;let ms=1;let R=16;let f=(1000/Rn);
+let $F=1;
+function M(){
+if(T)
+{return;
+}
+if ($F==1){
+r(t($1));
+$5.set(t(v),0);
+$F=2;
+}else if($F==2){
+r(t($2));
+$6.set(t(v),0);
+$F=3;
+}else if($F==3){
+r(t($3));
+$7.set(t(v),0);
+$F=4;
+}else if($F==4){
+r(t($4));
+$8.set(t(v),0);
+$F=5;
+}else if($F==5){
+r(t($5));
+$1.set(t(v),0);
+$F=6;
+}else if($F==6){
+r(t($2));
+$2.set(t(v),0);
+$F=7;
+}else if($F==7){
+r(t($2));
+$3.set(t(v),0);
+$F=8;
+}else if($F==8){
+r(t($2));
+$4.set(t(v),0);
+$F=1;
+}
+let mq=((ms*f)/R);let k=Math.floor(mq);
+let y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;
+setTimeout(function(){M();},16.666);}
+M();
+document.getElementById("di").onclick=function(){
+T=true;
+S();};return()=>{T=true;};}
+});
+
 extern "C" {
+
 void str(){
 strt();
 }
@@ -448,7 +490,7 @@ void pl(){
 plt();
 }
 void b3(){
-jsPlay();
+ma();
 }}
 
 int main(){
