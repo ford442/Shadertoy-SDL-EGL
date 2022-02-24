@@ -435,43 +435,77 @@ $4.set(t(v),0);
 let T=false;
 let $F=1;
 function M(){
-if(T)
-{return;
-}
+if(T){return;}
 if ($F==1){
 r(t($1));
-$5.set(t(v),0);
 $F=2;
-}else if($F==2){
+}
+if($F==2){
 r(t($2));
-$6.set(t(v),0);
 $F=3;
-}else if($F==3){
+}
+if($F==3){
 r(t($3));
-$7.set(t(v),0);
 $F=4;
-}else if($F==4){
+}
+if($F==4){
 r(t($4));
-$8.set(t(v),0);
 $F=5;
-}else if($F==5){
+}
+if($F==5){
 r(t($5));
-$1.set(t(v),0);
 $F=6;
-}else if($F==6){
+}
+if($F==6){
 r(t($2));
-$2.set(t(v),0);
 $F=7;
-}else if($F==7){
+}
+if($F==7){
 r(t($2));
-$3.set(t(v),0);
 $F=8;
-}else if($F==8){
+}
+if($F==8){
 r(t($2));
-$4.set(t(v),0);
 $F=1;
 }
-setTimeout(function(){M();},16.666);}
+setTimeout(function(){
+if ($F==1){
+$5.set(t(v),0);
+$F=2;
+}
+if($F==2){
+$6.set(t(v),0);
+$F=3;
+}
+if($F==3){
+$7.set(t(v),0);
+$F=4;
+}
+if($F==4){
+$8.set(t(v),0);
+$F=5;
+}
+if($F==5){
+$1.set(t(v),0);
+$F=6;
+}
+if($F==6){
+$2.set(t(v),0);
+$F=7;
+}
+if($F==7){
+$3.set(t(v),0);
+$F=8;
+}
+if($F==8){
+$4.set(t(v),0);
+$F=1;
+}},8.333);}
+setTimeout(function(){
+M();
+},8.333);
+}
+  
 M();
 document.getElementById("di").onclick=function(){
 T=true;
