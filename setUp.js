@@ -39,7 +39,7 @@ const $5=new Uint8ClampedArray(W5.buffer,0,l);
 const $6=new Uint8ClampedArray(W6.buffer,0,l);
 const $7=new Uint8ClampedArray(W7.buffer,0,l);
 const $8=new Uint8ClampedArray(W8.buffer,0,l);
-let Frme=1;
+var Frme=1;
 };
 
 function b3Frame(){
