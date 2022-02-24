@@ -170,7 +170,7 @@ iFrame++;
 static void strt(){
 iFrame=0;
 clickLoc=true;
-S=EM_ASM_INT({return parseInt(document.getElementById('ihig').innerHTML,10);});
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
@@ -430,7 +430,7 @@ $2.set(t(v),0);
 $3.set(t(v),0);
 $4.set(t(v),0);
 let T=false;
-let $F=1;
+var $F=1;
 function M(){
 if(T){return;}
 setTimeout(function(){
