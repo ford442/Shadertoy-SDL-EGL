@@ -131,7 +131,6 @@ y=e->clientY;
 return 0;
 }
 
-
 EM_JS(void,jsPlay,(),{
 const S=document.getElementById('pmhig').innerHTML;
 let o=[S,S];
@@ -164,7 +163,7 @@ var Frme=1;
 
 EM_JS(void,jsFrame,(),{
   console.log("test?");
-  testr();
+  tstr();
 if(Frme==1){
 r(t($1));
 $5.set(t(v),0);
