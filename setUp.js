@@ -12,6 +12,7 @@ document.getElementById("btn2").click();
 },500);
 };
 let Frme;
+
 function b3Play(){
 const S=document.getElementById('pmhig').innerHTML;
 let o=[S,S];
@@ -20,8 +21,8 @@ const contx=bcanvas.getContext('webgl2',{
 alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
-var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+const t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+const r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let l=(S*S*4);let m=Math.floor((l/65536)+1);
 const W1=new WebAssembly.Memory({initial:m});
 const W2=new WebAssembly.Memory({initial:m});
