@@ -131,6 +131,76 @@ y=e->clientY;
 return 0;
 }
 
+
+EM_JS(void,jsPlay,(),{
+const S=document.getElementById('pmhig').innerHTML;
+let o=[S,S];
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext('webgl2',{
+alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const v=document.getElementById("mv");
+const g=new GPU({canvas:bcanvas,webGl:contx});
+var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+let l=(S*S*4);let m=Math.floor((l/65536)+1);
+const W1=new WebAssembly.Memory({initial:m});
+const W2=new WebAssembly.Memory({initial:m});
+const W3=new WebAssembly.Memory({initial:m});
+const W4=new WebAssembly.Memory({initial:m});
+const W5=new WebAssembly.Memory({initial:m});
+const W6=new WebAssembly.Memory({initial:m});
+const W7=new WebAssembly.Memory({initial:m});
+const W8=new WebAssembly.Memory({initial:m});
+const $1=new Uint8ClampedArray(W1.buffer,0,l);
+const $2=new Uint8ClampedArray(W2.buffer,0,l);
+const $3=new Uint8ClampedArray(W3.buffer,0,l);
+const $4=new Uint8ClampedArray(W4.buffer,0,l);
+const $5=new Uint8ClampedArray(W5.buffer,0,l);
+const $6=new Uint8ClampedArray(W6.buffer,0,l);
+const $7=new Uint8ClampedArray(W7.buffer,0,l);
+const $8=new Uint8ClampedArray(W8.buffer,0,l);
+let Frme=1;
+let Buff=4;
+});
+
+EM_JS(void,jsFrame,(),{
+if(Frme==1){
+r(t($1));
+$5.set(t(v),0);
+Frme=2;
+}
+if(Frm==2){
+r(t($2));
+$6.set(t(v),0);
+Frme=3;
+}
+if(Frm==3){
+r(t($3));
+$7.set(t(v),0);
+Frme=4;
+}
+if(Frm==4){
+r(t($4));
+$8.set(t(v),0);
+Frme=5;
+}
+if(Frm==5){
+r(t($5));
+$1.set(t(v),0);
+}
+if(Frm==6){
+r(t($6));
+$2.set(t(v),0);
+}
+if(Frm==7){
+r(t($7));
+$3.set(t(v),0);
+}
+if(Frm==8){
+r(t($8));
+$4.set(t(v),0);
+}});
+
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
@@ -164,6 +234,7 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 nanosleep(&req,&rem);
+jsFrame();
 iFrame++;
 }
 
@@ -210,12 +281,12 @@ attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_DEFAULT;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -395,92 +466,6 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 }
-
-
-EM_JS(void,ma,(),{
-var w$,h$,0,t,r,d,Rn,l,m,W1,W2,W3,W4,W5,W6,W7,W8,$1,$2,$3,$4,$5,$6,$7,$8,T,ms,R,$F,mq,k,y;
-w$=document.getElementById('iwid').innerHTML;
-h$=document.getElementById('ihig').innerHTML;
-o=[w$,h$];
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-const v=document.getElementById("mv");
-const g=new GPU({canvas:bcanvas,webGl:contx});
-t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
-d=S();if(d)d();d=S();function S(){
-Rn=document.getElementById("frate").innerHTML;
-w$=document.getElementById('iwid').innerHTML;
-o=[w$,h$];
-t.setOutput(o);
-r.setOutput(o);
-l=($w*$h*4);m=((l/65536)+1);m=Math.floor(m);
-W1=new WebAssembly.Memory({initial:m});
-W2=new WebAssembly.Memory({initial:m});
-W3=new WebAssembly.Memory({initial:m});
-W4=new WebAssembly.Memory({initial:m});
-W5=new WebAssembly.Memory({initial:m});
-W6=new WebAssembly.Memory({initial:m});
-W7=new WebAssembly.Memory({initial:m});
-W8=new WebAssembly.Memory({initial:m});
-$1=new Uint8ClampedArray(W1.buffer,0,l);
-$2=new Uint8ClampedArray(W2.buffer,0,l);
-$3=new Uint8ClampedArray(W2.buffer,0,l);
-$4=new Uint8ClampedArray(W2.buffer,0,l);
-$5=new Uint8ClampedArray(W2.buffer,0,l);
-$6=new Uint8ClampedArray(W2.buffer,0,l);
-$7=new Uint8ClampedArray(W2.buffer,0,l);
-$8=new Uint8ClampedArray(W2.buffer,0,l);
-$1.set(t(v),0);
-$2.set(t(v),0);
-$3.set(t(v),0);
-T=false;ms=1;R=16;f=(1000/Rn);
-$F=1;
-function M(){
-if(T)
-{return;
-}
-if ($F==1){
-r(t($1));
-$5.set(t(v),0);
-$F=2;
-}else if($F==2){
-r(t($2));
-$6.set(t(v),0);
-$F=3;
-}else if($F==3){
-r(t($3));
-$7.set(t(v),0);
-$F=4;
-}else if($F==4){
-r(t($4));
-$8.set(t(v),0);
-$F=5;
-}else if($F==5){
-r(t($5));
-$1.set(t(v),0);
-$F=6;
-}else if($F==6){
-r(t($2));
-$2.set(t(v),0);
-$F=7;
-}else if($F==7){
-r(t($2));
-$3.set(t(v),0);
-$F=8;
-}else if($F==8){
-r(t($2));
-$4.set(t(v),0);
-$F=1;
-}
-mq=((ms*f)/R);k=Math.floor(mq);
-y=((k*f)-(k*Rn));if(y>8){R=8;}ms=ms+1;
-setTimeout(function(){M();},16.666);}
-M();
-document.getElementById("di").onclick=function(){
-T=true;
-S();};return()=>{T=true;};}
-});
 
 extern "C" {
 
