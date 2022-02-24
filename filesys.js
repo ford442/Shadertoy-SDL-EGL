@@ -2,6 +2,8 @@ let bz=new BroadcastChannel('bez');
 document.getElementById('btn').addEventListener('click',function(){
 let hi=window.innerHeight;
 let wi=window.innerWidth;
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById("ihig").innerHTML=hi;
 document.getElementById("circle").width=wi;
 document.getElementById("circle").height=hi;
 document.getElementById("di").click();
@@ -24,6 +26,12 @@ window.open('https://test.1ink.us/libflac.js');
 });
 
 document.getElementById('btn2').addEventListener('click',function(){
+document.getElementById("ihig").innerHTML=window.innerHeight;
+document.getElementById("circle").height=window.innerHeight;
+document.getElementById("circle").width=window.innerWidth;
+document.getElementById("scanvas").height=window.innerHeight;
+document.getElementById("scanvas").width=window.innerHeight;
+document.getElementById("bcanvas").height=window.innerHeight;
 document.getElementById('btn3').style.border="5px solid green";
 document.getElementById('btn2').style.border="5px solid red";
 document.getElementById('btn2').style.background="red";
