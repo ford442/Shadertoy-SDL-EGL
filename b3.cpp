@@ -438,35 +438,27 @@ function M(){
 if(T){return;}
 if ($F==1){
 r(t($1));
-$F=2;
 }
 if($F==2){
 r(t($2));
-$F=3;
 }
 if($F==3){
 r(t($3));
-$F=4;
 }
 if($F==4){
 r(t($4));
-$F=5;
 }
 if($F==5){
 r(t($5));
-$F=6;
 }
 if($F==6){
 r(t($2));
-$F=7;
 }
 if($F==7){
 r(t($2));
-$F=8;
 }
 if($F==8){
 r(t($2));
-$F=1;
 }
 setTimeout(function(){
 if ($F==1){
@@ -505,7 +497,6 @@ setTimeout(function(){
 M();
 },8.333);
 }
-  
 M();
 document.getElementById("di").onclick=function(){
 T=true;
