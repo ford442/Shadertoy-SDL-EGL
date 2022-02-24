@@ -408,7 +408,7 @@ var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const a
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 var $nw=document.getElementById('iwid').innerHTML;
-var no=[nw$,h$];
+var no=[$nw,h$];
 r.setOutput(no);
 t.setOutput(no);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
