@@ -151,7 +151,7 @@ glUniform1i(uniform_frame,fram);
 }
 
 EM_JS(void,jsPlay,(),{
-}
+});
 
 EM_JS(void,jsFrame,(),{
 if(Frme==1){
