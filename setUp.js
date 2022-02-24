@@ -11,3 +11,7 @@ setTimeout(function(){
 document.getElementById("btn2").click();
 },500);
 };
+
+function tstr(){
+console.log("yes");
+}
