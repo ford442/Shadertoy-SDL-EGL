@@ -11,7 +11,7 @@ setTimeout(function(){
 document.getElementById("btn2").click();
 },500);
 };
-
+let Frme;
 function b3Play(){
 const S=document.getElementById('pmhig').innerHTML;
 let o=[S,S];
@@ -39,7 +39,7 @@ const $5=new Uint8ClampedArray(W5.buffer,0,l);
 const $6=new Uint8ClampedArray(W6.buffer,0,l);
 const $7=new Uint8ClampedArray(W7.buffer,0,l);
 const $8=new Uint8ClampedArray(W8.buffer,0,l);
-var Frme=1;
+Frme=1;
 };
 
 function b3Frame(){
