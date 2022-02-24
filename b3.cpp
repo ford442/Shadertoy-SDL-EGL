@@ -170,7 +170,7 @@ iFrame++;
 static void strt(){
 iFrame=0;
 clickLoc=true;
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=EM_ASM_INT({return parseInt(document.getElementById('ihig').innerHTML,10);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
@@ -332,28 +332,26 @@ glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_DEPTH_TEST);
-// glDepthMask(GL_TRUE);
 glDepthFunc(GL_LESS);
-// glDepthMask(F);
-// glClearDepthf(F);
-// glDisable(GL_SCISSOR_TEST);
-// glDisable(GL_STENCIL_TEST);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
+
 void cls_aud(){
 if(dev!=0){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 SDL_CloseAudioDevice(dev);
 dev=0;
 }}
+
 void qu(int rc){
 SDL_Quit();
 exit(rc);
 }
+
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
@@ -364,6 +362,7 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 static Uint8* wptr;
 static int lft;
+
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
@@ -407,10 +406,8 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
-var $nw=document.getElementById('iwid').innerHTML;
-var no=[$nw,h$];
-r.setOutput(no);
-t.setOutput(no);
+r.setOutput(o);
+t.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
