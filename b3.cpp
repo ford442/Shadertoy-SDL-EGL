@@ -81,56 +81,8 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-static const char8_t *read_file(const char *filename){
-FILE *file=fopen(filename,"r");
-if(file){
-int status=fseek(file,0,SEEK_END);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-length=ftell(file);
-status=fseek(file,0,SEEK_SET);
-if(status!=0){
-fclose(file);
-return NULL;
-}
-result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
-if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
-result[actual_length++]={'\0'};
-} 
-fclose(file);
-return result;
-}
-return NULL;
-}
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
-GLsizei srclens[nsources];
-for(i=0;i<nsources;++i){
-srclens[i]=(GLsizei)strlen(sources[i]);
-}
-shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
-glCompileShader(shader);
-return shader;
-}
 
-static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-mouseLPressed=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-mouseLPressed=false;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
-}}
-return 0;
-}
-
+extern "C" {
 void jsPlay(){
 EM_ASM({
 const S=document.getElementById('pmhig').innerHTML;
@@ -202,6 +154,56 @@ r(t($8));
 $4.set(t(v),0);
 }
 });
+
+static const char8_t *read_file(const char *filename){
+FILE *file=fopen(filename,"r");
+if(file){
+int status=fseek(file,0,SEEK_END);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+length=ftell(file);
+status=fseek(file,0,SEEK_SET);
+if(status!=0){
+fclose(file);
+return NULL;
+}
+result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
+if(result){
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
+result[actual_length++]={'\0'};
+} 
+fclose(file);
+return result;
+}
+return NULL;
+}
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+GLsizei srclens[nsources];
+for(i=0;i<nsources;++i){
+srclens[i]=(GLsizei)strlen(sources[i]);
+}
+shader=glCreateShader(type);
+glShaderSource(shader,nsources,sources,srclens);
+glCompileShader(shader);
+return shader;
+}
+
+static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+mouseLPressed=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+mouseLPressed=false;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+x=e->clientX;
+y=e->clientY;
+}}
+return 0;
+}
 
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
@@ -468,8 +470,6 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 }
-
-extern "C" {
 
 void str(){
 strt();
