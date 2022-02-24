@@ -411,7 +411,6 @@ let Rn=document.getElementById("frate").innerHTML;
 w$=document.getElementById('iwid').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
-r.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -432,6 +431,7 @@ let $8=new Uint8ClampedArray(W2.buffer,0,l);
 $1.set(t(v),0);
 $2.set(t(v),0);
 $3.set(t(v),0);
+$4.set(t(v),0);
 Rn=Math.round(Rn);
 let T=false;let ms=1;let R=16;let f=(1000/Rn);
 let $F=1;
@@ -478,6 +478,7 @@ setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
+  
 S();};return()=>{T=true;};}
 });
 
