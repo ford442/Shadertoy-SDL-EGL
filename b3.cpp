@@ -397,9 +397,9 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=document.getElementById('iwid').innerHTML;
+let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
-var o=[w$,h$];
+let o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const v=document.getElementById("mv");
@@ -408,7 +408,6 @@ var t=g.createKernel(function(v){const P=v[this.thread.y][this.thread.x];const a
 var r=g.createKernel(function(f){const p=f[this.thread.y][this.thread.x];this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 let Rn=document.getElementById("frate").innerHTML;
-w$=document.getElementById('iwid').innerHTML;
 o=[w$,h$];
 t.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
@@ -478,7 +477,7 @@ setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
-  
+w$=document.getElementById('iwid').innerHTML;
 S();};return()=>{T=true;};}
 });
 
