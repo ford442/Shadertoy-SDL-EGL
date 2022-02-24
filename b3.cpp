@@ -163,6 +163,8 @@ var Frme=1;
 });
 
 EM_JS(void,jsFrame,(),{
+  console.log("test?");
+  testr();
 if(Frme==1){
 r(t($1));
 $5.set(t(v),0);
