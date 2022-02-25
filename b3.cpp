@@ -429,14 +429,14 @@ let $4=new Uint8ClampedArray(W4.buffer,0,l);
 let $5=new Uint8ClampedArray(W5.buffer,0,l);
 let vv=document.getElementById("mv");
 setTimeout(function(){
-r(t($8));},16.666);}
+r(t($8));},16.666);
 $1.set(t(vv),0);
 setTimeout(function(){
 r(t($7));
-},16.666);}
+},16.666);
 $2.set(t(vv),0);
 setTimeout(function(){
-r(t($6));},16.666);}
+r(t($6));},16.666);
 $3.set(t(vv),0);
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
