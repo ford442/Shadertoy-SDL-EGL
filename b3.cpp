@@ -411,22 +411,22 @@ var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
-const W1=new WebAssembly.Memory({initial:128});
-const W2=new WebAssembly.Memory({initial:128});
-const W3=new WebAssembly.Memory({initial:128});
-const W4=new WebAssembly.Memory({initial:128});
-const W5=new WebAssembly.Memory({initial:128});
-const W6=new WebAssembly.Memory({initial:128});
-const W7=new WebAssembly.Memory({initial:128});
-const W8=new WebAssembly.Memory({initial:128});
-const $1=new Uint8ClampedArray(W1.buffer,0,8294400);
-const $2=new Uint8ClampedArray(W2.buffer,0,8294400);
-const $3=new Uint8ClampedArray(W3.buffer,0,8294400);
-const $4=new Uint8ClampedArray(W4.buffer,0,8294400);
-const $5=new Uint8ClampedArray(W5.buffer,0,8294400);
-const $6=new Uint8ClampedArray(W6.buffer,0,8294400);
-const $7=new Uint8ClampedArray(W7.buffer,0,8294400);
-const $8=new Uint8ClampedArray(W8.buffer,0,8294400);
+let W1=new WebAssembly.Memory({initial:128});
+let W2=new WebAssembly.Memory({initial:128});
+let W3=new WebAssembly.Memory({initial:128});
+let W4=new WebAssembly.Memory({initial:128});
+let W5=new WebAssembly.Memory({initial:128});
+let W6=new WebAssembly.Memory({initial:128});
+let W7=new WebAssembly.Memory({initial:128});
+let W8=new WebAssembly.Memory({initial:128});
+let $1=new Uint8ClampedArray(W1.buffer,0,8294400);
+let $2=new Uint8ClampedArray(W2.buffer,0,8294400);
+let $3=new Uint8ClampedArray(W3.buffer,0,8294400);
+let $4=new Uint8ClampedArray(W4.buffer,0,8294400);
+let $5=new Uint8ClampedArray(W5.buffer,0,8294400);
+let $6=new Uint8ClampedArray(W6.buffer,0,8294400);
+let $7=new Uint8ClampedArray(W7.buffer,0,8294400);
+let $8=new Uint8ClampedArray(W8.buffer,0,8294400);
   
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
