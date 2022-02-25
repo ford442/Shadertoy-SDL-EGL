@@ -407,9 +407,9 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){
 let P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.7)*(((P[0]+P[1]+P[2])/3)*3.333));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-var q=g.createKernel(function(v){
-let P=v[this.thread.y][this.thread.x];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.7)*(((P[0]+P[1]+P[2])/3)*3.333));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+var q=g.createKernel(function(N){
+let ZZ=N[this.thread.y][this.thread.x];
+let aveg=1.0-((((ZZ[0]+ZZ[1]+ZZ[2])/3)-0.7)*(((ZZ[0]+ZZ[1]+ZZ[2])/3)*3.333));return[ZZ[0],ZZ[1],ZZ[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){
 let p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
