@@ -414,9 +414,9 @@ let r=g.createKernel(function(f){
 let p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
-let $w=document.getElementById('iwid').innerHTML;
-let o=[$w,h$];
-t.setOutput(o);
+let $nw=document.getElementById('iwid').innerHTML;
+let No=[$nw,h$];
+t.setOutput(No);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -446,10 +446,10 @@ $2.set(t(vv),0);
 setTimeout(function(){
 r(q(lv));},16.666);
 $3.set(t(vv),0);
-q.setOutput(o);
-r.setOutput(o);
+q.setOutput(No);
+r.setOutput(No);
 let T=false;
-let $F=1;
+var $F=1;
 function M(){
 if(T){return;}
 if($F==8){
