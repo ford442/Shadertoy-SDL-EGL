@@ -414,10 +414,8 @@ var r=g.createKernel(function(f){
 let p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
-var $6,$7,$8;
 var $nw=document.getElementById('iwid').innerHTML;
 o=[$nw,h$];
-t.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -432,9 +430,9 @@ let $5=new Uint8ClampedArray(W5.buffer,0,l);
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
-$6=new Uint8ClampedArray(W6.buffer,0,l);
-$7=new Uint8ClampedArray(W7.buffer,0,l);
-$8=new Uint8ClampedArray(W8.buffer,0,l);
+let $6=new Uint8ClampedArray(W6.buffer,0,l);
+let $7=new Uint8ClampedArray(W7.buffer,0,l);
+let $8=new Uint8ClampedArray(W8.buffer,0,l);
 var vv=document.getElementById("mv");
 var lv=document.getElementById("ldv");
 setTimeout(function(){
@@ -496,7 +494,8 @@ $F=2;
 }
 setTimeout(function(){M();},16.666);}
 M();
-document.getElementById("di").onclick=function(){ 
+document.getElementById("di").onclick=function(){
+t.setOutput(o);
 T=true;
 S();};return()=>{T=true;};}
 });
