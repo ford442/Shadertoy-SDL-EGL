@@ -432,11 +432,16 @@ let $5=new Uint8ClampedArray(W5.buffer,0,l);
 let $6=new Uint8ClampedArray(W6.buffer,0,l);
 let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
-$1.set(t(v),0);
-$2.set(t(v),0);
-$3.set(t(v),0);
-$4.set(t(v),0);
 let T=false;
+$8.set(t(v),0);
+$7.set(t(v),0);
+$6.set(t(v),0);
+r(t($8));
+$1.set(t(v),0);
+r(t($7));
+$2.set(t(v),0);
+r(t($6));
+$3.set(t(v),0);
 let $F=1;
 function M(){
 if(T)
