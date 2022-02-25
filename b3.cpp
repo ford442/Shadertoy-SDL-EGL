@@ -433,12 +433,12 @@ let $6=new Uint8ClampedArray(W6.buffer,0,l);
 let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
 
-setTimeout(function(){$8.set(t(v),0);},8.333);}
-setTimeout(function(){$7.set(t(v),0);},8.333);}
-setTimeout(function(){$6.set(t(v),0);},8.333);}
-setTimeout(function(){r(t($8));$1.set(t(v),0);},16.666);}                
-setTimeout(function(){r(t($7));$2.set(t(v),0);},16.666);}                
-setTimeout(function(){r(t($6));$3.set(t(v),0);},16.666);}                
+setTimeout(function(){$8.set(t(v),0);},8.333);};
+setTimeout(function(){$7.set(t(v),0);},8.333);};
+setTimeout(function(){$6.set(t(v),0);},8.333);};
+setTimeout(function(){r(t($8));$1.set(t(v),0);},16.666);}    ;            
+setTimeout(function(){r(t($7));$2.set(t(v),0);},16.666);}    ;            
+setTimeout(function(){r(t($6));$3.set(t(v),0);},16.666);}     ;           
 let T=false;
 let $F=1;
 function M(){
