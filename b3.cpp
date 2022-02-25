@@ -416,6 +416,7 @@ this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).set
 let d=S();if(d)d();d=S();function S(){
 var $w=document.getElementById('iwid').innerHTML;
 var o=[$w,h$];
+t.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -494,9 +495,6 @@ $F=2;
 setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
-var $w=document.getElementById('iwid').innerHTML;
-var o=[$w,h$];
-t.setOutput(o);
 T=true;
 S();};return()=>{T=true;};}
 });
