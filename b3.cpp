@@ -402,11 +402,11 @@ let h$=document.getElementById('ihig').innerHTML;
 let o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-const v=document.getElementById("mv");
+let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
-const aveg=1.0-(Math.sqrt(((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)-0.75)*4.0);return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
 var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
@@ -433,57 +433,59 @@ let $6=new Uint8ClampedArray(W6.buffer,0,l);
 let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
-$8.set(t(v),0);
-$7.set(t(v),0);
-$6.set(t(v),0);
+  let vv=document.getElementById("mv");
+
+$8.set(t(vv),0);
+$7.set(t(vv),0);
+$6.set(t(vv),0);
 r(t($8));
-$1.set(t(v),0);
+$1.set(t(vv),0);
 r(t($7));
-$2.set(t(v),0);
+$2.set(t(vv),0);
 r(t($6));
-$3.set(t(v),0);
+$3.set(t(vv),0);
 let $F=1;
 function M(){
 if(T)
 {return;
 }if($F==8){
 r(t($2));
-$4.set(t(v),0);
+$4.set(t(vv),0);
 $F=1;
 }
 if($F==7){
 r(t($2));
-$3.set(t(v),0);
+$3.set(t(vv),0);
 $F=8;
 }
 if($F==6){
 r(t($2));
-$2.set(t(v),0);
+$2.set(t(vv),0);
 $F=7;
 }
 if($F==5){
 r(t($5));
-$1.set(t(v),0);
+$1.set(t(vv),0);
 $F=6;
 }
 if($F==4){
 r(t($4));
-$8.set(t(v),0);
+$8.set(t(vv),0);
 $F=5;
 }
 if($F==3){
 r(t($3));
-$7.set(t(v),0);
+$7.set(t(vv),0);
 $F=4;
 }
 if($F==2){
 r(t($2));
-$6.set(t(v),0);
+$6.set(t(vv),0);
 $F=3;
 }
 if($F==1){
 r(t($1));
-$5.set(t(v),0);
+$5.set(t(vv),0);
 $F=2;
 }
 setTimeout(function(){M();},16.666);}
