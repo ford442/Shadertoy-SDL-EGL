@@ -415,7 +415,7 @@ $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
 t.setOutput(o);
 r.setOutput(o);
-let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
+let l=($w*$h*4);let m=((l/65536)+1);m=Math.round(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
