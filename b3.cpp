@@ -429,27 +429,27 @@ let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
 let $5=new Uint8ClampedArray(W5.buffer,0,l);
-let vv=document.getElementById("mv");
-setTimeout(function(){
-r(q($8));},16.666);
-$1.set(t(vv),0);
-setTimeout(function(){
-r(q($7));
-},16.666);
-$2.set(t(vv),0);
-setTimeout(function(){
-r(q($6));},16.666);
-$3.set(t(vv),0);
-q.setOutput(o);
-r.setOutput(o);
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
 $6=new Uint8ClampedArray(W6.buffer,0,l);
 $7=new Uint8ClampedArray(W7.buffer,0,l);
 $8=new Uint8ClampedArray(W8.buffer,0,l);
+var vv=document.getElementById("mv");
+var lv=document.getElementById("ldv");
+setTimeout(function(){
+r(q(lv));},16.666);
+$1.set(t(vv),0);
+setTimeout(function(){
+r(q(lv));
+},16.666);
+$2.set(t(vv),0);
+setTimeout(function(){
+r(q(lv));},16.666);
+$3.set(t(vv),0);
+q.setOutput(o);
+r.setOutput(o);
 let T=false;
-let lv=document.getElementById("ldv");
 let $F=1;
 function M(){
 if(T)
@@ -496,11 +496,7 @@ $F=2;
 }
 setTimeout(function(){M();},16.666);}
 M();
-document.getElementById("di").onclick=function(){
-$8.set(t(lv),0);
-$7.set(t(lv),0);
-$6.set(t(lv),0);
-
+document.getElementById("di").onclick=function(){ 
 T=true;
 S();};return()=>{T=true;};}
 });
