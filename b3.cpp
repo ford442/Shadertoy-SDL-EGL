@@ -411,6 +411,7 @@ var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
+var $6,$7,$8;
 $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
 t.setOutput(o);
@@ -421,29 +422,30 @@ let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
 let W4=new WebAssembly.Memory({initial:m});
 let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
 let $5=new Uint8ClampedArray(W5.buffer,0,l);
-let $6=new Uint8ClampedArray(W6.buffer,0,l);
-let $7=new Uint8ClampedArray(W7.buffer,0,l);
-let $8=new Uint8ClampedArray(W8.buffer,0,l);
-let T=false;
-  let vv=document.getElementById("mv");
-
-$8.set(t(vv),0);
-$7.set(t(vv),0);
-$6.set(t(vv),0);
-r(t($8));
+let vv=document.getElementById("mv");
+setTimeout(function(){
+r(t($8));},16.666);}
 $1.set(t(vv),0);
+setTimeout(function(){
 r(t($7));
+},16.666);}
 $2.set(t(vv),0);
-r(t($6));
+setTimeout(function(){
+r(t($6));},16.666);}
 $3.set(t(vv),0);
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
+$6=new Uint8ClampedArray(W6.buffer,0,l);
+$7=new Uint8ClampedArray(W7.buffer,0,l);
+$8=new Uint8ClampedArray(W8.buffer,0,l);
+let T=false;
+let lv=document.getElementById("ldv");
 let $F=1;
 function M(){
 if(T)
@@ -491,6 +493,10 @@ $F=2;
 setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
+$8.set(t(lv),0);
+$7.set(t(lv),0);
+$6.set(t(lv),0);
+
 T=true;
 S();};return()=>{T=true;};}
 });
