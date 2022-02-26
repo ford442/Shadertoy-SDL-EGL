@@ -456,9 +456,7 @@ let vv=document.getElementById("mv");
 
 let $F=1;
 function M(){
-if(T)
-{return;
-}
+
 if($F==8){
 r(t($2));
 $4.set(t(vv),0);
@@ -587,8 +585,8 @@ $F=2;
 setTimeout(function(){},16.666);}
 }
 
-T=true;
-S();};return()=>{T=true;};}
+S();};
+  
 });
 
 extern "C" {
