@@ -449,7 +449,7 @@ $3.set(t(vv),0);
 q.setOutput(No);
 r.setOutput(No);
 let T=false;
-var $F=1;
+let $F=1;
 function M(){
 if(T){return;}
 if($F==8){
