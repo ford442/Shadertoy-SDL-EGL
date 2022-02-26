@@ -404,7 +404,7 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
-let blank$;
+let blank$=0;
 let rblank$=0;
 var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
@@ -415,7 +415,7 @@ this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).set
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
-blank$=(w$-h$)*0.5;
+blank$=(w$-h$);
 rblank$=((h$-w$)*0.5);
 t.setOutput(o);
 r.setOutput(o);
