@@ -399,18 +399,19 @@ opn_aud();
 EM_JS(void,ma,(),{
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
-let o=[w$,h$];
+let o=[h$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=(w$-h$)*0.5;
+let rblank$=(h$-w$)*0.5;
 var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+const p=f[this.thread.y][this.thread.x+this.constants.rblnk];
+this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({rblnk:rblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
