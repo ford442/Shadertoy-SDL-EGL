@@ -411,14 +411,14 @@ var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x+this.constants.nblnk];
+const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max(((h$-w$)/2),0);
 mh$=Math.min(h$,w$);
-o=[h$,h$];
+o=[mh$,h$];
 t.setOutput(o);
 r.setOutput(o);
 var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
