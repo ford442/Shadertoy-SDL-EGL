@@ -421,7 +421,7 @@ mh$=Math.min(h$,w$);
 o=[h$,h$];
 t.setOutput(o);
 r.setOutput(o);
-var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
+var l=h$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
