@@ -409,8 +409,7 @@ let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 function blank(){return blank$}
 var t=g.createKernel(function(v){
-  
-const P=v[this.thread.y][this.thread.x+blank];
+const P=v[this.thread.y][this.thread.x+blank()];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(io);
 var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
