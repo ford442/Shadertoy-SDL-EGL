@@ -399,6 +399,9 @@ opn_aud();
 EM_JS(void,ma,(),{
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
+let mh$=Math.min(h$,w$);
+let bo=[w$,h$];
+
 let o=[h$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -407,19 +410,20 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=0;
 let rblank$=0;
 var t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+this.constants.blnk];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+const P=v[this.thread.y][this.thread.x-this.constants.blnk];
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(bo);
 var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x+this.constants.rblnk];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({rblnk:rblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
+blank$=Math.max((w$-h$),0);
+rblank$=Math.max(((h$-w$)*0.5),0);
+mh$=Math.min(h$,w$);
+  
 o=[h$,h$];
-blank$=w$-h$;
-rblank$=(h$-w$)*0.5;
 t.setOutput(o);
 r.setOutput(o);
-let mh$=Math.min(h$,w$);
 let l=mh$*h$*4;let m=(l/65536)+1;m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -441,14 +445,11 @@ let T=false;
 let vv=document.getElementById("mv");
 
 $8.set(t(vv),0);
-$7.set(t(vv),0);
-$6.set(t(vv),0);
-
 r(t($8));
 $1.set(t(vv),0);
-r(t($7));
+r(t($8));
 $2.set(t(vv),0);
-r(t($6));
+r(t($8));
 $3.set(t(vv),0);
 let $F=1;
 function M(){
