@@ -452,7 +452,7 @@ var $$4=new Uint8ClampedArray($W4.buffer,0,l);
 var $$5=new Uint8ClampedArray($W5.buffer,0,l);
 var $$6=new Uint8ClampedArray($W6.buffer,0,l);
 var $$7=new Uint8ClampedArray($W7.buffer,0,l);
-letvar $$8=new Uint8ClampedArray($W8.buffer,0,l);
+var $$8=new Uint8ClampedArray($W8.buffer,0,l);
 let vv=document.getElementById("mv");
 function M(){
 if($F==8){r(t($2));$4.set(t(vv),0);$F=1;}
