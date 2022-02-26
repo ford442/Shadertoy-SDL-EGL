@@ -412,8 +412,8 @@ let w1$=document.getElementById('iwid').innerHTML;
 let h1$=document.getElementById('ihig').innerHTML;
 return (h1$-w1$)*0.5;});
 var t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+blank()];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(io);
+const P=v[this.thread.y][this.thread.x+blnk];
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(io);
 var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
