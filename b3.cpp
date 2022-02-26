@@ -417,10 +417,11 @@ let d=S();if(d)d();d=S();
 var $F=1;
 function S(){
 $w=document.getElementById('iwid').innerHTML;
+$h=document.getElementById('ihig').innerHTML;
 o=[$w,h$];
 q.setOutput(o);
 r.setOutput(o);
-let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
+var l=($w*$h*4);var m=((l/65536)+1);m=Math.floor(m);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -429,14 +430,6 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $W1=new WebAssembly.Memory({initial:m});
-var $W2=new WebAssembly.Memory({initial:m});
-var $W3=new WebAssembly.Memory({initial:m});
-var $W4=new WebAssembly.Memory({initial:m});
-var $W5=new WebAssembly.Memory({initial:m});
-var $W6=new WebAssembly.Memory({initial:m});
-var $W7=new WebAssembly.Memory({initial:m});
-var $W8=new WebAssembly.Memory({initial:m});
 var $1=new Uint8ClampedArray(W1.buffer,0,l);
 var $2=new Uint8ClampedArray(W2.buffer,0,l);
 var $3=new Uint8ClampedArray(W3.buffer,0,l);
@@ -445,14 +438,6 @@ var $5=new Uint8ClampedArray(W5.buffer,0,l);
 var $6=new Uint8ClampedArray(W6.buffer,0,l);
 var $7=new Uint8ClampedArray(W7.buffer,0,l);
 var $8=new Uint8ClampedArray(W8.buffer,0,l);
-var $$1=new Uint8ClampedArray($W1.buffer,0,l);
-var $$2=new Uint8ClampedArray($W2.buffer,0,l);
-var $$3=new Uint8ClampedArray($W3.buffer,0,l);
-var $$4=new Uint8ClampedArray($W4.buffer,0,l);
-var $$5=new Uint8ClampedArray($W5.buffer,0,l);
-var $$6=new Uint8ClampedArray($W6.buffer,0,l);
-var $$7=new Uint8ClampedArray($W7.buffer,0,l);
-var $$8=new Uint8ClampedArray($W8.buffer,0,l);
 let vv=document.getElementById("mv");
 function M(){
 if($F==8){r(t($2));$4.set(t(vv),0);$F=1;}
@@ -469,8 +454,26 @@ M();
 document.getElementById("di").onclick=function(){
 var nvv=document.getElementById("mv");
 $w=document.getElementById('iwid').innerHTML;
+$h=document.getElementById('ihig').innerHTML;
 o=[$w,h$];
 t.setOutput(o);
+var l=($w*$h*4);var m=((l/65536)+1);m=Math.floor(m);
+var $W1=new WebAssembly.Memory({initial:m});
+var $W2=new WebAssembly.Memory({initial:m});
+var $W3=new WebAssembly.Memory({initial:m});
+var $W4=new WebAssembly.Memory({initial:m});
+var $W5=new WebAssembly.Memory({initial:m});
+var $W6=new WebAssembly.Memory({initial:m});
+var $W7=new WebAssembly.Memory({initial:m});
+var $W8=new WebAssembly.Memory({initial:m});
+var $$1=new Uint8ClampedArray($W1.buffer,0,l);
+var $$2=new Uint8ClampedArray($W2.buffer,0,l);
+var $$3=new Uint8ClampedArray($W3.buffer,0,l);
+var $$4=new Uint8ClampedArray($W4.buffer,0,l);
+var $$5=new Uint8ClampedArray($W5.buffer,0,l);
+var $$6=new Uint8ClampedArray($W6.buffer,0,l);
+var $$7=new Uint8ClampedArray($W7.buffer,0,l);
+var $$8=new Uint8ClampedArray($W8.buffer,0,l);
 for($B=0;$B<8;$B++){ 
 if($F==8){$$8.set(q($4),0);$F=1;}
 if($F==7){$$3.set(q($3),0);$F=8;}
