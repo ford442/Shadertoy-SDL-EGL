@@ -405,7 +405,7 @@ const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pr
 let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=(w$-h$)*0.5;
-let rblank$=(h$-w$)*0.5;
+let rblank$=((h$-w$)*0.5);
 var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
@@ -415,10 +415,11 @@ this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).set
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
-blank$=(h$-w$)*0.5;
+blank$=(w$-h$)*0.5;
+rblank$=((h$-w$)*0.5);
 t.setOutput(o);
 r.setOutput(o);
-let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
+let l=($h*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
