@@ -414,12 +414,13 @@ const p=f[this.thread.y][this.thread.x+this.constants.rblnk];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({rblnk:rblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
-o=[$w,h$];
+o=[h$,h$];
 blank$=(w$-h$);
 rblank$=((h$-w$)*0.5);
 t.setOutput(o);
 r.setOutput(o);
-let l=($h*$h*4);let m=((l/65536)+1);m=Math.floor(m);
+let mh$=Math.min(h$,w$);
+let l=($mh*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
