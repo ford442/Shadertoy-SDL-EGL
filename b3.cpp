@@ -535,13 +535,15 @@ $F=3;
 if($F==1){
 $$1.set(q($5),0);
 $F=2;
-}}
+}
+}
 
 var nvv=document.getElementById("mv");
 $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
 t.setOutput(o);
-for ($B=0;$B<8;$B++){
+
+for ($B5=0;$B5<8;$B5++){
 if($F==8){
 r(q($$2));
 $4.set(t(nvv),0);
