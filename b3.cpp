@@ -402,7 +402,7 @@ let h$=document.getElementById('ihig').innerHTML;
 let o=[w$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let mv=document.getElementById("mv");
+let vv=document.getElementById("mv");
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let t=g.createKernel(function(v){
 let P=v[this.thread.y][this.thread.x];
@@ -434,17 +434,13 @@ let W8=new WebAssembly.Memory({initial:m});
 let $6=new Uint8ClampedArray(W6.buffer,0,l);
 let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
-let vv=document.getElementById("mv");
+// let vv=document.getElementById("mv");
 let lv=document.getElementById("ldv");
-setTimeout(function(){
-r(q(lv));},16.666);
+// setTimeout(function(){r(q(lv));},16.666);
 $1.set(t(vv),0);
-setTimeout(function(){
-r(q(lv));
-},16.666);
+// setTimeout(function(){r(q(lv));},16.666);
 $2.set(t(vv),0);
-setTimeout(function(){
-r(q(lv));},16.666);
+// setTimeout(function(){r(q(lv));},16.666);
 $3.set(t(vv),0);
 q.setOutput(No);
 r.setOutput(No);
