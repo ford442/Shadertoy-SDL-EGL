@@ -432,23 +432,41 @@ let $5=new Uint8ClampedArray(W5.buffer,0,l);
 let $6=new Uint8ClampedArray(W6.buffer,0,l);
 let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
+let $W1=new WebAssembly.Memory({initial:m});
+let $W2=new WebAssembly.Memory({initial:m});
+let $W3=new WebAssembly.Memory({initial:m});
+let $W4=new WebAssembly.Memory({initial:m});
+let $W5=new WebAssembly.Memory({initial:m});
+let $W6=new WebAssembly.Memory({initial:m});
+let $W7=new WebAssembly.Memory({initial:m});
+let $W8=new WebAssembly.Memory({initial:m});
+let $$1=new Uint8ClampedArray(W1.buffer,0,l);
+let $$2=new Uint8ClampedArray(W2.buffer,0,l);
+let $$3=new Uint8ClampedArray(W3.buffer,0,l);
+let $$4=new Uint8ClampedArray(W4.buffer,0,l);
+let $$5=new Uint8ClampedArray(W5.buffer,0,l);
+let $$6=new Uint8ClampedArray(W6.buffer,0,l);
+let $$7=new Uint8ClampedArray(W7.buffer,0,l);
+let $$8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
-  let vv=document.getElementById("mv");
+let vv=document.getElementById("mv");
 
-$8.set(t(vv),0);
-$7.set(t(vv),0);
-$6.set(t(vv),0);
+  
+  
 r(t($8));
 $1.set(t(vv),0);
 r(t($7));
 $2.set(t(vv),0);
 r(t($6));
 $3.set(t(vv),0);
+  
+
 let $F=1;
 function M(){
 if(T)
 {return;
-}if($F==8){
+}
+if($F==8){
 r(t($2));
 $4.set(t(vv),0);
 $F=1;
@@ -491,6 +509,87 @@ $F=2;
 setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
+for ($B=0;$B<8;$B++){ 
+if($F==8){
+$$8.set(q($4),0);
+$F=1;
+}
+if($F==7){
+$$3.set(q($3),0);
+$F=8;
+}
+if($F==6){
+$$6.set(q($2),0);
+$F=7;
+}
+if($F==5){
+$$5.set(q($1),0);
+$F=6;
+}
+if($F==4){
+$$4.set(q($8),0);
+$F=5;
+}
+if($F==3){
+$$3.set(q($7),0);
+$F=4;
+}
+if($F==2){
+$$2.set(q($6),0);
+$F=3;
+}
+if($F==1){
+$$1.set(q($5),0);
+$F=2;
+}}
+let nvv=document.getElementById("mv");
+$w=document.getElementById('iwid').innerHTML;
+o=[$w,h$];
+t.setOutput(o);
+for ($B=0;$B<8;$B++){
+if($F==8){
+r(q($$2));
+$4.set(t(nvv),0);
+$F=1;
+}
+if($F==7){
+r(q($$2));
+$3.set(t(nvv),0);
+$F=8;
+}
+if($F==6){
+r(q($$2));
+$2.set(t(nvv),0);
+$F=7;
+}
+if($F==5){
+r(q($$5));
+$1.set(t(nvv),0);
+$F=6;
+}
+if($F==4){
+r(q($$4));
+$8.set(t(nvv),0);
+$F=5;
+}
+if($F==3){
+r(q($$3));
+$7.set(t(nvv),0);
+$F=4;
+}
+if($F==2){
+r(q($$2));
+$6.set(t(nvv),0);
+$F=3;
+}
+if($F==1){
+r(q($$1));
+$5.set(t(nvv),0);
+$F=2;
+}
+setTimeout(function(){},16.666);}
+}
+
 T=true;
 S();};return()=>{T=true;};}
 });
