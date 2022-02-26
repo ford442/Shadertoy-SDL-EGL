@@ -415,13 +415,13 @@ const p=f[this.thread.y][this.thread.x+this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
-blank$=Math.max((w$-h$),0);
-nblank$=Math.max((h$-w$),0);
+blank$=Math.max(((w$-h$)/2),0);
+nblank$=Math.max(((h$-w$)/2),0);
 mh$=Math.min(h$,w$);
 o=[h$,h$];
 t.setOutput(o);
 r.setOutput(o);
-var l=h$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
+var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
