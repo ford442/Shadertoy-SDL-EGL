@@ -406,19 +406,17 @@ const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pr
 let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max((w$-h$),0);
-var rblank$=Math.max(((h$-w$)*0.5),0);
 var nblank$=Math.max((h$-w$),0);
 var t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,nblnk:nblank$}).setOutput(o);
+const P=v[this.thread.y][this.thread.x-this.constants.blnk];
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x+this.constants.rblnk];
-this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({rblnk:rblank$}).setOutput(o);
+const p=f[this.thread.y][this.thread.x+this.constants.nblnk];
+this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({rblnk:rblank$,nblnk:nblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
 blank$=Math.max((w$-h$),0);
 nblank$=Math.max((h$-w$),0);
-rblank$=Math.max(((h$-w$)*0.5),0);
 mh$=Math.min(h$,w$);
 o=[h$,h$];
 t.setOutput(o);
