@@ -400,66 +400,66 @@ EM_JS(void,ma,(),{
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 let o=[w$,h$];
-let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let vv=document.getElementById("mv");
-let g=new GPU({canvas:bcanvas,webGl:contx});
-let t=g.createKernel(function(v){
-let P=v[this.thread.y][this.thread.x];
-let avega=1.0-((((P[0]+P[1]+P[2])/3)-0.7)*(((P[0]+P[1]+P[2])/3)*3.333));return[P[0],P[1],P[2],(avega)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-let q=g.createKernel(function(N){
-let ZZ=N[this.thread.y][this.thread.x];
-let aveg=1.0-((((ZZ[0]+ZZ[1]+ZZ[2])/3)-0.7)*(((ZZ[0]+ZZ[1]+ZZ[2])/3)*3.333));return[ZZ[0],ZZ[1],ZZ[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-let r=g.createKernel(function(f){
-let p=f[this.thread.y][this.thread.x];
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let v=document.getElementById("mv");
+const g=new GPU({canvas:bcanvas,webGl:contx});
+var t=g.createKernel(function(v){
+const P=v[this.thread.y][this.thread.x];
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.7)*(((P[0]+P[1]+P[2])/3)*3.333));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+var r=g.createKernel(function(f){
+const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 $w=document.getElementById('iwid').innerHTML;
 o=[$w,h$];
 t.setOutput(o);
+r.setOutput(o);
 let l=($w*$h*4);let m=((l/65536)+1);m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
 let W4=new WebAssembly.Memory({initial:m});
 let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
 let $5=new Uint8ClampedArray(W5.buffer,0,l);
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
 let $6=new Uint8ClampedArray(W6.buffer,0,l);
 let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
-// let vv=document.getElementById("mv");
-let lv=document.getElementById("ldv");
-// setTimeout(function(){r(q(lv));},16.666);
-$1.set(t(vv),0);
-// setTimeout(function(){r(q(lv));},16.666);
-$2.set(t(vv),0);
-// setTimeout(function(){r(q(lv));},16.666);
-$3.set(t(vv),0);
-q.setOutput(o);
-r.setOutput(o);
 let T=false;
+  let vv=document.getElementById("mv");
+
+$8.set(t(vv),0);
+$7.set(t(vv),0);
+$6.set(t(vv),0);
+r(t($8));
+$1.set(t(vv),0);
+r(t($7));
+$2.set(t(vv),0);
+r(t($6));
+$3.set(t(vv),0);
 let $F=1;
 function M(){
-if(T){return;}
-if($F==8){
-r(t($8));
+if(T)
+{return;
+}if($F==8){
+r(t($2));
 $4.set(t(vv),0);
 $F=1;
 }
 if($F==7){
-r(t($7));
+r(t($2));
 $3.set(t(vv),0);
 $F=8;
 }
 if($F==6){
-r(t($6));
+r(t($2));
 $2.set(t(vv),0);
 $F=7;
 }
