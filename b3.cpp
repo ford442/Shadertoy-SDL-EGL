@@ -402,15 +402,12 @@ let h$=document.getElementById('ihig').innerHTML;
 let io=[w$,h$];
 let ro=[h$,h$];
 var rblank=h$-w$;
+let blank$=(w$-h$)*0.5;
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
 const g=new GPU({canvas:bcanvas,webGl:contx});
 
-g.addFunction(function blank(){
-let w1$=document.getElementById('iwid').innerHTML;
-let h1$=document.getElementById('ihig').innerHTML;
-return (h1$-w1$)*0.5;});
 var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(io);
