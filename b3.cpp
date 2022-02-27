@@ -414,8 +414,8 @@ var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
-$w=document.getElementById('iwid').innerHTML;
-$h=document.getElementById('pmhig').innerHTML;
+w$=document.getElementById('iwid').innerHTML;
+h$=document.getElementById('pmhig').innerHTML;
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
