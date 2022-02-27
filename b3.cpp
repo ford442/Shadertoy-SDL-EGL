@@ -163,7 +163,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -498,9 +498,7 @@ r(t($1));
 $5.set(t(vv),0);
 $F=2;
 }
-Module.ccall("nano");
-M();
-}
+setTimeout(function(){M();},8.333);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
