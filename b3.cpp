@@ -402,7 +402,7 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 let w$=document.getElementById('iwid').innerHTML;
-let h$=document.getElementById('ihig').innerHTML;
+let h$=document.getElementById('pmhig').innerHTML;
 var mh$=Math.min(h$,w$);
 let o=[h$,h$];
 const bcanvas=document.getElementById("bcanvas");
@@ -424,9 +424,7 @@ blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 o=[h$,h$];
-t.setOutput(o);
-r.setOutput(o);
-var l=w$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
+var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -446,13 +444,18 @@ let $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 
-$8.set(t(vv),0);
 r(t($8));
+  
+  t.setOutput(o);
+
 $1.set(t(vv),0);
 r(t($8));
 $2.set(t(vv),0);
 r(t($8));
 $3.set(t(vv),0);
+  
+  r.setOutput(o);
+
 let $F=1;
 function M(){
 if(T)
