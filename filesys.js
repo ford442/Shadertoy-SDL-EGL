@@ -2,8 +2,7 @@ let bz=new BroadcastChannel('bez');
 document.getElementById('btn').addEventListener('click',function(){
 let hi=window.innerHeight;
 let wi=window.innerWidth;
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById("ihig").innerHTML=hi;
+document.getElementById('pmhig').innerHTML=Math.round(window.innerHeight);
 document.getElementById("circle").width=wi;
 document.getElementById("circle").height=hi;
 document.getElementById("di").click();
@@ -12,7 +11,7 @@ data:222
 });});
 function pll(){
 Module.ccall("pl");
-};
+}
 
 const fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
@@ -26,12 +25,8 @@ window.open('https://test.1ink.us/libflac.js');
 });
 
 document.getElementById('btn2').addEventListener('click',function(){
-document.getElementById("ihig").innerHTML=window.innerHeight;
 document.getElementById("circle").height=window.innerHeight;
 document.getElementById("circle").width=window.innerWidth;
-document.getElementById("scanvas").height=window.innerHeight;
-document.getElementById("scanvas").width=window.innerHeight;
-document.getElementById("bcanvas").height=window.innerHeight;
 document.getElementById('btn3').style.border="5px solid green";
 document.getElementById('btn2').style.border="5px solid red";
 document.getElementById('btn2').style.background="red";
@@ -50,8 +45,6 @@ document.getElementById('btn').style="background-color:red;position:absolute;dis
 });
 
 document.getElementById('btn6').addEventListener('click',function(){
-let widd=document.getElementById("iwid").innerHTML;
-let midl=(window.innerWidth*0.5)-(widd*0.5);
 document.getElementById("contain2").style="pointer-events:none;z-index:999993;height:"+window.innerHeight+"px;width:"+window.innerHeight+"px;position:absolute;top:0;left:0;right:0;";
 document.getElementById("bcanvas").style="background-color:rgba(1,1,1,0);z-index:999992;height:100vh;width:100vh;position:absolute;top:0;";
 document.getElementById("scanvas").style="position:absolute;top:0;background-color:rgba(1,1,1,0);z-index:999993;image-rendering:auto;width:"+window.innerHeight+"px;height:"+window.innerHeight+"px;opacity:0.3;";

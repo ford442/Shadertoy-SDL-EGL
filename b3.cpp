@@ -1,5 +1,5 @@
-#include <emscripten.h>
-#include <emscripten/html5.h>
+#include </home/ford/emsdk/upstream/emscripten/system/include/emscripten.h>
+#include </home/ford/emsdk/upstream/emscripten/system/include/emscripten/html5.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -52,7 +52,7 @@ static GLfloat mX,mY;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
-GLsizei nsources,i;
+GLsizei i;
 GLfloat fps;
 EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
@@ -105,7 +105,7 @@ return result;
 }
 return NULL;
 }
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -150,7 +150,7 @@ glUniform1i(uniform_frame,fram);
 
 static void renderFrame(){
 eglSwapBuffers(display,surface);
-t2=steady_clock::now();
+t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
@@ -341,7 +341,7 @@ glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-t1=steady_clock::now();
+t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 void cls_aud(){
@@ -499,7 +499,7 @@ M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
-});
+})
 
 extern "C" {
 
