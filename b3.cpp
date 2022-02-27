@@ -402,7 +402,7 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 let w$=document.getElementById('iwid').innerHTML;
-let h$=document.getElementById('pmhig').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
 let o=[h$,h$];
 const bcanvas=document.getElementById("bcanvas");
@@ -419,7 +419,7 @@ const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
-h$=document.getElementById('pmhig').innerHTML;
+h$=document.getElementById('ihig').innerHTML;
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
