@@ -443,6 +443,7 @@ let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
+$8.set(t(vv),0);
 
 r(t($8));
   
