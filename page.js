@@ -3,9 +3,9 @@ var sound,loadV,mil,sfr,slo,tsl,tem,dat,datb,a,ss,$hg,slt,$ll,$h,wi,adr,hi,r$,$w
 
 document.getElementById("mv").load();
 document.getElementById("ldv").load();
-let $sngs=[];
-let $vids=[];
-let $shds=[];
+var $sngs=[];
+var $vids=[];
+var $shds=[];
 function sngs(xml){
     var parser=new DOMParser();
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
