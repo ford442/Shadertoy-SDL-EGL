@@ -48,7 +48,7 @@ b3: b3.cpp  Makefile
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
 -o b3003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---post-js filesys.js --post-js ccall.js --post-js fs.js --pre-js setUp.js --post-js startUp.js --post-js page.js
+--post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --post-js startUp.js --post-js page.js
 
 glsl: glsl.cpp  Makefile
 	emcc glsl.cpp -sFULL_ES2=0 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 -sUSE_SDL=2  \
