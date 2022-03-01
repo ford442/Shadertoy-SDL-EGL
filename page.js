@@ -1,5 +1,5 @@
 
-let sound,loadV,mil,sfr,slo,tsl,tem,dat,datb,a,ss,$hg,slt,$ll,$h,wi,adr,hi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong,songSrc;
+var sound,loadV,mil,sfr,slo,tsl,tem,dat,datb,a,ss,$hg,slt,$ll,$h,wi,adr,hi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong,songSrc;
 
 document.getElementById("mv").load();
 document.getElementById("ldv").load();
