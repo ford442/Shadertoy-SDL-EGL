@@ -43,7 +43,7 @@ function shds(xml){
         $shds[i+1]=Self+"all/"+txxt;
     }
     var randShade=Math.random();
-    randShade=Math.round($shds[0]*randShade);
+    randShade=Math.round($shds[0]*randShade)+5;
     document.getElementById("path").innerHTML=$shds[randShade];
 }
 
@@ -167,8 +167,7 @@ function loada(){
     $ls=$ls*1000;
     $ls=Math.round($ls);
     $ls=$ls/1000;
-    $rn=Math.random()*($vids[0]-5);
-    rnum=Math.floor($rn)+5;
+    rnum=Math.round((Math.random()*($vids[0]-5))+5);
     document.getElementById("isrc").innerHTML=$vids[rnum];
     $h=Math.round(window.innerHeight);
     he=document.getElementById("hig").innerHTML;
