@@ -405,10 +405,10 @@ let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
 let o=[h$,h$];
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var bcanvas=document.getElementById("bcanvas");
+var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
-const g=new GPU({canvas:bcanvas,webGl:contx});
+var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 var t=g.createKernel(function(v){
@@ -425,38 +425,31 @@ nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 o=[h$,h$];
 var l=w$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
-let W1=new WebAssembly.Memory({initial:m});
-let W2=new WebAssembly.Memory({initial:m});
-let W3=new WebAssembly.Memory({initial:m});
-let W4=new WebAssembly.Memory({initial:m});
-let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
-let $1=new Uint8ClampedArray(W1.buffer,0,l);
-let $2=new Uint8ClampedArray(W2.buffer,0,l);
-let $3=new Uint8ClampedArray(W3.buffer,0,l);
-let $4=new Uint8ClampedArray(W4.buffer,0,l);
-let $5=new Uint8ClampedArray(W5.buffer,0,l);
-let $6=new Uint8ClampedArray(W6.buffer,0,l);
-let $7=new Uint8ClampedArray(W7.buffer,0,l);
-let $8=new Uint8ClampedArray(W8.buffer,0,l);
+var W1=new WebAssembly.Memory({initial:m});
+var W2=new WebAssembly.Memory({initial:m});
+var W3=new WebAssembly.Memory({initial:m});
+var W4=new WebAssembly.Memory({initial:m});
+var W5=new WebAssembly.Memory({initial:m});
+var W6=new WebAssembly.Memory({initial:m});
+var W7=new WebAssembly.Memory({initial:m});
+var W8=new WebAssembly.Memory({initial:m});
+var $1=new Uint8ClampedArray(W1.buffer,0,l);
+var $2=new Uint8ClampedArray(W2.buffer,0,l);
+var $3=new Uint8ClampedArray(W3.buffer,0,l);
+var $4=new Uint8ClampedArray(W4.buffer,0,l);
+var $5=new Uint8ClampedArray(W5.buffer,0,l);
+var $6=new Uint8ClampedArray(W6.buffer,0,l);
+var $7=new Uint8ClampedArray(W7.buffer,0,l);
+var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 $8.set(t(vv),0);
-
 r(t($8));
-  
-  t.setOutput(o);
-
+t.setOutput(o);
 $1.set(t(vv),0);
-r(t($8));
 $2.set(t(vv),0);
-r(t($8));
 $3.set(t(vv),0);
-  
-  r.setOutput(o);
-
+r.setOutput(o);
 let $F=1;
 function M(){
 if(T)
