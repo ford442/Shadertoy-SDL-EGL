@@ -401,7 +401,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let w$=document.getElementById('iwid').innerHTML;
+let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
 let o=[h$,h$];
@@ -412,10 +412,10 @@ var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 var t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+this.constants.blnk];
+var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
@@ -423,8 +423,8 @@ h$=document.getElementById('ihig').innerHTML;
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
-o=[h$,h$];
-var l=w$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
+var o=[h$,h$];
+var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
