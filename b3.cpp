@@ -404,7 +404,6 @@ EM_JS(void,ma,(),{
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
-var lnn=mh$*h$;
 let o=[mh$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -413,6 +412,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var avg;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 avg=avg[0];
