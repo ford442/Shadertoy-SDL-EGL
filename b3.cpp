@@ -413,11 +413,11 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
-var avg=0.0;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 avg=avg[0];
 }
+avvg();
 let min$=0.0;
 let max$=1.0;
 function setMin(a,b){
@@ -468,7 +468,7 @@ $8.set(t(vv),0);
 avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
-// avvg();
+avvg();
 r(t($8));
 t.setOutput(o);
 $1.set(t(vv),0);
