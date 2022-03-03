@@ -401,24 +401,24 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let w$=Math.round(document.getElementById('iwid').innerHTML);
-let h$=document.getElementById('ihig').innerHTML;
+var w$=Math.round(document.getElementById('iwid').innerHTML);
+var h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
 var lnn=mh$*h$;
 let o=[mh$,h$];
-var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let bcanvas=document.getElementById("bcanvas");
+let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
-var g=new GPU({canvas:bcanvas,webGl:contx});
+let g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 var avg;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8; 
 }
-var min$=0.0;
-var max$=1.0;
+let min$=0.0;
+let max$=1.0;
 function setMin(a,b){
 return Math.min(a,b);
 }
@@ -428,16 +428,12 @@ return Math.max(a,b);
 function avgg(a,b){
 return a+b;
 }
-var av=g.createKernel(function(rr){
-return rr[3+(this.thread.x*4)];
-}).setTactic("speed").setPipeline(true).setDynamicOutput(true).setOutput(o);
-
-var t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blnk];
-var aveg=((P[0]+P[1]+P[2])/3);
+let t=g.createKernel(function(v){
+const P=v[this.thread.y][this.thread.x+this.constants.blnk];
+let aveg=((P[0]+P[1]+P[2])/3);
 return[P[0],P[1],P[2],aveg];}).setTactic("speed").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
-var r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk];
+let r=g.createKernel(function(f){
+const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("speed").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
@@ -446,7 +442,8 @@ blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[mh$,h$];
-var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
+var l=mh$*h$*4;
+var m=Math.floor((mh$*h$*4)/65536)+1;
 var avgl=mh$*h$*3;
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
@@ -467,9 +464,9 @@ var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 $8.set(t(vv),0);
-avgs[8]=(av($8)).reduce(avgg)/(l/4);
-max$=(av($8)).reduce(setMax);
-min$=(av($8)).reduce(setMin);
+avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
 avvg();
 r(t($8));
 t.setOutput(o);
@@ -480,13 +477,13 @@ min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $2.set(t(vv),0);
 avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $3.set(t(vv),0);
 avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 r.setOutput(o);
 let $F=1;
@@ -498,8 +495,8 @@ if($F==8){
 r(t($8));
 $4.set(t(vv),0);
 avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=1;
 }
@@ -507,8 +504,8 @@ if($F==7){
 r(t($7));
 $3.set(t(vv),0);
 avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=8;
 }
@@ -516,8 +513,8 @@ if($F==6){
 r(t($6));
 $2.set(t(vv),0);
 avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=7;
 }
@@ -534,8 +531,8 @@ if($F==4){
 r(t($4));
 $8.set(t(vv),0);
 avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=5;
 }
@@ -543,8 +540,8 @@ if($F==3){
 r(t($3));
 $7.set(t(vv),0);
 avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=4;
 }
@@ -552,8 +549,8 @@ if($F==2){
 r(t($2));
 $6.set(t(vv),0);
 avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=3;
 }
