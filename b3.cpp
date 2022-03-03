@@ -433,7 +433,7 @@ let aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-let favg=((p[3]+aVG)/2);
+let favg=((p[3]+aVg)/2);
 this.color(p[0],p[1],p[2],1.0-((favg-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-favg))));}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
