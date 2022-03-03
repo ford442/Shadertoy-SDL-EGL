@@ -416,8 +416,8 @@ var avg;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8; 
 }
-var min$=0;
-var max$=0;
+let min$=0;
+let max$=0;
 function setMin(min){
 min$=min;
 }
