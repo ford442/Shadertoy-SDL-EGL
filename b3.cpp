@@ -404,7 +404,8 @@ EM_JS(void,ma,(),{
 let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
-let o=[h$,h$];
+var lnn=mh$*h$;
+let o=[mh$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
@@ -424,6 +425,13 @@ return Math.min(a,b);
 function setMax(a,b){
 return Math.max(a,b);
 }
+function avgg(a,b){
+return a+b;
+}
+var av=g.createKernel(function(rr){
+return rr[3+(this.thread.x*4)];
+}).setTactic("speed").setPipeline(true).setDynamicOutput(true).setOutput(o);
+
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 var aveg=((P[0]+P[1]+P[2])/3);
@@ -431,16 +439,13 @@ return[P[0],P[1],P[2],aveg];}).setTactic("speed").setPipeline(true).setDynamicOu
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("speed").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
-function avgg(a,b){
-return a+b;
-}
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
-var o=[h$,h$];
+var o=[mh$,h$];
 var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
 var avgl=mh$*h$*3;
 var W1=new WebAssembly.Memory({initial:m});
@@ -462,9 +467,9 @@ var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 $8.set(t(vv),0);
-avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
+avgs[8]=(av($8)).reduce(avgg)/(l/4);
+max$=(av($8)).reduce(setMax);
+min$=(av($8)).reduce(setMin);
 avvg();
 r(t($8));
 t.setOutput(o);
