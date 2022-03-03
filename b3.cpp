@@ -59,7 +59,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,16666666};
+struct timespec req={0,3333200};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -163,7 +163,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -561,7 +561,7 @@ min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=2;
 }
-setTimeout(function(){M();},16.666);}
+setTimeout(function(){M();},33.332);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
