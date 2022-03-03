@@ -418,11 +418,11 @@ avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 }
 var min$=0.0;
 var max$=1.0;
-function setMin(min){
-min$=min;
+function setMin(a,b){
+return Math.min(a,b);
 }
-function setMax(max){
-max$=max;
+function setMax(a,b){
+return Math.max(a,b);
 }
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
@@ -510,7 +510,7 @@ $F=8;
 if($F==6){
 r(t($6));
 $2.set(t(vv),0);
-[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 max$=Math.max.apply(null,$2.filter((_,i) => i % 4 == 3));
 min$=Math.min.apply(null,$2.filter((_,i) => i % 4 == 3));
 avvg();
@@ -529,15 +529,15 @@ if($F==4){
 r(t($4));
 $8.set(t(vv),0);
 avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$8.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$8.filter((_,i) => i % 4 == 3));
+max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=5;
 }
 if($F==3){
 r(t($3));
 $7.set(t(vv),0);
-[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 max$=Math.max.apply(null,$7.filter((_,i) => i % 4 == 3));
 min$=Math.min.apply(null,$7.filter((_,i) => i % 4 == 3)); 
 avvg();
