@@ -431,7 +431,7 @@ return a+b;
 }
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
-let aveg=((P[0]+P[1]+P[2])/3)+this.constants.aVg)/2;
+let aveg=((P[0]+P[1]+P[2])/3);
 return[P[0],P[1],P[2],aveg];}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,aVg:avg}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
