@@ -70,7 +70,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;precision mediump sampler3D;precision mediump sampler2D;\n";
+"#version 300 es \n precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -427,10 +427,10 @@ return Math.max(a,b);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 var aveg=((P[0]+P[1]+P[2])/3);
-return[P[0],P[1],P[2],aveg];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+return[P[0],P[1],P[2],aveg];}).setTactic("speed").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
+this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("speed").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
 function avgg(a,b){
 return a+b;
 }
