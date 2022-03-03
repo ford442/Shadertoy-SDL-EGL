@@ -411,12 +411,24 @@ let v=document.getElementById("mv");
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
+var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var avg;
+function avvg(){
+avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8; 
+}
+var min$=0;
+var max$=0;
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+let aveg=((P[0]+P[1]+P[2])/3);
+if(aveg>this.constants.max){this.constants.max=aveg};if(aveg<this.constants.min){this.constants.min=aveg};
+return[P[0],P[1],P[2],aveg];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,min:min$,max:max$}).setOutput(o);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
+this.color(p[0],p[1],p[2],1.0-(p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
+function avgg(a,b){
+return a+b;
+}
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
@@ -425,6 +437,7 @@ nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[h$,h$];
 var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
+var avgl=mh$*h$*3;
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -444,11 +457,19 @@ var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 $8.set(t(vv),0);
+avgs[8]=$8.reduce(avgg)/l;
+avvg();
 r(t($8));
 t.setOutput(o);
 $1.set(t(vv),0);
+avgs[1]=$1.reduce(avgg)/l;
+avvg();
 $2.set(t(vv),0);
+avgs[2]=$2.reduce(avgg)/l;
+avvg();
 $3.set(t(vv),0);
+avgs[3]=$3.reduce(avgg)/l;
+avvg();
 r.setOutput(o);
 let $F=1;
 function M(){
@@ -458,41 +479,57 @@ if(T)
 if($F==8){
 r(t($8));
 $4.set(t(vv),0);
+avgs[4]=$4.reduce(avgg)/l;
+avvg();
 $F=1;
 }
 if($F==7){
 r(t($7));
 $3.set(t(vv),0);
+avgs[3]=$3.reduce(avgg)/l;
+avvg();
 $F=8;
 }
 if($F==6){
 r(t($6));
 $2.set(t(vv),0);
+avgs[2]=$2.reduce(avgg)/l;
+avvg();
 $F=7;
 }
 if($F==5){
 r(t($5));
 $1.set(t(vv),0);
+avgs[1]=$1.reduce(avgg)/l;
+avvg();
 $F=6;
 }
 if($F==4){
 r(t($4));
 $8.set(t(vv),0);
+avgs[8]=$8.reduce(avgg)/l;
+avvg();
 $F=5;
 }
 if($F==3){
 r(t($3));
 $7.set(t(vv),0);
+avgs[7]=$7.reduce(avgg)/l;
+avvg();
 $F=4;
 }
 if($F==2){
 r(t($2));
 $6.set(t(vv),0);
+avgs[6]=$6.reduce(avgg)/l;
+avvg();
 $F=3;
 }
 if($F==1){
 r(t($1));
 $5.set(t(vv),0);
+avgs[5]=$5.reduce(avgg)/l;
+avvg();
 $F=2;
 }
 setTimeout(function(){M();},16.666);}
