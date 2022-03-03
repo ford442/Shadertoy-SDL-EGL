@@ -413,7 +413,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
-var avg;
+var avg=0.0;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 avg=avg[0];
