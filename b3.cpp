@@ -416,6 +416,7 @@ let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 var avg;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
+avg=avg[0];
 }
 let min$=0.0;
 let max$=1.0;
@@ -431,7 +432,7 @@ return a+b;
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=(((P[0]+P[1]+P[2])/3)+aVg)/2;
-return[P[0],P[1],P[2],aveg];}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,aVg:avgs[0]}).setOutput(o);
+return[P[0],P[1],P[2],aveg];}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,aVg:avg}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
