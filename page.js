@@ -172,7 +172,7 @@ function loada(){
     $h=Math.round(window.innerHeight);
     he=document.getElementById("hig").innerHTML;
     r$=he/$h;
-    $w=wi/r$;
+    $w=wi*r$;
     hii=Math.round(dat.innerHTML);
     $hi=$h-hii;
     if($hi>1){$h=Math.round(dat.innerHTML);datb.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
