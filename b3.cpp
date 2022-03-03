@@ -70,7 +70,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"#version 300 es \n precision mediump float;precision mediump sampler3D;precision mediump sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -163,7 +163,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -431,10 +431,10 @@ return a+b;
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=((P[0]+P[1]+P[2])/3);
-return[P[0],P[1],P[2],aveg];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+return[P[0],P[1],P[2],aveg];}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
+this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
@@ -467,7 +467,7 @@ $8.set(t(vv),0);
 avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
-avvg();
+// avvg();
 r(t($8));
 t.setOutput(o);
 $1.set(t(vv),0);
