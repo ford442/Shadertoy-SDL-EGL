@@ -401,17 +401,17 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=Math.round(document.getElementById('iwid').innerHTML);
-var h$=document.getElementById('ihig').innerHTML;
-var mh$=Math.min(h$,w$);
-var o=[mh$,h$];
-var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-var v=document.getElementById("mv");
-var g=new GPU({canvas:bcanvas,webGl:contx});
-var blank$=Math.max(((w$-h$)/2),0);
-var nblank$=Math.max((h$-w$),0);
-var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+let w$=Math.round(document.getElementById('iwid').innerHTML);
+let h$=document.getElementById('ihig').innerHTML;
+let mh$=Math.min(h$,w$);
+let o=[mh$,h$];
+let bcanvas=document.getElementById("bcanvas");
+let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let v=document.getElementById("mv");
+let g=new GPU({canvas:bcanvas,webGl:contx});
+let blank$=Math.max(((w$-h$)/2),0);
+let nblank$=Math.max((h$-w$),0);
+let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 }
@@ -428,13 +428,13 @@ return a+b;
 }
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
-let aveg=(P[0]+P[1]+P[2])/3;
+const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-let favg=((p[3]+this.constants.aVg)/2);
-this.color(p[0],p[1],p[2],1.0-((favg-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-favg))));
+let favg=this.constants.aVg;
+this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-p[3]))));
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
