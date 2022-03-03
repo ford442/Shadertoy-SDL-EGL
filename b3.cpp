@@ -405,20 +405,20 @@ var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
 var lnn=mh$*h$;
-let o=[h$,h$];
+var o=[h$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
 let g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 var avg;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8; 
 }
-let min$=0.0;
-let max$=1.0;
+var min$=0.0;
+var max$=1.0;
 function setMin(a,b){
 return Math.min(a,b);
 }
@@ -428,11 +428,11 @@ return Math.max(a,b);
 function avgg(a,b){
 return a+b;
 }
-let t=g.createKernel(function(v){
+var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=((P[0]+P[1]+P[2])/3);
 return[P[0],P[1],P[2],aveg];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
-let r=g.createKernel(function(f){
+var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-p[3]+this.constants.min))*(1.0/(1.0-p[3]))));}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
@@ -486,7 +486,7 @@ $3.set(t(vv),0);
 // min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 r.setOutput(o);
-let $F=1;
+var $F=1;
 function M(){
 if(T)
 {return;
