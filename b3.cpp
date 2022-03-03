@@ -470,18 +470,18 @@ r(t($8));
 t.setOutput(o);
 $1.set(t(vv),0);
 avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$1.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$1.filter((_,i) => i % 4 == 3));
+max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $2.set(t(vv),0);
 avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$2.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$2.filter((_,i) => i % 4 == 3));
+max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $3.set(t(vv),0);
 avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$3.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$3.filter((_,i) => i % 4 == 3));
+max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 r.setOutput(o);
 let $F=1;
@@ -493,8 +493,8 @@ if($F==8){
 r(t($8));
 $4.set(t(vv),0);
 avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$4.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$4.filter((_,i) => i % 4 == 3));
+max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=1;
 }
@@ -502,8 +502,8 @@ if($F==7){
 r(t($7));
 $3.set(t(vv),0);
 avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$3.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$3.filter((_,i) => i % 4 == 3));
+max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=8;
 }
@@ -511,8 +511,8 @@ if($F==6){
 r(t($6));
 $2.set(t(vv),0);
 avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$2.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$2.filter((_,i) => i % 4 == 3));
+max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=7;
 }
@@ -520,8 +520,8 @@ if($F==5){
 r(t($5));
 $1.set(t(vv),0);
 avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$1.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$1.filter((_,i) => i % 4 == 3));
+max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=6;
 }
@@ -538,8 +538,8 @@ if($F==3){
 r(t($3));
 $7.set(t(vv),0);
 avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$7.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$7.filter((_,i) => i % 4 == 3)); 
+max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=4;
 }
@@ -547,8 +547,8 @@ if($F==2){
 r(t($2));
 $6.set(t(vv),0);
 avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$6.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$6.filter((_,i) => i % 4 == 3));
+max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=3;
 }
@@ -556,8 +556,8 @@ if($F==1){
 r(t($1));
 $5.set(t(vv),0);
 avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=Math.max.apply(null,$5.filter((_,i) => i % 4 == 3));
-min$=Math.min.apply(null,$5.filter((_,i) => i % 4 == 3));
+max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=2;
 }
