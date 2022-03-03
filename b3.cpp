@@ -464,6 +464,7 @@ var $7=new Uint8ClampedArray(W7.buffer,0,l);
 var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
+  avvg();
 $8.set(t(vv),0);
 avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
