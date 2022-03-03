@@ -411,8 +411,8 @@ var v=document.getElementById("mv");
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
-var avg=0.0;
+let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+let avg=0.0;
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 avg=avgs[0];
@@ -435,7 +435,7 @@ return[P[0],P[1],P[2],aveg];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-let favg=((p[3]+aVg)/2);
+let favg=((p[3]+this.constants.aVg)/2);
 this.color(p[0],p[1],p[2],1.0-((favg-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-favg))));
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avg}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
