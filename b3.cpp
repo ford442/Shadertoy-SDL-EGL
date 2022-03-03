@@ -404,7 +404,7 @@ EM_JS(void,ma,(),{
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
-varlet o=[mh$,h$];
+var o=[mh$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var v=document.getElementById("mv");
