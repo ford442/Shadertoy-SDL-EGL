@@ -418,10 +418,16 @@ avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 }
 var min$=0;
 var max$=0;
+function setMin(min){
+min$=min;
+}
+function setMax(max){
+max$=max;
+}
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=((P[0]+P[1]+P[2])/3);
-if(aveg>this.constants.max){this.constants.max=aveg};if(aveg<this.constants.min){this.constants.min=aveg};
+if(aveg>this.constants.max){setMin(aveg)};if(aveg<this.constants.min){setMax(aveg)};
 return[P[0],P[1],P[2],aveg];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,min:min$,max:max$}).setOutput(o);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk];
