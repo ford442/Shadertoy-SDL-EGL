@@ -448,7 +448,7 @@ mh$=Math.min(h$,w$);
 var o=[mh$,h$];
 var l=mh$*h$*4;
 var m=Math.floor((mh$*h$*4)/65536)+1;
-var avgl=mh$*h$*3;
+var avgl=mh$*h$;
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -469,7 +469,7 @@ let T=false;
 let vv=document.getElementById("mv");
   avvg();
 $8.set(t(vv),0);
-avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+avgs[1]=(($1.reduce((a, b) => a + b, 0))/avgl;
 // max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
 avvg();
