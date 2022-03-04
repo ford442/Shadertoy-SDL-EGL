@@ -467,29 +467,29 @@ var $7=new Uint8ClampedArray(W7.buffer,0,l);
 var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-  avvg();
+//   avvg();
 $8.set(t(vv),0);
-avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
+// avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 // max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
 avvg();
 r(t($8));
 t.setOutput(o);
 $1.set(t(vv),0);
-avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
 min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $2.set(t(vv),0);
-avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $3.set(t(vv),0);
-avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 r.setOutput(o);
 let $F=1;
 function M(){
@@ -499,28 +499,28 @@ if(T)
 if($F==8){
 r(t($8));
 $4.set(t(vv),0);
-avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $F=1;
 }
 if($F==7){
 r(t($7));
 $3.set(t(vv),0);
-avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $F=8;
 }
 if($F==6){
 r(t($6));
 $2.set(t(vv),0);
-avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $F=7;
 }
 if($F==5){
@@ -535,36 +535,36 @@ $F=6;
 if($F==4){
 r(t($4));
 $8.set(t(vv),0);
-avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $F=5;
 }
 if($F==3){
 r(t($3));
 $7.set(t(vv),0);
-avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $F=4;
 }
 if($F==2){
 r(t($2));
 $6.set(t(vv),0);
-avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
+// avvg();
 $F=3;
 }
 if($F==1){
 r(t($1));
 $5.set(t(vv),0);
 avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
+max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
+min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=2;
 }
@@ -576,7 +576,6 @@ S();};return()=>{T=true;};}
 })
 
 extern "C" {
-
 void str(){
 strt();
 }
