@@ -415,6 +415,8 @@ var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
   console.log(avgs);
+  console.log(min$);
+  console.log(max$);
 }
 let min$=0.0;
 let max$=1.0;
