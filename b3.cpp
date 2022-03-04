@@ -52,14 +52,14 @@ static GLfloat mX,mY;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
-GLsizei nsources,i;
+GLsizei i;
 GLfloat fps;
 EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,16666666};
+struct timespec req={0,33332000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -70,7 +70,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision mediump float;precision mediump sampler3D;precision mediump sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -105,7 +105,7 @@ return result;
 }
 return NULL;
 }
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **sources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -150,7 +150,7 @@ glUniform1i(uniform_frame,fram);
 
 static void renderFrame(){
 eglSwapBuffers(display,surface);
-t2=steady_clock::now();
+t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
@@ -163,8 +163,12 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 iFrame++;
+}
+
+static void slp(){
+nanosleep(&req,&rem);
 }
 
 static void strt(){
@@ -341,7 +345,7 @@ glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-t1=steady_clock::now();
+t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 void cls_aud(){
@@ -397,58 +401,104 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let w$=document.getElementById('iwid').innerHTML;
+let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=document.getElementById('ihig').innerHTML;
-var mh$=Math.min(h$,w$);
-let o=[h$,h$];
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let mh$=Math.min(h$,w$);
+let o=[mh$,h$];
+let bcanvas=document.getElementById("bcanvas");
+let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let v=document.getElementById("mv");
-const g=new GPU({canvas:bcanvas,webGl:contx});
-var blank$=Math.max(((w$-h$)/2),0);
-var nblank$=Math.max(((h$-w$)/2),0);
-var t=g.createKernel(function(v){
+let g=new GPU({canvas:bcanvas,webGl:contx});
+let blank$=Math.max(((w$-h$)/2),0);
+let nblank$=Math.max((h$-w$),0);
+var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+function avvg(){
+avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
+  console.log(avgs);
+  console.log(min$);
+  console.log(max$);
+}
+let min$=0.0;
+let max$=1.0;
+function setMin(a,b){
+return Math.min(a,b);
+}
+function setMax(a,b){
+return Math.max(a,b);
+}
+function avgg(a,b){
+return a+b;
+}
+let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));return[P[0],P[1],P[2],(aveg)];}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
-var r=g.createKernel(function(f){
+const aveg=(P[0]+P[1]+P[2])/3;
+return[P[0],P[1],P[2],aveg];
+}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-this.color(p[0],p[1],p[2],p[3]);}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
+let favg=this.constants.aVg;
+this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-p[3]))));
+}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
-$w=document.getElementById('iwid').innerHTML;
-$h=document.getElementById('pmhig').innerHTML;
+w$=document.getElementById('iwid').innerHTML;
+h$=document.getElementById('ihig').innerHTML;
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
-o=[h$,h$];
-t.setOutput(o);
-r.setOutput(o);
-var l=mh$*h$*4;var m=(l/65536)+1;m=Math.floor(m);
-let W1=new WebAssembly.Memory({initial:m});
-let W2=new WebAssembly.Memory({initial:m});
-let W3=new WebAssembly.Memory({initial:m});
-let W4=new WebAssembly.Memory({initial:m});
-let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
-let $1=new Uint8ClampedArray(W1.buffer,0,l);
-let $2=new Uint8ClampedArray(W2.buffer,0,l);
-let $3=new Uint8ClampedArray(W3.buffer,0,l);
-let $4=new Uint8ClampedArray(W4.buffer,0,l);
-let $5=new Uint8ClampedArray(W5.buffer,0,l);
-let $6=new Uint8ClampedArray(W6.buffer,0,l);
-let $7=new Uint8ClampedArray(W7.buffer,0,l);
-let $8=new Uint8ClampedArray(W8.buffer,0,l);
+var o=[mh$,h$];
+var l=mh$*h$*4;
+var m=Math.floor((mh$*h$*4)/65536)+1;
+var aam=Math.floor((mh$*h$)/65536)+1;
+var avgl=mh$*h$;
+var A1=new WebAssembly.Memory({initial:aam});
+var A2=new WebAssembly.Memory({initial:aam});
+var W1=new WebAssembly.Memory({initial:m});
+var W2=new WebAssembly.Memory({initial:m});
+var W3=new WebAssembly.Memory({initial:m});
+var W4=new WebAssembly.Memory({initial:m});
+var W5=new WebAssembly.Memory({initial:m});
+var W6=new WebAssembly.Memory({initial:m});
+var W7=new WebAssembly.Memory({initial:m});
+var W8=new WebAssembly.Memory({initial:m});
+var $a1=new Uint8ClampedArray(A1.buffer,0,avgl);
+var $a2=new Uint8ClampedArray(A2.buffer,0,avgl);
+var $1=new Uint8ClampedArray(W1.buffer,0,l);
+var $2=new Uint8ClampedArray(W2.buffer,0,l);
+var $3=new Uint8ClampedArray(W3.buffer,0,l);
+var $4=new Uint8ClampedArray(W4.buffer,0,l);
+var $5=new Uint8ClampedArray(W5.buffer,0,l);
+var $6=new Uint8ClampedArray(W6.buffer,0,l);
+var $7=new Uint8ClampedArray(W7.buffer,0,l);
+var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-
-$8.set(t(vv),0);
-r(t($8));
+//   avvg();
+// $8.set(t(vv),0);
+// avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
+// max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
+// avvg();
+// r(t($8));
+t.setOutput(o);
 $1.set(t(vv),0);
-r(t($8));
+ //    console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
+
+// avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
+// avgs[1]=0.5;
+max$=$1.buffer[55];
+min$=1.0;
+// avvg();
 $2.set(t(vv),0);
-r(t($8));
+// avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $3.set(t(vv),0);
+// avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
+r.setOutput(o);
 let $F=1;
 function M(){
 if(T)
@@ -457,52 +507,92 @@ if(T)
 if($F==8){
 r(t($8));
 $4.set(t(vv),0);
+// avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $F=1;
 }
 if($F==7){
 r(t($7));
 $3.set(t(vv),0);
+// avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $F=8;
 }
 if($F==6){
 r(t($6));
 $2.set(t(vv),0);
+var aveTotal=0;
+for(var il=0;i<avgl;i++){
+aveTotal+=$1.buffer[i+3];
+};
+avgs[1]=aveTotal/avgl;
+  // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $F=7;
 }
 if($F==5){
 r(t($5));
 $1.set(t(vv),0);
+// for(var il=0;i<avgl;i++){
+// $a1[i]=$1[i+3];
+// }
+// avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
+avvg();
 $F=6;
 }
 if($F==4){
 r(t($4));
 $8.set(t(vv),0);
+// avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $F=5;
 }
 if($F==3){
 r(t($3));
 $7.set(t(vv),0);
+// avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $F=4;
 }
 if($F==2){
 r(t($2));
 $6.set(t(vv),0);
+// avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// avvg();
 $F=3;
 }
 if($F==1){
 r(t($1));
 $5.set(t(vv),0);
+// for (
+// avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
+avvg();
 $F=2;
 }
-setTimeout(function(){M();},16.666);}
+setTimeout(function(){M();},33.332);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
-});
+})
 
 extern "C" {
-
 void str(){
 strt();
 }
@@ -511,6 +601,9 @@ plt();
 }
 void b3(){
 ma();
+}
+void nano(){
+slp();
 }}
 
 int main(){
