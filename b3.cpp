@@ -613,4 +613,3 @@ FS.mkdir('/shader');
 });
 return 1;
 }
-
