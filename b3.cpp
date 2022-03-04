@@ -469,7 +469,7 @@ let T=false;
 let vv=document.getElementById("mv");
   avvg();
 $8.set(t(vv),0);
-avgs[1]=(($1.reduce((a, b) => a + b, 0))/avgl;
+avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 // max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
 avvg();
