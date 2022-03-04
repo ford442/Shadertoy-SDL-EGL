@@ -417,7 +417,6 @@ avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
   console.log(avgs);
   console.log(min$);
   console.log(max$);
-   console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
 }
 let min$=0.0;
 let max$=1.0;
@@ -477,6 +476,8 @@ let vv=document.getElementById("mv");
 // r(t($8));
 t.setOutput(o);
 $1.set(t(vv),0);
+     console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
+
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 avgs[1]=0.5;
 max$=$1[0];
