@@ -448,7 +448,10 @@ mh$=Math.min(h$,w$);
 var o=[mh$,h$];
 var l=mh$*h$*4;
 var m=Math.floor((mh$*h$*4)/65536)+1;
+var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
+var A1=new WebAssembly.Memory({initial:aam});
+var A2=new WebAssembly.Memory({initial:aam});
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -457,6 +460,8 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
+var $a1=new Uint8ClampedArray(A1.buffer,0,avgl);
+var $a2=new Uint8ClampedArray(A2.buffer,0,avgl);
 var $1=new Uint8ClampedArray(W1.buffer,0,l);
 var $2=new Uint8ClampedArray(W2.buffer,0,l);
 var $3=new Uint8ClampedArray(W3.buffer,0,l);
@@ -520,7 +525,12 @@ $F=8;
 if($F==6){
 r(t($6));
 $2.set(t(vv),0);
-// avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+var aveTotal=0;
+for(var il=0;i<avgl;i++){
+aveTotal+=$1[i+3];
+}
+avgs[1]=aveTotal/avgl;
+  // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
 // avvg();
@@ -529,9 +539,12 @@ $F=7;
 if($F==5){
 r(t($5));
 $1.set(t(vv),0);
-avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
+// for(var il=0;i<avgl;i++){
+// $a1[i]=$1[i+3];
+// }
+// avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=6;
 }
@@ -565,9 +578,10 @@ $F=3;
 if($F==1){
 r(t($1));
 $5.set(t(vv),0);
-avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
-min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
+for (
+// avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
+// max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
+// min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
 avvg();
 $F=2;
 }
