@@ -470,12 +470,12 @@ var $1=new Uint8ClampedArray(W1,0,l);
 let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
-$1.set([A(vv)],0);
+$1.set(0,[A(vv)]);
         console.log($1[200]);
   },5000);
   
     setTimeout(function(){
-$1.set([B(vv)],0);
+$1.set(0,B(vv));
         console.log($1[200]);
   },5000);
   
