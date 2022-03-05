@@ -462,7 +462,6 @@ var W1=new WebAssembly.Memory({initial:m});
 
 var $1=new Uint8ClampedArray(W1.buffer,0,l);
 
-var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 $1.set([a(vv)],0);
