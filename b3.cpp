@@ -527,7 +527,7 @@ r(t($6));
 $2.set(t(vv),0);
 var aveTotal=0;
 for(var il=0;i<avgl;i++){
-aveTotal+=W1(i+3);
+aveTotal+=W1[i+3];
 };
 avgs[1]=aveTotal/avgl;
   // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
