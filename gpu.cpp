@@ -476,7 +476,8 @@ $1.set(0,[A(vv)]);
   
     setTimeout(function(){
 $1.set(0,B(vv));
-        console.log($1[200]);
+        console.log(W1[200]);
+        console.log(W1);
   },5000);
   
 document.getElementById("di").onclick=function(){
