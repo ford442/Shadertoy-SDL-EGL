@@ -469,22 +469,11 @@ let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
 $1.set(0,A(vv));
-        console.log($1);        console.log(W1);
+        console.log($1);        console.log(new Uint8ClampedArray(W1.buffer,0,l));
 
   },5000);
   
-    setTimeout(function(){
-$1.set(0,[B(vv)]);
-        console.log(W1[0]);
-        console.log(W1);
-  },5000);
-      setTimeout(function(){
 
-  $1.set(0,[55,55]);
-        console.log($1);      
-  console.log(W1);
-
-  },5000);
   
 document.getElementById("di").onclick=function(){
 T=true;
