@@ -471,12 +471,12 @@ let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
 $1.set(A(vv),0);
-        console.log($1.buffer);
+        console.log($1[200]);
   },5000);
   
     setTimeout(function(){
 $1.set([B(vv)],0);
-        console.log($1.buffer);
+        console.log($1[200]);
   },5000);
   
 document.getElementById("di").onclick=function(){
