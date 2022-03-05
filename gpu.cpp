@@ -430,8 +430,6 @@ function avgg(a,b){
 return a+b;
 }
   
-  
-  
 let A=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];
@@ -470,13 +468,13 @@ var $1=new Uint8ClampedArray(W1,0,l);
 let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
-$1.set([0],A(vv));
+$1.set(0,A(vv));
         console.log($1);        console.log(W1);
 
   },5000);
   
     setTimeout(function(){
-$1.set([0],[B(vv)]);
+$1.set(0,[B(vv)]);
         console.log(W1[0]);
         console.log(W1);
   },5000);
