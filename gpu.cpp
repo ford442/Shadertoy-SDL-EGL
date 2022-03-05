@@ -465,9 +465,9 @@ var $1=new Uint8ClampedArray(W1.buffer,0,l);
 var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-$1.set([a(vv],0);
+$1.set([a(vv)],0);
         console.log($1.buffer);
-        }
+        
   
 document.getElementById("di").onclick=function(){
 T=true;
