@@ -434,7 +434,7 @@ return a+b;
   
 let A=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
-return P;
+return[P[0],P[1],P[2]];
 }).setTactic("balanced").setOutput(o);
   
 let B=g.createKernel(function(v){
