@@ -472,8 +472,8 @@ let Fv1=new ArrayBuffer(l);
   
 t.setOutput(o);
   
-  var nn=Array.from([t(vv)]);
-  
+  var nn=t(vv);
+  console.log(nn.toArray());
 // let $1v=new DataView(F1,l);
 
 // $1v.setUint8(l,t(vv));
