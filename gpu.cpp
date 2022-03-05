@@ -472,7 +472,7 @@ let Fv1=new ArrayBuffer(l);
   
 t.setOutput(o);
   
-  var nn=Array.from(t(vv));
+  var nn=Array.from([t(vv)]);
   
 // let $1v=new DataView(F1,l);
 
