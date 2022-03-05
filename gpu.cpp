@@ -405,22 +405,20 @@ let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=document.getElementById('ihig').innerHTML;
 let mh$=Math.min(h$,w$);
 let o=[mh$,h$];
-let lll=mh$*h$;
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-// let v=document.getElementById("mv");
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=Math.max(((w$-h$)/2),0);
 let nblank$=Math.max((h$-w$),0);
-let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
   console.log(avgs);
   console.log(min$);
   console.log(max$);
 }
-let min$=0.0;
-let max$=1.0;
+var min$=0.0;
+var max$=1.0;
 function setMin(a,b){
 return Math.min(a,b);
 }
@@ -430,17 +428,6 @@ return Math.max(a,b);
 function avgg(a,b){
 return a+b;
 }
-  
-let A=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2]];
-}).setTactic("balanced").setOutput([lll]);
-  
-let B=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2]];
-}).setTactic("balanced").setPipeline(true).setOutput(o);
-  
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
@@ -462,21 +449,100 @@ var l=mh$*h$*4;
 var m=Math.floor((mh$*h$*4)/65536)+1;
 var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
-var W1=new WebAssembly.Memory({initial:m});
-var $1=new Uint8ClampedArray(W1,0,l);
+let W1=new WebAssembly.Memory({initial:m});
+let W2=new WebAssembly.Memory({initial:m});
+let W3=new WebAssembly.Memory({initial:m});
+let W4=new WebAssembly.Memory({initial:m});
+let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
+let $1=new Uint8ClampedArray(W1,0,l);
+let $1v=new DataView(W1.buffer);
+let $2=new Uint8ClampedArray(W2.buffer,0,l);
+let $3=new Uint8ClampedArray(W3.buffer,0,l);
+let $4=new Uint8ClampedArray(W4.buffer,0,l);
+let $5=new Uint8ClampedArray(W5.buffer,0,l);
+let $6=new Uint8ClampedArray(W6.buffer,0,l);
+let $7=new Uint8ClampedArray(W7.buffer,0,l);
+let $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-setTimeout(function(){
-$1.set(A(vv),0);
-console.log($1);       
-console.log(new Uint8ClampedArray(W1.buffer,0,l));
-},5000);
-  setTimeout(function(){
-$1.set([B(vv).toArray()],0);
-console.log($1);       
-console.log(new Uint8ClampedArray(W1.buffer,0,l));
-},5000);
-  
+
+t.setOutput(o);
+  var testFr=t(vv).toArray();
+$1.set(t(vv),0);
+ 
+max$=$1[22];
+min$=$1[40];
+  let normalArray = Array.from($1);
+console.log(normalArray);
+
+$2.set(0,t(vv));
+
+$3.set(0,t(vv));
+
+r.setOutput(o);
+let $F=1;
+function M(){
+if(T)
+{return;
+}
+if($F==8){
+r(t($8));
+$4.set(0,t(vv));
+
+$F=1;
+}
+if($F==7){
+r(t($7));
+$3.set(0,t(vv));
+
+$F=8;
+}
+if($F==6){
+r(t($6));
+$2.set(0,t(vv));
+var aveTotal=0;
+for(var il=0;i<avgl;i++){
+aveTotal=aveTotal+$1[i+3].buffer;
+}
+avgs[1]=aveTotal/avgl;
+
+$F=7;
+}
+if($F==5){
+r(t($5));
+$1.set([t(vv)],0);
+avvg();
+$F=6;
+}
+if($F==4){
+r(t($4));
+$8.set(0,t(vv));
+
+$F=5;
+}
+if($F==3){
+r(t($3));
+$7.set(0,t(vv));
+
+$F=4;
+}  console.log(W1); console.log($1);
+
+if($F==2){
+r(t($2));
+$6.set(0,t(vv));
+$F=3;
+}
+if($F==1){
+r(t($1));
+$5.set(0,t(vv));
+avvg();
+$F=2;
+}
+setTimeout(function(){M();},33.332);}
+M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
