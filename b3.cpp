@@ -488,6 +488,7 @@ $1.set(t(vv),0);
 // avgs[1]=0.5;
 max$=$1v[22];
 min$=$1v[22];
+  console.log($1v.getUint8(22));
 // avvg();
 $2.set(t(vv),0);
 // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
