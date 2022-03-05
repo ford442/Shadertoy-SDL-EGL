@@ -486,7 +486,6 @@ max$=$1[22];
 min$=$1[40];
   let normalArray = Array.from($1);
 
-  console.log(W1.buffer);
 //  console.log($1.getUint8(22));
 //  console.log(W1.getUint8(22));
 // avvg();
@@ -567,7 +566,8 @@ $7.set([t(vv)],0);
 // min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
 // avvg();
 $F=4;
-}
+}  console.log(W1.buffer);
+
 if($F==2){
 r(t($2));
 $6.set([t(vv)],0);
