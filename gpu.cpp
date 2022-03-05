@@ -463,7 +463,7 @@ var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
 var W1=new WebAssembly.Memory({initial:m});
 
-var $1=new Uint8ClampedArray(W1,0,l);
+var $1=new Uint8ClampedArray(W1.buffer,0,l);
 
 let T=false;
 let vv=document.getElementById("mv");
