@@ -477,7 +477,7 @@ let vv=document.getElementById("mv");
 // avvg();
 // r(t($8));
 t.setOutput(o);
-$1.set([t(vv)],0);
+$1v.setuint8(0,[t(vv)]);
  //    console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
 
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
