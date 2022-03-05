@@ -485,7 +485,7 @@ $1.set(t(vv),0);
 
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 // avgs[1]=0.5;
-max$=W1.[22];
+max$=W1[22];
 min$=W1.buffer[22];
 // avvg();
 $2.set(t(vv),0);
