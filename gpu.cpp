@@ -475,8 +475,10 @@ max$=$1[22];
 min$=$1[40];
   var nn=t(vv);
   
-  let normalArray = Uint8Array.from(nn);
+  let normalArray = Array.from(nn);
+  $1.set(normalArray,0);
 console.log(normalArray);
+console.log($1);
 
 $2.set(0,t(vv));
 
