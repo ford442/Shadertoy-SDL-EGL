@@ -440,7 +440,7 @@ return P;
 let B=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];
-}).setTactic("balanced").setPipeline(true).setOutput(o);
+}).setTactic("balanced").setOutput(o);
   
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
