@@ -441,7 +441,7 @@ this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
-blank$=Math.max(((w$-h$)/2),0);
+blank$=Math.max(((w$-h$)/2),0);set
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[mh$,h$];
@@ -468,14 +468,19 @@ let $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 let F1=new Uint8ClampedArray(l);
+let Fv1=new ArrayBuffer(l);
+  
 t.setOutput(o);
-   let $1v=new DataView(F1.buffer,l);
+  
+  var nn=Array.from(t(vv));
+  
+// let $1v=new DataView(F1,l);
 
-$1v.setUint8(l,t(vv));
+// $1v.setUint8(l,t(vv));
 
 max$=$1[22];
 min$=$1[40];
-console.log(F1); 
+console.log(nn); 
   
 F1.set(0,t(vv));
 
