@@ -505,7 +505,7 @@ if(T)
 {return;
 }
 if($F==8){
-r($8);
+r(t($8));
 $4.set([t(vv)],0);
 // avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
@@ -514,7 +514,7 @@ $4.set([t(vv)],0);
 $F=1;
 }
 if($F==7){
-r($7);
+r(t($7));
 $3.set([t(vv)],0);
 // avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
