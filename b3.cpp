@@ -463,7 +463,7 @@ let W8=new WebAssembly.Memory({initial:m});
 let $a1=new Uint8ClampedArray(A1.buffer,0,avgl);
 let $a2=new Uint8ClampedArray(A2.buffer,0,avgl);
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
-let $1v=new DataView(W1.buffer);
+let $1v=new DataView(W1);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
@@ -492,12 +492,12 @@ min$=$1[40];
 //  console.log($1.getUint8(22));
 //  console.log(W1.getUint8(22));
 // avvg();
-$2.set(t(vv),0);
+$2.set([t(vv)],0);
 // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
 // avvg();
-$3.set(t(vv),0);
+$3.set([t(vv)],0);
 // avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
@@ -510,7 +510,7 @@ if(T)
 }
 if($F==8){
 r(t($8));
-$4.set(t(vv),0);
+$4.set([t(vv)],0);
 // avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
@@ -519,7 +519,7 @@ $F=1;
 }
 if($F==7){
 r(t($7));
-$3.set(t(vv),0);
+$3.set([t(vv)],0);
 // avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
@@ -528,7 +528,7 @@ $F=8;
 }
 if($F==6){
 r(t($6));
-$2.set(t(vv),0);
+$2.set([t(vv)],0);
 var aveTotal=0;
 for(var il=0;i<avgl;i++){
 aveTotal=aveTotal+$1[i+3].buffer;
@@ -554,7 +554,7 @@ $F=6;
 }
 if($F==4){
 r(t($4));
-$8.set(t(vv),0);
+$8.set([t(vv)],0);
 // avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
@@ -563,7 +563,7 @@ $F=5;
 }
 if($F==3){
 r(t($3));
-$7.set(t(vv),0);
+$7.set([t(vv)],0);
 // avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
@@ -572,7 +572,7 @@ $F=4;
 }
 if($F==2){
 r(t($2));
-$6.set(t(vv),0);
+$6.set([t(vv)],0);
 // avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
 // min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
