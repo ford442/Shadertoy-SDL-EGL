@@ -471,7 +471,7 @@ let vv=document.getElementById("mv");
 
 t.setOutput(o);
   var testFr=t(vv).toArray();
-$1.set(t(vv),0);
+$1.set([t(vv)],0);
  
 max$=$1[22];
 min$=$1[40];
