@@ -476,7 +476,7 @@ min$=$1[40];
   var nn=t(vv);
   
   let normalArray =nn.toArray();
-  $1.set(normalArray,0);
+  $1.set(new Uint8Array.from(normalArray),0);
 console.log(normalArray);
 console.log($1);
 
