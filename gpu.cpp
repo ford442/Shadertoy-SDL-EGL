@@ -476,7 +476,7 @@ max$=$1[22];
 min$=$1[40];
   let normalArray = Array.from($1);
 console.log(normalArray);
-
+console.log(W1); console.log($1);
 $2.set(0,t(vv));
 
 $3.set(0,t(vv));
@@ -527,7 +527,7 @@ r(t($3));
 $7.set(0,t(vv));
 
 $F=4;
-}  console.log(W1); console.log($1);
+}  
 
 if($F==2){
 r(t($2));
