@@ -1,8 +1,6 @@
 
 var sound,loadV,mil,sfr,slo,tsl,tem,dat,datb,a,ss,$hg,slt,$ll,$h,wi,adr,hi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong,songSrc;
 
-document.getElementById("mv").load();
-document.getElementById("ldv").load();
 var $sngs=[];
 var $vids=[];
 var $shds=[];
@@ -80,6 +78,9 @@ function scanShaders(){
 scanShaders();
 scanVideos();
 scanSongs();
+
+document.getElementById("mv").load();
+document.getElementById("ldv").load();
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
