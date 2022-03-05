@@ -463,6 +463,7 @@ var W8=new WebAssembly.Memory({initial:m});
 var $a1=new Uint8ClampedArray(A1.buffer,0,avgl);
 var $a2=new Uint8ClampedArray(A2.buffer,0,avgl);
 var $1=new Uint8ClampedArray(W1.buffer,0,l);
+  var $1v=new DataView(W1.buffer);
 var $2=new Uint8ClampedArray(W2.buffer,0,l);
 var $3=new Uint8ClampedArray(W3.buffer,0,l);
 var $4=new Uint8ClampedArray(W4.buffer,0,l);
@@ -485,8 +486,8 @@ $1.set(t(vv),0);
 
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 // avgs[1]=0.5;
-max$=$1[22].buffer;
-min$=$1[22].buffer;
+max$=$1v[22].buffer;
+min$=$1v[22];
 // avvg();
 $2.set(t(vv),0);
 // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
