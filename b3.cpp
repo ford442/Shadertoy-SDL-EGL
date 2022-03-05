@@ -418,7 +418,7 @@ avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
   console.log(min$);
   console.log(max$);
 }
-let min$=0.0;
+var min$=0.0;
 let max$=1.0;
 function setMin(a,b){
 return Math.min(a,b);
@@ -486,7 +486,7 @@ $1.set(t(vv),0);
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 // avgs[1]=0.5;
 max$=W1[22];
-min$=W1.buffer[22];
+min$=W1[22];
 // avvg();
 $2.set(t(vv),0);
 // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
@@ -527,7 +527,7 @@ r(t($6));
 $2.set(t(vv),0);
 var aveTotal=0;
 for(var il=0;i<avgl;i++){
-aveTotal+=W1[i+3];
+aveTotal=aveTotal+W1[i+3];
 };
 avgs[1]=aveTotal/avgl;
   // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
