@@ -432,7 +432,7 @@ let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
-}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+}).setTactic("balanced").setPipeline(false).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 let favg=this.constants.aVg;
@@ -441,7 +441,7 @@ this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
-blank$=Math.max(((w$-h$)/2),0);set
+blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[mh$,h$];
@@ -458,6 +458,7 @@ let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
+let $1v=new DataView(W1.buffer);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
@@ -467,22 +468,17 @@ let $7=new Uint8ClampedArray(W7.buffer,0,l);
 let $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-let F1=new Uint8ClampedArray(l);
-let Fv1=new ArrayBuffer(l);
-  
+
 t.setOutput(o);
-  
-  var nn=t(vv);
-  console.log(nn.toArray());
-// let $1v=new DataView(F1,l);
-
-// $1v.setUint8(l,t(vv));
-
+ 
 max$=$1[22];
 min$=$1[40];
-console.log(nn); 
+  var nn=t(vv);
   
-F1.set(0,t(vv));
+  let normalArray = Array.from(nn);
+console.log(normalArray);
+
+$2.set(0,t(vv));
 
 $3.set(0,t(vv));
 
