@@ -488,7 +488,7 @@ $1.set([0],[B(vv)]);
 
   },5000);
   
-$1.set(0,55);
+$1.set(0,[55]);
         console.log(W1[0]);
         console.log(W1);
   
