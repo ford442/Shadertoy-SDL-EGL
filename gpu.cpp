@@ -463,19 +463,19 @@ var m=Math.floor((mh$*h$*4)/65536)+1;
 var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
 var W1=new WebAssembly.Memory({initial:m});
-
 var $1=new Uint8ClampedArray(W1.buffer,0,l);
-
 let T=false;
 let vv=document.getElementById("mv");
-  setTimeout(function(){
+setTimeout(function(){
 $1.set(0,A(vv));
-        console.log($1);       
-    console.log(new Uint8ClampedArray(W1.buffer,0,l));
-
-  },5000);
-  
-
+console.log($1);       
+console.log(new Uint8ClampedArray(W1.buffer,0,l));
+},5000);
+  setTimeout(function(){
+$1.set(0,B(vv).toArray());
+console.log($1);       
+console.log(new Uint8ClampedArray(W1.buffer,0,l));
+},5000);
   
 document.getElementById("di").onclick=function(){
 T=true;
