@@ -435,8 +435,7 @@ return a+b;
 let A=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];
-}).setTactic("balanced").setGraphical(true).setOutput(o);
-  
+}).setTactic("balanced").setOutput(o);
   
 let B=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
@@ -472,6 +471,11 @@ let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
 $1.set([A(vv)],0);
+        console.log($1.buffer);
+  },5000);
+  
+    setTimeout(function(){
+$1.set([B(vv)],0);
         console.log($1.buffer);
   },5000);
   
