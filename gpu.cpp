@@ -405,9 +405,10 @@ let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=document.getElementById('ihig').innerHTML;
 let mh$=Math.min(h$,w$);
 let o=[mh$,h$];
+  let lll=mh$*h$;
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let v=document.getElementById("mv");
+// let v=document.getElementById("mv");
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=Math.max(((w$-h$)/2),0);
 let nblank$=Math.max((h$-w$),0);
@@ -433,12 +434,12 @@ return a+b;
 let A=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];
-}).setTactic("balanced").setOutput(o);
+}).setTactic("balanced").setOutput([lll]);
   
 let B=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2]];
-}).setTactic("balanced").setOutput(o);
+}).setTactic("balanced").setPipeline(true).setOutput(o);
   
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
@@ -469,7 +470,8 @@ let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
 $1.set(0,A(vv));
-        console.log($1);        console.log(new Uint8ClampedArray(W1.buffer,0,l));
+        console.log($1);       
+    console.log(new Uint8ClampedArray(W1.buffer,0,l));
 
   },5000);
   
