@@ -481,7 +481,7 @@ let vv=document.getElementById("mv");
 // avvg();
 // r(t($8));
 t.setOutput(o);
-$1.set(t(vv),0);
+$1.set([t(vv)],0);
  //    console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
 
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
@@ -542,7 +542,7 @@ $F=7;
 }
 if($F==5){
 r(t($5));
-$1.set(t(vv),0);
+$1.set([t(vv)],0);
 // for(var il=0;i<avgl;i++){
 // $a1[i]=$1[i+3];
 // }
@@ -581,7 +581,7 @@ $F=3;
 }
 if($F==1){
 r(t($1));
-$5.set(t(vv),0);
+$5.set([t(vv)],0);
 // for (
 // avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
 // max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
