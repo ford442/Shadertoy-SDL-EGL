@@ -464,9 +464,10 @@ var $1=new Uint8ClampedArray(W1.buffer,0,l);
 
 let T=false;
 let vv=document.getElementById("mv");
+  setTimeout(function(){
 $1.set([A(vv)],0);
         console.log($1.buffer);
-        
+  },5000);
   
 document.getElementById("di").onclick=function(){
 T=true;
