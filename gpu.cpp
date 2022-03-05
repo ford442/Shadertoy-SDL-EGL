@@ -488,10 +488,6 @@ $1.set([0],[B(vv)]);
 
   },5000);
   
-$1.set(0,[55]);
-        console.log(W1[0]);
-        console.log(W1);
-  
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
