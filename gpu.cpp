@@ -475,7 +475,7 @@ max$=$1[22];
 min$=$1[40];
   var nn=t(vv);
   
-  let normalArray = Array.from(nn);
+  let normalArray =nn.toArray();
   $1.set(normalArray,0);
 console.log(normalArray);
 console.log($1);
