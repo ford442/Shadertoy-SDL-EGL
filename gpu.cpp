@@ -472,10 +472,11 @@ t.setOutput(o);
 
   var nn=t(vv);
   var nnt=nn.toArray();
-  $1.set(nnt,0);
-// console.log(normalArray);
+  var nnnt=new Uint8Array(nnt);
+  $1.set(nnnt,0);
 console.log($1);
-  
+  console.log(nnnt);
+
 max$=$1[22];
 min$=$1[40];
   
