@@ -470,7 +470,7 @@ let T=false;
 let vv=document.getElementById("mv");
 
 t.setOutput(o);
-$1v.setUint8(l,t(vv));
+$1v.setUint8(t(vv),0);
  
 max$=$1[22];
 min$=$1[40];
