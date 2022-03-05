@@ -476,7 +476,7 @@ $1.set(0,[A(vv)]);
   },5000);
   
     setTimeout(function(){
-$1.set(0,B(vv));
+$1.set(0,[B(vv)]);
         console.log(W1[0]);
         console.log(W1);
   },5000);
@@ -486,7 +486,7 @@ $1.set(0,B(vv));
 
   },5000);
   
-$1.set(0,55);
+$1.set(0,[55]);
         console.log(W1[0]);
         console.log(W1);
   
