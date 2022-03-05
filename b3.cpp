@@ -485,8 +485,8 @@ $1.set(t(vv),0);
 
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
 // avgs[1]=0.5;
-max$=W1[22];
-min$=W1[22];
+max$=$1[22];
+min$=$1.buffer[22];
 // avvg();
 $2.set(t(vv),0);
 // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
@@ -527,7 +527,7 @@ r(t($6));
 $2.set(t(vv),0);
 var aveTotal=0;
 for(var il=0;i<avgl;i++){
-aveTotal=aveTotal+W1[i+3];
+aveTotal=aveTotal+$1[i+3];
 };
 avgs[1]=aveTotal/avgl;
   // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
