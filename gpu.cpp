@@ -471,7 +471,8 @@ let T=false;
 let vv=document.getElementById("mv");
   setTimeout(function(){
 $1.set(0,[A(vv)]);
-        console.log($1[200]);
+        console.log($1[200]);        console.log(W1);
+
   },5000);
   
     setTimeout(function(){
