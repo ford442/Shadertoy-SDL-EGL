@@ -458,7 +458,7 @@ let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
-let $1v=new DataView(W1);
+let $1v=new DataView(W1.buffer);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
@@ -470,7 +470,7 @@ let T=false;
 let vv=document.getElementById("mv");
 
 t.setOutput(o);
-$1v.setUint8(t(vv),0);
+$1v.setUint8(l,t(vv));
  
 max$=$1[22];
 min$=$1[40];
