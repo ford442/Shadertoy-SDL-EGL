@@ -432,7 +432,7 @@ let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
-}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 let favg=this.constants.aVg;
@@ -476,7 +476,8 @@ let vv=document.getElementById("mv");
 // avvg();
 // r(t($8));
 t.setOutput(o);
-$1.set([t(vv)],0);
+  
+$1.set([t(vv).toArray()],0);
  //    console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
 
 // avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
@@ -484,7 +485,7 @@ $1.set([t(vv)],0);
 max$=$1[22];
 min$=$1[40];
   let normalArray = Array.from($1);
-
+console.log(normalArray);
 //  console.log($1.getUint8(22));
 //  console.log(W1.getUint8(22));
 // avvg();
