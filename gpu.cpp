@@ -458,7 +458,6 @@ let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
-let $1v=new DataView(W1.buffer);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
 let $4=new Uint8ClampedArray(W4.buffer,0,l);
@@ -470,15 +469,16 @@ let T=false;
 let vv=document.getElementById("mv");
 
 t.setOutput(o);
- 
-max$=$1[22];
-min$=$1[40];
+
   var nn=t(vv);
-  var nnt=new Uint8Array(nn.toArray());
+  var nnt=nn.toArray();
   $1.set(nnt,0);
 // console.log(normalArray);
 console.log($1);
-
+  
+max$=$1[22];
+min$=$1[40];
+  
 $2.set(0,t(vv));
 
 $3.set(0,t(vv));
