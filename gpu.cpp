@@ -429,6 +429,14 @@ return Math.max(a,b);
 function avgg(a,b){
 return a+b;
 }
+  
+  
+  
+let A=g.createKernel(function(v){
+const P=v[this.thread.y][this.thread.x];
+return[P[0],P[1],P[2]];
+}).setTactic("balanced").setOutput(o);
+  
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
@@ -450,143 +458,17 @@ var l=mh$*h$*4;
 var m=Math.floor((mh$*h$*4)/65536)+1;
 var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
-var A1=new WebAssembly.Memory({initial:aam});
-var A2=new WebAssembly.Memory({initial:aam});
 var W1=new WebAssembly.Memory({initial:m});
-var W2=new WebAssembly.Memory({initial:m});
-var W3=new WebAssembly.Memory({initial:m});
-var W4=new WebAssembly.Memory({initial:m});
-var W5=new WebAssembly.Memory({initial:m});
-var W6=new WebAssembly.Memory({initial:m});
-var W7=new WebAssembly.Memory({initial:m});
-var W8=new WebAssembly.Memory({initial:m});
-var $a1=new Uint8ClampedArray(A1.buffer,0,avgl);
-var $a2=new Uint8ClampedArray(A2.buffer,0,avgl);
+
 var $1=new Uint8ClampedArray(W1.buffer,0,l);
-var $2=new Uint8ClampedArray(W2.buffer,0,l);
-var $3=new Uint8ClampedArray(W3.buffer,0,l);
-var $4=new Uint8ClampedArray(W4.buffer,0,l);
-var $5=new Uint8ClampedArray(W5.buffer,0,l);
-var $6=new Uint8ClampedArray(W6.buffer,0,l);
-var $7=new Uint8ClampedArray(W7.buffer,0,l);
+
 var $8=new Uint8ClampedArray(W8.buffer,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-//   avvg();
-// $8.set(t(vv),0);
-// avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
-// max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin)
-// avvg();
-// r(t($8));
-t.setOutput(o);
-$1.set(t(vv),0);
- //    console.log(($1.filter((_,i) => i % 4 == 3)).reduce(setMin));
-
-// avgs[1]=($1.reduce((a, b) => a + b, 0))/avgl;
-// avgs[1]=0.5;
-max$=$1.get[55];
-min$=1.0;
-// avvg();
-$2.set(t(vv),0);
-// avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$3.set(t(vv),0);
-// avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-r.setOutput(o);
-let $F=1;
-function M(){
-if(T)
-{return;
-}
-if($F==8){
-r(t($8));
-$4.set(t(vv),0);
-// avgs[4]=($4.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($4.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($4.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$F=1;
-}
-if($F==7){
-r(t($7));
-$3.set(t(vv),0);
-// avgs[3]=($3.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($3.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($3.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$F=8;
-}
-if($F==6){
-r(t($6));
-$2.set(t(vv),0);
-var aveTotal=0;
-for(var il=0;i<avgl;il++){
-aveTotal+=$1.get(il+3);
-};
-avgs[1]=aveTotal/avgl;
-  // avgs[2]=($2.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($2.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($2.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$F=7;
-}
-if($F==5){
-r(t($5));
-$1.set(t(vv),0);
-// for(var il=0;i<avgl;i++){
-// $a1[i]=$1[i+3];
-// }
-// avgs[1]=($1.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($1.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($1.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
-$F=6;
-}
-if($F==4){
-r(t($4));
-$8.set(t(vv),0);
-// avgs[8]=($8.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($8.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($8.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$F=5;
-}
-if($F==3){
-r(t($3));
-$7.set(t(vv),0);
-// avgs[7]=($7.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($7.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$F=4;
-}
-if($F==2){
-r(t($2));
-$6.set(t(vv),0);
-// avgs[6]=($6.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($6.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($6.filter((_,i) => i % 4 == 3)).reduce(setMin);
-// avvg();
-$F=3;
-}
-if($F==1){
-r(t($1));
-$5.set(t(vv),0);
-// for (
-// avgs[5]=($5.filter((_,i) => i % 4 == 3)).reduce(avgg)/(l/4);
-// max$=($5.filter((_,i) => i % 4 == 3)).reduce(setMax);
-// min$=($5.filter((_,i) => i % 4 == 3)).reduce(setMin);
-avvg();
-$F=2;
-}
-setTimeout(function(){M();},33.332);}
-M();
+$1.set([a(vv],0);
+        console.log($1.buffer);
+        }
+  
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
