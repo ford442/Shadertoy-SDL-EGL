@@ -405,7 +405,7 @@ let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=document.getElementById('ihig').innerHTML;
 let mh$=Math.min(h$,w$);
 let o=[mh$,h$];
-  let lll=mh$*h$;
+let lll=mh$*h$;
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 // let v=document.getElementById("mv");
@@ -463,16 +463,16 @@ var m=Math.floor((mh$*h$*4)/65536)+1;
 var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
 var W1=new WebAssembly.Memory({initial:m});
-var $1=new Uint8ClampedArray(W1.buffer,0,l);
+var $1=new Uint8ClampedArray(W1,0,l);
 let T=false;
 let vv=document.getElementById("mv");
 setTimeout(function(){
-$1.set(0,A(vv));
+$1.set(A(vv),0);
 console.log($1);       
 console.log(new Uint8ClampedArray(W1.buffer,0,l));
 },5000);
   setTimeout(function(){
-$1.set(0,B(vv).toArray());
+$1.set([B(vv).toArray()],0);
 console.log($1);       
 console.log(new Uint8ClampedArray(W1.buffer,0,l));
 },5000);
