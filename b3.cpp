@@ -407,7 +407,6 @@ let mh$=Math.min(h$,w$);
 let o=[mh$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let v=document.getElementById("mv");
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=Math.max(((w$-h$)/2),0);
 let nblank$=Math.max((h$-w$),0);
