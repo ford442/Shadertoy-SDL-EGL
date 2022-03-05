@@ -566,7 +566,7 @@ $7.set([t(vv)],0);
 // min$=($7.filter((_,i) => i % 4 == 3)).reduce(setMin);
 // avvg();
 $F=4;
-}  console.log(W1.buffer);
+}  console.log(W1); console.log($1);
 
 if($F==2){
 r(t($2));
