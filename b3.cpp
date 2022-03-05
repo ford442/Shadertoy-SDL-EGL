@@ -488,7 +488,9 @@ $1.set([t(vv)],0);
 // avgs[1]=0.5;
 max$=$1[22];
 min$=$1[40];
-  console.log($1v.getUint8(64));
+  let normalArray = Array.from($1);
+
+  console.log(normalArray[55]);
 //  console.log($1.getUint8(22));
 //  console.log(W1.getUint8(22));
 // avvg();
