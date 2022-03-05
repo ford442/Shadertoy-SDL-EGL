@@ -469,7 +469,7 @@ let T=false;
 let vv=document.getElementById("mv");
 let F1=new Uint8ClampedArray(l);
 t.setOutput(o);
-   let $1v=new DataView(F1.buffer);
+   let $1v=new DataView(F1.buffer,l);
 
 $1v.setUint8(l,t(vv));
 
