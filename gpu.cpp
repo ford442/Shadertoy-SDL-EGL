@@ -474,12 +474,11 @@ t.setOutput(o);
 var nn=t(vv);
 var normalArray=nn.toArray();
   var unin=new Float32Array(normalArray);
-  console.log(normalArray.length);
+  console.log(normalArray.byteLength);
   console.log($T.length);
-  console.log(WT.byteLength);
+  console.log($T.byteLength);
     console.log($1.length);
-    console.log($T2.length);
-    console.log($T2.byteLength);
+    console.log($1.byteLength);
 
 $T.set(normalArray,0);
 console.log("normal");
