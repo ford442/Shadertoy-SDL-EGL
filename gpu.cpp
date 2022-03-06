@@ -474,10 +474,18 @@ max$=$1[22];
 min$=$1[40];
   var nn=t(vv);
   
-  let normalArray =nn.toArray();
+  var normalArray =nn.toArray();
   $1.set(555,44);
+  
+  console.log("normal");
 console.log(normalArray[44]);
-console.log($1[44]);
+    console.log("wasm");
+
+console.log($1[555]);
+var clone = [].concat(t(vv));
+    console.log("clone");
+
+console.log(clone);
 
 $2.set(0,t(vv));
 
