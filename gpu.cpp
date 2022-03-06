@@ -472,7 +472,7 @@ t.setOutput(o);
 
 var nn=t(vv);
 var normalArray=nn.toArray();
-  var unin=new Float32Array(normalArray);
+  var unin=new Float32Array(normalArray,0,avgl);
   console.log(normalArray.byteLength);
   console.log($T.length);
   console.log($T.byteLength);
@@ -481,7 +481,8 @@ var normalArray=nn.toArray();
 
 $T.set(new Float32Array(t(vv)),0,avgl);
 console.log("normal");
-console.log(new Float32Array(normalArray),0,avgl);
+console.log(new Float32Array(normalArray));
+console.log(normalArray.buffer);
 console.log("normal f32");
 console.log(new Float32Array(unin),0,avgl);
 console.log("wasm");
