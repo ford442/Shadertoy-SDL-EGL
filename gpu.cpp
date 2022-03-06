@@ -429,8 +429,8 @@ function avgg(a,b){
 return a+b;
 }
   
-let B=g.createKernel(function(v){
-return v[this.thread.y][this.thread.x];
+let B=g.createKernel(function(tv){
+return tv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setDynamicOutput(true).setOutput(o);
   
 let t=g.createKernel(function(v){
