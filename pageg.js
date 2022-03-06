@@ -140,7 +140,7 @@ document.getElementById("wid").innerHTML=wi;
 hii=Math.round(window.innerHeight);
 document.getElementById("ihid").innerHTML=hii;
 r$=(hii/he)*1000;r$=Math.round(r$);r$=r$/1000;
-$w=Math.round(wi*r$);
+$w=Math.round(wi/r$);
 dat=document.getElementById("ihid");
 datb=document.getElementById("ihig");
 $hg=hii+"px";
