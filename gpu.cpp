@@ -461,6 +461,7 @@ var l=h$*h$*16;
 var m=Math.ceil(l/65536)+1;
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
+  var  WW=new ArrayBuffer(l);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -471,6 +472,7 @@ var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
 var $T=new Float32Array(WT.buffer,0,l/16);
 var $T2=new Float32Array(WT2,l/16);
+  var $TT=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,l/16);
 var $2=new Float32Array(W2.buffer,0,l/16);
 var $3=new Float32Array(W3.buffer,0,l/16);
@@ -487,14 +489,14 @@ R.setOutput(o);
   console.log($T.length);
   console.log($T.byteLength);
     console.log($1.length);
-    console.log($1.byteLength);   
-  var ffg=t(vv);
-  $T.set(ffg);
+    console.log($1.byteLength); 
+  var ffg=t(vv).toArray();
+  $TT.set(ffg);
 console.log("wasm");
-console.log($T);
+console.log($TT);
 
 console.log("wasm 2");
-  $T2.set(ffg);
+  $T2.set($TT);
 
 console.log($T2);
   
