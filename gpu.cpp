@@ -446,7 +446,7 @@ nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[h$,h$];
 var l=h$*h$*4;
-var m=Math.round((h$*h$*4)/65536)+1;
+var m=((Math.ceil(h$*h$)/4)*4)/65536)+1;
 var avgl=Math.ceil((h$*h$)/4)*4;
 var WT=new WebAssembly.Memory({initial:m});
 var W1=new WebAssembly.Memory({initial:m});
@@ -493,7 +493,7 @@ console.log($T);
 console.log("wasm T2");
   $T2.set(t(vv),0);
 console.log($T2);
-$2.set(t(vv));
+$2.set(t(vv),0);
 
 $3.set(t(vv));
 
