@@ -457,21 +457,21 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT.buffer,0,avgl);
-var $1=new Float32Array(W1.buffer,0,avgl);
-var $2=new Float32Array(W2,0,l/4);
-var $3=new Float32Array(W3,0,l/4);
-var $4=new Float32Array(W4,0,l/4);
-var $5=new Float32Array(W5,0,l/4);
-var $6=new Float32Array(W6,0,l/4);
-var $7=new Float32Array(W7,0,l/4);
-var $8=new Float32Array(W8,0,l/4);
+var $T=new Float32Array(WT,0,avgl);
+var $1=new Float32Array(W1);
+var $2=new Float32Array(W2,0,avgl);
+var $3=new Float32Array(W3,0,avgl);
+var $4=new Float32Array(W4,0,avgl);
+var $5=new Float32Array(W5,0,avgl);
+var $6=new Float32Array(W6,0,avgl);
+var $7=new Float32Array(W7,0,avgl);
+var $8=new Float32Array(W8,0,avgl);
 var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
 
 var nn=t(vv);
-var normalArray=nn.toArray();
+var normalArray=Array.from(nn);
   var unin=new Float32Array(normalArray);
   console.log(normalArray.byteLength);
   console.log($T.length);
@@ -479,23 +479,20 @@ var normalArray=nn.toArray();
     console.log($1.length);
     console.log($1.byteLength);
 
-$T.set(t(vv));
+$T.set(nn);
 console.log("normal");
 console.log(normalArray);
 console.log(normalArray.buffer);
 console.log("normal f32");
-console.log(new Float32Array(unin));
+console.log(new Float32Array(normalArray));
 console.log("wasm");
 console.log($T);
-// console.log("wasm f32");
-// $T.set(new Float32Array(unin));
-// console.log($T);
   
 console.log("wasm f32 with l");
-$T.set(new Float32Array(unin),0,avgl);
+$T.set(new Float32Array(normalArray));
 console.log($T);
+  
 $2.set(t(vv));
-
 $3.set(t(vv));
 
 r.setOutput(o);
