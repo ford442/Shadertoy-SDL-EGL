@@ -469,16 +469,16 @@ let T=false;
 let vv=document.getElementById("mv");
 
 t.setOutput(o);
-
-  var nn=t(vv);
-  var nnt=nn.toArray();
-  var nnnt=new Uint8Array(nnt.slice());
-  $1.set(nnnt.slice(),0);
-console.log($1);
-  console.log(nnnt);
-
+ 
 max$=$1[22];
 min$=$1[40];
+  var nn=t(vv);
+  
+  let normalArray =nn.toArray();
+  $1.set(normalArray.slice(),0);
+console.log(normalArray[44]);
+console.log($1[44]);
+
 $2.set(0,t(vv));
 
 $3.set(0,t(vv));
