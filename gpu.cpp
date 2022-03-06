@@ -449,7 +449,7 @@ var l=mh$*h$*4;
 var m=Math.floor((mh$*h$*4)/65536)+1;
 var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
-let WT=new WebAssembly.Memory({initial:m});
+let WT=new WebAssembly.Memory({initial:aam});
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -458,7 +458,7 @@ let W5=new WebAssembly.Memory({initial:m});
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
-let $T=new Float32Array(WT,0,l/4);
+let $T=new Float32Array(WT,0,avgl);
 let $1=new Float32Array(W1,0,l/4);
 let $2=new Float32Array(W2,0,l/4);
 let $3=new Float32Array(W3,0,l/4);
@@ -474,14 +474,17 @@ t.setOutput(o);
 var nn=t(vv);
 var normalArray=nn.toArray();
   var unin=new Float32Array(normalArray);
-$T.set(t(vv));
+$T.set(normalArray);
 console.log("normal");
 console.log(normalArray);
 console.log("normal f32");
 console.log(unin);
 console.log("wasm");
+  $T.set(normalArray);
 console.log($T);
-
+console.log("wasm f32");
+  $T.set(unin);
+console.log($T);
 
 $2.set(t(vv));
 
