@@ -488,7 +488,7 @@ console.log(new Float32Array(unin));
 console.log("wasm");
 console.log($T);
 console.log("wasm f32");
-$T.set([unin]);
+$T.set(unin,0);
 console.log($T);
 console.log("wasm T2");
   $T2.set([t(vv)]);
