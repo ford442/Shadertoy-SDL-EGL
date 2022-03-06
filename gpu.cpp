@@ -469,33 +469,24 @@ var $8=new Float32Array(W8.buffer,0,avgl);
 var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
-
 var nn=t(vv);
-var fArray=Array.from(nn);
 var tArray=(nn).toArray();
-  var uninf=new Float32Array(fArray);
   var unint=new Float32Array(tArray);
-  console.log(fArray.byteLength);
   console.log(tArray.byteLength);
   console.log($T.length);
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength);
-
-$T.set((t(vv)).toArray());
-console.log("f normal");
-console.log(fArray);
+$T.set(nn).toArray());
 console.log("t normal");
 console.log(tArray);
-console.log("f normal f32");
-console.log(new Float32Array(fArray));
 console.log("t normal f32");
 console.log(new Float32Array(tArray));
 console.log("wasm");
 console.log($T);
 
 console.log("wasm f32 with l");
-$T.set(new Float32Array((t(vv)).toArray()));
+$T.set(new Float32Array((nn).toArray()));
 console.log($T);
   
 $2.set(t(vv));
