@@ -483,7 +483,7 @@ console.log("wasm");
 console.log($T);
 var clone=[].concat(t(vv));
 console.log("clone");
-$T.set(new Float32Array(clone));
+$T.set(clone);
 console.log(clone);
 console.log("clone wasm");
 console.log($T);
