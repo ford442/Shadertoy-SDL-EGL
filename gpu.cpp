@@ -573,7 +573,6 @@ ma();
 void nano(){
 slp();
 }}
-
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
