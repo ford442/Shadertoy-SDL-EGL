@@ -477,6 +477,7 @@ var normalArray=nn.toArray();
   var unin=new Float32Array(normalArray);
   console.log(normalArray.length);
   console.log($T.length);
+  console.log(WT.byteLength);
 $T.set(normalArray);
 console.log("normal");
 console.log(normalArray);
