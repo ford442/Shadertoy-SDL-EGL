@@ -475,7 +475,7 @@ var vv=document.getElementById("mv");
 t.setOutput(o);
 B.setOutput(o);
 var nn=B(vv);
-var tArray=(nn).toArray();
+var tArray=Array.from(nn);
   var unint=new Float32Array(tArray);
   console.log(tArray.byteLength);
   console.log($T.length);
