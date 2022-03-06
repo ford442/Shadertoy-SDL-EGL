@@ -475,7 +475,7 @@ min$=$1[40];
   var nn=t(vv);
   
   let normalArray =nn.toArray();
-  $1.set(normalArray.slice(),0);
+  $1.set(555,44);
 console.log(normalArray[44]);
 console.log($1[44]);
 
@@ -542,7 +542,7 @@ $5.set(0,t(vv));
 avvg();
 $F=2;
 }
-setTimeout(function(){M();},33.332);}
+setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
