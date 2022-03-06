@@ -477,7 +477,7 @@ t.setOutput(o);
   var nn=t(vv);
   
   var normalArray =nn.toArray();
-  $T.set(normalArray.slice(),0);
+  $T.set(normalArray.slice());
   
   console.log("normal");
   
@@ -488,7 +488,7 @@ console.log(normalArray);
 console.log($T);
 var clone = [].concat(t(vv));
     console.log("clone");
-  $T.set(new Uint8ClampedArray(clone),0);
+  $T.set(new Uint8ClampedArray(clone));
 
 console.log(clone);
     console.log("clone wasm");
