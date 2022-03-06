@@ -458,15 +458,15 @@ let W5=new WebAssembly.Memory({initial:m});
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
-let $T=new Float32Array(WT.buffer,0,l/4);
-let $1=new Float32Array(W1,0,l);
-let $2=new Float32Array(W2,0,l);
-let $3=new Float32Array(W3,0,l);
-let $4=new Float32Array(W4,0,l);
-let $5=new Float32Array(W5,0,l);
-let $6=new Float32Array(W6,0,l);
-let $7=new Float32Array(W7,0,l);
-let $8=new Float32Array(W8,0,l);
+let $T=new Float32Array(WT,0,l/4);
+let $1=new Float32Array(W1,0,l/4);
+let $2=new Float32Array(W2,0,l/4);
+let $3=new Float32Array(W3,0,l/4);
+let $4=new Float32Array(W4,0,l/4);
+let $5=new Float32Array(W5,0,l/4);
+let $6=new Float32Array(W6,0,l/4);
+let $7=new Float32Array(W7,0,l/4);
+let $8=new Float32Array(W8,0,l/4);
 let T=false;
 let vv=document.getElementById("mv");
 t.setOutput(o);
@@ -509,7 +509,7 @@ $F=8;
 }
 if($F==6){
 r(t($6));
-$2.set(0,t(vv));
+$2.set(t(vv));
 var aveTotal=0;
 for(var il=0;i<avgl;i++){
 aveTotal=aveTotal+$1[i+3].buffer;
@@ -520,31 +520,31 @@ $F=7;
 }
 if($F==5){
 r(t($5));
-$1.set([t(vv)],0);
+$1.set(t(vv));
 avvg();
 $F=6;
 }
 if($F==4){
 r(t($4));
-$8.set(0,t(vv));
+$8.set(t(vv));
 
 $F=5;
 }
 if($F==3){
 r(t($3));
-$7.set(0,t(vv));
+$7.set(t(vv));
 
 $F=4;
 }  
 
 if($F==2){
 r(t($2));
-$6.set(0,t(vv));
+$6.set(t(vv));
 $F=3;
 }
 if($F==1){
 r(t($1));
-$5.set(0,t(vv));
+$5.set(t(vv));
 avvg();
 $F=2;
 }
