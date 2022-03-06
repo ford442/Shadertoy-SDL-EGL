@@ -431,6 +431,10 @@ return a+b;
   
 let B=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
+}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
+  
+  let R=g.createKernel(function(tv){
+return tv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setDynamicOutput(true).setOutput(o);
   
 let t=g.createKernel(function(v){
@@ -474,6 +478,7 @@ var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
 B.setOutput(o);
+R.setOutput(o);
   var nn=B(vv);
 var tArray=nn.toArray();
   var unint=new Float32Array(tArray);
