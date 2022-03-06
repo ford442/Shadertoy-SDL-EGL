@@ -488,8 +488,8 @@ R.setOutput(o);
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength);   
-  
-  $T.set(t(vv));
+  var ffg=t(vv);
+  $T.set(ffg.toArray());
 console.log("wasm");
 console.log($T);
 
