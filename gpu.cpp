@@ -470,8 +470,8 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT.buffer,0,l/16);
-var $T2=new Float32Array(WT2,l/16);
+var $T=new Float32Array(WT,0,l/16);
+var $T2=new Float32Array(WT2);
   var $TT=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,l/16);
 var $2=new Float32Array(W2.buffer,0,l/16);
@@ -496,10 +496,13 @@ console.log("wasm");
 console.log($TT);
 
 console.log("wasm 2");
-  $T2.set($TT);
+  $T.set($TT);
 
-console.log($T2);
+console.log($T);
   
+  console.log("normal");
+
+console.log(ffg);
 $2.set(t(vv));
 $3.set(t(vv));
 
