@@ -458,40 +458,31 @@ let W5=new WebAssembly.Memory({initial:m});
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
-let $T=new Uint8ClampedArray(W1.buffer,0,l);
-let $1=new Uint8ClampedArray(W1.buffer,0,l);
-let $2=new Uint8ClampedArray(W2.buffer,0,l);
-let $3=new Uint8ClampedArray(W3.buffer,0,l);
-let $4=new Uint8ClampedArray(W4.buffer,0,l);
-let $5=new Uint8ClampedArray(W5.buffer,0,l);
-let $6=new Uint8ClampedArray(W6.buffer,0,l);
-let $7=new Uint8ClampedArray(W7.buffer,0,l);
-let $8=new Uint8ClampedArray(W8.buffer,0,l);
+let $T=new Float32Array(W1,0,l);
+let $1=new Float32Array(W1,0,l);
+let $2=new Float32Array(W2,0,l);
+let $3=new Float32Array(W3,0,l);
+let $4=new Float32Array(W4,0,l);
+let $5=new Float32Array(W5,0,l);
+let $6=new Float32Array(W6,0,l);
+let $7=new Float32Array(W7,0,l);
+let $8=new Float32Array(W8,0,l);
 let T=false;
 let vv=document.getElementById("mv");
-
 t.setOutput(o);
- 
-// max$=$1[22];
-// min$=$1[40];
-  var nn=t(vv);
-  
-  var normalArray =nn.toArray();
-  $T.set(normalArray.slice());
-  
-  console.log("normal");
-  
+
+var nn=t(vv);
+var normalArray=nn.toArray();
+$T.set(normalArray.slice());
+console.log("normal");
 console.log(normalArray);
-  
-    console.log("wasm");
-
+console.log("wasm");
 console.log($T);
-var clone = [].concat(t(vv));
-    console.log("clone");
-  $T.set(new Uint8ClampedArray(clone));
-
+var clone=[].concat(t(vv));
+console.log("clone");
+$T.set(new Uint8ClampedArray(clone));
 console.log(clone);
-    console.log("clone wasm");
+console.log("clone wasm");
 console.log($T);
 
 $2.set(0,t(vv));
