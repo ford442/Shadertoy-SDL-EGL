@@ -484,7 +484,7 @@ B.setOutput(o);
 R.setOutput(o);
   var nn=B(vv);
 var tArray=(B(vv).toArray());
-  var unint=new Float32Array(tArray);
+  var unint=new Float32Array(tArray,0,h$*h$);
   console.log(tArray.byteLength);
   console.log($T.length);
   console.log($T.byteLength);
