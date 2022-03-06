@@ -477,16 +477,18 @@ t.setOutput(o);
   var nn=t(vv);
   
   var normalArray =nn.toArray();
-  $T.set([555],44);
+  $T.set(normalArray,44);
   
   console.log("normal");
-// console.log(normalArray[]);
+  
+console.log(normalArray);
+  
     console.log("wasm");
 
-console.log($1[44]);
+console.log($T);
 var clone = [].concat(t(vv));
     console.log("clone");
-  $T.set([clone],0);
+  $T.set(clone,0);
 
 console.log(clone);
     console.log("clone wasm");
