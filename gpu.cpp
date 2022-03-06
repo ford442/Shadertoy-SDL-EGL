@@ -432,23 +432,23 @@ return a+b;
 let B=g.createKernel(function(tv){
 const E=v[this.thread.y][this.thread.x];
 return[E[0],E[1],E[2],E[4]];
-}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
+}).setTactic("balanced").setOptimizeFloatMemory(true).setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
-}).setTactic("balanced").setDynamicOutput(true).setOutput(o);
+}).setTactic("balanced").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput(o);
   
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
-}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+}).setTactic("balanced").setOptimizeFloatMemory(true).setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 let favg=this.constants.aVg;
 this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-p[3]))));
-}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
+}).setTactic("balanced").setOptimizeFloatMemory(true).setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
