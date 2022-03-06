@@ -414,8 +414,8 @@ var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
   console.log(avgs);
-  console.log(min$);
-  console.log(max$);
+// console.log(min$);
+ //  console.log(max$);
 }
 var min$=0.0;
 var max$=1.0;
@@ -526,14 +526,14 @@ var aveTotal=0;
 for(var il=0;i<l;i++){
 aveTotal=aveTotal+$1[i+3];
 }
-avgs[1]=aveTotal/l;
+avgs[1]=aveTotal/(l/16);
 
 $F=7;
 }
 if($F==5){
 r(t($5));
 $1.set(t(vv));
-avvg();
+// avvg();
 $F=6;
 }
 if($F==4){
