@@ -430,10 +430,11 @@ return a+b;
 }
   
 let B=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x];
+const E=v[this.thread.y][this.thread.x];
+return[E[0],E[1],E[2],E[4]];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
-  let R=g.createKernel(function(tv){
+let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setDynamicOutput(true).setOutput(o);
   
@@ -442,11 +443,13 @@ const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+  
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 let favg=this.constants.aVg;
 this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-p[3]))));
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
+
 let d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
@@ -465,7 +468,7 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT,l,0,h$*h$);
+var $T=new Float32Array(WT.buffer);
 var $1=new Float32Array(W1.buffer,0,l/4);
 var $2=new Float32Array(W2.buffer,0,l/4);
 var $3=new Float32Array(W3.buffer,0,l/4);
@@ -480,7 +483,7 @@ t.setOutput(o);
 B.setOutput(o);
 R.setOutput(o);
   var nn=B(vv);
-var tArray=nn.toArray();
+var tArray=(nn.toArray());
   var unint=new Float32Array(tArray);
   console.log(tArray.byteLength);
   console.log($T.length);
