@@ -493,13 +493,13 @@ R.setOutput(o);
   var ffg=t(vv).toArray();
   $TT.set(ffg);
 console.log("wasm");
-console.log(B($TT));
+console.log(R($TT));
 
 console.log("wasm 2");
   $T.set($TT);
 
-console.log($T);
-  
+  console.log(R($T));
+
   console.log("normal");
 
 console.log(ffg);
