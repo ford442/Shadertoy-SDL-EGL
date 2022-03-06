@@ -487,9 +487,9 @@ console.log("normal f32");
 console.log(new Float32Array(unin),0,avgl);
 console.log("wasm");
 console.log($T);
-console.log("wasm f32");
-$T.set(new Float32Array(unin));
-console.log($T);
+// console.log("wasm f32");
+// $T.set(new Float32Array(unin));
+// console.log($T);
   
 console.log("wasm f32 with l");
 $T.set(new Float32Array(unin),0,avgl);
