@@ -480,7 +480,7 @@ var normalArray=nn.toArray();
     console.log($1.length);
     console.log($1.byteLength);
 
-$T.set(normalArray);
+$T.set([normalArray]);
 console.log("normal");
 console.log(normalArray);
 console.log("normal f32");
@@ -488,10 +488,10 @@ console.log(unin);
 console.log("wasm");
 console.log($T);
 console.log("wasm f32");
-$T.set(unin);
+$T.set([unin]);
 console.log($T);
 console.log("wasm T2");
-  $T2.set(t(vv));
+  $T2.set([t(vv)]);
 console.log($T2);
 $2.set(t(vv));
 
