@@ -481,7 +481,7 @@ var normalArray=nn.toArray();
 
 $T.set(new Float32Array([t(vv)]);
 console.log("normal");
-console.log(new Float32Array([normalArray]));
+console.log(new Float32Array([normalArray]);
 console.log(normalArray.buffer);
 console.log("normal f32");
 console.log(new Float32Array(unin),0,avgl);
