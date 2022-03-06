@@ -170,7 +170,7 @@ function loada(){
     document.getElementById("isrc").innerHTML=$vids[rnum];
     $h=Math.round(window.innerHeight);
     he=document.getElementById("hig").innerHTML;
-    r$=he/$h;
+    r$=$h/he;
     $w=wi*r$;
     hii=Math.round(dat.innerHTML);
     $hi=$h-hii;
