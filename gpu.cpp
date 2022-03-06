@@ -431,7 +431,7 @@ return a+b;
   
 let B=g.createKernel(function(ttv){
 const E=ttv[this.thread.y][this.thread.x];
-return[E[0],E[1],E[2],E[4]];
+return[E[0],E[1],E[2]];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 let R=g.createKernel(function(tv){
