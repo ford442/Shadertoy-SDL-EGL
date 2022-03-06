@@ -446,7 +446,7 @@ nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[h$,h$];
 var l=h$*h$*4;
-var m=((Math.ceil(h$*h$)/4)*4)/65536)+1;
+var m=((Math.ceil((h$*h$)/4))*4)/65536)+1;
 var avgl=Math.ceil((h$*h$)/4)*4;
 var WT=new WebAssembly.Memory({initial:m});
 var W1=new WebAssembly.Memory({initial:m});
@@ -480,7 +480,7 @@ var normalArray=nn.toArray();
     console.log($1.length);
     console.log($1.byteLength);
 
-$T.set(normalArray,0);
+$T.set(normalArray);
 console.log("normal");
 console.log(normalArray);
 console.log("normal f32");
@@ -488,12 +488,12 @@ console.log(unin);
 console.log("wasm");
 console.log($T);
 console.log("wasm f32");
-$T.set(unin,0);
+$T.set(unin);
 console.log($T);
 console.log("wasm T2");
-  $T2.set(t(vv),0);
+  $T2.set(t(vv));
 console.log($T2);
-$2.set(t(vv),0);
+$2.set(t(vv));
 
 $3.set(t(vv));
 
