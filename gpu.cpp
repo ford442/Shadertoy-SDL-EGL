@@ -428,6 +428,11 @@ return Math.max(a,b);
 function avgg(a,b){
 return a+b;
 }
+  
+let B=g.createKernel(function(v){
+return v[this.thread.y][this.thread.x];
+}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
+  
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
@@ -468,7 +473,8 @@ var $8=new Float32Array(W8.buffer,0,l/4);
 var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
-var nn=t(vv);
+B.setOutput(o);
+var nn=B(vv);
 var tArray=(nn).toArray();
   var unint=new Float32Array(tArray);
   console.log(tArray.byteLength);
