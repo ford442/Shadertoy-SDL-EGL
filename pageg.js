@@ -166,7 +166,7 @@ function loada(){
     $ls=$ls*1000;
     $ls=Math.round($ls);
     $ls=$ls/1000;
-    rnum=Math.random()*($vids[0]-5)+5;
+    rnum=Math.round((Math.random()*($vids[0]-5))+5);
     document.getElementById("isrc").innerHTML=$vids[rnum];
     $h=Math.round(window.innerHeight);
     he=document.getElementById("hig").innerHTML;
