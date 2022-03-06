@@ -431,7 +431,7 @@ return a+b;
   
 let B=g.createKernel(function(ttv){
 const E=ttv[this.thread.y][this.thread.x];
-return[E[0],E[1],E[2]];
+return[E[0],E[1],E[2],0.0];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 let R=g.createKernel(function(tv){
@@ -468,7 +468,7 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT.buffer);
+var $T=new Float32Array(WT.buffer,0,l/16);
 var $1=new Float32Array(W1.buffer,0,l/16);
 var $2=new Float32Array(W2.buffer,0,l/16);
 var $3=new Float32Array(W3.buffer,0,l/16);
