@@ -510,7 +510,7 @@ r(t($6));
 $2.set(t(vv));
 var aveTotal=0;
 for(var il=0;i<avgl;i++){
-aveTotal=aveTotal+$1[i+3].buffer;
+aveTotal=aveTotal+$1[i+3];
 }
 avgs[1]=aveTotal/avgl;
 
