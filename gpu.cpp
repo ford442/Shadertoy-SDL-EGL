@@ -484,8 +484,8 @@ console.log(new Float32Array(tArray));
 console.log("wasm");
 console.log($T);
 
-console.log("wasm f32 with l");
-$T.set(new Float32Array((nn).toArray()));
+console.log("wasm f32");
+$T.set(new Float32Array(nn));
 console.log($T);
   
 $2.set(t(vv));
@@ -513,10 +513,10 @@ if($F==6){
 r(t($6));
 $2.set(t(vv));
 var aveTotal=0;
-for(var il=0;i<avgl;i++){
+for(var il=0;i<l;i++){
 aveTotal=aveTotal+$1[i+3];
 }
-avgs[1]=aveTotal/avgl;
+avgs[1]=aveTotal/l;
 
 $F=7;
 }
