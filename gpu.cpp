@@ -481,16 +481,11 @@ console.log("normal f32");
 console.log(unin);
 console.log("wasm");
 console.log($T);
-var clone=[].concat(t(vv));
-console.log("clone");
-$T.set(clone);
-console.log(clone);
-console.log("clone wasm");
-console.log($T);
 
-$2.set(0,t(vv));
 
-$3.set(0,t(vv));
+$2.set(t(vv));
+
+$3.set(t(vv));
 
 r.setOutput(o);
 let $F=1;
@@ -500,13 +495,13 @@ if(T)
 }
 if($F==8){
 r(t($8));
-$4.set(0,t(vv));
+$4.set(t(vv));
 
 $F=1;
 }
 if($F==7){
 r(t($7));
-$3.set(0,t(vv));
+$3.set(t(vv));
 
 $F=8;
 }
