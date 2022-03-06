@@ -474,15 +474,14 @@ var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
 B.setOutput(o);
-var nn=B(vv);
-var tArray=Array.from(nn);
+var tArray=B(vv).toArray();
   var unint=new Float32Array(tArray);
   console.log(tArray.byteLength);
   console.log($T.length);
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength);
-$T.set([tArray]);
+$T.set(B(vv));
 console.log("t normal");
 console.log(tArray);
 console.log("t normal f32");
@@ -491,7 +490,7 @@ console.log("wasm");
 console.log($T);
 
 console.log("wasm f32");
-$T.set(new Float32Array(nn));
+$T.set(new Float32Array(tArray));
 console.log($T);
   
 $2.set(t(vv));
