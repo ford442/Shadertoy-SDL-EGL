@@ -75,12 +75,13 @@ function scanShaders(){
     xhttp.open("GET","all/",true);
     xhttp.send();
 }
-scanShaders();
 scanVideos();
+
+scanShaders();
 scanSongs();
 
-document.getElementById("mv").load();
-document.getElementById("ldv").load();
+// document.getElementById("mv").load();
+// document.getElementById("ldv").load();
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
