@@ -457,8 +457,8 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT);
-var $1=new Float32Array(W1);
+var $T=new Float32Array(WT,0,avgl);
+var $1=new Float32Array(W1,0,avgl);
 var $2=new Float32Array(W2,0,l/4);
 var $3=new Float32Array(W3,0,l/4);
 var $4=new Float32Array(W4,0,l/4);
@@ -481,14 +481,18 @@ var normalArray=nn.toArray();
 
 $T.set(new Float32Array(t(vv)));
 console.log("normal");
-console.log(new Float32Array([normalArray]));
+console.log(new Float32Array(normalArray));
 console.log(normalArray.buffer);
 console.log("normal f32");
-console.log(new Float32Array(unin));
+console.log(new Float32Array(unin),0,avgl);
 console.log("wasm");
 console.log($T);
 console.log("wasm f32");
 $T.set(new Float32Array(unin));
+console.log($T);
+  
+console.log("wasm f32 with l");
+$T.set(new Float32Array(unin),0,avgl);
 console.log($T);
 $2.set(t(vv));
 
