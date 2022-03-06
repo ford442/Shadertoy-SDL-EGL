@@ -473,7 +473,7 @@ t.setOutput(o);
   var nn=t(vv);
   var nnt=nn.toArray();
   var nnnt=new Uint8Array(nnt);
-  $1.set(nnnt,0);
+  $1.set(nnnt.slice(),0);
 console.log($1);
   console.log(nnnt);
 
