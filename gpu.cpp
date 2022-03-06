@@ -490,7 +490,7 @@ var tArray=(nn.toArray());
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength);
-$T.set(B(vv));
+$T.set(R(vv));
 console.log("t normal");
 console.log(tArray);
 console.log("t normal f32");
