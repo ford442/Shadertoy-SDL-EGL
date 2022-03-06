@@ -480,11 +480,11 @@ var normalArray=nn.toArray();
     console.log($1.length);
     console.log($1.byteLength);
 
-$T.set([normalArray]);
+$T.set([normalArray],avgl);
 console.log("normal");
 console.log(normalArray);
 console.log("normal f32");
-console.log(unin);
+console.log(new Float32Array(unin));
 console.log("wasm");
 console.log($T);
 console.log("wasm f32");
