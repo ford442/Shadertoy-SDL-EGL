@@ -449,6 +449,7 @@ var l=mh$*h$*4;
 var m=Math.floor((mh$*h$*4)/65536)+1;
 var aam=Math.floor((mh$*h$)/65536)+1;
 var avgl=mh$*h$;
+let WT=new WebAssembly.Memory({initial:m});
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -457,6 +458,7 @@ let W5=new WebAssembly.Memory({initial:m});
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
+let $T=new Uint8ClampedArray(W1,0,l);
 let $1=new Uint8ClampedArray(W1.buffer,0,l);
 let $2=new Uint8ClampedArray(W2.buffer,0,l);
 let $3=new Uint8ClampedArray(W3.buffer,0,l);
@@ -470,22 +472,25 @@ let vv=document.getElementById("mv");
 
 t.setOutput(o);
  
-max$=$1[22];
-min$=$1[40];
+// max$=$1[22];
+// min$=$1[40];
   var nn=t(vv);
   
   var normalArray =nn.toArray();
-  $1.set(555,44);
+  $T.set([555],44);
   
   console.log("normal");
-console.log(normalArray[44]);
+// console.log(normalArray[]);
     console.log("wasm");
 
-console.log($1[555]);
+console.log($1[44]);
 var clone = [].concat(t(vv));
     console.log("clone");
+  $T.set([clone],0);
 
 console.log(clone);
+    console.log("clone wasm");
+console.log($T);
 
 $2.set(0,t(vv));
 
