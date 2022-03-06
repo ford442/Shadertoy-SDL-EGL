@@ -482,7 +482,7 @@ var vv=document.getElementById("mv");
 t.setOutput(o);
 B.setOutput(o);
 R.setOutput(o);
-  var nn=B(new Float32Array(vv));
+  var nn=B(new Float32Array(vv),0,l/16);
 var tArray=(nn.toArray());
   var unint=new Float32Array(tArray);
   console.log(tArray.byteLength);
