@@ -478,7 +478,6 @@ var $8=new Float32Array(W8.buffer,0,l/16);
 var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
-B.setOutput(o);
 R.setOutput(o);
 console.log(W1.buffer.length);
 console.log(W1.buffer.byteLength);
