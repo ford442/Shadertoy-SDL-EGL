@@ -511,19 +511,17 @@ r(t($r6));
 var $$2=R(vv);
 $TT.set($$2);
 $2.set(R($TT));
-var aveTotal=0;
-avgs[2]=aveTotal/(la);
 $F=7;
 }
 if($F==5){  
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
-var $$A=R(vv).toArray();
+var $$A=$$1.toArray();
 var avg1=$$A.reduce(adds,0)/$$A.length;
 avgs.set([avg1],0);
 min$.set([Math.min(...$$A)]);
-min$.set([Math.min(...$$A)]);
+max$.set([Math.max(...$$A)]);
 $TT.set($$1);
 $1.set(R($TT));
 avvg();
