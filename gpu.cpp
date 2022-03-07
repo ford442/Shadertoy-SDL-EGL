@@ -519,7 +519,7 @@ $3.set(R($TT));
 $F=8;
 }
 if($F==6){  
-var $r6=t($6);
+var $r6=R($6);
 r(t($r6));
 var $$2=R(vv);
 $TT.set($$2);
