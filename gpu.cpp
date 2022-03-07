@@ -503,6 +503,7 @@ let $F=1;
 function M(){
 if(T){return;}
 if($F==8){
+  console.log("8");
 var $r8=R($8);
 r(t($8));
 var $$4=R(vv);
@@ -510,7 +511,8 @@ $TT.set($$4);
 $4.set(R($TT));
 $F=1;
 }
-if($F==7){
+if($F==7){  console.log("7");
+
 var $r7=R($7);
 r($7);
 var $$3=R(vv);
@@ -518,7 +520,8 @@ $TT.set($$3);
 $3.set(R($TT));
 $F=8;
 }
-if($F==6){
+if($F==6){  console.log("6");
+
 var $r6=t($6);
 r($r6);
 var $$2=R(vv);
@@ -531,7 +534,8 @@ aveTotal=aveTotal+$1[i+3];
 avgs[1]=aveTotal/(l/16);
 $F=7;
 }
-if($F==5){
+if($F==5){  console.log("5");
+
 var $r5=R($5);
 r(t($5));
 var $$1=R(vv);
