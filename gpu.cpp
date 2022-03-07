@@ -530,7 +530,7 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-  console.log(new Float32Array(R($TT),4,4));
+  console.log(new Float32Array(R($TT).toArray(),4,4,4));
 
 avvg();
 $F=6;
