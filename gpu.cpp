@@ -430,11 +430,11 @@ return a+b;
 }
   
 var R=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x+this.constants.blnk];
+return tv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x];
+const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
