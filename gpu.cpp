@@ -478,7 +478,7 @@ avgs.set([2.0],2);
 avgs.set([3.0],3);
 console.log(avgs);
 console.log(avg$);
-console.log($TT[44]);
+console.log(WW[44]);
 console.log(min$[0]+" "+max$[0]);
 }
 
