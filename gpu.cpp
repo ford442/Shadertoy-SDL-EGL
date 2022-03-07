@@ -509,9 +509,9 @@ $3.set(t(vv));
 
 // r($TT);  
  console.log("render wasm");
+r.setOutput(o);
 
 r($T);
-r.setOutput(o);
 let $F=1;
 function M(){
 if(T)
