@@ -493,12 +493,12 @@ R.setOutput(o);
   var ffg=t(vv);
   $TT.set(ffg);
 console.log("wasm");
-console.log(B($TT));
+console.log(R($TT));
 
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
   $T.set($TT);
 
-  console.log(R($T));
+  console.log(B($T));
 
   console.log("normal");
 
