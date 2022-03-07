@@ -503,7 +503,7 @@ let $F=1;
 function M(){
 if(T){return;}
 if($F==8){
-var $r8=R2($8);
+var $r8=R($8);
 r($r8);
 var $$4=R(vv);
 $TT.set($$4);
@@ -511,7 +511,7 @@ $4.set(R($TT));
 $F=1;
 }
 if($F==7){
-var $r7=R2($7);
+var $r7=R($7);
 r($r7);
 var $$3=R(vv);
 $TT.set($$3);
@@ -519,7 +519,7 @@ $3.set(R($TT));
 $F=8;
 }
 if($F==6){
-var $r6=R2($6);
+var $r6=R($6);
 r($r6);
 var $$2=R(vv);
 $TT.set($$2);
@@ -532,7 +532,7 @@ avgs[1]=aveTotal/(l/16);
 $F=7;
 }
 if($F==5){
-var $r5=R2($5);
+var $r5=R($5);
 r($r5);
 var $$1=R(vv);
 $TT.set($$1);
@@ -541,7 +541,7 @@ $1.set(R($TT));
 $F=6;
 }
 if($F==4){
-var $r4=R2($4);
+var $r4=R($4);
 r($r4);
 var $$8=R(vv);
 $TT.set($$8);
@@ -549,7 +549,7 @@ $8.set(R($TT));
 $F=5;
 }
 if($F==3){
-var $r3=R2($3);
+var $r3=R($3);
 r($r3);
 var $$7=R(vv);
 $TT.set($$7);
@@ -557,7 +557,7 @@ $7.set(R($TT));
 $F=4;
 }  
 if($F==2){
-var $r2=R2($2);
+var $r2=R($2);
 r($r2);
 var $$6=R(vv);
 $TT.set($$6);
