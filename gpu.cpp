@@ -483,7 +483,8 @@ min$.set([1.0],0);
 max$.set([0.0],0);
 console.log(avgs);
 console.log(avg$);
-console.log(new Float32Array($TT,44,1));
+ var rdd=new Float32Array(WW,44,1);
+console.log(rdd);
 console.log(min$[0]+" "+max$[0]);
 }
 
