@@ -440,7 +440,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
+const p=f[this.thread.y][this.thread.x];
 var favg=this.constants.aVg;
 var minMax=this.constants.max-this.constants.min-favg+this.constants.min;
 this.color(p[0],p[1],p[2],p[3]);
@@ -449,9 +449,9 @@ this.color(p[0],p[1],p[2],p[3]);
 let d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-blank$=Math.max(((w$-h$)/2),0);
-nblank$=Math.max((h$-w$),0);
-mh$=Math.min(h$,w$);
+var blank$=Math.max(((w$-h$)/2),0);
+var nblank$=Math.max((h$-w$),0);
+var mh$=Math.min(h$,w$);
 var o=[mh$,h$];
 var ro=[h$,h$];
 var l=mh$*h$*32;
