@@ -497,7 +497,8 @@ console.log(R($TT));
 
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
   $T.set(R($TT));
-var lln=R(Array.from($T));
+  var nll=$T.toArray();
+var lln=R($T);
   console.log(lln);
 
   console.log("normal");
@@ -507,10 +508,10 @@ $2.set(t(vv));
 $3.set(t(vv));
     console.log("render");
 
-r($TT.toArray());  
+r($TT);  
  console.log("render wasm");
 
-r(Array.from($T));
+r($T);
 r.setOutput(o);
 let $F=1;
 function M(){
