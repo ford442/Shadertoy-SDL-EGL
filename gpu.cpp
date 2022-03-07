@@ -490,12 +490,12 @@ R.setOutput(o);
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength); 
-  var ffg=t(vv).toArray();
+  var ffg=t(vv);
   $TT.set(ffg);
 console.log("wasm");
 console.log(B($TT));
 
-console.log("wasm 2");
+console.log("wasm 2"); // .setOptimizeFloatMemory(true)
   $T.set($TT);
 
   console.log(R($T));
