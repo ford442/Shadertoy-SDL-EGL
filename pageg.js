@@ -12,7 +12,7 @@ function sngs(xml){
     for (i=1;i<preList.length;i++){
         var txxt=preList[i].href;
         var Self=location.href;
-        Self=Self.replace(/best.1ink/,"");
+        Self=Self.replace(/1ink.1ink/,"");
         txxt=txxt.replace(Self,"");
         $sngs[i+1]=Self+"songs/"+txxt;
     }}
@@ -24,7 +24,7 @@ function vids(xml){
     for (i=1;i<preList.length;i++){
         var txxt=preList[i].href;
         var Self=location.href;
-        Self=Self.replace(/best.1ink/,"");
+        Self=Self.replace(/1ink.1ink/,"");
         txxt=txxt.replace(Self,"");
         $vids[i]=Self+"video/"+txxt;
     }}
@@ -36,7 +36,7 @@ function shds(xml){
     for (i=1;i<preList.length;i++){
         var txxt=preList[i].href;
         var Self=location.href;
-        Self=Self.replace(/best.1ink/,"");
+        Self=Self.replace(/1ink.1ink/,"");
         txxt=txxt.replace(Self,"");
         $shds[i+1]=Self+"all/"+txxt;
     }
