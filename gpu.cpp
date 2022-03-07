@@ -507,9 +507,10 @@ $2.set(t(vv));
 $3.set(t(vv));
     console.log("render");
 
-r($TT);   console.log("render wasm");
+r($TT.toArray());  
+ console.log("render wasm");
 
-r($T);
+r(Array.from($T));
 r.setOutput(o);
 let $F=1;
 function M(){
