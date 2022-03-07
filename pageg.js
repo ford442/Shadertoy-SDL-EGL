@@ -153,8 +153,8 @@ document.getElementById("ldv").height=document.getElementById("ihig").innerHTML;
 document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("isrc").innerHTML=adr;
 document.getElementById("mv").play();
-// setTimeout(function(){    document.getElementById("btn11").click();},2100);
-// setTimeout(function(){    document.getElementById("btn").click();},1750);
+setTimeout(function(){    document.getElementById("btn11").click();},2100);
+ setTimeout(function(){    document.getElementById("btn").click();},1750);
 vide=document.querySelectorAll("video");
 function loada(){
     document.getElementById('pmhig').innerHTML=window.innerHeight;
