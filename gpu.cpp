@@ -484,7 +484,7 @@ max$.set([0.0],0);
 console.log(avgs);
 console.log(avg$);
  var rdd=new Float32Array(WW,44,1);
-console.log(rdd);
+console.log(rdd*100);
 console.log(min$[0]+" "+max$[0]);
 }
 
