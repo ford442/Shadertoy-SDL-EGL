@@ -410,25 +410,25 @@ var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-
-function adds(ac,a){
-return ac+a;
-}
- 
-var min$=new Float32Array(1);
-var max$=new Float32Array(1);
-min$[0]=[0.0];
-max$[0]=[1.0];
-let avgs=new Float32Array(8);
-let avg$=new Float32Array(1);
- 
+var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
-avg$.set([avgs.reduce(adds,0)/8]);
+avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
 console.log(avgs);
-console.log(avg$);
-console.log(min$[0]+" "+max$[0]);
+// console.log(min$);
+ //  console.log(max$);
 }
-
+var min$=0.0;
+var max$=1.0;
+function setMin(a,b){
+return Math.min(a,b);
+}
+function setMax(a,b){
+return Math.max(a,b);
+}
+function avgg(a,b){
+return a+b;
+}
+  
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
@@ -444,7 +444,7 @@ const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 var favg=this.constants.aVg;
 var minMax=this.constants.max-this.constants.min-favg+this.constants.min;
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avg$}).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
@@ -486,9 +486,9 @@ console.log($1.length);
 console.log($1.byteLength); 
 var $$1=R(vv);
 $TT.set($$1);
-$1.set($$1);
-$2.set($$1);
-$3.set($$1);
+$1.set(R($TT));
+$2.set(R($TT));
+$3.set(R($TT));
 r.setOutput(o);
 let $F=1;
 function M(){
@@ -515,6 +515,8 @@ r(t($r6));
 var $$2=R(vv);
 $TT.set($$2);
 $2.set(R($TT));
+var aveTotal=0;
+avgs[2]=aveTotal/(la);
 $F=7;
 }
 if($F==5){  
@@ -522,10 +524,6 @@ var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
-var $ave1=$$1.toArray();
-avgs.set([$ave1.reduce(adds,0)/$ave1.length],1);
-min.set([Math.min(...$ave1)],0);
-max.set([Math.min(...$ave1)],0);
 $1.set(R($TT));
 avvg();
 $F=6;
