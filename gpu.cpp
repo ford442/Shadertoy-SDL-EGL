@@ -577,7 +577,7 @@ $5.set(R($TT));
 avvg();
 $F=2;
 }
-setTimeout(function(){M();},16.666);}
+setTimeout(function(){M();},166.666);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
