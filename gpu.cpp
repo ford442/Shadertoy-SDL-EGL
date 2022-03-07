@@ -504,7 +504,7 @@ function M(){
 if(T){return;}
 if($F==8){
 var $r8=R($8);
-r($r8);
+r(t($8));
 var $$4=R(vv);
 $TT.set($$4);
 $4.set(R($TT));
@@ -512,14 +512,14 @@ $F=1;
 }
 if($F==7){
 var $r7=R($7);
-r($r7);
+r($7);
 var $$3=R(vv);
 $TT.set($$3);
 $3.set(R($TT));
 $F=8;
 }
 if($F==6){
-var $r6=R($6);
+var $r6=t($6);
 r($r6);
 var $$2=R(vv);
 $TT.set($$2);
@@ -533,7 +533,7 @@ $F=7;
 }
 if($F==5){
 var $r5=R($5);
-r($r5);
+r(t($5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
@@ -542,7 +542,7 @@ $F=6;
 }
 if($F==4){
 var $r4=R($4);
-r($r4);
+r(t($r4));
 var $$8=R(vv);
 $TT.set($$8);
 $8.set(R($TT));
