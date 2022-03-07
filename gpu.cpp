@@ -519,7 +519,10 @@ r(t($r5));
 var $$1=R(vv);
 var $$1a=t(vv);
 var $$A=$$1a.toArray();
+ console.log($$A);
 var avg1=$$A.reduce(adds,0)/$$A.length;
+  console.log(avg1);
+
 avgs[0]=avg1;
 min$[0]=Math.min(...$$A);
 max$[0]=Math.max(...$$A);
