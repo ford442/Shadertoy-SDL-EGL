@@ -475,13 +475,13 @@ var vv=document.getElementById("mv");
  
 function avvg(){
  
-avg$.set([avgs.reduce(adds,0)/8]);
+avg$.set([(new FLoat32Array(avv).reduce(adds,0)/8]);
 avgs.set([1.0],0);
-avgs.set([2.0],2);
-avgs.set([3.0],3);
+avgs.set([2.0],1);
+avgs.set([3.0],2);
 console.log(avgs);
 console.log(avg$);
-console.log(WW[44]);
+console.log(new Float32Array($TT,44,1));
 console.log(min$[0]+" "+max$[0]);
 }
 
