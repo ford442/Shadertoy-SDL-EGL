@@ -520,7 +520,9 @@ var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 var $$A=R(vv).toArray();
-
+avgs.set([$$A.reduce(adds,0)],0);
+min$.set([Math.min(...$$A)]);
+min$.set([Math.min(...$$A)]);
 $TT.set($$1);
 $1.set(R($TT));
 avvg();
