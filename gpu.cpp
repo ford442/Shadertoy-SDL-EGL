@@ -414,8 +414,8 @@ var nblank$=Math.max((h$-w$),0);
 function adds(ac,a){
 return ac+a;
 }
-var min$=new Float32Array(1);
-var max$=new Float32Array(1);
+let min$=new Float32Array(1);
+let max$=new Float32Array(1);
 min$[0]=[0.0];
 max$[0]=[1.0];
 let avgs=new Float32Array(8);
@@ -517,7 +517,8 @@ if($F==5){
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
-var $$A=$$1.toArray();
+var $$1a=t(vv);
+var $$A=$$1a.toArray();
 var avg1=$$A.reduce(adds,0)/$$A.length;
 avgs[0]=avg1;
 min$[0]=Math.min(...$$A);
