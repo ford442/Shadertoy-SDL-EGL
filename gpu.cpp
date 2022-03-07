@@ -505,9 +505,9 @@ var lln=R($T);
 console.log(ffg);
 $2.set(t(vv));
 $3.set(t(vv));
-    console.log("render");
+ //   console.log("render");
 
-r($TT);  
+// r($TT);  
  console.log("render wasm");
 
 r($T);
