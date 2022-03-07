@@ -502,7 +502,7 @@ R.setOutput(o);
 console.log("wasm");
 console.log(R($TT));
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
-$T.set(B($TT));
+$T.set(R($TT));
 var lln=t($T);
 console.log(lln);
   console.log("wasm f32"); // .setOptimizeFloatMemory(true)
@@ -518,16 +518,14 @@ $3.set(t(vv));
 // r($TT);  
  console.log("render wasm");
 r.setOutput(o);
-// r($T);
+r($TT);
   console.log("render wasm 2");
-    $1.set(B($TT));
-
+    $1.set(R($TT));
 r($1);
-
  console.log("render wasm buff");
 r.setOutput(o);
-r($TT);
-  
+r($T);
+
 let $F=1;
 function M(){
 if(T)
@@ -536,13 +534,11 @@ if(T)
 if($F==8){
 r(t($8));
 $4.set(t(vv));
-
 $F=1;
 }
 if($F==7){
 r(t($7));
 $3.set(t(vv));
-
 $F=8;
 }
 if($F==6){
@@ -553,7 +549,6 @@ for(var il=0;i<l;i++){
 aveTotal=aveTotal+$1[i+3];
 }
 avgs[1]=aveTotal/(l/16);
-
 $F=7;
 }
 if($F==5){
@@ -565,16 +560,13 @@ $F=6;
 if($F==4){
 r(t($4));
 $8.set(t(vv));
-
 $F=5;
 }
 if($F==3){
 r(t($3));
 $7.set(t(vv));
-
 $F=4;
 }  
-
 if($F==2){
 r(t($2));
 $6.set(t(vv));
@@ -591,7 +583,7 @@ M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
-})
+});
 
 extern "C" {
 void str(){
