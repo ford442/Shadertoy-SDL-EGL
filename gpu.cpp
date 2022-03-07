@@ -497,7 +497,6 @@ console.log(R($TT));
 
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
   $T.set(R($TT));
-  var nll=$T.toArray();
 var lln=R($T);
   console.log(lln);
 
