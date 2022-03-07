@@ -475,7 +475,7 @@ var vv=document.getElementById("mv");
  
 function avvg(){
  
-avg$.set([(new FLoat32Array(avv)).reduce(adds,0)/8]);
+avg$.set([(new Float32Array(avv)).reduce(adds,0)/8]);
 avgs.set([1.0],0);
 avgs.set([2.0],1);
 avgs.set([3.0],2);
