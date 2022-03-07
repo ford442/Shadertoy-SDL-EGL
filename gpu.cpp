@@ -483,28 +483,33 @@ console.log(W1.buffer.length);
 console.log(W1.buffer.byteLength);
 console.log($1.length);
 console.log($1.byteLength); 
-$1.set(R(vv));
-$2.set(R(vv));
-$3.set(R(vv));
+var $$1=R(vv);
+$1.set($$1);
+$2.set($$1);
+$3.set($$1);
 r.setOutput(o);
 let $F=1;
 function M(){
-if(T)
-{return;
-}
+if(T){return;}
 if($F==8){
-r(t($8));
-$4.set(R(vv));
+var $r8=t($8);
+r($r8);
+var $$4=R(vv);
+$4.set($$4);
 $F=1;
 }
 if($F==7){
-r(t($7));
-$3.set(R(vv));
+var $r7=t($7);
+r($r7);
+var $$3=R(vv);
+$3.set($$3);
 $F=8;
 }
 if($F==6){
-r(t($6));
-$2.set(R(vv));
+var $r6=t($6);
+r($r6);
+var $$2=R(vv);
+$2.set($$2);
 var aveTotal=0;
 for(var il=0;i<l;i++){
 aveTotal=aveTotal+$1[i+3];
@@ -513,29 +518,39 @@ avgs[1]=aveTotal/(l/16);
 $F=7;
 }
 if($F==5){
-r(t($5));
-$1.set(R(vv));
+var $r5=t($5);
+r($r5);
+var $$1=R(vv);
+$1.set($$1);
 // avvg();
 $F=6;
 }
 if($F==4){
-r(t($4));
-$8.set(R(vv));
+var $r4=t($4);
+r($r4);
+var $$8=R(vv);
+$8.set($$8);
 $F=5;
 }
 if($F==3){
-r(t($3));
-$7.set(R(vv));
+var $r3=t($3);
+r($r3);
+var $$7=R(vv);
+$7.set($$7);
 $F=4;
 }  
 if($F==2){
-r(t($2));
-$6.set(R(vv));
+var $r2=t($2);
+r($r2);
+var $$6=R(vv);
+$6.set($$6);
 $F=3;
 }
 if($F==1){
-r(t($1));
-$5.set(R(vv));
+var $r1=t($1);
+r($r1);
+var $$5=R(vv);
+$5.set($$5);
 avvg();
 $F=2;
 }
