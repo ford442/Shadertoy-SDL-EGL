@@ -470,7 +470,7 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT.buffer,0,l/16);
+var $T=new Float32Array(WT.buffer,0,l/4);
 var $T2=new Float32Array(WT2);
   var $TT=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,l/16);
@@ -494,15 +494,16 @@ R.setOutput(o);
   $TT.set(ffg);
 console.log("wasm");
 console.log(R($TT));
-
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
-  $T.set(R($TT));
+$T.set(R($TT));
 var lln=R($T);
-  console.log(lln);
-
-  console.log("normal");
-
+console.log(lln);
+  console.log("wasm f32"); // .setOptimizeFloatMemory(true)
+console.log(new Float32Array(lln));
+console.log("normal");
 console.log(ffg);
+console.log("toarray");
+console.log(ffg.toArray());
 $2.set(t(vv));
 $3.set(t(vv));
  //   console.log("render");
@@ -510,8 +511,8 @@ $3.set(t(vv));
 // r($TT);  
  console.log("render wasm");
 r.setOutput(o);
-
 r($T);
+
 let $F=1;
 function M(){
 if(T)
