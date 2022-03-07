@@ -442,13 +442,13 @@ return tuv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x-this.constants.blnk];
+const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x+this.constants.nblnk];
+const p=f[this.thread.y][this.thread.x];
 var favg=this.constants.aVg;
 var minMax=this.constants.max-this.constants.min-favg+this.constants.min;
 this.color(p[0],p[1],p[2],1.0-((p[3]-(minMax))*(1.0/(1.0-p[3]))));
@@ -461,6 +461,7 @@ blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
 var o=[mh$,h$];
+var ro=[h$,h$];
 var l=mh$*h$*16;
 var m=Math.ceil(l/65536)+1;
 var WT=new WebAssembly.Memory({initial:m});
@@ -498,7 +499,7 @@ $TT.set($$1);
 $1.set(R($TT));
 $2.set(R($TT));
 $3.set(R($TT));
-r.setOutput(o);
+r.setOutput(ro);
 let $F=1;
 function M(){
 if(T){return;}
