@@ -486,9 +486,9 @@ console.log($1.length);
 console.log($1.byteLength); 
 var $$1=R(vv);
 $TT.set($$1);
-$1.set(R($TT));
-$2.set(R($TT));
-$3.set(R($TT));
+$1.set($$1);
+$2.set($$1);
+$3.set($$1);
 r.setOutput(o);
 let $F=1;
 function M(){
