@@ -410,7 +410,7 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let blank$=Math.max(((w$-h$)/2),0);
 let nblank$=Math.max((h$-w$),0);
-var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
   console.log(avgs);
@@ -429,25 +429,21 @@ function avgg(a,b){
 return a+b;
 }
   
-let B=g.createKernel(function(ttv){
-const E=ttv[this.thread.y][this.thread.x];
-return[E[0],E[1],E[2],0.0];
-}).setTactic("balanced").setDynamicOutput(true).setOutput(o);
-  
-let R=g.createKernel(function(tv){
+var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
-let t=g.createKernel(function(v){
+var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x+this.constants.blnk];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
-let r=g.createKernel(function(f){
+var r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
-let favg=this.constants.aVg;
-this.color(p[0],p[1],p[2],1.0-((p[3]-(this.constants.max-this.constants.min-favg+this.constants.min))*(1.0/(1.0-p[3]))));
+var favg=this.constants.aVg;
+var minMax=this.constants.max-this.constants.min-favg+this.constants.min
+this.color(p[0],p[1],p[2],1.0-((p[3]-(minMax))*(1.0/(1.0-p[3]))));
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
@@ -470,8 +466,6 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT.buffer,0,l/16);
-var $T2=new Float32Array(WT2);
   var $TT=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,l/16);
 var $2=new Float32Array(W2.buffer,0,l/16);
@@ -486,61 +480,31 @@ var vv=document.getElementById("mv");
 t.setOutput(o);
 B.setOutput(o);
 R.setOutput(o);
-
-  
-  console.log(W1.buffer.length);
-  console.log(W1.buffer.byteLength);
-  
-  console.log(WW.length);
-  console.log(WW.byteLength);
-    console.log($T.length);
-  console.log($T.byteLength);
-    console.log($1.length);
-    console.log($1.byteLength); 
-  var ffg=R(vv);
-  $TT.set(ffg);
-console.log("wasm");
-console.log(R($TT));
-console.log("wasm 2"); // .setOptimizeFloatMemory(true)
-$T.set(R($TT));
-
-console.log("normal");
-console.log(ffg);
-console.log("toarray");
-console.log(ffg.toArray());
+console.log(W1.buffer.length);
+console.log(W1.buffer.byteLength);
+console.log($1.length);
+console.log($1.byteLength); 
+$1.set(t(vv));
 $2.set(t(vv));
 $3.set(t(vv));
- //   console.log("render");
-
-// r($TT);  
- console.log("render wasm");
 r.setOutput(o);
-  var mmm=R($TT);
-r(mmm);
-  console.log("render wasm 2");
-    $1.set(R($TT));
-r($1);
- console.log("render wasm buff");
-r.setOutput(o);
-r($T);
-
 let $F=1;
 function M(){
 if(T)
 {return;
 }
 if($F==8){
-r(t($8));
+r(R($8));
 $4.set(t(vv));
 $F=1;
 }
 if($F==7){
-r(t($7));
+r(R($7));
 $3.set(t(vv));
 $F=8;
 }
 if($F==6){
-r(t($6));
+r(R($6));
 $2.set(t(vv));
 var aveTotal=0;
 for(var il=0;i<l;i++){
@@ -550,28 +514,28 @@ avgs[1]=aveTotal/(l/16);
 $F=7;
 }
 if($F==5){
-r(t($5));
+r(R($5));
 $1.set(t(vv));
 // avvg();
 $F=6;
 }
 if($F==4){
-r(t($4));
+r(R($4));
 $8.set(t(vv));
 $F=5;
 }
 if($F==3){
-r(t($3));
+r(R($3));
 $7.set(t(vv));
 $F=4;
 }  
 if($F==2){
-r(t($2));
+r(R($2));
 $6.set(t(vv));
 $F=3;
 }
 if($F==1){
-r(t($1));
+r(R($1));
 $5.set(t(vv));
 avvg();
 $F=2;
@@ -581,7 +545,7 @@ M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();};return()=>{T=true;};}
-});
+})
 
 extern "C" {
 void str(){
