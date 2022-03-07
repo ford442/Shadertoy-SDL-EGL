@@ -410,23 +410,21 @@ var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+ 
+function adds(ac,a){
+return ac+a;
+}
+var min$=new Float32Array(1);
+var max$=new Float32Array(1);
+min$[0]=[0.0];
+max$[0]=[1.0];
+let avgs=new Float32Array(8);
+let avg$=new Float32Array(1);
 function avvg(){
-avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
+avg$.set([avgs.reduce(adds,0)/8]);
 console.log(avgs);
-// console.log(min$);
- //  console.log(max$);
-}
-var min$=0.0;
-var max$=1.0;
-function setMin(a,b){
-return Math.min(a,b);
-}
-function setMax(a,b){
-return Math.max(a,b);
-}
-function avgg(a,b){
-return a+b;
+console.log(avg$);
+console.log(min$[0]+" "+max$[0]);
 }
   
 var R=g.createKernel(function(tv){
@@ -523,6 +521,8 @@ if($F==5){
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
+var $$A=R(vv).toArray();
+
 $TT.set($$1);
 $1.set(R($TT));
 avvg();
