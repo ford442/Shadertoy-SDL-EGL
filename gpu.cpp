@@ -503,10 +503,7 @@ console.log("wasm");
 console.log(R($TT));
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
 $T.set(R($TT));
-var lln=t(Array.from($T));
-console.log(lln);
-  console.log("wasm f32"); // .setOptimizeFloatMemory(true)
-console.log(lln);
+
 console.log("normal");
 console.log(ffg);
 console.log("toarray");
