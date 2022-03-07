@@ -517,7 +517,7 @@ $TT.set($$2);
 $2.set(R($TT));
 var aveTotal=0;
 for(var il=0;i<la;il++){
-aveTotal=aveTotal+$2[i+3];
+aveTotal=aveTotal+$TT[i+3];
 }
 avgs[2]=aveTotal/(la);
 $F=7;
