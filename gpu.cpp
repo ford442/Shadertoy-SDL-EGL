@@ -516,10 +516,10 @@ var $$2=R(vv);
 $TT.set($$2);
 $2.set(R($TT));
 var aveTotal=0;
-for(var il=0;i<la;i++){
-aveTotal=aveTotal+$TT[i+3];
+for(var il=0;i<la;il++){
+aveTotal=aveTotal+$2[i+3];
 }
-avgs[1]=aveTotal/(la);
+avgs[2]=aveTotal/(la);
 $F=7;
 }
 if($F==5){  
