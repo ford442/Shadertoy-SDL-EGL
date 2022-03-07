@@ -403,8 +403,8 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-var wh$=Math.min(h$,w$);
-var o=[h$,h$];
+var mh$=Math.min(h$,w$);
+var o=[mh$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
@@ -430,7 +430,7 @@ return a+b;
 }
   
 var R=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x];
+return tv[this.thread.y][this.thread.x+this.constants.blnk];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
@@ -440,7 +440,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x];
+const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 var favg=this.constants.aVg;
 var minMax=this.constants.max-this.constants.min-favg+this.constants.min;
 this.color(p[0],p[1],p[2],p[3]);
@@ -452,10 +452,10 @@ var h$=Math.round(document.getElementById('ihig').innerHTML);
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
-var o=[h$,h$];
+var o=[mh$,h$];
 var ro=[h$,h$];
-var l=h$*h$*32;
-var la=h$*h$;
+var l=mh$*h$*32;
+var la=mh$*h$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
