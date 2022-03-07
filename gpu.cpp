@@ -511,7 +511,7 @@ $TT.set($$4);
 $4.set(R($TT));
 $F=1;
 }
-if($F==7){  console.log("7");
+if($F==7){ 
 
 var $r7=R($7);
 r($7);
@@ -520,7 +520,7 @@ $TT.set($$3);
 $3.set(R($TT));
 $F=8;
 }
-if($F==6){  console.log("6");
+if($F==6){  
 
 var $r6=t($6);
 r($r6);
@@ -534,17 +534,16 @@ aveTotal=aveTotal+$1[i+3];
 avgs[1]=aveTotal/(l/16);
 $F=7;
 }
-if($F==5){  console.log("5");
-
+if($F==5){    console.log("5");
 var $r5=R($5);
-r(t($5));
+r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
   // avvg();
 $F=6;
 }
-if($F==4){
+if($F==4){  console.log("4");
 var $r4=R($4);
 r(t($r4));
 var $$8=R(vv);
@@ -552,9 +551,9 @@ $TT.set($$8);
 $8.set(R($TT));
 $F=5;
 }
-if($F==3){
+if($F==3){  console.log("3");
 var $r3=R($3);
-r($r3);
+r(t($r3));
 var $$7=R(vv);
 $TT.set($$7);
 $7.set(R($TT));
