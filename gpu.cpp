@@ -403,7 +403,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-var h$=Math.min(h$,w$);
+var wh$=Math.min(h$,w$);
 var o=[h$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
