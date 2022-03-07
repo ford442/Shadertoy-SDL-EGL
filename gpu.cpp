@@ -506,7 +506,7 @@ $T.set(R($TT));
 var lln=R($T);
 console.log(lln);
   console.log("wasm f32"); // .setOptimizeFloatMemory(true)
-console.log(new Float32Array.of(lln));
+console.log(new Float32Array(lln));
 console.log("normal");
 console.log(ffg);
 console.log("toarray");
