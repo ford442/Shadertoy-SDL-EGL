@@ -410,25 +410,25 @@ var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+
+function adds(ac,a){
+return ac+a;
+}
+ 
+var min$=new Float32Array(1);
+var max$=new Float32Array(1);
+min$[0]=[0.0];
+max$[0]=[1.0];
+let avgs=new Float32Array(8);
+let avg$=new Float32Array(1);
+ 
 function avvg(){
-avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
+avg$.set([avgs.reduce(adds,0)/8]);
 console.log(avgs);
-// console.log(min$);
- //  console.log(max$);
+console.log(avg$);
+console.log(min$[0]+" "+max$[0]);
 }
-var min$=0.0;
-var max$=1.0;
-function setMin(a,b){
-return Math.min(a,b);
-}
-function setMax(a,b){
-return Math.max(a,b);
-}
-function avgg(a,b){
-return a+b;
-}
-  
+
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
@@ -444,7 +444,7 @@ const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 var favg=this.constants.aVg;
 var minMax=this.constants.max-this.constants.min-favg+this.constants.min;
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avgs[0]}).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$,max:max$,min:min$,aVg:avg$}).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
@@ -460,6 +460,7 @@ var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
 var WW=new ArrayBuffer(l);
+var $A=new ArrayBuffer(l/4);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -469,6 +470,7 @@ var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
 var $TT=new Float32Array(WW);
+var $A=new Float32Array($A);
 var $1=new Float32Array(W1.buffer,0,la);
 var $2=new Float32Array(W2.buffer,0,la);
 var $3=new Float32Array(W3.buffer,0,la);
@@ -522,6 +524,10 @@ var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
+var $ave1=$$1.toArray();
+avgs.set([$ave1.reduce(adds,0)/$ave1.length],1);
+min.set([Math.min(...$ave1)],0);
+max.set([Math.min(...$ave1)],0);
 $1.set(R($TT));
 avvg();
 $F=6;
