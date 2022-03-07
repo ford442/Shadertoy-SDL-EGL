@@ -531,7 +531,7 @@ var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
  var nn=new Float32Array(WW,0,1);
- var ou=parseInt(nn);
+ var ou=parseInt(nn*1000);
   console.log(ou*1000);
 
 avvg();
