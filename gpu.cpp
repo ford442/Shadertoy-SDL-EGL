@@ -525,12 +525,13 @@ $2.set(R($TT));
 $F=7;
 }
 if($F==5){  
- console.log(new Float32Array($TT,4,4));
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
+  console.log(new Float32Array(R($TT),4,4));
+
 avvg();
 $F=6;
 }
