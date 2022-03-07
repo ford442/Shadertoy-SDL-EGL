@@ -483,9 +483,9 @@ console.log(W1.buffer.length);
 console.log(W1.buffer.byteLength);
 console.log($1.length);
 console.log($1.byteLength); 
-$1.set(t(vv));
-$2.set(t(vv));
-$3.set(t(vv));
+$1.set(R(vv));
+$2.set(R(vv));
+$3.set(R(vv));
 r.setOutput(o);
 let $F=1;
 function M(){
@@ -493,18 +493,18 @@ if(T)
 {return;
 }
 if($F==8){
-r(R($8));
-$4.set(t(vv));
+r(t($8));
+$4.set(R(vv));
 $F=1;
 }
 if($F==7){
-r(R($7));
-$3.set(t(vv));
+r(t($7));
+$3.set(R(vv));
 $F=8;
 }
 if($F==6){
-r(R($6));
-$2.set(t(vv));
+r(t($6));
+$2.set(R(vv));
 var aveTotal=0;
 for(var il=0;i<l;i++){
 aveTotal=aveTotal+$1[i+3];
@@ -513,29 +513,29 @@ avgs[1]=aveTotal/(l/16);
 $F=7;
 }
 if($F==5){
-r(R($5));
-$1.set(t(vv));
+r(t($5));
+$1.set(R(vv));
 // avvg();
 $F=6;
 }
 if($F==4){
-r(R($4));
-$8.set(t(vv));
+r(t($4));
+$8.set(R(vv));
 $F=5;
 }
 if($F==3){
-r(R($3));
-$7.set(t(vv));
+r(t($3));
+$7.set(R(vv));
 $F=4;
 }  
 if($F==2){
-r(R($2));
-$6.set(t(vv));
+r(t($2));
+$6.set(R(vv));
 $F=3;
 }
 if($F==1){
-r(R($1));
-$5.set(t(vv));
+r(t($1));
+$5.set(R(vv));
 avvg();
 $F=2;
 }
