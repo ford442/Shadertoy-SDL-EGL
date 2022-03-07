@@ -487,6 +487,7 @@ var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
 R.setOutput(o);
+R2.setOutput(o);
 Rr.setOutput(o);
 console.log(W1.buffer.length);
 console.log(W1.buffer.byteLength);
@@ -505,21 +506,24 @@ if($F==8){
 var $r8=Rr($8);
 r($r8);
 var $$4=R(vv);
-$4.set($$4);
+$TT.set($$4);
+$4.set(R($TT));
 $F=1;
 }
 if($F==7){
 var $r7=Rr($7);
 r($r7);
 var $$3=R(vv);
-$3.set($$3);
+$TT.set($$3);
+$3.set(R($TT));
 $F=8;
 }
 if($F==6){
 var $r6=Rr($6);
 r($r6);
 var $$2=R(vv);
-$2.set($$2);
+$TT.set($$2);
+$2.set(R($TT));
 var aveTotal=0;
 for(var il=0;i<l;i++){
 aveTotal=aveTotal+$1[i+3];
@@ -532,7 +536,7 @@ var $r5=Rr($5);
 r($r5);
 var $$1=R(vv);
 $TT.set($$1);
-$1.set(R($$1));
+$1.set(R($TT));
   // avvg();
 $F=6;
 }
@@ -540,21 +544,24 @@ if($F==4){
 var $r4=Rr($4);
 r($r4);
 var $$8=R(vv);
-$8.set($$8);
+$TT.set($$8);
+$8.set(R($TT));
 $F=5;
 }
 if($F==3){
 var $r3=Rr($3);
 r($r3);
 var $$7=R(vv);
-$7.set($$7);
+$TT.set($$7);
+$7.set(R($TT));
 $F=4;
 }  
 if($F==2){
 var $r2=Rr($2);
 r($r2);
 var $$6=R(vv);
-$6.set($$6);
+$TT.set($$6);
+$6.set(R($TT));
 $F=3;
 }
 if($F==1){
@@ -563,7 +570,7 @@ r($r1);
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
-  avvg();
+avvg();
 $F=2;
 }
 setTimeout(function(){M();},16.666);}
