@@ -483,8 +483,6 @@ min$.set([1.0],0);
 max$.set([0.0],0);
 console.log(avgs);
 console.log(avg$);
- var rdd=new Float32Array(WW,44,1);
-console.log(rdd*100);
 console.log(min$[0]+" "+max$[0]);
 }
 
@@ -527,6 +525,8 @@ $2.set(R($TT));
 $F=7;
 }
 if($F==5){  
+ console.log(new Float32Array(WW,44,1));
+
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
