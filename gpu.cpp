@@ -523,8 +523,8 @@ var avg1=rd.reduce(adds,0)/rd.length;
   console.log(avg1);
 
 avgs[0]=avg1;
-min$[0]=Math.min(...$$A);
-max$[0]=Math.max(...$$A);
+min$[0]=Math.min(...rd);
+max$[0]=Math.max(...rd);
 $TT.set($$1);
 $1.set(R($TT));
 avvg();
