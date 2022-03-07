@@ -455,6 +455,7 @@ mh$=Math.min(h$,w$);
 var o=[h$,h$];
 var ro=[h$,h$];
 var l=h$*h$*32;
+var la=h$*h$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
@@ -468,14 +469,14 @@ var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
   var $TT=new Float32Array(WW);
-var $1=new Float32Array(W1.buffer,0,l);
-var $2=new Float32Array(W2.buffer,0,l);
-var $3=new Float32Array(W3.buffer,0,l);
-var $4=new Float32Array(W4.buffer,0,l);
-var $5=new Float32Array(W5.buffer,0,l);
-var $6=new Float32Array(W6.buffer,0,l);
-var $7=new Float32Array(W7.buffer,0,l);
-var $8=new Float32Array(W8.buffer,0,l);
+var $1=new Float32Array(W1.buffer,0,la);
+var $2=new Float32Array(W2.buffer,0,la);
+var $3=new Float32Array(W3.buffer,0,la);
+var $4=new Float32Array(W4.buffer,0,la);
+var $5=new Float32Array(W5.buffer,0,la);
+var $6=new Float32Array(W6.buffer,0,la);
+var $7=new Float32Array(W7.buffer,0,la);
+var $8=new Float32Array(W8.buffer,0,la);
 var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
@@ -515,10 +516,10 @@ var $$2=R(vv);
 $TT.set($$2);
 $2.set(R($TT));
 var aveTotal=0;
-for(var il=0;i<l;i++){
+for(var il=0;i<la;i++){
 aveTotal=aveTotal+$1[i+3];
 }
-avgs[1]=aveTotal/(l/16);
+avgs[1]=aveTotal/(la);
 $F=7;
 }
 if($F==5){  
