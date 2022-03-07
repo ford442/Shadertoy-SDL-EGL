@@ -452,7 +452,7 @@ var la=mh$*h$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
-var WW=new ArrayBuffer(l);
+var WW=new ArrayBuffer(la*4);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -525,8 +525,7 @@ $2.set(R($TT));
 $F=7;
 }
 if($F==5){  
- console.log(new Float32Array($TT,44,1));
-
+ console.log(new Float32Array($TT,4,4));
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
