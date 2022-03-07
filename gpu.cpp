@@ -520,7 +520,7 @@ var $$1=R(vv);
 var $$1a=t(vv);
 var $$A=$$1a.toArray();
  console.log($$A);
-var avg1=$$A.reduce(adds,0)/$$A.length;
+var avg1=$$A.reduce(adds,0.0)/$$A.length;
   console.log(avg1);
 
 avgs[0]=avg1;
