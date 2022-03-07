@@ -410,18 +410,20 @@ var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
+let minn=new ArrayBuffer(4);
+let maxx=new ArrayBuffer(4);
 function adds(ac,a){
 return ac+a;
 }
-let min$=new Float32Array(1);
-let max$=new Float32Array(1);
+let min$=new Float32Array(minn);
+let max$=new Float32Array(maxx);
 min$[0]=[0.0];
 max$[0]=[1.0];
-let avgs=new Float32Array(8);
-let avg$=new Float32Array(1);
+ let avv=new ArrayBuffer(32);
+ let avv$=new ArrayBuffer(4);
+let avgs=new Float32Array(avv);
+let avg$=new Float32Array(avv$);
  
- 
-  
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
@@ -472,6 +474,7 @@ var T=false;
 var vv=document.getElementById("mv");
  
 function avvg(){
+ 
 avg$.set([avgs.reduce(adds,0)/8]);
 avgs.set([1.0],0);
 avgs.set([2.0],2);
