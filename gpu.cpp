@@ -429,12 +429,16 @@ function avgg(a,b){
 return a+b;
 }
   
-var Rr=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x];
+var Rr=g.createKernel(function(utv){
+return utv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setDynamicOutput(true).setOutput(o);
   
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
+}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
+  
+  var R2=g.createKernel(function(tuv){
+return tuv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
@@ -489,9 +493,10 @@ console.log(W1.buffer.byteLength);
 console.log($1.length);
 console.log($1.byteLength); 
 var $$1=R(vv);
-$1.set($$1);
-$2.set($$1);
-$3.set($$1);
+$TT.set($$1);
+$1.set(R($TT));
+$2.set(R($TT));
+$3.set(R($TT));
 r.setOutput(o);
 let $F=1;
 function M(){
@@ -526,8 +531,9 @@ if($F==5){
 var $r5=Rr($5);
 r($r5);
 var $$1=R(vv);
-$1.set($$1);
-// avvg();
+$TT.set($$1);
+$1.set(R($$1));
+  // avvg();
 $F=6;
 }
 if($F==4){
@@ -552,11 +558,12 @@ $6.set($$6);
 $F=3;
 }
 if($F==1){
-var $r1=Rr($1);
+var $r1=R($1);
 r($r1);
 var $$5=R(vv);
-$5.set($$5);
-avvg();
+$TT.set($$5);
+$5.set(R($TT));
+  avvg();
 $F=2;
 }
 setTimeout(function(){M();},16.666);}
