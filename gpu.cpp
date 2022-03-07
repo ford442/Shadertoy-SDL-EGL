@@ -459,7 +459,7 @@ var la=mh$*h$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
-  var  WW=new ArrayBuffer(l);
+var WW=new ArrayBuffer(l);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -468,7 +468,7 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-  var $TT=new Float32Array(WW);
+var $TT=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,la);
 var $2=new Float32Array(W2.buffer,0,la);
 var $3=new Float32Array(W3.buffer,0,la);
@@ -517,7 +517,7 @@ $TT.set($$2);
 $2.set(R($TT));
 var aveTotal=0;
 for(var il=0;i<la;i++){
-aveTotal=aveTotal+$1[i+3];
+aveTotal=aveTotal+$TT[i+3];
 }
 avgs[1]=aveTotal/(la);
 $F=7;
