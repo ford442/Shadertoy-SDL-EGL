@@ -518,9 +518,8 @@ var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 var $$1a=t(vv);
-var $$A=$$1a.toArray();
- console.log($$A);
-var avg1=$$A.reduce(adds,0.0)/$$A.length;
+var rd=R($$1a).toArray();
+var avg1=rd.reduce(adds,0)/rd.length;
   console.log(avg1);
 
 avgs[0]=avg1;
