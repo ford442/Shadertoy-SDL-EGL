@@ -470,7 +470,7 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $T=new Float32Array(WT.buffer,0,l/4);
+var $T=new Float32Array(WT.buffer,0,l/16);
 var $T2=new Float32Array(WT2);
   var $TT=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,l/16);
@@ -488,8 +488,8 @@ B.setOutput(o);
 R.setOutput(o);
 
   
-  console.log(W1.length);
-  console.log(W1.byteLength);
+  console.log(W1.buffer.length);
+  console.log(W1.buffer.byteLength);
   
   console.log(WW.length);
   console.log(WW.byteLength);
@@ -497,16 +497,16 @@ R.setOutput(o);
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength); 
-  var ffg=t(vv);
+  var ffg=R(vv);
   $TT.set(ffg);
 console.log("wasm");
 console.log(R($TT));
 console.log("wasm 2"); // .setOptimizeFloatMemory(true)
-$T.set(R($TT));
-var lln=R($T);
+$T.set(B($TT));
+var lln=t($T);
 console.log(lln);
   console.log("wasm f32"); // .setOptimizeFloatMemory(true)
-console.log(new Float32Array(lln));
+console.log(lln);
 console.log("normal");
 console.log(ffg);
 console.log("toarray");
@@ -518,8 +518,16 @@ $3.set(t(vv));
 // r($TT);  
  console.log("render wasm");
 r.setOutput(o);
-r(new Float32Array(WW));
+r($T);
+  console.log("render wasm 2");
+    $1.set(t($TT));
 
+r($1);
+
+ console.log("render wasm buff");
+r.setOutput(o);
+r($TT);
+  
 let $F=1;
 function M(){
 if(T)
