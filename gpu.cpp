@@ -486,7 +486,14 @@ var vv=document.getElementById("mv");
 t.setOutput(o);
 B.setOutput(o);
 R.setOutput(o);
-  console.log($T.length);
+
+  
+  console.log(W1.length);
+  console.log(W1.byteLength);
+  
+  console.log(WW.length);
+  console.log(WW.byteLength);
+    console.log($T.length);
   console.log($T.byteLength);
     console.log($1.length);
     console.log($1.byteLength); 
@@ -511,7 +518,7 @@ $3.set(t(vv));
 // r($TT);  
  console.log("render wasm");
 r.setOutput(o);
-r($T);
+r(new Float32Array(WW));
 
 let $F=1;
 function M(){
