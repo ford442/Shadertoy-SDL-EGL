@@ -455,7 +455,7 @@ var mh$=Math.min(h$,w$);
 var o=[mh$,h$];
 var ro=[h$,h$];
 var l=mh$*h$*32;
-var la=mh$*h$;
+var la=mh$*h$*4;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
@@ -515,8 +515,6 @@ r(t($r6));
 var $$2=R(vv);
 $TT.set($$2);
 $2.set(R($TT));
-var aveTotal=0;
-avgs[2]=aveTotal/(la);
 $F=7;
 }
 if($F==5){  
