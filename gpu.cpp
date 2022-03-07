@@ -440,7 +440,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x+this.constants.nblnk];
+const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 var favg=this.constants.aVg;
 var minMax=this.constants.max-this.constants.min-favg+this.constants.min;
 this.color(p[0],p[1],p[2],p[3]);
