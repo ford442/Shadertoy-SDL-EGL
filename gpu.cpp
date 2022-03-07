@@ -403,17 +403,17 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-let mh$=Math.min(h$,w$);
-let o=[mh$,h$];
-let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let g=new GPU({canvas:bcanvas,webGl:contx});
-let blank$=Math.max(((w$-h$)/2),0);
-let nblank$=Math.max((h$-w$),0);
-let avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var h$=Math.min(h$,w$);
+var o=[h$,h$];
+var bcanvas=document.getElementById("bcanvas");
+var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var g=new GPU({canvas:bcanvas,webGl:contx});
+var blank$=Math.max(((w$-h$)/2),0);
+var nblank$=Math.max((h$-w$),0);
+var avgs=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 function avvg(){
 avgs[0]=(avgs[1]+avgs[2]+avgs[3]+avgs[4]+avgs[5]+avgs[6]+avgs[7]+avgs[8])/8;
-  console.log(avgs);
+ // console.log(avgs);
 // console.log(min$);
  //  console.log(max$);
 }
@@ -429,16 +429,8 @@ function avgg(a,b){
 return a+b;
 }
   
-var Rr=g.createKernel(function(utv){
-return utv[this.thread.y][this.thread.x];
-}).setTactic("balanced").setDynamicOutput(true).setOutput(o);
-  
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
-}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
-  
-  var R2=g.createKernel(function(tuv){
-return tuv[this.thread.y][this.thread.x];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
@@ -460,9 +452,9 @@ var h$=Math.round(document.getElementById('ihig').innerHTML);
 blank$=Math.max(((w$-h$)/2),0);
 nblank$=Math.max((h$-w$),0);
 mh$=Math.min(h$,w$);
-var o=[mh$,h$];
+var o=[h$,h$];
 var ro=[h$,h$];
-var l=mh$*h$*16;
+var l=h$*h$*16;
 var m=Math.ceil(l/65536)+1;
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
@@ -488,8 +480,6 @@ var T=false;
 var vv=document.getElementById("mv");
 t.setOutput(o);
 R.setOutput(o);
-R2.setOutput(o);
-Rr.setOutput(o);
 console.log(W1.buffer.length);
 console.log(W1.buffer.byteLength);
 console.log($1.length);
@@ -499,7 +489,7 @@ $TT.set($$1);
 $1.set(R($TT));
 $2.set(R($TT));
 $3.set(R($TT));
-r.setOutput(ro);
+r.setOutput(o);
 let $F=1;
 function M(){
 if(T){return;}
