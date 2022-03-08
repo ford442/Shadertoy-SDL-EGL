@@ -435,7 +435,7 @@ return[P[0],P[1],P[2],(aveg)];
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x+this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
 
 var d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
