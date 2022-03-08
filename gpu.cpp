@@ -526,7 +526,7 @@ var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 var $$r=Ra(vv);
-$TTa.set($$r.toArray());
+$TTa.set($$r);
 $TT.set($$1);
 $1.set(R($TT));
 $F=6;
