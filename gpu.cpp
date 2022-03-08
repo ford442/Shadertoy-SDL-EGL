@@ -413,15 +413,14 @@ var nblank$=Math.max((h$-w$),0);
 let minn=new ArrayBuffer(4);
 let maxx=new ArrayBuffer(4);
 
-let min$=new Float32Array(minn);
-let max$=new Float32Array(maxx);
-min$[0]=[0.0];
-max$[0]=[1.0];
- let avv=new ArrayBuffer(32);
- let avv$=new ArrayBuffer(4);
-let avgs=new Float32Array(avv);
-let avg$=new Float32Array(avv$);
- 
+let min$=new Float32Array(minn,0,1);
+let max$=new Float32Array(maxx,0,1);
+min$.set([0.0]);
+max$.set([0.0]);
+let avv=new ArrayBuffer(32);
+let avv$=new ArrayBuffer(4);
+let avgs=new Float32Array(avv,0,8);
+let avg$=new Float32Array(avv$,0,1);
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
@@ -521,11 +520,12 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-let nn=R($TT);
+let nn=t($TT);
 let fave=nn.toArray();
-let ttl=Math.min(...fave);
+ let gtg=new Float32Array(fave);
+let ttl=Math.min(...gtg);
  console.log(ttl);
- console.log(fave);
+ console.log(gtg);
 avvg();
 $F=6;
 }
