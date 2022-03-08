@@ -475,11 +475,11 @@ return ac+a;
 }
 function avvg(){
 var fave=new Float32Array(W1,0,la);
-var ttl2=new Float32Array(fave[0]);
-  avgs.set([ttl2],0);
+  avgs.set([fave[0]],0);
 min$.set([Math.min(...fave)],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 console.log(avgs);
+console.log(min$);
 }
 t.setOutput(o);
 R.setOutput(o);
