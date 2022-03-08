@@ -480,12 +480,12 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-let fave=Ra($TTa).toArray();
+let fave=Ra($TTa);
+let ara=fave.toArray();
 let ttl2=fave[0][0][0];
 avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 }
-avvg();
 t.setOutput(o);
 R.setOutput(o);
 var $$1=R(vv);
@@ -564,6 +564,7 @@ $5.set(R($TT));
 $F=2;
 }
 setTimeout(function(){M();},16.666);}
+avvg();
 M();
 document.getElementById("di").onclick=function(){
 T=true;
