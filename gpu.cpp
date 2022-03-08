@@ -474,7 +474,7 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-var fave=new Float32Array(W1,0,la);
+var fave=new Float32Array(W1.buffer,0,la);
   avgs.set([fave[0]],0);
 min$.set([Math.min(...fave)],0);
 avg$.set([avgs.reduce(adds,0)/8]);
