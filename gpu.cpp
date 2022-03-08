@@ -560,8 +560,8 @@ $F=3;
 if($F==1){
 var $r1=R($1);
 r(t($r1));
- var nn=new Float32Array(W1).toArray();
-  console.log(nn);
+ var nn=new Float32Array(W1);
+  console.log(nn.toArray());
  var ounn=$1.toArray();
    console.log(ounn);
 
