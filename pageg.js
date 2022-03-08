@@ -1,7 +1,8 @@
 
 var slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
 const $iwid=document.getElementById("iwid");
-const mV=document.getElementById("mv");
+var mV=document.getElementById("mv");
+var loadV=document.getElementById("ldv");
 var $sngs=[];
 var $vids=[];
 var $shds=[];
@@ -83,7 +84,6 @@ document.getElementById('pmhig').innerHTML=Math.round(window.innerHeight);
 // document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
-const loadV=document.getElementById("ldv");
 loadV.addEventListener('canplay',function(){
     document.getElementById("hig").innerHTML=this.videoWidth;
     document.getElementById("wid").innerHTML=this.videoHeight;
@@ -169,6 +169,10 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
  setTimeout(function(){document.getElementById("btn").click();},1750);
  setTimeout(function(){document.getElementById("btn3").click();},1750);
 vide=document.querySelectorAll("video");
+vide[0].addEventListener('loadedmetadata', function(e){
+    console.log(vide[0].videoHeight);
+    console.log(vide[0].videoWidth);
+});
 function loada(){
     document.getElementById('pmhig').innerHTML=window.innerHeight;
     hii=Math.round(window.innerHeight);
