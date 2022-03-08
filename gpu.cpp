@@ -475,9 +475,9 @@ return ac+a;
 }
 function avvg(){
 avg$.set([avgs.reduce(adds,0)/8]);
-console.log(new Float32Array(avv));
-console.log(new Float32Array(avv$));
-console.log(min$[0]+" "+max$[0]);
+console.log(avgs);
+console.log(avg$);
+console.log(min$+" "+max$);
 }
 
 t.setOutput(o);
@@ -522,8 +522,10 @@ var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
  
-var nn=R($TT).toArray();
+var nn=t($1).toArray();
+console.log(nn[0][0][0]);
 var fave=nn.reduce(adds,0)/nn.length;
+console.log(parseFloat(fave));
 avgs.set([fave],0); 
 avvg();
 $F=6;
