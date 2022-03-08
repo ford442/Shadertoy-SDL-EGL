@@ -140,6 +140,13 @@ setTimeout(function(){
     document.getElementById("btn6").style.display="none";
     document.getElementById("btn7").style.display="none";
 },1800);
+loadV.addEventListener('loadedmetadata', function(e){
+    console.log(loadV.videoHeight);
+
+    // Print the native width of the video
+    console.log(loadV.videoWidth);
+});
+
 document.getElementById("hig").innerHTML=he;
 document.getElementById("wid").innerHTML=wi;
 hii=Math.round(window.innerHeight);
