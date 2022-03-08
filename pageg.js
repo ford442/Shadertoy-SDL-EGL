@@ -171,8 +171,7 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
 vide=document.querySelectorAll("video");
 
 function loada(){
-    loadV.height=1080;
-   mV.height=1080;
+  
      loadV.addEventListener('loadedmetadata', function(e){
     console.log(loadV.videoHeight);
     console.log(loadV.videoWidth);
@@ -210,6 +209,9 @@ function loada(){
     console.log("w: "+loadV.videoWidth);
     setTimeout(function(){
         loadV.src=document.getElementById("isrc").innerHTML;
+          loadV.height=1080;
+          loadV.height=1920;
+          loadV.play();
         loadV.currentTime=document.getElementById("itim").innerHTML;
         loadV.width=$iwid.innerHTML;
         loadV.height=datb.innerHTML;
