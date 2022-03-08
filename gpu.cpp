@@ -476,8 +476,11 @@ return ac+a;
 function avvg(){
 var fave=new Float32Array(W1,0,la);
 var ttl2=fave[0];
+  var tts=Math.min(...fave);
 avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
+console.log(avgs);
+console.log(tts);
 }
 t.setOutput(o);
 R.setOutput(o);
