@@ -475,7 +475,7 @@ return ac+a;
 }
   
 function avvg(){
-  var fave=new Float32Array(W1.buffer,0,la);
+  var fave=new Float32Array($1,0,la);
   var get$=new ArrayBuffer(64);
   var gett=new Float32Array(get$);
   gett.set(fave[0]);
