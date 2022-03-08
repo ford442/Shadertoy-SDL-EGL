@@ -405,7 +405,6 @@ var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
 var mh$=Math.min(h$,w$);
 var o=[h$,h$];
-var o=[h$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
@@ -435,7 +434,7 @@ return[P[0],P[1],P[2],(aveg)];
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$,nblnk:nblank$}).setOutput(ro);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$,nblnk:nblank$}).setOutput(o);
 
 var d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
@@ -446,7 +445,6 @@ t.setConstants({blnk:blank$,nblnk:nblank$});
 r.setConstants({blnk:blank$,nblnk:nblank$});
 var mh$=Math.min(h$,w$);
 var o=[h$,h$];
-var ro=[h$,h$];
 var l=h$*h$*32;
 var la=h$*h$;
 var m=Math.ceil(l/65536);
@@ -475,18 +473,16 @@ var vv=document.getElementById("mv");
 function adds(ac,a){
 return ac+a;
 }
-  
 function avvg(){
 }
-
 t.setOutput(o);
 R.setOutput(o);
+r.setOutput(o);
 var $$1=R(vv);
 $TT.set($$1);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-r.setOutput(ro);
 let $F=1;
 function M(){
 if(T){return;}
