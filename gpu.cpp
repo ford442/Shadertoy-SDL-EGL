@@ -525,8 +525,6 @@ let nn=t($TT);
 let fave=nn.toArray();
 let ttl=Math.min(...fave);
  console.log(ttl);
- console.log(parseFloat(ttl));
-min$.set([ttl],0); 
 avvg();
 $F=6;
 }
