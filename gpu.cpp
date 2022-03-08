@@ -433,7 +433,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var r=g.createKernel(function(f){
-var p=f[this.thread.y+this.constants.blnk][this.thread.x-this.constants.blnk];
+var p=f[this.thread.y+this.constants.nblnk][this.thread.x-this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
 
@@ -445,9 +445,9 @@ var nblank$=Math.max((h$-w$)/2,0);
 t.setConstants({blnk:blank$,nblnk:nblank$});
 r.setConstants({blnk:blank$,nblnk:nblank$});
 var mh$=Math.min(h$,w$);
-var o=[mh$,w$];
+var o=[h$,w$];
 var ro=[h$,h$];
-var l=mh$*w$*32;
+var l=h$*w$*32;
 var la=h$*w$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
