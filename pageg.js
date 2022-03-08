@@ -170,8 +170,8 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
  setTimeout(function(){document.getElementById("btn3").click();},1750);
 vide=document.querySelectorAll("video");
 vide[0].addEventListener('loadedmetadata', function(e){
-    console.log(vide[0].videoHeight);
-    console.log(vide[0].videoWidth);
+    console.log(vide[0].naturalHeight);
+    console.log(vide[0].naturalWidth);
 });
 function loada(){
     document.getElementById('pmhig').innerHTML=window.innerHeight;
