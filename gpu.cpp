@@ -422,8 +422,8 @@ let avv$=new ArrayBuffer(4);
 let avgs=new Float32Array(avv,0,8);
 let avg$=new Float32Array(avv$,0,1);
   
-var Ra=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x];
+var Ra=g.createKernel(function(tgv){
+return tgv[this.thread.y][this.thread.x];
 }).setTactic("speed").setDynamicOutput(true).setOutput(o);
   
 var R=g.createKernel(function(tv){
@@ -452,37 +452,37 @@ var ro=[h$,h$];
 var l=mh$*h$*32;
 var la=mh$*h$;
 var m=Math.ceil(l/65536);
-var WT=new WebAssembly.Memory({initial:m});
-var WT2=new WebAssembly.Memory({initial:m});
-var WW=new ArrayBuffer(l);
-var WWa=new ArrayBuffer(l);
-var W1=new WebAssembly.Memory({initial:m});
-var W2=new WebAssembly.Memory({initial:m});
-var W3=new WebAssembly.Memory({initial:m});
-var W4=new WebAssembly.Memory({initial:m});
-var W5=new WebAssembly.Memory({initial:m});
-var W6=new WebAssembly.Memory({initial:m});
-var W7=new WebAssembly.Memory({initial:m});
-var W8=new WebAssembly.Memory({initial:m});
-var $TT=new Float32Array(WW);
-var $TTa=new Float32Array(WW);
-var $1=new Float32Array(W1.buffer,0,la);
-var $2=new Float32Array(W2.buffer,0,la);
-var $3=new Float32Array(W3.buffer,0,la);
-var $4=new Float32Array(W4.buffer,0,la);
-var $5=new Float32Array(W5.buffer,0,la);
-var $6=new Float32Array(W6.buffer,0,la);
-var $7=new Float32Array(W7.buffer,0,la);
-var $8=new Float32Array(W8.buffer,0,la);
+let WT=new WebAssembly.Memory({initial:m});
+let WT2=new WebAssembly.Memory({initial:m});
+let WW=new ArrayBuffer(l);
+let WWa=new ArrayBuffer(l);
+let W1=new WebAssembly.Memory({initial:m});
+let W2=new WebAssembly.Memory({initial:m});
+let W3=new WebAssembly.Memory({initial:m});
+let W4=new WebAssembly.Memory({initial:m});
+let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
+let $TT=new Float32Array(WW);
+let $TTa=new Float32Array(WW);
+let $1=new Float32Array(W1.buffer,0,la);
+let $2=new Float32Array(W2.buffer,0,la);
+let $3=new Float32Array(W3.buffer,0,la);
+let $4=new Float32Array(W4.buffer,0,la);
+let $5=new Float32Array(W5.buffer,0,la);
+let $6=new Float32Array(W6.buffer,0,la);
+let $7=new Float32Array(W7.buffer,0,la);
+let $8=new Float32Array(W8.buffer,0,la);
 var T=false;
 var vv=document.getElementById("mv");
 function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-let fave=Ra($TTa);
-let ara=fave.toArray();
-let ttl2=fave[0][0][0];
+var fave=Ra($TTa);
+var ara=fave.toArray();
+var ttl2=fave[0][0][0];
 avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 }
