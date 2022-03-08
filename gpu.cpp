@@ -477,7 +477,7 @@ function avvg(){
 avg$.set([avgs.reduce(adds,0)/8]);
 console.log(avgs);
 console.log(avg$);
-console.log(min$+" "+max$);
+console.log(new Float32Array(minn)+" "+max$);
 }
 
 t.setOutput(o);
@@ -525,7 +525,7 @@ $1.set(R($TT));
 let nn=t($1);
 let fave=nn.toArray();
 let ttl=Math.min(...fave);
-min$.set([new Float32Array(ttl)],0); 
+min$.set([ttl],0); 
 avvg();
 $F=6;
 }
