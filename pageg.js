@@ -171,8 +171,8 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
 vide=document.querySelectorAll("video");
 
 function loada(){
-    loadV.videoHeight=1080;
-   mV.videoHeight=1080;
+    loadV.height=1080;
+   mV.height=1080;
      loadV.addEventListener('loadedmetadata', function(e){
     console.log(loadV.videoHeight);
     console.log(loadV.videoWidth);
