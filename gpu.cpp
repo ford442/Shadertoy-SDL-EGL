@@ -433,7 +433,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x+this.constants.nblank];
+var p=f[this.thread.y][this.thread.x+this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 
