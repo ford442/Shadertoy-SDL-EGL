@@ -415,8 +415,8 @@ let maxx=new ArrayBuffer(4);
 
 let min$=new Float32Array(minn,0,1);
 let max$=new Float32Array(maxx,0,1);
-min$.set([0.0]);
-max$.set([0.0]);
+min$.set(0.0);
+max$.set(0.0);
 let avv=new ArrayBuffer(32);
 let avv$=new ArrayBuffer(4);
 let avgs=new Float32Array(avv,0,8);
