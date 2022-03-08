@@ -446,7 +446,7 @@ t.setConstants({blnk:blank$,nblnk:nblank$});
 r.setConstants({blnk:blank$,nblnk:nblank$});
 var mh$=Math.min(h$,w$);
 var o=[h$,w$];
-var ro=[h$,h$];
+var ro=[mh$,w$];
 var l=h$*w$*32;
 var la=h$*w$;
 var m=Math.ceil(l/65536);
