@@ -182,9 +182,10 @@ function loada(){
     setTimeout(function(){
         document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
         document.getElementById("ldv").currentTime=document.getElementById("itim").innerHTML;
-        document.getElementById("ldv").play();
+        
         document.getElementById("ldv").width=document.getElementById("iwid").innerHTML;
         document.getElementById("ldv").height=document.getElementById("ihig").innerHTML;
+        document.getElementById("ldv").play();
         mv=vide[0].id;
         lo=vide[1].id;
         vide[0].id=lo;
