@@ -532,7 +532,9 @@ $TT.set($$1);
 $1.set(R($TT));
  
  var nn=R($TT);
-  console.log(nn.toArray());
+ var prt=nn.toArray();
+ var prt$=part[444];
+  console.log(parseFloat(prt$));
  
 avvg();
 $F=6;
