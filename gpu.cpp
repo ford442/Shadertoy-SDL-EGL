@@ -562,7 +562,7 @@ var $r1=R($1);
 r(t($r1));
  var nn=new Float32Array(W1,8,8,8);
  var ou=parseFloat(nn);
-  console.log(ou);
+  console.log(nn+" "+ou);
  
 var $$5=R(vv);
 $TT.set($$5);
