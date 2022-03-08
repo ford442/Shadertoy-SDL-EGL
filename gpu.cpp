@@ -455,7 +455,6 @@ var m=Math.ceil(l/65536);
 let WT=new WebAssembly.Memory({initial:m});
 let WT2=new WebAssembly.Memory({initial:m});
 let WW=new ArrayBuffer(l);
-let WWa=new ArrayBuffer(l);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -465,7 +464,6 @@ let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
 let $TT=new Float32Array(WW);
-let $TTa=new Float32Array(WW);
 let $1=new Float32Array(W1.buffer,0,la);
 let $2=new Float32Array(W2.buffer,0,la);
 let $3=new Float32Array(W3.buffer,0,la);
@@ -480,8 +478,7 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-var fave=Ra($TTa);
-var ara=fave.toArray();
+var fave=new Float32Array(W1,0,la);
 var ttl2=fave[0][0][0];
 avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
@@ -525,8 +522,6 @@ if($F==5){
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
-var $$r=Ra(vv);
-$TTa.set($$r);
 $TT.set($$1);
 $1.set(R($TT));
 $F=6;
