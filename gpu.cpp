@@ -473,29 +473,16 @@ var vv=document.getElementById("mv");
 function adds(ac,a){
 return ac+a;
 }
+  
 function avvg(){
 var fave=new Float32Array(W1,0,la);
-  var gett=new Float32Array(la);
-  gett.set(fave);
-var tester=new Float32Array(gett[0],0,4);
+var tester=(new Float32Array(fave));
 console.log(tester);
   var fave=new Float32Array(W1.buffer,0,la);
-  var gett=new Float32Array(la);
-  gett.set(fave);
-var tester=new Float32Array(gett[0],0,4);
+ var tester=(new Float32Array(fave));
 console.log(tester);
-var fave=new Float32Array(W1,0,la);
-var tester=new Float32Array(fave[0]);
-console.log(tester);
-  var fave=new Float32Array(W1.buffer,0,la);
-var tester=new Float32Array(fave[0]);
-console.log(tester);
- //  avgs.set([fave[0]],0);
-// min$.set([Math.min(...fave)],0);
-// avg$.set([avgs.reduce(adds,0)/8]);
-// console.log(avgs);
-// console.log(min$);
 }
+
 t.setOutput(o);
 R.setOutput(o);
 var $$1=R(vv);
