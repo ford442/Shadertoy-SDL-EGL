@@ -475,7 +475,10 @@ return ac+a;
 }
 function avvg(){
 var fave=new Float32Array(W1.buffer,0,la);
-  var tester=t(fave);
+  var tester=fave[0];
+  console.log(tester);
+  var fave=new Float32Array(W1,0,la);
+  var tester=fave[0];
   console.log(tester);
  //  avgs.set([fave[0]],0);
 // min$.set([Math.min(...fave)],0);
