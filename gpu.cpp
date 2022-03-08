@@ -531,9 +531,8 @@ var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
  
- var nn=R($TT);
- var prt=nn.toArray();
- var prt$=prt.reduce(adds,0)/prt.length;
+ var nn=R($TT).toArray();
+ var prt$=nn.reduce(adds,0)/nn.length;
   console.log(parseFloat(prt$));
  
 avvg();
