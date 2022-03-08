@@ -421,11 +421,7 @@ let avv=new ArrayBuffer(32);
 let avv$=new ArrayBuffer(4);
 let avgs=new Float32Array(avv,0,8);
 let avg$=new Float32Array(avv$,0,1);
-  
-var Ra=g.createKernel(function(tgv){
-return tgv[this.thread.y][this.thread.x];
-}).setTactic("speed").setDynamicOutput(true).setOutput(o);
-  
+
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
@@ -479,7 +475,7 @@ return ac+a;
 }
 function avvg(){
 var fave=new Float32Array(W1,0,la);
-var ttl2=fave[0][0][0];
+var ttl2=fave[0];
 avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 }
