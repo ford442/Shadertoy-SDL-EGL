@@ -401,8 +401,8 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=parseInt(document.getElementById('iwid').innerHTML,10);
-var h$=parseInt(document.getElementById('ihig').innerHTML,10);
+var w$=document.getElementById('iwid').innerHTML;
+var h$=document.getElementById('ihig').innerHTML;
 var mh$=Math.min(h$,w$);
 var o=[h$,w$];
 var ro=[h$,h$];
@@ -438,8 +438,8 @@ this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
 
 var d=S();if(d)d();d=S();function S(){
-var w$=parseInt(document.getElementById('iwid').innerHTML,10);
-var h$=parseInt(document.getElementById('ihig').innerHTML,10);
+var w$=document.getElementById('iwid').innerHTML;
+var h$=document.getElementById('ihig').innerHTML;
 var blank$=Math.max((w$-h$)/2,0);
 var nblank$=Math.max((h$-w$)/2,0);
 t.setConstants({blnk:blank$,nblnk:nblank$});
