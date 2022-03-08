@@ -530,6 +530,10 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
+ 
+ var nn=R($TT);
+  console.log(nn.toArray());
+ 
 avvg();
 $F=6;
 }
@@ -560,12 +564,6 @@ $F=3;
 if($F==1){
 var $r1=R($1);
 r(t($r1));
- 
- var nn=R($1);
-  console.log(nn.toArray());
-
-
- 
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
