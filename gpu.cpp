@@ -474,10 +474,10 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-var fave=new Float32Array(W1.buffer,0,la);
+var fave=new Float32Array(W1.buffer,la);
   var gett=new Float32Array(la);
   gett.set(fave);
-var tester=new Float32Array(gett[0],0,1);
+var tester=new Float32Array(gett[0],1);
 console.log(tester);
 var fave=new Float32Array(W1,0,la);
     var gett=new Float32Array(la);
