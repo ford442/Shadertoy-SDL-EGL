@@ -474,9 +474,6 @@ return ac+a;
 }
 function avvg(){
 avg$.set([avgs.reduce(adds,0)/8]);
-console.log(avgs);
-console.log(avg$);
-console.log(min$+" "+max$);
 }
 
 t.setOutput(o);
@@ -520,8 +517,8 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-var fave=t($1).toArray();
-var ttl2=fave[0][0][0];
+let fave=t($1).toArray();
+let ttl2=fave[0][0][0];
 avgs.set([ttl2],0);
 avvg();
 $F=6;
