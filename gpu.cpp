@@ -475,9 +475,7 @@ return ac+a;
 }
   
 function avvg(){
-  var ttr=new ArrayBuffer(32);
-  var gett=new Float32Array(ttr);
-  console.log(gett);
+  
 }
 
 t.setOutput(o);
@@ -555,7 +553,8 @@ $TT.set($$5);
 $5.set(R($TT));
 $F=2;
 }
-setTimeout(function(){M();},16.666);}
+M();
+}
 avvg();
 M();
 document.getElementById("di").onclick=function(){
