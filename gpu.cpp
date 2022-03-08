@@ -560,13 +560,10 @@ $F=3;
 if($F==1){
 var $r1=R($1);
 r(t($r1));
- var llc=$r1.toArray();
- var nn=new Float32Array($r1,8,8,8);
+ var nn=new Float32Array(W1,8,8,8);
  var ou=parseFloat(nn);
   console.log(ou);
-  var nn=new Float32Array(llc,8,8,8);
- var ou=parseFloat(nn);
-  console.log(ou);
+ 
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
