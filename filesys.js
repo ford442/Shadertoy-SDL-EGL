@@ -21,7 +21,7 @@ pll();
 });
 
 document.getElementById('btn3').addEventListener('click',function(){
-window.open('https://test.1ink.us/libflac.js');
+window.open('https://b3hd.1ink.us/libflac.js');
 });
 
 document.getElementById('btn2').addEventListener('click',function(){
