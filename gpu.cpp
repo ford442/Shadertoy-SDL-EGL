@@ -406,38 +406,37 @@ var h$=Math.round(document.getElementById('ihig').innerHTML);
 var mh$=Math.min(h$,w$);
 var o=[mh$,h$];
 var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-var g=new GPU({canvas:bcanvas,webGl:contx});
+const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-let minn=new ArrayBuffer(4);
-let maxx=new ArrayBuffer(4);
-
-let min$=new Float32Array(minn,0,1);
-let max$=new Float32Array(maxx,0,1);
+var minn=new ArrayBuffer(4);
+var maxx=new ArrayBuffer(4);
+var min$=new Float32Array(minn,0,1);
+var max$=new Float32Array(maxx,0,1);
 min$.set([0.0]);
 max$.set([0.0]);
-let avv=new ArrayBuffer(32);
-let avv$=new ArrayBuffer(4);
-let avgs=new Float32Array(avv,0,8);
-let avg$=new Float32Array(avv$,0,1);
+var avv=new ArrayBuffer(32);
+var avv$=new ArrayBuffer(4);
+var avgs=new Float32Array(avv,0,8);
+var avg$=new Float32Array(avv$,0,1);
 
-var R=g.createKernel(function(tv){
+const R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
-var t=g.createKernel(function(v){
+const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
-var r=g.createKernel(function(f){
+const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 
-let d=S();if(d)d();d=S();function S(){
+var d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
 var blank$=Math.max(((w$-h$)/2),0);
@@ -475,7 +474,6 @@ return ac+a;
 }
   
 function avvg(){
-  
 }
 
 t.setOutput(o);
