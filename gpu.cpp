@@ -452,7 +452,7 @@ var la=mh$*h$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
-var WW=new ArrayBuffer(la*4);
+var WW=new ArrayBuffer(l);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -476,7 +476,7 @@ var vv=document.getElementById("mv");
 function avvg(){
 avg$.set([avgs.reduce(adds,0)/8]);
 console.log(new Float32Array(avv));
-console.log(avg$);
+console.log(new Float32Array(avv$));
 console.log(min$[0]+" "+max$[0]);
 }
 
@@ -521,9 +521,9 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
- 
- var nn=R($TT).toArray();
- var prt$=nn[0][0][0];
+var nn=R($TT).toArray();
+var prt$=nn.reduce(adds,0)/nn.length;
+
 avgs.set([prt$],0); 
 avvg();
 $F=6;
