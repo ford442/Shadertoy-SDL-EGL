@@ -532,7 +532,7 @@ $TT.set($$1);
 $1.set(R($TT));
  
  var nn=R($TT).toArray();
- var prt$=nn.reduce(adds,0)/nn.length;
+ var prt$=nn[0][0][0];
 avgs.set([prt$],0); 
 avvg();
 $F=6;
