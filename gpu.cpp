@@ -523,8 +523,8 @@ $TT.set($$1);
 $1.set(R($TT));
  
 let nn=t($1);
-let fave=nn.toArray().reduce(adds,0)/nn.length;
-avgs.set([fave],0); 
+let fave=nn.toArray();
+avgs.set([fave.reduce(adds,0)/nn.length],0); 
 avvg();
 $F=6;
 }
