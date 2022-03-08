@@ -440,8 +440,8 @@ this.color(p[0],p[1],p[2],p[3]);
 var d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-var blank$=Math.max(((w$-h$)/2),0);
-var nblank$=Math.max(((h$-w$)/2),0);
+var blank$=Math.max((w$-h$),0);
+var nblank$=Math.max((h$-w$),0);
 t.setConstants({blnk:blank$});
 r.setConstants({nblnk:nblank$});
 var mh$=Math.min(h$,w$);
