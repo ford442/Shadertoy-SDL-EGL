@@ -172,9 +172,7 @@ vide=document.querySelectorAll("video");
 
 function loada(){
     loadV.videoHeight=1080;
-    loadV.videoWidth=auto;
    mV.videoHeight=1080;
-   mV.videoWidth=auto;
      loadV.addEventListener('loadedmetadata', function(e){
     console.log(loadV.videoHeight);
     console.log(loadV.videoWidth);
