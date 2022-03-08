@@ -404,8 +404,8 @@ EM_JS(void,ma,(),{
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
 var mh$=Math.min(h$,w$);
-var o=[h$,h$];
-var bo=[mh$,h$];
+var o=[h$,w$];
+var ro=[h$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
@@ -427,7 +427,7 @@ return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
-var P=v[this.thread.y+this.constants.nblnk][this.thread.x+this.constants.blnk];
+var P=v[this.thread.y+this.constants.nblnk][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,nblnk:nblank$}).setOutput(o);
@@ -435,7 +435,7 @@ return[P[0],P[1],P[2],(aveg)];
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x+this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(ro);
 
 var d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
@@ -445,10 +445,10 @@ var nblank$=Math.max((h$-w$)/2,0);
 t.setConstants({blnk:blank$,nblnk:nblank$});
 r.setConstants({blnk:blank$});
 var mh$=Math.min(h$,w$);
-var o=[h$,h$];
-var bo=[h$,h$];
-var l=h$*h$*32;
-var la=h$*h$;
+var o=[h$,w$];
+var ro=[h$,h$];
+var l=h$*w$*32;
+var la=h$*w$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
@@ -486,7 +486,7 @@ $TT.set($$1);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-r.setOutput(bo);
+r.setOutput(ro);
 let $F=1;
 function M(){
 if(T){return;}
