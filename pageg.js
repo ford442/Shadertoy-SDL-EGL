@@ -173,11 +173,19 @@ vide=document.querySelectorAll("video");
 function loada(){
     vide[0].addEventListener('loadedmetadata', function(e){
     console.log(vide[0].naturalHeight);
-    console.log(vide[0].naturalWidth);
+    console.log(vide[0].width);
 });
     vide[1].addEventListener('loadedmetadata', function(e){
     console.log(vide[1].naturalHeight);
-    console.log(vide[1].naturalWidth);
+    console.log(vide[1].videoWidth);
+});
+     loadV.addEventListener('loadedmetadata', function(e){
+    console.log(loadV.naturalHeight);
+    console.log(loadV.videoWidth);
+});
+    mV.addEventListener('loadedmetadata', function(e){
+    console.log(mV.naturalHeight);
+    console.log(mV.videoWidth);
 });
     document.getElementById('pmhig').innerHTML=window.innerHeight;
     hii=Math.round(window.innerHeight);
