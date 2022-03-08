@@ -526,7 +526,7 @@ let nn=R($1);
 let fave=nn.toArray();
 let ttl=fave.reduce(adds,0)/nn.length;
  
-avgs.set([ttl],0); 
+avgs.set([new Float32Array(ttl)],0); 
 avvg();
 $F=6;
 }
