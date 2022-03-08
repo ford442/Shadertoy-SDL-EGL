@@ -443,7 +443,7 @@ var h$=Math.round(document.getElementById('ihig').innerHTML);
 var blank$=Math.max((w$-h$)/2,0);
 var nblank$=Math.max((h$-w$)/2,0);
 t.setConstants({blnk:blank$,nblnk:nblank$});
-t.setConstants({blnk:blank$});
+r.setConstants({blnk:blank$});
 var mh$=Math.min(h$,w$);
 var o=[h$,h$];
 var bo=[h$,h$];
