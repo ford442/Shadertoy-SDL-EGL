@@ -426,7 +426,7 @@ return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var Rn=g.createKernel(function(tnv){
-return tv[this.thread.y+this.constants.nblnk][this.thread.x+this.constants.blnk];
+return tnv[this.thread.y+this.constants.nblnk][this.thread.x+this.constants.blnk];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$,nblnk:nblank$}).setOutput(o);
   
 var t=g.createKernel(function(v){
