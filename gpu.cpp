@@ -481,8 +481,7 @@ function avvg(){
   var rr=new Float32Array($1[0][0],0,4);
     gett.set(rr);
   console.log(gett);
- var tester=(new Float32Array($1[0][0],0,4));
-console.log(tester);
+console.log(new Float32Array($1[0][0],0,4));
 }
 
 t.setOutput(o);
