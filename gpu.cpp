@@ -521,10 +521,11 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-let nn=t($TT);
+let nn=R($TT);
 let fave=nn.toArray();
 let ttl=Math.min(...fave);
  console.log(ttl);
+ console.log(fave);
 avvg();
 $F=6;
 }
