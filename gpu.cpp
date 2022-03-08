@@ -405,6 +405,7 @@ var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
 var mh$=Math.min(h$,w$);
 var o=[h$,h$];
+var bo=[mh$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
@@ -426,7 +427,7 @@ return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
+var P=v[this.thread.y][this.thread.x-this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
@@ -443,7 +444,7 @@ var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 var mh$=Math.min(h$,w$);
 var o=[h$,h$];
-var ro=[h$,h$];
+var bo=[h$,h$];
 var l=h$*h$*32;
 var la=h$*h$;
 var m=Math.ceil(l/65536);
@@ -476,7 +477,7 @@ return ac+a;
 function avvg(){
 }
 
-t.setOutput(o);
+t.setOutput(bo);
 R.setOutput(o);
 var $$1=R(vv);
 $TT.set($$1);
