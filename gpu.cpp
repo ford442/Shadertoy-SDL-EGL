@@ -480,9 +480,11 @@ t.setOutput(o);
 R.setOutput(o);
 r.setOutput(o);
 var $$1=R(vv);
-$TT.set($$1);
+// $TT.set($$1);
 $1.set($$1);
+var $$2=R(vv);
 $2.set($$1);
+var $$3=R(vv);
 $3.set($$1);
 let $F=1;
 function M(){
@@ -491,39 +493,39 @@ if($F==8){
 var $r8=R($8);
 r(t($r8));
 var $$4=R(vv);
-$TT.set($$4);
-$4.set(R($TT));
+// $TT.set($$4);
+$4.set($$4));
 $F=1;
 }
 if($F==7){ 
 var $r7=R($7);
 r(t($r7));
 var $$3=R(vv);
-$TT.set($$3);
-$3.set(R($TT));
+// $TT.set($$3);
+$3.set($$3);
 $F=8;
 }
 if($F==6){  
 var $r6=R($6);
 r(t($r6));
 var $$2=R(vv);
-$TT.set($$2);
-$2.set(R($TT));
+// $TT.set($$2);
+$2.set($$2);
 $F=7;
 }
 if($F==5){  
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
-$TT.set($$1);
-$1.set(R($TT));
+// $TT.set($$1);
+$1.set($$1);
 $F=6;
 }
 if($F==4){  
 var $r4=R($4);
 r(t($r4));
 var $$8=R(vv);
-$TT.set($$8);
+// $TT.set($$8);
 $8.set($$8);
 $F=5;
 }
@@ -531,7 +533,7 @@ if($F==3){
 var $r3=R($3);
 r(t($r3));
 var $$7=R(vv);
-$TT.set($$7);
+// $TT.set($$7);
 $7.set($$7);
 $F=4;
 }  
@@ -539,7 +541,7 @@ if($F==2){
 var $r2=R($2);
 r(t($r2));
 var $$6=R(vv);
-$TT.set($$6);
+// $TT.set($$6);
 $6.set($$6);
 $F=3;
 }
@@ -547,7 +549,7 @@ if($F==1){
 var $r1=R($1);
 r(t($r1));
 var $$5=R(vv);
-$TT.set($$5);
+// $TT.set($$5);
 $5.set($$5);
 $F=2;
 }
