@@ -520,7 +520,7 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-var nn=t($$1);
+var nn=t($1);
 var fave=nn.toArray();
   console.log(nn[0][0][0]);
 var ttl2=fave[0][0][0];
