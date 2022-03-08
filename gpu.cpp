@@ -473,6 +473,9 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
+let fave=t($TT).toArray();
+let ttl2=fave[0][0][0];
+avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 }
 
@@ -517,9 +520,6 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-let fave=t($1).toArray();
-let ttl2=fave[0][0][0];
-avgs.set([ttl2],0);
 avvg();
 $F=6;
 }
