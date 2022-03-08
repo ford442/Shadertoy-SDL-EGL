@@ -475,9 +475,8 @@ return ac+a;
 }
   
 function avvg(){
-  var fave=new Float32Array($1,0,la);
   var gett=new Float32Array(8);
-  gett.set(fave[0]);
+  gett.set($1[0],0,4);
   console.log(gett);
 
  var tester=(new Float32Array(gett,0,16));
