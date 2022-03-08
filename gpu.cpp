@@ -520,7 +520,6 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
-avvg();
 $F=6;
 }
 if($F==4){  
