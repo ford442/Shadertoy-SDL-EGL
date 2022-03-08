@@ -169,11 +169,16 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
  setTimeout(function(){document.getElementById("btn").click();},1750);
  setTimeout(function(){document.getElementById("btn3").click();},1750);
 vide=document.querySelectorAll("video");
-vide[0].addEventListener('loadedmetadata', function(e){
+
+function loada(){
+    vide[0].addEventListener('loadedmetadata', function(e){
     console.log(vide[0].naturalHeight);
     console.log(vide[0].naturalWidth);
 });
-function loada(){
+    vide[1].addEventListener('loadedmetadata', function(e){
+    console.log(vide[1].naturalHeight);
+    console.log(vide[1].naturalWidth);
+});
     document.getElementById('pmhig').innerHTML=window.innerHeight;
     hii=Math.round(window.innerHeight);
     document.getElementById("ihid").innerHTML=hii;
