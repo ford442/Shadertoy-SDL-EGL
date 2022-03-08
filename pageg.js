@@ -185,11 +185,11 @@ function loada(){
     $iwid.innerHTML=Math.round($w);
     datb.innerHTML=window.innerHeight;
     window.scroll(0,0);
-    console.log("h: "+loadV.naturalHeight);
-    console.log("w: "+loadV.naturalWidth);
+    console.log("h: "+loadV.videoHeight);
+    console.log("w: "+loadV.videoWidth);
     
-    console.log("h: "+loadV.naturalHeight);
-    console.log("w: "+loadV.naturalWidth);
+    console.log("h: "+loadV.videoHeight);
+    console.log("w: "+loadV.videoWidth);
     setTimeout(function(){
         loadV.src=document.getElementById("isrc").innerHTML;
         loadV.currentTime=document.getElementById("itim").innerHTML;
