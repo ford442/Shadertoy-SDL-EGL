@@ -1,5 +1,5 @@
 
-var slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
 const $iwid=document.getElementById("iwid");
 var mV=document.getElementById("mv");
 var loadV=document.getElementById("ldv");
@@ -120,7 +120,7 @@ ban.addEventListener("click",function(){slo.toggle();sfr.innerHTML="";
     setTimeout(function(){
         grab$lt();slt=$lt/1000;slt=Math.round(slt);
         sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-     var   tsl=new rSlider({target:"#timeslider",values:{min:1,max:15},
+        tsl=new rSlider({target:"#timeslider",values:{min:1,max:15},
             step:[.10],labels:false,tooltip:true,scale:false,});
         grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
         slt=slt/100;tsl.setValues(slt);
