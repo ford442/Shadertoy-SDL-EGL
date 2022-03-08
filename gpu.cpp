@@ -480,7 +480,6 @@ var ttl2=new Float32Array(fave[0]);
 min$.set([Math.min(...fave)],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 console.log(avgs);
-console.log(tts);
 }
 t.setOutput(o);
 R.setOutput(o);
