@@ -171,20 +171,16 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
 vide=document.querySelectorAll("video");
 
 function loada(){
-    vide[0].addEventListener('loadedmetadata', function(e){
-    console.log(vide[0].naturalHeight);
-    console.log(vide[0].width);
-});
-    vide[1].addEventListener('loadedmetadata', function(e){
-    console.log(vide[1].naturalHeight);
-    console.log(vide[1].videoWidth);
-});
+    loadV.videoHeight=1080;
+    loadV.videoWidth=auto;
+   mV.videoHeight=1080;
+   mV.videoWidth=auto;
      loadV.addEventListener('loadedmetadata', function(e){
-    console.log(loadV.naturalHeight);
+    console.log(loadV.videoHeight);
     console.log(loadV.videoWidth);
 });
     mV.addEventListener('loadedmetadata', function(e){
-    console.log(mV.naturalHeight);
+    console.log(mV.videoHeight);
     console.log(mV.videoWidth);
 });
     document.getElementById('pmhig').innerHTML=window.innerHeight;
