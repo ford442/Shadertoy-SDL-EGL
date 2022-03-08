@@ -522,9 +522,11 @@ var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
  
-let nn=t($1);
+let nn=R($1);
 let fave=nn.toArray();
-avgs.set([fave.reduce(adds,0)/nn.length],0); 
+let ttl=fave.reduce(adds,0)/nn.length;
+ 
+avgs.set([ttl],0); 
 avvg();
 $F=6;
 }
