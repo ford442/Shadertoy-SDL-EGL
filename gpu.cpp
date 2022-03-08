@@ -401,54 +401,52 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
+var w$=Math.round(document.getElementById('iwid').innerHTML);
+var h$=Math.round(document.getElementById('ihig').innerHTML);
 var mh$=Math.min(h$,w$);
-var o=[h$,w$];
-var ro=[h$,h$];
+var o=[mh$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
-var minn=new ArrayBuffer(4);
-var maxx=new ArrayBuffer(4);
-var min$=new Float32Array(minn,0,1);
-var max$=new Float32Array(maxx,0,1);
+let minn=new ArrayBuffer(4);
+let maxx=new ArrayBuffer(4);
+
+let min$=new Float32Array(minn,0,1);
+let max$=new Float32Array(maxx,0,1);
 min$.set([0.0]);
 max$.set([0.0]);
-var avv=new ArrayBuffer(32);
-var avv$=new ArrayBuffer(4);
-var avgs=new Float32Array(avv,0,8);
-var avg$=new Float32Array(avv$,0,1);
+let avv=new ArrayBuffer(32);
+let avv$=new ArrayBuffer(4);
+let avgs=new Float32Array(avv,0,8);
+let avg$=new Float32Array(avv$,0,1);
 
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-
+  
 var t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
+const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x];
+const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 
-var d=S();if(d)d();d=S();function S(){
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
-var blank$=Math.max((w$-h$)/2,0);
-var nblank$=Math.max((h$-w$)/2,0);
-t.setConstants({blnk:blank$,nblnk:nblank$});
-r.setConstants({blnk:blank$,nblnk:nblank$});
+let d=S();if(d)d();d=S();function S(){
+var w$=Math.round(document.getElementById('iwid').innerHTML);
+var h$=Math.round(document.getElementById('ihig').innerHTML);
+var blank$=Math.max(((w$-h$)/2),0);
+var nblank$=Math.max((h$-w$),0);
 var mh$=Math.min(h$,w$);
-var o=[h$,w$];
+var o=[mh$,h$];
 var ro=[h$,h$];
-var l=h$*w$*32;
-var la=h$*w$;
+var l=mh$*h$*32;
+var la=mh$*h$;
 var m=Math.ceil(l/65536);
 let WT=new WebAssembly.Memory({initial:m});
 let WT2=new WebAssembly.Memory({initial:m});
@@ -462,31 +460,32 @@ let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
 let $TT=new Float32Array(WW);
-var $1=new Float32Array(W1.buffer,0,la);
-var $2=new Float32Array(W2.buffer,0,la);
-var $3=new Float32Array(W3.buffer,0,la);
-var $4=new Float32Array(W4.buffer,0,la);
-var $5=new Float32Array(W5.buffer,0,la);
-var $6=new Float32Array(W6.buffer,0,la);
-var $7=new Float32Array(W7.buffer,0,la);
-var $8=new Float32Array(W8.buffer,0,la);
+let $1=new Float32Array(W1.buffer,0,la);
+let $2=new Float32Array(W2.buffer,0,la);
+let $3=new Float32Array(W3.buffer,0,la);
+let $4=new Float32Array(W4.buffer,0,la);
+let $5=new Float32Array(W5.buffer,0,la);
+let $6=new Float32Array(W6.buffer,0,la);
+let $7=new Float32Array(W7.buffer,0,la);
+let $8=new Float32Array(W8.buffer,0,la);
 var T=false;
 var vv=document.getElementById("mv");
 function adds(ac,a){
 return ac+a;
 }
+  
 function avvg(){
+  
 }
+
 t.setOutput(o);
 R.setOutput(o);
-r.setOutput(ro);
 var $$1=R(vv);
-// $TT.set($$1);
+$TT.set($$1);
 $1.set($$1);
-var $$2=R(vv);
 $2.set($$1);
-var $$3=R(vv);
 $3.set($$1);
+r.setOutput(o);
 let $F=1;
 function M(){
 if(T){return;}
@@ -494,64 +493,64 @@ if($F==8){
 var $r8=R($8);
 r(t($r8));
 var $$4=R(vv);
-// $TT.set($$4);
-$4.set($$4);
+$TT.set($$4);
+$4.set(R($TT));
 $F=1;
 }
 if($F==7){ 
 var $r7=R($7);
 r(t($r7));
 var $$3=R(vv);
-// $TT.set($$3);
-$3.set($$3);
+$TT.set($$3);
+$3.set(R($TT));
 $F=8;
 }
 if($F==6){  
 var $r6=R($6);
 r(t($r6));
 var $$2=R(vv);
-// $TT.set($$2);
-$2.set($$2);
+$TT.set($$2);
+$2.set(R($TT));
 $F=7;
 }
 if($F==5){  
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
-// $TT.set($$1);
-$1.set($$1);
+$TT.set($$1);
+$1.set(R($TT));
 $F=6;
 }
 if($F==4){  
 var $r4=R($4);
 r(t($r4));
 var $$8=R(vv);
-// $TT.set($$8);
-$8.set($$8);
+$TT.set($$8);
+$8.set(R($TT));
 $F=5;
 }
 if($F==3){  
 var $r3=R($3);
 r(t($r3));
 var $$7=R(vv);
-// $TT.set($$7);
-$7.set($$7);
+$TT.set($$7);
+$7.set(R($TT));
 $F=4;
 }  
 if($F==2){
 var $r2=R($2);
 r(t($r2));
 var $$6=R(vv);
-// $TT.set($$6);
-$6.set($$6);
+$TT.set($$6);
+$6.set(R($TT));
 $F=3;
 }
 if($F==1){
 var $r1=R($1);
 r(t($r1));
 var $$5=R(vv);
-// $TT.set($$5);
-$5.set($$5);
+$TT.set($$5);
+$5.set(R($TT));
 $F=2;
 }
 setTimeout(function(){
