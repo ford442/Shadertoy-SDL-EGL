@@ -405,6 +405,7 @@ var w$=parseInt(document.getElementById('iwid').innerHTML,10);
 var h$=parseInt(document.getElementById('ihig').innerHTML,10);
 var mh$=Math.min(h$,w$);
 var o=[mh$,w$];
+var ro=[h$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
@@ -434,7 +435,7 @@ return[P[0],P[1],P[2],(aveg)];
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x+this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
 
 var d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
@@ -445,6 +446,7 @@ t.setConstants({blnk:blank$,nblnk:nblank$});
 r.setConstants({blnk:blank$,nblnk:nblank$});
 var mh$=Math.min(h$,w$);
 var o=[mh$,w$];
+var ro=[h$,h$];
 var l=mh$*w$*32;
 var la=h$*w$;
 var m=Math.ceil(l/65536);
@@ -475,10 +477,9 @@ return ac+a;
 }
 function avvg(){
 }
-
 t.setOutput(o);
 R.setOutput(o);
-r.setOutput(o);
+r.setOutput(ro);
 var $$1=R(vv);
 // $TT.set($$1);
 $1.set($$1);
