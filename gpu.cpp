@@ -421,6 +421,11 @@ let avv=new ArrayBuffer(32);
 let avv$=new ArrayBuffer(4);
 let avgs=new Float32Array(avv,0,8);
 let avg$=new Float32Array(avv$,0,1);
+  
+var Ra=g.createKernel(function(tv){
+return tv[this.thread.y][this.thread.x];
+}).setTactic("speed").setDynamicOutput(true).setOutput(o);
+  
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
@@ -450,6 +455,7 @@ var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
 var WW=new ArrayBuffer(l);
+var WWa=new ArrayBuffer(l);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -459,6 +465,7 @@ var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
 var $TT=new Float32Array(WW);
+var $TTa=new Float32Array(WW);
 var $1=new Float32Array(W1.buffer,0,la);
 var $2=new Float32Array(W2.buffer,0,la);
 var $3=new Float32Array(W3.buffer,0,la);
@@ -473,12 +480,12 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-let fave=t($TT).toArray();
+let fave=Ra($TTa).toArray();
 let ttl2=fave[0][0][0];
 avgs.set([ttl2],0);
 avg$.set([avgs.reduce(adds,0)/8]);
 }
-
+avvg();
 t.setOutput(o);
 R.setOutput(o);
 var $$1=R(vv);
@@ -518,6 +525,8 @@ if($F==5){
 var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
+var $$r=Ra(vv);
+$TTa.set($$r.toArray());
 $TT.set($$1);
 $1.set(R($TT));
 $F=6;
