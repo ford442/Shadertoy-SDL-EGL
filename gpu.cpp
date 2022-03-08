@@ -524,8 +524,8 @@ $1.set(R($TT));
  
 let nn=t($1);
 let fave=nn.toArray();
-let ttl=fave.reduce(adds,0)/nn.length;
-avgs.set([new Float32Array(ttl)],0); 
+let ttl=Math.min(...fave);
+min$.set([new Float32Array(ttl)],0); 
 avvg();
 $F=6;
 }
