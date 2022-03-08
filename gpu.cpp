@@ -542,7 +542,8 @@ $7.set(R($TT));
 $F=4;
 }  
 if($F==2){
-var $r2=new Float32Array(W2);
+var $r2=new Float32Array(W2.buffer);
+  
 r($r2);
 var $$6=R(vv);
 $TT.set($$6);
@@ -550,9 +551,9 @@ $6.set(R($TT));
 $F=3;
 }
 if($F==1){
-var $r1=new Float32Array(W1);
+var $r1=new Float32Array(W1.buffer);
   let r1=t($r1);
-r(r1);
+r($r1);
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
