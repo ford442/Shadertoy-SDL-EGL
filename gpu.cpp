@@ -483,9 +483,9 @@ t.setOutput(o);
 R.setOutput(o);
 var $$1=R(vv);
 $TT.set($$1);
-$1.set(R($TT));
-$2.set(R($TT));
-$3.set(R($TT));
+$1.set($$1);
+$2.set($$1);
+$3.set($$1);
 r.setOutput(o);
 let $F=1;
 function M(){
@@ -552,10 +552,9 @@ r(t($r1));
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
-avvg();
 $F=2;
 }
-setTimeout(function(){M();},8.333);}
+setTimeout(function(){M();},16.666);}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
