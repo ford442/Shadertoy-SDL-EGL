@@ -555,7 +555,7 @@ $F=2;
 }
 setTimeout(function(){
   M();
-},4);
+},8.333);
 }
 M();
 document.getElementById("di").onclick=function(){
