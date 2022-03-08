@@ -553,7 +553,10 @@ $TT.set($$5);
 $5.set(R($TT));
 $F=2;
 }
-setTimeout(function(){M();},16.666);}
+setTimeout(function(){
+  M();
+},4);
+}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
