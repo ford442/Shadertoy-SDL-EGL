@@ -553,8 +553,7 @@ $F=3;
 }
 if($F==1){
 var $r1=new Float32Array(W1,0,la);
-let r1a=Float32Array.from(t($r1));
-r(r1a);
+r($r1);
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
