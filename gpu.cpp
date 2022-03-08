@@ -474,23 +474,14 @@ var T=false;
 var vv=document.getElementById("mv");
  
 function avvg(){
- 
-avg$.set([(new Float32Array(avv)).reduce(adds,0)/8]);
-avgs.set([1.0],0);
-avgs.set([2.0],1);
-avgs.set([3.0],2);
-min$.set([1.0],0);
-max$.set([0.0],0);
-console.log(avgs);
+avg$.set([avgs.reduce(adds,0)/8]);
+console.log(new Float32Array(avv));
 console.log(avg$);
 console.log(min$[0]+" "+max$[0]);
 }
 
 t.setOutput(o);
 R.setOutput(o);
-console.log(W1.buffer.byteLength);
-console.log($1.length);
-console.log($1.byteLength); 
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
