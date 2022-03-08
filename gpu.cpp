@@ -424,24 +424,26 @@ var avg$=new Float32Array(avv$,0,1);
 
 var R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setDynamicConstants(true).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setDynamicConstants(true).setConstants({blnk:blank$}).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
   
 var r=g.createKernel(function(f){
 var p=f[this.thread.y+this.constants.nblnk][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setDynamicConstants(true).setConstants({nblnk:nblank$}).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
 
 var d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
 var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max(((h$-w$)/2),0);
+t.setConstants({blnk:blank$});
+r.setConstants({nblnk:nblank$});
 var mh$=Math.min(h$,w$);
 var o=[h$,h$];
 var bo=[mh$,h$];
