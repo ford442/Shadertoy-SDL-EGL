@@ -522,7 +522,8 @@ var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
 var nn=R($TT).toArray();
-avgs.set([nn.reduce(adds,0)/nn.length],0); 
+var fave=nn.reduce(adds,0)/nn.length;
+avgs.set([fave],0); 
 avvg();
 $F=6;
 }
