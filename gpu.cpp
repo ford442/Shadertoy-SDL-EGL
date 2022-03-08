@@ -401,10 +401,10 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=Math.round(document.getElementById('iwid').innerHTML);
-var h$=Math.round(document.getElementById('ihig').innerHTML);
+var w$=parseInt(document.getElementById('iwid').innerHTML,10);
+var h$=parseInt(document.getElementById('ihig').innerHTML,10);
 var mh$=Math.min(h$,w$);
-var o=[h$,h$];
+var o=[mh$,w$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
@@ -444,9 +444,9 @@ var nblank$=Math.max((h$-w$)/2,0);
 t.setConstants({blnk:blank$,nblnk:nblank$});
 r.setConstants({blnk:blank$,nblnk:nblank$});
 var mh$=Math.min(h$,w$);
-var o=[h$,h$];
-var l=h$*h$*32;
-var la=h$*h$;
+var o=[mh$,w$];
+var l=mh$*w$*32;
+var la=h$*w$;
 var m=Math.ceil(l/65536);
 var WT=new WebAssembly.Memory({initial:m});
 var WT2=new WebAssembly.Memory({initial:m});
