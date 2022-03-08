@@ -495,7 +495,8 @@ function M(){
 if(T){return;}
 if($F==8){
 var $r8=R($8);
-r(t($r8));
+     var ttss=new Float32Array(W1);
+r(t(ttss));
 var $$4=R(vv);
 $TT.set($$4);
 $4.set(R($TT));
