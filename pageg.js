@@ -135,6 +135,14 @@ ban.addEventListener("click",function(){slo.toggle();sfr.innerHTML="";
         },8);},16);});
 adr="./intro.mp4";
 wi=1920;he=1080;
+setTimeout(function(){
+    document.getElementById("btn").style.display="none";
+    document.getElementById("btn3").style.display="none";
+    document.getElementById("btn4").style.display="none";
+    document.getElementById("btn5").style.display="none";
+    document.getElementById("btn6").style.display="none";
+    document.getElementById("btn7").style.display="none";
+},1800);
 document.getElementById("hig").innerHTML=he;
 document.getElementById("wid").innerHTML=wi;
 hii=Math.round(window.innerHeight);
@@ -194,14 +202,4 @@ function loada(){
         loada();
     },$ldt);}
 loada();
-setTimeout(function(){
-    document.getElementById("btn8").click();
-},2000);
-setTimeout(function(){
-    document.getElementById("btn").style.display="none";
-    document.getElementById("btn3").style.display="none";
-    document.getElementById("btn4").style.display="none";
-    document.getElementById("btn5").style.display="none";
-    document.getElementById("btn6").style.display="none";
-    document.getElementById("btn7").style.display="none";
-},1800);
+
