@@ -477,7 +477,6 @@ return ac+a;
 function avvg(){
   var ttr=new ArrayBuffer(32);
   var gett=new Float32Array(ttr);
-  gett.set(Array.from(new Float32Array($1));
   console.log(gett);
 }
 
