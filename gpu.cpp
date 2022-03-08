@@ -523,8 +523,7 @@ $1.set(R($TT));
 var nn=t($TT);
 var fave=nn.toArray();
 var ttl2=fave[0][0][0];
-console.log(new Float32Array(ttl2));
-  avgs.set([ttl2]);
+avgs.set([ttl2],0);
 avvg();
 $F=6;
 }
