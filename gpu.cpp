@@ -412,9 +412,7 @@ var blank$=Math.max(((w$-h$)/2),0);
 var nblank$=Math.max((h$-w$),0);
 let minn=new ArrayBuffer(4);
 let maxx=new ArrayBuffer(4);
-function adds(ac,a){
-return ac+a;
-}
+
 let min$=new Float32Array(minn);
 let max$=new Float32Array(maxx);
 min$[0]=[0.0];
@@ -472,7 +470,9 @@ var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
 var T=false;
 var vv=document.getElementById("mv");
- 
+function adds(ac,a){
+return ac+a;
+}
 function avvg(){
 avg$.set([avgs.reduce(adds,0)/8]);
 console.log(new Float32Array(avv));
@@ -521,6 +521,7 @@ r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
 $1.set(R($TT));
+ 
 var nn=R($TT).toArray();
 var fave=nn.reduce(adds,0)/nn.length;
 avgs.set([fave],0); 
