@@ -479,9 +479,9 @@ function avvg(){
   gett.set($1[0],0,4);
   console.log(tester);
 
-  console.log($1[0][0][0]);
+  console.log($1[0][0]);
 
- var tester=(new Float32Array($1[0][0][0]));
+ var tester=(new Float32Array($1[0][0]));
 console.log(tester);
 }
 
