@@ -124,7 +124,7 @@ ban.addEventListener("click",function(){slo.toggle();sfr.innerHTML="";
         grab$lt();slt=$lt/1000;slt=Math.round(slt);
         sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
         tsl=new rSlider({target:"#timeslider",values:{min:1,max:15},
-            step:[.25],labels:false,tooltip:true,scale:false,});
+            step:[.10],labels:false,tooltip:true,scale:false,});
         grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
         slt=slt/100;tsl.setValues(slt);
         document.getElementById("menu").addEventListener("click",function(){
