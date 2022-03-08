@@ -474,8 +474,9 @@ function adds(ac,a){
 return ac+a;
 }
 function avvg(){
-// var fave=new Float32Array(W1,0,4);
- //  console.log(fave);
+var fave=new Float32Array(W1.buffer,0,la);
+  var tester=t(fave);
+  console.log(tester);
  //  avgs.set([fave[0]],0);
 // min$.set([Math.min(...fave)],0);
 // avg$.set([avgs.reduce(adds,0)/8]);
@@ -494,31 +495,31 @@ let $F=1;
 function M(){
 if(T){return;}
 if($F==8){
-let r$8=new Float32Array(W8);
-r(r$8);
-let $$4=R(vv);
+var $r8=R($8);
+r(t($r8));
+var $$4=R(vv);
 $TT.set($$4);
 $4.set(R($TT));
 $F=1;
 }
 if($F==7){ 
-let r$7=new Float32Array(W7);
-r($r7);
+var $r7=R($7);
+r(t($r7));
 var $$3=R(vv);
 $TT.set($$3);
 $3.set(R($TT));
 $F=8;
 }
 if($F==6){  
-var $r6=new Float32Array(W6);
-r($r6);
+var $r6=R($6);
+r(t($r6));
 var $$2=R(vv);
 $TT.set($$2);
 $2.set(R($TT));
 $F=7;
 }
 if($F==5){  
-var $r5=new Float32Array(W5);
+var $r5=R($5);
 r(t($r5));
 var $$1=R(vv);
 $TT.set($$1);
@@ -526,7 +527,7 @@ $1.set(R($TT));
 $F=6;
 }
 if($F==4){  
-var $r4=new Float32Array(W4);
+var $r4=R($4);
 r(t($r4));
 var $$8=R(vv);
 $TT.set($$8);
@@ -534,7 +535,7 @@ $8.set(R($TT));
 $F=5;
 }
 if($F==3){  
-var $r3=new Float32Array(W3);
+var $r3=R($3);
 r(t($r3));
 var $$7=R(vv);
 $TT.set($$7);
@@ -542,18 +543,16 @@ $7.set(R($TT));
 $F=4;
 }  
 if($F==2){
-var $r2=new Float32Array(W2.buffer);
-let r2=Float32Array.from($r2);
-let r2a=t(r2);
-r(r2a);
+var $r2=R($2);
+r(t($r2));
 var $$6=R(vv);
 $TT.set($$6);
 $6.set(R($TT));
 $F=3;
 }
 if($F==1){
-var $r1=new Float32Array(W1.buffer,0,la);
-r($r1.toArray());
+var $r1=R($1);
+r(t($r1));
 var $$5=R(vv);
 $TT.set($$5);
 $5.set(R($TT));
