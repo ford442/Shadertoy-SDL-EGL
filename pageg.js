@@ -210,12 +210,12 @@ function loada(){
     setTimeout(function(){
         loadV.src=document.getElementById("isrc").innerHTML;
           loadV.height=1080;
-          loadV.height=1920;
+          mV.height=1080;
           loadV.play();
         loadV.currentTime=document.getElementById("itim").innerHTML;
         // loadV.width=$iwid.innerHTML;
-        loadV.height=datb.innerHTML;
-        mV.height=datb.innerHTML;
+        loadV.height=1080;
+        mV.height=1080;
         loadV.play();
         mV.play();
         mv=vide[0].id;
