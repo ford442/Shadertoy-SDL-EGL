@@ -261,7 +261,6 @@ glReleaseShaderCompiler();
 attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
-
 /*
 glGenBuffers(1,&CBO);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
@@ -269,7 +268,6 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(colors),colors,GL_DYNAMIC_READ);
 glEnableVertexAttribArray(1);
 glBindBuffer(GL_ARRAY_BUFFER,CBO);
 glVertexAttribPointer(1,4,GL_FLOAT,GL_FALSE,0,(void*)0);
-
 glGenTextures(v4,tex2d);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,tex2d[0]);
