@@ -213,7 +213,7 @@ function loada(){
           loadV.height=1920;
           loadV.play();
         loadV.currentTime=document.getElementById("itim").innerHTML;
-        loadV.width=$iwid.innerHTML;
+        // loadV.width=$iwid.innerHTML;
         loadV.height=datb.innerHTML;
         loadV.play();
         mv=vide[0].id;
