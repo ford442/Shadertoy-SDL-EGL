@@ -218,8 +218,8 @@ function loada(){
         mV.height=1080;
         loadV.play();
         mV.play();
-        mv=vide[0].id;
-        lo=vide[1].id;
+      var  mv=vide[0].id;
+      var  lo=vide[1].id;
         vide[0].id=lo;
         vide[1].id=mv;
         document.getElementById("di").click();
