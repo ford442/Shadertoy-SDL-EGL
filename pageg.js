@@ -1,11 +1,11 @@
 
 var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
-var $iwid=document.getElementById("iwid");
-var mV=document.getElementById("mv");
-var loadV=document.getElementById("ldv");
-var $sngs=[];
-var $vids=[];
-var $shds=[];
+let $iwid=document.getElementById("iwid");
+let mV=document.getElementById("mv");
+let loadV=document.getElementById("ldv");
+let $sngs=[];
+let $vids=[];
+let $shds=[];
 function sngs(xml){
     var parser=new DOMParser();
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
