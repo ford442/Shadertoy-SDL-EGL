@@ -11,7 +11,7 @@ function sngs(xml){
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
     var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
     $sngs[0]=preList.length;
-    for (i=1;i<preList.length;i++){
+    for (var i=1;i<preList.length;i++){
         var txxt=preList[i].href;
         var Self=location.href;
         Self=Self.replace(/1ink.1ink/,"");
@@ -23,7 +23,7 @@ function vids(xml){
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
     var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
     $vids[0]=preList.length;
-    for (i=1;i<preList.length;i++){
+    for (var i=1;i<preList.length;i++){
         var txxt=preList[i].href;
         var Self=location.href;
         Self=Self.replace(/1ink.1ink/,"");
@@ -35,7 +35,7 @@ function shds(xml){
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
     var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
     $shds[0]=preList.length;
-    for (i=1;i<preList.length;i++){
+    for (var i=1;i<preList.length;i++){
         var txxt=preList[i].href;
         var Self=location.href;
         Self=Self.replace(/1ink.1ink/,"");
