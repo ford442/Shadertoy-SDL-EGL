@@ -70,7 +70,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -176,6 +176,7 @@ iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
+  
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -401,18 +402,14 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=Math.round(document.getElementById('iwid').innerHTML);
-var h$=Math.round(document.getElementById('ihig').innerHTML);
-var mh$=Math.min(h$,w$);
-var o=[mh$,h$];
+var w$=1080;
+var h$=1080;
+var o=[h$,h$];
 var bcanvas=document.getElementById("bcanvas");
 var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
-var blank$=Math.max(((w$-h$)/2),0);
-var nblank$=Math.max((h$-w$),0);
 let minn=new ArrayBuffer(4);
 let maxx=new ArrayBuffer(4);
-
 let min$=new Float32Array(minn,0,1);
 let max$=new Float32Array(maxx,0,1);
 min$.set(0.0);
@@ -430,23 +427,19 @@ var t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({blnk:blank$}).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 var r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x-this.constants.nblnk];
+const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setConstants({nblnk:nblank$}).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-var blank$=Math.max(((w$-h$)/2),0);
-var nblank$=Math.max((h$-w$),0);
-var mh$=Math.min(h$,w$);
-var o=[mh$,h$];
-var ro=[h$,h$];
-var l=mh$*h$*32;
-var la=mh$*h$;
+var o=[h$,h$];
+var l=h$*h$*32;
+var la=h$*h$;
 var m=Math.ceil(l/65536);
 let WT=new WebAssembly.Memory({initial:m});
 let WT2=new WebAssembly.Memory({initial:m});
@@ -473,11 +466,8 @@ var vv=document.getElementById("mv");
 function adds(ac,a){
 return ac+a;
 }
-  
 function avvg(){
-  
 }
-
 t.setOutput(o);
 R.setOutput(o);
 var $$1=R(vv);
