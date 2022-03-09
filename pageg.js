@@ -1,6 +1,6 @@
 
 var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
-const $iwid=document.getElementById("iwid");
+var $iwid=document.getElementById("iwid");
 var mV=document.getElementById("mv");
 var loadV=document.getElementById("ldv");
 var $sngs=[];
@@ -215,7 +215,9 @@ function loada(){
         loadV.currentTime=document.getElementById("itim").innerHTML;
         // loadV.width=$iwid.innerHTML;
         loadV.height=datb.innerHTML;
+        mV.height=datb.innerHTML;
         loadV.play();
+        mV.play();
         mv=vide[0].id;
         lo=vide[1].id;
         vide[0].id=lo;
