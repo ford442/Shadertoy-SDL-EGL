@@ -400,12 +400,12 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=1080;
-var h$=1080;
-var o=[h$,h$];
-var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-var g=new GPU({canvas:bcanvas,webGl:contx});
+let w$=1080;
+let h$=1080;
+let o=[h$,h$];
+let bcanvas=document.getElementById("bcanvas");
+let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let g=new GPU({canvas:bcanvas,webGl:contx});
 let minn=new ArrayBuffer(4);
 let maxx=new ArrayBuffer(4);
 let min$=new Float32Array(minn,0,1);
@@ -417,28 +417,33 @@ let avv$=new ArrayBuffer(4);
 let avgs=new Float32Array(avv,0,8);
 let avg$=new Float32Array(avv$,0,1);
 
-var R=g.createKernel(function(tv){
+function avvg(){
+
+}
+
+let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
-var t=g.createKernel(function(v){
+let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
-var r=g.createKernel(function(f){
+let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
-var w$=Math.round(document.getElementById('iwid').innerHTML);
-var h$=Math.round(document.getElementById('ihig').innerHTML);
-var o=[h$,h$];
-var l=h$*h$*32;
-var la=h$*h$;
-var m=Math.ceil(l/65536);
+let vv=document.getElementById("mv");
+let w$=Math.round(document.getElementById('iwid').innerHTML);
+let h$=Math.round(document.getElementById('ihig').innerHTML);
+let o=[h$,h$];
+let l=h$*h$*32;
+let la=h$*h$;
+let m=Math.ceil(l/65536);
 let WT=new WebAssembly.Memory({initial:m});
 let WT2=new WebAssembly.Memory({initial:m});
 let WW=new ArrayBuffer(l);
@@ -459,97 +464,79 @@ let $5=new Float32Array(W5.buffer,0,la);
 let $6=new Float32Array(W6.buffer,0,la);
 let $7=new Float32Array(W7.buffer,0,la);
 let $8=new Float32Array(W8.buffer,0,la);
-var T=false;
-var vv=document.getElementById("mv");
-function adds(ac,a){
-return ac+a;
-}
-function avvg(){
-}
 t.setOutput(o);
 R.setOutput(o);
 var $$1=R(vv);
-$TT.set($$1);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 r.setOutput(o);
 let $F=1;
 function M(){
-if(T){return;}
 if($F==8){
-var $r8=R($8);
-r(t($r8));
+var $r8=t($8);
+r($r8);
 var $$4=R(vv);
-$TT.set($$4);
-$4.set(R($TT));
+$4.set($$4);
 $F=1;
 }
 if($F==7){ 
-var $r7=R($7);
-r(t($r7));
+var $r7=t($7);
+r($r7);
 var $$3=R(vv);
-$TT.set($$3);
-$3.set(R($TT));
+$3.set($$3);
 $F=8;
 }
 if($F==6){  
-var $r6=R($6);
-r(t($r6));
+var $r6=t($6);
+r($r6);
 var $$2=R(vv);
-$TT.set($$2);
-$2.set(R($TT));
+$2.set($$2);
 $F=7;
 }
 if($F==5){  
-var $r5=R($5);
-r(t($r5));
+var $r5=t($5);
+r($r5);
 var $$1=R(vv);
-$TT.set($$1);
-$1.set(R($TT));
+$1.set($$1);
 $F=6;
 }
 if($F==4){  
-var $r4=R($4);
-r(t($r4));
+var $r4=t($4);
+r($r4);
 var $$8=R(vv);
-$TT.set($$8);
-$8.set(R($TT));
+$8.set($$8);
 $F=5;
 }
 if($F==3){  
-var $r3=R($3);
-r(t($r3));
+var $r3=t($3);
+r($r3);
 var $$7=R(vv);
-$TT.set($$7);
-$7.set(R($TT));
+$7.set($$7);
 $F=4;
 }  
 if($F==2){
-var $r2=R($2);
-r(t($r2));
+var $r2=t($2);
+r($r2);
 var $$6=R(vv);
-$TT.set($$6);
-$6.set(R($TT));
+$6.set($$6);
 $F=3;
 }
 if($F==1){
-var $r1=R($1);
-r(t($r1));
+var $r1=t($1);
+r($r1);
 var $$5=R(vv);
-$TT.set($$5);
-$5.set(R($TT));
+$5.set($$5);
 $F=2;
 }
 setTimeout(function(){
 M();
-},16.66);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
-T=true;
-S();};return()=>{T=true;};}
-})
+S();};
+}})
 
 extern "C" {
 void str(){
