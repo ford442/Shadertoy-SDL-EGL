@@ -471,11 +471,9 @@ $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 r.setOutput(o);
-let $F=1;var T=false;
-
+let $F=1;
+var T=false;
 function M(){
-  if(T){return;}
-
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -532,6 +530,7 @@ var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
+if(T){return;}
 setTimeout(function(){
 M();
 },16.6);
