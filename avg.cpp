@@ -471,8 +471,11 @@ $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 r.setOutput(o);
-let $F=1;
+let $F=1;var T=false;
+
 function M(){
+  if(T){return;}
+
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -535,8 +538,9 @@ M();
 }
 M();
 document.getElementById("di").onclick=function(){
-S();};
-}})
+T=true;
+S();};return()=>{T=true;};}
+})
 
 extern "C" {
 void str(){
