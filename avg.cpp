@@ -522,6 +522,10 @@ $6.set($$6);
 $F=3;
 }
 if($F==1){
+  var $bb=R($B);
+var gfg=$bb.join().split(',').map(Number);
+gfg=gfg.reduce(function(a, b){ return a + b; });
+gfg=gfg/la;
 var $r1=t($1);
 r($r1);
 var $$5=t(vv);
@@ -534,13 +538,9 @@ if(T){return;}
 setTimeout(function(){
   
 M();
-let $bb=R($B);
-let gfg=$bb.join().split(',').map(Number);
-let llll=gfg.reduce(function(a, b){ return a + b; });
-let fllll=llll/la;
+
 // console.log(fllll);
-  
-},33.33);
+},33.32);
 }
 M();
 document.getElementById("di").onclick=function(){
