@@ -412,7 +412,9 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 
 let R=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x];
+const P=tv[this.thread.y][this.thread.x];
+const aveg=(P[0]+P[1]+P[2])/3;
+return[P[0],P[1],P[2],aveg];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
 let t=g.createKernel(function(v){
