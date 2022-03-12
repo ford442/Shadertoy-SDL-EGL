@@ -420,6 +420,7 @@ return[P[0],P[1],P[2],(aveg)];
 
 function setAvg(){
 t.constants={avg:avag};
+  console.log(avag);
 }
 
 let r=g.createKernel(function(f){
