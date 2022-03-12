@@ -1,8 +1,8 @@
 
 var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong;
 let $iwid=document.getElementById("iwid");
-let mV=document.getElementById("mv");
-let loadV=document.getElementById("ldv");
+var mV=document.getElementById("mv");
+var loadV=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
@@ -159,6 +159,10 @@ setTimeout(function(){document.getElementById("btn11").click();},2100);
 setTimeout(function(){document.getElementById("btn").click();},1750);
 setTimeout(function(){document.getElementById("btn3").click();},1750);
 function loada(){
+    
+    var mV=document.getElementById("mv");
+var loadV=document.getElementById("ldv");
+    
 let vide=document.querySelectorAll("video");
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 hii=Math.round(window.innerHeight);
