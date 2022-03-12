@@ -423,7 +423,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 function setAvg(){
-  avag=agav[0];
+  avag=agav[0].toFixed(3);
 t.constants={avg:avag};
   console.log(avag);
 }
