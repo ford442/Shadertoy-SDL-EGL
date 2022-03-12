@@ -408,6 +408,9 @@ let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 
+
+let d=S();if(d)d();d=S();function S(){
+  
 let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
@@ -422,8 +425,7 @@ let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput(o);
-
-let d=S();if(d)d();d=S();function S(){
+  
 let vv=document.getElementById("mv");
 let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=Math.round(document.getElementById('ihig').innerHTML);
