@@ -209,15 +209,12 @@ function loada(){
     console.log("w: "+loadV.videoWidth);
     setTimeout(function(){
         loadV.src=document.getElementById("isrc").innerHTML;
-          loadV.height=1080;
-          mV.height=1080;
+       mV.width=$iwid.innerHTML;
+mV.height=datb.innerHTML;
+loadV.width=$iwid.innerHTML;
+loadV.height=datb;
           loadV.play();
         loadV.currentTime=document.getElementById("itim").innerHTML;
-        // loadV.width=$iwid.innerHTML;
-        loadV.height=1080;
-        mV.height=1080;
-        loadV.play();
-        mV.play();
       var  mv=vide[0].id;
       var  lo=vide[1].id;
         vide[0].id=lo;
