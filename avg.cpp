@@ -400,6 +400,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
+let avag=0.0;
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
@@ -423,9 +424,9 @@ return tv[this.thread.y][this.thread.x];
 
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true)..setConstants({avg:avag}).setOutput(o);
   
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
@@ -466,11 +467,7 @@ function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avag=gfgs/(la*4);
-var mina=$bb.reduce(function(previousValue,currentValue){return Math.min(currentValue,previousValue)});
-var maxa=gfg.reduce(function(previousValue,currentValue){return Math.max(currentValue,previousValue)});
-console.log(mina+" "+maxa+" "+avag);
-
+avag=gfgs/(la*4);
 }
 avvg();
 var $$1=t(vv);
