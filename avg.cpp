@@ -400,8 +400,8 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let w$=Math.round(document.getElementById('iwid').innerHTML);
-let h$=Math.round(document.getElementById('ihig').innerHTML);
+let w$=parseInt(document.getElementById('iwid').innerHTML,10);
+let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
