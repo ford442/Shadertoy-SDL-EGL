@@ -466,11 +466,9 @@ function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-let avag=gfgs/(la*4);
-
-const initialValue = 0;
-let mina=gfg.reduce(function(previousValue,currentValue) {return Math.min(previousValue,currentValue)});
-let maxa=gfg.reduce(function(previousValue,currentValue){return Math.max(previousValue,currentValue)});
+var avag=gfgs/(la*4);
+var mina=gfg.reduce(function(previousValue,currentValue) {return Math.min(previousValue,currentValue)});
+var maxa=gfg.reduce(function(previousValue,currentValue){return Math.max(previousValue,currentValue)});
 console.log(mina+" "+maxa+" "+avag);
 
 }
