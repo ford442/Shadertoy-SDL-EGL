@@ -463,7 +463,7 @@ var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la*4);
-avvvg=(avvvg+0.75)/2;
+avvvg=1.0-avvvg;
 avag=avvvg;
 agav.set([avag]);
 setAvg();
