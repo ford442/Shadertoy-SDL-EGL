@@ -403,6 +403,7 @@ EM_JS(void,ma,(),{
   
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
+let o=[h$,h$];
 
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -435,7 +436,6 @@ let $6=new Uint8ClampedArray(W6.buffer,0,la);
 let $7=new Uint8ClampedArray(W7.buffer,0,la);
 let $8=new Uint8ClampedArray(W8.buffer,0,la);
 let $B=new Uint8ClampedArray(W8.buffer,0,la);
-let o=[h$,h$];
 
 let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
@@ -462,15 +462,11 @@ let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput(o);
-  
 
-  
 t.setOutput(o);
 R.setOutput(o);
 var $$B5=R(vv);
 $B.set($$B5);
-  
-// t.setConstants({avg:avag});
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
