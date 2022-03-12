@@ -400,7 +400,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let avag;
+let avag=0.750;
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
