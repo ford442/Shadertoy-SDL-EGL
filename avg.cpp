@@ -404,9 +404,9 @@ let avgg=new ArrayBuffer(8);
 let agav=new Float32Array(avgg,0,1);
 var avag=0.750;
 agav.set([avag]);
-var w$=parseInt(document.getElementById('iwid').innerHTML,10);
-var h$=parseInt(document.getElementById('ihig').innerHTML,10);
-var vv=document.getElementById("mv");
+let w$=document.getElementById('iwid').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
+let vv=document.getElementById("mv");
 let o=[w$,h$];
 let ro=[h$,h$];
 const bcanvas=document.getElementById("bcanvas");
@@ -437,8 +437,8 @@ this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
 
 let d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById('iwid').innerHTML,10);
-h$=parseInt(document.getElementById('ihig').innerHTML,10);
+w$=document.getElementById('iwid').innerHTML;
+h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 ro=[h$,h$];
 var l=w$*h$*32;
@@ -463,18 +463,13 @@ var $8=new Float64Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
 var $bb=R(vv);
-  console.log($bb.length);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-    console.log(gfg.length);
-
 var avvvg=gfgs/la;
-    console.log(la);
-    console.log(avvvg);
-
 var avag=avvvg;
 agav.set([avag]);
 setAvg();
+  
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
