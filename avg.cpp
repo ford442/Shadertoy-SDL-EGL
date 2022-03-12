@@ -465,7 +465,7 @@ R.setOutput(o);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/(la/4);
+var avvvg=gfgs/(la/2);
 var avag=avvvg;
 agav.set([avag]);
 setAvg();
