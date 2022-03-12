@@ -440,9 +440,9 @@ this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput(o);
   
 let vv=document.getElementById("mv");
-let w$=Math.round(document.getElementById('iwid').innerHTML);
-let h$=Math.round(document.getElementById('ihig').innerHTML);
-let o=[h$,h$];
+w$=parseInt(document.getElementById('iwid').innerHTML,10);
+h$=parseInt(document.getElementById('ihig').innerHTML,10
+o=[h$,h$];
 let l=h$*h$*1;
 let la=h$*h$;
 let m=Math.ceil(l/65536);
