@@ -184,7 +184,7 @@ $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
 setTimeout(function(){
-loadV.src=document.getElementById("isrc").innerHTML;
+mV.src=document.getElementById("isrc").innerHTML;
 loadV.width=$iwid.innerHTML;
 loadV.height=datb;
 loadV.currentTime=document.getElementById("itim").innerHTML;
