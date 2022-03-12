@@ -1,12 +1,12 @@
 
-var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,he,$pt,randSong;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
 let loadV=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
-var mv,lo;
+let mv,lo;
 function sngs(xml){
     var parser=new DOMParser();
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
@@ -159,8 +159,8 @@ mV.play();
 setTimeout(function(){document.getElementById("btn11").click();},2100);
 setTimeout(function(){document.getElementById("btn").click();},1750);
 setTimeout(function(){document.getElementById("btn3").click();},1750);
-vide=document.querySelectorAll("video");
 function loada(){
+let vide=document.querySelectorAll("video");
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 hii=Math.round(window.innerHeight);
 document.getElementById("ihid").innerHTML=hii;
