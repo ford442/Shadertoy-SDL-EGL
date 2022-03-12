@@ -533,13 +533,13 @@ $F=2;
 if(T){return;}
 setTimeout(function(){
   
+M();
 let $bb=R($B);
 let gfg=$bb.join().split(',').map(Number);
 let llll=gfg.reduce(function(a, b){ return a + b; });
 let fllll=llll/la;
 // console.log(fllll);
   
-M();
 },33.33);
 }
 M();
