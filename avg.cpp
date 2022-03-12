@@ -457,18 +457,11 @@ let $5=new Float64Array(W5.buffer,0,la);
 let $6=new Float64Array(W6.buffer,0,la);
 let $7=new Float64Array(W7.buffer,0,la);
 let $8=new Float64Array(W8.buffer,0,la);
-let $B=new Uint8ClampedArray(W8.buffer,0,la);
+let $B=new Float64Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
 var $$B5=R(vv);
 $B.set($$B5);
-var $$1=t(vv);
-$1.set($$1);
-$2.set($$1);
-$3.set($$1);
-r.setOutput(o);
-let $F=1;
-let T=false;
 function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
@@ -476,6 +469,14 @@ gfg=gfg.reduce(function(a, b){ return a + b; });
 gfg=gfg/la;
 }
 avvg();
+var $$1=t(vv);
+$1.set($$1);
+$2.set($$1);
+$3.set($$1);
+r.setOutput(o);
+let $F=1;
+let T=false;
+
 function M(){
 if($F==8){
 var $r8=t($8);
