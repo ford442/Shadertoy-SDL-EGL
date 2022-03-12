@@ -83,8 +83,8 @@ document.getElementById('pmhig').innerHTML=Math.round(window.innerHeight);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 loadV.addEventListener('canplay',function(){
-document.getElementById("hig").innerHTML=this.videoWidth;
-document.getElementById("wid").innerHTML=this.videoHeight;
+document.getElementById("hig").innerHTML=this.videoHeight;
+document.getElementById("wid").innerHTML=this.videoWidth;
 $sc=this.duration;
 var mil=Math.round($sc*1000);
 $pt=Math.random()*mil;
