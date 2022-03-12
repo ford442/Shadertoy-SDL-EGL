@@ -45,6 +45,8 @@ function shds(xml){
     var randShade=Math.random();
     randShade=Math.round($shds[0]*randShade)+5;
     document.getElementById("path").innerHTML=$shds[randShade];
+    setTimeout(function(){document.getElementById("btn2").click();},500);
+
 }
 
 function scanSongs(){
@@ -155,7 +157,6 @@ loadV.height=datb.innerHTML;
 document.getElementById("wrap").style.lineheight=$hg;
 // document.getElementById("isrc").innerHTML=adr;
 mV.play();
-setTimeout(function(){document.getElementById("btn2").click();},1500);
 setTimeout(function(){document.getElementById("btn11").click();},2100);
 setTimeout(function(){document.getElementById("btn").click();},1750);
 setTimeout(function(){document.getElementById("btn8").click();},2200);
