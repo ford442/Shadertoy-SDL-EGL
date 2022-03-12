@@ -1,5 +1,5 @@
 
-var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,mv,lo,mV,loadV;
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,mv,lo;
 var $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
 let loadV=document.getElementById("ldv");
