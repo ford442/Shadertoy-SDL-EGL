@@ -184,7 +184,6 @@ $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
 setTimeout(function(){
-document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=document.getElementById("itim").innerHTML;
 document.getElementById("ldv").width=document.getElementById("iwid").innerHTML;
 document.getElementById("ldv").height=document.getElementById("ihig").innerHTML;
@@ -193,6 +192,7 @@ mv=vide[0].id;
 lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
+document.getElementById("ldv").src=adr;
 document.getElementById("di").click();
 loada();
 },$ldt);
