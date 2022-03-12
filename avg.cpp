@@ -414,7 +414,7 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 const R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
-return [0.5,0.5,0.5,aveg];
+return [0.0,0.0,0.0,aveg];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
 const t=g.createKernel(function(v){
@@ -465,7 +465,7 @@ var $bb=R(vv);
   console.log($bb[0],$bb[1],$bb[2],$bb[3]);
 var gfg=$bb.join().split(',').map(Number);
     console.log(gfg.length);
-  console.log(gfg[gfg.length-0],gfg[gfg.length-1],gfg[gfg.length-2],gfg[gfg.length-3]);
+  console.log(gfg[gfg.length]);
 
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la);
