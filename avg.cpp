@@ -417,7 +417,11 @@ const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
-  
+
+function setAvg(){
+t.constants={avg:avag};
+}
+
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
@@ -462,7 +466,7 @@ avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
 }
 avvg();
-// t.constants={avg:avag};
+  setAvg();
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
