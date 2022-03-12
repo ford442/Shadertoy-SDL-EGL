@@ -182,8 +182,9 @@ $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
+            document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
+
   setTimeout(function(){
-        document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
         document.getElementById("ldv").currentTime=document.getElementById("itim").innerHTML;
         document.getElementById("ldv").width=document.getElementById("iwid").innerHTML;
         document.getElementById("ldv").height=document.getElementById("ihig").innerHTML;
