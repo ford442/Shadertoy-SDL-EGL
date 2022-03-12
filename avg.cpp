@@ -456,7 +456,7 @@ $B.set($$B5);
 function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a,b){return a+b;});
+var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la*4);
 avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
