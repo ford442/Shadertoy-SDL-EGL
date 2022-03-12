@@ -413,6 +413,10 @@ let d=S();if(d)d();d=S();function S(){
 
 let o=[h$,h$];
 
+let R=g.createKernel(function(tv){
+return tv[this.thread.y][this.thread.x];
+}).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
+
 function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
@@ -422,10 +426,6 @@ avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
 }
 avvg();
-
-let R=g.createKernel(function(tv){
-return tv[this.thread.y][this.thread.x];
-}).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
