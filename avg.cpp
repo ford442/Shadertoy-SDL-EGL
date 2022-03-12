@@ -476,6 +476,8 @@ var T=false;
 function M(){
 if($F==8){
 var $r8=t($8);
+  var n8=new Uint8ClampedArray($r8,0,$r8.length);
+  console.log(n8[0]);
 r($r8);
 var $$4=t(vv);
 $4.set($$4);
