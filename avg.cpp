@@ -422,12 +422,7 @@ let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
-let t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
-return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
-  
+
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
@@ -441,28 +436,26 @@ let o=[h$,h$];
 let l=h$*h$*1;
 let la=h$*h$;
 let m=Math.ceil(l/65536);
-let W1=new WebAssembly.Memory({initial:m});
-let W2=new WebAssembly.Memory({initial:m});
-let W3=new WebAssembly.Memory({initial:m});
-let W4=new WebAssembly.Memory({initial:m});
-let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
-let WB=new WebAssembly.Memory({initial:m});
-let $1=new Uint8ClampedArray(W1.buffer,0,la);
-let $2=new Uint8ClampedArray(W2.buffer,0,la);
-let $3=new Uint8ClampedArray(W3.buffer,0,la);
-let $4=new Uint8ClampedArray(W4.buffer,0,la);
-let $5=new Uint8ClampedArray(W5.buffer,0,la);
-let $6=new Uint8ClampedArray(W6.buffer,0,la);
-let $7=new Uint8ClampedArray(W7.buffer,0,la);
-let $8=new Uint8ClampedArray(W8.buffer,0,la);
-let $B=new Uint8ClampedArray(W8.buffer,0,la);
-t.setOutput(o);
-R.setOutput(o);
-var $$B5=R(vv);
-$B.set($$B5);
+var W1=new WebAssembly.Memory({initial:m});
+var W2=new WebAssembly.Memory({initial:m});
+var W3=new WebAssembly.Memory({initial:m});
+var W4=new WebAssembly.Memory({initial:m});
+var W5=new WebAssembly.Memory({initial:m});
+var W6=new WebAssembly.Memory({initial:m});
+var W7=new WebAssembly.Memory({initial:m});
+var W8=new WebAssembly.Memory({initial:m});
+var WB=new WebAssembly.Memory({initial:m});
+var $1=new Uint8ClampedArray(W1.buffer,0,la);
+var $2=new Uint8ClampedArray(W2.buffer,0,la);
+var $3=new Uint8ClampedArray(W3.buffer,0,la);
+var $4=new Uint8ClampedArray(W4.buffer,0,la);
+var $5=new Uint8ClampedArray(W5.buffer,0,la);
+var $6=new Uint8ClampedArray(W6.buffer,0,la);
+var $7=new Uint8ClampedArray(W7.buffer,0,la);
+var $8=new Uint8ClampedArray(W8.buffer,0,la);
+var $B=new Uint8ClampedArray(W8.buffer,0,la);
+  R.setOutput(o);
+
 function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
@@ -472,6 +465,15 @@ avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
 }
 avvg();
+  let t=g.createKernel(function(v){
+const P=v[this.thread.y][this.thread.x];
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
+return[P[0],P[1],P[2],(aveg)];
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+
+t.setOutput(o);
+var $$B5=R(vv);
+$B.set($$B5);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
