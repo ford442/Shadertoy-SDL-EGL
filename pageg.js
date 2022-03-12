@@ -6,6 +6,7 @@ let loadV=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
+var mv,lo;
 function sngs(xml){
     var parser=new DOMParser();
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
@@ -184,14 +185,12 @@ datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
 setTimeout(function(){
 loadV.src=document.getElementById("isrc").innerHTML;
-mV.width=$iwid.innerHTML;
-mV.height=datb.innerHTML;
 loadV.width=$iwid.innerHTML;
 loadV.height=datb;
-loadV.play();
 loadV.currentTime=document.getElementById("itim").innerHTML;
-var mv=vide[0].id;
-var lo=vide[1].id;
+loadV.play();
+mv=vide[0].id;
+lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById("di").click();
