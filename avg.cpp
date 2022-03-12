@@ -462,7 +462,7 @@ avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
 }
 avvg();
-// t.setConstants({avg:avag});
+t.constants={avg:avag};
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
@@ -470,7 +470,6 @@ $3.set($$1);
 r.setOutput(o);
 let $F=1;
 let T=false;
-
 function M(){
 if($F==8){
 var $r8=t($8);
