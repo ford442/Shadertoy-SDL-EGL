@@ -400,7 +400,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let avag=0.0;
+let avag;
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
@@ -422,7 +422,12 @@ let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
-
+let t=g.createKernel(function(v){
+const P=v[this.thread.y][this.thread.x];
+let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
+return[P[0],P[1],P[2],(aveg)];
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+  
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
@@ -454,8 +459,10 @@ let $6=new Uint8ClampedArray(W6.buffer,0,la);
 let $7=new Uint8ClampedArray(W7.buffer,0,la);
 let $8=new Uint8ClampedArray(W8.buffer,0,la);
 let $B=new Uint8ClampedArray(W8.buffer,0,la);
-  R.setOutput(o);
-
+t.setOutput(o);
+R.setOutput(o);
+var $$B5=R(vv);
+$B.set($$B5);
 function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
@@ -465,15 +472,6 @@ avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
 }
 avvg();
-  let t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x];
-let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
-return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
-
-t.setOutput(o);
-var $$B5=R(vv);
-$B.set($$B5);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
