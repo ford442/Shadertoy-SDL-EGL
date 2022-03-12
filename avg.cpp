@@ -469,8 +469,8 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 let avag=gfgs/(la*4);
 
 const initialValue = 0;
-let mina=gfg.reduce(function(previousValue,currentValue) => Math.min(previousValue,currentValue));
-let maxa=gfg.reduce(function(previousValue,currentValue) => Math.max(previousValue,currentValue));
+let mina=gfg.reduce(function(previousValue,currentValue) {return Math.min(previousValue,currentValue)});
+let maxa=gfg.reduce(function(previousValue,currentValue){return Math.max(previousValue,currentValue)});
 console.log(mina+" "+maxa+" "+avag);
 
 }
