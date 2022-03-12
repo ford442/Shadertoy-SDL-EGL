@@ -462,7 +462,7 @@ avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
 }
 avvg();
-t.setConstants({avg:avag});
+// t.setConstants({avg:avag});
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
