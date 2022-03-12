@@ -436,8 +436,8 @@ this.color(p[0],p[1],p[2],p[3]);
 
 let d=S();if(d)d();d=S();function S(){
 var vv=document.getElementById("mv");
-var w$=Math.round(document.getElementById('iwid').innerHTML);
-var h$=Math.round(document.getElementById('ihig').innerHTML);
+var w$=parseInt(document.getElementById('iwid').innerHTML,10);
+var h$=parseInt(document.getElementById('ihig').innerHTML,10);
 var o=[w$,h$];
 var l=w$*h$*32;
 var la=w$*h$;
@@ -462,8 +462,10 @@ t.setOutput(o);
 R.setOutput(o);
 var $bb=R(vv);
   console.log($bb.length);
+  console.log($bb[0],$bb[1],$bb[2],$bb[3]);
 var gfg=$bb.join().split(',').map(Number);
     console.log(gfg.length);
+  console.log(gfg[0],gfg[1],gfg[2],gfg[3]);
 
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la);
