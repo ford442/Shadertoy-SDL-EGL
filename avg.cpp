@@ -538,7 +538,7 @@ $F=2;
 if(T){return;}
 setTimeout(function(){
 M();
-},16.6);
+},33.33);
 }
 M();
 document.getElementById("di").onclick=function(){
