@@ -423,9 +423,9 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 function setAvg(){
-  avag=agav[0].toFixed(3);
+avag=agav[0];
 t.constants={avg:avag};
-  console.log(avag);
+console.log(avag);
 }
 
 let r=g.createKernel(function(f){
@@ -468,9 +468,11 @@ var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la*4);
-avvvg=(avvvg+0.75)/2;
-avag=avvvg.toFixed(3);
-  agav.set([avag]);
+avvvg=((avvvg+0.75)/2)*1000;
+avvvg=Math.round(avvvg);
+avvvg=avvvg/1000;
+avag=avvvg;
+agav.set([avag]);
 setAvg();
 }
 avvg();
