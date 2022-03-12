@@ -441,7 +441,7 @@ this.color(p[0],p[1],p[2],p[3]);
   
 let vv=document.getElementById("mv");
 w$=parseInt(document.getElementById('iwid').innerHTML,10);
-h$=parseInt(document.getElementById('ihig').innerHTML,10
+h$=parseInt(document.getElementById('ihig').innerHTML,10);
 o=[h$,h$];
 let l=h$*h$*1;
 let la=h$*h$;
