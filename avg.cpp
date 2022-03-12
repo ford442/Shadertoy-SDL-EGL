@@ -417,10 +417,6 @@ let avv$=new ArrayBuffer(4);
 let avgs=new Float32Array(avv,0,8);
 let avg$=new Float32Array(avv$,0,1);
 
-function avvg(){
-
-}
-
 let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
@@ -471,6 +467,12 @@ $3.set($$1);
 r.setOutput(o);
 let $F=1;
 let T=false;
+function avvg(){
+var $bb=R($B);
+var gfg=$bb.join().split(',').map(Number);
+gfg=gfg.reduce(function(a, b){ return a + b; });
+gfg=gfg/la;
+}
 function M(){
 if($F==8){
 var $r8=t($8);
@@ -499,6 +501,7 @@ r($r5);
 var $$1=t(vv);
 $1.set($$1);
 $F=6;
+avvg();
 }
 if($F==4){  
 var $r4=t($4);
@@ -522,10 +525,6 @@ $6.set($$6);
 $F=3;
 }
 if($F==1){
-  var $bb=R($B);
-var gfg=$bb.join().split(',').map(Number);
-gfg=gfg.reduce(function(a, b){ return a + b; });
-gfg=gfg/la;
 var $r1=t($1);
 r($r1);
 var $$5=t(vv);
