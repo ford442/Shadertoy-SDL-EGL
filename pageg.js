@@ -189,10 +189,10 @@ datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
 setTimeout(function(){
 mV.src=document.getElementById("isrc").innerHTML;
-loadV.width=$iwid.innerHTML;
-loadV.height=datb;
 loadV.currentTime=document.getElementById("itim").innerHTML;
 loadV.play();
+loadV.width=$iwid.innerHTML;
+loadV.height=datb;
 var mv=vide[0].id;
 var lo=vide[1].id;
 vide[0].id=lo;
