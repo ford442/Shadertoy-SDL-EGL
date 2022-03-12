@@ -400,7 +400,9 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-
+  
+let w$=parseInt(document.getElementById('iwid').innerHTML,10);
+let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -408,9 +410,7 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 let avag=0.750;
 
 let d=S();if(d)d();d=S();function S(){
-  
-let w$=parseInt(document.getElementById('iwid').innerHTML,10);
-let h$=parseInt(document.getElementById('ihig').innerHTML,10);
+
 let o=[h$,h$];
 
 function avvg(){
