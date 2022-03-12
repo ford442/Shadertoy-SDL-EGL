@@ -497,10 +497,10 @@ if($F==5){
 var $r5=t($5);
 var $b5=R($B);
 r($r5);
-var gfg=$b5.join().split(',').map(Number);
-var llll=gfg.reduce(function(a, b){ return a + b; });
-var fllll=llll/la;
-console.log(fllll);
+let gfg=$b5.join().split(',').map(Number);
+let llll=gfg.reduce(function(a, b){ return a + b; });
+let fllll=llll/la;
+// console.log(fllll);
 var $$1=t(vv);
 $1.set($$1);
 $F=6;
