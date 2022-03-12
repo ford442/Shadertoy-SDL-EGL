@@ -467,8 +467,8 @@ var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 let avag=gfgs/la;
-let mina=Math.min(...gfg);
-let maxa=Math.max(...gfg);
+let mina=gfg.reduce((previousValue,currentValue) => Math.min(previousValue,currentValue,initialValue));
+let maxa=gfg.reduce((previousValue,currentValue) => Math.max(previousValue,currentValue,initialValue));
 console.log(mina+" "+maxa+" "+avag);
 }
 avvg();
