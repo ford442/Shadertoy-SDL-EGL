@@ -434,7 +434,7 @@ console.log(avag);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(ro);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
@@ -442,7 +442,7 @@ h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 var ro=[h$,h$];
 var l=w$*h$*32;
-var la=w$*h$;
+var la=w$*h$*4;
 var m=Math.ceil(l/65536);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
@@ -474,7 +474,7 @@ var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-r.setOutput(ro);
+r.setOutput(o);
 var $F=1;
 var T=false;
 function M(){
