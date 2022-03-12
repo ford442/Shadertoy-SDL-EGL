@@ -33,7 +33,7 @@ function vids(xml){
 function shds(xml){
     var parser=new DOMParser();
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
-    var preLvarist=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
+    var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
     $shds[0]=preList.length;
     for (var i=1;i<preList.length;i++){
         var txxt=preList[i].href;
