@@ -538,7 +538,7 @@ if(T){return;}
 setTimeout(function(){
 M();
 // console.log(fllll);
-},33.32);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
