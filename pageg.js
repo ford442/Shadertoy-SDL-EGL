@@ -6,7 +6,6 @@ let loadV=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
-let mv,lo;
 function sngs(xml){
     var parser=new DOMParser();
     var htmlDoc=parser.parseFromString(xml.responseText,'text/html');
@@ -189,8 +188,8 @@ loadV.width=$iwid.innerHTML;
 loadV.height=datb;
 loadV.currentTime=document.getElementById("itim").innerHTML;
 loadV.play();
-mv=vide[0].id;
-lo=vide[1].id;
+var mv=vide[0].id;
+var lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById("di").click();
