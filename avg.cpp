@@ -425,7 +425,6 @@ return[P[0],P[1],P[2],(aveg)];
 function setAvg(){
 avag=agav[0];
 t.constants={avg:avag};
-console.log(avag);
 }
 
 let r=g.createKernel(function(f){
@@ -459,15 +458,15 @@ let $7=new Float32Array(W7.buffer,0,la);
 let $8=new Float32Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
-var $bb=R(vv);
-var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/(la*4);
+let $bb=R(vv);
+let gfg=$bb.join().split(',').map(Number);
+let gfgs=gfg.reduce(function(a, b){ return a + b; });
+let avvvg=gfgs/(la*4);
 avvvg=1.0-avvvg;
 avag=avvvg;
 agav.set([avag]);
 setAvg();
-var $$1=t(vv);
+let $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
@@ -476,58 +475,58 @@ let $F=1;
 let T=false;
 function M(){
 if($F==8){
-var $r8=t($8);
+let $r8=t($8);
 r($r8);
-var $$4=t(vv);
+let $$4=t(vv);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
-var $r7=t($7);
+let $r7=t($7);
 r($r7);
-var $$3=t(vv);
+let $$3=t(vv);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
-var $r6=t($6);
+let $r6=t($6);
 r($r6);
-var $$2=t(vv);
+let $$2=t(vv);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
-var $r5=t($5);
+let $r5=t($5);
 r($r5);
-var $$1=t(vv);
+let $$1=t(vv);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
-var $r4=t($4);
+let $r4=t($4);
 r($r4);
-var $$8=t(vv);
+let $$8=t(vv);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
-var $r3=t($3);
+let $r3=t($3);
 r($r3);
-var $$7=t(vv);
+let $$7=t(vv);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
-var $r2=t($2);
+let $r2=t($2);
 r($r2);
-var $$6=t(vv);
+let $$6=t(vv);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
-var $r1=t($1);
+let $r1=t($1);
 r($r1);
-var $$5=t(vv);
+let $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
