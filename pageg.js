@@ -194,6 +194,6 @@ window.scroll(0,0);
         vide[1].id=mv;
         document.getElementById("di").click();
         loada();
-    },$ldt);}
+    },$ldt);
 }
 loada();
