@@ -423,8 +423,8 @@ function avvg(){
 
 let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput(o);
-  
+}).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
+
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-0.75)*(((P[0]+P[1]+P[2])/3)*4.0));
@@ -442,11 +442,8 @@ let w$=Math.round(document.getElementById('iwid').innerHTML);
 let h$=Math.round(document.getElementById('ihig').innerHTML);
 let o=[h$,h$];
 let l=h$*h$*32;
-let la=h$*h$;
+let la=h$*h$*4;
 let m=Math.ceil(l/65536);
-let WT=new WebAssembly.Memory({initial:m});
-let WT2=new WebAssembly.Memory({initial:m});
-let WW=new ArrayBuffer(l);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
 let W3=new WebAssembly.Memory({initial:m});
@@ -455,7 +452,7 @@ let W5=new WebAssembly.Memory({initial:m});
 let W6=new WebAssembly.Memory({initial:m});
 let W7=new WebAssembly.Memory({initial:m});
 let W8=new WebAssembly.Memory({initial:m});
-let $TT=new Float64Array(WW);
+let WB=new WebAssembly.Memory({initial:m});
 let $1=new Float64Array(W1.buffer,0,la);
 let $2=new Float64Array(W2.buffer,0,la);
 let $3=new Float64Array(W3.buffer,0,la);
@@ -464,6 +461,7 @@ let $5=new Float64Array(W5.buffer,0,la);
 let $6=new Float64Array(W6.buffer,0,la);
 let $7=new Float64Array(W7.buffer,0,la);
 let $8=new Float64Array(W8.buffer,0,la);
+let $B=new Float64Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
 var $$1=t(vv);
@@ -472,12 +470,10 @@ $2.set($$1);
 $3.set($$1);
 r.setOutput(o);
 let $F=1;
-var T=false;
+let T=false;
 function M(){
 if($F==8){
 var $r8=t($8);
-  var n8=new Uint8ClampedArray($r8,0,$r8.length);
-  console.log(n8[0]);
 r($r8);
 var $$4=t(vv);
 $4.set($$4);
@@ -499,7 +495,12 @@ $F=7;
 }
 if($F==5){  
 var $r5=t($5);
+var $b5=R($B);
 r($r5);
+var gfg=$b5.join().split(',').map(Number);
+var llll=gfg.reduce(function(a, b){ return a + b; });
+var fllll=llll/al;
+console.log(fllll);
 var $$1=t(vv);
 $1.set($$1);
 $F=6;
@@ -529,7 +530,9 @@ if($F==1){
 var $r1=t($1);
 r($r1);
 var $$5=t(vv);
+var $$B5=R(vv);
 $5.set($$5);
+$B.set($$B5);
 $F=2;
 }
 if(T){return;}
