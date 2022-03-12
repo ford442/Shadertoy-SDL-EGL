@@ -461,9 +461,15 @@ var $8=new Float64Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
 var $bb=R(vv);
+  console.log($bb.length);
 var gfg=$bb.join().split(',').map(Number);
+    console.log(gfg.length);
+
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la);
+    console.log(avvvg);
+  console.log(la);
+
 var avag=avvvg;
 agav.set([avag]);
 setAvg();
