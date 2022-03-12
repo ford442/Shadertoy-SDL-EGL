@@ -59,7 +59,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,16666666};
+struct timespec req={0,8333000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -70,7 +70,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -404,20 +404,20 @@ let avgg=new ArrayBuffer(8);
 let agav=new Float32Array(avgg,0,1);
 var avag=0.750;
 agav.set([avag]);
-let w$=parseInt(document.getElementById('iwid').innerHTML,10);
-let h$=parseInt(document.getElementById('ihig').innerHTML,10);
-let o=[h$,h$];
-let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let g=new GPU({canvas:bcanvas,webGl:contx});
+var w$=parseInt(document.getElementById('iwid').innerHTML,10);
+var h$=parseInt(document.getElementById('ihig').innerHTML,10);
+var o=[h$,h$];
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const g=new GPU({canvas:bcanvas,webGl:contx});
 
-let R=g.createKernel(function(tv){
+const R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
 return[P[0],P[1],P[2],aveg];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
-let t=g.createKernel(function(v){
+const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
@@ -428,112 +428,112 @@ avag=agav[0];
 t.constants={avg:avag};
 }
 
-let r=g.createKernel(function(f){
+const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
-let vv=document.getElementById("mv");
-let w$=Math.round(document.getElementById('iwid').innerHTML);
-let h$=Math.round(document.getElementById('ihig').innerHTML);
-let o=[h$,h$];
-let l=h$*h$*16;
-let la=h$*h$;
-let m=Math.ceil(l/65536);
-let W1=new WebAssembly.Memory({initial:m});
-let W2=new WebAssembly.Memory({initial:m});
-let W3=new WebAssembly.Memory({initial:m});
-let W4=new WebAssembly.Memory({initial:m});
-let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
-let $1=new Float32Array(W1.buffer,0,la);
-let $2=new Float32Array(W2.buffer,0,la);
-let $3=new Float32Array(W3.buffer,0,la);
-let $4=new Float32Array(W4.buffer,0,la);
-let $5=new Float32Array(W5.buffer,0,la);
-let $6=new Float32Array(W6.buffer,0,la);
-let $7=new Float32Array(W7.buffer,0,la);
-let $8=new Float32Array(W8.buffer,0,la);
+var vv=document.getElementById("mv");
+var w$=Math.round(document.getElementById('iwid').innerHTML);
+var h$=Math.round(document.getElementById('ihig').innerHTML);
+var o=[h$,h$];
+var l=h$*h$*16;
+var la=h$*h$;
+var m=Math.ceil(l/65536);
+var W1=new WebAssembly.Memory({initial:m});
+var W2=new WebAssembly.Memory({initial:m});
+var W3=new WebAssembly.Memory({initial:m});
+var W4=new WebAssembly.Memory({initial:m});
+var W5=new WebAssembly.Memory({initial:m});
+var W6=new WebAssembly.Memory({initial:m});
+var W7=new WebAssembly.Memory({initial:m});
+var W8=new WebAssembly.Memory({initial:m});
+var $1=new Float32Array(W1.buffer,0,la);
+var $2=new Float32Array(W2.buffer,0,la);
+var $3=new Float32Array(W3.buffer,0,la);
+var $4=new Float32Array(W4.buffer,0,la);
+var $5=new Float32Array(W5.buffer,0,la);
+var $6=new Float32Array(W6.buffer,0,la);
+var $7=new Float32Array(W7.buffer,0,la);
+var $8=new Float32Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
-let $bb=R(vv);
-let gfg=$bb.join().split(',').map(Number);
-let gfgs=gfg.reduce(function(a, b){ return a + b; });
-let avvvg=gfgs/(la*4);
-avag=avvvg;
+var $bb=R(vv);
+var gfg=$bb.join().split(',').map(Number);
+var gfgs=gfg.reduce(function(a, b){ return a + b; });
+var avvvg=gfgs/(la*4);
+var avag=avvvg;
 agav.set([avag]);
 setAvg();
-let $$1=t(vv);
+var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 r.setOutput(o);
-let $F=1;
-let T=false;
+var $F=1;
+var T=false;
 function M(){
 if($F==8){
-let $r8=t($8);
+var $r8=t($8);
 r($r8);
-let $$4=t(vv);
+var $$4=t(vv);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
-let $r7=t($7);
+var $r7=t($7);
 r($r7);
-let $$3=t(vv);
+var $$3=t(vv);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
-let $r6=t($6);
+var $r6=t($6);
 r($r6);
-let $$2=t(vv);
+var $$2=t(vv);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
-let $r5=t($5);
+var $r5=t($5);
 r($r5);
-let $$1=t(vv);
+var $$1=t(vv);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
-let $r4=t($4);
+var $r4=t($4);
 r($r4);
-let $$8=t(vv);
+var $$8=t(vv);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
-let $r3=t($3);
+var $r3=t($3);
 r($r3);
-let $$7=t(vv);
+var $$7=t(vv);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
-let $r2=t($2);
+var $r2=t($2);
 r($r2);
-let $$6=t(vv);
+var $$6=t(vv);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
-let $r1=t($1);
+var $r1=t($1);
 r($r1);
-let $$5=t(vv);
+var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
 if(T){return;}
 setTimeout(function(){
 M();
-},16.666);
+},8.333);
 }
 M();
 document.getElementById("di").onclick=function(){
