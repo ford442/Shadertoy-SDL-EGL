@@ -414,7 +414,7 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 const R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
-return aveg;
+return [0.5,0.5,0.5,aveg];
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
 const t=g.createKernel(function(v){
