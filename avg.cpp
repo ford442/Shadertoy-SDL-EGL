@@ -400,7 +400,11 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let avag=0.750;
+  let avgg=new ArrayBuffer(8);
+  let agav=new Float32Array(avgg,0,1);
+var avag=0.750;
+  agav.set([avag]);
+  console.log(agav);
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
@@ -419,6 +423,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 function setAvg(){
+  avag=agav[0];
 t.constants={avg:avag};
   console.log(avag);
 }
@@ -465,6 +470,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la*4);
 avvvg=(avvvg+0.75)/2;
 avag=avvvg.toFixed(3);
+  agav.set([avag]);
 setAvg();
 }
 avvg();
