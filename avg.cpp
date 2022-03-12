@@ -410,18 +410,18 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 
 let R=g.createKernel(function(tv){
 return tv[this.thread.y][this.thread.x];
-}).setTactic("speed").setDynamicOutput(true);
+}).setTactic("speed").setDynamicOutput(true).setOutput(o);
 
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("balanced").setPipeline(true).setDynamicOutput(true);
+}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setOutput(o);
   
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("balanced").setGraphical(true).setDynamicOutput(true);
+}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 let vv=document.getElementById("mv");
