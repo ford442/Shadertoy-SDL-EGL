@@ -466,11 +466,11 @@ function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-let avag=gfgs/la;
+let avag=gfgs/(la*4);
 
 const initialValue = 0;
-let mina=gfg.reduce((previousValue,currentValue) => Math.min(previousValue,currentValue,initialValue));
-let maxa=gfg.reduce((previousValue,currentValue) => Math.max(previousValue,currentValue,initialValue));
+let mina=gfg.reduce(function(previousValue,currentValue) => Math.min(previousValue,currentValue));
+let maxa=gfg.reduce(function(previousValue,currentValue) => Math.max(previousValue,currentValue));
 console.log(mina+" "+maxa+" "+avag);
 
 }
