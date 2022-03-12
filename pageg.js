@@ -153,7 +153,7 @@ mV.height=datb.innerHTML;
 loadV.width=$iwid.innerHTML;
 loadV.height=datb.innerHTML;
 document.getElementById("wrap").style.lineheight=$hg;
-document.getElementById("isrc").innerHTML=adr;
+// document.getElementById("isrc").innerHTML=adr;
 mV.play();
 setTimeout(function(){document.getElementById("btn11").click();},2100);
 setTimeout(function(){document.getElementById("btn").click();},1750);
