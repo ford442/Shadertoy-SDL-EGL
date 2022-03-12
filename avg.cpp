@@ -465,8 +465,11 @@ $B.set($$B5);
 function avvg(){
 var $bb=R($B);
 var gfg=$bb.join().split(',').map(Number);
-gfg=gfg.reduce(function(a, b){ return a + b; });
-gfg=gfg/la;
+var gfgs=gfg.reduce(function(a, b){ return a + b; });
+let avag=gfgs/la;
+let mina=Math.min(...gfg);
+let maxa=Math.max(...gfg);
+console.log(mina+" "+maxa+" "+avag);
 }
 avvg();
 var $$1=t(vv);
