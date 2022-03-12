@@ -420,7 +420,7 @@ let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("balanced").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 function setAvg(){
 avag=agav[0];
@@ -431,7 +431,7 @@ console.log(avag);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput(o);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
 let vv=document.getElementById("mv");
@@ -463,8 +463,7 @@ t.setOutput(o);
 R.setOutput(o);
 var $$B5=R(vv);
 $B.set($$B5);
-function avvg(){
-var $bb=R($B);
+var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la*4);
@@ -474,8 +473,6 @@ avvvg=avvvg/1000;
 avag=avvvg;
 agav.set([avag]);
 setAvg();
-}
-avvg();
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
