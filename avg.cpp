@@ -426,7 +426,7 @@ let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true)..setConstants({avg:avag}).setOutput(o);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
   
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
