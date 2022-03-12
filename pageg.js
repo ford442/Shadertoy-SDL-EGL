@@ -174,6 +174,7 @@ let adr=$vids[rnum];
 document.getElementById("isrc").innerHTML=adr;
 $h=Math.round(window.innerHeight);
 he=document.getElementById("hig").innerHTML;
+wi=document.getElementById("wid").innerHTML;
 r$=$h/he;
 $w=wi*r$;
 hii=Math.round(dat.innerHTML);
