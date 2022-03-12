@@ -406,7 +406,7 @@ var avag=0.750;
 agav.set([avag]);
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
 var h$=parseInt(document.getElementById('ihig').innerHTML,10);
-var o=[h$,h$];
+var o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const g=new GPU({canvas:bcanvas,webGl:contx});
@@ -414,7 +414,7 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 const R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
-return[P[0],P[1],P[2],aveg];
+return aveg;
 }).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
 
 const t=g.createKernel(function(v){
@@ -426,6 +426,7 @@ return[P[0],P[1],P[2],(aveg)];
 function setAvg(){
 avag=agav[0];
 t.constants={avg:avag};
+  console.log(avag);
 }
 
 const r=g.createKernel(function(f){
@@ -437,9 +438,9 @@ let d=S();if(d)d();d=S();function S(){
 var vv=document.getElementById("mv");
 var w$=Math.round(document.getElementById('iwid').innerHTML);
 var h$=Math.round(document.getElementById('ihig').innerHTML);
-var o=[h$,h$];
-var l=h$*h$*16;
-var la=h$*h$;
+var o=[w$,h$];
+var l=w$*h$*32;
+var la=w$*h$;
 var m=Math.ceil(l/65536);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
@@ -449,20 +450,20 @@ var W5=new WebAssembly.Memory({initial:m});
 var W6=new WebAssembly.Memory({initial:m});
 var W7=new WebAssembly.Memory({initial:m});
 var W8=new WebAssembly.Memory({initial:m});
-var $1=new Float32Array(W1.buffer,0,la);
-var $2=new Float32Array(W2.buffer,0,la);
-var $3=new Float32Array(W3.buffer,0,la);
-var $4=new Float32Array(W4.buffer,0,la);
-var $5=new Float32Array(W5.buffer,0,la);
-var $6=new Float32Array(W6.buffer,0,la);
-var $7=new Float32Array(W7.buffer,0,la);
-var $8=new Float32Array(W8.buffer,0,la);
+var $1=new Float64Array(W1.buffer,0,la);
+var $2=new Float64Array(W2.buffer,0,la);
+var $3=new Float64Array(W3.buffer,0,la);
+var $4=new Float64Array(W4.buffer,0,la);
+var $5=new Float64Array(W5.buffer,0,la);
+var $6=new Float64Array(W6.buffer,0,la);
+var $7=new Float64Array(W7.buffer,0,la);
+var $8=new Float64Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/(la*4);
+var avvvg=gfgs/(la);
 var avag=avvvg;
 agav.set([avag]);
 setAvg();
