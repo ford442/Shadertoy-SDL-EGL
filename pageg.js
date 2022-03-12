@@ -157,12 +157,10 @@ document.getElementById("wrap").style.lineheight=$hg;
 mV.play();
 setTimeout(function(){document.getElementById("btn11").click();},2100);
 setTimeout(function(){document.getElementById("btn").click();},1750);
-setTimeout(function(){document.getElementById("btn3").click();},1750);
+setTimeout(function(){document.getElementById("btn8").click();},2200);
 function loada(){
-    
-    var mV=document.getElementById("mv");
+var mV=document.getElementById("mv");
 var loadV=document.getElementById("ldv");
-    
 let vide=document.querySelectorAll("video");
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 hii=Math.round(window.innerHeight);
