@@ -45,8 +45,6 @@ function shds(xml){
     var randShade=Math.random();
     randShade=Math.round($shds[0]*randShade)+5;
     document.getElementById("path").innerHTML=$shds[randShade];
-    setTimeout(function(){document.getElementById("btn2").click();},500);
-
 }
 
 function scanSongs(){
@@ -69,12 +67,14 @@ xhttp.open("GET","video/",true);
 xhttp.send();
 }
 function scanShaders(){
-var xhttp=new XMLHttpRequest();
-xhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
-shds(this);
-}};
-xhttp.open("GET","all/",true);
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function(){
+        if(this.readyState==4&&this.status==200){
+            shds(this);
+        }
+    };
+    xhttp.open("GET","all/",true);
+    xhttp.send();
 }
 scanVideos();
 scanShaders();
