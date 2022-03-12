@@ -409,17 +409,17 @@ var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 var o=[w$,h$];
 var ro=[h$,h$];
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-const g=new GPU({canvas:bcanvas,webGl:contx});
+let bcanvas=document.getElementById("bcanvas");
+let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let g=new GPU({canvas:bcanvas,webGl:contx});
 
-const R=g.createKernel(function(tv){
+let R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
 return [0.75,0.0,0.0,aveg];
-}).setTactic("speed").setPipeline(false).setDynamicOutput(true).setOutput(o);
+}).setTactic("speed").setDynamicOutput(true).setOutput(o);
 
-const t=g.createKernel(function(v){
+let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
@@ -431,19 +431,19 @@ t.constants={avg:avag};
 console.log(avag);
 }
 
-const r=g.createKernel(function(f){
+let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
-
+var l,la,m;
 let d=S();if(d)d();d=S();function S(){
-w$=document.getElementById('iwid').innerHTML;
-h$=document.getElementById('ihig').innerHTML;
+var w$=document.getElementById('iwid').innerHTML;
+var h$=document.getElementById('ihig').innerHTML;
 var o=[w$,h$];
 var ro=[h$,h$];
-var l=w$*h$*16;
-var la=w$*h$*4;
-var m=Math.ceil(l/65536);
+ l=w$*h$*16;
+ la=w$*h$*4;
+ m=Math.ceil(l/65536);
 var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
@@ -460,8 +460,8 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-t.setOutput(o);
-R.setOutput(o);
+t.setOutput([w$,h$]);
+R.setOutput([w$,h$]);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
@@ -474,7 +474,7 @@ var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-r.setOutput(o);
+r.setOutput([w$,h$]);
 var $F=1;
 var T=false;
 function M(){
