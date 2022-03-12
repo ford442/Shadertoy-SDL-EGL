@@ -460,6 +460,8 @@ let $8=new Float64Array(W8.buffer,0,la);
 let $B=new Uint8ClampedArray(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
+var $$B5=R(vv);
+$B.set($$B5);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
@@ -473,6 +475,7 @@ var gfg=$bb.join().split(',').map(Number);
 gfg=gfg.reduce(function(a, b){ return a + b; });
 gfg=gfg/la;
 }
+avvg();
 function M(){
 if($F==8){
 var $r8=t($8);
@@ -528,16 +531,12 @@ if($F==1){
 var $r1=t($1);
 r($r1);
 var $$5=t(vv);
-var $$B5=R(vv);
 $5.set($$5);
-$B.set($$B5);
 $F=2;
 }
 if(T){return;}
 setTimeout(function(){
-  
 M();
-
 // console.log(fllll);
 },33.32);
 }
