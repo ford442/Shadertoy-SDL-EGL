@@ -400,7 +400,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var avag=0.750;
+let avag=0.750;
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
@@ -464,7 +464,7 @@ var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/(la*4);
 avvvg=(avvvg+0.75)/2;
-var avag=avvvg.toFixed(3);
+avag=avvvg.toFixed(3);
 setAvg();
 }
 avvg();
