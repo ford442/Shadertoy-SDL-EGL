@@ -400,11 +400,10 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-  let avgg=new ArrayBuffer(8);
-  let agav=new Float32Array(avgg,0,1);
+let avgg=new ArrayBuffer(8);
+let agav=new Float32Array(avgg,0,1);
 var avag=0.750;
-  agav.set([avag]);
-  console.log(agav);
+agav.set([avag]);
 let w$=parseInt(document.getElementById('iwid').innerHTML,10);
 let h$=parseInt(document.getElementById('ihig').innerHTML,10);
 let o=[h$,h$];
