@@ -406,6 +406,7 @@ var avag=0.750;
 agav.set([avag]);
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
 var h$=parseInt(document.getElementById('ihig').innerHTML,10);
+var vv=document.getElementById("mv");
 var o=[w$,h$];
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -426,7 +427,7 @@ return[P[0],P[1],P[2],(aveg)];
 function setAvg(){
 avag=agav[0];
 t.constants={avg:avag};
-  console.log(avag);
+console.log(avag);
 }
 
 const r=g.createKernel(function(f){
@@ -435,10 +436,9 @@ this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput(o);
 
 let d=S();if(d)d();d=S();function S(){
-var vv=document.getElementById("mv");
-var w$=parseInt(document.getElementById('iwid').innerHTML,10);
-var h$=parseInt(document.getElementById('ihig').innerHTML,10);
-var o=[w$,h$];
+w$=parseInt(document.getElementById('iwid').innerHTML,10);
+h$=parseInt(document.getElementById('ihig').innerHTML,10);
+o=[w$,h$];
 var l=w$*h$*32;
 var la=w$*h$;
 var m=Math.ceil(l/65536);
@@ -461,17 +461,9 @@ var $8=new Float64Array(W8.buffer,0,la);
 t.setOutput(o);
 R.setOutput(o);
 var $bb=R(vv);
-  console.log($bb.length);
-  console.log($bb[0],$bb[1],$bb[2],$bb[3]);
 var gfg=$bb.join().split(',').map(Number);
-    console.log(gfg.length);
-  console.log(gfg[gfg.length]);
-
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/(la);
-    console.log(avvvg);
-  console.log(la);
-
+var avvvg=gfgs/($bb.length);
 var avag=avvvg;
 agav.set([avag]);
 setAvg();
