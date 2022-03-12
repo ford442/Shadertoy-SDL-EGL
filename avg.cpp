@@ -410,7 +410,31 @@ const g=new GPU({canvas:bcanvas,webGl:contx});
 let avag=0.750;
 
 let d=S();if(d)d();d=S();function S(){
-
+let vv=document.getElementById("mv");
+w$=parseInt(document.getElementById('iwid').innerHTML,10);
+h$=parseInt(document.getElementById('ihig').innerHTML,10);
+o=[h$,h$];
+let l=h$*h$*1;
+let la=h$*h$;
+let m=Math.ceil(l/65536);
+let W1=new WebAssembly.Memory({initial:m});
+let W2=new WebAssembly.Memory({initial:m});
+let W3=new WebAssembly.Memory({initial:m});
+let W4=new WebAssembly.Memory({initial:m});
+let W5=new WebAssembly.Memory({initial:m});
+let W6=new WebAssembly.Memory({initial:m});
+let W7=new WebAssembly.Memory({initial:m});
+let W8=new WebAssembly.Memory({initial:m});
+let WB=new WebAssembly.Memory({initial:m});
+let $1=new Uint8ClampedArray(W1.buffer,0,la);
+let $2=new Uint8ClampedArray(W2.buffer,0,la);
+let $3=new Uint8ClampedArray(W3.buffer,0,la);
+let $4=new Uint8ClampedArray(W4.buffer,0,la);
+let $5=new Uint8ClampedArray(W5.buffer,0,la);
+let $6=new Uint8ClampedArray(W6.buffer,0,la);
+let $7=new Uint8ClampedArray(W7.buffer,0,la);
+let $8=new Uint8ClampedArray(W8.buffer,0,la);
+let $B=new Uint8ClampedArray(W8.buffer,0,la);
 let o=[h$,h$];
 
 let R=g.createKernel(function(tv){
@@ -439,31 +463,7 @@ const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput(o);
   
-let vv=document.getElementById("mv");
-w$=parseInt(document.getElementById('iwid').innerHTML,10);
-h$=parseInt(document.getElementById('ihig').innerHTML,10);
-o=[h$,h$];
-let l=h$*h$*1;
-let la=h$*h$;
-let m=Math.ceil(l/65536);
-let W1=new WebAssembly.Memory({initial:m});
-let W2=new WebAssembly.Memory({initial:m});
-let W3=new WebAssembly.Memory({initial:m});
-let W4=new WebAssembly.Memory({initial:m});
-let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
-let WB=new WebAssembly.Memory({initial:m});
-let $1=new Uint8ClampedArray(W1.buffer,0,la);
-let $2=new Uint8ClampedArray(W2.buffer,0,la);
-let $3=new Uint8ClampedArray(W3.buffer,0,la);
-let $4=new Uint8ClampedArray(W4.buffer,0,la);
-let $5=new Uint8ClampedArray(W5.buffer,0,la);
-let $6=new Uint8ClampedArray(W6.buffer,0,la);
-let $7=new Uint8ClampedArray(W7.buffer,0,la);
-let $8=new Uint8ClampedArray(W8.buffer,0,la);
-let $B=new Uint8ClampedArray(W8.buffer,0,la);
+
   
 t.setOutput(o);
 R.setOutput(o);
