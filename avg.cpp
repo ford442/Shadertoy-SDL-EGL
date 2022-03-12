@@ -466,7 +466,7 @@ var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
     console.log(gfg.length);
 
-var avvvg=gfgs/(la*4);
+var avvvg=gfgs/la;
     console.log(la);
     console.log(avvvg);
 
