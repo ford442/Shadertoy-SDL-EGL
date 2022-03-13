@@ -342,30 +342,28 @@ let avag=0.750;
 agav.set([avag]);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
-let vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 var o=[w$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
-
 let R=g.createKernel(function(tv){
 var P=tv[this.thread.y][this.thread.x];
 var avgg=(P[0]+P[1]+P[2])/3;
 return [P[0],P[1],P[2],avgg];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
-let t=g.createKernel(function(v,av){
-var j=v[this.thread.y][this.thread.x];
-var av$=(j[0]+j[1]+j[2])/3;
-var aveg=1.0-(((av$)-(av))*((av$)*(1.0/(1.0-av))));
-return[j[0],j[1],j[2],aveg];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x];
+var av$=(P[0]+P[1]+P[2])/3;
+var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
+return[P[0],P[1],P[2],aveg];
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
-  
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
@@ -390,66 +388,69 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-var $$1=t(vv,avag);
+// t.setOutput([w$,h$]);
+// R.setOutput([w$,h$]);
+var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
+// r.setOutput([w$,h$]);
 var $F=1;
 var T=false;
 function M(){
 if($F==8){
-var $r8=t($8,avag);
+var $r8=t($8);
 r($r8);
-var $$4=t(vv,avag);
+var $$4=t(vv);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
-var $r7=t($7,avag);
+var $r7=t($7);
 r($r7);
-var $$3=t(vv,avag);
+var $$3=t(vv);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
-var $r6=t($6,avag);
+var $r6=t($6);
 r($r6);
-var $$2=t(vv,avag);
+var $$2=t(vv);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
-var $r5=t($5,avag);
+var $r5=t($5);
 r($r5);
-var $$1=t(vv,avag);
+var $$1=t(vv);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
-var $r4=t($4,avag);
+var $r4=t($4);
 r($r4);
-var $$8=t(vv,avag);
+var $$8=t(vv);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
-var $r3=t($3,avag);
+var $r3=t($3);
 r($r3);
-var $$7=t(vv,avag);
+var $$7=t(vv);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
-var $r2=t($2,avag);
+var $r2=t($2);
 r($r2);
-var $$6=t(vv,avag);
+var $$6=t(vv);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
-var $r1=t($1,avag);
+var $r1=t($1);
 r($r1);
-var $$5=t(vv,avag);
+var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
@@ -463,15 +464,19 @@ document.getElementById("di").onclick=function(){
   
 T=true;
 var $bb=R(vv);
-var gfg=$bb.join().split(',').map(Number);
+var gfg=$bb.join().split(',').map(parseFloat);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
+// var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
+// var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
+// console.log($bb.length,gfg.length,la,al);
 var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
-avag=avag*1000;
+avag=avag*10000;
 avag=Math.round(avag);
-avag=avag/1000;
+avag=avag/10000;
+t.constants={avg:avag};
 console.log(avag);
 S();};return()=>{T=true;};}
 })
@@ -496,4 +501,3 @@ FS.mkdir('/shader');
 });
 return 1;
 }
-
