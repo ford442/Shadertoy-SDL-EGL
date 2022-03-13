@@ -187,7 +187,7 @@ window.scroll(0,0);
 var mv=vide[0].id;
 var lo=vide[1].id;
 vide[0].id=lo;
-vide[1].id=document.getElementById("mv");
+vide[1].id=mv;
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
 document.getElementById("ldv").width=$w
