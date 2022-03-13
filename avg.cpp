@@ -171,7 +171,7 @@ iFrame++;
 static void slp(Uint8 JSfrm){
   EM_ASM({
     console.log("Array: "+$0);
-  },JSfrom[0]);
+  },JSfrm[0]);
 }
 
 static void strt(){
