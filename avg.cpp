@@ -439,7 +439,7 @@ let d=S();if(d)d();d=S();function S(){
  h$=document.getElementById('ihig').innerHTML;
  o=[w$,h$];
 let l=(w$*h$*16);
-let la=(w$*h$*4);
+var la=(w$*h$*4);
 let m=Math.ceil(l/65536);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -462,10 +462,15 @@ var $8=new Float32Array(W8.buffer,0,la);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var tstmin=gfg.reduce(function(a, b){ return Math.min(a, b); });
-var tstmax=gfg.reduce(function(a, b){ return Math.max(a, b); });
-  console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=gfgs/(gfg.length);
+var tstmin=gfg.reduce(function(a, b){ return [Math.min(a, b)]; });
+var tstmax=gfg.reduce(function(a, b){ return [Math.max(a, b)]; });
+  
+  function minMax(arr) { return arr.reduce(function(acc, cur) { return [Math.min(cur, acc[0]),Math.max(cur, acc[1])]
+  }, [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]);
+}
+  
+console.log(gfg.length,la,tstmin,tstmax);
+let avvvg=gfgs/(la);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
