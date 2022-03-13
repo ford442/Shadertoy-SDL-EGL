@@ -189,7 +189,6 @@ window.scroll(0,0);document.getElementById("ldv").play();
 setTimeout(function(){
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
-document.getElementById("ldv").play();
 document.getElementById("ldv").width=$w
 document.getElementById("ldv").height=$h;
 mv=vide[0].id;
