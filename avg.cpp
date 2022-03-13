@@ -472,7 +472,6 @@ avag=agav[0];
 avag=avag*10000;
 avag=Math.round(avag);
 avag=avag/10000;
-t.constants={avg:avag};
 console.log(avag);
 S();};return()=>{T=true;};}
 })
