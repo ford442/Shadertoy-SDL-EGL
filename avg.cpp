@@ -168,12 +168,12 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-unsigned int JSfrm[6];
-static void slp(unsigned int JSfrm){
-  auto hth=JSfrm[3];
+int JSfrm;
+static void slp(int JSfrm){
+  auto hth=JSfrm;
 EM_ASM({
-console.log("Array: "+$0);
-},JSfrm[2]);
+console.log("Int: "+$0);
+},JSfrm);
 }
 
 static void strt(){
@@ -468,8 +468,8 @@ document.getElementById("di").onclick=function(){
   
 T=true;
 var $bb=R(vv);
-var cc=new Uint8Array([1,6,0,6,8,1],0,4);
-Module.ccall('nano',null,['Array'],[cc]);
+var cc=new Uint8Array([1,6,0,6,8,1],0,6);
+Module.ccall('nano',null,['Number'],[5]);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/la;
@@ -494,7 +494,7 @@ plt();
 void b3(){
 ma();
 }
-void nano(unsigned int JSfrm[6]){
+void nano(int JSfrm){
 slp(JSfrm);
 }}
 int main(){
