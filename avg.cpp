@@ -464,6 +464,7 @@ document.getElementById("di").onclick=function(){
   
 T=true;
 var $bb=R(vv);
+  Module.ccall("nano");
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/al;
