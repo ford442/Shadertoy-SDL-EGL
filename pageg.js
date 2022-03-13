@@ -184,13 +184,13 @@ if($hi>1){$h=Math.round(dat.innerHTML);datb.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=
 $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
-window.scroll(0,0);document.getElementById("ldv").play();
-
-setTimeout(function(){
+window.scroll(0,0);
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
 document.getElementById("ldv").width=$w
 document.getElementById("ldv").height=$h;
+document.getElementById("ldv").play();
+setTimeout(function(){
 mv=vide[0].id;
 lo=vide[1].id;
 vide[0].id=lo;
