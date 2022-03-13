@@ -357,8 +357,8 @@ let t=g.createKernel(function(v,vav){
 var P=v[this.thread.y][this.thread.x];
 var av$=(P[0]+P[1]+P[2])/3;
 var aveg=1.0-(((av$)-(vav))*((av$)*(1.0/(1.0-vav))));
-return[P[0],P[1],P[2],aveg];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+return [P[0],P[1],P[2],aveg];
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -369,9 +369,8 @@ w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 agav[0]=0.75;
-var l=(w$*h$*16);
-var la=(w$*h$*4);
-var al=w$*h$;
+var l=w$*h$*16;
+var la=w$*h$*4;
 var m=Math.ceil(l/65536);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -389,7 +388,7 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-
+t.setOutput(o);
 var $$1=t(vv,agav[0]);
 $1.set($$1);
 $2.set($$1);
@@ -460,13 +459,11 @@ M();
 }
 M();
 document.getElementById("di").onclick=function(){
-  
-T=true;
+R.setOutput(o);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(parseFloat);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-
-var avvvg=gfgs/al;
+var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
@@ -474,6 +471,7 @@ avag=avag*10000;
 avag=Math.round(avag);
 avag=avag/10000;
 console.log(avag);
+T=true;
 S();};return()=>{T=true;};}
 })
 
