@@ -338,7 +338,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 let avgg=new ArrayBuffer(4);
 let agav=new Float32Array(avgg,0,1);
-var avag=0.750;
+let avag=0.750;
 agav.set([avag]);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
@@ -353,12 +353,12 @@ var avgg=(P[0]+P[1]+P[2])/3;
 return [P[0],P[1],P[2],avgg];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
-let t=g.createKernel(function(v,vav){
+let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 var av$=(P[0]+P[1]+P[2])/3;
-var aveg=1.0-(((av$)-(vav))*((av$)*(1.0/(1.0-vav))));
-return [P[0],P[1],P[2],aveg];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
+var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
+return[P[0],P[1],P[2],aveg];
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -368,18 +368,18 @@ let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
-agav[0]=0.75;
-var l=w$*h$*16;
-var la=w$*h$*4;
+var l=(w$*h$*16);
+var la=(w$*h$*4);
+var al=w$*h$;
 var m=Math.ceil(l/65536);
-let W1=new WebAssembly.Memory({initial:m});
-let W2=new WebAssembly.Memory({initial:m});
-let W3=new WebAssembly.Memory({initial:m});
-let W4=new WebAssembly.Memory({initial:m});
-let W5=new WebAssembly.Memory({initial:m});
-let W6=new WebAssembly.Memory({initial:m});
-let W7=new WebAssembly.Memory({initial:m});
-let W8=new WebAssembly.Memory({initial:m});
+var W1=new WebAssembly.Memory({initial:m});
+var W2=new WebAssembly.Memory({initial:m});
+var W3=new WebAssembly.Memory({initial:m});
+var W4=new WebAssembly.Memory({initial:m});
+var W5=new WebAssembly.Memory({initial:m});
+var W6=new WebAssembly.Memory({initial:m});
+var W7=new WebAssembly.Memory({initial:m});
+var W8=new WebAssembly.Memory({initial:m});
 var $1=new Float32Array(W1.buffer,0,la);
 var $2=new Float32Array(W2.buffer,0,la);
 var $3=new Float32Array(W3.buffer,0,la);
@@ -388,67 +388,69 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-t.setOutput(o);
-var $$1=t(vv,agav[0]);
+// t.setOutput([w$,h$]);
+// R.setOutput([w$,h$]);
+var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
+// r.setOutput([w$,h$]);
 var $F=1;
 var T=false;
 function M(){
 if($F==8){
-var $r8=t($8,agav[0]);
+var $r8=t($8);
 r($r8);
-var $$4=t(vv,agav[0]);
+var $$4=t(vv);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
-var $r7=t($7,agav[0]);
+var $r7=t($7);
 r($r7);
-var $$3=t(vv,agav[0]);
+var $$3=t(vv);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
-var $r6=t($6,agav[0]);
+var $r6=t($6);
 r($r6);
-var $$2=t(vv,agav[0]);
+var $$2=t(vv);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
-var $r5=t($5,agav[0]);
+var $r5=t($5);
 r($r5);
-var $$1=t(vv,agav[0]);
+var $$1=t(vv);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
-var $r4=t($4,agav[0]);
+var $r4=t($4);
 r($r4);
-var $$8=t(vv,agav[0]);
+var $$8=t(vv);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
-var $r3=t($3,agav[0]);
+var $r3=t($3);
 r($r3);
-var $$7=t(vv,agav[0]);
+var $$7=t(vv);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
-var $r2=t($2,agav[0]);
+var $r2=t($2);
 r($r2);
-var $$6=t(vv,agav[0]);
+var $$6=t(vv);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
-var $r1=t($1,agav[0]);
+var $r1=t($1);
 r($r1);
-var $$5=t(vv,agav[0]);
+var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
@@ -459,10 +461,14 @@ M();
 }
 M();
 document.getElementById("di").onclick=function(){
-R.setOutput(o);
+  
+T=true;
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
+// var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
+// var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
+// console.log($bb.length,gfg.length,la,al);
 var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
@@ -470,8 +476,8 @@ avag=agav[0];
 avag=avag*10000;
 avag=Math.round(avag);
 avag=avag/10000;
+t.constants={avg:avag};
 console.log(avag);
-T=true;
 S();};return()=>{T=true;};}
 })
 
