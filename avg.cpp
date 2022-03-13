@@ -473,7 +473,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
 console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=((gfgs/h$)/w$);
+let avvvg=(((gfgs/h$)/w$/4));
 avag=avvvg;
 agav.set([avag]);
 setAvg();
