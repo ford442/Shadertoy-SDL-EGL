@@ -158,8 +158,9 @@ setTimeout(function(){document.getElementById("btn2").click();},800);
 setTimeout(function(){document.getElementById("btn11").click();},1700);
 setTimeout(function(){document.getElementById("btn").click();},1550);
 setTimeout(function(){document.getElementById("btn8").click();},900);
+let vide=document.querySelectorAll("video");
+
 function loada(){
-var vide=document.querySelectorAll("video");
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 hii=Math.round(window.innerHeight);
 document.getElementById("ihid").innerHTML=hii;
@@ -193,6 +194,7 @@ lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById("mv").play();
+document.getElementById("ldv").play();
 document.getElementById("di").click();
 loada();
 },$ldt);
