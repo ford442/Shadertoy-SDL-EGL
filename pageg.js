@@ -184,6 +184,8 @@ if($hi>1){$h=Math.round(dat.innerHTML);datb.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=
 $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
+    document.getElementById("ldv").load();
+
 window.scroll(0,0);
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
