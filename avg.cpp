@@ -465,11 +465,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(a, b){ return [Math.min(a, b)]; });
 var tstmax=gfg.reduce(function(a, b){ return [Math.max(a, b)]; });
   
-  function minMax(arr) { return arr.reduce(function(acc, cur) { return [Math.min(cur, acc[0]),Math.max(cur, acc[1])]
-  }, [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]);
-}
-  
-console.log(gfg.length,la,tstmin,tstmax);
+console.log(gfg.length,la,new Float32Array(tstmin,0,1),tstmax);
 let avvvg=gfgs/(la);
 avag=avvvg;
 agav.set([avag]);
