@@ -461,12 +461,12 @@ var $8=new Float32Array(W8.buffer,0,la);
 // R.setOutput([w$,h$]);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var tstmin=gfg.reduce(function(a, b){ return Math.min(b, a); });
-var tstmax=gfg.reduce(function(a, b){ return Math.max(b, a); });
+var gfgs=gfg.reduce(function(a, b){ return a + b; }).toFixed(4);
+var tstmin=gfg.reduce(function(a, b){ return Math.min(b, a); }).toFixed(4);
+var tstmax=gfg.reduce(function(a, b){ return Math.max(b, a); }).toFixed(4);
   
 console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=gfgs/(la);
+var avvvg=gfgs/(w$*h$*4);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
