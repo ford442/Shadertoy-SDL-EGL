@@ -536,8 +536,8 @@ T=true;
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var tstmin=gfg.reduce(function(acc, val){ return acc > val ? acc : val; });
-var tstmax=gfg.reduce(function(acc, val){ return acc < val ? acc : val; });
+var tstmin=gfg.reduce(function(acc, val){ return acc < val ? acc : val; });
+var tstmax=gfg.reduce(function(acc, val){ return acc > val ? acc : val; });
   
 console.log(gfg.length,la,tstmin,tstmax);
 var avvvg=gfgs/la;
