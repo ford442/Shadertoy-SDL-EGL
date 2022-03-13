@@ -462,10 +462,10 @@ var $8=new Float32Array(W8.buffer,0,la);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var tstmin=gfg.reduce(function(a, b){ return [Math.min(a, b)]; });
-var tstmax=gfg.reduce(function(a, b){ return [Math.max(a, b)]; });
+var tstmin=gfg.reduce(function(a, b){ return Math.min(b, a); });
+var tstmax=gfg.reduce(function(a, b){ return Math.max(b, a); });
   
-console.log(gfg.length,la,new Float32Array(tstmin,0,1),tstmax);
+console.log(gfg.length,la,tstmin,tstmax);
 let avvvg=gfgs/(la);
 avag=avvvg;
 agav.set([avag]);
