@@ -372,7 +372,7 @@ var l=(w$*h$*16);
 var la=(w$*h$*4);
 var al=w$*h$;
 var m=Math.ceil(l/65536);
-let W1=new WebAssembly.Memory({initial:m});
+var W1=new WebAssembly.Memory({initial:m});
 var W2=new WebAssembly.Memory({initial:m});
 var W3=new WebAssembly.Memory({initial:m});
 var W4=new WebAssembly.Memory({initial:m});
@@ -388,13 +388,13 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-t.setOutput(o);
-R.setOutput(o);
+// t.setOutput(o);
+// R.setOutput(o);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-r.setOutput(o);
+// r.setOutput(o);
 var $F=1;
 var T=false;
 function M(){
@@ -473,7 +473,7 @@ avag=agav[0];
 avag=avag*10000;
 avag=Math.round(avag);
 avag=avag/10000;
-t.constants={avg:avag};
+// t.constants={avg:avag};
 console.log(avag);
 S();};return()=>{T=true;};}
 })
