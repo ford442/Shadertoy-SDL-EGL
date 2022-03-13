@@ -415,7 +415,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 let R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
-return [0.0,0.0,0.0,aveg];
+return [aveg,aveg,aveg,aveg];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
 let t=g.createKernel(function(v){
@@ -465,7 +465,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(a, b){ return Math.min(a, b); });
 var tstmax=gfg.reduce(function(a, b){ return Math.max(a, b); });
   console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=gfgs/(gfg.length/4);
+let avvvg=gfgs/(gfg.length);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
