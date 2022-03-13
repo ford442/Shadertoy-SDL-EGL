@@ -169,11 +169,11 @@ iFrame++;
 }
 
 unsigned int JSfrm[6];
-static void slp(unsigned int JSfrm[]){
+static void slp(unsigned int JSfrm){
   auto hth=JSfrm[3];
 EM_ASM({
 console.log("Array: "+$0);
-},JSfrm[0]);
+},JSfrm[2]);
 }
 
 static void strt(){
@@ -468,7 +468,7 @@ document.getElementById("di").onclick=function(){
   
 T=true;
 var $bb=R(vv);
-var cc=new Uint8Array([6.0,6.0,6.0,6.0],0,4);
+var cc=new Uint8Array([1,6,0,6,8,1],0,4);
 Module.ccall('nano',null,['Array'],[cc]);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
