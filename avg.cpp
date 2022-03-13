@@ -426,7 +426,6 @@ return[P[0],P[1],P[2],(aveg)];
 
 function setAvg(){
 avag=agav[0];
-avag=avag.toFixed(4);
 t.constants={avg:avag};
 console.log(avag);
 }
@@ -462,12 +461,12 @@ var $8=new Float32Array(W8.buffer,0,la);
 // R.setOutput([w$,h$]);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a, b){ return a + b; }).toFixed(4);
+var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(a, b){ return Math.min(b, a); }).toFixed(4);
 var tstmax=gfg.reduce(function(a, b){ return Math.max(b, a); }).toFixed(4);
   
 console.log(gfg.length,la,tstmin,tstmax);
-var avvvg=gfgs/(w$*h$*4);
+var avvvg=(gfgs/(w$*h$*4)).toFixed(4);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
