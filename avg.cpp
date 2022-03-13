@@ -426,6 +426,7 @@ return[P[0],P[1],P[2],(aveg)];
 
 function setAvg(){
 avag=agav[0];
+avag=avag.toFixed(4);
 t.constants={avg:avag};
 console.log(avag);
 }
@@ -435,9 +436,9 @@ const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
- w$=document.getElementById('iwid').innerHTML;
- h$=document.getElementById('ihig').innerHTML;
- o=[w$,h$];
+w$=document.getElementById('iwid').innerHTML;
+h$=document.getElementById('ihig').innerHTML;
+o=[w$,h$];
 let l=(w$*h$*16);
 var la=(w$*h$*4);
 let m=Math.ceil(l/65536);
