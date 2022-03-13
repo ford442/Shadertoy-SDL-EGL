@@ -169,8 +169,8 @@ iFrame++;
 }
 
 unsigned int JSfrm[6];
-static void slp(unsigned int JSfrm){
-  float hth=JSfrm[3];
+static void slp(unsigned int JSfrm[]){
+  auto hth=JSfrm[3];
 EM_ASM({
 console.log("Array: "+$0);
 },JSfrm[0]);
@@ -494,7 +494,7 @@ plt();
 void b3(){
 ma();
 }
-void nano(unsigned int JSfrm){
+void nano(unsigned int JSfrm[6]){
 slp(JSfrm);
 }}
 int main(){
