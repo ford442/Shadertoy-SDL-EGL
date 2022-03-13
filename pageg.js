@@ -171,7 +171,7 @@ $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
 rnum=Math.round((Math.random()*($vids[0]-5))+5);
-let adr=$vids[rnum];
+var adr=$vids[rnum];
 document.getElementById("isrc").innerHTML=adr;
 $h=Math.round(window.innerHeight);
 he=document.getElementById("hig").innerHTML;
@@ -185,16 +185,16 @@ $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
-setTimeout(function(){document.getElementById("ldv").src=adr;
+setTimeout(function(){
+document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
+document.getElementById("ldv").play();
 document.getElementById("ldv").width=$w
 document.getElementById("ldv").height=$h;
 mv=vide[0].id;
 lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
-document.getElementById("mv").play();
-document.getElementById("ldv").play();
 document.getElementById("di").click();
 loada();
 },$ldt);
