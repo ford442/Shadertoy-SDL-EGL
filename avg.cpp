@@ -348,18 +348,18 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let R=g.createKernel(function(tv){
 var P=tv[this.thread.y][this.thread.x];
-var avgg=(P[0]+P[1]+P[2])/3);
+var avgg=(P[0]+P[1]+P[2])/3;
 return [P[0],P[1],P[2],avgg];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
-return[P[0],P[1],P[2],(aveg)];
+return[P[0],P[1],P[2],aveg];
 }).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 let r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x];
+var p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
