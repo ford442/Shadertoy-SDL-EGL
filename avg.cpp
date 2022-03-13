@@ -461,7 +461,7 @@ M();
 document.getElementById("di").onclick=function(){
 R.setOutput(o);
 var $bb=R(vv);
-var gfg=$bb.join().split(',').map(parseFloat);
+var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var avvvg=gfgs/la;
 avag=avvvg;
