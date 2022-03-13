@@ -390,7 +390,7 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-var $$1=t(vv,agav[0]);
+var $$1=t(vv,avag);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
@@ -398,58 +398,58 @@ var $F=1;
 var T=false;
 function M(){
 if($F==8){
-var $r8=t($8,agav[0]);
+var $r8=t($8,avag);
 r($r8);
-var $$4=t(vv,agav[0]);
+var $$4=t(vv,avag);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
-var $r7=t($7,agav[0]);
+var $r7=t($7,avag);
 r($r7);
-var $$3=t(vv,agav[0]);
+var $$3=t(vv,avag);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
-var $r6=t($6,agav[0]);
+var $r6=t($6,avag);
 r($r6);
-var $$2=t(vv,agav[0]);
+var $$2=t(vv,avag);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
-var $r5=t($5,agav[0]);
+var $r5=t($5,avag);
 r($r5);
-var $$1=t(vv,agav[0]);
+var $$1=t(vv,avag);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
-var $r4=t($4,agav[0]);
+var $r4=t($4,avag);
 r($r4);
-var $$8=t(vv,agav[0]);
+var $$8=t(vv,avag);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
-var $r3=t($3,agav[0]);
+var $r3=t($3,avag);
 r($r3);
-var $$7=t(vv,agav[0]);
+var $$7=t(vv,avag);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
-var $r2=t($2,agav[0]);
+var $r2=t($2,avag);
 r($r2);
-var $$6=t(vv,agav[0]);
+var $$6=t(vv,avag);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
-var $r1=t($1,agav[0]);
+var $r1=t($1,avag);
 r($r1);
-var $$5=t(vv,agav[0]);
+var $$5=t(vv,avag);
 $5.set($$5);
 $F=2;
 }
