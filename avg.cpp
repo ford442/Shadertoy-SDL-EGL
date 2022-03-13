@@ -464,12 +464,12 @@ document.getElementById("di").onclick=function(){
   
 T=true;
 var $bb=R(vv);
-var gfg=$bb.join().split(',').map(Number);
+var gfg=$bb.join().split(',').map(parseFloat);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 // var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 // var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
 // console.log($bb.length,gfg.length,la,al);
-var avvvg=gfgs/al;
+var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
