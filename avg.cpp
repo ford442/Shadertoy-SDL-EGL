@@ -462,7 +462,7 @@ var $8=new Float32Array(W8.buffer,0,la);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-let avvvg=gfgs/la;
+let avvvg=gfgs/(la/4);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
