@@ -126,7 +126,7 @@ $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);te
 setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
-document.getElementById("mv").play();
+document.getElementById("mv").load();
 document.getElementById("ldv").load();
 wi=1920;he=1080;
 setTimeout(function(){
@@ -184,15 +184,16 @@ $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
-var mv=vide[0].id;
-var lo=vide[1].id;
-vide[0].id=lo;
-vide[1].id=mv;
+
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
 document.getElementById("ldv").width=$w
 document.getElementById("ldv").height=$h;
 document.getElementById("ldv").play();
+    var mv=vide[0].id;
+var lo=vide[1].id;
+vide[0].id=lo;
+vide[1].id=mv;
 setTimeout(function(){
 
 document.getElementById("di").click();
