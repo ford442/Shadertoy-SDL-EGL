@@ -346,10 +346,10 @@ var o=[w$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
-let R=g.createKernel(function(tv){
+let gR=new GPU({mode:'cpu'});
+let R=gR.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
-const aveg=(P[0]+P[1]+P[2])/3;
-return [P[0],P[1],P[2],aveg];
+return [P[0],P[1],P[2],0.75];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
 let t=g.createKernel(function(v){
@@ -474,7 +474,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
 console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=gfgs/(al);
+let avvvg=((gfgs/h$)/w$);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
