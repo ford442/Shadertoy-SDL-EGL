@@ -343,13 +343,11 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 var o=[w$,h$];
-var Ro=[w$,h$];
+var Ro=[w$/4,h$/4];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
-let gR=new GPU({mode:'cpu'});
-
-let R=gR.createKernel(function(tv){
+let R=g.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
 return [P[0],P[1],P[2],aveg];
@@ -377,6 +375,7 @@ h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 let l=(w$*h$*16);
 var la=(w$*h$*4);
+Ro=[w$/4,h$/4];
 let m=Math.ceil(l/65536);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
