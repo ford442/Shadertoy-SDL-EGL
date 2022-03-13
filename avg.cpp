@@ -168,6 +168,7 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
+Uint8 JSfrom;
 static void slp(Uint8 JSfrm){
   EM_ASM({
     console.log("Array: "+$0);
