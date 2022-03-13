@@ -465,7 +465,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(a, b){ return Math.min(a, b); });
 var tstmax=gfg.reduce(function(a, b){ return Math.max(a, b); });
   console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=gfgs/(la/4);
+let avvvg=gfgs/(gfg.length/4);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
