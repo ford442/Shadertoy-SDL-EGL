@@ -356,7 +356,7 @@ return [P[0],P[1],P[2],avgg];
 let t=g.createKernel(function(v,vav){
 var P=v[this.thread.y][this.thread.x];
 var av$=(P[0]+P[1]+P[2])/3;
-var aveg=1.0-(((av$)-(vav))*((av$)*(1.0/(1.0-this.constants.avg))));
+var aveg=1.0-(((av$)-(vav))*((av$)*(1.0/(1.0-vav))));
 return[P[0],P[1],P[2],aveg];
 }).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
@@ -388,13 +388,11 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-// t.setOutput([w$,h$]);
-// R.setOutput([w$,h$]);
+
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-// r.setOutput([w$,h$]);
 var $F=1;
 var T=false;
 function M(){
@@ -466,9 +464,7 @@ T=true;
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(parseFloat);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-// var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
-// var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
-// console.log($bb.length,gfg.length,la,al);
+
 var avvvg=gfgs/al;
 avag=avvvg;
 agav.set([avag]);
