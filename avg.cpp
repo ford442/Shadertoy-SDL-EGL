@@ -59,7 +59,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,16660000};
+struct timespec req={0,16666666};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -347,19 +347,16 @@ let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let R=g.createKernel(function(tv){
-const P=tv[this.thread.y][this.thread.x];
-return [P[0],P[1],P[2],0.75];
+var P=tv[this.thread.y][this.thread.x];
+var avgg=(P[0]+P[1]+P[2])/3);
+return [P[0],P[1],P[2],avgg];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
 let t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x];
+var P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
 }).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
-
-function setAvg(){
-
-}
 
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
@@ -391,7 +388,6 @@ var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
 // t.setOutput([w$,h$]);
 // R.setOutput([w$,h$]);
-
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
@@ -459,7 +455,7 @@ $F=2;
 if(T){return;}
 setTimeout(function(){
 M();
-},33.33);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -470,8 +466,8 @@ var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
 // var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 // var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
-console.log($bb.length,gfg.length,la,al);
-let avvvg=gfgs/la;
+// console.log($bb.length,gfg.length,la,al);
+var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
