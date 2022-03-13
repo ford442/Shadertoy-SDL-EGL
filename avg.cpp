@@ -359,7 +359,7 @@ var j=v[this.thread.y][this.thread.x];
 var av$=(j[0]+j[1]+j[2])/3;
 var aveg=1.0-(((av$)-(av))*((av$)*(1.0/(1.0-av))));
 return[j[0],j[1],j[2],aveg];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -465,9 +465,6 @@ T=true;
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(parseFloat);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-// var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
-// var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
-// console.log($bb.length,gfg.length,la,al);
 var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
@@ -475,7 +472,6 @@ avag=agav[0];
 avag=avag*1000;
 avag=Math.round(avag);
 avag=avag/1000;
-t.constants={avg:avag};
 console.log(avag);
 S();};return()=>{T=true;};}
 })
