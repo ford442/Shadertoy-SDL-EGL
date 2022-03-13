@@ -400,19 +400,19 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let avgg=new ArrayBuffer(8);
-let agav=new Float64Array(avgg,0,1);
-let avag=0.750;
+let avgg=new ArrayBuffer(4);
+let agav=new Float32Array(avgg,0,1);
+var avag=0.750;
 agav.set([avag]);
 
-let ming=new ArrayBuffer(8);
-let minv=new Float64Array(avgg,0,1);
-let $min=0.0;
+let ming=new ArrayBuffer(4);
+let minv=new Float32Array(avgg,0,1);
+var $min=0.0;
 minv.set([$min]);
   
-let maxg=new ArrayBuffer(8);
-let maxv=new Float64Array(avgg,0,1);
-let $max=1.0;
+let maxg=new ArrayBuffer(4);
+let maxv=new Float32Array(avgg,0,1);
+var $max=1.0;
 maxv.set([$max]);
   
 let w$=document.getElementById('iwid').innerHTML;
@@ -437,8 +437,8 @@ return[P[0],P[1],P[2],(aveg)];
 
 function setAvg(){
 avag=agav[0];
-$min=minv[0];
-$max=maxv[0];
+var $min=minv[0];
+var $max=maxv[0];
 t.constants={avg:avag};
 console.log(avag);
 console.log($min);
