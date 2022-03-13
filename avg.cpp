@@ -349,7 +349,7 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let R=g.createKernel(function(tv){
 var P=tv[this.thread.y][this.thread.x];
-return ((P[0]+P[1]+P[2])/3);
+return [P[0],P[1],P[2],(P[0]+P[1]+P[2])/3];
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
 
 let t=g.createKernel(function(v,av){
@@ -387,13 +387,10 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-// t.setOutput([w$,h$]);
-// R.setOutput([w$,h$]);
 var $$1=t(vv,agav[0]);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
-// r.setOutput([w$,h$]);
 var $F=1;
 var T=false;
 function M(){
@@ -465,9 +462,6 @@ T=true;
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(parseFloat);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-// var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
-// var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
-// console.log($bb.length,gfg.length,la,al);
 var avvvg=gfgs/al;
 avag=avvvg;
 agav.set([avag]);
