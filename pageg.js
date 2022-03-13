@@ -187,16 +187,17 @@ datb.innerHTML=window.innerHeight;
 document.getElementById("ldv").load();
 
 window.scroll(0,0);
+    mv=vide[0].id;
+lo=vide[1].id;
+vide[0].id=lo;
+vide[1].id=mv;
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
 document.getElementById("ldv").width=$w
 document.getElementById("ldv").height=$h;
 document.getElementById("ldv").play();
 setTimeout(function(){
-mv=vide[0].id;
-lo=vide[1].id;
-vide[0].id=lo;
-vide[1].id=mv;
+
 document.getElementById("di").click();
 loada();
 },$ldt);
