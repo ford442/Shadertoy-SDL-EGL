@@ -356,7 +356,7 @@ return [P[0],P[1],P[2],avgg];
 let t=g.createKernel(function(v,vav){
 var P=v[this.thread.y][this.thread.x];
 var av$=(P[0]+P[1]+P[2])/3;
-var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
+var aveg=1.0-(((av$)-(vav))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
 }).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
