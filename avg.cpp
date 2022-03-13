@@ -467,14 +467,14 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 // var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 // var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
 // console.log($bb.length,gfg.length,la,al);
-var avvvg=gfgs/(al);
+var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
-avag=avag*10000;
+avag=avag*1000;
 avag=Math.round(avag);
-avag=avag/10000;
-t.constants={avg:avag};
+avag=avag/1000;
+// t.constants={avg:avag};
 console.log(avag);
 S();};return()=>{T=true;};}
 })
