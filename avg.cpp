@@ -347,12 +347,13 @@ var Ro=[w$/4,h$/4];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
+let gR=new GPU({mode:cpu});
 
-let R=g.createKernel(function(tv){
+let R=gR.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 const aveg=(P[0]+P[1]+P[2])/3;
 return [P[0],P[1],P[2],aveg];
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(Ro);
 
 let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
