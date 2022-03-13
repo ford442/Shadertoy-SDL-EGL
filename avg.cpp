@@ -343,8 +343,6 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 var o=[w$,h$];
-var Rw=w$/4;var Rh=h$/4;
-Ro=[Rw,Rh];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
@@ -358,7 +356,7 @@ let t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x];
 let aveg=1.0-((((P[0]+P[1]+P[2])/3)-(this.constants.avg))*(((P[0]+P[1]+P[2])/3)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],(aveg)];
-}).setTactic("balanced").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 function setAvg(){
 avag=agav[0];
@@ -369,7 +367,7 @@ console.log(avag);
 let r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 let d=S();if(d)d();d=S();function S(){
 w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
@@ -377,8 +375,6 @@ o=[w$,h$];
 let l=(w$*h$*16);
 var la=(w$*h$*4);
 var al=(w$*h$);
-Rw=w$/4;Rh=h$/4;
-Ro=[Rw,Rh];
 let m=Math.ceil(l/65536);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -478,7 +474,7 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
 console.log(gfg.length,la,tstmin,tstmax);
-var avvvg=gfgs/(al);
+let avvvg=gfgs/(al);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
