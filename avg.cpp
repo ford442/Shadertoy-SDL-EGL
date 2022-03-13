@@ -59,7 +59,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,8333000};
+struct timespec req={0,16660000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -462,11 +462,13 @@ var $8=new Float32Array(W8.buffer,0,la);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
+var tstmin=gfg.reduce(function(a, b){ return Math.min(a, b); });
+var tstmax=gfg.reduce(function(a, b){ return Math.max(a, b); });
+  console.log(gfg.length,la,tstmin,tstmax);
 let avvvg=gfgs/(la/4);
 avag=avvvg;
 agav.set([avag]);
 setAvg();
-  
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
@@ -534,7 +536,7 @@ $F=2;
 if(T){return;}
 setTimeout(function(){
 M();
-},8.333);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
