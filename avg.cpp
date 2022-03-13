@@ -346,7 +346,7 @@ var o=[w$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
-let gR=new GPU({mode:'cpu'});
+let gR=new GPU();
 let R=gR.createKernel(function(tv){
 const P=tv[this.thread.y][this.thread.x];
 return [P[0],P[1],P[2],0.75];
