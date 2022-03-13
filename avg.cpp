@@ -359,6 +359,9 @@ return[P[0],P[1],P[2],(aveg)];
 
 function setAvg(){
 avag=agav[0];
+avag=avag*10000;
+avag=Math.round(avag);
+avag=avag/10000;
 t.constants={avg:avag};
 console.log(avag);
 }
@@ -372,8 +375,8 @@ w$=document.getElementById('iwid').innerHTML;
 h$=document.getElementById('ihig').innerHTML;
 o=[w$,h$];
 let l=(w$*h$*16);
-var la=(w$*h$*4);
-var al=(w$*h$);
+let la=(w$*h$*4);
+let al=w$*h$;
 let m=Math.ceil(l/65536);
 let W1=new WebAssembly.Memory({initial:m});
 let W2=new WebAssembly.Memory({initial:m});
@@ -470,10 +473,10 @@ T=true;
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
-var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
-console.log(gfg.length,la,tstmin,tstmax);
-let avvvg=(((gfgs/h$)/w$/4));
+// var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
+// var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
+console.log($bb.length,gfg.length,la,al);
+let avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 setAvg();
