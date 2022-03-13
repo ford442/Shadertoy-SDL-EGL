@@ -400,21 +400,10 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let avgg=new ArrayBuffer(4);
+let avgg=new ArrayBuffer(8);
 let agav=new Float32Array(avgg,0,1);
 let avag=0.750;
 agav.set([avag]);
-
-let ming=new ArrayBuffer(4);
-let minv=new Float32Array(avgg,0,1);
-let $min=0.0;
-minv.set([$min]);
-  
-let maxg=new ArrayBuffer(4);
-let maxv=new Float32Array(avgg,0,1);
-let $max=1.0;
-maxv.set([$max]);
-  
 let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -437,12 +426,8 @@ return[P[0],P[1],P[2],(aveg)];
 
 function setAvg(){
 avag=agav[0];
-$min=minv[0];
-$max=maxv[0];
 t.constants={avg:avag};
 console.log(avag);
-console.log($min);
-console.log($max);
 }
 
 let r=g.createKernel(function(f){
@@ -476,15 +461,12 @@ var $8=new Float32Array(W8.buffer,0,la);
 // R.setOutput([w$,h$]);
 var $bb=R(vv);
 var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a, b) { return a + b; });
-var tstmin=gfg.reduce(function(a, b) { return Math.min(a, b); });
-var tstmax=gfg.reduce(function(a, b) { return Math.max(a, b); });
-var avvvg=gfgs/la;
+var gfgs=gfg.reduce(function(a, b){ return a + b; });
+let avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
-minv.set([tstmin]);
-maxv.set([tstmax]);
 setAvg();
+  
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
@@ -552,7 +534,7 @@ $F=2;
 if(T){return;}
 setTimeout(function(){
 M();
-},16.66);
+},8.333);
 }
 M();
 document.getElementById("di").onclick=function(){
