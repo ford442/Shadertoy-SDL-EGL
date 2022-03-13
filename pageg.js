@@ -1,8 +1,8 @@
 
-var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,mv,lo;
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,document.getElementById("mv"),lo;
 var $iwid=document.getElementById("iwid");
-let mV=document.getElementById("mv");
-let loadV=document.getElementById("ldv");
+let document.getElementById("mv")=document.getElementById("document.getElementById("mv")");
+let document.getElementById("ldv")=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
@@ -82,7 +82,7 @@ scanSongs();
 document.getElementById('pmhig').innerHTML=Math.round(window.innerHeight);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
-loadV.addEventListener('canplay',function(){
+document.getElementById("ldv").addEventListener('canplay',function(){
 document.getElementById("hig").innerHTML=this.videoHeight;
 document.getElementById("wid").innerHTML=this.videoWidth;
 $sc=this.duration;
@@ -128,7 +128,8 @@ $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);te
 setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
-mV.play();
+document.getElementById("mv").play();
+document.getElementById("ldv").load();
 wi=1920;he=1080;
 setTimeout(function(){
 document.getElementById("btn").style.display="none";
@@ -149,10 +150,10 @@ const datb=document.getElementById("ihig");
 var $hg=hii+"px";
 datb.innerHTML=window.innerHeight;
 $iwid.innerHTML=$w;
-mV.width=$iwid.innerHTML;
-mV.height=datb.innerHTML;
-loadV.width=$iwid.innerHTML;
-loadV.height=datb.innerHTML;
+document.getElementById("mv").width=$iwid.innerHTML;
+document.getElementById("mv").height=datb.innerHTML;
+document.getElementById("ldv").width=$iwid.innerHTML;
+document.getElementById("ldv").height=datb.innerHTML;
 document.getElementById("wrap").style.lineheight=$hg;
 setTimeout(function(){document.getElementById("btn2").click();},800);
 setTimeout(function(){document.getElementById("btn11").click();},1700);
@@ -184,13 +185,11 @@ if($hi>1){$h=Math.round(dat.innerHTML);datb.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=
 $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
-document.getElementById("ldv").load();
-
 window.scroll(0,0);
-    mv=vide[0].id;
+document.getElementById("mv")=vide[0].id;
 lo=vide[1].id;
 vide[0].id=lo;
-vide[1].id=mv;
+vide[1].id=document.getElementById("mv");
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
 document.getElementById("ldv").width=$w
