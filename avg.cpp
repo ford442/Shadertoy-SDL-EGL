@@ -168,7 +168,7 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-unsigned int JSfrm=[6];
+unsigned int JSfrm[6];
 static void slp(unsigned int JSfrm){
   float hth=JSfrm[3];
 EM_ASM({
