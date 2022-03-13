@@ -168,11 +168,11 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-Uint8 JSfrom;
+Uint8* JSfrm;
 static void slp(Uint8* JSfrm){
   EM_ASM({
     console.log("Array: "+$0);
-  },JSfrm);
+  },JSfrm[0]);
 }
 
 static void strt(){
@@ -467,7 +467,7 @@ document.getElementById("di").onclick=function(){
   
 T=true;
 var $bb=R(vv);
-var cc=new Uint8Array($bb,0,la);
+var cc=new Uint8Array([6.0,6.0,6.0,6.0],0,4);
 Module.ccall('nano',null,['Array'],[cc]);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
