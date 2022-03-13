@@ -1,8 +1,6 @@
 
-var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,document.getElementById("mv"),lo;
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,lo;
 var $iwid=document.getElementById("iwid");
-let document.getElementById("mv")=document.getElementById("document.getElementById("mv")");
-let document.getElementById("ldv")=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
