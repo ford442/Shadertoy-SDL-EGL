@@ -388,7 +388,7 @@ var $5=new Float32Array(W5.buffer,0,la);
 var $6=new Float32Array(W6.buffer,0,la);
 var $7=new Float32Array(W7.buffer,0,la);
 var $8=new Float32Array(W8.buffer,0,la);
-var $$1=t(vv,avag);
+var $$1=t(vv,agav[0]);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
@@ -466,14 +466,14 @@ var gfgs=gfg.reduce(function(a, b){ return a + b; });
 // var tstmin=gfg.reduce(function(acc, val){ return Math.min(acc,val) });
 // var tstmax=gfg.reduce(function(acc, val){ return Math.max(acc,val) });
 // console.log($bb.length,gfg.length,la,al);
-var avvvg=gfgs/la;
+var avvvg=gfgs/(al);
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
 avag=avag*10000;
 avag=Math.round(avag);
 avag=avag/10000;
-// t.constants={avg:avag};
+t.constants={avg:avag};
 console.log(avag);
 S();};return()=>{T=true;};}
 })
