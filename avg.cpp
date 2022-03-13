@@ -358,12 +358,7 @@ return[P[0],P[1],P[2],(aveg)];
 }).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
 
 function setAvg(){
-avag=agav[0];
-avag=avag*10000;
-avag=Math.round(avag);
-avag=avag/10000;
-t.constants={avg:avag};
-console.log(avag);
+
 }
 
 let r=g.createKernel(function(f){
@@ -479,7 +474,12 @@ console.log($bb.length,gfg.length,la,al);
 let avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
-setAvg();
+avag=agav[0];
+avag=avag*10000;
+avag=Math.round(avag);
+avag=avag/10000;
+t.constants={avg:avag};
+console.log(avag);
 S();};return()=>{T=true;};}
 })
 
