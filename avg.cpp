@@ -467,7 +467,7 @@ var $bb=R(vv);
   Module.ccall("nano");
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/al;
+var avvvg=gfgs/la;
 avag=avvvg;
 agav.set([avag]);
 avag=agav[0];
