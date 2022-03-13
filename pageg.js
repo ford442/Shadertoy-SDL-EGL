@@ -171,7 +171,7 @@ $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
 rnum=Math.round((Math.random()*($vids[0]-5))+5);
-var adr=$vids[rnum];
+let adr=$vids[rnum];
 document.getElementById("isrc").innerHTML=adr;
 $h=Math.round(window.innerHeight);
 he=document.getElementById("hig").innerHTML;
@@ -184,7 +184,8 @@ if($hi>1){$h=Math.round(dat.innerHTML);datb.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=
 $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
-window.scroll(0,0);
+window.scroll(0,0);document.getElementById("ldv").play();
+
 setTimeout(function(){
 document.getElementById("ldv").src=adr;
 document.getElementById("ldv").currentTime=$pt;
