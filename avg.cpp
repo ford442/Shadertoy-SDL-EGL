@@ -168,11 +168,12 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-Uint8* JSfrm;
-static void slp(Uint8* JSfrm){
-  EM_ASM({
-    console.log("Array: "+$0);
-  },JSfrm[0]);
+unsigned int JSfrm=[6];
+static void slp(unsigned int JSfrm){
+  float hth=JSfrm[3];
+EM_ASM({
+console.log("Array: "+$0);
+},JSfrm[0]);
 }
 
 static void strt(){
@@ -493,7 +494,7 @@ plt();
 void b3(){
 ma();
 }
-void nano(Uint8* JSfrm){
+void nano(unsigned int JSfrm){
 slp(JSfrm);
 }}
 int main(){
