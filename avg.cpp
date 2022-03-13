@@ -169,10 +169,10 @@ iFrame++;
 }
 
 Uint8 JSfrom;
-static void slp(Uint8 JSfrm){
+static void slp(Uint8* JSfrm){
   EM_ASM({
     console.log("Array: "+$0);
-  },JSfrm[0]);
+  },JSfrm);
 }
 
 static void strt(){
@@ -493,7 +493,7 @@ plt();
 void b3(){
 ma();
 }
-void nano(Uint8 JSfrm){
+void nano(Uint8* JSfrm){
 slp(JSfrm);
 }}
 int main(){
