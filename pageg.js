@@ -1,5 +1,5 @@
 
-var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,lo;
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,he,$pt,randSong,lo,mv;
 var $iwid=document.getElementById("iwid");
 let $sngs=[];
 let $vids=[];
@@ -184,8 +184,8 @@ $hg=$h+"px";
 $iwid.innerHTML=Math.round($w);
 datb.innerHTML=window.innerHeight;
 window.scroll(0,0);
-document.getElementById("mv")=vide[0].id;
-lo=vide[1].id;
+var mv=vide[0].id;
+var lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=document.getElementById("mv");
 document.getElementById("ldv").src=adr;
