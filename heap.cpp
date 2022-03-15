@@ -482,6 +482,9 @@ document.getElementById("di").onclick=function(){
 T=true;
 var point9=8*la;
 var $9=new Float32Array($H,point9,la);
+  
+var $bb=R(vv);
+$9.set($bb,0,la);
 var $bb=R($9);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
