@@ -57,6 +57,14 @@ gpu: avg.cpp  Makefile
 -o g3003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
+heap: heap.cpp  Makefile
+	em++ heap.cpp -flto=thin --closure 1 -g2 -std=gnu++2b -O2 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sGL_TESTING=1 \
+-sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
+-o g3004.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+--post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
+
+
 glsl: glsl.cpp  Makefile
 	emcc glsl.cpp -sFULL_ES2=0 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 -sUSE_SDL=2  \
 -sUSE_WEBGL2=1 -sENVIRONMENT=web -sMALLOC='emmalloc' -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
@@ -64,5 +72,5 @@ glsl: glsl.cpp  Makefile
 -O3 -o gui003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_read"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --post-js filesys.js --post-js ccall.js --post-js fs-glsl.js -sSUPPORT_BIG_ENDIAN=0 -sOFFSCREEN_FRAMEBUFFER=1
 
-all: b3
+all: heap gpu
 	echo 'Built 1ink.us Shaders.'
