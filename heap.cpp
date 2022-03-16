@@ -29,7 +29,9 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint sampler_channel[0],sampler_channel[1],sampler_channel[2],sampler_channel[3],sampler_channel[4];
+GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag;
+GLuint uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLint iFrame;
 static GLsizei s4=4;
@@ -68,13 +70,12 @@ static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-// const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
+"\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannelB3;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -268,6 +269,7 @@ sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
+sampler_channel[4]=glGetUniformLocation(shader_program,"iChannelB3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 // uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
 // uniform_date=glGetUniformLocation(shader_program,"iDate");
