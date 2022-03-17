@@ -480,36 +480,24 @@ $5.set($$5);
 $F=2;
 }
 if(T){return;}
-setTimeout(function(){
-M();
-},16.666);
-}
-M();
-document.getElementById("di").onclick=function(){
-T=true;
-var point9=8*la;
+  var point9=8*la;
 var $9=new Float32Array($H,82944000,la);
 var $bb=R(vv);
 $9.set($bb,0,la);
-  /*
-var $bb=R($9);
-var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/(la*4);
-avag=avvvg;
-agav.set([avag]);
-avag=agav[0];
-avag=avag*10000;
-avag=Math.round(avag);
-avag=avag/10000;
-*/
 avag=Module.ccall('nano','Number',['Number'],['Number'],[la],[82944000]);
 setTimeout(function(){
 var avage=new Float32Array($H,82933000,1);
 avag=avage;agav.set([avag]);
 t.constants={avg:avag};
+},8.3);
+setTimeout(function(){
+M();
+},8.3);
+}
+M();
+document.getElementById("di").onclick=function(){
+T=true;
 S();
-},64);
 };return()=>{T=true;};}
 })
 
