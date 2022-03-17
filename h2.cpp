@@ -28,7 +28,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame;
-GLuint sampler_channel[5];
+GLuint sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag;
 GLuint uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
@@ -225,7 +225,7 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -268,7 +268,6 @@ sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
-sampler_channel[4]=glGetUniformLocation(shader_program,"iChannelB3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 // uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
 // uniform_date=glGetUniformLocation(shader_program,"iDate");
@@ -351,8 +350,7 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 
 let d=S();if(d)d();d=S();function S(){
-  
-  
+
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 let vv=document.getElementById("mv");
