@@ -168,12 +168,17 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-int JSfrm;
-static void slp(int JSfrm){
-auto hth=JSfrm;
-EM_ASM({
-console.log("Int: "+$0);
-},JSfrm);
+static void avgFrm(int leng,float *dat){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+for (int i=4;i<leng;i++){
+sum+=dat[i];
+if(max<dat[i]){max=dat[i];}
+if(min>dat[i]&&dat[i]>0){min=dat[i];}
+}
+sum=sum/leng;
+return sum;
 }
 
 static void strt(){
@@ -481,10 +486,10 @@ M();
 document.getElementById("di").onclick=function(){
 T=true;
 var point9=8*la;
-var $9=new Float32Array($H,point9,la);
-  
+var $9=new Float32Array($H,82944000,la);
 var $bb=R(vv);
 $9.set($bb,0,la);
+  /*
 var $bb=R($9);
 var gfg=$bb.join().split(',').map(Number);
 var gfgs=gfg.reduce(function(a, b){ return a + b; });
@@ -495,23 +500,32 @@ avag=agav[0];
 avag=avag*10000;
 avag=Math.round(avag);
 avag=avag/10000;
-// t.constants={avg:avag};
+*/
+avag=Module.ccall('nano','Number',['Number'],['Number'],[la],[82944000]);
+t.constants={avg:avag};
 S();};return()=>{T=true;};}
 })
 
 extern "C" {
+
 void str(){
 strt();
 }
+
 void pl(){
 plt();
 }
+
 void b3(){
 ma();
 }
-void nano(int JSfrm){
-slp(JSfrm);
-}}
+
+void nano(int leng,float *ptr){
+float ret=avgFrm(leng,ptr);
+return ret;
+}
+}
+
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
