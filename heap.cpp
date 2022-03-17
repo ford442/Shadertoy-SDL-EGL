@@ -351,24 +351,20 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
-var vv=document.getElementById("mv");
-var o=[h$,h$];
-var sz=(h$*h$)/8;
+
   
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let d=S();if(d)d();d=S();
-let $H=Module.HEAPF32.buffer;
 
 function S(){
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
-var vv=document.getElementById("mv");
-var o=[h$,h$];
-var sz=(h$*h$)/8;
+let w$=document.getElementById('iwid').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
+let vv=document.getElementById("mv");
+let o=[h$,h$];
+let sz=(h$*h$)/8;
+let $H=Module.HEAPF32.buffer;
 
 let R=g.createKernel(function(tv){
 var P=tv[this.thread.y][this.thread.x];
@@ -493,7 +489,12 @@ M();
 M();
 document.getElementById("di").onclick=function(){
 T=true;
-S();};return()=>{T=true;};}
+R.destroy();
+t.destroy();
+r.destroy();
+S();
+};
+return()=>{T=true;};}
 })
 
 extern "C" {
