@@ -28,7 +28,7 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
+GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame;
 GLuint sampler_channel[0],sampler_channel[1],sampler_channel[2],sampler_channel[3],sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag;
 GLuint uniform_frame,uniform_time,uniform_res,uniform_mouse;
