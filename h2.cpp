@@ -490,7 +490,7 @@ var avage=new Float32Array($H,82933000,1);
 avag=avage;agav.set([avag]);
 t.constants={avg:avag};
 M();
-},75);
+},125);
 
 }
 M();
