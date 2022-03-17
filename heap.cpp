@@ -489,9 +489,9 @@ M();
 M();
 document.getElementById("di").onclick=function(){
 T=true;
-R.destroy();
-t.destroy();
-r.destroy();
+// R.destroy();
+// t.destroy();
+// r.destroy();
 S();
 };
 return()=>{T=true;};}
