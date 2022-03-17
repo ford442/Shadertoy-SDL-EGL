@@ -489,10 +489,10 @@ setTimeout(function(){
 var avage=new Float32Array($H,82933000,1);
 avag=avage;agav.set([avag]);
 t.constants={avg:avag};
-},8.3);
+},20);
 setTimeout(function(){
 M();
-},8.3);
+},20);
 }
 M();
 document.getElementById("di").onclick=function(){
