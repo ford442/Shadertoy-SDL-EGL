@@ -70,7 +70,7 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision highp float;precision highp sampler3D;precision highp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
