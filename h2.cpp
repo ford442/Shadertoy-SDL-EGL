@@ -528,7 +528,7 @@ ma();
 }
 
 float nano(int leng,float *ptr){
-float ret=avgFrm(leng,ptr);
+avgFrm(leng,ptr);
 }
 }
 
