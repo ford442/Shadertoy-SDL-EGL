@@ -480,7 +480,7 @@ $5.set($$5);
 $F=2;
 }
 if(T){return;}
-  var point9=8*la;
+var point9=8*la;
 var $9=new Float32Array($H,82944000,la);
 var $bb=R(vv);
 $9.set($bb,0,la);
@@ -489,10 +489,8 @@ setTimeout(function(){
 var avage=new Float32Array($H,82933000,1);
 avag=avage;agav.set([avag]);
 t.constants={avg:avag};
-setTimeout(function(){
 M();
-},40);
-},40);
+},75);
 
 }
 M();
