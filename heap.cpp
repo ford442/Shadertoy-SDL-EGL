@@ -501,7 +501,7 @@ void b3(){
 ma();
 }
 
-void nano(float ptrn*,int JSfrm,int leng){
+void nano(float *ptrn,int JSfrm,int leng){
 ptrn=(JSfrm-1)*leng;
 avgFrm(JSfrm,leng,ptrn);
 }
