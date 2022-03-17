@@ -527,7 +527,7 @@ void b3(){
 ma();
 }
 
-float nano(int leng,float *ptr){
+void nano(int leng,float *ptr){
 avgFrm(leng,ptr);
 }
 }
