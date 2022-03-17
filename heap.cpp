@@ -413,7 +413,7 @@ var T=false;
 
 function M(){
 var ptrn=0;
-Module.ccall("b3",null,'Number','Number',[F],[sz]);
+Module.ccall("b3",null,'Number','Number',[$F],[sz]);
 var minPtr=82944000+F;
 var maxPtr=82944010+F;
 var avgPtr=82944020+F;
@@ -426,56 +426,56 @@ max$[0]=((max$[1]+max$[2]+max$[3]+max$[4]+max$[5]+max$[6]+max$[7]+max$[8])/8);
 if(T){return;}
 if($F==8){
 var $r8=t($8);
-r($r8,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r8,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$4=t(vv);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
 var $r7=t($7);
-r($r7,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r7,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$3=t(vv);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
 var $r6=t($6);
-r($r6,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r6,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$2=t(vv);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
 var $r5=t($5);
-r($r5,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r5,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$1=t(vv);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
 var $r4=t($4);
-r($r4,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r4,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$8=t(vv);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
 var $r3=t($3);
-r($r3,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r3,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$7=t(vv);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
 var $r2=t($2);
-r($r2,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r2,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$6=t(vv);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
 var $r1=t($1);
-r($r1,min$[F],min$[0],max$[F],max$[0],avg$[F],avg$[0]);
+r($r1,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$5=t(vv);
 $5.set($$5);
 $F=2;
