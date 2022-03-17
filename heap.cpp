@@ -412,7 +412,8 @@ let $F=1;
 var T=false;
 
 function M(){
-Module.ccall("b3",null,'Number','Number',[F],[sz]);
+var ptrn=0;
+Module.ccall("b3",null,'Number','Number','Number',[ptrn],[F],[sz]);
 var minPtr=82944000+F;
 var maxPtr=82944010+F;
 var avgPtr=82944020+F;
@@ -500,10 +501,9 @@ void b3(){
 ma();
 }
 
-void nano(float JSfrm,int leng){
-int fRm=JSfrm;
-JSfrm=(JSfrm-1)*leng;
-avgFrm(fRm,leng,JSfrm);
+void nano(float ptrn*,int JSfrm,int leng){
+ptrn=(JSfrm-1)*leng;
+avgFrm(JSfrm,leng,ptrn);
 }
 }
   
