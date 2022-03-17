@@ -178,7 +178,9 @@ if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
 sum=sum/leng;
-return sum;
+EM_ASM({
+Module.HEAPF32.set($0,82933000,1);
+},sum);
 }
 
 static void strt(){
@@ -189,7 +191,7 @@ Size=(float)S;
   
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
@@ -502,8 +504,13 @@ avag=Math.round(avag);
 avag=avag/10000;
 */
 avag=Module.ccall('nano','Number',['Number'],['Number'],[la],[82944000]);
+setTimeout(function(){
+var avage=new Float32Array($H,82933000,1);
+avag=avage;agav.set([avag]);
 t.constants={avg:avag};
-S();};return()=>{T=true;};}
+S();
+},64);
+};return()=>{T=true;};}
 })
 
 extern "C" {
@@ -522,7 +529,6 @@ ma();
 
 float nano(int leng,float *ptr){
 float ret=avgFrm(leng,ptr);
-return ret;
 }
 }
 
