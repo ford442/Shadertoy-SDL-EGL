@@ -28,8 +28,10 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame;
+GLuint sampler_channel[5];
+GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag;
+GLuint uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLint iFrame;
 static GLsizei s4=4;
@@ -68,13 +70,12 @@ static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-// const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
+"\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannelB3;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -168,12 +169,24 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-int JSfrm;
-static void slp(int JSfrm){
-auto hth=JSfrm;
+static void avgFrm(int F,int leng,float *dat){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+for (int i=4;i<leng;i++){
+sum+=dat[i];
+if(max<dat[i]){max=dat[i];}
+if(min>dat[i]&&dat[i]>0){min=dat[i];}
+}
+sum=sum/leng;
 EM_ASM({
-console.log("Int: "+$0);
-},JSfrm);
+var minPtr=82944000+$0;
+var maxPtr=82944010+$0;
+var avgPtr=82944020+$0;
+Module.HEAPF32.set($1,avgPtr,1);
+Module.HEAPF32.set($2,minPtr,1);
+Module.HEAPF32.set($3,maxPtr,1);
+},F,sum,min,max);  
 }
 
 static void strt(){
@@ -184,7 +197,7 @@ Size=(float)S;
   
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
@@ -268,11 +281,9 @@ sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
+sampler_channel[4]=glGetUniformLocation(shader_program,"iChannelB3");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
-// uniform_dtime=glGetUniformLocation(shader_program,"iTimeDelta");
-// uniform_date=glGetUniformLocation(shader_program,"iDate");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
-// uniform_fps=glGetUniformLocation(shader_program,"iFrameRate");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
@@ -340,44 +351,40 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let avgg=new ArrayBuffer(4);
-let agav=new Float32Array(avgg,0,1);
-let avag=0.750;
-agav.set([avag]);
 
+  
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
+let d=S();if(d)d();d=S();
 
-let d=S();if(d)d();d=S();function S(){
-  
-  
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
+function S(){
+let w$=document.getElementById('iwid').innerHTML;
+let h$=document.getElementById('ihig').innerHTML;
 let vv=document.getElementById("mv");
-var o=[w$,h$];
+let o=[h$,h$];
+let sz=(h$*h$)/8;
+let $H=Module.HEAPF32.buffer;
+
 let R=g.createKernel(function(tv){
 var P=tv[this.thread.y][this.thread.x];
 var avgg=(P[0]+P[1]+P[2])/3;
-return [P[0],P[1],P[2],avgg];
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput(o);
+return avgg;
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 var av$=(P[0]+P[1]+P[2])/3;
-var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
-return[P[0],P[1],P[2],aveg];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setConstants({avg:avag}).setOutput(o);
+return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 
-let r=g.createKernel(function(f){
+let r=g.createKernel(function(f,fmin,amin,fmax,amax,favg,aavg){
 var p=f[this.thread.y][this.thread.x];
-this.color(p[0],p[1],p[2],p[3]);
+var alph=(((fmax-fmin)*p[3])+fmin)+0.75+(((amax-amin)*aavg)+amin)+((p[3]+favg)/2)/4;  
+this.color(p[0],p[1],p[2],alph);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 
-var l=w$*h$*16;
 var la=w$*h$*4;
-var al=w$*h$*8;
-let $H=Module.HEAPF32.buffer;
 var point1=0;
 var $1=new Float32Array($H,point1,la);
 var point2=1*la;
@@ -394,67 +401,83 @@ var point7=6*la;
 var $7=new Float32Array($H,point7,la);
 var point8=7*la;
 var $8=new Float32Array($H,point8,la);
+var point9=8*la;
+var $9=new Float32Array($H,point9,sz);
+var $bb=R(vv);
+$9.set($bb,0,sz);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 $4.set($$1);
-var $F=1;
+let $F=1;
 var T=false;
+
 function M(){
+var ptrn=0;
+Module.ccall("b3",null,'Number','Number',[$F],[sz]);
+var minPtr=82944000+F;
+var maxPtr=82944010+F;
+var avgPtr=82944020+F;
+var min$=new Float32Array($H,minPtr,10);
+var max$=new Float32Array($H,maxPtr,10);
+var avg$=new Float32Array($H,avgPtr,10);
+avg$[0]=((avg$[1]+avg$[2]+avg$[3]+avg$[4]+avg$[5]+avg$[6]+avg$[7]+avg$[8])/8);
+min$[0]=((min$[1]+min$[2]+min$[3]+min$[4]+min$[5]+min$[6]+min$[7]+min$[8])/8);
+max$[0]=((max$[1]+max$[2]+max$[3]+max$[4]+max$[5]+max$[6]+max$[7]+max$[8])/8);
 if(T){return;}
 if($F==8){
 var $r8=t($8);
-r($r8);
+r($r8,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$4=t(vv);
 $4.set($$4);
 $F=1;
 }
 if($F==7){ 
 var $r7=t($7);
-r($r7);
+r($r7,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$3=t(vv);
 $3.set($$3);
 $F=8;
 }
 if($F==6){  
 var $r6=t($6);
-r($r6);
+r($r6,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$2=t(vv);
 $2.set($$2);
 $F=7;
 }
 if($F==5){  
 var $r5=t($5);
-r($r5);
+r($r5,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$1=t(vv);
 $1.set($$1);
 $F=6;
 }
 if($F==4){  
 var $r4=t($4);
-r($r4);
+r($r4,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$8=t(vv);
 $8.set($$8);
 $F=5;
 }
 if($F==3){  
 var $r3=t($3);
-r($r3);
+r($r3,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$7=t(vv);
 $7.set($$7);
 $F=4;
 }  
 if($F==2){
 var $r2=t($2);
-r($r2);
+r($r2,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$6=t(vv);
 $6.set($$6);
 $F=3;
 }
 if($F==1){
 var $r1=t($1);
-r($r1);
+r($r1,min$[$F],min$[0],max$[$F],max$[0],avg$[$F],avg$[0]);
 var $$5=t(vv);
 $5.set($$5);
 $F=2;
@@ -466,22 +489,12 @@ M();
 M();
 document.getElementById("di").onclick=function(){
 T=true;
-var point9=8*la;
-var $9=new Float32Array($H,point9,la);
-var $bb=R(vv);
-$9.set($bb,0,la);
-var $bb=R($9);
-var gfg=$bb.join().split(',').map(Number);
-var gfgs=gfg.reduce(function(a, b){ return a + b; });
-var avvvg=gfgs/(la*4);
-avag=avvvg;
-agav.set([avag]);
-avag=agav[0];
-avag=avag*10000;
-avag=Math.round(avag);
-avag=avag/10000;
-t.constants={avg:avag};
-S();};return()=>{T=true;};}
+R.destroy();
+t.destroy();
+r.destroy();
+S();
+};
+return()=>{T=true;};}
 })
 
 extern "C" {
@@ -494,9 +507,14 @@ plt();
 void b3(){
 ma();
 }
-void nano(int JSfrm){
-slp(JSfrm);
-}}
+
+void nano(int JSfrm,int leng){
+float ptrna=static_cast<float>((JSfrm-1.0)*leng);
+float *ptrnb=&ptrna;
+avgFrm(JSfrm,leng,ptrnb);
+}
+}
+  
 int main(){
 EM_ASM({
 FS.mkdir('/snd');
