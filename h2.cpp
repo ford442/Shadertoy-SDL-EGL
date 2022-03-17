@@ -346,7 +346,7 @@ let avag=0.750;
 agav.set([avag]);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
-let vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 var o=[w$,h$];
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -372,6 +372,7 @@ this.color(p[0],p[1],p[2],p[3]);
 let d=S();if(d)d();d=S();function S(){
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
+var vv=document.getElementById("mv");
 var o=[w$,h$];
 var l=w$*h$*16;
 var la=w$*h$*4;
