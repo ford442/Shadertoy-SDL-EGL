@@ -169,7 +169,7 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-static void avgFrm(int F,int leng,float *ptr){
+static void avgFrm(int F,int leng,float *dat){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
