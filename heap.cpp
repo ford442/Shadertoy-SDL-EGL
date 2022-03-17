@@ -502,7 +502,7 @@ ma();
 }
 
 void nano(float *ptrn,int JSfrm,int leng){
-ptrn=(JSfrm-1)*leng;
+ptrn=((float)JSfrm-1.0)*(float)leng;
 avgFrm(JSfrm,leng,ptrn);
 }
 }
