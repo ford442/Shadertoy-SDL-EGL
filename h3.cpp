@@ -348,12 +348,12 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-let $H=Module.HEAPF32.buffer;
-var agav=new Float32Array($H,82933000,1);
-var sz=(h$*h$)/8;
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
+let $H=Module.HEAPF32.buffer;
+var agav=new Float32Array($H,82933000,1);
+var sz=(h$*h$)/8;
 var avag=0.750;
 agav.set([avag],0,1);
 let bcanvas=document.getElementById("bcanvas");
