@@ -421,7 +421,7 @@ $4.set($$1);
 let $F=1;
 var T=false;
 function M(){
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[F]});
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[$F]});
 if($F==8){
 var $r8=t($8);
 r($r8);
