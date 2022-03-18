@@ -71,7 +71,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -165,7 +165,7 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 // glFinish();
- nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -350,7 +350,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,82933000,1);
-var sz=(h$*h$);
+var sz=(h$*h$)/8;
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -371,12 +371,12 @@ var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=(P[0]+P[1]+P[2])/3;
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
-}).setTactic("balanced").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,1);
@@ -388,7 +388,7 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
 var la=h$*h$*4;
 var al=w$*h$*8;
-var sz=(h$*h$);
+var sz=(h$*h$)/8;
 var point1=0;
 var $1=new Float32Array($H,point1,la);
 var point2=1*la;
@@ -410,7 +410,7 @@ var $9=new Float32Array($H,82944000,sz);
 // t.setOutput([w$,h$]);
 t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 r.setConstants({nblnk:nblank$,blnk:blank$});
-R.setOutput([sz]);
+// R.setOutput([sz]);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
@@ -421,6 +421,9 @@ var $F=1;
 var T=false;
 
 function M(){
+ 
+ t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
+
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -482,9 +485,8 @@ var $bb=R(vv);
 $9.set($bb,0,sz);
 setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],[sz],[82944000]);
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 M();
-},16.666);
+},33.3);
 }
 M();
 document.getElementById("di").onclick=function(){
