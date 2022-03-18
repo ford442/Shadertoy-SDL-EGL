@@ -1369,6 +1369,7 @@ let w$=document.getElementById('iwid').innerHTML;
 let h$=document.getElementById('ihig').innerHTML;
 let vv=document.getElementById("mv");
 let o=[h$,h$];
+let ro=[h$,h$];
 let sz=(h$*h$)/8;
 let $H=Module.HEAPF32.buffer;
 
@@ -1388,7 +1389,7 @@ let r=g.createKernel(function(f,fmin,amin,fmax,amax,favg,aavg){
 var p=f[this.thread.y][this.thread.x];
 var alph=(((fmax-fmin)*p[3])+fmin)+0.75+(((amax-amin)*aavg)+amin)+((p[3]+favg)/2)/4;  
 this.color(p[0],p[1],p[2],alph);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(ro);
 
 var la=w$*h$*4;
 var point1=0;
