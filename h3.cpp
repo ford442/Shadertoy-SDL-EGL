@@ -381,7 +381,7 @@ var agav=new Float32Array($H,82933000,1);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
-var blank$=Math.max(((w$-h$)/2),0);
+var blank$=Math.max(((w$-h$)),0);
 var nblank$=Math.max((h$-w$),0);
 var l=w$*h$*16;
 var la=w$*h$*4;
@@ -417,8 +417,6 @@ var $F=1;
 var T=false;
 
 function M(){
-  
-  
 if($F==8){
 var $r8=t($8);
 r($r8);
