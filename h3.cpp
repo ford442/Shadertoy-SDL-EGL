@@ -366,7 +366,7 @@ return [P[0],P[1],P[2],avgg];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blnk];
+var P=v[this.thread.y][this.thread.x+this.constants.blnk-200];
 var av$=(P[0]+P[1]+P[2])/3;
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
