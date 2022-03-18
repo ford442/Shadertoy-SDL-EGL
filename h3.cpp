@@ -169,7 +169,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 }
 
-void avgFrm(int leng,float *dat){
+void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -179,9 +179,10 @@ if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
 sum=sum/leng;
-EM_ASM({
-Module.HEAPF32.set($0,82933000,1);
-},sum);
+aLoc[F]=sum;
+for (int i=0;i<7;i++){
+aLoc[i]=(((aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8)+aLoc[i])/2);
+}
 }
 
 static void strt(){
@@ -348,10 +349,10 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-var agav=new Float32Array($H,82933000,1);
+var agav=new Float32Array($H,82933000,10);
 var sz=(h$*h$)/8;
 var avag=0.750;
-agav.set([avag],0,1);
+agav.set(avag,0,10);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
@@ -379,7 +380,7 @@ this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
-var agav=new Float32Array($H,82933000,1);
+var agav=new Float32Array($H,82933000,10);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -419,11 +420,8 @@ $4.set($$1);
 // r.setOutput([h$,h$]);
 var $F=1;
 var T=false;
-
 function M(){
- 
- t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
-
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[F]});
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -484,7 +482,7 @@ if(T){return;}
 var $bb=R(vv);
 $9.set($bb,0,sz);
 setTimeout(function(){
-Module.ccall('nano',null,['Number'],['Number'],[sz],[82944000]);
+Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
 M();
 },33.3);
 }
@@ -513,8 +511,8 @@ void b3(){
 ma();
 }
 
-void nano(int leng,float *ptr){
-avgFrm(leng,ptr);
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
 }
 }
 
