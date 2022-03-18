@@ -71,7 +71,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -164,7 +164,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
- glFinish();
+// glFinish();
 // nanosleep(&req,&rem);
 iFrame++;
 }
@@ -354,7 +354,7 @@ var avag=0.750;
 agav.set([avag],0,1);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
+let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU({canvas:bcanvas,webGl:contx2});
 const glslAve=`float Ave(float a, float b,float c) {return (a + b + c) / 3.0 ;}`;
@@ -370,12 +370,12 @@ var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,1);
