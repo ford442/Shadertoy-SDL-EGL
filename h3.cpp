@@ -181,7 +181,7 @@ if(min>dat[i]&&dat[i]>0){min=dat[i];}
 sum=sum/leng;
 aLoc[F]=sum;
 for (int i=0;i<7;i++){
-aLoc[i]=(((aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8)+aLoc[i])/2);
+aLoc[i]=(((aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8)+aLoc[i])/2;
 }
 }
 
