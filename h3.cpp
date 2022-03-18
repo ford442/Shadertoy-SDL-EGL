@@ -353,7 +353,6 @@ var sz=(h$*h$)/8;
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
-
 var avag=0.750;
 agav.set(avag,0,1);
 let bcanvas=document.getElementById("bcanvas");
@@ -366,14 +365,14 @@ return [P[0],P[1],P[2],avgg];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blnk];
+var P=v[this.thread.y][this.thread.x+this.constants.blnk+this.constants.nblnk];
 var av$=(P[0]+P[1]+P[2])/3;
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-512];
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]);
 
@@ -382,8 +381,8 @@ var agav=new Float32Array($H,82933000,1);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
-let blank$=Math.max(((w$-h$)/2),0);
-let nblank$=Math.max((h$-w$),0);
+var blank$=Math.max(((w$-h$)/2),0);
+var nblank$=Math.max((h$-w$),0);
 var l=w$*h$*16;
 var la=w$*h$*4;
 var al=w$*h$*8;
@@ -405,18 +404,21 @@ var $7=new Float32Array($H,point7,la);
 var point8=7*la;
 var $8=new Float32Array($H,point8,la);
 // t.setOutput([w$,h$]);
-t.setConstants({avg:agav[0],blnk:blank$});
-r.setConstants({nblnk:nblank$});
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$});
 R.setOutput([sz]);
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 $4.set($$1);
-// r.setOutput([w$,h$]);
+// r.setOutput([h$,h$]);
 var $F=1;
 var T=false;
+
 function M(){
+  
+  
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -481,16 +483,18 @@ $9.set($bb,0,la);
 var agav=new Float32Array($H,82933000,1);
 avag=Module.ccall('nano','Number',['Number'],['Number'],[la],[82944000]);
 setTimeout(function(){
-t.setConstants({avg:agav[0]});
 M();
 },16.66);
-
 }
 M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();
-};return()=>{T=true;};}
+};
+return()=>{
+T=true;
+};
+}
 })
 
 extern "C" {
