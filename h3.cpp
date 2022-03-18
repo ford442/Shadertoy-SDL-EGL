@@ -358,6 +358,7 @@ let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,pr
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU({canvas:bcanvas,webGl:contx2});
 const glslAve=`float Ave(float a, float b,float c) {return (a + b + c) / 3.0 ;}`;
+g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 
 let R=g2.createKernel(function(tv){
