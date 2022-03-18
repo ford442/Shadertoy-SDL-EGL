@@ -354,11 +354,13 @@ var avag=0.750;
 agav.set([avag],0,1);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
 let g=new GPU({canvas:bcanvas,webGl:contx});
+let g2=new GPU({canvas:bcanvas,webGl:contx2});
 const glslAve=`float Ave(float a, float b,float c) {return (a + b + c) / 3.0 ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 
-let R=g.createKernel(function(tv){
+let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
