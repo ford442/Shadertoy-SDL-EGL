@@ -163,8 +163,8 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-glFinish();
-nanosleep(&req,&rem);
+// glFinish();
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
