@@ -354,7 +354,7 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 var avag=0.750;
-agav.set(avag,0,1);
+agav.set([avag],0,1);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
@@ -418,6 +418,7 @@ var $F=1;
 var T=false;
 
 function M(){
+var agav=new Float32Array($H,82933000,1);
 t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 if($F==8){
 var $r8=t($8);
