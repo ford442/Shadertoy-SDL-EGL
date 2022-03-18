@@ -365,14 +365,14 @@ return [P[0],P[1],P[2],avgg];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blnk+this.constants.nblnk];
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=(P[0]+P[1]+P[2])/3;
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var p=f[this.thread.y][this.thread.x+this.constants.nblnk+this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]);
 
