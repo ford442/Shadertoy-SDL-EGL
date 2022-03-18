@@ -359,7 +359,7 @@ let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let R=g.createKernel(function(tv){
-var P=tv[this.thread.y][this.thread.x];
+var P=tv[this.thread.y][this.thread.x*4];
 var avgg=(P[0]+P[1]+P[2])/3;
 return [P[0],P[1],P[2],avgg];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
@@ -387,6 +387,7 @@ var l=w$*h$*16;
 var la=h$*h$*4;
 var al=w$*h$*8;
 var sz=(h$*h$)/8;
+var asz=(h$*h$)/32;
 var point1=0;
 var $1=new Float32Array($H,point1,la);
 var point2=1*la;
@@ -417,6 +418,7 @@ var $F=1;
 var T=false;
 
 function M(){
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -479,7 +481,7 @@ var $9=new Float32Array($H,82944000,la);
 var $bb=R(vv);
 $9.set($bb,0,la);
 var agav=new Float32Array($H,82933000,1);
-avag=Module.ccall('nano','Number',['Number'],['Number'],[la],[82944000]);
+avag=Module.ccall('nano','Number',['Number'],['Number'],[asz],[82944000]);
 setTimeout(function(){
 M();
 },16.66);
