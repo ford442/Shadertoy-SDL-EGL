@@ -485,7 +485,7 @@ var agav=new Float32Array($H,82933000,1);
 avag=Module.ccall('nano','Number',['Number'],['Number'],[asz],[82944000]);
 setTimeout(function(){
 M();
-},16.66);
+},80);
 }
 M();
 document.getElementById("di").onclick=function(){
