@@ -419,7 +419,6 @@ var T=false;
 
 function M(){
 var agav=new Float32Array($H,82933000,1);
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -470,22 +469,25 @@ $6.set($$6);
 $F=3;
 }
 if($F==1){
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 var $r1=t($1);
 r($r1);
-var $$5=t(vv);
-$5.set($$5);
-$F=2;
-}
-if(T){return;}
+        //  Get average
 var point9=8*la;
 var $9=new Float32Array($H,82944000,la);
 var $bb=R(vv);
 $9.set($bb,0,la);
 var agav=new Float32Array($H,82933000,1);
 avag=Module.ccall('nano','Number',['Number'],['Number'],[asz],[82944000]);
+  
+var $$5=t(vv);
+$5.set($$5);
+$F=2;
+}
+if(T){return;}
 setTimeout(function(){
 M();
-},80);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
