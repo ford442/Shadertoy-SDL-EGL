@@ -363,7 +363,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 let R=g.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 var avgg=(Pa[0]+Pa[1]+Pa[2])/3;
-return [Pa[0],Pa[1],Pa[2],avgg];
+return avgg;
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
