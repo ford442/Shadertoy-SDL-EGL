@@ -418,7 +418,7 @@ $2.set($$1);
 $3.set($$1);
 $4.set($$1);
 // r.setOutput([h$,h$]);
-var $F=1;
+let $F=1;
 var T=false;
 function M(){
 t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[F]});
