@@ -355,7 +355,7 @@ agav.set([avag],0,1);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
-const glslAve = `float Ave(float a, float b,float c) {return (a + b + c) / 3.0 ;}`;
+const glslAve=`float Ave(float a, float b,float c) {return (a + b + c) / 3.0 ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 
 let R=g.createKernel(function(tv){
@@ -365,7 +365,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-var av$=Ave(Pa[0],Pa[1],Pa[2]);
+var av$=Ave(P[0],P[1],P[2]);
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
