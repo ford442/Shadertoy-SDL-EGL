@@ -172,7 +172,7 @@ static void avgFrm(int leng,float *dat){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
-for (int i=4;i<leng;i=i+8){
+for (int i=4;i<leng;i=i){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
@@ -349,7 +349,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,82933000,1);
-var sz=(h$*h$)/8;
+var sz=(h$*h$);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -358,23 +358,24 @@ agav.set([avag],0,1);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
+
 let R=g.createKernel(function(tv){
-var P=tv[this.thread.y][this.thread.x*4];
-var avgg=(P[0]+P[1]+P[2])/3;
-return [P[0],P[1],P[2],avgg];
-}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+var Pa=tv[this.thread.y][this.thread.x*4];
+var avgg=(Pa[0]+Pa[1]+Pa[2])/3;
+return [Pa[0],Pa[1],Pa[2],avgg];
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=(P[0]+P[1]+P[2])/3;
 var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
 return[P[0],P[1],P[2],aveg];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,1);
@@ -386,8 +387,7 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
 var la=h$*h$*4;
 var al=w$*h$*8;
-var sz=(h$*h$)/8;
-var asz=(h$*h$)/32;
+var sz=(h$*h$);
 var point1=0;
 var $1=new Float32Array($H,point1,la);
 var point2=1*la;
@@ -404,6 +404,8 @@ var point7=6*la;
 var $7=new Float32Array($H,point7,la);
 var point8=7*la;
 var $8=new Float32Array($H,point8,la);
+var point9=8*la;
+var $9=new Float32Array($H,82944000,sz);
 // t.setOutput([w$,h$]);
 t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 r.setConstants({nblnk:nblank$,blnk:blank$});
@@ -418,7 +420,6 @@ var $F=1;
 var T=false;
 
 function M(){
-var agav=new Float32Array($H,82933000,1);
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -469,23 +470,18 @@ $6.set($$6);
 $F=3;
 }
 if($F==1){
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 var $r1=t($1);
 r($r1);
-        //  Get average
-var point9=8*la;
-var $9=new Float32Array($H,82944000,la);
-var $bb=R(vv);
-$9.set($bb,0,la);
-var agav=new Float32Array($H,82933000,1);
-avag=Module.ccall('nano','Number',['Number'],['Number'],[asz],[82944000]);
-  
 var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
 if(T){return;}
+var $bb=R(vv);
+$9.set($bb,0,sz);
 setTimeout(function(){
+Module.ccall('nano',null,['Number'],['Number'],[sz],[82944000]);
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
 M();
 },16.666);
 }
