@@ -373,7 +373,7 @@ return[P[0],P[1],P[2],aveg];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-200];
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-512];
 this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]);
 
