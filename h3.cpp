@@ -374,7 +374,7 @@ return[P[0],P[1],P[2],aveg];
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 this.color(p[0],p[1],p[2],p[3]);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,1);
