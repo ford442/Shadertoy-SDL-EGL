@@ -160,7 +160,7 @@ console.log($0);
 if(jFrame<floor(Ttime/0.01666666)){
 jFrame++;
 EM_ASM({
-Module.HEAPF32.set(1,82933040,1);
+Module.HEAPF32.set(1.0,82933040,1);
 });
 }
 glUniform1f(uniform_time,time);
@@ -465,7 +465,7 @@ if($st[1]==1){
 document.getElementById('di').click();
 $st[1]=0;
 }
-  if ($st[0]==1){
+  if ($st[0]==1.0){
 if(T){return;}
 if($F==8){
 var $r8=t($8);
@@ -527,7 +527,7 @@ $F=2;
 var $bb=R(vv);
 $9.set($bb,0,sz);
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
-$st[0]=0;
+$st[0]=0.0;
 }
 setTimeout(function(){
 M();
