@@ -168,7 +168,8 @@ glUniform1i(uniform_frame,fram);
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
-Dtime=duration_cast<duration<float>>t2.count();
+duration<double>jtime=duration_cast<duration<float>>(t2);
+Dtime=jtime.count();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
