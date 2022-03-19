@@ -390,7 +390,7 @@ return[red,green,blue,av$];
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var alph=((((this.constants.fmax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.amin/2))*0.75)+(this.constants.amin/2))+(((1.0-(this.constants.amax))*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.75)/2))/6;
-var aveg=1.0-(((p[3])-(alph))*((this.constants.amax-this.constants.aavg)/(p[3]-this.constants.aavg)));
+var aveg=1.0-(((p[3])-(alph))*((this.constants.fmax-this.constants.favg)/(p[3]-this.constants.favg)));
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
