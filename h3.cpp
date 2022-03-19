@@ -153,7 +153,8 @@ Tm=EM_ASM_INT({return parseInt(document.getElementById('tim').innerHTML,10);});
 Tm=Tm/1000;
 EM_ASM({
 console.log($0);
-Module.HEAPF32.set(1,82933041,1);
+// Module.HEAPF32.set(1,82933041,1);
+  document.getElementById("di").click();
 },Ttime);
 }
 if(jFrame<floor(Ttime/0.01666666)){
