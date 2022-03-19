@@ -30,7 +30,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,Dtime;
+GLfloat Ttime,Dtime;
 EGLint iFrame;
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
@@ -155,7 +155,7 @@ eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
-Ttime=time_spana.count();
+Ttime=time_spana.count()*timeSpeed;
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
@@ -165,7 +165,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-glFinish();
+// glFinish();
 // nanosleep(&req,&rem);
 iFrame++;
 }
@@ -222,8 +222,8 @@ EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v24,
-EGL_STENCIL_SIZE,v8,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v0,
 EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
@@ -234,7 +234,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
