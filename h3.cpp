@@ -29,9 +29,10 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 GLfloat Ttime,Dtime;
 EGLint iFrame;
+EGLint jFrame=0,jVid=0;
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 static GLfloat F=1.0f;
@@ -44,7 +45,7 @@ static GLfloat cMouseY;
 static GLfloat x;
 static GLfloat y;
 static EM_BOOL mouseLPressed;
-static int S;
+int S,Tm;
 static GLfloat Size;
 static EM_BOOL clickLoc;
 static GLfloat mX,mY;
@@ -146,6 +147,20 @@ glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
 clickLoc=true;
 }
+if(jVid<floor(Dtime/Tm)){
+jVid++;
+Tm=EM_ASM_INT({return parseInt(document.getElementById('tim').innerHTML,10);});
+Tm=Tm/1000;
+EM_ASM({
+Module.HEAPF32.set(1,82933041,1);
+});
+}
+if(jFrame<floor(Dtime/0.01666666){
+jFrame++;
+EM_ASM({
+Module.HEAPF32.set(1,82933040,1);
+});
+}
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
@@ -153,6 +168,7 @@ glUniform1i(uniform_frame,fram);
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
+Dtime=t2.count();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
@@ -186,17 +202,14 @@ aLoc[F+20]=max;
 aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8;
 aLoc[10]=(aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18])/8;
 aLoc[20]=(aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28])/8;
-if (aLoc[0]>0.5){
-timeSpeed=1.0-aLoc[F];
-}else{
-timeSpeed=1.0+aLoc[F];
-}
 }
 
 static void strt(){
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+Tm=EM_ASM_INT({return parseInt(document.getElementById('tim').innerHTML,10);});
+Tm=Tm/1000;
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
@@ -404,6 +417,7 @@ this.color(p[0],p[1],p[2],aveg);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
+var $st=new Float32Array($H,82933040,2);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -443,6 +457,8 @@ var T=false;
 
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
+if ($st[0]==1){
+if(T){return;}
 if($F==8){
 var $r8=t($8);
 r($r8);
@@ -499,13 +515,18 @@ var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
-if(T){return;}
+if($st[1]==1){
+document.getElementById('di').click();
+$st[1]=0;
+}
 var $bb=R(vv);
 $9.set($bb,0,sz);
-setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
+$st[0]=0;
+}
+setTimeout(function(){
 M();
-},16.666);
+},8);
 }
 M();
 document.getElementById("di").onclick=function(){
