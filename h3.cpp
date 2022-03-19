@@ -370,8 +370,8 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-var agav=new Float32Array($H,82933000,30);
-var $st=new Float32Array($H,82933040,2);
+let agav=new Float32Array($H,82933000,30);
+let $st=new Float32Array($H,82933040,2);
 $st[0]=1;
 $st[1]=1;
 var sz=(h$*h$)/8;
@@ -419,8 +419,7 @@ this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
-var agav=new Float32Array($H,82933000,30);
-var $st=new Float32Array($H,82933040,2);
+
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
