@@ -376,15 +376,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var red=P[0];
-var green=P[1];
-var blue=P[2];
-if(av$<0.32){
-red=0.0;
-green=0.0;
-blue=0.0;
-}
-return[red,green,blue,av$];
+return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
