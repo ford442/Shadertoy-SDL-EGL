@@ -180,9 +180,11 @@ if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
 sum=sum/leng;
 aLoc[F]=sum;
-for (int i=0;i<7;i++){
-aLoc[i]=(((aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8)+aLoc[i])/2;
-}
+aLoc[F+10]=min;
+aLoc[F+20]=max;
+aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8;
+aLoc[10]=(aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18])/8;
+aLoc[20]=(aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28])/8;
 }
 
 static void strt(){
@@ -349,7 +351,7 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-var agav=new Float32Array($H,82933000,10);
+var agav=new Float32Array($H,82933000,30);
 var sz=(h$*h$)/8;
 var avag=0.750;
 agav.set(avag,0,10);
@@ -380,7 +382,7 @@ this.color(p[0],p[1],p[2],p[3]);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
-var agav=new Float32Array($H,82933000,10);
+var agav=new Float32Array($H,82933000,30);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -409,7 +411,7 @@ var $8=new Float32Array($H,point8,la);
 var point9=8*la;
 var $9=new Float32Array($H,82944000,sz);
 // t.setOutput([w$,h$]);
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[$F],min:agav[$F+10],max:agav[$F+20],avgMin:agav[10],avgMax:agav[20],avgAvg:agav[0]});
 r.setConstants({nblnk:nblank$,blnk:blank$});
 // R.setOutput([sz]);
 var $$1=t(vv);
@@ -420,8 +422,9 @@ $4.set($$1);
 // r.setOutput([h$,h$]);
 let $F=1;
 var T=false;
+
 function M(){
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[$F]});
+t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[$F],min:agav[$F+10],max:agav[$F+20],avgMin:agav[10],avgMax:agav[20],avgAvg:agav[0]});
 if($F==8){
 var $r8=t($8);
 r($r8);
