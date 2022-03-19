@@ -370,8 +370,8 @@ var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-let agav=new Float32Array($H,82933000,30);
-let $st=new Float32Array($H,82933040,2);
+var agav=new Float32Array($H,82933000,30);
+var $st=new Float32Array($H,82933040,2);
 $st[0]=0;
 $st[1]=0;
 var sz=(h$*h$)/8;
@@ -419,7 +419,7 @@ this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
-
+var $st=new Float32Array($H,82933040,2);
 var w$=document.getElementById('iwid').innerHTML;
 var h$=document.getElementById('ihig').innerHTML;
 var vv=document.getElementById("mv");
@@ -458,8 +458,13 @@ $4.set($$1);
 var T=false;
 
 function M(){
+  
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
-if ($st[0]==1){
+if($st[1]==1){
+document.getElementById('di').click();
+$st[1]=0;
+}
+  if ($st[0]==1){
 if(T){return;}
 if($F==8){
 var $r8=t($8);
@@ -517,10 +522,7 @@ var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
-if($st[1]==1){
-document.getElementById('di').click();
-$st[1]=0;
-}
+
 var $bb=R(vv);
 $9.set($bb,0,sz);
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
