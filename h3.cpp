@@ -489,7 +489,7 @@ $9.set($bb,0,sz);
 setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
 M();
-},16.666);
+},42);
 }
 M();
 document.getElementById("di").onclick=function(){
