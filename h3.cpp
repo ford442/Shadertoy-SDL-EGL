@@ -152,7 +152,7 @@ jVid++;
 Tm=EM_ASM_INT({return parseInt(document.getElementById('tim').innerHTML,10);});
 Tm=Tm/1000;
 EM_ASM({
-  console.log($0);
+console.log($0);
 Module.HEAPF32.set(1,82933041,1);
 },Ttime);
 }
