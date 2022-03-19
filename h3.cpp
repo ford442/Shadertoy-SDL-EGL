@@ -146,7 +146,7 @@ glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
 clickLoc=true;
 }
-glUniform1f(uniform_time,time*timeSpeed);
+glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
 
@@ -155,7 +155,7 @@ eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
-Ttime=time_spana.count()*timeSpeed;
+Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
@@ -370,7 +370,7 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.7422) + b) + (((c - d) * 0.742) + d) + (((1.0 - (d / 2.0)) * 0.7422) + (d/2.0)) + (((1.0 - (c)) * 0.7422)) + ((0.7422 - (0.7422 * (e - g) / (c-f)))) + ((f + 0.7422) / 2.0)) / 6.0) ;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.742201) + b) + (((c - d) * 0.7501) + d) + (((1.0 - (b / 2)) * 0.74999) + (b/2)) + (((1.0 - (c)) * 0.75111)) + ((0.7500303 - (0.7509 * (e - g) / (c-f)))) + ((f + 0.74955) / 2)) / 6) ;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -400,7 +400,7 @@ var $aavg=this.constants.aavg;
 var alph=Alphe($fmax,$fmin,$amax,$amin,$favg,$aavg,p[3]);
 var aveg=Aveg(p[3],alph);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
