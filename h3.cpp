@@ -388,7 +388,7 @@ p[0]=0.0;
 p[1]=0.0;
 p[2]=0.0;
 }
-this.color(p[0],p[1],p[2],p[3]);
+this.color(p[0],p[1],p[2],aveg);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
