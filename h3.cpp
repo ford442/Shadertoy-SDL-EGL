@@ -154,7 +154,7 @@ Tm=Tm/1000;
 EM_ASM({
 console.log($0);
 // Module.HEAPF32.set(1,82933041,1);
-  document.getElementById("di").click();
+  document.getElementById("dil").click();
 },Ttime);
 }
 if(jFrame<floor(Ttime/0.01666666)){
