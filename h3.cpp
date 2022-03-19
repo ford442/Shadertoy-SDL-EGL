@@ -354,7 +354,11 @@ let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,82933000,30);
 var sz=(h$*h$)/8;
 var avag=0.750;
-agav.set(avag,0,10);
+var min=1.0;
+var max=0.0;
+agav.fill(avag,0,10);
+agav.fill(min,10,10);
+agav.fill(max,20,10);
 let bcanvas=document.getElementById("bcanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:true});
@@ -372,13 +376,14 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
-return[P[0],P[1],P[2],aveg];
+// var aveg=1.0-(((av$)-(this.constants.avg))*((av$)*(1.0/(1.0-this.constants.avg))));
+return[P[0],P[1],P[2],av$];
 }).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-this.color(p[0],p[1],p[2],p[3]);
+var alph=(((this.constants.fmax-this.constants.fmin)*p[3])+this.constants.fmin)+0.75+(((this.constants.amax-this.constants.amin)*this.constants.aavg)+this.constants.amin)+((p[3]+this.constants.favg)/2)/4;
+this.color(p[0],p[1],p[2],alph);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
@@ -410,21 +415,18 @@ var point8=7*la;
 var $8=new Float32Array($H,point8,la);
 var point9=8*la;
 var $9=new Float32Array($H,82944000,sz);
-// t.setOutput([w$,h$]);
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[$F],min:agav[$F+10],max:agav[$F+20],avgMin:agav[10],avgMax:agav[20],avgAvg:agav[0]});
-r.setConstants({nblnk:nblank$,blnk:blank$});
-// R.setOutput([sz]);
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
 $3.set($$1);
 $4.set($$1);
-// r.setOutput([h$,h$]);
 let $F=1;
 var T=false;
 
 function M(){
-t.setConstants({nblnk:nblank$,blnk:blank$,avg:agav[$F],min:agav[$F+10],max:agav[$F+20],avgMin:agav[10],avgMax:agav[20],avgAvg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 if($F==8){
 var $r8=t($8);
 r($r8);
