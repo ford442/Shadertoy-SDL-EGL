@@ -30,7 +30,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 GLuint uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-GLfloat Ttime,Dtime;
+float Ttime,Dtime;
 EGLint iFrame;
 EGLint jFrame=0,jVid=0;
 static GLsizei s4=4;
