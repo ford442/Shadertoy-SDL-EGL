@@ -147,7 +147,7 @@ glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
 clickLoc=true;
 }
-if(jVid<floor(Dtime/Tm)){
+if(jVid<floor(Ttime/Tm)){
 jVid++;
 Tm=EM_ASM_INT({return parseInt(document.getElementById('tim').innerHTML,10);});
 Tm=Tm/1000;
@@ -155,7 +155,7 @@ EM_ASM({
 Module.HEAPF32.set(1,82933041,1);
 });
 }
-if(jFrame<floor(Dtime/0.01666666)){
+if(jFrame<floor(Ttime/0.01666666)){
 jFrame++;
 EM_ASM({
 Module.HEAPF32.set(1,82933040,1);
@@ -170,9 +170,7 @@ eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
-duration<double>time_spanb=duration_cast<duration<double>>(t2);
 Ttime=time_spana.count();
-Dtime=time_spanb.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
