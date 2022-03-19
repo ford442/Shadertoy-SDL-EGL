@@ -71,7 +71,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -164,7 +164,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
- glFinish();
+// glFinish();
 // nanosleep(&req,&rem);
 iFrame++;
 }
@@ -371,20 +371,28 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("balanced").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("balanced").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var alph=((((this.constants.fmax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.amin/2))*0.75)+(this.constants.amin/2))+(((1.0-(this.constants.amax))*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.75)/2))/6;
 var aveg=1.0-(((p[3])-(alph))*((this.constants.fmax-this.constants.favg)/(p[3]-this.constants.favg)));
-this.color(p[0],p[1],p[2],aveg);
-}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+var red=p[0];
+var green=p[1];
+var blue=p[2];
+if(aveg<0.22){
+red=0.0;
+green=0.0;
+blue=0.0;
+}
+this.color(red,green,blue,aveg);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
@@ -489,7 +497,7 @@ $9.set($bb,0,sz);
 setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
 M();
-},42);
+},33.3);
 }
 M();
 document.getElementById("di").onclick=function(){
