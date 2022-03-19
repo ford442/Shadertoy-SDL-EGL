@@ -370,7 +370,7 @@ let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,pres
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.742201) + b) + (((c - d) * 0.7501) + d) + (((1.0 - (b / 2)) * 0.74999) + (b/2)) + (((1.0 - (c)) * 0.75111)) + ((0.7500303 - (0.7509 * (e - g) / (c-f)))) + ((f + 0.74955) / 2)) / 6) ;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.742201) + b) + (((c - d) * 0.7501) + d) + (((1.0 - (b / 2.0)) * 0.74999) + (b/2.0)) + (((1.0 - (c)) * 0.75111)) + ((0.7500303 - (0.7509 * (e - g) / (c-f)))) + ((f + 0.74955) / 2.0)) / 6.0) ;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
