@@ -186,11 +186,6 @@ aLoc[F+20]=max;
 aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8;
 aLoc[10]=(aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18])/8;
 aLoc[20]=(aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28])/8;
-if (aLoc[0]>0.5){
-timeSpeed=1.0-aLoc[F];
-}else{
-timeSpeed=1.0+aLoc[F];
-}
 }
 
 static void strt(){
