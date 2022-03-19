@@ -165,7 +165,7 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
  glFinish();
- nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -371,20 +371,20 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+}).setTactic("balanced").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var alph=((((this.constants.fmax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.amin/2))*0.75)+(this.constants.amin/2))+(((1.0-(this.constants.amax))*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.75)/2))/6;
 var aveg=1.0-(((p[3])-(alph))*((this.constants.fmax-this.constants.favg)/(p[3]-this.constants.favg)));
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
