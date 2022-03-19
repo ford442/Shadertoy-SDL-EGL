@@ -365,7 +365,10 @@ let contx2=bcanvas.getContext('webgl2',{alpha:false,stencil:false,depth:false,pr
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU({canvas:bcanvas,webGl:contx2});
 const glslAve=`float Ave(float a, float b,float c) {return (a + b + c) / 3.0 ;}`;
+const glslAlphe=`float Alphe(float a, float b, float c, float d, float e, float f, float g) {return (((((a - b) * 0.7422) + b) + (((c - d) * 0.742) + d) + (((1.0 - (d / 2)) * 0.7422) + (d/2)) + (((1.0 - (c)) * 0.7422)) + ((0.7422 - (0.7422 * (e - g) / (c-f)))) + ((f + 0.7422) / 2)) / 6) ;}`;
+
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 
 let R=g2.createKernel(function(tv){
@@ -381,7 +384,7 @@ return[P[0],P[1],P[2],av$];
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var alph=((((this.constants.fmax-this.constants.fmin)*0.7422)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.742)+this.constants.amin)+(((1.0-(this.constants.amin/2))*0.7422)+(this.constants.amin/2))+(((1.0-(this.constants.amax))*0.7422))+((0.7422-(0.7422*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.7422)/2))/6;
+var alph=Alphe($fmax,$fmin,$amax,$amin,$fmax,$aavg,p[3]);
 var aveg=1.0-(((p[3])-(alph))*((p[3])*(1.0/(1.0-alph))));
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
