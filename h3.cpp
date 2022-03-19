@@ -381,7 +381,7 @@ return[P[0],P[1],P[2],av$];
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var alph=((((this.constants.fmax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.amin/2))*0.75)+(this.constants.amin/2))+(((1.0-(this.constants.amax))*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.75)/2))/6;
+var alph=((((this.constants.amax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.amin/2))*0.75)+(this.constants.amin/2))+(((1.0-(this.constants.amax))*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.75)/2))/6;
 var aveg=1.0-(((p[3])-(alph))*((this.constants.amax-this.constants.favg)/(p[3]-this.constants.favg)));
 var red=p[0];
 var green=p[1];
