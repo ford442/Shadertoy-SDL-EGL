@@ -381,7 +381,7 @@ return[P[0],P[1],P[2],av$];
   
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var alph=((((this.constants.fmax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.fmin*2))*0.75))+(((this.constants.amax/2)*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.fmax-this.constants.aavg))))+((this.constants.favg+0.75)/2))/6;
+var alph=((((this.constants.fmax-this.constants.fmin)*0.75)+this.constants.fmin)+(((this.constants.amax-this.constants.amin)*0.75)+this.constants.amin)+(((1.0-(this.constants.fmin*2))*0.75))+(((this.constants.amax/2)*0.75))+((0.75-(0.75*(this.constants.favg-p[3])/(this.constants.amax-this.constants.aavg))))+((this.constants.aavg+0.75)/2))/6;
 var aveg=1.0-(((p[3])-(alph))*((p[3])*(1.0/(1.0-alph))));
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
