@@ -387,6 +387,11 @@ var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
   
+let tA=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+return[0.0,0.0,0.0,p[3]];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+  
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
@@ -450,7 +455,8 @@ rA.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 if($F==8){
 var $r8=t($8);
-rA($r8);
+var $r8A=tA($8);
+rA($r8A);
 r($r8);
 var $$4=t(vv);
 $4.set($$4);
@@ -458,7 +464,8 @@ $F=1;
 }
 if($F==7){ 
 var $r7=t($7);
-rA($r7);
+var $r7A=tA($7);
+rA($r7A);
 r($r7);
 var $$3=t(vv);
 $3.set($$3);
@@ -466,7 +473,8 @@ $F=8;
 }
 if($F==6){  
 var $r6=t($6);
-rA($r6);
+var $r6A=tA($6);
+rA($r6A);
 r($r6);
 var $$2=t(vv);
 $2.set($$2);
@@ -474,7 +482,8 @@ $F=7;
 }
 if($F==5){  
 var $r5=t($5);
-rA($r5);
+var $r5A=tA($5);
+rA($r5A);
 r($r5);
 var $$1=t(vv);
 $1.set($$1);
@@ -482,7 +491,8 @@ $F=6;
 }
 if($F==4){  
 var $r4=t($4);
-rA($r4);
+var $r4A=tA($4);
+rA($r4A);
 r($r4);
 var $$8=t(vv);
 $8.set($$8);
@@ -490,7 +500,8 @@ $F=5;
 }
 if($F==3){  
 var $r3=t($3);
-rA($r3);
+var $r3A=tA($3);
+rA($r3A);
 r($r3);
 var $$7=t(vv);
 $7.set($$7);
@@ -498,7 +509,8 @@ $F=4;
 }  
 if($F==2){
 var $r2=t($2);
-rA($r2);
+var $r2A=tA($2);
+rA($r2A);
 r($r2);
 var $$6=t(vv);
 $6.set($$6);
@@ -506,7 +518,8 @@ $F=3;
 }
 if($F==1){
 var $r1=t($1);
-rA($r1);
+var $r1A=tA($1);
+rA($r1A);
 r($r1);
 var $$5=t(vv);
 $5.set($$5);
