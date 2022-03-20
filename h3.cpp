@@ -505,7 +505,9 @@ M();
 M();
 document.getElementById("di").onclick=function(){
 T=true;
+  setTimeout(function(){
 S();
+  },400);
 };
 return()=>{
 T=true;
