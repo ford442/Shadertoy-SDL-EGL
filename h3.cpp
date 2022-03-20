@@ -452,6 +452,7 @@ function M(){
 rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
+if(T){return;}
 if($F==8){
 var $r8=t($8);
 rA($r8);
@@ -516,7 +517,6 @@ var $$5=t(vv);
 $5.set($$5);
 $F=2;
 }
-if(T){return;}
 var $bb=R(vv);
 $9.set($bb,0,sz);
 setTimeout(function(){
