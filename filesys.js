@@ -2,10 +2,10 @@ let bz=new BroadcastChannel('bez');
 document.getElementById('btn').addEventListener('click',function(){
 let hi=window.innerHeight;
 let wi=window.innerWidth;
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById("circle").width=wi;
-document.getElementById("circle").height=hi;
-document.getElementById("di").click();
+// document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById("circle").width=wi;
+// document.getElementById("circle").height=hi;
+// document.getElementById("di").click();
 bz.postMessage({
 data:222
 });});
@@ -21,7 +21,7 @@ pll();
 });
 
 document.getElementById('btn3').addEventListener('click',function(){
-window.open('https://b3hd.1ink.us/flac');
+window.open('https://test.1ink.us/libflac.js');
 });
 
 document.getElementById('btn2').addEventListener('click',function(){
@@ -32,7 +32,7 @@ document.getElementById('btn2').style.border="5px solid red";
 document.getElementById('btn2').style.background="red";
 document.getElementById('btn').style.border="5px solid green";
 document.getElementById('btn7').style.border="5px solid green";
-document.getElementById('di').click();
+// document.getElementById('di').click();
 });
 
 document.getElementById('btn').addEventListener('click',function(){
@@ -51,7 +51,7 @@ document.getElementById("scanvas").style="position:absolute;top:0;background-col
 document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById("circle").height=window.innerHeight;
 document.getElementById("circle").width=window.innerWidth;
-document.getElementById('di').click();
+// document.getElementById('di').click();
 });
 
 document.getElementById('btn7').addEventListener('click',function(){
@@ -64,5 +64,5 @@ document.getElementById('btn6').style="background-color:yellow;position:absolute
 document.getElementById('btn').style="background-color:red;position:absolute;display:block;left:3%;top:23%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById('btn7').style="background-color:red;position:absolute;display:block;left:3%;top:63%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById('shut').innerHTML=2;
-document.getElementById('di').click();
+// document.getElementById('di').click();
 });
