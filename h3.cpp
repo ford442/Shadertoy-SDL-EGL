@@ -403,9 +403,9 @@ this.color(p[0],p[1],p[2],aveg);
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var avrg=1.0-pd[3];
-var red=1.0-p[0];
-var green=1.0-p[1];
-var blue=1.0-p[2];
+var red=1.0-pd[0];
+var green=1.0-pd[1];
+var blue=1.0-pd[2];
 this.color(red,green,blue,avrg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
