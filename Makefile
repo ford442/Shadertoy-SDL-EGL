@@ -6,26 +6,6 @@ tst1: main.cpp  Makefile
 -O3 -std=c++17 -o shader.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
 
-tst8b: egl4b.cpp  Makefile
-	em++ egl4b.cpp -std=c++2b -O2 -sFULL_ES2=1 -sFULL_ES3=1 \
--sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
--o sh1t.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
-
-tst9: egl5.cpp  Makefile
-	em++ egl5.cpp -std=c++2b -O2 -sFULL_ES2=1 -sFULL_ES3=1 \
--sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--DNDEBUG -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
--o sh9.js -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---extern-post-js filesysNoSDL.js --extern-post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
-
-sdl: sdl.cpp  Makefile
-	em++ sdl.cpp -std=gnu++2b --closure 0 -O2 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sGL_TESTING=1 \
--sUSE_WEBGL2=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=256mb -sMALLOC="emmalloc" \
--o sdl.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js
 
 
 tst8c: glsl_loader2.cpp  Makefile
