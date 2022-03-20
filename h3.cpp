@@ -407,7 +407,8 @@ this.color(p[0],p[1],p[2],aveg);
 
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-this.color(1.0,1.0,1.0,pd[3]);
+var AlphB=1.0-pd[3];
+this.color(1.0,1.0,1.0,AlphB);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
