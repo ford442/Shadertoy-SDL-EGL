@@ -361,9 +361,12 @@ agav.fill(avag,0,10);
 agav.fill(min,10,10);
 agav.fill(max,20,10);
 let bcanvas=document.getElementById("bcanvas");
+let acanvas=document.getElementById("acanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx2=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
+let g3=new GPU(canvas:acanvas,webGl:contx2);
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.742201) + b) + (((c - d) * 0.7501) + d) + (((1.0 - (b / 2.0)) * 0.74999) + (b/2.0)) + (((1.0 - (c)) * 0.75111)) + ((0.7500303 - (0.7509 * (e - g) / (c-f)))) + ((f + 0.74955) / 2.0)) / 6.0) ;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
@@ -395,7 +398,12 @@ var $aavg=this.constants.aavg;
 var alph=Alphe($fmax,$fmin,$amax,$amin,$favg,$aavg,p[3]);
 var aveg=Aveg(p[3],alph);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+
+let rA=g.createKernel(function(fa){
+var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+this.color(1.0,1.0,1.0,pd[3]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
@@ -441,6 +449,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:ag
 if($F==8){
 var $r8=t($8);
 r($r8);
+rA($r8);
 var $$4=t(vv);
 $4.set($$4);
 $F=1;
@@ -448,6 +457,7 @@ $F=1;
 if($F==7){ 
 var $r7=t($7);
 r($r7);
+rA($r7);
 var $$3=t(vv);
 $3.set($$3);
 $F=8;
@@ -455,6 +465,7 @@ $F=8;
 if($F==6){  
 var $r6=t($6);
 r($r6);
+rA($r6);
 var $$2=t(vv);
 $2.set($$2);
 $F=7;
@@ -462,6 +473,7 @@ $F=7;
 if($F==5){  
 var $r5=t($5);
 r($r5);
+rA($r5);
 var $$1=t(vv);
 $1.set($$1);
 $F=6;
@@ -469,6 +481,7 @@ $F=6;
 if($F==4){  
 var $r4=t($4);
 r($r4);
+rA($r4);
 var $$8=t(vv);
 $8.set($$8);
 $F=5;
@@ -476,6 +489,7 @@ $F=5;
 if($F==3){  
 var $r3=t($3);
 r($r3);
+rA($r3);
 var $$7=t(vv);
 $7.set($$7);
 $F=4;
@@ -483,6 +497,7 @@ $F=4;
 if($F==2){
 var $r2=t($2);
 r($r2);
+rA($r2);
 var $$6=t(vv);
 $6.set($$6);
 $F=3;
@@ -490,6 +505,7 @@ $F=3;
 if($F==1){
 var $r1=t($1);
 r($r1);
+rA($r1);
 var $$5=t(vv);
 $5.set($$5);
 $F=2;
