@@ -349,7 +349,7 @@ opn_aud();
 
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('iwid').innerHTML,10);
-var h$=parseInt(window.innerHeight,10);
+var h$=parseInt(document.getElementById('ihig').innerHTML,10);
   console.log("starting EM_JS  -  got width:"+w$+" / height:"+w$);
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
@@ -400,8 +400,8 @@ this.color(p[0],p[1],p[2],aveg);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
-var w$=document.getElementById('iwid').innerHTML;
-var h$=parseInt(window.innerHeight,10);
+var w$=parseInt(document.getElementById('iwid').innerHTML,10);
+var h$=parseInt(document.getElementById('ihig').innerHTML,10);
     console.log("stating setup  -  got width:"+w$+" / height:"+w$);
 
 vv=document.getElementById("mv");
