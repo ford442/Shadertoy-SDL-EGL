@@ -363,7 +363,7 @@ agav.fill(max,20,10);
 let bcanvas=document.getElementById("bcanvas");
 let acanvas=document.getElementById("acanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let contx2=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx2=acanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let g3=new GPU(canvas:acanvas,webGl:contx2);
@@ -403,7 +403,7 @@ this.color(p[0],p[1],p[2],aveg);
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 this.color([1.0],[1.0],[1.0],pd[3]);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
