@@ -442,6 +442,7 @@ var $9=new Float32Array($H,82944000,sz);
 let $F=1;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
+tA.setConstants({nblnk:nblank$,blnk:blank$});
 rA.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 $1.set($$1);
@@ -452,6 +453,7 @@ var T=false;
 
 function M(){
 rA.setConstants({nblnk:nblank$,blnk:blank$});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 if($F==8){
 var $r8=t($8);
