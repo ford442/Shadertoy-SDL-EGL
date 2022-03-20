@@ -361,6 +361,8 @@ var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
+ var point1=0; var $1=new Float32Array($H,point1,la); var point2=1*la; var $2=new Float32Array($H,point2,la); var point3=2*la; var $3=new Float32Array($H,point3,la); var point4=3*la; var $4=new Float32Array($H,point4,la); var point5=4*la; var $5=new Float32Array($H,point5,la); var point6=5*la; var $6=new Float32Array($H,point6,la); var point7=6*la; var $7=new Float32Array($H,point7,la); var point8=7*la; var $8=new Float32Array($H,point8,la); var point9=8*la; var $9=new Float32Array($H,point9,la); var point10=9*la; var $10=new Float32Array($H,point10,la); var point11=10*la; var $11=new Float32Array($H,point11,la); var point12=11*la; var $12=new Float32Array($H,point12,la); var point13=12*la; var $13=new Float32Array($H,point13,la); var point14=13*la; var $14=new Float32Array($H,point14,la); var point15=14*la; var $15=new Float32Array($H,point15,la); var point16=15*la; var $16=new Float32Array($H,point16,la); var point17=16*la; var $17=new Float32Array($H,point17,la); var point18=17*la; var $18=new Float32Array($H,point18,la); var point19=18*la; var $19=new Float32Array($H,point19,la); var point20=19*la; var $20=new Float32Array($H,point20,la); var point21=20*la; var $21=new Float32Array($H,point21,la); var point22=21*la; var $22=new Float32Array($H,point22,la); var point23=22*la; var $23=new Float32Array($H,point23,la); var point24=23*la; var $24=new Float32Array($H,point24,la); var point25=24; var $25=new Float32Array($H,point25,la); var point26=25*la; var $26=new Float32Array($H,point26,la); var point27=26*la; var $27=new Float32Array($H,point27,la); var point28=27*la; var $28=new Float32Array($H,point28,la); var point29=28*la; var $29=new Float32Array($H,point29,la); var point30=29*la; var $30=new Float32Array($H,point30,la); var point31=30*la; var $31=new Float32Array($H,point31,la); var point32=31*la; var $32=new Float32Array($H,point32,la); var point9=8*la; var $B=new Float32Array($H,82944000,sz);
+
 var agav=new Float32Array($H,82933000,500);
 var sz=(h$*h$)/8;
 var avag=0.750;
@@ -415,9 +417,7 @@ var avrg=((1.0-Ave(pd[0],pd[1],pd[2])-0.75)*(Ave(pd[0],pd[1],pd[2])*4.0))/2;
 this.color(pd[0],pd[1],pd[2],avrg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 let $F=1;
-rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
