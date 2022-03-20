@@ -284,9 +284,9 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
-// glEnable(GL_BLEND);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ glEnable(GL_BLEND);
+ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
@@ -368,7 +368,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let g3=new GPU({canvas:acanvas,webGl:contx2});
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.742201) + b) + (((c - d) * 0.7501) + d) + (((1.0 - (b / 2.0)) * 0.74999) + (b/2.0)) + (((1.0 - (c)) * 0.75111)) + ((0.2500303 - (0.2509 * (e - g) / (c-f)))) + ((f + 0.24955) / 2.0)) / 6.0) ;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.242201) + b) + (((c - d) * 0.2501) + d) + (((1.0 - (b / 2.0)) * 0.24999) + (b/2.0)) + (((1.0 - (c)) * 0.25111)) + ((0.2500303 - (0.2509 * (e - g) / (c-f)))) + ((f + 0.24955) / 2.0)) / 6.0) ;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -402,7 +402,7 @@ this.color(p[0],p[1],p[2],aveg);
 
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var avrg=1.0-pd[3];
+var avrg=1.0-p[3];
 var red=1.0-pd[0];
 var green=1.0-pd[1];
 var blue=1.0-pd[2];
