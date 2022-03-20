@@ -368,7 +368,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let g3=new GPU({canvas:acanvas,webGl:contx2});
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((((a - b) * 0.724224201) + b) + (((c - d) * 0.725424201) + d) + (((1.0 - (b / 2.0)) * 0.7205) + (b/2.0)) + (((1.0 - (c)) * 0.75)) + ((0.7550420303 - (0.75424209 * (e - g) / (c-f)))) + ((f + 0.2492455) / 2.0)) + 0.75) / 7.0) ;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((((c - d) * 0.724224201) + c) + (((c - d) * 0.725424201) + d) + (((1.0 - (d / 2.0)) * 0.7205) + (d/2.0)) + (((1.0 - (c)) * 0.75)) + ((0.7550420303 - (0.75424209 * (f - e) / (c-f)))) + ((f + e) / 2.0)) + g) / 7.0) ;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -402,8 +402,8 @@ this.color(p[0],p[1],p[2],aveg);
 
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var avrg=pd[3];
-this.color(pd[0],pd[1],pd[2],0.1);
+var avrg=(1.0-pd[3])/4;
+this.color(pd[0],pd[1],pd[2],avrg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
