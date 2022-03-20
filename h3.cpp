@@ -348,8 +348,8 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
+var w$=parseInt(document.getElementById('iwid').innerHTML,10);
+var h$=parseInt(window.innerHeight,10);
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,82933000,30);
@@ -400,8 +400,8 @@ this.color(p[0],p[1],p[2],aveg);
 let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
 var w$=document.getElementById('iwid').innerHTML;
-var h$=document.getElementById('ihig').innerHTML;
-var vv=document.getElementById("mv");
+var h$=parseInt(window.innerHeight,10);
+vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
