@@ -179,7 +179,7 @@ sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
-sum=sum/(float)leng;
+sum=sum/leng;
 aLoc[F]=sum;
 aLoc[F+100]=min;
 aLoc[F+200]=max;
