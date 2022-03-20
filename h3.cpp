@@ -402,7 +402,7 @@ this.color(p[0],p[1],p[2],aveg);
 
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-this.color(1.0,1.0,1.0,pd[3]);
+this.color([1.0],[1.0],[1.0],pd[3]);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
@@ -437,6 +437,7 @@ var $9=new Float32Array($H,82944000,sz);
 let $F=1;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 $1.set($$1);
 $2.set($$1);
