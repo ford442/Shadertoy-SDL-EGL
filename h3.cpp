@@ -350,7 +350,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-  console.log("starting EM_JS  -  got width:"+w$+" / height:"+w$);
+  console.log("starting EM_JS  -  got width:"+w$+" / height:"+h$);
 var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,82933000,30);
@@ -402,7 +402,7 @@ let d=S();if(d)d();d=S();function S(){
 var agav=new Float32Array($H,82933000,30);
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-    console.log("stating setup  -  got width:"+w$+" / height:"+w$);
+    console.log("stating setup  -  got width:"+w$+" / height:"+h$);
 
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
