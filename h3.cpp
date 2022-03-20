@@ -509,10 +509,8 @@ M();
 document.getElementById("di").onclick=function(){
 T=true;
   console.log("got click - ");
-  setTimeout(function(){
     console.log("restarting setup");
 S();
-  },400);
 };
 return()=>{
 T=true;
