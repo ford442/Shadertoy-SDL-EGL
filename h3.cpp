@@ -59,8 +59,8 @@ EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-// struct timespec rem;
-// struct timespec req={0,16666666};
+ struct timespec rem;
+ struct timespec req={0,16666666};
 // struct timespec req={0,33100000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -166,7 +166,7 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
  glFinish();
-// nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -187,9 +187,9 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
 for (int i=1;i<33;i=i){
-avgSum+=dat[i];
-minSum+=dat[i+100];
-maxSum+=dat[i+200];
+avgSum+=aLoc[i];
+minSum+=aLoc[i+100];
+maxSum+=aLoc[i+200];
 }
 aLoc[0]=avgSum/32;
 aLoc[100]=minSum/32;
