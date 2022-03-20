@@ -350,7 +350,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.getElementById("mv");
+vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,82933000,30);
 var sz=(h$*h$)/8;
@@ -386,12 +386,7 @@ var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-  
-let tA=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-return[0.0,0.0,0.0,p[3]];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-  
+
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
@@ -422,6 +417,7 @@ var l=w$*h$*16;
 var la=h$*h$*4;
 var al=w$*h$*8;
 var sz=(h$*h$)/8;
+R.setOutput(sz);
 var point1=0;
 var $1=new Float32Array($H,point1,la);
 var point2=1*la;
