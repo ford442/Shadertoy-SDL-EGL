@@ -89,13 +89,13 @@ if(file){
 int status=fseek(file,0,SEEK_END);
 if(status!=0){
 fclose(file);
-return NULL;
+return nullptr;
 }
 length=ftell(file);
 status=fseek(file,0,SEEK_SET);
 if(status!=0){
 fclose(file);
-return NULL;
+return nullptr;
 }
 result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
 if(result){
@@ -105,7 +105,7 @@ result[actual_length++]={'\0'};
 fclose(file);
 return result;
 }
-return NULL;
+return nullptr;
 }
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
 GLsizei srclens[nsources];
@@ -179,7 +179,7 @@ sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
-sum=sum/leng;
+sum=sum/(float)leng;
 aLoc[F]=sum;
 aLoc[F+100]=min;
 aLoc[F+200]=max;
@@ -191,9 +191,9 @@ avgSum+=aLoc[i];
 minSum+=aLoc[i+100];
 maxSum+=aLoc[i+200];
 }
-aLoc[0]=avgSum/32;
-aLoc[100]=minSum/32;
-aLoc[200]=maxSum/32;
+aLoc[0]=avgSum/32.0;
+aLoc[100]=minSum/32.0;
+aLoc[200]=maxSum/32.0;
 }
 
 static void strt(){
