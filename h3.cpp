@@ -520,8 +520,7 @@ $F=3;
 }
 if($F==1){
 var $r1=t($1);
-var $r1A=tA($1);
-rA($r1A);
+rA($r1);
 r($r1);
 var $$5=t(vv);
 $5.set($$5);
