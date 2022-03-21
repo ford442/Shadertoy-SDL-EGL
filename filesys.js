@@ -1,11 +1,5 @@
 let bz=new BroadcastChannel('bez');
 document.getElementById('btn').addEventListener('click',function(){
-let hi=window.innerHeight;
-let wi=window.innerWidth;
-// document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-// document.getElementById("circle").width=wi;
-// document.getElementById("circle").height=hi;
-// document.getElementById("di").click();
 bz.postMessage({
 data:222
 });});
