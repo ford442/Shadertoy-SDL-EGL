@@ -43,7 +43,7 @@ heap: h3.cpp  Makefile
 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" -ffast-math \
 -o g3004.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js \
---extern-post-js cl-gpu.js
+--extern-pre-js cl-gpu.js
 
 heap-devel: h3.cpp  Makefile
 	em++ h3.cpp -g -std=gnu++2b --closure 0 -O2 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sGL_TESTING=1 \
