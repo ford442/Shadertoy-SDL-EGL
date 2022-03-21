@@ -183,9 +183,9 @@ sum=sum/leng;
 aLoc[F]=sum;
 aLoc[F+100]=min;
 aLoc[F+200]=max;
-aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8]+aLoc[9]+aLoc[10]+aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18]+aLoc[19]+aLoc[20]+aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28]+aLoc[29]+aLoc[30]+aLoc[31]+aLoc[32)/32;
-aLoc[100]=(aLoc[101]+aLoc[102]+aLoc[103]+aLoc[104]+aLoc[105]+aLoc[106]+aLoc[107]+aLoc[108]+aLoc[109]+aLoc[110]+aLoc[111]+aLoc[112]+aLoc[113]+aLoc[114]+aLoc[115]+aLoc[116]+aLoc[117]+aLoc[118]+aLoc[119]+aLoc[120]+aLoc[121]+aLoc[122]+aLoc[123]+aLoc[124]+aLoc[125]+aLoc[126]+aLoc[127]+aLoc[128]+aLoc[129]+aLoc[130]+aLoc[131]+aLoc[132)/32;
-aLoc[200]=(aLoc[201]+aLoc[202]+aLoc[203]+aLoc[204]+aLoc[205]+aLoc[206]+aLoc[207]+aLoc[208]+aLoc[209]+aLoc[210]+aLoc[211]+aLoc[212]+aLoc[213]+aLoc[214]+aLoc[215]+aLoc[216]+aLoc[217]+aLoc[218]+aLoc[219]+aLoc[220]+aLoc[221]+aLoc[222]+aLoc[223]+aLoc[224]+aLoc[225]+aLoc[226]+aLoc[227]+aLoc[228]+aLoc[229]+aLoc[230]+aLoc[231]+aLoc[232)/32;
+aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8]+aLoc[9]+aLoc[10]+aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18]+aLoc[19]+aLoc[20]+aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28]+aLoc[29]+aLoc[30]+aLoc[31]+aLoc[32])/32;
+aLoc[100]=(aLoc[101]+aLoc[102]+aLoc[103]+aLoc[104]+aLoc[105]+aLoc[106]+aLoc[107]+aLoc[108]+aLoc[109]+aLoc[110]+aLoc[111]+aLoc[112]+aLoc[113]+aLoc[114]+aLoc[115]+aLoc[116]+aLoc[117]+aLoc[118]+aLoc[119]+aLoc[120]+aLoc[121]+aLoc[122]+aLoc[123]+aLoc[124]+aLoc[125]+aLoc[126]+aLoc[127]+aLoc[128]+aLoc[129]+aLoc[130]+aLoc[131]+aLoc[132])/32;
+aLoc[200]=(aLoc[201]+aLoc[202]+aLoc[203]+aLoc[204]+aLoc[205]+aLoc[206]+aLoc[207]+aLoc[208]+aLoc[209]+aLoc[210]+aLoc[211]+aLoc[212]+aLoc[213]+aLoc[214]+aLoc[215]+aLoc[216]+aLoc[217]+aLoc[218]+aLoc[219]+aLoc[220]+aLoc[221]+aLoc[222]+aLoc[223]+aLoc[224]+aLoc[225]+aLoc[226]+aLoc[227]+aLoc[228]+aLoc[229]+aLoc[230]+aLoc[231]+aLoc[232])/32;
 }
 
 static void strt(){
