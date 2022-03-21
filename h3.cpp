@@ -30,7 +30,7 @@ struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4];
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,Dtime;
+double Ttime,Dtime;
 EGLint iFrame;
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
@@ -60,8 +60,8 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
- struct timespec req={0,16666666};
-// struct timespec req={0,33100000};
+// struct timespec req={0,16666666};
+struct timespec req={0,33100000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -165,7 +165,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-// glFinish();
+ glFinish();
 // nanosleep(&req,&rem);
 iFrame++;
 }
@@ -181,8 +181,8 @@ if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
 sum=sum/leng;
 aLoc[F]=sum;
-aLoc[F+100]=min;
-aLoc[F+200]=max;
+aLoc[F+10]=min;
+aLoc[F+20]=max;
 aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8;
 aLoc[10]=(aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18])/8;
 aLoc[20]=(aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28])/8;
@@ -352,15 +352,14 @@ var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
- var avgptr=275420000;
-var agav=new Float32Array($H,avgptr,500);
+var agav=new Float32Array($H,82933000,30);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
-agav.fill(avag,0,33);
-agav.fill(min,10,33);
-agav.fill(max,20,33);
+agav.fill(avag,0,10);
+agav.fill(min,10,10);
+agav.fill(max,20,10);
 let bcanvas=document.getElementById("bcanvas");
 let acanvas=document.getElementById("acanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -408,8 +407,7 @@ this.color(pd[0],pd[1],pd[2],avrg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
-avgptr=275420000;
-var agav=new Float32Array($H,avgptr,30);
+var agav=new Float32Array($H,82933000,30);
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var vv=document.getElementById("mv");
@@ -436,10 +434,10 @@ var point7=6*la;
 var $7=new Float32Array($H,point7,la);
 var point8=7*la;
 var $8=new Float32Array($H,point8,la);
-var pointb=12*la;
-var $B=new Float32Array($H,pointb,sz);
+var point9=8*la;
+var $9=new Float32Array($H,82944000,sz);
 let $F=1;
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 rA.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
@@ -452,7 +450,7 @@ var T=false;
 function M(){
 rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
 if(T){return;}
 if($F==8){
 var $r8=t($8);
@@ -519,9 +517,9 @@ $5.set($$5);
 $F=2;
 }
 var $bb=R(vv);
-$B.set($bb,0,sz);
+$9.set($bb,0,sz);
 setTimeout(function(){
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[avgptr]);
+Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[82944000],[82933000]);
 M();
 },16.666);
 }
