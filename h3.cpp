@@ -166,7 +166,7 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
  glFinish();
-// nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -181,11 +181,11 @@ if(min>dat[i]&&dat[i]>0){min=dat[i];}
 }
 sum=sum/leng;
 aLoc[F]=sum;
-aLoc[F+10]=min;
-aLoc[F+20]=max;
+aLoc[F+100]=min;
+aLoc[F+200]=max;
 aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8;
-aLoc[10]=(aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18])/8;
-aLoc[20]=(aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28])/8;
+aLoc[100]=(aLoc[111]+aLoc[112]+aLoc[113]+aLoc[114]+aLoc[115]+aLoc[116]+aLoc[117]+aLoc[118])/8;
+aLoc[200]=(aLoc[221]+aLoc[222]+aLoc[223]+aLoc[224]+aLoc[225]+aLoc[226]+aLoc[227]+aLoc[228])/8;
 }
 
 static void strt(){
@@ -352,14 +352,14 @@ var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-var agav=new Float32Array($H,82933000,30);
+var agav=new Float32Array($H,82933000,300);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
 agav.fill(avag,0,10);
-agav.fill(min,10,10);
-agav.fill(max,20,10);
+agav.fill(min,100,10);
+agav.fill(max,200,10);
 let bcanvas=document.getElementById("bcanvas");
 let acanvas=document.getElementById("acanvas");
 let contx=bcanvas.getContext('webgl2',{alpha:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
@@ -407,7 +407,7 @@ this.color(pd[0],pd[1],pd[2],avrg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 let d=S();if(d)d();d=S();function S(){
-var agav=new Float32Array($H,82933000,30);
+var agav=new Float32Array($H,82933000,300);
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var vv=document.getElementById("mv");
@@ -450,7 +450,7 @@ var T=false;
 function M(){
 rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+10],fmax:agav[$F+20],amin:agav[10],amax:agav[20],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 if($F==8){
 var $r8=t($8);
