@@ -429,9 +429,11 @@ var point31=30*la;
 var $31=new Float32Array($H,point31,la);
 var point32=31*la;
 var $32=new Float32Array($H,point32,la);
-var point9=8*la;
-var $B=new Float32Array($H,265420900,sz);
-var agav=new Float32Array($H,275420000,500);
+var pointB=32*la;
+var $B=new Float32Array($H,pointB,sz);
+  avgptr=275420000;
+
+var agav=new Float32Array($H,avgptr,500);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
@@ -504,7 +506,7 @@ $14.set($$1);
 $15.set($$1);
 $16.set($$1);
 let d=S();if(d)d();d=S();function S(){
-var agav=new Float32Array($H,275420000,500);
+var agav=new Float32Array($H,avgptr,500);
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var vv=document.getElementById("mv");
@@ -580,8 +582,8 @@ var point31=30*la;
 var $31=new Float32Array($H,point31,la);
 var point32=31*la;
 var $32=new Float32Array($H,point32,la);
-var point9=8*la;
-var $B=new Float32Array($H,265420900,sz);
+var pointB=32*la;
+var $B=new Float32Array($H,pointB,sz);
 var T=false;
 
 function M(){
@@ -849,7 +851,7 @@ $F=2;
 var $bb=R(vv);
 $B.set($bb,0,sz);
 setTimeout(function(){
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[265420900],[275420000]);
+Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointB],[avgptr]);
 M();
 },16.666);
 }
