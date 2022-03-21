@@ -515,7 +515,262 @@ rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
-if($F==32)var $r32=t($32)rA($r32)r($r32)var $$16=t(vv)$16.set($$16)$F=1if($F==31)var $r31=t($31)rA($r31)r($r31)var $$15=t(vv)$15.set($$15)$F=32if($F==30)var $r30=t($30)rA($r30)r($r30)var $$14=t(vv)$14.set($$14)$F=31if($F==29)var $r29=t($29)rA($r29)r($r29)var $$13=t(vv)$13.set($$13)$F=30if($F==28)var $r28=t($28)rA($r28)r($r28)var $$12=t(vv)$12.set($$12)$F=29if($F==27)var $r27=t($27)rA($r27)r($r27)var $$11=t(vv)$11.set($$11)$F=28if($F==26)var $r26=t($26)rA($r26)r($r26)var $$10=t(vv)$10.set($$10)$F=27if($F==25)var $r25=t($25)rA($r25)r($r25)var $$9=t(vv)$9.set($$9)$F=26if($F==24)var $r24=t($24)rA($r24)r($r24)var $$8=t(vv)$8.set($$8)$F=25if($F==23)var $r23=t($23)rA($r23)r($r23)var $$7=t(vv)$7.set($$7)$F=24if($F==22)var $r22=t($22)rA($r22)r($r22)var $$6=t(vv)$6.set($$6)$F=23if($F==21)var $r21=t($21)rA($r21)r($r21)var $$5=t(vv)$5.set($$5)$F=22if($F==20)var $r20=t($20)rA($r20)r($r20)var $$4=t(vv)$4.set($$4)$F=21if($F==19)var $r19=t($19)rA($r19)r($r19)var $$3=t(vv)$3.set($$3)$F=20if($F==18)var $r18=t($18)rA($r18)r($r18)var $$2=t(vv)$2.set($$2)$F=19if($F==17)var $r17=t($17)rA($r17)r($r17)var $$1=t(vv)$1.set($$1)$F=18if($F==16)var $r16=t($16)rA($r16)r($r16)var $$32=t(vv)$32.set($$32)$F=17if($F==15)var $r15=t($15)rA($r15)r($r15)var $$31=t(vv)$31.set($$31)$F=16if($F==14)var $r14=t($14)rA($r14)r($r14)var $$30=t(vv)$30.set($$30)$F=15if($F==13)var $r13=t($13)rA($r13)r($r13)var $$29=t(vv)$29.set($$29)$F=14if($F==12)var $r12=t($12)rA($r12)r($r12)var $$28=t(vv)$28.set($$28)$F=13if($F==11)var $r11=t($11)rA($r11)r($r11)var $$27=t(vv)$27.set($$27)$F=12if($F==10)var $r10=t($10)rA($r10)r($r10)var $$26=t(vv)$26.set($$26)$F=11if($F==9)var $r9=t($9)rA($r9)r($r9)var $$25=t(vv)$25.set($$25)$F=10if($F==8)var $r8=t($8)rA($r8)r($r8)var $$24=t(vv)$24.set($$24)$F=9if($F==7)var $r7=t($7)rA($r7)r($r7)var $$23=t(vv)$23.set($$23)$F=8if($F==6)var $r6=t($6)rA($r6)r($r6)var $$22=t(vv)$22.set($$22)$F=7if($F==5)var $r5=t($5)rA($r5)r($r5)var $$21=t(vv)$21.set($$21)$F=6if($F==4)var $r4=t($4)rA($r4)r($r4)var $$20=t(vv)$20.set($$20)$F=5if($F==3)var $r3=t($3)rA($r3)r($r3)var $$19=t(vv)$19.set($$19)$F=4if($F==2)var $r2=t($2)rA($r2)r($r2)var $$18=t(vv)$18.set($$18)$F=3if($F==1)var $r1=t($1)rA($r1)r($r1)var $$17=t(vv)$17.set($$17)$F=2
+if($F==32){
+var $r32=t($32);
+rA($r32);
+r($r32);
+var $$16=t(vv);
+$16.set($$16);
+$F=1;
+}
+if($F==31){
+var $r31=t($31);
+rA($r31);
+r($r31);
+var $$15=t(vv);
+$15.set($$15);
+$F=32;
+}
+if($F==30){
+var $r30=t($30);
+rA($r30);
+r($r30);
+var $$14=t(vv);
+$14.set($$14);
+$F=31;
+}
+if($F==29){
+var $r29=t($29);
+rA($r29);
+r($r29);
+var $$13=t(vv);
+$13.set($$13);
+$F=30;
+}
+if($F==28){
+var $r28=t($28);
+rA($r28);
+r($r28);
+var $$12=t(vv);
+$12.set($$12);
+$F=29;
+}
+if($F==27){
+var $r27=t($27);
+rA($r27);
+r($r27);
+var $$11=t(vv);
+$11.set($$11);
+$F=28;
+}
+if($F==26){
+var $r26=t($26);
+rA($r26);
+r($r26);
+var $$10=t(vv);
+$10.set($$10);
+$F=27;
+}
+if($F==25){
+var $r25=t($25);
+rA($r25);
+r($r25);
+var $$9=t(vv);
+$9.set($$9);
+$F=26;
+}
+if($F==24){
+var $r24=t($24);
+rA($r24);
+r($r24);
+var $$8=t(vv);
+$8.set($$8);
+$F=25;
+}
+if($F==23){
+var $r23=t($23);
+rA($r23);
+r($r23);
+var $$7=t(vv);
+$7.set($$7);
+$F=24;
+}
+if($F==22){
+var $r22=t($22);
+rA($r22);
+r($r22);
+var $$6=t(vv);
+$6.set($$6);
+$F=23;
+}
+if($F==21){
+var $r21=t($21);
+rA($r21);
+r($r21);
+var $$5=t(vv);
+$5.set($$5);
+$F=22;
+}
+if($F==20){
+var $r20=t($20);
+rA($r20);
+r($r20);
+var $$4=t(vv);
+$4.set($$4);
+$F=21;
+}
+if($F==19){
+var $r19=t($19);
+rA($r19);
+r($r19);
+var $$3=t(vv);
+$3.set($$3);
+$F=20;
+}
+if($F==18){
+var $r18=t($18);
+rA($r18);
+r($r18);
+var $$2=t(vv);
+$2.set($$2);
+$F=19;
+}
+if($F==17){
+var $r17=t($17);
+rA($r17);
+r($r17);
+var $$1=t(vv);
+$1.set($$1);
+$F=18;
+}
+if($F==16){
+var $r16=t($16);
+rA($r16);
+r($r16);
+var $$32=t(vv);
+$32.set($$32);
+$F=17;
+}
+if($F==15){
+var $r15=t($15);
+rA($r15);
+r($r15);
+var $$31=t(vv);
+$31.set($$31);
+$F=16;
+}
+if($F==14){
+var $r14=t($14);
+rA($r14);
+r($r14);
+var $$30=t(vv);
+$30.set($$30);
+$F=15;
+}
+if($F==13){
+var $r13=t($13);
+rA($r13);
+r($r13);
+var $$29=t(vv);
+$29.set($$29);
+$F=14;
+}
+if($F==12){
+var $r12=t($12);
+rA($r12);
+r($r12);
+var $$28=t(vv);
+$28.set($$28);
+$F=13;
+}
+if($F==11){
+var $r11=t($11);
+rA($r11);
+r($r11);
+var $$27=t(vv);
+$27.set($$27);
+$F=12;
+}
+if($F==10){
+var $r10=t($10);
+rA($r10);
+r($r10);
+var $$26=t(vv);
+$26.set($$26);
+$F=11;
+}
+if($F==9){
+var $r9=t($9);
+rA($r9);
+r($r9);
+var $$25=t(vv);
+$25.set($$25);
+$F=10;
+}
+if($F==8){
+var $r8=t($8);
+rA($r8);
+r($r8);
+var $$24=t(vv);
+$24.set($$24);
+$F=9;
+}
+if($F==7){
+var $r7=t($7);
+rA($r7);
+r($r7);
+var $$23=t(vv);
+$23.set($$23);
+$F=8;
+}
+if($F==6){
+var $r6=t($6);
+rA($r6);
+r($r6);
+var $$22=t(vv);
+$22.set($$22);
+$F=7;
+}
+if($F==5){
+var $r5=t($5);
+rA($r5);
+r($r5);
+var $$21=t(vv);
+$21.set($$21);
+$F=6;
+}
+if($F==4){
+var $r4=t($4);
+rA($r4);
+r($r4);
+var $$20=t(vv);
+$20.set($$20);
+$F=5;
+}
+if($F==3){
+var $r3=t($3);
+rA($r3);
+r($r3);
+var $$19=t(vv);
+$19.set($$19);
+$F=4;
+}
+if($F==2){
+var $r2=t($2);
+rA($r2);
+r($r2);
+var $$18=t(vv);
+$18.set($$18);
+$F=3;
+}
+if($F==1){
+var $r1=t($1);
+rA($r1);
+r($r1);
+var $$17=t(vv);
+$17.set($$17);
+$F=2;
+}
 var $bb=R(vv);
 $B.set($bb,0,sz);
 setTimeout(function(){
