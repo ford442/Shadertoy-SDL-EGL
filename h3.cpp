@@ -368,7 +368,7 @@ let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let g3=new GPU({canvas:acanvas,webGl:contx2});
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.8) + b) + (((c - d) * 0.8) + d) + (((1.0 - (b / 2.0)) * 0.7) + (b/2.0)) + (((1.0 - (c)) * 0.7)) + ((0.7 - (0.7 * (e - g) / (c-f)))) + ((f + 0.7) / 2.0)) / 6.0) ;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((((a - b) * 0.6) + b) + (((c - d) * 0.6) + d) + (((1.0 - (b / 2.0)) * 0.7) + (b/2.0)) + (((1.0 - (c)) * 0.7)) + ((0.7 - (0.7 * (e - g) / (c-f)))) + ((f + 0.7) / 2.0)) / 6.0) ;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
