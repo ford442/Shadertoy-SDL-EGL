@@ -191,9 +191,9 @@ avgSum+=aLoc[i];
 minSum+=aLoc[i+10];
 maxSum+=aLoc[i+20];
 }
-aLoc[0]=avgSum/8;
-aLoc[10]=minSum/8;
-aLoc[20]=maxSum/8;
+aLoc[0]=avgSum/8.0;
+aLoc[10]=minSum/8.0;
+aLoc[20]=maxSum/8.0;
 }
 
 static void strt(){
