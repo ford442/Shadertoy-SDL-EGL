@@ -405,8 +405,8 @@ this.color(p[0],p[1],p[2],aveg);
 let rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var avrg=(1.0-Ave(pd[0],pd[1],pd[2])-0.75)*(Ave(pd[0],pd[1],pd[2])*4.0);
-this.color(pd[0],pd[1],pd[2],0.0666);
-}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
+this.color(pd[0],pd[1],pd[2],0.2);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
