@@ -186,7 +186,7 @@ aLoc[F+20]=max;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
-for (int i=1;i<8;i=i){
+for (int i=1;i<9;i=i){
 avgSum+=aLoc[i];
 minSum+=aLoc[i+10];
 maxSum+=aLoc[i+20];
