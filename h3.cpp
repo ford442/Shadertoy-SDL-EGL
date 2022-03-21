@@ -774,6 +774,7 @@ $F=2;
 var $bb=R(vv);
 $B.set($bb,0,sz);
 setTimeout(function(){
+var pointB=32*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
 },16.666);
