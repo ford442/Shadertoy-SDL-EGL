@@ -183,9 +183,17 @@ sum=sum/leng;
 aLoc[F]=sum;
 aLoc[F+10]=min;
 aLoc[F+20]=max;
-aLoc[0]=(aLoc[1]+aLoc[2]+aLoc[3]+aLoc[4]+aLoc[5]+aLoc[6]+aLoc[7]+aLoc[8])/8;
-aLoc[10]=(aLoc[11]+aLoc[12]+aLoc[13]+aLoc[14]+aLoc[15]+aLoc[16]+aLoc[17]+aLoc[18])/8;
-aLoc[20]=(aLoc[21]+aLoc[22]+aLoc[23]+aLoc[24]+aLoc[25]+aLoc[26]+aLoc[27]+aLoc[28])/8;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
+for (int i=1;i<33;i=i){
+avgSum+=aLoc[i];
+minSum+=aLoc[i+10];
+maxSum+=aLoc[i+20];
+}
+aLoc[0]=avgSum/32;
+aLoc[10]=minSum/32;
+aLoc[20]=maxSum/32;
 }
 
 static void strt(){
