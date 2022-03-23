@@ -408,7 +408,7 @@ var avG=Ave(pd[1],pd[1],1.0);
 var avRB=Ave(pd[0],pd[2],1.0);
 var gG=Aveg(avG,0.5);
 var gRB=Aveg(avRB,0.5);
-var aG=Math.max((gG-gRB,0.0);
+var aG=Math.max(gG-gRB,0.0);
 var gA=Aveg(aG,0.25);
 var gAlph=Math.max(gA,gRB);
 this.color(pd[0],pd[1],pd[2],gAlph);
