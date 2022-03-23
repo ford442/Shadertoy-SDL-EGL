@@ -40,7 +40,7 @@ gpu: avg.cpp  Makefile
 heap: h3.cpp  Makefile
 	em++ h3.cpp -DNDEBUG --closure 1 -g2 -std=gnu++2b -O1 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sGL_TESTING=1 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
--sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
+-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMAXIMUM_MEMORY=4GB \
 -o g3004.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js \
 
