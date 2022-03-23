@@ -421,12 +421,10 @@ var avRB=Ave(pd[0],pd[2],1.0);
 var gG=Aveg(avG,0.5);
 var gRB=Aveg(avRB,0.5);
 var aG=Math.max(gG-gRB,0.0);
-var gA=Aveg(aG,0.05);
+var gA=Aveg(aG,0.25);
 var gAlph=Math.max(gA,gRB);
-var THr=((this.constants.amax-this.constants.amin)*((pd[3]+this.constants.aavg)/2))+this.constants.amin;
 var aVgg=Math.max((Ave(pd[0],pd[1],pd[2])-0.75),0.0);
 var aV=gAlph+(aVgg*6.0);
-var outA=(aV+Thr)/2;
 this.color(0.0,pd[1],0.0,aV);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
@@ -451,8 +449,9 @@ var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 let $F=1;
 let $Bu=33;
-let $Ghost=30;
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 
 var $$1=t(vv);
 for (i=0;i<65;i++){
@@ -479,19 +478,21 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 
 function M(){
 var vv=document.getElementById("mv");
-rA.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
-var locc=$Ghost+1;if(locc>64){locc=1;}
-eval("if ($F=="+i+"){var $Gr"+$Ghost+"=t($"+$Ghost+");var $r"+i+"=t($"+i+");rA($Gr"+$Ghost+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";$Ghost="+locc+";}");
+eval("if ($F=="+i+"){var $Gr"+$Bu+"=t($"+$Bu+");var $r"+i+"=t($"+i+");rA($Gr"+$Bu+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
