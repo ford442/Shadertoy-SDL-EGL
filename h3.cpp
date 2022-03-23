@@ -516,7 +516,8 @@ $13.set($$1);
 $14.set($$1);
 $15.set($$1);
 $16.set($$1);
- 
+ let $F=1;
+
 let d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
@@ -596,7 +597,6 @@ var point32=31*la;
 var $32=new Float32Array($H,point32,la);
 var pointb=32*la;
 var $B=new Float32Array($H,pointb,sz);
-let $F=1;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 rA.setConstants({nblnk:nblank$,blnk:blank$});
