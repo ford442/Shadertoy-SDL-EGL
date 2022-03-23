@@ -382,7 +382,7 @@ var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 var g3=new GPU({canvas:acanvas,webGl:contx2});
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.75)+b))*(((a-b)*g)+b))+(((1.0*(floor(0.5/f)))*(((a-e)*g)+e))+((1.0*(floor(0.5/f)))*(((a-d)*0.75)+d)))+(((0.75*(1.0-a))+(((1.0-b)*g)+b))/2.0))/3.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.75)+b))*(((a-b)*g)+b))+(((1.0*(floor(0.5/f)))*(((a-e)*g)+e))+((1.0*(floor(0.5/f)))*(((a-d)*0.75)+d)))+(((0.75*(1.0-a))+(((1.0-b)*g)+b))/2.0)+0.75)/4.0);}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -423,8 +423,8 @@ var gRB=Aveg(avRB,0.5);
 var aG=Math.max(gG-gRB,0.0);
 var gA=Aveg(aG,0.25);
 var gAlph=Math.max(gA,gRB);
-var aVgg=Math.max((Ave(pd[0],pd[1],pd[2])-0.5),0.0);
-var aV=gAlph+(aVgg*4.0);
+var aVgg=Math.max((Ave(pd[0],pd[1],pd[2])-0.75),0.0);
+var aV=gAlph+(aVgg*6.0);
 this.color(0.0,pd[1],0.0,aV);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
