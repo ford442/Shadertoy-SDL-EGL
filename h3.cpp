@@ -422,10 +422,10 @@ var gG=Aveg(avG,0.5);
 var gRB=Aveg(avRB,0.5);
 var aG=Math.max(gG-gRB,0.0);
 var gA=Aveg(aG,0.25);
-var THr=((this.constants.amax-this.constants.amin)*(this.constants.aavg))+this.constants.amin;
-var outA=(gRB+Thr)/2.0;
-var gAlph=Math.max(gA,outA);
-this.color(0.0,pd[1],0.0,gAlph);
+var gAlph=Math.max(gA,gRB);
+var aVgg=Math.max((Ave(pd[0],pd[1],pd[2])-0.6),0.0);
+var aV=gAlph+(aVgg*5.0);
+this.color(pd[0],pd[1],pd[2],aV);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
@@ -451,7 +451,7 @@ let $F=1;
 let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-rA.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 
 var $$1=t(vv);
 for (i=0;i<65;i++){
@@ -480,12 +480,12 @@ var pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-rA.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 
 function M(){
 var vv=document.getElementById("mv");
-rA.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
