@@ -610,7 +610,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for (i=32;i>0;i--){
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");rA($r"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$+"+$Bu+".set($$"+$Bu+");}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");rA($r"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");}");
 var loca=$F+1;
 if (loca>32){loca=1;}
 var locb=$Bu+1;
