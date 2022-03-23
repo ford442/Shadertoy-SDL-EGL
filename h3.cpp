@@ -421,13 +421,12 @@ var avRB=Ave(pd[0],pd[2],1.0);
 var gG=Aveg(avG,0.5);
 var gRB=Aveg(avRB,0.5);
 var aG=Math.max(gG-gRB,0.0);
-var gA=Aveg(aG,0.05);
+var gA=Aveg(aG,0.35);
 var gAlph=Math.max(gA,gRB);
-var       aVgg=Math.max(0.6-((pd[0]+pd[1]+pd[2])/3.0),0.0);
-var aV=gAlph+(aVgg*6.0);
-  var     THr=(((this.constants.amax-this.constants.amin)*((((pd[0]+pd[1]+pd[2])/3.0))+this.constants.aavg)/2.0))+this.constants.amin;
-
-var outA=(aV+Thr)/2;
+var aVgg=Math.max(0.5-((pd[0]+pd[1]+pd[2])/3.0),0.0);
+var aV=gAlph+(aVgg*5.0);
+var THr=(((this.constants.amax-this.constants.amin)*(this.constants.aavg))+this.constants.amin;
+var outA=(aV+Thr)/2.0;
 this.color(0.0,pd[1],0.0,outA);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
