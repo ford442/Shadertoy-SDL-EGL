@@ -424,8 +424,9 @@ var aG=Math.max(gG-gRB,0.0);
 var gA=Aveg(aG,0.05);
 var gAlph=Math.max(gA,gRB);
 var       aVgg=Math.max(0.6-((pd[0]+pd[1]+pd[2])/3.0),0.0);
-var     THr=(((this.constants.amax-this.constants.amin)*((((pd[0]+pd[1]+pd[2])/3.0))+this.constants.aavg)/2.0))+this.constants.amin;
 var aV=gAlph+(aVgg*6.0);
+  var     THr=(((this.constants.amax-this.constants.amin)*((((pd[0]+pd[1]+pd[2])/3.0))+this.constants.aavg)/2.0))+this.constants.amin;
+
 var outA=(aV+Thr)/2;
 this.color(0.0,pd[1],0.0,outA);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
