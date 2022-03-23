@@ -516,7 +516,6 @@ $13.set($$1);
 $14.set($$1);
 $15.set($$1);
 $16.set($$1);
- let $F=1;
 
 let d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
