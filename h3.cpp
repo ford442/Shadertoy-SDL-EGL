@@ -376,8 +376,8 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 var bcanvas=document.getElementById("bcanvas");
 var acanvas=document.getElementById("acanvas");
-var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false});
-var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false});
+var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 var g3=new GPU({canvas:acanvas,webGl:contx2});
@@ -412,7 +412,7 @@ var $aavg=this.constants.aavg;
 var alph=Alphe($fmax,$fmin,$amax,$amin,$favg,$aavg,p[3]);
 var aveg=Aveg(p[3],alph);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var rA=g.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -498,7 +498,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},16.666);
+},33.2);
 }
 M();
 document.getElementById("di").onclick=function(){
