@@ -424,7 +424,7 @@ var aG=Math.max(gG-gRB,0.0);
 var gA=Aveg(aG,0.05);
 var gAlph=Math.max(gA,gRB);
 var THr=((this.constants.amax-this.constants.amin)*((pd[3]+this.constants.aavg)/2))+this.constants.amin;
-var aVgg=Math.max((0.6-(Ave(pd[0],pd[1],pd[2]))),0.0);
+var aVgg=Math.max((Ave(pd[0],pd[1],pd[2])-0.333),0.0);
 var aV=gAlph+(aVgg*6.0);
 var outA=(aV+Thr)/2;
 this.color(0.0,pd[1],0.0,aV);
