@@ -615,7 +615,7 @@ var loca=$F+1;
 if (loca>32){loca=1;}
 var locb=$Bu+1;
 if (locb>32){locb=1;}
-eval("$F="+loca+";$B="+locb+";");
+eval("$F="+loca+";$Bu="+locb+";");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
