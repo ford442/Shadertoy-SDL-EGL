@@ -449,7 +449,6 @@ var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 let $F=1;
 let $Bu=33;
-let $Ghost=2;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 rA.setConstants({nblnk:nblank$,blnk:blank$});
@@ -494,7 +493,7 @@ for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
 var locc=$Ghost+1;if(locc>64){locc=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");rA($r"+$Ghost+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";$Ghost="+locc+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");rA($r"+$Bu+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
