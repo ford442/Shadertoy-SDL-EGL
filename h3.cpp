@@ -410,8 +410,8 @@ var gG=Aveg(avG,0.5);
 var gRB=Aveg(avRB,0.5);
 var aG=Math.max((gG-gRB,0.0);
 var gA=Aveg(aG,0.25);
-
-this.color(pd[0],pd[1],pd[2],gA);
+var gAlph=Math.max(gA,gRB);
+this.color(pd[0],pd[1],pd[2],gAlph);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
