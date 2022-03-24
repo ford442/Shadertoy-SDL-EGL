@@ -176,7 +176,7 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
-glUniform1i(sampler_channel[0],0);
+// glUniform1i(sampler_channel[0],0);
 emscripten_webgl_make_context_current(ctx);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
@@ -330,11 +330,11 @@ glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
 solidColor=create_texture();
-unsigned int whitePixel=0xAAAAAAAu;
+unsigned int whitePixel=0xFFFFFFFFu;
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
   glBindTexture(GL_TEXTURE_2D,texture);
 
-glUniform1i(sampler_channel[0],0);
+// glUniform1i(sampler_channel[0],0);
   
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
