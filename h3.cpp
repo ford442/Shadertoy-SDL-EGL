@@ -326,8 +326,8 @@ glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
 solidColor=create_texture();
-GLfloat whitePixel[]=[0.0,1.0,0.0,1.0];
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_FLOAT,&whitePixel);
+GLfloat whitePixel=([0.0,1.0,0.0,1.0]);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,&whitePixel);
 glBindTexture(GL_TEXTURE_2D,texture);
 glActiveTexture(GL_TEXTURE0);
 glUniform2f(sampler_channel_res[0],Size,Size);
