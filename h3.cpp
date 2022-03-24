@@ -78,6 +78,8 @@ static const char vertex_shader_body_gles3[]=
 static const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution[4];uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
+"\n vec2 Tuv=fragCoord.xy/iResolution.xy;"
+"fragColor=fragColor*(vec4(texture(iChannel0,Tuv).xyz,1.0));"
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
@@ -161,6 +163,7 @@ clickLoc=true;
 }
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
+glUniform1i(sampler_channel[0],0);
 }
 
 static void renderFrame(){
@@ -176,10 +179,6 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
-  glUniform1i(sampler_channel[0],0);
-
-
-  
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFinish();
@@ -327,8 +326,8 @@ glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
 solidColor=create_texture();
-unsigned int whitePixel=0xFFFFFFFFu;
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+GLfloat whitePixel=[0.0,1.0,0.0,1.0];
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_FLOAT,&whitePixel);
 glBindTexture(GL_TEXTURE_2D,texture);
 glActiveTexture(GL_TEXTURE0);
 glUniform2f(sampler_channel_res[0],Size,Size);
