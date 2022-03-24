@@ -28,7 +28,7 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4],sampler_channel_res[4],solidColor;
+GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4],sampler_channel_res[4],solidColor,TEX;
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLint iFrame;
@@ -84,16 +84,14 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-GLuint texture;
-
 static GLuint create_texture(){
-glGenTextures(1,&texture);
-glBindTexture(GL_TEXTURE_2D,texture);
+glGenTextures(1,&TEX);
+glBindTexture(GL_TEXTURE_2D,TEX);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-return texture;
+return TEX;
 }
 
 static const char8_t *read_file(const char *filename){
@@ -316,7 +314,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
-  glUniform2f(sampler_channel_res[0],S,S);
+  glUniform2f(sampler_channel_res[0],Size,Size);
   glUniform2f(sampler_channel_res[1],Size,Size);
   glUniform2f(sampler_channel_res[2],Size,Size);
   glUniform2f(sampler_channel_res[3],Size,Size);
@@ -329,15 +327,15 @@ glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
   
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
 solidColor=create_texture();
 unsigned int whitePixel=0xFFFFFFFFu;
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, &whitePixel);
 
-  glBindTexture(GL_TEXTURE_2D,texture);
+  glBindTexture(GL_TEXTURE_2D,TEX);
 glUniform1i(sampler_channel[0],0);
 
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glBindTexture(GL_TEXTURE_2D,texture);
 
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
