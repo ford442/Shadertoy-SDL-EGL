@@ -174,11 +174,7 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-void avgFrm(int F,int leng,float *dat,float *aLoc,float *Dloc){
-glGenTextures(1,&texture);
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,texture);glBindTexture(GL_TEXTURE_2D,texture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,S,S,0,GL_RGBA,GL_FLOAT,&dat);
+void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -323,7 +319,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,nullptr);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,0);
 glUniform2f(sampler_channel_res[0],Size,Size);
 glUniform1i(sampler_channel[0],0);
 t1=high_resolution_clock::now();
@@ -518,7 +514,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 setTimeout(function(){
 var pointb=66*la;
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa],[0]);
+Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
 },33.2);
 }
@@ -547,8 +543,8 @@ void b3(){
 ma();
 }
 
-void nano(int Fnum,int leng,float *ptr,float *aptr,float *Dloc){
-avgFrm(Fnum,leng,ptr,aptr,Dloc);
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
 }
 }
 
