@@ -159,14 +159,14 @@ clickLoc=true;
 }
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
-   glUniform1i(sampler_channel[0],0);
+//   glUniform1i(sampler_channel[0],0);
 
 }
 
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
@@ -324,17 +324,18 @@ glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
 solidColor=create_texture();
 unsigned int whitePixel=0xFFFFFFFFu;
+   glActiveTexture(GL_TEXTURE0);
+
    glBindTexture(GL_TEXTURE_2D,TEX);
-glActiveTexture(GL_TEXTURE0);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
 
 glUniform2f(sampler_channel_res[0],Size,Size);
 glUniform1i(sampler_channel[0],0);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
