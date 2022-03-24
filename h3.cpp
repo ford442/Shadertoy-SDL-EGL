@@ -186,7 +186,8 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-void avgFrm(int F,int leng,float *dat,float *aLoc){
+void avgFrm(int F,int leng,float *dat,float *aLoc,float *Dloc){
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,S,S,0,GL_RGBA,GL_FLOAT,&dat);
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -324,15 +325,13 @@ glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-  
 solidColor=create_texture();
 GLfloat whitePixel=([0.0,1.0,0.0,1.0]);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,&whitePixel);
 glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,nullptr);
 glActiveTexture(GL_TEXTURE0);
 glUniform2f(sampler_channel_res[0],Size,Size);
 glUniform1i(sampler_channel[0],0);
-  
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
@@ -525,7 +524,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 setTimeout(function(){
 var pointb=66*la;
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa],[0]);
 M();
 },33.2);
 }
@@ -554,8 +553,8 @@ void b3(){
 ma();
 }
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
+void nano(int Fnum,int leng,float *ptr,float *aptr,float *Dloc*){
+avgFrm(Fnum,leng,ptr,aptr,Dloc);
 }
 }
 
