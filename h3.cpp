@@ -308,6 +308,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
+glUniform2f(sampler_channel_res[0],Size,Size);
 
 unsigned int whitePixel=0xFFFFFFFFu;
 glGenTextures(1,&TEX);
@@ -318,16 +319,17 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 
 // glActiveTexture(GL_TEXTURE0);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
 
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
+ 
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
-glUniform2f(sampler_channel_res[0],Size,Size);
 
 glUniform1i(sampler_channel[0],0);
 
