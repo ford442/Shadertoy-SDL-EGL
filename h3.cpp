@@ -164,7 +164,11 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
+ glUniform1i(sampler_channel[5],0);
+
 emscripten_webgl_make_context_current(ctx);
+ glUniform1i(sampler_channel[5],0);
+
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFinish();
 nanosleep(&req,&rem);
