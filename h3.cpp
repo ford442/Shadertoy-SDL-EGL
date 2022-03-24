@@ -320,9 +320,9 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
      glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+unsigned int whitePixel=0xFFFFFFFFu;
 
 solidColor=create_texture();
-unsigned int whitePixel=0xFFFFFFFFu;
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,TEX);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
