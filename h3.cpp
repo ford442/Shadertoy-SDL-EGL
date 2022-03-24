@@ -167,7 +167,7 @@ glUniform1i(uniform_frame,fram);
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
@@ -181,6 +181,8 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 
 emscripten_webgl_make_context_current(ctx);
 
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,TEX);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFinish();
 nanosleep(&req,&rem);
@@ -318,6 +320,8 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
 glUniform2f(sampler_channel_res[0],Size,Size);
+     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
 solidColor=create_texture();
 unsigned int whitePixel=0xFFFFFFFFu;
 glActiveTexture(GL_TEXTURE0);
@@ -333,7 +337,6 @@ glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 
 glUniform1i(sampler_channel[0],0);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
