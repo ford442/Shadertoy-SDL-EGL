@@ -28,7 +28,7 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[6],sampler_channel_res[6],TEX;
+GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[6],sampler_channel_res,TEX;
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLint iFrame;
@@ -76,7 +76,10 @@ static const char common_shader_header_gles3[]=
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution[6];uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;uniform sampler2D iChannel4;uniform sampler2D iChannelB;out vec4 fragColor;\n";
+"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
+"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"uniform sampler2D iChannel3;uniform sampler2D iChannel4;uniform sampler2D iChannelB;"
+"out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
@@ -293,33 +296,29 @@ attrib_position=glGetAttribLocation(shader_program,"iPosition");
 glEnableVertexAttribArray(attrib_position);
 glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(void*)0);
 sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
-sampler_channel_res[0]=glGetUniformLocation(shader_program,"iChannelResolution0");
+sampler_channel_res=glGetUniformLocation(shader_program,"iChannelResolution0");
 sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
-sampler_channel_res[1]=glGetUniformLocation(shader_program,"iChannelResolution1");
 sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
-sampler_channel_res[2]=glGetUniformLocation(shader_program,"iChannelResolution2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
-sampler_channel_res[3]=glGetUniformLocation(shader_program,"iChannelResolution3");
 sampler_channel[4]=glGetUniformLocation(shader_program,"iChannel4");
-sampler_channel_res[4]=glGetUniformLocation(shader_program,"iChannelResolution4");
 sampler_channel[5]=glGetUniformLocation(shader_program,"iChannelB");
-sampler_channel_res[5]=glGetUniformLocation(shader_program,"iChannelResolutionB");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
 uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform2f(uniform_res,Size,Size);
-glUniform2f(sampler_channel_res[5],Size,Size);
- 
+glUniform3f(uniform_res,Size,Size,1.0);
+glUniform3f(sampler_channel_res[5],Size,Size,1.0);
+
 glClearColor(F0,F0,1.0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
-// glClearColor(1.0,F0,F0,F);
-// glEnable(GL_BLEND);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearColor(1.0,1.0,1.0,F);
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 
+float greenPixel[]={0.0f,1.0f,0.0f,1.0f};
 unsigned int whitePixel=0xFFFFFFFFu;
 glGenTextures(1,&TEX);
 glBindTexture(GL_TEXTURE_2D,TEX);
@@ -328,7 +327,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_FLOAT,&greenPixel);
 glUniform1i(sampler_channel[5],GL_TEXTURE0);
 
 t1=high_resolution_clock::now();
