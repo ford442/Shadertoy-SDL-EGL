@@ -296,10 +296,8 @@ sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
 sampler_channel_res[2]=glGetUniformLocation(shader_program,"iChannelResolution2");
 sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
 sampler_channel_res[3]=glGetUniformLocation(shader_program,"iChannelResolution3");
- 
 sampler_channel[4]=glGetUniformLocation(shader_program,"iChannel4");
 sampler_channel_res[4]=glGetUniformLocation(shader_program,"iChannelResolution4");
- 
 sampler_channel[5]=glGetUniformLocation(shader_program,"iChannelB");
 sampler_channel_res[5]=glGetUniformLocation(shader_program,"iChannelResolutionB");
 uniform_time=glGetUniformLocation(shader_program,"iTime");
@@ -312,10 +310,6 @@ glUniform2f(sampler_channel_res[5],Size,Size);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearColor(1.0,F0,F0,F);
- 
-glViewport(0,0,S,S);
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -327,10 +321,10 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
 
 glUniform1i(sampler_channel[5],0);
- glClearColor(1.0,F0,1.0,F);
+ glClearColor(F0,F0,1.0,F);
 
  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
