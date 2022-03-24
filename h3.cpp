@@ -338,7 +338,7 @@ unsigned int whitePixel=0xAAAAAAAu;
   glActiveTexture(GL_TEXTURE0);
 
   glBindTexture(GL_TEXTURE_2D,texture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,Size,Size,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
 
 glUniform1i(sampler_channel[0],0);
   
