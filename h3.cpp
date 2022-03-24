@@ -325,13 +325,13 @@ glDepthFunc(GL_LESS);
 glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-  
+  glUniform2f(sampler_channel_res[0],Size,Size);
+
 solidColor=create_texture();
-unsigned int whitePixel=0x0AAAAAAAA;
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
-glBindTexture(GL_TEXTURE_2D,texture);
+unsigned int whitePixel=0xFFFFFFFFu;
 glActiveTexture(GL_TEXTURE0);
-glUniform2f(sampler_channel_res[0],Size,Size);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
 glUniform1i(sampler_channel[0],0);
   
 t1=high_resolution_clock::now();
