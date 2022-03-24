@@ -307,7 +307,7 @@ uniform_frame=glGetUniformLocation(shader_program,"iFrame");
 uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,Size,Size,1.0);
-glUniform3f(sampler_channel_res[5],Size,Size,1.0);
+glUniform3f(sampler_channel_res,Size,Size,1.0);
 
 glClearColor(F0,F0,1.0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
