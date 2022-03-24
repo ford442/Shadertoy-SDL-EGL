@@ -311,9 +311,11 @@ glUniform2f(sampler_channel_res[5],Size,Size);
  
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
-glClearColor(F0,F0,F0,F);
-glViewport(0,0,S,S);
+glClearColor(1.0,F0,F0,F);
  
+glViewport(0,0,S,S);
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -328,6 +330,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
 
 glUniform1i(sampler_channel[5],0);
+ glClearColor(1.0,F0,1.0,F);
+
  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
 t1=high_resolution_clock::now();
