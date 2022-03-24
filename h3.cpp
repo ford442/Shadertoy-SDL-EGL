@@ -175,7 +175,9 @@ iFrame++;
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc,float *Dloc){
-glBindTexture(GL_TEXTURE_2D,texture);
+glGenTextures(1,&texture);
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,texture);glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,S,S,0,GL_RGBA,GL_FLOAT,&dat);
 float max=0.0;
 float min=1.0;
@@ -315,13 +317,13 @@ glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glGenTextures(1,&texture);
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,nullptr);
-glActiveTexture(GL_TEXTURE0);
 glUniform2f(sampler_channel_res[0],Size,Size);
 glUniform1i(sampler_channel[0],0);
 t1=high_resolution_clock::now();
