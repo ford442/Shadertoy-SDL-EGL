@@ -28,7 +28,7 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4],sampler_channel_res[4];
+GLuint DBO,EBO,VBO,CBO,tex2d[4],shader_program,shader,frame,sampler_channel[4],sampler_channel_res[4],solidColor;
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLint iFrame;
@@ -84,9 +84,9 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-GLuint texture,solidColor;
 
 static GLuint create_texture(){
+  GLuint texture;
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
@@ -178,6 +178,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 // glUniform1i(sampler_channel[0],0);
 emscripten_webgl_make_context_current(ctx);
+glBindTexture(GL_TEXTURE_2D,texture);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFinish();
@@ -331,10 +332,10 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
 solidColor=create_texture();
 unsigned int whitePixel=0xFFFFFFFFu;
+  
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
-  glBindTexture(GL_TEXTURE_2D,texture);
 
-// glUniform1i(sampler_channel[0],0);
+glUniform1i(sampler_channel[0],0);
   
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
