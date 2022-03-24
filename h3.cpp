@@ -149,8 +149,6 @@ clickLoc=true;
 }
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
-//   glUniform1i(sampler_channel[0],0);
-
 }
 
 static void renderFrame(){
@@ -166,12 +164,7 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
-     glUniform1i(sampler_channel[0],0);
-
 emscripten_webgl_make_context_current(ctx);
-
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,TEX);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFinish();
 nanosleep(&req,&rem);
@@ -309,7 +302,14 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform2f(uniform_res,Size,Size);
 glUniform2f(sampler_channel_res[0],Size,Size);
-
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearColor(F0,F0,F0,F);
+glViewport(0,0,S,S);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 unsigned int whitePixel=0xFFFFFFFFu;
 glGenTextures(1,&TEX);
 glBindTexture(GL_TEXTURE_2D,TEX);
@@ -317,22 +317,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-
-// glActiveTexture(GL_TEXTURE0);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
-
-glEnable(GL_BLEND);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- 
- 
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearColor(F0,F0,F0,F);
-glViewport(0,0,S,S);
-
 glUniform1i(sampler_channel[0],0);
-
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
