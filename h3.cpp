@@ -314,7 +314,7 @@ glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 
-float greenPixel[]={0.0f,1.0f,0.0f,1.0f};
+GLfloat greenPixel[]={0.0f,1.0f,0.0f,1.0f};
 unsigned int whitePixel=0xFFFFFFFFu;
 glGenTextures(1,&TEX);
 glBindTexture(GL_TEXTURE_2D,TEX);
