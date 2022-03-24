@@ -326,7 +326,6 @@ glClearColor(F0,F0,F0,F);
 glViewport(0,0,S,S);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 solidColor=create_texture();
-GLfloat whitePixel=([0.0,1.0,0.0,1.0]);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,1,1,0,GL_RGBA,GL_FLOAT,nullptr);
 glActiveTexture(GL_TEXTURE0);
@@ -553,7 +552,7 @@ void b3(){
 ma();
 }
 
-void nano(int Fnum,int leng,float *ptr,float *aptr,float *Dloc*){
+void nano(int Fnum,int leng,float *ptr,float *aptr,float *Dloc){
 avgFrm(Fnum,leng,ptr,aptr,Dloc);
 }
 }
