@@ -304,17 +304,15 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,Size,Size,1.0);
 glUniform3f(sampler_channel_res,Size,Size,1.0);
-
-glClearColor(F0,F0,1.0,F);
+glClearColor(F0,1.0,F0,F);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
-glClearColor(1.0,1.0,1.0,F);
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 
-GLfloat greenPixel={0.0f,1.0f,0.0f,0.5f};
+GLfloat greenPixel={[0.0f,1.0f,0.0f,0.5f]};
 unsigned int whitePixel=0xFFFFFFFFu;
 glGenTextures(1,&TEX);
 glBindTexture(GL_TEXTURE_2D,TEX);
