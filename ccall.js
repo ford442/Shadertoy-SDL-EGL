@@ -6,7 +6,7 @@ document.getElementById('btn11').addEventListener('click',function(){
 Module.ccall('b3');
 });
 document.getElementById('btn10').addEventListener('click',function(){
-document.getElementById("scanvas").style="height100vh;width:100vh;image-rendering:auto;";
+document.getElementById("scanvas").style="background-color:rgba(1,1,1,0);z-index:999994;height:100vh;width:auto;position:absolute;text-align:center;";
 });
 document.getElementById('btn7').addEventListener('click',function(){
 document.getElementById("scanvas").height=window.innerHeight*2;
