@@ -60,8 +60,8 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-// struct timespec req={0,16660000};
-struct timespec req={0,33100000};
+ struct timespec req={0,16600000};
+// struct timespec req={0,33100000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -436,18 +436,6 @@ var aveg=Aveg(p[3],alph);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
-var rA=g.createKernel(function(fa){
-var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var avG=Ave(pd[1],pd[1],1.0);
-var avRB=Ave(pd[0],pd[2],1.0);
-var gG=Aveg(avG,0.5);
-var gRB=Aveg(avRB,0.5);
-var aG=Math.max(gG-gRB,0.0);
-var gA=Aveg(aG,0.25);
-var gAlph=Math.max(gA,gRB);
-this.color(pd[0],pd[1],pd[2],gAlph);
-}).setTactic("speed").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var vv=document.getElementById("mv");
@@ -471,7 +459,6 @@ let $F=1;
 let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-rA.setConstants({nblnk:nblank$,blnk:blank$});
 
 var $$1=t(vv);
 for (i=0;i<65;i++){
@@ -500,19 +487,17 @@ var pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-rA.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 
 function M(){
 var vv=document.getElementById("mv");
-rA.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $Gr"+$Bu+"=t($"+$Bu+");var $r"+i+"=t($"+i+");rA($Gr"+$Bu+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
@@ -520,7 +505,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},33.2);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
