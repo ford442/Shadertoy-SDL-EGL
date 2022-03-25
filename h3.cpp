@@ -61,7 +61,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
 // struct timespec req={0,16600000};
- struct timespec req={0,33100000};
+// struct timespec req={0,33100000};
  struct timespec req={0,23800000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
