@@ -81,7 +81,7 @@ static const char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor*texture(iChannel3,uv.xy),gl_FragCoord.xy);}\n\0";
+"\n void main(){fragColor=fragColor*texture(iChannel3,uv);mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
