@@ -167,16 +167,9 @@ mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
- 
-// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
- 
-glUniform1i(sampler_channel[3],GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,TEX);
-
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-glFinish();
-
-nanosleep(&req,&rem);
+// glFinish();
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -316,6 +309,7 @@ glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 
+ /*
 GLfloat greenPixel[4]={0.0f,1.0f,0.0f,0.5f};
 unsigned int whitePixel=0xFFFFFFFFu;
 glGenTextures(1,&TEX);
@@ -328,7 +322,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_FLOAT,&greenPixel);
 glUniform1i(sampler_channel[3],GL_TEXTURE0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-
+*/
 
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
@@ -509,7 +503,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},16.666);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
