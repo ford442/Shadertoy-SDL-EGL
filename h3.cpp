@@ -401,8 +401,7 @@ var acanvas=document.getElementById("acanvas");
 var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
-var g2=new GPU();
-var g3=new GPU({canvas:acanvas,webGl:contx2});
+var g2=new GPU({canvas:acanvas,webGl:contx2});
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.75)+b))*(((a-b)*g)+b))+(((1.0*(floor(0.5/f)))*(((a-e)*g)+e))+((1.0*(floor(0.5/f)))*(((a-d)*0.75)+d)))+(((0.75*(1.0-a))+(((1.0-b)*g)+b))/2.0)+0.75)/4.0);}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
@@ -410,6 +409,7 @@ const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) *
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
+g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 
 var R=g2.createKernel(function(tv){
@@ -436,7 +436,7 @@ var aveg=Aveg(p[3],alph);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
-var rA=g.createKernel(function(fa){
+var rA=g2.createKernel(function(fa){
 var pd=fa[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var avG=Ave(pd[1],pd[1],1.0);
 var avRB=Ave(pd[0],pd[2],1.0);
