@@ -81,7 +81,7 @@ static const char fragment_shader_header_gles3[]=
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+"\n void main(){mainImage(fragColor*texture(iChannel3,uv.xy),gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -321,7 +321,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_FLOAT,&greenPixel);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_FLOAT,&greenPixel);
 glUniform1i(sampler_channel[3],GL_TEXTURE0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
