@@ -157,7 +157,7 @@ glUniform1i(uniform_frame,fram);
 static void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
- glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
@@ -167,10 +167,13 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
+ 
+glUniform1i(sampler_channel[3],GL_TEXTURE0);
+
 emscripten_webgl_make_context_current(ctx);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
- glFinish();
- nanosleep(&req,&rem);
+glFinish();
+nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -302,7 +305,7 @@ uniform_res=glGetUniformLocation(shader_program,"iResolution");
 uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,Size,Size,1.0);
 glUniform3f(sampler_channel_res,Size,Size,1.0);
-glClearColor(F0,1.0,F0,F);
+glClearColor(F0,F0,F0,F0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
@@ -310,9 +313,7 @@ glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 
- /*
-GLfloat greenPixel[4]={0.0f,1.0f,0.0f,0.5f};
-unsigned int whitePixel=0xFFFFFFFFu;
+GLfloat greenPixel[4]={0.0f,0.7f,0.21f,0.5f};
 glGenTextures(1,&TEX);
 glBindTexture(GL_TEXTURE_2D,TEX);
 glActiveTexture(GL_TEXTURE0);
@@ -323,7 +324,6 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,S,S,0,GL_RGBA,GL_FLOAT,&greenPixel);
 glUniform1i(sampler_channel[3],GL_TEXTURE0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-*/
 
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
