@@ -73,7 +73,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -402,7 +402,7 @@ var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothin
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float $fmax,float $fmin,float $amax,float $amin,float $favg,float $aavg,float p3) {return ((((1.0*floor(0.5/(($fmax-$fmin)*0.75)+$fmin))*((($fmax-$fmin)*p3)+$fmin))+(((1.0*(floor(0.5/$aavg)))*(1.0-((($fmax-$favg)*p3)+$favg)))+((1.0*(floor(0.5/$aavg)))*((($fmax-$amin)*0.75)+$amin)))+(((0.75*(1.0-$fmax))+(((1.0-$fmin)*p3)+$fmin))/2.0)+0.75)/4.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.75)+b))*(((a-b)*g)+b))+(((1.0*(floor(0.5/f)))*(1.0-(((a-e)*g)+e)))+((1.0*(floor(0.5/f)))*(((a-d)*0.75)+d)))+(((0.75*(1.0-a))+(((1.0-b)*g)+b))/2.0)+0.75)/4.0);}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
