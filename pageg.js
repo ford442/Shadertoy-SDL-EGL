@@ -13,6 +13,7 @@ var nparser=new DOMParser();
 var htmlDoc=nparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
+    console.log('Number of songs: '+$songs[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -26,6 +27,8 @@ var vparser=new DOMParser();
 var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
+      console.log('Number of videos: '+$vids[0]);
+
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -39,6 +42,8 @@ var sparser=new DOMParser();
 var htmlDoc=sparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $shds[0]=preList.length;
+      console.log('Number of shaders: '+$shds[0]);
+
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -48,6 +53,8 @@ $shds[i+1]=Self+"all/"+txxt;
 }
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
+console.log('Random shader: #'+randShade+' '+$shds[randShade]);
+
 document.getElementById("path").innerHTML=$shds[randShade];
 }
 
@@ -97,6 +104,8 @@ document.getElementById("ldv").load();
 
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
+  console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
+
 var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
 var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
@@ -181,6 +190,8 @@ $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
 rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+  console.log('Random video: #'+rnum+' '+$vids[rnum]);
+
 document.getElementById("isrc").innerHTML=$vids[rnum];
 $h=window.innerHeight;
 var he=document.getElementById("hig").innerHTML;
