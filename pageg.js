@@ -13,7 +13,7 @@ var nparser=new DOMParser();
 var htmlDoc=nparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
-    console.log('Number of songs: '+$songs[0]);
+    console.log('Number of songs: '+$sngs[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
