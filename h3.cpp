@@ -402,7 +402,7 @@ var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothin
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((min((ceil(e/g)),1.0)*(1.0-(((a-e)/2.0)+e)))+(1.0-((min((ceil(f/g)),1.0))*(1.0-(((c-f)/2)+f))))+(((a-e)/2)+e)+0.75)/4.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((min((ceil(e/g)),1.0)*(1.0-(((a-e)/2.0)+e)))+(1.0-((min((ceil(f/g)),1.0))*(1.0-(((c-f)/2)+f))))+(((a-e)/2)+e)+0.75)/4.0;}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
