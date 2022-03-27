@@ -432,10 +432,10 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($fmax,$fmin,$amax,$amin,$favg,$aavg,p[3]);
 var aveg=Aveg(p[3],alph);
-var Min=((((1.0-($amax-$amin))*($fmax-$favg)/2.0))+(($amax-$aavg)/2.0)+$aavg);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,aveg);
 this.color(p[0],p[1],p[2],ouT);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
