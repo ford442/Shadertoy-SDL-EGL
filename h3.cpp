@@ -171,8 +171,10 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 // glUniform1i(sampler_channel[3],GL_TEXTURE0);
 
 emscripten_webgl_make_context_current(ctx);
+glBindTexture(GL_TEXTURE_2D,TEX);
+
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-glFinish();
+glFlush();
 // nanosleep(&req,&rem);
 iFrame++;
 }
@@ -312,7 +314,7 @@ glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-/*
+
 GLfloat greenPixel[4]={0.0f,0.7f,0.21f,0.5f};
 glGenTextures(1,&TEX);
 glBindTexture(GL_TEXTURE_2D,TEX);
@@ -322,9 +324,9 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glUniform1i(sampler_channel[3],GL_TEXTURE0);
+// glUniform1i(sampler_channel[3],GL_TEXTURE0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-*/
+
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
