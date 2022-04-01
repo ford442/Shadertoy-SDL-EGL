@@ -215,6 +215,8 @@ $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 setTimeout(function(){
+document.getElementById('circle').height=parseInt(window.innerHeight,10);
+document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
 },500);
 setTimeout(function(){
