@@ -71,7 +71,7 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;\n";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 const char fragment_shader_header_gles3[]=
@@ -382,7 +382,7 @@ let r=g.createKernel(function(f,fmin,amin,fmax,amax,favg,aavg){
 var p=f[this.thread.y][this.thread.x];
 var alph=(((fmax-fmin)*p[3])+fmin)+0.75+(((amax-amin)*aavg)+amin)+((p[3]+favg)/2)/4;  
 this.color(p[0],p[1],p[2],alph);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 
 var la=w$*h$*4;
 var point1=0;
