@@ -382,7 +382,7 @@ let r=g.createKernel(function(f,fmin,amin,fmax,amax,favg,aavg){
 var p=f[this.thread.y][this.thread.x];
 var alph=(((fmax-fmin)*p[3])+fmin)+0.75+(((amax-amin)*aavg)+amin)+((p[3]+favg)/2)/4;  
 this.color(p[0],p[1],p[2],alph);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput(o);
 
 var la=w$*h$*4;
 var point1=0;
