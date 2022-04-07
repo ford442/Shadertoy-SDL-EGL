@@ -34,22 +34,22 @@ GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag;
 GLuint uniform_frame,uniform_time,uniform_res,uniform_mouse;
 long double Ttime,Dtime;
 EGLint iFrame;
-static GLsizei s4=4;
-static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
-static GLfloat F=1.0f;
-static GLfloat F0=0.0f;
-static GLfloat Fm1=-1.0f;
-static GLfloat mouseX;
-static GLfloat mouseY;
-static GLfloat cMouseX;
-static GLfloat cMouseY;
-static GLfloat x;
-static GLfloat y;
-static EM_BOOL mouseLPressed;
-static int S;
-static GLfloat Size;
-static EM_BOOL clickLoc;
-static GLfloat mX,mY;
+GLsizei s4=4;
+EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
+GLfloat F=1.0f;
+GLfloat F0=0.0f;
+GLfloat Fm1=-1.0f;
+GLfloat mouseX;
+GLfloat mouseY;
+GLfloat cMouseX;
+GLfloat cMouseY;
+GLfloat x;
+GLfloat y;
+EM_BOOL mouseLPressed;
+int S;
+GLfloat Size;
+EM_BOOL clickLoc;
+GLfloat mX,mY;
 
 EGLDisplay display;
 EGLSurface surface;
@@ -64,25 +64,25 @@ struct timespec rem;
 struct timespec req={0,16666666};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
-static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-static const char *fileloc="/shader/shader1.toy";
+Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
+GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-static const char common_shader_header_gles3[]=
+const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;\n";
-static const char vertex_shader_body_gles3[]=
+const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-static const char fragment_shader_header_gles3[]=
+const char fragment_shader_header_gles3[]=
 "\n uniform vec2 iResolution;uniform float iTime;uniform vec4 iMouse;uniform sampler2D iChannelB3;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;out vec4 fragColor;\n";
-static const char fragment_shader_footer_gles3[]=
+const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-static const char8_t *read_file(const char *filename){
+const char* common_shader_header=common_shader_header_gles3;
+const char* vertex_shader_body=vertex_shader_body_gles3;
+const char* fragment_shader_header=fragment_shader_header_gles3;
+const char* fragment_shader_footer=fragment_shader_footer_gles3;
+const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -106,7 +106,7 @@ return result;
 }
 return NULL;
 }
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
+GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -117,7 +117,7 @@ glCompileShader(shader);
 return shader;
 }
 
-static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 mouseLPressed=true;
@@ -132,7 +132,7 @@ y=e->clientY;
 return 0;
 }
 
-static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
+void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -149,7 +149,7 @@ glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
 
-static void renderFrame(){
+void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -169,7 +169,7 @@ nanosleep(&req,&rem);
 iFrame++;
 }
 
-static void avgFrm(int F,int leng,float *dat){
+void avgFrm(int F,int leng,float *dat){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -189,17 +189,17 @@ Module.HEAPF32.set($3,maxPtr,1);
 },F,sum,min,max);  
 }
 
-static void strt(){
+void strt(){
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
   
 eglBindAPI(EGL_OPENGL_ES_API);
-static const EGLint attribut_list[]={ 
+const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
-static const EGLint anEglCtxAttribs2[]={
+const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
@@ -207,7 +207,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
-static const EGLint attribute_list[]={
+const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -255,7 +255,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-static const char* default_fragment_shader=(char*)read_file(fileloc);
+const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -316,8 +316,8 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static Uint8* wptr;
-static int lft;
+Uint8* wptr;
+int lft;
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
@@ -334,7 +334,7 @@ wave.pos+=len;
 }
 void plt(){
 cls_aud();
-static char flnm[24];
+char flnm[24];
 SDL_FreeWAV(wave.snd);
 SDL_Quit();
 SDL_SetMainReady();
