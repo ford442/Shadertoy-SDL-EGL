@@ -96,9 +96,12 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
-document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
-
+document.getElementById("scanvas1").height=parseInt(window.innerHeight,10);
+document.getElementById("scanvas1").width=parseInt(window.innerHeight,10);
+document.getElementById("scanvas2").height=parseInt(window.innerHeight,10);
+document.getElementById("scanvas2").width=parseInt(window.innerHeight,10);
+document.getElementById("scanvas3").height=parseInt(window.innerHeight,10);
+document.getElementById("scanvas3").width=parseInt(window.innerHeight,10);
 
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
@@ -137,7 +140,6 @@ setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
 
-
 let adr="./1inkus.png";
 wi=1024;
 he=809;
@@ -153,7 +155,6 @@ $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("isrc").innerHTML=adr;
 
-
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},2400);
 setTimeout(function(){document.getElementById("btn77").click();},2800);
@@ -161,13 +162,14 @@ setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
-loadV.addEventListener('onload',function(){
-loadV.width=this.width;
-loadV.height=this.height;
-document.getElementById("wid").innerHTML=this.width;
-document.getElementById("hig").innerHTML=this.height;
 
+loadV.addEventListener('onload',function(){
+loadV.width=this.naturalWidth;
+loadV.height=this.naturalHeight;
+document.getElementById("wid").innerHTML=this.naturalWidth;
+document.getElementById("hig").innerHTML=this.naturalHeight;
 });
+
 vide=document.querySelectorAll("img");
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
