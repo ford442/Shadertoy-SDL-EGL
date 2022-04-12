@@ -559,55 +559,55 @@ bcanvas2.setAttribute("style", "transform: scaleX(-1);");
 bcanvas1.setAttribute("style", "transform: scaleY(-1);");
 bcanvas3.setAttribute("style", "transform: scaleY(-1);");
 }
-knb = document.getElementById("rra");
-kna = document.getElementById("mainr");
-knc = document.getElementById("rrb");
-knd = document.getElementById("rrc");
-knbb = document.getElementById("rrab");
-kncb = document.getElementById("rrbb");
-kndb = document.getElementById("rrcb");
-rate = (kna.innerHTML);
-rott = 0;
-rottb = 0;
-rottc = 0;
+knb=document.getElementById("rra");
+kna=document.getElementById("mainr");
+knc=document.getElementById("rrb");
+knd=document.getElementById("rrc");
+knbb=document.getElementById("rrab");
+kncb=document.getElementById("rrbb");
+kndb=document.getElementById("rrcb");
+rate=kna.innerHTML;
+rott=0;
+rottb=0;
+rottc=0;
 function M(){
 if(T){return;}
 function rrra(rta) {
-bcanvas1.setAttribute("style", "transform: rotate(" + rta + "deg);");
+bcanvas1.setAttribute("style","transform: rotate("+rta+"deg);");
 }
 function rrrb(rtb) {
-bcanvas2.setAttribute("style", "transform:rotate(" + rtb + "deg);");
+bcanvas2.setAttribute("style", "transform:rotate("+rtb +"deg);");
 }
 function rrrc(rtc) {
-bcanvas3.setAttribute("style", "transform: rotate(" + rtc + "deg);");
+bcanvas3.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
-if ((rott - knd.innerHTML) < 0) {
-rott = (rott + 360 - knd.innerHTML);
-} else {
-rott = rott - knd.innerHTML;
+if((rott-knd.innerHTML)<0){
+rott=rott+360-knd.innerHTML;
+}else{
+rott=rott-knd.innerHTML;
 }
 rrra(rott);
-if ((rottb - knc.innerHTML) < 0) {
-rottb = (rottb + 360 - knc.innerHTML);
-} else {
-rottb = (rottb - knc.innerHTML);
+if ((rottb-knc.innerHTML)<0){
+rottb=(rottb+360-knc.innerHTML);
+}else{
+rottb=rottb-knc.innerHTML;
 }
-setTimeout(function() {
+setTimeout(function(){
 Rb();
 rrrb(rottb);
-}, rate);
-if ((rottc + knb.innerHTML) > 360) {
-rottc = ((rottc + knb.innerHTML) - 360);
+},rate);
+if((rottc+knb.innerHTML)>360){
+rottc=((rottc+knb.innerHTML)-360);
 } else {
-rottc = (rottc + knb.innerHTML);
+rottc=rottc+knb.innerHTML;
 }
-setTimeout(function() {
+setTimeout(function(){
 Ra();
 rrrc(rottc);
-}, rate);
+},rate);
 setTimeout(function(){
 M();
-},8.333);
+},rate);
 }
 M();
 document.getElementById("di").onclick=function(){
