@@ -398,19 +398,29 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var bcanvas=document.getElementById("bcanvas");
-var acanvas=document.getElementById("acanvas");
-var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-var g=new GPU({canvas:bcanvas,webGl:contx});
+var bcanvas1=document.getElementById("bcanvas1");
+var bcanvas2=document.getElementById("bcanvas2");
+var bcanvas3=document.getElementById("bcanvas3");
+var contx1=bcanvas1.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var contx2=bcanvas2.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var contx3=bcanvas3.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var gA=new GPU({canvas:bcanvas,webGl:contx1});
+var gB=new GPU({canvas:bcanvas,webGl:contx1});
+var gC=new GPU({canvas:bcanvas,webGl:contx1});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.751)+b))*(((a-b)*g)+b))+(((1.0*(ceil(0.5/f)))*(1.0-(((a-e)*g)+e)))+((1.0*(ceil(0.5/f)))*(((a-d)*0.7511)+d)))+(((0.7501*(1.0-a))+(((1.0-b)*g)+b))/2.0)+(1.0-(f-g))+0.777)/5.0);}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
-g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
-g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
+gA.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+gA.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
+gA.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
+gB.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+gB.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
+gB.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
+gC.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+gC.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
+gC.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 
@@ -419,13 +429,13 @@ var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLImage']).setOutput([sz]);
 
-var t=g.createKernel(function(v){
+var t=gA.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([w$,h$]);
 
-var r=g.createKernel(function(f){
+var r=gA.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
@@ -434,8 +444,8 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
- var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
- var ouT=Math.max(Min,alph);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
