@@ -450,6 +450,36 @@ var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
+ var rB=gB.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var $fmax=this.constants.fmax;
+var $fmin=this.constants.fmin;
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $favg=this.constants.favg;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+
+ var rC=gC.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var $fmax=this.constants.fmax;
+var $fmin=this.constants.fmin;
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $favg=this.constants.favg;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var vv=document.getElementById("mv");
@@ -511,7 +541,7 @@ if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");rB($r"+i+");rC($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
