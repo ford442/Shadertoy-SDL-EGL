@@ -588,7 +588,7 @@ rott=rott-knd.innerHTML;
 }
 rrra(rott);
 if ((rottb-knc.innerHTML)<0){
-rottb=(rottb+360-knc.innerHTML);
+rottb=rottb+360-knc.innerHTML;
 }else{
 rottb=rottb-knc.innerHTML;
 }
@@ -597,9 +597,9 @@ Rb();
 rrrb(rottb);
 },rate);
 if((rottc+knb.innerHTML)>360){
-rottc=parseInt((rottc+knb.innerHTML)-360,10);
+rottc=rottc+knb.innerHTML)-360;
 } else {
-rottc=parseInt(rottc+knb.innerHTML,10);
+rottc=rottc+knb.innerHTML;
 }
 setTimeout(function(){
 Ra();
