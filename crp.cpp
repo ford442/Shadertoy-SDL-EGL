@@ -384,8 +384,8 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
-var w$=parseInt(document.getElementById('wid').innerHTML,10);
-var h$=parseInt(document.getElementById('hig').innerHTML,10);
+var w$=parseInt(document.getElementById('iwid').innerHTML,10);
+var h$=parseInt(document.getElementById('ihig').innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
