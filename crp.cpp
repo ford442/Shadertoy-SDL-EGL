@@ -550,20 +550,20 @@ rA($$A);
 rB($$B);
 rC($$C);
 function Ra() {
-bcanvas2.setAttribute("style","transform: scaleX(1);");
-bcanvas2.setAttribute("style","transform: scaleY(1);");
-bcanvas3.setAttribute("style","transform: scaleY(-1);");
-bcanvas3.setAttribute("style","transform: scaleX(-1);");
-bcanvas1.setAttribute("style","transform: scaleY(-1);");
-bcanvas1.setAttribute("style","transform: scaleX(-1);");
+bcanvas2.style.transform="scaleX(1);";
+bcanvas2.style.transform="scaleY(1);";
+bcanvas3.style.transform="scaleY(-1);";
+bcanvas3.style.transform="scaleX(-1);";
+bcanvas1.style.transform="scaleY(-1);";
+bcanvas1.style.transform="scaleX(-1);";
 }
 function Rb() {
-bcanvas2.setAttribute("style","transform: scaleX(-1);");
-bcanvas2.setAttribute("style","transform: scaleY(-1);");
-bcanvas3.setAttribute("style","transform: scaleY(1);");
-bcanvas3.setAttribute("style","transform: scaleY(1);");
-bcanvas1.setAttribute("style","transform: scaleX(1);");
-bcanvas1.setAttribute("style","transform: scaleX(1);");
+bcanvas2.style.transform="scaleX(-1);";
+bcanvas2.style.transform="scaleY(-1);";
+bcanvas3.style.transform="scaleY(1);";
+bcanvas3.style.transform="scaleY(1);";
+bcanvas1.style.transform="scaleX(1);";
+bcanvas1.style.transform="scaleX(1);";
 }
 knb=document.getElementById("rra");
 kna=document.getElementById("mainr");
@@ -579,13 +579,13 @@ rottc=0;
 function M(){
 if(T){return;}
 function rrra(rta) {
-bcanvas1.setAttribute("style","transform: rotate("+rta+"deg);");
+bcanvas1.style.transform="rotate("+rta+"deg);";
 }
 function rrrb(rtb) {
-bcanvas2.setAttribute("style", "transform:rotate("+rtb+"deg);");
+bcanvas2.style.transform="rotate("+rtb+"deg);";
 }
 function rrrc(rtc) {
-bcanvas3.setAttribute("style","transform: rotate("+rtc+"deg);");
+bcanvas3.style.transform="rotate("+rtc+"deg);";
 }
 if((rott-knd.innerHTML)<0){
 rott=rott+360-knd.innerHTML;
