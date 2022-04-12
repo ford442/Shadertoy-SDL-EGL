@@ -554,20 +554,21 @@ rA($$A);
 rB($$B);
 rC($$C);
 function Ra() {
-c2.style.transform="scaleX(1);";
-c2.style.transform="scaleY(1);";
-c3.style.transform="scaleY(-1);";
-c3.style.transform="scaleX(-1);";
-c1.style.transform="scaleY(-1);";
-c1.style.transform="scaleX(-1);";
+y1.setAttribute("style","transform: scaleY(1);");
+x1.setAttribute("style","transform: scaleX(1);");
+y2.setAttribute("style","transform: scaleY(-1);");
+x2.setAttribute("style","transform: scaleX(-1);");
+y3.setAttribute("style","transform: scaleY(1);");
+x3.setAttribute("style","transform: scaleX(1);");
+
 }
 function Rb() {
-c2.style.transform="scaleX(-1);";
-c2.style.transform="scaleY(-1);";
-c3.style.transform="scaleY(1);";
-c3.style.transform="scaleY(1);";
-c1.style.transform="scaleX(1);";
-c1.style.transform="scaleX(1);";
+x1.setAttribute("style","transform: scaleX(-1);");
+y1.setAttribute("style","transform: scaleY(-1);");
+x2.setAttribute("style","transform: scaleX(1);");
+y2.setAttribute("style","transform: scaleY(1);");
+x3.setAttribute("style","transform: scaleX(-1);");
+y3.setAttribute("style","transform: scaleY(-1);");
 }
 knb=document.getElementById("rra");
 kna=document.getElementById("mainr");
@@ -583,13 +584,13 @@ rottc=0;
 function M(){
 if(T){return;}
 function rrra(rta) {
-c1.style.transform="rotate("+rta+"deg);";
+c1.setAttribute("style","transform: rotate("+rta+"deg);")
 }
 function rrrb(rtb) {
-c2.style.transform="rotate("+rtb+"deg);";
+c2.setAttribute("style","transform: rotate("+rta+"deg);")
 }
 function rrrc(rtc) {
-c3.style.transform="rotate("+rtc+"deg);";
+c3.setAttribute("style","transform: rotate("+rta+"deg);")
 }
 if((rott-knd.innerHTML)<0){
 rott=rott+360-knd.innerHTML;
