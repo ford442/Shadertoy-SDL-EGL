@@ -204,6 +204,16 @@ document.getElementById('x3').height=parseInt(window.innerHeight,10);
 document.getElementById('y1').height=parseInt(window.innerHeight,10);
 document.getElementById('y2').height=parseInt(window.innerHeight,10);
 document.getElementById('y3').height=parseInt(window.innerHeight,10);
+    
+document.getElementById('c1').width=parseInt(window.innerHeight,10);
+document.getElementById('c2').width=parseInt(window.innerHeight,10);
+document.getElementById('c3').width=parseInt(window.innerHeight,10);
+document.getElementById('x1').width=parseInt(window.innerHeight,10);
+document.getElementById('x2').width=parseInt(window.innerHeight,10);
+document.getElementById('x3').width=parseInt(window.innerHeight,10);
+document.getElementById('y1').width=parseInt(window.innerHeight,10);
+document.getElementById('y2').width=parseInt(window.innerHeight,10);
+document.getElementById('y3').width=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
