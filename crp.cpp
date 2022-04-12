@@ -405,6 +405,14 @@ var bcanvas3=document.getElementById("bcanvas3");
 var c1=document.getElementById("c1");
 var c2=document.getElementById("c2");
 var c3=document.getElementById("c3");
+
+var x1=document.getElementById("c1");
+var x2=document.getElementById("c2");
+var x3=document.getElementById("c3");
+
+var y1=document.getElementById("c1");
+var y2=document.getElementById("c2");
+var y3=document.getElementById("c3");
 var contx1=bcanvas1.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var contx2=bcanvas2.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var contx3=bcanvas3.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
