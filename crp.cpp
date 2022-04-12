@@ -471,7 +471,7 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
- if (aveg==1.0){
+ if (p[3]==1.0){
   aveg=0.0;
  }
 this.color(p[3],0.0,0.0,aveg);
@@ -489,7 +489,7 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
- if (aveg==1.0){
+ if (p[3]==1.0){
   aveg=0.0;
  }
  this.color(0.0,p[3],0.0,aveg);
@@ -507,7 +507,7 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
- if (aveg==1.0){
+ if (p[3]==1.0){
   aveg=0.0;
  }
  this.color(0.0,0.0,p[3],aveg);
@@ -599,25 +599,25 @@ c2.setAttribute("style","transform: rotate("+rtb+"deg);")
 function rrrc(rtc) {
 c3.setAttribute("style","transform: rotate("+rtc+"deg);")
 }
-if((rott-knd)<0){
-rott=rott+360-knd;
+if((rott-knd.innerHTML)<0){
+rott=rott+360-knd.innerHTML;
 }else{
-rott=rott-knd;
+rott=rott-knd.innerHTML;
 }
 rrra(rott);
-if ((rottb-knc)<0){
-rottb=rottb+360-knc;
+if ((rottb-knc.innerHTML)<0){
+rottb=rottb+360-knc.innerHTML;
 }else{
-rottb=rottb-knc;
+rottb=rottb-knc.innerHTML;
 }
 setTimeout(function(){
 Rb();
 rrrb(rottb);
 },rate);
-if((rottc+knb)>360){
-rottc=rottc+knb-360;
+if((rottc+knb.innerHTML)>360){
+rottc=rottc+knb.innerHTML-360;
 } else {
-rottc=rottc+knb;
+rottc=rottc+knb.innerHTML;
 }
 setTimeout(function(){
 Ra();
