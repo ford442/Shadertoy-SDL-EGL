@@ -162,10 +162,10 @@ setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
 loadV.addEventListener('onload',function(){
-loadV.width=this.videoWidth;
-loadV.height=this.videoHeight;
-document.getElementById("wid").innerHTML=this.videoWidth;
-document.getElementById("hig").innerHTML=this.videoHeight;
+loadV.width=this.width;
+loadV.height=this.height;
+document.getElementById("wid").innerHTML=this.width;
+document.getElementById("hig").innerHTML=this.height;
 $sc=this.duration;
 var mil=Math.round($sc*1000);
 $pt=Math.random()*mil;
