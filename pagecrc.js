@@ -176,7 +176,7 @@ $pt=$pt/1000;
 document.getElementById("idur").innerHTML=mil/1000;
 document.getElementById("itim").innerHTML=$pt;
 });
-vide=document.querySelectorAll("video");
+vide=document.querySelectorAll("img");
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById("ihid").innerHTML=hii;
