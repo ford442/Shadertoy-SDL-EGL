@@ -561,14 +561,13 @@ var $$C=tC(vv);
 rA($$A);
 rB($$B);
 rC($$C);
-function Ra() {
+function Ra(){
 y1.setAttribute("style","transform: scaleY(1);");
 x1.setAttribute("style","transform: scaleX(1);");
 y2.setAttribute("style","transform: scaleY(-1);");
 x2.setAttribute("style","transform: scaleX(-1);");
 y3.setAttribute("style","transform: scaleY(1);");
 x3.setAttribute("style","transform: scaleX(1);");
-
 }
 function Rb() {
 x1.setAttribute("style","transform: scaleX(-1);");
@@ -591,14 +590,14 @@ rottb=0;
 rottc=0;
 function M(){
 if(T){return;}
-function rrra(rta) {
+function rrra(rta){
 c1.setAttribute("style","transform: rotate("+rta+"deg);")
 }
-function rrrb(rtb) {
-c2.setAttribute("style","transform: rotate("+rta+"deg);")
+function rrrb(rtb){
+c2.setAttribute("style","transform: rotate("+rtb+"deg);")
 }
-function rrrc(rtc) {
-c3.setAttribute("style","transform: rotate("+rta+"deg);")
+function rrrc(rtc){
+c3.setAttribute("style","transform: rotate("+rtc+"deg);")
 }
 if((rott-knd.innerHTML)<0){
 rott=rott+360-knd.innerHTML;
@@ -617,7 +616,7 @@ rrrb(rottb);
 },rate);
 if((rottc+knb.innerHTML)>360){
 rottc=rottc+knb.innerHTML-360;
-} else {
+}else{
 rottc=rottc+knb.innerHTML;
 }
 setTimeout(function(){
