@@ -561,16 +561,15 @@ var $$C=tC(vv);
 rA($$A);
 rB($$B);
 rC($$C);
-function Ra() {
+function Ra(){
 y1.setAttribute("style","transform: scaleY(1);");
 x1.setAttribute("style","transform: scaleX(1);");
 y2.setAttribute("style","transform: scaleY(-1);");
 x2.setAttribute("style","transform: scaleX(-1);");
 y3.setAttribute("style","transform: scaleY(1);");
 x3.setAttribute("style","transform: scaleX(1);");
-
 }
-function Rb() {
+function Rb(){
 x1.setAttribute("style","transform: scaleX(-1);");
 y1.setAttribute("style","transform: scaleY(-1);");
 x2.setAttribute("style","transform: scaleX(1);");
@@ -578,19 +577,19 @@ y2.setAttribute("style","transform: scaleY(1);");
 x3.setAttribute("style","transform: scaleX(-1);");
 y3.setAttribute("style","transform: scaleY(-1);");
 }
-knb=document.getElementById("rra");
-kna=document.getElementById("mainr");
-knc=document.getElementById("rrb");
-knd=document.getElementById("rrc");
-knbb=document.getElementById("rrab");
-kncb=document.getElementById("rrbb");
-kndb=document.getElementById("rrcb");
-rate=kna.innerHTML;
 rott=0;
 rottb=0;
 rottc=0;
 function M(){
 if(T){return;}
+knb=document.getElementById("rra").innerHTML;
+kna=document.getElementById("mainr").innerHTML;
+knc=document.getElementById("rrb").innerHTML;
+knd=document.getElementById("rrc").innerHTML;
+knbb=document.getElementById("rrab").innerHTML;
+kncb=document.getElementById("rrbb").innerHTML;
+kndb=document.getElementById("rrcb").innerHTML;
+rate=kna.innerHTML;
 function rrra(rta) {
 c1.setAttribute("style","transform: rotate("+rta+"deg);")
 }
@@ -600,25 +599,25 @@ c2.setAttribute("style","transform: rotate("+rtb+"deg);")
 function rrrc(rtc) {
 c3.setAttribute("style","transform: rotate("+rtc+"deg);")
 }
-if((rott-knd.innerHTML)<0){
-rott=rott+360-knd.innerHTML;
+if((rott-knd)<0){
+rott=rott+360-knd;
 }else{
-rott=rott-knd.innerHTML;
+rott=rott-knd;
 }
 rrra(rott);
-if ((rottb-knc.innerHTML)<0){
-rottb=rottb+360-knc.innerHTML;
+if ((rottb-knc)<0){
+rottb=rottb+360-knc;
 }else{
-rottb=rottb-knc.innerHTML;
+rottb=rottb-knc;
 }
 setTimeout(function(){
 Rb();
 rrrb(rottb);
 },rate);
-if((rottc+knb.innerHTML)>360){
-rottc=rottc+knb.innerHTML-360;
+if((rottc+knb)>360){
+rottc=rottc+knb-360;
 } else {
-rottc=rottc+knb.innerHTML;
+rottc=rottc+knb;
 }
 setTimeout(function(){
 Ra();
