@@ -595,10 +595,10 @@ function rrra(rta) {
 c1.setAttribute("style","transform: rotate("+rta+"deg);")
 }
 function rrrb(rtb) {
-c2.setAttribute("style","transform: rotate("+rta+"deg);")
+c2.setAttribute("style","transform: rotate("+rtb+"deg);")
 }
 function rrrc(rtc) {
-c3.setAttribute("style","transform: rotate("+rta+"deg);")
+c3.setAttribute("style","transform: rotate("+rtc+"deg);")
 }
 if((rott-knd.innerHTML)<0){
 rott=rott+360-knd.innerHTML;
