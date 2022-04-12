@@ -195,6 +195,15 @@ $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 setTimeout(function(){
+document.getElementById('c1').height=parseInt(window.innerHeight,10);
+document.getElementById('c2').height=parseInt(window.innerHeight,10);
+document.getElementById('c3').height=parseInt(window.innerHeight,10);
+document.getElementById('x1').height=parseInt(window.innerHeight,10);
+document.getElementById('x2').height=parseInt(window.innerHeight,10);
+document.getElementById('x3').height=parseInt(window.innerHeight,10);
+document.getElementById('y1').height=parseInt(window.innerHeight,10);
+document.getElementById('y2').height=parseInt(window.innerHeight,10);
+document.getElementById('y3').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
