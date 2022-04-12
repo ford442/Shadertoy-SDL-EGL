@@ -159,12 +159,8 @@ setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
 
-loadV.addEventListener('onload',function(){
-loadV.width=this.naturalWidth;
-loadV.height=this.naturalHeight;
-document.getElementById("wid").innerHTML=this.naturalWidth;
-document.getElementById("hig").innerHTML=this.naturalHeight;
-});
+document.getElementById("wid").innerHTML=loadV.naturalWidth;
+document.getElementById("hig").innerHTML=loadV.naturalHeight;
 
 vide=document.querySelectorAll("img");
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
