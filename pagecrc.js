@@ -158,7 +158,24 @@ setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
-
+document.getElementById('c1').height=window.innerHeight;
+document.getElementById('c2').height=window.innerHeight;
+document.getElementById('c3').height=window.innerHeight;
+document.getElementById('x1').height=window.innerHeight;
+document.getElementById('x2').height=window.innerHeight;
+document.getElementById('x3').height=window.innerHeight;
+document.getElementById('y1').height=window.innerHeight;
+document.getElementById('y2').height=window.innerHeight;
+document.getElementById('y3').height=window.innerHeight;
+document.getElementById('c1').width=window.innerHeight;
+document.getElementById('c2').width=window.innerHeight;
+document.getElementById('c3').width=window.innerHeight;
+document.getElementById('x1').width=window.innerHeight;
+document.getElementById('x2').width=window.innerHeight;
+document.getElementById('x3').width=window.innerHeight;
+document.getElementById('y1').width=window.innerHeight;
+document.getElementById('y2').width=window.innerHeight;
+document.getElementById('y3').width=window.innerHeight;
 document.getElementById("wid").innerHTML=loadV.naturalWidth;
 document.getElementById("hig").innerHTML=loadV.naturalHeight;
 
@@ -195,25 +212,7 @@ $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 setTimeout(function(){
-document.getElementById('c1').height=window.innerHeight;
-document.getElementById('c2').height=window.innerHeight;
-document.getElementById('c3').height=window.innerHeight;
-document.getElementById('x1').height=window.innerHeight;
-document.getElementById('x2').height=window.innerHeight;
-document.getElementById('x3').height=window.innerHeight;
-document.getElementById('y1').height=window.innerHeight;
-document.getElementById('y2').height=window.innerHeight;
-document.getElementById('y3').height=window.innerHeight;
-    
-document.getElementById('c1').width=window.innerHeight;
-document.getElementById('c2').width=window.innerHeight;
-document.getElementById('c3').width=window.innerHeight;
-document.getElementById('x1').width=window.innerHeight;
-document.getElementById('x2').width=window.innerHeight;
-document.getElementById('x3').width=window.innerHeight;
-document.getElementById('y1').width=window.innerHeight;
-document.getElementById('y2').width=window.innerHeight;
-document.getElementById('y3').width=window.innerHeight;
+
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
