@@ -459,7 +459,10 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
+ if (aveg==1.0){
+  aveg=0.0;
+ }
+this.color(p[3],0.0,0.0,aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var rB=gB.createKernel(function(f){
@@ -474,7 +477,10 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
+ if (aveg==1.0){
+  aveg=0.0;
+ }
+ this.color(0.0,p[3],0.0,aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var rC=gC.createKernel(function(f){
@@ -489,12 +495,14 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
+ if (aveg==1.0){
+  aveg=0.0;
+ }
+ this.color(0.0,0.0,p[3],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
