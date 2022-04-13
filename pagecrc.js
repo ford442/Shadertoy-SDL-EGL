@@ -158,8 +158,8 @@ setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
-document.getElementById('contain2').height=parseInt(window.innerHeight,10);
-document.getElementById('contain2').width=parseInt(window.innerHeight,10);
+document.getElementById('wrap').height=parseInt(window.innerHeight,10);
+document.getElementById('wrap').width=parseInt(window.innerHeight,10);
 
 document.getElementById("wid").innerHTML=loadV.naturalWidth;
 document.getElementById("hig").innerHTML=loadV.naturalHeight;
