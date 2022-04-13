@@ -589,7 +589,7 @@ knd=document.getElementById("rrc").innerHTML;
 knbb=document.getElementById("rrab").innerHTML;
 kncb=document.getElementById("rrbb").innerHTML;
 kndb=document.getElementById("rrcb").innerHTML;
-rate=kna.innerHTML;
+rate=kna;
 function rrra(rta) {
 c1.setAttribute("style","transform: rotate("+rta+"deg);")
 }
@@ -599,25 +599,25 @@ c2.setAttribute("style","transform: rotate("+rtb+"deg);")
 function rrrc(rtc) {
 c3.setAttribute("style","transform: rotate("+rtc+"deg);")
 }
-if((rott-knd.innerHTML)<0){
-rott=rott+360-knd.innerHTML;
+if((rott-knd)<0){
+rott=rott+360-knd;
 }else{
-rott=rott-knd.innerHTML;
+rott=rott-knd;
 }
 rrra(rott);
-if ((rottb-knc.innerHTML)<0){
-rottb=rottb+360-knc.innerHTML;
+if ((rottb-knc)<0){
+rottb=rottb+360-knc;
 }else{
-rottb=rottb-knc.innerHTML;
+rottb=rottb-knc;
 }
 setTimeout(function(){
 Rb();
 rrrb(rottb);
 },rate);
-if((rottc+knb.innerHTML)>360){
-rottc=rottc+knb.innerHTML-360;
+if((rottc+knb)>360){
+rottc=rottc+knb-360;
 } else {
-rottc=rottc+knb.innerHTML;
+rottc=rottc+knb;
 }
 setTimeout(function(){
 Ra();
