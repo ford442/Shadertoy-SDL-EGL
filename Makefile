@@ -37,9 +37,6 @@ gpu: avg.cpp  Makefile
 -o g3003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
-
-
-
 heap: h3.cpp  Makefile
 	em++ h3.cpp -O1 -o g3004.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web -sMAXIMUM_MEMORY=4GB \
 	-sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=3400mb \
@@ -71,10 +68,7 @@ crp: img.cpp  Makefile
 	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=1 \
 	 --closure 1 -g2 -std=gnu++2b \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUpImg.js --post-js pageImg.js
-
-
-
+         --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageImg.js
 
 heap-devel: h3.cpp  Makefile
 	em++ h3.cpp -g -std=gnu++2b --closure 0 -O2 -sUSE_SDL=2 -sFULL_ES3=1 -sGL_TESTING=1 \
@@ -82,7 +76,6 @@ heap-devel: h3.cpp  Makefile
 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb  \
 -o g3004dev.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js cl-gpu.js
-
 
 glsl: glsl.cpp  Makefile
 	emcc glsl.cpp -sFULL_ES2=0 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 -sUSE_SDL=2  \
