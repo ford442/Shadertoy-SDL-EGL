@@ -74,7 +74,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -417,7 +417,7 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLImage']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLImage']).setOutput([sz]);
 
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
