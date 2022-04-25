@@ -398,7 +398,7 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var bcanvas=document.getElementById("bcanvas");
+var bcanvas=document.querySelector("canvas");
 var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
@@ -415,13 +415,13 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLCanvas']).setOutput([sz]);
 
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLCanvas']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -436,7 +436,7 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
  var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLCanvas']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
