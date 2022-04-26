@@ -28,12 +28,12 @@ console.error(text);
 }
 },
 canvas: (function() {
-let canvas = document.getElementById('bcanvas');
-canvas.addEventListener("webglcontextlost", function(e) {
+var sscanvas = document.getElementById('bcanvas');
+sscanvas.addEventListener("webglcontextlost", function(e) {
 alert('WebGL context lost. You will need to reload the page.');
 e.preventDefault();
 }, false);
-return canvas;
+return sscanvas;
 }
 )(),
 setStatus: function(text) {
