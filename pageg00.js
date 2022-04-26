@@ -3,6 +3,7 @@ var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSo
 
 var $iwid=document.getElementById("iwid");
 var mV=document.querySelector("canvas");
+mV.id="mv";
 let $sngs=[];
 let $vids=[];
 let $shds=[];
