@@ -379,7 +379,7 @@ let $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-var sz=(h$*h$)/8;
+var sz=(ss$*ss$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -436,7 +436,7 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
 var la=h$*h$*4;
 var al=w$*h$*8;
-var sz=(h$*h$)/8;
+var sz=(ss$*ss$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 
