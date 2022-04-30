@@ -172,6 +172,7 @@ emscripten_webgl_make_context_current(ctx);
 glBindTexture(GL_TEXTURE_2D,TEX);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
+glFlush();
 // glFinish();
 // nanosleep(&req,&rem);
 iFrame++;
@@ -410,7 +411,7 @@ var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -425,7 +426,7 @@ var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
@@ -496,7 +497,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},16.666);
+},8.333);
 }
 M();
 document.getElementById("di").onclick=function(){
