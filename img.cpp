@@ -168,15 +168,12 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
- 
-// glUniform1i(sampler_channel[3],GL_TEXTURE0);
-
 emscripten_webgl_make_context_current(ctx);
 glBindTexture(GL_TEXTURE_2D,TEX);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFinish();
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -315,17 +312,6 @@ glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-
-GLfloat greenPixel[4]={0.0f,0.7f,0.21f,0.5f};
-glGenTextures(1,&TEX);
-glBindTexture(GL_TEXTURE_2D,TEX);
-glActiveTexture(GL_TEXTURE0);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_FLOAT,&greenPixel);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-// glUniform1i(sampler_channel[3],GL_TEXTURE0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
 t1=high_resolution_clock::now();
@@ -386,6 +372,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
+var ss$=parseInt(document.getElementById('pmhig').innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
@@ -423,7 +410,7 @@ var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -434,11 +421,11 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
- var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
- var ouT=Math.max(Min,alph);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
