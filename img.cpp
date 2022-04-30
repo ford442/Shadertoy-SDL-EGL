@@ -74,7 +74,7 @@ char8_t *result=NULL;
 long length=0;
 // const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;precision lowp int;precision lowp sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -410,7 +410,7 @@ var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -425,7 +425,7 @@ var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
