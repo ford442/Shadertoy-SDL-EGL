@@ -172,8 +172,8 @@ emscripten_webgl_make_context_current(ctx);
 glBindTexture(GL_TEXTURE_2D,TEX);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-glFinish();
-nanosleep(&req,&rem);
+// glFinish();
+// nanosleep(&req,&rem);
 iFrame++;
 }
 
