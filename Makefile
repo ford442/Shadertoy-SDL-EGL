@@ -34,8 +34,8 @@ gpu: avg.cpp  Makefile
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
 heap: h3.cpp  Makefile
-	em++ h3.cpp -O1 -o g3005.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web -sMAXIMUM_MEMORY=4GB \
-	-sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=4000mb \
+	em++ h3.cpp -O1 -o g3006.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
+	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=4000mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 -ffast-math \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
