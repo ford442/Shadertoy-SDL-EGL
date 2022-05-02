@@ -191,7 +191,7 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 setTimeout(function(){
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
-var canvasT=document.getElementById("myCanvas");
+var canvasT=document.getElementById("mvv");
 var ctxI=canvasT.getContext("2d");
 var imgI=document.getElementById("mv");
 var siZe=parseInt(window.innerHeight,10);
