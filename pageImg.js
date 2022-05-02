@@ -195,7 +195,7 @@ var canvasT=document.getElementById("mvv");
 var ctxI=canvasT.getContext("2d");
 var imgI=document.getElementById("mv");
 var siZe=parseInt(window.innerHeight,10);
-imgI.onload=function(){
+document.getElementById("mv").onload=function(){
 ctxI.drawImage(imgI,0,0,siZe,siZe);
 }
 document.getElementById("di").click();
