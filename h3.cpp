@@ -69,7 +69,6 @@ static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-// const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision lowp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
@@ -177,7 +176,7 @@ float sum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
-for (int i=4;i<leng;i=i){
+for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
@@ -186,18 +185,18 @@ sum=sum/leng;
 aLoc[F]=sum;
 aLoc[F+100]=min;
 aLoc[F+200]=max;
-for(int i=1;i<65;i++){
+for(int i=33;i<65;i++){
 avgSum+=aLoc[i];
 }
-aLoc[0]=avgSum;
-for(int i=1;i<65;i++){
+aLoc[0]=avgSum/32;
+for(int i=33;i<65;i++){
 minSum+=aLoc[i+100];
 }
-aLoc[100]=minSum;
-for(int i=1;i<65;i++){
+aLoc[100]=minSum/32;
+for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
-aLoc[200]=maxSum;
+aLoc[200]=maxSum/32;
 }
 
 static void strt(){
@@ -305,9 +304,7 @@ glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
