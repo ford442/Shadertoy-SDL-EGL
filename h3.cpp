@@ -168,6 +168,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 glFlush();
 nanosleep(&req,&rem);
+glFinsh();
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
