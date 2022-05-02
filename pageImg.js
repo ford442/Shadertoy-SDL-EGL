@@ -195,9 +195,11 @@ var canvasT=document.getElementById("mvv");
 var ctxI=canvasT.getContext("2d");
 var imgI=document.getElementById("mv");
 var siZe=parseInt(window.innerHeight,10);
+setTimeout(function(){
 ctxI.drawImage(imgI,0,0,siZe,siZe);
-document.getElementById("di").click();
 },500);
+document.getElementById("di").click();
+},250);
 setTimeout(function(){
 loada();
 },$ldt);}
