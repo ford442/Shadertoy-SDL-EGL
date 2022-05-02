@@ -70,7 +70,7 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision lowp sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -165,7 +165,6 @@ mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-nanosleep(&req,&rem);
 iFrame++;
 }
 
@@ -409,11 +408,11 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
- var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
- var ouT=Math.max(Min,alph);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
