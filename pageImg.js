@@ -193,10 +193,9 @@ document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 var canvasT=document.getElementById("mvv");
 var ctxI=canvasT.getContext("2d");
-var imgI=document.getElementById("mv");
 var siZe=parseInt(window.innerHeight,10);
 document.getElementById("mv").onload=function(){
-ctxI.drawImage(imgI,0,0,siZe,siZe);
+ctxI.drawImage(mV,0,0,siZe,siZe);
 }
 document.getElementById("di").click();
 },250);
