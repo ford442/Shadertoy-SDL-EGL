@@ -369,7 +369,7 @@ EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var ss$=parseInt(document.getElementById('pmhig').innerHTML,10);
-vv=document.getElementById("mv");
+vv=document.getElementById("mvv");
 let $H=Module.HEAPF32.buffer;
 var la=ss$*ss$*4;
 var pointa=77*la;
@@ -400,13 +400,13 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLImage']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLCanvas']).setOutput([sz]);
 
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLCanvas']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -425,7 +425,7 @@ this.color(p[0],p[1],p[2],aveg);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.getElementById("mv");
+var vv=document.getElementById("mvv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=ss$*ss$*16;
