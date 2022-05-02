@@ -60,7 +60,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,33100000};
+struct timespec req={0,16666666};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -486,7 +486,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},33.332);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
