@@ -60,10 +60,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-// struct timespec req={0,8333333};
 struct timespec req={0,16666666};
-// struct timespec req={0,33100000};
-// struct timespec req={0,23800000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -72,9 +69,8 @@ static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
-// const GLenum attt[]={GL_COLOR_ATTACHMENT0,GL_COLOR_ATTACHMENT1,GL_COLOR_ATTACHMENT2,GL_COLOR_ATTACHMENT3};
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -169,12 +165,11 @@ mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 emscripten_webgl_make_context_current(ctx);
-glBindTexture(GL_TEXTURE_2D,TEX);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-// glFlush();
-// glFinish();
-// nanosleep(&req,&rem);
+glFlush();
+nanosleep(&req,&rem);
+glFinish();
 iFrame++;
 }
 
@@ -185,7 +180,7 @@ float sum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
-for (int i=4;i<leng;i=i){
+for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
@@ -194,18 +189,18 @@ sum=sum/leng;
 aLoc[F]=sum;
 aLoc[F+100]=min;
 aLoc[F+200]=max;
-for(int i=1;i<65;i++){
+for(int i=33;i<65;i++){
 avgSum+=aLoc[i];
 }
-aLoc[0]=avgSum;
-for(int i=1;i<65;i++){
+aLoc[0]=avgSum/32;
+for(int i=33;i<65;i++){
 minSum+=aLoc[i+100];
 }
-aLoc[100]=minSum;
-for(int i=1;i<65;i++){
+aLoc[100]=minSum/32;
+for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
-aLoc[200]=maxSum;
+aLoc[200]=maxSum/32;
 }
 
 static void strt(){
@@ -459,8 +454,8 @@ eval("$"+j+".set($$1);");
 }
 
 let d=S();if(d)d();d=S();function S(){
-var w$=parseInt(document.getElementById('wid').innerHTML,10);
-var h$=parseInt(document.getElementById('hig').innerHTML,10);
+var w$=parseInt(document.getElementById('pmhig').innerHTML,10);
+var h$=w$;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=ss$*ss$*16;
@@ -497,7 +492,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},8.333);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
