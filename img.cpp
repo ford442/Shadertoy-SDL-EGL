@@ -369,7 +369,7 @@ EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 var ss$=parseInt(document.getElementById('pmhig').innerHTML,10);
-vv=document.getElementById("mvv");
+vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var la=ss$*ss$*4;
 var pointa=77*la;
@@ -400,13 +400,13 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLCanvas']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLImage']).setOutput([sz]);
 
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLCanvas']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -421,11 +421,11 @@ var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLCanvas']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.getElementById("mvv");
+var vv=document.getElementById("mv");
 var blank$=0;
 var nblank$=0;
 var l=ss$*ss$*16;
