@@ -174,7 +174,6 @@ hii=$ihigB.innerHTML;
 $hi=$h-hii;
 if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
 $hg=$h+"px";
-window.scroll(0,0);
 
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
