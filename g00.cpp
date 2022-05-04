@@ -60,8 +60,8 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
- struct timespec req={0,8333333};
-// struct timespec req={0,16666666};
+// struct timespec req={0,8333333};
+ struct timespec req={0,16666666};
 // struct timespec req={0,33100000};
 // struct timespec req={0,23800000};
 EMSCRIPTEN_RESULT ret;
@@ -175,8 +175,9 @@ emscripten_webgl_make_context_current(ctx);
 glBindTexture(GL_TEXTURE_2D,TEX);
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-glFinish();
+glFlush();
 nanosleep(&req,&rem);
+glFinish();
 iFrame++;
 }
 
@@ -187,7 +188,7 @@ float sum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
-for (int i=4;i<leng;i=i){
+for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
 if(min>dat[i]&&dat[i]>0){min=dat[i];}
@@ -196,18 +197,18 @@ sum=sum/leng;
 aLoc[F]=sum;
 aLoc[F+100]=min;
 aLoc[F+200]=max;
-for(int i=1;i<65;i++){
+for(int i=33;i<65;i++){
 avgSum+=aLoc[i];
 }
-aLoc[0]=avgSum;
-for(int i=1;i<65;i++){
+aLoc[0]=avgSum/32;
+for(int i=33;i<65;i++){
 minSum+=aLoc[i+100];
 }
-aLoc[100]=minSum;
-for(int i=1;i<65;i++){
+aLoc[100]=minSum/32;
+for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
-aLoc[200]=maxSum;
+aLoc[200]=maxSum/32;
 }
 
 static void strt(){
@@ -222,13 +223,13 @@ EGL_NONE};
 static const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -251,14 +252,14 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -497,7 +498,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},8.333);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
