@@ -377,7 +377,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-vv=document.getElementById("mv");
+var vv=document.querySelector("canvas");
 let $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
@@ -423,15 +423,15 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
- var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
- var ouT=Math.max(Min,alph);
+var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLCanvas']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.getElementById("mv");
+var vv=document.querySelector("canvas");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
@@ -483,7 +483,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 
 function M(){
-var vv=document.getElementById("mv");
+var vv=document.querySelector("canvas");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
