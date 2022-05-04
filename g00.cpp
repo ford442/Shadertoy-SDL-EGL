@@ -369,7 +369,7 @@ opn_aud();
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.querySelector("canvas");
+var vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
