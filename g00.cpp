@@ -431,7 +431,6 @@ this.color(p[0],p[1],p[2],aveg);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.querySelector("canvas");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
@@ -483,7 +482,6 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 
 function M(){
-var vv=document.querySelector("canvas");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
