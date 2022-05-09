@@ -153,9 +153,9 @@ document.getElementById("isrc").innerHTML=adr;
 
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},2400);
-setTimeout(function(){document.getElementById("btn").click();},2800);
+// setTimeout(function(){document.getElementById("btn").click();},2800);
 setTimeout(function(){document.getElementById("btn10").click();},3800);
-setTimeout(function(){document.getElementById("btn8").click();},3200);
+// setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
 document.getElementById('wrap').height=window.innerHeight;
@@ -200,6 +200,13 @@ setTimeout(function(){
 
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
+    
+document.getElementById('contain1').height=parseInt(window.innerHeight,10);
+document.getElementById('contain1').width=parseInt(window.innerHeight,10);
+    
+document.getElementById('contain2').height=parseInt(window.innerHeight,10);
+document.getElementById('contain2').width=parseInt(window.innerHeight,10);
+    
 document.getElementById("di").click();
 },500);
 setTimeout(function(){
