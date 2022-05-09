@@ -60,10 +60,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
- struct timespec req={0,8333333};
-// struct timespec req={0,16666666};
-// struct timespec req={0,33100000};
-// struct timespec req={0,23800000};
+struct timespec req={0,8333333};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -507,10 +504,10 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
- if (p[3]==1.0){
-  aveg=0.0;
- }
- this.color(0.0,0.0,p[3],aveg);
+if (p[3]==1.0){
+aveg=0.0;
+}
+this.color(0.0,0.0,p[3],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
