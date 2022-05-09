@@ -201,7 +201,7 @@ setTimeout(function(){
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('circle').width=window.innerWidth;
     
-document.getElementById('contain1').height=parseInt(window.innerHeight;
+document.getElementById('contain1').height=window.innerHeight;
 document.getElementById('contain1').width=window.innerHeight;
     
 document.getElementById('contain2').height=window.innerHeight;
