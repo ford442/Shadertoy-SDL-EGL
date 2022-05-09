@@ -193,19 +193,19 @@ lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
-$iwid.innerHTML=parseInt($w,10);
-$ihig.innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+$iwid.innerHTML=$w;
+$ihig.innerHTML=window.innerHeight;
+document.getElementById('pmhig').innerHTML=window.innerHeight;
 setTimeout(function(){
 
-document.getElementById('circle').height=parseInt(window.innerHeight,10);
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
+document.getElementById('circle').height=window.innerHeight;
+document.getElementById('circle').width=window.innerWidth;
     
-document.getElementById('contain1').height=parseInt(window.innerHeight,10);
-document.getElementById('contain1').width=parseInt(window.innerHeight,10);
+document.getElementById('contain1').height=parseInt(window.innerHeight;
+document.getElementById('contain1').width=window.innerHeight;
     
-document.getElementById('contain2').height=parseInt(window.innerHeight,10);
-document.getElementById('contain2').width=parseInt(window.innerHeight,10);
+document.getElementById('contain2').height=window.innerHeight;
+document.getElementById('contain2').width=window.innerHeight;
     
 document.getElementById("di").click();
 },500);
