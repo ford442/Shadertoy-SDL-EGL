@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
-#include <cmath>
+#include <cmath>.
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
@@ -24,14 +24,14 @@ using namespace std;
 using namespace std::chrono;
 
 //  SDL
-SDL_AudioDeviceID dev;
+static SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
-high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,Dtime;
-EGLint iFrame;
+static high_resolution_clock::time_point t1,t2,t3;
+static GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
+static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+static long double Ttime,Dtime;
+static EGLint iFrame;
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 static GLfloat F=1.0f;
@@ -43,29 +43,29 @@ static GLfloat cMouseX;
 static GLfloat cMouseY;
 static GLfloat x;
 static GLfloat y;
-static EM_BOOL mouseLPressed;
-static int S;
-static GLfloat Size;
-static EM_BOOL clickLoc;
+EM_BOOL mouseLPressed;
+int S;
+GLfloat Size;
+EM_BOOL clickLoc;
 static GLfloat mX,mY;
 
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
-GLsizei i;
-GLfloat fps;
-GLfloat timeSpeed;
-EGLint config_size,major,minor,attrib_position;
+static EGLDisplay display;
+static EGLSurface surface;
+static EGLContext contextegl;
+static GLsizei i;
+static GLfloat fps;
+static GLfloat timeSpeed;
+static EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-struct timespec rem;
-struct timespec req={0,8333333};
-EMSCRIPTEN_RESULT ret;
+static EmscriptenWebGLContextAttributes attr;
+static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+static struct timespec rem;
+static struct timespec req={0,8333333};
+static EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 static GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-static const char *fileloc="/shader/shader1.toy";
+const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
@@ -171,13 +171,13 @@ nanosleep(&req,&rem);
 glFinish();
 }
 
-void avgFrm(int F,int leng,float *dat,float *aLoc){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+static void avgFrm(int F,int leng,float *dat,float *aLoc){
+static float max=0.0;
+static float min=1.0;
+static float sum=0.0;
+static float avgSum=0.0;
+static float minSum=0.0;
+static float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
@@ -201,16 +201,16 @@ maxSum+=aLoc[i+200];
 aLoc[200]=maxSum/32;
 }
 
-static void strt(){
+void strt(){
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
-static const EGLint attribut_list[]={ 
+const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
-static const EGLint anEglCtxAttribs2[]={
+const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
@@ -218,7 +218,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
-static const EGLint attribute_list[]={
+const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -362,7 +362,7 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
-EM_JS(void,ma,(),{
+static EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById("mv");
@@ -394,13 +394,13 @@ g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setFixIntegerDivisionAccuracy(false).setOutput([sz]);
 
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -415,7 +415,7 @@ var Min=(($fmin*($amax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
@@ -513,7 +513,7 @@ void b3(){
 ma();
 }
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
+static void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 }
