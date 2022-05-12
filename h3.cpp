@@ -362,7 +362,7 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
-static EM_JS(void,ma,(),{
+EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById("mv");
