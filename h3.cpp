@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
-#include <cmath>.
+#include <cmath>
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
