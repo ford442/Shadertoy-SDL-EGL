@@ -382,7 +382,7 @@ var contx=bcanvas.getContext('webgl2',{antialias:true,alpha:true,imageSmoothingE
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*(c))+b))*(((a-b)*g)+b))+(((1.0*(ceil(0.5/f)))*(1.0-(((a-e)*g)+e)))+((1.0*(ceil(0.5/f)))*(((a-d)*(a-d))+d)))+((((a)*(1.0-a))+(((1.0-b)*g)+b))/2.0)+(1.0-(f-g))+(a-d))/5.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-0.25)*(c-0.25))+b))*(((c-b)*g)+b))+(((1.0*(ceil(0.5/f)))*(1.0-(((a-e)*g)+e)))+((1.0*(ceil(0.5/f)))*(((a-d)*(a-d))+d)))+((((a)*(1.0-a))+(((1.0-b)*g)+b))/2.0)+(1.0-(f-g))+(a-d))/5.0);}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
