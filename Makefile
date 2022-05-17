@@ -40,7 +40,7 @@ heap: h3.cpp  Makefile
 	-sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 \
-	 --closure 1 -g2 -std=gnu++2b \
+	 --closure 1 -g2 -std=gnu++2b -flto=thin \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
