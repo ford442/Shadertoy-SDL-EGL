@@ -60,7 +60,7 @@ EGLConfig eglconfig=NULL;
 static EmscriptenWebGLContextAttributes attr;
 static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static struct timespec rem;
-static struct timespec req={0,8333333};
+static struct timespec req={0,8330000};
 static EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -382,7 +382,7 @@ var contx=bcanvas.getContext('webgl2',{antialias:true,alpha:true,imageSmoothingE
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((f-(1.0-a)-b)*1.5)/2.0)-((e-0.5)*0.2)+((0.5-e)*0.2);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((f-(1.0-a)-b)*1.5)/2.0)-((e-0.5)*(1.0-f))+((0.5-e)*(1.0-f));}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -486,7 +486,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},8.333);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
