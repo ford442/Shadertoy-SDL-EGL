@@ -382,7 +382,7 @@ var contx=bcanvas.getContext('webgl2',{antialias:true,alpha:true,imageSmoothingE
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((f-(1.0-a)-b)*1.5)/2.0)+((f-0.5)*(1.0-f))+((0.5-e)*(1.0-e));}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (((f-(1.0-a)-b)*1.5)/2.0)-((f-0.5)*(1.0-f))+((0.5-e)*(1.0-e));}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -411,7 +411,7 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-var Min=(($fmin*($amax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var Min=(($fmin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
