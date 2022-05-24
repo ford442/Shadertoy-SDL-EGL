@@ -68,8 +68,8 @@ crp: crp.cpp  Makefile
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUpCrp.js --post-js pagecrc.js
 
 img: img.cpp  Makefile
-	em++ img.cpp -O1 -o i002.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
-	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3400mb \
+	em++ img.cpp -O1 -o i003.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
+	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
