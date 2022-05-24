@@ -386,7 +386,7 @@ var contx2=acanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothin
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.751)+b))*(((a-b)*g)+b))+(((1.0*(ceil(0.5/f)))*(1.0-(((a-e)*g)+e)))+((1.0*(ceil(0.5/f)))*(((a-d)*0.7511)+d)))+(((0.7501*(1.0-a))+(((1.0-b)*g)+b))/2.0)+(1.0-(f-g))+0.777)/5.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return 1.0-(((((1.0-e)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
 
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
@@ -404,7 +404,7 @@ var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("speed").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -414,12 +414,12 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
+var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLImage']).setDynamicOutput(true).setOutput([ss$,ss$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
