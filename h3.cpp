@@ -412,7 +412,7 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 // var Min=(($fmin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
-var Min=4.0*(($amax-$aavg)/2.0);
+var Min=1.0-(($amax-$aavg)/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
