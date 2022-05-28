@@ -108,8 +108,14 @@ randSong=Math.floor(($sngs[0]-5)*Math.random());
 
 var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
-var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
-sound.play();
+    let sng=new BroadcastChannel('sng');
+song.postMessage({
+data:songSrc
+});
+    
+    
+// var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
+// sound.play();
 }
 
 document.getElementById('btn8').addEventListener('click',function(){
@@ -161,7 +167,7 @@ setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},2400);
 setTimeout(function(){document.getElementById("btn").click();},2800);
 setTimeout(function(){document.getElementById("btn10").click();},3800);
-// setTimeout(function(){document.getElementById("btn8").click();},3200);
+setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
 loadV.addEventListener('canplay',function(){
