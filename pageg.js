@@ -104,15 +104,13 @@ document.getElementById("ldv").load();
 
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
-  console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
-
+console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
 var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
-    let sng=new BroadcastChannel('sng');
+let sng=new BroadcastChannel('sng');
 sng.postMessage({
 data:songSrc
 });
-    
     
 // var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
 // sound.play();
