@@ -13,7 +13,7 @@ var nparser=new DOMParser();
 var htmlDoc=nparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
-    console.log('Number of songs: '+$sngs[0]);
+console.log('Number of songs: '+$sngs[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -27,8 +27,7 @@ var vparser=new DOMParser();
 var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
-      console.log('Number of videos: '+$vids[0]);
-
+console.log('Number of videos: '+$vids[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -42,8 +41,7 @@ var sparser=new DOMParser();
 var htmlDoc=sparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $shds[0]=preList.length;
-      console.log('Number of shaders: '+$shds[0]);
-
+console.log('Number of shaders: '+$shds[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -54,7 +52,6 @@ $shds[i+1]=Self+"all/"+txxt;
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 console.log('Random shader: #'+randShade+' '+$shds[randShade]);
-
 document.getElementById("path").innerHTML=$shds[randShade];
 }
 
@@ -63,8 +60,7 @@ var nxhttp=new XMLHttpRequest();
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
-}
-};
+}};
 nxhttp.open("GET","songs/",true);
 nxhttp.send();
 }
@@ -73,8 +69,7 @@ var fxhttp=new XMLHttpRequest();
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
-}
-};
+}};
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
@@ -84,8 +79,7 @@ var dxhttp=new XMLHttpRequest();
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
-}
-};
+}};
 dxhttp.open("GET","all/",true);
 dxhttp.send();
 }
@@ -93,12 +87,10 @@ dxhttp.send();
 scanVideos();
 scanShaders();
 scanSongs();
-
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
-
 document.getElementById("mv").load();
 document.getElementById("ldv").load();
 
@@ -111,15 +103,12 @@ let sng=new BroadcastChannel('sng');
 sng.postMessage({
 data:songSrc
 });
-    
 // var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
 // sound.play();
 }
-
 document.getElementById('btn8').addEventListener('click',function(){
 snd();
 });
-
 const tem=document.getElementById("tim");
 ban=document.getElementById("btn1");
 const sfr=document.getElementById("slideframe");
@@ -142,8 +131,6 @@ $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);te
 setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
-
-
 let adr="./intro.mp4";
 wi=1920;
 he=1080;
@@ -158,15 +145,13 @@ $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("isrc").innerHTML=adr;
-
 mV.play();
-
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},2400);
 setTimeout(function(){document.getElementById("btn").click();},2800);
 setTimeout(function(){document.getElementById("btn10").click();},3800);
-setTimeout(function(){document.getElementById("btn3").click();},3000);
-setTimeout(function(){document.getElementById("btn8").click();},3500);
+setTimeout(function(){document.getElementById("btn3").click();},3300);
+setTimeout(function(){document.getElementById("btn8").click();},3800);
 
 function loada(){
 loadV.addEventListener('canplay',function(){
@@ -195,8 +180,7 @@ $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
 rnum=Math.floor((Math.random()*($vids[0]-5))+5);
-  console.log('Random video: #'+rnum+' '+$vids[rnum]);
-
+console.log('Random video: #'+rnum+' '+$vids[rnum]);
 document.getElementById("isrc").innerHTML=$vids[rnum];
 $h=window.innerHeight;
 var he=document.getElementById("hig").innerHTML;
@@ -227,5 +211,4 @@ document.getElementById("di").click();
 setTimeout(function(){
 loada();
 },$ldt);}
-
 loada();
