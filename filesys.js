@@ -1,8 +1,10 @@
 let bz=new BroadcastChannel('bez');
+
 document.getElementById('btn').addEventListener('click',function(){
 bz.postMessage({
 data:222
 });});
+
 function pll(){
 Module.ccall("pl");
 }
@@ -12,6 +14,10 @@ fll.addEventListener('message',ea=> {
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 pll();
+let shutDown=new BroadcastChannel('shutDown');
+shutDown.postMessage({
+data:222
+});
 });
 
 document.getElementById('btn3').addEventListener('click',function(){
