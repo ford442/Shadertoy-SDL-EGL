@@ -12,18 +12,21 @@ Module.ccall("pl");
 const fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
 const fill=new Uint8Array(ea.data.data);
+  console.log("Writing file1");
 FS.writeFile('/snd/sample.wav',fill);
-pll();
-let shutDown=new BroadcastChannel('shutDown');
-shutDown.postMessage({
-data:222
-});
+
 });
 
 const fll2=new BroadcastChannel('file2');
 fll2.addEventListener('message',ea=> {
 const fill2=new Uint8Array(ea.data.data);
+    console.log("Writing file2, sending play, shutting down");
 FS.writeFile('/snd/sample2.wav',fill2);
+  pll();
+let shutDown=new BroadcastChannel('shutDown');
+shutDown.postMessage({
+data:222
+});
 });
 
 document.getElementById('btn3').addEventListener('click',function(){
