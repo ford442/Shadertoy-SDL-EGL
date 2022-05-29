@@ -44,6 +44,18 @@ heap: h3.cpp  Makefile
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
+dbl: dbl.cpp  Makefile
+	em++ dbl.cpp -O1 -o d3001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
+	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2400mb \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	-sUSE_SDL=2 -sFULL_ES3=1 \
+	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
+	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 \
+	 --closure 1 -g2 -std=gnu++2b -flto=thin \
+         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --post-js filesysdbl.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
+
+
 g0: g00.cpp  Makefile
 	em++ g00.cpp -O1 -o g0001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=4000mb \
