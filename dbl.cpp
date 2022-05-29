@@ -26,7 +26,7 @@ using namespace std::chrono;
 //  SDL
 static SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
-struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave2;
+struct{SDL_AudioSpec spec2;Uint8* snd2;Uint32 slen2;int pos2;}wave2;
 
 high_resolution_clock::time_point t1,t2,t3;
 static GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
@@ -325,7 +325,7 @@ void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
-SDL_FreeWAV(wave2.snd);
+SDL_FreeWAV(wave2.snd2);
 qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
@@ -349,25 +349,25 @@ SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
 void SDLCALL bfr2(void *unused2,Uint8* stm2,int len2){
-wptr2=wave2.snd+wave2.pos;
-lft2=wave2.slen-wave2.pos;
+wptr2=wave2.snd2+wave2.pos2;
+lft2=wave2.slen2-wave2.pos2;
 while (lft2<=len2){
 SDL_memcpy(stm2,wptr2,lft2);
 stm2+=lft2;
 len2-=lft2;
-wptr2=wave2.snd;
-lft2=wave2.slen;
-wave2.pos=0;
+wptr2=wave2.snd2;
+lft2=wave2.slen2;
+wave2.pos2=0;
 }
 SDL_memcpy(stm2,wptr2,len2);
-wave2.pos+=len2;
+wave2.pos2+=len2;
 }
 void plt(){
 cls_aud();
 static char flnm[24];
 static char flnm2[24];
 SDL_FreeWAV(wave.snd);
-SDL_FreeWAV(wave2.snd);
+SDL_FreeWAV(wave2.snd2);
 SDL_Quit();
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
@@ -378,11 +378,11 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
 }
-// if(SDL_LoadWAV(flnm2,&wave2.spec,&wave2.snd,&wave2.slen)==NULL){qu(1);}
+// if(SDL_LoadWAV(flnm2,&wave2.spec2,&wave2.snd2,&wave2.slen2)==NULL){qu(1);}
 wave.pos=0;
-wave2.pos=0;
+wave2.pos2=0;
 wave.spec.callback=bfr;
-wave2.spec.callback=bfr2;
+wave2.spec2.callback=bfr2;
 opn_aud();
 }
 
