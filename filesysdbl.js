@@ -21,9 +21,9 @@ data:222
 });
 
 const fll2=new BroadcastChannel('file2');
-fll.addEventListener('message',ea=> {
+fll2.addEventListener('message',ea=> {
 const fill2=new Uint8Array(ea.data.data);
-FS.writeFile('/snd/sample2.wav',fill);
+FS.writeFile('/snd/sample2.wav',fill2);
 });
 
 document.getElementById('btn3').addEventListener('click',function(){
