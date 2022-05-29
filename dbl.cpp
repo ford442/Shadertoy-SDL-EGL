@@ -378,13 +378,11 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
 }
-if(SDL_LoadWAV(flnm2,&wave2.spec,&wave2.snd,&wave2.slen)==NULL){
-qu(1);
-}
+// if(SDL_LoadWAV(flnm2,&wave2.spec,&wave2.snd,&wave2.slen)==NULL){qu(1);}
 wave.pos=0;
-wave2.pos=0;
+// wave2.pos=0;
 wave.spec.callback=bfr;
-wave2.spec.callback=bfr2;
+// wave2.spec.callback=bfr2;
 opn_aud();
 }
 
