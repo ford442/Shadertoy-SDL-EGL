@@ -374,11 +374,11 @@ if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
 }
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
- // SDL_strlcpy(flnm2,"/snd/sample2.wav",sizeof(flnm2));
+SDL_strlcpy(flnm2,"/snd/sample2.wav",sizeof(flnm2));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
 }
-// if(SDL_LoadWAV(flnm2,&wave2.spec2,&wave2.snd2,&wave2.slen2)==NULL){qu(1);}
+if(SDL_LoadWAV(flnm2,&wave2.spec2,&wave2.snd2,&wave2.slen2)==NULL){qu(1);}
 wave.pos=0;
 wave2.pos2=0;
 wave.spec.callback=bfr;
