@@ -348,7 +348,7 @@ wave.pos=0;
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
-void SDLCALL bfr2(void *unused,Uint8* stm2,int len2){
+void SDLCALL bfr2(void *unused2,Uint8* stm2,int len2){
 wptr2=wave2.snd+wave2.pos;
 lft2=wave2.slen-wave2.pos;
 while (lft2<=len2){
@@ -374,15 +374,15 @@ if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
 }
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
- // SDL_strlcpy(flnm,"/snd/sample2.wav",sizeof(flnm));
+ // SDL_strlcpy(flnm2,"/snd/sample2.wav",sizeof(flnm2));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
 }
 // if(SDL_LoadWAV(flnm2,&wave2.spec,&wave2.snd,&wave2.slen)==NULL){qu(1);}
 wave.pos=0;
-// wave2.pos=0;
+wave2.pos=0;
 wave.spec.callback=bfr;
-// wave2.spec.callback=bfr2;
+wave2.spec.callback=bfr2;
 opn_aud();
 }
 
