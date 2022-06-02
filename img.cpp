@@ -166,7 +166,7 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-glFlush();
+// glFlush();
 nanosleep(&req,&rem);
 glFinish();
 }
