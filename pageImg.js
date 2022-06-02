@@ -146,7 +146,7 @@ document.getElementById("isrc").innerHTML=adr;
 
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},2400);
-setTimeout(function(){document.getElementById("btn7").click();},2800);
+setTimeout(function(){document.getElementById("btn").click();},2800);
 setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
 
