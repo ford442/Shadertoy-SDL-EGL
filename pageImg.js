@@ -151,12 +151,14 @@ setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
-document.getElementById('wrap').height=window.innerHeight;
-document.getElementById('wrap').width=window.innerHeight;
-
-document.getElementById("wid").innerHTML=loadV.naturalWidth;
-document.getElementById("hig").innerHTML=loadV.naturalHeight;
-
+loadV.addEventListener('canplay',function(){
+loadV.width=this.naturalWidth;
+loadV.height=this.naturalHeight;
+document.getElementById("wid").innerHTML=this.naturalWidth;
+document.getElementById("hig").innerHTML=this.naturalHeight;
+document.getElementById("wid").innerHTML=this.naturalWidth;
+document.getElementById("hig").innerHTML=this.naturalHeight;
+});
 vide=document.querySelectorAll("img");
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
@@ -187,7 +189,7 @@ vide[1].id=mv;
 document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=window.innerHeight;
 setTimeout(function(){
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
