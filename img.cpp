@@ -166,9 +166,11 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-// glFlush();
+  emscripten_webgl_make_context_current(ctx);
+
+ glFlush();
 nanosleep(&req,&rem);
-// glFinish();
+ glFinish();
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
