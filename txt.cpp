@@ -417,11 +417,9 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 // var Min=(4.0*(($amax-$amin-$aavg)/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-if(aveg==1.0){
-this.color(0.0,0.0,0.0,1.0);
-}else{
+
 this.color(p[0],p[1],p[2],aveg);
-}
+
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
