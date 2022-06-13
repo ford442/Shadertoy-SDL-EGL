@@ -13,7 +13,7 @@ var nparser=new DOMParser();
 var htmlDoc=nparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
-    console.log('Number of songs: '+$sngs[0]);
+console.log('Number of songs: '+$sngs[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -27,8 +27,7 @@ var vparser=new DOMParser();
 var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
-      console.log('Number of videos: '+$vids[0]);
-
+console.log('Number of videos: '+$vids[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -42,8 +41,7 @@ var sparser=new DOMParser();
 var htmlDoc=sparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $shds[0]=preList.length;
-      console.log('Number of shaders: '+$shds[0]);
-
+console.log('Number of shaders: '+$shds[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -54,7 +52,6 @@ $shds[i+1]=Self+"all/"+txxt;
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 console.log('Random shader: #'+randShade+' '+$shds[randShade]);
-
 document.getElementById("path").innerHTML=$shds[randShade];
 }
 
@@ -150,7 +147,7 @@ document.getElementById("wrap").style.lineheight=$hg;
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},4400);
 setTimeout(function(){document.getElementById("btn").click();},2800);
-setTimeout(function(){document.getElementById("btn10").click();},3800);
+// setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
 
 function loada(){
