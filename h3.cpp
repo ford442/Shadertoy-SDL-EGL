@@ -24,7 +24,7 @@ using namespace std;
 using namespace std::chrono;
 
 //  SDL
-static SDL_AudioDeviceID dev;
+SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
@@ -329,8 +329,8 @@ qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-static Uint8* wptr;
-static int lft;
+Uint8* wptr;
+int lft;
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
@@ -347,7 +347,7 @@ wave.pos+=len;
 }
 void plt(){
 cls_aud();
-static char flnm[24];
+char flnm[24];
 SDL_FreeWAV(wave.snd);
 SDL_Quit();
 SDL_SetMainReady();
