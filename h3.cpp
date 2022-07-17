@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <chrono>
 #include <SDL2/SDL.h>
+#include <immintrin.h>
 
 using namespace std;
 using namespace std::chrono;
