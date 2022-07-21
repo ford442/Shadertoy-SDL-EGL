@@ -216,7 +216,7 @@ frameOff=1;
 return 0;
 }else{
 return frameOff;
-}
+}}
 
 static void strt(){
 frameOff=0;
