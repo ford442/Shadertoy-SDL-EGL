@@ -210,7 +210,7 @@ if(frameOff==1){
 frameOff=2;
 }}
 
-static void jfrm(){
+static int jfrm(){
 if(frameOff==0){
 frameOff=1;
 return 0;
@@ -534,7 +534,7 @@ ma();
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
-void frm(){
+int frm(){
 return jfrm();
 }}
 
