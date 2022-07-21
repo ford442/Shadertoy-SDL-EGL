@@ -510,7 +510,9 @@ var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 }
 frameTurn=Module.ccall('frm','number');
+M();
 }
+
 M();
 
 document.getElementById("di").onclick=function(){
