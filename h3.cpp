@@ -173,6 +173,7 @@ iFrame++;
 glFlush();
 if(frameOff==2){
 frameOff=0;
+frameOn=1;
 }
 nanosleep(&req,&rem);
 glFinish();
@@ -206,20 +207,20 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-if(frameOff==1){
 frameOff=2;
-}}
+}
 
 static int jfrm(){
-if(frameOff==0){
-frameOff=1;
+if(frameOn==1){
+frameOn=0;
 return 0;
-}else{
-return frameOff;
-}}
+}
+return 1;
+}
 
 static void strt(){
 frameOff=0;
+frameOn=1;
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -382,6 +383,7 @@ opn_aud();
 }
 
 EM_JS(void,ma,(),{
+let frameTurn=0;
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById("mv");
@@ -491,8 +493,6 @@ var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
-var frameTurn=Module.ccall('frm','number');
-
 function M(){
 while(frameTurn==0){
 var vv=document.getElementById("mv");
