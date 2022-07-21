@@ -85,6 +85,8 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
+static float switch_loc;
+
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
@@ -168,6 +170,9 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 glFlush();
+if(switch_loc[301]==2){
+switch_loc[301]=0;
+}  
 nanosleep(&req,&rem);
 glFinish();
 }
@@ -200,6 +205,10 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
+if(aLoc[301]==1){
+aLoc[301]=2;
+}
+switch_loc=aLoc;
 }
 
 static void strt(){
@@ -462,7 +471,7 @@ var la=h$*h$*4;
 var al=w$*h$*8;
 var sz=(h$*h$)/8;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+var agav=new Float32Array($H,pointa,301);
 R.setOutput([sz]);
 
 for(i=0;i<65;i++){
@@ -487,12 +496,17 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+function turnFrame(){
+if(agav[301]==0){
+agav[301]=1;
 M();
-},50);
+}else{
+turnFrame();
+}}  
 }
+
 M();
 document.getElementById("di").onclick=function(){
 T=true;
