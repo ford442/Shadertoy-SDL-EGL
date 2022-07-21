@@ -85,7 +85,7 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-static float switch_loc;
+static float *switch_loc;
 
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
