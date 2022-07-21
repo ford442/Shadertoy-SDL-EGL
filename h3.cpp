@@ -85,7 +85,8 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-static float *switch_loc;
+static int frameOn;
+static int frameOff;
 
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
@@ -170,9 +171,9 @@ uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 glFlush();
-if(switch_loc[301]==2){
-switch_loc[301]=0;
-}  
+if(frameOff==2){
+frameOff=0;
+}
 nanosleep(&req,&rem);
 glFinish();
 }
@@ -205,13 +206,20 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-if(aLoc[301]==1){
-aLoc[301]=2;
-}
-switch_loc=aLoc;
+if(frameOff==1){
+frameOff=2;
+}}
+
+static void jfrm(){
+if(frameOff==0){
+frameOff=1;
+return 0;
+}else{
+return frameOff;
 }
 
 static void strt(){
+frameOff=0;
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -380,7 +388,7 @@ vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,301);
+var agav=new Float32Array($H,pointa,300);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
@@ -471,7 +479,7 @@ var la=h$*h$*4;
 var al=w$*h$*8;
 var sz=(h$*h$)/8;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,301);
+var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 
 for(i=0;i<65;i++){
@@ -483,8 +491,10 @@ var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
+var frameTurn=Module.ccall('frm','number');
 
 function M(){
+while(frameTurn==0){
 var vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -498,22 +508,15 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
-function turnFrame(){
-if(agav[301]==0){
-agav[301]=1;
-M();
-}else{
-turnFrame();
-}}  
 }
-
+frameTurn=Module.ccall('frm','number');
 M();
+
 document.getElementById("di").onclick=function(){
 T=true;
 S();
 };
-return()=>{
-T=true;
+return()=>{T=true;
 };
 }
 })
@@ -536,6 +539,8 @@ void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
+void frm(){
+return jfrm();
 }
 
 int main(){
