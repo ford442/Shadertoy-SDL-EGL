@@ -522,26 +522,21 @@ return()=>{T=true;
 })
 
 extern "C" {
-
 void str(){
 strt();
 }
-
 void pl(){
 plt();
 }
-
 void b3(){
 ma();
 }
-
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
-
 void frm(){
 return jfrm();
-}
+}}
 
 int main(){
 EM_ASM({
