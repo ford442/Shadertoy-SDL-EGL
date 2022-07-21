@@ -510,6 +510,7 @@ var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 }
 frameTurn=Module.ccall('frm','number');
+}
 M();
 
 document.getElementById("di").onclick=function(){
@@ -535,7 +536,8 @@ void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 int frm(){
-return jfrm();
+frameOn=jfrm();
+return frameOn;
 }}
 
 int main(){
