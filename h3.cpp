@@ -28,10 +28,10 @@ SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
-static GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
-static GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-static long double Ttime,Dtime;
-static EGLint iFrame;
+GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
+GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+long double Ttime,Dtime;
+EGLint iFrame;
 static GLsizei s4=4;
 static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 static GLfloat F=1.0f;
@@ -52,15 +52,15 @@ static GLfloat mX,mY;
 static EGLDisplay display;
 static EGLSurface surface;
 static EGLContext contextegl;
-static GLsizei i;
-static GLfloat fps;
-static GLfloat timeSpeed;
+GLsizei i;
+GLfloat fps;
+GLfloat timeSpeed;
 static EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
 static EmscriptenWebGLContextAttributes attr;
 static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static struct timespec rem;
-static struct timespec req={0,16000000};
+struct timespec req={0,16666666};
 static EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -70,7 +70,7 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -119,7 +119,7 @@ glCompileShader(shader);
 return shader;
 }
 
-static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 mouseLPressed=true;
@@ -134,7 +134,7 @@ y=e->clientY;
 return 0;
 }
 
-static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
+void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -151,10 +151,10 @@ glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
 
-static void renderFrame(){
+void renderFrame(){
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
@@ -166,18 +166,18 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-glFlush();
-nanosleep(&req,&rem);
-glFinish();
+// glFlush();
+// nanosleep(&req,&rem);
+// glFinish();
 }
 
-static void avgFrm(int F,int leng,float *dat,float *aLoc){
-static float max=0.0;
-static float min=1.0;
-static float sum=0.0;
-static float avgSum=0.0;
-static float minSum=0.0;
-static float maxSum=0.0;
+void avgFrm(int F,int leng,float *dat,float *aLoc){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
@@ -201,7 +201,7 @@ maxSum+=aLoc[i+200];
 aLoc[200]=maxSum/32;
 }
 
-static void strt(){
+void strt(){
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -220,7 +220,7 @@ EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -243,7 +243,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -301,13 +301,13 @@ uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,Size,Size,1.0);
 glUniform3f(sampler_channel_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
-glEnable(GL_BLEND);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+// glEnable(GL_BLEND);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
@@ -490,7 +490,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},33.3);
+},33.2);
 }
 M();
 document.getElementById("di").onclick=function(){
