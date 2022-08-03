@@ -60,7 +60,7 @@ EGLConfig eglconfig=NULL;
 static EmscriptenWebGLContextAttributes attr;
 static EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static struct timespec rem;
-static struct timespec req={0,8330000};
+static struct timespec req={0,16000000};
 static EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 static Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -220,7 +220,7 @@ EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -379,7 +379,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:false,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
