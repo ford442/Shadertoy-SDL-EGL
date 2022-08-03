@@ -4,11 +4,11 @@ let ff=new XMLHttpRequest();
 ff.open("GET",pth,true);
 ff.responseType="arraybuffer";
 ff.onload=function(oEvent){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader1.toy',sfil);
+var arrayBuffer=ff.response;
+if(arrayBuffer){
+var fil=new Uint8ClampedArray(arrayBuffer);
+FS.writeFile('/shader/shader1.toy',fil);
 }}
 ff.send(null);
-console.log('Wrote 1 shader to filesystem: \n -> ',pth);
+console.log('Wrote 1 shader to filesystem.');
 });
