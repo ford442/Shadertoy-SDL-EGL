@@ -34,11 +34,11 @@ gpu: avg.cpp  Makefile
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
 heap: h3.cpp  Makefile
-	 em++ h3.cpp -O2 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
+	 em++ h3.cpp -O1 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3800mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=1  \
-	 --closure 1 -g2 -std=gnu++2b -flto=thin \
+	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
+	 --closure 1 -g2 -flto=thin \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
