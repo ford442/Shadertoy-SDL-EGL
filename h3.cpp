@@ -490,7 +490,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},16.6);
+},33.33);
 }
 M();
 document.getElementById("di").onclick=function(){
