@@ -34,17 +34,19 @@ gpu: avg.cpp  Makefile
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
 heap: h3.cpp  Makefile
-	 em++ h3.cpp -O1 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sMAXIMUM_MEMORY=3400mb -sINITIAL_MEMORY=2400mb \
+	 em++ h3.cpp -O3 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
+	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 -ffast-math \
 	 --closure 1 -g2 -flto=thin -std=gnu++2b \
+	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
+	 -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 txt: txt.cpp  Makefile
-	em++ txt.cpp -O1 -o t3001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
-	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3200mb \
+	em++ txt.cpp -O3 -o t3001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
+	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
@@ -59,7 +61,7 @@ dbl: dbl.cpp  Makefile
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
-	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 \
+	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=0 \
 	 --closure 1 -g2 -std=gnu++2b -flto=thin \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesysdbl.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
@@ -71,7 +73,7 @@ g0: g00.cpp  Makefile
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 -ffast-math \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
-	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=1 \
+	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=0 \
 	 --closure 1 -g2 -std=gnu++2b \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg00.js
@@ -79,22 +81,22 @@ g0: g00.cpp  Makefile
 
 crp: crp.cpp  Makefile
 	em++ crp.cpp -O1 -o c001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web -sMAXIMUM_MEMORY=4GB \
-	-sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=3400mb \
+	-sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
-	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=1 \
+	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=0 \
 	 --closure 1 -g2 -std=gnu++2b \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUpCrp.js --post-js pagecrc.js
 
 img: img.cpp  Makefile
 	em++ img.cpp -O1 -o i003.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web  \
-	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2400mb \
+	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
-	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=1 \
+	  -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=0 \
 	 --closure 1 -g2 -std=gnu++2b \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageImg.js
@@ -109,7 +111,7 @@ heap-devel: h3.cpp  Makefile
 glsl: glsl.cpp  Makefile
 	emcc glsl.cpp -sFULL_ES3=1 --closure 0 -sUSE_SDL=2  \
 -sUSE_WEBGL2=1 -sENVIRONMENT=web -sMALLOC='emmalloc' -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--ffast-math -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2400mb \
+-ffast-math -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 -O1 -o gui003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_read"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --post-js filesys.js --post-js ccall.js --post-js fs-glsl.js -sSUPPORT_BIG_ENDIAN=0 -sOFFSCREEN_FRAMEBUFFER=1
 
