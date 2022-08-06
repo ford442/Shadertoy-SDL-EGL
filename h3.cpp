@@ -419,7 +419,7 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
+}).setTactic("speed").setGraphical(true).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
 var h$=parseInt(document.getElementById('hig').innerHTML,10);
