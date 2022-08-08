@@ -312,8 +312,12 @@ wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
 }
-SDL_memcpy(stm,wptr,len);
-wave.pos+=len;
+SDL_PauseAudioDevice(dev,SDL_TRUE);
+EM_ASM({
+document.getElementById("btn8").click();
+});
+// SDL_memcpy(stm,wptr,len);
+// wave.pos+=len;
 }
 void plt(){
 cls_aud();
