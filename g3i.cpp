@@ -506,7 +506,6 @@ T=true;
 extern "C" {
 
 void str(){
-strt();
 }
 
 void pl(){
@@ -518,7 +517,6 @@ ma();
 }
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
 }
 
 }
