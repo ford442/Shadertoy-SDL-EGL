@@ -45,26 +45,26 @@ heap: h3.cpp  Makefile
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 g3f: g3f.cpp  Makefile
-	 em++ g3f.cpp -O3 -o g3f001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
+	 em++ g3f.cpp -O1 -o g3f001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=0 -sFULL_ES2=0 -ffast-math \
-	 --closure 1 -g2 -flto=thin -std=gnu++2b \
+	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
+	 --closure 1 -g2  -std=gnu++2b \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=0 \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         -sEXPORTED_FUNCTIONS='["_main","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pagef.js
 
 
 g3i: g3i.cpp  Makefile
-	 em++ g3i.cpp -O3 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 em++ g3i.cpp -O2 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=0 -sFULL_ES2=0 -ffast-math \
+	 -sUSE_SDL=2 -sFULL_ES3=0 -sFULL_ES2=0 \
 	 --closure 1 -g2 -flto=thin -std=gnu++2b \
 	 -DNDEBUG -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=0 \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         -sEXPORTED_FUNCTIONS='["_main","_pl","_b3"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pagei.js
 
 
