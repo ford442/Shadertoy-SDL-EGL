@@ -337,11 +337,16 @@ opn_aud();
 extern "C" {
 
 void str(){
-strt();
 }
 
 void pl(){
 plt();
+}
+
+void b3(){
+}
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
 }
 
 }
