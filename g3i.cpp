@@ -1,14 +1,5 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <iostream>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <unistd.h>
-#include <SDL2/SDL.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -16,11 +7,26 @@
 #include <GLES3/gl32.h>
 #define __gl2_h_
 #include <GLES2/gl2ext.h>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <ctime>
+#include <unistd.h>
+#include <chrono>
+#include <SDL2/SDL.h>
+
 using namespace std;
+using namespace std::chrono;
 
 //  SDL
 SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+
 static GLfloat mouseX;
 static GLfloat mouseY;
 static GLfloat cMouseX;
