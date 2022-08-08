@@ -312,18 +312,21 @@ wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
 }
+if lft==0{
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 EM_ASM({
-document.getElementById("btn8").click();
+setTimeout(function(){document.getElementById("btn3").click();},500);
+setTimeout(function(){document.getElementById("btn8").click();},1800);
 });
-// SDL_memcpy(stm,wptr,len);
-// wave.pos+=len;
+}
+SDL_memcpy(stm,wptr,len);
+wave.pos+=len;
 }
 void plt(){
 cls_aud();
 char flnm[24];
 SDL_FreeWAV(wave.snd);
-SDL_Quit();
+// SDL_Quit();
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
