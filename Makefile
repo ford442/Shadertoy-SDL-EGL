@@ -57,7 +57,7 @@ g3f: g3f.cpp  Makefile
 
 
 g3i: g3i.cpp  Makefile
-	 em++ g3i.cpp -O2 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 em++ g3i.cpp -O3 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1800mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
