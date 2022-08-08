@@ -312,7 +312,7 @@ wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
 }
-if(lft==0){
+if(wave.slen-wave.pos==0){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 EM_ASM({
 setTimeout(function(){document.getElementById("btn3").click();},500);
