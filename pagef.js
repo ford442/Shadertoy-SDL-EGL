@@ -2,10 +2,7 @@
 var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
 
 var $iwid=document.getElementById("iwid");
-var mV=document.getElementById("mv");
-var loadV=document.getElementById("ldv");
 let $sngs=[];
-let $vids=[];
 let $shds=[];
 
 function sngs(xml){
@@ -22,19 +19,6 @@ txxt=txxt.replace(Self,"");
 $sngs[i]=Self+"songs/"+txxt;
 }}
 
-function vids(xml){
-var vparser=new DOMParser();
-var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
-var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
-$vids[0]=preList.length;
-console.log('Number of videos: '+$vids[0]);
-for (var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
-var Self=location.href;
-Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
-$vids[i]=Self+"video/"+txxt;
-}}
 
 function shds(xml){
 var sparser=new DOMParser();
@@ -64,15 +48,7 @@ sngs(this);
 nxhttp.open("GET","songs/",true);
 nxhttp.send();
 }
-function scanVideos(){
-var fxhttp=new XMLHttpRequest();
-fxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
-vids(this);
-}};
-fxhttp.open("GET","video/",true);
-fxhttp.send();
-}
+
 
 function scanShaders(){
 var dxhttp=new XMLHttpRequest();
@@ -84,15 +60,12 @@ dxhttp.open("GET","all/",true);
 dxhttp.send();
 }
 
-scanVideos();
 scanShaders();
 scanSongs();
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
-document.getElementById("mv").load();
-document.getElementById("ldv").load();
 
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
