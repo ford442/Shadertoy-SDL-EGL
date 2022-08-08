@@ -400,7 +400,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-return[P[0],P[1],P[2],av$];
+return[P[0],P[1],P[2],1.0];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
 
 var r=g.createKernel(function(f){
@@ -418,7 +418,7 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 // var Min=(4.0*(($amax-$amin-$aavg)/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
+this.color(p[0],p[1],p[2],1.0);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setFixIntegerDivisionAccuracy(false).setOutput([w$,h$]);
 
 var w$=parseInt(document.getElementById('wid').innerHTML,10);
@@ -490,7 +490,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},33.32);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
