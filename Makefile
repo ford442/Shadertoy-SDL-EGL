@@ -46,7 +46,7 @@ heap: h3.cpp  Makefile
 
 g3f: g3f.cpp  Makefile
 	 em++ g3f.cpp -O3 -o g3f001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb \
+	 -sALLOW_MEMORY_GROWTH=0 -sMALLOC=emmalloc -sINITIAL_MEMORY=700mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=1 \
 	 --closure 1 -g2  -std=gnu++2b -flto=thin  \
