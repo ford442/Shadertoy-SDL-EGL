@@ -19,7 +19,6 @@ txxt=txxt.replace(Self,"");
 $sngs[i]=Self+"songs/"+txxt;
 }}
 
-
 function shds(xml){
 var sparser=new DOMParser();
 var htmlDoc=sparser.parseFromString(xml.responseText,'text/html');
