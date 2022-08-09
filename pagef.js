@@ -48,7 +48,6 @@ nxhttp.open("GET","songs/",true);
 nxhttp.send();
 }
 
-
 function scanShaders(){
 var dxhttp=new XMLHttpRequest();
 dxhttp.onreadystatechange=function(){
