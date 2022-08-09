@@ -312,7 +312,7 @@ wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
 }
-if(wave.slen-wave.pos==0){
+if(wave.slen-wave.pos==1){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 EM_ASM({
 setTimeout(function(){document.getElementById("btn3").click();},500);
@@ -326,7 +326,7 @@ void plt(){
 cls_aud();
 char flnm[24];
 SDL_FreeWAV(wave.snd);
-// SDL_Quit();
+SDL_Quit();
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
