@@ -75,7 +75,7 @@ function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
 console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
 var songSrc=$sngs[randSong+5];
-document.getElementById("track").src=songSrc;
+// document.getElementById("track").src=songSrc;
 let sng=new BroadcastChannel('sng');
 sng.postMessage({
 data:songSrc
