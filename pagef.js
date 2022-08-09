@@ -66,8 +66,8 @@ document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 
 document.getElementById('btnSng').addEventListener('click',function(){
-setTimeout(function(){document.getElementById("btn3").click();},500);
-setTimeout(function(){document.getElementById("btn8").click();},1800);
+setTimeout(function(){document.getElementById("btn3").click();},300);
+setTimeout(function(){document.getElementById("btn8").click();},1100);
 });
 
 function snd(){
@@ -108,10 +108,10 @@ setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
 
-setTimeout(function(){document.getElementById("btn2").click();},400);
+setTimeout(function(){document.getElementById("btn2").click();},200);
 // setTimeout(function(){document.getElementById("btn11").click();},900);
 // setTimeout(function(){document.getElementById("btn").click();},1300);
 setTimeout(function(){document.getElementById("btn10").click();},2200);
-setTimeout(function(){document.getElementById("btn3").click();},500);
-setTimeout(function(){document.getElementById("btn8").click();},1800);
+setTimeout(function(){document.getElementById("btn3").click();},300);
+setTimeout(function(){document.getElementById("btn8").click();},1200);
 
