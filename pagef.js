@@ -67,7 +67,7 @@ document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 
 document.getElementById('btnSng').addEventListener('click',function(){
 setTimeout(function(){document.getElementById("btn3").click();},300);
-setTimeout(function(){document.getElementById("btn8").click();},1100);
+setTimeout(function(){document.getElementById("btn8").click();},2000);
 });
 
 function snd(){
@@ -113,5 +113,5 @@ setTimeout(function(){document.getElementById("btn2").click();},200);
 // setTimeout(function(){document.getElementById("btn").click();},1300);
 setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},300);
-setTimeout(function(){document.getElementById("btn8").click();},1200);
+setTimeout(function(){document.getElementById("btn8").click();},2000);
 
