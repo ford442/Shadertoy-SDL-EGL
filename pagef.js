@@ -66,6 +66,11 @@ document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 
+document.getElementById('btnSng').addEventListener('click',function(){
+setTimeout(function(){document.getElementById("btn3").click();},500);
+setTimeout(function(){document.getElementById("btn8").click();},1800);
+});
+
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
 console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
