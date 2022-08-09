@@ -111,7 +111,7 @@ slt=tem.innerHTML;
 // setTimeout(function(){document.getElementById("btn2").click();},200);
 // setTimeout(function(){document.getElementById("btn11").click();},900);
 // setTimeout(function(){document.getElementById("btn").click();},1300);
-setTimeout(function(){document.getElementById("btn10").click();},2200);
+// setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},300);
 setTimeout(function(){document.getElementById("btn8").click();},2000);
 
