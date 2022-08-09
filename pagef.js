@@ -108,7 +108,7 @@ setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
 
-setTimeout(function(){document.getElementById("btn2").click();},200);
+// setTimeout(function(){document.getElementById("btn2").click();},200);
 // setTimeout(function(){document.getElementById("btn11").click();},900);
 // setTimeout(function(){document.getElementById("btn").click();},1300);
 setTimeout(function(){document.getElementById("btn10").click();},2200);
