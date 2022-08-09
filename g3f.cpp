@@ -304,6 +304,13 @@ int lft;
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
+if(lft==1){
+SDL_PauseAudioDevice(dev,SDL_TRUE);
+EM_ASM({
+setTimeout(function(){document.getElementById("btn3").click();},500);
+setTimeout(function(){document.getElementById("btn8").click();},1800);
+});
+}
 while (lft<=len){
 SDL_memcpy(stm,wptr,lft);
 stm+=lft;
@@ -311,13 +318,6 @@ len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
-}
-if(wave.slen-wave.pos==1){
-SDL_PauseAudioDevice(dev,SDL_TRUE);
-EM_ASM({
-setTimeout(function(){document.getElementById("btn3").click();},500);
-setTimeout(function(){document.getElementById("btn8").click();},1800);
-});
 }
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
