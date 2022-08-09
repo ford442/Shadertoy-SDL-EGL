@@ -35,7 +35,7 @@ gpu: avg.cpp  Makefile
 
 heap: h3.cpp  Makefile
 	 em++ h3.cpp -O3 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1800mb \
+	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
 	 --closure 1 -g2 -flto=thin -std=gnu++2b \
@@ -46,7 +46,7 @@ heap: h3.cpp  Makefile
 
 g3f: g3f.cpp  Makefile
 	 em++ g3f.cpp -O1 -o g3f001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb \
+	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
 	 --closure 1 -g2 -flto=thin -std=gnu++2b \
@@ -56,7 +56,7 @@ g3f: g3f.cpp  Makefile
 
 g3i: g3i.cpp  Makefile
 	 em++ g3i.cpp -O3 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1800mb \
+	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1800mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
 	 --closure 1 -g2 -flto=thin -std=gnu++2b \
