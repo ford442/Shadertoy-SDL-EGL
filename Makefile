@@ -34,7 +34,7 @@ gpu: avg.cpp  Makefile
 --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
 heap: h3.cpp  Makefile
-	 em++ h3.cpp -O3 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 em++ h3.cpp -O1 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
@@ -44,7 +44,7 @@ heap: h3.cpp  Makefile
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 g3f: g3f.cpp  Makefile
-	 em++ g3f.cpp -O3 -o g3f001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 em++ g3f.cpp -O1 -o g3f001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
@@ -54,7 +54,7 @@ g3f: g3f.cpp  Makefile
 
 
 g3i: g3i.cpp  Makefile
-	 em++ g3i.cpp -O3 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	 em++ g3i.cpp -O1 -o g3i001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
