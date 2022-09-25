@@ -93,6 +93,8 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 
