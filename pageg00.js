@@ -174,6 +174,8 @@ $hi=$h-hii;
 if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
 $hg=$h+"px";
 
+document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt(window.innerHeight,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
