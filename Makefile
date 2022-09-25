@@ -86,7 +86,7 @@ dbl: dbl.cpp  Makefile
 
 
 g0: g00.cpp  Makefile
-	em++ g00.cpp -O2 -o g0001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	emcc g00.cpp -O2 -o g0001.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1  -sFULL_ES2=0 \
