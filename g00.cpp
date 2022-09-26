@@ -382,7 +382,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var contx=bcanvas.getContext('webgl2',{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:true,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 var g=new GPU({canvas:bcanvas,webGl:contx});
 var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
