@@ -303,7 +303,6 @@ glUniform3f(uniform_res,Size,Size,1.0);
 glUniform3f(sampler_channel_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glEnable(GL_FRAMEBUFFER_SRGB);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
