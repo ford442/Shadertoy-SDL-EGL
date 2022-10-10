@@ -47,7 +47,7 @@ heap: h3.cpp  Makefile
 
 heapsrgb:
 	 em++ h3.cpp -O3 -o g3008.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1900mb \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
 	 --closure 1 -g2 -flto=thin -std=gnu++2b \
