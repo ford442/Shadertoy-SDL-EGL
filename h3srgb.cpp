@@ -169,6 +169,7 @@ nanosleep(&req,&rem);
 glFlush();
 }
 
+
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 static float max=0.0;
 static float min=1.0;
@@ -332,9 +333,12 @@ qu(2);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 
-void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
 int lft;
+Uint8* stm;
+
+void SDLCALL bfr(void *unused,Uint8* stm,int len){
+
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
