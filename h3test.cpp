@@ -57,7 +57,9 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static struct timespec rem;
 // static struct timespec req={0,16600000};
-static struct timespec req={0,15000000};
+// static struct timespec req={0,15000000};
+static struct timespec req={0,10000000};
+static struct timespec reqs={0,22675};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -343,6 +345,7 @@ len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
+nanosleep(&reqs,&rem);
 }
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
@@ -494,7 +497,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},15);
+},10);
 }
 M();
 document.getElementById("di").onclick=function(){
