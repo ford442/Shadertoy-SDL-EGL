@@ -345,7 +345,6 @@ len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
-nanosleep(&reqs,&rem);
 }
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
