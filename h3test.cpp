@@ -57,9 +57,10 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static struct timespec rem;
 // static struct timespec req={0,33200000};
-static struct timespec req={0,25000000};
+// static struct timespec req={0,25000000};
 // static struct timespec req={0,16600000};
 // static struct timespec req={0,15000000};
+static struct timespec req={0,13333333};
 // static struct timespec req={0,10000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -497,7 +498,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},25);
+},13.333);
 }
 M();
 document.getElementById("di").onclick=function(){
