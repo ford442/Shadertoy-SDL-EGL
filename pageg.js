@@ -147,11 +147,11 @@ document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
 setTimeout(function(){document.getElementById("btn2").click();},400);
-setTimeout(function(){document.getElementById("btn11").click();},2200);
-setTimeout(function(){document.getElementById("btn").click();},3700);
+setTimeout(function(){document.getElementById("btn11").click();},1500);
+setTimeout(function(){document.getElementById("btn").click();},2500);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},500);
-setTimeout(function(){document.getElementById("btn8").click();},2600);
+setTimeout(function(){document.getElementById("btn8").click();},1700);
 
 function loada(){
 loadV.addEventListener('canplay',function(){
