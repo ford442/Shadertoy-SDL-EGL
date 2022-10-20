@@ -3,6 +3,10 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -15,6 +19,8 @@
 #include <unistd.h>
 #include <chrono>
 #include <SDL2/SDL.h>
+
+#define GL_GLEXT_PROTOTYPES
 
 using namespace std;
 using namespace std::chrono;
@@ -236,18 +242,19 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
+emscripten_webgl_enable_extension(ctx,"WEBGL_multi_draw");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
