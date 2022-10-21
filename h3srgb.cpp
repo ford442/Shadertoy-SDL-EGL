@@ -210,7 +210,7 @@ iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
-// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
