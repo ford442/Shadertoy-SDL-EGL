@@ -61,9 +61,9 @@ static EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-struct timespec rem;
+static struct timespec rem;
 // static struct timespec req={0,16600000};
-struct timespec req={0,16666666};
+static struct timespec req={0,16666666};
 //static struct timespec req={0,15000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -170,9 +170,9 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-glFinish();
+// glFinish();
 nanosleep(&req,&rem);
-glFlush();
+// glFlush();
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
