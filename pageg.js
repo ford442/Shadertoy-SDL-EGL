@@ -13,7 +13,7 @@ var nparser=new DOMParser();
 var htmlDoc=nparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
-// console.log('Number of songs: '+$sngs[0]);
+console.log('Number of songs: '+$sngs[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -27,7 +27,7 @@ var vparser=new DOMParser();
 var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
-// console.log('Number of videos: '+$vids[0]);
+console.log('Number of videos: '+$vids[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -41,7 +41,7 @@ var sparser=new DOMParser();
 var htmlDoc=sparser.parseFromString(xml.responseText,'text/html');
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $shds[0]=preList.length;
-// console.log('Number of shaders: '+$shds[0]);
+console.log('Number of shaders: '+$shds[0]);
 for (var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
@@ -51,7 +51,7 @@ $shds[i+1]=Self+"all/"+txxt;
 }
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
-// console.log('Random shader: #'+randShade+' '+$shds[randShade]);
+console.log('Random shader: #'+randShade+' '+$shds[randShade]);
 document.getElementById("path").innerHTML=$shds[randShade];
 }
 
@@ -96,7 +96,7 @@ document.getElementById("ldv").load();
 
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
-// console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
+console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
 var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
 let sng=new BroadcastChannel('sng');
@@ -146,12 +146,12 @@ $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
-setTimeout(function(){document.getElementById("btn2").click();},700);
-setTimeout(function(){document.getElementById("btn11").click();},1000);
-setTimeout(function(){document.getElementById("btn").click();},2500);
+setTimeout(function(){document.getElementById("btn2").click();},400);
+setTimeout(function(){document.getElementById("btn11").click();},2200);
+setTimeout(function(){document.getElementById("btn").click();},3700);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
-setTimeout(function(){document.getElementById("btn3").click();},300);
-setTimeout(function(){document.getElementById("btn8").click();},1500);
+setTimeout(function(){document.getElementById("btn3").click();},500);
+setTimeout(function(){document.getElementById("btn8").click();},2600);
 
 function loada(){
 loadV.addEventListener('canplay',function(){
@@ -180,7 +180,7 @@ $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
 rnum=Math.floor((Math.random()*($vids[0]-5))+5);
-// console.log('Random video: #'+rnum+' '+$vids[rnum]);
+console.log('Random video: #'+rnum+' '+$vids[rnum]);
 document.getElementById("isrc").innerHTML=$vids[rnum];
 $h=window.innerHeight;
 var he=document.getElementById("hig").innerHTML;
