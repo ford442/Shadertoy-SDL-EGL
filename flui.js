@@ -14,7 +14,7 @@ const canvas=document.getElementById('acanvas');
 
 resizeCanvas();
 let config={
-SIM_RESOLUTION:64,DYE_RESOLUTION:1024,CAPTURE_RESOLUTION:512,DENSITY_DISSIPATION:1,VELOCITY_DISSIPATION:0.2,PRESSURE:0.8,PRESSURE_ITERATIONS:20,CURL:30,SPLAT_RADIUS:0.25,SPLAT_FORCE:6000,SHADING:true,COLORFUL:false,COLOR_UPDATE_SPEED:10,PAUSED:false,BACK_COLOR:{r:0,g:0,b:0},TRANSPARENT:true,BLOOM:true,BLOOM_ITERATIONS:8,BLOOM_RESOLUTION:256,BLOOM_INTENSITY:0.8,BLOOM_THRESHOLD:0.6,BLOOM_SOFT_KNEE:0.7,SUNRAYS:true,SUNRAYS_RESOLUTION:196,SUNRAYS_WEIGHT:1.0
+SIM_RESOLUTION:256,DYE_RESOLUTION:1024,CAPTURE_RESOLUTION:512,DENSITY_DISSIPATION:1,VELOCITY_DISSIPATION:0.2,PRESSURE:0.8,PRESSURE_ITERATIONS:20,CURL:30,SPLAT_RADIUS:0.25,SPLAT_FORCE:6000,SHADING:true,COLORFUL:false,COLOR_UPDATE_SPEED:10,PAUSED:false,BACK_COLOR:{r:0,g:0,b:0},TRANSPARENT:true,BLOOM:false,BLOOM_ITERATIONS:8,BLOOM_RESOLUTION:256,BLOOM_INTENSITY:0.8,BLOOM_THRESHOLD:0.6,BLOOM_SOFT_KNEE:0.7,SUNRAYS:false,SUNRAYS_RESOLUTION:196,SUNRAYS_WEIGHT:1.0
 };
 function pointerPrototype(){
 this.id= -1;
@@ -45,7 +45,7 @@ startGUI();
 function getWebGLContext(canvas){
 const params={alpha:true,depth:false,stencil:false,antialias:true,preserveDrawingBuffer:false};
 let gl=canvas.getContext('webgl2',{
-imageSmoothingEnabled:false,preserveDrawingBuffer:false,antialias:true,stencil:true,premultipliedAlpha:false,alpha:true,depth:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance'
+imageSmoothingEnabled:false,preserveDrawingBuffer:false,antialias:true,stencil:false,premultipliedAlpha:false,alpha:true,depth:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance'
 });
 const isWebGL2=!!gl;
 if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
