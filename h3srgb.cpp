@@ -39,17 +39,17 @@ static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
-static GLfloat mouseX;
-static GLfloat mouseY;
-static GLfloat cMouseX;
-static GLfloat cMouseY;
-static GLfloat x;
-static GLfloat y;
-static EM_BOOL mouseLPressed;
+GLfloat mouseX;
+GLfloat mouseY;
+GLfloat cMouseX;
+GLfloat cMouseY;
+GLfloat x;
+GLfloat y;
+EM_BOOL mouseLPressed;
 int S;
 GLfloat Size;
-static EM_BOOL clickLoc;
-static GLfloat mX,mY;
+EM_BOOL clickLoc;
+GLfloat mX,mY;
 
 EGLDisplay display;
 EGLSurface surface;
@@ -61,9 +61,9 @@ static EGLint config_size,major,minor,attrib_position;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-static struct timespec rem;
+struct timespec rem;
 // static struct timespec req={0,16600000};
-static struct timespec req={0,16666666};
+struct timespec req={0,16666666};
 //static struct timespec req={0,15000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -123,7 +123,7 @@ glCompileShader(shader);
 return shader;
 }
 
-static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 mouseLPressed=true;
