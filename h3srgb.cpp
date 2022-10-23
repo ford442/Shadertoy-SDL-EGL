@@ -1,5 +1,9 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
+
+#define GL_GLEXT_PROTOTYPES 1
+#define GL3_PROTOTYPES 1
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -20,8 +24,6 @@
 #include <chrono>
 #include <SDL2/SDL.h>
 
-#define GL_GLEXT_PROTOTYPES
-
 using namespace std;
 using namespace std::chrono;
 
@@ -35,11 +37,12 @@ GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame
 // long double Ttime,Dtime;
 double Ttime,Dtime;
 EGLint iFrame;
-static GLsizei s4=4;
-static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
-static GLfloat F=1.0f;
-static GLfloat F0=0.0f;
-static GLfloat Fm1=-1.0f;
+GLsizei s4=4;
+// static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
+int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
+GLfloat F=1.0f;
+GLfloat F0=0.0f;
+GLfloat Fm1=-1.0f;
 GLfloat mouseX;
 GLfloat mouseY;
 GLfloat cMouseX;
