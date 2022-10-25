@@ -174,9 +174,9 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-// glFinish();
+glFinish();
 nanosleep(&req,&rem);
-// glFlush();
+glFlush();
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
@@ -505,7 +505,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},33.3);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
