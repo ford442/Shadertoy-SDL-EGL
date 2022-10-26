@@ -151,6 +151,8 @@ setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){document.getElementById("btn3").click();},500);
 setTimeout(function(){document.getElementById("btn8").click();},1600);
 setTimeout(function(){document.getElementById("tim").innerHTML=1700;},4200);
+setTimeout(function(){document.getElementById('wrap').style.pointerEvents='auto';
+},5000);
 
 function loada(){
 loadV.addEventListener('canplay',function(){
