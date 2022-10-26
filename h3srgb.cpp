@@ -1,14 +1,13 @@
-#include <emscripten.h>
-#include <emscripten/html5.h>
+
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
 
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include <GLES3/gl3.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
 
 #include <iostream>
 #include <algorithm>
@@ -72,6 +71,7 @@ static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
+
 static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
@@ -87,40 +87,6 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-static const char8_t *read_file(const char *filename){
-FILE *file=fopen(filename,"r");
-if(file){
-int status=fseek(file,0,SEEK_END);
-if(status!=0){
-fclose(file);
-return nullptr;
-}
-length=ftell(file);
-status=fseek(file,0,SEEK_SET);
-if(status!=0){
-fclose(file);
-return nullptr;
-}
-result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
-if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
-result[actual_length++]={'\0'};
-} 
-fclose(file);
-return result;
-}
-return nullptr;
-}
-static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
-GLsizei srclens[nsources];
-for(i=0;i<nsources;++i){
-srclens[i]=(GLsizei)strlen(sources[i]);
-}
-shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
-glCompileShader(shader);
-return shader;
-}
 
 EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -136,6 +102,7 @@ y=e->clientY;
 }}
 return 0;
 }
+
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 
@@ -204,6 +171,42 @@ iFrame++;
 glFinish();
 nanosleep(&req,&rem);
 glFlush();
+}
+
+static const char8_t *read_file(const char *filename){
+FILE *file=fopen(filename,"r");
+if(file){
+int status=fseek(file,0,SEEK_END);
+if(status!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+status=fseek(file,0,SEEK_SET);
+if(status!=0){
+fclose(file);
+return nullptr;
+}
+result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
+if(result){
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
+result[actual_length++]={'\0'};
+} 
+fclose(file);
+return result;
+}
+return nullptr;
+}
+
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
+GLsizei srclens[nsources];
+for(i=0;i<nsources;++i){
+srclens[i]=(GLsizei)strlen(sources[i]);
+}
+shader=glCreateShader(type);
+glShaderSource(shader,nsources,sources,srclens);
+glCompileShader(shader);
+return shader;
 }
 
 void strt(){
@@ -462,11 +465,7 @@ T=true;
 }
 })
 
-
-
-//  SDL
 #include <SDL2/SDL.h>
-
 SDL_AudioDeviceID dev;
 struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
@@ -479,18 +478,15 @@ dev=0;
 
 void qu(int rc){
 SDL_Quit();
-// exit(rc);
 }
 
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
-// qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
-
 
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
@@ -510,10 +506,10 @@ wave.pos+=len;
 }
 
 void plt(){
-cls_aud();
+// cls_aud();
 char flnm[24];
 SDL_FreeWAV(wave.snd);
-SDL_Quit();
+// SDL_Quit();
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
