@@ -10,5 +10,5 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 }}
 ff.send(null);
-console.log('Wrote 1 shader to filesystem: \n -> ',pth);
+// console.log('Wrote 1 shader to filesystem: \n -> ',pth);
 });
