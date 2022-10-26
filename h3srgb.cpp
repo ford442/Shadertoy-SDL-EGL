@@ -492,6 +492,23 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 
 
+void SDLCALL bfr(void *unused,Uint8* stm,int len){
+Uint8* wptr;
+int lft;
+wptr=wave.snd+wave.pos;
+lft=wave.slen-wave.pos;
+while (lft<=len){
+SDL_memcpy(stm,wptr,lft);
+stm+=lft;
+len-=lft;
+wptr=wave.snd;
+lft=wave.slen;
+wave.pos=0;
+}
+SDL_memcpy(stm,wptr,len);
+wave.pos+=len;
+}
+
 void plt(){
 cls_aud();
 char flnm[24];
@@ -510,22 +527,6 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
-void SDLCALL bfr(void *unused,Uint8* stm,int len){
-Uint8* wptr;
-int lft;
-wptr=wave.snd+wave.pos;
-lft=wave.slen-wave.pos;
-while (lft<=len){
-SDL_memcpy(stm,wptr,lft);
-stm+=lft;
-len-=lft;
-wptr=wave.snd;
-lft=wave.slen;
-wave.pos=0;
-}
-SDL_memcpy(stm,wptr,len);
-wave.pos+=len;
-}
 
 extern "C" {
 
