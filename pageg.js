@@ -1,6 +1,4 @@
-
 var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
-
 var $iwid=document.getElementById("iwid");
 var mV=document.getElementById("mv");
 var loadV=document.getElementById("ldv");
@@ -152,6 +150,7 @@ setTimeout(function(){document.getElementById("btn").click();},2700);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},500);
 setTimeout(function(){document.getElementById("btn8").click();},1600);
+setTimeout(function(){document.getElementById("tim").innerHTML=1700;},4200);
 
 function loada(){
 loadV.addEventListener('canplay',function(){
