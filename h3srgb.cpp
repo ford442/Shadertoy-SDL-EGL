@@ -134,11 +134,11 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-reportVar(leng);
 }
 
 extern "C" {
 void nano(int Fnum,int leng,float *ptr,float *aptr){
+reportVar(leng);
 avgFrm(Fnum,leng,ptr,aptr);
 }
 }
