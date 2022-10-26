@@ -75,10 +75,10 @@ static const unsigned char fragment_shader_header_gles3[]=
 "out vec4 fragColor;\n";
 static const unsigned char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-static const unsigned char* common_shader_header=common_shader_header_gles3;
-static const unsigned char* vertex_shader_body=vertex_shader_body_gles3;
-static const unsigned char* fragment_shader_header=fragment_shader_header_gles3;
-static const unsigned char* fragment_shader_footer=fragment_shader_footer_gles3;
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
