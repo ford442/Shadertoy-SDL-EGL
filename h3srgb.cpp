@@ -149,7 +149,7 @@ glUniform1i(uniform_frame,fram);
 
 void renderFrame(){
 high_resolution_clock::time_point t1,t2;
-long double Ttime;
+double Ttime;
 
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
