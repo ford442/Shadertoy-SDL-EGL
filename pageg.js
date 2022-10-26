@@ -8,7 +8,7 @@ let $shds=[];
 
 function sngs(xml){
 var nparser=new DOMParser();
-var htmlDoc=nparser.parseFromString(xml.responseText,'text/html');
+var htmlDoc=nparser.parseFromString(xml.responseText,"text/html");
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
 // console.log('Number of songs: '+$sngs[0]);
@@ -22,7 +22,7 @@ $sngs[i]=Self+"songs/"+txxt;
 
 function vids(xml){
 var vparser=new DOMParser();
-var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
+var htmlDoc=vparser.parseFromString(xml.responseText,"text/html");
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
 // console.log('Number of videos: '+$vids[0]);
@@ -36,7 +36,7 @@ $vids[i]=Self+"video/"+txxt;
 
 function shds(xml){
 var sparser=new DOMParser();
-var htmlDoc=sparser.parseFromString(xml.responseText,'text/html');
+var htmlDoc=sparser.parseFromString(xml.responseText,"text/html");
 var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $shds[0]=preList.length;
 // console.log('Number of shaders: '+$shds[0]);
@@ -85,8 +85,8 @@ dxhttp.send();
 scanVideos();
 scanShaders();
 scanSongs();
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById("pmhig").innerHTML=parseInt(window.innerHeight,10);
+document.getElementById("ihig").innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 document.getElementById("mv").load();
@@ -97,14 +97,14 @@ randSong=Math.floor(($sngs[0]-5)*Math.random());
 // console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
 var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
-let sng=new BroadcastChannel('sng');
+let sng=new BroadcastChannel("sng");
 sng.postMessage({
 data:songSrc
 });
 // var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
 // sound.play();
 }
-document.getElementById('btn8').addEventListener('click',function(){
+document.getElementById("btn8").addEventListener("click",function(){
 snd();
 });
 const tem=document.getElementById("tim");
@@ -142,6 +142,7 @@ var $hg=hii+"px";
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
+document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
 setTimeout(function(){document.getElementById("btn2").click();},400);
@@ -151,11 +152,9 @@ setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){document.getElementById("btn3").click();},500);
 setTimeout(function(){document.getElementById("btn8").click();},1600);
 setTimeout(function(){document.getElementById("tim").innerHTML=1700;},4200);
-setTimeout(function(){document.getElementById('wrap').style.pointerEvents='auto';
-},5000);
 
 function loada(){
-loadV.addEventListener('canplay',function(){
+loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
 document.getElementById("wid").innerHTML=this.videoWidth;
@@ -171,7 +170,7 @@ document.getElementById("idur").innerHTML=mil/1000;
 document.getElementById("itim").innerHTML=$pt;
 });
 vide=document.querySelectorAll("video");
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById("pmhig").innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById("ihid").innerHTML=hii;
 $lt=Math.round(tem.innerHTML);
@@ -203,10 +202,10 @@ document.getElementById("ldv").load();
 document.getElementById("mv").play();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById("pmhig").innerHTML=parseInt(window.innerHeight,10);
 setTimeout(function(){
-document.getElementById('circle').height=parseInt(window.innerHeight,10);
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
+document.getElementById("circle").height=parseInt(window.innerHeight,10);
+document.getElementById("circle").width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
 },500);
 setTimeout(function(){
