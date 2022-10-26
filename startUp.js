@@ -1,6 +1,6 @@
 let statusElement=document.getElementById("status");
 let progressElement=document.getElementById("progress");
-let Module={
+Module={
 preRun:[],
 postRun:[],
 print:(function(){
