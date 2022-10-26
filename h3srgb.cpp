@@ -28,7 +28,6 @@ GLuint VCO,ECO,vtx,frag,uni_frm,uni_tme,uni_res,uni_mse;
 GLfloat Ttime;
 EGLint iFrame;
 GLsizei s4=4;
-// static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
@@ -56,32 +55,30 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-// static struct timespec req={0,16600000};
 struct timespec req={0,16600000};
-//static struct timespec req={0,15000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-static const unsigned char *fileloc="/shader/shader1.toy";
-const unsigned char *sources[4];
+static const char *fileloc="/shader/shader1.toy";
+const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
-static const unsigned char common_shader_header_gles3[]=
+static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;";
-static const unsigned char vertex_shader_body_gles3[]=
+static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-static const unsigned char fragment_shader_header_gles3[]=
+static const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
-static const unsigned char fragment_shader_footer_gles3[]=
+static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-static const unsigned char* common_shader_header=common_shader_header_gles3;
-static const unsigned char* vertex_shader_body=vertex_shader_body_gles3;
-static const unsigned char* fragment_shader_header=fragment_shader_header_gles3;
-static const unsigned char* fragment_shader_footer=fragment_shader_footer_gles3;
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -165,7 +162,7 @@ nanosleep(&req,&rem);
 glFlush();
 }
 
-static const char8_t *read_file(const unsigned char *filename){
+static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -190,7 +187,7 @@ return result;
 return nullptr;
 }
 
-static GLuint compile_shader(GLenum type,GLsizei nsources,const unsigned char **dsources){
+static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -268,7 +265,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
-static const unsigned char* default_fragment_shader=(unsigned char*)read_file(fileloc);
+static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -483,7 +480,7 @@ wave.pos+=len;
 }
 
 void plt(){
-unsigned char flnm[24];
+char flnm[24];
 SDL_FreeWAV(wave.snd);
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
