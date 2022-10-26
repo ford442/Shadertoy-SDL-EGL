@@ -162,7 +162,7 @@ nanosleep(&req,&rem);
 glFlush();
 }
 
-static const char8_t *read_file(const unsigned char *filename){
+static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
