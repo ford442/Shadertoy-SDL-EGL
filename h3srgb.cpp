@@ -25,8 +25,6 @@ using namespace std;
 using namespace std::chrono;
 
 
-
-
 GLuint uniform_date,VCO,vtx,frag,uniform_frame,uniform_time,uniform_mouse;
 
 EGLint iFrame;
@@ -198,6 +196,7 @@ return nullptr;
 }
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
+GLuint shader;
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
