@@ -67,7 +67,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
 // static struct timespec req={0,16600000};
-struct timespec req={0,16666666};
+struct timespec req={0,16600000};
 //static struct timespec req={0,15000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -174,18 +174,20 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-//glFinish();
-//nanosleep(&req,&rem);
-//glFlush();
+glFinish();
+nanosleep(&req,&rem);
+glFlush();
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+
+float max=0.5;
+float min=0.5;
+float sum=0.5;
+float avgSum=0.5;
+float minSum=0.5;
+float maxSum=0.5;
+
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
@@ -223,12 +225,12 @@ EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -501,11 +503,13 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-setTimeout(function(){
+
 var pointb=66*la;
+
+setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},30);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
