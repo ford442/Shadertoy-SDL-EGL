@@ -25,14 +25,11 @@ using namespace std;
 using namespace std::chrono;
 
 
-high_resolution_clock::time_point t1,t2,t3;
-GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-long double Ttime,Dtime;
-// double Ttime,Dtime;
+
+
+GLuint uniform_date,VCO,vtx,frag,uniform_frame,uniform_time,uniform_mouse;
+
 EGLint iFrame;
-GLsizei s4=4;
-// static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
@@ -49,9 +46,7 @@ GLfloat Size;
 EM_BOOL clickLoc;
 GLfloat mX,mY;
 
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
+
 GLsizei i;
 GLfloat fps;
 GLfloat timeSpeed;
@@ -60,9 +55,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-// static struct timespec req={0,16600000};
 struct timespec req={0,16600000};
-//static struct timespec req={0,15000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -137,6 +130,7 @@ aLoc[200]=maxSum/32;
 }
 
 void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
+GLuint uniform_frame,uniform_time,uniform_mouse;
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -154,6 +148,9 @@ glUniform1i(uniform_frame,fram);
 }
 
 void renderFrame(){
+high_resolution_clock::time_point t1,t2;
+long double Ttime;
+
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -210,6 +207,11 @@ return shader;
 }
 
 void strt(){
+EGLDisplay display;
+EGLSurface surface;
+EGLContext contextegl;
+GLuint EBO,VBO,shader_program,sampler_channel[4],sampler_channel_res,shader,uniform_res;
+high_resolution_clock::time_point t1;
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
