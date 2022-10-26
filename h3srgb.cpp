@@ -22,14 +22,10 @@
 #include <ctime>
 #include <unistd.h>
 #include <chrono>
-#include <SDL2/SDL.h>
 
 using namespace std;
 using namespace std::chrono;
 
-//  SDL
-SDL_AudioDeviceID dev;
-struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
@@ -142,6 +138,38 @@ y=e->clientY;
 return 0;
 }
 
+void avgFrm(int F,int leng,float *dat,float *aLoc){
+
+float max=0.5;
+float min=0.5;
+float sum=0.5;
+float avgSum=0.5;
+float minSum=0.5;
+float maxSum=0.5;
+
+for (int i=0;i<leng;i++){
+sum+=dat[i];
+if(max<dat[i]){max=dat[i];}
+if(min>dat[i]&&dat[i]>0){min=dat[i];}
+}
+sum=sum/leng;
+aLoc[F]=sum;
+aLoc[F+100]=min;
+aLoc[F+200]=max;
+for(int i=33;i<65;i++){
+avgSum+=aLoc[i];
+}
+aLoc[0]=avgSum/32;
+for(int i=33;i<65;i++){
+minSum+=aLoc[i+100];
+}
+aLoc[100]=minSum/32;
+for(int i=33;i<65;i++){
+maxSum+=aLoc[i+200];
+}
+aLoc[200]=maxSum/32;
+}
+
 void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
@@ -177,38 +205,6 @@ iFrame++;
 glFinish();
 nanosleep(&req,&rem);
 glFlush();
-}
-
-void avgFrm(int F,int leng,float *dat,float *aLoc){
-
-float max=0.5;
-float min=0.5;
-float sum=0.5;
-float avgSum=0.5;
-float minSum=0.5;
-float maxSum=0.5;
-
-for (int i=0;i<leng;i++){
-sum+=dat[i];
-if(max<dat[i]){max=dat[i];}
-if(min>dat[i]&&dat[i]>0){min=dat[i];}
-}
-sum=sum/leng;
-aLoc[F]=sum;
-aLoc[F+100]=min;
-aLoc[F+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aLoc[i];
-}
-aLoc[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aLoc[i+100];
-}
-aLoc[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aLoc[i+200];
-}
-aLoc[200]=maxSum/32;
 }
 
 void strt(){
@@ -321,63 +317,6 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
-}
-
-void cls_aud(){
-if(dev!=0){
-SDL_PauseAudioDevice(dev,SDL_TRUE);
-SDL_CloseAudioDevice(dev);
-dev=0;
-}}
-
-void qu(int rc){
-SDL_Quit();
-exit(rc);
-}
-
-void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
-if(!dev){
-SDL_FreeWAV(wave.snd);
-qu(2);
-}
-SDL_PauseAudioDevice(dev,SDL_FALSE);
-}
-
-void SDLCALL bfr(void *unused,Uint8* stm,int len){
-Uint8* wptr;
-int lft;
-wptr=wave.snd+wave.pos;
-lft=wave.slen-wave.pos;
-while (lft<=len){
-SDL_memcpy(stm,wptr,lft);
-stm+=lft;
-len-=lft;
-wptr=wave.snd;
-lft=wave.slen;
-wave.pos=0;
-}
-SDL_memcpy(stm,wptr,len);
-wave.pos+=len;
-}
-
-void plt(){
-cls_aud();
-char flnm[24];
-SDL_FreeWAV(wave.snd);
-SDL_Quit();
-SDL_SetMainReady();
-if (SDL_Init(SDL_INIT_AUDIO)<0){
-qu(1);
-}
-  
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
-qu(1);
-}
-wave.pos=0;
-wave.spec.callback=bfr;
-opn_aud();
 }
 
 EM_JS(void,ma,(),{
@@ -540,6 +479,70 @@ void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
+}
+
+
+//  SDL
+#include <SDL2/SDL.h>
+
+SDL_AudioDeviceID dev;
+struct{SDL_AudioSpec spec;const Uint8* snd;Uint32 slen;int pos;}wave;
+
+void cls_aud(){
+if(dev!=0){
+SDL_PauseAudioDevice(dev,SDL_TRUE);
+SDL_CloseAudioDevice(dev);
+dev=0;
+}}
+
+void qu(int rc){
+SDL_Quit();
+exit(rc);
+}
+
+void opn_aud(){
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
+if(!dev){
+SDL_FreeWAV(wave.snd);
+qu(2);
+}
+SDL_PauseAudioDevice(dev,SDL_FALSE);
+}
+
+void SDLCALL bfr(void *unused,const Uint8* stm,int len){
+Uint8* wptr;
+int lft;
+wptr=wave.snd+wave.pos;
+lft=wave.slen-wave.pos;
+while (lft<=len){
+SDL_memcpy(stm,wptr,lft);
+stm+=lft;
+len-=lft;
+wptr=wave.snd;
+lft=wave.slen;
+wave.pos=0;
+}
+SDL_memcpy(stm,wptr,len);
+wave.pos+=len;
+}
+
+void plt(){
+cls_aud();
+char flnm[24];
+SDL_FreeWAV(wave.snd);
+SDL_Quit();
+SDL_SetMainReady();
+if (SDL_Init(SDL_INIT_AUDIO)<0){
+qu(1);
+}
+  
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
+qu(1);
+}
+wave.pos=0;
+wave.spec.callback=bfr;
+opn_aud();
 }
 
 int main(){
