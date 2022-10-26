@@ -1,5 +1,3 @@
-
-
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
 
@@ -24,9 +22,13 @@
 using namespace std;
 using namespace std::chrono;
 
-
-
+high_resolution_clock::time_point t1,t2;
+GLuint EBO,VBO,shader_program,shader,sampler_channel[4],sampler_channel_res;
+GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLfloat Ttime;
 EGLint iFrame;
+GLsizei s4=4;
+// static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
 GLfloat F=1.0f;
 GLfloat F0=0.0f;
@@ -54,7 +56,9 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
+// static struct timespec req={0,16600000};
 struct timespec req={0,16600000};
+//static struct timespec req={0,15000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -65,7 +69,7 @@ char8_t *result=NULL;
 long length=0;
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -78,7 +82,6 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-
 
 EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -95,16 +98,13 @@ y=e->clientY;
 return 0;
 }
 
-
 void avgFrm(int F,int leng,float *dat,float *aLoc){
-
 float max=0.5;
 float min=0.5;
 float sum=0.5;
 float avgSum=0.5;
 float minSum=0.5;
 float maxSum=0.5;
-
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
@@ -129,7 +129,6 @@ aLoc[200]=maxSum/32;
 }
 
 void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
-GLuint uniform_frame,uniform_time,uniform_mouse;
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -147,9 +146,6 @@ glUniform1i(uniform_frame,fram);
 }
 
 void renderFrame(){
-high_resolution_clock::time_point t1,t2;
-GLfloat Ttime;
-
 eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -195,7 +191,6 @@ return nullptr;
 }
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
-GLuint shader;
 GLsizei srclens[nsources];
 for(i=0;i<nsources;++i){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -207,10 +202,6 @@ return shader;
 }
 
 void strt(){
-GLuint uniform_date,VCO,vtx,frag,uniform_frame,uniform_time,uniform_mouse;
-
-GLuint EBO,VBO,shader_program,sampler_channel[4],sampler_channel_res,shader,uniform_res;
-high_resolution_clock::time_point t1;
 iFrame=0;
 clickLoc=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -224,12 +215,12 @@ EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -311,7 +302,7 @@ uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
 glUniform3f(uniform_res,Size,Size,1.0);
 glUniform3f(sampler_channel_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
@@ -344,24 +335,20 @@ var g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
-
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
-
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
@@ -372,14 +359,10 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
-
-// var Min=(4.0*(($amax-$aavg)/2.0))+(($fmin+$amin)/2.0);
-// var Min=(4.0*(($amax-$amin-$aavg)/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
@@ -391,7 +374,6 @@ var al=w$*h$*8;
 var sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -403,13 +385,11 @@ let $F=1;
 let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
 }
-
 let d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -422,7 +402,6 @@ var sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
@@ -432,7 +411,6 @@ var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
-
 function M(){
 var vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -445,9 +423,7 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-
 var pointb=66*la;
-
 setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 setTimeout(function(){
@@ -510,7 +486,6 @@ void plt(){
 // cls_aud();
 char flnm[24];
 SDL_FreeWAV(wave.snd);
-// SDL_Quit();
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
@@ -523,7 +498,6 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 }
-
 
 extern "C" {
 
