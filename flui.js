@@ -716,7 +716,6 @@ gl.viewport(0,0,target.width,target.height);
 gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
 }
 if(clear){
-let clr2.color=generateColor();
 gl.clearColor((0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),0.7);
 gl.clear(gl.COLOR_BUFFER_BIT);
 }
