@@ -3,14 +3,14 @@
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
-
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-#define __gl2_h_
-#include <GLES2/gl2ext.h>
+
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -30,8 +30,8 @@ using namespace std::chrono;
 high_resolution_clock::time_point t1,t2,t3;
 GLuint DBO,EBO,VBO,CBO,shader_program,shader,frame,sampler_channel[4],sampler_channel_res,TEX;
 GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
-// long double Ttime,Dtime;
-double Ttime,Dtime;
+long double Ttime,Dtime;
+// double Ttime,Dtime;
 EGLint iFrame;
 GLsizei s4=4;
 // static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
@@ -447,8 +447,10 @@ var pointb=66*la;
 
 setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+setTimeout(function(){
 M();
-},16.6);
+},8.3);
+},8.3);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -486,7 +488,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 #include <SDL2/SDL.h>
 
 SDL_AudioDeviceID dev;
-struct{SDL_AudioSpec spec;const Uint8* snd;Uint32 slen;int pos;}wave;
+struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
 
 void cls_aud(){
 if(dev!=0){
@@ -497,19 +499,30 @@ dev=0;
 
 void qu(int rc){
 SDL_Quit();
-exit(rc);
+// exit(rc);
 }
 
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
-qu(2);
+// qu(2);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 }
 
-void SDLCALL bfr(void *unused,const Uint8* stm,int len){
+
+void plt(){
+cls_aud();
+char flnm[24];
+SDL_FreeWAV(wave.snd);
+SDL_Quit();
+SDL_SetMainReady();
+if (SDL_Init(SDL_INIT_AUDIO)<0){
+qu(1);
+}
+
+void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
 int lft;
 wptr=wave.snd+wave.pos;
@@ -526,16 +539,6 @@ SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 }
 
-void plt(){
-cls_aud();
-char flnm[24];
-SDL_FreeWAV(wave.snd);
-SDL_Quit();
-SDL_SetMainReady();
-if (SDL_Init(SDL_INIT_AUDIO)<0){
-qu(1);
-}
-  
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
