@@ -462,25 +462,6 @@ T=true;
 }
 })
 
-extern "C" {
-
-void str(){
-strt();
-}
-
-void pl(){
-plt();
-}
-
-void b3(){
-ma();
-}
-
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-}
-
-}
 
 
 //  SDL
@@ -547,6 +528,25 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
+extern "C" {
+
+void str(){
+strt();
+}
+
+void pl(){
+plt();
+}
+
+void b3(){
+ma();
+}
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+}
+
+}
 int main(){
 EM_ASM({
 FS.mkdir("/snd");
