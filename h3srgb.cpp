@@ -265,7 +265,7 @@ glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
-static const unsigned char* default_fragment_shader=(unsigned char*)read_file(fileloc);
+static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
@@ -480,7 +480,7 @@ wave.pos+=len;
 }
 
 void plt(){
-unsigned char flnm[24];
+char flnm[24];
 SDL_FreeWAV(wave.snd);
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
