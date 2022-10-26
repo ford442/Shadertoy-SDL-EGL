@@ -8,10 +8,7 @@ promoPopup.style.display='table';
 }
 const appleLink=document.getElementById('apple_link');
 const googleLink=document.getElementById('google_link');
-
-// const canvas=document.getElementsByTagName('canvas')[0];
 const canvas=document.getElementById('acanvas');
-
 resizeCanvas();
 let config={
 SIM_RESOLUTION:256,DYE_RESOLUTION:1024,CAPTURE_RESOLUTION:512,DENSITY_DISSIPATION:1,VELOCITY_DISSIPATION:0.2,PRESSURE:0.8,PRESSURE_ITERATIONS:20,CURL:30,SPLAT_RADIUS:0.25,SPLAT_FORCE:6000,SHADING:true,COLORFUL:false,COLOR_UPDATE_SPEED:10,PAUSED:false,BACK_COLOR:{r:0,g:0,b:0},TRANSPARENT:true,BLOOM:false,BLOOM_ITERATIONS:8,BLOOM_RESOLUTION:512,BLOOM_INTENSITY:0.3,BLOOM_THRESHOLD:0.8,BLOOM_SOFT_KNEE:0.7,SUNRAYS:false,SUNRAYS_RESOLUTION:196,SUNRAYS_WEIGHT:1.0
@@ -58,7 +55,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 halfFloat=gl.getExtension('OES_texture_half_float');
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
-gl.clearColor((0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(Math.random());
+gl.clearColor((Math.random(),(Math.random(),(Math.random(),(Math.random());
 const halfFloatTexType=isWebGL2?gl.HALF_FLOAT:halfFloat.HALF_FLOAT_OES;
 let formatRGBA;
 let formatRG;
@@ -716,7 +713,7 @@ gl.viewport(0,0,target.width,target.height);
 gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
 }
 if(clear){
-gl.clearColor((0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(Math.random());
+gl.clearColor((Math.random(),(Math.random(),(Math.random(),(Math.random());
 gl.clear(gl.COLOR_BUFFER_BIT);
 }
 gl.drawElements(gl.TRIANGLES,6,gl.UNSIGNED_SHORT,0);
@@ -1215,9 +1212,9 @@ return delta;
 }
 function generateColor(){
 let c=HSVtoRGB(Math.random(),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)));
-c.r=(0.25+(Math.random()*0.5));
-c.g=(0.25+(Math.random()*0.5));
-c.b=(0.25+(Math.random()*0.5));
+c.r=(0.25+(Math.random()*0.75));
+c.g=(0.25+(Math.random()*0.75));
+c.b=(0.25+(Math.random()*0.75));
 return c;
 }
 function HSVtoRGB(h,s,v){
