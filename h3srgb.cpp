@@ -174,9 +174,9 @@ mouseY=(Size-y)/Size;
 uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
-glFinish();
-nanosleep(&req,&rem);
-glFlush();
+//glFinish();
+//nanosleep(&req,&rem);
+//glFlush();
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
@@ -228,7 +228,7 @@ EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -247,7 +247,7 @@ EGL_NONE
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
-attr.depth=EM_FALSE;
+attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
@@ -505,7 +505,7 @@ setTimeout(function(){
 var pointb=66*la;
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},16.6);
+},30);
 }
 M();
 document.getElementById("di").onclick=function(){
