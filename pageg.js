@@ -80,7 +80,7 @@ dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
 }};
-dxhttp.open("GET","glsl.1ink.us/",true);
+dxhttp.open("GET","../shadertoys/",true);
 dxhttp.send();
 }
 
