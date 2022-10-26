@@ -1,52 +1,52 @@
-let tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
-let $iwid=document.getElementById("iwid");
-let mV=document.getElementById("mv");
-let loadV=document.getElementById("ldv");
+var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
+var $iwid=document.getElementById("iwid");
+var mV=document.getElementById("mv");
+var loadV=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
 function sngs(xml){
-let nparser=new DOMParser();
-let htmlDoc=nparser.parseFromString(xml.responseText,"text/html");
-let preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
+var nparser=new DOMParser();
+var htmlDoc=nparser.parseFromString(xml.responseText,"text/html");
+var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $sngs[0]=preList.length;
-for (let i=1;i<preList.length;i++){
-let txxt=preList[i].href;
-let Self=location.href;
+for (var i=1;i<preList.length;i++){
+var txxt=preList[i].href;
+var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $sngs[i]=Self+"songs/"+txxt;
 }}
 function vids(xml){
-let vparser=new DOMParser();
-let htmlDoc=vparser.parseFromString(xml.responseText,"text/html");
-let preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
+var vparser=new DOMParser();
+var htmlDoc=vparser.parseFromString(xml.responseText,"text/html");
+var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
-for (let i=1;i<preList.length;i++){
-let txxt=preList[i].href;
-let Self=location.href;
+for (var i=1;i<preList.length;i++){
+var txxt=preList[i].href;
+var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $vids[i]=Self+"video/"+txxt;
 }}
 function shds(xml){
-let sparser=new DOMParser();
-let htmlDoc=sparser.parseFromString(xml.responseText,"text/html");
-let preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
+var sparser=new DOMParser();
+var htmlDoc=sparser.parseFromString(xml.responseText,"text/html");
+var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $shds[0]=preList.length;
-for (let i=1;i<preList.length;i++){
-let txxt=preList[i].href;
-let Self=location.href;
+for (var i=1;i<preList.length;i++){
+var txxt=preList[i].href;
+var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $shds[i+1]="https://glsl.1ink.us/shaders/"+txxt;
 }
-let randShade=Math.random();
+var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 document.getElementById("path").innerHTML=$shds[randShade];
 }
 function scanSongs(){
-let nxhttp=new XMLHttpRequest();
+var nxhttp=new XMLHttpRequest();
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
@@ -55,7 +55,7 @@ nxhttp.open("GET","songs/",true);
 nxhttp.send();
 }
 function scanVideos(){
-let fxhttp=new XMLHttpRequest();
+var fxhttp=new XMLHttpRequest();
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
@@ -64,7 +64,7 @@ fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
 function scanShaders(){
-let dxhttp=new XMLHttpRequest();
+var dxhttp=new XMLHttpRequest();
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
@@ -83,7 +83,7 @@ document.getElementById("mv").load();
 document.getElementById("ldv").load();
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
-let songSrc=$sngs[randSong+5];
+var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
 let sng=new BroadcastChannel("sng");
 sng.postMessage({
@@ -124,7 +124,7 @@ r$=hii/he;
 $w=wi*r$;
 let $ihigB=document.getElementById("ihid");
 let $ihig=document.getElementById("ihig");
-let $hg=hii+"px";
+var $hg=hii+"px";
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
@@ -134,6 +134,7 @@ mV.play();
 setTimeout(function(){document.getElementById("btn2").click();},400);
 setTimeout(function(){document.getElementById("btn11").click();},2200);
 setTimeout(function(){document.getElementById("btn").click();},2700);
+// setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},500);
 setTimeout(function(){document.getElementById("btn8").click();},1600);
 setTimeout(function(){document.getElementById("tim").innerHTML=1700;},4200);
@@ -144,7 +145,7 @@ loadV.height=this.videoHeight;
 document.getElementById("wid").innerHTML=this.videoWidth;
 document.getElementById("hig").innerHTML=this.videoHeight;
 $sc=this.duration;
-let mil=Math.round($sc*1000);
+var mil=Math.round($sc*1000);
 $pt=Math.random()*mil;
 $pt=$pt*1000;
 $pt=$pt/1000;
@@ -166,8 +167,8 @@ $ls=$ls/1000;
 rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 document.getElementById("isrc").innerHTML=$vids[rnum];
 $h=window.innerHeight;
-let he=document.getElementById("hig").innerHTML;
-let wi=document.getElementById("wid").innerHTML;
+var he=document.getElementById("hig").innerHTML;
+var wi=document.getElementById("wid").innerHTML;
 r$=he/$h;
 $w=wi/r$;
 hii=$ihigB.innerHTML;
