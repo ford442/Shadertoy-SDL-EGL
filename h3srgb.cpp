@@ -95,6 +95,21 @@ y=e->clientY;
 return 0;
 }
 
+EM_JS(void,getVar,(float a,float b,float c,float d,float e,float f),{
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
+console.log(e);
+console.log(f);
+})
+
+extern "C" {
+void reportVar(float a,float b,float c,float d,float e,float f){
+getVar(a,b,c,d,e,f);
+}
+}
+
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
 float min=1.0;
@@ -123,6 +138,7 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
+reportVar(max,min,sum,avgSum,minSum,maxSum);
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
