@@ -444,7 +444,7 @@ T=true;
 
 #include <SDL2/SDL.h>
 SDL_AudioDeviceID dev;
-struct{SDL_AudioSpec spec;Uint8* snd;Uint32 slen;int pos;}wave;
+struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
 void cls_aud(){
 if(dev!=0){
