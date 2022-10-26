@@ -439,11 +439,11 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
-setTimeout(function($F,sz,pointb,pointa){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+  
 setTimeout(function(){
 M();
-},200);
+
 },200);
 }
 M();
