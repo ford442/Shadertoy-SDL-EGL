@@ -23,8 +23,8 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
-GLuint EBO,VBO,shader_program,shader,sampler_channel[4],sampler_channel_res;
-GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame,uniform_time,uniform_res,uniform_mouse;
+GLuint EBO,VBO,shd_prg,shader,smp_chn[4],smp_chn_res;
+GLuint VCO,ECO,vtx,frag,uni_frm,uni_tme,uni_res,uni_mse;
 GLfloat Ttime;
 EGLint iFrame;
 GLsizei s4=4;
@@ -39,10 +39,10 @@ GLfloat cMouseX;
 GLfloat cMouseY;
 GLfloat x;
 GLfloat y;
-EM_BOOL mouseLPressed;
+EM_BOOL ms_l;
 int S;
 GLfloat Size;
-EM_BOOL clickLoc;
+EM_BOOL clk_l;
 GLfloat mX,mY;
 
 EGLDisplay display;
@@ -51,7 +51,7 @@ EGLContext contextegl;
 GLsizei i;
 GLfloat fps;
 GLfloat timeSpeed;
-static EGLint config_size,major,minor,attrib_position;
+static EGLint config_size,major,minor,atb_pos;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
@@ -62,7 +62,7 @@ struct timespec req={0,16600000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-GLubyte Indices[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const unsigned char *fileloc="/shader/shader1.toy";
 const unsigned char *sources[4];
 char8_t *result=NULL;
@@ -83,13 +83,13 @@ static const unsigned wchar_t* vertex_shader_body=vertex_shader_body_gles3;
 static const unsigned wchar_t* fragment_shader_header=fragment_shader_header_gles3;
 static const unsigned wchar_t* fragment_shader_footer=fragment_shader_footer_gles3;
 
-EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-mouseLPressed=true;
+ms_l=true;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-mouseLPressed=false;
+ms_l=false;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -128,21 +128,21 @@ maxSum+=aLoc[i+200];
 aLoc[200]=maxSum/32;
 }
 
-void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
-if(mouseLPressed==true){
-if(clickLoc==true){
+void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
+if(ms_l==true){
+if(clk_l==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
 mX=xxx*Size;
 mY=yyy*Size;
-clickLoc=false;
+clk_l=false;
 }
-glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
+glUniform4f(uni_mse,(Size*xx),(Size*yy),mX,mY);
 }else{
-clickLoc=true;
+clk_l=true;
 }
-glUniform1f(uniform_time,time);
-glUniform1i(uniform_frame,fram);
+glUniform1f(uni_tme,time);
+glUniform1i(uni_frm,fram);
 }
 
 void renderFrame(){
@@ -151,14 +151,14 @@ t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
-ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
-ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
-uniforms(mouseX,mouseY,Ttime,iFrame);
-glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
+uni(mouseX,mouseY,Ttime,iFrame);
+glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 iFrame++;
 glFinish();
 nanosleep(&req,&rem);
@@ -203,7 +203,7 @@ return shader;
 
 void strt(){
 iFrame=0;
-clickLoc=true;
+clk_l=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
@@ -262,7 +262,7 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(Indices),Indices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
@@ -277,30 +277,30 @@ sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-shader_program=glCreateProgram();
-glAttachShader(shader_program,vtx);
-glAttachShader(shader_program,frag);
-glLinkProgram(shader_program);
-attrib_position=v0;
-glBindAttribLocation(shader_program,v0,"iPosition");
-glUseProgram(shader_program);
+shd_prg=glCreateProgram();
+glAttachShader(shd_prg,vtx);
+glAttachShader(shd_prg,frag);
+glLinkProgram(shd_prg);
+atb_pos=v0;
+glBindAttribLocation(shd_prg,v0,"iPosition");
+glUseProgram(shd_prg);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-attrib_position=glGetAttribLocation(shader_program,"iPosition");
-glEnableVertexAttribArray(attrib_position);
-glVertexAttribPointer(attrib_position,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-sampler_channel[0]=glGetUniformLocation(shader_program,"iChannel0");
-sampler_channel_res=glGetUniformLocation(shader_program,"iChannelResolution");
-sampler_channel[1]=glGetUniformLocation(shader_program,"iChannel1");
-sampler_channel[2]=glGetUniformLocation(shader_program,"iChannel2");
-sampler_channel[3]=glGetUniformLocation(shader_program,"iChannel3");
-uniform_time=glGetUniformLocation(shader_program,"iTime");
-uniform_frame=glGetUniformLocation(shader_program,"iFrame");
-uniform_res=glGetUniformLocation(shader_program,"iResolution");
-uniform_mouse=glGetUniformLocation(shader_program,"iMouse");
-glUniform3f(uniform_res,Size,Size,1.0);
-glUniform3f(sampler_channel_res,Size,Size,1.0);
+atb_pos=glGetAttribLocation(shd_prg,"iPosition");
+glEnableVertexAttribArray(atb_pos);
+glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
+smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
+smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
+smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
+uni_tme=glGetUniformLocation(shd_prg,"iTime");
+uni_frm=glGetUniformLocation(shd_prg,"iFrame");
+uni_res=glGetUniformLocation(shd_prg,"iResolution");
+uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+glUniform3f(uni_res,Size,Size,1.0);
+glUniform3f(smp_chn_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glEnable(GL_DEPTH_TEST);
