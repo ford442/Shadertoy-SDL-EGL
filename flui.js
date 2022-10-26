@@ -58,8 +58,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 halfFloat=gl.getExtension('OES_texture_half_float');
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
-let clr.color=generateColor();
-gl.clearColor(clr.r,clr.g,clr.b,0.7);
+gl.clearColor((0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),0.7);
 const halfFloatTexType=isWebGL2?gl.HALF_FLOAT:halfFloat.HALF_FLOAT_OES;
 let formatRGBA;
 let formatRG;
@@ -718,7 +717,7 @@ gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
 }
 if(clear){
 let clr2.color=generateColor();
-gl.clearColor(clr2.r,clr2.g,clr2.b,0.7);
+gl.clearColor((0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)),0.7);
 gl.clear(gl.COLOR_BUFFER_BIT);
 }
 gl.drawElements(gl.TRIANGLES,6,gl.UNSIGNED_SHORT,0);
@@ -1217,9 +1216,9 @@ return delta;
 }
 function generateColor(){
 let c=HSVtoRGB(Math.random(),(0.25+(Math.random()*0.5)),(0.25+(Math.random()*0.5)));
-c.r*=(0.25+(Math.random()*0.5));
-c.g*=(0.25+(Math.random()*0.5));
-c.b*=(0.25+(Math.random()*0.5));
+c.r=(0.25+(Math.random()*0.5));
+c.g=(0.25+(Math.random()*0.5));
+c.b=(0.25+(Math.random()*0.5));
 return c;
 }
 function HSVtoRGB(h,s,v){
