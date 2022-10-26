@@ -95,18 +95,13 @@ y=e->clientY;
 return 0;
 }
 
-EM_JS(void,getVar,(float a,float b,float c,float d,float e,float f),{
+EM_JS(void,getVar,(float a),{
 console.log(a);
-console.log(b);
-console.log(c);
-console.log(d);
-console.log(e);
-console.log(f);
 })
 
 extern "C" {
-void reportVar(float a,float b,float c,float d,float e,float f){
-getVar(a,b,c,d,e,f);
+void reportVar(float a){
+getVar(a);
 }
 }
 
@@ -138,7 +133,7 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-reportVar(max,min,sum,avgSum,minSum,maxSum);
+reportVar(max);
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
@@ -441,8 +436,8 @@ setTimeout(function(){
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 setTimeout(function(){
 M();
-},8.3);
-},8.3);
+},200);
+},200);
 }
 M();
 document.getElementById("di").onclick=function(){
