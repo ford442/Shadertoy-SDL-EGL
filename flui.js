@@ -108,8 +108,8 @@ let status=gl.checkFramebufferStatus(gl.FRAMEBUFFER);
 return status == gl.FRAMEBUFFER_COMPLETE;
 }
 function startGUI(){
-let ww=window.innerWidth;
-let gui=new dat.GUI({width:ww});
+var ww=window.innerWidth;
+var gui=new dat.GUI({width:ww});
 gui.add(config,'DYE_RESOLUTION',{
 'high':1024,'medium':512,'low':256,'very low':128
 }).name('quality').onFinishChange(initFramebuffers);
