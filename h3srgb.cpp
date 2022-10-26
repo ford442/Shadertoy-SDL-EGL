@@ -103,6 +103,9 @@ extern "C" {
 void reportVar(float a){
 getVar(a);
 }
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+}
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
@@ -152,6 +155,8 @@ clk_l=true;
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 }
+
+
 
 void renderFrame(){
 eglSwapBuffers(display,surface);
@@ -520,9 +525,6 @@ void b3(){
 ma();
 }
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-}
 
 }
 
