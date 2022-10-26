@@ -55,7 +55,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 halfFloat=gl.getExtension('OES_texture_half_float');
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
-gl.clearColor((Math.random(),(Math.random(),(Math.random(),(Math.random());
+gl.clearColor(Math.random(),Math.random(),Math.random(),Math.random());
 const halfFloatTexType=isWebGL2?gl.HALF_FLOAT:halfFloat.HALF_FLOAT_OES;
 let formatRGBA;
 let formatRG;
@@ -713,7 +713,7 @@ gl.viewport(0,0,target.width,target.height);
 gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
 }
 if(clear){
-gl.clearColor((Math.random(),(Math.random(),(Math.random(),(Math.random());
+gl.clearColor(Math.random(),Math.random(),Math.random(),Math.random());
 gl.clear(gl.COLOR_BUFFER_BIT);
 }
 gl.drawElements(gl.TRIANGLES,6,gl.UNSIGNED_SHORT,0);
