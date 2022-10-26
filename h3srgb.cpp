@@ -46,7 +46,9 @@ GLfloat Size;
 EM_BOOL clickLoc;
 GLfloat mX,mY;
 
-
+EGLDisplay display;
+EGLSurface surface;
+EGLContext contextegl;
 GLsizei i;
 GLfloat fps;
 GLfloat timeSpeed;
@@ -207,9 +209,7 @@ return shader;
 }
 
 void strt(){
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
+
 GLuint EBO,VBO,shader_program,sampler_channel[4],sampler_channel_res,shader,uniform_res;
 high_resolution_clock::time_point t1;
 iFrame=0;
