@@ -96,12 +96,12 @@ return 0;
 }
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
-float max=0.5;
-float min=0.5;
-float sum=0.5;
-float avgSum=0.5;
-float minSum=0.5;
-float maxSum=0.5;
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
@@ -235,7 +235,7 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
