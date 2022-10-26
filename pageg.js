@@ -47,7 +47,7 @@ var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
-$shds[i+1]=Self+"all/"+txxt;
+$shds[i+1]="https://glsl.1ink.us/"+txxt;
 }
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
@@ -80,7 +80,7 @@ dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
 }};
-dxhttp.open("GET","../shadertoys/",true);
+dxhttp.open("GET","https://glsl.1ink.us",true);
 dxhttp.send();
 }
 
