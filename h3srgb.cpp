@@ -3,10 +3,11 @@
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
-#define __gl2_h_
-#include <GLES2/gl2ext.h>
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
