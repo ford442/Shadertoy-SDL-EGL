@@ -4,57 +4,50 @@ var Module={
 preRun: [],
 postRun: [],
 print: (function() {
-var element=document.getElementById("output");
-if (element)
-element.value='';
-return function(text) {
+var elm=document.getElementById("output");
+if (elm)
+elm.value='';
+return function(text){
+if(arguments.length>1)
+text=Array.prototype.slice.call(arguments).join(' ');
+if (elm) {
+elm.value += text + "\n";
+elm.scrollTop=elm.scrollHeight;
+}};})(),
+printErr: function(text){
 if (arguments.length > 1)
 text=Array.prototype.slice.call(arguments).join(' ');
-// console.log(text);
-if (element) {
-element.value += text + "\n";
-element.scrollTop=element.scrollHeight;
-}
-};
-}
-)(),
-printErr: function(text) {
-if (arguments.length > 1)
-text=Array.prototype.slice.call(arguments).join(' ');
-if (0) {
+if(0){
 dump(text + '\n');
-} else {
+}else{
 console.error(text);
-}
-},
-canvas: (function() {
-var sscanvas=document.getElementById("bcanvas");
-sscanvas.addEventListener("webglcontextlost", function(e) {
+}},
+canvas: (function(){
+var scv=document.getElementById("bcanvas");
+scv.addEventListener("webglcontextlost", function(e) {
 alert('WebGL context lost. You will need to reload the page.');
 e.preventDefault();
-}, false);
-return sscanvas;
-}
-)(),
-setStatus: function(text) {
-if (!Module.setStatus.last) {
+},false);
+return scv;
+})(),
+setStatus: function(text){
+if(!Module.setStatus.last){
 Module.setStatus.last={
 time: Date.now(),
 text: ''
-};
-}
-if (text === Module.setStatus.text) {
+};}
+if(text === Module.setStatus.text){
 return;
 }
 var m=text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
 var now=Date.now();
-if (m && now - Date.now() < 30) {
+if(m && now - Date.now() < 30) {
 return;
 }
-if (m) {
+if(m){
 text=m[1];
-progressElement.value=parseInt(m[2], 10) * 100;
-progressElement.max=parseInt(m[4], 10) * 100;
+progressElement.value=parseInt(m[2],10)*100;
+progressElement.max=parseInt(m[4],10)*100;
 progressElement.hidden=false;
 } else {
 progressElement.value=null;
@@ -64,17 +57,14 @@ progressElement.hidden=true;
 statusElement.innerHTML=text;
 },
 totalDependencies: 0,
-monitorRunDependencies: function(left) {
+monitorRunDependencies: function(left){
 this.totalDependencies=Math.max(this.totalDependencies, left);
 Module.setStatus(left ? 'Preparing...(' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
-}
-};
+}};
 Module.setStatus("|Download|");
-window.onerror=function(event) {
+window.onerror=function(event){
 Module.setStatus('Exception thrown,see JavaScript console');
-Module.setStatus=function(text) {
+Module.setStatus=function(text){
 if (text) {
 Module.printErr("[post-exception status] " + text);
-}
-};
-};
+}};};
