@@ -95,12 +95,12 @@ y=e->clientY;
 return 0;
 }
 
-EM_JS(void,getVar,(float a),{
+EM_JS(void,getVar,(int a),{
 console.log(a);
 })
 
 extern "C" {
-void reportVar(float a){
+void reportVar(int a){
 getVar(a);
 }
 
