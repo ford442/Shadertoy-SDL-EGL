@@ -133,7 +133,7 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-reportVar(max);
+reportVar(leng);
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
