@@ -1,29 +1,29 @@
-var statusElement=document.getElementById("status");
-var progressElement=document.getElementById("progress");
-var Module={
-preRun: [],
-postRun: [],
-print: (function() {
-var elm=document.getElementById("output");
-if (elm)
-elm.value='';
+let statusElement=document.getElementById("status");
+let progressElement=document.getElementById("progress");
+let Module={
+preRun:[],
+postRun:[],
+print:(function(){
+let elm=document.getElementById("output");
+if(elm)elm.value='';
 return function(text){
-if(arguments.length>1)
+if(arguments.length>1){
 text=Array.prototype.slice.call(arguments).join(' ');
-if (elm) {
+}
+if(elm){
 elm.value += text + "\n";
 elm.scrollTop=elm.scrollHeight;
 }};})(),
 printErr: function(text){
-if (arguments.length > 1)
-text=Array.prototype.slice.call(arguments).join(' ');
+if (arguments.length > 1){
+text=Array.prototype.slice.call(arguments).join(' ');}
 if(0){
 dump(text + '\n');
 }else{
 console.error(text);
 }},
 canvas: (function(){
-var scv=document.getElementById("bcanvas");
+let scv=document.getElementById("bcanvas");
 scv.addEventListener("webglcontextlost", function(e) {
 alert('WebGL context lost. You will need to reload the page.');
 e.preventDefault();
@@ -39,8 +39,8 @@ text: ''
 if(text === Module.setStatus.text){
 return;
 }
-var m=text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
-var now=Date.now();
+let m=text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+let now=Date.now();
 if(m && now - Date.now() < 30) {
 return;
 }
@@ -49,7 +49,7 @@ text=m[1];
 progressElement.value=parseInt(m[2],10)*100;
 progressElement.max=parseInt(m[4],10)*100;
 progressElement.hidden=false;
-} else {
+}else{
 progressElement.value=null;
 progressElement.max=null;
 progressElement.hidden=true;
