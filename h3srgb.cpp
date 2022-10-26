@@ -416,7 +416,7 @@ if(T){return;}
 for(i=64;i>0;i--){
 let loca=$F+1;if(loca>64){loca=1;}
 let locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F=="+i+"){let $r"+i+"=t($"+i+");r($r"+i+");let $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){let $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 let $bb=R(vv);
 $B.set($bb,0,sz);
