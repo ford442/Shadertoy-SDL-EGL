@@ -501,6 +501,14 @@ SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
 }
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
+qu(1);
+}
+wave.pos=0;
+wave.spec.callback=bfr;
+opn_aud();
+}
 
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
@@ -517,15 +525,6 @@ wave.pos=0;
 }
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
-}
-
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
-qu(1);
-}
-wave.pos=0;
-wave.spec.callback=bfr;
-opn_aud();
 }
 
 extern "C" {
@@ -547,6 +546,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 }
+
 int main(){
 EM_ASM({
 FS.mkdir("/snd");
