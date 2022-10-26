@@ -313,7 +313,7 @@ emscripten_set_main_loop((void(*)())renderFrame,0,0);
 EM_JS(void,ma,(),{
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
+let vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
@@ -362,7 +362,7 @@ this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-let vv=document.getElementById("mv");
+vv=document.getElementById("mv");
 let blank$=Math.max((((w$-h$)*0)/2),0);
 let nblank$=Math.max((((h$-w$)*0)/2),0);
 let l=w$*h$*16;
