@@ -25,7 +25,6 @@ using namespace std;
 using namespace std::chrono;
 
 
-GLuint uniform_date,VCO,vtx,frag,uniform_frame,uniform_time,uniform_mouse;
 
 EGLint iFrame;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
@@ -208,6 +207,7 @@ return shader;
 }
 
 void strt(){
+GLuint uniform_date,VCO,vtx,frag,uniform_frame,uniform_time,uniform_mouse;
 
 GLuint EBO,VBO,shader_program,sampler_channel[4],sampler_channel_res,shader,uniform_res;
 high_resolution_clock::time_point t1;
