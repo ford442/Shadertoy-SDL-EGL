@@ -192,7 +192,7 @@ return nullptr;
 
 static GLuint compile_shader(GLenum type,GLsizei nsources,const unsigned char **dsources){
 GLsizei srclens[nsources];
-for(i=0;i<nsources;++i){
+for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
 }
 shader=glCreateShader(type);
