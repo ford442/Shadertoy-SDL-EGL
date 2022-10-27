@@ -210,8 +210,9 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-extern "C" {
-EM_JS(void,ma,(),{
+
+
+EM_ASM({
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -294,53 +295,7 @@ var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
-var la=h$*h$*4;
-var al=w$*h$*8;
-var sz=(h$*h$)/8;
-var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-R.setOutput([sz]);
-for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
-var pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
-var T=false;
-function M(){
-var vv=document.getElementById("mv");
-t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-if(T){return;}
-for(i=64;i>0;i--){
-var loca=$F+1;if(loca>64){loca=1;}
-var locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
-}
-var $bb=R(vv);
-$B.set($bb,0,sz);
-var pointb=66*la;
-setTimeout(function(){
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-setTimeout(function(){
-Module.ccall("rnDr");
-M();
-},16.6);
-},16.6);
-}
-M();
-document.getElementById("di").onclick=function(){
-T=true;
-S();
-};
-return()=>{
-T=true;
-};
-}
-})
-}
+
 
 void strt(){
 iFrame=0;
@@ -451,7 +406,52 @@ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
-emscripten_set_main_loop((void(*)())ma,0,0);
+var la=h$*h$*4;
+var al=w$*h$*8;
+var sz=(h$*h$)/8;
+var pointa=77*la;
+var agav=new Float32Array($H,pointa,300);
+R.setOutput([sz]);
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+}
+var pointb=66*la;
+var $B=new Float32Array($H,pointb,sz);
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
+var T=false;
+function M(){
+var vv=document.getElementById("mv");
+t.setConstants({nblnk:nblank$,blnk:blank$});
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+if(T){return;}
+for(i=64;i>0;i--){
+var loca=$F+1;if(loca>64){loca=1;}
+var locb=$Bu+1;if(locb>64){locb=1;}
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+}
+var $bb=R(vv);
+$B.set($bb,0,sz);
+var pointb=66*la;
+setTimeout(function(){
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+setTimeout(function(){
+Module.ccall("rnDr");
+M();
+},16.6);
+},16.6);
+}
+M();
+document.getElementById("di").onclick=function(){
+T=true;
+S();
+};
+return()=>{
+T=true;
+};
+}
+})
 }
 
 
