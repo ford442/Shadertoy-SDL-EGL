@@ -125,6 +125,9 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
+  EM_ASM({
+      console.log('frame: ' + $0);
+  },F);
 }
 
 }
