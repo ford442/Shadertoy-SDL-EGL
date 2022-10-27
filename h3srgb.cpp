@@ -107,7 +107,7 @@ console.log('aLoc: ' + $0);
 },aLoc[F]);
     
         EM_ASM({
-console.log('aLoc: ' + $0);
+console.log('dat: ' + $0);
 },dat[i]);
     
 for (int i=0;i<leng;i++){
