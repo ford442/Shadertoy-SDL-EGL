@@ -95,7 +95,7 @@ y=e->clientY;
 return 0;
 }
 
-void avgFrm(int F,int leng,float *dat,float *aLoc){
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -103,46 +103,46 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
     EM_ASM({
-console.log('aLoc[20]: ' + $0);
-},aLoc[20]);
+console.log('aptr[20]: ' + $0);
+},aptr[20]);
     
         EM_ASM({
-console.log('dat[20]: ' + $0);
-},dat[20]);
+console.log('ptr[20]: ' + $0);
+},ptr[20]);
     
 for (int i=0;i<leng;i++){
-sum+=dat[i];
-if(max<dat[i]){max=dat[i];}
-if(min>dat[i]&&dat[i]>0){min=dat[i];}
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&dat[i]>0){min=ptr[i];}
 }
 sum=sum/leng;
-aLoc[F]=sum;
-aLoc[F+100]=min;
-aLoc[F+200]=max;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
-avgSum+=aLoc[i];
+avgSum+=aptr[i];
 }
-aLoc[0]=avgSum/32;
+aptr[0]=avgSum/32;
 for(int i=33;i<65;i++){
-minSum+=aLoc[i+100];
+minSum+=aptr[i+100];
 }
-aLoc[100]=minSum/32;
+aptr[100]=minSum/32;
 for(int i=33;i<65;i++){
-maxSum+=aLoc[i+200];
+maxSum+=aptr[i+200];
 }
-aLoc[200]=maxSum/32;
+aptr[200]=maxSum/32;
 EM_ASM({
-console.log('frame: ' + $0);
-},F);
+console.log('Fnum: ' + $0);
+},Fnum);
 
   EM_ASM({
-console.log('frame: ' + $0);
+console.log('max: ' + $0);
 },max);
   EM_ASM({
-console.log('frame: ' + $0);
+console.log('min: ' + $0);
 },min);
   EM_ASM({
-console.log('frame: ' + $0);
+console.log('sum: ' + $0);
 },sum);
 }
 
