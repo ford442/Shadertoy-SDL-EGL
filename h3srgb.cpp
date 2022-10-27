@@ -95,6 +95,7 @@ y=e->clientY;
 return 0;
 }
 
+extern "C" {
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
@@ -124,12 +125,6 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-}
-
-extern "C" {
-
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
 }
 
 }
@@ -432,8 +427,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
 setTimeout(function(){
-  console.log($F);
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+Module.ccall('avgFrm',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 setTimeout(function(){
 M();
 },200);
