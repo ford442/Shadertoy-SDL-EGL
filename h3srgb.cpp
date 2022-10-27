@@ -95,15 +95,6 @@ y=e->clientY;
 return 0;
 }
 
-EM_JS(void,getVar,(int a),{
-console.log(a);
-})
-
-void reportVar(int a){
-getVar(a);
-}
-
-
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
@@ -134,12 +125,15 @@ maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
 }
+
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 reportVar(Fnum);
 avgFrm(Fnum,leng,ptr,aptr);
-}}
+}
+
+}
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(ms_l==true){
@@ -326,6 +320,7 @@ t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 }
 
+extern "C" {
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -455,6 +450,7 @@ T=true;
 };
 }
 })
+}
 
 #include <SDL2/SDL.h>
 SDL_AudioDeviceID dev;
