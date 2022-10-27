@@ -113,7 +113,7 @@ console.log('ptr[20]: ' + $0);
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&dat[i]>0){min=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
 sum=sum/leng;
 aptr[Fnum]=sum;
