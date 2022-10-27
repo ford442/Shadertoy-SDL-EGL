@@ -521,10 +521,6 @@ void pl(){
 plt();
 }
 
-void b3(){
-ma();
-}
-
 }
 
 int main(){
