@@ -464,7 +464,7 @@ setTimeout(function(){
   console.log(pointb);
   console.log(pointa);
   console.log($B[20]);
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+Module.ccall("nano",null,["Number"],["Number"],["Number"],["Number"],[$F],[sz],[pointb],[pointa]);
 setTimeout(function(){
 M();
 },200);
