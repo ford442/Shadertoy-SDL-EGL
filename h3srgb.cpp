@@ -55,7 +55,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,33200000};
+struct timespec req={0,12000000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -165,14 +165,8 @@ uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 iFrame++;
 glFinish();
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 glFlush();
-}
-
-extern "C" {
-void rnDr(){
-renderFrame();
-}
 }
 
 static const char8_t *read_file(const char *filename){
@@ -210,9 +204,6 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-
-
-
 
 void strt(){
 iFrame=0;
@@ -323,8 +314,11 @@ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 t1=high_resolution_clock::now();
+emscripten_set_main_loop((void(*)())renderFrame,0,0);
+}
 
-EM_ASM({
+extern "C" {
+EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -435,13 +429,13 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
+
 setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
-Module.ccall("rnDr");
 M();
-},16.6);
-},16.6);
+},12);
+},12);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -452,9 +446,8 @@ return()=>{
 T=true;
 };
 }
-});
+})
 }
-
 
 #include <SDL2/SDL.h>
 SDL_AudioDeviceID dev;
@@ -520,6 +513,10 @@ strt();
 
 void pl(){
 plt();
+}
+
+void b3(){
+ma();
 }
 
 }
