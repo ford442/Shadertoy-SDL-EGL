@@ -55,7 +55,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 struct timespec rem;
-struct timespec req={0,24000000};
+struct timespec req={0,33200000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -165,8 +165,13 @@ uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 iFrame++;
 glFinish();
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glFlush();
+}
+
+extern "C" {
+void rnDr(){
+renderFrame();
 }
 
 static const char8_t *read_file(const char *filename){
@@ -204,119 +209,6 @@ glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
 }
-
-void strt(){
-iFrame=0;
-clk_l=true;
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-Size=(float)S;
-eglBindAPI(EGL_OPENGL_ES_API);
-const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-EGL_NONE};
-const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,v3,
-EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
-EGL_NONE};
-const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,v8,
-EGL_GREEN_SIZE,v8,
-EGL_BLUE_SIZE,v8,
-EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v24,
-EGL_STENCIL_SIZE,v8,
-EGL_BUFFER_SIZE,v32,
-EGL_NONE
-};
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
-attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=v2;
-attr.minorVersion=v0;
-ctx=emscripten_webgl_create_context("#scanvas",&attr);
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-emscripten_webgl_make_context_current(ctx);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glGenBuffers(v1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-glGenVertexArrays(v1,&VCO);
-glBindVertexArray(VCO);
-glGenBuffers(v1,&VBO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
-static const char* default_fragment_shader=(char*)read_file(fileloc);
-sources[0]=common_shader_header;
-sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-sources[0]=common_shader_header;
-sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
-sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-shd_prg=glCreateProgram();
-glAttachShader(shd_prg,vtx);
-glAttachShader(shd_prg,frag);
-glLinkProgram(shd_prg);
-atb_pos=v0;
-glBindAttribLocation(shd_prg,v0,"iPosition");
-glUseProgram(shd_prg);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
-atb_pos=glGetAttribLocation(shd_prg,"iPosition");
-glEnableVertexAttribArray(atb_pos);
-glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
-smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
-smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
-smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
-smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
-uni_tme=glGetUniformLocation(shd_prg,"iTime");
-uni_frm=glGetUniformLocation(shd_prg,"iFrame");
-uni_res=glGetUniformLocation(shd_prg,"iResolution");
-uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,Size,Size,1.0);
-glUniform3f(smp_chn_res,Size,Size,1.0);
-glClearColor(F0,F0,F0,F0);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glEnable(GL_BLEND);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-t1=high_resolution_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
-}
-
 extern "C" {
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -429,13 +321,13 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
-
 setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
+Module.ccall("rnDr");
 M();
-},24);
-},24);
+},16.6);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -448,6 +340,119 @@ T=true;
 }
 })
 }
+
+void strt(){
+iFrame=0;
+clk_l=true;
+S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+Size=(float)S;
+eglBindAPI(EGL_OPENGL_ES_API);
+const EGLint attribut_list[]={ 
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_NONE};
+const EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,v3,
+EGL_CONTEXT_MINOR_VERSION_KHR,v0,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+EGL_NONE};
+const EGLint attribute_list[]={
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_RED_SIZE,v8,
+EGL_GREEN_SIZE,v8,
+EGL_BLUE_SIZE,v8,
+EGL_ALPHA_SIZE,v8,
+EGL_DEPTH_SIZE,v24,
+EGL_STENCIL_SIZE,v8,
+EGL_BUFFER_SIZE,v32,
+EGL_NONE
+};
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_FALSE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=v2;
+attr.minorVersion=v0;
+ctx=emscripten_webgl_create_context("#scanvas",&attr);
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display,&v3,&v0);
+eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
+emscripten_webgl_make_context_current(ctx);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glGenBuffers(v1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glGenVertexArrays(v1,&VCO);
+glBindVertexArray(VCO);
+glGenBuffers(v1,&VBO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+static const char* default_fragment_shader=(char*)read_file(fileloc);
+sources[0]=common_shader_header;
+sources[1]=vertex_shader_body;
+vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
+sources[0]=common_shader_header;
+sources[1]=fragment_shader_header;
+sources[2]=default_fragment_shader;
+sources[3]=fragment_shader_footer;
+frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
+shd_prg=glCreateProgram();
+glAttachShader(shd_prg,vtx);
+glAttachShader(shd_prg,frag);
+glLinkProgram(shd_prg);
+atb_pos=v0;
+glBindAttribLocation(shd_prg,v0,"iPosition");
+glUseProgram(shd_prg);
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
+atb_pos=glGetAttribLocation(shd_prg,"iPosition");
+glEnableVertexAttribArray(atb_pos);
+glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
+smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
+smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
+smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
+uni_tme=glGetUniformLocation(shd_prg,"iTime");
+uni_frm=glGetUniformLocation(shd_prg,"iFrame");
+uni_res=glGetUniformLocation(shd_prg,"iResolution");
+uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+glUniform3f(uni_res,Size,Size,1.0);
+glUniform3f(smp_chn_res,Size,Size,1.0);
+glClearColor(F0,F0,F0,F0);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+t1=high_resolution_clock::now();
+emscripten_set_main_loop((void(*)())ma,0,0);
+}
+
 
 #include <SDL2/SDL.h>
 SDL_AudioDeviceID dev;
