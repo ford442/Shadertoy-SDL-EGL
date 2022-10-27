@@ -1,3 +1,4 @@
+
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
 
@@ -95,7 +96,6 @@ y=e->clientY;
 return 0;
 }
 
-extern "C" {
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
@@ -125,9 +125,15 @@ for(int i=33;i<65;i++){
 maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
-  EM_ASM({
-      console.log('frame: ' + $0);
-  },F);
+EM_ASM({
+console.log('frame: ' + F);
+},F);
+}
+
+extern "C" {
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
 }
 
 }
@@ -430,7 +436,8 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
 setTimeout(function(){
-Module.ccall('avgFrm',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
+  console.log($F);
+Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 setTimeout(function(){
 M();
 },200);
