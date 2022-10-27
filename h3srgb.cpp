@@ -389,7 +389,6 @@ var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 let $F=1;
 let $Bu=33;
-    console.log(agav[$F]);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
@@ -431,6 +430,8 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
+        console.log(agav[$F]);
+
 setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
