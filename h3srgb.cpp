@@ -102,14 +102,6 @@ float sum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
-    EM_ASM({
-console.log('aptr[20]: ' + $0);
-},aptr[20]);
-    
-        EM_ASM({
-console.log('ptr[20]: ' + $0);
-},ptr[20]);
-    
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -131,31 +123,11 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
-EM_ASM({
-console.log('Fnum: ' + $0);
-},Fnum);
-
-  EM_ASM({
-console.log('max: ' + $0);
-},max);
-  EM_ASM({
-console.log('min: ' + $0);
-},min);
-  EM_ASM({
-console.log('sum: ' + $0);
-},sum);
 }
 
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
-    
-            EM_ASM({
-console.log('ptr[20]: ' + $0);
-},ptr[20]);
-                EM_ASM({
-console.log('Fnum: ' + $0);
-},Fnum);
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
@@ -362,28 +334,28 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-const g=new GPU({canvas:bcanvas,webGl:contx});
-const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
-const glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
+var bcanvas=document.getElementById("bcanvas");
+var contx=bcanvas.getContext("webgl2",{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+var g=new GPU({canvas:bcanvas,webGl:contx});
+var g2=new GPU();
+var glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
+var glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
+var glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-const R=g2.createKernel(function(tv){
+var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
-const t=g.createKernel(function(v){
+var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-const r=g.createKernel(function(f){
+var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
@@ -417,6 +389,7 @@ var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 let $F=1;
 let $Bu=33;
+    console.log(agav[$F]);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
@@ -459,11 +432,6 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
 setTimeout(function(){
-  console.log($F);
-  console.log(sz);
-  console.log(pointb);
-  console.log(pointa);
-  console.log($B[20]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
