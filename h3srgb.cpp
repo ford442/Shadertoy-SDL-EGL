@@ -173,6 +173,7 @@ extern "C" {
 void rnDr(){
 renderFrame();
 }
+}
 
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
