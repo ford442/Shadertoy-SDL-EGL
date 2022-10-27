@@ -129,7 +129,6 @@ aLoc[200]=maxSum/32;
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
-reportVar(Fnum);
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
