@@ -132,7 +132,7 @@ document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
 setTimeout(function(){document.getElementById("btn2").click();},400);
-setTimeout(function(){document.getElementById("btn11").click();},2200);
+// setTimeout(function(){document.getElementById("btn11").click();},2200);
 setTimeout(function(){document.getElementById("btn").click();},2700);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},500);
