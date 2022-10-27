@@ -443,7 +443,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
 setTimeout(function(){
-  console.log(F);
+  console.log($F);
   console.log(sz);
   console.log(pointb);
   console.log(pointa);
