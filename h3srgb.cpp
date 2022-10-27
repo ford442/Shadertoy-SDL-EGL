@@ -99,12 +99,11 @@ EM_JS(void,getVar,(int a),{
 console.log(a);
 })
 
-extern "C" {
 void reportVar(int a){
 getVar(a);
 }
 
-}
+
 
 void avgFrm(int F,int leng,float *dat,float *aLoc){
 float max=0.0;
@@ -136,11 +135,9 @@ maxSum+=aLoc[i+200];
 aLoc[200]=maxSum/32;
 }
 
-extern "C" {
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 reportVar(Fnum);
 avgFrm(Fnum,leng,ptr,aptr);
-}
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
