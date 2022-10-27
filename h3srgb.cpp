@@ -321,7 +321,7 @@ extern "C" {
 EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
@@ -338,7 +338,7 @@ const contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothin
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 var glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e){return (1.0-b)-(((((1.0-e)-(a)+b)*1.5)/2.0)+((e-0.5)*((1.0-e)*0.25))-((0.5-e)*(e*0.25)));}`;
+var glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((e-0.5)*((1.0-e)*0.25))-((0.5-e)*(g*0.25)));}`;
 var glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
@@ -368,9 +368,9 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
-var vv=document.getElementById("mv");
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
+vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
@@ -396,14 +396,14 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-var l=w$*h$*16;
-var la=h$*h$*4;
-var al=w$*h$*8;
-var sz=(h$*h$)/8;
+l=w$*h$*16;
+la=h$*h$*4;
+al=w$*h$*8;
+sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
@@ -428,7 +428,7 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=66*la;
+pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
