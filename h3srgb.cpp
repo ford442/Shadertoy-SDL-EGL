@@ -337,9 +337,9 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
-let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+(((c-d)*0.7)+d)+((0.7-(0.7*(e-g)/(c-f))))/3.0));}`;
-let glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
+var glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
+var glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)))+(((c-d)*0.7)+d)+((0.7-(0.7*(e-g)/(c-f))))/3.0);}`;
+var glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
@@ -386,8 +386,8 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
-let $F=1;
-let $Bu=33;
+var $F=1;
+var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
@@ -395,7 +395,7 @@ for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
 }
-let d=S();if(d)d();d=S();function S(){
+var d=S();if(d)d();d=S();function S(){
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
@@ -429,13 +429,11 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;
-
-setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},8);
-},8);
+},16);
+
 }
 M();
 document.getElementById("di").onclick=function(){
