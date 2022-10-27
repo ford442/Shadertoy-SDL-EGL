@@ -134,11 +134,12 @@ maxSum+=aLoc[i+200];
 }
 aLoc[200]=maxSum/32;
 }
+extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 reportVar(Fnum);
 avgFrm(Fnum,leng,ptr,aptr);
-}
+}}
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(ms_l==true){
