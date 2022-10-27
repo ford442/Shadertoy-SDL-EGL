@@ -149,6 +149,13 @@ console.log('frame: ' + $0);
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
+    
+            EM_ASM({
+console.log('ptr[20]: ' + $0);
+},ptr[20]);
+                EM_ASM({
+console.log('Fnum: ' + $0);
+},Fnum);
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
