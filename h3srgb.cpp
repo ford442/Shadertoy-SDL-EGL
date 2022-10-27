@@ -164,9 +164,9 @@ mouseY=(Size-y)/Size;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 iFrame++;
-glFinish();
-nanosleep(&req,&rem);
-glFlush();
+//glFinish();
+//nanosleep(&req,&rem);
+//glFlush();
 }
 
 static const char8_t *read_file(const char *filename){
@@ -217,20 +217,20 @@ EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
@@ -254,7 +254,7 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
@@ -266,12 +266,12 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -338,8 +338,7 @@ const contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothin
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 var glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-//var glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((e-0.5)*((1.0-e)*0.25))-((0.5-e)*(g*0.25)));}`;
-var glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return (1.0-b)-(((((1.0-e)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-e)*0.25))-((0.5-f)*(g*0.25)));}`;
+var glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return (((1.0-b)-(((((1.0-e)-(a)+b)*1.5)/2.0)+(((f-0.5)*((1.0-g)*0.25))-((0.5-f)*(f*0.25)))))+((1.0-d)-(((((1.0-e)-(c)+d)*1.5)/2.0)+((f-0.5)*((1.0-g)*0.25))-((0.5-f)*(f*0.25))))/2.0);}`;
 var glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
