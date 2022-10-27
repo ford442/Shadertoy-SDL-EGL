@@ -137,7 +137,7 @@ setTimeout(function(){document.getElementById("btn").click();},2500);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 setTimeout(function(){document.getElementById("btn3").click();},400);
 setTimeout(function(){document.getElementById("btn8").click();},1300);
-setTimeout(function(){document.getElementById("tim").innerHTML=1800;},5000);
+setTimeout(function(){document.getElementById("tim").innerHTML=3200;},5000);
 function loada(){
 loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
