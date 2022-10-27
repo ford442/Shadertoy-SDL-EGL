@@ -102,6 +102,9 @@ float sum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
+    EM_ASM({
+console.log('frame: ' + $0);
+},aLoc[F]);
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
@@ -126,6 +129,7 @@ aLoc[200]=maxSum/32;
 EM_ASM({
 console.log('frame: ' + $0);
 },F);
+
   EM_ASM({
 console.log('frame: ' + $0);
 },max);
