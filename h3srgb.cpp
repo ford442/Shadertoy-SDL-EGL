@@ -103,8 +103,13 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
     EM_ASM({
-console.log('frame: ' + $0);
+console.log('aLoc: ' + $0);
 },aLoc[F]);
+    
+        EM_ASM({
+console.log('aLoc: ' + $0);
+},dat[i]);
+    
 for (int i=0;i<leng;i++){
 sum+=dat[i];
 if(max<dat[i]){max=dat[i];}
