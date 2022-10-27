@@ -328,7 +328,7 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glEnable(GL_BLEND);
@@ -344,7 +344,7 @@ EM_JS(void,ma,(),{
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-let $H=Module.HEAPF32.buffer;
+var $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
