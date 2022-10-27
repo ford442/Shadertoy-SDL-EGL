@@ -103,12 +103,12 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
     EM_ASM({
-console.log('aLoc: ' + $0);
-},aLoc[F]);
+console.log('aLoc[20]: ' + $0);
+},aLoc[20]);
     
         EM_ASM({
-console.log('dat: ' + $0);
-},dat[i]);
+console.log('dat[20]: ' + $0);
+},dat[20]);
     
 for (int i=0;i<leng;i++){
 sum+=dat[i];
@@ -456,6 +456,7 @@ setTimeout(function(){
   console.log(sz);
   console.log(pointb);
   console.log(pointa);
+  console.log($B[20]);
 Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 setTimeout(function(){
 M();
