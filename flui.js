@@ -6,11 +6,11 @@ setTimeout(() => {
 promoPopup.style.display='table';
 },20000);
 }
-const appleLink=document.getElementById('apple_link');
-const googleLink=document.getElementById('google_link');
+var appleLink=document.getElementById('apple_link');
+var googleLink=document.getElementById('google_link');
 
 // const canvas=document.getElementsByTagName('canvas')[0];
-const canvas=document.getElementById('acanvas');
+var canvas=document.getElementById('acanvas');
 
 resizeCanvas();
 let config={
@@ -43,9 +43,9 @@ config.SUNRAYS=false;
 }
 startGUI();
 function getWebGLContext(canvas){
-const params={alpha:true,depth:false,stencil:false,antialias:false,preserveDrawingBuffer:false};
+const params={alpha:true,depth:false,stencil:false,antialias:true,preserveDrawingBuffer:false};
 let gl=canvas.getContext('webgl2',{
-imageSmoothingEnabled:false,preserveDrawingBuffer:false,antialias:false,stencil:false,premultipliedAlpha:false,alpha:true,depth:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance'
+imageSmoothingEnabled:false,preserveDrawingBuffer:false,antialias:true,stencil:false,premultipliedAlpha:false,alpha:true,depth:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance'
 });
 const isWebGL2=!!gl;
 if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
