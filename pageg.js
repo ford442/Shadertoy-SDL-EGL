@@ -1,4 +1,4 @@
-let tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
+let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
 let loadV=document.getElementById("ldv");
