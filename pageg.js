@@ -1,7 +1,7 @@
-var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
-var $iwid=document.getElementById("iwid");
-var mV=document.getElementById("mv");
-var loadV=document.getElementById("ldv");
+let tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
+let $iwid=document.getElementById("iwid");
+let mV=document.getElementById("mv");
+let loadV=document.getElementById("ldv");
 let $sngs=[];
 let $vids=[];
 let $shds=[];
@@ -41,7 +41,7 @@ Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $shds[i+1]="https://glsl.1ink.us/shaders/"+txxt;
 }
-var randShade=Math.random();
+randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 document.getElementById("path").innerHTML=$shds[randShade];
 }
@@ -83,7 +83,7 @@ document.getElementById("mv").load();
 document.getElementById("ldv").load();
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
-var songSrc=$sngs[randSong+5];
+let songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
 let sng=new BroadcastChannel("sng");
 sng.postMessage({
@@ -93,14 +93,14 @@ data:songSrc
 document.getElementById("btn8").addEventListener("click",function(){
 snd();
 });
-const tem=document.getElementById("tim");
+let tem=document.getElementById("tim");
 ban=document.getElementById("btn1");
-const sfr=document.getElementById("slideframe");
+let sfr=document.getElementById("slideframe");
 function grab$lt(){
 $lt=Math.round($lt);}
 $lt=tem.innerHTML;
 grab$lt();
-const slo=new Slideout({"panel":document.getElementById("panel"),"menu":document.getElementById("menu"),"padding":384,"tolerance":70,"easing":"cubic-bezier(.32,2,.55,.27)"});
+let slo=new Slideout({"panel":document.getElementById("panel"),"menu":document.getElementById("menu"),"padding":384,"tolerance":70,"easing":"cubic-bezier(.32,2,.55,.27)"});
 ban.addEventListener("click",function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();slt=$lt/1000;slt=Math.round(slt);
@@ -124,7 +124,7 @@ r$=hii/he;
 $w=wi*r$;
 let $ihigB=document.getElementById("ihid");
 let $ihig=document.getElementById("ihig");
-var $hg=hii+"px";
+$hg=hii+"px";
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
@@ -145,7 +145,7 @@ loadV.height=this.videoHeight;
 document.getElementById("wid").innerHTML=this.videoWidth;
 document.getElementById("hig").innerHTML=this.videoHeight;
 $sc=this.duration;
-var mil=Math.round($sc*1000);
+mil=Math.round($sc*1000);
 $pt=Math.random()*mil;
 $pt=$pt*1000;
 $pt=$pt/1000;
@@ -167,8 +167,8 @@ $ls=$ls/1000;
 rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 document.getElementById("isrc").innerHTML=$vids[rnum];
 $h=window.innerHeight;
-var he=document.getElementById("hig").innerHTML;
-var wi=document.getElementById("wid").innerHTML;
+he=document.getElementById("hig").innerHTML;
+wi=document.getElementById("wid").innerHTML;
 r$=he/$h;
 $w=wi/r$;
 hii=$ihigB.innerHTML;
