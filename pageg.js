@@ -131,13 +131,13 @@ document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
-setTimeout(function(){document.getElementById("btn2").click();},300);
-setTimeout(function(){document.getElementById("btn11").click();},2000);
-setTimeout(function(){document.getElementById("btn").click();},1700);
+setTimeout(function(){document.getElementById("btn2").click();},700);
+setTimeout(function(){document.getElementById("btn11").click();},1700);
+setTimeout(function(){document.getElementById("btn").click();},2700);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
-setTimeout(function(){document.getElementById("btn3").click();},500);
-setTimeout(function(){document.getElementById("btn8").click();},1500);
-setTimeout(function(){document.getElementById("tim").innerHTML=1600;},2200);
+setTimeout(function(){document.getElementById("btn3").click();},700);
+setTimeout(function(){document.getElementById("btn8").click();},3700);
+setTimeout(function(){document.getElementById("tim").innerHTML=1650;},2700);
 function loada(){
 loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
