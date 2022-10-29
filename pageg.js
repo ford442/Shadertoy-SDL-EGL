@@ -6,6 +6,7 @@ let fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
 let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
+pll();
 let shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({
 data:222
@@ -171,7 +172,6 @@ data:222
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
-setTimeout(function(){pll();},3200);
 setTimeout(function(){document.getElementById("tim").innerHTML=1650;},2700);
 
 function loada(){
