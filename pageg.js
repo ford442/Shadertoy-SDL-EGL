@@ -1,8 +1,4 @@
 let bz=new BroadcastChannel('bez');
-document.getElementById('btn').addEventListener('click',function(){
-bz.postMessage({
-data:222
-});});
 function pll(){
 Module.ccall("pl");
 }
@@ -10,7 +6,6 @@ let fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
 let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-pll();
 let shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({
 data:222
@@ -166,13 +161,18 @@ mV.play();
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
 setTimeout(function(){Module.ccall("b3");},1700);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
-setTimeout(function(){Module.ccall("str");},2300);
+setTimeout(function(){
+Module.ccall("str");
+bz.postMessage({
+data:222
+});},2300);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 setTimeout(function(){window.open('./flac');},700);
 
+setTimeout(function(){snd();},1200);
+setTimeout(function(){pll();},3200);
 
-setTimeout(function(){document.getElementById("btn8").click();},3700);
 setTimeout(function(){document.getElementById("tim").innerHTML=1650;},2700);
 
 function loada(){
