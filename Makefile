@@ -58,7 +58,7 @@ fire:
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -ffast-math -flto=thin -std=gnu++2b -stdlib=libc++ \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js pageg.js --post-js flui.js --post-js fluid.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-pre-js cl-gpu.js 
+         --post-js pageg.js --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-pre-js cl-gpu.js 
 
 emloop:
 	  em++ emloop.cpp -O3 -o g3011.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
