@@ -1,3 +1,22 @@
+let bz=new BroadcastChannel('bez');
+document.getElementById('btn').addEventListener('click',function(){
+bz.postMessage({
+data:222
+});});
+function pll(){
+Module.ccall("pl");
+}
+let fll=new BroadcastChannel('file');
+fll.addEventListener('message',ea=> {
+let fill=new Uint8Array(ea.data.data);
+FS.writeFile('/snd/sample.wav',fill);
+pll();
+let shutDown=new BroadcastChannel('shutDown');
+shutDown.postMessage({
+data:222
+});
+});
+
 let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
@@ -44,6 +63,17 @@ $shds[i+1]="https://glsl.1ink.us/shaders/"+txxt;
 randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 document.getElementById("path").innerHTML=$shds[randShade];
+let pth=document.getElementById("path").innerHTML;
+let ff=new XMLHttpRequest();
+ff.open("GET",pth,true);
+ff.responseType="arraybuffer";
+ff.onload=function(oEvent){
+let sarrayBuffer=ff.response;
+if(sarrayBuffer){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile("/shader/shader1.toy",sfil);
+}}
+ff.send(null);
 }
 function scanSongs(){
 var nxhttp=new XMLHttpRequest();
@@ -131,13 +161,20 @@ document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
-setTimeout(function(){document.getElementById("btn2").click();},700);
-setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){document.getElementById("btn").click();},2700);
+
+// setTimeout(function(){document.getElementById("btn2").click();},700);
+// setTimeout(function(){document.getElementById("btn11").click();},1700);
+setTimeout(function(){Module.ccall("b3");},1700);
+// setTimeout(function(){document.getElementById("btn").click();},2700);
+setTimeout(function(){Module.ccall("str");},2300);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
-setTimeout(function(){document.getElementById("btn3").click();},700);
+// setTimeout(function(){document.getElementById("btn3").click();},700);
+setTimeout(function(){window.open('./flac');},700);
+
+
 setTimeout(function(){document.getElementById("btn8").click();},3700);
 setTimeout(function(){document.getElementById("tim").innerHTML=1650;},2700);
+
 function loada(){
 loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
