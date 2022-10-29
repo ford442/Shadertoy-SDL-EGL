@@ -53,7 +53,7 @@ heapsrgb:
 
 fire:
 	  em++ h3srgb.cpp -O3 -o g3010.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=1 \
+	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb -sTOTAL_STACK=64mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
 	 -ffast-math -flto=thin -std=gnu++2b -stdlib=libc++ \
