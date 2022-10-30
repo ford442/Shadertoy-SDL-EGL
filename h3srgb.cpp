@@ -204,6 +204,10 @@ glCompileShader(shader);
 return shader;
 }
 
+void stpp(){
+emscripten_cancel_main_loop();
+}
+
 void strt(){
 iFrame=0;
 clk_l=true;
@@ -502,9 +506,7 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
-void stpp(){
-emscripten_cancel_main_loop();
-}
+
 
 extern "C" {
 
