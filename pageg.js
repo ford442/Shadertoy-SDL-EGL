@@ -127,6 +127,8 @@ setTimeout(function(){snd();},1200);
 
 document.getElementById("btn6").addEventListener("click",function(){
 Module.ccall("stp");
+scanShaders();
+setTimeout(function(){Module.ccall("str");},500);
 });
 
 let tem=document.getElementById("tim");
