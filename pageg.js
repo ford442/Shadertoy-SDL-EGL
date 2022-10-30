@@ -12,7 +12,7 @@ shutDown.postMessage({
 data:222
 });
 });
-
+document.getElementById("hig").innerHTML=1080;
 let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
@@ -118,9 +118,11 @@ sng.postMessage({
 data:songSrc
 });
 }
+
 document.getElementById("btn8").addEventListener("click",function(){
 snd();
 });
+
 let tem=document.getElementById("tim");
 ban=document.getElementById("btn1");
 let sfr=document.getElementById("slideframe");
