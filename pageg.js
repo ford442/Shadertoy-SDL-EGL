@@ -165,7 +165,7 @@ mV.play();
 
 // setTimeout(function(){document.getElementById("btn2").click();},700);
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){Module.ccall("b3");},2700);
+setTimeout(function(){Module.ccall("b3");},1300);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
@@ -175,7 +175,7 @@ data:222
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
-setTimeout(function(){document.getElementById("tim").innerHTML=1650;},2700);
+setTimeout(function(){document.getElementById("tim").innerHTML=1750;},2700);
 
 function loada(){
 loadV.addEventListener("canplay",function(){
