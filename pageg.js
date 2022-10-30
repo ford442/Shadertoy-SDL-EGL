@@ -6,13 +6,14 @@ let fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
 let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
+setTimeout(function(){
 pll();
+},1000);
 let shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({
 data:222
 });
 });
-document.getElementById("hig").innerHTML=1080;
 let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
@@ -164,7 +165,7 @@ mV.play();
 
 // setTimeout(function(){document.getElementById("btn2").click();},700);
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){Module.ccall("b3");},1700);
+setTimeout(function(){Module.ccall("b3");},2700);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
