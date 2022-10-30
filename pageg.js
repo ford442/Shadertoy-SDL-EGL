@@ -121,7 +121,8 @@ data:songSrc
 }
 
 document.getElementById("btn8").addEventListener("click",function(){
-snd();
+setTimeout(function(){window.open('./flac');},250);
+setTimeout(function(){snd();},1200);
 });
 
 let tem=document.getElementById("tim");
@@ -173,8 +174,10 @@ data:222
 });},600);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 // setTimeout(function(){document.getElementById("btn3").click();},700);
+
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
+
 setTimeout(function(){document.getElementById("tim").innerHTML=1750;},2700);
 
 function loada(){
