@@ -121,12 +121,14 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
+return;
 }
 
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+return;
 }
 
 }
@@ -146,6 +148,7 @@ clk_l=true;
 }
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
+return;
 }
 
 void renderFrame(){
@@ -166,6 +169,7 @@ iFrame++;
 // glFinish();
 // nanosleep(&req,&rem);
 // glFlush();
+return;
 }
 
 static const char8_t *read_file(const char *filename){
@@ -206,6 +210,7 @@ return shader;
 
 void stpp(){
 emscripten_cancel_main_loop();
+return;
 }
 
 void strt(){
@@ -316,6 +321,7 @@ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 t1=high_resolution_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
+return;
 }
 
 extern "C" {
@@ -459,10 +465,12 @@ if(dev!=0){
 SDL_PauseAudioDevice(dev,SDL_TRUE);
 SDL_CloseAudioDevice(dev);
 dev=0;
+return;
 }}
 
 void qu(int rc){
 SDL_Quit();
+return;
 }
 
 void opn_aud(){
@@ -471,6 +479,7 @@ if(!dev){
 SDL_FreeWAV(wave.snd);
 }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
+return;
 }
 
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
@@ -488,6 +497,7 @@ wave.pos=0;
 }
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
+return;
 }
 
 void plt(){
@@ -504,6 +514,7 @@ qu(1);
 wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
+return;
 }
 
 
@@ -512,18 +523,22 @@ extern "C" {
 
 void str(){
 strt();
+return;
 }
 
 void pl(){
 plt();
+return;
 }
 
 void b3(){
 ma();
+return;
 }
 
 void stp(){
 stpp();
+return;
 }
 
 }
