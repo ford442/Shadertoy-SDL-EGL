@@ -502,6 +502,10 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
+void stpp(){
+emscripten_cancel_main_loop();
+}
+
 extern "C" {
 
 void str(){
@@ -517,7 +521,7 @@ ma();
 }
 
 void stp(){
-emscripten_cancel_main_loop();
+stpp();
 }
 
 }
