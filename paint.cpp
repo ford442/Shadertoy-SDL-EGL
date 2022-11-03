@@ -368,8 +368,9 @@ var Min=(4.0*(($amax-($favg-$amin))/2.0));
 // var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-if (aveg<1.0){p[0]=1.0;p[1]=1.0;p[2]=1.0;}
-this.color(p[0],p[1],p[2],aveg);
+var grr=(p[3]-1.0)*10;
+p[0]=p[0]+grr;p[1]=p[1]+grr;p[2]=p[2]+grr;}
+this.color(p[0],p[1],p[2],1.0);
 }).setTactic("speed").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
