@@ -368,7 +368,7 @@ var Min=(4.0*(($amax-($favg-$amin))/2.0));
 // var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-var grr=(p[3]-1.0)*10;
+var grr=(p[3]-1.0)*10.0;
 p[0]=p[0]+grr;p[1]=p[1]+grr;p[2]=p[2]+grr;
 this.color(p[0],p[1],p[2],1.0);
 }).setTactic("speed").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
