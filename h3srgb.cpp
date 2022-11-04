@@ -57,8 +57,8 @@ struct timespec rem;
 struct timespec req={0,33200000};
 EMSCRIPTEN_RESULT ret;
 typedef struct{GLfloat XYZW[4];}Vertex;
-static const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-static const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
+const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
@@ -360,9 +360,8 @@ let contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingE
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-// let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1)));}`;
 let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-let glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
+let glslAveg=`float Aveg(float a,float b) {return (0.9999522-(((a)-(b))*((a)*(0.9999522/(0.9999522-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
@@ -386,8 +385,7 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-var Min=(4.0*(($amax-($favg-$amin))/2.0));
-// var Min=(4.0*(($amax-($favg-$amin))/2.0));
+var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
@@ -456,7 +454,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},32);
+},24);
 
 }
 M();
