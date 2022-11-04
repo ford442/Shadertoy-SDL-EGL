@@ -59,14 +59,14 @@ function getWebGLContext(canvas){
  supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
  }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
- const halfFloatTexType=isWebGL2?gl.HALF_FLOAT:halfFloat.HALF_FLOAT_OES;
+ const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA16F,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RG16F,gl.RG,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.R16F,gl.RED,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
+ formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
+ formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
  }else{
  formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
@@ -81,10 +81,10 @@ function getWebGLContext(canvas){
 function getSupportedFormat(gl,internalFormat,format,type){
  if(!supportRenderTextureFormat(gl,internalFormat,format,type)){
  switch(internalFormat){
- case gl.R16F:
- return getSupportedFormat(gl,gl.RG16F,gl.RG,type);
- case gl.RG16F:
- return getSupportedFormat(gl,gl.RGBA16F,gl.RGBA,type);
+ case gl.R32F:
+ return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
+ case gl.RG32F:
+ return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
  default:
  return null;
  }
