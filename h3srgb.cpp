@@ -238,7 +238,7 @@ EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
 EGL_DEPTH_SIZE,v32,
 EGL_STENCIL_SIZE,v16,
-EGL_BUFFER_SIZE,v64,
+EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
