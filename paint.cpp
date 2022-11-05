@@ -288,7 +288,7 @@ glAttachShader(shd_prg,frag);
 glLinkProgram(shd_prg);
 atb_pos=v0;
 glBindAttribLocation(shd_prg,v0,"iPosition");
-// glUseProgram(shd_prg);
+glUseProgram(shd_prg);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
