@@ -369,6 +369,7 @@ var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 var tst=p[3]-1.92;
+  tst=tst-(p[0]-.78)-(p[1]-.78)-(p[2]-.78);
 tst=Math.min(tst,0.0);
 var grr=tst/3.0;
 var rr=p[0]-grr;
