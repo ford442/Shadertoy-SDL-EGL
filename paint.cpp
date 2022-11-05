@@ -237,7 +237,7 @@ EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
 EGL_DEPTH_SIZE,v24,
-EGL_STENCIL_SIZE,v0,
+EGL_STENCIL_SIZE,v16,
 EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
@@ -368,8 +368,10 @@ var Min=(4.0*(($amax-($favg-$amin))/2.0));
 // var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-var grr=(p[0]-0.6)+(p[1]-0.6)+(p[2]-0.6);
-grr=grr*5.0;
+  var rng=ouT-0.2;
+var grr=(p[0]-rng)+(p[1]-rng)+(p[2]-rng);
+// var grr=(p[0]-0.55)+(p[1]-0.55)+(p[2]-0.55);
+grr=grr*6.0;
 grr=Math.max(grr,0.0);
 var rr=p[0]+grr;
 var gg=p[1]+grr;
