@@ -288,7 +288,7 @@ glAttachShader(shd_prg,frag);
 glLinkProgram(shd_prg);
 atb_pos=v0;
 glBindAttribLocation(shd_prg,v0,"iPosition");
-glUseProgram(shd_prg);
+// glUseProgram(shd_prg);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -368,7 +368,7 @@ var Min=(4.0*(($amax-($favg-$amin))/2.0));
 // var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-var grr=(1.0-p[3])*10.0;
+var grr=(1.0-(p[3]/3.0))*10.0;
 
 this.color(p[0]+grr,p[1]+grr,p[2]+grr,1.0-grr);
 }).setTactic("speed").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
