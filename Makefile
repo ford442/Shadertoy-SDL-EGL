@@ -43,7 +43,7 @@ heap: h3.cpp  Makefile
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 heapsrgb:
-	  em++ h3srgb.cpp -O2 -o g3008.js -DNDEBUG -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
+	  em++ h3srgb.cpp -O3 -o g3008.js -DNDEBUG -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
@@ -61,11 +61,11 @@ fire:
          --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
 
 paint:
-	  em++ paint.cpp -O3 -o p3001.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
+	  em++ paint.cpp -O2 -o p3001.js -sFORCE_FILESYSTEM=1 \
+	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=700mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -ffast-math -flto=thin -std=gnu++2b -stdlib=libc++ \
+	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 \
+	 -flto=thin -std=gnu++2b -stdlib=libc++ \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_stp"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
 
