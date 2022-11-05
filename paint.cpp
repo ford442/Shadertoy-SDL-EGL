@@ -370,7 +370,7 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 var tst=p[3]-1.92;
 var grr=tst/3.0;
-this.color(p[0]+grr,p[1]+grr,p[2]+grr,aveg);
+this.color(p[0]-grr,p[1]-grr,p[2]-grr,aveg);
 }).setTactic("speed").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
