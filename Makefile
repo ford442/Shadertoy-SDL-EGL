@@ -52,8 +52,8 @@ heapsrgb:
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 fire:
-	  em++ h3srgb.cpp -o g3010.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
+	 em++ h3srgb.cpp -o g3010.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=1536mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=c++2b -stdlib=libc++ \
@@ -61,8 +61,8 @@ fire:
          --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
 
 paint:
-	  em++ paint.cpp -o p3001.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1536mb \
+	 em++ paint.cpp -o p3001.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=1536mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=c++2b -stdlib=libc++ \
@@ -133,7 +133,7 @@ dbl: dbl.cpp  Makefile
 
 g0: g00.cpp  Makefile
 	em++ g00.cpp -o g0001.js -sFORCE_FILESYSTEM=1 \
-	-sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
+	-sINITIAL_MEMORY=1536mb \
 	-sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	-flto=thin -std=c++2b --profiling-funcs -sASSERTIONS=1 \
