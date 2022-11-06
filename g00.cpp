@@ -123,22 +123,9 @@ glCompileShader(shader);
 return shader;
 }
 
-static EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-mouseLPressed=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-mouseLPressed=false;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
-}}
-return 0;
-}
 
-static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
+
+static void uniforms(GLfloat time,EGLint fram){
  /*
 if(mouseLPressed==true){
 if(clickLoc==true){
@@ -396,7 +383,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx=bcanvas.getContext("webgl2",{antialias:false,alpha:false,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
