@@ -376,7 +376,7 @@ grr=Math.max(grr,0.0);
 var rr=p[0]+grr;
 var gg=p[1]+grr;
 var bb=p[2]+grr;
-this.color(rr,gg,bb,aveg-grr);
+this.color(rr,gg,bb,aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
