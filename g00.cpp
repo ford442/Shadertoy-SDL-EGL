@@ -139,6 +139,7 @@ return 0;
 }
 
 static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
+ /*
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -151,6 +152,7 @@ glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
 clickLoc=true;
 }
+*/
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
@@ -175,7 +177,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 iFrame++;
 }
 
-void avgFrm(int F,int leng,float *dat,float *aLoc){
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -183,27 +185,36 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
 for (int i=0;i<leng;i++){
-sum+=dat[i];
-if(max<dat[i]){max=dat[i];}
-if(min>dat[i]&&dat[i]>0){min=dat[i];}
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
 sum=sum/leng;
-aLoc[F]=sum;
-aLoc[F+100]=min;
-aLoc[F+200]=max;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
-avgSum+=aLoc[i];
+avgSum+=aptr[i];
 }
-aLoc[0]=avgSum/32;
+aptr[0]=avgSum/32;
 for(int i=33;i<65;i++){
-minSum+=aLoc[i+100];
+minSum+=aptr[i+100];
 }
-aLoc[100]=minSum/32;
+aptr[100]=minSum/32;
 for(int i=33;i<65;i++){
-maxSum+=aLoc[i+200];
+maxSum+=aptr[i+200];
 }
-aLoc[200]=maxSum/32;
+aptr[200]=maxSum/32;
 }
+
+extern "C" {
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+}
+
+}
+
 
 static void strt(){
 iFrame=0;
@@ -515,9 +526,6 @@ void b3(){
 ma();
 }
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-}
 }
 
 int main(){
