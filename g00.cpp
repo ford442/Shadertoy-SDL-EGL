@@ -33,7 +33,7 @@ GLuint uniform_dtime,uniform_fps,uniform_date,VCO,ECO,CCO,vtx,frag,uniform_frame
 double Ttime,Dtime;
 EGLint iFrame;
 static GLsizei s4=4;
-static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v24,v32=32,a,b;
+static EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v16=16,v24,v32=32,a,b;
 static GLfloat F=1.0f;
 static GLfloat F0=0.0f;
 static GLfloat Fm1=-1.0f;
