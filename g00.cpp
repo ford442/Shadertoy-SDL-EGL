@@ -418,6 +418,7 @@ var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
 var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
+ aveg=Math.max(aveg,1.0);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
