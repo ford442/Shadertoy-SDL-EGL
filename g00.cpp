@@ -379,47 +379,44 @@ wave.spec.callback=bfr;
 opn_aud();
 }
 
+extern "C" {
 EM_JS(void,ma,(),{
-var w$=parseInt(document.getElementById('wid').innerHTML,10);
-var h$=parseInt(document.getElementById('hig').innerHTML,10);
-var vv=document.getElementById("mv");
-let $H=Module.HEAPF32.buffer;
-var la=h$*h$*4;
+let w$=parseInt(document.getElementById("wid").innerHTML,10);
+let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let vv=document.getElementById("mv");
+var $H=Module.HEAPF32.buffer;
+let la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-var sz=(h$*h$)/8;
+let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var bcanvas=document.getElementById("bcanvas");
-var contx=bcanvas.getContext('webgl2',{antialias:true,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:true,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-var g=new GPU({canvas:bcanvas,webGl:contx});
-var g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c) {return (a + b + c) / 3.0 ;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g) {return ((((1.0*floor(0.5/((a-b)*0.751)+b))*(((a-b)*g)+b))+(((1.0*(ceil(0.5/f)))*(1.0-(((a-e)*g)+e)))+((1.0*(ceil(0.5/f)))*(((a-d)*0.7511)+d)))+(((0.7501*(1.0-a))+(((1.0-b)*g)+b))/2.0)+(1.0-(f-g))+0.777)/5.0);}`;
-const glslAveg=`float Aveg(float a,float b) {return (1.0 - (((a) - (b)) * ((a) * (1.0 / (1.0 - b))))) ;}`;
-
+let bcanvas=document.getElementById("bcanvas");
+let contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let g=new GPU({canvas:bcanvas,webGl:contx});
+let g2=new GPU();
+let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
+let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+let glslAveg=`float Aveg(float a,float b) {return (0.9999522-(((a)-(b))*((a)*(0.9999522/(0.9999522-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-
-var R=g2.createKernel(function(tv){
+let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
-
-var t=g.createKernel(function(v){
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
-
-var r=g.createKernel(function(f){
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
@@ -427,24 +424,23 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$amax,$amin,$aavg,$aavg,p[3]);
-var Min=(($amin*($fmax-$favg)/2.0)+(($amax-$aavg)/2.0)+$aavg);
+var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],1.0);
-}).setTactic("balanced").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-
-var w$=parseInt(document.getElementById('wid').innerHTML,10);
-var h$=parseInt(document.getElementById('hig').innerHTML,10);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
+vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-var l=w$*h$*16;
-var la=h$*h$*4;
-var al=w$*h$*8;
-var sz=(h$*h$)/8;
+let l=w$*h$*16;
+la=h$*h$*4;
+let al=w$*h$*8;
+sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -452,30 +448,27 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
-let $F=1;
-let $Bu=33;
+var $F=1;
+var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
 }
-
-let d=S();if(d)d();d=S();function S(){
-var w$=parseInt(document.getElementById('wid').innerHTML,10);
-var h$=parseInt(document.getElementById('hig').innerHTML,10);
+var d=S();if(d)d();d=S();function S(){
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-var l=w$*h$*16;
-var la=h$*h$*4;
-var al=w$*h$*8;
-var sz=(h$*h$)/8;
+l=w$*h$*16;
+la=h$*h$*4;
+al=w$*h$*8;
+sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
@@ -485,8 +478,8 @@ var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
-
 function M(){
+var vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
@@ -497,11 +490,12 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
+pointb=66*la;
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
-var pointb=66*la;
-Module.ccall('nano',null,['Number'],['Number'],['Number'],['Number'],[$F],[sz],[pointb],[pointa]);
 M();
-},16.6);
+},12);
+
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -513,6 +507,7 @@ T=true;
 };
 }
 })
+}
 
 extern "C" {
 
