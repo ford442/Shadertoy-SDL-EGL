@@ -136,7 +136,7 @@ g0: g00.cpp  Makefile
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	-sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
-	-flto=thin -std=c++2b -sEXIT_RUNTIME=0 \
+	-flto=thin -std=c++2b -sEXIT_RUNTIME=0 -fsanitize=address \
         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
         --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg00.js
 
