@@ -158,7 +158,7 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 */
-uniforms(mouseX,mouseY,Ttime,iFrame);
+uniforms(Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 // glFlush();
 // nanosleep(&req,&rem);
@@ -383,7 +383,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext("webgl2",{antialias:false,alpha:false,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx=bcanvas.getContext("webgl2",{antialias:false,alpha:true,imageSmoothingEnabled:false,stencil:false,depth:false,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:false,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
