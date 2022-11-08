@@ -23,8 +23,8 @@ using namespace std;
 using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
-GLuint EBO,VBO,shd_prg,shader,smp_chn[4],smp_chn_res;
-GLuint VCO,ECO,vtx,frag,uni_frm,uni_tme,uni_res,uni_mse;
+
+GLuint uni_frm,uni_tme,uni_res,uni_mse;
 GLfloat Ttime;
 EGLint iFrame;
 GLsizei s4=4;
@@ -207,7 +207,9 @@ return;
 
 void strt(){
 emscripten_cancel_main_loop();
-
+  
+GLuint EBO,VBO,shd_prg,shader,smp_chn[4],smp_chn_res;
+GLuint VCO,ECO,vtx,frag,
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -216,7 +218,6 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 static EGLint config_size,major,minor,atb_pos;
 
-emscripten_cancel_main_loop();
 iFrame=0;
 clk_l=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
