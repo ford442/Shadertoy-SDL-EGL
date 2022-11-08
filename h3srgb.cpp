@@ -207,6 +207,7 @@ return;
 }
 
 void strt(){
+emscripten_cancel_main_loop();
 iFrame=0;
 clk_l=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
