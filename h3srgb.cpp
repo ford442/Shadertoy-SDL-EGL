@@ -410,21 +410,21 @@ let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
 sz=(h$*h$)/8;
-var pointa=78*la;
+var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-for(i=1;i<66;i++){
+for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=78*la;
+var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
-for (i=1;i<66;i++){
+for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
 }
@@ -437,14 +437,14 @@ l=w$*h$*16;
 la=h$*h$*4;
 al=w$*h$*8;
 sz=(h$*h$)/8;
-var pointa=78*la;
+var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-for(i=1;i<66;i++){
+for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=67*la;
+var pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -461,12 +461,11 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=67*la;
+pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
 },12);
-
 }
 M();
 document.getElementById("di").onclick=function(){
