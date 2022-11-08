@@ -24,7 +24,7 @@ using namespace std::chrono;
 
 high_resolution_clock::time_point t1,t2;
 
-GLuint uni_frm,uni_tme,uni_res,uni_mse;
+GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
 GLfloat Ttime;
 EGLint iFrame;
 GLsizei s4=4;
@@ -208,8 +208,8 @@ return;
 void strt(){
 emscripten_cancel_main_loop();
   
-GLuint EBO,VBO,shd_prg,shader,smp_chn[4],smp_chn_res;
-GLuint VCO,ECO,vtx,frag,
+GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
+GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
