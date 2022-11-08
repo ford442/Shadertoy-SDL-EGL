@@ -70,7 +70,7 @@ static const char vertex_shader_body_gles3[]=
 static const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"out vec4 fragColor;\n";
+"out highp vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 static const char* common_shader_header=common_shader_header_gles3;
