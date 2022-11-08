@@ -43,19 +43,15 @@ int S;
 GLfloat Size;
 EM_BOOL clk_l;
 GLfloat mX,mY;
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
+
+
 GLsizei i;
 GLfloat fps;
 GLfloat timeSpeed;
-static EGLint config_size,major,minor,atb_pos;
-EGLConfig eglconfig=NULL;
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+
 struct timespec rem;
 struct timespec req={0,33200000};
-EMSCRIPTEN_RESULT ret;
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
@@ -63,6 +59,7 @@ static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
+
 static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
@@ -73,6 +70,7 @@ static const char fragment_shader_header_gles3[]=
 "out highp vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+
 static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -149,7 +147,9 @@ glUniform1i(uni_frm,fram);
 }
 
 void renderFrame(){
-eglSwapBuffers(display,surface);
+  EMSCRIPTEN_RESULT ret;
+
+// eglSwapBuffers(display,surface);
 t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
@@ -202,11 +202,20 @@ return shader;
 }
 
 void stpp(){
-emscripten_cancel_main_loop();
 return;
 }
 
 void strt(){
+emscripten_cancel_main_loop();
+
+EGLDisplay display;
+EGLSurface surface;
+EGLContext contextegl;
+EGLConfig eglconfig=NULL;
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+static EGLint config_size,major,minor,atb_pos;
+
 emscripten_cancel_main_loop();
 iFrame=0;
 clk_l=true;
