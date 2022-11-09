@@ -184,7 +184,7 @@ data:222
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
 
-setTimeout(function(){document.getElementById("tim").innerHTML=1750;},2700);
+setTimeout(function(){document.getElementById("tim").innerHTML=2750;},2700);
 
 function loada(){
 loadV.addEventListener("canplay",function(){
