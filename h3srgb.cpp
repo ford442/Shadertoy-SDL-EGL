@@ -3,9 +3,10 @@
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <GLES3/gl3.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#include <GLES3/gl3.h>
+
 
 #include <iostream>
 #include <algorithm>
