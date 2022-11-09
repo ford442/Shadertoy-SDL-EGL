@@ -22,7 +22,7 @@
 using namespace std;
 using namespace std::chrono;
 
-system_clock::time_point t1,t2;
+steady_clock::time_point t1,t2;
 
 GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
 GLfloat Ttime;
