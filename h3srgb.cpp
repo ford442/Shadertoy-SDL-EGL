@@ -555,11 +555,6 @@ ma();
 return;
 }
 
-void stp(){
-stpp();
-return;
-}
-
 }
 
 int main(){
