@@ -91,12 +91,12 @@ return 0;
 }
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-GLfloat max=0.0;
-GLfloat min=1.0;
-GLfloat sum=0.0;
-GLfloat avgSum=0.0;
-GLfloat minSum=0.0;
-GLfloat maxSum=0.0;
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -235,7 +235,7 @@ EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
@@ -257,7 +257,7 @@ attr.depth=EM_FALSE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
