@@ -125,12 +125,6 @@ setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
 });
 
-document.getElementById("btn6").addEventListener("click",function(){
-Module.ccall("stp");
-scanShaders();
-setTimeout(function(){Module.ccall("str");},500);
-});
-
 let tem=document.getElementById("tim");
 ban=document.getElementById("btn1");
 let sfr=document.getElementById("slideframe");
