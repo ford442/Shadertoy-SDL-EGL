@@ -53,9 +53,9 @@ heapsrgb:
 
 fire:
 	 em++ h3srgb.cpp -o g3010.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=1 \
+	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=c++2b -stdlib=libc++ \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
