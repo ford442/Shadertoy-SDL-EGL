@@ -178,8 +178,6 @@ data:222
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
 
-setTimeout(function(){document.getElementById("tim").innerHTML=2750;},2700);
-
 function loada(){
 loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
@@ -224,7 +222,7 @@ vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
 document.getElementById("ldv").currentTime=document.getElementById("itim").innerHTML;
-document.getElementById("ldv").load();
+// document.getElementById("ldv").load();
 document.getElementById("mv").play();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
