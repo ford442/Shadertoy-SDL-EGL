@@ -28,10 +28,10 @@ GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
 float Ttime;
 int iFrame;
 GLsizei s4=4;
-int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,a,b;
-float F=1.0f;
-float F0=0.0f;
-float Fm1=-1.0f;
+const int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,a,b;
+const float F=1.0f;
+const float F0=0.0f;
+const float Fm1=-1.0f;
 float mouseX;
 float mouseY;
 float cMouseX;
@@ -48,8 +48,8 @@ GLsizei i;
 float fps;
 float timeSpeed;
 
-struct timespec rem;
-struct timespec req={0,12000000};
+const struct timespec rem;
+const struct timespec req={0,12000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
@@ -130,40 +130,38 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
-// if(ms_l==true){
-// if(clk_l==true){
-// const GLfloat xxx=xx;
-// const GLfloat yyy=yy;
-// mX=xxx*Size;
-// mY=yyy*Size;
-// clk_l=false;
-// }
-// glUniform4f(uni_mse,(Size*xx),(Size*yy),mX,mY);
-// }else{
-// clk_l=true;
-// }
+if(ms_l==true){
+if(clk_l==true){
+const GLfloat xxx=xx;
+const GLfloat yyy=yy;
+mX=xxx*Size;
+mY=yyy*Size;
+clk_l=false;
+}
+glUniform4f(uni_mse,(Size*xx),(Size*yy),mX,mY);
+}else{
+clk_l=true;
+}
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
 }
 
 void renderFrame(){
- // EMSCRIPTEN_RESULT ret;
-
-// eglSwapBuffers(display,surface);
-t2=high_resolution_clock::now();
+EMSCRIPTEN_RESULT ret;
+t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
-// ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-// ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-// ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-// ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-// mouseX=x/Size;
-// mouseY=(Size-y)/Size;
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+mouseX=x/Size;
+mouseY=(Size-y)/Size;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
- glFlush();
+glFlush();
 nanosleep(&req,&rem);
 glFinish();
 iFrame++;
@@ -208,7 +206,6 @@ return shader;
 
 void strt(){
 emscripten_cancel_main_loop();
-  
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
@@ -217,8 +214,7 @@ EGLContext contextegl;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-static EGLint config_size,major,minor,atb_pos;
-
+EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
 S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
@@ -230,15 +226,15 @@ EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
@@ -311,8 +307,11 @@ shd_prg=glCreateProgram();
   nanosleep(&req,&rem);
 
 glAttachShader(shd_prg,vtx);
-  
+    nanosleep(&req,&rem);
+
 glAttachShader(shd_prg,frag);
+   nanosleep(&req,&rem);
+
 glLinkProgram(shd_prg);
   nanosleep(&req,&rem);
 
@@ -339,13 +338,14 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
+ 
 // glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
-// glEnable(GL_BLEND);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
 t1=steady_clock::now();
-  nanosleep(&req,&rem);
 
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
