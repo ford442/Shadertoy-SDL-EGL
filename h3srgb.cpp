@@ -1,5 +1,6 @@
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
