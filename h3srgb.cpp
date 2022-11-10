@@ -48,8 +48,8 @@ GLsizei i;
 float fps;
 float timeSpeed;
 
-const struct timespec rem;
-const struct timespec req={0,12000000};
+struct timespec rem;
+struct timespec req={0,12000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
