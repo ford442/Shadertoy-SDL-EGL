@@ -1,13 +1,3 @@
-#define GL_GLEXT_PROTOTYPES 1
-#define GL3_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#include <GLES3/gl3.h>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -19,6 +9,20 @@
 #include <ctime>
 #include <unistd.h>
 #include <chrono>
+
+#define GL_GLEXT_PROTOTYPES 1
+#define GL3_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#define __gl2_h_
+#include <GLES2/gl2ext.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -152,7 +156,7 @@ return;
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -236,7 +240,7 @@ EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
@@ -254,8 +258,8 @@ EGL_NONE
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
-attr.depth=EM_FALSE;
-attr.antialias=EM_FALSE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_TRUE;
@@ -341,11 +345,11 @@ glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
  
-// glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
-// glEnable(GL_BLEND);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  
 t1=steady_clock::now();
 
