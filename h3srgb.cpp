@@ -165,11 +165,11 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
 uni(mouseX,mouseY,Ttime,iFrame);
+glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
 nanosleep(&req,&rem);
-glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glFinish();
 iFrame++;
+glFinish();
 return;
 }
 
