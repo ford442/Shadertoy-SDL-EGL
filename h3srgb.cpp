@@ -15,13 +15,15 @@
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
 #include <emscripten.h>
+extern "C" {
 #include <emscripten/html5.h>
-
+}
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
+
+#include <GLES2/gl2ext.h>
+#include <GLES3/gl3platform.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -343,12 +345,14 @@ glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
 glClearColor(F0,F0,F0,F0);
  
-// glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- 
+glDisable(GL_DITHER);
+glDisable(SCISSOR_TEST);
+glDisable(STENCIL_TEST);
 t1=steady_clock::now();
 
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
