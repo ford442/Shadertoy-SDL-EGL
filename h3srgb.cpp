@@ -351,8 +351,6 @@ glDepthFunc(GL_LESS);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
-glDisable(SCISSOR_TEST);
-glDisable(STENCIL_TEST);
 t1=steady_clock::now();
 
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
