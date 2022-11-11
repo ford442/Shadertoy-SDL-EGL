@@ -44,8 +44,7 @@ float cMouseY;
 float x;
 float y;
 EM_BOOL ms_l;
-int S;
-float Size;
+int Size;
 EM_BOOL clk_l;
 float mX,mY;
 
@@ -57,15 +56,15 @@ struct timespec rem;
 struct timespec req={0,12000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
+GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -139,11 +138,11 @@ if(ms_l==true){
 if(clk_l==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mX=xxx*Size;
-mY=yyy*Size;
+mX=xxx*(float)Size;
+mY=yyy*(float)Size;
 clk_l=false;
 }
-glUniform4f(uni_mse,(Size*xx),(Size*yy),mX,mY);
+glUniform4f(uni_mse,((float)Size*xx),((float)Size*yy),mX,mY);
 }else{
 clk_l=true;
 }
@@ -162,8 +161,8 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call)
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-mouseX=x/Size;
-mouseY=(Size-y)/Size;
+mouseX=x/(float)Size;
+mouseY=((float)Size-y)/(float)Size;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
@@ -222,8 +221,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-Size=(float)S;
+Size=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -256,8 +254,8 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
-attr.depth=EM_FALSE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 // attr.colorSpace=display-p3;
 attr.premultipliedAlpha=EM_FALSE;
@@ -281,14 +279,14 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
   nanosleep(&req,&rem);
 
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
   nanosleep(&req,&rem);
 
 static const char* default_fragment_shader=(char*)read_file(fileloc);
@@ -318,11 +316,11 @@ glAttachShader(shd_prg,vtx);
 glAttachShader(shd_prg,frag);
    nanosleep(&req,&rem);
 
+atb_pos=v0;
+glBindAttribLocation(shd_prg,v0,"iPosition");
 glLinkProgram(shd_prg);
   nanosleep(&req,&rem);
 
-atb_pos=v0;
-glBindAttribLocation(shd_prg,v0,"iPosition");
 glUseProgram(shd_prg);
   nanosleep(&req,&rem);
 
