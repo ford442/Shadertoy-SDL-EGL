@@ -68,13 +68,13 @@ char8_t *result=NULL;
 long length=0;
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;";
+"#version 300 es \n precision highp float;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform highp float iTime;uniform lowp vec4 iMouse;"
+"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"out highp vec4 fragColor;\n";
+"out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
@@ -142,8 +142,8 @@ if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=xxx*(float)Size;
-mY=yyy*(float)Size;
+mX=xxx*Size;
+mY=yyy*Size;
 clk_l=false;
 }
 glUniform4f(uni_mse,((float)Size*xx),((float)Size*yy),mX,mY);
@@ -165,8 +165,8 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call)
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-mouseX=x/(float)Size;
-mouseY=((float)Size-y)/(float)Size;
+mouseX=x/Size;
+mouseY=(Size-y)/Size;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
@@ -301,7 +301,6 @@ sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
   nanosleep(&req,&rem);
-nanosleep(&req,&rem);
 
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
@@ -309,7 +308,6 @@ sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
   nanosleep(&req,&rem);
-nanosleep(&req,&rem);
 
 shd_prg=glCreateProgram();
   nanosleep(&req,&rem);
