@@ -262,7 +262,7 @@ attr.antialias=EM_TRUE;
 // attr.colorSpace=display-p3;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -343,14 +343,16 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
-glClearColor(F0,F0,F0,F0);
- 
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
+glClearColor(F1,F1,F1,F1);
+ glDisable(GL_BLEND);
+ glDisable(GL_DEPTH_TEST);
+// glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_DITHER);
+          glDisable(GL_CULL_FACE);
+
+glEnable(GL_DITHER);
 t1=steady_clock::now();
 
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
