@@ -343,7 +343,7 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
-glClearColor(F1,F1,F1,F1);
+glClearColor(F,F,F,F);
  glDisable(GL_BLEND);
  glDisable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
