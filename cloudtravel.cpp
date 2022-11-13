@@ -9,6 +9,7 @@
 #include <ctime>
 #include <unistd.h>
 #include <chrono>
+#include <emscripten/key_codes.h>
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
@@ -70,9 +71,9 @@ static const char common_shader_header_gles3[]=
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform highp float iTime;uniform lowp vec4 iMouse;"
+"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"out highp vec4 fragColor;\n";
+"out vec4 fragColor;\n";
 static const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
@@ -82,6 +83,13 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 
+EM_BOOL key_call(int eventType,const EmscriptenKeyboardEvent *e,void *userData){
+if(eventType==EMSCRIPTEN_EVENT_KEYPRESS&&e->which){return e->which;}
+if(e->charCode){return e->charCode;}
+if(strlen(e->key)==1){return(int)e->key[0];}
+if(e->which){return e->which;}
+return e->keyCode;
+}
 
 
 
@@ -139,13 +147,13 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-void uni(float xx,float yy,float time,EGLint fram){
+void uni(glfloat xx,glfloat yy,float time,EGLint fram){
 if(ms_l==true){
 if(clk_l==true){
-const float xxx=xx;
-const float yyy=yy;
-mX=xxx*(float)Size;
-mY=yyy*(float)Size;
+const glfloat xxx=xx;
+const glfloat yyy=yy;
+mX=xxx*Size;
+mY=yyy*Size;
 clk_l=false;
 }
 glUniform4f(uni_mse,((float)Size*xx),((float)Size*yy),mX,mY);
@@ -171,8 +179,8 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
   
   
-mouseX=x/(float)Size;
-mouseY=((float)Size-y)/(float)Size;
+mouseX=x/Size;
+mouseY=(Size-y)/Size;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
@@ -239,13 +247,13 @@ EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -277,8 +285,8 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -370,6 +378,23 @@ EM_JS(void,ma,(),{
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
+const pnnl=document.getElementByID("panel");
+pnnl.addEventListener('keydown',doKey);
+pnnl.addEventListener('keyup',doUpKey);
+let Mov=0;
+function doKey(e){
+if (e.code=='KeyS'){Mov=-1;}
+if (e.code=='KeyW'){Mov=1;}
+  console.log("key on: "+e.code);
+}
+                          
+function doUpKey(e){
+if (e.code=='KeyS'){Mov=0;}
+if (e.code=='KeyW'){Mov=0;}
+    console.log("key off: "+e.code);
+
+}
+  
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
@@ -472,10 +497,10 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
-  
+
 var loca=$F+1;
 if(loca>64){loca=1;}
-  
+
 var locb=$Bu+1;
 if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
