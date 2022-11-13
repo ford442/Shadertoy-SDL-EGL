@@ -228,7 +228,7 @@ clk_l=true;
 Size=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
@@ -374,7 +374,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext("webgl2",{colorSpace:'display-p3',antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+let contx=bcanvas.getContext("webgl2",{colorSpace:'srgb',antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
 let g=new GPU({canvas:bcanvas,webGl:contx});
 let g2=new GPU();
 let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
