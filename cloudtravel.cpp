@@ -147,11 +147,11 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-void uni(glfloat xx,glfloat yy,float time,EGLint fram){
+void uni(float xx,float yy,float time,EGLint fram){
 if(ms_l==true){
 if(clk_l==true){
-const glfloat xxx=xx;
-const glfloat yyy=yy;
+const float xxx=xx;
+const float yyy=yy;
 mX=xxx*Size;
 mY=yyy*Size;
 clk_l=false;
