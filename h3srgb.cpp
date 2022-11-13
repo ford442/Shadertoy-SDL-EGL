@@ -61,7 +61,7 @@ struct timespec req={0,12000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
@@ -344,17 +344,15 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,Size,Size,1.0);
 glUniform3f(smp_chn_res,Size,Size,1.0);
 glClearColor(F,F,F,F);
- glDisable(GL_BLEND);
- glDisable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
+glDisable(GL_BLEND);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-          glDisable(GL_CULL_FACE);
-
-glEnable(GL_DITHER);
+glDisable(GL_CULL_FACE);
+glDisable(GL_DITHER);
 t1=steady_clock::now();
-
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
