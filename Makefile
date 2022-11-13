@@ -88,6 +88,15 @@ paint2:
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
 
+cloud:
+	 em++ cloudtravel.cpp -o c3001.js -sFORCE_FILESYSTEM=1 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sUSE_SDL=2 -sFULL_ES3=1 \
+	 -std=c++2b -stdlib=libc++ \
+         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --extern-post-js tilt.js --extern-post-js fluid.js --extern-post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
+
 
 emloop:
 	  em++ emloop.cpp -O3 -o g3011.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
