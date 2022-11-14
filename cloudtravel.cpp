@@ -378,7 +378,7 @@ EM_JS(void,ma,(),{
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
-const pnnl=document.getElementByID("panel");
+const pnnl=document.getElementById("panel");
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keyup',doUpKey);
 let Mov=0;
