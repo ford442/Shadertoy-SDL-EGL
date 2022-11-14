@@ -245,8 +245,8 @@ class VanillaTilt {
 
     if (this.fullPageListening) {
       this.event = {
-      //  clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * this.clientWidth,
-     //   clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.clientHeight
+        clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * this.clientWidth,
+        clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.clientHeight
       };
     } else {
       this.event = {
@@ -267,8 +267,8 @@ class VanillaTilt {
     let x, y;
 
     if (this.fullPageListening) {
-    //  x = this.event.clientX / this.clientWidth;
-   //   y = this.event.clientY / this.clientHeight;
+      x = this.event.clientX / this.clientWidth;
+      y = this.event.clientY / this.clientHeight;
     } else {
       x = (this.event.clientX - this.left) / this.width;
       y = (this.event.clientY - this.top) / this.height;
@@ -305,7 +305,7 @@ class VanillaTilt {
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
       "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
       "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-     // "translate(-" +(values.percentageX*10)+ "px,-"+(values.percentageY*10)+"px) " +
+      "translate(-" +(values.percentageX*10)+ "px,-"+(values.percentageY*10)+"px) " +
       "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
 
     if (this.glare) {
