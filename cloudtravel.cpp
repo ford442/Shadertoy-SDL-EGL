@@ -380,17 +380,20 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
 const pnnl=document.body;
   
-let Mov=0;
+let Mov=1;
 function doKey(e){
+if(e.code=='Space'){
+if(Mov==1){Mov=0;}
+else if(Mov==0){Mov=1;}
+Mov=0;}
+
 if (e.code=='KeyS'){Mov=-1;}
 if (e.code=='KeyW'){Mov=1;}
-console.log("key on: "+e.code);
 }
                           
 function doUpKey(e){
 if (e.code=='KeyS'){Mov=0;}
 if (e.code=='KeyW'){Mov=0;}
-console.log("key off: "+e.code);
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keyup',doUpKey);
