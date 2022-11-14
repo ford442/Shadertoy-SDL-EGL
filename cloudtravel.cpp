@@ -502,7 +502,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 if(T){return;}
 for(i=64;i>0;i--){
 
-var loca=$F+1;
+var loca=$F+Mov;
 if(loca>64){loca=1;}
 
 var locb=$Bu+1;
