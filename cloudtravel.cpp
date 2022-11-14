@@ -378,24 +378,24 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
 const pnnl=document.body;
   
-var Mov=1;
+let Mov=1;
 function doKey(e){
 if(e.code=='Space'){
+e.preventDefault();
 if(Mov==1){Mov=0;vv.pause();}
 else if(Mov==0){Mov=1;vv.play();}
 }
 
-if (e.code=='KeyS'){Mov=-1;}
-if (e.code=='KeyW'){Mov=1;}
+else if (e.code=='KeyS'){Mov=-1;}
+else if (e.code=='KeyW'){Mov=1;}
 }
                           
 function doUpKey(e){
 if (e.code=='KeyS'){Mov=0;}
-if (e.code=='KeyW'){Mov=0;}
+else if (e.code=='KeyW'){Mov=0;}
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keyup',doUpKey);
-
   
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -499,10 +499,11 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 var vv=document.getElementById("mv");
+  
 function M(){
+  if(T){return;}
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-if(T){return;}
 
 if(Mov==1){
 for(i=64;i>0;i--){
@@ -523,7 +524,7 @@ for(i=64;i>0;i--){
 var loca=$F-1;
 if(loca<0){loca=64;}
 var locb=$Bu-1;
-if(locb>64){locb=1;}
+if(locb<0){locb=64;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";$Bu="+locb+";}");
 }
 }
