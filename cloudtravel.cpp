@@ -514,14 +514,25 @@ $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 }
-
-if(Mov==-1){
+var frmNum=$F;
+while(Mov==-1){
+  $F=frmNum;
+for(bw=1;bw<7;bw++){
+setTimeout(function(){
 for(i=64;i>0;i--){
 var loca=$F-1;
 if(loca<0){loca=64;}
-var locb=$Bu-1;
-if(locb<0){locb=64;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
+}},16.666);
+}
+  $F=frmNum;
+for(bw=1;bw<7;bw++){
+setTimeout(function(){
+for(i=64;i>0;i--){
+var loca=$F+1;
+if(loca<0){loca=64;}
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
+}},16.666);
 }
 }
 
