@@ -221,8 +221,9 @@ class VanillaTilt {
     if (this.element && this.element.style) {
       this.element.style.transform = `perspective(${this.settings.perspective}px) ` +
         `rotateX(0deg) ` +
-        `rotateY(0deg) ` +
-        `scale3d(1, 1, 1)`;
+        `rotateY(0deg)`;
+       // `rotateY(0deg) ` +
+       // `scale3d(1, 1, 1)`;
     }
 
     this.resetGlare();
@@ -244,8 +245,8 @@ class VanillaTilt {
 
     if (this.fullPageListening) {
       this.event = {
-        clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * this.clientWidth,
-        clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.clientHeight
+      //  clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * this.clientWidth,
+     //   clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.clientHeight
       };
     } else {
       this.event = {
