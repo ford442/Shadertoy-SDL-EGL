@@ -457,9 +457,7 @@ var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
   
 for(i=0;i<65;i++){
-if(Mov==1){
 var j=i+1;eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
 }
   
 var pointb=77*la;
@@ -472,11 +470,9 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
   
 for (i=0;i<65;i++){
-if(Mov==1){
 var j=i+1;eval("$"+j+".set($$1);");
 }
-}
-  
+
 var d=S();if(d)d();d=S();function S(){
   
 w$=parseInt(document.getElementById("wid").innerHTML,10);
