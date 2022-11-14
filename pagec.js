@@ -179,6 +179,7 @@ setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
 
 function back(){
+  var vv=document.getElementById("mv");
 vv.pause();
 var fps=40;
 var intervalRewind=setInterval(function(){
