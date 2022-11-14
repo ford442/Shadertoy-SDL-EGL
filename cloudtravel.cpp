@@ -386,12 +386,10 @@ if(Mov==1){Mov=0;vv.pause();}
 else if(Mov==0){Mov=1;vv.play();}
 }
 
-if (e.code=='KeyS'){Mov=-1;}
 if (e.code=='KeyW'){Mov=1;}
 }
                           
 function doUpKey(e){
-if (e.code=='KeyS'){Mov=0;}
 if (e.code=='KeyW'){Mov=0;}
 }
 pnnl.addEventListener('keydown',doKey);
