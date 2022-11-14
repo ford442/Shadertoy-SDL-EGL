@@ -378,7 +378,7 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
 const pnnl=document.body;
   
-let Mov=1;
+var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -386,13 +386,13 @@ if(Mov==1){Mov=0;vv.pause();}
 else if(Mov==0){Mov=1;vv.play();}
 }
 
-else if (e.code=='KeyS'){Mov=-1;}
-else if (e.code=='KeyW'){Mov=1;}
+if (e.code=='KeyS'){Mov=-1;}
+if (e.code=='KeyW'){Mov=1;}
 }
                           
 function doUpKey(e){
 if (e.code=='KeyS'){Mov=0;}
-else if (e.code=='KeyW'){Mov=0;}
+if (e.code=='KeyW'){Mov=0;}
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keyup',doUpKey);
@@ -515,13 +515,14 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 }
 var frmNum=$F;
-while(Mov==-1){
+  
+if(Mov==-1){
   $F=frmNum;
 for(bw=1;bw<7;bw++){
 setTimeout(function(){
 for(i=64;i>0;i--){
 var loca=$F-1;
-if(loca<0){loca=64;}
+if(loca<1){loca=64;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
 }},16.666);
 }
@@ -530,7 +531,7 @@ for(bw=1;bw<7;bw++){
 setTimeout(function(){
 for(i=64;i>0;i--){
 var loca=$F+1;
-if(loca<0){loca=64;}
+if(loca<1){loca=64;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
 }},16.666);
 }
