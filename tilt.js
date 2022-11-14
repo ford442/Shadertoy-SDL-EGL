@@ -306,7 +306,7 @@ class VanillaTilt {
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
       "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
       "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-      "translate(-" +(values.percentageX*5)+ "px,-"+(values.percentageY*5)+"px) " +
+      "translate(-" +(values.percentageX*10)+ "px,-"+(values.percentageY*10)+"px) " +
       "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
 
     if (this.glare) {
