@@ -359,8 +359,8 @@ glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(F0,F0,F0,F);
  
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
+// glEnable(GL_DEPTH_TEST);
+// glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
