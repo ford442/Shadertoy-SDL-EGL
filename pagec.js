@@ -177,7 +177,8 @@ data:222
 
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
-  let lockVid=0;
+
+  var lockVid=0;
 function spKey(e){
   if (e.code=='Space'){
     if (lockVid==0){lockVid=1;}
@@ -187,6 +188,7 @@ const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
 
 function loada(){
+  
   if (lockVid!=1){
 loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
