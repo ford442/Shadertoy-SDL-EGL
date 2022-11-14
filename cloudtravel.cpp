@@ -278,7 +278,7 @@ attr.antialias=EM_TRUE;
 // attr.colorSpace=display-p3;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -380,12 +380,12 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
 const pnnl=document.body;
   
-let Mov=1;
+var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
-if(Mov==1){Mov=0;}
-else if(Mov==0){Mov=1;}
-Mov=0;}
+if(Mov==1){Mov=0;vv.pause();}
+else if(Mov==0){Mov=1;vv.play();}
+}
 
 if (e.code=='KeyS'){Mov=-1;}
 if (e.code=='KeyW'){Mov=1;}
@@ -457,10 +457,13 @@ sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
+  
 for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+if(Mov==1){
+var j=i+1;eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
+}
+  
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
@@ -469,10 +472,13 @@ var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
+  
 for (i=0;i<65;i++){
-var j=i+1;
-eval("$"+j+".set($$1);");
+if(Mov==1){
+var j=i+1;eval("$"+j+".set($$1);");
 }
+}
+  
 var d=S();if(d)d();d=S();function S(){
   
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -487,8 +493,10 @@ var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+if(Mov==1){
+
+var j=i+1;eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+}
 }
 var pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -500,12 +508,14 @@ var vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
+  if(Mov!=0){
+
 for(i=64;i>0;i--){
 
 var loca=$F+Mov;
 if(loca>64){loca=1;}
 
-var locb=$Bu+1;
+var locb=$Bu+Mov;
 if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
@@ -513,6 +523,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+  }
 setTimeout(function(){
 M();
 },30);
