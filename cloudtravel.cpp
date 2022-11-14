@@ -48,6 +48,7 @@ float x;
 float y;
 EM_BOOL ms_l;
 int Size;
+float S;
 EM_BOOL clk_l;
 float mX,mY;
 
@@ -67,7 +68,7 @@ char8_t *result=NULL;
 long length=0;
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision mediump float;";
+"#version 300 es \n precision highp float;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -82,7 +83,6 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-
 EM_BOOL key_call(int eventType,const EmscriptenKeyboardEvent *e,void *userData){
 if(eventType==EMSCRIPTEN_EVENT_KEYPRESS&&e->which){return e->which;}
 if(e->charCode){return e->charCode;}
@@ -90,8 +90,6 @@ if(strlen(e->key)==1){return(int)e->key[0];}
 if(e->which){return e->which;}
 return e->keyCode;
 }
-
-
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -152,11 +150,11 @@ if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=xxx*Size;
-mY=yyy*Size;
+mX=xxx*S;
+mY=yyy*S;
 clk_l=false;
 }
-glUniform4f(uni_mse,((float)Size*xx),((float)Size*yy),mX,mY);
+glUniform4f(uni_mse,(S*xx),(S*yy),mX,mY);
 }else{
 clk_l=true;
 }
@@ -178,9 +176,8 @@ ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
   
-  
-mouseX=x/Size;
-mouseY=(Size-y)/Size;
+mouseX=x/S;
+mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
@@ -240,6 +237,7 @@ EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
 Size=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=(float)Size;
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -357,8 +355,8 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,(float)Size,(float)Size,1.0);
-glUniform3f(smp_chn_res,(float)Size,(float)Size,1.0);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(F0,F0,F0,F);
  
 glEnable(GL_DEPTH_TEST);
@@ -493,10 +491,7 @@ var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
-if(Mov==1){
-
 var j=i+1;eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
 }
 var pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -508,6 +503,7 @@ function M(){
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
+
 if(Mov==1){
 for(i=64;i>0;i--){
 var loca=$F+1;
@@ -521,18 +517,15 @@ $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 }
+
 if(Mov==-1){
 for(i=64;i>0;i--){
 var loca=$F-1;
 if(loca<0){loca=64;}
-var locb=$Bu;
+var locb=$Bu-1;
 if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";$Bu="+locb+";}");
 }
-var $bb=R(vv);
-$B.set($bb,0,sz);
-pointb=66*la;
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 }
 
 setTimeout(function(){
