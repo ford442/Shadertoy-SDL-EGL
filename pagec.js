@@ -182,7 +182,7 @@ function spKey(e){
   if (e.code=='Space'){
     if (lockVid==0){lockVid=1;}
     if (lockVid==1){lockVid=0;}
-  }
+  }}
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
 
