@@ -355,8 +355,8 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,1.0,1.0,1.0);
-glUniform3f(smp_chn_res,1.0,1.0,1.0);
+glUniform3f(uni_res,S,S,S);
+glUniform3f(smp_chn_res,S,S,S);
 glClearColor(0.5,0.5,0.5,F);
  
 // glEnable(GL_DEPTH_TEST);
