@@ -177,11 +177,10 @@ data:222
 
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
-
+var vv=document.getElementById("mv");
 function back(){
-  var vv=document.getElementById("mv");
 vv.pause();
-var fps=40;
+var fps=30;
 var intervalRewind=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalRewind);
@@ -199,13 +198,13 @@ if (e.code=='Space'){
 if (lockVid==0){lockVid=1;}
 if (lockVid==1){lockVid=0;}
 }
-if (e.code=='KeyS'){back();}
+if (e.code=='KeyS'){lockVid=1;back();}
 };
 
 
 function spKeyUp(e){
 
-if (e.code=='KeyS'){vv.play();}
+if (e.code=='KeyS'){lockVid=0;vv.play();}
 };
 
 const pnnl=document.body;
