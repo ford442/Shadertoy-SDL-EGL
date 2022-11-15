@@ -223,21 +223,22 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-Size=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+S=(float)Size;
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -249,8 +250,8 @@ EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v16,
-EGL_STENCIL_SIZE,v8,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v16,
 EGL_BUFFER_SIZE,v32,
 EGL_NONE
 };
@@ -259,18 +260,17 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-// attr.colorSpace=display-p3;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -339,17 +339,17 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,Size,Size,1.0);
-glUniform3f(smp_chn_res,Size,Size,1.0);
-glClearColor(F,F,F,F);
-glDisable(GL_BLEND);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
+glClearColor(F0,F0,F0,F);
+// glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_CULL_FACE);
-glDisable(GL_DITHER);
+// glDisable(GL_CULL_FACE);
+// glDisable(GL_DITHER);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
@@ -371,28 +371,28 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-let bcanvas=document.getElementById("bcanvas");
-let contx=bcanvas.getContext("webgl2",{colorSpace:'srgb',antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-let g=new GPU({canvas:bcanvas,webGl:contx});
-let g2=new GPU();
-let glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-let glslAveg=`float Aveg(float a,float b) {return (0.9999522-(((a)-(b))*((a)*(0.9999522/(0.9999522-b))))) ;}`;
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const g=new GPU({canvas:bcanvas,webGl:contx});
+const g2=new GPU();
+const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+const glslAveg=`float Aveg(float a,float b) {return (0.9999522-(((a)-(b))*((a)*(0.9999522/(0.9999522-b))))) ;}`;
 g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
 g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
 g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
 g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-let R=g2.createKernel(function(tv){
+const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
-let t=g.createKernel(function(v){
+const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-let r=g.createKernel(function(f){
+const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
