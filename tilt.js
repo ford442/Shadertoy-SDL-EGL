@@ -302,8 +302,8 @@ class VanillaTilt {
   update() {
     let values = this.getValues();
     var Siz=window.innerHeight;
-var leftRight = ((values.percentageX - 50.0) * 0.01)*Siz;
-var upDown = ((values.percentageY - 50.0) * 0.01)*Siz;
+var leftRight = (((100-values.percentageX) - 50.0) * 0.005)*Siz;
+var upDown = (((100-values.percentageY) - 50.0) * 0.005)*Siz;
 
     
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
