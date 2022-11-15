@@ -218,7 +218,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 static void strt(){
 iFrame=0;
 clickLoc=true;
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=EM_ASM_INT({return parseInt(document.innerHeight);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
@@ -378,8 +378,8 @@ opn_aud();
 
 extern "C" {
 EM_JS(void,ma,(),{
-let w$=parseInt(document.getElementById('pmhig').innerHTML);
-let h$=parseInt(document.getElementById('pmhig').innerHTML);
+let w$=document.innerHeight;
+let h$=document.innerHeight;
 let vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -427,11 +427,11 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setFixIntegerDivisionAccuracy(true).setDynamicOutput(true).setOutput([w$,h$]);
+w$=document.innerHeight;
+h$=document.innerHeight;
 vv=document.getElementById("mv");
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+var blank$=0;
+var nblank$=0;
 let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
@@ -455,8 +455,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-h$=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+w$=document.innerHeight;
+h$=document.innerHeight;
 var blank$=0;
 var nblank$=0;
 l=w$*h$*16;
