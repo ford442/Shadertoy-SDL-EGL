@@ -5,8 +5,6 @@
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-#define __gl2_h_
-#include <GLES2/gl2ext.h>
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -89,7 +87,7 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
