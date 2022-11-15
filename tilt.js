@@ -306,9 +306,9 @@ class VanillaTilt {
     
     var Siz=window.innerHeight;
     
-    var leftRight = ((50.0-values.percentageX) * 0.005)*Siz;
+    var leftRight = ((50.0-values.percentageX) * 0.01)*Siz;
     
-    var upDown = ((50.0-values.percentageY) * 0.005)*Siz;
+    var upDown = ((50.0-values.percentageY) * 0.01)*Siz;
 
     
     
