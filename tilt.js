@@ -222,9 +222,8 @@ class VanillaTilt {
       this.element.style.transform = `perspective(${this.settings.perspective}px) ` +
         `rotateX(0deg) ` +
         `translate(0px,0px) ` +
-        `rotateY(0deg)`;
-       // `rotateY(0deg) ` +
-       // `scale3d(1, 1, 1)`;
+        `rotateY(0deg) ` +
+        `scale3d(1, 1, 1)`;
     }
 
     this.resetGlare();
@@ -302,11 +301,15 @@ class VanillaTilt {
 
   update() {
     let values = this.getValues();
+    let Siz=window.innerHeight;
+let leftRight = ((values.percentageX - 50.0) * 0.1)*hei;
+let upDown = ((values.percentageY - 50.0) * 0.1)*hei;
 
+    
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
       "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
       "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-      "translate(-" +(values.percentageX*10)+ "px,-"+(values.percentageY*10)+"px) " +
+      "translate(" +leftRight+ "px,"+upDown+"px) " +
       "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
 
     if (this.glare) {
