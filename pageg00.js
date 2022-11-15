@@ -1,4 +1,3 @@
-
 var tsl,slt,$ll,$h,wi,r$,$w,$r,$hi,$lt,rnum,$sc,$rn,$ls,lo,mv,vide,he,$pt,randSong;
 
 var $iwid=document.getElementById("iwid");
@@ -20,20 +19,6 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $sngs[i]=Self+"songs/"+txxt;
-}}
-
-function vids(xml){
-var vparser=new DOMParser();
-var htmlDoc=vparser.parseFromString(xml.responseText,'text/html');
-var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
-$vids[0]=preList.length;
-console.log('Number of videos: '+$vids[0]);
-for (var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
-var Self=location.href;
-Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
-$vids[i]=Self+"video/"+txxt;
 }}
 
 function shds(xml){
@@ -65,16 +50,6 @@ sngs(this);
 nxhttp.open("GET","songs/",true);
 nxhttp.send();
 }
-function scanVideos(){
-var fxhttp=new XMLHttpRequest();
-fxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
-vids(this);
-}
-};
-fxhttp.open("GET","video/",true);
-fxhttp.send();
-}
 
 function scanShaders(){
 var dxhttp=new XMLHttpRequest();
@@ -87,7 +62,6 @@ dxhttp.open("GET","all/",true);
 dxhttp.send();
 }
 
-scanVideos();
 scanShaders();
 scanSongs();
 
@@ -100,18 +74,15 @@ document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 
 function snd(){
 randSong=Math.floor(($sngs[0]-5)*Math.random());
-  console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
-
+console.log('Random song: #'+randSong+' '+$sngs[randSong+5]);
 var songSrc=$sngs[randSong+5];
 document.getElementById("track").src=songSrc;
 var sound=new Howl({src:[songSrc],volume:1,onend:function(){snd();}});
 sound.play();
 }
-
 document.getElementById('btn8').addEventListener('click',function(){
 snd();
 });
-
 const tem=document.getElementById("tim");
 ban=document.getElementById("btn1");
 const sfr=document.getElementById("slideframe");
@@ -134,7 +105,6 @@ $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);te
 setTimeout(function(){
 slt=tem.innerHTML;
 },8);},16);});
-
 hii=window.innerHeight;
 document.getElementById("ihid").innerHTML=hii;
 r$=hii/he;
@@ -145,15 +115,12 @@ var $hg=hii+"px";
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
-
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},4400);
 setTimeout(function(){document.getElementById("btn").click();},2800);
 // setTimeout(function(){document.getElementById("btn10").click();},3800);
 setTimeout(function(){document.getElementById("btn8").click();},3200);
-
 function loada(){
-
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById("ihid").innerHTML=hii;
@@ -163,7 +130,6 @@ $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-
 $h=window.innerHeight;
 var he=document.getElementById("hig").innerHTML;
 var wi=document.getElementById("wid").innerHTML;
@@ -173,7 +139,6 @@ hii=$ihigB.innerHTML;
 $hi=$h-hii;
 if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
 $hg=$h+"px";
-
 document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt(window.innerHeight,10);
@@ -187,5 +152,4 @@ document.getElementById("di").click();
 setTimeout(function(){
 loada();
 },$ldt);}
-
 loada();
