@@ -145,7 +145,7 @@ var $hg=hii+"px";
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById("wrap").style.lineheight=$hg;
-document.getElementById("isrc").innerHTML=adr;
+document.getElementById("isrc").innerHTML='./intro.mp4';
 
 setTimeout(function(){document.getElementById("btn2").click();},2000);
 setTimeout(function(){document.getElementById("btn11").click();},2400);
