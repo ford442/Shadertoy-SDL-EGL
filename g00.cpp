@@ -427,8 +427,8 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setFixIntegerDivisionAccuracy(true).setDynamicOutput(true).setOutput([w$,h$]);
-w$=document.innerHeight;
-h$=document.innerHeight;
+w$=EM_ASM_INT({return parseInt(document.innerHeight);});
+h$=EM_ASM_INT({return parseInt(document.innerHeight);});
 vv=document.getElementById("mv");
 var blank$=0;
 var nblank$=0;
@@ -455,8 +455,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=document.innerHeight;
-h$=document.innerHeight;
+w$=EM_ASM_INT({return parseInt(document.innerHeight);});
+h$=EM_ASM_INT({return parseInt(document.innerHeight);});
 var blank$=0;
 var nblank$=0;
 l=w$*h$*16;
