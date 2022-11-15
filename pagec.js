@@ -209,13 +209,12 @@ var lockVid=0;
 
 function spKey(e){
 if (e.code=='Space'){
-if (lockVid==0){lockVid=1;}
-if (lockVid==1){lockVid=0;}
+if (lockVid==0){vv.pause;lockVid=1;}
+if (lockVid==1){vv.play;lockVid=0;}
 }
 if (e.code=='KeyS'){lockVid=1;back();}
 if (e.code=='KeyW'){lockVid=1;forward();}
 };
-
 
 function spKeyUp(e){
 if (e.code=='KeyS'){lockVid=0;vv.play();}
