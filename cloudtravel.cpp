@@ -374,25 +374,6 @@ EM_JS(void,ma,(),{
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
-const pnnl=document.body;
-  
-var Mov=1;
-function doKey(e){
-if(e.code=='Space'){
-e.preventDefault();
-if(Mov==1){Mov=0;vv.pause();}
-else if(Mov==0){Mov=1;vv.play();}
-}
-
-if (e.code=='KeyW'){Mov=1;}
-}
-                          
-function doUpKey(e){
-if (e.code=='KeyW'){Mov=0;}
-}
-pnnl.addEventListener('keydown',doKey);
-pnnl.addEventListener('keyup',doUpKey);
-  
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
@@ -497,7 +478,6 @@ function M(){
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 
-if(Mov==1){
 for(i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;}
@@ -509,9 +489,6 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-}
-var frmNum=$F;
-
 setTimeout(function(){
 M();
 },30);
