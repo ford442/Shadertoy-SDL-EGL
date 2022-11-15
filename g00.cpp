@@ -88,6 +88,22 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
+
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+x=e->clientX;
+y=e->clientY;
+}}
+return 0;
+}
+
 static const char8_t *read_file(const char *filename){
 FILE *file=fopen(filename,"r");
 if(file){
