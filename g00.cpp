@@ -43,6 +43,8 @@ static GLfloat x;
 static GLfloat y;
 static EM_BOOL mouseLPressed;
 static int S;
+EM_BOOL ms_l;
+
 static GLfloat Size;
 static EM_BOOL clickLoc;
 static GLfloat mX,mY;
@@ -90,10 +92,10 @@ static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 EM_BOOL mouse_callback(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-ms_l=true;
+mouseLPressed=true;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-ms_l=false;
+mouseLPressed=false;
 }
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
