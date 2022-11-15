@@ -126,7 +126,6 @@ return shader;
 
 
 static void uniforms(GLfloat time,EGLint fram){
- /*
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -139,7 +138,6 @@ glUniform4f(uniform_mouse,(Size*xx),(Size*yy),mX,mY);
 }else{
 clickLoc=true;
 }
-*/
 glUniform1f(uniform_time,time);
 glUniform1i(uniform_frame,fram);
 }
@@ -150,19 +148,19 @@ t2=high_resolution_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
-/*
+
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
-*/
+
 uniforms(Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
-// glFlush();
-// nanosleep(&req,&rem);
-// glFinish();
+glFlush();
+nanosleep(&req,&rem);
+glFinish();
 iFrame++;
 }
 
@@ -208,7 +206,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 static void strt(){
 iFrame=0;
 clickLoc=true;
-S=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
+S=EM_ASM_INT({return parseInt(document.innerHeight);});
 Size=(float)S;
 eglBindAPI(EGL_OPENGL_ES_API);
 static const EGLint attribut_list[]={ 
@@ -227,8 +225,8 @@ static const EGLint attribute_list[]={
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
@@ -368,8 +366,8 @@ opn_aud();
 
 extern "C" {
 EM_JS(void,ma,(),{
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let w$=document.innerHeight;
+let h$=document.innerHeight;
 let vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -402,7 +400,7 @@ let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setFixIntegerDivisionAccuracy(true).setDynamicOutput(true).setOutput([w$,h$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
@@ -416,12 +414,12 @@ var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setFixIntegerDivisionAccuracy(true).setDynamicOutput(true).setOutput([w$,h$]);
+w$=document.innerHeight;
+h$=document.innerHeight;
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+var blank$=0;
+var nblank$=0;
 let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
@@ -445,10 +443,10 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+w$=document.innerHeight;
+h$=document.innerHeight;
+var blank$=0;
+var nblank$=0;
 l=w$*h$*16;
 la=h$*h$*4;
 al=w$*h$*8;
