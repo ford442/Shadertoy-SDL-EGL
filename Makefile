@@ -166,7 +166,7 @@ g0:
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	-std=c++2b \
         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-        --extern-pre-js filesys.js --extern-pre-js ccall.js --extern-pre-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-pre-js pageg0.js
+        --extern-pre-js filesys.js --extern-pre-js ccall.js --extern-pre-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-pre-js pageg0.js  --extern-pre-js cl-gpu.js
 
 
 crp: crp.cpp  Makefile
