@@ -47,6 +47,7 @@ float x;
 float y;
 EM_BOOL ms_l;
 int Size;
+float S;
 EM_BOOL clk_l;
 float mX,mY;
 
