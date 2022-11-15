@@ -123,7 +123,7 @@ glCompileShader(shader);
 return shader;
 }
 
-static void uniforms(GLfloat time,EGLint fram){
+static void uniforms(GLfloat xx,GLfloat yy,GLfloat time,EGLint fram){
 if(mouseLPressed==true){
 if(clickLoc==true){
 const GLfloat xxx=xx;
@@ -152,7 +152,7 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_callback);
 mouseX=x/Size;
 mouseY=(Size-y)/Size;
-uniforms(Ttime,iFrame);
+uniforms(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,Indices);
 glFlush();
 nanosleep(&req,&rem);
