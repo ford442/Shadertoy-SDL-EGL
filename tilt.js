@@ -300,16 +300,22 @@ class VanillaTilt {
   }
 
   update() {
+    
+    
     let values = this.getValues();
+    
     var Siz=window.innerHeight;
-var leftRight = (((100.0-values.percentageX) - 50.0) * 0.005)*Siz;
-var upDown = (((100.0-values.percentageY) - 50.0) * 0.005)*Siz;
+    
+    var leftRight = ((50.0-values.percentageX) * 0.005)*Siz;
+    
+    var upDown = ((50.0-values.percentageY) * 0.005)*Siz;
 
+    
     
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
       "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
       "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-      "translate(-" +leftRight+ "px,-"+upDown+"px) " +
+      "translate(" +leftRight+ "px,"+upDown+"px) " +
       "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
 
     if (this.glare) {
