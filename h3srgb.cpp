@@ -25,6 +25,8 @@ extern "C" {
 #include <GLES3/gl32.h>
 #include <GLES3/gl3platform.h>
 
+extern "C" {
+
 #include <SDL2/SDL.h>
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
@@ -84,6 +86,8 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 return;
+}
+
 }
 
 using namespace std;
