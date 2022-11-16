@@ -98,8 +98,8 @@ steady_clock::time_point t1,t2;
 GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
 float Ttime;
 int iFrame;
-GLsizei s4=4;
-int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
+const GLsizei s4=4;
+const int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
 int a,b;
 const float F=1.0f;
 const float F0=0.0f;
@@ -316,9 +316,11 @@ EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v32,
-EGL_STENCIL_SIZE,v16,
+EGL_DEPTH_SIZE,v24,
+EGL_STENCIL_SIZE,v8,
 EGL_BUFFER_SIZE,v32,
+EGL_SAMPLE_BUFFERS,v1,
+EGL_SAMPLES,v4,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
