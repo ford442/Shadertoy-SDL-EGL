@@ -181,7 +181,7 @@ var vv=document.getElementById("mv");
 
 function back(){
 vv.pause();
-var fps=60;
+var fps=30;
 var intervalRewind=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalRewind);
@@ -194,7 +194,7 @@ vv.currentTime+=-(1/fps);
 
 function forward(){
 vv.pause();
-var fps=60;
+var fps=30;
 var intervalRewind=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalRewind);
@@ -209,6 +209,7 @@ var lockVid=0;
 
 function spKey(e){
 if (e.code=='Space'){
+e.preventDefault();
 if (lockVid==0){vv.pause;lockVid=1;}
 if (lockVid==1){vv.play;lockVid=0;}
 }
