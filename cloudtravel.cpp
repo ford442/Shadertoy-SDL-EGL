@@ -371,6 +371,53 @@ return;
 
 extern "C" {
 EM_JS(void,ma,(),{
+
+const pnnl=document.body;
+
+function back(){
+vv.pause();
+var fps=30;
+var intervalForward=setInterval(function(){
+if(vv.currentTime==0){
+clearInterval(intervalForward);
+vv.pause();
+}else{
+vv.currentTime+=-(1/fps);
+}
+},1000/fps);
+};
+
+function forward(){
+vv.pause();
+var fps=30;
+var intervalRewind=setInterval(function(){
+if(vv.currentTime==0){
+clearInterval(intervalRewind);
+vv.pause();
+}else{
+vv.currentTime+=(1/fps);
+}
+},1000/fps);
+};
+
+var Mov=1;
+function doKey(e){
+if(e.code=='Space'){
+e.preventDefault();
+if(Mov==1){Mov=0;vv.pause();}
+else if(Mov==0){Mov=1;vv.play();}
+}
+if (e.code=='KeyW'){Mov=1;forward();}
+if (e.code=='KeyS'){Mov=1;back();}
+}
+
+function doKeyUp(e){
+if (e.code=='KeyS'){Mov=1;forward();}
+}
+
+pnnl.addEventListener('keydown',doKey);
+pnnl.addEventListener('keydown',doKeyUp);
+
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
