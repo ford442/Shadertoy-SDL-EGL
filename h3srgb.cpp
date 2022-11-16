@@ -222,7 +222,7 @@ return;
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -350,48 +350,38 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
-  nanosleep(&req,&rem);
-
-static const char* default_fragment_shader=(char*)read_file(fileloc);
-  nanosleep(&req,&rem);
 nanosleep(&req,&rem);
-
+static const char* default_fragment_shader=(char*)read_file(fileloc);
+nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glAttachShader(shd_prg,vtx);
-    nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glAttachShader(shd_prg,frag);
-   nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 atb_pos=v0;
 glBindAttribLocation(shd_prg,v0,"iPosition");
 glLinkProgram(shd_prg);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glUseProgram(shd_prg);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
