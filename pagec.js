@@ -177,49 +177,24 @@ data:222
 
 setTimeout(function(){window.open('./flac');},250);
 setTimeout(function(){snd();},1200);
+
 var vv=document.getElementById("mv");
-
-function back(){
-vv.pause();
-var fps=30;
-var intervalRewind=setInterval(function(){
-if(vv.currentTime==0){
-clearInterval(intervalRewind);
-vv.pause();
-}else{
-vv.currentTime+=-(1/fps);
-}
-},1000/fps);
-};
-
-function forward(){
-vv.pause();
-var fps=30;
-var intervalRewind=setInterval(function(){
-if(vv.currentTime==0){
-clearInterval(intervalRewind);
-vv.pause();
-}else{
-vv.currentTime+=-(1/fps);
-}
-},1000/fps);
-};
 
 var lockVid=0;
 
 function spKey(e){
 if (e.code=='Space'){
 e.preventDefault();
-if (lockVid==0){vv.pause;lockVid=1;}
-if (lockVid==1){vv.play;lockVid=0;}
+if (lockVid==0){lockVid=1;}
+else if (lockVid==1){lockVid=0;}
 }
-if (e.code=='KeyS'){lockVid=1;back();}
-if (e.code=='KeyW'){lockVid=1;forward();}
+if (e.code=='KeyS'){lockVid=1;}
+if (e.code=='KeyW'){lockVid=1;}
 };
 
 function spKeyUp(e){
-if (e.code=='KeyS'){lockVid=0;vv.play();}
-if (e.code=='KeyW'){lockVid=0;vv.play();}
+if (e.code=='KeyS'){lockVid=0;}
+if (e.code=='KeyW'){lockVid=0;}
 };
 
 const pnnl=document.body;
