@@ -15,9 +15,8 @@
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
 #include <emscripten.h>
-extern "C" {
 #include <emscripten/html5.h>
-}
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
@@ -99,11 +98,11 @@ GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
 float Ttime;
 int iFrame;
 GLsizei s4=4;
-int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
+const int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
 int a,b;
-float F=1.0f;
-float F0=0.0f;
-float Fm1=-1.0f;
+const float F=1.0f;
+const float F0=0.0f;
+const float Fm1=-1.0f;
 float mouseX;
 float mouseY;
 float cMouseX;
@@ -125,14 +124,14 @@ struct timespec req={0,12000000};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
