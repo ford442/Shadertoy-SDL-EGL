@@ -404,6 +404,7 @@ glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
+  glFrontFace(GL_CW);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
