@@ -144,12 +144,6 @@ T=true;
 #include <unistd.h>
 #include <chrono>
 
-
-
-
-
-
-
 extern "C" {
 
 #include <SDL2/SDL.h>
@@ -215,12 +209,9 @@ return;
 
 }
 
-
-
 extern "C" {
 
 #include <emscripten/html5.h>
-
 
 }
 
@@ -242,7 +233,6 @@ y=e->clientY;
 }}
 return 0;
 }
-
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -283,7 +273,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-
 extern "C" {
 
 #include <EGL/egl.h>
@@ -302,10 +291,9 @@ using namespace std;
 using namespace std::chrono;
 
 steady_clock::time_point t1,t2;
-
 GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
-float Ttime;
-int iFrame;
+GLfloat Ttime;
+EGLint iFrame;
 GLsizei s4=4;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
 int a,b;
@@ -316,21 +304,17 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-
 int Size;
 float S;
 EM_BOOL clk_l;
-float mX,mY;
-
+GLfloat mX,mY;
 GLsizei i;
 float fps;
 float timeSpeed;
-
 struct timespec rem;
 struct timespec req={0,12000000};
 
-
-void uni(float xx,float yy,float time,int fram){
+void uni(float xx,float yy,GLfloat time,EGLint fram){
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -339,7 +323,9 @@ mX=xxx*Size;
 mY=yyy*Size;
 clk_l=false;
 }
-glUniform4f(uni_mse,(S*xx),(S*yy),mX,mY);
+GLfloat mm=S*xx;
+GLfloat nn=S*yy;
+glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 }
