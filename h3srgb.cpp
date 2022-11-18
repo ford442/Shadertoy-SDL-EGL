@@ -225,41 +225,6 @@ extern "C" {
 }
 
 
-
-using namespace std;
-using namespace std::chrono;
-
-steady_clock::time_point t1,t2;
-
-GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
-float Ttime;
-int iFrame;
-GLsizei s4=4;
-int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
-int a,b;
-float F=1.0f;
-float F0=0.0f;
-float Fm1=-1.0f;
-float mouseX;
-float mouseY;
-float cMouseX;
-float cMouseY;
-float x;
-float y;
-EM_BOOL ms_l;
-int Size;
-float S;
-EM_BOOL clk_l;
-float mX,mY;
-
-GLsizei i;
-float fps;
-float timeSpeed;
-
-struct timespec rem;
-struct timespec req={0,12000000};
-
-
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -315,7 +280,56 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-void uni(float xx,float yy,float time,fram){
+
+extern "C" {
+
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <GLES3/gl3platform.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
+#define GL_GLEXT_PROTOTYPES 1
+#define GL3_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+
+}
+
+using namespace std;
+using namespace std::chrono;
+
+steady_clock::time_point t1,t2;
+
+GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
+float Ttime;
+int iFrame;
+GLsizei s4=4;
+int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
+int a,b;
+float F=1.0f;
+float F0=0.0f;
+float Fm1=-1.0f;
+float mouseX;
+float mouseY;
+float cMouseX;
+float cMouseY;
+float x;
+float y;
+EM_BOOL ms_l;
+int Size;
+float S;
+EM_BOOL clk_l;
+float mX,mY;
+
+GLsizei i;
+float fps;
+float timeSpeed;
+
+struct timespec rem;
+struct timespec req={0,12000000};
+
+
+void uni(float xx,float yy,float time,int fram){
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -334,19 +348,7 @@ return;
 }
 
 
-extern "C" {
 
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-#include <GLES3/gl3platform.h>
-#include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
-#define GL_GLEXT_PROTOTYPES 1
-#define GL3_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
-
-}
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
