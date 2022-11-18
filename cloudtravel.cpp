@@ -16,13 +16,16 @@
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
 #include <emscripten.h>
+
 extern "C" {
+
 #include <emscripten/html5.h>
-}
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl3platform.h>
+
+}
 
 using namespace std;
 using namespace std::chrono;
@@ -35,9 +38,9 @@ int iFrame;
 GLsizei s4=4;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
 int a,b;
-const float F=1.0f;
-const float F0=0.0f;
-const float Fm1=-1.0f;
+float F=1.0f;
+float F0=0.0f;
+float Fm1=-1.0f;
 float mouseX;
 float mouseY;
 float cMouseX;
@@ -66,7 +69,7 @@ char8_t *result=NULL;
 long length=0;
 
 static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;";
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 static const char fragment_shader_header_gles3[]=
@@ -104,6 +107,71 @@ y=e->clientY;
 return 0;
 }
 
+extern "C" {
+
+#include <SDL2/SDL.h>
+SDL_AudioDeviceID dev;
+struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
+
+void cls_aud(){
+if(dev!=0){
+SDL_PauseAudioDevice(dev,SDL_TRUE);
+SDL_CloseAudioDevice(dev);
+dev=0;
+return;
+}}
+
+void qu(int rc){
+SDL_Quit();
+return;
+}
+
+void opn_aud(){
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
+if(!dev){
+SDL_FreeWAV(wave.snd);
+}
+SDL_PauseAudioDevice(dev,SDL_FALSE);
+return;
+}
+
+void SDLCALL bfr(void *unused,Uint8* stm,int len){
+Uint8* wptr;
+int lft;
+wptr=wave.snd+wave.pos;
+lft=wave.slen-wave.pos;
+while (lft<=len){
+SDL_memcpy(stm,wptr,lft);
+stm+=lft;
+len-=lft;
+wptr=wave.snd;
+lft=wave.slen;
+wave.pos=0;
+}
+SDL_memcpy(stm,wptr,len);
+wave.pos+=len;
+return;
+}
+
+void plt(){
+char flnm[24];
+SDL_FreeWAV(wave.snd);
+SDL_SetMainReady();
+if (SDL_Init(SDL_INIT_AUDIO)<0){
+qu(1);
+}
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
+qu(1);
+}
+wave.pos=0;
+wave.spec.callback=bfr;
+opn_aud();
+return;
+}
+
+}
+
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
@@ -135,6 +203,7 @@ aptr[200]=maxSum/32;
 return;
 }
 
+
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
@@ -143,7 +212,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-void uni(float xx,float yy,float time,EGLint fram){
+void uni(float xx,float yy,float time,int fram){
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -167,13 +236,10 @@ t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
-  
-  
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-  
 mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
@@ -238,7 +304,7 @@ Size=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);
 S=(float)Size;
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
@@ -264,6 +330,9 @@ EGL_ALPHA_SIZE,v8,
 EGL_DEPTH_SIZE,v16,
 EGL_STENCIL_SIZE,v8,
 EGL_BUFFER_SIZE,v32,
+EGL_BUFFER_SIZE,v32,
+EGL_SAMPLE_BUFFERS,v1,
+EGL_SAMPLES,v4,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -274,7 +343,7 @@ attr.antialias=EM_TRUE;
 // attr.colorSpace=display-p3;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -293,51 +362,41 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
-  nanosleep(&req,&rem);
-
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
+nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-  nanosleep(&req,&rem);
-
-static const char* default_fragment_shader=(char*)read_file(fileloc);
-  nanosleep(&req,&rem);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
-
+static const char* default_fragment_shader=(char*)read_file(fileloc);
+nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
-  nanosleep(&req,&rem);
 nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
-  nanosleep(&req,&rem);
 nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glAttachShader(shd_prg,vtx);
-    nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glAttachShader(shd_prg,frag);
-   nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 atb_pos=v0;
 glBindAttribLocation(shd_prg,v0,"iPosition");
 glLinkProgram(shd_prg);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glUseProgram(shd_prg);
-  nanosleep(&req,&rem);
-
+nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -356,24 +415,20 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,S);
 glUniform3f(smp_chn_res,S,S,S);
 glClearColor(0.5,0.5,0.5,F);
- 
-// glEnable(GL_DEPTH_TEST);
+ // glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_DITHER);
 t1=steady_clock::now();
-
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
 
 extern "C" {
 EM_JS(void,ma,(),{
-
 const pnnl=document.body;
-
 function back(){
 vv.pause();
 var fps=30;
@@ -386,7 +441,6 @@ vv.currentTime+=-(1/fps);
 }
 },1000/fps);
 };
-
 var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
@@ -397,15 +451,12 @@ else if(Mov==0){Mov=1;vv.play();}
 if (e.code=='KeyW'){Mov=1;vv.play();}
 if (e.code=='KeyS'){Mov=1;back();}
 }
-
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=1;vv.play();clearInterval(intervalForward);}
 if (e.code=='KeyW'){Mov=0;vv.pause();}
 }
-
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
@@ -467,26 +518,20 @@ sz=(h$*h$)/8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-  
 for(i=0;i<65;i++){
 var j=i+1;eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-  
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
-
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
-  
 for (i=0;i<65;i++){
 var j=i+1;eval("$"+j+".set($$1);");
 }
-
 var d=S();if(d)d();d=S();function S(){
-  
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
@@ -507,12 +552,10 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 var vv=document.getElementById("mv");
-  
 function M(){
-  if(T){return;}
+if(T){return;}
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-
 for(i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;}
@@ -540,66 +583,6 @@ T=true;
 })
 }
 
-#include <SDL2/SDL.h>
-SDL_AudioDeviceID dev;
-struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
-
-void cls_aud(){
-if(dev!=0){
-SDL_PauseAudioDevice(dev,SDL_TRUE);
-SDL_CloseAudioDevice(dev);
-dev=0;
-return;
-}}
-
-void qu(int rc){
-SDL_Quit();
-return;
-}
-
-void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
-if(!dev){
-SDL_FreeWAV(wave.snd);
-}
-SDL_PauseAudioDevice(dev,SDL_FALSE);
-return;
-}
-
-void SDLCALL bfr(void *unused,Uint8* stm,int len){
-Uint8* wptr;
-int lft;
-wptr=wave.snd+wave.pos;
-lft=wave.slen-wave.pos;
-while (lft<=len){
-SDL_memcpy(stm,wptr,lft);
-stm+=lft;
-len-=lft;
-wptr=wave.snd;
-lft=wave.slen;
-wave.pos=0;
-}
-SDL_memcpy(stm,wptr,len);
-wave.pos+=len;
-return;
-}
-
-void plt(){
-char flnm[24];
-SDL_FreeWAV(wave.snd);
-SDL_SetMainReady();
-if (SDL_Init(SDL_INIT_AUDIO)<0){
-qu(1);
-}
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
-qu(1);
-}
-wave.pos=0;
-wave.spec.callback=bfr;
-opn_aud();
-return;
-}
 
 extern "C" {
 
