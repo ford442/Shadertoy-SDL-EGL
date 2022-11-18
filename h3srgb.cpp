@@ -1,3 +1,137 @@
+#include <emscripten.h>
+
+
+extern "C" {
+
+EM_JS(void,ma,(),{
+let w$=parseInt(document.getElementById("wid").innerHTML,10);
+let h$=parseInt(document.getElementById("hig").innerHTML,10);
+var vv=document.getElementById("mv");
+var $H=Module.HEAPF32.buffer;
+let la=h$*h$*4;
+var pointa=77*la;
+var agav=new Float32Array($H,pointa,300);
+let sz=(h$*h$)/8;
+var avag=0.750;
+var min=1.0;
+var max=0.0;
+agav.fill(avag,0,33);
+agav.fill(min,100,33);
+agav.fill(max,200,33);
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const g=new GPU({canvas:bcanvas,webGl:contx});
+const g2=new GPU();
+const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+const glslAveg=`float Aveg(float a,float b) {return (0.9999522-(((a)-(b))*((a)*(0.9999522/(0.9999522-b))))) ;}`;
+g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
+g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
+g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
+g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+const R=g2.createKernel(function(tv){
+var Pa=tv[this.thread.y][this.thread.x*4];
+return Ave(Pa[0],Pa[1],Pa[2]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+const t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var av$=Ave(P[0],P[1],P[2]);
+return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+const r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var $fmax=this.constants.fmax;
+var $fmin=this.constants.fmin;
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $favg=this.constants.favg;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
+vv=document.getElementById("mv");
+var blank$=Math.max((((w$-h$)*0)/2),0);
+var nblank$=Math.max((((h$-w$)*0)/2),0);
+let l=w$*h$*16;
+la=h$*h$*4;
+let al=w$*h$*8;
+sz=(h$*h$)/8;
+var pointa=77*la;
+var agav=new Float32Array($H,pointa,300);
+R.setOutput([sz]);
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+}
+var pointb=77*la;
+var $B=new Float32Array($H,pointb,sz);
+var $F=1;
+var $Bu=33;
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
+var $$1=t(vv);
+for (i=0;i<65;i++){
+var j=i+1;
+eval("$"+j+".set($$1);");
+}
+var d=S();if(d)d();d=S();function S(){
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
+var blank$=Math.max((((w$-h$)*0)/2),0);
+var nblank$=Math.max((((h$-w$)*0)/2),0);
+l=w$*h$*16;
+la=h$*h$*4;
+al=w$*h$*8;
+sz=(h$*h$)/8;
+var pointa=77*la;
+var agav=new Float32Array($H,pointa,300);
+R.setOutput([sz]);
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+}
+var pointb=66*la;
+var $B=new Float32Array($H,pointb,sz);
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
+var T=false;
+function M(){
+var vv=document.getElementById("mv");
+t.setConstants({nblnk:nblank$,blnk:blank$});
+r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+if(T){return;}
+for(i=64;i>0;i--){
+var loca=$F+1;if(loca>64){loca=1;}
+var locb=$Bu+1;if(locb>64){locb=1;}
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+}
+var $bb=R(vv);
+$B.set($bb,0,sz);
+pointb=66*la;
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+setTimeout(function(){
+M();
+},12);
+}
+M();
+document.getElementById("di").onclick=function(){
+T=true;
+S();
+};
+return()=>{
+T=true;
+};
+}
+})
+
+}
+
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -10,19 +144,11 @@
 #include <unistd.h>
 #include <chrono>
 
-#define GL_GLEXT_PROTOTYPES 1
-#define GL3_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-#include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
+
+
+
 
 extern "C" {
 
@@ -89,6 +215,17 @@ return;
 
 }
 
+
+
+extern "C" {
+
+#include <emscripten/html5.h>
+
+
+}
+
+
+
 using namespace std;
 using namespace std::chrono;
 
@@ -122,29 +259,6 @@ float timeSpeed;
 struct timespec rem;
 struct timespec req={0,12000000};
 
-typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-static const char *fileloc="/shader/shader1.toy";
-const char *sources[4];
-char8_t *result=NULL;
-long length=0;
-
-static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
-static const char vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-static const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"out vec4 fragColor;\n";
-static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -160,6 +274,7 @@ y=e->clientY;
 }}
 return 0;
 }
+
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -200,7 +315,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-void uni(float xx,float yy,float time,EGLint fram){
+void uni(float xx,float yy,float time,fram){
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -209,7 +324,7 @@ mX=xxx*Size;
 mY=yyy*Size;
 clk_l=false;
 }
-glUniform4f(uni_mse,((float)Size*xx),((float)Size*yy),mX,mY);
+glUniform4f(uni_mse,(S*xx),(S*yy),mX,mY);
 }else{
 clk_l=true;
 }
@@ -217,6 +332,45 @@ glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
 }
+
+
+extern "C" {
+
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
+#include <GLES3/gl3platform.h>
+#define GL_GLEXT_PROTOTYPES 1
+#define GL3_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+
+}
+
+typedef struct{GLfloat XYZW[4];}Vertex;
+Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
+const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+static const char *fileloc="/shader/shader1.toy";
+const char *sources[4];
+char8_t *result=NULL;
+long length=0;
+
+static const char common_shader_header_gles3[]=
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
+static const char vertex_shader_body_gles3[]=
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+static const char fragment_shader_header_gles3[]=
+"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
+"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"out vec4 fragColor;\n";
+static const char fragment_shader_footer_gles3[]=
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
@@ -228,8 +382,8 @@ ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call)
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-mouseX=x/Size;
-mouseY=(Size-y)/Size;
+mouseX=x/S;
+mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
@@ -414,136 +568,6 @@ t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
-
-extern "C" {
-EM_JS(void,ma,(),{
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
-var vv=document.getElementById("mv");
-var $H=Module.HEAPF32.buffer;
-let la=h$*h$*4;
-var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-let sz=(h$*h$)/8;
-var avag=0.750;
-var min=1.0;
-var max=0.0;
-agav.fill(avag,0,33);
-agav.fill(min,100,33);
-agav.fill(max,200,33);
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-const g=new GPU({canvas:bcanvas,webGl:contx});
-const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAveg=`float Aveg(float a,float b) {return (0.9999522-(((a)-(b))*((a)*(0.9999522/(0.9999522-b))))) ;}`;
-g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
-g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
-g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
-g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-const R=g2.createKernel(function(tv){
-var Pa=tv[this.thread.y][this.thread.x*4];
-return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
-const t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-var av$=Ave(P[0],P[1],P[2]);
-return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-const r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var $fmax=this.constants.fmax;
-var $fmin=this.constants.fmin;
-var $amax=this.constants.amax;
-var $amin=this.constants.amin;
-var $favg=this.constants.favg;
-var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
-var ouT=Math.max(Min,alph);
-var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
-let l=w$*h$*16;
-la=h$*h$*4;
-let al=w$*h$*8;
-sz=(h$*h$)/8;
-var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-R.setOutput([sz]);
-for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
-var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
-var $F=1;
-var $Bu=33;
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
-var $$1=t(vv);
-for (i=0;i<65;i++){
-var j=i+1;
-eval("$"+j+".set($$1);");
-}
-var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
-l=w$*h$*16;
-la=h$*h$*4;
-al=w$*h$*8;
-sz=(h$*h$)/8;
-var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-R.setOutput([sz]);
-for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
-var pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
-var T=false;
-function M(){
-var vv=document.getElementById("mv");
-t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-if(T){return;}
-for(i=64;i>0;i--){
-var loca=$F+1;if(loca>64){loca=1;}
-var locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
-}
-var $bb=R(vv);
-$B.set($bb,0,sz);
-pointb=66*la;
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-setTimeout(function(){
-M();
-},12);
-}
-M();
-document.getElementById("di").onclick=function(){
-T=true;
-S();
-};
-return()=>{
-T=true;
-};
-}
-})
-}
-
 
 extern "C" {
 
