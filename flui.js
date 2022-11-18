@@ -43,9 +43,10 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 function getWebGLContext(canvas){
- const params={colorSpace:'display-p3',alpha:true,depth:false,stencil:false,antialias:false,preserveDrawingBuffer:false};
+ // colorSpace:'display-p3'
+ const params={colorSpace:'srgb',alpha:true,depth:true,stencil:true,antialias:true,preserveDrawingBuffer:false};
  let gl=canvas.getContext('webgl2',{
- imageSmoothingEnabled:false,preserveDrawingBuffer:false,antialias:false,stencil:false,premultipliedAlpha:false,alpha:true,depth:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance'
+ imageSmoothingEnabled:true,preserveDrawingBuffer:false,antialias:true,stencil:true,premultipliedAlpha:false,alpha:true,depth:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance'
  });
  const isWebGL2=!!gl;
  if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
