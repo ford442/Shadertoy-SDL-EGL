@@ -224,6 +224,9 @@ extern "C" {
 
 }
 
+float x;
+float y;
+EM_BOOL ms_l;
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -313,9 +316,7 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-float x;
-float y;
-EM_BOOL ms_l;
+
 int Size;
 float S;
 EM_BOOL clk_l;
@@ -346,9 +347,6 @@ glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
 }
-
-
-
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
