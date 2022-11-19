@@ -71,7 +71,10 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile("/shader/shader1.toy",sfil);
 }}
 ff.send(null);
-setTimeout(function(){Module.ccall("str");},500);
+setTimeout(function(){
+// Module.ccall("str");
+document.getElementById("btn7").click();
+},500);
 }
 
 function scanSongs(){
