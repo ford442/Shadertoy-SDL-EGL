@@ -4,8 +4,8 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
-let w$=parseInt(window.innerHeight,10);
-let h$=parseInt(window.innerHeight,10);
+let w$=parseInt(document.getElementById("pmhig").innerHTML,10);
+let h$=parseInt(document.getElementById("pmhig").innerHTML,10);
 var vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -53,8 +53,8 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-w$=parseInt(window.innerHeight,10);
-h$=parseInt(window.innerHeight,10);
+w$=parseInt(document.getElementById("pmhig").innerHTML,10);
+h$=parseInt(document.getElementById("pmhig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
@@ -81,8 +81,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(window.innerHeight,10);
-h$=parseInt(window.innerHeight,10);
+w$=parseInt(document.getElementById("pmhig").innerHTML,10);
+h$=parseInt(document.getElementById("pmhig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
