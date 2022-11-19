@@ -4,8 +4,10 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+// let w$=parseInt(document.getElementById("wid").innerHTML,10);
+let w$=parseInt(window.innerHeight,10);
+// let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let h$=parseInt(window.innerHeight,10);
 var vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -488,7 +490,7 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
@@ -536,8 +538,10 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,1.0);
-glUniform3f(smp_chn_res,S,S,1.0);
+// glUniform3f(uni_res,S,S,1.0);
+glUniform3f(uni_res,F,F,1.0);
+// glUniform3f(smp_chn_res,S,S,1.0);
+glUniform3f(smp_chn_res,F,F,1.0);
 glClearColor(F0,F0,F0,0.5);
 // glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
