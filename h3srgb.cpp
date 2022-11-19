@@ -431,7 +431,8 @@ EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
-S=(float)Size;
+// S=(float)Size;
+S=F;
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
