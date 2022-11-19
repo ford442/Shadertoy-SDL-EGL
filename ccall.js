@@ -19,6 +19,7 @@ document.getElementById("btn").style="background-color:red;position:absolute;dis
 document.getElementById("btn7").style="background-color:red;position:absolute;display:block;left:3%;top:63%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById("pmhig").innerHTML=window.innerHeight*2;
 Module.ccall("str");
+document.getElementById("btn10").click();
 });
 
 document.getElementById("btn77").addEventListener("click",function(){
