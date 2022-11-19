@@ -78,7 +78,7 @@ FS.writeFile("/shader/shader1.toy",sfil);
 ff.send(null);
 setTimeout(function(){
 Module.ccall("str");
-},250);
+},850);
 }
 
 function scanSongs(){
@@ -170,7 +170,7 @@ document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
-setTimeout(function(){Module.ccall("b3");},400);
+setTimeout(function(){Module.ccall("b3");},700);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
