@@ -4,8 +4,8 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let w$=parseInt(window.innerHeight,10);
+let h$=parseInt(window.innerHeight,10);
 var vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -53,8 +53,8 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(window.innerHeight,10);
+h$=parseInt(window.innerHeight,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
@@ -81,8 +81,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(window.innerHeight,10);
+h$=parseInt(window.innerHeight,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
@@ -215,24 +215,6 @@ extern "C" {
 
 }
 
-GLfloat x;
-GLfloat y;
-EM_BOOL ms_l;
-
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-ms_l=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-ms_l=false;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
-}}
-return 0;
-}
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -287,6 +269,26 @@ extern "C" {
 
 }
 
+
+GLfloat x;
+GLfloat y;
+EM_BOOL ms_l;
+
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+x=e->clientX;
+y=e->clientY;
+}}
+return 0;
+}
+
 using namespace std;
 using namespace std::chrono;
 
@@ -339,6 +341,7 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
+GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
@@ -401,11 +404,10 @@ void strt(){
 emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 nanosleep(&req,&rem);
-  
+
   
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
@@ -421,7 +423,6 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
-  
   
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
