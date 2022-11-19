@@ -215,8 +215,8 @@ extern "C" {
 
 }
 
-float x;
-float y;
+GLfloat x;
+GLfloat y;
 EM_BOOL ms_l;
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
@@ -305,7 +305,7 @@ float mouseY;
 float cMouseX;
 float cMouseY;
 int Size;
-float S;
+GLfloat S;
 EM_BOOL clk_l;
 GLfloat mX,mY;
 GLsizei i;
@@ -334,29 +334,11 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
-const GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
-static const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
-static const char vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-static const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"out vec4 fragColor;\n";
-static const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-
-static const char* common_shader_header=common_shader_header_gles3;
-static const char* vertex_shader_body=vertex_shader_body_gles3;
-static const char* fragment_shader_header=fragment_shader_header_gles3;
-static const char* fragment_shader_footer=fragment_shader_footer_gles3;
 
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
@@ -417,6 +399,30 @@ return shader;
 
 void strt(){
 emscripten_cancel_main_loop();
+nanosleep(&req,&rem);
+nanosleep(&req,&rem);
+  
+  
+typedef struct{GLfloat XYZW[4];}Vertex;
+Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
+GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+static const char common_shader_header_gles3[]=
+"#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
+static const char vertex_shader_body_gles3[]=
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+static const char fragment_shader_header_gles3[]=
+"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
+"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"out vec4 fragColor;\n";
+static const char fragment_shader_footer_gles3[]=
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+static const char* common_shader_header=common_shader_header_gles3;
+static const char* vertex_shader_body=vertex_shader_body_gles3;
+static const char* fragment_shader_header=fragment_shader_header_gles3;
+static const char* fragment_shader_footer=fragment_shader_footer_gles3;
+
+  
+  
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
@@ -429,8 +435,8 @@ EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
-// S=(float)Size;
-S=F;
+S=(GLfloat)Size;
+
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -537,22 +543,20 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-// glUniform3f(uni_res,S,S,1.0);
-glUniform3f(uni_res,F,F,1.0);
-// glUniform3f(smp_chn_res,S,S,1.0);
-glUniform3f(smp_chn_res,F,F,1.0);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(F0,F0,F0,0.5);
-// glDisable(GL_BLEND);
+glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
-  glFrontFace(GL_CW);
+glFrontFace(GL_CW);
 // glEnable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_CULL_FACE);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
