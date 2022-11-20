@@ -463,11 +463,11 @@ EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v24,
-EGL_STENCIL_SIZE,v8,
+EGL_DEPTH_SIZE,v32,
+EGL_STENCIL_SIZE,v16,
 EGL_BUFFER_SIZE,v32,
-EGL_SAMPLE_BUFFERS,v1,
-EGL_SAMPLES,v4,
+EGL_SAMPLE_BUFFERS,v2,
+EGL_SAMPLES,v8,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -477,7 +477,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -547,17 +547,17 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(F0,F0,F0,0.5);
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
-glDisable(GL_SCISSOR_TEST);
+// glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
-// glEnable(GL_BLEND);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_CULL_FACE);
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
