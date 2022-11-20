@@ -190,6 +190,8 @@ else if (lockVid==1){lockVid=0;}
 }
 if (e.code=='KeyS'){lockVid=1;}
 if (e.code=='KeyW'){lockVid=1;}
+if (e.code=='KeyZ'){lockVid=1;}
+if (e.code=='KeyX'){lockVid=0;}
 };
 
 function spKeyUp(e){
