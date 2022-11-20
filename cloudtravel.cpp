@@ -301,10 +301,10 @@ EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
 Size=EM_ASM_INT({return parseInt(document.getElementById('pmhig').innerHTML,10);});
-S=(float)Size;
+S=(GLfloat)Size;
 eglBindAPI(EGL_OPENGL_ES_API);
 const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
@@ -317,7 +317,7 @@ EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
@@ -340,18 +340,17 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-// attr.colorSpace=display-p3;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=v2;
 attr.minorVersion=v0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
+ // emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -414,13 +413,13 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,S);
 glUniform3f(smp_chn_res,S,S,S);
-glClearColor(0.5,0.5,0.5,F);
- // glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
-// glEnable(GL_BLEND);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glDisable(GL_DITHER);
+glClearColor(0.5,0.5,0.5,0.5);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glDisable(GL_DITHER);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
@@ -428,19 +427,36 @@ return;
 
 extern "C" {
 EM_JS(void,ma,(),{
+
 const pnnl=document.body;
 function back(){
 vv.pause();
-var fps=30;
+var fps=60;
 var intervalForward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalForward);
-vv.pause();
 }else{
 vv.currentTime+=-(1/fps);
 }
-},1000/fps);
+},16.6);
 };
+ 
+function backForth(){
+vv.pause();
+var fps=60;
+var stp=parseInt(vv.currentTime,10);
+var a=stp-1;
+var b=stp+1;
+var intervalLoop=setInterval(function(){
+if(vv.currentTime<a){
+if(vv.currentTime<b){
+vv.currentTime+=(1/fps);}
+}else{
+vv.currentTime+=-(1/fps);
+}
+},16.6);
+};
+ 
 var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
@@ -450,6 +466,8 @@ else if(Mov==0){Mov=1;vv.play();}
 }
 if (e.code=='KeyW'){Mov=1;vv.play();}
 if (e.code=='KeyS'){Mov=1;back();}
+if (e.code=='KeyZ'){Mov=1;backForth();}
+if (e.code=='KeyX'){clearInterval(intervalLoop);}
 }
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=1;vv.play();clearInterval(intervalForward);}
@@ -457,6 +475,8 @@ if (e.code=='KeyW'){Mov=0;vv.pause();}
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
+ 
+ 
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
@@ -569,7 +589,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},30);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
