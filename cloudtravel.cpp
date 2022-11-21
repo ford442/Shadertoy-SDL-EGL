@@ -455,22 +455,21 @@ function stpBack(){
 clearInterval(intervalBackward);
 }
 
-
 function backForth(){
-let stp=[];
+var stp=[];
 stp[0]=vv.currentTime;
-let a=stp[0]-0.11;
-let b=stp[0]+0.33;
-let f=true;
-let intervalLoop=setInterval(function(){
+stp[1]=stp[0]-0.15;
+stp[2]=stp[0]+0.35;
+var f=true;
+var intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>a){
+if(vv.currentTime>stp[1]){
 vv.currentTime+=-0.01;
 }else{
 f=false;
 vv.currentTime+=0.01;
 }}else{
-if(vv.currentTime<b){
+if(vv.currentTime<stp[2]){
 vv.currentTime+=0.01;
 }else{
 f=true;
