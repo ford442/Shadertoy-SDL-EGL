@@ -361,7 +361,7 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
@@ -462,23 +462,23 @@ let stp;
 function backForth(){
 stp=vv.currentTime;
 var a=stp-0.222;
-var b=stp+0.666;
+var b=stp+0.444;
 var f=true;
 var intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(1/fps);
+vv.currentTime+=-0.01;
 }else{
 f=false;
-vv.currentTime+=(1/fps);
+vv.currentTime+=0.01;
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=(1/fps);
+vv.currentTime+=0.01;
 }else{
 f=true;
-vv.currentTime+=-(1/fps);
+vv.currentTime+=-0.01;
 }}
-},(fps/1000));
+},10);
 };
  
 var Mov=1;
