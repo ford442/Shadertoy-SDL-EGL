@@ -311,7 +311,7 @@ float cMouseY;
 int Size;
 GLfloat S;
 EM_BOOL clk_l;
-
+GLuint smp_chn_res;
 GLsizei i;
 float fps;
 float timeSpeed;
@@ -433,7 +433,7 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
   
 
-GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
+GLuint EBO,VBO,shd_prg,smp_chn[4];
 GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
 EGLSurface surface;
