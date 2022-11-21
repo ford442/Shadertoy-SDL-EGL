@@ -461,8 +461,8 @@ clearInterval(intervalLoop);
 
 function backForth(){
 var stp=parseInt(vv.currentTime);
-var a=stp-0.5;
-var b=stp+0.5;
+var a=stp-0.444;
+var b=stp+0.333;
 var f=true;
 var intervalLoop=setInterval(function(){
 if(f==true){
@@ -470,11 +470,13 @@ if(vv.currentTime>a){
 vv.currentTime+=-(1/fps);
 }else{
 f=false;
+vv.currentTime+=(1/fps);
 }}else{
 if(vv.currentTime<b){
 vv.currentTime+=(1/fps);
 }else{
 f=true;
+vv.currentTime+=-(1/fps);
 }}
 },16.6);
 };
