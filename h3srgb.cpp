@@ -314,9 +314,10 @@ float timeSpeed;
 struct timespec rem;
 struct timespec req={0,10000000};
 
+GLuint uni_mse;
+
 void uni(float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
-GLuint uni_mse;
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -341,8 +342,9 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
-void renderFrame(){
 GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+
+void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -419,8 +421,6 @@ static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
   
-GLuint uni_mse;
-GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
@@ -495,13 +495,13 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
