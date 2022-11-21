@@ -428,6 +428,7 @@ return;
 extern "C" {
 EM_JS(void,ma,(),{
 const pnnl=document.body;
+var vv=document.getElementById("mv");
 
 function back(){
 vv.pause();
