@@ -429,10 +429,9 @@ extern "C" {
 EM_JS(void,ma,(),{
 const pnnl=document.body;
 var vv=document.getElementById("mv");
+var fps=60;
 
 function back(){
-vv.pause();
-var fps=60;
 var intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
@@ -443,16 +442,24 @@ vv.currentTime+=-(1/fps);
 };
  
 function forward(){
-vv.pause();
-var fps=60;
 var intervalForward=setInterval(function(){
 vv.currentTime+=-(1/fps);
 },16.6);
 };
  
+function stpForward(){
+clearInterval(intervalForward);
+}
+
+function stpBack(){
+clearInterval(intervalBackward);
+}
+
+function stpBackForth(){
+clearInterval(intervalLoop);
+}
+
 function backForth(){
-vv.pause();
-var fps=60;
 var stp=parseInt(vv.currentTime);
 var a=stp-0.5;
 var b=stp+0.5;
@@ -472,50 +479,28 @@ f=true;
 },16.6);
 };
  
-function backForthB(){
-vv.pause();
-var fps=60;
-var stp=parseInt(vv.currentTime);
-var a=stp-0.5;
-var b=stp+0.5;
-var f=true;
-var intervalLoopB=setInterval(function(){
-if(f==true){
-if(vv.currentTime>a){
-vv.fastSeek+=-(1/fps);
-}else{
-f=false;
-}}else{
-if(vv.currentTime<b){
-vv.fastSeek+=(1/fps);
-}else{
-f=true;
-}}
-},16.6);
-};
- 
 var Mov=1;
+ 
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
 if(Mov==1){Mov=0;vv.pause();}
 else if(Mov==0){Mov=1;vv.play();}
 }
-if (e.code=='KeyW'){Mov=1;forward();}
-if (e.code=='KeyS'){Mov=1;back();}
-if (e.code=='KeyZ'){Mov=1;backForth();}
-if (e.code=='KeyC'){Mov=1;backForthB();}
-if (e.code=='KeyX'){clearInterval(intervalLoop);vv.play();}
-if (e.code=='KeyV'){clearInterval(intervalLoopB);vv.play();}
+if (e.code=='KeyW'){Mov=1;vv.pause();forward();}
+if (e.code=='KeyS'){Mov=1;vv.pause();back();}
+if (e.code=='KeyZ'){Mov=1;vv.pause();backForth();}
+if (e.code=='KeyX'){stpBackForth();vv.play();}
 }
+ 
 function doKeyUp(e){
-if (e.code=='KeyS'){Mov=1;clearInterval(intervalBackward);vv.play();}
-if (e.code=='KeyW'){Mov=0;clearInterval(intervalForward);vv.pause();}
+if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
+if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 }
+ 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
- 
- 
+
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
