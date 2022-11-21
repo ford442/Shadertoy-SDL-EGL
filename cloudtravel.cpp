@@ -444,15 +444,21 @@ vv.currentTime+=-(1/fps);
 function backForth(){
 vv.pause();
 var fps=60;
-var stp=parseInt(vv.currentTime,10);
-var a=stp-1;
-var b=stp+1;
+var stp=vv.currentTime;
+var a=stp-1.0;
+var b=stp+1.0;
+var f=true;
 var intervalLoop=setInterval(function(){
-if(vv.currentTime<a){
-if(vv.currentTime<b){
-vv.currentTime+=(1/fps);}
-}else{
+if (f==true){
+if(vv.currentTime>a){
 vv.currentTime+=-(1/fps);
+}else{
+f=false;
+}else{
+if(vv.currentTime<b){
+vv.currentTime+=(1/fps);
+}else{
+f=true;
 }
 },16.6);
 };
