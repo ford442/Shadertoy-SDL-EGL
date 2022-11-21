@@ -455,17 +455,14 @@ function stpBack(){
 clearInterval(intervalBackward);
 }
 
-function stpBackForth(){
-clearInterval(intervalLoop);
-}
 
 function backForth(){
-var stp=[];
+let stp=[];
 stp[0]=vv.currentTime;
-var a=stp[0]-0.11;
-var b=stp[0]+0.33;
-var f=true;
-var intervalLoop=setInterval(function(){
+let a=stp[0]-0.11;
+let b=stp[0]+0.33;
+let f=true;
+let intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
 vv.currentTime+=-0.01;
@@ -482,6 +479,9 @@ vv.currentTime+=-0.01;
 },10);
 };
  
+function stpBackForth(){
+clearInterval(intervalLoop);
+}
 var Mov=1;
  
 function doKey(e){
