@@ -458,11 +458,11 @@ clearInterval(intervalBackward);
 function stpBackForth(){
 clearInterval(intervalLoop);
 }
-
+let stp;
 function backForth(){
-var stp=parseInt(vv.currentTime);
-var a=stp-0.444;
-var b=stp+0.333;
+stp=vv.currentTime;
+var a=stp-0.222;
+var b=stp+0.666;
 var f=true;
 var intervalLoop=setInterval(function(){
 if(f==true){
@@ -478,7 +478,7 @@ vv.currentTime+=(1/fps);
 f=true;
 vv.currentTime+=-(1/fps);
 }}
-},16.6);
+},(fps/1000));
 };
  
 var Mov=1;
