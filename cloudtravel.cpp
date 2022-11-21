@@ -427,8 +427,8 @@ return;
 
 extern "C" {
 EM_JS(void,ma,(),{
-
 const pnnl=document.body;
+
 function back(){
 vv.pause();
 var fps=60;
@@ -449,17 +449,17 @@ var a=stp-1.0;
 var b=stp+1.0;
 var f=true;
 var intervalLoop=setInterval(function(){
-if (f==true){
+if(f==true){
 if(vv.currentTime>a){
 vv.currentTime+=-(1/fps);
 }else{
 f=false;
-}else{
+}}else{
 if(vv.currentTime<b){
 vv.currentTime+=(1/fps);
 }else{
 f=true;
-}
+}}
 },16.6);
 };
  
