@@ -458,11 +458,11 @@ clearInterval(intervalBackward);
 function stpBackForth(){
 clearInterval(intervalLoop);
 }
-let stp;
+var stp;
 function backForth(){
 stp=vv.currentTime;
-var a=stp-0.222;
-var b=stp+0.444;
+var a=stp-0.1;
+var b=stp+0.3;
 var f=true;
 var intervalLoop=setInterval(function(){
 if(f==true){
