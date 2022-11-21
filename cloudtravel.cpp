@@ -457,6 +457,7 @@ clearInterval(intervalBackward);
 
 function backForth(){
 var stp=[];
+ console.log(vv.currentTime);
 stp[0]=vv.currentTime;
 stp[1]=stp[0]-0.15;
 stp[2]=stp[0]+0.35;
