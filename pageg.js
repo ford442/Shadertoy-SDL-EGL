@@ -234,9 +234,9 @@ document.getElementById("circle").height=parseInt(window.innerHeight,10);
 document.getElementById("circle").width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
 setTimeout(function(){
-var hEi=document.getElementById("pmhig").innerHTML;
+var hEi=parseInt(document.getElementById("pmhig").innerHTML,10);
 var heI=parseInt(window.innerHeight,10);
-if (hEi!==heI){
+if (hEi!=heI){
 Module.ccall("szz");
 console.log("Test resizing.");
 }
