@@ -229,17 +229,17 @@ document.getElementById("ldv").currentTime=document.getElementById("itim").inner
 document.getElementById("ldv").load();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-var hEi=document.getElementById("pmhig").innerHTML;
-var heI=parseInt(window.innerHeight,10);
-if (hEi!==heI){
-Module.ccall("szz");
-  console.log("Test resizing.");
-}
 document.getElementById("pmhig").innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("circle").height=parseInt(window.innerHeight,10);
 document.getElementById("circle").width=parseInt(window.innerWidth,10);
 document.getElementById("di").click();
 setTimeout(function(){
+var hEi=document.getElementById("pmhig").innerHTML;
+var heI=parseInt(window.innerHeight,10);
+if (hEi!==heI){
+Module.ccall("szz");
+console.log("Test resizing.");
+}
 loada();
 },$ldt);
 }
