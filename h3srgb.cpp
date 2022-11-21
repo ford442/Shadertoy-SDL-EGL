@@ -1,6 +1,5 @@
 #include <emscripten.h>
 
-
 extern "C" {
 
 EM_JS(void,ma,(),{
@@ -141,11 +140,11 @@ T=true;
 #include <cstdint>
 #include <cstdlib>
 #include <ctime>
-#include <unistd.h>
 #include <chrono>
 
 extern "C" {
 
+#include <unistd.h>
 #include <SDL2/SDL.h>
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
@@ -214,7 +213,6 @@ extern "C" {
 #include <emscripten/html5.h>
 
 }
-
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -293,8 +291,8 @@ using namespace std;
 using namespace std::chrono;
 
 steady_clock::time_point t1,t2;
-GLuint uni_frm,uni_tme,uni_res,uni_mse,shader;
-GLfloat Ttime;
+GLuint uni_frm,uni_tme,uni_res,shader;
+double Ttime;
 EGLint iFrame;
 GLsizei s4=4;
 int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32;
@@ -309,7 +307,7 @@ float cMouseY;
 int Size;
 GLfloat S;
 EM_BOOL clk_l;
-GLfloat mX,mY;
+
 GLsizei i;
 float fps;
 float timeSpeed;
@@ -317,6 +315,8 @@ struct timespec rem;
 struct timespec req={0,10000000};
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
+GLfloat mX,mY;
+GLuint uni_mse;
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -341,9 +341,8 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 
-GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-
 void renderFrame(){
+GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -403,9 +402,6 @@ return shader;
 void strt(){
 emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
-nanosleep(&req,&rem);
-
-  
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 static const char common_shader_header_gles3[]=
@@ -422,7 +418,6 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-
   
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
@@ -438,7 +433,8 @@ clk_l=true;
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 S=(GLfloat)Size;
 
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
