@@ -460,7 +460,7 @@ clearInterval(intervalLoop);
 }
 
 function backForth(){
-const stp=vv.currentTime;
+let stp=vv.currentTime;
 var a=stp-0.1;
 var b=stp+0.3;
 var f=true;
