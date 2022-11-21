@@ -433,12 +433,20 @@ var vv=document.getElementById("mv");
 function back(){
 vv.pause();
 var fps=60;
-var intervalForward=setInterval(function(){
+var intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
-clearInterval(intervalForward);
+clearInterval(intervalBackward);
 }else{
 vv.currentTime+=-(1/fps);
 }
+},16.6);
+};
+ 
+function forward(){
+vv.pause();
+var fps=60;
+var intervalForward=setInterval(function(){
+vv.currentTime+=-(1/fps);
 },16.6);
 };
  
@@ -446,8 +454,8 @@ function backForth(){
 vv.pause();
 var fps=60;
 var stp=vv.currentTime;
-var a=stp-1.0;
-var b=stp+1.0;
+var a=stp-0.5;
+var b=stp+0.5;
 var f=true;
 var intervalLoop=setInterval(function(){
 if(f==true){
@@ -471,14 +479,14 @@ e.preventDefault();
 if(Mov==1){Mov=0;vv.pause();}
 else if(Mov==0){Mov=1;vv.play();}
 }
-if (e.code=='KeyW'){Mov=1;vv.play();}
+if (e.code=='KeyW'){Mov=1;forward();}
 if (e.code=='KeyS'){Mov=1;back();}
 if (e.code=='KeyZ'){Mov=1;backForth();}
-if (e.code=='KeyX'){clearInterval(intervalLoop);}
+if (e.code=='KeyX'){clearInterval(intervalLoop);vv.play();}
 }
 function doKeyUp(e){
-if (e.code=='KeyS'){Mov=1;vv.play();clearInterval(intervalForward);}
-if (e.code=='KeyW'){Mov=0;vv.pause();}
+if (e.code=='KeyS'){Mov=1;clearInterval(intervalBackward);vv.play();}
+if (e.code=='KeyW'){Mov=0;clearInterval(intervalForward);vv.pause();}
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
