@@ -454,9 +454,10 @@ clearInterval(intervalForward);
 function stpBack(){
 clearInterval(intervalBackward);
 }
+ 
 var stp;
-function backForth(){
-stp=vv.currentTime*1000;
+ 
+function backForth(stp){
 var a=(stp/1000)-0.150;
 var b=(stp/1000)+0.350;
 var f=true;
@@ -490,7 +491,8 @@ else if(Mov==0){Mov=1;vv.play();}
 }
 if (e.code=='KeyW'){Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){Mov=1;vv.pause();backForth();}
+if (e.code=='KeyZ'){Mov=1;vv.pause();stp=vv.currentTime*1000;
+backForth(stp);}
 if (e.code=='KeyX'){stpBackForth();vv.play();}
 }
  
