@@ -453,7 +453,7 @@ vv.currentTime+=-(1/fps);
 function backForth(){
 vv.pause();
 var fps=60;
-var stp=vv.currentTime;
+var stp=parseInt(vv.currentTime);
 var a=stp-0.5;
 var b=stp+0.5;
 var f=true;
@@ -472,6 +472,28 @@ f=true;
 },16.6);
 };
  
+function backForthB(){
+vv.pause();
+var fps=60;
+var stp=parseInt(vv.currentTime);
+var a=stp-0.5;
+var b=stp+0.5;
+var f=true;
+var intervalLoopB=setInterval(function(){
+if(f==true){
+if(vv.currentTime>a){
+vv.fastSeek+=-(1/fps);
+}else{
+f=false;
+}}else{
+if(vv.currentTime<b){
+vv.fastSeek+=(1/fps);
+}else{
+f=true;
+}}
+},16.6);
+};
+ 
 var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
@@ -482,7 +504,9 @@ else if(Mov==0){Mov=1;vv.play();}
 if (e.code=='KeyW'){Mov=1;forward();}
 if (e.code=='KeyS'){Mov=1;back();}
 if (e.code=='KeyZ'){Mov=1;backForth();}
+if (e.code=='KeyC'){Mov=1;backForthB();}
 if (e.code=='KeyX'){clearInterval(intervalLoop);vv.play();}
+if (e.code=='KeyV'){clearInterval(intervalLoopB);vv.play();}
 }
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=1;clearInterval(intervalBackward);vv.play();}
