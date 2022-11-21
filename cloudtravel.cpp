@@ -491,7 +491,7 @@ else if(Mov==0){Mov=1;vv.play();}
 }
 if (e.code=='KeyW'){Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){Mov=1;vv.pause();stp=vv.currentTime*1000;
+if (e.code=='KeyZ'){Mov=1;vv.pause();var stp=vv.currentTime*1000;
 backForth(stp);}
 if (e.code=='KeyX'){stpBackForth();vv.play();}
 }
