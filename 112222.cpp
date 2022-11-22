@@ -419,7 +419,6 @@ GLuint shd_prg,smp_chn[4],smp_chn_res,vtx,frag;
 EGLint atb_pos;
 
 void loadShader(){
-  
 static const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;";
 static const char vertex_shader_body_gles3[]=
@@ -434,7 +433,6 @@ static const char* common_shader_header=common_shader_header_gles3;
 static const char* vertex_shader_body=vertex_shader_body_gles3;
 static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
-  
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 S=(GLfloat)Size;
 static const char* default_fragment_shader=(char*)read_file(fileloc);
@@ -459,6 +457,7 @@ nanosleep(&req,&rem);
 atb_pos=v0;
 glBindAttribLocation(shd_prg,v0,"iPosition");
 glLinkProgram(shd_prg);
+glUseProgram(0);
 nanosleep(&req,&rem);
 glUseProgram(shd_prg);
 nanosleep(&req,&rem);
@@ -480,7 +479,6 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(F0,F0,F0,0.5);
-  
 return;
 }
 
