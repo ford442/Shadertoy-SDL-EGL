@@ -339,8 +339,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-void resz(S){
-
+void resz(GLfloat S){
 glUniform3f(uni_res,S,S,(GLfloat)1.f);
 glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
 }
