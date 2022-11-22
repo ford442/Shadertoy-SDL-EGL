@@ -19,8 +19,10 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorSpace:'srgb',antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+
 contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
+
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
@@ -263,12 +265,12 @@ extern "C" {
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-
-}
-
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
+
+}
+
 
 GLfloat x;
 GLfloat y;
@@ -309,7 +311,7 @@ float cMouseY;
 int Size;
 GLfloat S;
 EM_BOOL clk_l;
-GLuint smp_chn_res;
+
 GLsizei i;
 float fps;
 float timeSpeed;
@@ -324,12 +326,12 @@ if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=xxx*S;
-mY=yyy*S;
+mX=xxx*Size;
+mY=yyy*Size;
 clk_l=false;
 }
-GLfloat mm=S-(S*xx);
-GLfloat nn=S-(S*yy);
+GLfloat mm=S*xx;
+GLfloat nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
@@ -337,13 +339,6 @@ clk_l=true;
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
-}
-
-void resz(){
-// Size=EM_ASM_INT({return parseInt(window.innerHeight);});
-// S=(GLfloat)Size;
-// glUniform3f(uni_res,S,S,(GLfloat)1.f);
-// glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
 }
 
 static const char *fileloc="/shader/shader1.toy";
@@ -431,7 +426,7 @@ static const char* fragment_shader_header=fragment_shader_header_gles3;
 static const char* fragment_shader_footer=fragment_shader_footer_gles3;
   
 
-GLuint EBO,VBO,shd_prg,smp_chn[4];
+GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
 EGLSurface surface;
@@ -462,7 +457,7 @@ const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -504,13 +499,13 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
@@ -552,9 +547,9 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,(GLfloat)1.f);
-glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
-glClearColor((GLfloat)F0,(GLfloat)F0,(GLfloat)F0,(GLfloat)0.3);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
+glClearColor(F0,F0,F0,0.5);
 // glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
@@ -585,11 +580,6 @@ return;
 
 void b3(){
 ma();
-return;
-}
-  
-void szz(){
-resz();
 return;
 }
 
