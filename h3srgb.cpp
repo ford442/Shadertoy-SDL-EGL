@@ -19,10 +19,8 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorSpace:'srgb',antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
-
 contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
-
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
@@ -265,12 +263,12 @@ extern "C" {
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-#define GL_GLEXT_PROTOTYPES 1
-#define GL3_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
 
 }
 
+#define GL_GLEXT_PROTOTYPES 1
+#define GL3_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
 
 GLfloat x;
 GLfloat y;
@@ -326,12 +324,12 @@ if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=xxx*Size;
-mY=yyy*Size;
+mX=xxx*S;
+mY=yyy*S;
 clk_l=false;
 }
-GLfloat mm=S*xx;
-GLfloat nn=S*yy;
+GLfloat mm=S-(S*xx);
+GLfloat nn=S-(S*yy);
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
@@ -506,13 +504,13 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
