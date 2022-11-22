@@ -73,6 +73,7 @@ ff.onload=function(oEvent){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.unlink("/shader/shader1.toy");
 FS.writeFile("/shader/shader1.toy",sfil);
 }}
 ff.send(null);
