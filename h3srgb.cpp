@@ -567,8 +567,8 @@ return;
 }
 
 void resz(){
-glUniform3f(uni_res,S,S,(GLfloat)1.f);
-glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
+// glUniform3f(uni_res,S,S,(GLfloat)1.f);
+// glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
 }
 
 extern "C" {
