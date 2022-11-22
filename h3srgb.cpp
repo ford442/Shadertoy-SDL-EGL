@@ -339,7 +339,12 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-
+void resz(){
+Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+S=(GLfloat)Size;
+glUniform3f(uni_res,S,S,(GLfloat)1.f);
+glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
+}
 
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -564,11 +569,6 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
-}
-
-void resz(){
-// glUniform3f(uni_res,S,S,(GLfloat)1.f);
-// glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
 }
 
 extern "C" {
