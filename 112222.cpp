@@ -448,6 +448,7 @@ sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
 nanosleep(&req,&rem);
+
 shd_prg=glCreateProgram();
 nanosleep(&req,&rem);
 glAttachShader(shd_prg,vtx);
@@ -605,6 +606,7 @@ return;
 }
   
 void ldd(){
+glDeleteProgram(shd_prg);
 loadShader();
 return;
 }
