@@ -306,8 +306,7 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-int Size;
-GLfloat S;
+
 EM_BOOL clk_l;
 GLuint smp_chn_res;
 GLsizei i;
@@ -440,8 +439,9 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-Size=EM_ASM_INT({return parseInt(window.innerHeight);});
-S=(GLfloat)Size;
+
+int sSize=EM_ASM_INT({return parseInt(window.innerHeight);});
+GLfloat S=(GLfloat)sSize;
 
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
@@ -587,8 +587,8 @@ return;
 }
   
 void szz(){
-Size=EM_ASM_INT({return parseInt(window.innerHeight);});
-S=(GLfloat)Size;
+int rSize=EM_ASM_INT({return parseInt(window.innerHeight);});
+GLfloat S=(GLfloat)rSize;
 resz(S);
 return;
 }
