@@ -239,7 +239,7 @@ setTimeout(function(){
 // if (hEi!=heI){
 // Module.ccall("szz");
 // console.log("Test resizing.");
-}
+// }
 loada();
 },$ldt);
 }
