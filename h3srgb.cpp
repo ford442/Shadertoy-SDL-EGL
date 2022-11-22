@@ -344,8 +344,8 @@ return;
 void resz(){
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 S=(GLfloat)Size;
-glUniform3f(uni_res,S,S,S);
-glUniform3f(smp_chn_res,S,S,S);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
 }
 
 static const char *fileloc="/shader/shader1.toy";
@@ -554,8 +554,8 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,S);
-glUniform3f(smp_chn_res,S,S,S);
+glUniform3f(uni_res,S,S,F);
+glUniform3f(smp_chn_res,S,S,F);
 glClearColor(F0,F0,F0,0.3);
 // glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
