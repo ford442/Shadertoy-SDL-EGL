@@ -605,6 +605,11 @@ void b3(){
 ma();
 return;
 }
+  
+void ldd(){
+loadShader();
+return;
+}
 
 }
 
