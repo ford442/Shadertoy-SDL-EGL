@@ -306,7 +306,8 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-
+int Size;
+GLfloat S;
 EM_BOOL clk_l;
 GLuint smp_chn_res;
 GLsizei i;
@@ -316,7 +317,6 @@ struct timespec rem;
 struct timespec req={0,10000000};
 
 GLuint uni_mse;
-GLfloat S;
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
@@ -339,10 +339,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-void resz(){
-glUniform3f(uni_res,S,S,(GLfloat)1.f);
-glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
-}
+
 
 static const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
@@ -440,9 +437,8 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-
-int sSize=EM_ASM_INT({return parseInt(window.innerHeight);});
-GLfloat S=(GLfloat)sSize;
+Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+S=(GLfloat)Size;
 
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
@@ -553,8 +549,6 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,(GLfloat)1.f);
 glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
-
-  
 glClearColor((GLfloat)F0,(GLfloat)F0,(GLfloat)F0,(GLfloat)0.3);
 // glDisable(GL_BLEND);
 glEnable(GL_CULL_FACE);
@@ -570,6 +564,11 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
+}
+
+void resz(){
+glUniform3f(uni_res,S,S,(GLfloat)1.f);
+glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
 }
 
 extern "C" {
