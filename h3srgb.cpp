@@ -554,7 +554,7 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,(GLfloat)1.f);
 glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
   
-    EM_ASM({console.log("Size: ",$0)},rSize);
+    EM_ASM({console.log("Size: ",$0)},sSize);
   EM_ASM({console.log("Sizef: ",$0)},S);
   
 glClearColor((GLfloat)F0,(GLfloat)F0,(GLfloat)F0,(GLfloat)0.3);
