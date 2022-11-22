@@ -316,6 +316,7 @@ struct timespec rem;
 struct timespec req={0,10000000};
 
 GLuint uni_mse;
+GLfloat S;
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
