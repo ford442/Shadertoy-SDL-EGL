@@ -340,10 +340,10 @@ return;
 }
 
 void resz(){
-Size=EM_ASM_INT({return parseInt(window.innerHeight);});
-S=(GLfloat)Size;
-glUniform3f(uni_res,S,S,(GLfloat)1.f);
-glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
+// Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+// S=(GLfloat)Size;
+// glUniform3f(uni_res,S,S,(GLfloat)1.f);
+// glUniform3f(smp_chn_res,S,S,(GLfloat)1.f);
 }
 
 static const char *fileloc="/shader/shader1.toy";
