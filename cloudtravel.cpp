@@ -8,7 +8,7 @@ EM_JS(void,ma,(),{
 const pnnl=document.body;
 let vv=document.getElementById("mv");
 var fps=60;
-  var intervalBackward;
+let intervalBackward;
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -18,20 +18,14 @@ vv.currentTime+=-(1/fps);
 }
 },16.6);
 };
-  var intervalForward;
+let intervalForward;
 function forward(){
 intervalForward=setInterval(function(){
 vv.currentTime+=-(1/fps);
 },16.6);
 };
-function stpForward(){
-clearInterval(intervalForward);
-}
-function stpBack(){
-clearInterval(intervalBackward);
-}
-  var intervalLoop;
-var stp,a,b,f;
+let intervalLoop;
+let stp,a,b,f;
 function backForth(stp){
 a=(stp/1000)-0.250;
 b=(stp/1000)+0.250;
@@ -52,6 +46,12 @@ vv.currentTime+=-0.01;
 }}
 },10);
 };
+function stpForward(){
+clearInterval(intervalForward);
+}
+function stpBack(){
+clearInterval(intervalBackward);
+}
 function stpBackForth(){
 clearInterval(intervalLoop);
 }
@@ -617,7 +617,7 @@ glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(0.5,0.5,0.5,1.0);
 // glDisable(GL_BLEND);
-// glEnable(GL_CULL_FACE);
+glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
@@ -626,7 +626,7 @@ glEnable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_CULL_FACE);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
