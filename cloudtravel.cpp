@@ -8,8 +8,9 @@ EM_JS(void,ma,(),{
 const pnnl=document.body;
 let vv=document.getElementById("mv");
 var fps=60;
+  var intervalBackward;
 function back(){
-var intervalBackward=setInterval(function(){
+intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
@@ -17,8 +18,9 @@ vv.currentTime+=-(1/fps);
 }
 },16.6);
 };
+  var intervalForward;
 function forward(){
-var intervalForward=setInterval(function(){
+intervalForward=setInterval(function(){
 vv.currentTime+=-(1/fps);
 },16.6);
 };
@@ -28,13 +30,13 @@ clearInterval(intervalForward);
 function stpBack(){
 clearInterval(intervalBackward);
 }
-  
+  var intervalLoop;
 var stp,a,b,f;
 function backForth(stp){
 a=(stp/1000)-0.250;
 b=(stp/1000)+0.250;
 f=true;
-var intervalLoop=setInterval(function(){
+intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
 vv.currentTime+=-0.01;
