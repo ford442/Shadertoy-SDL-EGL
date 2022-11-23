@@ -14,37 +14,37 @@ intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
-vv.currentTime+=-(1/fps);
+vv.currentTime+=-(0.0166);
 }
 },16.6);
 };
 let intervalForward;
 function forward(){
 intervalForward=setInterval(function(){
-vv.currentTime+=-(1/fps);
+vv.currentTime+=-(0.0166);
 },16.6);
 };
 let intervalLoop;
 let stp,a,b,f;
 function backForth(stp){
-a=(stp/1000)-0.250;
-b=(stp/1000)+0.250;
+a=(stp/1000)-0.333;
+b=(stp/1000)+0.333;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-0.01;
+vv.currentTime+=-(0.0166);
 }else{
 f=false;
-vv.currentTime+=0.01;
+vv.currentTime+=(0.0166);
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=0.01;
+vv.currentTime+=(0.0166);
 }else{
 f=true;
-vv.currentTime+=-0.01;
+vv.currentTime+=-(0.0166);
 }}
-},10);
+},16.6);
 };
 function stpForward(){
 clearInterval(intervalForward);
