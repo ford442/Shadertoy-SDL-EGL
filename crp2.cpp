@@ -9,8 +9,8 @@ var h,ww,kna,knb,knbb,knc,kncb,knd,kndb,rott,rottb,rottc;
 function set(){ww=document.getElementById("iwid").innerHTML;h=document.getElementById("ihig").innerHTML;
 ow=document.getElementById("wid").innerHTML;oh=document.getElementById("hig").innerHTML;
 let cnP=document.getElementById("cp");let flP=document.getElementById("flip");let vd=document.getElementById("mv");
-var c=document.getElementById("imag");var ctx=c.getContext("2d",{alpha:true,desynchronized:false,premultipliedAlpha:false});
-ctx.drawImage(vd,0,0,ww,h);var imgData=ctx.getImageData(0,0,ww,h);var rgbdat=ctx.createImageData(ww,h);var rgbd=rgbdat.data;
+var ac=document.getElementById("imag");var actx=ac.getContext("2d",{alpha:true,desynchronized:false,premultipliedAlpha:false});
+actx.drawImage(vd,0,0,ww,h);var imgData=actx.getImageData(0,0,ww,h);var rgbdat=actx.createImageData(ww,h);var rgbd=rgbdat.data;
 var imgg=imgData.data;var i;
 for(i=0;i<ww*h*4;i=i+4){
 var rgb=imgg[i]*.2126+imgg[i+1]*.7152+imgg[i+2]*.0722;
