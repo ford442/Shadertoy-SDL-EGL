@@ -27,8 +27,8 @@ vv.currentTime+=-(0.01666);
 let intervalLoop;
 let stp,a,b,f;
 function backForth(stp){
-a=(stp/1000)-0.444;
-b=(stp/1000)+0.444;
+a=(stp/1000)-0.666;
+b=(stp/1000)+0.666;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
