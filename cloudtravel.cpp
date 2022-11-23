@@ -33,7 +33,9 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.0166);
+  
+vv.fastSeek+=-(0.0166);
+  
 }else{
 f=false;
 vv.currentTime+=(0.0166);
