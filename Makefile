@@ -76,7 +76,7 @@ crp2:
 	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 \
 	 -std=gnu++20 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-post-js pagecrp2.js --extern-pre-js cl-gpu.js
+         --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUpCrp2.js --extern-post-js pagecrp2.js --extern-pre-js cl-gpu.js
 
 shade:
 	 em++ h3srgb.cpp -o s3001.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
