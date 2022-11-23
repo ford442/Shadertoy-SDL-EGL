@@ -20,8 +20,6 @@ else{rgbd[i]=110;rgbd[i+1]=110;rgbd[i+2]=110;rgbd[i+3]=0;}}
 ctx.putImageData(rgbdat,0,0);function Ra(){flP.setAttribute("style","transform: scaleX(1);");cnP.setAttribute("style","transform: scaleY(1);")}function Rb(){flP.setAttribute("style","transform: scaleX(-1);");cnP.setAttribute("style","transform: scaleY(-1);")}knb=document.getElementById("rra");kna=document.getElementById("mainr");knc=document.getElementById("rrb");knd=document.getElementById("rrc");knbb=document.getElementById("rrab");kncb=document.getElementById("rrbb");kndb=document.getElementById("rrcb");rate=kna.innerHTML;rott=0;rottb=0;rottc=0;let dur=document.getElementById("temptime").innerHTML/10;let dsd=false;function $rn(){if(dsd){return}function rrra(rta){cnP.setAttribute("style","transform: rotate("+rta+"deg);")}function rrrb(rtb){cnP.setAttribute("style","transform:rotate("+rtb+"deg);")}function rrrc(rtc){cnP.setAttribute("style","transform: rotate("+rtc+"deg);")}if(rott-knd.innerHTML<0){rott=rott+360-knd.innerHTML}else{rott=rott-knd.innerHTML}rrra(rott);if(rottb-knc.innerHTML<0){rottb=rottb+360-knc.innerHTML}else{rottb=rottb-knc.innerHTML}setTimeout(function(){Rb();rrrb(rottb)},rate);if(rottc+knb.innerHTML>360){rottc=rottc+knb.innerHTML-360}else{rottc=rottc+knb.innerHTML}setTimeout(function(){Ra();rrrc(rottc)},rate);setTimeout(function(){$rn()},rate)}$rn();document.getElementById("di").onclick=function(){dsd=true;set()};return()=>{dsd=true}}}
 });
 
-})
-
 }
 
 #include <iostream>
