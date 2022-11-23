@@ -28,7 +28,7 @@ console.error(text);
 }
 },
 canvas: (function() {
-var sscanvas=document.getElementById("scanvas");
+var sscanvas=document.getElementById("imag");
 sscanvas.addEventListener("webglcontextlost", function(e) {
 alert('WebGL context lost. You will need to reload the page.');
 e.preventDefault();
