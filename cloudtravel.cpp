@@ -6,7 +6,7 @@ extern "C" {
 
 EM_JS(void,ma,(),{
 const pnnl=document.body;
-var vv=document.getElementById("mv");
+let vv=document.getElementById("mv");
 var fps=60;
 function back(){
 var intervalBackward=setInterval(function(){
@@ -28,11 +28,12 @@ clearInterval(intervalForward);
 function stpBack(){
 clearInterval(intervalBackward);
 }
-var stp;
+  
+var stp,a,b,f;
 function backForth(stp){
-var a=(stp/1000)-0.150;
-var b=(stp/1000)+0.350;
-var f=true;
+a=(stp/1000)-0.250;
+b=(stp/1000)+0.250;
+f=true;
 var intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
@@ -56,14 +57,14 @@ var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
-if(Mov==1){Mov=0;vv.pause();}
-else if(Mov==0){Mov=1;vv.play();}
+if(Mov==1){vv=document.getElementById("mv");Mov=0;vv.pause();}
+else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 }
-if (e.code=='KeyW'){Mov=1;vv.pause();forward();}
-if (e.code=='KeyS'){Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){Mov=1;vv.pause();var stp=vv.currentTime*1000;
+if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
+if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
+if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();stp=vv.currentTime*1000;
 backForth(stp);}
-if (e.code=='KeyX'){stpBackForth();vv.play();}
+if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
@@ -73,7 +74,7 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
-var vv=document.getElementById("mv");
+vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
@@ -171,7 +172,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
-var vv=document.getElementById("mv");
+vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
