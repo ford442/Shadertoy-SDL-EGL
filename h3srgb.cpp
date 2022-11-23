@@ -120,7 +120,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},12);
+},16.66);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -317,7 +317,7 @@ GLsizei i;
 float fps;
 float timeSpeed;
 struct timespec rem;
-struct timespec req={0,10000000};
+struct timespec req={0,16660000};
 
 GLuint uni_mse;
 
