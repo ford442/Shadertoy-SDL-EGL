@@ -4,7 +4,6 @@ extern "C" {
 
 EM_JS(void,ma,(),{
   
-function ma(){
 let dis=set();if(dis)dis();dis=set();
 var h,ww,kna,knb,knbb,knc,kncb,knd,kndb,rott,rottb,rottc;
 function set(){ww=document.getElementById("iwid").innerHTML;h=document.getElementById("ihig").innerHTML;
@@ -36,7 +35,7 @@ function rrrc(rtc){cnP.setAttribute("style","transform: rotate("+rtc+"deg);")}
 if(rott-knd.innerHTML<0){rott=rott+360-knd.innerHTML}else{rott=rott-knd.innerHTML}
 rrra(rott);if(rottb-knc.innerHTML<0){rottb=rottb+360-knc.innerHTML}else{rottb=rottb-knc.innerHTML}setTimeout(function(){Rb();
 rrrb(rottb)},rate);if(rottc+knb.innerHTML>360){rottc=rottc+knb.innerHTML-360}else{rottc=rottc+knb.innerHTML}setTimeout(
-function(){Ra();rrrc(rottc)},rate);setTimeout(function(){$rn()},rate)}$rn();document.getElementById("di").onclick=function(){dsd=true;set()};return()=>{dsd=true}}}
+function(){Ra();rrrc(rottc)},rate);setTimeout(function(){$rn()},rate)}$rn();document.getElementById("di").onclick=function(){dsd=true;set()};return()=>{dsd=true}}
 });
 
 }
