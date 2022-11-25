@@ -28,23 +28,23 @@ let intervalLoop;
 var stp,a,b,f;
 function backForth(stp){
 a=(stp/1000);
-b=(stp/1000)+0.960;
+b=(stp/1000)+0.99996;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.016);
+vv.currentTime+=-(0.01666);
 }else{
-// vv.currentTime+=(0.016);
+// vv.currentTime+=(0.01666);
 f=false;
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=(0.016);
+vv.currentTime+=(0.01666);
 }else{
 f=true;
-// vv.currentTime+=-(0.016);
+// vv.currentTime+=-(0.01666);
 }}
-},16);
+},16.66);
 };
 function stpForward(){
 clearInterval(intervalForward);
