@@ -25,27 +25,26 @@ vv.currentTime+=-(0.01666);
 },16.66);
 };
 let intervalLoop;
-var stp,f,a,b,tmm;
+var stp,a,b,f;
 function backForth(stp){
-tmm=vv.currentTime;
-a=(stp/1000)-0.6666;
-b=(stp/1000)+0.6666;
+a=(stp/1000)-0.666;
+b=(stp/1000)+0.666;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(tmm>a){
-tmm+=-(0.03333);
+if(vv.currentTime>a){
+vv.currentTime+=-(0.0333);
 }else{
 f=false;
-// tmm+=(0.03333);
+vv.currentTime+=(0.0333);
 }}else{
-if(tmm<b){
-tmm+=(0.03333);
+if(vv.currentTime<b){
+vv.currentTime+=(0.0333);
 }else{
 f=true;
-// tmm+=-(0.03333);
+vv.currentTime+=-(0.0333);
 }}
-},33.33);
+},33.3);
 };
 function stpForward(){
 clearInterval(intervalForward);
