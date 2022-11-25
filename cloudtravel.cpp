@@ -190,12 +190,12 @@ if(T){return;}
   if (Loop==true){
     if(Rev==true){
 for(i=64;i>0;i--){
-var loca=$F-1;if(loca<1){loca=1;Rev=false;}
+var loca=$F-1;if(loca<1){Rev=false;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
 }      
     }else{
 for(i=64;i>0;i--){
-var loca=$F+1;if(loca>64){loca=64;Rev=true;}
+var loca=$F+1;if(loca>64){Rev=true;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
 }
     }
