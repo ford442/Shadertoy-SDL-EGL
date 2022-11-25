@@ -497,12 +497,12 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
