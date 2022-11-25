@@ -35,14 +35,14 @@ if(f==true){
 if(vv.currentTime>a){
 vv.currentTime+=-(0.0333);
 }else{
-f=false;
 vv.currentTime+=(0.0333);
+f=false;
 }}else{
 if(vv.currentTime<b){
 vv.currentTime+=(0.0333);
 }else{
-f=true;
 vv.currentTime+=-(0.0333);
+f=true;
 }}
 },33.3);
 };
