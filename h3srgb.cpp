@@ -255,7 +255,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-#include <gl.h>
+#include <GL/gl.h>
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
