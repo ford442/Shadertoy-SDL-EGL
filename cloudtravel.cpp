@@ -5,8 +5,8 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
-var Loop=false;
-  var Rev=false;
+let Loop=false;
+  let Rev=false;
   
 const pnnl=document.body;
 let vv=document.getElementById("mv");
@@ -204,7 +204,7 @@ if (Loop !== true) {
 } else {
 
     if (Rev !== true) {
-        for (i = 64; i > 0; i--) {
+        for (i = 64; i > 1; i--) {
             var loca = $F + 1;
             if (loca > 63) {
                 Rev = true;
@@ -214,7 +214,7 @@ if (Loop !== true) {
         }
     } else {
 
-        for (i = 64; i > 0; i--) {
+        for (i = 64; i > 1; i--) {
             var loca = $F - 1;
             if (loca < 2) {
                 Rev = false;
