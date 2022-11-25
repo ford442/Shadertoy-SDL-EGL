@@ -212,7 +212,8 @@ if (Loop !== true) {
             eval("if ($F==" + i + "){var $r" + i + "=t($" + i + ");r($r" + i + ");$F=" + loca + ";}");
             console.log("playing frame: ", $F);
         }
-    } else {
+    } 
+  if(Rev==true){
 
         for (i = 64; i > 1; i--) {
             var loca = $F - 1;
