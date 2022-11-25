@@ -33,18 +33,18 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.033);
+vv.currentTime+=-(0.016);
 }else{
-vv.currentTime+=(0.033);
+// vv.currentTime+=(0.016);
 f=false;
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=(0.033);
+vv.currentTime+=(0.016);
 }else{
 f=true;
-vv.currentTime+=-(0.033);
+// vv.currentTime+=-(0.016);
 }}
-},33);
+},16);
 };
 function stpForward(){
 clearInterval(intervalForward);
