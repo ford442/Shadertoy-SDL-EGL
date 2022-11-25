@@ -205,8 +205,8 @@ if (Loop !== true) {
 
     if (Rev !== true) {
         for (i = 64; i > 1; i--) {
-            var loca = $F + 1;
-            if (loca > 63) {
+            loca = $F + 1;
+            if (loca > 64) {
                 Rev = true;
             }
             eval("if ($F==" + i + "){var $r" + i + "=t($" + i + ");r($r" + i + ");$F=" + loca + ";}");
@@ -216,8 +216,8 @@ if (Loop !== true) {
   if(Rev==true){
 
         for (i = 64; i > 1; i--) {
-            var loca = $F - 1;
-            if (loca < 2) {
+            loca = $F - 1;
+            if (loca < 1) {
                 Rev = false;
             }
             eval("if ($F==" + i + "){var $r" + i + "=t($" + i + ");r($r" + i + ");$F=" + loca + ";}");
