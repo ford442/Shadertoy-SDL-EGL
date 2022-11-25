@@ -499,8 +499,7 @@ glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
-glGenVertexArrays(v1,&VCO);
-glBindVertexArray(VCO);
+
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
@@ -533,6 +532,10 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
+  
+glGenVertexArrays(v1,&VCO);
+glBindVertexArray(VCO);
+  
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
