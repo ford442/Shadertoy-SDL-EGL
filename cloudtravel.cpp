@@ -192,11 +192,14 @@ if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F-1;if(loca<1){Rev=false;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
+  console.log("playing frame: ",$F);
 }      
     }else{
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){Rev=true;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
+    console.log("playing frame: ",$F);
+
 }
     }
   }else{
