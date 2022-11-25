@@ -25,12 +25,12 @@ vv.currentTime+=-(0.01666);
 },16.66);
 };
 let intervalLoop;
-let stp;
-  let tmm=vv.currentTime;
+var stp,f,a,b,tmm;
 function backForth(stp){
-let a=(stp/1000)-0.6666;
-let b=(stp/1000)+0.6666;
-let f=true;
+tmm=vv.currentTime;
+a=(stp/1000)-0.6666;
+b=(stp/1000)+0.6666;
+f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(tmm>a){
