@@ -18,7 +18,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorSpace:'srgb',antialias:true,alpha:true,imageSmoothingEnabled:true,stencil:true,depth:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',majorVersion:2,minorVersion:0,desynchronized:false});
+const contx=bcanvas.getContext("webgl2",{colorSpace:'srgb',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
 
 contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
