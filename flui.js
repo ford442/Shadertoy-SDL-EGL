@@ -44,8 +44,8 @@ if(!ext.supportLinearFiltering){
 startGUI();
 function getWebGLContext(canvas){
  // colorSpace:'display-p3'
-const params={colorSpace:'srgb',alpha:true,imageSmoothingEnabled:true,premultipliedAlpha:false,depth:true,stencil:true,antialias:true,preserveDrawingBuffer:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance'};
-let gl=canvas.getContext('webgl2',{colorSpace:'srgb',imageSmoothingEnabled:true,preserveDrawingBuffer:false,antialias:true,stencil:true,premultipliedAlpha:false,alpha:true,depth:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance'});
+const params={colorSpace:'srgb',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true};
+let gl=canvas.getContext('webgl2',{colorSpace:'srgb',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
  const isWebGL2=!!gl;
  if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
  let halfFloat;
