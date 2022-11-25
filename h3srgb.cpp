@@ -146,10 +146,12 @@ T=true;
 #include <ctime>
 #include <chrono>
 
-extern "C" {
 
 #include <unistd.h>
 #include <SDL2/SDL.h>
+
+extern "C" {
+
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
@@ -212,11 +214,10 @@ return;
 
 }
 
-extern "C" {
 
 #include <emscripten/html5.h>
 
-}
+
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -257,15 +258,14 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-extern "C" {
 
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
+#include <GLES2/gl2ext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
 
-}
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
@@ -298,7 +298,7 @@ GLuint uni_frm,uni_tme,uni_res,shader;
 double Ttime;
 EGLint iFrame;
 GLsizei s4=4;
-int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
+EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
 int a,b;
 float F=1.0f;
 float F0=0.0f;
@@ -558,9 +558,9 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,1.0);
-glUniform3f(smp_chn_res,S,S,1.0);
-glClearColor(F0,F0,F0,0.5);
+glUniform3f(uni_res,S,S,gF);
+glUniform3f(smp_chn_res,S,S,gF);
+glClearColor(gF0,gF0,gF0,(GLfloat)0.5);
 glDisable(GL_BLEND);
 glDisable(GL_CULL_FACE);
 glDisable(GL_DEPTH_TEST);
@@ -573,7 +573,7 @@ glFrontFace(GL_CW);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_CULL_FACE);
   
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
