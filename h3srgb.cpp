@@ -467,7 +467,7 @@ EGL_ALPHA_SIZE,v8,
 EGL_DEPTH_SIZE,v24,
 EGL_STENCIL_SIZE,v8,
 EGL_BUFFER_SIZE,v32,
-EGL_SAMPLE_BUFFERS,v32,
+EGL_SAMPLE_BUFFERS,v64,
 EGL_SAMPLES,v32,
 EGL_NONE
 };
@@ -497,13 +497,13 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
