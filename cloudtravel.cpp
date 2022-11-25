@@ -5,6 +5,9 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
+var Loop=false;
+  var Rev=false;
+  
 const pnnl=document.body;
 let vv=document.getElementById("mv");
 var fps=60;
@@ -27,9 +30,11 @@ vv.currentTime+=-(0.01666);
 let intervalLoop;
 let stp,a,b,f;
 function backForth(stp){
+  
 a=(stp/1000)-0.666;
 b=(stp/1000)+0.666;
 f=true;
+  Loop=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
@@ -42,7 +47,10 @@ if(vv.currentTime<b){
 vv.currentTime+=(0.01666);
 }else{
 f=true;
-vv.currentTime+=-(0.01666);
+  Loop=true;
+  clearInterval(intervalLoop);
+
+// vv.currentTime+=-(0.01666);
 }}
 },16.66);
 };
@@ -66,7 +74,7 @@ if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();stp=vv.currentTime*1000;
 backForth(stp);}
-if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
+if (e.code=='KeyX'){vv=document.getElementById("mv");Loop=false;stpBackForth();vv.play();}
 }
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
@@ -178,11 +186,28 @@ vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
+  
+  if (Loop==true){
+    if(Rev==true){
+for(i=64;i>0;i--){
+var loca=$F-1;if(loca<1){loca=1;Rev=false;}
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
+}      
+    }else{
+for(i=64;i>0;i--){
+var loca=$F+1;if(loca>64){loca=64;Rev=true;}
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";}");
+}
+    }
+  }else{
+  
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
+  }
+  
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
