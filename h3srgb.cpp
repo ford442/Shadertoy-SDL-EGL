@@ -214,10 +214,7 @@ return;
 
 }
 
-
 #include <emscripten/html5.h>
-
-
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -256,9 +253,6 @@ void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
-}
-
-
 #include <GLES2/gl2ext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
@@ -266,6 +260,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
+}
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL3_PROTOTYPES 1
