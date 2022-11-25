@@ -25,10 +25,10 @@ vv.currentTime+=-(0.01666);
 },16.66);
 };
 let intervalLoop;
-let stp,a,b,f;
+var stp,a,b,f;
 function backForth(stp){
-a=(stp/1000)-0.9999;
-b=(stp/1000)+0.9999;
+a=(stp/1000)-0.6666;
+b=(stp/1000)+0.6666;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
