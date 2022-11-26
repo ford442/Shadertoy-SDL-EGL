@@ -6,7 +6,7 @@ extern "C" {
 
 EM_JS(void,ma,(),{
 const pnnl=document.body;
-let vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 var fps=60;
 let intervalBackward;
 function back(){
@@ -76,7 +76,7 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
-var vv=document.getElementById("mv");
+vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
@@ -176,7 +176,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
-var vv=document.getElementById("mv");
+vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
