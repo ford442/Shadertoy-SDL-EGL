@@ -117,7 +117,7 @@ paint2:
          --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
 
 cloud:
-	 em++ cloudtravel.cpp -o c3001.js -sFORCE_FILESYSTEM=1 \
+	 em++ h3srgb.cpp -o c3001.js -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1536mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
