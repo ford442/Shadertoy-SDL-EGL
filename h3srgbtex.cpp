@@ -450,7 +450,7 @@ const char fragment_shader_footer_gles3[]=
   
   
   
-"\n void main(){mainImage(fragColor*iChannel0,gl_FragCoord.xy);}\n\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
   
   
   
