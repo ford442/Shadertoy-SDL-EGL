@@ -1,8 +1,79 @@
 #include <emscripten.h>
+#include <emscripten/html5.h>
+#include <emscripten/key_codes.h>
 
 extern "C" {
 
 EM_JS(void,ma,(),{
+const pnnl=document.body;
+let vv=document.getElementById("mv");
+var fps=60;
+let intervalBackward;
+function back(){
+intervalBackward=setInterval(function(){
+if(vv.currentTime==0){
+clearInterval(intervalBackward);
+}else{
+vv.currentTime+=-(0.01666);
+}
+},16.66);
+};
+let intervalForward;
+function forward(){
+intervalForward=setInterval(function(){
+vv.currentTime+=-(0.01666);
+},16.66);
+};
+let intervalLoop;
+var stp,a,b,f;
+function backForth(stp){
+a=(stp/1000);
+b=(stp/1000)+0.9999;
+f=true;
+intervalLoop=setInterval(function(){
+if(f==true){
+if(vv.currentTime>a){
+vv.currentTime+=-(0.03333);
+}else{
+// vv.currentTime+=(0.03333);
+f=false;
+}}else{
+if(vv.currentTime<b){
+vv.currentTime+=(0.03333);
+}else{
+f=true;
+// vv.currentTime+=-(0.01666);
+}}
+},33.33);
+};
+function stpForward(){
+clearInterval(intervalForward);
+}
+function stpBack(){
+clearInterval(intervalBackward);
+}
+function stpBackForth(){
+clearInterval(intervalLoop);
+}
+var Mov=1;
+function doKey(e){
+if(e.code=='Space'){
+e.preventDefault();
+if(Mov==1){vv=document.getElementById("mv");Mov=0;vv.pause();}
+else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
+}
+if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
+if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
+if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();stp=vv.currentTime*1000;
+backForth(stp);}
+if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
+}
+function doKeyUp(e){
+if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
+if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
+}
+pnnl.addEventListener('keydown',doKey);
+pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 var vv=document.getElementById("mv");
@@ -549,7 +620,7 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
-glClearColor(gF0,gF0,gF0,(GLfloat)0.5);
+glClearColor(gF0,gF0,gF0,gF0);
 glDisable(GL_BLEND);
 glDisable(GL_CULL_FACE);
 glDisable(GL_DEPTH_TEST);
