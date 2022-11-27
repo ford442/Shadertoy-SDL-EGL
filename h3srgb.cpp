@@ -4,10 +4,12 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
+  
 const pnnl=document.body;
-var vv=document.getElementById("mv");
+let vv=document.getElementById("mv");
 var fps=60;
 let intervalBackward;
+  
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -17,14 +19,18 @@ vv.currentTime+=-(0.01666);
 }
 },16.66);
 };
+  
 let intervalForward;
+  
 function forward(){
 intervalForward=setInterval(function(){
 vv.currentTime+=-(0.01666);
 },16.66);
 };
+  
 let intervalLoop;
 var stp,a,b,f;
+  
 function backForth(stp){
 a=(stp/1000);
 b=(stp/1000)+1.44;
@@ -34,27 +40,30 @@ if(f==true){
 if(vv.currentTime>a){
 vv.currentTime+=-(0.024);
 }else{
-// vv.currentTime+=(0.024);
 f=false;
 }}else{
 if(vv.currentTime<b){
 vv.currentTime+=(0.024);
 }else{
 f=true;
-// vv.currentTime+=-(0.024);
 }}
 },24);
 };
+  
 function stpForward(){
 clearInterval(intervalForward);
 }
+  
 function stpBack(){
 clearInterval(intervalBackward);
 }
+  
 function stpBackForth(){
 clearInterval(intervalLoop);
 }
+  
 var Mov=1;
+  
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -67,10 +76,12 @@ if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();stp=vv.cur
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
+  
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
 if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 }
+  
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -89,10 +100,8 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
-
 contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
-
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
@@ -215,8 +224,6 @@ T=true;
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
-
-
 #include <unistd.h>
 #include <SDL2/SDL.h>
 
@@ -326,7 +333,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 #include <GL/gl.h>
-
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
@@ -409,14 +415,13 @@ const char *sources[4];
 char8_t *result=NULL;
 long length=0;
 GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-// GLubyte indc[]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -477,7 +482,6 @@ GLfloat gF=1.0f;
 GLfloat gF0=0.0f;
 GLfloat gFm1=-1.0f;
 typedef struct{GLfloat XYZW[4];}Vertex;
-// Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es \n precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;";
@@ -533,8 +537,8 @@ EGL_RED_SIZE,v8,
 EGL_GREEN_SIZE,v8,
 EGL_BLUE_SIZE,v8,
 EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v32,
-EGL_STENCIL_SIZE,v16,
+EGL_DEPTH_SIZE,v24,
+EGL_STENCIL_SIZE,v8,
 EGL_BUFFER_SIZE,v32,
 EGL_SAMPLE_BUFFERS,v64,
 EGL_SAMPLES,v32,
@@ -568,7 +572,6 @@ glGenBuffers(v1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
-
 glGenBuffers(v1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
@@ -601,10 +604,8 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-  
 glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
-  
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
@@ -631,9 +632,7 @@ glFrontFace(GL_CW);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_CULL_FACE);
-  
 // glDisable(GL_DITHER);
-  
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
