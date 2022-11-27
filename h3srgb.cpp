@@ -33,21 +33,21 @@ var stp,a,b,f;
   
 function backForth(stp){
 a=(stp/1000);
-b=(stp/1000)+1.44;
+b=(stp/1000)+0.996;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.024);
+vv.currentTime+=-(0.0166);
 }else{
 f=false;
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=(0.024);
+vv.currentTime+=(0.0166);
 }else{
 f=true;
 }}
-},24);
+},16.6);
 };
   
 function stpForward(){
@@ -199,7 +199,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},12);
+},16.6);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -386,7 +386,7 @@ GLsizei i;
 float fps;
 float timeSpeed;
 struct timespec rem;
-struct timespec req={0,12000000};
+struct timespec req={0,16600000};
 GLuint uni_mse;
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
