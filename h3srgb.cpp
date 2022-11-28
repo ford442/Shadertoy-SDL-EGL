@@ -32,8 +32,8 @@ let intervalLoop;
 var stp,a,b,f;
 
 function backForth(stp){
-a=(stp/1000);
-b=(stp/1000)+0.996;
+var a=(stp/1000);
+var b=(stp/1000)+0.996;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
