@@ -4,12 +4,12 @@
 extern "C" {
 
 EM_JS(void,ma,(),{
-  
+
 const pnnl=document.body;
 let vv=document.getElementById("mv");
 var fps=60;
 let intervalBackward;
-  
+
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -19,18 +19,18 @@ vv.currentTime+=-(0.01666);
 }
 },16.66);
 };
-  
+
 let intervalForward;
-  
+
 function forward(){
 intervalForward=setInterval(function(){
 vv.currentTime+=-(0.01666);
 },16.66);
 };
-  
+
 let intervalLoop;
 var stp,a,b,f;
-  
+
 function backForth(stp){
 a=(stp/1000);
 b=(stp/1000)+0.996;
@@ -49,21 +49,21 @@ f=true;
 }}
 },16.6);
 };
-  
+
 function stpForward(){
 clearInterval(intervalForward);
 }
-  
+
 function stpBack(){
 clearInterval(intervalBackward);
 }
-  
+
 function stpBackForth(){
 clearInterval(intervalLoop);
 }
-  
+
 var Mov=1;
-  
+
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -76,12 +76,12 @@ if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();stp=vv.cur
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
-  
+
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
 if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 }
-  
+
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -507,7 +507,7 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
-iFrame=v0;
+iFrame=0;
 clk_l=true;
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 S=(GLfloat)Size;
@@ -517,8 +517,8 @@ const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,v3,
-EGL_CONTEXT_MINOR_VERSION_KHR,v0,
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -534,15 +534,15 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,v8,
-EGL_GREEN_SIZE,v8,
-EGL_BLUE_SIZE,v8,
-EGL_ALPHA_SIZE,v8,
-EGL_DEPTH_SIZE,v24,
-EGL_STENCIL_SIZE,v8,
-EGL_BUFFER_SIZE,v32,
-EGL_SAMPLE_BUFFERS,v64,
-EGL_SAMPLES,v32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_DEPTH_SIZE,24,
+EGL_STENCIL_SIZE,8,
+EGL_BUFFER_SIZE,32,
+EGL_SAMPLE_BUFFERS,64,
+EGL_SAMPLES,32,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -556,24 +556,24 @@ attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=v2;
-attr.minorVersion=v0;
+attr.majorVersion=2;
+attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
+eglInitialize(display,3,0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,v0,attribut_list);
+surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glGenBuffers(v1,&EBO);
+glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
-glGenBuffers(v1,&VBO);
+glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
@@ -582,13 +582,13 @@ nanosleep(&req,&rem);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,v2,sources);
+vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,v4,sources);
+frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 nanosleep(&req,&rem);
@@ -596,8 +596,8 @@ glAttachShader(shd_prg,vtx);
 nanosleep(&req,&rem);
 glAttachShader(shd_prg,frag);
 nanosleep(&req,&rem);
-atb_pos=v0;
-glBindAttribLocation(shd_prg,v0,"iPosition");
+atb_pos=0;
+glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 nanosleep(&req,&rem);
 glUseProgram(shd_prg);
@@ -605,11 +605,11 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-glGenVertexArrays(v1,&VCO);
+glGenVertexArrays(1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
-glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,v0,(GLvoid*)0);
+glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
@@ -635,7 +635,7 @@ glFrontFace(GL_CW);
 // glDisable(GL_CULL_FACE);
 // glDisable(GL_DITHER);
 t1=steady_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,v0,v0);
+emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
 
