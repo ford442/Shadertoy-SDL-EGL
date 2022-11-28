@@ -370,7 +370,7 @@ GLuint uni_frm,uni_tme,uni_res,shader;
 double Ttime;
 EGLint iFrame;
 GLsizei s4=4;
-GLuint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
+int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
 int a,b;
 float F=1.0;
 float F0=0.0;
