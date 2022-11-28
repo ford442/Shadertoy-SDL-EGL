@@ -15,7 +15,7 @@ intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
-vv.currentTime+=-(0.01666);
+vv.currentTime+=-(0.016);
 }
 },16.66);
 };
@@ -24,7 +24,7 @@ let intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
-vv.currentTime+=-(0.01666);
+vv.currentTime+=-(0.016);
 },16.66);
 };
 
@@ -33,17 +33,17 @@ var stp,a,b,f;
 
 function backForth(stp){
 var a=(stp/1000);
-var b=(stp/1000)+0.996;
+var b=(stp/1000)+0.99;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.0166);
+vv.currentTime+=-(0.016);
 }else{
 f=false;
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=(0.0166);
+vv.currentTime+=(0.016);
 }else{
 f=true;
 }}
@@ -514,7 +514,7 @@ S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -534,12 +534,12 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
+EGL_ALPHA_SIZE,16,
 EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,8,
+EGL_STENCIL_SIZE,16,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,64,
 EGL_SAMPLES,32,
