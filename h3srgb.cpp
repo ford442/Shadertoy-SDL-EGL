@@ -372,9 +372,9 @@ EGLint iFrame;
 GLsizei s4=4;
 EGLint v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
 int a,b;
-float F=1.0f;
-float F0=0.0f;
-float Fm1=-1.0f;
+float F=1.0;
+float F0=0.0;
+float Fm1=-1.0;
 float mouseX;
 float mouseY;
 float cMouseX;
@@ -478,18 +478,19 @@ return shader;
 void strt(){
 emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
-GLfloat gF=1.0f;
-GLfloat gF0=0.0f;
-GLfloat gFm1=-1.0f;
+GLfloat gF=F;
+GLfloat gF0=F0;
+GLfloat gFm1=Fm1;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;";
+"#version 300 es \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+// "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"uniform sampler2D iChannel0;"
 "out vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
@@ -506,25 +507,25 @@ EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
-iFrame=0;
+iFrame=v0;
 clk_l=true;
 Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,v3,
 EGL_CONTEXT_MINOR_VERSION_KHR,v0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -564,7 +565,7 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+surface=eglCreateWindowSurface(display,eglconfig,v0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -608,7 +609,7 @@ glGenVertexArrays(v1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
-glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+glVertexAttribPointer(atb_pos,v4,GL_FLOAT,GL_TRUE,v0,(GLvoid*)0);
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
@@ -634,7 +635,7 @@ glFrontFace(GL_CW);
 // glDisable(GL_CULL_FACE);
 // glDisable(GL_DITHER);
 t1=steady_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop((void(*)())renderFrame,v0,v0);
 return;
 }
 
