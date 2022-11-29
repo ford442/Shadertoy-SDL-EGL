@@ -52,11 +52,11 @@ heapsrgb:
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 fire:
-	 em++ h3srgb.cpp -o g3013.js -sSINGLE_FILE=1 -sASYNCIFY -sFORCE_FILESYSTEM=1 \
+	 em++ h3srgb.cpp -o g3013.js -sASYNCIFY -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1536mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -std=gnu++20 -s PTHREAD_POOL_SIZE=1 -sGL_POOL_TEMP_BUFFERS=0 \
+	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 \
+	 -std=c++20  \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js cl-gpu.js
 
