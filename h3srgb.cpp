@@ -367,7 +367,7 @@ using namespace std::chrono;
 
 steady_clock::time_point t1,t2;
 GLuint uni_frm,uni_tme,uni_res,shader;
-double Ttime;
+float Ttime;
 EGLint iFrame;
 GLsizei s4=4;
 // int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
@@ -383,8 +383,6 @@ int Size;
 GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
-float fps;
-float timeSpeed;
 struct timespec rem;
 struct timespec req={0,16600000};
 GLuint uni_mse;
@@ -410,10 +408,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-const char *fileloc="/shader/shader1.toy";
 const char *sources[4];
-char8_t *result=NULL;
-long length=0;
 GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
@@ -440,6 +435,8 @@ return;
 }
 
 static const char8_t *read_file(const char *filename){
+char8_t *result=NULL;
+long length=0;
 FILE *file=fopen(filename,"r");
 if(file){
 int status=fseek(file,0,SEEK_END);
@@ -478,6 +475,8 @@ return shader;
 void strt(){
 emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
+const char *fileloc="/shader/shader1.toy";
+
 EGLint v0=0,v3=3;
 GLfloat gF=F;
 GLfloat gF0=F0;
@@ -631,9 +630,7 @@ glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-  
 glDisable(GL_DITHER);
-  
 t1=steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
