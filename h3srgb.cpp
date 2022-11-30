@@ -533,12 +533,12 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,16,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,16,
+EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,64,
 EGL_SAMPLES,32,
@@ -618,8 +618,8 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,4.0f);
-glUniform3f(smp_chn_res,S,S,4.0f);
+glUniform2f(uni_res,S,S);
+glUniform2f(smp_chn_res,S,S);
 glClearColor(gF0,gF0,gF0,gF0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
@@ -632,6 +632,9 @@ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
+
+glViewport(0,0,GLint(Size),GLint(Size));
+
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
