@@ -2,7 +2,6 @@
 #include <emscripten/html5.h>
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-void nano(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
   
@@ -231,8 +230,6 @@ T=true;
 #include <chrono>
 #include <unistd.h>
 #include <SDL2/SDL.h>
-
-void SDLCALL bfr(void *unused,Uint8* stm,int len);
 
 extern "C" {
 
