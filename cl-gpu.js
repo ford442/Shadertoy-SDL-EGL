@@ -14637,14 +14637,14 @@ return new OffscreenCanvas(0,0);
  }
  }
 
- initContext() {
- const settings={
-depth: false,
+initContext(){
+const settings={
+depth: true,
 alpha: true,
-antialias: false
- };
- return this.canvas.getContext('webgl',settings) || this.canvas.getContext('experimental-webgl',settings);
- }
+antialias: true
+};
+return this.canvas.getContext('webgl',settings) || this.canvas.getContext('experimental-webgl',settings);
+}
 
  initPlugins(settings) {
  const pluginsToUse=[];
@@ -17366,26 +17366,24 @@ highFloatPrecision: gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER,gl.HIGH_FLOAT
  return features;
  }
 
- static get fragmentShader() {
- return fragmentShader;
- }
- static get vertexShader() {
- return vertexShader;
- }
+static get fragmentShader() {
+return fragmentShader;
+}
+static get vertexShader() {
+return vertexShader;
+}
 
- initContext() {
- const settings={
-alpha:true,depth:false,stencil:false,imageSmoothingEnabled:false,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:false
- };
- return this.canvas.getContext('webgl2',settings);
- }
+initContext(){
+const settings={logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true};
+return this.canvas.getContext('webgl2',settings);
+}
 
- initExtensions() {
- this.extensions={
+initExtensions() {
+this.extensions={
 EXT_color_buffer_float: this.context.getExtension('EXT_color_buffer_float'),
 OES_texture_float_linear: this.context.getExtension('OES_texture_float_linear'),
- };
- }
+};
+}
 
  validateSettings(args) {
  if (!this.validate) {
