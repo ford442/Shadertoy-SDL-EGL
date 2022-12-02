@@ -1,7 +1,26 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-extern "C" {
+void cls_aud();
+void qu(int rc);
+void opn_aud();
+void SDLCALL bfr(void *unused,Uint8* stm,int len);
+void plt();
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
+void nano(int Fnum,int leng,float *ptr,float *aptr);
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+void renderFrame();
+static const char8_t *read_file(const char *filename);
+void strt();
+void str();
+void pl();
+void b3();
+  
+
+  
+  
+  
+  extern "C" {
 
 EM_JS(void,ma,(),{
 
@@ -347,6 +366,9 @@ avgFrm(Fnum,leng,ptr,aptr);
 GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
+
+void uni(float xx,float yy,GLfloat time,EGLint fram);
+GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
