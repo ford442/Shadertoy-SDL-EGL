@@ -1,26 +1,12 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-void cls_aud();
-void qu(int rc);
-void opn_aud();
-void SDLCALL bfr(void *unused,Uint8* stm,int len);
-void plt();
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 void nano(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-void renderFrame();
 static const char8_t *read_file(const char *filename);
-void strt();
-void str();
-void pl();
-void b3();
   
-
-  
-  
-  
-  extern "C" {
+extern "C" {
 
 EM_JS(void,ma,(),{
 
@@ -245,6 +231,8 @@ T=true;
 #include <chrono>
 #include <unistd.h>
 #include <SDL2/SDL.h>
+
+void SDLCALL bfr(void *unused,Uint8* stm,int len);
 
 extern "C" {
 
