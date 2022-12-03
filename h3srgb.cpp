@@ -11,7 +11,7 @@ EM_JS(void,ma,(),{
 
 const pnnl=document.body;
 let vv=document.getElementById("mv");
-var fps=60;
+let fps=60;
 let intervalBackward;
 
 function back(){
@@ -91,10 +91,10 @@ pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
@@ -149,7 +149,7 @@ la=h$*h$*4;
 let al=w$*h$*8;
 sz=(h$*h$)/8;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
