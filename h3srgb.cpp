@@ -631,7 +631,7 @@ glUniform3f(smp_chn_res,S,S,0.0);
 glClearColor(gF0,gF0,gF0,gF0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
-glEnable(GL_BLEND);
+glDisable(GL_BLEND);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
