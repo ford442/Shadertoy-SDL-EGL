@@ -225,7 +225,12 @@ function clamp01(input){
  return Math.min(Math.max(input,0),1);
 }
 function textureToCanvas(texture,width,height){
- let captureCanvas=document.createElement('canvas');
+
+
+// let captureCanvas=document.createElement('canvas');
+ let captureCanvas=document.getElementById('acanvas');
+ 
+ 
  let ctx=captureCanvas.getContext('2d');
  captureCanvas.width=width;
  captureCanvas.height=height;
