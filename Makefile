@@ -114,7 +114,7 @@ paint2:
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
 	 -std=gnu++20 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js --extern-pre-js cl-gpu.js
+         --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pagec.js --extern-pre-js cl-gpu.js
 
 cloud:
 	 em++ h3srgb.cpp -o c3001.js -sFORCE_FILESYSTEM=1 \
