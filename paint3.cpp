@@ -148,7 +148,7 @@ var rr=Math.min((p[0]+grr),1.0)-((p[1])*0.14);
 var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
 this.color(rr,gg,bb,aveg);
-}).setTactic("precision").setGraphical(true).setPrecision('single').setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
