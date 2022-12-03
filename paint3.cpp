@@ -144,7 +144,7 @@ var grr=(p[0]-rng)+(p[1]-rng)+(p[2]-rng);
 // var grr=(p[0]-0.55)+(p[1]-0.55)+(p[2]-0.55);
 grr=grr*4.0;
 grr=Math.max(grr,0.0);
-var rr=Math.min((p[0]+grr),1.0)-((p[3]*0.3)*0.14);
+var rr=Math.min((p[0]+grr),1.0)-((p[1])*0.14);
 var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
 this.color(rr,gg,bb,aveg);
