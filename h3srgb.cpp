@@ -579,7 +579,6 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
@@ -612,8 +611,8 @@ glReleaseShaderCompiler();
 glGenVertexArrays(1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
-glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+glEnableVertexAttribArray(atb_pos);
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
