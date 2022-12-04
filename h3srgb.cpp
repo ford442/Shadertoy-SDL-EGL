@@ -336,13 +336,13 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
+#define GL_GLEXT_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
 
-#define GL_GLEXT_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
 
 GLfloat x;
 GLfloat y;
