@@ -336,16 +336,12 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-#include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
 
 #define GL_GLEXT_PROTOTYPES 1
-#define GL3_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
 GLfloat x;
@@ -559,7 +555,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
