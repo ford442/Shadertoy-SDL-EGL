@@ -148,7 +148,7 @@ let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
 sz=(h$*h$)/8;
-var pointa=77*la;
+pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
@@ -175,14 +175,14 @@ l=w$*h$*16;
 la=h$*h$*4;
 al=w$*h$*8;
 sz=(h$*h$)/8;
-var pointa=77*la;
+pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=66*la;
+pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
