@@ -52,7 +52,7 @@ heapsrgb:
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
 fire:
-	 em++ h3srgb.cpp -o g3013.js -sASYNCIFY -sFORCE_FILESYSTEM=1 \
+	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
