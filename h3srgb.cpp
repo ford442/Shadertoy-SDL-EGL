@@ -559,7 +559,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -615,10 +615,10 @@ glReleaseShaderCompiler();
 glGenVertexArrays(1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
-glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
 glEnableVertexAttribArray(atb_pos);
-smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
+glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
@@ -640,9 +640,7 @@ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
-
 glViewport(0,0,GLint(Size),GLint(Size));
-
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
