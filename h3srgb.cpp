@@ -375,7 +375,7 @@ using namespace std::chrono;
 
 steady_clock::time_point t1,t2;
 GLuint uni_frm,uni_tme,uni_res,shader;
-float Ttime;
+double Ttime;
 EGLint iFrame;
 GLsizei s4=4;
 // int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
@@ -516,7 +516,10 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-Size=static_cast<int>EM_ASM({return parseInt(window.innerHeight);});
+// Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+double wi,hi;
+emscripten_get_element_css_size("canvas",&wi,&hi);
+Size=(int)hil
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
