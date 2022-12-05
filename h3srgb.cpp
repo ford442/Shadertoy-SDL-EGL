@@ -516,7 +516,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-Size=(int)EM_ASM({return parseInt(window.innerHeight);});
+Size=static_cast<int>EM_ASM({return parseInt(window.innerHeight);});
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
