@@ -10,7 +10,7 @@ extern "C" {
 EM_JS(void,ma,(),{
 
 const pnnl=document.body;
-let vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 let fps=60;
 let intervalBackward;
 
