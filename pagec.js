@@ -72,10 +72,10 @@ FS.writeFile("/shader/shader1.toy",sfil);
 }}
 ff.send(null);
 setTimeout(function(){
-  document.getElementById("btn7").click();
- // Module.ccall("str");
+ //  document.getElementById("btn7").click();
+Module.ccall("str");
 
-},500);
+},1200);
 }
 
 function scanSongs(){
