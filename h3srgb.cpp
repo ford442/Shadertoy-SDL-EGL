@@ -336,17 +336,17 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-#define GL_GLEXT_PROTOTYPES 1
+// #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
-#define GL3_PROTOTYPES 1
+// #define GL3_PROTOTYPES 1
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
 #include <EGL/egl.h>
-#include <EGL/eglext.h>
+// #include <EGL/eglext.h>
 #include <GL/gl.h>
-#include <GL/glext.h>
+// #include <GL/glext.h>
 
 GLfloat x;
 GLfloat y;
@@ -424,7 +424,6 @@ void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -484,7 +483,6 @@ void strt(){
 emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
-
 EGLint v0=0,v3=3;
 GLfloat gF=F;
 GLfloat gF0=F0;
@@ -492,7 +490,7 @@ GLfloat gFm1=Fm1;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
+"#version 330 core \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 const char fragment_shader_header_gles3[]=
@@ -524,7 +522,7 @@ S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -537,7 +535,7 @@ EGL_NONE};
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -549,7 +547,7 @@ EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,8,
+EGL_STENCIL_SIZE,16,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,64,
 EGL_SAMPLES,32,
@@ -562,7 +560,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -629,8 +627,8 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,0.0);
-glUniform3f(smp_chn_res,S,S,0.0);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(gF0,gF0,gF0,gF0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
@@ -643,7 +641,7 @@ glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
-glViewport(0,0,GLint(Size),GLint(Size));
+glViewport(0,0,GLsizei(Size),GLsizei(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
