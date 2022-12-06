@@ -344,9 +344,10 @@ avgFrm(Fnum,leng,ptr,aptr);
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
 #include <EGL/egl.h>
-// #include <EGL/eglext.h>
+#include <EGL/eglext.h>
 #include <GL/gl.h>
-// #include <GL/glext.h>
+#include <GL/glu.h>
+#include <GL/glext.h>
 
 GLfloat x;
 GLfloat y;
