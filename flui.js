@@ -20,7 +20,7 @@ let config={
  DENSITY_DISSIPATION:1,
  VELOCITY_DISSIPATION:0.2,
  PRESSURE:0.8,PRESSURE_ITERATIONS:20,
- CURL:128,
+ CURL:23,
  SPLAT_RADIUS:0.25,
  SPLAT_FORCE:6000,
  SHADING:true,
@@ -66,7 +66,6 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 function getWebGLContext(canvas){
- // colorSpace:'display-p3'
 const params={logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true};
 let gl=canvas.getContext('webgl2',{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
  const isWebGL2=!!gl;
@@ -130,8 +129,8 @@ function supportRenderTextureFormat(gl,internalFormat,format,type){
  return status == gl.FRAMEBUFFER_COMPLETE;
 }
 function startGUI(){
- var ww=window.innerWidth;
- var gui=new dat.GUI({width:ww});
+ let ww=window.innerWidth;
+ let gui=new dat.GUI({width:ww});
  gui.add(config,'DYE_RESOLUTION',{
  'high':1024,'medium':512,'low':256,'very low':128
  }).name('quality').onFinishChange(initFramebuffers);
@@ -206,7 +205,8 @@ function startGUI(){
  let appIcon=document.createElement('span');
  app.domElement.parentElement.appendChild(appIcon);
  appIcon.className='icon app';
- if(isMobile()) gui.close();
+ // if(isMobile()) gui.close();
+ gui.close();
 }
 function isMobile(){
  return /Mobi|Android/i.test(navigator.userAgent);
