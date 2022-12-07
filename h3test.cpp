@@ -180,9 +180,10 @@ sz=(h$*h$)/8;
 pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
+if(Loop===0){
 
 for(i=0;i<65;i++){var j=i+1;eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");}
-
+}
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -195,7 +196,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 if(T){return;}
 if(Loop===0){
 for(i=64;i>0;i--){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");}
-}else{
+}else if(Loop===1){
 for(i=64;i>0;i--){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");$F="+loca+";$Bu="+locb+";}");}
 }
 var $bb=R(vv);
