@@ -11,7 +11,6 @@ EM_JS(void,ma,(),{
 
 const pnnl=document.body;
 var vv=document.getElementById("mv");
-let fps=60;
 let intervalBackward;
 
 function back(){
@@ -37,21 +36,21 @@ var stp,a,b,f;
 
 function backForth(stp){
 var a=(stp/1000);
-var b=(stp/1000)+0.99;
+var b=(stp/1000)+0.999999;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.016);
+vv.currentTime+=-(0.015999);
 }else{
 f=false;
 }}else{
 if(vv.currentTime<b){
-vv.currentTime+=(0.016);
+vv.currentTime+=(0.015999);
 }else{
 f=true;
 }}
-},16.6);
+},16.66);
 };
 
 function stpForward(){
