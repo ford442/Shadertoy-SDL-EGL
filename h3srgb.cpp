@@ -35,21 +35,20 @@ let intervalLoop;
 var stp,a,b,f;
 
 function backForth(stp){
-var a=(stp/1000);
-var b=(stp/1000)+0.999999;
+var a=(stp/1000.0);
+var b=(stp/1000.0)+1.0;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.015999);
+vv.currentTime+=-(0.016666);
 }else{
 f=false;
-}}else{
-if(vv.currentTime<b){
-vv.currentTime+=(0.015999);
+}}else if(vv.currentTime<b){
+vv.currentTime+=(0.016666);
 }else{
 f=true;
-}}
+}
 },16.66);
 };
 
@@ -75,7 +74,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 }
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000;
+if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
