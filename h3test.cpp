@@ -352,7 +352,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 #include <EGL/eglext.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
-#include <GL/glcorearb.h>
 
 GLfloat x;
 GLfloat y;
