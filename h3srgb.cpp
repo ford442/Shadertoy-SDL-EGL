@@ -201,7 +201,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},16.6);
+},16.66);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -292,8 +292,6 @@ return;
 }
 
 }
-
-#include <emscripten/html5.h>
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -390,7 +388,7 @@ GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
 struct timespec rem;
-struct timespec req={0,16600000};
+struct timespec req={0,16666000};
 GLuint uni_mse;
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
@@ -523,7 +521,7 @@ S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -578,10 +576,10 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
-glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
-glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
-glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
+// glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+// glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
+// glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
+// glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
