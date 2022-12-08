@@ -544,7 +544,7 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,32,
+EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
@@ -642,7 +642,7 @@ glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
