@@ -1,3 +1,4 @@
+/*
 let bz=new BroadcastChannel('bez');
 
 document.getElementById('btn').addEventListener('click',function(){
@@ -20,7 +21,7 @@ shutDown.postMessage({
 data:222
 });
 });
-
+*/
 document.getElementById('btn3').addEventListener('click',function(){
 window.open('./flac');
 });
