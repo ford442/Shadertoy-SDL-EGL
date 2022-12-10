@@ -11,8 +11,8 @@ EM_JS(void,ma,(),{
 
 const pnnl=document.body;
 var vv=document.getElementById("mv");
-let fps=60;
-let intervalBackward;
+var fps=60;
+var intervalBackward;
 
 function back(){
 intervalBackward=setInterval(function(){
@@ -24,7 +24,7 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalForward;
+var intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
@@ -32,7 +32,7 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalLoop;
+var intervalLoop;
 var stp,a,b,f;
 
 function backForth(stp){
@@ -104,7 +104,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
 contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
 const g=new GPU({canvas:bcanvas,webGl:contx});
@@ -196,16 +196,17 @@ if(T){return;}
 if(Loop===0){
 for(i=64;i>0;i--){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");}
 var $bb=R(vv);
-
-}else if(Loop===1){
-for(i=64;i>0;i--){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){r($$"+i+");$F="+loca+";$Bu="+locb+";}");}
-eval("var $bb=t($$"+i+")");
-
-}
-  
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+  
+}else if(Loop===1){
+for(i=64;i>0;i--){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t($"+i+");$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");}
+// eval("var $bb=t($$"+i+")");
+
+}
+  
+
 setTimeout(function(){
 M();
 },16.6);
@@ -530,7 +531,7 @@ S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -538,15 +539,15 @@ EGL_CONTEXT_MINOR_VERSION_KHR,0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -555,7 +556,7 @@ EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,16,
+EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,64,
 EGL_SAMPLES,32,
@@ -563,7 +564,7 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
@@ -586,10 +587,6 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
   
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
-glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
-glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
-glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
@@ -646,14 +643,14 @@ glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(gF0,gF0,gF0,gF0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
-glDisable(GL_BLEND);
+glEnable(GL_BLEND);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
