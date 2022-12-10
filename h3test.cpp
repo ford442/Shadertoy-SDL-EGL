@@ -5,7 +5,42 @@ void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
   
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
+for (int i=0;i<leng;i++){
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+}
+sum=sum/leng;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
+for(int i=33;i<65;i++){
+avgSum+=aptr[i];
+}
+aptr[0]=avgSum/32;
+for(int i=33;i<65;i++){
+minSum+=aptr[i+100];
+}
+aptr[100]=minSum/32;
+for(int i=33;i<65;i++){
+maxSum+=aptr[i+200];
+}
+aptr[200]=maxSum/32;
+return;
+}
+
 extern "C" {
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+}
 
 EM_JS(void,ma,(),{
 
@@ -202,7 +237,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
   
 }else if(Loop===1){
 for(i=0;i<65;i++){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");}
-eval("var $bb=t($$"+i+")");
+var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 }
@@ -302,46 +337,7 @@ return;
 
 }
 
-#include <emscripten/html5.h>
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-}
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-}
-aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-}
-aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-}
-aptr[200]=maxSum/32;
-return;
-}
-
-extern "C" {
-
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-}
-
-}
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
