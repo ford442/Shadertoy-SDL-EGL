@@ -3,7 +3,6 @@
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
-
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
