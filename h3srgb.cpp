@@ -48,7 +48,7 @@ EM_JS(void,ma,(),{
 
 const pnnl=document.body;
 var vv=document.getElementById("mv");
-let intervalBackward;
+var intervalBackward;
 
 function back(){
 intervalBackward=setInterval(function(){
@@ -60,7 +60,7 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalForward;
+var intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
@@ -68,7 +68,7 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalLoop;
+var intervalLoop;
 var stp,a,b,f;
 
 function backForth(stp){
