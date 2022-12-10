@@ -236,7 +236,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
   
 }else if(Loop===1){
-for(i=0;i<65;i++){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");}
+for(i=64;i>0;i--){var loca=$F+1;if(loca>64){loca=1;}var locb=$Bu+1;if(locb>64){locb=1;}eval("if($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t($$"+i+");$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");}
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
