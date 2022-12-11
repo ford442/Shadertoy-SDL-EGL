@@ -144,6 +144,11 @@ const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
 contx.getExtension('EXT_float_blend');
+contx.getExtension('EXT_frag_depth');
+contx.getExtension('EXT_shader_texture_lod');
+contx.getExtension('EXT_sRGB');
+contx.getExtension('EXT_blend_minmax');
+
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
