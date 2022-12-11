@@ -516,7 +516,7 @@ iFrame=0;
 clk_l=true;
 // Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 double wi,hi;
-emscripten_get_element_css_size("scanvas",&wi,&hi);
+emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
