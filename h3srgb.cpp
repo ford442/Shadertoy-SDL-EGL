@@ -342,10 +342,13 @@ return;
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
+#include <GLES3/gl3platform.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#include <EGL/eglplatform.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
+#include <GL/glcorearb.h>
 
 GLfloat x;
 GLfloat y;
