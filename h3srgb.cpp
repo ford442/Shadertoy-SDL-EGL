@@ -349,7 +349,6 @@ return;
 #include <EGL/eglplatform.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
-#include <GL/glcorearb.h>
 
 GLfloat x;
 GLfloat y;
