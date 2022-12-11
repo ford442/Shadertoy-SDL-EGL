@@ -580,6 +580,11 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
+emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
+emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
+emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
+emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
+
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
