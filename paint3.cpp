@@ -1,18 +1,56 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
+#include <webgl/webgl2.h>
+
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-static const char8_t *read_file(const char *filename);
-  
+
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
+for (int i=0;i<leng;i++){
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+}
+sum=sum/leng;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
+for(int i=33;i<65;i++){
+avgSum+=aptr[i];
+}
+aptr[0]=avgSum/32;
+for(int i=33;i<65;i++){
+minSum+=aptr[i+100];
+}
+aptr[100]=minSum/32;
+for(int i=33;i<65;i++){
+maxSum+=aptr[i+200];
+}
+aptr[200]=maxSum/32;
+return;
+}
+
+extern "C" {
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+}
+
+}
+
 extern "C" {
 
 EM_JS(void,ma,(),{
 
 const pnnl=document.body;
-let vv=document.getElementById("mv");
-var fps=60;
-let intervalBackward;
+var vv=document.getElementById("mv");
+var intervalBackward;
 
 function back(){
 intervalBackward=setInterval(function(){
@@ -24,7 +62,7 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalForward;
+var intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
@@ -32,26 +70,25 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalLoop;
+var intervalLoop;
 var stp,a,b,f;
 
 function backForth(stp){
-var a=(stp/1000);
-var b=(stp/1000)+0.99;
+var a=(stp/1000.0);
+var b=(stp/1000.0)+1.0;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.016);
+vv.currentTime+=-(0.016666);
 }else{
 f=false;
-}}else{
-if(vv.currentTime<b){
-vv.currentTime+=(0.016);
+}}else if(vv.currentTime<b){
+vv.currentTime+=(0.016666);
 }else{
 f=true;
-}}
-},16.6);
+}
+},16.66);
 };
 
 function stpForward(){
@@ -76,7 +113,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 }
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000;
+if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
@@ -103,9 +140,42 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
-contx.getExtension('EXT_color_buffer_float');
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
+contx.getExtension('WEBGL_color_buffer_float');
+contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
+contx.getExtension('OES_texture_half_float_linear');
+contx.getExtension('EXT_float_blend');
+contx.getExtension('EXT_frag_depth');
+contx.getExtension('EXT_shader_texture_lod');
+contx.getExtension('EXT_sRGB');
+contx.getExtension('EXT_blend_minmax');
+contx.getExtension('ANGLE_instanced_arrays');
+contx.getExtension('EXT_disjoint_timer_query');
+
+contx.getExtension('EXT_clip_cull_distance');
+contx.getExtension('EXT_disjoint_timer_query_webgl2');
+contx.getExtension('KHR_parallel_shader_compile');
+contx.getExtension('OES_draw_buffers_indexed');
+contx.getExtension('OES_element_index_uint');
+contx.getExtension('OES_fbo_render_mipmap');
+contx.getExtension('OES_standard_derivatives');
+contx.getExtension('OES_vertex_array_object');
+contx.getExtension('WEBGL_blend_equation_advanced_coherent');
+contx.getExtension('WEBGL_depth_texture');
+contx.getExtension('WEBGL_draw_buffers');
+contx.getExtension('WEBGL_provoking_vertex');
+contx.getExtension('EXT_framebuffer_sRGB');
+contx.getExtension('OES_depth32');
+contx.getExtension('OES_fixed_point');
+contx.getExtension('OES_shader_multisample_interpolation');
+contx.getExtension('WEBGL_webcodecs_video_frame');
+contx.getExtension('OES_single_precision');
+contx.getExtension('GL_EXT_texture_shadow_lod');
+contx.getExtension('GL_NV_memory_attachment');
+  
+  contx.disable(gl.DITHER);
+
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -170,7 +240,7 @@ let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
 sz=(h$*h$)/8;
-var pointa=77*la;
+pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
@@ -197,14 +267,14 @@ l=w$*h$*16;
 la=h$*h$*4;
 al=w$*h$*8;
 sz=(h$*h$)/8;
-var pointa=77*la;
+pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=66*la;
+pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -217,7 +287,7 @@ if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
@@ -225,7 +295,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},16.6);
+},16.66);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -253,6 +323,9 @@ T=true;
 #include <unistd.h>
 #include <SDL2/SDL.h>
 
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+static const char8_t *read_file(const char *filename);
+  
 extern "C" {
 
 SDL_AudioDeviceID dev;
@@ -317,58 +390,19 @@ return;
 
 }
 
-#include <emscripten/html5.h>
-
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-}
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-}
-aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-}
-aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-}
-aptr[200]=maxSum/32;
-return;
-}
-
-extern "C" {
-
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-}
-
-}
+#define GL_GLEXT_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+#define GL3_PROTOTYPES 1
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
+#include <GLES3/gl3platform.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#include <EGL/eglplatform.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
-
-#define GL_GLEXT_PROTOTYPES 1
-#define GL3_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
 
 GLfloat x;
 GLfloat y;
@@ -397,7 +431,7 @@ using namespace std::chrono;
 
 steady_clock::time_point t1,t2;
 GLuint uni_frm,uni_tme,uni_res,shader;
-float Ttime;
+double Ttime;
 EGLint iFrame;
 GLsizei s4=4;
 // int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
@@ -414,7 +448,7 @@ GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
 struct timespec rem;
-struct timespec req={0,16600000};
+struct timespec req={0,16666000};
 GLuint uni_mse;
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
@@ -445,8 +479,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -506,7 +539,6 @@ void strt(){
 emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
-
 EGLint v0=0,v3=3;
 GLfloat gF=F;
 GLfloat gF0=F0;
@@ -514,9 +546,12 @@ GLfloat gFm1=Fm1;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
-"#version 300 es \n precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;";
+"#version 300 es \n"
+"#undef HW_PERFORMANCE \n"
+"#define HW_PERFORMANCE 0 \n"
+"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
@@ -538,20 +573,23 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
-Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+// Size=EM_ASM_INT({return parseInt(window.innerHeight);});
+double wi,hi;
+emscripten_get_element_css_size("canvas",&wi,&hi);
+Size=(int)hi;
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
@@ -559,37 +597,73 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,8,
 EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,8,
-EGL_BUFFER_SIZE,32,
-EGL_SAMPLE_BUFFERS,64,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,0,
+EGL_BUFFER_SIZE,64,
+EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,32,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+
+    attr.premultipliedAlpha=EM_TRUE;
+    
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+
+    attr.enableExtensionsByDefault=EM_TRUE;
+
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
+emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
+emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
+emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
+emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
+emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
+emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
+emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
+emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
+  
+emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
+emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
+emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
+emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
+emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
+emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
+emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
+emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
+emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
+emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
+emscripten_webgl_enable_extension(ctx,"WEBGL_draw_buffers");
+emscripten_webgl_enable_extension(ctx,"WEBGL_provoking_vertex");
+emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB");
+emscripten_webgl_enable_extension(ctx,"OES_depth32");
+emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
+emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
+emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
+emscripten_webgl_enable_extension(ctx,"OES_single_precision");
+
+emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
+emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
+
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -598,13 +672,17 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glGenBuffers(1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+// glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+// glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
+// glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
+// glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glGenBuffers(1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
@@ -639,8 +717,8 @@ glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
@@ -648,23 +726,23 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,0.0);
-glUniform3f(smp_chn_res,S,S,0.0);
-glClearColor(gF,gF,gF,gF);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
+glClearColor(gF0,gF0,gF0,gF0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
-glEnable(GL_BLEND);
+glDisable(GL_BLEND);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+  
 glDisable(GL_DITHER);
+  
 t1=steady_clock::now();
-
 glViewport(0,0,GLint(Size),GLint(Size));
-
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
