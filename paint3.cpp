@@ -156,9 +156,9 @@ var aveg=Aveg(p[3],ouT);
 // grr=Math.max(grr,0.0);
   
     // send p[x],p[x] => return r/g/b
-var rr=Stoned(p[0],p[1],grr);
-var gg=Stoned(p[1],p[3],grr);
-var bb=Stoned(p[2],p[3],grr);
+var rr=Stoned(p[0],p[1],rng);
+var gg=Stoned(p[1],p[3],rng);
+var bb=Stoned(p[2],p[3],rng);
 
 // var rr=Math.min((p[0]+grr),1.0)-((p[1])*0.14);
 // var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
