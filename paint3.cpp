@@ -108,22 +108,21 @@ contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('OES_texture_float_linear');
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
-// let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1)));}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
+const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
   
 const glslStone=`float Stone(float a,float b,float c,float d){return(max(((a-(d-(d*0.5)))+(b-(d-(d*0.5)))+(c-(d-(d*0.5)))*4.0),0.0));}`;
-const glslStoned=`float Stoned(float a,float b,float c){return(min((a+c),1.0)-((b)*0.14));}`;
+const glslStoned=`float Stoned(float a,float b,float c){return(min((a+c),1.0)-((b*0.3)*0.14));}`;
   
-g.addNativeFunction('Stone', glslStone, { returnType: 'Number' });
-g.addNativeFunction('Stoned', glslStoned, { returnType: 'Number' });
+g.addNativeFunction('Stone',glslStone,{returnType:'Number'});
+g.addNativeFunction('Stoned',glslStoned,{returnType:'Number'});
   
-g.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
-g.addNativeFunction('Alphe', glslAlphe, { returnType: 'Number' });
-g.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
-g2.addNativeFunction('Aveg', glslAveg, { returnType: 'Number' });
-g2.addNativeFunction('Ave', glslAve, { returnType: 'Number' });
+g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
+g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
@@ -143,30 +142,24 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var Min=(4.0*(($amax-($favg-$amin))/2.0));
-// var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
-var aveg=Aveg(p[3],ouT);
-
   // send p[0],p[1],p[2],ouT => return grr
   var rng=Stone(p[0],p[1],p[2],ouT);
-
 // var rng=ouT-(ouT*0.5);
 // var grr=(p[0]-rng)+(p[1]-rng)+(p[2]-rng);
 // grr=grr*4.0;
 // grr=Math.max(grr,0.0);
-  
     // send p[x],p[x] => return r/g/b
 var rr=Stoned(p[0],p[1],rng);
 var gg=Stoned(p[1],p[3],rng);
 var bb=Stoned(p[2],p[3],rng);
-
 // var rr=Math.min((p[0]+grr),1.0)-((p[1])*0.14);
 // var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 // var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
+  var ss=Ave(rr,gg,bb);
+  var aveg=Aveg(ss,ouT);
 
 this.color(rr,gg,bb,aveg);
-
-
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
