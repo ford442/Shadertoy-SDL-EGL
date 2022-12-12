@@ -650,7 +650,7 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,0.0);
 glUniform3f(smp_chn_res,S,S,0.0);
-glClearColor(gF0,gF0,gF0,gF0);
+glClearColor(gF,gF,gF,gF);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glEnable(GL_BLEND);
