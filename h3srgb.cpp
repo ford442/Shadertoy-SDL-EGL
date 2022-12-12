@@ -144,6 +144,7 @@ const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
+contx.getExtension('OES_texture_half_float_linear');
 contx.getExtension('EXT_float_blend');
 contx.getExtension('EXT_frag_depth');
 contx.getExtension('EXT_shader_texture_lod');
@@ -608,6 +609,7 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
+emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
 emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
