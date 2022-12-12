@@ -113,7 +113,7 @@ const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 const glslAveg=`float Aveg(float a,float b) {return (1.0-(((a)-(b))*((a)*(1.0/(1.0-b))))) ;}`;
   
-const glslStone=`float Stone(float a,float b,float c,float d){return(max((a-(d-(d*0.5)))+(b-(d-(d*0.5)))+(c-(d-(d*0.5)))*4.0),0.0));}`;
+const glslStone=`float Stone(float a,float b,float c,float d){return(max(((a-(d-(d*0.5)))+(b-(d-(d*0.5)))+(c-(d-(d*0.5)))*4.0),0.0));}`;
 const glslStoned=`float Stoned(float a,float b,float c){return(min((a+c),1.0)-((b)*0.14));}`;
   
 g.addNativeFunction('Stone', glslStone, { returnType: 'Number' });
