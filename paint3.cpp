@@ -157,7 +157,7 @@ var bb=Stoned(p[2],p[3],rng);
 // var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 // var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
   var ss=(Ave(rr,gg,bb)-p[3]);
-  var aveg=Aveg(ss,ouT)+ss;
+  var aveg=Aveg(p[3],ouT)+ss;
 
 this.color(rr,gg,bb,aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
