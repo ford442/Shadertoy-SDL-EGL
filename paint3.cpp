@@ -148,7 +148,7 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
   // send p[0],p[1],p[2],ouT => return grr
-  var rng=Stone(ouT);
+  var rng=Stone(p[0],p[1],p[2],ouT);
 
 // var rng=ouT-(ouT*0.5);
 // var grr=(p[0]-rng)+(p[1]-rng)+(p[2]-rng);
