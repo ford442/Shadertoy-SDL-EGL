@@ -14,7 +14,7 @@ shutDown.postMessage({
 data:222
 });
 });
-let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mil,randSong,randShade;
+let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mic,randSong,randShade;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
 let loadV=document.getElementById("ldv");
@@ -215,13 +215,13 @@ loadV.height=this.videoHeight;
 document.getElementById("wid").innerHTML=this.videoWidth;
 document.getElementById("hig").innerHTML=this.videoHeight;
 $sc=this.duration;
-mil=Math.round($sc*1000);
-$pt=Math.random()*mil;
-$pt=$pt*1000;
-$pt=$pt/1000;
+mic=Math.round($sc*1000000);
+$pt=Math.random()*mic;
+$pt=$pt*1000000;
+$pt=$pt/1000000;
 $pt=Math.round($pt);
-$pt=$pt/1000;
-document.getElementById("idur").innerHTML=mil/1000;
+$pt=$pt/1000000;
+document.getElementById("idur").innerHTML=mic/1000000;
 document.getElementById("itim").innerHTML=$pt;
 });
 vide=document.querySelectorAll("video");
