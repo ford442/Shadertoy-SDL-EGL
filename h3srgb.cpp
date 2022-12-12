@@ -592,9 +592,13 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+
+    attr.premultipliedAlpha=EM_TRUE;
+    
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+
+    attr.enableExtensionsByDefault=EM_TRUE;
+
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
