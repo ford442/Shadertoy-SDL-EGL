@@ -272,7 +272,7 @@ pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
-},16.66);
+},8);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -425,7 +425,7 @@ GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
 struct timespec rem;
-struct timespec req={0,16666000};
+struct timespec req={0,8000000};
 GLuint uni_mse;
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
@@ -456,7 +456,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -526,7 +526,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 0 \n"
-"precision mediump float;precision mediump int;precision lowp sampler3D;precision mediump sampler2D;\n";
+"precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
@@ -594,13 +594,9 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_FALSE;
 attr.antialias=EM_FALSE;
-
-    attr.premultipliedAlpha=EM_TRUE;
-    
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-
-    attr.enableExtensionsByDefault=EM_TRUE;
-
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -618,7 +614,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
-  
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
@@ -637,10 +632,8 @@ emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
-
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
-
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -649,17 +642,13 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
-// glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
-// glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
-// glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
@@ -703,11 +692,11 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,1.0);
-glUniform3f(smp_chn_res,S,S,1.0);
-glClearColor(gF0,gF0,gF0,gF0);
+glUniform3f(uni_res,S,S,1.0f);
+glUniform3f(smp_chn_res,S,S,1.0f);
+glClearColor(gF0,gF0,gF0,gF);
 glEnable(GL_CULL_FACE);
-glEnable(GL_DEPTH_TEST);
+glDisable(GL_DEPTH_TEST);
 glDisable(GL_BLEND);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
