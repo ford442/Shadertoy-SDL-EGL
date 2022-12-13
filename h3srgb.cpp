@@ -152,7 +152,6 @@ contx.getExtension('EXT_sRGB');
 contx.getExtension('EXT_blend_minmax');
 contx.getExtension('ANGLE_instanced_arrays');
 contx.getExtension('EXT_disjoint_timer_query');
-
 contx.getExtension('EXT_clip_cull_distance');
 contx.getExtension('EXT_disjoint_timer_query_webgl2');
 contx.getExtension('KHR_parallel_shader_compile');
@@ -173,9 +172,7 @@ contx.getExtension('WEBGL_webcodecs_video_frame');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
-  
-  contx.disable(gl.DITHER);
-
+contx.disable(gl.DITHER);
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
@@ -527,7 +524,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 0 \n"
-"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
@@ -559,7 +556,7 @@ S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -584,7 +581,7 @@ EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,0,
+EGL_STENCIL_SIZE,16,
 EGL_BUFFER_SIZE,64,
 EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,32,
@@ -592,16 +589,12 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-
-    attr.premultipliedAlpha=EM_TRUE;
-    
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-
-    attr.enableExtensionsByDefault=EM_TRUE;
-
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -619,7 +612,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
-  
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
@@ -638,10 +630,8 @@ emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
-
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
-
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -650,10 +640,6 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
-// glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
-// glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
-// glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -716,9 +702,7 @@ glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-  
 glDisable(GL_DITHER);
-  
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
