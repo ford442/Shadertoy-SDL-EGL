@@ -47,7 +47,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 extern "C" {
 
 EM_JS(void,ma,(),{
-
+"use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
