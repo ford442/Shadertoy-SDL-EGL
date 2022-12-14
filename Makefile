@@ -107,8 +107,8 @@ crp2:
          --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUpCrp2.js --extern-post-js pagecrp2.js --extern-pre-js cl-gpu.js
 
 shade:
-	 em++ h3srgb.cpp -o s3001.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sMAXIMUM_MEMORY=4096mb -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
+	 em++ h3srgb.cpp -o s3001.js -sFORCE_FILESYSTEM=1 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=gnu++20 \
