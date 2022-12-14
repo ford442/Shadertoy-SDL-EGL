@@ -1,3 +1,5 @@
+"use strict";
+
 var statusElement=document.getElementById("status");
 var progressElement=document.getElementById("progress");
 var Module={
