@@ -404,10 +404,10 @@ return 0;
 using namespace std;
 using namespace std::chrono;
 
-steady_clock::time_point t1,t2;
-GLuint uni_frm,uni_tme,uni_res,shader;
-double Ttime;
-EGLint iFrame;
+steady_clock::time_point t1,t2,t3;
+GLuint uni_frm,uni_tme,uni_tme_dlt,uni_res,shader;
+double Ttime,TtimeDelta;
+EGLint iFrame,iFps;
 GLsizei s4=4;
 // int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
 int a,b;
@@ -452,9 +452,11 @@ GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 void renderFrame(){
+t3=t2;
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
+TtimeDelta=time_spanb.count();
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -463,8 +465,11 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
+glClear(GL_STENCIL_BUFFER_BIT);
 uni(mouseX,mouseY,Ttime,iFrame);
+glClear(GL_DEPTH_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
+glClear(GL_COLOR_BUFFER_BIT);
 glFlush();
 nanosleep(&req,&rem);
 iFrame++;
