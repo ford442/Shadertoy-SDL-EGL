@@ -1,3 +1,4 @@
+"use strict";
 function opn(){
 setTimeout(function(){
 document.getElementById("shut").innerHTML=2;
