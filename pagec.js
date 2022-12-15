@@ -40,9 +40,11 @@ document.getElementById("btn10").click();
 });
 
 let bz=new BroadcastChannel('bez');
+
 function pll(){
 Module.ccall("pl");
 }
+
 let fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=> {
 let fill=new Uint8Array(ea.data.data);
@@ -113,10 +115,9 @@ FS.writeFile("/shader/shader1.toy",sfil);
 }}
 ff.send(null);
 setTimeout(function(){
-//  document.getElementById("btn7").click();
-Module.ccall("str");
-
-},1200);
+document.getElementById("btn7").click();
+// Module.ccall("str");
+},1500);
 }
 
 function scanSongs(){
@@ -182,8 +183,8 @@ ban.addEventListener("click",function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();slt=$lt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-tsl=new rSlider({target:"#timeslider",values:{min:0.25,max:45.00},
-step:[0.001],labels:false,tooltip:true,scale:false,});
+tsl=new rSlider({target:"#timeslider",values:{min:0.25,max:30.00},
+step:[0.25],labels:false,tooltip:true,scale:false,});
 grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
 document.getElementById("menu").addEventListener("click",function(){
