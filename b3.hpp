@@ -1,9 +1,7 @@
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
-
 #include <webgl/webgl2.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -16,17 +14,12 @@
 #include <chrono>
 #include <unistd.h>
 #include <SDL2/SDL.h>
-
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-
 static const char8_t *read_file(const char *filename);
-  
 #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
-
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
@@ -36,25 +29,18 @@ static const char8_t *read_file(const char *filename);
 #include <EGL/eglplatform.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
-
-
 GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
-
 void uni(float xx,float yy,GLfloat time,EGLint fram);
-
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
-
 using namespace std;
 using namespace std::chrono;
-
 steady_clock::time_point t1,t2,t3;
 GLuint uni_frm,uni_tme,uni_tme_dlt,uni_res,shader;
 double Ttime,TtimeDelta;
 EGLint iFrame,iFps;
 GLsizei s4=4;
-// int v0=0,v1=1,v2=2,v3=3,v4=4,v6=6,v8=8,v10=10,v16=16,v24=24,v32=32,v64=64;
 int a,b;
 float F=1.0;
 float F0=0.0;
@@ -68,7 +54,7 @@ GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
 struct timespec rem;
-struct timespec req={0,16666000};
+struct timespec req={0,16666666};
 GLuint uni_mse;
 
 const char *sources[4];
