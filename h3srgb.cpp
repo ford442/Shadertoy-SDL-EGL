@@ -69,8 +69,8 @@ let intervalLoop;
 let stp,a,b,f;
 
 function backForth(stp){
-let a=(stp/1000.0)-1.0;
-let b=(stp/1000.0)+1.0;
+let a=(stp/1000.0)-1.5;
+let b=(stp/1000.0);
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
@@ -220,13 +220,13 @@ pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
-var j=i+1;
+let j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
-var $F=1;
-var $Bu=33;
+let pointb=77*la;
+let $B=new Float32Array($H,pointb,sz);
+let $F=1;
+let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
