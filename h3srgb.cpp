@@ -79,12 +79,11 @@ vv.currentTime-=0.016;
 }else{
 f=false;
 }}
-if(f==false){
-if(vv.currentTime<b){
+else if(vv.currentTime<b){
 vv.currentTime+=0.016;
 }else{
 f=true;
-}}
+}
 },16.6);
 };
 
@@ -248,26 +247,28 @@ var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 let j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
+let $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-var T=false;
+let T=false;
 function M(){
 vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
-var loca=$F+1;if(loca>64){loca=1;}
-var locb=$Bu+1;if(locb>64){locb=1;}
+let loca=$F+1;
+if(loca>64){loca=1;}
+let locb=$Bu+1;
+if(locb>64){locb=1;}
 eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 
-if($F%4==0){
-var $bb=R(vv);
+if($F%5==0){
+let $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
@@ -675,6 +676,7 @@ return;
 
 int main(){
 EM_ASM({
+"use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
