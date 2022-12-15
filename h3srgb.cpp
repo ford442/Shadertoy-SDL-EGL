@@ -44,8 +44,8 @@ extern "C" {
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-var vv=document.getElementById("mv");
-var intervalBackward;
+let vv=document.getElementById("mv");
+let intervalBackward;
 
 function back(){
 intervalBackward=setInterval(function(){
@@ -57,7 +57,7 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-var intervalForward;
+let intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
@@ -65,12 +65,12 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-var intervalLoop;
-var stp,a,b,f;
+let intervalLoop;
+let stp,a,b,f;
 
 function backForth(stp){
-var a=(stp/1000.0);
-var b=(stp/1000.0)+1.0;
+let a=(stp/1000.0)-1.0;
+let b=(stp/1000.0)+1.0;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
@@ -83,7 +83,7 @@ vv.currentTime+=(0.016);
 }else{
 f=true;
 }
-},16.6);
+},16);
 };
 
 function stpForward(){
@@ -98,7 +98,7 @@ function stpBackForth(){
 clearInterval(intervalLoop);
 }
 
-var Mov=1;
+let Mov=1;
 
 function doKey(e){
 if(e.code=='Space'){
@@ -125,12 +125,12 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
-var pointa=77*la;
+let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-var avag=0.750000;
-var min=1.000000;
-var max=0.000000;
+let avag=0.750000;
+let min=1.000000;
+let max=0.000000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
