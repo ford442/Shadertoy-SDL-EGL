@@ -108,7 +108,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 }
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
+if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();stp=vv.currentTime*1000.0;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
