@@ -205,8 +205,8 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 /// var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
-// var Min=(4.0*(($fmax-($favg-$amin))/2.0));
-var Min=(4.0*(($fmax-(p[3]-$amin))/2.0));
+var Min=(4.0*(($fmax-($favg-$amin))/2.0));
+// var Min=(4.0*(($fmax-(p[3]-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
@@ -270,7 +270,7 @@ var locb=$Bu+1;if(locb>64){locb=1;}
 eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 
-if($F%8===0){
+if($F%16===0){
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
