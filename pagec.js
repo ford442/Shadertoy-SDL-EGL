@@ -51,7 +51,7 @@ let fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 pll();
-},1000);
+},500);
 let shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({
 data:222
@@ -117,7 +117,7 @@ ff.send(null);
 setTimeout(function(){
 document.getElementById("btn7").click();
 // Module.ccall("str");
-},2500);
+},1300);
 }
 
 function scanSongs(){
@@ -168,7 +168,7 @@ data:songSrc
 
 document.getElementById("btn8").addEventListener("click",function(){
 setTimeout(function(){window.open('./flac');},250);
-setTimeout(function(){snd();},1200);
+setTimeout(function(){snd();},800);
 });
 
 let tem=document.getElementById("tim");
@@ -211,12 +211,12 @@ document.getElementById("isrc").innerHTML=adr;
 mV.play();
 // setTimeout(function(){document.getElementById("btn2").click();},700);
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){Module.ccall("b3");},2000);
+setTimeout(function(){Module.ccall("b3");},1100);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
 data:222
-});},800);
+});},1200);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 // setTimeout(function(){window.open('./flac');},200);
