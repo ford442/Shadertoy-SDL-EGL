@@ -264,7 +264,7 @@ var locb=$Bu+1;if(locb>64){locb=1;}
 eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 
-if($F%16===0){
+if($F%4==0){
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
