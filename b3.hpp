@@ -79,7 +79,9 @@ void renderFrame();
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
+extern "C"{
 void strt();
 void str();
 void pl();
 void b3();
+}
