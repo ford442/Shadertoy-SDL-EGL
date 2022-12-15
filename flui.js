@@ -2,12 +2,13 @@
 const promoPopup=document.getElementsByClassName('promo')[0];
 const promoPopupClose=document.getElementsByClassName('promo-close')[0];
 if(isMobile()){
-setTimeout(() => {
-promoPopup.style.display='table';
-},20000);
+ setTimeout(() => {
+ promoPopup.style.display='table';
+ },20000);
 }
 var appleLink=document.getElementById('apple_link');
 var googleLink=document.getElementById('google_link');
+
 // const canvas=document.getElementsByTagName('canvas')[0];
 var canvas=document.getElementById('acanvas');
 
@@ -16,64 +17,64 @@ let config={
  SIM_RESOLUTION:256,
  DYE_RESOLUTION:1024,
  CAPTURE_RESOLUTION:512,
- DENSITY_DISSIPATION:0.88,
+ DENSITY_DISSIPATION:1,
  VELOCITY_DISSIPATION:0.2,
- PRESSURE:0.77,PRESSURE_ITERATIONS:24,
- CURL:42,
- SPLAT_RADIUS:0.42,
- SPLAT_FORCE:6660,
+ PRESSURE:0.8,PRESSURE_ITERATIONS:20,
+ CURL:23,
+ SPLAT_RADIUS:0.25,
+ SPLAT_FORCE:6000,
  SHADING:true,
  COLORFUL:false,
  COLOR_UPDATE_SPEED:10,
  PAUSED:false,
  BACK_COLOR:{r:0,g:0,b:0},
  TRANSPARENT:true,
- BLOOM:true,
- BLOOM_ITERATIONS:24,
+ BLOOM:false,
+ BLOOM_ITERATIONS:8,
  BLOOM_RESOLUTION:512,
- BLOOM_INTENSITY:0.1,
+ BLOOM_INTENSITY:0.3,
  BLOOM_THRESHOLD:0.8,
  BLOOM_SOFT_KNEE:0.7,
- SUNRAYS:true,
+ SUNRAYS:false,
  SUNRAYS_RESOLUTION:196,
- SUNRAYS_WEIGHT:0.2
+ SUNRAYS_WEIGHT:1.0
 };
 function pointerPrototype(){
-this.id= -1;
-this.texcoordX=0;
-this.texcoordY=0;
-this.prevTexcoordX=0;
-this.prevTexcoordY=0;
-this.deltaX=0;
-this.deltaY=0;
-this.down=false;
-this.moved=false;
-this.color=[30,0,300];
+ this.id= -1;
+ this.texcoordX=0;
+ this.texcoordY=0;
+ this.prevTexcoordX=0;
+ this.prevTexcoordY=0;
+ this.deltaX=0;
+ this.deltaY=0;
+ this.down=false;
+ this.moved=false;
+ this.color=[30,0,300];
 }
 let pointers=[];
 let splatStack=[];
 pointers.push(new pointerPrototype());
 const {gl,ext}=getWebGLContext(canvas);
 if(isMobile()){
-config.DYE_RESOLUTION=512;
+ config.DYE_RESOLUTION=512;
 }
 if(!ext.supportLinearFiltering){
-config.DYE_RESOLUTION=512;
-config.SHADING=false;
-config.BLOOM=false;
-config.SUNRAYS=false;
+ config.DYE_RESOLUTION=512;
+ config.SHADING=false;
+ config.BLOOM=false;
+ config.SUNRAYS=false;
 }
 startGUI();
 function getWebGLContext(canvas){
-const params={logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:true,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true};
-let gl=canvas.getContext('webgl2',{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:true,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
-const isWebGL2=!!gl;
-if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
-let halfFloat;
-let supportLinearFiltering;
-if(isWebGL2){
-gl.getExtension('EXT_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_float');
+const params={logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true};
+let gl=canvas.getContext('webgl2',{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
+ const isWebGL2=!!gl;
+ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
+ let halfFloat;
+ let supportLinearFiltering;
+ if(isWebGL2){
+ gl.getExtension('EXT_color_buffer_float');
+  gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
 gl.getExtension('OES_texture_half_float_linear');
@@ -84,6 +85,7 @@ gl.getExtension('EXT_sRGB');
 gl.getExtension('EXT_blend_minmax');
 gl.getExtension('ANGLE_instanced_arrays');
 gl.getExtension('EXT_disjoint_timer_query');
+
 gl.getExtension('EXT_clip_cull_distance');
 gl.getExtension('EXT_disjoint_timer_query_webgl2');
 gl.getExtension('KHR_parallel_shader_compile');
@@ -104,12 +106,15 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-gl.disable(gl.DITHER);
-supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
-}else{
-halfFloat=gl.getExtension('OES_texture_half_float');
-gl.getExtension('EXT_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_float');
+  
+  
+  gl.disable(gl.DITHER);
+
+ supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
+ }else{
+ halfFloat=gl.getExtension('OES_texture_half_float');
+   gl.getExtension('EXT_color_buffer_float');
+  gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
 gl.getExtension('OES_texture_half_float_linear');
@@ -120,6 +125,7 @@ gl.getExtension('EXT_sRGB');
 gl.getExtension('EXT_blend_minmax');
 gl.getExtension('ANGLE_instanced_arrays');
 gl.getExtension('EXT_disjoint_timer_query');
+
 gl.getExtension('EXT_clip_cull_distance');
 gl.getExtension('EXT_disjoint_timer_query_webgl2');
 gl.getExtension('KHR_parallel_shader_compile');
@@ -140,10 +146,13 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-gl.disable(gl.DITHER);
-supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
-}
-gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
+  
+  
+  gl.disable(gl.DITHER);
+
+ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
+ }
+ gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
  const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
  let formatRG;
