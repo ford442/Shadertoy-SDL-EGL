@@ -75,15 +75,15 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.016666);
+vv.currentTime+=-(0.016);
 }else{
 f=false;
 }}else if(vv.currentTime<b){
-vv.currentTime+=(0.016666);
+vv.currentTime+=(0.016);
 }else{
 f=true;
 }
-},16.666666);
+},16.6);
 };
 
 function stpForward(){
