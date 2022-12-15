@@ -117,7 +117,7 @@ ff.send(null);
 setTimeout(function(){
 document.getElementById("btn7").click();
 // Module.ccall("str");
-},1500);
+},2500);
 }
 
 function scanSongs(){
@@ -211,12 +211,12 @@ document.getElementById("isrc").innerHTML=adr;
 mV.play();
 // setTimeout(function(){document.getElementById("btn2").click();},700);
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){Module.ccall("b3");},1000);
+setTimeout(function(){Module.ccall("b3");},2000);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
 data:222
-});},600);
+});},800);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 // setTimeout(function(){window.open('./flac');},200);
