@@ -75,15 +75,17 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.016);
+vv.currentTime-=0.016;
 }else{
 f=false;
-}}else if(vv.currentTime<b){
-vv.currentTime+=(0.016);
+}}
+if(f==false){
+if(vv.currentTime<b){
+vv.currentTime+=0.016;
 }else{
 f=true;
-}
-},16);
+}}
+},16.6);
 };
 
 function stpForward(){
@@ -181,35 +183,35 @@ g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
-var Pa=tv[this.thread.y][this.thread.x*4];
+let Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 const t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-var av$=Ave(P[0],P[1],P[2]);
+let P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+let av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+let p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
 // var $fmin=this.constants.fmin;
-var $amax=this.constants.amax;
-var $amin=this.constants.amin;
+let $amax=this.constants.amax;
+let $amin=this.constants.amin;
 // var $favg=this.constants.favg;
-var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$aavg,p[3]);
+let $aavg=this.constants.aavg;
+let alph=Alphe($amax,$amin,$aavg,p[3]);
 /// var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
-var Min=(4.0*(($amax-($aavg-$amin))/2.0));
+let Min=(4.0*(($amax-($aavg-$amin))/2.0));
 // var Min=(4.0*(($fmax-(p[3]-$amin))/2.0));
-var ouT=Math.max(Min,alph);
-var aveg=Aveg(p[3],ouT);
+let ouT=Math.max(Min,alph);
+let aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+let blank$=Math.max((((w$-h$)*0)/2),0);
+let nblank$=Math.max((((h$-w$)*0)/2),0);
 let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
