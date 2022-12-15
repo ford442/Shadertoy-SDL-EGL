@@ -83,7 +83,7 @@ vv.currentTime+=(0.016666);
 }else{
 f=true;
 }
-},16.66);
+},8);
 };
 
 function stpForward(){
@@ -273,7 +273,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 
 setTimeout(function(){
 M();
-},16.66);
+},8);
 }
 M();
 document.getElementById("di").onclick=function(){
