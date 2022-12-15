@@ -83,7 +83,7 @@ vv.currentTime+=(0.016666);
 }else{
 f=true;
 }
-},8);
+},16.666666);
 };
 
 function stpForward(){
@@ -273,7 +273,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 
 setTimeout(function(){
 M();
-},8);
+},16.666666);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -408,10 +408,10 @@ mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glFlush();
-nanosleep(&req,&rem);
+// glFlush();
+// nanosleep(&req,&rem);
 iFrame++;
-glFinish();
+// glFinish();
 return;
 }
 
