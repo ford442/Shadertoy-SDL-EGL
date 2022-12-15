@@ -248,7 +248,7 @@ var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 let j=i+1;
-eval("let point"+j+"="+i+"*la;let $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
