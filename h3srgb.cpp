@@ -252,7 +252,7 @@ var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;let $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -270,7 +270,7 @@ var locb=$Bu+1;if(locb>64){locb=1;}
 eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 
-if($F%16===0){
+if($F%8===0){
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
