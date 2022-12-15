@@ -135,14 +135,14 @@ let la=h$*h$*4;
 var pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-var avag=0.750;
-var min=1.0;
-var max=0.0;
+var avag=0.750000;
+var min=1.000000;
+var max=0.000000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
@@ -180,7 +180,7 @@ const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(0.999952-(((a)-(b))*((a)*(0.999952/(0.999952-b)))));}`;
+const glslAveg=`float Aveg(float a,float b){return(0.999999-(((a)-(b))*((a)*(0.999999/(0.999999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
@@ -268,10 +268,12 @@ var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
 eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
+  
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+  
 setTimeout(function(){
 M();
 },16.66);
