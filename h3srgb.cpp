@@ -135,7 +135,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true});
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
@@ -473,7 +473,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 0 \n"
-"precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"precision mediump float;precision mediump int;precision lowp sampler3D;precision mediump sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
@@ -530,7 +530,7 @@ EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,8,
+EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,32,
@@ -538,7 +538,7 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
@@ -649,8 +649,8 @@ glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
