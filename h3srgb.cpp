@@ -75,15 +75,15 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime-=0.016;
+vv.currentTime-=0.016666;
 }else{
 f=false;
 }}else if(vv.currentTime<b){
-vv.currentTime+=0.016;
+vv.currentTime+=0.016666;
 }else{
 f=true;
 }
-},16.6);
+},16.666666);
 };
 
 function stpForward(){
@@ -279,7 +279,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 
 setTimeout(function(){
 M();
-},16.6);
+},16.666666);
 }
 M();
 document.getElementById("di").onclick=function(){
