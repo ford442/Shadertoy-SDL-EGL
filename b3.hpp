@@ -29,6 +29,7 @@ static const char8_t *read_file(const char *filename);
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
+#include <GL/gl.h>
 
 #include <GL/glext.h>
 GLfloat x;
