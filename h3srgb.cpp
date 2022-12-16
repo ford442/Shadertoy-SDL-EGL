@@ -70,17 +70,18 @@ let stp,a,b,f;
 
 function backForth(stp){
 let a=(stp/1000.0);
-let b=(stp/1000.0)+1.5;
+let b=(stp/1000.0)+1.75;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>a){
-vv.currentTime-=0.016666;
-}else{
-f=false;
-}}else{
 if(vv.currentTime<b){
 vv.currentTime+=0.016666;
+}else{
+f=false;
+}
+}else{
+if(vv.currentTime>a){
+vv.currentTime-=0.016666;
 }else{
 f=true;
 }}
