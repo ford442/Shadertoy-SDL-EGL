@@ -396,7 +396,7 @@ return;
 }
 
 void renderFrame(){
-glClear(GL_STENCIL_BUFFER_BIT);
+// glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
@@ -410,14 +410,14 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
-glClear(GL_DEPTH_BUFFER_BIT);
+// glClear(GL_DEPTH_BUFFER_BIT);
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glFlush();
-nanosleep(&req,&rem);
+// glFlush();
+// nanosleep(&req,&rem);
 iFrame++;
-glFinish();
+// glFinish();
 return;
 }
 
