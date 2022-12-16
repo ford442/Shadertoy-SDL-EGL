@@ -54,7 +54,7 @@ GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
 struct timespec rem;
-struct timespec req={0,8000000};
+struct timespec req={0,16666666};
 GLuint uni_mse;
 const char *sources[4];
 GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
