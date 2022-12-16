@@ -277,7 +277,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 
 setTimeout(function(){
 M();
-},16.6);
+},16.666666);
 }
 M();
 document.getElementById("di").onclick=function(){
@@ -412,10 +412,10 @@ mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-// glFlush();
-// nanosleep(&req,&rem);
+glFlush();
+nanosleep(&req,&rem);
 iFrame++;
-// glFinish();
+glFinish();
 return;
 }
 
