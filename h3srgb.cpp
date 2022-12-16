@@ -219,7 +219,7 @@ agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 // for(i=0;i<65;i++){
 // let j=i+1;
-// eval("let point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 // }
 let pointb=77*la;
 let $B=new Float32Array($H,pointb,sz);
@@ -231,7 +231,7 @@ let $$1=t(vv);
 for (i=0;i<65;i++){
 let j=i+1;
 
-eval("let point"+j+"="+i+"*la;let $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 
 }
 let d=S();if(d)d();d=S();function S(){
@@ -248,7 +248,7 @@ var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 let j=i+1;
-eval("let point"+j+"="+i+"*la;let $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 let $B=new Float32Array($H,pointb,sz);
@@ -266,7 +266,7 @@ if(loca>64){loca=1;}
 let locb=$Bu+1;
 if(locb>64){locb=1;}
 
-eval("if ($F==="+i+"){let $r"+i+"=t($"+i+");r($r"+i+");let $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 
 }
 
