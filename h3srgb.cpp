@@ -188,7 +188,7 @@ const t=g.createKernel(function(v){
 let P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 let av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 let p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
@@ -204,7 +204,7 @@ let Min=(4.0*(($amax-($aavg-$amin))/2.0));
 let ouT=Math.max(Min,alph);
 let aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("balanced").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -473,7 +473,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 0 \n"
-"precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;\n";
+"precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
@@ -530,8 +530,8 @@ EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,16,
-EGL_BUFFER_SIZE,64,
+EGL_STENCIL_SIZE,8,
+EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,32,
 EGL_NONE
