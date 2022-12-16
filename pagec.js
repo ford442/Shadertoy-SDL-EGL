@@ -115,7 +115,7 @@ FS.writeFile("/shader/shader1.toy",sfil);
 setTimeout(function(){
 document.getElementById("btn7").click();
 // Module.ccall("str");
-},500);
+},200);
 }}
 ff.send(null);
 }
@@ -211,12 +211,12 @@ document.getElementById("isrc").innerHTML=adr;
 mV.play();
 // setTimeout(function(){document.getElementById("btn2").click();},700);
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){Module.ccall("b3");},400);
+setTimeout(function(){Module.ccall("b3");},800);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
 data:222
-});},750);
+});},450);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 // setTimeout(function(){window.open('./flac');},200);
@@ -291,7 +291,8 @@ vide[1].id=mv;
 document.getElementById("mv").play();
 document.getElementById("ldv").src=document.getElementById("isrc").innerHTML;
 // document.getElementById("ldv").currentTime=document.getElementById("itim").innerHTML;
-document.getElementById("ldv").fastSeek(document.getElementById("itim").innerHTML);
+// document.getElementById("ldv").fastSeek(document.getElementById("itim").innerHTML);
+document.getElementById("ldv").fastSeek($pt);
 document.getElementById("ldv").load();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
