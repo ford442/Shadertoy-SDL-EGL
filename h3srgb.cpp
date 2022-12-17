@@ -646,8 +646,8 @@ glBindBuffer(GL_ARRAY_BUFFER,VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-glBindBuffer(GL_ARRAY_BUFFER,GL_NONE);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+// glBindBuffer(GL_ARRAY_BUFFER,GL_NONE);
+// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 
 // glBindVertexArray(GL_NONE);
 
