@@ -402,7 +402,6 @@ void renderFrame(){
 // glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
-// GLuint VBO;
 t2=steady_clock::now();
 duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
@@ -415,13 +414,9 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/S;
 mouseY=(S-y)/S;
 // glClear(GL_DEPTH_BUFFER_BIT);
-// glBindVertexArray(VBO);
-
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-// glBindVertexArray(GL_NONE);
-
 glFlush();
 nanosleep(&req,&rem);
 iFrame++;
@@ -536,15 +531,15 @@ EGL_CONFORMANT, EGL_OPENGL_BIT,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,10,
-EGL_GREEN_SIZE,10,
-EGL_BLUE_SIZE,10,
-EGL_ALPHA_SIZE,10,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,16,
-EGL_BUFFER_SIZE,64,
+EGL_RED_SIZE,64,
+EGL_GREEN_SIZE,64,
+EGL_BLUE_SIZE,64,
+EGL_ALPHA_SIZE,64,
+EGL_DEPTH_SIZE,64,
+EGL_STENCIL_SIZE,0,
+EGL_BUFFER_SIZE,128,
 EGL_SAMPLE_BUFFERS,128,
-EGL_SAMPLES,32,
+EGL_SAMPLES,128,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -604,11 +599,9 @@ nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
-
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
@@ -638,19 +631,11 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-
 glGenVertexArrays(1,&VCO);
 glBindVertexArray(VCO);
-glBindBuffer(GL_ARRAY_BUFFER,VCO);
-
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-// glBindBuffer(GL_ARRAY_BUFFER,GL_NONE);
-// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-
-// glBindVertexArray(GL_NONE);
-
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
