@@ -414,9 +414,13 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/S;
 mouseY=(S-y)/S;
 // glClear(GL_DEPTH_BUFFER_BIT);
+glBindVertexArray(VCO);
+
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
+glBindVertexArray(GL_NONE);
+
 glFlush();
 nanosleep(&req,&rem);
 iFrame++;
@@ -599,9 +603,11 @@ nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
@@ -631,11 +637,18 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
+
 glGenVertexArrays(1,&VCO);
 glBindVertexArray(VCO);
+glBindBuffer(GL_ARRAY_BUFFER,VCO);
+
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+glBindBuffer(GL_ARRAY_BUFFER,GL_NONE);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBindVertexArray(GL_NONE);
+
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
