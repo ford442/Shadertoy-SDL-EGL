@@ -39,8 +39,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 }
 
-extern "C" {
-
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
@@ -295,11 +293,6 @@ T=true;
 }
 })
 
-}
-
-
-extern "C" {
-
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
@@ -358,8 +351,6 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 return;
-}
-
 }
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
@@ -471,7 +462,7 @@ GLfloat gF=F;
 GLfloat gF0=F0;
 GLfloat gFm1=Fm1;
 typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
