@@ -402,7 +402,7 @@ void renderFrame(){
 // glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
-GLuint VBO;
+// GLuint VBO;
 t2=steady_clock::now();
 duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
@@ -415,12 +415,12 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/S;
 mouseY=(S-y)/S;
 // glClear(GL_DEPTH_BUFFER_BIT);
-glBindVertexArray(VBO);
+// glBindVertexArray(VBO);
 
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glBindVertexArray(GL_NONE);
+// glBindVertexArray(GL_NONE);
 
 glFlush();
 nanosleep(&req,&rem);
@@ -647,7 +647,7 @@ atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
 glBindBuffer(GL_ARRAY_BUFFER,GL_NONE);
-glBindVertexArray(GL_NONE);
+// glBindVertexArray(GL_NONE);
 
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
