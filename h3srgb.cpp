@@ -402,6 +402,7 @@ void renderFrame(){
 // glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
+GLuint VCO;
 t2=steady_clock::now();
 duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
