@@ -402,7 +402,7 @@ void renderFrame(){
 // glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
-GLuint VCO;
+GLuint ECO;
 t2=steady_clock::now();
 duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
@@ -415,7 +415,7 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/S;
 mouseY=(S-y)/S;
 // glClear(GL_DEPTH_BUFFER_BIT);
-glBindVertexArray(VCO);
+glBindVertexArray(ECO);
 
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
