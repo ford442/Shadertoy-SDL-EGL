@@ -67,33 +67,21 @@ let intervalLoop;
 let stp,a,b,f;
 
 function backForth(stp){
-let a=stp/1000.0;
-let b=(stp/1000.0)+1.666666;
+var a=(stp/1000.0);
+var b=(stp/1000.0)+1.0;
 f=true;
-  
 intervalLoop=setInterval(function(){
-  
 if(f==true){
-if(vv.currentTime<=b){
-vv.currentTime+=0.016666;
-// vv.fastSeek(vv.currentTime+0.016666);
+if(vv.currentTime>a){
+vv.currentTime+=-(0.016666);
 }else{
 f=false;
-}
-}
-  
-if(f==false){
-if(vv.currentTime>=a){
-vv.currentTime-=0.016666;
-// vv.fastSeek(vv.currentTime-0.016666);
+}}else if(vv.currentTime<b){
+vv.currentTime+=(0.016666);
 }else{
 f=true;
 }
-}
-}
-
-},16.666666);
-  
+},16.66);
 };
 
 function stpForward(){
