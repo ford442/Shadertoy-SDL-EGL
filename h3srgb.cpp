@@ -548,7 +548,6 @@ attr.majorVersion=2;
 attr.minorVersion=0;
   
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_make_context_current(ctx);
 
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -588,6 +587,7 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 
   eglMakeCurrent(display,surface,surface,contextegl);
+
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 nanosleep(&req,&rem);
@@ -655,6 +655,9 @@ glFrontFace(GL_CW);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
+
+emscripten_webgl_make_context_current(ctx);
+
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
