@@ -42,7 +42,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-var vv=document.getElementById("mv");
+let vv=document.getElementById("mv");
 let intervalBackward;
 
 function back(){
@@ -63,25 +63,29 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-var intervalLoop;
-var stp,a,b,f;
+let intervalLoop;
+let stp,a,b,f;
 
 function backForth(stp){
-var a=(stp/1000.0);
-var b=(stp/1000.0)+1.0;
+let a=(stp/1000.0)-0.888;
+let b=(stp/1000.0)+0.888;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>a){
-vv.currentTime+=-(0.016666);
+if(vv.currentTime<=b){
+vv.currentTime+=0.016666;
+// vv.fastSeek(vv.currentTime+0.016666);
 }else{
 f=false;
-}}else if(vv.currentTime<b){
-vv.currentTime+=(0.016666);
+}
+}else{
+if(vv.currentTime>=a){
+vv.currentTime-=0.016666;
+// vv.fastSeek(vv.currentTime-0.016666);
 }else{
 f=true;
-}
-},16.66);
+}}
+},16.666666);
 };
 
 function stpForward(){
@@ -107,7 +111,8 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-stp=vv.currentTime*1000.0;backForth(stp);}
+                    // stp=vv.currentTime*1000.0;
+backForth(vv.currentTime*1000.0);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
 
