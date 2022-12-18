@@ -73,7 +73,7 @@ f=true;
   
 intervalLoop=setInterval(function(){
   
-if(f===true){
+if(f==true){
 if(vv.currentTime<=b){
 vv.currentTime+=0.016666;
 // vv.fastSeek(vv.currentTime+0.016666);
@@ -82,7 +82,7 @@ f=false;
 }
 }
   
-if(f===false){
+if(f==false){
 if(vv.currentTime>=a){
 vv.currentTime-=0.016666;
 // vv.fastSeek(vv.currentTime-0.016666);
