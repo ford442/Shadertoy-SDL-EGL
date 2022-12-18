@@ -42,7 +42,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-let vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 let intervalBackward;
 
 function back(){
@@ -63,8 +63,8 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalLoop;
-let stp,a,b,f;
+var intervalLoop;
+var stp,a,b,f;
 
 function backForth(stp){
 var a=(stp/1000.0);
