@@ -113,8 +113,8 @@ if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile("/shader/shader1.toy",sfil);
 setTimeout(function(){
-document.getElementById("btn7").click();
-// Module.ccall("str");
+// document.getElementById("btn7").click();
+Module.ccall("str");
 },200);
 }}
 ff.send(null);
@@ -167,8 +167,8 @@ data:songSrc
 }
 
 document.getElementById("btn8").addEventListener("click",function(){
-setTimeout(function(){window.open('./flac');},250);
-setTimeout(function(){snd();},800);
+setTimeout(function(){window.open('./flac');},150);
+setTimeout(function(){snd();},1500);
 });
 
 let tem=document.getElementById("tim");
@@ -211,7 +211,7 @@ document.getElementById("isrc").innerHTML=adr;
 mV.play();
 // setTimeout(function(){document.getElementById("btn2").click();},700);
 // setTimeout(function(){document.getElementById("btn11").click();},1700);
-setTimeout(function(){Module.ccall("b3");},800);
+setTimeout(function(){Module.ccall("b3");},500);
 // setTimeout(function(){document.getElementById("btn").click();},2700);
 setTimeout(function(){
 bz.postMessage({
