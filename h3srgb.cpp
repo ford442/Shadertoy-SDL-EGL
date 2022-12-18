@@ -67,25 +67,33 @@ let intervalLoop;
 let stp,a,b,f;
 
 function backForth(stp){
-let a=(stp/1000.0)-0.888;
-let b=(stp/1000.0)+0.888;
+let a=stp/1000.0;
+let b=(stp/1000.0)+1.666666;
 f=true;
+  
 intervalLoop=setInterval(function(){
-if(f==true){
+  
+if(f===true){
 if(vv.currentTime<=b){
 vv.currentTime+=0.016666;
 // vv.fastSeek(vv.currentTime+0.016666);
 }else{
 f=false;
 }
-}else{
+}
+  
+if(f===false){
 if(vv.currentTime>=a){
 vv.currentTime-=0.016666;
 // vv.fastSeek(vv.currentTime-0.016666);
 }else{
 f=true;
-}}
+}
+}
+}
+
 },16.666666);
+  
 };
 
 function stpForward(){
@@ -111,8 +119,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-                    // stp=vv.currentTime*1000.0;
-backForth(vv.currentTime*1000.0);}
+stp=vv.currentTime*1000.0;backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
 
