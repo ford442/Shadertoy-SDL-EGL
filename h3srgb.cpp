@@ -586,6 +586,8 @@ eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 
+emscripten_webgl_make_context_current(ctx);
+
   eglMakeCurrent(display,surface,surface,contextegl);
 
 
@@ -656,7 +658,6 @@ glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 
-emscripten_webgl_make_context_current(ctx);
 
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
