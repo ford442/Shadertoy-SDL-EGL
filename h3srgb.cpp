@@ -199,7 +199,8 @@ let P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 let av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 // }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+// }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 let p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
