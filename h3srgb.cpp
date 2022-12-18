@@ -170,6 +170,7 @@ contx.getExtension('WEBGL_webcodecs_video_frame');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
+  contx.getExtension('NV_depth_nonlinear');
 contx.disable(gl.DITHER);
 contx.enable(gl.CULL_FACE);
 contx.enable(gl.DEPTH_TEST);
@@ -197,7 +198,8 @@ const t=g.createKernel(function(v){
 let P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 let av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+// }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 let p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
@@ -596,6 +598,7 @@ emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
+emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 nanosleep(&req,&rem);
