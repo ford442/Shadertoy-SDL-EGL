@@ -399,7 +399,7 @@ return;
 }
 
 void renderFrame(){
-// glClear(GL_STENCIL_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
@@ -413,10 +413,11 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
-// glClear(GL_DEPTH_BUFFER_BIT);
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
+ glClear(GL_DEPTH_BUFFER_BIT);
+
 glFlush();
 nanosleep(&req,&rem);
 iFrame++;
@@ -536,7 +537,7 @@ EGL_GREEN_SIZE,64,
 EGL_BLUE_SIZE,64,
 EGL_ALPHA_SIZE,64,
 EGL_DEPTH_SIZE,64,
-EGL_STENCIL_SIZE,0,
+EGL_STENCIL_SIZE,64,
 EGL_BUFFER_SIZE,128,
 EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,128,
@@ -544,7 +545,7 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
