@@ -171,6 +171,12 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.disable(gl.DITHER);
+contx.enable(gl.CULL_FACE);
+contx.enable(gl.DEPTH_TEST);
+contx.disable(gl.BLEND);
+contx.disable(gl.STENCIL_TEST);
+contx.disable(gl.SCISSOR_TEST);
+
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
