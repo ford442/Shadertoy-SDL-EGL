@@ -168,7 +168,7 @@ data:songSrc
 
 document.getElementById("btn8").addEventListener("click",function(){
 setTimeout(function(){window.open('./flac');},150);
-setTimeout(function(){snd();},1500);
+setTimeout(function(){snd();},550);
 });
 
 let tem=document.getElementById("tim");
