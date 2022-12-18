@@ -586,9 +586,9 @@ eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 
-emscripten_webgl_make_context_current(ctx);
 
   eglMakeCurrent(display,surface,surface,contextegl);
+emscripten_webgl_make_context_current(ctx);
 
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
