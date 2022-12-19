@@ -67,8 +67,8 @@ let intervalLoop;
 var stp;
   
 function backForth(stp){
-let a=stp/1000.0-1.666;
-let b=(stp/1000.0)+1.666;
+let a=stp.toFixed(3)/1000.0-1.666;
+let b=(stp.toFixed(3)/1000.0)+1.666;
 let f=true;
 
 intervalLoop=setInterval(function(){
@@ -108,8 +108,8 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-                    // stp=vv.currentTime*1000.0;
-backForth(vv.currentTime*1000.0);}
+                    // stp=vv.currentTime.toFixed(3)*1000.0;
+backForth(vv.currentTime.toFixed(3)*1000.0);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
 
