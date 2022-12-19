@@ -73,19 +73,19 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime<=b){
-vv.currentTime+=0.016666;
+vv.currentTime+=0.016;
 // vv.fastSeek(vv.currentTime+0.016666);
 }else{
 f=false;
 }
-}else{
+if(f==false){
 if(vv.currentTime>=a){
-vv.currentTime-=0.016666;
-// vv.fastSeek(vv.currentTime-0.016666);
+vv.currentTime-=0.016;
+// vv.fastSeek(vv.currentTime-0.016);
 }else{
 f=true;
-}}
-},16.666666);
+}}}
+},16.666);
 };
 
 function stpForward(){
