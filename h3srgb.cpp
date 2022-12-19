@@ -42,7 +42,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-let vv=document.getElementById("mv");
+var vv=document.getElementById("mv");
 let intervalBackward;
 
 function back(){
@@ -64,12 +64,12 @@ vv.currentTime+=-(0.016);
 };
 
 let intervalLoop;
-let stp,a,b,f;
+var stp,a,b,f;
 f=true;
   
 function backForth(stp){
-let a=stp/1000.0;
-let b=(stp/1000.0)+1.666;
+var a=stp/1000.0;
+var b=(stp/1000.0)+1.666;
 
 intervalLoop=setInterval(function(){
 if(f!==false){
@@ -101,7 +101,7 @@ function stpBackForth(){
 clearInterval(intervalLoop);
 }
 
-let Mov=1;
+var Mov=1;
 
 function doKey(e){
 if(e.code=='Space'){
@@ -129,12 +129,12 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
-let pointa=77*la;
+var pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-let avag=0.750000;
-let min=1.000000;
-let max=0.000000;
+var avag=0.750000;
+var min=1.000000;
+var max=0.000000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
@@ -171,14 +171,13 @@ contx.getExtension('WEBGL_webcodecs_video_frame');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
-  contx.getExtension('NV_depth_nonlinear');
+contx.getExtension('NV_depth_nonlinear');
 contx.disable(gl.DITHER);
 contx.enable(gl.CULL_FACE);
 contx.enable(gl.DEPTH_TEST);
 contx.disable(gl.BLEND);
 contx.disable(gl.STENCIL_TEST);
 contx.disable(gl.SCISSOR_TEST);
-
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
@@ -192,37 +191,37 @@ g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
-let Pa=tv[this.thread.y][this.thread.x*4];
+var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 const t=g.createKernel(function(v){
-let P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-let av$=Ave(P[0],P[1],P[2]);
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 // }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 // }).setTactic("precision").setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
-let p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
 // var $fmin=this.constants.fmin;
-let $amax=this.constants.amax;
-let $amin=this.constants.amin;
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
 // var $favg=this.constants.favg;
-let $aavg=this.constants.aavg;
-let alph=Alphe($amax,$amin,$aavg,p[3]);
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$aavg,p[3]);
 /// var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
-let Min=(4.0*(($amax-($aavg-$amin))/2.0));
+var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 // var Min=(4.0*(($fmax-(p[3]-$amin))/2.0));
-let ouT=Math.max(Min,alph);
-let aveg=Aveg(p[3],ouT);
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-let blank$=Math.max((((w$-h$)*0)/2),0);
-let nblank$=Math.max((((h$-w$)*0)/2),0);
+var blank$=Math.max((((w$-h$)*0)/2),0);
+var nblank$=Math.max((((h$-w$)*0)/2),0);
 let l=w$*h$*16;
 la=h$*h$*4;
 let al=w$*h$*8;
@@ -231,19 +230,19 @@ pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
-let j=i+1;
+var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-let pointb=77*la;
-let $B=new Float32Array($H,pointb,sz);
-let $F=1;
-let $Bu=33;
+var pointb=77*la;
+var $B=new Float32Array($H,pointb,sz);
+var $F=1;
+var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-let $$1=t(vv);
+var $$1=t(vv);
   
 for (i=0;i<65;i++){
-let j=i+1;
+var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 }
 
@@ -260,28 +259,28 @@ pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
-let j=i+1;
+var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
-let $B=new Float32Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-let T=false;
+var T=false;
 function M(){
 vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
-let loca=$F+1;
+var loca=$F+1;
 if(loca>64){loca=1;}
-let locb=$Bu+1;
+var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 
-if($F%16===0){
+if($F%8==0){
 let $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
