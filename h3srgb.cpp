@@ -67,9 +67,9 @@ let intervalLoop;
 var stp;
   
 function backForth(stp){
-var a=stp/1000.0;
-var b=(stp/1000.0)+1.666;
-var f=true;
+let a=stp/1000.0-1.666;
+let b=(stp/1000.0)+1.666;
+let f=true;
 
 intervalLoop=setInterval(function(){
 if(f!=false){
