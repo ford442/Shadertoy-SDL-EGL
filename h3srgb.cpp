@@ -63,12 +63,12 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalLoop;
+var intervalLoop;
 var stp;
   
 function backForth(stp){
-let a=(stp/1000.0)-1.5;
-let b=(stp/1000.0);
+var a=(stp/1000.0)-1.5;
+var b=(stp/1000.0);
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
@@ -108,7 +108,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-stp=vv.currentTime.toFixed(3)*1000.0;
+var stp=vv.currentTime.toFixed(3)*1000.0;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
