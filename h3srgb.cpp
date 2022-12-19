@@ -72,19 +72,19 @@ let a=(stp/1000.0)-0.888;
 let b=(stp/1000.0)+0.888;
 
 intervalLoop=setInterval(function(){
-if(f==true){
-if(vv.currentTime<=b){
+if(f!=false){
+if(vv.currentTime>=b){
+f=false;
+}else{
 vv.currentTime+=0.016;
 // vv.fastSeek(vv.currentTime+0.016666);
-}else{
-f=false;
 }
-if(f==false){
-if(vv.currentTime>=a){
+if(f!=true){
+if(vv.currentTime<=a){
+f=true;
+}else{
 vv.currentTime-=0.016;
 // vv.fastSeek(vv.currentTime-0.016);
-}else{
-f=true;
 }}}
 },16.666);
 };
