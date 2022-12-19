@@ -67,19 +67,19 @@ let intervalLoop;
 var stp;
   
 function backForth(stp){
-let a=stp.toFixed(3)/1000.0-1.666;
+let a=stp.toFixed(3)/1000.0;
 let b=(stp.toFixed(3)/1000.0)+1.666;
 let f=true;
 
 intervalLoop=setInterval(function(){
 if(f!=false){
 vv.currentTime+=0.016;
-if(vv.currentTime>=b){
+if(vv.currentTime>b){
 f=false;
 }
 if(f!=true){
 vv.currentTime-=0.016;
-if(vv.currentTime<=a){
+if(vv.currentTime<a){
 f=true;
 }}}
 },16.666);
