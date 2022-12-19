@@ -67,22 +67,22 @@ let intervalLoop;
 var stp;
   
 function backForth(stp){
-let a=stp.toFixed(3)/1000.0;
-let b=(stp.toFixed(3)/1000.0)+1.666;
-let f=true;
-
-intervalLoop=setInterval(function(){
-if(f!=false){
-vv.currentTime+=0.016;
-if(vv.currentTime>b){
-f=false;
-}
-if(f!=true){
-vv.currentTime-=0.016;
-if(vv.currentTime<a){
+let a=(stp/1000.0)-1.5;
+let b=(stp/1000.0);
 f=true;
-}}}
-},16.666);
+intervalLoop=setInterval(function(){
+if(f==true){
+if(vv.currentTime>a){
+vv.currentTime-=0.016;
+}else{
+f=false;
+}}
+else if(vv.currentTime<b){
+vv.currentTime+=0.016;
+}else{
+f=true;
+}
+},16.6);
 };
 
 function stpForward(){
