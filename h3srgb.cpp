@@ -69,16 +69,16 @@ var stp;
 function backForth(stp){
 var a=(stp/1000.0)-1.5;
 var b=(stp/1000.0);
-f=true;
+var f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
 vv.currentTime-=0.016;
 }else{
-f=false;
+var f=false;
 }}
 else if(vv.currentTime>b){
-f=true;
+var f=true;
 }else{
 vv.currentTime+=0.016;
 }
