@@ -63,11 +63,11 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-let intervalLoop;
+var intervalLoop=null;
 var stp;
 let f;
 function backForth(stp){
-var a=(stp/1000.0)-1.5;
+var a=(stp/1000.0)-1.666;
 var b=(stp/1000.0);
 f=true;
 intervalLoop=setInterval(function(){
