@@ -471,7 +471,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 0 \n"
-"precision highp float;precision mediump int;precision lowp sampler3D;precision lowp sampler2D;\n";
+"precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
@@ -526,20 +526,20 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,64,
-EGL_GREEN_SIZE,64,
-EGL_BLUE_SIZE,64,
-EGL_ALPHA_SIZE,64,
-EGL_DEPTH_SIZE,64,
-EGL_STENCIL_SIZE,64,
-EGL_BUFFER_SIZE,128,
-EGL_SAMPLE_BUFFERS,128,
-EGL_SAMPLES,128,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,0,
+EGL_BUFFER_SIZE,32,
+EGL_SAMPLE_BUFFERS,32,
+EGL_SAMPLES,32,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
@@ -550,9 +550,7 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
-  
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -643,9 +641,9 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-glUniform3f(uni_res,S,S,1.0);
-glUniform3f(smp_chn_res,S,S,1.0);
-glClearColor(gF0,gF0,gF0,gF0);
+glUniform3f(uni_res,S,S,1.0f);
+glUniform3f(smp_chn_res,S,S,1.0f);
+glClearColor(gF0,gF0,gF0,0.7f);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glDisable(GL_BLEND);
@@ -657,7 +655,7 @@ glFrontFace(GL_CW);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
-glViewport(0,0,GLint(Size),GLint(Size));
+// glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
