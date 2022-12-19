@@ -55,7 +55,7 @@ fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 \
+	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=c++20 -sASYNCIFY \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js cl-gpu.js
