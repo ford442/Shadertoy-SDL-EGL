@@ -273,7 +273,8 @@ var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+// eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var tEst=Math.random()*12;var $r"+(i+tEst)+"=t($"+i+");r($r"+(i+tEst)+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 
 if($F%8==0){
