@@ -68,18 +68,18 @@ let stp,a,b,f;
 f=true;
   
 function backForth(stp){
-let a=(stp/1000.0)-0.888;
-let b=(stp/1000.0)+0.888;
+let a=stp/1000.0;
+let b=(stp/1000.0)+1.666;
 
 intervalLoop=setInterval(function(){
-if(f!=false){
+if(f!==false){
 if(vv.currentTime>=b){
 f=false;
 }else{
 vv.currentTime+=0.016;
 // vv.fastSeek(vv.currentTime+0.016666);
 }
-if(f!=true){
+if(f!==true){
 if(vv.currentTime<=a){
 f=true;
 }else{
