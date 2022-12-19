@@ -77,10 +77,10 @@ vv.currentTime-=0.016;
 }else{
 f=false;
 }}
-else if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
+else if(vv.currentTime>b){
 f=true;
+}else{
+vv.currentTime+=0.016;
 }
 },16.6);
 };
