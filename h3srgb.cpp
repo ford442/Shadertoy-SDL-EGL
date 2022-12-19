@@ -73,18 +73,14 @@ var b=(stp/1000.0)+1.666;
 
 intervalLoop=setInterval(function(){
 if(f!=false){
+vv.currentTime+=0.016;
 if(vv.currentTime>=b){
 f=false;
-}else{
-vv.currentTime+=0.016;
-// vv.fastSeek(vv.currentTime+0.016666);
 }
 if(f!=true){
+vv.currentTime-=0.016;
 if(vv.currentTime<=a){
 f=true;
-}else{
-vv.currentTime-=0.016;
-// vv.fastSeek(vv.currentTime-0.016);
 }}}
 },16.666);
 };
