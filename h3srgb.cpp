@@ -64,12 +64,12 @@ vv.currentTime+=-(0.016);
 };
 
 let intervalLoop;
-var stp,a,b;
-let f=true;
+var stp;
   
 function backForth(stp){
 var a=stp/1000.0;
 var b=(stp/1000.0)+1.666;
+var f=true;
 
 intervalLoop=setInterval(function(){
 if(f!=false){
