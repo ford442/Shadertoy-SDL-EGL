@@ -65,20 +65,21 @@ vv.currentTime+=-(0.016);
 
 let intervalLoop;
 let stp,a,b,f;
-
+f=true;
+  
 function backForth(stp){
 let a=(stp/1000.0)-0.888;
 let b=(stp/1000.0)+0.888;
-f=true;
+
 intervalLoop=setInterval(function(){
-if(f===true){
+if(f==true){
 if(vv.currentTime<=b){
 vv.currentTime+=0.016;
 // vv.fastSeek(vv.currentTime+0.016666);
 }else{
 f=false;
 }
-if(f===false){
+if(f==false){
 if(vv.currentTime>=a){
 vv.currentTime-=0.016;
 // vv.fastSeek(vv.currentTime-0.016);
@@ -289,7 +290,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 
 setTimeout(function(){
 M();
-},16.666666);
+},16.666);
 }
 M();
 document.getElementById("di").onclick=function(){
