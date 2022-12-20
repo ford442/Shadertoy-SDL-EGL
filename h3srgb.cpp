@@ -68,8 +68,8 @@ var stp;
 let f=true;
   
 function backForth(stp){
-var a=stp-1.666;
-var b=stp;
+var a=stp;
+var b=stp+1.666;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
