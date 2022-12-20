@@ -68,8 +68,8 @@ var stp;
 let f=true;
   
 function backForth(stp){
-var a=(stp/1000.0)-1.666;
-var b=(stp/1000.0);
+var a=stp-1.666;
+var b=stp;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
@@ -109,7 +109,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-var stp=vv.currentTime.toFixed(3)*1000.0;
+var stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 }
