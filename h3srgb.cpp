@@ -481,7 +481,8 @@ GLfloat gF=F;
 GLfloat gF0=F0;
 GLfloat gFm1=Fm1;
 
-typedef struct{GLfloat XYZW[4];}Vertex;
+// typedef struct{GLfloat XYZW[4];}Vertex;
+typedef struct{std::vector<GLfloat> XYZW;}Vertex;
  
 std::vector<GLfloat>aA={gFm1,gFm1,gF,gF};
 std::vector<GLfloat>bB={gF,gFm1,gF,gF};
