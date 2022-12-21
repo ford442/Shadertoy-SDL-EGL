@@ -43,6 +43,7 @@ EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
+  /*
 let intervalBackward;
 
 function back(){
@@ -129,6 +130,9 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
+  
+  
+  */
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -221,7 +225,7 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("speed").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
