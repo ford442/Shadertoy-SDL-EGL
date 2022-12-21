@@ -1,5 +1,4 @@
 #include "b3.hpp"
-#include <vector>
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -482,27 +481,14 @@ float gF0=F0;
 float gFm1=Fm1;
 
 typedef struct{float XYZW[4];}Vertex;
-// typedef struct{std::vector<GLfloat>XYZW;}Vertex;
- 
-// std::vector<GLfloat>aA={gFm1,gFm1,gF,gF};
-// std::vector<GLfloat>bB={gF,gFm1,gF,gF};
-// std::vector<GLfloat>cC={gF,gF,gF,gF};
-// std::vector<GLfloat>dD={gFm1,gF,gF,gF};
-// std::vector<GLfloat>eE={gFm1,gFm1,gFm1,gF};
-// std::vector<GLfloat>fF={gF,gFm1,gFm1,gF};
-// std::vector<GLfloat>gG={gF,gF,gFm1,gF};
-// std::vector<GLfloat>hH={gFm1,gF,gF,gF};
-
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-// const Vertex vertices[]={{aA},{bB},{cC},{dD},{eE},{fF},{gG},{hH}};
-
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 0 \n"
-"precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"precision highp float;precision highp int;precision lowp sampler3D;precision lowp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}; \n";
 const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
@@ -532,7 +518,7 @@ S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -706,7 +692,7 @@ ma();
 return;
 };
 
-}
+};
 
 int main(){
 EM_ASM({
@@ -715,4 +701,4 @@ FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
 return 1;
-}
+};
