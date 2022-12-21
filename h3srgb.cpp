@@ -477,12 +477,12 @@ void strt(){
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
-GLfloat gF=F;
-GLfloat gF0=F0;
-GLfloat gFm1=Fm1;
+float gF=F;
+float gF0=F0;
+float gFm1=Fm1;
 
-// typedef struct{GLfloat XYZW[4];}Vertex;
-typedef struct{std::vector<GLfloat>XYZW;}Vertex;
+typedef struct{float XYZW[4];}Vertex;
+// typedef struct{std::vector<GLfloat>XYZW;}Vertex;
  
 // std::vector<GLfloat>aA={gFm1,gFm1,gF,gF};
 // std::vector<GLfloat>bB={gF,gFm1,gF,gF};
