@@ -482,19 +482,19 @@ GLfloat gF0=F0;
 GLfloat gFm1=Fm1;
 
 // typedef struct{GLfloat XYZW[4];}Vertex;
-typedef struct{std::vector<GLfloat> XYZW;}Vertex;
+typedef struct{std::vector<GLfloat>XYZW;}Vertex;
  
-std::vector<GLfloat>aA={gFm1,gFm1,gF,gF};
-std::vector<GLfloat>bB={gF,gFm1,gF,gF};
-std::vector<GLfloat>cC={gF,gF,gF,gF};
-std::vector<GLfloat>dD={gFm1,gF,gF,gF};
-std::vector<GLfloat>eE={gFm1,gFm1,gFm1,gF};
-std::vector<GLfloat>fF={gF,gFm1,gFm1,gF};
-std::vector<GLfloat>gG={gF,gF,gFm1,gF};
-std::vector<GLfloat>hH={gFm1,gF,gF,gF};
+// std::vector<GLfloat>aA={gFm1,gFm1,gF,gF};
+// std::vector<GLfloat>bB={gF,gFm1,gF,gF};
+// std::vector<GLfloat>cC={gF,gF,gF,gF};
+// std::vector<GLfloat>dD={gFm1,gF,gF,gF};
+// std::vector<GLfloat>eE={gFm1,gFm1,gFm1,gF};
+// std::vector<GLfloat>fF={gF,gFm1,gFm1,gF};
+// std::vector<GLfloat>gG={gF,gF,gFm1,gF};
+// std::vector<GLfloat>hH={gFm1,gF,gF,gF};
 
-// const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-const Vertex vertices[]={{aA},{bB},{cC},{dD},{eE},{fF},{gG},{hH}};
+const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+// const Vertex vertices[]={{aA},{bB},{cC},{dD},{eE},{fF},{gG},{hH}};
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
