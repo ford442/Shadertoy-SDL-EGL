@@ -216,18 +216,17 @@ var lockVid=0;
 function spKey(e){
 if (e.code=='Space'){
 e.preventDefault();
-if (lockVid==0){lockVid=1;};
-else if (lockVid==1){lockVid=0;};
+if(lockVid==0){lockVid=1;}else if(lockVid==1){lockVid=0;};
 };
-if (e.code=='KeyS'){lockVid=1;};
-if (e.code=='KeyW'){lockVid=1;};
-if (e.code=='KeyZ'){lockVid=1;};
-if (e.code=='KeyX'){lockVid=0;};
+if(e.code=='KeyS'){lockVid=1;};
+if(e.code=='KeyW'){lockVid=1;};
+if(e.code=='KeyZ'){lockVid=1;};
+if(e.code=='KeyX'){lockVid=0;};
 };
 
 function spKeyUp(e){
-if (e.code=='KeyS'){lockVid=0;};
-if (e.code=='KeyW'){lockVid=0;};
+if(e.code=='KeyS'){lockVid=0;};
+if(e.code=='KeyW'){lockVid=0;};
 };
 
 const pnnl=document.body;
@@ -235,7 +234,7 @@ pnnl.addEventListener('keydown',spKey);
 pnnl.addEventListener('keyup',spKeyUp);
 
 function loada(){
-if (lockVid!=1){
+if(lockVid!=1){
 loadV.addEventListener("canplay",function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
