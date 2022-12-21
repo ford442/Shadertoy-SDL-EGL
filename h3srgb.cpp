@@ -303,7 +303,8 @@ S();
 };
 return()=>{
 T=true;
-}}});
+}};
+});
 
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
@@ -402,7 +403,7 @@ return;
 };
 
 void renderFrame(){
-glClear(GL_STENCIL_BUFFER_BIT);
+// glClear(GL_STENCIL_BUFFER_BIT);
 t3=t2;
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
@@ -419,8 +420,7 @@ mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
- glClear(GL_DEPTH_BUFFER_BIT);
-
+glClear(GL_DEPTH_BUFFER_BIT);
 // glFlush();
 // nanosleep(&req,&rem);
 iFrame++;
@@ -485,7 +485,8 @@ const char common_shader_header_gles3[]=
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
+"\n uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"\n uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "\n out vec4 fragColor;\n";
 const char fragment_shader_footer_gles3[]=
@@ -642,15 +643,19 @@ glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
-smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
-smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
-smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
-smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
+// smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+// smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
+// smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
+// smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
+// smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+  
+uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
+glUniform1f(uni_srate,44100.0f);
+
 glUniform3f(uni_res,S,S,1.0f);
 glUniform3f(smp_chn_res,S,S,1.0f);
 glClearColor(gF,gF,gF,1.0f);
