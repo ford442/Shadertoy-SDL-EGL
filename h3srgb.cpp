@@ -65,7 +65,7 @@ vv.currentTime+=-(0.016);
 
 var intervalLoop=null;
 var stp;
-let f=true;
+var f=true;
   
 function backForth(stp){
 var a=stp;
