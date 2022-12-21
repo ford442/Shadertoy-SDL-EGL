@@ -65,7 +65,7 @@ vv.currentTime+=-(0.016);
 
 var intervalLoop=null;
 var stp;
-var f=true;
+let f;
   
 function backForth(stp){
 var a=stp;
@@ -77,7 +77,7 @@ vv.currentTime-=0.016;
 }else{
 f=false;
 }};
-if(f==true){
+if(f==false){
 if(vv.currentTime<b){
 vv.currentTime+=0.016;
 }else{
