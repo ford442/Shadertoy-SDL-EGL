@@ -216,7 +216,8 @@ var lockVid=0;
 function spKey(e){
 if (e.code=='Space'){
 e.preventDefault();
-if(lockVid==0){lockVid=1;}else if(lockVid==1){lockVid=0;};
+if(lockVid==0){lockVid=1;};
+if(lockVid==1){lockVid=0;};
 };
 if(e.code=='KeyS'){lockVid=1;};
 if(e.code=='KeyW'){lockVid=1;};
