@@ -11,33 +11,33 @@ for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-}
+};
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
 aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
-}
+};
 aptr[0]=avgSum/32;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
-}
+};
 aptr[100]=minSum/32;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
-}
+};
 aptr[200]=maxSum/32;
 return;
-}
+};
 
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-}
+};
 
-}
+};
 
 EM_JS(void,ma,(),{
 "use strict";
@@ -51,7 +51,7 @@ if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
 vv.currentTime+=-(0.016);
-}
+};
 },16.66);
 };
 
@@ -76,27 +76,27 @@ if(vv.currentTime>a){
 vv.currentTime-=0.016;
 }else{
 f=false;
-  vv.currentTime+=0.016;
-}
-}else if(vv.currentTime<b){
+}};
+if(f==true){
+if(vv.currentTime<b){
 vv.currentTime+=0.016;
 }else{
 f=true;
-}
+}};
 },16.6);
 };
 
 function stpForward(){
 clearInterval(intervalForward);
-}
+};
 
 function stpBack(){
 clearInterval(intervalBackward);
-}
+};
 
 function stpBackForth(){
 clearInterval(intervalLoop);
-}
+};
 
 var Mov=1;
 
@@ -105,19 +105,19 @@ if(e.code=='Space'){
 e.preventDefault();
 if(Mov==1){vv=document.getElementById("mv");Mov=0;vv.pause();}
 else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
-}
+};
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
 var stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
-}
+};
 
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
 if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
-}
+};
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
@@ -229,7 +229,7 @@ R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
+};
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
@@ -241,7 +241,7 @@ var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
-}
+};
 
 let d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -258,7 +258,7 @@ R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
+};
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -276,17 +276,17 @@ var locb=$Bu+1;
 if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
-}
-if($F%32==0){
+};
+if($F%4==0){
 let $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-}
+};
 setTimeout(function(){
 M();
-},16.666);
-}
+},16.66);
+};
 M();
 document.getElementById("di").onclick=function(){
 T=true;
@@ -295,8 +295,8 @@ S();
 return()=>{
 T=true;
 };
-}
-})
+};
+});
 
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
@@ -307,21 +307,21 @@ SDL_PauseAudioDevice(dev,SDL_TRUE);
 SDL_CloseAudioDevice(dev);
 dev=0;
 return;
-}}
+}};
 
 void qu(int rc){
 SDL_Quit();
 return;
-}
+};
 
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
-}
+};
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
-}
+};
 
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
@@ -335,11 +335,11 @@ len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
-}
+};
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
-}
+};
 
 void plt(){
 char flnm[24];
@@ -347,31 +347,31 @@ SDL_FreeWAV(wave.snd);
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
-}
+};
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
-}
+};
 wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 return;
-}
+};
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
-}
+};
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
-}
+};
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
-}}
+}};
 return 0;
-}
+};
 
 void uni(float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
@@ -382,17 +382,17 @@ const float yyy=yy;
 mX=xxx*Size;
 mY=yyy*Size;
 clk_l=false;
-}
+};
 GLfloat mm=S*xx;
 GLfloat nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
-}
+};
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
-}
+};
 
 void renderFrame(){
 glClear(GL_STENCIL_BUFFER_BIT);
@@ -419,7 +419,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 iFrame++;
 // glFinish();
 return;
-}
+};
 
 static const char8_t *read_file(const char *filename){
 char8_t *result=NULL;
@@ -430,34 +430,34 @@ int status=fseek(file,0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
-}
+};
 length=ftell(file);
 status=fseek(file,0,SEEK_SET);
 if(status!=0){
 fclose(file);
 return nullptr;
-}
+};
 result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
-} 
+} ;
 fclose(file);
 return result;
-}
+};
 return nullptr;
-}
+};
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
-}
+};
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
-}
+};
 
 void strt(){
 // emscripten_cancel_main_loop();
@@ -660,24 +660,24 @@ t1=steady_clock::now();
 // glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
-}
+};
 
 extern "C" {
 
 void str(){
 strt();
 return;
-}
+};
 
 void pl(){
 plt();
 return;
-}
+};
 
 void b3(){
 ma();
 return;
-}
+};
 
 }
 
