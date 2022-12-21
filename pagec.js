@@ -1,13 +1,5 @@
 "use strict";
 
-document.getElementById("btn").addEventListener("click",function(){
-Module.ccall("str");
-});
-
-document.getElementById("btn11").addEventListener("click",function(){
-Module.ccall("b3");
-});
-
 document.getElementById("btn10").addEventListener("click",function(){
 document.getElementById("scanvas").height=window.innerHeight;
 // document.getElementById("scanvas").style.height='100vh';
