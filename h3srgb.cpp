@@ -68,21 +68,29 @@ var stp;
 var f;
   
 function backForth(stp){
-var a=stp;
-var b=stp+1.666;
+var a=stp-0.888;
+var b=stp+0.888;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>=a){
 vv.currentTime-=0.016;
 }else{
-var f=false;
-}};
-if(f==false){
+f=false;
 if(vv.currentTime<=b){
 vv.currentTime+=0.016;
 }else{
 var f=true;
-}};
+};};
+if(f==false){
+if(vv.currentTime<=b){
+vv.currentTime+=0.016;
+}else{
+f=true;
+if(vv.currentTime>=a){
+vv.currentTime-=0.016;
+}else{
+var f=false;
+};};
 },16.6);
 };
 
