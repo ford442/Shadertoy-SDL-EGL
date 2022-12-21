@@ -249,12 +249,10 @@ var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
-  
 for (i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 };
-
 let d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -297,8 +295,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 };
 setTimeout(function(){
 M();
-},16.66);
-};
+},16.66)};
 M();
 document.getElementById("di").onclick=function(){
 T=true;
@@ -306,9 +303,7 @@ S();
 };
 return()=>{
 T=true;
-};
-};
-});
+}}});
 
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
@@ -658,7 +653,7 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,1.0f);
 glUniform3f(smp_chn_res,S,S,1.0f);
-glClearColor(gF0,gF0,gF0,0.7f);
+glClearColor(gF,gF,gF,1.0f);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glDisable(GL_BLEND);
