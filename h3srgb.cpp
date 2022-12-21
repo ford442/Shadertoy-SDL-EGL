@@ -493,7 +493,7 @@ std::vector<GLfloat>gG={gF,gF,gFm1,gF};
 std::vector<GLfloat>hH={gFm1,gF,gF,gF};
 
 // const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-const Vertex vertices[]={aA,bB,cC,dD,eE,fF,gG,hH};
+const Vertex vertices[]={{aA},{bB},{cC},{dD},{eE},{fF},{gG},{hH}};
 
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
