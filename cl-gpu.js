@@ -17378,7 +17378,7 @@ return vertexShader;
 }
 
 initContext(){
-const settings={logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true};
+const settings={precision:'highp',preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0};
 return this.canvas.getContext('webgl2',settings);
 }
 
