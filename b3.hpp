@@ -33,6 +33,9 @@ static const char8_t *read_file(const char *filename);
 #include <GL/gl.h>
 #include <GL/glext.h>
 
+EMSCRIPTEN_FULLSCREEN_CANVAS_SCALE 2;
+EMSCRIPTEN_FULLSCREEN_FILTERING 2;
+    
 GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
