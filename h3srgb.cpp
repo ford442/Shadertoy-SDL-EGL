@@ -184,12 +184,12 @@ contx.getExtension('NV_depth_nonlinear');
 contx.disable(gl.DITHER);
 contx.enable(gl.CULL_FACE);
 contx.enable(gl.DEPTH_TEST);
-contx.disable(gl.BLEND);
-contx.disable(gl.STENCIL_TEST);
-contx.disable(gl.SCISSOR_TEST);
+// contx.disable(gl.BLEND);
+// contx.disable(gl.STENCIL_TEST);
+// contx.disable(gl.SCISSOR_TEST);
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c) {return (a+b+c)/3.0;}`;
+const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 /// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return((f+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
@@ -477,9 +477,9 @@ float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
   
-  float vgF=F;
-float vgF0=F0;
-float vgFm1=Fm1;
+std::vector<float>vgF=F;
+std::vector<float>vgF0=F0;
+std::vector<float>vgFm1=Fm1;
   
 #include <vector>
 typedef struct{std::vector<float>XYZW[4];}Vertex;
