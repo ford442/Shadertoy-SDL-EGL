@@ -404,9 +404,9 @@ return;
 
 void renderFrame(){
 // glClear(GL_STENCIL_BUFFER_BIT);
-t3=t2;
+auto t3=t2;
 EMSCRIPTEN_RESULT ret;
-t2=steady_clock::now();
+auto t2=steady_clock::now();
 duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
@@ -680,7 +680,7 @@ glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
-t1=steady_clock::now();
+auto t1=steady_clock::now();
 // glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
