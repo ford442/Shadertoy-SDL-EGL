@@ -477,11 +477,18 @@ float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
   
+  float vgF=F;
+float vgF0=F0;
+float vgFm1=Fm1;
+  
 #include <vector>
 typedef struct{std::vector<float>XYZW[4];}Vertex;
   
-const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-const char common_shader_header_gles3[]=
+// const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+
+  const Vertex vertices[]={{vgFm1,vgFm1,vgF,vgF},{vgF,vgFm1,vgF,vgF},{vgF,vgF,vgF,vgF},{vgFm1,vgF,vgF,vgF},{vgFm1,vgFm1,vgFm1,vgF},{vgF,vgFm1,vgFm1,vgF},{vgF,vgF,vgFm1,vgF},{vgFm1,vgF,vgF,vgF}};
+
+  const char common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
