@@ -42,7 +42,7 @@ GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 using namespace std;
 using namespace std::chrono;
 // steady_clock::time_point t1;
-// steady_clock::time_point t2;
+steady_clock::time_point t2;
 // steady_clock::time_point t3;
 GLuint uni_mse;
 GLuint uni_frm;
