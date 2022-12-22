@@ -18,6 +18,7 @@
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
+
 #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
@@ -40,9 +41,9 @@ void uni(float xx,float yy,GLfloat time,EGLint fram);
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 using namespace std;
 using namespace std::chrono;
-steady_clock::time_point t1;
-steady_clock::time_point t2;
-steady_clock::time_point t3;
+// steady_clock::time_point t1;
+// steady_clock::time_point t2;
+// steady_clock::time_point t3;
 GLuint uni_mse;
 GLuint uni_frm;
 GLuint uni_tme;
