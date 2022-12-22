@@ -478,7 +478,7 @@ float gF0=F0;
 float gFm1=Fm1;
     
 #include <vector>
-typedef struct{<float>XYZW[4];}Vertex;
+typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
