@@ -477,9 +477,9 @@ float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
   
-std::vector<float>vgF=F;
-std::vector<float>vgF0=F0;
-std::vector<float>vgFm1=Fm1;
+std::vector<float>vgF=1.0f;
+std::vector<float>vgF0=0.0f;
+std::vector<float>vgFm1=-1.0f;
   
 #include <vector>
 typedef struct{std::vector<float>XYZW[4];}Vertex;
