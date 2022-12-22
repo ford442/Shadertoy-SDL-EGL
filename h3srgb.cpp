@@ -469,26 +469,18 @@ return shader;
 };
 
 void strt(){
-// emscripten_cancel_main_loop();
+emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
 float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
-  
-std::vector<float>vgF=1.0f;
-std::vector<float>vgF0=0.0f;
-std::vector<float>vgFm1=-1.0f;
-  
+    
 #include <vector>
-typedef struct{std::vector<float>XYZW[4];}Vertex;
-  
-// const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-
-  const Vertex vertices[]={{vgFm1,vgFm1,vgF,vgF},{vgF,vgFm1,vgF,vgF},{vgF,vgF,vgF,vgF},{vgFm1,vgF,vgF,vgF},{vgFm1,vgFm1,vgFm1,vgF},{vgF,vgFm1,vgFm1,vgF},{vgF,vgF,vgFm1,vgF},{vgFm1,vgF,vgF,vgF}};
-
-  const char common_shader_header_gles3[]=
+typedef struct{<float>XYZW[4];}Vertex;
+const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+const char common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
