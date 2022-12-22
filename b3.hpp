@@ -51,7 +51,7 @@ GLuint uni_res;
 GLuint uni_srate;
 GLuint shader;
 
-double Ttime,TtimeDelta;
+float Ttime,TtimeDelta;
 EGLint iFrame,iFps;
 GLsizei s4=4;
 int a,b;
