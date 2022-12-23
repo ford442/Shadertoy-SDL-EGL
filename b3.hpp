@@ -65,9 +65,13 @@ double Ttime,TtimeDelta;
 EGLint iFrame,iFps;
 GLsizei s4=4;
 int a,b;
-float F=1.0;
-float F0=0.0;
-float Fm1=-1.0;
+float F=1.0f;
+float F0=0.0f;
+float Fm1=-1.0f;
+float D=1.0;
+float D0=0.0;
+float Dm1=-1.0;
+
 float mouseX;
 float mouseY;
 float cMouseX;
