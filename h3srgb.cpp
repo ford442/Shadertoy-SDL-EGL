@@ -1,7 +1,3 @@
-
-// 3.00 is interpreted as a double, as opposed to 3.00f which is seen by the compiler as a float.
-
-
 #include "b3.hpp"
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
@@ -199,8 +195,7 @@ const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 /// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
-// const glslAlphe=`float Alphe(float a,float b,float f,float g){return((f+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((g/f)+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return((f+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999999-(((a)-(b))*((a)*(0.999999/(0.999999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
@@ -486,9 +481,8 @@ float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
     
-typedef struct{double XYZW[4];}Vertex;
+typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-// const Vertex vertices[]={{Fm1,Fm1,F,F},{F,Fm1,F,F},{F,F,F,F},{Fm1,F,F,F},{Fm1,Fm1,Fm1,F},{F,Fm1,Fm1,F},{F,F,Fm1,F},{Fm1,F,F,F}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
@@ -671,11 +665,11 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
   
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
-glUniform1f(uni_srate,44100.0);
+glUniform1f(uni_srate,44100.0f);
 
-glUniform3f(uni_res,S,S,1.0);
-glUniform3f(smp_chn_res,S,S,1.0);
-glClearColor(gF,gF,gF,1.0);
+glUniform3f(uni_res,S,S,1.0f);
+glUniform3f(smp_chn_res,S,S,1.0f);
+glClearColor(gF,gF,gF,1.0f);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glEnable(GL_BLEND);
