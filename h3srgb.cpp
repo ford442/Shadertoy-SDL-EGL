@@ -1,12 +1,16 @@
+
+// 3.00 is interpreted as a double, as opposed to 3.00f which is seen by the compiler as a float.
+
+
 #include "b3.hpp"
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+float max=0.0f;
+float min=1.0f;
+float sum=0.0f;
+float avgSum=0.0f;
+float minSum=0.0f;
+float maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -478,12 +482,13 @@ setprecision(9);
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
-float gF=F;
-float gF0=F0;
-float gFm1=Fm1;
+float gF=1.0f;
+float gF0=0.0f;
+float gFm1=-1.0f;
     
-typedef struct{float XYZW[4];}Vertex;
-const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+typedef struct{double XYZW[4];}Vertex;
+// const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+const Vertex vertices[]={{Dm1,Dm1,D,D},{D,Dm1,D,D},{D,D,D,D},{Dm1,D,D,D},{Dm1,Dm1,Dm1,D},{D,Dm1,Dm1,D},{D,D,Dm1,D},{Dm1,D,D,D}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
