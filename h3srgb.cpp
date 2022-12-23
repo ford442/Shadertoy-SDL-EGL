@@ -410,9 +410,9 @@ void renderFrame(){
 auto t3=t2;
 EMSCRIPTEN_RESULT ret;
 auto t2=steady_clock::now();
-duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
+duration<float>time_spanb=duration_cast<duration<float>>(t2-t3);
 TtimeDelta=time_spanb.count();
-duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
+duration<float>time_spana=duration_cast<duration<float>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -665,11 +665,11 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
   
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
-glUniform1f(uni_srate,44100.0f);
+glUniform1f(uni_srate,44100.0);
 
-glUniform3f(uni_res,S,S,1.0f);
-glUniform3f(smp_chn_res,S,S,1.0f);
-glClearColor(gF,gF,gF,1.0f);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
+glClearColor(gF,gF,gF,1.0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glEnable(GL_BLEND);
