@@ -407,9 +407,9 @@ void renderFrame(){
 auto t3=t2;
 EMSCRIPTEN_RESULT ret;
 auto t2=steady_clock::now();
-duration<float>time_spanb=duration_cast<duration<float>>(t2-t3);
+duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
-duration<float>time_spana=duration_cast<duration<float>>(t2-t1);
+duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
