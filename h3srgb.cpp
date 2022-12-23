@@ -671,11 +671,11 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
   
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
-glUniform1f(uni_srate,44100.0f);
+glUniform1f(uni_srate,44100.0);
 
-glUniform3f(uni_res,S,S,1.0f);
-glUniform3f(smp_chn_res,S,S,1.0f);
-glClearColor(gF,gF,gF,1.0f);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
+glClearColor(gF,gF,gF,1.0);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 glEnable(GL_BLEND);
