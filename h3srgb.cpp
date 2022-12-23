@@ -482,9 +482,9 @@ setprecision(9);
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
-float gF=1.0f;
-float gF0=0.0f;
-float gFm1=-1.0f;
+float gF=1.0;
+float gF0=0.0;
+float gFm1=-1.0;
     
 typedef struct{double XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
