@@ -1,9 +1,4 @@
 #include <iomanip>
-setprecision(25);
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -18,6 +13,8 @@ setprecision(25);
 #include <unistd.h>
 #include <SDL2/SDL.h>
 #include "SDL_config.h"
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
