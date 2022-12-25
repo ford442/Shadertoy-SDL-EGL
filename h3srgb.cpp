@@ -736,6 +736,7 @@ return;
 };
 
 int main(){
+setprecision(25);
 EM_ASM({
 "use strict";
 FS.mkdir("/snd");
