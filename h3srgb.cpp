@@ -66,9 +66,9 @@ vv.currentTime+=-(0.016);
 };
 
 let intervalLoop=null;
-let f;
-let a;
-let b;
+var f;
+var a;
+var b;
 let loopLoop;
 function backForth(stp){
 loopLoop=true;
@@ -126,7 +126,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-stp=vv.currentTime;
+var stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 };
