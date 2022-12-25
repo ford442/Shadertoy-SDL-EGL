@@ -73,8 +73,8 @@ let loopLoop;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-1.024;
-b=stp;
+a=stp;
+b=stp+1.024;
   /*
 intervalLoop=setInterval(function(){
 if(loopLoop==true){
