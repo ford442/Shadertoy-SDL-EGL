@@ -65,30 +65,29 @@ vv.currentTime+=-(0.016);
 },16.66);
 };
 
-var intervalLoop=null;
-
+let intervalLoop=null;
   
 function backForth(stp){
-var f=true;
-var a=stp-0.888;
-var b=stp+0.888;
+let f=true;
+let a=stp-0.888;
+let b=stp+0.888;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>=a){
+if(vv.currentTime>a){
 vv.currentTime-=0.016;
 }else{
 f=false;
-if(vv.currentTime<=b){
+if(vv.currentTime<b){
 vv.currentTime+=0.016;
 }else{
 f=true;
 }}};
 if(f==false){
-if(vv.currentTime<=b){
+if(vv.currentTime<b){
 vv.currentTime+=0.016;
 }else{
 f=true;
-if(vv.currentTime>=a){
+if(vv.currentTime>a){
 vv.currentTime-=0.016;
 }else{
 f=false;
@@ -131,7 +130,6 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-  
   
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
