@@ -23,6 +23,7 @@ EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
 
 #define GL_GLEXT_PROTOTYPES 1
+#define EGL_EGLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
 
