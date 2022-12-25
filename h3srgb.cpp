@@ -502,7 +502,6 @@ return shader;
 
 void strt(){
 // emscripten_cancel_main_loop();
-setprecision(12);
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
