@@ -66,12 +66,18 @@ vv.currentTime+=-(0.016);
 };
 
 let intervalLoop=null;
-  
+let f;
+let a;
+let b;
+let loopLoop;
 function backForth(stp){
-let f=true;
-let a=stp-0.888;
-let b=stp+0.888;
+loopLoop=true;
+f=true;
+a=stp-0.888;
+b=stp+0.888;
+  /*
 intervalLoop=setInterval(function(){
+if(loopLoop==true){
 if(f==true){
 if(vv.currentTime>a){
 vv.currentTime-=0.016;
@@ -91,10 +97,11 @@ if(vv.currentTime>a){
 vv.currentTime-=0.016;
 }else{
 f=false;
-}}};
+}}}};
 },16.6);
 };
-
+*/
+};
 function stpForward(){
 clearInterval(intervalForward);
 };
@@ -105,6 +112,7 @@ clearInterval(intervalBackward);
 
 function stpBackForth(){
 clearInterval(intervalLoop);
+loopLoop=false;
 };
 
 var Mov=1;
@@ -296,6 +304,29 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 };
 setTimeout(function(){
 M();
+  
+if(loopLoop==true){
+if(f==true){
+if(vv.currentTime>a){
+vv.currentTime-=0.016;
+}else{
+f=false;
+if(vv.currentTime<b){
+vv.currentTime+=0.016;
+}else{
+f=true;
+}}};
+if(f==false){
+if(vv.currentTime<b){
+vv.currentTime+=0.016;
+}else{
+f=true;
+if(vv.currentTime>a){
+vv.currentTime-=0.016;
+}else{
+f=false;
+}}}};
+  
 },16.66)};
 M();
 document.getElementById("di").onclick=function(){
