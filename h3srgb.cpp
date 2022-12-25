@@ -1,12 +1,12 @@
 #include "b3.hpp"
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+float max=0.0f;
+float min=1.0f;
+float sum=0.0f;
+float avgSum=0.0f;
+float minSum=0.0f;
+float maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -73,7 +73,7 @@ let loopLoop;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-0.888;
+a=stp-1.024;
 b=stp;
   /*
 intervalLoop=setInterval(function(){
