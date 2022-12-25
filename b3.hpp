@@ -1,7 +1,9 @@
+#include <iomanip>
 setprecision(25);
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
+
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -12,8 +14,6 @@ setprecision(25);
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
-
-#include <iomanip>
 
 #include <unistd.h>
 #include <SDL2/SDL.h>
@@ -27,6 +27,7 @@ static const char8_t *read_file(const char *filename);
 #define EGL_EGLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
+#define GL4_PROTOTYPES 1 //maybe??
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
