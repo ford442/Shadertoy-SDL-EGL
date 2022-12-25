@@ -99,10 +99,10 @@ let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile("/shader/shader1.toy",sfil);
-setTimeout(function(){
-document.getElementById("btn7").click();
-// Module.ccall("str");
-},600);
+// setTimeout(function(){
+// document.getElementById("btn7").click();
+Module.ccall("str");
+// },600);
 }};
 ff.send(null);
 };
