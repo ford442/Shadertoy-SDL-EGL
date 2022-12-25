@@ -40,6 +40,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 };
 
 EM_JS(void,ma,(),{
+  
 "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
@@ -81,7 +82,7 @@ if(vv.currentTime<=b){
 vv.currentTime+=0.016;
 }else{
 f=true;
-};};
+}}};
 if(f==false){
 if(vv.currentTime<=b){
 vv.currentTime+=0.016;
@@ -91,7 +92,7 @@ if(vv.currentTime>=a){
 vv.currentTime-=0.016;
 }else{
 f=false;
-};};
+}}};
 },16.6);
 };
 
