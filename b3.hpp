@@ -1,3 +1,5 @@
+#pragma once
+
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
@@ -33,6 +35,8 @@
 #include <webgl/webgl2.h>
 
 #include <SDL2/SDL.h>
+#undef main
+
 #include "SDL_config.h"
 
 #include <emscripten.h>
