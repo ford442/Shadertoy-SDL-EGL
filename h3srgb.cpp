@@ -43,7 +43,7 @@ EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
-  /*
+
 let intervalBackward;
 
 function back(){
@@ -66,7 +66,7 @@ vv.currentTime+=-(0.016);
 
 var intervalLoop=null;
 var stp;
-var f;
+let f;
   
 function backForth(stp){
 var a=stp-0.888;
@@ -80,7 +80,7 @@ f=false;
 if(vv.currentTime<=b){
 vv.currentTime+=0.016;
 }else{
-var f=true;
+f=true;
 };};
 if(f==false){
 if(vv.currentTime<=b){
@@ -90,7 +90,7 @@ f=true;
 if(vv.currentTime>=a){
 vv.currentTime-=0.016;
 }else{
-var f=false;
+f=false;
 };};
 },16.6);
 };
@@ -118,7 +118,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-var stp=vv.currentTime;
+stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 };
@@ -132,7 +132,6 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
   
   
-  */
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -141,9 +140,9 @@ let la=h$*h$*4;
 var pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-var avag=0.750000;
-var min=1.000000;
-var max=0.000000;
+var avag=0.750;
+var min=1.000;
+var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
@@ -195,8 +194,8 @@ const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 /// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((g/f)+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(0.999999-(((a)-(b))*((a)*(0.999999/(0.999999-b)))));}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
+const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
@@ -290,7 +289,7 @@ if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
-if($F%2==0){
+if($F%4==0){
 let $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
@@ -546,15 +545,15 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
+EGL_RED_SIZE,64,
+EGL_GREEN_SIZE,64,
+EGL_BLUE_SIZE,64,
+EGL_ALPHA_SIZE,64,
+EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,0,
-EGL_BUFFER_SIZE,32,
-EGL_SAMPLE_BUFFERS,128,
-EGL_SAMPLES,32,
+EGL_BUFFER_SIZE,64,
+EGL_SAMPLE_BUFFERS,64,
+EGL_SAMPLES,64,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -562,7 +561,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
