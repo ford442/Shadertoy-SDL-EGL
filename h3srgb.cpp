@@ -74,7 +74,7 @@ function backForth(stp){
 loopLoop=true;
 f=true;
 a=stp-0.888;
-b=stp+0.888;
+b=stp;
   /*
 intervalLoop=setInterval(function(){
 if(loopLoop==true){
