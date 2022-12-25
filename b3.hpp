@@ -1,3 +1,4 @@
+setprecision(25);
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
