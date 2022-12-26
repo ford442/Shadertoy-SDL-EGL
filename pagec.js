@@ -3,12 +3,13 @@
 document.getElementById("btn10").addEventListener("click",function(){
 document.getElementById("scanvas").height=window.innerHeight;
 document.getElementById("scanvas").width=window.innerHeight;
+document.getElementById("pmhig").innerHTML=window.innerHeight;
 });
 
 document.getElementById("btn7").addEventListener("click",function(){
-document.getElementById("scanvas").height=window.innerHeight*2;
-document.getElementById("scanvas").width=window.innerHeight*2;
-document.getElementById("pmhig").innerHTML=window.innerHeight*2;
+document.getElementById("scanvas").height=window.innerHeight*4;
+document.getElementById("scanvas").width=window.innerHeight*4;
+document.getElementById("pmhig").innerHTML=window.innerHeight*4;
 Module.ccall("str");
 document.getElementById("btn10").click();
 });
