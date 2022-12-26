@@ -657,6 +657,7 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_
 glEnable(GL_BLEND);
 
 glDisable(GL_DITHER);
+glViewport(0,0,GLint(Size),GLint(Size));
 
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
@@ -715,7 +716,6 @@ glUniform1f(uni_srate,44100.0);
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 auto t1=steady_clock::now();
-// glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
