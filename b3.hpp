@@ -20,6 +20,14 @@
 
 #include <unistd.h>
 
+#include <SDL2/SDL.h>
+#undef main
+
+#include "SDL_config.h"
+
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 
@@ -34,13 +42,6 @@
 
 #include <webgl/webgl2.h>
 
-#include <SDL2/SDL.h>
-#undef main
-
-#include "SDL_config.h"
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
