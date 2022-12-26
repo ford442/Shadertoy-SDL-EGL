@@ -51,7 +51,9 @@ shutDown.postMessage({
 data:222
 });
 });
-let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mic,randSong,randShade;
+
+var tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mic,randSong,randShade;
+
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
 let loadV=document.getElementById("ldv");
@@ -108,7 +110,6 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile("/shader/shader1.toy",sfil);
 setTimeout(function(){
 document.getElementById("btn7").click();
-  
 },500);
 }};
 ff.send(null);
