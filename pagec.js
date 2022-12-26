@@ -13,9 +13,10 @@ document.getElementById("scanvas").height=window.innerHeight*3;
 document.getElementById("scanvas").width=window.innerHeight*3;
 document.getElementById("pmhig").innerHTML=window.innerHeight*3;
 Module.ccall("str");
-  
 document.getElementById("btn10").click();
-  
+Module.ccall("b3");
+let bz=new BroadcastChannel('bez');
+bz.postMessage({data:222});
 });
 
 document.getElementById("btn77").addEventListener("click",function(){
@@ -27,11 +28,10 @@ document.getElementById("btn3").style="background-color:red;position:absolute;di
 document.getElementById("btn6").style="background-color:yellow;position:absolute;display:block;left:3%;top:53%;z-index:999997;border:5px solid green;border-radius:50%;";
 document.getElementById("btn7").style="background-color:red;position:absolute;display:block;left:3%;top:63%;z-index:999997;border:5px solid red;border-radius:50%;";
 document.getElementById("pmhig").innerHTML=2880;
+  
 Module.ccall("str");
 document.getElementById("btn10").click();
-Module.ccall("b3");
-let bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});
+
 });
 
 
