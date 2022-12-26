@@ -13,7 +13,9 @@ document.getElementById("scanvas").height=window.innerHeight*4;
 document.getElementById("scanvas").width=window.innerHeight*4;
 document.getElementById("pmhig").innerHTML=window.innerHeight*4;
 Module.ccall("str");
+  
 document.getElementById("btn10").click();
+  
 });
 
 document.getElementById("btn77").addEventListener("click",function(){
@@ -27,6 +29,8 @@ document.getElementById("btn7").style="background-color:red;position:absolute;di
 document.getElementById("pmhig").innerHTML=2880;
 Module.ccall("str");
 document.getElementById("btn10").click();
+Module.ccall("b3");
+bz.postMessage({data:222});
 });
 
 let bz=new BroadcastChannel('bez');
@@ -104,6 +108,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile("/shader/shader1.toy",sfil);
 setTimeout(function(){
 document.getElementById("btn7").click();
+  
 },500);
 }};
 ff.send(null);
@@ -203,11 +208,8 @@ document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById("isrc").innerHTML=adr;
 mV.play();
 // setTimeout(function(){document.getElementById("btn2").click();},700);
-setTimeout(function(){Module.ccall("b3");},1300);
-setTimeout(function(){
-bz.postMessage({
-data:222
-});},450);
+// setTimeout(function(){Module.ccall("b3");},1300);
+// setTimeout(function(){bz.postMessage({data:222});},450);
 // setTimeout(function(){document.getElementById("btn10").click();},2200);
 // setTimeout(function(){document.getElementById("btn3").click();},700);
 // setTimeout(function(){window.open('./flac');},200);
