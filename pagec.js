@@ -30,10 +30,10 @@ document.getElementById("pmhig").innerHTML=2880;
 Module.ccall("str");
 document.getElementById("btn10").click();
 Module.ccall("b3");
+let bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
 });
 
-let bz=new BroadcastChannel('bez');
 
 function pll(){
 Module.ccall("pl");
