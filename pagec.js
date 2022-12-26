@@ -52,8 +52,8 @@ data:222
 });
 });
 
-var tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,rnum,$sc,$ls,lo,mv,he,wi,$pt,mic,randSong,randShade;
-
+let tsl,slt,$ll,$h,r$,$w,$r,$hi,$lt,$hg,$sc,$ls,lo,mv,he,wi,mic,randSong,randShade;
+var rnum,$pt;
 let $iwid=document.getElementById("iwid");
 let mV=document.getElementById("mv");
 let loadV=document.getElementById("ldv");
@@ -248,7 +248,7 @@ document.getElementById("wid").innerHTML=this.videoWidth;
 document.getElementById("hig").innerHTML=this.videoHeight;
 $sc=this.duration;
 mic=Math.round($sc*1000000);
-var $pt=Math.random()*mic;
+$pt=Math.random()*mic;
 $pt=$pt*1000000;
 $pt=$pt/1000000;
 $pt=Math.round($pt);
@@ -266,7 +266,7 @@ $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 document.getElementById("isrc").innerHTML=$vids[rnum];
 $h=window.innerHeight;
 he=document.getElementById("hig").innerHTML;
