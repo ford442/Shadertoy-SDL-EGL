@@ -1,9 +1,11 @@
 "use strict";
 
 document.getElementById("btn10").addEventListener("click",function(){
+setTimeout(function(){
 document.getElementById("scanvas").height=window.innerHeight;
 document.getElementById("scanvas").width=window.innerHeight;
 document.getElementById("pmhig").innerHTML=window.innerHeight;
+},500);
 });
 
 document.getElementById("btn7").addEventListener("click",function(){
@@ -102,8 +104,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile("/shader/shader1.toy",sfil);
 setTimeout(function(){
 document.getElementById("btn7").click();
-// Module.ccall("str");
-},300);
+},500);
 }};
 ff.send(null);
 };
