@@ -154,7 +154,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float32',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:false,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
+const contx=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:false,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
@@ -326,7 +326,7 @@ vv.currentTime-=0.016;
 }else{
 f=false;
 }}}};
-},16.666)};
+},16.66)};
 M();
 document.getElementById("di").onclick=function(){
 T=true;
@@ -514,7 +514,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;\n";
+"precision mediump float;precision mediump int;precision lowp sampler3D;precision mediump sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
