@@ -266,8 +266,8 @@ contx.getExtension('NV_depth_nonlinear');
 contx.drawingBufferColorSpace="display-p3";
 contx.unpackColorSpace="display-p3";
 
-contx.hint(contx.GENERATE_MIPMAP_HINT,contx.NICEST);
-contx.hint(contx.FRAGMENT_SHADER_DERIVATIVE_HINT,contx.NICEST);
+contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 
 contx.disable(gl.DITHER);
   
@@ -619,7 +619,7 @@ glEnable(GL_DEPTH_TEST);
   
    glBlendColor(gF,gF,gF,1.0);
   //		glEnable(GL_FRAMEBUFFER_SRGB);
-  glEnable(GL_MULTISAMPLE); 
+ // glEnable(GL_MULTISAMPLE); 
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
