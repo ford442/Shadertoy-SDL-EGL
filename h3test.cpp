@@ -555,7 +555,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -617,7 +617,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
-   glBlendColor(gF,gF,gF,1.0);
+   glBlendColor(gF,gF,gF,0.0);
   //		glEnable(GL_FRAMEBUFFER_SRGB);
  // glEnable(GL_MULTISAMPLE); 
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
@@ -627,7 +627,7 @@ glEnable(GL_BLEND);
 
 glDisable(GL_DITHER);
   
-// glViewport(0,0,GLint(Size),GLint(Size));
+glViewport(0,0,GLint(Size),GLint(Size));
 
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
