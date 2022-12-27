@@ -642,8 +642,8 @@ emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
-// emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
-// emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
+emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
+emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
   
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glClearColor(gF,gF,gF,0.0);
