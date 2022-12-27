@@ -511,7 +511,7 @@ return shader;
 };
 
 void strt(){
-// emscripten_cancel_main_loop();
+emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 float gF=F;
