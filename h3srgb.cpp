@@ -60,8 +60,6 @@ opn_aud();
 return;
 };
 
-extern "C"{
-
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -75,8 +73,6 @@ x=e->clientX;
 y=e->clientY;
 }};
 return 0;
-};
-
 };
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
@@ -154,32 +150,7 @@ loopLoop=true;
 f=true;
 a=stp;
 b=stp+1.024;
-  /*
-intervalLoop=setInterval(function(){
-if(loopLoop==true){
-if(f==true){
-if(vv.currentTime>a){
-vv.currentTime-=0.016;
-}else{
-f=false;
-if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
-f=true;
-}}};
-if(f==false){
-if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
-f=true;
-if(vv.currentTime>a){
-vv.currentTime-=0.016;
-}else{
-f=false;
-}}}};
-},16.6);
-};
-*/
+ 
 };
 function stpForward(){
 clearInterval(intervalForward);
@@ -205,7 +176,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-var stp=vv.currentTime;
+stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 };
@@ -218,14 +189,14 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
   
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=parseInt(document.getElementById("wid").innerHTML,10);
+var h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-let $H=Module.HEAPF32.buffer;
-let la=h$*h$*4;
+var $H=Module.HEAPF32.buffer;
+var la=h$*h$*4;
 var pointa=77*la;
-let agav=new Float32Array($H,pointa,300);
-let sz=(h$*h$)/8;
+var agav=new Float32Array($H,pointa,300);
+var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
