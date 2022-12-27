@@ -262,6 +262,12 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('NV_depth_nonlinear');
+
+  
+contx.disable(gl.DITHER);
+contx.enable(gl.CULL_FACE);
+contx.enable(gl.DEPTH_TEST);
+  
 /*
 contx.drawingBufferColorSpace="display-p3";
 contx.unpackColorSpace="display-p3";
