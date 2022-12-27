@@ -116,14 +116,13 @@ shade:
          --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pages.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js cl-gpu.js
 
 paint:
-	 em++ paint.cpp -o p3001.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sMAXIMUM_MEMORY=4096mb -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
+	 em++ castle.cpp -o p3002.js -sFORCE_FILESYSTEM=1 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sASSERTIONS=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -std=gnu++20 \
+	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_stp"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pageg.js --extern-pre-js cl-gpu.js
-
+         --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js gpujs.js
 
 paint2:
 	 em++ paint3.cpp -o p3002.js -sFORCE_FILESYSTEM=1 \
