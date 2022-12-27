@@ -1,11 +1,3 @@
-#pragma once
-
-#define GL_GLEXT_PROTOTYPES 1
-#define EGL_EGLEXT_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
-#define GL3_PROTOTYPES 1
-#define GL4_PROTOTYPES 1 //maybe??
-
 #include <iomanip>
 #include <iostream>
 #include <algorithm>
@@ -19,39 +11,36 @@
 #include <chrono>
 
 #include <unistd.h>
-
 #include <SDL2/SDL.h>
-#undef main
 #include "SDL_config.h"
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+static const char8_t *read_file(const char *filename);
+
+#define GL_GLEXT_PROTOTYPES 1
+#define EGL_EGLEXT_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+#define GL3_PROTOTYPES 1
+#define GL4_PROTOTYPES 1 //maybe??
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
 #include <GLES3/gl3platform.h>
-
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
-
 #include <GL/gl.h>
 #include <GL/glext.h>
-
 #include <webgl/webgl2.h>
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-
-
-static const char8_t *read_file(const char *filename);
 
 GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
-
 void uni(float xx,float yy,GLfloat time,EGLint fram);
-
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 using namespace std;
 using namespace std::chrono;
@@ -103,5 +92,4 @@ void strt();
 void str();
 void pl();
 void b3();
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 }
