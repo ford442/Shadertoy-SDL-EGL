@@ -1,4 +1,4 @@
-#include "b3.hpp"
+#include "b3test.hpp"
 
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
