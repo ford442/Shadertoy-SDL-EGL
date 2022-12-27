@@ -617,7 +617,6 @@ emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glClearColor(gF,gF,gF,0.0);
   
 glDisable(GL_STENCIL_TEST);
@@ -695,6 +694,9 @@ glUniform1f(uni_srate,44100.0);
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 auto t1=steady_clock::now();
+  
+ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
