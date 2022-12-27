@@ -266,20 +266,20 @@ contx.getExtension('NV_depth_nonlinear');
 contx.drawingBufferColorSpace="display-p3";
 contx.unpackColorSpace="display-p3";
 
-contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+contx.hint(contx.GENERATE_MIPMAP_HINT,contx.NICEST);
+contx.hint(contx.FRAGMENT_SHADER_DERIVATIVE_HINT,contx.NICEST);
 
-contx.disable(gl.DITHER);
+contx.disable(contx.DITHER);
   
-contx.disable(gl.CULL_FACE);
+contx.disable(contx.CULL_FACE);
   
-contx.enable(gl.DEPTH_TEST);
+contx.enable(contx.DEPTH_TEST);
   
-contx.disable(gl.BLEND);
+contx.disable(contx.BLEND);
   
-contx.disable(gl.STENCIL_TEST);
+contx.disable(contx.STENCIL_TEST);
   
-contx.disable(gl.SCISSOR_TEST);
+contx.disable(contx.SCISSOR_TEST);
   
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
