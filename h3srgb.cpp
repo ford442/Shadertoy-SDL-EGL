@@ -573,7 +573,7 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
-ctx=emscripten_webgl_create_context("#scanvas",&attr);
+ctx=emscripten_webgl_create_context("#canvas",&attr);
 emscripten_webgl_make_context_current(ctx);
 
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
