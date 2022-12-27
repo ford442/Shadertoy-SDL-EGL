@@ -611,14 +611,14 @@ glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
   
 glFrontFace(GL_CW);
-glEnable(GL_CULL_FACE);
+glDisable(GL_CULL_FACE);
   
 glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
    glBlendColor(gF,gF,gF,1.0);
-  		glEnable(GL_FRAMEBUFFER_SRGB);
+  //		glEnable(GL_FRAMEBUFFER_SRGB);
   glEnable(GL_MULTISAMPLE); 
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
