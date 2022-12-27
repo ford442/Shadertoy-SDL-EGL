@@ -588,14 +588,15 @@ emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
-// emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
+emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
+  
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
   
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glClearColor(gF,gF,gF,0.0);
+glClearColor(gF,gF,gF,1.0);
   
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
@@ -607,7 +608,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
-glBlendColor(gF,gF,gF,1.0);
+// glBlendColor(gF,gF,gF,1.0);
   
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
