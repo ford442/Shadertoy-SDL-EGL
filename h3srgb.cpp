@@ -582,7 +582,7 @@ EGL_ALPHA_SIZE,64,
 EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,256,
+EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,64,
 EGL_NONE
 };
@@ -591,7 +591,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -605,8 +605,12 @@ eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 GLctx=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,GLctx);
+  
+  
 emscripten_webgl_make_context_current(ctx);
+  
+  eglMakeCurrent(display,surface,surface,GLctx);
+
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
@@ -658,15 +662,14 @@ glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
-   glBlendColor(gF,gF,gF,1.0);
-  
+glBlendColor(gF,gF,gF,1.0);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_BLEND);
 
 glDisable(GL_DITHER);
   
-// glViewport(0,0,GLint(Size),GLint(Size));
+glViewport(0,0,GLint(Size),GLint(Size));
 
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
