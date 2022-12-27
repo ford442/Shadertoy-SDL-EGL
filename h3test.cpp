@@ -262,10 +262,10 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('NV_depth_nonlinear');
-
+/*
 contx.drawingBufferColorSpace="display-p3";
 contx.unpackColorSpace="display-p3";
-/*
+
 contx.hint(contx.GENERATE_MIPMAP_HINT,contx.NICEST);
 contx.hint(contx.FRAGMENT_SHADER_DERIVATIVE_HINT,contx.NICEST);
 
