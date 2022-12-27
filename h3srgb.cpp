@@ -580,8 +580,8 @@ eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-// eglMakeCurrent(display,surface,surface,contextegl);
-emscripten_webgl_make_context_current(ctx);
+eglMakeCurrent(display,surface,surface,contextegl);
+// emscripten_webgl_make_context_current(ctx);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
@@ -636,7 +636,7 @@ glEnable(GL_BLEND);
 
 glDisable(GL_DITHER);
   
-// glViewport(0,0,GLint(Size),GLint(Size));
+glViewport(0,0,GLint(Size),GLint(Size));
 
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
