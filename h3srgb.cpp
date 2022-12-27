@@ -60,6 +60,8 @@ opn_aud();
 return;
 };
 
+extern "C"{
+
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -73,6 +75,8 @@ x=e->clientX;
 y=e->clientY;
 }};
 return 0;
+};
+
 };
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
@@ -150,7 +154,32 @@ loopLoop=true;
 f=true;
 a=stp;
 b=stp+1.024;
- 
+  /*
+intervalLoop=setInterval(function(){
+if(loopLoop==true){
+if(f==true){
+if(vv.currentTime>a){
+vv.currentTime-=0.016;
+}else{
+f=false;
+if(vv.currentTime<b){
+vv.currentTime+=0.016;
+}else{
+f=true;
+}}};
+if(f==false){
+if(vv.currentTime<b){
+vv.currentTime+=0.016;
+}else{
+f=true;
+if(vv.currentTime>a){
+vv.currentTime-=0.016;
+}else{
+f=false;
+}}}};
+},16.6);
+};
+*/
 };
 function stpForward(){
 clearInterval(intervalForward);
@@ -176,7 +205,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-stp=vv.currentTime;
+var stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 };
@@ -189,14 +218,14 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
   
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+let w$=parseInt(document.getElementById("wid").innerHTML,10);
+let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var $H=Module.HEAPF32.buffer;
-var la=h$*h$*4;
+let $H=Module.HEAPF32.buffer;
+let la=h$*h$*4;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-var sz=(h$*h$)/8;
+let agav=new Float32Array($H,pointa,300);
+let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -476,7 +505,7 @@ return shader;
 };
 
 void strt(){
-emscripten_cancel_main_loop();
+// emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
@@ -557,11 +586,10 @@ EGL_ALPHA_SIZE,64,
 EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,128,
+EGL_SAMPLE_BUFFERS,256,
 EGL_SAMPLES,64,
 EGL_NONE
 };
-  
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
