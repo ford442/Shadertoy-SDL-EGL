@@ -265,7 +265,7 @@ contx.getExtension('NV_depth_nonlinear');
 
 contx.drawingBufferColorSpace="display-p3";
 contx.unpackColorSpace="display-p3";
-
+/*
 contx.hint(contx.GENERATE_MIPMAP_HINT,contx.NICEST);
 contx.hint(contx.FRAGMENT_SHADER_DERIVATIVE_HINT,contx.NICEST);
 
@@ -280,7 +280,7 @@ contx.disable(contx.BLEND);
 contx.disable(contx.STENCIL_TEST);
   
 contx.disable(contx.SCISSOR_TEST);
-  
+  */
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
