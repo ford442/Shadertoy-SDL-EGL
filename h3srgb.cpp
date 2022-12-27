@@ -576,12 +576,11 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-// emscripten_webgl_make_context_current(ctx);
+// eglInitialize(display,&v3,&v0);
+// eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+// contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+// surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+// eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
@@ -617,6 +616,10 @@ emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
+emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
+emscripten_webgl_make_context_current(ctx);
+
 glClearColor(gF,gF,gF,0.0);
   
 glDisable(GL_STENCIL_TEST);
