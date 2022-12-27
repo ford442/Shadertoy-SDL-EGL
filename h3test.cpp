@@ -617,7 +617,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
-   glBlendColor(gF,gF,gF,0.0);
+   glBlendColor(gF0,gF0,gF0,1.0);
   //		glEnable(GL_FRAMEBUFFER_SRGB);
  // glEnable(GL_MULTISAMPLE); 
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
