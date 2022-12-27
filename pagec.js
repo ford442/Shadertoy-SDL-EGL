@@ -113,6 +113,11 @@ setTimeout(function(){
 
 // document.getElementById("btn7").click();
 },500);
+  setTimeout(function(){
+    Module.ccall("b3");
+
+},500);
+
 }};
 ff.send(null);
 };
