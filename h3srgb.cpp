@@ -387,7 +387,6 @@ T=true;
 }};
 });
 
-
 void uni(float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
 if(ms_l==true){
@@ -517,7 +516,7 @@ iFrame=0;
 clk_l=true;
 // Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 double wi,hi;
-emscripten_get_element_css_size("canvas",&wi,&hi);
+emscripten_get_element_css_size("scanvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
@@ -575,6 +574,8 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
+  emscripten_webgl_make_context_current(ctx);
+
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // eglInitialize(display,&v3,&v0);
 // eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -618,7 +619,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
-emscripten_webgl_make_context_current(ctx);
 
 glClearColor(gF,gF,gF,0.0);
   
