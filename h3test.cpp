@@ -263,11 +263,11 @@ gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 
-gl.drawingBufferColorSpace="display-p3";
-gl.unpackColorSpace="display-p3";
+// gl.drawingBufferColorSpace="display-p3";
+// gl.unpackColorSpace="display-p3";
 
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+// gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 
 gl.disable(gl.DITHER);
   
