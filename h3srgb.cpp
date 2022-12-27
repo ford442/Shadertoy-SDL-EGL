@@ -476,7 +476,7 @@ return shader;
 };
 
 void strt(){
-// emscripten_cancel_main_loop();
+emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
@@ -557,10 +557,11 @@ EGL_ALPHA_SIZE,64,
 EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,256,
+EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,64,
 EGL_NONE
 };
+  
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
