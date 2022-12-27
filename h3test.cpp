@@ -247,7 +247,7 @@ contx.getExtension('KHR_parallel_shader_compile');
 contx.getExtension('OES_draw_buffers_indexed');
 contx.getExtension('OES_element_index_uint');
 contx.getExtension('OES_fbo_render_mipmap');
-contx.getExtension('OES_standard_derivatives');
+// contx.getExtension('OES_standard_derivatives');
 contx.getExtension('OES_vertex_array_object');
 contx.getExtension('WEBGL_blend_equation_advanced_coherent');
 contx.getExtension('WEBGL_depth_texture');
@@ -262,14 +262,24 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('NV_depth_nonlinear');
-  
+
+contx.drawingBufferColorSpace="display-p3";
+contx.unpackColorSpace="display-p3";
+
+contx.hint(contx.GENERATE_MIPMAP_HINT,contx.NICEST);
+contx.hint(contx.FRAGMENT_SHADER_DERIVATIVE_HINT,contx.NICEST);
+
 contx.disable(gl.DITHER);
-contx.enable(gl.CULL_FACE);
+  
+contx.disable(gl.CULL_FACE);
+  
 contx.enable(gl.DEPTH_TEST);
   
-// contx.disable(gl.BLEND);
-// contx.disable(gl.STENCIL_TEST);
-// contx.disable(gl.SCISSOR_TEST);
+contx.disable(gl.BLEND);
+  
+contx.disable(gl.STENCIL_TEST);
+  
+contx.disable(gl.SCISSOR_TEST);
   
 const g=new GPU({canvas:bcanvas,webGl:contx});
 const g2=new GPU();
@@ -573,7 +583,7 @@ emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
-emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
+// emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
 emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
@@ -588,12 +598,12 @@ emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
-// emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
+emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
-  
+  emscripten_webgl_enable_extension(ctx,"GL_ARB_multisample");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glClearColor(gF,gF,gF,0.0);
   
@@ -608,7 +618,8 @@ glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
    glBlendColor(gF,gF,gF,1.0);
-  
+  		glEnable(GL_FRAMEBUFFER_SRGB);
+  glEnable(GL_MULTISAMPLE); 
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
