@@ -43,7 +43,6 @@
 
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
 
 GLfloat x;
@@ -97,6 +96,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame();
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 extern "C"{
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 void strt();
 void str();
 void pl();
