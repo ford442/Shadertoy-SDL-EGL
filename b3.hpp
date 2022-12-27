@@ -20,6 +20,9 @@
 
 #include <unistd.h>
 
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
@@ -38,8 +41,6 @@
 
 #include <webgl/webgl2.h>
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
