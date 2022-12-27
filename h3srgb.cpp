@@ -150,32 +150,7 @@ loopLoop=true;
 f=true;
 a=stp;
 b=stp+1.024;
-  /*
-intervalLoop=setInterval(function(){
-if(loopLoop==true){
-if(f==true){
-if(vv.currentTime>a){
-vv.currentTime-=0.016;
-}else{
-f=false;
-if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
-f=true;
-}}};
-if(f==false){
-if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
-f=true;
-if(vv.currentTime>a){
-vv.currentTime-=0.016;
-}else{
-f=false;
-}}}};
-},16.6);
-};
-*/
+ 
 };
 function stpForward(){
 clearInterval(intervalForward);
@@ -201,7 +176,7 @@ else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
 if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
 if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
 if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
-var stp=vv.currentTime;
+stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 };
@@ -214,14 +189,14 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
   
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=parseInt(document.getElementById("wid").innerHTML,10);
+var h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-let $H=Module.HEAPF32.buffer;
-let la=h$*h$*4;
+var $H=Module.HEAPF32.buffer;
+var la=h$*h$*4;
 var pointa=77*la;
-let agav=new Float32Array($H,pointa,300);
-let sz=(h$*h$)/8;
+var agav=new Float32Array($H,pointa,300);
+var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -533,7 +508,7 @@ GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
 EGLSurface surface;
-EGLContext GLctx;
+EGLContext contextegl;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
@@ -603,9 +578,9 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-GLctx=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,GLctx);
+eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -642,9 +617,6 @@ emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
-emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
-  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glClearColor(gF,gF,gF,0.0);
   
@@ -658,8 +630,6 @@ glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
   
-   glBlendColor(gF,gF,gF,1.0);
-  
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_BLEND);
@@ -671,14 +641,10 @@ glDisable(GL_DITHER);
 nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-  
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
-  
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-  
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-  
 nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 nanosleep(&req,&rem);
