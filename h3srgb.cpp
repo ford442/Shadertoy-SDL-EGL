@@ -60,6 +60,8 @@ opn_aud();
 return;
 };
 
+extern "C"{
+
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -73,6 +75,8 @@ x=e->clientX;
 y=e->clientY;
 }};
 return 0;
+};
+
 };
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
