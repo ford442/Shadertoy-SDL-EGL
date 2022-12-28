@@ -154,32 +154,7 @@ loopLoop=true;
 f=true;
 a=stp;
 b=stp+1.024;
-  /*
-intervalLoop=setInterval(function(){
-if(loopLoop==true){
-if(f==true){
-if(vv.currentTime>a){
-vv.currentTime-=0.016;
-}else{
-f=false;
-if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
-f=true;
-}}};
-if(f==false){
-if(vv.currentTime<b){
-vv.currentTime+=0.016;
-}else{
-f=true;
-if(vv.currentTime>a){
-vv.currentTime-=0.016;
-}else{
-f=false;
-}}}};
-},16.6);
-};
-*/
+
 };
 function stpForward(){
 clearInterval(intervalForward);
@@ -267,6 +242,9 @@ gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
+
+gl.hint(gl.GENERATE_MIPMAP_HINT, gl.NICEST);
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES, gl.NICEST);
 
 gl.drawingBufferColorSpace='display-p3';
 gl.unpackColorSpace='display-p3';
@@ -651,18 +629,18 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_multisample");
   
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glClearColor(gF,gF,gF,1.0);
+glClearColor(gF,gF,gF,0.0);
 glEnable(MULTISAMPLE_ARB);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
-  
+
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
   
 glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
-  
+
 glBlendColor(gF,gF,gF,1.0);
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
