@@ -549,10 +549,10 @@ eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-  eglMakeCurrent(display,surface,surface,contextegl);
 
 emscripten_webgl_make_context_current(ctx);
-  
+    eglMakeCurrent(display,surface,surface,contextegl);
+
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -598,7 +598,7 @@ glEnable(GL_CULL_FACE);
 glDepthFunc(GL_LESS);
    glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
-   glBlendColor(gF,gF,gF,0.5);
+ //  glBlendColor(gF,gF,gF,0.5);
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
