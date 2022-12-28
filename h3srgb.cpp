@@ -359,7 +359,7 @@ T=true;
 }};
 });
 
-void uni(float xx,float yy,GLfloat time,short int fram){
+void uni(float xx,float yy,GLfloat time,int fram){
 GLfloat mX,mY;
 if(ms_l==true){
 if(clk_l==true){
@@ -411,7 +411,7 @@ char8_t *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
 if(file){
-short int status=fseek(file,0,SEEK_END);
+int status=fseek(file,0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
@@ -487,7 +487,7 @@ clk_l=true;
 // Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 double wi,hi;
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=(short int)hi;
+Size=(int)hi;
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
