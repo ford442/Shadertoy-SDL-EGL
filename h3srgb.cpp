@@ -211,7 +211,7 @@ gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
 gl.disable(gl.CULL_FACE);
 gl.disable(gl.DEPTH_TEST);
-gl.disable(gl.BLEND);
+gl.enable(gl.BLEND);
 gl.disable(gl.STENCIL_TEST);
 gl.disable(gl.SCISSOR_TEST);
 const g=new GPU({canvas:bcanvas,webGl:gl});
