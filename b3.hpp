@@ -43,7 +43,7 @@
 #include <emscripten/html5.h>
 
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
 static const char8_t *read_file(const char *filename);
 
