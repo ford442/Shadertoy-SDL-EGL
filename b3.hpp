@@ -20,13 +20,15 @@
 
 #include <unistd.h>
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
 
+#include <webgl/webgl2.h>
+
+#include <GL/gl.h>
+#include <GL/glext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
@@ -36,10 +38,8 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-#include <GL/gl.h>
-#include <GL/glext.h>
-
-#include <webgl/webgl2.h>
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
