@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
+#include <cfloat>
+#include <climits>
 
 #include <unistd.h>
 
