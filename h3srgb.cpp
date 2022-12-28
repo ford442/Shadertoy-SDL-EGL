@@ -592,12 +592,13 @@ glEnable(GL_CULL_FACE);
 glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
-// glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-  glBlendEquation(GL_MAX);
+ // glBlendEquation(GL_FUNC_ADD);
  glBlendColor(F0,F0,F0,0.7);
 
 glDisable(GL_DITHER);
