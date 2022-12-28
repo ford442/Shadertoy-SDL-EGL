@@ -588,7 +588,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
   // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-glClearColor(1.0,1.0,1.0,1.0);
+glClearColor(gF,gF,gF,1.0);
 // glEnable(MULTISAMPLE_ARB);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
