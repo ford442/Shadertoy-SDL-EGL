@@ -422,7 +422,7 @@ return;
 };
 
 void renderFrame(){
-// glClear(GL_STENCIL_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
 auto t3=t2;
 EMSCRIPTEN_RESULT ret;
 auto t2=steady_clock::now();
@@ -488,7 +488,8 @@ return shader;
 };
 
 void strt(){
-// emscripten_cancel_main_loop();
+nanosleep(&req,&rem);
+emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
@@ -500,6 +501,7 @@ typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
+"#define GL_ES 1\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
@@ -536,8 +538,8 @@ S=(GLfloat)Size;
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -561,7 +563,6 @@ EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
-
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
@@ -594,100 +595,92 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 emscripten_webgl_make_context_current(ctx);
 eglMakeCurrent(display,surface,surface,contextegl);
-
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
+emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
+emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
+emscripten_webgl_enable_extension(ctx,"WEBGL_draw_buffers");
+emscripten_webgl_enable_extension(ctx,"WEBGL_provoking_vertex");
+emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
+emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
+emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
+emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
+emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
+emscripten_webgl_enable_extension(ctx,"OES_depth32");
+emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
+emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
+emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
 emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
-emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
-emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
-emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
-emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
-emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
-emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
-emscripten_webgl_enable_extension(ctx,"WEBGL_draw_buffers");
-emscripten_webgl_enable_extension(ctx,"WEBGL_provoking_vertex");
 emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB");
-emscripten_webgl_enable_extension(ctx,"OES_depth32");
-emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
-emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
-emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
-emscripten_webgl_enable_extension(ctx,"OES_single_precision");
+emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
+emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
+emscripten_webgl_enable_extension(ctx,"GL_ARB_multisample");
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(ctx,"GL_ARB_multisample");
-  
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
+  // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glClearColor(gF,gF,gF,0.0);
 glEnable(MULTISAMPLE_ARB);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
-
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
-  
 glDepthFunc(GL_LESS);
-glClearDepth(1.0);
+   glClearDepth(0.5);
 glEnable(GL_DEPTH_TEST);
-
-glBlendColor(gF,gF,gF,1.0);
+   glBlendColor(gF,gF,gF,0.5);
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_BLEND);
-
 glDisable(GL_DITHER);
-  
 glViewport(0,0,GLint(Size),GLint(Size));
-
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
-nanosleep(&req,&rem);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 glAttachShader(shd_prg,vtx);
 nanosleep(&req,&rem);
 glAttachShader(shd_prg,frag);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 atb_pos=0;
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 glUseProgram(shd_prg);
-nanosleep(&req,&rem);
+ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -705,10 +698,8 @@ uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-  
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 glUniform1f(uni_srate,44100.0);
-
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 auto t1=steady_clock::now();
@@ -717,30 +708,13 @@ return;
 };
 
 extern "C" {
-
-void str(){
-strt();
-return;
-};
-
-void pl(){
-plt();
-return;
-};
-
-void b3(){
-ma();
-return;
-};
-
+void str(){strt();return;};
+void pl(){plt();return;};
+void b3(){ma();return;};
 };
 
 int main(){
 setprecision(25);
-EM_ASM({
-"use strict";
-FS.mkdir("/snd");
-FS.mkdir("/shader");
-});
+EM_ASM({"use strict";FS.mkdir("/snd");FS.mkdir("/shader");});
 return 1;
 };
