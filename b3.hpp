@@ -5,10 +5,7 @@
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1 //maybe??
 
-#include <iomanip>
-
 #include <iostream>
-
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -21,15 +18,15 @@
 
 #include <unistd.h>
 
-
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
 
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
 #include <webgl/webgl2.h>
 
-#include <GL/gl.h>
-#include <GL/glext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
@@ -39,9 +36,8 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
+#include <GL/gl.h>
+#include <GL/glext.h>
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
