@@ -244,7 +244,7 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-gl.enable(MULTISAMPLE_ARB);
+// gl.enable(MULTISAMPLE_ARB);
 gl.hint(gl.GENERATE_MIPMAP_HINT, gl.NICEST);
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES, gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
