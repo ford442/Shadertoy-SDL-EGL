@@ -395,11 +395,12 @@ ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 mouseX=x/S;
 mouseY=(S-y)/S;
 // glClear(GL_STENCIL_BUFFER_BIT);
-// glClear(GL_DEPTH_BUFFER_BIT);
-  glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
 
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
+    glClear(GL_COLOR_BUFFER_BIT);
+
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 // glFlush();
 // nanosleep(&req,&rem);
@@ -460,7 +461,7 @@ const char common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const char fragment_shader_header_gles3[]=
@@ -549,9 +550,9 @@ eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+ //   eglMakeCurrent(display,surface,surface,contextegl);
 
 emscripten_webgl_make_context_current(ctx);
-    eglMakeCurrent(display,surface,surface,contextegl);
 
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -589,7 +590,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
   // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-glClearColor(gF,gF,gF,1.0);
+// glClearColor(gF,gF,gF,1.0);
 // glEnable(MULTISAMPLE_ARB);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
@@ -598,7 +599,7 @@ glEnable(GL_CULL_FACE);
 glDepthFunc(GL_LESS);
    glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
- //  glBlendColor(gF,gF,gF,0.5);
+ glBlendColor(gF,gF,gF,1.0);
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
