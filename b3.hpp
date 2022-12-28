@@ -42,6 +42,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
+typedef struct{float XYZW[4];}Vertex;
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
