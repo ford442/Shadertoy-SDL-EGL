@@ -51,7 +51,7 @@ GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
 
-void uni(float xx,float yy,GLfloat time,short int fram);
+void uni(float xx,float yy,GLfloat time,int fram);
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
@@ -76,7 +76,7 @@ GLuint uni_res;
 GLuint uni_srate;
 GLuint shader;
 float Ttime,TtimeDelta;
-short int iFrame,iFps;
+int iFrame,iFps;
 GLsizei s4=4;
 int a,b;
 float F=1.0f;
@@ -89,7 +89,7 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-short int Size;
+int Size;
 GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
@@ -108,6 +108,6 @@ void strt();
 void str();
 void pl();
 void b3();
-void nano(short int Fnum,int leng,float *ptr,float *aptr);
+void nano(int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 };
