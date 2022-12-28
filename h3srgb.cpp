@@ -453,11 +453,9 @@ EGLint v0=0,v3=3;
 float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
-typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
-"#extension all : enable\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
