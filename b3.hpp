@@ -22,10 +22,6 @@
 #undef main
 #include "SDL_config.h"
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
-#include <webgl/webgl2.h>
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
@@ -38,6 +34,11 @@
 
 #include <GL/gl.h>
 #include <GL/glext.h>
+
+#include <webgl/webgl2.h>
+
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
