@@ -43,7 +43,7 @@
 #include <emscripten/html5.h>
 
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
+void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
 static const char8_t *read_file(const char *filename);
 
@@ -51,7 +51,7 @@ GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
 
-void uni(float xx,float yy,GLfloat time,int fram);
+void uni(float xx,float yy,GLfloat time,short int fram);
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
@@ -89,7 +89,7 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-int Size;
+short int Size;
 GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
@@ -108,6 +108,6 @@ void strt();
 void str();
 void pl();
 void b3();
-void nano(int Fnum,int leng,float *ptr,float *aptr);
+void nano(short int Fnum,int leng,float *ptr,float *aptr);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 };
