@@ -457,7 +457,7 @@ typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
-"#define GL_ES 1\n"
+"#define GL_ES=1\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
@@ -587,14 +587,14 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
   // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-// glClearColor(gF,gF,gF,0.5);
+glClearColor(gF,gF,gF,1.0);
 // glEnable(MULTISAMPLE_ARB);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_SCISSOR_TEST);
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
 glDepthFunc(GL_LESS);
-   glClearDepth(0.5);
+   glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
    glBlendColor(gF,gF,gF,0.5);
 glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
