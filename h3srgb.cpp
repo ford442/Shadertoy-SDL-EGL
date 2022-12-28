@@ -246,7 +246,7 @@ gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
 // gl.enable(MULTISAMPLE_ARB);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES,gl.FASTEST);
+// gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES,gl.FASTEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
