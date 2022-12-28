@@ -671,7 +671,6 @@ void b3(){ma();return;};
 };
 
 int main(){
-setprecision(25);
 EM_ASM({"use strict";FS.mkdir("/snd");FS.mkdir("/shader");});
 return 0;
 };
