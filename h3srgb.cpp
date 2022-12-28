@@ -3,24 +3,13 @@
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
-void cls_aud(){
-if(dev!=0){
-SDL_PauseAudioDevice(dev,SDL_TRUE);
-SDL_CloseAudioDevice(dev);
-dev=0;
-return;
-}};
+void cls_aud(){if(dev!=0){SDL_PauseAudioDevice(dev,SDL_TRUE);SDL_CloseAudioDevice(dev);dev=0;return;}};
 
-void qu(int rc){
-SDL_Quit();
-return;
-};
+void qu(int rc){SDL_Quit();return;};
 
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
-if(!dev){
-SDL_FreeWAV(wave.snd);
-};
+if(!dev){SDL_FreeWAV(wave.snd);};
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 };
@@ -62,7 +51,7 @@ return;
 
 extern "C"{
 
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_call(short int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -79,14 +68,14 @@ return 0;
 
 };
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
+void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
-for (int i=0;i<leng;i++){
+for (short int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
@@ -95,15 +84,15 @@ sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
 aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
+for(short int i=33;i<65;i++){
 avgSum+=aptr[i];
 };
 aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
+for(short int i=33;i<65;i++){
 minSum+=aptr[i+100];
 };
 aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
+for(short int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 };
 aptr[200]=maxSum/32;
@@ -111,21 +100,14 @@ return;
 };
 
 extern "C" {
-
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-};
-
+void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,aptr);};
 };
 
 EM_JS(void,ma,(),{
-  
 "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
-
 let intervalBackward;
-
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -135,15 +117,12 @@ vv.currentTime+=-(0.016);
 };
 },16.666);
 };
-
 let intervalForward;
-
 function forward(){
 intervalForward=setInterval(function(){
 vv.currentTime+=-(0.016);
 },16.666);
 };
-
 let intervalLoop=null;
 var f;
 var a;
@@ -153,24 +132,12 @@ function backForth(stp){
 loopLoop=true;
 f=true;
 a=stp;
-b=stp+1.024;
-
+b=stp+1.2;
 };
-function stpForward(){
-clearInterval(intervalForward);
-};
-
-function stpBack(){
-clearInterval(intervalBackward);
-};
-
-function stpBackForth(){
-clearInterval(intervalLoop);
-loopLoop=false;
-};
-
+function stpForward(){clearInterval(intervalForward);};
+function stpBack(){clearInterval(intervalBackward);};
+function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;};
 var Mov=1;
-
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -184,15 +151,12 @@ var stp=vv.currentTime;
 backForth(stp);}
 if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 };
-
 function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
 if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 };
-
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-  
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -242,23 +206,18 @@ gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
-
 gl.getExtension('GL_ARB_multisample');
 gl.disable(MULTISAMPLE_ARB);
-
 gl.hint(gl.GENERATE_MIPMAP_HINT, gl.NICEST);
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES, gl.NICEST);
-
 gl.drawingBufferColorSpace='display-p3';
 gl.unpackColorSpace='display-p3';
-  
 gl.disable(gl.DITHER);
 gl.disable(gl.CULL_FACE);
 gl.disable(gl.DEPTH_TEST);
 gl.disable(gl.BLEND);
 gl.disable(gl.STENCIL_TEST);
 gl.disable(gl.SCISSOR_TEST);
-  
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -400,7 +359,7 @@ T=true;
 }};
 });
 
-void uni(float xx,float yy,GLfloat time,int fram){
+void uni(float xx,float yy,GLfloat time,short int fram){
 GLfloat mX,mY;
 if(ms_l==true){
 if(clk_l==true){
@@ -422,7 +381,6 @@ return;
 };
 
 void renderFrame(){
-glClear(GL_STENCIL_BUFFER_BIT);
 auto t3=t2;
 EMSCRIPTEN_RESULT ret;
 auto t2=steady_clock::now();
@@ -436,15 +394,14 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
 uni(mouseX,mouseY,Ttime,iFrame);
-//   glDisable(GL_BLEND);
+iFrame++;
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-//  glEnable(GL_BLEND);
-// glClear(GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 // glFlush();
 // nanosleep(&req,&rem);
-iFrame++;
 // glFinish();
 return;
 };
@@ -454,7 +411,7 @@ char8_t *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
 if(file){
-int status=fseek(file,0,SEEK_END);
+short int status=fseek(file,0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
@@ -469,7 +426,7 @@ result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
-} ;
+};
 fclose(file);
 return result;
 };
@@ -496,7 +453,6 @@ EGLint v0=0,v3=3;
 float gF=F;
 float gF0=F0;
 float gFm1=Fm1;
-    
 typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
@@ -532,7 +488,7 @@ clk_l=true;
 // Size=EM_ASM_INT({return parseInt(window.innerHeight);});
 double wi,hi;
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=(int)hi;
+Size=(short int)hi;
 S=(GLfloat)Size;
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
@@ -713,8 +669,8 @@ void pl(){plt();return;};
 void b3(){ma();return;};
 };
 
-int main(){
+void main(){
 setprecision(25);
 EM_ASM({"use strict";FS.mkdir("/snd");FS.mkdir("/shader");});
-return 1;
+return;
 };
