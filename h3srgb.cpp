@@ -419,7 +419,7 @@ T=true;
 }};
 });
 
-void uni(float xx,float yy,GLfloat time,EGLint fram){
+void uni(float xx,float yy,GLfloat time,int fram){
 GLfloat mX,mY;
 if(ms_l==true){
 if(clk_l==true){
