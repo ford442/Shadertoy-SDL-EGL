@@ -1,4 +1,3 @@
-#pragma once
 
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
@@ -7,7 +6,9 @@
 #define GL4_PROTOTYPES 1 //maybe??
 
 #include <iomanip>
+
 #include <iostream>
+
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -42,8 +43,7 @@
 #include <emscripten/html5.h>
 
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-
+void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
 static const char8_t *read_file(const char *filename);
 
@@ -51,7 +51,7 @@ GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
 
-void uni(float xx,float yy,GLfloat time,int fram);
+void uni(float xx,float yy,GLfloat time,short int fram);
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
@@ -76,7 +76,7 @@ GLuint uni_res;
 GLuint uni_srate;
 GLuint shader;
 float Ttime,TtimeDelta;
-int iFrame,iFps;
+short int iFrame,iFps;
 GLsizei s4=4;
 int a,b;
 float F=1.0f;
@@ -89,7 +89,7 @@ float mouseX;
 float mouseY;
 float cMouseX;
 float cMouseY;
-int Size;
+short int Size;
 GLfloat S;
 EM_BOOL clk_l;
 GLsizei i;
@@ -108,5 +108,6 @@ void strt();
 void str();
 void pl();
 void b3();
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+void nano(short int Fnum,int leng,float *ptr,float *aptr);
+EM_BOOL mouse_call(short int eventType,const EmscriptenMouseEvent *e,void *userData);
 };
