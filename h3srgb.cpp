@@ -112,7 +112,7 @@ var loopLoop;
 
 function backForth(stp){
 loopLoop=true;
-f=true;
+f=false;
 a=stp;
 b=stp+1.2;
 }
