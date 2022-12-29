@@ -229,7 +229,7 @@ gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
  
-gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.DST_COLOR,gl.ONE_MINUS_SRC_ALPHA);
+gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
  
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
@@ -589,7 +589,7 @@ glEnable(GL_BLEND);
 // glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
  
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
