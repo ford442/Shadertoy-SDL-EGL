@@ -101,9 +101,9 @@ void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,a
 
 EM_JS(void,ma,(),{
 
-'use strict';
+"use strict";
 const pnnl=document.body;
-var vv=document.getElementById('mv');
+var vv=document.getElementById("mv");
 var intervalLoop=null;
 var f;
 var loopLoop;
@@ -122,20 +122,20 @@ if(e.code=='Space'){
 e.preventDefault();
 }
 if (e.code=='KeyZ'){
-vv=document.getElementById('mv');
+vv=document.getElementById("mv");
 vv.pause();
 var stp=vv.currentTime;
 backForth(stp);
 }
 if(e.code=='KeyX'){
-vv=document.getElementById('mv');
+vv=document.getElementById("mv");
 stpBackForth();
 vv.play();
 }
 }
 pnnl.addEventListener('keydown',doKey);
-var w$=parseInt(document.getElementById('wid').innerHTML,10);
-var h$=parseInt(document.getElementById('hig').innerHTML,10);
+var w$=parseInt(document.getElementById("wid").innerHTML,10);
+var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
@@ -147,8 +147,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-const bcanvas=document.getElementById('bcanvas');
-const gl=bcanvas.getContext('webgl2',{colorType:'float32',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:false,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
+const bcanvas=document.getElementById("bcanvas");
+const gl=bcanvas.getContext("webgl2",{colorType:'float32',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:false,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -164,14 +164,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic('speed').setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-// }).setTactic('precision').setPrecision('single').setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-}).setTactic('precision').setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
-// }).setTactic('precision').setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+// }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+// }).setTactic("precision").setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
@@ -187,7 +187,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic('precision').setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -226,7 +226,7 @@ gl.getExtension('GL_ARB_multisample');
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
-gl.unpackColorSpace='display-p3';
+// gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
  
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
@@ -242,9 +242,9 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
 // gl.enable(gl.BLEND);
 // gl.disable(gl.STENCIL_TEST);
 // gl.disable(gl.SCISSOR_TEST);
-w$=parseInt(document.getElementById('wid').innerHTML,10);
-h$=parseInt(document.getElementById('hig').innerHTML,10);
-vv=document.getElementById('mv');
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
+vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
@@ -256,7 +256,7 @@ agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval('var point'+j+'='+i+'*la;var $'+j+'=new Float32Array($H,point'+j+',la);');
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -267,11 +267,11 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval('var point'+j+'='+i+'*la;var $'+j+'=new Float32Array($H,point'+j+',la);$'+j+'.set($$1);');
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById('wid').innerHTML,10);
-h$=parseInt(document.getElementById('hig').innerHTML,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
@@ -283,7 +283,7 @@ var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval('var point'+j+'='+i+'*la;var $'+j+'=new Float32Array($H,point'+j+',la);');
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -300,14 +300,14 @@ var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval('if ($F=='+i+'){var $r'+i+'=t($'+i+');r($r'+i+');}');
-eval('if ($F=='+i+'){var $$'+$Bu+'=t(vv);$'+$Bu+'.set($$'+$Bu+');$F='+loca+';$Bu='+locb+';}');
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
+eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
 if($F%8==0){
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-Module.ccall('nano',null,['Number','Number','Number','Number'],[$F,sz,pointb,pointa]);
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 };
 setTimeout(function(){
 M();
@@ -335,7 +335,7 @@ f=false;
 }}}};
 },16.666666)}
 M();
-document.getElementById('di').onclick=function(){
+document.getElementById("di").onclick=function(){
 T=true;
 S();
 };
@@ -378,13 +378,12 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
- glClear(GL_DEPTH_BUFFER_BIT);
+ glClear(GL_COLOR_BUFFER_BIT);
 
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
- glClear(GL_COLOR_BUFFER_BIT);
-
-// glClear(GL_STENCIL_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 // glFlush();
 // // nanosleep(&req,&rem);
@@ -508,7 +507,7 @@ EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,0,
+EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,128,
 EGL_SAMPLES,32,
@@ -516,7 +515,7 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
