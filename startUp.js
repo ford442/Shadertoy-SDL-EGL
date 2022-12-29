@@ -1,19 +1,18 @@
-"use strict";
-
-const statusElement=document.getElementById("status");
-const progressElement=document.getElementById("progress");
+'use strict';
+const statusElement=document.getElementById('status');
+const progressElement=document.getElementById('progress');
 var Module={
 preRun:[],
 postRun:[],
 print:(function(){
-const element=document.getElementById("output");
+const element=document.getElementById('output');
 if(element){element.value='';};
 return function(text){
 if(arguments.length>1)
 text=Array.prototype.slice.call(arguments).join(' ');
 // console.log(text);
 if(element){
-element.value+=text+"\n";
+element.value+=text+'\n';
 element.scrollTop=element.scrollHeight;
 }}})(),
 printErr:function(text){
@@ -25,8 +24,8 @@ dump(text+'\n');
 console.error(text);
 }},
 canvas:(function(){
-const sscanvas=document.getElementById("bcanvas");
-sscanvas.addEventListener("webglcontextlost",function(e){
+const sscanvas=document.getElementById('bcanvas');
+sscanvas.addEventListener('webglcontextlost',function(e){
 alert('WebGL context lost. You will need to reload the page.');
 e.preventDefault();
 },false);
@@ -63,10 +62,10 @@ monitorRunDependencies:function(left){
 this.totalDependencies=Math.max(this.totalDependencies,left);
 Module.setStatus(left?'Preparing...('+(this.totalDependencies-left)+'/'+this.totalDependencies+')':'All downloads complete.');
 }};
-Module.setStatus("|Download|");
+Module.setStatus('|Download|');
 window.onerror=function(event){
 Module.setStatus('Exception thrown,see JavaScript console');
 Module.setStatus=function(text){
 if(text){
-Module.printErr("[post-exception status]"+text);
+Module.printErr('[post-exception status]'+text);
 }}};
