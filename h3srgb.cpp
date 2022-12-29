@@ -222,15 +222,20 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
+ 
 // gl.enable(MULTISAMPLE_ARB);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES,gl.NICEST);
+ 
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
- 
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
  
+ 
+gl.blendFuncColor(1.0,1.0,1.0,0.777);
+// gl.blendFuncColor(0.0,0.0,0.0,0.777);
+
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
 // gl.blendEquationSeparate(gl.FUNC_ADD,gl.FUNC_SUBTRACT);
@@ -242,6 +247,7 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
 // gl.enable(gl.BLEND);
 // gl.disable(gl.STENCIL_TEST);
 // gl.disable(gl.SCISSOR_TEST);
+ 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -534,7 +540,6 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 
 eglMakeCurrent(display,surface,surface,contextegl);
-
 emscripten_webgl_make_context_current(ctx);
 
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
@@ -573,7 +578,10 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
+ 
+ 
 glClearColor(F,F,F,0.777);
+ 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(MULTISAMPLE_ARB);
 // glDisable(GL_STENCIL_TEST);
@@ -583,23 +591,32 @@ glEnable(GL_CULL_FACE);
 glDepthFunc(GL_LESS);
 glClearDepth(1.0);
 glEnable(GL_DEPTH_TEST);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
 glEnable(GL_BLEND);
+
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+glBlendEquationSeparate(GL_MIN,GL_MAX);
+ 
+// glBlendColor(F,F,F,0.777);
+glBlendColor(F,F,F,0.777);
+ 
+glDisable(GL_DITHER);
+glViewport(0,0,GLint(Size),GLint(Size));
+ 
+ 
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 //   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
 // glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
  
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-glBlendColor(F,F,F,0.777);
-glDisable(GL_DITHER);
-glViewport(0,0,GLint(Size),GLint(Size));
+
+ 
  // nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
