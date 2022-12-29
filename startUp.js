@@ -1,12 +1,12 @@
 "use strict";
 
-var statusElement=document.getElementById("status");
-var progressElement=document.getElementById("progress");
+const statusElement=document.getElementById("status");
+const progressElement=document.getElementById("progress");
 var Module={
 preRun:[],
 postRun:[],
 print:(function(){
-var element=document.getElementById("output");
+const element=document.getElementById("output");
 if(element){element.value='';};
 return function(text){
 if(arguments.length>1)
