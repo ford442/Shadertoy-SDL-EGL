@@ -95,7 +95,7 @@ aptr[200]=maxSum/32;
 return;
 };
 
-extern 'C' {
+extern "C" {
 void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,aptr);};
 };
 
