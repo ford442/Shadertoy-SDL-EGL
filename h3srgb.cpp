@@ -165,30 +165,30 @@ function doKey(e) {
     g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
     g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
     const R=g2.createKernel(function(tv){
-        var Pa=tv[this.thread.y][this.thread.x*4];
+        const Pa=tv[this.thread.y][this.thread.x*4];
         return Ave(Pa[0],Pa[1],Pa[2]);
     }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
     const t=g.createKernel(function(v){
-        var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-        var av$=Ave(P[0],P[1],P[2]);
+        const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+        const av$=Ave(P[0],P[1],P[2]);
         return[P[0],P[1],P[2],av$];
 // }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
     }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 // }).setTactic("precision").setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
     const r=g.createKernel(function(f){
-        var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+        const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 // var $fmax=this.constants.fmax;
 // var $fmin=this.constants.fmin;
-        var $amax=this.constants.amax;
-        var $amin=this.constants.amin;
+        const $amax=this.constants.amax;
+        const $amin=this.constants.amin;
 // var $favg=this.constants.favg;
-        var $aavg=this.constants.aavg;
-        var alph=Alphe($amax,$amin,$aavg,p[3]);
+        const $aavg=this.constants.aavg;
+        const alph=Alphe($amax,$amin,$aavg,p[3]);
 /// var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
-        var Min=(4.0*(($amax-($aavg-$amin))/2.0));
+        const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 // var Min=(4.0*(($fmax-(p[3]-$amin))/2.0));
-        var ouT=Math.max(Min,alph);
-        var aveg=Aveg(p[3],ouT);
+        const ouT=Math.max(Min,alph);
+        const aveg=Aveg(p[3],ouT);
         this.color(p[0],p[1],p[2],aveg);
     }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
     gl.getExtension('WEBGL_color_buffer_float');
@@ -239,8 +239,8 @@ function doKey(e) {
     w$=parseInt(document.getElementById("wid").innerHTML,10);
     h$=parseInt(document.getElementById("hig").innerHTML,10);
     vv=document.getElementById("mv");
-    var blank$=Math.max((((w$-h$)*0)/2),0);
-    var nblank$=Math.max((((h$-w$)*0)/2),0);
+    var blank$=Math.max((((w$-h$)*1)/2),0);
+    var nblank$=Math.max((((h$-w$)*1)/2),0);
     var l=w$*h$*16;
     la=h$*h$*4;
     var al=w$*h$*8;
