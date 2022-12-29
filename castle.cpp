@@ -270,7 +270,7 @@ this.color(rr,gg,bb,aveg);
         var j=i+1;
         eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
     };
-    const d=S();if(d)d();d=S();function S(){
+    var d=S();if(d)d();d=S();function S(){
         w$=parseInt(document.getElementById("wid").innerHTML,10);
         h$=parseInt(document.getElementById("hig").innerHTML,10);
         var blank$=Math.max((((w$-h$)*0)/2),0);
