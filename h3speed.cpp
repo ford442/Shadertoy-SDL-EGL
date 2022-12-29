@@ -317,7 +317,7 @@ vv.currentTime-=0.016;
 }else{
 f=false;
 }}}};
-},16.6)}
+},16.666666)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
