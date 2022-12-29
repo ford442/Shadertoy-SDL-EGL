@@ -235,8 +235,8 @@ gl.disable(gl.DITHER);
  
 gl.enable(gl.BLEND);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_DST_ALPHA,gl.ONE_MINUS_CONSTANT_ALPHA);
-gl.blendEquationSeparate(gl.MAX,gl.REVERSE_SUBTRACT);
-gl.blendColor(1.0,1.0,1.0,0.777);
+gl.blendEquationSeparate(gl.MAX,gl.FUNC_ADD);
+gl.blendColor(1.0,1.0,1.0,0.3);
  
 // gl.blendColor(0.0,0.0,0.0,0.777);
 
