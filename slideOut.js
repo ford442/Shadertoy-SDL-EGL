@@ -2,7 +2,7 @@
 if('object'==typeof exports&&'undefined'!=typeof module)module.exports=t();else if('function'==typeof define&& define.amd)define([],t);else{
 var e;
 'undefined'!=typeof window?e=window:'undefined'!=typeofglobal?e=global:'undefined'!=typeofself&&(e=self),e.Slideout=t()
-}
+};
 }(function(){
 var t,e,n;
 return function i(t,e,n){
@@ -14,13 +14,13 @@ if(!a&&u)return u(r,!0);
 if(s)return s(r,!0);
 var l=new Error("Cannot find module '"+r+"'");
 throw l.code='MODULE_NOT_FOUND', l
-}
+};
 var h=e[r]={exports:{}};
 t[r][0].call(h.exports,function(e){
 var n=t[r][1][e];
 return o(n?n:e)
 },h,h.exports,i,t,e,n)
-}
+};
 return e[r].exports
 }
 var s=typeof require=='function'&&require;
@@ -43,22 +43,22 @@ var e=a.getElementsByTagName('script')[0].style;
 for(var n in e){
 if(t.test(n)){
 return '-'+n.match(t)[0].toLowerCase()+'-'
-}
-}
+};
+};
 if('WebkitOpacity' in e){
 return '-webkit-'
-}
+};
 if('KhtmlOpacity' in e){
 return '-khtml-'
-}
+};
 return ''
 }();
 function c(t,e){
 for(var n in e){
 if(e[n]){
 t[n]=e[n]
-}
-}
+};
+};
 return t
 }
 function p(t,e){
@@ -68,9 +68,9 @@ function d(t){
 while(t.parentNode){
 if(t.getAttribute('data-slideout-ignore')!==null){
 return t
-}
+};
 t=t.parentNode
-}
+};
 return null
 }
 function _(t){
@@ -93,19 +93,19 @@ this._orientation=this._side==='right'?-1:1;
 this._translateTo*=this._orientation;
 if(!this.panel.classList.contains('slideout-panel')){
 this.panel.classList.add('slideout-panel')
-}
+};
 if(!this.panel.classList.contains('slideout-panel-'+this._side)){
 this.panel.classList.add('slideout-panel-'+this._side)
-}
+};
 if(!this.menu.classList.contains('slideout-menu')){
 this.menu.classList.add('slideout-menu')
-}
+};
 if(!this.menu.classList.contains('slideout-menu-'+this._side)){
 this.menu.classList.add('slideout-menu-'+this._side)
-}
+};
 if(this._touch){
 this._initTouchEvents()
-}
+};
 }
 p(_,o);
 _.prototype.open=function(){
@@ -113,7 +113,7 @@ var t=this;
 this.emit('beforeopen');
 if(!u.classList.contains('slideout-open')){
 u.classList.add('slideout-open')
-}
+};
 this._setTransition();
 this._translateXTo(this._translateTo);
 this._opened=true;
@@ -127,7 +127,7 @@ _.prototype.close=function(){
 var t=this;
 if(!this.isOpen()&&!this._opening){
 return this
-}
+};
 this.emit('beforeclose');
 this._setTransition();
 this._translateXTo(0);
@@ -168,13 +168,13 @@ r=false
 this._preventMove=function(e){
 if(t._moved){
 e.preventDefault()
-}
+};
 };
 a.addEventListener(h.move,this._preventMove);
 this._resetTouchFn=function(e){
 if(typeof e.touches==='undefined'){
 return
-}
+};
 t._moved=false;
 t._opening=false;
 t._startOffsetX=e.touches[0].pageX;
@@ -190,39 +190,39 @@ this._onTouchEndFn=function(){
 if(t._moved){
 t.emit('translateend');
 t._opening&&Math.abs(t._currentOffsetX)>t._tolerance?t.open():t.close()
-}
+};
 t._moved=false
 };
 this.panel.addEventListener(h.end,this._onTouchEndFn);
 this._onTouchMoveFn=function(e){
 if(r||t._preventOpen||typeofe.touches==='undefined'||d(e.target)){
 return
-}
+};
 var n=e.touches[0].clientX-t._startOffsetX;
 var i=t._currentOffsetX=n;
 if(Math.abs(i) > t._padding){
 return
-}
+};
 if(Math.abs(n)>20){
 t._opening=true;
 var o=n*t._orientation;
 if(t._opened&&o>0||!t._opened&&o<0){
 return
-}
+};
 if(!t._moved){
 t.emit('translatestart')
-}
+};
 if(o<=0){
 i=n+t._padding*t._orientation;
 t._opening=false
-}
+};
 if(!(t._moved&&u.classList.contains('slideout-open'))){
 u.classList.add('slideout-open')
-}
+};
 t.panel.style[f+'transform']=t.panel.style.transform='translateX('+i+'px)';
 t.emit('translate',i);
 t._moved=true
-}
+};
 };
 this.panel.addEventListener(h.move,this._onTouchMoveFn);
 return this
@@ -259,13 +259,13 @@ function o(t,e,n){
 var o,s=false;
 function r(t){
 o=t;
-a()
+a();
 }
 function a(){
 if(!s){
 i(u);
 s=true
-}
+};
 }
 function u(){
 n.call(t,o);
@@ -285,7 +285,7 @@ throw new TypeError('Cannot call a class as a function')
 n.__esModule=true;
 var o=function(){
 function t(){
-i(this,t)
+i(this,t);
 }
 t.prototype.on=function e(t,n){
 this._eventCollection=this._eventCollection||{};
@@ -307,26 +307,26 @@ t.prototype.off=function o(t,e){
 var n=undefined;
 if(!this._eventCollection||!(n=this._eventCollection[t])){
 return this
-}
+};
 n.forEach(function(t,i){
 if(t===e||t.listener===e){
 n.splice(i,1)
-}
+};
 });
 if(n.length===0){
 delete this._eventCollection[t]
-}
+};
 return this
 };
 t.prototype.emit=function s(t){
 var e=this;
 for(var n=arguments.length,i=Array(n>1?n-1:0),o=1;o<n;o++){
 i[o-1]=arguments[o]
-}
+};
 var s=undefined;
 if(!this._eventCollection||!(s=this._eventCollection[t])){
 return this
-}
+};
 s=s.slice(0);
 s.forEach(function(t){
 return t.apply(e,i)
