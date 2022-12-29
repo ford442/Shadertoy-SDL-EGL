@@ -164,7 +164,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0],P[1],P[2]);
@@ -187,7 +187,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -229,22 +229,17 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
  
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
+ 
 gl.disable(gl.DITHER);
-gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
- 
- 
+gl.enable(gl.BLEND);
+
+gl.blendFuncSeparate(gl.SRC_COLOR,gl.ONE_MINUS_DST_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_DST_ALPHA);
+gl.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 gl.blendColor(1.0,1.0,1.0,0.777);
 // gl.blendColor(0.0,0.0,0.0,0.777);
 
-// gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendEquation(gl.MIN);
-// gl.blendEquationSeparate(gl.FUNC_ADD,gl.FUNC_SUBTRACT);
-gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
-// gl.blendEquationSeparate(gl.MIN,gl.MIN);
-
 // gl.disable(gl.CULL_FACE);
 // gl.disable(gl.DEPTH_TEST);
-// gl.enable(gl.BLEND);
 // gl.disable(gl.STENCIL_TEST);
 // gl.disable(gl.SCISSOR_TEST);
  
