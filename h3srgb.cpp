@@ -231,9 +231,9 @@ gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 gl.blendFuncSeparate(gl.DST_COLOR, gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendEquation(gl.GL_MAX);
+gl.blendEquation(gl.MIN);
 // gl.blendEquationSeparate(gl.FUNC_ADD,gl.FUNC_SUBTRACT);
-gl.blendEquationSeparate(gl.MAX,gl.MIN);
+// gl.blendEquationSeparate(gl.MIN,gl.MIN);
 
 // gl.disable(gl.CULL_FACE);
 // gl.disable(gl.DEPTH_TEST);
