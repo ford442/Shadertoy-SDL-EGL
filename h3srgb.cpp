@@ -233,8 +233,8 @@ gl.disable(gl.DITHER);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
  
  
-gl.blendFuncColor(1.0,1.0,1.0,0.777);
-// gl.blendFuncColor(0.0,0.0,0.0,0.777);
+gl.blendColor(1.0,1.0,1.0,0.777);
+// gl.blendColor(0.0,0.0,0.0,0.777);
 
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
