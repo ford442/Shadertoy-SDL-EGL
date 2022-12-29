@@ -234,7 +234,7 @@ gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
  
 gl.enable(gl.BLEND);
-gl.blendFuncSeparate(gl.SRC_COLOR,gl.DST_COLOR,gl.ONE_MINUS_DST_ALPHA,gl.ONE_MINUS_CONSTANT_ALPHA);
+gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_DST_ALPHA,gl.ONE_MINUS_CONSTANT_ALPHA);
 gl.blendEquationSeparate(gl.MAX,gl.REVERSE_SUBTRACT);
 gl.blendColor(1.0,1.0,1.0,0.777);
  
