@@ -64,8 +64,8 @@ speed:
 	 em++ h3speed.cpp -o gs001.js -sFORCE_FILESYSTEM=1 -sASSERTIONS=0 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -ffast-math \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sPRECISE_F32=1 \
-	 -std=gnu++2b -sASYNCIFY \
+	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sPRECISE_F32=1 -lembind -fwasm-exceptions \
+	 -std=gnu++2b \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagecs.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js cl-gpu.js
 
