@@ -79,7 +79,6 @@ function vids(xml){
         $vids[i]=Self+"video/"+txxt;
     }};
 function shds(xml){
-    
     const sparser=new DOMParser();
     var htmlDoc=sparser.parseFromString(xml.responseText,"text/html");
     var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
@@ -94,7 +93,7 @@ function shds(xml){
     var randShade=Math.random();
     randShade=Math.floor($shds[0]*randShade)+5;
     document.getElementById("path").innerHTML=$shds[randShade];
-    const pth=document.getElementById("path").innerHTML;
+    var pth=document.getElementById("path").innerHTML;
     const ff=new XMLHttpRequest();
     ff.open("GET",pth,true);
     ff.responseType="arraybuffer";
