@@ -562,7 +562,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
 emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
-emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
+// emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
