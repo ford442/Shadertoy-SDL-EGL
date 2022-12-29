@@ -31,7 +31,7 @@ document.getElementById("btn10").click();
 
 function pll(){
 Module.ccall("pl");
-};
+}
 
 const fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=>{
@@ -65,7 +65,7 @@ function sngs(xml){
         Self=Self.replace(/1ink.1ink/,"");
         txxt=txxt.replace(Self,"");
         $sngs[i]=Self+"songs/"+txxt;
-    }};
+    }}
 function vids(xml){
     const vparser=new DOMParser();
     const htmlDocv=vparser.parseFromString(xml.responseText,"text/html");
@@ -77,7 +77,7 @@ function vids(xml){
         Self=Self.replace(/1ink.1ink/,"");
         txxt=txxt.replace(Self,"");
         $vids[i]=Self+"video/"+txxt;
-    }};
+    }}
 function shds(xml){
     const sparser=new DOMParser();
     const htmlDoch=sparser.parseFromString(xml.responseText,"text/html");
@@ -114,7 +114,7 @@ function shds(xml){
 
         }};
     ff.send(null);
-};
+}
 
 function scanSongs(){
     const nxhttp=new XMLHttpRequest();
@@ -124,7 +124,7 @@ function scanSongs(){
         }};
     nxhttp.open("GET","songs/",true);
     nxhttp.send();
-};
+}
 
 function scanVideos(){
     const fxhttp=new XMLHttpRequest();
@@ -134,7 +134,7 @@ function scanVideos(){
         }};
     fxhttp.open("GET","video/",true);
     fxhttp.send();
-};
+}
 
 function scanShaders(){
     const dxhttp=new XMLHttpRequest();
@@ -144,7 +144,7 @@ function scanShaders(){
         }};
     dxhttp.open("GET","https://glsl.1ink.us/shaders/",true);
     dxhttp.send();
-};
+}
 
 scanVideos();
 scanShaders();
@@ -163,7 +163,7 @@ function snd(){
     sng.postMessage({
         data:songSrc
     });
-};
+}
 
 document.getElementById("btn8").addEventListener("click",function(){
     window.open('./flac');
@@ -175,7 +175,7 @@ const ban=document.getElementById("btn1");
 const sfr=document.getElementById("slideframe");
 function grab$lt(){
     $lt=Math.round($lt);
-};
+}
 $lt=tem.innerHTML;
 grab$lt();
 const slo=new Slideout({"panel":document.getElementById("panel"),"menu":document.getElementById("menu"),"padding":384,"tolerance":70,"easing":"cubic-bezier(.32,2,.55,.27)"});
@@ -229,12 +229,12 @@ function spKey(e){
     if(e.code=='KeyW'){lockVid=1;};
     if(e.code=='KeyZ'){lockVid=1;};
     if(e.code=='KeyX'){lockVid=0;};
-};
+}
 
 function spKeyUp(e){
     if(e.code=='KeyS'){lockVid=0;};
     if(e.code=='KeyW'){lockVid=0;};
-};
+}
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
@@ -297,6 +297,6 @@ function loada(){
     setTimeout(function(){
         loada();
     },$ldt);
-};
+}
 
 loada();
