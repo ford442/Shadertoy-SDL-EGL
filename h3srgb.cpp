@@ -228,7 +228,7 @@ function doKey(e) {
 // gl.enable(MULTISAMPLE_ARB);
 // gl.hint(gl.GENERATE_MIPMAP_HINT, gl.NICEST);
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES, gl.NICEST);
-// gl.drawingBufferColorSpace='display-p3';
+gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
     gl.disable(gl.DITHER);
 // gl.disable(gl.CULL_FACE);
@@ -239,8 +239,8 @@ function doKey(e) {
     w$=parseInt(document.getElementById("wid").innerHTML,10);
     h$=parseInt(document.getElementById("hig").innerHTML,10);
     vv=document.getElementById("mv");
-    var blank$=Math.max((((w$-h$)*1)/2),0);
-    var nblank$=Math.max((((h$-w$)*1)/2),0);
+    var blank$=Math.max((((w$-h$)*0)/2),0);
+    var nblank$=Math.max((((h$-w$)*0)/2),0);
     var l=w$*h$*16;
     la=h$*h$*4;
     var al=w$*h$*8;
