@@ -230,10 +230,11 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
-// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-gl.blendEquation(gl.GL_MAX);
-// glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_SUBTRACT);
+gl.blendFuncSeparate(gl.DST_COLOR, gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+// gl.blendEquation(gl.GL_MAX);
+// gl.blendEquationSeparate(gl.FUNC_ADD,gl.FUNC_SUBTRACT);
+gl.blendEquationSeparate(gl.MAX,gl.MIN);
 
 // gl.disable(gl.CULL_FACE);
 // gl.disable(gl.DEPTH_TEST);
