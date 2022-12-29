@@ -99,6 +99,7 @@ extern "C" {
 void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,aptr);};
 };
 
+EM_JS(void,ma,(),{
 
     "use strict";
     const pnnl=document.body;
@@ -122,12 +123,13 @@ function doKey(e){
     if(e.code=='Space') {
         e.preventDefault();
     }
-    if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();
+    if (e.code=='KeyZ'){vv=document.getElementById("mv");vv.pause();
         var stp=vv.currentTime;
         backForth(stp);}
     if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
 
 pnnl.addEventListener('keydown',doKey);
+    
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF32.buffer;
