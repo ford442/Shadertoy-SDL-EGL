@@ -424,19 +424,19 @@ float gFm1=Fm1;
 typedef struct{float XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
-"#version 300 es\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
-"precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;\n";
+"#version 300 es \n"
+"#undef HW_PERFORMANCE \n"
+"#define HW_PERFORMANCE 0 \n"
+"precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D; \n";
 const char vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;} \n";
 const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"\n uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+// "\n uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"\n out vec4 fragColor;\n";
+"\n out vec4 fragColor; \n";
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);} \n\0";
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
