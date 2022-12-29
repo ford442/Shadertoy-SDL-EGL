@@ -225,7 +225,7 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
 // gl.enable(MULTISAMPLE_ARB);
-// gl.hint(gl.GENERATE_MIPMAP_HINT, gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT, gl.NICEST);
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES, gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
@@ -525,7 +525,7 @@ eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 
-// eglMakeCurrent(display,surface,surface,contextegl);
+eglMakeCurrent(display,surface,surface,contextegl);
 
 emscripten_webgl_make_context_current(ctx);
 
@@ -588,10 +588,12 @@ glViewport(0,0,GLint(Size),GLint(Size));
  nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+// glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
  nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
  nanosleep(&req,&rem);
