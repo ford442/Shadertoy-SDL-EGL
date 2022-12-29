@@ -578,11 +578,14 @@ glEnable(GL_DEPTH_TEST);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_BLEND);
 //   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
+ 
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
-glBlendEquation(GL_FUNC_ADD);
+ glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
+// glBlendEquation(GL_FUNC_ADD);
 glBlendColor(F0,F0,F0,0.777);
 glDisable(GL_DITHER);
 glViewport(0,0,GLint(Size),GLint(Size));
