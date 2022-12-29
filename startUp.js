@@ -12,11 +12,11 @@ return function(text){
 if(arguments.length>1)
 text=Array.prototype.slice.call(arguments).join(' ');
 // console.log(text);
-if (element){
+if(element){
 element.value+=text+"\n";
 element.scrollTop=element.scrollHeight;
 }}})(),
-printErr: function(text) {
+printErr:function(text){
 if(arguments.length>1)
 text=Array.prototype.slice.call(arguments).join(' ');
 if(0){
@@ -33,7 +33,7 @@ e.preventDefault();
 return sscanvas;
 })(),
 setStatus:function(text){
-if (!Module.setStatus.last){
+if(!Module.setStatus.last){
 Module.setStatus.last={
 time:Date.now(),
 text:''
