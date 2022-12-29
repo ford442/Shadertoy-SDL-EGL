@@ -106,14 +106,13 @@ const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
 var f;
-
 var loopLoop;
-
+var a,b;
 function backForth(stp){
 loopLoop=true;
 f=true;
-const a=stp-0.75;
-const b=stp+0.75;
+a=stp-0.75;
+b=stp+0.75;
 }
 
 function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;}
