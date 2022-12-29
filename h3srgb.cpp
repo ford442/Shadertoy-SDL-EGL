@@ -115,9 +115,9 @@ EM_JS(void,ma,(),{
     f=true;
     a=stp;
     b=stp+1.2;
-};
+}
 
-function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;};
+function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;}
 
 function doKey(e) {
     if (e.code == 'Space') {
@@ -327,16 +327,15 @@ gl.drawingBufferColorSpace='display-p3';
                             }else{
                                 f=false;
                             }}}};
-            },16.66)};
+            },16.66)}
         M();
         document.getElementById("di").onclick=function(){
             T=true;
             S();
-        };
+        }
         return()=>{
             T=true;
-        }};
-});
+        }}});
 
 void uni(float xx,float yy,GLfloat time,short int fram){
 GLfloat mX,mY;
