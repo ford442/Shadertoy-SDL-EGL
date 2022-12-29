@@ -332,7 +332,7 @@ gl.drawingBufferColorSpace='display-p3';
         document.getElementById("di").onclick=function(){
             T=true;
             S();
-        }
+        };
         return()=>{
             T=true;
         }}});
