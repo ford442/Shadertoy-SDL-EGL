@@ -570,7 +570,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
  
  
-glClearColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)0.111);
+glClearColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(MULTISAMPLE_ARB);
