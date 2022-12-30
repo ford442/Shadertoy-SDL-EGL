@@ -433,10 +433,10 @@ emscripten_cancel_main_loop();
 // nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
-float gF=F;
-float gF0=F0;
-float gFm1=Fm1;
-typedef struct{float XYZW[4];}Vertex;
+GLfloat gF=F;
+GLfloat gF0=F0;
+GLfloat gFm1=Fm1;
+typedef struct{GLfloat XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
@@ -572,7 +572,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
  
  
-glClearColor(F,F,F,0.777);
+glClearColor(gF,gF,gF,0.777);
  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(MULTISAMPLE_ARB);
@@ -597,7 +597,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPH
 glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-glBlendColor(F,F,F,0.777);
+glBlendColor(gF,gF,gF,0.777);
 glDisable(GL_DITHER);
 glViewport(0,0,GLint(Size),GLint(Size));
  
