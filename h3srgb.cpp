@@ -562,7 +562,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
 emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
-// emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
+emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
@@ -595,7 +595,7 @@ glEnable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 glBlendFunc(GL_ONE_MINUS_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-glBlendEquation(GL_MAX);
+glBlendEquation(GL_MAX_EXT);
 // glBlendColor(F0,F0,F0,0.777);
 glBlendColor(F,F,F,0.777);
  
