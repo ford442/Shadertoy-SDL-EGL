@@ -223,7 +223,7 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
  
-// gl.enable(MULTISAMPLE_ARB);
+gl.enable(gl.BLEND);
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES,gl.NICEST);
 
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -233,19 +233,12 @@ gl.unpackColorSpace='display-p3';
  
 gl.disable(gl.DITHER);
  
- /*
-gl.enable(gl.BLEND);
-gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_DST_ALPHA,gl.ONE_MINUS_CONSTANT_ALPHA);
-gl.blendEquationSeparate(gl.MAX,gl.FUNC_ADD);
-gl.blendColor(1.0,1.0,1.0,0.3);
- */
- 
-// gl.blendColor(0.0,0.0,0.0,0.777);
+gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
 
-// gl.disable(gl.CULL_FACE);
-// gl.disable(gl.DEPTH_TEST);
-// gl.disable(gl.STENCIL_TEST);
-// gl.disable(gl.SCISSOR_TEST);
+// gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+// gl.blendEquation(gl.MIN);
+// gl.blendEquationSeparate(gl.FUNC_ADD,gl.FUNC_SUBTRACT);
+gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
  
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
