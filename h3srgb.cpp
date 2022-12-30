@@ -374,7 +374,7 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
- glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
@@ -569,7 +569,6 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
  
- 
 glClearColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -588,7 +587,10 @@ glEnable(GL_BLEND);
 // glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
  
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
+ 
 glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+ //  swap alpha to use one_minus_alpha for 'source'
+ 
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
