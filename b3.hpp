@@ -44,7 +44,7 @@
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
-static const char8_t *read_file(const char *filename);
+static const char8_t *read_file(const GLchar *filename);
 
 GLfloat x;
 GLfloat y;
