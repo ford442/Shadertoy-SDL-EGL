@@ -230,7 +230,7 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
-// gl.blendColor()
+gl.blendColor(1.0,1.0,1.0,0.5);
  
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -575,14 +575,14 @@ glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(MULTISAMPLE_ARB);
-// glDisable(GL_STENCIL_TEST);
+glEnable(GL_STENCIL_TEST);
 // glDisable(GL_SCISSOR_TEST);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
-glClearDepth((GLdouble)1.0);
+glClearDepth(D);
 
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_BLEND);
@@ -604,7 +604,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPH
 glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-glBlendColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)0.111);
+glBlendColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)0.5);
 glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
  
