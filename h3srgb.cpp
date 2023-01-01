@@ -586,7 +586,7 @@ glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
 // glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
 
- glScissor(GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+ glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
  glEnable(GL_SCISSOR_TEST);
 
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
@@ -602,7 +602,7 @@ glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_ADD);
 glBlendColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)0.111);
 glDisable(GL_DITHER);
-glViewport(0,0,GLint(Size),GLint(Size));
+glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
  
  
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
