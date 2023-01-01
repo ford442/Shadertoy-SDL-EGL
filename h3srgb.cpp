@@ -106,10 +106,10 @@ var vv=document.getElementById("mv");
 var intervalLoop=null;
 
 var loopLoop;
-var f;
+
 function backForth(stp){
  
-f=true;
+var f=true;
 loopLoop=true;
 var a=stp-1.00;
 var b=stp+1.00;
