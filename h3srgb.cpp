@@ -387,7 +387,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 return;
 };
 
-static const char8_t *read_file(const char *filename){
+static const char8_t *read_file(const GLchar *filename){
 char8_t *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
@@ -414,7 +414,7 @@ return result;
 return nullptr;
 };
 
-GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources){
+GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -436,24 +436,24 @@ GLfloat gF0=F0;
 GLfloat gFm1=Fm1;
 typedef struct{GLfloat XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-const char common_shader_header_gles3[]=
+const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;\n";
-const char vertex_shader_body_gles3[]=
+const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
-const char fragment_shader_header_gles3[]=
+const GLchar fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "\n uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "\n out vec4 fragColor;\n";
-const char fragment_shader_footer_gles3[]=
+const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
-const char* common_shader_header=common_shader_header_gles3;
-const char* vertex_shader_body=vertex_shader_body_gles3;
-const char* fragment_shader_header=fragment_shader_header_gles3;
-const char* fragment_shader_footer=fragment_shader_footer_gles3;
+const GLchar* common_shader_header=common_shader_header_gles3;
+const GLchar* vertex_shader_body=vertex_shader_body_gles3;
+const GLchar* fragment_shader_header=fragment_shader_header_gles3;
+const GLchar* fragment_shader_footer=fragment_shader_footer_gles3;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
 GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
@@ -625,7 +625,7 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 // glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
  // nanosleep(&req,&rem);
-static const char* default_fragment_shader=(char*)read_file(fileloc);
+static const GLchar* default_fragment_shader=(GLchar*)read_file(fileloc);
  // nanosleep(&req,&rem);
  // nanosleep(&req,&rem);
 sources[0]=common_shader_header;
