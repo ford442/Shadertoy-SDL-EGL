@@ -100,19 +100,19 @@ void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,a
 };
 
 EM_JS(void,ma,(),{
-
 "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
-var f;
+
 var loopLoop;
-var a,b;
+var f;
+
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-1.00;
-b=stp+1.00;
+var a=stp-1.00;
+var b=stp+1.00;
 }
 
 function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;}
@@ -318,7 +318,7 @@ if(vv.currentTime<b){
 vv.currentTime+=0.016666;
 }else{
 f=true;
-}}};
+}}}
 if(f==false){
 if(vv.currentTime<b){
 vv.currentTime+=0.016666;
@@ -328,7 +328,7 @@ if(vv.currentTime>a){
 vv.currentTime-=0.016666;
 }else{
 f=false;
-}}}};
+}}}}
 },16.666666)}
 M();
 document.getElementById("di").onclick=function(){
