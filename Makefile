@@ -140,7 +140,7 @@ cloud:
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=gnu++2b -sPRECISE_F32=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --extern-post-js tilt.js --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujs.js
+         --post-js tilt.js --pre-js fluid.js --pre-js flui.js --pre-js setUp.js --pre-js startUp.js --post-js pagec.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js
 
 
 emloop:
