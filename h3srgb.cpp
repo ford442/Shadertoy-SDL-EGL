@@ -111,8 +111,8 @@ var a,b;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-0.75;
-b=stp+0.75;
+a=stp-1.00;
+b=stp+1.00;
 }
 
 function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;}
