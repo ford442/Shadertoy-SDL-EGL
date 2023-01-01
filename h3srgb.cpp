@@ -96,8 +96,8 @@ return;
 };
 
 extern "C" {
+ 
 void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,aptr);};
-};
 
 EM_JS(void,ma,(),{
 
@@ -338,6 +338,8 @@ S();
 return()=>{
 T=true;
 }}});
+
+};
 
 void uni(float xx,float yy,GLfloat time,short int fram){
 GLfloat mX,mY;
