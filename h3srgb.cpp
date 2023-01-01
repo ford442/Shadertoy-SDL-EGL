@@ -100,19 +100,19 @@ void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,a
 };
 
 EM_JS(void,ma,(),{
+
 "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
-
+var f;
 var loopLoop;
-
+var a,b;
 function backForth(stp){
- 
-var f=true;
 loopLoop=true;
-var a=stp-1.00;
-var b=stp+1.00;
+f=true;
+a=stp-1.00;
+b=stp+1.00;
 }
 
 function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;}
