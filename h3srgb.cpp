@@ -106,10 +106,10 @@ var vv=document.getElementById("mv");
 var intervalLoop=null;
 
 var loopLoop;
-
+var f;
 function backForth(stp){
  
-var f=true;
+f=true;
 loopLoop=true;
 var a=stp-1.00;
 var b=stp+1.00;
@@ -318,7 +318,7 @@ if(vv.currentTime<b){
 vv.currentTime+=0.016666;
 }else{
 f=true;
-}}}
+}}};
 if(f==false){
 if(vv.currentTime<b){
 vv.currentTime+=0.016666;
@@ -328,7 +328,7 @@ if(vv.currentTime>a){
 vv.currentTime-=0.016666;
 }else{
 f=false;
-}}}}
+}}}};
 },16.666666)}
 M();
 document.getElementById("di").onclick=function(){
