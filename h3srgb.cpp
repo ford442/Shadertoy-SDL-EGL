@@ -105,34 +105,32 @@ EM_JS(void,ma,(),{
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
-var f;
-var loopLoop;
-var a,b;
-function backForth(stp){
-loopLoop=true;
-f=true;
-a=stp-1.00;
-b=stp+1.00;
-}
-
-function stpBackForth(){clearInterval(intervalLoop);loopLoop=false;}
+var f,loopLoop,a,b,stp;
 
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
 }
+ 
 if (e.code=='KeyZ'){
 vv=document.getElementById("mv");
 vv.pause();
-var stp=vv.currentTime;
+var stp=Math.floor(vv.currentTime);
+loopLoop=true;
+f=true;
+a=stp-2.00;
+b=stp;
 backForth(stp);
 }
+ 
 if(e.code=='KeyX'){
 vv=document.getElementById("mv");
+loopLoop=false;
 stpBackForth();
 vv.play();
 }
 }
+
 pnnl.addEventListener('keydown',doKey);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -154,7 +152,7 @@ const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.099999))))))/3.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(1.0-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
