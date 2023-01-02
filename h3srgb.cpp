@@ -115,18 +115,15 @@ e.preventDefault();
 if (e.code=='KeyZ'){
 vv=document.getElementById("mv");
 vv.pause();
-var stp=Math.floor(vv.currentTime);
 loopLoop=true;
 f=true;
-a=stp-2.00;
-b=stp;
-backForth(stp);
+a=vv.currentTime-2.00;
+b=vv.currentTime;
 }
  
 if(e.code=='KeyX'){
 vv=document.getElementById("mv");
 loopLoop=false;
-stpBackForth();
 vv.play();
 }
 }
@@ -150,9 +147,7 @@ const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPe
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(1.0-f)))))))/3.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(1.0-g)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
@@ -167,21 +162,14 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-// }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
-// }).setTactic("precision").setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-// var $fmax=this.constants.fmax;
-// var $fmin=this.constants.fmin;
 const $amax=this.constants.amax;
 const $amin=this.constants.amin;
-// var $favg=this.constants.favg;
 const $aavg=this.constants.aavg;
 const alph=Alphe($amax,$amin,$aavg,p[3]);
-/// var Min=(4.0*(($fmax-($aavg-$fmin))/2.0));
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
-// var Min=(4.0*(($fmax-(p[3]-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
