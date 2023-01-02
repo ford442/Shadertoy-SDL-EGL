@@ -1,3 +1,14 @@
+fire:
+	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
+	 -stdlib=libc++ -std=gnu++2a \
+	 -mcpu=bleeding-edge -mfloat-abi=hard  \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
+	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --pre-js fluid.js --pre-js flui.js --pre-js setUp.js --pre-js startUp.js --post-js pagec.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js
+
 tst1: main.cpp  Makefile
 	em++ main.cpp  --closure 0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
 -sUSE_WEBGL2=1 -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
@@ -51,16 +62,6 @@ heapsrgb:
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --pre-js setUp.js --pre-js startUp.js --post-js pageg.js
 
-fire:
-	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
-	 -stdlib=libc++ -std=gnu++2a \
-	 -mcpu=bleeding-edge \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
-	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js fluid.js --pre-js flui.js --pre-js setUp.js --pre-js startUp.js --post-js pagec.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js
 
 speed:
 	 em++ h3speed.cpp -o gs001.js -sFORCE_FILESYSTEM=1 -sASSERTIONS=0 \
