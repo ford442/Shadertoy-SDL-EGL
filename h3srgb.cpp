@@ -105,7 +105,7 @@ EM_JS(void,ma,(),{
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
-var f,loopLoop,a,b,stp;
+var rv,loopLoop,a,b,stp;
 
 function doKey(e){
 if(e.code=='Space'){
@@ -116,7 +116,7 @@ if (e.code=='KeyZ'){
 vv=document.getElementById("mv");
 vv.pause();
 loopLoop=true;
-f=true;
+rv=true;
 a=vv.currentTime-2.00;
 b=vv.currentTime;
 }
@@ -210,14 +210,11 @@ gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
  
 // gl.enable(gl.BLEND);
-// gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT_OES,gl.NICEST);
-
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';
 gl.disable(gl.DITHER);
-gl.blendColor(1.0,1.0,1.0,0.5);
- 
+gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
@@ -295,25 +292,21 @@ setTimeout(function(){
 M();
 
 if(loopLoop==true){
-if(f==true){
+if(rv==true){
 if(vv.currentTime>a){
 vv.currentTime-=0.016666;
 }else{
-f=false;
+rv=false;
 if(vv.currentTime<b){
 vv.currentTime+=0.016666;
-}else{
-f=true;
 }}};
-if(f==false){
+if(rv==false){
 if(vv.currentTime<b){
 vv.currentTime+=0.016666;
 }else{
-f=true;
+rv=true;
 if(vv.currentTime>a){
 vv.currentTime-=0.016666;
-}else{
-f=false;
 }}}};
 },16.666666)}
 M();
