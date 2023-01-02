@@ -1,6 +1,6 @@
 fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
-	 -stdlib=libc++ -std=gnu++2a --regalloc=pbqp \
+	 -stdlib=libc++ -std=gnu++2a --regalloc='pbqp' \
 	 -mcpu=bleeding-edge -mfloat-abi=hard -cl-unsafe-math-optimizations \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
 	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
