@@ -119,7 +119,7 @@ vv.pause();
 loopLoop=true;
 rv=false;
 a=vv.currentTime;
-b=a+4.0;
+b=vv.currentTime+4.0;
 }
  
 if(e.code=='KeyX'){
