@@ -55,7 +55,7 @@ fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -stdlib=libc++ -std=gnu++2a \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
-	 -fno-signed-zeros -freciprocal-math -ffp-contract=fast -menable-unsafe-fp-math -menable-no-nans -menable-no-infs \
+	 -fno-signed-zeros -freciprocal-math -ffp-contract=fast -enable-unsafe-fp-math  -enable-no-nans -enable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
