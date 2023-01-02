@@ -1,6 +1,6 @@
 fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
-	 -ffixed-point -fforce-enable-int128 -fp-model=extended \
+	 -ffixed-point -fforce-enable-int128 -ffp-model=extended \
 	 -stdlib=libc++ -std=gnu++2a -fno-fast-math -fexperimental-new-constant-interpreter \
 	 -mcpu=bleeding-edge -cl-unsafe-math-optimizations \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
