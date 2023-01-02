@@ -1,7 +1,7 @@
 fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -ffixed-point -fforce-enable-int128 -ffp-exception-behavior=strict  \
-	 -stdlib=libc++ -std=gnu++2a -fno-fast-math \
+	 -stdlib=libc++ -std=gnu++2a -fno-fast-math -ffp-contract=fast \
 	 -mcpu=bleeding-edge \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
 	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
