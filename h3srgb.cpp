@@ -106,7 +106,7 @@ EM_JS(void,ma,(),{
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
-let rv,loopLoop,a,b,stp;
+var rv,loopLoop,a,b,stp;
 
 function doKey(e){
 if(e.code=='Space'){
@@ -118,8 +118,8 @@ var vv=document.getElementById("mv");
 vv.pause();
 loopLoop=true;
 rv=true;
-a=vv.currentTime-5.00;
-b=vv.currentTime;
+a=vv.currentTime;
+b=a+6.0;
 }
  
 if(e.code=='KeyX'){
