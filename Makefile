@@ -54,7 +54,7 @@ heapsrgb:
 fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -stdlib=libc++ -std=gnu++2a \
-	 -mcpu=x86-64 -mfpu=SSE3 \
+	 -mcpu=bleeding-edge \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
 	 -ffast-math -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 \
