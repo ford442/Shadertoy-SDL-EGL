@@ -117,9 +117,9 @@ if (e.code=='KeyZ'){
 var vv=document.getElementById("mv");
 vv.pause();
 loopLoop=true;
-rv=false;
-a=vv.currentTime;
-b=vv.currentTime+4.0;
+rv=true;
+a=vv.currentTime-2.0;
+b=vv.currentTime+2.0;
 }
  
 if(e.code=='KeyX'){
