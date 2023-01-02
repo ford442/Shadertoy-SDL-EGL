@@ -110,12 +110,14 @@ crp2:
 
 shade:
 	 em++ h3srgb.cpp -o s3001.js -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -std=gnu++20 \
+	 -mcpu=bleeding-edge \
+	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -stdlib=libc++ -std=gnu++2a \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pages.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js cl-gpu.js
+         --pre-js setUp.js --pre-js startUp.js --post-js pages.js --pre-js rSlider.js --pre-js slideOut.js
 
 paint:
 	 em++ castle.cpp -o p3002.js -sFORCE_FILESYSTEM=1 \
