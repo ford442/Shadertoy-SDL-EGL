@@ -349,7 +349,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPH
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
  
-glBlendEquationSeparate(GL_MIN,GL_MAX);
+glBlendEquationSeparate(GL_MAX,GL_MIN);
  // glBlendEquation(GL_MAX);
 
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
