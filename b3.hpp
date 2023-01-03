@@ -104,6 +104,8 @@ void renderFrame();
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+
 extern "C"{
   
 void strt();
@@ -111,7 +113,6 @@ void str();
 void pl();
 void b3();
 void nano(short int Fnum,int leng,float *ptr,float *aptr);
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 
 };
 
