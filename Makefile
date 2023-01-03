@@ -1,16 +1,23 @@
 fire:
-	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
-	 -std=gnu++2b -stdlib=libc++ -fno-fast-math -ffp-contract=off -matomics  \
-         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
-	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx \
-	 -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize \
-	 -mmultivalue -mextended-const -mmutable-globals -mnontrapping-fptoint \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb\
-	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 em++ h3srgb.cpp -o g3013.js \
+	 -std=gnu++2b -stdlib=libc++ -fno-fast-math -ffp-contract=off -matomics  -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb  \
+         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize \
+	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
+	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
+
+speed:
+	 em++ h3speed.cpp -o gs001.js \
+	 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb  \
+         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize \
+	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
+	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
+
 
 tst1: main.cpp  Makefile
 	em++ main.cpp  --closure 0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
@@ -66,14 +73,6 @@ heapsrgb:
          --post-js filesys.js --post-js ccall.js --post-js fs.js --pre-js setUp.js --pre-js startUp.js --post-js pageg.js
 
 
-speed:
-	 em++ h3speed.cpp -o gs001.js -sFORCE_FILESYSTEM=1 -sASSERTIONS=0 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -ffast-math \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sPRECISE_F32=1 -lembind -fexceptions -fwasm-exceptions \
-	 -std=gnu++2b \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagecs.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js cl-gpu.js
 
 t3st:
 	 em++ h3test.cpp -o tx001.js -sFORCE_FILESYSTEM=1 \
