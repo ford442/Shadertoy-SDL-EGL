@@ -59,12 +59,12 @@ GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 using namespace std;
 using namespace std::chrono;
 
-steady_clock::time_point t1;
-steady_clock::time_point t2;
-steady_clock::time_point t3;
-// high_resolution_clock::time_point t1;
-// high_resolution_clock::time_point t2;
-// high_resolution_clock::time_point t3;
+// steady_clock::time_point t1;
+// steady_clock::time_point t2;
+// steady_clock::time_point t3;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
+high_resolution_clock::time_point t3;
 // system_clock::time_point t1;
 // system_clock::time_point t2;
 // system_clock::time_point t3;
