@@ -422,7 +422,7 @@ return shader;
 
 void strt(){
 nanosleep(&req,&rem);
-// emscripten_cancel_main_loop();
+emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
