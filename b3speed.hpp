@@ -15,10 +15,6 @@
 
 #include <unistd.h>
 
-#include <SDL2/SDL.h>
-#undef main
-#include "SDL_config.h"
-
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
@@ -105,7 +101,6 @@ GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 extern "C"{
 void strt();
 void str();
-void pl();
 void b3();
 void nano(short int Fnum,int leng,float *ptr,float *aptr);
 };
