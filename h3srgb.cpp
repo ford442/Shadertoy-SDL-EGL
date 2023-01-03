@@ -321,7 +321,10 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
-glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+ 
+ 
+// glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+ 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(MULTISAMPLE_ARB);
 glEnable(GL_STENCIL_TEST);
@@ -521,9 +524,9 @@ const alph=Alphe($amax,$amin,$aavg,p[3]);
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
  
-  const GLONEMINUSaveg=1.0-ouT;
+ //  const GLONEMINUSaveg=1.0-ouT;
 
-const aveg=Aveg(p[3],GLONEMINUSaveg);
+const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 gl.getExtension('WEBGL_color_buffer_float');
