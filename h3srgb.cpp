@@ -337,8 +337,14 @@ glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glEnable(GL_SCISSOR_TEST);
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
 glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+ 
+ 
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
  //  swap alpha to use one_minus_alpha for 'source'
+ 
+ 
+ 
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
@@ -518,7 +524,8 @@ const alph=Alphe($amax,$amin,$aavg,p[3]);
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
+ const GLONEMINUSaveg=1.0-aveg;
+this.color(p[0],p[1],p[2],GLONEMINUSaveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
