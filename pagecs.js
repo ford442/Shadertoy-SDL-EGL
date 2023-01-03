@@ -29,16 +29,6 @@ Module.ccall("str");
 document.getElementById("btn10").click();
 });
 
-function pll(){Module.ccall("pl");}
-
-const fll=new BroadcastChannel('file');
-fll.addEventListener('message',ea=>{
-const fill=new Uint8Array(ea.data.data);
-FS.writeFile('/snd/sample.wav',fill);
-setTimeout(function(){pll();},500);
-const shutDown=new BroadcastChannel('shutDown');
-shutDown.postMessage({data:222});
-});
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
@@ -48,18 +38,8 @@ var loadV=document.getElementById("ldv");
 var $sngs=[];
 var $vids=[];
 var $shds=[];
-function sngs(xml){
-const nparser=new DOMParser();
-const htmlDocs=nparser.parseFromString(xml.responseText,"text/html");
-const preList=htmlDocs.getElementsByTagName("pre")[0].getElementsByTagName("a");
-$sngs[0]=preList.length;
-for(var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
-var Self=location.href;
-Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
-$sngs[i]=Self+"songs/"+txxt;
-}}
+
+
 function vids(xml){
 const vparser=new DOMParser();
 const htmlDocv=vparser.parseFromString(xml.responseText,"text/html");
@@ -101,15 +81,7 @@ setTimeout(function(){Module.ccall("b3");},500);}};
 ff.send(null);
 }
 
-function scanSongs(){
-const nxhttp=new XMLHttpRequest();
-nxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
-sngs(this);
-}};
-nxhttp.open("GET","songs/",true);
-nxhttp.send();
-}
+
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
@@ -133,25 +105,12 @@ dxhttp.send();
 
 scanVideos();
 scanShaders();
-scanSongs();
 document.getElementById("pmhig").innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("ihig").innerHTML=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").height=parseInt(window.innerHeight,10);
 document.getElementById("scanvas").width=parseInt(window.innerHeight,10);
 document.getElementById("mv").load();
 document.getElementById("ldv").load();
-function snd(){
-const randSong=Math.floor(($sngs[0]-5)*Math.random());
-const songSrc=$sngs[randSong+5];
-document.getElementById("track").src=songSrc;
-const sng=new BroadcastChannel("sng");
-sng.postMessage({data:songSrc});
-}
-
-document.getElementById("btn8").addEventListener("click",function(){
-window.open('./flac');
-setTimeout(function(){snd();},1750);
-});
 
 const tem=document.getElementById("tim");
 const ban=document.getElementById("btn1");
