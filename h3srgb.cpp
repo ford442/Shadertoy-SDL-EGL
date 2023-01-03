@@ -339,7 +339,7 @@ glEnable(GL_SCISSOR_TEST);
 glEnable(GL_BLEND);
  
  
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  //  swap alpha to use one_minus_alpha for 'source'
  
@@ -349,7 +349,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPH
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
  
-glBlendEquationSeparate(GL_MAX,GL_MIN);
+glBlendEquationSeparate(GL_MIN,GL_FUNC_SUBTRACT);
  // glBlendEquation(GL_MAX);
 
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
