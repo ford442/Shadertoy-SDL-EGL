@@ -160,7 +160,7 @@ const bcanvas=document.getElementById("bcanvas");
 const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c){return((a*0.266666)+(b*0.333333)+(c*0.399999))/2.999999;}`;
+const glslAve=`float Ave(float a,float b,float c){return((c*0.266666)+(b*0.333333)+(a*0.399999))/2.999999;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
