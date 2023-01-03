@@ -370,14 +370,15 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
+glClear(GL_STENCIL_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glClear(GL_STENCIL_BUFFER_BIT);
-glClear(GL_DEPTH_BUFFER_BIT);
+
 // glFlush();
-// nanosleep(&req,&rem);
+// // nanosleep(&req,&rem);
 // glFinish();
 return;
 };
@@ -468,8 +469,8 @@ S=(GLfloat)Size;
 eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -523,8 +524,10 @@ eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
+
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -561,10 +564,11 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-glClearColor((GLclampf)0.0,(GLclampf)0.0,(GLclampf)0.0,(GLclampf)1.0);
+glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glEnable(MULTISAMPLE_ARB);  // fails
+// glEnable(MULTISAMPLE_ARB);
 glEnable(GL_STENCIL_TEST);
+// glDisable(GL_SCISSOR_TEST);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glEnable(GL_DEPTH_TEST);
@@ -574,10 +578,10 @@ glClearDepth(D);
 //   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
 // glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
-glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-glEnable(GL_BLEND);
+glEnable(GL_SCISSOR_TEST);
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
+glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
  //  swap alpha to use one_minus_alpha for 'source'
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -586,20 +590,32 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPH
 glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+glBlendColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 glDisable(GL_DITHER);
-// glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+ 
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
+ 
+// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ // glBlendEquation(GL_FUNC_ADD);
+// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
+// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
+// glBlendEquation(GL_FUNC_ADD);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-// glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+// glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+nanosleep(&req,&rem);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
-// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 static const GLchar* default_fragment_shader=(GLchar*)read_file(fileloc);
-nanosleep(&req,&rem);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -612,10 +628,10 @@ sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
+ // nanosleep(&req,&rem);
+glAttachShader(shd_prg,frag);
 nanosleep(&req,&rem);
 glAttachShader(shd_prg,vtx);
-nanosleep(&req,&rem);
-glAttachShader(shd_prg,frag);
 nanosleep(&req,&rem);
 atb_pos=0;
 glBindAttribLocation(shd_prg,0,"iPosition");
@@ -623,9 +639,9 @@ glLinkProgram(shd_prg);
 nanosleep(&req,&rem);
 glUseProgram(shd_prg);
 nanosleep(&req,&rem);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
+// glDeleteShader(vtx);
+// glDeleteShader(frag);
+// glReleaseShaderCompiler();
 glGenVertexArrays(1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
@@ -645,6 +661,7 @@ glUniform1f(uni_srate,44100.0);
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 auto t1=steady_clock::now();
+nanosleep(&req,&rem);
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
