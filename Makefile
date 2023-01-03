@@ -1,5 +1,5 @@
 fire:
-	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 --target=wasm32-x86_64-unknown \
+	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse4.2 \
 	 -ffixed-point -ffp-exception-behavior=strict  \
 	 -stdlib=libc++ -std=gnu++2a -fno-fast-math -ffp-contract=fast \
