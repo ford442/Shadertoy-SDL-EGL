@@ -1,5 +1,5 @@
 fire:
-	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
+	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 --ranlib="emranlib" \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -msse4.1 -msse4.2 \
 	 -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize  \
 	 -stdlib=libc++ -std=gnu++2a -fno-fast-math -ffp-contract=fast -matomics  \
