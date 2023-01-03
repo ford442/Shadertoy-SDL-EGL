@@ -684,7 +684,7 @@ return;
 extern "C" {
 void str(){strt();return;};
 void pl(){plt();return;};
-void clr(){clrclr();return;};
+void clr(GLclampf lcrlcr){clrclr(lcrlcr);return;};
 void b3(){ma();return;};
 };
 
