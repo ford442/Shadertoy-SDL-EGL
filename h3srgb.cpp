@@ -525,9 +525,11 @@ const $aavg=this.constants.aavg;
 const alph=Alphe($amax,$amin,$aavg,p[3]);
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
-const aveg=Aveg(p[3],ouT);
- const GLONEMINUSaveg=1.0-aveg;
-this.color(p[0],p[1],p[2],GLONEMINUSaveg);
+ 
+  const GLONEMINUSaveg=1.0-ouT;
+
+const aveg=Aveg(p[3],GLONEMINUSaveg);
+this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
