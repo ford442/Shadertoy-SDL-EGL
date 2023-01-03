@@ -299,13 +299,12 @@ if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
-if($F%8==0){
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+if($F%32==0){
 Module.ccall("clr",null,["Number","Number"],[agav[200]]);
-
 };
 setTimeout(function(){
 M();
