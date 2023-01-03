@@ -103,6 +103,7 @@ return 0;
 
 void clrclr(GLclampf rlc){
 // glBlendColor(rlc,rlc,rlc,1.0);
+ rlc=1.0-rlc;
 glClearColor(rlc,rlc,rlc,1.0);
 };
 
