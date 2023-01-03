@@ -349,7 +349,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPH
 glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-glBlendColor((GLclampf)1.0 ,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
@@ -515,7 +515,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-const av$=Ave(P[0]*0.399,P[1]*0.333,P[2]*0.266);
+const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
