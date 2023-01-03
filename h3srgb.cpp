@@ -227,7 +227,7 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.disable(gl.DITHER);
-gl.blendColor(0.0,0.0,0.0,1.0);
+gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
