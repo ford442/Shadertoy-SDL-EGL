@@ -81,8 +81,6 @@ aptr[200]=maxSum/32;
 return;
 };
 
-extern "C" {
- 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -97,8 +95,12 @@ y=e->clientY;
 }};
 return 0;
 };
- 
+
+extern "C" {
+
 void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,aptr);};
+
+}
 
 EM_JS(void,ma,(),{
 
@@ -326,9 +328,10 @@ S();
 };
 return()=>{
 T=true;
-}}});
+}}
 
-};
+});
+
 
 void uni(float xx,float yy,GLfloat time,short int fram){
 GLfloat mX,mY;
