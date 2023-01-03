@@ -13,6 +13,7 @@
 #include <cfloat>
 #include <climits>
 
+#include <xmmintrin.h>
 #include <unistd.h>
 
 #include <SDL2/SDL.h>
