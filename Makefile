@@ -1,15 +1,16 @@
 fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
+	 -std=gnu++17 -stdlib=libc++ -fno-fast-math -ffp-contract=off -matomics  \
+         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx \
 	 -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize \
-	 -stdlib=libc++ -std=gnu++2a -fno-fast-math -ffp-contract=off -matomics  \
-	 -mcpu=bleeding-edge -mmultivalue -mextended-const -mmutable-globals -mnontrapping-fptoint \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
+	 -mmultivalue -mextended-const -mmutable-globals -mnontrapping-fptoint \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb\
 	 -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js fluid.js --pre-js flui.js --pre-js setUp.js --pre-js startUp.js --post-js pagec.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js
+         --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
 
 tst1: main.cpp  Makefile
 	em++ main.cpp  --closure 0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
