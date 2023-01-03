@@ -304,9 +304,9 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-if($F%32==0){
+// if($F%32==0){
 Module.ccall("clr",null,["Number","Number","Number"],[agav[0],agav[200]]);
-};
+// };
 setTimeout(function(){
 M();
 if(loopLoop==true){
