@@ -515,7 +515,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-const av$=Ave(P[0]*0.266,P[1]*0.333,P[2]*0.399);
+const av$=Ave(P[0]*0.399,P[1]*0.333,P[2]*0.266);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
