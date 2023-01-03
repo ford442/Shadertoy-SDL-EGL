@@ -224,7 +224,6 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
 // gl.enable(gl.BLEND);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.disable(gl.DITHER);
@@ -233,6 +232,8 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALP
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
+ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
