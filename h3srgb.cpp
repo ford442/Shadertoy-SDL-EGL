@@ -339,8 +339,8 @@ glEnable(GL_SCISSOR_TEST);
 glEnable(GL_BLEND);
  
  
-// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  //  swap alpha to use one_minus_alpha for 'source'
  
  
@@ -349,7 +349,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
  
-glBlendEquationSeparate(GL_MAX,GL_MIN);
+glBlendEquationSeparate(GL_MIN,GL_MAX);
  // glBlendEquation(GL_MAX);
 
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
@@ -500,7 +500,7 @@ const bcanvas=document.getElementById("bcanvas");
 const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c){return((a*0.266)+(b*0.333)+(c*0.399));}`;
+const glslAve=`float Ave(float a,float b,float c){return(a+b+c);}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
@@ -514,7 +514,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-const av$=Ave(P[0],P[1],P[2]);
+const av$=Ave(P[0]*0.266,P[1]*0.333,P[2]*0.399);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
