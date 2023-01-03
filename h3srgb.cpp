@@ -12,7 +12,7 @@ dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
 if(!dev){SDL_FreeWAV(wave.snd);};
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
-};
+}
 
 void SDLCALL bfr(void *unused,Uint8* stm,int len){
 Uint8* wptr;
@@ -26,11 +26,11 @@ len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
-};
+}
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
-};
+}
 
 void plt(){
 char flnm[24];
@@ -38,17 +38,16 @@ SDL_FreeWAV(wave.snd);
 SDL_SetMainReady();
 if (SDL_Init(SDL_INIT_AUDIO)<0){
 qu(1);
-};
+}
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu(1);
-};
+}
 wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 return;
-};
-
+}
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -336,7 +335,6 @@ T=true;
 
 });
 
-
 void uni(float xx,float yy,GLfloat time,short int fram){
 GLfloat mX,mY;
 if(ms_l==true){
@@ -361,10 +359,10 @@ return;
 void renderFrame(){
 auto t3=t2;
 EMSCRIPTEN_RESULT ret;
-auto t2=steady_clock::now();
-duration<float>time_spanb=duration_cast<duration<float>>(t2-t3);
+auto t2=high_resolution_clock::now();
+duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
-duration<float>time_spana=duration_cast<duration<float>>(t2-t1);
+duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -671,7 +669,7 @@ uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 glUniform1f(uni_srate,44100.0);
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
-auto t1=steady_clock::now();
+auto t1=high_resolution_clock::now();
 nanosleep(&req,&rem);
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
@@ -684,6 +682,6 @@ void b3(){ma();return;};
 };
 
 int main(){
-EM_ASM({"use strict";FS.mkdir("/snd");FS.mkdir("/shader");});
+EM_ASM({FS.mkdir("/snd");FS.mkdir("/shader");});
 return 0;
 };
