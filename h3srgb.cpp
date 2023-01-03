@@ -101,9 +101,9 @@ y=e->clientY;
 return 0;
 };
 
-void clrclr(GLclampf rlc,GLclampf dnlb){
+void clrclr(GLclampf rlc){
 // glBlendColor(rlc,rlc,rlc,1.0);
-glClearColor(dnlb,dnlb,dnlb,1.0);
+glClearColor(rlc,rlc,rlc,1.0);
 };
 
 EM_JS(void,ma,(),{
@@ -160,6 +160,7 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
+const g=new GPU({canvas:bcanvas,webGl:gl});
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -203,9 +204,7 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MIN
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
- gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-
- const g=new GPU({canvas:bcanvas,webGl:gl});
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g)))))))/3.0);}`;
@@ -232,13 +231,10 @@ const $aavg=this.constants.aavg;
 const alph=Alphe($amax,$amin,$aavg,p[3]);
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
- 
 // const GLONEMINUSaveg=1.0-ouT;
-
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -284,13 +280,13 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(var i=64;i>0;i--){
 var loca=$F+1;
@@ -305,7 +301,7 @@ $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 // if($F%32==0){
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200]]);
 // };
 setTimeout(function(){
 M();
@@ -383,7 +379,6 @@ uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-
 // glFlush();
 // // nanosleep(&req,&rem);
 // glFinish();
@@ -443,7 +438,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+"precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
@@ -685,7 +680,7 @@ return;
 extern "C" {
 void str(){strt();return;};
 void pl(){plt();return;};
-void clr(GLclampf cllr,GLclampf blnd){clrclr(cllr,blnd);return;};
+void clr(GLclampf cllr){clrclr(cllr);return;};
 void b3(){ma();return;};
 };
 
