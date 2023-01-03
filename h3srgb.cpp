@@ -101,9 +101,9 @@ y=e->clientY;
 return 0;
 };
 
-void clrclr(GLclampf blc,GLclampf rlc){
+void clrclr(GLclampf rlc,GLclampf dnlb){
 glClearColor(rlc,rlc,rlc,1.0);
-glBlendColor(blc,blc,blc,1.0);
+glBlendColor(dnlb,dnlb,dnlb,1.0);
 };
 
 EM_JS(void,ma,(),{
@@ -305,7 +305,7 @@ $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 // if($F%32==0){
-Module.ccall("clr",null,["Number","Number","Number"],[agav[0],agav[200]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100]]);
 // };
 setTimeout(function(){
 M();
@@ -685,7 +685,7 @@ return;
 extern "C" {
 void str(){strt();return;};
 void pl(){plt();return;};
-void clr(GLclampf bclr,GLclampf lcrlcr){clrclr(bclr,lcrlcr);return;};
+void clr(GLclampf cllr,GLclampf blnd){clrclr(cllr,blnd);return;};
 void b3(){ma();return;};
 };
 
