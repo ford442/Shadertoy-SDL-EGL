@@ -232,9 +232,9 @@ const alph=Alphe($amax,$amin,$aavg,p[3]);
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
  
-const GLONEMINUSaveg=1.0-ouT;
+// const GLONEMINUSaveg=1.0-ouT;
 
-const aveg=Aveg(p[3],GLONEMINUSaveg);
+const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 
@@ -304,7 +304,7 @@ $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 if($F%32==0){
-Module.ccall("clr",null,["Number","Number"],[agav[200]]);
+Module.ccall("clr",null,["Number","Number"],[agav[0]]);
 };
 setTimeout(function(){
 M();
