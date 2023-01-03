@@ -1,7 +1,7 @@
 fire:
 	 em++ h3srgb.cpp -o g3013.js -sFORCE_FILESYSTEM=1 \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -msse4.1 -msse4.2 \
-	 -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize -fcxx-exceptions -fasync-exceptions \
+	 -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize  \
 	 -stdlib=libc++ -std=gnu++2a -fno-fast-math -ffp-contract=fast -matomics \
 	 -mcpu=bleeding-edge \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -fwasm-exceptions -fexperimental-library \
