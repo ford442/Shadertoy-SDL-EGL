@@ -9,9 +9,9 @@ document.getElementById('pmhig').innerHTML=window.innerHeight;
 });
 
 document.getElementById('btn7').addEventListener('click',function(){
-document.getElementById('scanvas').height=window.innerHeight*2.5;
-document.getElementById('scanvas').width=window.innerHeight*2.5;
-document.getElementById('pmhig').innerHTML=window.innerHeight*2.5;
+document.getElementById('scanvas').height=window.innerHeight*1.333333;
+document.getElementById('scanvas').width=window.innerHeight*1.333333;
+document.getElementById('pmhig').innerHTML=window.innerHeight*1.333333;
 Module.ccall('str');
 
 document.getElementById('scanvas').height=window.innerHeight;
@@ -100,14 +100,14 @@ const sarrayBuffer=ff.response;
 if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-setTimeout(function(){
+// setTimeout(function(){
   Module.ccall('str');
-},500);};
-  setTimeout(function(){
+// },500);};
+//   setTimeout(function(){
 Module.ccall('b3');
-// document.getElementById('btn7').click();           
-},500);};
-};
+document.getElementById('btn7').click();           
+// },500);
+};};
 ff.send(null);
 };
 
