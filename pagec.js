@@ -13,12 +13,12 @@ document.getElementById('scanvas').height=window.innerHeight*2.5;
 document.getElementById('scanvas').width=window.innerHeight*2.5;
 document.getElementById('pmhig').innerHTML=window.innerHeight*2.5;
 Module.ccall('str');
-setTimeout(function(){
+
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 Module.ccall('b3');
-},1500);
+
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
 });
