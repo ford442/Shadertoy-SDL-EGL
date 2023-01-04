@@ -1,9 +1,9 @@
 'use strict';
 
 function hiResStart(){
-document.getElementById('scanvas').height=window.innerHeight*3.333333;
-document.getElementById('scanvas').width=window.innerHeight*3.333333;
-document.getElementById('pmhig').innerHTML=window.innerHeight*3.333333;
+document.getElementById('scanvas').height=window.innerHeight*1.333333;
+document.getElementById('scanvas').width=window.innerHeight*1.333333;
+document.getElementById('pmhig').innerHTML=window.innerHeight*1.333333;
 setTimeout(function(){
 Module.ccall('str');},50);
 document.getElementById('scanvas').height=window.innerHeight;
