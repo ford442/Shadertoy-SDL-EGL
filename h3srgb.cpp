@@ -376,10 +376,10 @@ iFrame++;
 glClear(GL_DEPTH_BUFFER_BIT);
  glClear(GL_COLOR_BUFFER_BIT);
 //  glClear(GL_STENCIL_BUFFER_BIT);
-glFlush();
+// glFlush();
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-nanosleep(&req,&rem);
-glFinish();
+// nanosleep(&req,&rem);
+// glFinish();
 return;
 };
 
