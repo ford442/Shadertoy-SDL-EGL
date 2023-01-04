@@ -101,10 +101,10 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 // setTimeout(function(){
-  Module.ccall('str');
+ // Module.ccall('str');
 // },500);};
 //   setTimeout(function(){
-Module.ccall('b3');
+// Module.ccall('b3');
 document.getElementById('btn7').click();           
 // },500);
 };};
