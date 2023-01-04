@@ -102,8 +102,8 @@ return 0;
 };
 
 void clrclr(GLclampf rlc,GLclampf alc){
-glBlendColor(rlc,rlc,rlc,1.0-alc);
-glClearColor(alc,alc,alc,1.0-rlc);
+glBlendColor(rlc,rlc,rlc,alc);
+glClearColor(rlc,rlc,rlc,1.0-rlc);
 };
 
 EM_JS(void,ma,(),{
