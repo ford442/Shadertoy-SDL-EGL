@@ -600,7 +600,7 @@ glEnable(GL_BLEND);
  glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glEnable(GL_SCISSOR_TEST);
  
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
  
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
