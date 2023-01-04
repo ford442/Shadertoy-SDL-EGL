@@ -227,6 +227,7 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
   gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+ 
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
@@ -531,7 +532,6 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
  
  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
- glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
