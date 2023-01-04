@@ -132,9 +132,9 @@ e.preventDefault();
 }
  
 if (e.code=='KeyZ'){
-vv=document.getElementById("mv");
-vv.pause();
-stp=vv.currentTime;
+let mmvv=document.getElementById("mv");
+mmvv.pause();
+stp=mmvv.currentTime;
 backForth(stp);
 }
  
@@ -293,35 +293,33 @@ if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
-eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+"); $F="+loca+";$Bu="+locb+";}");
 };
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-// if($F%32==0){
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100]]);
-// };
 setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
-if(vv.currentTime>a){
-document.getElementById("mv").currentTime-=0.016666;
+if(mmvv.currentTime>a){
+mmvv.currentTime-=0.016666;
 }else{
 f=false;
-if(vv.currentTime<b){
-document.getElementById("mv").currentTime+=0.016666;
+if(mmvv.currentTime<b){
+mmvv.currentTime+=0.016666;
 }else{
 f=true;
 }}};
 if(f==false){
-if(vv.currentTime<b){
-document.getElementById("mv").currentTime+=0.016666;
+if(mmvv.currentTime<b){
+mmvv.currentTime+=0.016666;
 }else{
 f=true;
-if(vv.currentTime>a){
-document.getElementById("mv").currentTime-=0.016666;
+if(mmvv.currentTime>a){
+mmvv.currentTime-=0.016666;
 }else{
 f=false;
 }}}};
