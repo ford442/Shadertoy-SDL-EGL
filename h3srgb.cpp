@@ -110,7 +110,7 @@ EM_JS(void,ma,(),{
 
 "use strict";
 const pnnl=document.body;
-var let=document.getElementById("mv");
+var vv=document.getElementById("mv");
 var intervalLoop=null;
 var f;
 var loopLoop;
