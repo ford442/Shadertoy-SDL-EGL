@@ -697,7 +697,7 @@ return;
 extern "C" {
 void str(){strt();return;};
 void pl(){plt();return;};
-void clr(GLclampf cllr){clrclr(cllr);return;};
+void clr(GLclampf cllr,GLclampf alp){clrclr(cllr,alp);return;};
 void b3(){ma();return;};
 };
 
