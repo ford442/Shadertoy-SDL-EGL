@@ -192,6 +192,8 @@ const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
  gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+ gl.drawingBufferColorSpace='display-p3';
+
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -232,7 +234,6 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MIN
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);
 
-gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';  // very slow
 
 gl.disable(gl.DITHER);
