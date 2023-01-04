@@ -44,6 +44,8 @@
 
 #include <webgl/webgl2.h>
 
+void clrclr(GLclampf rlc);
+  
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
 static const char8_t *read_file(const GLchar *filename);
@@ -113,6 +115,7 @@ void str();
 void pl();
 void b3();
 void nano(short int Fnum,int leng,float *ptr,float *aptr);
+void clr(GLclampf cllr);
 
 };
 
