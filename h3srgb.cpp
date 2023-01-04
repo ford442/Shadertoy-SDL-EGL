@@ -386,7 +386,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 // glFlush();
 // // nanosleep(&req,&rem);
-// glFinish();
+glFinish();
 return;
 };
 
@@ -582,34 +582,36 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_2_compatibility");
 
-// glEnable(MULTISAMPLE_ARB);
 glEnable(GL_STENCIL_TEST);
-// glDisable(GL_SCISSOR_TEST);
+ 
+ glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
 
+ 
+ glDepthFunc(GL_LESS);
+ glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
 
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glEnable(GL_BLEND);
-//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
-// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
-
- glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
- glEnable(GL_SCISSOR_TEST);
-// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
  //  swap alpha to use one_minus_alpha for 'source'
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-glBlendEquationSeparate(GL_MIN,GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
+ glBlendEquationSeparate(GL_MIN,GL_FUNC_ADD);
+ glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+glEnable(GL_BLEND);
+//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
+ 
+ glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glEnable(GL_SCISSOR_TEST);
+ 
+// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
+
 glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
