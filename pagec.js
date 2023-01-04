@@ -96,8 +96,8 @@ const sarrayBuffer=ff.response;
 if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-setTimeout(function(){Module.ccall('str');},500);
-setTimeout(function(){Module.ccall('b3');},500);}};
+setTimeout(function(){Module.ccall('str');setTimeout(function(){Module.ccall('b3');},500);},500);
+}};
 ff.send(null);
 }
 
@@ -190,21 +190,15 @@ document.getElementById('isrc').innerHTML=adr;
 mV.play();
 var vv=document.getElementById('mv');
 var lockVid=0;
+
 function spKey(e){
 if(e.code=='Space'){
 e.preventDefault();
 if(lockVid==0){lockVid=1;};
 if(lockVid==1){lockVid=0;};
 };
-if(e.code=='KeyS'){lockVid=1;};
-if(e.code=='KeyW'){lockVid=1;};
 if(e.code=='KeyZ'){lockVid=1;};
 if(e.code=='KeyX'){lockVid=0;};
-}
-
-function spKeyUp(e){
-if(e.code=='KeyS'){lockVid=0;};
-if(e.code=='KeyW'){lockVid=0;};
 }
 
 const pnnl=document.body;
