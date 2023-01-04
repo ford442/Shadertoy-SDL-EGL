@@ -9,12 +9,16 @@ document.getElementById('pmhig').innerHTML=window.innerHeight;
 });
 
 document.getElementById('btn7').addEventListener('click',function(){
-document.getElementById('scanvas').height=window.innerHeight*3.5;
-document.getElementById('scanvas').width=window.innerHeight*3.5;
-document.getElementById('pmhig').innerHTML=window.innerHeight*3.5;
+document.getElementById('scanvas').height=window.innerHeight*2.5;
+document.getElementById('scanvas').width=window.innerHeight*2.5;
+document.getElementById('pmhig').innerHTML=window.innerHeight*2.5;
 Module.ccall('str');
-document.getElementById('btn10').click();
+setTimeout(function(){
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('pmhig').innerHTML=window.innerHeight;
 Module.ccall('b3');
+},500);
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
 });
@@ -59,7 +63,7 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,'');
 txxt=txxt.replace(Self,'');
 $sngs[i]=Self+'songs/'+txxt;
-}}
+}};
 function vids(xml){
 const vparser=new DOMParser();
 const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
@@ -71,7 +75,7 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,'');
 txxt=txxt.replace(Self,'');
 $vids[i]=Self+'video/'+txxt;
-}}
+}};
 function shds(xml){
 const sparser=new DOMParser();
 const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
@@ -96,10 +100,12 @@ const sarrayBuffer=ff.response;
 if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-setTimeout(function(){Module.ccall('str');setTimeout(function(){Module.ccall('b3');},500);},500);
-}};
+setTimeout(function(){
+document.getElementById('btn7').click();           
+},500);};
+};
 ff.send(null);
-}
+};
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
@@ -109,7 +115,7 @@ sngs(this);
 }};
 nxhttp.open('GET','songs/',true);
 nxhttp.send();
-}
+};
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
@@ -119,7 +125,7 @@ vids(this);
 }};
 fxhttp.open('GET','video/',true);
 fxhttp.send();
-}
+};
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
@@ -146,11 +152,11 @@ const songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
 const sng=new BroadcastChannel('sng');
 sng.postMessage({data:songSrc});
-}
+};
 
 document.getElementById('btn8').addEventListener('click',function(){
 window.open('./flac');
-setTimeout(function(){snd();},1750);
+setTimeout(function(){snd();},1450);
 });
 
 const tem=document.getElementById('tim');
