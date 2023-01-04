@@ -133,7 +133,7 @@ e.preventDefault();
 };
  
 if (e.code=='KeyZ'){
-var mmvv=document.getElementById("mv");
+mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=mmvv.currentTime;
 backForth(stp);
