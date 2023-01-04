@@ -160,7 +160,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
+const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -515,10 +515,12 @@ EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+ 
+  attr.premultipliedAlpha=EM_FALSE;
+ 
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -585,7 +587,7 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_2_compatibility");
 
-glEnable(GL_STENCIL_TEST);
+glDisable(GL_STENCIL_TEST);
  
  glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
