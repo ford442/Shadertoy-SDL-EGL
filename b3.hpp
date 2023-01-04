@@ -44,7 +44,7 @@
 
 #include <webgl/webgl2.h>
 
-void clrclr(GLclampf rlc);
+void clrclr(GLclampf rlc,GLclampf alp);
   
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
