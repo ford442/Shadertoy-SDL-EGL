@@ -18,7 +18,7 @@ document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 Module.ccall('b3');
-},500);
+},1500);
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
 });
