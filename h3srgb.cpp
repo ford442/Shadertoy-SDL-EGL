@@ -103,7 +103,7 @@ return 0;
 
 void clrclr(GLclampf rlc,GLclampf alc){
 // glBlendColor(rlc,rlc,rlc,1.0);
-glClearColor(rlc,rlc,rlc,rlc-alc);
+glClearColor(rlc,rlc,rlc,1.0-alc);
 };
 
 EM_JS(void,ma,(),{
@@ -230,7 +230,7 @@ gl.getExtension('GL_ARB_multisample');
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-gl.enable(gl.BLEND);
+// gl.enable(gl.BLEND);
 
 gl.drawingBufferColorSpace='display-p3';
 // gl.unpackColorSpace='display-p3';  // very slow
