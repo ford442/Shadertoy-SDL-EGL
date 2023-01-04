@@ -203,7 +203,6 @@ if(e.code=='KeyX'){lockVid=0;};
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
-pnnl.addEventListener('keyup',spKeyUp);
 
 function loada(){
 if(lockVid!=1){
