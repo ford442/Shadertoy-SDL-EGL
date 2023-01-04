@@ -19,6 +19,16 @@ speed:
          --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
 
 
+cloud:
+	 em++ h3srgb.cpp -o c3001.js \
+	 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb  \
+         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize \
+	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
+	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --post-js tilt.js --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
+	 
 tst1: main.cpp  Makefile
 	em++ main.cpp  --closure 0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
 -sUSE_WEBGL2=1 -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
@@ -139,15 +149,6 @@ paint2:
 	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujs.js
-
-cloud:
-	 em++ h3srgb.cpp -o c3001.js -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -lembind -fwasm-exceptions \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -std=gnu++2b -sPRECISE_F32=2 \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js tilt.js --pre-js fluid.js --pre-js flui.js --pre-js setUp.js --pre-js startUp.js --post-js pagec.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js
 
 
 emloop:
