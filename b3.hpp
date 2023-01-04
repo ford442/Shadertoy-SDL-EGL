@@ -50,8 +50,8 @@ void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
 static const char8_t *read_file(const GLchar *filename);
 
-GLfloat x;
-GLfloat y;
+GLclampf x;
+GLclampf y;
 EM_BOOL ms_l;
 
 void uni(float xx,float yy,GLfloat time,short int fram);
