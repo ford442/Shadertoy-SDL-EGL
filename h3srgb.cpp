@@ -103,7 +103,7 @@ return 0;
 
 void clrclr(GLclampf rlc,GLclampf alc){
 // glBlendColor(rlc,rlc,rlc,1.0);
-glClearColor(rlc,rlc,rlc,1.0-alc);
+glClearColor(rlc,rlc,rlc,rlc-alc);
 };
 
 EM_JS(void,ma,(),{
