@@ -436,7 +436,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;\n";
+"precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
@@ -475,13 +475,13 @@ EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
 const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 //  EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
