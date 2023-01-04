@@ -104,7 +104,7 @@ return 0;
 void clrclr(GLclampf rlc){
 // glBlendColor(rlc,rlc,rlc,1.0);
 
-glClearColor(rlc,rlc,rlc,rlc);
+glClearColor(rlc,rlc,rlc,1.0-rlc);
 };
 
 EM_JS(void,ma,(),{
@@ -121,8 +121,8 @@ var stp;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-1.00;
-b=stp+1.00;
+a=stp-2.00;
+b=stp;
 }
 
 function stpBackForth(){loopLoop=false;}
@@ -588,12 +588,12 @@ glEnable(GL_BLEND);
  glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
  glEnable(GL_SCISSOR_TEST);
 // glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_SRC_ALPHA,GL_SRC_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  //  swap alpha to use one_minus_alpha for 'source'
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-glBlendEquationSeparate(GL_MIN,GL_FUNC_ADD);
+glBlendEquationSeparate(GL_MIN,GL_FUNC_SUBTRACT);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
 glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
