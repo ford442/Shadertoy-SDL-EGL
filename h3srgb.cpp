@@ -103,8 +103,8 @@ return 0;
 
 void clrclr(GLclampf rlc){
 // glBlendColor(rlc,rlc,rlc,1.0);
- rlc=1.0-rlc;
-glClearColor(rlc,rlc,rlc,1.0);
+
+glClearColor(rlc,rlc,rlc,1.0-rlc);
 };
 
 EM_JS(void,ma,(),{
@@ -593,7 +593,7 @@ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_SRC_ALPHA,GL_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendEquation(GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
+glBlendEquationSeparate(GL_MIN,GL_FUNC_ADD);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
 glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
