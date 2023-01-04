@@ -122,7 +122,7 @@ function backForth(stp){
 loopLoop=true;
 f=true;
 a=stp-(60*0.0166666);
-b=stp;
+b=stp+(60*0.0166666);
 };
 
 function stpBackForth(){loopLoop=false;}
@@ -324,7 +324,7 @@ mmvv.currentTime-=0.016;
 }else{
 f=false;
 }}}};
-},16.666)};
+},16.666666)};
 M();
 document.getElementById("di").onclick=function(){
 T=true;
