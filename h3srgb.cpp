@@ -101,10 +101,9 @@ y=e->clientY;
 return 0;
 };
 
-void clrclr(GLclampf rlc){
+void clrclr(GLclampf rlc,GLclampf alc){
 // glBlendColor(rlc,rlc,rlc,1.0);
-
-glClearColor(rlc,rlc,rlc,1.0-rlc);
+glClearColor(rlc,rlc,rlc,1.0-alc);
 };
 
 EM_JS(void,ma,(),{
@@ -121,8 +120,8 @@ var stp;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-1.00;
-b=stp+1.00;
+a=stp-2.00;
+b=stp;
 }
 
 function stpBackForth(){loopLoop=false;}
@@ -192,9 +191,7 @@ const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-
  gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -229,17 +226,19 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-// gl.enable(gl.BLEND);
-gl.drawingBufferColorSpace='display-p3';
-// gl.unpackColorSpace='display-p3';  // very slow
-gl.disable(gl.DITHER);
+
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendEquation(gl.MIN);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
- 
- w$=parseInt(document.getElementById("wid").innerHTML,10);
+gl.enable(gl.BLEND);
+
+gl.drawingBufferColorSpace='display-p3';
+// gl.unpackColorSpace='display-p3';  // very slow
+
+gl.disable(gl.DITHER);
+
+
+w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
@@ -305,28 +304,28 @@ $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 // if($F%32==0){
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100]]);
 // };
 setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime-=0.016666;
+document.getElementById("mv").currentTime-=0.016666;
 }else{
 f=false;
 if(vv.currentTime<b){
-vv.currentTime+=0.016666;
+document.getElementById("mv").currentTime+=0.016666;
 }else{
 f=true;
 }}};
 if(f==false){
 if(vv.currentTime<b){
-vv.currentTime+=0.016666;
+document.getElementById("mv").currentTime+=0.016666;
 }else{
 f=true;
 if(vv.currentTime>a){
-vv.currentTime-=0.016666;
+document.getElementById("mv").currentTime-=0.016666;
 }else{
 f=false;
 }}}};
@@ -343,7 +342,7 @@ T=true;
 });
 
 void uni(float xx,float yy,GLfloat time,short int fram){
-GLfloat mX,mY;
+GLclampf mX,mY;
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -352,8 +351,8 @@ mX=xxx*Size;
 mY=yyy*Size;
 clk_l=false;
 };
-GLfloat mm=S*xx;
-GLfloat nn=S*yy;
+GLclampf mm=S*xx;
+GLclampf nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
@@ -377,14 +376,12 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_cal
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
-
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
- glClear(GL_STENCIL_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
-
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 nanosleep(&req,&rem);
 glFinish();
