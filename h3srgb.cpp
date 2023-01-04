@@ -114,14 +114,14 @@ var vv=document.getElementById("mv");
 var intervalLoop=null;
 var f;
 var loopLoop;
-let a,b;
-let stp;
-let mmvv;
+var a,b;
+var stp;
+var mmvv;
  
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-2.00;
+a=stp-(60*0.0166666);
 b=stp;
 };
 
