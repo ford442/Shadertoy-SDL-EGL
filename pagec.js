@@ -103,10 +103,6 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 
 setTimeout(function(){
- // Module.ccall('str');
-// },500);};
-//   setTimeout(function(){
-// Module.ccall('b3');
 document.getElementById('btn7').click();           
 },50);
 };};
@@ -146,12 +142,14 @@ dxhttp.send();
 scanVideos();
 scanShaders();
 scanSongs();
+
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('mv').load();
 document.getElementById('ldv').load();
+
 function snd(){
 const randSong=Math.floor(($sngs[0]-5)*Math.random());
 const songSrc=$sngs[randSong+5];
