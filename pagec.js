@@ -9,18 +9,19 @@ document.getElementById('pmhig').innerHTML=window.innerHeight;
 });
 
 document.getElementById('btn7').addEventListener('click',function(){
-document.getElementById('scanvas').height=window.innerHeight*1.333333;
-document.getElementById('scanvas').width=window.innerHeight*1.333333;
-document.getElementById('pmhig').innerHTML=window.innerHeight*1.333333;
-Module.ccall('str');
-
+document.getElementById('scanvas').height=window.innerHeight*3.333333;
+document.getElementById('scanvas').width=window.innerHeight*3.333333;
+document.getElementById('pmhig').innerHTML=window.innerHeight*3.333333;
+setTimeout(function(){
+Module.ccall('str');},50);
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
-Module.ccall('b3');
-
+setTimeout(function(){
+Module.ccall('b3');},50);
+setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});
+bz.postMessage({data:222});},50);
 });
 
 document.getElementById('btn77').addEventListener('click',function(){
@@ -100,13 +101,14 @@ const sarrayBuffer=ff.response;
 if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-// setTimeout(function(){
+
+setTimeout(function(){
  // Module.ccall('str');
 // },500);};
 //   setTimeout(function(){
 // Module.ccall('b3');
 document.getElementById('btn7').click();           
-// },500);
+},50);
 };};
 ff.send(null);
 };
