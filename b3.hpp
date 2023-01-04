@@ -24,25 +24,26 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
+#include <webgl/webgl2.h>
+
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1 //maybe??
 
-#include <GL/gl.h>
-#include <GL/glext.h>
-
+#include <GLES3/gl3platform.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-#include <webgl/webgl2.h>
+#include <GL/gl.h>
+#include <GL/glext.h>
+
 
 void clrclr(GLclampf rlc,GLclampf alp);
   
@@ -61,12 +62,12 @@ GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 using namespace std;
 using namespace std::chrono;
 
-// steady_clock::time_point t1;
-// steady_clock::time_point t2;
-// steady_clock::time_point t3;
-high_resolution_clock::time_point t1;
-high_resolution_clock::time_point t2;
-high_resolution_clock::time_point t3;
+steady_clock::time_point t1;
+steady_clock::time_point t2;
+steady_clock::time_point t3;
+// high_resolution_clock::time_point t1;
+// high_resolution_clock::time_point t2;
+// high_resolution_clock::time_point t3;
 // system_clock::time_point t1;
 // system_clock::time_point t2;
 // system_clock::time_point t3;
