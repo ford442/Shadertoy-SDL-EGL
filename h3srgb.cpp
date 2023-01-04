@@ -116,23 +116,24 @@ var f;
 var loopLoop;
 var a,b;
 var stp;
-
+var mmvv;
+ 
 function backForth(stp){
 loopLoop=true;
 f=true;
 a=stp-2.00;
 b=stp;
-}
+};
 
 function stpBackForth(){loopLoop=false;}
 
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
-}
+};
  
 if (e.code=='KeyZ'){
-let mmvv=document.getElementById("mv");
+var mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=mmvv.currentTime;
 backForth(stp);
