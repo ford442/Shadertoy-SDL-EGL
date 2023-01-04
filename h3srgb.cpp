@@ -193,6 +193,8 @@ const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 
+ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -236,7 +238,6 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MIN
 // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 // gl.blendEquation(gl.MIN);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
  
  w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -382,10 +383,10 @@ iFrame++;
  glClear(GL_STENCIL_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
  glClear(GL_COLOR_BUFFER_BIT);
+glFlush();
 
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-// glFlush();
-// // nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 glFinish();
 return;
 };
@@ -434,10 +435,10 @@ emscripten_cancel_main_loop();
 nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
-GLfloat gF=F;
-GLfloat gF0=F0;
-GLfloat gFm1=Fm1;
-typedef struct{GLfloat XYZW[4];}Vertex;
+GLclampf gF=F;
+GLclampf gF0=F0;
+GLclampf gFm1=Fm1;
+typedef struct{GLclampf XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
@@ -534,6 +535,8 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
+ 
+ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -616,7 +619,6 @@ glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 
- 
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 //   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
@@ -628,7 +630,6 @@ glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_FUNC_ADD);
-
  
  // nanosleep(&req,&rem);
  
@@ -665,7 +666,6 @@ glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 nanosleep(&req,&rem);
 glUseProgram(shd_prg);
- glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 
 nanosleep(&req,&rem);
 glDeleteShader(vtx);
