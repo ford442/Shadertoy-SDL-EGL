@@ -193,7 +193,6 @@ this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
  gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
  gl.drawingBufferColorSpace='display-p3';
-
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -228,17 +227,12 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);
-
 // gl.unpackColorSpace='display-p3';  // very slow
-
 gl.disable(gl.DITHER);
-
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -476,7 +470,7 @@ eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE};
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
@@ -508,7 +502,7 @@ EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,64,
 EGL_BUFFER_SIZE,64,
 EGL_SAMPLE_BUFFERS,256,
-EGL_SAMPLES,64,
+EGL_SAMPLES,128,
 EGL_NONE
 };
 emscripten_webgl_init_context_attributes(&attr);
@@ -517,7 +511,7 @@ attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
  
-  attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_TRUE;
  
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
@@ -596,51 +590,25 @@ glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 
  //  swap alpha to use one_minus_alpha for 'source'
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- // glBlendEquation(GL_FUNC_ADD);
-// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
-// glBlendEquation(GL_FUNC_ADD);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+
  glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
  glBlendEquationSeparate(GL_MIN,GL_FUNC_ADD);
  glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 glEnable(GL_BLEND);
-//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
-// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
- 
+
  glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glEnable(GL_SCISSOR_TEST);
  
-// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-
 glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
 
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
-// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
- 
-// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- // glBlendEquation(GL_FUNC_ADD);
-// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
-// glBlendEquation(GL_FUNC_ADD);
- 
- // nanosleep(&req,&rem);
- 
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-// glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 static const GLchar* default_fragment_shader=(GLchar*)read_file(fileloc);
