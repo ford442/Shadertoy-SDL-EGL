@@ -5,12 +5,12 @@ document.getElementById('scanvas').height=window.innerHeight*1.333333;
 document.getElementById('scanvas').width=window.innerHeight*1.333333;
 document.getElementById('pmhig').innerHTML=window.innerHeight*1.333333;
 setTimeout(function(){
-Module.ccall('str');},50);
+Module.ccall('str');},250);
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3');},50);
+Module.ccall('b3');},650);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
