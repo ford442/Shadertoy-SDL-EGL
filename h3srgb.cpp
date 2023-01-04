@@ -533,6 +533,54 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 
+// glEnable(MULTISAMPLE_ARB);
+glEnable(GL_STENCIL_TEST);
+// glDisable(GL_SCISSOR_TEST);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
+
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearDepth(D);
+
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glEnable(GL_BLEND);
+//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
+
+ glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+ glEnable(GL_SCISSOR_TEST);
+// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+ //  swap alpha to use one_minus_alpha for 'source'
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ // glBlendEquation(GL_FUNC_ADD);
+// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
+glBlendEquationSeparate(GL_MIN,GL_MAX);
+// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
+// glBlendEquation(GL_FUNC_ADD);
+glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+glDisable(GL_DITHER);
+glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+
+ 
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
+ 
+// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ // glBlendEquation(GL_FUNC_ADD);
+// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
+// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
+// glBlendEquation(GL_FUNC_ADD);
+
+ 
+ // nanosleep(&req,&rem);
+ 
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -570,53 +618,6 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 
-// glEnable(MULTISAMPLE_ARB);
-glEnable(GL_STENCIL_TEST);
-// glDisable(GL_SCISSOR_TEST);
-glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
-
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
-
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glEnable(GL_BLEND);
-//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
-// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
-
- glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
- glEnable(GL_SCISSOR_TEST);
-// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
- //  swap alpha to use one_minus_alpha for 'source'
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- // glBlendEquation(GL_FUNC_ADD);
-// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-glBlendEquationSeparate(GL_MIN,GL_FUNC_SUBTRACT);
-// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
-// glBlendEquation(GL_FUNC_ADD);
-glBlendColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
-glDisable(GL_DITHER);
-glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
-glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
-
- 
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-//   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
-// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR);
- 
-// glBlendFunc(GL_SRC_ALPHA,GL_CONSTANT_ALPHA);
-// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- // glBlendEquation(GL_FUNC_ADD);
-// glBlendEquationSeparate(GL_FUNC_ADD,GL_MIN);
-// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
-// glBlendEquation(GL_FUNC_ADD);
-
- 
- // nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 // glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
