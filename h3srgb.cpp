@@ -360,7 +360,7 @@ return;
 void renderFrame(){
 auto t3=t2;
 EMSCRIPTEN_RESULT ret;
-auto t2=steady_clock::now();
+auto t2=high_resolution_clock::now();
 duration<float>time_spanb=duration_cast<duration<float>>(t2-t3);
 TtimeDelta=time_spanb.count();
 duration<float>time_spana=duration_cast<duration<float>>(t2-t1);
