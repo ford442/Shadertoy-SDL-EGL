@@ -110,13 +110,13 @@ EM_JS(void,ma,(),{
 
 "use strict";
 const pnnl=document.body;
-var vv=document.getElementById("mv");
+var let=document.getElementById("mv");
 var intervalLoop=null;
 var f;
 var loopLoop;
-var a,b;
-var stp;
-var mmvv;
+let a,b;
+let stp;
+let mmvv;
  
 function backForth(stp){
 loopLoop=true;
