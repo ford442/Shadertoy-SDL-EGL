@@ -10,7 +10,7 @@ struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 void cls_aud();
 void qu(int rc);
 void opn_aud();
-void SDLCALL bfr(void *unused,Uint8* stm,int len);
+void SDLCALL bfr(void *,Uint8*,int);
 void plt();
 void pl();
 };
