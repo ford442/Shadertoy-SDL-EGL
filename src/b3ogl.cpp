@@ -15,8 +15,8 @@ return 0;
 };
 
 void clrclr(GLclampf rlc,GLclampf alc){
-glBlendColor(y1,y1,y1,y1-alc);
-glClearColor(rlc,rlc,rlc,y1-rlc);
+glBlendColor(y1y,y1y,y1y,y1y-alc);
+glClearColor(rlc,rlc,rlc,y1y-rlc);
 };
 
 void uni(float xx,float yy,GLfloat time,short int fram){
