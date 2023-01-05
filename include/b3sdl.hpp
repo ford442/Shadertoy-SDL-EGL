@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
