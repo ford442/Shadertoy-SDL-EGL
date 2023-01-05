@@ -9,7 +9,7 @@ b3hd:
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs
 	 em++ src/b3sdl.cpp -c \
-	 -std=gnu++2b -ffast-math -ffp-contract=off -matomics \
+	 -sUSE_SDL=2 -std=gnu++2b -ffast-math -ffp-contract=off -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs
@@ -20,7 +20,7 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3014.js \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb  \
-	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
 
