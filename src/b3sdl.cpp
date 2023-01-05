@@ -1,13 +1,27 @@
 #include "../include/b3sdl.hpp"
 
-void cls_aud(){if(dev!=0){SDL_PauseAudioDevice(dev,SDL_TRUE);SDL_CloseAudioDevice(dev);dev=0;return;}};
-void qu(int rc){SDL_Quit();return;};
+void cls_aud(){
+  if(dev!=0){
+    SDL_PauseAudioDevice(dev,SDL_TRUE);
+    SDL_CloseAudioDevice(dev);
+    dev=0;
+    return;
+  }};
+
+void qu(int rc){
+  SDL_Quit();
+  return;
+};
+
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
-if(!dev){SDL_FreeWAV(wave.snd);};
+if(!dev){
+SDL_FreeWAV(wave.snd);
+}
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
+
 void SDLCALL bfr(void * unused,Uint8 * stm,int len){
 Uint8 * wptr;
 int lft;
@@ -24,7 +38,8 @@ wave.pos=0;
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
-}
+};
+
 void plt(){
 char flnm[24];
 SDL_FreeWAV(wave.snd);
@@ -40,7 +55,7 @@ wave.pos=0;
 wave.spec.callback=bfr;
 opn_aud();
 return;
-}
+};
 
 extern"C"{
   
