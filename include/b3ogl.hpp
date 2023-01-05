@@ -3,7 +3,7 @@
 
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
 
 float F=1.0f,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f,Ttime,TtimeDelta;
 short int iFrame,iFps,Size;
@@ -50,7 +50,7 @@ GLsizei s4=4,i;
 const GLchar *sources[4];
 GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
+GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 typedef struct{GLclampf XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag;
@@ -126,18 +126,18 @@ EGL_SAMPLES,128,
 EGL_NONE
 };
 
-void uni(float xx,float yy,GLfloat time,short int fram);
+void uni(float,float,GLfloat,short int);
 
-GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
+GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
-void clrclr(GLclampf rlc,GLclampf alp);
+void clrclr(GLclampf,GLclampf);
 
-static const char8_t *read_file(const GLchar *filename);
+static const char8_t *read_file(const GLchar *);
 
 extern "C"{
   
 void str();
   
-void clr(GLclampf cllr,GLclampf alp);
+void clr(GLclampf,GLclampf);
   
 };
