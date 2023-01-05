@@ -80,7 +80,73 @@ GLclampf gF0=F0;
 GLclampf gFm1=Fm1;
 typedef struct{GLclampf XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-
+const GLchar common_shader_header_gles3[]=
+"#version 300 es\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
+"precision mediump float;precision mediump int;precision lowp sampler3D;precision highp sampler2D;\n";
+const GLchar vertex_shader_body_gles3[]=
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+const GLchar fragment_shader_header_gles3[]=
+"\n uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"\n uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"\n out vec4 fragColor;\n";
+const GLchar fragment_shader_footer_gles3[]=
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
+const GLchar* common_shader_header=common_shader_header_gles3;
+const GLchar* vertex_shader_body=vertex_shader_body_gles3;
+const GLchar* fragment_shader_header=fragment_shader_header_gles3;
+const GLchar* fragment_shader_footer=fragment_shader_footer_gles3;
+GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res;
+GLuint VCO,ECO,vtx,frag;
+EGLDisplay display;
+EGLSurface surface;
+EGLContext contextegl;
+  
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+EGLint config_size,major,minor,atb_pos;
+ 
+ double wi,hi;
+ const EGLint attribut_list[]={ 
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_NONE};
+const EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+EGL_NONE};
+const EGLint attribute_list[]={
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+//  EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
+EGL_CONFORMANT,EGL_OPENGL_BIT,
+// EGL_COLOR_BUFFER_TYPE, EGL_RGB_BUFFER,
+// EGL_BIND_TO_TEXTURE_RGBA, EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
+EGL_RED_SIZE,64,
+EGL_GREEN_SIZE,64,
+EGL_BLUE_SIZE,64,
+EGL_ALPHA_SIZE,64,
+EGL_DEPTH_SIZE,64,
+EGL_STENCIL_SIZE,64,
+EGL_BUFFER_SIZE,64,
+EGL_SAMPLE_BUFFERS,256,
+EGL_SAMPLES,128,
+EGL_NONE
+};
 extern "C"{
 void str();
 void clr(GLclampf cllr,GLclampf alp);
