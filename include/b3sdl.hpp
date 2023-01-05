@@ -1,4 +1,3 @@
-
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
@@ -10,9 +9,9 @@ void qu(int rc);
 void opn_aud();
 void SDLCALL bfr(void *,Uint8 *,int);
 void plt();
+extern "C"{
 void pl();
-  
+}
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
-
