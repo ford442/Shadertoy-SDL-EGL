@@ -26,7 +26,9 @@ void clrclr(GLclampf rlc,GLclampf alp);
 static const char8_t *read_file(const GLchar *filename);
 GLclampf x;
 GLclampf y;
+GLclampf y1=1.0;
 EM_BOOL ms_l;
+
 void uni(float xx,float yy,GLfloat time,short int fram);
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 steady_clock::time_point t1;
@@ -71,6 +73,14 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame();
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+const char *fileloc="/shader/shader1.toy";
+EGLint v0=0,v3=3;
+GLclampf gF=F;
+GLclampf gF0=F0;
+GLclampf gFm1=Fm1;
+typedef struct{GLclampf XYZW[4];}Vertex;
+const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+
 extern "C"{
 void str();
 void clr(GLclampf cllr,GLclampf alp);
