@@ -3,7 +3,8 @@
 #include "SDL_config.h"
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <cstdio>
+#include <cstdlib>
+#include <iostream>
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 void cls_aud();
