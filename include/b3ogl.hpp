@@ -1,6 +1,5 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <cstdlib>
 #include <iostream>
 #include <ctime>
 #include <chrono>
