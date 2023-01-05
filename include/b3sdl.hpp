@@ -3,6 +3,7 @@
 #include "SDL_config.h"
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 SDL_AudioDeviceID dev;
