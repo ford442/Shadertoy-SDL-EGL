@@ -30,12 +30,12 @@ GLfloat g1g=1.0;
 EM_BOOL ms_l;
 void uni(float xx,float yy,GLfloat time,short int fram);
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
-steady_clock::time_point t1;
-steady_clock::time_point t2;
-steady_clock::time_point t3;
-// high_resolution_clock::time_point t1;
-// high_resolution_clock::time_point t2;
-// high_resolution_clock::time_point t3;
+// steady_clock::time_point t1;
+// steady_clock::time_point t2;
+// steady_clock::time_point t3;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
+high_resolution_clock::time_point t3;
 // system_clock::time_point t1;
 // system_clock::time_point t2;
 // system_clock::time_point t3;
@@ -83,7 +83,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump float;precision mediump int;precision lowp sampler3D;precision highp sampler2D;\n";
+"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
