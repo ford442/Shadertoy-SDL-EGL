@@ -268,6 +268,5 @@ T=true;
 });
 
 extern "C" {
-void clr(GLclampf cllr,GLclampf alp){clrclr(cllr,alp);return;};
 void b3(){ma();return;};
 };
