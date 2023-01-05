@@ -3,14 +3,14 @@ EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData)
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
-};
+}
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
-};
+}
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
-}};
+}}
 return 0;
 };
 
@@ -28,13 +28,13 @@ const float yyy=yy;
 mX=xxx*Size;
 mY=yyy*Size;
 clk_l=false;
-};
+}
 GLclampf mm=S*xx;
 GLclampf nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
-};
+}
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
@@ -74,21 +74,21 @@ short int status=fseek(file,0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
-};
+}
 length=ftell(file);
 status=fseek(file,0,SEEK_SET);
 if(status!=0){
 fclose(file);
 return nullptr;
-};
+}
 result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
-};
+}
 fclose(file);
 return result;
-};
+}
 return nullptr;
 };
 
@@ -96,7 +96,7 @@ GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar ** dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
-};
+}
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
@@ -259,9 +259,10 @@ void str(){
 strt();
 return;
 };
+
 void clr(GLclampf cllr,GLclampf alp){
 clrclr(cllr,alp);
 return;
 };
 
-};
+}
