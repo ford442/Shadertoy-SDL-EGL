@@ -252,7 +252,16 @@ nanosleep(&req,&rem);
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
+
 extern "C" {
-void str(){strt();return;};
-void clr(GLclampf cllr,GLclampf alp){clrclr(cllr,alp);return;};
+ 
+void str(){
+strt();
+return;
+};
+void clr(GLclampf cllr,GLclampf alp){
+clrclr(cllr,alp);
+return;
+};
+
 };
