@@ -1,9 +1,9 @@
-#include <cstdio>
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include <cstdio>
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 void cls_aud();
