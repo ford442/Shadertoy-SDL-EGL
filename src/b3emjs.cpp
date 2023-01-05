@@ -1,5 +1,5 @@
-include "include/b3emjs.hpp"
-include "include/b3ogl.hpp"
+include "../include/b3emjs.hpp"
+include "../include/b3ogl.hpp"
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
