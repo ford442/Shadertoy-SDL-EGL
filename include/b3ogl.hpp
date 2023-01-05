@@ -26,7 +26,7 @@ void clrclr(GLclampf rlc,GLclampf alp);
 static const char8_t *read_file(const GLchar *filename);
 GLclampf x;
 GLclampf y;
-GLclampf y1=1.0;
+GLclampf y1y=1.0;
 EM_BOOL ms_l;
 
 void uni(float xx,float yy,GLfloat time,short int fram);
