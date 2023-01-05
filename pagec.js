@@ -15,6 +15,15 @@ setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
 };
+function normalResStart(){
+setTimeout(function(){
+Module.ccall('str');},250);
+setTimeout(function(){
+Module.ccall('b3');},450);
+setTimeout(function(){
+const bz=new BroadcastChannel('bez');
+bz.postMessage({data:222});},50);
+};
 
 function pll(){Module.ccall('pl');}
 
@@ -83,9 +92,8 @@ const sarrayBuffer=ff.response;
 if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-
 setTimeout(function(){
-hiResStart();
+normalResStart();
 },50);
 };};
 ff.send(null);
