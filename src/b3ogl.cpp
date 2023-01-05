@@ -43,9 +43,9 @@ return;
 void renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::high_resolution_clock::now();
-duration<double>time_spanb=duration_cast<duration<double>>(t2-t3);
+std::chrono::duration<double>time_spanb=duration_cast<std::chrono::duration<double>>(t2-t3);
 TtimeDelta=time_spanb.count();
-duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
+std::chrono::duration<double>time_spana=duration_cast<std::chrono::duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
