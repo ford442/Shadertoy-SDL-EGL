@@ -91,7 +91,25 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const gl=bcanvas.getContext("webgl2",{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
+const gl=bcanvas.getContext("webgl2",{
+ colorType:'float64',
+ preferLowPowerToHighPerformance:false,
+ precision:'highp',logarithmicDepthBuffer:true,
+ colorSpace:'display-p3',
+ alpha:true,
+ depth:true,
+ stencil:true,
+ imageSmoothingEnabled:true,
+ preserveDrawingBuffer:true,
+ premultipliedAlpha:false,
+ desynchronized:false,
+ lowLatency:true,
+ powerPreference:'high-performance',
+ antialias:true,
+ willReadFrequently:true,
+ majorVersion:2,
+ minorVersion:0
+ });
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'webgl2'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
