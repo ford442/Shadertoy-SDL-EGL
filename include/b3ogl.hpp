@@ -1,14 +1,36 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
+
+EMSCRIPTEN_RESULT ret;
+EM_BOOL ms_l,clk_l;
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+
+float F=1.0f,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f,Ttime,TtimeDelta;
+short int iFrame,iFps,Size;
+double wi,hi;
+const char *fileloc="/shader/shader1.toy";
+
+void renderFrame();
+
 #include <iostream>
 #include <ctime>
 #include <chrono>
-EMSCRIPTEN_RESULT ret;
+
+// steady_clock::time_point t1;
+// steady_clock::time_point t2;
+// steady_clock::time_point t3;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
+high_resolution_clock::time_point t3;
+struct timespec rem;
+struct timespec req={0,15000000};
+
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1 //maybe??
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 #include <GLES3/gl3.h>
@@ -26,31 +48,16 @@ using namespace std::chrono;
 GLclampf x,y,y1y=1.0,gF=F,gF0=F0,gFm1=Fm1;
 GLfloat g1g=1.0,S;
 EGLint v0=0,v3=3;
-EM_BOOL ms_l,clk_l;
 GLuint uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm;
-short int iFrame,iFps,Size;
 GLsizei s4=4,i;
-double wi,hi;
-float F=1.0f,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f,Ttime,TtimeDelta;
-// steady_clock::time_point t1;
-// steady_clock::time_point t2;
-// steady_clock::time_point t3;
-high_resolution_clock::time_point t1;
-high_resolution_clock::time_point t2;
-high_resolution_clock::time_point t3;
-struct timespec rem;
-struct timespec req={0,15000000};
 const GLchar *sources[4];
 GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-void renderFrame();
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-const char *fileloc="/shader/shader1.toy";
+
 
 typedef struct{GLclampf XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag;
 EGLDisplay display;
 EGLSurface surface;
