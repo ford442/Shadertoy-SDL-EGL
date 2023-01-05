@@ -1,7 +1,9 @@
-#include <ctime>
-#include <chrono>
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+#include <chrono>
 EMSCRIPTEN_RESULT ret;
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
