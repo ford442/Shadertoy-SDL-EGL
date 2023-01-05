@@ -15,8 +15,8 @@ return 0;
 };
 
 void clrclr(GLclampf rlc,GLclampf alc){
-glBlendColor(1.0,1.0,1.0,1.0-alc);
-glClearColor(rlc,rlc,rlc,1.0-rlc);
+glBlendColor(y1,y1,y1,y1-alc);
+glClearColor(rlc,rlc,rlc,y1-rlc);
 };
 
 void uni(float xx,float yy,GLfloat time,short int fram){
@@ -105,13 +105,6 @@ return shader;
 
 void strt(){
 emscripten_cancel_main_loop();
-const char *fileloc="/shader/shader1.toy";
-EGLint v0=0,v3=3;
-GLclampf gF=F;
-GLclampf gF0=F0;
-GLclampf gFm1=Fm1;
-typedef struct{GLclampf XYZW[4];}Vertex;
-const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
