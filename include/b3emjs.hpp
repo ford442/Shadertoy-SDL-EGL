@@ -1,9 +1,9 @@
-void avgFrm(short int,int,float *,float *);
-
 extern "C"{
 void b3();
 void nano(short int,int,float *,float *);
 };
+
+void avgFrm(short int,int,float *,float *);
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
