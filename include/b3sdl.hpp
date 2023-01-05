@@ -1,5 +1,4 @@
-extern "C"{
-  
+
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
@@ -16,4 +15,4 @@ void pl();
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
-};
+
