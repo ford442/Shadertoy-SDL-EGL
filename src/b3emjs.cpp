@@ -1,6 +1,6 @@
 #include "../include/b3emjs.hpp"
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
+void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -33,7 +33,7 @@ return;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr){avgFrm(Fnum,leng,ptr,aptr);};
+void nano(short int Fnum,int leng,float * ptr,float * aptr){avgFrm(Fnum,leng,ptr,aptr);};
 
 }
 
