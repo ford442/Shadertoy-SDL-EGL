@@ -1,5 +1,5 @@
 #include "../include/b3ogl.hpp"
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -65,10 +65,10 @@ nanosleep(&req,&rem);
 return;
 };
 
-static const char8_t *read_file(const GLchar *filename){
-char8_t *result=NULL;
+static const char8_t * read_file(const GLchar * filename){
+char8_t * result=NULL;
 long length=0;
-FILE *file=fopen(filename,"r");
+FILE * file=fopen(filename,"r");
 if(file){
 short int status=fseek(file,0,SEEK_END);
 if(status!=0){
@@ -81,7 +81,7 @@ if(status!=0){
 fclose(file);
 return nullptr;
 };
-result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
@@ -92,7 +92,7 @@ return result;
 return nullptr;
 };
 
-GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources){
+GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar ** dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
@@ -202,7 +202,7 @@ glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-static const GLchar* default_fragment_shader=(GLchar*)read_file(fileloc);
+static const GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -233,7 +233,7 @@ glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
-glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid *)0);
 // smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
