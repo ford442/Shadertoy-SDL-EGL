@@ -26,8 +26,8 @@ static const char8_t *read_file(const GLchar *filename);
 GLclampf x;
 GLclampf y;
 GLclampf y1y=1.0;
+GLfloat g1g=1.0;
 EM_BOOL ms_l;
-
 void uni(float xx,float yy,GLfloat time,short int fram);
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 steady_clock::time_point t1;
@@ -102,13 +102,12 @@ GLuint VCO,ECO,vtx,frag;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
-  
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EGLint config_size,major,minor,atb_pos;
- 
- double wi,hi;
- const EGLint attribut_list[]={ 
+EGLConfig eglconfig;
+double wi,hi;
+const EGLint attribut_list[]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
