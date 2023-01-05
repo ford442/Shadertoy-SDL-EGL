@@ -2,10 +2,7 @@
 #include <chrono>
 #include <emscripten.h>
 #include <emscripten/html5.h>
-
 EMSCRIPTEN_RESULT ret;
-
-
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
@@ -72,9 +69,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame();
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar **dsources);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-
 extern "C"{
 void str();
 void clr(GLclampf cllr,GLclampf alp);
 };
-
