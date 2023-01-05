@@ -1,4 +1,4 @@
-#include <include/b3main.hpp>
+#include <./include/b3main.hpp>
 int main(){
 EM_ASM({
 FS.mkdir("/snd");
