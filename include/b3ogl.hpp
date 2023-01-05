@@ -1,7 +1,5 @@
 extern "C"{
-  
 void str();
-   
 };
 
 float F=1.0f,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f,Ttime,TtimeDelta;
