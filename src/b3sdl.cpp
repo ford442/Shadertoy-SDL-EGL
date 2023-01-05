@@ -8,8 +8,8 @@ if(!dev){SDL_FreeWAV(wave.snd);};
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
-void SDLCALL bfr(void *unused,Uint8* stm,int len){
-Uint8* wptr;
+void SDLCALL bfr(void * unused,Uint8 * stm,int len){
+Uint8 * wptr;
 int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
