@@ -17,7 +17,7 @@ return 1;
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 glBlendColor(y1y-rlc,y1y-rlc,y1y-rlc,y1y-alc);
-glClearColor(avr,avr,avr,y1y);
+glClearColor(avr,avr,avr,y1y-alc);
 return;
 }
 
@@ -63,7 +63,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
- glClear(GL_COLOR_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT);
 
 // glFinish();
 // nanosleep(&req,&rem);
