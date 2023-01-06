@@ -1,14 +1,9 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-int main(){
-  
-EM_ASM({
-  
-"use strict";
-FS.mkdir("/snd");
-FS.mkdir("/shader");
+EM_JS(void,js_main,(),{
 
+  
 function hiResStart(){
 document.getElementById('scanvas').height=window.innerHeight*1.333333;
 document.getElementById('scanvas').width=window.innerHeight*1.333333;
@@ -272,17 +267,25 @@ $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
-  
 document.getElementById('di').click();
-
 };
 setTimeout(function(){
 loada();
 },$ldt);
 }
-
 loada();
+  
+});
+  
+int main(){
+  
+EM_ASM({
+  
+"use strict";
+FS.mkdir("/snd");
+FS.mkdir("/shader");
 
 });
+js_main();
 return 0;
 }
