@@ -2,7 +2,6 @@
 #include <emscripten/html5.h>
 
 EM_JS(void,js_main,(),{
-
   
 function hiResStart(){
 document.getElementById('scanvas').height=window.innerHeight*1.333333;
@@ -161,7 +160,7 @@ sng.postMessage({data:songSrc});
 
 document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
-setTimeout(function(){snd();},1450);
+setTimeout(function(){snd();},1550);
 });
 
 const tem=document.getElementById('tim');
