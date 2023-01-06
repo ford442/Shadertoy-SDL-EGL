@@ -146,7 +146,7 @@ this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setPrecision('single').setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
 gl.drawingBufferColorSpace='display-p3';
-gl.disable(gl.DITHER);
+// gl.disable(gl.DITHER);
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
