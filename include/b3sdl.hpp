@@ -9,7 +9,7 @@ void pl();
 SDL_AudioDeviceID dev;
 struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 void cls_aud();
-void qu(int);
+void qu();
 void opn_aud();
 void SDLCALL bfr(void *,Uint8 *,int);
 void plt();
