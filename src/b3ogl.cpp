@@ -190,7 +190,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(D);
  //  swap alpha to use one_minus_alpha for 'source'
 glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_MAX,GL_MIN);
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
