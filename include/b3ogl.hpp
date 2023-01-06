@@ -29,7 +29,7 @@ struct timespec req={0,15000000};
 
 extern "C"{
   
-void clr(GLclampf,GLclampf);
+void clr(GLclampf,GLclampf,GLclampf);
   
 };
 
