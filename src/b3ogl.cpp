@@ -1,4 +1,5 @@
 #include "../include/b3ogl.hpp"
+
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -11,12 +12,13 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-return 0;
+return;
 }
 
 void clrclr(GLclampf rlc,GLclampf alc){
 glBlendColor(y1y,y1y,y1y,y1y-alc);
 glClearColor(rlc,rlc,rlc,y1y-rlc);
+return;
 }
 
 void uni(float xx,float yy,GLfloat time,short int fram){
@@ -47,10 +49,10 @@ std::chrono::duration<double>time_spanb=duration_cast<std::chrono::duration<doub
 TtimeDelta=time_spanb.count();
 std::chrono::duration<double>time_spana=duration_cast<std::chrono::duration<double>>(t2-t1);
 Ttime=time_spana.count();
-ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
@@ -59,7 +61,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
-glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
+glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 glFinish();
 nanosleep(&req,&rem);
 return;
@@ -70,13 +72,13 @@ char8_t * result=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
 if(file){
-short int status=fseek(file,0,SEEK_END);
+short int status=fseek(file,(long int)0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
 }
 length=ftell(file);
-status=fseek(file,0,SEEK_SET);
+status=fseek(file,(long int)0,SEEK_SET);
 if(status!=0){
 fclose(file);
 return nullptr;
@@ -129,7 +131,7 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
@@ -194,11 +196,11 @@ glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 // glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
-glGenBuffers(1,&VBO);
+glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-glGenBuffers(1,&EBO);
+glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
@@ -206,13 +208,13 @@ static const GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+vtx=compile_shader(GL_VERTEX_SHADER,(GLsizei)2,sources);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+frag=compile_shader(GL_FRAGMENT_SHADER,(GLsizei)4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 nanosleep(&req,&rem);
@@ -233,7 +235,7 @@ glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
-glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid *)0);
+glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
 // smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
@@ -254,10 +256,11 @@ return;
 }
 
 extern "C" {
- 
+
 void str(){
 strt();
 return;
+
 }
 
 void clr(GLclampf cllr,GLclampf alp){
