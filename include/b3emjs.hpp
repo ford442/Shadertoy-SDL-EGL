@@ -10,8 +10,10 @@ void avgFrm(short int,int,float *,float *);
 
 EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
 
-#define GL_GLEXT_PROTOTYPES 1
+#define GL3_PROTOTYPES 1
+#define GL4_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 
