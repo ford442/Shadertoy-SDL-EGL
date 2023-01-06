@@ -69,7 +69,7 @@ void uni(float,float,GLfloat,short int);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
-void clrclr(GLclampf,GLclampf,GLclampf);
+void clrclr(GLclampf,GLclampf);
 
 static const char8_t * read_file(const GLchar *);
 
