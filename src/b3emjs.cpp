@@ -109,7 +109,8 @@ desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
-willReadFrequently:true,
+willReadFrequently:false,
+xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
