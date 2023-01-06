@@ -6,4 +6,4 @@ FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
 return 0;
-};
+}
