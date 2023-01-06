@@ -45,9 +45,9 @@ return;
 void renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::high_resolution_clock::now();
-std::chrono::duration<double>time_spanb=duration_cast<std::chrono::duration<double>>(t2-t3);
+std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
 TtimeDelta=time_spanb.count();
-std::chrono::duration<double>time_spana=duration_cast<std::chrono::duration<double>>(t2-t1);
+std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
@@ -191,7 +191,7 @@ glClearDepth(D);
  //  swap alpha to use one_minus_alpha for 'source'
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_MAX,GL_MAX);
+glBlendEquationSeparate(GL_MAX,GL_MIN);
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 // glDisable(GL_DITHER);
