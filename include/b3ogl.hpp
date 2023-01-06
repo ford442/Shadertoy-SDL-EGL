@@ -23,6 +23,7 @@ struct timespec rem;
 struct timespec req={0,15000000};
 
 #define GL3_PROTOTYPES 1
+#define GL4_PROTOTYPES 1
 #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #include <GL/gl.h>
@@ -126,15 +127,6 @@ EGL_SAMPLES,64,
 EGL_NONE
 };
 
-// #define GL4_PROTOTYPES 1 //maybe??
-
-#include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
-
-#include <webgl/webgl2.h>
-
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
@@ -143,3 +135,10 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
 EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
+
+#include <GLES3/gl3.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
+#include <GLES3/gl3platform.h>
+
+#include <webgl/webgl2.h>
