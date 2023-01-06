@@ -57,11 +57,14 @@ mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
+ glClear(GL_COLOR_BUFFER_BIT);
+
 glClear(GL_DEPTH_BUFFER_BIT);
-glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+ glClear(GL_COLOR_BUFFER_BIT);
+
 // glFinish();
 // nanosleep(&req,&rem);
 return;
