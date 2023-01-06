@@ -232,8 +232,8 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
-r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
+// r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+// t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
