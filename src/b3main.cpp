@@ -3,20 +3,23 @@
 
 EM_JS(void,js_main,(),{
   
-function hiResStart(){
+function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*1.333333;
 document.getElementById('scanvas').width=window.innerHeight*1.333333;
 document.getElementById('pmhig').innerHTML=window.innerHeight*1.333333;
 setTimeout(function(){
-Module.ccall('str');},250);
+Module.ccall('str');
+},150);
+setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
+},250);
 setTimeout(function(){
-Module.ccall('b3');},650);
+Module.ccall('b3');},450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},50);
+bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
@@ -103,8 +106,8 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-normalResStart();
-},50);
+highResStart();
+},150);
 };};
 ff.send(null);
 }
@@ -279,12 +282,12 @@ loada();
 int main(){
   
 EM_ASM({
-  
 "use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
-
 });
+
 js_main();
 return 0;
+
 }
