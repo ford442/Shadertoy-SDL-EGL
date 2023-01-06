@@ -279,7 +279,7 @@ S();
 };
 return()=>{
 T=true;
-}}
+};}
 
 });
 
@@ -287,5 +287,5 @@ extern "C" {
 void b3(){
 ma();
 return;
-};
+}
 }
