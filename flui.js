@@ -111,6 +111,7 @@ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experim
 let halfFloat;
 let supportLinearFiltering;
 if(isWebGL2){
+gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
@@ -144,9 +145,9 @@ gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
 gl.disable(gl.DITHER);
-
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 }else{
+gl.drawingBufferColorSpace='display-p3';
 halfFloat=gl.getExtension('OES_texture_half_float');
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
