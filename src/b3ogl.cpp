@@ -15,9 +15,9 @@ y=e->clientY;
 return 1;
 }
 
-void clrclr(GLclampf rlc,GLclampf alc){
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 glBlendColor(y1y-rlc,y1y-rlc,y1y-rlc,y1y-alc);
-glClearColor(y1y-alc,y1y-alc,y1y-alc,rlc);
+glClearColor(y1y-avr,y1y-avr,y1y-avr,rlc);
 return;
 }
 
@@ -261,8 +261,8 @@ renderFrame();
 return;
 }
 
-void clr(GLclampf cllr,GLclampf alp){
-clrclr(cllr,alp);
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+clrclr(cllr,alp,avr);
 return;
 }
 
