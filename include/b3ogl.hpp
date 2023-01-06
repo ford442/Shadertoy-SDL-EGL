@@ -2,7 +2,7 @@ extern "C"{
 void str();
 };
 
-float F=1.0f,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f,Ttime,TtimeDelta;
+float Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
 short int iFrame,iFps,Size;
 double wi,hi;
 const char * fileloc="/shader/shader1.toy";
@@ -34,7 +34,7 @@ void clr(GLclampf,GLclampf);
   
 };
 
-GLclampf x,y,y1y=1.0,gF=F,gF0=F0,gFm1=Fm1;
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
 GLfloat g1g=1.0,S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm;
@@ -78,6 +78,7 @@ static const char8_t * read_file(const GLchar *);
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
+
 EGLint v0=0,v3=3,config_size,major,minor,atb_pos;
 EGLDisplay display;
 EGLSurface surface;
@@ -86,7 +87,7 @@ EGLConfig eglconfig;
 
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE};
 
@@ -102,7 +103,7 @@ EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 //  EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -120,8 +121,8 @@ EGL_ALPHA_SIZE,64,
 EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,64,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,256,
-EGL_SAMPLES,128,
+EGL_SAMPLE_BUFFERS,64,
+EGL_SAMPLES,64,
 EGL_NONE
 };
 
