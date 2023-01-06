@@ -55,13 +55,6 @@ cloud:
          -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js tilt.js --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
 	 
-tst1: main.cpp  Makefile
-	em++ main.cpp  --closure 0 -sUSE_SDL=2 -sEXPORT_NAME='createModule' -sMODULARIZE=1 \
--sUSE_WEBGL2=1 -sPRINTF_LONG_DOUBLE=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
--ffast-math -flto -sSUPPORT_LONGJMP=0 -DNDEBUG -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
--O3 -std=c++17 -o shader.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str"]' -sEXPORTED_RUNTIME_METHODS=ccall \
---post-js index.js --post-js filesys.js --post-js ccall.js -sSUPPORT_BIG_ENDIAN=1
-
 tst8c: glsl_loader2.cpp  Makefile
 	em++ glsl_loader2.cpp -std=c++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
 -sUSE_WEBGL2=1 -sENVIRONMENT=web -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 \
@@ -76,19 +69,6 @@ load: glsl_loader.cpp  Makefile
 -O3 -o glsl001.js -sEXPORTED_FUNCTIONS='["_main","_pl","_str","_read"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --extern-post-js index.js --post-js filesys.js --post-js ccall.js --post-js fs-glsl.js -sSUPPORT_BIG_ENDIAN=0
 
-b3: b3.cpp  Makefile
-	em++ b3.cpp -flto=thin --closure 1 -g2 -std=gnu++2b -O2 -ffast-math -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 -sGL_TESTING=1 \
--sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
--sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
--o b3004.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js page.js
-
-gpu: avg.cpp  Makefile
-	em++ avg.cpp -flto=thin --closure 1 -g2 -std=gnu++2b -O2 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sGL_TESTING=1 \
--sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
--sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sMALLOC="emmalloc" \
--o g3003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js
 
 heap: h3.cpp  Makefile
 	 em++ h3.cpp -O2 -o g3007.js -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
@@ -177,15 +157,6 @@ paint2:
          --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujs.js
 
 
-emloop:
-	  em++ emloop.cpp -O3 -o g3011.js -DNDEBUG -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1536mb -sTOTAL_STACK=64mb \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=0 \
-	 --closure 1 -g2 -ffast-math -flto=thin -std=gnu++2b -stdlib=libc++ \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js fluid.js --post-js flui.js --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
-
 tester:
 	  em++ h3test.cpp -O3 -o g3009.js -DNDEBUG -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb \
@@ -270,12 +241,6 @@ img: img.cpp  Makefile
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageImg.js
 
-heap-devel: h3.cpp  Makefile
-	em++ h3.cpp -g -std=gnu++2b --closure 0 -O2 -sUSE_SDL=2 -sFULL_ES3=1 -sGL_TESTING=1 \
--sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sFORCE_FILESYSTEM=1 -sENVIRONMENT=web \
--sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb  \
--o g3004dev.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
---post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js cl-gpu.js
 
 glsl: glsl.cpp  Makefile
 	emcc glsl.cpp -sFULL_ES3=1 --closure 0 -sUSE_SDL=2  \
@@ -284,5 +249,5 @@ glsl: glsl.cpp  Makefile
 -O1 -o gui003.js -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_read"]' -sEXPORTED_RUNTIME_METHODS=ccall \
 --post-js filesys.js --post-js ccall.js --post-js fs-glsl.js -sSUPPORT_BIG_ENDIAN=0 -sOFFSCREEN_FRAMEBUFFER=1
 
-all: heap gpu
+all: b3hd
 	echo 'Built 1ink.us Shaders.'
