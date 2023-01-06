@@ -60,8 +60,8 @@ $sngs[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/1ink.1ink/,'');
-txxt=txxt.replace(Self,'');
+Self=Self.replace(/1ink.1ink/,"");
+txxt=txxt.replace(Self,"");
 $sngs[i]=Self+'songs/'+txxt;
 }}
 
@@ -73,8 +73,8 @@ $vids[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/1ink.1ink/,'');
-txxt=txxt.replace(Self,'');
+Self=Self.replace(/1ink.1ink/,"");
+txxt=txxt.replace(Self,"");
 $vids[i]=Self+'video/'+txxt;
 }}
 
@@ -86,8 +86,8 @@ $shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/1ink.1ink/,'');
-txxt=txxt.replace(Self,'');
+Self=Self.replace(/1ink.1ink/,"");
+txxt=txxt.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
 };
 var randShade=Math.random();
@@ -170,7 +170,7 @@ function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;
 grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
-ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML='';
+ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();slt=$lt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
