@@ -1,10 +1,8 @@
 extern "C"{
-
 void str();
+};
 
-}
-
-float Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f;
+float F=1.0f,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,Fm1=-1.0f,F0=0.0f,Ttime,TtimeDelta;
 short int iFrame,iFps,Size;
 double wi,hi;
 const char * fileloc="/shader/shader1.toy";
@@ -21,21 +19,19 @@ void renderFrame();
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
-
 struct timespec rem;
 struct timespec req={0,15000000};
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
-// #include <GL/gl.h>
-// #include <GL/glext.h>
-#include <GL/glcorearb.h>
+#include <GL/gl.h>
+#include <GL/glext.h>
 
 extern "C"{
   
 void clr(GLclampf,GLclampf);
   
-}
+};
 
 GLclampf x,y,y1y=1.0,gF=F,gF0=F0,gFm1=Fm1;
 GLfloat g1g=1.0,S;
@@ -50,7 +46,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
+"precision highp float;precision mediump int;precision mediump sampler3D;precision highp sampler2D;\n";
 
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
@@ -78,11 +74,9 @@ void clrclr(GLclampf,GLclampf);
 static const char8_t * read_file(const GLchar *);
 
 #define EGL_EGLEXT_PROTOTYPES 1
-
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
-
 EGLint v0=0,v3=3,config_size,major,minor,atb_pos;
 EGLDisplay display;
 EGLSurface surface;
@@ -91,7 +85,7 @@ EGLConfig eglconfig;
 
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE};
 
@@ -107,7 +101,7 @@ EGL_NONE};
 const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 //  EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -125,13 +119,13 @@ EGL_ALPHA_SIZE,64,
 EGL_DEPTH_SIZE,64,
 EGL_STENCIL_SIZE,64,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,64,
-EGL_SAMPLES,64,
+EGL_SAMPLE_BUFFERS,256,
+EGL_SAMPLES,128,
 EGL_NONE
 };
 
-#define GL3_PROTOTYPES 1
-#define GL4_PROTOTYPES 1 //maybe??
+// #define GL3_PROTOTYPES 1
+// #define GL4_PROTOTYPES 1 //maybe??
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
