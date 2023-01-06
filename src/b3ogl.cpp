@@ -12,7 +12,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-return;
+return 1;
 }
 
 void clrclr(GLclampf rlc,GLclampf alc){
