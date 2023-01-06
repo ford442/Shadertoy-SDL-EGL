@@ -172,7 +172,7 @@ document.getElementById('menu').addEventListener('click',function(){
 $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-const adr='./intro.mp4';
+var adr='./intro.mp4';
 wi=1920;
 he=1080;
 var hii=window.innerHeight;
@@ -211,8 +211,8 @@ loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
 document.getElementById('wid').innerHTML=this.videoWidth;
 document.getElementById('hig').innerHTML=this.videoHeight;
-const $sc=this.duration;
-const mic=Math.round($sc*1000000);
+var $sc=this.duration;
+var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
 $pt=$pt*1000000;
 $pt=$pt/1000000;
@@ -231,7 +231,7 @@ $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-const rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 document.getElementById('isrc').innerHTML=$vids[rnum];
 $h=window.innerHeight;
 he=document.getElementById('hig').innerHTML;
@@ -239,7 +239,7 @@ wi=document.getElementById('wid').innerHTML;
 r$=he/$h;
 $w=wi/r$;
 hii=$ihigB.innerHTML;
-const $hi=$h-hii;
+var $hi=$h-hii;
 if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
 $hg=$h+'px';
 window.scroll(0,0);
@@ -256,7 +256,9 @@ $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
+  
 document.getElementById('di').click();
+
 };
 setTimeout(function(){
 loada();
