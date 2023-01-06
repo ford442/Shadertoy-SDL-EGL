@@ -16,8 +16,8 @@ return 1;
 }
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avrg){
-glBlendColor(avrg,avrg,avrg,alc);
-glClearColor(rlc,rlc,rlc,rlc);
+glBlendColor(y1y,y1y,y1y,alc);
+glClearColor(avrg,avrg,avrg,rlc);
 return;
 }
 
@@ -193,7 +193,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(D);
  //  swap alpha to use one_minus_alpha for 'source'
 glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_SRC_ALPHA,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_MIN,GL_MAX);
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
