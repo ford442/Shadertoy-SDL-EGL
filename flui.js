@@ -66,15 +66,53 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 function getWebGLContext(canvas){
-const params={colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0};
-let gl=canvas.getContext('webgl2',{colorType:'float64',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:false,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:true,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
- const isWebGL2=!!gl;
- if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
- let halfFloat;
- let supportLinearFiltering;
- if(isWebGL2){
- gl.getExtension('EXT_color_buffer_float');
-  gl.getExtension('WEBGL_color_buffer_float');
+const params={colorType:'float64',
+preferLowPowerToHighPerformance:false,
+precision:'highp',
+logarithmicDepthBuffer:true,
+colorSpace:'display-p3',
+alpha:true,
+depth:true,
+stencil:true,
+imageSmoothingEnabled:true,
+preserveDrawingBuffer:false,
+premultipliedAlpha:true,
+desynchronized:false,
+lowLatency:true,
+powerPreference:'high-performance',
+antialias:true,
+willReadFrequently:false,
+xrCompatible:false,
+majorVersion:2,
+minorVersion:0};
+const gl=canvas.getContext('webgl2',{
+colorType:'float64',
+preferLowPowerToHighPerformance:false,
+precision:'highp',
+logarithmicDepthBuffer:true,
+colorSpace:'display-p3',
+alpha:true,
+depth:true,
+stencil:false,
+imageSmoothingEnabled:true,
+preserveDrawingBuffer:false,
+premultipliedAlpha:true,
+desynchronized:false,
+lowLatency:true,
+powerPreference:'high-performance',
+antialias:true,
+willReadFrequently:false,
+xrCompatible:false,
+majorVersion:2,
+minorVersion:0
+});
+const isWebGL2=!!gl;
+if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
+let halfFloat;
+let supportLinearFiltering;
+if(isWebGL2){
+gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
 gl.getExtension('OES_texture_half_float_linear');
@@ -85,7 +123,6 @@ gl.getExtension('EXT_sRGB');
 gl.getExtension('EXT_blend_minmax');
 gl.getExtension('ANGLE_instanced_arrays');
 gl.getExtension('EXT_disjoint_timer_query');
-
 gl.getExtension('EXT_clip_cull_distance');
 gl.getExtension('EXT_disjoint_timer_query_webgl2');
 gl.getExtension('KHR_parallel_shader_compile');
@@ -106,15 +143,13 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-  
-  
-  gl.disable(gl.DITHER);
+gl.disable(gl.DITHER);
 
- supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
- }else{
- halfFloat=gl.getExtension('OES_texture_half_float');
-   gl.getExtension('EXT_color_buffer_float');
-  gl.getExtension('WEBGL_color_buffer_float');
+supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
+}else{
+halfFloat=gl.getExtension('OES_texture_half_float');
+gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
 gl.getExtension('OES_texture_half_float_linear');
@@ -125,7 +160,6 @@ gl.getExtension('EXT_sRGB');
 gl.getExtension('EXT_blend_minmax');
 gl.getExtension('ANGLE_instanced_arrays');
 gl.getExtension('EXT_disjoint_timer_query');
-
 gl.getExtension('EXT_clip_cull_distance');
 gl.getExtension('EXT_disjoint_timer_query_webgl2');
 gl.getExtension('KHR_parallel_shader_compile');
@@ -146,9 +180,7 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-  
-  
-  gl.disable(gl.DITHER);
+gl.disable(gl.DITHER);
 
  supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
  }
