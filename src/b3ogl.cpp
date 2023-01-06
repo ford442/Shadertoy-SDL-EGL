@@ -17,7 +17,7 @@ return 1;
 
 void clrclr(GLclampf rlc,GLclampf alc){
 glBlendColor(y1y,y1y,y1y,y1y-alc);
-glClearColor(rlc,rlc,rlc,rlc);
+glClearColor(y1y-alc,y1y-alc,y1y-alc,rlc);
 return;
 }
 
