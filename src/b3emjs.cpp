@@ -274,6 +274,9 @@ mmvv.currentTime-=0.016;
 }else{
 f=false;
 }}}}
+ 
+Module.ccall("frm");
+
 },16.666)}
 M();
 document.getElementById("di").onclick=function(){
