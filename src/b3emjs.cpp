@@ -33,7 +33,10 @@ return;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float * ptr,float * aptr){avgFrm(Fnum,leng,ptr,aptr);};
+void nano(short int Fnum,int leng,float * ptr,float * aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+return;
+}
 
 }
 
@@ -53,8 +56,8 @@ var mmvv;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-(60*0.0166666);
-b=stp+(60*0.0166666);
+a=stp-(60*0.0166);
+b=stp+(60*0.0166);
 }
 
 function stpBackForth(){
@@ -271,7 +274,7 @@ mmvv.currentTime-=0.016;
 }else{
 f=false;
 }}}}
-},16.666666)}
+},16.666)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
