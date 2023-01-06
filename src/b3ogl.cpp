@@ -15,8 +15,8 @@ y=e->clientY;
 return 1;
 }
 
-void clrclr(GLclampf rlc,GLclampf alc){
-glBlendColor(y1y,y1y,y1y,alc);
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avrg){
+glBlendColor(avrg,avrg,avrg,alc);
 glClearColor(rlc,rlc,rlc,rlc);
 return;
 }
@@ -262,8 +262,8 @@ renderFrame();
 return;
 }
 
-void clr(GLclampf cllr,GLclampf alp){
-clrclr(cllr,alp);
+void clr(GLclampf cllr,GLclampf alp,GLclampf avrg){
+clrclr(cllr,alp,avrg);
 return;
 }
 
