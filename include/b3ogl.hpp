@@ -48,10 +48,12 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
+"#undef GL_FRAGMENT_PRECISION_HIGH\n"
 "#define GL_FRAGMENT_PRECISION_HIGH 1\n"
 "precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;\n";
 
 const GLchar vertex_shader_body_gles3[]=
+"#undef GL_FRAGMENT_PRECISION_HIGH\n"
 "#define GL_FRAGMENT_PRECISION_HIGH 1\n"
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
