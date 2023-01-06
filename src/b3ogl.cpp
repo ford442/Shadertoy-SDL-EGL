@@ -12,12 +12,12 @@ x=e->clientX;
 y=e->clientY;
 }}
 return 0;
-};
+}
 
 void clrclr(GLclampf rlc,GLclampf alc){
 glBlendColor(y1y,y1y,y1y,y1y-alc);
 glClearColor(rlc,rlc,rlc,y1y-rlc);
-};
+}
 
 void uni(float xx,float yy,GLfloat time,short int fram){
 GLclampf mX,mY;
@@ -38,7 +38,7 @@ clk_l=true;
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
 return;
-};
+}
 
 void renderFrame(){
 auto t3=t2;
@@ -63,7 +63,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFinish();
 nanosleep(&req,&rem);
 return;
-};
+}
 
 static const char8_t * read_file(const GLchar * filename){
 char8_t * result=NULL;
@@ -90,7 +90,7 @@ fclose(file);
 return result;
 }
 return nullptr;
-};
+}
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar ** dsources){
 GLsizei srclens[nsources];
@@ -101,7 +101,7 @@ shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
-};
+}
 
 void strt(){
 emscripten_cancel_main_loop();
@@ -251,18 +251,18 @@ auto t1=std::chrono::high_resolution_clock::now();
 nanosleep(&req,&rem);
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
-};
+}
 
 extern "C" {
  
 void str(){
 strt();
 return;
-};
+}
 
 void clr(GLclampf cllr,GLclampf alp){
 clrclr(cllr,alp);
 return;
-};
+}
 
 }
