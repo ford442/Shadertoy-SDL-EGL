@@ -106,7 +106,7 @@ return shader;
 }
 
 void strt(){
-emscripten_cancel_main_loop();
+// emscripten_cancel_main_loop();
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
@@ -184,14 +184,14 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_2_compatibility");
 // glDisable(GL_STENCIL_TEST);
 glEnable(GL_CULL_FACE);
-glEnable(GL_DEPTH_TEST);
 glFrontFace(GL_CW);
+glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
  //  swap alpha to use one_minus_alpha for 'source'
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_MIN,GL_MAX);
+glBlendEquationSeparate(GL_MAX,GL_MAX);
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 // glDisable(GL_DITHER);
