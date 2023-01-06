@@ -1,6 +1,6 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -std=gnu++2b -mcpu=bleeding-edge -fwasm-exceptions -mavx
+         -std=gnu++2b -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -mbulk-memory -msign-ext -m32
 	 em++ src/b3ogl.cpp -c \
 	 -std=gnu++2b -fno-fast-math -ffp-contract=off -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize -mavx \
@@ -8,11 +8,11 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs
 	 em++ src/b3sdl.cpp -c \
 	 -sUSE_SDL=2 -std=gnu++2b -ffast-math -ffp-contract=on -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -mavx \
+         -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32
 	 em++ src/b3emjs.cpp -c \
 	 -std=gnu++2b -fno-fast-math -ffp-contract=off -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize -mavx \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3014.js \
