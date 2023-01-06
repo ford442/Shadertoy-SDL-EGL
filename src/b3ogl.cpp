@@ -260,7 +260,6 @@ extern "C" {
 void str(){
 strt();
 return;
-
 }
 
 void clr(GLclampf cllr,GLclampf alp){
