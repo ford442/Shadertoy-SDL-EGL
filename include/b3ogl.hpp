@@ -142,3 +142,7 @@ EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
 #include <GLES3/gl3platform.h>
 
 #include <webgl/webgl2.h>
+
+#include <wasm_simd128.h>
+#include <xmmintrin.h>
+#include <unistd.h>
