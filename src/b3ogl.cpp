@@ -16,8 +16,8 @@ return 1;
 }
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-glBlendColor(avr,avr,avr,y1y-alc);
-glClearColor(avr,avr,avr,(avr+(1.0-alc))/2.0);
+glBlendColor(avr,avr,avr,y1y);
+glClearColor(1.0-avr,1.0-avr,1.0-avr,(avr+rlc)/2.0);
 return;
 }
 
