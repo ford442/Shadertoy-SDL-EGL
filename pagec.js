@@ -256,10 +256,8 @@ $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
-  document.getElementById('ldv').height=document.innerHeight;
-
+//  document.getElementById('ldv').height=document.innerHeight;
 document.getElementById('di').click();
-
 };
 setTimeout(function(){
 loada();
