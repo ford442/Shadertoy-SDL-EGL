@@ -125,7 +125,6 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_make_context_current(ctx);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
     eglBindAPI(EGL_OPENGL_API);
 
@@ -135,6 +134,8 @@ eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
+    emscripten_webgl_make_context_current(ctx);
+
 glDisable(GL_DITHER);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
