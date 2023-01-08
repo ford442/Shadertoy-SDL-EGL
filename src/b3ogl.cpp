@@ -131,17 +131,17 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 
-attr.colorType:'float64';
+attr.colorType='float64';
 attr.xrCompatible=EM_FALSE;
 attr.preferLowPowerToHighPerformance=EM_FALSE;
 attr.logarithmicDepthBuffer=EM_TRUE;
 attr.precision='highp';
-attr.colorSpace:'display-p3';
+attr.colorSpace='display-p3';
 attr.imageSmoothingEnabled=EM_TRUE;
-imageSmoothingQuality='high';
+attr.imageSmoothingQuality='high';
 attr.desynchronized=EM_FALSE;
 attr.lowLatency=EM_TRUE;
-attr.powerPreference:'high-performance';
+attr.powerPreference='high-performance';
 attr.willReadFrequently=EM_FALSE;
   
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
