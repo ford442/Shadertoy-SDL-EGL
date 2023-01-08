@@ -1,9 +1,9 @@
 'use strict';
 
 function hiResStart(){
-document.getElementById('scanvas').height=window.innerHeight*2;
-document.getElementById('scanvas').width=window.innerHeight*2;
-document.getElementById('pmhig').innerHTML=window.innerHeight*2;
+document.getElementById('scanvas').height=window.innerHeight*5;
+document.getElementById('scanvas').width=window.innerHeight*5;
+document.getElementById('pmhig').innerHTML=window.innerHeight*5;
 setTimeout(function(){
 Module.ccall('str');},250);
 document.getElementById('scanvas').height=window.innerHeight;
@@ -95,7 +95,7 @@ setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
 setTimeout(function(){
-normalResStart();
+highResStart();
 },150);
 };};
 ff.send(null);
