@@ -16,7 +16,7 @@ return 1;
 }
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc);
+GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(y1y,y1y,y1y,y1y);
 return;
@@ -130,20 +130,6 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
-
-attr.colorType='float64';
-attr.xrCompatible=EM_FALSE;
-attr.preferLowPowerToHighPerformance=EM_FALSE;
-attr.logarithmicDepthBuffer=EM_TRUE;
-attr.precision='highp';
-attr.colorSpace='display-p3';
-attr.imageSmoothingEnabled=EM_TRUE;
-attr.imageSmoothingQuality='high';
-attr.desynchronized=EM_FALSE;
-attr.lowLatency=EM_TRUE;
-attr.powerPreference='high-performance';
-attr.willReadFrequently=EM_FALSE;
-  
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
