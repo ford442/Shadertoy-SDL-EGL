@@ -1,9 +1,9 @@
 'use strict';
 
 function hiResStart(){
-document.getElementById('scanvas').height=window.innerHeight*1.333333;
-document.getElementById('scanvas').width=window.innerHeight*1.333333;
-document.getElementById('pmhig').innerHTML=window.innerHeight*1.333333;
+document.getElementById('scanvas').height=window.innerHeight*3.333333;
+document.getElementById('scanvas').width=window.innerHeight*3.333333;
+document.getElementById('pmhig').innerHTML=window.innerHeight*3.333333;
 setTimeout(function(){
 Module.ccall('str');},250);
 document.getElementById('scanvas').height=window.innerHeight;
@@ -93,7 +93,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-normalResStart();
+highResStart();
 },50);
 };};
 ff.send(null);
