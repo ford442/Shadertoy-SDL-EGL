@@ -1,9 +1,9 @@
 'use strict';
 
 function hiResStart(){
-document.getElementById('scanvas').height=window.innerHeight*3.333333;
-document.getElementById('scanvas').width=window.innerHeight*3.333333;
-document.getElementById('pmhig').innerHTML=window.innerHeight*3.333333;
+document.getElementById('scanvas').height=window.innerHeight*2;
+document.getElementById('scanvas').width=window.innerHeight*2;
+document.getElementById('pmhig').innerHTML=window.innerHeight*2;
 setTimeout(function(){
 Module.ccall('str');},250);
 document.getElementById('scanvas').height=window.innerHeight;
@@ -249,9 +249,10 @@ vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById('mv').play();
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
-  document.getElementById('ldv').height=document.innerHeight;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
 document.getElementById('ldv').load();
+    document.getElementById('ldv').height=document.innerHeight;
+
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
