@@ -1,18 +1,19 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast 
+         -fcoroutines-ts -march=native -std=gnu++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
+	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
-	 -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fcoroutines-ts -march=native -std=gnu++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
-	 -sUSE_SDL=2 -std=gnu++2b -stdlib=libc++ -matomics -fslp-vectorize \
+	 -fcoroutines-ts -march=native -sUSE_SDL=2 -std=gnu++2a -stdlib=libc++ -matomics -fslp-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
-	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on
+	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
-	 -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fcoroutines-ts -march=native -std=gnu++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
