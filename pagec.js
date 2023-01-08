@@ -91,10 +91,12 @@ ff.onload=function(oEvent){
 const sarrayBuffer=ff.response;
 if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
+setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
+},150);
 setTimeout(function(){
 normalResStart();
-},50);
+},150);
 };};
 ff.send(null);
 };
