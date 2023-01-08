@@ -83,7 +83,7 @@ static const char8_t * read_file(const GLchar *);
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-EGLint v0=0,v3=3,v1=1,v2=2,config_size,major,minor,atb_pos;
+EGLint v0=0,v3=3,v1=1,v2=2,v5=5,config_size,major,minor,atb_pos;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
