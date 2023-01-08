@@ -250,14 +250,16 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
-document.getElementById('ldv').load();
     document.getElementById('ldv').height=document.innerHeight;
+
+document.getElementById('ldv').load();
 
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
+    
 document.getElementById('di').click();
 };
 setTimeout(function(){
