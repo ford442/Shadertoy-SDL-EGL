@@ -1,8 +1,8 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -std=gnu++2b -stdlib=libc++-mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast 
+         -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast 
 	 em++ src/b3ogl.cpp -c \
-	 -std=gnu++2b -stdlib=libc++-matomics \
+	 -std=gnu++2b -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
