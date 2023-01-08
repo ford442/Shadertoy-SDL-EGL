@@ -58,14 +58,10 @@ mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 iFrame++;
- glClear(GL_COLOR_BUFFER_BIT);
-
+glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
-// glFlush();
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-// glFinish();
-// nanosleep(&req,&rem);
 return;
 }
 
@@ -108,7 +104,6 @@ return shader;
 }
 
 void strt(){
-// emscripten_cancel_main_loop();
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
@@ -132,7 +127,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
+eglInitialize(display,&v3,&v1);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
@@ -157,7 +152,6 @@ emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-
 emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
 emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
@@ -178,7 +172,6 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"ARB_multisample");
-
 emscripten_webgl_enable_extension(ctx,"ARB_robustness");
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
@@ -190,7 +183,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 // glDisable(GL_STENCIL_TEST);
-
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glEnable(GL_DEPTH_TEST);
@@ -246,9 +238,7 @@ uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
- // glFinish();
 auto t1=std::chrono::high_resolution_clock::now();
-// nanosleep(&req,&rem);
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
