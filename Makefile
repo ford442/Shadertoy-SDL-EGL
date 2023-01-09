@@ -1,19 +1,19 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -fcoroutines-ts -std=gnu++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
+         -fcoroutines-ts -std=gnu++2a -stdlib=libstdc++13 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
 	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
-	 -fcoroutines-ts -std=gnu++2a -stdlib=libc++ -matomics \
+	 -fcoroutines-ts -std=gnu++2a -stdlib=libstdc++13 -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
-	 -fcoroutines-ts -sUSE_SDL=2 -std=gnu++2a -stdlib=libc++ -matomics -fslp-vectorize \
+	 -fcoroutines-ts -sUSE_SDL=2 -std=gnu++2a -stdlib=libstdc++13 -matomics -fslp-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
-	 -fcoroutines-ts -std=gnu++2a -stdlib=libc++ -matomics \
+	 -fcoroutines-ts -std=gnu++2a -stdlib=libstdc++13 -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
