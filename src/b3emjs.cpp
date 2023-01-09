@@ -56,8 +56,8 @@ var mmvv;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-(60*0.0166);
-b=stp+(60*0.0166);
+a=stp-(60*0.016666);
+b=stp+(60*0.016666);
 }
 
 function stpBackForth(){
