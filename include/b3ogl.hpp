@@ -32,6 +32,14 @@ extern "C"{
 void clr(GLclampf,GLclampf,GLclampf);
   
 };
+#define MAX_TEXTURES 32
+
+GLuint matPos,tex_prg,ttx,trag,solidColor;
+
+typedef struct Texture{char *url;int w,h;GLuint texture;}Texture;
+static Texture textures[MAX_TEXTURES]={};
+
+static GLuint create_texture();
 
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
 GLfloat g1g=1.0,S;
@@ -60,10 +68,31 @@ const GLchar fragment_shader_header_gles3[]=
 const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 
+
+const GLchar vertex_shader_tex[]=
+"#version 300 es\n"
+"\n #undef HW_PERFORMANCE\n"
+"\n #define HW_PERFORMANCE 0\n"
+"\n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n"
+"in vec4 pos;out vec2 uv;"
+"void main(){uv=pos.xy;gl_Position=pos;} \n \0";
+
+const GLchar fragment_shader_tex[]=
+"#version 300 es\n"
+"\n #undef HW_PERFORMANCE\n"
+"\n #define HW_PERFORMANCE 0\n"
+"\n precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n"
+"uniform sampler2D tex;uniform vec4 color;in vec2 uv;out vec4 texColor;"
+"void main(){texColor=vec4(color*texture(tex,uv));} \n \0 ";
+
+
 const GLchar * common_shader_header=common_shader_header_gles3;
 const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
+
+const GLchar * tex_vertex_shader=vertex_shader_tex;
+const GLchar * tex_fragment_shader=fragment_shader_tex;
 
 void uni(float,float,GLfloat,short int);
 
@@ -83,7 +112,7 @@ static const char8_t * read_file(const GLchar *);
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-EGLint v0=0,v3=3,v1=1,v2=2,v5=5,config_size,major,minor,atb_pos;
+EGLint v0=0,v3=3,v1=1,v2=2,v5=5,config_size,major,minor,atb_pos,tex_pos;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
@@ -129,6 +158,7 @@ EGL_SAMPLE_BUFFERS,64,
 EGL_SAMPLES,64,
 EGL_NONE
 };
+
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
