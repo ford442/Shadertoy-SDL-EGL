@@ -201,74 +201,10 @@ pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
  
-// for(i=0;i<65;i++){
-// var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-// }
- 
-var point1=0*la;var $1=new Float32Array($H,point1,la);
-var point1=1*la;var $2=new Float32Array($H,point2,la);
-var point2=2*la;var $3=new Float32Array($H,point3,la);
-var point3=3*la;var $4=new Float32Array($H,point4,la);
-var point4=4*la;var $5=new Float32Array($H,point5,la);
-var point5=5*la;var $6=new Float32Array($H,point6,la);
-var point6=6*la;var $7=new Float32Array($H,point7,la);
-var point7=7*la;var $8=new Float32Array($H,point8,la);
-var point8=8*la;var $9=new Float32Array($H,point9,la);
-var point9=9*la;var $10=new Float32Array($H,point10,la);
-var point10=10*la;var $11=new Float32Array($H,point11,la);
-var point11=11*la;var $12=new Float32Array($H,point12,la);
-var point12=12*la;var $13=new Float32Array($H,point13,la);
-var point13=13*la;var $14=new Float32Array($H,point14,la);
-var point14=14*la;var $15=new Float32Array($H,point15,la);
-var point15=15*la;var $16=new Float32Array($H,point16,la);
-var point16=16*la;var $17=new Float32Array($H,point17,la);
-var point17=17*la;var $18=new Float32Array($H,point18,la);
-var point18=18*la;var $19=new Float32Array($H,point19,la);
-var point19=19*la;var $20=new Float32Array($H,point20,la);
-var point20=20*la;var $21=new Float32Array($H,point21,la);
-var point21=21*la;var $22=new Float32Array($H,point22,la);
-var point22=22*la;var $23=new Float32Array($H,point23,la);
-var point23=23*la;var $24=new Float32Array($H,point24,la);
-var point24=24*la;var $25=new Float32Array($H,point25,la);
-var point25=25*la;var $26=new Float32Array($H,point26,la);
-var point26=26*la;var $27=new Float32Array($H,point27,la);
-var point27=27*la;var $28=new Float32Array($H,point28,la);
-var point28=28*la;var $29=new Float32Array($H,point29,la);
-var point29=29*la;var $30=new Float32Array($H,point30,la);
-var point30=30*la;var $31=new Float32Array($H,point31,la);
-var point31=31*la;var $32=new Float32Array($H,point32,la);
-var point32=32*la;var $33=new Float32Array($H,point33,la);
-var point33=33*la;var $34=new Float32Array($H,point34,la);
-var point34=34*la;var $35=new Float32Array($H,point35,la);
-var point35=35*la;var $36=new Float32Array($H,point36,la);
-var point36=36*la;var $37=new Float32Array($H,point37,la);
-var point37=37*la;var $38=new Float32Array($H,point38,la);
-var point38=38*la;var $39=new Float32Array($H,point39,la);
-var point39=39*la;var $40=new Float32Array($H,point40,la);
-var point40=40*la;var $41=new Float32Array($H,point41,la);
-var point41=41*la;var $42=new Float32Array($H,point42,la);
-var point42=42*la;var $43=new Float32Array($H,point43,la);
-var point43=43*la;var $44=new Float32Array($H,point44,la);
-var point44=44*la;var $45=new Float32Array($H,point45,la);
-var point45=45*la;var $46=new Float32Array($H,point46,la);
-var point46=46*la;var $47=new Float32Array($H,point47,la);
-var point47=47*la;var $48=new Float32Array($H,point48,la);
-var point48=48*la;var $49=new Float32Array($H,point49,la);
-var point49=49*la;var $50=new Float32Array($H,point50,la);
-var point50=50*la;var $51=new Float32Array($H,point51,la);
-var point51=51*la;var $52=new Float32Array($H,point52,la);
-var point52=52*la;var $53=new Float32Array($H,point53,la);
-var point53=53*la;var $54=new Float32Array($H,point54,la);
-var point54=54*la;var $55=new Float32Array($H,point55,la);
-var point55=55*la;var $56=new Float32Array($H,point56,la);
-var point56=56*la;var $57=new Float32Array($H,point57,la);
-var point57=57*la;var $58=new Float32Array($H,point58,la);
-var point58=58*la;var $59=new Float32Array($H,point59,la);
-var point59=59*la;var $60=new Float32Array($H,point60,la);
-var point60=60*la;var $61=new Float32Array($H,point61,la);
-var point61=61*la;var $62=new Float32Array($H,point62,la);
-var point62=62*la;var $63=new Float32Array($H,point63,la);
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+}
  
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -299,8 +235,8 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
-// r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-// t.setConstants({nblnk:nblank$,blnk:blank$});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
@@ -327,21 +263,21 @@ M();
 if(loopLoop==true){
 if(f==true){
 if(mmvv.currentTime>a){
-mmvv.currentTime-=0.016;
+mmvv.currentTime-=0.016666;
 }else{
 f=false;
 if(mmvv.currentTime<b){
-mmvv.currentTime+=0.016;
+mmvv.currentTime+=0.016666;
 }else{
 f=true;
 }}}
 if(f==false){
 if(mmvv.currentTime<b){
-mmvv.currentTime+=0.016;
+mmvv.currentTime+=0.016666;
 }else{
 f=true;
 if(mmvv.currentTime>a){
-mmvv.currentTime-=0.016;
+mmvv.currentTime-=0.016666;
 }else{
 f=false;
 }}}}
