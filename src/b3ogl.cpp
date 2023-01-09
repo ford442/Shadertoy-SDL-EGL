@@ -15,6 +15,17 @@ y=e->clientY;
 return 1;
 }
 
+static GLuint create_texture(){
+GLuint texture;
+glGenTextures(1,&texture);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+return texture;
+}
+
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
 glBlendColor(avrg,avrg,avrg,y1y);
@@ -126,7 +137,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_API);
 
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
@@ -134,7 +145,7 @@ eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-    emscripten_webgl_make_context_current(ctx);
+emscripten_webgl_make_context_current(ctx);
 
 glDisable(GL_DITHER);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -205,9 +216,32 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 static const GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
+
+
+sources[0]=tex_vertex_shader;
+ttx=compile_shader(GL_VERTEX_SHADER,(GLsizei)1,sources);
+sources[0]=tex_fragment_shader;
+trag=compile_shader(GL_FRAGMENT_SHADER,(GLsizei)1,sources);
+tex_prg=glCreateProgram();
+glAttachShader(tex_prg,trag);
+glAttachShader(tex_prg,ttx);
+tex_pos=0;
+glBindAttribLocation(tex_prg,(GLuint)0,"pos");
+glLinkProgram(tex_prg);
+glUseProgram(tex_prg);
+glDeleteShader(ttx);
+glDeleteShader(trag);
+glReleaseShaderCompiler();
+
+solidColor=create_texture();
+unsigned int whitePixel=0xFFFFFFFFu;
+colorPos=glGetUniformLocation(tex_prg,"color");
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,&whitePixel);
+
+
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,(GLsizei)2,sources);
+ttx=compile_shader(GL_VERTEX_SHADER,(GLsizei)2,sources);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
@@ -223,6 +257,8 @@ glUseProgram(shd_prg);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
+
+
 glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
@@ -238,6 +274,8 @@ uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
+
+
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
