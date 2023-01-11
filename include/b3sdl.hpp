@@ -14,6 +14,4 @@ void opn_aud();
 void SDLCALL bfr(void *,Uint8 *,int);
 void plt();
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
 #include <iostream>
