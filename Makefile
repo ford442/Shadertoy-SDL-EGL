@@ -1,20 +1,20 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
          -menable-experimental-extensions -fno-math-errno -std=gnu++2a -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
-	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
+	 -mfloat-abi=hard -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
 	 -menable-experimental-extensions -fno-math-errno -std=gnu++2a -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize -mavx \
+         -mfloat-abi=hard -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
 	 -menable-experimental-extensions -fno-math-errno -sUSE_SDL=2 -std=gnu++2a -matomics -fslp-vectorize \
-         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
+         -mfloat-abi=hard -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
 	 -menable-experimental-extensions -fno-math-errno -std=gnu++2a -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize \
+         -mfloat-abi=hard -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
