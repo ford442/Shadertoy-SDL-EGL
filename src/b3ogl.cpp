@@ -50,10 +50,6 @@ std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float
 TtimeDelta=time_spanb.count();
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
-ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
-ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
-ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
@@ -240,6 +236,12 @@ glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::high_resolution_clock::now();
+  
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+  
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
