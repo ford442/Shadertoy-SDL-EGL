@@ -45,10 +45,10 @@ return;
 
 void renderFrame(){
 auto t3=t2;
-auto t2=std::experimental::chrono::high_resolution_clock::now();
-std::chrono::duration<float>time_spanb=duration_cast<std::experimental::chrono::duration<float>>(t2-t3);
+auto t2=std::chrono::high_resolution_clock::now();
+std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
 TtimeDelta=time_spanb.count();
-std::experimental::chrono::duration<float>time_spana=duration_cast<std::experimental::chrono::duration<float>>(t2-t1);
+std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
