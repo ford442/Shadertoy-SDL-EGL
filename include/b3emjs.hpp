@@ -8,7 +8,7 @@ void avgFrm(short int,int,float *,float *);
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
+EM_BOOL mouse_call(int,EmscriptenMouseEvent *,void *);
 
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1
