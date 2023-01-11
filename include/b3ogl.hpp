@@ -137,7 +137,8 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
-EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
+
+EM_BOOL mouse_call(int,EmscriptenMouseEvent *,void *);
 
 #include <webgl/webgl2.h>
 
