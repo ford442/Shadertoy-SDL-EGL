@@ -94,7 +94,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
@@ -110,7 +110,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
@@ -148,7 +148,7 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-// gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
