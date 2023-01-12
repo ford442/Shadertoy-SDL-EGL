@@ -102,7 +102,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setDynamicOutput(true).setPrecision('single').setTactic("precision").setPipeline(true).setOutput([w$,h$]);
+}).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setPrecision('single').setTactic("precision").setPipeline(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -113,7 +113,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setDynamicOutput(true).setPrecision('single').setTactic("precision").setGraphical(true).setOutput([w$,h$]);
+}).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setPrecision('single').setTactic("precision").setGraphical(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
