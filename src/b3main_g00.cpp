@@ -146,7 +146,7 @@ dxhttp.send();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTMLparseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
