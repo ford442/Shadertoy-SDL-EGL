@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 function hiResStart(){
 document.getElementById('scanvas').height=window.innerHeight;//*1.333;
