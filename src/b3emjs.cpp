@@ -146,6 +146,8 @@ const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
+ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('WEBGL_color_buffer_float');
@@ -182,7 +184,6 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
@@ -200,12 +201,10 @@ sz=(h$*h$)/8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
- 
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
- 
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
@@ -253,29 +252,28 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
+Module.ccall("frm");
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
-Module.ccall("frm");
-
 setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
-if(mmvv.currentTime>a){
+if(mmvv.currentTime>=a){
 mmvv.currentTime-=0.016666;
 }else{
 f=false;
-if(mmvv.currentTime<b){
+if(mmvv.currentTime<=b){
 mmvv.currentTime+=0.016666;
 }else{
 f=true;
 }}}
 if(f==false){
-if(mmvv.currentTime<b){
+if(mmvv.currentTime<=b){
 mmvv.currentTime+=0.016666;
 }else{
 f=true;
-if(mmvv.currentTime>a){
+if(mmvv.currentTime>=a){
 mmvv.currentTime-=0.016666;
 }else{
 f=false;
