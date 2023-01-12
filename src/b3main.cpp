@@ -1,8 +1,9 @@
 #include <emscripten.h>
+
 #include <emscripten/html5.h>
 
 EM_JS(void,js_main,(),{
-  
+"use strict";
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*1.333333;
 document.getElementById('scanvas').width=window.innerHeight*1.333333;
@@ -27,7 +28,7 @@ function normalResStart(){
 setTimeout(function(){
 Module.ccall('str');},250);
 setTimeout(function(){
-// Module.ccall('b3');
+Module.ccall('b3');
 },450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
@@ -284,7 +285,7 @@ loada();
 int main(){
   
 EM_ASM({
-// "use strict";
+"use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
