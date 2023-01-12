@@ -37,7 +37,8 @@ fire:
 
 fire2:
 	 em++ h3srgb.cpp -o g3016.js \
-	 -std=gnu++2b -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb  \
+	 -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 \
+	 -std=gnu++2b -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
