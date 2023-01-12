@@ -13,7 +13,7 @@ Module.ccall('str');
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('pmhig').innerHTML=window.innerHeight;
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 },250);
 setTimeout(function(){
 Module.ccall('b3');
@@ -146,7 +146,7 @@ dxhttp.send();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTML=window.innerHeight;
+document.getElementById('pmhig').innerHTMLparseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
@@ -200,11 +200,10 @@ document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('wid').innerHTML=window.innerHeight;
 document.getElementById('hig').innerHTML=window.innerHeight;
 var vide=document.querySelectorAll('video');
-document.getElementById('pmhig').innerHTML=window.innerHeight;
 hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 window.scroll(0,0);
-document.getElementById('pmhig').innerHTML=window.innerHeight;
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('circle').width=window.innerHeight;
 document.getElementById('di').click();
