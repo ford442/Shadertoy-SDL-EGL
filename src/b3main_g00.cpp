@@ -142,7 +142,7 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-// scanVideos();
+scanVideos();
 scanShaders();
 scanSongs();
 
