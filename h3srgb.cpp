@@ -108,7 +108,7 @@ glClearColor(rlc,rlc,rlc,1.0-rlc);
 
 EM_JS(void,ma,(),{
 
-"use strict";
+// "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalLoop=null;
