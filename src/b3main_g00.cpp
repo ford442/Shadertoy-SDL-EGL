@@ -25,10 +25,10 @@ bz.postMessage({data:222});},350);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('str');},2550);
+Module.ccall('str');},1050);
 setTimeout(function(){
 Module.ccall('b3');
-},2950);
+},1950);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
@@ -142,7 +142,7 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-scanVideos();
+// scanVideos();
 scanShaders();
 scanSongs();
 
@@ -197,8 +197,8 @@ $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
 document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
 var vide=document.querySelectorAll('video');
 hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
