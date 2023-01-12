@@ -46,8 +46,8 @@ EM_JS(void,ma,(),{
 
 var vv=document.getElementById("mcanvas");
 
-var w$=parseInt(document.innerHeight,10);
-var h$=parseInt(document.innerHeight,10);
+var w$=document.innerHeight;
+var h$=document.innerHeight;
 const $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
