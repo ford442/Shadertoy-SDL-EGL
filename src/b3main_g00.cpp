@@ -1,6 +1,7 @@
 #include <emscripten.h>
 
 EM_JS(void,js_main,(),{
+  
 "use strict";
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*4;
@@ -50,8 +51,6 @@ shutDown.postMessage({data:222});
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
 var $iwid=document.getElementById('iwid');
-var mV=document.getElementById('mv');
-var loadV=document.getElementById('ldv');
 var $sngs=[];
 var $vids=[];
 var $shds=[];
