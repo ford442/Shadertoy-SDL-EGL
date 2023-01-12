@@ -11,7 +11,7 @@ b3hd:
 	 em++ src/b3sdl.cpp -c \
 	 -std=gnu++2a -matomics -fslp-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
-	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
+	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math -sUSE_SDL=2 
 	 em++ src/b3emjs.cpp -c \
 	 -std=gnu++2a -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
