@@ -26,7 +26,7 @@ function normalResStart(){
 setTimeout(function(){
 Module.ccall('str');},250);
 setTimeout(function(){
-// Module.ccall('b3');
+Module.ccall('b3');
 },450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
@@ -283,7 +283,7 @@ loada();
 int main(){
   
 EM_ASM({
-"use strict";
+// "use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
