@@ -1,7 +1,7 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
          -std=gnu++2a -mcpu=bleeding-edge -fwasm-exceptions \
-	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
+	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast
 	 em++ src/b3ogl.cpp -c \
 	 -std=gnu++2a -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -mavx \
@@ -15,8 +15,7 @@ b3hd:
 	 em++ src/b3emjs.cpp -c \
 	 -std=gnu++2a -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
-	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3015.js \
 	 -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
