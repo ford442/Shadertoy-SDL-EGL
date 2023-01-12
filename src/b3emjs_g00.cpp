@@ -44,7 +44,6 @@ EM_JS(void,ma,(),{
 
 // "use strict";
 
-const pnnl=document.body;
 var vv=document.getElementById("mcanvas");
 
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -149,7 +148,7 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
