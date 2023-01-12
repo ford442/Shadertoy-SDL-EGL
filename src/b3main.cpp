@@ -3,7 +3,7 @@
 #include <emscripten/html5.h>
 
 EM_JS(void,js_main,(),{
-// "use strict";
+"use strict";
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*1.333333;
 document.getElementById('scanvas').width=window.innerHeight*1.333333;
