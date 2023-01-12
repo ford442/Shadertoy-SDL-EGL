@@ -38,13 +38,13 @@ b3g00:
 	 -fno-math-errno -sUSE_SDL=2 -std=gnu++2a -matomics -fslp-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
-	 em++ src/b3emjs.cpp -c \
+	 em++ src/b3emjs_g00.cpp -c \
 	 -fno-math-errno -std=gnu++2a -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
-	 emcc b3main_g00.o b3ogl.o b3sdl.o b3emjs_g00.o -o g3014.js \
+	 emcc b3main_g00.o b3ogl.o b3sdl.o b3emjs_g00.o -o g0001.js \
 	 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
