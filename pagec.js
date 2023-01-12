@@ -95,7 +95,7 @@ setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
 setTimeout(function(){
-highResStart();
+normalResStart();
 },150);
 };};
 ff.send(null);
