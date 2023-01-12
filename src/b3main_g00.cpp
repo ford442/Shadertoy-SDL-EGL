@@ -148,8 +148,8 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 document.getElementById('ihig').innerHTML=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
+// document.getElementById('scanvas').height=window.innerHeight;
+// document.getElementById('scanvas').width=window.innerHeight;
 
 function snd(){
 const randSong=Math.floor(($sngs[0]-5)*Math.random());
