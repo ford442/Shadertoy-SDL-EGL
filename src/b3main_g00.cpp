@@ -3,6 +3,7 @@
 EM_JS(void,js_main,(),{
   
  "use strict";
+  
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*4;
 document.getElementById('scanvas').width=window.innerHeight*4;
@@ -24,6 +25,10 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
+
+var canvv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
+canvv.id='mcanvas';
+
 setTimeout(function(){
 Module.ccall('b3');
 },1050);
