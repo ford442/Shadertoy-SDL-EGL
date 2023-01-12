@@ -135,7 +135,7 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_li
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
