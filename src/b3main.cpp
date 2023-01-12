@@ -1,8 +1,7 @@
 #include <emscripten.h>
 
-#include <emscripten/html5.h>
-
 EM_JS(void,js_main,(),{
+  
 "use strict";
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*1.333333;
@@ -270,7 +269,7 @@ $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
-  document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
+document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
 document.getElementById('ldv').load();
 document.getElementById('di').click();
