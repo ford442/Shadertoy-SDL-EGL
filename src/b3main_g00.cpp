@@ -25,7 +25,8 @@ bz.postMessage({data:222});},350);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('str');},1050);
+// Module.ccall('str');
+},1050);
 setTimeout(function(){
 Module.ccall('b3');
 },1950);
