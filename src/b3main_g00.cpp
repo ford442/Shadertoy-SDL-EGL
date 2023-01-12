@@ -30,10 +30,10 @@ var canvv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene_
 canvv.id='mcanvas';
 
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },1050);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },1950);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
