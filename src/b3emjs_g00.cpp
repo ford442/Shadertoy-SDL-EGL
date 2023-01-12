@@ -44,6 +44,9 @@ EM_JS(void,ma,(),{
 
 // "use strict";
 
+var canvv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
+canvv.id='mcanvas';
+
 var vv=document.getElementById("mcanvas");
 
 var w$=document.getElementById("wid").innerHTML;
