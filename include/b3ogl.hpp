@@ -79,7 +79,6 @@ EGLint config_size,major,minor,atb_pos;
 #include <emscripten.h>
 
 EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
 
