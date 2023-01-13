@@ -174,14 +174,15 @@ const bcanvas=document.getElementById("bcanvas");
 const gl=bcanvas.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
-precision:'highp',logarithmicDepthBuffer:true,
+precision:'highp',
+logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:false,
-imageSmoothingQuality:'high',
-preserveDrawingBuffer:true,
+imageSmoothingEnabled:true,
+imageSmoothingQuality:'low',
+preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
@@ -194,9 +195,7 @@ minorVersion:0
 });
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'webgl2'});
- gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.disable(gl.DITHER);
-gl.drawingBufferColorSpace='display-p3';
+
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((g-f)*((g)*(g-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -261,6 +260,11 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
+ 
+
+gl.drawingBufferColorSpace='display-p3';
+  gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.disable(gl.DITHER);
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
