@@ -23,7 +23,7 @@ return;
 void plt(){
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
-wave.request.format=AUDIO_S32LSB;
+wave.request.format=AUDIO_S32;
 wave.request.channels=2;
 wave.request.samples=1024;
 wave.pos=0;
