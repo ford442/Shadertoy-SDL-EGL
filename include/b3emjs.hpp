@@ -1,4 +1,4 @@
-#include <emscripten.h>
+#include "../include/b3emsc.hpp"
 
 extern "C"{
 void b3();
@@ -12,6 +12,7 @@ void avgFrm(short int,int,float *,float *);
 
 EGLContext contextegl_js;
 EmscriptenWebGLContextAttributes attr_js;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
 EGLDisplay display_js;
 EGLSurface surface_js;
