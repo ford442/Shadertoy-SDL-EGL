@@ -76,14 +76,14 @@ EGLContext contextegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor,atb_pos;
 
-#include <emscripten.h>
+#include "../include/b3emsc.hpp"
 
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
 
 EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
-
 
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
