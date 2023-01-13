@@ -1,7 +1,6 @@
 
 #include <emscripten.h>
 
-EmscriptenWebGLContextAttributes attr_js;
 
 extern "C"{
 void b3();
@@ -15,6 +14,8 @@ EGLContext contextegl_js;
 
 #include "../include/b3gl.hpp"
 #include "../include/b3egl.hpp"
+
+EmscriptenWebGLContextAttributes attr_js;
 
 EGLDisplay display_js;
 EGLSurface surface_js;
