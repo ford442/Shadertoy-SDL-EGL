@@ -58,4 +58,5 @@ EGL_NONE
 };
 
 #include <webgl/webgl2.h>
+#include <emscripten/html5.h>
 
