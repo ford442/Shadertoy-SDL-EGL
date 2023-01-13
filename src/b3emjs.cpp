@@ -2,18 +2,18 @@
 
 void egl(){
 emscripten_webgl_init_context_attributes(&attr_js);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
-attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=2;
-attr.minorVersion=0;
+attr_js.alpha=EM_TRUE;
+attr_js.stencil=EM_TRUE;
+attr_js.depth=EM_TRUE;
+attr_js.antialias=EM_TRUE;
+attr_js.premultipliedAlpha=EM_FALSE;
+attr_js.preserveDrawingBuffer=EM_FALSE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
+attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
+attr_js.majorVersion=2;
+attr_js.minorVersion=0;
 ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
 display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglBindAPI(EGL_OPENGL_API);
