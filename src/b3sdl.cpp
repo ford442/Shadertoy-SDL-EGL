@@ -57,7 +57,7 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32SYS;
 wave.request.channels=2;
-wave.request.samples=2048;
+wave.request.samples=1024;
 wave.pos=0;
 wave.request.callback=bfr;
 opn_aud();
