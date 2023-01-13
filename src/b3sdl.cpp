@@ -18,6 +18,7 @@ dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,&wave.receive,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
 }
+SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
@@ -56,9 +57,9 @@ wave.request.format=AUDIO_S16SYS;
 wave.request.channels=2;
 wave.request.samples=4096;
 wave.pos=0;
+wave.request.callback=bfr;
 opn_aud();
 SDL_PauseAudioDevice(dev,SDL_FALSE);
-wave.request.callback=bfr;
 return;
 }
 
