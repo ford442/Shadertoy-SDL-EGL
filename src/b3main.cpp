@@ -26,13 +26,13 @@ bz.postMessage({data:222});},950);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('b3');},250);
+Module.ccall('str');},150);
 setTimeout(function(){
-Module.ccall('str');
-},450);
+Module.ccall('b3');
+},250);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},50);
+bz.postMessage({data:222});},750);
 }
 
 function pll(){
@@ -44,7 +44,7 @@ const fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-setTimeout(function(){pll();},500);
+setTimeout(function(){pll();},300);
 const shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({data:222});
 });
@@ -109,7 +109,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-highResStart();
+normalResStart();
 },150);
 };};
 ff.send(null);
