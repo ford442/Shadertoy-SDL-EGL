@@ -1,5 +1,7 @@
 #include "../include/b3emsc.hpp"
 
+char flnm[24];
+
 extern "C"{
 
 void pl();
@@ -13,8 +15,6 @@ void pl();
 SDL_AudioDeviceID dev;
 
 struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;}wave;
-
-void opn_aud();
 
 void SDLCALL bfr(void *,Uint8 *,int);
 
