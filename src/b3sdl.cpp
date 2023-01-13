@@ -52,7 +52,7 @@ if(SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen)==NULL){
 qu();
 }
 SDL_memset(&wave.request,0,sizeof(wave.request));
-wave.request.freq=44100;
+wave.request.freq=48000;
 // wave.request.format=AUDIO_F32MSB;
 wave.request.channels=2;
 wave.request.samples=4096;
