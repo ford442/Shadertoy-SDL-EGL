@@ -73,8 +73,6 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-emscripten_webgl_make_context_current(ctx);
-
 }
 
 void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
