@@ -169,7 +169,7 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-const bcanvas=document.getElementById("bcanvas");
+let bcanvas=document.getElementById("bcanvas");
 let gl=bcanvas.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
@@ -227,11 +227,10 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
- 
-
 gl.drawingBufferColorSpace='display-p3';
-  gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
+ 
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'webgl2'});
 
