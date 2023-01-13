@@ -22,12 +22,13 @@ glClearColor(y1y,y1y,y1y,y1y);
 return;
 }
 
-void uni(float xx,float yy,GLfloat time,short int fram){
+void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 GLclampf mX,mY;
+iFps=60/delt;
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
@@ -43,6 +44,8 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 clk_l=true;
 }
 glUniform1f(uni_tme,time);
+glUniform1f(uni_tme_dlt,delt);
+glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
 }
@@ -52,11 +55,12 @@ auto t3=t2;
 auto t2=std::chrono::high_resolution_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
 TtimeDelta=time_spanb.count();
+
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-uni(mouseX,mouseY,Ttime,iFrame);
+uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
@@ -231,7 +235,9 @@ glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
+uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
+uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
