@@ -47,7 +47,8 @@ EM_JS(void,ma,(),{
 // var canvv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
 // canvv.id='mcanvas';
 
-var vv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
+var vvc=document.getElementByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
+var vv=vvc[0];
 
 var w$=(document.getElementById("wid").innerHTML,10);
 var h$=(document.getElementById("hig").innerHTML,10);
