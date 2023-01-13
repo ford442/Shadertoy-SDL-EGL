@@ -10,7 +10,6 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
