@@ -10,7 +10,7 @@ void pl();
 
 SDL_AudioDeviceID dev;
 
-struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;SDL_AudioSpec recieve;}wave;
+struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;SDL_AudioSpec receive;}wave;
 
 void cls_aud();
 
