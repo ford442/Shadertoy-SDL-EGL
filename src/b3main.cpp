@@ -1,4 +1,4 @@
-#include <emscripten.h>
+#include "../include/b3main.hpp"
 
 EM_JS(void,js_main,(),{
   
