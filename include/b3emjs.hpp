@@ -9,12 +9,13 @@ void nano(short int,int,float *,float *);
 
 void avgFrm(short int,int,float *,float *);
 
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
-EGLContext contextegl_js;
+
 
 #include "../include/b3gl.hpp"
 #include "../include/b3egl.hpp"
 
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
+EGLContext contextegl_js;
 EmscriptenWebGLContextAttributes attr_js;
 
 EGLDisplay display_js;
