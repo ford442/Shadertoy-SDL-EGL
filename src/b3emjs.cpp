@@ -146,10 +146,7 @@ const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
- gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 
-gl.disable(gl.DITHER);
-gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -189,6 +186,9 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALP
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);
 // gl.unpackColorSpace='display-p3';  // very slow
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.disable(gl.DITHER);
+gl.drawingBufferColorSpace='display-p3';
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
