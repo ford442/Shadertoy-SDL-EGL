@@ -123,7 +123,6 @@ EM_JS(void,ma,(),{
 
 const pnnl=document.body;
 var vv=document.getElementById("mv");
-var lvv=document.getElementById("ldv");
 var intervalLoop=null;
 var f;
 var loopLoop;
@@ -161,13 +160,11 @@ vv.play();
 pnnl.addEventListener('keydown',doKey);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
-var lw$=parseInt(document.getElementById("lwid").innerHTML,10);
-var lh$=parseInt(document.getElementById("lhig").innerHTML,10);
 const $H=Module.HEAPF32.buffer;
-var la=h$*w$*4;
+var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-var sz=(lh$*lw$)/8;
+var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -233,6 +230,8 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALP
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
+ 
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
@@ -269,19 +268,16 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
 gl.disable(gl.DITHER);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+ 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-lw$=parseInt(document.getElementById("lwid").innerHTML,10);
-lh$=parseInt(document.getElementById("lhig").innerHTML,10);
-lvv=document.getElementById("ldv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
-la=h$*w$*4;
+la=h$*h$*4;
 var al=w$*h$*8;
-sz=(lh$*lw$)/8;
+sz=(h$*h$)/8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
@@ -303,14 +299,12 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-lw$=parseInt(document.getElementById("lwid").innerHTML,10);
-lh$=parseInt(document.getElementById("lhig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
-la=h$*w$*4;
+la=h$*h$*4;
 al=w$*h$*8;
-sz=(lh$*lw$)/8;
+sz=(h$*h$)/8;
 pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
@@ -325,7 +319,6 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
-lvv=document.getElementById("ldv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
@@ -334,9 +327,9 @@ var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+"); $F="+loca+";$Bu="+locb+";}");
 }
-var $bb=R(lvv);
+var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
