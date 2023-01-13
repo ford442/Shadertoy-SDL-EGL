@@ -25,16 +25,15 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
-
 setTimeout(function(){
 Module.ccall('str');
-},1050);
+},250);
 setTimeout(function(){
 Module.ccall('b3');
-},1950);
+},650);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},50);
+bz.postMessage({data:222});},550);
 }
 
 function pll(){
