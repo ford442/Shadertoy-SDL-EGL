@@ -72,7 +72,7 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glDisable(GL_DITHER);
 return;
 }
@@ -171,8 +171,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-let bcanvas=document.getElementById("bcanvas");
-let gl=bcanvas.getContext("webgl2",{
+var bcanvas=document.getElementById("bcanvas");
+var gl=bcanvas.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
