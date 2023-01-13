@@ -35,11 +35,13 @@ vve.id='mcanvas';
 Module.ccall('str');
 },250);
 setTimeout(function(){
+const bz=new BroadcastChannel('bez');
+bz.postMessage({data:222});
+},150);
+setTimeout(function(){
 Module.ccall('b3');
 },650);
-setTimeout(function(){
-const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},550);
+
 }
 
 function pll(){
