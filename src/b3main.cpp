@@ -150,14 +150,13 @@ scanVideos();
 scanShaders();
 scanSongs();
 
-  /*
+
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('mv').load();
-document.getElementById('ldv').load();
-*/
+//document.getElementById('mv').load();
+// document.getElementById('ldv').load();
   
 function snd(){
 const randSong=Math.floor(($sngs[0]-5)*Math.random());
