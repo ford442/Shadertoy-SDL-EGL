@@ -134,7 +134,7 @@ function backForth(stp){
 loopLoop=true;
 f=true;
 a=stp-(120*0.013333);
-b=stp+(120*0.013333);
+b=stp;
 }
 
 function stpBackForth(){
