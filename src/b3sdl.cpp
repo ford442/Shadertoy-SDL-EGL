@@ -53,7 +53,7 @@ qu();
 }
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
-wave.request.format=AUDIO_F32;
+wave.request.format=AUDIO_S16;
 wave.request.channels=2;
 wave.request.samples=4096;
 wave.pos=0;
