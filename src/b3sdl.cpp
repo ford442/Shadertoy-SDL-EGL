@@ -14,7 +14,7 @@ return;
 }
 
 void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,&wave.receive,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
 }
