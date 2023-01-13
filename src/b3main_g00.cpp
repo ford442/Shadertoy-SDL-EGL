@@ -10,15 +10,15 @@ document.getElementById('scanvas').width=window.innerHeight*4;
 document.getElementById('pmhig').innerHTML=window.innerHeight*4;
 setTimeout(function(){
 Module.ccall('str');
-},150);
-setTimeout(function(){
+},350);
+
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-},250);
+
 setTimeout(function(){
 Module.ccall('b3');
-},450);
+},750);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},350);
