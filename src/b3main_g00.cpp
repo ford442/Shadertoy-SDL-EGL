@@ -25,6 +25,11 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
+  
+var vvc=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
+var vve=vvc[0];
+vve.id='mcanvas';
+
 setTimeout(function(){
 Module.ccall('str');
 },250);
