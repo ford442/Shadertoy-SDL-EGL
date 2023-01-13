@@ -28,12 +28,14 @@ int lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
+SDL_UnlockAudioDevice(dev);
 SDL_memcpy(stm,wptr,lft);
 stm+=lft;
 len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
+SDL_LockAudioDevice(dev);
 }
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
