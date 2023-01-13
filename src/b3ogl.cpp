@@ -241,7 +241,7 @@ glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::high_resolution_clock::now();
   
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
