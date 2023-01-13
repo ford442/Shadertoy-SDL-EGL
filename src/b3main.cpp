@@ -150,13 +150,15 @@ scanVideos();
 scanShaders();
 scanSongs();
 
+  /*
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('mv').load();
 document.getElementById('ldv').load();
-
+*/
+  
 function snd(){
 const randSong=Math.floor(($sngs[0]-5)*Math.random());
 const songSrc=$sngs[randSong+5];
@@ -226,8 +228,8 @@ if(lockVid!=1){
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
+document.getElementById('lwid').innerHTML=this.videoWidth;
+document.getElementById('lhig').innerHTML=this.videoHeight;
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -265,7 +267,8 @@ lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById('mv').play();
-
+document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
+document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
