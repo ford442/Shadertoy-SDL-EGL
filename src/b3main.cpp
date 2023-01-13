@@ -8,15 +8,15 @@ function highResStart(){
 setTimeout(function(){
 Module.ccall('b3');
 },50);
-document.getElementById('scanvas').height=window.innerHeight*4;
-document.getElementById('scanvas').width=window.innerHeight*4;
+document.getElementById('scanvas').style.height=(window.innerHeight*4)+'px';
+document.getElementById('scanvas').style.width=(window.innerHeight*4)+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight*4;
 setTimeout(function(){
 Module.ccall('str');
 },150);
 setTimeout(function(){
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').style.height=window.innerHeight+'px';
+document.getElementById('scanvas').style.width=window.innerHeight+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 },350);
 setTimeout(function(){
@@ -110,7 +110,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-normalResStart();
+highResStart();
 },150);
 };};
 ff.send(null);
