@@ -1,11 +1,5 @@
 #include "../include/b3sdl.hpp"
 
-void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
-SDL_PauseAudioDevice(dev,SDL_FALSE);
-return;
-}
-
 void SDLCALL bfr(void * unused,Uint8 * stm,int len){
 Uint8 * wptr;
 int lft;
@@ -27,7 +21,6 @@ return;
 }
 
 void plt(){
-char flnm[24];
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32LSB;
@@ -38,7 +31,8 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
 wave.request.callback=bfr;
-opn_aud();
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
+SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
