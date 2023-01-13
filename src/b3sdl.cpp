@@ -14,11 +14,10 @@ return;
 }
 
 void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.spec,NULL,0);
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,&receive,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
 }
-SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
@@ -52,8 +51,9 @@ if(SDL_LoadWAV(flnm,&wave.spec,&wave.snd,&wave.slen)==NULL){
 qu();
 }
 wave.pos=0;
-wave.spec.callback=bfr;
 opn_aud();
+SDL_PauseAudioDevice(dev,SDL_FALSE);
+request.callback=bfr;
 return;
 }
 
