@@ -60,6 +60,7 @@ emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx_js,"ARB_multisample");
 emscripten_webgl_enable_extension(ctx_js,"ARB_robustness");
