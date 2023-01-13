@@ -1,3 +1,5 @@
+#include "../include/b3emsc.hpp"
+
 extern "C"{
 
 void pl();
@@ -10,11 +12,7 @@ void pl();
 
 SDL_AudioDeviceID dev;
 
-struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;SDL_AudioSpec receive;}wave;
-
-void cls_aud();
-
-void qu();
+struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;}wave;
 
 void opn_aud();
 
