@@ -10,12 +10,9 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
+EGLint v0=0,v3=3,v1=1,v2=2,v5=5;
 
-EGLint v0=0,v3=3,v1=1,v2=2,v5=5,config_size,major,minor,atb_pos;
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
-EGLConfig eglconfig;
+
 
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
