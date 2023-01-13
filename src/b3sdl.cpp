@@ -58,7 +58,7 @@ wave.request.samples=4096;
 wave.pos=0;
 opn_aud();
 SDL_PauseAudioDevice(dev,SDL_FALSE);
-request.callback=bfr;
+wave.request.callback=bfr;
 return;
 }
 
