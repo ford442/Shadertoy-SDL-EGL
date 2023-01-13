@@ -25,9 +25,9 @@ bz.postMessage({data:222});},350);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('str');},250);
+Module.ccall('b3');},250);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
@@ -108,7 +108,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-highResStart();
+normalResStart();
 },150);
 };};
 ff.send(null);
