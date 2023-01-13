@@ -169,8 +169,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-let bcanvas=document.getElementById("bcanvas");
-let gl=bcanvas.getContext("webgl2",{
+var bcanvas=document.getElementById("bcanvas");
+var gl=bcanvas.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
@@ -192,7 +192,8 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
- 
+ gl.drawingBufferColorSpace='display-p3';
+
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -227,7 +228,6 @@ gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
-gl.drawingBufferColorSpace='display-p3';
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
  
