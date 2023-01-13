@@ -60,3 +60,5 @@ EGL_SAMPLES,64,
 EGL_NONE
 };
 
+#include <webgl/webgl2.h>
+
