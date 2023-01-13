@@ -10,15 +10,16 @@ void pl();
 
 SDL_AudioDeviceID dev;
 
-SDL_AudioSpec request,recieve;
-SDL_memset(&request,0,sizeof(request));
-request.freq=44100;
-request.format=AUDIO_F32;
-request.channels=2;
-request.samples=4096;
-request.callback=bfr; 
 
-struct{Uint8 * snd;int pos;Uint32 slen;}wave;
+
+struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;SDL_AudioSpec recieve;}wave;
+
+SDL_memset(&wave.request,0,sizeof(wave.request));
+
+wave.request.freq=44100;
+wave.request.format=AUDIO_F32;
+wave.request.channels=2;
+wave.request.samples=4096;
 
 void cls_aud();
 
