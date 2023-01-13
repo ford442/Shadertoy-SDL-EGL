@@ -332,10 +332,10 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-Module.ccall("frm");
-if($F%4==0){
+if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+Module.ccall("frm");
 };
 setTimeout(function(){
 M();
