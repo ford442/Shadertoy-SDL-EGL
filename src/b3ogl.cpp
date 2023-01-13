@@ -23,11 +23,10 @@ return;
 }
 
 void uni(float xx,float yy,GLfloat time,short int fram){
-  ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
-  
 GLclampf mX,mY;
 if(ms_l==true){
 if(clk_l==true){
@@ -117,8 +116,8 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
-attr.preserveDrawingBuffer=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -134,9 +133,8 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
-glDisable(GL_DITHER);
-
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glDisable(GL_DITHER);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -241,8 +239,6 @@ glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::high_resolution_clock::now();
-  
-
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
