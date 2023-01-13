@@ -14,7 +14,7 @@ return;
 }
 
 void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_FREQUENCY_CHANGE);
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
 }
@@ -51,15 +51,14 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 if(SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen)==NULL){
 qu();
 }
-// SDL_memset(&wave.request,0,sizeof(wave.request));
-// wave.request.freq=48000;
-// wave.request.format=AUDIO_F32MSB;
-// wave.request.channels=2;
-// wave.request.samples=4096;
+SDL_memset(&wave.request,0,sizeof(wave.request));
+wave.request.freq=44100;
+wave.request.format=AUDIO_S32;
+wave.request.channels=2;
+wave.request.samples=4096;
 wave.pos=0;
 wave.request.callback=bfr;
 opn_aud();
-SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
