@@ -3,21 +3,22 @@
 EM_JS(void,js_main,(),{
   
 "use strict";
+  
 function highResStart(){
 setTimeout(function(){
 Module.ccall('b3');
-},350);
+},50);
 document.getElementById('scanvas').height=window.innerHeight*4;
 document.getElementById('scanvas').width=window.innerHeight*4;
 document.getElementById('pmhig').innerHTML=window.innerHeight*4;
 setTimeout(function(){
 Module.ccall('str');
-},650);
+},150);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
-},850);
+},350);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},950);
