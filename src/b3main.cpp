@@ -6,21 +6,21 @@ EM_JS(void,js_main,(),{
 function highResStart(){
 setTimeout(function(){
 Module.ccall('b3');
-},450);
+},250);
 document.getElementById('scanvas').height=window.innerHeight*4;
 document.getElementById('scanvas').width=window.innerHeight*4;
 document.getElementById('pmhig').innerHTML=window.innerHeight*4;
 setTimeout(function(){
 Module.ccall('str');
-},150);
+},450);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
-},250);
+},650);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},650);
+bz.postMessage({data:222});},750);
 }
 
 function normalResStart(){
