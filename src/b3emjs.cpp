@@ -1,5 +1,80 @@
 #include "../include/b3emjs.hpp"
 
+void egl(){
+emscripten_webgl_init_context_attributes(&attr_js);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=2;
+attr.minorVersion=0;
+ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
+display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglBindAPI(EGL_OPENGL_API);
+eglInitialize(display_js,&major_js,&minor_js);
+eglChooseConfig(display_js,attribute_list,&eglconfig_js,(EGLint)1,&config_size_js);
+contextegl=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2);
+surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list);
+eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
+emscripten_webgl_make_context_current(ctx_js);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glDisable(GL_DITHER);
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_depth_texture");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_draw_buffers");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_provoking_vertex");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_webcodecs_video_frame");
+emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
+emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
+emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
+emscripten_webgl_enable_extension(ctx_js,"OES_fbo_render_mipmap");
+emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
+emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
+emscripten_webgl_enable_extension(ctx_js,"OES_depth32");
+emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
+emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
+emscripten_webgl_enable_extension(ctx_js,"OES_single_precision");
+emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
+emscripten_webgl_enable_extension(ctx_js,"EXT_float_blend");
+emscripten_webgl_enable_extension(ctx_js,"EXT_frag_depth");
+emscripten_webgl_enable_extension(ctx_js,"EXT_shader_texture_lod");
+emscripten_webgl_enable_extension(ctx_js,"EXT_sRGB");
+// emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
+emscripten_webgl_enable_extension(ctx_js,"EXT_disjoint_timer_query");
+emscripten_webgl_enable_extension(ctx_js,"EXT_clip_cull_distance");
+emscripten_webgl_enable_extension(ctx_js,"EXT_disjoint_timer_query_webgl2");
+emscripten_webgl_enable_extension(ctx_js,"EXT_framebuffer_sRGB");
+emscripten_webgl_enable_extension(ctx_js,"ANGLE_instanced_arrays");
+emscripten_webgl_enable_extension(ctx_js,"KHR_parallel_shader_compile");
+emscripten_webgl_enable_extension(ctx_js,"EXT_texture_shadow_lod");
+emscripten_webgl_enable_extension(ctx_js,"NV_memory_attachment");
+emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_display_p3");
+emscripten_webgl_enable_extension(ctx_js,"ARB_multisample");
+emscripten_webgl_enable_extension(ctx_js,"ARB_robustness");
+emscripten_webgl_enable_extension(ctx_js,"ARB_robust_buffer_access_behavior");
+emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
+emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
+// emscripten_webgl_enable_extension(ctx,"ARB_ES2_compatibility");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
+emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
+emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
+}
+
 void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
 float min=1.0;
@@ -295,6 +370,7 @@ T=true;
 extern "C" {
 
 void b3(){
+egl();
 ma();
 return;
 }
