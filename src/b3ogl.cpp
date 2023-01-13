@@ -134,6 +134,7 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
+glDisable(GL_DITHER);
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
@@ -241,7 +242,6 @@ glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::high_resolution_clock::now();
   
-// glDisable(GL_DITHER);
 
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
