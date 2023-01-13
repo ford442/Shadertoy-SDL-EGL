@@ -1,23 +1,7 @@
 #include "../include/b3sdl.hpp"
 
-void cls_aud(){
-if(dev!=0){
-SDL_PauseAudioDevice(dev,SDL_TRUE);
-SDL_CloseAudioDevice(dev);
-dev=0;
-return;
-}}
-
-void qu(){
-SDL_Quit();
-return;
-}
-
 void opn_aud(){
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
-// if(!dev){
-// SDL_FreeWAV(wave.snd);
-// }
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
@@ -44,23 +28,15 @@ return;
 
 void plt(){
 char flnm[24];
-// SDL_FreeWAV(wave.snd);
-// SDL_SetMainReady();
-// if (SDL_Init(SDL_INIT_AUDIO)<0){
-// qu();
-// }
-SDL_Init(SDL_INIT_AUDIO);
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-// if(SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen)==NULL){
-// qu();
-// }
-SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32LSB;
 wave.request.channels=2;
 wave.request.samples=1024;
 wave.pos=0;
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+SDL_Init(SDL_INIT_AUDIO);
+SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
 wave.request.callback=bfr;
 opn_aud();
 return;
