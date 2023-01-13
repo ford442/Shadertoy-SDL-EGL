@@ -74,6 +74,7 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glDisable(GL_DITHER);
+return;
 }
 
 void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
@@ -132,8 +133,8 @@ var mmvv;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-(60*0.016666);
-b=stp+(60*0.016666);
+a=stp-(120*0.013333);
+b=stp+(120*0.013333);
 }
 
 function stpBackForth(){
@@ -143,17 +144,18 @@ loopLoop=false;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
-}
+};
 if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=mmvv.currentTime;
 backForth(stp);
-}
+};
 if(e.code=='KeyX'){
 stpBackForth();
 vv.play();
-}}
+};
+}
 
 pnnl.addEventListener('keydown',doKey);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -169,8 +171,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var bcanvas=document.getElementById("bcanvas");
-var gl=bcanvas.getContext("webgl2",{
+let bcanvas=document.getElementById("bcanvas");
+let gl=bcanvas.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
@@ -229,10 +231,8 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
 gl.disable(gl.DITHER);
- 
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'webgl2'});
-
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((g-f)*((g)*(g-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -261,14 +261,12 @@ const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setPrecision("single").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
-
+// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-// gl.enable(gl.BLEND);
+// gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
