@@ -14,7 +14,7 @@ return;
 }
 
 void opn_aud(){
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,&wave.receive,0);
 if(!dev){
 SDL_FreeWAV(wave.snd);
 }
@@ -55,7 +55,7 @@ SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32SYS;
 wave.request.channels=2;
-wave.request.samples=1024;
+wave.request.samples=2048;
 wave.pos=0;
 wave.request.callback=bfr;
 opn_aud();
