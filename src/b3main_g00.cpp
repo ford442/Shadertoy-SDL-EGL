@@ -26,9 +26,6 @@ bz.postMessage({data:222});},350);
 
 function normalResStart(){
 
-var canvv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
-canvv.id='mcanvas';
-
 setTimeout(function(){
 Module.ccall('str');
 },1050);
@@ -112,7 +109,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-normalResStart();
+highResStart();
 },150);
 };};
 ff.send(null);
@@ -148,7 +145,7 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-// scanVideos();
+scanVideos();
 scanShaders();
 scanSongs();
 
