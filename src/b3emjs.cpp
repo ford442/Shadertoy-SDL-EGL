@@ -23,8 +23,7 @@ contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAt
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glDisable(GL_DITHER);
+
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -73,6 +72,8 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
+ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glDisable(GL_DITHER);
 }
 
 void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
