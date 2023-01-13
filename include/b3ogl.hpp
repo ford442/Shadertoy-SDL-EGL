@@ -61,7 +61,7 @@ const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-void uni(float,float,GLfloat,short int);
+void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
