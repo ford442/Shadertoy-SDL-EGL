@@ -160,6 +160,7 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
+  
 mV.load();
 loadV.load();
 
@@ -231,7 +232,7 @@ function loada(){
 if(lockVid!=1){
   
 document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
-document.getElementById('hig').innerHTML=(document.innerHeight);
+document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
   
 mV.addEventListener('canplay',function(){
 mV.width=mV.videoWidth;
