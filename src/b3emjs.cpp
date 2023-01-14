@@ -5,7 +5,7 @@ emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_FALSE;
 attr_js.depth=EM_TRUE;
-attr_js.antialias=EM_FALSE;
+attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
 attr_js.enableExtensionsByDefault=EM_TRUE;
@@ -188,7 +188,7 @@ premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
-antialias:false,
+antialias:true,
 willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
