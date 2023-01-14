@@ -229,13 +229,14 @@ pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
-loadV.addEventListener('canplay',function(){
-loadV.width=this.videoWidth;
+mV.addEventListener('canplay',function(){
 mV.width=mV.videoWidth;
-loadV.height=this.videoHeight;
 mV.height=mV.videoHeight;
-// document.getElementById('wid').innerHTML=mV.videoWidth;
-// document.getElementById('hig').innerHTML=mV.videoHeight;
+document.getElementById('wid').innerHTML=mV.videoWidth;
+document.getElementById('hig').innerHTML=mV.videoHeight;
+});
+loadV.addEventListener('canplay',function(){
+loadV.width=this.videoWidth;loadV.height=this.videoHeight;
 document.getElementById('lwid').innerHTML=this.videoWidth;
 document.getElementById('lhig').innerHTML=this.videoHeight;
 var $sc=this.duration;
