@@ -179,7 +179,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_robustness");
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
-emscripten_webgl_enable_extension(ctx,"ARB_ES2_compatibility");
+// emscripten_webgl_enable_extension(ctx,"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
