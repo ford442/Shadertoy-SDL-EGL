@@ -133,8 +133,8 @@ var mmvv;
 function backForth(stp){
 loopLoop=true;
 f=true;
-a=stp-(120*0.013333);
-b=stp;
+a=(stp-1);
+b=(stp+1);
 }
 
 function stpBackForth(){
@@ -149,7 +149,9 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=mmvv.currentTime;
-backForth(stp);
+loopLoop=true;
+f=true;
+// backForth(stp);
 };
 if(e.code=='KeyX'){
 stpBackForth();
@@ -347,21 +349,21 @@ setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
-if(mmvv.currentTime>a){
+if(mmvv.currentTime>(stp-1.0)){
 mmvv.currentTime-=0.013333;
 }else{
 f=false;
-if(mmvv.currentTime<b){
+if(mmvv.currentTime<(stp+1.0)){
 mmvv.currentTime+=0.013333;
 }else{
 f=true;
 }}}
 if(f==false){
-if(mmvv.currentTime<b){
+if(mmvv.currentTime<(stp+1.0)){
 mmvv.currentTime+=0.013333;
 }else{
 f=true;
-if(mmvv.currentTime>a){
+if(mmvv.currentTime>(stp-1.0)){
 mmvv.currentTime-=0.013333;
 }else{
 f=false;
