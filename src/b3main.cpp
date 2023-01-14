@@ -212,7 +212,6 @@ document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('isrc').innerHTML=adr;
 mV.play();
-var vv=document.getElementById('mv');
 var lockVid=0;
 
 function spKey(e){
