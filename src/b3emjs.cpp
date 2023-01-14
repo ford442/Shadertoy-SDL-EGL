@@ -149,9 +149,9 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=mmvv.currentTime;
- console.log(stp);
+// console.log(stp);
 loopLoop=true;
-f=true;
+f=false;
 // backForth(stp);
 };
 if(e.code=='KeyX'){
