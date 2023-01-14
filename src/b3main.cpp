@@ -114,7 +114,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-highResStart();
+normalResStart();
 },150);
 };};
 ff.send(null);
@@ -269,7 +269,6 @@ lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById('mv').play();
-
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
@@ -278,6 +277,8 @@ document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
 document.getElementById('ldv').load();
+document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
+document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 document.getElementById('di').click();
 };
 setTimeout(function(){
