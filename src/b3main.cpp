@@ -40,9 +40,7 @@ const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},750);
 }
 
-function pll(){
-Module.ccall('pl');
-}
+
 
 const fll=new BroadcastChannel('file');
 
@@ -53,6 +51,10 @@ setTimeout(function(){pll();},300);
 const shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({data:222});
 });
+  
+function pll(){
+Module.ccall('pl');
+}
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
@@ -158,8 +160,8 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('mv').load();
-document.getElementById('ldv').load();
+mV.load();
+loadV.load();
 
 function snd(){
 const randSong=Math.floor(($sngs[0]-5)*Math.random());
@@ -229,9 +231,13 @@ function loada(){
 if(lockVid!=1){
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
+mV.width=mV.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
+mV.height=mV.videoHeight;
+document.getElementById('wid').innerHTML=mV.videoWidth;
+document.getElementById('hig').innerHTML=mV.videoHeight;
+document.getElementById('lwid').innerHTML=this.videoWidth;
+document.getElementById('lhig').innerHTML=this.videoHeight;
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
