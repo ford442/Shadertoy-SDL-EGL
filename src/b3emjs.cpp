@@ -149,6 +149,7 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=mmvv.currentTime;
+ console.log(stp);
 loopLoop=true;
 f=true;
 // backForth(stp);
