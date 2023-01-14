@@ -3,9 +3,9 @@
 void egl(){
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_TRUE;
+attr_js.stencil=EM_FALSE;
 attr_js.depth=EM_TRUE;
-attr_js.antialias=EM_TRUE;
+attr_js.antialias=EM_FALSE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
 attr_js.enableExtensionsByDefault=EM_TRUE;
@@ -180,15 +180,15 @@ logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:true,
-imageSmoothingEnabled:true,
+stencil:false,
+imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
-antialias:true,
+antialias:false,
 willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
