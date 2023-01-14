@@ -128,7 +128,7 @@ var f;
 var loopLoop;
 var a,b;
 let stp;
-var mmvv;
+let mmvv;
  
 function backForth(stp){
 loopLoop=true;
@@ -352,20 +352,27 @@ if(loopLoop==true){
 if(f==true){
 if(mmvv.currentTime>(stp)){
 mmvv.currentTime-=0.013333;
+ mmvv.load();
 }else{
 f=false;
 if(mmvv.currentTime<(stp+2.0)){
 mmvv.currentTime+=0.013333;
+  mmvv.load();
+
 }else{
 f=true;
 }}}
 if(f==false){
 if(mmvv.currentTime<(stp+2.0)){
 mmvv.currentTime+=0.013333;
+  mmvv.load();
+
 }else{
 f=true;
 if(mmvv.currentTime>(stp)){
 mmvv.currentTime-=0.013333;
+  mmvv.load();
+
 }else{
 f=false;
 }}}}
