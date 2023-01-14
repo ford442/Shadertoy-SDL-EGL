@@ -13,9 +13,9 @@ void renderFrame();
 #include <ctime>
 #include <chrono>
 
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+std::chrono::steady_clock::time_point t1;
+std::chrono::steady_clock::time_point t2;
+std::chrono::steady_clock::time_point t3;
 
 struct timespec rem;
 struct timespec req={0,13333333};
