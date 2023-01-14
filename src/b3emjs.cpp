@@ -158,8 +158,12 @@ vv.play();
 }
 
 pnnl.addEventListener('keydown',doKey);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+ 
+// var w$=parseInt(document.getElementById("wid").innerHTML,10);
+// var h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=vv.videoHeight;
+var h$=vv.videoWidth;
+ 
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
@@ -268,9 +272,11 @@ gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('GL_ARB_multisample');
 gl.disable(gl.DITHER);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+// w$=parseInt(document.getElementById("wid").innerHTML,10);
+// h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
+ var w$=vv.videoHeight;
+var h$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 var l=w$*h$*16;
@@ -296,8 +302,10 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+// w$=parseInt(document.getElementById("wid").innerHTML,10);
+// h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=vv.videoHeight;
+var h$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
