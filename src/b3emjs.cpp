@@ -127,7 +127,7 @@ var intervalLoop=null;
 var f;
 var loopLoop;
 var a,b;
-var stp;
+let stp;
 var mmvv;
  
 function backForth(stp){
