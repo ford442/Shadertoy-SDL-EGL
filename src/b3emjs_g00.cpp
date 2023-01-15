@@ -123,7 +123,6 @@ EM_JS(void,ma,(),{
 
 var vv=document.getElementById("mcanvas");
 
-pnnl.addEventListener('keydown',doKey);
 // var w$=parseInt(document.getElementById("wid").innerHTML,10);
 // var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var h$=vv.height;
