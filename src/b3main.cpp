@@ -40,6 +40,8 @@ const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},750);
 }
 
+
+
 const fll=new BroadcastChannel('file');
 
 fll.addEventListener('message',ea=>{
@@ -222,7 +224,8 @@ if(e.code=='KeyZ'){lockVid=1;};
 if(e.code=='KeyX'){lockVid=0;};
 }
 
-document.body.addEventListener('keydown',spKey());
+const pnnl=document.body;
+pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
