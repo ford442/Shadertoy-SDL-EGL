@@ -1,4 +1,4 @@
-#include <emscripten.h>
+#include "../include/b3main.hpp"
 
 EM_JS(void,js_main,(),{
   
@@ -25,22 +25,20 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
-  
-
 
 setTimeout(function(){
 var vvc=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
 var vve=vvc[0];
 vve.id='mcanvas';
-Module.ccall('str');
-},250);
+Module.ccall('b3');
+},550);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
-},150);
-setTimeout(function(){
-Module.ccall('b3');
 },650);
+setTimeout(function(){
+Module.ccall('str');
+},850);
 
 }
 
