@@ -11,11 +11,9 @@ document.getElementById('pmhig').innerHTML=window.innerHeight*4;
 setTimeout(function(){
 Module.ccall('str');
 },350);
-
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-
 setTimeout(function(){
 Module.ccall('b3');
 },750);
@@ -25,11 +23,10 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
-
-setTimeout(function(){
 var vvc=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
 var vve=vvc[0];
 vve.id='mcanvas';
+setTimeout(function(){
 Module.ccall('b3');
 },550);
 setTimeout(function(){
@@ -39,7 +36,6 @@ bz.postMessage({data:222});
 setTimeout(function(){
 Module.ccall('str');
 },850);
-
 }
 
 function pll(){
