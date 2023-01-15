@@ -233,12 +233,7 @@ if(lockVid!=1){
 document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
 document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
   
-mV.addEventListener('canplay',function(){
-mV.width=mV.videoWidth;
-mV.height=mV.videoHeight;
-document.getElementById('wid').innerHTML=mV.videoWidth;
-document.getElementById('hig').innerHTML=mV.videoHeight;
-});
+
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;loadV.height=this.videoHeight;
 document.getElementById('lwid').innerHTML=this.videoWidth;
