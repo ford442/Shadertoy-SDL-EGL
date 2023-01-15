@@ -121,44 +121,7 @@ EM_JS(void,ma,(),{
 
 // "use strict";
 
-const pnnl=document.body;
 var vv=document.getElementById("mcanvas");
-var intervalLoop=null;
-var f;
-var loopLoop;
-var a,b;
-var stp;
-var mmvv;
- 
-function backForth(stp){
-loopLoop=true;
-f=true;
-a=(stp-1);
-b=(stp+1);
-}
-
-function stpBackForth(){
-loopLoop=false;
-}
-
-function doKey(e){
-if(e.code=='Space'){
-e.preventDefault();
-};
-if (e.code=='KeyZ'){
-mmvv=document.getElementById("mv");
-mmvv.pause();
-stp=mmvv.currentTime;
-// console.log(stp);
-loopLoop=true;
-f=false;
-// backForth(stp);
-};
-if(e.code=='KeyX'){
-stpBackForth();
-vv.play();
-};
-}
 
 pnnl.addEventListener('keydown',doKey);
 // var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -345,27 +308,6 @@ Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1
 Module.ccall("frm");
 setTimeout(function(){
 M();
-if(loopLoop==true){
-if(f==true){
-if(mmvv.currentTime>(stp)){
-mmvv.currentTime-=0.013333;
-}else{
-f=false;
-if(mmvv.currentTime<(stp+2.0)){
-mmvv.currentTime+=0.013333;
-}else{
-f=true;
-}}}
-if(f==false){
-if(mmvv.currentTime<(stp+2.0)){
-mmvv.currentTime+=0.013333;
-}else{
-f=true;
-if(mmvv.currentTime>(stp)){
-mmvv.currentTime-=0.013333;
-}else{
-f=false;
-}}}}
 },13.333333)}
 M();
 document.getElementById("di").onclick=function(){
