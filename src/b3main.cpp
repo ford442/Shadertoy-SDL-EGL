@@ -224,8 +224,7 @@ if(e.code=='KeyZ'){lockVid=1;};
 if(e.code=='KeyX'){lockVid=0;};
 }
 
-const pnnl=document.body;
-pnnl.addEventListener('keydown',spKey);
+document.body.addEventListener('keydown',spKey(e));
 
 function loada(){
 if(lockVid!=1){
