@@ -324,7 +324,7 @@ T=true;
 extern "C" {
 
 void b3(){
-egl();
+// egl();
 ma();
 return;
 }
