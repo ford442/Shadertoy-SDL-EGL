@@ -27,15 +27,16 @@ var vvc=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__c
 var vve=vvc[0];
 vve.id='mcanvas';
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },550);
+
+setTimeout(function(){
+Module.ccall('b3');
+},850);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
-},650);
-setTimeout(function(){
-Module.ccall('str');
-},850);
+},1250);
 }
 
 function pll(){
