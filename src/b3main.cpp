@@ -29,15 +29,15 @@ bz.postMessage({data:222});},950);
 }
 
 function normalResStart(){
-setTimeout(function(){
+
 Module.ccall('b3');
-},2000);
+},200);
 setTimeout(function(){
 Module.ccall('str');
-},2000);
+},700);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},2000);
+bz.postMessage({data:222});},1000);
 }
 
 const fll=new BroadcastChannel('file');
@@ -172,7 +172,9 @@ sng.postMessage({data:songSrc});
 
 document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
-setTimeout(function(){snd();},1550);
+setTimeout(function(){
+snd();
+},1550);
 });
 
 const tem=document.getElementById('tim');
@@ -227,10 +229,9 @@ pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
-  
+
 document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
 document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
-  
 
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;loadV.height=this.videoHeight;
