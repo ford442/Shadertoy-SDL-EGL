@@ -5,7 +5,7 @@
 <link rel=preconnect href=https://css.1ink.us>
 <title>R*A*1*N</title>
 <link crossorigin rel='stylesheet' href='https://css.1ink.us/sh1.1iss'>
-<link rel='stylesheet' href='./css/normalize.css'>
+<link rel='stylesheet' href='./css/normalize.css'/>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet'>
 <link rel='stylesheet' href='./css/demo.css'>
 <link rel='stylesheet' href='./css/style1.css'>
@@ -36,11 +36,6 @@ TIMESLIDER<br>(Seconds between video change)</div>
 <img src=./img/weather/texture-drizzle-fg.png>
 <img src=./img/weather/texture-drizzle-bg.png>
 </div>
-<link rel="stylesheet" href="./mono-index.css" />
-</head>
-<body>
-<div id="container" style="width: 800px; height: 600px; border: 1px solid #ccc"></div>
-<script type="module" src="./mono-index.js"></script>
 <header class=codrops-header>
 <h1>Rain &amp; Water Effects</h1>
 <nav class=codrops-demos>
@@ -128,4 +123,7 @@ TIMESLIDER<br>(Seconds between video change)</div>
 <audio crossorigin id=track preload=auto hidden style='pointer-events:none;'></audio>
 <script async crossorigin src=https://wasm.noahcohn.com/s3001.1ijs></script>
 <script charset=utf-8 src=./js/index.16.js></script>
+<div id="container" style="width: 800px; height: 600px; border: 1px solid #ccc"></div>
+<script type="module" src="./mono-index.js"></script>
 </body>
+
