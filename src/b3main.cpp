@@ -31,13 +31,14 @@ bz.postMessage({data:222});},950);
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('b3');
-},150);
+},350);
 setTimeout(function(){
 Module.ccall('str');
-},250);
+},550);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},750);
+bz.postMessage({data:222});
+},950);
 }
 
 const fll=new BroadcastChannel('file');
