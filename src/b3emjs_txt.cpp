@@ -219,7 +219,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -279,7 +279,6 @@ gl.disable(gl.DITHER);
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
 cvv=document.getElementById("mvc");
-
 var h$=vv.videoHeight;
 var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
@@ -348,7 +347,7 @@ eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(cvv);$"+$Bu
 }
 pointb=66*la;
 if($F%2==0){
-var $bb=R(vv);$B.set($bb,0,sz);
+var $bb=R(cvv);$B.set($bb,0,sz);
 }else{
 var $bb=R(lvv);$B.set($bb,0,sz);
 }
