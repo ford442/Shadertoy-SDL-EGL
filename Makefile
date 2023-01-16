@@ -44,7 +44,7 @@ cloud:
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
-	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3001.js \
+	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o c3001.js \
 	 -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
