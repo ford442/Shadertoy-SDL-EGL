@@ -218,7 +218,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision("single")..setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPrecision("single").setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -229,7 +229,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setPrecision("single")..setOptimizeFloatMemory(true).setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPrecision("single").setOptimizeFloatMemory(true).setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
