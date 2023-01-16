@@ -120,7 +120,7 @@ return;
 EM_JS(void,ma,(),{
 
 // "use strict";
-
+var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var intervalLoop=null;
 var f;
@@ -328,7 +328,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
-// var lvv=document.getElementById("ldv");
+lvv=document.getElementById("ldv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){
@@ -339,16 +339,18 @@ var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-var locc=$aBu+1;
-if(locc>64){locc=1;}
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");var $bb=R($"+$Bu+");$B.set($bb,0,sz);$F="+loca+";$Bu="+locb+";$aBu="+locc+";}");
+eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
+ 
 pointb=66*la;
 if($F%2==0){
+var $bb=R(vv);$B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 Module.ccall("frm");
-};
+}else{
+var $bb=R(lvv);$B.set($bb,0,sz);
+}
 setTimeout(function(){
 M();
 if(loopLoop==true){
