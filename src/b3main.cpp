@@ -40,8 +40,6 @@ const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},750);
 }
 
-
-
 const fll=new BroadcastChannel('file');
 
 fll.addEventListener('message',ea=>{
@@ -233,9 +231,9 @@ if(lockVid!=1){
 document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
 document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
   
-
 loadV.addEventListener('canplay',function(){
-loadV.width=this.videoWidth;loadV.height=this.videoHeight;
+loadV.width=this.videoWidth;
+loadV.height=this.videoHeight;
 document.getElementById('lwid').innerHTML=this.videoWidth;
 document.getElementById('lhig').innerHTML=this.videoHeight;
 var $sc=this.duration;
