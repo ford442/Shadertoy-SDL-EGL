@@ -120,7 +120,7 @@ return;
 EM_JS(void,ma,(),{
 
 // "use strict";
-
+var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var intervalLoop=null;
 var f;
@@ -218,7 +218,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision("single").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPrecision("single").setArgumentTypes(["HTMLVideo"]).setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -294,6 +294,7 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
 var $F=1;
+var $aBu=17;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -327,23 +328,28 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
-// var lvv=document.getElementById("ldv");
+lvv=document.getElementById("ldv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-if(T){return;}
+if(T){
+return;
+};
 for(var i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+"); $F="+loca+";$Bu="+locb+";}");
+eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
-var $bb=R(vv);
-$B.set($bb,0,sz);
 pointb=66*la;
+if($F%2==0){
+var $bb=R(vv);$B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 Module.ccall("frm");
+}else{
+var $bb=R(lvv);$B.set($bb,0,sz);
+}
 setTimeout(function(){
 M();
 if(loopLoop==true){
