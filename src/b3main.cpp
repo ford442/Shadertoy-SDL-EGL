@@ -282,6 +282,7 @@ document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
+document.getElementById('ldv').height=document.innerHeight;
 document.getElementById('ldv').load();
 document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
 document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
