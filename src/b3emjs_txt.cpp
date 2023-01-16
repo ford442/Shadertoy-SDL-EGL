@@ -347,7 +347,7 @@ eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(cvv);$"+$Bu
 }
 pointb=66*la;
 if($F%2==0){
-var $bb=R(cvv);$B.set($bb,0,sz);
+var $bb=R(vv);$B.set($bb,0,sz);
 }else{
 var $bb=R(lvv);$B.set($bb,0,sz);
 }
