@@ -130,7 +130,7 @@ var w$=vv.width;
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
@@ -246,7 +246,7 @@ la=h$*h$*8;
 var al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -275,7 +275,7 @@ la=h$*h$*8;
 al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
@@ -323,7 +323,7 @@ T=true;
 extern "C" {
 
 void b3(){
-// egl();
+egl();
 ma();
 return;
 }
