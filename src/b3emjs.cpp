@@ -229,7 +229,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setPrecision("single").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setPrecision("single").setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
