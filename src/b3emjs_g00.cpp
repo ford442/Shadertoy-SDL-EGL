@@ -179,7 +179,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision("single").setPipeline(true).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -190,7 +190,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setPrecision("single").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
@@ -264,8 +264,6 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
-// h$=parseInt(document.getElementById("hig").innerHTML,10);
 var h$=vv.height;
 var w$=vv.width;
 var blank$=Math.max((((w$-h$)*0)/2),0);
@@ -288,7 +286,6 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mcanvas");
-// var lvv=document.getElementById("ldv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
