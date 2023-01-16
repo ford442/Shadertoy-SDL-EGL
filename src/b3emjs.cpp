@@ -340,8 +340,8 @@ if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
 var locc=$aBu+1;
-if(locb>64){locb=1;}
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";var $bb=R($+"$aBu"+);$B.set($bb,0,sz);}");
+if(locc>64){locc=1;}
+eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";$aBu="+locc+";var $bb=R($"+$aBu+");$B.set($bb,0,sz);}");
 }
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
