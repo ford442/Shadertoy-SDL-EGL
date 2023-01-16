@@ -341,12 +341,14 @@ var locb=$Bu+1;
 if(locb>64){locb=1;}
 var locc=$aBu+1;
 if(locc>64){locc=1;}
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";$aBu="+locc+";var $bb=R($"+$aBu+");$B.set($bb,0,sz);}");
+eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");var $bb=R($"+$Bu+");$B.set($bb,0,sz);$F="+loca+";$Bu="+locb+";$aBu="+locc+";}");
 }
 pointb=66*la;
+if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 Module.ccall("frm");
+};
 setTimeout(function(){
 M();
 if(loopLoop==true){
