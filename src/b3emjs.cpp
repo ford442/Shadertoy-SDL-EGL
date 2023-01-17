@@ -393,7 +393,6 @@ return;
 }
 
 void b3(){
-egl();
 ma();
 return;
 }
