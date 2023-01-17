@@ -1,5 +1,7 @@
 #include "../include/b3sdl.hpp"
 
+extern"C"{
+  
 void SDLCALL bfr(void * unused,Uint8 * stm,int len){
 Uint8 * wptr;
 int lft;
@@ -36,8 +38,6 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
-extern"C"{
-  
 void pl(){
 plt();
 return;
