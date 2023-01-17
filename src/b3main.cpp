@@ -1,9 +1,10 @@
 #include "../include/b3main.hpp"
 
 EM_JS(void,js_main,(),{
-  
+
 "use strict";
-  
+var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
+
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
@@ -53,22 +54,22 @@ document.getElementById('circle').height=window.innerHeight;
 // bz.postMessage({data:222});
 },950);
 }
-
-const fll=new BroadcastChannel('file');
-
-fll.addEventListener('message',ea=>{
-const fill=new Uint8Array(ea.data.data);
-FS.writeFile('/snd/sample.wav',fill);
-setTimeout(function(){pll();},300);
-const shutDown=new BroadcastChannel('shutDown');
-shutDown.postMessage({data:222});
-});
   
 function pll(){
 Module.ccall('pl');
 }
+  
+const fll=new BroadcastChannel('file');
+const shutDown=new BroadcastChannel('shutDown');
 
-var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
+fll.addEventListener('message',ea=>{
+const fill=new Uint8Array(ea.data.data);
+FS.writeFile('/snd/sample.wav',fill);
+setTimeout(function(){
+shutDown.postMessage({data:222});
+pll();
+},750);
+});
 
 var $iwid=document.getElementById('iwid');
 var mV=document.getElementById('mv');
@@ -131,7 +132,7 @@ setTimeout(function(){
   
   normalResStart();
   
-},150);
+},350);
 };};
 ff.send(null);
 }
@@ -190,7 +191,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1550);
+},650);
 });
 
 const tem=document.getElementById('tim');
@@ -301,8 +302,8 @@ document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
 // document.getElementById('ldv').height=document.innerHeight;
 document.getElementById('ldv').load();
-document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
-document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
+// document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
+// document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 document.getElementById('di').click();
 };
 setTimeout(function(){
