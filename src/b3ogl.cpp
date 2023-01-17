@@ -128,6 +128,17 @@ emscripten_webgl_make_context_current(ctx);
   
   glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
   glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+    glDisable(GL_DITHER);
+  glDisable(GL_STENCIL_TEST);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearDepth(D);
+glEnable(GL_BLEND);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+glEnable(GL_SCISSOR_TEST);
   
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -179,16 +190,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
-// glDisable(GL_STENCIL_TEST);
-glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
-glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glEnable(GL_SCISSOR_TEST);
+
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glGenBuffers((GLsizei)1,&VBO);
@@ -237,9 +239,6 @@ glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::steady_clock::now();
-  
-  glDisable(GL_DITHER);
-
 return;
 }
 
