@@ -2,6 +2,7 @@
 
 extern "C"{
 void b3();
+void b3_egl();
 void nano(short int,int,float *,float *);
 };
 
