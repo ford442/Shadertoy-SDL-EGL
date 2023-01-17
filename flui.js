@@ -2,67 +2,65 @@
 const promoPopup=document.getElementsByClassName('promo')[0];
 const promoPopupClose=document.getElementsByClassName('promo-close')[0];
 if(isMobile()){
- setTimeout(() => {
- promoPopup.style.display='table';
- },20000);
+setTimeout(()=>{
+promoPopup.style.display='table';
+},20000);
 }
 var appleLink=document.getElementById('apple_link');
 var googleLink=document.getElementById('google_link');
-
-// const canvas=document.getElementsByTagName('canvas')[0];
 var canvas=document.getElementById('acanvas');
 
 resizeCanvas();
 let config={
- SIM_RESOLUTION:256,
- DYE_RESOLUTION:1024,
- CAPTURE_RESOLUTION:512,
- DENSITY_DISSIPATION:1,
- VELOCITY_DISSIPATION:0.2,
- PRESSURE:0.8,PRESSURE_ITERATIONS:20,
- CURL:23,
- SPLAT_RADIUS:0.25,
- SPLAT_FORCE:6000,
- SHADING:true,
- COLORFUL:false,
- COLOR_UPDATE_SPEED:10,
- PAUSED:false,
- BACK_COLOR:{r:0,g:0,b:0},
- TRANSPARENT:true,
- BLOOM:false,
- BLOOM_ITERATIONS:8,
- BLOOM_RESOLUTION:512,
- BLOOM_INTENSITY:0.3,
- BLOOM_THRESHOLD:0.8,
- BLOOM_SOFT_KNEE:0.7,
- SUNRAYS:false,
- SUNRAYS_RESOLUTION:196,
- SUNRAYS_WEIGHT:1.0
+SIM_RESOLUTION:256,
+DYE_RESOLUTION:1024,
+CAPTURE_RESOLUTION:512,
+DENSITY_DISSIPATION:1,
+VELOCITY_DISSIPATION:0.2,
+PRESSURE:0.8,PRESSURE_ITERATIONS:20,
+CURL:23,
+SPLAT_RADIUS:0.25,
+SPLAT_FORCE:6000,
+SHADING:true,
+COLORFUL:false,
+COLOR_UPDATE_SPEED:10,
+PAUSED:false,
+BACK_COLOR:{r:0,g:0,b:0},
+TRANSPARENT:true,
+BLOOM:false,
+BLOOM_ITERATIONS:8,
+BLOOM_RESOLUTION:512,
+BLOOM_INTENSITY:0.3,
+BLOOM_THRESHOLD:0.8,
+BLOOM_SOFT_KNEE:0.7,
+SUNRAYS:false,
+SUNRAYS_RESOLUTION:196,
+SUNRAYS_WEIGHT:1.0
 };
 function pointerPrototype(){
- this.id= -1;
- this.texcoordX=0;
- this.texcoordY=0;
- this.prevTexcoordX=0;
- this.prevTexcoordY=0;
- this.deltaX=0;
- this.deltaY=0;
- this.down=false;
- this.moved=false;
- this.color=[30,0,300];
+this.id= -1;
+this.texcoordX=0;
+this.texcoordY=0;
+this.prevTexcoordX=0;
+this.prevTexcoordY=0;
+this.deltaX=0;
+this.deltaY=0;
+this.down=false;
+this.moved=false;
+this.color=[30,0,300];
 }
 let pointers=[];
 let splatStack=[];
 pointers.push(new pointerPrototype());
 const {gl,ext}=getWebGLContext(canvas);
 if(isMobile()){
- config.DYE_RESOLUTION=512;
+config.DYE_RESOLUTION=512;
 }
 if(!ext.supportLinearFiltering){
- config.DYE_RESOLUTION=512;
- config.SHADING=false;
- config.BLOOM=false;
- config.SUNRAYS=false;
+config.DYE_RESOLUTION=512;
+config.SHADING=false;
+config.BLOOM=false;
+config.SUNRAYS=false;
 }
 startGUI();
 function getWebGLContext(canvas){
@@ -74,7 +72,7 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:false,
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:true,
@@ -95,8 +93,8 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:false,
-imageSmoothingEnabled:false,
-imageSmoothingQuality:'high',
+imageSmoothingEnabled:true,
+imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
@@ -146,9 +144,11 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
-}else{gl.disable(gl.DITHER);
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+}else{
+gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 halfFloat=gl.getExtension('OES_texture_half_float');
 gl.getExtension('EXT_color_buffer_float');
@@ -183,286 +183,286 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-
-
- supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
- }
- gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
- const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
- let formatRGBA;
- let formatRG;
- let formatR;
- if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
- }else{
- formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- }
- return {
- gl,ext:{
- formatRGBA,formatRG,formatR,halfFloatTexType,supportLinearFiltering
- }
- };
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
+}
+gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
+const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
+let formatRGBA;
+let formatRG;
+let formatR;
+if(isWebGL2){
+formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
+formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
+formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
+}else{
+formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
+formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
+formatR=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
+}
+return {
+gl,ext:{
+formatRGBA,formatRG,formatR,halfFloatTexType,supportLinearFiltering
+}
+};
 }
 function getSupportedFormat(gl,internalFormat,format,type){
- if(!supportRenderTextureFormat(gl,internalFormat,format,type)){
- switch(internalFormat){
- case gl.R32F:
- return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
- case gl.RG32F:
- return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
- default:
- return null;
- }
- }
- return {
- internalFormat,format
- };
+if(!supportRenderTextureFormat(gl,internalFormat,format,type)){
+switch(internalFormat){
+case gl.R32F:
+return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
+case gl.RG32F:
+return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
+default:
+return null;
+}
+}
+return {
+internalFormat,format
+};
 }
 function supportRenderTextureFormat(gl,internalFormat,format,type){
- let texture=gl.createTexture();
- gl.bindTexture(gl.TEXTURE_2D,texture);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
- gl.texImage2D(gl.TEXTURE_2D,0,internalFormat,4,4,0,format,type,null);
- let fbo=gl.createFramebuffer();
- gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
- gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,texture,0);
- let status=gl.checkFramebufferStatus(gl.FRAMEBUFFER);
- return status == gl.FRAMEBUFFER_COMPLETE;
+let texture=gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D,texture);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+gl.texImage2D(gl.TEXTURE_2D,0,internalFormat,4,4,0,format,type,null);
+let fbo=gl.createFramebuffer();
+gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
+gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,texture,0);
+let status=gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+return status == gl.FRAMEBUFFER_COMPLETE;
 }
 function startGUI(){
- let ww=window.innerWidth;
- let gui=new dat.GUI({width:ww});
- gui.add(config,'DYE_RESOLUTION',{
- 'high':1024,'medium':512,'low':256,'very low':128
- }).name('quality').onFinishChange(initFramebuffers);
- gui.add(config,'SIM_RESOLUTION',{
- '32':32,'64':64,'128':128,'256':256
- }).name('sim resolution').onFinishChange(initFramebuffers);
- gui.add(config,'DENSITY_DISSIPATION',0,4.0).name('density diffusion');
- gui.add(config,'VELOCITY_DISSIPATION',0,4.0).name('velocity diffusion');
- gui.add(config,'PRESSURE',0.0,1.0).name('pressure');
- gui.add(config,'CURL',0,50).name('vorticity').step(1);
- gui.add(config,'SPLAT_RADIUS',0.01,1.0).name('splat radius');
- gui.add(config,'SHADING').name('shading').onFinishChange(updateKeywords);
- gui.add(config,'COLORFUL').name('colorful');
- gui.add(config,'PAUSED').name('paused').listen();
- gui.add({
- fun:() => {
- splatStack.push(parseInt(Math.random()*20)+5);
- }
- },'fun').name('Random splats');
- let bloomFolder=gui.addFolder('Bloom');
- bloomFolder.add(config,'BLOOM').name('enabled').onFinishChange(updateKeywords);
- bloomFolder.add(config,'BLOOM_INTENSITY',0.1,2.0).name('intensity');
- bloomFolder.add(config,'BLOOM_THRESHOLD',0.0,1.0).name('threshold');
- let sunraysFolder=gui.addFolder('Sunrays');
- sunraysFolder.add(config,'SUNRAYS').name('enabled').onFinishChange(updateKeywords);
- sunraysFolder.add(config,'SUNRAYS_WEIGHT',0.3,1.0).name('weight');
- let captureFolder=gui.addFolder('Capture');
- captureFolder.addColor(config,'BACK_COLOR').name('background color');
- captureFolder.add(config,'TRANSPARENT').name('transparent');
- captureFolder.add({fun:captureScreenshot},'fun').name('take screenshot');
- let github=gui.add({
- fun:() => {
- window.open('https://github.com/PavelDoGreat/WebGL-Fluid-Simulation');
- ga('send','event','link button','github');
- }
- },'fun').name('Github');
- github.__li.className='cr function bigFont';
- github.__li.style.borderLeft='3px solid #8C8C8C';
- let githubIcon=document.createElement('span');
- github.domElement.parentElement.appendChild(githubIcon);
- githubIcon.className='icon github';
- let twitter=gui.add({
- fun:() => {
- ga('send','event','link button','twitter');
- window.open('https://twitter.com/PavelDoGreat');
- }
- },'fun').name('Twitter');
- twitter.__li.className='cr function bigFont';
- twitter.__li.style.borderLeft='3px solid #8C8C8C';
- let twitterIcon=document.createElement('span');
- twitter.domElement.parentElement.appendChild(twitterIcon);
- twitterIcon.className='icon twitter';
- let discord=gui.add({
- fun:() => {
- ga('send','event','link button','discord');
- window.open('https://discordapp.com/invite/CeqZDDE');
- }
- },'fun').name('Discord');
- discord.__li.className='cr function bigFont';
- discord.__li.style.borderLeft='3px solid #8C8C8C';
- let discordIcon=document.createElement('span');
- discord.domElement.parentElement.appendChild(discordIcon);
- discordIcon.className='icon discord';
- let app=gui.add({
- fun:() => {
- ga('send','event','link button','app');
- window.open('http://onelink.to/5b58bn');
- }
- },'fun').name('Check out mobile app');
- app.__li.className='cr function appBigFont';
- app.__li.style.borderLeft='3px solid #00FF7F';
- let appIcon=document.createElement('span');
- app.domElement.parentElement.appendChild(appIcon);
- appIcon.className='icon app';
- // if(isMobile()) gui.close();
- gui.close();
+let ww=window.innerWidth;
+let gui=new dat.GUI({width:ww});
+gui.add(config,'DYE_RESOLUTION',{
+'high':1024,'medium':512,'low':256,'very low':128
+}).name('quality').onFinishChange(initFramebuffers);
+gui.add(config,'SIM_RESOLUTION',{
+'32':32,'64':64,'128':128,'256':256
+}).name('sim resolution').onFinishChange(initFramebuffers);
+gui.add(config,'DENSITY_DISSIPATION',0,4.0).name('density diffusion');
+gui.add(config,'VELOCITY_DISSIPATION',0,4.0).name('velocity diffusion');
+gui.add(config,'PRESSURE',0.0,1.0).name('pressure');
+gui.add(config,'CURL',0,50).name('vorticity').step(1);
+gui.add(config,'SPLAT_RADIUS',0.01,1.0).name('splat radius');
+gui.add(config,'SHADING').name('shading').onFinishChange(updateKeywords);
+gui.add(config,'COLORFUL').name('colorful');
+gui.add(config,'PAUSED').name('paused').listen();
+gui.add({
+fun:() => {
+splatStack.push(parseInt(Math.random()*20)+5);
+}
+},'fun').name('Random splats');
+let bloomFolder=gui.addFolder('Bloom');
+bloomFolder.add(config,'BLOOM').name('enabled').onFinishChange(updateKeywords);
+bloomFolder.add(config,'BLOOM_INTENSITY',0.1,2.0).name('intensity');
+bloomFolder.add(config,'BLOOM_THRESHOLD',0.0,1.0).name('threshold');
+let sunraysFolder=gui.addFolder('Sunrays');
+sunraysFolder.add(config,'SUNRAYS').name('enabled').onFinishChange(updateKeywords);
+sunraysFolder.add(config,'SUNRAYS_WEIGHT',0.3,1.0).name('weight');
+let captureFolder=gui.addFolder('Capture');
+captureFolder.addColor(config,'BACK_COLOR').name('background color');
+captureFolder.add(config,'TRANSPARENT').name('transparent');
+captureFolder.add({fun:captureScreenshot},'fun').name('take screenshot');
+let github=gui.add({
+fun:() => {
+window.open('https://github.com/PavelDoGreat/WebGL-Fluid-Simulation');
+ga('send','event','link button','github');
+}
+},'fun').name('Github');
+github.__li.className='cr function bigFont';
+github.__li.style.borderLeft='3px solid #8C8C8C';
+let githubIcon=document.createElement('span');
+github.domElement.parentElement.appendChild(githubIcon);
+githubIcon.className='icon github';
+let twitter=gui.add({
+fun:() => {
+ga('send','event','link button','twitter');
+window.open('https://twitter.com/PavelDoGreat');
+}
+},'fun').name('Twitter');
+twitter.__li.className='cr function bigFont';
+twitter.__li.style.borderLeft='3px solid #8C8C8C';
+let twitterIcon=document.createElement('span');
+twitter.domElement.parentElement.appendChild(twitterIcon);
+twitterIcon.className='icon twitter';
+let discord=gui.add({
+fun:() => {
+ga('send','event','link button','discord');
+window.open('https://discordapp.com/invite/CeqZDDE');
+}
+},'fun').name('Discord');
+discord.__li.className='cr function bigFont';
+discord.__li.style.borderLeft='3px solid #8C8C8C';
+let discordIcon=document.createElement('span');
+discord.domElement.parentElement.appendChild(discordIcon);
+discordIcon.className='icon discord';
+let app=gui.add({
+fun:() => {
+ga('send','event','link button','app');
+window.open('http://onelink.to/5b58bn');
+}
+},'fun').name('Check out mobile app');
+app.__li.className='cr function appBigFont';
+app.__li.style.borderLeft='3px solid #00FF7F';
+let appIcon=document.createElement('span');
+app.domElement.parentElement.appendChild(appIcon);
+appIcon.className='icon app';
+// if(isMobile()) gui.close();
+gui.close();
 }
 function isMobile(){
- return /Mobi|Android/i.test(navigator.userAgent);
+return /Mobi|Android/i.test(navigator.userAgent);
 }
 function captureScreenshot(){
- let res=getResolution(config.CAPTURE_RESOLUTION);
- let target=createFBO(res.width,res.height,ext.formatRGBA.internalFormat,ext.formatRGBA.format,ext.halfFloatTexType,gl.NEAREST);
- render(target);
- let texture=framebufferToTexture(target);
- texture=normalizeTexture(texture,target.width,target.height);
- let captureCanvas=textureToCanvas(texture,target.width,target.height);
- let datauri=captureCanvas.toDataURL();
- downloadURI('fluid.png',datauri);
- URL.revokeObjectURL(datauri);
+let res=getResolution(config.CAPTURE_RESOLUTION);
+let target=createFBO(res.width,res.height,ext.formatRGBA.internalFormat,ext.formatRGBA.format,ext.halfFloatTexType,gl.NEAREST);
+render(target);
+let texture=framebufferToTexture(target);
+texture=normalizeTexture(texture,target.width,target.height);
+let captureCanvas=textureToCanvas(texture,target.width,target.height);
+let datauri=captureCanvas.toDataURL();
+downloadURI('fluid.png',datauri);
+URL.revokeObjectURL(datauri);
 }
 function framebufferToTexture(target){
- gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
- let length=target.width*target.height*4;
- let texture=new Float32Array(length);
- gl.readPixels(0,0,target.width,target.height,gl.RGBA,gl.FLOAT,texture);
- return texture;
+gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
+let length=target.width*target.height*4;
+let texture=new Float32Array(length);
+gl.readPixels(0,0,target.width,target.height,gl.RGBA,gl.FLOAT,texture);
+return texture;
 }
 function normalizeTexture(texture,width,height){
- let result=new Uint8Array(texture.length);
- let id=0;
- for(let i=height-1; i>=0; i--){
- for(let j=0; j<width; j++){
- let nid=i*width*4+j*4;
- result[nid+0]=clamp01(texture[id+0])*255;
- result[nid+1]=clamp01(texture[id+1])*255;
- result[nid+2]=clamp01(texture[id+2])*255;
- result[nid+3]=clamp01(texture[id+3])*255;
- id+=4;
- }
- }
- return result;
+let result=new Uint8Array(texture.length);
+let id=0;
+for(let i=height-1; i>=0; i--){
+for(let j=0; j<width; j++){
+let nid=i*width*4+j*4;
+result[nid+0]=clamp01(texture[id+0])*255;
+result[nid+1]=clamp01(texture[id+1])*255;
+result[nid+2]=clamp01(texture[id+2])*255;
+result[nid+3]=clamp01(texture[id+3])*255;
+id+=4;
+}
+}
+return result;
 }
 function clamp01(input){
- return Math.min(Math.max(input,0),1);
+return Math.min(Math.max(input,0),1);
 }
 function textureToCanvas(texture,width,height){
 
 
 // let captureCanvas=document.createElement('canvas');
- let captureCanvas=document.getElementById('acanvas');
- 
- 
- let ctx=captureCanvas.getContext('2d');
- captureCanvas.width=width;
- captureCanvas.height=height;
- let imageData=ctx.createImageData(width,height);
- imageData.data.set(texture);
- ctx.putImageData(imageData,0,0);
- return captureCanvas;
+let captureCanvas=document.getElementById('acanvas');
+
+
+let ctx=captureCanvas.getContext('2d');
+captureCanvas.width=width;
+captureCanvas.height=height;
+let imageData=ctx.createImageData(width,height);
+imageData.data.set(texture);
+ctx.putImageData(imageData,0,0);
+return captureCanvas;
 }
 function downloadURI(filename,uri){
- let link=document.createElement('a');
- link.download=filename;
- link.href=uri;
- document.body.appendChild(link);
- link.click();
- document.body.removeChild(link);
+let link=document.createElement('a');
+link.download=filename;
+link.href=uri;
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
 }
 class Material{
- constructor(vertexShader,fragmentShaderSource){
- this.vertexShader=vertexShader;
- this.fragmentShaderSource=fragmentShaderSource;
- this.programs=[];
- this.activeProgram=null;
- this.uniforms=[];
- }
- setKeywords(keywords){
- let hash=0;
- for(let i=0; i<keywords.length; i++) hash+=hashCode(keywords[i]);
- let program=this.programs[hash];
- if(program == null){
- let fragmentShader=compileShader(gl.FRAGMENT_SHADER,this.fragmentShaderSource,keywords);
- program=createProgram(this.vertexShader,fragmentShader);
- this.programs[hash]=program;
- }
- if(program == this.activeProgram) return;
- this.uniforms=getUniforms(program);
- this.activeProgram=program;
- }
- bind(){
- gl.useProgram(this.activeProgram);
- }
+constructor(vertexShader,fragmentShaderSource){
+this.vertexShader=vertexShader;
+this.fragmentShaderSource=fragmentShaderSource;
+this.programs=[];
+this.activeProgram=null;
+this.uniforms=[];
+}
+setKeywords(keywords){
+let hash=0;
+for(let i=0;i<keywords.length;i++)hash+=hashCode(keywords[i]);
+let program=this.programs[hash];
+if(program == null){
+let fragmentShader=compileShader(gl.FRAGMENT_SHADER,this.fragmentShaderSource,keywords);
+program=createProgram(this.vertexShader,fragmentShader);
+this.programs[hash]=program;
+}
+if(program == this.activeProgram)return;
+this.uniforms=getUniforms(program);
+this.activeProgram=program;
+}
+bind(){
+gl.useProgram(this.activeProgram);
+}
 }
 class Program{
- constructor(vertexShader,fragmentShader){
- this.uniforms={};
- this.program=createProgram(vertexShader,fragmentShader);
- this.uniforms=getUniforms(this.program);
- }
- bind(){
- gl.useProgram(this.program);
- }
+constructor(vertexShader,fragmentShader){
+this.uniforms={};
+this.program=createProgram(vertexShader,fragmentShader);
+this.uniforms=getUniforms(this.program);
+}
+bind(){
+gl.useProgram(this.program);
+}
 }
 function createProgram(vertexShader,fragmentShader){
- let program=gl.createProgram();
- gl.attachShader(program,vertexShader);
- gl.attachShader(program,fragmentShader);
- gl.linkProgram(program);
- if(!gl.getProgramParameter(program,gl.LINK_STATUS)) console.trace(gl.getProgramInfoLog(program));
- return program;
+let program=gl.createProgram();
+gl.attachShader(program,vertexShader);
+gl.attachShader(program,fragmentShader);
+gl.linkProgram(program);
+if(!gl.getProgramParameter(program,gl.LINK_STATUS)) console.trace(gl.getProgramInfoLog(program));
+return program;
 }
 function getUniforms(program){
- let uniforms=[];
- let uniformCount=gl.getProgramParameter(program,gl.ACTIVE_UNIFORMS);
- for(let i=0; i<uniformCount; i++){
- let uniformName=gl.getActiveUniform(program,i).name;
- uniforms[uniformName]=gl.getUniformLocation(program,uniformName);
- }
- return uniforms;
+let uniforms=[];
+let uniformCount=gl.getProgramParameter(program,gl.ACTIVE_UNIFORMS);
+for(let i=0; i<uniformCount; i++){
+let uniformName=gl.getActiveUniform(program,i).name;
+uniforms[uniformName]=gl.getUniformLocation(program,uniformName);
+}
+return uniforms;
 }
 function compileShader(type,source,keywords){
- source=addKeywords(source,keywords);
- const shader=gl.createShader(type);
- gl.shaderSource(shader,source);
- gl.compileShader(shader);
- if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)) console.trace(gl.getShaderInfoLog(shader));
- return shader;
+source=addKeywords(source,keywords);
+const shader=gl.createShader(type);
+gl.shaderSource(shader,source);
+gl.compileShader(shader);
+if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)) console.trace(gl.getShaderInfoLog(shader));
+return shader;
 };
 function addKeywords(source,keywords){
- if(keywords == null) return source;
- let keywordsString='';
- keywords.forEach(keyword => {
- keywordsString+='#define '+keyword+'\n';
- });
- return keywordsString+source;
+if(keywords == null) return source;
+let keywordsString='';
+keywords.forEach(keyword => {
+keywordsString+='#define '+keyword+'\n';
+});
+return keywordsString+source;
 }
 const baseVertexShader=compileShader(gl.VERTEX_SHADER,`
- precision highp float;
- attribute vec2 aPosition;
- varying vec2 vUv;
- varying vec2 vL;
- varying vec2 vR;
- varying vec2 vT;
- varying vec2 vB;
- uniform vec2 texelSize;
- void main () {
- vUv=aPosition * 0.5 + 0.5;
- vL=vUv - vec2(texelSize.x,0.0);
- vR=vUv + vec2(texelSize.x,0.0);
- vT=vUv + vec2(0.0,texelSize.y);
- vB=vUv - vec2(0.0,texelSize.y);
- gl_Position=vec4(aPosition,0.0,1.0);
- }
+precision highp float;
+attribute vec2 aPosition;
+varying vec2 vUv;
+varying vec2 vL;
+varying vec2 vR;
+varying vec2 vT;
+varying vec2 vB;
+uniform vec2 texelSize;
+void main () {
+vUv=aPosition * 0.5 + 0.5;
+vL=vUv - vec2(texelSize.x,0.0);
+vR=vUv + vec2(texelSize.x,0.0);
+vT=vUv + vec2(0.0,texelSize.y);
+vB=vUv - vec2(0.0,texelSize.y);
+gl_Position=vec4(aPosition,0.0,1.0);
+}
 `);
 const blurVertexShader=compileShader(gl.VERTEX_SHADER,`
  precision highp float;
@@ -1398,11 +1398,11 @@ function wrap(value,min,max){
  return (value-min)%range+min;
 }
 function getResolution(resolution){
- let aspectRatio=gl.drawingBufferWidth/gl.drawingBufferHeight;
- if(aspectRatio<1) aspectRatio=1.0/aspectRatio;
- let min=Math.round(resolution);
- let max=Math.round(resolution*aspectRatio);
- if(gl.drawingBufferWidth>gl.drawingBufferHeight) return {width:max,height:min}; else return {width:min,height:max};
+let aspectRatio=gl.drawingBufferWidth/gl.drawingBufferHeight;
+if(aspectRatio<1) aspectRatio=1.0/aspectRatio;
+let min=Math.round(resolution);
+let max=Math.round(resolution*aspectRatio);
+if(gl.drawingBufferWidth>gl.drawingBufferHeight){return{width:max,height:min}}else{return{width:min,height:max}};
 }
 function getTextureScale(texture,width,height){
  return {
