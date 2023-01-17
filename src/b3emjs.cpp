@@ -344,7 +344,6 @@ if(locb>64){locb=1;}
 eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 pointb=66*la;
-setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
@@ -378,7 +377,7 @@ Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1
 if(sh4d==true&&$F%2!=0){
 Module.ccall("frm");
 };
-},13.333333)}
+}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
