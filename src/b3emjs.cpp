@@ -18,7 +18,7 @@ ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
 eglBindAPI(EGL_OPENGL_API);
 display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display_js,&major_js,&minor_js);
-eglChooseConfig(display_js,attribute_list,&eglconfig_js,(EGLint)1,&config_size_js);
+eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_size_js);
 contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
