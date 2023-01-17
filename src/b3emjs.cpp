@@ -119,7 +119,7 @@ return;
 
 EM_JS(void,ma,(),{
 
-"use strict";
+// "use strict";
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var intervalLoop=null;
@@ -342,16 +342,10 @@ if(locb>64){locb=1;}
 eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 pointb=66*la;
-if($F%2==0){
-var $bb=R(vv);$B.set($bb,0,sz);
-}else{
-var $bb=R(lvv);$B.set($bb,0,sz);
-}
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
-Module.ccall("frm");
+
 setTimeout(function(){
 M();
+ 
 if(loopLoop==true){
 if(f==true){
 if(mmvv.currentTime>(stp)){
@@ -372,8 +366,16 @@ if(mmvv.currentTime>(stp)){
 mmvv.currentTime-=0.013333;
 }else{
 f=false;
-}}}}
-},13.333333)}
+}}}}else{
+Module.ccall("frm");
+if($F%2==0){
+var $bb=R(vv);$B.set($bb,0,sz);
+}else{
+var $bb=R(lvv);$B.set($bb,0,sz);
+};
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+};},13.333333)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
