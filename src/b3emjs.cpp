@@ -367,7 +367,6 @@ mmvv.currentTime-=0.013333;
 }else{
 f=false;
 }}}}else{
-Module.ccall("frm");
 if($F%2==0){
 var $bb=R(vv);$B.set($bb,0,sz);
 }else{
@@ -375,7 +374,9 @@ var $bb=R(lvv);$B.set($bb,0,sz);
 };
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
-};},13.333333)}
+};
+Module.ccall("frm");
+},13.333333)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
