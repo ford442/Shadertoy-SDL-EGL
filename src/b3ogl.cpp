@@ -1,21 +1,5 @@
 #include "../include/b3ogl.hpp"
 
-  static EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
-    
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-ms_l=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-ms_l=false;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
-}}
-return (EM_BOOL)1;
-}
-
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
 glBlendColor(avrg,avrg,avrg,y1y);
@@ -259,6 +243,21 @@ auto t1=std::chrono::steady_clock::now();
   glDisable(GL_DITHER);
 
 return;
+}
+
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+x=e->clientX;
+y=e->clientY;
+}}
+return (EM_BOOL)1;
 }
 
 extern "C" {
