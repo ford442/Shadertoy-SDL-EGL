@@ -31,10 +31,10 @@ bz.postMessage({data:222});},950);
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('b3');
-},350);
+},450);
 setTimeout(function(){
 Module.ccall('str');
-},550);
+},750);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
@@ -115,7 +115,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-normalResStart();
+highResStart();
 },150);
 };};
 ff.send(null);
