@@ -7,7 +7,7 @@ EM_JS(void,js_main,(),{
 function highResStart(){
 setTimeout(function(){
 Module.ccall('b3');
-},50);
+},350);
 document.getElementById('scanvas').height=window.innerHeight*4;
 document.getElementById('scanvas').width=window.innerHeight*4;
 document.getElementById('scanvas').style.height=(window.innerHeight*4)+'px';
@@ -15,14 +15,14 @@ document.getElementById('scanvas').style.width=(window.innerHeight*4)+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight*4;
 setTimeout(function(){
 Module.ccall('str');
-},150);
+},550);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight+'px';
 document.getElementById('scanvas').style.width=window.innerHeight+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight;
-},350);
+},750);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},950);
@@ -173,7 +173,9 @@ sng.postMessage({data:songSrc});
 
 document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
-setTimeout(function(){snd();},1550);
+setTimeout(function(){
+snd();
+},1550);
 });
 
 const tem=document.getElementById('tim');
