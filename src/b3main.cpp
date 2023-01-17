@@ -11,10 +11,10 @@ document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
 document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight*2;
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3_egl');
 },450);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },550);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
@@ -24,7 +24,7 @@ document.getElementById('scanvas').style.width=window.innerHeight+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 },750);
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('b3');
 },850);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
