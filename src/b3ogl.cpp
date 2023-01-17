@@ -13,13 +13,13 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
 GLclampf mX,mY;
-iFps=60/delt;
+iFps=60.0/delt;
 if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=xxx*Size;
-mY=yyy*Size;
+mX=1.0-(xxx*Size);
+mY=1.0-(yyy*Size);
 clk_l=false;
 }
 GLclampf mm=S*xx;
