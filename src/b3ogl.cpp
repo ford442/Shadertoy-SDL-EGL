@@ -178,7 +178,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
-emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear");
 emscripten_webgl_enable_extension(ctx,"ARB_multisample");
 emscripten_webgl_enable_extension(ctx,"ARB_robustness");
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
@@ -190,7 +190,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
-
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glGenBuffers((GLsizei)1,&VBO);
@@ -255,7 +254,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-return (EM_BOOL)1;
+return (EM_BOOL)0;
 }
 
 extern "C" {
