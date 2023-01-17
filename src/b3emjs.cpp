@@ -72,7 +72,7 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glDisable(GL_DITHER);
 return;
@@ -344,6 +344,7 @@ if(locb>64){locb=1;}
 eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 pointb=66*la;
+setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
@@ -366,7 +367,7 @@ mmvv.currentTime-=0.013333;
 }else{
 f=false;
 }}}}else{
-if($F%2!=0){
+if($F%2==0){
 var $bb=R(vv);$B.set($bb,0,sz);
 }else{
 var $bb=R(lvv);$B.set($bb,0,sz);
@@ -374,10 +375,10 @@ var $bb=R(lvv);$B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 };
-if(sh4d==true&&$F%2==0){
+if(sh4d==true&&$F%2!=0){
 Module.ccall("frm");
 };
-}
+},8.333333)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
