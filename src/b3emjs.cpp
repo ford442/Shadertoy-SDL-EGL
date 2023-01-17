@@ -168,7 +168,7 @@ var h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
 const $H=Module.HEAPF64.buffer;
-var la=h$*h$*16;
+var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*h$)/8;
@@ -281,7 +281,7 @@ vv=document.getElementById("mv");
 // var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-la=h$*h$*16;
+la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
@@ -308,14 +308,14 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-la=h$*h$*16;
+la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+  var j=i+1;
+  eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float64Array($H,pointb,sz);
@@ -323,63 +323,63 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
-vv=document.getElementById("mv");
-lvv=document.getElementById("ldv");
-t.setConstants({nblnk:nblank$,blnk:blank$});
-r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-if(T){
-return;
-};
-for(var i=64;i>0;i--){
-var loca=$F+1;
-if(loca>64){loca=1;}
-var locb=$Bu+1;
-if(locb>64){locb=1;}
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
-}
-pointb=66*la;
-setTimeout(function(){
-M();
-if(loopLoop==true){
-if(f==true){
-if(mmvv.currentTime>(stp)){
-mmvv.currentTime-=0.013333;
-}else{
-f=false;
-if(mmvv.currentTime<(stp+2.0)){
-mmvv.currentTime+=0.013333;
-}else{
-f=true;
-}}}
-if(f==false){
-if(mmvv.currentTime<(stp+2.0)){
-mmvv.currentTime+=0.013333;
-}else{
-f=true;
-if(mmvv.currentTime>(stp)){
-mmvv.currentTime-=0.013333;
-}else{
-f=false;
-}}}}else{
-if($F%2!=0){
-var $bb=R(vv);$B.set($bb,0,sz);
-};
-};
-if($F%2==0){
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
-if(sh4d==true){
-Module.ccall("frm");
-};
-};
-},13.333333)}
+  vv=document.getElementById("mv");
+  lvv=document.getElementById("ldv");
+  t.setConstants({nblnk:nblank$,blnk:blank$});
+  r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+  if(T){
+    return;
+  };
+  for(var i=64;i>0;i--){
+    var loca=$F+1;
+    if(loca>64){loca=1;}
+    var locb=$Bu+1;
+    if(locb>64){locb=1;}
+    eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+  }
+  pointb=66*la;
+  setTimeout(function(){
+    M();
+    if(loopLoop==true){
+      if(f==true){
+        if(mmvv.currentTime>(stp)){
+          mmvv.currentTime-=0.013333;
+        }else{
+          f=false;
+          if(mmvv.currentTime<(stp+2.0)){
+            mmvv.currentTime+=0.013333;
+          }else{
+            f=true;
+          }}}
+      if(f==false){
+        if(mmvv.currentTime<(stp+2.0)){
+          mmvv.currentTime+=0.013333;
+        }else{
+          f=true;
+          if(mmvv.currentTime>(stp)){
+            mmvv.currentTime-=0.013333;
+          }else{
+            f=false;
+          }}}}else{
+      if($F%2!=0){
+        var $bb=R(vv);$B.set($bb,0,sz);
+      };
+    };
+    if($F%2==0){
+      Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+      Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+      if(sh4d==true){
+        Module.ccall("frm");
+      };
+    };
+        },13.333333)}
 M();
 document.getElementById("di").onclick=function(){
-T=true;
-S();
+  T=true;
+  S();
 };
 return()=>{
-T=true;
+  T=true;
 };
 }
 
@@ -388,9 +388,9 @@ T=true;
 extern "C" {
 
 void b3(){
-egl();
-ma();
-return;
+  egl();
+  ma();
+  return;
 }
 
 }
