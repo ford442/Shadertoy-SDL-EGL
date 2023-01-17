@@ -170,7 +170,7 @@ var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
@@ -202,7 +202,7 @@ majorVersion:2,
 minorVersion:0
 });
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
-const g2=new GPU({mode:'gpu'});
+const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((g-f)*((g)*(g-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -286,7 +286,7 @@ la=h$*h$*8;
 var al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -316,7 +316,7 @@ la=h$*h$*8;
 al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
@@ -374,7 +374,7 @@ var $bb=R(lvv);$B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 };
-if(sh4d==true){
+if(sh4d==true&&$F%2!=0){
 Module.ccall("frm");
 };
 },13.333333)}
