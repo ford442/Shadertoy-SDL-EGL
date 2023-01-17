@@ -7,12 +7,12 @@ glClearColor(y1y,y1y,y1y,y1y);
 return;
 }
 
-void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
+static void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
   
 // ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+// ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 GLclampf mX,mY;
 iFps=60/delt;
