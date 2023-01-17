@@ -5,9 +5,6 @@ EM_JS(void,js_main,(),{
 "use strict";
   
 function highResStart(){
-setTimeout(function(){
-Module.ccall('b3');
-},350);
 document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
 document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
@@ -15,6 +12,9 @@ document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight*2;
 setTimeout(function(){
 Module.ccall('str');
+},450);
+setTimeout(function(){
+Module.ccall('b3_egl');
 },550);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
@@ -24,11 +24,17 @@ document.getElementById('scanvas').style.width=window.innerHeight+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 },750);
 setTimeout(function(){
+Module.ccall('b3');
+},850);
+setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},950);
 }
 
 function normalResStart(){
+setTimeout(function(){
+Module.ccall('b3_egl');
+},250);
 setTimeout(function(){
 Module.ccall('b3');
 },450);
