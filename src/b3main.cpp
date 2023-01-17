@@ -122,7 +122,7 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
   
-  highResStart();
+  normalResStart();
   
 },150);
 };};
