@@ -206,7 +206,7 @@ minorVersion:0
 });
  
    gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-  glDisable(GL_DITHER);
+  gl.disable(gl.DITHER);
 
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
