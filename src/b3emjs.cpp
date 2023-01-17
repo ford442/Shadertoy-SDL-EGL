@@ -339,7 +339,7 @@ eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+
 }
 pointb=66*la;
 setTimeout(function(){
-M();
+// M();
 if(loopLoop==true){
 if(f==true){
 if(mmvv.currentTime>(stp)){
