@@ -248,8 +248,7 @@ glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::steady_clock::now();
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glDisable(GL_DITHER);
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
