@@ -70,10 +70,10 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
+emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
+emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 return;
 }
 
