@@ -63,8 +63,10 @@ uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
-glClear(GL_STENCIL_BUFFER_BIT);
+// glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+glFinish();
+nanosleep(&req,&rem);
 return;
 }
 
@@ -113,7 +115,6 @@ clk_l=true;
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
-// eglBindAPI(EGL_OPENGL_ES_API);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
@@ -129,6 +130,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
