@@ -72,7 +72,7 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-glHint(GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glDisable(GL_DITHER);
 return;
