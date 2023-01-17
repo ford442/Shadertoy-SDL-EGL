@@ -233,12 +233,13 @@ if(lockVid!=1){
   
 document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
 document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
   
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('lwid').innerHTML=this.videoWidth;
-document.getElementById('lhig').innerHTML=this.videoHeight;
+document.getElementById('wid').innerHTML=this.videoWidth;
+document.getElementById('hig').innerHTML=this.videoHeight;
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
