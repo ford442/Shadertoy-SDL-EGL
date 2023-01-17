@@ -1,6 +1,7 @@
 #include "../include/b3ogl.hpp"
 
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
+  static EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
+    
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -23,9 +24,11 @@ return;
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
+  
 // ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+//  ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
+
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)1,mouse_call);
 GLclampf mX,mY;
 iFps=60/delt;
@@ -140,6 +143,10 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_make_context_current(ctx);
+  
+  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+  glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+  
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -177,7 +184,8 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_linear");
-emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
+emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
+emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
 emscripten_webgl_enable_extension(ctx,"ARB_multisample");
 emscripten_webgl_enable_extension(ctx,"ARB_robustness");
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
@@ -247,9 +255,9 @@ glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
 auto t1=std::chrono::steady_clock::now();
-glDisable(GL_DITHER);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+  
+  glDisable(GL_DITHER);
+
 return;
 }
 
