@@ -386,11 +386,16 @@ T=true;
 });
 
 extern "C" {
+ 
+void b3_egl(){
+egl();
+return;
+}
 
 void b3(){
 egl();
 ma();
 return;
 }
-
+ 
 }
