@@ -1,7 +1,7 @@
 #include "../include/b3emsc.hpp"
 
 #include <stdlib.h>
-#include <thread>
+#include <pthread.h>
 #include <SDL2/SDL.h>
 #undef main
 #include "SDL_config.h"
