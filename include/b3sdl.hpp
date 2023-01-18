@@ -4,7 +4,6 @@
 #undef main
 #include "SDL_config.h"
 
-std::thread *sdl_thread = nullptr;
 char flnm[24];
 SDL_AudioDeviceID dev;
 
