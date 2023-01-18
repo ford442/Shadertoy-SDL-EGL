@@ -65,10 +65,10 @@ const shutDown=new BroadcastChannel('shutDown');
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
+pll();
 setTimeout(function(){
 shutDown.postMessage({data:222});
-pll();
-},750);
+},150);
 });
 
 var $iwid=document.getElementById('iwid');
