@@ -7,7 +7,7 @@ short int iFrame,iFps,Size;
 double wi,hi;
 char * fileloc="/shader/shader1.toy";
 
-static void renderFrame();
+void renderFrame();
 
 #include <iostream>
 #include <ctime>
@@ -57,11 +57,11 @@ const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-static void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
+void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
-static void clrclr(GLclampf,GLclampf,GLclampf);
+void clrclr(GLclampf,GLclampf,GLclampf);
 
 char8_t * read_file(const GLchar *);
 
