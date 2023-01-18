@@ -172,10 +172,10 @@ var h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
 const $H=Module.HEAPF64.buffer;
-var la=h$*h$*8;
+var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
-var sz=(h$*h$)/8;
+var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -289,15 +289,15 @@ var h$=vv.videoHeight;
 var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-la=h$*h$*8;
-sz=(h$*h$)/8;
+la=h$*h$*4;
+sz=(h$*w$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
-for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-}
+// for(i=0;i<65;i++){
+// var j=i+1;
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+ // }
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
 var $F=1;
@@ -316,8 +316,8 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-la=h$*h$*8;
-sz=(h$*h$)/8;
+la=h$*h$*4;
+sz=(h$*w$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
