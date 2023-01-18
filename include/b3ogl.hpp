@@ -7,7 +7,7 @@ short int iFrame,iFps,Size;
 double wi,hi;
 char * fileloc="/shader/shader1.toy";
 
-void renderFrame();
+static void renderFrame();
 
 #include <iostream>
 #include <ctime>
