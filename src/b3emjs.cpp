@@ -124,7 +124,7 @@ return;
 
 }
 
-static EM_JS(void,ma,(),{
+EM_JS(void,ma,(),{
 
 "use strict";
 var lvv=document.getElementById("ldv");
