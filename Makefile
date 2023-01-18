@@ -9,7 +9,7 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
-	 -sUSE_SDL=2 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=2 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize \
+	 -sUSE_SDL=2 -s USE_PTHREADS=1 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
