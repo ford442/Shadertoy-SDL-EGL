@@ -1,4 +1,6 @@
 #include "../include/b3emsc.hpp"
+
+#include <stdlib.h>
 #include <thread>
 #include <SDL2/SDL.h>
 #undef main
