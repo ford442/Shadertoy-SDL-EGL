@@ -55,7 +55,7 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-static const char8_t * read_file(const GLchar * filename){
+char8_t * read_file(const GLchar * filename){
 char8_t * result=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
@@ -125,21 +125,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_make_context_current(ctx);
-  
-  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-  glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-    glDisable(GL_DITHER);
-  glDisable(GL_STENCIL_TEST);
-glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
-glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glEnable(GL_SCISSOR_TEST);
-  
+
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -190,15 +176,15 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
-glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+// glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+// glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
-static const GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
+GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,(GLsizei)2,sources);
@@ -214,14 +200,13 @@ atb_pos=0;
 glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
 glLinkProgram(shd_prg);
 glUseProgram(shd_prg);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
+
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
+  
 // smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
@@ -237,7 +222,28 @@ uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
+  
+  glDisable(GL_STENCIL_TEST);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearDepth(D);
+glEnable(GL_BLEND);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+      glDisable(GL_DITHER);
+  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+  glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+  
+// glEnable(GL_SCISSOR_TEST);
+  
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
+  
 auto t1=std::chrono::steady_clock::now();
+
 return;
 }
 
