@@ -23,7 +23,6 @@ contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAt
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
- 
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -31,7 +30,6 @@ emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_draw_buffers");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_provoking_vertex");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_webcodecs_video_frame");
-  
 emscripten_webgl_enable_extension(ctx_js,"GL_OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"GL_OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"GL_OES_element_index_uint");
