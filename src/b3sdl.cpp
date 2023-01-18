@@ -1,7 +1,7 @@
 #include "../include/b3sdl.hpp"
-
-
   
+std::thread *sdl_thread = nullptr;
+
 sdl_thread=new std::thread([]()->void SDLCALL bfr(void * unused,Uint8 * stm,int len){
 Uint8 * wptr;
 int lft;
