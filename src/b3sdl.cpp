@@ -34,7 +34,7 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 
 SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
-wave.request.callback=thread;
+wave.request.callback=bfr;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
