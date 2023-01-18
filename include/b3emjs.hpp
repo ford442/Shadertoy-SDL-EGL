@@ -6,7 +6,7 @@ void b3_egl();
 void nano(short int,int,float *,float *);
 };
 
-void avgFrm(short int,int,float *,float *);
+static void avgFrm(short int,int,float *,float *);
 
 #include "../include/b3gl.hpp"
 #include "../include/b3egl.hpp"
