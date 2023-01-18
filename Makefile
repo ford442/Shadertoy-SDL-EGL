@@ -1,20 +1,20 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -std=c++2a -stdlib=libc++ -mtune=intel -fwasm-exceptions \
+         -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
 	 -std=c++2a -stdlib=libc++ -matomics \
-         -mtune=intel -fwasm-exceptions -ffixed-point -fslp-vectorize \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
 	 -sUSE_SDL=2 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize \
-         -mtune=intel -fwasm-exceptions \
+         -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
 	 -std=c++2a -stdlib=libc++ -matomics \
-         -mtune=intel -fwasm-exceptions -ffixed-point -fslp-vectorize \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
