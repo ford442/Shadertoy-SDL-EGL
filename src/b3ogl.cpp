@@ -1,13 +1,13 @@
 #include "../include/b3ogl.hpp"
 
-void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+static void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(y1y,y1y,y1y,y1y);
 return;
 }
 
-void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
+static void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
@@ -35,7 +35,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-void renderFrame(){
+static void renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
