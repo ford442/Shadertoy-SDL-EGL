@@ -68,7 +68,7 @@ FS.writeFile('/snd/sample.wav',fill);
 pll();
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},150);
+},450);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -130,9 +130,9 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
   
-  highResStart();
+  normalResStart();
   
-},350);
+},150);
 };};
 ff.send(null);
 }
@@ -191,7 +191,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},650);
+},1650);
 });
 
 const tem=document.getElementById('tim');
