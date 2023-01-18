@@ -24,9 +24,8 @@ surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,at
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
  
- 
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
+emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_depth_texture");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_draw_buffers");
@@ -79,15 +78,13 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
- 
- 
 glDisable(GL_DITHER);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 return;
 }
 
-void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
+static void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -127,7 +124,7 @@ return;
 
 }
 
-EM_JS(void,ma,(),{
+static EM_JS(void,ma,(),{
 
 "use strict";
 var lvv=document.getElementById("ldv");
