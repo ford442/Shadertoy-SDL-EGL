@@ -1,6 +1,6 @@
 #include "../include/b3ogl.hpp"
 
-static void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(y1y,y1y,y1y,y1y);
