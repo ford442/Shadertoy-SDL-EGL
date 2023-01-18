@@ -20,7 +20,7 @@ wave.pos+=len;
 return;
 }
 
-int plays(){
+int plays(void *data){
 
     SDL_ThreadPriority prio = SDL_THREAD_PRIORITY_NORMAL;
 
