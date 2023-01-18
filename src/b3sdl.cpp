@@ -1,8 +1,8 @@
 #include "../include/b3sdl.hpp"
 
-extern"C"{
+
   
-void SDLCALL bfr(void * unused,Uint8 * stm,int len){
+sdl_thread=new std::thread([]()->void SDLCALL bfr(void * unused,Uint8 * stm,int len){
 Uint8 * wptr;
 int lft;
 wptr=wave.snd+wave.pos;
@@ -20,7 +20,7 @@ SDL_LockAudioDevice(dev);
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
-}
+});
 
 void plt(){
 SDL_memset(&wave.request,0,sizeof(wave.request));
@@ -37,6 +37,8 @@ dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
+
+extern "C" {
 
 void pl(){
 plt();
