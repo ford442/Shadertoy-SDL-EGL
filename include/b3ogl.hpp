@@ -135,7 +135,3 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
 static EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
-
-#include <wasm_simd128.h>
-#include <xmmintrin.h>
-#include <unistd.h>
