@@ -27,6 +27,7 @@ extern "C"{
 void clr(GLclampf,GLclampf,GLclampf);
   
 };
+
 GLuint atb_pos;
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
 GLfloat g1g=1.0,S;
@@ -56,13 +57,13 @@ const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
+static void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
-void clrclr(GLclampf,GLclampf,GLclampf);
+static void clrclr(GLclampf,GLclampf,GLclampf);
 
-static const char8_t * read_file(const GLchar *);
+char8_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
