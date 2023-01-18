@@ -1,10 +1,6 @@
 #include "../include/b3sdl.hpp"
-  
-std::thread *sdl_thread = nullptr;
 
 void SDLCALL bfr(void * unused,Uint8 * stm,int len){
-
-sdl_thread=new std::thread([]()->void {
 Uint8 * wptr;
 int lft;
 wptr=wave.snd+wave.pos;
@@ -22,11 +18,12 @@ SDL_LockAudioDevice(dev);
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
-});
-
 }
 
 void plt(){
+
+    SDL_Thread *thread;
+
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32;
@@ -35,8 +32,13 @@ wave.request.samples=1024;
 wave.pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
+
+tls=SDL_TLSCreate();
+SDL_assert(tls);
+SDL_TLSSet(tls,"main thread",NULL);
+thread=SDL_CreateThread(bfr,"Buffer","thread1");
 SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
-wave.request.callback=bfr;
+wave.request.callback=thread;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
