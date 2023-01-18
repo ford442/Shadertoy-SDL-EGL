@@ -125,7 +125,6 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_make_context_current(ctx);
-
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -133,7 +132,6 @@ emscripten_webgl_make_context_current(ctx);
 // emscripten_webgl_enable_extension(ctx,"WEBGL_draw_buffers");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_provoking_vertex");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
-  
 emscripten_webgl_enable_extension(ctx,"GL_OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"GL_OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx,"GL_OES_element_index_uint");
@@ -150,7 +148,6 @@ emscripten_webgl_enable_extension(ctx,"GL_EXT_frag_depth");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_shader_texture_lod");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_sRGB");
 emscripten_webgl_enable_extension(ctx,"GL_OES_depth32");
-
 // emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 // emscripten_webgl_enable_extension(ctx,"GL_EXT_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_clip_cull_distance");
