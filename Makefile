@@ -1,11 +1,11 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
+         -fno-math-errno -std=gnu++2b -s-stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -mavx \
-	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
+	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
@@ -15,7 +15,7 @@ b3hd:
 	 em++ src/b3emjs.cpp -c \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
-	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
+	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js \
