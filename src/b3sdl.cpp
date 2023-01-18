@@ -20,7 +20,7 @@ wave.pos+=len;
 return;
 }
 
-void plays(){
+int plays(){
 
     SDL_ThreadPriority prio = SDL_THREAD_PRIORITY_NORMAL;
 
@@ -37,7 +37,7 @@ SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
 wave.request.callback=bfr;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
-return;
+return 1;
 }
 
 void plt(){
@@ -47,6 +47,7 @@ SDL_assert(tls);
 SDL_TLSSet(tls,"main thread",NULL);
 SDL_Init(0);
 thread=SDL_CreateThread(plays,"One","#1");
+return;
 }
 
 extern "C" {
