@@ -41,12 +41,12 @@ return 1;
 }
 
 void plt(){
-SDL_Thread *thread;
+
 tls=SDL_TLSCreate();
 SDL_assert(tls);
 SDL_TLSSet(tls,"main thread",NULL);
 SDL_Init(0);
-thread=SDL_CreateThread(plays,"One","#1");
+SDL_CreateThread(plays,"One","#1");
 return;
 }
 
