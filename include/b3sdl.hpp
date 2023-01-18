@@ -1,10 +1,14 @@
 #include "../include/b3emsc.hpp"
 
 #include <stdlib.h>
+#include <signal.h>
+
 #include <pthread.h>
 #include <SDL2/SDL.h>
+
 #undef main
-#include "SDL_config.h"
+
+static SDL_TLSID tls;
 
 char flnm[24];
 SDL_AudioDeviceID dev;
