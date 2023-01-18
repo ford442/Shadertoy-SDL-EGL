@@ -55,7 +55,7 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-char8_t * read_file(const GLchar * filename){
+const char8_t * read_file(const GLchar * filename){
 char8_t * result=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
