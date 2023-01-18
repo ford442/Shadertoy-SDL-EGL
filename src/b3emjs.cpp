@@ -24,8 +24,6 @@ surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,at
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
  
-
- 
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -206,8 +204,6 @@ majorVersion:2,
 minorVersion:0
 });
  
-
-
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -271,8 +267,8 @@ gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
-gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
-gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
+gl.getExtension('EXT_gl_colorspace_display_p3_linear');
+gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('GL_ARB_multisample');
 // gl.disable(gl.DITHER);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
@@ -282,9 +278,9 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
-   gl.disable(gl.DITHER);
-    gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-    gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.disable(gl.DITHER);
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
