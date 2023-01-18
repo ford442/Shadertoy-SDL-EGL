@@ -2,7 +2,9 @@
   
 std::thread *sdl_thread = nullptr;
 
-sdl_thread=new std::thread([]()->void SDLCALL bfr(void * unused,Uint8 * stm,int len){
+void SDLCALL bfr(void * unused,Uint8 * stm,int len){
+
+sdl_thread=new std::thread([]()->void {
 Uint8 * wptr;
 int lft;
 wptr=wave.snd+wave.pos;
@@ -21,6 +23,8 @@ SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
 });
+
+}
 
 void plt(){
 SDL_memset(&wave.request,0,sizeof(wave.request));
