@@ -1,5 +1,7 @@
 #pragma once
-
+#include <wasm_simd128.h>
+#include <xmmintrin.h>
+#include <unistd.h>
 #include <webgl/webgl2.h>
 
 #include <GLES3/gl3.h>
