@@ -33,10 +33,6 @@ wave.pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 
-tls=SDL_TLSCreate();
-SDL_assert(tls);
-SDL_TLSSet(tls,"main thread",NULL);
-thread=SDL_CreateThread(bfr,"Buffer","thread1");
 SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
 wave.request.callback=thread;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
@@ -50,7 +46,7 @@ tls=SDL_TLSCreate();
 SDL_assert(tls);
 SDL_TLSSet(tls,"main thread",NULL);
 SDL_Init(0);
-thread=SDL_CreateThread(plays,"One","#1");
+thread=SDL_CreateThread(plays(),"One","#1");
 }
 
 extern "C" {
