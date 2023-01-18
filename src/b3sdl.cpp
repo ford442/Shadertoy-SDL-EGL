@@ -46,7 +46,7 @@ tls=SDL_TLSCreate();
 SDL_assert(tls);
 SDL_TLSSet(tls,"main thread",NULL);
 SDL_Init(0);
-SDL_CreateThread(plays,"One","#1");
+SDL_CreateThread(plays,"One",NULL);
 return;
 }
 
