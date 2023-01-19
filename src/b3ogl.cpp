@@ -97,7 +97,6 @@ void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-char * fileloc="/shader/shader1.toy";
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
