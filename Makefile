@@ -1,10 +1,10 @@
 b3hd:
 	 em++ src/main.cpp -c \
-         -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
+         -flto -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/shader.cpp -c \
-	 -std=c++2a -stdlib=libc++ -matomics \
+	 -flto -std=c++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -DSIMD=128 \
@@ -13,19 +13,20 @@ b3hd:
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 
 	 em++ src/sdl_audio.cpp -c \
-	 -sUSE_SDL=2 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize -ftree-vectorize \
+	 -flto -sUSE_SDL=2 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=on -freciprocal-math
 	 
 	 em++ src/emjs.cpp -c \
-	 -std=c++2a -stdlib=libc++ -matomics \
+	 -flto -std=c++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off
 	 
 	 emcc main.o shader.o sdl_audio.o emjs.o -o g3021.js \
-	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -flto -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 \
+	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js js/rSlider.js --pre-js js/slideOut.js --post-js js/fluid.js --post-js js/flui.js --pre-js js/gpujs.js 
