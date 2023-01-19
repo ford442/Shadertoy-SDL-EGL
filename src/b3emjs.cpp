@@ -3,7 +3,7 @@
 void egl(){
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_TRUE;
+attr_js.stencil=EM_FALSE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
@@ -23,8 +23,8 @@ contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAt
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
-emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size_js=(int)hi_js;
+emscripten_get_element_css_size("canvas",&wi,&hi);
+Size=(int)hi;
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -78,10 +78,11 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
-glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
+ glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+
 glDisable(GL_DITHER);
-// glDisable(GL_STENCIL_TEST);
-// glDisable(GL_DEPTH_TEST);
+glDisable(GL_STENCIL_TEST);
+glDisable(GL_DEPTH_TEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 return;
@@ -400,7 +401,7 @@ if(sh4d==true){
 Module.ccall("frm");
 };
 };
-};},13.333333)}
+}},13.333333)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
