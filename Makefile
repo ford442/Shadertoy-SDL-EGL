@@ -9,7 +9,7 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
-	 -sUSE_SDL=2 -s USE_PTHREADS=1 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize \
+	 -sUSE_SDL=2 -pthread -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
@@ -19,7 +19,7 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js \
-	 -fuse-ld=mold -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=2 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -fuse-ld=mold -pthread -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js rSlider.js --pre-js slideOut.js --pre-js fluid.js --pre-js flui.js --post-js gpujs.js 
