@@ -138,7 +138,7 @@ var loopLoop;
 var sh4d=true;
 var a,b;
 let stp=document.getElementById("mv").currentTime;
-let loopPart=stp-(Math.floor(stp))+1.0;
+let loopPart=(stp-(Math.floor(stp))+1.0)*2;
 let mmvv=document.getElementById("mv");
  
 function stpBackForth(){
@@ -292,8 +292,8 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
-var blank$=Math.max((((w$-h$)*1)/2),0);
-var nblank$=Math.max((((h$-w$)*1)/2),0);
+var blank$=Math.max((((w$-h$)*0)/2.0),0);
+var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -319,8 +319,8 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
-var blank$=Math.max((((w$-h$)*1)/2),0);
-var nblank$=Math.max((((h$-w$)*1)/2),0);
+var blank$=Math.max((((w$-h$)*0)/2.0),0);
+var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -363,7 +363,7 @@ if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
-}}}
+}}} /*
 if(f==false){
 if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
@@ -373,7 +373,9 @@ if(document.getElementById("mv").currentTime>(stp-loopPart)){
 document.getElementById("mv").currentTime-=0.013333;
 }else{
 f=false;
-}}}}else{
+}}
+} */
+}else{
 if($F%2!=0){
 var $bb=R(vv);$B.set($bb,0,sz);
 };
