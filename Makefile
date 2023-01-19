@@ -7,7 +7,7 @@ b3hd:
 	 -std=c++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
-	 -mprefer-avx128 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mavx2 -m3dnow -m3dnowa -DSIMD=128 \
+	 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mavx2 -m3dnow -m3dnowa -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
