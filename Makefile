@@ -6,7 +6,7 @@ b3hd:
 	 em++ src/b3ogl.cpp -c \
 	 -std=c++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
-	 -sSIMD=1 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
+	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
@@ -20,12 +20,12 @@ b3hd:
 	 em++ src/b3emjs.cpp -c \
 	 -std=c++2a -stdlib=libc++ -matomics \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
-	 -sSIMD=1 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -DSIMD=128 \
+	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off
 	 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js \
-	 -sSIMD=1 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --post-js rSlider.js --post-js slideOut.js --post-js fluid.js --post-js flui.js --post-js gpujs.js 
