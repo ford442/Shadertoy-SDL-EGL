@@ -18,7 +18,7 @@ b3hd:
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
-	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js -sEXPORT_NAME=“ExampleModuleFactory" \
+	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js \
 	 -fuse-ld=mold -pthread -sPTHREAD_POOL_SIZE=2 -sPROXY_TO_PTHREAD -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
