@@ -387,7 +387,7 @@ Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1
 if(sh4d==true){
 Module.ccall("frm");
 };
-// };
+};
 },13.333333)}
 M();
 document.getElementById("di").onclick=function(){
