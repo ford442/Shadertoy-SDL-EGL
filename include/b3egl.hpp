@@ -4,7 +4,6 @@
 #include <immintrin.h> 
 #include <nmmintrin.h>
 #include <unistd.h>
-#include <emscripten/vector.h>
 #include <webgl/webgl2.h>
 
 #include <GLES3/gl3.h>
