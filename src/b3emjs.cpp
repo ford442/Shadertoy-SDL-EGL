@@ -137,9 +137,9 @@ var f;
 var loopLoop;
 var sh4d=true;
 var a,b;
-let stp=document.getElementById("mv").currentTime;
-let loopPart=(stp-(Math.floor(stp))+1.0)*2;
-let mmvv=document.getElementById("mv");
+var stp=document.getElementById("mv").currentTime;
+var loopPart=(stp-(Math.floor(stp))+1.0)*2;
+var mmvv=document.getElementById("mv");
  
 function stpBackForth(){
 loopLoop=false;
@@ -153,6 +153,7 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=document.getElementById("mv").currentTime;
+loopPart=(stp-(Math.floor(stp))+1.0)*2;
 // console.log(stp);
 loopLoop=true;
 f=false;
