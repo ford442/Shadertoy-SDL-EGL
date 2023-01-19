@@ -1,5 +1,5 @@
 #include "../include/b3emsc.hpp"
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #undef main
 #include "SDL_config.h"
 
