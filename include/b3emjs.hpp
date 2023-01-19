@@ -1,5 +1,5 @@
 #include "../include/b3emsc.hpp"
-int Size_js;
+short int Size_js;
 double wi_js,hi_js;
 
 extern "C"{
