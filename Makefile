@@ -18,11 +18,11 @@ b3hd:
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
-	 emcc b3main.o b3ogl.o b3emjs.o b3sdl.o -o g3020.js \
+	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js \
 	 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js rSlider.js --pre-js slideOut.js --pre-js fluid.js --pre-js flui.js --js-library gpujs.js 
+         --pre-js rSlider.js --pre-js slideOut.js --pre-js fluid.js --pre-js flui.js --post-js gpujs.js 
 
 cloud:
 	 em++ src/b3main.cpp -c \
