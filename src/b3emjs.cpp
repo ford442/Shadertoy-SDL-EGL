@@ -3,7 +3,7 @@
 void egl(){
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_FALSE;
+attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
@@ -78,11 +78,10 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
- glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
-
+glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
 glDisable(GL_DITHER);
-glDisable(GL_STENCIL_TEST);
-glDisable(GL_DEPTH_TEST);
+// glDisable(GL_STENCIL_TEST);
+// glDisable(GL_DEPTH_TEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 return;
@@ -138,8 +137,8 @@ var f;
 var loopLoop;
 var sh4d=true;
 var a,b;
-var stp;
-var mmvv;
+let stp=document.getElementById("mv").currentTime;
+let mmvv=document.getElementById("mv");
  
 function stpBackForth(){
 loopLoop=false;
@@ -152,7 +151,7 @@ e.preventDefault();
 if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
-stp=mmvv.currentTime;
+stp=document.getElementById("mv").currentTime;
 // console.log(stp);
 loopLoop=true;
 f=false;
@@ -197,7 +196,7 @@ logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
+stencil:true,
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
@@ -356,22 +355,22 @@ setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
-if(mmvv.currentTime>(stp)){
+if(document.getElementById("mv").currentTime>(stp)){
 mmvv.currentTime-=0.013333;
 }else{
 f=false;
-if(mmvv.currentTime<(stp+2.0)){
-mmvv.currentTime+=0.013333;
+if(document.getElementById("mv").currentTime<(stp+2.0)){
+document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
 }}}
 if(f==false){
-if(mmvv.currentTime<(stp+2.0)){
-mmvv.currentTime+=0.013333;
+if(document.getElementById("mv").currentTime<(stp+2.0)){
+document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
-if(mmvv.currentTime>(stp)){
-mmvv.currentTime-=0.013333;
+if(document.getElementById("mv").currentTime>(stp)){
+document.getElementById("mv").currentTime-=0.013333;
 }else{
 f=false;
 }}}}else{
