@@ -248,16 +248,16 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
   
-document.getElementById('wid').innerHTML=1920;
-document.getElementById('hig').innerHTML=1080;
+// document.getElementById('wid').innerHTML=1920;
+// document.getElementById('hig').innerHTML=1080;
 document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
 
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
-var $sc=this.duration;
+document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
+document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
+var $sc=this.duration-2.0;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
 $pt=$pt*1000000;
