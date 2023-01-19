@@ -28,10 +28,6 @@ Module.ccall('b3');
 },1050);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
-// document.getElementById('circle').width=window.innerWidth;
-// document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
 },1350);
 }
 
@@ -47,10 +43,6 @@ Module.ccall('str');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
-// document.getElementById('circle').width=window.innerWidth;
-// document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
 },950);
 }
   
@@ -59,15 +51,15 @@ Module.ccall('pl');
 }
   
 const fll=new BroadcastChannel('file');
-const shutDown=new BroadcastChannel('shutDown');
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 pll();
 setTimeout(function(){
+const shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({data:222});
-},350);
+},450);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -131,7 +123,7 @@ setTimeout(function(){
   
   normalResStart();
   
-},150);
+},250);
 };};
 ff.send(null);
 }
@@ -172,8 +164,8 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
+// document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
+// document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
   
 mV.load();
 loadV.load();
@@ -257,8 +249,8 @@ document.getElementById('floatHigh').innerHTML=document.innerHeight;
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
+document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
+document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration-2.0;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
