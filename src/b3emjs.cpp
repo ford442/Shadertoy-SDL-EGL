@@ -76,6 +76,8 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
+ glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+
 glDisable(GL_DITHER);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_DEPTH_TEST);
