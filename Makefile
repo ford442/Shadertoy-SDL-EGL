@@ -1,11 +1,11 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
+         -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3ogl.cpp -c \
 	 -std=c++2a -stdlib=libc++ -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mavx2 -m3dnow -m3dnowa -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
@@ -13,14 +13,14 @@ b3hd:
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off 
 	 
 	 em++ src/b3sdl.cpp -c \
-	 -sUSE_SDL=2 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize \
+	 -sUSE_SDL=2 -std=c++2a -stdlib=libc++ -matomics -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 
 	 em++ src/b3emjs.cpp -c \
 	 -std=c++2a -stdlib=libc++ -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -mmutable-globals -mnontrapping-fptoint \
-	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mavx2 -m3dnow -m3dnowa -DSIMD=128 \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
+	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -m32 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=off
 	 
