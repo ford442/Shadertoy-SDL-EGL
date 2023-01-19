@@ -179,7 +179,7 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_gpu_shader5");
 // glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-// glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
