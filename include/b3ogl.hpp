@@ -51,7 +51,7 @@ const GLchar fragment_shader_header_gles3[]=
 "\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "\n out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
+"\n void main(){fragColor.a=1.0;mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
 const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
@@ -121,7 +121,7 @@ EGL_GREEN_SIZE,(EGLint)10,
 EGL_BLUE_SIZE,(EGLint)10,
 EGL_ALPHA_SIZE,(EGLint)10,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)0,
+EGL_STENCIL_SIZE,(EGLint)10,
 EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)128,
