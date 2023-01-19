@@ -377,13 +377,13 @@ f=false;
 }}
 } */
 }else{
-if($F%2!=0){
+if($F%4!=0){
 var $bb=R(vv);$B.set($bb,0,sz);
-};
-};
-if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+};
+};
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+if($F%2==0){
 if(sh4d==true){
 Module.ccall("frm");
 };
