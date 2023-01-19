@@ -138,6 +138,7 @@ var loopLoop;
 var sh4d=true;
 var a,b;
 let stp=document.getElementById("mv").currentTime;
+let loopPart=stp-(Math.floor(stp))+1.0;
 let mmvv=document.getElementById("mv");
  
 function stpBackForth(){
@@ -210,7 +211,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
- 
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -287,13 +287,13 @@ gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
-// h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var h$=vv.videoHeight;
-var w$=vv.videoWidth;
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+// var h$=vv.videoHeight;
+// var w$=vv.videoWidth;
+var blank$=Math.max((((w$-h$)*1)/2),0);
+var nblank$=Math.max((((h$-w$)*1)/2),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -319,8 +319,8 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+var blank$=Math.max((((w$-h$)*1)/2),0);
+var nblank$=Math.max((((h$-w$)*1)/2),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -355,21 +355,21 @@ setTimeout(function(){
 M();
 if(loopLoop==true){
 if(f==true){
-if(document.getElementById("mv").currentTime>(stp)){
+if(document.getElementById("mv").currentTime>(stp-loopPart)){
 mmvv.currentTime-=0.013333;
 }else{
 f=false;
-if(document.getElementById("mv").currentTime<(stp+2.0)){
+if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
 }}}
 if(f==false){
-if(document.getElementById("mv").currentTime<(stp+2.0)){
+if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
-if(document.getElementById("mv").currentTime>(stp)){
+if(document.getElementById("mv").currentTime>(stp-loopPart)){
 document.getElementById("mv").currentTime-=0.013333;
 }else{
 f=false;
