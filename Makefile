@@ -28,7 +28,7 @@ b3hd:
 	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js rSlider.js --pre-js slideOut.js --post-js fluid.js --post-js flui.js --pre-js gpujs.js 
+         --pre-js js/rSlider.js --pre-js js/slideOut.js --post-js js/fluid.js --post-js js/flui.js --pre-js js/gpujs.js 
 
 cloud:
 	 em++ src/b3main.cpp -c \
