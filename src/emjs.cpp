@@ -376,6 +376,7 @@ if(sh4d==true){
 Module.ccall("frm");
 };
 };
+};
 },13.333333)}
 M();
 document.getElementById("di").onclick=function(){
