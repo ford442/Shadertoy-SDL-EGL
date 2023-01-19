@@ -27,14 +27,8 @@ wave.request.format=AUDIO_S32;
 wave.request.channels=2;
 wave.request.samples=1024;
 wave.pos=0;
-
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-
-std::thread thread([&]() {
 SDL_Init(SDL_INIT_AUDIO);
-});
-thread.join();
-  
 SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
 wave.request.callback=bfr;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
