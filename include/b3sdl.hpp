@@ -1,4 +1,5 @@
 #include "../include/b3emsc.hpp"
+#include <emscripten/html5.h>
 
 #include <stdlib.h>
 #include <signal.h>
