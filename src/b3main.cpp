@@ -28,8 +28,18 @@ Module.ccall('b3');
 },1050);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').style.height=window.innerHeight+'px';
+document.getElementById('bcanvas').style.width=window.innerHeight+'px';
+document.getElementById('acanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').style.height=window.innerHeight+'px';
+document.getElementById('acanvas').style.width=window.innerHeight+'px';
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
+document.getElementById('circle').style.height=window.innerHeight+'px';
+document.getElementById('circle').style.width=window.innerHeight+'px';
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
 },1350);
