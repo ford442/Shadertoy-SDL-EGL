@@ -180,10 +180,10 @@ sh4d=false;
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
+// var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
-// var w$=vv.videoWidth;
+var w$=vv.videoWidth;
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
@@ -296,11 +296,11 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
  gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 
-w$=parseInt(document.getElementById("wid").innerHTML,10);
+// w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 // var h$=vv.videoHeight;
-// var w$=vv.videoWidth;
+var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
@@ -329,9 +329,9 @@ gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
  
 // w$=parseInt(document.getElementById("wid").innerHTML,10);
-// h$=parseInt(document.getElementById("hig").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
-// var w$=vv.videoWidth;
+var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
