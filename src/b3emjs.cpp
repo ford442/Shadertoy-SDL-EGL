@@ -212,6 +212,10 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
+ 
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+ 
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -284,10 +288,9 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALP
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
-gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+ gl.drawingBufferColorSpace='display-p3';
+
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
