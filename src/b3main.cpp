@@ -172,12 +172,12 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('acanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
 mV.load();
 loadV.load();
 
