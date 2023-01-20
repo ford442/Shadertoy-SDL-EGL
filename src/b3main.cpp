@@ -174,6 +174,10 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
+document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
+document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
+document.getElementById('bcanvas').height=parseInt(window.innerHeight,10);
+document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
   
 mV.load();
 loadV.load();
@@ -254,10 +258,14 @@ if(lockVid!=1){
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
+  
+  
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
 document.getElementById('wid').innerHTML=this.videoWidth;
 document.getElementById('hig').innerHTML=this.videoHeight;
+  
+  
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
