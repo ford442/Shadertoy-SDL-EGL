@@ -180,7 +180,7 @@ scanVideos();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
@@ -270,7 +270,7 @@ if(lockVid!=1){
   
 document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
 // loadV.width=this.videoWidth;
@@ -316,7 +316,7 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
