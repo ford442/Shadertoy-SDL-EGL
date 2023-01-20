@@ -9,7 +9,7 @@ document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
 document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
 document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-document.getElementById('pmhig').innerHTML=document.innerHeight*2;
+document.getElementById('pmhig').innerHTML=window.innerHeight*2;
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
@@ -21,25 +21,15 @@ document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight+'px';
 document.getElementById('scanvas').style.width=window.innerHeight+'px';
-document.getElementById('pmhig').innerHTML=document.innerHeight;
+document.getElementById('pmhig').innerHTML=window.innerHeight;
 },750);
 setTimeout(function(){
 Module.ccall('b3');
 },1050);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
-document.getElementById('bcanvas').height=window.innerHeight;
-document.getElementById('bcanvas').width=window.innerHeight;
-document.getElementById('bcanvas').style.height=window.innerHeight+'px';
-document.getElementById('bcanvas').style.width=window.innerHeight+'px';
-document.getElementById('acanvas').height=window.innerHeight;
-document.getElementById('acanvas').width=window.innerHeight;
-document.getElementById('acanvas').style.height=window.innerHeight+'px';
-document.getElementById('acanvas').style.width=window.innerHeight+'px';
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
-document.getElementById('circle').style.height=window.innerHeight+'px';
-document.getElementById('circle').style.width=window.innerHeight+'px';
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
 },1350);
@@ -180,21 +170,11 @@ scanVideos();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').style.height=window.innerHeight+'px';
-document.getElementById('acanvas').style.width=window.innerHeight+'px';
-document.getElementById('bcanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas').style.height=window.innerHeight+'px';
-document.getElementById('bcanvas').style.width=window.innerHeight+'px';
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-
+  
 mV.load();
 loadV.load();
 
@@ -268,15 +248,15 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
   
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('wid').innerHTML=1920;
+document.getElementById('hig').innerHTML=1080;
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
 
 loadV.addEventListener('canplay',function(){
-// loadV.width=this.videoWidth;
-loadV.height=window.innerHeight;
-// document.getElementById('wid').innerHTML=this.videoWidth;
-// document.getElementById('hig').innerHTML=this.videoHeight;
+loadV.width=this.videoWidth;
+loadV.height=this.videoHeight;
+document.getElementById('wid').innerHTML=this.videoWidth;
+document.getElementById('hig').innerHTML=this.videoHeight;
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -288,7 +268,7 @@ document.getElementById('idur').innerHTML=mic/1000000;
 document.getElementById('itim').innerHTML=$pt;
 });
 var vide=document.querySelectorAll('video');
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 $lt=Math.round(tem.innerHTML);
@@ -316,7 +296,7 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
