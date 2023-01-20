@@ -170,7 +170,7 @@ scanVideos();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
