@@ -255,7 +255,7 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-// document.getElementById('wid').innerHTML=this.videoWidth;
+document.getElementById('wid').innerHTML=this.videoWidth;
 // document.getElementById('hig').innerHTML=this.videoHeight;
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
