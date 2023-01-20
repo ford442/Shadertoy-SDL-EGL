@@ -248,9 +248,10 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
   
-document.getElementById('wid').innerHTML=1920;
-document.getElementById('hig').innerHTML=1080;
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
+// document.getElementById('wid').innerHTML=1920;
+// document.getElementById('hig').innerHTML=1080;
+  
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
