@@ -182,16 +182,16 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('acanvas')=parseInt(window.innerHeight,10);
-document.getElementById('acanvas')=parseInt(window.innerHeight,10);
+document.getElementById('acanvas')=window.innerHeight;
+document.getElementById('acanvas')=window.innerHeight;
 document.getElementById('acanvas').style.height=window.innerHeight+'px';
 document.getElementById('acanvas').style.width=window.innerHeight+'px';
-document.getElementById('bcanvas')=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas')=parseInt(window.innerHeight,10);
+document.getElementById('bcanvas')=window.innerHeight;
+document.getElementById('bcanvas')=window.innerHeight;
 document.getElementById('bcanvas').style.height=window.innerHeight+'px';
 document.getElementById('bcanvas').style.width=window.innerHeight+'px';
-document.getElementById('scanvas')=parseInt(window.innerHeight,10);
-document.getElementById('scanvas')=parseInt(window.innerHeight,10);
+document.getElementById('scanvas')=window.innerHeight;
+document.getElementById('scanvas')=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight+'px';
 document.getElementById('scanvas').style.width=window.innerHeight+'px';
 
