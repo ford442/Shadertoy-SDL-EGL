@@ -285,10 +285,7 @@ gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('GL_ARB_multisample');
-  
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
- 
+
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
@@ -327,8 +324,12 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+    
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
+ 
+// w$=parseInt(document.getElementById("wid").innerHTML,10);
+// h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
