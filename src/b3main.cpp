@@ -9,7 +9,7 @@ document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
 document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
 document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-document.getElementById('pmhig').innerHTML=window.innerHeight*2;
+document.getElementById('pmhig').innerHTML=document.innerHeight*2;
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
@@ -21,7 +21,7 @@ document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight+'px';
 document.getElementById('scanvas').style.width=window.innerHeight+'px';
-document.getElementById('pmhig').innerHTML=window.innerHeight;
+document.getElementById('pmhig').innerHTML=document.innerHeight;
 },750);
 setTimeout(function(){
 Module.ccall('b3');
@@ -180,7 +180,7 @@ scanVideos();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('acanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
@@ -270,7 +270,7 @@ if(lockVid!=1){
   
 document.getElementById('wid').innerHTML=parseInt(window.innerHeight);
 document.getElementById('hig').innerHTML=parseInt(window.innerHeight);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
 
 loadV.addEventListener('canplay',function(){
 // loadV.width=this.videoWidth;
@@ -288,7 +288,7 @@ document.getElementById('idur').innerHTML=mic/1000000;
 document.getElementById('itim').innerHTML=$pt;
 });
 var vide=document.querySelectorAll('video');
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 $lt=Math.round(tem.innerHTML);
