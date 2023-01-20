@@ -83,7 +83,7 @@ glDisable(GL_DITHER);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 return;
 }
 
@@ -140,7 +140,7 @@ var a,b;
 var stp=document.getElementById("mv").currentTime;
 var loopPart=(stp-(Math.floor(stp))+1.0)*2;
 var mmvv=document.getElementById("mv");
- 
+var paus;
 function stpBackForth(){
 loopLoop=false;
 }
@@ -148,6 +148,12 @@ loopLoop=false;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
+if(paus==true){
+paus=false;
+};
+if(paus==false){
+paus=true;
+};
 };
 if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
@@ -212,10 +218,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
- 
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
- 
+
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -282,14 +285,19 @@ gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('GL_ARB_multisample');
+  
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
+ 
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
-gl.disable(gl.DITHER);
+ 
  gl.drawingBufferColorSpace='display-p3';
+gl.disable(gl.DITHER);
 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -387,9 +395,9 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 // };
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 // if($F%2==0){
+};
 if(sh4d==true){
 Module.ccall("frm");
-};
 };
 },13.333333)}
 M();
