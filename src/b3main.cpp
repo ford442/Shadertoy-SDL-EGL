@@ -172,8 +172,8 @@ scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
   
 mV.load();
 loadV.load();
