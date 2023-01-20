@@ -196,7 +196,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 var bcanvas=document.getElementById("bcanvas");
-var gl=bcanvas.getContext("webgl2",{
+var gl=bcanvas.getContext("gl",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
