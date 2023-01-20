@@ -248,7 +248,7 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
   
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
