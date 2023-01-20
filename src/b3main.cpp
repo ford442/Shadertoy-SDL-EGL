@@ -268,8 +268,8 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
   
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight);
-document.getElementById('hig').innerHTML=parseInt(window.innerHeight);
+document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
+document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
 document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
 
 loadV.addEventListener('canplay',function(){
