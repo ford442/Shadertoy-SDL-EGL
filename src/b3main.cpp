@@ -250,12 +250,11 @@ if(lockVid!=1){
   
 // document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
-// document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
-// loadV.width=this.videoWidth;
-// loadV.height=this.videoHeight;
-loadV.height=parseInt(window.innerHeight,10);
+loadV.width=this.videoWidth;
+loadV.height=this.videoHeight;
 document.getElementById('wid').innerHTML=this.videoWidth;
 // document.getElementById('hig').innerHTML=this.videoHeight;
 var $sc=this.duration;
