@@ -229,7 +229,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
