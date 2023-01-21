@@ -268,8 +268,9 @@ loadV.addEventListener('canplay',function(){
   console.log('yep');
 // loadV.width=parseInt(this.videoWidth,10);
 // loadV.height=parseInt(this.videoHeight,10);
-// document.getElementById('wid').innerHTML=parseInt(this.width,10);
-// document.getElementById('hig').innerHTML=parseInt(this.height,10);
+loadV.height=parseInt(window.innerHeight,10);
+document.getElementById('wid').innerHTML=parseInt(loadV.videoWidth,10);
+document.getElementById('hig').innerHTML=parseInt(loadV.videoHeight,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
