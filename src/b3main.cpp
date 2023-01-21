@@ -329,7 +329,9 @@ T=true;
 EM_JS(void,js_main,(),{
 
 "use strict";
-
+ 
+var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
+ 
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
@@ -514,12 +516,6 @@ snd();
 },1650);
 });
   
-});
-
-EM_JS(void,js_page,(),{
-
-var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
- 
 var $iwid=document.getElementById('iwid');
 
 const mV=document.getElementById('mv');
@@ -669,7 +665,6 @@ FS.mkdir("/shader");
 });
 
 js_main();
-js_page();
 
 return 1;
 
