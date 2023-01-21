@@ -33,11 +33,6 @@ return;
 
 extern "C" {
 
-void b3(){
-b3_main();
-return;
-}
-
 void nano(short int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
@@ -655,7 +650,16 @@ loada();
 loada();
   
 });
-  
+
+extern "C" {
+ 
+void b3(){
+b3_main();
+return;
+}
+
+}
+   
 int main(){
   
 EM_ASM({
