@@ -68,16 +68,16 @@ startGUI();
 function getWebGLContext(canvas){
 const params={colorType:'float64',
 preferLowPowerToHighPerformance:false,
-precision:'mediump',
+precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:true,
-imageSmoothingEnabled:true,
+stencil:false,
+imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
-premultipliedAlpha:false,
+premultipliedAlpha:true,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
@@ -112,8 +112,7 @@ const isWebGL2=!!gl;
 if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
 let halfFloat;
 let supportLinearFiltering;
-if(isWebGL2){
- gl.disable(gl.DITHER);
+if(isWebGL2){gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
@@ -147,11 +146,9 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
+
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.FASTEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
-}else{gl.disable(
-gl.DITHER);
+}else{gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 halfFloat=gl.getExtension('OES_texture_half_float');
 gl.getExtension('EXT_color_buffer_float');
@@ -186,12 +183,11 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
-supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.FASTEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
-}
-gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
- 
+
+
+ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
+ }
+ gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
  const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
  let formatRG;
