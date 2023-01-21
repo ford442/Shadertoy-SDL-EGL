@@ -268,8 +268,8 @@ loadV.addEventListener('canplay',function(){
   console.log('yep');
 // loadV.width=parseInt(this.videoWidth,10);
 // loadV.height=parseInt(this.videoHeight,10);
-document.getElementById('wid').innerHTML=parseInt(this.width,10);
-document.getElementById('hig').innerHTML=parseInt(this.height,10);
+// document.getElementById('wid').innerHTML=parseInt(this.width,10);
+// document.getElementById('hig').innerHTML=parseInt(this.height,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -333,7 +333,8 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').style.height=window.innerHeight+'px';
 document.getElementById('bcanvas').style.width=window.innerHeight+'px';
-  
+document.getElementById('wid').innerHTML=parseInt(document.getElementById('mv').width,10);
+document.getElementById('hig').innerHTML=parseInt(document.getElementById('mv').height,10);
 document.getElementById('ldv').load();
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
 document.getElementById('di').click();
