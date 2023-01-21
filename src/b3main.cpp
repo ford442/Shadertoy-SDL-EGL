@@ -1,6 +1,4 @@
 #include "../include/b3main.hpp"
-#include "../src/b3emjs.cpp"
-
 
 void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
