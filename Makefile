@@ -5,7 +5,7 @@ b3hdb:
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=off -freciprocal-math
 	 
 	 em++ src/b3ogl.cpp -c \
-	 -std=c++2a -stdlib=libc++ \
+	 -std=c++2a -stdlib=libc++ -sUSE_SDL=2 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -DSIMD=128 -msimd128 -mavx  \
