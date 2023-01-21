@@ -48,20 +48,20 @@ document.getElementById('bcanvas').style.height=window.innerHeight+'px';
 document.getElementById('bcanvas').style.width=window.innerHeight+'px';
 setTimeout(function(){
 Module.ccall('b3_egl');
-},250);
-setTimeout(function(){
-Module.ccall('b3');
 },450);
 setTimeout(function(){
+Module.ccall('b3');
+},1050);
+setTimeout(function(){
 Module.ccall('str');
-},750);
+},1550);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},950);
+},1950);
 }
   
 function pll(){
