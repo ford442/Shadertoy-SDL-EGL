@@ -244,7 +244,7 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j
 var d=S();if(d)d();d=S();function S(){
     
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
  
 // w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
