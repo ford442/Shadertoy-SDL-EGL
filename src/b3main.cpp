@@ -392,8 +392,6 @@ shutDown.postMessage({data:222});
 },450);
 });
 
-var $iwid=document.getElementById('iwid');
-
 var $sngs=[];
 var $vids=[];
 var $shds=[];
@@ -521,6 +519,8 @@ snd();
 EM_JS(void,js_page,(),{
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
+ 
+var $iwid=document.getElementById('iwid');
 
 const mV=document.getElementById('mv');
 const loadV=document.getElementById('ldv');
