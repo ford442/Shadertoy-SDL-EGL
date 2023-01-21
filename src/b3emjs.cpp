@@ -251,7 +251,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([o$,o$]);
+}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
  
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -263,7 +263,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([o$,o$]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
