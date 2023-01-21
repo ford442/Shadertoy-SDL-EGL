@@ -18,8 +18,8 @@ if(ms_l==true){
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=1.0-(xxx*Size_gl);
-mY=1.0-(yyy*Size_gl);
+mX=1.0-(xxx*Size);
+mY=1.0-(yyy*Size);
 clk_l=false;
 }
 GLclampf mm=S*xx;
@@ -98,8 +98,8 @@ eglconfig=NULL;
 iFrame=0;
 clk_l=true;
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size_gl=(int)hi;
-S=(GLfloat)Size_gl;
+Size=(int)hi;
+S=(GLfloat)Size;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -178,8 +178,8 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_gpu_shader5");
-// glScissor((GLint)0,(GLint)0,(GLsizei)Size_gl,(GLsizei)Size_gl);
-glViewport((GLint)0,(GLint)0,GLsizei(Size_gl),GLsizei(Size_gl));
+// glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
