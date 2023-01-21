@@ -266,10 +266,10 @@ if(lockVid!=1){
   
 loadV.addEventListener('canplay',function(){
   console.log('yep');
-loadV.width=parseInt(this.videoWidth,10);
-loadV.height=parseInt(this.videoHeight,10);
-document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
-document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
+// loadV.width=parseInt(this.videoWidth,10);
+// loadV.height=parseInt(this.videoHeight,10);
+document.getElementById('wid').innerHTML=parseInt(this.width,10);
+document.getElementById('hig').innerHTML=parseInt(this.height,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
