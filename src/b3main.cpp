@@ -1,4 +1,5 @@
 #include "../include/b3main.hpp"
+#include "../src/b3emjs.cpp"
 
 EM_JS(void,js_main,(),{
 
@@ -54,25 +55,20 @@ document.getElementById('circle').height=window.innerHeight;
 },950);
 }
   
-function pll(){
-Module.ccall('pl');
-}
-  
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-pll();
+Module.ccall('pl');
 setTimeout(function(){
 shutDown.postMessage({data:222});
 },450);
 });
 
 var $iwid=document.getElementById('iwid');
-var mV=document.getElementById('mv');
-var loadV=document.getElementById('ldv');
+
 var $sngs=[];
 var $vids=[];
 var $shds=[];
@@ -178,9 +174,7 @@ document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('bcanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
-  
-mV.load();
-loadV.load();
+
 
 function snd(){
 const randSong=Math.floor(($sngs[0]-5)*Math.random());
@@ -196,21 +190,31 @@ setTimeout(function(){
 snd();
 },1650);
 });
+  
+});
+
+EM_JS(void,js_main,(),{
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
-let tem=document.getElementById('tim');
-let ban=document.getElementById('menuBtn');
-let sfr=document.getElementById('slideframe');
+const mV=document.getElementById('mv');
+const loadV=document.getElementById('ldv');
+
+mV.load();
+loadV.load();
+
+const tem=document.getElementById('tim');
+const ban=document.getElementById('menuBtn');
+const sfr=document.getElementById('slideframe');
 function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;
 grab$lt();
-let slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
+const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();slt=$lt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-let tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:16.00},
+const tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:16.00},
 step:[0.25],labels:false,tooltip:true,scale:false,});
 grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
@@ -233,6 +237,7 @@ $iwid.innerHTML=parseInt($w,10);
 document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('isrc').innerHTML=adr;
+
 mV.play();
 var lockVid=0;
 
@@ -257,14 +262,11 @@ if(lockVid!=1){
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
-loadV.addEventListener('canplay',function(){
-  
-  
-loadV.width=this.videoWidth;
-loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
-  
+document.getElementById('ldv').addEventListener('canplay',function(){
+document.getElementById('ldv').width=document.getElementById('ldv').videoWidth;
+document.getElementById('ldv').height=document.getElementById('ldv').videoHeight;
+document.getElementById('wid').innerHTML=document.getElementById('ldv').videoWidth;
+document.getElementById('hig').innerHTML=document.getElementById('ldv').videoHeight;
   
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
@@ -333,6 +335,8 @@ FS.mkdir("/shader");
 });
 
 js_main();
-return 0;
+js_page();
+
+return 1;
 
 }
