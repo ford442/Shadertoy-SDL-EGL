@@ -9,7 +9,6 @@ document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
 document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
 document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-document.getElementById('pmhig').innerHTML=window.innerHeight*2;
 setTimeout(function(){
 Module.ccall('b3_egl');
 },350);
@@ -21,7 +20,6 @@ document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight+'px';
 document.getElementById('scanvas').style.width=window.innerHeight+'px';
-document.getElementById('pmhig').innerHTML=window.innerHeight;
 },850);
 setTimeout(function(){
 Module.ccall('b3');
@@ -36,6 +34,18 @@ document.getElementById('circle').height=window.innerHeight;
 }
 
 function normalResStart(){
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').style.height=window.innerHeight+'px';
+document.getElementById('scanvas').style.width=window.innerHeight+'px';
+document.getElementById('acanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').style.height=window.innerHeight+'px';
+document.getElementById('acanvas').style.width=window.innerHeight+'px';
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').style.height=window.innerHeight+'px';
+document.getElementById('bcanvas').style.width=window.innerHeight+'px';
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
@@ -170,14 +180,16 @@ scanVideos();
 scanShaders();
 scanSongs();
 
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
+  
+  /*
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('bcanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
+  */
   
 mV.load();
 loadV.load();
@@ -259,13 +271,11 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
   
-  
-loadV.width=this.videoWidth;
-loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
-  
-  
+loadV.width=parseInt(this.videoWidth,10);
+loadV.height=parseInt(this.videoHeight,10);
+document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
+document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
+
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -295,7 +305,14 @@ r$=he/$h;
 $w=wi/r$;
 hii=$ihigB.innerHTML;
 var $hi=$h-hii;
-if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
+if($hi>1){
+$h=$ihigB.innerHTML;
+$ihig.innerHTML=$h;
+$r=$h/he;
+$r=$r*1000;
+$r=$r/1000;
+$w=wi*$r;
+};
 $hg=$h+'px';
 window.scroll(0,0);
 mv=vide[0].id;
@@ -309,11 +326,11 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
+  
+  // document.getElementById('ldv').height=window.innerHeight;
+
 document.getElementById('ldv').load();
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
-// document.getElementById('ldv').height=document.innerHeight;
-// document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
-// document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 document.getElementById('di').click();
 };
 setTimeout(function(){
