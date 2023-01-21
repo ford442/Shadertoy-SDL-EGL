@@ -364,6 +364,18 @@ document.getElementById('circle').height=window.innerHeight;
 }
 
 function normalResStart(){
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').style.height=window.innerHeight+'px';
+document.getElementById('scanvas').style.width=window.innerHeight+'px';
+document.getElementById('acanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').style.height=window.innerHeight+'px';
+document.getElementById('acanvas').style.width=window.innerHeight+'px';
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').style.height=window.innerHeight+'px';
+document.getElementById('bcanvas').style.width=window.innerHeight+'px';
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
