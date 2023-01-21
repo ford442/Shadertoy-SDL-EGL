@@ -264,18 +264,12 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
   
-// document.getElementById('wid').innerHTML=1920;
-// document.getElementById('hig').innerHTML=1080;
-  
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-
 loadV.addEventListener('canplay',function(){
-  
+  console.log('yep');
 loadV.width=parseInt(this.videoWidth,10);
 loadV.height=parseInt(this.videoHeight,10);
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
-
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -286,8 +280,8 @@ $pt=$pt/1000000;
 document.getElementById('idur').innerHTML=mic/1000000;
 document.getElementById('itim').innerHTML=$pt;
 });
+
 var vide=document.querySelectorAll('video');
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 $lt=Math.round(tem.innerHTML);
@@ -322,12 +316,11 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
   
-  // document.getElementById('ldv').height=window.innerHeight;
+  document.getElementById('ldv').height=window.innerHeight;
 
 document.getElementById('ldv').load();
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
