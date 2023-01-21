@@ -19,4 +19,4 @@
 
 #include <emscripten/html5.h>
 // #include <emscripten/html5_webgl.h>
-short int Size;
+
