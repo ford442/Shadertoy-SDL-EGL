@@ -180,10 +180,10 @@ sh4d=false;
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-// var w$=parseInt(document.getElementById("wid").innerHTML,10);
+var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
-var w$=vv.videoWidth;
+// var w$=vv.videoWidth;
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
@@ -297,8 +297,8 @@ gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 
 vv=document.getElementById("mv");
-h$=parseInt(vv.videoHeight,10);
-w$=parseInt(vv.videoWidth,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
  
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
@@ -323,13 +323,11 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 }
 var d=S();if(d)d();d=S();function S(){
-    
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
- 
 vv=document.getElementById("mv");
-h$=parseInt(vv.videoHeight,10);
-w$=parseInt(vv.videoWidth,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
