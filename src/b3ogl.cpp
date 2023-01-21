@@ -1,3 +1,4 @@
+#include "../src/b3sdl.cpp"
 #include "../include/b3ogl.hpp"
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
