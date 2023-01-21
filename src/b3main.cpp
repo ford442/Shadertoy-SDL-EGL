@@ -523,7 +523,7 @@ snd();
   
 });
 
-EM_JS(void,js_main,(),{
+EM_JS(void,js_page,(),{
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
