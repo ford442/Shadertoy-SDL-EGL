@@ -3,65 +3,56 @@
 EM_JS(void,js_main,(),{
 
 "use strict";
+var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
 document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
 document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-setTimeout(function(){
-Module.ccall('b3_egl');
-},350);
-setTimeout(function(){
-Module.ccall('str');
-},650);
-setTimeout(function(){
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-},850);
-setTimeout(function(){
-Module.ccall('b3');
-},1250);
-setTimeout(function(){
-document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
-},1550);
-}
-
-function normalResStart(){
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-document.getElementById('acanvas').height=window.innerHeight;
-document.getElementById('acanvas').width=window.innerHeight;
-document.getElementById('acanvas').style.height=window.innerHeight+'px';
-document.getElementById('acanvas').style.width=window.innerHeight+'px';
-document.getElementById('bcanvas').height=window.innerHeight;
-document.getElementById('bcanvas').width=window.innerHeight;
-document.getElementById('bcanvas').style.height=window.innerHeight+'px';
-document.getElementById('bcanvas').style.width=window.innerHeight+'px';
+document.getElementById('pmhig').innerHTML=window.innerHeight*2;
 setTimeout(function(){
 Module.ccall('b3_egl');
 },450);
 setTimeout(function(){
-Module.ccall('b3');
-},1050);
-setTimeout(function(){
 Module.ccall('str');
-},1550);
+},550);
+setTimeout(function(){
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').style.height=window.innerHeight+'px';
+document.getElementById('scanvas').style.width=window.innerHeight+'px';
+document.getElementById('pmhig').innerHTML=window.innerHeight;
+},750);
+setTimeout(function(){
+Module.ccall('b3');
+},850);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},1950);
+},1250);
+}
+
+function normalResStart(){
+setTimeout(function(){
+Module.ccall('b3_egl');
+},250);
+setTimeout(function(){
+Module.ccall('b3');
+},450);
+setTimeout(function(){
+Module.ccall('str');
+},750);
+setTimeout(function(){
+document.getElementById('shut').innerHTML=2;
+document.getElementById('circle').width=window.innerWidth;
+document.getElementById('circle').height=window.innerHeight;
+// const bz=new BroadcastChannel('bez');
+// bz.postMessage({data:222});
+},950);
 }
   
 function pll(){
@@ -74,10 +65,10 @@ const shutDown=new BroadcastChannel('shutDown');
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-pll();
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},450);
+pll();
+},750);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -141,7 +132,7 @@ setTimeout(function(){
   
   normalResStart();
   
-},150);
+},350);
 };};
 ff.send(null);
 }
@@ -180,16 +171,10 @@ scanVideos();
 scanShaders();
 scanSongs();
 
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-  
-  /*
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('acanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
-  */
   
 mV.load();
 loadV.load();
@@ -206,30 +191,28 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1650);
+},650);
 });
 
-var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
-
-let tem=document.getElementById('tim');
-let ban=document.getElementById('menuBtn');
-let sfr=document.getElementById('slideframe');
+const tem=document.getElementById('tim');
+const ban=document.getElementById('menuBtn');
+const sfr=document.getElementById('slideframe');
 function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;
 grab$lt();
-let slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
+const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();slt=$lt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-let tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:16.00},
+const tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
 step:[0.25],labels:false,tooltip:true,scale:false,});
 grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
 document.getElementById('menu').addEventListener('click',function(){
 $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
-setTimeout(function(){slt=tem.innerHTML;},8);},13);});
+setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 var adr='./intro.mp4';
 wi=1920;
 he=1080;
@@ -237,8 +220,8 @@ var hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 r$=hii/he;
 $w=wi*r$;
-let $ihigB=document.getElementById('ihid');
-let $ihig=document.getElementById('ihig');
+const $ihigB=document.getElementById('ihid');
+const $ihig=document.getElementById('ihig');
 $hg=hii+'px';
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 $iwid.innerHTML=parseInt($w,10);
@@ -258,19 +241,21 @@ if(e.code=='KeyZ'){lockVid=1;};
 if(e.code=='KeyX'){lockVid=0;};
 }
 
-let pnnl=document.body;
+const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
   
+document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
+document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
+  
 loadV.addEventListener('canplay',function(){
-  console.log('yep');
-// loadV.width=parseInt(this.videoWidth,10);
-// loadV.height=parseInt(this.videoHeight,10);
-loadV.height=parseInt(window.innerHeight,10);
-document.getElementById('wid').innerHTML=parseInt(loadV.videoWidth,10);
-document.getElementById('hig').innerHTML=parseInt(loadV.videoHeight,10);
+loadV.width=this.videoWidth;
+loadV.height=this.videoHeight;
+document.getElementById('wid').innerHTML=this.videoWidth;
+document.getElementById('hig').innerHTML=this.videoHeight;
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -281,8 +266,8 @@ $pt=$pt/1000000;
 document.getElementById('idur').innerHTML=mic/1000000;
 document.getElementById('itim').innerHTML=$pt;
 });
-
 var vide=document.querySelectorAll('video');
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 $lt=Math.round(tem.innerHTML);
@@ -300,14 +285,7 @@ r$=he/$h;
 $w=wi/r$;
 hii=$ihigB.innerHTML;
 var $hi=$h-hii;
-if($hi>1){
-$h=$ihigB.innerHTML;
-$ihig.innerHTML=$h;
-$r=$h/he;
-$r=$r*1000;
-$r=$r/1000;
-$w=wi*$r;
-};
+if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
 $hg=$h+'px';
 window.scroll(0,0);
 mv=vide[0].id;
@@ -317,27 +295,15 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 $iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
-  
-document.getElementById('ldv').height=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-document.getElementById('acanvas').height=window.innerHeight;
-document.getElementById('acanvas').width=window.innerHeight;
-document.getElementById('acanvas').style.height=window.innerHeight+'px';
-document.getElementById('acanvas').style.width=window.innerHeight+'px';
-document.getElementById('bcanvas').height=window.innerHeight;
-document.getElementById('bcanvas').width=window.innerHeight;
-document.getElementById('bcanvas').style.height=window.innerHeight+'px';
-document.getElementById('bcanvas').style.width=window.innerHeight+'px';
-document.getElementById('wid').innerHTML=parseInt(document.getElementById('mv').width,10);
-document.getElementById('hig').innerHTML=parseInt(document.getElementById('mv').height,10);
-document.getElementById('ldv').load();
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
+// document.getElementById('ldv').height=document.innerHeight;
+document.getElementById('ldv').load();
+// document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
+// document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 document.getElementById('di').click();
 };
 setTimeout(function(){
