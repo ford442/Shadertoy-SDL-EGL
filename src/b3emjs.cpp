@@ -293,14 +293,13 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
  
- gl.drawingBufferColorSpace='display-p3';
+gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-// var h$=vv.videoHeight;
-var w$=vv.videoWidth;
+h$=parseInt(vv.videoHeight,10);
+w$=parseInt(vv.videoWidth,10);
+ 
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
@@ -326,12 +325,11 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j
 var d=S();if(d)d();d=S();function S(){
     
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.FASTEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
  
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-// var h$=vv.videoHeight;
-var w$=vv.videoWidth;
+vv=document.getElementById("mv");
+h$=parseInt(vv.videoHeight,10);
+w$=parseInt(vv.videoWidth,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
@@ -376,7 +374,7 @@ if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
-}}} /*
+}}}
 if(f==false){
 if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
@@ -387,15 +385,12 @@ document.getElementById("mv").currentTime-=0.013333;
 }else{
 f=false;
 }}
-} */
+}
 }else{
-// if($F%4!=0){
-var $bb=R(vv);$B.set($bb,0,sz);
+var $bb=R(vv);
+$B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-// };
-// };
 Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
-// if($F%2==0){
 };
 if(sh4d==true){
 Module.ccall("frm");
