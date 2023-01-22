@@ -1,4 +1,6 @@
-
+double wi,hi;
+double Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX;
+double Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -64,9 +66,7 @@ char8_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
-double Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
 int_fast32_t iFrame,iFps,Size;
-double wi,hi;
 
 EGLDisplay display;
 EGLSurface surface;
