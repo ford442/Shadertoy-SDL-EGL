@@ -1,5 +1,3 @@
-#include <cstdint>
-#include <stdfloat>
 
 std::float64_t Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
 int_fast32_t iFrame,iFps,Size;
