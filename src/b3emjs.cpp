@@ -7,8 +7,8 @@ attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
-attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_FALSE;
+attr_js.preserveDrawingBuffer=EM_TRUE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -198,7 +198,7 @@ depth:true,
 stencil:true,
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
-preserveDrawingBuffer:false,
+preserveDrawingBuffer:true,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
