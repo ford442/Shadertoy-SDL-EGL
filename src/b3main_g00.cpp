@@ -36,9 +36,9 @@ setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
-},950);
+const bz=new BroadcastChannel('bez');
+bz.postMessage({data:222});
+},1950);
 }
   
 
