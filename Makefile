@@ -7,7 +7,7 @@ b3hd:
 	 -std=gnu++2b -stdlib=libc++ \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
-	 -mrelaxed-simd -msimd128 -mavx -mavx2 -DSIMD=128 \
+	 -mrelaxed-simd -msimd128 -mavx -DSIMD=128 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast 
