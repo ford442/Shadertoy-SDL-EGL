@@ -60,29 +60,36 @@ cloud:
 
 b3g00:
 	 em++ src/b3main_g00.cpp -c \
-         -fno-math-errno -std=gnu++2a -mcpu=bleeding-edge -fwasm-exceptions \
-	 -mbulk-memory -msign-ext -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
+         -std=gnu++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
+	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
+	 
 	 em++ src/b3ogl.cpp -c \
-	 -fno-math-errno -std=gnu++2a -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -mavx \
-	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
+	 -std=gnu++20 \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
+	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
+	 -msimd128 -mavx -DSIMD=128 \
+	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast 
+	 
 	 em++ src/b3sdl.cpp -c \
-	 -fno-math-errno -sUSE_SDL=2 -std=gnu++2a -matomics -fslp-vectorize \
+	 -sUSE_SDL=2 -std=gnu++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
-	 -mbulk-memory -msign-ext -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
+	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
+	 
 	 em++ src/b3emjs_g00.cpp -c \
-	 -fno-math-errno -std=gnu++2a -matomics \
-         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize \
-	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
+	 -std=gnu++11 \
+         -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
+	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off
-	 emcc b3main_g00.o b3ogl.o b3sdl.o b3emjs_g00.o -o g0001.js \
-	 -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -ffp-exception-behavior=maytrap -ffp-contract=off
+	 
+	 emcc b3main_g00.o b3ogl.o b3sdl.o b3emjs_g00.o -o g3020_g00.js \
+	 -sWASM_BIGINT=1 -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions \
+	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js setUp.js --pre-js startUp.js --post-js  rSlider.js --post-js  slideOut.js --post-js gpujs.js 
+         -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+          --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 txt:
 	 em++ src/b3main.cpp -c \
