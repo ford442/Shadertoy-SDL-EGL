@@ -23,21 +23,24 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
-var vvc=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
-var vve=vvc[0];
-vve.id='mcanvas';
 setTimeout(function(){
-Module.ccall('str');
-},550);
-
+Module.ccall('b3_egl');
+},1250);
 setTimeout(function(){
 Module.ccall('b3');
-},850);
+},1450);
 setTimeout(function(){
-const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});
-},1250);
+Module.ccall('str');
+},1750);
+setTimeout(function(){
+document.getElementById('shut').innerHTML=2;
+document.getElementById('circle').width=window.innerWidth;
+document.getElementById('circle').height=window.innerHeight;
+// const bz=new BroadcastChannel('bez');
+// bz.postMessage({data:222});
+},950);
 }
+  
 
 function pll(){
 Module.ccall('pl');
