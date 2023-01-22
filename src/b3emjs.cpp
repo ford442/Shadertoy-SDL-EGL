@@ -153,7 +153,7 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=document.getElementById("mv").currentTime;
-loopPart=(stp-(Math.floor(stp))+1.0)*2;
+loopPart=(stp-(Math.floor(stp))+1.0);
 loopLoop=true;
 f=false;
 };
@@ -209,8 +209,8 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-const g=new GPU({mode:'gpu|webgl2',canvas:bcanvas,webGl:gl});
-const g2=new GPU({mode:'gpu|webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
+const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
+const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((g-f)*((g)*(g-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -227,7 +227,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setPrecision("single").setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -281,10 +281,10 @@ gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALP
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
-gl.drawingBufferColorSpace='display-p3';
-gl.disable(gl.DITHER);
+ gl.disable(gl.DITHER);
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.drawingBufferColorSpace='display-p3';
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
