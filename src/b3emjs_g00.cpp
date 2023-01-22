@@ -131,40 +131,23 @@ EM_JS(void,ma,(),{
 
 "use strict";
 var vv=document.getElementById("mcanvas");
-var intervalLoop=null;
-var f;
-var loopLoop;
-var sh4d=true;
-var a,b;
-var stp;
-var loopPart;
-var mmvv;
  
-function stpBackForth(){
-loopLoop=false;
-}
-
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
 };
+ 
 if (e.code=='KeyZ'){
-mmvv=document.getElementById("mv");
-mmvv.pause();
-stp=document.getElementById("mv").currentTime;
-loopPart=(stp-(Math.floor(stp))+1.0);
-loopLoop=true;
-f=false;
+
 };
 if(e.code=='KeyX'){
-loopLoop=false;
-vv.play();
+
 };
 if(e.code=='KeyA'){
-sh4d=true;
+
 };
 if(e.code=='KeyS'){
-sh4d=false;
+
 };
 }
 
