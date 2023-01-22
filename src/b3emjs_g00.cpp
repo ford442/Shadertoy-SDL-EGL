@@ -130,7 +130,6 @@ return;
 EM_JS(void,ma,(),{
 
 "use strict";
-const vv=document.getElementById("mcanvas");
 var sh4d;
 function doKey(e){
 if(e.code=='Space'){
@@ -191,6 +190,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
+ 
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -294,6 +294,7 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 }
 var d=S();if(d)d();d=S();function S(){
+var vv=document.getElementById("mcanvas");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var h$=vv.videoHeight;
