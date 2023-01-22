@@ -384,7 +384,7 @@ $B.set($bb,0,sz);
 if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 };
-Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
 Module.ccall("frm");
 };
