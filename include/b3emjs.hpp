@@ -22,7 +22,7 @@ EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
 
-float64_t wi_js,hi_js;
+double wi_js,hi_js;
 int_fast32_t Size_js;
 
 EGLint const attribut_list_js[]={ 
