@@ -1,10 +1,10 @@
 b3hd:
 	 em++ src/b3main.cpp -c \
-         -std=c++2a -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
+         -std=c++23 -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3ogl.cpp -c \
-	 -std=c++2a -stdlib=libc++ \
+	 -std=c++23 -stdlib=libc++ \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -mrelaxed-simd -msimd128 -mavx -mavx2 -DSIMD=128 \
@@ -13,12 +13,12 @@ b3hd:
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast 
 	 
 	 em++ src/b3sdl.cpp -c \
-	 -sUSE_SDL=2 -std=c++2a -stdlib=libc++  -fslp-vectorize -ftree-vectorize \
+	 -sUSE_SDL=2 -std=c++23 -stdlib=libc++  -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3emjs.cpp -c \
-	 -std=c++2a -stdlib=libc++ \
+	 -std=c++23 -stdlib=libc++ \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -mrelaxed-simd -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
