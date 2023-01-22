@@ -288,7 +288,7 @@ var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-var vv=document.getElementById("mcanvas");
+var vv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
