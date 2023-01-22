@@ -24,8 +24,8 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffp-contract=off
 	 
-	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js \
-	 -sWASM_BIGINT=1 -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions \
+	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js -O0 \
+	 -s ASSERTIONS=1 -sWASM_BIGINT=1 -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
