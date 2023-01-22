@@ -1,10 +1,9 @@
-extern "C"{
-void str();
-};
 #include <cstdint>
-double Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
+#include <stdfloat>
+
+std::float64_t Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
 int_fast32_t iFrame,iFps,Size;
-double wi,hi;
+std::float64_t wi,hi;
 char * fileloc=(char*)"/shader/shader1.toy";
 
 void renderFrame();
@@ -25,7 +24,9 @@ struct timespec req={0,13333333};
 extern "C"{
   
 void clr(GLclampf,GLclampf,GLclampf);
-  
+
+void str();
+
 };
 
 GLuint atb_pos;
