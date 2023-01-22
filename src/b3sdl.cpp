@@ -1,8 +1,8 @@
 #include "../include/b3sdl.hpp"
 
-void SDLCALL bfr(void * unused,Uint8 * stm,int len){
+void SDLCALL bfr(void * unused,Uint8 * stm,int_fast32_t len){
 Uint8 * wptr;
-int lft;
+int_fast32_t lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while (lft<=len){
