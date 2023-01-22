@@ -4,7 +4,7 @@ b3hd:
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3ogl.cpp -c \
-	 -std=gnu++20 -O1 \
+	 -std=gnu++20 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -DSIMD=128 \
@@ -13,12 +13,12 @@ b3hd:
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 
 	 em++ src/b3sdl.cpp -c \
-	 -sUSE_SDL=2 -std=gnu++11 -fslp-vectorize -ftree-vectorize -O3 \
+	 -sUSE_SDL=2 -std=gnu++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3emjs.cpp -c \
-	 -std=gnu++11 -O0 \
+	 -std=gnu++11 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
