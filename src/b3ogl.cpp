@@ -2,8 +2,9 @@
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
+GLclampf drk=y1y-(avr-0.5);
 glBlendColor(avrg,avrg,avrg,y1y);
-glClearColor(y1y,y1y,y1y,y1y);
+glClearColor(drk,drk,drk,y1y-rlc);
 return;
 }
 
