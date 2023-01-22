@@ -1,8 +1,5 @@
 #include "../include/b3emsc.hpp"
 
-std::float64_t wi_js,hi_js;
-int_fast32_t Size_js;
-
 extern "C"{
 
 void b3();
@@ -24,6 +21,9 @@ EGLDisplay display_js;
 EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
+
+float64_t wi_js,hi_js;
+int_fast32_t Size_js;
 
 EGLint const attribut_list_js[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
