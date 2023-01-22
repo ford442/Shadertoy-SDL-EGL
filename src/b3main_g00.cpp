@@ -114,7 +114,11 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
+  
+  
 normalResStart();
+  
+  
 },150);
 };};
 ff.send(null);
@@ -191,25 +195,12 @@ document.getElementById('menu').addEventListener('click',function(){
 $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-var adr='./intro.mp4';
-wi=1920;
-he=1080;
-var hii=window.innerHeight;
-document.getElementById('ihid').innerHTML=hii;
-r$=hii/he;
-$w=wi*r$;
-const $ihigB=document.getElementById('ihid');
-const $ihig=document.getElementById('ihig');
-$hg=hii+'px';
-$ihig.innerHTML=parseInt(window.innerHeight,10);
-$iwid.innerHTML=parseInt($w,10);
+
 document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
-var vide=document.querySelectorAll('video');
 hii=window.innerHeight;
-document.getElementById('ihid').innerHTML=hii;
 window.scroll(0,0);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=window.innerHeight;
