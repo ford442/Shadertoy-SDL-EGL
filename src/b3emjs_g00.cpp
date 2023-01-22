@@ -130,8 +130,8 @@ return;
 EM_JS(void,ma,(),{
 
 "use strict";
-var vv=document.getElementById("mcanvas");
- 
+const vv=document.getElementById("mcanvas");
+var sh4d;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -144,10 +144,10 @@ if(e.code=='KeyX'){
 
 };
 if(e.code=='KeyA'){
-
+sh4d=true;
 };
 if(e.code=='KeyS'){
-
+sh4d=false;
 };
 }
 
