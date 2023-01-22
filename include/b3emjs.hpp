@@ -1,10 +1,14 @@
 #include "../include/b3emsc.hpp"
-double wi_js,hi_js,Size_js;
+
+double wi_js,hi_js;
+int_fast32_t Size_js;
 
 extern "C"{
+
 void b3();
 void b3_egl();
 void nano(short int,int,float *,float *);
+
 };
 
 static void avgFrm(short int,int,float *,float *);
