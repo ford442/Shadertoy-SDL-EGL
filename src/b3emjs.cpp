@@ -137,9 +137,9 @@ var f;
 var loopLoop;
 var sh4d=true;
 var a,b;
-var stp=document.getElementById("mv").currentTime;
-var loopPart=(stp-(Math.floor(stp))+1.0)*2;
-var mmvv=document.getElementById("mv");
+var stp;
+var loopPart;
+var mmvv;
  
 function stpBackForth(){
 loopLoop=false;
@@ -154,14 +154,11 @@ mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=document.getElementById("mv").currentTime;
 loopPart=(stp-(Math.floor(stp))+1.0)*2;
-// console.log(stp);
 loopLoop=true;
 f=false;
-// backForth(stp);
 };
 if(e.code=='KeyX'){
 loopLoop=false;
-// stpBackForth();
 vv.play();
 };
 if(e.code=='KeyA'){
@@ -364,7 +361,7 @@ if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
 }else{
 f=true;
-}}} /*
+};};};
 if(f==false){
 if(document.getElementById("mv").currentTime<(stp)){
 document.getElementById("mv").currentTime+=0.013333;
@@ -374,8 +371,8 @@ if(document.getElementById("mv").currentTime>(stp-loopPart)){
 document.getElementById("mv").currentTime-=0.013333;
 }else{
 f=false;
-}}
-} */
+};};
+};
 }else{
 if($F%4!=0){
 var $bb=R(vv);
