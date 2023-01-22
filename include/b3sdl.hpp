@@ -5,9 +5,9 @@
 
 char flnm[24];
 SDL_AudioDeviceID dev;
-struct{Uint8 * snd;int pos;Uint32 slen;SDL_AudioSpec request;}wave;
+struct{Uint8 * snd;int_fast32_t pos;Uint32 slen;SDL_AudioSpec request;}wave;
 
-void SDLCALL bfr(void *,Uint8 *,int);
+void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
   
 void plt();
 
