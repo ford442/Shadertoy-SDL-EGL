@@ -3,7 +3,7 @@ void str();
 };
 
 double Ttime,TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0,F=1.0f,Fm1=-1.0f,F0=0.0f;
-short int iFrame,iFps,Size;
+int_fast32_t iFrame,iFps,Size;
 double wi,hi;
 char * fileloc=(char*)"/shader/shader1.toy";
 
