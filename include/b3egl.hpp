@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cstdfloat>
 
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
