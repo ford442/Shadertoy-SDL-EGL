@@ -23,22 +23,28 @@ bz.postMessage({data:222});},350);
 }
 
 function normalResStart(){
+  setTimeout(function(){
+
+document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas')[0].id='mcanvas';
+    
+},550);
+  
 setTimeout(function(){
 Module.ccall('b3_egl');
-},1250);
+},1550);
 setTimeout(function(){
 Module.ccall('b3');
-},1450);
+},1750);
 setTimeout(function(){
 Module.ccall('str');
-},1750);
+},1950);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
-},1950);
+},2250);
 }
   
 
