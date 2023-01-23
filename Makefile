@@ -12,7 +12,7 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 
-	 em++ src/b3sdl.cpp -c -O2 \
+	 em++ src/b3sdl.cpp -c -O0 \
 	 -sUSE_SDL=2 -std=c++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
