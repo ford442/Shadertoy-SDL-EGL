@@ -227,13 +227,13 @@ const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
     const R=g2.createKernel(function(tv){
         const Pa=tv[this.thread.y][this.thread.x*4];
         return Ave(Pa[0],Pa[1],Pa[2]);
-    }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+    }).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
     const t=g.createKernel(function(v){
         const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
         const av$=Ave(P[0],P[1],P[2]);
         return[P[0],P[1],P[2],av$];
 // }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-    }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+    }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 // }).setTactic("precision").setPipeline(true).setPrecision('unsigned').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
     const r=g.createKernel(function(f){
         const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -257,7 +257,7 @@ const rr=Math.min((p[0]+grr),1.0)-((p[3]*0.3)*0.14);
 const gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 const bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
 this.color(rr,gg,bb,aveg);
-    }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+    }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
  
 #elif defined(CASTLE2)
   const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -278,12 +278,12 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPrecision('single').setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.amax;
@@ -309,10 +309,11 @@ var bb=Stoned(p[2],p[3],rng);
 // var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 // var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
   var ss=(Ave(rr,gg,bb)-p[3]);
-  var aveg=Aveg(p[3],ouT)+ss;
+ // var aveg=Aveg(p[3],ouT)+ss;
+  var aveg=Aveg(p[3],ouT);
 
 this.color(rr,gg,bb,aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
 
 #else
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
