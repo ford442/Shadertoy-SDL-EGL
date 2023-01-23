@@ -286,11 +286,11 @@ return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var $fmax=this.constants.fmax;
-var $fmin=this.constants.fmin;
+var $fmax=this.constants.amax;
+var $fmin=this.constants.amin;
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
-var $favg=this.constants.favg;
+var $favg=this.constants.aavg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var Min=(4.0*(($amax-($favg-$amin))/2.0));
