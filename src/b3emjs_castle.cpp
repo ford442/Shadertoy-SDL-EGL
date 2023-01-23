@@ -210,7 +210,7 @@ majorVersion:2,
 minorVersion:0
 });
  
-#ifdef CASTLE
+#if defined(CASTLE)
      const g=new GPU({canvas:bcanvas,webGl:gl_js});
     const g2=new GPU();
     const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
