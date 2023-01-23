@@ -4,7 +4,7 @@ b3hd:
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3ogl.cpp -c \
-	 -std=c++2b -nostdlib \
+	 -std=c++2b \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -DSIMD=128 \
