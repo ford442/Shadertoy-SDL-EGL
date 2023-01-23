@@ -1,5 +1,5 @@
 b3hd:
-	 em++ src/b3main.cpp -c -O3 -nostdlib \
+	 em++ src/b3main.cpp -c -O3 \
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
@@ -17,7 +17,7 @@ b3hd:
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
-	 em++ src/b3emjs.cpp -c -O0 -nostdlib \
+	 em++ src/b3emjs.cpp -c -O0 \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
