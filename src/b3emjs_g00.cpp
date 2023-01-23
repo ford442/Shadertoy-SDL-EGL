@@ -130,6 +130,10 @@ return;
 EM_JS(void,ma,(),{
 
 "use strict";
+ 
+// var vv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
+var vv=document.getElementById('mcanvas');
+
 var sh4d;
 function doKey(e){
 if(e.code=='Space'){
@@ -213,7 +217,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setPrecision("single").setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setPipeline(true).setPrecision("single").setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
@@ -292,7 +296,6 @@ var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-var vv=document.getElementsByClassName('mapsConsumerUiSceneInternalCoreScene__canvas widget-scene-canvas');
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
