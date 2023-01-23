@@ -51,7 +51,7 @@ castle:
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
 	 em++ src/b3emjs_castle.cpp -c -O0 -nostdlib \
-	 -std=c++2a -DCASTLE1 \
+	 -std=c++2a -DCASTLE2 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
