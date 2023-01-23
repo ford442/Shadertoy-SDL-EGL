@@ -25,7 +25,7 @@ b3hd:
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js -O0 -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 \
-	 -USE_GLFW=0 -sASSERTIONS=0 -sPRECISE_F32=1 -DNDEBUG -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
+	  -sRELOCATABLE=1 -USE_GLFW=0 -sASSERTIONS=0 -sPRECISE_F32=1 -DNDEBUG -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
