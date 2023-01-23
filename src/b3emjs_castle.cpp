@@ -210,7 +210,6 @@ majorVersion:2,
 minorVersion:0
 });
  
-#ifdef CASTLE
  
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl_js});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
@@ -243,40 +242,6 @@ const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
  
-#else
-
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl_js});
-const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
-const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((g-f)*((g)*(g-f)))))))/3.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
-g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
-g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-const R=g2.createKernel(function(tv){
-const Pa=tv[this.thread.y][this.thread.x*4];
-return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
-const t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
-return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
-const r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-const $amax=this.constants.amax;
-const $amin=this.constants.amin;
-const $aavg=this.constants.aavg;
-const alph=Alphe($amax,$amin,$aavg,p[3]);
-const Min=(4.0*(($amax-($aavg-$amin))/2.0));
-const ouT=Math.max(Min,alph);
-const aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-
-#endif
 
 gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
