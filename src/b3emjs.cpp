@@ -348,7 +348,6 @@ eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+
 }
 pointb=66*la;
 setTimeout(function(){
-M();
 if(loopLoop==true){
 if(f==true){
 if(document.getElementById("mv").currentTime>(stp)){
@@ -384,6 +383,7 @@ Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0
 if(sh4d==true){
 Module.ccall("frm");
 };
+M();
 },13.333333)}
 M();
 document.getElementById("di").onclick=function(){
