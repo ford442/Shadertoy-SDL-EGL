@@ -129,7 +129,6 @@ void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call);
-GLclampf mX,mY;
 iFps=60.0/delt;
 if(ms_l==true){
 if(clk_l==true){
@@ -139,8 +138,8 @@ mX=1.0-(xxx*Size);
 mY=1.0-(yyy*Size);
 clk_l=false;
 }
-GLclampf mm=S*xx;
-GLclampf nn=S*yy;
+mm=S*xx;
+nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
@@ -215,6 +214,8 @@ clk_l=true;
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
+mX=0.5*S;
+mY=0.5*S;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -374,7 +375,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-// return (EM_BOOL)0;
+return (EM_BOOL)1;
 }
 
 extern "C" {
