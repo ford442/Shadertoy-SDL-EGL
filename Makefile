@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp --wasm64 -c -nostdlib -sMEMORY64=2 \
+	 em++ src/b3ogl.cpp --target=wasm64 -c -nostdlib -sMEMORY64=2 \
 	 -std=c++2a -O0 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
