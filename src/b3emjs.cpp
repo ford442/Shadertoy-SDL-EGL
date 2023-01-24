@@ -13,6 +13,7 @@ var a,b;
 var stp;
 var stpInc=0.013333;
 var setTim;
+ var timFrm=13.333333;
 var loopPart;
 var mmvv;
  
@@ -240,7 +241,7 @@ f=false;
 
 if(f==false){
 setTim+=stpInc;
-if(setTim<=(stp+loopPart)){
+if(setTim<(stp+loopPart)){
 mmvv.currentTime=setTim;
 }
 else{
@@ -257,7 +258,7 @@ if(sh4d==true){
 Module.ccall("frm");
 };
 M();
-},13.333333)}
+},timFrm)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
