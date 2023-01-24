@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp -c -nostdlib --march=wasm64-emscripten \
+	 em++ src/b3ogl.cpp -c -nostdlib -march=wasm64-emscripten \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -9,23 +9,23 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast
 
-	 em++ src/b3emjs.cpp -c -O0 -nostdlib \
+	 em++ src/b3emjs.cpp -c -O0 -nostdlib -march=wasm64-emscripten \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off
 
-	 em++ src/b3sdl.cpp -c -O0 -nostdlib \
+	 em++ src/b3sdl.cpp -c -O0 -nostdlib -march=wasm64-emscripten \
 	 -sUSE_SDL=2 -std=c++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ src/b3main.cpp -c -O3 -nostdlib \
+	 em++ src/b3main.cpp -c -O3 -nostdlib -march=wasm64-emscripten \
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ b3main.o b3sdl.o -m64 b3ogl.o  b3emjs.o -o g3020.js -O0 -DNDEBUG --target=wasm64-unknown-emscripten -march=wasm64-emscripten \
+	 em++ b3main.o b3sdl.o -m64 b3ogl.o  b3emjs.o -o g3020.js -O0 -DNDEBUG -march=wasm64-emscripten \
 	 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sEMBIND_STD_STRING_IS_UTF8=0 -sTEXTDECODER=0 -sMALLOC="emmalloc" -sSUPPORT_LONGJMP=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=1 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
