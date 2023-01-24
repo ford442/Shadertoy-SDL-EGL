@@ -204,6 +204,10 @@ glAttachShader(shd_prg,vtx);
 atb_pos=0;
 glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
 glLinkProgram(shd_prg);
+  
+   glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+   glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+  
 glUseProgram(shd_prg);
 glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
@@ -240,10 +244,8 @@ glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 glDisable(GL_DITHER);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glEnable(GL_SCISSOR_TEST);
-  glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
+// glEnable(GL_SCISSOR_TEST);
 
-glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 auto t1=std::chrono::steady_clock::now();
 return;
 }
