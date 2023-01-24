@@ -33,7 +33,8 @@ void b3_egl();
 
 };
 
-
+GLclampf mX,mY;
+GLclampf mm,nn;
 GLuint atb_pos;
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
 GLfloat g1g=1.0,S;
