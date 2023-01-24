@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp -c -nostdlib -march=wasm64-emscripten -sMEMORY64=2 \
+	 em++ src/b3ogl.cpp -c -nostdlib -m64 -march=wasm64-emscripten -sMEMORY64=2 \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -21,8 +21,8 @@ b3hd:
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ b3main.o  -sMEMORY64=2  b3ogl.o  b3emjs.o -o g3020.js -O0 -DNDEBUG -march=wasm64-emscripten \
-	 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
+	 em++ b3main.o  -m64 -sMEMORY64=2  b3ogl.o  b3emjs.o -o g3020.js -O0 -DNDEBUG -march=wasm64-emscripten \
+	 -sWASMFS=1 -sPRECISE_F32=2 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sEMBIND_STD_STRING_IS_UTF8=0 -sTEXTDECODER=0 -sMALLOC="emmalloc" -sSUPPORT_LONGJMP=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=1 -fuse-ld=mold -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
