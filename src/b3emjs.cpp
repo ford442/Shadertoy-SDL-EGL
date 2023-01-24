@@ -17,9 +17,6 @@ var setTim;
 var loopPart;
 var mmvv;
  
-function stpBackForth(){
-loopLoop=false;
-}
 
 function doKey(e){
 if(e.code=='Space'){
@@ -32,7 +29,7 @@ stp=document.getElementById("mv").currentTime;
 setTim=stp;
 loopPart=(stp-(Math.floor(stp))+1.0);
 loopLoop=true;
-f=false;
+f=true;
 };
 if(e.code=='KeyX'){
 loopLoop=false;
@@ -243,11 +240,11 @@ if(f==false){
 setTim+=stpInc;
 if(setTim<(stp+loopPart)){
 mmvv.currentTime=setTim;
-}
-else{
+}else{
 f=true;
 };
 };
+
 };
  
 var $bb=R(vv);
