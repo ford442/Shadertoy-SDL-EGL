@@ -229,7 +229,7 @@ if(loopLoop==true){
 if(f==true){
 if(setTime>=(stp)){
 setTime-=stpInc;
-mmvv.currentTime=setTime;
+mmvv.currentTime=setTim;
 }else{
 f=false;
 };
