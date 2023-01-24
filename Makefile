@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp -c -nostdlib -sMEMORY64=2 \
+	 em++ src/b3ogl.cpp -mwasm64 -c -nostdlib -sMEMORY64=2 \
 	 -std=c++2a -O0 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -9,7 +9,7 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast
 
-	 em++ src/b3emjs.cpp -c -O0 -nostdlib -sMEMORY64=2 \
+	 em++ src/b3emjs.cpp -mwasm64 -c -O0 -nostdlib -sMEMORY64=2 \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
