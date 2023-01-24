@@ -11,6 +11,8 @@ var loopLoop;
 var sh4d=true;
 var a,b;
 var stp;
+var stpInc=0.013333;
+var setTim;
 var loopPart;
 var mmvv;
  
@@ -26,6 +28,7 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=document.getElementById("mv").currentTime;
+setTim=stp;
 loopPart=(stp-(Math.floor(stp))+1.0);
 loopLoop=true;
 f=false;
@@ -223,20 +226,29 @@ eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+
 }
 pointb=66*la;
 setTimeout(function(){
+ 
 if(loopLoop==true){
+ 
 if(f==true){
-if(document.getElementById("mv").currentTime>=(stp)){
-mmvv.currentTime-=0.013333;
+setTime-=stpInc;
+if(setTime>=(stp)){
+mmvv.currentTime-=setTime;
 }else{
 f=false;
-};};
+};
+};
+
 if(f==false){
-if(document.getElementById("mv").currentTime<=(stp+loopPart)){
-document.getElementById("mv").currentTime+=0.013333;
-}else{
+setTim+=stpInc;
+if(setTim<=(stp+loopPart)){
+mmvv.currentTime=setTim;
+}
+else{
 f=true;
 };
-};};
+};
+};
+ 
 var $bb=R(vv);
 $B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
