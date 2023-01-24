@@ -5,7 +5,6 @@ GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
 GLclampf drk=y1y-(avr-0.5);
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,y1y-rlc);
-return;
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
@@ -33,7 +32,6 @@ glUniform1f(uni_tme,time);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
-return;
 }
 
 void renderFrame(){
@@ -53,7 +51,6 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFinish();
 // nanosleep(&req,&rem);
-return;
 }
 
 char32_t * read_file(const GLchar * filename){
@@ -245,9 +242,7 @@ glDisable(GL_DITHER);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glEnable(GL_SCISSOR_TEST);
-
 auto t1=std::chrono::steady_clock::now();
-return;
 }
 
 static EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -262,24 +257,21 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-return (EM_BOOL)0;
+// return (EM_BOOL)0;
 }
 
 extern "C" {
 
 void str(){
 strt();
-return;
 }
 
 void frm(){
 renderFrame();
-return;
 }
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
 clrclr(cllr,alp,avr);
-return;
 }
 
 }
