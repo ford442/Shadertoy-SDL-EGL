@@ -85,7 +85,6 @@ glDisable(GL_DITHER);
 // glDisable(GL_DEPTH_TEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-return;
 }
 
 void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
@@ -116,14 +115,12 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
-return;
 }
 
 extern "C" {
 
 void nano(short int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-return;
 }
 
 }
@@ -336,9 +333,7 @@ var $B=new Float64Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
- 
 function M(){
-
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){
@@ -406,12 +401,10 @@ extern "C" {
  
 void b3_egl(){
 egl();
-return;
 }
 
 void b3(){
 ma();
-return;
 }
  
 }
