@@ -87,7 +87,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 }
 
-void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
+void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -119,7 +119,7 @@ aptr[200]=maxSum/32;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float * ptr,float * aptr){
+void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
@@ -371,14 +371,14 @@ f=false;
 };};
 };
 }else{
-if($F%4!=0){
+// if($F%4!=0){
 var $bb=R(vv);
 $B.set($bb,0,sz);
+// };
 };
-};
-if($F%2==0){
+// if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-};
+// };
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
 Module.ccall("frm");
