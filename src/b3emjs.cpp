@@ -29,7 +29,7 @@ stp=document.getElementById("mv").currentTime;
 setTim=stp;
 loopPart=(stp-(Math.floor(stp))+1.0);
 loopLoop=true;
-f=true;
+f=false;
 };
 if(e.code=='KeyX'){
 loopLoop=false;
