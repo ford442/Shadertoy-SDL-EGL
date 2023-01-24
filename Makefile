@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp -c -nostdlib \
+	 em++ src/b3ogl.cpp -c -nostdlib -m64 \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
