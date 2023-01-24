@@ -227,8 +227,8 @@ setTimeout(function(){
 if(loopLoop==true){
  
 if(f==true){
-if(setTime>=(stp)){
-setTime-=stpInc;
+if(setTim>=(stp)){
+setTim-=stpInc;
 mmvv.currentTime=setTim;
 }else{
 f=false;
