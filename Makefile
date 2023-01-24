@@ -1,7 +1,7 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp --target=wasm64 -c -nostdlib -sMEMORY64=2 \
-	 -std=c++2a -O0 \
+	 em++ src/b3ogl.cpp -c -nostdlib -sMEMORY64=2 \
+	 -std=c++2a -O0 -march=wasm64-emscripten \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -DSIMD=128 \
