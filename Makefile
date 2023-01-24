@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp -c -nostdlib \
+	 em++ src/b3ogl.cpp -c -nostdlib -sMEMORY64=2 \
 	 -std=c++2a -O0 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -9,7 +9,7 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast
 
-	 em++ src/b3emjs.cpp -c -O0 -nostdlib \
+	 em++ src/b3emjs.cpp -c -O0 -nostdlib -sMEMORY64=2 \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -26,7 +26,7 @@ b3hd:
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g3020.js -O0 -DNDEBUG \
-	 -sWASMFS=1 -sMEMORY64=2 \
+	 -sWASMFS=1 \
 	 -sEMBIND_STD_STRING_IS_UTF8=0 -sTEXTDECODER=0 -sMALLOC="emmalloc" -sSUPPORT_LONGJMP=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=2 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=128 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
