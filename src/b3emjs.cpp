@@ -1,10 +1,5 @@
 #include "../include/b3emjs.hpp"
 
-extern "C" {
-
-
-}
-
 EM_JS(void,ma,(),{
 
 "use strict";
@@ -230,35 +225,21 @@ pointb=66*la;
 setTimeout(function(){
 if(loopLoop==true){
 if(f==true){
-if(document.getElementById("mv").currentTime>(stp)){
+if(document.getElementById("mv").currentTime>=(stp)){
 mmvv.currentTime-=0.013333;
 }else{
 f=false;
-if(document.getElementById("mv").currentTime<(stp+loopPart)){
-document.getElementById("mv").currentTime+=0.013333;
-}else{
-f=true;
-};};};
-if(f==false){
-if(document.getElementById("mv").currentTime<(stp+loopPart)){
-document.getElementById("mv").currentTime+=0.013333;
-}else{
-f=true;
-if(document.getElementById("mv").currentTime>(stp)){
-document.getElementById("mv").currentTime-=0.013333;
-}else{
-f=false;
 };};
-};
+if(f==false){
+if(document.getElementById("mv").currentTime<=(stp+loopPart)){
+document.getElementById("mv").currentTime+=0.013333;
 }else{
-// if($F%4!=0){
+f=true;
+};
+};};
 var $bb=R(vv);
 $B.set($bb,0,sz);
-// };
-};
-// if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-// };
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
 Module.ccall("frm");
