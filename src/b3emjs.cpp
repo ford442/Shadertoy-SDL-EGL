@@ -13,10 +13,9 @@ var a,b;
 var stp;
 var stpInc=0.013333;
 var setTim;
- var timFrm=13.333333;
+var timFrm=13.333333;
 var loopPart;
 var mmvv;
- 
 
 function doKey(e){
 if(e.code=='Space'){
@@ -27,7 +26,7 @@ mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=document.getElementById("mv").currentTime;
 setTim=stp;
-loopPart=(stp-(Math.floor(stp))+1.0);
+loopPart=(stp+1.0)-(Math.floor(stp));
 loopLoop=true;
 f=false;
 };
@@ -230,7 +229,7 @@ if(loopLoop==true){
 if(f==true){
 setTime-=stpInc;
 if(setTime>=(stp)){
-mmvv.currentTime-=setTime;
+mmvv.currentTime=setTime;
 }else{
 f=false;
 };
