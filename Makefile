@@ -9,7 +9,7 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=fast
 
-	 em++ src/b3emjs.cpp -c -O0 -nostdlib --target=wasm64-unknown-emscripten -march=wasm64-emscripten \
+	 em++ src/b3emjs.cpp -c -O0 -nostdlib \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -25,7 +25,7 @@ b3hd:
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -O0 -DNDEBUG --target=wasm64-unknown-emscripten -march=wasm64-emscripten \
+	 em++ b3main.o b3sdl.o -mwasm64 b3ogl.o  b3emjs.o -o g3020.js -O0 -DNDEBUG --target=wasm64-unknown-emscripten -march=wasm64-emscripten \
 	 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sEMBIND_STD_STRING_IS_UTF8=0 -sTEXTDECODER=0 -sMALLOC="emmalloc" -sSUPPORT_LONGJMP=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=1 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
