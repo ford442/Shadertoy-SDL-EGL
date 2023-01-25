@@ -116,12 +116,12 @@ maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
 }
-
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-GLclampf avrg=((avr+(y1y-rlc))/2.0)+alc;
-GLclampf drk=y1y-(avr-0.5);
+brt=(((avr+(y1y-rlc))/2.0)+alc);
+drk=(y1y-(avr-0.5));
+brt=((y1y-rlc)-(alc-0.5));
 glBlendColor(avrg,avrg,avrg,y1y);
-glClearColor(drk,drk,drk,y1y-rlc);
+glClearColor(drk,drk,drk,brt);
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
