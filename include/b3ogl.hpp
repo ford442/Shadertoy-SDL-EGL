@@ -33,6 +33,8 @@ void b3_egl();
 
 };
 
+GLclampf avrg,drk,brt;
+
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
