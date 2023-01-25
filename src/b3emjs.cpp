@@ -16,7 +16,7 @@ var setTim;
 var timFrm=13.333333;
 var loopPart;
 var mmvv;
-var looP;
+var loopP;
  
 function doKey(e){
 if(e.code=='Space'){
@@ -28,7 +28,7 @@ mmvv.pause();
 stp=document.getElementById("mv").currentTime;
 setTim=stp;
 loopPart=(stp+1.0)-(Math.floor(stp));
-loopP=(stp+loopP);
+loopP=(stp+loopPart);
 loopLoop=true;
 f=false;
 };
