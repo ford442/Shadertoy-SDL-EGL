@@ -260,7 +260,7 @@ setTim+=stpInc;
 mmvv.currentTime=setTim;
 }else{
 var intt;
-eval("intt=0."+$F+$F+$F";");
+eval("intt=0."+$F+";");
 gl_js.blendColor(0.0,0.0,intt,1.0-intt);
 gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);
 Module.ccall("clr",null,["Number","Number","Number"],[1.0,0.5,0.1333]);
