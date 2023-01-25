@@ -251,7 +251,7 @@ f=false;
 };
 
 if(f==false){
-if(setTim<(loopP)){
+if(setTim<(stp+2.0)){
 gl_js.blendColor(0.0,0.777777,0.0,0.777777);
 gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.CONSTANT_COLOR);
 gl_js.blendEquationSeparate(gl.MIN,gl.MAX);
