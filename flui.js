@@ -66,7 +66,8 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 function getWebGLContext(canvas){
-const params={colorType:'float64',
+const params={
+colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
@@ -95,9 +96,9 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:false,
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'high',
-preserveDrawingBuffer:false,
+preserveDrawingBuffer:true,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
