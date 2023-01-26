@@ -242,7 +242,7 @@ var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");var $b"+i+"=t($"+i+");var $b"+i+"=R($r"+i+");$B.set($b"+i+",0,sz);var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";}");
+eval("if($F=="+i+"){var $r"+i+"=t($"+i+");var $b"+i+"=t($"+i+");var $b"+i+"=R($b"+i+");$B.set($b"+i+",0,sz);var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";}");
 }
 pointb=66*la;
 setTimeout(function(){
