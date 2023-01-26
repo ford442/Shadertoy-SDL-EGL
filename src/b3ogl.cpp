@@ -150,6 +150,10 @@ glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 }
 
+void uni_js(GLclampf avg1){
+glUniform1f(uni_alph,avg1);
+}
+
 void renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
@@ -386,6 +390,10 @@ strt();
 
 void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+}
+  
+void uni(GLclampf avg1){
+uni_js(avg1);
 }
 
 void frm(){
