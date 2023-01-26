@@ -229,9 +229,9 @@ if(loopLoop==true){
 var ccc=eval("'rgba(1.0,1.0,1.0,"+agav[0]+")';");
 alphCan.style.backgroundColor=ccc;
 if(f==true){
-setTime-=stpInc;
-if(setTime>=(stp)){
-mmvv.currentTime=setTime;
+setTim-=stpInc;
+if(setTim>=(stp)){
+mmvv.currentTime=setTim;
 }else{
 f=false;
 };
