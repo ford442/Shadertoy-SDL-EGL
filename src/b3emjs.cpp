@@ -115,8 +115,8 @@ const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+// g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+// g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
