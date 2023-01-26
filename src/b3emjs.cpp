@@ -7,7 +7,6 @@ var alphCan=document.getElementById("acanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var sh4d=true;
-var a,b;
 var stp,Lstp;
 var stpInc=0.016;
 var setTim;
@@ -244,7 +243,8 @@ var loca=$F+1;
 if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";}");
+eval("if($F=="+i+"){var $r"+i+"=t($"+i+");var $b"+i+"=t($"+i+");var $b"+i+"=R($r"+i+");$B.set($b"+i+",0,sz);
+var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";}");
 }
 pointb=66*la;
 setTimeout(function(){
@@ -255,8 +255,8 @@ reverseLoop();
 forwardLoop();
 };
 };
-var $bb=R(vv);
-$B.set($bb,0,sz);
+// var $bb=R(vv);
+// $B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
