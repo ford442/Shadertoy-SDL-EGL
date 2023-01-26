@@ -45,9 +45,10 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
 stp=document.getElementById("mv").currentTime;
-setTim=stp;
-loopPart=(stp+2.0)-(Math.floor(stp));
+loopPart=(stp+2.5)-(Math.floor(stp));
 Lstp=stp-loopPart;
+stp-=loopPart/2.0;
+setTim=stp;
 loopLoop=true;
 revv=true;
 };
