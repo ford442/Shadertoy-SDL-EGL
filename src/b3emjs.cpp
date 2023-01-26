@@ -226,7 +226,8 @@ pointb=66*la;
 setTimeout(function(){
  
 if(loopLoop==true){
-alphCan.style.backgroundColor=eval("'rgba(1.0,1.0,1.0,"+agav[0]+)';");
+var ccc=eval("'rgba(1.0,1.0,1.0,"+agav[0]+")';");
+alphCan.style.backgroundColor=ccc;
 if(f==true){
 setTime-=stpInc;
 if(setTime>=(stp)){
