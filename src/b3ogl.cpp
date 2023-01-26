@@ -25,6 +25,8 @@ eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(int)hi_js;
+  glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -83,8 +85,7 @@ glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glDisable(GL_DITHER);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+
 }
 
 void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
@@ -221,7 +222,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -242,7 +243,8 @@ eglMakeCurrent(display,surface,surface,contextegl);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_make_context_current(ctx);
   
-
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
   
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -298,6 +300,16 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_gpu_shader5");
   
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearDepth(D);
+glEnable(GL_BLEND);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+glDisable(GL_DITHER);
+
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
@@ -348,17 +360,6 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
   // glDisable(GL_STENCIL_TEST);
-glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
-glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glDisable(GL_DITHER);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glEnable(GL_SCISSOR_TEST);
 auto t1=std::chrono::steady_clock::now();
 }
