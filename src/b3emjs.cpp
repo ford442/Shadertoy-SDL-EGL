@@ -9,15 +9,14 @@ var intervalLoop=null;
 var f;
 var loopLoop;
 var sh4d=true;
-
+var a,b;
 var stp;
 var stpInc=0.013333;
 var setTim;
 var timFrm=13.333333;
 var loopPart;
 var mmvv;
-var loopP;
- 
+
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -28,23 +27,11 @@ mmvv.pause();
 stp=document.getElementById("mv").currentTime;
 setTim=stp;
 loopPart=(stp+1.0)-(Math.floor(stp));
-loopP=(stp+loopPart);
 loopLoop=true;
 f=false;
 };
 if(e.code=='KeyX'){
 loopLoop=false;
-gl_js.blendColor(1.0,1.0,1.0,1.0);
-gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
-gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-var stp;
-var stpInc=0.013333;
-var setTim;
-var timFrm=13.333333;
-var loopPart;
-var mmvv;
-var looP;
 vv.play();
 };
 if(e.code=='KeyA'){
@@ -240,30 +227,19 @@ setTimeout(function(){
 if(loopLoop==true){
  
 if(f==true){
-if(setTim>=(stp)){
-setTim-=stpInc;
-mmvv.currentTime=setTim;
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+setTime-=stpInc;
+if(setTime>=(stp)){
+mmvv.currentTime=setTime;
 }else{
-gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);
 f=false;
 };
 };
 
 if(f==false){
-if(setTim<(stp+2.0)){
-gl_js.blendColor(0.0,0.777777,0.0,0.777777);
-gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.CONSTANT_COLOR);
-gl_js.blendEquationSeparate(gl.MIN,gl.MAX);
-gl_js.enable(gl.DITHER);
 setTim+=stpInc;
+if(setTim<(stp+loopPart)){
 mmvv.currentTime=setTim;
 }else{
-var intt;
-eval("intt=0."+$F+";");
-gl_js.blendColor(0.0,0.0,intt,1.0-intt);
-gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);
-Module.ccall("clr",null,["Number","Number","Number"],[1.0,0.5,0.1333]);
 f=true;
 };
 };
@@ -274,6 +250,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+Module.ccall("uni",null,["Number"],[agav[1]]);
 if(sh4d==true){
 Module.ccall("frm");
 };
