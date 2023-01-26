@@ -20,7 +20,7 @@ var revv;
 function forwardLoop(){
 setTim=mmvv.currentTime;
 setTim+=stpInc;
-if(setTim<stp){
+if(setTim<=stp){
 mmvv.currentTime=setTim;
 }else{
 revv=true;
@@ -30,7 +30,7 @@ revv=true;
 function reverseLoop(){
 setTim=mmvv.currentTime;
 setTim-=stpInc;
-if(setTim>Lstp){
+if(setTim>=Lstp){
 mmvv.currentTime=setTim;
 }else{
 revv=false;
