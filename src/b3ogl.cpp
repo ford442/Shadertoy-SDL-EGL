@@ -150,10 +150,6 @@ glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 }
 
-void uni_js(GLclampf avg1){
-glUniform1f(uni_alph,avg1);
-}
-
 void renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
@@ -345,7 +341,6 @@ uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
-// uni_alph=glGetUniformLocation(shd_prg,"iAlpha");
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
@@ -391,10 +386,6 @@ strt();
 
 void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-}
-  
-void uni(GLclampf avg1){
-uni_js(avg1);
 }
 
 void frm(){
