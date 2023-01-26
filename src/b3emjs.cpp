@@ -3,6 +3,7 @@
 EM_JS(void,ma,(),{
 
 "use strict";
+var alphCan=document.getElementById("acanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var intervalLoop=null;
@@ -225,7 +226,7 @@ pointb=66*la;
 setTimeout(function(){
  
 if(loopLoop==true){
- 
+eval("alphCan.style.background-color='rgba(1.0,1.0,1.0,"+agav[0]+)';";
 if(f==true){
 setTime-=stpInc;
 if(setTime>=(stp)){
