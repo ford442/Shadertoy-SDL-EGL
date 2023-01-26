@@ -83,6 +83,8 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
+gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl_js});
 const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -156,8 +158,7 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
-gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 gl_js.drawingBufferColorSpace='display-p3';
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
