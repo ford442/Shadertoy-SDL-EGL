@@ -345,6 +345,7 @@ uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
+uni_alph=glGetUniformLocation(shd_prg,"iAlpha");
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
