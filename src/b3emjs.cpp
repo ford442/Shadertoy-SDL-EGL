@@ -6,19 +6,37 @@ EM_JS(void,ma,(),{
 var alphCan=document.getElementById("acanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
-var intervalLoop=null;
-var f;
-var loopLoop;
 var sh4d=true;
 var a,b;
-var stp;
-var stpInc=0.013333;
+var stp,Lstp;
+var stpInc=0.016;
 var setTim;
-var timFrm=13.333333;
+var timFrm=16.666;
+var loopLoop;
 var loopPart;
 var mmvv;
-var mmvvTime;
+var revv;
 
+function forwardLoop(){
+setTim=mmvv.currentTime;
+setTim+=stpInc;
+if(setTim<stp){
+mmvv.currentTime=setTim;
+}else{
+revv=true;
+};
+}
+ 
+function reverseLoop(){
+setTim=mmvv.currentTime;
+setTim-=stpInc;
+if(setTim>Lstp){
+mmvv.currentTime=setTim;
+}else{
+revv=false;
+};
+}
+  
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -26,12 +44,12 @@ e.preventDefault();
 if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
-mmvvTime=mmvv.currentTime;
 stp=document.getElementById("mv").currentTime;
 setTim=stp;
-loopPart=(stp+1.0)-(Math.floor(stp));
+loopPart=(stp+2.0)-(Math.floor(stp));
+Lstp=stp-loopPart;
 loopLoop=true;
-f=false;
+revv=true;
 };
 if(e.code=='KeyX'){
 loopLoop=false;
@@ -44,6 +62,8 @@ if(e.code=='KeyS'){
 sh4d=false;
 };
 }
+ 
+
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
@@ -227,35 +247,17 @@ eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+
 }
 pointb=66*la;
 setTimeout(function(){
- 
 if(loopLoop==true){
-// var ccc=eval("'rgba(1.0,1.0,1.0,"+agav[0]+")';");
-// alphCan.style.backgroundColor=ccc;
-if(f==true){
-setTim-=stpInc;
-if(setTim>=(stp)){
-mmvvTime=setTim;
+if(revv==true){
+reverseLoop();
 }else{
-f=false;
+forwardLoop();
 };
 };
-
-if(f==false){
-setTim+=stpInc;
-if(setTim<(stp+loopPart)){
-mmvvTime=setTim;
-}else{
-f=true;
-};
-};
-
-};
- 
 var $bb=R(vv);
 $B.set($bb,0,sz);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
-// Module.ccall("uni",null,["Number"],[agav[1]]);
 if(sh4d==true){
 Module.ccall("frm");
 };
