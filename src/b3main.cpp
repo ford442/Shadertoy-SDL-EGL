@@ -89,7 +89,7 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $sngs[i]=Self+'songs/'+txxt;
-}}
+};}
 
 function vids(xml){
 const vparser=new DOMParser();
@@ -102,7 +102,7 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $vids[i]=Self+'video/'+txxt;
-}}
+};}
 
 function shds(xml){
 const sparser=new DOMParser();
@@ -142,7 +142,7 @@ const nxhttp=new XMLHttpRequest();
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
-}};
+};};
 nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
@@ -152,7 +152,7 @@ const fxhttp=new XMLHttpRequest();
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
-}};
+};};
 fxhttp.open('GET','video/',true);
 fxhttp.send();
 }
@@ -162,7 +162,7 @@ const dxhttp=new XMLHttpRequest();
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
-}};
+};};
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
@@ -197,7 +197,11 @@ snd();
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
-function grab$lt(){$lt=Math.round($lt);}
+
+function grab$lt(){
+$lt=Math.round($lt);
+}
+
 $lt=tem.innerHTML;
 grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
@@ -325,4 +329,4 @@ FS.mkdir("/shader");
 js_main();
 return 0;
 
-}
+};
