@@ -134,7 +134,7 @@ aptr[200]=maxSum/32;
 };
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 brt=(((avr+(y1y-rlc))/2.0)+alc);
-drk=(y1y-(avr-0.5));
+drk=avr-0.5;
 brt=((y1y-rlc)-(alc-0.5));
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
