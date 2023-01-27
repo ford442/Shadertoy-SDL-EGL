@@ -252,13 +252,12 @@ var locb=$Bu+1;
 if(locb>64){locb=1;};
 if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
+};
+};
 $bb=R(vv);
 $B.set($bb,0,sz);
-};
-};
 pointb=66*la;
 setTimeout(function(){
-
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
