@@ -244,7 +244,7 @@ if(loca>64){loca=1;}
 var locb=$Bu+1;
 if(locb>64){locb=1;}
 if($F==i){
-eval("var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
+eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 $bb=R(vv);
 $B.set($bb,0,sz);
 }
@@ -279,7 +279,6 @@ T=true;
 });
 
 extern "C" {
-
 
 void b3(){
 ma();
