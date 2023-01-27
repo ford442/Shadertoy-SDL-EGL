@@ -40,10 +40,10 @@ eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(int)hi_js;
-  glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
+// emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_depth_texture");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_draw_buffers");
@@ -132,9 +132,10 @@ maxSum+=aptr[i+200];
 };
 aptr[200]=maxSum/32;
 };
+
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-brt=(((avr+(y1y-rlc))/2.0)+alc);
-drk=avr-0.5;
+avrg=(((avr+(y1y-rlc))/2.0)+alc);
+drk=y1y-(avr-0.5);
 brt=((y1y-rlc)-(alc-0.5));
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
