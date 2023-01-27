@@ -207,4 +207,5 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_RESULT ret;
 EM_BOOL ms_l,clk_l;
 
-static EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
+EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
+static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
