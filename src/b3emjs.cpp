@@ -238,6 +238,13 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 if(T){
 return;
 };
+if(loopLoop==true){
+if(revv==true){
+reverseLoop();
+}else{
+forwardLoop();
+};
+};
 for(var i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;};
@@ -251,18 +258,13 @@ $B.set($bb,0,sz);
 };
 pointb=66*la;
 setTimeout(function(){
-if(loopLoop==true){
-if(revv==true){
-reverseLoop();
-}else{
-forwardLoop();
-};
-};
+
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
 Module.ccall("frm");
 };
+   
 M();
 },timFrm)};
 M();
