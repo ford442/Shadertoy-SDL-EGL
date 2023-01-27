@@ -236,15 +236,6 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 if(T){
 return;
 };
-
-if(loopLoop==true){
-if(revv==true){
-reverseLoop();
-}else{
-forwardLoop();
-};
-};
-
 for(var i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;};
@@ -257,6 +248,13 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
+if(loopLoop==true){
+if(revv==true){
+reverseLoop();
+}else{
+forwardLoop();
+};
+};
 if(sh4d==true){
 Module.ccall("frm");
 };
