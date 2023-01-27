@@ -170,7 +170,7 @@ const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArguments('HTMLVideo').setPrecision('single').setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setPrecision('single').setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 const $amax=this.constants.amax;
