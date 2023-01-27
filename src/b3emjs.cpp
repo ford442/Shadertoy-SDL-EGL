@@ -182,7 +182,6 @@ const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -197,7 +196,7 @@ agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
 }
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
@@ -226,7 +225,7 @@ var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float64Array($H,pointb,sz);
