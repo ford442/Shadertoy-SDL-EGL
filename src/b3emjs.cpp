@@ -257,13 +257,12 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-setTimeout(function(){
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==true){
 Module.ccall("frm");
 };
-   
+setTimeout(function(){
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 M();
 },timFrm)};
 M();
