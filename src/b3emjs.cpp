@@ -149,11 +149,9 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
-
 gl_js.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
-const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
- 
+const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((g-f)*((g)*(g-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -165,7 +163,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
@@ -181,7 +179,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
@@ -238,6 +236,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 if(T){
 return;
 };
+
 if(loopLoop==true){
 if(revv==true){
 reverseLoop();
@@ -245,6 +244,7 @@ reverseLoop();
 forwardLoop();
 };
 };
+
 for(var i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;};
