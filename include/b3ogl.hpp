@@ -49,7 +49,7 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 const GLchar * sources[4];
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
-  
+"#extension WEBGL_color_buffer_float : enable\n"
 "\n #undef HW_PERFORMANCE\n"
 "\n #define HW_PERFORMANCE 0\n"
 "\n precision highp float;precision mediump sampler3D;precision mediump samplerCube;precision mediump sampler2D;precision mediump atomic_uint;\n";
@@ -61,8 +61,6 @@ const GLchar fragment_shader_header_gles3[]=
 "\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "\n out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
-"\n #undef HW_PERFORMANCE\n"
-"\n #define HW_PERFORMANCE 0\n"
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
 const GLchar * vertex_shader_body=vertex_shader_body_gles3;
