@@ -51,7 +51,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "\n #undef HW_PERFORMANCE\n"
 "\n #define HW_PERFORMANCE 0\n"
-"\n precision highp float;precision mediump sampler3D;precision mediump sampler2D;precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;precision mediump samplerCubeShadow;precision mediump sampler2DArrayShadow;\n";
+"\n precision highp float;precision highp sampler3D;precision highp sampler2D;precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
