@@ -123,37 +123,8 @@ const slo=new Slideout({
 grab$lt();
     slt=$lt/1000;
     slt=Math.round(slt);
-sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({
-  target:'#timeslider',
-  values:{
-    min:0.25,
-    max:30.00
-    },
-  step:[0.25],
-  labels:false,
-  tooltip:true,
-  scale:false,
-});
-grab$lt();
-    slt=($lt/1000);
-    slt=slt*100;
-    slt=Math.round(slt);
-slt=slt/100;
-    tsl.setValues(slt);
-document.getElementById('menu').addEventListener('click',function(){
-  $ll=tsl.getValue();
-  $ll=$ll*100;
-  $ll=Math.round($ll);
-  $ll=$ll/100;
-  $ll=($ll*1000);
-  tem.innerHTML=$ll;
   });
-setTimeout(function(){
-  slt=tem.innerHTML;
-},8);
-  },16);
-  });
+    
   wi=parseInt(window.innerHeight,10);
   he=parseInt(window.innerHeight,10);
   var hii=window.innerHeight;
