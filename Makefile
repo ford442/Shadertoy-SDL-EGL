@@ -1,12 +1,12 @@
 b3hd:
-
-	 em++ src/b3ogl.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -Dsimd=avx \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
+	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on -mllvm
 
 	 em++ src/b3emjs.cpp -c -O0 -std=c++11 -fno-math-errno -fPIC -fexperimental-library \
 	 -Dsimd=sse42 \
