@@ -66,6 +66,10 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 
+
+function getWebGLContext(canvas){
+
+if (document.getElementById('ffire').innerHTML=='0'){
 var params={
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
@@ -74,11 +78,11 @@ logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
-imageSmoothingEnabled:false,
-imageSmoothingQuality:'medium',
+stencil:true,
+imageSmoothingEnabled:true,
+imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
-premultipliedAlpha:true,
+premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
@@ -88,22 +92,30 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 };
-
-function doKeys(e){
-if(e.code=='KeyT'){
-params.preserveDrawingBuffer=true;
-var gl=canvas.getContext('webgl2',params);
+}else{
+var params={
+colorType:'float64',
+preferLowPowerToHighPerformance:false,
+precision:'highp',
+logarithmicDepthBuffer:true,
+colorSpace:'display-p3',
+alpha:true,
+depth:true,
+stencil:true,
+imageSmoothingEnabled:true,
+imageSmoothingQuality:'high',
+preserveDrawingBuffer:true,
+premultipliedAlpha:false,
+desynchronized:false,
+lowLatency:true,
+powerPreference:'high-performance',
+antialias:true,
+willReadFrequently:false,
+xrCompatible:false,
+majorVersion:2,
+minorVersion:0
 };
-if(e.code=='KeyY'){
-params.preserveDrawingBuffer=false;
-var gl=canvas.getContext('webgl2',params);
 };
-}
- 
-var pnnls=document.body;
-pnnls.addEventListener('keydown',doKeys);
- 
-function getWebGLContext(canvas){
 
 var gl=canvas.getContext('webgl2',params);
  
