@@ -66,7 +66,7 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 function getWebGLContext(canvas){
-const params={
+var params={
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
@@ -87,30 +87,24 @@ willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
-const gl=canvas.getContext('webgl2',{
-colorType:'float64',
-preferLowPowerToHighPerformance:false,
-precision:'highp',
-logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
-alpha:true,
-depth:true,
-stencil:false,
-imageSmoothingEnabled:true,
-imageSmoothingQuality:'high',
-preserveDrawingBuffer:false,
-premultipliedAlpha:false,
-desynchronized:false,
-lowLatency:true,
-powerPreference:'high-performance',
-antialias:true,
-willReadFrequently:false,
-xrCompatible:false,
-majorVersion:2,
-minorVersion:0
-});
+var gl=canvas.getContext('webgl2',params);
+ 
+function doKeys(e){
+if(e.code=='KeyT'){
+params.preserveDrawingBuffer=true;
+gl=canvas.getContext('webgl2',params);
+};
+if(e.code=='KeyY'){
+params.preserveDrawingBuffer=false;
+gl=canvas.getContext('webgl2',params);
+};
+}
+ 
+var pnnls=document.body;
+pnnls.addEventListener('keydown',doKeys);
+ 
 const isWebGL2=!!gl;
-if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
+if(!isWebGL2) gl=canvas.getContext('webgl2',params) || canvas.getContext('webgl2',params);
 let halfFloat;
 let supportLinearFiltering;
 if(isWebGL2){
