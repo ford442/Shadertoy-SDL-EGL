@@ -66,21 +66,6 @@ if(!ext.supportLinearFiltering){
 }
 startGUI();
 
-function doKeys(e){
-if(e.code=='KeyT'){
-params.preserveDrawingBuffer=true;
-gl=canvas.getContext('webgl2',params);
-};
-if(e.code=='KeyY'){
-params.preserveDrawingBuffer=false;
-gl=canvas.getContext('webgl2',params);
-};
-}
- 
-var pnnls=document.body;
-pnnls.addEventListener('keydown',doKeys);
- 
-function getWebGLContext(canvas){
 var params={
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
@@ -101,7 +86,25 @@ antialias:true,
 willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
-minorVersion:0};
+minorVersion:0
+};
+
+function doKeys(e){
+if(e.code=='KeyT'){
+params.preserveDrawingBuffer=true;
+var gl=canvas.getContext('webgl2',params);
+};
+if(e.code=='KeyY'){
+params.preserveDrawingBuffer=false;
+var gl=canvas.getContext('webgl2',params);
+};
+}
+ 
+var pnnls=document.body;
+pnnls.addEventListener('keydown',doKeys);
+ 
+function getWebGLContext(canvas){
+
 var gl=canvas.getContext('webgl2',params);
  
 const isWebGL2=!!gl;
