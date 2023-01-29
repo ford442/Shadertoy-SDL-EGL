@@ -106,7 +106,6 @@ emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
 glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 
-
 };
 
 void egla(){
@@ -195,46 +194,8 @@ emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
 glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 
-
 };
 
-void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];};
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];};
-};
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-};
-aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-};
-aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-};
-aptr[200]=maxSum/32;
-};
-
-void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avrg=(((avr+(y1y-rlc))/2.0)+alc);
-drk=y1y-(avr-0.5);
-brt=((y1y-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,y1y);
-glClearColor(drk,drk,drk,brt);
-};
 
 void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
@@ -480,6 +441,8 @@ glReleaseShaderCompiler();
   // glDisable(GL_STENCIL_TEST);
 // glEnable(GL_SCISSOR_TEST);
 auto t1=std::chrono::steady_clock::now();
+  emscripten_set_main_loop((void(*)())renderFrame,0,0);
+
 };
 
 extern "C" {
@@ -487,22 +450,9 @@ extern "C" {
 void str(){
 strt();
 };
-
-void nano(int Fnum,int leng,float * ptr,float * aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-};
-
-void frm(){
-renderFrame();
-};
  
 void b3_egl(){
 egla();
-egl();
-};
-
-void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
-clrclr(cllr,alp,avr);
 };
 
 };
