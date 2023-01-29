@@ -176,6 +176,8 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j
 }
 sh4d=true;
 var d=S();if(d)d();d=S();function S(){
+  var vv=document.getElementById('mcanvas');
+
 w$=parseInt(vv.width,10);
 h$=parseInt(vv.height,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
@@ -196,6 +198,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
  
 function M(){
+ var vv=document.getElementById('mcanvas');
 
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -223,7 +226,6 @@ Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1
 if(sh4d==true){
 Module.ccall("frm");
 };
- var vv=document.getElementById('mcanvas');
 
 },13.333333)}
 M();
