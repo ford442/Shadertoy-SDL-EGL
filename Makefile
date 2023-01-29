@@ -24,7 +24,7 @@ b3hd:
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 emcc b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0  -mllvm -polly -static -DNDEBUG -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 emcc b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -polly -static -DNDEBUG -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=avx -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
