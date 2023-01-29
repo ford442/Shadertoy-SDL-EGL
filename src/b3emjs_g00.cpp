@@ -78,12 +78,12 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
-glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
-glDisable(GL_DITHER);
+ glDisable(GL_DITHER);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
 return;
 }
 
@@ -159,8 +159,8 @@ pnnl.addEventListener('keydown',doKey);
 // var w$=parseInt(document.getElementById("wid").innerHTML,10);
 // var h$=parseInt(document.getElementById("hig").innerHTML,10);
  
- var w$=parseInt(window.innerHeight,10);
-var h$=parseInt(window.innerHeight,10);
+var w$=parseInt(vv.width,10);
+var h$=parseInt(vv.height,10);
  
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
@@ -275,8 +275,8 @@ gl.disable(gl.DITHER);
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.drawingBufferColorSpace='display-p3';
-w$=parseInt(window.innerHeight,10);
-h$=parseInt(window.innerHeight,10);
+w$=parseInt(vv.width,10);
+h$=parseInt(vv.height,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
@@ -302,8 +302,8 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(window.innerHeight,10);
-h$=parseInt(window.innerHeight,10);
+w$=parseInt(vv.width,10);
+h$=parseInt(vv.height,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
