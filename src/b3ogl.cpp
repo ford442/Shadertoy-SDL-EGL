@@ -100,11 +100,12 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader4");
 emscripten_webgl_enable_extension(ctx_js,"GL_EXT_gpu_shader5");
-glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glDisable(GL_DITHER);
+  glDisable(GL_DITHER);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
+glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
+glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+
 
 };
 
@@ -351,7 +352,8 @@ glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
 atb_pos=0;
 glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
-glLinkProgram(shd_prg);
+  
+// glLinkProgram(shd_prg);
   
    glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
    glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
@@ -384,8 +386,6 @@ glReleaseShaderCompiler();
 // glEnable(GL_SCISSOR_TEST);
 auto t1=std::chrono::steady_clock::now();
 };
-
-
 
 extern "C" {
 
