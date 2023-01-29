@@ -36,7 +36,7 @@ setTimeout(function(){
 Module.ccall('b3');
 },1750);
 setTimeout(function(){
-Module.ccall('str');
+// Module.ccall('str');
 },1950);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
