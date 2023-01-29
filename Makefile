@@ -1,6 +1,6 @@
 b3hd:
 
-	 em++ src/b3ogl.cpp -c -fno-math-errno -fPIC  -fexperimental-library  -mllvm -polly \
+	 em++ src/b3ogl.cpp -c -fno-math-errno -fPIC  -fexperimental-library -mllvm \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -9,19 +9,19 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 
-	 em++ src/b3emjs.cpp -c -O0 -fno-math-errno -fPIC  -fexperimental-library  -mllvm -polly \
+	 em++ src/b3emjs.cpp -c -O0 -fno-math-errno -fPIC  -fexperimental-library -mllvm \
 	 -std=c++11 -Dsimd=sse42 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on
 
-	 em++ src/b3sdl.cpp -c -O0 -fno-math-errno -fPIC  -fexperimental-library  -mllvm -polly \
+	 em++ src/b3sdl.cpp -c -O0 -fno-math-errno -fPIC  -fexperimental-library -mllvm \
 	 -sUSE_SDL=2 -std=c++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ src/b3main.cpp -c -O3 -fno-math-errno -fPIC  -fexperimental-library  -mllvm -polly \
+	 em++ src/b3main.cpp -c -O3 -fno-math-errno -fPIC  -fexperimental-library -mllvm \
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
