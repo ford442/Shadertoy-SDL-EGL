@@ -65,6 +65,21 @@ if(!ext.supportLinearFiltering){
  config.SUNRAYS=false;
 }
 startGUI();
+
+function doKeys(e){
+if(e.code=='KeyT'){
+params.preserveDrawingBuffer=true;
+gl=canvas.getContext('webgl2',params);
+};
+if(e.code=='KeyY'){
+params.preserveDrawingBuffer=false;
+gl=canvas.getContext('webgl2',params);
+};
+}
+ 
+var pnnls=document.body;
+pnnls.addEventListener('keydown',doKeys);
+ 
 function getWebGLContext(canvas){
 var params={
 colorType:'float64',
@@ -88,20 +103,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
 var gl=canvas.getContext('webgl2',params);
- 
-function doKeys(e){
-if(e.code=='KeyT'){
-params.preserveDrawingBuffer=true;
-gl=canvas.getContext('webgl2',params);
-};
-if(e.code=='KeyY'){
-params.preserveDrawingBuffer=false;
-gl=canvas.getContext('webgl2',params);
-};
-}
- 
-var pnnls=document.body;
-pnnls.addEventListener('keydown',doKeys);
  
 const isWebGL2=!!gl;
 if(!isWebGL2) gl=canvas.getContext('webgl2',params) || canvas.getContext('webgl2',params);
