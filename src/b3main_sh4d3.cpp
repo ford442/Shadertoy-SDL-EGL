@@ -30,6 +30,8 @@ EM_JS(void,js_main,(),{
 
   function normalResStart(){
     setTimeout(function(){
+Module.ccall('b3_egl');
+          },350);
     setTimeout(function(){
       Module.ccall('str');
     },750);
