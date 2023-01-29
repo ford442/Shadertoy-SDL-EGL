@@ -33,7 +33,7 @@ b3hd:
           --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 sh4d3:
-	 em++  src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 em++  src/b3ogl_sh4d3.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -46,7 +46,7 @@ sh4d3:
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 emcc b3main_sh4d3.o b3ogl.o -o s3005.js -std=c++11 -fPIC -fexperimental-library -O0 -mllvm -polly -static -DNDEBUG -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 emcc b3main_sh4d3.o b3ogl_sh4d3.o -o s3005.js -std=c++11 -fPIC -fexperimental-library -O0 -mllvm -polly -static -DNDEBUG -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=avx -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
