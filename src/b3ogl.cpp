@@ -353,8 +353,14 @@ glAttachShader(shd_prg,vtx);
 atb_pos=0;
 glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
   
-// glLinkProgram(shd_prg);
-  
+glLinkProgram(shd_prg);
+  uni_tme=glGetUniformLocation(shd_prg,"iTime");
+uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
+uni_frm=glGetUniformLocation(shd_prg,"iFrame");
+uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
+uni_res=glGetUniformLocation(shd_prg,"iResolution");
+uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
    glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
    glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
   
@@ -369,13 +375,9 @@ glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
-uni_tme=glGetUniformLocation(shd_prg,"iTime");
-uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
-uni_frm=glGetUniformLocation(shd_prg,"iFrame");
-uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
-uni_res=glGetUniformLocation(shd_prg,"iResolution");
-uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
+
+  
+  
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
 glUniform3f(smp_chn_res,S,S,g1g);
