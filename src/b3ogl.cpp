@@ -497,8 +497,8 @@ renderFrame();
 };
  
 void b3_egl(){
-egl();
 egla();
+egl();
 };
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
