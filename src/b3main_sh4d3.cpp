@@ -119,12 +119,9 @@ const slo=new Slideout({
   ban.addEventListener('click',function(){
     slo.toggle();
     sfr.innerHTML="";
-  setTimeout(function(){
-grab$lt();
-    slt=$lt/1000;
-    slt=Math.round(slt);
+
   });
-    
+
   wi=parseInt(window.innerHeight,10);
   he=parseInt(window.innerHeight,10);
   var hii=window.innerHeight;
@@ -171,13 +168,13 @@ grab$lt();
       document.getElementById('circle').height=parseInt(window.innerHeight,10);
       document.getElementById('circle').width=parseInt(window.innerWidth,10);
       document.getElementById('di').click();
-    setTimeout(function(){
-      loada();
-    },$ldt);
+      setTimeout(function(){
+        loada();
+      },$ldt);
   }
   loada();
 
-  });
+});
 
   int main(){
 
