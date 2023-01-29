@@ -498,6 +498,7 @@ renderFrame();
  
 void b3_egl(){
 egl();
+egla();
 };
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
