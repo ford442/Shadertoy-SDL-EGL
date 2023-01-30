@@ -332,7 +332,7 @@ document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
-document.getElementById('ldv').height=window.innerHeight;
+// document.getElementById('ldv').height=window.innerHeight;
 document.getElementById('ldv').load();
 document.getElementById('di').click();
 };
