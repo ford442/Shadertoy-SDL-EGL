@@ -187,10 +187,11 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
+scanSongs();
 document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 scanShaders();
-scanSongs();
+
 });
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
