@@ -198,8 +198,6 @@ scanShaders();
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('iwid').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 
@@ -278,9 +276,7 @@ pnnl.addEventListener('keydown',spKey);
 function loada(){
 if(lockVid!=1){
 
-document.getElementById('wid').innerHTML=parseInt(document.innerHeight,10);
-document.getElementById('hig').innerHTML=parseInt(document.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
