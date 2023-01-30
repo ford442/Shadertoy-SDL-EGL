@@ -66,8 +66,8 @@ sh4d=false;
  
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=parseInt(window.innerHeight,10);
+var h$=parseInt(window.innerHeight,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
 const $H=Module.HEAPF64.buffer;
@@ -183,8 +183,8 @@ const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=parseInt(window.innerHeight,10);
+var h$=parseInt(window.innerHeight,10);
 vv=document.getElementById("mv");
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
@@ -213,8 +213,8 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=parseInt(window.innerHeight,10);
+var h$=parseInt(window.innerHeight,10);
 // var h$=vv.videoHeight;
 // var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
