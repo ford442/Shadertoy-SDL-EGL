@@ -165,8 +165,8 @@ const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
 }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
-// const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-const P=v[this.thread.y][this.thread.x];
+const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+// const P=v[this.thread.y][this.thread.x];
 // const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 const av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
@@ -214,11 +214,11 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($
 };
 var d=S();if(d)d();d=S();function S(){
 lvv=document.getElementById("ldv");
-var w$=parseInt(window.innerHeight,10);
-var h$=parseInt(window.innerHeight,10);
+// var w$=parseInt(window.innerHeight,10);
+// var h$=parseInt(window.innerHeight,10);
 vv=document.getElementById("mv");
-// var h$=vv.videoHeight;
-// var w$=vv.videoWidth;
+var h$=vv.videoHeight;
+var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*1)/2.0),0);
 var nblank$=Math.max((((h$-w$)*1)/2.0),0);
 la=h$*h$*8;
