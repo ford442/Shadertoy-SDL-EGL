@@ -49,8 +49,8 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 const GLchar * sources[4];
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
-"#version 300 es\n"
 "\n #undef HW_PERFORMANCE\n"
+"\n #define HW_PERFORMANCE 0\n"
 "\n precision highp float;precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;"
