@@ -53,7 +53,7 @@ const GLchar common_shader_header_gles3[]=
 "\n #define HW_PERFORMANCE 0\n"
 "\n precision highp float;precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;"
+/*"precision highp isampler2D;"
 "precision highp isampler3D;"
 "precision highp isamplerCube;"
 "precision highp isampler2DArray;"
@@ -76,7 +76,7 @@ const GLchar common_shader_header_gles3[]=
 "precision highp imageCube;"
 "precision highp iimageCube;"
 "precision highp uimageCube;"
-// "precision highp struct;"
+ "precision highp struct;" */
 "precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
