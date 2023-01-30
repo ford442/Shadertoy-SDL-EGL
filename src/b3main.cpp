@@ -4,7 +4,7 @@ EM_JS(void,js_main,(),{
 
 "use strict";
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
-
+/*
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
@@ -35,7 +35,8 @@ document.getElementById('circle').height=window.innerHeight;
 // bz.postMessage({data:222});
 },1250);
 }
-
+*/
+  
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('b3_egl');
@@ -206,11 +207,13 @@ var looc='video/';
 fxhttp.open('GET',looc,true);
 fxhttp.send();
 };
+setTimeout(function(){
 if(vidMenu2!='Default'){
 var looc=vidMenu2+'video/';
 fxhttpB.open('GET',looc,true);
 fxhttpB.send();
-};
+};},500);
+  
 }
 
 function scanShaders(){
