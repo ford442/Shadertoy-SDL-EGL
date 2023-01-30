@@ -102,13 +102,15 @@ var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
-// const vidMenu1=document.getElementById('vi1').value;
-// if(vidMenu1!='Default'){
-// $vids[i]=vidMenu1+'video/'+txxt;
-// }else{
+const vidMenu1=document.getElementById('vi1').value;
+const vidMenu2=document.getElementById('vi2').value;
+const vidMenu3=document.getElementById('vi3').value;
+if(vidMenu1!='Default'){
+$vids[i]=vidMenu1+txxt;
+}else{
 $vids[i]=Self+'video/'+txxt;
-// };
-};}
+};
+}
 
 function shds(xml){
 const sparser=new DOMParser();
