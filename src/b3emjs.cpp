@@ -108,7 +108,7 @@ minorVersion:0
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl_js.getExtension('WEBGL_color_buffer_float');
-// gl_js.getExtension('WEBGL_color_buffer_half_float');
+gl_js.getExtension('WEBGL_color_buffer_half_float');
 gl_js.getExtension('OES_texture_float_linear');
 gl_js.getExtension('OES_texture_half_float_linear');
 gl_js.getExtension('EXT_float_blend');
@@ -142,10 +142,7 @@ gl_js.getExtension('EGL_NV_depth_nonlinear');
 gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl_js.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
-// gl_js.getExtension('ARB_multisample');
-
-// gl.enable(gl.SAMPLE_COVERAGE);
-
+gl_js.getExtension('ARB_multisample');
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl_js.blendColor(1.0,1.0,1.0,1.0);
 gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
