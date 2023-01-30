@@ -3,7 +3,8 @@
 EM_JS(void,ma,(),{
 
 "use strict";
-var alphCan=document.getElementById("acanvas");
+const alphCan=document.getElementById("acanvas");
+const bCan=document.getElementById("bcanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var sh4d=true;
@@ -16,7 +17,7 @@ var loopPart;
 var mmvv;
 var revv;
 var $bb;
-   
+
 function forwardLoop(){
 setTim=mmvv.currentTime;
 setTim+=stpInc;
@@ -63,7 +64,7 @@ if(e.code=='KeyS'){
 sh4d=false;
 };
 }
- 
+
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -74,7 +75,7 @@ const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
-var sz=(h$*w$)/8;
+var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -151,7 +152,7 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
-const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
+const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -163,7 +164,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 // const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
@@ -191,7 +192,7 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*w$)/8;
+sz=(h$*h$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
@@ -220,7 +221,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*w$)/8;
+sz=(h$*h$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
