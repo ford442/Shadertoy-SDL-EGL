@@ -3,20 +3,19 @@
 EM_JS(void,ma,(),{
 
 "use strict";
-const alphCan=document.getElementById("acanvas");
-const bCan=document.getElementById("bcanvas");
+var alphCan=document.getElementById("acanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var sh4d=true;
 var stp,Lstp;
-const stpInc=0.0166;
-let setTim=0.000000;
-const timFrm=16.666;
+var stpInc=0.01;
+var setTim;
+var timFrm=10.0;
 var loopLoop;
 var loopPart;
 var mmvv;
 var revv;
-let $bb;
+var $bb;
    
 function forwardLoop(){
 setTim=mmvv.currentTime;
@@ -74,8 +73,8 @@ var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,304);
-var sz=(h$*h$)/8;
+var agav=new Float64Array($H,pointa,300);
+var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -90,9 +89,9 @@ precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
-depth:true,
-stencil:true,
-imageSmoothingEnabled:false,
+depth:false,
+stencil:false,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:true,
 premultipliedAlpha:false,
@@ -107,8 +106,6 @@ minorVersion:0
 });
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-//    gl_js.enable(gl.SAMPLE_COVERAGE);
-// gl_js.sampleCoverage(1.0, false);
 gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
 gl_js.getExtension('OES_texture_float_linear');
@@ -153,8 +150,8 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
-const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
+const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl_js});
+const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -166,7 +163,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setOptimizeFloatMemory(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 // const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
@@ -194,9 +191,9 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*h$)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,304);
+agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -223,9 +220,9 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*h$)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,304);
+var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
@@ -237,13 +234,6 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
-if(loopLoop==true){
-if(revv==true){
-reverseLoop();
-}else{
-forwardLoop();
-};
-};
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){
@@ -258,7 +248,7 @@ if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
-$bb=R(bCan);
+$bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 if(sh4d==true){
@@ -268,7 +258,13 @@ setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 M();
-
+if(loopLoop==true){
+if(revv==true){
+reverseLoop();
+}else{
+forwardLoop();
+};
+};
 },timFrm)};
 M();
 document.getElementById("di").onclick=function(){
