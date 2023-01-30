@@ -214,11 +214,11 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($
 };
 var d=S();if(d)d();d=S();function S(){
 lvv=document.getElementById("ldv");
-// var w$=parseInt(window.innerHeight,10);
-// var h$=parseInt(window.innerHeight,10);
+var w$=parseInt(window.innerHeight,10);
+var h$=parseInt(window.innerHeight,10);
 vv=document.getElementById("mv");
-var h$=vv.videoHeight;
-var w$=vv.videoWidth;
+// var h$=vv.videoHeight;
+// var w$=vv.videoWidth;
 var blank$=Math.max((((w$-h$)*1)/2.0),0);
 var nblank$=Math.max((((h$-w$)*1)/2.0),0);
 la=h$*h$*8;
