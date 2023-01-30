@@ -146,7 +146,7 @@ setTimeout(function(){
 
   normalResStart();
 
-},350);
+},650);
 };};
 ff.send(null);
 }
