@@ -40,20 +40,20 @@ document.getElementById('circle').height=window.innerHeight;
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('b3_egl');
-},250);
+},150);
 setTimeout(function(){
 Module.ccall('b3');
-},450);
+},350);
 setTimeout(function(){
 Module.ccall('str');
-},750);
+},550);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},1050);
+},850);
 }
 
 function pll(){
@@ -69,7 +69,7 @@ FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},750);
+},550);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -147,7 +147,7 @@ setTimeout(function(){
 
   normalResStart();
 
-},450);
+},750);
 };};
 ff.send(null);
 }
