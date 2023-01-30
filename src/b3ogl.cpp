@@ -151,7 +151,7 @@ emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
-// emscripten_webgl_enable_extension(ctx_js,"GL_single_precision");
+emscripten_webgl_enable_extension(ctx_js,"GL_single_precision");
 emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
 emscripten_webgl_enable_extension(ctx_js,"OES_frag_depth");
@@ -350,13 +350,12 @@ eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+
 emscripten_webgl_make_context_current(ctx);
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
+  emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
