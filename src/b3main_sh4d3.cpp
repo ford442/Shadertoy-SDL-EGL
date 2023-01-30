@@ -127,9 +127,6 @@ const slo=new Slideout({
   document.getElementById('wrap').style.lineheight=$hg;
   document.getElementById('wrap').style.pointerEvents='auto';
 
-  const pnnl=document.body;
-  pnnl.addEventListener('keydown',spKey);
-
   function loada(){
       document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
       document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
