@@ -85,11 +85,11 @@ const htmlDocs=nparser.parseFromString(xml.responseText,'text/html');
 const preList=htmlDocs.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $sngs[0]=preList.length;
 for(var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
+var stxxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
-$sngs[i]=Self+'songs/'+txxt;
+stxxt=stxxt.replace(Self,"");
+$sngs[i]=Self+'songs/'+stxxt;
 };}
 
 function vids(xml){
@@ -98,13 +98,13 @@ const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
 const preList=htmlDocv.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $vids[0]=preList.length;
 for(var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
+var vtxxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
+vtxxt=vtxxt.replace(Self,"");
 const vidMenu1=document.getElementById('vi1').value;
-var ar1=vidMenu1+'video/'+txxt;
-var ar2=Self+'video/'+txxt;
+var ar1=vidMenu1+'video/'+vtxxt;
+var ar2=Self+'video/'+vtxxt;
 if(vidMenu1!='Default'){
 $vids[i]=ar1;
 }else{
@@ -118,11 +118,11 @@ const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
 const preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
+var txxts=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
-$shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
+txxts=txxts.replace(Self,"");
+$shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 };
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
