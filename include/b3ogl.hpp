@@ -51,7 +51,6 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#version 300 es\n"
 "\n #undef HW_PERFORMANCE\n"
-"\n #extension GL_EXT_color_buffer_float : enable\n"
 "\n precision highp float;precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;"
