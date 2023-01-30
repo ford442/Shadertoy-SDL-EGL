@@ -171,7 +171,7 @@ vids(this);
   
 const vidMenu1=document.getElementById('vi1').value;
 if(vidMenu1!='Default'){
-var looc=vidMenu1+'video/'+txxt;
+var looc=vidMenu1+'video/';
 }else{
 var looc='video/';
 };
