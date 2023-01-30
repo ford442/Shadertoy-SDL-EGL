@@ -3,20 +3,20 @@
 EM_JS(void,ma,(),{
 
 "use strict";
-var alphCan=document.getElementById("acanvas");
+const alphCan=document.getElementById("acanvas");
 const bCan=document.getElementById("bcanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var sh4d=true;
 var stp,Lstp;
-var stpInc=0.01;
-var setTim;
-var timFrm=10.0;
+const stpInc=0.0166;
+let setTim=0.000000;
+const timFrm=16.666;
 var loopLoop;
 var loopPart;
 var mmvv;
 var revv;
-var $bb;
+let $bb;
    
 function forwardLoop(){
 setTim=mmvv.currentTime;
@@ -235,6 +235,13 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
+if(loopLoop==true){
+if(revv==true){
+reverseLoop();
+}else{
+forwardLoop();
+};
+};
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){
@@ -259,13 +266,7 @@ setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 M();
-if(loopLoop==true){
-if(revv==true){
-reverseLoop();
-}else{
-forwardLoop();
-};
-};
+
 },timFrm)};
 M();
 document.getElementById("di").onclick=function(){
