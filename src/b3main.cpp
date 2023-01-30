@@ -125,14 +125,8 @@ var vtxxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 vtxxt=vtxxt.replace(Self,"");
-const vidMenu1=document.getElementById('vi2').value;
-var ar1=vidMenu1+'video/'+vtxxt;
-var ar2=Self+'video/'+vtxxt;
-if(vidMenu2!='Default'){
-$vids[i+vids1]=ar1;
-}else{
-$vids[i+vids1]=ar2;
-};
+const vidMenu2=document.getElementById('vi2').value;
+$vids[i+vids1]=vidMenu2+'video/'+vtxxt;
 };
 }
 
