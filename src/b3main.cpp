@@ -283,8 +283,9 @@ if(lockVid!=1){
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 
 loadV.addEventListener('canplay',function(){
-loadV.width=this.videoWidth;
-loadV.height=this.videoHeight;
+loadV.height=parseInt(window.innerHeight,10);
+//  loadV.width=this.videoWidth;
+
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 
