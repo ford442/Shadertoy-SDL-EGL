@@ -74,8 +74,8 @@ var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
-var sz=(h$*w$)/8;
+var agav=new Float64Array($H,pointa,304);
+var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -90,9 +90,9 @@ precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
-depth:false,
-stencil:false,
-imageSmoothingEnabled:true,
+depth:true,
+stencil:true,
+imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:true,
 premultipliedAlpha:false,
@@ -152,9 +152,6 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
-   
-
-   
 gl_js.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
 const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
@@ -197,9 +194,9 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*w$)/8;
+sz=(h$*h$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -226,9 +223,9 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*w$)/8;
+sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
