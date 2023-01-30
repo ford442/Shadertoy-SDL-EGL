@@ -107,7 +107,7 @@ minorVersion:0
 });
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl_js.getExtension('EXT_color_buffer_float');
+// gl_js.getExtension('EXT_color_buffer_float');
 // gl_js.getExtension('WEBGL_color_buffer_half_float');
 gl_js.getExtension('OES_texture_float_linear');
 gl_js.getExtension('OES_texture_half_float_linear');
