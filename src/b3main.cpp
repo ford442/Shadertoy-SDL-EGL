@@ -108,7 +108,7 @@ $vids[i]=vidMenu1+''+txxt;
 }else{
 $vids[i]=Self+'video/'+txxt;
 };
-}}
+};}
 
 function shds(xml){
 const sparser=new DOMParser();
