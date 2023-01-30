@@ -104,7 +104,7 @@ Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 const vidMenu1=document.getElementById('vi1').value;
 if(vidMenu1!='Default'){
-$vids[i]=vidMenu1+''+txxt;
+$vids[i]=vidMenu1+txxt+'';
 }else{
 $vids[i]=Self+'video/'+txxt;
 };
