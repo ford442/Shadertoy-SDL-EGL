@@ -160,6 +160,7 @@ gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
  gl.disable(gl.DITHER);
+ gl.enable(gl.SAMPLE_COVERAGE);
 gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 }else{
@@ -200,6 +201,7 @@ gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
  gl.disable(gl.DITHER);
+  gl.enable(gl.SAMPLE_COVERAGE);
 gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
