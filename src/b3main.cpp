@@ -102,8 +102,15 @@ var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
+const vidMenu1=document.getElementById('vi1').value;
+const vidMenu2=document.getElementById('vi2').value;
+const vidMenu3=document.getElementById('vi3').value;
+if(vidMenu1!='Default'){
+$vids[i]=vidMenu1+txxt;
+}else{
 $vids[i]=Self+'video/'+txxt;
-};}
+};
+}
 
 function shds(xml){
 const sparser=new DOMParser();
@@ -161,20 +168,11 @@ fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
 };};
-const vidMenu1=document.getElementById('vi1').value;
-const vidMenu2=document.getElementById('vi2').value;
-const vidMenu3=document.getElementById('vi3').value;
-if(vidMenu1!='Default'){
-fxhttp.open('GET',vidMenu1,true);
-fxhttp.send();
-}else{
+
 fxhttp.open('GET','video/',true);
 fxhttp.send();
 };
-if(vidMenu2!='Default'){
-};
-if(vidMenu3!='Default'){
-};
+
 }
 
 function scanShaders(){
