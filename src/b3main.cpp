@@ -53,7 +53,7 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},1150);
+},1050);
 }
 
 function pll(){
@@ -147,7 +147,7 @@ setTimeout(function(){
 
   normalResStart();
 
-},650);
+},450);
 };};
 ff.send(null);
 }
