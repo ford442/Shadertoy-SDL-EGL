@@ -115,6 +115,7 @@ $vids[i]=ar2;
 
 }
   
+/*
 function vids2(xml){
 const vparser=new DOMParser();
 const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
@@ -130,7 +131,8 @@ const vidMenu2=document.getElementById('vi2').value;
 $vids[i+vids1]=vidMenu2+'video/'+vtxxt;
 };
 }
-
+*/
+  
 function shds(xml){
 const sparser=new DOMParser();
 const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
@@ -207,13 +209,14 @@ var looc='video/';
 fxhttp.open('GET',looc,true);
 fxhttp.send();
 };
+/*
 setTimeout(function(){
 if(vidMenu2!='Default'){
 var looc=vidMenu2+'video/';
 fxhttpB.open('GET',looc,true);
 fxhttpB.send();
 };},500);
-  
+  */
 }
 
 function scanShaders(){
