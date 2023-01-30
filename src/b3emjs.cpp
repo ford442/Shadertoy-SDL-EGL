@@ -20,7 +20,7 @@ var $bb;
 function forwardLoop(){
 setTim=mmvv.currentTime;
 setTim+=stpInc;
-if(setTim<=stp){
+if(setTim<stp){
 mmvv.currentTime=setTim;
 }else{
 revv=true;
