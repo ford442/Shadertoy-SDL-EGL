@@ -103,10 +103,12 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 const vidMenu1=document.getElementById('vi1').value;
+var ar1=vidMenu1+txxt;
+var ar2=Self+'video/'+txxt;
 if(vidMenu1!='Default'){
-$vids[i]=vidMenu1+txxt;
+$vids[i]=ar1;
 }else{
-$vids[i]=Self+'video/'+txxt;
+$vids[i]=ar2;
 };
 };}
 
