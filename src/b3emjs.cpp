@@ -150,6 +150,9 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
+   
+  gl_js.enable(gl.SAMPLE_COVERAGE);
+   
 gl_js.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
 const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
