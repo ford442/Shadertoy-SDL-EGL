@@ -37,6 +37,8 @@ document.getElementById('circle').height=window.innerHeight;
 }
 
 function normalResStart(){
+  
+  
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
@@ -118,7 +120,14 @@ $shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
 };
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
+const shdMenu=document.getElementById('sh1');
+if (shdMenu.value!='Default'){
+if (shdMenu.value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
+}else{
+document.getElementById('path').'https://glsl.1ink.us/shaders/'+shdMenu.value;
+};
+};
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -153,8 +162,20 @@ fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
 };};
+const vidMenu1=document.getElementById('vi1').value;
+const vidMenu2=document.getElementById('vi2').value;
+const vidMenu3=document.getElementById('vi3').value;
+if(vidMenu1!='Default'){
+fxhttp.open('GET',vidMenu1,true);
+fxhttp.send();
+}else{
 fxhttp.open('GET','video/',true);
 fxhttp.send();
+};
+if(vidMenu2!='Default'){
+};
+if(vidMenu3!='Default'){
+};
 }
 
 function scanShaders(){
