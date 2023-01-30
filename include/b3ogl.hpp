@@ -49,9 +49,9 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 const GLchar * sources[4];
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
-"\n #undef HW_PERFORMANCE\n"
-"\n #define HW_PERFORMANCE 0\n"
-"\n precision highp float;precision highp sampler3D;precision highp sampler2D;"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
+"precision highp float;precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;"
 "precision highp isampler3D;"
@@ -61,33 +61,14 @@ const GLchar common_shader_header_gles3[]=
 "precision highp usampler3D;"
 "precision highp usamplerCube;"
 "precision highp usampler2DArray;"
- /*  
-  "precision highp image2D;"
-// // "precision highp sampler2DMS;"
-"precision highp isampler2DMS;"
-"precision highp usampler2DMS;"
-"precision highp image2DArray;"
-"precision highp iimage2DArray;"
-"precision highp uimage2DArray;"
-"precision highp iimage2D;"
-"precision highp uimage2D;"
-"precision highp image3D;"
-"precision highp iimage3D;"
-"precision highp uimage3D;"
-"precision highp imageCube;"
-"precision highp iimageCube;"
-"precision highp uimageCube;"
-// // "precision highp struct;"
-*/
-  
 "precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
-"\n uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"\n uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
-"\n uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"\n out vec4 fragColor;\n";
+"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
@@ -115,8 +96,8 @@ EGLint config_size,major,minor;
 
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
