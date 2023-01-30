@@ -37,15 +37,14 @@ document.getElementById('circle').height=window.innerHeight;
 }
 
 function normalResStart(){
-  
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },450);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
