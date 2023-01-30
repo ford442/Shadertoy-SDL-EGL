@@ -123,14 +123,14 @@ const slo=new Slideout({
   const $ihig=document.getElementById('ihig');
   $hg=hii+'px';
   $ihig.innerHTML=parseInt(window.innerHeight,10);
-  $iwid.innerHTML=parseInt($w,10);
+  $iwid.innerHTML=parseInt(window.innerHeight,10);
   document.getElementById('wrap').style.lineheight=$hg;
   document.getElementById('wrap').style.pointerEvents='auto';
 
   function loada(){
-      document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
-      document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
-      document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
+      document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
+      document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
+      document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
       document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
       hii=window.innerHeight;
       document.getElementById('ihid').innerHTML=hii;
