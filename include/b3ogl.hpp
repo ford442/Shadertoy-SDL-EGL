@@ -61,7 +61,7 @@ const GLchar common_shader_header_gles3[]=
 "precision highp usampler3D;"
 "precision highp usamplerCube;"
 "precision highp usampler2DArray;"
-// "precision highp sampler2DMS;"
+/* "precision highp sampler2DMS;"
 // "precision highp isampler2DMS;"
 // "precision highp usampler2DMS;"
 "precision highp image2DArray;"
@@ -75,8 +75,8 @@ const GLchar common_shader_header_gles3[]=
 "precision highp uimage3D;"
 "precision highp imageCube;"
 "precision highp iimageCube;"
-"precision highp uimageCube;"
-//  "precision highp struct;"
+"precision highp uimageCube;"*/
+"precision highp struct;"
 "precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
