@@ -120,11 +120,11 @@ $shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 const shdMenu=document.getElementById('sh1');
-if (shdMenu.value!='Default'){
-if (shdMenu.value=='Random'){
+if(shdMenu.value!='Default'){
+if(shdMenu.value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
 }else{
-document.getElementById('path').'https://glsl.1ink.us/shaders/'+shdMenu.value;
+document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
 };
 };
 var pth=document.getElementById('path').innerHTML;
