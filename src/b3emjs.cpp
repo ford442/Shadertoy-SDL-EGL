@@ -143,6 +143,9 @@ gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl_js.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 gl_js.getExtension('ARB_multisample');
+
+  gl.enable(gl.SAMPLE_COVERAGE);
+
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl_js.blendColor(1.0,1.0,1.0,1.0);
 gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
