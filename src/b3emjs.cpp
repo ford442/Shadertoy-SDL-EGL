@@ -251,13 +251,6 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-if(loopLoop==true){
-if(revv==true){
-reverseLoop();
-}else{
-forwardLoop();
-};
-};
 if(sh4d==true){
 Module.ccall("frm");
 };
@@ -265,6 +258,13 @@ setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 M();
+if(loopLoop==true){
+if(revv==true){
+reverseLoop();
+}else{
+forwardLoop();
+};
+};
 },timFrm)};
 M();
 document.getElementById("di").onclick=function(){
