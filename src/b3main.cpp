@@ -15,7 +15,7 @@ setTimeout(function(){
 Module.ccall('b3_egl');
 },450);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },550);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
@@ -25,7 +25,7 @@ document.getElementById('scanvas').style.width=window.innerHeight+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 },750);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },850);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -39,20 +39,20 @@ document.getElementById('circle').height=window.innerHeight;
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('b3_egl');
+},250);
+setTimeout(function(){
+Module.ccall('str');
 },450);
 setTimeout(function(){
 Module.ccall('b3');
 },750);
-setTimeout(function(){
-Module.ccall('str');
-},950);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},1250);
+},1150);
 }
 
 function pll(){
