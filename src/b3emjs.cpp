@@ -89,9 +89,9 @@ precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
-depth:false,
-stencil:false,
-imageSmoothingEnabled:true,
+depth:true,
+stencil:true,
+imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:true,
 premultipliedAlpha:false,
@@ -138,9 +138,9 @@ gl_js.getExtension('OES_single_precision');
 // gl.getExtension('EXT_texture_shadow_lod');
 gl_js.getExtension('EGL_NV_memory_attachment');
 gl_js.getExtension('EGL_NV_depth_nonlinear');
-gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3');
-gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
-gl_js.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
+gl_js.getExtension('EXT_gl_colorspace_display_p3');
+gl_js.getExtension('EXT_gl_colorspace_display_p3_linear');
+gl_js.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl_js.getExtension('ARB_multisample');
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl_js.blendColor(1.0,1.0,1.0,1.0);
