@@ -245,9 +245,9 @@ $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);te
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 var adr='./intro.mp4';
-wi=1920;
-he=1080;
-var hii=window.innerHeight;
+wi=parseInt(window.innerHeight,10);
+he=parseInt(window.innerHeight,10);
+var hii=parseInt(window.innerHeight,10);
 document.getElementById('ihid').innerHTML=hii;
 r$=hii/he;
 $w=wi*r$;
