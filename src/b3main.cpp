@@ -103,8 +103,6 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 const vidMenu1=document.getElementById('vi1').value;
-const vidMenu2=document.getElementById('vi2').value;
-const vidMenu3=document.getElementById('vi3').value;
 if(vidMenu1!='Default'){
 $vids[i]=vidMenu1+txxt;
 }else{
@@ -168,7 +166,14 @@ fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
 };};
-fxhttp.open('GET','video/',true);
+  
+const vidMenu1=document.getElementById('vi1').value;
+if(vidMenu1!='Default'){
+var looc=vidMenu1+'video/'+txxt;
+}else{
+var looc='video/';
+};
+fxhttp.open('GET',looc,true);
 fxhttp.send();
 }
 
