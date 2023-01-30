@@ -54,11 +54,11 @@ document.getElementById('circle').height=window.innerHeight;
 // bz.postMessage({data:222});
 },950);
 }
-  
+
 function pll(){
 Module.ccall('pl');
 }
-  
+
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
 
@@ -129,9 +129,9 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-  
+
   normalResStart();
-  
+
 },350);
 };};
 ff.send(null);
@@ -175,7 +175,7 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-  
+
 mV.load();
 loadV.load();
 
@@ -250,11 +250,11 @@ pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
-  
-document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
-document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
-document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
-  
+
+document.getElementById('wid').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('hig').innerHTML=parseInt(document.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight,10);
+
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
@@ -304,10 +304,7 @@ document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
-// document.getElementById('ldv').height=document.innerHeight;
 document.getElementById('ldv').load();
-// document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
-// document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 document.getElementById('di').click();
 };
 setTimeout(function(){
@@ -315,11 +312,11 @@ loada();
 },$ldt);
 }
 loada();
-  
+
 });
-  
+
 int main(){
-  
+
 EM_ASM({
 "use strict";
 FS.mkdir("/snd");
