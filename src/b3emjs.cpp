@@ -3,8 +3,7 @@
 EM_JS(void,ma,(),{
 
 "use strict";
-const alphCan=document.getElementById("acanvas");
-const bCan=document.getElementById("bcanvas");
+var alphCan=document.getElementById("acanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var sh4d=true;
@@ -17,11 +16,11 @@ var loopPart;
 var mmvv;
 var revv;
 var $bb;
-
+   
 function forwardLoop(){
 setTim=mmvv.currentTime;
 setTim+=stpInc;
-if(setTim<stp){
+if(setTim<=stp){
 mmvv.currentTime=setTim;
 }else{
 revv=true;
@@ -64,7 +63,7 @@ if(e.code=='KeyS'){
 sh4d=false;
 };
 }
-
+ 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -75,7 +74,7 @@ const $H=Module.HEAPF64.buffer;
 var la=h$*h$*8;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
-var sz=(h$*h$)/8;
+var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -92,7 +91,7 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:true,
 premultipliedAlpha:false,
@@ -107,42 +106,42 @@ minorVersion:0
 });
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl_js.getExtension('WEBGL_color_buffer_float');
+ gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
-gl_js.getExtension('OES_texture_float_linear');
-gl_js.getExtension('OES_texture_half_float_linear');
-gl_js.getExtension('EXT_float_blend');
-gl_js.getExtension('EXT_frag_depth');
-gl_js.getExtension('EXT_shader_texture_lod');
-gl_js.getExtension('EXT_sRGB');
-gl_js.getExtension('EXT_blend_minmax');
+gl_js.getExtension('GL_OES_texture_float_linear');
+gl_js.getExtension('GL_OES_texture_half_float_linear');
+gl_js.getExtension('GL_EXT_float_blend');
+gl_js.getExtension('GL_EXT_frag_depth');
+gl_js.getExtension('GL_EXT_shader_texture_lod');
+gl_js.getExtension('GL_EXT_sRGB');
+gl_js.getExtension('GL_EXT_blend_minmax');
 gl_js.getExtension('ANGLE_instanced_arrays');
 // gl.getExtension('EXT_disjoint_timer_query');
-gl_js.getExtension('EXT_clip_cull_distance');
+gl_js.getExtension('GL_EXT_clip_cull_distance');
 // gl.getExtension('EXT_disjoint_timer_query_webgl2');
 gl_js.getExtension('KHR_parallel_shader_compile');
-gl_js.getExtension('OES_draw_buffers_indexed');
-gl_js.getExtension('OES_element_index_uint');
-gl_js.getExtension('OES_fbo_render_mipmap');
-gl_js.getExtension('OES_standard_derivatives');
-gl_js.getExtension('OES_vertex_array_object');
+gl_js.getExtension('GL_OES_draw_buffers_indexed');
+gl_js.getExtension('GL_OES_element_index_uint');
+gl_js.getExtension('GL_OES_fbo_render_mipmap');
+gl_js.getExtension('GL_OES_standard_derivatives');
+gl_js.getExtension('GL_OES_vertex_array_object');
 gl_js.getExtension('WEBGL_blend_equation_advanced_coherent');
 gl_js.getExtension('WEBGL_depth_texture');
 gl_js.getExtension('WEBGL_draw_buffers');
 gl_js.getExtension('WEBGL_provoking_vertex');
 gl_js.getExtension('EXT_framebuffer_sRGB');
 gl_js.getExtension('OES_depth32');
-gl_js.getExtension('OES_fixed_point');
-gl_js.getExtension('OES_shader_multisample_interpolation');
+gl_js.getExtension('GL_OES_fixed_point');
+gl_js.getExtension('GL_OES_shader_multisample_interpolation');
 gl_js.getExtension('WEBGL_webcodecs_video_frame');
-gl_js.getExtension('OES_single_precision');
-// gl.getExtension('EXT_texture_shadow_lod');
+gl_js.getExtension('GL_OES_single_precision');
+// gl.getExtension('GL_EXT_texture_shadow_lod');
 gl_js.getExtension('EGL_NV_memory_attachment');
 gl_js.getExtension('EGL_NV_depth_nonlinear');
-gl_js.getExtension('EXT_gl_colorspace_display_p3');
-gl_js.getExtension('EXT_gl_colorspace_display_p3_linear');
-gl_js.getExtension('EXT_gl_colorspace_bt2020_linear');
-gl_js.getExtension('ARB_multisample');
+gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3');
+gl_js.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
+gl_js.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
+gl_js.getExtension('GL_ARB_multisample');
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl_js.blendColor(1.0,1.0,1.0,1.0);
 gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
@@ -164,7 +163,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setOptimizeFloatMemory(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 // const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
@@ -192,7 +191,7 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*h$)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
@@ -211,7 +210,6 @@ for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 };
-var agav=new Float64Array($H,pointa,300);
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
@@ -222,9 +220,9 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
-sz=(h$*h$)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
-$B=new Float64Array($H,pointb,sz);
+var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
@@ -250,16 +248,9 @@ if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
-$bb=R(bCan);
+$bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-if(sh4d==true){
-Module.ccall("frm");
-};
-setTimeout(function(){
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
-M();
 if(loopLoop==true){
 if(revv==true){
 reverseLoop();
@@ -267,6 +258,13 @@ reverseLoop();
 forwardLoop();
 };
 };
+if(sh4d==true){
+Module.ccall("frm");
+};
+setTimeout(function(){
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+M();
 },timFrm)};
 M();
 document.getElementById("di").onclick=function(){
