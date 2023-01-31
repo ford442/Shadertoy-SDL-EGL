@@ -31,7 +31,7 @@ var $high=document.getElementById('canvasSize');
 var winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=winSize;
+document.getElementById('circle').width=parseInt(window.innerWidth,10);
    
 var lockVid=0;
 
@@ -254,7 +254,7 @@ var mv,lo;
 if(lockVid!=1){
 $high.innerHTML=winSize;
 document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=winSize;
+document.getElementById('circle').width=parseInt(window.innerWidth,10);
 loadV.addEventListener('canplay',function(){
 loadV.height=this.videoHeight;
 loadV.width=this.videoWidth;
