@@ -73,7 +73,7 @@ sh4d=false;
  
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
-var la=h$*w$*8;
+var la=h$*h$*8;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*h$)/8;
@@ -89,7 +89,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
-la=h$*w$*8;
+la=h$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
  
@@ -138,7 +138,7 @@ const av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([h$,h$]);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 const $amax=this.constants.amax;
@@ -149,7 +149,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([h$,h$]);
 
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -225,13 +225,13 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
-la=h$*w$*8;
+la=h$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
 $B=new Float64Array($H,pointb,sz);
 R.setOutput([sz]);
-t.setOutput([h$,h$]);
-r.setOutput([$S,$S]);
+t.setOutput([w$,h$]);
+r.setOutput([h$,h$]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
