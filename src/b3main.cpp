@@ -30,8 +30,7 @@ var $itim=document.getElementById('itim');
 var $high=document.getElementById('canvasSize');
 var winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-mV.load();
-loadV.load();
+
 var lockVid=0;
 
 function spKey(e){
@@ -179,8 +178,6 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-
-
 /*
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*2;
@@ -216,21 +213,20 @@ document.getElementById('circle').height=window.innerHeight;
   
 function normalResStart(){
 setTimeout(function(){
-// Module.ccall('b3_egl');
-},250);
+Module.ccall('b3_egl');
+},150);
+setTimeout(function(){
+Module.ccall('b3');
+},350);
 setTimeout(function(){
 Module.ccall('str');
-},450);
-setTimeout(function(){
-// Module.ccall('b3');
-},750);
+},650);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
-},1050);
+document.getElementById('di').click();
+},850);
 }
   
 const tem=document.getElementById('tim');
@@ -309,8 +305,8 @@ loada();
 document.getElementById('startBtn').addEventListener('click',function(){
 scanSongs();
 scanVideos();
-scanShaders();
 loada();
+scanShaders();
 });
 
 });
