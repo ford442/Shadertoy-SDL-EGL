@@ -179,12 +179,7 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-document.getElementById('startBtn').addEventListener('click',function(){
-scanSongs();
-scanVideos();
-scanShaders();
-loada();
-});
+
 
 /*
 function highResStart(){
@@ -310,6 +305,14 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
+   
+document.getElementById('startBtn').addEventListener('click',function(){
+scanSongs();
+scanVideos();
+scanShaders();
+loada();
+});
+
 });
 
 int main(){
