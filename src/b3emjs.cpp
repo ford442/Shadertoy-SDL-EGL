@@ -150,7 +150,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([h$,h$]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
 
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -243,7 +243,7 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 var T=false;
-r.setOutput([h$,h$]);
+r.setOutput([$S,$S]);
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
