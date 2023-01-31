@@ -45,6 +45,7 @@ setTimeout(function(){
 Module.ccall('str');
 },450);
 setTimeout(function(){
+//  loada();
 // Module.ccall('b3');
 },750);
 setTimeout(function(){
@@ -261,7 +262,7 @@ $iwid.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('isrc').innerHTML=adr;
-mV.play();
+// mV.play();
 var lockVid=0;
 
 function spKey(e){
@@ -341,7 +342,6 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-loada();
 
 });
 
