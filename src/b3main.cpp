@@ -4,7 +4,7 @@ EM_JS(void,js_main,(),{
 
 "use strict";
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
-/*
+
 function highResStart(){
 document.getElementById('scanvas').height=window.innerHeight*2;
 document.getElementById('scanvas').width=window.innerHeight*2;
@@ -15,7 +15,7 @@ setTimeout(function(){
 Module.ccall('b3_egl');
 },450);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },550);
 setTimeout(function(){
 document.getElementById('scanvas').height=window.innerHeight;
@@ -25,7 +25,7 @@ document.getElementById('scanvas').style.width=window.innerHeight+'px';
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 },750);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },850);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -35,17 +35,16 @@ document.getElementById('circle').height=window.innerHeight;
 // bz.postMessage({data:222});
 },1250);
 }
-*/
-  
+
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('b3_egl');
 },250);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },450);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -53,13 +52,13 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},1050);
+},950);
 }
-
+  
 function pll(){
 Module.ccall('pl');
 }
-
+  
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
 
@@ -85,11 +84,11 @@ const htmlDocs=nparser.parseFromString(xml.responseText,'text/html');
 const preList=htmlDocs.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $sngs[0]=preList.length;
 for(var i=1;i<preList.length;i++){
-var stxxt=preList[i].href;
+var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-stxxt=stxxt.replace(Self,"");
-$sngs[i]=Self+'songs/'+stxxt;
+txxt=txxt.replace(Self,"");
+$sngs[i]=Self+'songs/'+txxt;
 };}
 
 function vids(xml){
@@ -98,18 +97,11 @@ const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
 const preList=htmlDocv.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $vids[0]=preList.length;
 for(var i=1;i<preList.length;i++){
-var vtxxt=preList[i].href;
+var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-vtxxt=vtxxt.replace(Self,"");
-const vidMenu1=document.getElementById('vi1').value;
-var ar1=vidMenu1+'video/'+vtxxt;
-var ar2=Self+'video/'+vtxxt;
-if(vidMenu1!='Default'){
-$vids[i]=ar1;
-}else{
-$vids[i]=ar2;
-};
+txxt=txxt.replace(Self,"");
+$vids[i]=Self+'video/'+txxt;
 };}
 
 function shds(xml){
@@ -118,22 +110,15 @@ const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
 const preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
-var txxts=preList[i].href;
+var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-txxts=txxts.replace(Self,"");
-$shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
+txxt=txxt.replace(Self,"");
+$shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
 };
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
-const shdMenu=document.getElementById('sh1');
-if(shdMenu.value!='Default'){
-if(shdMenu.value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
-}else{
-document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
-};
-};
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -144,17 +129,16 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-
+  
   normalResStart();
-
-},450);
+  
+},350);
 };};
 ff.send(null);
 }
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-nxhttp.withCredentials=false;
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
@@ -165,25 +149,16 @@ nxhttp.send();
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
 };};
-  
-const vidMenu1=document.getElementById('vi1').value;
-if(vidMenu1!='Default'){
-var looc=vidMenu1+'video/';
-}else{
-var looc='video/';
-};
-fxhttp.open('GET',looc,true);
+fxhttp.open('GET','video/',true);
 fxhttp.send();
 }
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
@@ -192,19 +167,15 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-scanSongs();
-document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 scanShaders();
-
-});
+scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('iwid').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-
+  
 mV.load();
 loadV.load();
 
@@ -247,9 +218,9 @@ $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);te
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 var adr='./intro.mp4';
-wi=parseInt(window.innerHeight,10);
-he=parseInt(window.innerHeight,10);
-var hii=parseInt(window.innerHeight,10);
+wi=1920;
+he=1080;
+var hii=window.innerHeight;
 document.getElementById('ihid').innerHTML=hii;
 r$=hii/he;
 $w=wi*r$;
@@ -257,7 +228,7 @@ const $ihigB=document.getElementById('ihid');
 const $ihig=document.getElementById('ihig');
 $hg=hii+'px';
 $ihig.innerHTML=parseInt(window.innerHeight,10);
-$iwid.innerHTML=parseInt(window.innerHeight,10);
+$iwid.innerHTML=parseInt($w,10);
 document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('isrc').innerHTML=adr;
@@ -279,16 +250,16 @@ pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
-
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-
+  
+document.getElementById('wid').innerHTML=parseInt(document.innerHeight);
+document.getElementById('hig').innerHTML=parseInt(document.innerHeight);
+document.getElementById('pmhig').innerHTML=parseInt(document.innerHeight);
+  
 loadV.addEventListener('canplay',function(){
-loadV.height=parseInt(window.innerHeight,10);
-//  loadV.width=this.videoWidth;
-
+loadV.width=this.videoWidth;
+loadV.height=this.videoHeight;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
-
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -326,15 +297,17 @@ lo=vide[1].id;
 vide[0].id=lo;
 vide[1].id=mv;
 document.getElementById('mv').play();
-$iwid.innerHTML=parseInt(window.innerHeight,10);
+$iwid.innerHTML=parseInt($w,10);
 $ihig.innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('circle').height=parseInt(window.innerHeight,10);
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
-// document.getElementById('ldv').height=window.innerHeight;
+// document.getElementById('ldv').height=document.innerHeight;
 document.getElementById('ldv').load();
+// document.getElementById('wid').innerHTML=document.getElementById('mv').videoWidth;
+// document.getElementById('hig').innerHTML=document.getElementById('mv').videoHeight;
 document.getElementById('di').click();
 };
 setTimeout(function(){
@@ -342,11 +315,11 @@ loada();
 },$ldt);
 }
 loada();
-
+  
 });
-
+  
 int main(){
-
+  
 EM_ASM({
 "use strict";
 FS.mkdir("/snd");
