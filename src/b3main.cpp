@@ -148,7 +148,7 @@ if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
 var pth=$shds[randShade];
 }else{
-var pth=='https://glsl.1ink.us/shaders/'+shdMenu.value;
+var pth='https://glsl.1ink.us/shaders/'+shdMenu.value;
 };
 }else{
 var pth='https://glsl.1ink.us/shaders/'+document.getElementById('path').innerHTML;
