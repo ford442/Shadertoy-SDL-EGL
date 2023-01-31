@@ -126,7 +126,7 @@ let supportLinearFiltering;
 if(isWebGL2){
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-
+/*
 // gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
@@ -164,7 +164,7 @@ gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
- 
+*/
  
  gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
@@ -175,7 +175,7 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 
 halfFloat=gl.getExtension('OES_texture_half_float');
  
- 
+ /*
 // gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
@@ -214,7 +214,7 @@ gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
  
- 
+ */
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
