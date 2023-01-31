@@ -501,8 +501,8 @@ renderFrame();
 };
 
 void b3_egl(){
-egla();
-egl();
+// egla();
+// egl();
 };
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
