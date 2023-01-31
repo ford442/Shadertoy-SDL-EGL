@@ -32,7 +32,8 @@ var winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 document.getElementById('circle').height=winSize;
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
-   
+document.getElementById('di').click();
+
 var lockVid=0;
 
 function spKey(e){
