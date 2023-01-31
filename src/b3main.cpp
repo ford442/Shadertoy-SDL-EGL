@@ -253,12 +253,13 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 function loada(){
 var mv,lo;
 if(lockVid!=1){
+winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 document.getElementById('circle').height=winSize;
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
-loadV.addEventListener('canplay',function(){
-loadV.height=this.videoHeight;
-loadV.width=this.videoWidth;
+document.getElementById('ldv').addEventListener('canplay',function(){
+document.getElementById('ldv').height=winSize;
+// loadV.width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
