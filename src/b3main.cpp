@@ -154,7 +154,7 @@ ff.send(null);
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-nxhttp.withCredentials=false;
+// nxhttp.withCredentials=false;
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
@@ -165,7 +165,7 @@ nxhttp.send();
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-fxhttp.withCredentials=false;
+// fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
