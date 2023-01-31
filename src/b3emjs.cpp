@@ -83,6 +83,16 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
  
+ 
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
+vv=document.getElementById("mv");
+var blank$=Math.max(((w$-h$)/2.0),0);
+var nblank$=Math.max(((h$-w$)/2.0),0);
+la=h$*w$*8;
+sz=(h$*h$)/8;
+pointa=77*la;
+ 
 const gl_js=bcanvas.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
@@ -190,15 +200,6 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
 
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
-var blank$=Math.max(((w$-h$)/2.0),0);
-var nblank$=Math.max(((h$-w$)/2.0),0);
-la=h$*w$*8;
-sz=(h$*h$)/8;
-pointa=77*la;
-agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 t.setOutput([w$,h$]);
 r.setOutput([w$,h$]);
