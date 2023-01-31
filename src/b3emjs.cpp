@@ -105,6 +105,41 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
+const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
+const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
+const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
+const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
+g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
+g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+const R=g2.createKernel(function(tv){
+const Pa=tv[this.thread.y][this.thread.x*4];
+// return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
+return Ave(Pa[0],Pa[1],Pa[2]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setOptimizeFloatMemory(true).setOutput([sz]);
+const t=g.createKernel(function(v){
+const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+// const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
+const av$=Ave(P[0],P[1],P[2]);
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$-(minuss*(av$*0.01));
+return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setPrecision('single').setDynamicOutput(true).setOutput([w$,h$]);
+const r=g.createKernel(function(f){
+const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+const $amax=this.constants.amax;
+const $amin=this.constants.amin;
+const $aavg=this.constants.aavg;
+const alph=Alphe($amax,$amin,$aavg,p[3]);
+const Min=(4.0*(($amax-($aavg-$amin))/2.0));
+const ouT=Math.max(Min,alph);
+const aveg=Aveg(p[3],ouT);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
+ 
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl_js.getExtension('WEBGL_color_buffer_float');
@@ -151,39 +186,6 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
-const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
-const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
-g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
-g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-const R=g2.createKernel(function(tv){
-const Pa=tv[this.thread.y][this.thread.x*4];
-return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setOptimizeFloatMemory(true).setOutput([sz]);
-const t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-// const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
-const av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
-return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setPrecision('single').setDynamicOutput(true).setOutput([w$,h$]);
-const r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-const $amax=this.constants.amax;
-const $amin=this.constants.amin;
-const $aavg=this.constants.aavg;
-const alph=Alphe($amax,$amin,$aavg,p[3]);
-const Min=(4.0*(($amax-($aavg-$amin))/2.0));
-const ouT=Math.max(Min,alph);
-const aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
