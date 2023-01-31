@@ -132,7 +132,8 @@ const Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
+// const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+const P=v[this.thread.y][this.thread.x];
 // const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 const av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
@@ -205,7 +206,6 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
 };
 var pointb=77*la;
-var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -216,6 +216,8 @@ var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 };
 var agav=new Float64Array($H,pointa,300);
+var $B=new Float64Array($H,pointb,sz);
+
 var d=S();if(d)d();d=S();
 function S(){
 $S=parseInt(window.innerHeight,10);
