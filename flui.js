@@ -145,7 +145,7 @@ gl.getExtension('KHR_parallel_shader_compile');
 gl.getExtension('OES_draw_buffers_indexed');
 gl.getExtension('OES_element_index_uint');
 gl.getExtension('OES_fbo_render_mipmap');
-// gl.getExtension('OES_standard_derivatives');
+gl.getExtension('OES_standard_derivatives');
 gl.getExtension('OES_vertex_array_object');
 gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 gl.getExtension('WEBGL_depth_texture');
@@ -164,6 +164,8 @@ gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
+ 
+ 
  gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
@@ -172,6 +174,8 @@ gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 
 halfFloat=gl.getExtension('OES_texture_half_float');
+ 
+ 
 // gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
@@ -190,7 +194,7 @@ gl.getExtension('KHR_parallel_shader_compile');
 gl.getExtension('OES_draw_buffers_indexed');
 gl.getExtension('OES_element_index_uint');
 gl.getExtension('OES_fbo_render_mipmap');
-// gl.getExtension('OES_standard_derivatives');
+gl.getExtension('OES_standard_derivatives');
 gl.getExtension('OES_vertex_array_object');
 gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 gl.getExtension('WEBGL_depth_texture');
@@ -209,6 +213,8 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
+ 
+ 
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
