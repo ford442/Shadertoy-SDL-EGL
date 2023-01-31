@@ -211,6 +211,7 @@ for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 };
+var agav=new Float64Array($H,pointa,300);
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
@@ -223,7 +224,7 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+$B=new Float64Array($H,pointb,sz);
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 var j=i+1;
