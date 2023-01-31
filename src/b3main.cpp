@@ -183,6 +183,7 @@ document.getElementById('startBtn').addEventListener('click',function(){
 scanSongs();
 scanVideos();
 scanShaders();
+loada();
 });
 
 /*
@@ -309,7 +310,6 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-loada();
 });
 
 int main(){
