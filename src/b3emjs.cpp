@@ -254,7 +254,7 @@ if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
-$bb=R(bCan);
+$bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 if(sh4d==true){
