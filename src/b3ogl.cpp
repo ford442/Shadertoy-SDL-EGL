@@ -240,7 +240,7 @@ glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
 };
 
-void uni(GLfloat xx,GLfloat yy,GLfloat time,GLint fram,GLfloat delt){
+void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 iFps=60.0/delt;
@@ -250,8 +250,8 @@ ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=1.0-(xxx*Size);
-mY=1.0-(yyy*Size);
+mX=1.0-(xxx*sSize);
+mY=1.0-(yyy*sSize);
 clk_l=false;
 };
 mm=S*xx;
@@ -260,7 +260,7 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 };
-glUniform1f(uni_tme,time);
+glUniform1f(uni_tme,stime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
@@ -328,8 +328,8 @@ eglconfig=NULL;
 iFrame=0;
 clk_l=true;
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=(int)hi;
-S=(GLfloat)Size;
+sSize=(int)hi;
+S=(GLfloat)sSize;
 mX=0.5*S;
 mY=0.5*S;
 emscripten_webgl_init_context_attributes(&attr);
@@ -460,8 +460,8 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 
-   glViewport((GLint)0,(GLint)0,GLsizei(Size),GLsizei(Size));
-   glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+   glViewport((GLint)0,(GLint)0,GLsizei(sSize),GLsizei(sSize));
+   glScissor((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
    glUseProgram(shd_prg);
 
 
@@ -502,7 +502,7 @@ renderFrame();
 
 void b3_egl(){
 // egla();
-// egl();
+egl();
 };
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
