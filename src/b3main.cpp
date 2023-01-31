@@ -30,7 +30,9 @@ var $itim=document.getElementById('itim');
 var $high=document.getElementById('canvasSize');
 var winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-
+document.getElementById('circle').height=winSize;
+document.getElementById('circle').width=winSize;
+   
 var lockVid=0;
 
 function spKey(e){
