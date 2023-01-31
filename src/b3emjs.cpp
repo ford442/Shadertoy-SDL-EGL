@@ -140,6 +140,7 @@ av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
 const r=g.createKernel(function(f){
+ 
 const p=f[this.thread.y+this.constants.nblnk][this.thread.x+this.constants.blnk];
 const $amax=this.constants.amax;
 const $amin=this.constants.amin;
@@ -245,7 +246,8 @@ pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 var T=false;
 function M(){
-r.setConstants({amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){
 return;
 };
