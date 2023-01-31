@@ -139,7 +139,7 @@ const av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([h$,h$]);
+}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([$S,$S]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 const $amax=this.constants.amax;
@@ -220,7 +220,9 @@ var $B=new Float64Array($H,pointb,sz);
 
 var d=S();if(d)d();d=S();
 function S(){
+ 
 $S=parseInt(window.innerHeight,10);
+ t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -232,8 +234,6 @@ sz=(h$*h$)/8;
 pointa=77*la;
 $B=new Float64Array($H,pointb,sz);
 R.setOutput([sz]);
-t.setOutput([h$,h$]);
-r.setOutput([h$,h$]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
@@ -243,6 +243,7 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 var T=false;
+r.setOutput([h$,h$]);
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
