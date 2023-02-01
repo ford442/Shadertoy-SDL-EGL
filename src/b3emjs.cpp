@@ -211,7 +211,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
+eval("var point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 };
 var agav=new Float64Array($H,pointa,300);
 var $B=new Float64Array($H,pointb,sz);
