@@ -28,7 +28,7 @@ static void avgFrm(int,int,float *,float *);
 
 extern "C"{
   
-void clr(GLclampf,GLclampf,GLclampf,GLclampf);
+void clr(GLclampf,GLclampf,GLclampf);
   
 void nano(int,int,float *,float *);
 
