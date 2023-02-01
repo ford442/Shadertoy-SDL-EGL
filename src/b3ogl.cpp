@@ -453,8 +453,8 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 
-   glViewport((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
-   glScissor((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
+//   glViewport((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
+//   glScissor((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
    glUseProgram(shd_prg);
 
 glEnable(GL_CULL_FACE);
