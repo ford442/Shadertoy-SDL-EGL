@@ -147,14 +147,15 @@ $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 const shdMenu=document.getElementById('sh1');
+var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
-var pth=$shds[randShade];
+pth=$shds[randShade];
 }else{
-var pth='https://glsl.1ink.us/shaders/'+shdMenu.value;
+pth='https://glsl.1ink.us/shaders/'+shdMenu.value;
 };
 }else{
-var pth='https://glsl.1ink.us/shaders/'+document.getElementById('path').innerHTML;
+pth='https://glsl.1ink.us/shaders/'+document.getElementById('path').innerHTML;
 };
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
