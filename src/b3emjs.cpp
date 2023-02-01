@@ -150,8 +150,7 @@ const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
-gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
  /*
 gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
@@ -191,6 +190,8 @@ gl_js.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl_js.getExtension('ARB_multisample');
 */
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl_js.blendColor(1.0,1.0,1.0,1.0);
 gl_js.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
