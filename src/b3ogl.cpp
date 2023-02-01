@@ -327,8 +327,9 @@ void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-emscripten_get_element_css_size("canvas",&wi,&hi);
-sSize=(int)hi;
+// emscripten_get_element_css_size("canvas",&wi,&hi);
+sSize=EM_ASM_INT({return parseInt(document.getElementById('canvasSize').innerHTML,10);});
+// sSize=(int)hi;
 S=(GLfloat)sSize;
 mX=0.5*S;
 mY=0.5*S;
