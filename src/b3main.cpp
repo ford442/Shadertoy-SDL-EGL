@@ -157,6 +157,8 @@ pth='https://glsl.1ink.us/shaders/'+shdMenu.value;
 }else{
 pth='https://glsl.1ink.us/shaders/'+document.getElementById('path').innerHTML;
 };
+var   pth='https://glsl.1ink.us/shaders/melt';
+
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
