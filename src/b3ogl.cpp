@@ -250,8 +250,8 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=1.0-(xxx*sSize);
-mY=1.0-(yyy*sSize);
+mX=1.0-(xxx*Size);
+mY=1.0-(yyy*Size);
 clk_l=false;
 };
 mm=S*xx;
@@ -329,9 +329,8 @@ iFrame=0;
 clk_l=true;
 retSa=emscripten_get_element_css_size("scanvas",&wi,&hi);
 // sSize=EM_ASM_INT({return document.getElementById('canvasSize').innerHTML;});
-// sSize=(int)hi;
-sSize=1000;
- S=(GLfloat)sSize;
+Size=(int)hi;
+ S=(GLfloat)Size;
 // S=800.0;
 mX=0.5*S;
 mY=0.5*S;
@@ -455,8 +454,8 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 
-//   glViewport((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
-//   glScissor((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
+//   glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+//   glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
    glUseProgram(shd_prg);
 
 glEnable(GL_CULL_FACE);
