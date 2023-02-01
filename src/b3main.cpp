@@ -236,7 +236,8 @@ document.getElementById('di').click();
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
-function grab$lt(){var $lt=Math.round($lt);}
+var $lt;
+function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
