@@ -17,9 +17,11 @@ fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
-shutDown.postMessage({data:222});
 pll();
-},750);
+},1500);
+setTimeout(function(){
+shutDown.postMessage({data:222});
+},2000);
 });
 
 var vide=document.querySelectorAll('video');
@@ -33,7 +35,6 @@ $high.innerHTML=winSize;
 document.getElementById('circle').height=winSize;
 document.getElementById('circle').width=parseInt(window.innerWidth,10);
 document.getElementById('di').click();
-
 var lockVid=0;
 
 function spKey(e){
@@ -90,7 +91,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},650);
+},550);
 });
 
 function vids(xml){
