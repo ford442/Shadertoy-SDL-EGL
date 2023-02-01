@@ -5,7 +5,7 @@
 #include <immintrin.h> 
 #include <nmmintrin.h>
 #include <unistd.h>
-// #include <webgl/webgl2.h>
+#include <webgl/webgl2.h>
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
@@ -19,5 +19,5 @@
 
 
 #include <emscripten/html5.h>
-// #include <emscripten/html5_webgl.h>
+#include <emscripten/html5_webgl.h>
 
