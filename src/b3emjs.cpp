@@ -4,9 +4,8 @@ EM_JS(void,ma,(),{
 
 "use strict";
 
-const pnnl=document.body;
-const alphCan=document.getElementById("acanvas");
-const bCan=document.getElementById("bcanvas");
+var pnnl=document.body;
+var bCan=document.getElementById("bcanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var $S=parseInt(window.innerHeight,10);
@@ -96,7 +95,7 @@ const gl_js=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
-logarithmicDepthBuffer:true,
+// logarithmicDepthBuffer:true,
 // colorSpace:'display-p3',
 alpha:true,
 depth:true,
