@@ -98,7 +98,7 @@ colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
+// colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
@@ -198,7 +198,7 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
-gl_js.drawingBufferColorSpace='display-p3';
+// gl_js.drawingBufferColorSpace='display-p3';
 // for(i=0;i<65;i++){
 // var j=i+1;
 // eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
