@@ -86,7 +86,8 @@ char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
-int_fast32_t sSize,iFrame,iFps;
+int_fast32_t iFrame,iFps;
+int sSize;
 
 EGLDisplay display;
 EGLSurface surface;
