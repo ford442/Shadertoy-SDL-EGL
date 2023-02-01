@@ -252,7 +252,7 @@ if(loca>64){loca=1;};
 var locb=$Bu+1;
 if(locb>64){locb=1;};
 if($F==i){
-eval("var point"+i+"="+i+"*la;var $"+i+"=new Float64Array($H,point"+i+",la);var $r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
+eval("var point"+i+"="+i+"*la;var $"+i+"=new Float64Array($H,point"+i+",la);var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
 $bb=R(bCan);
