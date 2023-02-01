@@ -28,7 +28,7 @@ attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_TRUE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -47,7 +47,7 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(int)hi_js;
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-  /*
+
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -63,7 +63,7 @@ emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
-// emscripten_webgl_enable_extension(ctx_js,"GL_single_precision");
+emscripten_webgl_enable_extension(ctx_js,"OES_single_precision");
 // emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
 emscripten_webgl_enable_extension(ctx_js,"OES_frag_depth");
@@ -73,10 +73,10 @@ emscripten_webgl_enable_extension(ctx_js,"OES_depth32");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_blend_minmax");
 // emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx_js,"EXT_clip_cull_distance");
-emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx_js,"GL_framebuffer_sRGB");
-// emscripten_webgl_enable_extension(ctx_js,"ANGLE_instanced_arrays");
+emscripten_webgl_enable_extension(ctx_js,"EXT_framebuffer_sRGB");
+emscripten_webgl_enable_extension(ctx_js,"ANGLE_instanced_arrays");
 // emscripten_webgl_enable_extension(ctx_js,"KHR_parallel_shader_compile");
 emscripten_webgl_enable_extension(ctx_js,"EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_memory_attachment");
@@ -138,7 +138,7 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(int)hi_js;
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-  /*
+
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -193,7 +193,7 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
-*/
+
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
@@ -328,10 +328,8 @@ eglconfig=NULL;
 iFrame=0;
 clk_l=true;
 retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
-// sSize=EM_ASM_INT({return document.getElementById('canvasSize').innerHTML;});
 Size=(int)hi;
- S=(GLfloat)Size;
-// S=800.0;
+S=(GLfloat)Size;
 mX=0.5*S;
 mY=0.5*S;
 emscripten_webgl_init_context_attributes(&attr);
@@ -341,7 +339,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -360,8 +358,8 @@ emscripten_webgl_make_context_current(ctx);
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  /*
-  emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
+
+emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
@@ -376,7 +374,7 @@ emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
-// emscripten_webgl_enable_extension(ctx,"GL_single_precision");
+emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx,"OES_float_blend");
 emscripten_webgl_enable_extension(ctx,"OES_frag_depth");
@@ -389,7 +387,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx,"GL_framebuffer_sRGB");
-// emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
+emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 // emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_memory_attachment");
@@ -415,7 +413,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
-*/
+
 
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -452,9 +450,9 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 
-//   glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-//   glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-   glUseProgram(shd_prg);
+glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glUseProgram(shd_prg);
 
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
@@ -466,7 +464,7 @@ glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPH
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 glDisable(GL_DITHER);
   
-// smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
@@ -481,7 +479,7 @@ glDeleteShader(frag);
 glReleaseShaderCompiler();
 
   // glDisable(GL_STENCIL_TEST);
-// glEnable(GL_SCISSOR_TEST);
+glEnable(GL_SCISSOR_TEST);
 auto t1=std::chrono::steady_clock::now();
 };
 
@@ -500,8 +498,8 @@ renderFrame();
 };
 
 void b3_egl(){
-// egla();
-// egl();
+egla();
+egl();
 };
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
