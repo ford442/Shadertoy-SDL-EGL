@@ -73,7 +73,7 @@ sh4d=false;
  
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
-var la=h$*h$*8;
+var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*h$)/8;
@@ -151,7 +151,6 @@ const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
-
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
  /*
@@ -200,7 +199,6 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
-
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
@@ -217,19 +215,17 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($
 };
 var agav=new Float64Array($H,pointa,300);
 var $B=new Float64Array($H,pointb,sz);
-
 var d=S();if(d)d();d=S();
 function S(){
- 
 $S=parseInt(window.innerHeight,10);
- t.setOutput([$S,$S]);
+t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
 $B=new Float64Array($H,pointb,sz);
