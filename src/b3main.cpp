@@ -147,7 +147,8 @@ $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 const shdMenu=document.getElementById('sh1');
-var pth;
+
+   /*
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
 pth=$shds[randShade];
@@ -157,7 +158,9 @@ pth='https://glsl.1ink.us/shaders/'+shdMenu.value;
 }else{
 pth='https://glsl.1ink.us/shaders/'+document.getElementById('path').innerHTML;
 };
-var   pth='https://glsl.1ink.us/shaders/melt';
+*/
+var pth='https://glsl.1ink.us/shaders/melt';
+
 
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
