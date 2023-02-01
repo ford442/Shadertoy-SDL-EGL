@@ -83,7 +83,7 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const gl_js=bcanvas.getContext("webgl2",{
-colorType:'float64',
+// colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
