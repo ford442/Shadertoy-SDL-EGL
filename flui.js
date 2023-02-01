@@ -75,7 +75,7 @@ colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
+// colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
@@ -98,7 +98,7 @@ colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
+// colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
@@ -167,7 +167,7 @@ gl.getExtension('GL_NV_memory_attachment');
 */
  
  gl.disable(gl.DITHER);
-gl.drawingBufferColorSpace='display-p3';
+// gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 }else{
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
@@ -216,7 +216,7 @@ gl.getExtension('GL_NV_memory_attachment');
  
  */
 gl.disable(gl.DITHER);
-gl.drawingBufferColorSpace='display-p3';
+// gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
