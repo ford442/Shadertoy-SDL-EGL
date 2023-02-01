@@ -103,11 +103,11 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 */
-glDisable(GL_DITHER);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+glDisable(GL_DITHER);
 
 };
 
@@ -194,11 +194,11 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 */
-  glDisable(GL_DITHER);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+  glDisable(GL_DITHER);
 
 };
 
@@ -241,12 +241,12 @@ glClearColor(drk,drk,drk,brt);
 };
 
 void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
-ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
-ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
+retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
+retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 iFps=60.0/delt;
 if(ms_l==true){
-ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_move);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
+retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_move);
+retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
@@ -327,9 +327,9 @@ void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-// emscripten_get_element_css_size("canvas",&wi,&hi);
-sSize=EM_ASM_INT({return document.getElementById('canvasSize').innerHTML;});
-// sSize=(int)hi;
+retSa=emscripten_get_element_css_size("scanvas",&wi,&hi);
+// sSize=EM_ASM_INT({return document.getElementById('canvasSize').innerHTML;});
+sSize=(int)hi;
 S=(GLfloat)sSize;
 mX=0.5*S;
 mY=0.5*S;
@@ -417,15 +417,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
 */
-glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
-glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glDisable(GL_DITHER);
+
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
@@ -448,7 +440,7 @@ atb_pos=0;
 glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
 
 glLinkProgram(shd_prg);
-  glGenVertexArrays((GLsizei)1,&VCO);
+glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
@@ -461,18 +453,25 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 
-   glViewport((GLint)0,(GLint)0,GLsizei(sSize),GLsizei(sSize));
+   glViewport((GLint)0,(GLint)0,(GLsizeis)sSize,(GLsizei)sSize);
    glScissor((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
    glUseProgram(shd_prg);
 
-
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearDepth(D);
+glEnable(GL_BLEND);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+glDisable(GL_DITHER);
+  
 // smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
-
-
 
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,g1g);
