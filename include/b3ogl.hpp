@@ -1,3 +1,5 @@
+#include <cstdint>
+
 int_fast32_t Size,iFrame,iFps;
 double wi_js,hi_js;
 int_fast32_t Size_js;
