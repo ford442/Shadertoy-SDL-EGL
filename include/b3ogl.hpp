@@ -42,7 +42,7 @@ GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
-GLclampf x,y,gF=1.0f,gF0=0.0f,gFm1=-0.1f,y1y=1.0f;
+GLclampf x,y,gF=1.0,gF0=0.0,gFm1=-0.1,y1y=1.0;
 GLfloat g1g=1.0,S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
