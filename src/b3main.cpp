@@ -70,7 +70,7 @@ $sngs[i]=Self+'songs/'+stxxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-// nxhttp.withCredentials=false;
+nxhttp.withCredentials=false;
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
@@ -117,7 +117,7 @@ $vids[i]=ar2;
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
+fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
@@ -176,7 +176,7 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
+dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
