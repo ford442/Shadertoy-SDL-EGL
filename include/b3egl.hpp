@@ -17,6 +17,7 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
+#include <cstdint>
 
 #include <emscripten/html5.h>
 // #include <emscripten/html5_webgl.h>
