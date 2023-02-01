@@ -137,7 +137,7 @@ const av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([$S,$S]);
+}).setTactic("precision").setPrecision('single').setPipeline(true).setDynamicOutput(true).setOutput([$S,$S]);
 const r=g.createKernel(function(f){
 const p=f[this.thread.y][this.thread.x];
 const $amax=this.constants.amax;
@@ -150,7 +150,6 @@ const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
 
- /*
 gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
 gl_js.getExtension('OES_texture_float_linear');
@@ -187,7 +186,7 @@ gl_js.getExtension('EXT_gl_colorspace_display_p3');
 gl_js.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl_js.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl_js.getExtension('ARB_multisample');
-*/
+
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -197,11 +196,11 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
-// gl_js.drawingBufferColorSpace='display-p3';
-// for(i=0;i<65;i++){
-// var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
-// };
+gl_js.drawingBufferColorSpace='display-p3';
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
+};
 var pointb=77*la;
 var $F=1;
 var $Bu=33;
@@ -210,7 +209,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 };
 var agav=new Float64Array($H,pointa,300);
 var $B=new Float64Array($H,pointb,sz);
@@ -231,10 +230,10 @@ $B=new Float64Array($H,pointb,sz);
 R.setOutput([sz]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-// for(var i=0;i<65;i++){
-// var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-// };
+for(var i=0;i<65;i++){
+var j=i+1;
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
+};
 pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 var T=false;
@@ -251,17 +250,17 @@ if(loca>64){loca=1;};
 var locb=$Bu+1;
 if(locb>64){locb=1;};
 if($F==i){
-eval("var point"+i+"="+i+"*la;var $"+i+"=new Float64Array($H,point"+i+",la);var $"+$Bu+"=new Float64Array($H,point"+i+",la);var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
+eval("point"+i+"="+i+"*la;$"+i+"=new Float64Array($H,point"+i+",la);$"+$Bu+"=new Float64Array($H,point"+i+",la);$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
-$bb=R(bCan);
-$B.set($bb,0,sz);
-pointb=66*la;
 if(sh4d==true){
 Module.ccall("frm");
 };
 setTimeout(function(){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+$bb=R(bCan);
+$B.set($bb,0,sz);
+pointb=66*la;
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 M();
 if(loopLoop==true){
