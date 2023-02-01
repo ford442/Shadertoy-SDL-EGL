@@ -213,7 +213,7 @@ EGL_NONE
 
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_RESULT ret,retSa,retSb,retSc;
+EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 EM_BOOL ms_l,clk_l;
 
 EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
