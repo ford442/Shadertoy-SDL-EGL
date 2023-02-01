@@ -4,11 +4,11 @@ EM_JS(void,ma,(),{
 
 "use strict";
 
-var pnnl=document.body;
-var bCan=document.getElementById("bcanvas");
+let pnnl=document.body;
+let bCan=document.getElementById("bcanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
-var $S=parseInt(window.innerHeight,10);
+let $S=parseInt(window.innerHeight,10);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var sh4d=true;
