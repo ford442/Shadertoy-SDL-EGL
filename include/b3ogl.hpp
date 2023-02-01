@@ -1,4 +1,9 @@
-
+int_fast32_t Size,iFrame,iFps;
+double wi_js,hi_js;
+int_fast32_t Size_js;
+double wi,hi;
+float TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+double Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -150,12 +155,6 @@ EGLDisplay display_js;
 EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
-int_fast32_t Size,iFrame,iFps;
-double wi_js,hi_js;
-int_fast32_t Size_js;
-double wi,hi;
-float TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 EGLint const attribut_list_js[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
