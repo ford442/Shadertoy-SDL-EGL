@@ -5,15 +5,14 @@ EM_JS(void,ma,(),{
 "use strict";
 
 const pnnl=document.body;
-const bcanvas=document.getElementById("bcanvas");
 const alphCan=document.getElementById("acanvas");
 const bCan=document.getElementById("bcanvas");
-let lvv=document.getElementById("ldv");
-let vv=document.getElementById("mv");
-let $S=parseInt(window.innerHeight,10);
+var lvv=document.getElementById("ldv");
+var vv=document.getElementById("mv");
+var $S=parseInt(window.innerHeight,10);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
-let sh4d=true;
+var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016;
 var setTim;
@@ -22,7 +21,7 @@ var loopLoop;
 var loopPart;
 var mmvv;
 var revv;
-let $bb;
+var $bb;
 
 function forwardLoop(){
 setTim=mmvv.currentTime;
@@ -93,7 +92,7 @@ la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
  
-const gl_js=bcanvas.getContext("webgl2",{
+const gl_js=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
@@ -116,7 +115,7 @@ majorVersion:2,
 minorVersion:0
 });
 
-const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl_js});
+const g=new GPU({mode:'webgl2',canvas:bCan,webGl:gl_js});
 const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
