@@ -27,10 +27,10 @@ b3hd:
 	 emcc b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -mllvm -polly -static -DNDEBUG -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -DSIMD=1 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -DSIMD=avx -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --extern-post-js fluid.js --extern-post-js flui.js --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+          --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 sh4d3:
 	 em++  src/b3ogl_sh4d3.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
