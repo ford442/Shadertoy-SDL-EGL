@@ -232,10 +232,10 @@ $B=new Float64Array($H,pointb,sz);
 R.setOutput([sz]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-for(var i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-};
+// for(var i=0;i<65;i++){
+// var j=i+1;
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+// };
 pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 var T=false;
@@ -252,7 +252,7 @@ if(loca>64){loca=1;};
 var locb=$Bu+1;
 if(locb>64){locb=1;};
 if($F==i){
-eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
+eval("var point"+i+"="+i+"*la;var $"+i+"=new Float64Array($H,point"+i+",la);$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
 $bb=R(bCan);
