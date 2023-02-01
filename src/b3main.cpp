@@ -286,7 +286,7 @@ var vidSrc=$vids[rnum];
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
 var wi=document.getElementById('wid').innerHTML;
-r$=he/$h;
+var r$=he/$h;
 var $w=wi/r$;
 var $hi=he-winSize;
 if($hi>1){$h=winSize;var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
