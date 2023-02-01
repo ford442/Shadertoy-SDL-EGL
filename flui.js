@@ -65,21 +65,37 @@ if(!ext.supportLinearFiltering){
  config.SUNRAYS=false;
 }
 startGUI();
-
-
 function getWebGLContext(canvas){
-
-if (document.getElementById('ffire').innerHTML=='0'){
-var params={
+const params={colorType:'float64',
+preferLowPowerToHighPerformance:false,
+precision:'highp',
+logarithmicDepthBuffer:true,
+colorSpace:'display-p3',
+alpha:true,
+depth:true,
+stencil:false,
+imageSmoothingEnabled:false,
+imageSmoothingQuality:'medium',
+preserveDrawingBuffer:false,
+premultipliedAlpha:true,
+desynchronized:false,
+lowLatency:true,
+powerPreference:'high-performance',
+antialias:true,
+willReadFrequently:false,
+xrCompatible:false,
+majorVersion:2,
+minorVersion:0};
+const gl=canvas.getContext('webgl2',{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
-// colorSpace:'display-p3',
+colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:true,
-imageSmoothingEnabled:true,
+stencil:false,
+imageSmoothingEnabled:false,
 imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
@@ -91,43 +107,14 @@ willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
 minorVersion:0
-};
-}else{
-var params={
-colorType:'float64',
-preferLowPowerToHighPerformance:false,
-precision:'highp',
-logarithmicDepthBuffer:true,
-// colorSpace:'display-p3',
-alpha:true,
-depth:true,
-stencil:true,
-imageSmoothingEnabled:true,
-imageSmoothingQuality:'high',
-preserveDrawingBuffer:true,
-premultipliedAlpha:false,
-desynchronized:false,
-lowLatency:true,
-powerPreference:'high-performance',
-antialias:true,
-willReadFrequently:false,
-xrCompatible:false,
-majorVersion:2,
-minorVersion:0
-};
-};
-
-var gl=canvas.getContext('webgl2',params);
- 
+});
 const isWebGL2=!!gl;
-if(!isWebGL2) gl=canvas.getContext('webgl2',params) || canvas.getContext('webgl2',params);
+if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
 let halfFloat;
 let supportLinearFiltering;
-if(isWebGL2){
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-/*
-// gl.getExtension('EXT_color_buffer_float');
+if(isWebGL2){gl.disable(gl.DITHER);
+gl.drawingBufferColorSpace='display-p3';
+gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -155,70 +142,51 @@ gl.getExtension('EXT_framebuffer_sRGB');
 gl.getExtension('OES_depth32');
 gl.getExtension('OES_fixed_point');
 gl.getExtension('OES_shader_multisample_interpolation');
-gl.getExtension('WEBGL_webcodecs_video_frame');
-gl.getExtension('KHR_gl_colorspace');
-gl.getExtension('EXT_gl_colorspace_bt2020_pq');
-gl.getExtension('EXT_gl_colorspace_bt2020_linear');
-gl.getExtension('EXT_gl_colorspace_display_p3');
-gl.getExtension('EXT_gl_colorspace_display_p3_linear');
-// gl.getExtension('OES_single_precision');
-gl.getExtension('GL_EXT_texture_shadow_lod');
-gl.getExtension('GL_NV_memory_attachment');
-*/
- 
- gl.disable(gl.DITHER);
-// gl.drawingBufferColorSpace='display-p3';
-supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
-}else{
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-
-halfFloat=gl.getExtension('OES_texture_half_float');
- 
- /*
-// gl.getExtension('EXT_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_half_float');
-gl.getExtension('OES_texture_float_linear');
-gl.getExtension('OES_texture_half_float_linear');
-gl.getExtension('EXT_float_blend');
-gl.getExtension('EXT_frag_depth');
-gl.getExtension('EXT_shader_texture_lod');
-gl.getExtension('EXT_sRGB');
-gl.getExtension('EXT_blend_minmax');
-gl.getExtension('ANGLE_instanced_arrays');
-gl.getExtension('EXT_disjoint_timer_query');
-gl.getExtension('EXT_clip_cull_distance');
-gl.getExtension('EXT_disjoint_timer_query_webgl2');
-gl.getExtension('KHR_parallel_shader_compile');
-gl.getExtension('OES_draw_buffers_indexed');
-gl.getExtension('OES_element_index_uint');
-gl.getExtension('OES_fbo_render_mipmap');
-gl.getExtension('OES_standard_derivatives');
-gl.getExtension('OES_vertex_array_object');
-gl.getExtension('WEBGL_blend_equation_advanced_coherent');
-gl.getExtension('WEBGL_depth_texture');
-gl.getExtension('WEBGL_draw_buffers');
-gl.getExtension('WEBGL_provoking_vertex');
-gl.getExtension('EXT_framebuffer_sRGB');
-gl.getExtension('OES_depth32');
-gl.getExtension('OES_fixed_point');
-gl.getExtension('OES_shader_multisample_interpolation');
-gl.getExtension('KHR_gl_colorspace');
-gl.getExtension('EXT_gl_colorspace_bt2020_pq');
-gl.getExtension('EXT_gl_colorspace_bt2020_linear');
-gl.getExtension('EXT_gl_colorspace_display_p3');
-gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
- 
- */
-gl.disable(gl.DITHER);
-// gl.drawingBufferColorSpace='display-p3';
-supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
-}
+
+supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
+}else{gl.disable(gl.DITHER);
+gl.drawingBufferColorSpace='display-p3';
+halfFloat=gl.getExtension('OES_texture_half_float');
+gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_half_float');
+gl.getExtension('OES_texture_float_linear');
+gl.getExtension('OES_texture_half_float_linear');
+gl.getExtension('EXT_float_blend');
+gl.getExtension('EXT_frag_depth');
+gl.getExtension('EXT_shader_texture_lod');
+gl.getExtension('EXT_sRGB');
+gl.getExtension('EXT_blend_minmax');
+gl.getExtension('ANGLE_instanced_arrays');
+gl.getExtension('EXT_disjoint_timer_query');
+gl.getExtension('EXT_clip_cull_distance');
+gl.getExtension('EXT_disjoint_timer_query_webgl2');
+gl.getExtension('KHR_parallel_shader_compile');
+gl.getExtension('OES_draw_buffers_indexed');
+gl.getExtension('OES_element_index_uint');
+gl.getExtension('OES_fbo_render_mipmap');
+gl.getExtension('OES_standard_derivatives');
+gl.getExtension('OES_vertex_array_object');
+gl.getExtension('WEBGL_blend_equation_advanced_coherent');
+gl.getExtension('WEBGL_depth_texture');
+gl.getExtension('WEBGL_draw_buffers');
+gl.getExtension('WEBGL_provoking_vertex');
+gl.getExtension('EXT_framebuffer_sRGB');
+gl.getExtension('OES_depth32');
+gl.getExtension('OES_fixed_point');
+gl.getExtension('OES_shader_multisample_interpolation');
+gl.getExtension('WEBGL_webcodecs_video_frame');
+gl.getExtension('OES_single_precision');
+gl.getExtension('GL_EXT_texture_shadow_lod');
+gl.getExtension('GL_NV_memory_attachment');
+
+
+ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
+ }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
  const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
