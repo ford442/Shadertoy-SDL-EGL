@@ -502,7 +502,7 @@ renderFrame();
 };
 
 void b3_egl(){
-// egla();
+egla();
 egl();
 };
 
