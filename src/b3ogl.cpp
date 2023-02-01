@@ -102,12 +102,13 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
-*/
+glDisable(GL_DITHER);
+glEnable(GL_SCISSOR_TEST);
+
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glDisable(GL_DITHER);
 
 };
 
@@ -193,12 +194,13 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
+  glDisable(GL_DITHER);
+glEnable(GL_SCISSOR_TEST);
 
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-  glDisable(GL_DITHER);
 
 };
 
@@ -414,7 +416,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
 
-
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
@@ -449,11 +450,10 @@ uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
-
-glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-glUseProgram(shd_prg);
-
+  
+  // glDisable(GL_STENCIL_TEST);
+glEnable(GL_SCISSOR_TEST);
+glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glEnable(GL_DEPTH_TEST);
@@ -462,8 +462,12 @@ glClearDepth(D);
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glDisable(GL_DITHER);
   
+glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+  
+glUseProgram(shd_prg);
+
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
@@ -478,8 +482,6 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 
-  // glDisable(GL_STENCIL_TEST);
-glEnable(GL_SCISSOR_TEST);
 auto t1=std::chrono::steady_clock::now();
 };
 
