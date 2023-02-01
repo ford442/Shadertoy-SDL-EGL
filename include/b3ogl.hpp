@@ -150,7 +150,7 @@ EGLDisplay display_js;
 EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
-int_fast32_t sSize,iFrame,iFps;
+int_fast32_t Size,iFrame,iFps;
 double wi_js,hi_js;
 int_fast32_t Size_js;
 double wi,hi;
