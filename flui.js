@@ -116,7 +116,7 @@ let supportLinearFiltering;
 if(isWebGL2){
 gl.disable(gl.DITHER);
 // gl.drawingBufferColorSpace='display-p3';
-gl.getExtension('WEBGL_color_buffer_float');  can't use both EXT_color_buffer_float & WEBGL_color_buffer_float
+gl.getExtension('WEBGL_color_buffer_float'); // can't use both EXT_color_buffer_float & WEBGL_color_buffer_float
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
 gl.getExtension('OES_texture_half_float_linear');
