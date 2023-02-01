@@ -105,7 +105,7 @@ emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 */
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
+glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glDisable(GL_DITHER);
 
@@ -196,7 +196,7 @@ emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 */
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-glViewport((GLint)0,(GLint)0,GLsizei(Size_js),GLsizei(Size_js));
+glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
   glDisable(GL_DITHER);
 
@@ -453,7 +453,7 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 
-   glViewport((GLint)0,(GLint)0,(GLsizeis)sSize,(GLsizei)sSize);
+   glViewport((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
    glScissor((GLint)0,(GLint)0,(GLsizei)sSize,(GLsizei)sSize);
    glUseProgram(shd_prg);
 
