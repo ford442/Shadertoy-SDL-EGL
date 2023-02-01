@@ -327,7 +327,7 @@ void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-retSa=emscripten_get_element_css_size("scanvas",&wi,&hi);
+retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 // sSize=EM_ASM_INT({return document.getElementById('canvasSize').innerHTML;});
 Size=(int)hi;
  S=(GLfloat)Size;
@@ -341,7 +341,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
