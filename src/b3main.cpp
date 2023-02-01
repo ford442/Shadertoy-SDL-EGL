@@ -217,10 +217,10 @@ document.getElementById('circle').height=window.innerHeight;
   
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('b3_egl');
+// Module.ccall('b3_egl');
 },150);
 setTimeout(function(){
-Module.ccall('b3');
+// Module.ccall('b3');
 },350);
 setTimeout(function(){
 Module.ccall('str');
