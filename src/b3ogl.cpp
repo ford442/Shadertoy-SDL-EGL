@@ -236,9 +236,9 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 clk_l=true;
 };
 glUniform1f(uni_tme,stime);
-// glUniform1f(uni_tme_dlt,delt);
-// glUniform1f(uni_fps,iFps);
-// glUniform1i(uni_frm,fram);
+glUniform1f(uni_tme_dlt,delt);
+glUniform1f(uni_fps,iFps);
+glUniform1i(uni_frm,fram);
 return;
 }
 
@@ -418,13 +418,6 @@ glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
-uni_tme=glGetUniformLocation(shd_prg,"iTime");
-uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
-uni_frm=glGetUniformLocation(shd_prg,"iFrame");
-uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
-uni_res=glGetUniformLocation(shd_prg,"iResolution");
-uni_mse=glGetUniformLocation(shd_prg,"iMouse");
-uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
   
   // glDisable(GL_STENCIL_TEST);
 glEnable(GL_SCISSOR_TEST);
@@ -442,7 +435,13 @@ glUseProgram(shd_prg);
 
 glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-  
+uni_tme=glGetUniformLocation(shd_prg,"iTime");
+uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
+uni_frm=glGetUniformLocation(shd_prg,"iFrame");
+uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
+uni_res=glGetUniformLocation(shd_prg,"iResolution");
+uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
