@@ -215,6 +215,7 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($
 var agav=new Float64Array($H,pointa,300);
 var $B=new Float64Array($H,pointb,sz);
 var d=S();if(d)d();d=S();
+ 
 function S(){
 $S=parseInt(window.innerHeight,10);
 t.setOutput([$S,$S]);
@@ -239,6 +240,7 @@ pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 var T=false;
 r.setOutput([$S,$S]);
+ 
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -251,19 +253,19 @@ if(loca>64){loca=1;};
 var locb=$Bu+1;
 if(locb>64){locb=1;};
 if($F==i){
-eval("point"+i+"="+i+"*la;$"+i+"=new Float64Array($H,point"+i+",la);$"+$Bu+"=new Float64Array($H,point"+i+",la);$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
+eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
 if(sh4d==true){
 Module.ccall("frm");
 };
 setTimeout(function(){
+M();
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 $bb=R(bCan);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
-M();
 if(loopLoop==true){
 if(revv==true){
 reverseLoop();
