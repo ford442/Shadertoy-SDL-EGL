@@ -73,6 +73,8 @@ pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
 var la=h$*h$*4;
 var pointa=77*la;
+var pointb=66*la;
+var $B=new Float64Array($H,pointb,sz);
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*h$)/8;
 var avag=0.750;
@@ -186,7 +188,6 @@ gl_js.getExtension('EXT_gl_colorspace_display_p3');
 gl_js.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl_js.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl_js.getExtension('ARB_multisample');
-
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl_js.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl_js.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -197,11 +198,12 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
+R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
 };
-var pointb=77*la;
+pointb=66*la;
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -211,10 +213,7 @@ for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1,0,la);");
 };
-var agav=new Float64Array($H,pointa,300);
-var $B=new Float64Array($H,pointb,sz);
 var d=S();if(d)d();d=S();
- 
 function S(){
 $S=parseInt(window.innerHeight,10);
 t.setOutput([$S,$S]);
@@ -227,6 +226,8 @@ var nblank$=Math.max(((h$-w$)/2.0),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
+agav=new Float64Array($H,pointa,300);
+pointb=66*la;
 $B=new Float64Array($H,pointb,sz);
 R.setOutput([sz]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -235,11 +236,8 @@ for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 };
-pointb=66*la;
-$B=new Float64Array($H,pointb,sz);
 var T=false;
 r.setOutput([$S,$S]);
- 
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -255,15 +253,15 @@ if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 };
 };
+$bb=R(vv);
+$B.set($bb,0,sz);
+// pointb=66*la;
 if(sh4d==true){
 Module.ccall("frm");
 };
 setTimeout(function(){
 M();
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-$bb=R(vv);
-$B.set($bb,0,sz);
-pointb=66*la;
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(loopLoop==true){
 if(revv==true){
