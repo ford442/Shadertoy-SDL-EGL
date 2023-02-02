@@ -85,8 +85,8 @@ char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
-int_fast32_t Size,iFrame,iFps;
-// int Size,iFrame,iFps;
+// int_fast32_t Size,iFrame,iFps;
+int Size,iFrame,iFps;
 
 EGLDisplay display;
 EGLSurface surface;
@@ -95,8 +95,8 @@ EGLConfig eglconfig;
 EGLint config_size,major,minor;
 
 double wi_js,hi_js;
-int_fast32_t Size_js;
-// int Size_js;
+// int_fast32_t Size_js;
+int Size_js;
 
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
