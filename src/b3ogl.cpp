@@ -472,8 +472,12 @@ renderFrame();
 return;
 }
 
-void b3_egl(){
+void fire_egl(){
 egla();
+return;
+}
+
+void b3_egl(){
 egl();
 return;
 }
