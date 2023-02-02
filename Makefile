@@ -33,7 +33,7 @@ b3hd:
           --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3hdm:
-	 em++  src/b3ogl.cpp -c -std=c++2a
+	 em++  src/b3ogl.cpp -c -std=c++2a -Dsimd=sse42 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
 	 em++ src/b3emjs.cpp -c -std=c++11
 	 em++ src/b3sdl.cpp -c  -std=c++11 -sUSE_SDL=2
 	 em++ src/b3main.cpp -c  -std=c++11
