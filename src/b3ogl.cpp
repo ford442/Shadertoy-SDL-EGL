@@ -4,21 +4,21 @@ EM_BOOL mouse_call_click(int eventType,const EmscriptenMouseEvent * e,void * use
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
-};
+}
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
-};};
+}}
 return (EM_BOOL)1;
-};
+}
 
 static EM_BOOL mouse_call_move(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
-};};
+}}
 return (EM_BOOL)1;
-};
+}
 
 void egl(){
 emscripten_webgl_init_context_attributes(&attr_js);
@@ -110,7 +110,8 @@ glEnable(GL_SCISSOR_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 
-};
+return;
+}
 
 void egla(){
 emscripten_webgl_init_context_attributes(&attr_js);
@@ -202,37 +203,10 @@ glEnable(GL_SCISSOR_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 
-};
+return;
+}
 
-void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];};
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];};
-};
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-};
-aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-};
-aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-};
-aptr[200]=maxSum/32;
-};
+
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(y1y-rlc))/2.0)+alc);
@@ -240,7 +214,8 @@ drk=y1y-(avr-0.5);
 brt=((y1y-rlc)-(alc-0.5));
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
-};
+return;
+}
 
 void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
@@ -266,7 +241,8 @@ glUniform1f(uni_tme,stime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
-};
+return;
+}
 
 void renderFrame(){
 auto t3=t2;
@@ -285,7 +261,8 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFinish();
 // nanosleep(&req,&rem);
-};
+return;
+}
 
 char32_t * read_file(const GLchar * filename){
 char32_t * result=NULL;
@@ -296,34 +273,34 @@ short int status=fseek(file,(long int)0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
-};
+}
 length=ftell(file);
 status=fseek(file,(long int)0,SEEK_SET);
 if(status!=0){
 fclose(file);
 return nullptr;
-};
+}
 result=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char32_t),length,file);
 result[actual_length++]={'\0'};
-};
+}
 fclose(file);
 return result;
-};
+}
 return nullptr;
-};
+}
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar ** dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
-};
+}
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
-};
+}
 
 void strt(){
 eglconfig=NULL;
@@ -483,29 +460,27 @@ glDeleteShader(frag);
 glReleaseShaderCompiler();
 
 auto t1=std::chrono::steady_clock::now();
-};
+return;
+}
 
 extern "C" {
 
 void str(){
 strt();
-};
+}
 
-void nano(int Fnum,int leng,float * ptr,float * aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-};
 
 void frm(){
 renderFrame();
-};
+}
 
 void b3_egl(){
 egla();
 egl();
-};
+}
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
 clrclr(cllr,alp,avr);
-};
+}
 
-};
+}
