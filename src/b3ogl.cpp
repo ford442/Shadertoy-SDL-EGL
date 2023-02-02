@@ -187,14 +187,14 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_robust_buffer_access_behavior");
 emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
-emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage ");
+emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
-  glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 
 // glDisable(GL_STENCIL_TEST);
