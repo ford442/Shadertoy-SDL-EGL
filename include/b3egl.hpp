@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
 #include <immintrin.h> 
@@ -17,7 +19,6 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-#include <cstdint>
 
 #include <emscripten/html5.h>
 // #include <emscripten/html5_webgl.h>
