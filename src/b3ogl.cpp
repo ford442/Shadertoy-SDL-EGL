@@ -473,12 +473,12 @@ return;
 }
 
 void fire_egl(){
-egla();
+// egla();
 return;
 }
 
 void b3_egl(){
-egl();
+// egl();
 return;
 }
 
