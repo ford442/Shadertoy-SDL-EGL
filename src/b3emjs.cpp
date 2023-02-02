@@ -31,6 +31,15 @@ aptr[200]=maxSum/32;
 return;
 }
 
+extern "C" {
+
+void nano(int Fnum,int leng,float * ptr,float * aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+return;
+}
+ 
+}
+
 EM_JS(void,ma,(),{
 
 "use strict";
@@ -316,11 +325,6 @@ T=true;
 });
 
 extern "C" {
-
-void nano(int Fnum,int leng,float * ptr,float * aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-return;
-}
 
 void b3(){
 ma();
