@@ -61,7 +61,7 @@ var revv;
 var $bb;
 
 function forwardLoop(){
-setTim=mmvv.currentTime;
+// setTim=mmvv.currentTime;
 setTim+=stpInc;
 if(setTim<stp){
 mmvv.currentTime=setTim;
@@ -71,7 +71,7 @@ revv=true;
 }
  
 function reverseLoop(){
-setTim=mmvv.currentTime;
+// setTim=mmvv.currentTime;
 setTim-=stpInc;
 if(setTim>=Lstp){
 mmvv.currentTime=setTim;
