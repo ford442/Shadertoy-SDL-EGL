@@ -128,14 +128,14 @@ g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 const Pa=tv[this.thread.y][this.thread.x*4];
-// return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-return Ave(Pa[0],Pa[1],Pa[2]);
+return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
+// return Ave(Pa[0],Pa[1],Pa[2]);
 }).setArgumentTypes(["HTMLVideo"]).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 // const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 const P=v[this.thread.y][this.thread.x];
-// const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
-const av$=Ave(P[0],P[1],P[2]);
+const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
+// const av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
@@ -216,7 +216,7 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($
 var d=S();if(d)d();d=S();
 function S(){
 $S=parseInt(window.innerHeight,10);
-t.setOutput([$S,$S]);
+// t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -237,7 +237,7 @@ var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var T=false;
-r.setOutput([$S,$S]);
+// r.setOutput([$S,$S]);
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -255,7 +255,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };
 $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;  // has to revar?
+var pointb=66*la;  // has to revar?
 if(sh4d==true){
 Module.ccall("frm");
 };
