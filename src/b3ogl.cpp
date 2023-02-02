@@ -206,13 +206,11 @@ glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 return;
 }
 
-
-
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avrg=(((avr+(y1y-rlc))/2.0)+alc);
-drk=y1y-(avr-0.5);
-brt=((y1y-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,y1y);
+avrg=(((avr+(F-rlc))/2.0)+alc);
+drk=F-(avr-0.5);
+brt=((F-rlc)-(alc-0.5));
+glBlendColor(avrg,avrg,avrg,F);
 glClearColor(drk,drk,drk,brt);
 return;
 }
@@ -452,8 +450,8 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 
 glUniform1f(uni_srate,(GLfloat)44100.0);
-glUniform3f(uni_res,S,S,g1g);
-glUniform3f(smp_chn_res,S,S,g1g);
+glUniform3f(uni_res,S,S,F);
+glUniform3f(smp_chn_res,S,S,F);
 
 glDeleteShader(vtx);
 glDeleteShader(frag);
