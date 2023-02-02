@@ -218,6 +218,19 @@ document.getElementById('circle').height=window.innerHeight;
 */
   
 function normalResStart(){
+
+document.getElementById('circle').width=window.innerWidth;
+document.getElementById('circle').height=window.innerHeight;
+
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
+
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').height=window.innerHeight;
+
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').height=window.innerHeight;
+
 setTimeout(function(){
 Module.ccall('b3_egl');
 },150);
