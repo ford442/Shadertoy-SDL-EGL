@@ -150,7 +150,7 @@ const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setArgumentTypes(["HTMLCanvas"]).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
 
 gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
