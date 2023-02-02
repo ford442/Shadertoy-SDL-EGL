@@ -475,7 +475,7 @@ renderFrame();
 return;
 }
   
-void szz(int szi){
+void szz(GLsizei szi){
 resizeShader(szi);
 return;
 }
