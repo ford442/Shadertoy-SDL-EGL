@@ -21,18 +21,6 @@ struct timespec req={0,13333333};
 
 static void avgFrm(int,int,float *,float *);
 
-extern "C"{
-  
-void clr(GLclampf,GLclampf,GLclampf);
-  
-void nano(int,int,float *,float *);
-
-void str();
-  
-void b3_egl();
-
-}
-
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
@@ -216,3 +204,15 @@ EM_BOOL ms_l,clk_l;
 EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
+
+extern "C"{
+  
+void clr(GLclampf,GLclampf,GLclampf);
+  
+void nano(int,int,float *,float *);
+
+void str();
+  
+void b3_egl();
+
+}
