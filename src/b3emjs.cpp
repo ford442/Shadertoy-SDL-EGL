@@ -295,7 +295,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };
 $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=66*la;  // has to revar?
+pointb=66*la;  // has to revar?
 if(sh4d==true){
 Module.ccall("frm");
 };
