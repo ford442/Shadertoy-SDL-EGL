@@ -470,14 +470,13 @@ strt();
 return;
 }
 
-
 void frm(){
 renderFrame();
 return;
 }
 
 void b3_egl(){
-egla();
+// egla();
 egl();
 return;
 }
