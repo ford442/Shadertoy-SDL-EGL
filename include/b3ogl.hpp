@@ -19,7 +19,9 @@ struct timespec req={0,13333333};
 
 #include "../include/b3gl.hpp"
 
-static void avgFrm(int,int,float *,float *);
+void avgFrm(int,int,float *,float *);
+
+void resizeShader(GLsizei);
 
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
@@ -212,7 +214,9 @@ void clr(GLclampf,GLclampf,GLclampf);
 void nano(int,int,float *,float *);
 
 void str();
-  
+
+void szz(short int);
+
 void b3_egl();
 
 void fire_egl();
