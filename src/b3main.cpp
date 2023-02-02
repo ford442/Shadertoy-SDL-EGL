@@ -147,18 +147,17 @@ $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
 const shdMenu=document.getElementById('sh1');
-var pth='https://glsl.1ink.us/shaders/melt';
-
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
-pth=$shds[randShade];
+document.getElementById('path').innerHTML=$shds[randShade];
 }else{
-pth='https://glsl.1ink.us/shaders/'+shdMenu.value;
+document.getElementById('path').innerHTML=shdMenu.value;
 };
 }else{
-pth='https://glsl.1ink.us/shaders/'+document.getElementById('path').innerHTML;
+var fle=document.getElementById('path').innerHTML;
+document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 };
-
+var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
