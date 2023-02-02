@@ -319,10 +319,12 @@ extern "C" {
 
 void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+return;
 }
 
 void b3(){
 ma();
-};
+return;
+}
  
-};
+}
