@@ -18,7 +18,7 @@ SDL_LockAudioDevice(dev);
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
-};
+}
 
 void plt(){
 SDL_memset(&wave.request,0,sizeof(wave.request));
@@ -34,13 +34,13 @@ wave.request.callback=bfr;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
-};
+}
 
 extern "C" {
 
 void pl(){
 plt();
 return;
-};
+}
   
-};
+}
