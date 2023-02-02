@@ -63,7 +63,7 @@ emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
-emscripten_webgl_enable_extension(ctx_js,"OES_single_precision");
+// emscripten_webgl_enable_extension(ctx_js,"OES_single_precision");
 // emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
 emscripten_webgl_enable_extension(ctx_js,"OES_frag_depth");
@@ -100,16 +100,14 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
+// emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
+// emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-
 return;
 }
 
@@ -140,7 +138,6 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(int)hi_js;
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -165,8 +162,8 @@ emscripten_webgl_enable_extension(ctx_js,"OES_sRGB");
 emscripten_webgl_enable_extension(ctx_js,"OES_depth32");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_blend_minmax");
 // emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query");
-emscripten_webgl_enable_extension(ctx_js,"EXT_clip_cull_distance");
-emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
+//  emscripten_webgl_enable_extension(ctx_js,"EXT_clip_cull_distance");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx_js,"GL_framebuffer_sRGB");
 // emscripten_webgl_enable_extension(ctx_js,"ANGLE_instanced_arrays");
@@ -177,7 +174,7 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");
+// emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_display_p3");
@@ -193,16 +190,14 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
+//emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
+ // emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-
 return;
 }
 
@@ -480,7 +475,7 @@ renderFrame();
 return;
 }
   
-void szz(short int szi){
+void szz(int szi){
 resizeShader(szi);
 return;
 }
