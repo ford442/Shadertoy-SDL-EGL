@@ -235,17 +235,20 @@ setTimeout(function(){
 Module.ccall('b3_egl');
 },150);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },350);
 setTimeout(function(){
+Module.ccall('b3');
+},550);
+setTimeout(function(){
 Module.ccall('str');
-},650);
+},750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},850);
+},950);
 }
   
 const tem=document.getElementById('tim');
