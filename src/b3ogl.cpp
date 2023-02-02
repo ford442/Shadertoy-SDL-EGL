@@ -236,9 +236,9 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 clk_l=true;
 };
 glUniform1f(uni_tme,stime);
-glUniform1f(uni_tme_dlt,delt);
-glUniform1f(uni_fps,iFps);
-glUniform1i(uni_frm,fram);
+// glUniform1f(uni_tme_dlt,delt);
+// glUniform1f(uni_fps,iFps);
+// glUniform1i(uni_frm,fram);
 return;
 }
 
