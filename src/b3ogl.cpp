@@ -481,7 +481,7 @@ return;
 }
 
 void fire_egl(){
-// egla();
+egla();
 return;
 }
 
