@@ -464,7 +464,7 @@ glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPH
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 
 glUseProgram(shd_prg);
-  
+
 glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
   
