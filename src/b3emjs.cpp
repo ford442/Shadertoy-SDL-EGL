@@ -44,8 +44,6 @@ EM_JS(void,ma,(),{
 
 "use strict";
 
-let pnnl=document.body;
-let bCan=document.getElementById("bcanvas");
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 let $S=parseInt(window.innerHeight,10);
@@ -108,31 +106,31 @@ if(e.code=='KeyS'){
 sh4d=false;
 };
 }
- 
+const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*h$*4;
 var pointa=77*la;
 var pointb=66*la;
 var $B=new Float64Array($H,pointb,sz);
 var agav=new Float64Array($H,pointa,300);
-var sz=(h$*h$)/8;
-var avag=0.750;
-var min=1.000;
-var max=0.000;
+var sz=(h$*w$)/8;
+var avag=0.750000;
+var min=1.000000;
+var max=0.000000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
   
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
 la=h$*h$*4;
-sz=(h$*h$)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
- 
+const bCan=document.getElementById("bcanvas");
 const gl_js=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
@@ -264,7 +262,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
 la=h$*h$*4;
-sz=(h$*h$)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);  // has to var?
 pointb=66*la;
