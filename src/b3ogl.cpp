@@ -473,8 +473,8 @@ return;
 }
 
 void b3_egl(){
-// egla();
-//egl();
+egla();
+egl();
 return;
 }
 
