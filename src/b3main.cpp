@@ -343,4 +343,4 @@ FS.mkdir("/shader");
 js_main();
 return 0;
 
-};
+}
