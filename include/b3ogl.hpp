@@ -215,7 +215,7 @@ void nano(int,int,float *,float *);
 
 void str();
 
-void szz(int);
+void szz(GLsizei);
 
 void b3_egl();
 
