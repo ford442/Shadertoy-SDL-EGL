@@ -1,6 +1,6 @@
 double wi,hi;
-float TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double Ttime,Dm1=-1.0,D0=0.0,D=1.0;
+float F=1.0f,Fm1=-1.0f,F0=0.0f;
+double TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -31,7 +31,7 @@ void str();
   
 void b3_egl();
 
-};
+}
 
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
@@ -85,8 +85,8 @@ char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
-// int_fast32_t Size,iFrame,iFps;
-int Size,iFrame,iFps;
+int_fast32_t Size,iFrame,iFps;
+// int Size,iFrame,iFps;
 
 EGLDisplay display;
 EGLSurface surface;
@@ -95,8 +95,8 @@ EGLConfig eglconfig;
 EGLint config_size,major,minor;
 
 double wi_js,hi_js;
-// int_fast32_t Size_js;
-int Size_js;
+int_fast32_t Size_js;
+// int Size_js;
 
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
@@ -105,7 +105,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
-};
+}
 
 EGLint const anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
@@ -115,7 +115,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
-};
+}
 
 EGLint const attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
@@ -146,7 +146,7 @@ EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)32,
 EGL_NONE
-};
+}
 
 EGLContext contextegl_js;
 
@@ -162,7 +162,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
-};
+}
 
 EGLint const anEglCtxAttribs2_js[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
@@ -172,7 +172,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
-};
+}
 
 EGLint const attribute_list_js[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
@@ -203,7 +203,7 @@ EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)32,
 EGL_NONE
-};
+}
 
 #include "../include/b3emsc.hpp"
 
