@@ -226,9 +226,9 @@ var nblank$=Math.max(((h$-w$)/2.0),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,300);  // has to var?
 pointb=66*la;
-$B=new Float64Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);  // has to var?
 R.setOutput([sz]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -255,7 +255,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };
 $bb=R(vv);
 $B.set($bb,0,sz);
-// pointb=66*la;
+pointb=66*la;  // has to revar?
 if(sh4d==true){
 Module.ccall("frm");
 };
