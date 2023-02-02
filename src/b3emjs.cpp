@@ -261,7 +261,7 @@ Module.ccall("frm");
 setTimeout(function(){
 M();
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-$bb=R(bCan);
+$bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
