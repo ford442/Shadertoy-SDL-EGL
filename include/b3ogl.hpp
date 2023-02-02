@@ -215,7 +215,7 @@ void nano(int,int,float *,float *);
 
 void str();
 
-void szz(short int);
+void szz(int);
 
 void b3_egl();
 
