@@ -462,12 +462,12 @@ glClearDepth(D);
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+
+glUseProgram(shd_prg);
   
 glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
   
-glUseProgram(shd_prg);
-
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
