@@ -215,6 +215,14 @@ glClearColor(drk,drk,drk,brt);
 return;
 }
 
+void resizeShader(GLsizei szi){
+glViewport((GLint)0,(GLint)0,szi,szi);
+glScissor((GLint)0,(GLint)0,szi,szi);
+glUniform3f(uni_res,szi,szi,(GLfloat)1.0);
+glUniform3f(smp_chn_res,szi,szi,(GLfloat)1.0);
+return;
+}
+
 void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
@@ -469,6 +477,11 @@ return;
 
 void frm(){
 renderFrame();
+return;
+}
+  
+void szz(short int szi){
+resizeShader(szi);
 return;
 }
 
