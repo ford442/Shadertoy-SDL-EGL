@@ -450,8 +450,8 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 
 glUniform1f(uni_srate,(GLfloat)44100.0);
-glUniform3f(uni_res,S,S,F);
-glUniform3f(smp_chn_res,S,S,F);
+glUniform3f(uni_res,S,S,(GLfloat)1.0);
+glUniform3f(smp_chn_res,S,S,(GLfloat)1.0);
 
 glDeleteShader(vtx);
 glDeleteShader(frag);
