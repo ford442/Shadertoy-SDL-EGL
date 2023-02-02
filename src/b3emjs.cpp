@@ -71,7 +71,7 @@ sh4d=false;
  
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
-var la=h$*h$*8;
+var la=h$*h$*4;
 var pointa=77*la;
 var pointb=66*la;
 var $B=new Float64Array($H,pointb,sz);
@@ -89,7 +89,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
  
@@ -224,7 +224,7 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max(((w$-h$)/2.0),0);
 var nblank$=Math.max(((h$-w$)/2.0),0);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);  // has to var?
