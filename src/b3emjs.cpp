@@ -263,7 +263,7 @@ Module.ccall("frm");
 setTimeout(function(){
 M();
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(loopLoop==true){
 if(revv==true){
 reverseLoop();
