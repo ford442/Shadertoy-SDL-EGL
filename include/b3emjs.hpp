@@ -1,10 +1,10 @@
 #include "../include/b3emsc.hpp"
 
-static void avgFrm(int,int,float *,float *);
+static void avgFrm(short int,int,float *,float *);
 
 extern "C"{
 
-void nano(int,int,float *,float *);
+void nano(short int,int,float *,float *);
 
 void b3();
 
