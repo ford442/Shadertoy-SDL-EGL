@@ -467,20 +467,24 @@ extern "C" {
 
 void str(){
 strt();
+return;
 }
 
 
 void frm(){
 renderFrame();
+return;
 }
 
 void b3_egl(){
 egla();
 egl();
+return;
 }
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
 clrclr(cllr,alp,avr);
+return;
 }
 
 }
