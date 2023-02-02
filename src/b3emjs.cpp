@@ -147,8 +147,7 @@ const alph=Alphe($amax,$amin,$aavg,p[3]);
 const Min=(4.0*(($amax-($aavg-$amin))/2.0));
 const ouT=Math.max(Min,alph);
 const aveg=Aveg(p[3],ouT);
-// this.color(p[0],p[1],p[2],aveg);
-this.color(p[0],p[1],p[2],0.7);
+this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
 
 gl_js.getExtension('WEBGL_color_buffer_float');
