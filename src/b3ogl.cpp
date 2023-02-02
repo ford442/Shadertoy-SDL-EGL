@@ -478,7 +478,7 @@ return;
 }
 
 void b3_egl(){
-// egl();
+egl();
 return;
 }
 
