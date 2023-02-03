@@ -17,7 +17,6 @@ b3hd:
 
 	 em++ src/b3sdl.cpp -c -O0 -g0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
-	 
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
