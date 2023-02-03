@@ -2,8 +2,8 @@
 
 void egla(){ 
 eglconfig_fjs=NULL;
-emscripten_get_element_css_size("canvas",&wi_fjs,&hi_fjs);
-Size_fjs=(GLsizei)hi_fjs;
+// emscripten_get_element_css_size("canvas",&wi_fjs,&hi_fjs);
+// Size_fjs=(GLsizei)hi_fjs;
 emscripten_webgl_init_context_attributes(&attr_fjs);
 attr_fjs.alpha=EM_TRUE;
 attr_fjs.stencil=EM_TRUE;
@@ -82,8 +82,8 @@ emscripten_webgl_enable_extension(ctx_fjs,"ARB_robust_buffer_access_behavior");
 // emscripten_webgl_enable_extension(ctx_fjs,"ARB_ES3_2_compatibility");
 //emscripten_webgl_enable_extension(ctx_fjs,"EXT_gpu_shader5");
  // emscripten_webgl_enable_extension(ctx_fjs,"OES_gpu_shader5");
-glViewport((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
+   // glViewport((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
+   // glScissor((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
