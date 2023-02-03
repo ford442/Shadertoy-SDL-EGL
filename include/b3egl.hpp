@@ -3,7 +3,7 @@
 #include <cstdint>
 
 #include <popcntintrin.h>
-#include <mmintrin.h> //  MMX
+// #include <mmintrin.h> //  MMX
 #include <xmmintrin.h> // SSE
 #include <emmintrin.h> // SSE2
 #include <pmmintrin.h> // SSE3
