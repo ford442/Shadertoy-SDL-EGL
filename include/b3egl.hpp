@@ -10,7 +10,7 @@
 #include <tmmintrin.h> // SSSE3
 #include <nmmintrin.h>  //  SSE 4.2 lib
 #include <avxintrin.h>  // AVX
-#include <avxvnniintrin.h>  // AVX
+
 #include <avxifmaintrin.h>  // AVX
 #include <avxvnniint8intrin.h>  // AVX
 #include <wasm_simd128.h>
