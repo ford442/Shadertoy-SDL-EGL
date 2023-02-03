@@ -1,6 +1,3 @@
-double wi,hi;
-float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -18,6 +15,10 @@ struct timespec rem;
 struct timespec req={0,13333333};
 
 #include "../include/b3gl.hpp"
+
+double wi,hi;
+float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 void avgFrm(int,int,float *,float *);
 
