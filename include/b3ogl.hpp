@@ -78,7 +78,7 @@ char32_t * read_file(const GLchar *);
 
 int_fast32_t iFrame,iFps;
 // int Size,iFrame,iFps;
-GLsizei Size;
+// GLsizei Size;
 short int Size;
 
 EGLDisplay display;
@@ -86,7 +86,6 @@ EGLSurface surface;
 EGLContext contextegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-
 
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
