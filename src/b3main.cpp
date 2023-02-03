@@ -341,7 +341,7 @@ setTimeout(function(){
 // Module.ccall('b3');
 },550);
 setTimeout(function(){
-Module.ccall('str');
+// Module.ccall('str');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
