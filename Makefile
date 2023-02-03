@@ -1,9 +1,9 @@
 b3hd:
-	 em++  src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 em++  src/b3ogl.cpp -c -mavx -nostdlib -fno-math-errno -fPIC -fexperimental-library \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
-	 -msimd128 -mavx -Dsimd=avx \
+	 -msimd128 -Dsimd=avx \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
