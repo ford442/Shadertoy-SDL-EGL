@@ -15,7 +15,7 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on
 
-	 em++ src/b3sdl.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3sdl.cpp -c -O3 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
