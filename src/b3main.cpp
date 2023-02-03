@@ -338,7 +338,7 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 
 setTimeout(function(){
-// Module.ccall('fire_egl');
+Module.ccall('fire_egl');
 },150);
 setTimeout(function(){
 Module.ccall('b3_egl');
