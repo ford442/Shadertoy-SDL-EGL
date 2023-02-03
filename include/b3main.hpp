@@ -1,9 +1,8 @@
-#include "../include/b3emsc.hpp"
-
 double wi_fjs,hi_fjs;
 int_fast32_t Size_fjs;
 // int Size_js;
 
+#include "../include/b3gl.hpp"
 #include "../include/b3egl.hpp"
 
 EGLContext contextegl_fjs;
