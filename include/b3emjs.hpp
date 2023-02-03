@@ -6,8 +6,9 @@
 static void avgFrm(short int,int,float *,float *);
 
 double wi_js,hi_js;
-int_fast32_t Size_js;
+// int_fast32_t Size_js;
 // int Size_js;
+GLsizei Size_js;
 
 EGLContext contextegl_js;
 
