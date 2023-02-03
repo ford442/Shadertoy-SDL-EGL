@@ -2,10 +2,21 @@
 
 #include <cstdint>
 
+#include <popcntintrin.h>
+#include <wmmintrin.h>  // AES
+#include <mmintrin.h> //  MMX
+#include <xmmintrin.h> // SSE
+#include <emmintrin.h> // SSE2
+#include <pmmintrin.h> // SSE3
+#include <tmmintrin.h> // SSSE3
+#include <nmmintrin.h>  //  SSE 4.2 lib
+#include <x86gprintrin.h>
+#include <avxintrin.h>  // AVX
+#include <avxvnniintrin.h>  // AVX
+#include <avxifmaintrin.h>  // AVX
+#include <avxvnniint8intrin.h>  // AVX
 #include <wasm_simd128.h>
-#include <xmmintrin.h>
-#include <immintrin.h> 
-#include <nmmintrin.h>
+
 #include <unistd.h>
 // #include <webgl/webgl2.h>
 
@@ -22,4 +33,3 @@
 
 #include <emscripten/html5.h>
 // #include <emscripten/html5_webgl.h>
-
