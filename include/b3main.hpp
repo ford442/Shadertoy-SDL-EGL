@@ -5,7 +5,8 @@
 double wi_fjs,hi_fjs;
 // int_fast32_t Size_fjs;
 // int Size_js;
-GLsizei Size_fjs;
+short int Size_fjs;
+// GLsizei Size_fjs;
 
 EGLContext contextegl_fjs;
 
