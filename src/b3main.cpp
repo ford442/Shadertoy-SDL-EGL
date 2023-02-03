@@ -318,7 +318,7 @@ document.getElementById('circle').height=window.innerHeight;
 */
   
 function normalResStart(){
-/*
+
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 
@@ -330,15 +330,15 @@ document.getElementById('bcanvas').height=window.innerHeight;
 
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
-*/
+
 setTimeout(function(){
-Module.ccall('fire_egl');
+// Module.ccall('fire_egl');
 },150);
 setTimeout(function(){
-Module.ccall('b3_egl');
+// Module.ccall('b3_egl');
 },350);
 setTimeout(function(){
-Module.ccall('b3');
+// Module.ccall('b3');
 },550);
 setTimeout(function(){
 Module.ccall('str');
