@@ -9,7 +9,6 @@
 #include <pmmintrin.h> // SSE3
 #include <tmmintrin.h> // SSSE3
 #include <nmmintrin.h>  //  SSE 4.2 lib
-#include <x86gprintrin.h>
 #include <avxintrin.h>  // AVX
 #include <avxvnniintrin.h>  // AVX
 #include <avxifmaintrin.h>  // AVX
