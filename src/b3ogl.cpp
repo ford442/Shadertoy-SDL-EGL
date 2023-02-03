@@ -20,7 +20,7 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-void egl(){
+void egl(){  /*
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
@@ -107,11 +107,11 @@ glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js); */
 return;
 }
 
-void egla(){
+void egla(){  /*
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
@@ -198,7 +198,7 @@ glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-return;
+return; */
 }
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
