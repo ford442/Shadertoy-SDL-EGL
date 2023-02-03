@@ -1,11 +1,15 @@
-double wi_js,hi_js;
-int_fast32_t Size_js;
-// int Size_js;
+
+
+
+#include "../include/b3gl.hpp"
+
+#include "../include/b3egl.hpp"
 
 static void avgFrm(short int,int,float *,float *);
 
-#include "../include/b3gl.hpp"
-#include "../include/b3egl.hpp"
+double wi_js,hi_js;
+int_fast32_t Size_js;
+// int Size_js;
 
 EGLContext contextegl_js;
 
