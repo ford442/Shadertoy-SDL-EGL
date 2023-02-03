@@ -1,6 +1,11 @@
 #include "../include/b3main.hpp"
 
 void egla(){ 
+
+eglconfig_fjs=NULL;
+emscripten_get_element_css_size("canvas",&wi_fjs,&hi_fjs);
+Size_fjs=(GLsizei)hi_fjs;
+
 emscripten_webgl_init_context_attributes(&attr_fjs);
 attr_fjs.alpha=EM_TRUE;
 attr_fjs.stencil=EM_TRUE;
@@ -15,18 +20,20 @@ attr_fjs.failIfMajorPerformanceCaveat=EM_FALSE;
 attr_fjs.majorVersion=2;
 attr_fjs.minorVersion=0;
 ctx_fjs=emscripten_webgl_create_context("#acanvas",&attr_fjs);
+
 eglBindAPI(EGL_OPENGL_API);
 display_fjs=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display_fjs,&major_fjs,&minor_fjs);
 eglChooseConfig(display_fjs,attribute_list_fjs,&eglconfig_fjs,(EGLint)1,&config_size_fjs);
 contextegl_fjs=eglCreateContext(display_fjs,eglconfig_fjs,EGL_NO_CONTEXT,anEglCtxAttribs2_fjs);
 surface_fjs=eglCreateWindowSurface(display_fjs,eglconfig_fjs,(NativeWindowType)0,attribut_list_fjs);
+
 eglMakeCurrent(display_fjs,surface_fjs,surface_fjs,contextegl_fjs);
 emscripten_webgl_make_context_current(ctx_fjs);
-emscripten_get_element_css_size("canvas",&wi_fjs,&hi_fjs);
-Size_fjs=(int)hi_fjs;
+
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+
 emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_blend_equation_advanced_coherent");
