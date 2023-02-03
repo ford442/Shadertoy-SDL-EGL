@@ -11,7 +11,6 @@
 #include <nmmintrin.h>  //  SSE 4.2 lib
 #include <avxintrin.h>  // AVX
 
-#include <avxvnniint8intrin.h>  // AVX
 #include <wasm_simd128.h>
 
 #include <unistd.h>
