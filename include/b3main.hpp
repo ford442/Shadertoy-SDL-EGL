@@ -1,5 +1,4 @@
 
-
 #include "../include/b3gl.hpp"
 #include "../include/b3egl.hpp"
 
