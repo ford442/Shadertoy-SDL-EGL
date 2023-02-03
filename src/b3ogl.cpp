@@ -20,187 +20,6 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-void egl(){
-emscripten_webgl_init_context_attributes(&attr_js);
-attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_TRUE;
-attr_js.depth=EM_TRUE;
-attr_js.antialias=EM_TRUE;
-attr_js.premultipliedAlpha=EM_FALSE;
-attr_js.preserveDrawingBuffer=EM_TRUE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
-attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
-attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
-attr_js.majorVersion=2;
-attr_js.minorVersion=0;
-ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
-eglBindAPI(EGL_OPENGL_API);
-display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display_js,&major_js,&minor_js);
-eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_size_js);
-contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2_js);
-surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
-eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
-emscripten_webgl_make_context_current(ctx_js);
-emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size_js=(int)hi_js;
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_depth_texture");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_draw_buffers");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_provoking_vertex");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_webcodecs_video_frame");
-emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
-emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
-emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
-emscripten_webgl_enable_extension(ctx_js,"OES_fbo_render_mipmap");
-emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
-emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
-emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
-// emscripten_webgl_enable_extension(ctx_js,"OES_single_precision");
-// emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
-emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
-emscripten_webgl_enable_extension(ctx_js,"OES_frag_depth");
-emscripten_webgl_enable_extension(ctx_js,"OES_shader_texture_lod");
-emscripten_webgl_enable_extension(ctx_js,"OES_sRGB");
-emscripten_webgl_enable_extension(ctx_js,"OES_depth32");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_blend_minmax");
-// emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query");
-emscripten_webgl_enable_extension(ctx_js,"EXT_clip_cull_distance");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
-// emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx_js,"EXT_framebuffer_sRGB");
-emscripten_webgl_enable_extension(ctx_js,"ANGLE_instanced_arrays");
-// emscripten_webgl_enable_extension(ctx_js,"KHR_parallel_shader_compile");
-emscripten_webgl_enable_extension(ctx_js,"EXT_texture_shadow_lod");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_memory_attachment");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");
-emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_bt2020_linear");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_display_p3");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_display_p3_linear");
-emscripten_webgl_enable_extension(ctx_js,"ARB_multisample");
-emscripten_webgl_enable_extension(ctx_js,"ARB_robustness");
-emscripten_webgl_enable_extension(ctx_js,"ARB_robust_buffer_access_behavior");
-emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
-emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
-emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
-emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage ");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
-// emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
-glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
-// glDisable(GL_STENCIL_TEST);
-// glDisable(GL_DEPTH_TEST);
-glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js); */
-return;
-}
- /*
-void egla(){ 
-emscripten_webgl_init_context_attributes(&attr_js);
-attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_TRUE;
-attr_js.depth=EM_TRUE;
-attr_js.antialias=EM_TRUE;
-attr_js.premultipliedAlpha=EM_FALSE;
-attr_js.preserveDrawingBuffer=EM_TRUE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
-attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
-attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
-attr_js.majorVersion=2;
-attr_js.minorVersion=0;
-ctx_js=emscripten_webgl_create_context("#acanvas",&attr_js);
-eglBindAPI(EGL_OPENGL_API);
-display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display_js,&major_js,&minor_js);
-eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_size_js);
-contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2_js);
-surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
-eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
-emscripten_webgl_make_context_current(ctx_js);
-emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size_js=(int)hi_js;
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_depth_texture");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_draw_buffers");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_provoking_vertex");
-// emscripten_webgl_enable_extension(ctx_js,"WEBGL_webcodecs_video_frame");
-emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
-emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
-emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
-emscripten_webgl_enable_extension(ctx_js,"OES_fbo_render_mipmap");
-emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
-emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
-emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
-// emscripten_webgl_enable_extension(ctx_js,"GL_single_precision");
-// emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
-emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
-emscripten_webgl_enable_extension(ctx_js,"OES_frag_depth");
-emscripten_webgl_enable_extension(ctx_js,"OES_shader_texture_lod");
-emscripten_webgl_enable_extension(ctx_js,"OES_sRGB");
-emscripten_webgl_enable_extension(ctx_js,"OES_depth32");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_blend_minmax");
-// emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query");
-//  emscripten_webgl_enable_extension(ctx_js,"EXT_clip_cull_distance");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
-// emscripten_webgl_enable_extension(ctx_js,"GL_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx_js,"GL_framebuffer_sRGB");
-// emscripten_webgl_enable_extension(ctx_js,"ANGLE_instanced_arrays");
-// emscripten_webgl_enable_extension(ctx_js,"KHR_parallel_shader_compile");
-emscripten_webgl_enable_extension(ctx_js,"EXT_texture_shadow_lod");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_memory_attachment");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_bt2020_linear");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_display_p3");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_display_p3_linear");
-emscripten_webgl_enable_extension(ctx_js,"ARB_multisample");
-emscripten_webgl_enable_extension(ctx_js,"ARB_robustness");
-emscripten_webgl_enable_extension(ctx_js,"ARB_robust_buffer_access_behavior");
-emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
-emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
-emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
-emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
-emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-//emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
- // emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
-glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
-// glDisable(GL_STENCIL_TEST);
-// glDisable(GL_DEPTH_TEST);
-glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-return; 
-}
-*/
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(y1y-rlc))/2.0)+alc);
 drk=y1y-(avr-0.5);
@@ -436,7 +255,7 @@ glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 
 glUseProgram(shd_prg);
 
-glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
@@ -477,16 +296,6 @@ return;
   
 void szz(GLsizei szi){
 resizeShader(szi);
-return;
-}
-
-void fire_egl(){
-// egla();
-return;
-}
-
-void b3_egl(){
-egl();
 return;
 }
 
