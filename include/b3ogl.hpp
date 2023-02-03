@@ -78,7 +78,7 @@ char32_t * read_file(const GLchar *);
 
 int_fast32_t iFrame,iFps;
 // int Size,iFrame,iFps;
-GLsizei Size_js;
+GLsizei Size;
 
 EGLDisplay display;
 EGLSurface surface;
