@@ -86,7 +86,7 @@ glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js); */
+glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 return;
 }
 
