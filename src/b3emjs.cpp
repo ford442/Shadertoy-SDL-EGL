@@ -245,43 +245,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-
-const g=new GPU({mode:'gpu',canvas:bCan,webGl:gl_js});
-const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
-const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
-g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
-g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-var R=g2.createKernel(function(tv){
-var Pa=tv[this.thread.y][this.thread.x*4];
-return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-
-}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
-var t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-
-var av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
-
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
-
-return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
-var r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var $amax=this.constants.amax;
-var $amin=this.constants.amin;
-var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$aavg,p[3]);
-var Min=(4.0*(($amax-($aavg-$amin))/2.0));
-var ouT=Math.max(Min,alph);
-var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
 gl_js.getExtension('WEBGL_color_buffer_float');
 gl_js.getExtension('WEBGL_color_buffer_half_float');
 gl_js.getExtension('OES_texture_float_linear');
@@ -328,6 +291,39 @@ gl_js.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl_js.disable(gl.DITHER);
 gl_js.drawingBufferColorSpace='display-p3';
+const g=new GPU({mode:'gpu',canvas:bCan,webGl:gl_js});
+const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
+const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
+const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
+g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
+g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+var R=g2.createKernel(function(tv){
+var Pa=tv[this.thread.y][this.thread.x*4];
+return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
+}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
+var t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$-(minuss*(av$*0.01));
+return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
+var r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$aavg,p[3]);
+var Min=(4.0*(($amax-($aavg-$amin))/2.0));
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
+
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
