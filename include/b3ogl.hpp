@@ -1,7 +1,25 @@
+extern "C"{
+  
+void clr(GLclampf,GLclampf,GLclampf);
+
+void nano(int,int,float *,float *);
+
+void str();
+
+void szz(GLsizei);
+
+};
+
+int_fast32_t iFrame,iFps,Size;
+// int Size,iFrame,iFps;
+// GLsizei Size;
+// short int Size;
+
+double wi,hi;
+float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
-
-void renderFrame();
 
 #include <iostream>
 #include <ctime>
@@ -15,14 +33,6 @@ struct timespec rem;
 struct timespec req={0,13333333};
 
 #include "../include/b3gl.hpp"
-
-double wi,hi;
-float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
-
-void avgFrm(int,int,float *,float *);
-
-void resizeShader(GLsizei);
 
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
@@ -76,10 +86,11 @@ char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
-int_fast32_t iFrame,iFps;
-// int Size,iFrame,iFps;
-// GLsizei Size;
-short int Size;
+void renderFrame();
+
+void avgFrm(int,int,float *,float *);
+
+void resizeShader(GLsizei);
 
 EGLDisplay display;
 EGLSurface surface;
@@ -148,15 +159,3 @@ EM_BOOL ms_l,clk_l;
 EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
-
-extern "C"{
-  
-void clr(GLclampf,GLclampf,GLclampf);
-
-void nano(int,int,float *,float *);
-
-void str();
-
-void szz(GLsizei);
-
-}
