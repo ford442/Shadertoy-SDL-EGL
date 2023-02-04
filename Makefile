@@ -3,12 +3,10 @@ b3hd:
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
-	 -msimd128 -Dsimd=avx -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 em++ src/b3emjs.cpp -c -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
-	 -msimd128 -Dsimd=avx -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
@@ -19,10 +17,9 @@ b3hd:
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3main.cpp -c  -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
-	 -msimd128 -Dsimd=avx -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -sWASM=0 --closure 0 -std=c++2a -fPIC -fexperimental-library -mllvm -polly -static -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
+	 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -Dsimd=avx -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
