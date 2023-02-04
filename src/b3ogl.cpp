@@ -32,8 +32,8 @@ return;
 void resizeShader(GLsizei szi){
 glViewport((GLint)0,(GLint)0,szi,szi);
 glScissor((GLint)0,(GLint)0,szi,szi);
-glUniform3f(uni_res,(GLfloat)szi,(GLfloat)szi,(GLfloat)1.0);
-glUniform3f(smp_chn_res,(GLfloat)szi,(GLfloat)szi,(GLfloat)1.0);
+// glUniform3f(uni_res,(GLfloat)szi,(GLfloat)szi,(GLfloat)1.0);
+// glUniform3f(smp_chn_res,(GLfloat)szi,(GLfloat)szi,(GLfloat)1.0);
 return;
 }
 
