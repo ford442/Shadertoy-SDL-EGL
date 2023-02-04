@@ -1,6 +1,6 @@
 extern "C"{
 
-void nano(short int,int,float *,float *);
+void nano(int,int,float *,float *);
 
 void b3_egl();
 
@@ -17,7 +17,7 @@ double wi_js,hi_js;
 
 int_fast32_t Size_js;
 
-static void avgFrm(short int,int,float *,float *);
+static void avgFrm(int,int,float *,float *);
 
 EGLContext contextegl_js;
 
