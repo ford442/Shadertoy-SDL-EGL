@@ -29,7 +29,7 @@ contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAt
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 
-eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
+// eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
 
 emscripten_webgl_make_context_current(ctx_js);
 
@@ -48,7 +48,7 @@ emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
 emscripten_webgl_enable_extension(ctx_js,"OES_fbo_render_mipmap");
 emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
+// emscripten_webgl_enable_extension(ctx_js,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx_js,"OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx_js,"OES_single_precision");
 // emscripten_webgl_enable_extension(ctx_js,"OES_standard_derivatives");
