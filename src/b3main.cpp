@@ -85,7 +85,7 @@ emscripten_webgl_enable_extension(ctx_fjs,"ARB_robust_buffer_access_behavior");
 // glViewport((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
 // glScissor((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
 glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
+// glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 return; 
