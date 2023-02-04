@@ -1,4 +1,3 @@
-
 extern "C"{
 
 void fire_egl();
@@ -6,13 +5,12 @@ void fire_egl();
 };
 
 double wi_fjs,hi_fjs;
-int_fast32_t Size_fjs;
-// int Size_js;
-// short int Size_fjs;
-// GLsizei Size_fjs;
 
 #include "../include/b3gl.hpp"
 #include "../include/b3egl.hpp"
+
+int_fast32_t Size_fjs;
+
 
 EGLContext contextegl_fjs;
 
