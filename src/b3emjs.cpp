@@ -256,30 +256,30 @@ g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-const R=g2.createKernel(function(tv){
-const Pa=tv[this.thread.y][this.thread.x*4];
+var R=g2.createKernel(function(tv){
+var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
 
 }).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
-const t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 
-const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
+var av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 
-// var minuss=(av$-0.9)*(av$/(av$-0.9));
-// av$=av$-(minuss*(av$*0.01));
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$-(minuss*(av$*0.01));
 
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
-const r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-const $amax=this.constants.amax;
-const $amin=this.constants.amin;
-const $aavg=this.constants.aavg;
-const alph=Alphe($amax,$amin,$aavg,p[3]);
-const Min=(4.0*(($amax-($aavg-$amin))/2.0));
-const ouT=Math.max(Min,alph);
-const aveg=Aveg(p[3],ouT);
+var r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$aavg,p[3]);
+var Min=(4.0*(($amax-($aavg-$amin))/2.0));
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setDynamicOutput(true).setOutput([$S,$S]);
 gl_js.getExtension('WEBGL_color_buffer_float');
@@ -307,10 +307,10 @@ gl_js.getExtension('WEBGL_draw_buffers');
 gl_js.getExtension('WEBGL_provoking_vertex');
 gl_js.getExtension('EXT_framebuffer_sRGB');
 gl_js.getExtension('OES_depth32');
-gl_js.getExtension('OES_fixed_point');
-gl_js.getExtension('OES_shader_multisample_interpolation');
-gl_js.getExtension('WEBGL_webcodecs_video_frame');
-gl_js.getExtension('OES_single_precision');
+// gl_js.getExtension('OES_fixed_point');
+  //  gl_js.getExtension('OES_shader_multisample_interpolation');
+// gl_js.getExtension('WEBGL_webcodecs_video_frame');
+// gl_js.getExtension('OES_single_precision');
 // gl.getExtension('EXT_texture_shadow_lod');
 gl_js.getExtension('EGL_NV_memory_attachment');
 gl_js.getExtension('EGL_NV_depth_nonlinear');
