@@ -27,7 +27,7 @@ b3hd:
 	 -Dsimd=avx -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js rSlider.js --pre-js slideOut.js --pre-js fluid.js --post-js fluib.js --post-js gpujs.js 
+         --pre-js rSlider.js --pre-js slideOut.js  --post-js gpujs.js 
 
 b3hdm:
 	 em++ src/b3ogl.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
