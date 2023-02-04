@@ -220,8 +220,8 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
   
 vv=document.getElementById("mv");
-var blank$=Math.max(((w$-h$)/2.0),0);
-var nblank$=Math.max(((h$-w$)/2.0),0);
+var blank$=Math.max(((w$-h$)/0),0);
+var nblank$=Math.max(((h$-w$)/0),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -269,8 +269,9 @@ const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk]
 
 const av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// av$=av$-(minuss*(av$*0.01));
+
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setPrecision("single").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
 const r=g.createKernel(function(f){
@@ -355,8 +356,8 @@ vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max(((w$-h$)/2.0),0);
-var nblank$=Math.max(((h$-w$)/2.0),0);
+var blank$=Math.max(((w$-h$)/0),0);
+var nblank$=Math.max(((h$-w$)/0),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
