@@ -98,7 +98,7 @@ egla();
 return;
 }
 
-}
+};
 
 EM_JS(void,js_main,(),{
 
