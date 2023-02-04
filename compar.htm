@@ -5,11 +5,11 @@
 <link rel=preconnect href=https://css.1ink.us>
 <title>R*A*1*N</title>
 <link crossorigin rel='stylesheet' href='https://css.1ink.us/sh1.1iss'>
-<link rel='stylesheet' href='./css/normalize.css'>
+<link rel='stylesheet' href='./css/normalize.css'/>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet'>
 <link rel='stylesheet' href='./css/demo.css'>
 <link rel='stylesheet' href='./css/style1.css'>
-<link rel='stylesheet' href='./mono-index.css'>
+<link rel="stylesheet" href="./mono-index.css" />
 </head>
 <body class=demo-1>
 <nav id=menu>
@@ -39,41 +39,11 @@ TIMESLIDER<br>(Seconds between video change)</div>
 <header class=codrops-header>
 <h1>Rain &amp; Water Effects</h1>
 <nav class=codrops-demos>
-<a class=current-demo href=./index.html  style='position:absolute;top:0;z-index:999993;'>Weather</a>
+<a class=current-demo href=./index.html  style='opacity:0.333;position:absolute;top:0;z-index:999993;left:calc(50% - 50vh);width: 100vh; height: 100vh;'>Weather</a>
 <a href=./index2.html>Water</a>
 <a href=./index3.html>Video</a>
 </nav>
 </header>
-<div class=slideshow style='position:absolute;top:0;z-index:999994;'>
-<canvas width=1 height=1 id=container style='position:absolute;top:0;z-index:999995;'></canvas>
-<div class=slide id=slide-1 data-weather=rain>
-<div class='slide__element slide__element--date'>Sunday, 24<sup>th</sup> of October 2043</div>
-<div class='slide__element slide__element--temp'>12Â°<small>C</small></div>
-</div>
-<div class=slide id=slide-2 data-weather=drizzle>
-<div class='slide__element slide__element--date'>Saturday, 25<sup>th</sup> of October 2043</div>
-<div class='slide__element slide__element--temp'>18Â°<small>C</small></div>
-</div>
-<div class=slide id=slide-3 data-weather=sunny>
-<div class='slide__element slide__element--date'>Monday, 26<sup>th</sup> of October 2043</div>
-<div class='slide__element slide__element--temp'>25Â°<small>C</small></div>
-</div>
-<div class=slide id=slide-5 data-weather=storm>
-<div class='slide__element slide__element--date'>Wednesday, 28<sup>th</sup> of October 2043</div>
-<div class='slide__element slide__element--temp'>20Â°<small>C</small></div>
-</div>
-<div class=slide id=slide-4 data-weather=fallout>
-<div class='slide__element slide__element--date'>Tuesday, 27<sup>th</sup> of October 2043</div>
-<div class='slide__element slide__element--temp'>34Â°<small>C</small></div>
-</div>
-<nav class=slideshow__nav>
-<a class=nav-item href=#slide-1><i class='icon icon--rainy'></i><span>10/24</span></a>
-<a class=nav-item href=#slide-2><i class='icon icon--drizzle'></i><span>10/25</span></a>
-<a class=nav-item href=#slide-3><i class='icon icon--sun'></i><span>10/26</span></a>
-<a class=nav-item href=#slide-5><i class='icon icon--storm'></i><span>10/28</span></a>
-<a class=nav-item href=#slide-4><i class='icon icon--radioactive'></i><span>10/27</span></a>
-</nav>
-</div>
 <iframe src=./bezz.1ink style='pointer-events:none;border-width:0px;position:absolute;top:0px;left:0px;right:0px;bottom:0px;overflow:hidden;z-index:999998;display:block;overflow-y:hidden;overflow-x:hidden;' id=circle title='Circular mask'></iframe>
 <input type=button id=btn1 style='background-color:black;position:absolute;display:block;left:5%;top:50%;z-index:999999;border:5px solid #e7e7e7;border-radius:50%;'></input>
 <input type=button id=btn3 style='background-color:purple;position:absolute;display:none;left:3%;top:13%;z-index:999997;border:5px solid red;border-radius:50%;' onclick='document.getElementById("di")).click();'></input>
@@ -93,8 +63,6 @@ TIMESLIDER<br>(Seconds between video change)</div>
 <progress value=0 max=100 id=progress></progress>
 </div>
 <input type=checkbox id=di hidden/>
-<div id=rndShader hidden>0</div>
-<div id=ffire hidden>0</div>
 <div hidden=true id=path>./drops</div>
 <div id=iwid hidden>0</div>
 <div id=ihig hidden>0</div>
@@ -107,6 +75,11 @@ TIMESLIDER<br>(Seconds between video change)</div>
 <div id=isrc hidden>./intro.mp4</div>
 <div id=idur hidden>0</div>
 <div id=itim hidden>0</div>
+<script>
+document.getElementById('pmhig').innerHTML=window.innerHeight;
+document.getElementById('wid').innerHTML=window.innerHeight;
+document.getElementById('hig').innerHTML=window.innerHeight;
+</script>
 <div id=wrap>
 <div id=contain1>
 <canvas id=scanvas class=emscripten style='opacity:0.333;pointer-events:auto;display:block;position:absolute;z-index:999995;background-color:rgba(1,1,1,0);top:0;height:100vh;width:100vh;image-rendering:auto;'></canvas>
@@ -114,23 +87,17 @@ TIMESLIDER<br>(Seconds between video change)</div>
 <script type="module" src="./mono-index.js"></script>
 </div>
 <div id=contain2>
-<canvas id=acanvas style='opacity:0.333;pointer-events:auto;cursor:url(cursor.cur),auto;display:block;z-index:999996;position:absolute;height:100vh;width:100vh;margin-left:auto;margin-right:auto;background-color:rgba(1,1,1,0);top:0;image-rendering:auto;'></canvas>
+<canvas id=acanvas style='opacity:0.333;pointer-events:auto;cursor:url(cursor.cur),auto;display:block;z-index:999994;position:absolute;height:100vh;width:100vh;margin-left:auto;margin-right:auto;background-color:rgba(1,1,1,0);top:0;image-rendering:auto;'></canvas>
 <canvas id=bcanvas style='opacity:0.333;pointer-events:none;display:block;z-index:999996;position:absolute;height:100vh;width:100vh;margin-left:auto;margin-right:auto;background-color:rgba(1,1,1,0);top:0;image-rendering:auto;'></canvas>
 </div>
-<script>
-document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-</script>
 </main>
-<div>
-<video hidden muted src=./intro.mp4 crossorigin playsinline id=mv preload=auto style='pointer-events:none;height:100vh;' />
+<div id=vidWrapA>
+<video hidden muted src=./intro.mp4 crossorigin id=mv preload=auto style='pointer-events:none;'></video>
 </div>
-<div>
-<video hidden muted src=./intro.mp4 crossorigin playsinline id=ldv preload=auto style='pointer-events:none;height:100vh;' />
+<div id=vidWrapB>
+<video hidden muted src=./intro.mp4 crossorigin id=ldv preload=auto style='pointer-events:none;'></video>
 </div>
+<audio crossorigin id=track preload=auto hidden style='pointer-events:none;'></audio>
+<script async crossorigin src=https://wasm.noahcohn.com/s3001.1ijs></script>
 <script charset=utf-8 src=./js/index.16.js></script>
 </body>
-<script async src=./s3001.1ijs></script>
