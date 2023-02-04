@@ -2,13 +2,13 @@
 
 #include <cstdint>
 
-#include <wasm_simd128.h>
-#include <xmmintrin.h> // SSE
-#include <emmintrin.h> // SSE2
-#include <pmmintrin.h> // SSE3
-#include <popcntintrin.h>
-#include <tmmintrin.h> // SSSE3
-#include <nmmintrin.h>  //  SSE 4.2 lib
+///#include <wasm_simd128.h>
+///#include <xmmintrin.h> // SSE
+///#include <emmintrin.h> // SSE2
+///#include <pmmintrin.h> // SSE3
+///#include <popcntintrin.h>
+//   #include <tmmintrin.h> // SSSE3
+//   #include <nmmintrin.h>  //  SSE 4.2 lib
 // #include <avxintrin.h>  // AVX
 
 #include <unistd.h>
