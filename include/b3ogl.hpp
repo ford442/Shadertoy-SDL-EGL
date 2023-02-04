@@ -10,11 +10,6 @@ void szz(GLsizei);
 
 };
 
-int_fast32_t iFrame,iFps,Size;
-// int Size,iFrame,iFps;
-// GLsizei Size;
-// short int Size;
-
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
 double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
@@ -85,6 +80,8 @@ void clrclr(GLclampf,GLclampf,GLclampf);
 char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
+
+int_fast32_t iFrame,iFps,Size;
 
 void renderFrame();
 
