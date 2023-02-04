@@ -25,7 +25,7 @@ struct timespec rem;
 struct timespec req={0,13333333};
 
 #include "../include/b3gl.hpp"
-
+GLsizei szi;
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
