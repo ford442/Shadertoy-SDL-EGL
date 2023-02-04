@@ -154,10 +154,8 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
-
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
@@ -212,7 +210,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 // emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 // emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
-
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
@@ -233,14 +230,12 @@ glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
 atb_pos=0;
 glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
-
 glLinkProgram(shd_prg);
 glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
-  
   // glDisable(GL_STENCIL_TEST);
 glEnable(GL_SCISSOR_TEST);
 glDisable(GL_DITHER);
@@ -252,9 +247,7 @@ glClearDepth(D);
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-
 glUseProgram(shd_prg);
-
 glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
@@ -269,15 +262,12 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
-
 glUniform1f(uni_srate,(GLfloat)44100.0);
 glUniform3f(uni_res,S,S,(GLfloat)1.0);
 glUniform3f(smp_chn_res,S,S,(GLfloat)1.0);
-
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-
 auto t1=std::chrono::steady_clock::now();
 return;
 }
@@ -304,4 +294,4 @@ clrclr(cllr,alp,avr);
 return;
 }
 
-}
+};
