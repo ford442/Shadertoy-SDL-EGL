@@ -20,7 +20,7 @@ b3hd:
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -fPIC -fexperimental-library -mllvm -polly -static -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
-	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
+	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 -sWASM_BIGINT=1 \
 	 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
