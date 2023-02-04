@@ -1,7 +1,5 @@
 #pragma once
 
-// #include <cstdint>
-
 ///#include <wasm_simd128.h>
 ///#include <xmmintrin.h> // SSE
 ///#include <emmintrin.h> // SSE2
