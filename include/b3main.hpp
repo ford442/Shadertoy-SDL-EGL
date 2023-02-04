@@ -1,12 +1,18 @@
 
-#include "../include/b3gl.hpp"
-#include "../include/b3egl.hpp"
+extern "C"{
+
+void fire_egl();
+  
+};
 
 double wi_fjs,hi_fjs;
-// int_fast32_t Size_fjs;
+int_fast32_t Size_fjs;
 // int Size_js;
-short int Size_fjs;
+// short int Size_fjs;
 // GLsizei Size_fjs;
+
+#include "../include/b3gl.hpp"
+#include "../include/b3egl.hpp"
 
 EGLContext contextegl_fjs;
 
@@ -70,8 +76,3 @@ EGL_NONE
 EmscriptenWebGLContextAttributes attr_fjs;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_fjs;
 
-extern "C"{
-
-void fire_egl();
-  
-}
