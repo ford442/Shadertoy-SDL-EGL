@@ -84,7 +84,7 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_robust_buffer_access_behavior");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
+// glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 // glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
@@ -92,7 +92,7 @@ glEnable(GL_SCISSOR_TEST);
 return;
 }
 
-void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
+void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -125,7 +125,7 @@ return;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float * ptr,float * aptr){
+void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
