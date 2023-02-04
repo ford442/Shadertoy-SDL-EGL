@@ -9,14 +9,13 @@ void b3();
 };
 
 double wi_js,hi_js;
-int_fast32_t Size_js;
-// short int Size_js;
-// int Size_js;
-// GLsizei Size_js;
+
 
 #include "../include/b3gl.hpp"
 
 #include "../include/b3egl.hpp"
+
+int_fast32_t Size_js;
 
 static void avgFrm(short int,int,float *,float *);
 
