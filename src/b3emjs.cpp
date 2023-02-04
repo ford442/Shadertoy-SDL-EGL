@@ -1,12 +1,9 @@
 #include "../include/b3emjs.hpp"
 
 void egl(){
-
 eglconfig_js=NULL;
-
-emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size_js=(GLsizei)hi_js;
-
+// emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
+// Size_js=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
@@ -28,11 +25,8 @@ eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_siz
 contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2_js);
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
-
 // eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
-
 emscripten_webgl_make_context_current(ctx_js);
-
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
@@ -136,7 +130,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
  
-}
+};
 
 EM_JS(void,ma,(),{
 
@@ -433,4 +427,4 @@ egl();
 return;
 }
  
-}
+};
