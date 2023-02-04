@@ -28,6 +28,9 @@ eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_siz
 contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2_js);
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
+
+eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
+
 emscripten_webgl_make_context_current(ctx_js);
 
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
