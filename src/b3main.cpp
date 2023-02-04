@@ -436,8 +436,8 @@ scanShaders();
 });
 
 int main(){
-"use strict";
 EM_ASM({
+ "use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
