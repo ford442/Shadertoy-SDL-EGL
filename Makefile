@@ -1,5 +1,5 @@
 b3hd:
-	 em++  src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 em++  src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library -sFORCE_FILESYSTEM=1 \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -14,11 +14,11 @@ b3hd:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on
 	 em++ src/b3sdl.cpp -c -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
-	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
+	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize -sFORCE_FILESYSTEM=1 \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3main.cpp -c  -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
-         -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
+         -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize -sFORCE_FILESYSTEM=1 \
 	 -msimd128 -Dsimd=avx -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -fPIC -fexperimental-library -mllvm -polly -static -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
