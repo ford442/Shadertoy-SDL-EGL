@@ -90,8 +90,8 @@ glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+// glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+// glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 return;
 }
 
@@ -212,9 +212,9 @@ var pointb=66*la;
 var $B=new Float64Array($H,pointb,sz);
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*w$)/8;
-var avag=0.750000;
-var min=1.000000;
-var max=0.000000;
+var avag=0.750;
+var min=1.000;
+var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
@@ -249,8 +249,8 @@ majorVersion:2,
 minorVersion:0
 });
 
-const g=new GPU({mode:'webgl2',canvas:bCan,webGl:gl_js});
-const g2=new GPU({mode:'webgl2'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
+const g=new GPU({mode:'gpu',canvas:bCan,webGl:gl_js});
+const g2=new GPU({mode:'gpu'});  //  A / B    'webgl2' / 'gpu' / 'cpu'
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f))))))+0.7)/4.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -371,7 +371,7 @@ var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var T=false;
-// r.setOutput([$S,$S]);
+r.setOutput([$S,$S]);
 function M(){
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
