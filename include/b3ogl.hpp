@@ -1,12 +1,9 @@
+
 extern "C"{
   
-void clr(GLclampf,GLclampf,GLclampf);
-
 void nano(int,int,float *,float *);
 
 void str();
-
-void szz(GLsizei);
 
 };
 
@@ -80,6 +77,14 @@ void clrclr(GLclampf,GLclampf,GLclampf);
 char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
+
+extern "C"{
+  
+void clr(GLclampf,GLclampf,GLclampf);
+
+void szz(GLsizei);
+
+};
 
 int_fast32_t iFrame,iFps,Size;
 
