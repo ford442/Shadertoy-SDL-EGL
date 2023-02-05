@@ -8,23 +8,23 @@ b3hd:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 
-	 em++ src/b3emjs.cpp -c -O0 -std=c++11 -stdlib=libc++ \
+	 em++ src/b3emjs.cpp -c -O0 -std=c++2a -stdlib=libc++ \
 	 -Dsimd=sse42 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on
 
-	 em++ src/b3sdl.cpp -c -O0 -std=c++11 -stdlib=libc++ \
+	 em++ src/b3sdl.cpp -c -O0 -std=c++2a -stdlib=libc++ \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ src/b3main.cpp -c -O3 -std=c++11 -stdlib=libc++ \
+	 em++ src/b3main.cpp -c -O3 -std=c++2a -stdlib=libc++ \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++11 -stdlib=libc++ -O0 \
+	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -stdlib=libc++ -O0 \
 	 -msimd128 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -Dsimd=avx -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
