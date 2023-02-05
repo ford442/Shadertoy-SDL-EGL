@@ -50,13 +50,13 @@ const float yyy=yy;
 mX=1.0-(xxx*Size);
 mY=1.0-(yyy*Size);
 clk_l=false;
-}
+};
 mm=S*xx;
 nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
-}
+};
 glUniform1f(uni_tme,stime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
@@ -93,21 +93,21 @@ short int status=fseek(file,(long int)0,SEEK_END);
 if(status!=0){
 fclose(file);
 return nullptr;
-}
+};
 length=ftell(file);
 status=fseek(file,(long int)0,SEEK_SET);
 if(status!=0){
 fclose(file);
 return nullptr;
-}
+};
 result=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char32_t),length,file);
 result[actual_length++]={'\0'};
-}
+};
 fclose(file);
 return result;
-}
+};
 return nullptr;
 }
 
@@ -115,7 +115,7 @@ GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar ** dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
 srclens[i]=(GLsizei)strlen(sources[i]);
-}
+};
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
