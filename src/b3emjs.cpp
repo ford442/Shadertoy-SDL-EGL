@@ -131,7 +131,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
  
-};
+}
 
 EM_JS(void,ma,(),{
 
@@ -430,4 +430,4 @@ egl();
 return;
 }
  
-};
+}
