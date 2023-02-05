@@ -13,7 +13,7 @@ b3hd:
 	 em++ src/b3sdl.cpp -c -std=c++2a -fno-math-errno -fPIC \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
-	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
+	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math \
 	 em++ src/b3main.cpp -c -std=c++2a -fno-math-errno -fPIC \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -freciprocal-math
