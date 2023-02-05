@@ -322,10 +322,10 @@ loada();
 }
 
 document.getElementById('startBtn').addEventListener('click',function(){
-scanShaders();
 scanVideos();
 scanSongs();
 loada();
+scanShaders();
 });
 
 });
