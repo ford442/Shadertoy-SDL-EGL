@@ -7,7 +7,6 @@
 #include <popcntintrin.h>
 #include <tmmintrin.h> // SSSE3
 #include <nmmintrin.h>  //  SSE 4.2 lib
-#include <avxintrin.h>  // AVX
 
 #include <unistd.h>
 #include <webgl/webgl2.h>
