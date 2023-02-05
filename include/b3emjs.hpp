@@ -6,7 +6,7 @@ void b3_egl();
 
 void b3();
 
-}
+};
 
 double wi_js,hi_js;
 
