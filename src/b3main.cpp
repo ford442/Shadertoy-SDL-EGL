@@ -126,9 +126,8 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $vids[i]=Self+'video/'+txxt;
-};
-}
-
+}}
+/*
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
 // fxhttp.withCredentials=false;
@@ -145,7 +144,18 @@ var looc='video/';
 fxhttp.open('GET',looc,true);
 fxhttp.send();
 }
-
+*/
+   
+function scanVideos(){
+const fxhttp=new XMLHttpRequest();
+fxhttp.onreadystatechange=function(){
+if(this.readyState==4&&this.status==200){
+vids(this);
+}};
+fxhttp.open('GET','video/',true);
+fxhttp.send();
+}
+   
 function shds(xml){
 const sparser=new DOMParser();
 const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
