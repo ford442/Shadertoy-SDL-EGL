@@ -426,10 +426,10 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-   loada();
 document.getElementById('startBtn').addEventListener('click',function(){
 scanSongs();
 scanVideos();
+   loada();
 
 scanShaders();
 });
