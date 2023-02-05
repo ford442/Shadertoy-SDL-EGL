@@ -50,13 +50,13 @@ const float yyy=yy;
 mX=1.0-(xxx*Size);
 mY=1.0-(yyy*Size);
 clk_l=false;
-};
+}
 mm=S*xx;
 nn=S*yy;
 glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
-};
+}
 glUniform1f(uni_tme,stime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
@@ -294,4 +294,4 @@ clrclr(cllr,alp,avr);
 return;
 }
 
-};
+}
