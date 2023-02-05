@@ -91,7 +91,7 @@ glDisable(GL_DITHER);
 glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 return;
-}
+};
 
 void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
@@ -102,8 +102,8 @@ float minSum=0.0;
 float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];};
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];};
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 };
 sum=sum/leng;
 aptr[Fnum]=sum;
@@ -122,16 +122,16 @@ maxSum+=aptr[i+200];
 };
 aptr[200]=maxSum/32;
 return;
-}
+};
 
 extern "C" {
 
 void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
-}
+};
  
-}
+};
 
 EM_JS(void,ma,(),{
 
@@ -420,11 +420,11 @@ extern "C" {
 void b3(){
 ma();
 return;
-}
+};
 
 void b3_egl(){
 egl();
 return;
-}
+};
  
-}
+};
