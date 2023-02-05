@@ -26,6 +26,53 @@ b3hd:
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js rSlider.js --pre-js slideOut.js  --extern-pre-js fluid.js --extern-pre-js flui.js --pre-js gpujs.js 
 
+
+b3_shader:
+	 em++ src/b3ogl_sh4d3.cpp -c -std=c++2a  \
+	 em++ src/b3main_sh4d3.cpp -c -std=c++2a \
+	 emcc b3main_sh4d3.o b3ogl_sh4d3.o -o s3020.js -std=c++2a \
+	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         -sEXPORTED_FUNCTIONS='["_main","_str","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --pre-js rSlider.js --pre-js slideOut.js
+
+
+b3_webgl:
+	 em++ src/b3emjs.cpp -c -std=c++2a
+	 em++ src/b3main.cpp -c -std=c++2a
+	 emcc b3main.o b3emjs.o -o b3020.js -std=c++2a \
+	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js 
+
+
+b3_audio:
+	 em++ src/b3main.cpp -c -std=c++2a
+	 em++ src/b3sdl.cpp -c -std=c++2a -sUSE_SDL=2
+	 emcc b3main.o b3sdl.o -o a3020.js -std=c++2a \
+	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         -sEXPORTED_FUNCTIONS='["_main","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+         --pre-js rSlider.js --pre-js slideOut.js
+
+
+b3_fire:
+	 em++ src/b3main.cpp -c -std=c++2a
+	 emcc b3main.o -o f3020.js -std=c++2a \
+	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         --pre-js rSlider.js --pre-js slideOut.js  --extern-pre-js fluid.js --extern-pre-js flui.js
+
+
+b3_vanilla:
+	 em++ src/b3main_vanilla.cpp -c -std=c++2a
+	 emcc b3main_vanilla.o -o v3020.js -std=c++2a \
+	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+         --pre-js rSlider.js --pre-js slideOut.js
+
+
 b3hdm:
 	 em++ src/b3ogl.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
 	 em++ src/b3emjs.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
