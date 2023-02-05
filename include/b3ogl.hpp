@@ -6,7 +6,7 @@ void str();
 
 }
 
-#include <avxintrin.h>  // AVX
+// #include <avxintrin.h>  // AVX
 
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
