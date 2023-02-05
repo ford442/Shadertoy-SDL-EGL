@@ -135,7 +135,7 @@ return;
 
 EM_JS(void,ma,(),{
 
-"use strict";
+// "use strict";
 
 var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
