@@ -335,6 +335,7 @@ scanSongs();
 });
 
 int main(){
+"use strict";
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
