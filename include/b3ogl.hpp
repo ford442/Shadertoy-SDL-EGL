@@ -1,11 +1,10 @@
-
 extern "C"{
   
 void nano(int,int,float *,float *);
 
 void str();
 
-};
+}
 
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
@@ -25,6 +24,7 @@ struct timespec rem;
 struct timespec req={0,13333333};
 
 #include "../include/b3gl.hpp"
+
 GLsizei szi;
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
@@ -84,7 +84,7 @@ void clr(GLclampf,GLclampf,GLclampf);
 
 void szz(GLsizei);
 
-};
+}
 
 int_fast32_t iFrame,iFps,Size;
 
@@ -148,7 +148,6 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)64,
   EGL_MIPMAP_LEVEL,(EGLint)64,
-
 EGL_NONE
 };
 
