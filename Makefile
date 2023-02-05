@@ -1,30 +1,30 @@
 b3hd:
-	 em++  src/b3ogl.cpp -c -O0 -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3ogl.cpp -c -O0 -fno-math-errno -fPIC \
 	 -std=c++2a  -msimd128 -mavx -Dsimd=avx \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffast-math -ffp-contract=on
-	 em++ src/b3emjs.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3emjs.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -Dsimd=sse42 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ src/b3sdl.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3sdl.cpp -c -O3 -std=c++2a -fno-math-errno -fPIC \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
-	 em++ src/b3main.cpp -c -O3 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3main.cpp -c -O3 -std=c++2a -fno-math-errno -fPIC \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mbulk-memory -msign-ext -ffast-math -freciprocal-math
-	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -fPIC -fexperimental-library -polly -static -fno-math-errno -DNDEBUG -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -sWASMFS=1 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx \
-	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 -sWASM_BIGINT=1 -DSIMD=avx \
+	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -fPIC -polly -fno-math-errno -DNDEBUG -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 -sWASMFS=1 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
+	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js rSlider.js --pre-js slideOut.js  --extern-pre-js fluid.js --extern-pre-js flui.js --post-js gpujs.js 
+         --pre-js rSlider.js --pre-js slideOut.js  --extern-pre-js fluid.js --extern-pre-js flui.js --pre-js gpujs.js 
 
 b3hdm:
 	 em++ src/b3ogl.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
