@@ -14,7 +14,7 @@ wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
 SDL_LockAudioDevice(dev);
-};
+}
 SDL_memcpy(stm,wptr,len);
 wave.pos+=len;
 return;
