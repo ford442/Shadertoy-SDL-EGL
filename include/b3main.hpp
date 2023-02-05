@@ -2,7 +2,7 @@ extern "C"{
 
 void fire_egl();
   
-};
+}
 
 double wi_fjs,hi_fjs;
 
@@ -10,7 +10,6 @@ double wi_fjs,hi_fjs;
 #include "../include/b3egl.hpp"
 
 int_fast32_t Size_fjs;
-
 
 EGLContext contextegl_fjs;
 
@@ -67,7 +66,6 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)64,
   EGL_MIPMAP_LEVEL,(EGLint)64,
-
 EGL_NONE
 };
 
@@ -75,4 +73,3 @@ EGL_NONE
 
 EmscriptenWebGLContextAttributes attr_fjs;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_fjs;
-
