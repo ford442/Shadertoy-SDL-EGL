@@ -14,7 +14,7 @@ b3hd:
 	 em++ src/b3sdl.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
-	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math -mllvm
+	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3main.cpp -c -O3 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mbulk-memory -msign-ext -ffast-math -freciprocal-math
