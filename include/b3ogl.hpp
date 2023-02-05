@@ -4,7 +4,7 @@ void nano(int,int,float *,float *);
 
 void str();
 
-}
+};
 
 // #include <avxintrin.h>  // AVX
 
@@ -86,7 +86,7 @@ void clr(GLclampf,GLclampf,GLclampf);
 
 void szz(GLsizei);
 
-}
+};
 
 int_fast32_t iFrame,iFps,Size;
 
