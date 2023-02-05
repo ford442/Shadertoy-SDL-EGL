@@ -5,12 +5,12 @@ b3hd:
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
+	 -ffast-math -ffp-contract=on
 	 em++ src/b3emjs.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -Dsimd=sse42 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs  -mllvm \
-	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 -fno-fast-math -ffp-contract=on -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/b3sdl.cpp -c -O0 -std=c++2a -fno-math-errno -fPIC -fexperimental-library \
 	 -sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
