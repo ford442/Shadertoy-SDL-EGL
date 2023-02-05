@@ -2,8 +2,8 @@
 
 void egl(){
 eglconfig_js=NULL;
-// emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-// Size_js=(GLsizei)hi_js;
+emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
+Size_js=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
@@ -88,8 +88,8 @@ glDisable(GL_DITHER);
 // glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-// glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
-// glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+glViewport((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
+glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 return;
 }
 
@@ -102,8 +102,8 @@ float minSum=0.0;
 float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+if(max<ptr[i]){max=ptr[i];};
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];};
 };
 sum=sum/leng;
 aptr[Fnum]=sum;
