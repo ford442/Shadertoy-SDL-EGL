@@ -1,106 +1,5 @@
 #include "../include/b3main.hpp"
 
-void egla(){ 
-eglconfig_fjs=NULL;
-// emscripten_get_element_css_size("canvas",&wi_fjs,&hi_fjs);
-// Size_fjs=(GLsizei)hi_fjs;
-emscripten_webgl_init_context_attributes(&attr_fjs);
-attr_fjs.alpha=EM_TRUE;
-attr_fjs.stencil=EM_TRUE;
-attr_fjs.depth=EM_TRUE;
-attr_fjs.antialias=EM_TRUE;
-attr_fjs.premultipliedAlpha=EM_FALSE;
-attr_fjs.preserveDrawingBuffer=EM_TRUE;
-attr_fjs.enableExtensionsByDefault=EM_TRUE;
-attr_fjs.renderViaOffscreenBackBuffer=EM_FALSE;
-attr_fjs.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr_fjs.failIfMajorPerformanceCaveat=EM_FALSE;
-attr_fjs.majorVersion=2;
-attr_fjs.minorVersion=0;
-ctx_fjs=emscripten_webgl_create_context("#acanvas",&attr_fjs);
-// eglBindAPI(EGL_OPENGL_API);
-eglBindAPI(EGL_OPENGL_ES_API);
-display_fjs=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display_fjs,&major_fjs,&minor_fjs);
-eglChooseConfig(display_fjs,attribute_list_fjs,&eglconfig_fjs,(EGLint)1,&config_size_fjs);
-contextegl_fjs=eglCreateContext(display_fjs,eglconfig_fjs,EGL_NO_CONTEXT,anEglCtxAttribs2_fjs);
-surface_fjs=eglCreateWindowSurface(display_fjs,eglconfig_fjs,(NativeWindowType)0,attribut_list_fjs);
-eglMakeCurrent(display_fjs,surface_fjs,surface_fjs,contextegl_fjs);
-emscripten_webgl_make_context_current(ctx_fjs);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_color_buffer_float");
-// emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_blend_equation_advanced_coherent");
-// emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_depth_texture");
-// emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_draw_buffers");
-// emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_provoking_vertex");
-// emscripten_webgl_enable_extension(ctx_fjs,"WEBGL_webcodecs_video_frame");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_texture_float_linear");
-// emscripten_webgl_enable_extension(ctx_fjs,"OES_texture_half_float_linear");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_element_index_uint");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_fbo_render_mipmap");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_vertex_array_object");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_fixed_point");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_shader_multisample_interpolation");
-// emscripten_webgl_enable_extension(ctx_fjs,"GL_single_precision");
-// emscripten_webgl_enable_extension(ctx_fjs,"OES_standard_derivatives");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_float_blend");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_frag_depth");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_shader_texture_lod");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_sRGB");
-emscripten_webgl_enable_extension(ctx_fjs,"OES_depth32");
-emscripten_webgl_enable_extension(ctx_fjs,"EXT_blend_minmax");
-// emscripten_webgl_enable_extension(ctx_fjs,"GL_disjoint_timer_query");
-//  emscripten_webgl_enable_extension(ctx_fjs,"EXT_clip_cull_distance");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_shading_language_420pack");
-// emscripten_webgl_enable_extension(ctx_fjs,"GL_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx_fjs,"GL_framebuffer_sRGB");
-// emscripten_webgl_enable_extension(ctx_fjs,"ANGLE_instanced_arrays");
-// emscripten_webgl_enable_extension(ctx_fjs,"KHR_parallel_shader_compile");
-// emscripten_webgl_enable_extension(ctx_fjs,"EXT_texture_shadow_lod");
-// emscripten_webgl_enable_extension(ctx_fjs,"EGL_NV_memory_attachment");
-emscripten_webgl_enable_extension(ctx_fjs,"EGL_NV_context_priority_realtime");
-// emscripten_webgl_enable_extension(ctx_fjs,"EGL_NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_fjs,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_fjs,"KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_fjs,"EXT_pixel_format_float");
-emscripten_webgl_enable_extension(ctx_fjs,"EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(ctx_fjs,"EXT_gl_colorspace_bt2020_linear");
-emscripten_webgl_enable_extension(ctx_fjs,"EXT_gl_colorspace_display_p3");
-emscripten_webgl_enable_extension(ctx_fjs,"EXT_gl_colorspace_display_p3_linear");
-emscripten_webgl_enable_extension(ctx_fjs,"ARB_multisample");
-emscripten_webgl_enable_extension(ctx_fjs,"ARB_robustness");
-emscripten_webgl_enable_extension(ctx_fjs,"ARB_robust_buffer_access_behavior");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_gl_spirv");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_spirv_extensions");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_invalidate_subdata");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_texture_storage");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_ES2_compatibility");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_ES3_compatibility");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_ES3_1_compatibility");
-// emscripten_webgl_enable_extension(ctx_fjs,"ARB_ES3_2_compatibility");
-//emscripten_webgl_enable_extension(ctx_fjs,"EXT_gpu_shader5");
- // emscripten_webgl_enable_extension(ctx_fjs,"OES_gpu_shader5");
-// glViewport((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
-// glScissor((GLint)0,(GLint)0,(GLsizei)Size_fjs,(GLsizei)Size_fjs);
-glDisable(GL_DITHER);
-// glEnable(GL_SCISSOR_TEST);
-// glDisable(GL_STENCIL_TEST);
-// glDisable(GL_DEPTH_TEST);
-return; 
-}
-
-extern "C" {
-
-void fire_egl(){
-egla();
-return;
-}
-
-}
-
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -332,17 +231,15 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 
-setTimeout(function(){
-Module.ccall('fire_egl');
-},150);
+
 setTimeout(function(){
 Module.ccall('b3_egl');
 },350);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },550);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -426,19 +323,19 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-document.getElementById('startBtn').addEventListener('click',function(){
-scanSongs();
-scanVideos();
-   loada();
 
+loada();
+
+document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
+scanVideos();
+scanSongs();
 });
 
 });
 
 int main(){
 EM_ASM({
-"use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
