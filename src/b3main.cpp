@@ -99,7 +99,7 @@ egla();
 return;
 }
 
-};
+}
 
 EM_JS(void,js_main,(),{
 
@@ -438,12 +438,10 @@ scanShaders();
 
 int main(){
 EM_ASM({
- "use strict";
+"use strict";
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
-
 js_main();
 return 0;
-
 }
