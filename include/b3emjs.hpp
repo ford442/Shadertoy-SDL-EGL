@@ -6,7 +6,7 @@ void b3_egl();
 
 void b3();
 
-};
+}
 
 double wi_js,hi_js;
 
@@ -79,5 +79,3 @@ EGL_NONE
 
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
-
-
