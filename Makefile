@@ -20,7 +20,7 @@ b3hd:
 	 em++ src/b3main.cpp -c -O3 -std=c++11 -fno-math-errno -fPIC -fexperimental-library \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
-	 emcc b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -DNDEBUG -fno-math-errno \
+	 emcc b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -fno-math-errno \
 	 -msimd128 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=avx -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -polly \
