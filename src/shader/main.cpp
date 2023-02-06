@@ -1,4 +1,5 @@
-#include "../../include/shader/main.hpp"
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 EM_JS(void,js_main,(),{
 
