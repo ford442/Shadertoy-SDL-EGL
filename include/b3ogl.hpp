@@ -1,10 +1,4 @@
-extern "C"{
-  
-void nano(int,int,float *,float *);
 
-void str();
-
-};
 #include <emscripten/html5.h>
 
 #include <avxintrin.h>  // AVX
@@ -83,21 +77,11 @@ char32_t * read_file(const GLchar *);
 
 #include "../include/b3egl.hpp"
 
-extern "C"{
-  
-void clr(GLclampf,GLclampf,GLclampf);
-
-void szz(GLsizei);
-  
-void fire_egl();
-
-};
-
 int_fast32_t iFrame,iFps,Size,Size_fjs;
 
 void renderFrame();
 
-void avgFrm(int,int,float *,float *);
+void avgFrm(short int,int,float *,float *);
 
 void resizeShader(GLsizei);
 
@@ -230,3 +214,17 @@ EM_BOOL ms_l,clk_l;
 EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
+
+extern "C"{
+
+void clr(GLclampf,GLclampf,GLclampf);
+
+void szz(GLsizei);
+
+void fire_egl();
+
+void nano(short int,int,float *,float *);
+
+void str();
+
+};
