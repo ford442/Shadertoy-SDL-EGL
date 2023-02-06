@@ -71,7 +71,7 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 char32_t * read_file(const GLchar *);
 
-#include "../include/b3egl.hpp"
+#include "../../include/shader/egl.hpp"
 
 int_fast32_t iFrame,iFps,Size;
 
