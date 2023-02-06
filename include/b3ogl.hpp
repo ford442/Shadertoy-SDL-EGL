@@ -288,8 +288,6 @@ void fire_egl();
 
 void b3_egl();
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr);
-
 void str();
 
 };
