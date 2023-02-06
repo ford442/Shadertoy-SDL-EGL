@@ -278,6 +278,8 @@ static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
 extern "C"{
 
+void nano(short int,int,float *,float *);
+
 void clr(GLclampf,GLclampf,GLclampf);
 
 void szz(GLsizei);
