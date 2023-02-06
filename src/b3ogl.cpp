@@ -520,4 +520,9 @@ egla();
 return;
 };
 
+void b3_egl(){
+egl();
+return;
+};
+
 };
