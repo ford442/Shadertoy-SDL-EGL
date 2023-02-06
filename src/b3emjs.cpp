@@ -93,7 +93,7 @@ glScissor((GLint)0,(GLint)0,(GLsizei)Size_js,(GLsizei)Size_js);
 return;
 };
 
-void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
+void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
@@ -126,7 +126,7 @@ return;
 
 extern "C" {
 
-void nano(int Fnum,int leng,float * ptr,float * aptr){
+void nano(short int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
 };
