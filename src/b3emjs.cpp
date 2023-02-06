@@ -342,6 +342,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 };
 setTimeout(function(){
 M();
+Module.ccall("frm");
 
 if(loopLoop==true){
 if(f==true){
