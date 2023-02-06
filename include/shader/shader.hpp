@@ -57,7 +57,7 @@ const GLchar fragment_shader_header_gles3[]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
 const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
