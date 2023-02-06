@@ -2,11 +2,11 @@
 
 #include <cstdint>
 
-#include <wasm_simd128.h>
-#include <xmmintrin.h>
-#include <immintrin.h> 
-#include <nmmintrin.h>
-#include <unistd.h>
+// #include <wasm_simd128.h>
+// #include <xmmintrin.h>
+// #include <immintrin.h> 
+// #include <nmmintrin.h>
+// #include <unistd.h>
 
 #include <webgl/webgl2.h>
 
