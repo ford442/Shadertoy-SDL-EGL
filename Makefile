@@ -30,7 +30,7 @@ b3hd:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sWASMFS=1 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js startUp.js --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
+         --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js
 
 b3_shader:
 	 em++ src/b3ogl_sh4d3.cpp -c -std=c++2a  \
