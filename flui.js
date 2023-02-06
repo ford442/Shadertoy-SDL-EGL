@@ -87,7 +87,7 @@ willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
-const gl=canvas.getContext('webgl2',{
+var gl=canvas.getContext('webgl2',{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
@@ -109,7 +109,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-const isWebGL2=!!gl;
+var isWebGL2=!!gl;
 if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
 let halfFloat;
 let supportLinearFiltering;
@@ -192,7 +192,7 @@ gl.getExtension('GL_NV_memory_attachment');
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
- const halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
+ var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
  let formatRG;
  let formatR;
