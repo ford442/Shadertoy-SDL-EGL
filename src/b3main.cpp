@@ -320,13 +320,14 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
+  
+loada();
 
 document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 scanSongs();
 
 scanShaders();
-  loada();
 });
 
 });
