@@ -21,8 +21,6 @@ struct timespec req={0,13333333};
 
 #include "../../include/shader/gl.hpp"
 
-GLsizei szi;
-GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
@@ -58,7 +56,7 @@ const GLchar fragment_shader_header_gles3[]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
 const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
@@ -75,6 +73,7 @@ char32_t * read_file(const GLchar *);
 #include <cstdint>
 
 int_fast32_t iFrame,iFps,Size;
+int iFrame,iFps,Size;
 
 void renderFrame();
 
