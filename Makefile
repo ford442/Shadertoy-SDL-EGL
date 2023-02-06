@@ -24,18 +24,18 @@ b3hd:
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -stdlib=libc++ -O0 \
+	 emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++2a -stdlib=libc++ -O0 \
 	 -msimd128 -mcpu=bleeding-edge -fwasm-exceptions  -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -Dsimd=avx -fuse-ld=mold -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sWASMFS=1 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
+         --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
 	 em++ src/shader/shader.cpp -c -std=c++2a
 	 em++ src/shader/main.cpp -c -std=c++2a
-	 em++ shader.o main.o -o s3020.js -std=c++2a \
+	 emcc shader.o main.o -o s3020.js -std=c++2a \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
