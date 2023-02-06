@@ -1,14 +1,5 @@
 #include "../include/b3emjs.hpp"
 
-extern "C" {
-
-void nano(short int Fnum,int leng,float * ptr,float * aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-return;
-};
- 
-};
-
 EM_JS(void,ma,(),{
 
 "use strict";
