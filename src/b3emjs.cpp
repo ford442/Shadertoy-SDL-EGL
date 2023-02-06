@@ -137,7 +137,6 @@ EM_JS(void,ma,(),{
 
 "use strict";
 
-var lvv=document.getElementById("ldv");
 var vv=document.getElementById("mv");
 var $S=parseInt(window.innerHeight,10);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -348,7 +347,6 @@ $S=parseInt(window.innerHeight,10);
 Module.ccall("szz",null,["Number"],[$S]);
 // t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
-lvv=document.getElementById("ldv");
 var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
