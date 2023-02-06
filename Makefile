@@ -33,10 +33,10 @@ b3hd:
          --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
-	 em++ src/shader/shader.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ src/shader/main.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 em++ src/shader/shader.cpp -c -std=c++2a
+	 em++ src/shader/main.cpp -c -std=c++2a
 	 emcc shader.o main.o -o s3020.js -std=c++2a \
-	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
          --pre-js rSlider.js --pre-js slideOut.js
