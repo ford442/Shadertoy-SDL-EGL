@@ -1,6 +1,5 @@
 #include "../include/b3emjs.hpp"
 
-
 extern "C" {
 
 void nano(short int Fnum,int leng,float * ptr,float * aptr){
