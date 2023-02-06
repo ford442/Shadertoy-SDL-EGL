@@ -73,6 +73,8 @@ char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
+#include <cstdint>
+
 int_fast32_t iFrame,iFps,Size;
 
 void renderFrame();
@@ -135,7 +137,7 @@ EGL_SAMPLES,(EGLint)64,
 EGL_NONE
 };
 
-#include "../include/b3emsc.hpp"
+#include <emscripten.h>
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
