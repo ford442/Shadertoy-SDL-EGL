@@ -5,8 +5,9 @@ void nano(int,int,float *,float *);
 void str();
 
 };
+#include <emscripten/html5.h>
 
-// #include <avxintrin.h>  // AVX
+#include <avxintrin.h>  // AVX
 
 double wi,hi;
 double wi_fjs,hi_fjs;
