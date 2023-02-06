@@ -2,7 +2,7 @@
 
 extern "C"{
 
-void nano(int,int,float *,float *);
+void nano(short int,int,float *,float *);
 
 void b3();
 
