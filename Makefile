@@ -30,7 +30,7 @@ b3hd:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sWASMFS=1 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-         --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js
+         --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
 	 em++ src/b3ogl_sh4d3.cpp -c -std=c++2a  \
@@ -105,7 +105,7 @@ sh4d3:
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
 	 emcc b3main_sh4d3.o b3ogl_sh4d3.o -o s3005.js -std=c++11 -fPIC -fexperimental-library -O0 -mllvm -polly -static -DNDEBUG -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
+	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=avx -fuse-ld=gold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sASSERTIONS=0 -USE_GLFW=0 \
