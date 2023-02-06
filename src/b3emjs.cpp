@@ -201,15 +201,15 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF64.buffer;
+const $H=Module.HEAPF32.buffer;
 var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*h$*4;
 var pointa=77*la;
 var pointb=66*la;
-var $B=new Float64Array($H,pointb,sz);
-var agav=new Float64Array($H,pointa,300);
+var $B=new Float32Array($H,pointb,sz);
+var agav=new Float32Array($H,pointa,300);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
@@ -329,7 +329,7 @@ gl.drawingBufferColorSpace='display-p3';
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -340,7 +340,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();
 function S(){
@@ -359,13 +359,13 @@ sz=(h$*h$)/8;
 pointa=77*la;
 var agav=new Float32Array($H,pointa,300);  // has to var?
 pointb=66*la;
-var $B=new Float64Array($H,pointb,sz);  // has to var?
+var $B=new Float32Array($H,pointb,sz);  // has to var?
 R.setOutput([sz]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var T=false;
 r.setOutput([$S,$S]);
