@@ -21,7 +21,7 @@ b3hd:
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 emcc b3main.o b3sdl.o b3ogl.o  b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -DNDEBUG -fno-math-errno \
-	 -msimd128 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
+	 -msimd128 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=avx -fuse-ld=mold -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -polly \
          -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire_egl","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
