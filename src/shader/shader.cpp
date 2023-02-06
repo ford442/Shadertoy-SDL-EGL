@@ -8,7 +8,7 @@ ms_l=true;
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
 }};
-return (EM_BOOL)1;
+return(EM_BOOL)1;
 };
 
 static EM_BOOL mouse_call_move(int eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -252,6 +252,7 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 auto t1=std::chrono::steady_clock::now();
+emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
 
