@@ -227,17 +227,17 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-Module.ccall('fire_egl');
+// Module.ccall('fire_egl');
 },50);
 setTimeout(function(){
 Module.ccall('b3_egl');
 },350);
 setTimeout(function(){
-Module.ccall('str');
-},550);
-setTimeout(function(){
 Module.ccall('b3');
 },750);
+setTimeout(function(){
+Module.ccall('str');
+},550);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
