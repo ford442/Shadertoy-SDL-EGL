@@ -20,7 +20,7 @@ b3hd:
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
-	 em++ src/b3main.cpp -c -O3 -std=c++2a -stdlib=libc++ \
+	 em++ src/b3main.cpp -c -O0 -std=c++2a -stdlib=libc++ \
          -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 
