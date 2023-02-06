@@ -382,7 +382,7 @@ if(loca>64){loca=1;};
 var locb=$Bu+1;
 if(locb>64){locb=1;};
 // eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
-eval("if($F=="+i+")r(t($"+i+"));}");
+eval("if($F=="+i+"){r(t($"+i+"))};}");
 eval("if($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
 $bb=R(vv);
