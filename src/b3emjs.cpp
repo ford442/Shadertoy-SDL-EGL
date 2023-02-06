@@ -201,7 +201,7 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF32.buffer;
+const $H=Module.HEAPF64.buffer;
 var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -248,7 +248,7 @@ minorVersion:0
 });
 
 const g=new GPU({mode:'gpu',canvas:bCan,webGl:gl});
-const g2=new GPU({mode:'gpu'});
+const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))+((f-g)*((1.0-g)*(f-g)))-((f-g)*((g)*(g-f)))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -329,7 +329,7 @@ gl.drawingBufferColorSpace='display-p3';
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
@@ -340,7 +340,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();
 function S(){
@@ -349,8 +349,7 @@ Module.ccall("szz",null,["Number"],[$S]);
 // t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 lvv=document.getElementById("ldv");
-  var $S=parseInt(window.innerHeight,10);
-
+var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
@@ -366,7 +365,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var T=false;
 r.setOutput([$S,$S]);
