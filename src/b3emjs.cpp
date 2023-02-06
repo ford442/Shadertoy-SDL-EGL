@@ -329,7 +329,7 @@ gl.drawingBufferColorSpace='display-p3';
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var r"+i+",$"+i+",$$"+i+";");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
