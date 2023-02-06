@@ -1,6 +1,5 @@
 b3hd:
-	 em++ src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
-	 -std=c++2a -O0  \
+	 em++ src/b3ogl.cpp -c -std=c++2a -O0 -nostdlib -fno-math-errno -fPIC -fexperimental-library \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -Dsimd=avx \
