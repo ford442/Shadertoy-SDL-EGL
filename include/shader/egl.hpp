@@ -8,7 +8,6 @@
 // #include <nmmintrin.h>
 // #include <unistd.h>
 
-#include <webgl/webgl2.h>
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
@@ -20,4 +19,5 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
+#include <webgl/webgl2.h>
 // #include <emscripten/html5_webgl.h>
