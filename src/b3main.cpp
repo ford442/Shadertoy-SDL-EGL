@@ -321,18 +321,17 @@ loada();
 },$ldt);
 }
   
-loada();
-
 document.getElementById('startBtn').addEventListener('click',function(){
-scanVideos();
 scanSongs();
-
+loada();
+scanVideos();
 scanShaders();
 });
 
 });
 
 int main(){
+"use strict";
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
