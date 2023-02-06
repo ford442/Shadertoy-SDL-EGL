@@ -20,7 +20,7 @@ std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,13333333};
 
-#include "../include/b3gl.hpp"
+#include "../../include/shader/gl.hpp"
 
 GLsizei szi;
 GLclampf avrg,drk,brt;
