@@ -149,6 +149,6 @@ void strt(void);
 
 extern "C"{
 
-void str(void);
+void str();
 
 }
