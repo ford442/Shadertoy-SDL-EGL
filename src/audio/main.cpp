@@ -12,7 +12,7 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
-},350);
+},850);
 }
   
 function pll(){
