@@ -28,9 +28,9 @@ b3hd:
 	--pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
-	em++ src/shader/shader.cpp -c -fno-math-errno -O0 -std=c++2b -mcpu=bleeding-edge -mtune=corei7-avx \
+	em++ src/shader/shader.cpp -c -fno-math-errno -O0 -std=c++2b -mcpu=bleeding-edge \
 	-Dsimd=avx -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	em++ src/shader/main.cpp -c -fno-math-errno -O0 -std=c++11 -mcpu=bleeding-edge -mtune=corei7-avx \
+	em++ src/shader/main.cpp -c -fno-math-errno -O0 -std=c++11 -mcpu=bleeding-edge \
 	-fwasm-exceptions -fslp-vectorize -ftree-vectorize
 	emcc shader.o main.o -o s3020.js -std=c++2b -fno-math-errno -O0 -mcpu=bleeding-edge -mtune=corei7-avx \
 	-fwasm-exceptions -fslp-vectorize -ftree-vectorize \
