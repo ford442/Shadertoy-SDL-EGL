@@ -47,7 +47,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-void renderFrame(void){
+void renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
