@@ -1,4 +1,4 @@
-// #include <avxintrin.h>  // AVX
+#include <avxintrin.h>  // AVX
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
