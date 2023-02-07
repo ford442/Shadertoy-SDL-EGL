@@ -1,5 +1,4 @@
 #include <avxintrin.h>  // AVX
-#include <emscripten.h>
 
 double wi,hi;
 
