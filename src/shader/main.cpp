@@ -1,4 +1,5 @@
 #include <emscripten.h>
+#include <emscripten/html5.h>
 
 EM_JS(void,js_main,(),{
 
@@ -142,18 +143,17 @@ document.getElementById('menu').addEventListener('click',function(){
 var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 
-
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 });
 
 });
 
-int main(){
+int main(void){
 "use strict";
 EM_ASM({
 FS.mkdir("/shader");
 });
 js_main();
 return 0;
-};
+}
