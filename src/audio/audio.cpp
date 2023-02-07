@@ -1,4 +1,4 @@
-#include "../include/b3sdl.hpp"
+#include "../../include/audio/audio.hpp"
 
 void SDLCALL bfr(void * unused,Uint8 * stm,int_fast32_t len){
 Uint8 * wptr;
