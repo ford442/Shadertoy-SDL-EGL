@@ -258,7 +258,7 @@ return;
 
 extern "C" {
 
-void str(void){
+void str(){
 strt();
 return;
 }
