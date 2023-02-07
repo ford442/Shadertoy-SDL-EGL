@@ -28,7 +28,7 @@ b3hd:
 	--pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
-	 em++ src/shader/shader.cpp -c -std=c++2a
+	 em++ src/shader/shader.cpp -c -std=c++2a -msimd128
 	 em++ src/shader/main.cpp -c -std=c++11
 	 emcc shader.o main.o -o s3020.js -std=c++2a \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
