@@ -1,6 +1,4 @@
 #include <SDL2/SDL.h>
-#undef main
-#include "SDL_config.h"
 
 #include <iostream>
 #include <algorithm>
@@ -25,14 +23,14 @@ Uint8 * snd;
 int_fast32_t pos;
 Uint32 slen;
 SDL_AudioSpec request;
-}wave;
+};wave;
 
 void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
   
-void plt();
+void plt(void);
 
 extern "C"{  
   
-void pl();
+void pl(void);
   
 }
