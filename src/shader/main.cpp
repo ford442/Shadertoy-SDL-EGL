@@ -147,6 +147,8 @@ document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 });
 
+document.getElementById('di').click();
+
 });
 
 int main(void){
