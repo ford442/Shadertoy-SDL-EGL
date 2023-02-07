@@ -29,7 +29,7 @@ b3hd:
 
 b3_shader:
 	 em++ src/shader/shader.cpp -c -std=c++2a
-	 em++ src/shader/main.cpp -c -std=c++2a
+	 em++ src/shader/main.cpp -c -std=c++11
 	 emcc shader.o main.o -o s3020.js -std=c++2a \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
