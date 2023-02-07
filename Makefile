@@ -48,9 +48,7 @@ b3_webgl:
 
 
 b3_audio:
-	 em++ src/b3main.cpp -c -std=c++2a
-	 em++ src/b3sdl.cpp -c -std=c++2a -sUSE_SDL=2
-	 emcc b3main.o b3sdl.o -o a3020.js -std=c++2a \
+	 em++ src/audio/main.cpp -o a3020.js -std=c++2a -sUSE_SDL=2 \
 	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
