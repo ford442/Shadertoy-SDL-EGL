@@ -75,6 +75,7 @@ int_fast32_t iFrame,iFps,Size;
 // int iFrame,iFps,Size;
 
 void renderFrame();
+void strt();
 
 EGLDisplay display;
 EGLSurface surface;
