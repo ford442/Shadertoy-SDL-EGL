@@ -1,5 +1,5 @@
 b3hd:
-	 em++ src/b3ogl.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3ogl.cpp -c -fno-math-errno -fPIC -fexperimental-library \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -48,7 +48,9 @@ b3_webgl:
 
 
 b3_audio:
-	 em++ src/audio/main.cpp -o a3020.js -std=c++2a -sUSE_SDL=2 \
+	 em++ src/audio/main.cpp -c -std=c++2a
+	 em++ src/audio/audio.cpp -c -std=c++2a -sUSE_SDL=2
+	 emcc main.o audio.o -o a3020.js -std=c++2a \
 	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
          -sEXPORTED_FUNCTIONS='["_main","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -84,7 +86,7 @@ b3hdm:
 
 
 sh4d3:
-	 em++  src/b3ogl_sh4d3.cpp -c -nostdlib -fno-math-errno -fPIC -fexperimental-library \
+	 em++  src/b3ogl_sh4d3.cpp -c -fno-math-errno -fPIC -fexperimental-library \
 	 -std=c++2a -O0  \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -106,7 +108,7 @@ sh4d3:
          --extern-pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 castle:
-	 em++ src/b3main.cpp -c -O3 -nostdlib \
+	 em++ src/b3main.cpp -c -O3 \
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
@@ -119,12 +121,12 @@ castle:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 
-	 em++ src/b3sdl.cpp -c -O0 -nostdlib \
+	 em++ src/b3sdl.cpp -c -O0 \
 	 -sUSE_SDL=2 -std=c++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
-	 em++ src/b3emjs_castle.cpp -c -O0 -nostdlib \
+	 em++ src/b3emjs_castle.cpp -c -O0 \
 	 -std=c++2a -DCASTLE2 \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -139,7 +141,7 @@ castle:
           --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js 
 	  
 b3php:
-	 em++ src/b3main.cpp -c -O3 -nostdlib \
+	 em++ src/b3main.cpp -c -O3 \
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
@@ -152,12 +154,12 @@ b3php:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 
-	 em++ src/b3sdl.cpp -c -O0 -nostdlib \
+	 em++ src/b3sdl.cpp -c -O0 \
 	 -sUSE_SDL=2 -std=c++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
-	 em++ src/b3emjs.cpp -c -O0 -nostdlib \
+	 em++ src/b3emjs.cpp -c -O0 \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -199,7 +201,7 @@ cloud:
 
 
 g00:
-	 em++ src/b3main_g00.cpp -c -O3 -nostdlib \
+	 em++ src/b3main_g00.cpp -c -O3 \
          -std=c++11 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	 
@@ -212,12 +214,12 @@ g00:
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 
-	 em++ src/b3sdl.cpp -c -O0 -nostdlib \
+	 em++ src/b3sdl.cpp -c -O0 \
 	 -sUSE_SDL=2 -std=c++11 -fslp-vectorize -ftree-vectorize \
          -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -msign-ext -fno-fast-math -ffp-contract=fast -freciprocal-math
 	 
-	 em++ src/b3emjs_g00.cpp -c -O0 -nostdlib \
+	 em++ src/b3emjs_g00.cpp -c -O0 \
 	 -std=c++2a \
          -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
