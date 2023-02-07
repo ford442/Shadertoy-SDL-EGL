@@ -149,8 +149,6 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
-void strt(void);
-
 extern "C"{
 
 void str(void);
