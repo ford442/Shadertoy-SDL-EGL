@@ -37,9 +37,9 @@ b3_shader:
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_webgl:
-	 em++ src/b3emjs.cpp -c -std=c++2a 
-	 em++ src/b3main.cpp -c -std=c++2a
-	 emcc b3main.o b3emjs.o -o b3020.js -std=c++2a \
+	 em++ src/b3emjs.cpp -c -std=c++2a -stdlib=libc++ -O0
+	 em++ src/b3main.cpp -c -std=c++2a-stdlib=libc++ -O0
+	 emcc b3main.o b3emjs.o -o b3020.js -std=c++2a -stdlib=libc++ -O0 \
 	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
