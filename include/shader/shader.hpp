@@ -1,8 +1,17 @@
 // #include <avxintrin.h>  // AVX
 #include <emscripten/html5.h>
 #include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
 #include <ctime>
 #include <chrono>
+#include <cfloat>
+#include <climits>
 
 double wi,hi;
 
@@ -68,7 +77,6 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
-#include <cstdint>
 
 int_fast32_t iFrame,iFps,Size;
 // int iFrame,iFps,Size;
