@@ -5,31 +5,6 @@ EM_JS(void,js_main,(),{
 "use strict";
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
-function highResStart(){
-document.getElementById('scanvas').height=window.innerHeight*2;
-document.getElementById('scanvas').width=window.innerHeight*2;
-document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
-document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-document.getElementById('pmhig').innerHTML=window.innerHeight*2;
-
-setTimeout(function(){
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-document.getElementById('pmhig').innerHTML=window.innerHeight;
-},750);
-setTimeout(function(){
-
-setTimeout(function(){
-document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
-},1250);
-}
-
 function normalResStart(){
 
 setTimeout(function(){
