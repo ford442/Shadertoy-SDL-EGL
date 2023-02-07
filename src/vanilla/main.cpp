@@ -86,7 +86,7 @@ $sngs[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/index.htm/,"");
+Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $sngs[i]=Self+'songs/'+txxt;
 }}
@@ -99,7 +99,7 @@ $vids[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/index.htm/,"");
+Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $vids[i]=Self+'video/'+txxt;
 }}
@@ -112,7 +112,7 @@ $shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/index.htm/,"");
+Self=Self.replace(/1ink.1ink/,"");
 txxt=txxt.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
 };
