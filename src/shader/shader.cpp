@@ -105,7 +105,7 @@ glCompileShader(shader);
 return shader;
 }
 
-void strt(void){
+void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
