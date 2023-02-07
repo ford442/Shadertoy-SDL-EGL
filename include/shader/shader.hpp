@@ -9,8 +9,19 @@ double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 char * fileloc=(char*)"/shader/shader1.toy";
 
 #include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
 #include <ctime>
 #include <chrono>
+#include <cfloat>
+#include <climits>
+
+#include <iostream>
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
