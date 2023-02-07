@@ -9,7 +9,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
 }};
 return(EM_BOOL)1;
-}
+};
 
 static EM_BOOL mouse_call_move(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -18,7 +18,7 @@ x=e->clientX;
 y=e->clientY;
 }};
 return (EM_BOOL)1;
-}
+};
 
 void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
@@ -45,7 +45,7 @@ glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
-}
+};
 
 void renderFrame(){
 auto t3=t2;
@@ -92,7 +92,7 @@ fclose(file);
 return result;
 };
 return nullptr;
-}
+};
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const GLchar ** dsources){
 GLsizei srclens[nsources];
@@ -103,7 +103,7 @@ shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
-}
+};
 
 void strt(){
 eglconfig=NULL;
@@ -254,13 +254,13 @@ glReleaseShaderCompiler();
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
-}
+};
 
 extern "C" {
 
 void str(){
 strt();
 return;
-}
+};
 
-}
+};
