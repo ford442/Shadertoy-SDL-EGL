@@ -151,7 +151,7 @@ document.getElementById('di').click();
 
 });
 
-int main(void){
+int main(){
 "use strict";
 EM_ASM({
 FS.mkdir("/shader");
