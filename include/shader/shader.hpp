@@ -1,5 +1,5 @@
 #include <avxintrin.h>  // AVX
-#include <emscripten/html5.h>
+#include <emscripten.h>
 
 double wi,hi;
 
@@ -146,7 +146,7 @@ EGL_SAMPLES,(EGLint)64,
 EGL_NONE
 };
 
-#include <emscripten.h>
+#include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
