@@ -152,7 +152,7 @@ emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
 emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
+// emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx,"OES_single_precision");
 // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
