@@ -6,14 +6,13 @@ EM_JS(void,js_main,(),{
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
 function normalResStart(){
-
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 // const bz=new BroadcastChannel('bez');
 // bz.postMessage({data:222});
-},950);
+},350);
 }
   
 function pll(){
@@ -115,10 +114,12 @@ if(e.code=='KeyX'){lockVid=0;};
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
-  
+
+normalResStart();
+
 });
   
-int main(){
+main(){
   
 EM_ASM({
 "use strict";
@@ -126,6 +127,5 @@ FS.mkdir("/snd");
 });
 
 js_main();
-return 0;
 
 }
