@@ -29,9 +29,8 @@ b3hd:
 
 b3_shader:
 	em++ src/shader/shader.cpp -c -fno-math-errno -O0 -std=c++2a -mcpu=bleeding-edge \
-	-Dsimd=avx -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	em++ src/shader/main.cpp -c -fno-math-errno -O0 -std=c++2a -mcpu=bleeding-edge \
-	-fwasm-exceptions -fslp-vectorize -ftree-vectorize
+	-Dsimd=avx -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	em++ src/shader/main.cpp -c -fno-math-errno -O0 -std=c++2a -mcpu=bleeding-edge
 	emcc shader.o main.o -o s3020.js -std=c++2a -fno-math-errno -O0 -mcpu=bleeding-edge -mtune=corei7-avx \
 	-fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	-sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
