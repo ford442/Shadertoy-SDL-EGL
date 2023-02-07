@@ -78,8 +78,8 @@ char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iFps,Size;
-// int iFrame,iFps,Size;
+// int_fast32_t iFrame,iFps,Size;
+int iFrame,iFps,Size;
 
 EGLDisplay display;
 EGLSurface surface;
