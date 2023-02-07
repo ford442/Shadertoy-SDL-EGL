@@ -1,5 +1,10 @@
 // #include <avxintrin.h>  // AVX
+#include <emscripten.h>
 #include <emscripten/html5.h>
+#include <iostream>
+#include <ctime>
+#include <chrono>
+#include <cstdint>
 
 double wi,hi;
 
@@ -7,10 +12,6 @@ float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
 double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
-
-#include <iostream>
-#include <ctime>
-#include <chrono>
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -69,8 +70,6 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
-
-#include <cstdint>
 
 // int_fast32_t iFrame,iFps,Size;
 int iFrame,iFps,Size;
@@ -135,8 +134,6 @@ EGL_SAMPLES,(EGLint)64,
 EGL_NONE
 };
 
-#include <emscripten.h>
-
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
@@ -151,4 +148,4 @@ extern "C"{
 
 void str();
 
-};
+}
