@@ -1,6 +1,4 @@
-
 #include <emscripten/html5.h>
-
 #include <avxintrin.h>  // AVX
 
 double wi,hi;
