@@ -23,7 +23,7 @@ Uint8 * snd;
 int_fast32_t pos;
 Uint32 slen;
 SDL_AudioSpec request;
-};wave;
+}wave;
 
 void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
   
