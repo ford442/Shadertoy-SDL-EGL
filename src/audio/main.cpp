@@ -6,12 +6,12 @@ EM_JS(void,js_main,(),{
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
 function normalResStart(){
+document.getElementById('di').click();
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
-const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});
+document.getElementById('di').click();
 },850);
 }
   
