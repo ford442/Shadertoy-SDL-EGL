@@ -1,13 +1,10 @@
 #pragma once
 
-#include <cstdint>
-
 // #include <wasm_simd128.h>
 // #include <xmmintrin.h>
 // #include <immintrin.h> 
 // #include <nmmintrin.h>
 #include <unistd.h>
-
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
