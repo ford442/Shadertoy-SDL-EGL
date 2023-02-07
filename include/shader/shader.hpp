@@ -1,5 +1,4 @@
 // #include <avxintrin.h>  // AVX
-#include <emscripten.h>
 #include <emscripten/html5.h>
 #include <iostream>
 #include <ctime>
@@ -131,6 +130,8 @@ EGL_BUFFER_SIZE,(EGLint)64,
  // EGL_MIPMAP_LEVEL,(EGLint)64,
 EGL_NONE
 };
+
+#include <emscripten.h>
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
