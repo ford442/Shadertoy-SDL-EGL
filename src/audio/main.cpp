@@ -119,7 +119,7 @@ normalResStart();
 
 });
   
-main(){
+int main(void){
   
 EM_ASM({
 "use strict";
