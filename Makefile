@@ -3,7 +3,7 @@ b3hd:
 	-std=c++2a -stdlib=libc++ -O0 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	-fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
-	-msimd128 -mavx -Dsimd=avx \
+	-msimd128 -Dsimd=avx -mavx \
 	-mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	-Xclang -menable-no-nans -Xclang -menable-no-infs \
 	-ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
