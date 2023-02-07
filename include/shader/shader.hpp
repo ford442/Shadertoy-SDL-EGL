@@ -75,7 +75,7 @@ char32_t * read_file(const GLchar *);
 int_fast32_t iFrame,iFps,Size;
 // int iFrame,iFps,Size;
 
-void renderFrame();
+void renderFrame(void);
 
 EGLDisplay display;
 EGLSurface surface;
@@ -145,7 +145,7 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
-void strt();
+void strt(void);
 
 extern "C"{
 
