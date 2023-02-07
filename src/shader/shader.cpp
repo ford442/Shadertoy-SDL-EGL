@@ -259,7 +259,7 @@ return;
 extern "C" {
 
 void str(void){
-strt(void);
+strt();
 return;
 }
 
