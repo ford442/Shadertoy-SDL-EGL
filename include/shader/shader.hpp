@@ -12,7 +12,6 @@
 #include <chrono>
 #include <cfloat>
 #include <climits>
-#include <bits/stdc++.h>
 
 double wi,hi;
 
