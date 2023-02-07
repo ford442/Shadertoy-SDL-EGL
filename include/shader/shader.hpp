@@ -38,17 +38,18 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;"
-"precision highp isampler3D;"
-"precision highp isamplerCube;"
-"precision highp isampler2DArray;"
-"precision highp usampler2D;"
-"precision highp usampler3D;"
-"precision highp usamplerCube;"
-"precision highp usampler2DArray;"
-"precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";
+"precision highp float;precision lowp sampler3D;precision mediump sampler2D;"
+"precision lowp samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;"
+"precision lowp isampler3D;"
+"precision lowp isamplerCube;"
+"precision mediump isampler2DArray;"
+"precision mediump usampler2D;"
+"precision lowp usampler3D;"
+"precision lowp usamplerCube;"
+"precision mediump usampler2DArray;"
+"precision lowp samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
@@ -96,7 +97,7 @@ EGLint const anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
@@ -119,8 +120,8 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_TRANSPARENT_RED_VALUE,(EGLint)1000000000,
 // EGL_TRANSPARENT_GREEN_VALUE,(EGLint)1000000000,
 // EGL_TRANSPARENT_BLUE_VALUE,(EGLint)0,
-//// EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_NATIVE_RENDERABLE,EGL_TRUE,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_RED_SIZE,(EGLint)32,
 EGL_GREEN_SIZE,(EGLint)32,
 EGL_BLUE_SIZE,(EGLint)32,
@@ -130,7 +131,7 @@ EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)64,
- // EGL_MIPMAP_LEVEL,(EGLint)64,
+EGL_MIPMAP_LEVEL,(EGLint)64,
 EGL_NONE
 };
 
