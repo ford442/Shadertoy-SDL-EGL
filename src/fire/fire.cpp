@@ -1310,28 +1310,7 @@ logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
-imageSmoothingEnabled:false,
-imageSmoothingQuality:'medium',
-preserveDrawingBuffer:false,
-premultipliedAlpha:true,
-desynchronized:false,
-lowLatency:true,
-powerPreference:'high-performance',
-antialias:true,
-willReadFrequently:false,
-xrCompatible:false,
-majorVersion:2,
-minorVersion:0};
-var gl=canvas.getContext('webgl2',{
-colorType:'float64',
-preferLowPowerToHighPerformance:false,
-precision:'highp',
-logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
-alpha:true,
-depth:true,
-stencil:false,
+stencil:true,
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
@@ -1343,8 +1322,8 @@ antialias:true,
 willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
-minorVersion:0
-});
+minorVersion:0};
+var gl=canvas.getContext('webgl2',params);
 var isWebGL2=!!gl;
 if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experimental-webgl',params);
 let halfFloat;
@@ -1353,7 +1332,7 @@ if(isWebGL2){
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
-gl.drawingBufferColorSpace='display-p3';
+gl.drawingBufferColorSpace='srgb';
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
