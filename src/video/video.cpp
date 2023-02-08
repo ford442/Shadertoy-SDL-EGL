@@ -125,9 +125,9 @@ var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 var bCan=document.getElementById("bcanvas");
 var gl=bCan.getContext("webgl2",{
-colorType:'float32',
+colorType:'uint8',
 preferLowPowerToHighPerformance:false,
-precision:'mediump',
+precision:'lowp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
