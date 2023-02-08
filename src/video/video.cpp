@@ -13,34 +13,34 @@ if(max<ptr[i]){max=ptr[i];
 }
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];
 }
-}
+};
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
 aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
-}
+};
 aptr[0]=avgSum/32;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
-}
+};
 aptr[100]=minSum/32;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
-}
+};
 aptr[200]=maxSum/32;
 return;
-}
+};
 
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
-}
+};
 
-}
+};
 
 EM_JS(void,vid,(),{
 
@@ -231,7 +231,7 @@ R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-}
+};
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
 var $F=1;
@@ -242,7 +242,7 @@ var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1);");
-}
+};
 var d=S();if(d)d();d=S();
 function S(){
 $S=parseInt(window.innerHeight,10);
@@ -265,7 +265,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
-}
+};
 var T=false;
 r.setOutput([$S,$S]);
 function M(){
@@ -276,12 +276,14 @@ return;
 }
 for(var i=64;i>0;i--){
 var loca=$F+1;
-if(loca>64){loca=1;};
+if(loca>64){loca=1;}
 var locb=$Bu+1;
-if(locb>64){locb=1;};
-eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
-eval("if($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+if(locb>64){locb=1;}
+if($F==i){
+eval("var $r"+i+"=t($"+i+");r($r"+i+");");
+eval("var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";");
 }
+};
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
@@ -302,7 +304,7 @@ M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();
-}
+};
 return()=>{
 T=true;
 }
@@ -315,6 +317,6 @@ extern "C" {
 void b3(){
 vid();
 return;
-}
+};
 
-}
+};
