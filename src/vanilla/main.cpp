@@ -1,7 +1,6 @@
 #include "../../include/vanilla/main.hpp"
 
 EM_JS(void,js_main,(),{
-document.getElementById('di').click();
 
 "use strict";
 
@@ -59,6 +58,9 @@ slt=tem.innerHTML;
 document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
+setTimeout(function(){
+document.getElementById('di').click();
+},550);
 
 });
   
