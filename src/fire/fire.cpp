@@ -1329,8 +1329,7 @@ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experim
 let halfFloat;
 let supportLinearFiltering;
 
-gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
-gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
 // gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
 // gl.getExtension('OES_texture_float_linear');
@@ -1379,6 +1378,8 @@ gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
+ gl.getExtension('EXT_color_buffer_float');
+
 gl.clearColor(Math.random(),Math.random(),Math.random(),1.0-(Math.random()*0.15));
 var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
