@@ -11,22 +11,22 @@ for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-};
+}
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
 aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
-};
+}
 aptr[0]=avgSum/32;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
-};
+}
 aptr[100]=minSum/32;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
-};
+}
 aptr[200]=maxSum/32;
 return;
 }
