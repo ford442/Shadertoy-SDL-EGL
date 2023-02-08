@@ -1330,7 +1330,7 @@ let halfFloat;
 let supportLinearFiltering;
 
 // gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
-gl.getExtension('WEBGL_color_buffer_float');
+// gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
 // gl.getExtension('OES_texture_float_linear');
 // gl.getExtension('OES_texture_half_float_linear');
@@ -1386,9 +1386,9 @@ var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRG;
  let formatR;
 
- formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
+ formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
+ formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
 
  return {
  gl,ext:{
