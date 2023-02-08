@@ -1329,9 +1329,6 @@ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experim
 let halfFloat;
 let supportLinearFiltering;
 
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.hint(gl.SAMPLES,4);
 
 gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
 gl.getExtension('EXT_color_buffer_float');
@@ -1373,6 +1370,10 @@ gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('ARB_multisample');
+
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 gl.enable(gl.MULTISAMPLE);
 gl.enable(gl.FRAMEBUFFER_SRGB);
 gl.drawingBufferColorSpace='display-p3';
