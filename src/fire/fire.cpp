@@ -1331,6 +1331,7 @@ let supportLinearFiltering;
 
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.hint(gl.SAMPLES,4);
 
 gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
 gl.getExtension('EXT_color_buffer_float');
