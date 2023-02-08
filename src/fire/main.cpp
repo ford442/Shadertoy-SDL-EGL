@@ -1,4 +1,4 @@
-#include "../../include/vanilla/main.hpp"
+#include "../../include/fire/main.hpp"
 
 EM_JS(void,js_main,(),{
 
