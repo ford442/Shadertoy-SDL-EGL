@@ -43,7 +43,7 @@ b3_video:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js 
+	 --pre-js rSlider.js --pre-js slideOut.js --post-js gpujs.js 
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=c++11 -mtune=corei7-avx -fno-math-errno -O0
