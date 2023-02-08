@@ -1250,7 +1250,7 @@ var canvas=document.getElementById('acanvas');
 
 resizeCanvas();
 let config={
- SIM_RESOLUTION:256,
+ SIM_RESOLUTION:512,
  DYE_RESOLUTION:1024,
  CAPTURE_RESOLUTION:512,
  DENSITY_DISSIPATION:1,
@@ -1377,10 +1377,10 @@ gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.enable(gl.FRAMEBUFFER_SRGB);
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
-// supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
+supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
-gl.getExtension('OES_texture_half_float_linear');
+// gl.getExtension('OES_texture_half_float_linear');
 
 gl.clearColor(Math.random(),Math.random(),Math.random(),1.0-(Math.random()*0.15));
 var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
@@ -1431,10 +1431,10 @@ function startGUI(){
  let ww=window.innerWidth;
  let gui=new dat.GUI({width:ww});
  gui.add(config,'DYE_RESOLUTION',{
- 'high':1024,'medium':512,'low':256,'very low':128
+ 'extreme':2048,'high':1024,'medium':512,'low':256,'very low':128
  }).name('quality').onFinishChange(initFramebuffers);
  gui.add(config,'SIM_RESOLUTION',{
- '32':32,'64':64,'128':128,'256':256
+ '32':32,'64':64,'128':128,'256':256,'512':512,'1024':1024
  }).name('sim resolution').onFinishChange(initFramebuffers);
  gui.add(config,'DENSITY_DISSIPATION',0,4.0).name('density diffusion');
  gui.add(config,'VELOCITY_DISSIPATION',0,4.0).name('velocity diffusion');
