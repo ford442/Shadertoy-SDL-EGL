@@ -1373,9 +1373,10 @@ gl.getExtension('GL_ARB_multisample');
 
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 
-gl.enable(gl.MULTISAMPLE_ARB);
-gl.enable(gl.FRAMEBUFFER_SRGB);
+// gl.enable(gl.MULTISAMPLE);  
+// gl.enable(gl.FRAMEBUFFER_SRGB);
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
