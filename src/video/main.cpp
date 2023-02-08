@@ -52,7 +52,7 @@ var fxhttp=new XMLHttpRequest();
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
-}};
+}}
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
@@ -133,7 +133,7 @@ var wi=document.getElementById('wid').innerHTML;
 var r$=he/$h;
 var $w=wi/r$;
 var $hi=he-winSize;
-if($hi>1){$h=winSize;var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
+if($hi>1){$h=winSize;var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
 var $hg=$h+'px';
 mv=vide[0].id;
 lo=vide[1].id;
@@ -146,7 +146,7 @@ document.getElementById('ldv').src=vidSrc;
 document.getElementById('ldv').currentTime=$itim.innerHTML;
 document.getElementById('ldv').load();
 document.getElementById('di').click();
-};
+}
 setTimeout(function(){
 loada();
 },$ldt);
