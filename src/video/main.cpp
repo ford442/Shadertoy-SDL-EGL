@@ -57,7 +57,7 @@ $vids[i]=ar2;
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
+fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
