@@ -1231,6 +1231,8 @@ EM_JS(void,fl,(),{
  e.color=pe,e.controllers=fe,e.dom=me,e.gui=ge,e.GUI=be,e.default=ve,Object.defineProperty(e,"__esModule",{value: !0});
 });
 
+});
+
 EM_JS(void,fi,(),{
 'use strict';
 const promoPopup=document.getElementsByClassName('promo')[0];
@@ -2660,8 +2662,6 @@ function hashCode(s){
  }
  return hash;
 };
-
-});
 
 });
 
