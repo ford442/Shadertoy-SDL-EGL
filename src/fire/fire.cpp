@@ -1379,6 +1379,8 @@ gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 // supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('OES_texture_float_linear');
+gl.getExtension('OES_texture_half_float_linear');
 
 gl.clearColor(Math.random(),Math.random(),Math.random(),1.0-(Math.random()*0.15));
 var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
