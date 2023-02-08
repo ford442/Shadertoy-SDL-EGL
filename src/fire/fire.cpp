@@ -1305,7 +1305,7 @@ function getWebGLContext(canvas){
 const params={
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
-precision:'mediump',
+precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
@@ -1329,13 +1329,12 @@ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experim
 let halfFloat;
 let supportLinearFiltering;
 
-
 gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
 gl.getExtension('EXT_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_half_float');
-gl.getExtension('OES_texture_float_linear');
-gl.getExtension('OES_texture_half_float_linear');
+// gl.getExtension('WEBGL_color_buffer_float');
+// gl.getExtension('WEBGL_color_buffer_half_float');
+// gl.getExtension('OES_texture_float_linear');
+// gl.getExtension('OES_texture_half_float_linear');
 gl.getExtension('EXT_float_blend');
 gl.getExtension('EXT_frag_depth');
 gl.getExtension('EXT_shader_texture_lod');
@@ -1386,9 +1385,9 @@ var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRG;
  let formatR;
 
- formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
+ formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
+ formatR=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
 
  return {
  gl,ext:{
