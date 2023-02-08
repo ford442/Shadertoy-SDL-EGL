@@ -126,25 +126,25 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 var bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
 // colorType:'uint8',
-preferLowPowerToHighPerformance:false,
-precision:'lowp',
-logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
+// preferLowPowerToHighPerformance:false,
+// precision:'lowp',
+// logarithmicDepthBuffer:true,
+// colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:true,
-imageSmoothingQuality:'medium',
+// imageSmoothingEnabled:true,
+// imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
-willReadFrequently:false,
-xrCompatible:false,
-majorVersion:2,
-minorVersion:0
+// willReadFrequently:false,
+// xrCompatible:false,
+// majorVersion:2,
+// minorVersion:0
 });
 let g=new GPU({canvas:bcanvas,webGl:gl});
 let g2=new GPU();
