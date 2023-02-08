@@ -1,5 +1,45 @@
 #include "../../include/video/video.hpp"
 
+void avgFrm(short int Fnum,int leng,float * ptr,float * aptr){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
+for (int i=0;i<leng;i++){
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+};
+sum=sum/leng;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
+for(int i=33;i<65;i++){
+avgSum+=aptr[i];
+};
+aptr[0]=avgSum/32;
+for(int i=33;i<65;i++){
+minSum+=aptr[i+100];
+};
+aptr[100]=minSum/32;
+for(int i=33;i<65;i++){
+maxSum+=aptr[i+200];
+};
+aptr[200]=maxSum/32;
+return;
+}
+
+extern "C" {
+
+void nano(short int Fnum,int leng,float * ptr,float * aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+return;
+}
+
+}
+
 EM_JS(void,vid,(),{
 
 // "use strict";
@@ -18,7 +58,6 @@ var loopPart;
 var mmvv;
 var revv;
 var $bb;
-
 function forwardLoop(){
 // setTim=mmvv.currentTime;
 setTim+=stpInc;
@@ -28,7 +67,6 @@ mmvv.currentTime=setTim;
 revv=true;
 };
 }
- 
 function reverseLoop(){
 // setTim=mmvv.currentTime;
 setTim-=stpInc;
@@ -38,7 +76,6 @@ mmvv.currentTime=setTim;
 revv=false;
 };
 }
-  
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -109,7 +146,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'webgl2'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -270,12 +306,14 @@ T=true;
 
 });
 
+
 extern "C" {
 
 void b3(){
 vid();
 return;
-};
+}
 
 
-};
+
+}
