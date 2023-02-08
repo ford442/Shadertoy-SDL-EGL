@@ -64,10 +64,9 @@ b3_fire:
 
 
 b3_vanilla:
-	 em++ src/b3main_vanilla.cpp -c -std=c++2a
-	 emcc b3main_vanilla.o -o v3020.js -std=c++2a \
-	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 em++ src/vanilla/main.cpp -c -std=c++2a
+	 emcc main.o -o v3020.js -std=c++2a \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
