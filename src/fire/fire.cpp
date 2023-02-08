@@ -1307,7 +1307,7 @@ colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
+colorSpace:'linear',
 alpha:true,
 depth:true,
 stencil:true,
@@ -1331,8 +1331,8 @@ let supportLinearFiltering;
 
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.disable(gl.DITHER);
-gl.drawingBufferColorSpace='display-p3';
+
+gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
@@ -1366,11 +1366,15 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
 gl.getExtension('KHR_gl_colorspace');
+gl.getExtension('EXT_gl_colorspace_scrgb_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_pq');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('ARB_multisample');
+glEnable(GL_FRAMEBUFFER_SRGB);
+gl.drawingBufferColorSpace='linear';
+gl.disable(gl.DITHER);
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 gl.clearColor(Math.random(),Math.random(),Math.random(),1.0-(Math.random()*0.15));
 var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
