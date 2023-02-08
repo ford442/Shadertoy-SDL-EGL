@@ -1365,22 +1365,23 @@ gl.getExtension('WEBGL_webcodecs_video_frame');
 gl.getExtension('OES_single_precision');
 gl.getExtension('GL_EXT_texture_shadow_lod');
 gl.getExtension('GL_NV_memory_attachment');
+gl.getExtension('KHR_gl_colorspace');
+gl.getExtension('EXT_gl_colorspace_bt2020_pq');
+gl.getExtension('EXT_gl_colorspace_bt2020_linear');
+gl.getExtension('EXT_gl_colorspace_display_p3');
+gl.getExtension('EXT_gl_colorspace_display_p3_linear');
+gl.getExtension('ARB_multisample');
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
-
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
- var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
+// var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
  let formatRGBA;
  let formatRG;
  let formatR;
- if(isWebGL2){
+
  formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
  formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
- }else{
- formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
- }
+
  return {
  gl,ext:{
  formatRGBA,formatRG,formatR,halfFloatTexType,supportLinearFiltering
