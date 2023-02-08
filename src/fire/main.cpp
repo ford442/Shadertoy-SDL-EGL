@@ -64,7 +64,9 @@ document.getElementById('di').click();
 });
   
 int main(){
-  
+"use strict";
+EM_ASM({
+console.log('fire.. heh heh..');});
 js_main();
 return 0;
 
