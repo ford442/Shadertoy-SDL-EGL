@@ -127,7 +127,7 @@ var bCan=document.getElementById("bcanvas");
 var gl=bCan.getContext("webgl2",{
 colorType:'float32',
 preferLowPowerToHighPerformance:false,
-precision:'highp',
+precision:'mediump',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
