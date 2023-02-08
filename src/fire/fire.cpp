@@ -2663,6 +2663,8 @@ function hashCode(s){
 
 });
 
+});
+
 
 extern "C" {
 
