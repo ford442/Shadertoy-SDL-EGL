@@ -67,7 +67,7 @@ if(setTim<stp){
 mmvv.currentTime=setTim;
 }else{
 revv=true;
-};
+}
 }
 function reverseLoop(){
 // setTim=mmvv.currentTime;
@@ -76,12 +76,12 @@ if(setTim>=Lstp){
 mmvv.currentTime=setTim;
 }else{
 revv=false;
-};
+}
 }
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
-};
+}
 if (e.code=='KeyZ'){
 mmvv=document.getElementById("mv");
 mmvv.pause();
@@ -92,21 +92,21 @@ stp-=loopPart/2.0;
 setTim=stp;
 loopLoop=true;
 revv=true;
-};
+}
 if(e.code=='KeyX'){
 loopLoop=false;
 vv.play();
-};
+}
 if(e.code=='KeyA'){
 sh4d=true;
-};
+}
 if(e.code=='KeyS'){
 sh4d=false;
-};
+}
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF32.buffer;
+const $H=Module.HEAPF64.buffer;
 var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -127,26 +127,26 @@ var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 var bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-// colorType:'uint8',
-// preferLowPowerToHighPerformance:false,
-// precision:'lowp',
-// logarithmicDepthBuffer:true,
-// colorSpace:'display-p3',
+colorType:'float64',
+preferLowPowerToHighPerformance:false,
+precision:'highp',
+logarithmicDepthBuffer:true,
+colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-// imageSmoothingEnabled:true,
-// imageSmoothingQuality:'medium',
+imageSmoothingEnabled:true,
+imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
-// willReadFrequently:false,
-// xrCompatible:false,
-// majorVersion:2,
-// minorVersion:0
+willReadFrequently:false,
+xrCompatible:false,
+majorVersion:2,
+minorVersion:0
 });
 let g=new GPU({canvas:bcanvas,webGl:gl});
 let g2=new GPU();
@@ -230,10 +230,10 @@ gl.drawingBufferColorSpace='display-p3';
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-};
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+}
 var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -241,8 +241,8 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
-};
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);$"+j+".set($$1);");
+}
 var d=S();if(d)d();d=S();
 function S(){
 $S=parseInt(window.innerHeight,10);
@@ -256,16 +256,16 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float32Array($H,pointa,300);  // has to var?
+var agav=new Float64Array($H,pointa,300);  // has to var?
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);  // has to var?
+var $B=new Float64Array($H,pointb,sz);  // has to var?
 R.setOutput([sz]);
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
-};
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H,point"+j+",la);");
+}
 var T=false;
 r.setOutput([$S,$S]);
 function M(){
@@ -273,7 +273,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){
 return;
-};
+}
 for(var i=64;i>0;i--){
 var loca=$F+1;
 if(loca>64){loca=1;};
@@ -281,29 +281,31 @@ var locb=$Bu+1;
 if(locb>64){locb=1;};
 eval("if($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
-};
+}
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
+
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+
 setTimeout(function(){
 M();
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 if(loopLoop==true){
 if(revv==true){
 reverseLoop();
 }else{
 forwardLoop();
-};
-};
+}
+}
 },timFrm)};
 M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();
-};
+}
 return()=>{
 T=true;
-};
+}
 }
 
 });
@@ -314,7 +316,5 @@ void b3(){
 vid();
 return;
 }
-
-
 
 }
