@@ -1330,7 +1330,7 @@ let halfFloat;
 let supportLinearFiltering;
 
 // gl.getExtension('WEBGL_compressed_texture_s3tc_srgb');
-// gl.getExtension('WEBGL_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
 // gl.getExtension('OES_texture_float_linear');
 // gl.getExtension('OES_texture_half_float_linear');
