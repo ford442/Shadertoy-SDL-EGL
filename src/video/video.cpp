@@ -1,4 +1,4 @@
-#include "../include/b3emjs.hpp"
+#include "../../include/video/video.hpp"
 
 EM_JS(void,vid,(),{
 
