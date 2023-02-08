@@ -1434,7 +1434,7 @@ function startGUI(){
  'extreme':2048,'high':1024,'medium':512,'low':256,'very low':128
  }).name('quality').onFinishChange(initFramebuffers);
  gui.add(config,'SIM_RESOLUTION',{
- '32':32,'64':64,'128':128,'256':256,'512':512,'1024':1024
+ '32':32,'64':64,'128':128,'256':256,'512':512,'1024':1024,'2048':2048
  }).name('sim resolution').onFinishChange(initFramebuffers);
  gui.add(config,'DENSITY_DISSIPATION',0,4.0).name('density diffusion');
  gui.add(config,'VELOCITY_DISSIPATION',0,4.0).name('velocity diffusion');
@@ -1553,7 +1553,7 @@ function textureToCanvas(texture,width,height){
  let captureCanvas=document.getElementById('acanvas');
  
  
- let ctx=captureCanvas.getContext('2d');
+ let ctx=captureCanvas.getContext('2d',params);
  captureCanvas.width=width;
  captureCanvas.height=height;
  let imageData=ctx.createImageData(width,height);
