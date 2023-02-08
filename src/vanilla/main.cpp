@@ -59,6 +59,8 @@ document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 setTimeout(function(){
+document.getElementById('circle').width=window.innerWidth;
+document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },550);
 
