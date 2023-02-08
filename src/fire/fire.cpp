@@ -1635,8 +1635,8 @@ function addKeywords(source,keywords){
  });
  return keywordsString+source;
 }
-const baseVertexShader=compileShader(gl.VERTEX_SHADER,`
- precision highp float;
+var baseVertexShader=compileShader(gl.VERTEX_SHADER,`
+ precision mediump float;
  attribute vec2 aPosition;
  varying vec2 vUv;
  varying vec2 vL;
