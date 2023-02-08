@@ -1369,12 +1369,12 @@ gl.getExtension('EXT_gl_colorspace_bt2020_pq');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
-gl.getExtension('ARB_multisample');
+gl.getExtension('GL_ARB_multisample');
 
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 
-gl.enable(gl.MULTISAMPLE);
+gl.enable(gl.MULTISAMPLE_ARB);
 gl.enable(gl.FRAMEBUFFER_SRGB);
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
