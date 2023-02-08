@@ -1440,10 +1440,3 @@ return;
 }
 
 }
-
-int main(){
-"use strict";
-EM_ASM({
-console.log('fire.. heh heh..');});
-return 0;
-}
