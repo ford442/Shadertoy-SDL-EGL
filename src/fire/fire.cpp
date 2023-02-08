@@ -1307,7 +1307,7 @@ colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
-colorSpace:'display_p3',
+colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
@@ -1373,7 +1373,7 @@ gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('ARB_multisample');
 glEnable(GL_FRAMEBUFFER_SRGB);
-gl.drawingBufferColorSpace='display_p3';
+gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 gl.clearColor(Math.random(),Math.random(),Math.random(),1.0-(Math.random()*0.15));
