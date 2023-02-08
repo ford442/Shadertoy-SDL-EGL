@@ -208,7 +208,6 @@ eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($
 var d=S();if(d)d();d=S();
 function S(){
 $S=parseInt(window.innerHeight,10);
-Module.ccall("szz",null,["Number"],[$S]);
 // t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 var $S=parseInt(window.innerHeight,10);
