@@ -1305,7 +1305,7 @@ function getWebGLContext(canvas){
 const params={
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
-precision:'highp',
+precision:'mediump',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
@@ -1635,8 +1635,8 @@ function addKeywords(source,keywords){
  });
  return keywordsString+source;
 }
-var baseVertexShader=compileShader(gl.VERTEX_SHADER,`
- precision mediump float;
+const baseVertexShader=compileShader(gl.VERTEX_SHADER,`
+ precision highp float;
  attribute vec2 aPosition;
  varying vec2 vUv;
  varying vec2 vL;
