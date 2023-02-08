@@ -67,7 +67,7 @@ if(!ext.supportLinearFiltering){
 startGUI();
 function getWebGLContext(canvas){
 const params={
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
@@ -88,7 +88,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
 var gl=canvas.getContext('webgl2',{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
@@ -119,10 +119,10 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('EXT_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_half_float');
+// gl.getExtension('WEBGL_color_buffer_float');
+// gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
-gl.getExtension('OES_texture_half_float_linear');
+// gl.getExtension('OES_texture_half_float_linear');
 gl.getExtension('EXT_float_blend');
 gl.getExtension('EXT_frag_depth');
 gl.getExtension('EXT_shader_texture_lod');
