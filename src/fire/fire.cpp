@@ -1372,9 +1372,7 @@ gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('ARB_multisample');
-gl.enable(gl.SAMPLE_COVERAGE);
-gl.sampleCoverage(0.5, false);
-
+gl.enable(gl.MULTISAMPLE);
 gl.enable(gl.FRAMEBUFFER_SRGB);
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
