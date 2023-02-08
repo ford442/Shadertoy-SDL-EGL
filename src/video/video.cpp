@@ -2,7 +2,7 @@
 
 EM_JS(void,vid,(),{
 
-"use strict";
+// "use strict";
 
 var vv=document.getElementById("mv");
 var $S=parseInt(window.innerHeight,10);
