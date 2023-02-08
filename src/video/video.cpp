@@ -248,13 +248,9 @@ eval("if($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu=
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
-if(sh4d==true){
-Module.ccall("frm");
-};
 setTimeout(function(){
 M();
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(loopLoop==true){
 if(revv==true){
 reverseLoop();
