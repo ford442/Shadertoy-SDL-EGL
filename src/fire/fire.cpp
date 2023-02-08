@@ -1432,10 +1432,18 @@ function hashCode(s){
 
 });
 
+extern "C" {
+
+void str(){
+fi();
+return;
+}
+
+}
+
 int main(){
 "use strict";
 EM_ASM({
 console.log('fire.. heh heh..');});
-fi();
 return 0;
 }
