@@ -20,17 +20,16 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
-  
+var  $lt=tem.innerHTML;
+
 function grab$lt(){
 $lt=Math.round($lt);
 }
 
 $lt=tem.innerHTML;
 grab$lt();
-
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
-
 setTimeout(function(){
 grab$lt();
 slt=$lt/1000;
