@@ -30,7 +30,6 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
-return;
 }
 
 EM_JS(void,vid,(),{
@@ -307,7 +306,6 @@ extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-return;
 }
 
 void b3(){
