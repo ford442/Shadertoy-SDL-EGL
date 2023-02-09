@@ -97,7 +97,7 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF32.buffer;
 var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -223,7 +223,7 @@ R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-};
+}
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
@@ -233,8 +233,8 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
-};
+eval("$"+j+".set($$1);");
+}
 var d=S();if(d)d();d=S();
 function S(){
 $S=parseInt(window.innerHeight,10);
@@ -257,7 +257,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
-};
+}
 var T=false;
 r.setOutput([$S,$S]);
 function M(){
@@ -275,7 +275,7 @@ if($F==i){
 eval("var $r"+i+"=t($"+i+");r($r"+i+");");
 eval("var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";");
 }
-};
+}
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
