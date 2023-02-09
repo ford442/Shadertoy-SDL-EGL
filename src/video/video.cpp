@@ -135,14 +135,14 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:true,
+imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
-antialias:true,
+antialias:false,
 willReadFrequently:false,
 xrCompatible:false,
 majorVersion:2,
@@ -161,14 +161,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setPipeline(true).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -179,7 +179,7 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setPrecision('single').setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
