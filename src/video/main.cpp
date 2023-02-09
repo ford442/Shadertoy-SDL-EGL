@@ -2,7 +2,7 @@
 
 EM_JS(void,js_main,(),{
 
-// "use strict";
+"use strict";
 
 window.scroll(0,0);
 
@@ -56,7 +56,6 @@ vids(this);
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
-scanVideos();
 function normalResStart(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -152,18 +151,23 @@ loada();
 },$ldt);
 }
 
-loada();
-
 document.getElementById('startBtn').addEventListener('click',function(){
+loada();
+scanVideos();
 normalResStart();
 });
 
 });
 
 int main(){
-// "use strict";
+
+"use strict";
+
 EM_ASM({
-console.log('b3...  heh heh...!');});
+console.log('b3...  heh heh...!');
+});
+
 js_main();
 return 0;
-};
+
+}
