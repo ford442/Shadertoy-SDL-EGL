@@ -56,7 +56,7 @@ vids(this);
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
-  
+scanVideos();
 function normalResStart(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -151,10 +151,10 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-  
-document.getElementById('startBtn').addEventListener('click',function(){
+
 loada();
-scanVideos();
+
+document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
