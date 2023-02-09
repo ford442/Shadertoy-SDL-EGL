@@ -172,6 +172,7 @@ var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.getExtension('EXT_color_buffer_float');
+/*
 gl.getExtension('WEBGL_color_buffer_float');
 gl.getExtension('WEBGL_color_buffer_half_float');
 gl.getExtension('OES_texture_float_linear');
@@ -208,6 +209,7 @@ gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('ARB_multisample');
+*/
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
   
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
