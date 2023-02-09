@@ -276,7 +276,7 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 }
 $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;  // has to revar?
+var pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
