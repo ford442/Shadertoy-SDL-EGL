@@ -161,7 +161,7 @@ normalResStart();
 });
 
 int main(){
-"use strict";
+// "use strict";
 EM_ASM({
 console.log('b3...  heh heh...!');});
 js_main();
