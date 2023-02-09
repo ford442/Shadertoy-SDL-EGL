@@ -285,9 +285,9 @@ if(revv==true){
 reverseLoop();
 }else{
 forwardLoop();
-}}
+};
+};
 },timFrm)};
-}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
@@ -296,6 +296,7 @@ S();
 return()=>{
 T=true;
 };
+}
 
 });
 
