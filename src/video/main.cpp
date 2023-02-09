@@ -2,7 +2,7 @@
 
 EM_JS(void,js_main,(),{
 
-"use strict";
+// "use strict";
 
 window.scroll(0,0);
 
