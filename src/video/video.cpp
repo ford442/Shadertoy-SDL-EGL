@@ -236,8 +236,7 @@ for(var i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
 }
-var d=S();if(d)d();d=S();
-function S(){
+var d=S();if(d)d();d=S();function S(){
 $S=parseInt(window.innerHeight,10);
 // t.setOutput([$S,$S]);
 vv=document.getElementById("mv");
@@ -249,19 +248,25 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
+    
 var agav=new Float32Array($H,pointa,300);  // has to var?
-pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);  // has to var?
-R.setOutput([sz]);
-r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
-for(var i=0;i<65;i++){
+  R.setOutput([sz]);
+
+  for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
 }
+  
+pointb=66*la;
+var $B=new Float32Array($H,pointb,sz);  // has to var?
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
+
 var T=false;
-r.setOutput([$S,$S]);
+// r.setOutput([$S,$S]);
 function M(){
+  var vv=document.getElementById("mv");
+
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){
