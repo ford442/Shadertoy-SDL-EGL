@@ -1,9 +1,9 @@
-#include <avxintrin.h>  // AVX
+// #include <avxintrin.h>  // AVX
 
 double wi,hi;
 
-float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
+float TtimeDelta,Ttime,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+double Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -19,7 +19,6 @@ char * fileloc=(char*)"/shader/shader1.toy";
 #include <chrono>
 #include <cfloat>
 #include <climits>
-
 #include <iostream>
 
 std::chrono::steady_clock::time_point t1;
@@ -35,7 +34,7 @@ GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
-GLfloat g1g=1.0,S;
+GLfloat g1g=F,S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLclampf XYZW[4];}Vertex;
@@ -95,7 +94,7 @@ EGLContext contextegl_js;
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
