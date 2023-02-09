@@ -248,25 +248,20 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
-    
 var agav=new Float32Array($H,pointa,300);  // has to var?
-  R.setOutput([sz]);
-
-  for(var i=0;i<65;i++){
+R.setOutput([sz]);
+for(var i=0;i<65;i++){
 var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
 }
-  
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-
 var T=false;
 // r.setOutput([$S,$S]);
 function M(){
-  var vv=document.getElementById("mv");
-
+var vv=document.getElementById("mv");
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){
@@ -282,9 +277,7 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
-
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-
 setTimeout(function(){
 M();
 if(loopLoop==true){
@@ -292,9 +285,9 @@ if(revv==true){
 reverseLoop();
 }else{
 forwardLoop();
-}
-}
+}}
 },timFrm)};
+}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
@@ -302,7 +295,7 @@ S();
 };
 return()=>{
 T=true;
-}
+};
 }
 
 });
@@ -315,7 +308,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 void b3(){
 vid();
-return;
 }
 
 }
