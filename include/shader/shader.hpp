@@ -47,7 +47,7 @@ const GLchar common_shader_header_gles3[]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"; /*
 "precision highp isampler2D;"
 "precision highp isampler3D;"
 "precision highp isamplerCube;"
@@ -56,7 +56,7 @@ const GLchar common_shader_header_gles3[]=
 "precision highp usampler3D;"
 "precision highp usamplerCube;"
 "precision highp usampler2DArray;"
-"precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";
+"precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";*/
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
@@ -128,7 +128,7 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_TRANSPARENT_GREEN_VALUE,(EGLint)1000000000,
 // EGL_TRANSPARENT_BLUE_VALUE,(EGLint)0,
 //// EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+  //  EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_RED_SIZE,(EGLint)32,
 EGL_GREEN_SIZE,(EGLint)32,
 EGL_BLUE_SIZE,(EGLint)32,
@@ -142,6 +142,7 @@ EGL_SAMPLES,(EGLint)64,
 EGL_NONE
 };
 
+#include <emscripten.h>
 #include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
