@@ -268,9 +268,9 @@ glUniform1f(uni_srate,44100.0f);
 // glScissor((GLint)0,(GLint)0,Size,Size);
 // glEnable(GL_SCISSOR_TEST);
 
-glUniform3f(uni_res,Size,Size,gF);
+glUniform3f(uni_res,S,S,gF);
 
-glUniform3f(smp_chn_res,Size,Size,gF);
+glUniform3f(smp_chn_res,S,S,gF);
 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
