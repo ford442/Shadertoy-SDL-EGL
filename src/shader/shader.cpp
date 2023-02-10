@@ -195,8 +195,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 // emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
 
-
-
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
@@ -208,9 +206,8 @@ glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 
-// glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-// glEnable(GL_SCISSOR_TEST);
-
+glScissor((GLint)0,(GLint)0,Size,Size);
+glEnable(GL_SCISSOR_TEST);
 
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 
@@ -269,11 +266,11 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
-    glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
+    glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 
-    glUniform3f(uni_res,gF,gF,gF);
+    glUniform3f(uni_res,Size,Size,gF);
 
-glUniform3f(smp_chn_res,gF,gF,gF);
+glUniform3f(smp_chn_res,Size,Size,gF);
 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
