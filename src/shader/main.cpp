@@ -53,7 +53,7 @@ var fle=document.getElementById('path').innerHTML;
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 }
 var pth=document.getElementById('path').innerHTML;
-var ff=new XMLHttpRequest();
+const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
