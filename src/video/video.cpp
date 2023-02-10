@@ -34,7 +34,7 @@ aptr[200]=maxSum/32;
 
 EM_JS(void,vid,(),{
 
-// "use strict";
+"use strict";
 
 var vv=document.getElementById("mv");
 var $S=parseInt(window.innerHeight,10);
@@ -102,8 +102,6 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*h$*4;
 var pointa=77*la;
-// var pointb=66*la;
-// var $B=new Float32Array($H,pointb,sz);
 var agav=new Float32Array($H,pointa,300);
 var sz=(h$*h$)/8;
 var avag=0.750;
@@ -138,8 +136,8 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-let g=new GPU({canvas:bcanvas,webGl:gl});
-let g2=new GPU();
+let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+let g2=new GPU(mode:'gpu');
 let glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 let glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g)))))))/3.0);}`;
 let glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -151,14 +149,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0]*0.8,Pa[1],Pa[2]*1.2);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setOptimizeFloatMemory(true).setOutput([sz]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0]*0.8,P[1],P[2]*1.2);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -171,11 +169,10 @@ var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 // gl.getExtension('EXT_color_buffer_float');
-/*
-gl.getExtension('WEBGL_color_buffer_float');
-gl.getExtension('WEBGL_color_buffer_half_float');
-gl.getExtension('OES_texture_float_linear');
-gl.getExtension('OES_texture_half_float_linear');
+// gl.getExtension('WEBGL_color_buffer_float');
+// gl.getExtension('WEBGL_color_buffer_half_float');
+// gl.getExtension('OES_texture_float_linear');
+// gl.getExtension('OES_texture_half_float_linear');
 gl.getExtension('EXT_float_blend');
 gl.getExtension('EXT_frag_depth');
 gl.getExtension('EXT_shader_texture_lod');
@@ -208,18 +205,18 @@ gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('ARB_multisample');
-*/
+
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
   
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// gl.blendColor(1.0,1.0,1.0,1.0);
-// gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-// gl.enable(gl.BLEND);  //  webgl2 messed up effect
+gl.blendColor(1.0,1.0,1.0,1.0);
+gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
-gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
+gl.disable(gl.DITHER);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
