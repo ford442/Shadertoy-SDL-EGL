@@ -27,7 +27,7 @@ document.getElementById('di').click();
 }
 
 function shds(xml){
-let sparser=new DOMParser();
+const sparser=new DOMParser();
 let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
 let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $shds[0]=preList.length;
@@ -69,7 +69,7 @@ ff.send(null);
 }
 
 function scanShaders(){
-let dxhttp=new XMLHttpRequest();
+const dxhttp=new XMLHttpRequest();
 dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
