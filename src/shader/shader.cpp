@@ -264,12 +264,11 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 
-    glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+// glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+// glScissor((GLint)0,(GLint)0,Size,Size);
+// glEnable(GL_SCISSOR_TEST);
 
-glScissor((GLint)0,(GLint)0,Size,Size);
-glEnable(GL_SCISSOR_TEST);
-
-    glUniform3f(uni_res,Size,Size,gF);
+glUniform3f(uni_res,Size,Size,gF);
 
 glUniform3f(smp_chn_res,Size,Size,gF);
 
