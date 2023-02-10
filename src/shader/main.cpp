@@ -53,7 +53,7 @@ var fle=document.getElementById('path').innerHTML;
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 }
 var pth=document.getElementById('path').innerHTML;
-let ff=new XMLHttpRequest();
+var ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
@@ -63,7 +63,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
    normalResStart();
-},450);
+},250);
 }}
 ff.send(null);
 }
