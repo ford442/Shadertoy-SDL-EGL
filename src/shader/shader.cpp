@@ -211,9 +211,8 @@ glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 // glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 // glEnable(GL_SCISSOR_TEST);
 
-    // glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
 
-glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -269,11 +268,12 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
-glUniform1f(uni_srate,44100.0);
+glUniform1f(uni_srate,44100.0f);
 
-    glUniform3f(uni_res,S,S,1.0);
-    
-glUniform3f(smp_chn_res,S,S,1.0);
+    glUniform3f(uni_res,S,S,gF);
+    glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
+
+glUniform3f(smp_chn_res,S,S,gF);
 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
