@@ -15,15 +15,20 @@ $high.innerHTML=winSize;
 var $shds=[];
 
 function normalResStart(){
-setTimeout(function(){
-Module.ccall('str');
-},550);
-setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},950);
+setTimeout(function(){
+Module.ccall('str');
+},550);
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').height=window.innerHeight;
+document.getElementById('di').click();
 }
 
 function shds(xml){
