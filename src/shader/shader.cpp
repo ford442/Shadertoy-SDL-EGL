@@ -111,7 +111,7 @@ iFrame=0;
 clk_l=true;
 retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(GLsizei)hi;
-S=(GLfloat)hi;
+S=(GLfloat)Size;
 mX=0.5*S;
 mY=0.5*S;
 emscripten_webgl_init_context_attributes(&attr);
