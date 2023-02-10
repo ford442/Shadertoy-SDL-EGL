@@ -15,14 +15,6 @@ $high.innerHTML=winSize;
 var $shds=[];
 
 function normalResStart(){
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('bcanvas').width=window.innerHeight;
-document.getElementById('bcanvas').height=window.innerHeight;
-document.getElementById('acanvas').width=window.innerHeight;
-document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('str');
 },550);
@@ -35,9 +27,9 @@ document.getElementById('di').click();
 }
 
 function shds(xml){
-const sparser=new DOMParser();
-const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
-const preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
+let sparser=new DOMParser();
+let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
+let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxts=preList[i].href;
@@ -45,10 +37,10 @@ var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
-};
+}
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
-const shdMenu=document.getElementById('sh1');
+let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
@@ -61,43 +53,43 @@ var fle=document.getElementById('path').innerHTML;
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 }
 var pth=document.getElementById('path').innerHTML;
-const ff=new XMLHttpRequest();
+let ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
-const sarrayBuffer=ff.response;
+let sarrayBuffer=ff.response;
 if(sarrayBuffer){
-const sfil=new Uint8ClampedArray(sarrayBuffer);
+let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
    normalResStart();
 },450);
-};};
+}}
 ff.send(null);
 }
 
 function scanShaders(){
-const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
+let dxhttp=new XMLHttpRequest();
+dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
-};};
+}}
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 } 
-const tem=document.getElementById('tim');
-const ban=document.getElementById('menuBtn');
-const sfr=document.getElementById('slideframe');
+let tem=document.getElementById('tim');
+let ban=document.getElementById('menuBtn');
+let sfr=document.getElementById('slideframe');
 var $lt;
 function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;grab$lt();
-const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
+let slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();var slt=$lt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
+let tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
 step:[0.25],labels:false,tooltip:true,scale:false,});
 grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
