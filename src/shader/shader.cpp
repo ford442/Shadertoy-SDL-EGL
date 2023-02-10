@@ -110,7 +110,7 @@ eglconfig=NULL;
 iFrame=0;
 clk_l=true;
 retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=(GLsizei)hi;
+Size=(int)hi;
 S=(GLfloat)Size;
 mX=0.5*S;
 mY=0.5*S;
@@ -263,14 +263,11 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
-
-// glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
-// glScissor((GLint)0,(GLint)0,Size,Size);
-// glEnable(GL_SCISSOR_TEST);
-
 glUniform3f(uni_res,S,S,gF);
-
 glUniform3f(smp_chn_res,S,S,gF);
+glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+glScissor((GLint)0,(GLint)0,Size,Size);
+glEnable(GL_SCISSOR_TEST);
 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
