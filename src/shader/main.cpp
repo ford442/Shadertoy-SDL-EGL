@@ -64,7 +64,7 @@ FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
    normalResStart();
 },250);
-}}
+}};
 ff.send(null);
 }
 
@@ -74,10 +74,11 @@ dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
-}}
+}};
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
-} 
+}
+
 let tem=document.getElementById('tim');
 let ban=document.getElementById('menuBtn');
 let sfr=document.getElementById('slideframe');
