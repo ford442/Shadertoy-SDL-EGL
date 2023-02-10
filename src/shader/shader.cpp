@@ -194,34 +194,10 @@ emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 // emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 // emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
-glGenBuffers((GLsizei)1,&VBO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
-glGenBuffers((GLsizei)1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
-GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
-sources[0]=common_shader_header;
-sources[1]=vertex_shader_body;
-vtx=compile_shader(GL_VERTEX_SHADER,(GLsizei)2,sources);
-sources[0]=common_shader_header;
-sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
-sources[3]=fragment_shader_footer;
-frag=compile_shader(GL_FRAGMENT_SHADER,(GLsizei)4,sources);
-shd_prg=glCreateProgram();
-glAttachShader(shd_prg,frag);
-glAttachShader(shd_prg,vtx);
-atb_pos=0;
-glBindAttribLocation(shd_prg,(GLuint)0,"iPosition");
-glLinkProgram(shd_prg);
-glGenVertexArrays((GLsizei)1,&VCO);
-glBindVertexArray(VCO);
-atb_pos=glGetAttribLocation(shd_prg,"iPosition");
-glEnableVertexAttribArray(atb_pos);
-glVertexAttribPointer(atb_pos,(GLint)4,GL_FLOAT,GL_TRUE,(GLsizei)0,(GLvoid *)0);
-  // glDisable(GL_STENCIL_TEST);
-glEnable(GL_SCISSOR_TEST);
+
+
+
+// glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
@@ -231,9 +207,54 @@ glClearDepth(D);
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glUseProgram(shd_prg);
-glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
+
 glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glEnable(GL_SCISSOR_TEST);
+glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
+glClearColor((GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0,(GLclampf)1.0);
+
+glGenBuffers((GLsizei)1,&VBO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
+nanosleep(&req,&rem);
+
+glGenBuffers((GLsizei)1,&EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
+nanosleep(&req,&rem);
+
+GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
+
+nanosleep(&req,&rem);
+
+sources[0]=common_shader_header;
+sources[1]=vertex_shader_body;
+vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+sources[0]=common_shader_header;
+sources[1]=fragment_shader_header;
+sources[2]=default_fragment_shader;
+sources[3]=fragment_shader_footer;
+frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+nanosleep(&req,&rem);
+
+shd_prg=glCreateProgram();
+glAttachShader(shd_prg,frag);
+glAttachShader(shd_prg,vtx);
+atb_pos=0;
+glBindAttribLocation(shd_prg,0,"iPosition");
+glLinkProgram(shd_prg);
+glUseProgram(shd_prg);
+nanosleep(&req,&rem);
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
+
+glGenVertexArrays((GLsizei)1,&VCO);
+glBindVertexArray(VCO);
+atb_pos=glGetAttribLocation(shd_prg,"iPosition");
+glEnableVertexAttribArray(atb_pos);
+glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
+
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
@@ -241,17 +262,15 @@ uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
-  // // smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
+smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
 // smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
-glUniform1f(uni_srate,(GLfloat)44100.0);
-glUniform3f(uni_res,S,S,(GLfloat)1.0);
-  // // glUniform3f(smp_chn_res,S,S,(GLfloat)1.0);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
+glUniform1f(uni_srate,44100.0);
+glUniform3f(uni_res,S,S,1.0);
+glUniform3f(smp_chn_res,S,S,1.0);
+
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
