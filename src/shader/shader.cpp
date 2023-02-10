@@ -269,11 +269,11 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 // smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 // smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
-
-    glUniform3f(uni_res,S,S,gF);
     glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);  //  viewport/scissor after UsePrg runs at full resolution
 
-glUniform3f(smp_chn_res,S,S,gF);
+    glUniform3f(uni_res,gF,gF,gF);
+
+glUniform3f(smp_chn_res,gF,gF,gF);
 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
