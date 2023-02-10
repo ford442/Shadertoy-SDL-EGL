@@ -150,11 +150,9 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-
-loada();
-
-document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
+loada();
+document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
