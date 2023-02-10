@@ -87,42 +87,7 @@ shds(this);
 };};
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
-}
-
-/*
-function highResStart(){
-document.getElementById('scanvas').height=window.innerHeight*2;
-document.getElementById('scanvas').width=window.innerHeight*2;
-document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
-document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-$high.innerHTML=window.innerHeight*2;
-setTimeout(function(){
-Module.ccall('b3_egl');
-},450);
-setTimeout(function(){
-Module.ccall('b3');
-},550);
-setTimeout(function(){
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-$high.innerHTML=window.innerHeight;
-},750);
-setTimeout(function(){
-Module.ccall('str');
-},850);
-setTimeout(function(){
-document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
-},1250);
-}
-*/
-
-  
+} 
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
@@ -140,15 +105,14 @@ grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
 document.getElementById('menu').addEventListener('click',function(){
 var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
-});setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-
+});
+setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 scanShaders();
 });
-
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -158,10 +122,15 @@ document.getElementById('di').click();
 });
 
 int main(){
+
 "use strict";
+
 EM_ASM({
 FS.mkdir("/shader");
 });
+
 js_main();
+
 return 0;
+
 }
