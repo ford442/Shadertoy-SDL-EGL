@@ -143,10 +143,17 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 });setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 
 document.getElementById('startBtn').addEventListener('click',function(){
+document.getElementById('circle').width=window.innerWidth;
+document.getElementById('circle').height=window.innerHeight;
+document.getElementById('di').click();
 scanShaders();
 });
 
+setTimeout(function(){
+document.getElementById('circle').width=window.innerWidth;
+document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
+},150);
 
 });
 
