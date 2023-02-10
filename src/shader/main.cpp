@@ -11,9 +11,6 @@ let $itim=document.getElementById('itim');
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
-document.getElementById('di').click();
 
 var $shds=[];
 
@@ -113,11 +110,6 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 scanShaders();
 });
-setTimeout(function(){
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
-},150);
 
 });
 
