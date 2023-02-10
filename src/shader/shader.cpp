@@ -136,7 +136,7 @@ emscripten_webgl_make_context_current(ctx);
 // retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
-S=(GLfloat)Size;
+S=(float)Size;
 mX=0.5*S;
 mY=0.5*S;
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
