@@ -151,8 +151,9 @@ loada();
 },$ldt);
 }
 
-document.getElementById('startBtn').addEventListener('click',function(){
 loada();
+
+document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 normalResStart();
 });
