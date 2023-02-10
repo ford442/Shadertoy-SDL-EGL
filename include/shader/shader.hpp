@@ -79,7 +79,7 @@ char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iFps,Size;
+int_fast32_t iFrame,iFps,Size,iwi,ihi;
 // int iFrame,iFps,Size;
 
 void renderFrame();
