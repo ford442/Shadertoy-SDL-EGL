@@ -1,10 +1,9 @@
 // #include <avxintrin.h>  // AVX
 
-// double wi,hi;
-float wi,hi;
+double wi,hi;
 
-float TtimeDelta,Ttime,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double Dm1=-1.0,D0=0.0,D=1.0;
+float F=1.0f,Fm1=-1.0f,F0=0.0f;
+double TtimeDelta,Ttime,cMouseY,cMouseX,mouseY,mouseX,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -47,17 +46,17 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"; /*
-"precision highp isampler2D;"
-"precision highp isampler3D;"
-"precision highp isamplerCube;"
-"precision highp isampler2DArray;"
-"precision highp usampler2D;"
-"precision highp usampler3D;"
-"precision highp usamplerCube;"
-"precision highp usampler2DArray;"
-"precision highp samplerCubeShadow;precision highp sampler2DArrayShadow;\n";*/
+"precision highp float;precision lowp sampler3D;precision mediump sampler2D;"
+"precision lowp samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;"
+"precision lowp isampler3D;"
+"precision lowp isamplerCube;"
+"precision mediump isampler2DArray;"
+"precision mediump usampler2D;"
+"precision lowp usampler3D;"
+"precision lowp usamplerCube;"
+"precision mediump usampler2DArray;"
+"precision lowp samplerCubeShadow;precision mediump sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
@@ -66,7 +65,7 @@ const GLchar fragment_shader_header_gles3[]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0f;}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
 const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
@@ -80,8 +79,8 @@ char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-// int_fast32_t iFrame,iFps,Size;
-int iFrame,iFps,Size;
+int_fast32_t iFrame,iFps,Size;
+// int iFrame,iFps,Size;
 
 void renderFrame();
 
