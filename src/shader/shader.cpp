@@ -135,7 +135,7 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 // retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
-  emscripten_set_canvas_size(wi,hi);
+emscripten_set_canvas_size(hi,hi);
 Size=(int)hi;
 S=(float)Size;
 mX=0.5*S;
