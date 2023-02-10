@@ -134,9 +134,10 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_li
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 // retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
-retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
-emscripten_set_canvas_size(hi,hi);
-Size=(int)hi;
+emscripten_get_element_css_size("canvas",&wi,&hi);
+emscripten_get_canvas_element_size("scanvas",&iwi,&ihi);
+emscripten_set_canvas_element_size(ihi,ihi);
+Size=ihi;
 S=(float)Size;
 mX=0.5*S;
 mY=0.5*S;
