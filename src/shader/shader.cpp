@@ -109,11 +109,7 @@ void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-retSa=emscripten_get_element_css_size("scanvas",&wi,&hi);
-Size=(int)hi;
-S=(GLfloat)Size;
-mX=0.5*S;
-mY=0.5*S;
+
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -137,7 +133,12 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
-
+// retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
+retSa=emscripten_get_element_css_size(&wi,&hi);
+Size=(int)hi;
+S=(GLfloat)Size;
+mX=0.5*S;
+mY=0.5*S;
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
