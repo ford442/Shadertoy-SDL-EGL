@@ -2,7 +2,7 @@
 
 EM_JS(void,js_main,(),{
 
-"use strict";
+// "use strict";
 
 window.scroll(0,0);
 
@@ -160,11 +160,6 @@ normalResStart();
 });
 
 int main(){
-
-EM_ASM({
-"use strict";
-console.log('b3...  heh heh...!');
-});
 
 js_main();
 return 0;
