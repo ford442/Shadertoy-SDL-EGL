@@ -24,7 +24,7 @@ dump(text+'\n');
 console.error(text);
 }},
 canvas:(function(){
-const sscanvas=document.getElementById('scanvas');
+const sscanvas=document.getElementById('bcanvas');
 sscanvas.addEventListener('webglcontextlost',function(e){
 alert('WebGL context lost. You will need to reload the page.');
 e.preventDefault();
