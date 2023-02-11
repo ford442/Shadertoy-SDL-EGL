@@ -15,6 +15,7 @@
 #include <unistd.h>
 
 #include <emscripten.h>
+#include <emscripten/html5.h>
 
 #define GL_GLEXT_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
