@@ -216,10 +216,10 @@ gl.enable(gl.BLEND);  //  webgl2 messed up effect
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 R.setOutput([sz]);
-for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
+// for(i=0;i<65;i++){
+// var j=i+1;
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+// }
 let pointb=77*la;
 let $B=new Float32Array($H,pointb,sz);
 let $F=1;
@@ -229,7 +229,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var $$1=t(vv);var $"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);var $"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
 $S=parseInt(window.innerHeight,10);
@@ -247,7 +247,7 @@ var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;$"+j+"=var new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);  // has to var?
