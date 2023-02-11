@@ -168,7 +168,6 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setOutput([$S,$S]);
-
 gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
@@ -206,9 +205,7 @@ gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('ARB_multisample');
-
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-  
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.blendColor(1.0,1.0,1.0,1.0);
@@ -229,7 +226,7 @@ let $F=1;
 let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-let $$1=t(vv);
+var $$1=t(vv);
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
