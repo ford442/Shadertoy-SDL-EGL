@@ -5,7 +5,7 @@ EM_JS(void,js_main,(),{
 "use strict";
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
-const switch=document.getElementById('di');
+const switchy=document.getElementById('di');
 var vide=document.querySelectorAll('video');
 var mV=document.getElementById('mv');
 var loadV=document.getElementById('ldv');
@@ -16,7 +16,7 @@ let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 bezl.height=winSize;
 bezl.width=parseInt(window.innerWidth,10);
-switch.click();
+switchy.click();
 var lockVid=0;
 
 function spKey(e){
@@ -72,7 +72,7 @@ setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
-switch.click();
+switchy.click();
 },950);
 }
   
@@ -145,7 +145,7 @@ document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById('ldv').src=vidSrc;
 document.getElementById('ldv').currentTime=$itim.innerHTML;
 document.getElementById('ldv').load();
-switch.click();
+switchy.click();
 }
 setTimeout(function(){
 loada();
