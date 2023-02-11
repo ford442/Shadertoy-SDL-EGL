@@ -226,10 +226,10 @@ let $F=1;
 let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-var $$1=t(vv);
+
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("$"+j+".set($$1);");
+eval("var $$1=t(vv);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
 $S=parseInt(window.innerHeight,10);
