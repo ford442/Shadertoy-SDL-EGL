@@ -2,10 +2,10 @@
 
 EM_JS(void,js_main,(),{
 
-// "use strict";
-
+"use strict";
+const bezl=document.getElementById('circle');
 window.scroll(0,0);
-
+const switch=document.getElementById('di');
 var vide=document.querySelectorAll('video');
 var mV=document.getElementById('mv');
 var loadV=document.getElementById('ldv');
@@ -14,9 +14,9 @@ let $itim=document.getElementById('itim');
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
-document.getElementById('di').click();
+bezl.height=winSize;
+bezl.width=parseInt(window.innerWidth,10);
+switch.click();
 var lockVid=0;
 
 function spKey(e){
@@ -57,8 +57,8 @@ fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
 function normalResStart(){
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
+bezl.width=window.innerWidth;
+bezl.height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('bcanvas').width=window.innerHeight;
@@ -70,9 +70,9 @@ Module.ccall('b3');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
+bezl.width=window.innerWidth;
+bezl.height=window.innerHeight;
+switch.click();
 },950);
 }
   
@@ -80,6 +80,7 @@ const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
 var $lt;
+
 function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
@@ -100,10 +101,10 @@ var mv,lo;
 if(lockVid!=1){
 winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
+bezl.height=winSize;
+bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-document.getElementById('ldv').height=winSize;
+// document.getElementById('ldv').height=winSize;
 // loadV.width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
@@ -144,7 +145,7 @@ document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById('ldv').src=vidSrc;
 document.getElementById('ldv').currentTime=$itim.innerHTML;
 document.getElementById('ldv').load();
-document.getElementById('di').click();
+switch.click();
 }
 setTimeout(function(){
 loada();
@@ -152,8 +153,8 @@ loada();
 }
 
 document.getElementById('startBtn').addEventListener('click',function(){
-loada();
 scanVideos();
+loada();
 normalResStart();
 });
 
