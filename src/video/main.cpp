@@ -160,9 +160,8 @@ normalResStart();
 
 int main(){
 
-"use strict";
-
 EM_ASM({
+"use strict";
 console.log('b3...  heh heh...!');
 });
 
