@@ -268,7 +268,7 @@ glUniform3f(smp_chn_res,S,S,1.0f);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,Size,Size);
 glEnable(GL_SCISSOR_TEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 auto t1=std::chrono::steady_clock::now();
