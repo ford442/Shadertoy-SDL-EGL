@@ -151,11 +151,12 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-
-document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 loada();
 normalResStart();
+
+document.getElementById('startBtn').addEventListener('click',function(){
+
 });
 
 });
