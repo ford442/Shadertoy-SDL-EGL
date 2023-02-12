@@ -111,8 +111,8 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 vv=document.getElementById("mv");
-let blank$=Math.max((((w$-h$)*0)/2.0),0);
-let nblank$=Math.max((((h$-w$)*0)/2.0),0);
+let blank$=0;// Math.max((((w$-h$)*0)/2.0),0);
+let nblank$=0;// Math.max((((h$-w$)*0)/2.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
 colorType:'float64',
@@ -238,8 +238,8 @@ r.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=0; // var blank$=Math.max((((w$-h$)*0)/2.0),0);
-var nblank$=0; // var nblank$=Math.max((((h$-w$)*0)/2.0),0);
+// var blank$=Math.max((((w$-h$)*0)/2.0),0);
+// var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
@@ -247,7 +247,7 @@ var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("var point"+j+"="+i+"*la;$"+j+"=var new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);  // has to var?
