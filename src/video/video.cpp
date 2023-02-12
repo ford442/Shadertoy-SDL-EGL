@@ -45,9 +45,9 @@ EM_JS(void,vid,(),{
 // "use strict";
 
 var vv=document.getElementById("mv");
-let $S=parseInt(window.innerHeight,10);
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+var $S=parseInt(window.innerHeight,10);
+var w$=parseInt(document.getElementById("wid").innerHTML,10);
+var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016;
@@ -104,25 +104,25 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-let $H=Module.HEAPF64.buffer;
+var $H=Module.HEAPF64.buffer;
 $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-let la=h$*h$*4;
-let pointa=77*la;
-let agav=new Float64Array($H,pointa,300);
-let sz=($S*$S)/8;
-let avag=0.750;
-let min=1.000;
-let max=0.000;
+var la=h$*h$*4;
+var pointa=77*la;
+var agav=new Float64Array($H,pointa,300);
+var sz=($S*$S)/8;
+var avag=0.750;
+var min=1.000;
+var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 vv=document.getElementById("mv");
-let blank$=Math.max((((w$-h$)*0)/2.0),0);
-let nblank$=Math.max((((h$-w$)*0)/2.0),0);
-let bCan=document.getElementById("bcanvas");
-let gl=bCan.getContext("webgl2",{
+var blank$=Math.max((((w$-h$)*0)/2.0),0);
+var nblank$=Math.max((((h$-w$)*0)/2.0),0);
+var bCan=document.getElementById("bcanvas");
+var gl=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -144,11 +144,11 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-let g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
-let g2=new GPU({mode:'webgl2'});
-let glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-let glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-let glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
+var g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
+var g2=new GPU({mode:'webgl2'});
+var glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+var glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
+var glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
@@ -161,9 +161,10 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
-return[P[0],P[1],P[2],av$];
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// var aav$=av$-(minuss*(av$*0.01));
+// return[P[0],P[1],P[2],av$];
+return[av$,av$,av$,av$];
 }).setPrecision("single").setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -228,10 +229,10 @@ R.setOutput([sz]);
 // var j=i+1;
 // eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 // }
-let pointb=77*la;
-let $B=new Float64Array($H,pointb,sz);
-let $F=1;
-let $Bu=33;
+var pointb=77*la;
+var $B=new Float64Array($H,pointb,sz);
+var $F=1;
+var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 
