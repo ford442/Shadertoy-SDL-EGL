@@ -72,11 +72,11 @@ b3_vanilla:
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_test:
-	 em++ src/vanilla/main.cpp -c -std=c++2a -mllvm
-	 emcc main.o -o v3020.js -std=c++2a -flto=thin -fwhole-program -mllvm -polly \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 em++ src/vanilla/main.cpp -c -O0 -std=c++2a -mllvm -mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize
+	 emcc main.o -o v3020.js -O0 -std=c++2a -flto=thin -fwhole-program -mllvm -polly \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize \
 	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -static –experimental-wasm-simd \
-	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
