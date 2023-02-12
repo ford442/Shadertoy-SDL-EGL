@@ -156,7 +156,7 @@ emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
-emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
+// emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx,"OES_float_blend");
 emscripten_webgl_enable_extension(ctx,"OES_frag_depth");
 emscripten_webgl_enable_extension(ctx,"OES_shader_texture_lod");
