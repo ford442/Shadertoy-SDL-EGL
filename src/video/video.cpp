@@ -42,7 +42,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 
 EM_JS(void,vid,(),{
 
-"use strict";
+// "use strict";
 
 var vv=document.getElementById("mv");
 let $S=parseInt(window.innerHeight,10);
