@@ -131,7 +131,7 @@ alpha:true,
 depth:true,
 stencil:true,
 precision:'highp',
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
@@ -175,7 +175,7 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
   var silvrr=Ave(p[0],p[1],p[2]);
-this.color(1.0-silvrr,1.0-silvrr,1.0-p[2],aveg);
+this.color((1.0-silvrr),(1.0-silvrr),(1.0-p[2]),aveg);
 // this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 // gl.getExtension('EXT_color_buffer_float');
