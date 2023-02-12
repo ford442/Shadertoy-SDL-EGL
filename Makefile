@@ -75,7 +75,7 @@ b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -std=c++2a -mllvm
 	 emcc main.o -o v3020.js -std=c++2a -flto=thin -fwhole-program -mllvm -polly \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -static –experimental-wasm-simd 
+	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -static –experimental-wasm-simd \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
