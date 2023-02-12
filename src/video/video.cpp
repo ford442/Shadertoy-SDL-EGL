@@ -161,9 +161,9 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-// var minuss=(av$-0.9)*(av$/(av$-0.9));
-// var aav$=av$-(minuss*(av$*0.01));
-return[P[0],P[1],P[2],av$];
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+var aav$=av$-(minuss*(av$*0.01));
+return[P[0],P[1],P[2],aav$];
 }).setPrecision("single").setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -175,8 +175,8 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
   var silvrr=Ave(p[0],p[1],p[2]);
-this.color((1.0-silvrr),(1.0-silvrr),(1.0-p[2]),aveg);
-// this.color(p[0],p[1],p[2],aveg);
+// this.color((1.0-silvrr),(1.0-silvrr),(1.0-p[2]),aveg);
+this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 // gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
