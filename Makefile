@@ -69,13 +69,13 @@ b3_vanilla:
 	 em++ src/vanilla/main.cpp -c -std=c++2a
 	 emcc main.o -o v3020.js -std=c++2a \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -std=c++2a
 	 emcc main.o -o v3020.js -std=c++2a \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
