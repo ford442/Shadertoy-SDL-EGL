@@ -74,10 +74,10 @@ b3_vanilla:
 b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -O0 \
 	 -fno-math-errno -std=c++2a -mllvm \
-	 -mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize -ftree-vectorize
+	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
 	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++2a -flto=thin \
 	 -fwhole-program -mllvm -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
+	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -static –experimental-wasm-simd \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
