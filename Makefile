@@ -78,7 +78,6 @@ b3_vanilla_test:
 	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
-	 –experimental-wasm-simd \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
