@@ -103,7 +103,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 let la=h$*h$*4;
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
-let sz=(h$*h$)/8;
+let sz=($S*$S)/4;
 let avag=0.750;
 let min=1.000;
 let max=0.000;
@@ -241,7 +241,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var blank$=Math.max((((w$-h$)*0)/2.0),0);
 // var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
-sz=(h$*h$)/8;
+sz=($S*$S)/4;
 pointa=77*la;
 var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
