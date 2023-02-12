@@ -62,8 +62,8 @@ glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-// glFinish();
-// nanosleep(&req,&rem);
+glFinish();
+nanosleep(&req,&rem);
 return;
 }
 
@@ -147,7 +147,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_draw_buffers");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_provoking_vertex");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
-emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
+// emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
@@ -202,9 +202,9 @@ glFrontFace(GL_CW);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-glEnable(GL_BLEND);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+// glEnable(GL_BLEND);
+// glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 
