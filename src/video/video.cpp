@@ -32,6 +32,14 @@ maxSum+=aptr[i+200];
 aptr[200]=maxSum/32;
 }
 
+extern "C" {
+
+void nano(int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+}
+
+}
+
 EM_JS(void,vid,(),{
 
 // "use strict";
@@ -295,10 +303,6 @@ T=true;
 });
 
 extern "C" {
-
-void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-}
 
 void b3(){
 vid();
