@@ -111,7 +111,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 let la=h$*h$*4;
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
-let sz=($S*$S)/4;
+let sz=($S*$S)/8;
 let avag=0.750;
 let min=1.000;
 let max=0.000;
@@ -157,14 +157,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setPrecision("single").setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -220,7 +220,7 @@ gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 gl.enable(gl.BLEND);  //  webgl2 messed up effect
-// gl.unpackColorSpace='display-p3';  // very slow
+gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 R.setOutput([sz]);
@@ -249,7 +249,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 // var blank$=Math.max((((w$-h$)*0)/2.0),0);
 // var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
-sz=($S*$S)/4;
+sz=($S*$S)/8;
 pointa=77*la;
 var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
