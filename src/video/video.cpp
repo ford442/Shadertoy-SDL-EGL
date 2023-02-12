@@ -174,7 +174,7 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-  var silvrr=Ave(p[0],p[1],p[2]);
+  var silvrr=Ave(p[0],p[1]*0.7,p[2]*1.3);
 this.color(silvrr,silvrr,p[2],aveg);
 // this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
