@@ -196,7 +196,7 @@ gl.getExtension('KHR_parallel_shader_compile');
 gl.getExtension('OES_draw_buffers_indexed');
 gl.getExtension('OES_element_index_uint');
 gl.getExtension('OES_fbo_render_mipmap');
-// gl.getExtension('OES_standard_derivatives');
+gl.getExtension('OES_standard_derivatives');
 gl.getExtension('OES_vertex_array_object');
 gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 gl.getExtension('WEBGL_depth_texture');
