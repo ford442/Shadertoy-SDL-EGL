@@ -73,16 +73,17 @@ b3_vanilla:
 
 b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -O0 \
-	 -fno-math-errno -std=c++2a -mllvm \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++2a -flto=thin \
-	 -fwhole-program -mllvm -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
+	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx 
+	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -flto=thin \
+	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -static –experimental-wasm-simd \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold 
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold -mtune=corei7-avx \
+	 -mcpu=bleeding-edge \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
