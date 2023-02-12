@@ -144,8 +144,8 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-var g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
-var g2=new GPU({mode:'webgl2'});
+var g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+var g2=new GPU({mode:'gpu'});
 var glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 var glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 var glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
@@ -163,8 +163,7 @@ var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // var aav$=av$-(minuss*(av$*0.01));
-// return[P[0],P[1],P[2],av$];
-return[av$,av$,av$,av$];
+return[P[0],P[1],P[2],av$];
 }).setPrecision("single").setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -175,7 +174,9 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-this.color(p[0],p[1],p[2],aveg);
+  var silvrr=Ave(p[0],p[1],p[2]);
+this.color(silvrr,silvrr,p[2],aveg);
+// this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 // gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
