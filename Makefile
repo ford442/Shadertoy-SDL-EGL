@@ -71,6 +71,12 @@ b3_vanilla:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
+b3_vanilla_test:
+	 em++ src/vanilla/main.cpp -c -std=c++2a
+	 emcc main.o -o v3020.js -std=c++2a \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 --pre-js rSlider.js --pre-js slideOut.js
+
 
 b3hdm:
 	 em++ src/b3ogl.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
