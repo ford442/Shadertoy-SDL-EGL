@@ -88,10 +88,11 @@ b3_vanilla_test:
 
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c
-	 emcc main.o -o v3020.js -mllvm \
+	 em++ src/vanilla/main.cpp -c -O0
+	 emcc main.o -o v3020.js -mllvm -O0 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold \
 	 --pre-js rSlider.js --pre-js slideOut.js
