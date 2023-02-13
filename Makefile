@@ -87,16 +87,15 @@ b3_vanilla_test:
 	 
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0 -mllvm \
-	 -std=c++20 -mllvm \
-	 -fslp-vectorize -ftree-vectorize
-	 emcc main.o -o v3020.js -O0 -std=c++20 -flto=thin \
+	 --W=c++20 -mllvm \
+	 -ftree-vectorize
+	 emcc main.o -o v3020.js -O0 --W=c++20 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -fslp-vectorize -ftree-vectorize \
+	 -ftree-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold \
-	 -mcpu=bleeding-edge \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
