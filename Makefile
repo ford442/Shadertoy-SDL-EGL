@@ -88,7 +88,7 @@ b3_vanilla_test:
 
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -mllvm
+	 em++ src/vanilla/main.cpp -c
 	 emcc main.o -o v3020.js -mllvm \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
