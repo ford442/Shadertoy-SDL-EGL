@@ -87,7 +87,7 @@ b3_vanilla_test:
 	 
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0 -mllvm
-	 emcc main.o -o v3020.js -O0 --W=c++20 -flto=thin \
+	 emcc main.o -o v3020.js -O0 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
