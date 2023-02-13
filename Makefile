@@ -71,6 +71,7 @@ b3_vanilla:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
+
 b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -O0 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
@@ -84,10 +85,11 @@ b3_vanilla_test:
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold -mtune=corei7-avx \
 	 -mcpu=bleeding-edge \
 	 --pre-js rSlider.js --pre-js slideOut.js
-	 
+
+
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0 -mllvm
-	 emcc main.o -o v3020.js -O0 -flto=thin \
+	 emcc main.o -o v3020.js -O0 -flto=thin -mllvm \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
