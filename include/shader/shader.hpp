@@ -63,7 +63,7 @@ const GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out vec4 fragColor;\n";
+"out highp vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
@@ -112,7 +112,7 @@ EGL_NONE
 
 EGLint const attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_COLOR_BUFFER_TYPE, EGL_RGB_BUFFER,
@@ -129,16 +129,16 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_TRANSPARENT_BLUE_VALUE,(EGLint)0,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_RED_SIZE,(EGLint)32,
-EGL_GREEN_SIZE,(EGLint)32,
-EGL_BLUE_SIZE,(EGLint)32,
-EGL_ALPHA_SIZE,(EGLint)32,
+EGL_RED_SIZE,(EGLint)8,
+EGL_GREEN_SIZE,(EGLint)8,
+EGL_BLUE_SIZE,(EGLint)8,
+EGL_ALPHA_SIZE,(EGLint)8,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)32,
-EGL_BUFFER_SIZE,(EGLint)64,
+EGL_STENCIL_SIZE,(EGLint)8,
+EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
-EGL_SAMPLES,(EGLint)64,
-EGL_MIPMAP_LEVEL,(EGLint)64,
+EGL_SAMPLES,(EGLint)32,
+EGL_MIPMAP_LEVEL,(EGLint)4,
 EGL_NONE
 };
 
