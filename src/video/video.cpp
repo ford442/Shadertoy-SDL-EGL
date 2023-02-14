@@ -113,7 +113,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-var sz=($S*$S)/8;
+var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -123,8 +123,8 @@ agav.fill(max,200,33);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
-const bCan=document.getElementById("bcanvas");
-const gl=bCan.getContext("webgl2",{
+let bCan=document.getElementById("bcanvas");
+let gl=bCan.getContext("webgl2",{
 colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -146,28 +146,28 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-const g=new GPU({canvas:bcanvas,webGl:gl});
-const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
+let g=new GPU({canvas:bcanvas,webGl:gl});
+let g2=new GPU();
+let glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+let glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
+let glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-const R=g2.createKernel(function(tv){
+let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
-const t=g.createKernel(function(v){
+let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
-const r=g.createKernel(function(f){
+let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
@@ -228,11 +228,11 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
-R.setOutput([sz]);
+R.setOutput([sz]);/*
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
-}
+}*/
 var pointb=77*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
@@ -254,7 +254,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
-sz=($S*$S)/8;
+sz=(h$*w$)/8;
 pointa=77*la;
 var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
