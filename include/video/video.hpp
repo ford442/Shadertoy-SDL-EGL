@@ -36,8 +36,15 @@
 #include <EGL/eglext.h>
 // #include <EGL/eglplatform.h>
 
-short int Size;
+int_fast32_t Size;
 double wi_js,hi_js;
+
+EGLContext contextegl_js;
+EGLDisplay display_js;
+EGLSurface surface_js;
+EGLConfig eglconfig_js;
+EGLint config_size_js,major_js,minor_js;
+
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
