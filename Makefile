@@ -38,8 +38,8 @@ b3_shader:
 
 b3_video:
 	 em++ src/video/main.cpp -c -std=c++20
-	 em++ src/video/video.cpp -c -std=c++20
-	 emcc main.o video.o -o b3020.js -std=c++20 \
+	 em++ src/video/video_edit.cpp -c -std=c++20
+	 emcc main.o video_edit.o -o b3020.js -std=c++20 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
