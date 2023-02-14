@@ -40,7 +40,7 @@ b3_shader_test:
 	 em++ src/shader/main.cpp -c -O3 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=c++20
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=c++20 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 emcc main.o shader.o -o s3020.js -O0 -std=c++20 -fno-math-errno -flto=thin \
