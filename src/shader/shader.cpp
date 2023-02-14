@@ -109,7 +109,6 @@ void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -194,7 +193,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
-
 emscripten_webgl_enable_extension(ctx,"AMD_pinned_memory");
 emscripten_webgl_enable_extension(ctx,"ARB_blend_func_extended");
 emscripten_webgl_enable_extension(ctx,"ARB_buffer_storage");
@@ -215,7 +213,6 @@ emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"ARB_draw_buffers_blend");
 emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
-
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
@@ -226,23 +223,17 @@ glClearDepth(D);
 glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
-
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
-
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
-
 GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
-
 nanosleep(&req,&rem);
-
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
@@ -252,7 +243,6 @@ sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
-
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
@@ -264,13 +254,11 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-
 glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_TRUE,0,(GLvoid*)0);
-
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
