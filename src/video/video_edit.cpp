@@ -291,7 +291,7 @@ this.color(rr,gg,bb,aveg);
 extern "C" {
 
 void b3(){
-vid();
+ma();
 return;
 }
 
