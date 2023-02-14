@@ -44,7 +44,7 @@ return;
 
 EM_JS(void,ma,(),{
 
-    "use strict";
+   // "use strict";
     const pnnl=document.body;
     var vv=document.getElementById("mv");
     var intervalLoop=null;
