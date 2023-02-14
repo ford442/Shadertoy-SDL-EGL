@@ -152,15 +152,10 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-
+scanVideos();
+loada();
 
 document.getElementById('startBtn').addEventListener('click',function(){
-scanVideos();
-setTimeout(function(){
-},200);
-loada();
-setTimeout(function(){
-},550);
 normalResStart();
 });
 
