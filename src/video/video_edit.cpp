@@ -198,7 +198,7 @@ this.color(rr,gg,bb,aveg);
     pointa=77*la;
     agav=new Float32Array($H,pointa,300);
     R.setOutput([sz]);
-    for(i=0;i<65;i++){
+    for(var i=0;i<65;i++){
         var j=i+1;
         eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
     };
@@ -225,7 +225,7 @@ this.color(rr,gg,bb,aveg);
         pointa=77*la;
         var agav=new Float32Array($H,pointa,300);
         R.setOutput([sz]);
-        for(i=0;i<65;i++){
+        for(var i=0;i<65;i++){
             var j=i+1;
             eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
         };
@@ -239,7 +239,7 @@ this.color(rr,gg,bb,aveg);
             t.setConstants({nblnk:nblank$,blnk:blank$});
             r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
             if(T){return;}
-            for(i=64;i>0;i--){
+            for(var i=64;i>0;i--){
                 var loca=$F+1;
                 if(loca>64){loca=1;}
                 var locb=$Bu+1;
