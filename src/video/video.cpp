@@ -44,7 +44,7 @@ return;
 
 EM_JS(void,vid,(),{
 
-// "use strict";
+"use strict";
 
 var vv=document.getElementById("mv");
 var $S=parseInt(window.innerHeight,10);
@@ -146,8 +146,8 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-var g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
-var g2=new GPU({mode:'gpu'});
+var g=new GPU(canvas:bcanvas,webGl:gl});
+var g2=new GPU();
 var glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 var glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 var glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
@@ -159,14 +159,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 var R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
 var t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setPrecision("single").setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 var r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -176,14 +176,14 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-  var silvrr=Ave(p[0],p[1],p[2]);
-this.color(silvrr,silvrr,p[2],aveg);
-// this.color(p[0],p[1],p[2],aveg);
+//   var silvrr=Ave(p[0],p[1],p[2]);
+// this.color(silvrr,silvrr,p[2],aveg);
+this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 // gl.getExtension('EXT_color_buffer_float');
-// gl.getExtension('WEBGL_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
-// gl.getExtension('OES_texture_float_linear');
+gl.getExtension('OES_texture_float_linear');
 // gl.getExtension('OES_texture_half_float_linear');
 gl.getExtension('EXT_float_blend');
 gl.getExtension('EXT_frag_depth');
@@ -198,7 +198,7 @@ gl.getExtension('KHR_parallel_shader_compile');
 gl.getExtension('OES_draw_buffers_indexed');
 gl.getExtension('OES_element_index_uint');
 gl.getExtension('OES_fbo_render_mipmap');
-// gl.getExtension('OES_standard_derivatives');
+gl.getExtension('OES_standard_derivatives');
 gl.getExtension('OES_vertex_array_object');
 gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 gl.getExtension('WEBGL_depth_texture');
@@ -218,21 +218,21 @@ gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('ARB_multisample');
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+// gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// gl.blendColor(1.0,1.0,1.0,1.0);
+gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-gl.enable(gl.BLEND);  //  webgl2 messed up effect
+// gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
 R.setOutput([sz]);
-// for(i=0;i<65;i++){
-// var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-// }
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+}
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
 var $F=1;
@@ -251,8 +251,8 @@ r.setOutput([$S,$S]);
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-// var blank$=Math.max((((w$-h$)*0)/2.0),0);
-// var nblank$=Math.max((((h$-w$)*0)/2.0),0);
+var blank$=Math.max((((w$-h$)*0)/2.0),0);
+var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=($S*$S)/8;
 pointa=77*la;
