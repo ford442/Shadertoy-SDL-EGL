@@ -30,19 +30,22 @@
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
+// #include <GLES3/gl3platform.h>
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#include <EGL/eglplatform.h>
+// #include <EGL/eglplatform.h>
 
 #include <webgl/webgl2.h>
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
+void egl();
+
 extern "C"{
 
 void b3();
+
 void nano(short int Fnum,int leng,float *ptr,float *aptr);
 
 }
