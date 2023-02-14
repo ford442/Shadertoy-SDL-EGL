@@ -106,13 +106,13 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-var $H=Module.HEAPF64.buffer;
+var $H=Module.HEAPF32.buffer;
 $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*h$*4;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float32Array($H,pointa,300);
 var sz=($S*$S)/8;
 var avag=0.750;
 var min=1.000;
@@ -125,7 +125,7 @@ var blank$=Math.max((((w$-h$)*0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 var bCan=document.getElementById("bcanvas");
 var gl=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -231,10 +231,10 @@ gl.disable(gl.DITHER);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=77*la;
-var $B=new Float64Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -242,7 +242,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
 $S=parseInt(window.innerHeight,10);
@@ -256,14 +256,14 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*4;
 sz=($S*$S)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);  // has to var?
+var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float64Array($H,pointb,sz);  // has to var?
+var $B=new Float32Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
