@@ -3,7 +3,7 @@
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size_js=(GLsizei)hi_js;
+Size=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_FALSE;
