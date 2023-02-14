@@ -63,7 +63,7 @@ const GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform vec4 iDate;uniform highp float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform lowp float iSampleRate;"
-"out highp vec4 fragColor;\n";
+"out vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
