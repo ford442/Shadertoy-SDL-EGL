@@ -2,7 +2,8 @@
 #include <immintrin.h>
 
 float simd_test(float a){
-v128_t ab=wasm_f32x4_splat(a);
+  float clr[]=[a,a,a,1.0];
+v128_t ab=wasm_f32x4_splat(clr);
 wasm_v128_store(0,ab);
 // wasm_v128_store(0,a);
 // v128_t b=wasm_v128_load(0);
