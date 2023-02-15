@@ -35,7 +35,7 @@ b3_shader:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
-	 
+
 b3_shader_simd:
 	 em++ src/shader/main.cpp -c -std=c++11
 	 em++ src/shader/shader_simd.cpp -c -std=c++20 -msimd128 -mavx
@@ -44,18 +44,18 @@ b3_shader_simd:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
-	 
-	 
+
+
 b3_shader_test:
 	 em++ src/shader/main.cpp -c -O3 \
 	 -fno-math-errno -std=c++11 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=c++20 \
-	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
+	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge -msimd128 -mavx \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 emcc main.o shader.o -o s3020.js -O0 -std=c++20 -fno-math-errno -flto=thin \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -73,7 +73,7 @@ b3_shader_llvm:
 
 
 b3_video_test:
-	 em++ src/video/main.cpp -c  -O3 \
+	 em++ src/video/main.cpp -c -O3 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 em++ src/video/video.cpp -c  -O0 -fno-math-errno -std=c++20 \
