@@ -47,10 +47,10 @@ b3_shader_simd:
 
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -O3 \
+	 em++ src/shader/main.cpp -shared -O3 \
 	 -fno-math-errno -std=c++11 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=c++20 \
+	 em++ src/shader/shader.cpp -shared -O0 -fno-math-errno -std=c++20 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
