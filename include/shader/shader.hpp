@@ -15,7 +15,8 @@
 
 double_t wi,hi;
 
-float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
+float_t F0=0.0f;
 double_t TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
