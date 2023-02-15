@@ -32,6 +32,10 @@ document.getElementById('di').click();
 },950);
 var tsta=document.getElementById('smd').innerHTML;
 var tst=[tsta,tsta,tsta,tsta,tsta,tsta,tsta,tsta];
+  const $H=Module.HEAPF64.buffer;
+ const $P=Module.HEAPF64.subarray(0,8);
+  $P.set(tst,0);
+  console.log($H.buffer);
 var reslt=Module.ccall('js_simd',"number",["array"],[tst]);
 console.log(reslt);
 }
