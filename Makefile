@@ -36,7 +36,7 @@ b3_shader:
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 	 
-b3_shader:
+b3_shader_simd:
 	 em++ src/shader/main.cpp -c -std=c++11
 	 em++ src/shader/shader_simd.cpp -c -std=c++20 -msimd128 -mavx
 	 emcc main.o shader_simd.o -o s3020.js -std=c++20 -msimd128 -mavx \
