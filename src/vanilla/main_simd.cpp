@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main.hpp"
 #include <immintrin.h>
 
-float simd_test(float a){
+float simd_test(float * a){
 // v128_t ab=wasm_f32x4_splat(a);
 // wasm_v128_store(0,ab);
 wasm_v128_store(0,[a[0],a[1],a[2],a[3]]);
