@@ -223,8 +223,7 @@ var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*h$*2;
 var pointa=77*la;
-// var agav=new Float64Array($H,pointa,300);
-var agav=Module.HEAPF64.subarray(pointa,300);
+var agav=new Float64Array($H,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -329,7 +328,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setStrictIntegers(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setTactic("precision").setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -351,15 +350,14 @@ var nblank$=Math.max((((h$-w$)*0)/2.0),0);
 la=h$*h$*2;
 sz=(h$*w$)/8;
 pointa=77*la;
-// agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
-// for(i=0;i<65;i++){
-// var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-// };
+for(i=0;i<65;i++){
+var j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+};
 var pointb=77*la;
-// var $B=new Float64Array($H,pointb,sz);
-var $B=Module.HEAPF64.subarray(pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -367,8 +365,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 
 for(var i=0;i<65;i++){
 var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-eval("var point"+j+"="+i+"*la;var $"+j+"=Module.HEAPF64.subarray(point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
@@ -384,17 +381,14 @@ $S=parseInt(window.innerHeight,10);
 la=h$*h$*2;
 sz=(h$*w$)/8;
 pointa=77*la;
-// var agav=new Float64Array($H,pointa,300);  // has to var?
-var agav=Module.HEAPF64.subarray(pointa,300);  // has to var?
-  
+var agav=new Float64Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
-// for(var i=0;i<65;i++){
-// j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-// };
+for(var i=0;i<65;i++){
+j=i+1;
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+};
 pointb=66*la;
-// var $B=new Float64Array($H,pointb,sz);  // has to var?
-var $B=Module.HEAPF64.subarray(pointb,sz);  // has to var?
+var $B=new Float64Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
