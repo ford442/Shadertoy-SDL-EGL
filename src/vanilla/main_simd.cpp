@@ -11,7 +11,8 @@ return b[0];
 extern"C"{
   
 void js_simd(float aa){
-simd_test(aa);
+float cc=simd_test(aa);
+return cc;
 }
   
 }
@@ -39,7 +40,7 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
-var  $lt=tem.innerHTML;
+var $lt=tem.innerHTML;
 
 function grab$lt(){
 $lt=Math.round($lt);
