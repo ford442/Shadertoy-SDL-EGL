@@ -1,5 +1,19 @@
-
 #include "../../include/vanilla/main.hpp"
+#include <immintrin.h>
+
+float simd_test(float a){
+wasm_v128_store(0,a);
+const v128_t b = wasm_v128_load(0);
+return b;
+}
+
+extern"C"{
+  
+void js_simd(float aa){
+simd_test(aa);
+}
+  
+}
 
 EM_JS(void,js_main,(),{
 
@@ -12,6 +26,9 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },950);
+var tst=document.getElementById('smd').innerHTML;
+var reslt=Module.ccall('js_simd',"number",["number"],[tst]);
+console.log(reslt);
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
