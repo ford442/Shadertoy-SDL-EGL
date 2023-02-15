@@ -164,7 +164,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_shader_texture_lod");
 // emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
-emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
+// emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB");
 // emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
