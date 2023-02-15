@@ -1,15 +1,11 @@
 #include "../../include/vanilla/main.hpp"
-//#include <immintrin.h>
-#include <wasm_simd128.h>
+#include <immintrin.h>
 
 float simd_test(float a[]){
-  
 v128_t ab=wasm_f32x4_splat(a[0]);
 wasm_v128_store(0,ab);
 // wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
-// v128_t b=wasm_v32x4_load_splat(0);
-  
 float c=wasm_f32x4_extract_lane(b,0);
 return c;
 }
@@ -35,11 +31,11 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },950);
 var tsta=document.getElementById('smd').innerHTML;
-var tst=[tsta,0.5,0.0,1.0];
-//  const $H=Module.HEAPF64.buffer;
-// const $P=$H.subarray(0,4);
-//  $P.set(tst,0);
-//  console.log($H);
+var tst=[tsta,tsta,tsta,tsta,tsta,tsta,tsta,tsta];
+  const $H=Module.HEAPF64.buffer;
+ const $P=Module.HEAPF64.subarray(0,2);
+  $P.set(tst,0);
+  console.log($H);
 var reslt=Module.ccall('js_simd',"number",["array"],[tst]);
 console.log(reslt);
 }
