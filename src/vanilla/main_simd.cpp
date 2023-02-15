@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main.hpp"
-#include <immintrin.h>
+//#include <immintrin.h>
+#include <wasm_simd128.h>
 
 float simd_test(float a){
   float clr[]=[a,a,a,1.0];
