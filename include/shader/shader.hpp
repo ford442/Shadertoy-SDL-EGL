@@ -1,13 +1,4 @@
 // #include <avxintrin.h>  // AVX
-#include <float.h>
-
-double_t wi,hi;
-
-float_t cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double_t TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
-
-char * fileloc=(char*)"/shader/shader1.toy";
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -22,6 +13,12 @@ char * fileloc=(char*)"/shader/shader1.toy";
 #include <climits>
 #include <iostream>
 
+double_t wi,hi;
+
+float_t cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+double_t TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
+
+char * fileloc=(char*)"/shader/shader1.toy";
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
