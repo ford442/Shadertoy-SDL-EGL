@@ -50,15 +50,15 @@ b3_shader_test:
 	 em++ src/shader/main.cpp -shared -O3 \
 	 -fno-math-errno -std=c++11 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 em++ src/shader/shader.cpp -shared -O0 -fno-math-errno -std=c++20 \
+	 em++ src/shader/shader.cpp -shared -O3 -fno-math-errno -std=c++20 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 emcc main.o shader.o -o s3020.js -O0 -std=c++20 -fno-math-errno -flto=thin \
+	 emcc main.o shader.o -o s3020.js -O3 -std=c++20 -fno-math-errno -flto=thin \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -s GL_UNSAFE_OPTS=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
