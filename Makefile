@@ -115,7 +115,13 @@ b3_vanilla:
 	 emcc main.o -o v3020.js -std=c++2a \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 --pre-js rSlider.js --pre-js slideOut.js
-
+	 
+b3_vanilla_simd:
+	 em++ src/vanilla/main_simd.cpp -c -std=c++2a -msimd128 -mavx
+	 emcc main_simd.o -o v3020.js -std=c++2a -msimd128 -mavx \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sEXPORTED_FUNCTIONS='["_main","_js_simd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -O0 \
