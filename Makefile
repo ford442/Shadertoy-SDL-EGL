@@ -52,10 +52,12 @@ b3_shader_test:
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=c++20 \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge -msimd128 -mavx \
+	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 emcc main.o shader.o -o s3020.js -O0 -std=c++20 -fno-math-errno -flto=thin \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx \
+	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
