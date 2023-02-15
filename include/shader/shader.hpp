@@ -1,9 +1,10 @@
 // #include <avxintrin.h>  // AVX
+#include <float.h>
 
 double wi,hi;
 
-float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
-double TtimeDelta,Ttime,Dm1=-1.0,D0=0.0,D=1.0;
+float_t TtimeDelta,cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f,F0=0.0f;
+double Ttime,Dm1=-1.0,D0=0.0,D=1.0;
 
 char * fileloc=(char*)"/shader/shader1.toy";
 
@@ -46,7 +47,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision superp float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
+"precision highp float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
 "precision lowp samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;"
 "precision lowp isampler3D;"
