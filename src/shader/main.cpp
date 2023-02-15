@@ -21,7 +21,7 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 setTimeout(function(){
 Module.ccall('str');
-},550);
+},150);
 document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
@@ -68,7 +68,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
    normalResStart();
-},750);
+},450);
 }};
 ff.send(null);
 }
