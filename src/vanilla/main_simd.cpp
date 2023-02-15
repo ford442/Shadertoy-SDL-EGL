@@ -2,9 +2,8 @@
 //#include <immintrin.h>
 #include <wasm_simd128.h>
 
-float simd_test(float a){
-  float clr[]=[a,a,a,1.0];
-v128_t ab=wasm_f32x4_splat(a);
+float simd_test(float a[]){
+v128_t ab=wasm_f32x4_splat(a[0]);
 wasm_v128_store(0,ab);
 // wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
@@ -40,7 +39,7 @@ var tst=[tsta,tsta,tsta,tsta];
 // const $P=$H.subarray(0,4);
 //  $P.set(tst,0);
 //  console.log($H);
-var reslt=Module.ccall('js_simd',"number",["array"],[tsta]);
+var reslt=Module.ccall('js_simd',"number",["array"],[tst]);
 console.log(reslt);
 }
   
