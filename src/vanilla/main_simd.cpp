@@ -5,7 +5,7 @@ float simd_test(float a){
 const v128_t ab = wasm_f32x4_splat(a);
 wasm_v128_store(0,ab);
 const v128_t b = wasm_v128_load(0);
-return b;
+return b[0];
 }
 
 extern"C"{
