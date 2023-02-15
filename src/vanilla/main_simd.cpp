@@ -15,7 +15,7 @@ return c;
 
 extern"C"{
   
-float js_simd(float aa){
+float js_simd(float aa[]){
 float cc=simd_test(aa);
 return cc;
 }
