@@ -231,7 +231,7 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
@@ -345,7 +345,7 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
 la=h$*w$*2;
 sz=(h$*w$)/8;
@@ -373,7 +373,7 @@ vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 
-var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
 $S=parseInt(window.innerHeight,10);
 // t.setOutput([$S,$S]);
