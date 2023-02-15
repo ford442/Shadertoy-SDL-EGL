@@ -41,7 +41,6 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 }
-  
 v128_t b=wasm_v128_load(0);
 float c=wasm_f32x4_extract_lane(b,0);
 glUniform1f(uni_tme,c);
@@ -58,9 +57,8 @@ std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float
 TtimeDelta=time_spanb.count();
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
-  v128_t ab=wasm_f32x4_splat(time_spana);
+v128_t ab=wasm_f32x4_splat(Ttime);
 wasm_v128_store(0,ab);
-
 mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
