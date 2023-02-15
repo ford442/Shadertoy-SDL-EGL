@@ -373,10 +373,10 @@ sz=(h$*w$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
-for(i=0;i<65;i++){
-var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
-};
+// for(i=0;i<65;i++){
+// var j=i+1;
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+// };
 var pointb=77*la;
 var $B=new Float64Array($H,pointb,sz);
 var $F=1;
