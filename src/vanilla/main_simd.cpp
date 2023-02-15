@@ -1,10 +1,10 @@
 #include "../../include/vanilla/main.hpp"
 #include <immintrin.h>
 
-float simd_test(float a){
+float simd_test(float* a){
 // v128_t ab=wasm_f32x4_splat(a);
 // wasm_v128_store(0,ab);
-wasm_v128_store(0,a);
+wasm_v128_store(0,a[0]);
 v128_t b=wasm_v128_load(0);
 float c=wasm_f32x4_extract_lane(b,0);
 return c;
