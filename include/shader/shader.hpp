@@ -46,7 +46,7 @@ const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
+"precision superp float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
 "precision lowp samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;"
 "precision lowp isampler3D;"
