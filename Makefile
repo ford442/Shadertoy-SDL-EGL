@@ -60,7 +60,7 @@ b3_shader_test:
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -s GL_UNSAFE_OPTS=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
