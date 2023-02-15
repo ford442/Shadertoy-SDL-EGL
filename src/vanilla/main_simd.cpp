@@ -31,7 +31,7 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },950);
 var tsta=document.getElementById('smd').innerHTML;
-var tst=[tsta,tsta,tsta,tsta];
+var tst=[tsta,tsta,tsta,tsta,tsta,tsta,tsta,tsta];
 var reslt=Module.ccall('js_simd',"number",["array"],[tst]);
 console.log(reslt);
 }
