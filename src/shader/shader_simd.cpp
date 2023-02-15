@@ -57,7 +57,7 @@ std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float
 TtimeDelta=time_spanb.count();
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
-v128_t ab=wasm_f32x4_splat(Ttime);
+v128_t ab=wasm_f32x4_splat((float)Ttime);
 wasm_v128_store(0.0,ab);
 mouseX=x/S;
 mouseY=(S-y)/S;
