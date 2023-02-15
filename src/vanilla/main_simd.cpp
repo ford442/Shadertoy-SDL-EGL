@@ -33,7 +33,7 @@ document.getElementById('di').click();
 var tsta=document.getElementById('smd').innerHTML;
 var tst=[tsta,tsta,tsta,tsta,tsta,tsta,tsta,tsta];
   const $H=Module.HEAPF64.buffer;
- const $P=Module.HEAPF64.subarray(0,8);
+ const $P=Module.HEAPF64.subarray(0,1);
   $P.set(tst,0);
   console.log($H);
 var reslt=Module.ccall('js_simd',"number",["array"],[tst]);
