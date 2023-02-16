@@ -55,7 +55,7 @@ const GLchar common_shader_header_gles3[]=
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "#extension GL_EXT_vertex_attrib_64bit : enable\n"
 "#extension GL_NV_gpu_shader5 : enable\n"
-"ARB_color_buffer_float : enable\n"
+"#extension GL_ARB_color_buffer_float : enable\n"
 "precision highp float;precision highp int;precision lowp sampler3D;precision highp sampler2D;"
 "precision lowp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;"
