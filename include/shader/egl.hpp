@@ -1,6 +1,10 @@
 #pragma once
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
+#include <assert.h>
+#pragma STDC FENV_ACCESS ON
+assert(FLT_EVAL_METHOD == 2);
+
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
 #include <immintrin.h> 
