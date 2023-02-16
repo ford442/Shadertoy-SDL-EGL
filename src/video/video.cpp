@@ -30,7 +30,7 @@ eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -260,7 +260,7 @@ minorVersion:0
 
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
 // gl.getExtension('OES_texture_float_linear');
