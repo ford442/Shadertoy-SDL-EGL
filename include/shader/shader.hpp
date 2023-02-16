@@ -48,6 +48,7 @@ const GLchar common_shader_header_gles3[]=
 "#pragma optionNV(fastprecision off)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
+"#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "precision mediump float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
 "precision lowp samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;"
