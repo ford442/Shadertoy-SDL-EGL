@@ -13,8 +13,6 @@
 #include <climits>
 #include <iostream>
 
-#include <stdfloat>  //  c++23
-
 double_t wi,hi;
 
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
