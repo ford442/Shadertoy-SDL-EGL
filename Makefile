@@ -47,16 +47,16 @@ b3_shader_simd:
 
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -shared -O3 \
+	 em++ src/shader/main.cpp -c -shared -O1 \
 	 -fno-math-errno -std=c++11 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 em++ src/shader/shader.cpp -c -shared -O0 -fno-math-errno -std=c++20 \
-	 -fno-math-errno -std=c++2b -mcpu=bleeding-edge -msimd128 -mavx \
+	 -fno-math-errno -std=c++2b -mcpu=bleeding-edge -mfpmath=both -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 emcc main.o shader.o -o s3020.js -O0 -std=c++2b -fno-math-errno -flto=thin \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -mfpmath=387 -msimd128 -mavx -sWASMFS=1 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -mfpmath=both -msimd128 -mavx -sWASMFS=1 \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
