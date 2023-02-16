@@ -40,7 +40,7 @@ b3_shader:
 b3_shader_google:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
 	 em++ src/shader/shader_google_street.cpp -c -std=gnu++2a \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc main.o shader_google_street.o -o g0026.js -std=gnu++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
