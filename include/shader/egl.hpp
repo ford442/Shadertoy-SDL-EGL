@@ -1,6 +1,7 @@
 #pragma once
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
+#undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
 
 #include <wasm_simd128.h>
