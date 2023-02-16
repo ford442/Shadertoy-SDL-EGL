@@ -3,6 +3,7 @@
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
+#pragma STDC CX_LIMITED_RANGE ON
 
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
