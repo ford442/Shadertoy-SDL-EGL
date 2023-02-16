@@ -213,6 +213,7 @@ emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"ARB_draw_buffers_blend");
 emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
+emscripten_webgl_enable_extension(ctx,"GL_ARB_gpu_shader_fp64");
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
