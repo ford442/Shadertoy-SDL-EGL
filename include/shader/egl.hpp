@@ -3,8 +3,6 @@
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
-#undef STDC FP_CONTRACT
-#pragma STDC FP_CONTRACT off
 
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
