@@ -50,11 +50,11 @@ b3_shader_test:
 	 em++ src/shader/main.cpp -c -shared -O1 \
 	 -fno-math-errno -std=c++11 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 em++ src/shader/shader.cpp -c -shared -O0 -fno-math-errno -std=c++2b -ffp-contract=off \
+	 em++ src/shader/shader.cpp -c -shared -O0 -fno-math-errno -std=gnu++2b -ffp-contract=off \
 	 -fno-math-errno -std=c++2b -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 emcc main.o shader.o -o s3020.js -O0 -std=c++2b -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3020.js -O0 -std=gnu++2b -fno-math-errno -ffp-contract=off \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -sWASMFS=1 \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
