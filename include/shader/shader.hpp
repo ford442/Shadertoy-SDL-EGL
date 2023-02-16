@@ -44,6 +44,8 @@ const GLchar * sources[4];
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 // "#define AA 1\n"
+"#pragma optionNV(fastmath off)\n"
+"#pragma optionNV(fastprecision off)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision mediump float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
