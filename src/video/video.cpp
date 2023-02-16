@@ -235,7 +235,7 @@ var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -297,7 +297,7 @@ gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('ARB_multisample');
   
-// gl.drawingBufferStorage(gl.RGBA16F, canvas.width, canvas.height);
+gl.drawingBufferStorage(gl.RGBA32F,bCan.width,bCan.height);
 gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
