@@ -40,7 +40,7 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 }
-glUniform1d(uni_tme,(double)stime);
+glUniform1f(uni_tme,stime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
