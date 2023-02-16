@@ -50,7 +50,7 @@ const GLchar common_shader_header_gles3[]=
 "#define HW_PERFORMANCE 0\n"
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "#extension GL_EXT_vertex_attrib_64bit : enable\n"
-"precision mediump float;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
+"precision mediump float;precision mediump double;precision highp int;precision lowp sampler3D;precision mediump sampler2D;"
 "precision lowp samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;"
 "precision lowp isampler3D;"
