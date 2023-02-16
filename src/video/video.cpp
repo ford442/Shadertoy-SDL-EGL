@@ -262,46 +262,44 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
-gl.getExtension('OES_texture_float_linear');
+// gl.getExtension('OES_texture_float_linear');
 // gl.getExtension('OES_texture_half_float_linear');
 gl.getExtension('EXT_float_blend');
-gl.getExtension('EXT_frag_depth');
+// gl.getExtension('EXT_frag_depth');
 gl.getExtension('EXT_shader_texture_lod');
-gl.getExtension('EXT_sRGB');
-gl.getExtension('EXT_blend_minmax');
-gl.getExtension('ANGLE_instanced_arrays');
-gl.getExtension('EXT_disjoint_timer_query');
+// gl.getExtension('EXT_sRGB');
+// gl.getExtension('EXT_blend_minmax');
+// gl.getExtension('ANGLE_instanced_arrays');
+// gl.getExtension('EXT_disjoint_timer_query');
 gl.getExtension('EXT_clip_cull_distance');
-gl.getExtension('EXT_disjoint_timer_query_webgl2');
-gl.getExtension('KHR_parallel_shader_compile');
+// gl.getExtension('EXT_disjoint_timer_query_webgl2');
+// gl.getExtension('KHR_parallel_shader_compile');
 gl.getExtension('OES_draw_buffers_indexed');
 gl.getExtension('OES_element_index_uint');
 gl.getExtension('OES_fbo_render_mipmap');
 gl.getExtension('OES_standard_derivatives');
 gl.getExtension('OES_vertex_array_object');
-gl.getExtension('WEBGL_blend_equation_advanced_coherent');
-gl.getExtension('WEBGL_depth_texture');
-gl.getExtension('WEBGL_draw_buffers');
-gl.getExtension('WEBGL_provoking_vertex');
+// /gl.getExtension('WEBGL_blend_equation_advanced_coherent');
+// gl.getExtension('WEBGL_depth_texture');
+// gl.getExtension('WEBGL_draw_buffers');
+// gl.getExtension('WEBGL_provoking_vertex');
 gl.getExtension('EXT_framebuffer_sRGB');
-gl.getExtension('OES_depth32');
-gl.getExtension('OES_fixed_point');
+// gl.getExtension('OES_depth32');
+// gl.getExtension('OES_fixed_point');
 gl.getExtension('OES_shader_multisample_interpolation');
-gl.getExtension('WEBGL_webcodecs_video_frame');
-gl.getExtension('OES_single_precision');
+// gl.getExtension('WEBGL_webcodecs_video_frame');
+// gl.getExtension('OES_single_precision');
 gl.getExtension('EXT_texture_shadow_lod');
 gl.getExtension('EGL_NV_memory_attachment');
 gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
-gl.getExtension('ARB_multisample');
-  
-gl.drawingBufferStorage(gl.RGBA32F,bCan.width,bCan.height);
+// gl.getExtension('ARB_multisample');
+gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
@@ -309,7 +307,6 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 gl.disable(gl.DITHER);
-
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'webgl2'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -364,7 +361,6 @@ var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
