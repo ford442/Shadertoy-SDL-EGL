@@ -36,6 +36,17 @@ b3_shader:
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
+
+b3_shader_google:
+	 em++ src/shader/main.cpp -c -std=gnu++2a
+	 em++ src/shader/shader_google_street.cpp -c -std=gnu++2a
+	 emcc main.o shader_google_street.o -o g0026.js -std=gnu++2a \
+	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js rSlider.js --pre-js slideOut.js
+
+
 b3_shader_simd:
 	 em++ src/shader/main.cpp -c -std=c++11
 	 em++ src/shader/shader_simd.cpp -c -std=c++20 -msimd128 -mavx
