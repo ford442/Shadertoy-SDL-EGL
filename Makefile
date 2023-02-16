@@ -54,7 +54,7 @@ b3_shader_test:
 	 -fno-math-errno -std=c++2b -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
-	 emcc main.o shader.o -o s3020.js -O0 -std=c++2b -fno-math-errno -flto=thin --comments 0 \
+	 emcc main.o shader.o -o s3020.js -O0 -std=c++2b -fno-math-errno -flto=thin \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -sWASMFS=1 \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
