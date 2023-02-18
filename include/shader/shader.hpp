@@ -18,7 +18,8 @@
 double_t wi,hi;
 
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
-float_t F0=0.0f;
+// float_t F0=0.0f;
+float F0=0.0f;
 double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
 long double Ttime;
 
@@ -88,8 +89,9 @@ char32_t * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iFps,Size,iwi,ihi;
+// int_fast32_t iFrame,iFps,Size,iwi,ihi;
 // int iFrame,iFps,Size;
+int iFrame,iFps,Size,iwi,ihi;
 
 void renderFrame();
 
