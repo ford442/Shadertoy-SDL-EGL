@@ -226,7 +226,7 @@ glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
 glEnable(GL_BLEND);
-glEnable(GL_SCISSOR_TEST);
+// glEnable(GL_SCISSOR_TEST);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
@@ -281,7 +281,7 @@ glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
-glScissor((GLint)0,(GLint)0,Size,Size);
+// glScissor((GLint)0,(GLint)0,Size,Size);
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
