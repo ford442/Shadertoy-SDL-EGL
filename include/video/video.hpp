@@ -24,17 +24,19 @@
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1 //maybe??
 
+#include <webgl/webgl2.h>
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
-// #include <GLES3/gl3platform.h>
+#include <GLES3/gl3platform.h>
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-// #include <EGL/eglplatform.h>
+#include <EGL/eglplatform.h>
 
 int_fast32_t Size;
 double wi_js,hi_js;
@@ -52,7 +54,7 @@ EGLint const attribut_list_js[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
 };
@@ -99,7 +101,6 @@ EGL_MIPMAP_LEVEL,(EGLint)1,
 EGL_NONE
 };
 
-#include <webgl/webgl2.h>
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
