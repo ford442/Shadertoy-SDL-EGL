@@ -296,8 +296,6 @@ gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
-// gl.getExtension('EXT_framebuffer_multisample');
-
 // emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 gl.getExtension('GL_ARB_gl_spirv');
 gl.getExtension('GL_ARB_spirv_extensions');
@@ -332,7 +330,7 @@ gl.getExtension('GL_ARB_cull_distance');
 gl.getExtension('GL_ARB_gpu_shader_fp64');
 gl.getExtension('GL_EXT_vertex_attrib_64bit');
 gl.disable(gl.DITHER);
-gl.glRenderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
