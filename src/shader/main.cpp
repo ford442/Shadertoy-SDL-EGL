@@ -1,14 +1,5 @@
 #include "../../include/shader/main.hpp"
 
-extern"C"{
- 
-int r4nd(int dnr){
-int rt=rand() % dnr + 1;
-return rt;
-}
-
-}
-
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -24,8 +15,6 @@ $high.innerHTML=winSize;
 var $shds=[];
 
 function normalResStart(){
-var r4d=Module.ccall("r4nd","Number",["Number"],[42]);
-console.log(r4d);
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
