@@ -140,7 +140,7 @@ mX=0.5*S;
 mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx,"GL_EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx,"GL_EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
