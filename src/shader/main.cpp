@@ -1,7 +1,7 @@
 #include "../../include/shader/main.hpp"
 
 int rNd(int rd){
-rd=r4nd()rd+1;
+rd=rand()rd+1;
 return rd;
 }
 
