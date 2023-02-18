@@ -1,14 +1,14 @@
 #include "../../include/shader/main.hpp"
 
 int rNd(int rd){
-int rtt=rand()%rd+1;
+rtt=rand()%rd+1;
 return rtt;
 }
 
 extern"C"{
  
 int r4nd(int dnr){
-int rt=rNd(dnr);
+rt=rNd(dnr);
 return rt;
 }
 
