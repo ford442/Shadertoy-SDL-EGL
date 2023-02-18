@@ -99,7 +99,7 @@ EGL_MIPMAP_LEVEL,(EGLint)1,
 EGL_NONE
 };
 
-// #include <webgl/webgl2.h>
+#include <webgl/webgl2.h>
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
