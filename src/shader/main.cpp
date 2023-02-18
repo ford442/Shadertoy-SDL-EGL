@@ -29,7 +29,7 @@ $high.innerHTML=winSize;
 var $shds=[];
 
 function normalResStart(){
-var r4d=Module.ccall("rand","Number",["Number"],[42]);
+var r4d=Module.ccall("r4nd","Number",["Number"],[42]);
 console.log(r4d);
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
