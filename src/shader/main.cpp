@@ -1,7 +1,7 @@
 #include "../../include/shader/main.hpp"
 
 int rNd(int rd){
-rtt=rand()%rd+1;
+rtt=rand()%rd;
 return rtt;
 }
 
@@ -29,8 +29,8 @@ $high.innerHTML=winSize;
 var $shds=[];
 
 function normalResStart(){
-var r4d=Module.ccall("r4nd","Number",["Number"],[42]);
-console.log(r4d);
+// var r4d=Module.ccall("r4nd","Number",["Number"],[42]);
+// console.log(r4d);
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
