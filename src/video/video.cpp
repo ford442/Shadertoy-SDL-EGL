@@ -32,7 +32,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-// emscripten_webgl_enable_extension(ctx_js,"GL_EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx_js,"GL_EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
