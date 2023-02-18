@@ -236,13 +236,13 @@ var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float32',
+colorType:'float64',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
-depth:false,
-stencil:false,
+depth:true,
+stencil:true,
 precision:'highp',
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'high',
@@ -296,7 +296,7 @@ gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EXT_gl_colorspace_display_p3');
 gl.getExtension('EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EXT_gl_colorspace_bt2020_linear');
-gl.getExtension('EXT_framebuffer_multisample');
+// gl.getExtension('EXT_framebuffer_multisample');
 
 // emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 gl.getExtension('GL_ARB_gl_spirv');
