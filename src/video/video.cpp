@@ -90,7 +90,7 @@ emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"AMD_pinned_memory");
 emscripten_webgl_enable_extension(ctx_js,"ARB_blend_func_extended");
 emscripten_webgl_enable_extension(ctx_js,"ARB_buffer_storage");
-emscripten_webgl_enable_extension(ctx_js,"ARB_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"ARB_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_compute_shader");
 emscripten_webgl_enable_extension(ctx_js,"ARB_enhanced_layouts");
