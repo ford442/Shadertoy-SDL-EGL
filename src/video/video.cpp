@@ -331,7 +331,7 @@ gl.getExtension('GL_ARB_draw_buffers_blend');
 gl.getExtension('GL_ARB_cull_distance');
 gl.getExtension('GL_ARB_gpu_shader_fp64');
 gl.getExtension('GL_EXT_vertex_attrib_64bit');
-gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+gl.glRenderbufferStorageMultisample(gl.RENDERBUFFER,16,gl.RGBAF32,bCan.height,bCan.height);
 gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
