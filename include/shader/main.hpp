@@ -10,6 +10,6 @@ int rNd(int);
 
 extern"C"{
 
-int rand(int); 
+int r4nd(int); 
 
 }
