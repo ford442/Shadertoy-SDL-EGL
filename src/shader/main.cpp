@@ -3,7 +3,7 @@
 extern"C"{
  
 int r4nd(int dnr){
-int rt=rand() % rd + 1;
+int rt=rand() % dnr + 1;
 return rt;
 }
 
