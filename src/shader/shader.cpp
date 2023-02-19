@@ -170,12 +170,17 @@ emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB");
 // emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 // emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_shadow_lod");
+  
 emscripten_webgl_enable_extension(ctx,"EGL_NV_memory_attachment");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
+  
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
+  
 emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
+  
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
