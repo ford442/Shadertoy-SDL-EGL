@@ -138,8 +138,7 @@ Size=(int)hi;
 S=(float)Size;
 mX=0.5*S;
 mY=0.5*S;
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -282,6 +281,8 @@ glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,Size,Size);
 glEnable(GL_SCISSOR_TEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
