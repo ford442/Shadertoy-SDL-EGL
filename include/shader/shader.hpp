@@ -60,6 +60,7 @@ const GLchar common_shader_header_gles3[]=
 "#extension GL_EXT_vertex_attrib_64bit : enable\n"
 "#extension GL_NV_gpu_shader5 : enable\n"
 "#extension GL_ARB_color_buffer_float : enable\n"
+"#extension EGL_NV_context_priority_realtime : enable\n"
 "precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
@@ -67,12 +68,12 @@ const GLchar common_shader_header_gles3[]=
 "precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+"\n layout(location=0)centroid in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform lowp float iSampleRate;"
-"out highp vec4 fragColor;\n";
+"sample out highp vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
@@ -103,7 +104,7 @@ EGLContext contextegl_js;
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_SRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_SRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
@@ -146,8 +147,8 @@ EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
-EGL_SAMPLES,(EGLint)32,
-EGL_MIPMAP_LEVEL,(EGLint)32,
+EGL_SAMPLES,(EGLint)4,
+EGL_MIPMAP_LEVEL,(EGLint)1,
 EGL_NONE
 };
 
