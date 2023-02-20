@@ -59,7 +59,8 @@ const GLchar common_shader_header_gles3[]=
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "#extension GL_EXT_vertex_attrib_64bit : enable\n"
 "#extension GL_NV_gpu_shader5 : enable\n"
-"#extension GL_NV_context_priority_realtime : enable\n"
+"#extension GL_ARB_color_buffer_float : enable\n"
+"#extension EGL_NV_context_priority_realtime : enable\n"
 "precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
@@ -103,7 +104,7 @@ EGLContext contextegl_js;
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_SRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_SRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
