@@ -166,7 +166,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_shader_texture_lod");
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 // emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB");
+// emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB"); //  ES 2
 // emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 // emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_shadow_lod");
