@@ -5,4 +5,5 @@
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
 #include <GL/gl.h>
+#define GL_GLEXT_PROTOTYPES 1
 #include <GL/glext.h>
