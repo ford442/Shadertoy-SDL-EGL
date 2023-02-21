@@ -155,6 +155,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx,"OES_fixed_point");  // webgl 1
+  
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx,"OES_single_precision");  // webgl 1
 // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
@@ -166,7 +167,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_shader_texture_lod");
 // emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query");
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
-// emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
+emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query_webgl2");
 // emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB"); //  ES 2
 // emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
@@ -198,8 +199,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
-emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader5");
-emscripten_webgl_enable_extension(ctx,"OES_gpu_shader5");
+emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"AMD_pinned_memory");
 emscripten_webgl_enable_extension(ctx,"ARB_blend_func_extended");
 emscripten_webgl_enable_extension(ctx,"ARB_buffer_storage");
