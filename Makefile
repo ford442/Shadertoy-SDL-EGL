@@ -158,7 +158,7 @@ b3_vanilla_test:
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold -mtune=corei7-avx \
-	 -mcpu=bleeding-edge -fpie -flto-jobs=20 -ffunction-sections -fdata-sections \
+	 -mcpu=bleeding-edge -fpie -flto-jobs=4 -ffunction-sections -fdata-sections \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
