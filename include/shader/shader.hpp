@@ -60,7 +60,7 @@ const GLchar common_shader_header_gles3[]=
 "#extension GL_ARB_gpu_shader5 : enable\n"
 "#extension GL_NV_context_priority_realtime : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
-"#GL_ARB_shading_language_420pack : enable\n"
+"#extension GL_ARB_shading_language_420pack : enable\n"
 
 "#extension GL_OES_sample_variables : enable\n"
 "#extension GL_OES_shader_multisample_interpolation : enable\n"
