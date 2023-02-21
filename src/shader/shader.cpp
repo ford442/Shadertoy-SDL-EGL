@@ -216,7 +216,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_geometry_shader");
 emscripten_webgl_enable_extension(ctx,"MESA_shader_integer_functions");
 // emscripten_webgl_enable_extension(ctx,"OES_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"ARB_texture_stencil8");
-emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
+// emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"ARB_draw_buffers_blend");
 emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
