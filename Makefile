@@ -148,7 +148,7 @@ b3_vanilla_simd:
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_test:
-	 em++ src/vanilla/main.cpp -c -O0 \
+	 em++ src/vanilla/main.cpp -c -O0 -fpie \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mtune=corei7-avx
 	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -flto=thin \
@@ -158,7 +158,7 @@ b3_vanilla_test:
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold -mtune=corei7-avx \
-	 -mcpu=bleeding-edge \
+	 -mcpu=bleeding-edge -fpie \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 
