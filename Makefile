@@ -30,7 +30,7 @@ b3hd:
 b3_shader:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
 	 em++ src/shader/shader.cpp -c -std=gnu++2a
-	 emcc main.o shader.o -o s3020.js -std=gnu++2a \
+	 emcc main.o shader.o -o s3021.js -std=gnu++2a \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -67,7 +67,7 @@ b3_shader_test:
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 emcc main.o shader.o -o s3020.js -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3021.js -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
