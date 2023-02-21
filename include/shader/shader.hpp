@@ -61,11 +61,11 @@ const GLchar common_shader_header_gles3[]=
 "#extension GL_NV_gpu_shader5 : enable\n"
 "#extension GL_NV_context_priority_realtime : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
-"precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
+"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
