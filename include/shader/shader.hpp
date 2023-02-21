@@ -64,8 +64,8 @@ const GLchar common_shader_header_gles3[]=
 "#extension GL_ARB_shading_language_420pack : enable\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
-"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+// "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
+"#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
 "#extension GL_OES_sample_variables : enable\n"
 "#extension GL_OES_shader_multisample_interpolation : enable\n"
   
@@ -112,8 +112,8 @@ EGLContext contextegl_js;
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-//EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
+//EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
