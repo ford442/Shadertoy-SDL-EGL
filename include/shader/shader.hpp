@@ -52,7 +52,7 @@ const GLchar common_shader_header_gles3[]=
 "#pragma optionNV(fastprecision off)\n"
 "#pragma optionNV(unroll none)\n"
 "#pragma optionNV(ifcvt none)\n"
-"#pragma optionNV(inline none)\n"
+"#pragma optionNV(inline all)\n"
 "#pragma optionNV(strict off)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
