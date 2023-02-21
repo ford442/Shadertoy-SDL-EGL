@@ -60,10 +60,10 @@ b3_shader_simd:
 
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -shared -O3 -ffast-math \
+	 em++ src/shader/main.cpp -c -O3 -ffast-math \
 	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 em++ src/shader/shader.cpp -c -shared -O0 -fno-math-errno -std=gnu++2b -ffp-contract=off \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=gnu++2b -ffp-contract=off \
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
@@ -71,8 +71,8 @@ b3_shader_test:
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
-	 -fuse-ld=gold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -sWASMFS=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
+	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
