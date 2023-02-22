@@ -61,7 +61,7 @@ iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
-glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+// glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 glFlush();
 nanosleep(&req,&rem);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
@@ -223,21 +223,25 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_cull_distance");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_vertex_attrib_64bit");
-  
-  glEnable(GL_POLYGON_OFFSET_FILL);
-  glPolygonOffset(gF,gF);
-  
+
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LESS);
+glClearDepth(D);
+
+glEnable(GL_POLYGON_OFFSET_FILL);
+glPolygonOffset((GLfloat)0.5,(GLfloat)500.0);
+
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
-glClearDepth(D);
+
 glEnable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+
+// glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
