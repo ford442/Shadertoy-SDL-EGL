@@ -173,8 +173,10 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB"); //  ES 2
 // emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 // emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
-emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
-  
+// emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
+
+emscripten_webgl_enable_extension(ctx,"GL_ARB_framebuffer_object");
+
 // emscripten_webgl_enable_extension(ctx,"EGL_NV_memory_attachment");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
