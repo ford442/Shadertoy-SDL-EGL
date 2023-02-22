@@ -1,4 +1,4 @@
-#include "../../include/video/video.hpp"
+#include "../../include/combine/video.hpp"
 
 void egl(){
 eglconfig_js=NULL;
