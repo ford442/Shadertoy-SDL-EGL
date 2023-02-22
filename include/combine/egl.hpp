@@ -5,6 +5,8 @@
 #define FLT_EVAL_METHOD 2
 #pragma STDC CX_LIMITED_RANGE ON
 
+#include <webgl/webgl2.h>
+
 #include <wasm_simd128.h>
 #include <xmmintrin.h>
 #include <immintrin.h> 
@@ -23,5 +25,4 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-#include <webgl/webgl2.h>
 // #include <emscripten/html5_webgl.h>
