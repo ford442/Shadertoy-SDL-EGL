@@ -24,6 +24,9 @@ shutDown.postMessage({data:222});
 },2000);
 });
 
+const bezl=document.getElementById('circle');
+window.scroll(0,0);
+const switchy=document.getElementById('di');
 var vide=document.querySelectorAll('video');
 var mV=document.getElementById('mv');
 var loadV=document.getElementById('ldv');
@@ -32,9 +35,9 @@ let $itim=document.getElementById('itim');
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
-document.getElementById('di').click();
+bezl.height=winSize;
+bezl.width=parseInt(window.innerWidth,10);
+switchy.click();
 var lockVid=0;
 
 function spKey(e){
@@ -95,44 +98,46 @@ snd();
 });
 
 function vids(xml){
-const vparser=new DOMParser();
-const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
-const preList=htmlDocv.getElementsByTagName('pre')[0].getElementsByTagName('a');
+var vparser=new DOMParser();
+var htmlDoc=vparser.parseFromString(xml.responseText,"text/html");
+var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
 $vids[0]=preList.length;
-for(var i=1;i<preList.length;i++){
-var vtxxt=preList[i].href;
+for (var i=1;i<preList.length;i++){
+var txxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-vtxxt=vtxxt.replace(Self,"");
-const vidMenu1=document.getElementById('vi1').value;
-var ar1=vidMenu1+'video/'+vtxxt;
-var ar2=Self+'video/'+vtxxt;
-if(vidMenu1!='Default'){
-$vids[i]=ar1;
-}else{
-$vids[i]=ar2;
-};
-};
-}
+txxt=txxt.replace(Self,"");
+$vids[i]=Self+"video/"+txxt;
+}}
 
 function scanVideos(){
-const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
+var fxhttp=new XMLHttpRequest();
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
-};};
-const vidMenu1=document.getElementById('vi1').value;
-if(vidMenu1!='Default'){
-var looc=vidMenu1+'video/';
-}else{
-var looc='video/';
-};
-fxhttp.open('GET',looc,true);
+}};
+fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
-  
-  
+function normalResStart(){
+bezl.width=window.innerWidth;
+bezl.height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').height=window.innerHeight;
+setTimeout(function(){
+Module.ccall('b3');
+},750);
+setTimeout(function(){
+document.getElementById('shut').innerHTML=2;
+bezl.width=window.innerWidth;
+bezl.height=window.innerHeight;
+switchy.click();
+},950);
+}
   
 function normalResStart(){
 document.getElementById('circle').width=window.innerWidth;
@@ -196,7 +201,7 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
    normalResStart();
-},450);
+},350);
 };};
 ff.send(null);
 }
@@ -211,39 +216,6 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
-
-/*
-function highResStart(){
-document.getElementById('scanvas').height=window.innerHeight*2;
-document.getElementById('scanvas').width=window.innerHeight*2;
-document.getElementById('scanvas').style.height=(window.innerHeight*2)+'px';
-document.getElementById('scanvas').style.width=(window.innerHeight*2)+'px';
-$high.innerHTML=window.innerHeight*2;
-setTimeout(function(){
-Module.ccall('b3_egl');
-},450);
-setTimeout(function(){
-Module.ccall('b3');
-},550);
-setTimeout(function(){
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').style.height=window.innerHeight+'px';
-document.getElementById('scanvas').style.width=window.innerHeight+'px';
-$high.innerHTML=window.innerHeight;
-},750);
-setTimeout(function(){
-Module.ccall('str');
-},850);
-setTimeout(function(){
-document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-// const bz=new BroadcastChannel('bez');
-// bz.postMessage({data:222});
-},1250);
-}
-*/
   
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
@@ -263,17 +235,16 @@ slt=slt/100;tsl.setValues(slt);
 document.getElementById('menu').addEventListener('click',function(){
 var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-
 function loada(){
 var mv,lo;
 if(lockVid!=1){
 winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-document.getElementById('circle').height=winSize;
-document.getElementById('circle').width=parseInt(window.innerWidth,10);
+bezl.height=winSize;
+bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
 document.getElementById('ldv').height=winSize;
-// loadV.width=this.videoWidth;
+loadV.width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
@@ -301,7 +272,7 @@ var wi=document.getElementById('wid').innerHTML;
 var r$=he/$h;
 var $w=wi/r$;
 var $hi=he-winSize;
-if($hi>1){$h=winSize;var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
+if($hi>1){$h=winSize;var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
 var $hg=$h+'px';
 mv=vide[0].id;
 lo=vide[1].id;
@@ -313,17 +284,18 @@ document.getElementById("wrap").style.pointerEvents="auto";
 document.getElementById('ldv').src=vidSrc;
 document.getElementById('ldv').currentTime=$itim.innerHTML;
 document.getElementById('ldv').load();
-document.getElementById('di').click();
-};
+switchy.click();
+}
 setTimeout(function(){
 loada();
 },$ldt);
 }
-  
-document.getElementById('startBtn').addEventListener('click',function(){
-scanSongs();
-loada();
+
 scanVideos();
+loada();
+scanSongs();
+
+document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 });
 
