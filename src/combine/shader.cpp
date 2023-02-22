@@ -156,21 +156,21 @@ emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 // emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
 // emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
-emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
+// emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx,"OES_fixed_point");  // webgl 1
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx,"OES_single_precision");  // webgl 1
 // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
+// emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 // emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_shader_texture_lod");
 // emscripten_webgl_enable_extension(ctx,"GL_OES_sRGB");
 // emscripten_webgl_enable_extension(ctx,"GL_OES_depth32");
 // emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query");
-emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
-emscripten_webgl_enable_extension(ctx,"GL_ARB_shading_language_420pack");
+// emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
+// emscripten_webgl_enable_extension(ctx,"GL_ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"GL_disjoint_timer_query_webgl2");
 // emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB"); //  ES 2
 // emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
@@ -223,7 +223,7 @@ emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_cull_distance");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_gpu_shader_fp64");
-emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
+// emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
