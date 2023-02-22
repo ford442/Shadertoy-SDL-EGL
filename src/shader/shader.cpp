@@ -232,7 +232,6 @@ glClearDepth(D);
 
 glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
-glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
