@@ -2619,7 +2619,7 @@ function hashCode(s){
 
 extern "C" {
 
-void str(){
+void fire(){
 fl();
 fi();
 return;
