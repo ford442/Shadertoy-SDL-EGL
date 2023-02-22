@@ -117,8 +117,8 @@ if(isWebGL2){
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
-gl.getExtension('EGL_KHR_gl_colorspace');
-gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
+// gl.getExtension('EGL_KHR_gl_colorspace');
+// gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl.drawingBufferColorSpace='display-p3';
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 }else{
