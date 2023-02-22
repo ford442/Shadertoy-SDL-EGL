@@ -31,7 +31,7 @@ std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,10416666};
 
-#include "../../include/shader/gl.hpp"
+#include "../../include/combine/gl.hpp"
 
 GLclampf mX,mY;
 GLclampf mm,nn;
@@ -89,7 +89,7 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 char32_t * read_file(const GLchar *);
 
-#include "../../include/shader/egl.hpp"
+#include "../../include/combine/egl.hpp"
 
 int_fast32_t iFrame,iFps,Size,iwi,ihi;
 // int iFrame,iFps,Size;
