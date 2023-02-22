@@ -30,7 +30,7 @@ emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
+// glEnable(GL_SCISSOR_TEST);
 // emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
@@ -90,7 +90,7 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_display_p3_linea
 // emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"AMD_pinned_memory");
-emscripten_webgl_enable_extension(ctx_js,"GL_ARB_blend_func_extended");
+// emscripten_webgl_enable_extension(ctx_js,"GL_ARB_blend_func_extended");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_buffer_storage");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_compatibility");
@@ -113,7 +113,7 @@ emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 // glViewport((GLint)0,(GLint)0,Size_js,Size_js);
-glScissor((GLint)0,(GLint)0,Size_js,Size_js);
+// glScissor((GLint)0,(GLint)0,Size_js,Size_js);
 return;
 }
 
@@ -168,7 +168,7 @@ var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016;
 var setTim;
-const timFrm=16.666;
+const timFrm=10.42;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -224,7 +224,7 @@ const $H=Module.HEAPF64.buffer;
 var $S=parseInt(window.innerHeight,10);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*w$*4;
+var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*w$)/8;
@@ -262,18 +262,11 @@ minorVersion:0
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.getExtension('EXT_color_buffer_float');
-// gl.getExtension('WEBGL_color_buffer_float');
-// gl.getExtension('WEBGL_color_buffer_half_float');
-// gl.getExtension('OES_texture_float_linear');
-// gl.getExtension('OES_texture_half_float_linear');
-// gl.getExtension('EXT_float_blend');
-// gl.getExtension('OES_element_index_uint');
-// gl.getExtension('WEBGL_blend_equation_advanced_coherent');
+
 gl.getExtension('OES_sample_variables');
 gl.getExtension('OES_shader_multisample_interpolation');
 // gl.getExtension('WEBGL_webcodecs_video_frame');
 // gl.getExtension('OES_single_precision');
-// gl.getExtension('EGL_NV_memory_attachment');
 gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
 gl.getExtension('EGL_KHR_gl_colorspace');
@@ -282,7 +275,6 @@ gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 // gl.getExtension('EXT_gpu_shader5');
-gl.getExtension('GL_ARB_blend_func_extended');
 gl.getExtension('EXT_texture_filter_anisotropic');
 // gl.getExtension('GL_ARB_gpu_shader_fp64');
 // gl.getExtension('EXT_vertex_attrib_64bit');
@@ -290,14 +282,14 @@ gl.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-// gl.blendColor(1.0,1.0,1.0,1.0);
+gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
-const g2=new GPU({mode:'gpu'});
+const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gl});
+const g2=new GPU({mode:'webgl2'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
@@ -311,14 +303,14 @@ var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x+this.constants.nblnk-this.constants.blnk];
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $aavg=this.constants.aavg;
@@ -333,9 +325,9 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
-la=h$*w$*4;
+var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/2.0),0);
+la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
@@ -358,10 +350,10 @@ var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/2.0),0);
 $S=parseInt(window.innerHeight,10);
-la=h$*w$*4;
+la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);  // has to var?
