@@ -1,4 +1,4 @@
-#include "../../include/combine/fire.hpp"
+#include "../../include/fire/fire.hpp"
 
 EM_JS(void,fl,(),{
 !function (e,t) {
