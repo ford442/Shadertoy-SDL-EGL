@@ -35,7 +35,7 @@ b3_combine:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/combine/shader.cpp -c -std=gnu++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o audio.o fire.o video.o shader.o -o $001.js -std=gnu++2a -sUSE_SDL=2 \
+	 emcc main.o audio.o fire.o video.o shader.o -o b3hd001.js -std=gnu++2a -sUSE_SDL=2 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
