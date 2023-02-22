@@ -30,17 +30,16 @@ b3hd:
 b3_combine:
 	 em++ src/combine/main.cpp -c -std=gnu++2a
 	 em++ src/combine/audio.cpp -c -std=gnu++2a -sUSE_SDL=2
-	 em++ src/combine/fire.cpp -c -std=gnu++2a
 	 em++ src/combine/video.cpp -c -std=gnu++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/combine/shader.cpp -c -std=gnu++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o audio.o fire.o video.o shader.o -o b3hd001.js -std=gnu++2a -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -o b3hd001.js -std=gnu++2a -sUSE_SDL=2 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js 
+	 --pre-js startUp.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
