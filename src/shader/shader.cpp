@@ -223,6 +223,10 @@ emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_cull_distance");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_vertex_attrib_64bit");
+  
+  glEnable(GL_POLYGON_OFFSET_FILL);
+  glPolygonOffset(gF,gF);
+  
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
