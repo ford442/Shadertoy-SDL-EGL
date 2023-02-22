@@ -31,7 +31,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -260,7 +260,7 @@ minorVersion:0
 });
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_half_float');
 // gl.getExtension('OES_texture_float_linear');
@@ -285,7 +285,7 @@ gl.getExtension('EXT_texture_filter_anisotropic');
 gl.getExtension('GL_ARB_gpu_shader_fp64');
 gl.getExtension('EXT_vertex_attrib_64bit');
 gl.disable(gl.DITHER);
-gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
