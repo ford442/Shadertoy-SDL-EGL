@@ -149,7 +149,7 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-// Module.ccall('fire');
+Module.ccall('fire');
 },50);
 setTimeout(function(){
 Module.ccall('b3');
