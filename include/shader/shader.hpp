@@ -56,9 +56,6 @@ const GLchar common_shader_header_gles3[]=
 "#pragma optionNV(strict off)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"#extension GL_ARB_gpu_shader_fp64 : enable\n"
-"#extension EXT_vertex_attrib_64bit : enable\n"
-"#extension GL_ARB_gpu_shader5 : enable\n"
 "precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
@@ -112,8 +109,8 @@ EGL_NONE
 };
 
 EGLint const anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 //EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
