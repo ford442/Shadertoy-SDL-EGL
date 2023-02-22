@@ -31,6 +31,6 @@ void plt();
 
 extern "C"{  
   
-void pl(void);
+void pl();
   
 }
