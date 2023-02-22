@@ -32,7 +32,8 @@ b3_combine:
 	 em++ src/combine/fire.cpp -c -std=gnu++2a
 	 em++ src/combine/video.cpp -c -std=gnu++2a
 	 em++ src/combine/shader.cpp -c -std=gnu++2a
-	 emcc main.o shader.o -o $001.js -std=gnu++2a \
+	 emcc main.o fire.o video.o shader.o -o $001.js -std=gnu++2a \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
