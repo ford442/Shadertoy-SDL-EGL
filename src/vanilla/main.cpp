@@ -66,7 +66,7 @@ document.getElementById('di').click();
 
 });
   
-int main(){
+int main(void){
   
 js_main();
 return 0;
