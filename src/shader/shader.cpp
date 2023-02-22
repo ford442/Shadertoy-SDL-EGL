@@ -231,14 +231,16 @@ glDepthFunc(GL_LESS);
 glClearDepth(D);
 
 glEnable(GL_POLYGON_OFFSET_FILL);
-glPolygonOffset((GLfloat)0.5,(GLfloat)500.0);
+glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
+glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 
-glEnable(GL_BLEND);
+//glEnable(GL_BLEND);
+glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 
@@ -294,9 +296,9 @@ smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
-glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
-// glScissor((GLint)0,(GLint)0,Size,Size);
-// glEnable(GL_SCISSOR_TEST);
+// glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+glScissor((GLint)0,(GLint)0,Size,Size);
+glEnable(GL_SCISSOR_TEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
