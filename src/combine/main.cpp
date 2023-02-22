@@ -39,19 +39,20 @@ bezl.height=winSize;
 bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
 var lockVid=0;
+const pnnl=document.body;
 
-function spKey(e){
+function Key(e){
 if(e.code=='Space'){
 e.preventDefault();
 if(lockVid==0){lockVid=1;};
 if(lockVid==1){lockVid=0;};
 };
 if(e.code=='KeyZ'){lockVid=1;};
+if(e.code=='KeyQ'){scanShaders();};
 if(e.code=='KeyX'){lockVid=0;};
 }
 
-const pnnl=document.body;
-pnnl.addEventListener('keydown',spKey);
+pnnl.addEventListener('keydown',Key);
 
 var $sngs=[];
 var $vids=[];
@@ -73,7 +74,7 @@ $sngs[i]=Self+'songs/'+stxxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-// nxhttp.withCredentials=false;
+nxhttp.withCredentials=false;
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
@@ -112,6 +113,7 @@ $vids[i]=Self+"video/"+txxt;
 
 function scanVideos(){
 var fxhttp=new XMLHttpRequest();
+fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
@@ -178,6 +180,7 @@ document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 };
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
+ff.withCredentials=false;
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
@@ -194,7 +197,7 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
+dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
@@ -277,9 +280,11 @@ loada();
 },$ldt);
 }
 
+setTimeout(function(){
 scanVideos();
 loada();
 scanSongs();
+},500);
 
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
