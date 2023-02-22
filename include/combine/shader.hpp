@@ -101,7 +101,6 @@ EGLSurface surface;
 EGLContext contextegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-EGLContext contextegl_js;
 
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
