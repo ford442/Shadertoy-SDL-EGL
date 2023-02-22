@@ -92,10 +92,12 @@ b3_video_test:
 	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/video/video.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
 	 emcc main.o video.o -o b3020.js -O0 -fpie -std=c++20 -stdlib=libc++ -fno-math-errno -flto=thin \
 	 -fwasm-exceptions \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
