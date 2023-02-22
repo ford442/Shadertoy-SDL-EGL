@@ -45,16 +45,16 @@ b3_combine_test:
 	 em++ src/combine/main.cpp -c -O3 -std=c++11 -stdlib=libc++ -fpie \
 	 -ffast-math -fno-rtti -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/combine/audio.cpp -c -std=gnu++11 -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math 
+	 em++ src/combine/audio.cpp -c -std=gnu++11 -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -fno-math-errno -mcpu=bleeding-edge
 	 em++ src/combine/video.cpp -c -std=gnu++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/combine/shader.cpp -c -std=gnu++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc main.o audio.o video.o shader.o -o b3hd001.js -std=gnu++2b -stdlib=libc++ -sUSE_SDL=2 \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -sWASMFS=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
