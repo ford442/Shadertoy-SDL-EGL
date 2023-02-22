@@ -68,7 +68,7 @@ b3_shader_test:
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
 	 emcc main.o shader.o -o s3021.js -O0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
-	 -fwasm-exceptions -mcpu=bleeding-edge -ffunction-sections -fdata-sections\
+	 -fwasm-exceptions -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -sWASMFS=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
@@ -88,20 +88,20 @@ b3_shader_llvm:
 
 
 b3_video_test:
-	 em++ src/video/main.cpp -c -O3 \
-	 -fno-math-errno -std=c++11 -mcpu=bleeding-edge \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 em++ src/video/video.cpp -c -O0 -fno-math-errno -std=c++20 \
-	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 emcc main.o video.o -o b3020.js -O0 -std=c++20 -fno-math-errno -flto=thin \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
+	 em++ src/video/main.cpp -c -O3 -fpie \
+	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
+	 em++ src/video/video.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
+	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
+	 emcc main.o video.o -o b3020.js -O0 -fpie -std=c++20 -stdlib=libc++ -fno-math-errno -flto=thin \
+	 -fwasm-exceptions \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -sPRECISE_F32=0 -sWASM_BIGINT=1 -mtune=corei7-avx \
-	 -mcpu=bleeding-edge \
-	 -fuse-ld=gold -fwhole-program -polly \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
+	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
+	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
@@ -115,8 +115,8 @@ b3_video:
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio:
-	em++ src/audio/main.cpp -c -std=c++11 -mtune=corei7-avx -fno-math-errno -O0
-	em++ src/audio/audio.cpp -c -std=c++2b -mtune=corei7-avx -sUSE_SDL=2 -fno-math-errno -O0
+	em++ src/audio/main.cpp -c -std=c++11 -fno-math-errno -O0
+	em++ src/audio/audio.cpp -c -std=c++2b -sUSE_SDL=2 -fno-math-errno -O0
 	emcc main.o audio.o -o a3020.js -std=c++2b -mtune=corei7-avx -fno-math-errno -O0 \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
