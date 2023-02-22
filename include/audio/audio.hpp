@@ -27,10 +27,10 @@ SDL_AudioSpec request;
 
 void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
   
-void plt(void);
+void plt();
 
 extern "C"{  
   
-void pl(void);
+void pl();
   
 }
