@@ -1,4 +1,4 @@
-#include "../include/combine/main.hpp"
+#include "../../include/combine/main.hpp"
 
 EM_JS(void,js_main,(),{
 
