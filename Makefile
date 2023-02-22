@@ -40,7 +40,7 @@ b3_combine:
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js 
 
 b3_shader:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
