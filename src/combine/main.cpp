@@ -129,19 +129,26 @@ document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
+   
+setTimeout(function(){
+Module.ccall('b3_egl');
+},300);
+
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-Module.ccall('b3');
-},200);
+},500);
+
 setTimeout(function(){
-Module.ccall('b3_egl');
-},700);
+Module.ccall('b3');
+},600);
+
 setTimeout(function(){
 Module.ccall('str');
-},1200);
+},1000);
+
 }
 
 function shds(xml){
