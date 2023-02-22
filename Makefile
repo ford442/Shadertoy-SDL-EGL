@@ -27,6 +27,17 @@ b3hd:
 	-sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire_egl","_b3_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js startUp.js --post-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
+b3_combine:
+	 em++ src/combine/main.cpp -c -std=gnu++2a
+	 em++ src/combine/fire.cpp -c -std=gnu++2a
+	 em++ src/combine/video.cpp -c -std=gnu++2a
+	 em++ src/combine/shader.cpp -c -std=gnu++2a
+	 emcc main.o shader.o -o $001.js -std=gnu++2a \
+	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
+
 b3_shader:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
 	 em++ src/shader/shader.cpp -c -std=gnu++2a
@@ -75,7 +86,7 @@ b3_shader_test:
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
