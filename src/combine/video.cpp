@@ -168,8 +168,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/4.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/4.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
 colorType:'float64',
@@ -215,7 +215,7 @@ av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var p=f[this.thread.y][this.thread.x];
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $aavg=this.constants.aavg;
@@ -258,8 +258,8 @@ gl.drawingBufferColorSpace='display-p3';
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0.0)/2.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/4.0),0);
+var nblank$=Math.max((((h$-w$)*0.0)/4.0),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -283,8 +283,8 @@ var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*1.0)/2.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/2.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/4.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/4.0),0);
 $S=parseInt(window.innerHeight,10);
 la=h$*h$*4;
 sz=(h$*w$)/8;
