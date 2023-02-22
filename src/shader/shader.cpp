@@ -162,7 +162,7 @@ emscripten_webgl_enable_extension(ctx,"GL_OES_shader_multisample_interpolation")
 // emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
 emscripten_webgl_enable_extension(ctx,"GL_EXT_float_blend");
 // emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
-emscripten_webgl_enable_extension(ctx,"GL_ARB_shader_texture_lod");
+// emscripten_webgl_enable_extension(ctx,"GL_ARB_shader_texture_lod");
 // emscripten_webgl_enable_extension(ctx,"GL_OES_sRGB");
 // emscripten_webgl_enable_extension(ctx,"GL_OES_depth32");
 // emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
