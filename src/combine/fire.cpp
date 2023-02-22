@@ -1,5 +1,7 @@
 #include "../../include/combine/fire.hpp"
 
+extern"C"{
+
 EM_JS(void,fl,(),{
 !function (e,t) {
  "object" == typeof exports && "undefined" != typeof module ? t(exports) : "function" == typeof define && define.amd ? define(["exports"],t) : t(e.dat={});
@@ -2615,9 +2617,6 @@ function hashCode(s){
 };
 
 });
-
-
-extern "C" {
 
 void fire(){
 fl();
