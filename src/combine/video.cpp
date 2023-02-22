@@ -287,10 +287,10 @@ gl.getExtension('EXT_texture_filter_anisotropic');
 // gl.getExtension('GL_ARB_gpu_shader_fp64');
 // gl.getExtension('EXT_vertex_attrib_64bit');
 gl.disable(gl.DITHER);
-gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-gl.drawingBufferColorMetadata={mode:'extended'};
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+// gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-gl.blendColor(1.0,1.0,1.0,1.0);
+// gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
