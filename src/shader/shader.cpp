@@ -125,8 +125,8 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-eglBindAPI(EGL_OPENGL_API);
-// eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES3_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
@@ -302,7 +302,6 @@ glUniform3f(smp_chn_res,S,S,gF);
 glScissor((GLint)0,(GLint)0,Size,Size);
 glEnable(GL_SCISSOR_TEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES,GL_NICEST);
-
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
