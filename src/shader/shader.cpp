@@ -126,7 +126,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // eglBindAPI(EGL_OPENGL_API);
-eglBindAPI(EGL_OPENGL_ES3_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
@@ -231,7 +231,7 @@ emscripten_webgl_enable_extension(ctx,"GL_EXT_vertex_attrib_64bit");
 
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
-glClearDepth(D);
+glClearDepthf(F);
 
 glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
