@@ -60,16 +60,16 @@ b3_shader_simd:
 
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -O3 -ffast-math \
+	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math \
 	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=gnu++2b -ffp-contract=off \
-	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
+	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize
-	 emcc main.o shader.o -o s3021.js -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
-	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mcpu=bleeding-edge \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections
+	 emcc main.o shader.o -o s3021.js -O0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 -fwasm-exceptions -mcpu=bleeding-edge -ffunction-sections -fdata-sections\
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -sWASMFS=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
