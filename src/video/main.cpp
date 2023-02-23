@@ -2,14 +2,14 @@
 
 int rnd(int Th){
 std::srand(std::time(nullptr));
-rD=std::rand()%Th;
+int rD=std::rand()%Th;
 return rD;
 }
 
 extern"C"{
  
 int r4nd(int tH){
-Rg=rnd(tH);
+int Rg=rnd(tH);
 return Rg;
 }
   
