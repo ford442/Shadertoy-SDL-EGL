@@ -103,7 +103,7 @@ var stp,Lstp;
 const stpInc=0.016;
 var setTim;
 // const timFrm=16.666;
-const timFrm=10.416;
+const timFrm=10.42;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -194,7 +194,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-const g=new GPU({canvas:bcanvas,webGl:gl});
+const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
@@ -204,18 +204,18 @@ g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-let R=g2.createKernel(function(tv){
+const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
-let t=g.createKernel(function(v){
+const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
-let r=g.createKernel(function(f){
+const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
@@ -228,8 +228,7 @@ var aveg=Aveg(p[3],ouT);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 // gl.getExtension('OES_single_precision');
 gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
@@ -239,13 +238,10 @@ gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 // gl.getExtension('EXT_gpu_shader5');
-// gl.getExtension('GL_ARB_blend_func_extended');
 // gl.getExtension('EXT_texture_filter_anisotropic');
-// gl.getExtension('GL_ARB_gpu_shader_fp64');
-// gl.getExtension('EXT_vertex_attrib_64bit');
+
 gl.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-// gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
@@ -253,6 +249,9 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
