@@ -158,7 +158,7 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },100);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -167,10 +167,10 @@ bezl.height=window.innerHeight;
 switchy.click();
 },300);
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('str');
 },500);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },700);
 
 }
