@@ -152,6 +152,15 @@ b3_video:
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
+b3_video_google:
+	 em++ src/video/main_google_street.cpp -c -std=c++20
+	 em++ src/video/video_google_street.cpp -c -std=c++20
+	 emcc main_google_street.o video_google_street.o -o g0002.js -std=c++20 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+
 b3_audio:
 	em++ src/audio/main.cpp -c -std=c++11 -fno-math-errno -O0
 	em++ src/audio/audio.cpp -c -std=c++2b -sUSE_SDL=2 -fno-math-errno -O0
