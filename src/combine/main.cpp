@@ -1,5 +1,11 @@
 #include "../../include/combine/main.hpp"
 
+int rNd(int Th){
+std::srand(std::time(nullptr));
+int rD=std::rand()%Th;
+return rD;
+}
+
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -84,8 +90,14 @@ nxhttp.send();
 }
 
 function snd(){
-const randSong=Math.floor(($sngs[0]-5)*Math.random());
-const songSrc=$sngs[randSong+5];
+
+//var randSong=Math.floor(($sngs[0]-5)*Math.random());
+
+var songsNum=$sngs[0]-5;
+if(songNum>0){
+var randSong=Module.ccall('r4nd','Number',['Number'],[songNum]);
+};
+var songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
 const sng=new BroadcastChannel('sng');
 sng.postMessage({data:songSrc});
@@ -175,9 +187,15 @@ Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 };
-var randShade=Math.random();
-randShade=Math.floor($shds[0]*randShade)+5;
-const shdMenu=document.getElementById('sh1');
+
+var shadesNum=$shds[0];
+// var randShade=Math.random();
+if(shadesNum>0){
+var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum]);
+};
+// randShade=Math.floor($shds[0]*randShade)+5;
+
+var shdMenu=document.getElementById('sh1');
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
@@ -248,7 +266,12 @@ document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
-var $pt=Math.random()*mic;
+
+// var $pt=Math.random()*mic;
+if(mic>0){
+var $pt=Module.ccall('r4nd','Number',['Number'],[shadesNum]);
+};
+
 $pt=$pt*1000000;
 $pt=$pt/1000000;
 $pt=Math.round($pt);
@@ -263,8 +286,14 @@ var $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
-var vidSrc=$vids[rnum];
+
+var vidsNum=$vids[0]-5;
+// var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+if(vidsNum>0){
+var rnum=Module.ccall('r4nd','Number',['Number'],[vidsNum]);
+var vidSrc=$vids[rnum+5];
+};
+
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
 var wi=document.getElementById('wid').innerHTML;
@@ -301,6 +330,15 @@ scanShaders();
 });
 
 });
+
+extern"C"{
+ 
+int r4nd(int tH){
+int Rg=rNd(tH);
+return Rg;
+}
+  
+}
 
 int main(void){
 // "use strict";
