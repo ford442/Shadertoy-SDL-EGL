@@ -467,7 +467,7 @@ T=true;
 
 extern "C" {
 
-void b3(){
+void b3_egl(){
 egl();
 }
 
