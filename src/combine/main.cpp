@@ -135,9 +135,6 @@ var looc='video/';
 fxhttp.open('GET',looc,true);
 fxhttp.send();
 }
-fxhttp.open("GET","video/",true);
-fxhttp.send();
-}
 
 function normalResStart(){
 bezl.width=window.innerWidth;
