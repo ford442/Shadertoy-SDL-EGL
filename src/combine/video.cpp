@@ -237,6 +237,7 @@ var aveg=Aveg(p[3],ouT);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
+gl.getExtension('EXT_color_buffer_float');
 
 // gl.getExtension('OES_single_precision');
 gl.getExtension('EGL_NV_depth_nonlinear');
