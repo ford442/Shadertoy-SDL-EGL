@@ -4,7 +4,7 @@ void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(y1y-rlc))/2.0)+alc);
 drk=y1y-(avr-0.5);
 brt=((y1y-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,y1y);
+// glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
 return;
 }
