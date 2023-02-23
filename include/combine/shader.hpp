@@ -171,6 +171,8 @@ static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
 extern "C"{
 
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr);
+
 void str();
 
 }
