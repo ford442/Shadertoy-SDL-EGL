@@ -45,8 +45,8 @@ typedef struct{GLclampf XYZW[4];}Vertex;
 const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-const GLchar * sources[4];
-const GLchar common_shader_header_gles3[]=
+GLchar * sources[4];
+GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
@@ -65,19 +65,19 @@ const GLchar common_shader_header_gles3[]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
-const GLchar vertex_shader_body_gles3[]=
+GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
-const GLchar fragment_shader_header_gles3[]=
+GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform lowp float iSampleRate;"
 "out highp vec4 fragColor;\n";
-const GLchar fragment_shader_footer_gles3[]=
+GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
-const GLchar * common_shader_header=common_shader_header_gles3;
-const GLchar * vertex_shader_body=vertex_shader_body_gles3;
-const GLchar * fragment_shader_header=fragment_shader_header_gles3;
-const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
+GLchar * common_shader_header=common_shader_header_gles3;
+GLchar * vertex_shader_body=vertex_shader_body_gles3;
+GLchar * fragment_shader_header=fragment_shader_header_gles3;
+GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
@@ -99,7 +99,7 @@ EGLConfig eglconfig;
 EGLint config_size,major,minor;
 EGLContext contextegl_js;
 
-EGLint const attribut_list[]={ 
+EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -111,7 +111,7 @@ EGLint const attribut_list[]={
 EGL_NONE
 };
 
-EGLint const anEglCtxAttribs2[]={
+EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
@@ -122,7 +122,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE
 };
 
-EGLint const attribute_list[]={
+EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
