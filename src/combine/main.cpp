@@ -285,12 +285,12 @@ loada();
 }
 
 setTimeout(function(){
-scanVideos();
-loada();
 scanSongs();
 },500);
 
 document.getElementById('startBtn').addEventListener('click',function(){
+scanVideos();
+loada();
 scanShaders();
 });
 
