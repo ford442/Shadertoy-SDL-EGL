@@ -33,7 +33,6 @@ struct timespec req={0,10416666};
 
 #include "../../include/combine/gl.hpp"
 
-GLclampf avrg,drk,brt;
 
 GLclampf mX,mY;
 GLclampf mm,nn;
@@ -81,7 +80,7 @@ const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
-void clrclr(GLclampf,GLclampf,GLclampf);
+void clrclr(GLclampf avrg,GLclampf drk,GLclampf brt);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
