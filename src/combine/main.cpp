@@ -2,7 +2,7 @@
 
 EM_JS(void,js_main,(),{
 
-"use strict";
+// "use strict";
 
 window.scroll(0,0);
 
@@ -293,7 +293,7 @@ scanShaders();
 });
 
 int main(void){
-"use strict";
+// "use strict";
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
