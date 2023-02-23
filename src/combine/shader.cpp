@@ -1,5 +1,14 @@
 #include "../../include/combine/shader.hpp"
 
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+avrg=(((avr+(y1y-rlc))/2.0)+alc);
+drk=y1y-(avr-0.5);
+brt=((y1y-rlc)-(alc-0.5));
+glBlendColor(avrg,avrg,avrg,y1y);
+glClearColor(drk,drk,drk,brt);
+return;
+}
+
 EM_BOOL mouse_call_click(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -298,6 +307,11 @@ return;
 }
 
 extern "C" {
+
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+clrclr(cllr,alp,avr);
+return;
+}
 
 void str(){
 strt();
