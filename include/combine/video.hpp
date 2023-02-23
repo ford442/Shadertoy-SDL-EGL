@@ -123,6 +123,8 @@ void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 void egl();
 
 extern "C"{
+  
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr);
 
 void b3();
 
