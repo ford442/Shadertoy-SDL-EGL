@@ -316,6 +316,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
