@@ -4,7 +4,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-int rnd(int);
+int rNd(int);
 
 extern"C"{
 
