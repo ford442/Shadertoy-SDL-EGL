@@ -6,14 +6,6 @@ int rD=std::rand()%Th;
 return rD;
 }
 
-extern"C"{
- 
-int r4nd(int tH){
-int Rg=rNd(tH);
-return Rg;
-}
-  
-}
 
 EM_JS(void,js_main,(),{
 
@@ -188,7 +180,16 @@ normalResStart();
 
 });
 
-int main(){
+extern"C"{
+ 
+int r4nd(int tH){
+int Rg=rNd(tH);
+return Rg;
+}
+  
+}
+
+int main(void){
 
 js_main();
 return 0;
