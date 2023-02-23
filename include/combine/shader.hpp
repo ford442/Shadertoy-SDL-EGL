@@ -33,6 +33,8 @@ struct timespec req={0,10416666};
 
 #include "../../include/combine/gl.hpp"
 
+GLclampf avrg,drk,brt;
+
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
