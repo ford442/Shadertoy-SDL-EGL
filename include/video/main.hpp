@@ -6,10 +6,7 @@
 
 int rnd(int);
 
-int rD;
-int Rg;
 extern"C"{
-
 
 int r4nd(int);
 
