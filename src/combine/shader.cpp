@@ -20,6 +20,15 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+avrg=(((avr+(y1y-rlc))/2.0)+alc);
+drk=y1y-(avr-0.5);
+brt=((y1y-rlc)-(alc-0.5));
+glBlendColor(avrg,avrg,avrg,y1y);
+glClearColor(drk,drk,drk,brt);
+return;
+}
+
 void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
@@ -105,15 +114,6 @@ shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
 glCompileShader(shader);
 return shader;
-}
-
-void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avrg=(((avr+(y1y-rlc))/2.0)+alc);
-drk=y1y-(avr-0.5);
-brt=((y1y-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,y1y);
-glClearColor(drk,drk,drk,brt);
-return;
 }
 
 void strt(){
