@@ -150,7 +150,7 @@ var rnum=Module.ccall('r4nd','Number',['Number'],[vidNum]);
 // var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 };
 
-var vidSrc=$vids[rnum];
+let vidSrc=$vids[rnum];
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
 var wi=document.getElementById('wid').innerHTML;
