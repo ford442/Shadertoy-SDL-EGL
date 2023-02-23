@@ -126,6 +126,8 @@ extern "C"{
 
 void b3();
 
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr);
+
 void nano(short int Fnum,int leng,float *ptr,float *aptr);
 
 }
