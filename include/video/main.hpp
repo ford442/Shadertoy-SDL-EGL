@@ -8,9 +8,9 @@ int rnd(int);
 
 int rD,Th;
 
+int tH,Rg;
 extern"C"{
 
-int tH,Rg;
 
 int r4nd(int);
 
