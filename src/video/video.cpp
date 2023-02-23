@@ -32,7 +32,8 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");  //  required for float/alpha (must be 'EXT_color_buffer_float' and not 'GL_EXT_color_buffer_float')
+// emscripten_webgl_enable_extension(ctx_js,"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_color_buffer_half_float");
 // emscripten_webgl_enable_extension(ctx_js,"WEBGL_blend_equation_advanced_coherent");
@@ -65,10 +66,12 @@ emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"KHR_parallel_shader_compile");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_texture_shadow_lod");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_NV_memory_attachment");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); // ^^
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+/// emscripten_webgl_enable_extension(ctx_js,"ATI_pixel_format_float"); 
 emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
@@ -93,7 +96,6 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx_js,"AMD_pinned_memory");
 // emscripten_webgl_enable_extension(ctx_js,"GL_ARB_blend_func_extended");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_buffer_storage");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_compute_shader");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_enhanced_layouts");
@@ -294,6 +296,8 @@ gl.getExtension('GL_OES_shader_multisample_interpolation');
 // gl.getExtension('EXT_texture_shadow_lod');
 gl.getExtension('EGL_NV_memory_attachment');
 gl.getExtension('EGL_NV_depth_nonlinear');
+gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
+gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
 // gl.getExtension('EXT_framebuffer_sRGB');
 gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
@@ -327,12 +331,12 @@ gl.getExtension('GL_ARB_blend_func_extended');
 // gl.getExtension('MESA_shader_integer_functions');
 // gl.getExtension('OES_geometry_shader');
 // gl.getExtension('ARB_texture_stencil8');
-gl.getExtension('GL_OES_shader_multisample_interpolation');
-gl.getExtension('GL_OES_draw_buffers_indexed');
-gl.getExtension('GL_ARB_draw_buffers_blend');
-gl.getExtension('GL_ARB_cull_distance');
-gl.getExtension('GL_ARB_gpu_shader_fp64');
-gl.getExtension('GL_EXT_vertex_attrib_64bit');
+gl.getExtension('OES_shader_multisample_interpolation');
+gl.getExtension('OES_draw_buffers_indexed');
+gl.getExtension('ARB_draw_buffers_blend');
+gl.getExtension('ARB_cull_distance');
+gl.getExtension('ARB_gpu_shader_fp64');
+gl.getExtension('EXT_vertex_attrib_64bit');
 gl.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 // gl.drawingBufferColorMetadata={mode:'extended'};
