@@ -290,14 +290,14 @@ $S=parseInt(window.innerHeight,10);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);  // has to var?
+agav=new Float64Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 pointb=66*la;
-var $B=new Float64Array($H,pointb,sz);  // has to var?
+$B=new Float64Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
