@@ -8,8 +8,8 @@ return rD;
 
 extern"C"{
  
-int r4nd(int Th){
-Rg=rnd(Th);
+int r4nd(int tH){
+Rg=rnd(tH);
 return Rg;
 }
   
