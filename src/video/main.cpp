@@ -1,6 +1,6 @@
 #include "../../include/video/main.hpp"
 
-int rnd(int Th){
+int rNd(int Th){
 std::srand(std::time(nullptr));
 int rD=std::rand()%Th;
 return rD;
@@ -9,7 +9,7 @@ return rD;
 extern"C"{
  
 int r4nd(int tH){
-int Rg=rnd(tH);
+int Rg=rNd(tH);
 return Rg;
 }
   
