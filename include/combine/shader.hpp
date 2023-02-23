@@ -81,6 +81,8 @@ const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
+void clrclr(GLclampf,GLclampf,GLclampf);
+
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 char32_t * read_file(const GLchar *);
