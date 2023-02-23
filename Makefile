@@ -189,7 +189,7 @@ b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -O0 -fpie -fno-rtti \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -ffunction-sections -fdata-sections
-	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -fno-rtti \
+	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -fno-rtti --experimental-wasm-bulk-memory \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
