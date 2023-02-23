@@ -124,9 +124,11 @@ var $sc=this.duration;
 
 var mic=Math.round($sc*1000000);
 
+if(mic>0){
 var $pt=Module.ccall('r4nd','Number',['Number'],[mic]);
 // var $pt=Math.random()*mic;
-
+};
+  
 $pt=$pt*1000000;
 $pt=$pt/1000000;
 $pt=Math.round($pt);
@@ -143,8 +145,10 @@ $ls=Math.round($ls);
 $ls=$ls/1000;
 var vidNum=($vids[0]-5)+5;
 
+if(vidNum>0){
 var rnum=Module.ccall('r4nd','Number',['Number'],[vidNum]);
 // var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+};
 
 var vidSrc=$vids[rnum];
 var $h=window.innerHeight;
