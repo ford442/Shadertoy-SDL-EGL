@@ -259,8 +259,8 @@ gl.drawingBufferColorSpace='display-p3';
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -317,7 +317,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };};
 $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;  // has to revar?
+var pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
