@@ -6,9 +6,8 @@
 
 int rnd(int);
 
-int rD,Th;
-
-int tH,Rg;
+int rD;
+int Rg;
 extern"C"{
 
 
