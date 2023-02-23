@@ -188,7 +188,7 @@ txxts=txxts.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 };
 
-var shadesNum=$shds[0];
+let shadesNum=$shds[0];
 // var randShade=Math.random();
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum]);
