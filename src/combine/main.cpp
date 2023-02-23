@@ -108,9 +108,9 @@ var vtxxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 vtxxt=vtxxt.replace(Self,"");
-var vidMenu1=document.getElementById('vi1').value;
-var ar1=vidMenu1+'video/'+vtxxt;
-var ar2=Self+'video/'+vtxxt;
+let vidMenu1=document.getElementById('vi1').value;
+let ar1=vidMenu1+'video/'+vtxxt;
+let ar2=Self+'video/'+vtxxt;
 if(vidMenu1!='Default'){
 $vids[i]=ar1;
 }else{
@@ -118,24 +118,17 @@ $vids[i]=ar2;
 };
 };
 }
-
+  
 function scanVideos(){
-var fxhttp=new XMLHttpRequest();
+const fxhttp=new XMLHttpRequest();
 fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
-}};
-function scanVideos(){
-const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
-fxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
-vids(this);
 };};
-var vidMenu1=document.getElementById('vi1').value;
-if(vidMenu1!='Default'){
-var looc=vidMenu1+'video/';
+let vidMenua1=document.getElementById('vi1').value;
+if(vidMenua1!='Default'){
+var looc=vidMenua1+'video/';
 }else{
 var looc='video/';
 };
