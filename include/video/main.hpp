@@ -4,10 +4,10 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-int rNd(int);
+int rNd(int Th);
 
 extern"C"{
 
-int r4nd(int);
+int r4nd(int tH);
 
 }
