@@ -126,6 +126,22 @@ fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
 }};
+function scanVideos(){
+const fxhttp=new XMLHttpRequest();
+// fxhttp.withCredentials=false;
+fxhttp.onreadystatechange=function(){
+if(this.readyState==4&&this.status==200){
+vids(this);
+};};
+var vidMenu1=document.getElementById('vi1').value;
+if(vidMenu1!='Default'){
+var looc=vidMenu1+'video/';
+}else{
+var looc='video/';
+};
+fxhttp.open('GET',looc,true);
+fxhttp.send();
+}
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
