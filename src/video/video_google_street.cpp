@@ -288,18 +288,18 @@ gl.getExtension('GL_ARB_cull_distance');
 gl.getExtension('GL_ARB_gpu_shader_fp64');
 gl.getExtension('GL_EXT_vertex_attrib_64bit');
 gl.disable(gl.DITHER);
-gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-gl.drawingBufferColorMetadata={mode:'extended'};
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+// gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-// gl.blendColor(1.0,1.0,1.0,1.0);
+gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
-const g2=new GPU({mode:'gpu'});
+const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
