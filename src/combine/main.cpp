@@ -2,7 +2,7 @@
 
 EM_JS(void,js_main,(),{
 
-// "use strict";
+"use strict";
 
 window.scroll(0,0);
 
@@ -108,7 +108,7 @@ var vtxxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 vtxxt=vtxxt.replace(Self,"");
-const vidMenu1=document.getElementById('vi1').value;
+var vidMenu1=document.getElementById('vi1').value;
 var ar1=vidMenu1+'video/'+vtxxt;
 var ar2=Self+'video/'+vtxxt;
 if(vidMenu1!='Default'){
@@ -141,19 +141,19 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3');
-},300);
+},200);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},500);
+},300);
 setTimeout(function(){
 Module.ccall('b3_egl');
-},600);
+},400);
 setTimeout(function(){
 Module.ccall('str');
-},1000);
+},500);
 
 }
 
