@@ -269,7 +269,7 @@ var mic=Math.round($sc*1000000);
 
 // var $pt=Math.random()*mic;
 if(mic>0){
-var $pt=Module.ccall('r4nd','Number',['Number'],[shadesNum]);
+var $pt=Module.ccall('r4nd','Number',['Number'],[mic]);
 };
 
 $pt=$pt*1000000;
