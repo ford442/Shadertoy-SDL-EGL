@@ -143,14 +143,14 @@ var $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-var vidNum=($vids[0]-5)+5;
+var vidNum=($vids[0]-5);
 
 if(vidNum>0){
 var rnum=Module.ccall('r4nd','Number',['Number'],[vidNum]);
 // var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 };
 
-let vidSrc=$vids[rnum];
+let vidSrc=$vids[rnum+5];
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
 var wi=document.getElementById('wid').innerHTML;
