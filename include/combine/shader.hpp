@@ -56,7 +56,7 @@ const GLchar common_shader_header_gles3[]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma optionNV(inline all)\n"
 "#pragma optionNV(strict off)\n"
-"pragma STDGL(invariant all)\n"
+"pragma STDGL invariant (all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "#extension GL_NV_gpu_shader5 : enable\n"
