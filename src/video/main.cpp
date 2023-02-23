@@ -1,8 +1,23 @@
 #include "../../include/video/main.hpp"
 
+int rnd(int Th){
+std::srand(std::time(nullptr));
+rD=std::rand()%Th;
+return rD;
+}
+
+extern"C"{
+ 
+int r4nd(int Th){
+Rg=rnd(Th);
+return Rg;
+}
+  
+}
+
 EM_JS(void,js_main,(),{
 
-// "use strict";
+"use strict";
 
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
@@ -57,6 +72,7 @@ vids(this);
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
+
 function normalResStart(){
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
@@ -68,13 +84,16 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3');
+},250);
+setTimeout(function(){
+Module.ccall('b3_egl');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},950);
+},550);
 }
   
 const tem=document.getElementById('tim');
@@ -110,8 +129,12 @@ loadV.width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
+
 var mic=Math.round($sc*1000000);
-var $pt=Math.random()*mic;
+
+var $pt=Module.ccall('r4nd','Number',['Number'],[mic]);
+// var $pt=Math.random()*mic;
+
 $pt=$pt*1000000;
 $pt=$pt/1000000;
 $pt=Math.round($pt);
@@ -126,7 +149,11 @@ var $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+var vidNum=($vids[0]-5)+5;
+
+var rnum=Module.ccall('r4nd','Number',['Number'],[vidNum]);
+// var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+
 var vidSrc=$vids[rnum];
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
