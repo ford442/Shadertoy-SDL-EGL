@@ -80,9 +80,6 @@ const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
-
-void clrclr(GLclampf avrg,GLclampf drk,GLclampf brt);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
@@ -94,6 +91,10 @@ int_fast32_t iFrame,iFps,Size,iwi,ihi;
 // int iFrame,iFps,Size;
 
 void renderFrame();
+
+void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
+
+void clrclr(GLclampf avrg,GLclampf drk,GLclampf brt);
 
 EGLDisplay display;
 EGLSurface surface;
