@@ -38,7 +38,7 @@ var tst=[tsta,tsta,tsta,tsta];
 // const $P=Module.HEAPF64.subarray(0,2);
 //  $P.set(tst,0);
 //  console.log($H);
-var reslt=Module.ccall('js_simd',"number",["array"],[tsta]);
+var reslt=Module.ccall('js_simd',"Number",["Number"],[tsta]);
 console.log(reslt);
 }
   
