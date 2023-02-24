@@ -240,6 +240,8 @@ glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 
+  glShadeModel(GL_SMOOTH);
+
 //glEnable(GL_BLEND);
 glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
