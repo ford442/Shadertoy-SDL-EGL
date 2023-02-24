@@ -11,10 +11,11 @@ float c=wasm_f32x4_extract_lane(b,0);
  // v128_t d=wasm_v128_load(a);
  //  for(int i=0;i<3;i++){
     v128_t f=wasm_i32x4_add(c,c);
+float g=wasm_f32x4_extract_lane(f,0);
 
  // }
-float e=(float)f;
-return e;
+// float e=(float)g;
+return g;
 }
 
 extern"C"{
