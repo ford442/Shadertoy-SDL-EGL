@@ -2,15 +2,17 @@
 #include <immintrin.h>
 
 float simd_test(float a){
+int sum_arr[] = {a, a, 1.0, 1.0};
+
 v128_t ab=wasm_f32x4_splat(a);
 wasm_v128_store(0,ab);
 // wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
 
 float c=wasm_f32x4_extract_lane(b,0);
- // v128_t d=wasm_v128_load(a);
+v128_t d=wasm_v128_load(sum_arr);
  //  for(int i=0;i<3;i++){
-    v128_t f=wasm_i32x4_add(ab,ab);
+    v128_t f=wasm_i32x4_add(d,d);
 float g=wasm_f32x4_extract_lane(f,0);
 
  // }
