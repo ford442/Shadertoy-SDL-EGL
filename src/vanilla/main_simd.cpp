@@ -7,9 +7,9 @@ v128_t ab=wasm_f32x4_splat(a);
 wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
 float c=wasm_f32x4_extract_lane(b,0);
-  v128_t d=wasm_v128_load(a);
+ // v128_t d=wasm_v128_load(a);
 
-return d;
+return b;
 }
 
 extern"C"{
