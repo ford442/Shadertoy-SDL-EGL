@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main.hpp"
 #include <immintrin.h>
 
-float simd_test(float * a){
+float simd_test(float a){
 v128_t ab=wasm_f32x4_splat(a);
 // wasm_v128_store(0,ab);
 wasm_v128_store(0,a);
@@ -14,7 +14,7 @@ return d;
 
 extern"C"{
   
-float js_simd(float aa[]){
+float js_simd(float aa){
 float cc=simd_test(aa);
 return cc;
 }
@@ -38,7 +38,7 @@ var tst=[tsta,tsta,tsta,tsta];
 // const $P=Module.HEAPF64.subarray(0,2);
 //  $P.set(tst,0);
 //  console.log($H);
-var reslt=Module.ccall('js_simd',"number",["array"],[tst]);
+var reslt=Module.ccall('js_simd',"number",["array"],[tsta]);
 console.log(reslt);
 }
   
