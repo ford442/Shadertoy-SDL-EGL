@@ -95,7 +95,7 @@ function snd(){
 
 var songsNum=$sngs[0]-5;
 if(songNum>0){
-var randSong=Module.ccall('r4nd','Number',['Number'],[songNum]);
+var randSong=Module.ccall('r4nd','Number',['Number'],[songsNum]);
 };
 var songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
