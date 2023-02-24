@@ -6,9 +6,14 @@ v128_t ab=wasm_f32x4_splat(a);
 wasm_v128_store(0,ab);
 // wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
+
 float c=wasm_f32x4_extract_lane(b,0);
  // v128_t d=wasm_v128_load(a);
-float e=(float)c;
+  for(int i=0;i<3;i++){
+    v128_t f+=wasm_i32x4_add(c,f);
+
+ }
+float e=(float)f;
 return e;
 }
 
