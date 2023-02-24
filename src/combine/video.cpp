@@ -218,7 +218,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -329,7 +329,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
