@@ -3,11 +3,11 @@
 
 float simd_test(float a[]){
 v128_t ab=wasm_f32x4_splat(a[0]);
-wasm_v128_store(0,ab);
-// wasm_v128_store(0,a);
+// wasm_v128_store(0,ab);
+wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
 float c=wasm_f32x4_extract_lane(b,0);
-return c;
+return b;
 }
 
 extern"C"{
