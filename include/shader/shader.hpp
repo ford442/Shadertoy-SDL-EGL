@@ -48,6 +48,7 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 GLchar * sources[4];
 GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
+"#pragma STDGL(invariant all)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma optionNV(unroll none)\n"
