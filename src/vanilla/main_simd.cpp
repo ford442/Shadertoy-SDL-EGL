@@ -2,7 +2,7 @@
 #include <immintrin.h>
 
 float simd_test(float a){
-int sum_arr[] = {a, a, 1.0, 1.0};
+float sum_arr[] = {a, a, 1.0, 1.0};
 
 v128_t ab=wasm_f32x4_splat(a);
 wasm_v128_store(0,ab);
