@@ -8,7 +8,7 @@ wasm_v128_store(0,ab);
 v128_t b=wasm_v128_load(0);
 float c=wasm_f32x4_extract_lane(b,0);
  // v128_t d=wasm_v128_load(a);
-float e=(float)b;
+float e=(float)c;
 return e;
 }
 
