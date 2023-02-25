@@ -55,7 +55,6 @@
 int_fast32_t Size_js;
 double wi_js,hi_js;
 
-EGLContext contextegl_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
 EGLConfig eglconfig_js;
@@ -115,7 +114,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)64,
 EGL_MIPMAP_LEVEL,(EGLint)64,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
