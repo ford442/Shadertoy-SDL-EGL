@@ -315,10 +315,11 @@ return;
 }
 
 }
+
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size=(GLsizei)hi_js;
+Size_js=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
@@ -427,8 +428,8 @@ emscripten_webgl_enable_extension(ctx_js,"GL_ARB_draw_buffers_blend");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_cull_distance");
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-// glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+// glViewport((GLint)0,(GLint)0,Size_js,Size_js);
+glScissor((GLint)0,(GLint)0,Size_js,Size_js);
 return;
 }
 
