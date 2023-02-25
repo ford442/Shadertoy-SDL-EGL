@@ -298,15 +298,6 @@ emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
 
-extern "C" {
-
-void str(){
-strt();
-return;
-}
-
-}
-
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
@@ -729,6 +720,11 @@ T=true;
 });
 
 extern "C" {
+
+void str(){
+strt();
+return;
+}
 
 void b3(){
 egl();
