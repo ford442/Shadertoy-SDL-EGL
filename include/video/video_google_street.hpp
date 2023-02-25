@@ -34,7 +34,7 @@
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1 //maybe??
 
-#include <webgl/webgl2.h>
+// #include <webgl/webgl2.h>
 
 #define GL_GLEXT_PROTOTYPES 1
 #include <GL/gl.h>
