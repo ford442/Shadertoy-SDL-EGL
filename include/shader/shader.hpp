@@ -51,7 +51,7 @@ GLchar common_shader_header_gles3[]=
 "#pragma STDGL(invariant all)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
-"#pragma optionNV(unroll none)\n"
+"#pragma optionNV(unroll all)\n"
 "#pragma optionNV(ifcvt none)\n"
 "#pragma optionNV(inline all)\n"
 "#pragma optionNV(strict off)\n"
