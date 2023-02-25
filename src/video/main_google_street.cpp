@@ -31,9 +31,9 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 setTimeout(function(){
-Module.ccall('str');
-},150);
 Module.ccall('b3');
+},150);
+Module.ccall('str');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
