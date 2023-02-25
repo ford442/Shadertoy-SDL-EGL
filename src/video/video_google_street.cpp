@@ -177,17 +177,13 @@ emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 // emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_framebuffer_object");
-
 emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
-
 // emscripten_webgl_enable_extension(ctx,"EGL_NV_memory_attachment");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
-  
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
-  
-/// emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
+  /// emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
@@ -223,7 +219,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"GL_MESA_shader_integer_functions");
 // emscripten_webgl_enable_extension(ctx,"OES_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"ARB_texture_stencil8");
-// emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
+emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_cull_distance");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
@@ -232,10 +228,8 @@ emscripten_webgl_enable_extension(ctx,"EXT_geometry_shader");
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-
 glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
-
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
@@ -244,16 +238,14 @@ glFrontFace(GL_CW);
 glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-
 // glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
-
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
 nanosleep(&req,&rem);
