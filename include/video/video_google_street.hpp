@@ -52,7 +52,7 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-int_fast32_t Size;
+int_fast32_t Size_js;
 double wi_js,hi_js;
 
 EGLContext contextegl_js;
