@@ -34,7 +34,7 @@
 #define GL3_PROTOTYPES 1
 #define GL4_PROTOTYPES 1 //maybe??
 
-// #include <webgl/webgl2.h>
+#include <webgl/webgl2.h>
 
 #define GL_GLEXT_PROTOTYPES 1
 #include <GL/gl.h>
@@ -265,9 +265,6 @@ EGL_MIPMAP_LEVEL,(EGLint)64,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
