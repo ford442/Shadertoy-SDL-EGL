@@ -167,10 +167,10 @@ setTimeout(function(){
 Module.ccall('str');
 },300);
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('b3');
 },500);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },700);
 
 }
