@@ -17,6 +17,7 @@ bezl.height=winSize;
 bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
 
+var $shds=[];
 var $vids=[];
 
 function normalResStart(){
@@ -29,6 +30,9 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
+setTimeout(function(){
+Module.ccall('str');
+},150);
 Module.ccall('b3');
 },750);
 setTimeout(function(){
@@ -39,6 +43,59 @@ switchy.click();
 },950);
 }
   
+function shds(xml){
+const sparser=new DOMParser();
+let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
+let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
+$shds[0]=preList.length;
+for(var i=1;i<preList.length;i++){
+var txxts=preList[i].href;
+var Self=location.href;
+Self=Self.replace(/1ink.1ink/,"");
+txxts=txxts.replace(Self,"");
+$shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
+}
+var randShade=Math.random();
+randShade=Math.floor($shds[0]*randShade)+5;
+let shdMenu=document.getElementById('sh1');
+var path;
+if(shdMenu.value!='Default'){
+if(shdMenu.value=='Random'){
+document.getElementById('path').innerHTML=$shds[randShade];
+}else{
+document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
+}
+}else{
+var fle=document.getElementById('path').innerHTML;
+document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
+}
+var pth=document.getElementById('path').innerHTML;
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+ff.onload=function(oEvent){
+let sarrayBuffer=ff.response;
+if(sarrayBuffer){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile('/shader/shader1.toy',sfil);
+setTimeout(function(){
+   normalResStart();
+},450);
+}};
+ff.send(null);
+}
+
+function scanShaders(){
+const dxhttp=new XMLHttpRequest();
+dxhttp.withCredentials=false;
+dxhttp.onreadystatechange=function(){
+if(this.readyState==4&&this.status==200){
+shds(this);
+}};
+dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
+dxhttp.send();
+}
+
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
@@ -75,14 +132,18 @@ tem.innerHTML=$ll;
 });setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 
 document.getElementById('startBtn').addEventListener('click',function(){
-normalResStart();
+scanShaders();
 });
 
 });
 
-int main(){
+int main(void){
+"use strict";
+
+EM_ASM({
+FS.mkdir("/shader");
+});
 
 js_main();
-return 0;
-
+return 1;
 }
