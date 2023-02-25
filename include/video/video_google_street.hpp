@@ -157,6 +157,7 @@ std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,10416666};
 
+GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
@@ -276,7 +277,11 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
+void clrclr(GLclampf avrg,GLclampf drk,GLclampf brt);
+
 extern "C"{
+
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr);
 
 void str();
 
