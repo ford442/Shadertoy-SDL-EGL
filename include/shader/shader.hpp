@@ -48,6 +48,7 @@ GLchar * sources[4];
 GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#pragma STDGL(invariant all)\n"
+"#pragma STDGL(precise all)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma optionNV(unroll all)\n"
