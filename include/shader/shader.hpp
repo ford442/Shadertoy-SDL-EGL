@@ -1,5 +1,4 @@
 // #include <avxintrin.h>  // AVX
-#include <iostream>
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
