@@ -153,7 +153,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
-// emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
+emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 // emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
 // emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 // emscripten_webgl_enable_extension(ctx,"GL_OES_draw_buffers_indexed");
