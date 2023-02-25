@@ -55,10 +55,21 @@
 int_fast32_t Size_js;
 double wi_js,hi_js;
 
+EGLContext contextegl_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
+
+EGLDisplay display;
+EGLSurface surface;
+EGLContext contextegl;
+EGLConfig eglconfig;
+EGLint config_size,major,minor;
+
+
+int_fast32_t iFrame,iFps,Size,iwi,ihi;
+// int iFrame,iFps,Size;
 
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
@@ -196,17 +207,7 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 char32_t * read_file(const GLchar *);
 
-int_fast32_t iFrame,iFps,Size,iwi,ihi;
-// int iFrame,iFps,Size;
-
 void renderFrame();
-
-EGLDisplay display;
-EGLSurface surface;
-EGLContext contextegl;
-EGLConfig eglconfig;
-EGLint config_size,major,minor;
-EGLContext contextegl_js;
 
 EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
