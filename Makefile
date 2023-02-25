@@ -113,6 +113,24 @@ b3_shader_test:
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
+b3_shader_js:
+	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
+	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -ffunction-sections -fdata-sections -ffp-contract=on
+	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
+	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -ffunction-sections -fdata-sections
+	 emcc main.o shader.o -o s3021js.js -O0 -sWASM=0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
+	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
+	 -sPRECISE_F32=2 -sWASMFS=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
+	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
+
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
 	 em++ src/shader/shader.cpp -c -std=gnu++2a
