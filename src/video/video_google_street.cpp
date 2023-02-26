@@ -619,9 +619,9 @@ const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
-const glslGoldR=`float GoldR(float a){return((a+0.831+((a+0.831)/2.0))/3.0);}`;
-const glslGoldG=`float GoldG(float a){return((a+0.686+((a+0.686)/2.0))/3.0);}`;
-const glslGoldB=`float GoldB(float a){return((a+0.215+((a+0.215)/2.0))/3.0);}`;
+const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
+const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
+const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
@@ -680,7 +680,7 @@ var aveg=Aveg(p[3],ouT);
 // bb=GoldB(eulb);
 // }
   
-this.color(Silver(p[0]),Silver(p[1]),Silver(p[2]),aveg);
+this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
   
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
