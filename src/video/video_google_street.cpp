@@ -666,19 +666,19 @@ if(der>0.333){
 rr=Silver(der);
 }else{
 rr=GoldR(der);
-};
+}
 
 if(neerg>0.4){
 gg=Silver(neerg);
 }else{
 gg=GoldG(neerg);
-};
+}
 
 if(eulb>0.5){
 bb=Silver(eulb);
 }else{
 bb=GoldB(eulb);
-};
+}
   
 this.color(rr,gg,bb,aveg);
 // this.color(p[0],p[1],p[2],aveg);
