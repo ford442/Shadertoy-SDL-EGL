@@ -103,7 +103,7 @@ b3_shader_test:
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -O0 --closure 0 -g0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3021.js -O0 --closure 0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
 	 -fwasm-exceptions -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
