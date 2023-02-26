@@ -47,7 +47,6 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 GLchar * sources[4];
 GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
-"#pragma STDGL(invariant all)\n"
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
@@ -64,6 +63,7 @@ GLchar common_shader_header_gles3[]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
+"#pragma STDGL(invariant all)\n"
 "\n layout(location=0)in vec4 iPosition;void main(){gl_PointSize=0.001;gl_Position=iPosition;}\n";
 GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
