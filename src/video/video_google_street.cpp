@@ -648,23 +648,23 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-
+var rr,gg,bb;
 if(p[0]>0.333){  // S
-var rr=Ave(p[0],0.75,(p[0]+0.75)/2.0);
+rr=Ave(p[0],0.75,(p[0]+0.75)/2.0);
 }else{  // G
-var rr=Ave(p[0],0.831,(p[0]+0.831)/2.0);
+rr=Ave(p[0],0.831,(p[0]+0.831)/2.0);
 };
 
 if(p[1]>0.4){  // S
-var gg=Ave(p[1],0.75,(p[1]+0.75)/2.0);
+gg=Ave(p[1],0.75,(p[1]+0.75)/2.0);
 }else{  // G
-var gg=Ave(p[1],0.868,(p[1]+0.686)/2.0);
+gg=Ave(p[1],0.868,(p[1]+0.686)/2.0);
 };
 
 if(p[2]>0.5){  // S
-var bb=Ave(p[2],0.75,(p[2]+0.75)/2.0);
+bb=Ave(p[2],0.75,(p[2]+0.75)/2.0);
 }else{  // G
-var bb=Ave(p[2],0.215,(p[2]+0.215)/2.0);
+bb=Ave(p[2],0.215,(p[2]+0.215)/2.0);
 };
   
 this.color(rr,gg,bb,aveg);
