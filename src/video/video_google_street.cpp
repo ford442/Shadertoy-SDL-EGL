@@ -618,10 +618,18 @@ gl.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+const glslSilver=`float Silver(float a){return(a+0.75+((a+0.75)/2.0))/3.0;}`;
+const glslGoldR=`float GoldR(float a){return(a+0.831+((a+0.831)/2.0))/3.0;}`;
+const glslGoldG=`float GoldG(float a){return(a+0.686+((a+0.686)/2.0)))/3.0;}`;
+const glslGoldB=`float GoldB(float a){return(a+0.215+((a+0.215)/2.0)))/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
+g.addNativeFunction('Silver',glslSilver,{returnType:'Number'});
+g.addNativeFunction('GoldR',glslGoldR,{returnType:'Number'});
+g.addNativeFunction('GoldG',glslGoldG,{returnType:'Number'});
+g.addNativeFunction('GoldB',glslGoldB,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
@@ -653,29 +661,23 @@ var rr,gg,bb;
 let der=p[0];
 let neerg=p[1];
 let eulb=p[2];
-let rdS=(der+0.75)/2.0;
-let grS=(der+0.831)/2.0;
-let blS=(neerg+0.75)/2.0;
-let rdG=(neerg+0.686)/2.0;
-let grG=(eulb+0.75)/2.0;
-let blG=(eulb+0.215)/2.0;
 
 if(der>0.333){
-rr=Ave(der,0.75,rdS);
+rr=Silver(der);
 }else{
-rr=Ave(der,0.831,rdG);
+rr=GoldR(der);
 };
 
 if(neerg>0.4){
-gg=Ave(neerg,0.75,grS);
+gg=Silver(neerg);
 }else{
-gg=Ave(neerg,0.868,grG);
+gg=GoldG(neerg);
 };
 
 if(eulb>0.5){
-bb=Ave(eulb,0.75,blS);
+bb=Silver(eulb);
 }else{
-bb=Ave(eulb,0.215,blG);
+bb=GoldB(eulb);
 };
   
 this.color(rr,gg,bb,aveg);
