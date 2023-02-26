@@ -680,7 +680,8 @@ var aveg=Aveg(p[3],ouT);
 // bb=GoldB(eulb);
 // }
   
-this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
+// this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
+this.color(p[0],p[1],p[2],aveg);
   
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
