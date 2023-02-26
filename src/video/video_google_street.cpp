@@ -658,9 +658,9 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
 var rr,gg,bb;
-let der=p[0];
-let neerg=p[1];
-let eulb=p[2];
+var der=p[0];
+var neerg=p[1];
+var eulb=p[2];
 
 if(der>0.333){
 rr=Silver(der);
