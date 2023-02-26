@@ -657,31 +657,30 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
-var rr,gg,bb;
-var der=p[0];
-var neerg=p[1];
-var eulb=p[2];
+// var rr,gg,bb;
+// var der=p[0];
+// var neerg=p[1];
+// var eulb=p[2];
 
 // if(der>0.333){
-rr=Silver(der);
+// rr=Silver(der);
 // }else{
 // rr=GoldR(der);
 // }
 
 // if(neerg>0.4){
-gg=Silver(neerg);
+// gg=Silver(neerg);
 // }else{
 // gg=GoldG(neerg);
 // }
 
 // if(eulb>0.5){
-bb=Silver(eulb);
+// bb=Silver(eulb);
 // }else{
 // bb=GoldB(eulb);
 // }
   
-this.color(rr,gg,bb,aveg);
-// this.color(p[0],p[1],p[2],aveg);
+this.color(Silver(p[0]),Silver(p[1]),Silver(p[2]),aveg);
   
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
