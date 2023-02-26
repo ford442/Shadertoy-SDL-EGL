@@ -115,8 +115,8 @@ const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
 var $S=parseInt(window.innerHeight,10);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+var w$=parseInt(window.innerHeight,10);
+var h$=parseInt(window.innerHeight,10);
 var la=h$*h$*8;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
@@ -142,7 +142,7 @@ precision:'highp',
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
-premultipliedAlpha:false,
+premultipliedAlpha:true,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
