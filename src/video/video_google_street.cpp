@@ -661,21 +661,21 @@ var grG=(eulb+0.75)/2.0);
 var blG=(eulb+0.215)/2.0);
 
 if(der>0.333){
-rr=Ave(der,0.75,rdS;
+rr=Ave(der,0.75,rdS);
 }else{
-rr=Ave(der,0.831,rdG;
+rr=Ave(der,0.831,rdG);
 };
 
 if(neerg>0.4){
-gg=Ave(neerg,0.75,grS;
+gg=Ave(neerg,0.75,grS);
 }else{
-gg=Ave(neerg,0.868,grG;
+gg=Ave(neerg,0.868,grG);
 };
 
 if(eulb>0.5){
-bb=Ave(eulb,0.75,blS;
+bb=Ave(eulb,0.75,blS);
 }else{
-bb=Ave(eulb,0.215,blG;
+bb=Ave(eulb,0.215,blG);
 };
   
 this.color(rr,gg,bb,aveg);
