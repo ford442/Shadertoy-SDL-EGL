@@ -671,7 +671,7 @@ rr=Silver(der);
 // if(neerg>0.4){
 gg=Silver(neerg);
 // }else{
-gg=GoldG(neerg);
+// gg=GoldG(neerg);
 // }
 
 // if(eulb>0.5){
