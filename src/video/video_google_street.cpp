@@ -653,12 +653,12 @@ var rr,gg,bb;
 var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
-var rdS=(der+0.75)/2.0);
-var grS=(der+0.831)/2.0);
-var blS=(neerg+0.75)/2.0);
-var rdG=(neerg+0.686)/2.0);
-var grG=(eulb+0.75)/2.0);
-var blG=(eulb+0.215)/2.0);
+var rdS=(der+0.75)/2.0;
+var grS=(der+0.831)/2.0;
+var blS=(neerg+0.75)/2.0;
+var rdG=(neerg+0.686)/2.0;
+var grG=(eulb+0.75)/2.0;
+var blG=(eulb+0.215)/2.0;
 
 if(der>0.333){
 rr=Ave(der,0.75,rdS);
