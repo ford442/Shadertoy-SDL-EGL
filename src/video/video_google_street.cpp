@@ -655,21 +655,21 @@ var neerg=p[1];
 var eulb=p[2];
 
 if(der>0.333){
-rr=Ave(p[0],0.75,(der+0.75)/2.0);
+rr=Ave(der,0.75,(der+0.75)/2.0);
 }else{
-rr=Ave(p[0],0.831,(der+0.831)/2.0);
+rr=Ave(der,0.831,(der+0.831)/2.0);
 };
 
 if(neerg>0.4){
-gg=Ave(p[1],0.75,(neerg+0.75)/2.0);
+gg=Ave(neerg,0.75,(neerg+0.75)/2.0);
 }else{
-gg=Ave(p[1],0.868,(neerg+0.686)/2.0);
+gg=Ave(neerg,0.868,(neerg+0.686)/2.0);
 };
 
 if(eulb>0.5){
-bb=Ave(p[2],0.75,(eulb+0.75)/2.0);
+bb=Ave(eulb,0.75,(eulb+0.75)/2.0);
 }else{
-bb=Ave(p[2],0.215,(eulb+0.215)/2.0);
+bb=Ave(eulb,0.215,(eulb+0.215)/2.0);
 };
   
 this.color(rr,gg,bb,aveg);
