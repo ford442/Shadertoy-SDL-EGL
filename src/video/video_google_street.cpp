@@ -653,23 +653,29 @@ var rr,gg,bb;
 var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
+var rdS=(der+0.75)/2.0);
+var grS=(der+0.831)/2.0);
+var blS=(neerg+0.75)/2.0);
+var rdG=(neerg+0.686)/2.0);
+var grG=(eulb+0.75)/2.0);
+var blG=(eulb+0.215)/2.0);
 
 if(der>0.333){
-rr=Ave(der,0.75,(der+0.75)/2.0);
+rr=Ave(der,0.75,rdS;
 }else{
-rr=Ave(der,0.831,(der+0.831)/2.0);
+rr=Ave(der,0.831,rdG;
 };
 
 if(neerg>0.4){
-gg=Ave(neerg,0.75,(neerg+0.75)/2.0);
+gg=Ave(neerg,0.75,grS;
 }else{
-gg=Ave(neerg,0.868,(neerg+0.686)/2.0);
+gg=Ave(neerg,0.868,grG;
 };
 
 if(eulb>0.5){
-bb=Ave(eulb,0.75,(eulb+0.75)/2.0);
+bb=Ave(eulb,0.75,blS;
 }else{
-bb=Ave(eulb,0.215,(eulb+0.215)/2.0);
+bb=Ave(eulb,0.215,blG;
 };
   
 this.color(rr,gg,bb,aveg);
