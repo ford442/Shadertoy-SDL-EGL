@@ -655,7 +655,7 @@ var rr=Ave(p[0],0.75,re);
 }else{  // G
 var re=(p[0]+0.831)/2.0;
 var rr=Ave(p[0],0.831,re);
-};
+}
 
 if(p[1]>0.4){  // S
 var gr=(p[1]+0.75)/2.0;
@@ -663,7 +663,7 @@ var gg=Ave(p[1],0.75,gr);
 }else{  // G
 var gr=(p[1]+0.686)/2.0;
 var gg=Ave(p[1],0.868,gr);
-};
+}
 
 if(p[2]>0.5){  // S
 var bl=(p[2]+0.75)/2.0;
@@ -671,7 +671,7 @@ var bb=Ave(p[2],0.75,bl);
 }else{  // G
 var bl=(p[2]+0.215)/2.0;
 var bb=Ave(p[2],0.215,bl);
-};
+}
   
 this.color(rr,gg,bb,aveg);
 // this.color(p[0],p[1],p[2],aveg);
