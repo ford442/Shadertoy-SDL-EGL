@@ -662,23 +662,23 @@ var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
 
-if(der>0.333){
+// if(der>0.333){
 rr=Silver(der);
-}else{
-rr=GoldR(der);
-}
+// }else{
+// rr=GoldR(der);
+// }
 
-if(neerg>0.4){
+// if(neerg>0.4){
 gg=Silver(neerg);
-}else{
+// }else{
 gg=GoldG(neerg);
-}
+// }
 
-if(eulb>0.5){
+// if(eulb>0.5){
 bb=Silver(eulb);
-}else{
-bb=GoldB(eulb);
-}
+// }else{
+// bb=GoldB(eulb);
+// }
   
 this.color(rr,gg,bb,aveg);
 // this.color(p[0],p[1],p[2],aveg);
