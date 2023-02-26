@@ -650,28 +650,22 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
 if(p[0]>0.333){  // S
-var re=(p[0]+0.75)/2.0;
-var rr=Ave(p[0],0.75,re);
+var rr=Ave(p[0],0.75,(p[0]+0.75)/2.0);
 }else{  // G
-var re=(p[0]+0.831)/2.0;
-var rr=Ave(p[0],0.831,re);
-}
+var rr=Ave(p[0],0.831,(p[0]+0.831)/2.0);
+};
 
 if(p[1]>0.4){  // S
-var gr=(p[1]+0.75)/2.0;
-var gg=Ave(p[1],0.75,gr);
+var gg=Ave(p[1],0.75,(p[1]+0.75)/2.0);
 }else{  // G
-var gr=(p[1]+0.686)/2.0;
-var gg=Ave(p[1],0.868,gr);
-}
+var gg=Ave(p[1],0.868,(p[1]+0.686)/2.0);
+};
 
 if(p[2]>0.5){  // S
-var bl=(p[2]+0.75)/2.0;
-var bb=Ave(p[2],0.75,bl);
+var bb=Ave(p[2],0.75,(p[2]+0.75)/2.0);
 }else{  // G
-var bl=(p[2]+0.215)/2.0;
-var bb=Ave(p[2],0.215,bl);
-}
+var bb=Ave(p[2],0.215,(p[2]+0.215)/2.0);
+};
   
 this.color(rr,gg,bb,aveg);
 // this.color(p[0],p[1],p[2],aveg);
