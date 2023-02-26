@@ -649,19 +649,22 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 var rr,gg,bb;
-if(p[0]>0.333){  // S
+var der=p[0];
+var neerg=p[1];
+var eulb=p[2];
+if(der>0.333){  // S
 rr=Ave(p[0],0.75,(p[0]+0.75)/2.0);
 }else{  // G
 rr=Ave(p[0],0.831,(p[0]+0.831)/2.0);
 };
 
-if(p[1]>0.4){  // S
+if(neerg>0.4){  // S
 gg=Ave(p[1],0.75,(p[1]+0.75)/2.0);
 }else{  // G
 gg=Ave(p[1],0.868,(p[1]+0.686)/2.0);
 };
 
-if(p[2]>0.5){  // S
+if(eulb>0.5){  // S
 bb=Ave(p[2],0.75,(p[2]+0.75)/2.0);
 }else{  // G
 bb=Ave(p[2],0.215,(p[2]+0.215)/2.0);
