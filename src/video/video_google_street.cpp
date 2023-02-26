@@ -650,9 +650,9 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
 var rr,gg,bb;
-var der=p[0];
-var neerg=p[1];
-var eulb=p[2];
+let der=p[0];
+let neerg=p[1];
+let eulb=p[2];
 let rdS=(der+0.75)/2.0;
 let grS=(der+0.831)/2.0;
 let blS=(neerg+0.75)/2.0;
