@@ -669,7 +669,7 @@ var gg=Ave(p[1],0.868,gr);
 
 if(p[2]>0.5){  // S
 var bl=(p[2]+0.75)/2.0;
-var bb=Ave(p[2],0.75],bl);
+var bb=Ave(p[2],0.75,bl);
 }else{  // G
 var bl=(p[2]+0.215)/2.0;
 var bb=Ave(p[2],0.215,bl);
