@@ -496,7 +496,7 @@ var w$=parseInt(window.innerHeight,10);
 var h$=parseInt(window.innerHeight,10);
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -691,7 +691,7 @@ var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -721,7 +721,7 @@ $S=parseInt(window.innerHeight,10);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);  // has to var?
+var agav=new Float64Array($H,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
