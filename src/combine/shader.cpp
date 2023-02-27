@@ -358,7 +358,12 @@ return;
 }
 
 extern "C" {
-  
+
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+clrclr(cllr,alp,avr);
+return;
+}
+
 void b3_egl(){
 egl();
 return;
