@@ -1,5 +1,4 @@
-#include "../../include/vanilla/main.hpp"
-#include <immintrin.h>
+#include "../../include/vanilla/main_simd.hpp"
 
 float simd_test(float a){
 float sum_arr[] = {a, a, 1.0, 1.0};
