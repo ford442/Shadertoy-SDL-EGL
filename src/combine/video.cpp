@@ -156,8 +156,8 @@ minorVersion:0
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('EXT_color_buffer_float');
-// gl.getExtension('OES_single_precision');
 gl.getExtension('EGL_NV_depth_nonlinear');
+gl.getExtension('EGL_HI_colorformats');
 gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
 gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
