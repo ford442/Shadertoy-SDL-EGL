@@ -473,7 +473,7 @@ T=true;
 extern "C" {
 
 void b3_egl(){
-egl();
+// egl();
 }
 
 void b3(){
