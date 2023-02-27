@@ -35,6 +35,7 @@ struct timespec req={0,10416666};
 
 #include "../../include/combine/gl.hpp"
 
+GLclampf avrg,drk,brt,avr;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
@@ -88,8 +89,6 @@ char32_t * read_file(const GLchar *);
 
 int_fast32_t iFrame,iFps,Size,iwi,ihi;
 // int iFrame,iFps,Size;
-
-GLclampf avrg,drk,brt,avr;
 
 void renderFrame();
 
