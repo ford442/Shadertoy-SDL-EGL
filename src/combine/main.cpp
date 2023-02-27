@@ -166,7 +166,7 @@ setTimeout(function(){
 Module.ccall('b3');
 },500);
 setTimeout(function(){
-Module.ccall('b3_egl');
+// Module.ccall('b3_egl');
 },700);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
