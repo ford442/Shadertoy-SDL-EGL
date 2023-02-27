@@ -163,7 +163,9 @@ b3_video_test:
 
 b3_video:
 	 em++ src/video/main.cpp -c -std=c++20
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/video/video.cpp -c -std=c++20
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 emcc main.o video.o -o b3020.js -std=c++20 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
