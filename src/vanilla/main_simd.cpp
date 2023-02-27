@@ -19,10 +19,10 @@ float g=wasm_f32x4_extract_lane(f,0);
 // float e=(float)g;
 // return g;
 
-int * tt=a;
+unsigned int tt;
 int mm=round(a);
 int yy=_rdrand32_step(&tt);
-int yy=_rdrand32_step(mm);
+int uu=_rdrand32_step(mm);
 return yy;
 }
 
