@@ -158,21 +158,21 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
+
+setTimeout(function(){
+Module.ccall('b3');
+},300);
+setTimeout(function(){
+Module.ccall('b3_egl');
+},500);
+setTimeout(function(){
+Module.ccall('str');
+},700);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},100);
-setTimeout(function(){
-Module.ccall('b3_egl');
-},300);
-setTimeout(function(){
-Module.ccall('str');
 },500);
-setTimeout(function(){
-Module.ccall('b3');
-},700);
-
 }
 
 function shds(xml){
