@@ -160,10 +160,10 @@ document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('str');
 },300);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3_egl');
 },500);
 setTimeout(function(){
 Module.ccall('b3');
