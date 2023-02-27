@@ -163,7 +163,7 @@ return;
 
 EM_JS(void,vid,(),{
 
-// "use strict";
+"use strict";
 
 var vv=document.getElementById("mv");
 var sh4d=true;
@@ -262,6 +262,41 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
+
+const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+const g2=new GPU();
+const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
+const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
+g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
+g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+let R=g2.createKernel(function(tv){
+var Pa=tv[this.thread.y][this.thread.x*4];
+return Ave(Pa[0],Pa[1],Pa[2]);
+}).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var av$=Ave(P[0],P[1],P[2]);
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$-(minuss*(av$*0.01));
+return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+let r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$aavg,p[3]);
+var Min=(4.0*(($amax-($aavg-$amin))/2.0));
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
+//   var silvrr=Ave(p[0],p[1],p[2]);
+// this.color(silvrr,silvrr,p[2],aveg);
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('EXT_color_buffer_float');
@@ -349,40 +384,6 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
-const g2=new GPU();
-const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
-g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
-g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-let R=g2.createKernel(function(tv){
-var Pa=tv[this.thread.y][this.thread.x*4];
-return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
-let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
-return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
-let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
-var $amax=this.constants.amax;
-var $amin=this.constants.amin;
-var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$aavg,p[3]);
-var Min=(4.0*(($amax-($aavg-$amin))/2.0));
-var ouT=Math.max(Min,alph);
-var aveg=Aveg(p[3],ouT);
-//   var silvrr=Ave(p[0],p[1],p[2]);
-// this.color(silvrr,silvrr,p[2],aveg);
-this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
