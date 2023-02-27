@@ -17,10 +17,10 @@ v128_t b=wasm_v128_load(0);
 double c=wasm_f64x2_extract_lane(b,0);
 double d=wasm_f64x2_extract_lane(b,1);
  float re=c+d;
-v128_t d=wasm_v128_load(sum_arr);
+// v128_t d=wasm_v128_load(sum_arr);
  //  for(int i=0;i<3;i++){
-v128_t f=wasm_i32x4_add(d,d);
-float g=wasm_f32x4_extract_lane(f,0);
+// v128_t f=wasm_i32x4_add(d,d);
+// float g=wasm_f32x4_extract_lane(f,0);
  
  // }
 // float e=(float)g;
