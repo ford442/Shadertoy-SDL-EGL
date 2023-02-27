@@ -276,14 +276,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setTactic("precision").setPrecision('single').setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
