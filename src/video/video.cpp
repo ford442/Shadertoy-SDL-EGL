@@ -237,8 +237,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
 colorType:'float64',
@@ -386,8 +386,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -411,8 +411,8 @@ var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
 // t.setOutput([$S,$S]);
 // r.setOutput([$S,$S]);
