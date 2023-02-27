@@ -160,13 +160,13 @@ document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },300);
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('str');
 },500);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },700);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
