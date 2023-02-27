@@ -150,14 +150,6 @@ aptr[200]=maxSum/32;
 return;
 }
 
-void store_frame(){
-  
-}
-
-float load_frame(){
-  
-}
-
 extern "C" {
 
 void nano(short int Fnum,int leng,float *ptr,float *aptr){
@@ -165,16 +157,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
   
-void put_frm(){
-store_frame();
-return;
-}
-  
-void get_frm(){
-load_frame();
-return;
-}
-
 }
 
 EM_JS(void,vid,(),{
