@@ -7,7 +7,7 @@ float sum_arr[] = {a, a, 1.0, 1.0};
  
  v128_t Input=wasm_f64x2_splat(uu);
  v128_t Add=wasm_f64x2_splat(ee);
-double nn=wasm_f64x2_add(uu,Add);
+double nn=wasm_f64x2_add(Input,Add);
  
 v128_t ab=wasm_f32x4_splat(a);
 wasm_v128_store(0,ab);
