@@ -7,14 +7,16 @@ float sum_arr[] = {a, a, 1.0, 1.0};
  
  v128_t Input=wasm_f64x2_splat(uu);
  v128_t Add=wasm_f64x2_splat(ee);
-double nn=wasm_f64x2_add(Input,Add);
+v128_t nn=wasm_f64x2_add(Input,Add);
  
-v128_t ab=wasm_f32x4_splat(a);
-wasm_v128_store(0,ab);
+// v128_t ab=wasm_f32x4_splat(a);
+wasm_v128_store(0,nn);
 // wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(0);
 
-float c=wasm_f32x4_extract_lane(b,0);
+double c=wasm_f64x2_extract_lane(b,0);
+double d=wasm_f64x2_extract_lane(b,1);
+ float re=c+d;
 v128_t d=wasm_v128_load(sum_arr);
  //  for(int i=0;i<3;i++){
 v128_t f=wasm_i32x4_add(d,d);
@@ -24,7 +26,7 @@ float g=wasm_f32x4_extract_lane(f,0);
 // float e=(float)g;
 // return g;
 
-return (float)nn;
+return re;
 }
 
 extern"C"{
