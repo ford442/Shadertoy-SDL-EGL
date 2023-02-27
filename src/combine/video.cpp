@@ -159,8 +159,8 @@ gl.getExtension('EXT_texture_filter_anisotropic');
 gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
 gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
 gl.disable(gl.DITHER);
-gl.drawingBufferColorMetadata={mode:'extended'};
-gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+// gl.drawingBufferColorMetadata={mode:'extended'};
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
