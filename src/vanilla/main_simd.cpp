@@ -14,13 +14,15 @@ v128_t d=wasm_v128_load(sum_arr);
  //  for(int i=0;i<3;i++){
 v128_t f=wasm_i32x4_add(d,d);
 float g=wasm_f32x4_extract_lane(f,0);
-_mm_mask_i32gather_epi32 
+ 
  // }
 // float e=(float)g;
 // return g;
 
-int tt=round(a);
-int yy=_rdrand16_step(tt);
+int * tt=a;
+int mm=round(a);
+int yy=_rdrand32_step(&tt);
+int yy=_rdrand32_step(mm);
 return yy;
 }
 
