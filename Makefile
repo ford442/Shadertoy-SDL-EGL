@@ -208,9 +208,17 @@ b3_vanilla:
 	 --pre-js rSlider.js --pre-js slideOut.js
 	 
 b3_vanilla_simd:
-	 em++ src/vanilla/main_simd.cpp -c -std=c++2a -msimd128 -mavx
-	 emcc main_simd.o -o v3020.js -std=c++2a -msimd128 -mavx \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 em++ src/vanilla/main_simd.cpp -c -O0 -fpie -fno-rtti -std=c++2a \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
+	 emcc main_simd.o -o v3020.js -O0 -std=c++2a -fpie \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions \
+	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -ffunction-sections -fdata-sections \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold -mtune=corei7-avx \
 	 -sEXPORTED_FUNCTIONS='["_main","_js_simd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
