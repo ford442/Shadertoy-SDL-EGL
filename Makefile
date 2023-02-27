@@ -209,7 +209,7 @@ b3_vanilla:
 	 
 b3_vanilla_simd:
 	 em++ src/vanilla/main_simd.cpp -c -O0 -fpie -fno-rtti -std=c++2a \
-	 -msimd128 -mavx -mrdrnd \
+	 -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
 	 emcc main_simd.o -o v3020.js -O0 -std=c++2a -fpie \
