@@ -159,9 +159,9 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 
-setTimeout(function(){
-Module.ccall('b3_egl');
-},300);
+//setTimeout(function(){
+//Module.ccall('b3_egl');
+//},300);
 setTimeout(function(){
 Module.ccall('str');
 },700);
@@ -208,7 +208,7 @@ document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 };
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
-// ff.withCredentials=false;
+ff.withCredentials=false;
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
@@ -225,7 +225,7 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
+dxhttp.withCredentials=false;
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 shds(this);
