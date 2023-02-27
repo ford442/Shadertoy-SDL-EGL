@@ -118,7 +118,7 @@ EGL_NONE
 };
 
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
 void egl();
 
@@ -126,6 +126,6 @@ extern "C"{
 
 void b3();
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr);
+void nano(int Fnum,int leng,float *ptr,float *aptr);
 
 }
