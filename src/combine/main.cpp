@@ -80,7 +80,7 @@ $sngs[i]=Self+'songs/'+stxxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-// nxhttp.withCredentials=false;
+nxhttp.withCredentials=false;
 nxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 sngs(this);
@@ -133,7 +133,7 @@ $vids[i]=ar2;
   
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
+fxhttp.withCredentials=false;
 fxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
 vids(this);
@@ -160,14 +160,14 @@ document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3_egl');
 },300);
 setTimeout(function(){
-Module.ccall('b3');
-},500);
-setTimeout(function(){
-// Module.ccall('b3_egl');
+Module.ccall('str');
 },700);
+setTimeout(function(){
+Module.ccall('b3');
+},900);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
