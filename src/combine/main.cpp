@@ -164,15 +164,15 @@ setTimeout(function(){
 //},300);
 setTimeout(function(){
 Module.ccall('str');
-},700);
+},400);
 setTimeout(function(){
 Module.ccall('b3');
-},900);
+},1200);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},500);
+},1500);
 }
 
 function shds(xml){
