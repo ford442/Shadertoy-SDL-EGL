@@ -113,13 +113,13 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF64.buffer;
+const $H=Module.HEAPF32.buffer;
 var $S=parseInt(window.innerHeight,10);
 var w$=parseInt(window.innerHeight,10);
 var h$=parseInt(window.innerHeight,10);
-var la=h$*h$*8;
+var la=h$*h$*4;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float32Array($H,pointa,300);
 var sz=($S*$S)/8;
 var avag=0.750;
 var min=1.000;
@@ -131,7 +131,7 @@ var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -160,24 +160,23 @@ gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
 gl.getExtension('EGL_KHR_gl_colorspace');
-// gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
+gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
-gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
+// gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
-// gl.getExtension('EXT_gpu_shader5');
-// gl.getExtension('EXT_texture_filter_anisotropic');
+gl.getExtension('EXT_texture_filter_anisotropic');
 gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
 gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
 gl.disable(gl.DITHER);
-// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+gl.drawingBufferColorMetadata={mode:'extended'};
+gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
+// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
-
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -192,8 +191,6 @@ const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
-  
-  
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -201,9 +198,7 @@ var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
-  
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([$S,$S]);
-
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $amax=this.constants.amax;
@@ -216,35 +211,31 @@ var aveg=Aveg(p[3],ouT);
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
-  
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([$S,$S]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
-
-
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=($S*$S)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=77*la;
-var $B=new Float64Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
@@ -253,17 +244,17 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=(h$*w$)/8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);  // has to var?
+var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=66*la;
-var $B=new Float64Array($H,pointb,sz);  // has to var?
+var $B=new Float32Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
@@ -285,7 +276,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
