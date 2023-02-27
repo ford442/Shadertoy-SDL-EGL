@@ -3,8 +3,10 @@
 float simd_test(float a){
 float sum_arr[] = {a, a, 1.0, 1.0};
  double uu=a/2.0;
+ double ee=5.0/2.0;
+ 
  v128_t Input=wasm_f64x2_splat(uu);
- v128_t Add=wasm_f64x2_splat(5.0);
+ v128_t Add=wasm_f64x2_splat(ee);
 double nn=wasm_f64x2_add(uu,Add);
  
 v128_t ab=wasm_f32x4_splat(a);
