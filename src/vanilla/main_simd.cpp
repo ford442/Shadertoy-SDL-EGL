@@ -1,18 +1,19 @@
 #include "../../include/vanilla/main_simd.hpp"
 
-float simd_test(float a){
-float sum_arr[] = {a, a, 1.0, 1.0};
- double uu=a/2.0;
- double ee=5.0/2.0;
+float simd_test(float * a){
+// float sum_arr[] = {a, a, 1.0, 1.0};
  
- v128_t Input=wasm_f64x2_splat(uu);
- v128_t Add=wasm_f64x2_splat(ee);
-v128_t nn=wasm_f64x2_add(Input,Add);
+ // double uu=a/2.0;
+//  double ee=5.0/2.0;
+ 
+ // v128_t Input=wasm_f64x2_splat(uu);
+//  v128_t Add=wasm_f64x2_splat(ee);
+// v128_t nn=wasm_f64x2_add(Input,Add);
  
 // v128_t ab=wasm_f32x4_splat(a);
-wasm_v128_store(0,nn);
+// wasm_v128_store(0,nn);
 // wasm_v128_store(0,a);
-v128_t b=wasm_v128_load(0);
+v128_t b=wasm_v128_load(a);
 
 double c=wasm_f64x2_extract_lane(b,0);
 double d=wasm_f64x2_extract_lane(b,1);
@@ -31,7 +32,7 @@ return re;
 
 extern"C"{
   
-float js_simd(float aa){
+float js_simd(float * aa){
 float cc=simd_test(aa);
 return cc;
 }
@@ -55,8 +56,10 @@ const $H=Module.HEAPF64.buffer;
 const $P=Module.HEAPF64.subarray(0,4);
 $P.set(tst,0);
 console.log('Javascript HEAPF64: ',$H);
-
-var reslt=Module.ccall('js_simd',"Number",["Number"],[tsta]);
+var pointa=800;
+var sim=new Float64Array($H,pointa,4);
+sim.set(tst,0);
+var reslt=Module.ccall('js_simd',"Number",["Number"],[pointa]);
 
 console.log(reslt);
 }
