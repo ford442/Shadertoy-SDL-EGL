@@ -1,14 +1,5 @@
 #include "../../include/combine/video.hpp"
 
-extern "C" {
-
-void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
-clrclr(cllr,alp,avr);
-return;
-}
-
-}
-
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
