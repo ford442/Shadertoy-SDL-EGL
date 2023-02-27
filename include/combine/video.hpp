@@ -52,17 +52,10 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-
-void clrclr(GLclampf avrg,GLclampf drk,GLclampf brt);
-
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
-
-
 
 extern "C"{
   
-void clr(GLclampf cllr,GLclampf alp,GLclampf avr);
-
 void b3();
 
 void nano(short int Fnum,int leng,float *ptr,float *aptr);
