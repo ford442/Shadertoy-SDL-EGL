@@ -9,7 +9,7 @@ attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
-attr_js.premultipliedAlpha=EM_FALSE;
+attr_js.premultipliedAlpha=EM_TRUE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
 attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -114,8 +114,8 @@ emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_cull_distance");
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
-// glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
-// glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glViewport((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
+glScissor((GLint)0,(GLint)0,(GLsizei)Size,(GLsizei)Size);
 return;
 }
 
@@ -263,7 +263,7 @@ majorVersion:2,
 minorVersion:0
 });
 
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
