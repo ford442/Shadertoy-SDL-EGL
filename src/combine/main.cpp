@@ -252,6 +252,7 @@ slt=slt/100;tsl.setValues(slt);
 document.getElementById('menu').addEventListener('click',function(){
 var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });setTimeout(function(){slt=tem.innerHTML;},8);},16);});
+
 function loada(){
 var mv,lo;
 if(lockVid!=1){
@@ -341,7 +342,7 @@ return Rg;
 }
 
 int main(void){
-// "use strict";
+"use strict";
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
