@@ -2,7 +2,11 @@
 
 float simd_test(float a){
 float sum_arr[] = {a, a, 1.0, 1.0};
-
+ double uu=a/2.0;
+ v128_t Input=wasm_v128_load(uu);
+ v128_t Add=5.0;
+double nn=wasm_f64x2_add(uu,Add);
+ 
 v128_t ab=wasm_f32x4_splat(a);
 wasm_v128_store(0,ab);
 // wasm_v128_store(0,a);
@@ -18,11 +22,7 @@ float g=wasm_f32x4_extract_lane(f,0);
 // float e=(float)g;
 // return g;
 
-unsigned int tt;
-int mm=round(a);
-int yy=_rdrand32_step(&tt);
-int uu=_rdrand32_step(mm);
-return yy;
+return (float)nn;
 }
 
 extern"C"{
