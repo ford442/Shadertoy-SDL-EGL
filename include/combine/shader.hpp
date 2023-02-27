@@ -245,7 +245,7 @@ extern "C"{
   
 void b3_egl();
 
-void clr(GLclampf rlc,GLclampf alc,GLclampf avr);
+void clr(GLclampf,GLclampf,GLclampf);
 
 void str();
 
