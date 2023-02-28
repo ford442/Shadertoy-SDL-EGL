@@ -93,7 +93,7 @@ dxhttp.addEventListener("load", shds(this));
    
 //   dxhttp.onreadystatechange=function(){
 // if(this.readyState==4&&this.status==200){
-/ shds(this);
+// shds(this);
 // }
 //   };
    
