@@ -1,5 +1,7 @@
 #include "../../include/shader/shader.hpp"
 
+extern"C"{
+
 EM_BOOL mouse_call_click(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -18,6 +20,8 @@ x=e->clientX;
 y=e->clientY;
 }}
 return (EM_BOOL)1;
+}
+
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat shtime,GLint fram,GLfloat delt){
@@ -48,7 +52,6 @@ return;
 }
 
 void renderFrame(){
-
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
@@ -254,15 +257,20 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-GLchar * default_fragment_shader=read_file(fileloc);
+GLchar(* rf)(GLchar * filename);
+rf=&read_file;
+// GLchar * default_fragment_shader=read_file(fileloc);
+GLchar * default_fragment_shader=rf(fileloc);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
+
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
+
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
