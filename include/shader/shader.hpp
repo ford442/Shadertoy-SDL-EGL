@@ -15,11 +15,11 @@
 
 double_t wi,hi;
 
-float F=1.0f,Fm1=-1.0f;
+float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
 float_t F0=0.0f;
-double_t TtimeDelta;
+double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
 
-long double Ttime,Dm1=-1.0,D0=0.0,D=1.0;
+long double Ttime;
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -30,16 +30,12 @@ struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
 
-struct mouse{
-float msY,msX;
-GLclampf mX,mY,mm,nn,xx,yy,x,y;
-}ms;
-
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
+GLclampf mX,mY;
+GLclampf mm,nn;
 GLuint atb_pos;
-GLclampf gF=F,gF0=F0,gFm1=Fm1,y1y=F;
-GLclampf delt;
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
