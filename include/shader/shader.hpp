@@ -77,9 +77,9 @@ GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
-GLuint compile_shader(GLenum,GLsizei,const GLchar **);
+GLuint compile_shader(GLenum,GLsizei,GLchar **);
 
-GLchar * read_file(const GLchar *);
+GLchar * read_file(GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
