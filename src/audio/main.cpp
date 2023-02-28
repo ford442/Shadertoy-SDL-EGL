@@ -116,14 +116,12 @@ setTimeout(function(){slt=tem.innerHTML;},8);},16);});
            
 
 function spKey(e){
-if(e.code=='Space'){
-e.preventDefault();
-if(lockVid==0){lockVid=1;};
-if(lockVid==1){lockVid=0;};
+if(e.code=='KeyQ'){
+window.open('./flac');
+setTimeout(function(){
+snd();
+},150);
 };
-if(e.code=='KeyZ'){lockVid=1;};
-if(e.code=='KeyQ'){snd();};
-if(e.code=='KeyX'){lockVid=0;};
 }
 
 const pnnl=document.body;
