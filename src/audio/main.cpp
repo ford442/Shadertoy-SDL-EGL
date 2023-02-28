@@ -78,10 +78,10 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 function snd(){
 var sngsNum=$sngs[0];
 if(sngsNum>0){
-let randSong=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
+const randSong=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
 };
 // let randSong=Math.floor(($sngs[0]-5)*Math.random());
-let songSrc=$sngs[randSong+5];
+const songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
 const sng=new BroadcastChannel('sng');
 sng.postMessage({data:songSrc});
