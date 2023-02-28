@@ -117,7 +117,7 @@ document.getElementById('di').click();
 },500);
 });
 
-int main(){
+int main(void){
 
 "use strict";
 
