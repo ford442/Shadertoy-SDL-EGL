@@ -1,5 +1,7 @@
 #include "../../include/shader/main.hpp"
 
+extern"C"{
+
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -117,8 +119,9 @@ document.getElementById('di').click();
 },500);
 });
 
-int main(void){
+}
 
+int main(void){
 "use strict";
 
 EM_ASM({
@@ -126,7 +129,5 @@ FS.mkdir("/shader");
 });
 
 js_main();
-
-return 0;
-
+return 1;
 }
