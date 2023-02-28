@@ -93,11 +93,11 @@ dxhttp.addEventListener("load",function(){
 //   loaded=1;
 shds(this);
 });
-dxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200&&loaded==1){
-shds(this);
-}
-};
+// dxhttp.onreadystatechange=function(){
+// if(this.readyState==4&&this.status==200&&loaded==1){
+// shds(this);
+// }
+// };
    
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
