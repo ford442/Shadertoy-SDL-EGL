@@ -304,7 +304,9 @@ return;
 extern "C" {
 
 void str(){
-strt();
+void(*st)();
+st=&strt;
+st();
 return;
 }
 
