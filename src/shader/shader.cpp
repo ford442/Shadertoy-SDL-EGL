@@ -20,7 +20,7 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
+void uni(GLfloat xx,GLfloat yy,GLfloat shtime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 iFps=60.0/delt;
@@ -40,7 +40,7 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 }
-glUniform1f(uni_tme,stime);
+glUniform1f(uni_tme,shtime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
