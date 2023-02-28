@@ -72,7 +72,7 @@ glFinish();
 return;
 }
 
-GLchar * read_file(GLchar * filename){
+GLchar * read_file(const char * filename){
 GLchar * result=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
@@ -255,8 +255,8 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 // GLchar(* rf)(GLchar *);
 // rf=&read_file;
-GLchar * default_fragment_shader=read_file(fileloc);
-// GLchar * default_fragment_shader=rf(fileloc);
+GLchar * default_fragment_shader=read_file(filename);
+// GLchar * default_fragment_shader=rf(filename);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
