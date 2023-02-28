@@ -28,7 +28,7 @@ struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
 
-GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
+GLchar * fileloc="/shader/shader1.toy";
 GLint fram;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,shtime;
