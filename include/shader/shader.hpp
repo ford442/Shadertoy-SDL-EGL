@@ -32,8 +32,8 @@ struct timespec req={0,10416666};
 
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
-GLclampf mX,mY;
-GLclampf mm,nn;
+GLfloat mX,mY,mm,nn;
+GLfloat delt;
 GLuint atb_pos;
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
@@ -85,7 +85,7 @@ GLchar * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iFps,Size,iwi,ihi;
+int_fast32_t iFrame,iFps,sSize,iwi,ihi;
 // int iFrame,iFps,Size;
 
 void renderFrame();
