@@ -30,7 +30,7 @@ struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
 
-structmouse{
+struct mouse{
 float msY,msX;
 GLclampf mX,mY,mm,nn,xx,yy;
 }ms;
