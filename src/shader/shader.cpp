@@ -1,7 +1,5 @@
 #include "../../include/shader/shader.hpp"
 
-extern"C"{
-
 EM_BOOL mouse_call_click(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -20,8 +18,6 @@ x=e->clientX;
 y=e->clientY;
 }}
 return (EM_BOOL)1;
-}
-
 }
 
 void uni(GLfloat xx,GLfloat yy,GLfloat shtime,GLint fram,GLfloat delt){
@@ -60,7 +56,7 @@ std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-void(*un)(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
+void(*un)(GLfloat xx,GLfloat yy,GLfloat shtime,GLint fram,GLfloat delt);
 un=&uni;
 un();
 // uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
