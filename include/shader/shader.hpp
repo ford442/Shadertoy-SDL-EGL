@@ -24,7 +24,7 @@ std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
 
 struct timespec rem;
-struct timespec req={0,10416666};
+struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
 
