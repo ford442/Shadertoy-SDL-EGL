@@ -1,4 +1,3 @@
-// #include <avxintrin.h>  // AVX
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -22,7 +21,7 @@ double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
 
 long double Ttime;
 
-char * fileloc=(char*)"/shader/shader1.toy";
+GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -81,7 +80,7 @@ void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
-char32_t * read_file(const GLchar *);
+GLchar * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
