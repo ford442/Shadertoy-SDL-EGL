@@ -161,7 +161,8 @@ return;
 }
 
 EM_JS(void,vid,(),{
-
+  
+"use strict";
 
 var vv=document.getElementById("mv");
 var sh4d=true;
@@ -376,14 +377,13 @@ gl.getExtension('EXT_gl_colorspace_scrgb_linear');
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
-gl.blendColor(1.0,1.0,1.0,1.0);
+// gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
   
-// "use strict";
   
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
