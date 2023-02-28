@@ -188,7 +188,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([$S,$S]);
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
