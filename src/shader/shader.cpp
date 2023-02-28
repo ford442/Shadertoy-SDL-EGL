@@ -262,7 +262,7 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 // GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
-GLchar * default_fragment_shader=static_cast<GLchar *>(read_file(fileloc));
+GLchar * default_fragment_shader=dynamic_cast<GLchar *>(read_file(fileloc));
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
