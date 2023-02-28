@@ -48,6 +48,7 @@ return;
 }
 
 void renderFrame(){
+
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
@@ -56,7 +57,10 @@ std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
+void(*un)(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
+un=&uni;
+un();
+// uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
@@ -143,7 +147,7 @@ mX=0.5*S;
 mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
+emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
@@ -184,13 +188,13 @@ emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
-/// emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
-/// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
-/// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
-/// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
-/// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_linear");
-/// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear");
+emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
+/// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb");
+emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
+/// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
+/// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_linear");
+/// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
+// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
 // emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_multisample");
 // emscripten_webgl_enable_extension(ctx,"ARB_robustness");
 // emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
