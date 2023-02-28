@@ -1,5 +1,11 @@
 #include "../../include/audio/main.hpp"
 
+int rNd(int Th){
+std::srand(std::time(nullptr));
+int rD=std::rand()%Th;
+return rD;
+}
+
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -51,10 +57,13 @@ $sngs[i]=Self+'songs/'+txxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-nxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+nxhttp.addEventListener("load",function(){
 sngs(this);
-}};
+});
+// nxhttp.onreadystatechange=function(){
+// if(this.readyState==4&&this.status==200){
+// sngs(this);
+// }};
 nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
@@ -67,8 +76,12 @@ document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 
 function snd(){
-const randSong=Math.floor(($sngs[0]-5)*Math.random());
-const songSrc=$sngs[randSong+5];
+var sngsNum=$sngs[0];
+if(sngsNum>0){
+let randSong=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
+};
+// let randSong=Math.floor(($sngs[0]-5)*Math.random());
+let songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
 const sng=new BroadcastChannel('sng');
 sng.postMessage({data:songSrc});
@@ -78,7 +91,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},650);
+},150);
 });
 
 const tem=document.getElementById('tim');
@@ -109,6 +122,7 @@ if(lockVid==0){lockVid=1;};
 if(lockVid==1){lockVid=0;};
 };
 if(e.code=='KeyZ'){lockVid=1;};
+if(e.code=='KeyQ'){snd();};
 if(e.code=='KeyX'){lockVid=0;};
 }
 
@@ -118,7 +132,18 @@ pnnl.addEventListener('keydown',spKey);
 normalResStart();
 
 });
+
+extern"C"{
+ 
+int r4nd(int tH){
+int(* RnD)(int);
+RnD=&rNd;
+// int Rg=RnD(tH);
+return RnD(tH);
+}
   
+}
+
 int main(void){
   
 EM_ASM({
