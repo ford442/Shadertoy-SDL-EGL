@@ -14,8 +14,8 @@ return(EM_BOOL)1;
 static EM_BOOL mouse_call_move(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
+ms.x=e->clientX;
+ms.y=e->clientY;
 }}
 return (EM_BOOL)1;
 }
@@ -54,8 +54,8 @@ std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float
 TtimeDelta=time_spanb.count();
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
-ms.msX=ms.xx/S;
-ms.msY=(S-ms.yy)/S;
+ms.msX=ms.x/S;
+ms.msY=(S-ms.y)/S;
 uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
