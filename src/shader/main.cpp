@@ -1,5 +1,11 @@
 #include "../../include/shader/main.hpp"
 
+int rNd(int Th){
+std::srand(std::time(nullptr));
+int rD=std::rand()%Th;
+return rD;
+}
+
 extern"C"{
 
 EM_JS(void,js_main,(),{
@@ -119,6 +125,17 @@ document.getElementById('di').click();
 },500);
 });
 
+}
+
+extern"C"{
+ 
+int r4nd(int tH){
+int(* RnD)(int);
+RnD=&rNd;
+// int Rg=RnD(tH);
+return RnD(tH);
+}
+  
 }
 
 int main(void){
