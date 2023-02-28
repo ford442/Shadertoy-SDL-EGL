@@ -15,8 +15,6 @@
 
 double_t wi,hi;
 
-
-
 float F=1.0f,Fm1=-1.0f;
 float_t F0=0.0f;
 double_t TtimeDelta;
@@ -32,10 +30,12 @@ struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
 
-struct{
+struct mouse{
 float msY,msX;
 GLclampf mX,mY,mm,nn,xx,yy;
-}ms;
+};
+
+mouse ms;
 
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
