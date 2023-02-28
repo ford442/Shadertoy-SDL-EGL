@@ -18,7 +18,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},850);
+},250);
 }
   
 function pll(){
@@ -34,7 +34,7 @@ FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},50);
+},250);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -91,7 +91,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},450);
+},550);
 });
 
 const tem=document.getElementById('tim');
@@ -120,7 +120,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},250);
+},750);
 };
 }
 
