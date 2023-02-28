@@ -32,13 +32,14 @@ struct timespec req={0,10416666};
 
 struct mouse{
 float msY,msX;
-GLclampf mX,mY,mm,nn,xx,yy;
+GLclampf mX,mY,mm,nn,xx,yy,x,y;
 }ms;
 
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
 GLuint atb_pos;
 GLclampf gF=F,gF0=F0,gFm1=Fm1,y1y=F;
+GLclampf delt;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
