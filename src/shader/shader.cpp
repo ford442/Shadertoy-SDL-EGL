@@ -264,14 +264,16 @@ GLchar * default_fragment_shader=rf(fileloc);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
-
-vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
+GLuint(* cs)(GLenum type,GLsizei nsources,GLchar ** sources);
+cs=&compile_shader;
+vtx=cs(GL_VERTEX_SHADER,2,sources);
+// vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-
-frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
+frag=cs(GL_FRAGMENT_SHADER,4,sources);
+//frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
