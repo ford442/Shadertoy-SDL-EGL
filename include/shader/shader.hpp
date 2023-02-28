@@ -63,7 +63,7 @@ GLchar common_shader_header_gles3[]=
 "precision highp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
 "#pragma STDGL(invariant all)\n"
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;gl_PointSize=max(100.0/gl_Position.w,1.0);}\n";
+"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;gl_PointSize=1.0;}\n";
 GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
