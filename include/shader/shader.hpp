@@ -15,9 +15,7 @@
 
 double_t wi,hi;
 
-struct mouse{
-float cMouseY,cMouseX,mouseY,mouseX;
-};
+
 
 float F=1.0f,Fm1=-1.0f;
 float_t F0=0.0f;
@@ -34,12 +32,15 @@ struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
 
+struct ms{
+float msY,msX;
+GLclampf mX,mY,mm,nn,xx,yy;
+};
+
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
-GLclampf mX,mY;
-GLclampf mm,nn;
 GLuint atb_pos;
-GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
+GLclampf gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
