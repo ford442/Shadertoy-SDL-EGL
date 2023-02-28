@@ -2,7 +2,7 @@
 
 int rNd(int Th){
 std::srand(std::time(nullptr));
-int rD=std::rand()%Th;
+rD=std::rand()%Th;
 return rD;
 }
 
@@ -51,8 +51,11 @@ Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 }
-var randShade=Math.random();
-randShade=Math.floor($shds[0]*randShade)+5;
+// var randShade=Math.random();
+if(shadesNum>0){
+var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
+};
+// randShade=Math.floor($shds[0]*randShade)+5;
 let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
