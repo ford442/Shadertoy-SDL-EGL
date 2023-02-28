@@ -78,7 +78,7 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 function snd(){
 var sngsNum=$sngs[0];
 if(sngsNum>0){
-const randSong=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
+const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum])+5;
 };
 // let randSong=Math.floor(($sngs[0]-5)*Math.random());
 const songSrc=$sngs[randSong+5];
