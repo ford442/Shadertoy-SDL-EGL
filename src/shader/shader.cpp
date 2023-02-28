@@ -73,7 +73,7 @@ glFinish();
 return;
 }
 
-GLchar * read_file(const GLchar * filename){
+GLchar * read_file(GLchar * filename){
 GLchar * result=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
