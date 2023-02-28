@@ -17,10 +17,8 @@ double_t wi,hi;
 
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
 float_t F0=0.0f;
-double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
-
-long double Ttime;
-
+double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
+double_t D0=0.0;
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -31,9 +29,9 @@ struct timespec req={0,10416666};
 #include "../../include/shader/gl.hpp"
 
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
-
+GLint fram
 GLfloat mX,mY,mm,nn;
-GLfloat delt;
+GLfloat delt,stime;
 GLuint atb_pos;
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
@@ -85,7 +83,8 @@ GLchar * read_file(const GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iFps,sSize,iwi,ihi;
+int_fast32_t iFrame,iwi,ihi;
+GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
 void renderFrame();
