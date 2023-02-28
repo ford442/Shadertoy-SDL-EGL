@@ -20,7 +20,7 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
+void uni(GLfloat ms.xx,GLfloat ms.yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 iFps=60.0/delt;
@@ -28,15 +28,15 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_move);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 if(clk_l==true){
-const float xxx=xx;
-const float yyy=yy;
-mX=1.0-(xxx*Size);
-mY=1.0-(yyy*Size);
+const float xxx=ms.xx;
+const float yyy=ms.yy;
+ms.mX=1.0-(xxx*Size);
+ms.mY=1.0-(yyy*Size);
 clk_l=false;
 }
-mm=S*xx;
-nn=S*yy;
-glUniform4f(uni_mse,mm,nn,mX,mY);
+ms.mm=S*ms.xx;
+ms.nn=S*ms.yy;
+glUniform4f(uni_mse,ms.mm,ms.nn,ms.mX,ms.mY);
 }else{
 clk_l=true;
 }
@@ -54,8 +54,8 @@ std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float
 TtimeDelta=time_spanb.count();
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
-mouseX=x/S;
-mouseY=(S-y)/S;
+ms.msX=ms.xx/S;
+ms.msY=(S-ms.yy)/S;
 uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
@@ -141,8 +141,8 @@ emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=static_cast<int>(hi);
 S=static_cast<float>(Size);
   
-mX=0.5*S;
-mY=0.5*S;
+ms.mX=0.5*S;
+ms.mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
@@ -308,7 +308,6 @@ glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
 auto t1=std::chrono::steady_clock::now();
-  
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 // emscripten_set_main_loop(static_cast<void(*)()>(renderFrame,0,0));
   
