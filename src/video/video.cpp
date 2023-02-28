@@ -226,7 +226,7 @@ const $BB=Module.HEAPF32.buffer;
 var $S=parseInt(window.innerHeight,10);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*h$*4;
+var la=h$*w$*4;
 var pointa=77*la;
 var agav=new Float32Array($BB,pointa,300);
 var sz=(h$*w$)/8;
@@ -388,7 +388,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
-la=h$*h$*4;
+la=h$*w$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
 agav=new Float32Array($BB,pointa,300);
@@ -416,7 +416,7 @@ var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
 // t.setOutput([$S,$S]);
 // r.setOutput([$S,$S]);
-la=h$*h$*4;
+la=h$*w$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
 var agav=new Float32Array($BB,pointa,300);  // has to var?
@@ -457,7 +457,7 @@ reverseLoop();
 forwardLoop();
 };
 };
-},timFrm)}
+},16.6)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
