@@ -21,7 +21,6 @@ double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
 
 long double Ttime;
 
-GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -30,6 +29,8 @@ struct timespec rem;
 struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
+
+GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
 GLclampf mX,mY;
 GLclampf mm,nn;
