@@ -189,7 +189,7 @@ b3_audio:
 	emcc main.o audio.o -o a3020.js -std=c++2b -mtune=corei7-avx -fno-math-errno -O0 \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	-sEXPORTED_FUNCTIONS='["_main","_pl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 
 
