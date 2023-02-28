@@ -30,12 +30,10 @@ struct timespec req={0,10416666};
 
 #include "../../include/shader/gl.hpp"
 
-struct{
+structmouse{
 float msY,msX;
 GLclampf mX,mY,mm,nn,xx,yy;
-}mouse;
-
-mouse ms;
+}ms;
 
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
 
