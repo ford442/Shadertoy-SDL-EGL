@@ -253,7 +253,7 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-GLchar(* rf)(GLchar **);
+GLchar(* rf)(GLchar *);
 rf=&read_file;
 // GLchar * default_fragment_shader=read_file(fileloc);
 GLchar * default_fragment_shader=rf(fileloc);
