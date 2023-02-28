@@ -34,7 +34,7 @@ FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},750);
+},50);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -91,7 +91,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},750);
+},450);
 });
 
 const tem=document.getElementById('tim');
@@ -120,7 +120,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},750);
+},250);
 };
 }
 
