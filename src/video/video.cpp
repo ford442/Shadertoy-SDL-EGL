@@ -162,7 +162,6 @@ return;
 
 EM_JS(void,vid,(),{
 
-"use strict";
 
 var vv=document.getElementById("mv");
 var sh4d=true;
@@ -383,6 +382,8 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
+  
+"use strict";
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
