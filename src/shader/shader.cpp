@@ -30,8 +30,8 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=1.0-(xxx*Size);
-mY=1.0-(yyy*Size);
+mX=1.0-(xxx*sSize);
+mY=1.0-(yyy*sSize);
 clk_l=false;
 }
 mm=S*xx;
@@ -137,10 +137,8 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 // retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-  
-Size=static_cast<int>(hi);
-S=static_cast<float>(Size);
-  
+sSize=static_cast<int>(hi);
+S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -180,16 +178,12 @@ emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
 // emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
 // emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_framebuffer_object");
-
 emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
-
 // emscripten_webgl_enable_extension(ctx,"EGL_NV_memory_attachment");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
-  
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
-  
 /// emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
@@ -231,16 +225,13 @@ emscripten_webgl_enable_extension(ctx,"EXT_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_cull_distance");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 // emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
-
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glEnable(GL_POLYGON_OFFSET_LINE);
 // glEnable(GL_POLYGON_OFFSET_POINT);
 // glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
-  
 // glEnable(GL_PROGRAM_POINT_SIZE);  // invalid capability
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
@@ -250,9 +241,7 @@ glFrontFace(GL_CW);
 glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
-
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
@@ -261,7 +250,6 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-// GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
 GLchar * default_fragment_shader=read_file(fileloc);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
@@ -304,14 +292,12 @@ smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
-glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,Size,Size);
+glScissor((GLint)0,(GLint)0,sSize,sSize);
 auto t1=std::chrono::steady_clock::now();
-  
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 // emscripten_set_main_loop(static_cast<void(*)()>(renderFrame,0,0));
-  
 return;
 }
 
