@@ -29,9 +29,9 @@ struct timespec req={0,10416666};
 #include "../../include/shader/gl.hpp"
 
 GLchar * fileloc=(GLchar *)"/shader/shader1.toy";
-GLint fram
+GLint fram;
 GLfloat mX,mY,mm,nn;
-GLfloat delt,stime;
+GLfloat delt,shtime;
 GLuint atb_pos;
 GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
