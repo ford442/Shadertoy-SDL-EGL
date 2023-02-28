@@ -383,7 +383,8 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
   
-"use strict";
+// "use strict";
+  
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
