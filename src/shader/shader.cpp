@@ -99,7 +99,8 @@ return nullptr;
 GLuint compile_shader(GLenum type,GLsizei nsources,GLchar ** dsources){
 GLsizei srclens[nsources];
 for(i=0;i<nsources;i++){
-srclens[i]=(GLsizei)strlen(sources[i]);
+// srclens[i]=(GLsizei)strlen(sources[i]);
+srclens[i]=static_cast<GLsizei>(strlen(sources[i]));
 }
 shader=glCreateShader(type);
 glShaderSource(shader,nsources,sources,srclens);
@@ -136,8 +137,10 @@ eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 // retSa=emscripten_get_element_css_size("canvas",&wi,&hi);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=(int)hi;
-S=(float)Size;
+  
+Size=static_cast<int>(hi);
+S=static_cast<float>(Size);
+  
 mX=0.5*S;
 mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -233,8 +236,11 @@ glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
 
-glEnable(GL_POLYGON_OFFSET_FILL);
-glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
+// glEnable(GL_POLYGON_OFFSET_FILL);
+// glEnable(GL_POLYGON_OFFSET_LINE);
+// glEnable(GL_POLYGON_OFFSET_POINT);
+// glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
+  
 // glEnable(GL_PROGRAM_POINT_SIZE);  // invalid capability
 // glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
@@ -245,7 +251,7 @@ glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 
-// glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -255,7 +261,8 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
+// GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
+GLchar * default_fragment_shader=static_cast<GLchar *>(read_file(fileloc));
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
@@ -290,20 +297,21 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
-// smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
-// smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
-// smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
-// smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
+smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
+smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
+smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
+smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES,GL_NICEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
-
 auto t1=std::chrono::steady_clock::now();
+  
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
+// emscripten_set_main_loop(static_cast<void(*)()>(renderFrame,0,0));
+  
 return;
 }
 
