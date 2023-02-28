@@ -159,9 +159,9 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 
-//setTimeout(function(){
-//Module.ccall('b3_egl');
-//},300);
+setTimeout(function(){
+// Module.ccall('b3_egl');
+},300);
 setTimeout(function(){
 Module.ccall('str');
 },400);
