@@ -296,8 +296,8 @@ glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg ru
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,sSize,sSize);
 auto t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
-// emscripten_set_main_loop(static_cast<void(*)()>(renderFrame,0,0));
+// emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop(static_cast<void(*)()>(renderFrame,0,0));
 return;
 }
 
