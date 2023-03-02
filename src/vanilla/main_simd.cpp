@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main_simd.hpp"
 
-float simd_test(float * a){
+v128_t simd_test(float * a){
 // float sum_arr[] = {a, a, 1.0, 1.0};
  
  // double uu=a/2.0;
@@ -14,10 +14,9 @@ float simd_test(float * a){
 // wasm_v128_store(0,nn);
 // wasm_v128_store(0,a);
 v128_t b=wasm_v128_load(a);
-
-double c=wasm_f64x2_extract_lane(b,0);
-double d=wasm_f64x2_extract_lane(b,1);
- float re=c+d;
+// double c=wasm_f64x2_extract_lane(b,0);
+// double d=wasm_f64x2_extract_lane(b,1);
+//  float re=c+d;
 // v128_t d=wasm_v128_load(sum_arr);
  //  for(int i=0;i<3;i++){
 // v128_t f=wasm_i32x4_add(d,d);
@@ -27,14 +26,17 @@ double d=wasm_f64x2_extract_lane(b,1);
 // float e=(float)g;
 // return g;
 
-return re;
+return b;
 }
 
 extern"C"{
   
 float js_simd(float * aa){
-float cc=simd_test(aa);
-return cc;
+v128_t cc=simd_test(aa);
+double c=wasm_f64x2_extract_lane(cc,0);
+double d=wasm_f64x2_extract_lane(cc,1);
+float re=c+d;
+return re;
 }
   
 }
