@@ -55,7 +55,6 @@
 // int_fast32_t Size;
 int eglSize;
 double wi_js,hi_js;
-int iI;
 EGLContext contextegl_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
