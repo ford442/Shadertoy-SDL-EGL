@@ -167,9 +167,9 @@ EM_JS(void,vid,(),{
 var vv=document.getElementById("mv");
 var sh4d=true;
 var stp,Lstp;
-const stpInc=0.016;
+const stpInc=0.016666;
 var setTim;
-const timFrm=16.666;
+const timFrm=16.666666;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -275,7 +275,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(false).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -383,8 +383,6 @@ gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
-  
-  
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
