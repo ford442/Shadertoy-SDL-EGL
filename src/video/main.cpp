@@ -6,7 +6,6 @@ int rD=std::rand()%Th;
 return rD;
 }
 
-
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -168,8 +167,9 @@ loada();
 },$ldt);
 }
   
-document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
+
+document.getElementById('startBtn').addEventListener('click',function(){
 loada();
 normalResStart();
 });
