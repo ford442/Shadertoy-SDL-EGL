@@ -168,10 +168,11 @@ loada();
 }
   
 scanVideos();
-
-document.getElementById('startBtn').addEventListener('click',function(){
 loada();
 normalResStart();
+
+document.getElementById('startBtn').addEventListener('click',function(){
+
 });
 
 });
