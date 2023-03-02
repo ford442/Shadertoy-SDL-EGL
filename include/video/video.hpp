@@ -121,7 +121,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 };
 
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
+void avgFrm(short int,int,float *,float *);
 
 void egl();
 
@@ -136,6 +136,6 @@ extern "C"{
 
 void b3();
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr);
+void nano(short int,int,float *,float *);
 
 }
