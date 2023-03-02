@@ -118,7 +118,7 @@ glScissor((GLint)0,(GLint)0,eglSize,eglSize);
 return;
 }
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 max=0.0;
 min=1.0;
 sum=0.0;
@@ -153,7 +153,7 @@ return;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr){
+void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
