@@ -57,10 +57,9 @@ $vids[i]=Self+"video/"+txxt;
 
 function scanVideos(){
 var fxhttp=new XMLHttpRequest();
-fxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+fxhttp.addEventListener("load",function(){
 vids(this);
-}};
+});
 fxhttp.open("GET","video/",true);
 fxhttp.send();
 }
@@ -121,14 +120,10 @@ loadV.width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
-
 var mic=Math.round($sc*1000000);
-
 if(mic>0){
 var $pt=Module.ccall('r4nd','Number',['Number'],[mic]);
-// var $pt=Math.random()*mic;
 };
-  
 $pt=$pt*1000000;
 $pt=$pt/1000000;
 $pt=Math.round($pt);
@@ -144,12 +139,9 @@ $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
 var vidNum=($vids[0]-5);
-
 if(vidNum>0){
 var rnum=Module.ccall('r4nd','Number',['Number'],[vidNum]);
-// var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 };
-
 let vidSrc=$vids[rnum+5];
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
@@ -175,10 +167,10 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
+  
+document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 loada();
-
-document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
