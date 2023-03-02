@@ -261,7 +261,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-
 const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
