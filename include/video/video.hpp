@@ -55,7 +55,7 @@
 // int_fast32_t Size;
 int eglSize;
 double wi_js,hi_js;
-short int iI;
+int iI;
 EGLContext contextegl_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
@@ -121,7 +121,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 };
 
 
-void avgFrm(short int,int,float *,float *);
+void avgFrm(int,int,float *,float *);
 
 void egl();
 
@@ -136,6 +136,6 @@ extern "C"{
 
 void b3();
 
-void nano(short int,int,float *,float *);
+void nano(int,int,float *,float *);
 
 }
