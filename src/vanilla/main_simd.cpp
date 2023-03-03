@@ -2,18 +2,24 @@
 
 v128_t simd_test(float * a){
 // float sum_arr[] = {a, a, 1.0, 1.0};
- 
  // double uu=a/2.0;
 //  double ee=5.0/2.0;
- 
+ float m=a*2.0;
+ float n=a*3.0;
+ float o=a*4.0;
+ float p=a*5.0;
  // v128_t Input=wasm_f64x2_splat(uu);
 //  v128_t Add=wasm_f64x2_splat(ee);
 // v128_t nn=wasm_f64x2_add(Input,Add);
- 
 // v128_t ab=wasm_f32x4_splat(a);
 // wasm_v128_store(0,nn);
-// wasm_v128_store(0,a);
+wasm_v128_store(0,a);
+v128_t b1=wasm_i32x4_replace_lane(m,0);
+v128_t b2=wasm_i32x4_replace_lane(n,1);
+v128_t b3=wasm_i32x4_replace_lane(o,2);
+v128_t b4=wasm_i32x4_replace_lane(p,3);
 v128_t b=wasm_v128_load(a);
+v128_t tt=wasm_f32x4_add(b,b);
 // double c=wasm_f64x2_extract_lane(b,0);
 // double d=wasm_f64x2_extract_lane(b,1);
 //  float re=c+d;
@@ -21,21 +27,21 @@ v128_t b=wasm_v128_load(a);
  //  for(int i=0;i<3;i++){
 // v128_t f=wasm_i32x4_add(d,d);
 // float g=wasm_f32x4_extract_lane(f,0);
- 
  // }
 // float e=(float)g;
 // return g;
-
-return b;
+return tt;
 }
 
 extern"C"{
   
 float js_simd(float * aa){
 v128_t cc=simd_test(aa);
-double c=wasm_f64x2_extract_lane(cc,0);
-double d=wasm_f64x2_extract_lane(cc,1);
-float re=c+d;
+double c=wasm_f32x4_extract_lane(cc,0);
+double d=wasm_f32x4_extract_lane(cc,1);
+double ce=wasm_f32x4_extract_lane(cc,2);
+double de=wasm_f32x4_extract_lane(cc,3);
+float re=c+d+ce+de;
 return re;
 }
   
@@ -54,15 +60,14 @@ document.getElementById('di').click();
 },950);
 var tsta=document.getElementById('smd').innerHTML;
 var tst=[tsta,tsta,tsta,tsta];
-const $H=Module.HEAPF64.buffer;
-const $P=Module.HEAPF64.subarray(0,4);
+const $H=Module.HEAPF32.buffer;
+const $P=Module.HEAPF32.subarray(0,4);
 $P.set(tst,0);
-console.log('Javascript HEAPF64: ',$H);
+console.log('Javascript HEAPF32: ',$H);
 var pointa=800;
-var sim=new Float64Array($H,pointa,4);
+var sim=new Float32Array($H,pointa,4);
 sim.set(tst,0);
 var reslt=Module.ccall('js_simd',"Number",["Number"],[pointa]);
-
 console.log(reslt);
 }
   
