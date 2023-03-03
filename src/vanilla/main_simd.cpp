@@ -9,20 +9,19 @@ float n=a[0]*3.0;v128_t k=wasm_f32x4_splat(n);
 float o=a[0]*4.0;v128_t j=wasm_f32x4_splat(o);
 float p=a[0]*5.0;v128_t ii=wasm_f32x4_splat(p);
 
-
-
  // v128_t Input=wasm_f64x2_splat(uu);
 //  v128_t Add=wasm_f64x2_splat(ee);
 // v128_t nn=wasm_f64x2_add(Input,Add);
 // v128_t ab=wasm_f32x4_splat(a);
 // wasm_v128_store(0,nn);
-wasm_v128_store(0,a);
-v128_t b1=wasm_i32x4_replace_lane(ii,0,0);
-v128_t b2=wasm_i32x4_replace_lane(j,1,0);
-v128_t b3=wasm_i32x4_replace_lane(k,2,0);
-v128_t b4=wasm_i32x4_replace_lane(l,3,0);
-v128_t b=wasm_v128_load(0);
-v128_t tt=wasm_f32x4_add(b,b);
+v128_t b5;
+v128_t b1=wasm_i32x4_replace_lane(b5,0,0);
+v128_t b2=wasm_i32x4_replace_lane(b5,1,0);
+v128_t b3=wasm_i32x4_replace_lane(b5,2,0);
+v128_t b4=wasm_i32x4_replace_lane(b5,3,0);
+// wasm_v128_store(0,b5);
+// v128_t b=wasm_v128_load(0);
+v128_t tt=wasm_f32x4_add(b5,b5);
 // double c=wasm_f64x2_extract_lane(b,0);
 // double d=wasm_f64x2_extract_lane(b,1);
 //  float re=c+d;
