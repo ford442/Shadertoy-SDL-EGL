@@ -14,10 +14,10 @@ v128_t simd_test(float * a){
 // v128_t ab=wasm_f32x4_splat(a);
 // wasm_v128_store(0,nn);
 wasm_v128_store(0,a);
-v128_t b1=wasm_i32x4_replace_lane(m,0);
-v128_t b2=wasm_i32x4_replace_lane(n,1);
-v128_t b3=wasm_i32x4_replace_lane(o,2);
-v128_t b4=wasm_i32x4_replace_lane(p,3);
+v128_t b1=wasm_i32x4_replace_lane(m,0,0);
+v128_t b2=wasm_i32x4_replace_lane(n,1,0);
+v128_t b3=wasm_i32x4_replace_lane(o,2,0);
+v128_t b4=wasm_i32x4_replace_lane(p,3,0);
 v128_t b=wasm_v128_load(a);
 v128_t tt=wasm_f32x4_add(b,b);
 // double c=wasm_f64x2_extract_lane(b,0);
