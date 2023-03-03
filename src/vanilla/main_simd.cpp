@@ -39,10 +39,10 @@ extern"C"{
   
 float js_simd(float * aa){
 v128_t cc=simd_test(aa);
-double c=wasm_f32x4_extract_lane(cc,0);
-double d=wasm_f32x4_extract_lane(cc,1);
-double ce=wasm_f32x4_extract_lane(cc,2);
-double de=wasm_f32x4_extract_lane(cc,3);
+float c=wasm_f32x4_extract_lane(cc,0);
+float d=wasm_f32x4_extract_lane(cc,1);
+float ce=wasm_f32x4_extract_lane(cc,2);
+float de=wasm_f32x4_extract_lane(cc,3);
 float re=c+d+ce+de;
 return re;
 }
