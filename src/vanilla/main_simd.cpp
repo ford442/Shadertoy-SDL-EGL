@@ -4,10 +4,13 @@ v128_t simd_test(float * a){
 // float sum_arr[] = {a, a, 1.0, 1.0};
  // double uu=a/2.0;
 //  double ee=5.0/2.0;
- float m=a*2.0;
- float n=a*3.0;
- float o=a*4.0;
- float p=a*5.0;
+float m=a*2.0;v128_t l=wasm_f32x4_splat(m);
+float n=a*3.0;v128_t k=wasm_f32x4_splat(n);
+float o=a*4.0;v128_t j=wasm_f32x4_splat(o);
+float p=a*5.0;v128_t ii=wasm_f32x4_splat(p);
+
+
+
  // v128_t Input=wasm_f64x2_splat(uu);
 //  v128_t Add=wasm_f64x2_splat(ee);
 // v128_t nn=wasm_f64x2_add(Input,Add);
