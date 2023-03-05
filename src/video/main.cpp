@@ -168,9 +168,9 @@ loada();
 }
   
 scanVideos();
-
-document.getElementById('startBtn').addEventListener('click',function(){
 loada();
+document.getElementById('startBtn').addEventListener('click',function(){
+
 normalResStart();
 });
 
