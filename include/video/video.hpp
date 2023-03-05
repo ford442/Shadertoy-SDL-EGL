@@ -124,12 +124,12 @@ void avgFrm(int,int,float *,float *);
 
 void egl();
 
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
 
 extern "C"{
 
