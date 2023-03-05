@@ -143,13 +143,13 @@ b3_shader_llvm:
 
 b3_video_test:
 	 em++ src/video/main.cpp -c -O3 -fpie -fno-rtti \
-	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/video/video.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
-	 emcc main.o video.o -o b3020.js -O0 -fpie -std=c++20 -stdlib=libc++ -fno-math-errno -flto=thin \
+	 emcc main.o video.o -o b3020.js -O0 -fpie -std=c++20 -fno-math-errno -flto=thin \
 	 -fwasm-exceptions \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
@@ -157,7 +157,7 @@ b3_video_test:
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
