@@ -37,6 +37,8 @@ extern"C"{
   
 float js_simd(float * aa){
 v128_t cc=simd_test(aa);
+     wasm_v128_store(&out[i], prod);
+
 float c=wasm_f32x4_extract_lane(cc,0);
 float d=wasm_f32x4_extract_lane(cc,1);
 float ce=wasm_f32x4_extract_lane(cc,2);
@@ -59,7 +61,7 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },950);
 var tsta=document.getElementById('smd').innerHTML;
-var tst=[tsta,tsta,tsta,tsta];
+var tst=[tsta,10.0,10.0,10.0];
 const $H=Module.HEAPF32.buffer;
 const $P=Module.HEAPF32.subarray(0,4);
 $P.set(tst,0);
