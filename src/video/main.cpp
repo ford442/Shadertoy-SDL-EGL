@@ -61,7 +61,7 @@ $vids[i]=ar2;
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
 fxhttp.withCredentials=false;
-dxhttp.addEventListener("load",function(){
+fxhttp.addEventListener("load",function(){
 vids(this);
 });
 let vidMenua1=document.getElementById('vi1').value;
