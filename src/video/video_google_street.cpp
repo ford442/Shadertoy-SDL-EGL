@@ -496,7 +496,7 @@ var inh=window.innerHeight;
 var $S=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
-var la=h$*h$*8;
+var la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float64Array($H,pointa,300);
 var sz=(h$*w$)/8;
@@ -691,7 +691,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
 agav=new Float64Array($H,pointa,300);
@@ -712,16 +712,12 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var 
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
-// t.setOutput([$S,$S]);
-// r.setOutput([$S,$S]);
-la=h$*h$*8;
+la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
 var agav=new Float64Array($H,pointa,300);  // has to var?
