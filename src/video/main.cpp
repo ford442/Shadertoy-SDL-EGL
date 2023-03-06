@@ -130,7 +130,7 @@ $high.innerHTML=winSize;
 bezl.height=winSize;
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-document.getElementById('ldv').height=winSize;
+// document.getElementById('ldv').height=winSize;
 loadV.width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
