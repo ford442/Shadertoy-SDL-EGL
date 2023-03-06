@@ -60,11 +60,10 @@ $vids[i]=ar2;
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
-fxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+fxhttp.withCredentials=false;
+dxhttp.addEventListener("load",function(){
 vids(this);
-};};
+});
 let vidMenua1=document.getElementById('vi1').value;
 if(vidMenua1!='Default'){
 var looc=vidMenua1+'video/';
