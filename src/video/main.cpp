@@ -121,7 +121,7 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 function loada(){
 var mv,lo;
 if(lockVid!=1){
-$high.innerHTML=parseInt(window.innerHeight,10);
+// $high.innerHTML=parseInt(window.innerHeight,10);
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
