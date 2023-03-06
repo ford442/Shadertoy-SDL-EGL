@@ -223,9 +223,15 @@ const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
 const $BB=Module.HEAPF64.buffer;
-var $S=parseInt(window.innerHeight,10);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+// var $S=parseInt(window.innerHeight,10);
+// var w$=parseInt(document.getElementById("wid").innerHTML,10);
+// var h$=parseInt(document.getElementById("hig").innerHTML,10);
+  
+var inh=window.innerHeight;
+var $S=parseInt(inh,10);
+var w$=parseInt(inh,10);
+var h$=parseInt(inh,10);
+  
 var la=h$*w$*8;
 var pointa=77*la;
 var agav=new Float64Array($BB,pointa,300);
