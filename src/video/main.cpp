@@ -42,24 +42,40 @@ pnnl.addEventListener('keydown',spKey);
 var $vids=[];
 
 function vids(xml){
-var vparser=new DOMParser();
-var htmlDoc=vparser.parseFromString(xml.responseText,"text/html");
-var preList=htmlDoc.getElementsByTagName("pre")[0].getElementsByTagName("a");
+const vparser=new DOMParser();
+const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
+const preList=htmlDocv.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $vids[0]=preList.length;
-for (var i=1;i<preList.length;i++){
-var txxt=preList[i].href;
+for(var i=1;i<preList.length;i++){
+var vtxxt=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
-txxt=txxt.replace(Self,"");
-$vids[i]=Self+"video/"+txxt;
-}}
+vtxxt=vtxxt.replace(Self,"");
+let vidMenu1=document.getElementById('vi1').value;
+let ar1=vidMenu1+'video/'+vtxxt;
+let ar2=Self+'video/'+vtxxt;
+if(vidMenu1!='Default'){
+$vids[i]=ar1;
+}else{
+$vids[i]=ar2;
+};
+};
+}
 
 function scanVideos(){
-var fxhttp=new XMLHttpRequest();
-fxhttp.addEventListener("load",function(){
+const fxhttp=new XMLHttpRequest();
+// fxhttp.withCredentials=false;
+fxhttp.onreadystatechange=function(){
+if(this.readyState==4&&this.status==200){
 vids(this);
-});
-fxhttp.open("GET","video/",true);
+};};
+let vidMenua1=document.getElementById('vi1').value;
+if(vidMenua1!='Default'){
+var looc=vidMenua1+'video/';
+}else{
+var looc='video/';
+};
+fxhttp.open('GET',looc,true);
 fxhttp.send();
 }
 
