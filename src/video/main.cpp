@@ -125,13 +125,11 @@ if(lockVid!=1){
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-// document.getElementById('ldv').height=parseInt(window.innerHeight,10);
-// document.getElementById('ldv').width=this.videoWidth;
-// document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
-// document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var nn=window.innerHeight;
-document.getElementById('wid').innerHTML=parseInt(nn,10);
-document.getElementById('hig').innerHTML=parseInt(nn,10);
+document.getElementById('ldv').height=parseInt(nn,10);
+document.getElementById('ldv').width=this.videoWidth;
+// document.getElementById('wid').innerHTML=this.videoWidth;
+// document.getElementById('hig').innerHTML=this.videoHeight;
   
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
