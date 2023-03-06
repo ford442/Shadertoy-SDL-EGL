@@ -14,14 +14,10 @@ const bezl=document.getElementById('circle');
 window.scroll(0,0);
 const switchy=document.getElementById('di');
 var vide=document.querySelectorAll('video');
-var mV=document.getElementById('mv');
-var loadV=document.getElementById('ldv');
 let $tim=document.getElementById('tim');
 let $itim=document.getElementById('itim');
-let $high=document.getElementById('canvasSize');
-let winSize=parseInt(window.innerHeight,10);
-$high.innerHTML=winSize;
-bezl.height=winSize;
+$document.getElementById('canvasSize').innerHTML=parseInt(window.innerHeight,10);
+bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
 var lockVid=0;
@@ -125,13 +121,12 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 function loada(){
 var mv,lo;
 if(lockVid!=1){
-winSize=parseInt(window.innerHeight,10);
-$high.innerHTML=winSize;
-bezl.height=winSize;
+$high.innerHTML=parseInt(window.innerHeight,10);
+bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-// document.getElementById('ldv').height=winSize;
-loadV.width=this.videoWidth;
+document.getElementById('ldv').height=parseInt(window.innerHeight,10);
+// document.getElementById('ldv').width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
@@ -146,7 +141,6 @@ $pt=$pt/1000000;
 document.getElementById('idur').innerHTML=mic/1000000;
 document.getElementById('itim').innerHTML=$pt;
 });
-winSize=parseInt(window.innerHeight,10);
 $lt=Math.round(tem.innerHTML);
 var $ldt=$tim.innerHTML;
 var $ls=$lt/1000;
@@ -163,8 +157,8 @@ var he=document.getElementById('hig').innerHTML;
 var wi=document.getElementById('wid').innerHTML;
 var r$=he/$h;
 var $w=wi/r$;
-var $hi=he-winSize;
-if($hi>1){$h=winSize;var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
+var $hi=he-parseInt(window.innerHeight,10);
+if($hi>1){$h=parseInt(window.innerHeight,10);var $r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;}
 var $hg=$h+'px';
 mv=vide[0].id;
 lo=vide[1].id;
