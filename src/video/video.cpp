@@ -118,13 +118,13 @@ glScissor((GLint)0,(GLint)0,eglSize,eglSize);
 return;
 }
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-max=0.0;
-min=1.0;
-sum=0.0;
-avgSum=0.0;
-minSum=0.0;
-maxSum=0.0;
+void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
 for(int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];
