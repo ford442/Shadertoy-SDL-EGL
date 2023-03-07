@@ -24,10 +24,10 @@ const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 pll();
-},1500);
+},500);
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},2000);
+},800);
 });
 
 const bezl=document.getElementById('circle');
@@ -80,11 +80,10 @@ $sngs[i]=Self+'songs/'+stxxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-// nxhttp.withCredentials=false;
-nxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+nxhttp.withCredentials=false;
+nxhttp.addEventListener("load",function(){
 sngs(this);
-};};
+});
 nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
@@ -130,11 +129,10 @@ $vids[i]=ar2;
   
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-// fxhttp.withCredentials=false;
-fxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+fxhttp.withCredentials=false;
+fxhttp.addEventListener("load",function(){
 vids(this);
-};};
+});
 let vidMenua1=document.getElementById('vi1').value;
 if(vidMenua1!='Default'){
 var looc=vidMenua1+'video/';
@@ -157,7 +155,7 @@ document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 
 setTimeout(function(){
-// Module.ccall('b3_egl');
+Module.ccall('b3_egl');
 },300);
 setTimeout(function(){
 Module.ccall('str');
@@ -218,11 +216,10 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
-dxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+dxhttp.withCredentials=false;
+dxhttp.addEventListener("load",function(){
 shds(this);
-};};
+});
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
