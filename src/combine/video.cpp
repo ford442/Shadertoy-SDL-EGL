@@ -1,12 +1,12 @@
 #include "../../include/combine/video.hpp"
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+max=0.0;
+min=1.0;
+sum=0.0;
+avgSum=0.0;
+minSum=0.0;
+maxSum=0.0;
 for(int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];
@@ -52,7 +52,7 @@ var stp,Lstp;
 const stpInc=0.016;
 var setTim;
 // const timFrm=16.666;
-const timFrm=20;
+const timFrm=10.42;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -104,13 +104,14 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF32.buffer;
-var $S=parseInt(window.innerHeight,10);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*h$*4;
+const $H=Module.HEAPF64.buffer;
+var inh=window.innerHeight;
+var $S=parseInt(inh,10);
+var w$=parseInt(inh,10);
+var h$=parseInt(inh,10);
+var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,300);
 var sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
@@ -122,7 +123,7 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float32',
+colorType:'float64',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -133,7 +134,7 @@ precision:'highp',
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
-premultipliedAlpha:true,
+premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
@@ -151,7 +152,7 @@ gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EGL_HI_colorformats');
 gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
 gl.getExtension('EGL_KHR_gl_colorspace');
-gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
+// gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
@@ -209,24 +210,24 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
-la=h$*h$*4;
+la=h$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
@@ -235,17 +236,17 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
-la=h$*h$*4;
+la=h$*h$*8;
 sz=(h$*w$)/8;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);  // has to var?
+var agav=new Float64Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);  // has to var?
+var $B=new Float64Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
