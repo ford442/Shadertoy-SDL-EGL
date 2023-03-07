@@ -212,19 +212,19 @@ glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
       
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-glBlendEquationSeparate(GL_MIN,GL_MAX);
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendEquationSeparate(GL_MIN,GL_MAX);
       
       glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
       glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+// glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanosleep(&req,&rem);
 GLchar * default_fragment_shader=read_file(filename);
 nanosleep(&req,&rem);
