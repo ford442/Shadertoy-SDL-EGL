@@ -238,13 +238,6 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
-
 void egl();
 
 extern "C"{
