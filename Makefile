@@ -39,7 +39,7 @@ b3_combine:
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_test:
 	 em++ src/combine/main.cpp -c -O3 -std=c++11 -stdlib=libc++ -fpie \
@@ -61,7 +61,7 @@ b3_combine_test:
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_shader:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
@@ -94,19 +94,19 @@ b3_shader_simd:
 
 b3_shader_test:
 	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
-	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
+	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=c++20 -fno-fast-math -ffp-contract=off \
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -O0 --closure 0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3021.js -O0 --closure 0 -fpie -std=c++20 -stdlib=libc++ -fno-math-errno -ffp-contract=off \
 	 -fwasm-exceptions -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
-	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=1 \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
+	 -fuse-ld=mold -fwhole-program -polly -sWASMFS=1 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
@@ -155,7 +155,7 @@ b3_video_test:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_test:
 	em++ src/audio/main.cpp -c -std=c++2b -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
@@ -187,7 +187,7 @@ b3_video_google_test:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_google:
 	 em++ src/video/main_google_street.cpp -c -std=c++20
@@ -198,7 +198,7 @@ b3_video_google:
 	 -sALLOW_MEMORY_GROWTH=1 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=4096mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano","_str","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js startUp.js --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js startUp.js --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=c++11 -fno-math-errno -O0
