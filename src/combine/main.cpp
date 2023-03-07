@@ -90,9 +90,6 @@ nxhttp.send();
 }
 
 function snd(){
-
-//var randSong=Math.floor(($sngs[0]-5)*Math.random());
-
 var songsNum=$sngs[0]-5;
 if(songNum>0){
 var randSong=Module.ccall('r4nd','Number',['Number'],[songsNum]);
@@ -187,14 +184,10 @@ Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 };
-
 let shadesNum=$shds[0];
-// var randShade=Math.random();
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum]);
 };
-// randShade=Math.floor($shds[0]*randShade)+5;
-
 var shdMenu=document.getElementById('sh1');
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
@@ -217,7 +210,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-   normalResStart();
+normalResStart();
 },350);
 };};
 ff.send(null);
@@ -268,7 +261,6 @@ document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 
-// var $pt=Math.random()*mic;
 if(mic>0){
 var $pt=Module.ccall('r4nd','Number',['Number'],[mic]);
 };
@@ -289,7 +281,6 @@ $ls=Math.round($ls);
 $ls=$ls/1000;
 
 var vidsNum=$vids[0]-5;
-// var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
 if(vidsNum>0){
 var rnum=Module.ccall('r4nd','Number',['Number'],[vidsNum]);
 var vidSrc=$vids[rnum+5];
@@ -348,5 +339,5 @@ FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
 js_main();
-return 0;
-};
+return 1;
+}
