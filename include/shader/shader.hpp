@@ -14,7 +14,7 @@
 // #include <stdfloat>  //  c++23
 
 // double_t wi,hi;
-long double wi,hi;
+double wi,hi;
 
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
 // float_t F0=0.0f;
