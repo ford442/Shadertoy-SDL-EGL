@@ -1,4 +1,5 @@
 #pragma once
+
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #undef FLT_EVAL_METHOD
@@ -28,4 +29,5 @@
 #include <EGL/eglplatform.h>
 
 #include <webgl/webgl2.h>
+
 // #include <emscripten/html5_webgl.h>
