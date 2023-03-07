@@ -63,8 +63,8 @@ GLchar common_shader_header_gles3[]=
 "#pragma optionNV(fastmath off)\n"
 "#pragma STDGL(fastprecision off)\n"
 "#pragma optionNV(fastprecision off)\n"
-"#pragma STDGL(unroll all)\n"
-"#pragma optionNV(unroll all)\n"
+"#pragma STDGL(unroll none)\n"
+"#pragma optionNV(unroll none)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
@@ -80,8 +80,8 @@ GLchar common_shader_header_gles3[]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
-"#pragma optionNV(invariant none)\n"
-"#pragma STDGL(invariant none)\n"
+"#pragma optionNV(invariant all)\n"
+"#pragma STDGL(invariant all)\n"
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;gl_PointSize=1.0;}\n";
 GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform highp vec4 iDate;uniform float iChannelTime[4];"
