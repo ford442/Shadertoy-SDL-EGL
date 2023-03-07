@@ -15,6 +15,7 @@
 
 char flnm[24];
 SDL_AudioDeviceID dev;
+int r;
 
 struct{
 Uint8 * snd;
