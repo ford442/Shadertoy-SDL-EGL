@@ -72,7 +72,6 @@ b3_shader:
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
-
 b3_shader_google:
 	 em++ src/shader/main.cpp -c -std=gnu++2a
 	 em++ src/shader/shader_google_street.cpp -c -std=gnu++2a \
@@ -84,7 +83,6 @@ b3_shader_google:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
-
 b3_shader_simd:
 	 em++ src/shader/main.cpp -c -std=c++11
 	 em++ src/shader/shader_simd.cpp -c -std=c++20 -msimd128 -mavx
@@ -93,7 +91,6 @@ b3_shader_simd:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
-
 
 b3_shader_test:
 	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
@@ -140,7 +137,6 @@ b3_shader_llvm:
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
-
 b3_video_test:
 	 em++ src/video/main.cpp -c -O3 -fpie -fno-rtti \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
@@ -159,7 +155,7 @@ b3_video_test:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_test:
 	em++ src/audio/main.cpp -c -std=c++2b -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
@@ -176,13 +172,19 @@ b3_audio_test:
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 
-b3_video:
-	 em++ src/video/main.cpp -c -std=c++20
-	 em++ src/video/video.cpp -c -std=c++20 \
+b3_video_google_test:
+	 em++ src/video/main.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
+	 em++ src/video/video.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o video.o -o b3020.js -std=c++20 \
+	 emcc main.o video.o -o b3020.js -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
+	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
@@ -207,8 +209,6 @@ b3_audio:
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 
-
-
 b3_fire:
 	 em++ src/fire/main.cpp -c -std=c++2a
 	 em++ src/fire/fire.cpp -c -std=c++2a
@@ -217,7 +217,6 @@ b3_fire:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
-
 
 b3_vanilla:
 	 em++ src/vanilla/main.cpp -c -std=c++2a
@@ -254,7 +253,6 @@ b3_vanilla_test:
 	 -mcpu=bleeding-edge -fpie -flto=thin -ffunction-sections -fdata-sections \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
-
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0
 	 emcc main.o -o v3020.js -mllvm -O0 -flto=thin \
@@ -264,7 +262,6 @@ b3_vanilla_llvm:
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=mold \
 	 --pre-js rSlider.js --pre-js slideOut.js
-
 
 b3hdm:
 	 em++ src/b3ogl.cpp -c -std=c++2a -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
@@ -276,7 +273,6 @@ b3hdm:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
-
 
 sh4d3:
 	 em++ src/b3ogl_sh4d3.cpp -c -fno-math-errno -fPIC -fexperimental-library \
