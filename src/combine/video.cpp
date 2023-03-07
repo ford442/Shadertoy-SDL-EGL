@@ -181,7 +181,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(false).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -227,7 +227,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
 // eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var jhj=0.0;$"+j+".fill(jhj);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
