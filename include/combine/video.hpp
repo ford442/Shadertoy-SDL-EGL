@@ -54,6 +54,13 @@
 
 void avgFrm(short int,int,float *,float *);
 
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
 extern "C"{
   
 void b3();
