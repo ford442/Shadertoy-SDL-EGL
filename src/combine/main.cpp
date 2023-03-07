@@ -80,7 +80,7 @@ $sngs[i]=Self+'songs/'+stxxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-nxhttp.withCredentials=false;
+// nxhttp.withCredentials=false;
 nxhttp.addEventListener("load",function(){
 sngs(this);
 });
@@ -129,7 +129,7 @@ $vids[i]=ar2;
   
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-fxhttp.withCredentials=false;
+// fxhttp.withCredentials=false;
 fxhttp.addEventListener("load",function(){
 vids(this);
 });
@@ -214,7 +214,7 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-dxhttp.withCredentials=false;
+// dxhttp.withCredentials=false;
 dxhttp.addEventListener("load",function(){
 shds(this);
 });
