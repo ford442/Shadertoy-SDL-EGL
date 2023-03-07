@@ -46,6 +46,13 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 GLchar * sources[4];
 GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
+"#extension EGL_KHR_gl_colorspace : enable\n"
+"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
+"#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
+"#extension EGL_EXT_gl_colorspace_bt2020_linear : enable\n"
+"#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
+"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
@@ -69,12 +76,13 @@ GLchar common_shader_header_gles3[]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
+"#pragma optionNV(invariant all)\n"
 "#pragma STDGL(invariant all)\n"
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;gl_PointSize=1.0;}\n";
 GLchar fragment_shader_header_gles3[]=
-"uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
+"uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform highp vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform lowp float iSampleRate;"
+"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform highp float iSampleRate;"
 "out highp vec4 fragColor;\n";
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
