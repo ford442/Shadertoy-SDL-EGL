@@ -104,7 +104,7 @@ GLchar * read_file(GLchar *);
 #include "../../include/shader/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
-long iFrame,iwi,ihi;
+long long iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
