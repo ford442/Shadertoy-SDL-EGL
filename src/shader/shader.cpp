@@ -138,7 +138,6 @@ sSize=static_cast<int>(hi);
 S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
-
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"ARB_texture_float");
@@ -146,7 +145,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 // emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
 // emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
-// emscripten_webgl_enable_extension(ctx,"GL_OES_draw_buffers_indexed");
+// emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
@@ -176,7 +175,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx,"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"ARB_compatibility");
 emscripten_webgl_enable_extension(ctx,"ARB_compute_shader");
-// emscripten_webgl_enable_extension(ctx,"ARB_enhanced_layouts");
+emscripten_webgl_enable_extension(ctx,"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(ctx,"ARB_tessellation_shader");
 // emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_multisample");
 // emscripten_webgl_enable_extension(ctx,"EXT_geometry_shader");
@@ -187,8 +186,8 @@ emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
 // emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
-// emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
-// emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
+emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
+emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
@@ -201,7 +200,7 @@ glClearDepth(D);
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
   //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
+glPolygonOffset((GLfloat)0.01f,(GLfloat)100.0f);
 
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
@@ -214,12 +213,12 @@ glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
       
-// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendEquationSeparate(GL_MIN,GL_MAX);
+glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+glBlendEquationSeparate(GL_MIN,GL_MAX);
       
       glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
       glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-// glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+// glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
