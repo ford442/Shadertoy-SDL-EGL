@@ -613,7 +613,7 @@ gl.disable(gl.DITHER);
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gl.blendEquationSeparate(gl.FUNC_ADD,gl.MIN);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
