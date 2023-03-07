@@ -194,19 +194,19 @@ glDepthFunc(GL_LESS);
 glClearDepth(D);
       
 glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-glEnable(GL_FOG);
+// glEnable(GL_FOG);
 // glFog(GL_FOG_MODE,GL_EXP2);
       
 glEnable(GL_POLYGON_OFFSET_POINT);
 glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
-      glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
+  //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
 glEnable(GL_POLYGON_OFFSET_FILL);
 glEnable(GL_POLYGON_SMOOTH);
-      glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
+  //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
       
 glEnable(GL_POLYGON_OFFSET_LINE);
 glEnable(GL_LINE_SMOOTH);
-      glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+  //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
              
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
