@@ -193,6 +193,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(D);
       
 glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+glEnable(GL_FOG);
 
 glEnable(GL_POLYGON_OFFSET_POINT);
 glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
