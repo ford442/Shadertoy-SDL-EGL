@@ -57,8 +57,8 @@ GLchar common_shader_header_gles3[]=
 "#extension EGL_EXT_gl_colorspace_bt2020_linear : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-"#pragma STDGL(precise all)\n"
-"#pragma optionNV(precise all)\n"
+"#pragma STDGL(precise none)\n"
+"#pragma optionNV(precise none)\n"
 "#pragma STDGL(fastmath off)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma STDGL(fastprecision off)\n"
@@ -71,6 +71,8 @@ GLchar common_shader_header_gles3[]=
 "#pragma optionNV(inline none)\n"
 "#pragma STDGL(strict off)\n"
 "#pragma optionNV(strict off)\n"
+"#pragma optionNV(invariant none)\n"
+"#pragma STDGL(invariant none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision highp sampler3D;precision highp sampler2D;"
@@ -80,8 +82,6 @@ GLchar common_shader_header_gles3[]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
-"#pragma optionNV(invariant none)\n"
-"#pragma STDGL(invariant none)\n"
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;gl_PointSize=1.0;}\n";
 GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform highp vec4 iDate;uniform float iChannelTime[4];"
