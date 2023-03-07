@@ -198,10 +198,10 @@ glClearDepth(D);
 // glEnable(GL_FOG);  // invalid capa
 // glFog(GL_FOG_MODE,GL_EXP2);
       
-glEnable(GL_POLYGON_OFFSET_POINT);
+// glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
 // glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
   //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
-// glEnable(GL_POLYGON_OFFSET_FILL);
+glEnable(GL_POLYGON_OFFSET_FILL);
 // glEnable(GL_POLYGON_SMOOTH);
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
       
