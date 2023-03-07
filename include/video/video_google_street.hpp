@@ -55,6 +55,13 @@
 int_fast32_t Size_js;
 double wi_js,hi_js;
 
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
 EGLContext contextegl_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
