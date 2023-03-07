@@ -153,10 +153,10 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },200);
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('b3');
 },400);
 setTimeout(function(){
 Module.ccall('str');
