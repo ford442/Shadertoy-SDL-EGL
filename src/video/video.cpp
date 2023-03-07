@@ -9,7 +9,7 @@ attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
-attr_js.premultipliedAlpha=EM_TRUE;
+attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
 attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -119,12 +119,12 @@ return;
 }
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+max=0.0;
+min=1.0;
+sum=0.0;
+avgSum=0.0;
+minSum=0.0;
+maxSum=0.0;
 for(int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];
@@ -169,7 +169,7 @@ var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016666;
 var setTim;
-const timFrm=16.666666;
+const timFrm=10.419;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -388,7 +388,6 @@ var aveg=Aveg(p[3],ouT);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
-
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
