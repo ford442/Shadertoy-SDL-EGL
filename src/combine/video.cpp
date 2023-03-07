@@ -226,8 +226,8 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".fill(255);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);$"+j+".fill(255);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
