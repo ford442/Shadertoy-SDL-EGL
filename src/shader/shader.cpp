@@ -193,7 +193,8 @@ glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
       
-// glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+      
 // glEnable(GL_FOG);
 // glFog(GL_FOG_MODE,GL_EXP2);
       
