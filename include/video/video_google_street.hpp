@@ -74,7 +74,6 @@ EGLContext contextegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 
-
 int_fast32_t iFrame,iFps,Size,iwi,ihi;
 
 EmscriptenWebGLContextAttributes attr_js;
