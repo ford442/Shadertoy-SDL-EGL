@@ -113,7 +113,6 @@ document.getElementById('menu').addEventListener('click',function(){
 $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-           
 
 function spKey(e){
 if(e.code=='KeyQ'){
