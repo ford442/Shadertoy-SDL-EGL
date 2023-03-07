@@ -13,12 +13,16 @@
 
 // #include <stdfloat>  //  c++23
 
-double_t wi,hi;
+// double_t wi,hi;
+long double wi,hi;
 
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
-float_t F0=0.0f;
-double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
-double_t D0=0.0;
+// float_t F0=0.0f;
+float F0=0.0f;
+// double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
+long double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
+// double_t D0=0.0;
+long double D0=0.0;
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -99,7 +103,8 @@ GLchar * read_file(GLchar *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iwi,ihi;
+// int_fast32_t iFrame,iwi,ihi;
+long iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
