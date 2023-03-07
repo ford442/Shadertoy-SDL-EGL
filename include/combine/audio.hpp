@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -12,7 +11,6 @@
 #include <chrono>
 #include <cfloat>
 #include <climits>
-
 #include <iostream>
 
 char flnm[24];
@@ -29,7 +27,7 @@ void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
   
 void plt();
 
-extern "C"{  
+extern"C"{  
   
 void pl();
   
