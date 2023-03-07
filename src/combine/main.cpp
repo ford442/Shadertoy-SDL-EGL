@@ -165,7 +165,6 @@ document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},800);
 }
 
 function shds(xml){
