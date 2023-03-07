@@ -1,5 +1,14 @@
 #include "../../include/combine/video.hpp"
 
+extern "C" {
+
+void nano(short int Fnum,int leng,float *ptr,float *aptr){
+avgFrm(Fnum,leng,ptr,aptr);
+return;
+}
+
+}
+
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
 max=0.0;
 min=1.0;
@@ -31,15 +40,6 @@ maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
 return;
-}
-
-extern "C" {
-
-void nano(short int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
-return;
-}
-
 }
 
 EM_JS(void,vid,(),{
