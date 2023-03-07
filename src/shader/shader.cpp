@@ -199,15 +199,16 @@ glClearDepth(D);
 // glFog(GL_FOG_MODE,GL_EXP2);
       
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
-// glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
-  //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
-glEnable(GL_POLYGON_OFFSET_FILL);
-// glEnable(GL_POLYGON_SMOOTH);
-  //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
+  //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
+glEnable(GL_POLYGON_OFFSET_FILL);  // works
+glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
+
+// glEnable(GL_POLYGON_SMOOTH); // invalid capa
+  //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
       
-// glEnable(GL_POLYGON_OFFSET_LINE);
-// glEnable(GL_LINE_SMOOTH);
-  //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+// glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
+// glEnable(GL_LINE_SMOOTH); // invalid capa
+  //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
              
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
