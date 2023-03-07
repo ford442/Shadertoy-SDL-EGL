@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -12,7 +11,6 @@
 #include <chrono>
 #include <cfloat>
 #include <climits>
-
 #include <iostream>
 
 char flnm[24];
