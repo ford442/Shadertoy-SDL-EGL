@@ -257,7 +257,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(false).setOutput([h$,w$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
