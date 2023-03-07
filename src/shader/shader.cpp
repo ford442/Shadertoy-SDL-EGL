@@ -138,8 +138,7 @@ sSize=static_cast<int>(hi);
 S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_texture_float");
@@ -192,17 +191,29 @@ emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-// glEnable(GL_POLYGON_OFFSET_FILL);
-glEnable(GL_POLYGON_OFFSET_LINE);
-      glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+      
+glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-// glEnable(GL_POLYGON_OFFSET_POINT);
-// glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
+glEnable(GL_POLYGON_OFFSET_POINT);
+glPolygonOffset((GLfloat)0.1f,(GLfloat)100.0f);
+      glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
+glEnable(GL_POLYGON_OFFSET_FILL);
+glEnable(GL_POLYGON_SMOOTH);
+      glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
+      
+glEnable(GL_POLYGON_OFFSET_LINE);
+glEnable(GL_LINE_SMOOTH);
+      glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
+             
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
+      
 glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 glBlendEquationSeparate(GL_MIN,GL_MAX);
+      
+      glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+      glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
