@@ -1,44 +1,21 @@
 #include "../../include/vanilla/main_simd.hpp"
 
 v128_t simd_test(float * a){
-// float sum_arr[] = {a, a, 1.0, 1.0};
- // double uu=a/2.0;
-//  double ee=5.0/2.0;
 int m=a[0]*1000;
- v128_t l=wasm_i32x4_splat(m);
-
- // v128_t Input=wasm_f64x2_splat(uu);
-//  v128_t Add=wasm_f64x2_splat(ee);
-// v128_t nn=wasm_f64x2_add(Input,Add);
-// v128_t ab=wasm_f32x4_splat(a);
-// wasm_v128_store(0,nn);
+v128_t l=wasm_i32x4_splat(m);
 v128_t b5;
 v128_t b1=_mm_insert_ps(ii,b5,0);
 v128_t b2=_mm_insert_ps(j,b5,1);
 v128_t b3=_mm_insert_ps(k,b5,2);
 v128_t b4=_mm_insert_ps(l,b5,3);
-// wasm_v128_store(0,b5);
-// v128_t b=wasm_v128_load(0);
 v128_t tt=wasm_f32x4_add(b5,b5);
-// double c=wasm_f64x2_extract_lane(b,0);
-// double d=wasm_f64x2_extract_lane(b,1);
-//  float re=c+d;
-// v128_t d=wasm_v128_load(sum_arr);
- //  for(int i=0;i<3;i++){
-// v128_t f=wasm_i32x4_add(d,d);
-// float g=wasm_f32x4_extract_lane(f,0);
- // }
-// float e=(float)g;
-// return g;
 return tt;
 }
 
 extern"C"{
-  
 float js_simd(float * aa){
 v128_t cc=simd_test(aa);
-     wasm_v128_store(&out[i], prod);
-
+wasm_v128_store(&out[i], prod);
 float c=wasm_f32x4_extract_lane(cc,0);
 float d=wasm_f32x4_extract_lane(cc,1);
 float ce=wasm_f32x4_extract_lane(cc,2);
@@ -122,13 +99,13 @@ setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},550);
+},150);
 
 });
   
 int main(){
   
 js_main();
-return 0;
+return 1;
 
 }
