@@ -309,9 +309,11 @@ setTimeout(function(){
 scanSongs();
 },500);
 
-document.getElementById('startBtn').addEventListener('click',function(){
 scanVideos();
 loada();
+ 
+document.getElementById('startBtn').addEventListener('click',function(){
+
 scanShaders();
 });
 
