@@ -122,15 +122,21 @@ EGL_NONE
 };
 
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
+void avgFrm(short int,int,float *,float *);
 
 void egl();
 
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
 
 extern "C"{
 
 void b3();
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr);
+void nano(short int,int,float *,float *);
 
 }
