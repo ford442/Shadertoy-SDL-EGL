@@ -87,6 +87,8 @@ char32_t * read_file(const GLchar *);
 #include "../../include/combine/egl.hpp"
 
 int_fast32_t iFrame,iFps,Size,iwi,ihi;
+int_fast32_t Size_js;
+double wi_js,hi_js;
 
 void renderFrame();
 
@@ -168,9 +170,6 @@ EM_BOOL ms_l,clk_l;
 EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
-
-int_fast32_t Size_js;
-double wi_js,hi_js;
 
 EGLContext contextegl_js;
 EGLDisplay display_js;
