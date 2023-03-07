@@ -6,8 +6,6 @@ rD=std::rand()%Th;
 return rD;
 }
 
-extern"C"{
-
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -51,12 +49,10 @@ Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 }
-// var randShade=Math.random();
 let shadesNum=$shds[0];
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
 };
-// randShade=Math.floor($shds[0]*randShade)+5;
 let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
@@ -73,32 +69,25 @@ var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
-ff.onload=function(oEvent){
+ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-   normalResStart();
-},450);
-}};
+normalResStart();
+},150);
+}
+});
 ff.send(null);
 }
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
 dxhttp.withCredentials=false;
-let loaded=0;
 dxhttp.addEventListener("load",function(){
-//   loaded=1;
 shds(this);
 });
-// dxhttp.onreadystatechange=function(){
-// if(this.readyState==4&&this.status==200&&loaded==1){
-// shds(this);
-// }
-// };
-   
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
@@ -136,15 +125,13 @@ document.getElementById('di').click();
 },500);
 });
 
-}
-
 extern"C"{
  
 int r4nd(int tH){
 int(* RnD)(int);
 RnD=&rNd;
-// int Rg=RnD(tH);
-return RnD(tH);
+Rg=RnD(tH);
+return RnD(Rg);
 }
   
 }
