@@ -39,7 +39,7 @@ return;
 extern "C" {
 
 void pl(){
-void(* P)();
+void(*r)();
 r=&plt;
 r();
 return;
