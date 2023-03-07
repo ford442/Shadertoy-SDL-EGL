@@ -6,7 +6,7 @@
 
 int rNd(int);
 
-int rD,Th;
+int rD,Th,Rg;
 
 extern"C"{
 
