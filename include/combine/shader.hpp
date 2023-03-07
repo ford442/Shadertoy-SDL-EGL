@@ -92,7 +92,7 @@ void renderFrame();
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
-void clrclr(GLclampf,GLclampf,GLclampf);
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr);
 
 EGLDisplay display;
 EGLSurface surface;
