@@ -76,7 +76,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
 normalResStart();
-},150);
+},350);
 }
 });
 ff.send(null);
