@@ -200,7 +200,7 @@ glClearDepth(D);
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
   //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)0.01f,(GLfloat)100.0f);
+glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
@@ -213,8 +213,8 @@ glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
       
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-glBlendEquationSeparate(GL_MIN,GL_MAX);
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendEquationSeparate(GL_MIN,GL_MAX);
       
       glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
       glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
