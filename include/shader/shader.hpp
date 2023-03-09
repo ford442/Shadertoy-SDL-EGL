@@ -11,6 +11,7 @@
 #include <climits>
 #include <iostream>
 
+#include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 
 // double_t wi,hi;
