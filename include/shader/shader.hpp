@@ -53,9 +53,10 @@ GLchar * sources[4];
 GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
-"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
-"#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
-"#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
+// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+// "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
+// "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
+"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
 "#pragma STDGL(precise none)\n"
 "#pragma optionNV(precise none)\n"
 "#pragma STDGL(fastmath off)\n"
@@ -121,7 +122,7 @@ EGLint config_size,major,minor;
 EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -158,13 +159,13 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_RED_SIZE,(EGLint)64,
-EGL_GREEN_SIZE,(EGLint)64,
-EGL_BLUE_SIZE,(EGLint)64,
-EGL_ALPHA_SIZE,(EGLint)64,
-EGL_DEPTH_SIZE,(EGLint)64,
+EGL_RED_SIZE,(EGLint)12,
+EGL_GREEN_SIZE,(EGLint)12,
+EGL_BLUE_SIZE,(EGLint)12,
+EGL_ALPHA_SIZE,(EGLint)12,
+EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)0,
-EGL_BUFFER_SIZE,(EGLint)64,
+EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)4,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
