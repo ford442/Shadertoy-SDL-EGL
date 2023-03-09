@@ -92,7 +92,7 @@ fclose(file);
        
 EM_ASM({
 console.log('I received: ' + $0);
-}, result);
+}, file);
        
 return result;
 }
