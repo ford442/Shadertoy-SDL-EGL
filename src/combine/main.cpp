@@ -153,10 +153,10 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('b3');
 },200);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },400);
 setTimeout(function(){
 Module.ccall('str');
@@ -206,7 +206,7 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
 normalResStart();
-},350);
+},450);
 };};
 ff.send(null);
 }
