@@ -90,7 +90,7 @@ result[actual_length++]={'\0'};
 }
 fclose(file);
 GLchar * result16=NULL;
-result16=std::codecvt<char16_t*, char8_t, std::mbstate_t>(result);
+result16=reinterpret_cast<GLchar *>(std::codecvt<char16_t*, char8_t, std::mbstate_t>(result));
 return result16;
 }
 return nullptr;
