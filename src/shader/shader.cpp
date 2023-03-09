@@ -89,7 +89,7 @@ size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-return std::codecvt<char16_t, char8_t, std::mbstate_t>(result);
+return std::codecvt<char16_t*, char8_t, std::mbstate_t>(result);
 }
 return nullptr;
 }
