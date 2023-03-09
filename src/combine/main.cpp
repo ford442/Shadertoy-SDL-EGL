@@ -331,8 +331,8 @@ return Rg;
 int main(void){
 "use strict";
 EM_ASM({
-FS.mkdir("/snd");
-FS.mkdir("/shader");
+FS.mkdir('/snd');
+FS.mkdir('/shader');
 });
 js_main();
 return 1;
