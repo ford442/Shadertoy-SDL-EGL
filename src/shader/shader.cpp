@@ -112,7 +112,7 @@ iFrame=0;
 clk_l=true;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
@@ -188,19 +188,27 @@ emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
+      
+      glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+      glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+      
+      glDepthFunc(GL_LESS);
+  glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
+      
+
       
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
       
 // glEnable(GL_FOG);  // invalid capa
+glDisable(GL_STENCIL_TEST);  // invalid capa
 // glFog(GL_FOG_MODE,GL_EXP2);
       
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
-  //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
+        //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
+      
+      glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
@@ -210,14 +218,14 @@ glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
   //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
              
 glDisable(GL_DITHER);
+      
+     glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
-glFrontFace(GL_CW);
+
       
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
       
-      glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-      glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
