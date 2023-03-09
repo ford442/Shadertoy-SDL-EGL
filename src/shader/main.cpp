@@ -140,7 +140,7 @@ int main(void){
 "use strict";
 
 EM_ASM({
-FS.mkdir("/shader");
+FS.mkdir('/shader');
 });
 
 js_main();
