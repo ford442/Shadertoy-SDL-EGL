@@ -69,6 +69,7 @@ return;
 
 GLchar * read_file(const char * filename){
 char16_t * result=NULL;
+GLchar * results=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
 if(file){
@@ -89,8 +90,8 @@ size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-result=reinterpret_cast<GLchar *>(result);
-return result;
+results=reinterpret_cast<GLchar *>(result);
+return results;
 }
 return nullptr;
 }
