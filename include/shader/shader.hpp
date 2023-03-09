@@ -96,7 +96,8 @@ void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint compile_shader(GLenum,GLsizei,GLchar **);
 
-GLchar * read_file(GLchar *);
+// GLchar * read_file(const char *);
+utf16_t * read_file(const char *);
 
 #include "../../include/shader/egl.hpp"
 
