@@ -251,7 +251,7 @@ b3_vanilla_test:
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=ld64 -mtune=corei7-avx \
 	 -mcpu=bleeding-edge -fpie -flto=thin -ffunction-sections -fdata-sections \
-	 --pre-js rSlider.js --pre-js slideOut.js
+	 -sCAN_ADDRESS_2GB=1 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0
