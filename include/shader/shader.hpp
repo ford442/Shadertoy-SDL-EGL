@@ -90,22 +90,6 @@ GLchar fragment_shader_header_gles3[]=
 "uniform highp vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out highp vec4 fragColor;\n";
 
-  /*
-"precision mediump int;precision mediump float;precision mediump sampler3D;precision mediump sampler2D;"
-"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;\n";
-GLchar vertex_shader_body_gles3[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;gl_PointSize=1.0;}\n";
-GLchar fragment_shader_header_gles3[]=
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
-"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform lowp vec3 iChannelResolution[4];uniform lowp vec3 iResolution;uniform lowp vec4 iMouse;uniform lowp float iSampleRate;"
-"out vec4 fragColor;\n";
-*/
-
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 GLchar * common_shader_header=common_shader_header_gles3;
