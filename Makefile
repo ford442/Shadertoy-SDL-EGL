@@ -108,7 +108,7 @@ b3_shader_test:
 	 -fuse-ld=mold -fwhole-program -polly -sWASMFS=1 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sMALLOC='emmalloc' \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 -sTEXTDECODER=1 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
+	 -sTEXTDECODER=3 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_js:
 	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
@@ -170,7 +170,7 @@ b3_audio_test:
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	--pre-js rSlider.js --pre-js slideOut.js
+	-s AUDIO_WORKLET=1 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_google_test:
 	 em++ src/video/main.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
