@@ -67,7 +67,8 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-#define __STDC_UTF_16__
+#undef __STDC_UTF_16__
+#define __STDC_UTF_16__ 0
 
 char16_t * read_file(const char * filename){
 char16_t * result=NULL;
