@@ -67,6 +67,8 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
+#define __STDC_UTF_16__
+
 char16_t * read_file(const char * filename){
 char16_t * result=NULL;
 long length=0;
@@ -89,9 +91,7 @@ size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-GLchar * result16=NULL;
-result16=reinterpret_cast<GLchar *>(std::codecvt<char16_t*, char8_t, std::mbstate_t>(result));
-return result16;
+return result;
 }
 return nullptr;
 }
