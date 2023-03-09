@@ -89,7 +89,7 @@ size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-         printf ("%s \n", result);
+         puts(result);
 return result;
 }
 return nullptr;
