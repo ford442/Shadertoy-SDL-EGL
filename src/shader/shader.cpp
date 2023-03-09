@@ -89,8 +89,11 @@ size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-       //  printf("%s",reinterpret_cast<char *>(file));
-         printf("%s","test");
+       
+EM_ASM({
+console.log('I received: ' + $0);
+}, result);
+       
 return result;
 }
 return nullptr;
