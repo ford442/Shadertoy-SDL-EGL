@@ -92,7 +92,7 @@ double wi_js,hi_js;
 
 // int_fast32_t iFrame,iwi,ihi;
 long long iFrame,iwi,ihi;
-GLint iFps,Size.Size_js;
+GLint iFps,Size,Size_js;
 // int iFrame,iFps,Size;
 
 void renderFrame();
