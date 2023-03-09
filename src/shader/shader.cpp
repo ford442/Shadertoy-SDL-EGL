@@ -198,8 +198,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
   glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
       
-
-      
+     
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
       
 // glEnable(GL_FOG);  // invalid capa
@@ -214,7 +213,7 @@ glEnable(GL_POLYGON_OFFSET_FILL);  // works
 
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
-      
+glEnable(GL_PROGRAM_POINT_SIZE);
 // glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
 // glEnable(GL_LINE_SMOOTH); // invalid capa
   //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
