@@ -152,7 +152,7 @@ document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
-Module.ccall('b3');
+setTimeout(function(){
 Module.ccall('b3_egl');
 },600);
 setTimeout(function(){
