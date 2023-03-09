@@ -67,8 +67,8 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-utf16_t * read_file(const char * filename){
-utf16_t * result=NULL;
+char16_t * read_file(const char * filename){
+char16_t * result=NULL;
 long length=0;
 FILE * file=fopen(filename,"r");
 if(file){
@@ -83,9 +83,9 @@ if(status!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<utf16_t *>(malloc((length+1)*sizeof(utf16_t)));
+result=static_cast<char16_t *>(malloc((length+1)*sizeof(char16_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(utf16_t),length,file);
+size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
