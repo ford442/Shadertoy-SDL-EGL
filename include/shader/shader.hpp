@@ -76,7 +76,7 @@ GLchar common_shader_header_gles3[]=
 "#pragma STDGL(invariant none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision mediump sampler3D;precision mediump sampler2D;"
+"precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
