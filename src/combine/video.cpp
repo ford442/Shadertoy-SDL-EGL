@@ -147,6 +147,7 @@ minorVersion:0
 });
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+  /*
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('EGL_NV_depth_nonlinear');
 gl.getExtension('EGL_HI_colorformats');
@@ -159,6 +160,31 @@ gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EXT_texture_filter_anisotropic');
 gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
 gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
+*/
+gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('EXT_pixel_format_float');
+gl.getExtension('EXT_float_blend');
+gl.getExtension('NV_memory_attachment');
+gl.getExtension('NV_depth_nonlinear');
+gl.getExtension('IMG_context_priority');     //     vv  required for realtime
+gl.getExtension('NV_context_priority_realtime'); // ^^
+gl.getExtension('ARB_gl_spirv');
+gl.getExtension('ARB_spirv_extensions');
+gl.getExtension('ARB_invalidate_subdata');
+gl.getExtension('ARB_texture_storage');
+gl.getExtension('ARB_ES2_compatibility');
+gl.getExtension('ARB_ES3_compatibility');
+gl.getExtension('ARB_ES3_1_compatibility');
+gl.getExtension('ARB_ES3_2_compatibility');
+gl.getExtension('EXT_gpu_shader5');
+gl.getExtension('ARB_blend_func_extended');
+gl.getExtension('OES_sample_variables');                  //  vv
+gl.getExtension('OES_shader_multisample_interpolation');  //  ^^
+// gl.getExtension('KHR_gl_colorspace');
+// gl.getExtension('EXT_gl_colorspace_scrgb_linear');
+// gl.getExtension('EXT_gl_colorspace_display_p3');
+// gl.getExtension('EXT_gl_colorspace_display_p3_linear');
+// gl.getExtension('EXT_gl_colorspace_bt2020_linear');
 gl.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
