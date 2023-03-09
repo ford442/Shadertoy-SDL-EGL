@@ -83,7 +83,7 @@ GLchar vertex_shader_body_gles3[]=
 GLchar fragment_shader_header_gles3[]=
 "uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform highp vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform highp float iSampleRate;"
+"uniform highp vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out highp vec4 fragColor;\n";
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
