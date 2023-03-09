@@ -94,18 +94,18 @@ b3_shader_simd:
 
 b3_shader_test:
 	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
-	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=c++20 -fno-fast-math -ffp-contract=off \
+	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -O0 --closure 0 -fpie -std=c++20 -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3021.js -O0 --closure 0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
 	 -fwasm-exceptions -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sPRECISE_F32=0 -sWASM_BIGINT=1 -mtune=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
-	 -fuse-ld=mold -fwhole-program -polly -sWASMFS=1 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sMALLOC='emmalloc' \
+	 -fuse-ld=mold -fwhole-program -polly -sWASMFS=1 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 -sTEXTDECODER=2 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
@@ -160,11 +160,11 @@ b3_video_test:
 b3_audio_test:
 	em++ src/audio/main.cpp -c -std=c++2b -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	em++ src/audio/audio.cpp -c -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti -matomics -mbulk-memory \
+	em++ src/audio/audio.cpp -c -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=off
 	emcc main.o audio.o -o a3020.js -std=c++2b -stdlib=libc++ -mtune=corei7-avx -fno-math-errno -O0 -fpie \
-	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=2 -matomics -mbulk-memory \
+	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=2 \
 	-fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
