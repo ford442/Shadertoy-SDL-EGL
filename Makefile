@@ -93,10 +93,10 @@ b3_shader_simd:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -fno-rtti \
+	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast
-	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=fast \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
+	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -ffp-contract=fast \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
