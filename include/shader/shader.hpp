@@ -93,7 +93,7 @@ GLchar fragment_shader_header_gles3[]=
 
 "precision mediump int;precision mediump float;precision mediump sampler3D;precision mediump sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision highp isamplerCube;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
 "precision mediump sampler2DArrayShadow;\n";
@@ -102,7 +102,7 @@ GLchar vertex_shader_body_gles3[]=
 GLchar fragment_shader_header_gles3[]=
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"uniform vec3 lowp iChannelResolution[4];uniform lowp vec3 iResolution;uniform lowp vec4 iMouse;uniform lowp float iSampleRate;"
 "out vec4 fragColor;\n";
 
 
