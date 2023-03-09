@@ -89,6 +89,7 @@ size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
+result=reinterpret_cast<GLchar *>(result);
 return result;
 }
 return nullptr;
@@ -235,7 +236,7 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-GLchar * default_fragment_shader=reinterpret_cast<GLchar *>(read_file(filename));
+GLchar * default_fragment_shader=read_file(filename);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
