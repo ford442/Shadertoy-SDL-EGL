@@ -191,8 +191,10 @@ emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
       
-      glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-      glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+    //  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+      glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+   //   glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+      glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
       
 //  glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
