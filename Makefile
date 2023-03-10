@@ -173,16 +173,16 @@ b3_audio_test:
 	-sWASM_WORKERS=1 -sAUDIO_WORKLET=1 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_google_test:
-	 em++ src/video/main.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	 em++ src/video/main.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
-	 em++ src/video/video.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	 em++ src/video/video.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o video.o -o b3020.js -std=c++20 -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	 emcc main.o video.o -o b3020.js -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
+	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
