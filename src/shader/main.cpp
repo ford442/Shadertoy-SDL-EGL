@@ -25,11 +25,11 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-setTimeout(function(){
+// setTimeout(function(){
          document.getElementById('stat').innerHTML='Sending Start';
    document.getElementById('stat').style.backgroundColor='green';
 Module.ccall('str');
-},150);
+// },150);
 document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
@@ -80,9 +80,9 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
          document.getElementById('stat').innerHTML='Downloaded Shader';
    document.getElementById('stat').style.backgroundColor='blue';
-setTimeout(function(){
+//setTimeout(function(){
 normalResStart();
-},350);
+//},350);
 }
 });
 ff.send(null);
@@ -91,9 +91,9 @@ ff.send(null);
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
 dxhttp.withCredentials=false;
+         
 dxhttp.addEventListener("load",function(){
-      document.getElementById('stat').innerHTML='Selecting Shader';
-   document.getElementById('stat').style.backgroundColor='orange';
+
 shds(this);
 });
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
@@ -124,7 +124,7 @@ document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-   document.getElementById('stat').innerHTML='Getting Shaders';
+   document.getElementById('stat').innerHTML='Scanning Shaders';
    document.getElementById('stat').style.backgroundColor='yellow';
 scanShaders();
 });
@@ -132,7 +132,7 @@ setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},500);
+},50);
 });
 
 extern"C"{
@@ -147,7 +147,7 @@ return RnD(Rg);
 }
 
 int main(void){
-"use strict";
+'use strict';
 
 EM_ASM({
 FS.mkdir('/shader');
