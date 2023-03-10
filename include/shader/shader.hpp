@@ -79,7 +79,7 @@ GLchar common_shader_header_gles3[]=
 "#pragma STDGL(invariant none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision lowp float;precision mediump int;precision lowp sampler3D;precision lowp sampler2D;"
+"precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
@@ -90,8 +90,8 @@ GLchar vertex_shader_body_gles3[]=
 GLchar fragment_shader_header_gles3[]=
 "uniform lowp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform lowp vec3 iChannelResolution[4];uniform lowp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out lowp vec4 fragColor;\n";
+"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"out vec4 fragColor;\n";
 
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
@@ -109,9 +109,9 @@ GLchar * read_file(const char *);
 
 #include "../../include/shader/egl.hpp"
 
-// int_fast32_t iFrame,iwi,ihi;
+int_fast32_t iFrame,iwi,ihi;
 // long long iFrame,iwi,ihi;
-long iFrame,iwi,ihi;
+// long iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
