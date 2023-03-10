@@ -17,15 +17,17 @@
 
 // double_t wi,hi;
 double wi,hi;
-
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
 // float_t F0=0.0f;
 float F0=0.0f;
 // double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
-// long double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
-float Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
+// long double Dm1=-1.0,D=1.0;
+double Dm1=-1.0,D=1.0;
+float Ttime,TtimeDelta;
 // double_t D0=0.0;
-long double D0=0.0;
+// long double D0=0.0;
+double D0=0.0;
+
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -108,7 +110,8 @@ GLchar * read_file(const char *);
 #include "../../include/shader/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
-long long iFrame,iwi,ihi;
+// long long iFrame,iwi,ihi;
+long iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
@@ -167,8 +170,8 @@ EGL_ALPHA_SIZE,(EGLint)12,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)0,
 EGL_BUFFER_SIZE,(EGLint)32,
-EGL_SAMPLE_BUFFERS,(EGLint)1,
-EGL_SAMPLES,(EGLint)4,
+// EGL_SAMPLE_BUFFERS,(EGLint)1,
+// EGL_SAMPLES,(EGLint)4,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
