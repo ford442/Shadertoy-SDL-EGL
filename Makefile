@@ -147,9 +147,9 @@ b3_video_test:
 	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
 	 emcc main.o video.o -o b3020.js -O0 -fpie -std=c++20 -fno-math-errno -flto=thin \
 	 -fwasm-exceptions \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
+	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -163,11 +163,11 @@ b3_audio_test:
 	em++ src/audio/audio.cpp -c -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=off
-	emcc main.o audio.o -o a3020.js -std=c++2b -stdlib=libc++ -mtune=corei7-avx -fno-math-errno -O0 -fpie \
-	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=2 \
+	emcc main.o audio.o -o a3020.js -std=c++2b -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
+	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=0 \
 	-fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
-	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	-msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	-sWASM_WORKERS=1 -sAUDIO_WORKLET=1 --pre-js rSlider.js --pre-js slideOut.js
@@ -181,8 +181,8 @@ b3_video_google_test:
 	 emcc main.o video.o -o b3020.js -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=corei7-avx \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -202,8 +202,8 @@ b3_video_google:
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=c++11 -fno-math-errno -O0
-	em++ src/audio/audio.cpp -c -std=c++2b -sUSE_SDL=2 -fno-math-errno -O0
-	emcc main.o audio.o -o a3020.js -std=c++2b -mtune=corei7-avx -fno-math-errno -O0 \
+	em++ src/audio/audio.cpp -c -std=c++2b -sUSE_SDL=2 -O0
+	emcc main.o audio.o -o a3020.js -std=c++2b -O0 \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -243,13 +243,13 @@ b3_vanilla_test:
 	 em++ src/vanilla/main.cpp -c -O0 -fpie -fno-rtti \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize -ffunction-sections -fdata-sections
-	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -fno-rtti --experimental-wasm-bulk-memory \
+	 emcc main.o -o v3020.js -O0 -fno-math-errno -std=c++20 -fno-rtti \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -fuse-ld=ld64 -mtune=corei7-avx \
+	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -fuse-ld=ld64 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -fpie -flto=thin -ffunction-sections -fdata-sections \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
