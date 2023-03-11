@@ -156,22 +156,26 @@ mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
+// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
-emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
+// emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
-emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
-emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
-emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
-emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
-emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
+// emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
+// emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
+// emscripten_webgl_enable_extension(ctx,"ARB_shading_language_420pack");
+// emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
+// emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx,"NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
+emscripten_webgl_enable_extension(ctx,"HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
@@ -293,22 +297,26 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-emscripten_webgl_enable_extension(ctx_js,"GL_EXT_color_buffer_float");
+// emscripten_webgl_enable_extension(ctx_js,"GL_EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
 // emscripten_webgl_enable_extension(ctx_js,"OES_fbo_render_mipmap");
 emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx_js,"GL_OES_shader_multisample_interpolation");
-emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
+// emscripten_webgl_enable_extension(ctx_js,"GL_OES_shader_multisample_interpolation");
+// emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");
+emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
+emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
 emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_linear");
@@ -383,7 +391,7 @@ var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016;
 var setTim;
-const timFrm=16.666;
+const timFrm=10.42;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -431,13 +439,15 @@ minorVersion:0
 });
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
 // gl.getExtension('OES_texture_half_float_linear');
-gl.getExtension('OES_shader_multisample_interpolation');
+// gl.getExtension('OES_shader_multisample_interpolation');
 gl.getExtension('EGL_NV_depth_nonlinear');
-gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
+gl.getExtension('NV_depth_nonlinear');
+// gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
 gl.getExtension('EGL_KHR_gl_colorspace');
+gl.getExtension('KHR_gl_colorspace');
 // gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
@@ -501,31 +511,31 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
-// var rr,gg,bb;
-// var der=p[0];
-// var neerg=p[1];
-// var eulb=p[2];
+var rr,gg,bb;
+var der=p[0];
+var neerg=p[1];
+var eulb=p[2];
 
-// if(der>0.333){
-// rr=Silver(der);
-// }else{
-// rr=GoldR(der);
-// }
+if(der>0.333){
+ rr=Silver(der);
+}else{
+ rr=GoldR(der);
+ }
 
-// if(neerg>0.4){
-// gg=Silver(neerg);
-// }else{
-// gg=GoldG(neerg);
-// }
+if(neerg>0.4){
+gg=Silver(neerg);
+}else{
+gg=GoldG(neerg);
+}
 
-// if(eulb>0.5){
-// bb=Silver(eulb);
-// }else{
-// bb=GoldB(eulb);
-// }
+if(eulb>0.5){
+bb=Silver(eulb);
+}else{
+bb=GoldB(eulb);
+}
   
-// this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
-this.color(p[0],p[1],p[2],aveg);
+this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
+// this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
