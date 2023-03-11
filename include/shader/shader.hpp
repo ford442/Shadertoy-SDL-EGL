@@ -79,7 +79,7 @@ GLchar common_shader_header_gles3[]=
 "#pragma STDGL(invariant none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision lowp float;precision lowp int;precision lowp sampler3D;precision lowp sampler2D;"
+"precision highp float;precision mediump int;precision lowp sampler3D;precision mediump sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
@@ -88,9 +88,9 @@ GLchar common_shader_header_gles3[]=
 GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 GLchar fragment_shader_header_gles3[]=
-"uniform lowp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform float iChannelTime[4];"
+"uniform mediump float iTime;uniform mediump float iTimeDelta;uniform mediump float iFrameRate;uniform mediump vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"uniform mediump vec3 iChannelResolution[4];uniform mediump vec3 iResolution;uniform mediump vec4 iMouse;uniform mediump float iSampleRate;"
 "out vec4 fragColor;\n";
 
 GLchar fragment_shader_footer_gles3[]=
@@ -136,8 +136,8 @@ EGL_NONE
 };
 
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 //EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -158,7 +158,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
+// EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -170,8 +170,8 @@ EGL_ALPHA_SIZE,(EGLint)12,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)0,
 EGL_BUFFER_SIZE,(EGLint)32,
-// EGL_SAMPLE_BUFFERS,(EGLint)1,
-// EGL_SAMPLES,(EGLint)4,
+EGL_SAMPLE_BUFFERS,(EGLint)1,
+EGL_SAMPLES,(EGLint)4,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
