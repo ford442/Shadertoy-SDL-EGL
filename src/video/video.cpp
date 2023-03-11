@@ -212,15 +212,14 @@ gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('EXT_float_blend');
 // gl.getExtension('NV_memory_attachment');
 gl.getExtension('EGL_NV_depth_nonlinear');
+gl.getExtension('NV_depth_nonlinear');
 gl.getExtension('IMG_context_priority');     //     vv  required for realtime
 gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
 gl.getExtension('NV_context_priority_realtime'); // ^^
 gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
-
 // gl.getExtension('ARB_blend_func_extended');
 // gl.getExtension('OES_sample_variables');                  //  vv
 // gl.getExtension('OES_shader_multisample_interpolation');  //  ^^
-  
 // gl.getExtension('KHR_gl_colorspace');
 // gl.getExtension('EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EXT_gl_colorspace_display_p3');
