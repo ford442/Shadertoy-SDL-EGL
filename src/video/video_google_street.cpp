@@ -297,7 +297,6 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-// emscripten_webgl_enable_extension(ctx_js,"GL_EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
@@ -439,28 +438,9 @@ minorVersion:0
 });
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
-// gl.getExtension('OES_texture_half_float_linear');
-// gl.getExtension('OES_shader_multisample_interpolation');
-gl.getExtension('EGL_NV_depth_nonlinear');
-gl.getExtension('NV_depth_nonlinear');
-// gl.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' not 'EGL_EXT_pixel_format_float')
-gl.getExtension('EGL_KHR_gl_colorspace');
-gl.getExtension('KHR_gl_colorspace');
-// gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
-// gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
-// gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
-// gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
-// gl.getExtension('ARB_gl_spirv');
-// gl.getExtension('ARB_spirv_extensions');
-// gl.getExtension('ARB_invalidate_subdata');
-// gl.getExtension('ARB_texture_storage');
-// gl.getExtension('ARB_ES2_compatibility');
-// gl.getExtension('ARB_ES3_compatibility');
-// gl.getExtension('ARB_ES3_1_compatibility');
-// gl.getExtension('ARB_ES3_2_compatibility');
-// gl.getExtension('ARB_compatibility');
+
 gl.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 // gl.drawingBufferColorMetadata={mode:'extended'};
