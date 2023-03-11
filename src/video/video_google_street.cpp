@@ -491,7 +491,9 @@ var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 
-var rr,gg,bb;
+var rr;
+var gg;
+var bb;
 var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
@@ -580,7 +582,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[201],agav[101],agav[1]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
