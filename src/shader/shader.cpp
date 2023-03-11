@@ -141,7 +141,8 @@ S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
-emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
+// emscripten_webgl_enable_extension(ctx,"WEBGL_EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"ARB_texture_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
@@ -150,17 +151,23 @@ emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 // emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
-emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
+// emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
+emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"HI_colorformats");
-emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");
+emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
+// emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");
+// emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
 // emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 // emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
@@ -190,45 +197,32 @@ emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader");
 // emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
-      
-    //  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+   //  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
       glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
    //   glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-      
 //  glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
-
-     
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
-      
 // glEnable(GL_FOG);  // invalid capa
 glDisable(GL_STENCIL_TEST);  // invalid capa
 // glFog(GL_FOG_MODE,GL_EXP2);
-      
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
         //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
-      
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
       glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
-
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
 // glEnable(GL_PROGRAM_POINT_SIZE);  //  invalid capability
 // glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
 // glEnable(GL_LINE_SMOOTH); // invalid capa
   //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
-             
 glDisable(GL_DITHER);
-      
  //    glFrontFace(GL_CW); 
  //  glEnable(GL_CULL_FACE);
-
-      
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-      
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
