@@ -173,12 +173,12 @@ b3_audio_test:
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_google_test:
-	 em++ src/video/main.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	 em++ src/video/main_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
-	 em++ src/video/video.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	 em++ src/video/video_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o video.o -o g0003.js -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	 emcc main_google_street.o video_google_street.o -o g0003.js -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
