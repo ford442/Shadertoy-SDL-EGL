@@ -2618,9 +2618,17 @@ function hashCode(s){
 
 });
 
+void fire_load(){
+void(*frrl)();
+frrl=&fl;
+frrl();
+return;
+}
+
 void fire(){
-fl();
-fi();
+void(*frr)();
+frr=&fi;
+frr();
 return;
 }
 
