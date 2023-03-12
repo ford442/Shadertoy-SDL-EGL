@@ -154,10 +154,10 @@ setTimeout(function(){
 Module.ccall('str');
 },100);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },400);
 setTimeout(function(){
-Module.ccall('b3_egl');
+Module.ccall('b3');
 },800);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
