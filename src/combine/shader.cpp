@@ -24,7 +24,7 @@ void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(1.0-rlc))/2.0)+alc);
 drk=1.0-(avr-0.5);
 brt=((1.0-rlc)-(alc-0.5));
-// glBlendColor(avrg,avrg,avrg,1.0);
+glBlendColor(avrg,avrg,avrg,1.0);
 glClearColor(drk,drk,drk,brt);
 return;
 }
@@ -69,12 +69,19 @@ uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
-glClear(GL_STENCIL_BUFFER_BIT);
+// glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 glFlush();
 nanosleep(&req,&rem);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 glFinish();
+return;
+}
+
+void fr4m(){
+void(*FrM)();
+FrM=&renderFrame;
+FrM();
 return;
 }
 
@@ -246,7 +253,7 @@ glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
 auto t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
+// emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 }
 
@@ -319,18 +326,30 @@ return;
 
 extern "C" {
 
+void frm(){
+void(*fRm)();
+fRm=&fr4m;
+fRm();
+return;
+}
+
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
 clrclr(cllr,alp,avr);
 return;
 }
 
 void b3_egl(){
-egl();
+void(*b4e)();
+b4e=&egl;
+b4e();
 return;
 }
-  
+
+
 void str(){
-strt();
+void(*sTr)();
+sTr=&strt;
+sTr();
 return;
 }
 
