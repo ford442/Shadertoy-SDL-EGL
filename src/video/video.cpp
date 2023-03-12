@@ -31,9 +31,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-// emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");  //  required for float/alpha (must be 'EXT_color_buffer_float' and not 'GL_EXT_color_buffer_float')
-emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
-// emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime"); // ^^
@@ -207,19 +205,9 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 // gl.getExtension('EXT_pixel_format_float');
-// gl.getExtension('EXT_float_blend');
-// gl.getExtension('NV_memory_attachment');
-// gl.getExtension('EGL_NV_depth_nonlinear');
-// gl.getExtension('NV_depth_nonlinear');
-// gl.getExtension('IMG_context_priority');     //     vv  required for realtime
-// gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
-// gl.getExtension('NV_context_priority_realtime'); // ^^
-// gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
 // gl.getExtension('ARB_blend_func_extended');
-// gl.getExtension('OES_sample_variables');                  //  vv
-// gl.getExtension('OES_shader_multisample_interpolation');  //  ^^
 // gl.getExtension('KHR_gl_colorspace');
 // gl.getExtension('EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EXT_gl_colorspace_display_p3');
@@ -239,7 +227,7 @@ gl.disable(gl.DITHER);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
-const g2=new GPU();
+const g2=new GPU({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
