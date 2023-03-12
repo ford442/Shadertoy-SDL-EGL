@@ -78,7 +78,7 @@ $sngs[i]=Self+'songs/'+stxxt;
 
 function scanSongs(){
 const nxhttp=new XMLHttpRequest();
-nxhttp.withCredentials=false;
+// nxhttp.withCredentials=false;
 nxhttp.addEventListener("load",function(){
 sngs(this);
 });
@@ -127,7 +127,7 @@ $vids[i]=ar2;
   
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-fxhttp.withCredentials=false;
+// fxhttp.withCredentials=false;
 fxhttp.addEventListener("load",function(){
 vids(this);
 });
@@ -196,7 +196,7 @@ document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 };
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
-ff.withCredentials=false;
+// ff.withCredentials=false;
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
