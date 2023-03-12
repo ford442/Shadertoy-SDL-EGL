@@ -239,12 +239,18 @@ sources[1]=vertex_shader_body;
 GLuint(* cs)(GLenum,GLsizei,GLchar **);
 cs=&compile_shader;
 vtx=cs(GL_VERTEX_SHADER,2,sources);
+nanosleep(&req,&rem);
+sources[0]=common_shader_header;
+sources[1]=geometry_shader_body;
+frag=cs(GL_GEOMETRY_SHADER,2,sources);
+nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=cs(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
+
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
