@@ -123,7 +123,7 @@ agav.fill(max,200,33);
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
-let gl=bCan.getContext("webgl2",{
+let gljs=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -145,9 +145,9 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
+gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
   /*
 gl.getExtension('EGL_HI_colorformats');
 gl.getExtension('EGL_KHR_gl_colorspace');
@@ -158,17 +158,17 @@ gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EXT_texture_filter_anisotropic');
 */
 // gl.getExtension('ARB_blend_func_extended');
-gl.disable(gl.DITHER);
+gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-gl.blendColor(1.0,1.0,1.0,1.0);
-gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gljs.blendColor(1.0,1.0,1.0,1.0);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
-gl.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+gljs.drawingBufferColorSpace='display-p3';
+const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
 const g2=new GPU({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
