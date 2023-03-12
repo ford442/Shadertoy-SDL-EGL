@@ -61,9 +61,7 @@ GLchar common_shader_header_gles3[]=
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-  "#extension GL_ARB_geometry_shader4 : enable\n";
-
-  
+"#extension GL_ARB_geometry_shader4 : enable\n"
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
