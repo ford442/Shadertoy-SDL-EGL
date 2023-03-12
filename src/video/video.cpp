@@ -6,7 +6,7 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_TRUE;
+attr_js.stencil=EM_FALSE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
@@ -32,8 +32,8 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 // emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");  //  required for float/alpha (must be 'EXT_color_buffer_float' and not 'GL_EXT_color_buffer_float')
-emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
-emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+// emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+// emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime"); // ^^
@@ -207,16 +207,16 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-gl.getExtension('EXT_color_buffer_float');
+/// gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('EXT_pixel_format_float');
 // gl.getExtension('EXT_float_blend');
 // gl.getExtension('NV_memory_attachment');
-gl.getExtension('EGL_NV_depth_nonlinear');
-gl.getExtension('NV_depth_nonlinear');
-gl.getExtension('IMG_context_priority');     //     vv  required for realtime
-gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
-gl.getExtension('NV_context_priority_realtime'); // ^^
-gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
+// gl.getExtension('EGL_NV_depth_nonlinear');
+// gl.getExtension('NV_depth_nonlinear');
+// gl.getExtension('IMG_context_priority');     //     vv  required for realtime
+// gl.getExtension('EGL_IMG_context_priority');     //     vv  required for realtime
+// gl.getExtension('NV_context_priority_realtime'); // ^^
+// gl.getExtension('EGL_NV_context_priority_realtime'); // ^^
 // gl.getExtension('ARB_blend_func_extended');
 // gl.getExtension('OES_sample_variables');                  //  vv
 // gl.getExtension('OES_shader_multisample_interpolation');  //  ^^
