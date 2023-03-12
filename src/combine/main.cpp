@@ -152,13 +152,13 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3_egl');
-},100);
+},300);
 setTimeout(function(){
 Module.ccall('str');
-},400);
+},700);
 setTimeout(function(){
 Module.ccall('b3');
-},800);
+},1000);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
