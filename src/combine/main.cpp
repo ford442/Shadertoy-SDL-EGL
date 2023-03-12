@@ -8,7 +8,7 @@ return rD;
 
 EM_JS(void,js_main,(),{
 
-"use strict";
+'use strict';
 
 window.scroll(0,0);
 
@@ -46,7 +46,6 @@ bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
 var lockVid=0;
 const pnnl=document.body;
-
 function Key(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -57,7 +56,6 @@ if(e.code=='KeyZ'){lockVid=1;};
 if(e.code=='KeyQ'){scanShaders();};
 if(e.code=='KeyX'){lockVid=0;};
 }
-
 pnnl.addEventListener('keydown',Key);
 
 var $sngs=[];
@@ -153,6 +151,9 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
+Module.ccall('fire_load');
+},100);
+setTimeout(function(){
 Module.ccall('b3_egl');
 },600);
 setTimeout(function(){
@@ -161,6 +162,9 @@ Module.ccall('b3');
 setTimeout(function(){
 Module.ccall('str');
 },1200);
+ setTimeout(function(){
+Module.ccall('fire');
+},1500);
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
@@ -254,11 +258,9 @@ document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
 document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
-
 if(mic>0){
 var $pt=Module.ccall('r4nd','Number',['Number'],[mic]);
 };
-
 $pt=$pt*1000000;
 $pt=$pt/1000000;
 $pt=Math.round($pt);
@@ -273,13 +275,11 @@ var $ls=$lt/1000;
 $ls=$ls*1000;
 $ls=Math.round($ls);
 $ls=$ls/1000;
-
 var vidsNum=$vids[0]-5;
 if(vidsNum>0){
 var rnum=Module.ccall('r4nd','Number',['Number'],[vidsNum]);
 var vidSrc=$vids[rnum+5];
 };
-
 var $h=window.innerHeight;
 var he=document.getElementById('hig').innerHTML;
 var wi=document.getElementById('wid').innerHTML;
@@ -307,13 +307,11 @@ loada();
 
 setTimeout(function(){
 scanSongs();
-},500);
-
 scanVideos();
 loada();
- 
-document.getElementById('startBtn').addEventListener('click',function(){
+},500);
 
+document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 });
 
@@ -329,11 +327,13 @@ return Rg;
 }
 
 int main(void){
-"use strict";
+'use strict';
 EM_ASM({
 FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
-js_main();
+void(*jss)();
+jss=&js_main;
+jss();
 return 1;
 }
