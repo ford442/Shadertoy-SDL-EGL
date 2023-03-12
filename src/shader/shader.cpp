@@ -127,7 +127,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 eglBindAPI(EGL_OPENGL_API);
-//  eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
@@ -140,9 +140,6 @@ sSize=static_cast<int>(hi);
 S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
-nanosleep(&req,&rem);
-emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader4");
-emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader5");
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_EXT_color_buffer_float");
@@ -201,12 +198,12 @@ emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
    //  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+      glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
    //   glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+      glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 //  glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
+            glDepthFunc(GL_LESS);
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
 glDisable(GL_STENCIL_TEST);  // invalid capa
@@ -214,7 +211,7 @@ glDisable(GL_STENCIL_TEST);  // invalid capa
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
         //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
+      glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
   //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
 // glEnable(GL_PROGRAM_POINT_SIZE);  //  invalid capability
@@ -234,19 +231,19 @@ nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+nanosleep(&req,&rem);
 GLchar * default_fragment_shader=read_file(filename);
 nanosleep(&req,&rem);
-GLuint(* cs)(GLenum,GLsizei,GLchar **);
-cs=&compile_shader;
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
+GLuint(* cs)(GLenum,GLsizei,GLchar **);
+cs=&compile_shader;
 vtx=cs(GL_VERTEX_SHADER,2,sources);
-nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
-geo=cs(GL_FRAGMENT_SHADER,4,sources);
+frag=cs(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
