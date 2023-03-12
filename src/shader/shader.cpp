@@ -250,7 +250,6 @@ geo=cs(GL_FRAGMENT_SHADER,4,sources);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
-glAttachShader(shd_prg,geo);
 glAttachShader(shd_prg,vtx);
 atb_pos=0;
 glBindAttribLocation(shd_prg,0,"iPosition");
