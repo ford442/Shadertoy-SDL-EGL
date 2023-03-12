@@ -30,7 +30,8 @@ emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
+glEnable(GL_SCISSOR_TEST);
+emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime"); // ^^
