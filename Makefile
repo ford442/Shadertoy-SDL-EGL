@@ -50,13 +50,10 @@ b3_combine_test:
 	 em++ src/combine/video.cpp -c -O0 -std=c++20 -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ src/combine/fire.cpp -c -O0 -std=c++20 -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/combine/shader.cpp -c -O0 -std=c++20 -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sTEXTDECODER=2
-	 emcc main.o audio.o video.o shader.o fire.o -o b3hd001.js -O0 -std=c++20 -stdlib=libc++ -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -o b3hd001.js -O0 -std=c++20 -stdlib=libc++ -sUSE_SDL=2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
