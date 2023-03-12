@@ -111,6 +111,8 @@ EGL_NONE
 
 void egl();
 
+GLclampf avrg,drk,brt,avr;
+
 void avgFrm(short int,int,float *,float *);
 
 double wi_js,hi_js;
