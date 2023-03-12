@@ -150,9 +150,7 @@ document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
-setTimeout(function(){
-Module.ccall('fire_load');
-},100);
+
 setTimeout(function(){
 Module.ccall('b3_egl');
 },600);
@@ -162,9 +160,7 @@ Module.ccall('b3');
 setTimeout(function(){
 Module.ccall('str');
 },1200);
- setTimeout(function(){
-Module.ccall('fire');
-},1500);
+
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
