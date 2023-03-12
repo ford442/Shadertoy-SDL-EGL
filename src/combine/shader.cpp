@@ -24,7 +24,7 @@ void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(1.0-rlc))/2.0)+alc);
 drk=1.0-(avr-0.5);
 brt=((1.0-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,1.0);
+// glBlendColor(avrg,avrg,avrg,1.0);
 glClearColor(drk,drk,drk,brt);
 return;
 }
@@ -197,7 +197,7 @@ glEnable(GL_BLEND);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
-// glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
