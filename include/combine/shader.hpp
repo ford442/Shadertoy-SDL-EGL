@@ -40,7 +40,7 @@ struct timespec req={0,10416666};
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
-GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
