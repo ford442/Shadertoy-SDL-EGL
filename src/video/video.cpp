@@ -207,7 +207,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-/// gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('EXT_pixel_format_float');
 // gl.getExtension('EXT_float_blend');
 // gl.getExtension('NV_memory_attachment');
