@@ -61,6 +61,9 @@ GLchar common_shader_header_gles3[]=
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
+  "#extension GL_ARB_geometry_shader4 : enable\n";
+
+  
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
@@ -97,10 +100,52 @@ GLchar fragment_shader_header_gles3[]=
 
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
+
+GLchar geometry_shader_body_gles3[]=
+"layout(triangles) in;"
+"layout(triangle_strip, max_vertices = 36) out;"
+"in vec4 vfrontColor[];"
+"out vec4 gfrontColor;"
+"void paintVertex(bool x, bool y, vec4 v, vec4 col){"
+    "gfrontColor=col;"
+    "vec4 offset=vec4( x? 0.5:-0.5, y? 0.5:-0.5, 0, 0);"
+    "gl_Position = v + offset;"
+    "EmitVertex();"
+"}"
+"void main( void ){"
+    "vec4 v0 = gl_in[0].gl_Position;"
+    "vec4 v1 = gl_in[1].gl_Position;"
+    "vec4 v2 = gl_in[2].gl_Position;"
+    "vec4 col0 = vfrontColor[0];"
+    "vec4 col1 = vfrontColor[1];"
+    "vec4 col2 = vfrontColor[2];"
+    "vec4 col3 = vfrontColor[3];"
+    "v0 = v0/v0.w;"
+    "v1 = v1/v1.w;"
+    "v2 = v2/v2.w;"
+    "paintVertex(true, true, v0, col0);"
+    "paintVertex(true, true, v1, col1);"
+    "paintVertex(true, true, v2, col2);"
+    "EndPrimitive();"
+    "paintVertex(true, false, v0, col0);"
+    "paintVertex(true, false, v1, col1);"
+    "paintVertex(true, false, v2, col2);"
+    "EndPrimitive();"
+    "paintVertex(false, true, v0, col0);"
+    "paintVertex(false, true, v1, col1);"
+    "paintVertex(false, true, v2, col2);"
+    "EndPrimitive();"
+    "paintVertex(false, false, v0, col0);"
+    "paintVertex(false, false, v1, col1);"
+    "paintVertex(false, false, v2, col2);"
+    "EndPrimitive();"
+"}\0";
+  
 GLchar * common_shader_header=common_shader_header_gles3;
 GLchar * vertex_shader_body=vertex_shader_body_gles3;
 GLchar * fragment_shader_header=fragment_shader_header_gles3;
 GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
+GLchar * geometry_shader_body=geometry_shader_body_gles3;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
