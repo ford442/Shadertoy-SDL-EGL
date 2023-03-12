@@ -30,17 +30,6 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-void avgFrm(short int,int,float *,float *);
-
-double wi_js,hi_js;
-
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
-
 extern "C"{
   
 void b3();
@@ -64,7 +53,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
 EGLint const attribut_list_js[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -74,8 +63,8 @@ EGL_NONE
 };
 
 EGLint const anEglCtxAttribs2_js[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -121,6 +110,17 @@ EGL_NONE
 };
 
 void egl();
+
+void avgFrm(short int,int,float *,float *);
+
+double wi_js,hi_js;
+
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
 
 extern "C"{
 
