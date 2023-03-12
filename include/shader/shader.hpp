@@ -18,15 +18,15 @@
 // double_t wi,hi;
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
-// float_t F0=0.0f;
-float F0=0.0f;
+float_t F0=0.0f;
+// float F0=0.0f;
 // double Ttime,TtimeDelta,Dm1=-1.0,D=1.0;
-// long double Dm1=-1.0,D=1.0;
-double Dm1=-1.0,D=1.0;
+long double Dm1=-1.0,D=1.0;
+// double Dm1=-1.0,D=1.0;
 float Ttime,TtimeDelta;
-// double_t D0=0.0;
+double_t D0=0.0;
 // long double D0=0.0;
-double D0=0.0;
+// double D0=0.0;
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -79,18 +79,18 @@ GLchar common_shader_header_gles3[]=
 "#pragma STDGL(invariant none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision mediump int;precision lowp sampler3D;precision mediump sampler2D;"
-"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;\n";
+"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 GLchar fragment_shader_header_gles3[]=
 "uniform mediump float iTime;uniform mediump float iTimeDelta;uniform mediump float iFrameRate;uniform mediump vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform mediump vec3 iChannelResolution[4];uniform mediump vec3 iResolution;uniform mediump vec4 iMouse;uniform mediump float iSampleRate;"
+"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 
 GLchar fragment_shader_footer_gles3[]=
@@ -109,8 +109,8 @@ GLchar * read_file(const char *);
 
 #include "../../include/shader/egl.hpp"
 
-int_fast32_t iFrame,iwi,ihi;
-// long long iFrame,iwi,ihi;
+// int_fast32_t iFrame,iwi,ihi;
+long long iFrame,iwi,ihi;
 // long iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
@@ -136,8 +136,8 @@ EGL_NONE
 };
 
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 //EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -158,8 +158,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-// EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
-
+EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -172,7 +171,7 @@ EGL_STENCIL_SIZE,(EGLint)0,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)4,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
