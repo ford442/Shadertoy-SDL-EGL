@@ -61,8 +61,8 @@ GLchar common_shader_header_gles3[]=
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-"#pragma STDGL(precise none)\n"
-"#pragma optionNV(precise none)\n"
+"#pragma STDGL(precise all)\n"
+"#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma STDGL(fastprecision off)\n"
@@ -88,10 +88,10 @@ GLchar common_shader_header_gles3[]=
 GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 GLchar fragment_shader_header_gles3[]=
-"uniform mediump float iTime;uniform mediump float iTimeDelta;uniform mediump float iFrameRate;uniform mediump vec4 iDate;uniform float iChannelTime[4];"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out vec4 fragColor;\n";
+"flat out vec4 fragColor;\n";
 
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
@@ -125,7 +125,7 @@ EGLint config_size,major,minor;
 
 EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
@@ -171,7 +171,7 @@ EGL_STENCIL_SIZE,(EGLint)0,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)4,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
