@@ -1,5 +1,23 @@
 #include "../../include/combine/video.hpp"
 
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+avrg=(((avr+(y1y-rlc))/2.0)+alc);
+drk=y1y-(avr-0.5);
+brt=((y1y-rlc)-(alc-0.5));
+glBlendColor(avrg,avrg,avrg,y1y);
+glClearColor(drk,drk,drk,brt);
+return;
+}
+
+extern "C" {
+
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+clrclr(cllr,alp,avr);
+return;
+}
+
+}
+
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
@@ -102,8 +120,6 @@ maxSum+=aptr[i+200];
 aptr[200]=maxSum/32;
 return;
 }
-
-
 
 EM_JS(void,vid,(),{
 
