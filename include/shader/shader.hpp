@@ -61,7 +61,6 @@ GLchar common_shader_header_gles3[]=
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-"#extension GL_ARB_geometry_shader4 : enable\n"
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
@@ -99,21 +98,10 @@ GLchar fragment_shader_header_gles3[]=
 GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 
-GLchar geometry_shader_body_gles3[]=
-"#version 300 es"
-"layout (GL_TRIANGLES) in;"
-"layout (GL_TRIANGLES, max_vertices = 1) out;"
-"void main() {"
-"gl_Position = gl_in[0].gl_Position;"
-"EmitVertex();"
-"EndPrimitive();"
-"}\0";
-  
 GLchar * common_shader_header=common_shader_header_gles3;
 GLchar * vertex_shader_body=vertex_shader_body_gles3;
 GLchar * fragment_shader_header=fragment_shader_header_gles3;
 GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
-GLchar * geometry_shader_body=geometry_shader_body_gles3;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
