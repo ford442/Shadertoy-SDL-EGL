@@ -1,10 +1,10 @@
 #include "../../include/combine/video.hpp"
 
 void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avrg=(((avr+(y1y-rlc))/2.0)+alc);
-drk=y1y-(avr-0.5);
-brt=((y1y-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,y1y);
+avrg=(((avr+(1.0-rlc))/2.0)+alc);
+drk=1.0-(avr-0.5);
+brt=((1.0-rlc)-(alc-0.5));
+glBlendColor(avrg,avrg,avrg,1.0);
 glClearColor(drk,drk,drk,brt);
 return;
 }
