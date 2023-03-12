@@ -151,10 +151,10 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },300);
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },600);
 setTimeout(function(){
 Module.ccall('b3_egl');
