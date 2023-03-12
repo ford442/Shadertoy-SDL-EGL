@@ -140,6 +140,8 @@ sSize=static_cast<int>(hi);
 S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
+   emscripten_webgl_enable_extension(ctx,"GL_ARB_geometry_shader4");
+   emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader4");
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_EXT_color_buffer_float");
