@@ -1,8 +1,8 @@
-#include "../../include/video/video.hpp"
+#include '../../include/video/video.hpp'
 
 void egl(){
 eglconfig_js=NULL;
-emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
+emscripten_get_element_css_size('canvas',&wi_js,&hi_js);
 Size=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
@@ -17,7 +17,7 @@ attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
 attr_js.majorVersion=2;
 attr_js.minorVersion=0;
-ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
+ctx_js=emscripten_webgl_create_context('#bcanvas',&attr_js);
 eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
 display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -32,16 +32,16 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 // emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");  //  required for float/alpha (must be 'EXT_color_buffer_float' and not 'GL_EXT_color_buffer_float')
-emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+emscripten_webgl_enable_extension(ctx_js,'EXT_pixel_format_float');  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
-emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
-emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");     //     vv  required for realtime
-emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime"); // ^^
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); // ^^
-emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
+emscripten_webgl_enable_extension(ctx_js,'EGL_IMG_context_priority');     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx_js,'IMG_context_priority');     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx_js,'NV_context_priority_realtime'); // ^^
+emscripten_webgl_enable_extension(ctx_js,'EGL_NV_context_priority_realtime'); // ^^
+emscripten_webgl_enable_extension(ctx_js,'NV_depth_nonlinear');
+emscripten_webgl_enable_extension(ctx_js,'EGL_NV_depth_nonlinear');
+emscripten_webgl_enable_extension(ctx_js,'HI_colorformats');
+emscripten_webgl_enable_extension(ctx_js,'EGL_HI_colorformats');
 // emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
@@ -52,10 +52,10 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
-emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
-emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
+emscripten_webgl_enable_extension(ctx_js,'KHR_gl_colorspace');
+emscripten_webgl_enable_extension(ctx_js,'EGL_KHR_gl_colorspace');
+emscripten_webgl_enable_extension(ctx_js,'EXT_gl_colorspace_scrgb_linear');
+emscripten_webgl_enable_extension(ctx_js,'EGL_EXT_gl_colorspace_scrgb_linear');
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_DEPTH_TEST);
 glViewport((GLint)0,(GLint)0,Size,Size);
@@ -96,7 +96,7 @@ aptr[200]=maxSum/32;
 return;
 }
 
-extern "C" {
+extern 'C' {
 
 void nano(short int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
@@ -107,9 +107,9 @@ return;
 
 EM_JS(void,vid,(),{
   
-"use strict";
+'use strict';
 
-var vv=document.getElementById("mv");
+var vv=document.getElementById('mv');
 var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016666;
@@ -143,9 +143,9 @@ if(e.code=='Space'){
 e.preventDefault();
 }
 if (e.code=='KeyZ'){
-mmvv=document.getElementById("mv");
+mmvv=document.getElementById('mv');
 mmvv.pause();
-stp=document.getElementById("mv").currentTime;
+stp=document.getElementById('mv').currentTime;
 loopPart=(stp+2.5)-(Math.floor(stp));
 setTim=stp;
 Lstp=stp-loopPart;
@@ -167,14 +167,14 @@ sh4d=false;
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
-const $BB=Module.HEAPF64.buffer;
+const $BB=Module.HEAPF32.buffer;
 var inh=window.innerHeight;
 var $S=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
 var la=h$*w$*8;
 var pointa=77*la;
-var agav=new Float64Array($BB,pointa,300);
+var agav=new Float32Array($BB,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -238,7 +238,7 @@ gl.disable(gl.DITHER);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+const g=new GPU({canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
@@ -251,14 +251,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
+}).setTactic('speed').setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
+}).setTactic('precision').setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -271,50 +271,50 @@ var aveg=Aveg(p[3],ouT);
 // var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setGraphical(true).setOutput([h$,w$]);
+w$=parseInt(document.getElementById('wid').innerHTML,10);
+h$=parseInt(document.getElementById('hig').innerHTML,10);
+vv=document.getElementById('mv');
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 la=h$*w$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float64Array($BB,pointa,300);
+agav=new Float32Array($BB,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=77*la;
-var $B=new Float64Array($BB,pointb,sz);
+var $B=new Float32Array($BB,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
-vv=document.getElementById("mv");
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+vv=document.getElementById('mv');
+w$=parseInt(document.getElementById('wid').innerHTML,10);
+h$=parseInt(document.getElementById('hig').innerHTML,10);
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
 la=h$*w$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($BB,pointa,300);  // has to var?
+var agav=new Float32Array($BB,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 pointb=66*la;
-var $B=new Float64Array($BB,pointb,sz);  // has to var?
+var $B=new Float32Array($BB,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
@@ -347,7 +347,7 @@ forwardLoop();
 };
 },16.6)}
 M();
-document.getElementById("di").onclick=function(){
+document.getElementById('di').onclick=function(){
 T=true;
 S();
 };
@@ -358,7 +358,7 @@ T=true;
 
 });
 
-extern "C" {
+extern 'C' {
 
 void b3_egl(){
 egl();
