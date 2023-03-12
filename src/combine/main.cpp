@@ -304,7 +304,7 @@ setTimeout(function(){
 scanSongs();
 scanVideos();
 loada();
-},500);
+},100);
 
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
