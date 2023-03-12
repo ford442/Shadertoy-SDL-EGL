@@ -281,6 +281,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
+  Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
@@ -306,9 +307,11 @@ T=true;
 });
 
 extern "C" {
-
+ 
 void b3(){
-vid();
+void(*b4)();
+b4=&vid;
+b4();
 return;
 }
 
