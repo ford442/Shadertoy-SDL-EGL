@@ -229,7 +229,7 @@ b3_audio_llvm:
 	em++ src/audio/audio.cpp -c -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=off
-	emcc main.o audio.o -mllvm -o a3020.js -std=c++2b -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
+	emcc main.o audio.o -o a3020.js -mllvm -std=c++2b -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
 	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=0 -sTEXTDECODER=0 \
 	-fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
