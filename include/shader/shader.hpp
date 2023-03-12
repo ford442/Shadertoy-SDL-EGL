@@ -100,7 +100,7 @@ GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 
 GLchar geometry_shader_body_gles3[]=
-// "#version 300 es"
+"#version 300 es"
 "layout (GL_TRIANGLES) in;"
 "layout (GL_TRIANGLES, max_vertices = 1) out;"
 "void main() {"
