@@ -271,7 +271,7 @@ var aveg=Aveg(p[3],ouT);
 // var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(['HTMLVideo']).setGraphical(true).setOutput([h$,w$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
 w$=parseInt(document.getElementById('wid').innerHTML,10);
 h$=parseInt(document.getElementById('hig').innerHTML,10);
 vv=document.getElementById('mv');
