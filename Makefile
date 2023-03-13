@@ -221,7 +221,7 @@ b3_video_llvm:
 	 -fwasm-exceptions \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
-	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
