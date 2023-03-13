@@ -4,9 +4,10 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "../../include/shader/intrins.hpp"
-int rNd(int);
+v128_t rNd(int);
 
-int rD,Th,Rg;
+int rD,Th;
+v128_t Dr;
 
 extern"C"{
 
