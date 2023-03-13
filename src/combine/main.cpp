@@ -329,7 +329,7 @@ EM_ASM({
 FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
-void(*jss)(){&js_main;};
+void(*jss)(){&js_main};
 jss=&js_main;
 // jss=&js_main;
 return 1;
