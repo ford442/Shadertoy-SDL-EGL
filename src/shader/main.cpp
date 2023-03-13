@@ -140,7 +140,7 @@ extern"C"{
  
 int r4nd(int tH){
 v128_t(* RnD)(int);
-Rnd=&rNd;
+RnD=&rNd;
 v128_t Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
