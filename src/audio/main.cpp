@@ -1,14 +1,16 @@
 #include "../../include/audio/main.hpp"
 
-int rNd(int Th){
+v128_t rNd(int Th){
 std::srand(std::time(nullptr));
 int rD=std::rand()%Th;
-return rD;
+v128_t Dr=wasm_i32x4_splat(rD);
+return Dr;
 }
 
 EM_JS(void,js_main,(),{
 
-"use strict";
+'use strict';
+
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
 function normalResStart(){
@@ -133,10 +135,12 @@ normalResStart();
 extern"C"{
  
 int r4nd(int tH){
-int(* RnD)(int){&rNd};
+v128_t(* RnD)(int){&rNd};
 // RnD=&rNd;
 // int Rg=RnD(tH);
-return RnD(tH);
+v128_t Rg=RnD(tH);
+int c=wasm_i32x4_extract_lane(Rg,0);
+return c;
 }
   
 }
