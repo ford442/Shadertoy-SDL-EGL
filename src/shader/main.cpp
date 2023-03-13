@@ -27,8 +27,8 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 // setTimeout(function(){
-         document.getElementById('status').innerHTML='Sending Start';
-   document.getElementById('status').style.backgroundColor='green';
+document.getElementById('status').innerHTML='Sending Start';
+document.getElementById('status').style.backgroundColor='green';
 Module.ccall('str');
 // },150);
 document.getElementById('bcanvas').width=window.innerHeight;
@@ -72,15 +72,15 @@ var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
-      document.getElementById('stat').innerHTML='Downloading Shader';
-   document.getElementById('stat').style.backgroundColor='yellow';
+document.getElementById('stat').innerHTML='Downloading Shader';
+document.getElementById('stat').style.backgroundColor='yellow';
 ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-         document.getElementById('stat').innerHTML='Downloaded Shader';
-   document.getElementById('stat').style.backgroundColor='blue';
+document.getElementById('stat').innerHTML='Downloaded Shader';
+document.getElementById('stat').style.backgroundColor='blue';
 //setTimeout(function(){
 normalResStart();
 //},350);
@@ -92,9 +92,7 @@ ff.send(null);
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
 dxhttp.withCredentials=false;
-         
 dxhttp.addEventListener("load",function(){
-
 shds(this);
 });
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
@@ -125,8 +123,8 @@ document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-   document.getElementById('stat').innerHTML='Scanning Shaders';
-   document.getElementById('stat').style.backgroundColor='yellow';
+document.getElementById('stat').innerHTML='Scanning Shaders';
+document.getElementById('stat').style.backgroundColor='yellow';
 scanShaders();
 });
 setTimeout(function(){
