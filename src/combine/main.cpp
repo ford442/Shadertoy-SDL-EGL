@@ -330,7 +330,6 @@ FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
 void(*jss)(){&js_main};
-jss=&js_main;
-// jss=&js_main;
+jss();
 return 1;
 }
