@@ -14,6 +14,10 @@
 #include <uchar.h> // utf-16
 #include "../../include/shader/intrins.hpp"
 
+#undef FLT_EVAL_METHOD
+#define FLT_EVAL_METHOD 2
+#pragma STDC CX_LIMITED_RANGE ON
+
 // #include <stdfloat>  //  c++23
 // double_t wi,hi;
 double wi,hi;
