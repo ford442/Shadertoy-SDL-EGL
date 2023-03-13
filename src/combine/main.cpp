@@ -151,20 +151,17 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3_egl');
-},250);
-setTimeout(function(){
 Module.ccall('b3');
-},750);
+},150);
 setTimeout(function(){
 Module.ccall('str');
-},1250);
+},750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},1850);
+},1000);
 }
 
 function shds(xml){
