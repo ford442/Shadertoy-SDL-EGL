@@ -13,6 +13,7 @@ v128_t rNd(int);
 
 extern"C"{
 
+v128_t c;
 int r4nd(int);
 
 }
