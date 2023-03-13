@@ -201,7 +201,9 @@ return Rg;
 
 int main(void){
 
-js_main();
+void(*jss)();
+jss=&js_main;
+jss();
 return 1;
 
 }
