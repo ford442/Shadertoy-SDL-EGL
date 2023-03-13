@@ -244,6 +244,7 @@ b3_audio_test:
 	
 b3_audio_llvm:
 	em++ src/audio/main.cpp -c -std=c++2a -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
 	em++ src/audio/audio.cpp -c -std=c++2a -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
