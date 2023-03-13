@@ -354,7 +354,7 @@ b3e();
 return;
 }
   
-void b3_egl(){
+void b3(){
 void(*B3)(){&vid};
 B3();
 return;
