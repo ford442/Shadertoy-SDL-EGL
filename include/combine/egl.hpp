@@ -17,10 +17,6 @@
 
 #include <webgl/webgl2.h>
 
-#define GL_GLEXT_PROTOTYPES 1
-#include <GL/gl.h>
-#include <GL/glext.h>
-
 #define GL_GLES_PROTOTYPES 1
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
