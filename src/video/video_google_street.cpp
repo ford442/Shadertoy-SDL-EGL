@@ -609,10 +609,11 @@ T=true;
 extern "C" {
 
 void str(){
-strt();
+void(*St)(){&strt};
+St();
 return;
 }
-
+ 
 void b3(){
 egl();
 vid();
