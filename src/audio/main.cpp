@@ -1,8 +1,8 @@
 #include "../../include/audio/main.hpp"
 
 int rNd(int Th){
-std::srand(std::time(nullptr));
-int rD=std::rand()%Th;
+std::srand(std::time(nullptr)){std::rand()%Th;};
+// int rD=std::rand()%Th;
 return rD;
 }
 
@@ -133,8 +133,8 @@ normalResStart();
 extern"C"{
  
 int r4nd(int tH){
-int(* RnD)(int);
-RnD=&rNd;
+int(* RnD)(int){&rNd};
+// RnD=&rNd;
 // int Rg=RnD(tH);
 return RnD(tH);
 }
@@ -148,6 +148,8 @@ EM_ASM({
 FS.mkdir('/snd');
 });
 
-js_main();
+void(*jss)(){&js_main};
+// jss=&js_main;
+jss();
 
 }
