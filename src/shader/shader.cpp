@@ -1,6 +1,5 @@
 #include "../../include/shader/shader.hpp"
-
-EM_BOOL mouse_call_click(int eventType,const EmscriptenMouseEvent * e,void * userData){
+EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -10,8 +9,7 @@ ms_l=false;
 }}
 return(EM_BOOL)1;
 }
-
-static EM_BOOL mouse_call_move(int eventType,const EmscriptenMouseEvent * e,void * userData){
+static EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -19,14 +17,13 @@ y=e->clientY;
 }}
 return (EM_BOOL)1;
 }
-
-void uni(GLfloat xx,GLfloat yy,GLfloat shtime,GLint fram,GLfloat delt){
-retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
-retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
+void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 iFps=60.0/delt;
 if(ms_l==true){
-retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_move);
-retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
+retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
+retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
@@ -40,25 +37,24 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 }
-glUniform1f(uni_tme,shtime);
+glUniform1f(uni_tme,Tm);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
 }
-
-void renderFrame(){
+void Rend(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
-TtimeDelta=time_spanb.count();
+Tdlt=time_spanb.count();
 std::chrono::duration<float>time_spana=duration_cast<std::chrono::duration<float>>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
 void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 un=&uni;
-un(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
+un(mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
@@ -66,21 +62,20 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
-
-GLchar * read_file(const char * filename){
+GLchar * rd_fl(const char * Fnm){
 char16_t * result=NULL;
 GLchar * results=NULL;
 long length=0;
-FILE * file=fopen(filename,"r");
+FILE * file=fopen(Fnm,"r");
 if(file){
-short int status=fseek(file,(long int)0,SEEK_END);
-if(status!=0){
+short int stat=fseek(file,(long int)0,SEEK_END);
+if(stat!=0){
 fclose(file);
 return nullptr;
 }
 length=ftell(file);
-status=fseek(file,(long int)0,SEEK_SET);
-if(status!=0){
+stat=fseek(file,(long int)0,SEEK_SET);
+if(stat!=0){
 fclose(file);
 return nullptr;
 }
@@ -95,25 +90,21 @@ return results;
 }
 return nullptr;
 }
-
-GLuint compile_shader(GLenum type,GLsizei nsources,GLchar ** sources){
-GLsizei srclens[nsources];
-for(i=0;i<nsources;i++){
-// srclens[i]=(GLsizei)strlen(sources[i]);
-srclens[i]=static_cast<GLsizei>(strlen(sources[i]));
+GLuint cmpl_shd(GLenum type,GLsizei nsrc,GLchar ** src){
+GLsizei srclens[nsrc];
+for(i=0;i<nsrc;i++){
+srclens[i]=static_cast<GLsizei>(strlen(src[i]));
 }
 shader=glCreateShader(type);
-glShaderSource(shader,nsources,sources,srclens);
+glShaderSource(shader,nsrc,src,srclens);
 glCompileShader(shader);
 return shader;
 }
-
 void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-   GLchar * default_fragment_shader=read_file(filename);
-
+GLchar * frag_body=rd_fl(Fnm);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
@@ -132,10 +123,10 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
-eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
+eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
+ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
+surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
+eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 emscripten_get_element_css_size("canvas",&wi,&hi);
 sSize=static_cast<int>(hi);
@@ -200,51 +191,51 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 // emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-    //     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-   glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-    //       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+//     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+//       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 //  glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_LESS);
+glDepthFunc(GL_LESS);
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
 glDisable(GL_STENCIL_TEST);  // invalid capa
 // glFog(GL_FOG_MODE,GL_EXP2);
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
-        //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
+//    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-      glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
+glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
-  //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
+//    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
 // glEnable(GL_PROGRAM_POINT_SIZE);  //  invalid capability
 // glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
 // glEnable(GL_LINE_SMOOTH); // invalid capa
-  //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
+//    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
 glDisable(GL_DITHER);
- //    glFrontFace(GL_CW); 
- //  glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW); 
+glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
 nanosleep(&req,&rem);
-sources[0]=common_shader_header;
-sources[1]=vertex_shader_body;
+src[0]=cm_hdr;
+src[1]=vrt_bdy;
 GLuint(* cs)(GLenum,GLsizei,GLchar **);
-cs=&compile_shader;
-vtx=cs(GL_VERTEX_SHADER,2,sources);
-sources[0]=common_shader_header;
-sources[1]=fragment_shader_header;
-sources[2]=default_fragment_shader;
-sources[3]=fragment_shader_footer;
-frag=cs(GL_FRAGMENT_SHADER,4,sources);
+cs=&cmpl_shd;
+vtx=cs(GL_VERTEX_SHADER,2,src);
+src[0]=cm_hdr;
+src[1]=frg_hdr;
+src[2]=frag_body;
+src[3]=frg_ftr;
+frag=cs(GL_FRAGMENT_SHADER,4,src);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
@@ -281,17 +272,14 @@ glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg ru
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,sSize,sSize);
 auto t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
-
 extern "C" {
-
 void str(){
 void(*st)();
 st=&strt;
 st();
 return;
 }
-
 }
