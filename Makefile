@@ -211,6 +211,7 @@ b3_video_test:
 b3_video_llvm:
 	 em++ src/video/main.cpp -c -O0 -fpie -fno-rtti \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/video/video.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
