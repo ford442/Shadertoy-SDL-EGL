@@ -380,16 +380,14 @@ T=true;
 extern "C" {
 
 void b3_egl(){
-void(*b4e)();
-b4e=&egl;
-b4e();
+void(*b3e)(){&egl};
+b3e();
 return;
 }
-
+  
 void b3(){
-void(*b4)(){&egl;&vid;};
-// b4=&vid;
-b4();
+void(*B3)(){&vid};
+B3();
 return;
 }
 
