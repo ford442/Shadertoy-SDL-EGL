@@ -21,7 +21,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-int rNd(int);
+v128_t rNd(int);
 
 int Th;
 v128_t Dr,rD;
