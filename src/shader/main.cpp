@@ -139,7 +139,7 @@ document.getElementById('di').click();
 extern"C"{
  
 int r4nd(int tH){
-int(* RnD)(int);
+v128_t(* RnD)(int);
 RnD=&rNd;
 Rg=RnD(tH);
 return RnD(Rg);
