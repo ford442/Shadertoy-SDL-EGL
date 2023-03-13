@@ -6,16 +6,6 @@
 #define FLT_EVAL_METHOD 2
 #pragma STDC CX_LIMITED_RANGE ON
 
-#include <wasm_simd128.h>
-#include <tmmintrin.h> // ssse 3
-#include <smmintrin.h>  // sse 4.1
-#include <avxintrin.h>  // AVX
-
-#include <xmmintrin.h>
-#include <immintrin.h> 
-#include <nmmintrin.h>  //  sse 4.2
-#include <unistd.h>
-
 #define GL_GLES_PROTOTYPES 1
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
