@@ -144,7 +144,7 @@ return RnD(tH);
 int main(void){
   
 EM_ASM({
-"use strict";
+'use strict';
 FS.mkdir('/snd');
 });
 
