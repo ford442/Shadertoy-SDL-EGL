@@ -126,12 +126,13 @@ EM_JS(void,vid,(),{
 'use strict';
 
 var vv=document.getElementById('mv');
-var sh4d=true;
+var sh4d=false;
 var stp,Lstp;
 const stpInc=0.016;
 var setTim;
 // const timFrm=16.666;
 const timFrm=10.42;
+var lockVid;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -349,9 +350,11 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
+if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+};
 setTimeout(function(){
 M();
 if(loopLoop==true){
