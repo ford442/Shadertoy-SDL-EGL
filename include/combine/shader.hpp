@@ -15,7 +15,6 @@
 // #include <stdfloat>  //  c++23
 
 #include <emscripten.h>
-#include <emscripten/html5.h>
 
 // double_t wi,hi;
 double wi,hi;
@@ -163,6 +162,8 @@ EGL_MIPMAP_LEVEL,(EGLint)64,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
+
+#include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
