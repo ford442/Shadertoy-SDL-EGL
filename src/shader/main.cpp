@@ -27,8 +27,8 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 // setTimeout(function(){
-         document.getElementById('stat').innerHTML='Sending Start';
-   document.getElementById('stat').style.backgroundColor='green';
+         document.getElementById('status').innerHTML='Sending Start';
+   document.getElementById('status').style.backgroundColor='green';
 Module.ccall('str');
 // },150);
 document.getElementById('bcanvas').width=window.innerHeight;
