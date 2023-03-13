@@ -7,7 +7,7 @@
 
 v128_t rNd(int);
 
-int rD,Th,rG;
+int rD,Th,Rg;
 v128_t Dr;
 
 extern"C"{
