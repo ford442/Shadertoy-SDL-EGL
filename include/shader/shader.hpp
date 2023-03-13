@@ -12,6 +12,8 @@
 #include <iostream>
 #include <locale> // utf-16
 #include <uchar.h> // utf-16
+#include "../../include/shader/intrins.hpp"
+
 // #include <stdfloat>  //  c++23
 // double_t wi,hi;
 double wi,hi;
