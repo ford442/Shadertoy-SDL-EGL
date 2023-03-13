@@ -1,9 +1,10 @@
 #include "../../include/shader/main.hpp"
 
-int rNd(int Th){
+v128_t rNd(int Th){
 std::srand(std::time(nullptr));
-rD=std::rand()%Th;
-return rD;
+int rD=std::rand()%Th;
+v128_t Dr=wasm_i32x4_splat(rD);
+return Dr;
 }
 
 EM_JS(void,js_main,(),{
