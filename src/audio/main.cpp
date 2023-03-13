@@ -1,7 +1,7 @@
 #include "../../include/audio/main.hpp"
 
 int rNd(int Th){
-std::srand(std::time(nullptr)){std::rand()%Th};
+std::srand(std::time(nullptr)){std::rand()%Th;};
 // int rD=std::rand()%Th;
 return rD;
 }
