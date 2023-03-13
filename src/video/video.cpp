@@ -349,12 +349,15 @@ T=true;
 extern "C" {
 
 void b3_egl(){
-egl();
-}
-
-void b3(){
-vid();
+void(*b3e)(){&egl};
+b3e();
 return;
 }
-
+  
+void b3_egl(){
+void(*B3)(){&vid};
+B3();
+return;
+}
+  
 }
