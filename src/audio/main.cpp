@@ -1,10 +1,9 @@
 #include "../../include/audio/main.hpp"
 
-v128_t rNd(int Th){
-std::srand(std::time(nullptr));
-int rD=std::rand()%Th;
-v128_t Dr=wasm_i32x4_splat(rD);
-return Dr;
+int rNd(int Th){
+std::srand(std::time(nullptr)){std::rand()%Th;};
+// int rD=std::rand()%Th;
+return rD;
 }
 
 EM_JS(void,js_main,(),{
@@ -134,12 +133,10 @@ normalResStart();
 extern"C"{
  
 int r4nd(int tH){
-v128_t(* RnD)(int){&rNd};
+int(* RnD)(int){&rNd};
 // RnD=&rNd;
 // int Rg=RnD(tH);
-v128_t Rg=RnD(tH);
-int c=wasm_i32x4_extract_lane(Rg,0);
-return c;
+return RnD(tH);
 }
   
 }
