@@ -142,7 +142,7 @@ int r4nd(int tH){
 v128_t(* RnD)(int);
 RnD=&rNd;
 Rg=RnD(tH);
-return RnD(Rg);
+return Rg;
 }
   
 }
