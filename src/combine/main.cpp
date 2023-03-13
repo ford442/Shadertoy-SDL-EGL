@@ -159,10 +159,12 @@ Module.ccall('str');
 setTimeout(function(){
 Module.ccall('b3');
 },1250);
+  setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
+},1850);
 }
 
 function shds(xml){
