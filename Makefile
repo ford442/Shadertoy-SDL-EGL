@@ -152,7 +152,7 @@ b3_shader_js:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_llvm:
-	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -fno-rtti \
+	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -fno-rtti -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -std=gnu++2a -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
