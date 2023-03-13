@@ -213,7 +213,7 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-dxhttp.withCredentials=false;
+// dxhttp.withCredentials=false;
 dxhttp.addEventListener("load",function(){
 shds(this);
 });
