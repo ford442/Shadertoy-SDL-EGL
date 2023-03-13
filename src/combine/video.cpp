@@ -387,8 +387,8 @@ return;
 }
 
 void b3(){
-void(*b4)();
-b4=&vid;
+void(*b4)(){&egl;&vid;};
+// b4=&vid;
 b4();
 return;
 }
