@@ -39,7 +39,9 @@ return;
 extern "C" {
 
 void pl(){
-plt();
+void(*jss)(){&plt};
+// jss=&plt;
+jss();
 return;
 }
   
