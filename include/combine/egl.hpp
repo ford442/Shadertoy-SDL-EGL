@@ -15,6 +15,8 @@
 #include <nmmintrin.h>  //  sse 4.2
 #include <unistd.h>
 
+#include <webgl/webgl2.h>
+
 #define GL_GLEXT_PROTOTYPES 1
 #include <GL/gl.h>
 #include <GL/glext.h>
@@ -32,4 +34,3 @@
 #include <EGL/eglplatform.h>
 
 // #include <emscripten/html5_webgl.h>
-#include <webgl/webgl2.h>
