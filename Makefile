@@ -64,18 +64,18 @@ b3_combine_test:
 	 --extern-pre-js gpujs.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_llvm:
-	 em++ src/combine/main.cpp -c -O0 -std=c++23 -stdlib=libc++ -fpie -fno-rtti \
+	 em++ src/combine/main.cpp -c -O0 -std=c++2a -stdlib=libc++ -fpie -fno-rtti \
 	 -ffast-math -fno-rtti -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/combine/audio.cpp -c -O0 -std=c++23 -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c -O0 -std=c++2a -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
-	 em++ src/combine/video.cpp -c -O0 -std=c++23 -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/video.cpp -c -O0 -std=c++2a -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ src/combine/shader.cpp -c -O0 -std=c++23 -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/shader.cpp -c -O0 -std=c++2a -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sTEXTDECODER=0
-	 emcc main.o audio.o video.o shader.o -flto -mllvm -o b3hd001.js -O0 -std=c++23 -stdlib=libc++ -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -flto -mllvm -o b3hd001.js -O0 -std=c++2a -stdlib=libc++ -sUSE_SDL=2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -153,13 +153,13 @@ b3_shader_js:
 
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -fno-rtti \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -std=gnu++2a -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=off \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
+	 -fno-math-errno -std=gnu++2a -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -flto -mllvm -O0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno \
+	 emcc main.o shader.o -o s3021.js -flto -mllvm -O0 -fpie -std=gnu++2a -stdlib=libc++ -fno-math-errno \
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -208,17 +208,17 @@ b3_video_test:
 	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_llvm:
-	 em++ src/video/main.cpp -c -O3 -fpie -fno-rtti \
+	 em++ src/video/main.cpp -c -O0 -fpie -fno-rtti \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/video/video.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
-	 emcc main.o video.o -mllvm -o b3020.js -O0 -fpie -std=c++20 -fno-math-errno -flto=thin \
+	 emcc main.o video.o -mllvm -o b3020.js -O0 -fpie -std=c++20 -fno-math-errno -flto \
 	 -fwasm-exceptions \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
@@ -228,12 +228,12 @@ b3_video_llvm:
 	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_test:
-	em++ src/audio/main.cpp -c -std=c++2b -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
+	em++ src/audio/main.cpp -c -std=c++2a -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	em++ src/audio/audio.cpp -c -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
+	em++ src/audio/audio.cpp -c -std=c++2a -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=off
-	emcc main.o audio.o -o a3020.js -std=c++2b -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
+	emcc main.o audio.o -o a3020.js -std=c++2a -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
 	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=0 \
 	-fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -243,13 +243,13 @@ b3_audio_test:
 	--pre-js rSlider.js --pre-js slideOut.js
 	
 b3_audio_llvm:
-	em++ src/audio/main.cpp -c -std=c++2b -stdlib=libc++ -fno-math-errno -O3 -fpie -fno-rtti \
-	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	em++ src/audio/audio.cpp -c -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
+	em++ src/audio/main.cpp -c -std=c++2a -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
+	em++ src/audio/audio.cpp -c -std=c++2a -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie -fno-rtti \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=off
-	emcc main.o audio.o -o a3020.js -mllvm -std=c++2b -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
-	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=0 -sTEXTDECODER=0 \
+	emcc main.o audio.o -o a3020.js -mllvm -flto -std=c++2a -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -fpie \
+	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 \
 	-fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
 	-msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -263,7 +263,7 @@ b3_video_google_llvm:
 	 em++ src/video/video_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main_google_street.o video_google_street.o -o g0003.js -mllvm -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	 emcc main_google_street.o video_google_street.o -o g0003.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
