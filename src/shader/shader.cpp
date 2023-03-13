@@ -277,8 +277,8 @@ return;
 }
 extern "C" {
 void str(){
-void(*st)();
-st=&strt;
+void(*st)(){&strt};
+// st=&strt;
 st();
 return;
 }
