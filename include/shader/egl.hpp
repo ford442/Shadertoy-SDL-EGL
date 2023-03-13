@@ -2,10 +2,6 @@
 
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-#undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 2
-#pragma STDC CX_LIMITED_RANGE ON
-
 #define GL_GLES_PROTOTYPES 1
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
