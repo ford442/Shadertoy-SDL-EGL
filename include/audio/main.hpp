@@ -23,7 +23,8 @@
 
 int rNd(int);
 
-int rD,Th;
+int Th;
+v128_t Dr,rD;
 
 extern"C"{
 
