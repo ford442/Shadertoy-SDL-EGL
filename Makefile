@@ -65,7 +65,7 @@ b3_combine_test:
 
 b3_combine_llvm:
 	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie -fno-rtti \
-	 -ffast-math -fno-rtti -fno-math-errno -mcpu=bleeding-edge \
+	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2a -sUSE_SDL=2 -fno-fast-math \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
