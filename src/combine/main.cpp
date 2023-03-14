@@ -1,34 +1,17 @@
 #include "../../include/combine/main.hpp"
 
-int rNd(int Th){
+v128_t rNd(int Th){
 std::srand(std::time(nullptr));
 int rD=std::rand()%Th;
-return rD;
+v128_t Dr=wasm_i32x4_splat(rD);
+return Dr;
 }
 
 EM_JS(void,js_main,(),{
 
 'use strict';
 
-window.scroll(0,0);
 
-const fll=new BroadcastChannel('file');
-const shutDown=new BroadcastChannel('shutDown');
-
-function pll(){
-Module.ccall('pl');
-}
-
-fll.addEventListener('message',ea=>{
-const fill=new Uint8Array(ea.data.data);
-FS.writeFile('/snd/sample.wav',fill);
-setTimeout(function(){
-pll();
-},500);
-setTimeout(function(){
-shutDown.postMessage({data:222});
-},800);
-});
 
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
@@ -312,13 +295,34 @@ document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 });
 
+const fll=new BroadcastChannel('file');
+const shutDown=new BroadcastChannel('shutDown');
+
+function pll(){
+Module.ccall('pl');
+}
+
+fll.addEventListener('message',ea=>{
+const fill=new Uint8Array(ea.data.data);
+FS.writeFile('/snd/sample.wav',fill);
+setTimeout(function(){
+pll();
+},500);
+setTimeout(function(){
+shutDown.postMessage({data:222});
+},800);
+});
+
 });
 
 extern"C"{
  
 int r4nd(int tH){
-int Rg=rNd(tH);
-return Rg;
+v128_t(* RnD)(int);
+RnD=&rNd;
+v128_t Rg=RnD(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
 }
   
 }
