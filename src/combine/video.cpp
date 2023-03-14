@@ -271,7 +271,7 @@ var av$=Ave(P[0],P[1],P[2]);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([s$,s$]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([h$,w$]);
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -321,14 +321,14 @@ var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
 la=h$*w$*8;
 sz=(h$*w$)/8;
-var pointa=77*la;
+pointa=77*la;
 var agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-var pointb=66*la;
+pointb=66*la;
 var $B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -351,9 +351,9 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
 if(sh4d==1){
-Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+Module.ccall("frm",null,[],[]);
 };
 setTimeout(function(){
 M();
