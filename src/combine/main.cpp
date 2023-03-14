@@ -11,8 +11,6 @@ EM_JS(void,js_main,(),{
 
 'use strict';
 
-
-
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
 const switchy=document.getElementById('di');
@@ -228,14 +226,16 @@ var mv,lo;
 if(lockVid!=1){
 winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-bezl.height=winSize;
+bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-winSize=parseInt(window.innerHeight,10);
-document.getElementById('ldv').height=winSize;
-// loadV.width=this.videoWidth;
-document.getElementById('wid').innerHTML=parseInt(this.videoWidth,10);
-document.getElementById('hig').innerHTML=parseInt(this.videoHeight,10);
+var nn=window.innerHeight;
+var vvh=this.videoHeight;
+var vvw=this.videoWidth;
+document.getElementById('ldv').height=parseInt(nn,10);
+document.getElementById('ldv').width=this.videoWidth;
+document.getElementById('wid').innerHTML=parseInt(vvw,10);
+document.getElementById('hig').innerHTML=parseInt(vvh,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 if(mic>0){
@@ -285,11 +285,10 @@ loada();
 },$ldt);
 }
 
-setTimeout(function(){
-scanSongs();
+
 scanVideos();
 loada();
-},100);
+scanSongs();
 
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
