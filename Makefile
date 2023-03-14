@@ -69,7 +69,7 @@ b3_combine_llvm:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2a -sUSE_SDL=2 -fno-fast-math \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
-	 em++ src/combine/video.cpp -c -O0 -std=c++2a -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/video.cpp -c -O0 -std=c++2a -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/combine/shader.cpp -c -O0 -std=c++2a -fno-math-errno -mcpu=bleeding-edge \
