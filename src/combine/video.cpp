@@ -364,7 +364,7 @@ reverseLoop();
 forwardLoop();
 };
 };
-},timFrm)}
+},10.4)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
