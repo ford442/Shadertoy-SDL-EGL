@@ -185,14 +185,14 @@ sh4d=false;
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
-const $BB=Module.HEAPF64.buffer;
+const $H32=Module.HEAPF32.buffer;
 var inh=window.innerHeight;
 var s$=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
 var la=h$*w$*8;
 var pointa=77*la;
-var agav=new Float64Array($BB,pointa,300);
+var agav=new Float32Array($H32,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -203,7 +203,7 @@ agav.fill(max,200,33);
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
-let gl=bCan.getContext("webgl2",{
+let gljs=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -225,28 +225,33 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-gl.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
-// gl.getExtension('EXT_pixel_format_float');
+
+gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
+  /*
+gl.getExtension('EGL_HI_colorformats');
+gl.getExtension('EGL_KHR_gl_colorspace');
+// gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
+// gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
+// gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
+// gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
+gl.getExtension('EXT_texture_filter_anisotropic');
+*/
 // gl.getExtension('ARB_blend_func_extended');
-// gl.getExtension('KHR_gl_colorspace');
-// gl.getExtension('EXT_gl_colorspace_scrgb_linear');
-// gl.getExtension('EXT_gl_colorspace_display_p3');
-// gl.getExtension('EXT_gl_colorspace_display_p3_linear');
-// gl.getExtension('EXT_gl_colorspace_bt2020_linear');
-// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+  
+gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
+gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
-// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-// gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.disable(gl.DITHER);
- gl.blendColor(1.0,1.0,1.0,1.0);
- gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
- gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+gljs.blendColor(1.0,1.0,1.0,1.0);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
+// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
-gl.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
+gljs.drawingBufferColorSpace='display-p3';
+const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
 const g2=new GPU({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
@@ -256,19 +261,20 @@ g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-let R=g2.createKernel(function(tv){
+const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
-let t=g.createKernel(function(v){
+const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
-let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([s$,s$]);
+//     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([h$,w$]);
+const r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x];
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $aavg=this.constants.aavg;
@@ -276,26 +282,27 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-// var silvrr=Ave(p[0],p[1],p[2]);
+//   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
+// }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
+var blank$=Math.max((((w$-s$)*1.0)/8.0),0);
+var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
 la=h$*w$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float64Array($BB,pointa,300);
+var agav=new Float32Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=77*la;
-var $B=new Float64Array($BB,pointb,sz);
+var $B=new Float32Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -303,26 +310,26 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
-$S=parseInt(window.innerHeight,10);
+var blank$=Math.max((((w$-s$)*1.0)/8.0),0);
+var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
+s$=parseInt(window.innerHeight,10);
 la=h$*w$*8;
 sz=(h$*w$)/8;
-pointa=77*la;
-var agav=new Float64Array($BB,pointa,300);  // has to var?
+var pointa=77*la;
+var agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-pointb=66*la;
-var $B=new Float64Array($BB,pointb,sz);  // has to var?
+var pointb=66*la;
+var $B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
@@ -344,9 +351,9 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
 if(sh4d==1){
+Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
-Module.ccall("frm",null,[],[]);
 };
 setTimeout(function(){
 M();
@@ -357,7 +364,7 @@ reverseLoop();
 forwardLoop();
 };
 };
-},10.4)}
+},timFrm)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
