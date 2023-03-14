@@ -2,15 +2,12 @@
 
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
+#include "../../include/combine/intrins.hpp"
+
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
 #pragma STDC CX_LIMITED_RANGE ON
 
-#include <wasm_simd128.h>
-#include <xmmintrin.h>
-#include <immintrin.h> 
-#include <nmmintrin.h>
-#include <unistd.h>
 
 #include <iostream>
 #include <algorithm>
@@ -24,8 +21,6 @@
 #include <chrono>
 #include <cfloat>
 #include <climits>
-
-#include <unistd.h>
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
