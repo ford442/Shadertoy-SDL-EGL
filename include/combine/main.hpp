@@ -3,11 +3,16 @@
 #include <ctime>
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include "../../include/combine/intrins.hpp"
 
-int rNd(int Th);
+#undef FLT_EVAL_METHOD
+#define FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE ON
 
+v128_t rNd(int);
 extern"C"{
 
-int r4nd(int tH);
+int c;
+int r4nd(int);
 
 }
