@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../include/combine/intrins.hpp"
+
 #include <webgl/webgl2.h>
 
 #define GL_GLES_PROTOTYPES 1
