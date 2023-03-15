@@ -22,7 +22,7 @@
 #endif
 
 #ifndef EGLAPI
-#define EGLAPI 1
+#define EGLAPI
 #endif
 
 #include <EGL/egl.h>
