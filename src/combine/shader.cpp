@@ -61,11 +61,11 @@ iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
+// glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+// glFlush();
+// nanosleep(&req,&rem);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFlush();
-nanosleep(&req,&rem);
-glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFinish();
 return;
 }
 
@@ -149,9 +149,9 @@ mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
-// emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");     //     vv  required for realtime
-// emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx,"NV_context_priority_realtime"); // ^^
 // emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); // ^^
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
