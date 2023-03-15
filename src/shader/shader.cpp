@@ -9,6 +9,7 @@ ms_l=false;
 }}
 return(EM_BOOL)1;
 }
+
 static EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
@@ -17,6 +18,7 @@ y=e->clientY;
 }}
 return (EM_BOOL)1;
 }
+
 void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -43,6 +45,7 @@ glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
 }
+
 void Rend(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
@@ -62,6 +65,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
+
 GLchar * rd_fl(const char * Fnm){
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -90,6 +94,7 @@ return results;
 }
 return nullptr;
 }
+
 GLuint cmpl_shd(GLenum type,GLsizei nsrc,GLchar ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
@@ -100,6 +105,7 @@ glShaderSource(shader,nsrc,src,srclens);
 glCompileShader(shader);
 return shader;
 }
+
 void strt(){
 eglconfig=NULL;
 iFrame=0;
@@ -275,11 +281,14 @@ auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
+
 extern "C" {
+
 void str(){
 void(*st)(){&strt};
 // st=&strt;
 st();
 return;
 }
+
 }
