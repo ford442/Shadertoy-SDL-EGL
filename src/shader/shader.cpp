@@ -63,25 +63,25 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 GLchar * rd_fl(const char * Fnm){
-char16_t * result=NULL;
+char8_t * result=NULL;
 GLchar * results=NULL;
 long length=0;
 FILE * file=fopen(Fnm,"r");
 if(file){
-short int stat=fseek(file,(long int)0,SEEK_END);
+int stat=fseek(file,(int)0,SEEK_END);
 if(stat!=0){
 fclose(file);
 return nullptr;
 }
 length=ftell(file);
-stat=fseek(file,(long int)0,SEEK_SET);
+stat=fseek(file,(int)0,SEEK_SET);
 if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char16_t *>(malloc((length+1)*sizeof(char16_t)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char16_t),length,file);
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
