@@ -132,7 +132,7 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
@@ -149,9 +149,9 @@ mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
-emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");  //  required for float/alpha (must be 'EXT_pixel_format_float' and not 'EGL_EXT_pixel_format_float')
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");     //     vv  required for realtime
-emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");     //     vv  required for realtime
 emscripten_webgl_enable_extension(ctx,"NV_context_priority_realtime"); // ^^
 // emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); // ^^
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
