@@ -332,7 +332,7 @@ for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-var pointb=66*la;
+var pointb=66*lab;
 var $B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -353,7 +353,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 }};
 $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=66*la;  // has to revar?
+var pointb=66*lab;  // has to revar?
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
