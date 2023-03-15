@@ -138,15 +138,17 @@ var loopPart;
 var mmvv;
 var revv;
 var $bb;
+
 function forwardLoop(){
 // setTim=mmvv.currentTime;
 setTim+=stpInc;
-if(setTim<stp){
+if(setTim<=stp){
 mmvv.currentTime=setTim;
 }else{
 revv=true;
 }
 }
+
 function reverseLoop(){
 // setTim=mmvv.currentTime;
 setTim-=stpInc;
@@ -156,6 +158,7 @@ mmvv.currentTime=setTim;
 revv=false;
 }
 }
+
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
@@ -200,8 +203,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
 colorType:'float64',
