@@ -105,7 +105,7 @@ char32_t * read_file(const GLchar *);
 
 // int_fast32_t iFrame,iwi,ihi;
 long long iFrame,iwi,ihi;
-GLint iFps,Size;
+GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
 void renderFrame();
