@@ -70,8 +70,8 @@ return;
 }
 
 void fr4m(){
-void(*FrM)();
-FrM=&renderFrame;
+void(*FrM)(){&renderFrame};
+// FrM=&renderFrame;
 FrM();
 return;
 }
@@ -251,15 +251,15 @@ return;
 extern "C" {
 
 void frm(){
-void(*fRm)();
-fRm=&fr4m;
+void(*fRm)(&fr4m);
+//fRm=&fr4m;
 fRm();
 return;
 }
 
 void str(){
-void(*sTr)();
-sTr=&strt;
+void(*sTr)(&strt);
+// sTr=&strt;
 sTr();
 return;
 }
