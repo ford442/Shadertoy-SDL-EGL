@@ -275,7 +275,7 @@ var av$=Ave(P[0],P[1],P[2]);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // av$=av$+(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([s$,s$]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
