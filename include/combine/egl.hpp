@@ -4,16 +4,20 @@
 
 #include <webgl/webgl2.h>
 
-#define GL_GLES_PROTOTYPES 1
+#ifndef GL_GLES_PROTOTYPES
+#define GL_GLES_PROTOTYPES
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 #include <GLES3/gl32.h>
 #include <GLES3/gl3platform.h>
-
-#define EGL_EGL_PROTOTYPES 1
-#define EGL_EGLEXT_PROTOTYPES 1
-#define EGL_NO_PLATFORM_SPECIFIC_TYPES 1
-#define EGLAPI 1
+#ifndef EGL_EGL_PROTOTYPES 
+#define EGL_EGL_PROTOTYPES
+#ifndef EGL_EGLEXT_PROTOTYPES
+#define EGL_EGLEXT_PROTOTYPES
+#ifndef EGL_NO_PLATFORM_SPECIFIC_TYPES
+#define EGL_NO_PLATFORM_SPECIFIC_TYPES
+#ifndef EGLAPI
+#define EGLAPI
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
