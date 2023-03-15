@@ -29,7 +29,7 @@ attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -203,8 +203,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
 colorType:'float64',
@@ -272,7 +272,7 @@ const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$+(minuss*(av$*0.01));
+av$=av$+(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
@@ -293,8 +293,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-s$)*1.0)/8.0),0);
-var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
+var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 la=h$*w$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -319,8 +319,8 @@ var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-s$)*1.0)/8.0),0);
-var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
+var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
 la=h$*w$*8;
 sz=(h$*w$)/8;
@@ -341,15 +341,15 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){
 return;
-};
+}
 for(var i=64;i>0;i--){
 var loca=$F+1;
-if(loca>64){loca=1;};
+if(loca>64){loca=1;}
 var locb=$Bu+1;
-if(locb>64){locb=1;};
+if(locb>64){locb=1;}
 if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
-};};
+}};
 $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*la;  // has to revar?
@@ -357,7 +357,7 @@ if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
-};
+}
 setTimeout(function(){
 M();
 if(loopLoop==true){
@@ -365,8 +365,8 @@ if(revv==true){
 reverseLoop();
 }else{
 forwardLoop();
-};
-};
+}
+}
 },timFrm)}
 M();
 document.getElementById("di").onclick=function(){
