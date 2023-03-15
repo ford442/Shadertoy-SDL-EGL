@@ -12,6 +12,7 @@
 
 #define EGL_EGL_PROTOTYPES 1
 #define EGL_EGLEXT_PROTOTYPES 1
+#define EGL_NO_PLATFORM_SPECIFIC_TYPES 1
 #define EGLAPI 1
 
 #include <EGL/egl.h>
