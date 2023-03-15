@@ -11,7 +11,7 @@ attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -304,7 +304,7 @@ for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-pointb=66*la;
+pointb=66*lab;
 var $B=new Float32Array($BB,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -325,7 +325,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };};
 $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;  // has to revar?
+pointb=66*lab;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
