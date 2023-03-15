@@ -142,8 +142,8 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,attribut_li
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=(int)hi;
-S=(float)Size;
+sSize=(int)hi;
+S=(float)sSize;
 mX=0.5*S;
 mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
