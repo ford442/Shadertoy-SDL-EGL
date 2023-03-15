@@ -136,7 +136,7 @@ var lockVid;
 var loopLoop;
 var loopPart;
 var mmvv;
-var revv;
+let revv;
 var $bb;
 
 function forwardLoop(){
