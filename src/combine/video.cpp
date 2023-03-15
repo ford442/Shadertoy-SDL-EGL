@@ -127,11 +127,11 @@ EM_JS(void,vid,(),{
 
 var vv=document.getElementById('mv');
 var sh4d=false;
-var stp,Lstp;
-const stpInc=0.016;
-var setTim;
+let stp,Lstp;
+let stpInc=0.016;
+let setTim;
 // const timFrm=16.666;
-const timFrm=10.42;
+let timFrm=10.42;
 var lockVid;
 var loopLoop;
 var loopPart;
