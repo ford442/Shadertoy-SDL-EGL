@@ -185,14 +185,14 @@ sh4d=false;
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 const $H=Module.HEAPF64.buffer;
-const $H32=Module.HEAPF64.buffer;
+const $H32=Module.HEAPF32.buffer;
 var inh=window.innerHeight;
 var s$=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
 var la=h$*w$*8;
 var pointa=77*la;
-var agav=new Float64Array($H32,pointa,300);
+var agav=new Float32Array($H32,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -295,22 +295,22 @@ var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
 la=h$*w$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($H32,pointa,300);
+var agav=new Float32Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=77*la;
-var $B=new Float64Array($H32,pointb,sz);
+var $B=new Float32Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
@@ -322,14 +322,14 @@ s$=parseInt(window.innerHeight,10);
 la=h$*w$*8;
 sz=(h$*w$)/8;
 var pointa=77*la;
-var agav=new Float64Array($H32,pointa,300);  // has to var?
+var agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
 var pointb=66*la;
-var $B=new Float64Array($H32,pointb,sz);  // has to var?
+var $B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
