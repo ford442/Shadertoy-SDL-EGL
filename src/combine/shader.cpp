@@ -30,8 +30,8 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=1.0-(xxx*Size);
-mY=1.0-(yyy*Size);
+mX=1.0-(xxx*sSize);
+mY=1.0-(yyy*sSize);
 clk_l=false;
 }
 mm=S*xx;
@@ -251,14 +251,14 @@ return;
 extern "C" {
 
 void frm(){
-void(*fRm)(&fr4m);
+void(*fRm)(){&fr4m};
 //fRm=&fr4m;
 fRm();
 return;
 }
 
 void str(){
-void(*sTr)(&strt);
+void(*sTr)(){&strt};
 // sTr=&strt;
 sTr();
 return;
