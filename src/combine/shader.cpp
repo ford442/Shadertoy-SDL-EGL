@@ -181,8 +181,8 @@ glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_DITHER);
-// glEnable(GL_CULL_FACE);
-// glFrontFace(GL_CW);
+glEnable(GL_CULL_FACE);
+glFrontFace(GL_CW);
 // glEnable(GL_BLEND);
 //glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
@@ -239,9 +239,9 @@ smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
-glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,Size,Size);
+glScissor((GLint)0,(GLint)0,sSize,sSize);
 auto t1=std::chrono::steady_clock::now();
 // emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
