@@ -3,6 +3,7 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #include "../../include/combine/intrins.hpp"
+#include <cfloat>
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
