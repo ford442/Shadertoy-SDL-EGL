@@ -69,7 +69,7 @@ return;
 GLchar * rd_fl(const char * Fnm){
 char8_t * result=NULL;
 GLchar * results=NULL;
-long length=0;
+long int length=0;
 FILE * file=fopen(Fnm,"r");
 if(file){
 int stat=fseek(file,(int)0,SEEK_END);
