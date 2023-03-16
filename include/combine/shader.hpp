@@ -97,9 +97,9 @@ const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-GLuint compile_shader(GLenum,GLsizei,const GLchar **);
+GLchar * read_file(const GLchar *);
 
-char32_t * read_file(const GLchar *);
+GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 #include "../../include/combine/egl.hpp"
 
