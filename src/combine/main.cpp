@@ -9,7 +9,7 @@ return Dr;
 
 EM_JS(void,js_main,(),{
 
-'use strict';
+"use strict";
 
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
@@ -327,7 +327,7 @@ return c;
 }
 
 int main(void){
-'use strict';
+"use strict";
 EM_ASM({
 FS.mkdir('/snd');
 FS.mkdir('/shader');
