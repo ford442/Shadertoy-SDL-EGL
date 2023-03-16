@@ -123,7 +123,7 @@ return;
 
 EM_JS(void,vid,(),{
 
-'use strict';
+"use strict";
 
 var vv=document.getElementById('mv');
 var sh4d=false;
