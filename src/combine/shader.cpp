@@ -71,7 +71,6 @@ return;
 
 void fr4m(){
 void(*FrM)(){&renderFrame};
-// FrM=&renderFrame;
 FrM();
 return;
 }
@@ -249,19 +248,16 @@ auto t1=std::chrono::steady_clock::now();
 return;
 }
 
-
 extern "C" {
 
 void frm(){
 void(*fRm)(){&fr4m};
-//fRm=&fr4m;
 fRm();
 return;
 }
 
 void str(){
 void(*sTr)(){&strt};
-// sTr=&strt;
 sTr();
 return;
 }
