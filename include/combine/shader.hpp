@@ -26,7 +26,7 @@ long double TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
 
 long double Ttime;
 
-char * fileloc=(char*)"/shader/shader1.toy";
+char * Fnm=(char*)"/shader/shader1.toy";
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -97,7 +97,7 @@ const GLchar * vertex_shader_body=vertex_shader_body_gles3;
 const GLchar * fragment_shader_header=fragment_shader_header_gles3;
 const GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-GLchar * read_file(const GLchar *);
+GLchar * rd_fl(const char *);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
