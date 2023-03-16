@@ -160,10 +160,10 @@ revv=false;
 }
 
 function doKey(e){
-if(e.code==='Space'){
+if(e.code=='Space'){
 e.preventDefault();
 }
-if (e.code==='KeyZ'){
+if (e.code=='KeyZ'){
 mmvv=document.getElementById('mv');
 mmvv.pause();
 stp=document.getElementById('mv').currentTime;
@@ -174,14 +174,14 @@ stp-=loopPart/2.0;
 loopLoop=true;
 revv=true;
 }
-if(e.code==='KeyX'){
+if(e.code=='KeyX'){
 loopLoop=false;
 vv.play();
 }
-if(e.code==='KeyA'){
+if(e.code=='KeyA'){
 sh4d=true;
 }
-if(e.code==='KeyS'){
+if(e.code=='KeyS'){
 sh4d=false;
 }
 }
@@ -305,7 +305,7 @@ for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-var pointb=77*la;
+var pointb=77*lab;
 var $B=new Float32Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
@@ -354,15 +354,15 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66*lab;  // has to revar?
-if(sh4d===1){
+if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 }
 setTimeout(function(){
 M();
-if(loopLoop===true){
-if(revv===true){
+if(loopLoop==true){
+if(revv==true){
 reverseLoop();
 }else{
 forwardLoop();
