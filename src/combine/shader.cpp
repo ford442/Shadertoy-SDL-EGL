@@ -76,26 +76,26 @@ FrM();
 return;
 }
 
-GLchar * read_file(const char * filename){
-char8_t * result=NULL;
+GLchar * rd_fl(const char * Fnm){
+char16_t * result=NULL;
 GLchar * results=NULL;
 long int length=0;
-FILE * file=fopen(filename,"r");
+FILE * file=fopen(Fnm,"r");
 if(file){
-int status=fseek(file,(long int)0,SEEK_END);
-if(status!=0){
+int stat=fseek(file,(int)0,SEEK_END);
+if(stat!=0){
 fclose(file);
 return nullptr;
 }
 length=ftell(file);
-status=fseek(file,(long int)0,SEEK_SET);
-if(status!=0){
+stat=fseek(file,(int)0,SEEK_SET);
+if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char16_t *>(malloc((length+1)*sizeof(char16_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char16_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
@@ -199,7 +199,7 @@ glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanosleep(&req,&rem);
-GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
+GLchar * default_fragment_shader=(GLchar *)rd_fl(Fnm);
 nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
