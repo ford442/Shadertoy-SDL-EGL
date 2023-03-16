@@ -136,16 +136,16 @@ Module.ccall('b3_egl');
 },150);
 setTimeout(function(){
 Module.ccall('b3');
-},750);
+},450);
 setTimeout(function(){
 Module.ccall('str');
-},950);
+},750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},1000);
+},800);
 }
 
 function shds(xml){
