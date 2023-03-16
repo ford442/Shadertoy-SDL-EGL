@@ -12,6 +12,11 @@
 #include <climits>
 #include <iostream>
 
+#undef FLT_EVAL_METHOD
+#define FLT_EVAL_METHOD 2
+#pragma STDC FP_CONTRACT OFF
+#pragma STDC CX_LIMITED_RANGE OFF
+
 // #include <stdfloat>  //  c++23
 
 #include <emscripten.h>
