@@ -133,19 +133,19 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3_egl');
-},150);
+},50);
 setTimeout(function(){
 Module.ccall('b3');
 },450);
 setTimeout(function(){
 Module.ccall('str');
-},750);
+},850);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},800);
+},950);
 }
 
 function shds(xml){
