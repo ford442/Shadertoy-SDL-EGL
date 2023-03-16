@@ -77,7 +77,7 @@ return;
 }
 
 GLchar * read_file(const char * filename){
-char16_t * result=NULL;
+char8_t * result=NULL;
 GLchar * results=NULL;
 long int length=0;
 FILE * file=fopen(filename,"r");
@@ -93,9 +93,9 @@ if(status!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char16_t *>(malloc((length+1)*sizeof(char16_t)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char16_t),length,file);
+long int actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
