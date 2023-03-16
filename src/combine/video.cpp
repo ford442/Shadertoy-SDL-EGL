@@ -29,7 +29,7 @@ attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_FALSE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -194,9 +194,8 @@ s$=parseInt(document.getElementById("canvasSize").innerHTML,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*w$*8;
-var lab=h$*w$*4;
-var pointa=77*lab;
-var agav=new Float32Array($H32,pointa,300);
+var pointa=77*la;
+var agav=new Float64Array($H32,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -216,7 +215,7 @@ alpha:true,
 depth:true,
 stencil:false,
 precision:'highp',
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
@@ -297,16 +296,15 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 la=h$*w$*8;
-lab=h$*w$*4;
-pointa=77*lab;
-var agav=new Float32Array($H32,pointa,300);
+pointa=77*la;
+var agav=new Float64Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-var pointb=77*lab;
-var $B=new Float32Array($H32,pointb,sz);
+var pointb=77*la;
+var $B=new Float64Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -324,16 +322,15 @@ var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
 la=h$*w$*8;
-lab=h$*w$*4;
-pointa=77*lab;
-var agav=new Float32Array($H32,pointa,300);  // has to var?
+pointa=77*la;
+var agav=new Float64Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 };
-var pointb=66*lab;
-var $B=new Float32Array($H32,pointb,sz);  // has to var?
+var pointb=66*la;
+var $B=new Float64Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
@@ -353,7 +350,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 }};
 $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=66*lab;  // has to revar?
+var pointb=66*la;  // has to revar?
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
