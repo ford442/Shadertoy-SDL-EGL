@@ -7,7 +7,8 @@
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
-#pragma STDC CX_LIMITED_RANGE ON
+#pragma STDC FP_CONTRACT OFF
+#pragma STDC CX_LIMITED_RANGE OFF
 
 #include <iostream>
 #include <algorithm>
