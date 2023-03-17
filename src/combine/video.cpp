@@ -4,8 +4,8 @@ void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(1.0-rlc))/2.0)+alc);
 drk=1.0-(avr-0.5);
 brt=((1.0-rlc)-(alc-0.5));
-// glBlendColor(avrg,avrg,avrg,1.0);
-glClearColor(drk,drk,drk,brt);
+glBlendColor(avrg,avrg,avrg,1.0);
+// glClearColor(drk,drk,drk,brt);
 return;
 }
 
@@ -255,8 +255,8 @@ gljs.blendColor(1.0,1.0,1.0,1.0);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
-const g2=new GPU({mode:'gpu'});
+const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
+const g2=new GPU({mode:'webgl2'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
