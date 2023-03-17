@@ -2,8 +2,8 @@
 
 v128_t rNd(int Th){
 std::srand(std::time(nullptr));
-int rD=std::rand()%Th;
-v128_t Dr=wasm_i32x4_splat(rD);
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
