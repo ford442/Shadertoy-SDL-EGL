@@ -285,6 +285,7 @@ b3_audio_llvm:
 	
 b3_video_google_llvm:
 	 em++ src/video/main_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
 	 em++ src/video/video_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
