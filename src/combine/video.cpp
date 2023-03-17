@@ -243,14 +243,14 @@ gl.getExtension('EXT_texture_filter_anisotropic');
   
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// gl.enable(gl.BLEND);  //  webgl2 messed up effect
 
 gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
-// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-// gl.enable(gl.BLEND);  //  webgl2 messed up effect
+ gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+ gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
@@ -355,7 +355,7 @@ var pointb=66*la;  // has to revar?
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 }
 setTimeout(function(){
 M();
