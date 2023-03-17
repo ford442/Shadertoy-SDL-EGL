@@ -11,6 +11,8 @@
 #pragma STDC CX_LIMITED_RANGE ON
 
 v128_t rNd(int);
+int rD;
+v128_t Dr;
 
 extern"C"{
 
