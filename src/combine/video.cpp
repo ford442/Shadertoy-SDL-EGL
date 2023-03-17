@@ -4,7 +4,7 @@ void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
 avrg=(((avr+(1.0-rlc))/2.0)+alc);
 drk=1.0-(avr-0.5);
 brt=((1.0-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,1.0);
+// glBlendColor(avrg,avrg,avrg,1.0);
 glClearColor(drk,drk,drk,brt);
 return;
 }
@@ -47,6 +47,7 @@ eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glEnable(GL_BLEND);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
@@ -355,7 +356,7 @@ var pointb=66*la;  // has to revar?
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 }
 setTimeout(function(){
 M();
