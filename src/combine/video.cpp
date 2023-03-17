@@ -47,7 +47,7 @@ eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glEnable(GL_BLEND);
+// glEnable(GL_BLEND);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
