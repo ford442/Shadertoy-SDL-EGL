@@ -480,7 +480,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $amax=this.constants.amax;
@@ -519,7 +519,7 @@ bb=GoldB(eulb);
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
 inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
