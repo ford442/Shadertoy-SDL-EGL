@@ -329,6 +329,18 @@ b3_video_google:
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano","_str","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
+b3_video_youtube:
+	 em++ src/video/main_google_street.cpp -c -std=c++20 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 em++ src/video/video_youtube.cpp -c -std=c++20 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 emcc main_google_street.o video_google_street.o -o g0003.js -std=c++20 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -sALLOW_MEMORY_GROWTH=1 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=4096mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano","_str","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js startUp.js --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+
 b3_audio:
 	em++ src/audio/main.cpp -c -std=c++11 -fno-math-errno -O0
 	em++ src/audio/audio.cpp -c -std=c++2b -sUSE_SDL=2 -O0
