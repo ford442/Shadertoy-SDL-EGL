@@ -403,7 +403,7 @@ var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -480,7 +480,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
+}).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $amax=this.constants.amax;
@@ -530,7 +530,7 @@ var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
