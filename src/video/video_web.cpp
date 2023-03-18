@@ -385,7 +385,7 @@ EM_JS(void,vid,(),{
 
 "use strict";
 
-var vv=document.getElementById("mv");
+var vv=document.getElementById("rend");
 var sh4d=true;
 var stp,Lstp;
 const stpInc=0.016;
@@ -524,7 +524,7 @@ inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
 h$=parseInt(inh,10);
-vv=document.getElementById("mv");
+vv=document.getElementById("rend");
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*8;
@@ -547,7 +547,7 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
-vv=document.getElementById("mv");
+vv=document.getElementById("rend");
 inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
