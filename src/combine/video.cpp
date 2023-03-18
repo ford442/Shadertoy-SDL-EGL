@@ -316,8 +316,8 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-//   /*
-//  
+  /*
+//  // 
 var rr;
 var gg;
 var bb;
@@ -338,16 +338,16 @@ gg=GreenG(neerg);
 bb=GreenB(eulb);
 // }else{
 // bb=RoseB(eulb);
-// }
-//    */
+// }//   
+ */
 // this.color(GreenR(p[0]),GreenG(p[1]),GreenB(p[2]),aveg);
-this.color(rr,gg,bb,aveg);
+// this.color(rr,gg,bb,aveg);
 // 
   
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
   
-// this.color(p[0],p[1],p[2],aveg);
+this.color(p[0],p[1],p[2],aveg);
   
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
