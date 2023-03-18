@@ -257,15 +257,44 @@ gljs.blendColor(1.0,1.0,1.0,1.0);
 gljs.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
 const g2=new GPU({mode:'webgl2'});
+
+const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
+const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
+const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
+const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
+  
+const glslRoseR=`float RoseR(float a){return((a+0.86+0.86+0.86+((a+0.86)/2.0))/5.0);}`;
+const glslRoseG=`float RoseG(float a){return((a+0.13+0.13+0.13+((a+0.13)/2.0))/5.0);}`;
+const glslRoseB=`float RoseB(float a){return((a+0.86+0.86+0.86+((a+0.86)/2.0))/5.0);}`;
+  
+  
+const glslGreenR=`float GreenR(float a){return((a+0.11+0.11+0.11+((a+0.11)/2.0))/5.0);}`;
+const glslGreenG=`float GreenG(float a){return((a+0.73+0.73+0.73+((a+0.73)/2.0))/5.0);}`;
+const glslGreenB=`float GreenB(float a){return((a+0.14+0.14+0.14+((a+0.14)/2.0))/5.0);}`;
+
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
+  
+  
 // const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
+  
+  
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+  
+
+g.addNativeFunction('GreenR',glslGreenR,{returnType:'Number'});
+g.addNativeFunction('GreenG',glslGreenG,{returnType:'Number'});
+g.addNativeFunction('GreenB',glslGreenB,{returnType:'Number'});
+  
+g.addNativeFunction('RoseR',glslRoseR,{returnType:'Number'});
+g.addNativeFunction('RoseG',glslRoseG,{returnType:'Number'});
+g.addNativeFunction('RoseB',glslRoseB,{returnType:'Number'});
+  
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
@@ -287,9 +316,39 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
+  
+//   /*
+var rr;
+var gg;
+var bb;
+var der=p[0];
+var neerg=p[1];
+var eulb=p[2];
+if(der>0.333){
+ rr=GreenR(der);
+}else{
+ rr=RoseR(der);
+ }
+if(neerg>0.4){
+gg=GreenG(neerg);
+}else{
+gg=RoseG(neerg);
+}
+if(eulb>0.5){
+bb=GreenB(eulb);
+}else{
+bb=RoseB(eulb);
+}
+  
+// this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
+this.color(rr,gg,bb,aveg);
+//  */
+  
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
-this.color(p[0],p[1],p[2],aveg);
+  
+// this.color(p[0],p[1],p[2],aveg);
+  
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
