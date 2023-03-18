@@ -379,8 +379,8 @@ var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
-var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
+blank$=Math.max((((w$-s$)*0.0)/8.0),0);
+nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
 la=h$*w$*8;
 pointa=77*la;
