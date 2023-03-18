@@ -579,6 +579,8 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
+},timFrm)}
+M();
 document.getElementById("di").onclick=function(){
 T=true;
 S();
