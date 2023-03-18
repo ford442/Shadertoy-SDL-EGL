@@ -316,7 +316,7 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-   /*
+//   /*
 //  
 var rr;
 var gg;
@@ -324,24 +324,24 @@ var bb;
 var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
-if(der>0.333){
+// if(der>0.333){
  rr=GreenR(der);
-}else{
- rr=RoseR(der);
- }
-if(neerg>0.4){
+// }else{
+// rr=RoseR(der);
+// }
+// if(neerg>0.4){
 gg=GreenG(neerg);
-}else{
-gg=RoseG(neerg);
-}
-if(eulb>0.5){
+// }else{
+// gg=RoseG(neerg);
+// }
+// if(eulb>0.5){
 bb=GreenB(eulb);
-}else{
-bb=RoseB(eulb);
-}
-   */
-this.color(GreenR(p[0]),GreenG(p[1]),GreenB(p[2]),aveg);
-// this.color(rr,gg,bb,aveg);
+// }else{
+// bb=RoseB(eulb);
+// }
+//    */
+// this.color(GreenR(p[0]),GreenG(p[1]),GreenB(p[2]),aveg);
+this.color(rr,gg,bb,aveg);
 // 
   
 //   var silvrr=Ave(p[0],p[1],p[2]);
