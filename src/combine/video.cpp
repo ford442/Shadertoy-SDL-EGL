@@ -316,8 +316,8 @@ var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
-  
-//   /*
+   /*
+//  
 var rr;
 var gg;
 var bb;
@@ -339,10 +339,10 @@ bb=GreenB(eulb);
 }else{
 bb=RoseB(eulb);
 }
-  
-// this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
-this.color(rr,gg,bb,aveg);
-//  */
+   */
+this.color(GreenR(p[0]),GreenG(p[1]),GreenB(p[2]),aveg);
+// this.color(rr,gg,bb,aveg);
+// 
   
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
