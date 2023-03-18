@@ -513,8 +513,11 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+
+inh=window.innerHeight;
+$S=parseInt(inh,10);
+w$=parseInt(inh,10);
+h$=parseInt(inh,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
@@ -539,15 +542,17 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var 
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+inh=window.innerHeight;
+$S=parseInt(inh,10);
+w$=parseInt(inh,10);
+h$=parseInt(inh,10);
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,304);  // has to var?
+var agav=new Float64Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
