@@ -243,14 +243,14 @@ b3_video_llvm:
 	 emcc main.o video.o -o b3020.js -mllvm -O0 -fpie -std=c++20 -fno-math-errno -flto \
 	 -fwasm-exceptions \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
-	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
+	 -fuse-ld=mold -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --post-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_test:
 	em++ src/audio/main.cpp -c -std=c++2a -stdlib=libc++ -fno-math-errno -O0 -fpie -fno-rtti \
