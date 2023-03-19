@@ -59,6 +59,7 @@ void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 un=&uni;
 un(mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
+  glDisable(GL_BLEND);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
@@ -139,6 +140,11 @@ sSize=static_cast<int>(hi);
 S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
+  
+  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+//     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+//       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_EXT_color_buffer_float");
@@ -197,14 +203,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 // emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-  
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-//     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-//       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-  
 
-  
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
@@ -222,7 +221,9 @@ glDisable(GL_STENCIL_TEST);  // invalid capa
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
 //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
+glPolygonOffset((GLfloat)1f,(GLfloat)1f);
+glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+  
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
 //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
 // glEnable(GL_PROGRAM_POINT_SIZE);  //  invalid capability
@@ -232,8 +233,7 @@ glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 glDisable(GL_DITHER);
 glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
-// glEnable(GL_FRAMEBUFFER_SRGB);
-glEnable(FRAMEBUFFER_SRGB_EXT);
+glEnable(GL_FRAMEBUFFER_SRGB);
     
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
