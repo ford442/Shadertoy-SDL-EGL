@@ -28,7 +28,6 @@
 
 #include <emscripten.h>
 
-GLint Size_js;
 double wi_js,hi_js;
 
 float max;
@@ -37,6 +36,10 @@ float sum;
 float avgSum;
 float minSum;
 float maxSum;
+
+#include "../../include/combine/gl.hpp"
+
+GLint Size_js;
 
 #include "../../include/combine/egl.hpp"
 
