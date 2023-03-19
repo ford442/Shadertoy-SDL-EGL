@@ -216,7 +216,7 @@ glStencilMask(0xFF);
 
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
-glDisable(GL_STENCIL_TEST);  // invalid capa
+// glDisable(GL_STENCIL_TEST);  // invalid capa
 // glFog(GL_FOG_MODE,GL_EXP2);
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
 //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
