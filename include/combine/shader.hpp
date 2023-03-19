@@ -11,6 +11,7 @@
 #include <cfloat>
 #include <climits>
 #include <iostream>
+#include "../../include/combine/intrins.hpp"
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 2
