@@ -20,7 +20,8 @@ v128_t Dr;
 
 extern"C"{
 
-int c,Rg;
+int c;
+v128_t Rg;
 int r4nd(int);
 
 }
