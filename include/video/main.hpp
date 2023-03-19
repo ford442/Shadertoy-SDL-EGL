@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <ctime>
+#include <float>
 #include <random>
 #include <emscripten.h>
 #include <emscripten/html5.h>
