@@ -131,7 +131,7 @@ setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},50);
+},100);
 });
 
 extern"C"{
@@ -155,5 +155,5 @@ FS.mkdir('/shader');
 
 void(*jss)(){&js_main};
 jss();
-return 1;
+return 0;
 }
