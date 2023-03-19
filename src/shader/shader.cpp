@@ -170,7 +170,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_linear");
+// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
