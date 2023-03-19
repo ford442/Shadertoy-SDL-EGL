@@ -31,7 +31,10 @@ int Th;
 v128_t Dr,rD;
 std::random_device rd;
 
-extern"C"{
+extern "C"{
+  
+v128_t Rg;
+int c;
 
 int r4nd(int);
 
