@@ -205,8 +205,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
+var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
 colorType:'float32',
@@ -251,8 +251,10 @@ gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
-gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+  
+// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+  
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
