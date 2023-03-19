@@ -1,9 +1,9 @@
 #pragma once
+
 #include <cstdlib>
 #include <ctime>
 #include <random>
 #include <emscripten.h>
-#include <emscripten/html5.h>
 #include "../../include/shader/intrins.hpp"
 
 #undef FLT_EVAL_METHOD
