@@ -27,8 +27,8 @@
 
 v128_t rNd(int);
 
-int Th;
-v128_t Dr,rD;
+int Th,rD;
+v128_t Dr;
 std::random_device rd;
 
 extern "C"{
