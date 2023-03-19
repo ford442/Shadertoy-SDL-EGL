@@ -61,7 +61,7 @@ un(mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
-// glClear(GL_STENCIL_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
@@ -113,7 +113,7 @@ clk_l=true;
 GLchar * frag_body=rd_fl(Fnm);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
@@ -202,9 +202,19 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 //     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 //       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-//  glClearDepth(D);
+  
+
+  
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
+glClearDepth(D);
+
+glEnable(GL_STENCIL_TEST);
+// glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
+glStencilFunc(GL_ALWAYS,1,0xFF);
+glStencilMask(0xFF);
+
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
 glDisable(GL_STENCIL_TEST);  // invalid capa
@@ -222,7 +232,9 @@ glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 glDisable(GL_DITHER);
 glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
-glEnable(GL_FRAMEBUFFER_SRGB);
+// glEnable(GL_FRAMEBUFFER_SRGB);
+glEnable(FRAMEBUFFER_SRGB_EXT);
+    
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
