@@ -10,6 +10,8 @@
 #define FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT OFF
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
 
 v128_t rNd(int);
 
