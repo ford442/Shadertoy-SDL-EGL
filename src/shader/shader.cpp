@@ -59,7 +59,7 @@ void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 un=&uni;
 un(mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
-  glDisable(GL_BLEND);
+ // glDisable(GL_BLEND);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
@@ -234,7 +234,7 @@ glDisable(GL_DITHER);
 glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
-    
+glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
