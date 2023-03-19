@@ -82,7 +82,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},550);
+},500);
 });
 
 function vids(xml){
@@ -133,19 +133,19 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3_egl');
-},50);
+},100);
 setTimeout(function(){
 Module.ccall('b3');
-},450);
+},400);
 setTimeout(function(){
 Module.ccall('str');
-},850);
+},800);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},950);
+},900);
 }
 
 function shds(xml){
@@ -187,7 +187,7 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
 normalResStart();
-},450);
+},400);
 };};
 ff.send(null);
 }
@@ -317,9 +317,8 @@ shutDown.postMessage({data:222});
 extern"C"{
  
 int r4nd(int tH){
-v128_t(* RnD)(int);
-RnD=&rNd;
-v128_t Rg=RnD(tH);
+v128_t(* RnD)(int){&rNd};
+Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
