@@ -24,12 +24,12 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_FALSE;
+attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_FALSE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -75,6 +75,7 @@ emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 glDisable(GL_STENCIL_TEST);
 glDisable(GL_DEPTH_TEST);
+glDisable(GL_BLEND);
 glViewport((GLint)0,(GLint)0,Size_js,Size_js);
 glScissor((GLint)0,(GLint)0,Size_js,Size_js);
 return;
@@ -188,15 +189,15 @@ sh4d=false;
 }
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-const $H=Module.HEAPF64.buffer;
-const $H32=Module.HEAPF64.buffer;
+const $H=Module.HEAPF32.buffer;
+const $H32=Module.HEAPF32.buffer;
 var inh=window.innerHeight;
 s$=parseInt(document.getElementById("canvasSize").innerHTML,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
-var la=h$*w$*8;
+var la=h$*w$*4;
 var pointa=77*la;
-var agav=new Float64Array($H32,pointa,300);
+var agav=new Float32Array($H32,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -208,13 +209,13 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
+stencil:true,
 precision:'highp',
 imageSmoothingEnabled:true,
 imageSmoothingQuality:'medium',
@@ -244,19 +245,19 @@ gl.getExtension('EXT_texture_filter_anisotropic');
   
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.enable(gl.BLEND);  //  webgl2 messed up effect
+// gl.enable(gl.BLEND);  //  webgl2 messed up effect
 
 gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
- gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
- gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
-const g2=new GPU({mode:'webgl2'});
+const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
+const g2=new GPU({mode:'gpu'});
 
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
@@ -354,44 +355,44 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
-var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
-la=h$*w$*8;
+var blank$=Math.max((((w$-s$)*1.0)/8.0),0);
+var nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
+la=h$*w$*4;
 pointa=77*la;
-var agav=new Float64Array($H32,pointa,300);
+var agav=new Float32Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=77*la;
-var $B=new Float64Array($H32,pointb,sz);
+var $B=new Float32Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-blank$=Math.max((((w$-s$)*0.0)/8.0),0);
-nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
+blank$=Math.max((((w$-s$)*1.0)/8.0),0);
+nblank$=Math.max((((s$-w$)*1.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
-la=h$*w$*8;
+la=h$*w$*4;
 pointa=77*la;
-var agav=new Float64Array($H32,pointa,300);  // has to var?
+var agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=66*la;
-var $B=new Float64Array($H32,pointb,sz);  // has to var?
+var $B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
