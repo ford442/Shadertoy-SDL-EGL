@@ -14,9 +14,11 @@
 #include "../../include/combine/intrins.hpp"
 
 #undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 2
+#define FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT OFF
-#pragma STDC CX_LIMITED_RANGE OFF
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
 
 // #include <stdfloat>  //  c++23
 
@@ -25,14 +27,18 @@
 // double_t wi,hi;
 double wi,hi;
 
-float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
-float_t F0=0.0f;
+float cMouseY,cMouseX,mouseY,mouseX;
+const float F=1.0f,Fm1=-1.0f;
+const float_t F0=0.0f;
 // double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
-long double TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
+long double TtimeDelta;
+const long double Dm1=-1.0,D=1.0;
+const double_t D0=0.0;
 
 long double Ttime;
 
-char * Fnm=(char*)"/shader/shader1.toy";
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader1.toy");
+
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -110,7 +116,7 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 #include "../../include/combine/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
-long long iFrame,iwi,ihi;
+long long int iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
@@ -145,7 +151,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
 };
 
@@ -159,7 +165,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_BUFFER_TYPE, EGL_RGB_BUFFER,
 // EGL_BIND_TO_TEXTURE_RGBA, EGL_TRUE,
 // EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -171,17 +177,17 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 EGL_NATIVE_RENDERABLE,EGL_TRUE,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_RED_SIZE,(EGLint)64,
-EGL_GREEN_SIZE,(EGLint)64,
-EGL_BLUE_SIZE,(EGLint)64,
-EGL_ALPHA_SIZE,(EGLint)64,
-EGL_DEPTH_SIZE,(EGLint)64,
-EGL_STENCIL_SIZE,(EGLint)64,
-EGL_BUFFER_SIZE,(EGLint)64,
+EGL_RED_SIZE,(EGLint)16,
+EGL_GREEN_SIZE,(EGLint)16,
+EGL_BLUE_SIZE,(EGLint)16,
+EGL_ALPHA_SIZE,(EGLint)16,
+EGL_DEPTH_SIZE,(EGLint)24,
+EGL_STENCIL_SIZE,(EGLint)16,
+EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
-EGL_SAMPLES,(EGLint)64,
-EGL_MIPMAP_LEVEL,(EGLint)64,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SAMPLES,(EGLint)32,
+EGL_MIPMAP_LEVEL,(EGLint)1,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
