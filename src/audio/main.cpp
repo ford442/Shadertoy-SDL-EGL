@@ -1,9 +1,10 @@
 #include "../../include/audio/main.hpp"
 
 v128_t rNd(int Th){
-std::srand(std::time(nullptr));
-int rD=std::rand()%Th;
-v128_t Dr=wasm_i32x4_splat(rD);
+std::srand(rd());
+// std::srand(std::time(nullptr));
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
@@ -20,7 +21,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},250);
+},200);
 }
   
 function pll(){
@@ -36,7 +37,7 @@ FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},250);
+},200);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -93,7 +94,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},550);
+},500);
 });
 
 const tem=document.getElementById('tim');
@@ -121,7 +122,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},750);
+},700);
 };
 }
 
@@ -138,8 +139,8 @@ int r4nd(int tH){
 v128_t(* RnD)(int){&rNd};
 // RnD=&rNd;
 // int Rg=RnD(tH);
-v128_t Rg=RnD(tH);
-int c=wasm_i32x4_extract_lane(Rg,0);
+Rg=RnD(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
   
@@ -155,5 +156,5 @@ FS.mkdir('/snd');
 void(*jss)(){&js_main};
 // jss=&js_main;
 jss();
-
+return 0;
 }
