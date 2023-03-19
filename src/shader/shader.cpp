@@ -196,6 +196,8 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 // emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
+emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
+  
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 //     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
@@ -220,6 +222,7 @@ glPolygonOffset((GLfloat)0.001f,(GLfloat)100.0f);
 glDisable(GL_DITHER);
 glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
+glEnable(GL_FRAMEBUFFER_SRGB);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
