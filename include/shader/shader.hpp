@@ -49,7 +49,7 @@ GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
-const GLuint vtx,frag;
+// const GLuint vtx,frag;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLclampf XYZW[4];}Vertex;
 Vertex vrt[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
