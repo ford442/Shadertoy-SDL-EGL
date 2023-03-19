@@ -27,6 +27,7 @@
 
 #include <unistd.h>
 
+double wi_js,hi_js;
 
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
@@ -57,15 +58,13 @@ float avgSum;
 float minSum;
 float maxSum;
 
-int_fast32_t Size;
+GLint sSize;
 // int eglSize;
-double wi_js,hi_js;
 EGLContext contextegl_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
-
 
 EGLint const attribut_list_js[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
