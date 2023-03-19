@@ -22,6 +22,8 @@ std::random_device rd;
 
 extern"C"{
 
+int c;
+v128_t Rg;
 int r4nd(int);
 
 }
