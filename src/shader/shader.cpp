@@ -222,7 +222,7 @@ glDisable(GL_STENCIL_TEST);  // invalid capa
 //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
 glPolygonOffset((GLfloat)1.0f,(GLfloat)1.0f);
-//  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);  undefined symbol
+//  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //  undefined symbol
   
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
 //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
@@ -233,7 +233,7 @@ glPolygonOffset((GLfloat)1.0f,(GLfloat)1.0f);
 glDisable(GL_DITHER);
 glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
-glEnable(GL_FRAMEBUFFER_SRGB);
+//  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
     
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
