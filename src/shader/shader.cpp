@@ -234,7 +234,7 @@ nanosleep(&req,&rem);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-GLuint(* cs)(GLenum,GLsizei,GLchar **);
+GLuint(* cs)(GLenum,GLsizei,const GLchar **);
 cs=&cmpl_shd;
 const GLuint vtx=cs(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
