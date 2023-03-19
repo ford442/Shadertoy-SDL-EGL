@@ -20,6 +20,8 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <random>
+
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
@@ -27,6 +29,7 @@ v128_t rNd(int);
 
 int Th;
 v128_t Dr,rD;
+std::random_device rd;
 
 extern"C"{
 
