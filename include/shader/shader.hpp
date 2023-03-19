@@ -1,3 +1,4 @@
+#include <emscripten.h>
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -178,7 +179,6 @@ EGL_SAMPLES,(EGLint)32,
 EGL_NONE
 };
 
-#include <emscripten.h>
 #include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
