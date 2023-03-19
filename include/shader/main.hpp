@@ -9,6 +9,7 @@
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
+#pragma STDC FP_CONTRACT OFF
 
 v128_t rNd(int);
 
