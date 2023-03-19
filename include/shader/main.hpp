@@ -15,7 +15,7 @@
 
 v128_t rNd(int);
 
-int rD,Th,Rg,c;
+int rD,Th;
 v128_t Dr;
 
 std::random_device rd;
