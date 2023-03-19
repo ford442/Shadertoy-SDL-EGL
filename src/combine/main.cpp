@@ -1,7 +1,7 @@
 #include "../../include/combine/main.hpp"
 
 v128_t rNd(int Th){
-std::srand(std::time(nullptr));
+std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
@@ -334,5 +334,5 @@ FS.mkdir('/shader');
 });
 void(*jss)(){&js_main};
 jss();
-return 1;
+return 0;
 }
