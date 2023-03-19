@@ -1,12 +1,16 @@
 #pragma once
 
+#include <emscripten.h>
+
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #include "../../include/shader/intrins.hpp"
 
 #undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 2
+#define FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
 
 #include <iostream>
 #include <algorithm>
@@ -23,12 +27,10 @@
 
 #include <unistd.h>
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #define GL3_PROTOTYPES 1
-#define GL4_PROTOTYPES 1 //maybe??
+#define GL4_PROTOTYPES 1 // maybe??
 
 #define GL_GLEXT_PROTOTYPES 1
 #include <GL/gl.h>
@@ -57,8 +59,6 @@ EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
 
-EmscriptenWebGLContextAttributes attr_js;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
 EGLint const attribut_list_js[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -127,6 +127,11 @@ float sum;
 float avgSum;
 float minSum;
 float maxSum;
+
+#include <emscripten/html5.h>
+
+EmscriptenWebGLContextAttributes attr_js;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
 extern "C"{
 
