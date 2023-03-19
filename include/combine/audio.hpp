@@ -13,6 +13,12 @@
 #include <climits>
 #include <iostream>
 
+#undef FLT_EVAL_METHOD
+#define FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE ON
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
+
 char flnm[24];
 SDL_AudioDeviceID dev;
 int r;
