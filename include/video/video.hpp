@@ -58,7 +58,7 @@ float avgSum;
 float minSum;
 float maxSum;
 
-GLint sSize;
+int_fast32_t Size;
 // int eglSize;
 EGLContext contextegl_js;
 EGLDisplay display_js;
