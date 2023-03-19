@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cfloat>
+#include <random>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "../../include/combine/intrins.hpp"
@@ -17,6 +18,7 @@
 v128_t rNd(int);
 int rD;
 v128_t Dr;
+std::random_device rd;
 
 extern"C"{
 
