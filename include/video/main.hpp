@@ -15,8 +15,13 @@
 
 v128_t rNd(int);
 
-extern"C"{
+int Th,rD;
+v128_t Dr;
+std::random_device rd;
 
+extern "C"{
+  
+v128_t Rg;
 int c;
 int r4nd(int);
 
