@@ -61,6 +61,7 @@ const GLchar cm_hdr_src[]=
 "#extension EGL_KHR_gl_colorspace : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
+// "#extension EGL_EXT_gl_colorspace_bt2020_pq_linear : enable\n"
 "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
@@ -132,7 +133,8 @@ EGLint att_lst2[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_LINEAR_EXT,
 EGL_NONE
 };
 const EGLint ctx_att[]={
