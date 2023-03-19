@@ -1,9 +1,9 @@
 #include "../../include/video/main.hpp"
 
 v128_t rNd(int Th){
-std::srand(std::time(nullptr));
-int rD=std::rand()%Th;
-v128_t Dr=wasm_i32x4_splat(rD);
+std::srand(rd());
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
@@ -194,9 +194,8 @@ normalResStart();
 extern"C"{
  
 int r4nd(int tH){
-v128_t(* RnD)(int);
-RnD=&rNd;
-v128_t Rg=RnD(tH);
+v128_t(* RnD)(int){&rNd};
+Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
@@ -207,6 +206,6 @@ int main(void){
 
 void(*jss)(){&js_main};
 jss();
-return 1;
+return 0;
 
 }
