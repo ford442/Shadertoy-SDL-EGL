@@ -106,7 +106,7 @@ const GLchar * frg_ftr=frg_ftr_src;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
-GLuint cmpl_shd(GLenum,GLsizei,GLchar **);
+GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 
 GLchar * rd_fl(const char *);
 
