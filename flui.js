@@ -114,6 +114,7 @@ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experim
 let halfFloat;
 let supportLinearFiltering;
 if(isWebGL2){
+gl.getExtension('EXT_color_buffer_float');
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
