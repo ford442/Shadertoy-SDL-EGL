@@ -177,16 +177,16 @@ b3_shader_js:
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=off \
-	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
+	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -flto -mllvm -O0 -fpie -std=c++2b -stdlib=libc++ -fno-math-errno \
+	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -O0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno \
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
-	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
+	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -sMALLOC='emmalloc' \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -fuse-ld=mold -fwhole-program -polly -sWASMFS=0 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
