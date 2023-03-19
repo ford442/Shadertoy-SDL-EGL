@@ -1,14 +1,17 @@
 #pragma once
 
+#include <cfloat>
+
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #include "../../include/combine/intrins.hpp"
-#include <cfloat>
 
 #undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 2
+#define FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT OFF
-#pragma STDC CX_LIMITED_RANGE OFF
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
 
 #include <iostream>
 #include <algorithm>
@@ -24,11 +27,18 @@
 #include <climits>
 
 #include <emscripten.h>
-#include <emscripten/html5.h>
-
-#include "../../include/combine/egl.hpp"
 
 int Size_js;
+double wi_js,hi_js;
+
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
+#include "../../include/combine/egl.hpp"
 
 EGLContext contextegl_js;
 EGLDisplay display_js;
@@ -36,8 +46,6 @@ EGLSurface surface_js;
 EGLConfig eglconfig_js;
 EGLint config_size_js,major_js,minor_js;
 
-EmscriptenWebGLContextAttributes attr_js;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
 EGLint const attribut_list_js[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -57,7 +65,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
 };
 
@@ -71,7 +79,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_BUFFER_TYPE, EGL_RGB_BUFFER,
 // EGL_CONFIG_CAVEAT,EGL_NONE,
 // EGL_BIND_TO_TEXTURE_RGBA, EGL_TRUE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -83,17 +91,17 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_RED_SIZE,(EGLint)64,
-EGL_GREEN_SIZE,(EGLint)64,
-EGL_BLUE_SIZE,(EGLint)64,
-EGL_ALPHA_SIZE,(EGLint)64,
-EGL_DEPTH_SIZE,(EGLint)64,
-EGL_STENCIL_SIZE,(EGLint)64,
-EGL_BUFFER_SIZE,(EGLint)64,
+EGL_RED_SIZE,(EGLint)16,
+EGL_GREEN_SIZE,(EGLint)16,
+EGL_BLUE_SIZE,(EGLint)16,
+EGL_ALPHA_SIZE,(EGLint)16,
+EGL_DEPTH_SIZE,(EGLint)24,
+EGL_STENCIL_SIZE,(EGLint)16,
+EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
-EGL_SAMPLES,(EGLint)64,
-EGL_MIPMAP_LEVEL,(EGLint)64,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SAMPLES,(EGLint)32,
+EGL_MIPMAP_LEVEL,(EGLint)1,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
@@ -103,14 +111,10 @@ GLclampf avrg,drk,brt,avr;
 
 void avgFrm(short int,int,float *,float *);
 
-double wi_js,hi_js;
+#include <emscripten/html5.h>
 
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
+EmscriptenWebGLContextAttributes attr_js;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
 extern "C"{
 
