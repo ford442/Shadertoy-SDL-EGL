@@ -361,7 +361,7 @@ var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 la=h$*w$*4;
 pointa=77*la;
-var agav=new Float32Array($H32,pointa,300);
+agav=new Float32Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -375,7 +375,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 // eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
@@ -387,7 +387,7 @@ nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
 la=h$*w$*4;
 pointa=77*la;
-var agav=new Float32Array($H32,pointa,300);  // has to var?
+agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
