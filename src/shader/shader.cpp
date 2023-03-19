@@ -221,7 +221,7 @@ glDisable(GL_STENCIL_TEST);  // invalid capa
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
 //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)1f,(GLfloat)1f);
+glPolygonOffset((GLfloat)1.0f,(GLfloat)1.0f);
 glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
   
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
