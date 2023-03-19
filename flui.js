@@ -19,8 +19,8 @@ let config={
  CAPTURE_RESOLUTION:512,
  DENSITY_DISSIPATION:1,
  VELOCITY_DISSIPATION:0.2,
- PRESSURE:0.8,PRESSURE_ITERATIONS:20,
- CURL:23,
+ PRESSURE:0.8,PRESSURE_ITERATIONS:32,
+ CURL:64,
  SPLAT_RADIUS:0.25,
  SPLAT_FORCE:6000,
  SHADING:true,
@@ -67,15 +67,15 @@ if(!ext.supportLinearFiltering){
 startGUI();
 function getWebGLContext(canvas){
 const params={
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
-imageSmoothingEnabled:false,
+stencil:true,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
@@ -88,15 +88,15 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
 var gl=canvas.getContext('webgl2',{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
-imageSmoothingEnabled:false,
+stencil:true,
+imageSmoothingEnabled:true,
 imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
@@ -118,7 +118,7 @@ gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
-gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
 // // // gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
@@ -128,7 +128,7 @@ gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 halfFloat=gl.getExtension('OES_texture_half_float');
-gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('WEBGL_color_buffer_float');
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
