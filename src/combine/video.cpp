@@ -365,7 +365,7 @@ var agav=new Float32Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=77*la;
 var $B=new Float32Array($H32,pointb,sz);
@@ -391,7 +391,7 @@ var agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var pointb=66*la;
 var $B=new Float32Array($H32,pointb,sz);  // has to var?
