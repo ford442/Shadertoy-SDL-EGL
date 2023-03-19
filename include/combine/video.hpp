@@ -28,7 +28,7 @@
 
 #include <emscripten.h>
 
-int Size_js;
+GLint Size_js;
 double wi_js,hi_js;
 
 float max;
