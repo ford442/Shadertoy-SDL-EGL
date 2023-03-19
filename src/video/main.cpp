@@ -18,7 +18,7 @@ var vide=document.querySelectorAll('video');
 let $tim=document.getElementById('tim');
 let $itim=document.getElementById('itim');
 var nn=window.innerHeight;
-document.getElementById('canvasSize').innerHTML=parseInt(nn,10);
+document.getElementById('canvasSize').innerHTML=nn;
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
