@@ -19,8 +19,10 @@ var mV=document.getElementById('mv');
 var loadV=document.getElementById('ldv');
 let $tim=document.getElementById('tim');
 let $itim=document.getElementById('itim');
-document.getElementById('canvasSize').innerHTML=parseInt(window.innerHeight,10);
-bezl.height=parseInt(window.innerHeight,10);
+let $high=document.getElementById('canvasSize');
+let winSize=parseInt(window.innerHeight,10);
+$high.innerHTML=winSize;
+bezl.height=winSize;
 bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
 var lockVid=0;
@@ -222,14 +224,16 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 function loada(){
 var mv,lo;
 if(lockVid!=1){
+winSize=parseInt(window.innerHeight,10);
+$high.innerHTML=winSize;
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-var nn=parseInt(window.innerHeight,10);
+var nn=window.innerHeight;
 var vvh=this.videoHeight;
 var vvw=this.videoWidth;
 document.getElementById('ldv').height=parseInt(nn,10);
-// document.getElementById('ldv').width=this.videoWidth;
+document.getElementById('ldv').width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(vvw,10);
 document.getElementById('hig').innerHTML=parseInt(vvh,10);
 var $sc=this.duration;
