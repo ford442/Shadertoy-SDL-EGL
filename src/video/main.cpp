@@ -17,7 +17,7 @@ const switchy=document.getElementById('di');
 var vide=document.querySelectorAll('video');
 let $tim=document.getElementById('tim');
 let $itim=document.getElementById('itim');
-var nn=window.innerHeight;
+// var nn=window.innerHeight;
 document.getElementById('canvasSize').innerHTML=parseInt(window.innerHeight,10);
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
@@ -87,16 +87,16 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3_egl');
-},250);
+},200);
 setTimeout(function(){
 Module.ccall('b3');
-},750);
+},700);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},850);
+},800);
 }
   
 const tem=document.getElementById('tim');
@@ -124,18 +124,16 @@ var mv,lo;
 if(lockVid!=1){
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
-  
+
 document.getElementById('ldv').addEventListener('canplay',function(){
-var nn=window.innerHeight;
+document.getElementById('ldv').height=parseInt(window.innerHeight,10);
+// document.getElementById('ldv').width=this.videoWidth;
+document.getElementById('canvasSize').innerHTML=parseInt(window.innerHeight,10);
 var vvh=this.videoHeight;
 var vvw=this.videoWidth;
-document.getElementById('ldv').height=parseInt(nn,10);
-// document.getElementById('ldv').width=this.videoWidth;
-  document.getElementById('canvasSize').innerHTML=parseInt(window.innerHeight,10);
-
 document.getElementById('wid').innerHTML=parseInt(vvw,10);
 document.getElementById('hig').innerHTML=parseInt(vvh,10);
-  
+
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 if(mic>0){
