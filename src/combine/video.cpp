@@ -208,7 +208,7 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
-colorType:'float32',
+// colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -229,7 +229,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-
+gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
   /*
 gl.getExtension('EGL_HI_colorformats');
