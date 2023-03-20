@@ -144,8 +144,9 @@ var $bb;
 
 function forwardLoop(){
 // setTim=mmvv.currentTime;
-setTim+=stpInc;
 if(setTim<=stp){
+  setTim+=stpInc;
+
 mmvv.currentTime=setTim;
 }else{
 revv=true;
@@ -154,8 +155,9 @@ revv=true;
 
 function reverseLoop(){
 // setTim=mmvv.currentTime;
-setTim-=stpInc;
 if(setTim>=Lstp){
+  setTim-=stpInc;
+
 mmvv.currentTime=setTim;
 }else{
 revv=false;
@@ -258,8 +260,8 @@ gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
-const g2=new GPU({mode:'gpu'});
+const g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
+const g2=new GPU({mode:'webgl2'});
 
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
@@ -276,7 +278,6 @@ const glslGreenG=`float GreenG(float a){return((a+0.73+0.73+0.73+((a+0.73)/2.0))
 const glslGreenB=`float GreenB(float a){return((a+0.14+0.14+0.14+((a+0.14)/2.0))/5.0);}`;
 
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-  
   
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return((((0.7)+2.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
@@ -378,7 +379,7 @@ var j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 // eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
-var d=S();if(d)d();d=S();function S(){
+var d=S();if(d){d()};d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
