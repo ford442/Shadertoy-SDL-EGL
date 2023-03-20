@@ -32,15 +32,15 @@ document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 setTimeout(function(){
 Module.ccall('str');
-},150);
+},100);
 Module.ccall('b3');
-},750);
+},700);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},950);
+},900);
 }
   
 function shds(xml){
@@ -145,5 +145,5 @@ FS.mkdir("/shader");
 });
 
 js_main();
-return 1;
+return 0;
 }
