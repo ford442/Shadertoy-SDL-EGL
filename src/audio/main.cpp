@@ -2,7 +2,6 @@
 
 v128_t rNd(int Th){
 std::srand(rd());
-// std::srand(std::time(nullptr));
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
@@ -81,7 +80,7 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 function snd(){
 var sngsNum=$sngs[0];
 
-const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum])+5;
+const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
 
 // let randSong=Math.floor(($sngs[0]-5)*Math.random());
 const songSrc=$sngs[randSong+5];
@@ -152,7 +151,6 @@ FS.mkdir('/snd');
 });
 
 void(*jss)(){&js_main};
-// jss=&js_main;
 jss();
 return 0;
 }
