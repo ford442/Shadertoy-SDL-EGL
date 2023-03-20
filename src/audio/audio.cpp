@@ -5,7 +5,12 @@ Uint8 * wptr;
 int_fast32_t lft;
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
-while (lft<=len){
+while(lft<=len){
+if(lft<2){
+EM_ASM({
+console.log('Song end.');
+});
+}
 SDL_UnlockAudioDevice(dev);
 SDL_memcpy(stm,wptr,lft);
 stm+=lft;
