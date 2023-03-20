@@ -225,7 +225,7 @@ function loada(){
 var mv,lo;
 if(lockVid!=1){
 winSize=parseInt(window.innerHeight,10);
-$high.innerHTML=winSize;
+$high.innerHTML=window.innerHeight;
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
