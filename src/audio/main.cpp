@@ -70,7 +70,6 @@ nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
 
-scanSongs();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
@@ -127,9 +126,8 @@ snd();
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
-
+scanSongs();
 normalResStart();
-
 });
 
 extern"C"{
