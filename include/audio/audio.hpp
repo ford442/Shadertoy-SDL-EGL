@@ -12,6 +12,7 @@
 #include <cfloat>
 #include <climits>
 #include <iostream>
+#include <emscripten.h>
 
 char flnm[24];
 SDL_AudioDeviceID dev;
