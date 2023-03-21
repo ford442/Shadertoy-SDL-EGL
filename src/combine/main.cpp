@@ -314,10 +314,11 @@ shutDown.postMessage({data:222});
 
 });
 
+v128_t(* RnD)(int){&rNd};
+
 extern"C"{
  
 int r4nd(int tH){
-v128_t(* RnD)(int){&rNd};
 Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
