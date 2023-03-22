@@ -198,8 +198,8 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 // emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-glEnable(GL_LIGHTING);  //  LEGACY_GL
-glEnable(GL_FOG);  //  LEGACY_GL
+// glEnable(GL_LIGHTING);  //  LEGACY_GL
+// glEnable(GL_FOG);  //  LEGACY_GL
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
