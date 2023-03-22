@@ -66,17 +66,18 @@ b3_combine_test:
 b3_combine_llvm:
 	 em++ src/combine/main.cpp -c -O0 -std=c++2b -fpie -fno-rtti \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -qsimd=auto \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2b -fpie -sUSE_SDL=2 -fno-fast-math \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -qsimd=auto
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
 	 em++ src/combine/video.cpp -c -O0 -std=c++2b -fpie -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=on \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -qsimd=auto
 	 em++ src/combine/shader.cpp -c -O0 -std=c++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=on \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=c++2b -sUSE_SDL=2 -flto=thin \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -qsimd=auto
+	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=c++2b -sUSE_SDL=2 -flto=thin -qsimd=auto \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mavxifma \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
