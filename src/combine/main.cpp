@@ -316,6 +316,8 @@ shutDown.postMessage({data:222});
 
 v128_t(* RnD)(int){&rNd};
 
+void(*jss)(){&js_main};
+
 extern"C"{
  
 int r4nd(int tH){
@@ -332,7 +334,6 @@ EM_ASM({
 FS.mkdir('/snd');
 FS.mkdir('/shader');
 });
-void(*jss)(){&js_main};
 jss();
 return 0;
 }
