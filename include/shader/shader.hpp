@@ -102,7 +102,7 @@ const GLchar frg_hdr_src[]=
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n"
-"int _N = 3;
+"int _N = 3;\n"
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
 "void mainImage(out vec4 O, vec2 U) {\n"
 "    vec4 o; O = vec4(0);\n"
