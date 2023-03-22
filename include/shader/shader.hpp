@@ -62,7 +62,6 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 const GLchar * src[4];
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
-"#define mainImage mainImage0(out vec4 O,vec2 U);\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
