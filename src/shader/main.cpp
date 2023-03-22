@@ -2,7 +2,6 @@
 
 v128_t rNd(int Th){
 std::srand(rd());
-// std::srand(std::time(nullptr));
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
@@ -135,10 +134,11 @@ document.getElementById('di').click();
 },100);
 });
 
+v128_t(* RnD)(int){&rNd};
+
 extern"C"{
  
 int r4nd(int tH){
-v128_t(* RnD)(int){&rNd};
 Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
