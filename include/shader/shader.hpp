@@ -81,8 +81,8 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
-"#pragma STDGL(strict off)\n"
-"#pragma optionNV(strict off)\n"
+"#pragma STDGL(strict on)\n"
+"#pragma optionNV(strict on)\n"
 "#pragma optionNV(invariant none)\n"
 "#pragma STDGL(invariant none)\n"
 "#pragma optionNV(centroid all)\n"
@@ -103,7 +103,7 @@ const GLchar frg_hdr_src[]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 const GLchar frg_ftr_src[]=
-"\n void main(){mainImage(fragColor,fragCoord.xy);fragColor.a=1.0;}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
 const GLchar * frg_hdr=frg_hdr_src;
