@@ -62,6 +62,7 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 const GLchar * src[4];
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
+"#define mainImage mainImage0(out vec4 O,vec2 U);\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
@@ -103,7 +104,6 @@ const GLchar frg_hdr_src[]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n"
 "int _N=3;\n"
-"#define mainImage mainImage0(out vec4 O,vec2 U);\n"
 "void mainImage(out vec4 O,vec2 U){\n"
 "vec4 o;O=vec4(0);\n"
 "for(int k=0;k<_N*_N;k++)\n"
@@ -113,7 +113,7 @@ const GLchar frg_hdr_src[]=
 "}\n"
 "void mainImage0";
 const GLchar frg_ftr_src[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
+"\n void main(){mainImage(fragColor,fragCoord.xy);fragColor.a=1.0;}\0";
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
 const GLchar * frg_hdr=frg_hdr_src;
