@@ -69,8 +69,9 @@ glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-void fr4m(){
 void(*FrM)(){&renderFrame};
+
+void fr4m(){
 FrM();
 return;
 }
@@ -252,16 +253,18 @@ auto t1=std::chrono::steady_clock::now();
 return;
 }
 
+void(*fRm)(){&fr4m};
+
+void(*sTr)(){&strt};
+
 extern "C" {
 
 void frm(){
-void(*fRm)(){&fr4m};
 fRm();
 return;
 }
 
 void str(){
-void(*sTr)(){&strt};
 sTr();
 return;
 }
