@@ -103,9 +103,13 @@ const GLchar frg_hdr_src[]=
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n"
-"int _N = 3;\ \n"
-"void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0 \n";
-const GLchar frg_ftr_src[]=
+"int _N=3;\n"
+"#define mainImage mainImage0(out vec4 O,vec2 U);void mainImage(out vec4 O, vec2 U){vec4 o;O=vec4(0); \\n"
+"for(int k=0;k<_N*_N;k++){mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O+=o;} \\n"
+"O/=float(_N*_N); \\n"
+"O=pow(O,vec4(1./1.));} \\n"
+"void mainImage0const 
+GLchar frg_ftr_src[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
