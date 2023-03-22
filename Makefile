@@ -434,7 +434,7 @@ b3_vanilla_test:
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -O0 -lmass -lmassvp8
+	 em++ src/vanilla/main.cpp -c -O0
 	 emcc main.o -o v3020.js -mllvm -O0 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
