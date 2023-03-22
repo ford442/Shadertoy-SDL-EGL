@@ -28,9 +28,9 @@ const float F=1.0f,Fm1=-1.0f;
 const float_t F0=0.0f;
 // float F0=0.0f;
 // double Ttime,Tdlt,Dm1=-1.0,D=1.0;
-const long double Dm1=-1.0,D=1.0;
+const double Dm1=-1.0,D=1.0;
 // double Dm1=-1.0,D=1.0;
-float Ttime,Tdlt;
+double Ttime,Tdlt;
 const double_t D0=0.0;
 // long double D0=0.0;
 // double D0=0.0;
@@ -114,6 +114,7 @@ GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 GLchar * rd_fl(const char *);
 
 // char16_t * rd_fl(const char *);
+
 #include "../../include/shader/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
@@ -140,8 +141,8 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_NONE
 };
 const EGLint ctx_att[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 //EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
