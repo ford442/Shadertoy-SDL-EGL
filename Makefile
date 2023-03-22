@@ -67,15 +67,15 @@ b3_combine_llvm:
 	 em++ src/combine/main.cpp -c -O0 -std=c++2b -fpie -fno-rtti \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -ffunction-sections -fdata-sections -ffp-contract=off
+	 -fdata-sections -ffp-contract=off
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2b -fpie -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 -ffunction-sections -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
+	 -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
 	 em++ src/combine/video.cpp -c -O0 -std=c++2b -fpie -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
-	 -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=on \
+	 -fdata-sections -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ src/combine/shader.cpp -c -O0 -std=c++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
-	 -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=on \
+	 -fdata-sections -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=c++2b -sUSE_SDL=2 -flto=thin \
 	 -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
