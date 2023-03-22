@@ -149,7 +149,7 @@ return c;
 }
 
 int main(void){
-'use strict';
+"use strict";
 
 EM_ASM({
 FS.mkdir('/shader');
