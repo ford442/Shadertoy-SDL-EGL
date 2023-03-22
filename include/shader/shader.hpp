@@ -111,7 +111,7 @@ const GLchar frg_hdr_src[]=
 "O/=float(_N*_N);\n"
 "O=pow(O,vec4(2.2/1.));\n"
 "}\n"
-"void mainImage0";
+"void mainImage0\n";
 const GLchar frg_ftr_src[]=
 "\n void main(){mainImage(fragColor,fragCoord.xy);fragColor.a=1.0;}\0";
 const GLchar * cm_hdr=cm_hdr_src;
