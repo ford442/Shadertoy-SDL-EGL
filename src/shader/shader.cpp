@@ -162,6 +162,7 @@ emscripten_webgl_enable_extension(ctx,"HI_colorformats");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx,"EXT_create_context_robustness");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
