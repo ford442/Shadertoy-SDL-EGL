@@ -1,3 +1,4 @@
+#include "../../include/combine/intrins.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <algorithm>
