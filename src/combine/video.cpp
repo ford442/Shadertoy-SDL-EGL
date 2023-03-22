@@ -21,7 +21,7 @@ return;
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
-Size_js=(GLsizei)hi_js;
+Size_js=static_cast<GLsizei>(hi_js);
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
@@ -29,7 +29,7 @@ attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -58,6 +58,7 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); //
 emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
+emscripten_webgl_enable_extension(ctx_js,"EXT_create_context_robustness");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
@@ -443,16 +444,18 @@ T=true;
 
 });
 
+void(*b3e)(){&egl};
+
+void(*B3)(){&vid};
+
 extern "C" {
 
 void b3_egl(){
-void(*b3e)(){&egl};
 b3e();
 return;
 }
   
 void b3(){
-void(*B3)(){&vid};
 B3();
 return;
 }
