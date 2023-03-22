@@ -116,7 +116,7 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_FALSE;
+attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
@@ -140,11 +140,6 @@ sSize=static_cast<int>(hi);
 S=static_cast<float>(sSize);
 mX=0.5*S;
 mY=0.5*S;
-  
-  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-//     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-//       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"WEBGL_EXT_color_buffer_float");
@@ -234,7 +229,7 @@ glDisable(GL_DITHER);
 glFrontFace(GL_CW); 
 glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
@@ -292,6 +287,12 @@ glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,sSize,sSize);
+   
+  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+//     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+//       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+ 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
