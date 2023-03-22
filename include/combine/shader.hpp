@@ -15,8 +15,8 @@
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 0
-#pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT OFF
+#pragma STDC CX_LIMITED_RANGE OFF
+#pragma STDC FP_CONTRACT ON
 #undef FLT_ROUNDS
 #define FLT_ROUNDS 1
 
@@ -31,11 +31,11 @@ float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const float_t F0=0.0f;
 // double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
-long double TtimeDelta;
-const long double Dm1=-1.0,D=1.0;
+double TtimeDelta;
+const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 
-long double Ttime;
+double Ttime;
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader1.toy");
 
@@ -44,7 +44,7 @@ std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
 
 struct timespec rem;
-struct timespec req={0,10416666};
+struct timespec req={0,16666666};
 
 #include "../../include/combine/gl.hpp"
 
@@ -64,10 +64,10 @@ const GLchar * sources[4];
 const GLchar common_shader_header_gles3[]=
 "#version 300 es\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
-"#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
+// "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
@@ -89,12 +89,12 @@ const GLchar common_shader_header_gles3[]=
 "#pragma STDGL(centroid all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n";
+"precision highp float;precision highp int;precision mediump sampler3D;precision mediump sampler2D;"
+"precision mediump samplerCube;precision mediump sampler2DArray;precision lowp sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision highp usampler2DArray;precision lowp samplerCubeShadow;"
+"precision lowp sampler2DArrayShadow;\n";
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
@@ -116,7 +116,7 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 #include "../../include/combine/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
-long long int iFrame,iwi,ihi;
+int iFrame,iwi,ihi;
 GLint iFps,sSize;
 // int iFrame,iFps,Size;
 
@@ -136,7 +136,7 @@ EGLint const attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SCRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
@@ -145,13 +145,10 @@ EGL_NONE
 };
 
 EGLint const anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
 };
 
@@ -174,20 +171,20 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_TRANSPARENT_RED_VALUE,(EGLint)1000000000,
 // EGL_TRANSPARENT_GREEN_VALUE,(EGLint)1000000000,
 // EGL_TRANSPARENT_BLUE_VALUE,(EGLint)0,
-EGL_NATIVE_RENDERABLE,EGL_TRUE,
+// EGL_NATIVE_RENDERABLE,EGL_TRUE,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_RED_SIZE,(EGLint)16,
 EGL_GREEN_SIZE,(EGLint)16,
 EGL_BLUE_SIZE,(EGLint)16,
 EGL_ALPHA_SIZE,(EGLint)16,
-EGL_DEPTH_SIZE,(EGLint)24,
+EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)16,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)32,
-EGL_MIPMAP_LEVEL,(EGLint)1,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MIPMAP_LEVEL,(EGLint)32,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
