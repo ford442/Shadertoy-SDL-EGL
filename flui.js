@@ -119,7 +119,7 @@ gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
-// gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
 // // // gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
