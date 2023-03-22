@@ -199,7 +199,7 @@ GLchar fragment_shader_header_gles3[]=
 "uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform lowp float iSampleRate;"
 "out highp vec4 fragColor;\n";
 GLchar fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 GLchar * common_shader_header=common_shader_header_gles3;
 GLchar * vertex_shader_body=vertex_shader_body_gles3;
 GLchar * fragment_shader_header=fragment_shader_header_gles3;
