@@ -19,6 +19,8 @@
 #define FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
 
 // #include <stdfloat>  //  c++23
 // double_t wi,hi;
