@@ -212,7 +212,7 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
-// colorType:'float32',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -307,8 +307,8 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-// var minuss=(av$-0.9)*(av$/(av$-0.9));
-// av$=av$+(minuss*(av$*0.05));
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$+(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
@@ -417,9 +417,9 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 }
 setTimeout(function(){
