@@ -78,7 +78,7 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader1.toy',sfil);
+FS.writeFile('/shader/shader.glsl',sfil);
 document.getElementById('stat').innerHTML='Downloaded Shader';
 document.getElementById('stat').style.backgroundColor='blue';
 //setTimeout(function(){
