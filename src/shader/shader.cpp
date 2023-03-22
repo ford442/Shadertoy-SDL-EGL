@@ -198,17 +198,14 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 // emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-
 glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
-
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
 // glDisable(GL_STENCIL_TEST);  // invalid capa
@@ -218,7 +215,6 @@ glStencilMask(0xFF);
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
 glPolygonOffset((GLfloat)1.0,(GLfloat)1.0);
 //  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //  undefined symbol
-  
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
 //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
 // glEnable(GL_PROGRAM_POINT_SIZE);  //  invalid capability
@@ -226,26 +222,25 @@ glPolygonOffset((GLfloat)1.0,(GLfloat)1.0);
 // glEnable(GL_LINE_SMOOTH); // invalid capa
 //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
 glDisable(GL_DITHER);
-glFrontFace(GL_CW); 
+glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
 // glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-// glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
+glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-nanosleep(&req,&rem);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-GLuint(* cs)(GLenum,GLsizei,const GLchar **);
-cs=&cmpl_shd;
+GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
+// cs=&cmpl_shd;
 const GLuint vtx=cs(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
@@ -298,11 +293,11 @@ emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
 
+void(*st)(){&strt};
+
 extern "C" {
 
 void str(){
-void(*st)(){&strt};
-// st=&strt;
 st();
 return;
 }
