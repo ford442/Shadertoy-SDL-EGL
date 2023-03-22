@@ -69,7 +69,7 @@ b3_combine_llvm:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2b -fpie -sUSE_SDL=2 -fno-fast-math \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
 	 em++ src/combine/video.cpp -c -O0 -std=c++2b -fpie -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
