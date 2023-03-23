@@ -95,7 +95,7 @@ const GLchar cm_hdr_src[]=
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision highp usampler2DArray;precision lowp samplerCubeShadow;"
-"precision lowp sampler2DArrayShadow;\n"
+"precision lowp sampler2DArrayShadow;\n";
 
 const GLchar vrt_bdy_src[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
