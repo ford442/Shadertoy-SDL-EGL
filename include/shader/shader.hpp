@@ -59,7 +59,7 @@ typedef struct{GLclampf XYZW[4];}Vertex;
 Vertex vrt[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-const GLchar * src[5];
+const GLchar * src[4];
 
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
@@ -110,7 +110,7 @@ const GLchar frg_aa_src[]=
 "\n #define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\n";
 
 const GLchar frg_ftr_src[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);vec4 tcol=vec4(0.);for(int mx=0;mx<4;mx++){for(int nx=0;nx<4;nx++){vec2 o=vec2(float(mx),float(nx))/float(AA)-0.5;tcol+=clamp(fragColor,0.0,1.0);}}fragColor=tcol/16.0;fragColor.a=1.0;}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
