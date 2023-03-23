@@ -1,4 +1,5 @@
 #include "../../include/shader/shader.hpp"
+
 EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -247,7 +248,7 @@ GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 const GLuint vtx=cs(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
-src[4]=frg_aa;
+// src[4]=frg_aa;
 src[2]=frag_body;
 src[3]=frg_ftr;
 const GLuint frag=cs(GL_FRAGMENT_SHADER,4,src);
