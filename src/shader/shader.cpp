@@ -250,7 +250,7 @@ src[1]=frg_hdr;
 src[2]=frg_aa;
 src[3]=frag_body;
 src[4]=frg_ftr;
-const GLuint frag=cs(GL_FRAGMENT_SHADER,5,src);
+const GLuint frag=cs(GL_FRAGMENT_SHADER,4,src);
 nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
