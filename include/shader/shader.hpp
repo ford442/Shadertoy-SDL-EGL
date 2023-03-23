@@ -60,6 +60,7 @@ Vertex vrt[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{g
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 const GLchar * src[5];
+
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
@@ -94,9 +95,12 @@ const GLchar cm_hdr_src[]=
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision highp usampler2DArray;precision lowp samplerCubeShadow;"
-"precision lowp sampler2DArrayShadow;\n";
+"precision lowp sampler2DArrayShadow;"
+"void mainImage(out vec4 fragColor,in vec2 fragCoord){vec4 tcol=vec4(0.);const int AA=4;for(int mx=0;mx<AA;mx++){for(int nx=0;nx<AA;nx++){vec2 o=vec2(float(mx),float(nx))/float(AA)-0.5;tcol+=clamp(fragColor,0.,1.);}}fragColor=tcol/float(AA*AA);}\n";
+
 const GLchar vrt_bdy_src[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+
 const GLchar frg_hdr_src[]=
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
@@ -107,7 +111,7 @@ const GLchar frg_aa_src[]=
 "\n #define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;oid mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\n";
 
 const GLchar frg_ftr_src[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy){vec4 tcol=vec4(0.);const int AA=4;for(int mx=0;mx<AA;mx++){for(int nx=0;nx<AA;nx++){vec2 o=vec2(float(mx),float(nx))/float(AA)-0.5;tcol+=clamp(fragColor,0.,1.);}}fragColor=tcol/float(AA*AA);};fragColor.a=1.0;}\0";
+"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
