@@ -216,8 +216,8 @@ glStencilMask(0xFF);
 // glFog(GL_FOG_MODE,GL_EXP2);
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
 //    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
-// glEnable(GL_POLYGON_OFFSET_FILL);  // works
-// glPolygonOffset((GLfloat)1.0,(GLfloat)1.0);
+glEnable(GL_POLYGON_OFFSET_FILL);  // works
+glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
 //  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //  undefined symbol
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
 //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
