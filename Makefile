@@ -64,20 +64,20 @@ b3_combine_test:
 	 --extern-pre-js gpujs.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_llvm:
-	 em++ src/combine/main.cpp -c -O0 -std=c++2b -fpie -fno-rtti \
+	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -fpie \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2b -fpie -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/video.cpp -c -O0 -std=c++2b -fpie -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/video.cpp -c -O0 -std=gnu++2b -fpie -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
 	 em++ src/combine/shader.cpp -c -O0 -std=c++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=c++2b -sUSE_SDL=2 -flto=thin \
+	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=gnu++2b -sUSE_SDL=2 -flto=thin \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mavxifma \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -88,7 +88,7 @@ b3_combine_llvm:
 	 --post-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js --post-js js/module.js
 
 b3_combine_cloud:
-	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie -fno-rtti \
+	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
@@ -140,7 +140,7 @@ b3_shader_simd:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math -fno-rtti \
+	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -ffp-contract=on \
