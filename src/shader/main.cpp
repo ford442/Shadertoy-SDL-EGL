@@ -125,10 +125,10 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 document.getElementById('stat').innerHTML='Scanning Shaders';
 document.getElementById('stat').style.backgroundColor='yellow';
+scanShaders();
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-scanShaders();
 });
 
 });
