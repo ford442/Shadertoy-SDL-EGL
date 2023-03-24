@@ -102,7 +102,7 @@ const GLchar vrt_bdy_src[]=
 
 const GLchar frg_hdr_src[]=
 "precision highp int;precision mediump sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision mediump sampler2DShadow;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
@@ -117,7 +117,7 @@ const GLchar frg_aa_src[]=
 
 const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O, vec2 U);int _N=8;void mainImage(out vec4 O,vec2 U){vec4 o;O=vec4(0);for(int k=0;k<_N*_N;k++){mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O+=o;}O/=float(_N*_N);O=pow(O,vec4(2.6/1.0));}void mainImage0\0";
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N=4;void mainImage(out vec4 O,vec2 U){vec4 o;O=vec4(0);for(int k=0;k<_N*_N;k++){mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O+=o;}O/=float(_N*_N);O=pow(O,vec4(2.6/1.0));}void mainImage0\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
@@ -159,8 +159,8 @@ EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_NONE
 };
 const EGLint ctx_att[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -169,12 +169,12 @@ EGL_NONE
 const EGLint att_lst[]={
 //EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_NONE,
-// EGL_CONFIG_CAVEAT,EGL_NONE,
+EGL_CONFIG_CAVEAT,EGL_NONE,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -191,7 +191,7 @@ EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)32,
 // EGL_MIPMAP_LEVEL,(EGLint)32,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
