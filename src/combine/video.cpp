@@ -197,7 +197,7 @@ const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 let $H=Module.HEAPF32.buffer;
 var inh=window.innerHeight;
-s$=parseInt(document.getElementById("canvasSize").innerHTML,10);
+s$=parseInt(window.innerHeight,10);
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*w$*4;
