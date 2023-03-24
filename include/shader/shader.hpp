@@ -16,7 +16,7 @@
 #include "../../include/shader/intrins.hpp"
 
 #undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 1
+#define FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
 #undef FLT_ROUNDS
