@@ -71,6 +71,7 @@ const GLchar cm_hdr_src[]=
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
+  /*
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
@@ -91,6 +92,7 @@ const GLchar cm_hdr_src[]=
 "#pragma STDGL(centroid all)\n"
 "#pragma optionNV(sample all)\n"
 "#pragma STDGL(sample all)\n"
+  */
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision mediump sampler3D;precision highp sampler2D;"
