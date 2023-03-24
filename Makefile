@@ -71,7 +71,7 @@ b3_combine_llvm:
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2b -fpie -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/video.cpp -c -O0 -std=gnu++2b -fpie -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/video.cpp -c -O0 -std=gnu++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
 	 em++ src/combine/shader.cpp -c -O0 -std=c++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
@@ -85,7 +85,7 @@ b3_combine_llvm:
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --post-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js --post-js js/module.js
+	 --js-library gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js --post-js js/module.js
 
 b3_combine_cloud:
 	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie \
@@ -179,8 +179,7 @@ b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge \
-	 -ffunction-sections -fdata-sections -ffp-contract=off \
-	 --pre-js rSlider.js --pre-js slideOut.js
+	 -ffunction-sections -fdata-sections -ffp-contract=off
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=on \
 	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge -msimd128 -mavx \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -193,7 +192,7 @@ b3_shader_llvm:
 	 -fuse-ld=lld -fwhole-program -polly -sWASMFS=0 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 -sTEXTDECODER=0 --post-js js/module.js
+	 -sTEXTDECODER=0 --post-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_texture:
 	 em++ src/shader/main_texture.cpp -c -O0 -fpie -ffast-math -fno-rtti \
