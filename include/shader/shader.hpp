@@ -47,9 +47,9 @@ struct timespec req={0,16666666};
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
 GLfloat mX,mY,mm,nn;
-GLfloat delt,Tm;
+GLfloat delt,Tm,iFps;
 GLuint atb_pos;
-GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
@@ -133,9 +133,9 @@ GLchar * rd_fl(const char *);
 #include "../../include/shader/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
-int iFrame,iwi,ihi;
+int iFrame;
 // long iFrame,iwi,ihi;
-GLint iFps,sSize;
+GLint sSize;
 // int iFrame,iFps,Size;
 void Rend();
 EGLDisplay display;
