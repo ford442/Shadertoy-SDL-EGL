@@ -94,11 +94,11 @@ const GLchar cm_hdr_src[]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision mediump sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;precision highp sampler2DArray;precision lowp sampler2DShadow;"
+"precision mediump samplerCube;precision highp sampler2DArray;precision mediump sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision lowp samplerCubeShadow;"
-"precision lowp sampler2DArrayShadow;\n";
+"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
 
 const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
@@ -114,7 +114,7 @@ const GLchar frg_aa_src[]=
 
 const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\n"
-"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 32;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\0";
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N=64;void mainImage(out vec4 O,vec2 U){vec4 o;O=vec4(0);for(int k=0;k<_N*_N;k++){mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O+=o;}O/=float(_N*_N);O=pow(O,vec4(2.2/1.0));}void mainImage0\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
