@@ -90,7 +90,7 @@ const GLchar cm_hdr_src[]=
 "#pragma STDGL(centroid all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;"
+"precision highp float;precision mediump sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision highp sampler2DArray;precision lowp sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
@@ -98,10 +98,10 @@ const GLchar cm_hdr_src[]=
 "precision lowp sampler2DArrayShadow;\n";
 
 const GLchar vrt_bdy_src[]=
-"\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
 
 const GLchar frg_hdr_src[]=
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"precision highp int;uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
