@@ -166,9 +166,9 @@ emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EXT_create_context_robustness");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
-// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_pq");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_bt2020_linear");
-emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
+// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
 // emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
@@ -287,12 +287,10 @@ glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,sSize,sSize);
-   
   glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 //     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 //       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
- 
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
