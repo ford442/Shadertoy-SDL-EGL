@@ -66,7 +66,7 @@ b3_combine_test:
 b3_combine_llvm:
 	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -fpie \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
-	 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections
 	 em++ src/combine/audio.cpp -c -O0 -std=gnu++2b -fpie -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
