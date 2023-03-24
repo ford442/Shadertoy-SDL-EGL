@@ -80,14 +80,16 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(unroll none)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline all)\n"
-"#pragma optionNV(inline all)\n"
+"#pragma STDGL(inline none)\n"
+"#pragma optionNV(inline none)\n"
 "#pragma STDGL(strict on)\n"
 "#pragma optionNV(strict on)\n"
 "#pragma optionNV(invariant none)\n"
 "#pragma STDGL(invariant none)\n"
 "#pragma optionNV(centroid all)\n"
 "#pragma STDGL(centroid all)\n"
+"#pragma optionNV(sample all)\n"
+"#pragma STDGL(sample all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;precision mediump sampler3D;precision highp sampler2D;"
@@ -107,10 +109,10 @@ const GLchar frg_hdr_src[]=
 "out vec4 fragColor;\n";
 
 const GLchar frg_aa_src[]=
-"\n #define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\n";
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\n";
 
 const GLchar frg_ftr_src[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
