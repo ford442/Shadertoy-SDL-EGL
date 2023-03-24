@@ -113,7 +113,8 @@ const GLchar frg_aa_src[]=
 "#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\n";
 
 const GLchar frg_ftr_src[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}fragColor.a=1.0;\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0;}"
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
