@@ -126,11 +126,12 @@ document.getElementById('di').click();
 document.getElementById('stat').innerHTML='Scanning Shaders';
 document.getElementById('stat').style.backgroundColor='yellow';
 scanShaders();
+});
+setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-});
-
+},100);
 });
 
 v128_t(* RnD)(int){&rNd};
@@ -138,13 +139,13 @@ v128_t(* RnD)(int){&rNd};
 void(*jss)(){&js_main};
 
 extern"C"{
-
+ 
 int r4nd(int tH){
 Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
-
+  
 }
 
 int main(void){
