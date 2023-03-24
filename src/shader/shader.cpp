@@ -134,8 +134,9 @@ eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglMakeCurrent(display,surface,surface,ctxegl);
-  eglBindAPI(EGL_OPENGL_ES_API);
 emscripten_webgl_make_context_current(ctx);
+    eglBindAPI(EGL_OPENGL_ES_API);
+
 emscripten_get_element_css_size("canvas",&wi,&hi);
 sSize=static_cast<GLint>(hi);
 S=static_cast<GLfloat>(wi);
