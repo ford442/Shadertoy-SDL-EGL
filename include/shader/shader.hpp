@@ -1,4 +1,18 @@
-#include <emscripten.h>
+extern "C"{
+  
+void str();
+  
+}
+
+#undef FLT_EVAL_METHOD
+#define FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE OFF
+#pragma STDC FP_CONTRACT ON
+#undef FLT_ROUNDS
+#define FLT_ROUNDS 1
+#define POSIX_TIMERS 1
+#define XOPEN_REALTIME 1
+
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -15,26 +29,19 @@
 #include <uchar.h> // utf-16
 #include "../../include/shader/intrins.hpp"
 
-#undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 0
-#pragma STDC CX_LIMITED_RANGE OFF
-#pragma STDC FP_CONTRACT ON
-#undef FLT_ROUNDS
-#define FLT_ROUNDS 1
+#include <emscripten.h>
 
 // #include <stdfloat>  //  c++23
-// double_t wi,hi;
+
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const float_t F0=0.0f;
 // float F0=0.0f;
-// double Ttime,Tdlt,Dm1=-1.0,D=1.0;
 const double Dm1=-1.0,D=1.0;
 // double Dm1=-1.0,D=1.0;
 double Ttime,Tdlt;
 const double_t D0=0.0;
-// long double D0=0.0;
 // double D0=0.0;
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -49,7 +56,7 @@ GLint fram;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLuint atb_pos;
-GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0;
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
@@ -117,7 +124,7 @@ const GLchar frg_aa_src[]=
 
 const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.6/1.0) );}void mainImage0\0";
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 8;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.6/1.0) );}void mainImage0\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
@@ -206,8 +213,4 @@ EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
 
-extern "C"{
-  
-void str();
-  
-}
+
