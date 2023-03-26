@@ -275,7 +275,7 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("wrap").style.pointerEvents="auto";
-// document.getElementById('ldv').height=$h;
+document.getElementById('ldv').height=$h;
 document.getElementById('ldv').src=vidSrc;
 document.getElementById('ldv').currentTime=$itim.innerHTML;
 document.getElementById('ldv').load();
@@ -285,7 +285,6 @@ setTimeout(function(){
 loada();
 },$ldt);
 }
-
 
 scanVideos();
 loada();
