@@ -67,24 +67,20 @@ if(!ext.supportLinearFiltering){
 startGUI();
 function getWebGLContext(canvas){
 const params={
-colorType:'float32',
 preferLowPowerToHighPerformance:false,
-precision:'highp',
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:true,
-imageSmoothingQuality:'high',
+imageSmoothingEnabled:false,
+// imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
-willReadFrequently:false,
-xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
 var gl=canvas.getContext('webgl2',{
