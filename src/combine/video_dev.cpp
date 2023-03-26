@@ -419,12 +419,10 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
-if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-}
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
 }
 setTimeout(function(){
 M();
