@@ -41,11 +41,11 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
+void(*jss)(){&plt};
+
 extern "C" {
 
 void pl(){
-void(*jss)(){&plt};
-// jss=&plt;
 jss();
 return;
 }
