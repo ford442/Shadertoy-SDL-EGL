@@ -144,8 +144,8 @@ let revv;
 var $bb;
   
 function reverseLoopB(){
-setTim-=stpInc;
-if(setTim>Lstp){
+if(setTim>Lstp){setTim-=stpInc;
+
 mmvv.currentTime=setTim;
 }else{
 revv=false;
@@ -154,8 +154,8 @@ forwardLoop();
 }
   
 function forwardLoop(){
-setTim+=stpInc;
-if(setTim<stp){
+if(setTim<stp){setTim+=stpInc;
+
 mmvv.currentTime=setTim;
 }else{
 revv=true;
@@ -164,8 +164,8 @@ reverseLoopB();
 }
 
 function reverseLoop(){
-setTim-=stpInc;
-if(setTim>Lstp){
+if(setTim>Lstp){setTim-=stpInc;
+
 mmvv.currentTime=setTim;
 }else{
 revv=false;
