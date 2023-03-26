@@ -79,10 +79,10 @@ const GLchar cm_hdr_src[]=
 "#extension EGL_KHR_gl_colorspace : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
-"#extension EGL_EXT_gl_colorspace_bt2020_pq_linear : enable\n"
+// "#extension EGL_EXT_gl_colorspace_bt2020_pq_linear : enable\n"
 // "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
 // "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
-// "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
+"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
   /*
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
@@ -113,10 +113,10 @@ const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
 
 const GLchar frg_hdr_src[]=
-"precision highp int;precision mediump sampler3D;precision highp sampler2D;"
+"precision highp int;precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
@@ -161,13 +161,13 @@ EGLint config_size,major,minor;
 EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE
 };
 const EGLint ctx_att[]={
@@ -217,5 +217,3 @@ EM_BOOL ms_l,clk_l;
 EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
-
-
