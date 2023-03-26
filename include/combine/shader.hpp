@@ -59,6 +59,8 @@ struct timespec req={0,16666666};
 
 #include "../../include/combine/gl.hpp"
 
+void clrclr(GLclampf,GLclampf,GLclampf);
+
 extern "C"{
 
 void clr(GLclampf,GLclampf,GLclampf);
@@ -135,8 +137,6 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 GLint iFps,sSize;
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
-
-void clrclr(GLclampf,GLclampf,GLclampf);
 
 EGLDisplay display;
 EGLSurface surface;
