@@ -432,7 +432,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 }
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[$F+200],agav[$F+100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
 }
 setTimeout(function(){
 M();
