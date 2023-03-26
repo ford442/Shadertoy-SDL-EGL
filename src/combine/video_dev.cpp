@@ -145,7 +145,7 @@ var $bb;
 
 function forwardLoop(){
 // setTim=mmvv.currentTime;
-if(setTim<=stp){
+if(setTim<stp){
 setTim+=stpInc;
 mmvv.currentTime=setTim;
 }else{
@@ -155,7 +155,7 @@ revv=true;
 
 function reverseLoop(){
 // setTim=mmvv.currentTime;
-if(setTim>=Lstp){
+if(setTim>Lstp){
 setTim-=stpInc;
 mmvv.currentTime=setTim;
 }else{
@@ -174,7 +174,7 @@ stp=document.getElementById('mv').currentTime;
 loopPart=(stp+2.5)-(Math.floor(stp));
 setTim=stp;
 Lstp=stp-loopPart;
-stp-=loopPart/2.0;
+// stp-=loopPart/2.0;
 loopLoop=true;
 revv=true;
 }
@@ -420,7 +420,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 }
