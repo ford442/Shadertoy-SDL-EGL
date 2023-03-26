@@ -44,11 +44,9 @@ contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAt
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
-  
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-eglBindAPI(EGL_OPENGL_ES_API);
-
+// eglBindAPI(EGL_OPENGL_ES_API);
 // glEnable(GL_BLEND);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
@@ -73,10 +71,10 @@ emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
-emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
-emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
+// emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
+// emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
+// emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
+// emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_BLEND);
@@ -148,8 +146,7 @@ var $bb;
 function forwardLoop(){
 // setTim=mmvv.currentTime;
 if(setTim<=stp){
-  setTim+=stpInc;
-
+setTim+=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=true;
@@ -159,8 +156,7 @@ revv=true;
 function reverseLoop(){
 // setTim=mmvv.currentTime;
 if(setTim>=Lstp){
-  setTim-=stpInc;
-
+setTim-=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=false;
@@ -193,16 +189,15 @@ if(e.code=='KeyS'){
 sh4d=false;
 }
 }
+
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 let $H=Module.HEAPF32.buffer;
-var inh=window.innerHeight;
+var inh=parseInt(window.innerHeight,10);
 s$=parseInt(inh,10);
-  
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
-  
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
+  // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*w$*16;
 var pointa=77*la;
