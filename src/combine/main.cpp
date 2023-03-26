@@ -82,7 +82,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},500);
+},1000);
 });
 
 function vids(xml){
@@ -136,16 +136,16 @@ Module.ccall('b3_egl');
 },100);
 setTimeout(function(){
 Module.ccall('b3');
-},400);
+},300);
 setTimeout(function(){
 Module.ccall('str');
-},800);
+},500);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},900);
+},1000);
 }
 
 function shds(xml){
@@ -187,14 +187,14 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
 normalResStart();
-},400);
+},500);
 };};
 ff.send(null);
 }
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
+dxhttp.withCredentials=false;
 dxhttp.addEventListener("load",function(){
 shds(this);
 });
@@ -229,7 +229,7 @@ $high.innerHTML=winSize;
 bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
-var nn=window.innerHeight;
+var nn=parseInt(window.innerHeight,10);
 var vvh=this.videoHeight;
 var vvw=this.videoWidth;
 document.getElementById('ldv').height=parseInt(nn,10);
