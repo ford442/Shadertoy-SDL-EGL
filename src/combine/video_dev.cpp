@@ -255,7 +255,7 @@ gljs.getExtension('EXT_framebuffer_sRGB');
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
-gl.enable(gl.FRAMEBUFFER_SRGB_EXT); 
+gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 
 gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
