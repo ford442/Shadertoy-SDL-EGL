@@ -22,13 +22,17 @@ void Rend();
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
-const float_t F0=0.0f;
 // float F0=0.0f;
 const double Dm1=-1.0,D=1.0;
 // double Dm1=-1.0,D=1.0;
 double Ttime,Tdlt;
-const double_t D0=0.0;
 // double D0=0.0;
+
+#include <float.h>
+
+const double_t D0=0.0;
+const float_t F0=0.0f;
+
 
 #include <algorithm>
 #include <cstring>
@@ -37,7 +41,6 @@ const double_t D0=0.0;
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
-#include <cfloat>
 #include <climits>
 #include <iostream>
 #include <locale> // utf-16
