@@ -1,43 +1,31 @@
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <cfloat>
-#include <climits>
-#include <iostream>
-#include "../../include/combine/intrins.hpp"
-
-#undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 0
-#pragma STDC CX_LIMITED_RANGE ON
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
-#undef FLT_ROUNDS
-#define FLT_ROUNDS 1
+#define _XOPEN_REALTIME 1
+#define _POSIX_ASYNC_IO 1
+#define _POSIX_PRIO_IO 1
+#define _POSIX_SYNC_IO 1
+#define	_XOPEN_SHM 1
+#define _POSIX_PRIORITIZED_IO 1
+#undef _FLT_ROUNDS
+#define _FLT_ROUNDS 1
 
-// #include <stdfloat>  //  c++23
+void renderFrame();
 
-#include <emscripten.h>
-
-// double_t wi,hi;
 double wi,hi;
-
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const float_t F0=0.0f;
-// double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
 double TtimeDelta;
 const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
-
+int iFrame,iwi,ihi;
 double Ttime;
-
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader1.toy");
+
+#include <ctime>
+#include <chrono>
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -46,7 +34,34 @@ std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,16666666};
 
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <cfloat>
+
+extern "C"{
+
+void str();
+
+}
+
+#include <climits>
+#include <iostream>
+
+// #include <stdfloat>  //  c++23
+
 #include "../../include/combine/gl.hpp"
+
+extern "C"{
+
+void clr(GLclampf,GLclampf,GLclampf);
+
+}
 
 GLclampf mX,mY;
 GLclampf mm,nn;
@@ -89,7 +104,7 @@ const GLchar common_shader_header_gles3[]=
 "#pragma STDGL(centroid all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;"
+"precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
@@ -115,12 +130,7 @@ GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 #include "../../include/combine/egl.hpp"
 
-// int_fast32_t iFrame,iwi,ihi;
-int iFrame,iwi,ihi;
 GLint iFps,sSize;
-// int iFrame,iFps,Size;
-
-void renderFrame();
 
 void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
@@ -183,11 +193,12 @@ EGL_STENCIL_SIZE,(EGLint)8,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)1,
-// EGL_MIPMAP_LEVEL,(EGLint)32,
+EGL_MIPMAP_LEVEL,(EGLint)1,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
+#include <emscripten.h>
 #include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
@@ -200,10 +211,4 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
-extern "C"{
-
-void clr(GLclampf,GLclampf,GLclampf);
-
-void str();
-
-}
+#include "../../include/combine/intrins.hpp"
