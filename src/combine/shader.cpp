@@ -20,15 +20,6 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avrg=(((avr+(1.0-rlc))/2.0)+alc);
-drk=1.0-(avr-0.5);
-brt=1.0-(((1.0-rlc)-(alc-0.5)));
-glBlendColor(avrg,avrg,avrg,1.0);
-glClearColor(drk,drk,drk,brt);
-return;
-}
-
 void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
