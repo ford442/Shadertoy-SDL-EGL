@@ -171,7 +171,7 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById('mv');
 mmvv.pause();
 stp=document.getElementById('mv').currentTime;
-loopPart=(stp+2.5)-(Math.floor(stp));
+loopPart=(stp+2.5)-(Math.ceil(stp));
 setTim=stp;
 Lstp=stp-loopPart;
 // stp-=loopPart/2.0;
@@ -199,10 +199,10 @@ var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
   // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*w$*8;
-var pointa=77*la;
+var la=Math.ceil(h$*w$*8);
+var pointa=Math.ceil(77*la);
 var agav=new Float32Array($H,pointa,304);
-var sz=(h$*w$)/8;
+var sz=Math.ceil((h$*w$)/8);
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -233,7 +233,6 @@ minorVersion:0
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 // gljs.getExtension('EGL_HI_colorformats');
 // gljs.getExtension('EGL_EXT_gl_colorspace_display_p3');
-
   /*
 gl.getExtension('EGL_KHR_gl_colorspace');
 // gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
@@ -243,7 +242,7 @@ gl.getExtension('EXT_texture_filter_anisotropic');
 */
 // gl.getExtension('ARB_blend_func_extended');
 // gljs.getExtension('EXT_framebuffer_sRGB');
-  
+
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
@@ -253,10 +252,10 @@ gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
-  
+
 gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-  
+
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
@@ -267,11 +266,10 @@ const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0)
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
 const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
-  
+
 const glslRoseR=`float RoseR(float a){return((a+0.86+0.86+0.86+((a+0.86)/2.0))/5.0);}`;
 const glslRoseG=`float RoseG(float a){return((a+0.13+0.13+0.13+((a+0.13)/2.0))/5.0);}`;
 const glslRoseB=`float RoseB(float a){return((a+0.86+0.86+0.86+((a+0.86)/2.0))/5.0);}`;
-  
   
 const glslGreenR=`float GreenR(float a){return((a+0.11+0.11+0.11+((a+0.11)/2.0))/5.0);}`;
 const glslGreenG=`float GreenG(float a){return((a+0.73+0.73+0.73+((a+0.73)/2.0))/5.0);}`;
@@ -283,22 +281,21 @@ let glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
 let glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 let glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return ((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-  
+
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-  
 
 g.addNativeFunction('GreenR',glslGreenR,{returnType:'Number'});
 g.addNativeFunction('GreenG',glslGreenG,{returnType:'Number'});
 g.addNativeFunction('GreenB',glslGreenB,{returnType:'Number'});
-  
+
 g.addNativeFunction('RoseR',glslRoseR,{returnType:'Number'});
 g.addNativeFunction('RoseG',glslRoseG,{returnType:'Number'});
 g.addNativeFunction('RoseB',glslRoseB,{returnType:'Number'});
-  
+
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
@@ -306,8 +303,8 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.05));
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// av$=av$-(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
@@ -350,12 +347,9 @@ bb=GreenB(eulb);
 // this.color(GreenR(p[0]),GreenG(p[1]),GreenB(p[2]),aveg);
 // this.color(rr,gg,bb,aveg);
 // 
-  
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
-  
 this.color(p[0],p[1],p[2],aveg);
-  
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setGraphical(true).setOutput([h$,w$]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -363,15 +357,15 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
-la=h$*w$*8;
-pointa=77*la;
+la=Math.ceil(h$*w$*8);
+pointa=Math.ceil(77*la);
 agav=new Float32Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
-var pointb=66*la;
+var pointb=Math.ceil(66*la);
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
@@ -389,15 +383,15 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
-la=h$*w$*8;
-pointa=77*la;
+la=Math.ceil(h$*w$*8);
+pointa=Math.ceil(77*la);
 agav=new Float32Array($H,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
 };
-var pointb=66*la;
+var pointb=Math.ceil(66*la);
 $B=new Float32Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -418,7 +412,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 }};
 $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;  // has to revar?
+pointb=Math.ceil(66*la);  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
 if(sh4d==1){
