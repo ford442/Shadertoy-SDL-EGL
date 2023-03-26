@@ -1,3 +1,11 @@
+
+#define _XOPEN_REALTIME 1
+#define _POSIX_ASYNC_IO 1
+#define _POSIX_PRIO_IO 1
+#define _POSIX_SYNC_IO 1
+#define	_XOPEN_SHM 1
+#define _POSIX_PRIORITIZED_IO 1
+
 #include "../../include/combine/intrins.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
