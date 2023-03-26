@@ -150,6 +150,7 @@ setTim+=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=true;
+reverseLoop();
 }
 }
 
@@ -160,6 +161,7 @@ setTim-=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=false;
+forwardLoop();
 }
 }
 
