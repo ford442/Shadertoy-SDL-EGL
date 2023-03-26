@@ -1,3 +1,5 @@
+int rD,Th;
+
 #pragma once
 
 #include "../../include/shader/intrins.hpp"
@@ -16,7 +18,6 @@
 
 v128_t rNd(int);
 
-int rD,Th;
 v128_t Dr;
 
 #include <random>
@@ -34,3 +35,4 @@ int r4nd(int);
 #include <emscripten.h>
 #include <cstdlib>
 #include <ctime>
+#include <chrono>
