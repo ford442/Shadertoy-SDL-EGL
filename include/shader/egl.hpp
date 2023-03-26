@@ -9,7 +9,7 @@
 #include <GLES3/gl3platform.h>
 
 #define EGL_EGL_PROTOTYPES 1
-#define EGL_EGLEXT_PROTOTYPES
+#define EGL_EGLEXT_PROTOTYPES 1
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
