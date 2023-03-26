@@ -29,19 +29,18 @@ double Ttime,Tdlt;
 // double D0=0.0;
 
 #include <float.h>
+#include <math.h>
 
 const double_t D0=0.0;
 const float_t F0=0.0f;
 
-
 #include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <climits>
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <limits.h>
 #include <iostream>
 #include <locale> // utf-16
 #include <uchar.h> // utf-16
@@ -49,7 +48,7 @@ const float_t F0=0.0f;
 
 // #include <stdfloat>  //  c++23
 
-#include <ctime>
+#include <time.h>
 #include <chrono>
 
 std::chrono::steady_clock::time_point t1;
