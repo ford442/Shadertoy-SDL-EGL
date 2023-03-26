@@ -34,5 +34,3 @@ int r4nd(int);
 
 #include <emscripten.h>
 #include <cstdlib>
-#include <ctime>
-#include <chrono>
