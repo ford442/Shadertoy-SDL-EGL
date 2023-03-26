@@ -232,7 +232,7 @@ document.getElementById('ldv').addEventListener('canplay',function(){
 var nn=parseInt(window.innerHeight,10);
 var vvh=this.videoHeight;
 var vvw=this.videoWidth;
-document.getElementById('ldv').height=parseInt(nn,10);
+// document.getElementById('ldv').height=parseInt(nn,10);
 document.getElementById('ldv').width=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(vvw,10);
 document.getElementById('hig').innerHTML=parseInt(vvh,10);
@@ -275,7 +275,7 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 document.getElementById("wrap").style.lineheight=$hg;
 document.getElementById("wrap").style.pointerEvents="auto";
-document.getElementById('ldv').height=$h;
+// document.getElementById('ldv').height=$h;
 document.getElementById('ldv').src=vidSrc;
 document.getElementById('ldv').currentTime=$itim.innerHTML;
 document.getElementById('ldv').load();
