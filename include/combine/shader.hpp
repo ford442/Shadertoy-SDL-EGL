@@ -61,12 +61,6 @@ struct timespec req={0,16666666};
 
 void clrclr(GLclampf,GLclampf,GLclampf);
 
-extern "C"{
-
-void clr(GLclampf,GLclampf,GLclampf);
-
-}
-
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
