@@ -171,7 +171,7 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById('mv');
 mmvv.pause();
 stp=document.getElementById('mv').currentTime;
-loopPart=(stp+2.5)-(Math.ceil(stp));
+loopPart=(stp+2.111111)-(Math.ceil(stp));
 setTim=stp;
 Lstp=stp-loopPart;
 // stp-=loopPart/2.0;
