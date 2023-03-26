@@ -20,6 +20,9 @@ void pl();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+char flnm[24];
+int r;
+
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -33,10 +36,6 @@ void pl();
 #include <cfloat>
 #include <climits>
 #include <iostream>
-
-char flnm[24];
-int r;
-
 #include <SDL2/SDL.h>
 
 SDL_AudioDeviceID dev;
