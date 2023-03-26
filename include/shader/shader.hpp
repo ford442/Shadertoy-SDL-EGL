@@ -8,36 +8,17 @@ void str();
 #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
-
-#undef _FLT_ROUNDS
-#define _FLT_ROUNDS 1
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <cfloat>
-#include <climits>
-#include <iostream>
-#include <locale> // utf-16
-#include <uchar.h> // utf-16
-#include "../../include/shader/intrins.hpp"
-
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
 #define _POSIX_SYNC_IO 1
 #define	_XOPEN_SHM 1
 #define _POSIX_PRIORITIZED_IO 1
+#undef _FLT_ROUNDS
+#define _FLT_ROUNDS 1
 
-#include <emscripten.h>
-
-// #include <stdfloat>  //  c++23
-
+int iFrame;
+void Rend();
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
@@ -48,6 +29,26 @@ const double Dm1=-1.0,D=1.0;
 double Ttime,Tdlt;
 const double_t D0=0.0;
 // double D0=0.0;
+
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <cfloat>
+#include <climits>
+#include <iostream>
+#include <locale> // utf-16
+#include <uchar.h> // utf-16
+#include "../../include/shader/intrins.hpp"
+
+// #include <stdfloat>  //  c++23
+
+#include <ctime>
+#include <chrono>
+
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -142,22 +143,20 @@ void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 
 GLchar * rd_fl(const char *);
-
 // char16_t * rd_fl(const char *);
 
 #include "../../include/shader/egl.hpp"
 
 // int_fast32_t iFrame,iwi,ihi;
-int iFrame;
-// long iFrame,iwi,ihi;
+
 GLint sSize;
-// int iFrame,iFps,Size;
-void Rend();
+
 EGLDisplay display;
 EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
+
 EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
@@ -207,6 +206,7 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
+#include <emscripten.h>
 #include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
