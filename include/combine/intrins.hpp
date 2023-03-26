@@ -9,3 +9,10 @@
 #include <immintrin.h> 
 #include <nmmintrin.h>  //  sse 4.2
 #include <unistd.h>
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+#ifndef TRUE
+#define TRUE 1
+#endif
