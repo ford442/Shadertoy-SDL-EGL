@@ -310,14 +310,14 @@ g.addNativeFunction('RoseB',glslRoseB,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([s$,s$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -327,7 +327,7 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var alph=Alphe($amax,$amin,$amax,$fmin,$favg,$aavg,p[3]);
 var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
@@ -364,7 +364,7 @@ bb=GreenB(eulb);
   
 this.color(p[0],p[1],p[2],aveg);
   
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([h$,w$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setGraphical(true).setOutput([h$,w$]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([$S,$S]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
