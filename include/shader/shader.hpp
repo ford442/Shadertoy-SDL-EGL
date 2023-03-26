@@ -8,14 +8,9 @@ void str();
 #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
+
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
-#define _POSIX_TIMERS 1
-#define _XOPEN_REALTIME 1
-#define _POSIX_ASYNC_IO 1
-#define _POSIX_PRIO_IO 1
-#define _POSIX_SYNC_IO 1
-
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
@@ -31,6 +26,13 @@ void str();
 #include <locale> // utf-16
 #include <uchar.h> // utf-16
 #include "../../include/shader/intrins.hpp"
+
+#define _XOPEN_REALTIME 1
+#define _POSIX_ASYNC_IO 1
+#define _POSIX_PRIO_IO 1
+#define _POSIX_SYNC_IO 1
+#define	_XOPEN_SHM 1
+#define _POSIX_PRIORITIZED_IO 1
 
 #include <emscripten.h>
 
