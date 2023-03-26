@@ -250,12 +250,12 @@ gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EXT_texture_filter_anisotropic');
 */
 // gl.getExtension('ARB_blend_func_extended');
-gljs.getExtension('EXT_framebuffer_sRGB');
+// gljs.getExtension('EXT_framebuffer_sRGB');
   
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
-gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
+// gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 
 gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
