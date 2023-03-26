@@ -142,22 +142,30 @@ var loopPart;
 var mmvv;
 let revv;
 var $bb;
-
+  
+function reverseLoopB(){
+setTim-=stpInc;
+if(setTim>Lstp){
+mmvv.currentTime=setTim;
+}else{
+revv=false;
+forwardLoop();
+}
+}
+  
 function forwardLoop(){
-// setTim=mmvv.currentTime;
-if(setTim<stp){
 setTim+=stpInc;
+if(setTim<stp){
 mmvv.currentTime=setTim;
 }else{
 revv=true;
-reverseLoop();
+reverseLoopB();
 }
 }
 
 function reverseLoop(){
-// setTim=mmvv.currentTime;
-if(setTim>Lstp){
 setTim-=stpInc;
+if(setTim>Lstp){
 mmvv.currentTime=setTim;
 }else{
 revv=false;
