@@ -204,7 +204,7 @@ var h$=parseInt(inh,10);
   
 // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*w$*8;
+var la=h$*w$*16;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 var sz=(h$*w$)/8;
@@ -239,8 +239,8 @@ minorVersion:0
 });
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
-gl.getExtension('EGL_HI_colorformats');
-gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
+gljs.getExtension('EGL_HI_colorformats');
+gljs.getExtension('EGL_EXT_gl_colorspace_display_p3');
 
   /*
 gl.getExtension('EGL_KHR_gl_colorspace');
@@ -371,7 +371,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
-la=h$*w$*8;
+la=h$*w$*16;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
@@ -397,7 +397,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
-la=h$*w$*8;
+la=h$*w$*16;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
@@ -432,7 +432,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 }
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[$F+200],agav[$F+100],agav[0]]);
 }
 setTimeout(function(){
 M();
