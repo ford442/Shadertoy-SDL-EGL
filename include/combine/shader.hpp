@@ -12,20 +12,29 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+extern "C"{
+
+void str();
+
+}
+
 void renderFrame();
 
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
-const float_t F0=0.0f;
 double TtimeDelta;
 const double Dm1=-1.0,D=1.0;
-const double_t D0=0.0;
 int iFrame,iwi,ihi;
 double Ttime;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader1.toy");
 
-#include <ctime>
+#include <math.h>
+
+const float_t F0=0.0f;
+const double_t D0=0.0;
+
+#include <time.h>
 #include <chrono>
 
 std::chrono::steady_clock::time_point t1;
@@ -37,21 +46,13 @@ struct timespec req={0,16666666};
 
 #include <iostream>
 #include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <cfloat>
-
-extern "C"{
-
-void str();
-
-}
-
-#include <climits>
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <float.h>
+#include <limits.h>
 #include <iostream>
 
 // #include <stdfloat>  //  c++23
