@@ -46,6 +46,8 @@ void nano(short int,int,float *,float *);
 
 #include "../../include/combine/gl.hpp"
 
+void clrclr(GLclampf,GLclampf,GLclampf);
+
 extern "C"{
 
 void clr(GLclampf,GLclampf,GLclampf);
