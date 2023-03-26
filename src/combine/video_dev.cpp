@@ -204,7 +204,7 @@ var h$=parseInt(inh,10);
   
 // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*w$*4;
+var la=h$*w$*8;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
 var sz=(h$*w$)/8;
@@ -371,7 +371,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
-la=h$*w$*4;
+la=h$*w$*8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
@@ -397,7 +397,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
-la=h$*w$*4;
+la=h$*w$*8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
