@@ -87,6 +87,31 @@ b3_combine_llvm:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js --post-js js/module.js
 
+b3_combine_dev:
+	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -fpie \
+	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections
+	 em++ src/combine/audio.cpp -c -O0 -std=gnu++2b -fpie -sUSE_SDL=2 -fno-fast-math \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -ffp-contract=on -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
+	 em++ src/combine/video_dev.cpp -c -O0 -std=gnu++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
+	 -fno-fast-math -ffp-contract=on \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
+	 em++ src/combine/shader.cpp -c -O0 -std=gnu++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
+	 -fno-fast-math -ffp-contract=on \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
+	 emcc main.o audio.o video_dev.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=gnu++2b -sUSE_SDL=2 -flto=thin \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sWASMFS=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=3 \
+	 -fuse-ld=lld -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js --post-js js/module.js
+
+
 b3_combine_cloud:
 	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
