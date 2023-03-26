@@ -250,7 +250,7 @@ gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EXT_texture_filter_anisotropic');
 */
 // gl.getExtension('ARB_blend_func_extended');
-gl.getExtension('EXT_framebuffer_sRGB');
+gljs.getExtension('EXT_framebuffer_sRGB');
   
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
