@@ -236,11 +236,12 @@ minorVersion:0
 });
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
-  /*
 gl.getExtension('EGL_HI_colorformats');
+gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
+
+  /*
 gl.getExtension('EGL_KHR_gl_colorspace');
 // gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
-// gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('EXT_texture_filter_anisotropic');
@@ -415,10 +416,14 @@ if(locb>64){locb=1;}
 if($F==i){
 eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);$F="+loca+";$Bu="+locb+";");
 }};
+if(($F%-1)2==0){
 $bb=R(vv);
 $B.set($bb,0,sz);
+}
 pointb=66*la;  // has to revar?
+if($F%2==0){
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+}
 if(sh4d==1){
 Module.ccall("frm",null,[],[]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
