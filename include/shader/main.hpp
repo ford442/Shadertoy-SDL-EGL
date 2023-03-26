@@ -10,6 +10,9 @@
 #define FLT_ROUNDS 1
 #define POSIX_TIMERS 1
 #define XOPEN_REALTIME 1
+#define POSIX_ASYNC_IO 1
+#define POSIX_PRIO_IO 1
+#define POSIX_SYNC_IO 1
 
 v128_t rNd(int);
 
