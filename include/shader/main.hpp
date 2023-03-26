@@ -1,9 +1,5 @@
 #pragma once
 
-#include <cstdlib>
-#include <ctime>
-#include <random>
-#include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
 
 #undef FLT_EVAL_METHOD
@@ -20,6 +16,8 @@ v128_t rNd(int);
 int rD,Th;
 v128_t Dr;
 
+#include <random>
+
 std::random_device rd;
 
 extern"C"{
@@ -29,3 +27,7 @@ v128_t Rg;
 int r4nd(int);
 
 }
+
+#include <emscripten.h>
+#include <cstdlib>
+#include <ctime>
