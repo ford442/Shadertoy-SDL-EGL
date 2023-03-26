@@ -1,20 +1,16 @@
-#include <SDL2/SDL.h>
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <cfloat>
-#include <climits>
-#include <iostream>
-#include <emscripten.h>
-
 char flnm[24];
+  
+void plt();
+
+extern "C"{  
+  
+void pl();
+  
+}
+
+#include <cstdint>
+#include <SDL2/SDL.h>
+
 SDL_AudioDeviceID dev;
 
 struct{
@@ -25,11 +21,17 @@ SDL_AudioSpec request;
 }wave;
 
 void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
-  
-void plt();
 
-extern "C"{  
-  
-void pl();
-  
-}
+#include <emscripten.h>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <cfloat>
+#include <climits>
+#include <iostream>
