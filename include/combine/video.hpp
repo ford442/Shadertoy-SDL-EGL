@@ -46,6 +46,12 @@ void nano(short int,int,float *,float *);
 
 #include "../../include/combine/gl.hpp"
 
+extern "C"{
+
+void clr(GLclampf,GLclampf,GLclampf);
+
+}
+
 GLint Size_js;
 GLclampf avrg,drk,brt,avr;
 
