@@ -1,4 +1,3 @@
-
 int Th,rD;
 
 #pragma once
