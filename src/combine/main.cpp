@@ -7,6 +7,18 @@ Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
+v128_t(* RnD)(int){&rNd};
+
+extern"C"{
+ 
+int r4nd(int tH){
+Rg=RnD(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
+}
+  
+}
+
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -201,7 +213,7 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
-  
+
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
@@ -309,24 +321,13 @@ pll();
 },500);
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},800);
+},1000);
 });
 
 });
 
-v128_t(* RnD)(int){&rNd};
 
 void(*jss)(){&js_main};
-
-extern"C"{
- 
-int r4nd(int tH){
-Rg=RnD(tH);
-c=wasm_i32x4_extract_lane(Rg,0);
-return c;
-}
-  
-}
 
 int main(void){
 "use strict";
