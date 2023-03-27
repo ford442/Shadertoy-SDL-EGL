@@ -12,7 +12,9 @@
 #define GL_GLEXT_PROTOTYPES 1
 #endif
 
+#include <GL/glext.h>
+
 #define GLFW_INCLUDE_GLEXT 1
+
 #include <GLFW/glfw3.h>
 
-#include <GL/glext.h>
