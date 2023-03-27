@@ -2,30 +2,33 @@
 
 #include <emscripten.h>
 
+void avgFrm(short int,int,float *,float *);
+
+extern "C"{
+
+void b3();
+
+void nano(short int,int,float *,float *);
+
+}
+
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
+#pragma STDC FP_CONTRACT ON
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD 0
+// #pragma STDC CX_LIMITED_RANGE OFF
+#define _XOPEN_REALTIME 1
+#define _POSIX_ASYNC_IO 1
+#define _POSIX_PRIO_IO 1
+#define _POSIX_SYNC_IO 1
+#define	_XOPEN_SHM 1
+#define _POSIX_PRIORITIZED_IO 1
+#undef _FLT_ROUNDS
+#define _FLT_ROUNDS 1
+#define _POSIX_REGEXP	1
+
 #include "../../include/shader/intrins.hpp"
-
-#undef FLT_EVAL_METHOD
-#define FLT_EVAL_METHOD 0
-#pragma STDC CX_LIMITED_RANGE ON
-#undef FLT_ROUNDS
-#define FLT_ROUNDS 1
-
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <cfloat>
-#include <climits>
-
-#include <unistd.h>
 
 double wi_js,hi_js;
 
@@ -39,17 +42,17 @@ double wi_js,hi_js;
 
 #define GL_GLES_PROTOTYPES 1
 #include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
+// #include <GLES3/gl31.h>
+// #include <GLES3/gl32.h>
+// #include <GLES3/gl3platform.h>
 
 #define EGL_EGL_PROTOTYPES 1
 #include <EGL/egl.h>
 #define EGL_EGLEXT_PROTOTYPES
 #include <EGL/eglext.h>
-#include <EGL/eglplatform.h>
+// #include <EGL/eglplatform.h>
 
-#include <webgl/webgl2.h>
+// #include <webgl/webgl2.h>
 
 float max;
 float min;
@@ -58,7 +61,8 @@ float avgSum;
 float minSum;
 float maxSum;
 
-int_fast32_t Size;
+// int_fast32_t Size;
+int Size;
 // int eglSize;
 EGLContext contextegl_js;
 EGLDisplay display_js;
@@ -119,11 +123,9 @@ EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)32,
 EGL_MIPMAP_LEVEL,(EGLint)1,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
-
-void avgFrm(short int,int,float *,float *);
 
 void egl();
 
@@ -132,10 +134,15 @@ void egl();
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
-extern "C"{
-
-void b3();
-
-void nano(short int,int,float *,float *);
-
-}
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <cfloat>
+#include <climits>
