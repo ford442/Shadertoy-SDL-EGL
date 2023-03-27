@@ -14,6 +14,6 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-// #include <webgl/webgl2.h>
+// #include <webgl/webgl2.h>  //  much better performance without
 
 // #include <emscripten/html5_webgl.h>
