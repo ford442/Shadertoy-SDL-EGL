@@ -207,7 +207,7 @@ b3_shader_llvm:
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fexceptions
 	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -fwasm-exceptions -fexceptions -force-vector-width=4 -O0 -static-pie -std=gnu++2b -fno-math-errno \
-	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
+	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -sTOTAL_STACK=128MB \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
 	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -sUSE_GLFW=3 -sLEGACY_GL_EMULATION=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_REGAL=0 \
