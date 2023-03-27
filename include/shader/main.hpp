@@ -1,3 +1,5 @@
+#include <emscripten.h>
+
 int rD,Th;
 
 #pragma once
@@ -35,5 +37,4 @@ int r4nd(int);
 
 }
 
-#include <emscripten.h>
 #include <cstdlib>
