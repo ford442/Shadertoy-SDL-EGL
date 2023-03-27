@@ -3,7 +3,7 @@
 
 extern"C"{
 
-void fire_load ();
+void fire_load();
 void fire();
 
 }
