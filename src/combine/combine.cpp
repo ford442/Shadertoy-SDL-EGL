@@ -69,13 +69,6 @@ glFinish();
 return;
 }
 
-void(*FrM)(){&renderFrame};
-
-void fr4m(){
-FrM();
-return;
-}
-
 GLchar * rd_fl(const char * Fnm){
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -361,6 +354,8 @@ maxSum+=aptr[i+200];
 aptr[200]=maxSum/32;
 return;
 }
+
+void(*FrM)(){&renderFrame};
 
 extern "C" {
 
