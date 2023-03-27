@@ -1,7 +1,5 @@
 #pragma once
 
-// #define GL_SILENCE_DEPRECATION
-
 #ifndef GL_FRAGMENT_PRECISION_HIGH
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #endif
@@ -17,4 +15,3 @@
 #define GLFW_INCLUDE_GLEXT 1
 
 #include <GLFW/glfw3.h>
-
