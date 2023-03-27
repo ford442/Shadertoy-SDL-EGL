@@ -189,8 +189,8 @@ glFrontFace(GL_CW);
 glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
-// glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
+glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
@@ -675,7 +675,9 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=Math.ceil(66*la);  // has to revar?
+ 
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+ 
 if(sh4d==1){
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
 Module.ccall("frm",null,[],[]);
