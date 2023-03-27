@@ -3,6 +3,7 @@
 int rD,Th;
 
 #pragma once
+
 #include "../../include/shader/intrins.hpp"
 
 #undef _FLT_EVAL_METHOD
@@ -18,7 +19,6 @@ int rD,Th;
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
-
 
 v128_t Dr;
 
