@@ -162,7 +162,6 @@ emscripten_webgl_enable_extension(ctx,"HI_colorformats");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
 emscripten_webgl_enable_extension(ctx,"EXT_create_context_robustness");
-
   /*
 emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
@@ -256,11 +255,92 @@ auto t1=std::chrono::steady_clock::now();
 return;
 }
 
+void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+avrg=(((avr+(1.0-rlc))/2.0)+alc);
+drk=1.0-(avr-0.5);
+brt=1.0-(((1.0-rlc)-(alc-0.5)));
+glBlendColor(avrg,avrg,avrg,1.0);
+glClearColor(drk,drk,drk,brt);
+return;
+}
+
+void egl(){
+eglconfig_js=NULL;
+emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
+Size_js=static_cast<GLsizei>(hi_js);
+emscripten_webgl_init_context_attributes(&attr_js);
+attr_js.alpha=EM_TRUE;
+attr_js.stencil=EM_TRUE;
+attr_js.depth=EM_TRUE;
+attr_js.antialias=EM_TRUE;
+attr_js.premultipliedAlpha=EM_FALSE;
+attr_js.preserveDrawingBuffer=EM_FALSE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
+attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
+attr_js.majorVersion=2;
+attr_js.minorVersion=0;
+ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
+// eglBindAPI(EGL_OPENGL_API);
+display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display_js,&major_js,&minor_js);
+eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_size_js);
+contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2_js);
+surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
+eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
+emscripten_webgl_make_context_current(ctx_js);
+  
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+eglBindAPI(EGL_OPENGL_ES_API);
+
+// glEnable(GL_BLEND);
+glDisable(GL_DITHER);
+glEnable(GL_SCISSOR_TEST);
+emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
+emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");     //     vv  required for realtime
+emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime"); // ^^
+emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); // ^^
+emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
+emscripten_webgl_enable_extension(ctx_js,"EXT_create_context_robustness");
+emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
+emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage ");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
+// emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
+emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
+// glDisable(GL_STENCIL_TEST);
+// glDisable(GL_DEPTH_TEST);
+// glDisable(GL_BLEND);
+glViewport((GLint)0,(GLint)0,Size_js,Size_js);
+glScissor((GLint)0,(GLint)0,Size_js,Size_js);
+return;
+}
+
 void(*fRm)(){&fr4m};
 
 void(*sTr)(){&strt};
 
 extern "C" {
+
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+clrclr(cllr,alp,avr);
+return;
+}
 
 void frm(){
 fRm();
