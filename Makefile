@@ -92,16 +92,13 @@ b3_combine_dev:
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/shader.cpp -c -O0 -std=gnu++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/combine.cpp -c -O0 -std=gnu++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
 	 em++ src/combine/audio.cpp -c -O0 -std=gnu++2b -fpie -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=on -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/video_dev.cpp -c -O0 -std=gnu++2b -fpie -fno-math-errno -mcpu=bleeding-edge \
-	 -fno-fast-math -ffp-contract=on \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o audio.o shader.o video_dev.o -o b3hd002.js -static-pie -mllvm -O0 -std=gnu++2b -sUSE_SDL=2 -flto=thin \
+	 emcc main.o audio.o combine.o -o b3hd002.js -static-pie -mllvm -O0 -std=gnu++2b -sUSE_SDL=2 -flto=thin \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
