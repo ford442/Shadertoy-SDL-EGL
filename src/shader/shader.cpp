@@ -69,7 +69,7 @@ return;
 }
 
 GLchar * rd_fl(const char * Fnm){
-char16_t * result=NULL;
+char8_t * result=NULL;
 GLchar * results=NULL;
 long int length=0;
 FILE * file=fopen(Fnm,"r");
@@ -85,9 +85,9 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char16_t *>(malloc((length+1)*sizeof(char16_t)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char16_t),length,file);
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
@@ -120,7 +120,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -135,16 +135,15 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
-    eglBindAPI(EGL_OPENGL_ES_API);
-
+eglBindAPI(EGL_OPENGL_ES_API);
+glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
 sSize=static_cast<GLint>(hi);
 S=static_cast<GLfloat>(wi);
 mX=0.5;
 mY=0.5;
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
-// emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
-// emscripten_webgl_enable_extension(ctx,"WEBGL_EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"ARB_texture_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
@@ -154,14 +153,14 @@ emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
-// emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"NV_context_priority_realtime");
-// emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"HI_colorformats");
 // emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
-// emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
+emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EXT_create_context_robustness");
@@ -198,8 +197,8 @@ emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_linear");
 // emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
 // emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
-// emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
-// emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
+emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
+emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
 // glEnable(GL_LIGHTING);  //  LEGACY_GL
 // glEnable(GL_FOG);  //  LEGACY_GL
@@ -213,10 +212,7 @@ glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
-// glDisable(GL_STENCIL_TEST);  // invalid capa
-// glFog(GL_FOG_MODE,GL_EXP2);
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
-//    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); // invalid target
 glEnable(GL_POLYGON_OFFSET_FILL);  // works
 glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
 //  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //  undefined symbol
@@ -245,7 +241,6 @@ nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
-// cs=&cmpl_shd;
 const GLuint vtx=cs(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
@@ -288,10 +283,8 @@ glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,sSize,sSize);
-  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-//     glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-//       glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
