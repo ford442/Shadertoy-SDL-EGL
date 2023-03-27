@@ -264,15 +264,6 @@ glClearColor(drk,drk,drk,brt);
 return;
 }
 
-extern "C" {
-
-void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
-clrclr(cllr,alp,avr);
-return;
-}
-
-}
-
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
