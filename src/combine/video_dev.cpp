@@ -369,17 +369,10 @@ T=true;
 
 });
 
-void(*b3e)(){&egl};
-
 void(*B3)(){&vid};
 
 extern "C" {
 
-void b3_egl(){
-b3e();
-return;
-}
-  
 void b3(){
 B3();
 return;
