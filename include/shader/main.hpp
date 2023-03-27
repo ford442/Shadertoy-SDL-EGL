@@ -4,8 +4,6 @@ int rD,Th;
 
 #pragma once
 
-#include "../../include/shader/intrins.hpp"
-
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
 // #pragma STDC CX_LIMITED_RANGE OFF
@@ -20,13 +18,14 @@ int rD,Th;
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-v128_t rNd(int);
+#include "../../include/shader/intrins.hpp"
 
 v128_t Dr;
 
 #include <random>
-
 std::random_device rd;
+
+v128_t rNd(int);
 
 extern"C"{
 
