@@ -14,7 +14,6 @@
 
 double wi_js,hi_js;
 
-void egl();
 void avgFrm(short int,int,float *,float *);
 
 extern "C"{
@@ -27,22 +26,8 @@ void nano(short int,int,float *,float *);
 
 #pragma once
 
-#include <cfloat>
-
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-#include "../../include/combine/intrins.hpp"
-
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <cfloat>
-#include <climits>
 
 #include "../../include/combine/gl.hpp"
 
@@ -58,6 +43,8 @@ GLint Size_js;
 GLclampf avrg,drk,brt,avr;
 
 #include "../../include/combine/egl.hpp"
+
+void egl();
 
 EGLContext contextegl_js;
 EGLDisplay display_js;
@@ -126,3 +113,15 @@ EGL_NONE
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 
+#include "../../include/combine/intrins.hpp"
+#include <cfloat>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <cfloat>
+#include <climits>
