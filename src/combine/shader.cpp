@@ -335,10 +335,17 @@ void(*fRm)(){&fr4m};
 
 void(*sTr)(){&strt};
 
+void(*b3e)(){&egl};
+
 extern "C" {
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
 clrclr(cllr,alp,avr);
+return;
+}
+
+void b3_egl(){
+b3e();
 return;
 }
 
