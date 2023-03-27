@@ -21,7 +21,6 @@ void pl();
 #define _POSIX_REGEXP	1
 
 char flnm[24];
-int r;
 
 #include <iostream>
 #include <algorithm>
