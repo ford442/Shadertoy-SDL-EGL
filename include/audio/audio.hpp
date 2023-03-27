@@ -36,7 +36,6 @@ SDL_AudioSpec request;
 
 void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
 
-#include <emscripten.h>
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -49,3 +48,4 @@ void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
 #include <cfloat>
 #include <climits>
 #include <iostream>
+#include <emscripten.h>
