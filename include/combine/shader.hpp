@@ -44,21 +44,13 @@ std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,16666666};
 
-#include <iostream>
-#include <algorithm>
-#include <string.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <float.h>
-#include <limits.h>
-#include <iostream>
-
 // #include <stdfloat>  //  c++23
 
 #include "../../include/combine/gl.hpp"
 
+void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
+
+GLint iFps,sSize;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
@@ -125,10 +117,6 @@ GLchar * rd_fl(const char *);
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 #include "../../include/combine/egl.hpp"
-
-GLint iFps,sSize;
-
-void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 EGLDisplay display;
 EGLSurface surface;
@@ -206,3 +194,13 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
 #include "../../include/combine/intrins.hpp"
+#include <iostream>
+#include <algorithm>
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <float.h>
+#include <limits.h>
+#include <iostream>
