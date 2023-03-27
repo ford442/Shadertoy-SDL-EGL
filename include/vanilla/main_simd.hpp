@@ -1,5 +1,8 @@
 #pragma once
+
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+#include <emscripten.h>
 
 #undef FLT_EVAL_METHOD
 #define FLT_EVAL_METHOD 0
@@ -16,7 +19,3 @@
 #include <immintrin.h> 
 #include <nmmintrin.h>  //  sse 4.2
 #include <unistd.h>
-
-#include <emscripten.h>
-
-#include <emscripten/html5.h>
