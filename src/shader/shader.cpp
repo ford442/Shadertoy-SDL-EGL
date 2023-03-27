@@ -61,10 +61,15 @@ un=&uni;
 un(mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
-glClear(GL_DEPTH_BUFFER_BIT);
-glClear(GL_STENCIL_BUFFER_BIT);
 glDisable(GL_BLEND);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+glFlush();
+glClear(GL_DEPTH_BUFFER_BIT);
+glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+glFlush();
+glClear(GL_STENCIL_BUFFER_BIT);
+glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+glFinish();
 return;
 }
 
