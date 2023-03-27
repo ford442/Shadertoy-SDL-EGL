@@ -1,12 +1,5 @@
 #pragma once
 
-#include <cstdlib>
-#include <ctime>
-#include <cfloat>
-#include <random>
-#include <emscripten.h>
-// #include <emscripten/html5.h>
-
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE OFF
@@ -21,12 +14,16 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+int rD;
+
+#include <random>
+
+std::random_device rd;
+
 #include "../../include/combine/intrins.hpp"
 
 v128_t rNd(int);
-int rD;
 v128_t Dr;
-std::random_device rd;
 
 extern"C"{
 
@@ -35,3 +32,8 @@ v128_t Rg;
 int r4nd(int);
 
 }
+
+#include <cstdlib>
+#include <ctime>
+#include <cfloat>
+#include <emscripten.h>
