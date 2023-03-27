@@ -119,10 +119,10 @@ const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[]=
-"precision highp int;precision highp sampler3D;precision highp sampler2D;"
+"precision highp int;precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp isampler2D;precision mediump isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
@@ -134,8 +134,8 @@ const GLchar frg_aa_src[]=
 "#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 3;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.2/1.0) );}void mainImage0\n";
 
 const GLchar frg_ftr_src[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 8;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.6/1.0) );}void mainImage0\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);\n"
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 8;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.6/1.0) );}void mainImage0}\n\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
