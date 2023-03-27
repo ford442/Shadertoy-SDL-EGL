@@ -10,7 +10,6 @@ int rD,Th;
 #define _FLT_EVAL_METHOD 0
 // #pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
-#pragma STDC FENV_ACCESS on
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
