@@ -200,17 +200,18 @@ b3_shader_js:
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge \
+	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge -fblocks -fpascal-strings -fborland-extensions \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -ftree-vectorize -fexceptions
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=on \
 	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge -msimd128 -mavx \
-	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -fms-extensions \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -fpascal-strings -fborland-extensions \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fexceptions
 	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -fwasm-exceptions -fexceptions -force-vector-width=4 -O0 -static-pie -std=gnu++2b -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -sTOTAL_STACK=128MB \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
-	  -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -sUSE_GLFW=3 -sLEGACY_GL_EMULATION=0 \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -sUSE_GLFW=3 -sLEGACY_GL_EMULATION=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_REGAL=0 \
+	 -fblocks -fpascal-strings -fborland-extensions \
 	 -fuse-ld=lld -fwhole-program -polly -sWASMFS=0 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
