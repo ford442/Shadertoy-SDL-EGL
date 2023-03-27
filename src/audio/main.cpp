@@ -7,6 +7,17 @@ Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
+extern"C"{
+ 
+int r4nd(int tH){
+v128_t(* RnD)(int){&rNd};
+Rg=RnD(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
+}
+  
+}
+
 EM_JS(void,js_main,(),{
 
 'use strict';
@@ -62,14 +73,9 @@ const nxhttp=new XMLHttpRequest();
 nxhttp.addEventListener("load",function(){
 sngs(this);
 });
-// nxhttp.onreadystatechange=function(){
-// if(this.readyState==4&&this.status==200){
-// sngs(this);
-// }};
 nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
-
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
@@ -78,10 +84,7 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 
 function snd(){
 var sngsNum=$sngs[0];
-
 const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
-
-// let randSong=Math.floor(($sngs[0]-5)*Math.random());
 const songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
 const sng=new BroadcastChannel('sng');
@@ -92,7 +95,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},500);
+},1000);
 });
 
 const tem=document.getElementById('tim');
@@ -120,7 +123,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},700);
+},1000);
 };
 }
 
@@ -130,25 +133,15 @@ scanSongs();
 normalResStart();
 });
 
-extern"C"{
- 
-int r4nd(int tH){
-v128_t(* RnD)(int){&rNd};
-Rg=RnD(tH);
-c=wasm_i32x4_extract_lane(Rg,0);
-return c;
-}
-  
-}
+void(*jss)(){&js_main};
 
 int main(void){
   
 EM_ASM({
-'use strict';
+"use strict";
 FS.mkdir('/snd');
 });
 
-void(*jss)(){&js_main};
 jss();
 return 0;
 }
