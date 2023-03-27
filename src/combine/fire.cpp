@@ -1715,9 +1715,9 @@ const checkerboardShader=compileShader(gl.FRAGMENT_SHADER,`
  precision highp sampler2D;
  varying vec2 vUv;
  uniform sampler2D uTexture;
- uniform float aspectRatio;
- #define SCALE 25.0
- void main () {
+uniform float aspectRatio;
+#define SCALE 25.0
+void main () {
  vec2 uv=floor(vUv * SCALE * vec2(aspectRatio,1.0));
  float v=mod(uv.x + uv.y,2.0);
  v=v * 0.1 + 0.8;
@@ -1847,9 +1847,9 @@ const sunraysShader=compileShader(gl.FRAGMENT_SHADER,`
  precision highp sampler2D;
  varying vec2 vUv;
  uniform sampler2D uTexture;
- uniform float weight;
- #define ITERATIONS 16
- void main () {
+uniform float weight;
+#define ITERATIONS 16
+void main () {
  float Density=0.3;
  float Decay=0.95;
  float Exposure=0.7;
