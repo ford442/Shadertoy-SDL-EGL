@@ -1,3 +1,5 @@
+#include <emscripten.h>
+
 extern "C"{
   
 void str();
@@ -63,14 +65,14 @@ struct timespec req={0,16666666};
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
+GLint sSize;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLuint atb_pos;
-GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
-GLclampd gD=D,gD0=D0,gDm1=Dm1;
-GLfloat g1g=F,S;
+GLclampf x,y,gF=1.0f,gF0=0.0f,gFm1=-1.0f,y1y=1.0f;
+GLclampd gD=1.0,gD0=0.0,gDm1=-1.0;
+GLfloat g1g=1.0f,S;
 GLsizei s4=4,i;
-// const GLuint vtx,frag;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLclampf XYZW[4];}Vertex;
 Vertex vrt[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
@@ -115,7 +117,7 @@ const GLchar cm_hdr_src[]=
 "precision highp float;\n";
 
 const GLchar vrt_bdy_src[]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[]=
 "precision highp int;precision highp sampler3D;precision highp sampler2D;"
@@ -134,7 +136,7 @@ const GLchar frg_aa_src[]=
 
 const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 8;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.6/1.0) );}void mainImage0\0";
+"#define mainImage mainImage0(out vec4 O, vec2 U);int _N = 8;void mainImage(out vec4 O, vec2 U){vec4 o; O = vec4(0);for (int k=0; k < _N*_N; k++ ){ mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));O += o; }O /= float(_N*_N);O = pow( O, vec4(2.6/1.0) );}void mainImage0\n\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
@@ -147,13 +149,8 @@ void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 
 GLchar * rd_fl(const char *);
-// char16_t * rd_fl(const char *);
 
 #include "../../include/shader/egl.hpp"
-
-// int_fast32_t iFrame,iwi,ihi;
-
-GLint sSize;
 
 EGLDisplay display;
 EGLSurface surface;
@@ -210,7 +207,6 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-#include <emscripten.h>
 #include <emscripten/html5.h>
 
 EmscriptenWebGLContextAttributes attr;
