@@ -36,10 +36,11 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
+void(*r)(){&plt};
+
 extern "C" {
 
 void pl(){
-void(*r)(){&plt};
 r();
 return;
 }
