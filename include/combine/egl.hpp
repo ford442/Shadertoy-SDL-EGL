@@ -1,6 +1,6 @@
 #pragma once
 
-#include <webgl/webgl2.h>
+// #include <webgl/webgl2.h>
 
 #ifndef GL_GLES_PROTOTYPES
 #define GL_GLES_PROTOTYPES 1
