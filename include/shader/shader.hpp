@@ -131,7 +131,7 @@ const GLchar frg_hdr_src[]=
 "out vec4 fragColor;\n";
 
 const GLchar frg_ftr_src[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.a=1.0f}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
 "int _N=8;void mainImage(out vec4 O,vec2 U){"
 "vec4 o;O = vec4(0);"
