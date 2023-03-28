@@ -80,14 +80,6 @@ const GLchar * src[4];
 
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
-"#extension EGL_KHR_gl_colorspace : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb_linear : enable\n"
-// "#extension EGL_EXT_gl_colorspace_bt2020_pq_linear : enable\n"
-// "#extension EGL_EXT_gl_colorspace_bt2020_pq : enable\n"
-// "#extension EGL_EXT_gl_colorspace_display_p3 : enable\n"
-"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
@@ -108,7 +100,6 @@ const GLchar cm_hdr_src[]=
 "#pragma STDGL(centroid all)\n"
 "#pragma optionNV(sample all)\n"
 "#pragma STDGL(sample all)\n"
-
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp float;\n";
@@ -178,9 +169,9 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE
 };
 const EGLint att_lst[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
