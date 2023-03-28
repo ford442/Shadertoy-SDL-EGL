@@ -28,7 +28,7 @@ const float F=1.0f,Fm1=-1.0f;
 // float F0=0.0f;
 const double Dm1=-1.0,D=1.0;
 // double Dm1=-1.0,D=1.0;
-double Ttime,Tdlt;
+float Ttime,Tdlt;
 // double D0=0.0;
 
 #include <float.h>
