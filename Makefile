@@ -200,11 +200,11 @@ b3_shader_js:
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge -fblocks -fpascal-strings -fborland-extensions \
+	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -ftree-vectorize -fexceptions
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=on \
 	 -fno-math-errno -std=gnu++2b -mcpu=bleeding-edge -msimd128 -mavx \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -fpascal-strings -fborland-extensions \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fexceptions
 	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -fwasm-exceptions -fexceptions -force-vector-width=4 -O0 -static-pie -std=gnu++2b -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -sTOTAL_STACK=128MB \
