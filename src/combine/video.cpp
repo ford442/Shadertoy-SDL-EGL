@@ -92,8 +92,8 @@ mmvv.pause();
 stp=document.getElementById('mv').currentTime;
 loopPart=(stp+2.5)-(Math.floor(stp));
 setTim=stp;
-Lstp=stp-loopPart;
-stp-=loopPart/2.0;
+Lstp=Math.floor(stp-loopPart);
+stp=Math.floor(stp);
 loopLoop=true;
 revv=true;
 }
