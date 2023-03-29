@@ -144,6 +144,8 @@ sSize=static_cast<GLint>(hi);
 S=static_cast<GLfloat>(wi);
 mX=0.5;
 mY=0.5;
+emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample_resolve");
+emscripten_webgl_enable_extension(ctx,"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 // emscripten_webgl_enable_extension(ctx,"ARB_texture_float");
