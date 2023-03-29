@@ -151,9 +151,6 @@ minorVersion:0
 });
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
-gl.getExtension('EGL_HI_colorformats');
-gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
-
   /*
 gl.getExtension('EGL_KHR_gl_colorspace');
 // gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
@@ -162,6 +159,7 @@ gl.getExtension('EGL_KHR_gl_colorspace');
 gl.getExtension('EXT_texture_filter_anisotropic');
 */
 // gl.getExtension('ARB_blend_func_extended');
+  
   
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
