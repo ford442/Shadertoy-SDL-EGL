@@ -157,6 +157,9 @@ emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
+  
+        emscripten_webgl_enable_extension(ctx, "EXT_float_blend");
+
 // emscripten_webgl_enable_extension(ctx_js,"ARB_robustness");
 
   /*
@@ -292,6 +295,9 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(GL_BLEND);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
+  
+        emscripten_webgl_enable_extension(ctx_js, "EXT_float_blend");
+
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
