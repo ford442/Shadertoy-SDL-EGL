@@ -231,15 +231,15 @@ glEnable(GL_CULL_FACE);
 // glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-glEnable(GL_COLOR_LOGIC_OP);
+// glEnable(GL_COLOR_LOGIC_OP); //  invalid capa
 glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
