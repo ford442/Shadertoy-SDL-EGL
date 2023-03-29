@@ -61,11 +61,11 @@ iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
+// glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+// glFlush();
+// nanosleep(&req,&rem);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFlush();
-nanosleep(&req,&rem);
-glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFinish();
 return;
 }
 
@@ -165,13 +165,12 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
 */
 // emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
-// emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
-emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
-// emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
- 	glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-		glDepthMask(GL_TRUE);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
+// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
+glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+glDepthMask(GL_TRUE);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
 glClearDepth(D);
 // glEnable(GL_POLYGON_OFFSET_FILL);
@@ -383,8 +382,7 @@ var sh4d=false;
 let stp,Lstp;
 let stpInc=0.016;
 let setTim;
-// const timFrm=16.666;
-let timFrm=10.42;
+let timFrm=16.66;
 var lockVid;
 var loopLoop;
 var mmvv;
@@ -510,14 +508,12 @@ gljs.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
 gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-
 gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-let g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
-let g2=new GPU({mode:'webgl2'});
+let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
+let g2=new GPU({mode:'gpu'});
 
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
@@ -538,7 +534,7 @@ const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g) {return (1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25)));}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g){                          return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g))))))+0.777777)/4.0);}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g))))))+0.777777)/4.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g))))))+1.4)/5.0);}`;
 
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
@@ -615,7 +611,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
-la=Math.ceil(h$*w$*4);
+la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
 agav=new Float32Array($H,pointa,304);
 R.setOutput([sz]);
@@ -641,7 +637,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
-la=Math.ceil(h$*w$*4);
+la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
 agav=new Float32Array($H,pointa,304);  // has to var?
 R.setOutput([sz]);
@@ -671,9 +667,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=Math.ceil(66*la);  // has to revar?
- 
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
- 
 if(sh4d==1){
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
 Module.ccall("frm",null,[],[]);
@@ -681,11 +675,11 @@ Module.ccall("frm",null,[],[]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
-timFrm=8;
+timFrm=16;
 if(revv==true){
 reverseLoop();
 }else{
-timFrm=16;
+timFrm=16.6;
 forwardLoop();
 }
 }
