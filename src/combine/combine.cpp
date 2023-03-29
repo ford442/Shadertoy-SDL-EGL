@@ -387,14 +387,13 @@ let setTim;
 let timFrm=10.42;
 var lockVid;
 var loopLoop;
-var loopPart;
 var mmvv;
 let revv;
 var $bb;
   
 function reverseLoopB(){
-if(setTim>Lstp){setTim-=stpInc;
-
+if(setTim>Lstp){
+setTim-=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=false;
@@ -403,8 +402,8 @@ forwardLoop();
 }
   
 function forwardLoop(){
-if(setTim<stp){setTim+=stpInc;
-
+if(setTim<stp){
+setTim+=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=true;
@@ -413,8 +412,8 @@ reverseLoopB();
 }
 
 function reverseLoop(){
-if(setTim>Lstp){setTim-=stpInc;
-
+if(setTim>Lstp){
+setTim-=stpInc;
 mmvv.currentTime=setTim;
 }else{
 revv=false;
@@ -430,10 +429,9 @@ if (e.code=='KeyZ'){
 mmvv=document.getElementById('mv');
 mmvv.pause();
 stp=document.getElementById('mv').currentTime;
-loopPart=(stp+2.111111)-(Math.ceil(stp));
+stp=Math.ceil(stp);
 setTim=stp;
-Lstp=stp-loopPart;
-// stp-=loopPart/2.0;
+Lstp=stp-2.0;
 loopLoop=true;
 revv=true;
 }
