@@ -168,8 +168,11 @@ emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_scrgb_linear");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
+ 	glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+		glDepthMask(GL_TRUE);
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LEQUAL);
+// glDepthFunc(GL_LESS);
 glClearDepth(D);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glPolygonOffset((GLfloat)1.0f,(GLfloat)1.0f);
@@ -182,9 +185,9 @@ glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 // glEnable(GL_BLEND);
-glDisable(GL_BLEND);
-// glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-// glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+// glDisable(GL_BLEND);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
@@ -508,9 +511,9 @@ gljs.disable(gl.DITHER);
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 
-// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
