@@ -96,7 +96,7 @@ b3_combine_dev:
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto -fpie -fno-fast-math \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fstrict-vtable-pointers -fwhole-program-vtables\
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=on -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o audio.o combine.o -o b3hd002.js -static-pie -mllvm -O0 -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto=thin -sTOTAL_STACK=128MB \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
@@ -199,18 +199,18 @@ b3_shader_js:
 
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -ftree-vectorize -fexceptions -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=on \
-	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
+	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fexceptions -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -fwasm-exceptions -fexceptions -force-vector-width=4 -O0 -static-pie -std=c++20 -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -sTOTAL_STACK=256MB -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc -lc++ -lc++abi \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
