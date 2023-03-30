@@ -147,6 +147,7 @@ mY=0.5*hi;
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx,"EXT_polygon_offset_clamp");
+emscripten_webgl_enable_extension(ctx,"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(ctx,"ARB_shader_atomic_counter_ops");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_quadruple_buffer");
