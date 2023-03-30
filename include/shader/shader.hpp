@@ -80,6 +80,7 @@ const GLchar * src[4];
 
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
+"#extension GL_ARB_shader_atomic_counters : enable\n"
 "#pragma STDGL(precise all)\n"
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(fastmath off)\n"
