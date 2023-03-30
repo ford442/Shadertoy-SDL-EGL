@@ -379,10 +379,10 @@ EM_JS(void,vid,(),{
 
 var vv=document.getElementById('mv');
 var sh4d=false;
-let stp,Lstp;
-let stpInc=0.016;
-let setTim;
-let timFrm=16.66;
+var stp,Lstp;
+var stpInc=0.016;
+var setTim;
+var timFrm=16.66;
 var lockVid;
 var loopLoop;
 var mmvv;
@@ -400,7 +400,7 @@ forwardLoop();
 }
   
 function forwardLoop(){
-if(setTim<stp){
+if(setTim<=stp){
 setTim+=stpInc;
 mmvv.currentTime=setTim;
 }else{
@@ -675,7 +675,7 @@ Module.ccall("frm",null,[],[]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
-timFrm=16;
+timFrm=33;
 if(revv==true){
 reverseLoop();
 }else{
