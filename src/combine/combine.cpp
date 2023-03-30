@@ -563,7 +563,7 @@ const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.05));
+av$=av$+(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPrecision('single').setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
@@ -648,7 +648,7 @@ agav=new Float32Array($H32,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H64,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 var pointb=Math.ceil(66*la);
 $B=new Float32Array($H32,pointb,sz);  // has to var?
