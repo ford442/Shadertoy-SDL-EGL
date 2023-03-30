@@ -108,7 +108,7 @@ const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[]=
-"precision highp int;precision highp sampler3D;precision highp sampler2D;"
+"precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
