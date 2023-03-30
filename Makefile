@@ -199,7 +199,7 @@ b3_shader_js:
 
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -ftree-vectorize -fexceptions -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=on \
