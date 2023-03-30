@@ -88,11 +88,11 @@ b3_combine_llvm:
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --post-js js/module.js
 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -fpie \
+	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto=thin -fpie \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -fpie -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
+	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto=thin -fpie -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -fpie -sUSE_SDL=2 -fno-fast-math \
