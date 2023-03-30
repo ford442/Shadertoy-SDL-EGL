@@ -680,11 +680,11 @@ Module.ccall("frm",null,[],[]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
-timFrm=33;
+timFrm=8.33;
 if(revv==true){
 reverseLoop();
 }else{
-timFrm=16.6;
+timFrm=16.66;
 forwardLoop();
 }
 }
