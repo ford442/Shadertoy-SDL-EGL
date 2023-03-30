@@ -52,7 +52,7 @@ const float_t F0=0.0f;
 
 #include <time.h>
 #include <chrono>
-
+using namespace std::chrono_literals;
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
