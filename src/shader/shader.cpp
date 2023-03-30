@@ -46,27 +46,24 @@ glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
 }
+void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 void Rend(){
-auto t3=t2;
-auto t2=std::chrono::steady_clock::now();
+t3=t2;
+t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
 Tdlt=time_spanb.count();
 std::chrono::duration<long double>time_spana=duration_cast<std::chrono::duration<long double>>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
-un=&uni;
 un(mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
-glDisable(GL_BLEND);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
-glFlush();
+// glFlush();
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFinish();
 return;
 }
 
@@ -204,11 +201,11 @@ emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
 // glEnable(GL_LIGHTING);  //  LEGACY_GL
 // glEnable(GL_FOG);  //  LEGACY_GL
-  	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-		glDepthMask(GL_TRUE);
-  glClearDepth(D);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
+glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+glDepthMask(GL_TRUE);
+glClearDepth(D);
+glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LEQUAL);
 // glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
 glEnable(GL_STENCIL_TEST);
@@ -292,7 +289,7 @@ glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,sSize,sSize);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-auto t1=std::chrono::steady_clock::now();
+t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
