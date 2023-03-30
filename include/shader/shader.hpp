@@ -27,7 +27,7 @@ double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
-double Ttime;
+long double Ttime;
 float Tdlt;
 
 #include <float.h>
@@ -63,7 +63,7 @@ struct timespec req={0,16666666};
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
-long long int sSize;
+int sSize;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLclampf x,y,gF=1.0f,gF0=0.0f,gFm1=-1.0f,y1y=1.0f;
