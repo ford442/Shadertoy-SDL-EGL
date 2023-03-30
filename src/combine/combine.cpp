@@ -477,7 +477,7 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
@@ -576,7 +576,7 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$amax,$fmin,$favg,$aavg,p[3]);
-var Min=(4.0*(($amax-($favg-$amin))/2.0));
+var Min=(4.0*(($amax-($aavg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
   /*
