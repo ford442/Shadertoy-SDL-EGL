@@ -46,6 +46,7 @@ glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
 }
+
 void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 void Rend(){
@@ -101,11 +102,13 @@ GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=static_cast<GLsizei>(strlen(src[i]));
 }
-shader=glCreateShader(type);
+const GLuint shader=glCreateShader(type);
 glShaderSource(shader,nsrc,src,srclens);
 glCompileShader(shader);
 return shader;
 }
+
+GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 
 void strt(){
 eglconfig=NULL;
@@ -137,7 +140,7 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-sSize=static_cast<GLint>(hi);
+sSize=static_cast<GLsizei>(hi);
 S=static_cast<GLfloat>(wi);
 mX=0.5;
 mY=0.5;
@@ -201,7 +204,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
 // glEnable(GL_LIGHTING);  //  LEGACY_GL
 // glEnable(GL_FOG);  //  LEGACY_GL
-glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(D);
 glEnable(GL_DEPTH_TEST);
@@ -244,7 +247,6 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 const GLuint vtx=cs(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
@@ -256,7 +258,7 @@ nanosleep(&req,&rem);
 const GLuint shd_prg=glCreateProgram();
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
-atb_pos=0;
+const GLuint atb_pos=0;
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 glUseProgram(shd_prg);
