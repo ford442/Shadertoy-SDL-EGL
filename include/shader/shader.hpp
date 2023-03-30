@@ -126,7 +126,7 @@ const GLchar frg_ftr_src[]=
 "vec4 o;O = vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.2/1.0));}"
+"O += o;}O /= float(_N*_N);O=pow(O,vec4(1.0/1.0));}"
 "void mainImage0\n\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
