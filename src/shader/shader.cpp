@@ -204,9 +204,13 @@ emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
 // glEnable(GL_LIGHTING);  //  LEGACY_GL
 // glEnable(GL_FOG);  //  LEGACY_GL
-glEnable(GL_DEPTH_TEST);
-glDepthFunc(GL_LESS);
-glClearDepth(D);
+  	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+		glDepthMask(GL_TRUE);
+  glClearDepth(D);
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LEQUAL);
+// glEnable(GL_DEPTH_TEST);
+// glDepthFunc(GL_LESS);
 glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
