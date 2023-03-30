@@ -62,7 +62,7 @@ struct timespec req={0,16666666};
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
-int sSize;
+long long int sSize;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLuint atb_pos;
@@ -195,7 +195,7 @@ EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
 EGL_COVERAGE_SAMPLES_NV,(EGLint)32,
 EGL_SAMPLES,(EGLint)32,
 // EGL_MIPMAP_LEVEL,(EGLint)1,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
