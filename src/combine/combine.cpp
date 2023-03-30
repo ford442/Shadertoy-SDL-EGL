@@ -447,16 +447,17 @@ sh4d=false;
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
-let $H=Module.HEAPF32.buffer;
+let $H64=Module.HEAPF64.buffer;
+let $H32=Module.HEAPF32.buffer;
 var inh=parseInt(window.innerHeight,10);
 s$=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
   // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=Math.ceil(h$*w$*4);
+var la=Math.ceil(h$*w$*8);
 var pointa=Math.ceil(77*la);
-var agav=new Float32Array($H,pointa,304);
+var agav=new Float32Array($H32,pointa,304);
 var sz=Math.ceil((h$*w$)/8);
 var avag=0.750;
 var min=1.000;
@@ -468,6 +469,8 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
+colorType:'float64',
+precision:'highp',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -481,6 +484,8 @@ desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
+willReadFrequently:false,
+xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
@@ -613,22 +618,22 @@ var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
-agav=new Float32Array($H,pointa,304);
+agav=new Float32Array($H32,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 var pointb=Math.ceil(66*la);
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float32Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H64,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H64,point"+j+",la);var $$1=0.0;$"+j+".fill($$1);");
 };
 var d=S();if(d){d()};d=S();function S(){
 vv=document.getElementById("mv");
@@ -639,14 +644,14 @@ nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
 la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
-agav=new Float32Array($H,pointa,304);  // has to var?
+agav=new Float32Array($H32,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
-eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H,point"+j+",la);");
+eval("point"+j+"="+i+"*la;$"+j+"=new Float32Array($H64,point"+j+",la);");
 };
 var pointb=Math.ceil(66*la);
-$B=new Float32Array($H,pointb,sz);  // has to var?
+$B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
