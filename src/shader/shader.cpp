@@ -52,9 +52,9 @@ void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 void Rend(){
 t3=t2;
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
+std::chrono::seconds<float>time_spanb=duration_cast<std::chrono::seconds<float>>(t2-t3);
 Tdlt=time_spanb.count();
-std::chrono::duration<long double>time_spana=duration_cast<std::chrono::duration<long double>>(t2-t1);
+std::chrono::seconds<long double>time_spana=duration_cast<std::chrono::seconds<long double>>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
