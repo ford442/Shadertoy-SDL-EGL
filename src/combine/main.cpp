@@ -242,10 +242,11 @@ bezl.height=parseInt(window.innerHeight,10);
 bezl.width=parseInt(window.innerWidth,10);
 document.getElementById('ldv').addEventListener('canplay',function(){
 var nn=parseInt(window.innerHeight,10);
-var vvh=this.videoHeight;
-var vvw=this.videoWidth;
+
 // document.getElementById('ldv').height=parseInt(nn,10);
 document.getElementById('ldv').width=this.videoWidth;
+ var vvh=this.videoHeight;
+var vvw=this.videoWidth;
 document.getElementById('wid').innerHTML=parseInt(vvw,10);
 document.getElementById('hig').innerHTML=parseInt(vvh,10);
 var $sc=this.duration;
