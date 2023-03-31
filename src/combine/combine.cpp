@@ -189,7 +189,7 @@ glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 // glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
-glBlendEquationSeparate(DARKEN_NV,GL_FUNC_REVERSE_SUBTRACT);
+glBlendEquationSeparate(GL_FUNC_DARKEN_NV,GL_FUNC_REVERSE_SUBTRACT);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_DST_ALPHA,GL_SRC_ALPHA);
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
