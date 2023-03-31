@@ -184,7 +184,7 @@ glStencilMask(0xFF);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-// glEnable(GL_BLEND);
+glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MULTIPLY_NV,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_ALPHA,GL_SRC_ALPHA);
