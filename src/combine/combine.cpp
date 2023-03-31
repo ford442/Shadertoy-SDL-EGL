@@ -288,7 +288,6 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glEnable(GL_BLEND);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
-
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //     vv  required for realtime
@@ -503,17 +502,16 @@ gljs.getExtension('EXT_texture_filter_anisotropic');
 gljs.getExtension('ARB_blend_func_extended');
 gljs.getExtension('EXT_framebuffer_sRGB');
 gljs.getExtension('EXT_float_blend');
-
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
-// gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
+gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 
 gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
-gljs.blendEquationSeparate(gl.SUBTRACT,gl.MAX);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
