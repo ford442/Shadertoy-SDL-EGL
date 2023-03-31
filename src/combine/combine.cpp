@@ -186,7 +186,7 @@ glFrontFace(GL_CW);
 // glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
 glBlendEquationSeparate(GL_MAX,GL_FUNC_REVERSE_SUBTRACT);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_DST_ALPHA,GL_SRC_ALPHA);
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
