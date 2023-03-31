@@ -505,11 +505,11 @@ gljs.getExtension('EXT_float_blend');
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
-gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
+// gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 
 gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
-gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
+// gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
 gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
