@@ -189,7 +189,7 @@ glFrontFace(GL_CW);
 // glBlendEquationSeparate(GL_MULTIPLY_NV,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_ALPHA,GL_SRC_ALPHA);
  
-glBlendEquation(GL_DARKEN_NV);
+glBlendEquation(GL_SCREEN_NV);
 glBlendFunc(GL_ONE_MINUS_SRC_COLOR,GL_ONE_MINUS_DST_COLOR);
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
