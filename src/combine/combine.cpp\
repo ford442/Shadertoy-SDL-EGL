@@ -152,8 +152,8 @@ emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_robustness");
-  /*
+emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
+
 emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
@@ -162,8 +162,8 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
 emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-*/
-// emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
+
+emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
@@ -295,17 +295,17 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");     //    
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime"); // ^^
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-// emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage ");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
-// emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
+emscripten_webgl_enable_extension(ctx_js,"ARB_gl_spirv");
+emscripten_webgl_enable_extension(ctx_js,"ARB_spirv_extensions");
+emscripten_webgl_enable_extension(ctx_js,"ARB_invalidate_subdata");
+emscripten_webgl_enable_extension(ctx_js,"ARB_texture_storage ");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES2_compatibility");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_compatibility ");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_1_compatibility");
+emscripten_webgl_enable_extension(ctx_js,"ARB_ES3_2_compatibility");
+emscripten_webgl_enable_extension(ctx_js,"ARB_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
@@ -489,19 +489,20 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-// gljs.getExtension('OES_texture_float_linear');
+gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 // gljs.getExtension('EGL_HI_colorformats');
 // gljs.getExtension('EGL_EXT_gl_colorspace_display_p3');
   /*
-gl.getExtension('EGL_KHR_gl_colorspace');
+// gl.getExtension('EGL_KHR_gl_colorspace');
 // gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
-gl.getExtension('EXT_texture_filter_anisotropic');
+gljs.getExtension('EXT_texture_filter_anisotropic');
 */
-// gl.getExtension('ARB_blend_func_extended');
-// gljs.getExtension('EXT_framebuffer_sRGB');
+gljs.getExtension('ARB_blend_func_extended');
+gljs.getExtension('EXT_framebuffer_sRGB');
+gljs.getExtension('EXT_float_blend');
 
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -509,8 +510,8 @@ gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 
 gljs.disable(gl.DITHER);
-// gl.drawingBufferColorMetadata={mode:'extended'};
-// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+gljs.drawingBufferColorMetadata={mode:'extended'};
+gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
 gljs.blendEquationSeparate(gl.SUBTRACT,gl.MAX);
 gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
