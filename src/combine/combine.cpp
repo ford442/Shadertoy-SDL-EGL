@@ -187,9 +187,11 @@ glFrontFace(GL_CW);
  
 glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
-glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
-glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
  
@@ -521,8 +523,8 @@ gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 gljs.blendColor(1.0,1.0,1.0,1.0);
-gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
