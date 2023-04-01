@@ -194,7 +194,7 @@ glEnable(GL_BLEND);
 glBlendEquation(GL_PLUS_NV);
  
  
-glBlendFunc(GL_SRC_COLOR,GL_DST_COLOR);
+glBlendFunc(GL_ONE_MINUS_SRC_ALPHA,GL_DST_COLOR);
  
  
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
