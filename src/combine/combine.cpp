@@ -191,10 +191,11 @@ glEnable(GL_BLEND);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_ALPHA,GL_SRC_ALPHA);
  
  
-glBlendEquation(PLUS_CLAMPED_ALPHA_NV);
+glBlendEquation(GL_PLUS_NV);
  
  
 glBlendFunc(GL_SRC_COLOR,GL_DST_COLOR);
+ 
  
 glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
