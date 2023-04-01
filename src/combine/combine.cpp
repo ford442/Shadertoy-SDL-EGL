@@ -185,7 +185,7 @@ glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
  
-glEnable(BLEND_ADVANCED_COHERENT_NV);
+glEnable(GL_BLEND_ADVANCED_COHERENT_NV);
 glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MULTIPLY_NV,GL_FUNC_ADD);
