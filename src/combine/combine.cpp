@@ -186,7 +186,7 @@ glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
  
 glEnable(GL_BLEND);
-glEnable(GL_COLOR_LOGIC_OP);
+// glEnable(GL_COLOR_LOGIC_OP); // invald capa
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
