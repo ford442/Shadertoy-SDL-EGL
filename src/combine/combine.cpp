@@ -190,7 +190,7 @@ glEnable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
  
