@@ -83,8 +83,8 @@ GLclampf mm,nn;
 GLuint atb_pos;
 
 GLclampf x,y;
-const GLclampf * gF=&Fv
-const GLclampf * gF0=&F0v
+const GLclampf * gF=&Fv;
+const GLclampf * gF0=&F0v;
 const GLclampf * gFm1=&Fm1v;
 const GLclampd * gD=&Dv;
 const GLclampd * gD0=&D0v;
