@@ -31,8 +31,8 @@ float cMouseY,cMouseX,mouseY,mouseX;
 
 float Fv=1.0f;
 float Fm1v=1.0f;
-const float * F=&Fv;
-const float * Fm1=&Fm1v;
+float * F=&Fv;
+float * Fm1=&Fm1v;
 
  // const float F=1.0f,Fm1=-1.0f;
 
