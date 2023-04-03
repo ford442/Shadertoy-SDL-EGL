@@ -29,10 +29,10 @@ double wi_js,hi_js;
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 
-float Fv=1.0f;
-float Fm1v=1.0f;
-float * F=&Fv;
-float * Fm1=&Fm1v;
+const float Fv=1.0f;
+const float Fm1v=1.0f;
+const float * F=&Fv;
+const float * Fm1=&Fm1v;
 
  // const float F=1.0f,Fm1=-1.0f;
 
