@@ -28,28 +28,17 @@ void renderFrame();
 double wi_js,hi_js;
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
-
-float Fv=1.0f;
-float Fm1v=1.0f;
-const float * F=&Fv;
-const float * Fm1=&Fm1v;
-
+const float F=1.0f,Fm1=-1.0f;
 double TtimeDelta;
-
-double Dv=1.0;
-double Dm1v=-1.0;
-const double * Dm1=&Dm1v;
-const double * D=&Dv;
-
+const double Dm1=-1.0,D=1.0;
 int iFrame,iwi,ihi;
 double Ttime;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader1.toy");
 
 #include <math.h>
-float_t F0v=0.0f;
-double_t D0v=0.0;
-const float_t * F0=&F0v;
-const double_t * D0=&D0v;
+
+const float_t F0=0.0f;
+const double_t D0=0.0;
 
 #include <time.h>
 #include <chrono>
@@ -81,18 +70,9 @@ GLint iFps;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
-
-GLclampf x,y;
-const GLclampf * gF=&Fv;
-const GLclampf * gF0=&F0v;
-const GLclampf * gFm1=&Fm1v;
-const GLclampd * gD=&Dv;
-const GLclampd * gD0=&D0v;
-const GLclampd * gDm1=&Dm1v;
-
-GLfloat * g1g=&Fv;
-GLfloat S;
-
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1;
+GLclampd gD=D,gD0=D0,gDm1=Dm1;
+GLfloat g1g=F,S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLclampf XYZW[4];}Vertex;
