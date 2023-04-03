@@ -31,7 +31,8 @@ float cMouseY,cMouseX,mouseY,mouseX;
 
 float Fv=1.0f;
 float Fm1v=1.0f;
-const float * F=&Fv,Fm1=&Fm1v;
+const float * F=&Fv;
+const float * Fm1=&Fm1v;
 
 double TtimeDelta;
 
