@@ -190,7 +190,7 @@ glEnable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MAX);
+glBlendEquationSeparate(GL_MAX,GL_MIN);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
@@ -576,7 +576,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$+(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
