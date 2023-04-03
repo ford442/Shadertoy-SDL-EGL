@@ -28,7 +28,14 @@ void renderFrame();
 double wi_js,hi_js;
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
-const float F=1.0f,Fm1=-1.0f;
+
+float Fv=1.0f;
+float Fm1v=1.0f;
+const float * F=&Fv;
+const float * Fm1=&Fm1v;
+
+ // const float F=1.0f,Fm1=-1.0f;
+
 double TtimeDelta;
 const double Dm1=-1.0,D=1.0;
 int iFrame,iwi,ihi;
