@@ -29,9 +29,9 @@ double wi_js,hi_js;
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 
-float * Fv;Fv=1.0f;
-float * Fm1v;Fm1v=1.0f;
-const float F=$Fv,Fm1=&Fm1v;
+float Fv=1.0f;
+float Fm1v=1.0f;
+const float * F=$Fv,Fm1=&Fm1v;
 
 double TtimeDelta;
 
