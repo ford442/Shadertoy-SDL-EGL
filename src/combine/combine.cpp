@@ -522,7 +522,7 @@ gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
-gljs.blendColor(1.0,1.0,1.0,1.0);
+// gljs.blendColor(1.0,1.0,1.0,1.0);
 // gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
