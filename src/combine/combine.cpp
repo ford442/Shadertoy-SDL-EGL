@@ -154,6 +154,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
 emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_func_separate");
 emscripten_webgl_enable_extension(ctx,"ARB_blend_func_extended");
+emscripten_webgl_enable_extension(ctx,"EXT_blend_func_extended");
 emscripten_webgl_enable_extension(ctx,"NV_blend_equation_advanced");
 emscripten_webgl_enable_extension(ctx,"NV_blend_equation_advanced_coherent");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
@@ -190,7 +191,9 @@ glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
- glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+
+// glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+ glBlendEquation(GL_EXCLUSION_NV);                             
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
