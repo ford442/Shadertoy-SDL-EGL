@@ -96,7 +96,8 @@ GLfloat S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,shd_prg,smp_chn[4],smp_chn_res,VCO,ECO,vtx,frag,uni_mse,shader,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{const GLclampf XYZW[4];}Vertex;
-const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+// const Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
+const Vertex vertices[]={{&Fm1v,&Fm1v,&Fv,&Fv},{&Fv,&Fm1v,&Fv,&Fv},{&Fv,&Fv,&Fv,&Fv},{&Fm1v,&Fv,&Fv,&Fv},{&Fm1v,&Fm1v,&Fm1v,&Fv},{&Fv,&Fm1v,&Fm1v,&Fv},{&Fv,&Fv,&Fm1v,&Fv},{&Fm1v,&Fv,&Fv,&Fv}};
 
 GLubyte gu0v=0,gu1v=1,gu2v=2,gu3v=3,gu4v=4,gu5v=5,gu6v=6,gu7v=7,gu8v=8,gu9v=9;
 const GLubyte * gu0=&gu0v;
