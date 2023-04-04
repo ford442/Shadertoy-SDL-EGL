@@ -196,14 +196,14 @@ glEnable(GL_BLEND);
 
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
 // glBlendEquation(GL_EXCLUSION_NV);                             
-glBlendEquation(GL_MAX);                             
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
- 
- // glBlendFunc(GL_ONE_MINUS_SRC_ALPHA,GL_DST_COLOR);
+glBlendEquation(GL_MAX);                             
+
+glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   
-glClearColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
+glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
