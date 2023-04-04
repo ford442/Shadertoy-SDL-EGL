@@ -65,6 +65,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+glFinish();
 return;
 }
 
