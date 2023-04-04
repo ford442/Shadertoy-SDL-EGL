@@ -155,8 +155,8 @@ emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_func_separate");
 emscripten_webgl_enable_extension(ctx,"ARB_blend_func_extended");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_func_extended");
-emscripten_webgl_enable_extension(ctx,"NV_blend_equation_advanced");
-emscripten_webgl_enable_extension(ctx,"NV_blend_equation_advanced_coherent");
+emscripten_webgl_enable_extension(ctx,"GL_NV_blend_equation_advanced");
+emscripten_webgl_enable_extension(ctx,"GL_NV_blend_equation_advanced_coherent");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx,"ARB_invalidate_subdata");
@@ -182,7 +182,9 @@ glEnable(GL_STENCIL_TEST);
 glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
-glDisable(GL_DITHER);
+ 
+// glDisable(GL_DITHER);
+ 
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
  
@@ -193,7 +195,7 @@ glEnable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
-//  glBlendEquation(GL_FUNC_EXCLUSION_NV);                             
+glBlendEquation(GL_EXCLUSION_NV);                             
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
