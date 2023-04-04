@@ -504,6 +504,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
+ 
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 // gljs.getExtension('EGL_HI_colorformats');
@@ -522,7 +523,6 @@ gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
-
 // gljs.disable(gl.DITHER);
  
 gljs.drawingBufferColorMetadata={mode:'extended'};
@@ -533,7 +533,9 @@ gljs.blendEquation(gl.MAX);
 // gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
-gljs.drawingBufferColorSpace='display-p3';
+ 
+// gljs.drawingBufferColorSpace='display-p3';
+ 
 let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
 let g2=new GPU();
 
