@@ -88,17 +88,17 @@ b3_combine_llvm:
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --post-js js/module.js
 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants \
+	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -mbulk-memory \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fno-fast-math \
 	 -ffp-contract=on -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
+	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -mbulk-memory -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -fmerge-all-constants -sUSE_SDL=2 -flto -fno-fast-math \
+	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -fmerge-all-constants -mbulk-memory -sUSE_SDL=2 -flto -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o audio.o combine.o -o b3hd002.js -static-pie -mllvm -O0 -fmerge-all-constants -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto -sTOTAL_STACK=512MB \
+	 emcc main.o audio.o combine.o -o b3hd002.js -static-pie -mllvm -O0 -mbulk-memory -fmerge-all-constants -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto -sTOTAL_STACK=512MB \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma -fstrict-vtable-pointers -fwhole-program-vtables -lc -lc++ -lc++abi \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 \
@@ -198,15 +198,15 @@ b3_shader_js:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_llvm:
-	 em++ src/shader/main.cpp -c -O0 -ffast-math -msimd128 -mavx -fmerge-all-constants \
+	 em++ src/shader/main.cpp -c -O0 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=on \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -ffp-contract=on -fmerge-all-constants \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -mbulk-memory -ffp-contract=on -fmerge-all-constants \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O0 -static-pie -std=c++20 -stdlib=libc++ -fno-math-errno \
+	 emcc main.o shader.o -o s3021.js -flto=thin -mllvm -mbulk-memory -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O0 -static-pie -std=c++20 -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -sTOTAL_STACK=1024MB -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
