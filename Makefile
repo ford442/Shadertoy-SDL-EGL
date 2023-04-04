@@ -88,14 +88,14 @@ b3_combine_llvm:
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --post-js js/module.js
 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fpie -fmerge-all-constants \
+	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fno-fast-math \
 	 -ffp-contract=on -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -fpie -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
+	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -fmerge-all-constants -sUSE_SDL=2 -flto -fpie -fno-fast-math \
+	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -fmerge-all-constants -sUSE_SDL=2 -flto -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o audio.o combine.o -o b3hd002.js -static-pie -mllvm -O0 -fmerge-all-constants -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto -sTOTAL_STACK=512MB \
@@ -104,7 +104,7 @@ b3_combine_dev:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sWASMFS=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -fuse-ld=mold -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
@@ -198,11 +198,11 @@ b3_shader_js:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_llvm:
-	 em++ src/shader/main.cpp -c -O0 -fpie -ffast-math -msimd128 -mavx -fmerge-all-constants \
+	 em++ src/shader/main.cpp -c -O0 -ffast-math -msimd128 -mavx -fmerge-all-constants \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=on \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -ffp-contract=on -fmerge-all-constants \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -ffp-contract=on -fmerge-all-constants \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
@@ -212,7 +212,7 @@ b3_shader_llvm:
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc -lc++ -lc++abi \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
