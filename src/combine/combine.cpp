@@ -194,7 +194,7 @@ glEnable(GL_BLEND);
 
 // glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
 //  glBlendEquation(GL_FUNC_EXCLUSION_NV);                             
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
 // glBlendEquation(GL_LIGHTEN_NV);
  
@@ -520,16 +520,17 @@ gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 
-gljs.disable(gl.DITHER);
+// gljs.disable(gl.DITHER);
+ 
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 // gljs.blendColor(1.0,1.0,1.0,1.0);
-gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-let g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
+let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
 let g2=new GPU();
 
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
