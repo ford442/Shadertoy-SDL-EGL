@@ -25,6 +25,13 @@ void nano(short int,int,float *,float *);
 
 void renderFrame();
 
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
 double wi_js,hi_js;
 double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
