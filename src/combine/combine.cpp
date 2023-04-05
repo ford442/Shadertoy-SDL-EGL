@@ -65,7 +65,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
 // nanosleep(&req,&rem);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFinish();
 return;
 }
 
@@ -473,7 +473,7 @@ var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
   // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=Math.ceil(h$*w$*8);
+var la=Math.ceil(h$*w$*4);
 var pointa=Math.ceil(77*la);
 var agav=new Float32Array($H32,pointa,304);
 var sz=Math.ceil((h$*w$)/8);
@@ -520,14 +520,13 @@ gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- 
 gljs.getExtension('EXT_texture_filter_anisotropic');
 */
 gljs.getExtension('ARB_blend_func_extended');
-gljs.getExtension('EXT_framebuffer_sRGB');
-gljs.getExtension('EXT_float_blend');
+// gljs.getExtension('EXT_framebuffer_sRGB');
+// gljs.getExtension('EXT_float_blend');
 gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
 // gljs.disable(gl.DITHER);
- 
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 // gljs.blendColor(1.0,1.0,1.0,1.0);
@@ -536,25 +535,19 @@ gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
- 
 // gljs.drawingBufferColorSpace='display-p3';
- 
 let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
 let g2=new GPU({mode:'gpu'});
-
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
 const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
-
 const glslRoseR=`float RoseR(float a){return((a+0.86+0.86+0.86+((a+0.86)/2.0))/5.0);}`;
 const glslRoseG=`float RoseG(float a){return((a+0.13+0.13+0.13+((a+0.13)/2.0))/5.0);}`;
 const glslRoseB=`float RoseB(float a){return((a+0.86+0.86+0.86+((a+0.86)/2.0))/5.0);}`;
-  
 const glslGreenR=`float GreenR(float a){return((a+0.11+0.11+0.11+((a+0.11)/2.0))/5.0);}`;
 const glslGreenG=`float GreenG(float a){return((a+0.73+0.73+0.73+((a+0.73)/2.0))/5.0);}`;
 const glslGreenB=`float GreenB(float a){return((a+0.14+0.14+0.14+((a+0.14)/2.0))/5.0);}`;
-
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
@@ -562,25 +555,21 @@ const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 // const glslAlphe=`float Alphe(float a,float b,float f,float g){                          return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g))))))+0.777777)/4.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*(f-g))))))+0.7)/4.0);}`;
-
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
-g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-
 g.addNativeFunction('GreenR',glslGreenR,{returnType:'Number'});
 g.addNativeFunction('GreenG',glslGreenG,{returnType:'Number'});
 g.addNativeFunction('GreenB',glslGreenB,{returnType:'Number'});
-
 g.addNativeFunction('RoseR',glslRoseR,{returnType:'Number'});
 g.addNativeFunction('RoseG',glslRoseG,{returnType:'Number'});
 g.addNativeFunction('RoseB',glslRoseB,{returnType:'Number'});
-
+g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
+g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(false).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -638,7 +627,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
-la=Math.ceil(h$*w$*8);
+la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
 agav=new Float32Array($H32,pointa,304);
 R.setOutput([sz]);
@@ -664,7 +653,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 blank$=Math.max((((w$-s$)*0.0)/8.0),0);
 nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
 s$=parseInt(window.innerHeight,10);
-la=Math.ceil(h$*w$*8);
+la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
 agav=new Float32Array($H32,pointa,304);  // has to var?
 R.setOutput([sz]);
