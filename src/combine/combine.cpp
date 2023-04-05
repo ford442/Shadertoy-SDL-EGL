@@ -168,6 +168,8 @@ emscripten_webgl_enable_extension(ctx, "ARB_ES3_2_compatibility");
 emscripten_webgl_enable_extension(ctx, "ARB_gpu_shader5");
 emscripten_webgl_enable_extension(ctx, "EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
+ // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
+
 // emscripten_webgl_enable_extension(ctx, "EGL_EXT_gl_colorspace_scrgb_linear");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
@@ -324,7 +326,8 @@ emscripten_webgl_enable_extension(ctx_js, "ARB_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx_js, "EGL_KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_gl_colorspace_scrgb_linear");
-emscripten_webgl_enable_extension(ctx_js, "EGL_EXT_gl_colorspace_scrgb");
+ // emscripten_webgl_enable_extension(ctx_js, "EGL_EXT_gl_colorspace_scrgb");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
