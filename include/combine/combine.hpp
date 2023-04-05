@@ -12,25 +12,16 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-void avgFrm(short int,int,float *,float *);
+void avgFrm(short int Fnum,int leng,float * ptr,float * aptr);
 
 extern "C"{
   
 void b3_egl();
 void str();
 void b3();
-void nano(short int,int,float *,float *);
+void nano(short int Fnum,int leng,float * ptr,float * aptr);
 
 }
-
-void renderFrame();
-
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
 
 double wi_js,hi_js;
 double wi,hi;
@@ -134,8 +125,6 @@ GLchar * rd_fl(const char *);
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 #include "../../include/combine/egl.hpp"
-
-void egl();
 
 EGLDisplay display;
 EGLSurface surface;
