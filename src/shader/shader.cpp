@@ -30,8 +30,8 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const float xxx=xx;
 const float yyy=yy;
-mX=1.0-(xxx*sSize);
-mY=1.0-(yyy*sSize);
+mX=1.0-(xxx*Size);
+mY=1.0-(yyy*Size);
 clk_l=false;
 }
 mm=S*xx;
@@ -141,7 +141,7 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-sSize=static_cast<GLsizei>(hi);
+Size=static_cast<GLsizei>(hi);
 S=static_cast<GLfloat>(wi);
 mX=0.5*hi;
 mY=0.5*hi;
@@ -290,9 +290,9 @@ smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
-glViewport((GLint)0,(GLint)0,sSize,sSize);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,sSize,sSize);
+glScissor((GLint)0,(GLint)0,Size,Size);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 t1=std::chrono::steady_clock::now();
