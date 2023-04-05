@@ -52,15 +52,8 @@
 #include <EGL/eglext.h>
 #include <EGL/eglplatform.h>
 
-int_fast32_t Size_js;
+int Size_js;
 double wi_js,hi_js;
-
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
 
 EGLContext contextegl_js;
 EGLDisplay display_js;
@@ -74,7 +67,7 @@ EGLContext contextegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 
-int_fast32_t iFrame,iFps,Size,iwi,ihi;
+int iFrame,iFps,Size,iwi,ihi;
 
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
@@ -92,23 +85,23 @@ EGL_NONE
 EGLint const anEglCtxAttribs2_js[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE
 };
 
 EGLint const attribute_list_js[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
 // EGL_COLOR_BUFFER_TYPE, EGL_RGB_BUFFER,
 // EGL_CONFIG_CAVEAT,EGL_NONE,
 // EGL_BIND_TO_TEXTURE_RGBA, EGL_TRUE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -129,14 +122,12 @@ EGL_STENCIL_SIZE,(EGLint)64,
 EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)64,
-EGL_MIPMAP_LEVEL,(EGLint)64,
+EGL_MIPMAP_LEVEL,(EGLint)1,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
 void avgFrm(short int,int,float *,float *);
-
-void egl();
 
 extern "C"{
 
@@ -146,25 +137,25 @@ void nano(short int,int,float *,float *);
 
 }
 
-double_t wi,hi;
+double wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX,F=1.0f,Fm1=-1.0f;
 float_t F0=0.0f;
-double_t TtimeDelta,Dm1=-1.0,D0=0.0,D=1.0;
-long double Ttime;
-
+double TtimeDelta,Dm1=-1.0,D=1.0;
+float Ttime;
+double_t D0=0.0;
 char * fileloc=(char*)"/shader/shader1.toy";
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
 
 struct timespec rem;
-struct timespec req={0,10416666};
+struct timespec req={0,16666666};
 
 GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
-GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=F;
+GLclampf x,y,gF=F,gF0=F0,gFm1=Fm1,y1y=1.0f;
 GLclampd gD=D,gD0=D0,gDm1=Dm1;
 GLfloat g1g=F,S;
 GLsizei s4=4,i;
@@ -185,12 +176,12 @@ GLchar common_shader_header_gles3[]=
 "#pragma optionNV(strict off)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision highp int;precision mediump sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n";
+"precision highp float;precision lowp sampler3D;precision lowp sampler2D;"
+"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
+"precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
+"precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
+"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
+"precision lowp sampler2DArrayShadow;\n";
 GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 GLchar fragment_shader_header_gles3[]=
@@ -226,10 +217,10 @@ EGL_NONE
 };
 
 EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_CONTEXT_CLIENT_VERSION,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 //EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
@@ -237,14 +228,14 @@ EGL_NONE
 };
 
 EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
 // EGL_COLOR_BUFFER_TYPE, EGL_RGB_BUFFER,
 // EGL_BIND_TO_TEXTURE_RGBA, EGL_TRUE,
 // EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -254,8 +245,8 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_TRANSPARENT_GREEN_VALUE,(EGLint)1000000000,
 // EGL_TRANSPARENT_BLUE_VALUE,(EGLint)0,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_RED_SIZE,(EGLint)64,
 EGL_GREEN_SIZE,(EGLint)64,
 EGL_BLUE_SIZE,(EGLint)64,
@@ -265,7 +256,7 @@ EGL_STENCIL_SIZE,(EGLint)64,
 EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_SAMPLES,(EGLint)64,
-EGL_MIPMAP_LEVEL,(EGLint)64,
+EGL_MIPMAP_LEVEL,(EGLint)0,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
