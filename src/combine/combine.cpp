@@ -584,8 +584,8 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.05));
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// av$=av$-(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
