@@ -23,12 +23,12 @@ void str();
 void Rend();
 
 int iFrame;
-double wi,hi;
+float wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
-long double Ttime;
-float Tdlt;
+double Ttime;
+float_t Tdlt;
 
 #include <float.h>
 #include <math.h>
