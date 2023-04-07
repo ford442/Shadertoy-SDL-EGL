@@ -218,9 +218,9 @@ b3_shader_js:
 b3_shader_llvm:
 	 em++ src/shader/main.cpp -c -O0 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
-	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=on \
+	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -mbulk-memory -ffp-contract=on -fmerge-all-constants \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -mbulk-memory -ffp-contract=fast -fmerge-all-constants \
 	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
