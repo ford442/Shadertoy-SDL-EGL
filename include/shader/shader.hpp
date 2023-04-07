@@ -21,8 +21,8 @@ void str();
 #define _POSIX_REGEXP	1
 
 int iFrame;
-float wi,hi;
-float cMouseY,cMouseX,mouseY,mouseX;
+double wi,hi;
+double cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
 double Ttime;
