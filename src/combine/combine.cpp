@@ -529,15 +529,15 @@ gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
-// gljs.blendColor(1.0,1.0,1.0,1.0);
-// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gljs.blendColor(1.0,1.0,1.0,1.0);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gljs.blendEquation(gl.MAX);
-// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
-// gljs.drawingBufferColorSpace='display-p3';
-let g=new GPU({mode:'webgl2',canvas:bcanvas,webGl:gljs});
-let g2=new GPU({mode:'webgl2'});
+gljs.drawingBufferColorSpace='display-p3';
+let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
+let g2=new GPU({mode:'gpu'});
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
@@ -569,7 +569,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(false).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
