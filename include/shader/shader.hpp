@@ -25,7 +25,7 @@ double wi,hi;
 double cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
-long long double Ttime;
+long double Ttime;
 
 #include <float.h>
 #include <math.h>
