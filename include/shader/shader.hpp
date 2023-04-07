@@ -20,19 +20,17 @@ void str();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-void Rend();
-
 int iFrame;
 float wi,hi;
 float cMouseY,cMouseX,mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
 double Ttime;
-float_t Tdlt;
 
 #include <float.h>
 #include <math.h>
 
+float_t Tdlt;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 
