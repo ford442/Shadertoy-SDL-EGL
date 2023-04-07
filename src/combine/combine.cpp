@@ -483,8 +483,8 @@ var max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
+var nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
 colorType:'float64',
@@ -625,8 +625,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-s$)*0.0)/8.0),0);
-var nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
+blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
+nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
 agav=new Float32Array($H32,pointa,300);
@@ -650,19 +650,19 @@ var d=S();if(d){d()};d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-blank$=Math.max((((w$-s$)*0.0)/8.0),0);
-nblank$=Math.max((((s$-w$)*0.0)/8.0),0);
+blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
+nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 s$=parseInt(window.innerHeight,10);
 la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
-var agav=new Float32Array($H32,pointa,300);  // has to var?
+agav=new Float32Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H64,point"+j+",la);");
 };
-var pointb=Math.ceil(66*la);
-var $B=new Float32Array($H32,pointb,sz);  // has to var?
+pointb=Math.ceil(66*la);
+$B=new Float32Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
@@ -682,10 +682,10 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 }};
 $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=Math.ceil(66*la);  // has to revar?
+pointb=Math.ceil(66*la);  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 if(sh4d==1){
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[$F+100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 Module.ccall("frm",null,[],[]);
 }
 setTimeout(function(){
