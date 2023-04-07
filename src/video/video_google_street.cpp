@@ -524,8 +524,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
+nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
@@ -535,8 +535,8 @@ for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
-var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
+pointb=77*la;
+$B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -549,8 +549,8 @@ var d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+var blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
+var nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 $S=parseInt(window.innerHeight,10);
 la=h$*h$*4;
 sz=(h$*w$)/8;
@@ -582,7 +582,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };};
 $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=66*la;  // has to revar?
+pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
