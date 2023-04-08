@@ -20,7 +20,19 @@ int rD,Th;
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+v128_t Dr;
+
 #include <random>
 std::random_device rd;
+
+v128_t rNd(int);
+
+extern"C"{
+
+int c;
+v128_t Rg;
+int r4nd(int);
+
+}
 
 #include <cstdlib>
