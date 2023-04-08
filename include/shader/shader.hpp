@@ -1,11 +1,5 @@
 #include <emscripten.h>
 
-extern "C"{
-  
-static inline void str();
-  
-}
-
 #pragma STDC FP_CONTRACT ON
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
@@ -132,8 +126,6 @@ const GLchar * vrt_bdy=vrt_bdy_src;
 const GLchar * frg_hdr=frg_hdr_src;
 const GLchar * frg_ftr=frg_ftr_src;
 
-static inline void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
-
 GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 
 GLchar * rd_fl(const char *);
@@ -204,6 +196,6 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 EM_BOOL ms_l,clk_l;
 
-static inline EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
+EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
 
-static inline EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
+EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
