@@ -132,7 +132,7 @@ const GLchar * vrt_bdy=vrt_bdy_src;
 const GLchar * frg_hdr=frg_hdr_src;
 const GLchar * frg_ftr=frg_ftr_src;
 
-void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
+static inline void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 
