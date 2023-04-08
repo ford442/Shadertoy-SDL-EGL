@@ -2,7 +2,7 @@
 
 int rNd(int Th){
 std::srand(rd());
-rD=std::rand()%Th;
+int rD=std::rand()%Th;
 return rD;
 }
 
