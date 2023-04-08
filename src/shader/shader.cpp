@@ -299,3 +299,5 @@ t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
+
+void(*st)(){&strt};
