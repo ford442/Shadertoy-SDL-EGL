@@ -1,6 +1,6 @@
 #include "../../include/shader/extern.h"
 
-extern "C"{
+extern "C" {
   
 int r4nd(int tH){
 tH=RnD(tH);
