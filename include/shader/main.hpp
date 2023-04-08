@@ -1,6 +1,7 @@
 #include <emscripten.h>
 
-int rD,Th;
+int * rD=new int;
+int * Th=new int;
 
 #pragma once
 
@@ -20,7 +21,7 @@ int rD,Th;
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-v128_t Dr;
+v128_t * Dr=new v128_t;
 
 #include <random>
 std::random_device rd;
