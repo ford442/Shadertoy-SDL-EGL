@@ -1,6 +1,6 @@
 int r4nd(int tH){
-Rg=RnD(tH);
-return Rg;
+tH=RnD(tH);
+return tH;
 }
 
 void str(){
