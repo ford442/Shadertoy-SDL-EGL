@@ -1,11 +1,11 @@
 b3_shader_llvm:
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -mbulk-memory -fomit-frame-pointer -ffp-contract=fast -fmerge-all-constants -ftls-model=local-exec \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -mbulk-memory -fomit-frame-pointer -ffp-contract=fast -fmerge-all-constants \
 	 -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -emit-llvm -fstrict-vtable-pointers \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/shader/main.cpp -c -O0 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants -fomit-frame-pointer \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -emit-llvm -fstrict-vtable-pointers \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast -ftls-model=local-exec \
+	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o shader.o -o s3021.js -emit-llvm -mllvm -ffp-contract=fast -ftree-vectorize -mbulk-memory -fomit-frame-pointer -fmerge-all-constants -ftls-model=local-exec -fwasm-exceptions -force-vector-width=4 -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt -sTOTAL_STACK=1024MB -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
