@@ -1,11 +1,5 @@
 #include <emscripten.h>
 
-extern "C"{
-  
-void str();
-  
-}
-
 #pragma STDC FP_CONTRACT ON
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
