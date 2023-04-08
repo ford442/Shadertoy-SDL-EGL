@@ -1,20 +1,26 @@
 #include "../../include/shader/main.hpp"
 
-int rNd(int Th){
+v128_t rNd(int Th){
 std::srand(rd());
-Th=std::rand()%Th;
-return Th;
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
+return Dr;
 }
 
 EM_JS(void,js_main,(),{
+
 "use strict";
+
 window.scroll(0,0);
+
 let $tim=document.getElementById('tim');
 let $itim=document.getElementById('itim');
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
+
 var $shds=[];
+
 function normalResStart(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
@@ -33,6 +39,7 @@ document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 document.getElementById('di').click();
 }
+
 function shds(xml){
 const sparser=new DOMParser();
 let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
@@ -81,6 +88,7 @@ normalResStart();
 });
 ff.send(null);
 }
+
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
 // dxhttp.withCredentials=false;
@@ -90,6 +98,7 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
+
 let tem=document.getElementById('tim');
 let ban=document.getElementById('menuBtn');
 let sfr=document.getElementById('slideframe');
@@ -109,11 +118,14 @@ document.getElementById('menu').addEventListener('click',function(){
 var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
+   
 const pnnl=document.body;
+
 function Key(e){
 if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
 }
 pnnl.addEventListener('keydown',Key);
+   
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -129,15 +141,27 @@ document.getElementById('di').click();
 },100);
 });
 
-int(* RnD)(int){&rNd};
+v128_t(* RnD)(int){&rNd};
 
 void(*jss)(){&js_main};
 
+extern"C"{
+ 
+int r4nd(int tH){
+Rg=RnD(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
+}
+  
+}
+
 int main(void){
 "use strict";
+
 EM_ASM({
 FS.mkdir('/shader');
 });
+
 jss();
 return 0;
 }
