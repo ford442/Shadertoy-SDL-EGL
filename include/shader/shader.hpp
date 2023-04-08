@@ -204,6 +204,6 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 EM_BOOL ms_l,clk_l;
 
-EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
+static inline EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
 
-static EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
+static inline EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
