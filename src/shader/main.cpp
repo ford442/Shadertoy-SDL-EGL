@@ -2,8 +2,8 @@
 
 int rNd(int Th){
 std::srand(rd());
-int rD=std::rand()%Th;
-return rD;
+Th=std::rand()%Th;
+return Th;
 }
 
 EM_JS(void,js_main,(),{
