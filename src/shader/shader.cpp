@@ -47,7 +47,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-static inline void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
+void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
 t3=t2;
