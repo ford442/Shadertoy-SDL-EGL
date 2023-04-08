@@ -58,7 +58,8 @@ b3_googleStreetView_dev:
 
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0
-	 emcc main.o -o v3020.js -mllvm -O0 -flto=thin \
+	 emcc src/vanilla/js.c -c -O0
+	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
