@@ -1,3 +1,3 @@
-int RnD(int);
+int r4nd(int);
 
-void st();
+void str();
