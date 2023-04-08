@@ -301,12 +301,3 @@ return;
 }
 
 void(*st)(){&strt};
-
-extern "C" {
-
-void str(){
-st();
-return;
-}
-
-}
