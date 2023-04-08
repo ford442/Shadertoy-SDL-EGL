@@ -11,7 +11,7 @@ ms_l=false;
 return(EM_BOOL)1;
 }
 
-EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
+static EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
