@@ -1,7 +1,5 @@
 #include "../../include/shader/extern.h"
 
-void(*st)(){&strt};
-
 int r4nd(int tH){
 tH=RnD(tH);
 return tH;
