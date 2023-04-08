@@ -20,7 +20,7 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+static void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 iFps=60.0/delt;
@@ -49,7 +49,7 @@ return;
 
 void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
-static inline void Rend(){
+static void Rend(){
 t3=t2;
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_spanb=std::chrono::duration<float,std::chrono::seconds::period>(t2-t3);
@@ -111,7 +111,7 @@ return shader;
 
 GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 
-static inline void strt(){
+static void strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
