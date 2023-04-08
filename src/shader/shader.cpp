@@ -304,7 +304,7 @@ void(*st)(){&strt};
 
 extern "C" {
 
-static inline void str(){
+void str(){
 st();
 return;
 }
