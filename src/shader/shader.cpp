@@ -1,6 +1,6 @@
 #include "../../include/shader/shader.hpp"
 
-static inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
+EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -11,7 +11,7 @@ ms_l=false;
 return(EM_BOOL)1;
 }
 
-static inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
+EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -47,7 +47,7 @@ glUniform1i(uni_frm,fram);
 return;
 }
 
-static inline void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
+void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
 t3=t2;
@@ -300,11 +300,11 @@ emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
 
-static inline void(*st)(){&strt};
+void(*st)(){&strt};
 
 extern "C" {
 
-static inline void str(){
+void str(){
 st();
 return;
 }
