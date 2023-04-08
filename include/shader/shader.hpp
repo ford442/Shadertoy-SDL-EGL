@@ -1,5 +1,11 @@
 #include <emscripten.h>
 
+extern "C"{
+  
+void str();
+  
+}
+
 #pragma STDC FP_CONTRACT ON
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
@@ -44,7 +50,6 @@ const float_t F0=0.0f;
 
 #include <time.h>
 #include <chrono>
-
 using namespace std::chrono_literals;
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -141,7 +146,7 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 
-const EGLint att_lst2[]={ 
+EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
