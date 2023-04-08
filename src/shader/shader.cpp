@@ -65,7 +65,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFinish();
 return;
 }
 
@@ -123,7 +123,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -235,7 +235,7 @@ glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
 //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
 // glDisable(GL_DITHER);
 glFrontFace(GL_CW);
-glEnable(GL_CULL_FACE);
+// // glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
 // glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
@@ -291,8 +291,8 @@ glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
-glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,Size,Size);
+// glEnable(GL_SCISSOR_TEST);
+// glScissor((GLint)0,(GLint)0,Size,Size);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 t1=std::chrono::steady_clock::now();
