@@ -61,7 +61,7 @@ struct timespec req={0,16666666};
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
-long long int Size;
+int Size;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLclampf x,y,gF=1.0f,gF0=0.0f,gFm1=-1.0f,y1y=1.0f;
@@ -121,7 +121,7 @@ const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
 "int _N=8;void mainImage(out vec4 O,vec2 U){"
-"vec4 o;O = vec4(0);"
+"vec4 o;O=vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
 "O += o;}O /= float(_N*_N);O=pow(O,vec4(2.6/1.0));}"
