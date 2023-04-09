@@ -57,9 +57,9 @@ b3_googleStreetView_dev:
 	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -O0 -std=gnu++2b -target-abi experimental-mv -emit-llvm
-	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -target-abi experimental-mv -emit-llvm
-	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -target-abi experimental-mv -emit-llvm\
+	 em++ src/vanilla/main.cpp -c -O0 -std=gnu++2b -target-abi=experimental-mv -emit-llvm
+	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -target-abi=experimental-mv -emit-llvm
+	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -target-abi=experimental-mv -emit-llvm\
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
