@@ -1,7 +1,7 @@
 b3_shader_llvm:
 	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -mbulk-memory -fomit-frame-pointer -ffp-contract=fast -fmerge-all-constants \
 	 -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers -ftls-model=local-exec \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -mtail-call -mmultivalue \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -mtail-call \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/shader/main.cpp -c -O0 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants -fomit-frame-pointer -ftls-model=local-exec \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue \
