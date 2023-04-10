@@ -89,7 +89,7 @@ return nullptr;
 result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
-result[actual_length++]={'\0'};
+result[actual_length++]={"\0"};
 }
 fclose(file);
 results=reinterpret_cast<GLchar *>(result);
