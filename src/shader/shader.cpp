@@ -274,7 +274,7 @@ glGenVertexArrays((GLsizei)1,&VCO);
 glBindVertexArray(VCO);
 const GLuint atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
-glVertexAttribLPointer(atb_pos,4,GL_DOUBLE,GL_FALSE,0,(GLvoid*)0);
+glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_tme=glGetUniformLocation(shd_prg,"iTime");
 uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
