@@ -68,13 +68,14 @@ struct timespec req={0,16666666};
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
-GLdouble Size;
-GLfloat mX,mY,mm,nn;
+int Size;
+float mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLfloat gF=1.0f,gF0=0.0f,gFm1=-1.0f;
 GLclampf x,y,y1y=1.0f;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-GLfloat g1g=1.0f,S;
+GLfloat g1g=1.0f;
+float S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
