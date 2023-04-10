@@ -57,8 +57,8 @@ b3_googleStreetView_dev:
 	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -O0 -std=gnu++2b -emit-llvm -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
-	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -emit-llvm -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
+	 em++ src/vanilla/main.cpp -c -O0 -std=gnu++2b -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
+	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -emit-llvm \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
