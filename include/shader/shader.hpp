@@ -61,7 +61,7 @@ struct timespec req={0,16666666};
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
-int Size;
+GLint Size;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLclampf x,y,gF=1.0f,gF0=0.0f,gFm1=-1.0f,y1y=1.0f;
