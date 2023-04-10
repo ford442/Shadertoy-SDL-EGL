@@ -141,8 +141,8 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=static_cast<GLsizei>(hi);
-S=static_cast<GLfloat>(wi);
+Size=static_cast<int>(hi);
+S=static_cast<float>(wi);
 mX=0.5*hi;
 mY=0.5*hi;
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
@@ -233,7 +233,7 @@ glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
 // glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
 // glEnable(GL_LINE_SMOOTH); // invalid capa
 //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 glFrontFace(GL_CW);
 // // glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
