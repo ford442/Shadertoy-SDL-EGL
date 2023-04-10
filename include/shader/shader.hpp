@@ -65,7 +65,7 @@ GLsizei Size;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLhalf gF=1.0f,gF0=0.0f,gFm1=-1.0f,
-GLclampf y1y=x,y,1.0f;
+GLclampf x,y,y1y=1.0f;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 GLfloat g1g=1.0f,S;
 GLsizei s4=4,i;
