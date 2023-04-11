@@ -29,7 +29,7 @@ void str();
 
 int iFrame;
 double wi,hi;
-double cMouseY,cMouseX,mouseY,mouseX;
+GLdouble mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
 long double Ttime;
