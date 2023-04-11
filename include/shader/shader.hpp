@@ -27,11 +27,10 @@ void str();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-int iFrame;
 double wi,hi;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
-long double Ttime;
+GLdouble Ttime;
 
 #include <float.h>
 #include <math.h>
@@ -56,7 +55,9 @@ const float_t F0=0.0f;
 
 #include <time.h>
 #include <chrono>
+
 using namespace std::chrono_literals;
+
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
@@ -65,6 +66,7 @@ struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
 
+GLint iFrame;
 GLdouble mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
