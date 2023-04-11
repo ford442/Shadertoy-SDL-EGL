@@ -34,7 +34,7 @@ const long double Dm1=-1.0,D=1.0;
 #include <float.h>
 #include <math.h>
 
-const double_t D0=0.0;
+const long double D0=0.0;
 const float_t F0=0.0f;
 
 #include <algorithm>
@@ -65,11 +65,11 @@ struct timespec req={0,16666666};
 #include "../../include/shader/gl.hpp"
 
 GLfloat Tdlt;
-GLdouble Ttime;
-GLint iFrame;
+long double Ttime;
+long int iFrame;
 GLdouble mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-GLint fram;
+long int fram;
 long int Size;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
