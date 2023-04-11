@@ -28,8 +28,8 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const float xxx=xx;
-const float yyy=yy;
+const GLfloat xxx=xx;
+const GLfloat yyy=yy;
 mX=1.0-(xxx*Size);
 mY=1.0-(yyy*Size);
 clk_l=false;
@@ -142,7 +142,7 @@ emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=static_cast<int>(hi);
-S=static_cast<float>(wi);
+S=static_cast<GLfloat>(wi);
 mX=0.5*hi;
 mY=0.5*hi;
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
