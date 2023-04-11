@@ -224,8 +224,8 @@ glStencilMask(0xFF);
 // glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
 // glEnable(GL_FOG);  // invalid capa
 // glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
-glEnable(GL_POLYGON_OFFSET_FILL);  // works
-glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
+// glEnable(GL_POLYGON_OFFSET_FILL);  // works
+// glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
 //  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //  undefined symbol
 // glEnable(GL_POLYGON_SMOOTH); // invalid capa
 //    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
@@ -234,7 +234,7 @@ glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
 // glEnable(GL_LINE_SMOOTH); // invalid capa
 //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
 glDisable(GL_DITHER);
-glFrontFace(GL_CW);
+// glFrontFace(GL_CW);
 // // glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
 // glDisable(GL_BLEND);
