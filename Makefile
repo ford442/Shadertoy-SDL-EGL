@@ -1,5 +1,5 @@
 b3_shader_llvm:
-	 em++ src/shader/shader.cpp -c -O0 -m32 -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=fast -fmerge-all-constants \
+	 em++ src/shader/shader.cpp -c -O3 -m32 -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=fast -fmerge-all-constants \
 	 -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
