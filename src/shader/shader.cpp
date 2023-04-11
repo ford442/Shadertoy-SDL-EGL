@@ -297,7 +297,7 @@ glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())Rend,0,0);
+emscripten_set_main_loop((void(*)())Rend,60,0);
 return;
 }
 
