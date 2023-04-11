@@ -34,8 +34,8 @@ const double Dm1=-1.0,D=1.0;
 #include <float.h>
 #include <math.h>
 
-const double D0=0.0;
-const float F0=0.0f;
+const double_t D0=0.0;
+const float_t F0=0.0f;
 
 #include <algorithm>
 #include <string.h>
