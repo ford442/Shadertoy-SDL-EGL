@@ -1,13 +1,13 @@
 b3_shader_llvm:
-	 em++ src/shader/shader.cpp -c -O3 -qhot=arraypad:level=2:vector:nofastmath -m32 -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=fast -fmerge-all-constants \
+	 em++ src/shader/shader.cpp -c -O3 -m32 -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=fast -fmerge-all-constants \
 	 -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/shader/main.cpp -c -O3 -qhot=arraypad:level=2:novector:fastmath -m32 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants -fno-stack-protector \
+	 em++ src/shader/main.cpp -c -O3 -m32 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants -fno-stack-protector \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o shader.o -o s3022.js -m32 -static -flto=thin -mllvm -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O0 -std=c++2b -stdlib=libc++ -fno-math-errno \
+	 emcc main.o shader.o -o s3022.js -m32 -static -flto=thin -mllvm -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O3 -std=c++2b -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt -sTOTAL_STACK=1024MB -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -fstrict-vtable-pointers \
