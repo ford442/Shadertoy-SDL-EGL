@@ -29,7 +29,6 @@ void str();
 
 int iFrame;
 double wi,hi;
-GLdouble mouseY,mouseX;
 const float F=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
 long double Ttime;
@@ -66,16 +65,17 @@ struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
 
+GLdouble mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 GLint fram;
 int Size;
-float mX,mY,mm,nn;
+GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLfloat gF=1.0f,gF0=0.0f,gFm1=-1.0f;
 GLclampf x,y,y1y=1.0f;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 GLfloat g1g=1.0f;
-float S;
+GLfloat S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
