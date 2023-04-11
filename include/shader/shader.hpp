@@ -65,7 +65,7 @@ struct timespec req={0,16666666};
 #include "../../include/shader/gl.hpp"
 
 float Tdlt;
-double Ttime;
+long double Ttime;
 int iFrame;
 GLdouble mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
