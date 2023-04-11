@@ -15,7 +15,7 @@ b3_shader_llvm:
 	 -s ASSERTIONS=0 -s DYLINK_DEBUG=0 -s ALLOW_TABLE_GROWTH=1 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb -sGLOBAL_BASE=0 -sGL_UNSAFE_OPTS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sGL_MAX_TEMP_BUFFER_SIZE=1024mb -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 -sTEXTDECODER=0 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
+	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_combine_dev:
 	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -mbulk-memory \
