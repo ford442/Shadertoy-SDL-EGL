@@ -34,8 +34,8 @@ const double Dm1=-1.0,D=1.0;
 #include <float.h>
 #include <math.h>
 
-const double_t D0=0.0;
-const float_t F0=0.0f;
+const double D0=0.0;
+const float F0=0.0f;
 
 #include <algorithm>
 #include <string.h>
@@ -64,8 +64,8 @@ struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
 
-float_t Tdlt;
-double_t Ttime;
+float Tdlt;
+double Ttime;
 int iFrame;
 GLdouble mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -77,7 +77,7 @@ GLfloat gF=1.0f,gF0=0.0f,gFm1=-1.0f;
 GLclampf x,y,y1y=1.0f;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 GLfloat g1g=1.0f;
-double_t S;
+double S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
