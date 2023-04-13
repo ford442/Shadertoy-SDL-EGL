@@ -63,7 +63,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFlush();
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFinish();
 return;
