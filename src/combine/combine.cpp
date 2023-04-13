@@ -624,6 +624,10 @@ this.color(p[0],p[1],p[2],aveg);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([s$,s$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
+ var inh=parseInt(window.innerHeight,10);
+
+ s$=parseInt(inh,10);
+
 vv=document.getElementById("mv");
 blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
 nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
@@ -650,6 +654,10 @@ var d=S();if(d){d()};d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
+ var inh=parseInt(window.innerHeight,10);
+
+ s$=parseInt(inh,10);
+
 blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
 nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 s$=parseInt(window.innerHeight,10);
