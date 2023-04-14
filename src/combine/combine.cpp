@@ -196,7 +196,7 @@ glFrontFace(GL_CW);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_SUBTRACT);
 // glBlendEquation(GL_EXCLUSION_NV);                             
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
  
@@ -576,7 +576,7 @@ const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.5)*(av$/(av$-0.5));
-av$=av$-(minuss*(av$*0.01));
+av$=av$-(minuss*(av$*0.05));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
