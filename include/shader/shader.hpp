@@ -15,7 +15,7 @@ void str();
 
 #pragma STDC FP_CONTRACT FAST
 #undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
+#define _FLT_EVAL_METHOD -1
 
 #pragma STDC CX_LIMITED_RANGE ON
 
