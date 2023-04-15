@@ -627,7 +627,7 @@ blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
 nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
-agav=new Float64Array($H32,pointa,300);
+agav=new Float64Array($H32,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
