@@ -468,7 +468,7 @@ var h$=parseInt(inh,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=Math.ceil(h$*w$*4);
 var pointa=Math.ceil(77*la);
-var agav=new Float64Array($H32,pointa,300);
+var agav=new Float64Array($H32,pointa,304);
 var sz=Math.ceil((h$*w$)/8);
 var avag=0.750;
 var min=1.000;
@@ -655,7 +655,7 @@ nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 s$=parseInt(window.innerHeight,10);
 la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
-agav=new Float64Array($H32,pointa,300);  // has to var?
+agav=new Float64Array($H32,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
