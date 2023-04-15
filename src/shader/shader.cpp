@@ -234,7 +234,9 @@ glStencilMask(0xFF);
 // glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
 // glEnable(GL_LINE_SMOOTH); // invalid capa
 //    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
-glDisable(GL_DITHER);
+  
+// glDisable(GL_DITHER);
+  
 // glFrontFace(GL_CW);
 // // glEnable(GL_CULL_FACE);
 //  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
