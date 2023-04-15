@@ -1,5 +1,5 @@
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT FAST
 #define _XOPEN_REALTIME 1
