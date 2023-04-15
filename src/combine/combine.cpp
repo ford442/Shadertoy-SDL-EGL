@@ -184,27 +184,20 @@ glEnable(GL_STENCIL_TEST);
 glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
- 
-// glDisable(GL_DITHER);
- 
+ // glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
- 
-// glEnable(GL_BLEND);
+ // glEnable(GL_BLEND);
 // glEnable(GL_COLOR_LOGIC_OP); // invald capa
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
 glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_FUNC_ADD);
 // glBlendEquation(GL_EXCLUSION_NV);                             
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
- 
 // glBlendEquation(GL_LIGHTEN_NV);
 // glBlendEquation(GL_MAX);                             
-
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-  
 glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
@@ -466,7 +459,7 @@ sh4d=false;
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 let $H64=Module.HEAPF64.buffer;
-let $H32=Module.HEAPF32.buffer;
+let $H32=Module.HEAPF64.buffer;
 var inh=parseInt(window.innerHeight,10);
 var s$=parseInt(inh,10);
 var w$=parseInt(inh,10);
@@ -475,7 +468,7 @@ var h$=parseInt(inh,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=Math.ceil(h$*w$*4);
 var pointa=Math.ceil(77*la);
-var agav=new Float32Array($H32,pointa,300);
+var agav=new Float64Array($H32,pointa,300);
 var sz=Math.ceil((h$*w$)/8);
 var avag=0.750;
 var min=1.000;
@@ -536,7 +529,7 @@ gljs.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-let g=new GPU({canvas:bcanvas,webGl:gljs});
+let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
 let g2=new GPU();
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
@@ -634,14 +627,14 @@ blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
 nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
-agav=new Float32Array($H32,pointa,300);
+agav=new Float64Array($H32,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 var pointb=Math.ceil(66*la);
-var $B=new Float32Array($H32,pointb,sz);
+var $B=new Float64Array($H32,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -662,14 +655,14 @@ nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 s$=parseInt(window.innerHeight,10);
 la=Math.ceil(h$*w$*4);
 pointa=Math.ceil(77*la);
-agav=new Float32Array($H32,pointa,300);  // has to var?
+agav=new Float64Array($H32,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 pointb=Math.ceil(66*la);
-$B=new Float32Array($H32,pointb,sz);  // has to var?
+$B=new Float64Array($H32,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
