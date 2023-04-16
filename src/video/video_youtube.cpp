@@ -297,6 +297,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
+emscripten_webgl_enable_extension(ctx_js, "EGL_EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
@@ -307,15 +308,10 @@ emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");
-emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
-emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
 emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_linear");
@@ -340,12 +336,12 @@ return;
 }
 
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
-max=0.0;
-min=1.0;
-sum=0.0;
-avgSum=0.0;
-minSum=0.0;
-maxSum=0.0;
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
 for(int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];
