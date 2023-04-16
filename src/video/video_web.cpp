@@ -176,6 +176,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"HI_colorformats");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
 /// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
@@ -199,8 +200,8 @@ emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-glEnable(GL_POLYGON_OFFSET_FILL);
-glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
+// glEnable(GL_POLYGON_OFFSET_FILL);
+// glPolygonOffset((GLfloat)0.5f,(GLfloat)500.0f);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
@@ -274,9 +275,9 @@ attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
-attr_js.premultipliedAlpha=EM_TRUE;
+attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_FALSE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -291,7 +292,6 @@ eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_siz
 contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAttribs2_js);
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
-// eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
 emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
@@ -301,21 +301,22 @@ glEnable(GL_SCISSOR_TEST);
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
 // emscripten_webgl_enable_extension(ctx_js,"OES_fbo_render_mipmap");
+emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx_js,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx_js,"OES_draw_buffers_indexed");
 // emscripten_webgl_enable_extension(ctx_js,"GL_OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx_js,"OES_float_blend");
 // emscripten_webgl_enable_extension(ctx_js,"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(ctx_js,"EGL_IMG_context_priority");
-emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");
+// emscripten_webgl_enable_extension(ctx_js,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
-emscripten_webgl_enable_extension(ctx_js,"NV_context_priority_realtime");
+emscripten_webgl_enable_extension(ctx_js,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
-emscripten_webgl_enable_extension(ctx_js,"NV_depth_nonlinear");
+emscripten_webgl_enable_extension(ctx_js,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx_js,"EGL_HI_colorformats");
-emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
+// emscripten_webgl_enable_extension(ctx_js,"HI_colorformats");
 emscripten_webgl_enable_extension(ctx_js,"EGL_KHR_gl_colorspace");
-emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
+// emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_pq");
 // emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_bt2020_linear");
@@ -436,22 +437,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.getExtension('EXT_color_buffer_float');
-// gl.getExtension('OES_texture_float_linear');
-
-gl.disable(gl.DITHER);
-// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-// gl.drawingBufferColorMetadata={mode:'extended'};
-// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-// gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-// gl.blendColor(1.0,1.0,1.0,1.0);
-// gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-// gl.enable(gl.BLEND);  //  webgl2 messed up effect
-// gl.unpackColorSpace='display-p3';  // very slow
-gl.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -497,29 +482,40 @@ var bb;
 var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
-
 if(der>0.333){
  rr=Silver(der);
 }else{
  rr=GoldR(der);
  }
-
 if(neerg>0.4){
 gg=Silver(neerg);
 }else{
 gg=GoldG(neerg);
 }
-
 if(eulb>0.5){
 bb=Silver(eulb);
 }else{
 bb=GoldB(eulb);
 }
-  
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
+gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('OES_texture_float_linear');
+gl.disable(gl.DITHER);
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+// gl.drawingBufferColorMetadata={mode:'extended'};
+// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+// gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+// gl.blendColor(1.0,1.0,1.0,1.0);
+// gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gl.enable(gl.BLEND);  //  webgl2 messed up effect
+// gl.unpackColorSpace='display-p3';  // very slow
+gl.drawingBufferColorSpace='display-p3';
 inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
