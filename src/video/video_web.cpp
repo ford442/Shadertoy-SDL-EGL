@@ -501,7 +501,7 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+// gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
@@ -582,8 +582,8 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+// Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 },timFrm)}
@@ -599,14 +599,15 @@ T=true;
 
 });
 
+void(*St)(){&strt};
+
 extern "C" {
 
 void str(){
-void(*St)(){&strt};
-St();
+// St();
 return;
 }
- 
+
 void b3(){
 egl();
 vid();
