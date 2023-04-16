@@ -130,9 +130,9 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -396,7 +396,7 @@ var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
 var la=h$*h$*8;
 var pointa=77*la;
-var agav=new Float64Array($H,pointa,300);
+var agav=new Float64Array($H,pointa,304);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.000;
@@ -411,7 +411,7 @@ let gl=bCan.getContext("webgl2",{
 colorType:'float64',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
-colorSpace:'display-p3',
+// colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
@@ -429,22 +429,6 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0
 });
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.getExtension('EXT_color_buffer_float');
-// gl.getExtension('OES_texture_float_linear');
-
-gl.disable(gl.DITHER);
-// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
-// gl.drawingBufferColorMetadata={mode:'extended'};
-// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-// gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-gl.blendColor(1.0,1.0,1.0,1.0);
-gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-// gl.enable(gl.BLEND);  //  webgl2 messed up effect
-// gl.unpackColorSpace='display-p3';  // very slow
-gl.drawingBufferColorSpace='display-p3';
 const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gl});
 const g2=new GPU();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -513,7 +497,21 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
-
+// gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+gl.getExtension('EXT_color_buffer_float');
+// gl.getExtension('OES_texture_float_linear');
+gl.disable(gl.DITHER);
+// gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
+// gl.drawingBufferColorMetadata={mode:'extended'};
+// gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+// gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
+// gl.blendColor(1.0,1.0,1.0,1.0);
+// gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gl.enable(gl.BLEND);  //  webgl2 messed up effect
+// gl.unpackColorSpace='display-p3';  // very slow
+gl.drawingBufferColorSpace='display-p3';
 inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
@@ -524,7 +522,7 @@ var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float64Array($H,pointa,300);
+agav=new Float64Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -552,7 +550,7 @@ $S=parseInt(window.innerHeight,10);
 la=h$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float64Array($H,pointa,300);  // has to var?
+var agav=new Float64Array($H,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
@@ -580,8 +578,8 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+// Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 },timFrm)}
@@ -597,11 +595,12 @@ T=true;
 
 });
 
+void(*St)(){&strt};
+
 extern "C" {
 
 void str(){
-void(*St)(){&strt};
-St();
+// St();
 return;
 }
  
