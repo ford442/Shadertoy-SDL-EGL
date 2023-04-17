@@ -39,6 +39,7 @@ const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 
+#include "../../include/shader/intrins.hpp"
 #include <algorithm>
 #include <string.h>
 #include <stdarg.h>
@@ -49,7 +50,6 @@ const float_t F0=0.0f;
 #include <iostream>
 #include <locale> // utf-16
 #include <uchar.h> // utf-16
-#include "../../include/shader/intrins.hpp"
 
 // #include <stdfloat>  //  c++23
 
@@ -194,18 +194,18 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,(EGLint)8,
-EGL_GREEN_SIZE,(EGLint)8,
-EGL_BLUE_SIZE,(EGLint)8,
-EGL_ALPHA_SIZE,(EGLint)8,
+EGL_RED_SIZE,(EGLint)32,
+EGL_GREEN_SIZE,(EGLint)32,
+EGL_BLUE_SIZE,(EGLint)32,
+EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)8,
+EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
 EGL_COVERAGE_SAMPLES_NV,(EGLint)32,
 EGL_SAMPLES,(EGLint)32,
-EGL_MIPMAP_LEVEL,(EGLint)0,
+EGL_MIPMAP_LEVEL,(EGLint)32,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE
 };
