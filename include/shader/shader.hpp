@@ -13,7 +13,7 @@ void str();
   
 }
 
-#pragma STDC FP_CONTRACT FAST
+#pragma STDC FP_CONTRACT OFF
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 
