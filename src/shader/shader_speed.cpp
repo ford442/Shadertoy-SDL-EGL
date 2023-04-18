@@ -130,16 +130,14 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-eglBindAPI(EGL_OPENGL_API);
-//   eglBindAPI(EGL_OPENGL_ES_API);
-  /*
+//   eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 eglMakeCurrent(display,surface,surface,ctxegl);
-  */
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
