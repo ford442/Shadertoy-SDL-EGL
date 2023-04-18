@@ -62,7 +62,7 @@ std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
 struct timespec rem;
-struct timespec req={0,14200000};
+struct timespec req={0,16600000};
 
 #include "../../include/shader/gl.hpp"
 
@@ -101,19 +101,16 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline none)\n"
 "#pragma optionNV(inline none)\n"
-"#pragma STDGL(strict on)\n"
-"#pragma optionNV(strict on)\n"
-"#pragma optionNV(invariant none)\n"
-"#pragma STDGL(invariant none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump float;\n";
+"precision lowp float;\n";
+"precision lowp int;\n";
 
 const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[]=
-"precision lowp sampler3D;precision mediump sampler2D;"
+"precision lowp sampler3D;precision lowp sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
 "precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
@@ -186,7 +183,7 @@ EGL_GREEN_SIZE,(EGLint)8,
 EGL_BLUE_SIZE,(EGLint)8,
 EGL_ALPHA_SIZE,(EGLint)8,
 EGL_DEPTH_SIZE,(EGLint)16,
-EGL_STENCIL_SIZE,(EGLint)8,
+EGL_STENCIL_SIZE,(EGLint)0,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_NONE
 };
