@@ -1,7 +1,7 @@
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT FAST
+#pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
