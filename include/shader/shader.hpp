@@ -120,11 +120,11 @@ const GLchar vrt_bdy_src[]=
 
 const GLchar frg_hdr_src[]=
 "precision mediump sampler3D;precision highp sampler2D;"
-"precision lowp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;"
+"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
@@ -133,7 +133,7 @@ const GLchar frg_hdr_src[]=
 const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
-"int _N=3;void mainImage(out vec4 O,vec2 U){"
+"int _N=16;void mainImage(out vec4 O,vec2 U){"
 "vec4 o;O=vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
