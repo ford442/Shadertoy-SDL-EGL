@@ -29,13 +29,13 @@ void str();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-double wi,hi;
-const float F=1.0f,Fm1=-1.0f;
-const double Dm1=-1.0,D=1.0;
 
 #include <float.h>
 #include <math.h>
 
+double_t wi,hi;
+const float_t F=1.0f,Fm1=-1.0f;
+const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 
@@ -62,24 +62,24 @@ std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
 struct timespec rem;
-struct timespec req={0,16666666};
+struct timespec req={0,14200000};
 
 #include "../../include/shader/gl.hpp"
 
-float Tdlt;
-double Ttime;
-int32_t iFrame;
-double mouseY,mouseX;
+float_t Tdlt;
+float_t Ttime;
+fast32_t iFrame;
+double_t mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-int32_t fram;
-int32_t Size;
+fast32_t fram;
+fast32_t Size;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
 GLfloat gF=1.0f,gF0=0.0f,gFm1=-1.0f;
 GLclampf x,y,y1y=F;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 GLfloat g1g=1.0f;
-double S;
+double_t S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -91,12 +91,10 @@ const GLchar * src[4];
 
 const GLchar cm_hdr_src[]=
 "#version 300 es\n"
-"#pragma STDGL(precise all)\n"
-"#pragma optionNV(precise all)\n"
-"#pragma STDGL(fastmath off)\n"
-"#pragma optionNV(fastmath off)\n"
-"#pragma STDGL(fastprecision off)\n"
-"#pragma optionNV(fastprecision off)\n"
+"#pragma STDGL(fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma STDGL(fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n"
 "#pragma STDGL(unroll none)\n"
 "#pragma optionNV(unroll none)\n"
 "#pragma STDGL(ifcvt none)\n"
@@ -107,38 +105,27 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(strict on)\n"
 "#pragma optionNV(invariant none)\n"
 "#pragma STDGL(invariant none)\n"
-"#pragma optionNV(centroid all)\n"
-"#pragma STDGL(centroid all)\n"
-"#pragma optionNV(sample all)\n"
-"#pragma STDGL(sample all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;\n";
+"precision mediump float;\n";
 
 const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[]=
-"precision mediump sampler3D;precision highp sampler2D;"
-"precision lowp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;"
+"precision lowp sampler3D;precision mediump sampler2D;"
+"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
+"precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
+"precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
+"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
+"precision lowp sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 
 const GLchar frg_ftr_src[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O,vec2 U);"
-"int _N=3;void mainImage(out vec4 O,vec2 U){"
-"vec4 o;O=vec4(0);"
-"for (int k=0; k < _N*_N; k++){"
-"mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.2/1.0));}"
-"void mainImage0\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
@@ -161,7 +148,7 @@ EGLint config_size,major,minor;
 
 EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
@@ -194,19 +181,13 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,(EGLint)32,
-EGL_GREEN_SIZE,(EGLint)32,
-EGL_BLUE_SIZE,(EGLint)32,
-EGL_ALPHA_SIZE,(EGLint)32,
-EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)32,
+EGL_RED_SIZE,(EGLint)8,
+EGL_GREEN_SIZE,(EGLint)8,
+EGL_BLUE_SIZE,(EGLint)8,
+EGL_ALPHA_SIZE,(EGLint)8,
+EGL_DEPTH_SIZE,(EGLint)16,
+EGL_STENCIL_SIZE,(EGLint)8,
 EGL_BUFFER_SIZE,(EGLint)32,
-EGL_SAMPLE_BUFFERS,(EGLint)1,
-EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
-EGL_COVERAGE_SAMPLES_NV,(EGLint)32,
-EGL_SAMPLES,(EGLint)32,
-EGL_MIPMAP_LEVEL,(EGLint)32,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE
 };
 
