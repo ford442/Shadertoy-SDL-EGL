@@ -54,7 +54,7 @@ t3=t2;
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_spanb=std::chrono::duration<float,std::chrono::seconds::period>(t2-t3);
 Tdlt=time_spanb.count();
-std::chrono::duration<double, std::chrono::seconds::period>time_spana=std::chrono::duration<long double,std::chrono::seconds::period>(t2-t1);
+std::chrono::duration<double, std::chrono::seconds::period>time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
@@ -123,7 +123,7 @@ attr.depth=EM_FALSE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -133,10 +133,10 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 eglBindAPI(EGL_OPENGL_API);
 //   eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
@@ -155,12 +155,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
-// emscripten_webgl_enable_extension(ctx,"ARB_texture_float");
-// emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
-// emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
-// emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
-// emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 // emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
@@ -177,39 +172,9 @@ emscripten_webgl_enable_extension(ctx,"EXT_create_context_robustness");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_linear");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear");
-// emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
-// emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
-// emscripten_webgl_enable_extension(ctx,"ARB_invalidate_subdata");
-// emscripten_webgl_enable_extension(ctx,"ARB_texture_storage");
-// emscripten_webgl_enable_extension(ctx,"ARB_ES2_compatibility");
-// emscripten_webgl_enable_extension(ctx,"ARB_ES3_compatibility ");
-// emscripten_webgl_enable_extension(ctx,"ARB_ES3_1_compatibility");
-// emscripten_webgl_enable_extension(ctx,"ARB_ES3_2_compatibility");
-// emscripten_webgl_enable_extension(ctx,"EXT_gpu_shader4");
-// emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader4");
-// emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader5");
-// emscripten_webgl_enable_extension(ctx,"ARB_blend_func_extended");
-// emscripten_webgl_enable_extension(ctx,"ARB_color_buffer_float");
-// emscripten_webgl_enable_extension(ctx,"ARB_compatibility");
-// emscripten_webgl_enable_extension(ctx,"ARB_compute_shader");
-// emscripten_webgl_enable_extension(ctx,"ARB_enhanced_layouts");
-// emscripten_webgl_enable_extension(ctx,"ARB_tessellation_shader");
-// emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_multisample");
-// emscripten_webgl_enable_extension(ctx,"EXT_geometry_shader");
-// emscripten_webgl_enable_extension(ctx,"MESA_shader_integer_functions");
-// emscripten_webgl_enable_extension(ctx,"OES_geometry_shader");
-// emscripten_webgl_enable_extension(ctx,"ARB_geometry_shader");
-// emscripten_webgl_enable_extension(ctx,"ARB_texture_stencil8");
-// emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
-// emscripten_webgl_enable_extension(ctx,"GL_ARB_draw_buffers_blend");
-// emscripten_webgl_enable_extension(ctx,"ARB_cull_distance");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-// glEnable(GL_LIGHTING);  //  LEGACY_GL
-// glEnable(GL_FOG);  //  LEGACY_GL
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(D);
@@ -222,28 +187,12 @@ glEnable(GL_STENCIL_TEST);
 glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
-// glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS); // invalid capa
-// glEnable(GL_FOG);  // invalid capa
-// glEnable(GL_POLYGON_OFFSET_POINT); // invalid capa
-// glEnable(GL_POLYGON_OFFSET_FILL);  // works
-// glPolygonOffset((GLfloat)0.0,(GLfloat)-0.0);
-//  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //  undefined symbol
-// glEnable(GL_POLYGON_SMOOTH); // invalid capa
-//    glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST); // invalid target
-// glEnable(GL_PROGRAM_POINT_SIZE);  //  invalid capability
-// glEnable(GL_POLYGON_OFFSET_LINE); // invalid capa
-// glEnable(GL_LINE_SMOOTH); // invalid capa
-//    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST); // invalid target
-  
 glDisable(GL_DITHER);
-  
-// glFrontFace(GL_CW);
+  // glFrontFace(GL_CW);
 // // glEnable(GL_CULL_FACE);
-//  glEnable(GL_FRAMEBUFFER_SRGB); //  invalid capa
 // glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-// glEnable(GL_COLOR_LOGIC_OP); //  invalid capa
 glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -294,12 +243,12 @@ glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
-// glEnable(GL_SCISSOR_TEST);
-// glScissor((GLint)0,(GLint)0,Size,Size);
+glEnable(GL_SCISSOR_TEST);
+glScissor((GLint)0,(GLint)0,Size,Size);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())Rend,0,0);
+emscripten_set_main_loop((void(*)())Rend,16,0);
 return;
 }
 
