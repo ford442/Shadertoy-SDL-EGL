@@ -141,7 +141,7 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=static_cast<fast32_t>(hi);
+Size=static_cast<int_fast32_t>(hi);
 // S=static_cast<GLfloat>(wi);
 S=wi;
 mX=0.5*S;
