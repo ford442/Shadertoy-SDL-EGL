@@ -555,7 +555,10 @@ gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gljs.blendEquation(gl.MAX);
 	
 // gljs.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+	
+// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+	
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
