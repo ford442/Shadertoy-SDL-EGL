@@ -41,10 +41,10 @@ b3_combine_dev:
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -ffast-math \
 	 -ffp-contract=on -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/combine.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -fno-stack-protector -mbulk-memory -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
+	 em++ src/combine/combine.cpp -c -O3 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -fno-stack-protector -mbulk-memory -fno-math-errno -mcpu=bleeding-edge -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -fno-stack-protector -fmerge-all-constants -mbulk-memory -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -flto=thin -fno-fast-math \
+	 em++ src/combine/audio.cpp -c -O3 -std=c++20 -stdlib=libc++ -fno-stack-protector -fmerge-all-constants -mbulk-memory -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -flto=thin -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fstrict-vtable-pointers -fwhole-program-vtables \
 	 -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o audio.o combine.o -o b3hd002.js -sALLOW_TABLE_GROWTH=1 -ffp-contract=on -fno-stack-protector -mllvm -O3 -mbulk-memory -fmerge-all-constants -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto \
