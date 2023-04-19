@@ -505,15 +505,16 @@ minorVersion:0
  
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
-	gljs.getExtension("WEBGL_color_buffer_float");
-gljs.getExtension("OES_texture_float_linear");
-gljs.getExtension("EXT_float_blend");
-gljs.getExtension("EXT_blend_minmax");
-gljs.getExtension("OES_single_precision");
+
 
 // gljs.getExtension('EGL_HI_colorformats');
 // gljs.getExtension('EGL_EXT_gl_colorspace_display_p3');
   /*
+  	gljs.getExtension("WEBGL_color_buffer_float");
+gljs.getExtension("OES_texture_float_linear");
+gljs.getExtension("EXT_float_blend");
+gljs.getExtension("EXT_blend_minmax");
+gljs.getExtension("OES_single_precision");
 gl.getExtension("WEBGL_color_buffer_half_float");
 gl.getExtension("OES_texture_half_float_linear");
 gl.getExtension("EXT_sRGB");
@@ -548,8 +549,8 @@ gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 	
 gljs.blendColor(1.0,1.0,1.0,1.0);
-gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
-// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
+// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
 	
 // gljs.blendEquation(gl.MAX);
 	
