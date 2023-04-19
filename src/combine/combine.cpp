@@ -169,7 +169,7 @@ emscripten_webgl_enable_extension(ctx, "ARB_gpu_shader5");
 emscripten_webgl_enable_extension(ctx, "EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
  // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
-
+glEnable(GL_LINE_SMOOTH);
 // emscripten_webgl_enable_extension(ctx, "EGL_EXT_gl_colorspace_scrgb_linear");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
@@ -192,15 +192,16 @@ glFrontFace(GL_CW);
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-glBlendEquationSeparate(GL_MAX,GL_MAX);
+// glBlendEquationSeparate(GL_MAX,GL_MAX);
 // glBlendEquation(GL_EXCLUSION_NV);   
- 
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
+	glBlendFunc(GL_ONE, GL_ZERO);
  // glBlendEquation(GL_LIGHTEN_NV);
 // glBlendEquation(GL_MAX);                             
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 glClearColor((GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF0,(GLclampf)gF);
+glClear(GL_COLOR_BUFFER_BIT);
+glBlendFunc(GL_SRC_ALPHA, GL_ZERO);
 glBlendColor((GLclampf)gF,(GLclampf)gF,(GLclampf)gF,(GLclampf)gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -527,6 +528,7 @@ gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.blendColor(1.0,1.0,1.0,1.0);
 // gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gljs.blendEquation(gl.MAX);
+gljs.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
