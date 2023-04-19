@@ -506,16 +506,17 @@ minorVersion:0
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 	gljs.getExtension("WEBGL_color_buffer_float");
+gljs.getExtension("OES_texture_float_linear");
+gljs.getExtension("EXT_float_blend");
+gljs.getExtension("EXT_blend_minmax");
+gljs.getExtension("OES_single_precision");
 
 // gljs.getExtension('EGL_HI_colorformats');
 // gljs.getExtension('EGL_EXT_gl_colorspace_display_p3');
   /*
 gl.getExtension("WEBGL_color_buffer_half_float");
-gl.getExtension("OES_texture_float_linear");
 gl.getExtension("OES_texture_half_float_linear");
-gl.getExtension("EXT_float_blend");
 gl.getExtension("EXT_sRGB");
-gl.getExtension("EXT_blend_minmax");
 gl.getExtension("OES_fbo_render_mipmap");
 gl.getExtension("WEBGL_blend_equation_advanced_coherent");
 gl.getExtension("EXT_framebuffer_sRGB");
@@ -523,7 +524,6 @@ gl.getExtension("OES_depth32");
 gl.getExtension("OES_fixed_point");
 gl.getExtension("OES_shader_multisample_interpolation");
 gl.getExtension("WEBGL_webcodecs_video_frame");
-gl.getExtension("OES_single_precision");
 gl.getExtension("GL_NV_memory_attachment");
 gl.getExtension("NV_depth_nonlinear");
 gl.getExtension("EXT_gl_colorspace_display_p3");
