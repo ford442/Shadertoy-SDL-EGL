@@ -462,7 +462,6 @@ sh4d=false;
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 let $H64=Module.HEAPF64.buffer;
-let $H32=Module.HEAPF64.buffer;
 var inh=parseInt(window.innerHeight,10);
 var s$=parseInt(inh,10);
 var w$=parseInt(inh,10);
@@ -471,7 +470,7 @@ var h$=parseInt(inh,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=Math.ceil(h$*w$*8);
 var pointa=Math.ceil(77*la);
-var agav=new Float64Array($H32,pointa,304);
+var agav=new Float64Array($H64,pointa,304);
 var sz=Math.ceil((h$*w$)/8);
 var avag=0.750;
 var min=1.000;
@@ -562,8 +561,8 @@ gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-let g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
-let g2=new GPU();
+let g=new GPU({mode:"gpu",canvas:bcanvas,webGl:gljs});
+let g2=new GPU({mode:"gpu"});
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
@@ -600,10 +599,10 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setPrecision('single').setFixIntegerDivisionAccuracy(false).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
-var av$=Ave(P[0],P[1],P[2]);
+var av$=Ave(0.8*P[0],P[1],1.2*P[2]);
 // var minuss=(av$-0.5)*(av$/(av$-0.5));
 // av$=av$+(minuss*(av$*0.033));
-return[P[0],P[1],P[2],av$];
+return[0.8*P[0],P[1],1.2*P[2],av$];
 }).setTactic("precision").setFixIntegerDivisionAccuracy(false).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
 const r=g.createKernel(function(f){
@@ -659,14 +658,14 @@ blank$=Math.max((((w$-s$)*1.0)/8.0),0.0);
 nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
-agav=new Float64Array($H32,pointa,304);
+agav=new Float64Array($H64,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 var pointb=Math.ceil(66*la);
-var $B=new Float64Array($H32,pointb,sz);
+var $B=new Float64Array($H64,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -687,14 +686,14 @@ nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 s$=parseInt(window.innerHeight,10);
 la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
-agav=new Float64Array($H32,pointa,304);  // has to var?
+agav=new Float64Array($H64,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 pointb=Math.ceil(66*la);
-$B=new Float64Array($H32,pointb,sz);  // has to var?
+$B=new Float64Array($H64,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
