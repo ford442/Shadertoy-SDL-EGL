@@ -487,11 +487,11 @@ colorType:'float64',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
-// colorSpace:'display-p3',
+colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:true,
+imageSmoothingEnabled:false,
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
@@ -506,9 +506,29 @@ minorVersion:0
  
 gljs.getExtension('OES_texture_float_linear');
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
+	gljs.getExtension("WEBGL_color_buffer_float");
+
 // gljs.getExtension('EGL_HI_colorformats');
 // gljs.getExtension('EGL_EXT_gl_colorspace_display_p3');
   /*
+gl.getExtension("WEBGL_color_buffer_half_float");
+gl.getExtension("OES_texture_float_linear");
+gl.getExtension("OES_texture_half_float_linear");
+gl.getExtension("EXT_float_blend");
+gl.getExtension("EXT_sRGB");
+gl.getExtension("EXT_blend_minmax");
+gl.getExtension("OES_fbo_render_mipmap");
+gl.getExtension("WEBGL_blend_equation_advanced_coherent");
+gl.getExtension("EXT_framebuffer_sRGB");
+gl.getExtension("OES_depth32");
+gl.getExtension("OES_fixed_point");
+gl.getExtension("OES_shader_multisample_interpolation");
+gl.getExtension("WEBGL_webcodecs_video_frame");
+gl.getExtension("OES_single_precision");
+gl.getExtension("GL_NV_memory_attachment");
+gl.getExtension("NV_depth_nonlinear");
+gl.getExtension("EXT_gl_colorspace_display_p3");
+gl.getExtension("GL_ARB_multisample");
 // gl.getExtension('EGL_KHR_gl_colorspace');
 // gl.getExtension('EGL_EXT_gl_colorspace_scrgb_linear');
 // gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
@@ -518,18 +538,24 @@ gljs.getExtension('EXT_texture_filter_anisotropic');
 gljs.getExtension('ARB_blend_func_extended');
 // gljs.getExtension('EXT_framebuffer_sRGB');
 // gljs.getExtension('EXT_float_blend');
-gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+	
+// gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+	
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
-// gljs.disable(gl.DITHER);
+gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
-// gljs.blendColor(1.0,1.0,1.0,1.0);
-// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+	
+gljs.blendColor(1.0,1.0,1.0,1.0);
+gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
+	
 // gljs.blendEquation(gl.MAX);
-gljs.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+	
+// gljs.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
@@ -568,7 +594,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setPrecision('single').setFixIntegerDivisionAccuracy(false).setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setPrecision('single').setFixIntegerDivisionAccuracy(false).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -619,7 +645,7 @@ bb=GreenB(eulb);
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setFixIntegerDivisionAccuracy(false).setDynamicOutput(true).setArgumentTypes(["HTMLCanvas"]).setGraphical(true).setOutput([h$,w$]);
+}).setTactic("precision").setFixIntegerDivisionAccuracy(false).setDynamicOutput(true).setGraphical(true).setOutput([h$,w$]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([s$,s$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
