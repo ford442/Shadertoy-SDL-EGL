@@ -100,7 +100,7 @@ const GLchar common_shader_header_gles3[]=
 "#pragma STDGL(centroid all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;precision mediump int;precision mediump sampler3D;precision mediump sampler2D;"
+"precision mediump float;precision mediump int;precision lowp sampler3D;precision mediump sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
@@ -109,10 +109,10 @@ const GLchar common_shader_header_gles3[]=
 const GLchar vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 const GLchar fragment_shader_header_gles3[]=
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out vec4 fragColor;\n";
+"out highp vec4 fragColor;\n";
 const GLchar fragment_shader_footer_gles3[]=
 "\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 const GLchar * common_shader_header=common_shader_header_gles3;
@@ -134,7 +134,7 @@ EGLint config_size,major,minor;
 
 EGLint const attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SCRGB_EXT,
@@ -154,7 +154,7 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint const attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
@@ -175,12 +175,12 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_RED_SIZE,(EGLint)8,
-EGL_GREEN_SIZE,(EGLint)8,
-EGL_BLUE_SIZE,(EGLint)8,
-EGL_ALPHA_SIZE,(EGLint)8,
-EGL_DEPTH_SIZE,(EGLint)24,
-EGL_STENCIL_SIZE,(EGLint)8,
+EGL_RED_SIZE,(EGLint)16,
+EGL_GREEN_SIZE,(EGLint)16,
+EGL_BLUE_SIZE,(EGLint)16,
+EGL_ALPHA_SIZE,(EGLint)16,
+EGL_DEPTH_SIZE,(EGLint)32,
+EGL_STENCIL_SIZE,(EGLint)16,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
@@ -202,7 +202,7 @@ EGLint const attribut_list_js[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -218,7 +218,7 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint const attribute_list_js[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
@@ -240,19 +240,19 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_RED_SIZE,(EGLint)8,
-EGL_GREEN_SIZE,(EGLint)8,
-EGL_BLUE_SIZE,(EGLint)8,
-EGL_ALPHA_SIZE,(EGLint)8,
-EGL_DEPTH_SIZE,(EGLint)24,
-EGL_STENCIL_SIZE,(EGLint)8,
+EGL_RED_SIZE,(EGLint)16,
+EGL_GREEN_SIZE,(EGLint)16,
+EGL_BLUE_SIZE,(EGLint)16,
+EGL_ALPHA_SIZE,(EGLint)16,
+EGL_DEPTH_SIZE,(EGLint)32,
+EGL_STENCIL_SIZE,(EGLint)16,
 EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
 EGL_COVERAGE_SAMPLES_NV,(EGLint)32,
 EGL_SAMPLES,(EGLint)32,
 EGL_MIPMAP_LEVEL,(EGLint)1,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE,EGL_NONE
 };
 
