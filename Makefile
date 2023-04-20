@@ -29,7 +29,7 @@ b3_shader_speed:
 	 emcc main.o shader_speed.o -o s3022s.js -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 -sUSE_GLFW=0 -m32 -static -flto=thin -mllvm -ffast-math -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector \
 	 -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O3 -std=gnu++2b -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma  -mbmi -mbmi2 -mlzcnt -mavxneconvert -mavxvnni \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -fstrict-vtable-pointers -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=2048mb -sGLOBAL_BASE=4096 \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sTOTAL_STACK=512MB --closureFriendly -sGL_ASSERTIONS=0 -sWASM_BIGINT -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 --enable-fma -lc -lc++ -lc++abi -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -sASSERTIONS=0 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sGL_UNSAFE_OPTS=1 \
