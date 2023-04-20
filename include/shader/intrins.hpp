@@ -5,6 +5,8 @@
 #include <smmintrin.h>  // sse 4.1
 #include <avxintrin.h>  // AVX
 
+#define VLEAVE _mm256_zeroupper
+
 #include <xmmintrin.h>
 #include <immintrin.h> 
 #include <nmmintrin.h>  //  sse 4.2
