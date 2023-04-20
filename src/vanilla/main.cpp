@@ -1,4 +1,7 @@
 #include "../../include/vanilla/main.hpp"
+#include <boost/multiprecision/float128.hpp>
+
+using boost::multiprecision::float128;
 
 EM_JS(void,js_main,(),{
 
