@@ -77,7 +77,7 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall('js_hello');
-var tst=[tsta,10.0,10.0,10.0];
+var tst=[10.0,10.0,10.0,10.0];
 const $H=Module.HEAPF32.buffer;
 const $P=Module.HEAPF32.subarray(0,4);
 $P.set(tst,0);
