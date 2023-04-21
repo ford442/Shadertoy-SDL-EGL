@@ -55,7 +55,7 @@ return retrn;
   
 float js_simd(float * aa){
 v128_t cc=simd_test(aa);
-wasm_v128_store(&out[i], prod);
+// wasm_v128_store(&out[i], prod);
 float c=wasm_f32x4_extract_lane(cc,0);
 float d=wasm_f32x4_extract_lane(cc,1);
 float ce=wasm_f32x4_extract_lane(cc,2);
