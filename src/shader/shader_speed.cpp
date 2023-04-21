@@ -275,7 +275,7 @@ glScissor((GLint)0,(GLint)0,Size,Size);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())Rend,17,0);
+emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
 
