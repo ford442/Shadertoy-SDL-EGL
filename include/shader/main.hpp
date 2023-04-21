@@ -1,17 +1,9 @@
 #include <emscripten.h>
 
-int rD;
-int Th;
-
 #pragma once
 
-#include "../../include/shader/intrins.hpp"
-#include "boost/tuple/tuple.hpp"
-
-using namespace ::boost::tuples;
-
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
@@ -24,6 +16,13 @@ using namespace ::boost::tuples;
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+int rD;
+int Th;
+
+#include "../../include/shader/intrins.hpp"
+#include "boost/tuple/tuple.hpp"
+
+using namespace ::boost::tuples;
 v128_t Dr;
 
 #include <random>
