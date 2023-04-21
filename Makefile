@@ -82,16 +82,13 @@ b3_vanilla_llvm:
 	 -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 \
 	 -msse4.2
 	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory \
-	 -mnontrapping-fptoint -msign-ext -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -mtail-call -mmultivalue -mbulk-memory \
 	 -mnontrapping-fptoint -msign-ext -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -emit-llvm \
-	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 \
-	 -sINITIAL_MEMORY=2048mb \
+	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mpclmul -maes -mavx2 -msha \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT \
-	 -sEXPORTED_FUNCTIONS='["_main","_js_hello","_js_tuple_float","_js_tuple_gl","_js_tuple_avx"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT -sEXPORTED_FUNCTIONS='["_main","_js_hello","_js_tuple_float","_js_tuple_gl","_js_tuple_avx"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3hd:
