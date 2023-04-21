@@ -152,13 +152,14 @@ Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
-  
-}
 
 void simd(){
 tie(th,RD);
 tie(Rg);
 }
+
+}
+
 
 int main(void){
 "use strict";
