@@ -106,8 +106,8 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(inline none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision highp float;\n"
-"precision mediump int;\n";
+"precision mediump float;\n"
+"precision lowp int;\n";
 
 const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
@@ -119,9 +119,9 @@ const GLchar frg_hdr_src[]=
 "precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
 "precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
 "precision lowp sampler2DArrayShadow;"
-"uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform lowp vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform float iSampleRate;"
+"uniform lowp vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out highp vec4 fragColor;\n";
 
 const GLchar frg_ftr_src[]=
