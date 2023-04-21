@@ -106,7 +106,7 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(inline none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision high float;\n"
+"precision highp float;\n"
 "precision mediump int;\n";
 
 const GLchar vrt_bdy_src[]=
