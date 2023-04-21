@@ -80,7 +80,7 @@ b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -O0 -std=gnu++2b -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -emit-llvm \
-	 -fwhole-program -polly -sUSE_BOOST=1 -sALLOW_MEMORY_GROWTH=0 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
+	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
