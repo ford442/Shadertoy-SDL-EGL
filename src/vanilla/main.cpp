@@ -3,21 +3,21 @@
 using namespace ::boost::tuples;
 
 float tuple_float(float num){
-boost::timer::auto_cpu_timer a1;
+// boost::timer::auto_cpu_timer a1;
 float cc=num,pp=num,uu=num;
 tie(cc,pp,uu);
 return uu;
 }
 
 GLfloat tuple_gl(GLfloat num){
-boost::timer::auto_cpu_timer a2;
+// boost::timer::auto_cpu_timer a2;
 GLfloat gg=num,pp=num,uu=num;
 tie(gg,pp,uu);
 return uu;
 }
 
 v128_t tuple_avx(float num){
-boost::timer::auto_cpu_timer a3;
+// boost::timer::auto_cpu_timer a3;
 v128_t aa=wasm_i32x4_splat(num);
 v128_t vv=wasm_i32x4_splat(num);
 v128_t xx=wasm_i32x4_splat(num);
