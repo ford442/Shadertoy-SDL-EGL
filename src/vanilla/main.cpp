@@ -19,7 +19,7 @@ float cc,pp,uu;
 float cc2,pp2,uu2;
 float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
-float Tdlt;
+float Tdlt,Tdlt2,Tdlt3,Tdlt4;
 
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
@@ -40,8 +40,8 @@ tie(ccc,ppc);tie(uuc,cc2c);tie(pp2c,uu2c);
 }
 t4=std::chrono::steady_clock::now();
 time_span=std::chrono::duration<float,std::chrono::seconds::period>(t4-t3);
-Tdlt=time_span.count()*1000000.0;
-cout << Tdlt << endl;
+Tdlt2=time_span.count()*1000000.0;
+cout << Tdlt2 << endl;
 float nn;
 t5=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
@@ -49,16 +49,16 @@ nn=cc+pp+uu+cc2+pp2+uu2;
 }
 t6=std::chrono::steady_clock::now();
 time_span=std::chrono::duration<float,std::chrono::seconds::period>(t5-t6);
-Tdlt=time_span.count()*1000000.0;
-cout << Tdlt << endl;
+Tdlt3=time_span.count()*1000000.0;
+cout << Tdlt3 << endl;
 t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 nn=ccc+ppc+uuc+cc2c+pp2c+uu2c;
 }
 t2=std::chrono::steady_clock::now();
 time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-Tdlt=time_span.count()*1000000.0;
-cout << Tdlt << endl;
+Tdlt4=time_span.count()*1000000.0;
+cout << Tdlt4 << endl;
 return uu;
 }
 
