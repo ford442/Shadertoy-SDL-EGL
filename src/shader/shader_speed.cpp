@@ -130,7 +130,10 @@ tie(EBO,VBO,VCO,ECO);
 tie(config_size,major,minor);
 tie(display,surface,ctxegl,eglconfig);
 tie(attr,surface,ctx);
-  
+tie(uni_mse,uni_srate,uni_res);
+tie(uni_tme,uni_frm,uni_fps);
+tie(smp_chn_res,smp_chn[4],uni_tme_dlt);
+
 // tie(cm_hdr_src[],vrt_bdy_src[],frg_hdr_src[],frg_ftr_src[]);
   //  tie(vrt[],indc[]);
   //  tie(src[],Fnm);
@@ -165,7 +168,7 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=static_cast<int_fast32_t>(hi);
 // S=static_cast<GLfloat>(wi);
-S=wi;
+S=Size;
 mX=0.5*S;
 mY=0.5*S;
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
