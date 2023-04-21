@@ -4,5 +4,5 @@
 #include <webgpu/webgpu_cpp.h>
 #include <boost/tuple/tuple.hpp>
 #include <boost/timer/timer.hpp>
-#include "./gl.h"
-#include "./avx.h"
+#include "../../include/vanilla/gl.hpp"
+#include "../../include/vanilla/avx.hpp"
