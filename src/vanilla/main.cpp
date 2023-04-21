@@ -6,6 +6,10 @@ using namespace std::chrono_literals;
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
+std::chrono::steady_clock::time_point t3;
+std::chrono::steady_clock::time_point t4;
+std::chrono::steady_clock::time_point t5;
+std::chrono::steady_clock::time_point t6;
 
 using namespace ::boost::tuples;
 #include <iostream>
@@ -15,36 +19,36 @@ float cc,pp,uu;
 float cc2,pp2,uu2;
 float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
+float Tdlt;
 
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
 // boost::timer::auto_cpu_timer a1;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 cc2c=num,pp2c=num,uu2c=num;ccc=num,ppc=num,uuc=num;
-
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count()*1000.0;
+Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
-t1=std::chrono::steady_clock::now();
+t3=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 tie(ccc,ppc);tie(uuc,cc2c);tie(pp2c,uu2c);
 }
-t2=std::chrono::steady_clock::now();
-time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+t4=std::chrono::steady_clock::now();
+time_span=std::chrono::duration<float,std::chrono::seconds::period>(t4-t3);
 Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 float nn;
-t1=std::chrono::steady_clock::now();
+t5=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 nn=cc+pp+uu+cc2+pp2+uu2;
 }
-t2=std::chrono::steady_clock::now();
-time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+t6=std::chrono::steady_clock::now();
+time_span=std::chrono::duration<float,std::chrono::seconds::period>(t5-t6);
 Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 t1=std::chrono::steady_clock::now();
