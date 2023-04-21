@@ -162,8 +162,11 @@ FS.mkdir('/shader');
 });
 tie(Th,rD);
 tie(Dr);
+   extern"C"{
+
 tie(th,RD);
 tie(Rg);
+   }
 jss();
 return 0;
 }
