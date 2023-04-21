@@ -47,6 +47,12 @@ v128_t ans=tuple_avx(nm);
 float retrn=wasm_f32x4_extract_lane(ans,0);
 return retrn;
 }
+
+float js_tuple_avx_gl(GLfloat nm){
+v128_t ans=tuple_avx(nm);
+GLfloat retrn=wasm_f32x4_extract_lane(ans,0);
+return retrn;
+}
   
 float js_simd(float * aa){
 v128_t cc=simd_test(aa);
@@ -99,6 +105,11 @@ var reslt=Module.ccall('js_tuple_avx',"Number",["Number"],[1.0]);
 console.log("avx function:");
 console.log(reslt);
 },1000);
+setTimeout(function(){
+var reslt=Module.ccall('js_tuple_avx_gl',"Number",["Number"],[1.0]);
+console.log("avx gl function:");
+console.log(reslt);
+},1000);
 
 }
   
@@ -109,7 +120,7 @@ document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
-var  $lt=tem.innerHTML;
+var $lt=tem.innerHTML;
 
 function grab$lt(){
 $lt=Math.round($lt);
