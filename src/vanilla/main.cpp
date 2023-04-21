@@ -31,7 +31,7 @@ Tdlt=time_span.count()*1000000.0;
 cout << Tdlt << endl;
 t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
-tie(ccc,ppc);tie(uuc,cc2c);tie(pp2c,uu2c);
+tie(ccc,ppc,uuc,cc2c,pp2c,uu2c);
 }
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float,std::chrono::milliseconds::period>time_span2=std::chrono::duration<float,std::chrono::milliseconds::period>(t2-t1);
