@@ -12,7 +12,7 @@ return uu;
 GLfloat tuple_gl(GLfloat num){
 boost::timer::auto_cpu_timer a2;
 GLfloat gg=num,pp=num,uu=num;
-tie(cc,pp,uu);
+tie(gg,pp,uu);
 return uu;
 }
 
@@ -21,14 +21,15 @@ boost::timer::auto_cpu_timer a3;
 v128_t gg=wasm_i32x4_splat(num);
 v128_t pp=wasm_i32x4_splat(num);
 v128_t uu=wasm_i32x4_splat(num);
-tie(cc,pp,uu);
-return uu;
+tie(aa,vv,xx);
+return xx;
 }
 
 v128_t simd_test(float * a){
 int m=a[0]*1000;
 v128_t l=wasm_i32x4_splat(m);
 v128_t b5;
+float ii,j,k,l;
 v128_t b1=_mm_insert_ps(ii,b5,0);
 v128_t b2=_mm_insert_ps(j,b5,1);
 v128_t b3=_mm_insert_ps(k,b5,2);
