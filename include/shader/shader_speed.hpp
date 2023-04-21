@@ -43,8 +43,6 @@ const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 
-tie(F,Fm1,F0);
-
 #include "../../include/shader/intrins.hpp"
 #include <algorithm>
 #include <string.h>
