@@ -54,10 +54,9 @@ t3=t2;
 t2=std::chrono::steady_clock::now();
 time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
 Ttime=time_spana.count();
-if(iFrame%500==0){
-time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(t2-t3);
-Tdlt=time_spanb.count();
-}else{
+// time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(t2-t3);
+// Tdlt=time_spanb.count();
+Tdlt=0.0;
 mouseX=x/S;
 mouseY=(S-y)/S;
 un(   mouseX,mouseY,Ttime,iFrame,Tdlt);
@@ -69,7 +68,6 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,   (GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFinish();
 return;
-}
 }
 
 GLchar * rd_fl(const char * Fnm){
