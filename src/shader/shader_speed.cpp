@@ -50,21 +50,23 @@ return;
 void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
+if(iFrame%500==0){
 t3=t2;
 t2=std::chrono::steady_clock::now();
 time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(t2-t3);
 Tdlt=time_spanb.count();
+}
 time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
 Ttime=time_spana.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-un(mouseX,mouseY,Ttime,iFrame,Tdlt);
+un(   mouseX,mouseY,Ttime,iFrame,Tdlt);
 iFrame++;
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
-glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
+glDrawElements(GL_TRIANGLES,   (GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFinish();
 return;
 }
