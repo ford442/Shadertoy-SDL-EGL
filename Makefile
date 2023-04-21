@@ -78,7 +78,7 @@ b3_googleStreetView_dev:
 	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -O0 -fwhole-archive -sUSE_BOOST_HEADERS=1 -std=gnu++2b -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ src/vanilla/main.cpp -c -O0 -Wl,--whole-archive -sUSE_BOOST_HEADERS=1 -std=gnu++2b -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -emit-llvm \
