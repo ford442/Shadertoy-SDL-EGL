@@ -35,7 +35,7 @@ void str();
 
 using namespace ::boost::tuples;
 
-double_t wi,hi;
+// double_t wi,hi;
 const float_t F=1.0f,Fm1=-1.0f;
 const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
@@ -69,17 +69,20 @@ struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
 
+GLdouble wi,hi;
 GLfloat Tdlt;
 GLdouble Ttime;
 GLint iFrame,iFps;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-int32_t Size;
+// int32_t Size;
+GLint Size;
 GLfloat mX,mY,mm,nn;
 GLfloat gF=F,gF0=F0,gFm1=Fm1;
 GLclampf x,y;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-float_t S;
+// float_t S;
+GLfloat S;
 GLsizei s4=4,i;
 
 GLuint EBO,VBO,VCO,ECO;
