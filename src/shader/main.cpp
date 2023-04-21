@@ -155,6 +155,11 @@ return c;
   
 }
 
+void simd(){
+tie(th,RD);
+tie(Rg);
+}
+
 int main(void){
 "use strict";
 EM_ASM({
@@ -162,11 +167,7 @@ FS.mkdir('/shader');
 });
 tie(Th,rD);
 tie(Dr);
-   extern"C"{
-
-tie(th,RD);
-tie(Rg);
-   }
+simd();
 jss();
 return 0;
 }
