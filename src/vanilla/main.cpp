@@ -23,15 +23,14 @@ tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
 t2=std::chrono::steady_clock::now();
-time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count()*1000.0;
+std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 for(r=0;r<100;r++){
 tie(cc,pp,uu,cc2,pp2,uu2);
 }
 
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return uu;
