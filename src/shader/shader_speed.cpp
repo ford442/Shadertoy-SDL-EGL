@@ -112,8 +112,15 @@ return shader;
 GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 
 static inline void strt(){
-  tie(F,Fm1,F0);
-
+tie(F,Fm1,F0);
+tie(gF,gFm1,gF0);
+tie(D,Dm1,D0);
+tie(gD,gDm1,gD0);
+tie(iFrame,iFps);
+tie(mouseY,mouseX);
+tie(gu0,gu1,gu2,gu3,gu4,gu5,gu6,gu7,gu8,gu9);
+  //  tie(vrt[],indc[]);
+    
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
