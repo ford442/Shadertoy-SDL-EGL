@@ -33,12 +33,17 @@ void str();
 
 #include <float.h>
 #include <math.h>
+#include "boost/tuple/tuple.hpp"
+
+using namespace ::boost::tuples;
 
 double_t wi,hi;
 const float_t F=1.0f,Fm1=-1.0f;
 const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
+
+tie(F,Fm1,F0);
 
 #include "../../include/shader/intrins.hpp"
 #include <algorithm>
