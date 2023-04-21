@@ -157,14 +157,13 @@ return c;
 
 int main(void){
 "use strict";
-
 EM_ASM({
 FS.mkdir('/shader');
 });
 tie(Th,rD);
 tie(Dr);
-// tie(th,RD);
-// tie(Rg);
+tie(th,RD);
+tie(Rg);
 jss();
 return 0;
 }
