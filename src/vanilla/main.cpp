@@ -15,51 +15,44 @@ float cc,pp,uu;
 float cc2,pp2,uu2;
 float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
-float Tdlt,Tdlt2,Tdlt3,Tdlt4;
+float Tdlt;
 
-float tuple_float(float num){
-t1=std::chrono::steady_clock::now();
+float tuple_float_short(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
-cc2c=num,pp2c=num,uu2c=num;ccc=num,ppc=num,uuc=num;
+float nn;
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
-t2=std::chrono::steady_clock::now();
-std::chrono::duration<double,std::chrono::seconds::period>time_span=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
-Tdlt=time_span.count()*1000000.0;
-cout << Tdlt << endl;
-t1=std::chrono::steady_clock::now();
-for(r=0;r<100;r++){
-tie(ccc,ppc,uuc,cc2c,pp2c,uu2c);
-}
-t2=std::chrono::steady_clock::now();
-std::chrono::duration<double,std::chrono::seconds::period>time_span2=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
-Tdlt2=time_span2.count()*1000000.0;
-cout << Tdlt2 << endl;
-float nn;
 t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 nn=cc+pp+uu+cc2+pp2+uu2;
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<double,std::chrono::seconds::period>time_span3=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
-Tdlt3=time_span3.count()*1000000.0;
-cout << Tdlt3 << endl;
+std::chrono::duration<double,std::chrono::seconds::period>time_span=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
+Tdlt=time_span.count()*1000000.0;
+cout << Tdlt << endl;
+return nn;
+}
+
+float tuple_float_long(float num){
+cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
-nn=ccc+ppc+uuc+cc2c+pp2c+uu2c;
+tie(cc,pp,uu,cc2,pp2,uu2);
+}
+for(r=0;r<100;r++){
+nn=cc+pp+uu+cc2+pp2+uu2;
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<double,std::chrono::seconds::period>time_span4=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
-Tdlt4=time_span4.count()*1000000.0;
-cout << Tdlt4 << endl;
+std::chrono::duration<double,std::chrono::seconds::period>time_span=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
+Tdlt=time_span.count()*1000000.0;
+cout << Tdlt << endl;
 return uu;
 }
 
 GLfloat tuple_gl(GLfloat num){
 t1=std::chrono::steady_clock::now();
-// boost::timer::auto_cpu_timer a2;
 GLfloat gg=num,pp=num,uu=num;
 tie(gg,pp,uu);
 t2=std::chrono::steady_clock::now();
@@ -71,7 +64,6 @@ return uu;
 
 v128_t tuple_avx(float num){
 t1=std::chrono::steady_clock::now();
-// boost::timer::auto_cpu_timer a3;
 v128_t aa=wasm_i32x4_splat(num);
 v128_t vv=wasm_i32x4_splat(num);
 v128_t xx=wasm_i32x4_splat(num);
@@ -97,8 +89,12 @@ return tt;
 
 extern "C"{
 
-float js_tuple_float(float nm){ 
-return tuple_float(nm);
+float js_tuple_float_short(float nm){ 
+return tuple_float_short(nm);
+}
+  
+float js_tuple_float_long(float nm){ 
+return tuple_float_long(nm);
 }
 
 GLfloat js_tuple_gl(float nm){
@@ -154,8 +150,13 @@ var reslt=Module.ccall('js_simd',"Number",["Number"],[pointa]);
 console.log(reslt);
 },1000);
 setTimeout(function(){
-console.log("float function:");
-var reslt=Module.ccall('js_tuple_float',"Number",["Number"],[1.0]);
+console.log("float function short:");
+var reslt=Module.ccall('js_tuple_float_short',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+console.log("float function long:");
+var reslt=Module.ccall('js_tuple_float_long',"Number",["Number"],[1.0]);
 console.log(reslt);
 },1000);
 setTimeout(function(){
