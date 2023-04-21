@@ -18,11 +18,11 @@ b3_shader_llvm:
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_speed:
-	 em++ src/shader/shader_speed.cpp -c -O3 -m32 -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=fast -fmerge-all-constants \
+	 em++ src/shader/shader_speed.cpp -c -O3 -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=fast -fmerge-all-constants \
 	 -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/shader/main.cpp -c -O3 -m32 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants -fno-stack-protector \
+	 em++ src/shader/main.cpp -c -O3 -ffast-math -msimd128 -mbulk-memory -mavx -fmerge-all-constants -fno-stack-protector \
 	 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
