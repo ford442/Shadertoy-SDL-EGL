@@ -71,9 +71,9 @@ struct timespec req={0,16666666};
 
 GLdouble wi,hi;
 GLfloat Tdlt;
-GLfloat time_spana;
+std::chrono::duration<GLfloat,std::chrono::seconds::period>GLfloat time_spana;
 GLdouble Ttime;
-GLdouble time_spanb;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>GLdouble time_spanb;
 GLint iFrame,iFps;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
