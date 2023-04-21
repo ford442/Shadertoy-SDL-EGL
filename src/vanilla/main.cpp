@@ -24,6 +24,7 @@ float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
 // boost::timer::auto_cpu_timer a1;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
+cc2c=num,pp2c=num,uu2c=num;ccc=num,ppc=num,uuc=num;
 
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
