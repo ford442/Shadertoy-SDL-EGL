@@ -126,9 +126,8 @@ tie(hi,wi,S);
 tie(mX,mY,mm,nn);
 tie(s4,i);
 tie(t1,t2,t3);
-  
-// tie(EBO,VBO);
-// tie(VCO,ECO);
+tie(EBO,VBO);
+tie(VCO,ECO);
 tie(config_size,major,minor);
 tie(display,surface,ctxegl,eglconfig);
 tie(attr,surface,ctx);
@@ -137,7 +136,6 @@ tie(uni_tme,uni_frm,uni_fps);
 tie(smp_chn_res,smp_chn,uni_tme_dlt);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
 tie(vrt,indc);
-
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
