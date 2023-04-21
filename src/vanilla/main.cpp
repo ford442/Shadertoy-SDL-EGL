@@ -13,25 +13,48 @@ using namespace std;
 int r;
 float cc,pp,uu;
 float cc2,pp2,uu2;
+float cca,ppa,uua;
+float cc2a,pp2a,uu2a;
+float ccb,ppb,uub;
+float cc2b,pp2b,uu2b;
+float ccc,ppc,uuc;
+float cc2c,pp2c,uu2c;
 
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
 // boost::timer::auto_cpu_timer a1;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
+
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 for(r=0;r<100;r++){
-tie(cc,pp,uu,cc2,pp2,uu2);
+tie(ccc,ppc,uuc,cc2c,pp2c,uu2c);
 }
 t2=std::chrono::steady_clock::now();
 time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 Tdlt=time_span.count()*1000.0;
+cout << Tdlt << endl;
+for(r=0;r<100;r++){
+tie(cca,ppa,uua);
+tie(cc2a,pp2a,uu2a);
+}
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+float Tdlt=time_span.count()*1000.0;
+cout << Tdlt << endl;
+for(r=0;r<100;r++){
+tie(ccb,ppb,uub);
+tie(cc2b,pp2b,uu2b);
+}
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return uu;
 }
