@@ -13,10 +13,6 @@ using namespace std;
 int r;
 float cc,pp,uu;
 float cc2,pp2,uu2;
-float cca,ppa,uua;
-float cc2a,pp2a,uu2a;
-float ccb,ppb,uub;
-float cc2b,pp2b,uu2b;
 float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
 
@@ -35,7 +31,7 @@ std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 for(r=0;r<100;r++){
-tie(ccc);tie(ppc);tie(uuc);tie(cc2c);tie(pp2c);tie(uu2c);
+tie(ccc,ppc);tie(uuc,cc2c);tie(pp2c,uu2c);
 }
 t2=std::chrono::steady_clock::now();
 time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
