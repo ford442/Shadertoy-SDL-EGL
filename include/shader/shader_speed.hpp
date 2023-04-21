@@ -66,25 +66,25 @@ std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
 struct timespec rem;
-struct timespec req={0,16600000};
+struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
 
 GLfloat Tdlt;
-GLfloat Ttime;
-GLint iFrame;
+GLdouble Ttime;
+GLint iFrame,iFps;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-int_fast32_t Size;
+int32_t Size;
 GLfloat mX,mY,mm,nn;
-GLfloat iFps;
-GLfloat gF=1.0f,gF0=0.0f,gFm1=-1.0f;
-GLclampf x,y,y1y=F;
+GLfloat gF=F,gF0=F0,gFm1=Fm1;
+GLclampf x,y;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-GLfloat g1g=1.0f;
-double_t S;
+float_t S;
 GLsizei s4=4,i;
-GLuint EBO,VBO,smp_chn[4],smp_chn_res,VCO,ECO,uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps;
+
+GLuint EBO,VBO,VCO,ECO;
+GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
