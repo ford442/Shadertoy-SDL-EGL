@@ -1,6 +1,7 @@
 #include "../../include/vanilla/main.hpp"
 
 using namespace ::boost::tuples;
+using namespace ::boost::timer;
 
 float tuple_float(float num){
 boost::timer::auto_cpu_timer a1;
