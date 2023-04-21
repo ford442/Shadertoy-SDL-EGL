@@ -86,18 +86,22 @@ var pointa=800;
 var sim=new Float32Array($H,pointa,4);
 sim.set(tst,0);
 var reslt=Module.ccall('js_simd',"Number",["Number"],[pointa]);
+console.log("intrins function:);
 console.log(reslt);
 },1000);
 setTimeout(function(){
 var reslt=Module.ccall('js_tuple_float',"Number",["Number"],[1.0]);
+console.log("float function:");
 console.log(reslt);
 },1000);
 setTimeout(function(){
 var reslt=Module.ccall('js_tuple_gl',"Number",["Number"],[1.0]);
+console.log("gl function:");
 console.log(reslt);
 },1000);
 setTimeout(function(){
 var reslt=Module.ccall('js_tuple_avx',"Number",["Number"],[1.0]);
+console.log("avx function:");
 console.log(reslt);
 },1000);
 
