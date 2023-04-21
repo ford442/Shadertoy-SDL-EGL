@@ -26,7 +26,7 @@ tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float,std::chrono::nanoseconds::period>time_span=std::chrono::duration<float,std::chrono::nanoseconds::period>(t2-t1);
+std::chrono::duration<double,std::chrono::seconds::period>time_span=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 Tdlt=time_span.count()*1000000.0;
 cout << Tdlt << endl;
 t1=std::chrono::steady_clock::now();
@@ -34,7 +34,7 @@ for(r=0;r<100;r++){
 tie(ccc,ppc,uuc,cc2c,pp2c,uu2c);
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float,std::chrono::nanoseconds::period>time_span2=std::chrono::duration<float,std::chrono::nanoseconds::period>(t2-t1);
+std::chrono::duration<double,std::chrono::seconds::period>time_span2=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 Tdlt2=time_span2.count()*1000000.0;
 cout << Tdlt2 << endl;
 float nn;
@@ -43,7 +43,7 @@ for(r=0;r<100;r++){
 nn=cc+pp+uu+cc2+pp2+uu2;
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float,std::chrono::nanoseconds::period>time_span3=std::chrono::duration<float,std::chrono::nanoseconds::period>(t2-t1);
+std::chrono::duration<double,std::chrono::seconds::period>time_span3=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 Tdlt3=time_span3.count()*1000000.0;
 cout << Tdlt3 << endl;
 t1=std::chrono::steady_clock::now();
@@ -51,7 +51,7 @@ for(r=0;r<100;r++){
 nn=ccc+ppc+uuc+cc2c+pp2c+uu2c;
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float,std::chrono::nanoseconds::period>time_span4=std::chrono::duration<float,std::chrono::nanoseconds::period>(t2-t1);
+std::chrono::duration<double,std::chrono::seconds::period>time_span4=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 Tdlt4=time_span4.count()*1000000.0;
 cout << Tdlt4 << endl;
 return uu;
