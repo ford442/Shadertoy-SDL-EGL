@@ -2,6 +2,68 @@
 
 using namespace ::boost::tuples;
 
+float tuple_float(float num){
+boost::timer::auto_cpu_timer a1;
+float cc=num,pp=num,uu=num;
+tie(cc,pp,uu);
+return uu;
+}
+
+GLfloat tuple_gl(GLfloat num){
+boost::timer::auto_cpu_timer a2;
+GLfloat gg=num,pp=num,uu=num;
+tie(cc,pp,uu);
+return uu;
+}
+
+v128_t tuple_avx(float num){
+boost::timer::auto_cpu_timer a3;
+v128_t gg=wasm_i32x4_splat(num);
+v128_t pp=wasm_i32x4_splat(num);
+v128_t uu=wasm_i32x4_splat(num);
+tie(cc,pp,uu);
+return uu;
+}
+
+v128_t simd_test(float * a){
+int m=a[0]*1000;
+v128_t l=wasm_i32x4_splat(m);
+v128_t b5;
+v128_t b1=_mm_insert_ps(ii,b5,0);
+v128_t b2=_mm_insert_ps(j,b5,1);
+v128_t b3=_mm_insert_ps(k,b5,2);
+v128_t b4=_mm_insert_ps(l,b5,3);
+v128_t tt=wasm_f32x4_add(b5,b5);
+return tt;
+}
+
+extern "C"{
+
+float js_tuple_float(float nm){ 
+return tuple_float(nm);
+}
+
+GLfloat js_tuple_gl(float nm){
+return tuple_gl(nm);
+}
+  
+float js_tuple_avx(float nm){
+return tuple_avx(nm);
+}
+  
+float js_simd(float * aa){
+v128_t cc=simd_test(aa);
+wasm_v128_store(&out[i], prod);
+float c=wasm_f32x4_extract_lane(cc,0);
+float d=wasm_f32x4_extract_lane(cc,1);
+float ce=wasm_f32x4_extract_lane(cc,2);
+float de=wasm_f32x4_extract_lane(cc,3);
+float re=c+d+ce+de;
+return re;
+}
+
+}
+
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -13,7 +75,30 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall('js_hello');
-},950);
+var tst=[tsta,10.0,10.0,10.0];
+const $H=Module.HEAPF32.buffer;
+const $P=Module.HEAPF32.subarray(0,4);
+$P.set(tst,0);
+console.log('Javascript HEAPF32: ',$H);
+var pointa=800;
+var sim=new Float32Array($H,pointa,4);
+sim.set(tst,0);
+var reslt=Module.ccall('js_simd',"Number",["Number"],[pointa]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+var reslt=Module.ccall('js_tuple_float',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+var reslt=Module.ccall('js_tuple_gl',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+var reslt=Module.ccall('js_tuple_avx',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
@@ -65,7 +150,7 @@ setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},550);
+},500);
 
 });
   
