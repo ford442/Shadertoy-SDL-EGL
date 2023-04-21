@@ -6,6 +6,9 @@ int Th;
 #pragma once
 
 #include "../../include/shader/intrins.hpp"
+#include "boost/tuple/tuple.hpp"
+
+using namespace ::boost::tuples;
 
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
