@@ -139,6 +139,7 @@ tie(vrt,indc);
 tie(retCl,retMu,retMd,retMv);
 tie(retSa,retSb,retSc);
 tie(ms_l,clk_l);
+tie(time_spana,time_spanb);
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
