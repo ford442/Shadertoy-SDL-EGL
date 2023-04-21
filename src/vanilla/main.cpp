@@ -30,6 +30,7 @@ t2=std::chrono::steady_clock::now();
 std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
+t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 tie(ccc,ppc);tie(uuc,cc2c);tie(pp2c,uu2c);
 }
@@ -38,6 +39,7 @@ time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 float nn;
+t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 nn=cc+pp+uu+cc2+pp2+uu2;
 }
@@ -45,6 +47,7 @@ t2=std::chrono::steady_clock::now();
 time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
+t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 nn=ccc+ppc+uuc+cc2c+pp2c+uu2c;
 }
