@@ -279,8 +279,8 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 t1=std::chrono::steady_clock::now();
 t3=std::chrono::steady_clock::now();
-std::chrono::duration<GLfloat, std::chrono::seconds::period> time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
-std::chrono::duration<GLdouble, std::chrono::seconds::period>time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
+time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
+time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
