@@ -10,6 +10,7 @@ std::chrono::steady_clock::time_point t2;
 using namespace ::boost::tuples;
 #include <iostream>
 using namespace std;
+int r;
 
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
