@@ -19,12 +19,11 @@ t1=std::chrono::steady_clock::now();
 // boost::timer::auto_cpu_timer a1;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
-
 tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 for(r=0;r<100;r++){
