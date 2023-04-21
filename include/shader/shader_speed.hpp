@@ -70,12 +70,11 @@ struct timespec req={0,16600000};
 
 #include "../../include/shader/gl.hpp"
 
-float_t Tdlt;
-float_t Ttime;
-int_fast32_t iFrame;
+GLfloat Tdlt;
+GLfloat Ttime;
+GLint iFrame;
 double_t mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-int_fast32_t fram;
 int_fast32_t Size;
 GLfloat mX,mY,mm,nn;
 GLfloat delt,Tm,iFps;
