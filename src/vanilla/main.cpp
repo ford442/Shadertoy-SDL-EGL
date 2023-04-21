@@ -18,7 +18,7 @@ float cc=num,pp=num,uu=num;
 tie(cc,pp,uu);
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count();
+float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;;
 return uu;
 }
@@ -30,7 +30,7 @@ GLfloat gg=num,pp=num,uu=num;
 tie(gg,pp,uu);
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count();
+float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;;
 return uu;
 }
@@ -44,15 +44,20 @@ v128_t xx=wasm_i32x4_splat(num);
 tie(aa,vv,xx);
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count();
-cout << Tdlt << endl;;
+float Tdlt=time_span.count()*1000.0;
+cout << Tdlt << endl;
 return xx;
 }
 
 v128_t simd_test(float * a){
+t1=std::chrono::steady_clock::now();
 int m=a[0]*1000.0;
 v128_t l=wasm_i32x4_splat(m);
 v128_t tt=wasm_f32x4_add(l,l);
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+float Tdlt=time_span.count()*1000.0;
+cout << Tdlt << endl;
 return tt;
 }
 
