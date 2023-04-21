@@ -11,13 +11,13 @@ using namespace ::boost::tuples;
 #include <iostream>
 using namespace std;
 int r;
-float cc=num,pp=num,uu=num;
-float cc2=num,pp2=num,uu2=num;
+float cc,pp,uu;
+float cc2,pp2,uu2;
 
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
 // boost::timer::auto_cpu_timer a1;
-
+cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
 
 tie(cc,pp,uu);
