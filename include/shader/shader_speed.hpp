@@ -77,7 +77,7 @@ double_t mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 int_fast32_t Size;
 GLfloat mX,mY,mm,nn;
-GLfloat delt,Tm,iFps;
+GLfloat iFps;
 GLfloat gF=1.0f,gF0=0.0f,gFm1=-1.0f;
 GLclampf x,y,y1y=F;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
