@@ -13,36 +13,39 @@ using namespace std;
 
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count();
-cout << Tdlt;
 // boost::timer::auto_cpu_timer a1;
 float cc=num,pp=num,uu=num;
 tie(cc,pp,uu);
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+float Tdlt=time_span.count();
+cout << Tdlt;
 return uu;
 }
 
 GLfloat tuple_gl(GLfloat num){
 t1=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count();
-cout << Tdlt;
 // boost::timer::auto_cpu_timer a2;
 GLfloat gg=num,pp=num,uu=num;
 tie(gg,pp,uu);
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+float Tdlt=time_span.count();
+cout << Tdlt;
 return uu;
 }
 
 v128_t tuple_avx(float num){
 t1=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
-float Tdlt=time_span.count();
-cout << Tdlt;
 // boost::timer::auto_cpu_timer a3;
 v128_t aa=wasm_i32x4_splat(num);
 v128_t vv=wasm_i32x4_splat(num);
 v128_t xx=wasm_i32x4_splat(num);
 tie(aa,vv,xx);
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+float Tdlt=time_span.count();
+cout << Tdlt;
 return xx;
 }
 
