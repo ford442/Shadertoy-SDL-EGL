@@ -16,10 +16,9 @@ float cc2,pp2,uu2;
 float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
 float Tdlt;
-
+float nn;
 float tuple_float_short(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
-float nn;
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
@@ -37,6 +36,7 @@ return nn;
 
 float tuple_float_long(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
+float nn;
 t1=std::chrono::steady_clock::now();
 for(r=0;r<100;r++){
 tie(cc,pp,uu,cc2,pp2,uu2);
