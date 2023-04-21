@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main.hpp"
 
-using boost::multiprecision::float128;
+using namespace ::boost::tuples;
 
 EM_JS(void,js_main,(),{
 
