@@ -29,7 +29,7 @@ v128_t simd_test(float * a){
 int m=a[0]*1000;
 v128_t l=wasm_i32x4_splat(m);
 v128_t b5;
-float ii,j,k,l;
+float ii,j,k;
 v128_t b1=_mm_insert_ps(ii,b5,0);
 v128_t b2=_mm_insert_ps(j,b5,1);
 v128_t b3=_mm_insert_ps(k,b5,2);
