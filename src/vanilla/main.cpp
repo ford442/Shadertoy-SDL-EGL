@@ -26,7 +26,7 @@ return xx;
 }
 
 v128_t simd_test(float * a){
-int m=a[0]*1000;
+int m=a[0]*1000.0;
 v128_t l=wasm_i32x4_splat(m);
 v128_t tt=wasm_f32x4_add(l,l);
 return tt;
