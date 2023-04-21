@@ -29,7 +29,6 @@ void str();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-
 #include <float.h>
 #include <math.h>
 #include "boost/tuple/tuple.hpp"
