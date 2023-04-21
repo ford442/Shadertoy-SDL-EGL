@@ -43,6 +43,7 @@ const double_t D0=0.0;
 const float_t F0=0.0f;
 
 #include "../../include/shader/intrins.hpp"
+
 #include <algorithm>
 #include <string.h>
 #include <stdarg.h>
@@ -192,6 +193,10 @@ EGL_NONE,EGL_NONE
 };
 
 #include <emscripten/html5.h>
+
+#include "emscripten/html5_webgpu.h"
+#include "webgpu/webgpu.h"
+#include "webgpu/webgpu_cpp.h"
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
