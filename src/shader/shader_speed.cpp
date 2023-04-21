@@ -126,7 +126,8 @@ tie(hi,wi,S);
 tie(mX,mY,mm,nn);
 tie(s4,i);
 tie(t1,t2,t3);
-tie(EBO,VBO,VCO,ECO);
+  
+// tie(EBO,VBO,VCO,ECO);
 tie(config_size,major,minor);
 tie(display,surface,ctxegl,eglconfig);
 tie(attr,surface,ctx);
