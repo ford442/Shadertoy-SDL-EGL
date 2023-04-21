@@ -125,6 +125,7 @@ tie(Tdlt,mouseY,mouseX);
 tie(hi,wi,S);
 tie(mX,mY,mm,nn);
 tie(s4,i);
+tie(t1,t2,t3);
 // tie(cm_hdr_src[],vrt_bdy_src[],frg_hdr_src[],frg_ftr_src[]);
   //  tie(vrt[],indc[]);
   //  tie(src[],Fnm);
