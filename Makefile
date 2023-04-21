@@ -29,7 +29,7 @@ b3_shader_speed:
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o shader_speed.o -o s3022s3.js -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 \
+	 emcc main.o shader_speed.o -o s3022s.js -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 \
 	 -sUSE_GLFW=0 -static -flto=thin -mllvm -ffast-math -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector \
 	 -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O3 -std=gnu++2b -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt \
