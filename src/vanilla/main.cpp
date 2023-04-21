@@ -31,7 +31,7 @@ tie(cc,pp,uu);
 tie(cc2,pp2,uu2);
 }
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float,std::chrono::seconds::period>time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+std::chrono::duration<float,std::chrono::milliseconds::period>time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t2-t1);
 Tdlt=time_span.count()*1000000.0;
 cout << Tdlt << endl;
 t3=std::chrono::steady_clock::now();
@@ -39,7 +39,7 @@ for(r=0;r<100;r++){
 tie(ccc,ppc);tie(uuc,cc2c);tie(pp2c,uu2c);
 }
 t4=std::chrono::steady_clock::now();
-time_span=std::chrono::duration<float,std::chrono::seconds::period>(t4-t3);
+time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t4-t3);
 Tdlt2=time_span.count()*1000000.0;
 cout << Tdlt2 << endl;
 float nn;
@@ -48,7 +48,7 @@ for(r=0;r<100;r++){
 nn=cc+pp+uu+cc2+pp2+uu2;
 }
 t6=std::chrono::steady_clock::now();
-time_span=std::chrono::duration<float,std::chrono::seconds::period>(t5-t6);
+time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t5-t6);
 Tdlt3=time_span.count()*1000000.0;
 cout << Tdlt3 << endl;
 t1=std::chrono::steady_clock::now();
@@ -56,7 +56,7 @@ for(r=0;r<100;r++){
 nn=ccc+ppc+uuc+cc2c+pp2c+uu2c;
 }
 t2=std::chrono::steady_clock::now();
-time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t2-t1);
 Tdlt4=time_span.count()*1000000.0;
 cout << Tdlt4 << endl;
 return uu;
@@ -68,7 +68,7 @@ t1=std::chrono::steady_clock::now();
 GLfloat gg=num,pp=num,uu=num;
 tie(gg,pp,uu);
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+std::chrono::duration<float, std::chrono::milliseconds::period> time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return uu;
@@ -82,7 +82,7 @@ v128_t vv=wasm_i32x4_splat(num);
 v128_t xx=wasm_i32x4_splat(num);
 tie(aa,vv,xx);
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+std::chrono::duration<float, std::chrono::milliseconds::period> time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return xx;
@@ -94,7 +94,7 @@ int m=a[0]*1000.0;
 v128_t l=wasm_i32x4_splat(m);
 v128_t tt=wasm_f32x4_add(l,l);
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
+std::chrono::duration<float, std::chrono::milliseconds::period> time_span=std::chrono::duration<float,std::chrono::milliseconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return tt;
