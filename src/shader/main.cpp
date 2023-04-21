@@ -26,11 +26,11 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-// setTimeout(function(){
+setTimeout(function(){
 document.getElementById('stat').innerHTML='Sending Start';
 document.getElementById('stat').style.backgroundColor='green';
 Module.ccall('str');
-// },150);
+},100);
 document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
@@ -153,13 +153,7 @@ c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
 
-void simd(){
-tie(th,RD);
-tie(Rg);
 }
-
-}
-
 
 int main(void){
 "use strict";
@@ -168,7 +162,6 @@ FS.mkdir('/shader');
 });
 tie(Th,rD);
 tie(Dr);
-simd();
 jss();
 return 0;
 }
