@@ -52,7 +52,7 @@ void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 static inline void Rend(){
 t3=t2;
 t2=std::chrono::steady_clock::now();
-std::chrono::duration<float, std::chrono::seconds::period> time_spanb=std::chrono::duration<float,std::chrono::seconds::period>(t2-t3);
+std::chrono::duration<float_t, std::chrono::seconds::period> time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
 Tdlt=time_spanb.count();
 std::chrono::duration<double, std::chrono::seconds::period>time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
 Ttime=time_spana.count();
@@ -278,6 +278,10 @@ glScissor((GLint)0,(GLint)0,Size,Size);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 t1=std::chrono::steady_clock::now();
+t3=std::chrono::steady_clock::now();
+std::chrono::duration<float_t, std::chrono::seconds::period> time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
+std::chrono::duration<double, std::chrono::seconds::period>time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
+
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
