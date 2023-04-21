@@ -14,12 +14,23 @@ using namespace std;
 float tuple_float(float num){
 t1=std::chrono::steady_clock::now();
 // boost::timer::auto_cpu_timer a1;
+
+for(r=0;r<100;r++){
 float cc=num,pp=num,uu=num;
+float cc2=num,pp2=num,uu2=num;
 tie(cc,pp,uu);
+tie(cc2,pp2,uu2);
+}
+
+for(r=0;r<100;r++){
+float cc=num,pp=num,uu=num;float cc2=num,pp2=num,uu2=num;
+tie(cc,pp,uu,cc2,pp2,uu2);
+}
+
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
-cout << Tdlt << endl;;
+cout << Tdlt << endl;
 return uu;
 }
 
@@ -31,7 +42,7 @@ tie(gg,pp,uu);
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<float, std::chrono::seconds::period> time_span=std::chrono::duration<float,std::chrono::seconds::period>(t2-t1);
 float Tdlt=time_span.count()*1000.0;
-cout << Tdlt << endl;;
+cout << Tdlt << endl;
 return uu;
 }
 
