@@ -18,9 +18,9 @@ return uu;
 
 v128_t tuple_avx(float num){
 boost::timer::auto_cpu_timer a3;
-v128_t gg=wasm_i32x4_splat(num);
-v128_t pp=wasm_i32x4_splat(num);
-v128_t uu=wasm_i32x4_splat(num);
+v128_t aa=wasm_i32x4_splat(num);
+v128_t vv=wasm_i32x4_splat(num);
+v128_t xx=wasm_i32x4_splat(num);
 tie(aa,vv,xx);
 return xx;
 }
