@@ -49,7 +49,7 @@ return tuple_gl(nm);
   
 float js_tuple_avx(float nm){
 v128_t ans=tuple_avx(nm);
-float retrn=wasm_f32x4_extract_lane(cc,0);
+float retrn=wasm_f32x4_extract_lane(nm,0);
 return retrn;
 }
   
