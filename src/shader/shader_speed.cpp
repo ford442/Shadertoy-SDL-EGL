@@ -118,9 +118,16 @@ tie(D,Dm1,D0);
 tie(gD,gDm1,gD0);
 tie(iFrame,iFps);
 tie(mouseY,mouseX);
-tie(gu0,gu1,gu2,gu3,gu4,gu5,gu6,gu7,gu8,gu9);
+tie(gu0,gu1,gu2,gu3);
+tie(gu4,gu5,gu6,gu7);
+tie(gu8,gu9);
+tie(Tdlt,mouseY,mouseX);
+tie(hi,wi,S);
+tie(mX,mY,mm,nn);
+tie(s4,i);
+// tie(cm_hdr_src[],vrt_bdy_src[],frg_hdr_src[],frg_ftr_src[]);
   //  tie(vrt[],indc[]);
-    
+  //  tie(src[],Fnm);
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
