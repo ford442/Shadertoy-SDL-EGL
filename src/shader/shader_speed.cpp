@@ -112,6 +112,8 @@ return shader;
 GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 
 static inline void strt(){
+  tie(F,Fm1,F0);
+
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
@@ -171,6 +173,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_create_context_robustness");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_pq");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
