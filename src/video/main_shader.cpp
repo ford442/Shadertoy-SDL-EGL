@@ -18,7 +18,6 @@ bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
 
 var $shds=[];
-var $vids=[];
 
 function normalResStart(){
 bezl.width=window.innerWidth;
@@ -79,8 +78,8 @@ if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-   normalResStart();
-},450);
+normalResStart();
+},400);
 }};
 ff.send(null);
 }
