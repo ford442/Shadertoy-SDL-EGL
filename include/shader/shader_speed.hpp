@@ -59,9 +59,9 @@ const float_t F0=0.0f;
 
 using namespace std::chrono_literals;
 
-std::chrono::steady_clock::time_point t1;
-std::chrono::steady_clock::time_point t2;
-std::chrono::steady_clock::time_point t3;
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 int32_t tmm=16666666;
 struct timespec rem;
 struct timespec req={0,tmm};
