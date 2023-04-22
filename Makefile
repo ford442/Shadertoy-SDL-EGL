@@ -18,7 +18,7 @@ b3_shader_llvm:
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_speed:
-	 em++ src/shader/shader_speed.cpp -c `-ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	 em++ src/shader/shader_speed.cpp -c -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	 -ffp-contract=fast -fmerge-all-constants -mmultivalue \
 	 -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
