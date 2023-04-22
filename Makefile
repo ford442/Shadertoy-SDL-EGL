@@ -20,7 +20,7 @@ b3_shader_llvm:
 b3_shader_speed:
 	 em++ src/shader/shader_speed.cpp -c -ffast-math -funsafe-math-optimizations -fno-math-errno -mbulk-memory -fno-stack-protector \
 	 -ffp-contract=fast -fmerge-all-constants -mmultivalue \
-	 -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers \
+	 -std=gnu++11/2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx -flto=thin -fstrict-vtable-pointers \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
