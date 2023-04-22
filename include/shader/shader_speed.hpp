@@ -69,13 +69,18 @@ struct timespec rem;
 struct timespec req={0,16666666};
 
 #include "../../include/shader/gl.hpp"
+GLfloat xx;
+GLfloat yy;
+GLfloat Tm;
+GLint fram;
+GLfloat delt;
 
 GLdouble wi,hi;
 GLfloat Tdlt;
 std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
 GLdouble Ttime;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-GLint iFrame,iFps;
+GLint iFrame,iFps,fram;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 // int32_t Size;
