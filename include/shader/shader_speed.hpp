@@ -50,8 +50,8 @@ const float_t F0=0.0f;
 #include <stdlib.h>
 #include <limits.h>
 #include <iostream>
-#include <locale> // utf-16
-#include <uchar.h> // utf-16
+// #include <locale> // utf-16
+// #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 
 #include <time.h>
@@ -190,18 +190,23 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,(EGLint)16,
-EGL_GREEN_SIZE,(EGLint)16,
-EGL_BLUE_SIZE,(EGLint)16,
-EGL_ALPHA_SIZE,(EGLint)16,
+EGL_RED_SIZE,(EGLint)32,
+EGL_GREEN_SIZE,(EGLint)32,
+EGL_BLUE_SIZE,(EGLint)32,
+EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)16,
+EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)32,
+EGL_SAMPLE_BUFFERS,(EGLint)1,
+EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
+EGL_COVERAGE_SAMPLES_NV,(EGLint)1,
+EGL_SAMPLES,(EGLint)1,
+EGL_MIPMAP_LEVEL,(EGLint)1,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE,EGL_NONE
 };
 
 #include <emscripten/html5.h>
-
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
