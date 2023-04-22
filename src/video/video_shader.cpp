@@ -409,8 +409,10 @@ this.color(rr,gg,bb,1.0);
 */
 this.color(p[0],p[1],p[2],1.0);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+var inh=window.innerHeight;
+var $S=parseInt(inh,10);
+var w$=parseInt(inh,10);
+var h$=parseInt(inh,10);
 la=h$*h$*4;
 for(i=0;i<65;i++){
 var j=i+1;
@@ -423,9 +425,10 @@ j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-$S=parseInt(window.innerHeight,10);
+var inh=window.innerHeight;
+var $S=parseInt(inh,10);
+var w$=parseInt(inh,10);
+var h$=parseInt(inh,10);
 la=h$*h$*4;
 for(var i=0;i<65;i++){
 j=i+1;
