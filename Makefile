@@ -87,17 +87,17 @@ b3_googleStreetView_dev:
 	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_video_shader_llvm:
-	 em++ src/video/main_shader.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
+	 em++ src/video/main_shader.cpp -c -std=gnu++2b -stdlib=libc++ -flto=thin -fno-math-errno -O3 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
-	 em++ src/video/video_shader.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
+	 em++ src/video/video_shader.cpp -c -std=gnu++2b -stdlib=libc++ -flto=thin -fno-math-errno -O3 \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main_shader.o video_shader.o -o sh001.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
+	 emcc main_shader.o video_shader.o -o sh001.js -mllvm -flto=thin -std=gnu++2b -stdlib=libc++ -fno-math-errno -O3 \
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx -mavxifma \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
