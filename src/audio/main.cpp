@@ -7,10 +7,11 @@ Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
-extern"C"{
- 
-int r4nd(int tH){
 v128_t(* RnD)(int){&rNd};
+
+extern"C"{
+
+int r4nd(int tH){
 Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
@@ -95,7 +96,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1000);
+},1500);
 });
 
 const tem=document.getElementById('tim');
@@ -123,7 +124,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1000);
+},1500);
 };
 }
 
