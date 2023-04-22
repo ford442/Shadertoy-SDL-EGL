@@ -8,8 +8,8 @@ void pl();
   
 }
 
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD 0
 // #pragma STDC CX_LIMITED_RANGE OFF
 #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
@@ -22,6 +22,10 @@ void pl();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+#include "boost/tuple/tuple.hpp"
+
+using namespace ::boost::tuples;
+
 #include <cstdint>
 #include <SDL2/SDL.h>
 
@@ -29,12 +33,12 @@ SDL_AudioDeviceID dev;
 
 struct{
 Uint8 * snd;
-int_fast32_t pos;
+int32_t pos;
 Uint32 slen;
 SDL_AudioSpec request;
 }wave;
 
-void SDLCALL bfr(void *,Uint8 *,int_fast32_t);
+void SDLCALL bfr(void *,Uint8 *,int32_t);
 
 #include <iostream>
 #include <algorithm>
