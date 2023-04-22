@@ -373,15 +373,20 @@ b3_audio_test:
 b3_audio_llvm:
 	em++ src/audio/main.cpp -c -std=gnu++2b -stdlib=libc++ -flto=thin -ffast-math -fno-math-errno -O3 -mbulk-memory -fno-stack-protector \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
-	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext 
-	em++ src/audio/audio.cpp -c -std=c++20 -stdlib=libc++ -flto=thin -sUSE_SDL=2 -fno-math-errno -O3 -mcpu=bleeding-edge \
-	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
-	-fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=fast -fmerge-all-constants -mmultivalue
-	emcc main.o audio.o -o a3020.js -mllvm -flto=thin -std=c++20 -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -static-pie \
-	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1  -mcpu=bleeding-edge \
-	-fuse-ld=lld -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
+	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
+	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
+	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
+	em++ src/audio/audio.cpp -c -std=gnu++2b -stdlib=libc++ -flto=thin -ffast-math -sUSE_SDL=2 -fno-math-errno -O3 -mbulk-memory -fno-stack-protector \
+	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
+	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
+	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
+	emcc main.o audio.o -o a3020.js -mllvm -flto=thin -std=gnu++2b -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O3 \
+	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
+	-fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 -sASSERTIONS=2 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
-	-msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 \
+        -wasm-enable-eh -exception-model=wasm -sPRECISE_I64_MATH=2 \
+        -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 \
 	-msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
