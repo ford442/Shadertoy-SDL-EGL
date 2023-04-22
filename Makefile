@@ -371,14 +371,14 @@ b3_audio_test:
 	--pre-js rSlider.js --pre-js slideOut.js
 	
 b3_audio_llvm:
-	em++ src/audio/main.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie \
+	em++ src/audio/main.cpp -c -std=gnu++2b -stdlib=libc++ -flto=thin -ffast-math -fno-math-errno -O3 -mbulk-memory -fno-stack-protector \
+	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -mcpu=bleeding-edge 
+	em++ src/audio/audio.cpp -c -std=c++20 -stdlib=libc++ -flto=thin -sUSE_SDL=2 -fno-math-errno -O3 -mcpu=bleeding-edge \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off
-	em++ src/audio/audio.cpp -c -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -fno-math-errno -O0 -fpie \
-	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=off
-	emcc main.o audio.o -o a3020.js -mllvm -flto -std=c++20 -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -static-pie \
-	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 \
+	-mcpu=bleeding-edge -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections -ffp-contract=fast -fmerge-all-constants -mmultivalue
+	emcc main.o audio.o -o a3020.js -mllvm -flto=thin -std=c++20 -stdlib=libc++ -mtune=tigerlake -march=corei7-avx -fno-math-errno -O0 -static-pie \
+	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1  -mcpu=bleeding-edge \
 	-fuse-ld=lld -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
 	-msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 \
