@@ -1,8 +1,10 @@
 #include "../../include/audio/audio.hpp"
 
-void SDLCALL bfr(void * unused,Uint8 * stm,int_fast32_t len){
+void SDLCALL bfr(void * unused,Uint8 * stm,int32_t len){
 Uint8 * wptr;
-int_fast32_t lft;
+int32_t lft;
+tie(len,lft);
+tie(stm,wptr);
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while(lft<=len){
