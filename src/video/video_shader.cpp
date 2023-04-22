@@ -472,7 +472,7 @@ return;
 }
  
 void b3(){
-egl();
+// egl();
 vid();
 return;
 }
