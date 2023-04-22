@@ -71,7 +71,6 @@ struct timespec req={0,tmm};
 GLfloat xx;
 GLfloat yy;
 GLfloat Tm;
-GLint fram;
 GLfloat delt;
 GLdouble wi,hi;
 GLfloat Tdlt;
