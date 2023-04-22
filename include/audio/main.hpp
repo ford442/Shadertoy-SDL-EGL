@@ -27,6 +27,10 @@ int Th,rD;
 #define _POSIX_REGEXP	1
 #include <unistd.h>
 
+#include "boost/tuple/tuple.hpp"
+
+using namespace ::boost::tuples;
+
 extern "C"{
   
 v128_t Rg;
