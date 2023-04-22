@@ -33,7 +33,7 @@ setTimeout(function(){
 Module.ccall('str');
 },100);
 Module.ccall('b3');
-},700);
+},1700);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
