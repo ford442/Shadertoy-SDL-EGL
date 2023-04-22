@@ -372,13 +372,10 @@ const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0)
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
 const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
-g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Silver',glslSilver,{returnType:'Number'});
 g.addNativeFunction('GoldR',glslGoldR,{returnType:'Number'});
 g.addNativeFunction('GoldG',glslGoldG,{returnType:'Number'});
 g.addNativeFunction('GoldB',glslGoldB,{returnType:'Number'});
-g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
