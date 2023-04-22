@@ -13,6 +13,8 @@ void str();
 #define TRUE 1
 #endif
 
+#include "../../include/shader/intrins.hpp"
+
 #pragma STDC FP_CONTRACT ON
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
@@ -41,7 +43,6 @@ const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 
-#include "../../include/shader/intrins.hpp"
 
 #include <algorithm>
 #include <string.h>
