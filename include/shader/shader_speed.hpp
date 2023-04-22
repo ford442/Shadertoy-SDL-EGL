@@ -37,12 +37,10 @@ void str();
 
 using namespace ::boost::tuples;
 
-// double_t wi,hi;
 const float_t F=1.0f,Fm1=-1.0f;
 const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
-
 
 #include <algorithm>
 #include <string.h>
@@ -54,7 +52,6 @@ const float_t F0=0.0f;
 #include <iostream>
 #include <locale> // utf-16
 #include <uchar.h> // utf-16
-
 // #include <stdfloat>  //  c++23
 
 #include <time.h>
@@ -65,16 +62,17 @@ using namespace std::chrono_literals;
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 std::chrono::steady_clock::time_point t3;
+int32_t tmm=16666666;
 struct timespec rem;
-struct timespec req={0,16666666};
+struct timespec req={0,tmm};
 
 #include "../../include/shader/gl.hpp"
+
 GLfloat xx;
 GLfloat yy;
 GLfloat Tm;
 GLint fram;
 GLfloat delt;
-
 GLdouble wi,hi;
 GLfloat Tdlt;
 std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
@@ -89,10 +87,8 @@ GLfloat mX,mY,mm,nn;
 GLfloat gF=F,gF0=F0,gFm1=Fm1;
 GLclampf x,y;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-// float_t S;
 GLfloat S;
 GLsizei s4=4,i;
-
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
 typedef struct{GLfloat XYZW[4];}Vertex;
