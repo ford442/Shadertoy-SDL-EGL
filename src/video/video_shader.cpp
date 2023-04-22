@@ -378,7 +378,6 @@ g.addNativeFunction('GoldG',glslGoldG,{returnType:'Number'});
 g.addNativeFunction('GoldB',glslGoldB,{returnType:'Number'});
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
-var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],1.0];
 }).setTactic("precision").setPrecision('single').setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
