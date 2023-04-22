@@ -74,6 +74,7 @@ GLfloat Tm;
 GLfloat delt;
 GLdouble wi,hi;
 GLfloat Tdlt;
+GLsizei ele=36;
 std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
 GLdouble Ttime;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
