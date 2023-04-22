@@ -333,7 +333,6 @@ var $S=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
 var la=h$*h$*4;
-var pointa=77*la;
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
 colorType:'float32',
