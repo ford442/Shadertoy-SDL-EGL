@@ -554,7 +554,7 @@ var nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 $S=parseInt(window.innerHeight,10);
 la=h$*h$*4;
 sz=(h$*w$)/8;
-pointa=77*la;
+var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
