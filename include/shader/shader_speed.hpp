@@ -104,16 +104,15 @@ const GLchar cm_hdr_src[]=
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
 "#pragma optionNV(fastprecision on)\n"
-"#pragma STDGL(unroll none)\n"
-"#pragma optionNV(unroll none)\n"
+// "#pragma STDGL(unroll none)\n"
+// "#pragma optionNV(unroll none)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline none)\n"
-"#pragma optionNV(inline none)\n"
+// "#pragma STDGL(inline none)\n"
+// "#pragma optionNV(inline none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump float;\n"
-"precision mediump int;\n";
+"precision mediump float;\n";
 
 const GLchar vrt_bdy_src[]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
@@ -125,9 +124,9 @@ const GLchar frg_hdr_src[]=
 "precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
 "precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
 "precision lowp sampler2DArrayShadow;"
-"uniform highp float iTime;uniform lowp float iTimeDelta;uniform lowp float iFrameRate;uniform lowp vec4 iDate;uniform lowp float iChannelTime[4];"
+"uniform float iTime;uniform lowp float iTimeDelta;uniform float iFrameRate;uniform lowp vec4 iDate;uniform lowp float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform lowp vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"uniform lowp vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform lowp float iSampleRate;"
 "out highp vec4 fragColor;\n";
 
 const GLchar frg_ftr_src[]=
