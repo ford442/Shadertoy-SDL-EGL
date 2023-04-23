@@ -1,6 +1,6 @@
 #include "../../include/video/video_google_street.hpp"
 
-void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
 avrg=(((avr+(y1y-rlc))/2.0)+alc);
 drk=y1y-(avr-0.5);
 brt=((y1y-rlc)-(alc-0.5));
