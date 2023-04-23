@@ -207,7 +207,7 @@ glPolygonOffset(0.0f,0.0f);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MAX);
 glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glClearColor(gF,gF,gF,gF);
 glGenBuffers((GLsizei)1,&VBO);
@@ -453,7 +453,7 @@ gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.blendColor(1.0,1.0,1.0,1.0);
 gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gl.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
+gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
