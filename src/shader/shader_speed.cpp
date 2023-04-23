@@ -51,6 +51,10 @@ return;
 void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
+iFrame++;
+glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 t3=t2;
 t2=std::chrono::high_resolution_clock::now();
@@ -61,10 +65,6 @@ Tdlt=time_spanb.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
 un(mouseX,mouseY,Ttime,iFrame,Tdlt);
-iFrame++;
-glClear(GL_COLOR_BUFFER_BIT);
-glClear(GL_DEPTH_BUFFER_BIT);
-glClear(GL_STENCIL_BUFFER_BIT);
 // glFlush();
 // glFinish();
 // nanosleep(&req,&rem);
