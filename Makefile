@@ -25,14 +25,14 @@ b3_shader_speed:
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fstrict-vtable-pointers -mbulk-memory \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -Rpass=loop-vectorize \
-	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
+	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Main
 	 em++ src/shader/main.cpp -c \
 	 -ffast-math -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fmerge-all-constants -fno-stack-protector \
 	 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=gnu++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
-	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
+	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Link
 	 emcc main.o shader_speed.o -o s3023s.js \
 	 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
@@ -42,7 +42,7 @@ b3_shader_speed:
 	 -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc -lc++ -lc++abi \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mpclmul -maes -msha -mfma -mbmi2 -mpopcnt \
 	 -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -mavxvnni -fblocks -fstrict-vtable-pointers -funsafe-math-optimizations \
-	 -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb -sUSE_GLFW=0 \
+	 -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=16384mb -sUSE_GLFW=0 \
 	 -sGLOBAL_BASE=16384 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=32MB -sUSE_WEBGPU=1 --closureFriendly \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 \
