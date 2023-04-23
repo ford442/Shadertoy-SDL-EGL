@@ -11,7 +11,7 @@ return;
 
 extern "C" {
 
-void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+void clr(GLfloat cllr,GLfloat alp,GLfloat avr){
 clrclr(cllr,alp,avr);
 return;
 }
