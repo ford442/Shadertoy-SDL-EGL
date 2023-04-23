@@ -270,11 +270,11 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
-void clrclr(GLclampf,GLclampf,GLclampf);
+void clrclr(GLfloat,GLfloat,GLfloat);
 
 extern "C"{
 
-void clr(GLclampf,GLclampf,GLclampf);
+void clr(GLfloat,GLfloat,GLfloat);
 
 void str();
 
