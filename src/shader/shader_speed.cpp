@@ -51,19 +51,12 @@ return;
 void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-
 glClear(GL_COLOR_BUFFER_BIT);
-  glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-
 glClear(GL_DEPTH_BUFFER_BIT);
-  glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-
 glClear(GL_STENCIL_BUFFER_BIT);
-  glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-
-  iFrame++;
-  t3=t2;
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+iFrame++;
+t3=t2;
 t2=std::chrono::high_resolution_clock::now();
 time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(t2-t1);
 time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
@@ -71,10 +64,11 @@ Ttime=time_spana.count();
 Tdlt=time_spanb.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-  un(mouseX,mouseY,Ttime,iFrame,Tdlt);
-
+un(mouseX,mouseY,Ttime,iFrame,Tdlt);
+glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-
 // glFlush();
 // glFinish();
 // nanosleep(&req,&rem);
