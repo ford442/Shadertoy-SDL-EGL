@@ -188,6 +188,8 @@ emscripten_webgl_enable_extension(ctx,"ARB_shader_atomic_counter_ops");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample");
+emscripten_webgl_enable_extension(ctx,"NV_depth_buffer_float");
+  
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
 emscripten_webgl_enable_extension(ctx,"OES_sample_variables");
