@@ -53,8 +53,8 @@ void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 static inline void Rend(){
 t3=t2;
 t2=std::chrono::steady_clock::now();
-time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
-time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(t2-t3);
+time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(t2-t1);
+time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
 Ttime=time_spana.count();
 Tdlt=time_spanb.count();
 mouseX=x/S;
@@ -232,11 +232,11 @@ glEnable(GL_CULL_FACE);
 glClearColor(gF0,gF0,gF0,gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 // nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 // nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
@@ -282,13 +282,12 @@ glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 t1=std::chrono::steady_clock::now();
 t3=std::chrono::steady_clock::now();
 time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
-time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
-
+time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(t2-t1);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
