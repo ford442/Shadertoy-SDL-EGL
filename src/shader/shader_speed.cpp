@@ -293,6 +293,13 @@ t1=std::chrono::high_resolution_clock::now();
 t3=std::chrono::high_resolution_clock::now();
 time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
 time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(t2-t1);
+nanosleep(&req,&rem);
+glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
+glClear(GL_STENCIL_BUFFER_BIT);
+glFlush();
+glFinish();
+nanosleep(&req,&rem);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
