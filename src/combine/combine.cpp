@@ -58,9 +58,9 @@ mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame,TtimeDelta);
 iFrame++;
-glClear(GL_COLOR_BUFFER_BIT);
-glClear(GL_DEPTH_BUFFER_BIT);
-glClear(GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT);
+// glClear(GL_DEPTH_BUFFER_BIT);
+// glClear(GL_STENCIL_BUFFER_BIT);
 // glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFlush();
 // nanosleep(&req,&rem);
@@ -512,6 +512,8 @@ minorVersion:0
 });
 
 gljs.getExtension('OES_texture_float_linear');
+gljs.getExtension('OES_texture_half_float_linear');
+gljs.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha   -- WEBGL2 --
 gljs.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 gljs.getExtension('EXT_color_buffer_half_float');
 gljs.getExtension("EXT_float_blend");
@@ -552,11 +554,11 @@ gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 // gljs.blendColor(1.0,1.0,1.0,1.0);
-gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
 // gljs.blendEquation(gl.MAX);
 // gljs.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
@@ -686,14 +688,14 @@ nblank$=Math.max((((s$-w$)*1.0)/8.0),0.0);
 s$=parseInt(window.innerHeight,10);
 la=Math.ceil(h$*w$*8);
 pointa=Math.ceil(77*la);
-agav=new Float64Array($H64,pointa,304);  // has to var?
+var agav=new Float64Array($H64,pointa,304);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("point"+j+"="+i+"*la;$"+j+"=new Float64Array($H64,point"+j+",la);");
 };
 pointb=Math.ceil(66*la);
-$B=new Float64Array($H64,pointb,sz);  // has to var?
+var $B=new Float64Array($H64,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
