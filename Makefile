@@ -496,7 +496,7 @@ b3_video_youtube:
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano","_str","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
-b3_audio:
+b3_audio_old:
 	em++ src/audio/main.cpp -c -std=c++11 -fno-math-errno -O0
 	em++ src/audio/audio.cpp -c -std=c++2b -sUSE_SDL=2 -O0
 	emcc main.o audio.o -o a3020.js -std=c++2b -O0 \
