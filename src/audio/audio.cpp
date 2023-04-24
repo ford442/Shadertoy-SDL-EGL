@@ -8,11 +8,6 @@ tie(stm,wptr);
 wptr=wave.snd+wave.pos;
 lft=wave.slen-wave.pos;
 while(lft<=len){
-if(lft<2){
-EM_ASM({
-console.log('Song end.');
-});
-}
 SDL_UnlockAudioDevice(dev);
 SDL_memcpy(stm,wptr,lft);
 stm+=lft;
@@ -28,6 +23,7 @@ return;
 }
 
 void plt(){
+tie(wave,dev);
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32;
