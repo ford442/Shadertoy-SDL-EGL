@@ -20,7 +20,7 @@ b3_shader_llvm:
 b3_shader_speed:
 	 ###         Shader
 	 em++ src/shader/shader_speed.cpp -c \
-	 -lrt -std=gnu++20 -stdlib=libc++ -flto=thin -ffast-math -funsafe-math-optimizations -fno-math-errno \
+	 -std=gnu++20 -stdlib=libc++ -flto=thin -ffast-math -funsafe-math-optimizations -fno-math-errno \
 	 -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fstrict-vtable-pointers -mbulk-memory \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize \
@@ -35,7 +35,7 @@ b3_shader_speed:
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Link
 	 emcc main.o shader_speed.o -o s3023s.js \
-	 -lrt -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
+	 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -flto=thin -mllvm -ffast-math -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector \
 	 -fmerge-all-constants -fwasm-exceptions -std=gnu++20 -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt \
