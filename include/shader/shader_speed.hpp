@@ -60,7 +60,7 @@ const float_t F0=0.0f;
 #include <boost/chrono/system_clocks.hpp>
 #include <boost/chrono/typeof/boost/chrono/chrono.hpp>
 
-// using namespace std::chrono_literals;
+using namespace ::boost::chrono_literals;
 
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::high_resolution_clock::time_point t2;
