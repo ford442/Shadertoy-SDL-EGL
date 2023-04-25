@@ -54,19 +54,13 @@ const float_t F0=0.0f;
 // #include <stdfloat>  //  c++23
 
 #include <time.h>
-// #include <chrono>
+#include <chrono>
 
-#include <boost/chrono/duration.hpp>
-#include <boost/chrono/time_point.hpp>
-#include <boost/chrono/system_clocks.hpp>
-#include <boost/chrono/typeof/boost/chrono/chrono.hpp>
+using namespace std::chrono_literals;
 
-using namespace boost::chrono_literals;
-
-boost::chrono::steady_clock::time_point t1;
-boost::chrono::steady_clock::time_point t2;
-boost::chrono::steady_clock::time_point t3;
-
+std::chrono::steady_clock::time_point t1;
+std::chrono::steady_clock::time_point t2;
+std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,16666666};
 
