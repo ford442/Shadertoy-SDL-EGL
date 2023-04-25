@@ -62,9 +62,10 @@ const float_t F0=0.0f;
 
 using namespace ::boost::chrono;
 
-boost::chrono::high_resolution_clock::time_point t1;
-boost::chrono::high_resolution_clock::time_point t2;
-boost::chrono::high_resolution_clock::time_point t3;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
+high_resolution_clock::time_point t3;
+
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
