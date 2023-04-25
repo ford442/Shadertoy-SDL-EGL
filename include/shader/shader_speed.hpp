@@ -55,13 +55,16 @@ const float_t F0=0.0f;
 // #include <stdfloat>  //  c++23
 
 #include <time.h>
-#include <chrono>
+#include <boost/chrono/duration.hpp>
+#include <boost/chrono/time_point.hpp>
+#include <boost/chrono/system_clocks.hpp>
+#include <boost/chrono/typeof/boost/chrono/chrono.hpp>
 
-using namespace std::chrono_literals;
+// using namespace std::chrono_literals;
 
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+boost::chrono::high_resolution_clock::time_point t1;
+boost::chrono::high_resolution_clock::time_point t2;
+boost::chrono::high_resolution_clock::time_point t3;
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -75,9 +78,9 @@ GLfloat delt;
 GLdouble wi,hi;
 GLfloat Tdlt;
 int32_t ele=36;
-std::chrono::duration<float_t,std::chrono::seconds::period>time_spana;
+boost::chrono::duration<float_t,boost::chrono::seconds::period>time_spana;
 double_t Ttime;
-std::chrono::duration<double_t,std::chrono::seconds::period>time_spanb;
+boost::chrono::duration<double_t,boost::chrono::seconds::period>time_spanb;
 GLint iFrame,iFps,fram;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
