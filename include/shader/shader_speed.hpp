@@ -54,6 +54,7 @@ const float_t F0=0.0f;
 // #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 
+#include <boost/thread.hpp>
 #include <time.h>
 #include <boost/chrono.hpp>
 
