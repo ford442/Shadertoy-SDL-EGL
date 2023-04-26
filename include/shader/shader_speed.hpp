@@ -56,6 +56,7 @@ const float_t F0=0.0f;
 
 #include <time.h>
 #include <chrono>
+#include <boost/fiber/all.hpp>
 
 using namespace std::chrono;
 
