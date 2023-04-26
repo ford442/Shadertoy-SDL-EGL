@@ -217,7 +217,6 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear")
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-  
 
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
@@ -296,8 +295,8 @@ glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-t1=high_resolution_clock::now();
-t3=high_resolution_clock::now();
+t1=std::chrono::high_resolution_clock::now();
+t3=std::chrono::high_resolution_clock::now();
 time_spanb=duration<float_t,seconds::period>(t2-t3);
 time_spana=duration<double_t,seconds::period>(t2-t1);
 nanosleep(&req,&rem);
