@@ -59,9 +59,9 @@ const float_t F0=0.0f;
 
 using namespace ::boost::chrono;
 
-high_resolution_clock::time_point t1;
-high_resolution_clock::time_point t2;
-high_resolution_clock::time_point t3;
+process_real_cpu_clock::time_point t1;
+process_real_cpu_clock::time_point t2;
+process_real_cpu_clock::time_point t3;
 
 int32_t tmm=166666660;
 struct timespec rem;
