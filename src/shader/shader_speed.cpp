@@ -180,6 +180,7 @@ S=static_cast<GLfloat>(wi);
 // S=Size;
 mX=0.5*S;
 mY=0.5*S;
+emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx,"EXT_polygon_offset_clamp");
