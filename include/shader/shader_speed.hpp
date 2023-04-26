@@ -33,7 +33,6 @@ void str();
 
 #include <float.h>
 #include <math.h>
-#include <chrono>
 #include "boost/tuple/tuple.hpp"
 
 using namespace ::boost::tuples;
@@ -55,12 +54,13 @@ const float_t F0=0.0f;
 // #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 
-#include <time.h>
-#include <boost/chrono/chrono.hpp>
+#include <time.h>#include <chrono>
 
-boost::chrono::high_resolution_clock::time_point t1;
-boost::chrono::high_resolution_clock::time_point t2;
-boost::chrono::high_resolution_clock::time_point t3;
+using namespace std::chrono_literals;
+
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
