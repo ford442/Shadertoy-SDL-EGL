@@ -33,6 +33,7 @@ void str();
 
 #include <float.h>
 #include <math.h>
+#include <chrono>
 #include "boost/tuple/tuple.hpp"
 
 using namespace ::boost::tuples;
