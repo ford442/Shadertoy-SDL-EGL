@@ -217,29 +217,8 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear")
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-glDisable(GL_DITHER);
   
-glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-glDepthMask(GL_TRUE);
-glClearDepth(D);
-glDepthFunc(GL_LEQUAL);
-  glEnable(GL_DEPTH_TEST);
-  
-glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
-glStencilFunc(GL_ALWAYS,1,0xFF);
-glStencilMask(0xFF);
-// glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_LESS);
-glEnable(GL_STENCIL_TEST);
-// glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 
-  glFrontFace(GL_CW);
-glEnable(GL_CULL_FACE);
-
-// glDisable(GL_BLEND);
-// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendEquationSeparate(GL_MIN,GL_MAX);
-glClearColor(gF0,gF0,gF0,gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
@@ -266,7 +245,29 @@ glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 glUseProgram(shd_prg);
+    
 nanosleep(&req,&rem);
+  
+glDisable(GL_DITHER);
+glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+glDepthMask(GL_TRUE);
+glClearDepth(D);
+glDepthFunc(GL_LEQUAL);
+glEnable(GL_DEPTH_TEST);
+glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
+glStencilFunc(GL_ALWAYS,1,0xFF);
+glStencilMask(0xFF);
+// glEnable(GL_DEPTH_TEST);
+// glDepthFunc(GL_LESS);
+glEnable(GL_STENCIL_TEST);
+// glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+glFrontFace(GL_CW);
+glEnable(GL_CULL_FACE);
+// glDisable(GL_BLEND);
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendEquationSeparate(GL_MIN,GL_MAX);
+glClearColor(gF0,gF0,gF0,gF);
+  
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -297,8 +298,8 @@ glScissor((GLint)0,(GLint)0,Size,Size);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 t1=process_real_cpu_clock::now();
 t3=process_real_cpu_clock::now();
-time_spanb=boost::chrono::duration<float_t,boost::chrono::seconds::period>(t2-t3);
-time_spana=boost::chrono::duration<double_t,boost::chrono::seconds::period>(t2-t1);
+time_spanb=duration<float_t,seconds::period>(t2-t3);
+time_spana=duration<double_t,seconds::period>(t2-t1);
 nanosleep(&req,&rem);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
