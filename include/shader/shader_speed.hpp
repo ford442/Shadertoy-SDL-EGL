@@ -56,17 +56,12 @@ const float_t F0=0.0f;
 
 #include <time.h>
 #include <boost/chrono.hpp>
-#include <boost/chrono/time_point.hpp>
-#include <boost/chrono/system_clocks.hpp>
-#include <boost/chrono/typeof/boost/chrono/chrono.hpp>
-#include <boost/chrono/chrono.hpp>
-#include <boost/chrono/duration.hpp>
 
 using namespace ::boost::chrono;
 
-process_real_cpu_clock::time_point t1;
-process_real_cpu_clock::time_point t2;
-process_real_cpu_clock::time_point t3;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
+high_resolution_clock::time_point t3;
 
 int32_t tmm=166666660;
 struct timespec rem;
