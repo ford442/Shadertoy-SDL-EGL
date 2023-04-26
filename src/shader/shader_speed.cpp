@@ -53,7 +53,7 @@ void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 static inline void Rend(){
 iFrame++;
 t3=t2;
-t2=boost::chrono::high_resolution_clock::now();
+t2=std::chrono::high_resolution_clock::now();
 time_spana=duration<double_t,seconds::period>(t2-t1);
 time_spanb=duration<float_t,seconds::period>(t2-t3);
 Ttime=time_spana.count();
