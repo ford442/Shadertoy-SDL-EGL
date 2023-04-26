@@ -55,13 +55,12 @@ const float_t F0=0.0f;
 // #include <stdfloat>  //  c++23
 
 #include <time.h>
-#include <chrono>
+#include <boost/chrono.h>
 
-using namespace std::chrono_literals;
 
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+boost::chrono::high_resolution_clock::time_point t1;
+boost::chrono::high_resolution_clock::time_point t2;
+boost::chrono::high_resolution_clock::time_point t3;
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
