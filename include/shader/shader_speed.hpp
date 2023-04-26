@@ -57,11 +57,11 @@ const float_t F0=0.0f;
 #include <time.h>
 #include <chrono>
 
-using namespace std::chrono_literals;
+using namespace std::chrono;
 
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+high_resolution_clock::time_point t1;
+high_resolution_clock::time_point t2;
+high_resolution_clock::time_point t3;
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
