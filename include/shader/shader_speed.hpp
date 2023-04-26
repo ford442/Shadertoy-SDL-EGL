@@ -54,16 +54,14 @@ const float_t F0=0.0f;
 // #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 
-#include <boost/thread.hpp>
 #include <time.h>
-#include <boost/chrono.hpp>
+#include <chrono>
 
-using namespace ::boost::chrono;
+using namespace std::chrono_literals;
 
-high_resolution_clock::time_point t1;
-high_resolution_clock::time_point t2;
-high_resolution_clock::time_point t3;
-
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -77,9 +75,9 @@ GLfloat delt;
 GLdouble wi,hi;
 GLfloat Tdlt;
 int32_t ele=36;
-duration<float_t,seconds::period>time_spana;
+std::chrono::duration<float_t,std::chrono::seconds::period>time_spana;
 double_t Ttime;
-duration<double_t,seconds::period>time_spanb;
+std::chrono::duration<double_t,std::chrono::seconds::period>time_spanb;
 GLint iFrame,iFps,fram;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -167,10 +165,10 @@ EGL_NONE,EGL_NONE
 };
 
 static const EGLint ctx_att[]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
-// EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-// EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+// EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
+// EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
