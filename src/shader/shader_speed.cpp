@@ -54,8 +54,8 @@ static inline void Rend(){
 iFrame++;
 t3=t2;
 t2=boost::chrono::high_resolution_clock::now();
-time_spana=boost::chrono::duration<double_t,seconds::period>(t2-t1);
-time_spanb=boost::chrono::duration<float_t,seconds::period>(t2-t3);
+time_spana=boost::chrono::duration<double_t,boost::chrono::seconds::period>(t2-t1);
+time_spanb=boost::chrono::duration<float_t,boost::chrono::seconds::period>(t2-t3);
 Ttime=time_spana.count();
 Tdlt=time_spanb.count();
 mouseX=x/S;
