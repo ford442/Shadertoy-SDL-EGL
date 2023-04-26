@@ -58,7 +58,6 @@ const float_t F0=0.0f;
 #include <boost/chrono.hpp>
 #include <boost/chrono/time_point.hpp>
 #include <boost/chrono/system_clocks.hpp>
-#include <boost/chrono/clock_strings.hpp>
 #include <boost/chrono/typeof/boost/chrono/chrono.hpp>
 #include <boost/chrono/chrono.hpp>
 #include <boost/chrono/duration.hpp>
