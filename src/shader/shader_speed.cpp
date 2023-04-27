@@ -1,6 +1,6 @@
 #include "../../include/shader/shader_speed.hpp"
 
-EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
+static inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -11,7 +11,7 @@ ms_l=false;
 return(EM_BOOL)1;
 }
 
-static EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
+static inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -23,8 +23,6 @@ return (EM_BOOL)1;
 static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-// iFps=60.0/delt;
-iFps=60.0;
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -43,19 +41,18 @@ clk_l=true;
 }
 glUniform1f(uni_tme,Tm);
 glUniform1f(uni_tme_dlt,delt);
-glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
 return;
 }
 
-void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
+static inline void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
 iFrame++;
 t3=t2;
 t2=std::chrono::high_resolution_clock::now();
-time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(t2-t1);
-time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
+time_spana=std::chrono::duration<double,std::chrono::seconds::period>(t2-t1);
+time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(t2-t3);
 Ttime=time_spana.count();
 Tdlt=time_spanb.count();
 mouseX=x/S;
@@ -76,7 +73,7 @@ char8_t * result=NULL;
 GLchar * results=NULL;
 long int length=0;
 FILE * file=fopen(Fnm,"r");
-tie(result,results,file);
+tie(result,results,file,length);
 if(file){
 int stat=fseek(file,(int)0,SEEK_END);
 if(stat!=0){
@@ -293,6 +290,8 @@ smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
+iFps=96.0;
+glUniform1f(uni_fps,iFps);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
@@ -313,11 +312,11 @@ emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
 
-void(*st)(){&strt};
+static inline void(*st)(){&strt};
 
 extern "C" {
 
-void str(){
+static inline void str(){
 st();
 return;
 }
