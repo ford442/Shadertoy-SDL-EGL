@@ -3,7 +3,7 @@
 void SDLCALL bfr(void * unused,Uint8 * stm,int32_t len){
 // Uint8 * wptr;
 GLubyte * wptr;
-int32_t lft;
+GLint lft;
 tie(len,lft);
 tie(stm,wptr);
 wptr=wave.snd+wave.pos;
