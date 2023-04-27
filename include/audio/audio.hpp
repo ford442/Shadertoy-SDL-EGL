@@ -1,5 +1,5 @@
   
-void plt();
+static inline void plt();
 
 extern "C"{  
   
