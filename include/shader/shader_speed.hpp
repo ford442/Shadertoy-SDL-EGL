@@ -2,7 +2,7 @@
 
 extern "C"{
   
-static inline void str();
+void str();
   
 }
 
