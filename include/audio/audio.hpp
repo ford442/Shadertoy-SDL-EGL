@@ -40,7 +40,7 @@ GLuint slen;
 SDL_AudioSpec request;
 }wave;
 
-void SDLCALL bfr(void *,GLubyte *,GLint);
+void SDLCALL bfr(void *,GLubyte *,GLuint);
 
 #include <iostream>
 #include <algorithm>
