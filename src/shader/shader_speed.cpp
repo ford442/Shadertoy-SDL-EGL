@@ -217,6 +217,14 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear")
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
+
+  emscripten_webgl_enable_extension(ctx,"OES_sample_shading");
+  emscripten_webgl_enable_extension(ctx,"EXT_multisample_compatibility");
+  emscripten_webgl_enable_extension(ctx,"OES_vertex_half_float");
+  emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
+  emscripten_webgl_enable_extension(ctx,"NV_framebuffer_multisample");
+
+glEnable(SAMPLE_SHADING_OES);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(D);
