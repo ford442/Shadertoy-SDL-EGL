@@ -34,13 +34,13 @@ SDL_AudioDeviceID dev;
 
 struct{
 // Uint8 * snd;
-  GLubyte  * snd;
+GLubyte * snd;
 GLint pos;
-Uint32 slen;
+GLubyte slen;
 SDL_AudioSpec request;
 }wave;
 
-void SDLCALL bfr(void *,GLuint *,int32_t);
+void SDLCALL bfr(void *,GLuint *,GLint);
 
 #include <iostream>
 #include <algorithm>
