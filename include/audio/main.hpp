@@ -44,7 +44,7 @@ v128_t Dr;
 
 #include <GL/gl.h>
 
-v128_t rNd(GLint);
+static inline v128_t rNd(GLint);
 
 GLint Th,rD;
 
