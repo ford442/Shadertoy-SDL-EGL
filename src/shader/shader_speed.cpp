@@ -68,7 +68,7 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-GLchar * rd_fl(const char * Fnm){
+static inline GLchar * rd_fl(const char * Fnm){
 char8_t * result=NULL;
 GLchar * results=NULL;
 long int length=0;
@@ -98,7 +98,7 @@ return results;
 return nullptr;
 }
 
-GLuint cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
+static inline GLuint cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=static_cast<GLsizei>(strlen(src[i]));
@@ -109,7 +109,7 @@ glCompileShader(shader);
 return shader;
 }
 
-GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
+static inline GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 
 static inline void strt(){
 tie(F,Fm1,F0);
