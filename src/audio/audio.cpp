@@ -2,6 +2,7 @@
 
 void SDLCALL bfr(void * unused,Uint8 * stm,int32_t len){
 Uint8 * wptr;
+GLuint * wptr;
 int32_t lft;
 tie(len,lft);
 tie(stm,wptr);
@@ -24,6 +25,7 @@ return;
 
 void plt(){
 tie(wave.snd,dev);
+tie(wave.pos,wave.slen,wave.request);
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32;
