@@ -1,13 +1,13 @@
 #include "../../include/audio/main.hpp"
 
-v128_t rNd(int Th){
+v128_t rNd(GLint Th){
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
-v128_t(* RnD)(int){&rNd};
+v128_t(* RnD)(GLint){&rNd};
 
 extern"C"{
 
@@ -142,7 +142,8 @@ EM_ASM({
 "use strict";
 FS.mkdir('/snd');
 });
-  tie(jss,js_main);
+tie(jss,js_main);
+tie(RnD,rNd);
 
 tie(Th,rD,Dr);
 jss();
