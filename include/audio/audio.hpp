@@ -36,11 +36,12 @@ struct{
 // Uint8 * snd;
   GLuint * snd;
 int32_t pos;
+int32_t pos;
 Uint32 slen;
 SDL_AudioSpec request;
 }wave;
 
-void SDLCALL bfr(void *,Uint8 *,int32_t);
+void SDLCALL bfr(void *,GLuint *,int32_t);
 
 #include <iostream>
 #include <algorithm>
