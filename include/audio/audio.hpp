@@ -1,4 +1,3 @@
-GLchar flnm[24];
   
 void plt();
 
@@ -30,10 +29,11 @@ using namespace ::boost::tuples;
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
 
+GLchar flnm[24];
+
 SDL_AudioDeviceID dev;
 
 struct{
-// Uint8 * snd;
 GLubyte * snd;
 GLint pos;
 GLuint slen;
@@ -50,7 +50,6 @@ void SDLCALL bfr(void *,GLubyte *,GLint);
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
-#include <chrono>
 #include <cfloat>
 #include <climits>
 #include <iostream>
