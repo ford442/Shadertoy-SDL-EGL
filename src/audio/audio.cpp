@@ -23,7 +23,7 @@ return;
 }
 
 void plt(){
-tie(wave,dev);
+tie(wave.snd,dev);
 SDL_memset(&wave.request,0,sizeof(wave.request));
 wave.request.freq=44100;
 wave.request.format=AUDIO_S32;
