@@ -224,7 +224,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
   emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
   emscripten_webgl_enable_extension(ctx,"NV_framebuffer_multisample");
 
-glEnable(SAMPLE_SHADING);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(D);
