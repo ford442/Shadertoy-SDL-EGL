@@ -23,7 +23,7 @@ return;
 }
 
 void plt(){
-tie(lp,bfr);
+tie(wave,bfr);
 tie(wave.snd,dev);
 tie(wave.pos,wave.slen,wave.request);
 SDL_memset(&wave.request,0,sizeof(wave.request));
@@ -42,13 +42,10 @@ return;
 }
 
 void(*lp)(){&plt};
-void(*lpa)(){tie(lp,bfr)};
-
 
 extern "C" {
 
 void pl(){
-lpa();
 lp();
 return;
 }
