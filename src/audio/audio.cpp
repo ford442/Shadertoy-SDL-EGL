@@ -1,6 +1,6 @@
 #include "../../include/audio/audio.hpp"
 
-void SDLCALL bfr(void * unused,GLuint * stm,GLint len){
+void SDLCALL bfr(void * unused,GLuint * stm,GLuint len){
 // Uint8 * wptr;
 GLubyte * wptr;
 GLint lft;
