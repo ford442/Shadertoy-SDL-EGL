@@ -42,13 +42,14 @@ return;
 }
 
 void(*lp)(){&plt};
-void(*lpa)(){tie(lp,bfr);&lp};
+void(*lpa)(){tie(lp,bfr)};
 
 
 extern "C" {
 
 void pl(){
 lpa();
+lp();
 return;
 }
   
