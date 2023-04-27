@@ -34,7 +34,7 @@ SDL_AudioDeviceID dev;
 
 struct{
 // Uint8 * snd;
-  GLchar * snd;
+  GLubyte  * snd;
 int32_t pos;
 Uint32 slen;
 SDL_AudioSpec request;
