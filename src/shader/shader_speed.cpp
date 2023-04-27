@@ -296,7 +296,9 @@ glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 t1=std::chrono::high_resolution_clock::now();
 t3=std::chrono::high_resolution_clock::now();
 time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
