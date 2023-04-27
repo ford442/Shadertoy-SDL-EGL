@@ -1,13 +1,13 @@
 #include "../../include/audio/main.hpp"
 
-v128_t rNd(GLint Th){
+static inline v128_t rNd(GLint Th){
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
 
-v128_t(* RnD)(GLint){&rNd};
+static inline v128_t(* RnD)(GLint){&rNd};
 
 extern"C"{
 
@@ -134,7 +134,7 @@ scanSongs();
 normalResStart();
 });
 
-void(*jss)(){&js_main};
+static inline void(*jss)(){&js_main};
 
 int main(void){
   
