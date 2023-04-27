@@ -2,7 +2,7 @@
 
 void SDLCALL bfr(void * unused,Uint8 * stm,int32_t len){
 // Uint8 * wptr;
-GLchar * wptr;
+GLubyte * wptr;
 int32_t lft;
 tie(len,lft);
 tie(stm,wptr);
