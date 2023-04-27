@@ -28,11 +28,13 @@ using namespace ::boost::tuples;
 
 #include <cstdint>
 #include <SDL2/SDL.h>
+#include <GL/gl.h>
 
 SDL_AudioDeviceID dev;
 
 struct{
-Uint8 * snd;
+// Uint8 * snd;
+  GLuint * snd;
 int32_t pos;
 Uint32 slen;
 SDL_AudioSpec request;
