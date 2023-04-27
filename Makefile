@@ -34,7 +34,7 @@ b3_shader_speed:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Link
-	 emcc main.o shader_speed.o -o s3023s.js \
+	 emcc main.o shader_speed.o -o s3023s.js --use-preload-plugins \
 	 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -flto=thin -mllvm -ffast-math -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector \
 	 -fmerge-all-constants -fwasm-exceptions -std=gnu++20 -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
