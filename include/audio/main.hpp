@@ -1,4 +1,3 @@
-int Th,rD;
 
 #pragma once
 
@@ -43,6 +42,10 @@ int r4nd(int);
 v128_t rNd(int);
 
 v128_t Dr;
+
+#include <GL/gl.h>
+
+GLint Th,rD;
 
 #include <cstdlib>
 #include <ctime>
