@@ -142,6 +142,8 @@ EM_ASM({
 "use strict";
 FS.mkdir('/snd');
 });
+  tie(jss,js_main);
+
 tie(Th,rD,Dr);
 jss();
 return 0;
