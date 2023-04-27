@@ -36,7 +36,7 @@ struct{
 // Uint8 * snd;
 GLubyte * snd;
 GLint pos;
-GLint slen;
+GLuint slen;
 SDL_AudioSpec request;
 }wave;
 
