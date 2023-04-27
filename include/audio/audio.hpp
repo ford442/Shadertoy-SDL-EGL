@@ -1,4 +1,4 @@
-char flnm[24];
+GLchar flnm[24];
   
 void plt();
 
@@ -8,9 +8,9 @@ void pl();
   
 }
 
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD 0
-// #pragma STDC CX_LIMITED_RANGE OFF
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD 0
+#pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
