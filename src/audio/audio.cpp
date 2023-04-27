@@ -1,7 +1,7 @@
 #include "../../include/audio/audio.hpp"
 
 void SDLCALL bfr(void * unused,Uint8 * stm,int32_t len){
-Uint8 * wptr;
+// Uint8 * wptr;
 GLuint * wptr;
 int32_t lft;
 tie(len,lft);
