@@ -1,6 +1,6 @@
 #include "../../include/audio/audio.hpp"
 
-void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
 tie(len,lft);
@@ -22,7 +22,7 @@ wave.pos+=len;
 return;
 }
 
-void plt(){
+static inline void plt(){
 tie(wave,bfr);
 tie(wave.snd,dev);
 tie(wave.pos,wave.slen,wave.request);
@@ -41,7 +41,7 @@ SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
 
-void(*lp)(){&plt};
+static inline void(*lp)(){&plt};
 
 extern "C" {
 
