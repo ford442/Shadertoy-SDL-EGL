@@ -57,11 +57,11 @@ const float_t F0=0.0f;
 #include <time.h>
 #include <chrono>
 
-using namespace std::chrono;
+// using namespace std::chrono;
 
-high_resolution_clock::time_point t1;
-high_resolution_clock::time_point t2;
-high_resolution_clock::time_point t3;
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -74,20 +74,20 @@ GLfloat Tm;
 GLfloat delt;
 GLdouble wi,hi;
 GLfloat Tdlt;
-int32_t ele=36;
-std::chrono::duration<float_t,std::chrono::seconds::period>time_spana;
-double_t Ttime;
-std::chrono::duration<double_t,std::chrono::seconds::period>time_spanb;
+GLint ele=36;
+std::chrono::duration<double,std::chrono::seconds::period>time_spana;
+GLdouble Ttime;
+std::chrono::duration<double,std::chrono::seconds::period>time_spanb;
 GLint iFrame,iFps,fram;
 GLfloat mouseY,mouseX;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 // int32_t Size;
-int32_t Size;
+GLint Size;
 GLfloat mX,mY,mm,nn;
 GLfloat gF=F,gF0=F0,gFm1=Fm1;
 GLclampf x,y;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-float S;
+GLfloat S;
 GLsizei s4=4,i;
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
