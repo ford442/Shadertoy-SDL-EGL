@@ -1,13 +1,8 @@
 #include "../../include/shader/shader_speed.hpp"
 
-Compile compile;
 Run run;
 
-
-
-
 // static inline GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
-
 
 // static inline void(*st)(){&strt};
 
