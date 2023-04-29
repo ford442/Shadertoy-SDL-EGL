@@ -6,8 +6,10 @@
 #endif
 
 #pragma STDC FP_CONTRACT ON
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD -1
+#undef _FLT_EVAL_METHOD
+
+#define _FLT_EVAL_METHOD 0
+
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
@@ -485,11 +487,11 @@ glEnable(GL_CULL_FACE);
 glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glGenBuffers((GLsizei)1,&shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,shad.EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
@@ -532,7 +534,7 @@ smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,mouse.S,mouse.S,gpu.gF);
 glUniform3f(smp_chn_res,mouse.S,mouse.S,gpu.gF);
-iFps=60.0;
+iFps=66.6;
 glUniform1f(uni_fps,iFps);
 mouse.mm=mouse.S*0.5;
 mouse.nn=mouse.S*0.5;
@@ -541,8 +543,8 @@ glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 times.t1=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
