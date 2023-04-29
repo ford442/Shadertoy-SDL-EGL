@@ -345,7 +345,6 @@ tie(Tdlt,Ttime);
 tie(mouseY,mouseX);
 tie(hi,wi,S);
 tie(mX,mY,mm,nn);
-tie(s4,i);
 tie(t1,t2,t3);
 tie(EBO,VBO);
 tie(VCO,ECO);
