@@ -146,7 +146,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_NONE,EGL_NONE
 };
 
-static const EGLint ctx_att[]={
+static const EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
@@ -156,7 +156,8 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE,EGL_NONE
 };
-static const EGLint att_lst[]={
+
+static const EGLint att_lst[1500]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -195,17 +196,23 @@ std::chrono::high_resolution_clock::time_point t3;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 
+using uint_tensor = tensor<GLuint>;
 using time_tensor = tensor<GLdouble>;
-time_tensor Ti=time_tensor{2,2};
-
 using mouse_tensor = tensor<GLdouble>;
+
 mouse_tensor Mo=mouse_tensor{6,2};
+time_tensor Ti=time_tensor{2,2};
+time_tensor Ui=uint_tensor{2,2};
 
 struct{
-GLdouble Ttime=Ti.at(1,1);
-GLdouble Tdlt=Ti.at(1,2);
-GLdouble uni_tme_dlt=Ti.at(2,1);
-GLdouble uni_tme=Ti.at(2,2);
+GLdouble Ttime=Ti.at(0,0);
+GLdouble Tdlt=Ti.at(0,1);
+GLdouble uni_tme_dlt=Ti.at(1,0);
+GLdouble uni_tme=Ti.at(1,1);
+GLfloat Tm=Ti.at(2,0);
+GLfloat delt=Ti.at(2,1);
+GLuint uni_frm=Ui.at(0,0);
+GLint fram=Ui.at(0,1);
 }times;
 
 struct{
@@ -226,7 +233,6 @@ GLclampf y=Mo.at(5,1);
 }mouse;
 
 GLint Size,tmm=166666000;
-GLuint uni_frm;
 struct timespec rem;
 struct timespec req={0,tmm};
 GLint iFrame,ele=36;
@@ -259,8 +265,9 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-GLfloat Tm,delt;
-GLint iFps,fram;
+  
+GLint iFps;
+  
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
@@ -298,23 +305,23 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
-glUniform1f(times.uni_tme,Tm);
-glUniform1f(times.uni_tme_dlt,delt);
-glUniform1i(uni_frm,fram);
+glUniform1f(times.uni_tme,times.Tm);
+glUniform1f(times.uni_tme_dlt,times.delt);
+glUniform1i(times.uni_frm,times.fram);
 return;
 }
 
 static inline void Rend(){
 iFrame++;
-t3=t2;
-t2=std::chrono::high_resolution_clock::now();
-time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
-time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t3);
+times.t3=times.t2;
+times.t2=std::chrono::high_resolution_clock::now();
+time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
+time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
 times.Ttime=time_spana.count();
 times.Tdlt=time_spanb.count();
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
-uni(mouse.mouseX,mouse.mouseY,times.Ttime,iFrame,times.Tdlt);
+uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
@@ -373,8 +380,8 @@ tie(VCO,ECO);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
-tie(uni_fps,uni_srate,uni_frm,fram);
-tie(times.uni_tme,times.uni_tme_dlt,Tm,delt);
+tie(uni_fps,uni_srate,times.uni_frm,times.fram);
+tie(times.uni_tme,times.uni_tme_dlt,times.Tm,times.delt);
 tie(smp_chn_res,smp_chn,uni_res);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
 tie(vrt,indc,ele);
