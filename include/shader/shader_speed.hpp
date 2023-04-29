@@ -117,13 +117,13 @@ const GLchar cm_hdr_src[500]=
 // "#pragma optionNV(inline none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
+"#define GL_ES 0\n"
 "precision mediump float;precision mediump int;\n";
 
 const GLchar vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[1000]=
-"#define GL_ES 0\n"
 "precision lowp sampler3D;precision lowp sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
