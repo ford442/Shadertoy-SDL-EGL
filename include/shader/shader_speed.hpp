@@ -224,7 +224,9 @@ return (EM_BOOL)1;
 }
 
 GLfloat xx,yy,mX,mY,mm,nn;
- 
+GLint Size;
+GLuint uni_tme_dlt,uni_tme,uni_mse,uni_frm;
+
 class Run
 {
 
@@ -242,10 +244,10 @@ struct timespec req={0,tmm};
 
 GLfloat Tm,delt;
 GLdouble wi,hi;
-GLint Size,iFps,fram;
+GLint iFps,fram;
 
 GLuint EBO,VBO,VCO,ECO;
-GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
+GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
 EGLContext ctxegl;
