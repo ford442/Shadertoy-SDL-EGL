@@ -45,8 +45,6 @@ return Dr;
 
 };
 
-void(*jss)(){&js_main};
-
 extern"C"{
 
 int c;
