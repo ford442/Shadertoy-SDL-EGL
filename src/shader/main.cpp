@@ -149,7 +149,7 @@ int main(void){
 EM_ASM({
 FS.mkdir('/shader');
 });
-tie(js.Th,js.rD,js.Dr);
+tie(Th,rD,Dr);
 jss();
 return 0;
 }
