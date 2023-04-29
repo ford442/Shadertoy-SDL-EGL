@@ -1,5 +1,3 @@
-
-
 #ifndef FALSE
 #define FALSE 0
 #endif
@@ -77,7 +75,7 @@ GLchar * results=NULL;
   
 static inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
-tie(compile.result,compile.results,file);
+tie(result,results,file);
 if(compile.file){
 int stat=fseek(file,(int)0,SEEK_END);
 if(stat!=0){
@@ -91,9 +89,9 @@ fclose(file);
 return nullptr;
 }
 result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
-if(compile.result){
-size_t actual_length=fread(compile.result,sizeof(char8_t),length,file);
-compile.result[actual_length++]={'\0'};
+if(result){
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
+result[actual_length++]={'\0'};
 }
 fclose(file);
 results=reinterpret_cast<GLchar *>(result);
