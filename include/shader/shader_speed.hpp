@@ -44,6 +44,7 @@
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
+#include <boost/numeric/ublas/tensor.hpp>
 
 #include <float.h>
 #include <math.h>
@@ -193,6 +194,8 @@ EM_BOOL ms_l,clk_l;
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
+
+using namespace boost::numeric::ublas;
 
 using time_tensor = tensor<GLdouble>;
 time_tensor Ti=time_tensor{1,2};
