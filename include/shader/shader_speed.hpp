@@ -133,46 +133,6 @@ const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
 
-class Run
-{
-
-private:
-  
-long int length=0;
-char8_t * result=NULL;
-GLchar * results=NULL;
-  
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
-  int32_t tmm=166666660;
-struct timespec rem;
-struct timespec req={0,tmm};
-
-// using namespace std::chrono;
-
-GLfloat S,xx,yy,Tm,delt,Tdlt,mouseY,mouseX,mX,mY,mm,nn;
-GLdouble wi,hi,Ttime;
-GLint Size,iFrame,iFps,fram,ele=36;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-GLclampf x,y;
-GLuint EBO,VBO,VCO,ECO;
-GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
-EGLDisplay display;
-EGLSurface surface;
-EGLContext ctxegl;
-EGLConfig eglconfig;
-EGLint config_size,major,minor;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-
-const GLchar * src[4];
-
-const GLchar * cm_hdr=cm_hdr_src;
-const GLchar * vrt_bdy=vrt_bdy_src;
-const GLchar * frg_hdr=frg_hdr_src;
-const GLchar * frg_ftr=frg_ftr_src;
-  
 static const EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
@@ -226,6 +186,47 @@ EGL_MIPMAP_LEVEL,(EGLint)1,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE,EGL_NONE
 };
+
+class Run
+{
+
+private:
+  
+long int length=0;
+char8_t * result=NULL;
+GLchar * results=NULL;
+  
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
+  int32_t tmm=166666660;
+struct timespec rem;
+struct timespec req={0,tmm};
+
+// using namespace std::chrono;
+
+GLfloat S,xx,yy,Tm,delt,Tdlt,mouseY,mouseX,mX,mY,mm,nn;
+GLdouble wi,hi,Ttime;
+GLint Size,iFrame,iFps,fram,ele=36;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+GLclampf x,y;
+GLuint EBO,VBO,VCO,ECO;
+GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
+EGLDisplay display;
+EGLSurface surface;
+EGLContext ctxegl;
+EGLConfig eglconfig;
+EGLint config_size,major,minor;
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+
+const GLchar * src[4];
+
+const GLchar * cm_hdr=cm_hdr_src;
+const GLchar * vrt_bdy=vrt_bdy_src;
+const GLchar * frg_hdr=frg_hdr_src;
+const GLchar * frg_ftr=frg_ftr_src;
+  
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
