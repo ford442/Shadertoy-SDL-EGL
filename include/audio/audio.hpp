@@ -73,10 +73,10 @@ len-=lft;
 wptr=wave.snd;
 lft=wave.slen;
 wave.pos=0;
-SDL_LockAudioDevice(dev);
+SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wptr,len);
-pos+=len;
+wave.pos+=len;
 return;
 }
 
