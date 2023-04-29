@@ -408,7 +408,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
@@ -557,7 +557,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanosleep(&req,&rem);
-  eglBindAPI(EGL_OPENGL_ES_API);
+//  eglBindAPI(EGL_OPENGL_ES_API);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
