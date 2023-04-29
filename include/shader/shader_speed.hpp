@@ -211,11 +211,6 @@ GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
 GLint fram=Ii.at(0,0);
 GLint iFrame=Ii.at(0,1);
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 }times;
 
 struct{
@@ -270,7 +265,12 @@ return (EM_BOOL)1;
 class Run{
 
 private:
-  
+
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
