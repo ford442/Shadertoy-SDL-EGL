@@ -29,11 +29,13 @@ using tensorVar = tensor<float>;
 
 class tens{
 public:
-tensorVar A = tensorVar{3,4,2};
-tensorVar B = A = 2;
-float lol=static_cast<float>(B[0]);
 
-float rtt(float nm){float olo=lol+nm*100;return olo;}
+float rtt(float nm){
+tensorVar A = tensorVar{3,4,2};
+tensorVar B = A = nm;
+float lol=static_cast<float>(B[0]);
+float olo=lol*100;
+return olo;}
 };
 
 class funcs{
