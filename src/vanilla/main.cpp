@@ -11,7 +11,7 @@ tens Tens;
 extern "C"{
 
 float js_Tensors(float nm){ 
-return Tens.tuple_float_short(nm);
+return Tens.rtt(nm);
 }
   
 float js_tuple_float_short(float nm){ 
