@@ -26,6 +26,31 @@
 #include "../../include/shader/intrins.hpp"
 #include <emscripten.h>
 
+#include <algorithm>
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <iostream>
+// #include <locale> // utf-16
+// #include <uchar.h> // utf-16
+// #include <stdfloat>  //  c++23
+
+#include <time.h>
+#include <chrono>
+#include "../../include/shader/gl.hpp"
+#include "../../include/shader/egl.hpp"
+#include <emscripten/html5.h>
+#include "emscripten/html5_webgpu.h"
+#include "webgpu/webgpu.h"
+#include "webgpu/webgpu_cpp.h"
+
+#include <float.h>
+#include <math.h>
+#include "boost/tuple/tuple.hpp"
+
 extern "C"{
   
 void str();
@@ -33,9 +58,6 @@ void str();
 }
 
 
-#include <float.h>
-#include <math.h>
-#include "boost/tuple/tuple.hpp"
 
 using namespace ::boost::tuples;
 
@@ -294,27 +316,6 @@ emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
 };
-
-#include <algorithm>
-#include <string.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <iostream>
-// #include <locale> // utf-16
-// #include <uchar.h> // utf-16
-// #include <stdfloat>  //  c++23
-
-#include <time.h>
-#include <chrono>
-#include "../../include/shader/gl.hpp"
-#include "../../include/shader/egl.hpp"
-#include <emscripten/html5.h>
-#include "emscripten/html5_webgpu.h"
-#include "webgpu/webgpu.h"
-#include "webgpu/webgpu_cpp.h"
 
 class Run
 {
