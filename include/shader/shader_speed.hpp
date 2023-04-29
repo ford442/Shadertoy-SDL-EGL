@@ -211,6 +211,13 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
+  std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
+  
+GLdouble Ttime,Tdlt;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 class Run
 {
 
@@ -226,11 +233,10 @@ struct timespec req={0,tmm};
 
 // using namespace std::chrono;
 
-GLfloat S,xx,yy,Tm,delt,Tdlt,mouseY,mouseX,mX,mY,mm,nn;
-GLdouble wi,hi,Ttime;
+GLfloat S,xx,yy,Tm,delt,mouseY,mouseX,mX,mY,mm,nn;
+GLdouble wi,hi;
 GLint Size,iFrame,iFps,fram,ele=36;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
@@ -251,11 +257,10 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
   
+
 public:
 
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+
 inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
