@@ -29,8 +29,8 @@ using tensorVar = tensor<float>;
 
 class tens{
 public:
-static auto A = tensorVar{3,4,2};
-static auto B = A = 2;
+tensorVar A = tensorVar{3,4,2};
+tensorVar B = A = 2;
 float rtt(float nm){return B+nm*100;}
 };
 
