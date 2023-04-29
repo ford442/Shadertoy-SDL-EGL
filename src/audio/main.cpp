@@ -117,7 +117,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1500);
+},1000);
 };
 }
 
