@@ -1,12 +1,5 @@
 #include "../../include/shader/main.hpp"
 
-v128_t rNd(int Th){
-std::srand(rd());
-rD=std::rand()%Th;
-Dr=wasm_i32x4_splat(rD);
-return Dr;
-}
-
 EM_JS(void,js_main,(),{
 
 "use strict";
@@ -118,14 +111,7 @@ document.getElementById('menu').addEventListener('click',function(){
 var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-   
 const pnnl=document.body;
-
-function Key(e){
-if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
-}
-pnnl.addEventListener('keydown',Key);
-   
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -139,6 +125,12 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },100);
+
+function Key(e){
+if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
+}
+pnnl.addEventListener('keydown',Key);
+
 });
 
 v128_t(* RnD)(int){&rNd};
