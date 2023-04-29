@@ -27,12 +27,14 @@ class js
 
 private:
 
-int rD;
-int Th;
-v128_t Dr;
+
 std::random_device rd;
 
 public:
+
+int rD;
+int Th;
+v128_t Dr;
 
 v128_t rNd(int Th){
 std::srand(rd());
