@@ -31,7 +31,7 @@ class tens{
 public:
 tensorVar A = tensorVar{3,4,2};
 tensorVar B = A = 2;
-float lol=static_cast<float>(B);
+float lol=static_cast<float>(B[0]);
 
 float rtt(float nm){float olo=lol+nm*100;return olo;}
 };
