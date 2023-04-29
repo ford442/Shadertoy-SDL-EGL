@@ -89,18 +89,7 @@ quarTensorf quartf=quarTensorf{3,3};
 quarTensorgf quartgf=quarTensorgf{3,3};
 quarTensorD quartD=quarTensorD{3,3};
 quarTensorgD quartgD=quarTensorgD{3,3};
-quartf.at(0,0)=-1.0f;
-quartf.at(0,1)=0.0f;
-quartf.at(0,2)=1.0f;
-quartD.at(0,0)=-1.0;
-quartD.at(0,1)=0.0;
-quartD.at(0,2)=1.0;
-quartgf.at(0,0)=-1.0f;
-quartgf.at(0,1)=0.0f;
-quartgf.at(0,2)=1.0f;
-quartgD.at(0,0)=-1.0;
-quartgD.at(0,1)=0.0;
-quartgD.at(0,2)=1.0;
+
 
 struct
 {
@@ -222,6 +211,19 @@ std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 
 using time_tensor = tensor<GLdouble>;
 time_tensor Ti=time_tensor{2,2};
+
+quartf.at(0,0)=-1.0f;
+quartf.at(0,1)=0.0f;
+quartf.at(0,2)=1.0f;
+quartD.at(0,0)=-1.0;
+quartD.at(0,1)=0.0;
+quartD.at(0,2)=1.0;
+quartgf.at(0,0)=-1.0f;
+quartgf.at(0,1)=0.0f;
+quartgf.at(0,2)=1.0f;
+quartgD.at(0,0)=-1.0;
+quartgD.at(0,1)=0.0;
+quartgD.at(0,2)=1.0;
 
 struct{
 GLdouble Ttime=Ti.at(1,1);
