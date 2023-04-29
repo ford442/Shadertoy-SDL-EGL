@@ -187,6 +187,26 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE,EGL_NONE
 };
 
+inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}}
+return(EM_BOOL)1;
+}
+
+inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+x=e->clientX;
+y=e->clientY;
+}}
+return (EM_BOOL)1;
+}
+
 class Run
 {
 
@@ -233,26 +253,6 @@ EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 EM_BOOL ms_l,clk_l;
   
 public:
-
-inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-ms_l=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-ms_l=false;
-}}
-return(EM_BOOL)1;
-}
-
-inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
-}}
-return (EM_BOOL)1;
-}
 
 inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
