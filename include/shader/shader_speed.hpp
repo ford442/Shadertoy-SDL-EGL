@@ -196,8 +196,7 @@ using time_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
 
 mouse_tensor Mo=mouse_tensor{6,2};
-time_tensor Ti=time_tensor{2,2};
-
+time_tensor Ti=time_tensor{3,2};
 uint_tensor Ui=uint_tensor{4,2};
 int_tensor Ii=int_tensor{1,2};
 
@@ -211,6 +210,11 @@ GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
 GLint fram=Ii.at(0,0);
 GLint iFrame=Ii.at(0,1);
+  std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+  std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 }times;
 
 struct{
@@ -236,11 +240,7 @@ GLclampf x=Mo.at(6,0);
 GLclampf y=Mo.at(6,1);
 }mouse;
 
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-  std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+
 GLint Size,tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -323,10 +323,10 @@ static inline void Rend(){
 times.iFrame=times.iFrame+1;
 t3=t2;
 t2=std::chrono::high_resolution_clock::now();
-time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
-time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t3);
-times.Ttime=time_spana.count();
-times.Tdlt=time_spanb.count();
+times.time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
+times.Ttime=times.time_spana.count();
+times.Tdlt=times.time_spanb.count();
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
@@ -395,7 +395,7 @@ tie(vrt,indc,ele);
 tie(retCl,retMu,retMd,retMv);
 tie(retSa,retSb,retSc);
 tie(ms_l,clk_l);
-tie(time_spana,time_spanb);
+tie(times.time_spana,times.time_spanb);
 tie(mouse.xx,mouse.yy,mouse.uni_mse);
 tie(rem,req,tmm);
 eglconfig=NULL;
@@ -556,10 +556,10 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-t1=std::chrono::high_resolution_clock::now();
-t3=std::chrono::high_resolution_clock::now();
-time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(t2-t3);
-time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(t2-t1);
+times.t1=std::chrono::high_resolution_clock::now();
+times.t3=std::chrono::high_resolution_clock::now();
+times.time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(times.t2-times.t3);
+times.time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(times.t2-times.t1);
 nanosleep(&req,&rem);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
