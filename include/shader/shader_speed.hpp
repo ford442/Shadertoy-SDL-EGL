@@ -294,21 +294,21 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
 
-static inline void uni(GLfloat mouse.xx,GLfloat mouse.yy,GLfloat Tm,GLint fram,GLfloat delt){
+static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const GLfloat xxx=mouse.xx;
-const GLfloat yyy=mouse.yy;
+const GLfloat xxx=xx;
+const GLfloat yyy=yy;
 mouse.mX=1.0f-(xxx*mouse.Size);
 mouse.mY=1.0f-(yyy*mouse.Size);
 clk_l=false;
 }
-mm=S*xx;
-nn=S*yy;
+mouse.mm=mouse.S*xx;
+mouse.nn=mouse.S*yy;
 glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
