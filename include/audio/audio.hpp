@@ -48,15 +48,13 @@ class Audio{
 
 public:
 GLchar flnm[24];
-
 SDL_AudioDeviceID dev;
-
 GLubyte * snd;
 GLint pos;
 GLuint slen;
 SDL_AudioSpec request;
 
-static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
 tie(len,lft);
@@ -79,8 +77,7 @@ return;
 }
 
 static inline void plt(){
-tie(bfr,dev);
-tie(pos,slen,request);
+tie(pos,slen,request,dev);
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
 request.format=AUDIO_S32;
