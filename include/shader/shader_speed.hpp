@@ -92,6 +92,8 @@ GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
 
+GLclampf x,y;
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
 
@@ -232,7 +234,6 @@ GLdouble wi,hi,Ttime;
 GLint Size,iFrame,iFps,fram,ele=36;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-GLclampf x,y;
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
