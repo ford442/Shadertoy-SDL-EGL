@@ -26,7 +26,7 @@
 #define _POSIX_REGEXP	1
 
 #include <unistd.h>
-
+#include <GL/gl.h>
 #include "boost/tuple/tuple.hpp"
 
 using namespace ::boost::tuples;
@@ -40,11 +40,11 @@ using namespace ::boost::tuples;
 class song_select{
 
 private:
-v128_t Dr;
-GLint Th,rD;
 std::random_device rd;
 
 public:
+v128_t Dr;
+GLint Th,rD;
 
 static inline v128_t rNd(GLint Th){
 std::srand(rd());
@@ -64,6 +64,5 @@ int r4nd(int);
 
 }
 
-#include <GL/gl.h>
 
 // static inline v128_t rNd(GLint);
