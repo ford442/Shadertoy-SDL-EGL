@@ -187,7 +187,9 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE,EGL_NONE
 };
 
-inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
+EM_BOOL ms_l,clk_l;
+
+inline EM_BOOL clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -250,7 +252,6 @@ const GLchar * frg_ftr=frg_ftr_src;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
-EM_BOOL ms_l,clk_l;
   
 public:
 
