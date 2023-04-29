@@ -305,8 +305,8 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
-glUniform1f(times.uni_tme,times.Tm);
-glUniform1f(times.uni_tme_dlt,times.delt);
+glUniform1f(times.uni_tme,Tm);
+glUniform1f(times.uni_tme_dlt,delt);
 glUniform1i(times.uni_frm,fram);
 return;
 }
