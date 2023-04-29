@@ -98,6 +98,40 @@ Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
+const GLchar cm_hdr_src[]=
+"#version 300 es\n"
+"#pragma STDGL(fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma STDGL(fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n"
+// "#pragma STDGL(unroll none)\n"
+// "#pragma optionNV(unroll none)\n"
+"#pragma STDGL(ifcvt none)\n"
+"#pragma optionNV(ifcvt none)\n"
+// "#pragma STDGL(inline none)\n"
+// "#pragma optionNV(inline none)\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
+"precision mediump float;precision mediump int;\n";
+
+const GLchar vrt_bdy_src[]=
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+
+const GLchar frg_hdr_src[]=
+"precision lowp sampler3D;precision lowp sampler2D;"
+"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
+"precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
+"precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
+"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
+"precision lowp sampler2DArrayShadow;"
+"uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform lowp vec4 iDate;uniform lowp float iChannelTime[4];"
+"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform highp float iSampleRate;"
+"out highp vec4 fragColor;\n";
+
+const GLchar frg_ftr_src[]=
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+
 
 class Run
 {
@@ -133,40 +167,6 @@ EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 
 const GLchar * src[4];
-
-const GLchar cm_hdr_src[]=
-"#version 300 es\n"
-"#pragma STDGL(fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
-"#pragma STDGL(fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n"
-// "#pragma STDGL(unroll none)\n"
-// "#pragma optionNV(unroll none)\n"
-"#pragma STDGL(ifcvt none)\n"
-"#pragma optionNV(ifcvt none)\n"
-// "#pragma STDGL(inline none)\n"
-// "#pragma optionNV(inline none)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
-"precision mediump float;precision mediump int;\n";
-
-const GLchar vrt_bdy_src[]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-
-const GLchar frg_hdr_src[]=
-"precision lowp sampler3D;precision lowp sampler2D;"
-"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
-"precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
-"precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
-"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
-"precision lowp sampler2DArrayShadow;"
-"uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform lowp vec4 iDate;uniform lowp float iChannelTime[4];"
-"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform highp float iSampleRate;"
-"out highp vec4 fragColor;\n";
-
-const GLchar frg_ftr_src[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
