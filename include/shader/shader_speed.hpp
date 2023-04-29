@@ -74,6 +74,7 @@ glShaderSource(shader,nsrc,src,srclens);
 glCompileShader(shader);
 return shader;
 }
+
 };
 
 using namespace boost::numeric::ublas;
@@ -177,8 +178,8 @@ EGL_RED_SIZE,(EGLint)32,
 EGL_GREEN_SIZE,(EGLint)32,
 EGL_BLUE_SIZE,(EGLint)32,
 EGL_ALPHA_SIZE,(EGLint)32,
-EGL_DEPTH_SIZE,(EGLint)24,
-EGL_STENCIL_SIZE,(EGLint)8,
+EGL_DEPTH_SIZE,(EGLint)32,
+EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
@@ -191,21 +192,20 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-using time_tensor = tensor<GLdouble>;
+using gld_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
 using shad_tensor = tensor<GLuint>;
 
-mouse_tensor Mo=mouse_tensor{6,2};
-time_tensor Ti=time_tensor{3,2};
+gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 
 struct{
-GLdouble Ttime=Ti.at(0,0);
-GLdouble Tdlt=Ti.at(0,1);
-GLdouble uni_tme_dlt=Ti.at(1,0);
-GLdouble uni_tme=Ti.at(1,1);
-GLfloat Tm=Ti.at(2,0);
-GLfloat delt=Ti.at(2,1);
+GLdouble Ttime=gld.at(0,0);
+GLdouble Tdlt=gld.at(0,1);
+GLdouble uni_tme_dlt=gld.at(1,0);
+GLdouble uni_tme=gld.at(1,1);
+GLfloat Tm=gld.at(2,0);
+GLfloat delt=gld.at(2,1);
 GLuint uni_frm=Sh.at(0,0);
 GLint iFrame=Sh.at(0,1);
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
@@ -222,20 +222,20 @@ GLuint VCO=Sh.at(2,0);
 }shad;
 
 struct{
-GLfloat xx=Mo.at(0,0);
-GLfloat yy=Mo.at(0,1);
-GLfloat mX=Mo.at(1,0);
-GLfloat mY=Mo.at(1,1);
-GLfloat mm=Mo.at(2,0);
-GLfloat nn=Mo.at(2,1);
-GLfloat uni_mse=Mo.at(3,0);
-GLfloat S=Mo.at(3,1);
-GLfloat mouseY=Mo.at(4,0);
-GLfloat mouseX=Mo.at(4,1);
-GLdouble wi=Mo.at(5,0);
-GLdouble hi=Mo.at(5,1);
-GLclampf x=Mo.at(6,0);
-GLclampf y=Mo.at(6,1);
+GLfloat xx=gld.at(3,0);
+GLfloat yy=gld.at(3,1);
+GLfloat mX=gld.at(4,0);
+GLfloat mY=gld.at(4,1);
+GLfloat mm=gld.at(5,0);
+GLfloat nn=gld.at(5,1);
+GLfloat uni_mse=gld.at(6,0);
+GLfloat S=gld.at(6,1);
+GLfloat mouseY=gld.at(7,0);
+GLfloat mouseX=gld.at(7,1);
+GLdouble wi=gld.at(8,0);
+GLdouble hi=gld.at(8,1);
+GLclampf x=gld.at(9,0);
+GLclampf y=gld.at(9,1);
 }mouse;
 
 GLint Size,tmm=166666000;
