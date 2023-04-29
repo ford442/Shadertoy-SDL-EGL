@@ -73,7 +73,7 @@ public:
 char8_t * result=NULL;
 GLchar * results=NULL;
   
-static inline GLchar * rd_fl(const char * Fnm){
+inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 tie(result,results,file);
 if(compile.file){
