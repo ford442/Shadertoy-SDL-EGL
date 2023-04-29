@@ -46,12 +46,13 @@ using namespace ::boost::tuples;
 
 struct{
   GLubyte * snd;
+    GLint pos;
+
 }wave;
 
 class Audio{
   
 private:
-  GLint pos;
 
   
 public:
@@ -65,8 +66,8 @@ GLubyte * wptr;
 GLint lft;
 tie(len,lft);
 tie(stm,wptr);
-wptr=wave.snd+pos;
-lft=slen-pos;
+wptr=wave.snd+wave.pos;
+lft=slen-wave.pos;
 while(lft<=len){
 SDL_UnlockAudioDevice(dev);
 SDL_memcpy(stm,wptr,lft);
