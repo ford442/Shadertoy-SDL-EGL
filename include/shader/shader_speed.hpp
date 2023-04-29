@@ -442,7 +442,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
 
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
-glClearDepth(D);
+glClearDepth(cpu.D);
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LEQUAL);
 // glEnable(GL_DEPTH_TEST);
@@ -458,7 +458,7 @@ glEnable(GL_CULL_FACE);
 // glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-glClearColor(gF0,gF0,gF0,gF);
+glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
