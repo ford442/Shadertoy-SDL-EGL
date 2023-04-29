@@ -40,13 +40,14 @@ using namespace ::boost::tuples;
 class song_select{
 
 private:
-std::random_device rd;
 
-public:
+std::random_device rd;
 v128_t Dr;
 GLint Th,rD;
 
-static inline v128_t rNd(GLint Th){
+public:
+
+inline v128_t rNd(GLint Th){
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
