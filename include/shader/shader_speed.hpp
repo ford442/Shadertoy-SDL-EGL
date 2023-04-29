@@ -223,6 +223,8 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
+GLfloat xx,yy,mX,mY,mm,nn;
+ 
 class Run
 {
 
@@ -238,7 +240,7 @@ struct timespec req={0,tmm};
 
 // using namespace std::chrono;
 
-GLfloat xx,yy,Tm,delt,mX,mY,mm,nn;
+GLfloat Tm,delt;
 GLdouble wi,hi;
 GLint Size,iFps,fram;
 
