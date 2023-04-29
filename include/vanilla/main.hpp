@@ -6,28 +6,24 @@
 #include "boost/timer/timer.hpp"
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/avx.hpp"
-
 #include <boost/numeric/ublas/tensor.hpp>
 // #include <boost/numeric/ublas/matrix.hpp>
 // #include <boost/numeric/ublas/vector.hpp>
-
 #include <time.h>
 #include <chrono>
 
 using namespace std::chrono_literals;
+using namespace ::boost::tuples;
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 
-using namespace ::boost::tuples;
-
 #include <iostream>
 
 using namespace std;
-
 using namespace boost::numeric::ublas;
-
-using tensorVar = tensor<float>;
+using tensorVar = tensor<GLfloat>;
+using tensorVarD = tensor<GLdouble>;
 
 class tens{
 
@@ -38,7 +34,9 @@ float lol,olo;
 public:
 
 float rtt(float nm){
-tensorVar A = tensorVar{3,4,2};
+tensorVar A = tensorVar{8,4};
+A[0][0]=2.0;
+tensorVar Aa = tensorVar{2,3};
 tensorVar B = A = nm;
 lol=static_cast<float>(B[0]);
 olo=lol*100;
