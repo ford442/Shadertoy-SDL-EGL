@@ -412,6 +412,7 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
+eglBindAPI(EGL_OPENGL_API);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
@@ -555,7 +556,6 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanosleep(&req,&rem);
-eglBindAPI(EGL_OPENGL_API);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
