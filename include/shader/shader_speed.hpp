@@ -109,15 +109,15 @@ const GLchar cm_hdr_src[500]=
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
 "#pragma optionNV(fastprecision on)\n"
-// "#pragma STDGL(unroll none)\n"
-// "#pragma optionNV(unroll none)\n"
+"#pragma STDGL(unroll all)\n"
+"#pragma optionNV(unroll all)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
-// "#pragma STDGL(inline none)\n"
-// "#pragma optionNV(inline none)\n"
+"#pragma STDGL(inline all)\n"
+"#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"#define GL_ES 0\n"
+// "#define GL_ES 0\n"
 "precision mediump float;precision mediump int;\n";
 
 const GLchar vrt_bdy_src[100]=
