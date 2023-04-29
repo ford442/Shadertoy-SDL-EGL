@@ -49,11 +49,14 @@ struct{
 }wave;
 
 class Audio{
+  
+private:
+  GLint pos;
 
+  
 public:
 GLchar flnm[24];
 SDL_AudioDeviceID dev;
-GLint pos;
 GLuint slen;
 SDL_AudioSpec request;
 
