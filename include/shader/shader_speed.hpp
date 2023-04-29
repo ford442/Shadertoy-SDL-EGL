@@ -8,9 +8,7 @@
 #pragma STDC FP_CONTRACT ON
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
-
 #pragma STDC CX_LIMITED_RANGE ON
-
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -23,7 +21,6 @@
 
 #include "../../include/shader/intrins.hpp"
 #include <emscripten.h>
-
 #include <algorithm>
 #include <string.h>
 #include <stdarg.h>
@@ -35,7 +32,6 @@
 // #include <locale> // utf-16
 // #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
-
 #include <time.h>
 #include <chrono>
 #include "../../include/shader/gl.hpp"
@@ -47,7 +43,6 @@
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
-
 #include <float.h>
 #include <math.h>
 #include "boost/tuple/tuple.hpp"
@@ -138,7 +133,7 @@ const GLchar frg_hdr_src[1000]=
 const GLchar frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
-static const EGLint att_lst2[]={ 
+static const EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
