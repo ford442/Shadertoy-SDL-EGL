@@ -201,7 +201,7 @@ std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 
 
-GLint iFrame,ele=36
+GLint iFrame,ele=36;
 GLfloat S,mouseY,mouseX;
 
 class Run
