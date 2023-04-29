@@ -83,19 +83,31 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
+struct cpu
+{
+const float_t F=1.0f,Fm1=-1.0f;
+const double_t Dm1=-1.0,D=1.0;
+const double_t D0=0.0;
+const float_t F0=0.0f;
+};
+
+struct gpu
+{
+GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
+};
+
+
+
 class Run
 {
 
 private:
   
-  long int length=0;
-  char8_t * result=NULL;
+long int length=0;
+char8_t * result=NULL;
 GLchar * results=NULL;
   
-const float_t F=1.0f,Fm1=-1.0f;
-const double_t Dm1=-1.0,D=1.0;
-const double_t D0=0.0;
-const float_t F0=0.0f;
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
@@ -105,25 +117,13 @@ struct timespec req={0,tmm};
 
 // using namespace std::chrono;
 
-GLfloat xx;
-GLfloat yy;
-GLfloat Tm;
-GLfloat delt;
-GLdouble wi,hi;
-GLfloat Tdlt;
-GLint ele=36;
+GLfloat S,xx,yy,Tm,delt,Tdlt,mouseY,mouseX,mX,mY,mm,nn;
+GLdouble wi,hi,Ttime;
+GLint Size,iFrame,iFps,fram,ele=36;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-GLdouble Ttime;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-GLint iFrame,iFps,fram;
-GLfloat mouseY,mouseX;
-GLint Size;
-GLfloat mX,mY,mm,nn;
-GLfloat gF=F,gF0=F0,gFm1=Fm1;
 GLclampf x,y;
-GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-GLfloat S;
-  GLuint EBO,VBO,VCO,ECO;
+GLuint EBO,VBO,VCO,ECO;
 GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 EGLDisplay display;
@@ -132,7 +132,6 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-// int32_t Size;
 
 const GLchar * src[4];
 
@@ -332,10 +331,10 @@ return nullptr;
 }
   
 static inline void strt(){
-tie(F,Fm1,F0);
-tie(gF,gFm1,gF0);
-tie(D,Dm1,D0);
-tie(gD,gDm1,gD0);
+tie(cpu.F,cpu.Fm1,cpu.F0);
+tie(gpu.gF,gpu.gFm1,gpu.gF0);
+tie(cpu.D,cpu.Dm1,cpu.D0);
+tie(gpu.gD,gpu.gDm1,gpu.gD0);
 tie(iFrame,iFps);
 tie(mouseY,mouseX,x,y);
 tie(gu0,gu1,gu2,gu3);
