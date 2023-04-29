@@ -291,7 +291,7 @@ Ttime=time_spana.count();
 Tdlt=time_spanb.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-run.uni(mouseX,mouseY,Ttime,iFrame,Tdlt);
+uni(mouseX,mouseY,Ttime,iFrame,Tdlt);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
