@@ -22,8 +22,8 @@ std::chrono::steady_clock::time_point t2;
 
 using namespace std;
 using namespace boost::numeric::ublas;
-using tensorVar = tensor<GLfloat>;
-using tensorVarD = tensor<GLdouble>;
+using tensorVar = tensor_dynamic<GLfloat>;
+using tensorVarD = tensor_dynamic<GLdouble>;
 
 class tens{
 
@@ -35,7 +35,7 @@ public:
 
 float rtt(float nm){
 tensorVar A = tensorVar{8,4};
-A[0]=2.0;
+// A[0]=2.0;
 tensorVar Aa = tensorVar{2,3};
 tensorVar B = A = nm;
 lol=static_cast<float>(B[0]);
