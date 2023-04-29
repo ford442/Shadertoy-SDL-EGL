@@ -283,7 +283,7 @@ return;
 
 // static inline void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
-inline void Rend(){
+static inline void Rend(){
 iFrame++;
 t3=t2;
 t2=std::chrono::high_resolution_clock::now();
