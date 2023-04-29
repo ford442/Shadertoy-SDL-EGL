@@ -39,7 +39,7 @@ tensorVar A=tensorVar{8,4};
 A.at(0,0)=nm;
 tensorVar Aa=tensorVar{2,3};
 tensorVar B=A;
-lol=static_cast<float>(B[0]);
+lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
 return olo;
 }
