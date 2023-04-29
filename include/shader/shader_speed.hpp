@@ -105,6 +105,8 @@ const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu
 
 const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
+"#undef GL_ES\n"
+// "#define GL_ES 0\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
@@ -123,8 +125,6 @@ const GLchar vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[1000]=
-"#undef GL_ES\n"
-// "#define GL_ES 0\n"
 "precision lowp sampler3D;precision lowp sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
@@ -137,7 +137,6 @@ const GLchar frg_hdr_src[1000]=
 "out highp vec4 fragColor;\n";
 
 const GLchar frg_ftr_src[100]=
-"\n#define GL_ES=1\n"
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
 static const EGLint att_lst2[]={ 
