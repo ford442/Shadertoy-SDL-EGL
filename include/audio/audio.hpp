@@ -1,6 +1,3 @@
-  
-static inline void plt();
-
 extern "C"{  
   
 void pl();
