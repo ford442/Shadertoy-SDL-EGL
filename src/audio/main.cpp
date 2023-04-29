@@ -40,7 +40,7 @@ const shutDown=new BroadcastChannel('shutDown');
 window.open('./flac');
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},500);
+},700);
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
@@ -96,7 +96,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},300);
+},200);
 });
 
 const tem=document.getElementById('tim');
@@ -122,9 +122,9 @@ setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 function spKey(e){
 if(e.code=='KeyQ'){
 window.open('./flac');
-setTimeout(function(){
+// setTimeout(function(){
 snd();
-},100);
+// },100);
 };
 }
 
