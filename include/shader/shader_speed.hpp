@@ -62,6 +62,8 @@ class Compile
 
 private:
 
+GLsizei i;
+  
 public:
   
 static inline GLuint cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
@@ -131,7 +133,6 @@ EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 // int32_t Size;
 
-GLsizei s4=4,i;
 const GLchar * src[4];
 
 const GLchar cm_hdr_src[]=
