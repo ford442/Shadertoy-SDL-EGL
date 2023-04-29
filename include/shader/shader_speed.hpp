@@ -320,7 +320,7 @@ return;
 }
 
 static inline void Rend(){
-times.iFrame++;
+times.iFrame=times.iFrame+1;
 t3=t2;
 t2=std::chrono::high_resolution_clock::now();
 time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
