@@ -4,12 +4,12 @@ Run run;
 
 // static inline GLuint(* cs)(GLenum,GLsizei,const GLchar **){&cmpl_shd};
 
-static inline void(*st)(){&run.strt};
+// static inline void(*st)(){&run.strt};
 
 extern "C" {
 
 void str(){
-strt();
+run.strt();
 return;
 }
 
