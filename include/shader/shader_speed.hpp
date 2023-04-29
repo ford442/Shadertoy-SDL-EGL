@@ -91,18 +91,7 @@ quarTensorgf quartgf=quarTensorgf{3,3};
 quarTensorD quartD=quarTensorD{3,3};
 quarTensorgD quartgD=quarTensorgD{3,3};
 
-quartf.at(0,0)=-1.0f;
-quartf.at(0,1)=0.0f;
-quartf.at(0,2)=1.0f;
-quartD.at(0,0)=-1.0;
-quartD.at(0,1)=0.0;
-quartD.at(0,2)=1.0;
-quartgf.at(0,0)=-1.0f;
-quartgf.at(0,1)=0.0f;
-quartgf.at(0,2)=1.0f;
-quartgD.at(0,0)=-1.0;
-quartgD.at(0,1)=0.0;
-quartgD.at(0,2)=1.0;
+
 
 struct
 {
@@ -364,6 +353,18 @@ return nullptr;
 }
   
 inline void strt(){
+quartf.at(0,0)=-1.0f;
+quartf.at(0,1)=0.0f;
+quartf.at(0,2)=1.0f;
+quartD.at(0,0)=-1.0;
+quartD.at(0,1)=0.0;
+quartD.at(0,2)=1.0;
+quartgf.at(0,0)=-1.0f;
+quartgf.at(0,1)=0.0f;
+quartgf.at(0,2)=1.0f;
+quartgD.at(0,0)=-1.0;
+quartgD.at(0,1)=0.0;
+quartgD.at(0,2)=1.0;
 Compile compile;
 tie(cpu.F,cpu.Fm1,cpu.F0);
 tie(gpu.gF,gpu.gFm1,gpu.gF0);
