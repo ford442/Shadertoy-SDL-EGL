@@ -37,7 +37,7 @@ const shutDown=new BroadcastChannel('shutDown');
   
 setTimeout(function(){
 window.open('./flac');
-},1000);
+},500);
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
@@ -46,10 +46,10 @@ shutDown.postMessage({data:222});
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-// setTimeout(function(){
+setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-// },100);
+},100);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -97,7 +97,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},500);
+},700);
 });
 
 const tem=document.getElementById('tim');
@@ -125,7 +125,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},500);
+},700);
 };
 }
 
