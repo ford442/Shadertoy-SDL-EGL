@@ -29,17 +29,6 @@ using namespace ::boost::tuples;
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
 
-GLchar flnm[24];
-
-SDL_AudioDeviceID dev;
-
-static inline struct{
-GLubyte * snd;
-GLint pos;
-GLuint slen;
-SDL_AudioSpec request;
-}wave;
-
 // static inline void SDLCALL bfr(void *,GLubyte *,GLint);
 
 #include <iostream>
@@ -58,44 +47,51 @@ SDL_AudioSpec request;
 class Audio{
 
 public:
+GLchar flnm[24];
+
+SDL_AudioDeviceID dev;
+
+GLubyte * snd;
+GLint pos;
+GLuint slen;
+SDL_AudioSpec request;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
 tie(len,lft);
 tie(stm,wptr);
-wptr=wave.snd+wave.pos;
-lft=wave.slen-wave.pos;
+wptr=snd+pos;
+lft=slen-pos;
 while(lft<=len){
 SDL_UnlockAudioDevice(dev);
 SDL_memcpy(stm,wptr,lft);
 stm+=lft;
 len-=lft;
-wptr=wave.snd;
-lft=wave.slen;
-wave.pos=0;
+wptr=snd;
+lft=slen;
+pos=0;
 SDL_LockAudioDevice(dev);
 }
 SDL_memcpy(stm,wptr,len);
-wave.pos+=len;
+pos+=len;
 return;
 }
 
 static inline void plt(){
-tie(wave,bfr);
-tie(wave.snd,dev);
-tie(wave.pos,wave.slen,wave.request);
-SDL_memset(&wave.request,0,sizeof(wave.request));
-wave.request.freq=44100;
-wave.request.format=AUDIO_S32;
-wave.request.channels=2;
-wave.request.samples=1024;
-wave.pos=0;
+tie(bfr,dev);
+tie(pos,slen,request);
+SDL_memset(&request,0,sizeof(request));
+request.freq=44100;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=1024;
+pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV(flnm,&wave.request,&wave.snd,&wave.slen);
+SDL_LoadWAV(flnm,&request,&snd,&slen);
 wave.request.callback=bfr;
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&wave.request,NULL,0);
+dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
 }
