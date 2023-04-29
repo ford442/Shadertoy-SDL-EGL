@@ -18,8 +18,6 @@ EM_JS(void,js_main,(),{
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
-window.open('./flac');
-
 function normalResStart(){
 document.getElementById('di').click();
 // setTimeout(function(){
@@ -42,12 +40,8 @@ window.open('./flac');
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},500);
+},300);
   
-setTimeout(function(){
-shutDown.postMessage({data:222});
-},500);
-
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
@@ -128,9 +122,9 @@ setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 function spKey(e){
 if(e.code=='KeyQ'){
 window.open('./flac');
-// setTimeout(function(){
+setTimeout(function(){
 snd();
-// },100);
+},100);
 };
 }
 
