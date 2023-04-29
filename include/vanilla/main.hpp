@@ -7,8 +7,8 @@
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/avx.hpp"
 #include <boost/numeric/ublas/tensor.hpp>
-// #include <boost/numeric/ublas/matrix.hpp>
-// #include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
 #include <time.h>
 #include <chrono>
 
