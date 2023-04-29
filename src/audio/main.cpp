@@ -137,8 +137,6 @@ EM_ASM({
 FS.mkdir('/snd');
 });
 tie(jss,js_main);
-tie(RnD,rNd);
-tie(Th,rD,Dr);
 jss();
 return 0;
 }
