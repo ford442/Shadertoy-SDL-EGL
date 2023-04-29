@@ -6,6 +6,11 @@
 #include "boost/timer/timer.hpp"
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/avx.hpp"
+
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+
 #include <time.h>
 #include <chrono>
 
@@ -17,6 +22,17 @@ std::chrono::steady_clock::time_point t2;
 using namespace ::boost::tuples;
 #include <iostream>
 using namespace std;
+
+	using namespace boost::numeric::ublas;
+
+using tensorVar = tensor<float>;
+
+class tens{
+public:
+auto A = tensorVar{3,4,2};
+auto B = A = 2;
+float rtt(float nm){return B+nm*100;}
+};
 
 class funcs{
 
