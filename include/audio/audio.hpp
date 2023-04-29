@@ -87,7 +87,7 @@ pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&snd,&slen);
-request.callback=bfr;
+request.callback=bfr();
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
 return;
