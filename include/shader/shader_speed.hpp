@@ -191,25 +191,6 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-ms_l=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-ms_l=false;
-}}
-return(EM_BOOL)1;
-}
-
-inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
-}}
-return (EM_BOOL)1;
-}
 
   std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
@@ -218,6 +199,11 @@ std::chrono::high_resolution_clock::time_point t3;
 GLdouble Ttime,Tdlt;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+
+
+GLint iFrame,ele=36
+GLfloat S,mouseY,mouseX;
+
 class Run
 {
 
@@ -233,9 +219,9 @@ struct timespec req={0,tmm};
 
 // using namespace std::chrono;
 
-GLfloat S,xx,yy,Tm,delt,mouseY,mouseX,mX,mY,mm,nn;
+GLfloat xx,yy,Tm,delt,mX,mY,mm,nn;
 GLdouble wi,hi;
-GLint Size,iFrame,iFps,fram,ele=36;
+GLint Size,iFps,fram;
 
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_mse,uni_srate,uni_res,uni_tme_dlt,uni_tme,uni_frm,uni_fps,smp_chn_res,smp_chn[4];
@@ -540,19 +526,12 @@ return;
   
 };
 
-
-
-
-
 // static inline void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 // static inline GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
 
 // static inline GLchar * rd_fl(const char *);
 
+inline EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
 
-
-
-// static inline EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
-
-// static inline EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
+inline EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
