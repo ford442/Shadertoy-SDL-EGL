@@ -1,6 +1,5 @@
 #include "../../include/audio/main.hpp"
 
-// static inline v128_t(* RnD)(GLint){&rNd};
 song_select song;
 
 extern"C"{
@@ -26,7 +25,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},200);
+},100);
 }
   
 function pll(){
@@ -42,7 +41,7 @@ FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},200);
+},100);
 });
 
 var $iwid=document.getElementById('iwid');
