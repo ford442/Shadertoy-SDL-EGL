@@ -524,7 +524,7 @@ times.uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
-uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+mouse.uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
@@ -536,6 +536,9 @@ glUniform3f(uni_res,S,S,gpu.gF);
 glUniform3f(smp_chn_res,S,S,gpu.gF);
 iFps=96.0;
 glUniform1f(uni_fps,iFps);
+mouse.mm=mouse.S*0.5;
+mouse.nn=mouse.S*0.5;
+glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
