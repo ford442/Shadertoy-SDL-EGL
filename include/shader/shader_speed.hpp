@@ -235,7 +235,7 @@ EM_BOOL ms_l,clk_l;
   
 public:
 
-static inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
+inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
