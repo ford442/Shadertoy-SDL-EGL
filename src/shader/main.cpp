@@ -133,12 +133,11 @@ pnnl.addEventListener('keydown',Key);
 
 });
 
-void(*jss)(){&js_main};
-
+js JS;
 extern"C"{
  
 int r4nd(int tH){
-Rg=js.rNd(tH);
+Rg=JS.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
