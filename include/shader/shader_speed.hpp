@@ -190,11 +190,6 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 
 using uint_tensor = tensor<GLuint>;
 using time_tensor = tensor<GLdouble>;
@@ -213,6 +208,11 @@ GLfloat Tm=Ti.at(2,0);
 GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
 GLint fram=Ui.at(0,1);
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 }times;
 
 struct{
@@ -315,9 +315,9 @@ static inline void Rend(){
 iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
-time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
-time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
-times.Ttime=time_spana.count();
+times.time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
+times.Ttime=times.time_spana.count();
 times.Tdlt=time_spanb.count();
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
