@@ -55,8 +55,6 @@ void str();
   
 }
 
-
-
 using namespace ::boost::tuples;
 
 class Compile
@@ -64,9 +62,7 @@ class Compile
 
 private:
 
-
 long int length=0;
-
   
 public:
   
@@ -76,7 +72,7 @@ GLchar * results=NULL;
 inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 tie(result,results,file);
-if(compile.file){
+if(file){
 int stat=fseek(file,(int)0,SEEK_END);
 if(stat!=0){
 fclose(file);
