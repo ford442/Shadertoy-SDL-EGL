@@ -19,7 +19,7 @@
 #define _POSIX_PRIORITIZED_IO 1
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
-#define _POSIX_REGEXP	1
+#define _POSIX_REGEXP 1
 
 #include "../../include/shader/intrins.hpp"
 #include <emscripten.h>
@@ -391,7 +391,7 @@ tie(rem,req,tmm);
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-GLchar * frag_body=rd_fl(Fnm);
+GLchar * frag_body[100000]=rd_fl(Fnm);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
