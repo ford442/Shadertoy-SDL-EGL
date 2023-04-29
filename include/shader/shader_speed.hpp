@@ -208,6 +208,7 @@ GLfloat Tm=Ti.at(2,0);
 GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
 GLint fram=Ui.at(0,1);
+GLint iFrame=Ui.at(1,0);
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
@@ -235,7 +236,7 @@ GLclampf y=Mo.at(5,1);
 GLint Size,tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
-GLint iFrame,ele=36;
+GLint ele=36;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
