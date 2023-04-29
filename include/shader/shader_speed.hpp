@@ -380,7 +380,7 @@ tie(times.Tdlt,times.Ttime);
 tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,mouse.S);
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
-tie(t1,t2,t3);
+tie(times.t1,times.t2,times.t3);
 tie(shad.EBO,shad.VBO,shad.VCO);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
