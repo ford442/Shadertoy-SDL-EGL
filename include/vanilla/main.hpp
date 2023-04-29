@@ -11,6 +11,7 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <time.h>
 #include <chrono>
+#include <boost/multiprecision/cpp_bin_float.hpp>
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
