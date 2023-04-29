@@ -18,7 +18,7 @@ using namespace ::boost::tuples;
 #include <iostream>
 using namespace std;
 
-Class funcs{
+class funcs{
 
 private:
 
