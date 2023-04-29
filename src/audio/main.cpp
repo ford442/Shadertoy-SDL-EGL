@@ -1,18 +1,11 @@
 #include "../../include/audio/main.hpp"
 
-static inline v128_t rNd(GLint Th){
-std::srand(rd());
-rD=std::rand()%Th;
-Dr=wasm_i32x4_splat(rD);
-return Dr;
-}
-
-static inline v128_t(* RnD)(GLint){&rNd};
+// static inline v128_t(* RnD)(GLint){&rNd};
 
 extern"C"{
 
 int r4nd(int tH){
-Rg=RnD(tH);
+Rg=song_select.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
