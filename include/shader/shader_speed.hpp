@@ -192,9 +192,11 @@ EM_BOOL ms_l,clk_l;
 
 using time_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
+using shad_tensor = tensor<GLuint>;
 
 mouse_tensor Mo=mouse_tensor{6,2};
 time_tensor Ti=time_tensor{3,2};
+shad_tensor Sh=shad_tensor{3,2};
 
 struct{
 GLdouble Ttime=Ti.at(0,0);
@@ -203,8 +205,8 @@ GLdouble uni_tme_dlt=Ti.at(1,0);
 GLdouble uni_tme=Ti.at(1,1);
 GLfloat Tm=Ti.at(2,0);
 GLfloat delt=Ti.at(2,1);
-GLuint uni_frm;
-GLint iFrame;
+GLuint uni_frm=Sh.at(0,0);
+GLint iFrame=Sh.at(0,1);
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 std::chrono::high_resolution_clock::time_point t1;
@@ -213,9 +215,9 @@ std::chrono::high_resolution_clock::time_point t3;
 }times;
 
 struct{
-GLuint EBO;
-GLuint VBO;
-GLuint VCO;
+GLuint EBO=Sh.at(1,0);
+GLuint VBO=Sh.at(1,1);
+GLuint VCO=Sh.at(2,0);
 }shad;
 
 struct{
@@ -268,7 +270,7 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-GLint iFps,fram;
+GLint iFps;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -380,7 +382,7 @@ tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
 tie(uni_fps,uni_srate,times.uni_frm,fram);
-tie(times.uni_tme,times.uni_tme_dlt,times.Tm,times.delt);
+tie(times.uni_tme,times.uni_tme_dlt);
 tie(smp_chn_res,smp_chn,uni_res);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
 tie(vrt,indc,ele);
