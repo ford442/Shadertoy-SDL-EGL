@@ -203,7 +203,7 @@ time_tensor Ti=time_tensor{1,2};
 struct{
 GLdouble Ttime=Ti.at(1,1);
 GLdouble Tdlt=Ti.at(1,2);
-}time;
+}times;
 
 
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
@@ -298,11 +298,11 @@ t3=t2;
 t2=std::chrono::high_resolution_clock::now();
 time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
 time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t3);
-time.Ttime=time_spana.count();
-time.Tdlt=time_spanb.count();
+times.Ttime=time_spana.count();
+times.Tdlt=time_spanb.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-uni(mouseX,mouseY,time.Ttime,iFrame,time.Tdlt);
+uni(mouseX,mouseY,times.Ttime,iFrame,times.Tdlt);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
@@ -351,7 +351,7 @@ tie(mouseY,mouseX,x,y);
 tie(gu0,gu1,gu2,gu3);
 tie(gu4,gu5,gu6);
 tie(gu7,gu8,gu9);
-tie(time.Tdlt,time.Ttime);
+tie(times.Tdlt,times.Ttime);
 tie(mouseY,mouseX);
 tie(hi,wi,S);
 tie(mX,mY,mm,nn);
