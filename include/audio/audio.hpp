@@ -33,7 +33,7 @@ GLchar flnm[24];
 
 SDL_AudioDeviceID dev;
 
-struct{
+static inline struct{
 GLubyte * snd;
 GLint pos;
 GLuint slen;
@@ -55,11 +55,11 @@ SDL_AudioSpec request;
 #include <iostream>
 #include <emscripten.h>
 
-class Audio{
+static inline class Audio{
 
 public:
 
-inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
 tie(len,lft);
@@ -81,7 +81,7 @@ wave.pos+=len;
 return;
 }
 
-inline void plt(){
+static inline void plt(){
 tie(wave,bfr);
 tie(wave.snd,dev);
 tie(wave.pos,wave.slen,wave.request);
