@@ -40,7 +40,7 @@ window.open('./flac');
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},300);
+},700);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
