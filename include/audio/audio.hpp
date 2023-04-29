@@ -55,7 +55,7 @@ SDL_AudioSpec request;
 #include <iostream>
 #include <emscripten.h>
 
-static class Audio{
+class Audio{
 
 public:
 
