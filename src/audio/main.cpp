@@ -40,7 +40,7 @@ const shutDown=new BroadcastChannel('shutDown');
 window.open('./flac');
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},200);
+},500);
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
@@ -124,7 +124,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},500);
+},100);
 };
 }
 
