@@ -220,9 +220,6 @@ long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
   
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
   int32_t tmm=166666660;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -256,6 +253,9 @@ EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
   
 public:
 
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
