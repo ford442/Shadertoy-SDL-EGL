@@ -91,20 +91,18 @@ quarTensorgf quartgf=quarTensorgf{3,3};
 quarTensorD quartD=quarTensorD{3,3};
 quarTensorgD quartgD=quarTensorgD{3,3};
 
-
-
 struct
 {
-const float_t F=quartf.at(0,2),Fm1=quartf.at(0,0);
-const double_t Dm1=quartD.at(0,0),D=quartD.at(0,2);
-const double_t D0=quartD.at(0,1);
-const float_t F0=quartf.at(0,1);
+const float_t F=1.0f,Fm1=-1.0f;
+const double_t Dm1=-1.0,D=1.0;
+const double_t D0=0.0;
+const float_t F0=0.0f;
 }cpu;
 
 struct
 {
-GLfloat gF=quartgf.at(0,2),gF0=quartgf.at(0,1),gFm1=quartgf.at(0,0);
-GLdouble gD=quartgD.at(0,2),gD0=quartgD.at(0,1),gDm1=quartgD.at(0,0);
+GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
 
 GLclampf x,y;
