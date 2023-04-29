@@ -96,7 +96,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1000);
+},300);
 });
 
 const tem=document.getElementById('tim');
