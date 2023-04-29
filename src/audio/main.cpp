@@ -40,7 +40,7 @@ window.open('./flac');
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},700);
+},2000);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
@@ -96,7 +96,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},300);
+},500);
 });
 
 const tem=document.getElementById('tim');
@@ -124,7 +124,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},300);
+},500);
 };
 }
 
