@@ -190,7 +190,6 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-
 using uint_tensor = tensor<GLuint>;
 using time_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
@@ -236,7 +235,7 @@ GLfloat mouseX=Mo.at(4,1);
 GLdouble wi=Mo.at(5,0);
 GLdouble hi=Mo.at(5,1);
 GLclampf x=Mo.at(6,0);
-GLclampf y=Mo.at(5,1);
+GLclampf y=Mo.at(6,1);
 }mouse;
 
 GLint Size,tmm=166666000;
@@ -272,9 +271,7 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-  
 GLint iFps;
-  
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
