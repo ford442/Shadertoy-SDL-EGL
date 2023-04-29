@@ -197,7 +197,7 @@ using mouse_tensor = tensor<GLdouble>;
 
 mouse_tensor Mo=mouse_tensor{6,2};
 time_tensor Ti=time_tensor{2,2};
-time_tensor Ui=uint_tensor{2,2};
+uint_tensor Ui=uint_tensor{2,2};
 
 struct{
 GLdouble Ttime=Ti.at(0,0);
@@ -312,7 +312,7 @@ return;
 }
 
 static inline void Rend(){
-iFrame++;
+times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
