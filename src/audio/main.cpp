@@ -18,30 +18,37 @@ EM_JS(void,js_main,(),{
 
 var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
+window.open('./flac');
+
 function normalResStart(){
 document.getElementById('di').click();
-setTimeout(function(){
+// setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-},100);
+// },100);
 }
-  
+
 function pll(){
 Module.ccall('pl');
 }
-  
+
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
+  
+window.open('./flac');
+setTimeout(function(){
+shutDown.postMessage({data:222});
+},200);
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
-setTimeout(function(){
+// setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},100);
+// },100);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -89,7 +96,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1500);
+},1000);
 });
 
 const tem=document.getElementById('tim');
@@ -117,7 +124,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1000);
+},500);
 };
 }
 
