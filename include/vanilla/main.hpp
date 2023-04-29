@@ -22,7 +22,7 @@ std::chrono::steady_clock::time_point t2;
 
 using namespace std;
 using namespace boost::numeric::ublas;
-using tensorVar = tensor_dynamic<GLfloat>;
+using tensorVar = boost::numeric::ublas::tensor_dynamic<GLfloat>;
 using tensorVarD = tensor_dynamic<GLdouble>;
 
 class tens{
