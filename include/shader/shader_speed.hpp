@@ -321,16 +321,12 @@ times.time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(ti
 times.time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
 times.Ttime=times.time_spana.count();
 times.Tdlt=times.time_spanb.count();
+if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
+}
 uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
-// glClear(GL_COLOR_BUFFER_BIT);
-// glClear(GL_DEPTH_BUFFER_BIT);
-// glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-// glFlush();
-// glFinish();
-// nanosleep(&req,&rem);
 return;
 }
   
@@ -410,10 +406,10 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-  
+
 eglBindAPI(EGL_OPENGL_API);
 //   eglBindAPI(EGL_OPENGL_ES_API);
-  
+
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -546,10 +542,10 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 times.t1=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
 times.time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(times.t2-times.t3);
