@@ -46,6 +46,8 @@ GLubyte * snd;
 GLint pos;
 SDL_AudioDeviceID dev;
 GLuint slen;
+GLubyte * wptr;
+GLint lft;
 }wave;
 
 class Audio{
@@ -53,27 +55,26 @@ class Audio{
 private:
 GLchar flnm[24];
 SDL_AudioSpec request;
-GLubyte * wptr;
-GLint lft;
+
 
 public:
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-tie(len,lft);
-tie(stm,wptr);
-wptr=wave.snd+wave.pos;
-lft=wave.slen-wave.pos;
-while(lft<=len){
+tie(len,wave.lft);
+tie(stm,wave.wptr);
+wave.wptr=wave.snd+wave.pos;
+wave.lft=wave.slen-wave.pos;
+while(wave.lft<=len){
 SDL_UnlockAudioDevice(wave.dev);
-SDL_memcpy(stm,wptr,lft);
-stm+=lft;
-len-=lft;
-wptr=wave.snd;
-lft=wave.slen;
+SDL_memcpy(stm,wave.wptr,wave.lft);
+stm+=wave.lft;
+len-=wave.lft;
+wave.wptr=wave.snd;
+wave.lft=wave.slen;
 wave.pos=0;
 SDL_LockAudioDevice(wave.dev);
 }
-SDL_memcpy(stm,wptr,len);
+SDL_memcpy(stm,wave.wptr,len);
 wave.pos+=len;
 return;
 }
