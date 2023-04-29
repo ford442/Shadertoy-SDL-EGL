@@ -8,8 +8,8 @@
 #include "../../include/vanilla/avx.hpp"
 
 #include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
+// #include <boost/numeric/ublas/matrix.hpp>
+// #include <boost/numeric/ublas/vector.hpp>
 
 #include <time.h>
 #include <chrono>
@@ -20,7 +20,9 @@ std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 
 using namespace ::boost::tuples;
+
 #include <iostream>
+
 using namespace std;
 
 using namespace boost::numeric::ublas;
@@ -28,14 +30,21 @@ using namespace boost::numeric::ublas;
 using tensorVar = tensor<float>;
 
 class tens{
+
+private:
+
+float lol,olo;
+
 public:
 
 float rtt(float nm){
 tensorVar A = tensorVar{3,4,2};
 tensorVar B = A = nm;
-float lol=static_cast<float>(B[0]);
-float olo=lol*100;
-return olo;}
+lol=static_cast<float>(B[0]);
+olo=lol*100;
+return olo;
+}
+
 };
 
 class funcs{
