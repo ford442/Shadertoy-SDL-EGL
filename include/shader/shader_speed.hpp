@@ -208,7 +208,6 @@ GLdouble uni_tme=Ti.at(1,1);
 GLfloat Tm=Ti.at(2,0);
 GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
-GLint fram=Ii.at(0,0);
 GLint iFrame=Ii.at(0,1);
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
