@@ -83,16 +83,6 @@ return shader;
 
 using namespace boost::numeric::ublas;
 
-using quarTensorf=tensor<float>;
-using quarTensorgf=tensor<GLfloat>;
-using quarTensorD=tensor<double>;
-using quarTensorgD=tensor<GLdouble>;
-
-quarTensorf quartf=quarTensorf{3,3};
-quarTensorgf quartgf=quarTensorgf{3,3};
-quarTensorD quartD=quarTensorD{3,3};
-quarTensorgD quartgD=quarTensorgD{3,3};
-
 struct
 {
 const float_t F=1.0f,Fm1=-1.0f;
@@ -106,7 +96,6 @@ struct
 GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
-
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
@@ -303,8 +292,8 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mouse.mX=1.0f-(xxx*mouse.Size);
-mouse.mY=1.0f-(yyy*mouse.Size);
+mouse.mX=1.0f-(xxx*Size);
+mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
 mouse.mm=mouse.S*xx;
@@ -444,7 +433,7 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<GLint>(mouse.hi);
 S=static_cast<GLfloat>(mouse.wi);
-// mouse.S=mouse.Size;
+// mouse.S=Size;
 mouse.mX=0.5*mouse.S;
 mouse.mY=0.5*mouse.S;
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
