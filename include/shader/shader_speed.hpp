@@ -350,7 +350,7 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=reinterpret_cast<GLchar>(result);
+results=reinterpret_cast<GLchar *>(result);
 return results;
 }
 return nullptr;
@@ -391,8 +391,7 @@ tie(rem,req,tmm);
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
-const GLchar frag_file[100000]=rd_fl(Fnm);
-const GLchar * frag_body=frag_file;
+const GLchar * frag_body=rd_fl(Fnm);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
