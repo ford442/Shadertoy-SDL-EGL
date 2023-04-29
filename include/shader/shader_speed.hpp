@@ -236,6 +236,11 @@ GLclampf x=Mo.at(6,0);
 GLclampf y=Mo.at(6,1);
 }mouse;
 
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+  std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 GLint Size,tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -267,8 +272,7 @@ class Run{
 private:
 
 
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -289,9 +293,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+
 static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -320,7 +322,7 @@ return;
 static inline void Rend(){
 times.iFrame++;
 t3=t2;
-2=std::chrono::high_resolution_clock::now();
+t2=std::chrono::high_resolution_clock::now();
 time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
 time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t3);
 Ttime=times.time_spana.count();
