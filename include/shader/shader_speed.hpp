@@ -113,7 +113,7 @@ const GLchar cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision mediump float;\n"
+"precision mediump float;\n";
 // "precision mediump int;\n";
 
 const GLchar vrt_bdy_src[100]=
