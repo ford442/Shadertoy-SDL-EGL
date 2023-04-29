@@ -36,7 +36,7 @@ public:
 
 float rtt(float nm){
 tensorVar A=tensorVar{8,4};
-A[0]=[2.0,2.0,1.0,1.0];
+A[0]=2.0,2.0,1.0,1.0;
 tensorVar Aa=tensorVar{2,3};
 tensorVar B=A=nm;
 lol=static_cast<float>(B[0]);
