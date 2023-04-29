@@ -10,31 +10,31 @@ float cc2c,pp2c,uu2c;
 extern "C"{
 
 float js_tuple_float_short(float nm){ 
-return funcs.tuple_float_short(nm);
+return Funcs.tuple_float_short(nm);
 }
   
 float js_tuple_float_long(float nm){ 
-return funcs.tuple_float_long(nm);
+return Funcs.tuple_float_long(nm);
 }
 
 GLfloat js_tuple_gl(float nm){
-return funcs.tuple_gl(nm);
+return Funcs.tuple_gl(nm);
 }
   
 float js_tuple_avx(float nm){
-v128_t ans=funcs.tuple_avx(nm);
+v128_t ans=Funcs.tuple_avx(nm);
 float retrn=wasm_f32x4_extract_lane(ans,0);
 return retrn;
 }
 
 float js_tuple_avx_gl(GLfloat nm){
-v128_t ans=funcs.tuple_avx(nm);
+v128_t ans=Funcs.tuple_avx(nm);
 GLfloat retrn=wasm_f32x4_extract_lane(ans,0);
 return retrn;
 }
   
 float js_simd(float * aa){
-v128_t cc=funcs.simd_test(aa);
+v128_t cc=Funcs.simd_test(aa);
 // wasm_v128_store(&out[i], prod);
 float c=wasm_f32x4_extract_lane(cc,0);
 float d=wasm_f32x4_extract_lane(cc,1);
@@ -151,7 +151,7 @@ document.getElementById('di').click();
 });
   
 int main(void){
-  
+funcs Funcs;
 js_main();
 return 1;
 
