@@ -42,25 +42,23 @@ using namespace ::boost::tuples;
 #include <emscripten.h>
 
 struct{
-  GLubyte * snd;
-    GLint pos;
+GLubyte * snd;
+GLint pos;
 SDL_AudioDeviceID dev;
 GLuint slen;
-
 }wave;
 
 class Audio{
-  
-private:
 
-  
-public:
+private:
 GLchar flnm[24];
 SDL_AudioSpec request;
-
-static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
+
+public:
+
+static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(len,lft);
 tie(stm,wptr);
 wptr=wave.snd+wave.pos;
@@ -81,19 +79,19 @@ return;
 }
 
 inline void plt(){
-tie(pos,wave.slen,request,wave.dev);
+tie(wave.pos,wave.slen,request,wave.dev);
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
 request.samples=1024;
-pos=0;
+wave.pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 request.callback=bfr;
-dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-SDL_PauseAudioDevice(dev,SDL_FALSE);
+wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return;
 }
   
