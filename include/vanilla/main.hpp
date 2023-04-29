@@ -36,10 +36,9 @@ public:
 
 float rtt(float nm){
 tensorVar A=tensorVar{8,4};
-A.at(0,0)=2.0;
-
+A.at(0,0)=nm;
 tensorVar Aa=tensorVar{2,3};
-tensorVar B=A=nm;
+tensorVar B=A;
 lol=static_cast<float>(B[0]);
 olo=lol*100;
 return olo;
