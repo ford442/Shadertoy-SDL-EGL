@@ -48,6 +48,7 @@ GLint Th,rD;
 public:
 
 inline v128_t rNd(GLint Th){
+tie(Th,rD,Dr);
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
