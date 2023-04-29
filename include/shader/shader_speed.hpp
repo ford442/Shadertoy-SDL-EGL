@@ -271,8 +271,6 @@ class Run{
 
 private:
 
-
-
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -320,9 +318,9 @@ return;
 }
 
 static inline void Rend(){
-times.iFrame=times.iFrame+1;
-t3=t2;
-t2=std::chrono::high_resolution_clock::now();
+times.iFrame++;
+times.t3=times.t2;
+times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
 times.time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
 times.Ttime=times.time_spana.count();
