@@ -197,7 +197,7 @@ using mouse_tensor = tensor<GLdouble>;
 
 mouse_tensor Mo=mouse_tensor{6,2};
 time_tensor Ti=time_tensor{3,2};
-uint_tensor Ui=uint_tensor{4,2};
+uint_tensor Ui=uint_tensor{3,2};
 int_tensor Ii=int_tensor{1,2};
 
 struct{
@@ -210,9 +210,9 @@ GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
 GLint fram=Ii.at(0,0);
 GLint iFrame=Ii.at(0,1);
-  std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-  std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
 }times;
