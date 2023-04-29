@@ -350,7 +350,7 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=reinterpret_cast<GLchar *>(result);
+results=reinterpret_cast<GLchar>(result);
 return results;
 }
 return nullptr;
