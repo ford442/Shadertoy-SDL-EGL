@@ -135,16 +135,16 @@ b3_audio:
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -O0 -sUSE_BOOST_HEADERS=1 -std=gnu++2b -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu++2b -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc src/vanilla/js.c -c -O0 -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
-	 emcc main.o js.o -o v3020.js -mllvm -O0 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -flto=thin \
+	 emcc src/vanilla/js.c -c -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
+	 emcc main.o js.o -o v3020.js -mllvm -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT -sUSE_GLFW=0 \
-	 -sEXPORTED_FUNCTIONS='["_main","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
 b3hd:
