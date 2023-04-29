@@ -76,7 +76,6 @@ glShaderSource(shader,nsrc,src,srclens);
 glCompileShader(shader);
 return shader;
 }
-  
 };
 
 struct
@@ -87,11 +86,11 @@ const double_t D0=0.0;
 const float_t F0=0.0f;
 }cpu;
 
-struct gpu
+struct
 {
 GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-};
+}gpu;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
