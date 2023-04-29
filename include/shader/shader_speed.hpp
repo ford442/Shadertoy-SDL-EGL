@@ -79,6 +79,8 @@ return shader;
 }
 };
 
+using namespace boost::numeric::ublas;
+
 using quarTensorf=tensor<float>;
 using quarTensorgf=tensor<GLfloat>;
 using quarTensorD=tensor<double>;
@@ -217,8 +219,6 @@ std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-
-using namespace boost::numeric::ublas;
 
 using time_tensor = tensor<GLdouble>;
 time_tensor Ti=time_tensor{2,2};
