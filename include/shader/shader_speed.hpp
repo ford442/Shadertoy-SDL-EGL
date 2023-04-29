@@ -197,7 +197,7 @@ using mouse_tensor = tensor<GLdouble>;
 
 mouse_tensor Mo=mouse_tensor{6,2};
 time_tensor Ti=time_tensor{2,2};
-uint_tensor Ui=uint_tensor{2,2};
+uint_tensor Ui=uint_tensor{4,2};
 
 struct{
 GLdouble Ttime=Ti.at(0,0);
@@ -215,6 +215,12 @@ std::chrono::high_resolution_clock::time_point t3;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 }times;
+
+struct{
+GLuint EBO=Ui.at(2,0);
+GLuint VBO=Ui.at(2,1);
+GLuint VCO=Ui.at(3,0);
+}shad;
 
 struct{
 GLfloat xx=Mo.at(0,0);
@@ -269,7 +275,6 @@ GLchar * results=NULL;
   
 GLint iFps;
   
-GLuint EBO,VBO,VCO,ECO;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -375,9 +380,9 @@ tie(times.Tdlt,times.Ttime);
 tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,mouse.S);
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
-tie(t1,t2,t3);
-tie(EBO,VBO);
-tie(VCO,ECO);
+tie(times.t1,times.t2,times.t3);
+tie(shad.EBO,shad.VBO);
+tie(shad.VCO,shad.ECO);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
@@ -489,12 +494,12 @@ glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
-glGenBuffers((GLsizei)1,&VBO);
-glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glGenBuffers((GLsizei)1,&shad.VBO);
+glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
-glGenBuffers((GLsizei)1,&EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
+glGenBuffers((GLsizei)1,&shad.EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,shad.EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
@@ -518,8 +523,8 @@ nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
-glGenVertexArrays((GLsizei)1,&VCO);
-glBindVertexArray(VCO);
+glGenVertexArrays((GLsizei)1,&shad.VCO);
+glBindVertexArray(shad.VCO);
 const GLuint atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
