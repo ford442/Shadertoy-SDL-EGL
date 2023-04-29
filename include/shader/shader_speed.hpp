@@ -312,7 +312,7 @@ clk_l=true;
 }
 glUniform1f(times.uni_tme,times.Tm);
 glUniform1f(times.uni_tme_dlt,times.delt);
-glUniform1i(times.uni_frm,times.fram);
+glUniform1i(times.uni_frm,fram);
 return;
 }
 
