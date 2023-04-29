@@ -113,7 +113,8 @@ const GLchar cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision mediump float;precision mediump int;\n";
+"precision mediump float;\n"
+// "precision mediump int;\n";
 
 const GLchar vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
@@ -125,9 +126,9 @@ const GLchar frg_hdr_src[1000]=
 "precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
 "precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
 "precision lowp sampler2DArrayShadow;"
-"uniform highp float iTime;uniform highp float iTimeDelta;uniform highp float iFrameRate;uniform lowp vec4 iDate;uniform lowp float iChannelTime[4];"
+"uniform highp float iTime;uniform highp float iTimeDelta;uniform mediump float iFrameRate;uniform lowp vec4 iDate;uniform lowp float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform highp float iSampleRate;"
+"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform highp vec4 iMouse;uniform mediump float iSampleRate;"
 "out highp vec4 fragColor;\n";
 
 const GLchar frg_ftr_src[100]=
@@ -408,7 +409,6 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 
 eglBindAPI(EGL_OPENGL_API);
-//   eglBindAPI(EGL_OPENGL_ES_API);
 
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
@@ -557,6 +557,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanosleep(&req,&rem);
+  eglBindAPI(EGL_OPENGL_ES_API);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
