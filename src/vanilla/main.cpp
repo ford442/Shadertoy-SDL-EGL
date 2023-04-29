@@ -5,6 +5,7 @@ float cc2,pp2,uu2;
 float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
 
+funcs Funcs;
 
 
 extern "C"{
@@ -151,7 +152,6 @@ document.getElementById('di').click();
 });
   
 int main(void){
-funcs Funcs;
 js_main();
 return 1;
 
