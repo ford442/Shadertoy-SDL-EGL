@@ -64,7 +64,7 @@ GLint lft;
 tie(len,lft);
 tie(stm,wptr);
 wptr=wave.snd+wave.pos;
-lft=slen-wave.pos;
+lft=wave.slen-wave.pos;
 while(lft<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wptr,lft);
