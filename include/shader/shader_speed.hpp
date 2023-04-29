@@ -226,7 +226,6 @@ const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
 const GLchar * frg_hdr=frg_hdr_src;
 const GLchar * frg_ftr=frg_ftr_src;
-  
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
@@ -246,7 +245,7 @@ ms_l=false;
 return(EM_BOOL)1;
 }
 
-static inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
+inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
@@ -255,7 +254,7 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -282,7 +281,7 @@ return;
 
 // static inline void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
-static inline void Rend(){
+inline void Rend(){
 iFrame++;
 t3=t2;
 t2=std::chrono::high_resolution_clock::now();
@@ -330,7 +329,7 @@ return results;
 return nullptr;
 }
   
-static inline void strt(){
+inline void strt(){
 tie(cpu.F,cpu.Fm1,cpu.F0);
 tie(gpu.gF,gpu.gFm1,gpu.gF0);
 tie(cpu.D,cpu.Dm1,cpu.D0);
