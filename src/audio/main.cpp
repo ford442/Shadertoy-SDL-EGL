@@ -1,11 +1,12 @@
 #include "../../include/audio/main.hpp"
 
 // static inline v128_t(* RnD)(GLint){&rNd};
+song_select song;
 
 extern"C"{
 
 int r4nd(int tH){
-Rg=song_select.rNd(tH);
+Rg=song.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
