@@ -193,7 +193,16 @@ EM_BOOL ms_l,clk_l;
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
-GLdouble Ttime,Tdlt;
+
+using time_tensor = tensor<GLdouble>;
+time_tensor Ti=time_tensor{1,2};
+
+struct{
+GLdouble Ttime=Ti.at(1,1);
+GLdouble Tdlt=Ti.at(1,2);
+}time;
+
+
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 GLint iFrame,ele=36;
@@ -286,11 +295,11 @@ t3=t2;
 t2=std::chrono::high_resolution_clock::now();
 time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
 time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t3);
-Ttime=time_spana.count();
-Tdlt=time_spanb.count();
+time.Ttime=time_spana.count();
+time.Tdlt=time_spanb.count();
 mouseX=x/S;
 mouseY=(S-y)/S;
-uni(mouseX,mouseY,Ttime,iFrame,Tdlt);
+uni(mouseX,mouseY,time.Ttime,iFrame,time.Tdlt);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
@@ -339,7 +348,7 @@ tie(mouseY,mouseX,x,y);
 tie(gu0,gu1,gu2,gu3);
 tie(gu4,gu5,gu6);
 tie(gu7,gu8,gu9);
-tie(Tdlt,Ttime);
+tie(time.Tdlt,time.Ttime);
 tie(mouseY,mouseX);
 tie(hi,wi,S);
 tie(mX,mY,mm,nn);
