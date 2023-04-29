@@ -35,8 +35,9 @@ Module.ccall('pl');
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
   
-  
+setTimeout(function(){
 window.open('./flac');
+},1000);
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
