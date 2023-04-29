@@ -54,7 +54,7 @@ GLint pos;
 GLuint slen;
 SDL_AudioSpec request;
 
-void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
 tie(len,lft);
@@ -76,7 +76,7 @@ pos+=len;
 return;
 }
 
-static inline void plt(){
+inline void plt(){
 tie(pos,slen,request,dev);
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
