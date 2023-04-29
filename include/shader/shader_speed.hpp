@@ -135,7 +135,6 @@ const GLchar frg_hdr_src[]=
 const GLchar frg_ftr_src[]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
-
 static const EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
@@ -191,23 +190,30 @@ EGL_NONE,EGL_NONE
 };
 
 EM_BOOL ms_l,clk_l;
+
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 
 using namespace boost::numeric::ublas;
 
 using time_tensor = tensor<GLdouble>;
-time_tensor Ti=time_tensor{1,2};
+time_tensor Ti=time_tensor{2,2};
 
 struct{
 GLdouble Ttime=Ti.at(1,1);
 GLdouble Tdlt=Ti.at(1,2);
+GLdouble uni_tme_dlt=Ti.at(2,1);
+GLdouble uni_tme=Ti.at(2,2);
 }times;
 
-
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+GLfloat xx,yy,mX,mY,mm,nn;
+GLint Size,tmm=166666000;
+GLuint uni_mse,uni_frm;
+struct timespec rem;
+struct timespec req={0,tmm};
 GLint iFrame,ele=36;
 GLfloat S,mouseY,mouseX;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
@@ -232,12 +238,6 @@ y=e->clientY;
 return (EM_BOOL)1;
 }
 
-GLfloat xx,yy,mX,mY,mm,nn;
-GLint Size;
-GLuint uni_tme_dlt,uni_tme,uni_mse,uni_frm;
-int32_t tmm=166666000;
-struct timespec rem;
-struct timespec req={0,tmm};
 
 class Run{
 
@@ -286,8 +286,8 @@ glUniform4f(uni_mse,mm,nn,mX,mY);
 }else{
 clk_l=true;
 }
-glUniform1f(uni_tme,Tm);
-glUniform1f(uni_tme_dlt,delt);
+glUniform1f(times.uni_tme,Tm);
+glUniform1f(times.uni_tme_dlt,delt);
 glUniform1i(uni_frm,fram);
 return;
 }
@@ -362,7 +362,7 @@ tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
 tie(uni_fps,uni_srate,uni_frm,fram);
-tie(uni_tme,uni_tme_dlt,Tm,delt);
+tie(times.uni_tme,times.uni_tme_dlt,Tm,delt);
 tie(smp_chn_res,smp_chn,uni_res);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
 tie(vrt,indc,ele);
@@ -503,8 +503,8 @@ glBindVertexArray(VCO);
 const GLuint atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
-uni_tme=glGetUniformLocation(shd_prg,"iTime");
-uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
+times.uni_tme=glGetUniformLocation(shd_prg,"iTime");
+times.uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
