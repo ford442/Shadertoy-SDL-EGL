@@ -557,7 +557,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanosleep(&req,&rem);
-//  eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
