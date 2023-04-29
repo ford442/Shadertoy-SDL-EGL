@@ -239,7 +239,6 @@ GLclampf x=Mo.at(6,0);
 GLclampf y=Mo.at(6,1);
 }mouse;
 
-
 GLint Size,tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -273,7 +272,7 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-GLint iFps;
+GLint iFps,fram;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -384,7 +383,7 @@ tie(shad.EBO,shad.VBO,shad.VCO);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
-tie(uni_fps,uni_srate,times.uni_frm);
+tie(uni_fps,uni_srate,times.uni_frm,fram);
 tie(times.uni_tme,times.uni_tme_dlt,times.Tm,times.delt);
 tie(smp_chn_res,smp_chn,uni_res);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
