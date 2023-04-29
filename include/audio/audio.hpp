@@ -44,6 +44,8 @@ using namespace ::boost::tuples;
 struct{
   GLubyte * snd;
     GLint pos;
+SDL_AudioDeviceID dev;
+GLuint slen;
 
 }wave;
 
@@ -54,8 +56,6 @@ private:
   
 public:
 GLchar flnm[24];
-SDL_AudioDeviceID dev;
-GLuint slen;
 SDL_AudioSpec request;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
@@ -66,13 +66,13 @@ tie(stm,wptr);
 wptr=wave.snd+wave.pos;
 lft=slen-wave.pos;
 while(lft<=len){
-SDL_UnlockAudioDevice(dev);
+SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wptr,lft);
 stm+=lft;
 len-=lft;
-wptr=snd;
-lft=slen;
-pos=0;
+wptr=wave.snd;
+lft=wave.slen;
+wave.pos=0;
 SDL_LockAudioDevice(dev);
 }
 SDL_memcpy(stm,wptr,len);
@@ -81,7 +81,7 @@ return;
 }
 
 inline void plt(){
-tie(pos,slen,request,dev);
+tie(pos,wave.slen,request,wave.dev);
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
 request.format=AUDIO_S32;
@@ -90,7 +90,7 @@ request.samples=1024;
 pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV(flnm,&request,&snd,&slen);
+SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 request.callback=bfr;
 dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(dev,SDL_FALSE);
