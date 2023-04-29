@@ -37,10 +37,14 @@ Module.ccall('pl');
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
   
+  
+setTimeout(function(){
 window.open('./flac');
+},100);
+  
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},700);
+},500);
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
