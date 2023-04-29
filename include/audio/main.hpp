@@ -1,15 +1,6 @@
-
 #pragma once
 
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
-#include <wasm_simd128.h>
-#include <tmmintrin.h> // ssse 3
-#include <smmintrin.h>  // sse 4.1
-#include <avxintrin.h>  // AVX
-#include <xmmintrin.h>
-#include <immintrin.h> 
-#include <nmmintrin.h>  //  sse 4.2
+// #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
@@ -25,8 +16,17 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
+#include <wasm_simd128.h>
+#include <tmmintrin.h> // ssse 3
+#include <smmintrin.h>  // sse 4.1
+#include <xmmintrin.h>
+#include <immintrin.h> 
+#include <nmmintrin.h>  //  sse 4.2
+#include <avxintrin.h>  // AVX
+
 #include <unistd.h>
 #include <GL/gl.h>
+
 #include "boost/tuple/tuple.hpp"
 
 using namespace ::boost::tuples;
@@ -65,6 +65,3 @@ int c;
 int r4nd(int);
 
 }
-
-
-// static inline v128_t rNd(GLint);
