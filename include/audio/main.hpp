@@ -31,6 +31,30 @@
 
 using namespace ::boost::tuples;
 
+#include <cstdlib>
+#include <ctime>
+#include <random>
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
+class song_select{
+
+private:
+v128_t Dr;
+GLint Th,rD;
+std::random_device rd;
+
+public:
+
+static inline v128_t rNd(GLint Th){
+std::srand(rd());
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
+return Dr;
+}
+
+};
+
 extern "C"{
   
 v128_t Rg;
@@ -40,19 +64,6 @@ int r4nd(int);
 
 }
 
-v128_t Dr;
-
 #include <GL/gl.h>
 
-static inline v128_t rNd(GLint);
-
-GLint Th,rD;
-
-#include <cstdlib>
-#include <ctime>
-#include <random>
-
-std::random_device rd;
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
+// static inline v128_t rNd(GLint);
