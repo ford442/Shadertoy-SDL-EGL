@@ -44,22 +44,25 @@ using namespace ::boost::tuples;
 #include <iostream>
 #include <emscripten.h>
 
+struct{
+  GLubyte * snd;
+}wave;
+
 class Audio{
 
 public:
 GLchar flnm[24];
 SDL_AudioDeviceID dev;
-GLubyte * snd;
 GLint pos;
 GLuint slen;
 SDL_AudioSpec request;
 
-inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 GLubyte * wptr;
 GLint lft;
 tie(len,lft);
 tie(stm,wptr);
-wptr=snd+pos;
+wptr=wave.snd+pos;
 lft=slen-pos;
 while(lft<=len){
 SDL_UnlockAudioDevice(dev);
