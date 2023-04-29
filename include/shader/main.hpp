@@ -16,19 +16,32 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-int rD;
-int Th;
-
 #include "../../include/shader/intrins.hpp"
 #include "boost/tuple/tuple.hpp"
+#include <random>
 
 using namespace ::boost::tuples;
-v128_t Dr;
 
-#include <random>
+class js
+{
+
+private:
+
+int rD;
+int Th;
+v128_t Dr;
 std::random_device rd;
 
-v128_t rNd(int);
+public:
+
+v128_t rNd(int Th){
+std::srand(rd());
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
+return Dr;
+}
+
+};
 
 extern"C"{
 
