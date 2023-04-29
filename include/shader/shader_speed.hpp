@@ -79,13 +79,13 @@ return shader;
   
 };
 
-struct cpu
+struct
 {
 const float_t F=1.0f,Fm1=-1.0f;
 const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
-};
+}cpu;
 
 struct gpu
 {
