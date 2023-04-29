@@ -201,6 +201,7 @@ std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 
 GLint iFrame,ele=36;
 GLfloat S,mouseY,mouseX;
+EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -259,7 +260,6 @@ const GLchar * frg_ftr=frg_ftr_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 public:
 
