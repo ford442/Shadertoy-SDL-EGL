@@ -191,12 +191,15 @@ EGL_NONE,EGL_NONE
 EM_BOOL ms_l,clk_l;
 
 using uint_tensor = tensor<GLuint>;
+using int_tensor = tensor<GLint>;
 using time_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
 
 mouse_tensor Mo=mouse_tensor{6,2};
 time_tensor Ti=time_tensor{2,2};
+
 uint_tensor Ui=uint_tensor{4,2};
+int_tensor Ii=int_tensor{1,2};
 
 struct{
 GLdouble Ttime=Ti.at(0,0);
@@ -206,8 +209,8 @@ GLdouble uni_tme=Ti.at(1,1);
 GLfloat Tm=Ti.at(2,0);
 GLfloat delt=Ti.at(2,1);
 GLuint uni_frm=Ui.at(0,0);
-GLint fram=Ui.at(0,1);
-GLint iFrame=Ui.at(1,0);
+GLint fram=Ii.at(0,0);
+GLint iFrame=Ii.at(0,1);
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
@@ -216,9 +219,9 @@ std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 }times;
 
 struct{
-GLuint EBO=Ui.at(2,0);
-GLuint VBO=Ui.at(2,1);
-GLuint VCO=Ui.at(3,0);
+GLuint EBO=Ui.at(1,0);
+GLuint VBO=Ui.at(1,1);
+GLuint VCO=Ui.at(2,0);
 }shad;
 
 struct{
