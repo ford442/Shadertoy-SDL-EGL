@@ -6,10 +6,14 @@ float ccc,ppc,uuc;
 float cc2c,pp2c,uu2c;
 
 funcs Funcs;
-
+tens Tens;
 
 extern "C"{
 
+float js_Tensors(float nm){ 
+return Tens.tuple_float_short(nm);
+}
+  
 float js_tuple_float_short(float nm){ 
 return Funcs.tuple_float_short(nm);
 }
@@ -93,6 +97,11 @@ console.log(reslt);
 setTimeout(function(){
 console.log("avx gl function:");
 var reslt=Module.ccall('js_tuple_avx_gl',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+console.log("Tensor class def:");
+var reslt=Module.ccall('js_Tensors',"Number",["Number"],[1.0]);
 console.log(reslt);
 },1000);
 
