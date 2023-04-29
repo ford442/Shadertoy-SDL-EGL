@@ -159,7 +159,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE,EGL_NONE
 };
 static const EGLint att_lst[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -190,15 +190,12 @@ EGL_NONE,EGL_NONE
 };
 
 EM_BOOL ms_l,clk_l;
-
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
-  
 GLdouble Ttime,Tdlt;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
 std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
-
 GLint iFrame,ele=36;
 GLfloat S,mouseY,mouseX;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
@@ -226,26 +223,20 @@ return (EM_BOOL)1;
 GLfloat xx,yy,mX,mY,mm,nn;
 GLint Size;
 GLuint uni_tme_dlt,uni_tme,uni_mse,uni_frm;
+int32_t tmm=166666000;
+struct timespec rem;
+struct timespec req={0,tmm};
 
-class Run
-{
+class Run{
 
 private:
   
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-  
-int32_t tmm=166666660;
-struct timespec rem;
-struct timespec req={0,tmm};
-
-// using namespace std::chrono;
-
 GLfloat Tm,delt;
 GLdouble wi,hi;
 GLint iFps,fram;
-
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
@@ -254,14 +245,11 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-
 const GLchar * src[4];
-
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
 const GLchar * frg_hdr=frg_hdr_src;
 const GLchar * frg_ftr=frg_ftr_src;
-
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
@@ -291,8 +279,6 @@ glUniform1f(uni_tme_dlt,delt);
 glUniform1i(uni_frm,fram);
 return;
 }
-
-// static inline void(*un)(GLfloat,GLfloat,GLfloat,GLint,GLfloat){&uni};
 
 static inline void Rend(){
 iFrame++;
@@ -385,15 +371,17 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
+  
 eglBindAPI(EGL_OPENGL_API);
 //   eglBindAPI(EGL_OPENGL_ES_API);
+  
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -403,7 +391,7 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=static_cast<int32_t>(hi);
+Size=static_cast<GLint>(hi);
 S=static_cast<GLfloat>(wi);
 // S=Size;
 mX=0.5*S;
@@ -445,13 +433,11 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear")
 emscripten_webgl_enable_extension(ctx,"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(ctx,"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(ctx,"EXT_sRGB_write_control");
-
-  emscripten_webgl_enable_extension(ctx,"OES_sample_shading");
-  emscripten_webgl_enable_extension(ctx,"EXT_multisample_compatibility");
-  emscripten_webgl_enable_extension(ctx,"OES_vertex_half_float");
-  emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
-  emscripten_webgl_enable_extension(ctx,"NV_framebuffer_multisample");
-
+emscripten_webgl_enable_extension(ctx,"OES_sample_shading");
+emscripten_webgl_enable_extension(ctx,"EXT_multisample_compatibility");
+emscripten_webgl_enable_extension(ctx,"OES_vertex_half_float");
+emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
+emscripten_webgl_enable_extension(ctx,"NV_framebuffer_multisample");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(cpu.D);
@@ -474,11 +460,11 @@ glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
-// nanosleep(&req,&rem);
+nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
