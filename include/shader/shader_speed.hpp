@@ -45,6 +45,7 @@
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
 #include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/vector.hpp>
 
 #include <float.h>
 #include <math.h>
