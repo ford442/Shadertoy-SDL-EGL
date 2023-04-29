@@ -7,11 +7,11 @@
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/avx.hpp"
 #include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
+// #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <time.h>
 #include <chrono>
-#include <boost/multiprecision/cpp_bin_float.hpp>
+// #include <boost/multiprecision/cpp_bin_float.hpp>
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
@@ -23,8 +23,8 @@ std::chrono::steady_clock::time_point t2;
 
 using namespace std;
 using namespace boost::numeric::ublas;
-using tensorVar = tensor<GLfloat>;
-using tensorVarD = tensor<GLdouble>;
+using tensorVar[] = tensor<GLfloat>;
+using tensorVarD[] = tensor<GLdouble>;
 
 class tens{
 
