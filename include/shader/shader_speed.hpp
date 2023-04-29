@@ -62,39 +62,8 @@ class Compile
 
 private:
 
-long int length=0;
-  
 public:
-  
-char8_t * result=NULL;
-GLchar * results=NULL;
-  
-inline GLchar * rd_fl(const char * Fnm){
-FILE * file=fopen(Fnm,"r");
-tie(result,results,file);
-if(file){
-int stat=fseek(file,(int)0,SEEK_END);
-if(stat!=0){
-fclose(file);
-return nullptr;
-}
-length=ftell(file);
-stat=fseek(file,(int)0,SEEK_SET);
-if(stat!=0){
-fclose(file);
-return nullptr;
-}
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
-if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
-result[actual_length++]={'\0'};
-}
-fclose(file);
-results=reinterpret_cast<GLchar *>(result);
-return results;
-}
-return nullptr;
-}
+   
   
 static inline GLuint cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
 GLsizei srclens[nsrc];
@@ -113,6 +82,10 @@ class Run
 {
 
 private:
+  
+  long int length=0;
+  char8_t * result=NULL;
+GLchar * results=NULL;
   
 const float_t F=1.0f,Fm1=-1.0f;
 const double_t Dm1=-1.0,D=1.0;
@@ -327,6 +300,32 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
   
+inline GLchar * rd_fl(const char * Fnm){
+FILE * file=fopen(Fnm,"r");
+tie(result,results,file);
+if(file){
+int stat=fseek(file,(int)0,SEEK_END);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+stat=fseek(file,(int)0,SEEK_SET);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+if(result){
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
+result[actual_length++]={'\0'};
+}
+fclose(file);
+results=reinterpret_cast<GLchar *>(result);
+return results;
+}
+return nullptr;
+}
   
 static inline void strt(){
 tie(F,Fm1,F0);
