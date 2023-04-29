@@ -107,7 +107,6 @@ GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
 GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
 
-GLclampf x,y;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
@@ -214,6 +213,9 @@ std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
 using time_tensor = tensor<GLdouble>;
 time_tensor Ti=time_tensor{2,2};
 
+using mouse_tensor = tensor<GLdouble>;
+mouse_tensor Mo=mouse_tensor{6,2};
+
 struct{
 GLdouble Ttime=Ti.at(1,1);
 GLdouble Tdlt=Ti.at(1,2);
@@ -221,13 +223,28 @@ GLdouble uni_tme_dlt=Ti.at(2,1);
 GLdouble uni_tme=Ti.at(2,2);
 }times;
 
-GLfloat xx,yy,mX,mY,mm,nn;
+struct{
+GLfloat xx=Mo.at(0,0);
+GLfloat yy=Mo.at(0,1);
+GLfloat mX=Mo.at(1,0);
+GLfloat mY=Mo.at(1,1);
+GLfloat mm=Mo.at(2,0);
+GLfloat nn=Mo.at(2,1);
+GLfloat uni_mse=Mo.at(3,0);
+GLfloat S=Mo.at(3,1);
+GLfloat mouseY=Mo.at(4,0);
+GLfloat mouseX=Mo.at(4,1);
+GLdouble wi=Mo.at(5,0);
+GLdouble hi=Mo.at(5,1);
+GLclampf x=Mo.at(6,0);
+GLclampf y=Mo.at(5,1);
+}mouse;
+
 GLint Size,tmm=166666000;
-GLuint uni_mse,uni_frm;
+GLuint uni_frm;
 struct timespec rem;
 struct timespec req={0,tmm};
 GLint iFrame,ele=36;
-GLfloat S,mouseY,mouseX;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -244,12 +261,11 @@ return(EM_BOOL)1;
 inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-x=e->clientX;
-y=e->clientY;
+mouse.x=e->clientX;
+mouse.y=e->clientY;
 }}
 return (EM_BOOL)1;
 }
-
 
 class Run{
 
@@ -259,7 +275,6 @@ long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
 GLfloat Tm,delt;
-GLdouble wi,hi;
 GLint iFps,fram;
 GLuint EBO,VBO,VCO,ECO;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
@@ -279,22 +294,22 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
 
-static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+static inline void uni(GLfloat mouse.xx,GLfloat mouse.yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const GLfloat xxx=xx;
-const GLfloat yyy=yy;
-mX=1.0-(xxx*Size);
-mY=1.0-(yyy*Size);
+const GLfloat xxx=mouse.xx;
+const GLfloat yyy=mouse.yy;
+mouse.mX=1.0f-(xxx*mouse.Size);
+mouse.mY=1.0f-(yyy*mouse.Size);
 clk_l=false;
 }
 mm=S*xx;
 nn=S*yy;
-glUniform4f(uni_mse,mm,nn,mX,mY);
+glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
@@ -312,9 +327,9 @@ time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t1);
 time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(t2-t3);
 times.Ttime=time_spana.count();
 times.Tdlt=time_spanb.count();
-mouseX=x/S;
-mouseY=(S-y)/S;
-uni(mouseX,mouseY,times.Ttime,iFrame,times.Tdlt);
+mouse.mouseX=mouse.x/mouse.S;
+mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
+uni(mouse.mouseX,mouse.mouseY,times.Ttime,iFrame,times.Tdlt);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
@@ -371,14 +386,14 @@ tie(gpu.gF,gpu.gFm1,gpu.gF0);
 tie(cpu.D,cpu.Dm1,cpu.D0);
 tie(gpu.gD,gpu.gDm1,gpu.gD0);
 tie(iFrame,iFps);
-tie(mouseY,mouseX,x,y);
+tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
 tie(gu0,gu1,gu2,gu3);
 tie(gu4,gu5,gu6);
 tie(gu7,gu8,gu9);
 tie(times.Tdlt,times.Ttime);
-tie(mouseY,mouseX);
-tie(hi,wi,S);
-tie(mX,mY,mm,nn);
+tie(mouse.mouseY,mouse.mouseX);
+tie(mouse.hi,mouse.wi,mouse.S);
+tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
 tie(t1,t2,t3);
 tie(EBO,VBO);
 tie(VCO,ECO);
@@ -394,7 +409,7 @@ tie(retCl,retMu,retMd,retMv);
 tie(retSa,retSb,retSc);
 tie(ms_l,clk_l);
 tie(time_spana,time_spanb);
-tie(xx,yy,uni_mse);
+tie(mouse.xx,mouse.yy,mouse.uni_mse);
 tie(rem,req,tmm);
 eglconfig=NULL;
 iFrame=0;
@@ -426,12 +441,12 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
-emscripten_get_element_css_size("canvas",&wi,&hi);
-Size=static_cast<GLint>(hi);
-S=static_cast<GLfloat>(wi);
-// S=Size;
-mX=0.5*S;
-mY=0.5*S;
+emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+Size=static_cast<GLint>(mouse.hi);
+S=static_cast<GLfloat>(mouse.wi);
+// mouse.S=mouse.Size;
+mouse.mX=0.5*mouse.S;
+mouse.mY=0.5*mouse.S;
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
