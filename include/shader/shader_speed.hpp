@@ -344,7 +344,7 @@ mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
 uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
 glDisable(GL_BLEND);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glEnable(GL_BLEND);
 return;
 }
