@@ -91,12 +91,11 @@ const float_t F0=0.0f;
 
 struct
 {
-GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
+const GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+const GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
 
-typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+
 
 const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
@@ -266,9 +265,12 @@ return (EM_BOOL)1;
 class Run{
 
 private:
-
-const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
   
+typedef struct{GLfloat XYZW[4];}Vertex;
+const Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -289,9 +291,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
-
-GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-
+  
 inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
