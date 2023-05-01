@@ -136,6 +136,7 @@ return tt;
 }
 
 v128_t double_add(float fl){
+tie(inte,deci,q,intrn);
 inte.at(0,0)=std::floor(fl);
 deci.at(0,0)=fl-inte.at(0,0);
 intrn.at(0,0)=wasm_f32x4_make(inte.at(0,0),deci.at(0,0),deci.at(0,0),deci.at(0,0));
