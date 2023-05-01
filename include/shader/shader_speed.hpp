@@ -272,6 +272,8 @@ class Run{
 
 private:
 
+Compile compile;
+
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -363,7 +365,6 @@ return nullptr;
 }
   
 inline void strt(){
-Compile compile;
 tie(cpu.F,cpu.Fm1,cpu.F0);
 tie(gpu.gF,gpu.gFm1,gpu.gF0);
 tie(cpu.D,cpu.Dm1,cpu.D0);
