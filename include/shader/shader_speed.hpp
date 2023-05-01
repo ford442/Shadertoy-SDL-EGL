@@ -311,7 +311,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
 
-Data data;
+static Data data;
 
 static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
