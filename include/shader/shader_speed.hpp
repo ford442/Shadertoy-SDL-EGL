@@ -98,9 +98,6 @@ GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
 
-using indi_tensor = tensor<GLubyte>;
-
-
 const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
@@ -293,9 +290,9 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
 
-const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
-static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -320,7 +317,7 @@ glUniform1i(times.uni_frm,fram);
 return;
 }
 
-static inline void Rend(){
+inline void Rend(){
 times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
