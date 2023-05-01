@@ -139,7 +139,7 @@ v128_t double_add(float fl){
 inte.at(0,0)=std::floor(fl);
 deci.at(0,0)=fl-inte.at(0,0);
 intrn.at(0,0)=wasm_f32x4_make(inte.at(0,0),deci.at(0,0),deci.at(0,0),deci.at(0,0));
-intrn.at(0,1)=wasm_f32x4_make(1000.0,100.0,10.0,1.0);
+intrn.at(0,1)=wasm_f32x4_make(1.0,100.0,10.0,1.0);
 intrn.at(0,0)=wasm_f32x4_div(intrn.at(0,0),intrn.at(0,1));
 intrn.at(0,2)=wasm_f32x4_sqrt(intrn.at(0,0));
 intrn.at(0,0)=wasm_f32x4_mul(intrn.at(0,2),intrn.at(0,2));
