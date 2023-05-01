@@ -273,7 +273,7 @@ mouse.y=e->clientY;
 return (EM_BOOL)1;
 }
 
-class Data{
+class data{
 
 private:
 
@@ -286,7 +286,7 @@ const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,
 
 };
 
-class Run:public Data data{
+class Run:public data{
 
 private:
 Compile compile;
