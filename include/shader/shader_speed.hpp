@@ -194,12 +194,6 @@ float Fm1=Fi.at(0,1);
 double D=Di.at(0,0);
 double Dm1=Di.at(0,1);
 double_t D0=Di.at(0,2);
-F=1.0f;
-F0=0.0f;
-Fm1=-1.0f;
-D=1.0;
-D0=0.0;
-Dm1=-1.0;
 }cpu;
 
 struct
@@ -379,6 +373,12 @@ return nullptr;
 }
   
 inline void strt(){
+Fi.at(0,0)=1.0f;
+Fi.at(0,2)=0.0f;
+Fi.at(0,1)=-1.0f;
+Di.at(0,0)=1.0;
+Di.at(0,1)=0.0;
+Di.at(0,2)=-1.0;
 tie(cpu.F,cpu.Fm1,cpu.F0);
 tie(gpu.gF,gpu.gFm1,gpu.gF0);
 tie(cpu.D,cpu.Dm1,cpu.D0);
