@@ -273,7 +273,7 @@ mouse.y=e->clientY;
 return (EM_BOOL)1;
 }
 
-class data{
+class Data{
 
 private:
 
@@ -286,7 +286,7 @@ const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,
 
 };
 
-class Run:public data{
+class Run{
 
 private:
 Compile compile;
@@ -310,6 +310,9 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
+
+Data data;
+
 static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
