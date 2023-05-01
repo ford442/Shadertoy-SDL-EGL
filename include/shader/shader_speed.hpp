@@ -6,9 +6,9 @@
 #endif
 
 #pragma STDC FP_CONTRACT ON
-#undef _FLT_EVAL_METHOD
 
-#define _FLT_EVAL_METHOD 0
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD 0
 
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
@@ -83,8 +83,8 @@ using namespace boost::numeric::ublas;
 
 struct
 {
-const float_t F=1.0f,Fm1=-1.0f;
-const double_t Dm1=-1.0,D=1.0;
+const float F=1.0f,Fm1=-1.0f;
+const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 }cpu;
@@ -200,6 +200,7 @@ using shad_tensor = tensor<GLuint>;
 
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
+shad_tensor Si=shad_tensor{1,1};
 
 struct{
 GLdouble Ttime=gld.at(0,0);
@@ -240,7 +241,8 @@ GLclampf x=gld.at(9,0);
 GLclampf y=gld.at(9,1);
 }mouse;
 
-GLint Size,tmm=166666000;
+GLint Size=Si.at(0,0);
+GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
 GLint ele=36;
