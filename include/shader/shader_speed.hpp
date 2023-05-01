@@ -194,16 +194,12 @@ float Fm1=Fi.at(0,1);
 double D=Di.at(0,0);
 double Dm1=Di.at(0,1);
 double_t D0=Di.at(0,2);
-}tensors;
-
-struct
-{
-tensors.F=1.0f;
-tensors.F0=0.0f;
-tensors.Fm1=-1.0f;
-tensors.D=1.0;
-tensors.D0=0.0;
-tensors.Dm1=-1.0;
+F=1.0f;
+F0=0.0f;
+Fm1=-1.0f;
+D=1.0;
+D0=0.0;
+Dm1=-1.0;
 }cpu;
 
 struct
