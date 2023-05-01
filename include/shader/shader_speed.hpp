@@ -183,11 +183,12 @@ using d_tensor = tensor<GLdouble>;
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 shad_tensor Si=shad_tensor{1,1};
+f_tensor Fi=f_tensor{1,3};
+d_tensor Di=d_tensor{1,3};
 
 struct
 {
-f_tensor Fi=f_tensor{1,3};
-d_tensor Di=d_tensor{1,3};
+
 float F=Fi.at(0,0);
 float F0=Fi.at(0,2);
 float Fm1=Fi.at(0,1);
