@@ -194,6 +194,7 @@ using shad_tensor = tensor<GLuint>;
 
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
+shad_tensor Si=shad_tensor{1,1};
 
 struct{
 GLdouble Ttime=gld.at(0,0);
@@ -217,9 +218,25 @@ GLuint VBO=Sh.at(1,1);
 GLuint VCO=Sh.at(2,0);
 }shad;
 
+struct{
+GLfloat xx=gld.at(3,0);
+GLfloat yy=gld.at(3,1);
+GLfloat mX=gld.at(4,0);
+GLfloat mY=gld.at(4,1);
+GLfloat mm=gld.at(5,0);
+GLfloat nn=gld.at(5,1);
+GLfloat uni_mse=gld.at(6,0);
+GLfloat S=gld.at(6,1);
+GLfloat mouseY=gld.at(7,0);
+GLfloat mouseX=gld.at(7,1);
+GLdouble wi=gld.at(8,0);
+GLdouble hi=gld.at(8,1);
+GLclampf x=gld.at(9,0);
+GLclampf y=gld.at(9,1);
+  
+}mouse;
 
-
-GLint Size;
+GLint Size=Si.at(0,0);
 static const GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -255,8 +272,6 @@ class Run{
 
 private:
   
-
-  
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -277,22 +292,7 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
-    struct{
-GLfloat xx=gld.at(3,0);
-GLfloat yy=gld.at(3,1);
-GLfloat mX=gld.at(4,0);
-GLfloat mY=gld.at(4,1);
-GLfloat mm=gld.at(5,0);
-GLfloat nn=gld.at(5,1);
-GLfloat uni_mse=gld.at(6,0);
-GLfloat S=gld.at(6,1);
-GLfloat mouseY=gld.at(7,0);
-GLfloat mouseX=gld.at(7,1);
-GLdouble wi=gld.at(8,0);
-GLdouble hi=gld.at(8,1);
-GLclampf x=gld.at(9,0);
-GLclampf y=gld.at(9,1);
-}mouse;
+
 static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
