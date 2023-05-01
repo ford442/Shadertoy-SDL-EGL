@@ -85,16 +85,12 @@ class cpu{
 
 private:
 
-const float * cF=1.0f,cFm1=-1.0f;
-const double * cDm1=-1.0,cD=1.0;
-const double_t * cD0=0.0;
-const float_t * cF0=0.0f;
-v128_t iF=wasm_v32x4_load_splat(cF);
-v128_t iFm1=wasm_v32x4_load_splat(cFm1);
-v128_t iF0=wasm_v32x4_load_splat(cF0);
-v128_t iD=wasm_v32x4_load_splat(cD);
-v128_t iDm1=wasm_v32x4_load_splat(cDm1);
-v128_t iD0=wasm_v32x4_load_splat(cD0);
+v128_t iF=wasm_v32x4_load_splat(1.0f);
+v128_t iFm1=wasm_v32x4_load_splat(-1.0f);
+v128_t iF0=wasm_v32x4_load_splat(0.0f);
+v128_t iD=wasm_v32x4_load_splat(1.0);
+v128_t iDm1=wasm_v32x4_load_splat(-1.0);
+v128_t iD0=wasm_v32x4_load_splat(0.0);
 
 public:
  
