@@ -84,7 +84,7 @@ using namespace boost::numeric::ublas;
 struct
 {
 const float_t F=1.0f,Fm1=-1.0f;
-const double_t Dm1=-1.0,DD=1.0;
+const double_t Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
 }cpu;
@@ -280,7 +280,7 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-static const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const GLchar * src[4];
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
