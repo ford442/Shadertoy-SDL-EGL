@@ -9,7 +9,14 @@ funcs Funcs;
 tens Tens;
 
 extern "C"{
-
+  
+float js_double(float nem){ 
+v128_t rtt=double_add(nem);
+float retrnI=wasm_f32x4_extract_lane(rtt,0);
+float retrnD=wasm_f32x4_extract_lane(rtt,4);
+return retrnI+retrnD;
+}
+  
 float js_Tensors(float nm){ 
 return Tens.rtt(nm);
 }
@@ -102,6 +109,11 @@ console.log(reslt);
 setTimeout(function(){
 console.log("Tensor class def:");
 var reslt=Module.ccall('js_Tensors',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+console.log("Intrins Tensor:");
+var reslt=Module.ccall('js_double',"Number",["Number"],[1.0]);
 console.log(reslt);
 },1000);
 
