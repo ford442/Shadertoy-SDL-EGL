@@ -295,7 +295,8 @@ const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,
 class Run{
 
 private:
-  
+Data data;
+Compile compile;
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
