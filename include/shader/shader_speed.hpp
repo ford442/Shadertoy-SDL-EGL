@@ -97,7 +97,7 @@ v128_t iD0=wasm_f32x4_splat(cD0);
 const float Fm1=wasm_i32x4_extract_lane(iFm1,0);
 */
   
-const float F=wasm_i32x4_extract_lane(iF,0);
+const float F=wasm_i32x4_extract_lane(iF,2);
 }cpu;
 
 struct
