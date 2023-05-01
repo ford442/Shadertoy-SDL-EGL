@@ -183,13 +183,13 @@ gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 shad_tensor Si=shad_tensor{1,1};
 f_tensor FL=f_tensor{3,1};
+const float cF=1.0f,cFm1=-1.0f;
+const float_t cF0=0.0f;
 
 struct
 {
-const float cF=1.0f,cFm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
-const float_t cF0=0.0f;
 FL.at(0,0)=cF;
 const float F=FL.at(0,0);
 FL.at(1,0)=cFm1;
