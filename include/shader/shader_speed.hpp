@@ -93,8 +93,10 @@ v128_t iF0=wasm_f32x4_splat(cF0);
 v128_t iD=wasm_f32x4_splat(cD);
 v128_t iDm1=wasm_f32x4_splat(cDm1);
 v128_t iD0=wasm_f32x4_splat(cD0);
-const float F=wasm_i32x4_extract_lane(iF,3),Fm1=wasm_i32x4_extract_lane(iFm1,3);
-const double Dm1=-1.0,D=1.0;
+const float F=wasm_i32x4_extract_lane(iF,3);
+const float Fm1=wasm_i32x4_extract_lane(iFm1,3);
+const double Dm1=-1.0
+const double D=1.0;
 const double_t D0=0.0;
 const float_t F0=wasm_i32x4_extract_lane(iF0,0);
 
@@ -276,8 +278,8 @@ return (EM_BOOL)1;
 struct{
 typedef struct{GLfloat XYZW[4];}Vertex;
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-const Vertex vrt[8]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
-const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+const Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 }data;
 
 class Run{
@@ -343,7 +345,9 @@ mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
 uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
+glDisable(GL_BLEND);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,data.indc);
+glEnable(GL_BLEND);
 return;
 }
   
@@ -495,7 +499,7 @@ glStencilMask(0xFF);
 glDisable(GL_DITHER);
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
