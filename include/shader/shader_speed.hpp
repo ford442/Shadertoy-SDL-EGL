@@ -87,14 +87,17 @@ const float cF=1.0f,Fm1=-1.0f;
 const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=0.0f;
-v128_t F=wasm_f32x4_splat(cF);
+v128_t iF=wasm_f32x4_splat(cF);
+/*
 v128_t iFm1=wasm_f32x4_splat(cFm1);
 v128_t iF0=wasm_f32x4_splat(cF0);
 v128_t iD=wasm_f32x4_splat(cD);
 v128_t iDm1=wasm_f32x4_splat(cDm1);
 v128_t iD0=wasm_f32x4_splat(cD0);
-const float F=wasm_i32x4_extract_lane(iF,0);
 const float Fm1=wasm_i32x4_extract_lane(iFm1,0);
+*/
+  
+const float F=wasm_i32x4_extract_lane(iF,0);
 }cpu;
 
 struct
