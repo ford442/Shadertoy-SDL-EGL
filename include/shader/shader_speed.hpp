@@ -518,7 +518,7 @@ glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 shad.PRG=shd_prg;
-glUseProgram(PRG);
+glUseProgram(shad.PRG);
 nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
