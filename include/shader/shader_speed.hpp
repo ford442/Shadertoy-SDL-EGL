@@ -183,23 +183,27 @@ using d_tensor = tensor<GLdouble>;
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 shad_tensor Si=shad_tensor{1,1};
-f_tensor Fi=f_tensor{1,3};
-d_tensor Di=d_tensor{1,3};
 
 struct
 {
-static float F=Fi.at(0,0);
-static float F0=Fi.at(0,2);
-static float Fm1=Fi.at(0,1);
-F=1.0f;
-F0=0.0f;
-Fm1=-1.0f;
-static double D=Di.at(0,0);
-static double Dm1=Di.at(0,1);
-static double_t D0=Di.at(0,2);
-D=1.0;
-D0=0.0;
-Dm1=-1.0;
+f_tensor Fi=f_tensor{1,3};
+d_tensor Di=d_tensor{1,3};
+float F=Fi.at(0,0);
+float F0=Fi.at(0,2);
+float Fm1=Fi.at(0,1);
+double D=Di.at(0,0);
+double Dm1=Di.at(0,1);
+double_t D0=Di.at(0,2);
+}tensors;
+
+struct
+{
+tensors.F=1.0f;
+tensors.F0=0.0f;
+tensors.Fm1=-1.0f;
+tensors.D=1.0;
+tensors.D0=0.0;
+tensors.Dm1=-1.0;
 }cpu;
 
 struct
