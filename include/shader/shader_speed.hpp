@@ -276,13 +276,12 @@ return (EM_BOOL)1;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 const Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
-
-struct{
-
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+
+
+
 const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
-}data;
 
 class Run{
 
@@ -348,7 +347,7 @@ mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
 uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
 glDisable(GL_BLEND);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,data.indc);
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glEnable(GL_BLEND);
 return;
 }
@@ -404,7 +403,7 @@ tie(uni_fps,uni_srate,times.uni_frm);
 tie(times.uni_tme,times.uni_tme_dlt);
 tie(smp_chn_res,smp_chn,uni_res);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
-tie(vrt,data.indc,ele);
+tie(vrt,indc,ele);
 tie(retCl,retMu,retMd,retMv);
 tie(retSa,retSb,retSc);
 tie(ms_l,clk_l);
