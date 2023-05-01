@@ -222,6 +222,8 @@ struct{
 GLuint EBO=Sh.at(1,0);
 GLuint VBO=Sh.at(1,1);
 GLuint VCO=Sh.at(2,0);
+GLuint PRG=Sh.at(2,1);
+
 }shad;
 
 struct{
@@ -506,13 +508,17 @@ src[2]=frag_body;
 src[3]=frg_ftr;
 const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // nanosleep(&req,&rem);
+  
+  
+  
 const GLuint shd_prg=glCreateProgram();
 tie(shd_prg,frag,vtx);
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
-glUseProgram(shd_prg);
+PRG=shd_prg;
+glUseProgram(PRG);
 nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
