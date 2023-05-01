@@ -199,8 +199,8 @@ double_t D0=Di.at(0,2);
 
 struct
 {
-GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-GLdouble gD=cpu.D,gD0=cpu.D0,gDm1=cpu.Dm1;
+GLfloat gF=cpu::F,gF0=cpu::F0,gFm1=cpu::Fm1;
+GLdouble gD=cpu::D,gD0=cpu::D0,gDm1=cpu::Dm1;
 }gpu;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
