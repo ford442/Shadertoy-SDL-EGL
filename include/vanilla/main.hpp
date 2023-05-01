@@ -35,13 +35,13 @@ class tens{
 private:
 
 float lol,olo;
+tensorVar A=tensorVar{8,4};
+tensorVar Aa=tensorVar{2,3};
 
 public:
 
 float rtt(float nm){
-tensorVar A=tensorVar{8,4};
 A.at(0,0)=nm;
-tensorVar Aa=tensorVar{2,3};
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
@@ -57,7 +57,6 @@ private:
 int r,m;
 float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 v128_t aa,vv,xx,l,tt;
-v128_t mlt,q;
 tI inte=tI{1,1};
 tF deci=tF{1,1};
 tV q=tV{1,1};
