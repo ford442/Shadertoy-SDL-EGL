@@ -24,7 +24,11 @@ std::chrono::steady_clock::time_point t2;
 using namespace std;
 using namespace boost::numeric::ublas;
 using tensorVar=tensor<GLfloat>;
+using tF=tensor<GLfloat>;
 using tensorVarD=tensor<GLdouble>;
+using tD=tensor<GLdouble>;
+using tI=tensor<GLint>;
+using tV=tensor<v128_t>;
 
 class tens{
 
@@ -53,7 +57,12 @@ private:
 int r,m;
 float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 v128_t aa,vv,xx,l,tt;
-
+v128_t mlt,q;
+tI inte=tI{1,1};
+tF deci=tF{1,1};
+tV q=tV{1,1};
+tV intrn=tV{1,3};
+  
 public:
 
 float tuple_float_short(float num){
@@ -125,6 +134,15 @@ std::chrono::duration<float, std::chrono::milliseconds::period> time_span=std::c
 Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return tt;
+}
+
+v128_t double_add(float fl){
+inte.at(0,0)=std::floor(fl);
+deci.at(0,0)=fl-inte;
+intrn.at(0,0)=wasm_f32x4_make(inte,deci,deci,deci);
+intrn.at(0,1)=wasm_f32x4_sqrt(1.0,deci,deci,1.0);
+intrn.at(0,2)=wasm_f32x4_mul(intrn.at(0,0),intrn.at(0,1));
+return intrn.at(0,2);
 }
 
 };
