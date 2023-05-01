@@ -255,22 +255,7 @@ class Run{
 
 private:
   
-  struct{
-GLfloat xx=gld.at(3,0);
-GLfloat yy=gld.at(3,1);
-GLfloat mX=gld.at(4,0);
-GLfloat mY=gld.at(4,1);
-GLfloat mm=gld.at(5,0);
-GLfloat nn=gld.at(5,1);
-GLfloat uni_mse=gld.at(6,0);
-GLfloat S=gld.at(6,1);
-GLfloat mouseY=gld.at(7,0);
-GLfloat mouseX=gld.at(7,1);
-GLdouble wi=gld.at(8,0);
-GLdouble hi=gld.at(8,1);
-GLclampf x=gld.at(9,0);
-GLclampf y=gld.at(9,1);
-}mouse;
+
   
 long int length=0;
 char8_t * result=NULL;
@@ -292,7 +277,22 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
-  
+    struct{
+GLfloat xx=gld.at(3,0);
+GLfloat yy=gld.at(3,1);
+GLfloat mX=gld.at(4,0);
+GLfloat mY=gld.at(4,1);
+GLfloat mm=gld.at(5,0);
+GLfloat nn=gld.at(5,1);
+GLfloat uni_mse=gld.at(6,0);
+GLfloat S=gld.at(6,1);
+GLfloat mouseY=gld.at(7,0);
+GLfloat mouseX=gld.at(7,1);
+GLdouble wi=gld.at(8,0);
+GLdouble hi=gld.at(8,1);
+GLclampf x=gld.at(9,0);
+GLclampf y=gld.at(9,1);
+}mouse;
 static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
