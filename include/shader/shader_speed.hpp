@@ -340,7 +340,7 @@ mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
 uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,Data.indc);
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,data.indc);
 return;
 }
   
