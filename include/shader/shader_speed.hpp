@@ -183,6 +183,7 @@ using d_tensor = tensor<GLdouble>;
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 shad_tensor Si=shad_tensor{1,1};
+f_tensor FL=f_tensor{6,1};
 f_tensor Fi=f_tensor{1,3};
 d_tensor Di=d_tensor{1,3};
 
@@ -210,16 +211,16 @@ const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 struct{
-GLdouble Ttime=gld.at(0,0);
-GLdouble Tdlt=gld.at(0,1);
-GLdouble uni_tme_dlt=gld.at(1,0);
-GLdouble uni_tme=gld.at(1,1);
-GLfloat Tm=gld.at(2,0);
-GLfloat delt=gld.at(2,1);
+GLfloat Ttime=FL.at(0,0);
+GLfloat Tdlt=FL.at(1,0);
+GLfloat uni_tme_dlt=FL.at(2,0);
+GLfloat uni_tme=FL.at(3,0);
+GLfloat Tm=FL.at(4,0);
+GLfloat delt=FL.at(5,0);
 GLuint uni_frm=Sh.at(0,0);
 GLint iFrame=Sh.at(0,1);
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLdouble,std::chrono::seconds::period>time_spanb;
+std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spanb;
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
@@ -333,8 +334,8 @@ static inline void Rend(){
 times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
-times.time_spana=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t1);
-times.time_spanb=std::chrono::duration<GLdouble,std::chrono::seconds::period>(times.t2-times.t3);
+times.time_spana=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t3);
 times.Ttime=times.time_spana.count();
 times.Tdlt=times.time_spanb.count();
 if(ms_l==true){
