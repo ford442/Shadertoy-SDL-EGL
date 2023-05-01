@@ -275,7 +275,7 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-static const GLint iFps=96;
+const GLint iFps=96;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
