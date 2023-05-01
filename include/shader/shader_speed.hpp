@@ -83,21 +83,21 @@ using namespace boost::numeric::ublas;
 
 struct
 {
-const float_t F=1.0f,Fm1=-1.0f;
-const double_t Dm1=-1.0,D=1.0;
-const double_t D0=0.0;
-const float_t F0=0.0f;
+static const float_t F=1.0f,Fm1=-1.0f;
+static const double_t Dm1=-1.0,D=1.0;
+static const double_t D0=0.0;
+static const float_t F0=0.0f;
 }cpu;
 
 struct
 {
-const GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-const GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
+static const GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+static const GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
 
 
 
-const GLchar cm_hdr_src[500]=
+static const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
@@ -115,10 +115,10 @@ const GLchar cm_hdr_src[500]=
 "precision highp float;\n";
 // "precision mediump int;\n";
 
-const GLchar vrt_bdy_src[100]=
+static const GLchar vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-const GLchar frg_hdr_src[1000]=
+static const GLchar frg_hdr_src[1000]=
 "precision lowp sampler3D;precision lowp sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
@@ -130,7 +130,7 @@ const GLchar frg_hdr_src[1000]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 
-const GLchar frg_ftr_src[100]=
+static const GLchar frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
 static const EGLint att_lst2[1000]={ 
@@ -236,10 +236,11 @@ GLclampf x=gld.at(9,0);
 GLclampf y=gld.at(9,1);
 }mouse;
 
-GLint Size,tmm=166666000;
+GLint Size;
+static const GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
-GLint ele=36;
+static const GLint ele=36;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -263,26 +264,25 @@ return (EM_BOOL)1;
 }
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-const Vertex vrt[8]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
-const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+static const Vertex vrt[8]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+static const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+static const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 class Run{
 
 private:
   
-
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-GLint iFps=96;
+static const GLint iFps=96;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+static const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const GLchar * src[4];
 const GLchar * cm_hdr=cm_hdr_src;
 const GLchar * vrt_bdy=vrt_bdy_src;
@@ -363,7 +363,6 @@ return nullptr;
 }
   
 inline void strt(){
-
 Compile compile;
 tie(cpu.F,cpu.Fm1,cpu.F0);
 tie(gpu.gF,gpu.gFm1,gpu.gF0);
@@ -398,7 +397,7 @@ eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
 times.iFrame=0;
 clk_l=true;
-const GLchar * frag_body=rd_fl(Fnm);
+static const GLchar * frag_body=rd_fl(Fnm);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -422,8 +421,8 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<GLint>(mouse.hi);
-mouse.S=static_cast<GLfloat>(mouse.wi);
+Size=dynamic_cast<GLint>(mouse.hi);
+mouse.S=dynamic_cast<GLfloat>(mouse.wi);
 // mouse.S=Size;
 mouse.mX=0.5*mouse.S;
 mouse.mY=0.5*mouse.S;
@@ -498,15 +497,15 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+static const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 // src[2]=frg_aa;
 src[2]=frag_body;
 src[3]=frg_ftr;
-const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+static const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // nanosleep(&req,&rem);
-const GLuint shd_prg=glCreateProgram();
+static const GLuint shd_prg=glCreateProgram();
 tie(shd_prg,frag,vtx);
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
@@ -519,7 +518,7 @@ glDeleteShader(frag);
 glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 glBindVertexArray(shad.VCO);
-const GLuint atb_pos=glGetAttribLocation(shd_prg,"iPosition");
+static const GLuint atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 times.uni_tme=glGetUniformLocation(shd_prg,"iTime");
