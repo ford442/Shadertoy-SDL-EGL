@@ -492,10 +492,12 @@ glEnable(GL_CULL_FACE);
 glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glGenBuffers((GLsizei)1,&shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
+nanosleep(&req,&rem);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,shad.EBO);
+nanosleep(&req,&rem);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
@@ -509,17 +511,16 @@ src[3]=frg_ftr;
 const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // nanosleep(&req,&rem);
   
-  
-  
 const GLuint shd_prg=glCreateProgram();
-tie(shd_prg,frag,vtx);
+tie(shd_prg,frag,vtx,shad.PRG);
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 shad.PRG=shd_prg;
-glUseProgram(shad.PRG);
 nanosleep(&req,&rem);
+nanosleep(&req,&rem);
+glUseProgram(shad.PRG);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
