@@ -11,7 +11,7 @@ tens Tens;
 extern "C"{
   
 float js_double(float nem){ 
-v128_t rtt=double_add(nem);
+v128_t rtt=Funcs.double_add(nem);
 float retrnI=wasm_f32x4_extract_lane(rtt,0);
 float retrnD=wasm_f32x4_extract_lane(rtt,4);
 return retrnI+retrnD;
