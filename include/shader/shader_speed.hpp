@@ -188,15 +188,15 @@ d_tensor Di=d_tensor{1,3};
 
 struct
 {
-static const float F=Fi.at(0,0);
-static const float F0=Fi.at(0,2);
-static const float Fm1=Fi.at(0,1);
+static float F=Fi.at(0,0);
+static float F0=Fi.at(0,2);
+static float Fm1=Fi.at(0,1);
 F=1.0f;
 F0=0.0f;
 Fm1=-1.0f;
-static const double D=Di.at(0,0);
-static const double Dm1=Di.at(0,1);
-static const double_t D0=Di.at(0,2);
+static double D=Di.at(0,0);
+static double Dm1=Di.at(0,1);
+static double_t D0=Di.at(0,2);
 D=1.0;
 D0=0.0;
 Dm1=-1.0;
