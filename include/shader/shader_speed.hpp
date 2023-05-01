@@ -174,11 +174,11 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-using gld_tensor = tensor<GLdouble>;
-using mouse_tensor = tensor<GLdouble>;
-using shad_tensor = tensor<GLuint>;
-using f_tensor = tensor<GLfloat>;
-using d_tensor = tensor<GLdouble>;
+using gld_tensor=tensor<GLdouble>;
+using mouse_tensor=tensor<GLdouble>;
+using shad_tensor=tensor<GLuint>;
+using f_tensor=tensor<GLfloat>;
+using d_tensor=tensor<GLdouble>;
 
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
@@ -235,23 +235,23 @@ GLuint PRG=Sh.at(2,1);
 }shad;
 
 struct{
-GLfloat xx=gld.at(3,0);
-GLfloat yy=gld.at(3,1);
-GLfloat mX=gld.at(4,0);
-GLfloat mY=gld.at(4,1);
-GLfloat mm=gld.at(5,0);
-GLfloat nn=gld.at(5,1);
-GLfloat uni_mse=gld.at(6,0);
-GLfloat S=gld.at(6,1);
-GLfloat mouseY=gld.at(7,0);
-GLfloat mouseX=gld.at(7,1);
-GLdouble wi=gld.at(8,0);
-GLdouble hi=gld.at(8,1);
-GLclampf x=gld.at(9,0);
-GLclampf y=gld.at(9,1);
+GLdouble xx=gld.at(0,0);
+GLdouble yy=gld.at(0,1);
+GLdouble mX=gld.at(1,0);
+GLdouble mY=gld.at(1,1);
+GLdouble mm=gld.at(2,0);
+GLdouble nn=gld.at(2,1);
+GLfloat uni_mse=FL.at(6,0);
+GLfloat S=FL.at(7,0);
+GLfloat mouseY=FL.at(8,0);
+GLfloat mouseX=FL.at(9,0);
+GLdouble wi=gld.at(3,0);
+GLdouble hi=gld.at(3,1);
+GLclampf x=FL.at(10,0);
+GLclampf y=FL.at(11,0);
 }mouse;
 
-GLint Size=Si.at(0,0);
+GLint Size=Si.at(12,0);
 GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
