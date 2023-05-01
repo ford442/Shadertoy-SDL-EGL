@@ -373,6 +373,7 @@ tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
 tie(gu0,gu1,gu2,gu3);
 tie(gu4,gu5,gu6);
 tie(gu7,gu8,gu9);
+tie(Si,Size);
 tie(times.Tdlt,times.Ttime);
 tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,mouse.S);
