@@ -81,9 +81,7 @@ return shader;
 
 using namespace boost::numeric::ublas;
 
-class Cpu{
-
-private:
+struct{
 
 const float cF=1.0f,cFm1=-1.0f;
 const double cDm1=-1.0,cD=1.0;
@@ -95,16 +93,13 @@ v128_t iF0=wasm_f32x4_splat(cF0);
 v128_t iD=wasm_f32x4_splat(cD);
 v128_t iDm1=wasm_f32x4_splat(cDm1);
 v128_t iD0=wasm_f32x4_splat(cD0);
-
-public:
- 
 const float F=wasm_i32x4_extract_lane(iF,3),Fm1=wasm_i32x4_extract_lane(iFm1,3);
 const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
 const float_t F0=wasm_i32x4_extract_lane(iF0,0);
 const GLfloat gF=F,gF0=F0,gFm1=Fm1;
 const GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-};
+}cpu;
 
 static const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
@@ -282,7 +277,6 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 
 public:
-Cpu cpu;
 const Vertex vrt[8]={{cpu.gFm1,cpu.gFm1,cpu.gF,cpu.gF},{cpu.gF,cpu.gFm1,cpu.gF,cpu.gF},{cpu.gF,cpu.gF,cpu.gF,cpu.gF},{cpu.gFm1,cpu.gF,cpu.gF,cpu.gF},{cpu.gFm1,cpu.gFm1,cpu.gFm1,cpu.gF},{cpu.gF,cpu.gFm1,cpu.gFm1,cpu.gF},{cpu.gF,cpu.gF,cpu.gFm1,cpu.gF},{cpu.gFm1,cpu.gF,cpu.gF,cpu.gF}};
 const GLubyte indc[36]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
