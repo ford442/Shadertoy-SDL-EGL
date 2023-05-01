@@ -6,9 +6,9 @@
 #endif
 
 #pragma STDC FP_CONTRACT ON
-#undef _FLT_EVAL_METHOD
+// #undef _FLT_EVAL_METHOD
 
-#define _FLT_EVAL_METHOD 0
+// #define _FLT_EVAL_METHOD 0
 
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
