@@ -81,39 +81,6 @@ return shader;
 
 using namespace boost::numeric::ublas;
 
-struct
-{
-const float cF=1.0f,Fm1=-1.0f;
-const double Dm1=-1.0,D=1.0;
-const double_t D0=0.0;
-const float_t F0=0.0f;
-v128_t iF=wasm_f32x4_splat(cF);
-/*
-v128_t iFm1=wasm_f32x4_splat(cFm1);
-v128_t iF0=wasm_f32x4_splat(cF0);
-v128_t iD=wasm_f32x4_splat(cD);
-v128_t iDm1=wasm_f32x4_splat(cDm1);
-v128_t iD0=wasm_f32x4_splat(cD0);
-const float Fm1=wasm_i32x4_extract_lane(iFm1,0);
-*/
-  
-const float F=wasm_i32x4_extract_lane(iF,2);
-}cpu;
-
-struct
-{
-GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
-}gpu;
-
-
-
-typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
-
-const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-
 const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
@@ -210,10 +177,50 @@ EM_BOOL ms_l,clk_l;
 using gld_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
 using shad_tensor = tensor<GLuint>;
+using f_tensor = tensor<GLfloat>;
 
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 shad_tensor Si=shad_tensor{1,1};
+f_tensor FL=f_tensor{3,1};
+
+struct
+{
+const float cF=1.0f,cFm1=-1.0f;
+const double Dm1=-1.0,D=1.0;
+const double_t D0=0.0;
+const float_t cF0=0.0f;
+FL.at(0,0)=cF;
+const float F=FL.at(0,0);
+FL.at(1,0)=cFm1;
+const float Fm1=FL.at(1,0);
+FL.at(2,0)=cF0;
+const float F0=FL.at(2,0);
+/*
+v128_t iF=wasm_f32x4_splat(cF);
+v128_t iFm1=wasm_f32x4_splat(cFm1);
+v128_t iF0=wasm_f32x4_splat(cF0);
+v128_t iD=wasm_f32x4_splat(cD);
+v128_t iDm1=wasm_f32x4_splat(cDm1);
+v128_t iD0=wasm_f32x4_splat(cD0);
+const float Fm1=wasm_i32x4_extract_lane(iFm1,0);
+const float F=wasm_i32x4_extract_lane(iF,2);
+
+*/
+  
+}cpu;
+
+struct
+{
+GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
+}gpu;
+
+typedef struct{GLfloat XYZW[4];}Vertex;
+Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+
+const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 struct{
 GLdouble Ttime=gld.at(0,0);
