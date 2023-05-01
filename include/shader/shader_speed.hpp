@@ -99,9 +99,7 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
 
 using indi_tensor = tensor<GLubyte>;
-indi_tensor In=indi_tensor{1,10};
 
-GLubyte indc[36];
 
 const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
@@ -272,6 +270,9 @@ class Run{
 
 private:
 
+const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+  
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -363,20 +364,6 @@ return nullptr;
 }
   
 inline void strt(){
-In.at(0,0)=0;
-In.at(0,1)=1;
-In.at(0,2)=2;
-In.at(0,3)=3;
-In.at(0,4)=4;
-In.at(0,5)=5;
-In.at(0,6)=6;
-In.at(0,7)=7;
-In.at(0,8)=8;
-In.at(0,9)=9;
-In.at(0,10)=10;
-const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-
-  GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 Compile compile;
 tie(cpu.F,cpu.Fm1,cpu.F0);
