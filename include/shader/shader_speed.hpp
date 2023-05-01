@@ -275,7 +275,7 @@ return (EM_BOOL)1;
 }
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-const Vertex vrt[8]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+const Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
 
 struct{
 
@@ -404,7 +404,7 @@ tie(uni_fps,uni_srate,times.uni_frm);
 tie(times.uni_tme,times.uni_tme_dlt);
 tie(smp_chn_res,smp_chn,uni_res);
 tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
-tie(data.vrt,data.indc,ele);
+tie(vrt,data.indc,ele);
 tie(retCl,retMu,retMd,retMv);
 tie(retSa,retSb,retSc);
 tie(ms_l,clk_l);
@@ -507,7 +507,7 @@ glEnable(GL_CULL_FACE);
 glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glGenBuffers((GLsizei)1,&shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(data.vrt),data.vrt,GL_STREAM_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,shad.EBO);
