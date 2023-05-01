@@ -81,12 +81,27 @@ return shader;
 
 using namespace boost::numeric::ublas;
 
-struct
-{
-const float F=1.0f,Fm1=-1.0f;
+class cpu{
+
+private:
+
+const float cF=1.0f,cFm1=-1.0f;
+const double cDm1=-1.0,cD=1.0;
+const double_t cD0=0.0;
+const float_t cF0=0.0f;
+v128_t iF=wasm_v32x4_load_splat(cF);
+v128_t iFm1=wasm_v32x4_load_splat(cFm1);
+v128_t iF0=wasm_v32x4_load_splat(cF0);
+v128_t iD=wasm_v32x4_load_splat(cD);
+v128_t iDm1=wasm_v32x4_load_splat(cDm1);
+v128_t iD0=wasm_v32x4_load_splat(cD0);
+
+public:
+ 
+const float F=wasm_i32x4_extract_lane(iF,3),Fm1=wasm_i32x4_extract_lane(iFm1,3);
 const double Dm1=-1.0,D=1.0;
 const double_t D0=0.0;
-const float_t F0=0.0f;
+const float_t F0=wasm_i32x4_extract_lane(iF0,0);
 }cpu;
 
 struct
