@@ -178,25 +178,34 @@ using gld_tensor = tensor<GLdouble>;
 using mouse_tensor = tensor<GLdouble>;
 using shad_tensor = tensor<GLuint>;
 using f_tensor = tensor<GLfloat>;
+using d_tensor = tensor<GLdouble>;
 
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 shad_tensor Si=shad_tensor{1,1};
 f_tensor Fi=f_tensor{1,3};
+d_tensor Di=d_tensor{1,3};
 
 struct
 {
-const float F=Fi.at(0,0);
-F=1.0f,Fm1=-1.0f;
-const float_t F0=0.0f;
-const double Dm1=-1.0,D=1.0;
-const double_t D0=0.0;
+static const float F=Fi.at(0,0);
+static const float F0=Fi.at(0,2);
+static const float Fm1=Fi.at(0,1);
+F=1.0f;
+F0=0.0f;
+Fm1=-1.0f;
+static const double D=Di.at(0,0);
+static const double Dm1=Di.at(0,1);
+static const double_t D0=Di.at(0,2);
+D=1.0;
+D0=0.0;
+Dm1=-1.0;
 }cpu;
 
 struct
 {
 GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
+GLdouble gD=cpu.D,gD0=cpu.D0,gDm1=cpu.Dm1;
 }gpu;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
