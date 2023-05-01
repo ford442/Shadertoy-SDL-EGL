@@ -103,7 +103,7 @@ indi_tensor In=indi_tensor{1,10};
 
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 // const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-GLubyte indc[];
+GLubyte indc[36];
 
 const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
@@ -277,7 +277,7 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-GLint iFps;
+GLint iFps=96;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -550,7 +550,7 @@ smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,mouse.S,mouse.S,gpu.gF);
 glUniform3f(smp_chn_res,mouse.S,mouse.S,gpu.gF);
-iFps=66.6;
+// iFps=66.6;
 glUniform1f(uni_fps,iFps);
 mouse.mm=mouse.S*0.5;
 mouse.nn=mouse.S*0.5;
