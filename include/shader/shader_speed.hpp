@@ -83,24 +83,17 @@ using namespace boost::numeric::ublas;
 
 struct
 {
-static const float_t F,Fm1;
-static const double_t Dm1,D;
-static const double_t D0;
-static const float_t F0;
+static const float_t F=1.0f,Fm1=-1.0f;
+static const double_t Dm1=-1.0,DD=1.0;
+static const double_t D0=0.0;
+static const float_t F0=0.0f;
 }cpu;
-
-cpu::F=1.0f,cpu::Fm1=-1.0f;
-cpu::Dm1=-1.0,cpu::D=1.0;
-cpu::D0=0.0;
-cpu::F0=0.0f;
 
 struct
 {
-static const GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-static const GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
+const GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+const GLdouble gD=1.0,gD0=0.0,gDm1=-1.0;
 }gpu;
-
-
 
 static const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
