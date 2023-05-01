@@ -263,7 +263,7 @@ mouse.y=e->clientY;
 return (EM_BOOL)1;
 }
 
-class Data{
+static class Data{
 
 private:
 
