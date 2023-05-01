@@ -83,11 +83,16 @@ using namespace boost::numeric::ublas;
 
 struct
 {
-static const float_t F=1.0f,Fm1=-1.0f;
-static const double_t Dm1=-1.0,D=1.0;
-static const double_t D0=0.0;
-static const float_t F0=0.0f;
+static const float_t F,Fm1;
+static const double_t Dm1,D;
+static const double_t D0;
+static const float_t F0;
 }cpu;
+
+cpu::F=1.0f,cpu::Fm1=-1.0f;
+cpu::Dm1=-1.0,cpu::D=1.0;
+cpu::D0=0.0;
+cpu::F0=0.0f;
 
 struct
 {
@@ -275,7 +280,7 @@ private:
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-static const GLint iFps=96;
+const GLint iFps=96;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -421,8 +426,8 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=dynamic_cast<GLint>(mouse.hi);
-mouse.S=dynamic_cast<GLfloat>(mouse.wi);
+Size=static_cast<GLint>(mouse.hi);
+mouse.S=static_cast<GLfloat>(mouse.wi);
 // mouse.S=Size;
 mouse.mX=0.5*mouse.S;
 mouse.mY=0.5*mouse.S;
