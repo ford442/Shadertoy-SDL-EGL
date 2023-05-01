@@ -217,22 +217,7 @@ GLuint VBO=Sh.at(1,1);
 GLuint VCO=Sh.at(2,0);
 }shad;
 
-struct{
-GLfloat xx=gld.at(3,0);
-GLfloat yy=gld.at(3,1);
-GLfloat mX=gld.at(4,0);
-GLfloat mY=gld.at(4,1);
-GLfloat mm=gld.at(5,0);
-GLfloat nn=gld.at(5,1);
-GLfloat uni_mse=gld.at(6,0);
-GLfloat S=gld.at(6,1);
-GLfloat mouseY=gld.at(7,0);
-GLfloat mouseX=gld.at(7,1);
-GLdouble wi=gld.at(8,0);
-GLdouble hi=gld.at(8,1);
-GLclampf x=gld.at(9,0);
-GLclampf y=gld.at(9,1);
-}mouse;
+
 
 GLint Size;
 static const GLint tmm=166666000;
@@ -270,10 +255,27 @@ class Run{
 
 private:
   
+  struct{
+GLfloat xx=gld.at(3,0);
+GLfloat yy=gld.at(3,1);
+GLfloat mX=gld.at(4,0);
+GLfloat mY=gld.at(4,1);
+GLfloat mm=gld.at(5,0);
+GLfloat nn=gld.at(5,1);
+GLfloat uni_mse=gld.at(6,0);
+GLfloat S=gld.at(6,1);
+GLfloat mouseY=gld.at(7,0);
+GLfloat mouseX=gld.at(7,1);
+GLdouble wi=gld.at(8,0);
+GLdouble hi=gld.at(8,1);
+GLclampf x=gld.at(9,0);
+GLclampf y=gld.at(9,1);
+}mouse;
+  
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
-const GLint iFps=96;
+static const GLint iFps=96;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
