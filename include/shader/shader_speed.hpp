@@ -189,18 +189,18 @@ d_tensor Di=d_tensor{1,3};
 struct
 {
 
-float F=Fi.at(0,0);
-float F0=Fi.at(0,2);
-float Fm1=Fi.at(0,1);
-double D=Di.at(0,0);
-double Dm1=Di.at(0,1);
-double_t D0=Di.at(0,2);
+float F=1.0f;
+float F0=0.0f;
+float Fm1=-1.0f;
+double D=1.0;
+double Dm1=-1.0;
+double_t D0=0.0;
 }cpu;
 
 struct
 {
-GLfloat gF=cpu::F,gF0=cpu::F0,gFm1=cpu::Fm1;
-GLdouble gD=cpu::D,gD0=cpu::D0,gDm1=cpu::Dm1;
+GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
+GLdouble gD=cpu.D,gD0=cpu.D0,gDm1=cpu.Dm1;
 }gpu;
 
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -345,7 +345,7 @@ uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
-  
+
 inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 tie(result,results,file);
@@ -380,6 +380,7 @@ Fi.at(0,1)=-1.0f;
 Di.at(0,0)=1.0;
 Di.at(0,2)=0.0;
 Di.at(0,1)=-1.0;
+tie(Fi,Di);
 tie(cpu.F,cpu.Fm1,cpu.F0);
 tie(gpu.gF,gpu.gFm1,gpu.gF0);
 tie(cpu.D,cpu.Dm1,cpu.D0);
@@ -502,7 +503,8 @@ glEnable(GL_CULL_FACE);
 // glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
+// glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
+glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
 nanosleep(&req,&rem);
@@ -523,7 +525,6 @@ src[2]=frag_body;
 src[3]=frg_ftr;
 const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // nanosleep(&req,&rem);
-  
 const GLuint shd_prg=glCreateProgram();
 tie(shd_prg,frag,vtx,shad.PRG);
 glAttachShader(shd_prg,frag);
