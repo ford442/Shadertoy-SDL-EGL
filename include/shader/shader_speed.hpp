@@ -333,7 +333,6 @@ class Run{
 private:
 
 Compile compile;
-GPU gpu;
   
 long int length=0;
 char8_t * result=NULL;
@@ -355,6 +354,8 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
+
+GPU gpu;
 
 inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
