@@ -408,7 +408,7 @@ inline void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
 GPU gpu;
 gpu.setFloats();
-Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF}};
+Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 
   /*
 Fi.at(0,0)=1.0f;
@@ -418,7 +418,7 @@ Di.at(0,0)=1.0;
 Di.at(0,2)=0.0;
 Di.at(0,1)=-1.0; */
 tie(Fi,Di);
-tie(cpu,gpu);
+// tie(cpu,gpu);
 // tie(cpu.F,cpu.Fm1,cpu.F0);
 // tie(gpu.gF,gpu.gFm1,gpu.gF0);
 // tie(cpu.D,cpu.Dm1,cpu.D0);
