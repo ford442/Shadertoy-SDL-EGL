@@ -184,6 +184,7 @@ using d_tensor=tensor<GLdouble>;
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 sz_tensor Si=sz_tensor{1,1};
+f_tensor t_time=f_tensor{3,3};
 f_tensor FL=f_tensor{6,1};
 f_tensor Fi=f_tensor{1,3};
 d_tensor Di=d_tensor{1,3};
@@ -200,16 +201,16 @@ double_t cD0=0.0;
 
 public:
 
-GLuint PRGin(GLuint prg){
+inline GLuint PRGin(GLuint prg){
 Sh.at(2,1)=prg;
 return 0;
 }
 
-GLuint PRGout(){
+inline GLuint PRGout(){
 return Sh.at(2,1);
 }
 
-float setFloats(){
+inline float setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
 Fi.at(0,2)=0.0f;
@@ -219,56 +220,66 @@ Di.at(0,2)=0.0;
 return 0.0;
 }
   
-float gF(){
+inline GLfloat gF(){
 return Fi.at(0,0);
 }
 
-float gFm1(){
+inline GLfloat gFm1(){
 return Fi.at(0,1);
 }
 
-float gF0(){
+inline GLfloat gF0(){
 return Fi.at(0,2);
 }
 
-float gD(){
+inline GLdouble gD(){
 return Di.at(0,0);
 }
 
-float gDm1(){
+inline GLdouble gDm1(){
 return Di.at(0,1);
 }
 
-float gD0(){
+inline GLdouble gD0(){
 return Di.at(0,2);
 }
 
+inline GLfloat u_iTime_set(GLfloat set){
+t_time.at(0,0)=set;
+}
+
+inline GLfloat u_iTime_get(){
+return t_time.at(0,0);
+}
+  
 };
 
-
-const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+const inline GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+const inline GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 struct{
-GLfloat Ttime=FL.at(0,0);
-GLfloat Tdlt=FL.at(1,0);
-GLfloat uni_tme_dlt=FL.at(2,0);
-GLfloat uni_tme=FL.at(3,0);
-GLfloat Tm=FL.at(4,0);
-GLfloat delt=FL.at(5,0);
-GLuint uni_frm=Sh.at(0,0);
-GLint iFrame=Sh.at(0,1);
-std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spanb;
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+  
+// GLfloat Ttime=FL.at(0,0);
+  GLfloat uni_tme;
+// GLfloat Tm=FL.at(4,0);
+
+inline GLfloat Tdlt=FL.at(1,0);
+GLfloat uni_tme_dlt;
+inline GLfloat delt;
+GLuint uni_frm;
+inline GLint iFrame;
+  
+inline std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
+inline std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spanb;
+inline std::chrono::high_resolution_clock::time_point t1;
+inline std::chrono::high_resolution_clock::time_point t2;
+inline std::chrono::high_resolution_clock::time_point t3;
 }times;
 
 struct{
-GLuint EBO=Sh.at(1,0);
-GLuint VBO=Sh.at(1,1);
-GLuint VCO=Sh.at(2,0);
+inline GLuint EBO=Sh.at(1,0);
+inline GLuint VBO=Sh.at(1,1);
+inline GLuint VCO=Sh.at(2,0);
 
 }shad;
 
@@ -289,7 +300,7 @@ GLclampf x=FL.at(10,0);
 GLclampf y=FL.at(11,0);
 }mouse;
 
-int32_t Size=Si.at(12,0);
+int Size=Si.at(12,0);
 GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -321,9 +332,8 @@ class Run{
 private:
 
 Compile compile;
-  GPU gpu;
-
-
+GPU gpu;
+  
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -364,7 +374,7 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
-glUniform1f(times.uni_tme,Tm);
+glUniform1f(uni_tme,gpu.u_iTime_get());
 glUniform1f(times.uni_tme_dlt,delt);
 glUniform1i(times.uni_frm,fram);
 return;
@@ -376,13 +386,13 @@ times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t1);
 times.time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t3);
-times.Ttime=times.time_spana.count();
+gpu.u_iTime_set(times.time_spana.count());
 times.Tdlt=times.time_spanb.count();
 if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
-uni(mouse.mouseX,mouse.mouseY,times.Ttime,times.iFrame,times.Tdlt);
+uni(mouse.mouseX,mouse.mouseY,times.iFrame,times.Tdlt);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
@@ -417,7 +427,7 @@ return nullptr;
 inline void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
-Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
+inline Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 
   /*
 Fi.at(0,0)=1.0f;
@@ -485,8 +495,8 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<GLint>(mouse.hi);
-mouse.S=static_cast<GLfloat>(mouse.wi);
+Size=static_cast<int>(mouse.hi);
+mouse.S=static_cast<float>(Size);
 // mouse.S=Size;
 mouse.mX=0.5*mouse.S;
 mouse.mY=0.5*mouse.S;
@@ -554,34 +564,30 @@ glEnable(GL_CULL_FACE);
 glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
-nanosleep(&req,&rem);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,shad.EBO);
-nanosleep(&req,&rem);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+inline const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 // src[2]=frg_aa;
 src[2]=frag_body;
 src[3]=frg_ftr;
-const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-// nanosleep(&req,&rem);
-const GLuint shd_prg=glCreateProgram();
+inline const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+inline const GLuint shd_prg=glCreateProgram();
 tie(shd_prg,frag,vtx);
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 gpu.PRGin(shd_prg);
-nanosleep(&req,&rem);
-nanosleep(&req,&rem);
 glUseProgram(gpu.PRGout());
+nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -621,24 +627,16 @@ times.t1=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
 times.time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(times.t2-times.t3);
 times.time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(times.t2-times.t1);
-nanosleep(&req,&rem);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
-nanosleep(&req,&rem);
 emscripten_set_main_loop((void(*)())Rend,0,0);
 return;
 }
   
 };
-
-// static inline void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
-
-// static inline GLuint cmpl_shd(GLenum,GLsizei,const GLchar **);
-
-// static inline GLchar * rd_fl(const char *);
 
 inline EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
 
