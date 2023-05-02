@@ -525,7 +525,7 @@ emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"NV_framebuffer_multisample");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
-glClearDepth(gpu.D());
+glClearDepth(gpu.gD());
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LEQUAL);
 // glEnable(GL_DEPTH_TEST);
