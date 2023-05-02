@@ -103,7 +103,7 @@ const GLchar vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const GLchar frg_hdr_src[1000]=
-"precision lowp sampler3D;precision lowp sampler2D;"
+"precision mediump sampler3D;precision lowp sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
 "precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
@@ -168,7 +168,7 @@ EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
 EGL_COVERAGE_SAMPLES_NV,(EGLint)1,
 EGL_SAMPLES,(EGLint)1,
 EGL_MIPMAP_LEVEL,(EGLint)1,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE,EGL_NONE
 };
 
@@ -276,8 +276,8 @@ struct{
 GLfloat uni_tme;
 GLfloat uni_tme_dlt;
 GLuint uni_frm;
-std::chrono::duration<double,std::chrono::seconds::period>time_spana;
-std::chrono::duration<double,std::chrono::seconds::period>time_spanb;
+std::chrono::duration<long double,std::chrono::seconds::period>time_spana;
+std::chrono::duration<long double,std::chrono::seconds::period>time_spanb;
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
@@ -404,8 +404,8 @@ static inline void Rend(){
 uni_i.at(0,0)++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
-times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
-times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
+times.time_spana=std::chrono::duration<long double,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<long double,std::chrono::seconds::period>(times.t2-times.t3);
 t_time.at(0,0)=times.time_spana.count();
 u_iTime_set(t_time.at(0,0));
 t_time.at(1,0)=times.time_spanb.count();
@@ -648,8 +648,8 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 times.t1=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
-times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
-times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<long double,std::chrono::seconds::period>(times.t2-times.t3);
+times.time_spana=std::chrono::duration<long double,std::chrono::seconds::period>(times.t2-times.t1);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
