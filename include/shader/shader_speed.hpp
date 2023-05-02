@@ -225,11 +225,11 @@ float D(){
 return Di.at(0,0);
 }
 
-float D(){
+float Dm1(){
 return Di.at(0,1);
 }
 
-float D(){
+float D0(){
 return Di.at(0,2);
 }
 
