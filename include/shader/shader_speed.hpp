@@ -244,7 +244,7 @@ inline GLdouble gD0(){
 return Di.at(0,2);
 }
 
-inline GLfloat u_iTime_set(GLfloat set){
+GLfloat u_iTime_set(GLfloat set){
 t_time.at(0,0)=set;
 }
 
@@ -263,23 +263,23 @@ struct{
   GLfloat uni_tme;
 // GLfloat Tm=FL.at(4,0);
 
-inline GLfloat Tdlt=FL.at(1,0);
+GLfloat Tdlt=FL.at(1,0);
 GLfloat uni_tme_dlt;
-inline GLfloat delt;
+GLfloat delt;
 GLuint uni_frm;
-inline GLint iFrame;
+GLint iFrame;
   
-inline std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
-inline std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spanb;
-inline std::chrono::high_resolution_clock::time_point t1;
-inline std::chrono::high_resolution_clock::time_point t2;
-inline std::chrono::high_resolution_clock::time_point t3;
+std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
+std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spanb;
+std::chrono::high_resolution_clock::time_point t1;
+std::chrono::high_resolution_clock::time_point t2;
+std::chrono::high_resolution_clock::time_point t3;
 }times;
 
 struct{
-inline GLuint EBO=Sh.at(1,0);
-inline GLuint VBO=Sh.at(1,1);
-inline GLuint VCO=Sh.at(2,0);
+GLuint EBO=Sh.at(1,0);
+GLuint VBO=Sh.at(1,1);
+GLuint VCO=Sh.at(2,0);
 
 }shad;
 
