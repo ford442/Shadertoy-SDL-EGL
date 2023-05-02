@@ -357,7 +357,7 @@ public:
 
 GPU gpu;
 
-inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -382,7 +382,7 @@ glUniform1i(times.uni_frm,fram);
 return;
 }
 
-static inline void Rend(){
+inline void Rend(){
 times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
