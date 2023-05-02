@@ -345,19 +345,11 @@ GPU gpu;
 
 public:
   
-static inline void sse_time_set(GLfloat set){
-sse_time=wasm_f32x4_splat(set);
+static inline void u_iTime_set(GLfloat set){
+t_time.at(0,0)=set;
+sse.at(0,0)=wasm_f32x4_splat(t_time.at(0,0));
+t_time.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
 return;
-}
-
-static inline GLfloat sse_time_get(){
-return wasm_f32x4_extract_lane(sse.at(0,0),0);
-}
-
-static inline GLfloat u_iTime_set(GLfloat set){
-sse_time_set(set);
-t_time.at(0,0)=sse_time_get();
-return 0.0;
 }
 
 static inline GLfloat u_iTime_get(){
@@ -383,7 +375,7 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
-glUniform1f(times.uni_tme,u_iTime_get());
+glUniform1f(times.uni_tme,t_time.at(0,0));
 glUniform1f(times.uni_tme_dlt,delt);
 glUniform1i(times.uni_frm,fram);
 return;
@@ -395,7 +387,7 @@ times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t1);
 times.time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t3);
-u_iTime_set(times.time_spana.count());
+t_time.at(0,0)=times.time_spana.count();
 times.Tdlt=times.time_spanb.count();
 if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
