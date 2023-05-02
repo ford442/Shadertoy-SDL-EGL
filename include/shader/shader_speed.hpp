@@ -210,27 +210,27 @@ Di.at(0,2)=0.0;
 return 0.0;
 }
   
-float F(){
+float gF(){
 return Fi.at(0,0);
 }
 
-float Fm1(){
+float gFm1(){
 return Fi.at(0,1);
 }
 
-float F0(){
+float gF0(){
 return Fi.at(0,2);
 }
 
-float D(){
+float gD(){
 return Di.at(0,0);
 }
 
-float Dm1(){
+float gDm1(){
 return Di.at(0,1);
 }
 
-float D0(){
+float gD0(){
 return Di.at(0,2);
 }
 
