@@ -244,12 +244,12 @@ inline GLdouble gD0(){
 return Di.at(0,2);
 }
 
-GLfloat u_iTime_set(GLfloat set){
+static inline GLfloat u_iTime_set(GLfloat set){
 t_time.at(0,0)=set;
 return 0.0;
 }
 
-inline GLfloat u_iTime_get(){
+static inline GLfloat u_iTime_get(){
 return t_time.at(0,0);
 }
   
