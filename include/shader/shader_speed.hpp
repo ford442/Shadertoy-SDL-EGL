@@ -619,7 +619,7 @@ glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
-gpu.EBOin(shad.VCO);
+gpu.VCOin(shad.VCO);
 glBindVertexArray(gpu.VCOout());
 const GLuint atb_pos=glGetAttribLocation(shd_prg,"iPosition");
 glEnableVertexAttribArray(atb_pos);
