@@ -634,7 +634,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
-void(*rndr)(){&Run::Rend()};
+void(*rndr)(){Run::Rend()};
   emscripten_set_main_loop((void(*)())rndr,0,0);
 return;
 }
