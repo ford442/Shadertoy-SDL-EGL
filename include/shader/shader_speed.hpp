@@ -477,7 +477,7 @@ tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,mouse.S);
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
 tie(times.t1,times.t2,times.t3);
-tie(EBO,VBO,VCO);
+tie(shad.EBO,shad.VBO,shad.VCO);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
