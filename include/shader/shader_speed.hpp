@@ -286,7 +286,9 @@ std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
 }times;
 
-
+struct{
+GLuint VBO,EBO,VCO;
+}shad;
 
 struct{
 GLdouble xx;
@@ -475,7 +477,7 @@ tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,mouse.S);
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
 tie(times.t1,times.t2,times.t3);
-tie(shad.EBO,shad.VBO,shad.VCO);
+tie(EBO,VBO,VCO);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
@@ -585,7 +587,6 @@ glEnable(GL_CULL_FACE);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
-GLuint VBO;
 glGenBuffers((GLsizei)1,VBOin(VBO));
 glBindBuffer(GL_ARRAY_BUFFER,VBOout());
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
