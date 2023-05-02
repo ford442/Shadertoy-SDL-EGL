@@ -103,12 +103,12 @@ const char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 const char frg_hdr_src[1000]=
-"precision mediump sampler3D;precision lowp sampler2D;"
-"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
-"precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
-"precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
-"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
-"precision lowp sampler2DArrayShadow;"
+"precision mediump sampler3D;precision mediump sampler2D;"
+"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
@@ -450,24 +450,10 @@ typedef struct{float XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 
-  /*
-Fi.at(0,0)=1.0f;
-Fi.at(0,2)=0.0f;
-Fi.at(0,1)=-1.0f;
-Di.at(0,0)=1.0;
-Di.at(0,2)=0.0;
-Di.at(0,1)=-1.0; */
+
 tie(Fi,Di);
-// tie(cpu,gpu);
-// tie(cpu.F,cpu.Fm1,cpu.F0);
-// tie(gpu.gF,gpu.gFm1,gpu.gF0);
-// tie(cpu.D,cpu.Dm1,cpu.D0);
-// tie(gpu.gD,gpu.gDm1,gpu.gD0);
 tie(uni_i,iFps);
 tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
-// tie(gu0,gu1,gu2,gu3);
-// tie(gu4,gu5,gu6);
-// tie(gu7,gu8,gu9);
 tie(sse_time,t_time);
 tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,mouse.S);
@@ -518,7 +504,6 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 mouse.S=static_cast<float>(Size);
-// mouse.S=Size;
 mouse.mX=0.5*mouse.S;
 mouse.mY=0.5*mouse.S;
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
@@ -543,7 +528,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_texture_filter_anisotropic");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_depth_nonlinear");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
-// emscripten_webgl_enable_extension(ctx,"EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_create_context");
@@ -579,7 +563,6 @@ glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-// glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
