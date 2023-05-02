@@ -180,11 +180,13 @@ using shad_tensor=tensor<GLuint>;
 using sz_tensor=tensor<int>;
 using f_tensor=tensor<GLfloat>;
 using d_tensor=tensor<GLdouble>;
+using v_tensor=tensor<v128_t>;
 
+v_tensor sse=v_tensor{1,1};
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 sz_tensor Si=sz_tensor{1,1};
-f_tensor t_time=f_tensor{3,3};
+f_tensor t_time=f_tensor{1,1};
 f_tensor FL=f_tensor{6,1};
 f_tensor Fi=f_tensor{1,3};
 d_tensor Di=d_tensor{1,3};
@@ -192,12 +194,6 @@ d_tensor Di=d_tensor{1,3};
 class GPU{
 
 private:
-float cF=1.0f;
-float cF0=0.0f;
-float cFm1=-1.0f;
-double cD=1.0;
-double cDm1=-1.0;
-double_t cD0=0.0;
 
 public:
 
@@ -219,7 +215,7 @@ Di.at(0,1)=-1.0;
 Di.at(0,2)=0.0;
 return 0.0;
 }
-  
+
 inline GLfloat gF(){
 return Fi.at(0,0);
 }
@@ -243,7 +239,6 @@ return Di.at(0,1);
 inline GLdouble gD0(){
 return Di.at(0,2);
 }
-
   
 };
 
@@ -293,7 +288,7 @@ GLclampf x=FL.at(10,0);
 GLclampf y=FL.at(11,0);
 }mouse;
 
-int Size=Si.at(12,0);
+int Size;
 GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
@@ -346,11 +341,22 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 GPU gpu;
-  
+v128_t sse_time;
+
 public:
 
+static inline v128_t sse_time_set(GLfloat set){
+sse_time=wasm_f32x4_splat(set);
+return nullptr;
+}
+
+static inline GLfloat sse_time_get(){
+return wasm_f32x4_extract_lane(sse.at(0,0),0);
+}
+
 static inline GLfloat u_iTime_set(GLfloat set){
-t_time.at(0,0)=set;
+sse_time(sse.at(0,0));
+t_time.at(0,0)=sse_time_get();
 return 0.0;
 }
 
