@@ -295,7 +295,7 @@ GLdouble mY;
 GLdouble mm;
 GLdouble nn;
 GLfloat uni_mse;
-float S;
+double S;
 GLdouble mouseY;
 GLdouble mouseX;
 GLdouble wi;
