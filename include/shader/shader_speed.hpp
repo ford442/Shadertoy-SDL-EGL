@@ -186,7 +186,7 @@ v_tensor sse=v_tensor{1,1};
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 sz_tensor Si=sz_tensor{1,1};
-f_tensor t_time=f_tensor{1,1};
+f_tensor t_time=f_tensor{2,1};
 f_tensor FL=f_tensor{6,1};
 f_tensor Fi=f_tensor{1,3};
 d_tensor Di=d_tensor{1,3};
@@ -246,19 +246,13 @@ const inline GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9
 const inline GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
 struct{
-  
-// GLfloat Ttime=FL.at(0,0);
-  GLfloat uni_tme;
-// GLfloat Tm=FL.at(4,0);
-
-GLfloat Tdlt=FL.at(1,0);
+GLfloat uni_tme;
 GLfloat uni_tme_dlt;
 GLfloat delt;
 GLuint uni_frm;
 GLint iFrame;
-  
-std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spana;
-std::chrono::duration<GLfloat,std::chrono::seconds::period>time_spanb;
+std::chrono::duration<double,std::chrono::seconds::period>time_spana;
+std::chrono::duration<double,std::chrono::seconds::period>time_spanb;
 std::chrono::high_resolution_clock::time_point t1;
 std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
@@ -352,10 +346,6 @@ t_time.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
 return;
 }
 
-static inline GLfloat u_iTime_get(){
-return t_time.at(0,0);
-}
-
 static inline void uni(GLfloat xx,GLfloat yy,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -376,7 +366,7 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 clk_l=true;
 }
 glUniform1f(times.uni_tme,t_time.at(0,0));
-glUniform1f(times.uni_tme_dlt,delt);
+glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
 glUniform1i(times.uni_frm,fram);
 return;
 }
@@ -385,10 +375,10 @@ static inline void Rend(){
 times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
-times.time_spana=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t1);
-times.time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t3);
+times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
 t_time.at(0,0)=times.time_spana.count();
-times.Tdlt=times.time_spanb.count();
+t_time.at(1,0)=times.time_spanb.count();
 if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
@@ -623,11 +613,11 @@ glScissor((GLint)0,(GLint)0,Size,Size);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 times.t1=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
-times.time_spanb=std::chrono::duration<float_t,std::chrono::seconds::period>(times.t2-times.t3);
-times.time_spana=std::chrono::duration<double_t,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
+times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
