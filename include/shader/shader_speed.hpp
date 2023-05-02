@@ -357,7 +357,7 @@ GPU gpu;
   
 public:
 
-inline void uni(GLfloat xx,GLfloat yy,GLint fram,GLfloat delt){
+static inline void uni(GLfloat xx,GLfloat yy,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -382,7 +382,7 @@ glUniform1i(times.uni_frm,fram);
 return;
 }
 
-inline void Rend(){
+static inline void Rend(){
 times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
@@ -398,8 +398,6 @@ uni(mouse.mouseX,mouse.mouseY,times.iFrame,times.Tdlt);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
-
-void(rndr)(){Run::Rend();};
 
 inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
@@ -636,7 +634,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
-  emscripten_set_main_loop((void(*)())rndr,0,0);
+emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return;
 }
   
