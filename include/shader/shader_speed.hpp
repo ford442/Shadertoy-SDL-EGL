@@ -224,12 +224,12 @@ inline GLuint VCOout(){
 return Sh.at(2,0);
 }
     
-inline GLuint VBOin(GLuint VBO){
+static inline GLuint VBOin(GLuint VBO){
 Sh.at(2,1)=VBO;
 return 0;
 }
     
-inline GLuint VBOout(){
+static inline GLuint VBOout(){
 return Sh.at(2,1);
 }
   
@@ -587,7 +587,7 @@ glEnable(GL_CULL_FACE);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
-glGenBuffers((GLsizei)1,VBOin(VBO));
+glGenBuffers((GLsizei)1,VBOin(shad.VBO));
 glBindBuffer(GL_ARRAY_BUFFER,VBOout());
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
