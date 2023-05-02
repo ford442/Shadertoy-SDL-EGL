@@ -81,7 +81,7 @@ return shader;
 
 using namespace boost::numeric::ublas;
 
-const GLchar cm_hdr_src[500]=
+const char cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
@@ -99,10 +99,10 @@ const GLchar cm_hdr_src[500]=
 "precision highp float;"
 "precision highp int;\n";
 
-const GLchar vrt_bdy_src[100]=
+const char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-const GLchar frg_hdr_src[1000]=
+const char frg_hdr_src[1000]=
 "precision mediump sampler3D;precision lowp sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
@@ -114,7 +114,7 @@ const GLchar frg_hdr_src[1000]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 
-const GLchar frg_ftr_src[100]=
+const char frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
 const EGLint att_lst2[1000]={ 
@@ -174,14 +174,13 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-using gld_tensor=tensor<GLdouble>;
-using mouse_tensor=tensor<GLdouble>;
-using shad_tensor=tensor<GLuint>;
+using mouse_tensor=tensor<double>;
+using shad_tensor=tensor<uint>;
 using sz_tensor=tensor<int>;
-using f_tensor=tensor<GLfloat>;
-using d_tensor=tensor<GLdouble>;
+using f_tensor=tensor<float>;
+using d_tensor=tensor<double>;
 using v_tensor=tensor<v128_t>;
-using gi_tensor=tensor<GLint>;
+using gi_tensor=tensor<int>;
 
 v_tensor sse=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
@@ -288,27 +287,27 @@ GLuint VBO,EBO,VCO;
 }shad;
 
 struct{
-GLdouble xx;
-GLdouble yy;
-GLdouble mX;
-GLdouble mY;
-GLdouble mm;
-GLdouble nn;
+double xx;
+double yy;
+double mX;
+double mY;
+double mm;
+double nn;
 GLfloat uni_mse;
 double S;
-GLdouble mouseY;
-GLdouble mouseX;
-GLdouble wi;
-GLdouble hi;
-GLclampf x;
-GLclampf y;
+double mouseY;
+double mouseX;
+double wi;
+double hi;
+float x;
+float y;
 }mouse;
 
 int Size;
-GLint tmm=166666000;
+int tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
-GLint ele=36;
+int ele=36;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 v128_t sse_time;
 
@@ -340,8 +339,8 @@ Compile compile;
 
 long int length=0;
 char8_t * result=NULL;
-GLchar * results=NULL;
-GLint iFps;
+char * results=NULL;
+int iFps;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -349,11 +348,11 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-const GLchar * src[4];
-const GLchar * cm_hdr=cm_hdr_src;
-const GLchar * vrt_bdy=vrt_bdy_src;
-const GLchar * frg_hdr=frg_hdr_src;
-const GLchar * frg_ftr=frg_ftr_src;
+const char * src[4];
+const char * cm_hdr=cm_hdr_src;
+const char * vrt_bdy=vrt_bdy_src;
+const char * frg_hdr=frg_hdr_src;
+const char * frg_ftr=frg_ftr_src;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
@@ -361,29 +360,29 @@ GPU gpu;
 
 public:
   
-static inline void u_iTime_set(GLfloat set){
+static inline void u_iTime_set(float set){
 t_time.at(0,0)=set;
 sse.at(0,0)=wasm_f32x4_splat(t_time.at(0,0));
 t_time.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
 return;
 }
   
-static inline void u_iTimeDelta_set(GLfloat set){
+static inline void u_iTimeDelta_set(float set){
 t_time.at(1,0)=set;
 sse.at(0,1)=wasm_f32x4_splat(t_time.at(1,0));
 t_time.at(1,0)=wasm_f32x4_extract_lane(sse.at(0,1),0);
 return;
 }
 
-static inline void uni(GLfloat xx,GLfloat yy){
+static inline void uni(float xx,float yy){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const GLfloat xxx=xx;
-const GLfloat yyy=yy;
+const float xxx=xx;
+const float yyy=yy;
 mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
@@ -440,14 +439,14 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=reinterpret_cast<GLchar *>(result);
+results=reinterpret_cast<char *>(result);
 return results;
 }
 return nullptr;
 }
   
 inline void strt(){
-typedef struct{GLfloat XYZW[4];}Vertex;
+typedef struct{float XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 
