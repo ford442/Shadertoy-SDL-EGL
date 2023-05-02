@@ -87,8 +87,8 @@ const GLchar cm_hdr_src[500]=
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
 "#pragma optionNV(fastprecision on)\n"
-"#pragma STDGL(unroll all)\n"
-"#pragma optionNV(unroll all)\n"
+// "#pragma STDGL(unroll all)\n"
+// "#pragma optionNV(unroll all)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
@@ -177,35 +177,66 @@ EM_BOOL ms_l,clk_l;
 using gld_tensor=tensor<GLdouble>;
 using mouse_tensor=tensor<GLdouble>;
 using shad_tensor=tensor<GLuint>;
+using sz_tensor=tensor<int>;
 using f_tensor=tensor<GLfloat>;
 using d_tensor=tensor<GLdouble>;
 
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
-shad_tensor Si=shad_tensor{1,1};
+sz_tensor Si=sz_tensor{1,1};
 f_tensor FL=f_tensor{6,1};
 f_tensor Fi=f_tensor{1,3};
 d_tensor Di=d_tensor{1,3};
 
-struct
-{
+class gpu{
 
-float F=1.0f;
-float F0=0.0f;
-float Fm1=-1.0f;
-double D=1.0;
-double Dm1=-1.0;
-double_t D0=0.0;
-}cpu;
+private:
+float cF=1.0f;
+float cF0=0.0f;
+float cFm1=-1.0f;
+double cD=1.0;
+double cDm1=-1.0;
+double_t cD0=0.0;
 
-struct
-{
-GLfloat gF=cpu.F,gF0=cpu.F0,gFm1=cpu.Fm1;
-GLdouble gD=cpu.D,gD0=cpu.D0,gDm1=cpu.Dm1;
-}gpu;
+public:
+  
+float setFloats(){
+Fi.at(0,0)=1.0f;
+Fi.at(0,1)=-1.0f;
+Fi.at(0,2)=0.0f;
+Di.at(0,0)=1.0;
+Di.at(0,1)=-1.0;
+Di.at(0,2)=0.0;
+}
+  
+float F(){
+return Fi.at(0,0);
+}
+
+float Fm1(){
+return Fi.at(0,1);
+}
+
+float F0(){
+return Fi.at(0,2);
+}
+
+float D(){
+return Di.at(0,0);
+}
+
+float D(){
+return Di.at(0,1);
+}
+
+float D(){
+return Di.at(0,2);
+}
+
+};
 
 typedef struct{GLfloat XYZW[4];}Vertex;
-Vertex vrt[]={{gpu.gFm1,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gF,gpu.gF},{gpu.gF,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF},{gpu.gFm1,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gFm1,gpu.gFm1,gpu.gF},{gpu.gF,gpu.gF,gpu.gFm1,gpu.gF},{gpu.gFm1,gpu.gF,gpu.gF,gpu.gF}};
+Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF}};
 
 const GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
@@ -251,7 +282,7 @@ GLclampf x=FL.at(10,0);
 GLclampf y=FL.at(11,0);
 }mouse;
 
-GLint Size=Si.at(12,0);
+int32_t Size=Si.at(12,0);
 GLint tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
