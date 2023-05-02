@@ -85,14 +85,14 @@ const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-"#pragma STDGL(fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n"
+// "#pragma STDGL(fastprecision on)\n"
+// "#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
 // "#pragma optionNV(unroll all)\n"
-"#pragma STDGL(ifcvt none)\n"
-"#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline all)\n"
-"#pragma optionNV(inline all)\n"
+// "#pragma STDGL(ifcvt none)\n"
+// "#pragma optionNV(ifcvt none)\n"
+// "#pragma STDGL(inline all)\n"
+// "#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
@@ -181,15 +181,15 @@ using sz_tensor=tensor<int>;
 using f_tensor=tensor<GLfloat>;
 using d_tensor=tensor<GLdouble>;
 using v_tensor=tensor<v128_t>;
+using gi_tensor=tensor<GLint>;
 
-v_tensor sse=v_tensor{1,2};
-gld_tensor gld=gld_tensor{10,2};
+v_tensor sse=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
 f_tensor t_time=f_tensor{2,1};
-f_tensor FL=f_tensor{6,1};
-f_tensor Fi=f_tensor{1,3};
-d_tensor Di=d_tensor{1,3};
+f_tensor Fi=f_tensor{2,2};
+d_tensor Di=d_tensor{2,2};
+gi_tensor uni_i=gi_tensor{1,1};
 
 class GPU{
 
@@ -223,24 +223,23 @@ return 0;
 inline GLuint VCOout(){
 return Sh.at(2,0);
 }
-    
+
 static inline GLuint VBOin(GLuint VBO){
 Sh.at(2,1)=VBO;
 return 0;
 }
-    
+
 static inline GLuint VBOout(){
 return Sh.at(2,1);
 }
-  
-  
+
 inline float setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
-Fi.at(0,2)=0.0f;
+Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
-Di.at(0,2)=0.0;
+Di.at(1,1)=0.0;
 return 0.0;
 }
 
@@ -253,7 +252,7 @@ return Fi.at(0,1);
 }
 
 inline GLfloat gF0(){
-return Fi.at(0,2);
+return Fi.at(1,1);
 }
 
 inline GLdouble gD(){
@@ -265,9 +264,9 @@ return Di.at(0,1);
 }
 
 inline GLdouble gD0(){
-return Di.at(0,2);
+return Di.at(1,1);
 }
-  
+
 };
 
 const inline GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
@@ -276,9 +275,7 @@ const inline GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1
 struct{
 GLfloat uni_tme;
 GLfloat uni_tme_dlt;
-GLfloat delt;
 GLuint uni_frm;
-GLint iFrame;
 std::chrono::duration<double,std::chrono::seconds::period>time_spana;
 std::chrono::duration<double,std::chrono::seconds::period>time_spanb;
 std::chrono::high_resolution_clock::time_point t1;
@@ -298,7 +295,7 @@ GLdouble mY;
 GLdouble mm;
 GLdouble nn;
 GLfloat uni_mse;
-GLfloat S;
+float S;
 GLdouble mouseY;
 GLdouble mouseX;
 GLdouble wi;
@@ -378,7 +375,7 @@ t_time.at(1,0)=wasm_f32x4_extract_lane(sse.at(0,1),0);
 return;
 }
 
-static inline void uni(GLfloat xx,GLfloat yy,GLint fram){
+static inline void uni(GLfloat xx,GLfloat yy){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -399,12 +396,12 @@ clk_l=true;
 }
 glUniform1f(times.uni_tme,t_time.at(0,0));
 glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
-glUniform1i(times.uni_frm,fram);
+glUniform1i(times.uni_frm,uni_i(0,0));
 return;
 }
 
 static inline void Rend(){
-times.iFrame++;
+uni_i(0,0)++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
@@ -417,7 +414,7 @@ if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
-uni(mouse.mouseX,mouse.mouseY,times.iFrame);
+uni(mouse.mouseX,mouse.mouseY);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
