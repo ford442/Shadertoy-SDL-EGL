@@ -244,14 +244,6 @@ inline GLdouble gD0(){
 return Di.at(0,2);
 }
 
-static inline GLfloat u_iTime_set(GLfloat set){
-t_time.at(0,0)=set;
-return 0.0;
-}
-
-static inline GLfloat u_iTime_get(){
-return t_time.at(0,0);
-}
   
 };
 
@@ -357,6 +349,15 @@ GPU gpu;
   
 public:
 
+static inline GLfloat u_iTime_set(GLfloat set){
+t_time.at(0,0)=set;
+return 0.0;
+}
+
+static inline GLfloat u_iTime_get(){
+return t_time.at(0,0);
+}
+
 static inline void uni(GLfloat xx,GLfloat yy,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -376,7 +377,7 @@ glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
-glUniform1f(times.uni_tme,gpu.u_iTime_get());
+glUniform1f(times.uni_tme,u_iTime_get());
 glUniform1f(times.uni_tme_dlt,delt);
 glUniform1i(times.uni_frm,fram);
 return;
@@ -388,7 +389,7 @@ times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t1);
 times.time_spanb=std::chrono::duration<GLfloat,std::chrono::seconds::period>(times.t2-times.t3);
-gpu.u_iTime_set(times.time_spana.count());
+u_iTime_set(times.time_spana.count());
 times.Tdlt=times.time_spanb.count();
 if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
