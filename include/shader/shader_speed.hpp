@@ -341,9 +341,9 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 GPU gpu;
-static v128_t sse_time;
 
 public:
+static v128_t sse_time;
 
 
 static inline void sse_time_set(GLfloat set){
