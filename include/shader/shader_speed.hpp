@@ -97,7 +97,7 @@ const GLchar cm_hdr_src[500]=
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
 "precision highp float;\n";
-// "precision mediump int;\n";
+"precision highp int;\n";
 
 const GLchar vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
