@@ -199,7 +199,14 @@ double cDm1=-1.0;
 double_t cD0=0.0;
 
 public:
-  
+GLuint PRGin(GLuint prg){
+Sh.at(2,1)=prg;
+}
+
+GLuint PRGout(){
+return Sh.at(2,1);
+}
+
 float setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
@@ -260,7 +267,6 @@ struct{
 GLuint EBO=Sh.at(1,0);
 GLuint VBO=Sh.at(1,1);
 GLuint VCO=Sh.at(2,0);
-GLuint PRG=Sh.at(2,1);
 
 }shad;
 
@@ -313,6 +319,8 @@ class Run{
 private:
 
 Compile compile;
+  GPU gpu;
+
 
 long int length=0;
 char8_t * result=NULL;
@@ -406,7 +414,6 @@ return nullptr;
   
 inline void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
-GPU gpu;
 gpu.setFloats();
 Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 
