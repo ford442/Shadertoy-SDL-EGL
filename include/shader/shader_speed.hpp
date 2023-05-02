@@ -182,7 +182,7 @@ using f_tensor=tensor<GLfloat>;
 using d_tensor=tensor<GLdouble>;
 using v_tensor=tensor<v128_t>;
 
-v_tensor sse=v_tensor{1,1};
+v_tensor sse=v_tensor{1,2};
 gld_tensor gld=gld_tensor{10,2};
 shad_tensor Sh=shad_tensor{3,2};
 sz_tensor Si=sz_tensor{1,1};
@@ -345,6 +345,13 @@ sse.at(0,0)=wasm_f32x4_splat(t_time.at(0,0));
 t_time.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
 return;
 }
+  
+static inline void u_iTimeDelta_set(GLfloat set){
+t_time.at(1,0)=set;
+sse.at(0,1)=wasm_f32x4_splat(t_time.at(1,0));
+t_time.at(1,0)=wasm_f32x4_extract_lane(sse.at(0,1),0);
+return;
+}
 
 static inline void uni(GLfloat xx,GLfloat yy,GLint fram){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -378,7 +385,9 @@ times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
 times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
 t_time.at(0,0)=times.time_spana.count();
+u_iTime_set(t_time.at(0,0));
 t_time.at(1,0)=times.time_spanb.count();
+u_iTimeDelta_set(t_time.at(1,0));
 if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
