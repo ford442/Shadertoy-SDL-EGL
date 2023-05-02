@@ -294,6 +294,7 @@ struct timespec rem;
 struct timespec req={0,tmm};
 GLint ele=36;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
+v128_t sse_time;
 
 inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -344,8 +345,6 @@ GPU gpu;
 
 public:
   
-v128_t sse_time;
-
 static inline void sse_time_set(GLfloat set){
 sse_time=wasm_f32x4_splat(set);
 return;
