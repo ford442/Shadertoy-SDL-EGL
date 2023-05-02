@@ -184,7 +184,7 @@ using v_tensor=tensor<v128_t>;
 
 v_tensor sse=v_tensor{1,2};
 gld_tensor gld=gld_tensor{10,2};
-shad_tensor Sh=shad_tensor{3,2};
+shad_tensor Sh=shad_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
 f_tensor t_time=f_tensor{2,1};
 f_tensor FL=f_tensor{6,1};
@@ -198,14 +198,42 @@ private:
 public:
 
 inline GLuint PRGin(GLuint prg){
-Sh.at(2,1)=prg;
+Sh.at(0,0)=prg;
 return 0;
 }
 
 inline GLuint PRGout(){
-return Sh.at(2,1);
+return Sh.at(0,0);
 }
 
+inline GLuint EBOin(GLuint EBO){
+Sh.at(1,0)=EBO;
+return 0;
+}
+
+inline GLuint EBOout(){
+return Sh.at(1,0);
+}
+
+inline GLuint VCOin(GLuint VCO){
+Sh.at(2,0)=VCO;
+return 0;
+}
+
+inline GLuint VCOout(){
+return Sh.at(2,0);
+}
+    
+inline GLuint VBOin(GLuint VBO){
+Sh.at(2,1)=VBO;
+return 0;
+}
+    
+inline GLuint VBOout(){
+return Sh.at(2,1);
+}
+  
+  
 inline float setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
@@ -258,28 +286,23 @@ std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
 }times;
 
-struct{
-GLuint EBO=Sh.at(1,0);
-GLuint VBO=Sh.at(1,1);
-GLuint VCO=Sh.at(2,0);
 
-}shad;
 
 struct{
-GLdouble xx=gld.at(0,0);
-GLdouble yy=gld.at(0,1);
-GLdouble mX=gld.at(1,0);
-GLdouble mY=gld.at(1,1);
-GLdouble mm=gld.at(2,0);
-GLdouble nn=gld.at(2,1);
-GLfloat uni_mse=FL.at(6,0);
-GLfloat S=FL.at(7,0);
-GLfloat mouseY=FL.at(8,0);
-GLfloat mouseX=FL.at(9,0);
-GLdouble wi=gld.at(3,0);
-GLdouble hi=gld.at(3,1);
-GLclampf x=FL.at(10,0);
-GLclampf y=FL.at(11,0);
+GLdouble xx;
+GLdouble yy;
+GLdouble mX;
+GLdouble mY;
+GLdouble mm;
+GLdouble nn;
+GLfloat uni_mse;
+GLfloat S;
+GLdouble mouseY;
+GLdouble mouseX;
+GLdouble wi;
+GLdouble hi;
+GLclampf x;
+GLclampf y;
 }mouse;
 
 int Size;
@@ -562,8 +585,9 @@ glEnable(GL_CULL_FACE);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
-glGenBuffers((GLsizei)1,&shad.VBO);
-glBindBuffer(GL_ARRAY_BUFFER,shad.VBO);
+GLuint VBO;
+glGenBuffers((GLsizei)1,VBOin(VBO));
+glBindBuffer(GL_ARRAY_BUFFER,VBOout());
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&shad.EBO);
