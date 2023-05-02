@@ -587,7 +587,7 @@ glEnable(GL_CULL_FACE);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
 glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
-glGenBuffers((GLsizei)1,gpu.VBOin(&shad.VBO));
+glGenBuffers((GLsizei)1,&gpu.VBOin(shad.VBO));
 glBindBuffer(GL_ARRAY_BUFFER,gpu.VBOout());
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
