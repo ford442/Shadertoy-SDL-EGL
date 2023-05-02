@@ -175,7 +175,7 @@ EGL_NONE,EGL_NONE
 EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<double>;
-using shad_tensor=tensor<uint>;
+using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<int>;
 using f_tensor=tensor<float>;
 using d_tensor=tensor<double>;
