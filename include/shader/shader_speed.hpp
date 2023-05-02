@@ -399,7 +399,7 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-void(rndr)(){Run::Rend()};
+void(rndr)(){Run::Rend();};
 
 inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
