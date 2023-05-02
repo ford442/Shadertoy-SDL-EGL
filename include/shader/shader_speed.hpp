@@ -117,7 +117,7 @@ const GLchar frg_hdr_src[1000]=
 const GLchar frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
-static const EGLint att_lst2[1000]={ 
+const EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -130,7 +130,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_NONE,EGL_NONE
 };
 
-static const EGLint ctx_att[500]={
+const EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
@@ -141,7 +141,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE,EGL_NONE
 };
 
-static const EGLint att_lst[1500]={
+const EGLint att_lst[1500]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -353,11 +353,11 @@ const GLchar * frg_ftr=frg_ftr_src;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
+GPU gpu;
+  
 public:
 
-GPU gpu;
-
-static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+inline void uni(GLfloat xx,GLfloat yy,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -382,7 +382,7 @@ glUniform1i(times.uni_frm,fram);
 return;
 }
 
-static inline void Rend(){
+inline void Rend(){
 times.iFrame++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
