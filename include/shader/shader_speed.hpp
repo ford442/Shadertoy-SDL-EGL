@@ -85,8 +85,8 @@ const GLchar cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-// "#pragma STDGL(fastprecision on)\n"
-// "#pragma optionNV(fastprecision on)\n"
+"#pragma STDGL(fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
 // "#pragma optionNV(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
@@ -168,7 +168,7 @@ EGL_COVERAGE_BUFFERS_NV,(EGLint)1,
 EGL_COVERAGE_SAMPLES_NV,(EGLint)1,
 EGL_SAMPLES,(EGLint)1,
 EGL_MIPMAP_LEVEL,(EGLint)1,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE,
 EGL_NONE,EGL_NONE
 };
 
@@ -498,7 +498,7 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
+attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
@@ -566,10 +566,9 @@ emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"NV_framebuffer_multisample");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
-glClearDepth(gpu.gD());
+glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LEQUAL);
-// glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
 glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
@@ -579,11 +578,10 @@ glStencilMask(0xFF);
 glDisable(GL_DITHER);
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
-// glDisable(GL_BLEND);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glClearColor(gpu.gF0,gpu.gF0,gpu.gF0,gpu.gF);
-glClearColor(Fi.at(0,2),Fi.at(0,2),Fi.at(0,2),Fi.at(0,0));
+glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,gpu.VBOout());
@@ -647,7 +645,7 @@ glScissor((GLint)0,(GLint)0,Size,Size);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 times.t1=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
 times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
