@@ -345,9 +345,9 @@ v128_t sse_time;
 
 public:
 
-static inline v128_t sse_time_set(GLfloat set){
+static inline void sse_time_set(GLfloat set){
 sse_time=wasm_f32x4_splat(set);
-return NULL;
+return;
 }
 
 static inline GLfloat sse_time_get(){
