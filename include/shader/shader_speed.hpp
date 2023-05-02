@@ -320,7 +320,7 @@ class Run{
 private:
 
 Compile compile;
-  
+
 long int length=0;
 char8_t * result=NULL;
 GLchar * results=NULL;
@@ -341,10 +341,10 @@ EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 GPU gpu;
+  v128_t sse_time;
 
 public:
-static v128_t sse_time;
-
+  
 
 static inline void sse_time_set(GLfloat set){
 sse_time=wasm_f32x4_splat(set);
