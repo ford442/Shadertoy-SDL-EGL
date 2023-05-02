@@ -188,7 +188,7 @@ f_tensor FL=f_tensor{6,1};
 f_tensor Fi=f_tensor{1,3};
 d_tensor Di=d_tensor{1,3};
 
-class gpu{
+class GPU{
 
 private:
 float cF=1.0f;
@@ -207,6 +207,7 @@ Fi.at(0,2)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(0,2)=0.0;
+return 0.0;
 }
   
 float F(){
