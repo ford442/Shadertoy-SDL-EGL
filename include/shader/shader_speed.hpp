@@ -199,8 +199,10 @@ double cDm1=-1.0;
 double_t cD0=0.0;
 
 public:
+
 GLuint PRGin(GLuint prg){
 Sh.at(2,1)=prg;
+return 0;
 }
 
 GLuint PRGout(){
@@ -571,15 +573,15 @@ src[3]=frg_ftr;
 const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // nanosleep(&req,&rem);
 const GLuint shd_prg=glCreateProgram();
-tie(shd_prg,frag,vtx,shad.PRG);
+tie(shd_prg,frag,vtx);
 glAttachShader(shd_prg,frag);
 glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
-shad.PRG=shd_prg;
+gpu.PRGin(shd_prg);
 nanosleep(&req,&rem);
 nanosleep(&req,&rem);
-glUseProgram(shad.PRG);
+glUseProgram(gpu.PRGout());
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
