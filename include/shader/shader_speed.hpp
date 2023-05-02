@@ -246,6 +246,7 @@ return Di.at(0,2);
 
 GLfloat u_iTime_set(GLfloat set){
 t_time.at(0,0)=set;
+return 0.0;
 }
 
 inline GLfloat u_iTime_get(){
@@ -355,7 +356,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 public:
 
-static inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
+inline void uni(GLfloat xx,GLfloat yy,GLfloat Tm,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
