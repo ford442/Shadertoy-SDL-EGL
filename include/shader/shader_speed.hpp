@@ -352,11 +352,11 @@ return;
 }
 
 static inline GLfloat sse_time_get(){
-return wasm_f32x4_extract_lane(sse_time.at(0,0),0);
+return wasm_f32x4_extract_lane(sse.at(0,0),0);
 }
 
 static inline GLfloat u_iTime_set(GLfloat set){
-sse_time_set(sse.at(0,0));
+sse_time_set(set);
 t_time.at(0,0)=sse_time_get();
 return 0.0;
 }
