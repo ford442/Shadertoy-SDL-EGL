@@ -396,12 +396,12 @@ clk_l=true;
 }
 glUniform1f(times.uni_tme,t_time.at(0,0));
 glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
-glUniform1i(times.uni_frm,uni_i(0,0));
+glUniform1i(times.uni_frm,uni_i.at(0,0));
 return;
 }
 
 static inline void Rend(){
-uni_i(0,0)++;
+uni_i.at(0,0)++;
 times.t3=times.t2;
 times.t2=std::chrono::high_resolution_clock::now();
 times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
