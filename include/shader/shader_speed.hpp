@@ -346,7 +346,7 @@ t_time.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
 return;
 }
 
-static inline void uni(GLfloat xx,GLfloat yy,GLint fram,GLfloat delt){
+static inline void uni(GLfloat xx,GLfloat yy,GLint fram){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -383,7 +383,7 @@ if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
-uni(mouse.mouseX,mouse.mouseY,times.iFrame,times.Tdlt);
+uni(mouse.mouseX,mouse.mouseY,times.iFrame);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
