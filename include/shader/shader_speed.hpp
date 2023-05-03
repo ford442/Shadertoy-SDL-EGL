@@ -363,15 +363,15 @@ public:
   
 static inline void u_iTime_set(float set){
 t_time.at(0,0)=set;
-sse.at(0,0)=wasm_f64x4_splat(t_time.at(0,0));
-t_time.at(0,0)=wasm_f64x4_extract_lane(sse.at(0,0),0);
+sse.at(0,0)=wasm_f64x2_splat(t_time.at(0,0));
+t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
 return;
 }
 
 static inline void u_iTimeDelta_set(float set){
 t_time.at(1,0)=set;
-sse.at(0,1)=wasm_f64x4_splat(t_time.at(1,0));
-t_time.at(1,0)=wasm_f64x4_extract_lane(sse.at(0,1),0);
+sse.at(0,1)=wasm_f64x2_splat(t_time.at(1,0));
+t_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
