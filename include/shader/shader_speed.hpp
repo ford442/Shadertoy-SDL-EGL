@@ -189,7 +189,7 @@ f_tensor t_time=f_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
-d_tensor t_size=d_tensor{1,1};
+f_tensor t_size=f_tensor{1,1};
 
 class GPU{
 
@@ -310,7 +310,6 @@ struct timespec rem;
 struct timespec req={0,tmm};
 int ele=36;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
-v128_t sse_time;
 
 inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -369,7 +368,7 @@ t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
 return;
 }
 
-static inline void u_iSize_set(double set){
+static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
 sse.at(1,0)=wasm_f64x2_splat(t_size.at(0,0));
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
