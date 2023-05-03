@@ -82,7 +82,7 @@ return shader;
 using namespace boost::numeric::ublas;
 
 const char cm_hdr_src[500]=
-"#version 310 es\n"
+"#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
