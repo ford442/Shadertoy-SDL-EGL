@@ -63,13 +63,13 @@ class Compile
 private:
 
 GLsizei i;
-  
+
 public:
-  
-inline GLuint cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
+
+inline uint cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
-srclens[i]=static_cast<GLsizei>(strlen(src[i]));
+srclens[i]=static_cast<sizei>(strlen(src[i]));
 }
 const GLuint shader=glCreateShader(type);
 glShaderSource(shader,nsrc,src,srclens);
@@ -350,9 +350,14 @@ EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 const char * cm_hdr=cm_hdr_src;
+std::string cm_hdr_S=cm_hdr;
 const char * vrt_bdy=vrt_bdy_src;
+std::string vrt_bdy_S=vrt_bdy;
 const char * frg_hdr=frg_hdr_src;
+std::string frg_hdr_S=frg_hdr;
 const char * frg_ftr=frg_ftr_src;
+std::string frg_ftr_S=frg_ftr;
+
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
@@ -449,8 +454,6 @@ inline void strt(){
 typedef struct{float XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
-
-
 tie(Fi,Di);
 tie(uni_i,iFps);
 tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
@@ -478,7 +481,8 @@ eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const GLchar * frag_body=rd_fl(Fnm);
+const char * frag_body=rd_fl(Fnm);
+std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -574,14 +578,14 @@ gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,gpu.EBOout());
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
-src[0]=cm_hdr;
-src[1]=vrt_bdy;
+src[0]=cm_hdr_S;
+src[1]=vrt_bdy_S;
 const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
-src[0]=cm_hdr;
-src[1]=frg_hdr;
+src[0]=cm_hdr_S;
+src[1]=frg_hdr_S;
 // src[2]=frg_aa;
-src[2]=frag_body;
-src[3]=frg_ftr;
+src[2]=frag_body_S;
+src[3]=frg_ftr_S;
 const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 const GLuint shd_prg=glCreateProgram();
 tie(shd_prg,frag,vtx);
