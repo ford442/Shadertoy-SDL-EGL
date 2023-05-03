@@ -404,8 +404,8 @@ mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
-mouse.mm=mouse.S*xx;
-mouse.nn=mouse.S*yy;
+mouse.mm=mouse.S*mouse.xx;
+mouse.nn=mouse.S*mouse.yy;
 glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
