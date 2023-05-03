@@ -614,12 +614,12 @@ smp_chn[1]=glGetUniformLocation(shd_prg,"iChannel1");
 smp_chn[2]=glGetUniformLocation(shd_prg,"iChannel2");
 smp_chn[3]=glGetUniformLocation(shd_prg,"iChannel3");
 glUniform1f(uni_srate,44100.0f);
-glUniform3f(uni_res,mouse.S,mouse.S,gpu.gF());
-glUniform3f(smp_chn_res,mouse.S,mouse.S,gpu.gF());
+glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 iFps=66;
 glUniform1f(uni_fps,iFps);
-mouse.mm=mouse.S*0.5;
-mouse.nn=mouse.S*0.5;
+mouse.mm=t_size.at(0,0)*0.5;
+mouse.nn=t_size.at(0,0)*0.5;
 glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
