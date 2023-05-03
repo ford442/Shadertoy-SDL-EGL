@@ -376,8 +376,6 @@ return;
 }
 
 static inline void uni(float xx,float yy){
-  
-  
 
 return;
 }
@@ -400,8 +398,8 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const float xxx=xx;
-const float yyy=yy;
+const float xxx=mouse.xx;
+const float yyy=mouse.yy;
 mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
