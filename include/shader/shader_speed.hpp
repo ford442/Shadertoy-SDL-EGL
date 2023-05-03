@@ -66,7 +66,7 @@ GLsizei i;
 
 public:
 
-inline unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+inline unsigned int cmpl_shd(GLenum type,GLsizei nsrc,std::string ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=static_cast<GLsizei>(strlen(src[i]));
@@ -349,6 +349,7 @@ EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
+std::string * src_S[4];
 const char * cm_hdr=cm_hdr_src;
 std::string cm_hdr_S=cm_hdr;
 const char * vrt_bdy=vrt_bdy_src;
@@ -578,14 +579,21 @@ gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,gpu.EBOout());
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanosleep(&req,&rem);
-src[0]=cm_hdr_S;
-src[1]=vrt_bdy_S;
+src[0]=cm_hdr;
+src[1]=vrt_bdy;
 const GLuint vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
-src[0]=cm_hdr_S;
-src[1]=frg_hdr_S;
+src[0]=cm_hdr;
+src[1]=frg_hdr;
 // src[2]=frg_aa;
-src[2]=frag_body_S;
-src[3]=frg_ftr_S;
+src[2]=frag_body;
+src[3]=frg_ftr;
+src_S[0]=cm_hdr_S;
+src_S[1]=vrt_bdy_S;
+src_S[0]=cm_hdr_S;
+src_S[1]=frg_hdr_S;
+// src[2]=frg_aa;
+src_S[2]=frag_body_S;
+src_S[3]=frg_ftr_S;
 const GLuint frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 const GLuint shd_prg=glCreateProgram();
 tie(shd_prg,frag,vtx);
