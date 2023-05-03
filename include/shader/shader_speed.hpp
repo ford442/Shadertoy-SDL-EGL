@@ -376,6 +376,24 @@ return;
 }
 
 static inline void uni(float xx,float yy){
+  
+  
+
+return;
+}
+
+static inline void Rend(){
+uni_i.at(0,0)++;
+times.t3=times.t2;
+times.t2=std::chrono::high_resolution_clock::now();
+times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
+times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
+u_iTime_set(times.time_spana.count());
+u_iTimeDelta_set(times.time_spanb.count());
+if(ms_l==true){
+mouse.mouseX=mouse.x/mouse.S;
+mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
+}
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -397,24 +415,6 @@ clk_l=true;
 glUniform1f(times.uni_tme,t_time.at(0,0));
 glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
 glUniform1i(times.uni_frm,uni_i.at(0,0));
-return;
-}
-
-static inline void Rend(){
-uni_i.at(0,0)++;
-times.t3=times.t2;
-times.t2=std::chrono::high_resolution_clock::now();
-times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
-times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
-t_time.at(0,0)=times.time_spana.count();
-u_iTime_set(t_time.at(0,0));
-t_time.at(1,0)=times.time_spanb.count();
-u_iTimeDelta_set(t_time.at(1,0));
-if(ms_l==true){
-mouse.mouseX=mouse.x/mouse.S;
-mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
-}
-uni(mouse.mouseX,mouse.mouseY);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
@@ -445,7 +445,7 @@ return results;
 }
 return nullptr;
 }
-  
+
 inline void strt(){
 typedef struct{float XYZW[4];}Vertex;
 gpu.setFloats();
@@ -628,10 +628,15 @@ glScissor((GLint)0,(GLint)0,Size,Size);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+u_iTime_set(0.0f);
+u_iTimeDelta_set(0.0f);
 times.t1=std::chrono::high_resolution_clock::now();
+times.t2=std::chrono::high_resolution_clock::now();
 times.t3=std::chrono::high_resolution_clock::now();
 times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t3);
 times.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(times.t2-times.t1);
+u_iTime_set(times.time_spana.count());
+u_iTimeDelta_set(times.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
