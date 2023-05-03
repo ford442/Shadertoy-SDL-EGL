@@ -278,6 +278,7 @@ double mX;
 double mY;
 double mm;
 double nn;
+double S;
 GLfloat uni_mse;
 double mouseY;
 double mouseX;
@@ -381,8 +382,8 @@ times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(time
 u_iTime_set(times.time_spana.count());
 u_iTimeDelta_set(times.time_spanb.count());
 if(ms_l==true){
-mouse.mouseX=mouse.x/t_size.at(0,0);
-mouse.mouseY=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
+mouse.mouseX=mouse.x/mouse.S;
+mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -396,8 +397,8 @@ mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
-mouse.mm=t_size.at(0,0)*mouse.xx;
-mouse.nn=t_size.at(0,0)*mouse.yy;
+mouse.mm=mouse.S*mouse.xx;
+mouse.nn=mouse.S*mouse.yy;
 glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
@@ -493,9 +494,10 @@ emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
-u_iSize_set(static_cast<float>(Size));
-mouse.mX=0.5*t_size.at(0,0);
-mouse.mY=0.5*t_size.at(0,0);
+mouse.S=static_cast<double>(Size);
+u_iSize_set(static_cast<float>(mouse.S));
+mouse.mX=0.5*mouse.S;
+mouse.mY=0.5*mouse.S;
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
@@ -607,8 +609,8 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 iFps=66;
 glUniform1f(uni_fps,iFps);
-mouse.mm=t_size.at(0,0)*0.5;
-mouse.nn=t_size.at(0,0)*0.5;
+mouse.mm=mouse.S*0.5;
+mouse.nn=mouse.S*0.5;
 glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
