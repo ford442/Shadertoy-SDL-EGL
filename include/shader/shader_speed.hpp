@@ -66,10 +66,10 @@ GLsizei i;
 
 public:
 
-inline unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
-GLsizei srclens[nsrc];
+inline unsigned int cmpl_shd(GLenum type,size_t nsrc,const char ** src){
+size_t srclens[nsrc];
 for(i=0;i<nsrc;i++){
-srclens[i]=static_cast<sizei>(strlen(src[i]));
+srclens[i]=static_cast<size_t>(strlen(src[i]));
 }
 const GLuint shader=glCreateShader(type);
 glShaderSource(shader,nsrc,src,srclens);
