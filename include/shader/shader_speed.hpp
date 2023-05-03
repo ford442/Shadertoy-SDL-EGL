@@ -197,39 +197,39 @@ private:
 
 public:
 
-inline GLuint PRGin(GLuint prg){
+inline unsigned int PRGin(unsigned int prg){
 Sh.at(0,0)=prg;
 return 0;
 }
 
-inline GLuint PRGout(){
+inline unsigned int PRGout(){
 return Sh.at(0,0);
 }
 
-inline GLuint EBOin(GLuint EBO){
+inline unsigned int EBOin(unsigned int EBO){
 Sh.at(1,0)=EBO;
 return 0;
 }
 
-inline GLuint EBOout(){
+inline unsigned int EBOout(){
 return Sh.at(1,0);
 }
 
-inline GLuint VCOin(GLuint VCO){
+inline unsigned int VCOin(unsigned int VCO){
 Sh.at(2,0)=VCO;
 return 0;
 }
 
-inline GLuint VCOout(){
+inline unsigned int VCOout(){
 return Sh.at(2,0);
 }
 
-static inline GLuint VBOin(GLuint VBO){
+static inline unsigned int VBOin(unsigned int VBO){
 Sh.at(2,1)=VBO;
 return 0;
 }
 
-static inline GLuint VBOout(){
+static inline unsigned int VBOout(){
 return Sh.at(2,1);
 }
 
@@ -284,7 +284,7 @@ std::chrono::high_resolution_clock::time_point t3;
 }times;
 
 struct{
-GLuint VBO,EBO,VCO;
+unsigned int VBO,EBO,VCO;
 }shad;
 
 struct{
