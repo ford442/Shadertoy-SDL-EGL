@@ -66,7 +66,7 @@ GLsizei i;
 
 public:
 
-inline uint cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+inline unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=static_cast<sizei>(strlen(src[i]));
