@@ -373,6 +373,31 @@ t_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
+static inline void uni(GLfloat xx,GLfloat yy){
+retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(ms_l==true){
+retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
+retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(clk_l==true){
+const GLfloat xxx=xx;
+const GLfloat yyy=yy;
+mouse.mX=1.0f-(xxx*Size);
+mouse.mY=1.0f-(yyy*Size);
+clk_l=false;
+}
+mouse.mm=mouse.S*xx;
+mouse.nn=mouse.S*yy;
+glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
+}else{
+clk_l=true;
+}
+glUniform1f(times.uni_tme,t_time.at(0,0));
+glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
+glUniform1i(times.uni_frm,uni_i.at(0,0));
+return;
+}
+  
 static inline void Rend(){
 uni_i.at(0,0)++;
 times.t3=times.t2;
@@ -385,27 +410,7 @@ if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
-retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-if(ms_l==true){
-retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
-retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-if(clk_l==true){
-const float xxx=mouse.xx;
-const float yyy=mouse.yy;
-mouse.mX=1.0f-(xxx*Size);
-mouse.mY=1.0f-(yyy*Size);
-clk_l=false;
-}
-mouse.mm=mouse.S*mouse.xx;
-mouse.nn=mouse.S*mouse.yy;
-glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
-}else{
-clk_l=true;
-}
-glUniform1f(times.uni_tme,t_time.at(0,0));
-glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
-glUniform1i(times.uni_frm,uni_i.at(0,0));
+uni(mouse.X,mouse.Y);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
