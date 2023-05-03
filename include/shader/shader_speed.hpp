@@ -272,20 +272,20 @@ unsigned int VBO,EBO,VCO;
 }shad;
 
 struct{
-double xx;
-double yy;
-double mX;
-double mY;
-double mm;
-double nn;
-double S;
+GLdouble xx;
+GLdouble yy;
+GLdouble mX;
+GLdouble mY;
+GLdouble mm;
+GLdouble nn;
 GLfloat uni_mse;
-double mouseY;
-double mouseX;
-double wi;
-double hi;
-float x;
-float y;
+float S;
+GLdouble mouseY;
+GLdouble mouseX;
+GLdouble wi;
+GLdouble hi;
+GLclampf x;
+GLclampf y;
 }mouse;
 
 int Size;
