@@ -197,50 +197,34 @@ private:
 
 public:
 
-inline unsigned int PRGin(unsigned int prg){
+inline void PRGin(unsigned int prg){
 Sh.at(0,0)=prg;
-return 0;
+return;
 }
 
-inline unsigned int PRGout(){
-return Sh.at(0,0);
-}
-
-inline unsigned int EBOin(unsigned int EBO){
+inline void EBOin(unsigned int EBO){
 Sh.at(1,0)=EBO;
-return 0;
+return;
 }
 
-inline unsigned int EBOout(){
-return Sh.at(1,0);
-}
-
-inline unsigned int VCOin(unsigned int VCO){
+inline void VCOin(unsigned int VCO){
 Sh.at(2,0)=VCO;
-return 0;
+return;
 }
 
-inline unsigned int VCOout(){
-return Sh.at(2,0);
-}
-
-static inline unsigned int VBOin(unsigned int VBO){
+static inline void VBOin(unsigned int VBO){
 Sh.at(2,1)=VBO;
-return 0;
+return;
 }
 
-static inline unsigned int VBOout(){
-return Sh.at(2,1);
-}
-
-inline float setFloats(){
+inline void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
 Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
-return 0.0;
+return;
 }
 
 inline GLfloat gF(){
@@ -376,8 +360,8 @@ return;
 
 static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
-sse.at(1,0)=wasm_f64x2_splat(t_size.at(0,0));
-t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
+sse.at(1,0)=wasm_f32x4_splat(t_size.at(0,0));
+t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 return;
 }
 
