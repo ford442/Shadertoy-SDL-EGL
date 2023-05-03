@@ -189,6 +189,7 @@ f_tensor t_time=f_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
+d_tensor t_size=d_tensor{1,1};
 
 class GPU{
 
@@ -368,15 +369,17 @@ t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
 return;
 }
 
+static inline void u_iSize_set(double set){
+t_size.at(0,0)=set;
+sse.at(1,0)=wasm_f64x2_splat(t_size.at(0,0));
+t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
+return;
+}
+
 static inline void u_iTimeDelta_set(float set){
 t_time.at(1,0)=set;
 sse.at(0,1)=wasm_f64x2_splat(t_time.at(1,0));
 t_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
-return;
-}
-
-static inline void uni(float xx,float yy){
-
 return;
 }
 
@@ -389,8 +392,8 @@ times.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(time
 u_iTime_set(times.time_spana.count());
 u_iTimeDelta_set(times.time_spanb.count());
 if(ms_l==true){
-mouse.mouseX=mouse.x/mouse.S;
-mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
+mouse.mouseX=mouse.x/t_size.at(0,0);
+mouse.mouseY=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
 }
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -404,8 +407,8 @@ mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
-mouse.mm=mouse.S*mouse.xx;
-mouse.nn=mouse.S*mouse.yy;
+mouse.mm=t_size.at(0,0)*mouse.xx;
+mouse.nn=t_size.at(0,0)*mouse.yy;
 glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
@@ -453,7 +456,7 @@ tie(uni_i,iFps);
 tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
 tie(sse_time,t_time);
 tie(mouse.mouseY,mouse.mouseX);
-tie(mouse.hi,mouse.wi,mouse.S);
+tie(mouse.hi,mouse.wi,t_size.at(0,0));
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
 tie(times.t1,times.t2,times.t3);
 tie(shad.EBO,shad.VBO,shad.VCO);
@@ -501,9 +504,9 @@ emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
-mouse.S=static_cast<float>(Size);
-mouse.mX=0.5*mouse.S;
-mouse.mY=0.5*mouse.S;
+u_iSize_set(mouse.hi);
+mouse.mX=0.5*t_size.at(0,0);
+mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
