@@ -408,7 +408,7 @@ u_iTime_set(times.time_spana.count());
 u_iTimeDelta_set(times.time_spanb.count());
 if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
-mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
+mouse.mouseY=mouse.y/mouse.S;
 }
 uni(mouse.mouseX,mouse.mouseY);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
