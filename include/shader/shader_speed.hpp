@@ -410,7 +410,7 @@ if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
-uni(mouse.X,mouse.Y);
+uni(mouse.mouseX,mouse.mouseY);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
