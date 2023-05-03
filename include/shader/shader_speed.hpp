@@ -453,7 +453,7 @@ const Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1
 tie(Fi,Di);
 tie(uni_i,iFps);
 tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
-tie(sse_time,t_time);
+tie(sse,t_time);
 tie(mouse.mouseY,mouse.mouseX);
 tie(mouse.hi,mouse.wi,t_size.at(0,0));
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
