@@ -360,6 +360,13 @@ GPU gpu;
 
 public:
   
+static inline void u_prg_set(float set){
+t_time.at(0,0)=set;
+sse.at(0,0)=wasm_f64x2_splat(t_time.at(0,0));
+t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
+return;
+}
+  
 static inline void u_iTime_set(float set){
 t_time.at(0,0)=set;
 sse.at(0,0)=wasm_f64x2_splat(t_time.at(0,0));
@@ -589,7 +596,7 @@ glAttachShader(shd_prg,vtx);
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 gpu.PRGin(shd_prg);
-glUseProgram(gpu.PRGout());
+glUseProgram(Sh.at(0,0));
 nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
