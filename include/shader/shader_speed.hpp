@@ -174,7 +174,7 @@ EGL_NONE,EGL_NONE
 
 EM_BOOL ms_l,clk_l;
 
-using mouse_tensor=tensor<double>;
+using mouse_tensor=tensor<float>;
 using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<int>;
 using f_tensor=tensor<float>;
@@ -272,16 +272,16 @@ unsigned int VBO,EBO,VCO;
 }shad;
 
 struct{
-double xx;
-double yy;
-double mX;
-double mY;
-double mm;
-double nn;
+float xx;
+float yy;
+float mX;
+float mY;
+float mm;
+float nn;
 GLfloat uni_mse;
 float S;
-double mouseY;
-double mouseX;
+float mouseY;
+float mouseX;
 double wi;
 double hi;
 GLclampf x;
