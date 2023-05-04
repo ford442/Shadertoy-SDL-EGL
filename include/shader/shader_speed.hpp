@@ -45,13 +45,11 @@
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
-#include <boost/multiprecision/cpp_bin_float.hpp>
-#include <boost/multiprecision/cpp_dec_float.hpp>
 
-using namespace ::boost::multiprecision;
 #include <float.h>
 #include <math.h>
 #include <boost/tuple/tuple.hpp>
+
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
 
@@ -185,7 +183,7 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=tensor<float>;
 using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<int32_t>;
-using f_tensor=tensor<cpp_dec_float_50>;
+using f_tensor=tensor<float>;
 using d_tensor=tensor<double>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<int32_t>;
