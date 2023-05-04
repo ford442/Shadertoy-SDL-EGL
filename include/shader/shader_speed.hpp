@@ -383,12 +383,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
-mouse.mX=1.0f-(xxx/mouse.S);
-mouse.mY=(yyy/mouse.S)-1.0f;
+mouse.mX=1.0f-(xxx/t_size.at(0,0));
+mouse.mY=(yyy/t_size.at(0,0));
 clk_l=false;
 }
-mouse.mm=xx*mouse.S;
-mouse.nn=mouse.S*yy;
+mouse.mm=xx*t_size.at(0,0);
+mouse.nn=t_size.at(0,0)*yy;
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
