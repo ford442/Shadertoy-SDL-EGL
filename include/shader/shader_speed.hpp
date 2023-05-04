@@ -281,13 +281,13 @@ float mX;
 float mY;
 float mm;
 float nn;
-float S;
-float mouseY;
-float mouseX;
+double S;
+double mouseY;
+double mouseX;
 double wi;
 double hi;
-float x;
-float y;
+GLclampf x;
+GLclampf y;
 }mouse;
 
 inline int32_t Size;
