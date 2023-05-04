@@ -181,6 +181,7 @@ using f_tensor=tensor<float>;
 using d_tensor=tensor<double>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<int>;
+using void_tensor=tensor<void *>;
 
 v_tensor sse=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
@@ -190,6 +191,8 @@ f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
 f_tensor t_size=f_tensor{1,1};
+f_tensor t_size=f_tensor{1,1};
+void_tensor cntx=void_tensor{2,2};
 
 class GPU{
 
@@ -494,6 +497,7 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
+cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 glUseProgram(0);
