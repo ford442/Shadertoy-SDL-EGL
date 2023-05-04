@@ -425,6 +425,7 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
 mms.at(0,1)=mouse.x/t_size.at(0,0);
 mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
+mms.at(1,1)=(1,0f-mouse.y)/t_size.at(0,0);
 }
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
