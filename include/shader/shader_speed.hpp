@@ -47,7 +47,9 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <float.h>
 #include <math.h>
-#include "boost/tuple/tuple.hpp"
+#include <boost/tuple/tuple.hpp>
+
+#include <boost/fiber/all.hpp>
 
 extern "C"{
   
