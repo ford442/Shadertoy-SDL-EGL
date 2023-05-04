@@ -27,7 +27,6 @@ class js
 
 private:
 
-
 std::random_device rd;
 
 public:
@@ -36,7 +35,7 @@ int rD;
 int Th;
 v128_t Dr;
 
-v128_t rNd(int Th){
+inline v128_t rNd(int Th){
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
