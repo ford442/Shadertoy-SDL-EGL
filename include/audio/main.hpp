@@ -2,10 +2,10 @@
 
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT ON
+#pragma STDC FP_CONTRACT OFF
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -43,11 +43,11 @@ private:
 
 std::random_device rd;
 v128_t Dr;
-GLint Th,rD;
+int32_t Th,rD;
 
 public:
 
-inline v128_t rNd(GLint Th){
+inline v128_t rNd(int32_t Th){
 tie(Th,rD,Dr);
 std::srand(rd());
 rD=std::rand()%Th;
@@ -60,8 +60,8 @@ return Dr;
 extern "C"{
   
 v128_t Rg;
-int c;
+int32_t c;
 
-int r4nd(int);
+int32_t r4nd(int32_t);
 
 }
