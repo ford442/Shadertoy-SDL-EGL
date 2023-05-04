@@ -31,11 +31,11 @@ std::random_device rd;
 
 public:
 
-int rD;
-int Th;
+int32_t rD;
+int32_t Th;
 v128_t Dr;
 
-inline v128_t rNd(int Th){
+static inline v128_t rNd(int32_t Th){
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
@@ -46,9 +46,9 @@ return Dr;
 
 extern"C"{
 
-int c;
+int32_t c;
 v128_t Rg;
-int r4nd(int);
+int32_t r4nd(int32_t);
 
 }
 
