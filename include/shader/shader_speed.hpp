@@ -85,19 +85,19 @@ inline char cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-"#pragma STDGL(fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n"
+// "#pragma STDGL(fastprecision on)\n"
+// "#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
 // "#pragma optionNV(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 // "#pragma optionNV(ifcvt none)\n"
-// "#pragma STDGL(inline all)\n"
-// "#pragma optionNV(inline all)\n"
+"#pragma STDGL(inline all)\n"
+"#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
 "precision highp float;"
-"precision highp int;\n";
+"precision mediump int;\n";
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
@@ -163,10 +163,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,(EGLint)64,
+// EGL_SAMPLE_BUFFERS,(EGLint)64,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-EGL_SAMPLES,(EGLint)64,
+// EGL_SAMPLES,(EGLint)64,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -487,7 +487,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -507,8 +507,8 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 mouse.S=static_cast<float>(mouse.hi);
-// u_iSize_set(mouse.S);
-  t_size.at(0,0)=mouse.S;
+u_iSize_set(mouse.S);
+ //  t_size.at(0,0)=mouse.S;
 mouse.mX=0.5*t_size.at(0,0);
 mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
