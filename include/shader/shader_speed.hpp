@@ -201,22 +201,22 @@ private:
 
 public:
 
-const inline void PRGin(unsigned int prg){
+inline void PRGin(unsigned int prg){
 Sh.at(0,0)=prg;
 return;
 }
 
-const inline void EBOin(unsigned int EBO){
+inline void EBOin(unsigned int EBO){
 Sh.at(1,0)=EBO;
 return;
 }
 
-const inline void VCOin(unsigned int VCO){
+inline void VCOin(unsigned int VCO){
 Sh.at(2,0)=VCO;
 return;
 }
 
-static const inline void VBOin(unsigned int VBO){
+const inline void VBOin(unsigned int VBO){
 Sh.at(2,1)=VBO;
 return;
 }
