@@ -172,7 +172,7 @@ EGL_SAMPLES,(EGLint)64,
 EGL_NONE,EGL_NONE
 };
 
-EM_BOOL ms_l,clk_l;
+inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<float>;
 using shad_tensor=tensor<unsigned int>;
@@ -293,12 +293,12 @@ float x;
 float y;
 }mouse;
 
-int32_t Size;
-int32_t tmm=166666000;
-struct timespec rem;
-struct timespec req={0,tmm};
-int32_t ele=36;
-EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
+inline int32_t Size;
+inline int32_t tmm=166666000;
+inline struct timespec rem;
+inline struct timespec req={0,tmm};
+inline int32_t ele=36;
+inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
