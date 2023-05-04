@@ -183,7 +183,7 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=tensor<float>;
 using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<int32_t>;
-using f_tensor=tensor<cpp_bin_float_single>;
+using f_tensor=tensor<cpp_bin_float_50>;
 using d_tensor=tensor<double>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<int32_t>;
