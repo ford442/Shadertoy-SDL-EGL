@@ -364,7 +364,7 @@ return;
 static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
 sse2.at(0,0)=wasm_f32x4_splat(t_size.at(0,0));
-t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
+t_size.at(0,0)=wasm_f32x4_extract_lane(sse2.at(0,0),0);
 return;
 }
 
@@ -487,7 +487,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
