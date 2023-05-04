@@ -239,19 +239,19 @@ const inline GLfloat gFm1(){
 return Fi.at(0,1);
 }
 
-inline GLfloat gF0(){
+const inline GLfloat gF0(){
 return Fi.at(1,1);
 }
 
-inline GLdouble gD(){
+const inline GLdouble gD(){
 return Di.at(0,0);
 }
 
-inline GLdouble gDm1(){
+const inline GLdouble gDm1(){
 return Di.at(0,1);
 }
 
-inline GLdouble gD0(){
+const inline GLdouble gD0(){
 return Di.at(1,1);
 }
 
@@ -259,11 +259,8 @@ return Di.at(1,1);
 
 const inline GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const inline GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
-inline GLfloat uni_tme;
-inline GLfloat uni_tme_dlt;
-inline GLuint uni_frm;
-inline GLfloat uni_mse;
+inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
+inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
 
 inline struct{
 std::chrono::duration<double,std::chrono::seconds::period>time_spana;
@@ -294,10 +291,10 @@ float y;
 }mouse;
 
 inline int32_t Size;
-inline int32_t tmm=166666000;
-inline struct timespec rem;
-inline struct timespec req={0,tmm};
-inline int32_t ele=36;
+const inline int32_t tmm=166666000;
+const inline struct timespec rem;
+const inline struct timespec req={0,tmm};
+const inline int32_t ele=36;
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -336,7 +333,7 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-const char * src[4];
+char * src[4];
 const char * cm_hdr=cm_hdr_src;
 const char * vrt_bdy=vrt_bdy_src;
 const char * frg_hdr=frg_hdr_src;
@@ -452,10 +449,13 @@ gpu.setFloats();
 const Vertex vrt[]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 tie(Fi,Di);
 tie(uni_i,iFps);
+tie(Sh,So,Fi);
+tie(Di,uni_i,t_size);
+tie(cntx,cntxi);
 tie(mouse.mouseY,mouse.mouseX,mouse.x,mouse.y);
 tie(sse,t_time);
 tie(mouse.mouseY,mouse.mouseX);
-tie(mouse.hi,mouse.wi,t_size.at(0,0));
+tie(mouse.hi,mouse.wi);
 tie(mouse.mX,mouse.mY,mouse.mm,mouse.nn);
 tie(times.t1,times.t2,times.t3);
 tie(shad.EBO,shad.VBO,shad.VCO);
