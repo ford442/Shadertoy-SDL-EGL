@@ -48,8 +48,10 @@
 #include <float.h>
 #include <math.h>
 #include <boost/tuple/tuple.hpp>
+#define BOOST_CHRONO_HEADER_ONLY 1
+#define BOOST_ERROR_CODE_HEADER_ONLY 1
 
-#include <boost/fiber/all.hpp>
+#include <boost/chrono.hpp>
 
 extern "C"{
   
