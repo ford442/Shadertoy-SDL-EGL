@@ -186,6 +186,7 @@ using void_tensor=tensor<void *>;
 
 inline v_tensor sse=v_tensor{2,2};
 inline v_tensor sse2=v_tensor{2,2};
+inline v_tensor sse3=v_tensor{2,2};
 inline shad_tensor Sh=shad_tensor{3,3};
 inline sz_tensor Si=sz_tensor{1,1};
 inline f_tensor t_time=f_tensor{2,1};
@@ -193,6 +194,7 @@ inline f_tensor Fi=f_tensor{2,2};
 inline d_tensor Di=d_tensor{2,2};
 inline gi_tensor uni_i=gi_tensor{1,1};
 inline f_tensor t_size=f_tensor{1,1};
+inline i_tensor i_size=i_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
 
@@ -363,8 +365,15 @@ return;
 
 static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
-sse2.at(0,0)=wasm_f32x4_splat(t_size.at(0,0));
-t_size.at(0,0)=wasm_f32x4_extract_lane(sse2.at(0,0),0);
+sse2.at(0,0)=wasm_f64x2_splat(t_size.at(0,0));
+t_size.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
+return;
+}
+  
+static inline void i_iSize_set(int32_t set){
+i_size.at(0,0)=set;
+sse3.at(0,0)=wasm_i32x4_splat(i_size.at(0,0));
+i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 return;
 }
 
@@ -388,8 +397,8 @@ mouse.mX=1.0f-(xxx*t_size.at(0,0));
 mouse.mY=1.0f-(yyy*t_size.at(0,0));
 clk_l=false;
 }
-mouse.mm=mouse.mouseX*Size;
-mouse.nn=Size*mouse.mouseY;
+mouse.mm=mouse.mouseX*i_size.at(0,0);
+mouse.nn=mouse.mouseY*i_size.at(0,0);
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
@@ -506,6 +515,7 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
+i_iSize_set(Size);
 mouse.S=static_cast<float>(mouse.hi);
 u_iSize_set(mouse.S);
  //  t_size.at(0,0)=mouse.S;
@@ -626,9 +636,9 @@ glUniform1f(uni_fps,iFps);
 mouse.mm=mouse.S*0.5;
 mouse.nn=mouse.S*0.5;
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
-glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,Size,Size);
+glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
