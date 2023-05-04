@@ -374,21 +374,21 @@ t_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-static inline void uni(float xx,float yy){
+static inline void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const GLfloat xxx=xx;
-const GLfloat yyy=yy;
-mouse.mX=1.0f-(xxx/t_size.at(0,0));
-mouse.mY=(yyy/t_size.at(0,0));
+const GLfloat xxx=mouse.xx;
+const GLfloat yyy=mouse.yy;
+mouse.mX=1.0f-(xxx*t_size.at(0,0));
+mouse.mY=1.0f-(yyy*t_size.at(0,0));
 clk_l=false;
 }
-mouse.mm=xx*t_size.at(0,0);
-mouse.nn=t_size.at(0,0)*yy;
+mouse.mm=mouse.xx*t_size.at(0,0);
+mouse.nn=t_size.at(0,0)*mouse.yy;
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
@@ -411,7 +411,7 @@ if(ms_l==true){
 mouse.mouseX=mouse.x/mouse.S;
 mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
 }
-uni(mouse.mouseX,mouse.mouseY);
+uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
