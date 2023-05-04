@@ -260,11 +260,12 @@ return Di.at(1,1);
 const inline GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const inline GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
+inline GLfloat uni_tme;
+inline GLfloat uni_tme_dlt;
+inline GLuint uni_frm;
+inline GLfloat uni_mse;
 
-struct{
-GLfloat uni_tme;
-GLfloat uni_tme_dlt;
-GLuint uni_frm;
+inline struct{
 std::chrono::duration<double,std::chrono::seconds::period>time_spana;
 std::chrono::duration<double,std::chrono::seconds::period>time_spanb;
 std::chrono::high_resolution_clock::time_point t1;
@@ -272,25 +273,24 @@ std::chrono::high_resolution_clock::time_point t2;
 std::chrono::high_resolution_clock::time_point t3;
 }times;
 
-struct{
+inline struct{
 unsigned int VBO,EBO,VCO;
 }shad;
 
-struct{
+inline struct{
 float xx;
 float yy;
 float mX;
 float mY;
 float mm;
 float nn;
-GLfloat uni_mse;
 float S;
 float mouseY;
 float mouseX;
 double wi;
 double hi;
-GLclampf x;
-GLclampf y;
+float x;
+float y;
 }mouse;
 
 int32_t Size;
@@ -392,13 +392,13 @@ clk_l=false;
 }
 mouse.mm=mouse.S*xx;
 mouse.nn=(mouse.S-mouse.y)*yy;
-glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
+glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
 }
-glUniform1f(times.uni_tme,t_time.at(0,0));
-glUniform1f(times.uni_tme_dlt,t_time.at(1,0));
-glUniform1i(times.uni_frm,uni_i.at(0,0));
+glUniform1f(uni_tme,t_time.at(0,0));
+glUniform1f(uni_tme_dlt,t_time.at(1,0));
+glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
   
@@ -471,7 +471,7 @@ tie(retCl,retMu,retMd,retMv);
 tie(retSa,retSb,retSc);
 tie(ms_l,clk_l);
 tie(times.time_spana,times.time_spanb);
-tie(mouse.xx,mouse.yy,mouse.uni_mse);
+tie(mouse.xx,mouse.yy,uni_mse);
 tie(rem,req,tmm);
 eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
@@ -608,7 +608,7 @@ times.uni_tme_dlt=glGetUniformLocation(shd_prg,"iTimeDelta");
 times.uni_frm=glGetUniformLocation(shd_prg,"iFrame");
 uni_fps=glGetUniformLocation(shd_prg,"iFrameRate");
 uni_res=glGetUniformLocation(shd_prg,"iResolution");
-mouse.uni_mse=glGetUniformLocation(shd_prg,"iMouse");
+uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 uni_srate=glGetUniformLocation(shd_prg,"iSampleRate");
 smp_chn_res=glGetUniformLocation(shd_prg,"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(shd_prg,"iChannel0");
@@ -622,7 +622,7 @@ iFps=66;
 glUniform1f(uni_fps,iFps);
 mouse.mm=mouse.S*0.5;
 mouse.nn=mouse.S*0.5;
-glUniform4f(mouse.uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
+glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,Size,Size);
