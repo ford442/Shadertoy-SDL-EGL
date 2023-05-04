@@ -89,8 +89,8 @@ inline char cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-// "#pragma STDGL(fastprecision on)\n"
-// "#pragma optionNV(fastprecision on)\n"
+"#pragma STDGL(fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
 // "#pragma optionNV(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
@@ -644,7 +644,7 @@ glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
