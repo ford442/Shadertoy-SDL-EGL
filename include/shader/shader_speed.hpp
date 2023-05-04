@@ -387,8 +387,8 @@ mouse.mX=1.0f-(xxx/Size);
 mouse.mY=1.0f-(yyy/Size);
 clk_l=false;
 }
-mouse.mm=mouse.S*xx;
-mouse.nn=(mouse.S-mouse.y)*yy;
+mouse.mm=1.0f-(xx/Size);
+mouse.nn=(Size-mouse.y)/yy;
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
@@ -505,10 +505,10 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
-mouse.S=static_cast<float>(Size);
+mouse.S=static_cast<double>(Size);
 u_iSize_set(mouse.S);
-mouse.mX=0.5;
-mouse.mY=0.5;
+mouse.mX=0.5*mouse.S;
+mouse.mY=0.5*mouse.S;
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
