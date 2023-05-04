@@ -45,6 +45,8 @@
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
+#include <boost/multiprecision/cpp_bin_float.hpp>
+
 #include <float.h>
 #include <math.h>
 #include <boost/tuple/tuple.hpp>
