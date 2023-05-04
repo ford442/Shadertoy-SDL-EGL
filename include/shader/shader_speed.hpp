@@ -184,16 +184,16 @@ using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
-v_tensor sse=v_tensor{2,2};
-shad_tensor Sh=shad_tensor{3,3};
-sz_tensor Si=sz_tensor{1,1};
-f_tensor t_time=f_tensor{2,1};
-f_tensor Fi=f_tensor{2,2};
-d_tensor Di=d_tensor{2,2};
-gi_tensor uni_i=gi_tensor{1,1};
-f_tensor t_size=f_tensor{1,1};
-void_tensor cntx=void_tensor{2,2};
-i_tensor cntxi=i_tensor{2,2};
+inline v_tensor sse=v_tensor{2,2};
+inline shad_tensor Sh=shad_tensor{3,3};
+inline sz_tensor Si=sz_tensor{1,1};
+inline f_tensor t_time=f_tensor{2,1};
+inline f_tensor Fi=f_tensor{2,2};
+inline d_tensor Di=d_tensor{2,2};
+inline gi_tensor uni_i=gi_tensor{1,1};
+inline f_tensor t_size=f_tensor{1,1};
+inline void_tensor cntx=void_tensor{2,2};
+inline i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
@@ -329,7 +329,7 @@ long int length=0;
 char8_t * result=NULL;
 char * results=NULL;
 int32_t iFps;
-GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
+inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
 EGLContext ctxegl;
