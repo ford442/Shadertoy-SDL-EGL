@@ -104,11 +104,11 @@ inline char vrt_bdy_src[100]=
 
 inline char frg_hdr_src[1000]=
 "precision highp sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
@@ -125,8 +125,8 @@ inline EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -163,10 +163,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,(EGLint)64,
+EGL_SAMPLE_BUFFERS,(EGLint)1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-EGL_SAMPLES,(EGLint)64,
+EGL_SAMPLES,(EGLint)1,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -518,7 +518,6 @@ Size=static_cast<int32_t>(mouse.hi);
 i_iSize_set(Size);
 mouse.S=static_cast<float>(mouse.hi);
 u_iSize_set(mouse.S);
- //  t_size.at(0,0)=mouse.S;
 mouse.mX=0.5*t_size.at(0,0);
 mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
@@ -598,8 +597,7 @@ src[2]=frag_body;
 src[3]=frg_ftr;
 unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 unsigned int shd_prg=glCreateProgram();
-  gpu.PRGin(shd_prg);
-
+gpu.PRGin(shd_prg);
 tie(shd_prg,frag,vtx);
 glAttachShader(Sh.at(0,0),frag);
 glAttachShader(Sh.at(0,0),vtx);
@@ -631,10 +629,10 @@ smp_chn[3]=glGetUniformLocation(Sh.at(0,0),"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-iFps=66;
+iFps=96;
 glUniform1f(uni_fps,iFps);
-mouse.mm=mouse.S*0.5;
-mouse.nn=mouse.S*0.5;
+mouse.mm=t_size.at(0,0)*0.5;
+mouse.nn=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
@@ -642,7 +640,7 @@ glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 times.t1=std::chrono::high_resolution_clock::now();
@@ -664,5 +662,4 @@ return;
 };
 
 inline EM_BOOL ms_clk(int32_t,const EmscriptenMouseEvent *,void *);
-
 inline EM_BOOL ms_mv(int32_t,const EmscriptenMouseEvent *,void *);
