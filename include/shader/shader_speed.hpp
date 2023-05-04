@@ -184,9 +184,9 @@ using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
-inline v_tensor sse=v_tensor{2,2};
-inline v_tensor sse2=v_tensor{2,2};
-inline shad_tensor Sh=shad_tensor{3,3};
+v_tensor sse=v_tensor{2,2};
+v_tensor sse2=v_tensor{2,2};
+shad_tensor Sh=shad_tensor{3,3};
 inline sz_tensor Si=sz_tensor{1,1};
 inline f_tensor t_time=f_tensor{2,1};
 inline f_tensor Fi=f_tensor{2,2};
