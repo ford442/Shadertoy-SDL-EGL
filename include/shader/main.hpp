@@ -35,7 +35,7 @@ int32_t rD;
 int32_t Th;
 v128_t Dr;
 
-static inline v128_t rNd(int32_t Th){
+inline v128_t rNd(int32_t Th){
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
