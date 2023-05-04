@@ -4,8 +4,8 @@ void pl();
   
 }
 
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
@@ -26,8 +26,6 @@ using namespace ::boost::tuples;
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
 
-// static inline void SDLCALL bfr(void *,GLubyte *,GLint);
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -41,7 +39,7 @@ using namespace ::boost::tuples;
 #include <iostream>
 #include <emscripten.h>
 
-struct{
+inline struct{
 GLubyte * snd;
 GLint pos;
 SDL_AudioDeviceID dev;
@@ -53,9 +51,9 @@ GLint lft;
 class Audio{
 
 private:
+
 GLchar flnm[24];
 SDL_AudioSpec request;
-
 
 public:
 
