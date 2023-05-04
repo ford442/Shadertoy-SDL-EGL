@@ -241,27 +241,27 @@ Di.at(1,1)=0.0;
 return;
 }
 
-const inline GLfloat gF(){
+inline GLfloat gF(){
 return Fi.at(0,0);
 }
 
-const inline GLfloat gFm1(){
+inline GLfloat gFm1(){
 return Fi.at(0,1);
 }
 
-const inline GLfloat gF0(){
+inline GLfloat gF0(){
 return Fi.at(1,1);
 }
 
-const inline GLdouble gD(){
+inline GLdouble gD(){
 return Di.at(0,0);
 }
 
-const inline GLdouble gDm1(){
+inline GLdouble gDm1(){
 return Di.at(0,1);
 }
 
-const inline GLdouble gD0(){
+inline GLdouble gD0(){
 return Di.at(1,1);
 }
 
