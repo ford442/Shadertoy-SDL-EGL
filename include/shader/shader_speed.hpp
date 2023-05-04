@@ -184,16 +184,16 @@ using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
-const inline v_tensor sse=v_tensor{2,2};
-const inline shad_tensor Sh=shad_tensor{3,3};
-const inline sz_tensor Si=sz_tensor{1,1};
-const inline f_tensor t_time=f_tensor{2,1};
-const inline f_tensor Fi=f_tensor{2,2};
-const inline d_tensor Di=d_tensor{2,2};
-const inline gi_tensor uni_i=gi_tensor{1,1};
-const inline f_tensor t_size=f_tensor{1,1};
-const inline void_tensor cntx=void_tensor{2,2};
-const inline i_tensor cntxi=i_tensor{2,2};
+inline v_tensor sse=v_tensor{2,2};
+inline shad_tensor Sh=shad_tensor{3,3};
+inline sz_tensor Si=sz_tensor{1,1};
+inline f_tensor t_time=f_tensor{2,1};
+inline f_tensor Fi=f_tensor{2,2};
+inline d_tensor Di=d_tensor{2,2};
+inline gi_tensor uni_i=gi_tensor{1,1};
+inline f_tensor t_size=f_tensor{1,1};
+inline void_tensor cntx=void_tensor{2,2};
+inline i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
@@ -201,17 +201,17 @@ private:
 
 public:
 
-inline void PRGin(unsigned int prg){
+const inline void PRGin(unsigned int prg){
 Sh.at(0,0)=prg;
 return;
 }
 
-inline void EBOin(unsigned int EBO){
+const inline void EBOin(unsigned int EBO){
 Sh.at(1,0)=EBO;
 return;
 }
 
-inline void VCOin(unsigned int VCO){
+const inline void VCOin(unsigned int VCO){
 Sh.at(2,0)=VCO;
 return;
 }
