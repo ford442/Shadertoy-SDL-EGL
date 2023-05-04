@@ -188,19 +188,20 @@ using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
-inline v_tensor sse=v_tensor{2,2};
-inline v_tensor sse2=v_tensor{2,2};
-inline v_tensor sse3=v_tensor{2,2};
-inline shad_tensor Sh=shad_tensor{3,3};
-inline sz_tensor Si=sz_tensor{1,1};
-inline f_tensor t_time=f_tensor{2,1};
-inline f_tensor Fi=f_tensor{2,2};
-inline d_tensor Di=d_tensor{2,2};
-inline gi_tensor uni_i=gi_tensor{1,1};
-inline d_tensor t_size=d_tensor{1,1};
-inline i_tensor i_size=i_tensor{1,1};
+v_tensor sse=v_tensor{2,2};
+v_tensor sse2=v_tensor{2,2};
+v_tensor sse3=v_tensor{2,2};
+shad_tensor Sh=shad_tensor{3,3};
+sz_tensor Si=sz_tensor{1,1};
+f_tensor t_time=f_tensor{2,1};
+f_tensor Fi=f_tensor{2,2};
+d_tensor Di=d_tensor{2,2};
+gi_tensor uni_i=gi_tensor{1,1};
+d_tensor t_size=d_tensor{1,1};
+i_tensor i_size=i_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
+mouse_tensor mms=mouse_tensor{3,3};
 
 class GPU{
 
@@ -289,8 +290,8 @@ float mY;
 float mm;
 float nn;
 double S;
-double mouseY;
-double mouseX;
+float mouseY;
+float mouseX;
 double wi;
 double hi;
 GLclampf x;
@@ -376,8 +377,8 @@ return;
   
 static inline void i_iSize_set(int32_t set){
 i_size.at(0,0)=set;
-sse3.at(0,0)=wasm_i32x4_splat(i_size.at(0,0));
-i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+sse3.at(0,0)=wasm_i64x2_splat(i_size.at(0,0));
+i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
@@ -395,15 +396,15 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const double xxx=mouse.mouseX;
-const double yyy=mouse.mouseY;
-mouse.mX=1.0f-(xxx*t_size.at(0,0));
-mouse.mY=1.0f-(yyy*t_size.at(0,0));
+const float xxx=mms.at(0,1);
+const float yyy=mms.at(1,1);
+mms.at(0,0)=1.0f-(xxx*t_size.at(0,0));
+mms.at(1,0)=1.0f-(yyy*t_size.at(0,0));
 clk_l=false;
 }
-mouse.mm=mouse.mouseX*i_size.at(0,0);
-mouse.nn=mouse.mouseY*i_size.at(0,0);
-glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
+mms.at(2,0)=mms.at(0,1)*i_size.at(0,0);
+mms.at(2,1)=mms.at(1,1)*i_size.at(0,0);
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 }else{
 clk_l=true;
 }
@@ -422,8 +423,8 @@ u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
-mouse.mouseX=mouse.x/mouse.S;
-mouse.mouseY=(mouse.S-mouse.y)/mouse.S;
+mms.at(0,1)=mouse.x/t_size.at(0,0);
+mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
 }
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -523,7 +524,13 @@ i_iSize_set(Size);
 mouse.S=mouse.hi;
 u_iSize_set(mouse.hi);
 mouse.mX=0.5*t_size.at(0,0);
+mms.at(0,0)=mouse.mX;
+mouse.mouseX=0.5*t_size.at(0,0);
+mms.at(0,1)=mouse.mouseX;
 mouse.mY=0.5*t_size.at(0,0);
+mms.at(1,0)=mouse.mY;
+mouse.mouseY=0.5*t_size.at(0,0);
+mms.at(1,1)=mouse.mouseY;
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
@@ -636,8 +643,10 @@ glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 iFps=96;
 glUniform1f(uni_fps,iFps);
 mouse.mm=t_size.at(0,0)*0.5;
+mms.at(2,0)=mouse.mm;
 mouse.nn=t_size.at(0,0)*0.5;
-glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
+mms.at(2,1)=mouse.nn;
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
