@@ -384,7 +384,7 @@ if(clk_l==true){
 const GLfloat xxx=xx;
 const GLfloat yyy=yy;
 mouse.mX=1.0f-(xxx/mouse.S);
-mouse.mY=(yyy/mouse.S);
+mouse.mY=(yyy/mouse.S)-1.0f;
 clk_l=false;
 }
 mouse.mm=xx*mouse.S;
