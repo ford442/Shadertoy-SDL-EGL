@@ -89,29 +89,29 @@ inline char cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-"#pragma STDGL(fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n"
+// "#pragma STDGL(fastprecision on)\n"
+// "#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
 // "#pragma optionNV(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 // "#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline all)\n"
-"#pragma optionNV(inline all)\n"
+// "#pragma STDGL(inline all)\n"
+// "#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision highp float;"
-"precision highp int;";
+//"precision highp int;"
+"precision highp float;";
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
 
 inline char frg_hdr_src[1000]=
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision mediump sampler3D;precision highp sampler2D;"
+"precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
 "uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
@@ -129,8 +129,8 @@ inline EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
