@@ -197,7 +197,7 @@ inline f_tensor t_time=f_tensor{2,1};
 inline f_tensor Fi=f_tensor{2,2};
 inline d_tensor Di=d_tensor{2,2};
 inline gi_tensor uni_i=gi_tensor{1,1};
-inline f_tensor t_size=f_tensor{1,1};
+inline d_tensor t_size=d_tensor{1,1};
 inline i_tensor i_size=i_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
@@ -288,7 +288,7 @@ float mX;
 float mY;
 float mm;
 float nn;
-float S;
+double S;
 float mouseY;
 float mouseX;
 double wi;
@@ -367,7 +367,7 @@ t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
 return;
 }
 
-static inline void u_iSize_set(float set){
+static inline void u_iSize_set(double set){
 t_size.at(0,0)=set;
 sse2.at(0,0)=wasm_f64x2_splat(t_size.at(0,0));
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
@@ -395,8 +395,8 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const float xxx=mouse.mouseX;
-const float yyy=mouse.mouseY;
+const double xxx=mouse.mouseX;
+const double yyy=mouse.mouseY;
 mouse.mX=1.0f-(xxx*t_size.at(0,0));
 mouse.mY=1.0f-(yyy*t_size.at(0,0));
 clk_l=false;
@@ -520,8 +520,8 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 i_iSize_set(Size);
-mouse.S=static_cast<float>(mouse.hi);
-u_iSize_set(mouse.S);
+mouse.S=mouse.hi;
+u_iSize_set(mouse.hi);
 mouse.mX=0.5*t_size.at(0,0);
 mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
