@@ -137,7 +137,7 @@ js JS;
 
 extern"C"{
  
-int r4nd(int tH){
+int32_t r4nd(int32_t tH){
 Rg=JS.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
