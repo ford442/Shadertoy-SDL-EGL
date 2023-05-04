@@ -185,6 +185,7 @@ using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
 inline v_tensor sse=v_tensor{2,2};
+inline v_tensor sse2=v_tensor{2,2};
 inline shad_tensor Sh=shad_tensor{3,3};
 inline sz_tensor Si=sz_tensor{1,1};
 inline f_tensor t_time=f_tensor{2,1};
@@ -362,8 +363,8 @@ return;
 
 static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
-sse.at(1,0)=wasm_f32x4_splat(t_size.at(0,0));
-t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
+sse2.at(0,0)=wasm_f32x4_splat(t_size.at(0,0));
+t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(0,0),0);
 return;
 }
 
@@ -375,20 +376,22 @@ return;
 }
 
 static inline void uni(){
+float xx=mouse.xx;
+float yy=mouse.yy;
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const GLfloat xxx=mouse.xx;
-const GLfloat yyy=mouse.yy;
+const float xxx=xx;
+const float yyy=yy;
 mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
-mouse.mm=mouse.xx*t_size.at(0,0);
-mouse.nn=t_size.at(0,0)*mouse.yy;
+mouse.mm=xx*t_size.at(0,0);
+mouse.nn=t_size.at(0,0)*yy;
 glUniform4f(uni_mse,mouse.mm,mouse.nn,mouse.mX,mouse.mY);
 }else{
 clk_l=true;
