@@ -96,14 +96,14 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision highp float;";
-// "precision highp int;\n"
+"precision highp float;"
+"precision highp int;\n";
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 inline char frg_hdr_src[1000]=
-"precision mediump sampler3D;precision mediump sampler2D;"
+"precision highp sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
