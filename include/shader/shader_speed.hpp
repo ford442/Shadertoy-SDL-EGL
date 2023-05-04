@@ -272,7 +272,7 @@ inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
 
 inline struct{
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<double,boost::chrono::seconds::period>time_spanb;
+boost::chrono::duration<float,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::steady_clock::time_point t2;
 boost::chrono::steady_clock::time_point t3;
@@ -424,7 +424,7 @@ u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
 mms.at(0,1)=mouse.x/t_size.at(0,0);
-mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
+// mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
 mms.at(1,1)=(1.0f-mouse.y)/t_size.at(0,0);
 }
 uni();
