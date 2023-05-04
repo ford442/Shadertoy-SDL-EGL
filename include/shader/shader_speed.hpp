@@ -35,7 +35,7 @@
 // #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 #include <time.h>
-#include <chrono>
+// #include <chrono>
 #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include <emscripten/html5.h>
@@ -270,11 +270,11 @@ inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
 
 inline struct{
-std::chrono::duration<double,std::chrono::seconds::period>time_spana;
-std::chrono::duration<double,std::chrono::seconds::period>time_spanb;
-std::chrono::high_resolution_clock::time_point t1;
-std::chrono::high_resolution_clock::time_point t2;
-std::chrono::high_resolution_clock::time_point t3;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spanb;
+boost::chrono::high_resolution_clock::time_point t1;
+boost::chrono::high_resolution_clock::time_point t2;
+boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 inline struct{
@@ -416,9 +416,9 @@ return;
 static inline void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
-u_time.t2=std::chrono::high_resolution_clock::now();
-u_time.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -647,11 +647,11 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
-u_time.t1=std::chrono::high_resolution_clock::now();
-u_time.t2=std::chrono::high_resolution_clock::now();
-u_time.t3=std::chrono::high_resolution_clock::now();
-u_time.time_spanb=std::chrono::duration<double,std::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=std::chrono::duration<double,std::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.t1=boost::chrono::high_resolution_clock::now();
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.t3=boost::chrono::high_resolution_clock::now();
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
