@@ -147,7 +147,7 @@ return c;
 
 static inline void(*jss)(){&js_main};
 
-int main(void){
+int32_t main(void){
 "use strict";
 EM_ASM({
 FS.mkdir('/shader');
