@@ -176,11 +176,12 @@ EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<float>;
 using shad_tensor=tensor<unsigned int>;
-using sz_tensor=tensor<int>;
+using sz_tensor=tensor<int32_t>;
 using f_tensor=tensor<float>;
 using d_tensor=tensor<double>;
 using v_tensor=tensor<v128_t>;
-using gi_tensor=tensor<int>;
+using gi_tensor=tensor<int32_t>;
+using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
 v_tensor sse=v_tensor{2,2};
@@ -192,6 +193,7 @@ d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
 f_tensor t_size=f_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
+i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
@@ -290,14 +292,14 @@ GLclampf x;
 GLclampf y;
 }mouse;
 
-int Size;
-int tmm=166666000;
+int32_t Size;
+int32_t tmm=166666000;
 struct timespec rem;
 struct timespec req={0,tmm};
-int ele=36;
+int32_t ele=36;
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
-inline EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
+inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -308,7 +310,7 @@ ms_l=false;
 return(EM_BOOL)1;
 }
 
-inline EM_BOOL ms_mv(int eventType,const EmscriptenMouseEvent * e,void * userData){
+inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mouse.x=e->clientX;
@@ -326,7 +328,7 @@ Compile compile;
 long int length=0;
 char8_t * result=NULL;
 char * results=NULL;
-int iFps;
+int32_t iFps;
 GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4];
 EGLDisplay display;
 EGLSurface surface;
@@ -421,13 +423,13 @@ inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 tie(result,results,file);
 if(file){
-int stat=fseek(file,(int)0,SEEK_END);
+int32_t stat=fseek(file,(int32_t)0,SEEK_END);
 if(stat!=0){
 fclose(file);
 return nullptr;
 }
 length=ftell(file);
-stat=fseek(file,(int)0,SEEK_SET);
+stat=fseek(file,(int32_t)0,SEEK_SET);
 if(stat!=0){
 fclose(file);
 return nullptr;
@@ -491,17 +493,18 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
+cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
-eglMakeCurrent(display,surface,surface,ctxegl);
-emscripten_webgl_make_context_current(ctx);
+eglMakeCurrent(display,surface,surface,cntx.at(0,0));
+emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<int>(mouse.hi);
+Size=static_cast<int32_t>(mouse.hi);
 mouse.S=static_cast<float>(Size);
 u_iSize_set(mouse.S);
 mouse.mX=0.5;
@@ -647,6 +650,6 @@ return;
   
 };
 
-inline EM_BOOL ms_clk(int,const EmscriptenMouseEvent *,void *);
+inline EM_BOOL ms_clk(int32_t,const EmscriptenMouseEvent *,void *);
 
-inline EM_BOOL ms_mv(int,const EmscriptenMouseEvent *,void *);
+inline EM_BOOL ms_mv(int32_t,const EmscriptenMouseEvent *,void *);
