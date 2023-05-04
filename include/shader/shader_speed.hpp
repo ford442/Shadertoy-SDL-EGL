@@ -91,13 +91,13 @@ inline char cm_hdr_src[500]=
 // "#pragma optionNV(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 // "#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline all)\n"
-"#pragma optionNV(inline all)\n"
+// "#pragma STDGL(inline all)\n"
+// "#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision highp float;"
-"precision mediump int;\n";
+"precision highp float;\n";
+//"precision mediump int;\n"
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
@@ -163,10 +163,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
-// EGL_SAMPLE_BUFFERS,(EGLint)64,
+EGL_SAMPLE_BUFFERS,(EGLint)64,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-// EGL_SAMPLES,(EGLint)64,
+EGL_SAMPLES,(EGLint)64,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -193,8 +193,8 @@ inline f_tensor Fi=f_tensor{2,2};
 inline d_tensor Di=d_tensor{2,2};
 inline gi_tensor uni_i=gi_tensor{1,1};
 inline f_tensor t_size=f_tensor{1,1};
-inline void_tensor cntx=void_tensor{2,2};
-inline i_tensor cntxi=i_tensor{2,2};
+void_tensor cntx=void_tensor{2,2};
+i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
