@@ -507,7 +507,7 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 mouse.S=static_cast<float>(mouse.hi);
 // u_iSize_set(mouse.S);
-  t_time.at(0,0)=mouse.S;
+  t_size.at(0,0)=mouse.S;
 mouse.mX=0.5*t_size.at(0,0);
 mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
