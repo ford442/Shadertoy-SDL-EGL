@@ -191,7 +191,6 @@ f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
 f_tensor t_size=f_tensor{1,1};
-f_tensor t_size=f_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 
 class GPU{
