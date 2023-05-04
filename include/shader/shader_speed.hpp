@@ -333,7 +333,7 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-char * src[4];
+const char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
