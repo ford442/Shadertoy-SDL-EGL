@@ -4,7 +4,7 @@ song_select song;
 
 extern"C"{
 
-int r4nd(int tH){
+int32_t r4nd(int32_t tH){
 Rg=song.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
@@ -137,7 +137,7 @@ normalResStart();
 
 static inline void(*jss)(){&js_main};
 
-int main(void){
+int32_t main(void){
   
 EM_ASM({
 "use strict";
