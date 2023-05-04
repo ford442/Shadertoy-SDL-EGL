@@ -383,8 +383,8 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const GLfloat xxx=mouse.xx;
 const GLfloat yyy=mouse.yy;
-mouse.mX=1.0f-(xxx*t_size.at(0,0));
-mouse.mY=1.0f-(yyy*t_size.at(0,0));
+mouse.mX=1.0f-(xxx*Size);
+mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
 mouse.mm=mouse.xx*t_size.at(0,0);
@@ -507,8 +507,8 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 mouse.S=static_cast<float>(mouse.hi);
 u_iSize_set(mouse.S);
-mouse.mX=0.5*mouse.S;
-mouse.mY=0.5*mouse.S;
+mouse.mX=0.5*t_size.at(0,0);
+mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_gl_spirv");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
