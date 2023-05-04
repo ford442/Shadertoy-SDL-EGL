@@ -81,7 +81,7 @@ return shader;
 
 using namespace boost::numeric::ublas;
 
-const char cm_hdr_src[500]=
+const inline char cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
@@ -99,10 +99,10 @@ const char cm_hdr_src[500]=
 "precision highp float;"
 "precision highp int;\n";
 
-const char vrt_bdy_src[100]=
+const inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-const char frg_hdr_src[1000]=
+const inline char frg_hdr_src[1000]=
 "precision mediump sampler3D;precision mediump sampler2D;"
 "precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
@@ -114,10 +114,10 @@ const char frg_hdr_src[1000]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 
-const char frg_ftr_src[100]=
+const inline char frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
-const EGLint att_lst2[1000]={ 
+const inline EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -130,7 +130,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_NONE,EGL_NONE
 };
 
-const EGLint ctx_att[500]={
+const inline EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
@@ -141,7 +141,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE,EGL_NONE
 };
 
-const EGLint att_lst[1500]={
+const inline EGLint att_lst[1500]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -184,16 +184,16 @@ using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
-inline v_tensor sse=v_tensor{2,2};
-inline shad_tensor Sh=shad_tensor{3,3};
-inline sz_tensor Si=sz_tensor{1,1};
-inline f_tensor t_time=f_tensor{2,1};
-inline f_tensor Fi=f_tensor{2,2};
-inline d_tensor Di=d_tensor{2,2};
-inline gi_tensor uni_i=gi_tensor{1,1};
-inline f_tensor t_size=f_tensor{1,1};
-inline void_tensor cntx=void_tensor{2,2};
-inline i_tensor cntxi=i_tensor{2,2};
+const inline v_tensor sse=v_tensor{2,2};
+const inline shad_tensor Sh=shad_tensor{3,3};
+const inline sz_tensor Si=sz_tensor{1,1};
+const inline f_tensor t_time=f_tensor{2,1};
+const inline f_tensor Fi=f_tensor{2,2};
+const inline d_tensor Di=d_tensor{2,2};
+const inline gi_tensor uni_i=gi_tensor{1,1};
+const inline f_tensor t_size=f_tensor{1,1};
+const inline void_tensor cntx=void_tensor{2,2};
+const inline i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
@@ -201,27 +201,27 @@ private:
 
 public:
 
-inline void PRGin(unsigned int prg){
+const inline void PRGin(unsigned int prg){
 Sh.at(0,0)=prg;
 return;
 }
 
-inline void EBOin(unsigned int EBO){
+const inline void EBOin(unsigned int EBO){
 Sh.at(1,0)=EBO;
 return;
 }
 
-inline void VCOin(unsigned int VCO){
+const inline void VCOin(unsigned int VCO){
 Sh.at(2,0)=VCO;
 return;
 }
 
-static inline void VBOin(unsigned int VBO){
+static const inline void VBOin(unsigned int VBO){
 Sh.at(2,1)=VBO;
 return;
 }
 
-inline void setFloats(){
+const inline void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
 Fi.at(1,1)=0.0f;
@@ -231,11 +231,11 @@ Di.at(1,1)=0.0;
 return;
 }
 
-inline GLfloat gF(){
+const inline GLfloat gF(){
 return Fi.at(0,0);
 }
 
-inline GLfloat gFm1(){
+const inline GLfloat gFm1(){
 return Fi.at(0,1);
 }
 
