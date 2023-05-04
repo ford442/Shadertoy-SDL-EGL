@@ -46,7 +46,7 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/multiprecision/cpp_bin_float.hpp>
-
+using namespace ::boost::multiprecision;
 #include <float.h>
 #include <math.h>
 #include <boost/tuple/tuple.hpp>
