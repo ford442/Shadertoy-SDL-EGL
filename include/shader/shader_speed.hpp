@@ -85,8 +85,8 @@ inline char cm_hdr_src[500]=
 "#version 300 es\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-// "#pragma STDGL(fastprecision on)\n"
-// "#pragma optionNV(fastprecision on)\n"
+"#pragma STDGL(fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
 // "#pragma optionNV(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
@@ -97,7 +97,7 @@ inline char cm_hdr_src[500]=
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
 "precision highp float;"
-"precision mediump int;\n";
+"precision highp int;\n";
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
@@ -163,10 +163,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
-// EGL_SAMPLE_BUFFERS,(EGLint)64,
+EGL_SAMPLE_BUFFERS,(EGLint)64,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-// EGL_SAMPLES,(EGLint)64,
+EGL_SAMPLES,(EGLint)64,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -184,17 +184,17 @@ using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
 using void_tensor=tensor<void *>;
 
-v_tensor sse=v_tensor{2,2};
-v_tensor sse2=v_tensor{2,2};
-shad_tensor Sh=shad_tensor{3,3};
-sz_tensor Si=sz_tensor{1,1};
-f_tensor t_time=f_tensor{2,1};
-f_tensor Fi=f_tensor{2,2};
-d_tensor Di=d_tensor{2,2};
-gi_tensor uni_i=gi_tensor{1,1};
-f_tensor t_size=f_tensor{1,1};
-void_tensor cntx=void_tensor{2,2};
-i_tensor cntxi=i_tensor{2,2};
+inline v_tensor sse=v_tensor{2,2};
+inline v_tensor sse2=v_tensor{2,2};
+inline shad_tensor Sh=shad_tensor{3,3};
+inline sz_tensor Si=sz_tensor{1,1};
+inline f_tensor t_time=f_tensor{2,1};
+inline f_tensor Fi=f_tensor{2,2};
+inline d_tensor Di=d_tensor{2,2};
+inline gi_tensor uni_i=gi_tensor{1,1};
+inline f_tensor t_size=f_tensor{1,1};
+inline void_tensor cntx=void_tensor{2,2};
+inline i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
@@ -487,7 +487,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -507,8 +507,8 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 mouse.S=static_cast<float>(mouse.hi);
-u_iSize_set(mouse.S);
- //  t_size.at(0,0)=mouse.S;
+// u_iSize_set(mouse.S);
+  t_size.at(0,0)=mouse.S;
 mouse.mX=0.5*t_size.at(0,0);
 mouse.mY=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
