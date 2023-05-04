@@ -1,6 +1,6 @@
 #include "../../include/shader/main.hpp"
 
-EM_JS(void,js_main,(),{
+static inline EM_JS(void,js_main,(),{
 
 "use strict";
 
@@ -134,6 +134,7 @@ pnnl.addEventListener('keydown',Key);
 });
 
 js JS;
+
 extern"C"{
  
 int r4nd(int tH){
@@ -144,7 +145,7 @@ return c;
 
 }
 
-void(*jss)(){&js_main};
+static inline void(*jss)(){&js_main};
 
 int main(void){
 "use strict";
