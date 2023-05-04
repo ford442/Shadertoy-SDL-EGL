@@ -1,6 +1,6 @@
 #include "../../include/shader/main.hpp"
 
-inline EM_JS(void,js_main,(),{
+EM_JS(void,js_main,(),{
 
 "use strict";
 
