@@ -292,8 +292,8 @@ float y;
 
 inline int32_t Size;
 const inline int32_t tmm=166666000;
-const inline struct timespec rem;
-const inline struct timespec req={0,tmm};
+inline struct timespec rem;
+inline struct timespec req={0,tmm};
 const inline int32_t ele=36;
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
@@ -334,10 +334,10 @@ EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 char * src[4];
-const char * cm_hdr=cm_hdr_src;
-const char * vrt_bdy=vrt_bdy_src;
-const char * frg_hdr=frg_hdr_src;
-const char * frg_ftr=frg_ftr_src;
+char * cm_hdr=cm_hdr_src;
+char * vrt_bdy=vrt_bdy_src;
+char * frg_hdr=frg_hdr_src;
+char * frg_ftr=frg_ftr_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
