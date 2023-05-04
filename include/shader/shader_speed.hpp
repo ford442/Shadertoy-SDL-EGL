@@ -194,7 +194,7 @@ inline d_tensor Di=d_tensor{2,2};
 inline gi_tensor uni_i=gi_tensor{1,1};
 inline f_tensor t_size=f_tensor{1,1};
 inline void_tensor cntx=void_tensor{2,2};
-inline i_tensor cntxi=i_tensor{2,2};
+i_tensor cntxi=i_tensor{2,2};
 
 class GPU{
 
