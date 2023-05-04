@@ -97,10 +97,10 @@ inline char cm_hdr_src[500]=
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
 "precision highp float;"
-"precision highp int;\n";
+"precision highp int;";
 
 inline char vrt_bdy_src[100]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
 
 inline char frg_hdr_src[1000]=
 "precision highp sampler3D;precision highp sampler2D;"
@@ -115,7 +115,7 @@ inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[100]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\0";
 
 inline EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
