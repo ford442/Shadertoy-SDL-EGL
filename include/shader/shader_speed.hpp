@@ -419,9 +419,9 @@ return;
 inline void swap(){
 emscripten_cancel_main_loop();
 glDeleteProgram(Sh.at(0,0));
-glDeleteBuffers(1,Sh.at(2,1));
-glDeleteBuffers(1,Sh.at(1,0));
-glDeleteVertexArrays(1,Sh.at(2,0));
+glDeleteBuffers(1,&Sh.at(2,1));
+glDeleteBuffers(1,&Sh.at(1,0));
+glDeleteVertexArrays(1,&Sh.at(2,0));
 strt();
 }
 
