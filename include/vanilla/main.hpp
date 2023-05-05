@@ -42,7 +42,6 @@ tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
 
 public:
-boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
 
 float rtt(float nm){
 A.at(0,0)=nm;
@@ -57,6 +56,7 @@ return olo;
 class funcs{
 
 private:
+boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
 
 int r,m;
 float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
