@@ -410,7 +410,8 @@ clk_l=false;
 mms.at(2,0)=(float)(mms2.at(0,0)*i_size.at(0,0));
 mms.at(2,1)=(float)(mms2.at(0,1)*i_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-}// else{
+// }
+  // else{
 // clk_l=true;
 // }
 glUniform1f(uni_tme,t_time.at(0,0));
