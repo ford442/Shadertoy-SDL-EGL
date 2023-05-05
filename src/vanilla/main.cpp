@@ -58,7 +58,7 @@ return re;
 
 float js_noblock(float * yy){
 float tt=noblock(yy);
-retutrn tt;
+return tt;
 }
 
 EM_JS(void,js_main,(),{
