@@ -43,9 +43,17 @@ var txxts=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
+   var x = document.getElementById("sh1");
+  var option = document.createElement("option");
+  option.text = txxts;
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
+ option.value = 'https://glsl.1ink.us/shaders/'+txxts;
+ x.add(option);
 }
-let shadesNum=$shds[0];
+}
+ 
+function rrun(){
+ let shadesNum=$shds[0];
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
 };
@@ -112,6 +120,11 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 const pnnl=document.body;
+ 
+document.getElementById('startBtn2').addEventListener('click',function(){
+rrun();
+});
+ 
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -120,6 +133,7 @@ document.getElementById('stat').innerHTML='Scanning Shaders';
 document.getElementById('stat').style.backgroundColor='yellow';
 scanShaders();
 });
+ 
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
