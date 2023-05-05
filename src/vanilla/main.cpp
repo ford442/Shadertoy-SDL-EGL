@@ -123,6 +123,7 @@ console.log(reslt);
 },1000);
 setTimeout(function(){
 console.log("noblock:");
+var pointa=800;
 var reslt=Module.ccall('js_noblock',"Number",["Number"],[pointa]);
 console.log(reslt);
 },1000);
