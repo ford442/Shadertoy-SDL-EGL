@@ -324,8 +324,8 @@ return(EM_BOOL)1;
 inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-mms2.at(0,0)=e->canvasX;
-mms2.at(0,1)=e->canvasY;
+mms2.at(0,0)=e->clientX;
+mms2.at(0,1)=e->clientY;
 }}
 return (EM_BOOL)1;
 }
@@ -397,7 +397,7 @@ return;
 static inline void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-if(ms_l==true){
+// if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
@@ -411,7 +411,7 @@ mms.at(2,0)=(float)(mms2.at(0,0)*i_size.at(0,0));
 mms.at(2,1)=(float)(mms2.at(0,1)*i_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 }else{
-clk_l=true;
+// clk_l=true;
 }
 glUniform1f(uni_tme,t_time.at(0,0));
 glUniform1f(uni_tme_dlt,t_time.at(1,0));
