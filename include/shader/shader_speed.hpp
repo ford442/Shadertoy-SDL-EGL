@@ -205,7 +205,7 @@ i_tensor i_size=i_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
 mouse_tensor mms=mouse_tensor{3,3};
-mouse_tensor mms2=mouse_tensor{1,1};
+li_tensor mms2=li_tensor{1,1};
 
 class GPU{
 
