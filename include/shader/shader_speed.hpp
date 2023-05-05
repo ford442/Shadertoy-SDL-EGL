@@ -180,11 +180,11 @@ EGL_NONE,EGL_NONE
 
 inline EM_BOOL ms_l,clk_l;
 
-using mouse_tensor=tensor<float>;
+using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<int32_t>;
 using f_tensor=tensor<boost::atomic<float>>;
-using d_tensor=tensor<double>;
+using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<int32_t>;
 using i_tensor=tensor<int32_t>;
@@ -301,10 +301,10 @@ GLclampf y;
 }mouse;
 
 inline int32_t Size;
-const inline int32_t tmm=166666000;
+boost::atomic<int>tmm=166666000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
-const inline int32_t ele=36;
+boost::atomic<int>ele=36;
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
