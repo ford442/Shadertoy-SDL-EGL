@@ -172,7 +172,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,(EGLint)1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-EGL_SAMPLES,(EGLint)1,
+EGL_SAMPLES,(EGLint)64,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -195,11 +195,11 @@ v_tensor sse2=v_tensor{2,2};
 v_tensor sse3=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
-f_tensor t_time=f_tensor{2,1};
+d_tensor t_time=d_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
-d_tensor t_size=d_tensor{1,1};
+f_tensor t_size=f_tensor{1,1};
 i_tensor i_size=i_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
@@ -291,7 +291,7 @@ float mX;
 float mY;
 float mm;
 float nn;
-double S;
+float S;
 float mouseY;
 float mouseX;
 double wi;
@@ -363,14 +363,14 @@ t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
 return;
 }
   
-static inline void u_iTime_set(float set){
+static inline void u_iTime_set(double set){
 t_time.at(0,0)=set;
 sse.at(0,0)=wasm_f64x2_splat(t_time.at(0,0));
 t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
 return;
 }
 
-static inline void u_iSize_set(double set){
+static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
 sse2.at(0,0)=wasm_f64x2_splat(t_size.at(0,0));
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
