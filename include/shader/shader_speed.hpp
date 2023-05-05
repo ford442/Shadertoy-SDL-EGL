@@ -181,13 +181,13 @@ EGL_NONE,EGL_NONE
 inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<boost::atomic<float>>;
-using shad_tensor=tensor<unsigned int>;
-using sz_tensor=tensor<int32_t>;
+using shad_tensor=tensor<boost::atomic<uint64_t>>; 
+using sz_tensor=tensor<boost::atomic<int32_t>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<int32_t>;
-using i_tensor=tensor<int32_t>;
+using i_tensor=tensor<boost::atomic<int32_t>>;
 using void_tensor=tensor<void *>;
 
 v_tensor sse=v_tensor{2,2};
