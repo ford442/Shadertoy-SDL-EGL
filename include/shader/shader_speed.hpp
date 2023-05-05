@@ -181,7 +181,7 @@ EGL_NONE,EGL_NONE
 inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<boost::atomic<float>>;
-using shad_tensor=tensor<GLuint>;
+using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<boost::atomic<int>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
@@ -241,27 +241,27 @@ Di.at(1,1)=0.0;
 return;
 }
 
-inline GLfloat gF(){
+inline float gF(){
 return Fi.at(0,0);
 }
 
-inline GLfloat gFm1(){
+inline float gFm1(){
 return Fi.at(0,1);
 }
 
-inline GLfloat gF0(){
+inline float gF0(){
 return Fi.at(1,1);
 }
 
-inline GLdouble gD(){
+inline double gD(){
 return Di.at(0,0);
 }
 
-inline GLdouble gDm1(){
+inline double gDm1(){
 return Di.at(0,1);
 }
 
-inline GLdouble gD0(){
+inline double gD0(){
 return Di.at(1,1);
 }
 
