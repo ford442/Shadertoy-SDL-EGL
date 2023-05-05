@@ -56,7 +56,7 @@ float re=c+d+ce+de;
 return re;
 }
 
-float js_noblock(float * yy){
+float js_noblock(float yy){
 float tt=Funcs.noblock(yy);
 return tt;
 }
