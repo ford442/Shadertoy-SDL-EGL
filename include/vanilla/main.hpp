@@ -153,7 +153,7 @@ return intrn.at(0,3);
 }
   
 float noblock(float * y){
-farray=&y[];
+farray[24]=&y[24];
 return farray[24];
 }
 
