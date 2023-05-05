@@ -294,8 +294,8 @@ float nn;
 float S;
 float mouseY;
 float mouseX;
-float wi;
-float hi;
+double wi;
+double hi;
 GLclampf x;
 GLclampf y;
 }mouse;
@@ -320,11 +320,13 @@ return(EM_BOOL)1;
 }
 
 inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(ms_l==true){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-mouse.x=e->clientX;
-mouse.y=e->clientY;
+mouse.x=e->canvasX;
+mouse.y=e->canvasY;
 }}
+}
 return (EM_BOOL)1;
 }
 
