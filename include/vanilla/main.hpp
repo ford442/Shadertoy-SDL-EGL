@@ -17,7 +17,6 @@
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
-using namespace ::boost::atomic;
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
