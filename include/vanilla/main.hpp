@@ -57,7 +57,7 @@ class funcs{
 
 private:
   
-boost::atomic<float *> farray;
+boost::atomic<float>farray;
 int r,m;
 float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 v128_t aa,vv,xx,l,tt;
@@ -152,9 +152,9 @@ intrn.at(0,3)=wasm_f32x4_mul(intrn.at(0,0),intrn.at(0,1));
 return intrn.at(0,3);
 }
   
-float noblock(float * y){
-farray=&y[];
-return farray[];
+float noblock(float y){
+farray=y;
+return farray;
 }
 
 };
