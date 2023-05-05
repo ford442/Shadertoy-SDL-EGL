@@ -123,6 +123,7 @@ const pnnl=document.body;
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 Module.ccall('swp');
+rrun();
 });
 
 document.getElementById('startBtn').addEventListener('click',function(){
