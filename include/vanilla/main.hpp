@@ -17,6 +17,7 @@
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
+using namespace ::boost::atomic;
 
 std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
@@ -57,7 +58,7 @@ class funcs{
 
 private:
   
-boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
+boost::atomic<float *> farray;
 int r,m;
 float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 v128_t aa,vv,xx,l,tt;
