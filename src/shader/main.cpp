@@ -47,7 +47,7 @@ txxts=txxts.replace(Self,"");
   var option = document.createElement("option");
   option.text = txxts;
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
- option.value = 'https://glsl.1ink.us/shaders/'+txxts;
+ option.value = txxts;
  x.add(option);
 }
 }
