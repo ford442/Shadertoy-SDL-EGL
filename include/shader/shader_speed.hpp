@@ -415,7 +415,16 @@ glUniform1f(uni_tme_dlt,t_time.at(1,0));
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
-  
+
+static inline void swap(){
+emscripten_cancel_main_loop();
+glDeleteProgram(Sh.at(0,0));
+glDeleteBuffers(Sh.at(2,1));
+glDeleteBuffers(Sh.at(1,0));
+glDeleteVertexArrays(Sh.at(2,0));
+strt();
+}
+
 static inline void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
