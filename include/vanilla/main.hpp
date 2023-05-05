@@ -32,10 +32,12 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
+
 class tens{
 
 private:
-
+  
+boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
 float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
@@ -148,6 +150,11 @@ intrn.at(0,2)=wasm_f32x4_sqrt(intrn.at(0,0));
 intrn.at(0,0)=wasm_f32x4_mul(intrn.at(0,2),intrn.at(0,2));
 intrn.at(0,3)=wasm_f32x4_mul(intrn.at(0,0),intrn.at(0,1));
 return intrn.at(0,3);
+}
+  
+float noblock(float * y){
+farray=&y;
+return farray[24];
 }
 
 };
