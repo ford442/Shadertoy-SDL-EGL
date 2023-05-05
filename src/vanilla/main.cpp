@@ -57,7 +57,7 @@ return re;
 }
 
 float js_noblock(float * yy){
-float tt=funcs.noblock(yy);
+float tt=Funcs.noblock(yy);
 return tt;
 }
 
