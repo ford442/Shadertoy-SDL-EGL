@@ -273,8 +273,8 @@ inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
 
 inline struct{
-boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<float,boost::chrono::seconds::period>time_spanb;
+boost::chrono::duration<boost::atomic<double>,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<boost::atomic<float>,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::steady_clock::time_point t2;
 boost::chrono::steady_clock::time_point t3;
@@ -300,11 +300,11 @@ GLclampf x;
 GLclampf y;
 }mouse;
 
-inline boost::atomic<int> Size;
+inline boost::atomic<int>Size;
 boost::atomic<int>tmm=166666000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
-const inline boost::atomic<int> ele=36;
+const inline boost::atomic<int>ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
@@ -429,8 +429,8 @@ static inline void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::steady_clock::now();
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::atomic<double>,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::atomic<float>,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -471,7 +471,7 @@ return nullptr;
 }
 
 inline void strt(){
-typedef struct{float XYZW[4];}Vertex;
+typedef struct{boost::atomic<float> XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 tie(Fi,t_size);
@@ -657,15 +657,15 @@ glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::steady_clock::now();
 u_time.t3=boost::chrono::steady_clock::now();
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::atomic<float>,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::atomic<double>,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
