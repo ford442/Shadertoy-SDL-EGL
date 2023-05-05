@@ -304,7 +304,8 @@ inline int32_t Size;
 boost::atomic<int>tmm=166666000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
-boost::atomic<int>ele=36;
+const inline int32_t ele=36;
+
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
 inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
