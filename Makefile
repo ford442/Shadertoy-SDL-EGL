@@ -50,7 +50,7 @@ b3_shader_speed:
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -sUSE_WEBGL2=1 -fuse-ld=mold -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js js/vanillaSelectChooser.js
+	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_combine_dev:
 	 em++ src/combine/main.cpp -c -O3 -std=c++20 -stdlib=libc++ -flto -fno-stack-protector -fmerge-all-constants -mbulk-memory \
