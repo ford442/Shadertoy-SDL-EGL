@@ -85,32 +85,32 @@ sim.set(tst,0);
 console.log("intrins function:");
 var reslt=Module.ccall('js_simd',"Number",["Number"],[pointa]);
 console.log(reslt);
-},1000);
+},400);
 setTimeout(function(){
 console.log("float function short:");
 var reslt=Module.ccall('js_tuple_float_short',"Number",["Number"],[1.0]);
 console.log(reslt);
-},1000);
+},500);
 setTimeout(function(){
 console.log("float function long:");
 var reslt=Module.ccall('js_tuple_float_long',"Number",["Number"],[1.0]);
 console.log(reslt);
-},1000);
+},600);
 setTimeout(function(){
 console.log("gl function:");
 var reslt=Module.ccall('js_tuple_gl',"Number",["Number"],[1.0]);
 console.log(reslt);
-},1000);
+},700);
 setTimeout(function(){
 console.log("avx function:");
 var reslt=Module.ccall('js_tuple_avx',"Number",["Number"],[1.0]);
 console.log(reslt);
-},1000);
+},800);
 setTimeout(function(){
 console.log("avx gl function:");
 var reslt=Module.ccall('js_tuple_avx_gl',"Number",["Number"],[1.0]);
 console.log(reslt);
-},1000);
+},900);
 setTimeout(function(){
 console.log("Tensor class def:");
 var reslt=Module.ccall('js_Tensors',"Number",["Number"],[1.0]);
@@ -120,13 +120,13 @@ setTimeout(function(){
 console.log("Intrins Tensor:");
 var reslt=Module.ccall('js_double',"Number",["Number"],[1.0]);
 console.log(reslt);
-},1000);
+},1100);
 setTimeout(function(){
 console.log("noblock:");
 var pointa=800;
 var reslt=Module.ccall('js_noblock',"Number",["Number"],[pointa]);
 console.log(reslt);
-},1000);
+},1200);
 
 }
   
