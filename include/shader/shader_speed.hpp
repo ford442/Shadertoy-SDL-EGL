@@ -89,8 +89,8 @@ using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
 "#version 300 es\n"
-"#pragma STDGL(fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
+// "#pragma STDGL(fastmath on)\n"
+// "#pragma optionNV(fastmath on)\n"
 // "#pragma STDGL(fastprecision on)\n"
 // "#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
