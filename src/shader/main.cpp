@@ -145,7 +145,7 @@ document.getElementById('di').click();
 
 function Key(e){
 if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
-if(e.code=='KeyE'){document.getElementById('sh1').click();};
+if(e.code=='KeyE'){document.getElementById('sh1').show();};
 }
 pnnl.addEventListener('keydown',Key);
 
