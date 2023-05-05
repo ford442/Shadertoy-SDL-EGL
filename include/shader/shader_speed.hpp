@@ -181,14 +181,14 @@ EGL_NONE,EGL_NONE
 inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<boost::atomic<float>>;
-using shad_tensor=tensor<GLuint>; 
-using sz_tensor=tensor<boost::atomic<int32_t>>;
+using shad_tensor=tensor<GLuint>;
+using sz_tensor=tensor<boost::atomic<int>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
-using gi_tensor=tensor<int32_t>;
-using i_tensor=tensor<boost::atomic<int32_t>>;
-using void_tensor=tensor<void *>;
+using gi_tensor=tensor<boost::atomic<int>>;
+using i_tensor=tensor<boost::atomic<int>>;
+using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
 v_tensor sse2=v_tensor{2,2};
@@ -300,11 +300,11 @@ GLclampf x;
 GLclampf y;
 }mouse;
 
-inline int32_t Size;
+inline boost::atomic<int> Size;
 boost::atomic<int>tmm=166666000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
-const inline int32_t ele=36;
+const inline boost::atomic<int> ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
