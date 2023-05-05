@@ -645,7 +645,7 @@ smp_chn[3]=glGetUniformLocation(Sh.at(0,0),"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-iFps=96;
+iFps=60;
 glUniform1f(uni_fps,iFps);
 mouse.mm=t_size.at(0,0)*0.5;
 mms.at(2,0)=mouse.mm;
