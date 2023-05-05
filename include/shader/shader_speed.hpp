@@ -188,6 +188,7 @@ using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<boost::atomic<int>>;
 using i_tensor=tensor<boost::atomic<int>>;
+using li_tensor=tensor<boost::atomic<long int>>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
@@ -204,6 +205,7 @@ i_tensor i_size=i_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
 mouse_tensor mms=mouse_tensor{3,3};
+mouse_tensor mms2=mouse_tensor{1,1};
 
 class GPU{
 
@@ -320,13 +322,11 @@ return(EM_BOOL)1;
 }
 
 inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
-if(ms_l==true){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-mouse.x=e->canvasX;
-mouse.y=e->canvasY;
+mms2.at(0,0)=e->canvasX;
+mms2.at(0,1)=e->canvasY;
 }}
-}
 return (EM_BOOL)1;
 }
 
@@ -407,8 +407,8 @@ mms.at(0,0)=1.0f-(xxx*t_size.at(0,0));
 mms.at(1,0)=1.0f-(yyy*t_size.at(0,0));
 clk_l=false;
 }
-mms.at(2,0)=mms.at(0,1)*i_size.at(0,0);
-mms.at(2,1)=mms.at(1,1)*i_size.at(0,0);
+mms.at(2,0)=(float)(mms2.at(0,0)*i_size.at(0,0));
+mms.at(2,1)=(float)(mms2.at(0,1)*i_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 }else{
 clk_l=true;
@@ -436,9 +436,9 @@ u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
-mms.at(0,1)=(float)(mouse.x/i_size.at(0,0));
+mms2.at(0,1)=mouse.x/i_size.at(0,0);
 // mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
-mms.at(1,1)=(float)((1.0f-mouse.y)/i_size.at(0,0));
+mms2.at(1,1)=(1.0f-mouse.y)/i_size.at(0,0);
 }
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
