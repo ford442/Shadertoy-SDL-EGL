@@ -56,8 +56,8 @@ return olo;
 class funcs{
 
 private:
+  
 boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
-
 int r,m;
 float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 v128_t aa,vv,xx,l,tt;
@@ -153,7 +153,7 @@ return intrn.at(0,3);
 }
   
 float noblock(float * y){
-farray=&y;
+farray=&y[];
 return farray[24];
 }
 
