@@ -61,6 +61,8 @@ float tt=Funcs.noblock(yy);
 return tt;
 }
 
+}
+
 EM_JS(void,js_main,(),{
 
 "use strict";
