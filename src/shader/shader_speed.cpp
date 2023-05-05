@@ -8,5 +8,10 @@ void str(){
 run.strt();
 return;
 }
+  
+void swp(){
+run.swap();
+return;
+}
 
 }
