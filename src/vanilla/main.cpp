@@ -56,6 +56,9 @@ float re=c+d+ce+de;
 return re;
 }
 
+float js_noblock(float * yy){
+float tt=noblock(yy);
+retutrn tt;
 }
 
 EM_JS(void,js_main,(),{
@@ -69,9 +72,9 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall('js_hello');
-var tst=[10.0,10.0,10.0,10.0];
+var tst=[10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,];
 const $H=Module.HEAPF32.buffer;
-const $P=Module.HEAPF32.subarray(0,4);
+const $P=Module.HEAPF32.subarray(0,32);
 $P.set(tst,0);
 console.log('Javascript HEAPF32: ',$H);
 var pointa=800;
@@ -114,6 +117,11 @@ console.log(reslt);
 setTimeout(function(){
 console.log("Intrins Tensor:");
 var reslt=Module.ccall('js_double',"Number",["Number"],[1.0]);
+console.log(reslt);
+},1000);
+setTimeout(function(){
+console.log("noblock:");
+var reslt=Module.ccall('js_noblock',"Number",["Number"],[pointa]);
 console.log(reslt);
 },1000);
 
