@@ -37,12 +37,12 @@ class tens{
 
 private:
   
-boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
 float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
 
 public:
+boost::lockfree::spsc_queue<float, boost::lockfree::capacity<32> > farray;
 
 float rtt(float nm){
 A.at(0,0)=nm;
