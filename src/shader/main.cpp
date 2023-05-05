@@ -120,7 +120,11 @@ var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 const pnnl=document.body;
- 
+
+document.getElementById('startBtn2').addEventListener('click',function(){
+Module.ccall('swp');
+});
+
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
