@@ -407,8 +407,8 @@ mms.at(0,0)=1.0f-(xxx*t_size.at(0,0));
 mms.at(1,0)=1.0f-(yyy*t_size.at(0,0));
 clk_l=false;
 }
-mms.at(2,0)=(float)(mms2.at(0,0)*i_size.at(0,0));
-mms.at(2,1)=(float)(mms2.at(0,1)*i_size.at(0,0));
+mms.at(2,0)=(float)(mms2.at(0,0)*t_size.at(0,0));
+mms.at(2,1)=(float)(mms2.at(0,1)*t_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // }
   // else{
