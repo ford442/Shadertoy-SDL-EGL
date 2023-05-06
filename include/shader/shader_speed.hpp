@@ -397,7 +397,7 @@ return;
 static inline void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-// if(ms_l==true){
+if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
@@ -410,10 +410,10 @@ clk_l=false;
 mms.at(2,0)=(float)(mms2.at(0,0)*t_size.at(0,0));
 mms.at(2,1)=(float)(mms2.at(0,1)*t_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-// }
-  // else{
-// clk_l=true;
-// }
+}
+else{
+clk_l=true;
+}
 glUniform1f(uni_tme,t_time.at(0,0));
 glUniform1f(uni_tme_dlt,t_time.at(1,0));
 glUniform1i(uni_frm,uni_i.at(0,0));
