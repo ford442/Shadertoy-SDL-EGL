@@ -681,6 +681,3 @@ return;
 }
   
 };
-
-inline EM_BOOL ms_clk(int32_t,const EmscriptenMouseEvent *,void *);
-inline EM_BOOL ms_mv(int32_t,const EmscriptenMouseEvent *,void *);
