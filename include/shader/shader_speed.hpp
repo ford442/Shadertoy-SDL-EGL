@@ -181,7 +181,8 @@ EGL_NONE,EGL_NONE
 inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<boost::atomic<float>>;
-using shad_tensor=tensor<long unsigned int>;
+using shad_tensor=tensor<unsigned int>;
+using prg_tensor=tensor<long unsigned int>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<long double>>;
 using v_tensor=tensor<v128_t>;
@@ -193,6 +194,7 @@ v_tensor sse=v_tensor{2,2};
 v_tensor sse2=v_tensor{2,2};
 v_tensor sse3=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
+prg_tensor Sh1=prg_tensor{1,1};
 d_tensor d_time=d_tensor{2,1};
 d_tensor f_time=d_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
@@ -211,8 +213,8 @@ private:
 
 public:
 
-const inline void PRGin(unsigned int prg){
-Sh.at(0,0)=prg;
+const inline void PRGin(long unsigned int prg){
+Sh1.at(0,0)=prg;
 return;
 }
 
@@ -402,7 +404,7 @@ return;
 
 inline void swap(){
 emscripten_cancel_main_loop();
-glDeleteProgram(Sh.at(0,0));
+glDeleteProgram(Sh1.at(0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
@@ -591,11 +593,11 @@ unsigned int shd_prg=glCreateProgram();
 gpu.PRGin(shd_prg);
 tie(Sh,shd_prg);
 tie(frag,vtx);
-glAttachShader(Sh.at(0,0),frag);
-glAttachShader(Sh.at(0,0),vtx);
-glBindAttribLocation(Sh.at(0,0),0,"iPosition");
-glLinkProgram(Sh.at(0,0));
-glUseProgram(Sh.at(0,0));
+glAttachShader(Sh1.at(0,0),frag);
+glAttachShader(Sh1.at(0,0),vtx);
+glBindAttribLocation(Sh1.at(0,0),0,"iPosition");
+glLinkProgram(Sh1.at(0,0));
+glUseProgram(Sh1.at(0,0));
 nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
@@ -603,21 +605,21 @@ glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
-const GLuint atb_pos=glGetAttribLocation(Sh.at(0,0),"iPosition");
+const GLuint atb_pos=glGetAttribLocation(Sh1.at(0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
-uni_tme=glGetUniformLocation(Sh.at(0,0),"iTime");
-uni_tme_dlt=glGetUniformLocation(Sh.at(0,0),"iTimeDelta");
-uni_frm=glGetUniformLocation(Sh.at(0,0),"iFrame");
-uni_fps=glGetUniformLocation(Sh.at(0,0),"iFrameRate");
-uni_res=glGetUniformLocation(Sh.at(0,0),"iResolution");
-uni_mse=glGetUniformLocation(Sh.at(0,0),"iMouse");
-uni_srate=glGetUniformLocation(Sh.at(0,0),"iSampleRate");
-smp_chn_res=glGetUniformLocation(Sh.at(0,0),"iChannelResolution");
-smp_chn[0]=glGetUniformLocation(Sh.at(0,0),"iChannel0");
-smp_chn[1]=glGetUniformLocation(Sh.at(0,0),"iChannel1");
-smp_chn[2]=glGetUniformLocation(Sh.at(0,0),"iChannel2");
-smp_chn[3]=glGetUniformLocation(Sh.at(0,0),"iChannel3");
+uni_tme=glGetUniformLocation(Sh1.at(0,0),"iTime");
+uni_tme_dlt=glGetUniformLocation(Sh1.at(0,0),"iTimeDelta");
+uni_frm=glGetUniformLocation(Sh1.at(0,0),"iFrame");
+uni_fps=glGetUniformLocation(Sh1.at(0,0),"iFrameRate");
+uni_res=glGetUniformLocation(Sh1.at(0,0),"iResolution");
+uni_mse=glGetUniformLocation(Sh1.at(0,0),"iMouse");
+uni_srate=glGetUniformLocation(Sh1.at(0,0),"iSampleRate");
+smp_chn_res=glGetUniformLocation(Sh1.at(0,0),"iChannelResolution");
+smp_chn[0]=glGetUniformLocation(Sh1.at(0,0),"iChannel0");
+smp_chn[1]=glGetUniformLocation(Sh1.at(0,0),"iChannel1");
+smp_chn[2]=glGetUniformLocation(Sh1.at(0,0),"iChannel2");
+smp_chn[3]=glGetUniformLocation(Sh1.at(0,0),"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
