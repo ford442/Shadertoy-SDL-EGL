@@ -112,8 +112,8 @@ mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
 }
-mouse.mm=mouse.mouseX*Size;
-mouse.nn=Size*mouse.mouseY;
+mouse.mm=mouse.x*Size;
+mouse.nn=Size*mouse.y;
 }else{
 clk_l=true;
 }
