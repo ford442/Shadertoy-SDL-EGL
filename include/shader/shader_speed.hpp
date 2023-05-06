@@ -201,11 +201,11 @@ f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
 f_tensor t_size=f_tensor{1,1};
-i_tensor i_size=i_tensor{1,1};
+li_tensor i_size=li_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
-mouse_tensor mms=mouse_tensor{3,3};
-li_tensor mms2=li_tensor{1,1};
+mouse_tensor mms=mouse_tensor{2,2};
+li_tensor mms2=li_tensor{2,2};
 
 class GPU{
 
@@ -326,10 +326,6 @@ if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e-
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
 mms2.at(0,1)=e->clientY;
-    long int tester=mms2.at(0,1);
-EM_ASM({
-  console.log($0);
- },tester);
 }}
 return (EM_BOOL)1;
 }
@@ -384,7 +380,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
   
-static inline void i_iSize_set(int32_t set){
+static inline void i_iSize_set(long int set){
 i_size.at(0,0)=set;
 sse3.at(0,0)=wasm_i64x2_splat(i_size.at(0,0));
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
@@ -405,14 +401,14 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const float xxx=mms.at(0,1);
-const float yyy=mms.at(1,1);
-mms.at(0,0)=1.0f-(xxx*i_size.at(0,0));
-mms.at(1,0)=1.0f-(yyy*i_size.at(0,0));
+const long int xxx=mms2.at(0,0);
+const long int yyy=mms2.at(0,1);
+mms.at(0,0)=round(xxx/i_size.at(0,0));
+mms.at(1,0)=round(yyy/i_size.at(0,0));
 clk_l=false;
 }
-mms.at(2,0)=(float)(mms2.at(0,0)*i_size.at(0,0));
-mms.at(2,1)=(float)(mms2.at(0,1)*i_size.at(0,0));
+mms.at(2,0)=(float)(mms2.at(0,0)/i_size.at(0,0));
+mms.at(2,1)=(float)(mms2.at(0,1)/i_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 }
 else{
@@ -441,9 +437,9 @@ u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
-mms.at(0,1)=mms2.at(0,0)/i_size.at(0,0);
+mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
 // mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
-mms.at(1,1)=(1.0f-mms2.at(0,1))/i_size.at(0,0);
+mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
