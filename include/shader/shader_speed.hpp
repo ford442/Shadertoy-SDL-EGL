@@ -328,6 +328,9 @@ if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e-
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
 mms2.at(0,1)=e->clientY;
+  EM_ASM({
+    console.log($0);
+  },mms2.at(0,0));
 }}
 return (EM_BOOL)1;
 }
