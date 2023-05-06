@@ -182,7 +182,7 @@ inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
-using prg_tensor=tensor<long unsigned int>;
+using prg_tensor=tensor<unsigned int>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<long double>>;
 using v_tensor=tensor<v128_t>;
