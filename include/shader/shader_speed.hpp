@@ -196,7 +196,8 @@ v_tensor sse2=v_tensor{2,2};
 v_tensor sse3=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
-d_tensor t_time=d_tensor{2,1};
+d_tensor d_time=d_tensor{2,1};
+d_tensor f_time=d_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
@@ -359,24 +360,17 @@ GPU gpu;
 
 public:
   
-static inline void u_prg_set(float set){
-t_time.at(0,0)=set;
-sse.at(0,0)=wasm_f64x2_splat(t_time.at(0,0));
-t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
-return;
-}
-  
 static inline void u_iTime_set(double set){
-t_time.at(0,0)=set;
-sse.at(0,0)=wasm_f64x2_splat(t_time.at(0,0));
-t_time.at(0,0)=wasm_f64x2_extract_lane(sse.at(0,0),0);
+d_time.at(0,0)=set;
+sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
+d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
 static inline void u_iSize_set(float set){
 t_size.at(0,0)=set;
-sse2.at(0,0)=wasm_f64x2_splat(t_size.at(0,0));
-t_size.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
+sse.at(1,0)=wasm_f64x2_splat(t_size.at(0,0));
+t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
@@ -388,9 +382,9 @@ return;
 }
 
 static inline void u_iTimeDelta_set(float set){
-t_time.at(1,0)=set;
-sse.at(0,1)=wasm_f64x2_splat(t_time.at(1,0));
-t_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
+f_time.at(1,0)=set;
+sse.at(0,1)=wasm_f64x2_splat(f_time.at(1,0));
+f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
@@ -438,7 +432,6 @@ u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
-// mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
 uni();
@@ -477,12 +470,11 @@ inline void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
-tie(Fi,t_size);
+tie(Fi,f_size,sse);
 tie(uni_i,iFps,Si,sse3);
 tie(cntx,mms);
 tie(i_size,cntxi);
-tie(sse,sse2);
-tie(mouse.hi,mouse.wi);
+tie(mouse.hi,mouse.wi,d_time);
 tie(u_time.t1,u_time.t2,u_time.t3);
 tie(shad.EBO,shad.VBO,shad.VCO);
 tie(config_size,major,minor);
