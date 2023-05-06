@@ -97,6 +97,9 @@ return (EM_BOOL)1;
 }
 
 void mss(){
+emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+Size=static_cast<int32_t>(mouse.hi);
+mouse.S=static_cast<float>(mouse.hi);
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -116,6 +119,9 @@ mouse.mm=mouse.x*Size;
 mouse.nn=Size*mouse.y;
 }else{
 clk_l=true;
+EM_ASM({
+console.log($0);
+},mouse.nn);
 }
 return;
 }
