@@ -220,8 +220,9 @@ return intrn.at(0,3);
   
 float noblock(float y){
 farray=y;
-emscripten_set_main_loop((void(*)())mss,0,0);
 return farray;
+  emscripten_set_main_loop((void(*)())mss,0,0);
+
 }
 
 };
