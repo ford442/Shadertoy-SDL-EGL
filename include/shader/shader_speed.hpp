@@ -403,12 +403,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const float xxx=mms.at(0,1);
 const float yyy=mms.at(1,1);
-mms.at(0,0)=1.0f-(xxx*t_size.at(0,0));
-mms.at(1,0)=1.0f-(yyy*t_size.at(0,0));
+mms.at(0,0)=1.0f-(xxx*i_size.at(0,0));
+mms.at(1,0)=1.0f-(yyy*i_size.at(0,0));
 clk_l=false;
 }
-mms.at(2,0)=(float)(mms2.at(0,0)*t_size.at(0,0));
-mms.at(2,1)=(float)(mms2.at(0,1)*t_size.at(0,0));
+mms.at(2,0)=(float)(mms2.at(0,0)*i_size.at(0,0));
+mms.at(2,1)=(float)(mms2.at(0,1)*i_size.at(0,0));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 }
 else{
