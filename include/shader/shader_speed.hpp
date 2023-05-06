@@ -197,7 +197,6 @@ v_tensor sse2=v_tensor{2,2};
 v_tensor sse3=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
-d_tensor t_time=d_tensor{2,1};
 ld_tensor t_time=ld_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
