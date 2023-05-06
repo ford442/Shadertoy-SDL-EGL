@@ -53,6 +53,28 @@ return olo;
 
 };
 
+inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
+
+inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}}
+return(EM_BOOL)1;
+}
+
+inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+mouse.x=e->clientX;
+mouse.y=e->clientY;
+}}
+return (EM_BOOL)1;
+}
+
 class funcs{
 
 private:
@@ -86,6 +108,52 @@ cout << Tdlt << endl;
 return nn;
 }
 
+inline int32_t Size;
+
+inline EM_BOOL ms_l,clk_l;
+
+inline struct{
+float xx;
+float yy;
+float mX;
+float mY;
+float mm;
+float nn;
+float S;
+float mouseY;
+float mouseX;
+double wi;
+double hi;
+GLclampf x;
+GLclampf y;
+}mouse;
+
+void mss(){
+retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(ms_l==true){
+retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
+retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(clk_l==true){
+EM_ASM({
+console.log($0);
+},xxx);
+const float xxx=mouse.mouseX;
+const float yyy=mouse.mouseY;
+mouse.mX=1.0f-(xxx*Size);
+mouse.mY=1.0f-(yyy*Size);
+clk_l=false;
+}
+mouse.mm=mouse.mouseX*Size;
+mouse.nn=Size*mouse.mouseY;
+}else{
+clk_l=true;
+}
+return;
+}
+
+}
+  
 float tuple_float_long(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
@@ -154,6 +222,7 @@ return intrn.at(0,3);
   
 float noblock(float y){
 farray=y;
+emscripten_set_main_loop((void(*)())mss,0,0);
 return farray;
 }
 
