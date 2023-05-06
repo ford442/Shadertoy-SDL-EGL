@@ -103,11 +103,11 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
+const float xxx=mouse.mouseX;
+const float yyy=mouse.mouseY;
 EM_ASM({
 console.log($0);
 },xxx);
-const float xxx=mouse.mouseX;
-const float yyy=mouse.mouseY;
 mouse.mX=1.0f-(xxx*Size);
 mouse.mY=1.0f-(yyy*Size);
 clk_l=false;
@@ -150,7 +150,7 @@ std::chrono::duration<double,std::chrono::milliseconds::period>time_span=std::ch
 Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return nn;
-}}
+}
   
 float tuple_float_long(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
