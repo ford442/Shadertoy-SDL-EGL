@@ -56,59 +56,6 @@ return olo;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
-inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
-ms_l=true;
-}
-if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
-ms_l=false;
-}}
-return(EM_BOOL)1;
-}
-
-inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
-if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
-if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
-mouse.x=e->clientX;
-mouse.y=e->clientY;
-}}
-return (EM_BOOL)1;
-}
-
-class funcs{
-
-private:
-  
-boost::atomic<float>farray;
-int r,m;
-float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
-v128_t aa,vv,xx,l,tt;
-tI inte=tI{1,1};
-tF deci=tF{1,1};
-tV q=tV{1,1};
-tV intrn=tV{1,4};
-  
-public:
-
-float tuple_float_short(float num){
-cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
-
-for(r=0;r<100;r++){
-tie(cc,pp,uu);
-tie(cc2,pp2,uu2);
-}
-t1=std::chrono::steady_clock::now();
-for(r=0;r<100;r++){
-nn=cc+pp+uu+cc2+pp2+uu2;
-}
-t2=std::chrono::steady_clock::now();
-std::chrono::duration<double,std::chrono::milliseconds::period>time_span=std::chrono::duration<double,std::chrono::milliseconds::period>(t2-t1);
-Tdlt=time_span.count()*1000.0;
-cout << Tdlt << endl;
-return nn;
-}
-
 inline int32_t Size;
 
 inline EM_BOOL ms_l,clk_l;
@@ -128,6 +75,26 @@ double hi;
 GLclampf x;
 GLclampf y;
 }mouse;
+
+inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}}
+return(EM_BOOL)1;
+}
+
+inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+mouse.x=e->clientX;
+mouse.y=e->clientY;
+}}
+return (EM_BOOL)1;
+}
 
 void mss(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -153,7 +120,37 @@ clk_l=true;
 return;
 }
 
+class funcs{
+
+private:
+  
+boost::atomic<float>farray;
+int r,m;
+float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
+v128_t aa,vv,xx,l,tt;
+tI inte=tI{1,1};
+tF deci=tF{1,1};
+tV q=tV{1,1};
+tV intrn=tV{1,4};
+  
+public:
+
+float tuple_float_short(float num){
+cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
+for(r=0;r<100;r++){
+tie(cc,pp,uu);
+tie(cc2,pp2,uu2);
 }
+t1=std::chrono::steady_clock::now();
+for(r=0;r<100;r++){
+nn=cc+pp+uu+cc2+pp2+uu2;
+}
+t2=std::chrono::steady_clock::now();
+std::chrono::duration<double,std::chrono::milliseconds::period>time_span=std::chrono::duration<double,std::chrono::milliseconds::period>(t2-t1);
+Tdlt=time_span.count()*1000.0;
+cout << Tdlt << endl;
+return nn;
+}}
   
 float tuple_float_long(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
