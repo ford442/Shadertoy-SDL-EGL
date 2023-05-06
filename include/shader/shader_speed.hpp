@@ -215,7 +215,7 @@ private:
 
 public:
 
-const inline void PRGin(unsigned int prg){
+const inline void PRGin(long unsigned int prg){
 S1.at(0,0)=prg;
 return;
 }
