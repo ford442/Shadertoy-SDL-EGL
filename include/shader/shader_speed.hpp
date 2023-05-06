@@ -328,9 +328,9 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
 mms2.at(0,1)=e->clientY;
   long int tester=mms2.at(0,1);
-  EM_ASM({
-    console.log($0);
-  },tester);
+//  EM_ASM({
+//    console.log($0);
+//  },tester);
 }}
 return (EM_BOOL)1;
 }
