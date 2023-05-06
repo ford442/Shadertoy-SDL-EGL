@@ -437,9 +437,9 @@ u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
-mms2.at(0,1)=mouse.x/i_size.at(0,0);
+mms.at(0,1)=mms2.at(0,0)/i_size.at(0,0);
 // mms.at(1,1)=(t_size.at(0,0)-mouse.y)/t_size.at(0,0);
-mms2.at(1,1)=(1.0f-mouse.y)/i_size.at(0,0);
+mms.at(1,1)=(1.0f-mms2.at(0,1))/i_size.at(0,0);
 }
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
