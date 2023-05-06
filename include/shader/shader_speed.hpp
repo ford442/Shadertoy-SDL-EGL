@@ -349,7 +349,7 @@ GPU gpu;
 public:
 
 static inline void nanoPause(){
-nanosleep(&req,&rem2);
+nanosleep(&req2,&rem);
 }
 
 static inline void PRGin(long unsigned int prg){
