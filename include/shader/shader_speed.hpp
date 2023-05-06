@@ -591,7 +591,7 @@ src[2]=frag_body;
 src[3]=frg_ftr;
 unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 unsigned int shd_prg=glCreateProgram();
-gpu.PRGin(shd_prg);
+PRGin(shd_prg);
 tie(Sh,shd_prg);
 tie(frag,vtx);
 glAttachShader(S1.at(0,0),frag);
