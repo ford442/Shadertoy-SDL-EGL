@@ -288,19 +288,8 @@ unsigned int VBO,EBO,VCO;
 }shad;
 
 inline struct{
-float xx;
-float yy;
-float mX;
-float mY;
-float mm;
-float nn;
-float S;
-float mouseY;
-float mouseX;
 double wi;
 double hi;
-long int x;
-long int y;
 }mouse;
 
 inline boost::atomic<int>Size;
@@ -408,8 +397,8 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 else{
 clk_l=true;
 }
-glUniform1f(uni_tme,t_time.at(0,0));
-glUniform1f(uni_tme_dlt,t_time.at(1,0));
+glUniform1f(uni_tme,d_time.at(0,0));
+glUniform1f(uni_tme_dlt,f_time.at(1,0));
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
@@ -470,7 +459,7 @@ inline void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
-tie(Fi,f_size,sse);
+tie(Fi,f_time,sse);
 tie(uni_i,iFps,Si,sse3);
 tie(cntx,mms);
 tie(i_size,cntxi);
@@ -520,16 +509,11 @@ glUseProgram(0);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 i_iSize_set(Size);
-mouse.S=mouse.hi;
 u_iSize_set(mouse.hi);
-mouse.mX=0.5*t_size.at(0,0);
-mms.at(0,0)=mouse.mX;
-mouse.mouseX=0.5*t_size.at(0,0);
-mms.at(0,1)=mouse.mouseX;
-mouse.mY=0.5*t_size.at(0,0);
-mms.at(1,0)=mouse.mY;
-mouse.mouseY=0.5*t_size.at(0,0);
-mms.at(1,1)=mouse.mouseY;
+mms.at(0,0)=t_size.at(0,0);
+mms.at(0,1)=0.5*t_size.at(0,0);
+mms.at(1,0)=0.5*t_size.at(0,0);
+mms.at(1,1)=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
