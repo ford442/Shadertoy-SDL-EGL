@@ -291,8 +291,10 @@ double hi;
 
 inline boost::atomic<int>Size;
 boost::atomic<int>tmm=166666000;
+boost::atomic<int>tmm2=100;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
+inline struct timespec req2={0,tmm2};
 const inline boost::atomic<int>ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
@@ -346,6 +348,10 @@ GPU gpu;
 
 public:
 
+static inline void nanoPause(){
+nanosleep(&req,&rem);
+}
+
 static inline void PRGin(long unsigned int prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
@@ -393,13 +399,17 @@ clk_l=false;
 mms.at(2,0)=(float)mms2.at(0,0);
 mms.at(2,1)=(float)mms2.at(0,1);
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+nanoPause();
 }
 else{
 clk_l=true;
 }
 glUniform1f(uni_tme,d_time.at(0,0));
+nanoPause();
 glUniform1f(uni_tme_dlt,f_time.at(1,0));
+nanoPause();
 glUniform1i(uni_frm,uni_i.at(0,0));
+nanoPause();
 return;
 }
 
@@ -409,6 +419,7 @@ glDeleteProgram(S1.at(0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
+nanoPause();
 }
 
 static inline void Rend(){
@@ -424,7 +435,9 @@ mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
 uni();
+nanoPause();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+nanoPause();
 return;
 }
 
@@ -489,7 +502,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -506,6 +519,7 @@ cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
+nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int32_t>(mouse.hi);
 i_iSize_set(Size);
@@ -576,12 +590,12 @@ glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
-nanosleep(&req,&rem);
+nanoPause();
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
-nanosleep(&req,&rem);
+nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
@@ -598,16 +612,19 @@ glAttachShader(S1.at(0,0),frag);
 glAttachShader(S1.at(0,0),vtx);
 glBindAttribLocation(S1.at(0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0));
+nanoPause();
 glUseProgram(S1.at(0,0));
-nanosleep(&req,&rem);
+nanoPause();
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
+nanoPause();
 const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
+nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_tme=glGetUniformLocation(S1.at(0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0),"iTimeDelta");
@@ -622,19 +639,24 @@ smp_chn[1]=glGetUniformLocation(S1.at(0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0),"iChannel3");
 glUniform1f(uni_srate,44100.0f);
+nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+nanoPause();
 iFps=60;
 glUniform1f(uni_fps,iFps);
+nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+nanoPause();
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // u_iTime_set(0.0f);
 // u_iTimeDelta_set(0.0f);
@@ -650,6 +672,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
+nanoPause();
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return;
 }
