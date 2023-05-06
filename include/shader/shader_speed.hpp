@@ -5,12 +5,12 @@
 #define TRUE 1
 #endif
 
-#pragma STDC FP_CONTRACT ON
+#pragma STDC FP_CONTRACT OFF
 
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
 
-#pragma STDC CX_LIMITED_RANGE ON
+#pragma STDC CX_LIMITED_RANGE OFF
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -89,8 +89,8 @@ using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
 "#version 300 es\n"
-// "#pragma STDGL(fastmath on)\n"
-// "#pragma optionNV(fastmath on)\n"
+"#pragma STDGL(fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
 // "#pragma STDGL(fastprecision on)\n"
 // "#pragma optionNV(fastprecision on)\n"
 // "#pragma STDGL(unroll all)\n"
@@ -102,19 +102,19 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-// "precision highp int;"
+"precision mediump int;"
 "precision mediump float;";
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\0";
 
 inline char frg_hdr_src[1000]=
-"precision mediump sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;"
+"precision mediump sampler3D;precision mediump sampler2D;"
+"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;"
 "uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
@@ -169,10 +169,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,(EGLint)1,
+// EGL_SAMPLE_BUFFERS,(EGLint)1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-EGL_SAMPLES,(EGLint)1,
+// EGL_SAMPLES,(EGLint)1,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -185,6 +185,7 @@ using shad_tensor=tensor<unsigned int>;
 using sz_tensor=tensor<boost::atomic<int>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
+using d_tensor=tensor<long double>;
 using v_tensor=tensor<v128_t>;
 using gi_tensor=tensor<boost::atomic<int>>;
 using i_tensor=tensor<boost::atomic<int>>;
@@ -197,6 +198,7 @@ v_tensor sse3=v_tensor{2,2};
 shad_tensor Sh=shad_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
 d_tensor t_time=d_tensor{2,1};
+ld_tensor t_time=ld_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 gi_tensor uni_i=gi_tensor{1,1};
@@ -505,10 +507,10 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
+attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -658,7 +660,7 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
