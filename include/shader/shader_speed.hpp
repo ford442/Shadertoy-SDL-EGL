@@ -329,7 +329,7 @@ mms2.at(0,0)=e->clientX;
 mms2.at(0,1)=e->clientY;
   EM_ASM({
     console.log($0);
-  },clientX);
+  },e->clientX);
 }}
 return (EM_BOOL)1;
 }
