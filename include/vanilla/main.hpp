@@ -19,6 +19,7 @@
 
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
+#include <boost/compute.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/multiprecision/gmp.hpp>
 
