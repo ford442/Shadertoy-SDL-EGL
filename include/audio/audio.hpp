@@ -31,8 +31,10 @@ void pl();
 #include <boost/atomic.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
+#include <boost/cstdint.hpp>
 
 using namespace ::boost::tuples;
+using namespace boost::numeric::ublas;
 
 #include <cstdint>
 #include <SDL2/SDL.h>
