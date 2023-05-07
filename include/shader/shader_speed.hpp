@@ -188,12 +188,12 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
 using prg_tensor=tensor<unsigned long long>;
-using sz_tensor=tensor<boost::atomic<long long int>>;
+using sz_tensor=tensor<boost::atomic<long>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
-using i_tensor=tensor<boost::atomic<long long int>>;
-using li_tensor=tensor<boost::atomic<long long int>>;
+using i_tensor=tensor<boost::atomic<long>>;
+using li_tensor=tensor<boost::atomic<long long>>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
