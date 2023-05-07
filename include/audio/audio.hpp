@@ -57,7 +57,7 @@ using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
 using gi_tensor=tensor<boost::atomic<int32_t>>;
 using ub_tensor=tensor<boost::atomic<unsigned char *>>;
-using lu_tensor=tensor<boost::atomic<long unsigned int *>>;
+using lu_tensor=tensor<boost::atomic<unsigned int>>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
 using d_tensor=tensor<boost::atomic<double *>>;
@@ -66,6 +66,7 @@ using v_tensor=tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,2};
 gi_tensor sound_pos=gi_tensor{2,2};
+lu_tensor sound_pos_u=lu_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
@@ -87,14 +88,14 @@ public:
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 wave.wptr=(sound.at(0,0)+sound_pos.at(0,0));
-sound_pos.at(0,1)=wave.slen-sound_pos.at(0,0);
+sound_pos.at(0,1)=sound_pos_u.at(0,0)-sound_pos.at(0,0);
 while(sound_pos.at(0,1)<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_pos.at(0,1));
 stm+=sound_pos.at(0,1);
 len-=sound_pos.at(0,1);
 wave.wptr=sound.at(0,0);
-sound_pos.at(0,1)=wave.slen;
+sound_pos.at(0,1)=sound_pos_u.at(0,0);
 sound_pos.at(0,0)=0;
 SDL_LockAudioDevice(wave.dev);
 }
@@ -124,6 +125,7 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 sound.at(0,0)=wave.snd;
+sound_pos_u.at(0,0)=wave.slen;
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
