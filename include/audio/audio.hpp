@@ -83,7 +83,7 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(boost::int_max_value_t::exact set){
+static inline void snd_pos(boost::int_max_value_t<64>::exact set){
 sse.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 return;
