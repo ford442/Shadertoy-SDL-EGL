@@ -94,16 +94,16 @@ SDL_AudioSpec request;
 public:
 
 static inline void snd_pos(long set){
-// sse.at(0,0)=wasm_i64x2_splat(set);
-// sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
-sound_pos.at(0,0)=&set;
+sse.at(0,0)=wasm_i64x2_splat(set);
+sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
+// sound_pos.at(0,0)=set;
 return;
 }
 
 static inline void snd_lft(long set){
-// sse.at(0,1)=wasm_i64x2_splat(set);
-// sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
-sound_pos.at(0,1)=&set;
+sse.at(0,1)=wasm_i64x2_splat(set);
+sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
+// sound_pos.at(0,1)=set;
 return;
 }
 
