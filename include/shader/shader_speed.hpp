@@ -193,7 +193,7 @@ using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
 using i_tensor=tensor<boost::int_max_value_t<64>>;
-using li_tensor=tensor<boost::int_max_value_t<64>>;
+using li_tensor=tensor<long>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
