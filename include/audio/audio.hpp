@@ -51,16 +51,15 @@ using namespace ::boost::tuples;
 #include <iostream>
 #include <emscripten.h>
 
-
-
-class Audio{
-
-private:
-
-GLchar flnm[24];
-SDL_AudioSpec request;
-
-public:
+using void_tensor=tensor<boost::atomic<void *>>;
+using i_tensor=tensor<boost::atomic<int32_t *>>;
+using u_tensor=tensor<boost::atomic<unsigned int *>>;
+using lu_tensor=tensor<boost::atomic<long unsigned int *>>;
+using li_tensor=tensor<boost::atomic<long int *>>;
+using f_tensor=tensor<boost::atomic<float *>>;
+using d_tensor=tensor<boost::atomic<double *>>;
+using void_tensor=tensor<boost::atomic<void *>>;
+using v_tensor=tensor<v128_t>;
 
 inline struct{
 GLubyte * snd;
@@ -70,6 +69,19 @@ GLuint slen;
 GLubyte * wptr;
 GLint lft;
 }wave;
+
+class Audio{
+
+private:
+
+GLchar flnm[24];
+SDL_AudioSpec request;
+
+
+
+public:
+
+
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(len,wave.lft);
