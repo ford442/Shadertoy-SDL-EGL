@@ -96,14 +96,14 @@ public:
 static inline void snd_pos(int128_t set){
 // sse.at(0,0)=wasm_i64x2_splat(set);
 // sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
-sound_pos.at(0,0)=set;
+sound_pos.at(0,0)=&set;
 return;
 }
 
 static inline void snd_lft(int128_t set){
 // sse.at(0,1)=wasm_i64x2_splat(set);
 // sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
-sound_pos.at(0,1)=set;
+sound_pos.at(0,1)=&set;
 return;
 }
 
@@ -115,7 +115,7 @@ return;
 }
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-wave.wptr=(sound.at(0,0)+sound_pos.at(0,0));
+wave.wptr=unsigned char *(sound.at(0,0)+sound_pos.at(0,0));
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_pos.at(0,1)<=len){
 SDL_UnlockAudioDevice(wave.dev);
