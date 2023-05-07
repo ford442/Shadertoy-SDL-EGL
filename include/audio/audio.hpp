@@ -60,7 +60,7 @@ using namespace boost::multiprecision;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using gi_tensor=tensor<boost::atomic<long long>>;
-using ub_tensor=tensor<unsigned char *>;
+using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<boost::atomic<unsigned long long>>;
 using v_tensor=tensor<v128_t>;
 
