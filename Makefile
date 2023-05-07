@@ -131,7 +131,7 @@ b3_audio:
 	-msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 -sASSERTIONS=2 \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
-	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd","_gmpz_init","_gmpz_clear"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","_gmpz_init","_gmpz_clear"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_vanilla_llvm:
