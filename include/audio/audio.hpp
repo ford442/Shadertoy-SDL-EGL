@@ -86,7 +86,7 @@ public:
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(len,wave.lft);
 tie(stm,wave.wptr);
-wave.wptr=*(sound.at(0,0)+wave.pos);
+wave.wptr=(sound.at(0,0)+wave.pos);
 wave.lft=wave.slen-wave.pos;
 while(wave.lft<=len){
 SDL_UnlockAudioDevice(wave.dev);
