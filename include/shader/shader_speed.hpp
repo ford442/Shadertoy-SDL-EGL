@@ -5,7 +5,7 @@
 #define TRUE 1
 #endif
 
-#pragma STDC FP_CONTRACT ON
+#pragma STDC FP_CONTRACT OFF
 
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
