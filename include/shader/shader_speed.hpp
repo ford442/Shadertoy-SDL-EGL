@@ -221,17 +221,17 @@ private:
 
 public:
 
-const inline void EBOin(boost::uint_t<64>EBO::exact){
+const inline void EBOin(boost::uint_t<64>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 }
 
-const inline void VCOin(boost::uint_t<64>VCO::exact){
+const inline void VCOin(boost::uint_t<64>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 }
 
-const inline void VBOin(boost::uint_t<64>VBO::exact){
+const inline void VBOin(boost::uint_t<64>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 }
