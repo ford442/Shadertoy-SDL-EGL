@@ -188,7 +188,7 @@ using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
 using i_tensor=tensor<boost::atomic<int>>;
-using li_tensor=tensor<boost::atomic<long int>>;
+using li_tensor=tensor<boost::atomic<int>>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
@@ -371,7 +371,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static inline void i_iSize_set(long int set){
+static inline void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
