@@ -175,10 +175,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)32,
-// EGL_SAMPLE_BUFFERS,(EGLint)1,
+EGL_SAMPLE_BUFFERS,(EGLint)1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-// EGL_SAMPLES,(EGLint)1,
+EGL_SAMPLES,(EGLint)32,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -376,7 +376,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static inline void i_iSize_set(int set){
+static inline void i_iSize_set(boost::uint_t<64>::exact set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
