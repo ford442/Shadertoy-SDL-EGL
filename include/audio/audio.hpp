@@ -149,7 +149,7 @@ SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 sound.at(0,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
-mpz_int ly[1]=[0];
+mpz_int ly[1]={0};
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,ly[0]);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return;
