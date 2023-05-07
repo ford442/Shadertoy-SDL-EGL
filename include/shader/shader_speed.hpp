@@ -246,27 +246,27 @@ Di.at(1,1)=0.0;
 return;
 }
 
-inline boost::atomic<float> gF(){
+inline float gF(){
 return Fi.at(0,0);
 }
 
-inline boost::atomic<float> gFm1(){
+inline float gFm1(){
 return Fi.at(0,1);
 }
 
-inline boost::atomic<float> gF0(){
+inline float gF0(){
 return Fi.at(1,1);
 }
 
-inline boost::atomic<double> gD(){
+inline double gD(){
 return Di.at(0,0);
 }
 
-inline boost::atomic<double> gDm1(){
+inline double gDm1(){
 return Di.at(0,1);
 }
 
-inline boost::atomic<double> gD0(){
+inline double gD0(){
 return Di.at(1,1);
 }
 
