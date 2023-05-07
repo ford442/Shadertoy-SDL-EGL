@@ -526,7 +526,7 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<boost::int_max_value_t>(mouse.hi);
+Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(mouse.hi);
 mms.at(0,0)=0.5*t_size.at(0,0);
