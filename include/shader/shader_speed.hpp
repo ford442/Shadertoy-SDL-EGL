@@ -246,27 +246,27 @@ Di.at(1,1)=0.0;
 return;
 }
 
-inline float gF(){
+inline boost::atomic<float> gF(){
 return Fi.at(0,0);
 }
 
-inline float gFm1(){
+inline boost::atomic<float> gFm1(){
 return Fi.at(0,1);
 }
 
-inline float gF0(){
+inline boost::atomic<float> gF0(){
 return Fi.at(1,1);
 }
 
-inline double gD(){
+inline boost::atomic<double> gD(){
 return Di.at(0,0);
 }
 
-inline double gDm1(){
+inline boost::atomic<double> gDm1(){
 return Di.at(0,1);
 }
 
-inline double gD0(){
+inline boost::atomic<double> gD0(){
 return Di.at(1,1);
 }
 
@@ -363,14 +363,14 @@ S1.at(0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static inline void u_iTime_set(double set){
+static inline void u_iTime_set(boost::atomic<double> set){
 d_time.at(0,0)=set;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
-static inline void u_iSize_set(float set){
+static inline void u_iSize_set(boost::atomic<float> set){
 sse.at(1,0)=wasm_f64x2_splat(set);
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
@@ -382,7 +382,7 @@ i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static inline void u_iTimeDelta_set(float set){
+static inline void u_iTimeDelta_set(boost::atomic<float> set){
 sse.at(0,1)=wasm_f64x2_splat(set);
 f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
@@ -397,12 +397,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const long int xxx=mms2.at(0,0);
 const long int yyy=mms2.at(0,1);
-mms.at(0,0)=(float)xxx;
-mms.at(1,0)=(float)(i_size.at(0,0)-yyy);
+mms.at(0,0)=(boost::atomic<float>)xxx;
+mms.at(1,0)=(boost::atomic<float>)(i_size.at(0,0)-yyy);
 clk_l=false;
 }
-mms.at(2,0)=(float)mms2.at(0,0);
-mms.at(2,1)=(float)(i_size.at(0,0)-mms2.at(0,1));
+mms.at(2,0)=(boost::atomic<float>)mms2.at(0,0);
+mms.at(2,1)=(boost::atomic<float>)(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
 }
