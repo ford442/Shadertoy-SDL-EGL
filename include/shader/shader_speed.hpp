@@ -55,6 +55,7 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 #include <boost/cstdint.hpp>
+#include <boost/integer.hpp>
 
 extern "C"{
   
