@@ -105,8 +105,8 @@ return;
 
 
 inline void plt(){
-tie(len,wave.lft);
-tie(stm,wave.wptr);
+tie(wave.len,wave.lft);
+tie(wave.stm,wave.wptr);
 tie(wave.pos,wave.slen);
 tie(request,wave.dev);
 tie(wave.snd,bfr,sound);
