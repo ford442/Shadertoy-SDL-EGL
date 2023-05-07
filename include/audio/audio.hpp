@@ -77,7 +77,7 @@ v_tensor sse2=v_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
-int pos;
+mpz_int  pos;
 SDL_AudioDeviceID dev;
 GLuint slen;
 GLubyte * wptr;
