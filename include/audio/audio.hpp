@@ -86,14 +86,14 @@ public:
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(len,wave.lft);
 tie(stm,wave.wptr);
-wave.wptr=wave.snd+wave.pos;
+wave.wptr=sound.at(0,0)+wave.pos;
 wave.lft=wave.slen-wave.pos;
 while(wave.lft<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,wave.lft);
 stm+=wave.lft;
 len-=wave.lft;
-wave.wptr=wave.snd;
+wave.wptr=sound.at(0,0);
 wave.lft=wave.slen;
 wave.pos=0;
 SDL_LockAudioDevice(wave.dev);
@@ -106,7 +106,7 @@ return;
 inline void plt(){
 tie(wave.pos,wave.slen);
 tie(request,wave.dev);
-tie(wave.snd,bfr);
+tie(wave.snd,bfr,sound);
 request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
@@ -119,7 +119,8 @@ request.samples=1024;
 wave.pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
+sound.at(0,0)=wave.snd;
+SDL_LoadWAV(flnm,&request,&sound.at(0,0),&wave.slen);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
