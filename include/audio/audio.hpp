@@ -64,9 +64,8 @@ using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<boost::atomic<unsigned long long>>;
 using v_tensor=tensor<v128_t>;
 
-ub_tensor sound=ub_tensor{1,1};
+ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
-gi_tensor sound_pos2=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
@@ -111,15 +110,14 @@ return;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(stm,len);
-sound_pos2=sound+sound_pos;
-wave.wptr=sound_pos2.at(0,0) // sound.at(0,0)+sound_pos.at(0,0);
+wave.wptr=sound.at(0,0,1)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
-wave.wptr=sound.at(0,0);
+wave.wptr=sound.at(0,0,0);
 snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
 SDL_LockAudioDevice(wave.dev);
@@ -146,7 +144,7 @@ snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-sound.at(0,0)=wave.snd;
+sound.at(0,0,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
