@@ -67,7 +67,7 @@ using v_tensor=tensor<v128_t>;
 ub_tensor sound=ub_tensor{1,2};
 gi_tensor sound_pos=gi_tensor{2,2};
 lu_tensor sound_pos_u=lu_tensor{1,1};
-v_tensor sse=v_tensor{1,1};
+v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 
 inline struct{
@@ -94,6 +94,12 @@ sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 return;
 }
 
+static inline void snd_lft(int32_t set){
+sse.at(0,1)=wasm_i64x2_splat(set);
+sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
+return;
+}
+
 static inline void snd_pos_u(int32_t set){
 sse2.at(0,0)=wasm_u64x2_splat(set);
 sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
@@ -102,19 +108,19 @@ return;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 wave.wptr=(sound.at(0,0)+sound_pos.at(0,0));
-sound_pos.at(0,1)=sound_pos_u.at(0,0)-sound_pos.at(0,0);
+snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_pos.at(0,1)<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_pos.at(0,1));
 stm+=sound_pos.at(0,1);
 len-=sound_pos.at(0,1);
 wave.wptr=sound.at(0,0);
-sound_pos.at(0,1)=sound_pos_u.at(0,0);
-sound_pos.at(0,0)=0;
+snd_lft(sound_pos_u.at(0,0));
+snd_pos(0);
 SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
-sound_pos.at(0,0)+=len;
+snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
@@ -134,7 +140,7 @@ request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
 request.samples=1024;
-sound_pos.at(0,0)=0;
+snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
