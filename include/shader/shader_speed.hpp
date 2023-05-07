@@ -272,7 +272,7 @@ return Di.at(1,1);
 
 };
 
-const inline GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
+const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const inline GLubyte indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
@@ -483,7 +483,7 @@ tie(cntx,mms);
 tie(i_size,cntxi);
 tie(mouse.hi,mouse.wi,d_time);
 tie(u_time.t1,u_time.t2,u_time.t3);
-tie(shad.EBO,shad.VBO,shad.VCO);
+tie(shad.EBO,shad.VBO,shad.VCO,sse4);
 tie(config_size,major,minor);
 tie(display,surface,eglconfig);
 tie(attr,ctxegl,ctx);
