@@ -174,7 +174,7 @@ EGL_BLUE_SIZE,(EGLint)32,
 EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
-EGL_BUFFER_SIZE,(EGLint)64,
+EGL_BUFFER_SIZE,(EGLint)32,
 // EGL_SAMPLE_BUFFERS,(EGLint)1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
@@ -526,7 +526,7 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<boost::int_max_value_t<32>>(mouse.hi);
+Size=dynamic_cast<boost::int_max_value_t<32>>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(mouse.hi);
 mms.at(0,0)=0.5*t_size.at(0,0);
