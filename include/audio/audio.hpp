@@ -61,7 +61,7 @@ using namespace boost::multiprecision;
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
 using gi_tensor=tensor<mpz_int>;
-using ub_tensor=tensor<boost::atomic<unsigned char *>>;
+using ub_tensor=tensor<unsigned char *>;
 using lu_tensor=tensor<unsigned long>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
