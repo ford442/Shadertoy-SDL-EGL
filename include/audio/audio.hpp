@@ -57,13 +57,11 @@ using namespace boost::multiprecision;
 #include <iostream>
 #include <emscripten.h>
 
-uint128_t tst128;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using gi_tensor=tensor<mpz_int>;
-// using ub_tensor=tensor<boost::atomic<unsigned char *>>;
-using ub_tensor=tensor<unsigned char *>;
+using gi_tensor=tensor<int128_t *>;
+using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<uint128_t>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
