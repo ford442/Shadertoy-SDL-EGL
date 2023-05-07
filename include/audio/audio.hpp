@@ -32,6 +32,7 @@ void pl();
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 #include <boost/cstdint.hpp>
+#include <boost/integer.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
 using namespace ::boost::tuples;
