@@ -62,7 +62,7 @@ using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
 using gi_tensor=tensor<mpz_int>;
 using ub_tensor=tensor<unsigned char *>;
-using lu_tensor=tensor<unsigned long>;
+using lu_tensor=tensor<unsigned int>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
 using d_tensor=tensor<boost::atomic<double *>>;
@@ -81,7 +81,6 @@ int pos;
 SDL_AudioDeviceID dev;
 GLuint slen;
 GLubyte * wptr;
-GLint lft;
 }wave;
 
 class Audio{
@@ -93,21 +92,21 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(boost::atomic<long long> set){
+static inline void snd_pos(int set){
 sse.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 // sound_pos.at(0,0)=set;
 return;
 }
 
-static inline void snd_lft(boost::atomic<long long> set){
+static inline void snd_lft(int set){
 sse.at(0,1)=wasm_i64x2_splat(set);
 sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 // sound_pos.at(0,1)=set;
 return;
 }
 
-inline void snd_pos_u(unsigned long set){
+inline void snd_pos_u(unsigned int set){
 // sse2.at(0,0)=wasm_u64x2_splat(set);
 // sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
   sound_pos_u.at(0,0)=set;
