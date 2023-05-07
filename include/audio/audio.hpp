@@ -85,8 +85,9 @@ SDL_AudioSpec request;
 public:
 
 static inline void snd_pos(boost::int_max_value_t<64> set){
-sse3.at(0,0)=wasm_i64x2_splat(set);
-sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+// sse3.at(0,0)=wasm_i64x2_splat(set);
+// sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+sound_pos.at(0,0)=set;
 return;
 }
 
