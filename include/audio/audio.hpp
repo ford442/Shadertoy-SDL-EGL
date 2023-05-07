@@ -70,7 +70,7 @@ inline struct{
 GLubyte * snd;
 long long pos;
 SDL_AudioDeviceID dev;
-unsigned long long slen;
+unsigned int slen;
 GLubyte * wptr;
 }wave;
 
