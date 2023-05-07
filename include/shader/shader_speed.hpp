@@ -182,7 +182,7 @@ inline EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
-using prg_tensor=tensor<long unsigned int>;
+using prg_tensor=tensor<long long unsigned int>;
 using sz_tensor=tensor<boost::atomic<int>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
@@ -352,7 +352,7 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static inline void PRGin(long unsigned int prg){
+static inline void PRGin(long long unsigned int prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
