@@ -19,7 +19,7 @@
 
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
-#include <boost/context.hpp>
+#include <boost/context/fiber.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
 using namespace std::chrono_literals;
