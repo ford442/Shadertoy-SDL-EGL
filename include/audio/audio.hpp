@@ -33,12 +33,9 @@ void pl();
 #include <boost/chrono.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/integer.hpp>
-#include <boost/multiprecision/cpp_int.hpp>
-#include <boost/multiprecision/gmp.hpp>
 
 using namespace ::boost::tuples;
 using namespace boost::numeric::ublas;
-using namespace boost::multiprecision;
 
 #include <cstdint>
 #include <SDL2/SDL.h>
@@ -57,7 +54,6 @@ using namespace boost::multiprecision;
 #include <iostream>
 #include <emscripten.h>
 
-
 using void_tensor=tensor<boost::atomic<void *>>;
 using gi_tensor=tensor<boost::atomic<long long>>;
 using ub_tensor=tensor<boost::atomic<unsigned char *>>;
@@ -72,9 +68,9 @@ v_tensor sse2=v_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
-GLint pos;
+long long pos;
 SDL_AudioDeviceID dev;
-GLuint slen;
+unsigned long long slen;
 GLubyte * wptr;
 }wave;
 
@@ -90,25 +86,23 @@ public:
 static inline void snd_pos(long long set){
 sse.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
-// sound_pos.at(0,0)=set;
 return;
 }
 
 static inline void snd_lft(long long set){
 sse.at(0,1)=wasm_i64x2_splat(set);
 sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
-// sound_pos.at(0,1)=set;
 return;
 }
 
 inline void snd_pos_u(unsigned long long set){
 sse2.at(0,0)=wasm_u64x2_splat(set);
 sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
- //  sound_pos_u.at(0,0)=set;
 return;
 }
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+tie(stm,len);
 wave.wptr=sound.at(0,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_pos.at(0,1)<=len){
@@ -126,13 +120,10 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-
 inline void plt(){
-// tie(wave.len,wave.lft);
-// tie(wave.stm,wave.wptr);
-tie(wave.pos,wave.slen);
-tie(request,wave.dev);
-tie(wave.snd,bfr,sound);
+tie(sound,sound_pos,sound_pos_u);
+tie(wave,sse,sse2);
+tie(bfr,request);
 request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
@@ -149,8 +140,7 @@ SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 sound.at(0,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
-mpz_int ly[1]={0};
-wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,ly[0]);
+wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return;
 }
