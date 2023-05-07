@@ -128,12 +128,13 @@ return;
 
 
 inline void plt(){
+  mpz_int ffq=44100;
 // tie(wave.len,wave.lft);
 // tie(wave.stm,wave.wptr);
 tie(wave.pos,wave.slen);
 tie(request,wave.dev);
 tie(wave.snd,bfr,sound);
-request.freq=44100;
+request.freq=ffq;
 request.format=AUDIO_S32;
 request.channels=2;
 request.samples=1024;
