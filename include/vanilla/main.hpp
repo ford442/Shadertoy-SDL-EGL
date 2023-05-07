@@ -15,6 +15,7 @@
 
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
+#include <boost/multiprecision/cpp_int.hpp>
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
