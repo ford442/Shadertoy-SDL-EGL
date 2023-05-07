@@ -106,8 +106,9 @@ return;
 }
 
 inline void snd_pos_u(uint128_t set){
-sse2.at(0,0)=wasm_u64x2_splat(set);
-sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+// sse2.at(0,0)=wasm_u64x2_splat(set);
+// sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+  sound_pos_u.at(0,0)=set;
 return;
 }
 
