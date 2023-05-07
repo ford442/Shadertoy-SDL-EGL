@@ -179,10 +179,10 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
-
+typedef uintmax_t iNt;
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
-using prg_tensor=tensor<long long uintmax_t>;
+using prg_tensor=tensor<long long iNt>;
 using sz_tensor=tensor<boost::atomic<int>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
