@@ -61,7 +61,7 @@ uint128_t tst128;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using gi_tensor=tensor<int128_t>;
+using gi_tensor=tensor<mpz_int>;
 // using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using ub_tensor=tensor<unsigned char *>;
 using lu_tensor=tensor<uint128_t>;
@@ -95,14 +95,14 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(int128_t set){
+static inline void snd_pos(mpz_int set){
 // sse.at(0,0)=wasm_i64x2_splat(set);
 // sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 sound_pos.at(0,0)=set;
 return;
 }
 
-static inline void snd_lft(int128_t set){
+static inline void snd_lft(mpz_int set){
 // sse.at(0,1)=wasm_i64x2_splat(set);
 // sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 sound_pos.at(0,1)=set;
