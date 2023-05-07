@@ -41,7 +41,7 @@ window.open('./flac');
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},2000);
+},4000);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
