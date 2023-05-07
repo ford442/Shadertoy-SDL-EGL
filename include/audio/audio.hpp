@@ -18,7 +18,19 @@ void pl();
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-#include "boost/tuple/tuple.hpp"
+
+#include <float.h>
+#include <math.h>
+
+#define BOOST_CHRONO_HEADER_ONLY 1
+#define BOOST_ERROR_CODE_HEADER_ONLY 1
+
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/atomic.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
 
 using namespace ::boost::tuples;
 
@@ -39,14 +51,7 @@ using namespace ::boost::tuples;
 #include <iostream>
 #include <emscripten.h>
 
-inline struct{
-GLubyte * snd;
-GLint pos;
-SDL_AudioDeviceID dev;
-GLuint slen;
-GLubyte * wptr;
-GLint lft;
-}wave;
+
 
 class Audio{
 
@@ -56,6 +61,15 @@ GLchar flnm[24];
 SDL_AudioSpec request;
 
 public:
+
+inline struct{
+GLubyte * snd;
+GLint pos;
+SDL_AudioDeviceID dev;
+GLuint slen;
+GLubyte * wptr;
+GLint lft;
+}wave;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(len,wave.lft);
