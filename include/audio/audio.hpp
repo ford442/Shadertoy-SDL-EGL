@@ -74,10 +74,10 @@ gi_tensor sound_pos=gi_tensor{2,2};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
-mpz_int tt;
+
 inline struct{
 GLubyte * snd;
-mpz_int  pos;
+GLint  pos;
 SDL_AudioDeviceID dev;
 GLuint slen;
 GLubyte * wptr;
