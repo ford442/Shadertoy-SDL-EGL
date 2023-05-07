@@ -20,7 +20,6 @@
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
-#include <boost/multiprecision/gmp.hpp>
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
@@ -50,7 +49,6 @@ float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
 uint128_t tst128;
-mpz_int tstmpz;
   
   
 public:
