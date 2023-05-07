@@ -60,9 +60,9 @@ using namespace boost::multiprecision;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using gi_tensor=tensor<int128_t *>;
+using gi_tensor=tensor<long>;
 using ub_tensor=tensor<boost::atomic<unsigned char *>>;
-using lu_tensor=tensor<uint128_t>;
+using lu_tensor=tensor<unsigned long>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
 using d_tensor=tensor<boost::atomic<double *>>;
@@ -93,21 +93,21 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(int128_t set){
+static inline void snd_pos(long set){
 // sse.at(0,0)=wasm_i64x2_splat(set);
 // sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 sound_pos.at(0,0)=&set;
 return;
 }
 
-static inline void snd_lft(int128_t set){
+static inline void snd_lft(long set){
 // sse.at(0,1)=wasm_i64x2_splat(set);
 // sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 sound_pos.at(0,1)=&set;
 return;
 }
 
-inline void snd_pos_u(uint128_t set){
+inline void snd_pos_u(unsigned long set){
 // sse2.at(0,0)=wasm_u64x2_splat(set);
 // sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
   sound_pos_u.at(0,0)=set;
