@@ -23,7 +23,7 @@ b3_shader_speed:
 	 -std=gnu++20 -stdlib=libc++ -flto=thin -matomics -ffast-math -funsafe-math-optimizations -fno-math-errno \
 	 -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fstrict-vtable-pointers -mbulk-memory \
-	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -NDEBUG -BOOST_UBLAS_NDEBUG \
+	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -BOOST_UBLAS_NDEBUG \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -Rpass=loop-vectorize \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Main
@@ -32,7 +32,7 @@ b3_shader_speed:
 	 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=gnu++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
-	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -NDEBUG -BOOST_UBLAS_NDEBUG 
+	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG 
 	 ###         Link
 	 emcc main.o shader_speed.o -o s3023s.js -matomics --use-preload-plugins \
 	 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
