@@ -188,12 +188,12 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
 using prg_tensor=tensor<unsigned long long>;
-using sz_tensor=tensor<boost::atomic<long>>;
+using sz_tensor=tensor<boost::int_max_value_t<64>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
-using i_tensor=tensor<boost::atomic<long>>;
-using li_tensor=tensor<boost::atomic<long long>>;
+using i_tensor=tensor<boost::atomic<int>>;
+using li_tensor=tensor<boost::atomic<int>>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
@@ -376,7 +376,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static inline void i_iSize_set(long long set){
+static inline void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
@@ -526,7 +526,7 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<int32_t>(mouse.hi);
+Size=static_cast<boost::int_max_value_t<32>>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(mouse.hi);
 mms.at(0,0)=0.5*t_size.at(0,0);
