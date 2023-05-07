@@ -68,7 +68,7 @@ ub_tensor sound=ub_tensor{1,2};
 gi_tensor sound_pos=gi_tensor{2,2};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,1};
-v_tensor sse=v_tensor{1,1};
+v_tensor sse2=v_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
