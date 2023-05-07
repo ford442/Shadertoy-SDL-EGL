@@ -34,6 +34,7 @@ void pl();
 #include <boost/cstdint.hpp>
 #include <boost/integer.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/gmp.hpp>
 
 using namespace ::boost::tuples;
 using namespace boost::numeric::ublas;
