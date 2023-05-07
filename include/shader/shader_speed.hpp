@@ -204,7 +204,7 @@ shad_tensor Sh=shad_tensor{3,3};
 prg_tensor S1=prg_tensor{3,3};
 sz_tensor Si=sz_tensor{1,1};
 d_tensor d_time=d_tensor{2,1};
-d_tensor f_time=d_tensor{2,1};
+f_tensor f_time=f_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 i_tensor uni_i=i_tensor{1,1};
@@ -354,7 +354,7 @@ GPU gpu;
 public:
 
 static inline void nanoPause(){
-// nanosleep(&req2,&rem);
+nanosleep(&req2,&rem);
 }
 
 static inline void PRGin(long long unsigned int prg){
@@ -376,7 +376,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static inline void i_iSize_set(int set){
+static inline void i_iSize_set(long long set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
