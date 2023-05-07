@@ -175,10 +175,10 @@ EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,(EGLint)1,
+// EGL_SAMPLE_BUFFERS,(EGLint)1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)1, // used to indicate, not set
-EGL_SAMPLES,(EGLint)1,
+// EGL_SAMPLES,(EGLint)1,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -504,7 +504,7 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
+attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
