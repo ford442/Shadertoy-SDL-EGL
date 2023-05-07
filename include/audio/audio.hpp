@@ -66,6 +66,7 @@ using v_tensor=tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
+gi_tensor sound_pos2=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
@@ -110,8 +111,9 @@ return;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(stm,len);
-wave.wptr=sound.at(0,0)+sound_pos.at(0,0);
-snd_lft(sound_pos_u-sound_pos);
+sound_pos2=sound+sound_pos;
+wave.wptr=sound_pos2.at(0,0) // sound.at(0,0)+sound_pos.at(0,0);
+snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
