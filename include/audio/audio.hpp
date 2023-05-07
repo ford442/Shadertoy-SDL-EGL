@@ -93,7 +93,7 @@ SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,wave.lft);
 stm+=wave.lft;
 len-=wave.lft;
-wave.wptr=*(sound.at(0,0));
+wave.wptr=sound.at(0,0);
 wave.lft=wave.slen;
 wave.pos=0;
 SDL_LockAudioDevice(wave.dev);
