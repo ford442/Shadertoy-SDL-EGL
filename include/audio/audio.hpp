@@ -65,6 +65,7 @@ gi_tensor sound_pos=gi_tensor{2,2};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
+v_tensor sse3=v_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
@@ -84,8 +85,8 @@ SDL_AudioSpec request;
 public:
 
 static inline void snd_pos(boost::int_max_value_t<64> set){
-sse.at(0,0)=wasm_i64x2_splat(set);
-sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
+sse3.at(0,0)=wasm_i64x2_splat(set);
+sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
