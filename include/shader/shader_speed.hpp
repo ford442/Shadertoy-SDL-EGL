@@ -363,14 +363,14 @@ S1.at(0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static inline void u_iTime_set(boost::atomic<double> set){
+static inline void u_iTime_set(double set){
 d_time.at(0,0)=set;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
-static inline void u_iSize_set(boost::atomic<float> set){
+static inline void u_iSize_set(float set){
 sse.at(1,0)=wasm_f64x2_splat(set);
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
@@ -382,7 +382,7 @@ i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static inline void u_iTimeDelta_set(boost::atomic<float> set){
+static inline void u_iTimeDelta_set(float set){
 sse.at(0,1)=wasm_f64x2_splat(set);
 f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
