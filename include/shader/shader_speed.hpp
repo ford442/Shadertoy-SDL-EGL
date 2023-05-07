@@ -40,7 +40,6 @@
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
-#include <boost/numeric/ublas/config.hpp>
 
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
