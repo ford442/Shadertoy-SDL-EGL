@@ -187,13 +187,13 @@ EGL_NONE,EGL_NONE
 inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
-using prg_tensor=tensor<boost::unsigned long long<64>::exact>;
-using sz_tensor=tensor<boost::int_max_value_t<64>::exact>;
+using prg_tensor=tensor<boost::unsigned long long<64>>;
+using sz_tensor=tensor<boost::int_max_value_t<64>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
-using i_tensor=tensor<boost::int_max_value_t<64>::exact>;
-using li_tensor=tensor<boost::int_max_value_t<64>::exact>;
+using i_tensor=tensor<boost::int_max_value_t<64>>;
+using li_tensor=tensor<boost::int_max_value_t<64>>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
@@ -221,17 +221,17 @@ private:
 
 public:
 
-const inline void EBOin(unsigned int EBO){
+const inline void EBOin(<boost::uint_t<64>EBO::exact){
 Sh.at(1,0)=EBO;
 return;
 }
 
-const inline void VCOin(unsigned int VCO){
+const inline void VCOin(boost::uint_t<64>VCO::exact){
 Sh.at(2,0)=VCO;
 return;
 }
 
-const inline void VBOin(unsigned int VBO){
+const inline void VBOin(boost::uint_t<64>VBO::exact){
 Sh.at(2,1)=VBO;
 return;
 }
