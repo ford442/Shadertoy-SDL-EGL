@@ -62,7 +62,7 @@ using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
 using gi_tensor=tensor<boost::atomic<long long>>;
 using ub_tensor=tensor<boost::atomic<unsigned char *>>;
-using lu_tensor=tensor<boost::atomic<uint128_t>>;
+using lu_tensor=tensor<uint128_t>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
 using d_tensor=tensor<boost::atomic<double *>>;
@@ -106,9 +106,9 @@ return;
 }
 
 inline void snd_pos_u(uint128_t set){
-// sse2.at(0,0)=wasm_u64x2_splat(set);
-// sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
-  sound_pos_u.at(0,0)=set;
+sse2.at(0,0)=wasm_u64x2_splat(set);
+sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+//   sound_pos_u.at(0,0)=set;
 return;
 }
 
