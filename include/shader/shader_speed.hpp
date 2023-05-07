@@ -23,6 +23,23 @@
 #define _POSIX_REGEXP 1
 
 #include "../../include/shader/intrins.hpp"
+
+#include <float.h>
+#include <math.h>
+
+#define BOOST_CHRONO_HEADER_ONLY 1
+#define BOOST_ERROR_CODE_HEADER_ONLY 1
+
+#include <boost/cstdint.hpp>
+#include <boost/integer.hpp>
+#include <boost/atomic.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
+
 #include <emscripten.h>
 #include <algorithm>
 #include <string.h>
@@ -43,20 +60,6 @@
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
-#include <float.h>
-#include <math.h>
-
-#define BOOST_CHRONO_HEADER_ONLY 1
-#define BOOST_ERROR_CODE_HEADER_ONLY 1
-
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/atomic.hpp>
-#include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
-#include <boost/cstdint.hpp>
-#include <boost/integer.hpp>
 
 extern "C"{
   
