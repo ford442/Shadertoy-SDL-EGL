@@ -64,7 +64,7 @@ using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<boost::atomic<unsigned long long>>;
 using v_tensor=tensor<v128_t>;
 
-ub_tensor sound=ub_tensor{1,2};
+ub_tensor sound=ub_tensor{1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
@@ -110,8 +110,8 @@ return;
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(stm,len);
-wave.wptr=sound.at(0,0)+sound_pos.at(0,0);
-snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
+wave.wptr=sound+sound_pos;
+snd_lft(sound_pos_u-sound_pos);
 while(sound_lft.at(0,0)<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
