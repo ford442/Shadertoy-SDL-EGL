@@ -133,7 +133,7 @@ inline void plt(){
 tie(wave.pos,wave.slen);
 tie(request,wave.dev);
 tie(wave.snd,bfr,sound);
-request.freq=ffq;
+request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
 request.samples=1024;
