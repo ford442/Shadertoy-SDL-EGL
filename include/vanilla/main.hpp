@@ -3,6 +3,10 @@
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
+
+#define BOOST_CHRONO_HEADER_ONLY 1
+#define BOOST_ERROR_CODE_HEADER_ONLY 1
+
 #include "boost/tuple/tuple.hpp"
 #include "boost/timer/timer.hpp"
 #include "../../include/vanilla/gl.hpp"
