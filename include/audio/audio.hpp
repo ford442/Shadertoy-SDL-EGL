@@ -55,7 +55,7 @@ using namespace boost::numeric::ublas;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using ub_tensor=tensor<boost::atomic<unsigned char **>>;
+using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<boost::atomic<long unsigned int *>>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
@@ -120,7 +120,7 @@ wave.pos=0;
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-sound.at(0,0)=&wave.snd;
+sound.at(0,0)=wave.snd;
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
