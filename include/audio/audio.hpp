@@ -93,14 +93,14 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(mpz_int set){
+static inline void snd_pos(int128_t set){
 // sse.at(0,0)=wasm_i64x2_splat(set);
 // sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 sound_pos.at(0,0)=set;
 return;
 }
 
-static inline void snd_lft(mpz_int set){
+static inline void snd_lft(int128_t set){
 // sse.at(0,1)=wasm_i64x2_splat(set);
 // sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 sound_pos.at(0,1)=set;
