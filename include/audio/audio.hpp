@@ -55,7 +55,7 @@ using namespace boost::numeric::ublas;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using ub_tensor=tensor<boost::atomic<unsigned char *>>;
+using ub_tensor=tensor<boost::atomic<unsigned char **>>;
 using lu_tensor=tensor<boost::atomic<long unsigned int *>>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
