@@ -60,7 +60,7 @@ using namespace boost::multiprecision;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using gi_tensor=tensor<long>;
+using gi_tensor=tensor<mpz_int>;
 using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<unsigned long>;
 using li_tensor=tensor<boost::atomic<long int *>>;
@@ -93,14 +93,14 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(long set){
+static inline void snd_pos(mpz_int set){
 sse.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
 // sound_pos.at(0,0)=set;
 return;
 }
 
-static inline void snd_lft(long set){
+static inline void snd_lft(mpz_int set){
 sse.at(0,1)=wasm_i64x2_splat(set);
 sound_pos.at(0,1)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 // sound_pos.at(0,1)=set;
