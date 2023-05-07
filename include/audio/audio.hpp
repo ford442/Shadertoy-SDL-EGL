@@ -67,10 +67,12 @@ using v_tensor=tensor<v128_t>;
 ub_tensor sound=ub_tensor{1,2};
 gi_tensor sound_pos=gi_tensor{2,2};
 lu_tensor sound_pos_u=lu_tensor{1,1};
+v_tensor sse=v_tensor{1,1};
+v_tensor sse=v_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
-GLint pos;
+int pos;
 SDL_AudioDeviceID dev;
 GLuint slen;
 GLubyte * wptr;
@@ -85,6 +87,18 @@ GLchar flnm[24];
 SDL_AudioSpec request;
 
 public:
+
+static inline void snd_pos(int32_t set){
+sse.at(0,0)=wasm_i64x2_splat(set);
+sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,0),0);
+return;
+}
+
+static inline void snd_pos_u(int32_t set){
+sse2.at(0,0)=wasm_u64x2_splat(set);
+sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+return;
+}
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 wave.wptr=(sound.at(0,0)+sound_pos.at(0,0));
@@ -125,7 +139,7 @@ SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 sound.at(0,0)=wave.snd;
-sound_pos_u.at(0,0)=wave.slen;
+snd_pos_u(wave.slen);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
