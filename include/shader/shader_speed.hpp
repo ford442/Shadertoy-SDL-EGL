@@ -188,11 +188,11 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=tensor<boost::atomic<float>>;
 using shad_tensor=tensor<unsigned int>;
 using prg_tensor=tensor<unsigned long long>;
-using sz_tensor=tensor<boost::atomic<long>>;
+using sz_tensor=tensor<boost::atomic<int>>;
 using f_tensor=tensor<boost::atomic<float>>;
 using d_tensor=tensor<boost::atomic<double>>;
 using v_tensor=tensor<v128_t>;
-using i_tensor=tensor<boost::atomic<long>>;
+using i_tensor=tensor<boost::atomic<int>>;
 using li_tensor=tensor<long>;
 using void_tensor=tensor<boost::atomic<void *>>;
 
@@ -376,7 +376,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static inline void i_iSize_set(boost::uint_t<64>::exact set){
+static inline void i_iSize_set(boost::int_t<64>::exact set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
