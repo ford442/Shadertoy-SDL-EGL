@@ -32,9 +32,11 @@ void pl();
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 #include <boost/cstdint.hpp>
+#include <boost/multiprecision/cpp_int.hpp>
 
 using namespace ::boost::tuples;
 using namespace boost::numeric::ublas;
+using namespace boost::multiprecision;
 
 #include <cstdint>
 #include <SDL2/SDL.h>
@@ -52,6 +54,8 @@ using namespace boost::numeric::ublas;
 #include <climits>
 #include <iostream>
 #include <emscripten.h>
+
+uint128_t tst128;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
