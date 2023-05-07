@@ -7,7 +7,7 @@ void pl();
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT ON
+#pragma STDC FP_CONTRACT OFF
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -55,13 +55,15 @@ using namespace boost::numeric::ublas;
 
 using void_tensor=tensor<boost::atomic<void *>>;
 using i_tensor=tensor<boost::atomic<int32_t *>>;
-using u_tensor=tensor<boost::atomic<unsigned int *>>;
+using ub_tensor=tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=tensor<boost::atomic<long unsigned int *>>;
 using li_tensor=tensor<boost::atomic<long int *>>;
 using f_tensor=tensor<boost::atomic<float *>>;
 using d_tensor=tensor<boost::atomic<double *>>;
 using void_tensor=tensor<boost::atomic<void *>>;
 using v_tensor=tensor<v128_t>;
+
+ub_tensor sound=ub_tensor{1,1};
 
 inline struct{
 GLubyte * snd;
@@ -79,11 +81,7 @@ private:
 GLchar flnm[24];
 SDL_AudioSpec request;
 
-
-
 public:
-
-
 
 static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 tie(len,wave.lft);
@@ -109,6 +107,10 @@ inline void plt(){
 tie(wave.pos,wave.slen);
 tie(request,wave.dev);
 tie(wave.snd,bfr);
+request.freq=44100;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=1024;
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
 request.format=AUDIO_S32;
