@@ -61,7 +61,8 @@ using lu_tensor=tensor<boost::atomic<unsigned long long>>;
 using v_tensor=tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,2};
-gi_tensor sound_pos=gi_tensor{2,2};
+gi_tensor sound_pos=gi_tensor{1,1};
+gi_tensor sound_lft=gi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
