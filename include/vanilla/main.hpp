@@ -16,6 +16,8 @@
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/gmp.hpp>
+
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
@@ -27,6 +29,8 @@ std::chrono::steady_clock::time_point t2;
 
 using namespace std;
 using namespace boost::numeric::ublas;
+using namespace boost::multiprecision;
+
 using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
 using tensorVarD=tensor<GLdouble>;
@@ -42,8 +46,10 @@ private:
 float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
-boost::multiprecision::uint128_t tst128;
-
+uint128_t tst128;
+mpz_int tstmpz;
+  
+  
 public:
 
 float rtt(float nm){
