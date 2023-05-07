@@ -115,12 +115,12 @@ b3_audio:
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
-	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -NDEBUG -BOOST_UBLAS_NDEBUG 
+	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
 	em++ src/audio/audio.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
-	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -NDEBUG -BOOST_UBLAS_NDEBUG 
+	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
 	emcc main.o audio.o -o a3020.js -mllvm -flto=thin -std=gnu++20 -stdlib=libc++ -ffp-contract=fast -mtune=tigerlake -march=corei7-avx -fno-math-errno \
 	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
 	-fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 -sASSERTIONS=2 \
