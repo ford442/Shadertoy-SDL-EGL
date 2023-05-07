@@ -221,7 +221,7 @@ private:
 
 public:
 
-const inline void EBOin(<boost::uint_t<64>EBO::exact){
+const inline void EBOin(boost::uint_t<64>EBO::exact){
 Sh.at(1,0)=EBO;
 return;
 }
