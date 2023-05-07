@@ -273,9 +273,9 @@ return Di.at(1,1);
 };
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-const inline GLubyte indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLuint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
-inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
+const inline unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
+inline float uni_tme,uni_tme_dlt,uni_mse;
 
 inline struct{
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
@@ -296,7 +296,7 @@ double hi;
 
 inline boost::atomic<int>Size;
 boost::atomic<int>tmm=166666000;
-boost::atomic<int>tmm2=100;
+boost::atomic<int>tmm2=50;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
@@ -446,7 +446,7 @@ nanoPause();
 return;
 }
 
-inline GLchar * rd_fl(const char * Fnm){
+inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 tie(result,results,file);
 if(file){
