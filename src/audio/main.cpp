@@ -97,7 +97,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},700);
+},1300);
 });
 
 const tem=document.getElementById('tim');
@@ -125,7 +125,7 @@ if(e.code=='KeyQ'){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},700);
+},2000);
 };
 }
 
