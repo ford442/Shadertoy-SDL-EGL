@@ -397,12 +397,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const long int xxx=mms2.at(0,0);
 const long int yyy=mms2.at(0,1);
-mms.at(0,0)=(boost::atomic<float>)xxx;
-mms.at(1,0)=(boost::atomic<float>)(i_size.at(0,0)-yyy);
+mms.at(0,0)=(float)xxx;
+mms.at(1,0)=(float)(i_size.at(0,0)-yyy);
 clk_l=false;
 }
-mms.at(2,0)=(boost::atomic<float>)mms2.at(0,0);
-mms.at(2,1)=(boost::atomic<float>)(i_size.at(0,0)-mms2.at(0,1));
+mms.at(2,0)=(float)mms2.at(0,0);
+mms.at(2,1)=(float)(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
 }
