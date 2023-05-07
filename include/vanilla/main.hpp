@@ -18,7 +18,6 @@
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/multiprecision/gmp.hpp>
 
-
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
 
