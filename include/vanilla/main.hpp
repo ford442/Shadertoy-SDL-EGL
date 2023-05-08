@@ -3,8 +3,8 @@
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
-// #include <torch/script.h>
-#include <torch/csrc/api/include/torch/all.h>
+#include <torch/script.h>
+// #include <torch/csrc/api/include/torch/all.h>
 // #include <ATen/ATen.h>
 
 #define BOOST_CHRONO_HEADER_ONLY 1
