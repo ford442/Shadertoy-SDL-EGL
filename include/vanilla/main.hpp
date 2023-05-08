@@ -239,7 +239,8 @@ return intrn.at(0,3);
 float noblock(float y){
 farray=y;
 return farray;
-  emscripten_set_main_loop((void(*)())mss,0,0);
+    std::cout << at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
+ // emscripten_set_main_loop((void(*)())mss,0,0);
 
 }
 
