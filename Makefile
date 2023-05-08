@@ -111,7 +111,7 @@ b3_video_shader_llvm:
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio:
-	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	em++ src/audio/main.cpp -c -std=gnu++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
