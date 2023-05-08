@@ -30,20 +30,20 @@ b3_shader_speed:
 	 em++ src/shader/main.cpp -c \
 	 -ffast-math -msimd128 -mbulk-memory -matomics -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fmerge-all-constants -fno-stack-protector \
 	 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
-	 -fno-math-errno -std=c++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
+	 -fno-math-errno -std=gnu++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG 
 	 ###         Link
-	 emcc main.o shader_speed.o -o s3023s.js -matomics --use-preload-plugins \
+	 emcc main.o shader_speed.o -o s3023s.js -std=gnu++17 -matomics --use-preload-plugins \
 	 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -flto=thin -mllvm -ffast-math -ffp-contract=fast -fchar8_t -ftree-vectorize -mbulk-memory -fno-stack-protector \
-	 -fmerge-all-constants -fwasm-exceptions -std=gnu++17 -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
+	 -fmerge-all-constants -fwasm-exceptions -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt \
 	 -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc++abi \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mpclmul -maes -msha -mfma -mbmi2 -mpopcnt \
 	 -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -mavxvnni -fblocks -fstrict-vtable-pointers -funsafe-math-optimizations \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb -sUSE_GLFW=0 \
-	 -sGLOBAL_BASE=16384 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=32MB -sUSE_WEBGPU=1 --closureFriendly \
+	 -sGLOBAL_BASE=16384 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB -sUSE_WEBGPU=1 --closureFriendly \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=1 -sSUPPORT_LONGJMP=0 -NDEBUG -BOOST_UBLAS_NDEBUG \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 \
 	 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
