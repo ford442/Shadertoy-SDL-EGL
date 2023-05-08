@@ -16,6 +16,6 @@
 #include <GLES3/gl32.h>
 #include <GLES3/gl3platform.h>
 
-#include <webgl/webgl2.h>  //  much better performance without
+// #include <webgl/webgl2.h>  //  much better performance without
 
-#include <emscripten/html5_webgl.h>
+// #include <emscripten/html5_webgl.h>
