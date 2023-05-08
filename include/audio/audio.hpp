@@ -34,12 +34,7 @@ void pl();
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/atomic.hpp>
 #include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
-#include <boost/cstdint.hpp>
 #include <boost/integer.hpp>
-
-using namespace ::boost::tuples;
-using namespace boost::numeric::ublas;
 
 #include <cstdint>
 #include <SDL2/SDL.h>
@@ -58,11 +53,11 @@ using namespace boost::numeric::ublas;
 #include <iostream>
 #include <emscripten.h>
 
-using void_tensor=tensor<boost::atomic<void *>>;
-using gi_tensor=tensor<boost::atomic<long long>>;
-using ub_tensor=tensor<boost::atomic<unsigned char *>>;
-using lu_tensor=tensor<boost::atomic<unsigned long long>>;
-using v_tensor=tensor<v128_t>;
+using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long long>>;
+using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
+using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long long>>;
+using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
@@ -72,7 +67,7 @@ v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
 
-inline struct{
+struct{
 GLubyte * snd;
 long long pos;
 SDL_AudioDeviceID dev;
@@ -89,27 +84,27 @@ SDL_AudioSpec request;
 
 public:
 
-static inline void snd_pos(boost::atomic<int> set){
+static void snd_pos(boost::atomic<int> set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 // sound_pos.at(0,0)=set;
 return;
 }
 
-static inline void snd_lft(long long set){
+static void snd_lft(long long set){
 sse.at(0,1)=wasm_i64x2_splat(set);
 sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-inline void snd_pos_u(unsigned long long set){
+static void snd_pos_u(unsigned long long set){
 sse2.at(0,0)=wasm_u64x2_splat(set);
 sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
-static inline void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-tie(stm,len);
+static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,0,1)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
@@ -127,10 +122,10 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-inline void plt(){
-tie(sound,sound_pos,sound_pos_u);
-tie(wave,sse,sse2);
-tie(bfr,request);
+void plt(){
+::boost::tuples::tie(sound,sound_pos,sound_pos_u);
+::boost::tuples::tie(wave,sse,sse2);
+::boost::tuples::tie(bfr,request);
 request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
