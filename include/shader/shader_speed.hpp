@@ -298,7 +298,7 @@ double hi;
 
 boost::atomic<int>Size;
 boost::atomic<int>tmm=166666000;
-boost::atomic<int>tmm2=50;
+boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
@@ -416,7 +416,6 @@ nanoPause();
 glUniform1f(uni_tme_dlt,f_time.at(1,0));
 nanoPause();
 glUniform1i(uni_frm,uni_i.at(0,0));
-nanoPause();
 return;
 }
 
@@ -442,7 +441,6 @@ mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
 uni();
-nanoPause();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 nanoPause();
 return;
