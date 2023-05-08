@@ -82,7 +82,7 @@ GLsizei i;
 
 public:
 
-inline unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=static_cast<GLsizei>(strlen(src[i]));
@@ -133,7 +133,7 @@ inline char frg_hdr_src[1000]=
 inline char frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 
-inline EGLint att_lst2[1000]={ 
+EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -146,7 +146,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_NONE,EGL_NONE
 };
 
-inline EGLint ctx_att[500]={
+EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
@@ -157,7 +157,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE,EGL_NONE
 };
 
-inline EGLint att_lst[1500]={
+EGLint att_lst[1500]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -225,22 +225,22 @@ private:
 
 public:
 
-const inline void EBOin(boost::uint_t<64>::exact EBO){
+const void EBOin(boost::uint_t<64>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 }
 
-const inline void VCOin(boost::uint_t<64>::exact VCO){
+const void VCOin(boost::uint_t<64>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 }
 
-const inline void VBOin(boost::uint_t<64>::exact VBO){
+const void VBOin(boost::uint_t<64>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 }
 
-const inline void setFloats(){
+const void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(0,1)=-1.0f;
 Fi.at(1,1)=0.0f;
@@ -277,11 +277,11 @@ return Di.at(1,1);
 };
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
-const inline unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline float uni_tme,uni_tme_dlt,uni_mse;
 
-inline struct{
+struct{
 boost::chrono::duration<float,boost::chrono::seconds::period>time_spana;
 boost::chrono::duration<float,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
@@ -289,7 +289,7 @@ boost::chrono::steady_clock::time_point t2;
 boost::chrono::steady_clock::time_point t3;
 }u_time;
 
-inline struct{
+struct{
 unsigned int VBO,EBO,VCO;
 }shad;
 
@@ -298,17 +298,17 @@ double wi;
 double hi;
 }mouse;
 
-inline boost::atomic<int>Size;
+boost::atomic<int>Size;
 boost::atomic<int>tmm=166666000;
 boost::atomic<int>tmm2=50;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-const inline boost::atomic<int>ele=36;
+const boost::atomic<int>ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
-inline EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -319,7 +319,7 @@ ms_l=false;
 return(EM_BOOL)1;
 }
 
-inline EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
@@ -361,38 +361,38 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static inline void PRGin(unsigned int prg){
+static void PRGin(unsigned int prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static inline void u_iTime_set(double set){
+static void u_iTime_set(double set){
 d_time.at(0,0)=set;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
-static inline void u_iSize_set(float set){
+static void u_iSize_set(float set){
 sse.at(1,0)=wasm_f64x2_splat(set);
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static inline void i_iSize_set(boost::int_t<64>::exact set){
+static void i_iSize_set(boost::int_t<64>::exact set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static inline void u_iTimeDelta_set(float set){
+static void u_iTimeDelta_set(float set){
 sse.at(0,1)=wasm_f64x2_splat(set);
 f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-static inline void uni(){
+static void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -431,7 +431,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 nanoPause();
 }
 
-void Rend(){
+static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::steady_clock::now();
