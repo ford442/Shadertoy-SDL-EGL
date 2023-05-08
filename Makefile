@@ -136,11 +136,11 @@ b3_audio:
 
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu++17 -stdlib=libc++ -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
-	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -I/content/RAMDRIVE2/ATen/aten/src/
+	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -I../libtorch/include/ATen/ATen.h -I../libtorch/include/aten/src/ATen/core/function.h
 	 emcc src/vanilla/js.c -c -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -std=gnu++17 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -flto=thin \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
-	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ -I/content/RAMDRIVE2/ATen/aten/src/
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ -I../libtorch/include/ATen/ATen.h
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DWORDS_BIGENDIAN=1 -DCPU_IS_LITTLE_ENDIAN=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
