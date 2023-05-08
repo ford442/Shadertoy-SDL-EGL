@@ -589,7 +589,7 @@ glEnable(GL_STENCIL_TEST);
 glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
