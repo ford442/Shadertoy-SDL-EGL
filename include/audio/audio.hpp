@@ -127,12 +127,12 @@ void plt(){
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
 request.freq=44100;
-request.format=AUDIO_S32;
+request.format=AUDIO_S16LSB;
 request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
-request.format=AUDIO_S32;
+request.format=AUDIO_S16LSB;
 request.channels=2;
 request.samples=128;
 snd_pos(0);
