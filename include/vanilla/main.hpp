@@ -3,7 +3,7 @@
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
-// #include "/usr/local/lib/python3.10/dist-packages/torch/include/torch/csrc/api/include/torch/torch.h"
+#include </torch/torch.h>
 // #include <ATen/ATen.h>
 
 #define BOOST_CHRONO_HEADER_ONLY 1
