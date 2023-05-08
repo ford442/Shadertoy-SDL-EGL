@@ -222,17 +222,17 @@ private:
 
 public:
 
-const void EBOin(boost::uint_t<128>::exact EBO){
+const void EBOin(boost::uint_t<80>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 }
 
-const void VCOin(boost::uint_t<128>::exact VCO){
+const void VCOin(boost::uint_t<80>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 }
 
-const void VBOin(boost::uint_t<128>::exact VBO){
+const void VBOin(boost::uint_t<80>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 }
@@ -377,7 +377,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
-static void i_iSize_set(boost::int_t<128>::exact set){
+static void i_iSize_set(boost::int_t<80>::exact set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
