@@ -71,8 +71,6 @@ void str();
   
 }
 
-using namespace ::boost::tuples;
-
 class Compile
 {
 
@@ -189,16 +187,16 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
-using mouse_tensor=tensor<boost::atomic<float>>;
-using shad_tensor=tensor<unsigned int>;
-using prg_tensor=tensor<unsigned int>;
-using sz_tensor=tensor<boost::atomic<int>>;
-using f_tensor=tensor<boost::atomic<float>>;
-using d_tensor=tensor<boost::atomic<double>>;
-using v_tensor=tensor<v128_t>;
-using i_tensor=tensor<boost::atomic<int>>;
-using li_tensor=tensor<long>;
-using void_tensor=tensor<boost::atomic<void *>>;
+using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
+using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::atomic<int>>;
+using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+using d_tensor=boost::numeric::ublas::tensor<boost::atomic<double>>;
+using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+using i_tensor=boost::numeric::ublas::tensor<boost::atomic<int>>;
+using li_tensor=boost::numeric::ublas::tensor<long>;
+using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 
 v_tensor sse=v_tensor{2,2};
 v_tensor sse2=v_tensor{2,2};
@@ -452,7 +450,7 @@ return;
 
 inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
-tie(result,results,file);
+::boost::tuples::tie(result,results,file);
 if(file){
 int32_t stat=fseek(file,(int32_t)0,SEEK_END);
 if(stat!=0){
@@ -481,23 +479,23 @@ void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
-tie(Fi,f_time,sse);
-tie(uni_i,iFps,Si,sse3);
-tie(cntx,mms);
-tie(i_size,cntxi);
-tie(mouse.hi,mouse.wi,d_time);
-tie(u_time.t1,u_time.t2,u_time.t3);
-tie(shad.EBO,shad.VBO,shad.VCO,sse4);
-tie(config_size,major,minor);
-tie(display,surface,eglconfig);
-tie(attr,ctxegl,ctx);
-tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
-tie(vrt,indc,ele);
-tie(retCl,retMu,retMd,retMv);
-tie(retSa,retSb,retSc);
-tie(ms_l,clk_l);
-tie(u_time.time_spana,u_time.time_spanb);
-tie(rem,req,tmm);
+::boost::tuples::tie(Fi,f_time,sse);
+::boost::tuples::tie(uni_i,iFps,Si,sse3);
+::boost::tuples::tie(cntx,mms);
+::boost::tuples::tie(i_size,cntxi);
+::boost::tuples::tie(mouse.hi,mouse.wi,d_time);
+::boost::tuples::tie(u_time.t1,u_time.t2,u_time.t3);
+::boost::tuples::tie(shad.EBO,shad.VBO,shad.VCO,sse4);
+::boost::tuples::tie(config_size,major,minor);
+::boost::tuples::tie(display,surface,eglconfig);
+::boost::tuples::tie(attr,ctxegl,ctx);
+::boost::tuples::tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
+::boost::tuples::tie(vrt,indc,ele);
+::boost::tuples::tie(retCl,retMu,retMd,retMv);
+::boost::tuples::tie(retSa,retSb,retSc);
+::boost::tuples::tie(ms_l,clk_l);
+::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
+::boost::tuples::tie(rem,req,tmm);
 eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
@@ -614,8 +612,8 @@ src[3]=frg_ftr;
 unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 unsigned int shd_prg=glCreateProgram();
 PRGin(shd_prg);
-tie(Sh,shd_prg);
-tie(frag,vtx);
+::boost::tuples::tie(Sh,shd_prg);
+::boost::tuples::tie(frag,vtx);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
