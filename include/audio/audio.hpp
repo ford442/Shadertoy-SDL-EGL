@@ -129,12 +129,12 @@ void plt(){
 request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
-request.samples=256;
+request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
 request.format=AUDIO_S32;
 request.channels=2;
-request.samples=256;
+request.samples=128;
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
