@@ -5,7 +5,7 @@
 #include "webgpu/webgpu_cpp.h"
 // #include <torch/script.h>
 // #include <torch/csrc/api/include/torch/all.h>
-#include <ATen.h>
+#include <ATen/ATen.h>
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
