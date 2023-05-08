@@ -23,7 +23,7 @@ b3_shader_speed:
 	 -std=gnu++17 -stdlib=libc++ -flto=thin -fchar8_t -matomics -ffast-math -funsafe-math-optimizations -fno-math-errno \
 	 -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fstrict-vtable-pointers -mbulk-memory \
-	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -BOOST_UBLAS_NDEBUG \
+	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -BOOST_UBLAS_NDEBUG -DSIMD=1 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -Rpass=loop-vectorize \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Main
@@ -32,7 +32,7 @@ b3_shader_speed:
 	 -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=gnu++17 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
-	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG 
+	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG -DSIMD=1
 	 ###         Link
 	 emcc main.o shader_speed.o -o s3023s.js -std=gnu++17 -matomics --use-preload-plugins \
 	 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
@@ -47,7 +47,7 @@ b3_shader_speed:
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=1 -sSUPPORT_LONGJMP=0 -NDEBUG -BOOST_UBLAS_NDEBUG \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 \
 	 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 \
+	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 -DSIMD=1 \
 	 -sUSE_WEBGL2=1 -fuse-ld=mold -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
@@ -111,25 +111,25 @@ b3_video_shader_llvm:
 	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio:
-	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
-	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=1 -flto=thin -ffast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
 	emcc main.o audio.o -o a3020.js -mllvm -flto=thin -std=gnu++17 -stdlib=libc++ -ffp-contract=fast -mtune=tigerlake -march=corei7-avx -fno-math-errno \
 	-Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
-	-fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 -sASSERTIONS=2 \
+	-fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 -DSIMD=1 -sASSERTIONS=2 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 -sSUPPORT_LONGJMP=0 \
         -wasm-enable-eh -exception-model=wasm -sPRECISE_I64_MATH=2 -sUSE_BOOST_HEADERS=1 -Wall -Wextra -pedantic \
 	-fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc++abi \
         -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -BOOST_UBLAS_NDEBUG -NDEBUG \
 	-msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
-	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 -sASSERTIONS=2 \
+	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 -sASSERTIONS=2 -sTOTAL_STACK=8MB \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
