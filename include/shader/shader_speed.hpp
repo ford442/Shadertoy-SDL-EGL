@@ -34,7 +34,6 @@
 #define BOOST_UBLAS_USE_LONG_DOUBLE
 #define BOOST_NO_EXCEPTIONS 
 
-#include <boost/cstdint.hpp>
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
