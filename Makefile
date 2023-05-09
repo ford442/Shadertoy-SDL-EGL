@@ -24,20 +24,20 @@ b3_shader_speed:
 	 -fborland-extensions -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fstrict-vtable-pointers -mbulk-memory \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -BOOST_UBLAS_NDEBUG -DSIMD=1 \
-	 -fasync-exceptions -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -Rpass=loop-vectorize \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1
 	 ###         Main
 	 em++ src/shader/main.cpp -c \
 	 -O0 -ffast-math -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fmerge-all-constants -fno-stack-protector \
 	 -fborland-extensions -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=gnu++17 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
-	 -fasync-exceptions -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG -DSIMD=1
 	 ###         Link
 	 emcc main.o shader_speed.o -o s3024s.js -std=gnu++17 --use-preload-plugins \
 	 -O0 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fborland-extensions -flto=thin -mllvm -ffast-math -ffp-contract=fast -fchar8_t -ftree-vectorize -mbulk-memory -fno-stack-protector \
-	 -fmerge-all-constants -fasync-exceptions -fwasm-exceptions -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
+	 -fmerge-all-constants -fwasm-exceptions -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt \
 	 -fasynchronous-unwind-tables -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc++abi \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mpclmul -msha -mfma -mbmi2 -mpopcnt \
