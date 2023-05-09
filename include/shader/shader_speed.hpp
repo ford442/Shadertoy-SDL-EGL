@@ -109,23 +109,23 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision lowp int;\n"
-"precision lowp float;\n";
+"precision mediump int;\n"
+"precision mediump float;\n";
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 inline char frg_hdr_src[1000]=
-"precision lowp sampler3D;precision lowp sampler2D;"
+"precision lowp sampler3D;precision mediump sampler2D;"
 "precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
 "precision lowp isampler2D;precision lowp isampler3D;precision lowp isamplerCube;"
 "precision lowp isampler2DArray;precision lowp usampler2D;precision lowp usampler3D;"
 "precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
 "precision lowp sampler2DArrayShadow;"
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform highp float iTime;uniform lowp float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out vec4 fragColor;\n";
+"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"out highp vec4 fragColor;\n";
 
 inline char frg_ftr_src[100]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
@@ -504,10 +504,10 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_FALSE;
+attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -660,8 +660,8 @@ glEnable(GL_SCISSOR_TEST);
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
