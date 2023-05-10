@@ -383,6 +383,10 @@ EM_JS(void,vid,(),{
 // document.getElementsByClassName('html5-main-video')[0].id='player';
 var vv=document.getElementsByClassName('html5-main-video')[0];
 var sh4d=true;
+let runn=false;
+document.getElementById('runBtn').addEventListener('click',function(){
+runn=true;
+});
 const timFrm=10.42;
 var $bb;
 const $H=Module.HEAPF64.buffer;
@@ -493,6 +497,10 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
+ 
+ 
+ 
+ 
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('EXT_color_buffer_float');
@@ -512,7 +520,7 @@ inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
 h$=parseInt(inh,10);
-vv==document.getElementsByClassName('html5-main-video')[0];
+vv=document.getElementsByClassName('html5-main-video')[0];
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*8;
@@ -530,12 +538,14 @@ var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
+
+var d=S();if(d)d();d=S();function S(){
+if (runn==true){
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
-var d=S();if(d)d();d=S();function S(){
-vv==document.getElementsByClassName('html5-main-video')[0];
+vv=document.getElementsByClassName('html5-main-video')[0];
 inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
@@ -586,7 +596,7 @@ S();
 };
 return()=>{
 T=true;
-};
+};}
 }
 
 });
