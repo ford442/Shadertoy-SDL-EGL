@@ -378,12 +378,12 @@ return;
 }
 
 EM_JS(void,vid,(),{
-
+document.getElementsByClassName('ytp-large-play-button')[0].click();
 "use strict";
 // document.getElementsByClassName('html5-main-video')[0].id='player';
 var vv=document.getElementsByClassName('html5-main-video')[0];
 var sh4d=true;
-let runn=false;
+let runn=true;
 document.getElementById('runBtn').addEventListener('click',function(){
 runn=true;
 });
