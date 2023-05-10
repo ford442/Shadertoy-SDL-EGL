@@ -8,7 +8,7 @@
 
 #define VLEAVE _mm256_zeroupper
 
-#include <xmmintrin.h>
+// #include <xmmintrin.h>
 #include <immintrin.h> 
 #include <nmmintrin.h>  //  sse 4.2
 #include <unistd.h>
