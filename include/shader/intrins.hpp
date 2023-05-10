@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 
 // #include <wasm_simd128.h>
 
@@ -6,9 +6,9 @@
 // #include <smmintrin.h>  // sse 4.1
 // #include <mmintrin.h>  //  experimental
 // #include <xmmintrin.h>
-#include <avxintrin.h>  // AVX
+// #include <avxintrin.h>  // AVX
 
-#include <mm3dnow.h>  //  experimental
+// #include <mm3dnow.h>  //  experimental
 
 #define VLEAVE _mm256_zeroupper
 
