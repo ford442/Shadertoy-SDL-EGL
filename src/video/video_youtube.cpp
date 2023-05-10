@@ -380,8 +380,8 @@ return;
 EM_JS(void,vid,(),{
 
 "use strict";
-document.getElementsByClassName('html5-main-video')[0].id='player';
-var vv=document.getElementById("player");
+// document.getElementsByClassName('html5-main-video')[0].id='player';
+var vv=document.getElementsByClassName('html5-main-video')[0];
 var sh4d=true;
 const timFrm=10.42;
 var $bb;
@@ -512,7 +512,7 @@ inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
 h$=parseInt(inh,10);
-vv=document.getElementById("player");
+vv==document.getElementsByClassName('html5-main-video')[0];
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 la=h$*h$*8;
@@ -535,7 +535,7 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
-vv=document.getElementById("player");
+vv==document.getElementsByClassName('html5-main-video')[0];
 inh=window.innerHeight;
 $S=parseInt(inh,10);
 w$=parseInt(inh,10);
