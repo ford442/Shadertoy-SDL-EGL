@@ -1,10 +1,10 @@
 #pragma once
 
 #include <wasm_simd128.h>
-#include <mmintrin.h>  //  experimental
 
 #include <tmmintrin.h> // ssse 3
 #include <smmintrin.h>  // sse 4.1
+#include <mmintrin.h>  //  experimental
 
 #define VLEAVE _mm256_zeroupper
 
