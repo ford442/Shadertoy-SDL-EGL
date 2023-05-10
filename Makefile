@@ -72,7 +72,7 @@ b3_combine_dev:
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 --closureFriendly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sDYNAMIC_EXECUTION=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=2048 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
+	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_googleStreetView_dev:
 	 em++ src/video/main_google_street.cpp -c -O0 -std=c++20 -stdlib=libc++ -flto -fmerge-all-constants -mbulk-memory \
@@ -90,7 +90,7 @@ b3_googleStreetView_dev:
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sUSE_GLFW=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
+	  --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_video_shader_llvm:
 	 em++ src/video/main_shader.cpp -c -std=gnu++2b -stdlib=libc++ -flto=thin -fno-math-errno -O3 \
@@ -411,7 +411,7 @@ b3_video_google_llvm:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc main_google_street.o video_google_street.o -o g0003.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
