@@ -380,7 +380,7 @@ return;
 EM_JS(void,vid,(),{
 
 "use strict";
-
+document.getElementsByClassName('html5-main-video')[0].id='player';
 var vv=document.getElementById("player");
 var sh4d=true;
 const timFrm=10.42;
