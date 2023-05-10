@@ -207,7 +207,7 @@ glPolygonOffset(0.0f,0.0f);
 // glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-glBlendEquationSeparate(GL_MAX,GL_MAX);
+glBlendEquationSeparate(GL_MIN,GL_MIN);
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
 glClearColor(gF,gF,gF,gF);
 glGenBuffers((GLsizei)1,&VBO);
