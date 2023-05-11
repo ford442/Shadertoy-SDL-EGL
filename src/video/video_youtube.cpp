@@ -379,7 +379,7 @@ return;
 
 EM_JS(void,vid,(),{
 "use strict";
-
+var sh4d=true;
 const timFrm=10.42;
 var $bb;
 const $H=Module.HEAPF64.buffer;
