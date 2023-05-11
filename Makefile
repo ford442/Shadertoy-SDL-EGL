@@ -35,7 +35,7 @@ b3_shader_speed:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG -DSIMD=1
 	 ###         Link
-	 @sh clang12.sh; \
+	 @sh clang15.sh; \
 	 emcc main.o shader_speed.o -o s3024s.js -std=gnu++17 --use-preload-plugins \
 	 -fPIC -O0 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fborland-extensions -flto=thin -mllvm -ffast-math -ffp-contract=fast -fchar8_t -ftree-vectorize -mbulk-memory -fno-stack-protector \
