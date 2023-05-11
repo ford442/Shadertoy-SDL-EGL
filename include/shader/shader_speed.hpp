@@ -109,7 +109,7 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision mediump int;\n"
+// "precision mediump int;\n"
 "precision mediump float;\n";
 
 inline char vrt_bdy_src[100]=
@@ -405,15 +405,15 @@ clk_l=false;
 mms.at(2,0)=(float)mms2.at(0,0);
 mms.at(2,1)=(float)(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-nanoPause();
+// nanoPause();
 }
 else{
 clk_l=true;
 }
 glUniform1f(uni_tme,d_time.at(0,0));
-nanoPause();
+// nanoPause();
 glUniform1f(uni_tme_dlt,f_time.at(1,0));
-nanoPause();
+// nanoPause();
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
@@ -424,7 +424,7 @@ glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
-nanoPause();
+// nanoPause();
 }
 
 static void Rend(){
@@ -441,7 +441,7 @@ mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-nanoPause();
+// nanoPause();
 return;
 }
 
