@@ -378,8 +378,17 @@ return;
 }
 
 EM_JS(void,vid,(),{
-document.getElementsByClassName('ytp-large-play-button ytp-button ytp-large-play-button-red-bg')[0].click();
 "use strict";
+var player;
+function onYouTubeIframeAPIReady() {
+player = new YT.Player('mv', {
+videoId: 'JKJMbuSnqgg?html5=1',
+});
+};
+function onPlayerReady(){
+player.playVideo();
+};
+document.getElementsByClassName('ytp-large-play-button ytp-button ytp-large-play-button-red-bg')[0].click();
 // document.getElementsByClassName('html5-main-video')[0].id='player';
 var vv=document.getElementsByClassName('html5-main-video')[0];
 var sh4d=true;
