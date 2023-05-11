@@ -379,27 +379,7 @@ return;
 
 EM_JS(void,vid,(),{
 "use strict";
-var player;
-function onYouTubeIframeAPIReady() {
-player = new YT.Player('mv', {
-videoId: 'JKJMbuSnqgg?html5=1',
-playerVars: {
-'playsinline': 1,
-'id': 'player'
-},});
-};
-function onPlayerReady(){
- document.getElementsByClassName('ytp-large-play-button ytp-button ytp-large-play-button-red-bg')[0].click();
-console.log('play video');
-player.playVideo();
-};
-// document.getElementsByClassName('html5-main-video')[0].id='player';
-var vv=document.getElementsByClassName('html5-main-video')[0];
-var sh4d=true;
-let runn=true;
-document.getElementById('runBtn').addEventListener('click',function(){
-runn=true;
-});
+
 const timFrm=10.42;
 var $bb;
 const $H=Module.HEAPF64.buffer;
