@@ -19,8 +19,7 @@ b3_shader_llvm:
 
 b3_shader_speed:
 	 ###         Shader
-	 @update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-6.0 100; \
-	 @update-alternatives --install /usr/bin/clang clang /usr/bin/clang-6.0 100; \
+	 @sh clang6.sh; \
 	 em++ src/shader/shader_speed.cpp -c \
 	 -fPIC -O0 -std=gnu++17 -stdlib=libc++ -flto=thin -fchar8_t -ffast-math -funsafe-math-optimizations -fno-math-errno \
 	 -fborland-extensions -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
@@ -36,8 +35,7 @@ b3_shader_speed:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG -DSIMD=1
 	 ###         Link
-	 @update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-12 100; \
-	 @update-alternatives --install /usr/bin/clang clang /usr/bin/clang-12 100; \
+	 @sh clang12.sh; \
 	 emcc main.o shader_speed.o -o s3024s.js -std=gnu++17 --use-preload-plugins \
 	 -fPIC -O0 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -fborland-extensions -flto=thin -mllvm -ffast-math -ffp-contract=fast -fchar8_t -ftree-vectorize -mbulk-memory -fno-stack-protector \
