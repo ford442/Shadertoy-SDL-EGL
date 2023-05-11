@@ -383,7 +383,10 @@ var player;
 function onYouTubeIframeAPIReady() {
 player = new YT.Player('mv', {
 videoId: 'JKJMbuSnqgg?html5=1',
-});
+playerVars: {
+'playsinline': 1,
+'id': 'player'
+},});
 };
 function onPlayerReady(){
 player.playVideo();
