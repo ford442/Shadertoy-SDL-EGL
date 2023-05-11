@@ -491,9 +491,6 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
  
- 
- 
- 
 // gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('EXT_color_buffer_float');
@@ -533,7 +530,6 @@ r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:aga
 t.setConstants({nblnk:nblank$,blnk:blank$});
 
 var d=S();if(d)d();d=S();function S(){
-if (runn==true){
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
@@ -590,7 +586,6 @@ S();
 return()=>{
 T=true;
 };}
-}
 
 });
 
