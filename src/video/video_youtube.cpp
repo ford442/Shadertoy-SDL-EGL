@@ -508,9 +508,9 @@ gl.disable(gl.DITHER);
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
 inh=window.innerHeight;
-$S=parseInt(inh,10);
-w$=parseInt(inh,10);
-h$=parseInt(inh,10);
+$S=inh;
+w$=inh;
+h$=inh;
 vv=document.getElementById('mv');
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
@@ -537,9 +537,9 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);var 
 };
 vv=document.getElementById('mv');
 inh=window.innerHeight;
-$S=parseInt(inh,10);
-w$=parseInt(inh,10);
-h$=parseInt(inh,10);
+$S=inh;
+w$=inh;
+h$=inh;
 var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
