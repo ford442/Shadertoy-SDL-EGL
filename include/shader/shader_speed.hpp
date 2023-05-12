@@ -127,7 +127,7 @@ inline char frg_hdr_src[1000]=
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out highp vec4 fragColor;\n";
 
-inline char frg_ftr_src[100]=
+inline char frg_ftr_src[350]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
 "int _N=3;void mainImage(out vec4 O,vec2 U){"
