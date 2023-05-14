@@ -21,7 +21,7 @@ b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_speed.cpp -c \
-	 -Wno-implicit-function-declaration -fPIC -O0 -std=gnu++17 -stdlib=libc++ -flto=thin -fchar8_t -ffast-math -funsafe-math-optimizations -fno-math-errno \
+	 -Wno-implicit-function-declaration -fPIC -O0 -std=gnu++20 -stdlib=libc++ -flto=thin -fchar8_t -ffast-math -funsafe-math-optimizations -fno-math-errno \
 	 -fborland-extensions -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fstrict-vtable-pointers -mbulk-memory \
 	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -BOOST_UBLAS_NDEBUG -DSIMD=1 \
@@ -31,14 +31,14 @@ b3_shader_speed:
 	 em++ src/shader/main.cpp -c \
 	 -Wno-implicit-function-declaration -fPIC -O0 -ffast-math -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fmerge-all-constants -fno-stack-protector \
 	 -fborland-extensions -flto=thin -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
-	 -fno-math-errno -std=gnu++17 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
+	 -fno-math-errno -std=gnu++20 -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG -DSIMD=1
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc main.o shader_speed.o -o s3024s.js -std=gnu++17 --use-preload-plugins \
+	 emcc main.o shader_speed.o -o s3024s.js -std=gnu++20 --use-preload-plugins \
 	 -Wno-implicit-function-declaration -fPIC -O0 -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
-	 -fborland-extensions -flto=thin -mllvm -ffast-math -ffp-contract=fast -fchar8_t -ftree-vectorize -mbulk-memory -fno-stack-protector \
+	 -fborland-extensions -flto=thin -mllvm -ffast-math -ffp-contract=fast -ftree-vectorize -mbulk-memory -fno-stack-protector \
 	 -fmerge-all-constants -fwasm-exceptions -stdlib=libc++ -fno-math-errno -wasm-enable-eh -exception-model=wasm \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt \
 	 -fasynchronous-unwind-tables -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc++abi \
