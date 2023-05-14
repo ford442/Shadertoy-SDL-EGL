@@ -1,7 +1,7 @@
 #pragma once
 
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <webgl/webgl2.h>  //  much better performance without
+// #include <webgl/webgl2.h>  //  much better performance without
 
 #define GL_GLES_PROTOTYPES 1
 #include <GLES3/gl3.h>
