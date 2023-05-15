@@ -146,18 +146,26 @@ document.getElementById('sizeUp').addEventListener('click',function(){
 // Module.ccall('vu');
 document.getElementById('scanvas').width=window.innerHeight*1.5;
 document.getElementById('scanvas').height=window.innerHeight*1.5;
+setTimeout(function(){
 Module.ccall('uu');
+},100);
+setTimeout(function(){
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
+},200);
 });
  
 document.getElementById('sizeDown').addEventListener('click',function(){
 // Module.ccall('vd');
 document.getElementById('scanvas').width=window.innerHeight/1.5;
 document.getElementById('scanvas').height=window.innerHeight/1.5;
+setTimeout(function(){
 Module.ccall('ud');
+},100);
+setTimeout(function(){
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
+},200);
 });
 
 document.getElementById('startBtn').addEventListener('click',function(){
