@@ -142,6 +142,24 @@ document.getElementById('viewUp').addEventListener('click',function(){
 Module.ccall('vu');
 });
 
+document.getElementById('sizeUp').addEventListener('click',function(){
+Module.ccall('vu');
+document.getElementById('scanvas').width=window.innerHeight*1.5;
+document.getElementById('scanvas').height=window.innerHeight*1.5;
+Module.ccall('uu');
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
+});
+ 
+document.getElementById('sizeDown').addEventListener('click',function(){
+Module.ccall('vd');
+document.getElementById('scanvas').width=window.innerHeight/1.5;
+document.getElementById('scanvas').height=window.innerHeight/1.5;
+Module.ccall('ud');
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
+});
+
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -166,6 +184,8 @@ if(e.code=='KeyA'){document.getElementById('uniUp').click();};
 if(e.code=='KeyD'){document.getElementById('uniDown').click();};
 if(e.code=='KeyW'){document.getElementById('viewUp').click();};
 if(e.code=='KeyS'){document.getElementById('viewDown').click();};
+if(e.code=='Key1'){document.getElementById('sizeDown').click();};
+if(e.code=='Key3'){document.getElementById('sizeUp').click();};
 }
 pnnl.addEventListener('keydown',Key);
 
