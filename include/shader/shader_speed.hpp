@@ -427,6 +427,28 @@ return;
 
 void swap(){
 emscripten_cancel_main_loop();
+emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+Size=static_cast<int>(mouse.hi);
+i_iSize_set(Size);
+u_iSize_set(Size);
+mms.at(0,0)=0.5*t_size.at(0,0);
+mms.at(0,1)=0.5*t_size.at(0,0);
+mms.at(1,0)=0.5*t_size.at(0,0);
+mms.at(1,1)=0.5*t_size.at(0,0);
+glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+mms.at(2,0)=t_size.at(0,0)*0.5;
+mms.at(2,1)=t_size.at(0,0)*0.5;
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
+glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+u_iTime_set(0.0f);
+u_iTimeDelta_set(0.0f);
+u_time.t1=boost::chrono::steady_clock::now();
+u_iTime_set(u_time.time_spana.count());
+u_iTimeDelta_set(u_time.time_spanb.count());
+glFlush();
+glFinish();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
