@@ -130,7 +130,7 @@ document.getElementById('uniDown').addEventListener('click',function(){
 Module.ccall('ud');
 });
  
-document.getElementById('ViewDown').addEventListener('click',function(){
+document.getElementById('viewDown').addEventListener('click',function(){
 Module.ccall('vd');
 });
  
