@@ -184,8 +184,8 @@ if(e.code=='KeyA'){document.getElementById('uniUp').click();};
 if(e.code=='KeyD'){document.getElementById('uniDown').click();};
 if(e.code=='KeyW'){document.getElementById('viewUp').click();};
 if(e.code=='KeyS'){document.getElementById('viewDown').click();};
-if(e.code=='Key1'){document.getElementById('sizeDown').click();};
-if(e.code=='Key3'){document.getElementById('sizeUp').click();};
+if(e.code=='Digit1'){document.getElementById('sizeDown').click();};
+if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
 }
 pnnl.addEventListener('keydown',Key);
 
