@@ -130,7 +130,7 @@ inline char frg_hdr_src[1000]=
 inline char frg_ftr_src[350]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
-"int _N=3;void mainImage(out vec4 O,vec2 U){"
+"int _N=32;void mainImage(out vec4 O,vec2 U){"
 "vec4 o;O=vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
@@ -182,7 +182,7 @@ EGL_BLUE_SIZE,(EGLint)32,
 EGL_ALPHA_SIZE,(EGLint)32,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)32,
-EGL_BUFFER_SIZE,(EGLint)32,
+EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
