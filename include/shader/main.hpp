@@ -2,8 +2,8 @@
 
 #pragma once
 
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD 0
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD -1
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
