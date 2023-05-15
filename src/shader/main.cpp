@@ -125,6 +125,22 @@ document.getElementById('startBtn2').addEventListener('click',function(){
 Module.ccall('swp');
 rrun();
 });
+ 
+document.getElementById('uniDown').addEventListener('click',function(){
+Module.ccall('ud');
+});
+ 
+document.getElementById('ViewDown').addEventListener('click',function(){
+Module.ccall('vd');
+});
+ 
+document.getElementById('uniUp').addEventListener('click',function(){
+Module.ccall('uu');
+});
+ 
+document.getElementById('viewUp').addEventListener('click',function(){
+Module.ccall('vu');
+});
 
 document.getElementById('startBtn').addEventListener('click',function(){
 document.getElementById('circle').width=window.innerWidth;
@@ -172,5 +188,5 @@ FS.mkdir('/shader');
 });
 tie(JS.Th,JS.rD,JS.Dr);
 jss();
-return 0;
+return 1;
 }
