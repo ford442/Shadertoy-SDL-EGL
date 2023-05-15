@@ -425,6 +425,30 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
+void uniUP(){
+glUniform3f(uni_res,t_size.at(0,0)*1.5,t_size.at(0,0)*1.5,gpu.gF());
+glUniform3f(smp_chn_res,t_size.at(0,0)*1.5,t_size.at(0,0)*1.5,gpu.gF());
+//  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+return;
+}
+
+void uniDOWN(){
+glUniform3f(uni_res,t_size.at(0,0)/1.5,t_size.at(0,0)/1.5,gpu.gF());
+glUniform3f(smp_chn_res,t_size.at(0,0)/1.5,t_size.at(0,0)/1.5,gpu.gF());
+// glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+return;
+}
+
+void viewUP(){
+glViewport((GLint)0,(GLint)0,i_size.at(0,0)*1.5,i_size.at(0,0)*1.5);
+return;
+}
+
+void viewDOWN(){
+glViewport((GLint)0,(GLint)0,i_size.at(0,0)/1.5,i_size.at(0,0)/1.5);
+return;
+}
+
 void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -454,6 +478,7 @@ glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
 // nanoPause();
+return;
 }
 
 static void Rend(){
