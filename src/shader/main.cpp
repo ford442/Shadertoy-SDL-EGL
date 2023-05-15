@@ -162,6 +162,10 @@ document.getElementById('di').click();
 function Key(e){
 if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
 if(e.code=='KeyE'){document.getElementById('startBtn2').click();};
+if(e.code=='KeyA'){document.getElementById('uniUp').click();};
+if(e.code=='KeyD'){document.getElementById('uniDown').click();};
+if(e.code=='KeyW'){document.getElementById('viewUp').click();};
+if(e.code=='KeyS'){document.getElementById('viewDown').click();};
 }
 pnnl.addEventListener('keydown',Key);
 
