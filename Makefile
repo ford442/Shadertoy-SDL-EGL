@@ -14,7 +14,7 @@ b3_shader_llvm:
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc++abi -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=0 -sSTACK_OVERFLOW_CHECK=2 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sGL_UNSAFE_OPTS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd","_up","_uu","_vd","_vu"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_speed:
@@ -51,7 +51,7 @@ b3_shader_speed:
 	 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 -DSIMD=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_up","_uu","_vd","_vu"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_combine_dev:
