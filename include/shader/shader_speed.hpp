@@ -551,7 +551,6 @@ eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
-glDisable(GL_DITHER);
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
 nanoPause();
