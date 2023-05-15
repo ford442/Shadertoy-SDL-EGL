@@ -7,8 +7,8 @@
 
 #pragma STDC FP_CONTRACT ON
 
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD 0
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD -1
 
 #pragma STDC CX_LIMITED_RANGE ON
 
@@ -109,7 +109,7 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision mediump int;\n"
+"precision highp int;\n"
 "precision mediump float;\n";
 
 inline char vrt_bdy_src[100]=
@@ -117,14 +117,14 @@ inline char vrt_bdy_src[100]=
 
 inline char frg_hdr_src[1000]=
 "precision mediump sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;"
 "uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out highp vec4 fragColor;\n";
 
 inline char frg_ftr_src[350]=
@@ -170,7 +170,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -186,7 +186,7 @@ EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,8,
+EGL_SAMPLES,32,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -535,17 +535,17 @@ nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(mouse.hi);
+u_iSize_set(Size);
 mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_polygon_offset_clamp");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counter_ops");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counter_ops");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
@@ -565,25 +565,26 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_robustness");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_create_context_robustness");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_robustness");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gpu_shader_fp64");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gpu_shader_fp64");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
+glEnable(MULTISAMPLE_EXT);
 // glDepthFunc(GL_LEQUAL);
 glDepthFunc(GL_LESS);
 glEnable(GL_STENCIL_TEST);
