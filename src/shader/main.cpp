@@ -143,7 +143,7 @@ Module.ccall('vu');
 });
 
 document.getElementById('sizeUp').addEventListener('click',function(){
-Module.ccall('vu');
+// Module.ccall('vu');
 document.getElementById('scanvas').width=window.innerHeight*1.5;
 document.getElementById('scanvas').height=window.innerHeight*1.5;
 Module.ccall('uu');
@@ -152,7 +152,7 @@ document.getElementById('scanvas').height=window.innerHeight;
 });
  
 document.getElementById('sizeDown').addEventListener('click',function(){
-Module.ccall('vd');
+// Module.ccall('vd');
 document.getElementById('scanvas').width=window.innerHeight/1.5;
 document.getElementById('scanvas').height=window.innerHeight/1.5;
 Module.ccall('ud');
