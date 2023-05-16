@@ -241,7 +241,7 @@ return intrn.at(0,3);
 }
   
 // native_simd<float> noblock(float y){
-noblock(float y){
+float noblock(float y){
 farray=y;
 // native_simd<float>rr=farray;
 return farray;
