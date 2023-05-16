@@ -1,4 +1,4 @@
-#pragma pack(1)
+#pragma pack(0)
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
