@@ -7,6 +7,9 @@
 // #include <torch/csrc/api/include/torch/all.h>
 // #include <ATen/ATen.h>
 
+#include <experimental/simd>
+using std::experimental::native_simd;
+
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
 
@@ -239,7 +242,8 @@ return intrn.at(0,3);
   
 float noblock(float y){
 farray=y;
-return farray;
+native_simd<float> rr=farray;
+return rr;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
  // emscripten_set_main_loop((void(*)())mss,0,0);
 
