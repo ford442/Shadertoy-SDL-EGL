@@ -122,7 +122,7 @@ var reslt=Module.ccall('js_double',"Number",["Number"],[1.0]);
 console.log(reslt);
 },1100);
 setTimeout(function(){
-console.log("noblock:");
+console.log("noblock (and native_simd):");
 var pointa=800;
 var reslt=Module.ccall('js_noblock',"Number",["Number"],[pointa]);
 console.log(reslt);
