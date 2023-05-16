@@ -26,6 +26,7 @@
 
 #include <float.h>
 #include <math.h>
+#include <new>
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
