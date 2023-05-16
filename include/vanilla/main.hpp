@@ -1,4 +1,8 @@
-#pragma pack(0)
+#pragma pack(16)
+#pragma float_control(precise, on)  // enable precise semantics
+#pragma fenv_access(on)             // enable environment sensitivity
+#pragma float_control(except, on)   // enable exception semantics
+
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
