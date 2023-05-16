@@ -240,7 +240,7 @@ intrn.at(0,3)=wasm_f32x4_mul(intrn.at(0,0),intrn.at(0,1));
 return intrn.at(0,3);
 }
   
-float noblock(float y){
+native_simd<float> noblock(float y){
 farray=y;
 native_simd<float> rr=farray;
 return rr;
