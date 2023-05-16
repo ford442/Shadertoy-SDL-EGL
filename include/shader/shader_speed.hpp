@@ -220,7 +220,7 @@ f_tensor f_time=f_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 i_tensor uni_i=i_tensor{1,1};
-f_tensor t_size=f_tensor{1,1};
+f_tensor t_size=f_tensor{1,3};
 li_tensor i_size=li_tensor{1,1};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
@@ -430,26 +430,30 @@ return;
 }
 
 void uniUP(){
-glUniform3f(uni_res,t_size.at(0,0)*1.5,t_size.at(0,0)*1.5,gpu.gF());
-glUniform3f(smp_chn_res,t_size.at(0,0)*1.5,t_size.at(0,0)*1.5,gpu.gF());
+t_size.at(0,1)=t_size.at(0,1)*1.5;
+glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
 }
 
 void uniDOWN(){
-glUniform3f(uni_res,t_size.at(0,0)/1.5,t_size.at(0,0)/1.5,gpu.gF());
-glUniform3f(smp_chn_res,t_size.at(0,0)/1.5,t_size.at(0,0)/1.5,gpu.gF());
+t_size.at(0,1)=t_size.at(0,1)/1.5;
+glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
 }
 
 void viewUP(){
-glViewport((GLint)0,(GLint)0,i_size.at(0,0)*1.5,i_size.at(0,0)*1.5);
+t_size.at(0,2)=t_size.at(0,2)*1.5;
+glViewport((GLint)0,(GLint)0,i_size.at(0,2),i_size.at(0,2));
 return;
 }
 
 void viewDOWN(){
-glViewport((GLint)0,(GLint)0,i_size.at(0,0)/1.5,i_size.at(0,0)/1.5);
+t_size.at(0,2)=t_size.at(0,2)/1.5;
+glViewport((GLint)0,(GLint)0,i_size.at(0,2),i_size.at(0,2));
 return;
 }
 
@@ -459,6 +463,8 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(Size);
+t_size.at(0,1)=t_size.at(0,0);
+t_size.at(0,2)=t_size.at(0,0);
 mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
@@ -587,6 +593,8 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(Size);
+t_size.at(0,1)=t_size.at(0,0);
+t_size.at(0,2)=t_size.at(0,0);
 mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
