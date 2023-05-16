@@ -5,6 +5,11 @@
 #define TRUE 1
 #endif
 
+#pragma pack(16)
+#pragma float_control(precise, on)  // enable precise semantics
+#pragma fenv_access(on)             // enable environment sensitivity
+#pragma float_control(except, on)   // enable exception semantics
+
 #pragma STDC FP_CONTRACT ON
 
 #undef _FLT_EVAL_METHOD
