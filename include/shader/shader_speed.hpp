@@ -385,6 +385,8 @@ return;
 static void u_iSize_set(float set){
 sse.at(1,0)=wasm_f64x2_splat(set);
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
+t_size.at(0,1)=wasm_f64x2_extract_lane(sse.at(1,0),0);
+t_size.at(0,2)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
@@ -463,8 +465,6 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(Size);
-t_size.at(0,1)=t_size.at(0,0);
-t_size.at(0,2)=t_size.at(0,0);
 mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
@@ -593,8 +593,6 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(Size);
-t_size.at(0,1)=t_size.at(0,0);
-t_size.at(0,2)=t_size.at(0,0);
 mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
