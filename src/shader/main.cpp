@@ -144,14 +144,14 @@ Module.ccall('vu');
 
 document.getElementById('sizeUp').addEventListener('click',function(){
 // Module.ccall('vu');
-document.getElementById('scanvas').width=window.innerHeight*1.5;
-document.getElementById('scanvas').height=window.innerHeight*1.5;
+document.getElementById('scanvas').style.width=window.innerHeight*1.5;
+document.getElementById('scanvas').style.height=window.innerHeight*1.5;
 setTimeout(function(){
 Module.ccall('uu');
 },100);
 setTimeout(function(){
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('scanvas').style.width=window.innerHeight;
+document.getElementById('scanvas').style.height=window.innerHeight;
 },200);
 });
  
