@@ -242,8 +242,8 @@ return intrn.at(0,3);
   
 native_simd<float> noblock(float y){
 farray=y;
-native_simd<float> rr=farray;
-return rr;
+native_simd<float>rr=farray;
+return rr[0];
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
  // emscripten_set_main_loop((void(*)())mss,0,0);
 
