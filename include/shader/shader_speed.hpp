@@ -448,13 +448,15 @@ return;
 }
 
 void viewUP(){
-t_size.at(0,2)=t_size.at(0,2)*1.5;
+float m=t_size.at(0,2)*1.5;
+t_size.at(0,2)=m;
 glViewport((GLint)0,(GLint)0,i_size.at(0,2),i_size.at(0,2));
 return;
 }
 
 void viewDOWN(){
-t_size.at(0,2)=t_size.at(0,2)/1.5;
+float n=t_size.at(0,2)/1.5;
+t_size.at(0,2)=n;
 glViewport((GLint)0,(GLint)0,i_size.at(0,2),i_size.at(0,2));
 return;
 }
