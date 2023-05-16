@@ -6,6 +6,7 @@
 // #include <torch/script.h>
 // #include <torch/csrc/api/include/torch/all.h>
 // #include <ATen/ATen.h>
+#include <gmp.h>
 
 #include <experimental/simd>
 using std::experimental::native_simd;
