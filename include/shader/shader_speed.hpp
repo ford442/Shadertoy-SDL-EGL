@@ -351,6 +351,7 @@ int32_t iFps;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext ctxegl;
+EGLConfig eglconfig;
 EGLint config_size,major,minor;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
