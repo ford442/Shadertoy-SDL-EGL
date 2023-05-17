@@ -40,17 +40,17 @@ return;
 }
 
 void md(){
-run.moveDown();
+run.moveDOWN();
 return;
 }
 
 void ml(){
-run.moveLeft();
+run.moveLEFT();
 return;
 }
 
 void mr(){
-run.moveRight();
+run.moveRIGHT();
 return;
 }
 
