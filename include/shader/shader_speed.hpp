@@ -344,8 +344,8 @@ private:
 Compile compile;
 
 long int length=0;
-char8_t * result=NULL;
-char * results=NULL;
+static char8_t * result=NULL;
+static char * results=NULL;
 int32_t iFps;
 EGLDisplay display;
 EGLSurface surface;
