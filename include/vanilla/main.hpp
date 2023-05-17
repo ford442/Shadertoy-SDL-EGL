@@ -160,13 +160,13 @@ boost::atomic<float>farray;
 static int r,m;
 static float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 static v128_t aa,vv,xx,l,tt;
-static tI inte=tI{1,1};
-static tF deci=tF{1,1};
-static tV q=tV{1,1};
-static tV intrn=tV{1,4};
+
   
 public:
-
+tI inte=tI{1,1};
+tF deci=tF{1,1};
+tV q=tV{1,1};
+tV intrn=tV{1,4};
 union{
 float tuple_float_short(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
@@ -254,9 +254,9 @@ return intrn.at(0,3);
 // native_simd<float> noblock(float y){
 float noblock(float y){
 farray=y;
-boost::float128_t tyt=farray;
+// boost::float128_t tyt=farray;
   // native_simd<float>rr=farray;
-return tyt;
+return farray;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
  // emscripten_set_main_loop((void(*)())mss,0,0);
 
