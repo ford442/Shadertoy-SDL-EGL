@@ -169,6 +169,8 @@ union{
 float tuple_float_short(float num){
   float cc,pp,uu,cc2,pp2,uu2,nn;
 int r;
+    float Tdlt;
+
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
