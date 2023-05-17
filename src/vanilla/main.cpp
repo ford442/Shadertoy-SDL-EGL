@@ -11,7 +11,7 @@ tens Tens;
 extern "C"{
   
 float js_double(float nem){ 
-v128_t rtt=Funcs.double_add(nem);
+v128_t rtt=Funcs.rnn.double_add(nem);
 float retrnI=wasm_f32x4_extract_lane(rtt,0);
 float retrnD=wasm_f32x4_extract_lane(rtt,4);
 return retrnI;
@@ -22,31 +22,31 @@ return Tens.rtt(nm);
 }
   
 float js_tuple_float_short(float nm){ 
-return Funcs.tuple_float_short(nm);
+return Funcs.rnn.tuple_float_short(nm);
 }
   
 float js_tuple_float_long(float nm){ 
-return Funcs.tuple_float_long(nm);
+return Funcs.rnn.tuple_float_long(nm);
 }
 
 GLfloat js_tuple_gl(float nm){
-return Funcs.tuple_gl(nm);
+return Funcs.rnn.tuple_gl(nm);
 }
   
 float js_tuple_avx(float nm){
-v128_t ans=Funcs.tuple_avx(nm);
+v128_t ans=Funcs.rnn.tuple_avx(nm);
 float retrn=wasm_f32x4_extract_lane(ans,0);
 return retrn;
 }
 
 float js_tuple_avx_gl(GLfloat nm){
-v128_t ans=Funcs.tuple_avx(nm);
+v128_t ans=Funcs.rnn.tuple_avx(nm);
 GLfloat retrn=wasm_f32x4_extract_lane(ans,0);
 return retrn;
 }
   
 float js_simd(float * aa){
-v128_t cc=Funcs.simd_test(aa);
+v128_t cc=Funcs.rnn.simd_test(aa);
 // wasm_v128_store(&out[i], prod);
 float c=wasm_f32x4_extract_lane(cc,0);
 float d=wasm_f32x4_extract_lane(cc,1);
@@ -57,7 +57,7 @@ return re;
 }
 
 float js_noblock(float yy){
-float tt=(float)Funcs.noblock(yy);
+float tt=(float)Funcs.rnn.noblock(yy);
 return tt;
 }
 
