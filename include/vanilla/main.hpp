@@ -160,15 +160,15 @@ class funcs{
 private:
   
 static boost::atomic<float>farray;
-static int r,m;
-static float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 static v128_t aa,vv,xx,l,tt;
 
-  
+
 public:
 
 union{
 float tuple_float_short(float num){
+  float cc,pp,uu,cc2,pp2,uu2,nn;
+int r;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
 tie(cc,pp,uu);
@@ -185,7 +185,9 @@ cout << Tdlt << endl;
 return nn;
 }
   
-float tuple_float_long(float num){
+float tuple_float_long(float num){float cc,pp,uu,cc2,pp2,uu2,nn;
+  float Tdlt;
+int r;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
@@ -203,6 +205,7 @@ return uu;
 }
 
 GLfloat tuple_gl(GLfloat num){
+  float Tdlt;
 t1=std::chrono::steady_clock::now();
 GLfloat ggg=num,ppg=num,uug=num;
 tie(ggg,ppg,uug);
@@ -214,6 +217,7 @@ return uug;
 }
 
 v128_t tuple_avx(float num){
+  float Tdlt;
 t1=std::chrono::steady_clock::now();
 aa=wasm_i32x4_splat(num);
 vv=wasm_i32x4_splat(num);
@@ -227,8 +231,9 @@ return xx;
 }
 
 v128_t simd_test(float * a){
+  float Tdlt;
 t1=std::chrono::steady_clock::now();
-m=a[0]*1000.0;
+int m=a[0]*1000.0;
 l=wasm_i32x4_splat(m);
 tt=wasm_f32x4_add(l,l);
 t2=std::chrono::steady_clock::now();
