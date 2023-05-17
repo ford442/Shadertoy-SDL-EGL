@@ -157,8 +157,8 @@ class funcs{
 private:
   
 boost::atomic<float>farray;
-int r,m;
-float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
+static int r,m;
+static float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 v128_t aa,vv,xx,l,tt;
 tI inte=tI{1,1};
 tF deci=tF{1,1};
