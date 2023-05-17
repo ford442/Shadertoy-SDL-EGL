@@ -145,6 +145,8 @@ Module.ccall('vu');
 document.getElementById('sizeUp').addEventListener('click',function(){
 document.getElementById('scanvas').style.width=window.innerHeight*1.5;
 document.getElementById('scanvas').style.height=window.innerHeight*1.5;
+ document.getElementById('scanvas').width=window.innerHeight*1.5;
+document.getElementById('scanvas').height=window.innerHeight*1.5;
 // Module.ccall('vu');
 // setTimeout(function(){
 Module.ccall('uu');
@@ -152,21 +154,27 @@ Module.ccall('uu');
 setTimeout(function(){
 document.getElementById('scanvas').style.width=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight;
+ document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
 // },200);
 // Module.ccall('vd');
 });
  
 document.getElementById('sizeDown').addEventListener('click',function(){
-document.getElementById('scanvas').width=window.innerHeight/1.5;
+document.getElementById('scanvas').style.width=window.innerHeight/1.5;
+document.getElementById('scanvas').style.height=window.innerHeight/1.5;
+ document.getElementById('scanvas').width=window.innerHeight/1.5;
 document.getElementById('scanvas').height=window.innerHeight/1.5;
 // Module.ccall('vd');
-// setTimeout(function(){
+setTimeout(function(){
 Module.ccall('ud');
-// },100);
-// setTimeout(function(){
-document.getElementById('scanvas').width=window.innerHeight;
+},100);
+setTimeout(function(){
+document.getElementById('scanvas').style.width=window.innerHeight;
+document.getElementById('scanvas').style.height=window.innerHeight;
+ document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
-// },200);
+},200);
 // Module.ccall('vu');
 });
 
@@ -190,8 +198,8 @@ document.getElementById('di').click();
 function Key(e){
 if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
 if(e.code=='KeyE'){document.getElementById('startBtn2').click();};
-if(e.code=='KeyA'){document.getElementById('uniUp').click();};
-if(e.code=='KeyD'){document.getElementById('uniDown').click();};
+if(e.code=='KeyD'){document.getElementById('uniUp').click();};
+if(e.code=='KeyA'){document.getElementById('uniDown').click();};
 if(e.code=='KeyW'){document.getElementById('viewUp').click();};
 if(e.code=='KeyS'){document.getElementById('viewDown').click();};
 if(e.code=='Digit1'){document.getElementById('sizeDown').click();};
