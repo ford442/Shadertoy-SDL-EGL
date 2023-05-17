@@ -5,7 +5,7 @@
 #define TRUE 1
 #endif
 
-#pragma pack(16)
+#pragma pack(1)
 #pragma fenv_access(on)             // enable environment sensitivity
 
 #pragma STDC FP_CONTRACT ON
