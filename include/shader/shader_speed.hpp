@@ -403,34 +403,6 @@ f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-static void uni(){
-retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-if(ms_l==true){
-retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
-retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-if(clk_l==true){
-const long int xxx=mms2.at(0,0);
-const long int yyy=mms2.at(0,1);
-mms.at(0,0)=(float)xxx;
-mms.at(1,0)=(float)(i_size.at(0,0)-yyy);
-clk_l=false;
-}
-mms.at(2,0)=(float)mms2.at(0,0);
-mms.at(2,1)=(float)(i_size.at(0,0)-mms2.at(0,1));
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-// nanoPause();
-}
-else{
-clk_l=true;
-}
-glUniform1f(uni_tme,d_time.at(0,0));
-// nanoPause();
-glUniform1f(uni_tme_dlt,f_time.at(1,0));
-// nanoPause();
-glUniform1i(uni_frm,uni_i.at(0,0));
-return;
-}
 
 void uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
@@ -481,6 +453,37 @@ return;
 void moveRIGHT(){
 i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+return;
+}
+  
+union{
+
+static void uni(){
+retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(ms_l==true){
+retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
+retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(clk_l==true){
+const long int xxx=mms2.at(0,0);
+const long int yyy=mms2.at(0,1);
+mms.at(0,0)=(float)xxx;
+mms.at(1,0)=(float)(i_size.at(0,0)-yyy);
+clk_l=false;
+}
+mms.at(2,0)=(float)mms2.at(0,0);
+mms.at(2,1)=(float)(i_size.at(0,0)-mms2.at(0,1));
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+// nanoPause();
+}
+else{
+clk_l=true;
+}
+glUniform1f(uni_tme,d_time.at(0,0));
+// nanoPause();
+glUniform1f(uni_tme_dlt,f_time.at(1,0));
+// nanoPause();
+glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
@@ -562,6 +565,8 @@ return results;
 }
 return nullptr;
 }
+
+};
 
 void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
