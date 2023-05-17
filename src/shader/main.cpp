@@ -148,15 +148,15 @@ document.getElementById('scanvas').style.height=window.innerHeight*1.5;
  document.getElementById('scanvas').width=window.innerHeight*1.5;
 document.getElementById('scanvas').height=window.innerHeight*1.5;
 // Module.ccall('vu');
-// setTimeout(function(){
+setTimeout(function(){
 Module.ccall('uu');
-// },100);
+},100);
 setTimeout(function(){
 document.getElementById('scanvas').style.width=window.innerHeight;
 document.getElementById('scanvas').style.height=window.innerHeight;
  document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
-// },200);
+},200);
 // Module.ccall('vd');
 });
  
