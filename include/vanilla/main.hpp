@@ -12,8 +12,8 @@
 // #include <torch/csrc/api/include/torch/all.h>
 // #include <ATen/ATen.h>
 // #include "/usr/include/x86_64-linux-gnu/gmp.h"
-#include <mpfr.h>
-#include <gmp.h>
+#include "./mpfr.h"
+#include "./gmp.h"
 
 // #include "/usr/include/gmpxx.h"
 
