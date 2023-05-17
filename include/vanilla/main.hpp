@@ -159,7 +159,7 @@ private:
 boost::atomic<float>farray;
 static int r,m;
 static float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
-v128_t aa,vv,xx,l,tt;
+static v128_t aa,vv,xx,l,tt;
 tI inte=tI{1,1};
 tF deci=tF{1,1};
 tV q=tV{1,1};
