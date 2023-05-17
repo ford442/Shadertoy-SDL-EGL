@@ -151,16 +151,19 @@ console.log($0);
 }
 return;
 }
+
 static tI inte=tI{1,1};
 static tF sdeci=tF{1,1};
 static tV q=tV{1,1};
 static tV intrn=tV{1,4};
+static boost::atomic<float>farray;
+static v128_t aa,vv,xx,l,tt;
+
 class funcs{
 
 private:
   
-static boost::atomic<float>farray;
-static v128_t aa,vv,xx,l,tt;
+
 
 
 public:
