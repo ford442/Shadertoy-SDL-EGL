@@ -474,7 +474,7 @@ return;
 
 void moveLEFT(){
 i_view.at(0,1)=i_view.at(0,1)-1;
-glViewport((GLint)i_view.at(0,0),(GLint)0,i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
