@@ -11,7 +11,7 @@
 // #include <torch/script.h>
 // #include <torch/csrc/api/include/torch/all.h>
 // #include <ATen/ATen.h>
- #include "/usr/include/x86_64-linux-gnu/gmp.h"
+// #include "/usr/include/x86_64-linux-gnu/gmp.h"
 // #include "/usr/include/gmpxx.h"
 //#include <gmp.h>
 
@@ -43,6 +43,9 @@ std::chrono::steady_clock::time_point t1;
 std::chrono::steady_clock::time_point t2;
 
 #include <iostream>
+
+#include <gmp.h>
+#include <mpfr.h>
 
 using namespace std;
 using namespace boost::numeric::ublas;
