@@ -459,7 +459,7 @@ return;
   
 union{
 
-void uni(){
+static void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -488,7 +488,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
-void swap(){
+static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
