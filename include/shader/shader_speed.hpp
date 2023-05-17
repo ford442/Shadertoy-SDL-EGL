@@ -432,7 +432,7 @@ return;
 }
 
 void uniUP(){
-t_size.at(0,1)=t_size.at(0,1)*1.5;
+t_size.at(0,1)=t_size.at(0,1)*(t_size.at(0,1)*1.01);
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
@@ -440,7 +440,7 @@ return;
 }
 
 void uniDOWN(){
-t_size.at(0,1)=t_size.at(0,1)/1.5;
+t_size.at(0,1)=t_size.at(0,1)-(t_size.at(0,1)*0.99);
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
@@ -455,7 +455,31 @@ return;
 
 void viewDOWN(){
 i_size.at(0,1)=i_size.at(0,1)/1.5;
-glViewport((GLint)(1.0-(i_size.at(0,0)/i_size.at(0,1))),(GLint)(1.0-(i_size.at(0,0)/i_size.at(0,1))),i_size.at(0,1),i_size.at(0,1));
+glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
+return;
+}
+
+void moveDOWN(){
+i_view.at(0,0)=i_view.at(0,0)-1;
+glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+return;
+}
+
+void moveUP(){
+i_view.at(0,0)=i_view.at(0,0)+1;
+glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+return;
+}
+
+void moveLEFT(){
+i_view.at(0,1)=i_view.at(0,1)-1;
+glViewport((GLint)i_view.at(0,0),(GLint)0,i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+return;
+}
+
+void moveRIGHT(){
+i_view.at(0,1)=i_view.at(0,1)+1;
+glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
