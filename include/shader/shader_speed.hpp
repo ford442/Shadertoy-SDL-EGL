@@ -339,6 +339,7 @@ return (EM_BOOL)1;
 
 static char8_t * result=NULL;
 static char * results=NULL;
+static long int length=0;
 
 class Run{
 
@@ -346,7 +347,6 @@ private:
 
 Compile compile;
 
-static long int length=0;
 int32_t iFps;
 EGLDisplay display;
 EGLSurface surface;
@@ -459,7 +459,7 @@ return;
   
 union{
 
-static void uni(){
+void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
