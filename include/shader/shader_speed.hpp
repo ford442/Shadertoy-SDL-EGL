@@ -220,8 +220,8 @@ f_tensor f_time=f_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 i_tensor uni_i=i_tensor{1,1};
-f_tensor t_size=f_tensor{1,3};
-li_tensor i_size=li_tensor{1,1};
+f_tensor t_size=f_tensor{1,2};
+li_tensor i_size=li_tensor{1,2};
 void_tensor cntx=void_tensor{2,2};
 i_tensor cntxi=i_tensor{2,2};
 mouse_tensor mms=mouse_tensor{2,2};
@@ -386,13 +386,13 @@ static void u_iSize_set(float set){
 sse.at(1,0)=wasm_f64x2_splat(set);
 t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 t_size.at(0,1)=wasm_f64x2_extract_lane(sse.at(1,0),0);
-t_size.at(0,2)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
   
 static void i_iSize_set(boost::int_t<32>::exact set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+i_size.at(0,1)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
@@ -448,16 +448,14 @@ return;
 }
 
 void viewUP(){
-float m=t_size.at(0,2)*1.5;
-t_size.at(0,2)=m;
-glViewport((GLint)0,(GLint)0,i_size.at(0,2),i_size.at(0,2));
+i_size.at(0,1)=i_size.at(0,1)*1.5;
+glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
 void viewDOWN(){
-float n=t_size.at(0,2)/1.5;
-t_size.at(0,2)=n;
-glViewport((GLint)0,(GLint)0,i_size.at(0,2),i_size.at(0,2));
+i_size.at(0,1)=i_size.at(0,1)/1.5;
+glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
