@@ -10,7 +10,7 @@ return;
 }
 
 void swp(){
-run.swap();
+run.procc.swap();
 return;
 }
 
