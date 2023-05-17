@@ -152,14 +152,14 @@ console.log($0);
 return;
 }
 static tI inte=tI{1,1};
-static tF deci=tF{1,1};
+static tF sdeci=tF{1,1};
 static tV q=tV{1,1};
 static tV intrn=tV{1,4};
 class funcs{
 
 private:
   
-boost::atomic<float>farray;
+static boost::atomic<float>farray;
 static int r,m;
 static float cc,pp,uu,cc2,pp2,uu2,Tdlt,nn;
 static v128_t aa,vv,xx,l,tt;
@@ -239,10 +239,10 @@ return tt;
 }
 
 v128_t double_add(float fl){
-tie(inte,deci,q,intrn);
+tie(inte,sdeci,q,intrn);
 inte.at(0,0)=std::floor(fl);
-deci.at(0,0)=fl-inte.at(0,0);
-intrn.at(0,0)=wasm_f32x4_make(inte.at(0,0),deci.at(0,0),deci.at(0,0),deci.at(0,0));
+sdeci.at(0,0)=fl-inte.at(0,0);
+intrn.at(0,0)=wasm_f32x4_make(inte.at(0,0),sdeci.at(0,0),sdeci.at(0,0),sdeci.at(0,0));
 intrn.at(0,1)=wasm_f32x4_make(1.0,100.0,10.0,1.0);
 intrn.at(0,0)=wasm_f32x4_div(intrn.at(0,0),intrn.at(0,1));
 intrn.at(0,2)=wasm_f32x4_sqrt(intrn.at(0,0));
