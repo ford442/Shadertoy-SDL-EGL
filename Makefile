@@ -137,7 +137,7 @@ b3_audio:
 	--pre-js rSlider.js --pre-js slideOut.js -s ENVIRONMENT='web'
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -I/usr/include/gmp.h -sUSE_BOOST_HEADERS=1 -std=c++17 -stdlib=libc++ -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=c++17 -stdlib=libc++ -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
 	 emcc src/vanilla/js.c -c -std=gnu17 -flto=thin -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -std=c++2b -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -flto=thin \
