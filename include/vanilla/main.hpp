@@ -167,6 +167,7 @@ tV intrn=tV{1,4};
   
 public:
 
+union{
 float tuple_float_short(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
@@ -260,5 +261,7 @@ return tyt;
  // emscripten_set_main_loop((void(*)())mss,0,0);
 
 }
+
+};
 
 };
