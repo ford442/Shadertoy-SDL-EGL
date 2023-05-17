@@ -455,7 +455,7 @@ return;
 
 void viewDOWN(){
 i_size.at(0,1)=i_size.at(0,1)/1.5;
-glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
+glViewport((GLint)(1.0-(i_size.at(0,0)/i_size.at(0,1))),(GLint)(1.0-(i_size.at(0,0)/i_size.at(0,1))),i_size.at(0,1));
 return;
 }
 
