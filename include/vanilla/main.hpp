@@ -254,7 +254,7 @@ return intrn.at(0,3);
 // native_simd<float> noblock(float y){
 float noblock(float y){
 farray=y;
-float128 tyt=farray;
+boost::float128 tyt=farray;
   // native_simd<float>rr=farray;
 return tyt;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
