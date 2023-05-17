@@ -151,7 +151,10 @@ console.log($0);
 }
 return;
 }
-
+static tI inte=tI{1,1};
+static tF deci=tF{1,1};
+static tV q=tV{1,1};
+static tV intrn=tV{1,4};
 class funcs{
 
 private:
@@ -163,10 +166,7 @@ static v128_t aa,vv,xx,l,tt;
 
   
 public:
-static tI inte=tI{1,1};
-static tF deci=tF{1,1};
-static tV q=tV{1,1};
-static tV intrn=tV{1,4};
+
 union{
 float tuple_float_short(float num){
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
