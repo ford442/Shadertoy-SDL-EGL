@@ -220,6 +220,7 @@ f_tensor f_time=f_tensor{2,1};
 f_tensor Fi=f_tensor{2,2};
 d_tensor Di=d_tensor{2,2};
 i_tensor uni_i=i_tensor{1,1};
+i_tensor i_view=i_tensor{1,2};
 f_tensor t_size=f_tensor{1,2};
 li_tensor i_size=li_tensor{1,2};
 void_tensor cntx=void_tensor{2,2};
