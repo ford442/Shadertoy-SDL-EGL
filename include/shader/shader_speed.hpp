@@ -208,25 +208,25 @@ using i_tensor=boost::numeric::ublas::tensor<boost::atomic<int>>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 
-v_tensor sse=v_tensor{2,2};
-v_tensor sse2=v_tensor{2,2};
-v_tensor sse3=v_tensor{2,2};
-v_tensor sse4=v_tensor{1,1};
-shad_tensor Sh=shad_tensor{3,3};
-prg_tensor S1=prg_tensor{1,1,1};
-sz_tensor Si=sz_tensor{1,1};
-d_tensor d_time=d_tensor{2,1};
-f_tensor f_time=f_tensor{2,1};
-f_tensor Fi=f_tensor{2,2};
-d_tensor Di=d_tensor{2,2};
-i_tensor uni_i=i_tensor{1,1};
-i_tensor i_view=i_tensor{1,2};
-f_tensor t_size=f_tensor{1,2};
-li_tensor i_size=li_tensor{1,2};
-void_tensor cntx=void_tensor{2,2};
-i_tensor cntxi=i_tensor{2,2};
-mouse_tensor mms=mouse_tensor{2,2};
-li_tensor mms2=li_tensor{2,2};
+static v_tensor sse=v_tensor{2,2};
+static v_tensor sse2=v_tensor{2,2};
+static v_tensor sse3=v_tensor{2,2};
+static v_tensor sse4=v_tensor{1,1};
+static shad_tensor Sh=shad_tensor{3,3};
+static prg_tensor S1=prg_tensor{1,1,1};
+static sz_tensor Si=sz_tensor{1,1};
+static d_tensor d_time=d_tensor{2,1};
+static f_tensor f_time=f_tensor{2,1};
+static f_tensor Fi=f_tensor{2,2};
+static d_tensor Di=d_tensor{2,2};
+static i_tensor uni_i=i_tensor{1,1};
+static i_tensor i_view=i_tensor{1,2};
+static f_tensor t_size=f_tensor{1,2};
+static li_tensor i_size=li_tensor{1,2};
+static void_tensor cntx=void_tensor{2,2};
+static i_tensor cntxi=i_tensor{2,2};
+static mouse_tensor mms=mouse_tensor{2,2};
+static li_tensor mms2=li_tensor{2,2};
 
 class GPU{
 
@@ -259,27 +259,27 @@ Di.at(1,1)=0.0;
 return;
 }
 
-inline float gF(){
+static inline float gF(){
 return Fi.at(0,0);
 }
 
-inline float gFm1(){
+static inline float gFm1(){
 return Fi.at(0,1);
 }
 
-inline float gF0(){
+static inline float gF0(){
 return Fi.at(1,1);
 }
 
-inline double gD(){
+static inline double gD(){
 return Di.at(0,0);
 }
 
-inline double gDm1(){
+static inline double gDm1(){
 return Di.at(0,1);
 }
 
-inline double gD0(){
+static inline double gD0(){
 return Di.at(1,1);
 }
 
@@ -404,7 +404,7 @@ return;
 }
 
 
-void uniUP(){
+static void uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
@@ -412,7 +412,7 @@ glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 return;
 }
 
-void uniDOWN(){
+static void uniDOWN(){
 t_size.at(0,1)=t_size.at(0,1)*0.99;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
@@ -420,37 +420,37 @@ glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 return;
 }
 
-void viewUP(){
+static void viewUP(){
 i_size.at(0,1)=i_size.at(0,1)*1.5;
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-void viewDOWN(){
+static void viewDOWN(){
 i_size.at(0,1)=i_size.at(0,1)/1.5;
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-void moveDOWN(){
+static void moveDOWN(){
 i_view.at(0,0)=i_view.at(0,0)-1;
 glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-void moveUP(){
+static void moveUP(){
 i_view.at(0,0)=i_view.at(0,0)+1;
 glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-void moveLEFT(){
+static void moveLEFT(){
 i_view.at(0,1)=i_view.at(0,1)-1;
 glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-void moveRIGHT(){
+static void moveRIGHT(){
 i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
@@ -533,7 +533,7 @@ if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
-procc.uni();
+uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 // nanoPause();
 return;
