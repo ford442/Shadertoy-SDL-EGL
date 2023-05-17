@@ -37,6 +37,7 @@ using std::experimental::native_simd;
 #include <boost/atomic.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
+#include <boost/cstdfloat.hpp>
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
@@ -253,8 +254,9 @@ return intrn.at(0,3);
 // native_simd<float> noblock(float y){
 float noblock(float y){
 farray=y;
-// native_simd<float>rr=farray;
-return farray;
+float128 tyt=farray;
+  // native_simd<float>rr=farray;
+return tyt;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
  // emscripten_set_main_loop((void(*)())mss,0,0);
 
