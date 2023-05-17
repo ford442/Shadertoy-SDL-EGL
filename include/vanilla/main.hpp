@@ -3,6 +3,8 @@
 #pragma fenv_access(on)             // enable environment sensitivity
 #pragma float_control(except, on)   // enable exception semantics
 
+#include <boost/cstdfloat.hpp>  // must be first include
+
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
@@ -37,7 +39,6 @@ using std::experimental::native_simd;
 #include <boost/atomic.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
-#include <boost/cstdfloat.hpp>
 
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
@@ -58,7 +59,6 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
-
 class tens{
 
 private:
@@ -67,8 +67,7 @@ float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
 uint128_t tst128;
-  
-  
+
 public:
 
 float rtt(float nm){
