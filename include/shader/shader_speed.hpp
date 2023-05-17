@@ -533,7 +533,7 @@ if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
 }
-uni();
+procc.uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 // nanoPause();
 return;
@@ -566,7 +566,7 @@ return results;
 return nullptr;
 }
 
-};
+}procc;
 
 void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
@@ -594,7 +594,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=rd_fl(Fnm);
+const char * frag_body=procc.rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
@@ -774,7 +774,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanoPause();
-emscripten_set_main_loop((void(*)())Run::Rend,0,0);
+emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
   
