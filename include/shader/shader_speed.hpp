@@ -337,15 +337,16 @@ mms2.at(0,1)=e->clientY;
 return (EM_BOOL)1;
 }
 
+static char8_t * result=NULL;
+static char * results=NULL;
+
 class Run{
 
 private:
 
 Compile compile;
 
-long int length=0;
-static char8_t * result=NULL;
-static char * results=NULL;
+static long int length=0;
 int32_t iFps;
 EGLDisplay display;
 EGLSurface surface;
