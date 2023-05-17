@@ -213,7 +213,7 @@ GLfloat ggg=num,ppg=num,uug=num;
 tie(ggg,ppg,uug);
 t2=std::chrono::steady_clock::now();
 std::chrono::duration<double,std::chrono::milliseconds::period>time_span=std::chrono::duration<double,std::chrono::milliseconds::period>(t2-t1);
-float Tdlt=time_span.count()*1000.0;
+Tdlt=time_span.count()*1000.0;
 cout << Tdlt << endl;
 return uug;
 }
