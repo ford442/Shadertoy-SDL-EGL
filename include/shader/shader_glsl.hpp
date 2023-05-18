@@ -579,7 +579,7 @@ std::string outt2=std::regex_replace(outt,rgx3,frepp3);
 // static char *cstr=reinterpret_cast<char *>(outt2.c_str());
 static char *cstr=(char *)outt2.c_str();
   // ----------------------------
-results=cstr;
+// results=cstr;
 
 return results;
 }
