@@ -61,6 +61,8 @@
 // #include <stdfloat>  //  c++23
 #include <time.h>
 #include <regex>
+#include <iostream>
+
 // #include <chrono>
 #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
