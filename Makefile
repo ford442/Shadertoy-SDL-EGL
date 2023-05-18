@@ -1,3 +1,21 @@
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,--export-memory
+
+SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
+
+LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
+-msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
+
+COMMON_FLAGS += -fpic -O3 -std=gnu++2b -stdlib=libc++ -flto -ffast-math -ffp-contract=fast -fwasm-exceptions \
+-fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
+-ffunction-sections -fdata-sections -mtail-call -msign-ext
+
+BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
+
+CXXAUDIO +=
+CXXMAIN += -Wall
+CXXSHADER +=
+CXXVIDEO +=
+
 b3_shader_llvm:
 	 em++ src/shader/shader.cpp -c -O0 -m32 -fno-math-errno -mbulk-memory -fno-stack-protector -ffp-contract=off -fmerge-all-constants \
 	 -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -flto -fstrict-vtable-pointers \
@@ -20,40 +38,33 @@ b3_shader_llvm:
 b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
-	 em++ src/shader/shader_speed.cpp -c \
-	 -Wno-implicit-function-declaration -fpic -O3 -std=gnu++2b -stdlib=libc++ -flto \
-	 -ffast-math -funsafe-math-optimizations -fno-math-errno \
-	 -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
-	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -mavx -fstrict-vtable-pointers -mbulk-memory \
-	 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext -fvectorize -BOOST_UBLAS_NDEBUG \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -Rpass=loop-vectorize \
+	 em++ src/shader/shader_speed.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 -Wno-implicit-function-declaration  \
+	 -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -fblocks -mnontrapping-fptoint \
+	 -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -sUSE_BOOST_HEADERS=1 -DSIMD=AES
 	 ###         Main
-	 em++ src/shader/main.cpp -c \
-	 -Wno-implicit-function-declaration -fpic -O3 -ffast-math -msimd128 -mbulk-memory -msse \
-	 -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -fmerge-all-constants \
-	 -flto -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint \
-	 -msign-ext -fno-stack-protector \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=fast \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize \
+	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 -Wno-implicit-function-declaration -fmerge-all-constants \
+	 -mmultivalue -mnontrapping-fptoint \
+	 -fno-stack-protector \
+	 -fblocks \
+	 -Rpass=loop-vectorize \
 	 -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG -DSIMD=AES
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc main.o shader_speed.o -o s3024s.js --use-preload-plugins --closureFriendly -std=gnu++2b \
-	 -Wno-implicit-function-declaration -fpic -O3 -mtail-call -mmultivalue -mnontrapping-fptoint \
-	 -flto -mllvm -ffast-math -ffp-contract=fast -mbulk-memory -fno-stack-protector \
-	 -fmerge-all-constants -fwasm-exceptions -stdlib=libc++ -fno-math-errno -wasm-enable-eh \
-	 -exception-model=wasm -msign-ext -rtlib=compiler-rt \
-	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
-	 -fasynchronous-unwind-tables -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
-	 -Rpass-analysis=loop-vectorize --enable-fma -lc++abi -DSIMD=AES \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 \
-	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes \
-	 -Wl,--lto-O3,--stack-first,--export-memory -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert \
-	 -mavxvnni -fblocks -fstrict-vtable-pointers -funsafe-math-optimizations \
+	 emcc main.o shader_speed.o -o s3024s.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
+	 --use-preload-plugins --closureFriendly \
+	 -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -mllvm -fno-stack-protector \
+	 -fmerge-all-constants -wasm-enable-eh \
+	 -exception-model=wasm -rtlib=compiler-rt \
+	 -mtune=tigerlake -march=corei7-avx \
+	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
+	 -Rpass-analysis=loop-vectorize -lc++abi \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -fblocks \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
