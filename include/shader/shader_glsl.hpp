@@ -349,7 +349,7 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+char * Fnm=reinterpret_cast<char *>("/shader/shader.glsl");
 char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
@@ -536,7 +536,7 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
-inline char * rd_fl(const char * Fnm){
+inline char * rd_fl(char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -610,7 +610,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=procc.rd_fl(Fnm);
+char * frag_body=procc.rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
