@@ -257,6 +257,7 @@ b3_combine_cloud:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/combine/audio.cpp -c -O0 -std=c++2a -sUSE_SDL=2 -fno-fast-math \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fno-math-errno -mcpu=bleeding-edge
 	 em++ src/combine/video.cpp -c -O0 -std=c++2a -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off \
