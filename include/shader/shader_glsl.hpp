@@ -60,7 +60,7 @@
 // #include <uchar.h> // utf-16
 // #include <stdfloat>  //  c++23
 #include <time.h>
-#include <regex>
+// #include <regex>
 // #include <chrono>
 #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
