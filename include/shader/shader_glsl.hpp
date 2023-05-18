@@ -600,18 +600,18 @@ std::string finpp(frag_body);
 std::string frepp="void main(){";
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
-std::string="(void mainImage)+.+({)";
-std::string="(fragCoord)";
-std::string="(#version 330 es)";
+std::string repp="(void mainImage)+.+({)";
+std::string repp2="(fragCoord)";
+std::string repp3="(#version 330 es)";
 std::basic_regex rgx(repp);
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
 std::string outt=std::regex_replace(finpp,rgx,frepp);
-std::string outt3=std::regex_replace(outt,rgx2,frepp2);
-std::string outt2=std::regex_replace(outt3,rgx3,frepp3);
+std::string outt2=std::regex_replace(outt,rgx2,frepp2);
+std::string outt3=std::regex_replace(outt2,rgx3,frepp3);
 // char *cstr=(char *)outt2.c_str();
 // static char *cstr=reinterpret_cast<char *>(outt2.c_str());
-char *cstr=(char *)outt2.c_str();
+char *cstr=(char *)outt3.c_str();
     // ----------------------------
 
 std::string frag_body_S=frag_body;
