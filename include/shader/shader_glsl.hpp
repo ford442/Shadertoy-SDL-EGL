@@ -152,7 +152,7 @@ EGL_NONE,EGL_NONE
 
 EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -566,9 +566,9 @@ std::string finpp(results);
 std::string frepp="void main(){";
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
-std::string repp="(void mainImage)+.+\0";
-std::string repp2="fragCoord\0";
-std::string repp3="(#version 330 es)+.+\0";
+char * repp=(char *)"(void mainImage)+.+\0";
+char * repp2=(char *)"fragCoord\0";
+char * repp3=(char *)"(#version 330 es)+.+\0";
 
 std::regex rgx(repp);
     /*
