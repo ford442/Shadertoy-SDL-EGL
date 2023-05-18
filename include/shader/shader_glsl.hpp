@@ -574,7 +574,7 @@ std::regex rgx3(repp3);
 std::string outt=std::regex_replace(finpp,rgx,frepp);
 outt=std::regex_replace(outt,rgx2,frepp2);
 std::string outt2=std::regex_replace(outt,rgx3,frepp3);
-char *cstr = reinterpret_cast<char *>outt2.c_str();
+char *cstr = reinterpret_cast<char *>(outt2.c_str());
   // ----------------------------
   
 return cstr;
