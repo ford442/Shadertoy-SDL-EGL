@@ -69,9 +69,9 @@
 #include "webgpu/webgpu_cpp.h"
 
 extern "C"{
-  
+
 void str();
-  
+
 }
 
 class Compile
@@ -99,7 +99,9 @@ return shader;
 using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
-"#version 300 es\n"
+"#version 420\n"
+// #extension GL_ARB_shading_language_420pack : enable
+// #extension GL_GOOGLE_include_directive : enable
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
@@ -113,11 +115,11 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
-"precision highp int;\n"
+// "precision highp int;\n"
 "precision highp float;\n";
 
 inline char vrt_bdy_src[100]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=vec4(iPosition);}\n\0";
 
 inline char frg_hdr_src[1000]=
 "precision highp sampler3D;precision highp sampler2D;"
@@ -132,14 +134,7 @@ inline char frg_hdr_src[1000]=
 "out highp vec4 fragColor;\n";
 
 inline char frg_ftr_src[350]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O,vec2 U);"
-"int _N=32;void mainImage(out vec4 O,vec2 U){"
-"vec4 o;O=vec4(0);"
-"for (int k=0; k < _N*_N; k++){"
-"mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.6/1.0));}"
-"void mainImage0\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -562,7 +557,26 @@ result[actual_length++]={'\0'};
 }
 fclose(file);
 results=reinterpret_cast<char *>(result);
-return results;
+  
+  // get glsl shader via regex
+  //  -----------------------
+std::string finpp(results);
+std::string frepp="void main(){";
+std::string frepp2="gl_FragCoord";
+std::string frepp3="#version 420";
+std::string repp="(void mainImage)+.+";
+std::string repp2="fragCoord";
+std::string repp3="#version 330 es";
+std::regex rgx(repp);
+std::regex rgx2(repp2);
+std::regex rgx3(repp3);
+std::string outt=std::regex_replace(finpp,rgx,frepp);
+outt=std::regex_replace(outt,rgx2,frepp2);
+std::string outt2=std::regex_replace(outt,rgx3,frepp3);
+const char *cstr = outt2.c_str();
+  // ----------------------------
+  
+return cstr;
 }
 return nullptr;
 }
@@ -704,8 +718,8 @@ unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
-src[3]=frg_ftr;
-unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+// src[3]=frg_ftr;
+unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,3,src);
 unsigned int shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
