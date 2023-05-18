@@ -557,7 +557,7 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=static_cast<char *>(result);
+results=reinterpret_cast<char *>(result);
   
   // get glsl shader via regex
   //  -----------------------
@@ -574,7 +574,7 @@ std::regex rgx3(repp3);
 std::string outt=std::regex_replace(finpp,rgx,frepp);
 outt=std::regex_replace(outt,rgx2,frepp2);
 std::string outt2=std::regex_replace(outt,rgx3,frepp3);
-char *cstr = outt2.c_str();
+char *cstr = reinterpret_cast<char *>outt2.c_str();
   // ----------------------------
   
 return cstr;
