@@ -84,12 +84,12 @@ GLsizei i;
 
 public:
 
-unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+unsigned int cmpl_shd(GLenum type,GLsizei nsrc,char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=static_cast<GLsizei>(strlen(src[i]));
 }
-const GLuint shader=glCreateShader(type);
+GLuint shader=glCreateShader(type);
 glShaderSource(shader,nsrc,src,srclens);
 glCompileShader(shader);
 return shader;
@@ -349,8 +349,8 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-const char * src[4];
+char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
