@@ -571,9 +571,10 @@ std::string repp2="fragCoord";
 std::string repp3="(#version 330 es)+.+";
 
 std::regex rgx(repp);
+    /*
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
-  /*
+
 std::string outt=std::regex_replace(finpp,rgx,frepp);
 std::string outt3=std::regex_replace(outt,rgx2,frepp2);
 std::string outt2=std::regex_replace(outt3,rgx3,frepp3);
