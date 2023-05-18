@@ -568,7 +568,7 @@ std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
 std::string repp="(void mainImage)+.+";
 std::string repp2="fragCoord";
-std::string repp3="#version 330 es";
+std::string repp3="(#version 330 es)+.+";
 std::regex rgx(repp);
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
