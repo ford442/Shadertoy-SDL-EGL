@@ -604,11 +604,11 @@ std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
 char reppc[23]="(void mainImage)+.+({)";
 std::string repp=(char *)reppc;
-  
 std::string repp2="(fragCoord)";
 std::string repp3="(#version 330 es)";
-std::basic_regex rgx(repp);
-  /*
+std::regex rgx;  /*
+rgx(repp);
+
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
 std::string outt=std::regex_replace(finpp,rgx,frepp);
