@@ -350,7 +350,7 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 // const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-inline char bdy_src[19]="/shader/shader.glsl"
+inline char bdy_src[19]="/shader/shader.glsl";
 char * Fnm=bdy_src;
 char * src[4];
 char * cm_hdr=cm_hdr_src;
