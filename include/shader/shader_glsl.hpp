@@ -350,7 +350,7 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 // const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-char bdy_src[19]="/shader/shader.glsl";
+char bdy_src[20]="/shader/shader.glsl";
 char * Fnm=bdy_src;
 char * src[4];
 char * cm_hdr=cm_hdr_src;
@@ -598,11 +598,11 @@ char * frag_body=procc.rd_fl(Fnm);
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(frag_body);
-char freppc[12]="void main(){";
+char freppc[13]="void main(){";
 std::string frepp=(char *)freppc;
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
-char reppc[22]="(void mainImage)+.+({)";
+char reppc[23]="(void mainImage)+.+({)";
 std::string repp=(char *)reppc;
   
 std::string repp2="(fragCoord)";
