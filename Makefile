@@ -1,4 +1,3 @@
-LDFLAGSgl += -Wl,--lto-O3,--export-memory
 LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,--export-memory
 
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
@@ -6,7 +5,7 @@ SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -fpic -O3 -flto -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
+COMMON_FLAGS += -fpic -O3 -flto=thin -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
 -fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -mtail-call -msign-ext
 
@@ -85,7 +84,7 @@ b3_shader_glsl:
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGSgl) \
+	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
 	 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -mllvm -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
@@ -96,7 +95,7 @@ b3_shader_glsl:
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -sSTACK_OVERFLOW_CHECK=2 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
-	 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
+	 -sGLOBAL_BASE=8388608 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sUSE_WEBGPU=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
