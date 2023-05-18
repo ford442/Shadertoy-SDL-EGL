@@ -21,7 +21,7 @@ b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_speed.cpp -c \
-	 -Wno-implicit-function-declaration -fpic -O3 -std=gnu++2b -stdlib=libc++abi -flto \
+	 -Wno-implicit-function-declaration -fpic -O3 -std=gnu++2b -stdlib=libc++ -flto \
 	 -ffast-math -funsafe-math-optimizations -fno-math-errno \
 	 -ffp-contract=fast -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -mcpu=bleeding-edge -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
