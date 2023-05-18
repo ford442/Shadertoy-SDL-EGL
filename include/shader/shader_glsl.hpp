@@ -570,7 +570,7 @@ char * repp=(char *)"(void mainImage)+.+\0";
 char * repp2=(char *)"fragCoord\0";
 char * repp3=(char *)"(#version 330 es)+.+\0";
 
-std::regex rgx(repp);
+std::basic_regex rgx(repp);
     /*
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
