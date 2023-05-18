@@ -35,7 +35,7 @@ b3_shader_llvm:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
-b3_shader_speed:
+b3_shader_glsl:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_speed.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
