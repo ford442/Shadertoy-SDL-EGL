@@ -566,7 +566,7 @@ std::string finpp(results);
 std::string frepp="void main(){";
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
-std::string repp='(void mainImage)+.+';
+std::string repp=(char *)"(void mainImage)+.+";
 std::string repp2="fragCoord";
 std::string repp3="(#version 330 es)+.+";
 
