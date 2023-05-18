@@ -598,7 +598,7 @@ char * frag_body=procc.rd_fl(Fnm);
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(frag_body);
-inline char freppc[12]="void main(){"
+inline char freppc[12]="void main(){";
 std::string frepp=(char *)freppc;
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
