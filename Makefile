@@ -52,7 +52,7 @@ b3_shader_speed:
 	 -Rpass-analysis=loop-vectorize --enable-fma -lc++abi -DSIMD=AES \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 \
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes \
-	 -Wl,--lto-O3 -Wl,--stack-first -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert \
+	 -Wl,--lto-O3,--stack-first,--compress-relocations,--import-memory,--export-memory, -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert \
 	 -mavxvnni -fblocks -fstrict-vtable-pointers -funsafe-math-optimizations \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
@@ -146,6 +146,7 @@ b3_audio:
 	-msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -maes -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 -sASSERTIONS=2 -sTOTAL_STACK=8MB \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	-Wl,--lto-O3,--stack-first,--compress-relocations,--import-memory,--export-memory \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js -s ENVIRONMENT='web'
 
