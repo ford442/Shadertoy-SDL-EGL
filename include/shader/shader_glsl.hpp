@@ -606,8 +606,8 @@ char reppc[23]="(void mainImage)+.+({)";
 std::string repp=(char *)reppc;
 std::string repp2="(fragCoord)";
 std::string repp3="(#version 330 es)";
-std::regex rgx;  /*
-rgx(repp);
+std::regex<char>rgx(repp); 
+  /*
 
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
