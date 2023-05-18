@@ -350,7 +350,8 @@ EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
 // const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-char * Fnm=(char *)"/shader/shader.glsl";
+inline char bdy_src[19]="/shader/shader.glsl"
+char * Fnm=bdy_src;
 char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
@@ -597,13 +598,17 @@ char * frag_body=procc.rd_fl(Fnm);
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(frag_body);
-std::string frepp="void main(){";
+inline char freppc[12]="void main(){"
+std::string frepp=(char *)freppc;
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
-std::string repp="(void mainImage)+.+({)";
+inline char reppc[22]="(void mainImage)+.+({)";
+std::string repp=(char *)reppc;
+  
 std::string repp2="(fragCoord)";
 std::string repp3="(#version 330 es)";
 std::basic_regex rgx(repp);
+  /*
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
 std::string outt=std::regex_replace(finpp,rgx,frepp);
@@ -613,7 +618,7 @@ std::string outt3=std::regex_replace(outt2,rgx3,frepp3);
 // static char *cstr=reinterpret_cast<char *>(outt2.c_str());
 char *cstr=(char *)outt3.c_str();
     // ----------------------------
-
+*/
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
