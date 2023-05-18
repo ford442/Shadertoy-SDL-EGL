@@ -1,4 +1,4 @@
-LDFLAGSgl += -Wl,--export-memory
+LDFLAGSgl += -Wl,--lto-O3,--export-memory
 LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,--export-memory
 
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
