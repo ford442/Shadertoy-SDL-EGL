@@ -146,7 +146,7 @@ b3_audio:
 	-sGLOBAL_BASE=8388608 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -maes -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sSTACK_OVERFLOW_CHECK=2 -sASSERTIONS=2 -sTOTAL_STACK=8MB \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	-Wl,--lto-O3,--stack-first,--import-memory,--export-memory \
+	-Wl,--lto-O3,--stack-first,--export-memory \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js -s ENVIRONMENT='web'
 
