@@ -557,7 +557,7 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=dynamic_cast<char *>(result);
+results=static_cast<char *>(result);
   
   // get glsl shader via regex
   //  -----------------------
