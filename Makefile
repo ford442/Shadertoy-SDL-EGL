@@ -114,7 +114,7 @@ b3_shader_speed_test:
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc shader_speed.cpp main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
+	 emcc src/shader/shader_speed.cpp main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
 	 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
