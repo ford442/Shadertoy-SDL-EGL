@@ -556,32 +556,8 @@ result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
-  results=reinterpret_cast<char *>(result);
-  
-  // get glsl shader via regex
-  //  -----------------------
-std::string finpp(results);
-std::string frepp="void main(){";
-std::string frepp2="gl_FragCoord";
-std::string frepp3="#version 420";
-char * repp=(char *)"(void mainImage)+.+\0";
-char * repp2=(char *)"fragCoord\0";
-char * repp3=(char *)"(#version 330 es)+.+\0";
-std::basic_regex rgx(repp);
-    /*
-std::regex rgx2(repp2);
-std::regex rgx3(repp3);
-
-std::string outt=std::regex_replace(finpp,rgx,frepp);
-std::string outt3=std::regex_replace(outt,rgx2,frepp2);
-std::string outt2=std::regex_replace(outt3,rgx3,frepp3);
-// char *cstr=(char *)outt2.c_str();
-// static char *cstr=reinterpret_cast<char *>(outt2.c_str());
-static char *cstr=(char *)outt2.c_str();
-  */
-  // ----------------------------
-// results=cstr;
 }
+results=reinterpret_cast<char *>(result);
 fclose(file);
 return results;
 }
@@ -617,6 +593,27 @@ eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
 char * frag_body=procc.rd_fl(Fnm);
+  
+  // get glsl shader via regex
+  //  -----------------------
+std::string finpp(frag_body);
+std::string frepp="void main(){";
+std::string frepp2="gl_FragCoord";
+std::string frepp3="#version 420";
+std::string="(void mainImage)+.+({)";
+std::string="(fragCoord)";
+std::string="(#version 330 es)";
+std::basic_regex rgx(repp);
+std::regex rgx2(repp2);
+std::regex rgx3(repp3);
+std::string outt=std::regex_replace(finpp,rgx,frepp);
+std::string outt3=std::regex_replace(outt,rgx2,frepp2);
+std::string outt2=std::regex_replace(outt3,rgx3,frepp3);
+// char *cstr=(char *)outt2.c_str();
+// static char *cstr=reinterpret_cast<char *>(outt2.c_str());
+char *cstr=(char *)outt2.c_str();
+    // ----------------------------
+
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
