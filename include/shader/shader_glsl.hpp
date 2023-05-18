@@ -556,10 +556,8 @@ result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
-}
-fclose(file);
-results=reinterpret_cast<char *>(result);
-
+  results=reinterpret_cast<char *>(result);
+  
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(results);
@@ -569,7 +567,6 @@ std::string frepp3="#version 420";
 char * repp=(char *)"(void mainImage)+.+\0";
 char * repp2=(char *)"fragCoord\0";
 char * repp3=(char *)"(#version 330 es)+.+\0";
-
 std::basic_regex rgx(repp);
     /*
 std::regex rgx2(repp2);
@@ -584,7 +581,8 @@ static char *cstr=(char *)outt2.c_str();
   */
   // ----------------------------
 // results=cstr;
-
+}
+fclose(file);
 return results;
 }
 return nullptr;
