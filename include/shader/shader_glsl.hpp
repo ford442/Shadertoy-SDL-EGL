@@ -559,7 +559,7 @@ result[actual_length++]={'\0'};
 }
 fclose(file);
 results=reinterpret_cast<char *>(result);
-  
+   /*
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(results);
@@ -578,8 +578,8 @@ std::string outt2=std::regex_replace(outt,rgx3,frepp3);
 // char *cstr=(char *)outt2.c_str();
 char *cstr=outt2.c_str();
   // ----------------------------
-  
-return cstr;
+  */
+return results;
 }
 return nullptr;
 }
