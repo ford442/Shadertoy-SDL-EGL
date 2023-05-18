@@ -557,11 +557,11 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=reinterpret_cast<char *>(result);
+// results=reinterpret_cast<char *>(result);
   
   // get glsl shader via regex
   //  -----------------------
-std::string finpp(results);
+std::string finpp(result);
 std::string frepp="void main(){";
 std::string frepp2="gl_FragCoord";
 std::string frepp3="#version 420";
