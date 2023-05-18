@@ -490,7 +490,7 @@ var blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'float32',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -550,7 +550,7 @@ gljs.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gljs.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gljs.enable(gl.FRAMEBUFFER_SRGB_EXT); 
-gljs.disable(gl.DITHER);
+// gljs.disable(gl.DITHER);
 gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 // gljs.blendColor(1.0,1.0,1.0,1.0);
@@ -598,14 +598,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 const R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setPrecision('single').setFixIntegerDivisionAccuracy(false).setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setPrecision('single').setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 const t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk-this.constants.nblnk];
 var av$=Ave(0.8*P[0],P[1],1.2*P[2]);
 // var minuss=(av$-0.5)*(av$/(av$-0.5));
 // av$=av$+(minuss*(av$*0.033));
 return[0.8*P[0],P[1],1.2*P[2],av$];
-}).setTactic("precision").setFixIntegerDivisionAccuracy(false).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([s$,s$]);
 //     }).setConstants({nblnk:nblank$,blnk:blank$}).setTactic("precision").setPipeline(true).setDynamicOutput(true).setOutput([s$,s$]);
 const r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -649,7 +649,7 @@ bb=GreenB(eulb);
 //   var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setFixIntegerDivisionAccuracy(false).setDynamicOutput(true).setGraphical(true).setOutput([h$,w$]);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([h$,w$]);
 // }).setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]}).setTactic("precision").setGraphical(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([s$,s$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
