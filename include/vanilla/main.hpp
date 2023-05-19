@@ -271,7 +271,7 @@ __m64 pt={12.0,12.0};
 // int tsst=_mm_extract_epi32(pt,1);
 native_simd<float>reet=farray;
 
-farray=y+(0.0001*reet);
+farray=y+(0.0001*reet[0]);
 // boost::float128_t tyt=farray;
 return farray;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
