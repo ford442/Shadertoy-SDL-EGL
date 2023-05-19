@@ -193,7 +193,7 @@ b3_vanilla_llvm:
 	 emcc main.o js.o -o v3020.js -mllvm -std=c++2b -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 -flto \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DWORDS_BIGENDIAN=1 -DCPU_IS_LITTLE_ENDIAN=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
 	 -sEXPORTED_FUNCTIONS='["_main","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
