@@ -261,13 +261,13 @@ return intrn.at(0,3);
   
 // native_simd<float> noblock(float y){
 float noblock(float y){
-__m64 p={6.0,6.0};
-__m64 pt={12.0,12.0};
+// __m64 p={6.0,6.0};
+// __m64 pt={12.0,12.0};
 // __m64 py3=_mm_adds_pi16_(p,pt);
 // int reet=_m_to_int_(py3);
 // int reet2=_mm_cvtsi64_si32_(py3);
 // int tsst=_mm_extract_epi32(pt,1);
-// float_v reet=farray;
+float_v reet=farray;
 
 farray=y;
 // boost::float128_t tyt=farray;
