@@ -21,7 +21,7 @@
 
 #include <experimental/simd>
 using std::experimental::native_simd;
-using float_v=std::experimental::simd<float,std::experimental::simd_abi::_GLIBCXX_SIMD_ABI>;
+using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
