@@ -266,7 +266,7 @@ float noblock(float y){
 __m64 p={6.0,6.0};
 __m64 pt={12.0,12.0};
 __m64 py3=_mm_adds_pi16_(p,pt);
-float reet=((double*)&py3)[0];
+int reet=_m_to_int(py3);
 farray=y+(0.0001*reet);
 // boost::float128_t tyt=farray;
   // native_simd<float>rr=farray;
