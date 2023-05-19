@@ -96,7 +96,7 @@ return shader;
 
 };
 
-using namespace boost::numeric::ublas;
+// using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
 "#version 300 es\n"
