@@ -676,6 +676,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
