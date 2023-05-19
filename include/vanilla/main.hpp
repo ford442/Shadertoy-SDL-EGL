@@ -310,9 +310,9 @@ return intrn.at(0,3);
   
 // native_simd<float> noblock(float y){
 float noblock(float y){
-m64 p=6;
-m64 pt=12;
-int py=(int)mm_adds_pi16(p,pt);
+__m64 p=6;
+__m64 pt=12;
+int py=(int)_mm_adds_pi16_(p,pt);
 farray=y+(0.0001*py);
 // boost::float128_t tyt=farray;
   // native_simd<float>rr=farray;
