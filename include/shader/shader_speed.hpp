@@ -102,6 +102,7 @@ inline char cm_hdr_src[500]=
 "#version 300 es\n"
 
 "#pragma STDGL(precision highp uint)\n"
+"#pragma STDGL(precision highp atomic_uint)\n"
 
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
@@ -116,6 +117,7 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
+"layout(std140)uniform;\n"
 "precision highp float;\n";
 
 inline char vrt_bdy_src[100]=
@@ -131,7 +133,7 @@ inline char frg_hdr_src[1000]=
 "uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out highp vec4 fragColor;layout(std140)uniform;\n";
+"out highp vec4 fragColor;\n";
 
 inline char frg_ftr_src[350]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
