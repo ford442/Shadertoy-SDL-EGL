@@ -100,19 +100,24 @@ return shader;
 
 inline char cm_hdr_src[500]=
 "#version 300 es\n"
+
+"#ifndef GL_ES\n"
+"#define GL_ES 1\n"
+"#endif\n"
+"#pragma STDGL(precision highp uint)\n"
+
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
 "#pragma optionNV(fastprecision off)\n"
-"#pragma STDGL(unroll none)\n"
-"#pragma optionNV(unroll none)\n"
+// "#pragma STDGL(unroll none)\n"
+// "#pragma optionNV(unroll none)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline none)\n"
-"#pragma optionNV(inline none)\n"
+// "#pragma STDGL(inline none)\n"
+// "#pragma optionNV(inline none)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-// "#define GL_ES 0\n"
 "precision highp int;\n"
 "precision highp float;\n";
 
@@ -129,7 +134,7 @@ inline char frg_hdr_src[1000]=
 "uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out highp vec4 fragColor;\n";
+"out highp vec4 fragColor;layout(std140)uniform;\n";
 
 inline char frg_ftr_src[350]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
@@ -149,14 +154,14 @@ EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -590,7 +595,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(ms_l,clk_l);
 ::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
 ::boost::tuples::tie(rem,req,tmm);
-// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
@@ -670,7 +675,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
@@ -754,8 +759,8 @@ mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+// glEnable(GL_SCISSOR_TEST);
+// glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
