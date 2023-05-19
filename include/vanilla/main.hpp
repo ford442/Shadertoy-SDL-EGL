@@ -53,7 +53,7 @@ std::chrono::steady_clock::time_point t2;
 //MMX
 __m64 _mm_unpackhi_pi32_(__m64 a, __m64 b);
 __m64 _mm_unpacklo_pi32_(__m64 a, __m64 b);
-int _mm_extract_epi16_(__m128i a, int imm8);
+// int _mm_extract_epi16_(__m128i a, int imm8);
 __m64 _mm_setzero_si64_();
 __m64 _m_pmaddwd_(__m64 a, __m64 b);
 __m64 _m_paddd_(__m64 a, __m64 b);
@@ -75,7 +75,7 @@ __m64 _mm_sign_pi16_(__m64 a, __m64 b);
 
 #define _mm_unpackhi_pi32 _mm_unpackhi_pi32_
 #define _mm_unpacklo_pi32 _mm_unpacklo_pi32_
-#define _mm_extract_epi16 _mm_extract_epi16_
+// #define _mm_extract_epi16 _mm_extract_epi16_
 #define _mm_setzero_si64 _mm_setzero_si64_
 #define _mm_packs_pi32 _mm_packs_pi32_
 #define _m_pmaddwd _m_pmaddwd_
@@ -310,7 +310,10 @@ return intrn.at(0,3);
   
 // native_simd<float> noblock(float y){
 float noblock(float y){
-farray=y;
+m64 p=6;
+m64 pt=12;
+int py=(int)mm_adds_pi16(p,pt);
+farray=y+(0.0001*py);
 // boost::float128_t tyt=farray;
   // native_simd<float>rr=farray;
 return farray;
