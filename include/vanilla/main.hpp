@@ -267,7 +267,7 @@ __m64 p={6.0,6.0};
 // int reet=_m_to_int_(py3);
 // int reet2=_mm_cvtsi64_si32_(py3);
 // int tsst=_mm_extract_epi32(pt,1);
-float_v reet=farray;
+float_v reet=p[0];
 
 farray=y+(reet[0]);
 // boost::float128_t tyt=farray;
