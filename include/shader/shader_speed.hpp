@@ -117,7 +117,7 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
-"layout(std420)uniform;\n"
+"layout(std140)uniform;\n"
 "precision highp float;\n";
 
 inline char vrt_bdy_src[100]=
@@ -160,7 +160,7 @@ EGL_NONE,EGL_NONE
 
 EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)2,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)5,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
