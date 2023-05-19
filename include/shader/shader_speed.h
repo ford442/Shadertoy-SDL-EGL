@@ -106,12 +106,12 @@ inline char cm_hdr_src[500]=
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
 "#pragma optionNV(fastprecision off)\n"
-// "#pragma STDGL(unroll none)\n"
-// "#pragma optionNV(unroll none)\n"
+"#pragma STDGL(unroll all)\n"
+"#pragma optionNV(unroll all)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
-// "#pragma STDGL(inline none)\n"
-// "#pragma optionNV(inline none)\n"
+"#pragma STDGL(inline all)\n"
+"#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
@@ -592,8 +592,8 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(ms_l,clk_l);
 ::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
 ::boost::tuples::tie(rem,req,tmm);
-// eglBindAPI(EGL_OPENGL_ES_API);
-eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
