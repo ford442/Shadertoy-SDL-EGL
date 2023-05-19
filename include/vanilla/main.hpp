@@ -269,7 +269,7 @@ __m64 p={6.0,6.0};
 // int tsst=_mm_extract_epi32(pt,1);
 float_v reet=farray;
 
-farray=y+reet;
+farray=y+(reet[0]*0.0001);
 // boost::float128_t tyt=farray;
 return farray;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
