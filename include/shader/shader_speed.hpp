@@ -11,7 +11,7 @@
 #pragma STDC FP_CONTRACT ON
 
 #undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD -1
+// #define _FLT_EVAL_METHOD -1
 
 #pragma STDC CX_LIMITED_RANGE ON
 
@@ -101,9 +101,6 @@ return shader;
 inline char cm_hdr_src[500]=
 "#version 300 es\n"
 
-"#ifndef GL_ES\n"
-"#define GL_ES 1\n"
-"#endif\n"
 "#pragma STDGL(precision highp uint)\n"
 
 "#pragma STDGL(fastmath on)\n"
