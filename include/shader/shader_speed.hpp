@@ -117,7 +117,7 @@ inline char cm_hdr_src[500]=
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
-"layout(std140)uniform;\n"
+"layout(std420)uniform;\n"
 "precision highp float;\n";
 
 inline char vrt_bdy_src[100]=
