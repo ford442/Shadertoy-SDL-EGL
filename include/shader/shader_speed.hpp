@@ -290,7 +290,7 @@ const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu
 inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline float uni_tme,uni_tme_dlt,uni_mse;
 
-struct{
+union{
 boost::chrono::duration<float,boost::chrono::seconds::period>time_spana;
 boost::chrono::duration<float,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
