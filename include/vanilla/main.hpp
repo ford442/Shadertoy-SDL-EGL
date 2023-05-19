@@ -272,7 +272,7 @@ __m64 pt={12.0,12.0};
 
 farray=y+(0.0001*reet);
 // boost::float128_t tyt=farray;
-  // native_simd<float>rr=farray;
+native_simd<float>rr=farray;
 return farray;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
  // emscripten_set_main_loop((void(*)())mss,0,0);
