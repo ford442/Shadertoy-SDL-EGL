@@ -164,16 +164,13 @@ class funcs{
 
 private:
   
-
-
-
 public:
 
 union{
 float tuple_float_short(float num){
-  float cc,pp,uu,cc2,pp2,uu2,nn;
+float cc,pp,uu,cc2,pp2,uu2,nn;
 int r;
-    float Tdlt;
+float Tdlt;
 
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 for(r=0;r<100;r++){
@@ -192,7 +189,7 @@ return nn;
 }
   
 float tuple_float_long(float num){float cc,pp,uu,cc2,pp2,uu2,nn;
-  float Tdlt;
+float Tdlt;
 int r;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
 cc2=num,pp2=num,uu2=num;cc=num,pp=num,uu=num;
@@ -211,7 +208,7 @@ return uu;
 }
 
 GLfloat tuple_gl(GLfloat num){
-  float Tdlt;
+float Tdlt;
 t1=std::chrono::steady_clock::now();
 GLfloat ggg=num,ppg=num,uug=num;
 tie(ggg,ppg,uug);
@@ -223,7 +220,7 @@ return uug;
 }
 
 v128_t tuple_avx(float num){
-  float Tdlt;
+float Tdlt;
 t1=std::chrono::steady_clock::now();
 aa=wasm_i32x4_splat(num);
 vv=wasm_i32x4_splat(num);
@@ -237,7 +234,7 @@ return xx;
 }
 
 v128_t simd_test(float * a){
-  float Tdlt;
+float Tdlt;
 t1=std::chrono::steady_clock::now();
 int m=a[0]*1000.0;
 l=wasm_i32x4_splat(m);
@@ -272,7 +269,7 @@ __m64 pt={12.0,12.0};
 // int tsst=_mm_extract_epi32(pt,1);
 float_v reet=farray;
 
-farray=y+(0.0001*reet);
+farray=y+(0.0001*reet[0]);
 // boost::float128_t tyt=farray;
 return farray;
  //   std::cout << ::at::ones({3,4}, at::CPU(at::kFloat)) << "\n";
