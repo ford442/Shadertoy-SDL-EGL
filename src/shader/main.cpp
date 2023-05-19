@@ -1,4 +1,4 @@
-#include "../../include/shader/main.hpp"
+#include "../../include/shader/main.h"
 
 EM_JS(void,js_main,(),{
 
