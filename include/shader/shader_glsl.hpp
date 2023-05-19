@@ -608,9 +608,7 @@ char reppc[23]="(void mainImage)+.+({)";
 std::string repp=(char *)reppc;
 std::string repp2="(fragCoord)";
 std::string repp3="(#version 330 es)";
-std::regex rgx(reppc); 
-  /*
-
+std::regex rgx(repp); 
 std::regex rgx2(repp2);
 std::regex rgx3(repp3);
 std::string outt=std::regex_replace(finpp,rgx,frepp);
@@ -620,8 +618,8 @@ std::string outt3=std::regex_replace(outt2,rgx3,frepp3);
 // static char *cstr=reinterpret_cast<char *>(outt2.c_str());
 char *cstr=(char *)outt3.c_str();
     // ----------------------------
-*/
-std::string frag_body_S=frag_body;
+
+std::string frag_body_S=cstr;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
