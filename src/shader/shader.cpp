@@ -1,4 +1,4 @@
-#include "../../include/shader/shader.h"
+#include "../../include/shader/shader.hpp"
 
 EM_BOOL ms_clk(int eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
