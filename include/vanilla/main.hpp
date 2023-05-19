@@ -21,7 +21,7 @@
 
 #include <experimental/simd>
 using std::experimental::native_simd;
-using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
+// using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
@@ -267,7 +267,7 @@ float noblock(float y){
 // int reet=_m_to_int_(py3);
 // int reet2=_mm_cvtsi64_si32_(py3);
 // int tsst=_mm_extract_epi32(pt,1);
-float_v reet=farray;
+// float_v reet=farray;
 
 farray=y;
 // boost::float128_t tyt=farray;
