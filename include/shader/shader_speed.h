@@ -25,7 +25,7 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
 
-#include "../../include/shader/intrins.hpp"
+#include "../../include/shader/intrins.h"
 
 #include <float.h>
 #include <math.h>
@@ -61,8 +61,8 @@
 // #include <stdfloat>  //  c++23
 #include <time.h>
 // #include <chrono>
-#include "../../include/shader/gl.hpp"
-#include "../../include/shader/egl.hpp"
+#include "../../include/shader/gl.h"
+#include "../../include/shader/egl.h"
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
@@ -95,8 +95,6 @@ return shader;
 }
 
 };
-
-// using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
 "#version 300 es\n"
