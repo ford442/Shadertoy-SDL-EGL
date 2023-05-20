@@ -122,21 +122,21 @@ inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 inline char frg_hdr_src[1000]=
-"precision highp sampler3D;precision highp sampler2D;"
+"precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out highp vec4 fragColor;\n";
+"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"out vec4 fragColor;\n";
 
 inline char frg_ftr_src[350]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
-"int _N=32;void mainImage(out vec4 O,vec2 U){"
+"int _N=3;void mainImage(out vec4 O,vec2 U){"
 "vec4 o;O=vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
@@ -157,8 +157,8 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)5,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -592,7 +592,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(ms_l,clk_l);
 ::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
 ::boost::tuples::tie(rem,req,tmm);
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(EGL_OPENGL_API);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
