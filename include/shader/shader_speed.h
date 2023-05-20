@@ -592,8 +592,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(ms_l,clk_l);
 ::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
 ::boost::tuples::tie(rem,req,tmm);
-// eglBindAPI(EGL_OPENGL_ES_API);
-// eglBindAPI(EGL_OPENGL_API);
+
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
@@ -615,11 +614,13 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglBindAPI(EGL_OPENGL_ES_API);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
+eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 glUseProgram(0);
