@@ -494,7 +494,7 @@ var blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 let bCan=document.getElementById("bcanvas");
 let gljs=bCan.getContext("webgl2",{
-colorType:'float32',
+colorType:'float64',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -502,11 +502,11 @@ colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:true,
-imageSmoothingEnabled:false,
+imageSmoothingEnabled:true,
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
-lowLatency:true,
+lowLatency:false,
 powerPreference:'high-performance',
 antialias:false,
 willReadFrequently:false,
