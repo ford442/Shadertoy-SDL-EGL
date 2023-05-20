@@ -194,7 +194,10 @@ glFrontFace(GL_CW);
 // glEnable(GL_COLOR_LOGIC_OP); // invald capa
 // glDisable(GL_BLEND);
 // glBlendEquationSeparate(GL_MAX,GL_FUNC_ADD);
+ 
 glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
+ 
 // glBlendEquationSeparate(GL_MAX,GL_MAX);
 // glBlendEquation(GL_EXCLUSION_NV);   
 // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
@@ -303,8 +306,10 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // eglBindAPI(EGL_OPENGL_ES_API);
 // glEnable(GL_BLEND);
-glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
+// glDisable(GL_DITHER);
+ glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
+// glEnable(GL_SCISSOR_TEST);
 emscripten_webgl_enable_extension(ctx_js, "EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(ctx_js, "EGL_EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
 emscripten_webgl_enable_extension(ctx_js, "EGL_IMG_context_priority");     //     vv  required for realtime
@@ -336,7 +341,7 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_display_p3");
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_BLEND);
 glViewport((GLint)0,(GLint)0,Size_js,Size_js);
-glScissor((GLint)0,(GLint)0,Size_js,Size_js);
+// glScissor((GLint)0,(GLint)0,Size_js,Size_js);
 return;
 }
 
@@ -554,10 +559,11 @@ gljs.drawingBufferColorMetadata={mode:'extended'};
 // gljs.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF64,bCan.height,bCan.height);
 // gljs.blendColor(1.0,1.0,1.0,1.0);
 // gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+ gljs.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 // gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.FUNC_ADD);
 // gljs.blendEquation(gl.MAX);
 // gljs.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // gljs.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
