@@ -10,7 +10,7 @@
 
 #pragma STDC FP_CONTRACT ON
 
-#undef _FLT_EVAL_METHOD
+// #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 
 #pragma STDC CX_LIMITED_RANGE ON
@@ -592,7 +592,6 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(ms_l,clk_l);
 ::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
 ::boost::tuples::tie(rem,req,tmm);
-
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
@@ -628,7 +627,7 @@ nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(static_cast<float>(mouse.hi));
+u_iSize_set(static_cast<float>(Size));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
