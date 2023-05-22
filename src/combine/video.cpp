@@ -5,12 +5,12 @@ Video video;
 extern "C" {
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
-video.clrclr(cllr,alp,avr);
+video.avg.clrclr(cllr,alp,avr);
 return;
 }
 
 void nano(short int Fnum,int leng,float *ptr,float *aptr){
-video.avgFrm(Fnum,leng,ptr,aptr);
+video.avg.avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
 
