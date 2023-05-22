@@ -779,7 +779,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanoPause();
-emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
+// emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
   
