@@ -138,6 +138,7 @@ double hi_js,wi_js,Size_js;
 EGLint config_size_js,major_js,minor_js;
 EGLDisplay display_js;
 EGLSurface surface_js;
+EGLContext ctxegl_js;
 
 class Video{
 
@@ -218,7 +219,7 @@ eglBindAPI(EGL_OPENGL_ES_API);
 ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
 display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display_js,&major_js,&minor_js);
-eglChooseConfig(display_js,att_list_js,&eglconfig_js,(EGLint)1,&config_size_js);
+eglChooseConfig(display_js,att_lst_js,&eglconfig_js,(EGLint)1,&config_size_js);
 contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,ctx_att_js);
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,att_lst2_js);
 eglBindAPI(EGL_OPENGL_API);
