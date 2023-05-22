@@ -340,7 +340,7 @@ void(*B3)(){&vid};
 extern "C" {
 
 void b3_egl(){
-egl()
+Video::egl();
 return;
 }
 
