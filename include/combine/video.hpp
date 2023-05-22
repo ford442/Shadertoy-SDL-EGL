@@ -73,7 +73,7 @@
 #include <cfloat>
 #include <climits>
 
-using avg_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+using avg_tensor=boost::numeric::ublas::tensor<float>;
 
 static avg_tensor avRg=avg_tensor{3,3};
 
@@ -133,7 +133,7 @@ aptr[200]=avg(2,1)/32;
 return;
 }
 
-}avg;
+}avgr;
 
 static void egl(){
 eglconfig_js=NULL;
