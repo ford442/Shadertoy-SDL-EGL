@@ -81,6 +81,9 @@ class Video{
 
 private:
 
+EmscriptenWebGLContextAttributes attr_js;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
+
 public:
 
 union{
