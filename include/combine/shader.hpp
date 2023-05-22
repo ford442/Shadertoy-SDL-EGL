@@ -61,8 +61,8 @@
 // #include <stdfloat>  //  c++23
 #include <time.h>
 // #include <chrono>
-#include "../../include/combine/gl.h"
-#include "../../include/combine/egl.h"
+#include "../../include/combine/gl.hpp"
+#include "../../include/combine/egl.hpp"
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
