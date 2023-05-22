@@ -572,7 +572,7 @@ return nullptr;
 }procc;
 
 void fram(){
-Rend();
+procc.Rend();
 }
     
 void strt(){
