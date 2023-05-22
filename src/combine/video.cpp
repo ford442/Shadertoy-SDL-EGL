@@ -5,7 +5,7 @@ Video video;
 extern "C" {
 
 void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
-clrclr(cllr,alp,avr);
+video.clrclr(cllr,alp,avr);
 return;
 }
 
@@ -15,7 +15,7 @@ return;
 }
 
 void frm(){
-FrM();
+video.FrM();
 return;
 }
 
