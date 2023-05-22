@@ -119,11 +119,11 @@ aptr[Fnum]=avRg.at(2,0);
 aptr[Fnum+100]=avRg.at(1,0);
 aptr[Fnum+200]=avRg.at(0,0);
 for(int i=33;i<65;i++){
-avg.at(0,1)+=aptr[i];
+avRg.at(0,1)+=aptr[i];
 }
 aptr[0]=avRg.at(0,1)/32;
 for(int i=33;i<65;i++){
-avRg(1,1)+=aptr[i+100];
+avRg.at(1,1)+=aptr[i+100];
 }
 aptr[100]=avRg.at(1,1)/32;
 for(int i=33;i<65;i++){
