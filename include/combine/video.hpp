@@ -81,14 +81,14 @@ class Video{
 
 private:
 
+
+ 
+ 
+public:
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 EGLConfig eglconfig_js;
 double hi_js,wi_js,Size_js;
- 
- 
-public:
-
 union{
 
 static void resetAvg(){
