@@ -25,7 +25,7 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
 
-#include "../../include/combine/intrins.h"
+#include "../../include/combine/intrins.hpp"
 
 #include <float.h>
 #include <math.h>
