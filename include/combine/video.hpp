@@ -76,19 +76,17 @@
 using avg_tensor=boost::numeric::ublas::tensor<float>;
 
 static avg_tensor avRg=avg_tensor{3,3};
+EmscriptenWebGLContextAttributes attr_js;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
+EGLConfig eglconfig_js;
+double hi_js,wi_js,Size_js;
 
 class Video{
 
 private:
 
-
- 
- 
 public:
-EmscriptenWebGLContextAttributes attr_js;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
-EGLConfig eglconfig_js;
-double hi_js,wi_js,Size_js;
+
 union{
 
 static void resetAvg(){
