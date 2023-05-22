@@ -7,7 +7,7 @@ Run run;
 extern "C" {
 
 void frm(){
-procc.Rend();
+run.procc.Rend();
 return;
 }
 
