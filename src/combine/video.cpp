@@ -14,11 +14,6 @@ video.avgr.avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
 
-void frm(){
-video.FrM();
-return;
-}
-
 }
 
 EM_JS(void,vid,(),{
