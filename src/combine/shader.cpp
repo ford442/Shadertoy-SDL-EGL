@@ -2,11 +2,11 @@
 
 Run run;
 
-void Swap(){
+static void Swap(){
 run.procc.swap();
 }
 
-void Frm(){
+static void Frm(){
 run.procc.Rend();
 return;
 }
