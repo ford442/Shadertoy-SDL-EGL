@@ -339,6 +339,11 @@ void(*B3)(){&vid};
 
 extern "C" {
 
+void b3_egl(){
+egl()
+return;
+}
+
 void b3(){
 video.avgr.resetAvg();
 B3();
