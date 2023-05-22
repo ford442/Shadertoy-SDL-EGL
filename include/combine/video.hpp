@@ -73,39 +73,36 @@
 #include <cfloat>
 #include <climits>
 
+using avg_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+
+static avg_tensor avRg=avg_tensor{3,3};
+
 class Video{
 
 private:
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
 
 public:
-
-using avg_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
-
-static avg_tensor avg=avg_tensor{3,3};
 
 union{
 
 static void resetAvg(){
-avg(0,0)=0.0; // max
-avg(1,0)=1.0; // min
-avg(2,0)=0.0; // sum
-avg(0,1)=0.0; // avgsum
-avg(1,1)=0.0; // minsum
-avg(2,1)=0.0; // maxsum
+avRg(0,0)=0.0; // max
+avRg(1,0)=1.0; // min
+avRg(2,0)=0.0; // sum
+avRg(0,1)=0.0; // avgsum
+avRg(1,1)=0.0; // minsum
+avRg(2,1)=0.0; // maxsum
+avRg(0,2)=0.0; // brt
+avRg(1,2)=0.0; // drk
+avRg(2,2)=0.0; // avrg
 }
 
-void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avrg=(((avr+(1.0-rlc))/2.0)+alc);
-drk=1.0-(avr-0.5);
-brt=1.0-(((1.0-rlc)-(alc-0.5)));
-glBlendColor(avrg,avrg,avrg,1.0);
-glClearColor(drk,drk,drk,brt);
+static void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
+avRg(2,2)=(((avr+(1.0-rlc))/2.0)+alc);
+avRg(1,2)=1.0-(avr-0.5);
+avRg(0,2)=1.0-(((1.0-rlc)-(alc-0.5)));
+glBlendColor(avRg(2,2),avRg(2,2),avRg(2,2),1.0f);
+glClearColor(avRg(1,2),avRg(1,2),avRg(1,2),avRg(0,2));
 return;
 }
 
@@ -138,7 +135,7 @@ return;
 
 }avg;
 
-void egl(){
+static void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=static_cast<int>(hi_js);
