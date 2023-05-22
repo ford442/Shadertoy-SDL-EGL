@@ -2,8 +2,6 @@
 
 Run run;
 
-// void(*FrM)(){&Run::procc.Rend};
-
 extern "C" {
 
 void frm(){
