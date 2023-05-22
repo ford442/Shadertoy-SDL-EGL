@@ -103,18 +103,17 @@ b3_shader_glsl:
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 	 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -fwhole-program-vtables \
+	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector -fwhole-program-vtables \
+	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector -fwhole-program-vtables \
+	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -fno-fast-math \
-	 -fwhole-program-vtables \
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -fwhole-program-vtables -lc++abi \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -lc++abi \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
 	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=0 -sSTACK_OVERFLOW_CHECK=2 -mtune=tigerlake -march=corei7-avx \
 	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sASSERTIONS=2 -s DYLINK_DEBUG=0 \
