@@ -103,16 +103,16 @@ b3_shader_glsl:
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 	 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants -fwhole-program-vtables \
+	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -fwhole-program-vtables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector -fwhole-program-vtables \
+	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector -fwhole-program-vtables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector -fwhole-program-vtables \
+	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector -fwhole-program-vtables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -fno-fast-math \
 	 -fwhole-program-vtables \
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 -flto \
+	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -fwhole-program-vtables -lc++abi \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
