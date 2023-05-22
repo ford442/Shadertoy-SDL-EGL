@@ -80,6 +80,9 @@ EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
 EGLConfig eglconfig_js;
 double hi_js,wi_js,Size_js;
+EGLint config_size_js,major_js,minor_js;
+EGLDisplay display_js;
+EGLSurface surface_js;
 
 class Video{
 
