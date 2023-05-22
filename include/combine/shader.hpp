@@ -74,7 +74,7 @@ void str();
   
 }
 
-class Compile
+static class Compile
 {
 
 private:
@@ -230,7 +230,7 @@ static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 
-class GPU{
+static class GPU{
 
 private:
 
@@ -343,7 +343,7 @@ static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
 
-class Run{
+static class Run{
 
 private:
 
