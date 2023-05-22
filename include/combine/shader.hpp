@@ -458,8 +458,6 @@ i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport((GLint)i_view.at(0,0),(GLint)i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
-  
-static union{
 
 static void uni(){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -568,12 +566,6 @@ return results;
 }
 return nullptr;
 }
-
-}procc;
-
-static void fram(){
-procc.Rend();
-}
     
 void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
@@ -599,7 +591,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=procc.rd_fl(Fnm);
+const char * frag_body=rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
