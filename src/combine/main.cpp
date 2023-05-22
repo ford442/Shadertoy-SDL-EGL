@@ -11,21 +11,6 @@ v128_t(* RnD)(int){&rNd};
 
 extern"C"{
 
-void b3_egl(){
-b3e();
-return;
-}
-
-void b3(){
-B3();
-return;
-}
-
-void str(){
-sTr();
-return;
-}
-
 int r4nd(int tH){
 Rg=RnD(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
