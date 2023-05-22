@@ -2,7 +2,7 @@
 
 Run run;
 
-void(*FrM)(){&Run::procc.renderFrame};
+void(*FrM)(){&Run::procc.Rend};
 
 extern "C" {
 
