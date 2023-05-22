@@ -571,6 +571,10 @@ return nullptr;
 
 }procc;
 
+void fram(){
+Rend();
+}
+    
 void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
 gpu.setFloats();
