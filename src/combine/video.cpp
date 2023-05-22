@@ -1,42 +1,21 @@
 #include "../../include/combine/video.hpp"
 
-void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
-for(int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];
-}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];
-}
-}
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-}
-aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-}
-aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-}
-aptr[200]=maxSum/32;
-return;
-}
+Video video;
 
 extern "C" {
 
+void clr(GLclampf cllr,GLclampf alp,GLclampf avr){
+clrclr(cllr,alp,avr);
+return;
+}
+
 void nano(short int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
+video.avgFrm(Fnum,leng,ptr,aptr);
+return;
+}
+
+void frm(){
+FrM();
 return;
 }
 
@@ -63,7 +42,7 @@ var $bb;
 function forwardLoop(){
 // setTim=mmvv.currentTime;
 if(setTim<=stp){
-  setTim+=stpInc;
+setTim+=stpInc;
 
 mmvv.currentTime=setTim;
 }else{
@@ -74,7 +53,7 @@ revv=true;
 function reverseLoop(){
 // setTim=mmvv.currentTime;
 if(setTim>=Lstp){
-  setTim-=stpInc;
+setTim-=stpInc;
 
 mmvv.currentTime=setTim;
 }else{
@@ -113,10 +92,8 @@ pnnl.addEventListener('keydown',doKey);
 let $H=Module.HEAPF32.buffer;
 var inh=window.innerHeight;
 var s$=parseInt(inh,10);
-  
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
-  
 // w$=parseInt(document.getElementById("wid").innerHTML,10);
 // h$=parseInt(document.getElementById("hig").innerHTML,10);
 var la=h$*w$*8;
@@ -205,7 +182,6 @@ g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-  
 
 g.addNativeFunction('GreenR',glslGreenR,{returnType:'Number'});
 g.addNativeFunction('GreenG',glslGreenG,{returnType:'Number'});
@@ -351,7 +327,7 @@ reverseLoop();
 forwardLoop();
 }
 }
-},timFrm)}
+},16)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
