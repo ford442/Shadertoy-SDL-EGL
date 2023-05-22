@@ -2,12 +2,12 @@
 
 Run run;
 
-void(*FrM)(){&Run::procc.Rend};
+// void(*FrM)(){&Run::procc.Rend};
 
 extern "C" {
 
 void frm(){
-FrM();
+procc.Rend();
 return;
 }
 
