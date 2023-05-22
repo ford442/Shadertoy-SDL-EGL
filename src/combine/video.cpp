@@ -343,8 +343,9 @@ T=true;
 void(*B3)(){&vid};
 
 extern "C" {
-  
+
 void b3(){
+video.avgr.resetAvg();
 B3();
 return;
 }
