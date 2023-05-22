@@ -108,28 +108,28 @@ return;
 
 static void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 for(int i=0;i<leng;i++){
-avg.at(2,0)+=ptr[i];
-if(avg.at(0,0)<ptr[i]){avg.at(0,0)=ptr[i];
+avRg.at(2,0)+=ptr[i];
+if(avRg.at(0,0)<ptr[i]){avRg.at(0,0)=ptr[i];
 }
-if(avg.at(1,0)>ptr[i]&&ptr[i]>0){avg.at(1,0)=ptr[i];
+if(avRg.at(1,0)>ptr[i]&&ptr[i]>0){avRg.at(1,0)=ptr[i];
 }
 }
-avg.at(2,0)=avg.at(2,0)/leng;
-aptr[Fnum]=avg.at(2,0);
-aptr[Fnum+100]=avg.at(1,0);
-aptr[Fnum+200]=avg.at(0,0);
+avRg.at(2,0)=avRg.at(2,0)/leng;
+aptr[Fnum]=avRg.at(2,0);
+aptr[Fnum+100]=avRg.at(1,0);
+aptr[Fnum+200]=avRg.at(0,0);
 for(int i=33;i<65;i++){
 avg.at(0,1)+=aptr[i];
 }
-aptr[0]=avg.at(0,1)/32;
+aptr[0]=avRg.at(0,1)/32;
 for(int i=33;i<65;i++){
-avg(1,1)+=aptr[i+100];
+avRg(1,1)+=aptr[i+100];
 }
-aptr[100]=avg.at(1,1)/32;
+aptr[100]=avRg.at(1,1)/32;
 for(int i=33;i<65;i++){
-avg.at(2,1)+=aptr[i+200];
+avRg.at(2,1)+=aptr[i+200];
 }
-aptr[200]=avg.at(2,1)/32;
+aptr[200]=avRg.at(2,1)/32;
 return;
 }
 
