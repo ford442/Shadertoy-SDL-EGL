@@ -86,50 +86,50 @@ public:
 union{
 
 static void resetAvg(){
-avRg(0,0)=0.0; // max
-avRg(1,0)=1.0; // min
-avRg(2,0)=0.0; // sum
-avRg(0,1)=0.0; // avgsum
-avRg(1,1)=0.0; // minsum
-avRg(2,1)=0.0; // maxsum
-avRg(0,2)=0.0; // brt
-avRg(1,2)=0.0; // drk
-avRg(2,2)=0.0; // avrg
+avRg.at(0,0)=0.0; // max
+avRg.at(1,0)=1.0; // min
+avRg.at(2,0)=0.0; // sum
+avRg.at(0,1)=0.0; // avgsum
+avRg.at(1,1)=0.0; // minsum
+avRg.at(2,1)=0.0; // maxsum
+avRg.at(0,2)=0.0; // brt
+avRg.at(1,2)=0.0; // drk
+avRg.at(2,2)=0.0; // avrg
 }
 
 static void clrclr(GLclampf rlc,GLclampf alc,GLclampf avr){
-avRg(2,2)=(((avr+(1.0-rlc))/2.0)+alc);
-avRg(1,2)=1.0-(avr-0.5);
-avRg(0,2)=1.0-(((1.0-rlc)-(alc-0.5)));
-glBlendColor(avRg(2,2),avRg(2,2),avRg(2,2),1.0f);
-glClearColor(avRg(1,2),avRg(1,2),avRg(1,2),avRg(0,2));
+avRg.at(2,2)=(((avr+(1.0-rlc))/2.0)+alc);
+avRg.at(1,2)=1.0-(avr-0.5);
+avRg.at(0,2)=1.0-(((1.0-rlc)-(alc-0.5)));
+glBlendColor(avRg.at(2,2),avRg.at(2,2),avRg.at(2,2),1.0f);
+glClearColor(avRg.at(1,2),avRg.at(1,2),avRg.at(1,2),avRg.at(0,2));
 return;
 }
 
 static void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 for(int i=0;i<leng;i++){
-avg(2,0)+=ptr[i];
-if(avg(0,0)<ptr[i]){avg(0,0)=ptr[i];
+avg.at(2,0)+=ptr[i];
+if(avg.at(0,0)<ptr[i]){avg.at(0,0)=ptr[i];
 }
-if(avg(1,0)>ptr[i]&&ptr[i]>0){avg(1,0)=ptr[i];
+if(avg.at(1,0)>ptr[i]&&ptr[i]>0){avg.at(1,0)=ptr[i];
 }
 }
-avg(2,0)=avg(2,0)/leng;
-aptr[Fnum]=avg(2,0);
-aptr[Fnum+100]=avg(1,0);
-aptr[Fnum+200]=avg(0,0);
+avg.at(2,0)=avg.at(2,0)/leng;
+aptr[Fnum]=avg.at(2,0);
+aptr[Fnum+100]=avg.at(1,0);
+aptr[Fnum+200]=avg.at(0,0);
 for(int i=33;i<65;i++){
-avg(0,1)+=aptr[i];
+avg.at(0,1)+=aptr[i];
 }
-aptr[0]=avg(0,1)/32;
+aptr[0]=avg.at(0,1)/32;
 for(int i=33;i<65;i++){
 avg(1,1)+=aptr[i+100];
 }
-aptr[100]=avg(1,1)/32;
+aptr[100]=avg.at(1,1)/32;
 for(int i=33;i<65;i++){
-avg(2,1)+=aptr[i+200];
+avg.at(2,1)+=aptr[i+200];
 }
-aptr[200]=avg(2,1)/32;
+aptr[200]=avg.at(2,1)/32;
 return;
 }
 
