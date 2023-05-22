@@ -140,7 +140,7 @@ inline char frg_ftr_src[350]=
 "vec4 o;O=vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.6/1.0));}"
+"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.1842287761220110194341755355456/1.0));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
