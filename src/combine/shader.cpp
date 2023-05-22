@@ -2,19 +2,10 @@
 
 Run run;
 
-static void Swap(){
-run.procc.swap();
-}
-
-static void Frm(){
-run.procc.Rend();
-return;
-}
-
 extern "C" {
 
 void frm(){
-Frm();
+run.Rend();
 return;
 }
 
@@ -24,7 +15,7 @@ return;
 }
 
 void swp(){
-Swap();
+run.swap();
 return;
 }
 
