@@ -102,7 +102,8 @@ return shader;
 using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
-"#version 420\n"
+"#version 420\n";
+/*
 // #extension GL_ARB_shading_language_420pack : enable
 // #extension GL_GOOGLE_include_directive : enable
 "#pragma STDGL(fastmath on)\n"
@@ -120,20 +121,23 @@ inline char cm_hdr_src[500]=
 // "#define GL_ES 0\n"
 // "precision highp int;\n"
 "precision highp float;\n";
+*/
 
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=vec4(iPosition);}\n\0";
 
 inline char frg_hdr_src[1000]=
+  /*
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
+  */
 "uniform highp float time;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 resolution;uniform vec4 mouse;uniform float iSampleRate;"
+"uniform vec3 iChannelResolution[4];uniform highp vec2 resolution;uniform vec2 mouse;uniform float iSampleRate;"
 // "out highp vec4 fragColor;\n"
 "\n";
 
@@ -429,10 +433,9 @@ f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-
 void uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
-glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform2f(uni_res,t_size.at(0,1),t_size.at(0,1));
 glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
@@ -440,7 +443,7 @@ return;
 
 void uniDOWN(){
 t_size.at(0,1)=t_size.at(0,1)*0.99;
-glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform2f(uni_res,t_size.at(0,1),t_size.at(0,1));
 glUniform3f(smp_chn_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
@@ -499,7 +502,7 @@ clk_l=false;
 }
 mms.at(2,0)=(float)mms2.at(0,0);
 mms.at(2,1)=(float)(i_size.at(0,0)-mms2.at(0,1));
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform2f(uni_mse,mms.at(2,0),mms.at(2,1));
 // nanoPause();
 }
 else{
@@ -525,11 +528,11 @@ mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
-glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
+glUniform2f(uni_res,t_size.at(0,0),t_size.at(0,0));
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform2f(uni_mse,mms.at(2,0),mms.at(2,1));
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0f);
@@ -778,12 +781,12 @@ const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
-uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
+uni_tme=glGetUniformLocation(S1.at(0,0,0),"time");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
 uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
-uni_res=glGetUniformLocation(S1.at(0,0,0),"iResolution");
-uni_mse=glGetUniformLocation(S1.at(0,0,0),"iMouse");
+uni_res=glGetUniformLocation(S1.at(0,0,0),"resolution");
+uni_mse=glGetUniformLocation(S1.at(0,0,0),"mouse");
 uni_srate=glGetUniformLocation(S1.at(0,0,0),"iSampleRate");
 smp_chn_res=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
@@ -792,7 +795,7 @@ smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
 glUniform1f(uni_srate,44100.0f);
 nanoPause();
-glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform2f(uni_res,t_size.at(0,0),t_size.at(0,0));
 nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
@@ -801,7 +804,7 @@ glUniform1f(uni_fps,iFps);
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform2f(uni_mse,mms.at(2,0),mms.at(2,1));
 nanoPause();
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
