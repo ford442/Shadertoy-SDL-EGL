@@ -25,7 +25,7 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
 
-#include "../../include/shader/intrins.hpp"
+#include "../../include/shader/intrins.h"
 
 #include <float.h>
 #include <math.h>
