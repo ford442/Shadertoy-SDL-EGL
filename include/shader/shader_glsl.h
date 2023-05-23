@@ -102,7 +102,7 @@ return shader;
 using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
-"#version 420\n";
+"#version 420\n"
 /*
 // #extension GL_ARB_shading_language_420pack : enable
 // #extension GL_GOOGLE_include_directive : enable
@@ -120,11 +120,11 @@ inline char cm_hdr_src[500]=
 "#define HW_PERFORMANCE 0\n"
 // "#define GL_ES 0\n"
 // "precision highp int;\n"
-"precision highp float;\n";
 */
+"precision highp float;\n";
 
 inline char vrt_bdy_src[100]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=vec4(iPosition);}\n\0";
+"layout(location=0)in vec3 position;void main(){gl_Position=vec4(position,1.0);}\n\0";
 
 inline char frg_hdr_src[1000]=
   /*
@@ -765,7 +765,7 @@ PRGin(shd_prg);
 ::boost::tuples::tie(frag,vtx);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
-glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
+glBindAttribLocation(S1.at(0,0,0),0,"position");
 glLinkProgram(S1.at(0,0,0));
 nanoPause();
 glUseProgram(S1.at(0,0,0));
@@ -777,7 +777,7 @@ glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
 nanoPause();
-const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
+const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"position");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
