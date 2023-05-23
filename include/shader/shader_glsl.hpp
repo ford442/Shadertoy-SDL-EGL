@@ -131,13 +131,37 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"uniform highp float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform highp float time;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
-"out highp vec4 fragColor;\n";
+"uniform vec3 iChannelResolution[4];uniform highp vec3 resolution;uniform vec4 mouse;uniform float iSampleRate;"
+// "out highp vec4 fragColor;\n"
+"\n";
+
+inline char frg_body_src[1200]=
+"void main(  )"
+"{"
+"vec2 uv = vec2((2.0*gl_FragCoord-resolution.x) / resolution.y);"
+"vec3 color = vec3(0.8 + 0.2*uv.y);"
+"for( int i=0; i<40; i++ )"
+"{"
+"float pha =      sin(float(i)*546.13+1.0)*0.5 + 0.5;"
+"float siz = pow( sin(float(i)*651.74+5.0)*0.5 + 0.5, 4.0 );"
+"float pox =      sin(float(i)*321.55+4.1) * resolution.x / resolution.y;"
+"float rad = 0.1 + 0.5*siz;"
+"vec2  pos = vec2( pox, -1.0-rad + (2.0+2.0*rad)*mod(pha+0.1*time*(0.2+0.8*siz),1.0));"
+"float dis = length( uv - pos );"
+"vec3  col = mix( vec3(0.94,0.3,0.0), vec3(0.1,0.4,0.8), 0.5+0.5*sin(float(i)*1.2+1.9));"
+"float f = length(uv-pos)/rad;"
+"f = sqrt(clamp(1.0-f*f,0.0,1.0));"
+"color -= col.zyx *(1.0-smoothstep( rad*0.95, rad, dis )) * f;"
+"}"
+"color *= sqrt(1.5-0.5*length(uv));"
+"gl_FragColor = vec4(color,1.0);"
+"}";
 
 inline char frg_ftr_src[350]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+// "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+"\n\0";
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -359,6 +383,7 @@ char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
+char * frg_bdy=frg_body_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
@@ -595,8 +620,9 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-char * frag_body=procc.rd_fl(Fnm);
   
+//  char * frag_body=procc.rd_fl(Fnm);  // read file
+  /*
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(frag_body);
@@ -618,8 +644,9 @@ std::string outt3=std::regex_replace(outt2,rgx3,frepp3);
 // static char *cstr=reinterpret_cast<char *>(outt2.c_str());
 char *cstr=(char *)outt3.c_str();
     // ----------------------------
-
 std::string frag_body_S=cstr;
+*/
+std::string frag_body_S=frg_bdy;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
