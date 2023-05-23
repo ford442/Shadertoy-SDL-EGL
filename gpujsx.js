@@ -17865,10 +17865,10 @@ vTexCoord = aTexCoord;
         };
     },{}],107:[function(require,module,exports){
         const lib = require('./index');
-        const GPUX = lib.GPU;
+        const GPUX = lib.GPUX;
         for (const p in lib) {
             if (!lib.hasOwnProperty(p)) continue;
-            if (p === 'GPU') continue;
+            if (p === 'GPUX') continue;
             GPUX[p] = lib[p];
         }
 
@@ -17881,7 +17881,7 @@ vTexCoord = aTexCoord;
 
         function bindTo(target) {
             if (target.GPUX) return;
-            Object.defineProperty(target, 'GPU', {
+            Object.defineProperty(target, 'GPUX', {
                 get() {
                     return GPUX;
                 }
