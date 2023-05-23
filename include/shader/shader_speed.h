@@ -142,7 +142,7 @@ inline char frg_ftr_src[420]=
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
 "O += o;}O /= float(_N*_N);O=pow(O,vec4(2.0770387807649426427817730541854/1.0,2.1842287761220110194341755355456/1.0,2.4497151263025349676624129894871/1.0,1.0));}"
 "void mainImage0\n\0";
-1842287761220110194341755355456
+
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
@@ -615,7 +615,7 @@ cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglBindAPI(EGL_OPENGL_ES_API);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst);
+surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
