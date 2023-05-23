@@ -618,12 +618,9 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-  
-//  char * frag_body=procc.rd_fl(Fnm);
 
 /*
-  // get glsl shader via regex
-  //  -----------------------
+//  char * frag_body=procc.rd_fl(Fnm);
 std::string finpp(frag_body);
 char freppc[13]="void main(){";
 std::string frepp=(char *)freppc;
@@ -642,9 +639,9 @@ std::string outt3=std::regex_replace(outt2,rgx3,frepp3);
 // char *cstr=(char *)outt2.c_str();
 // static char *cstr=reinterpret_cast<char *>(outt2.c_str());
 char *cstr=(char *)outt3.c_str();
-    // ----------------------------
 std::string frag_body_S=cstr;
 */
+  
 std::string frag_body_S=frg_bdy;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
