@@ -615,7 +615,7 @@ cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglBindAPI(EGL_OPENGL_ES_API);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
+surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
