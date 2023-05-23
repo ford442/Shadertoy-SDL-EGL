@@ -101,7 +101,14 @@ inline char cm_hdr_src[550]=
 
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
-
+"#pragma STDGL(precise all)\n"
+"#pragma optionNV(precise all)\n"
+"#pragma STDGL(strict on)\n"
+"#pragma optionNV(strict on)\n"
+"#pragma optionNV(invariant none)\n"
+"#pragma STDGL(invariant none)\n"
+"#pragma optionNV(centroid all)\n"
+"#pragma STDGL(centroid all)\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
