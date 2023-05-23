@@ -96,7 +96,7 @@ return shader;
 
 };
 
-inline char cm_hdr_src[550]=
+inline char cm_hdr_src[800]=
 "#version 300 es\n"
 
 "#pragma STDGL(precision highp uint)\n"
