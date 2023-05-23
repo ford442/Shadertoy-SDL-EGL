@@ -2,7 +2,7 @@
  * gpu.js
  * http://gpu.rocks/
  *
- * GPUX Accelerated JavaScript
+ * GPU Accelerated JavaScript
  *
  * @version 2.16.0
  * @date Wed Nov 16 2022 15:48:37 GMT-0500 (Eastern Standard Time)
@@ -9806,7 +9806,7 @@ return 1;
                         const newPrecision = this.getVariablePrecisionString(newTexSize, this.tactic);
                         if (oldPrecision !== newPrecision) {
                             if (this.debug) {
-                                console.warn('Precision requirement changed, asking GPUX instance to recompile');
+                                console.warn('Precision requirement changed, asking GPU instance to recompile');
                             }
                             this.switchKernels({
                                 type: 'outputPrecisionMismatch',
@@ -10793,9 +10793,9 @@ return 1;
                 if (source.name && source.source && source.argumentTypes && 'returnType' in source) {
                     this.functions.push(source);
                 } else if ('settings' in source && 'source' in source) {
-                    this.functions.push(this.functionToIGPUXFunction(source.source, source.settings));
+                    this.functions.push(this.functionToIGPUFunction(source.source, source.settings));
                 } else if (typeof source === 'string' || typeof source === 'function') {
-                    this.functions.push(this.functionToIGPUXFunction(source, settings));
+                    this.functions.push(this.functionToIGPUFunction(source, settings));
                 } else {
                     throw new Error(`function not properly defined`);
                 }
@@ -11170,7 +11170,7 @@ return 1;
                 throw new Error(`"getSignature" not implemented on ${ this.name }`);
             }
 
-            functionToIGPUXFunction(source, settings = {}) {
+            functionToIGPUFunction(source, settings = {}) {
                 if (typeof source !== 'string' && typeof source !== 'function') throw new Error('source not a string or function');
                 const sourceString = typeof source === 'string' ? source : source.toString();
                 let argumentTypes = [];
@@ -13361,11 +13361,11 @@ __MAIN_RESULT__;
                 const { maxTextureSize } = this.kernel.constructor.features;
                 if (width > maxTextureSize || height > maxTextureSize) {
                     if (width > height) {
-                        throw new Error(`Argument texture width of ${width} larger than maximum size of ${maxTextureSize} for your GPUX`);
+                        throw new Error(`Argument texture width of ${width} larger than maximum size of ${maxTextureSize} for your GPU`);
                     } else if (width < height) {
-                        throw new Error(`Argument texture height of ${height} larger than maximum size of ${maxTextureSize} for your GPUX`);
+                        throw new Error(`Argument texture height of ${height} larger than maximum size of ${maxTextureSize} for your GPU`);
                     } else {
-                        throw new Error(`Argument texture height and width of ${height} larger than maximum size of ${maxTextureSize} for your GPUX`);
+                        throw new Error(`Argument texture height and width of ${height} larger than maximum size of ${maxTextureSize} for your GPU`);
                     }
                 }
             }
@@ -17865,10 +17865,10 @@ vTexCoord = aTexCoord;
         };
     },{}],107:[function(require,module,exports){
         const lib = require('./index');
-        const GPUX = lib.GPUX;
+        const GPUX = lib.GPU;
         for (const p in lib) {
             if (!lib.hasOwnProperty(p)) continue;
-            if (p === 'GPUX') continue;
+            if (p === 'GPU') continue;
             GPUX[p] = lib[p];
         }
 
@@ -17881,7 +17881,7 @@ vTexCoord = aTexCoord;
 
         function bindTo(target) {
             if (target.GPUX) return;
-            Object.defineProperty(target, 'GPUX', {
+            Object.defineProperty(target, 'GPU', {
                 get() {
                     return GPUX;
                 }
@@ -17921,7 +17921,7 @@ vTexCoord = aTexCoord;
                 validate = true;
             }
 
-            static get isGPUXSupported() {
+            static get isGPUSupported() {
                 return kernelOrder.some(Kernel => Kernel.isSupported);
             }
 
@@ -17949,7 +17949,7 @@ vTexCoord = aTexCoord;
                 return typeof HTMLCanvasElement !== 'undefined';
             }
 
-            static get isGPUXHTMLImageArraySupported() {
+            static get isGPUHTMLImageArraySupported() {
                 return WebGL2Kernel.isSupported;
             }
 
