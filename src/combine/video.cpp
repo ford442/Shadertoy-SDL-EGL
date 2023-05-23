@@ -148,8 +148,8 @@ gljs.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.unpackColorSpace='display-p3';  // very slow
 gljs.drawingBufferColorSpace='display-p3';
-const g=new GPU({mode:'gpu',canvas:bcanvas,webGl:gljs});
-const g2=new GPU({mode:'gpu'});
+const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:gljs});
+const g2=new GPUX({mode:'gpu'});
 
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
