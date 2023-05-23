@@ -619,9 +619,9 @@ eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
   
-//  char * frag_body=procc.rd_fl(Fnm);  // read file
+//  char * frag_body=procc.rd_fl(Fnm);
 
-  /*
+/*
   // get glsl shader via regex
   //  -----------------------
 std::string finpp(frag_body);
@@ -752,7 +752,7 @@ src[1]=vrt_bdy;
 unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
-src[2]=frg_bdy;
+src[2]=frag_body_S;
 // src[3]=frg_ftr;
 unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,3,src);
 unsigned int shd_prg=glCreateProgram();
