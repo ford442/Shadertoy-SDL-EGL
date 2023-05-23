@@ -64,8 +64,8 @@
 #include <iostream>
 
 // #include <chrono>
-#include "../../include/shader/gl.hpp"
-#include "../../include/shader/egl.hpp"
+#include "../../include/shader/gl.h"
+#include "../../include/shader/egl.h"
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu.h"
