@@ -85,7 +85,7 @@ sh4d=false;
 const pnnl=document.body;
 pnnl.addEventListener('keydown',doKey);
 let $H=Module.HEAPF32.buffer;
-var inh=window.innerHeight;
+var inh=pnnl.innerHeight;
 var s$=parseInt(inh,10);
 var w$=parseInt(inh,10);
 var h$=parseInt(inh,10);
