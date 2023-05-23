@@ -102,7 +102,7 @@ return shader;
 using namespace boost::numeric::ublas;
 
 inline char cm_hdr_src[500]=
-"#version 420\n"
+"#version 410\n"
 /*
 // #extension GL_ARB_shading_language_420pack : enable
 // #extension GL_GOOGLE_include_directive : enable
@@ -128,13 +128,8 @@ inline char vrt_bdy_src[100]=
 
 inline char frg_hdr_src[1000]=
   /*
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;"
-  */
+"precision highp sampler2D;"
+"precision highp samplerCube;"
 "uniform highp float time;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform highp vec2 resolution;uniform vec2 mouse;uniform float iSampleRate;"
@@ -144,7 +139,7 @@ inline char frg_hdr_src[1000]=
 inline char frg_body_src[1200]=
 "void main(  )"
 "{"
-"vec2 uv = vec2((2.0*gl_FragCoord-resolution.x) / resolution.y);"
+"vec2 uv = vec2((2.0*vec2(gl_FragCoord)-resolution.x) / resolution.y);"
 "vec3 color = vec3(0.8 + 0.2*uv.y);"
 "for( int i=0; i<40; i++ )"
 "{"
