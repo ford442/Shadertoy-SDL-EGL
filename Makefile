@@ -139,7 +139,7 @@ b3_googleStreetView_dev:
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sUSE_GLFW=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_video_shader_llvm:
 	 em++ src/video/main_shader.cpp -c -std=gnu++2b -stdlib=libc++ -flto -fno-math-errno -O3 \
