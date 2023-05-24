@@ -157,7 +157,7 @@ b3_video_shader_llvm:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
@@ -224,7 +224,7 @@ b3hd:
 	-DSIMD=AES -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -polly \
 	-sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire_egl","_b3_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	--pre-js startUp.js --post-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
+	--pre-js startUp.js --post-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine:
 	 em++ src/combine/main.cpp -c -std=gnu++2a
@@ -238,7 +238,7 @@ b3_combine:
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujs.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_test:
 	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -fpie \
@@ -260,7 +260,7 @@ b3_combine_test:
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js gpujs.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --extern-pre-js gpujsx.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_llvm:
 	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fpie \
@@ -284,7 +284,7 @@ b3_combine_llvm:
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --post-js js/module.js
+	 --pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --post-js js/module.js
 
 b3_combine_cloud:
 	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie \
@@ -412,7 +412,7 @@ b3_video_test:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --extern-pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_llvm:
 	 em++ src/video/main.cpp -c -O0 -fpie \
@@ -434,7 +434,7 @@ b3_video_llvm:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --post-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js
+	 --post-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_test:
 	em++ src/audio/main.cpp -c -std=c++2a -stdlib=libc++ -fno-math-errno -O0 -fpie \
@@ -610,7 +610,7 @@ b3hdm:
 	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_fire_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 sh4d3:
 	 em++ src/b3ogl_sh4d3.cpp -c -fno-math-errno -fPIC -fexperimental-library \
@@ -698,7 +698,7 @@ b3php:
 	 -DSIMD=128 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js gpujs.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
+	 --pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 cloud:
 	 em++ src/b3main.cpp -c \
@@ -791,7 +791,7 @@ fire:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
+	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujsx.js --post-js pagec.js
 
 fire2:
 	 em++ h3srgb.cpp -o g3016.js \
@@ -799,7 +799,7 @@ fire2:
 	 -std=gnu++2b -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
+	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujsx.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
 
 
 speed:
@@ -810,7 +810,6 @@ speed:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
 
 
 cloudxx:
@@ -821,7 +820,7 @@ cloudxx:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --post-js tilt.js --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujs.js --post-js pagec.js
+	 --post-js tilt.js --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujsx.js --post-js pagec.js
 
 tst8c: glsl_loader2.cpp Makefile
 	em++ glsl_loader2.cpp -std=c++2b -O3 -sFULL_ES3=1 --closure 0 -sGL_TESTING=1 \
@@ -844,7 +843,7 @@ t3st:
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
 	 -std=c++20 -sASYNCIFY \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujs.js
+	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 texture:
 	 em++ h3srgbtex.cpp -o t3001.js -sASYNCIFY -sFORCE_FILESYSTEM=1 \
@@ -892,7 +891,7 @@ paint:
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_stp"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js gpujs.js
+	 --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js gpujsx.js
 
 paint2:
 	 em++ paint3.cpp -o p3002.js -sFORCE_FILESYSTEM=1 \
@@ -901,7 +900,7 @@ paint2:
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
 	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujs.js
+	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 
 tester:
