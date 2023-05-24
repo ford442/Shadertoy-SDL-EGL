@@ -38,19 +38,19 @@ b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_speed.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
 	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -Wno-implicit-function-declaration -fmerge-all-constants \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
 	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
 	 emcc main.o shader_speed.o -o s3024s.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
-	 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -60,7 +60,8 @@ b3_shader_speed:
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
 	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -sSTACK_OVERFLOW_CHECK=2 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
-	 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
+	 -sDISABLE_EXCEPTION_THROWING=1 -sMALLOC=emmalloc --memory-init-file 0 \
+	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
 	 -sEVAL_CTORS -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sUSE_WEBGPU=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
