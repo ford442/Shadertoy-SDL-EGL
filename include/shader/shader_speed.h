@@ -370,7 +370,7 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * Fnm=const_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
@@ -487,12 +487,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const long int xxx=mms2.at(0,0);
 const long int yyy=mms2.at(0,1);
-mms.at(0,0)=const_cast<float>{xxx};
-mms.at(1,0)=const_cast<float>{i_size.at(0,0)-yyy};
+mms.at(0,0)=const_cast<float>(xxx);
+mms.at(1,0)=const_cast<float>(i_size.at(0,0)-yyy);
 clk_l=false;
 }
-mms.at(2,0)=const_cast<float>{mms2.at(0,0)};
-mms.at(2,1)=const_cast<float>{i_size.at(0,0)-mms2.at(0,1)};
+mms.at(2,0)=const_cast<float>(mms2.at(0,0));
+mms.at(2,1)=const_cast<float>(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
 }
@@ -510,9 +510,9 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=const_cast<int>{mouse.hi};
+Size=const_cast<int>(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(const_cast<float>{mouse.hi});
+u_iSize_set(const_cast<float>(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -576,7 +576,7 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=const_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
@@ -584,7 +584,7 @@ result[actual_length++]={'\0'};
 fclose(file);
 
 // results=reinterpret_cast<char *>(result);
-results=const_cast<char *>{result};
+results=const_cast<char *>(result);
 
 return results;
 }
@@ -647,9 +647,9 @@ glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=const_cast<int>{mouse.hi};
+Size=const_cast<int>(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(const_cast<float>{mouse.hi});
+u_iSize_set(const_cast<float>(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
