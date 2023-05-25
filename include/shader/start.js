@@ -1,1 +1,5 @@
-document.body.addEventListener("load", Module.ccall("js_m"));
+function stt(){
+Module.ccall("js_m");
+}
+
+document.getElementById('wsm').addEventListener("load",stt());
