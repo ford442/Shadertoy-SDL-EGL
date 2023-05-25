@@ -368,7 +368,7 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-const char * Fnm=const char *("/shader/shader.glsl");
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
@@ -570,13 +570,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=char8_t *(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=char *(result);
+results=reinterpret_cast<char *>(result);
 return results;
 }
 return nullptr;
