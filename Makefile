@@ -56,15 +56,15 @@ b3_shader_speed:
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
-	 -sDYNAMIC_EXECUTION=0 -sUSE_BOOST_HEADERS=1 \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
-	 -sPOLYFILL=0 -sGLOBAL_BASE=65536 \
+	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -sASSERTIONS=0 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
 	 -sDISABLE_EXCEPTION_THROWING=1 -sMALLOC=emmalloc --memory-init-file 0 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
-	 -sEVAL_CTORS -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sSTRICT=1 -sTEXTDECODER=2 -sUSE_WEBGPU=1 -sWASM=1 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 --output_eol linux \
+	 -sEVAL_CTORS -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sUSE_WEBGPU=1 -sWASM=1 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
