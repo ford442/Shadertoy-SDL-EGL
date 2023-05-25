@@ -1,6 +1,8 @@
 #include "../../include/shader/main.h"
 
 EM_JS(void,js_main,(),{
+ 
+FS.mkdir('/shader');
 
 window.scroll(0,0);
 
@@ -237,18 +239,9 @@ return c;
 }
  
 static inline void(*jss)(){&js_main};
-static inline void ffs(){
-EM_ASM({
-FS.mkdir('/shader');
-});
-jss();
-return;
-}
-
-static inline void(*fss)(){&ffs};
 
 int main(void){
-fss();
+jss();
 // tie(JS.Th,JS.rD,JS.Dr);
 return 1;
 }
