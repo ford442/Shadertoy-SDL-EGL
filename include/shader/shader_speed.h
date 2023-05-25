@@ -349,9 +349,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
 mms2.at(0,1)=e->clientY;
 }}
-  
 return (EM_BOOL)1;
-  
 }
 
 static char8_t * result=NULL;
@@ -370,7 +368,7 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-const char * Fnm=const_cast<const char *>("/shader/shader.glsl");
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
@@ -477,9 +475,7 @@ return;
 union{
 
 static void uni(){
-  
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-  
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
@@ -487,12 +483,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const long int xxx=mms2.at(0,0);
 const long int yyy=mms2.at(0,1);
-mms.at(0,0)=const_cast<float>(xxx);
-mms.at(1,0)=const_cast<float>(i_size.at(0,0)-yyy);
+mms.at(0,0)=<float>(xxx);
+mms.at(1,0)=<float>((i_size.at(0,0)-yyy));
 clk_l=false;
 }
-mms.at(2,0)=const_cast<float>(mms2.at(0,0));
-mms.at(2,1)=const_cast<float>(i_size.at(0,0)-mms2.at(0,1));
+mms.at(2,0)=<float>(mms2.at(0,0);
+mms.at(2,1)=<float>(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
 }
@@ -510,9 +506,9 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=const_cast<int>(mouse.hi);
+Size=<int>(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(const_cast<float>(mouse.hi));
+u_iSize_set(<float>(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -524,10 +520,8 @@ glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-  
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-
-  glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::steady_clock::now();
@@ -547,8 +541,8 @@ static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::steady_clock::now();
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>{u_time.t2-u_time.t1};
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>{u_time.t2-u_time.t3};
+u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -576,16 +570,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=const_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-
-// results=reinterpret_cast<char *>(result);
-results=const_cast<char *>(result);
-
+results=reinterpret_cast<char *>(result);
 return results;
 }
 return nullptr;
@@ -647,9 +638,9 @@ glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=const_cast<int>(mouse.hi);
+Size=static_cast<int>(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(const_cast<float>(mouse.hi));
+u_iSize_set(static_cast<float>(Size));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -773,7 +764,7 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
-iFps=60;
+iFps=50;
 glUniform1f(uni_fps,iFps);
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
@@ -792,8 +783,8 @@ u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::steady_clock::now();
 u_time.t3=boost::chrono::steady_clock::now();
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>{u_time.t2-u_time.t3};
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>{u_time.t2-u_time.t1};
+u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
@@ -805,5 +796,5 @@ nanoPause();
 emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
-
+  
 };
