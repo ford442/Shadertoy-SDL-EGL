@@ -247,7 +247,7 @@ return;
 
 static inline void(*fss)(){&ffs};
 
-int32_t main(void){
+int main(void){
 fss();
 // tie(JS.Th,JS.rD,JS.Dr);
 return 1;
