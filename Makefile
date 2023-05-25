@@ -43,7 +43,7 @@ b3_shader_speed:
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
+	 -sUSE_SDL=0 -fmerge-all-constants \
 	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
