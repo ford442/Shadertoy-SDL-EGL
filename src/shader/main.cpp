@@ -222,9 +222,6 @@ pnnl.addEventListener('keydown',Key);
 
 js JS;
 
-static inline void(*jss)(){&js_main};
-
-
 extern"C"{
 
 int32_t r4nd(int32_t tH){
