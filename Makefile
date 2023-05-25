@@ -63,11 +63,11 @@ b3_shader_speed:
 	 -sDISABLE_EXCEPTION_THROWING=1 -sMALLOC=emmalloc --memory-init-file 0 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
-	 -sEVAL_CTORS -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sUSE_WEBGPU=1 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
+	 -sEVAL_CTORS -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sSTRICT=1 -sTEXTDECODER=2 -sUSE_WEBGPU=1 -sWASM=1 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_glsl:
 	 ###         Shader
