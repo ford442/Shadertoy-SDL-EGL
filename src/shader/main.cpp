@@ -240,7 +240,7 @@ return c;
  
 static inline void(*jss)(){&js_main};
 
-int main(void){
+int32_t main(){
 jss();
 // tie(JS.Th,JS.rD,JS.Dr);
 return 1;
