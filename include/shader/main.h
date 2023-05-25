@@ -31,6 +31,8 @@ std::random_device rd;
 
 public:
 
+static inline void(*jss)(){&js_main};
+
 int32_t rD;
 int32_t Th;
 v128_t Dr;
