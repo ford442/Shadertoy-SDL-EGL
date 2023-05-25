@@ -506,9 +506,9 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=<int>(mouse.hi);
+Size=int(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(<float>(mouse.hi));
+u_iSize_set(float(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
