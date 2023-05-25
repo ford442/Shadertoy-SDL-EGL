@@ -22,15 +22,6 @@
 
 using namespace ::boost::tuples;
 
-class js
-{
-
-private:
-
-std::random_device rd;
-
-public:
-
 EM_JS(void,js_main,(),{
  
 FS.mkdir('/shader');
@@ -250,6 +241,15 @@ if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
 pnnl.addEventListener('keydown',Key);
 
 });
+class js
+{
+
+private:
+
+std::random_device rd;
+
+public:
+
 static inline void(*jss)(){&js_main};
 
 int32_t rD;
