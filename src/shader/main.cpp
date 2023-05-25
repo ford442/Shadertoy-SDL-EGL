@@ -1,6 +1,5 @@
 #include "../../include/shader/main.h"
 
-
 js JS;
 
 extern"C"{
@@ -12,8 +11,9 @@ return c;
 }
 
 }
- 
-int main(){
+
+int32_t main(void){
+jss();
 tie(JS.Th,JS.rD,JS.Dr);
 return 0;
 }
