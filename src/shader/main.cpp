@@ -237,21 +237,20 @@ return c;
 }
 
 }
-
+ 
+static inline void(*jss)(){&js_main};
 static inline void ffs(){
 EM_ASM({
 FS.mkdir('/shader');
 });
+jss();
 return;
 }
- 
-static inline void(*jss)(){&js_main};
+
 static inline void(*fss)(){&ffs};
 
 int32_t main(void){
-"use strict";
 fss();
 tie(JS.Th,JS.rD,JS.Dr);
-jss();
 return 1;
 }
