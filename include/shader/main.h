@@ -1,6 +1,10 @@
-#include <emscripten.h>
-
 #pragma once
+#pragma pack(4)
+#pragma float_control(precise, on)  // enable precise semantics
+#pragma fenv_access(on)             // enable environment sensitivity
+#pragma float_control(except, on)   // enable exception semantics
+
+#include <boost/cstdfloat.hpp>  // must be first include
 
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD -1
@@ -19,6 +23,8 @@
 #include "../../include/shader/intrins.h"
 #include "boost/tuple/tuple.hpp"
 #include <random>
+#include <cstdlib>
+#include <emscripten.h>
 
 using namespace ::boost::tuples;
 
@@ -272,10 +278,5 @@ int32_t c;
 v128_t Rg;
 int32_t r4nd(int32_t);
 
-void js_m(){
-jss();
 }
 
-}
-
-#include <cstdlib>
