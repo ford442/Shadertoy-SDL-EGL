@@ -1,20 +1,20 @@
 #ifndef FALSE
 #define FALSE 0
 #endif
+
 #ifndef TRUE
 #define TRUE 1
 #endif
 
-#pragma pack(1)
+#pragma pack(4)
 #pragma fenv_access(on)             // enable environment sensitivity
-
-#pragma STDC FP_CONTRACT ON
+#pragma float_control(precise, on)  // enable precise semantics
+#pragma float_control(except, on)   // enable exception semantics
 
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
-
+#pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
-
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -24,12 +24,6 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
-
-#include "../../include/shader/intrins.h"
-
-#include <float.h>
-#include <math.h>
-#include <new>
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
@@ -43,6 +37,12 @@
 #define BOOST_HAS_NRVO 1
 #define BOOST_HAS_STDINT_H 1
 
+#include <boost/cstdfloat.hpp>  // must be first include
+
+#include <float.h>
+#include <math.h>
+#include <new>
+
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
@@ -52,7 +52,6 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 
-#include <emscripten.h>
 #include <algorithm>
 #include <string.h>
 #include <stdarg.h>
@@ -71,6 +70,9 @@
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
 #include "webgpu/webgpu_cpp.h"
+#include "../../include/shader/intrins.h"
+
+#include <emscripten.h>
 
 extern "C"{
   
