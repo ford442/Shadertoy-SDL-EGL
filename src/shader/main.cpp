@@ -2,8 +2,6 @@
 
 EM_JS(void,js_main,(),{
 
-"use strict";
-
 window.scroll(0,0);
 
 let $tim=document.getElementById('tim');
@@ -251,6 +249,6 @@ static inline void(*fss)(){&ffs};
 
 int32_t main(void){
 fss();
-tie(JS.Th,JS.rD,JS.Dr);
+// tie(JS.Th,JS.rD,JS.Dr);
 return 1;
 }
