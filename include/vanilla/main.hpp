@@ -1,4 +1,4 @@
-#pragma pack(16)
+#pragma pack(4)
 #pragma float_control(precise, on)  // enable precise semantics
 #pragma fenv_access(on)             // enable environment sensitivity
 #pragma float_control(except, on)   // enable exception semantics
