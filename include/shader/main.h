@@ -50,6 +50,10 @@ int32_t c;
 v128_t Rg;
 int32_t r4nd(int32_t);
 
+void js_m(){
+jss();
+}
+
 }
 
 #include <cstdlib>
