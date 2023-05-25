@@ -52,7 +52,7 @@ b3_shader_speed:
 	 emcc main.o shader_speed.o -o s3024s.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
 	 -sUSE_SDL=0 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
-	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
+	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
