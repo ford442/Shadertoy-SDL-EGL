@@ -487,12 +487,12 @@ retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)
 if(clk_l==true){
 const long int xxx=mms2.at(0,0);
 const long int yyy=mms2.at(0,1);
-mms.at(0,0)=float{xxx};
-mms.at(1,0)=float{i_size.at(0,0)-yyy};
+mms.at(0,0)=const_cast<float>{xxx};
+mms.at(1,0)=const_cast<float>{i_size.at(0,0)-yyy};
 clk_l=false;
 }
-mms.at(2,0)=<float>{mms2.at(0,0)};
-mms.at(2,1)=<float>{i_size.at(0,0)-mms2.at(0,1)};
+mms.at(2,0)=const_cast<float>{mms2.at(0,0)};
+mms.at(2,1)=const_cast<float>{i_size.at(0,0)-mms2.at(0,1)};
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
 }
@@ -510,9 +510,9 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=<int>{mouse.hi};
+Size=const_cast<int>{mouse.hi};
 i_iSize_set(Size);
-u_iSize_set(<float>{mouse.hi});
+u_iSize_set(const_cast<float>{mouse.hi});
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -584,7 +584,7 @@ result[actual_length++]={'\0'};
 fclose(file);
 
 // results=reinterpret_cast<char *>(result);
-results=<char *>{result};
+results=const_cast<char *>{result};
 
 return results;
 }
@@ -647,9 +647,9 @@ glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=<int>{mouse.hi};
+Size=const_cast<int>{mouse.hi};
 i_iSize_set(Size);
-u_iSize_set(<float>{mouse.hi});
+u_iSize_set(const_cast<float>{mouse.hi});
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
