@@ -2,7 +2,7 @@
 
 EM_JS(void,js_main,(),{
  
-FS.mkdir('/shader');
+// FS.mkdir('/shader');
 
 window.scroll(0,0);
 
