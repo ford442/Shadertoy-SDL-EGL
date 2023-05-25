@@ -11,7 +11,7 @@
 #pragma float_control(precise, on)  // enable precise semantics
 #pragma float_control(except, on)   // enable exception semantics
 
-// #undef _FLT_EVAL_METHOD
+#undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
@@ -30,8 +30,8 @@
 #define BOOST_UBLAS_MOVE_SEMANTICS
 #define BOOST_UBLAS_TYPE_CHECK 0
 #define BOOST_UBLAS_USE_LONG_DOUBLE
-// #define BOOST_NO_EXCEPTIONS
-// #define BOOST_HAS_FLOAT128
+#define BOOST_NO_EXCEPTIONS
+#define BOOST_HAS_FLOAT128
 #define BOOST_HAS_CLOCK_GETTIME 1
 #define BOOST_HAS_NANOSLEEP 1
 #define BOOST_HAS_NRVO 1
@@ -92,7 +92,7 @@ public:
 unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
-srclens[i]=static_cast<GLsizei>(strlen(src[i]));
+srclens[i]=GLsizei(strlen(src[i]));
 }
 const GLuint shader=glCreateShader(type);
 glShaderSource(shader,nsrc,src,srclens);
@@ -368,7 +368,7 @@ EGLSurface surface;
 EGLContext ctxegl;
 EGLConfig eglconfig;
 EGLint config_size,major,minor;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * Fnm=const char *("/shader/shader.glsl");
 const char * src[4];
 char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
@@ -570,13 +570,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=char8_t *(malloc((length+1)*sizeof(char8_t)));
 if(result){
 size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-results=reinterpret_cast<char *>(result);
+results=char *(result);
 return results;
 }
 return nullptr;
@@ -638,9 +638,9 @@ glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<int>(mouse.hi);
+Size=int(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(static_cast<float>(Size));
+u_iSize_set(float(Size));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
