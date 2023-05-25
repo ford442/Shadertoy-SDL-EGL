@@ -244,7 +244,7 @@ return c;
 
 }
  
-int32_t main(){
-tie(JS.Th,JS.rD,JS.Dr);
-return 1;
+int main(){
+// tie(JS.Th,JS.rD,JS.Dr);
+return 0;
 }
