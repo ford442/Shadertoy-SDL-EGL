@@ -67,7 +67,7 @@ b3_shader_speed:
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_js_m","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --post-js /include/shader/start.js
+	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --post-js include/shader/start.js
 
 b3_shader_glsl:
 	 ###         Shader
