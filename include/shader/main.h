@@ -241,6 +241,9 @@ if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
 pnnl.addEventListener('keydown',Key);
 
 });
+
+static inline void(*jss)(){&js_main};
+
 class js
 {
 
@@ -249,8 +252,6 @@ private:
 std::random_device rd;
 
 public:
-
-static inline void(*jss)(){&js_main};
 
 int32_t rD;
 int32_t Th;
