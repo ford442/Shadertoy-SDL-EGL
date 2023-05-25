@@ -6,8 +6,6 @@ FS.mkdir('/shader');
 
 window.scroll(0,0);
 
-let $tim=document.getElementById('tim');
-let $itim=document.getElementById('itim');
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
@@ -24,12 +22,8 @@ document.getElementById('stat').innerHTML='Sending Start';
 document.getElementById('stat').style.backgroundColor='green';
 Module.ccall('str');
 },100);
-document.getElementById('bcanvas').width=window.innerHeight;
-document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('acanvas').width=window.innerHeight;
-document.getElementById('acanvas').height=window.innerHeight;
 document.getElementById('di').click();
 }
 
@@ -92,7 +86,7 @@ ff.send(null);
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
+dxhttp.withCredentials=false;
 dxhttp.addEventListener("load",function(){
 shds(this);
 });
@@ -228,10 +222,12 @@ pnnl.addEventListener('keydown',Key);
 
 js JS;
 
-static inline void(*jss)(){&js_main};
+
 
 extern"C"{
- 
+
+static inline void(*jss)(){&js_main};
+
 void js_m(){
 jss();
 }
