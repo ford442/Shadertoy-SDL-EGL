@@ -8,7 +8,6 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "emscripten/html5_webgpu.h"
-#include "webgpu/webgpu.h"
 #include "webgpu/webgpu_cpp.h"
 // #include <torch/script.h>
 // #include <torch/csrc/api/include/torch/all.h>
