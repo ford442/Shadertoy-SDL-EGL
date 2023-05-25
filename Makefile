@@ -28,7 +28,7 @@ b3_shader_llvm:
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
 	 -msse -msse2 -msse3 -mssse3 -msse4 --closureFriendly -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -fstrict-vtable-pointers -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=512 \
-	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc++abi -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc++abi -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sGL_UNSAFE_OPTS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
@@ -57,7 +57,7 @@ b3_shader_speed:
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
-	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
+	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
 	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -sASSERTIONS=0 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
 	 -sMALLOC=emmalloc --memory-init-file 0 \
@@ -92,7 +92,7 @@ b3_shader_glsl:
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
-	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
+	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
 	 -sGLOBAL_BASE=8388608 -sASSERTIONS=2 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
@@ -116,7 +116,7 @@ b3_combine_dev:
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -lc++abi -flto \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
 	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sASSERTIONS=0 -s DYLINK_DEBUG=0 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 --closure 0 --closureFriendly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sDYNAMIC_EXECUTION=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=8388608 \
@@ -135,7 +135,7 @@ b3_googleStreetView_dev:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma -fstrict-vtable-pointers -fwhole-program-vtables -lc++abi \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -maes -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sUSE_GLFW=3 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
@@ -152,7 +152,7 @@ b3_video_shader_llvm:
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx -mavxifma \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 -sUSE_GLFW=0 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -179,7 +179,7 @@ b3_audio:
 	-msimd128 -mavx -mpclmul -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -BOOST_UBLAS_NDEBUG -NDEBUG \
 	-sGLOBAL_BASE=8388608 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -maes -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sASSERTIONS=0 -sTOTAL_STACK=8MB \
-	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-Wl,--lto-O3,--stack-first,--export-memory \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
@@ -193,7 +193,7 @@ b3_vanilla_llvm:
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DWORDS_BIGENDIAN=1 -DCPU_IS_LITTLE_ENDIAN=0 \
-	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
+	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
 	 -sEXPORTED_FUNCTIONS='["_main","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
@@ -220,7 +220,7 @@ b3hd:
 	-mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	-mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
 	emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -fno-math-errno \
-	-msimd128 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mcpu=bleeding-edge -fwasm-exceptions \
+	-msimd128 -sPRECISE_F32=2 -sWASM_BIGINT=0 -mcpu=bleeding-edge -fwasm-exceptions \
 	-DSIMD=AES -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -polly \
 	-sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_fire_egl","_b3_egl","_nano","_clr","_frm","_szz"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -280,7 +280,7 @@ b3_combine_llvm:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sWASMFS=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=3 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sWASMFS=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=3 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -304,7 +304,7 @@ b3_combine_cloud:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sWASMFS=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sWASMFS=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -351,7 +351,7 @@ b3_shader_test:
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sPRECISE_F32=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
+	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -fwhole-program -polly -sWASMFS=0 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -388,7 +388,7 @@ b3_shader_texture:
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sPRECISE_F32=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
+	 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	 -fwhole-program -polly -sWASMFS=0 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -428,7 +428,7 @@ b3_video_llvm:
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mavxifma \
 	 -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -447,7 +447,7 @@ b3_audio_test:
 	-fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 \
 	-msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 	
@@ -464,7 +464,7 @@ b3_video_google_llvm:
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx -mavxifma \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -501,7 +501,7 @@ b3_video_web_llvm:
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=3 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=1 -mtune=tigerlake -march=corei7-avx -mavxifma \
+	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -583,7 +583,7 @@ b3_vanilla_simd:
 	 -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -ffunction-sections -fdata-sections \
-	 -sPRECISE_F32=2 -sWASM_BIGINT=1 -mtune=corei7-avx \
+	 -sPRECISE_F32=2 -sWASM_BIGINT=0 -mtune=corei7-avx \
 	 -sEXPORTED_FUNCTIONS='["_main","_js_simd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
@@ -661,7 +661,7 @@ castle:
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs_castle.o -o g302c.js -O0 -DNDEBUG=1 \
-	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
+	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=0 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=AES -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -694,7 +694,7 @@ b3php:
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g302p.js -O0 -DNDEBUG=1 \
-	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
+	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=0 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=128 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -750,7 +750,7 @@ g00:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 emcc b3main_g00.o b3ogl.o b3sdl.o b3emjs_g00.o -o g0025.js -O0 -DNDEBUG=1 \
-	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=1 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
+	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=0 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
 	 -DSIMD=128 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
