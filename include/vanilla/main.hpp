@@ -59,6 +59,19 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
+
+WGPUDevice device;
+WGPUQueue queue;
+WGPUSwapChain swapchain;
+
+WGPURenderPipeline pipeline;
+WGPUBuffer vertBuf; // vertex buffer with triangle position and colours
+WGPUBuffer indxBuf; // index buffer
+WGPUBuffer uRotBuf; // uniform buffer (containing the rotation angle)
+WGPUBindGroup bindGroup;
+
+
+
 class tens{
 
 private:
