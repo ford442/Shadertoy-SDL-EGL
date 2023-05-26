@@ -98,8 +98,8 @@ return userData.adapter;
 
 WGPUDevice requestDevice(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
 struct UserData {
-WGPUDevice device = nullptr;
-bool requestEnded = false;
+WGPUDevice device=nullptr;
+bool requestEnded=false;
 };
 UserData userData;
 auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
@@ -119,9 +119,9 @@ return userData.device;
 void startWgpu(){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
-WGPUDeviceDescriptor deviceDesc={};
-WGPUDevice device=requestDevice(adapter,&deviceDesc);
-std::cout << "Got device: " << device << std::endl;
+WGPUDeviceDescriptor deviceDesc;
+WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
+std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 class tens{
