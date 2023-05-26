@@ -76,12 +76,7 @@ wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 
 WGPURequestAdapterOptions options={};
 WGPUDeviceDescriptor deviceDesc={};
-deviceDesc.nextInChain = nullptr;
-deviceDesc.label = "My Device"; // anything works here, that's your call
-deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
-deviceDesc.requiredLimits = nullptr; // we do not require any specific limit
-deviceDesc.defaultQueue.nextInChain = nullptr;
-deviceDesc.defaultQueue.label = "The default queue";
+
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
@@ -142,7 +137,12 @@ WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice device=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << device << std::endl;
-
+deviceDesc.nextInChain = nullptr;
+deviceDesc.label = "My Device"; // anything works here, that's your call
+deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
+deviceDesc.requiredLimits = nullptr; // we do not require any specific limit
+deviceDesc.defaultQueue.nextInChain = nullptr;
+deviceDesc.defaultQueue.label = "The default queue";
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
