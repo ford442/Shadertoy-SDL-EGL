@@ -66,7 +66,6 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-WGPUInstance instance;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
@@ -74,6 +73,9 @@ wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 WGPUDeviceDescriptor deviceDesc={};
 WGPURequestAdapterOptions options={};
+wgpu::InstanceDescriptor desc = {};
+desc.nextInChain = nullptr;
+wgpu::Instance instance = wgpu::createInstance(&desc);
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
