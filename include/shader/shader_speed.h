@@ -8,11 +8,11 @@
 
 #pragma pack(4)
 #pragma fenv_access(on)             // enable environment sensitivity
-#pragma float_control(precise, on)  // enable precise semantics
-#pragma float_control(except, on)   // enable exception semantics
+// #pragma float_control(precise, on)  // enable precise semantics
+// #pragma float_control(except, on)   // enable exception semantics
 
 #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD -1
+#define _FLT_EVAL_METHOD -1
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
