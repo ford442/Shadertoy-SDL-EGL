@@ -118,7 +118,6 @@ return userData.device;
 }
 
 WGPUAdapter adapter=requestAdapter(instance,&options);
-
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice device=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << device << std::endl;
