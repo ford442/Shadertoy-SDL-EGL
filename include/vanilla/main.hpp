@@ -39,7 +39,6 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #include <boost/atomic.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
-#include <boost/random.hpp>
 #include <boost/random/random_device.hpp>
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
