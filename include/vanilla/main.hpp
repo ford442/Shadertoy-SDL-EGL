@@ -9,7 +9,6 @@
 #include <emscripten/html5.h>
 // #include <emscripten/html5_webgpu.h>
 
-#include "../../include/vanilla/webgpu/dawn/webgpu.hpp"
 
 // #include <torch/script.h>
 // #include <torch/csrc/api/include/torch/all.h>
@@ -62,6 +61,9 @@ using tensorVarD=tensor<GLdouble>;
 using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
+
+#include "../../include/vanilla/webgpu/dawn/webgpu.h"
+#include "../../include/vanilla/webgpu/dawn/webgpu.hpp"
 
 WGPUDevice device;
 WGPUQueue queue;
