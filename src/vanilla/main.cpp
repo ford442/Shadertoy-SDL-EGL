@@ -184,8 +184,6 @@ document.getElementById('di').click();
 });
   
 int main(void){
-WGPURequestAdapterOptions options={};
-options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 js_main();
 return 1;
 
