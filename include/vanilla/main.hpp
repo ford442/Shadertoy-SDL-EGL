@@ -93,7 +93,6 @@ onAdapterRequestEnded,
 (void*)&userData
 );
 
-assert(userData.requestEnded);
 return userData.adapter;
 }
 
