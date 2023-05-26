@@ -62,12 +62,12 @@ return tt;
 }
   
 void wgpu_init1(){
-float tt=(float)Tens.init1();
+Tens.init1();
 return;
 }
   
 void wgpu_init2(){
-float tt=(float)Tens.init2();
+Tens.init2();
 return;
 }
 
