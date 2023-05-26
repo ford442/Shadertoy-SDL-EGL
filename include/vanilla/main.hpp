@@ -110,22 +110,7 @@ WGPUAdapter requestAdapter(WGPUInstance instance, WGPURequestAdapterOptions cons
     return userData.adapter;
 }
 
-void onAdapterRequestEnded(
-    WGPURequestAdapterStatus status, // a success status
-    WGPUAdapter adapter, // the returned adapter
-    char const* message, // error message, or nullptr
-    void* userdata // custom user data, as provided when requesting the adapter
-) {
-    // [...] Do something with the adapter
-}
-wgpuInstanceRequestAdapter(
-    instance /* equivalent of navigator.gpu */,
-    &options,
-    onAdapterRequestEnded,
-    nullptr // custom user data, see below
-);
-
-WGPUDevice device;
+GPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 
@@ -135,15 +120,6 @@ WGPUBindGroup bindGroup;
 wgpu::CommandEncoderDescriptor encoderDesc = wgpu::Default;
 
 
-computePass.setPipeline(computePipeline);
-
-WGPUInstanceDescriptor desc = {};
-desc.nextInChain = nullptr;
-
-wgpu::ComputePassEncoder computePass = encoder.beginComputePass(computePassDesc);
-
-// 2. We create the instance using this descriptor
-WGPUInstance instance = wgpuCreateInstance(&desc);
 
 class tens{
 
