@@ -59,7 +59,6 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
-
 WGPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
@@ -88,7 +87,7 @@ tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
 int llo=0;
-rng.generate(llo,50);
+rng.operator(llo,50);
 return olo+llo;
 }
 
