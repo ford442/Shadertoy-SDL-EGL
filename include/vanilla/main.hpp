@@ -92,7 +92,6 @@ WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-std::cout << "Requesting device userdata..." << std::endl;
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
@@ -100,7 +99,9 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
+ std::cout << "Requesting device userdata..." << std::endl;
+
+// wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
 
