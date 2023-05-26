@@ -78,7 +78,6 @@ uint128_t tst128;
 
 public:
 
-WGPUQueue queue;
 WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
 WGPUComputePassDescriptor computePassDesc={};
