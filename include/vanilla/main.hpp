@@ -123,7 +123,7 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 std::cout << "Requesting device..." << std::endl;
-wgpu::InstanceDescriptor desc={};
+WGPUInstanceDescriptor desc={};
 WGPUDevice Gdevice=requestDevice(userData.adapter,&desc);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
