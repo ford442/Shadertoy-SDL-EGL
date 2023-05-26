@@ -70,13 +70,14 @@ WGPUSwapChain swapchain;
 
 wgpu::ComputePassDescriptor computePassDesc;
 
-computePass.setPipeline(computePipeline);
 
 WGPUBindGroup bindGroup;
-wgpu::CommandEncoderDescriptor encoderDesc = Default;
+wgpu::CommandEncoderDescriptor encoderDesc = wgpu::Default;
+
 
 wgpu::ComputePassEncoder computePass = encoder.beginComputePass(computePassDesc);
 
+computePass.setPipeline(computePipeline);
 
 class tens{
 
