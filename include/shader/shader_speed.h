@@ -136,14 +136,14 @@ inline char vrt_bdy_src[100]=
 
 inline char frg_hdr_src[1000]=
 "precision mediump sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform float iTime;uniform mediump float iTimeDelta;uniform mediump float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"uniform mediump vec3 iChannelResolution[4];uniform vec3 iResolution;uniform mediump vec4 iMouse;uniform mediump float iSampleRate;"
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
@@ -153,18 +153,18 @@ inline char frg_ftr_src[420]=
 "vec4 o;O=vec4(0);"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.0770387807649426427817730541854/1.0,2.1842287761220110194341755355456/1.0,2.4497151263025349676624129894871/1.0,1.0));}"
+"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.077038/1.0,2.184228/1.0,2.449715/1.0,1.0));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
