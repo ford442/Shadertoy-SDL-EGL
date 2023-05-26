@@ -61,8 +61,6 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
-
-
 WGPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
@@ -76,7 +74,7 @@ WGPUBindGroup bindGroup;
 
 EM_BOOL raf(double time, void *userData)
 {
-  WGpuCommandEncoder encoder = wgpu_device_create_command_encoder(device, 0);
+  WGPUCommandEncoder encoder = wgpu_device_create_command_encoder(device, 0);
 
   WGpuRenderPassColorAttachment colorAttachment = WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
   colorAttachment.view = wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext), 0);
