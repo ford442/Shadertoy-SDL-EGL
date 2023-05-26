@@ -87,6 +87,9 @@ WGPUAdapter requestAdapter(WGPUInstance instance, WGPURequestAdapterOptions cons
         onAdapterRequestEnded,
         (void*)&userData
     );
+      std::cout << "Requesting adapter..." << std::endl;
+
+std::cout << "Got adapter: " << adapter << std::endl;
     assert(userData.requestEnded);
     return userData.adapter;
 }
@@ -112,12 +115,7 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
-  std::cout << "Requesting adapter..." << std::endl;
 
-WGPURequestAdapterOptions adapterOpts = {};
-WGPUAdapter adapter = requestAdapter(instance, &adapterOpts);
-
-std::cout << "Got adapter: " << adapter << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
