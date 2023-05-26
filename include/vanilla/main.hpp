@@ -90,7 +90,7 @@ tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
 // float llo=rng();
-return olo*llo;
+return olo;
 }
 
 };
