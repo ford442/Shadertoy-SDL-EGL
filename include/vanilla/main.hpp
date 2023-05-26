@@ -112,9 +112,8 @@ wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userDat
 return userData.device;
 }
 
-WGPUAdapter adapter=requestAdapter(instance,&options);
-
 void startWgpu(){
+WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << Gdevice << std::endl;
