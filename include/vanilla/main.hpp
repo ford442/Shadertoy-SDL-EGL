@@ -61,6 +61,7 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
+#define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
 WGPUDevice device;
