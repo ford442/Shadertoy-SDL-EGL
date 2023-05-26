@@ -76,6 +76,9 @@ WGPUAdapter requestAdapter(WGPUInstance instance, WGPURequestAdapterOptions cons
         UserData& userData = *reinterpret_cast<UserData*>(pUserData);
         if (status == WGPURequestAdapterStatus_Success) {
             userData.adapter = adapter;
+                  std::cout << "Requesting adapter..." << std::endl;
+
+std::cout << "Got adapter: " << adapter << std::endl;
         } else {
             std::cout << "Could not get WebGPU adapter: " << message << std::endl;
         }
@@ -87,9 +90,7 @@ WGPUAdapter requestAdapter(WGPUInstance instance, WGPURequestAdapterOptions cons
         onAdapterRequestEnded,
         (void*)&userData
     );
-      std::cout << "Requesting adapter..." << std::endl;
 
-std::cout << "Got adapter: " << adapter << std::endl;
     assert(userData.requestEnded);
     return userData.adapter;
 }
