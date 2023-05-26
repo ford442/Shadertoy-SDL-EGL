@@ -82,7 +82,7 @@ WGPUQueue queue;
 WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
 WGPUComputePassDescriptor computePassDesc={};
-WGPUCommandEncoderDescriptor encoderDesc=wgpu::Default;
+WGPUCommandEncoderDescriptor encoderDesc={};
 WGPUDeviceDescriptor deviceDesc={};
 WGPURequestAdapterOptions options={};
 WGPUInstance instance;
