@@ -39,7 +39,7 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #include <boost/atomic.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
-
+#include <boost/random/random_device.hpp>
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
 
@@ -75,7 +75,8 @@ WGPUBindGroup bindGroup;
 class tens{
 
 private:
-  
+
+boost::random::random_device rng;
 float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
@@ -88,7 +89,8 @@ A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
-return olo;
+int llo=rng(0)(50);
+return olo+llo;
 }
 
 };
