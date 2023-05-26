@@ -51,7 +51,7 @@ std::chrono::steady_clock::time_point t2;
 using namespace std;
 using namespace boost::numeric::ublas;
 using namespace boost::multiprecision;
-using namespace boost::random::random_device;
+using namespace boost::random;
 
 using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
