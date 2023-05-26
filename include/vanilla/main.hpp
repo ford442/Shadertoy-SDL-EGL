@@ -72,7 +72,7 @@ WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
 wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
-WGPUDeviceDescriptor deviceDesc;
+WGPUDeviceDescriptor deviceDesc={};
 
 WGPURequestAdapterOptions options={};
 
@@ -105,11 +105,6 @@ bool requestEnded=false;
 UserData userData;
 auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
 UserData& userData = *reinterpret_cast<UserData*>(pUserData);
-if (status == WGPURequestDeviceStatus_Success) {
-userData.device = device;
-} else {
-std::cout << "Could not get WebGPU device: " << message << std::endl;
-}
 userData.requestEnded = true;
 };
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
