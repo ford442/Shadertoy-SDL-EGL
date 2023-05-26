@@ -70,11 +70,12 @@ WGPUBuffer indxBuf; // index buffer
 WGPUBuffer uRotBuf; // uniform buffer (containing the rotation angle)
 WGPUBindGroup bindGroup;
 
+boost::random::random_device rng;
+
 class tens{
 
 private:
 
-boost::random::random_device rng;
 float lol,olo;
 tensorVar A=tensorVar{8,4};
 tensorVar Aa=tensorVar{2,3};
