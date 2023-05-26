@@ -106,7 +106,7 @@ WGPUBindGroup bindGroup;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 
 WGPUInstance instance;
-WGPURequestAdapterOptions adapterOpts = {};
+WGPURequestAdapterOptions options = {};
 WGPUAdapter adapter = requestAdapter(instance, &options);
 
 class tens{
