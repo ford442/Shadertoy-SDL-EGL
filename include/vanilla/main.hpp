@@ -68,15 +68,15 @@ WGPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 
-ComputePassDescriptor computePassDesc;
+wgpu::ComputePassDescriptor computePassDesc;
 computePassDesc.timestampWriteCount = 0;
 computePassDesc.timestampWrites = nullptr;
 computePass.setPipeline(computePipeline);
 
 WGPUBindGroup bindGroup;
-CommandEncoderDescriptor encoderDesc = Default;
+wgpu::CommandEncoderDescriptor encoderDesc = Default;
 
-ComputePassEncoder computePass = encoder.beginComputePass(computePassDesc);
+wgpu::ComputePassEncoder computePass = encoder.beginComputePass(computePassDesc);
 
 
 class tens{
