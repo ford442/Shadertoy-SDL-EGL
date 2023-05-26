@@ -185,7 +185,8 @@ document.getElementById('di').click();
   
 int main(void){
 js_main();
-startWgpu();
+Tens.startWgpu();
+Tens.startWgpu2();
 return 0;
 
 }
