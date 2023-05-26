@@ -66,47 +66,57 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options) {
+WGPUInstance instance;
+WGPUDevice device;
+WGPUQueue queue;
+WGPUSwapChain swapchain;
+WGPUBindGroup bindGroup;
+wgpu::ComputePassDescriptor computePassDesc;
+wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 
-struct UserData {
-WGPUAdapter adapter = nullptr;
-bool requestEnded = false;
+WGPURequestAdapterOptions options={};
+WGPUDeviceDescriptor deviceDesc={};
+
+WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
+struct UserData{
+WGPUAdapter adapter=nullptr;
+bool requestEnded=false;
 };
-
 UserData userData;
-auto onAdapterRequestEnded = [](WGPURequestAdapterStatus status, WGPUAdapter adapter, char const * message, void * pUserData) {
-UserData& userData = *reinterpret_cast<UserData*>(pUserData);
-if (status == WGPURequestAdapterStatus_Success) {
-userData.adapter = adapter;
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData) {
+UserData& userData=*reinterpret_cast<UserData*>(pUserData);
+if (status==WGPURequestAdapterStatus_Success){
+userData.adapter=adapter;
 std::cout << "Requesting adapter..." << std::endl;
 std::cout << "Got adapter: " << adapter << std::endl;
 } else {
 std::cout << "Could not get WebGPU adapter: " << message << std::endl;
 }
-userData.requestEnded = true;
+userData.requestEnded=true;
 };
-
-wgpuInstanceRequestAdapter(
-instance,
-options,
-onAdapterRequestEnded,
-(void*)&userData
-);
-
+wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
 
-WGPUDevice device;
-WGPUQueue queue;
-WGPUSwapChain swapchain;
-
-wgpu::ComputePassDescriptor computePassDesc;
-WGPUBindGroup bindGroup;
-wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
-
-WGPUInstance instance;
-WGPURequestAdapterOptions options = {};
-WGPUAdapter adapter = requestAdapter(instance, &options);
+WGPUDevice requestDevice(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
+struct UserData {
+WGPUDevice device = nullptr;
+bool requestEnded = false;
+};
+UserData userData;
+auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
+UserData& userData = *reinterpret_cast<UserData*>(pUserData);
+if (status == WGPURequestDeviceStatus_Success) {
+userData.device = device;
+} else {
+std::cout << "Could not get WebGPU device: " << message << std::endl;
+}
+userData.requestEnded = true;
+};
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
+assert(userData.requestEnded);
+return userData.device;
+}
 
 class tens{
 
@@ -121,6 +131,12 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
+  
+WGPUAdapter adapter=requestAdapter(instance,&options);
+std::cout << "Requesting device..." << std::endl;
+WGPUDevice device=requestDevice(adapter,&deviceDesc);
+std::cout << "Got device: " << device << std::endl;
+
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
