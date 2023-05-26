@@ -135,7 +135,6 @@ WGPUDevice Gdevice=requestDevice(adapter,&desc);
 std::cout << "Got device: " << Gdevice << std::endl;
 WGPUQueue queue = wgpuDeviceGetQueue(Gdevice);
 WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDesc);
-WGPUQueue queue=wgpuDeviceGetQueue(Gdevice);
 
 A.at(0,0)=nm;
 tensorVar B=A;
