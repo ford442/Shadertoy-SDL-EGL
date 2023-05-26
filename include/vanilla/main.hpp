@@ -117,11 +117,13 @@ assert(userData.requestEnded);
 return userData.device;
 }
 
+void startWgpu(){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice device=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << device << std::endl;
-  
+}
+
 class tens{
 
 private:
@@ -135,6 +137,8 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
+  
+  startWgpu();
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
