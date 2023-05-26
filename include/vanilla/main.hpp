@@ -53,7 +53,6 @@ using namespace std;
 using namespace boost::numeric::ublas;
 using namespace boost::multiprecision;
 using namespace boost::random;
-using namespace boost::random::random_device;
 
 using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
