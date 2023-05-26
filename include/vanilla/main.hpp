@@ -88,19 +88,21 @@ WGPURequestAdapterOptions options={};
 WGPUInstance instance;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
-struct pUserData{
+struct UserData{
 WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
-UserData pUserData;
+UserData UserData;
+ std::cout << "Requesting device userdata..." << std::endl;
+
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
-pUserData.device=device;
+UserData.device=device;
 }
-pUserData.requestEnded=true;
+UserData.requestEnded=true;
 };
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&pUserData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&UserData);
 return pUserData.device;
 }
 
