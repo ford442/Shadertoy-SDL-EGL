@@ -98,12 +98,12 @@ UserData UserData;
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
-UserData.device=device;
+userData.device=device;
 }
-UserData.requestEnded=true;
+userData.requestEnded=true;
 };
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&UserData);
-return pUserData.device;
+return userData.device;
 }
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
