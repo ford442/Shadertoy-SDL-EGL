@@ -66,11 +66,10 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-
 class tens{
 
 private:
-  
+
 // boost::random::random_device rng;
 float lol,olo;
 tensorVar A=tensorVar{8,4};
