@@ -91,7 +91,7 @@ WGPUAdapter requestAdapter(WGPUInstance instance, WGPURequestAdapterOptions cons
     return userData.adapter;
 }
 
-GPUDevice device;
+WGPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 
