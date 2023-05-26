@@ -60,6 +60,16 @@ float js_noblock(float yy){
 float tt=(float)Funcs.rnn.noblock(yy);
 return tt;
 }
+  
+void wgpu_init1(){
+float tt=(float)Funcs.init1();
+return;
+}
+  
+void wgpu_init2(){
+float tt=(float)Funcs.init2();
+return;
+}
 
 }
 
@@ -127,7 +137,13 @@ var pointa=800;
 var reslt=Module.ccall('js_noblock',"Number",["Number"],[pointa]);
 console.log(reslt);
 },1200);
-
+setTimeout(function(){
+console.log("noblock (and native_simd):");
+Module.ccall('wgpu_init1');
+},1400);
+setTimeout(function(){
+Module.ccall('wgpu_init2');
+},1600);
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
