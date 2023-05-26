@@ -88,8 +88,6 @@ if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Requesting adapter..." << std::endl;
 std::cout << "Got adapter: " << adapter << std::endl;
-} else {
-std::cout << "Could not get WebGPU adapter: " << message << std::endl;
 }
 userData.requestEnded=true;
 };
@@ -97,15 +95,18 @@ wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userDa
 return userData.adapter;
 }
 
-WGPUDevice requestDevice(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
+WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData {
 WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
-UserData& userData = *reinterpret_cast<UserData*>(pUserData);
-userData.requestEnded = true;
+auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+UserData& userData=*reinterpret_cast<UserData*>(pUserData);
+if(status==WGPURequestDeviceStatus_Success){
+userData.device=device;
+}
+userData.requestEnded=true;
 };
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
