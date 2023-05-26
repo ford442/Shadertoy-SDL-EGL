@@ -62,8 +62,7 @@ using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
-#include "../../include/vanilla/webgpu/dawn/webgpu.h"
-#include "../../include/vanilla/webgpu/dawn/webgpu.hpp"
+#include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
 WGPUDevice device;
 WGPUQueue queue;
