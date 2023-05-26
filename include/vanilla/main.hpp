@@ -74,7 +74,6 @@ wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 
 WGPURequestAdapterOptions options={};
-WGPUDeviceDescriptor deviceDesc={};
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
@@ -120,6 +119,7 @@ return userData.device;
 void startWgpu(){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
+WGPUDeviceDescriptor deviceDesc={};
 WGPUDevice device=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << device << std::endl;
 }
