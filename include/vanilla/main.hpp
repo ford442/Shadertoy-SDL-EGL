@@ -66,6 +66,19 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
+
+class tens{
+
+private:
+  
+// boost::random::random_device rng;
+float lol,olo;
+tensorVar A=tensorVar{8,4};
+tensorVar Aa=tensorVar{2,3};
+uint128_t tst128;
+
+public:
+
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
@@ -121,21 +134,8 @@ std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
-
-class tens{
-
-private:
   
-// boost::random::random_device rng;
-float lol,olo;
-tensorVar A=tensorVar{8,4};
-tensorVar Aa=tensorVar{2,3};
-uint128_t tst128;
-
-public:
-
 float rtt(float nm){
-  startWgpu2();
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
