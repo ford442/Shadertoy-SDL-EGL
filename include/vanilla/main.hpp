@@ -81,8 +81,9 @@ public:
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
-wgpu::ComputePassDescriptor computePassDesc;
-wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
+WGPUComputePassDescriptor computePassDesc={};
+WGPUCommandEncoderDescriptor encoderDesc=Default;
+encoderDesc.nextInChain = nullptr;
 WGPUDeviceDescriptor deviceDesc={};
 WGPURequestAdapterOptions options={};
 WGPUInstance instance;
@@ -128,7 +129,7 @@ float rtt(float nm){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
 const WGPUDeviceDescriptor desc={};
-WGPUDevice Gdevice=requestDevice(requestAdapter(instance,&options),&desc);
+WGPUDevice Gdevice=requestDevice(adapter,&desc);
 std::cout << "Got device: " << Gdevice << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
