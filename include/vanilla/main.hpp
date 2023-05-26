@@ -69,8 +69,7 @@ WGPUQueue queue;
 WGPUSwapChain swapchain;
 
 wgpu::ComputePassDescriptor computePassDesc;
-computePassDesc.timestampWriteCount = 0;
-computePassDesc.timestampWrites = nullptr;
+
 computePass.setPipeline(computePipeline);
 
 WGPUBindGroup bindGroup;
