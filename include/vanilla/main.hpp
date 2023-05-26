@@ -72,6 +72,7 @@ WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
 wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
+WGPUDeviceDescriptor deviceDesc;
 
 WGPURequestAdapterOptions options={};
 
@@ -118,7 +119,6 @@ return userData.device;
 void startWgpu(){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
-WGPUDeviceDescriptor deviceDesc;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
