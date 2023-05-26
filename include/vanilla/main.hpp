@@ -129,9 +129,10 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
+WGPUAdapter adapter;
 
 void init1(){
-WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
+adapter=requestAdapter(instance,&adapterOptions);
 }
  
 void init2(){
