@@ -74,7 +74,7 @@ wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 WGPUDeviceDescriptor deviceDesc={};
 WGPURequestAdapterOptions options={};
 wgpu::InstanceDescriptor desc={};
-wgpu::Instance instance={};
+WGPUInstance instance;
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
