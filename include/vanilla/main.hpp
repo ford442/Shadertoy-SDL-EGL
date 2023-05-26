@@ -67,7 +67,6 @@ using tV=tensor<v128_t>;
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
 WGPUInstance instance;
-WGPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 WGPUBindGroup bindGroup;
