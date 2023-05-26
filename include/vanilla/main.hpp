@@ -70,8 +70,6 @@ WGPUBuffer indxBuf; // index buffer
 WGPUBuffer uRotBuf; // uniform buffer (containing the rotation angle)
 WGPUBindGroup bindGroup;
 
-
-
 class tens{
 
 private:
@@ -89,7 +87,7 @@ A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
-int llo=rng operator(0)(50);
+int llo=rng(operator(0)(50));
 return olo+llo;
 }
 
