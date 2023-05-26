@@ -87,7 +87,8 @@ A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
 olo=lol*100;
-int llo=rng.generate(0,50);
+int llo[1];
+rng.generate(llo,50);
 return olo+llo;
 }
 
