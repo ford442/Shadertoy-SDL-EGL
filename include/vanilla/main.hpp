@@ -122,7 +122,6 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
-requestAdapter();
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
