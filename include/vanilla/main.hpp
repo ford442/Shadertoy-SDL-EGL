@@ -68,11 +68,16 @@ WGPUDevice device;
 WGPUQueue queue;
 WGPUSwapChain swapchain;
 
-WGPURenderPipeline pipeline;
-WGPUBuffer vertBuf; // vertex buffer with triangle position and colours
-WGPUBuffer indxBuf; // index buffer
-WGPUBuffer uRotBuf; // uniform buffer (containing the rotation angle)
+ComputePassDescriptor computePassDesc;
+computePassDesc.timestampWriteCount = 0;
+computePassDesc.timestampWrites = nullptr;
+computePass.setPipeline(computePipeline);
+
 WGPUBindGroup bindGroup;
+CommandEncoderDescriptor encoderDesc = Default;
+
+ComputePassEncoder computePass = encoder.beginComputePass(computePassDesc);
+
 
 class tens{
 
