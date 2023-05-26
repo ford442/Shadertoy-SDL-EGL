@@ -112,7 +112,6 @@ std::cout << "Could not get WebGPU device: " << message << std::endl;
 userData.requestEnded = true;
 };
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
-assert(userData.requestEnded);
 return userData.device;
 }
 
