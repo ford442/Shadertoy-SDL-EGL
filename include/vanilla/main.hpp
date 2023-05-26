@@ -102,7 +102,7 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&UserData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
 
