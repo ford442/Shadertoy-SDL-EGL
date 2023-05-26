@@ -92,7 +92,7 @@ struct UserData{
 WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
-UserData UserData;
+UserData userData;
  std::cout << "Requesting device userdata..." << std::endl;
 
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
