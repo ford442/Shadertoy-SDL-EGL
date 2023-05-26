@@ -66,33 +66,35 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-WGPUAdapter requestAdapter(WGPUInstance instance, WGPURequestAdapterOptions const * options) {
-    struct UserData {
-        WGPUAdapter adapter = nullptr;
-        bool requestEnded = false;
-    };
-    UserData userData;
-    auto onAdapterRequestEnded = [](WGPURequestAdapterStatus status, WGPUAdapter adapter, char const * message, void * pUserData) {
-        UserData& userData = *reinterpret_cast<UserData*>(pUserData);
-        if (status == WGPURequestAdapterStatus_Success) {
-            userData.adapter = adapter;
-                  std::cout << "Requesting adapter..." << std::endl;
+WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options) {
 
+struct UserData {
+WGPUAdapter adapter = nullptr;
+bool requestEnded = false;
+};
+
+UserData userData;
+auto onAdapterRequestEnded = [](WGPURequestAdapterStatus status, WGPUAdapter adapter, char const * message, void * pUserData) {
+UserData& userData = *reinterpret_cast<UserData*>(pUserData);
+if (status == WGPURequestAdapterStatus_Success) {
+userData.adapter = adapter;
+std::cout << "Requesting adapter..." << std::endl;
 std::cout << "Got adapter: " << adapter << std::endl;
-        } else {
-            std::cout << "Could not get WebGPU adapter: " << message << std::endl;
-        }
-        userData.requestEnded = true;
-    };
-    wgpuInstanceRequestAdapter(
-        instance /* equivalent of navigator.gpu */,
-        options,
-        onAdapterRequestEnded,
-        (void*)&userData
-    );
+} else {
+std::cout << "Could not get WebGPU adapter: " << message << std::endl;
+}
+userData.requestEnded = true;
+};
 
-    assert(userData.requestEnded);
-    return userData.adapter;
+wgpuInstanceRequestAdapter(
+instance,
+options,
+onAdapterRequestEnded,
+(void*)&userData
+);
+
+assert(userData.requestEnded);
+return userData.adapter;
 }
 
 WGPUDevice device;
@@ -101,7 +103,11 @@ WGPUSwapChain swapchain;
 
 wgpu::ComputePassDescriptor computePassDesc;
 WGPUBindGroup bindGroup;
-wgpu::CommandEncoderDescriptor encoderDesc = wgpu::Default;
+wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
+
+WGPUInstance instance;
+WGPURequestAdapterOptions adapterOpts = {};
+WGPUAdapter adapter = requestAdapter(instance, &options);
 
 class tens{
 
