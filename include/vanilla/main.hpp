@@ -73,8 +73,7 @@ wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 WGPUDeviceDescriptor deviceDesc={};
 WGPURequestAdapterOptions options={};
-wgpu::InstanceDescriptor desc = {};
-desc.nextInChain = nullptr;
+wgpu::InstanceDescriptor desc;
 wgpu::Instance instance = wgpu::createInstance(&desc);
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
