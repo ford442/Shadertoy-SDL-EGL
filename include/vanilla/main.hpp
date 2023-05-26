@@ -128,6 +128,8 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
  
 float rtt(float nm){
+ WGPUAdapter adapter=requestAdapter(instance,&options);
+
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
