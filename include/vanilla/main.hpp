@@ -73,7 +73,6 @@ WGPUBindGroup bindGroup;
 wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 WGPUDeviceDescriptor deviceDesc={};
-
 WGPURequestAdapterOptions options={};
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
@@ -96,12 +95,12 @@ return userData.adapter;
 }
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
-struct UserData {
+struct UserData{
 WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -112,8 +111,9 @@ wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userDat
 return userData.device;
 }
 
-void startWgpu(){
 WGPUAdapter adapter=requestAdapter(instance,&options);
+
+void startWgpu(){
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << Gdevice << std::endl;
