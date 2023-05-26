@@ -93,8 +93,7 @@ WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
- std::cout << "Requesting device userdata..." << std::endl;
-
+std::cout << "Requesting device userdata..." << std::endl;
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
@@ -129,7 +128,7 @@ float rtt(float nm){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
 const WGPUDeviceDescriptor desc={};
-WGPUDevice Gdevice=requestDevice(adapter,&desc);
+WGPUDevice Gdevice=requestDevice(requestAdapter(instance,&options),&desc);
 std::cout << "Got device: " << Gdevice << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
