@@ -77,12 +77,11 @@ tensorVar Aa=tensorVar{2,3};
 uint128_t tst128;
 
 public:
-const WGPUPipelineLayout pipelineLayout = nullptr;
-const WGPUComputePipeline computePipeline = nullptr;
-const WGPUBindGroup bindGroup = nullptr;
-const WGPUBindGroupLayout bindGroupLayout = nullptr;
-const WGPUSwapChain swapchain=nullptr;
+const WGPUPipelineLayout pipelineLayout=nullptr;
+const WGPUComputePipeline computePipeline=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
+const WGPUBindGroupLayout bindGroupLayout=nullptr;
+const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUQueue commandQueue=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
@@ -91,7 +90,7 @@ const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
-wgpuCreateInstance(&instanceDescriptor);
+//  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
 WGPUDevice device=nullptr;
@@ -137,8 +136,8 @@ WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 std::cout << "Requesting command Encoder..." << std::endl;
 WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
-// std::cout << "Requesting command queue..." << std::endl;
-// commandQueue=wgpuDeviceGetQueue(Gdevice);
+ std::cout << "Requesting command queue..." << std::endl;
+ commandQueue=wgpuDeviceGetQueue(Gdevice);
 std::cout << "OK" << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
