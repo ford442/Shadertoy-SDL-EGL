@@ -86,27 +86,7 @@ wgpu::ComputePassDescriptor computePassDesc;
 wgpu::CommandEncoderDescriptor encoderDesc=wgpu::Default;
 WGPUDeviceDescriptor deviceDesc={};
 WGPURequestAdapterOptions options={};
-wgpu::InstanceDescriptor desc={};
 WGPUInstance instance;
-
-WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
-struct UserData{
-WGPUAdapter adapter=nullptr;
-bool requestEnded=false;
-};
-UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData) {
-UserData& userData=*reinterpret_cast<UserData*>(pUserData);
-if (status==WGPURequestAdapterStatus_Success){
-userData.adapter=adapter;
-std::cout << "Requesting adapter..." << std::endl;
-std::cout << "Got adapter: " << adapter << std::endl;
-}
-userData.requestEnded=true;
-};
-wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
-return userData.adapter;
-}
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
@@ -125,16 +105,29 @@ wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userDat
 return userData.device;
 }
 
-void startWgpu(){
-WGPUAdapter adapter=requestAdapter(instance,&options);
+WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
+struct UserData{
+WGPUAdapter adapter=nullptr;
+bool requestEnded=false;
+};
+UserData userData;
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData) {
+UserData& userData=*reinterpret_cast<UserData*>(pUserData);
+if (status==WGPURequestAdapterStatus_Success){
+userData.adapter=adapter;
+std::cout << "Requesting adapter..." << std::endl;
+std::cout << "Got adapter: " << adapter << std::endl;
 }
-
-void startWgpu2(){
+userData.requestEnded=true;
+};
+wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
+return userData.adapter;
 std::cout << "Requesting device..." << std::endl;
-WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
+wgpu::InstanceDescriptor desc={};
+WGPUDevice Gdevice=requestDevice(userData.adapter,&desc);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
-  
+ 
 float rtt(float nm){
 A.at(0,0)=nm;
 tensorVar B=A;
