@@ -121,15 +121,15 @@ userData.requestEnded=true;
 };
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
-std::cout << "Requesting device..." << std::endl;
-const WGPUDeviceDescriptor desc={};
-WGPUDevice Gdevice=requestDevice(userData.adapter,&desc);
-std::cout << "Got device: " << Gdevice << std::endl;
+
 }
  
 float rtt(float nm){
  WGPUAdapter adapter=requestAdapter(instance,&options);
-
+std::cout << "Requesting device..." << std::endl;
+const WGPUDeviceDescriptor desc={};
+WGPUDevice Gdevice=requestDevice(userData.adapter,&desc);
+std::cout << "Got device: " << Gdevice << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
