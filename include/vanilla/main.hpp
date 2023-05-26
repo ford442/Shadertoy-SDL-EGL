@@ -83,7 +83,6 @@ const WGPUBindGroup bindGroup=nullptr;
 const WGPUBindGroupLayout bindGroupLayout=nullptr;
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
-const WGPUQueue commandQueue=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
 const WGPUDeviceDescriptor deviceDescriptor={};
 const WGPUCommandEncoderDescriptor encoderDescriptor={};
