@@ -125,13 +125,14 @@ return userData.adapter;
 }
  
 const WGPUDeviceDescriptor desc={};
-
+const  WGPUCommandEncoderDescriptor encoderDesc={};
+ 
 float rtt(float nm){
 WGPUAdapter adapter=requestAdapter(instance,&options);
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&desc);
 std::cout << "Got device: " << Gdevice << std::endl;
-WGPUCommandEncoderDescriptor encoderDesc={};
+
 WGPUCommandEncoder encoder = wgpuDeviceCreateCommandEncoder(Gdevice, &encoderDesc);
 A.at(0,0)=nm;
 tensorVar B=A;
