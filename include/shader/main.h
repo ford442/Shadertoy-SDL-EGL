@@ -266,9 +266,9 @@ int32_t Th;
 v128_t Dr;
 
 inline v128_t rNd(int32_t Th){
-// std::srand(rd());
-// rD=std::rand()%Th;
-rD=rd()*Th;
+int nm=Th*rd();
+std::srand(nm);
+rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
 }
