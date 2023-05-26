@@ -114,6 +114,9 @@ return userData.device;
 
 void startWgpu(){
 WGPUAdapter adapter=requestAdapter(instance,&options);
+}
+
+void startWgpu2(){
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDesc);
 std::cout << "Got device: " << Gdevice << std::endl;
@@ -132,7 +135,7 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
-  
+  startWgpu2();
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
