@@ -78,16 +78,16 @@ uint128_t tst128;
 
 public:
 
-static const WGPUSwapChain swapchain=nullptr;
-static const WGPUBindGroup bindGroup=nullptr;
-static const WGPUCommandBuffer commandBuffer=nullptr;
-static const WGPUQueue commandQueue=nullptr;
-static const WGPUComputePassDescriptor computePassDescriptor={};
-static const WGPUDeviceDescriptor deviceDescriptor={};
-static const WGPUCommandEncoderDescriptor encoderDescriptor={};
-static const WGPURequestAdapterOptions adapterOptions={};
-static const WGPUInstanceDescriptor instanceDescriptor={};
-static const WGPUInstance instance=nullptr;
+const WGPUSwapChain swapchain=nullptr;
+const WGPUBindGroup bindGroup=nullptr;
+const WGPUCommandBuffer commandBuffer=nullptr;
+const WGPUQueue commandQueue=nullptr;
+const WGPUComputePassDescriptor computePassDescriptor={};
+const WGPUDeviceDescriptor deviceDescriptor={};
+const WGPUCommandEncoderDescriptor encoderDescriptor={};
+const WGPURequestAdapterOptions adapterOptions={};
+const WGPUInstanceDescriptor instanceDescriptor={};
+const WGPUInstance instance=nullptr;
 wgpuCreateInstance(&instanceDescriptor);
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
