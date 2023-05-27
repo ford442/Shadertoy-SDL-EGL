@@ -81,6 +81,7 @@ const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipeline computePipeline=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
 const WGPUBindGroupLayout bindGroupLayout=nullptr;
+const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor=nullptr;
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
@@ -129,28 +130,28 @@ return userData.adapter;
 }
   
 WGPUAdapter adapter;
- void init1(){
- 
+void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
- }
+}
 
-  void init2(){
+void init2(){
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
+}
 
+void init3(){
 std::vector<BindGroupLayoutEntry>bindings(2,Default);
 bindings[0].binding=0;
-bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=wgpu::ShaderStage::Compute;
+bindings[0].buffer.type=BufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=ShaderStage::Compute;
 bindings[1].binding=1;
 bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
-bindings[1].visibility=wgpu::ShaderStage::Compute;
-wgpu::BindGroupLayoutDescriptor bindGroupLayoutDesc;
-bindGroupLayoutDesc.entryCount=(uint32_t)bindings.size();
-bindGroupLayoutDesc.entries=bindings.data();
-bindGroupLayout=Gdevice.createBindGroupLayout(bindGroupLayoutDesc);
-   
+bindings[1].visibility=ShaderStage::Compute;
+BindGroupLayoutDescriptor bindGroupLayoutDescriptor;
+bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
+bindGroupLayoutDescriptor.entries=bindings.data();
+bindGroupLayout=createBindGroupLayout(&bindGroupLayoutDescriptor);
 }
 
  float rtt(float nm){
