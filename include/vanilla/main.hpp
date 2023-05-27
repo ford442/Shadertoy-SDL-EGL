@@ -135,16 +135,17 @@ WGPUAdapter adapter;
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
 }
-
+WGPUDevice Gdevice;
 void init2(){
 std::cout << "Requesting device..." << std::endl;
-WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
+Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
+bindGroupLayout=createBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 
-std::cout << "Got bindlayout / computepipeline " << std::endl;
+std::cout << "Got bindlayout" << std::endl;
  
  // WGPUBindGroupLayoutEntry bindings[2]={};
 // bindings[0].binding=0;
