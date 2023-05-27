@@ -102,7 +102,7 @@ return shader;
 
 };
 
-inline char cm_hdr_src[1500]=
+inline char cm_hdr_src[1700]=
 "#version 300 es\n"
 "#extension GL_ARB_gpu_shader5 : enable\n"
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
