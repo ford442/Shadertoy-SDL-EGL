@@ -70,6 +70,16 @@ void wgpu_init2(){
 Tens.init2();
 return;
 }
+  
+void wgpu_init3(){
+Tens.init3();
+return;
+}
+  
+void wgpu_init4(){
+Tens.init4();
+return;
+}
 
 }
 
@@ -144,6 +154,12 @@ Module.ccall('wgpu_init1');
 setTimeout(function(){
 Module.ccall('wgpu_init2');
 },1600);
+setTimeout(function(){
+Module.ccall('wgpu_init3');
+},1800);
+setTimeout(function(){
+Module.ccall('wgpu_init4');
+},2000);
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
