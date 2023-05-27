@@ -138,10 +138,22 @@ adapter=requestAdapter(instance,&adapterOptions);
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
-  }
+
+std::vector<BindGroupLayoutEntry>bindings(2,Default);
+bindings[0].binding=0;
+bindings[0].buffer.type=BufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=ShaderStage::Compute;
+bindings[1].binding=1;
+bindings[1].buffer.type=BufferBindingType::Storage;
+bindings[1].visibility=ShaderStage::Compute;
+BindGroupLayoutDescriptor bindGroupLayoutDesc;
+bindGroupLayoutDesc.entryCount=(uint32_t)bindings.size();
+bindGroupLayoutDesc.entries=bindings.data();
+bindGroupLayout=device.createBindGroupLayout(bindGroupLayoutDesc);
+   
+}
 
  float rtt(float nm){
-
 // std::cout << "Requesting command Encoder..." << std::endl;
 // WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
 // std::cout << "Requesting command queue..." << std::endl;
