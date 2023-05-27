@@ -144,7 +144,7 @@ inline char frg_hdr_src[1000]=
 "uniform float iTime;uniform mediump float iTimeDelta;uniform mediump float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform mediump vec3 iChannelResolution[4];uniform vec3 iResolution;uniform mediump vec4 iMouse;uniform mediump float iSampleRate;"
-"double testt;out vec4 fragColor;\n";
+"out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
