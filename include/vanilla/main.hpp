@@ -70,6 +70,7 @@ WGPUInstanceDescriptor instanceDescriptor={};
 WGPUInstance instance=nullptr;
 WGPURequestAdapterOptions adapterOptions={};
 WGPUDeviceDescriptor deviceDescriptor={};
+WGPUDevice Gdevice;
 WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayout bindGroupLayout=nullptr;
 WGPUSwapChain swapchain=nullptr;
@@ -144,7 +145,8 @@ std::cout << "Got Queue" << std::endl;
 }
 
 WGPUCommandEncoder encoder(WGPUDevice Gdevice){
-return wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+// return wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+return Gdevice.CreateCommandEncoder();
 }
  
 void init3(WGPUDevice Gdevice){
@@ -153,10 +155,11 @@ const WGPUCommandEncoder commandEncoder=encoder(Gdevice);
 std::cout << "Got Encoder" << std::endl;
 init4(Gdevice);
 }
-
+ 
+ 
 void init2(){
 std::cout << "Requesting device..." << std::endl;
-WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
+Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 std::cout << "OK" << std::endl;
 init3(Gdevice);
