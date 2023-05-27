@@ -143,7 +143,7 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
-bindGroupLayout=createBindGroupLayout(&bindGroupLayoutDescriptor);
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 
 std::cout << "Got bindlayout" << std::endl;
  
