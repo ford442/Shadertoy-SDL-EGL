@@ -79,7 +79,6 @@ uint128_t tst128;
 public:
  
 const WGPUBindGroup bindGroup={};
-const WGPUBindGroupLayout bindGroupLayout=nullptr;
 const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipelineDescriptor computePipelineDescriptor={};
@@ -143,7 +142,7 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
-bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+const WGPUBindGroupLayout bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 
 std::cout << "Got bindlayout" << std::endl;
  
