@@ -66,6 +66,7 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
+const WGPUCanvasContext canvasContext;
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipeline computePipeline=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
@@ -74,7 +75,7 @@ const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
 const WGPUDeviceDescriptor deviceDescriptor={};
-const WGPUCommandEncoderDescriptor encoderDescriptor={};
+const WGPUCommandEncoderDescriptor encoderDescriptor=Default;
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
@@ -91,7 +92,6 @@ uint128_t tst128;
 
 public:
  
-
 //  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
@@ -141,13 +141,19 @@ WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 std::cout << "OK" << std::endl;
 }
+ 
+void init3(){
+std::cout << "Requesting command Encoder..." << std::endl;
+const WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+}
+ 
+void init4(){
+std::cout << "Requesting command queue..." << std::endl;
+const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);std::cout << "Got device: " << Gdevice << std::endl;
+std::cout << "OK" << std::endl;
+}
 
 float rtt(float nm){
-
-// std::cout << "Requesting command Encoder..." << std::endl;
-// WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
-// std::cout << "Requesting command queue..." << std::endl;
-// const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
