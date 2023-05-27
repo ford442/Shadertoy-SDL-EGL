@@ -141,16 +141,19 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
-WGPUBindGroupLayoutEntry bindings[2]={};
-bindings[0].binding=0;
-bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=wgpu::ShaderStage::Compute;
-bindings[1].binding=1;
-bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
-bindings[1].visibility=wgpu::ShaderStage::Compute;
-bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings[].size();
-bindGroupLayoutDescriptor.entries=bindings[].data();
-bindGroupLayout=createBindGroupLayout(&bindGroupLayoutDescriptor);
+WGPUBindGroupLayout bindGroupLayout;
+WGpuComputePipelineDescriptor computePipelineDescriptor=WGPU_COMPUTE_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER;
+std::cout << "Got bindlayout / computepipeline " << Gdevice << std::endl;
+ // WGPUBindGroupLayoutEntry bindings[2]={};
+// bindings[0].binding=0;
+// bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
+// bindings[0].visibility=wgpu::ShaderStage::Compute;
+// bindings[1].binding=1;
+// bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
+// bindings[1].visibility=wgpu::ShaderStage::Compute;
+// bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings[].size();
+// bindGroupLayoutDescriptor.entries=bindings[].data();
+
 }
 
  float rtt(float nm){
