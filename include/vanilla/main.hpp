@@ -141,7 +141,7 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
-WGPUBindGroupLayoutEntry bindings(2,Default);
+WGPUBindGroupLayoutEntry bindings[2]={};
 bindings[0].binding=0;
 bindings[0].buffer.type=WGPUBufferBindingType::ReadOnlyStorage;
 bindings[0].visibility=WGPUShaderStage::Compute;
