@@ -142,7 +142,7 @@ std::cout << "Got device: " << Gdevice << std::endl;
 
 void init3(){
 WGPUBindGroupLayout bindGroupLayout;
-WGpuComputePipelineDescriptor computePipelineDescriptor=WGPU_COMPUTE_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER;
+WGPUComputePipelineDescriptor computePipelineDescriptor=WGPU_COMPUTE_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER;
 std::cout << "Got bindlayout / computepipeline " << Gdevice << std::endl;
  // WGPUBindGroupLayoutEntry bindings[2]={};
 // bindings[0].binding=0;
