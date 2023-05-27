@@ -72,7 +72,7 @@ return;
 }
   
 void wgpu_init3(){
-// Tens.init3();
+Tens.init3();
 return;
 }
   
@@ -155,7 +155,7 @@ setTimeout(function(){
 Module.ccall('wgpu_init2');
 },1600);
 setTimeout(function(){
-// Module.ccall('wgpu_init3');
+Module.ccall('wgpu_init3');
 },1800);
 setTimeout(function(){
 // Module.ccall('wgpu_init4');
