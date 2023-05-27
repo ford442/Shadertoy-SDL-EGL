@@ -154,8 +154,8 @@ inline char frg_ftr_src[420]=
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
 "int _N=3;void mainImage(out vec4 O,vec2 U){"
 "dvec4 o;O=vec4(0);"
-"mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,dvec4(2.077038/1.0,2.184228/1.0,2.449715/1.0,1.0));}"
+"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038/1.0,2.184228/1.0,2.449715/1.0,1.0));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
