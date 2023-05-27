@@ -155,10 +155,10 @@ setTimeout(function(){
 Module.ccall('wgpu_init2');
 },1600);
 setTimeout(function(){
-Module.ccall('wgpu_init3');
+// Module.ccall('wgpu_init3');
 },1800);
 setTimeout(function(){
-Module.ccall('wgpu_init4');
+// Module.ccall('wgpu_init4');
 },2000);
 }
   
