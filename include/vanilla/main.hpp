@@ -72,11 +72,9 @@ const WGPURequestAdapterOptions adapterOptions={};
 const WGPUDeviceDescriptor deviceDescriptor={};
 const WGPUBindGroup bindGroup=nullptr;
 const WGPUBindGroupLayout bindGroupLayout=nullptr;
-
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
-const WGPUCommandEncoderDescriptor encoderDescriptor=wgpu::Default;
-
+const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipeline computePipeline=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
