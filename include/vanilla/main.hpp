@@ -143,11 +143,11 @@ std::cout << "Got device: " << Gdevice << std::endl;
 void init3(){
 WGPUBindGroupLayoutEntry bindings[2]={};
 bindings[0].binding=0;
-bindings[0].buffer.type=WGPUBufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=WGPUShaderStage::Compute;
+bindings[0].buffer.type=WGPUBufferBindingType::WGPUReadOnlyStorage;
+bindings[0].visibility=WGPUShaderStage::WGPUCompute;
 bindings[1].binding=1;
-bindings[1].buffer.type=WGPUBufferBindingType::Storage;
-bindings[1].visibility=WGPUShaderStage::Compute;
+bindings[1].buffer.type=WGPUBufferBindingType::WGPUStorage;
+bindings[1].visibility=WGPUShaderStage::WGPUCompute;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
