@@ -102,11 +102,12 @@ auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,ch
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
+std::cout << "Requesting device userdata..." << std::endl;
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 }
 userData.requestEnded=true;
 };
-std::cout << "Requesting device userdata..." << std::endl;
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
+
 return userData.device;
 }
 
@@ -121,29 +122,38 @@ UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Requesting adapter..." << std::endl;
+wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
+ 
 WGPUAdapter adapter;
 
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
 }
 
+WGPUQueue queue(WGPUDevice Gdevice){
+return wgpuDeviceGetQueue(Gdevice);
+}
+ 
 void init4(WGPUDevice Gdevice){
 std::cout << "Requesting command queue..." << std::endl;
-const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
-std::cout << "Got device: " << Gdevice << std::endl;
-std::cout << "OK" << std::endl;
+const WGPUQueue commandQueue=queue(Gdevice);
+std::cout << "Got Queue" << std::endl;
 }
 
+WGPUCommandEncoder encoder(WGPUDevice Gdevice){
+return wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+}
+ 
 void init3(WGPUDevice Gdevice){
 std::cout << "Requesting command Encoder..." << std::endl;
-const WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+const WGPUCommandEncoder commandEncoder=encoder(Gdevice);
+std::cout << "Got Encoder" << std::endl;
 init4(Gdevice);
 }
 
