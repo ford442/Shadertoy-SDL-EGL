@@ -77,11 +77,13 @@ tensorVar Aa=tensorVar{2,3};
 uint128_t tst128;
 
 public:
-const WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipeline computePipeline=nullptr;
+ 
 const WGPUBindGroup bindGroup={};
 const WGPUBindGroupLayout bindGroupLayout=nullptr;
 const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
+const WGPUPipelineLayout pipelineLayout=nullptr;
+const WGPUComputePipelineDescriptor computePipelineDescriptor={};
+const WGPUComputePipeline computePipeline=nullptr;
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
@@ -141,9 +143,9 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
-WGPUBindGroupLayout bindGroupLayout;
-WGPUComputePipelineDescriptor computePipelineDescriptor=WGPU_COMPUTE_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER;
-std::cout << "Got bindlayout / computepipeline " << Gdevice << std::endl;
+
+std::cout << "Got bindlayout / computepipeline " << std::endl;
+ 
  // WGPUBindGroupLayoutEntry bindings[2]={};
 // bindings[0].binding=0;
 // bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
