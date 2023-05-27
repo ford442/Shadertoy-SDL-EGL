@@ -107,7 +107,7 @@ inline char cm_hdr_src[1000]=
 "#extension GL_ARB_gpu_shader5 : enable\n"
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "#extension GL_ARB_vertex_attrib_64bit : enable\n"
-"#GL_NV_shader_buffer_load : enable\n"
+"#extension GL_NV_shader_buffer_load : enable\n"
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
 "#pragma STDGL(precise all)\n"
