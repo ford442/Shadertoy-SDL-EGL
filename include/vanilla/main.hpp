@@ -148,7 +148,6 @@ bindings[0].visibility=wgpu::ShaderStage::Compute;
 bindings[1].binding=1;
 bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
 bindings[1].visibility=wgpu::ShaderStage::Compute;
-BindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings[].size();
 bindGroupLayoutDescriptor.entries=bindings[].data();
 bindGroupLayout=createBindGroupLayout(&bindGroupLayoutDescriptor);
