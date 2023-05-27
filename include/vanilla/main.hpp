@@ -94,7 +94,7 @@ uint128_t tst128;
 
 public:
  
-WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
+WGPUDevice requestDevice(const WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{WGPUDevice device=nullptr;bool requestEnded=false;};
 UserData userData;
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
