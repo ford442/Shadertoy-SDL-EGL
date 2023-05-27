@@ -140,9 +140,9 @@ std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
-
+WGPUBindGroupLayout bindGroupLayout;
 void init3(){
-const WGPUBindGroupLayout bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 
 std::cout << "Got bindlayout" << std::endl;
  
