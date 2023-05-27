@@ -72,12 +72,12 @@ return;
 }
   
 void wgpu_init3(){
-Tens.init3();
+// Tens.init3();
 return;
 }
   
 void wgpu_init4(){
-Tens.init4();
+// Tens.init4();
 return;
 }
 
