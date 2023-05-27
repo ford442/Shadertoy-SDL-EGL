@@ -66,22 +66,6 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-WGPUInstanceDescriptor instanceDescriptor={};
-WGPUInstance instance=nullptr;
-WGPURequestAdapterOptions adapterOptions={};
-WGPUAdapter Gadapter;
-WGPUDeviceDescriptor deviceDescriptor={};
-WGPUDevice Gdevice;
-WGPUBindGroup bindGroup=nullptr;
-WGPUBindGroupLayout bindGroupLayout=nullptr;
-WGPUSwapChain swapchain=nullptr;
-WGPUCommandBuffer commandBuffer=nullptr;
-WGPUCommandEncoderDescriptor encoderDescriptor={};
-WGPUPipelineLayout pipelineLayout=nullptr;
-WGPUComputePipeline computePipeline=nullptr;
-WGPUComputePassDescriptor computePassDescriptor={};
-//  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
-
 class tens{
 
 private:
@@ -93,29 +77,44 @@ tensorVar Aa=tensorVar{2,3};
 uint128_t tst128;
 
 public:
- 
-WGPUDevice requestDevice(const WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
-struct UserData{WGPUDevice device=nullptr;bool requestEnded=false;};
+const WGPUPipelineLayout pipelineLayout=nullptr;
+const WGPUComputePipeline computePipeline=nullptr;
+const WGPUBindGroup bindGroup=nullptr;
+const WGPUBindGroupLayout bindGroupLayout=nullptr;
+const WGPUSwapChain swapchain=nullptr;
+const WGPUCommandBuffer commandBuffer=nullptr;
+const WGPUComputePassDescriptor computePassDescriptor={};
+const WGPUDeviceDescriptor deviceDescriptor={};
+const WGPUCommandEncoderDescriptor encoderDescriptor={};
+const WGPURequestAdapterOptions adapterOptions={};
+const WGPUInstanceDescriptor instanceDescriptor={};
+const WGPUInstance instance=nullptr;
+//  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
+WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
+struct UserData{
+WGPUDevice device=nullptr;
+bool requestEnded=false;
+};
 UserData userData;
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
-std::cout << "Requesting device userdata..." << std::endl;
 }
 userData.requestEnded=true;
 };
+std::cout << "Requesting device userdata..." << std::endl;
+// wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
- 
+
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
 WGPUAdapter adapter=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData) {
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
@@ -128,45 +127,17 @@ wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userDa
 return userData.adapter;
 }
  
-
-void init1(){
-Gadapter=requestAdapter(instance,&adapterOptions);
-}
-
-WGPUQueue queue(WGPUDevice Gdevice){
-return wgpuDeviceGetQueue(Gdevice);
-}
- 
-WGPUQueue commandQueue;
-
-void init4(WGPUDevice Gdevice){
-std::cout << "Requesting command queue..." << std::endl;
-commandQueue=queue(Gdevice);
-std::cout << "Got Queue" << std::endl;
-}
-
-WGPUCommandEncoder encoder(WGPUDevice Gdevice){
-// return wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
-return Gdevice.CreateCommandEncoder();
-}
- 
-void init3(WGPUDevice Gdevice){
-std::cout << "Requesting command Encoder..." << std::endl;
-const WGPUCommandEncoder commandEncoder=encoder(Gdevice);
-std::cout << "Got Encoder" << std::endl;
-init4(Gdevice);
-}
- 
- 
-void init2(){
-std::cout << "Requesting device..." << std::endl;
-Gdevice=requestDevice(adapter,&deviceDescriptor);
-std::cout << "Got device: " << Gdevice << std::endl;
-std::cout << "OK" << std::endl;
-init3(Gdevice);
-}
-
 float rtt(float nm){
+
+WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
+std::cout << "Requesting device..." << std::endl;
+WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
+std::cout << "Got device: " << Gdevice << std::endl;
+// std::cout << "Requesting command Encoder..." << std::endl;
+// WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+// std::cout << "Requesting command queue..." << std::endl;
+// const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
+std::cout << "OK" << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
