@@ -90,6 +90,7 @@ const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
 //  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
+ 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
 WGPUDevice device=nullptr;
@@ -126,10 +127,11 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
- 
+  
+WGPUAdapter adapter;
  void init1(){
  
-WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
+adapter=requestAdapter(instance,&adapterOptions);
  }
 
   void init2(){
