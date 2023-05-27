@@ -135,24 +135,26 @@ WGPUAdapter adapter;
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
 }
- 
+
+void init4(WGPUDevice Gdevice){
+std::cout << "Requesting command queue..." << std::endl;
+const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
+std::cout << "Got device: " << Gdevice << std::endl;
+std::cout << "OK" << std::endl;
+}
+
+void init3(WGPUDevice Gdevice){
+std::cout << "Requesting command Encoder..." << std::endl;
+const WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+init4(Gdevice);
+}
+
 void init2(){
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 std::cout << "OK" << std::endl;
-}
- 
-void init3(){
-std::cout << "Requesting command Encoder..." << std::endl;
-const WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
-}
- 
-void init4(){
-std::cout << "Requesting command queue..." << std::endl;
-const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
- std::cout << "Got device: " << Gdevice << std::endl;
-std::cout << "OK" << std::endl;
+init3(Gdevice);
 }
 
 float rtt(float nm){
