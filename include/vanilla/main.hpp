@@ -69,6 +69,7 @@ using tV=tensor<v128_t>;
 WGPUInstanceDescriptor instanceDescriptor={};
 WGPUInstance instance=nullptr;
 WGPURequestAdapterOptions adapterOptions={};
+WGPUAdapter Gadapter;
 WGPUDeviceDescriptor deviceDescriptor={};
 WGPUDevice Gdevice;
 WGPUBindGroup bindGroup=nullptr;
@@ -105,7 +106,6 @@ std::cout << "Requesting device userdata..." << std::endl;
 }
 userData.requestEnded=true;
 };
-
 return userData.device;
 }
 
@@ -128,19 +128,20 @@ userData.requestEnded=true;
 return userData.adapter;
 }
  
-WGPUAdapter adapter;
 
 void init1(){
-adapter=requestAdapter(instance,&adapterOptions);
+Gadapter=requestAdapter(instance,&adapterOptions);
 }
 
 WGPUQueue queue(WGPUDevice Gdevice){
 return wgpuDeviceGetQueue(Gdevice);
 }
  
+WGPUQueue commandQueue;
+
 void init4(WGPUDevice Gdevice){
 std::cout << "Requesting command queue..." << std::endl;
-const WGPUQueue commandQueue=queue(Gdevice);
+commandQueue=queue(Gdevice);
 std::cout << "Got Queue" << std::endl;
 }
 
