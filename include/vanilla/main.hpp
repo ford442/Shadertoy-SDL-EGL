@@ -127,12 +127,19 @@ wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userDa
 return userData.adapter;
 }
  
-float rtt(float nm){
-
+ void init1(){
+ 
 WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
+ }
+
+  void init2(){
 std::cout << "Requesting device..." << std::endl;
 WGPUDevice Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
+  }
+
+ float rtt(float nm){
+
 // std::cout << "Requesting command Encoder..." << std::endl;
 // WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
 // std::cout << "Requesting command queue..." << std::endl;
