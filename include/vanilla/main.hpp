@@ -66,19 +66,20 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-const WGPUCanvasContext canvasContext;
-const WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipeline computePipeline=nullptr;
-const WGPUBindGroup bindGroup=nullptr;
-const WGPUBindGroupLayout bindGroupLayout=nullptr;
-const WGPUSwapChain swapchain=nullptr;
-const WGPUCommandBuffer commandBuffer=nullptr;
-const WGPUComputePassDescriptor computePassDescriptor={};
-const WGPUDeviceDescriptor deviceDescriptor={};
-const WGPUCommandEncoderDescriptor encoderDescriptor=Default;
-const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
+const WGPURequestAdapterOptions adapterOptions={};
+const WGPUDeviceDescriptor deviceDescriptor={};
+const WGPUBindGroup bindGroup=nullptr;
+const WGPUBindGroupLayout bindGroupLayout=nullptr;
+
+const WGPUSwapChain swapchain=nullptr;
+const WGPUCommandBuffer commandBuffer=nullptr;
+const WGPUCommandEncoderDescriptor encoderDescriptor=wgpu::Default;
+
+const WGPUPipelineLayout pipelineLayout=nullptr;
+const WGPUComputePipeline computePipeline=nullptr;
+const WGPUComputePassDescriptor computePassDescriptor={};
 
 class tens{
 
@@ -149,7 +150,8 @@ const WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoder
  
 void init4(){
 std::cout << "Requesting command queue..." << std::endl;
-const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);std::cout << "Got device: " << Gdevice << std::endl;
+const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
+ std::cout << "Got device: " << Gdevice << std::endl;
 std::cout << "OK" << std::endl;
 }
 
