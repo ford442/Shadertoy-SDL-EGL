@@ -141,7 +141,7 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 
 void init3(){
-std::vector<BindGroupLayoutEntry>bindings(2,Default);
+BindGroupLayoutEntry bindings(2,Default);
 bindings[0].binding=0;
 bindings[0].buffer.type=BufferBindingType::ReadOnlyStorage;
 bindings[0].visibility=ShaderStage::Compute;
