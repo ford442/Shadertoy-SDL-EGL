@@ -66,18 +66,19 @@ using tV=tensor<v128_t>;
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 
-const WGPUInstanceDescriptor instanceDescriptor={};
-const WGPUInstance instance=nullptr;
-const WGPURequestAdapterOptions adapterOptions={};
-const WGPUDeviceDescriptor deviceDescriptor={};
-const WGPUBindGroup bindGroup=nullptr;
-const WGPUBindGroupLayout bindGroupLayout=nullptr;
-const WGPUSwapChain swapchain=nullptr;
-const WGPUCommandBuffer commandBuffer=nullptr;
-const WGPUCommandEncoderDescriptor encoderDescriptor={};
-const WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipeline computePipeline=nullptr;
-const WGPUComputePassDescriptor computePassDescriptor={};
+WGPUInstanceDescriptor instanceDescriptor={};
+WGPUInstance instance=nullptr;
+WGPURequestAdapterOptions adapterOptions={};
+WGPUDeviceDescriptor deviceDescriptor={};
+WGPUBindGroup bindGroup=nullptr;
+WGPUBindGroupLayout bindGroupLayout=nullptr;
+WGPUSwapChain swapchain=nullptr;
+WGPUCommandBuffer commandBuffer=nullptr;
+WGPUCommandEncoderDescriptor encoderDescriptor={};
+WGPUPipelineLayout pipelineLayout=nullptr;
+WGPUComputePipeline computePipeline=nullptr;
+WGPUComputePassDescriptor computePassDescriptor={};
+//  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
 
 class tens{
 
@@ -91,19 +92,15 @@ uint128_t tst128;
 
 public:
  
-//  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
-struct UserData{
-WGPUDevice device=nullptr;
-bool requestEnded=false;
-};
+struct UserData{WGPUDevice device=nullptr;bool requestEnded=false;};
 UserData userData;
 auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
 std::cout << "Requesting device userdata..." << std::endl;
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 }
 userData.requestEnded=true;
 };
