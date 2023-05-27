@@ -146,13 +146,13 @@ inline char frg_hdr_src[1000]=
 "uniform float iTime;uniform mediump float iTimeDelta;uniform mediump float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform mediump vec3 iChannelResolution[4];uniform vec3 iResolution;uniform mediump vec4 iMouse;uniform mediump float iSampleRate;"
-"double testt;out vec4 fragColor;\n";
+"out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out vec4 O,vec2 U);"
 "int _N=3;void mainImage(out vec4 O,vec2 U){"
-"vec4 o;O=vec4(0);"
+"vec4 o;O=vec4(0);double tts;"
 "for (int k=0; k < _N*_N; k++){"
 "mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
 "O += o;}O /= float(_N*_N);O=pow(O,vec4(2.077038/1.0,2.184228/1.0,2.449715/1.0,1.0));}"
