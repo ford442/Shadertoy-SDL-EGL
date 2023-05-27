@@ -79,9 +79,9 @@ uint128_t tst128;
 public:
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipeline computePipeline=nullptr;
-const WGPUBindGroup bindGroup=nullptr;
+const WGPUBindGroup bindGroup={};
 const WGPUBindGroupLayout bindGroupLayout=nullptr;
-const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor=nullptr;
+const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
