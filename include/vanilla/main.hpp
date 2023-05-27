@@ -129,7 +129,8 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
-  
+  WGPUBindGroupLayout bindGroupLayout;
+
 WGPUAdapter adapter;
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
@@ -139,10 +140,10 @@ void init2(){
 std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
+ bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+
 }
-WGPUBindGroupLayout bindGroupLayout;
 void init3(){
-bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 
 std::cout << "Got bindlayout" << std::endl;
  
