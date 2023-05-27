@@ -160,7 +160,7 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform int iFrame;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
