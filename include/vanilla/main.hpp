@@ -141,15 +141,15 @@ std::cout << "Got device: " << Gdevice << std::endl;
 
 std::vector<BindGroupLayoutEntry>bindings(2,Default);
 bindings[0].binding=0;
-bindings[0].buffer.type=BufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=ShaderStage::Compute;
+bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=wgpu::ShaderStage::Compute;
 bindings[1].binding=1;
-bindings[1].buffer.type=BufferBindingType::Storage;
-bindings[1].visibility=ShaderStage::Compute;
-BindGroupLayoutDescriptor bindGroupLayoutDesc;
+bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
+bindings[1].visibility=wgpu::ShaderStage::Compute;
+wgpu::BindGroupLayoutDescriptor bindGroupLayoutDesc;
 bindGroupLayoutDesc.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDesc.entries=bindings.data();
-bindGroupLayout=device.createBindGroupLayout(bindGroupLayoutDesc);
+bindGroupLayout=Gdevice.createBindGroupLayout(bindGroupLayoutDesc);
    
 }
 
