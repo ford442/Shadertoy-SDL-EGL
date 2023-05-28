@@ -63,8 +63,10 @@ using tV=tensor<v128_t>;
 
 #include <cassert>
 
-#define WEBGPU_CPP_IMPLEMENTATION
-#include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
+// #define WEBGPU_CPP_IMPLEMENTATION
+// #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
+#include <webgpu/webgpu.hpp>
+
 using namespace wgpu;
 using namespace std;
 
