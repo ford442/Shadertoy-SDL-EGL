@@ -96,7 +96,7 @@ WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -154,7 +154,7 @@ bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
 bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+// bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 // std::cout << "Requesting command Encoder..." << std::endl;
 // WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
 // std::cout << "Requesting command queue..." << std::endl;
