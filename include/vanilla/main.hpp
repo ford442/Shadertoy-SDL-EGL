@@ -147,7 +147,7 @@ void init3(){
 // std::cout << "Got bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
-bindings[0].buffer.type=BufferBindingType::ReadOnlyStorage;
+bindings[0].buffer.type=BufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
 bindings[0].visibility=ShaderStage::Compute;
 bindings[1].binding=1;
 bindings[1].buffer.type=BufferBindingType::Storage;
