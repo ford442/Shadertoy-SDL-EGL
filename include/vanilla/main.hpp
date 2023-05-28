@@ -80,15 +80,15 @@ uint128_t tst128;
 
 public:
  
-const WGPUBindGroup bindGroup={};
-WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
+const WGPUBindGroup bindGroup;
+WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor;
 const WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipelineDescriptor computePipelineDescriptor={};
+const WGPUComputePipelineDescriptor computePipelineDescriptor;
 const WGPUComputePipeline computePipeline=nullptr;
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
-const WGPUDeviceDescriptor deviceDescriptor={};
+const WGPUDeviceDescriptor deviceDescriptor;
 const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
