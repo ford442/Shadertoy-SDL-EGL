@@ -70,18 +70,6 @@ using tV=tensor<v128_t>;
 using namespace wgpu;
 using namespace std;
 
-class tens{
-
-private:
-
-// boost::random::random_device rng;
-float lol,olo;
-tensorVar A=tensorVar{8,4};
-tensorVar Aa=tensorVar{2,3};
-uint128_t tst128;
-
-public:
- 
 WGPUAdapter adapter=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
@@ -97,6 +85,10 @@ const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
 //  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
+ 
+WGPUBindGroupLayout requestBindGroupLayout(WGPUDevice device,WGPUBindGroupLayoutDescriptor const * descriptor){
+
+}
  
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
@@ -162,15 +154,28 @@ bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
 bindings[1].visibility=wgpu::ShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-bindGroupLayout=WGPUBindGroupLayout(&bindGroupLayoutDescriptor);
-
-}
-
- float rtt(float nm){
+bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 // std::cout << "Requesting command Encoder..." << std::endl;
 // WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
 // std::cout << "Requesting command queue..." << std::endl;
 // const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
+}
+
+
+class tens{
+
+private:
+
+// boost::random::random_device rng;
+float lol,olo;
+tensorVar A=tensorVar{8,4};
+tensorVar Aa=tensorVar{2,3};
+uint128_t tst128;
+
+public:
+ 
+
+float rtt(float nm){
 std::cout << "OK" << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
