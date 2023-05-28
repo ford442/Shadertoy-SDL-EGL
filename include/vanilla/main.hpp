@@ -147,11 +147,11 @@ void init3(){
 // std::cout << "Got bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
-bindings[0].buffer.type=BufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
-bindings[0].visibility=ShaderStage::Compute;
+bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
+bindings[0].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindings[1].binding=1;
-bindings[1].buffer.type=BufferBindingType::Storage;
-bindings[1].visibility=ShaderStage::Compute;
+bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
+bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
 bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
