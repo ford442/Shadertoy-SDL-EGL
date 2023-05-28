@@ -80,19 +80,19 @@ uint128_t tst128;
 
 public:
  
-static const  WGPUAdapter adapter=nullptr;
+WGPUAdapter adapter=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
-static const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
+WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
 const WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipelineDescriptor computePipelineDescriptor{};
+const WGPUComputePipelineDescriptor computePipelineDescriptor={};
 const WGPUComputePipeline computePipeline=nullptr;
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
-const WGPUDeviceDescriptor deviceDescriptor{};
-const WGPUCommandEncoderDescriptor encoderDescriptor{};
-const WGPURequestAdapterOptions adapterOptions{};
-const WGPUInstanceDescriptor instanceDescriptor{};
+const WGPUDeviceDescriptor deviceDescriptor={};
+const WGPUCommandEncoderDescriptor encoderDescriptor={};
+const WGPURequestAdapterOptions adapterOptions={};
+const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
 //  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
  
