@@ -80,6 +80,7 @@ uint128_t tst128;
 
 public:
  
+ WGPUAdapter adapter;
 const WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 const WGPUPipelineLayout pipelineLayout=nullptr;
@@ -133,7 +134,6 @@ return userData.adapter;
 }
  
 WGPUBindGroupLayout bindGroupLayout;
-WGPUAdapter adapter;
 
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
