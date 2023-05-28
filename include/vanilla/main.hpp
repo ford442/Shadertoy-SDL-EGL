@@ -80,7 +80,7 @@ uint128_t tst128;
 
 public:
  
- WGPUAdapter adapter;
+ WGPUAdapter adapter=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 const WGPUPipelineLayout pipelineLayout=nullptr;
@@ -110,7 +110,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 std::cout << "Requesting device userdata..." << std::endl;
-wgpuAdapterRequestDevice(adapter,&descriptor,onDeviceRequestEnded,(void*)&userData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
 
