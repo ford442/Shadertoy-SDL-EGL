@@ -80,9 +80,9 @@ uint128_t tst128;
 
 public:
  
- WGPUAdapter adapter=nullptr;
+const  WGPUAdapter adapter=nullptr;
 const WGPUBindGroup bindGroup=nullptr;
-WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
+const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipelineDescriptor computePipelineDescriptor{};
 const WGPUComputePipeline computePipeline=nullptr;
