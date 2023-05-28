@@ -81,7 +81,7 @@ uint128_t tst128;
 public:
  
 const WGPUBindGroup bindGroup={};
-const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
+WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipelineDescriptor computePipelineDescriptor={};
 const WGPUComputePipeline computePipeline=nullptr;
