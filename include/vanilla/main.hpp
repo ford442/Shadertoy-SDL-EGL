@@ -65,7 +65,7 @@ using tV=tensor<v128_t>;
 
 // #define WEBGPU_CPP_IMPLEMENTATION
 // #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
-#include <webgpu/webgpu.hpp>
+#include <webgpu/webgpu_cpp.hpp>
 
 using namespace wgpu;
 using namespace std;
