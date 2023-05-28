@@ -83,7 +83,7 @@ public:
 const WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 const WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipelineDescriptor computePipelineDescriptor;
+const WGPUComputePipelineDescriptor computePipelineDescriptor{};
 const WGPUComputePipeline computePipeline=nullptr;
 const WGPUSwapChain swapchain=nullptr;
 const WGPUCommandBuffer commandBuffer=nullptr;
