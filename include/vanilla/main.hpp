@@ -128,18 +128,18 @@ return userData.adapter;
 }
  
 WGPUBindGroupLayout bindGroupLayout;
-
+WGPUDevice Gdevice;
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
-}
-
-WGPUDevice Gdevice;
-
-void init2(){
-std::cout << "Requesting device..." << std::endl;
+ std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
- 
+}
+
+
+
+void init2(){
+
 
 }
 void init3(){
