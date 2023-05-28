@@ -136,9 +136,11 @@ WGPUBindGroupLayout bindGroupLayout;
 WGPUAdapter adapter;
 
 void init1(){
-adapter=requestAdapter(instance,&adapterOptions);
+adapter=requestAdapter(&adapterOptions);
 }
+
 WGPUDevice Gdevice;
+
 void init2(){
 std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
