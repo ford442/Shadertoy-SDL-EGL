@@ -124,26 +124,23 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
- 
+
 WGPUBindGroupLayout bindGroupLayout;
 WGPUDevice Gdevice;
+
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
- 
- std::cout << "Requesting device..." << std::endl;
+}
+
+void init2(){
+std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
 
-
-
-void init2(){
-
-
-}
 void init3(){
-
-// std::cout << "Got bindlayout" << std::endl;
+/*
+std::cout << "Got bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
 bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
@@ -153,13 +150,13 @@ bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
 bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-// bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
-// std::cout << "Requesting command Encoder..." << std::endl;
-// WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
-// std::cout << "Requesting command queue..." << std::endl;
-// const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
+bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+std::cout << "Requesting command Encoder..." << std::endl;
+WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+std::cout << "Requesting command queue..." << std::endl;
+const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
+*/
 }
-
 
 class tens{
 
