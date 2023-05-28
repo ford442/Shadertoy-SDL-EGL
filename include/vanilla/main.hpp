@@ -136,7 +136,7 @@ WGPUBindGroupLayout bindGroupLayout;
 WGPUAdapter adapter;
 
 void init1(){
-adapter=requestAdapter(&adapterOptions);
+adapter=requestAdapter(instance,&adapterOptions);
 }
 
 WGPUDevice Gdevice;
