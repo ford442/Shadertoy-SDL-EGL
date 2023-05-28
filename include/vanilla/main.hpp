@@ -84,7 +84,7 @@ const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 // const WGPUInstance instance=wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
-
+const WGPUInstance instance=nullptr;
 // WGPUBindGroupLayout requestBindGroupLayout(WGPUDevice device,WGPUBindGroupLayoutDescriptor const * descriptor){
 
 // }
