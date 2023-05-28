@@ -132,7 +132,7 @@ wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userDa
 return userData.adapter;
 }
  
-WGPUBindGroupLayout bindGroupLayout=nullptr;
+WGPUBindGroupLayout bindGroupLayout;
 WGPUAdapter adapter;
 
 void init1(){
