@@ -109,7 +109,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 std::cout << "Requesting device userdata..." << std::endl;
-// wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
 return userData.device;
 }
 
@@ -160,7 +160,7 @@ bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
 bindings[1].visibility=wgpu::ShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-// bindGroupLayout=createBindGroupLayout(&bindGroupLayoutDescriptor);
+bindGroupLayout=WGPUBindGroupLayout(&bindGroupLayoutDescriptor);
 
 }
 
