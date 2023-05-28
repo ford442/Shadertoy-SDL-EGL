@@ -67,7 +67,7 @@ using tV=tensor<v128_t>;
 // #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 #include <webgpu/webgpu.h>
 
-using namespace wgpu;
+// using namespace wgpu;
 using namespace std;
 
 WGPUAdapter adapter=nullptr;
@@ -147,11 +147,11 @@ void init3(){
 // std::cout << "Got bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
-bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=wgpu::ShaderStage::Compute;
+bindings[0].buffer.type=BufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=ShaderStage::Compute;
 bindings[1].binding=1;
-bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
-bindings[1].visibility=wgpu::ShaderStage::Compute;
+bindings[1].buffer.type=BufferBindingType::Storage;
+bindings[1].visibility=ShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
 bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
