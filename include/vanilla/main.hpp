@@ -84,8 +84,7 @@ const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 const WGPUInstance instance=nullptr;
-//  wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
- 
+instance=wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
 WGPUBindGroupLayout requestBindGroupLayout(WGPUDevice device,WGPUBindGroupLayoutDescriptor const * descriptor){
 
 }
@@ -131,6 +130,7 @@ WGPUBindGroupLayout bindGroupLayout;
 WGPUDevice Gdevice;
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
+ 
  std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
