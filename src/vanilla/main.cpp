@@ -153,13 +153,13 @@ Module.ccall('wgpu_init1');
 },1400);
 setTimeout(function(){
 Module.ccall('wgpu_init2');
-},1600);
+},2600);
 setTimeout(function(){
 Module.ccall('wgpu_init3');
-},1800);
+},3800);
 setTimeout(function(){
 // Module.ccall('wgpu_init4');
-},2000);
+},5000);
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
