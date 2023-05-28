@@ -129,9 +129,10 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
-  WGPUBindGroupLayout bindGroupLayout;
-
+ 
+WGPUBindGroupLayout bindGroupLayout=nullptr;
 WGPUAdapter adapter;
+
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
 }
