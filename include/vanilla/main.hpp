@@ -110,7 +110,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 std::cout << "Requesting device userdata..." << std::endl;
-wgpuAdapterRequestDevice(adapter,deviceDescriptor,onDeviceRequestEnded,(void*)&userData);
+wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
 
