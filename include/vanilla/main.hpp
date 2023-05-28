@@ -65,6 +65,8 @@ using tV=tensor<v128_t>;
 
 #define WEBGPU_CPP_IMPLEMENTATION
 #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
+using namespace wgpu;
+using namespace std;
 
 class tens{
 
@@ -79,7 +81,7 @@ uint128_t tst128;
 public:
  
 const WGPUBindGroup bindGroup={};
-const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
+const WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 const WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipelineDescriptor computePipelineDescriptor={};
 const WGPUComputePipeline computePipeline=nullptr;
@@ -141,22 +143,22 @@ void init2(){
 std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
- bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+ 
 
 }
 void init3(){
 
 std::cout << "Got bindlayout" << std::endl;
- 
- // WGPUBindGroupLayoutEntry bindings[2]={};
-// bindings[0].binding=0;
-// bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
-// bindings[0].visibility=wgpu::ShaderStage::Compute;
-// bindings[1].binding=1;
-// bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
-// bindings[1].visibility=wgpu::ShaderStage::Compute;
-// bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings[].size();
-// bindGroupLayoutDescriptor.entries=bindings[].data();
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+std::array<WGPUBindGroupLayoutEntry,2>bindings;
+bindings[0].binding=0;
+bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=wgpu::ShaderStage::Compute;
+bindings[1].binding=1;
+bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
+bindings[1].visibility=wgpu::ShaderStage::Compute;
+bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
+bindGroupLayoutDescriptor.entries=bindings.data();
 
 }
 
