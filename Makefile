@@ -187,7 +187,7 @@ b3_audio:
 
 b3_vanilla_llvm:
 	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=c++17 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
-	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 
+	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sUSE_WEBGPU=1
 	 emcc src/vanilla/js.c -c -std=gnu17 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main.o js.o -o v3020.js -mllvm -std=c++2b -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
