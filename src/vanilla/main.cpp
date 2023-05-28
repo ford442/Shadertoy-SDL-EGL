@@ -62,22 +62,22 @@ return tt;
 }
   
 void wgpu_init1(){
-Tens.init1();
+init1();
 return;
 }
   
 void wgpu_init2(){
-Tens.init2();
+init2();
 return;
 }
   
 void wgpu_init3(){
-Tens.init3();
+init3();
 return;
 }
   
 void wgpu_init4(){
-// Tens.init4();
+// init4();
 return;
 }
 
