@@ -150,7 +150,7 @@ std::cout << "Got device: " << Gdevice << std::endl;
 }
 void init3(){
 
-std::cout << "Got bindlayout" << std::endl;
+// std::cout << "Got bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
 bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
@@ -160,7 +160,7 @@ bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
 bindings[1].visibility=wgpu::ShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-bindGroupLayout=Gdevice.createBindGroupLayout(&bindGroupLayoutDescriptor);
+// bindGroupLayout=createBindGroupLayout(&bindGroupLayoutDescriptor);
 
 }
 
