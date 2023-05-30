@@ -27,10 +27,15 @@ WGPUVertexBufferLayout vertex_buffer_layout = {
 .attributeCount = 2,
 .attributes = vertex_attrib,
 };
-
-WGPUBindGroupLayout bindgroup_layout = wgpuDeviceCreateBindGroupLayout(state.wgpu.device, &(WGPUBindGroupLayoutDescriptor){
+    
+WGPUBindGroupLayoutDescriptor BindGroupLayoutDescriptor;
+WGPUPipelineLayoutDescriptor PipelineLayoutDescriptor;
+WGPURenderPipelineDescriptor RenderPipelineDescriptor;
+WGPUBindGroupLayoutEntry BindGroupLayoutEntry;
+        
+WGPUBindGroupLayout bindgroup_layout = wgpuDeviceCreateBindGroupLayout(state.wgpu.device, &BindGroupLayoutDescriptor{
 .entryCount = 1,
-.entries = &(WGPUBindGroupLayoutEntry){
+.entries = &BindGroupLayoutEntry{
 .binding = 0,
 .visibility = WGPUShaderStage_Vertex,
 .buffer = {
@@ -38,12 +43,17 @@ WGPUBindGroupLayout bindgroup_layout = wgpuDeviceCreateBindGroupLayout(state.wgp
 }
 },
 });
-WGPUPipelineLayout pipeline_layout = wgpuDeviceCreatePipelineLayout(state.wgpu.device, &(WGPUPipelineLayoutDescriptor){
+WGPUPipelineLayout pipeline_layout = wgpuDeviceCreatePipelineLayout(state.wgpu.device, &PipelineLayoutDescriptor{
 .bindGroupLayoutCount = 1,
 .bindGroupLayouts = &bindgroup_layout,
 });
-    
-state.wgpu.pipeline = wgpuDeviceCreateRenderPipeline(state.wgpu.device, &(WGPURenderPipelineDescriptor){
+
+WGPUFragmentState FragmentState;
+WGPUColorTargetState ColorTargetState;
+WGPUBlendState BlendState;
+WGPUBindGroupEntry BindGroupEntry;
+
+state.wgpu.pipeline = wgpuDeviceCreateRenderPipeline(state.wgpu.device, &RenderPipelineDescriptor{
 .layout = pipeline_layout,
 .vertex = {
 .module = shader_triangle,
@@ -57,14 +67,14 @@ state.wgpu.pipeline = wgpuDeviceCreateRenderPipeline(state.wgpu.device, &(WGPURe
 .topology = WGPUPrimitiveTopology_TriangleList,
 .stripIndexFormat = WGPUIndexFormat_Undefined,
 },
-.fragment = &(WGPUFragmentState){
+.fragment = &FragmentState{
 .module = shader_triangle,
 .entryPoint = "fs_main",
 .targetCount = 1,
-.targets = &(WGPUColorTargetState){
+.targets = &ColorTargetState{
 .format = WGPUTextureFormat_BGRA8Unorm,
 .writeMask = WGPUColorWriteMask_All,
-.blend = &(WGPUBlendState){
+.blend = &BlendState{
 .color = {
 .operation = WGPUBlendOperation_Add,
 .srcFactor = WGPUBlendFactor_One,
@@ -107,7 +117,7 @@ state.res.ubuffer = create_buffer(&state.var.rot, sizeof(state.var.rot), WGPUBuf
 state.res.bindgroup = wgpuDeviceCreateBindGroup(state.wgpu.device, &(WGPUBindGroupDescriptor){
 .layout = wgpuRenderPipelineGetBindGroupLayout(state.wgpu.pipeline, 0),
 .entryCount = 1,
-.entries = &(WGPUBindGroupEntry){
+.entries = &BindGroupEntry{
 .binding = 0,
 .offset = 0,
 .buffer = state.res.ubuffer,
@@ -124,6 +134,8 @@ wgpuDeviceRelease(state.wgpu.device);
 
 return 0;
 }
+WGPURenderPassDescriptor RenderPassDescriptor;
+WGPURenderPassColorAttachment RenderPassColorAttachment;
 
 void draw() {
 state.var.rot += 0.1f;
@@ -134,9 +146,9 @@ WGPUTextureView back_buffer = wgpuSwapChainGetCurrentTextureView(state.wgpu.swap
 
 WGPUCommandEncoder cmd_encoder = wgpuDeviceCreateCommandEncoder(state.wgpu.device, NULL);
 
-WGPURenderPassEncoder render_pass = wgpuCommandEncoderBeginRenderPass(cmd_encoder, &(WGPURenderPassDescriptor){
+WGPURenderPassEncoder render_pass = wgpuCommandEncoderBeginRenderPass(cmd_encoder, &RenderPassDescriptor{
 .colorAttachmentCount = 1,
-.colorAttachments = &(WGPURenderPassColorAttachment){
+.colorAttachments = &RenderPassColorAttachment{
 .view = back_buffer,
 .loadOp = WGPULoadOp_Clear,
 .storeOp = WGPUStoreOp_Store,
