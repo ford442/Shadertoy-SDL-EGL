@@ -82,24 +82,14 @@ int gpmain() {
         fprintf(stderr, "Could not initialize WebGPU!\n");
         return 1;
     }
-    if (!glfwInit()) {
-        printf("Could not initialize GLFW!\n");
-        return 1;
-    }
 
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); 
-    GLFWwindow *window = glfwCreateWindow(640, 480, "Learn WebGPU", NULL, NULL);
-    if (!window) {
-        printf("Could not open window!\n");
-        glfwTerminate();
-        return 1;
-    }
+
 
     printf("Requesting adapter...\n");
-    WGPUSurface surface = glfwGetWGPUSurface(instance, window);
+  //   WGPUSurface surface = glfwGetWGPUSurface(instance, window);
     WGPURequestAdapterOptions adapterOpts = {};
     adapterOpts.nextInChain = NULL;
-    adapterOpts.compatibleSurface = surface;
+ //    adapterOpts.compatibleSurface = surface;
     WGPUAdapter adapter = requestAdapter2(instance, &adapterOpts);
     printf( "Got adapter: %p\n", adapter);
     printf("Requesting device...\n");
@@ -118,27 +108,16 @@ int gpmain() {
     swapChainDesc.width = 640;
     swapChainDesc.height = 480;
     swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
-    WGPUTextureFormat swapChainFormat = wgpuSurfaceGetPreferredFormat(surface, adapter);
-    swapChainDesc.format = swapChainFormat;
+ //   WGPUTextureFormat swapChainFormat = wgpuSurfaceGetPreferredFormat(surface, adapter);
+  //  swapChainDesc.format = swapChainFormat;
     swapChainDesc.presentMode = WGPUPresentMode_Fifo;
-    WGPUSwapChain swapChain = wgpuDeviceCreateSwapChain(device, surface, &swapChainDesc);
-    printf( "Swapchain: %p\n", swapChain);
+ //    WGPUSwapChain swapChain = wgpuDeviceCreateSwapChain(device, surface, &swapChainDesc);
+  //   printf( "Swapchain: %p\n", swapChain);
     const char* shaderSource = "                                                                \
     @vertex                                                                                     \
     fn vs_main(@builtin(vertex_index) in_vertex_index: u32) -> @builtin(position) vec4<f32> {   \
         var p = vec2<f32>(0.0, 0.0);                                                            \
-        if (in_vertex_index == 0u) {                                                            \
-            p = vec2<f32>(-0.5, -0.5);                                                          \
-        } else if (in_vertex_index == 1u) {                                                     \
-            p = vec2<f32>(0.5, -0.5);                                                           \
-        } else {                                                                                \
-            p = vec2<f32>(0.0, 0.5);                                                            \
-        }                                                                                       \
-        return vec4<f32>(p, 0.0, 1.0);                                                          \
-    }                                                                                           \
-    @fragment                                                                                   \
-    fn fs_main() -> @location(0) vec4<f32> {                                                    \
-        return vec4<f32>(0.0, 0.4, 1.0, 1.0);                                                   \
+//  .................
     }                                                                                           \
     ";
 
@@ -177,23 +156,27 @@ int gpmain() {
     blendState.alpha.srcFactor = WGPUBlendFactor_Zero;
     blendState.alpha.dstFactor = WGPUBlendFactor_One;
     blendState.alpha.operation = WGPUBlendOperation_Add;
-    WGPUColorTargetState colorTarget = {};
-    colorTarget.format = swapChainFormat;
-    colorTarget.blend = &blendState;
-    colorTarget.writeMask = WGPUColorWriteMask_All; // We could write to only some of the color channels.
+ //   WGPUColorTargetState colorTarget = {};
+  //  colorTarget.format = swapChainFormat;
+ //   colorTarget.blend = &blendState;
+ //   colorTarget.writeMask = WGPUColorWriteMask_All; // We could write to only some of the color channels.
     fragmentState.targetCount = 1;
     fragmentState.targets = &colorTarget;
-    pipelineDesc.depthStencil = NULL;
-    pipelineDesc.multisample.count = 1;
-    pipelineDesc.multisample.mask = ~0u;
-    pipelineDesc.multisample.alphaToCoverageEnabled = false;
-    WGPUPipelineLayoutDescriptor layoutDesc = {};
+  //  pipelineDesc.depthStencil = NULL;
+ //   pipelineDesc.multisample.count = 1;
+ //   pipelineDesc.multisample.mask = ~0u;
+ //   pipelineDesc.multisample.alphaToCoverageEnabled = false;
+    
+ //   WGPUPipelineLayoutDescriptor layoutDesc = {};
+    
     layoutDesc.nextInChain = NULL;
     layoutDesc.bindGroupLayoutCount = 0;
     layoutDesc.bindGroupLayouts = NULL;
-    WGPUPipelineLayout layout = wgpuDeviceCreatePipelineLayout(device, &layoutDesc);
-    pipelineDesc.layout = layout;
-    WGPURenderPipeline pipeline = wgpuDeviceCreateRenderPipeline(device, &pipelineDesc);
+
+
+ //   WGPUPipelineLayout layout = wgpuDeviceCreatePipelineLayout(device, &layoutDesc);
+ //   pipelineDesc.layout = layout;
+  //  WGPURenderPipeline pipeline = wgpuDeviceCreateRenderPipeline(device, &pipelineDesc);
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         WGPUTextureView nextTexture = wgpuSwapChainGetCurrentTextureView(swapChain);
@@ -208,31 +191,31 @@ int gpmain() {
         WGPUCommandEncoder encoder = wgpuDeviceCreateCommandEncoder(device, &encoderDesc);
         WGPURenderPassDescriptor renderPassDesc = {};
         renderPassDesc.nextInChain = NULL;
-        WGPURenderPassColorAttachment renderPassColorAttachment = {};
-        renderPassColorAttachment.view = nextTexture;
-        renderPassColorAttachment.resolveTarget = NULL;
-        renderPassColorAttachment.loadOp = WGPULoadOp_Clear;
-        renderPassColorAttachment.storeOp = WGPUStoreOp_Store;
-        renderPassColorAttachment.clearValue = (WGPUColor){ 0.9, 0.1, 0.2, 1.0 };
-        renderPassDesc.colorAttachmentCount = 1;
-        renderPassDesc.colorAttachments = &renderPassColorAttachment;
-        renderPassDesc.depthStencilAttachment = NULL;
-        renderPassDesc.timestampWriteCount = 0;
-        renderPassDesc.timestampWrites = NULL;
-        WGPURenderPassEncoder renderPass = wgpuCommandEncoderBeginRenderPass(encoder, &renderPassDesc);
-        wgpuRenderPassEncoderSetPipeline(renderPass, pipeline);
-        wgpuRenderPassEncoderDraw(renderPass, 3, 1, 0, 0);
-        wgpuRenderPassEncoderEnd(renderPass);
-        wgpuTextureViewDrop(nextTexture);
+    //    WGPURenderPassColorAttachment renderPassColorAttachment = {};
+    //    renderPassColorAttachment.view = nextTexture;
+    //    renderPassColorAttachment.resolveTarget = NULL;
+    //    renderPassColorAttachment.loadOp = WGPULoadOp_Clear;
+     //   renderPassColorAttachment.storeOp = WGPUStoreOp_Store;
+     //   renderPassColorAttachment.clearValue = (WGPUColor){ 0.9, 0.1, 0.2, 1.0 };
+     //   renderPassDesc.colorAttachmentCount = 1;
+    //    renderPassDesc.colorAttachments = &renderPassColorAttachment;
+    //    renderPassDesc.depthStencilAttachment = NULL;
+    //    renderPassDesc.timestampWriteCount = 0;
+    //    renderPassDesc.timestampWrites = NULL;
+   //     WGPURenderPassEncoder renderPass = wgpuCommandEncoderBeginRenderPass(encoder, &renderPassDesc);
+   //     wgpuRenderPassEncoderSetPipeline(renderPass, pipeline);
+  //      wgpuRenderPassEncoderDraw(renderPass, 3, 1, 0, 0);
+  //      wgpuRenderPassEncoderEnd(renderPass);
+   //     wgpuTextureViewDrop(nextTexture);
         WGPUCommandBufferDescriptor cmdBufferDescriptor = {};
         cmdBufferDescriptor.nextInChain = NULL;
         cmdBufferDescriptor.label = "Command buffer";
         WGPUCommandBuffer command = wgpuCommandEncoderFinish(encoder, &cmdBufferDescriptor);
-        wgpuQueueSubmit(queue, 1, &command);
-        wgpuSwapChainPresent(swapChain);
+   //     wgpuQueueSubmit(queue, 1, &command);
+  //      wgpuSwapChainPresent(swapChain);
     }
-    glfwDestroyWindow(window);
-    glfwTerminate();
+//    glfwDestroyWindow(window);
+//    glfwTerminate();
 }
 
 float cc,pp,uu;
