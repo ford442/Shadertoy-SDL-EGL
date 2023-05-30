@@ -33,7 +33,7 @@ WGPUPipelineLayoutDescriptor PipelineLayoutDescriptor={};
 WGPURenderPipelineDescriptor RenderPipelineDescriptor={};
 WGPUBindGroupLayoutEntry BindGroupLayoutEntry={};
         
-WGPUBindGroupLayout bindgroup_layout = wgpuDeviceCreateBindGroupLayout(state.wgpu.device, &BindGroupLayoutDescriptor{
+WGPUBindGroupLayout bindgroup_layout = wgpuDeviceCreateBindGroupLayout(state.wgpu.device, &BindGroupLayoutDescriptor={
 .entryCount = 1,
 .entries = &BindGroupLayoutEntry{
 .binding = 0,
