@@ -17,6 +17,7 @@
 // #include "./gmp.h"
 
 // #include "/usr/include/gmpxx.h"
+#include <unistd.h>
 
 #include <experimental/simd>
 using std::experimental::native_simd;
