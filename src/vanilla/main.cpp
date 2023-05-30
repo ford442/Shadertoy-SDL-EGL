@@ -4,157 +4,151 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-//  ------------------------------- Adapter------------------------------------------------------------------
 struct AdapterUserData {
-    WGPUAdapter adapter;
-    bool requestEnded;
+WGPUAdapter adapter;
+bool requestEnded;
 };
 
 void onAdapterRequestEnded(WGPURequestAdapterStatus status, WGPUAdapter adapter, char const * message, void * pUserData) {
-    struct AdapterUserData * userData = (struct AdapterUserData *)pUserData;
-    if (status == WGPURequestAdapterStatus_Success) {
-        userData->adapter = adapter;
-    } else {
-            printf( "Could not get WebGPU adapter: %s\n", message);
-    }
-    userData->requestEnded = true;
+struct AdapterUserData * userData = (struct AdapterUserData *)pUserData;
+if (status == WGPURequestAdapterStatus_Success) {
+userData->adapter = adapter;
+} else {
+printf( "Could not get WebGPU adapter: %s\n", message);
+}
+userData->requestEnded = true;
 };
+
 WGPUAdapter requestAdapter2(WGPUInstance instance, WGPURequestAdapterOptions const * options) {
-    struct AdapterUserData userData =  {NULL, false};
+struct AdapterUserData userData =  {NULL, false};
 
-    // Call to the WebGPU request adapter procedure
-    wgpuInstanceRequestAdapter(
-        instance /* equivalent of navigator.gpu */,
-        options,
-        onAdapterRequestEnded,
-        (void*)&userData
-    );
+wgpuInstanceRequestAdapter(
+instance /* equivalent of navigator.gpu */,
+options,
+onAdapterRequestEnded,
+(void*)&userData
+);
 
-    assert(userData.requestEnded);
+assert(userData.requestEnded);
 
-    return userData.adapter;
+return userData.adapter;
 }
 
 //  ------------------------------- Device------------------------------------------------------------------
 struct DeviceUserData {
-    WGPUDevice device;
-    bool requestEnded;
+WGPUDevice device;
+bool requestEnded;
 };
 
 void onDeviceRequestEnded(WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
-    struct DeviceUserData * userData = (struct DeviceUserData *)(pUserData);
-    if (status == WGPURequestDeviceStatus_Success) {
-        userData->device = device;
-    } else {
-        printf( "Could not get WebGPU adapter: %s\n", message);
-    }
-    userData->requestEnded = true;
+struct DeviceUserData * userData = (struct DeviceUserData *)(pUserData);
+if (status == WGPURequestDeviceStatus_Success) {
+userData->device = device;
+} else {
+printf( "Could not get WebGPU adapter: %s\n", message);
+}
+userData->requestEnded = true;
 };
 
 WGPUDevice requestDevice2(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
+struct DeviceUserData userData = {NULL, false};
+wgpuAdapterRequestDevice(
+adapter,
+descriptor,
+onDeviceRequestEnded,
+(void*)&userData
+);
 
-    struct DeviceUserData userData = {NULL, false};
+assert(userData.requestEnded);
 
-    wgpuAdapterRequestDevice(
-        adapter,
-        descriptor,
-        onDeviceRequestEnded,
-        (void*)&userData
-    );
-
-    assert(userData.requestEnded);
-
-    return userData.device;
+return userData.device;
 }
 
 void onDeviceError (WGPUErrorType type, char const* message, void* pUserData) {
-    printf( "Uncaptured device error: type (%u)\n", type);
-    if (message)
-    printf( "Could not get WebGPU adapter: (%s)\n", message);
+printf( "Uncaptured device error: type (%u)\n", type);
+if (message)
+printf( "Could not get WebGPU adapter: (%s)\n", message);
 };
 
-//--------------------------------------------main
 int gpmain() {
-    WGPUInstanceDescriptor desc = {};
-    desc.nextInChain = NULL;
-    WGPUInstance instance = wgpuCreateInstance(&desc);
-    if (!instance) {
-        fprintf(stderr, "Could not initialize WebGPU!\n");
-        return 1;
-    }
+WGPUInstanceDescriptor desc = {};
+desc.nextInChain = NULL;
+WGPUInstance instance = wgpuCreateInstance(&desc);
+if (!instance) {
+fprintf(stderr, "Could not initialize WebGPU!\n");
+return 1;
+}
 
-
-
-    printf("Requesting adapter...\n");
+printf("Requesting adapter...\n");
   //   WGPUSurface surface = glfwGetWGPUSurface(instance, window);
-    WGPURequestAdapterOptions adapterOpts = {};
-    adapterOpts.nextInChain = NULL;
+WGPURequestAdapterOptions adapterOpts = {};
+adapterOpts.nextInChain = NULL;
  //    adapterOpts.compatibleSurface = surface;
-    WGPUAdapter adapter = requestAdapter2(instance, &adapterOpts);
-    printf( "Got adapter: %p\n", adapter);
-    printf("Requesting device...\n");
-    WGPUDeviceDescriptor deviceDesc = {};
-    deviceDesc.nextInChain = NULL;
-    deviceDesc.label = "My Device"; // anything works here, that's your call
-    deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
-    deviceDesc.requiredLimits = NULL; // we do not require any specific limit
-    deviceDesc.defaultQueue.nextInChain = NULL;
-    deviceDesc.defaultQueue.label = "The default queue";
-    WGPUDevice device = requestDevice2(adapter, &deviceDesc);
-    printf( "Got device: %p\n", device);
-    wgpuDeviceSetUncapturedErrorCallback(device, onDeviceError, NULL /* pUserData */);
-    WGPUQueue queue = wgpuDeviceGetQueue(device);
-    WGPUSwapChainDescriptor swapChainDesc = {};
-    swapChainDesc.width = 640;
-    swapChainDesc.height = 480;
-    swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
+WGPUAdapter adapter = requestAdapter2(instance, &adapterOpts);
+printf( "Got adapter: %p\n", adapter);
+printf("Requesting device...\n");
+WGPUDeviceDescriptor deviceDesc = {};
+deviceDesc.nextInChain = NULL;
+deviceDesc.label = "My Device"; // anything works here, that's your call
+deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
+deviceDesc.requiredLimits = NULL; // we do not require any specific limit
+deviceDesc.defaultQueue.nextInChain = NULL;
+deviceDesc.defaultQueue.label = "The default queue";
+WGPUDevice device = requestDevice2(adapter, &deviceDesc);
+printf( "Got device: %p\n", device);
+wgpuDeviceSetUncapturedErrorCallback(device, onDeviceError, NULL /* pUserData */);
+WGPUQueue queue = wgpuDeviceGetQueue(device);
+WGPUSwapChainDescriptor swapChainDesc = {};
+swapChainDesc.width = 640;
+swapChainDesc.height = 480;
+swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
  //   WGPUTextureFormat swapChainFormat = wgpuSurfaceGetPreferredFormat(surface, adapter);
   //  swapChainDesc.format = swapChainFormat;
-    swapChainDesc.presentMode = WGPUPresentMode_Fifo;
+swapChainDesc.presentMode = WGPUPresentMode_Fifo;
  //    WGPUSwapChain swapChain = wgpuDeviceCreateSwapChain(device, surface, &swapChainDesc);
   //   printf( "Swapchain: %p\n", swapChain);
-    const char* shaderSource = "                                                                \
+const char* shaderSource = "                                                                \
     @vertex                                                                                     \
     fn vs_main(@builtin(vertex_index) in_vertex_index: u32) -> @builtin(position) vec4<f32> {   \
         var p = vec2<f32>(0.0, 0.0);                                                            \
     }                                                                                           \
     ";
 
-    WGPUShaderModuleDescriptor shaderDesc = {};
+WGPUShaderModuleDescriptor shaderDesc = {};
    // shaderDesc.hintCount = 0;
    // shaderDesc.hints = NULL;
-    WGPUShaderModuleWGSLDescriptor shaderCodeDesc = {};
-    shaderCodeDesc.chain.next = NULL;
-    shaderCodeDesc.chain.sType = WGPUSType_ShaderModuleWGSLDescriptor;
-    shaderDesc.nextInChain = &shaderCodeDesc.chain;
-    shaderCodeDesc.source = shaderSource;
-    WGPUShaderModule shaderModule = wgpuDeviceCreateShaderModule(device, &shaderDesc);
-    WGPURenderPipelineDescriptor pipelineDesc = {};
+WGPUShaderModuleWGSLDescriptor shaderCodeDesc = {};
+shaderCodeDesc.chain.next = NULL;
+shaderCodeDesc.chain.sType = WGPUSType_ShaderModuleWGSLDescriptor;
+shaderDesc.nextInChain = &shaderCodeDesc.chain;
+shaderCodeDesc.source = shaderSource;
+WGPUShaderModule shaderModule = wgpuDeviceCreateShaderModule(device, &shaderDesc);
+WGPURenderPipelineDescriptor pipelineDesc = {};
     // pipelineDesc.nextInChain = NULL;
-    pipelineDesc.vertex.bufferCount = 0;
-    pipelineDesc.vertex.buffers = NULL;
-    pipelineDesc.vertex.module = shaderModule;
-    pipelineDesc.vertex.entryPoint = "vs_main";
-    pipelineDesc.vertex.constantCount = 0;
-    pipelineDesc.vertex.constants = NULL;
-    pipelineDesc.primitive.topology = WGPUPrimitiveTopology_TriangleList;
-    pipelineDesc.primitive.stripIndexFormat = WGPUIndexFormat_Undefined;
-    pipelineDesc.primitive.frontFace = WGPUFrontFace_CCW;
-    pipelineDesc.primitive.cullMode = WGPUCullMode_None;
-    WGPUFragmentState fragmentState = {};
-    fragmentState.nextInChain = NULL;
-    pipelineDesc.fragment = &fragmentState;
-    fragmentState.module = shaderModule;
-    fragmentState.entryPoint = "fs_main";
-    fragmentState.constantCount = 0;
-    fragmentState.constants = NULL;
-    WGPUBlendState blendState = {};
-    blendState.color.srcFactor = WGPUBlendFactor_SrcAlpha;
-    blendState.color.dstFactor = WGPUBlendFactor_OneMinusSrcAlpha;
-    blendState.color.operation = WGPUBlendOperation_Add;
-    blendState.alpha.srcFactor = WGPUBlendFactor_Zero;
-    blendState.alpha.dstFactor = WGPUBlendFactor_One;
-    blendState.alpha.operation = WGPUBlendOperation_Add;
+pipelineDesc.vertex.bufferCount = 0;
+pipelineDesc.vertex.buffers = NULL;
+pipelineDesc.vertex.module = shaderModule;
+pipelineDesc.vertex.entryPoint = "vs_main";
+pipelineDesc.vertex.constantCount = 0;
+pipelineDesc.vertex.constants = NULL;
+pipelineDesc.primitive.topology = WGPUPrimitiveTopology_TriangleList;
+pipelineDesc.primitive.stripIndexFormat = WGPUIndexFormat_Undefined;
+pipelineDesc.primitive.frontFace = WGPUFrontFace_CCW;
+pipelineDesc.primitive.cullMode = WGPUCullMode_None;
+WGPUFragmentState fragmentState = {};
+fragmentState.nextInChain = NULL;
+pipelineDesc.fragment = &fragmentState;
+fragmentState.module = shaderModule;
+fragmentState.entryPoint = "fs_main";
+fragmentState.constantCount = 0;
+fragmentState.constants = NULL;
+WGPUBlendState blendState = {};
+blendState.color.srcFactor = WGPUBlendFactor_SrcAlpha;
+blendState.color.dstFactor = WGPUBlendFactor_OneMinusSrcAlpha;
+blendState.color.operation = WGPUBlendOperation_Add;
+blendState.alpha.srcFactor = WGPUBlendFactor_Zero;
+blendState.alpha.dstFactor = WGPUBlendFactor_One;
+blendState.alpha.operation = WGPUBlendOperation_Add;
  //   WGPUColorTargetState colorTarget = {};
   //  colorTarget.format = swapChainFormat;
  //   colorTarget.blend = &blendState;
@@ -165,27 +159,22 @@ int gpmain() {
  //   pipelineDesc.multisample.count = 1;
  //   pipelineDesc.multisample.mask = ~0u;
  //   pipelineDesc.multisample.alphaToCoverageEnabled = false;
-    
- WGPUPipelineLayoutDescriptor layoutDesc = {};
-    
-    layoutDesc.nextInChain = NULL;
-    layoutDesc.bindGroupLayoutCount = 0;
-    layoutDesc.bindGroupLayouts = NULL;
-
-
+WGPUPipelineLayoutDescriptor layoutDesc = {};
+layoutDesc.nextInChain = NULL;
+layoutDesc.bindGroupLayoutCount = 0;
+layoutDesc.bindGroupLayouts = NULL;
  //   WGPUPipelineLayout layout = wgpuDeviceCreatePipelineLayout(device, &layoutDesc);
  //   pipelineDesc.layout = layout;
   //  WGPURenderPipeline pipeline = wgpuDeviceCreateRenderPipeline(device, &pipelineDesc);
   //  while (!glfwWindowShouldClose(window)) {
      //   glfwPollEvents();
      //   WGPUTextureView nextTexture = wgpuSwapChainGetCurrentTextureView(swapChain);
-  
-        WGPUCommandEncoderDescriptor encoderDesc = {};
-        encoderDesc.nextInChain = NULL;
-        encoderDesc.label = "My command encoder";
-        WGPUCommandEncoder encoder = wgpuDeviceCreateCommandEncoder(device, &encoderDesc);
-        WGPURenderPassDescriptor renderPassDesc = {};
-        renderPassDesc.nextInChain = NULL;
+WGPUCommandEncoderDescriptor encoderDesc = {};
+encoderDesc.nextInChain = NULL;
+encoderDesc.label = "My command encoder";
+WGPUCommandEncoder encoder = wgpuDeviceCreateCommandEncoder(device, &encoderDesc);
+WGPURenderPassDescriptor renderPassDesc = {};
+renderPassDesc.nextInChain = NULL;
     //    WGPURenderPassColorAttachment renderPassColorAttachment = {};
     //    renderPassColorAttachment.view = nextTexture;
     //    renderPassColorAttachment.resolveTarget = NULL;
@@ -202,10 +191,10 @@ int gpmain() {
   //      wgpuRenderPassEncoderDraw(renderPass, 3, 1, 0, 0);
   //      wgpuRenderPassEncoderEnd(renderPass);
    //     wgpuTextureViewDrop(nextTexture);
-        WGPUCommandBufferDescriptor cmdBufferDescriptor = {};
-        cmdBufferDescriptor.nextInChain = NULL;
-        cmdBufferDescriptor.label = "Command buffer";
-        WGPUCommandBuffer command = wgpuCommandEncoderFinish(encoder, &cmdBufferDescriptor);
+WGPUCommandBufferDescriptor cmdBufferDescriptor = {};
+cmdBufferDescriptor.nextInChain = NULL;
+cmdBufferDescriptor.label = "Command buffer";
+WGPUCommandBuffer command = wgpuCommandEncoderFinish(encoder, &cmdBufferDescriptor);
    //     wgpuQueueSubmit(queue, 1, &command);
   //      wgpuSwapChainPresent(swapChain);
   //  }
@@ -430,6 +419,7 @@ document.getElementById('di').click();
   
 int main(void){
 js_main();
+gpmain();
 return 0;
 
 }
