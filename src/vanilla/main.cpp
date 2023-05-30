@@ -117,7 +117,6 @@ int gpmain() {
     @vertex                                                                                     \
     fn vs_main(@builtin(vertex_index) in_vertex_index: u32) -> @builtin(position) vec4<f32> {   \
         var p = vec2<f32>(0.0, 0.0);                                                            \
-//  .................
     }                                                                                           \
     ";
 
