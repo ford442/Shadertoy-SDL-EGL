@@ -7,6 +7,7 @@
 struct AdapterUserData {
 WGPUAdapter adapter;
 bool requestEnded;
+};
 
 void onDeviceError (WGPUErrorType type, char const* message, void* pUserData) {
 printf( "Uncaptured device error: type (%u)\n", type);
