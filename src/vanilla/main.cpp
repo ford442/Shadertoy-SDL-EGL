@@ -2,7 +2,6 @@
 
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
-#include <webgpu/wgpu.h>
 #include <stdlib.h>
 #include <glfw3webgpu.h>
 
