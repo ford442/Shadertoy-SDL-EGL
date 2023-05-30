@@ -9,6 +9,12 @@ WGPUAdapter adapter;
 bool requestEnded;
 };
 
+void onDeviceError (WGPUErrorType type, char const* message, void* pUserData) {
+printf( "Uncaptured device error: type (%u)\n", type);
+if (message)
+printf( "Could not get WebGPU adapter: (%s)\n", message);
+};
+
 void onAdapterRequestEnded(WGPURequestAdapterStatus status, WGPUAdapter adapter, char const * message, void * pUserData) {
 struct AdapterUserData * userData = (struct AdapterUserData *)pUserData;
 if (status == WGPURequestAdapterStatus_Success) {
