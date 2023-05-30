@@ -46,7 +46,9 @@ printf( "Could not get WebGPU device");
 
 WGPUDevice requestDevice2(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
 struct DeviceUserData userData = {};
+printf( "device request.\n");
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded2,(void*)&userData);
+printf( "after device request.\n");
 return userData.device;
 }
 
@@ -64,10 +66,11 @@ WGPURequestAdapterOptions adapterOpts = {};
 adapterOpts.nextInChain = NULL;
  //    adapterOpts.compatibleSurface = surface;
 WGPUAdapter adapter2 = requestAdapter2(instance, &adapterOpts);
+  
 printf( "Got adapter.\n");
       sleep(3);
 
-printf("Requesting device.\n");
+printf("setup for requesting device.\n");
 WGPUDeviceDescriptor deviceDesc = {};
 deviceDesc.nextInChain = NULL;
 deviceDesc.label = "My Device"; // anything works here, that's your call
@@ -75,8 +78,9 @@ deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
 deviceDesc.requiredLimits = NULL; // we do not require any specific limit
 deviceDesc.defaultQueue.nextInChain = NULL;
 deviceDesc.defaultQueue.label = "The default queue";
-
+  
 WGPUDevice device = requestDevice2(adapter2, &deviceDesc);
+  
     sleep(3);
 
 printf( "Got device.\n");
