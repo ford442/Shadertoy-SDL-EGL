@@ -177,13 +177,9 @@ int gpmain() {
  //   pipelineDesc.layout = layout;
   //  WGPURenderPipeline pipeline = wgpuDeviceCreateRenderPipeline(device, &pipelineDesc);
   //  while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-        WGPUTextureView nextTexture = wgpuSwapChainGetCurrentTextureView(swapChain);
-        if (!nextTexture) {
-            fprintf(stderr, "Cannot acquire next swap chain texture\n");
-            return 1;
-        }
-        printf( "nextTexture: %p\n", nextTexture);
+     //   glfwPollEvents();
+     //   WGPUTextureView nextTexture = wgpuSwapChainGetCurrentTextureView(swapChain);
+  
         WGPUCommandEncoderDescriptor encoderDesc = {};
         encoderDesc.nextInChain = NULL;
         encoderDesc.label = "My command encoder";
