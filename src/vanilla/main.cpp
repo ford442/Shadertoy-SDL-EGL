@@ -3,7 +3,6 @@
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <glfw3webgpu.h>
 
 //  ------------------------------- Adapter------------------------------------------------------------------
 struct AdapterUserData {
