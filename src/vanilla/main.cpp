@@ -71,6 +71,7 @@ adapterOpts.nextInChain = NULL;
  //    adapterOpts.compatibleSurface = surface;
 WGPUAdapter adapter2 = requestAdapter2(instance, &adapterOpts);
 printf( "Got adapter: %p\n", adapter2);
+  sleep(3);
 printf("Requesting device...\n");
 WGPUDeviceDescriptor deviceDesc = {};
 deviceDesc.nextInChain = NULL;
