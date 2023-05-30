@@ -107,7 +107,7 @@ int gpmain() {
     WGPUSwapChainDescriptor swapChainDesc = {};
     swapChainDesc.width = 640;
     swapChainDesc.height = 480;
-    swapChainDesc.addd = her;
+    swapChainDesc.addd = "her";
     swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
  //   WGPUTextureFormat swapChainFormat = wgpuSurfaceGetPreferredFormat(surface, adapter);
   //  swapChainDesc.format = swapChainFormat;
