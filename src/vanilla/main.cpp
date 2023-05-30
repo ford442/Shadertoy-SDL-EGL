@@ -6,7 +6,6 @@
 
 struct AdapterUserData {
 WGPUAdapter adapter;
-bool requestEnded;
 };
 
 void onDeviceError (WGPUErrorType type, char const* message, void* pUserData) {
@@ -19,40 +18,35 @@ void onAdapterRequestEnded(WGPURequestAdapterStatus status, WGPUAdapter adapter,
 struct AdapterUserData * userData = (struct AdapterUserData *)pUserData;
 if (status == WGPURequestAdapterStatus_Success) {
 userData.adapter = adapter;
-printf( "Got WebGPU adapter!");
+printf( "Got WebGPU adapter.\n");
 } else {
 printf( "Could not get WebGPU adapter: %s\n", message);
 }
-userData->requestEnded = true;
 };
 
 WGPUAdapter requestAdapter2(WGPUInstance instance, WGPURequestAdapterOptions const * options) {
 struct AdapterUserData userData={NULL, false};
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
-userData.requestEnded=true;
 return userData.adapter;
 }
 
 struct DeviceUserData {
 WGPUDevice device;
-bool requestEnded;
 };
 
 void onDeviceRequestEnded2(WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
 struct DeviceUserData * userData = (struct DeviceUserData *)(pUserData);
 if (status == WGPURequestDeviceStatus_Success) {
 userData.device = device;
-printf( "Got WebGPU device:!");
+printf( "Got WebGPU device.\n");
 } else {
 printf( "Could not get WebGPU device");
 }
-userData.requestEnded = true;
 };
 
 WGPUDevice requestDevice2(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
 struct DeviceUserData userData = {NULL, false};
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded2,(void*)&userData);
-userData.requestEnded=true;
 return userData.device;
 }
 
@@ -61,17 +55,19 @@ WGPUInstanceDescriptor desc = {};
 desc.nextInChain = NULL;
 WGPUInstance instance = nullptr; // wgpuCreateInstance(&desc);
 if (!instance) {
-printf( "Skipping initialize WebGPU!\n");
+printf( "Skipping initialize WebGPU.\n");
 }
 
-printf("Requesting adapter...\n");
+printf("Requesting adapter.\n");
   //   WGPUSurface surface = glfwGetWGPUSurface(instance, window);
 WGPURequestAdapterOptions adapterOpts = {};
 adapterOpts.nextInChain = NULL;
  //    adapterOpts.compatibleSurface = surface;
 WGPUAdapter adapter2 = requestAdapter2(instance, &adapterOpts);
-printf( "Got adapter: %p\n", adapter2);
-printf("Requesting device...\n");
+printf( "Got adapter.\n");
+      sleep(3);
+
+printf("Requesting device.\n");
 WGPUDeviceDescriptor deviceDesc = {};
 deviceDesc.nextInChain = NULL;
 deviceDesc.label = "My Device"; // anything works here, that's your call
@@ -79,12 +75,11 @@ deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
 deviceDesc.requiredLimits = NULL; // we do not require any specific limit
 deviceDesc.defaultQueue.nextInChain = NULL;
 deviceDesc.defaultQueue.label = "The default queue";
-    sleep(3);
 
 WGPUDevice device = requestDevice2(adapter2, &deviceDesc);
     sleep(3);
 
-printf( "Got device: %p\n", device);
+printf( "Got device.\n");
 wgpuDeviceSetUncapturedErrorCallback(device, onDeviceError, NULL /* pUserData */);
 WGPUQueue queue = wgpuDeviceGetQueue(device);
 WGPUSwapChainDescriptor swapChainDesc = {};
