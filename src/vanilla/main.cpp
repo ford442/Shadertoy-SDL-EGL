@@ -41,9 +41,9 @@ void onDeviceRequestEnded2(WGPURequestDeviceStatus status, WGPUDevice device, ch
 struct DeviceUserData * userData = (struct DeviceUserData *)(pUserData);
 if (status == WGPURequestDeviceStatus_Success) {
 userData->device = device;
-printf( "Got WebGPU device: %s\n", message);
+printf( "Got WebGPU device: %s\n", device);
 } else {
-printf( "Could not get WebGPU device: %s\n", message);
+printf( "Could not get WebGPU device");
 }
 userData->requestEnded = true;
 };
