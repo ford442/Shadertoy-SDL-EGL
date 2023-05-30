@@ -61,7 +61,7 @@ WGPUInstanceDescriptor desc = {};
 desc.nextInChain = NULL;
 WGPUInstance instance = nullptr; // wgpuCreateInstance(&desc);
 if (!instance) {
-fprintf(stderr, "Skipping initialize WebGPU!\n");
+printf( "Skipping initialize WebGPU!\n");
 }
 
 printf("Requesting adapter...\n");
@@ -69,8 +69,8 @@ printf("Requesting adapter...\n");
 WGPURequestAdapterOptions adapterOpts = {};
 adapterOpts.nextInChain = NULL;
  //    adapterOpts.compatibleSurface = surface;
-WGPUAdapter adapter = requestAdapter2(instance, &adapterOpts);
-printf( "Got adapter: %p\n", adapter);
+WGPUAdapter adapter2 = requestAdapter2(instance, &adapterOpts);
+printf( "Got adapter: %p\n", adapter2);
 printf("Requesting device...\n");
 WGPUDeviceDescriptor deviceDesc = {};
 deviceDesc.nextInChain = NULL;
@@ -79,7 +79,7 @@ deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
 deviceDesc.requiredLimits = NULL; // we do not require any specific limit
 deviceDesc.defaultQueue.nextInChain = NULL;
 deviceDesc.defaultQueue.label = "The default queue";
-WGPUDevice device = requestDevice2(adapter, &deviceDesc);
+WGPUDevice device = requestDevice2(adapter2, &deviceDesc);
 printf( "Got device: %p\n", device);
 wgpuDeviceSetUncapturedErrorCallback(device, onDeviceError, NULL /* pUserData */);
 WGPUQueue queue = wgpuDeviceGetQueue(device);
