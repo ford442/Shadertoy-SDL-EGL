@@ -17,7 +17,7 @@ printf( "Could not get WebGPU adapter: (%s)\n", message);
 void onAdapterRequestEnded(WGPURequestAdapterStatus status, WGPUAdapter adapter, char const * message, void * pUserData) {
 struct AdapterUserData * userData = (struct AdapterUserData *)pUserData;
 if (status == WGPURequestAdapterStatus_Success) {
-userData.adapter = adapter;
+userData->adapter = adapter;
 printf( "Got WebGPU adapter.\n");
 } else {
 printf( "Could not get WebGPU adapter: %s\n", message);
@@ -25,7 +25,7 @@ printf( "Could not get WebGPU adapter: %s\n", message);
 };
 
 WGPUAdapter requestAdapter2(WGPUInstance instance, WGPURequestAdapterOptions const * options) {
-struct AdapterUserData userData={NULL, false};
+struct AdapterUserData userData={NULL};
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
@@ -37,7 +37,7 @@ WGPUDevice device;
 void onDeviceRequestEnded2(WGPURequestDeviceStatus status, WGPUDevice device, char const * message, void * pUserData) {
 struct DeviceUserData * userData = (struct DeviceUserData *)(pUserData);
 if (status == WGPURequestDeviceStatus_Success) {
-userData.device = device;
+userData->device = device;
 printf( "Got WebGPU device.\n");
 } else {
 printf( "Could not get WebGPU device");
@@ -45,7 +45,7 @@ printf( "Could not get WebGPU device");
 };
 
 WGPUDevice requestDevice2(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
-struct DeviceUserData userData = {NULL, false};
+struct DeviceUserData userData = {NULL};
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded2,(void*)&userData);
 return userData.device;
 }
