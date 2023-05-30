@@ -193,8 +193,8 @@ b3_vanilla_llvm:
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DWORDS_BIGENDIAN=1 -DCPU_IS_LITTLE_ENDIAN=0 \
-	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -sEVAL_CTORS -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=3 -sNO_DISABLE_EXCEPTION_CATCHING \
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
