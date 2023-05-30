@@ -56,7 +56,7 @@ userData.requestEnded=true;
 return userData.device;
 }
 
-int gpmain() {
+void gpmain() {
 WGPUInstanceDescriptor desc = {};
 desc.nextInChain = NULL;
 WGPUInstance instance = nullptr; // wgpuCreateInstance(&desc);
@@ -71,7 +71,6 @@ adapterOpts.nextInChain = NULL;
  //    adapterOpts.compatibleSurface = surface;
 WGPUAdapter adapter2 = requestAdapter2(instance, &adapterOpts);
 printf( "Got adapter: %p\n", adapter2);
-  sleep(3);
 printf("Requesting device...\n");
 WGPUDeviceDescriptor deviceDesc = {};
 deviceDesc.nextInChain = NULL;
@@ -80,7 +79,11 @@ deviceDesc.requiredFeaturesCount = 0; // we do not require any specific feature
 deviceDesc.requiredLimits = NULL; // we do not require any specific limit
 deviceDesc.defaultQueue.nextInChain = NULL;
 deviceDesc.defaultQueue.label = "The default queue";
+    sleep(3);
+
 WGPUDevice device = requestDevice2(adapter2, &deviceDesc);
+    sleep(3);
+
 printf( "Got device: %p\n", device);
 wgpuDeviceSetUncapturedErrorCallback(device, onDeviceError, NULL /* pUserData */);
 WGPUQueue queue = wgpuDeviceGetQueue(device);
@@ -186,6 +189,7 @@ WGPUCommandBuffer command = wgpuCommandEncoderFinish(encoder, &cmdBufferDescript
   //  }
 //    glfwDestroyWindow(window);
 //    glfwTerminate();
+return;
 }
 
 float cc,pp,uu;
