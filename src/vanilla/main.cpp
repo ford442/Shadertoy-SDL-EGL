@@ -28,10 +28,10 @@ WGPUVertexBufferLayout vertex_buffer_layout = {
 .attributes = vertex_attrib,
 };
     
-WGPUBindGroupLayoutDescriptor BindGroupLayoutDescriptor;
-WGPUPipelineLayoutDescriptor PipelineLayoutDescriptor;
-WGPURenderPipelineDescriptor RenderPipelineDescriptor;
-WGPUBindGroupLayoutEntry BindGroupLayoutEntry;
+WGPUBindGroupLayoutDescriptor BindGroupLayoutDescriptor={};
+WGPUPipelineLayoutDescriptor PipelineLayoutDescriptor={};
+WGPURenderPipelineDescriptor RenderPipelineDescriptor={};
+WGPUBindGroupLayoutEntry BindGroupLayoutEntry={};
         
 WGPUBindGroupLayout bindgroup_layout = wgpuDeviceCreateBindGroupLayout(state.wgpu.device, &BindGroupLayoutDescriptor{
 .entryCount = 1,
