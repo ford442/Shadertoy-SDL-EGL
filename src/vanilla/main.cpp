@@ -73,7 +73,7 @@ printf( "Could not get WebGPU adapter: (%s)\n", message);
 int gpmain() {
 WGPUInstanceDescriptor desc = {};
 desc.nextInChain = NULL;
-WGPUInstance instance = wgpuCreateInstance(&desc);
+WGPUInstance instance = nullptr; // wgpuCreateInstance(&desc);
 if (!instance) {
 fprintf(stderr, "Could not initialize WebGPU!\n");
 return 1;
