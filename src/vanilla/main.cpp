@@ -107,7 +107,6 @@ int gpmain() {
     WGPUSwapChainDescriptor swapChainDesc = {};
     swapChainDesc.width = 640;
     swapChainDesc.height = 480;
-    swapChainDesc.addd = "her";
     swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
  //   WGPUTextureFormat swapChainFormat = wgpuSurfaceGetPreferredFormat(surface, adapter);
   //  swapChainDesc.format = swapChainFormat;
@@ -122,8 +121,8 @@ int gpmain() {
     ";
 
     WGPUShaderModuleDescriptor shaderDesc = {};
-    shaderDesc.hintCount = 0;
-    shaderDesc.hints = NULL;
+   // shaderDesc.hintCount = 0;
+   // shaderDesc.hints = NULL;
     WGPUShaderModuleWGSLDescriptor shaderCodeDesc = {};
     shaderCodeDesc.chain.next = NULL;
     shaderCodeDesc.chain.sType = WGPUSType_ShaderModuleWGSLDescriptor;
