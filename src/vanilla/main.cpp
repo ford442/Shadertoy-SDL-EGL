@@ -127,7 +127,7 @@ int gpmain() {
     shaderCodeDesc.chain.next = NULL;
     shaderCodeDesc.chain.sType = WGPUSType_ShaderModuleWGSLDescriptor;
     shaderDesc.nextInChain = &shaderCodeDesc.chain;
-    shaderCodeDesc.code = shaderSource;
+    shaderCodeDesc.source = shaderSource;
     WGPUShaderModule shaderModule = wgpuDeviceCreateShaderModule(device, &shaderDesc);
     WGPURenderPipelineDescriptor pipelineDesc = {};
     // pipelineDesc.nextInChain = NULL;
