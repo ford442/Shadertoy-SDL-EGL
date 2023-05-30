@@ -104,8 +104,8 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-std::cout << "Requesting device userdata..." << std::endl;
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
+std::cout << "Skipping device userdata..." << std::endl;
+// wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
 
