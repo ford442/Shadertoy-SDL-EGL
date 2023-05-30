@@ -160,13 +160,13 @@ int gpmain() {
  //   colorTarget.blend = &blendState;
  //   colorTarget.writeMask = WGPUColorWriteMask_All; // We could write to only some of the color channels.
     fragmentState.targetCount = 1;
-    fragmentState.targets = &colorTarget;
+    fragmentState.targets = NUKLL; // &colorTarget;
   //  pipelineDesc.depthStencil = NULL;
  //   pipelineDesc.multisample.count = 1;
  //   pipelineDesc.multisample.mask = ~0u;
  //   pipelineDesc.multisample.alphaToCoverageEnabled = false;
     
- //   WGPUPipelineLayoutDescriptor layoutDesc = {};
+ WGPUPipelineLayoutDescriptor layoutDesc = {};
     
     layoutDesc.nextInChain = NULL;
     layoutDesc.bindGroupLayoutCount = 0;
@@ -176,7 +176,7 @@ int gpmain() {
  //   WGPUPipelineLayout layout = wgpuDeviceCreatePipelineLayout(device, &layoutDesc);
  //   pipelineDesc.layout = layout;
   //  WGPURenderPipeline pipeline = wgpuDeviceCreateRenderPipeline(device, &pipelineDesc);
-    while (!glfwWindowShouldClose(window)) {
+  //  while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         WGPUTextureView nextTexture = wgpuSwapChainGetCurrentTextureView(swapChain);
         if (!nextTexture) {
@@ -212,7 +212,7 @@ int gpmain() {
         WGPUCommandBuffer command = wgpuCommandEncoderFinish(encoder, &cmdBufferDescriptor);
    //     wgpuQueueSubmit(queue, 1, &command);
   //      wgpuSwapChainPresent(swapChain);
-    }
+  //  }
 //    glfwDestroyWindow(window);
 //    glfwTerminate();
 }
