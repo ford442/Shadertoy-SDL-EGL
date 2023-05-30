@@ -160,7 +160,7 @@ int gpmain() {
  //   colorTarget.blend = &blendState;
  //   colorTarget.writeMask = WGPUColorWriteMask_All; // We could write to only some of the color channels.
     fragmentState.targetCount = 1;
-    fragmentState.targets = NUKLL; // &colorTarget;
+    fragmentState.targets = NULL; // &colorTarget;
   //  pipelineDesc.depthStencil = NULL;
  //   pipelineDesc.multisample.count = 1;
  //   pipelineDesc.multisample.mask = ~0u;
