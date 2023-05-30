@@ -25,7 +25,7 @@ printf( "Could not get WebGPU adapter: %s\n", message);
 };
 
 WGPUAdapter requestAdapter2(WGPUInstance instance, WGPURequestAdapterOptions const * options) {
-struct AdapterUserData userData={NULL};
+struct AdapterUserData userData={};
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
 return userData.adapter;
 }
@@ -45,7 +45,7 @@ printf( "Could not get WebGPU device");
 };
 
 WGPUDevice requestDevice2(WGPUAdapter adapter, WGPUDeviceDescriptor const * descriptor) {
-struct DeviceUserData userData = {NULL};
+struct DeviceUserData userData = {};
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded2,(void*)&userData);
 return userData.device;
 }
