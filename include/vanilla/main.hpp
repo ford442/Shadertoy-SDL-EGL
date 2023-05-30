@@ -68,7 +68,8 @@ using tV=tensor<v128_t>;
 // #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
 #include <webgpu/webgpu.h>
 #include <stdio.h>
-#include "emscripten/html5_webgpu.h"
+
+// #include "emscripten/html5_webgpu.h"
 
 // using namespace wgpu;
 using namespace std;
