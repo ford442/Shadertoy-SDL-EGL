@@ -107,7 +107,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 std::cout << "requesting device" << std::endl;
-wgpuAdapterRequestDevice(adapter,&descriptor,onDeviceRequestEnded,&userData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
 return userData.device;
 }
 
@@ -125,7 +125,7 @@ std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,&options,onAdapterRequestEnded,&userData);
+wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
