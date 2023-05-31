@@ -168,12 +168,6 @@ std::function<float(float,float)>tensorAdd(){
 return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(0,1);return sx.at(1,0);};
 }
 
-int main()
-{
-    auto lmbda = returnLambda();
-    std::cout << lmbda(8.2, 6.4) << std::endl;
-}
-
 class tens{
 
 private:
