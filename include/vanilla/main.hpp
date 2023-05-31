@@ -89,7 +89,7 @@ const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 // const WGPUInstance instance=wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
 const WGPUInstance instance=nullptr;
-// WGPUBindGroupLayout requestBindGroupLayout(WGPUDevice device,WGPUBindGroupLayoutDescriptor const * descriptor){
+const WGPUBindGroupLayout bindGroupLayout;
 
 // }
  
@@ -106,8 +106,8 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-std::cout << "Skipping device userdata..." << std::endl;
-// wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
+std::cout << "requesting device" << std::endl;
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
 return userData.device;
 }
 
@@ -121,7 +121,7 @@ auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapte
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
-std::cout << "Requesting adapter..." << std::endl;
+std::cout << "Requesting adapter" << std::endl;
 std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
