@@ -57,7 +57,7 @@ WGPUInstanceDescriptor desc = {};
 desc.nextInChain = NULL;
 WGPUInstance instance = nullptr; // wgpuCreateInstance(&desc);
 if (!instance) {
-printf( "Skipping initialize WebGPU.\n");
+printf( "Skipping 'instance' initialize WebGPU.\n");
 }
 
 printf("Requesting adapter.\n");
@@ -68,7 +68,7 @@ adapterOpts.nextInChain = NULL;
 WGPUAdapter adapter2 = requestAdapter2(instance, &adapterOpts);
   
 printf( "Got adapter.\n");
-      sleep(3);
+      sleep(1);
 
 printf("setup for requesting device.\n");
 WGPUDeviceDescriptor deviceDesc = {};
@@ -81,7 +81,7 @@ deviceDesc.defaultQueue.label = "The default queue";
   
 WGPUDevice device = requestDevice2(adapter2, &deviceDesc);
   
-    sleep(3);
+    sleep(1);
 
 printf( "Got device.\n");
 wgpuDeviceSetUncapturedErrorCallback(device, onDeviceError, NULL /* pUserData */);
@@ -408,6 +408,7 @@ document.getElementById('di').click();
   
 int main(void){
 js_main();
+sleep(1);
 gpmain();
 return 0;
 
