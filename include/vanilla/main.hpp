@@ -270,14 +270,14 @@ sey.at(1,1)=longDoubleAdd(3.1415926535897932384626433832795028841971693993751058
 std::cout << "------intrins-------------" << std::endl;
 float ou2=wasm_f64x2_extract_lane(sz.at(1,1),0);
 double ou3=wasm_f64x2_extract_lane(sz.at(1,1),0);
-long double ou5=wasm_f64x2_extract_lane(sz.at(1,1),0);
+// long double ou5=wasm_f64x2_extract_lane(sz.at(1,1),0);
 std::cout << fixed << setprecision(64) << "--float---"<< ou2 <<"-----" << std::endl;
 std::cout << fixed << setprecision(64) << "--double---"<< ou3 <<"-----" << std::endl;
-std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
+// std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "---long double add--------------" << std::endl;
-std::cout << fixed << setprecision(64) << "-----"<< sey.at(1,1) <<"-----" << std::endl;
+// std::cout << fixed << setprecision(64) << "-----"<< sey.at(1,1) <<"-----" << std::endl;
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
