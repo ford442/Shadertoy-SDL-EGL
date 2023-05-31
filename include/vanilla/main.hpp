@@ -107,7 +107,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 std::cout << "requesting device" << std::endl;
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,userData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
 return userData.device;
 }
 
@@ -125,7 +125,7 @@ std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,userData);
+wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
@@ -164,9 +164,10 @@ const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 
 tensorVar sx=tf{2,2};
 
-std::function<float(float,float)>tensorAdd(){
+std::function<float(float,float)>TensorAdd(){
 return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(0,1);return sx.at(1,0);};
 }
+auto tensorAdd = TensorAdd();
 
 class tens{
 
