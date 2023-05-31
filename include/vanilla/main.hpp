@@ -130,7 +130,6 @@ wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userDa
 return userData.adapter;
 }
 
-WGPUBindGroupLayout bindGroupLayout;
 WGPUDevice Gdevice;
 
 void init1(){
