@@ -233,13 +233,13 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
 using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
-using sz_tensor=boost::numeric::ublas::tensor<boost::atomic<int>>;
+using sz_tensor=boost::numeric::ublas::tensor<int>;
 using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
-using d_tensor=boost::numeric::ublas::tensor<boost::atomic<double>>;
+using d_tensor=boost::numeric::ublas::tensor<double>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
-using i_tensor=boost::numeric::ublas::tensor<boost::atomic<int>>;
+using i_tensor=boost::numeric::ublas::tensor<int>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
-using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
+using void_tensor=boost::numeric::ublas::tensor<void *>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -324,8 +324,8 @@ inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline float uni_tme,uni_tme_dlt,uni_mse;
 
 struct{
-boost::chrono::duration<float,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<float,boost::chrono::seconds::period>time_spanb;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::steady_clock::time_point t2;
 boost::chrono::steady_clock::time_point t3;
@@ -340,13 +340,13 @@ double wi;
 double hi;
 }mouse;
 
-boost::atomic<int>Size;
+int Size;
 boost::atomic<int>tmm=166666000;
 boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-const boost::atomic<int>ele=36;
+const int ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
@@ -559,8 +559,8 @@ static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::steady_clock::now();
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -665,7 +665,6 @@ mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
-  
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
@@ -813,8 +812,8 @@ u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::steady_clock::now();
 u_time.t3=boost::chrono::steady_clock::now();
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
