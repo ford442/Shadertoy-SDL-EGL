@@ -257,8 +257,10 @@ sz.at(1,1)=intrinsAdd(wasm_f64x2_splat(3.141592653),wasm_f64x2_splat(3.141592653
 std::cout << "------intrins-------------" << std::endl;
 float ou2=wasm_f64x2_extract_lane(sz.at(1,1),0);
 double ou3=wasm_f64x2_extract_lane(sz.at(1,1),0);
+long double ou5=wasm_f64x2_extract_lane(sz.at(1,1),0);
 std::cout << fixed << setprecision(64) << "--float---"<< ou2 <<"-----" << std::endl;
 std::cout << fixed << setprecision(64) << "--double---"<< ou3 <<"-----" << std::endl;
+std::cout << fixed << setprecision(64) << "--double---"<< ou5 <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 
