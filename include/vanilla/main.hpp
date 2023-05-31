@@ -206,13 +206,13 @@ return sy.at(1,0);};
 }
 auto doubleAdd=DoubleAdd();
 
-tld say=tld{2,2};
-std::function<double(double,double)>LongDoubleAdd(){
-return[](double a,double b){
-sy.at(0,0)=a;
-sy.at(0,1)=b;
-sy.at(1,0)=sy.at(0,0)+sy.at(0,1);
-return sy.at(1,0);};
+tld sey=tld{2,2};
+std::function<long double(long double,long double)>LongDoubleAdd(){
+return[](long double a,long double b){
+sey.at(0,0)=a;
+sey.at(0,1)=b;
+sey.at(1,0)=sey.at(0,0)+sey.at(0,1);
+return sey.at(1,0);};
 }
 auto longDoubleAdd=LongDoubleAdd();
 
