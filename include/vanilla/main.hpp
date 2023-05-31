@@ -75,21 +75,21 @@ using tV=tensor<v128_t>;
 using namespace std;
 
 WGPUAdapter adapter=nullptr;
-const WGPUBindGroup bindGroup=nullptr;
+WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
-const WGPUPipelineLayout pipelineLayout=nullptr;
+WGPUPipelineLayout pipelineLayout=nullptr;
 const WGPUComputePipelineDescriptor computePipelineDescriptor={};
-const WGPUComputePipeline computePipeline=nullptr;
-const WGPUSwapChain swapchain=nullptr;
-const WGPUCommandBuffer commandBuffer=nullptr;
+WGPUComputePipeline computePipeline=nullptr;
+WGPUSwapChain swapchain=nullptr;
+WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor={};
 const WGPUDeviceDescriptor deviceDescriptor={};
 const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 // const WGPUInstance instance=wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
-const WGPUInstance instance=nullptr;
-const WGPUBindGroupLayout bindGroupLayout;
+WGPUInstance instance=nullptr;
+WGPUBindGroupLayout bindGroupLayout=nullptr;
 
 // }
  
