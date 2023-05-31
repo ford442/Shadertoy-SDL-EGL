@@ -88,8 +88,6 @@ const WGPUCommandEncoderDescriptor encoderDescriptor={};
 const WGPURequestAdapterOptions adapterOptions={};
 const WGPUInstanceDescriptor instanceDescriptor={};
 WGPUInstance instance=nullptr;
-wgpuCreateInstance(&instanceDescriptor);  //  TODO: not implemented in our .hpp
-WGPUInstance instance=nullptr;
 WGPUBindGroupLayout bindGroupLayout=nullptr;
 
 // }
@@ -122,7 +120,6 @@ auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapte
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
-std::cout << "Requesting adapter" << std::endl;
 std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
