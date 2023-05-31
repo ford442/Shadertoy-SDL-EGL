@@ -171,11 +171,11 @@ return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(
 auto tensorAdd = TensorAdd();
 
 td sy=td{2,2};
-std::function<double(float,float)>DoubleAdd(){
-return[](float a,float b){
-sx.at(0,0)=a;
-sx.at(0,1)=b;
-sy.at(1,0)=sx.at(0,0)+sx.at(0,1);
+std::function<double(double,double)>DoubleAdd(){
+return[](double a,double b){
+sy.at(0,0)=a;
+sy.at(0,1)=b;
+sy.at(1,0)=sy.at(0,0)+sy.at(0,1);
 return sy.at(1,0);};
 }
 auto doubleAdd=DoubleAdd();
