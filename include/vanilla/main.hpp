@@ -99,7 +99,7 @@ WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,device,nullptr,void * pUserData){
+WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -107,7 +107,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 std::cout << "requesting device" << std::endl;
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,(void*)&userData);
+wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,userData);
 return userData.device;
 }
 
@@ -117,7 +117,7 @@ WGPUAdapter adapter=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,adapter,nullptr,void * pUserData){
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
@@ -125,7 +125,7 @@ std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,(void*)&userData);
+wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,userData);
 return userData.adapter;
 }
 
@@ -179,7 +179,6 @@ tensorVar Aa=tensorVar{2,3};
 uint128_t tst128;
 
 public:
- 
 
 float rtt(float nm){
  
