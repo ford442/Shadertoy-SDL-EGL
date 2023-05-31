@@ -57,6 +57,7 @@ using namespace boost::random;
 
 using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
+using tf=tensor<float>;
 using tensorVarD=tensor<GLdouble>;
 using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
@@ -98,7 +99,7 @@ WGPUDevice device=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,NULL,void * pUserData){
+WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,device,nullptr,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -116,7 +117,7 @@ WGPUAdapter adapter=nullptr;
 bool requestEnded=false;
 };
 UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,NULL,void * pUserData){
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,adapter,nullptr,void * pUserData){
 UserData& userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
@@ -159,6 +160,19 @@ std::cout << "Requesting command queue..." << std::endl;
 const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 */
 }
+#include<functional>
+
+tensorVar sx=tf{2,2};
+
+std::function<float(float,float)>tensorAdd(){
+return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(0,1);return sx.at(1,0);};
+}
+
+int main()
+{
+    auto lmbda = returnLambda();
+    std::cout << lmbda(8.2, 6.4) << std::endl;
+}
 
 class tens{
 
@@ -174,7 +188,20 @@ public:
  
 
 float rtt(float nm){
-std::cout << "OK" << std::endl;
+ 
+std::cout << "Tensor adding input: 3.145" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+sx.at(1,1)=tensorAdd(3.145,3.145);
+std::cout << "-----"<< sx.at(1,1) <<"-----" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
