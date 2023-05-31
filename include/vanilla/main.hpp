@@ -216,6 +216,12 @@ sy.at(1,1)=doubleAdd(3.14159265358979323846,3.14159265358979323846);
 std::cout << "-----------double---------" << std::endl;
 std::cout << "-----"<< sy.at(1,1) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
+sz.at(1,1)=intrinsAdd(wasm_f32x4_splat(3.141592653),wasm_f32x4_splat(3.141592653));
+std::cout << "------intrins-------------" << std::endl;
+float ou2=wasm_f32x4_extract_lane(sz.at(1,1),0);
+double ou3=wasm_f32x4_extract_lane(sz.at(1,1),0);
+std::cout << "--float---"<< ou2 <<"-----" << std::endl;
+std::cout << "--double---"<< ou3 <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 
