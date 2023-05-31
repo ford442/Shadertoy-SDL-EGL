@@ -65,6 +65,7 @@ using tI=tensor<GLint>;
 using tV=tensor<v128_t>;
 
 #include <cassert>
+#include <iomanip>
 
 // #define WEBGPU_CPP_IMPLEMENTATION
 // #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
@@ -203,7 +204,7 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
- 
+setprecision(24);
 std::cout << "Tensor adding input: 3.145" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
