@@ -84,6 +84,7 @@ using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
 using tf=tensor<float>;
 using td=tensor<double>;
+using tld=tensor<long double>;
 using tensorVarD=tensor<GLdouble>;
 using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
@@ -216,6 +217,17 @@ return sz.at(1,0);
 }
 auto intrinsAdd=IntrinsAdd();
 
+tld szz=tld{2,2};
+std::function<v128_t(v128_t,v128_t)>IntrinsLDAdd(){
+return[](v128_t a,v128_t b){
+szz.at(0,0)=a;
+szz.at(0,1)=b;
+szz.at(1,0)=wasm_f64x2_add(a,b);
+return szz.at(1,0);
+};
+}
+auto intrinsLDAdd=IntrinsLDAdd();
+
 class tens{
 
 private:
@@ -254,7 +266,7 @@ std::cout << "-----------double---------" << std::endl;
 std::cout << fixed << setprecision(64) << "-----"<< sy.at(1,1) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 sz.at(1,1)=intrinsAdd(wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f),wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f));
-szz.at(1,1)=intrinsAdd(wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L),wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L));
+szz.at(1,1)=intrinsLDAdd(wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L),wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L));
 std::cout << "------intrins-------------" << std::endl;
 float ou2=wasm_f64x2_extract_lane(sz.at(1,1),0);
 double ou3=wasm_f64x2_extract_lane(sz.at(1,1),0);
