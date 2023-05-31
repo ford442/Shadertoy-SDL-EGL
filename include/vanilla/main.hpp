@@ -206,6 +206,17 @@ return sy.at(1,0);};
 }
 auto doubleAdd=DoubleAdd();
 
+tld say=tld{2,2};
+std::function<double(double,double)>LongDoubleAdd(){
+return[](double a,double b){
+sy.at(0,0)=a;
+sy.at(0,1)=b;
+sy.at(1,0)=sy.at(0,0)+sy.at(0,1);
+return sy.at(1,0);};
+}
+auto longDoubleAdd=LongDoubleAdd();
+
+
 tV sz=tV{2,2};
 std::function<v128_t(v128_t,v128_t)>IntrinsAdd(){
 return[](v128_t a,v128_t b){
