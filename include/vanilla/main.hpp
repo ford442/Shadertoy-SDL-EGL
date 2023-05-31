@@ -163,13 +163,13 @@ const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 }
 #include <functional>
 
-tensorVar sx=tf{2,2};
+tf sx=tf{2,2};
 std::function<float(float,float)>TensorAdd(){
 return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(0,1);return sx.at(1,0);};
 }
 auto tensorAdd = TensorAdd();
 
-tensorVar sy=td{2,2};
+td sy=td{2,2};
 std::function<double(float,float)>DoubleAdd(){
 return[](float a,float b){
 sx.at(0,0)=a;
@@ -179,7 +179,7 @@ return sy.at(1,0);};
 }
 auto doubleAdd=DoubleAdd();
 
-tensorVar sz=tf{2,2};
+tV sz=tV{2,2};
 std::function<v128_t(v128_t,v128_t)>IntrinsAdd(){
 return[](v128_t a,v128_t b){
 sz.at(0,0)=a;
