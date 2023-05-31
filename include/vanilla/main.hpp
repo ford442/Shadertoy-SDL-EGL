@@ -58,6 +58,7 @@ using namespace boost::random;
 using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
 using tf=tensor<float>;
+using td=tensor<double>;
 using tensorVarD=tensor<GLdouble>;
 using tD=tensor<GLdouble>;
 using tI=tensor<GLint>;
@@ -160,14 +161,34 @@ std::cout << "Requesting command queue..." << std::endl;
 const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 */
 }
-#include<functional>
+#include <functional>
 
 tensorVar sx=tf{2,2};
-
 std::function<float(float,float)>TensorAdd(){
 return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(0,1);return sx.at(1,0);};
 }
 auto tensorAdd = TensorAdd();
+
+tensorVar sy=td{2,2};
+std::function<double(float,float)>DoubleAdd(){
+return[](float a,float b){
+sx.at(0,0)=a;
+sx.at(0,1)=b;
+sy.at(1,0)=sx.at(0,0)+sx.at(0,1);
+return sy.at(1,0);};
+}
+auto doubleAdd=DoubleAdd();
+
+tensorVar sz=tf{2,2};
+std::function<v128_t(v128_t,v128_t)>IntrinsAdd(){
+return[](v128_t a,v128_t b){
+sz.at(0,0)=a;
+sz.at(0,1)=b;
+sz.at(1,0)=wasm_f32x4_add(a,b);
+return sz.at(1,0);
+};
+}
+auto intrinsAdd = IntrinsAdd();
 
 class tens{
 
@@ -186,12 +207,13 @@ float rtt(float nm){
 std::cout << "Tensor adding input: 3.145" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
-std::cout << "--------------------------" << std::endl;
-std::cout << "--------------------------" << std::endl;
-std::cout << "--------------------------" << std::endl;
-sx.at(1,1)=tensorAdd(3.145,3.145);
+sx.at(1,1)=tensorAdd(3.141592,3.141592);
+std::cout << "----------float-----------" << std::endl;
 std::cout << "-----"<< sx.at(1,1) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
+sy.at(1,1)=doubleAdd(3.141592,3.141592);
+std::cout << "-----------double---------" << std::endl;
+std::cout << "-----"<< sy.at(1,1) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
