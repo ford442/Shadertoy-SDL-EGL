@@ -205,6 +205,15 @@ public:
 
 float rtt(float nm){
 setprecision(24);
+ std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+float ppi=3.14159265358979323846f;
+double ppd=3.14159265358979323846;
+ std::cout << "-float------------" << std::endl;
+std::cout << "-----"<< ppi <<"-----" << std::endl;
+ std::cout << "-double------------" << std::endl;
+std::cout << "-----"<< ppd <<"-----" << std::endl;
+std::cout << "--------------------------" << std::endl;
 std::cout << "Tensor adding input: 3.145" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
