@@ -23,8 +23,33 @@
 using std::experimental::native_simd;
 using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
+
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD 0
+#pragma STDC FP_CONTRACT ON
+#pragma STDC CX_LIMITED_RANGE ON
+#define _XOPEN_REALTIME 1
+#define _POSIX_ASYNC_IO 1
+#define _POSIX_PRIO_IO 1
+#define _POSIX_SYNC_IO 1
+#define _XOPEN_SHM 1
+#define _POSIX_PRIORITIZED_IO 1
+#undef _FLT_ROUNDS
+#define _FLT_ROUNDS 1
+#define _POSIX_REGEXP 1
+
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
+#define BOOST_UBLAS_MOVE_SEMANTICS
+#define BOOST_UBLAS_TYPE_CHECK 0
+#define BOOST_UBLAS_USE_LONG_DOUBLE
+#define BOOST_NO_EXCEPTIONS
+#define BOOST_HAS_FLOAT128
+#define BOOST_HAS_CLOCK_GETTIME 1
+#define BOOST_HAS_NANOSLEEP 1
+#define BOOST_HAS_NRVO 1
+#define BOOST_HAS_STDINT_H 1
+
 
 #include "boost/tuple/tuple.hpp"
 #include "boost/timer/timer.hpp"
