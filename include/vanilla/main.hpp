@@ -193,7 +193,7 @@ tf sx=tf{2,2};
 std::function<float(float,float)>TensorAdd(){
 return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(0,1);return sx.at(1,0);};
 }
-auto tensorAdd = TensorAdd();
+auto tensorAdd=TensorAdd();
 
 td sy=td{2,2};
 std::function<double(double,double)>DoubleAdd(){
@@ -214,7 +214,7 @@ sz.at(1,0)=wasm_f64x2_add(a,b);
 return sz.at(1,0);
 };
 }
-auto intrinsAdd = IntrinsAdd();
+auto intrinsAdd=IntrinsAdd();
 
 class tens{
 
@@ -236,11 +236,11 @@ float ppi=3.14159265358979323846f;
 double ppd=3.14159265358979323846;
 long double ppD=3.14159265358979323846L;
 std::cout << "-float------------" << std::endl;
-std::cout << "-----"<< ppi <<"-----" << std::endl;
+std::cout << "-----"<< ppi.setprecision(15) <<"-----" << std::endl;
 std::cout << "-double------------" << std::endl;
-std::cout << "-----"<< ppd <<"-----" << std::endl; 
+std::cout << "-----"<< ppd.setprecision(15) <<"-----" << std::endl; 
 std::cout << "-long double------------" << std::endl;
-std::cout << "-----"<< ppD <<"-----" << std::endl;
+std::cout << "-----"<< ppD.setprecision(15) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "Tensor adding input: 3.145" << std::endl;
 std::cout << "--------------------------" << std::endl;
