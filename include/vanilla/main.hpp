@@ -229,7 +229,7 @@ uint128_t tst128;
 public:
 
 float rtt(float nm){
-setprecision(24);
+setprecision(15);
  std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 float ppi=3.14159265358979323846f;
