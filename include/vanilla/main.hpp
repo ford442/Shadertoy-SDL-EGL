@@ -252,16 +252,16 @@ std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderCodeDescriptor{};
 shaderCodeDescriptor.chain.next=nullptr;
-shaderCodeDescriptor.chain.sType=WGPUSType::WGSLShaderModuleWGSLDescriptor;
-WGPUShaderModuleDescriptor shadeModuleDescriptor{};
-shadeModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
+shaderCodeDescriptor.chain.sType=WGPUSType::WGPUSType_ShaderModuleWGSLDescriptor;
+WGPUShaderModuleDescriptor shaderModuleDescriptor{};
+shaderModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
 // shaderCodeDescriptor.source =  ____
-WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,shaderModuleDescriptor);
+WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
 
 std::cout << "get compute pipeline layout" << std::endl;
 WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor{};
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
-pipelineLayoutDescriptor.bindGroupLayouts=bindGroupLayout;
+pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
 pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
 /* 
 
