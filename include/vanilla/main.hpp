@@ -273,7 +273,7 @@ double ou3=wasm_f64x2_extract_lane(sz.at(1,1),0);
 // long double ou5=wasm_f64x2_extract_lane(szz.at(1,1),0);
 std::cout << fixed << setprecision(64) << "--float---"<< ou2 <<"-----" << std::endl;
 std::cout << fixed << setprecision(64) << "--double---"<< ou3 <<"-----" << std::endl;
-std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
+// std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 
