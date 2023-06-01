@@ -252,7 +252,7 @@ std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderCodeDescriptor{};
 shaderCodeDescriptor.chain.next=nullptr;
-shaderCodeDescriptor.chain.sType=WGPUSType::ShaderModuleWGSLDescriptor;
+shaderCodeDescriptor.chain.sType=WGPUSType::WGSLShaderModuleWGSLDescriptor;
 WGPUShaderModuleDescriptor shadeModuleDescriptor{};
 shadeModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
 // shaderCodeDescriptor.source =  ____
