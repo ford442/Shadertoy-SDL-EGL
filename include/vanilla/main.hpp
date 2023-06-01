@@ -181,6 +181,7 @@ auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,ch
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
+return userData.device;
 }
 userData.requestEnded=true;
 };
@@ -199,6 +200,7 @@ UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
+return userData.adapter;
 }
 userData.requestEnded=true;
 };
@@ -209,7 +211,7 @@ return userData.adapter;
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
 adapter=requestAdapter(instance,&adapterOptions);
- sleep(2);
+ sleep(1);
 }
 
 void init2(){
