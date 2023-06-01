@@ -209,6 +209,7 @@ return userData.adapter;
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
 adapter=requestAdapter(instance,&adapterOptions);
+ sleep(2);
 }
 
 void init2(){
