@@ -177,7 +177,7 @@ WGPUDevice device;
 bool requestEnded=false;
 };
 UserData userData;
-auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,(void *)pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -194,7 +194,7 @@ WGPUAdapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,(void *)pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
@@ -209,6 +209,18 @@ return userData.adapter;
 void init1(){
 
 }
+
+WGPUErrorCallback uncapturedErrorCallback(WGPUErrorType type,char const* message){
+std::cout << "Device error: type " << type;
+if (message) std::cout << " (message: " << message << ")";
+std::cout << std::endl;
+});
+
+WGPUDeviceLostCallback deviceLostCallback(WGPUDeviceLostReason reason,char const* message){
+std::cout << "Device error: reason " << reason;
+if (message) std::cout << " (message: " << message << ")";
+std::cout << std::endl;
+});
 
 void init2(){
 std::cout << "Requesting adapter" << std::endl;
@@ -246,19 +258,7 @@ deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
 Gdevice=requestDevice(adapter,&deviceDescriptor);
  
-WGPUErrorCallback uncapturedErrorCallback(WGPUErrorType type,char const* message){
-std::cout << "Device error: type " << type;
-if (message) std::cout << " (message: " << message << ")";
-std::cout << std::endl;
-});
-
 wgpuDeviceSetUncapturedErrorCallback(Gdevice,uncapturedErrorCallback, void * userdata)
-
-WGPUDeviceLostCallback deviceLostCallback(WGPUDeviceLostReason reason,char const* message){
-std::cout << "Device error: reason " << reason;
-if (message) std::cout << " (message: " << message << ")";
-std::cout << std::endl;
-});
 
 wgpuDeviceSetDeviceLostCallback(Gdevice,deviceLostCallback)
 
