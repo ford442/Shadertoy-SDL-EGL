@@ -163,7 +163,7 @@ const WGPURequestAdapterOptions adapterOptions{};
 // adapterOptions.compatibleSurface = nullptr;
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
-WGPUBindGroupLayout bindGroupLayout=nullptr;
+const WGPUBindGroupLayout bindGroupLayout;
 WGPUDevice Gdevice;
 WGPUBuffer inputBuffer=nullptr;
 WGPUBuffer outputBuffer=nullptr;
@@ -215,7 +215,7 @@ void init2(){
 
 std::cout << "Requesting device..." << std::endl;
 WGPUSupportedLimits supportedLimits;
-wgpuAdapterGetLimits(adapter,&supportedLimits);
+// wgpuAdapterGetLimits(adapter,&supportedLimits);
 WGPURequiredLimits requiredLimits;
 requiredLimits.limits.maxVertexAttributes=6;
 requiredLimits.limits.maxVertexBuffers=1;
