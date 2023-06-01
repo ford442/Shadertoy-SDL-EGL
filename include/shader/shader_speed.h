@@ -792,7 +792,7 @@ const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 // glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
-VertexAttribLPointerEXT(atb_pos,4,GL_DOUBLE,GL_FALSE,0,(GLvoid*)0);
+VertexAttribLPointer(atb_pos,4,GL_DOUBLE,GL_FALSE,0,(GLvoid*)0);
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
