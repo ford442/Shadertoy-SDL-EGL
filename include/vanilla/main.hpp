@@ -219,7 +219,7 @@ void init2(){
 
 void init4(){
 std::cout << "init bindgroup" << std::endl;
-std::array<BindGroupEntry,2>entries;
+std::array<WGPUBindGroupEntry,2>entries;
 entries[0].binding=0;
 entries[0].buffer=inputBuffer;
 entries[0].offset=0;
@@ -232,7 +232,7 @@ WGPUBindGroupDescriptor bindGroupDescriptor{};
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
-bindGroup=wgpuDeviceCreateBindGroup(device,&bindGroupDescriptor);
+bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
 }
 
 void init3(){
