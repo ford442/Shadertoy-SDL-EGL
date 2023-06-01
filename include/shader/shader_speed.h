@@ -767,7 +767,9 @@ glLinkProgram(S1.at(0,0,0));
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
+
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
+glProgramBinary(S1.at(0,0,0),binaryFormat,GLbin,binLength);
 
 nanoPause();
 glUseProgram(S1.at(0,0,0));
