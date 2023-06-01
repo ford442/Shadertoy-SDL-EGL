@@ -206,16 +206,6 @@ return sy.at(1,0);};
 }
 auto doubleAdd=DoubleAdd();
 
-tld sey=tld{2,2};
-std::function<long double(long double,long double)>LongDoubleAdd(){
-return[](long double a,long double b){
-sey.at(0,0)=a;
-sey.at(0,1)=b;
-sey.at(1,0)=sey.at(0,0)+sey.at(0,1);
-return sey.at(1,0);};
-}
-auto longDoubleAdd=LongDoubleAdd();
-
 tV sz=tV{2,2};
 std::function<v128_t(v128_t,v128_t)>IntrinsAdd(){
 return[](v128_t a,v128_t b){
@@ -226,6 +216,17 @@ return sz.at(1,0);
 };
 }
 auto intrinsAdd=IntrinsAdd();
+
+tld szz=tld{2,2};
+std::function<v128_t(v128_t,v128_t)>IntrinsLDAdd(){
+return[](v128_t a,v128_t b){
+szz.at(0,0)=a;
+szz.at(0,1)=b;
+szz.at(1,0)=wasm_f64x2_add(a,b);
+return szz.at(1,0);
+};
+}
+auto intrinsLDAdd=IntrinsLDAdd();
 
 class tens{
 
@@ -245,38 +246,37 @@ std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 float ppi=3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f;
 double ppd=3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
-// long double ppD=3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L;
+long double ppD=3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L;
 std::cout << "-float------------" << std::endl;
 std::cout << fixed << setprecision(64) << "-----"<< ppi <<"-----" << std::endl;
 std::cout << "-double------------" << std::endl;
 std::cout << fixed << setprecision(64) << "-----"<< ppd <<"-----" << std::endl; 
 std::cout << "-long double------------" << std::endl;
-// std::cout << fixed << setprecision(64) << "-----"<< ppD <<"-----" << std::endl;
+std::cout << fixed << setprecision(64) << "-----"<< ppD <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "Tensor adding input: 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
-// sx.at(1,1)=tensorAdd(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f,3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f);
+sx.at(1,1)=tensorAdd(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f,3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f);
 std::cout << "----------float-----------" << std::endl;
 std::cout << fixed << setprecision(64) << "-----"<< sx.at(1,1) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
-// sy.at(1,1)=doubleAdd(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679,3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679);
+sy.at(1,1)=doubleAdd(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679,3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679);
 std::cout << "-----------double---------" << std::endl;
-// std::cout << fixed << setprecision(64) << "-----"<< sy.at(1,1) <<"-----" << std::endl;
+std::cout << fixed << setprecision(64) << "-----"<< sy.at(1,1) <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
-// sz.at(1,1)=intrinsAdd(wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f),wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f));
-// sey.at(1,1)=longDoubleAdd(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L,3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L);
+sz.at(1,1)=intrinsAdd(wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f),wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f));
+szz.at(1,1)=intrinsLDAdd(wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L),wasm_f64x2_splat(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679L));
 std::cout << "------intrins-------------" << std::endl;
-// float ou2=wasm_f64x2_extract_lane(sz.at(1,1),0);
-// double ou3=wasm_f64x2_extract_lane(sz.at(1,1),0);
-// long double ou5=wasm_f64x2_extract_lane(sz.at(1,1),0);
-// std::cout << fixed << setprecision(64) << "--float---"<< ou2 <<"-----" << std::endl;
-// std::cout << fixed << setprecision(64) << "--double---"<< ou3 <<"-----" << std::endl;
-// std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
+float ou2=wasm_f64x2_extract_lane(sz.at(1,1),0);
+double ou3=wasm_f64x2_extract_lane(sz.at(1,1),0);
+long double ou5=wasm_f64x2_extract_lane(szz.at(1,1),0);
+std::cout << fixed << setprecision(64) << "--float---"<< ou2 <<"-----" << std::endl;
+std::cout << fixed << setprecision(64) << "--double---"<< ou3 <<"-----" << std::endl;
+std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
-std::cout << "---long double add--------------" << std::endl;
-// std::cout << fixed << setprecision(64) << "-----"<< sey.at(1,1) <<"-----" << std::endl;
+
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
