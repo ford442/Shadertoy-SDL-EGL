@@ -4,6 +4,9 @@
 // #pragma float_control(except, on)   // enable exception semantics
 
 #include <boost/cstdfloat.hpp>  // must be first include
+#include <cfloat>
+#include <climits>
+#include <math.h>
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
@@ -23,7 +26,7 @@
 using std::experimental::native_simd;
 using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
-
+/*
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD 0
 #pragma STDC FP_CONTRACT ON
@@ -37,6 +40,37 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
+
+
+#define FLT_MANT_DIG
+#define DBL_MANT_DIG
+#define LDBL_MANT_DIG
+#define FLT_DIG
+#define DBL_DIG
+#define LDBL_DIG
+#define FLT_MIN_EXP
+#define DBL_MIN_EXP
+#define LDBL_MIN_EXP
+#define FLT_MIN_10_EXP
+#define DBL_MIN_10_EXP
+#define LDBL_MIN_10_EXP
+#define FLT_MAX_EXP
+#define DBL_MAX_EXP
+#define LDBL_MAX_EXP
+#define FLT_MAX_10_EXP
+#define DBL_MAX_10_EXP
+#define LDBL_MAX_10_EXP
+#define FLT_MAX
+#define DBL_MAX
+#define LDBL_MAX
+#define FLT_EPSILON
+#define DBL_EPSILON
+#define LDBL_EPSILON
+#define FLT_MIN
+#define DBL_MIN
+#define LDBL_MIN
+#define DECIMAL_DIG
+*/
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
