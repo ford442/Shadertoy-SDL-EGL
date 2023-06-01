@@ -132,24 +132,40 @@ using tV=tensor<v128_t>;
 
 // #include "emscripten/html5_webgpu.h"
 
+#define GLM_FORCE_LEFT_HANDED
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/glm.hpp>
+
+constexpr float PI = 3.14159265358979323846f;
+
+using glm::mat4x4;
+using glm::vec4;
+using glm::vec3;
+using glm::vec2;
+
 // using namespace wgpu;
 using namespace std;
 
+bfrSize = 64 * sizeof(float);
+
 WGPUAdapter adapter=nullptr;
 WGPUBindGroup bindGroup=nullptr;
-WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor={};
+WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 WGPUPipelineLayout pipelineLayout=nullptr;
-const WGPUComputePipelineDescriptor computePipelineDescriptor={};
+const WGPUComputePipelineDescriptor computePipelineDescriptor{};
 WGPUComputePipeline computePipeline=nullptr;
 WGPUSwapChain swapchain=nullptr;
 WGPUCommandBuffer commandBuffer=nullptr;
-const WGPUComputePassDescriptor computePassDescriptor={};
-const WGPUDeviceDescriptor deviceDescriptor={};
-const WGPUCommandEncoderDescriptor encoderDescriptor={};
-const WGPURequestAdapterOptions adapterOptions={};
-const WGPUInstanceDescriptor instanceDescriptor={};
+const WGPUComputePassDescriptor computePassDescriptor{};
+const WGPUDeviceDescriptor deviceDescriptor{};
+const WGPUCommandEncoderDescriptor encoderDescriptor{};
+const WGPURequestAdapterOptions adapterOptions{};
+	adapterOptions.compatibleSurface = nullptr;
+
+const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
 WGPUBindGroupLayout bindGroupLayout=nullptr;
+WGPUDevice Gdevice;
 
 // }
  
@@ -189,30 +205,35 @@ wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
-WGPUDevice Gdevice;
-
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
-    
-    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
-
-#undef _FLT_EVAL_METHOD
-    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
-
-#define _FLT_EVAL_METHOD 1
-    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
 
 }
 
 void init2(){
-std::cout << "Requesting device..." << std::endl;
-Gdevice=requestDevice(adapter,&deviceDescriptor);
-std::cout << "Got device: " << Gdevice << std::endl;
+
+}
+
+void init4(){
+std::cout << "init bindgroup" << std::endl;
+std::array<BindGroupEntry,2>entries;
+entries[0].binding=0;
+entries[0].buffer=inputBuffer;
+entries[0].offset=0;
+entries[0].size=bfrSize;
+entries[1].binding=1;
+entries[1].buffer=outputBuffer;
+entries[1].offset=0;
+entries[1].size=bfrSize;
+BindGroupDescriptor bindGroupDescriptor{};
+bindGroupDescriptor.layout=bindGroupLayout;
+bindGroupDescriptor.entryCount=(uint32_t)entries.size();
+bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
+bindGroup=wgpuDeviceCreateBindGroup(device,&bindGroupDescriptor);
 }
 
 void init3(){
-/*
-std::cout << "Got bindlayout" << std::endl;
+std::cout << "get bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
 bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
@@ -222,13 +243,36 @@ bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
 bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-bindGroupLayout=requestBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+ 
+std::cout << "get compute pipeline" << std::endl;
+std::cout << "get shader module" << std::endl;
+ShaderModuleWGSLDescriptor shaderCodeDescriptor{};
+shaderCodeDescriptor.chain.next=nullptr;
+shaderCodeDescriptor.chain.sType=WGPUSType::ShaderModuleWGSLDescriptor;
+ShaderModuleDescriptor shadeModuleDescriptor{};
+shadeModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
+// shaderCodeDescriptor.source =  ____
+WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,shaderModuleDescriptor);
+
+std::cout << "get compute pipeline layout" << std::endl;
+PipelineLayoutDescriptor pipelineLayoutDescriptor{};
+pipelineLayoutDescriptor.bindGroupLayoutCount=1;
+pipelineLayoutDescriptor.bindGroupLayouts=bindGroupLayout;
+pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
+/* 
+
+std::cout << "Requesting device..." << std::endl;
+Gdevice=requestDevice(adapter,&deviceDescriptor);
+std::cout << "Got device: " << Gdevice << std::endl;
+
 std::cout << "Requesting command Encoder..." << std::endl;
 WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
 std::cout << "Requesting command queue..." << std::endl;
 const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 */
 }
+
 #include <functional>
 
 tf sx=tf{2,2};
