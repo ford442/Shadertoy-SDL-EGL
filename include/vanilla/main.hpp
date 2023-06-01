@@ -26,9 +26,15 @@
 using std::experimental::native_simd;
 using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
-/*
+    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
+
 #undef _FLT_EVAL_METHOD
+    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
+
 #define _FLT_EVAL_METHOD 0
+    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
+
+/*
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
