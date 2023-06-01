@@ -148,7 +148,7 @@ using namespace std;
 
 int bfrSize=64*sizeof(float);
 
-WGPUAdapter adapter=nullptr;
+WGPUAdapter adapter;
 WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 WGPUPipelineLayout pipelineLayout=nullptr;
@@ -173,7 +173,7 @@ WGPUBindGroupLayout bindGroupLayout;
  
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
-WGPUDevice device=nullptr;
+WGPUDevice device;
 bool requestEnded=false;
 };
 UserData userData;
@@ -184,14 +184,13 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-std::cout << "requesting device" << std::endl;
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
 return userData.device;
 }
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
-WGPUAdapter adapter=nullptr;
+WGPUAdapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
