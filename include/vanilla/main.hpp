@@ -167,6 +167,7 @@ WGPUDevice Gdevice;
 WGPUBuffer inputBuffer=nullptr;
 WGPUBuffer outputBuffer=nullptr;
 WGPUBuffer mapBuffer=nullptr;
+WGPUBindGroupLayout bindGroupLayout;
 
 // }
  
@@ -248,23 +249,6 @@ Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
 
-void init4(){
-std::cout << "init bindgroup" << std::endl;
-std::array<WGPUBindGroupEntry,2>entries;
-entries[0].binding=0;
-entries[0].buffer=inputBuffer;
-entries[0].offset=0;
-entries[0].size=bfrSize;
-entries[1].binding=1;
-entries[1].buffer=outputBuffer;
-entries[1].offset=0;
-entries[1].size=bfrSize;
-WGPUBindGroupDescriptor bindGroupDescriptor{};
-bindGroupDescriptor.layout=bindGroupLayout;
-bindGroupDescriptor.entryCount=(uint32_t)entries.size();
-bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
-bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
-}
 
 void init3(){
 std::cout << "get bindlayout" << std::endl;
@@ -277,7 +261,7 @@ bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
 bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-const WGPUBindGroupLayout bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderCodeDescriptor{};
@@ -300,6 +284,24 @@ WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescri
 std::cout << "Requesting command queue..." << std::endl;
 const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 */
+}
+
+void init4(){
+std::cout << "init bindgroup" << std::endl;
+std::array<WGPUBindGroupEntry,2>entries;
+entries[0].binding=0;
+entries[0].buffer=inputBuffer;
+entries[0].offset=0;
+entries[0].size=bfrSize;
+entries[1].binding=1;
+entries[1].buffer=outputBuffer;
+entries[1].offset=0;
+entries[1].size=bfrSize;
+WGPUBindGroupDescriptor bindGroupDescriptor{};
+bindGroupDescriptor.layout=bindGroupLayout;
+bindGroupDescriptor.entryCount=(uint32_t)entries.size();
+bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
+bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
 }
 
 #include <functional>
