@@ -762,14 +762,14 @@ PRGin(shd_prg);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
-  
+
 glLinkProgram(S1.at(0,0,0));
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
 
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
-glProgramBinary(S1.at(0,0,0),*binaryFormat,GLbin,binLength);
+glProgramBinary(S1.at(0,0,0),*binaryFormat,GLbin,*binLength);
 
 nanoPause();
 glUseProgram(S1.at(0,0,0));
