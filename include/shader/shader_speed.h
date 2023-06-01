@@ -720,7 +720,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
-  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
@@ -805,7 +804,7 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
-iFps=50;
+iFps=60;
 glUniform1f(uni_fps,iFps);
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
