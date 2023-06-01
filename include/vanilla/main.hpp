@@ -163,7 +163,7 @@ const WGPURequestAdapterOptions adapterOptions{};
 // adapterOptions.compatibleSurface = nullptr;
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
-WGPUDevice Gdevice;
+WGPUDevice Gdevice();
 WGPUBuffer inputBuffer=nullptr;
 WGPUBuffer outputBuffer=nullptr;
 WGPUBuffer mapBuffer=nullptr;
