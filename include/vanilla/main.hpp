@@ -163,11 +163,11 @@ const WGPURequestAdapterOptions adapterOptions{};
 // adapterOptions.compatibleSurface = nullptr;
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
-WGPUDevice Gdevice();
+WGPUDevice Gdevice=nullptr;
 WGPUBuffer inputBuffer=nullptr;
 WGPUBuffer outputBuffer=nullptr;
 WGPUBuffer mapBuffer=nullptr;
-WGPUBindGroupLayout bindGroupLayout;
+WGPUBindGroupLayout bindGroupLayout=nullptr;
 
 // }
  
