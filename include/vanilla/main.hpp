@@ -146,7 +146,7 @@ using glm::vec2;
 // using namespace wgpu;
 using namespace std;
 
-bfrSize = 64 * sizeof(float);
+int bfrSize=64*sizeof(float);
 
 WGPUAdapter adapter=nullptr;
 WGPUBindGroup bindGroup=nullptr;
