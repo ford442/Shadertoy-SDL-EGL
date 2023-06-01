@@ -668,8 +668,6 @@ mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_half_float");
@@ -720,6 +718,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
+  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
@@ -762,9 +762,16 @@ PRGin(shd_prg);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
+  
 glLinkProgram(S1.at(0,0,0));
+GLsizei * binLength;
+GLenum * binaryFormat;
+void * GLbin;
+glGetProgramBinary(S1.at(0,0,0),&binLength,&binaryFormat,&GLbin);
+    
 nanoPause();
 glUseProgram(S1.at(0,0,0));
+  
 nanoPause();
 // glDeleteShader(vtx);
 // glDeleteShader(frag);
