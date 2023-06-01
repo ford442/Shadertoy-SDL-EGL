@@ -148,7 +148,7 @@ using namespace std;
 
 int bfrSize=64*sizeof(float);
 
-WGPUAdapter adapter;
+WGPUAdapter adapter=nullptr;
 WGPUBindGroup bindGroup=nullptr;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 WGPUPipelineLayout pipelineLayout=nullptr;
