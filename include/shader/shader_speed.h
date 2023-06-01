@@ -711,6 +711,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader4");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader5");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_buffer_unified_memory");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_program5");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_attrib_integer_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
