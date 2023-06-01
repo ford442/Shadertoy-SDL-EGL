@@ -11,6 +11,7 @@
 // #pragma float_control(precise, on)  // enable precise semantics
 // #pragma float_control(except, on)   // enable exception semantics
 
+/*
 #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 // #pragma STDC FP_CONTRACT ON
@@ -24,6 +25,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
+*/
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
