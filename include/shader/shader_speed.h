@@ -606,9 +606,10 @@ return nullptr;
 }procc;
 
 void strt(){
-typedef struct{float XYZW[4];}Vertex;
+typedef struct{double XYZW[4];}Vertex;
 gpu.setFloats();
-const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
+// const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
+const Vertex vrt[8]={{gpu.gDm1(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gDm1(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()}};
 ::boost::tuples::tie(Fi,f_time,sse);
 ::boost::tuples::tie(uni_i,iFps,Si,sse3);
 ::boost::tuples::tie(cntx,mms);
@@ -785,7 +786,7 @@ nanoPause();
 const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
-glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
+glVertexAttribPointer(atb_pos,4,GL_DOUBLE,GL_FALSE,0,(GLvoid*)0);
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
