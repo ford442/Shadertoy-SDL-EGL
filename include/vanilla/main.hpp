@@ -195,7 +195,7 @@ bool requestEnded=false;
 };
 UserData userData;
 auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
-UserData& userData=*reinterpret_cast<UserData*>(pUserData);
+UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
@@ -276,7 +276,6 @@ pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
 pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
 /* 
-
 
 std::cout << "Requesting command Encoder..." << std::endl;
 WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
