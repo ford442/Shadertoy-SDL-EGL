@@ -246,14 +246,14 @@ deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 WGPU_EXPORT void wgpuDeviceSetUncapturedErrorCallback(WGPUDevice device, WGPUErrorCallback callback, void * userdata);
- 
-uncapturedErrorCallback=Gdevice->setUncapturedErrorCallback([](WGPUErrorType type,char const* message){
+ //wgpuDeviceSetUncapturedErrorCallback
+WGPUErrorCallback uncapturedErrorCallback=Gdevice->setUncapturedErrorCallback([](WGPUErrorType type,char const* message){
 std::cout << "Device error: type " << type;
 if (message) std::cout << " (message: " << message << ")";
 std::cout << std::endl;
 });
-
-deviceLostCallback=Gdevice->setDeviceLostCallback([](WGPUDeviceLostReason reason,char const* message){
+// wgpuDeviceSetDeviceLostCallback
+WGPUDeviceLostCallback deviceLostCallback=Gdevice->setDeviceLostCallback([](WGPUDeviceLostReason reason,char const* message){
 std::cout << "Device error: reason " << reason;
 if (message) std::cout << " (message: " << message << ")";
 std::cout << std::endl;
