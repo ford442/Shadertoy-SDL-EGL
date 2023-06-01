@@ -159,13 +159,16 @@ WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor{};
 const WGPUDeviceDescriptor deviceDescriptor{};
 const WGPUCommandEncoderDescriptor encoderDescriptor{};
-WGPURequestAdapterOptions adapterOptions{};
-adapterOptions->compatibleSurface = nullptr;
+const WGPURequestAdapterOptions adapterOptions{};
+adapterOptions.compatibleSurface = nullptr;
 
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
 WGPUBindGroupLayout bindGroupLayout=nullptr;
 WGPUDevice Gdevice;
+WGPUBuffer inputBuffer=nullptr;
+WGPUBuffer outputBuffer=nullptr;
+WGPUBuffer mapBuffer=nullptr;
 
 // }
  
@@ -225,7 +228,7 @@ entries[1].binding=1;
 entries[1].buffer=outputBuffer;
 entries[1].offset=0;
 entries[1].size=bfrSize;
-BindGroupDescriptor bindGroupDescriptor{};
+WGPUBindGroupDescriptor bindGroupDescriptor{};
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
