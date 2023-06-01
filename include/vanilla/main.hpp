@@ -199,7 +199,7 @@ adapter=requestAdapter(instance,&adapterOptions);
 #undef _FLT_EVAL_METHOD
     printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
 
-#define _FLT_EVAL_METHOD 0
+#define _FLT_EVAL_METHOD 1
     printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
 
 }
