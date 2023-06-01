@@ -170,7 +170,7 @@ inline char frg_hdr_src[1000]=
 inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
-"int _N=3;void mainImage(out dvec4 O,dvec2 U){"
+"int _N=16;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
@@ -178,8 +178,8 @@ inline char frg_ftr_src[420]=
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -191,7 +191,7 @@ EGL_NONE,EGL_NONE
 
 EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)5,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -225,7 +225,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,32,
+EGL_SAMPLES,8,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -241,7 +241,6 @@ using d_tensor=boost::numeric::ublas::tensor<double>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
-using ld_tensor=boost::numeric::ublas::tensor<long double>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 
 static v_tensor sse=v_tensor{2,2};
@@ -251,7 +250,7 @@ static v_tensor sse4=v_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
-static ld_tensor d_time=ld_tensor{2,1};
+static d_tensor d_time=d_tensor{2,1};
 static f_tensor f_time=f_tensor{2,1};
 static f_tensor Fi=f_tensor{2,2};
 static d_tensor Di=d_tensor{2,2};
@@ -259,7 +258,6 @@ static i_tensor uni_i=i_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
 static f_tensor t_size=f_tensor{1,2};
 static li_tensor i_size=li_tensor{1,2};
-static ld_tensor lD=ld_tensor{2,2};
 static void_tensor cntx=void_tensor{2,2};
 static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
@@ -329,8 +327,8 @@ inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline float uni_tme,uni_tme_dlt,uni_mse;
 
 struct{
-boost::chrono::duration<long double,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<long double,boost::chrono::seconds::period>time_spanb;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::steady_clock::time_point t2;
 boost::chrono::steady_clock::time_point t3;
@@ -415,7 +413,7 @@ S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(long double set){
+static void u_iTime_set(double set){
 d_time.at(0,0)=set;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
@@ -563,9 +561,9 @@ return;
 static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
-u_time.t2=boost::chrono::steady_clock::now();
-u_time.time_spana=boost::chrono::duration<long double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<long double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -826,8 +824,8 @@ u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::steady_clock::now();
 u_time.t3=boost::chrono::steady_clock::now();
-u_time.time_spanb=boost::chrono::duration<long double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<long double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
