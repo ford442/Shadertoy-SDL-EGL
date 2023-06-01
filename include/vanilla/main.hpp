@@ -207,13 +207,13 @@ return userData.adapter;
 }
 
 void init1(){
-adapter=requestAdapter(instance,&adapterOptions);
 }
 
 void init2(){
-
-std::cout << "Requesting device..." << std::endl;
-WGPUSupportedLimits supportedLimits;
+std::cout << "Requesting adapter" << std::endl;
+adapter=requestAdapter(instance,&adapterOptions);
+std::cout << "Requesting device" << std::endl;
+WGPUSupportedLimits supportedLimits{};
 // wgpuAdapterGetLimits(adapter,&supportedLimits);
 WGPURequiredLimits requiredLimits;
 requiredLimits.limits.maxVertexAttributes=6;
@@ -242,8 +242,6 @@ deviceDescriptor.label="My Device";
 deviceDescriptor.requiredFeaturesCount=0;
 deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
-
-std::cout << "Requesting device..." << std::endl;
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
