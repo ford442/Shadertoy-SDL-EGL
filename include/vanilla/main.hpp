@@ -157,7 +157,7 @@ WGPUComputePipeline computePipeline=nullptr;
 WGPUSwapChain swapchain=nullptr;
 WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor{};
-const WGPUDeviceDescriptor deviceDescriptor{};
+WGPUDeviceDescriptor deviceDescriptor{};
 const WGPUCommandEncoderDescriptor encoderDescriptor{};
 const WGPURequestAdapterOptions adapterOptions{};
 // adapterOptions.compatibleSurface = nullptr;
@@ -213,10 +213,10 @@ adapter=requestAdapter(instance,&adapterOptions);
 
 void init2(){
 
-	std::cout << "Requesting device..." << std::endl;
+std::cout << "Requesting device..." << std::endl;
 WGPUSupportedLimits supportedLimits;
 wgpuAdapterGetLimits(adapter,&supportedLimits);
-WGPURequiredLimits requiredLimits=Default;
+WGPURequiredLimits requiredLimits=WGPUDefault;
 requiredLimits.limits.maxVertexAttributes=6;
 requiredLimits.limits.maxVertexBuffers=1;
 requiredLimits.limits.maxBindGroups=2;
