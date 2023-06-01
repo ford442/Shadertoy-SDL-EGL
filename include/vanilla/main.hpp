@@ -216,7 +216,7 @@ void init2(){
 std::cout << "Requesting device..." << std::endl;
 WGPUSupportedLimits supportedLimits;
 wgpuAdapterGetLimits(adapter,&supportedLimits);
-WGPURequiredLimits requiredLimits=WGPUDefault;
+WGPURequiredLimits requiredLimits;
 requiredLimits.limits.maxVertexAttributes=6;
 requiredLimits.limits.maxVertexBuffers=1;
 requiredLimits.limits.maxBindGroups=2;
