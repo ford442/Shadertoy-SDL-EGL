@@ -207,11 +207,12 @@ return userData.adapter;
 }
 
 void init1(){
+std::cout << "Requesting adapter" << std::endl;
+adapter=requestAdapter(instance,&adapterOptions);
 }
 
 void init2(){
-std::cout << "Requesting adapter" << std::endl;
-adapter=requestAdapter(instance,&adapterOptions);
+
 std::cout << "Requesting device" << std::endl;
 WGPUSupportedLimits supportedLimits{};
 // wgpuAdapterGetLimits(adapter,&supportedLimits);
