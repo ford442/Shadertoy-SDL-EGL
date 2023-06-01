@@ -262,6 +262,7 @@ static void_tensor cntx=void_tensor{2,2};
 static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
+static void_tensor bin=void_tensor{1,1};
 
 class GPU{
 
@@ -762,21 +763,21 @@ PRGin(shd_prg);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
-
 glLinkProgram(S1.at(0,0,0));
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
-
+glDetachShader(S1.at(0,0,0),frag);
+glDetachShader(S1.at(0,0,0),vtx);
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
-glProgramBinary(S1.at(0,0,0),*binaryFormat,GLbin,*binLength);
-
+bin.at(0,0)=GLbin;
+nanoPause();
+glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 nanoPause();
 glUseProgram(S1.at(0,0,0));
-  
 nanoPause();
-// glDeleteShader(vtx);
-// glDeleteShader(frag);
+glDeleteShader(vtx);
+glDeleteShader(frag);
 glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
