@@ -159,8 +159,8 @@ WGPUCommandBuffer commandBuffer=nullptr;
 const WGPUComputePassDescriptor computePassDescriptor{};
 const WGPUDeviceDescriptor deviceDescriptor{};
 const WGPUCommandEncoderDescriptor encoderDescriptor{};
-WGPURequestAdapterOptions adapterOptions={};
-adapterOptions.compatibleSurface = nullptr;
+WGPURequestAdapterOptions adapterOptions{compatibleSurface = nullptr};
+// adapterOptions.compatibleSurface = nullptr;
 
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
