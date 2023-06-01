@@ -26,14 +26,6 @@
 using std::experimental::native_simd;
 using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
-    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
-
-#undef _FLT_EVAL_METHOD
-    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
-
-#define _FLT_EVAL_METHOD 0
-    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
-
 /*
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
@@ -201,6 +193,15 @@ WGPUDevice Gdevice;
 
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
+    
+    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
+
+#undef _FLT_EVAL_METHOD
+    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
+
+#define _FLT_EVAL_METHOD 0
+    printf("FLT_EVAL_METHOD = %d\n", FLT_EVAL_METHOD);
+
 }
 
 void init2(){
