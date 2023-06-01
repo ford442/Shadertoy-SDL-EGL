@@ -606,7 +606,7 @@ return nullptr;
 }procc;
 
 void strt(){
-typedef struct{double XYZW[4];}Vertex;
+typedef struct{float XYZW[4];}Vertex;
 gpu.setFloats();
 // const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 const Vertex vrt[8]={{gpu.gDm1(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gDm1(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()}};
