@@ -160,8 +160,7 @@ const WGPUComputePassDescriptor computePassDescriptor{};
 const WGPUDeviceDescriptor deviceDescriptor{};
 const WGPUCommandEncoderDescriptor encoderDescriptor{};
 const WGPURequestAdapterOptions adapterOptions{};
-adapterOptions.compatibleSurface = nullptr;
-
+// adapterOptions.compatibleSurface = nullptr;
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance=nullptr;
 WGPUBindGroupLayout bindGroupLayout=nullptr;
@@ -210,11 +209,10 @@ return userData.adapter;
 
 void init1(){
 adapter=requestAdapter(instance,&adapterOptions);
-
 }
 
 void init2(){
-
+std::cout << "waiting for get device" << std::endl;
 }
 
 void init4(){
@@ -247,7 +245,6 @@ bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
 bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
- 
 std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderCodeDescriptor{};
@@ -257,7 +254,6 @@ WGPUShaderModuleDescriptor shaderModuleDescriptor{};
 shaderModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
 // shaderCodeDescriptor.source =  ____
 WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
-
 std::cout << "get compute pipeline layout" << std::endl;
 WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor{};
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
