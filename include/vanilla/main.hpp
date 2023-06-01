@@ -217,17 +217,6 @@ return sz.at(1,0);
 }
 auto intrinsAdd=IntrinsAdd();
 
-tld szz=tld{2,2};
-std::function<v128_t(v128_t,v128_t)>IntrinsLDAdd(){
-return[](v128_t a,v128_t b){
-szz.at(0,0)=a;
-szz.at(0,1)=b;
-szz.at(1,0)=wasm_f64x2_add(a,b);
-return szz.at(1,0);
-};
-}
-auto intrinsLDAdd=IntrinsLDAdd();
-
 class tens{
 
 private:
