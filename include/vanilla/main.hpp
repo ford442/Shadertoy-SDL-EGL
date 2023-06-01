@@ -134,7 +134,7 @@ using tV=tensor<v128_t>;
 
 #define GLM_FORCE_LEFT_HANDED
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
+#include "/usr/include/glm/glm.hpp"
 
 constexpr float PI = 3.14159265358979323846f;
 
