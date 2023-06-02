@@ -160,7 +160,8 @@ const WGPUComputePassDescriptor computePassDescriptor{};
 WGPUDeviceDescriptor deviceDescriptor;
 const WGPUCommandEncoderDescriptor encoderDescriptor{};
 const WGPURequestAdapterOptions adapterOptions{};
-// adapterOptions.compatibleSurface = nullptr;
+// adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
+// adapterOptions.forceFallbackAdapter=false;
 const WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance;
 WGPUDevice Gdevice;
@@ -168,8 +169,6 @@ WGPUBuffer inputBuffer;
 WGPUBuffer outputBuffer;
 WGPUBuffer mapBuffer;
 WGPUBindGroupLayout bindGroupLayout;
-
-// }
  
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
@@ -185,6 +184,10 @@ userData.device=device;
 userData.requestEnded=true;
 };
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
+    while (!deviceCallbackReceived) {
+      emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
+      emscripten_sleep(100);
+    }
 return userData.device;
 }
 
@@ -203,6 +206,10 @@ std::cout << "Got adapter: " << adapter << std::endl;
 userData.requestEnded=true;
 };
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
+    while (!deviceCallbackReceived) {
+      emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
+      emscripten_sleep(100);
+    }
 return userData.adapter;
 }
 
