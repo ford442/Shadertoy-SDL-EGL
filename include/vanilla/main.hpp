@@ -178,7 +178,7 @@ bool requestEnded=false;
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 
 // UserData userData;
-auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,&userData){
+auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,userData){
 // UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 // if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -195,7 +195,7 @@ WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const
 // bool requestEnded=false;
 // };
 // UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,&userData){
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,userData){
 // UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
