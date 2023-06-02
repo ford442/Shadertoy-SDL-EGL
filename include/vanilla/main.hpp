@@ -184,7 +184,7 @@ while(!ArequestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
 sleep(1);
 }
-wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
+wgpuAdapterRequestDevice(adapter,&deviceDescriptor,*onDeviceRequestEnded,&userData);
 while(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...\n");
 sleep(1);
@@ -207,7 +207,7 @@ std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
+wgpuInstanceRequestAdapter(instance,&adapterOptions,*onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
