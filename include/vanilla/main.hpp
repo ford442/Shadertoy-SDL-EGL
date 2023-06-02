@@ -214,6 +214,7 @@ return userData.adapter;
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
 adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
+adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
 adapter=requestAdapter(instance,&adapterOptions);
 sleep(1);
@@ -256,7 +257,6 @@ deviceDescriptor.defaultQueue.label="The default queue";
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
 }
-
 
 void init3(){
 std::cout << "get bindlayout" << std::endl;
