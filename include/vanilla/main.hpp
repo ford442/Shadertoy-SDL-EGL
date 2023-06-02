@@ -184,7 +184,7 @@ userData.device=device;
 userData.requestEnded=true;
 };
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
-    while (!requestEnded) {
+    while (!userData.requestEnded) {
       emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
       sleep(1);
     }
@@ -206,7 +206,7 @@ std::cout << "Got adapter: " << adapter << std::endl;
 userData.requestEnded=true;
 };
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
-    while (!requestEnded) {
+    while (!userData.requestEnded) {
       emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
       sleep(1);
     }
