@@ -207,7 +207,7 @@ std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,adapterOptions,onAdapterRequestEnded,&userData);
+wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
