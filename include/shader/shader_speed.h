@@ -543,8 +543,8 @@ mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
-u_iTime_set(0.0f);
-u_iTimeDelta_set(0.0f);
+u_iTime_set(0.0);
+u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::steady_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
