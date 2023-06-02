@@ -253,8 +253,8 @@ deviceDescriptor.requiredLimits=nullptr; // we do not require any specific limit
 deviceDescriptor.defaultQueue.nextInChain=nullptr;
 deviceDescriptor.label="My Device";
 uint32_t * features;
-wgpuDeviceEnumerateFeatures(adapter,&features);
-deviceDescriptor.requiredFeaturesCount=features;
+wgpuAdapterEnumerateFeatures(adapter,&features);
+deviceDescriptor.requiredFeaturesCount=*features;
 deviceDescriptor.requiredFeatures=nullptr;
 deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
