@@ -186,7 +186,7 @@ userData.requestEnded=true;
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
     while (!userData.requestEnded) {
       emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
-      emscripten_sleep(100);
+      sleep(1);
     }
 return userData.device;
 }
@@ -208,7 +208,7 @@ userData.requestEnded=true;
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
     while (!userData.requestEnded) {
       emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
-      emscripten_sleep(100);
+      sleep(1);
     }
 return userData.adapter;
 }
