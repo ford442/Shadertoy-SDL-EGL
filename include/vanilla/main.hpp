@@ -10,7 +10,7 @@
 
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <emscripten/html5_webgpu.h>
+// #include <emscripten/html5_webgpu.h>
 
 // #include <torch/script.h>
 // #include <torch/csrc/api/include/torch/all.h>
@@ -127,7 +127,7 @@ using tV=tensor<v128_t>;
 
 // #define WEBGPU_CPP_IMPLEMENTATION
 // #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
-#include <webgpu/webgpu.h>
+// #include <webgpu/webgpu.h>
 #include <stdio.h>
 
 #define GLM_FORCE_LEFT_HANDED
