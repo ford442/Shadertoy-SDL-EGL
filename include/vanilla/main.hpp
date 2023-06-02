@@ -179,7 +179,7 @@ bool requestEnded=false;
 UserData userData;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
-if(status==WGPURequestDeviceStatus_Success){
+if(message){
 userData.device=device;
 }
 userData.requestEnded=true;
@@ -204,7 +204,7 @@ bool requestEnded=false;
 UserData userData;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void* pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
-if (status==WGPURequestAdapterStatus_Success){
+if (message){
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
 }
