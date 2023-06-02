@@ -177,15 +177,16 @@ bool requestEnded=false;
 UserData userData;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
+while(!message){
+emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
+sleep(1);
+}
 if(message){
 userData.device=device;
 }
 userData.requestEnded=true;
 };
-// while (!ArequestEnded) {
-// emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
-// sleep(1);
-// }
+
 wgpuAdapterRequestDevice(adapter,NULL,onDeviceRequestEnded,&userData);
 while (!userData.requestEnded) {
 emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
@@ -207,22 +208,19 @@ ArequestEnded=true;
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
 }
-
 userData.requestEnded=true;
 };
 wgpuInstanceRequestAdapter(instance,NULL,onAdapterRequestEnded,&userData);
-
 return userData.adapter;
 }
 
 void init1(){
-
+std::cout << "Requesting adapter" << std::endl;
+const WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
+sleep(1);
 }
 
 void init2(){
-std::cout << "Requesting adapter" << std::endl;
-const WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
- sleep(1);
 std::cout << "Requesting device" << std::endl;
 WGPUSupportedLimits supportedLimits;
 // wgpuAdapterGetLimits(adapter,&supportedLimits);
@@ -249,11 +247,9 @@ requiredLimits.limits.maxComputeWorkgroupSizeZ=1;
 requiredLimits.limits.maxComputeInvocationsPerWorkgroup=32;
 requiredLimits.limits.maxComputeWorkgroupsPerDimension=2;
 requiredLimits.limits.maxStorageBufferBindingSize=bfrSize;
- 
 deviceDescriptor.nextInChain = nullptr;
 deviceDescriptor.requiredLimits = nullptr; // we do not require any specific limit
 deviceDescriptor.defaultQueue.nextInChain = nullptr;
-
 deviceDescriptor.label="My Device";
 deviceDescriptor.requiredFeaturesCount=0;
 // deviceDescriptor.requiredLimits=&requiredLimits;
