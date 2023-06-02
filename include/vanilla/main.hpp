@@ -169,7 +169,8 @@ WGPUBuffer inputBuffer;
 WGPUBuffer outputBuffer;
 WGPUBuffer mapBuffer;
 WGPUBindGroupLayout bindGroupLayout;
- 
+bool ArequestEnded=false;
+
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 struct UserData{
 WGPUDevice device;
@@ -183,11 +184,15 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
+ while (!ArequestEnded) {
+emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
+sleep(1);
+}
 wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
-    while (!userData.requestEnded) {
-      emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
-      sleep(1);
-    }
+while (!userData.requestEnded) {
+emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
+sleep(1);
+}
 return userData.device;
 }
 
@@ -199,17 +204,15 @@ bool requestEnded=false;
 UserData userData;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
-// if (status==WGPURequestAdapterStatus_Success){
+if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
-// }
+}
+ArequestEnded=true;
 userData.requestEnded=true;
 };
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
-  //  while (!userData.requestEnded) {
- //     emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
-  //    sleep(1);
- //   }
+
 return userData.adapter;
 }
 
