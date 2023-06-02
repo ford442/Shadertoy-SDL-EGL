@@ -150,17 +150,15 @@ WGPUAdapter adapter;
 WGPUBindGroup bindGroup;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor;
 WGPUPipelineLayout pipelineLayout;
-const WGPUComputePipelineDescriptor computePipelineDescriptor{};
+WGPUComputePipelineDescriptor computePipelineDescriptor{};
 WGPUComputePipeline computePipeline;
 WGPUSwapChain swapchain;
 WGPUCommandBuffer commandBuffer;
-const WGPUComputePassDescriptor computePassDescriptor{};
+WGPUComputePassDescriptor computePassDescriptor{};
 WGPUDeviceDescriptor deviceDescriptor{};
-const WGPUCommandEncoderDescriptor encoderDescriptor{};
-const WGPURequestAdapterOptions adapterOptions{};
-// adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
-// adapterOptions.forceFallbackAdapter=false;
-const WGPUInstanceDescriptor instanceDescriptor{};
+WGPUCommandEncoderDescriptor encoderDescriptor{};
+WGPURequestAdapterOptions adapterOptions{};
+WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance;
 WGPUDevice Gdevice;
 WGPUBuffer inputBuffer;
@@ -176,19 +174,19 @@ bool requestEnded=false;
 };
 UserData userData;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
-UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 while(!message){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
 sleep(1);
 }
+UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
 }
 userData.requestEnded=true;
 };
-wgpuAdapterRequestDevice(adapter,NULL,onDeviceRequestEnded,&userData);
-while (!userData.requestEnded) {
-emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
+wgpuAdapterRequestDevice(adapter,adapterOptions,onDeviceRequestEnded,&userData);
+while(!userData.requestEnded){
+emscripten_log(EM_LOG_CONSOLE,"Waiting for device...\n");
 sleep(1);
 }
 return userData.device;
@@ -200,7 +198,7 @@ WGPUAdapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void* pUserData){
+WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
@@ -209,12 +207,14 @@ std::cout << "Got adapter: " << adapter << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,NULL,onAdapterRequestEnded,&userData);
+wgpuInstanceRequestAdapter(instance,deviceDescriptor,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
+adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
+adapterOptions.forceFallbackAdapter=false;
 adapter=requestAdapter(instance,&adapterOptions);
 sleep(1);
 }
