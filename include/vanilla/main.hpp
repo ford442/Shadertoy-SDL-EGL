@@ -182,10 +182,10 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
- while (!ArequestEnded) {
-emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
-sleep(1);
-}
+// while (!ArequestEnded) {
+// emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
+// sleep(1);
+// }
 wgpuAdapterRequestDevice(adapter,NULL,onDeviceRequestEnded,&userData);
 while (!userData.requestEnded) {
 emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
