@@ -173,7 +173,7 @@ WGPUDevice device;
 bool requestEnded=false;
 };
 UserData userData;
-WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+static void onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
@@ -198,7 +198,7 @@ WGPUAdapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
+static void onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
