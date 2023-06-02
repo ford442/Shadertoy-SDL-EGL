@@ -148,7 +148,7 @@ int bfrSize=64*sizeof(float);
 
 WGPUAdapter adapter;
 WGPUBindGroup bindGroup;
-WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor;
+WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 WGPUPipelineLayout pipelineLayout;
 WGPUComputePipelineDescriptor computePipelineDescriptor{};
 WGPUComputePipeline computePipeline;
@@ -184,8 +184,8 @@ while(!ArequestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
 sleep(1);
 }
-// wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-adapter->wgpu::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
+wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
+// adapter->wgpu::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
 while(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...\n");
 sleep(1);
@@ -204,18 +204,18 @@ UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
 userData.adapter=adapter;
-std::cout << "Got adapter: " << adapter << std::endl;
+std::cout << "Got adapter " << std::endl;
 }
 userData.requestEnded=true;
 };
-// wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
-instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
+wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
+// instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
-adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
+adapterOptions.powerPreference=HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
 adapter=requestAdapter(instance,&adapterOptions);
@@ -224,9 +224,9 @@ sleep(1);
 
 void init2(){
 std::cout << "Requesting device" << std::endl;
-WGPUSupportedLimits supportedLimits;
+WGPUSupportedLimits supportedLimits{};
 // wgpuAdapterGetLimits(adapter,&supportedLimits);
-WGPURequiredLimits requiredLimits;
+WGPURequiredLimits requiredLimits{};
 requiredLimits.limits.maxVertexAttributes=6;
 requiredLimits.limits.maxVertexBuffers=1;
 requiredLimits.limits.maxBindGroups=2;
