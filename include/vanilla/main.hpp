@@ -130,8 +130,6 @@ using tV=tensor<v128_t>;
 #include <webgpu/webgpu.h>
 #include <stdio.h>
 
-// #include "emscripten/html5_webgpu.h"
-
 #define GLM_FORCE_LEFT_HANDED
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include "/usr/include/glm/glm.hpp"
@@ -188,7 +186,7 @@ userData.requestEnded=true;
 emscripten_log(EM_LOG_CONSOLE, "Waiting for adapter...\n");
 sleep(1);
 }
-wgpuAdapterRequestDevice(adapter,descriptor,onDeviceRequestEnded,&userData);
+wgpuAdapterRequestDevice(adapter,NULL,onDeviceRequestEnded,&userData);
 while (!userData.requestEnded) {
 emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
 sleep(1);
