@@ -184,7 +184,7 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-wgpuAdapterRequestDevice(adapter,deviceDescriptor,onDeviceRequestEnded,&userData);
+wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
 while(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...\n");
 sleep(1);
