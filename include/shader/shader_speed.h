@@ -240,6 +240,7 @@ using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
+using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 
@@ -250,11 +251,10 @@ static v_tensor sse4=v_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
-static d_tensor d_time=d_tensor{2,1};
-static f_tensor f_time=f_tensor{2,1};
+static d_tensor d_time=d_tensor{2,2};
 static f_tensor Fi=f_tensor{2,2};
 static d_tensor Di=d_tensor{2,2};
-static i_tensor uni_i=i_tensor{1,1};
+static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
 static f_tensor t_size=f_tensor{1,2};
 static li_tensor i_size=li_tensor{1,2};
@@ -323,8 +323,8 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
-inline float uni_tme,uni_tme_dlt,uni_mse;
+inline GLint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
+inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
 
 struct{
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
@@ -434,9 +434,9 @@ i_size.at(0,1)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static void u_iTimeDelta_set(float set){
+static void u_iTimeDelta_set(double set){
 sse.at(0,1)=wasm_f64x2_splat(set);
-f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
+d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
@@ -518,7 +518,7 @@ clk_l=true;
 }
 glUniform1f(uni_tme,d_time.at(0,0));
 // nanoPause();
-glUniform1f(uni_tme_dlt,f_time.at(1,0));
+glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
@@ -610,7 +610,7 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 // const Vertex vrt[8]={{gpu.gDm1(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gDm1(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()}};
-::boost::tuples::tie(Fi,f_time,sse);
+::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,iFps,Si,sse3);
 ::boost::tuples::tie(cntx,mms);
 ::boost::tuples::tie(i_size,cntxi);
