@@ -248,12 +248,13 @@ requiredLimits.limits.maxComputeWorkgroupSizeZ=1;
 requiredLimits.limits.maxComputeInvocationsPerWorkgroup=32;
 requiredLimits.limits.maxComputeWorkgroupsPerDimension=2;
 requiredLimits.limits.maxStorageBufferBindingSize=bfrSize;
-deviceDescriptor.nextInChain = nullptr;
-deviceDescriptor.requiredLimits = nullptr; // we do not require any specific limit
-deviceDescriptor.defaultQueue.nextInChain = nullptr;
+deviceDescriptor.nextInChain=nullptr;
+deviceDescriptor.requiredLimits=nullptr; // we do not require any specific limit
+deviceDescriptor.defaultQueue.nextInChain=nullptr;
 deviceDescriptor.label="My Device";
+deviceDescriptor.requiredFeatures=nullptr;
 deviceDescriptor.requiredFeaturesCount=0;
-// deviceDescriptor.requiredLimits=&requiredLimits;
+deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
 Gdevice=requestDevice(adapter,&deviceDescriptor);
 std::cout << "Got device: " << Gdevice << std::endl;
