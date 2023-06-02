@@ -199,10 +199,10 @@ bool requestEnded=false;
 UserData userData;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
-if (status==WGPURequestAdapterStatus_Success){
+// if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
-}
+// }
 userData.requestEnded=true;
 };
 wgpuInstanceRequestAdapter(instance,options,onAdapterRequestEnded,&userData);
