@@ -168,16 +168,17 @@ WGPUBuffer inputBuffer=nullptr;
 WGPUBuffer outputBuffer=nullptr;
 WGPUBuffer mapBuffer=nullptr;
 WGPUBindGroupLayout bindGroupLayout=nullptr;
-
+struct UserData{
+ WGPUAdapter adapter;
+WGPUDevice device;
+bool requestEnded=false;
+}userData;
 // }
  
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
-struct UserData{
-WGPUDevice device;
-bool requestEnded=false;
-};
-UserData userData;
-auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+
+// UserData userData;
+auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,&userData){
 // UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 // if(status==WGPURequestDeviceStatus_Success){
 userData.device=device;
@@ -189,13 +190,13 @@ return userData.device;
 }
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
-struct UserData{
-WGPUAdapter adapter;
-bool requestEnded=false;
-};
-UserData userData;
-auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void *pUserData){
-UserData &userData=*reinterpret_cast<UserData*>(pUserData);
+// struct UserData{
+// WGPUAdapter adapter;
+// bool requestEnded=false;
+// };
+// UserData userData;
+auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,&userData){
+// UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if (status==WGPURequestAdapterStatus_Success){
 userData.adapter=adapter;
 std::cout << "Got adapter: " << adapter << std::endl;
