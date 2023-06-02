@@ -157,7 +157,7 @@ WGPUComputePipeline computePipeline;
 WGPUSwapChain swapchain;
 WGPUCommandBuffer commandBuffer;
 const WGPUComputePassDescriptor computePassDescriptor{};
-WGPUDeviceDescriptor deviceDescriptor;
+WGPUDeviceDescriptor deviceDescriptor{};
 const WGPUCommandEncoderDescriptor encoderDescriptor{};
 const WGPURequestAdapterOptions adapterOptions{};
 // adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
