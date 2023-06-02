@@ -174,16 +174,17 @@ bool requestEnded=false;
 };
 UserData userData;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
-while(!message){
-emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
-sleep(1);
-}
+
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
 }
 userData.requestEnded=true;
 };
+while(!ArequestEnded){
+emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
+sleep(1);
+}
 wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
 while(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...\n");
