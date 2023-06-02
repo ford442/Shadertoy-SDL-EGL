@@ -146,7 +146,7 @@ using namespace std;
 
 int bfrSize=64*sizeof(float);
 
-// WGPUAdapter adapter=nullptr;
+WGPUAdapter adapter;
 WGPUBindGroup bindGroup;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor;
 WGPUPipelineLayout pipelineLayout;
@@ -186,7 +186,6 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-
 wgpuAdapterRequestDevice(adapter,NULL,onDeviceRequestEnded,&userData);
 while (!userData.requestEnded) {
 emscripten_log(EM_LOG_CONSOLE, "Waiting for device...\n");
@@ -216,7 +215,7 @@ return userData.adapter;
 
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
-const WGPUAdapter adapter=requestAdapter(instance,&adapterOptions);
+adapter=requestAdapter(instance,&adapterOptions);
 sleep(1);
 }
 
