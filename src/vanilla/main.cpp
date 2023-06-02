@@ -216,6 +216,7 @@ document.getElementById('di').click();
 });
   
 int main(void){
+sleep(1);
 js_main();
 return 0;
 
