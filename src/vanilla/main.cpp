@@ -149,7 +149,7 @@ console.log(reslt);
 },1200);
 setTimeout(function(){
 console.log("noblock (and native_simd):");
-Module.ccall('wgpu_init1');
+Module.ccall('wgpu_init1',{async:true});
 },1400);
 setTimeout(function(){
 Module.ccall('wgpu_init2');
