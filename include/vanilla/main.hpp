@@ -170,6 +170,7 @@ WGPUBindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
+ContextProperties contextProperties;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
 ContextProperties &contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
@@ -186,6 +187,7 @@ return contextProperties.device;
 }
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
+ContextProperties contextProperties;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
 ContextProperties &contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestAdapterStatus_Success){
