@@ -169,7 +169,7 @@ WGPUBuffer mapBuffer;
 WGPUBindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
 ContextProperties contextProperties;
-/*
+
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 ContextProperties contextProperties;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
@@ -186,7 +186,7 @@ sleep(4);
 contextProperties.adapter->RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
 return contextProperties.device;
 }
-*/
+
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 ContextProperties contextPropertiesa;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
@@ -247,8 +247,8 @@ deviceDescriptor.requiredFeaturesCount=0;
 deviceDescriptor.requiredFeatures=nullptr;
 deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
-// ContextProperties.device=requestDevice(ContextProperties.adapter,&deviceDescriptor);
-contextProperties.device=0;
+contextProperties.device=requestDevice(contextProperties.adapter,&deviceDescriptor);
+// contextProperties.device=0;
 std::cout << "Got device" << std::endl;
 }
 
