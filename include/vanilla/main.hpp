@@ -209,7 +209,7 @@ std::cout << "Got adapter " << std::endl;
 userData.requestEnded=true;
 };
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
-instance=wgpu::CreateInstance(&instanceDescriptor);
+// instance=wgpu::CreateInstance(&instanceDescriptor);
 instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
