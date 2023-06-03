@@ -215,7 +215,7 @@ return userData.adapter;
 
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
-adapterOptions.powerPreference=HighPerformance;
+adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
 adapter=requestAdapter(instance,&adapterOptions);
