@@ -269,7 +269,7 @@ std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
 WGPUShaderModuleDescriptor shaderModuleDescriptor;
-shaderModuleDescriptor.nextInChain=shaderModuleWGSLDescriptor.chain;
+shaderModuleDescriptor.nextInChain=&shaderModuleWGSLDescriptor.chain;
 // wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(ContextProperties.device,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
 WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor;
