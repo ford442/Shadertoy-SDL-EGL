@@ -173,7 +173,7 @@ wgpu::Device device;
 bool requestEnded=false;
 };
 UserData userData;
-static auto onDeviceRequestEnded=[](wgpu::RequestDeviceStatus status,wgpu::Device device,char const * message,void * pUserData){
+wgpu::RequestDeviceCallback onDeviceRequestEnded=[](wgpu::RequestDeviceStatus status,wgpu::Device device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
@@ -199,7 +199,7 @@ wgpu::Adapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-RequestAdapterCallback onAdapterRequestEnded=[](wgpu::RequestAdapterStatus status,wgpu::Adapter adapter,char const * message,void * pUserData){
+wgpu::RequestAdapterCallback onAdapterRequestEnded=[](wgpu::RequestAdapterStatus status,wgpu::Adapter adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
