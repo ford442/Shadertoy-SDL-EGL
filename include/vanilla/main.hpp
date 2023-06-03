@@ -173,7 +173,7 @@ wgpu::Device device;
 bool requestEnded=false;
 };
 UserData userData;
-wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,Gdevice,char const * message,void * pUserData){
+wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUdevice device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
@@ -185,7 +185,7 @@ emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
 // wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-// adapter->wgpu::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
+userData.device=wgpuAdapter::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
 if(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
 sleep(4);
