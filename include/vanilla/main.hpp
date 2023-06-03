@@ -203,7 +203,7 @@ static auto onAdapterRequestEnded=[](wgpu::RequestAdapterStatus status,wgpu::Ada
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
-// userData.adapter=adapter;
+userData.adapter=adapter;
 std::cout << "Got adapter " << std::endl;
 }
 userData.requestEnded=true;
