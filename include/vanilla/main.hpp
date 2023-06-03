@@ -184,7 +184,7 @@ if(!ArequestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
-wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
+// wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
 // adapter->wgpu::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
 if(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
@@ -208,7 +208,9 @@ std::cout << "Got adapter " << std::endl;
 }
 userData.requestEnded=true;
 };
-wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
+// wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
+  
+  instance.wgpu::CreateInstance(&instanceDescriptor);
 // instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
@@ -272,21 +274,23 @@ bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
 bindings[1].visibility=wgpu::ShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+// bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
-wgpu::ShaderModuleWGSLDescriptor shaderCodeDescriptor;
-shaderCodeDescriptor.chain.next=nullptr;
-shaderCodeDescriptor.chain.sType=wgpu::SType::ShaderModuleWGSLDescriptor;
+wgpu::ShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
+shaderModuleWGSLDescriptor.chain=nullptr;
+shaderModuleWGSLDescriptor.source =  ____
+  
 wgpu::ShaderModuleDescriptor shaderModuleDescriptor;
-shaderModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
+shaderModuleDescriptor.nextInChain=&shaderModuleWGSLDescriptor.chain;
 // shaderCodeDescriptor.source =  ____
-wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
+  
+// wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
 wgpu::PipelineLayoutDescriptor pipelineLayoutDescriptor;
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
-pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
+// pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
 /* 
 
 std::cout << "Requesting command Encoder..." << std::endl;
@@ -311,7 +315,7 @@ wgpu::BindGroupDescriptor bindGroupDescriptor;
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(wgpu::BindGroupEntry*)entries.data();
-bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
+// bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
 }
 
 #include <functional>
