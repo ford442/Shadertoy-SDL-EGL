@@ -147,33 +147,33 @@ using namespace std;
 int bfrSize=64*sizeof(float);
 
 wgpu::Adapter adapter;
-WGPUBindGroup bindGroup;
-WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
-WGPUPipelineLayout pipelineLayout;
-WGPUComputePipelineDescriptor computePipelineDescriptor{};
-WGPUComputePipeline computePipeline;
-WGPUSwapChain swapchain;
-WGPUCommandBuffer commandBuffer;
-WGPUComputePassDescriptor computePassDescriptor{};
-WGPUDeviceDescriptor deviceDescriptor{};
-WGPUCommandEncoderDescriptor encoderDescriptor{};
-WGPURequestAdapterOptions adapterOptions{};
-WGPUInstanceDescriptor instanceDescriptor{};
-WGPUInstance instance;
+wgpu::BindGroup bindGroup;
+wgpu::BindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
+wgpu::PipelineLayout pipelineLayout;
+wgpu::ComputePipelineDescriptor computePipelineDescriptor{};
+wgpu::ComputePipeline computePipeline;
+wgpu::SwapChain swapchain;
+wgpu::CommandBuffer commandBuffer;
+wgpu::ComputePassDescriptor computePassDescriptor{};
+wgpu::DeviceDescriptor deviceDescriptor{};
+wgpu::CommandEncoderDescriptor encoderDescriptor{};
+wgpu::RequestAdapterOptions adapterOptions{};
+wgpu::InstanceDescriptor instanceDescriptor{};
+wgpu::Instance instance;
 wgpu::Device Gdevice;
-WGPUBuffer inputBuffer;
-WGPUBuffer outputBuffer;
-WGPUBuffer mapBuffer;
-WGPUBindGroupLayout bindGroupLayout;
+wgpu::Buffer inputBuffer;
+wgpu::Buffer outputBuffer;
+wgpu::Buffer mapBuffer;
+wgpu::BindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
 
-WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
+wgpu::Device requestDevice(wgpu::Adapter adapter,wgpu::DeviceDescriptor const * descriptor){
 struct UserData{
-WGPUDevice device;
+wgpu::Device device;
 bool requestEnded=false;
 };
 UserData userData;
-static auto onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+static auto onDeviceRequestEnded=[](wgpu::RequestDeviceStatus status,wgpu::Device device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
@@ -193,7 +193,7 @@ sleep(4);
 return userData.device;
 }
 
-wgpu::Adapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
+wgpu::Adapter requestAdapter(wgpu::Instance instance,wgpu::RequestAdapterOptions const * options){
 struct UserData{
 WGPUAdapter adapter;
 bool requestEnded=false;
@@ -215,7 +215,7 @@ return userData.adapter;
 
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
-adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
+adapterOptions.powerPreference=wgpu::PowerPreference::HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
 adapter=requestAdapter(instance,&adapterOptions);
@@ -224,9 +224,9 @@ sleep(1);
 
 void init2(){
 std::cout << "Requesting device" << std::endl;
-WGPUSupportedLimits supportedLimits{};
+wgpu::SupportedLimits supportedLimits{};
 // wgpuAdapterGetLimits(adapter,&supportedLimits);
-WGPURequiredLimits requiredLimits{};
+wgpu::RequiredLimits requiredLimits{};
 requiredLimits.limits.maxVertexAttributes=6;
 requiredLimits.limits.maxVertexBuffers=1;
 requiredLimits.limits.maxBindGroups=2;
@@ -263,27 +263,27 @@ std::cout << "Got device: " << Gdevice << std::endl;
 
 void init3(){
 std::cout << "get bindlayout" << std::endl;
-std::array<WGPUBindGroupLayoutEntry,2>bindings;
+std::array<wgpu::BindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
-bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
-bindings[0].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
+bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=wgpu::ShaderStage::Compute;
 bindings[1].binding=1;
-bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
-bindings[1].visibility=WGPUShaderStage::WGPUShaderStage_Compute;
+bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
+bindings[1].visibility=wgpu::ShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
 bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
-WGPUShaderModuleWGSLDescriptor shaderCodeDescriptor;
+wgpu::ShaderModuleWGSLDescriptor shaderCodeDescriptor;
 shaderCodeDescriptor.chain.next=nullptr;
-shaderCodeDescriptor.chain.sType=WGPUSType::WGPUSType_ShaderModuleWGSLDescriptor;
-WGPUShaderModuleDescriptor shaderModuleDescriptor;
+shaderCodeDescriptor.chain.sType=wgpu::SType::ShaderModuleWGSLDescriptor;
+wgpu::ShaderModuleDescriptor shaderModuleDescriptor;
 shaderModuleDescriptor.nextInChain=&shaderCodeDescriptor.chain;
 // shaderCodeDescriptor.source =  ____
-WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
+wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
-WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor;
+wgpu::PipelineLayoutDescriptor pipelineLayoutDescriptor;
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
 pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
@@ -298,7 +298,7 @@ const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 
 void init4(){
 std::cout << "init bindgroup" << std::endl;
-std::array<WGPUBindGroupEntry,2>entries;
+std::array<wgpu::BindGroupEntry,2>entries;
 entries[0].binding=0;
 entries[0].buffer=inputBuffer;
 entries[0].offset=0;
@@ -307,7 +307,7 @@ entries[1].binding=1;
 entries[1].buffer=outputBuffer;
 entries[1].offset=0;
 entries[1].size=bfrSize;
-WGPUBindGroupDescriptor bindGroupDescriptor;
+wgpu::BindGroupDescriptor bindGroupDescriptor;
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
