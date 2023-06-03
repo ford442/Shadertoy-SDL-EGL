@@ -180,15 +180,15 @@ userData.device=device;
 }
 userData.requestEnded=true;
 };
-while(!ArequestEnded){
-emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter...\n");
-sleep(1);
+if(!ArequestEnded){
+emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
+sleep(4);
 }
 wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
 // adapter->wgpu::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
-while(!userData.requestEnded){
-emscripten_log(EM_LOG_CONSOLE,"Waiting for device...\n");
-sleep(1);
+if(!userData.requestEnded){
+emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
+sleep(4);
 }
 return userData.device;
 }
