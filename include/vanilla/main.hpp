@@ -182,7 +182,7 @@ emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
 // wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-contextProperties.adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
+contextProperties.adapter->RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
 return contextProperties.device;
 }
 
