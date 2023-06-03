@@ -148,7 +148,7 @@ int bfrSize=64*sizeof(float);
 struct contextProperties{
 WGPUInstance instance;
 WGPUAdapter adapter;
-WGPUDevice GPUdevice;
+WGPUDevice device;
 };
 WGPUBindGroup bindGroup;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
@@ -171,7 +171,7 @@ WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descri
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void * pUserData){
 // UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
-struct contextProperties *contextProperties=userData;
+struct contextProperties *contextProperties=pUserData;
 contextProperties->device=devicea;
 }
 };
@@ -180,11 +180,7 @@ emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
 // wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
-if(!userData.requestEnded){
-emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
-sleep(4);
-}
+adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
 return contextProperties.device;
 }
 
@@ -192,7 +188,7 @@ WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
 //UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(status == WGPURequestAdapterStatus_Success){
-struct contextProperties *contextProperties=userData;
+struct contextProperties *contextProperties=pUserData;
 ArequestEnded=true;
 contextProperties.adapter=adaptera;
 std::cout << "Got adapter " << std::endl;
@@ -200,7 +196,7 @@ std::cout << "Got adapter " << std::endl;
 }
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
 // instance=wgpu::CreateInstance(&instanceDescriptor);
-instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
+instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&contextProperties);
 return contextProperties.adapter;
 }
 
