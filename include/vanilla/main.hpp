@@ -145,22 +145,22 @@ using glm::vec2;
 using namespace std;
 
 int bfrSize=64*sizeof(float);
-
+struct contextProperties{
+wgpu::Instance instance;
 wgpu::Adapter adapter;
+wgpu::Device GPUdevice;
+};
 wgpu::BindGroup bindGroup;
 wgpu::BindGroupLayoutDescriptor bindGroupLayoutDescriptor=WGPUDefault;
 wgpu::PipelineLayout pipelineLayout;
 wgpu::ComputePipelineDescriptor computePipelineDescriptor=wgpu::Default;
 wgpu::ComputePipeline computePipeline;
-wgpu::SwapChain swapchain;
 wgpu::CommandBuffer commandBuffer;
 wgpu::ComputePassDescriptor computePassDescriptor=Default;
 wgpu::DeviceDescriptor deviceDescriptor=Default;
 wgpu::CommandEncoderDescriptor encoderDescriptor=Default;
 wgpu::RequestAdapterOptions adapterOptions=Default;
 wgpu::InstanceDescriptor instanceDescriptor=Default;
-wgpu::Instance instance;
-wgpu::Device Gdevice;
 wgpu::Buffer inputBuffer;
 wgpu::Buffer outputBuffer;
 wgpu::Buffer mapBuffer;
@@ -168,17 +168,12 @@ wgpu::BindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
 
 wgpu::Device requestDevice(wgpu::Adapter adapter,wgpu::DeviceDescriptor const * descriptor){
-struct UserData{
-WGPUDevice device;
-bool requestEnded=false;
-};
-UserData userData;
 wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void * pUserData){
-UserData &userData=*reinterpret_cast<UserData*>(pUserData);
-if(message){
-userData.device=devicea;
+// UserData &userData=*reinterpret_cast<UserData*>(pUserData);
+if(status==WGPURequestDeviceStatus_Success){
+struct contextProperties *contextProperties=userData;
+contextProperties->device=devicea;
 }
-userData.requestEnded=true;
 };
 if(!ArequestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
@@ -190,28 +185,23 @@ if(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
 sleep(4);
 }
-return userData.device;
+return contextProperties.device;
 }
 
 wgpu::Adapter requestAdapter(wgpu::Instance instance,wgpu::RequestAdapterOptions const * options){
-struct UserData{
-WGPUAdapter adapter;
-bool requestEnded=false;
-};
-UserData userData;
 wgpu::RequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
-UserData &userData=*reinterpret_cast<UserData*>(pUserData);
-if(message){
+//UserData &userData=*reinterpret_cast<UserData*>(pUserData);
+if(status == WGPURequestAdapterStatus_Success){
+struct contextProperties *contextProperties=userData;
 ArequestEnded=true;
-userData.adapter=adaptera;
+contextProperties.adapter=adaptera;
 std::cout << "Got adapter " << std::endl;
 }
-userData.requestEnded=true;
-};
+}
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
 // instance=wgpu::CreateInstance(&instanceDescriptor);
 instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
-return userData.adapter;
+return contextProperties.adapter;
 }
 
 void init1(){
