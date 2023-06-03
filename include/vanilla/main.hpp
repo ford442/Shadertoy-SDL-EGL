@@ -171,9 +171,9 @@ bool ArequestEnded=false;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
-struct ContextProperties *ContextProperties=*reinterpret_cast<ContextProperties>(pUserData);
+struct ContextProperties *contextProperties=*reinterpret_cast<ContextProperties>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
-ContextProperties->device=devicea;
+contextProperties->device=devicea;
 }
 };
 if(!ArequestEnded){
@@ -181,23 +181,23 @@ emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
 // wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-ContextProperties.adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
+contextProperties.adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
 return contextProperties.device;
 }
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
-struct ContextProperties *ContextProperties=*reinterpret_cast<ContextProperties>(pUserData);
+struct ContextProperties *contextProperties=*reinterpret_cast<ContextProperties>(pUserData);
 if(status==WGPURequestAdapterStatus_Success){
 ArequestEnded=true;
-ContextProperties->adapter=adaptera;
+contextProperties->adapter=adaptera;
 std::cout << "Got adapter " << std::endl;
 }
 }
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
 // instance=wgpu::CreateInstance(&instanceDescriptor);
 ContextProperties.instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&ContextProperties);
-return ContextProperties.adapter;
+return contextProperties.adapter;
 }
 
 void init1(){
