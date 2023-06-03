@@ -185,7 +185,7 @@ emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
 // wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-userData.device=adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
+adapter.RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
 if(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
 sleep(4);
@@ -209,9 +209,8 @@ std::cout << "Got adapter " << std::endl;
 userData.requestEnded=true;
 };
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
-  
 instance=wgpu::CreateInstance(&instanceDescriptor);
-userData.adapter=instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
+instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
