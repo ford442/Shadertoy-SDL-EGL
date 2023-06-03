@@ -192,10 +192,10 @@ WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus sta
 ContextProperties &contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestAdapterStatus_Success){
 ArequestEnded=true;
-contextProperties->adapter=adaptera;
+contextProperties.adapter=adaptera;
 std::cout << "Got adapter " << adaptera << std::endl;
 }
-}
+};
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
 // instance=wgpu::CreateInstance(&instanceDescriptor);
 ContextProperties.instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&ContextProperties);
