@@ -263,26 +263,26 @@ bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
 bindings[1].visibility=WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
-// bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(contextProperties.device,&bindGroupLayoutDescriptor);
 std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
 WGPUShaderModuleDescriptor shaderModuleDescriptor;
 shaderModuleDescriptor.nextInChain=&shaderModuleWGSLDescriptor.chain;
-// wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(ContextProperties.device,&shaderModuleDescriptor);
+WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(contextProperties.device,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
 WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor;
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
-// pipelineLayout=wgpuDeviceCreatePipelineLayout(ContextProperties.device,&pipelineLayoutDescriptor);
-/* 
+pipelineLayout=wgpuDeviceCreatePipelineLayout(contextProperties.device,&pipelineLayoutDescriptor);
+
 
 std::cout << "Requesting command Encoder..." << std::endl;
-WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(Gdevice,&encoderDescriptor);
+WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(contextProperties.device,&encoderDescriptor);
 std::cout << "Requesting command queue..." << std::endl;
-const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
-*/
+const WGPUQueue commandQueue=wgpuDeviceGetQueue(contextProperties.device);
+
 }
 
 void init4(){
@@ -300,7 +300,7 @@ WGPUBindGroupDescriptor bindGroupDescriptor;
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
-// bindGroup=wgpuDeviceCreateBindGroup(ContextProperties.device,&bindGroupDescriptor);
+bindGroup=wgpuDeviceCreateBindGroup(contextProperties.device,&bindGroupDescriptor);
 }
 
 #include <functional>
