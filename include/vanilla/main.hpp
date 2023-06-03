@@ -210,7 +210,7 @@ userData.requestEnded=true;
 };
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
   
-wgpu::Instance::wgpuCreateInstance(&instanceDescriptor);
+instance=wgpuCreateInstance(&instanceDescriptor);
 // instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
