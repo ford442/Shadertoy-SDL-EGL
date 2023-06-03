@@ -253,18 +253,7 @@ std::cout << "Got device" << std::endl;
 }
 
 void init3(){
-std::cout << "get bindlayout" << std::endl;
-std::array<WGPUBindGroupLayoutEntry,2>bindings;
-bindings[0].binding=0;
-bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
-bindings[0].visibility=WGPUShaderStage_Compute;
-bindings[1].binding=1;
-bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
-bindings[1].visibility=WGPUShaderStage_Compute;
-bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
-bindGroupLayoutDescriptor.entries=bindings.data();
-bindGroupLayout=wgpuDeviceCreateBindGroupLayout(contextProperties.device,&bindGroupLayoutDescriptor);
-std::cout << "get compute pipeline" << std::endl;
+  std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
@@ -277,15 +266,18 @@ pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
 pipelineLayout=wgpuDeviceCreatePipelineLayout(contextProperties.device,&pipelineLayoutDescriptor);
 
-
-std::cout << "Requesting command Encoder..." << std::endl;
-WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(contextProperties.device,&encoderDescriptor);
-std::cout << "Requesting command queue..." << std::endl;
-const WGPUQueue commandQueue=wgpuDeviceGetQueue(contextProperties.device);
-
-}
-
-void init4(){
+  
+std::cout << "get bindlayout" << std::endl;
+std::array<WGPUBindGroupLayoutEntry,2>bindings;
+bindings[0].binding=0;
+bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
+bindings[0].visibility=WGPUShaderStage_Compute;
+bindings[1].binding=1;
+bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
+bindings[1].visibility=WGPUShaderStage_Compute;
+bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
+bindGroupLayoutDescriptor.entries=bindings.data();
+bindGroupLayout=wgpuDeviceCreateBindGroupLayout(contextProperties.device,&bindGroupLayoutDescriptor);
 std::cout << "init bindgroup" << std::endl;
 std::array<WGPUBindGroupEntry,2>entries;
 entries[0].binding=0;
@@ -301,6 +293,16 @@ bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
 bindGroup=wgpuDeviceCreateBindGroup(contextProperties.device,&bindGroupDescriptor);
+
+std::cout << "Requesting command Encoder..." << std::endl;
+WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(contextProperties.device,&encoderDescriptor);
+std::cout << "Requesting command queue..." << std::endl;
+const WGPUQueue commandQueue=wgpuDeviceGetQueue(contextProperties.device);
+
+}
+
+void init4(){
+
 }
 
 #include <functional>
