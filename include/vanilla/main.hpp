@@ -169,6 +169,7 @@ WGPUBuffer mapBuffer;
 WGPUBindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
 ContextProperties contextProperties;
+/*
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 ContextProperties contextProperties;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
@@ -185,7 +186,7 @@ sleep(4);
 contextProperties.adapter->RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
 return contextProperties.device;
 }
-
+*/
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 ContextProperties contextPropertiesa;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
@@ -255,11 +256,11 @@ void init3(){
 std::cout << "get bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
-bindings[0].buffer.type=WGPUBufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=WGPUShaderStage::Compute;
+bindings[0].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_ReadOnlyStorage;
+bindings[0].visibility=WGPUBufferBindingType::WGPUShaderStage_Compute;
 bindings[1].binding=1;
-bindings[1].buffer.type=WGPUBufferBindingType::Storage;
-bindings[1].visibility=WGPUShaderStage::Compute;
+bindings[1].buffer.type=WGPUBufferBindingType::WGPUBufferBindingType_Storage;
+bindings[1].visibility=WGPUBufferBindingType::WGPUShaderStage_Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
 // bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
