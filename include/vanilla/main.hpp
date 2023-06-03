@@ -171,9 +171,9 @@ bool ArequestEnded=false;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
-struct ContextProperties *contextProperties=*reinterpret_cast<ContextProperties>(pUserData);
+ContextProperties &contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
-contextProperties->device=devicea;
+contextProperties.device=devicea;
 }
 };
 if(!ArequestEnded){
@@ -187,11 +187,11 @@ return contextProperties.device;
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
-struct ContextProperties *contextProperties=*reinterpret_cast<ContextProperties>(pUserData);
+ContextProperties &contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestAdapterStatus_Success){
 ArequestEnded=true;
 contextProperties->adapter=adaptera;
-std::cout << "Got adapter " << std::endl;
+std::cout << "Got adapter " << adaptera << std::endl;
 }
 }
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
@@ -244,7 +244,8 @@ deviceDescriptor.requiredFeaturesCount=0;
 deviceDescriptor.requiredFeatures=nullptr;
 deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
-ContextProperties.device=requestDevice(ContextProperties.adapter,&deviceDescriptor);
+// ContextProperties.device=requestDevice(ContextProperties.adapter,&deviceDescriptor);
+ContextProperties.device=0;
 std::cout << "Got device" << std::endl;
 }
 
