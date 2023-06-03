@@ -195,15 +195,15 @@ return userData.device;
 
 wgpu::Adapter requestAdapter(wgpu::Instance instance,wgpu::RequestAdapterOptions const * options){
 struct UserData{
-WGPUAdapter adapter;
+wgpu::Adapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-static auto onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
+static auto onAdapterRequestEnded=[](wgpu::RequestAdapterStatus status,wgpu::Adapter adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
-userData.adapter=adapter;
+// userData.adapter=adapter;
 std::cout << "Got adapter " << std::endl;
 }
 userData.requestEnded=true;
@@ -211,7 +211,7 @@ userData.requestEnded=true;
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
   
 instance=wgpu::CreateInstance(&instanceDescriptor);
-// instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
+userData.adapter=wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
@@ -280,7 +280,7 @@ std::cout << "get shader module" << std::endl;
 wgpu::ShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
 wgpu::ShaderModuleDescriptor shaderModuleDescriptor;
-shaderModuleDescriptor.nextInChain=&shaderModuleWGSLDescriptor.nextInChain;
+shaderModuleDescriptor.nextInChain=shaderModuleWGSLDescriptor.nextInChain;
 // wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
 wgpu::PipelineLayoutDescriptor pipelineLayoutDescriptor;
