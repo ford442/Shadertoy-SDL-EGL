@@ -171,7 +171,7 @@ bool ArequestEnded=false;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
-struct ContextProperties *contextProperties=*reinterpret_cast<contextProperties*>(pUserData);
+struct ContextProperties *contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 ContextProperties->device=devicea;
 }
