@@ -310,7 +310,7 @@ entries[1].size=bfrSize;
 wgpu::BindGroupDescriptor bindGroupDescriptor;
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
-bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
+bindGroupDescriptor.entries=(wgpu::BindGroupEntry*)entries.data();
 bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
 }
 
