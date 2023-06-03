@@ -146,29 +146,29 @@ using namespace std;
 
 int bfrSize=64*sizeof(float);
 struct contextProperties{
-wgpu::Instance instance;
-wgpu::Adapter adapter;
-wgpu::Device GPUdevice;
+WGPUInstance instance;
+WGPUAdapter adapter;
+WGPUDevice GPUdevice;
 };
-wgpu::BindGroup bindGroup;
-wgpu::BindGroupLayoutDescriptor bindGroupLayoutDescriptor=WGPUDefault;
-wgpu::PipelineLayout pipelineLayout;
-wgpu::ComputePipelineDescriptor computePipelineDescriptor=wgpu::Default;
-wgpu::ComputePipeline computePipeline;
-wgpu::CommandBuffer commandBuffer;
-wgpu::ComputePassDescriptor computePassDescriptor=Default;
-wgpu::DeviceDescriptor deviceDescriptor=Default;
-wgpu::CommandEncoderDescriptor encoderDescriptor=Default;
-wgpu::RequestAdapterOptions adapterOptions=Default;
-wgpu::InstanceDescriptor instanceDescriptor=Default;
-wgpu::Buffer inputBuffer;
-wgpu::Buffer outputBuffer;
-wgpu::Buffer mapBuffer;
-wgpu::BindGroupLayout bindGroupLayout;
+WGPUBindGroup bindGroup;
+WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
+WGPUPipelineLayout pipelineLayout;
+WGPUComputePipelineDescriptor computePipelineDescriptor{};
+WGPUComputePipeline computePipeline;
+WGPUCommandBuffer commandBuffer;
+WGPUComputePassDescriptor computePassDescriptor{};
+WGPUDeviceDescriptor deviceDescriptor{};
+WGPUCommandEncoderDescriptor encoderDescriptor{};
+WGPURequestAdapterOptions adapterOptions{};
+WGPUInstanceDescriptor instanceDescriptor{};
+WGPUBuffer inputBuffer;
+WGPUBuffer outputBuffer;
+WGPUBuffer mapBuffer;
+WGPUBindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
 
-wgpu::Device requestDevice(wgpu::Adapter adapter,wgpu::DeviceDescriptor const * descriptor){
-wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void * pUserData){
+WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
+WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void * pUserData){
 // UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 struct contextProperties *contextProperties=userData;
@@ -188,8 +188,8 @@ sleep(4);
 return contextProperties.device;
 }
 
-wgpu::Adapter requestAdapter(wgpu::Instance instance,wgpu::RequestAdapterOptions const * options){
-wgpu::RequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
+WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
+WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
 //UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(status == WGPURequestAdapterStatus_Success){
 struct contextProperties *contextProperties=userData;
@@ -206,7 +206,7 @@ return contextProperties.adapter;
 
 void init1(){
 std::cout << "Requesting adapter" << std::endl;
-adapterOptions.powerPreference=wgpu::PowerPreference::HighPerformance;
+adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
 adapter=requestAdapter(instance,&adapterOptions);
@@ -215,9 +215,9 @@ sleep(1);
 
 void init2(){
 std::cout << "Requesting device" << std::endl;
-wgpu::SupportedLimits supportedLimits{};
+WGPUSupportedLimits supportedLimits{};
 // wgpuAdapterGetLimits(adapter,&supportedLimits);
-wgpu::RequiredLimits requiredLimits{};
+WGPURequiredLimits requiredLimits{};
 requiredLimits.limits.maxVertexAttributes=6;
 requiredLimits.limits.maxVertexBuffers=1;
 requiredLimits.limits.maxBindGroups=2;
@@ -254,25 +254,25 @@ std::cout << "Got device" << std::endl;
 
 void init3(){
 std::cout << "get bindlayout" << std::endl;
-std::array<wgpu::BindGroupLayoutEntry,2>bindings;
+std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
-bindings[0].buffer.type=wgpu::BufferBindingType::ReadOnlyStorage;
-bindings[0].visibility=wgpu::ShaderStage::Compute;
+bindings[0].buffer.type=WGPUBufferBindingType::ReadOnlyStorage;
+bindings[0].visibility=WGPUShaderStage::Compute;
 bindings[1].binding=1;
-bindings[1].buffer.type=wgpu::BufferBindingType::Storage;
-bindings[1].visibility=wgpu::ShaderStage::Compute;
+bindings[1].buffer.type=WGPUBufferBindingType::Storage;
+bindings[1].visibility=WGPUShaderStage::Compute;
 bindGroupLayoutDescriptor.entryCount=(uint32_t)bindings.size();
 bindGroupLayoutDescriptor.entries=bindings.data();
 // bindGroupLayout=wgpuDeviceCreateBindGroupLayout(Gdevice,&bindGroupLayoutDescriptor);
 std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
-wgpu::ShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
+WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
-wgpu::ShaderModuleDescriptor shaderModuleDescriptor;
+WGPUShaderModuleDescriptor shaderModuleDescriptor;
 shaderModuleDescriptor.nextInChain=shaderModuleWGSLDescriptor.nextInChain;
 // wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
-wgpu::PipelineLayoutDescriptor pipelineLayoutDescriptor;
+WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor;
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
 // pipelineLayout=wgpuDeviceCreatePipelineLayout(Gdevice,&pipelineLayoutDescriptor);
@@ -287,7 +287,7 @@ const WGPUQueue commandQueue=wgpuDeviceGetQueue(Gdevice);
 
 void init4(){
 std::cout << "init bindgroup" << std::endl;
-std::array<wgpu::BindGroupEntry,2>entries;
+std::array<WGPUBindGroupEntry,2>entries;
 entries[0].binding=0;
 entries[0].buffer=inputBuffer;
 entries[0].offset=0;
@@ -296,10 +296,10 @@ entries[1].binding=1;
 entries[1].buffer=outputBuffer;
 entries[1].offset=0;
 entries[1].size=bfrSize;
-wgpu::BindGroupDescriptor bindGroupDescriptor;
+WGPUBindGroupDescriptor bindGroupDescriptor;
 bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
-bindGroupDescriptor.entries=(wgpu::BindGroupEntry*)entries.data();
+bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
 // bindGroup=wgpuDeviceCreateBindGroup(Gdevice,&bindGroupDescriptor);
 }
 
