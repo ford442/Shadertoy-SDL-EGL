@@ -148,9 +148,9 @@ int bfrSize=64*sizeof(float);
 
 wgpu::Adapter adapter;
 wgpu::BindGroup bindGroup;
-wgpu::BindGroupLayoutDescriptor bindGroupLayoutDescriptor=Default;
+wgpu::BindGroupLayoutDescriptor bindGroupLayoutDescriptor=WGPUDefault;
 wgpu::PipelineLayout pipelineLayout;
-wgpu::ComputePipelineDescriptor computePipelineDescriptor=Default;
+wgpu::ComputePipelineDescriptor computePipelineDescriptor=wgpu::Default;
 wgpu::ComputePipeline computePipeline;
 wgpu::SwapChain swapchain;
 wgpu::CommandBuffer commandBuffer;
