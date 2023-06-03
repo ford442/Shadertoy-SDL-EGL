@@ -187,19 +187,19 @@ return contextProperties.device;
 }
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
-ContextProperties contextProperties;
+ContextProperties contextPropertiesa;
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
-ContextProperties &contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
+ContextProperties &contextPropertiesa=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status==WGPURequestAdapterStatus_Success){
 ArequestEnded=true;
-contextProperties.adapter=adaptera;
+contextPropertiesa.adapter=adaptera;
 std::cout << "Got adapter " << adaptera << std::endl;
 }
 };
-// wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
+wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&contextPropertiesa);
 // instance=wgpu::CreateInstance(&instanceDescriptor);
-contextProperties.instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&ContextProperties);
-return contextProperties.adapter;
+// contextProperties.instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&ContextProperties);
+return contextPropertiesa.adapter;
 }
 
 void init1(){
