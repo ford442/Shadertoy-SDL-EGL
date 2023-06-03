@@ -199,7 +199,7 @@ wgpu::Adapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-wgpu::RequestAdapterCallback onAdapterRequestEnded=[](wgpu::RequestAdapterStatus status,wgpu::Adapter adapter,char const * message,void * pUserData){
+wgpu::RequestAdapterCallback onAdapterRequestEnded=[](wgpu::RequestAdapterStatus status,adapter,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
