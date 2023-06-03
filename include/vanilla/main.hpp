@@ -109,7 +109,7 @@ std::chrono::steady_clock::time_point t2;
 
 using namespace std;
 using namespace boost::numeric::ublas;
-using namespace boost::multiprecision;
+// using namespace boost::multiprecision;
 using namespace boost::random;
 
 using tensorVar=tensor<GLfloat>;
@@ -173,10 +173,10 @@ WGPUDevice device;
 bool requestEnded=false;
 };
 UserData userData;
-wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
+wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
-userData.device=device;
+userData.device=devicea;
 }
 userData.requestEnded=true;
 };
@@ -199,11 +199,11 @@ wgpu::Adapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
-wgpu::RequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adapter,char const * message,void * pUserData){
+wgpu::RequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 ArequestEnded=true;
-userData.adapter=adapter;
+userData.adapter=adaptera;
 std::cout << "Got adapter " << std::endl;
 }
 userData.requestEnded=true;
