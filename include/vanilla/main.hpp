@@ -146,7 +146,7 @@ using namespace std;
 
 int bfrSize=64*sizeof(float);
 
-WGPUAdapter adapter;
+wgpu::Adapter adapter;
 WGPUBindGroup bindGroup;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 WGPUPipelineLayout pipelineLayout;
@@ -160,7 +160,7 @@ WGPUCommandEncoderDescriptor encoderDescriptor{};
 WGPURequestAdapterOptions adapterOptions{};
 WGPUInstanceDescriptor instanceDescriptor{};
 WGPUInstance instance;
-WGPUDevice Gdevice;
+wgpu::Device Gdevice;
 WGPUBuffer inputBuffer;
 WGPUBuffer outputBuffer;
 WGPUBuffer mapBuffer;
@@ -193,7 +193,7 @@ sleep(4);
 return userData.device;
 }
 
-WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
+wgpu::Adapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 struct UserData{
 WGPUAdapter adapter;
 bool requestEnded=false;
