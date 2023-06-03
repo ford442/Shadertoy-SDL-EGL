@@ -211,7 +211,7 @@ userData.requestEnded=true;
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
   
 instance=wgpu::CreateInstance(&instanceDescriptor);
-userData.adapter=wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
+userData.adapter=wgpu::Instance::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
 
