@@ -168,7 +168,7 @@ WGPUBuffer outputBuffer;
 WGPUBuffer mapBuffer;
 WGPUBindGroupLayout bindGroupLayout;
 bool ArequestEnded=false;
-
+ContextProperties contextProperties;
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 ContextProperties contextProperties;
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
@@ -198,7 +198,7 @@ std::cout << "Got adapter " << adaptera << std::endl;
 };
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
 // instance=wgpu::CreateInstance(&instanceDescriptor);
-ContextProperties.instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&ContextProperties);
+contextProperties.instance.RequestAdapter(&adapterOptions,onAdapterRequestEnded,&ContextProperties);
 return contextProperties.adapter;
 }
 
@@ -207,7 +207,7 @@ std::cout << "Requesting adapter" << std::endl;
 adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
-ContextProperties.adapter=requestAdapter(instance,&adapterOptions);
+contextProperties.adapter=requestAdapter(instance,&adapterOptions);
 sleep(1);
 }
 
