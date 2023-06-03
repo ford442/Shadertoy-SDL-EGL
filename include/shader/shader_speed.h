@@ -156,7 +156,7 @@ inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 inline char frg_hdr_src[1000]=
-"precision highp sampler3D;precision highp sampler2D;"
+"precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
@@ -822,8 +822,8 @@ glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/sciss
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
