@@ -210,7 +210,7 @@ userData.requestEnded=true;
 };
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
   
-wgpu::Instance.wgpu::CreateInstance(&instanceDescriptor);
+wgpu::Instance::CreateInstance(&instanceDescriptor);
 // instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
@@ -260,7 +260,7 @@ deviceDescriptor.requiredFeatures=nullptr;
 deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
 Gdevice=requestDevice(adapter,&deviceDescriptor);
-std::cout << "Got device: " << Gdevice << std::endl;
+std::cout << "Got device" << std::endl;
 }
 
 void init3(){
