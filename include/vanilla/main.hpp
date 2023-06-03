@@ -207,7 +207,7 @@ std::cout << "Requesting adapter" << std::endl;
 adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
-contextProperties.adapter=requestAdapter(instance,&adapterOptions);
+contextProperties.adapter=requestAdapter(contextProperties.instance,&adapterOptions);
 sleep(1);
 }
 
@@ -247,7 +247,7 @@ deviceDescriptor.requiredFeatures=nullptr;
 deviceDescriptor.requiredLimits=&requiredLimits;
 deviceDescriptor.defaultQueue.label="The default queue";
 // ContextProperties.device=requestDevice(ContextProperties.adapter,&deviceDescriptor);
-ContextProperties.device=0;
+contextProperties.device=0;
 std::cout << "Got device" << std::endl;
 }
 
