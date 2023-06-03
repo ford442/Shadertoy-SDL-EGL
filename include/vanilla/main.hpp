@@ -195,7 +195,7 @@ return userData.device;
 
 wgpu::Adapter requestAdapter(wgpu::Instance instance,wgpu::RequestAdapterOptions const * options){
 struct UserData{
-wgpu::Adapter adapter;
+WGPUAdapter adapter;
 bool requestEnded=false;
 };
 UserData userData;
