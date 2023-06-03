@@ -257,6 +257,7 @@ void init3(){
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
+shaderModuleWGSLDescriptor.chain.stype =WGPUSType_ShaderModuleWGSLDescriptor;
 WGPUShaderModuleDescriptor shaderModuleDescriptor;
 shaderModuleDescriptor.nextInChain=&shaderModuleWGSLDescriptor.chain;
 WGPUShaderModule shaderModule=wgpuDeviceCreateShaderModule(contextProperties.device,&shaderModuleDescriptor);
