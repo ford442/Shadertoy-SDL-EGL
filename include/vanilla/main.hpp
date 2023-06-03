@@ -254,6 +254,9 @@ std::cout << "Got device" << std::endl;
 
 void init3(){
   std::cout << "get compute pipeline" << std::endl;
+
+  wgpuDeviceCreateComputePipeline(contextProperties.device,&computePipelineDescriptor);
+  
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
