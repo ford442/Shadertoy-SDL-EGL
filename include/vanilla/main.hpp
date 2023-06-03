@@ -185,7 +185,7 @@ emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
 sleep(4);
 }
 // wgpuAdapterRequestDevice(adapter,&deviceDescriptor,onDeviceRequestEnded,&userData);
-userData.device=wgpu::Adapter::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
+userData.device=adapter.wgpu::RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&userData);
 if(!userData.requestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for device...(4)\n");
 sleep(4);
