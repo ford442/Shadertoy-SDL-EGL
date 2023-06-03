@@ -180,7 +180,7 @@ contextProperties.device=devicea;
 };
 if(!ArequestEnded){
 emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
-sleep(4);
+emscripten_sleep(1);
 }
 wgpuAdapterRequestDevice(contextProperties.adapter,&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
 // contextProperties.adapter->RequestDevice(&deviceDescriptor,onDeviceRequestEnded,&contextProperties);
@@ -195,6 +195,9 @@ if(status==WGPURequestAdapterStatus_Success){
 ArequestEnded=true;
 contextPropertiesa.adapter=adaptera;
 std::cout << "Got adapter " << adaptera << std::endl;
+}else{
+emscripten_log(EM_LOG_CONSOLE,"Waiting for adapter... (4)\n");
+emscripten_sleep(1);
 }
 };
 wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&contextPropertiesa);
@@ -209,7 +212,7 @@ adapterOptions.powerPreference=WGPUPowerPreference_HighPerformance;
 adapterOptions.compatibleSurface=NULL;
 adapterOptions.forceFallbackAdapter=false;
 contextProperties.adapter=requestAdapter(contextProperties.instance,&adapterOptions);
-sleep(1);
+emscripten_sleep(1);
 }
 
 void init2(){
