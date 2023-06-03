@@ -210,7 +210,7 @@ userData.requestEnded=true;
 };
 // wgpuInstanceRequestAdapter(instance,&adapterOptions,onAdapterRequestEnded,&userData);
   
-  instance.wgpu::CreateInstance(&instanceDescriptor);
+wgpu::Instance.wgpu::CreateInstance(&instanceDescriptor);
 // instance->wgpu::RequestAdapter(&adapterOptions,onAdapterRequestEnded,&userData);
 return userData.adapter;
 }
@@ -279,11 +279,10 @@ std::cout << "get compute pipeline" << std::endl;
 std::cout << "get shader module" << std::endl;
 wgpu::ShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.chain=nullptr;
-shaderModuleWGSLDescriptor.source =  ____
+shaderModuleWGSLDescriptor.source = "";
   
 wgpu::ShaderModuleDescriptor shaderModuleDescriptor;
 shaderModuleDescriptor.nextInChain=&shaderModuleWGSLDescriptor.chain;
-// shaderCodeDescriptor.source =  ____
   
 // wgpu::ShaderModule shaderModule=wgpuDeviceCreateShaderModule(Gdevice,&shaderModuleDescriptor);
 std::cout << "get compute pipeline layout" << std::endl;
