@@ -96,7 +96,7 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
 #include <boost/context/fiber.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/cpp_int.hpp>
 #include <boost/random.hpp>
 #include <boost/random/random_device.hpp>
 using namespace std::chrono_literals;
@@ -109,7 +109,7 @@ std::chrono::steady_clock::time_point t2;
 
 using namespace std;
 using namespace boost::numeric::ublas;
-// using namespace boost::multiprecision;
+using namespace boost::multiprecision;
 using namespace boost::random;
 
 using tensorVar=tensor<GLfloat>;
