@@ -145,11 +145,13 @@ using glm::vec2;
 using namespace std;
 
 int bfrSize=64*sizeof(float);
-struct contextProperties{
+
+struct ContextProperties{
 WGPUInstance instance;
 WGPUAdapter adapter;
 WGPUDevice device;
-};
+}contextProperties;
+
 WGPUBindGroup bindGroup;
 WGPUBindGroupLayoutDescriptor bindGroupLayoutDescriptor{};
 WGPUPipelineLayout pipelineLayout;
@@ -169,9 +171,8 @@ bool ArequestEnded=false;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
-// UserData &userData=*reinterpret_cast<UserData*>(pUserData);
+&contextProperties=*reinterpret_cast<contextProperties*>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
-struct contextProperties *contextProperties=pUserData;
 contextProperties->device=devicea;
 }
 };
@@ -186,9 +187,8 @@ return contextProperties.device;
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
-//UserData &userData=*reinterpret_cast<UserData*>(pUserData);
+&contextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
 if(status == WGPURequestAdapterStatus_Success){
-struct contextProperties *contextProperties=pUserData;
 ArequestEnded=true;
 contextProperties.adapter=adaptera;
 std::cout << "Got adapter " << std::endl;
