@@ -171,7 +171,7 @@ bool ArequestEnded=false;
 
 WGPUDevice requestDevice(WGPUAdapter adapter,WGPUDeviceDescriptor const * descriptor){
 WGPURequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice devicea,char const * message,void *pUserData){
-struct ContextProperties *ContextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
+struct ContextProperties *ContextProperties=*reinterpret_cast<ContextProperties>(pUserData);
 if(status==WGPURequestDeviceStatus_Success){
 ContextProperties->device=devicea;
 }
@@ -187,7 +187,7 @@ return contextProperties.device;
 
 WGPUAdapter requestAdapter(WGPUInstance instance,WGPURequestAdapterOptions const * options){
 WGPURequestAdapterCallback onAdapterRequestEnded=[](WGPURequestAdapterStatus status,WGPUAdapter adaptera,char const * message,void * pUserData){
-struct ContextProperties *ContextProperties=*reinterpret_cast<ContextProperties*>(pUserData);
+struct ContextProperties *ContextProperties=*reinterpret_cast<ContextProperties>(pUserData);
 if(status==WGPURequestAdapterStatus_Success){
 ArequestEnded=true;
 ContextProperties->adapter=adaptera;
