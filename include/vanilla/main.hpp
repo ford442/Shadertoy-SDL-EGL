@@ -173,7 +173,7 @@ wgpu::Device device;
 bool requestEnded=false;
 };
 UserData userData;
-wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUdevice device,char const * message,void * pUserData){
+wgpu::RequestDeviceCallback onDeviceRequestEnded=[](WGPURequestDeviceStatus status,WGPUDevice device,char const * message,void * pUserData){
 UserData &userData=*reinterpret_cast<UserData*>(pUserData);
 if(message){
 userData.device=device;
