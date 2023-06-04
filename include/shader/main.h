@@ -8,6 +8,7 @@
 
 #include <boost/cstdfloat.hpp>  // must be first include
 
+/*
 #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 #pragma STDC CX_LIMITED_RANGE ON
@@ -21,6 +22,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
+*/
 
 #include "../../include/shader/intrins.h"
 #include "boost/tuple/tuple.hpp"
@@ -261,8 +263,8 @@ std::random_device rd;
 
 public:
 
-int32_t rD;
-int32_t Th;
+int32_t rD=0;
+int32_t Th=0;
 v128_t Dr;
 
 inline v128_t rNd(int32_t Th){
@@ -277,7 +279,7 @@ return Dr;
 
 extern"C"{
 
-int32_t c;
+int32_t c=0;
 v128_t Rg;
 int32_t r4nd(int32_t);
 
