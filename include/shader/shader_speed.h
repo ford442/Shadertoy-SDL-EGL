@@ -397,7 +397,7 @@ char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 
 EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=nullptr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 GPU gpu;
 
