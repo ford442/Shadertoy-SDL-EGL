@@ -38,36 +38,6 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
-
-
-#define FLT_MANT_DIG
-#define DBL_MANT_DIG
-#define LDBL_MANT_DIG
-#define FLT_DIG
-#define DBL_DIG
-#define LDBL_DIG
-#define FLT_MIN_EXP
-#define DBL_MIN_EXP
-#define LDBL_MIN_EXP
-#define FLT_MIN_10_EXP
-#define DBL_MIN_10_EXP
-#define LDBL_MIN_10_EXP
-#define FLT_MAX_EXP
-#define DBL_MAX_EXP
-#define LDBL_MAX_EXP
-#define FLT_MAX_10_EXP
-#define DBL_MAX_10_EXP
-#define LDBL_MAX_10_EXP
-#define FLT_MAX
-#define DBL_MAX
-#define LDBL_MAX
-#define FLT_EPSILON
-#define DBL_EPSILON
-#define LDBL_EPSILON
-#define FLT_MIN
-#define DBL_MIN
-#define LDBL_MIN
-#define DECIMAL_DIG
 */
 
 #define BOOST_CHRONO_HEADER_ONLY 1
@@ -81,7 +51,6 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 // #define BOOST_HAS_NANOSLEEP 1
 // #define BOOST_HAS_NRVO 1
 // #define BOOST_HAS_STDINT_H 1
-
 
 #include "boost/tuple/tuple.hpp"
 #include "boost/timer/timer.hpp"
@@ -256,10 +225,8 @@ std::cout << "Got device" << std::endl;
 }
 
 void init3(){
-  std::cout << "get compute pipeline" << std::endl;
-
-  wgpuDeviceCreateComputePipeline(contextProperties.device,&computePipelineDescriptor);
-  
+std::cout << "get compute pipeline" << std::endl;
+wgpuDeviceCreateComputePipeline(contextProperties.device,&computePipelineDescriptor);
 std::cout << "get shader module" << std::endl;
 WGPUShaderModuleWGSLDescriptor shaderModuleWGSLDescriptor;
 shaderModuleWGSLDescriptor.source = "";
@@ -272,8 +239,6 @@ WGPUPipelineLayoutDescriptor pipelineLayoutDescriptor;
 pipelineLayoutDescriptor.bindGroupLayoutCount=1;
 pipelineLayoutDescriptor.bindGroupLayouts=&bindGroupLayout;
 pipelineLayout=wgpuDeviceCreatePipelineLayout(contextProperties.device,&pipelineLayoutDescriptor);
-
-  
 std::cout << "get bindlayout" << std::endl;
 std::array<WGPUBindGroupLayoutEntry,2>bindings;
 bindings[0].binding=0;
@@ -300,7 +265,6 @@ bindGroupDescriptor.layout=bindGroupLayout;
 bindGroupDescriptor.entryCount=(uint32_t)entries.size();
 bindGroupDescriptor.entries=(WGPUBindGroupEntry*)entries.data();
 bindGroup=wgpuDeviceCreateBindGroup(contextProperties.device,&bindGroupDescriptor);
-
 std::cout << "Requesting command Encoder..." << std::endl;
 WGPUCommandEncoder encoder=wgpuDeviceCreateCommandEncoder(contextProperties.device,&encoderDescriptor);
 std::cout << "Requesting command queue..." << std::endl;
@@ -322,9 +286,7 @@ auto tensorAdd=TensorAdd();
 
 td sy=td{2,2};
 
-
 std::function<double(double,double)>DoubleAdd(){
-sy.clear();
 return[](double a,double b){
 sy.at(0,0)=a;
 sy.at(0,1)=b;
@@ -392,7 +354,6 @@ std::cout << fixed << setprecision(64) << "--double---"<< ou3 <<"-----" << std::
 // std::cout << fixed << setprecision(64) << "--long double---"<< ou5 <<"-----" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
-
 A.at(0,0)=nm;
 tensorVar B=A;
 lol=static_cast<float>(B.at(4,4));
