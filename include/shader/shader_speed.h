@@ -323,8 +323,8 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLint uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
-inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
+inline GLint uni_srate=0,uni_res=0,uni_fps=0,smp_chn_res=0,smp_chn[4],uni_frm=0;
+inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
 
 struct{
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
@@ -335,12 +335,12 @@ boost::chrono::steady_clock::time_point t3;
 }u_time;
 
 union{
-unsigned int VBO,EBO,VCO;
+unsigned int VBO=0,EBO=0,VCO=0;
 }shad;
 
 inline struct{
-double wi;
-double hi;
+double wi=0.0;
+double hi=0.0;
 }mouse;
 
 int Size;
@@ -383,12 +383,12 @@ private:
 
 Compile compile;
 
-int32_t iFps;
-EGLDisplay display;
-EGLSurface surface;
-EGLContext ctxegl;
-EGLConfig eglconfig;
-EGLint config_size,major,minor;
+int32_t iFps=60;
+EGLDisplay display=nullptr;
+EGLSurface surface=nullptr;
+EGLContext ctxegl=nullptr;
+EGLConfig eglconfig=nullptr;
+EGLint config_size=0,major,minor=0;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * cm_hdr=cm_hdr_src;
@@ -396,8 +396,8 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+EmscriptenWebGLContextAttributes attr=nullptr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=nullptr;
 
 GPU gpu;
 
