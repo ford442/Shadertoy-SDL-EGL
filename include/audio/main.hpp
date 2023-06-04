@@ -1,7 +1,7 @@
 #pragma once
 
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
+/*
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
@@ -15,6 +15,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
+*/
 
 #include <wasm_simd128.h>
 #include <tmmintrin.h> // ssse 3
@@ -43,7 +44,7 @@ private:
 
 std::random_device rd;
 v128_t Dr;
-int32_t Th,rD;
+int32_t Th=0,rD=0;
 
 public:
 
@@ -60,7 +61,7 @@ return Dr;
 extern "C"{
   
 v128_t Rg;
-int32_t c;
+int32_t c=0;
 
 int32_t r4nd(int32_t);
 
