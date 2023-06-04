@@ -321,7 +321,7 @@ return[](float a,float b){sx.at(0,0)=a;sx.at(0,1)=b;sx.at(1,0)=sx.at(0,0)+sx.at(
 auto tensorAdd=TensorAdd();
 
 td sy=td{2,2};
-sy& operator=0.0;
+sy&=0.0;
 
 std::function<double(double,double)>DoubleAdd(){
 return[](double a,double b){
