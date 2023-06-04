@@ -335,7 +335,7 @@ boost::chrono::steady_clock::time_point t3;
 }u_time;
 
 union{
-unsigned int VBO=0,EBO=0,VCO=0;
+unsigned int VBO,EBO,VCO;
 }shad;
 
 inline struct{
@@ -396,7 +396,7 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 
-EmscriptenWebGLContextAttributes attr=nullptr;
+EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=nullptr;
 
 GPU gpu;
