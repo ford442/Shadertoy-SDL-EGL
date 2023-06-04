@@ -3,7 +3,7 @@ extern "C"{
 void pl();
   
 }
-
+/*
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
@@ -18,6 +18,7 @@ void pl();
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
+*/
 
 #include <float.h>
 #include <math.h>
@@ -54,9 +55,9 @@ void pl();
 #include <emscripten.h>
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long long>>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
-using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long long>>;
+using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,1,1};
@@ -69,9 +70,9 @@ v_tensor sse3=v_tensor{1,1};
 
 struct{
 GLubyte * snd;
-long long pos;
+long pos=0;
 SDL_AudioDeviceID dev;
-unsigned int slen;
+unsigned int slen=0;
 GLubyte * wptr;
 }wave;
 
@@ -87,7 +88,6 @@ public:
 static void snd_pos(boost::atomic<int> set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
-// sound_pos.at(0,0)=set;
 return;
 }
 
