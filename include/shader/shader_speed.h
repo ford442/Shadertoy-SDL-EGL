@@ -534,8 +534,8 @@ glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 
   
   // textures
-if(uni_i.at(0,0)%30==0){
-if(uni_i.at(0,0)%60==0){
+if(d_time.at(0,0)%0.500==0){
+if(d_time.at(0,0)%1.000==0){
 if(shaderToySeconds%2==0){
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
