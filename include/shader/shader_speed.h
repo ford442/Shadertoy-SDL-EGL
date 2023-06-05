@@ -575,6 +575,7 @@ glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[3],0);
 }
 }
+}
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
