@@ -11,11 +11,10 @@
 // #pragma float_control(precise, on)  // enable precise semantics
 // #pragma float_control(except, on)   // enable exception semantics
 
-/*
-#undef _FLT_EVAL_METHOD
+// #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
-// #pragma STDC FP_CONTRACT ON
-// #pragma STDC CX_LIMITED_RANGE ON
+#pragma STDC FP_CONTRACT ON
+#pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -25,7 +24,8 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
-*/
+
+#define _XOPEN_SOURCE 700
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
@@ -323,7 +323,7 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLint uni_srate=0,uni_res=0,uni_fps=0,smp_chn_res=0,smp_chn[4],uni_frm=0;
+inline GLint uni_srate=0,uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res=0,smp_chn[4],uni_frm=0;
 inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
 
 struct{
@@ -794,6 +794,7 @@ const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
+uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
@@ -826,6 +827,17 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
+  
+  // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday-1;
+short hr=5+datE->tm_hour;
+short mi=datE->tm_min;
+short sc=datE->tm_sec;
+glUniform4i(uni_dte,yr,mn,dy,hr,mi,sc);
   
 glUniform1f(uni_srate,44100.0f);
 nanoPause();
