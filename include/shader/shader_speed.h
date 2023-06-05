@@ -343,7 +343,7 @@ double wi=0.0;
 double hi=0.0;
 }mouse;
 
-int Size;
+int Size=0;
 boost::atomic<int>tmm=166666000;
 boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
@@ -802,7 +802,7 @@ glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
 nanoPause();
-const GLuint atb_pos=glGetAttribLocation(S1.at(0,0),"iPosition");
+const GLuint atb_pos=glGetAttribLocation(S1.at(0,0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
