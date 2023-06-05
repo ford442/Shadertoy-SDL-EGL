@@ -55,7 +55,7 @@ class Audio{
 private:
 
 GLchar flnm[24];
-SDL_AudioSpec request=nullptr;
+SDL_AudioSpec request;
 
 public:
 
