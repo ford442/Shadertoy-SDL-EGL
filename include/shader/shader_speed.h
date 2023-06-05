@@ -809,7 +809,9 @@ smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
   
     // texture
-unsigned char* Color=new unsigned char[size*size*sizeof(unsigned char)];
+GLsizei width=1;
+GLsizei height=1;
+unsigned char* Color=new unsigned char[width*height*sizeof(unsigned char)];
 Color[1]=0;
 Color[2]=255;
 Color[3]=0;
@@ -817,8 +819,6 @@ Color[4]=255;
 GLuint texture;
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
-GLsizei width=1;
-GLsizei height=1;
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Color);
 // glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE0);
