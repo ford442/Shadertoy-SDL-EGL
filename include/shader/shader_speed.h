@@ -531,10 +531,10 @@ short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
-  
+
   // textures
-if(shaderToySeconds%60==0){
-if((shaderToySeconds/60)%2==0){
+if(d_time.at(0,0)%60==0){
+if(shaderToySeconds%2==0){
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
