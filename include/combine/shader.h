@@ -213,6 +213,7 @@ static void_tensor cntx=void_tensor{2,2};
 static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
+static void_tensor bin=void_tensor{1,1};
 
 class GPU{
 
