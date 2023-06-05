@@ -1,4 +1,4 @@
-#include "../../include/combine/main.hpp"
+#include "../../include/combine/main.h"
 
 v128_t rNd(int Th){
 std::srand(rd());
