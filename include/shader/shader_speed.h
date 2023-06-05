@@ -520,9 +520,21 @@ glUniform1f(uni_tme,d_time.at(0,0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
   
+  // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday-1;
+short hr=5+datE->tm_hour;
+short mi=datE->tm_min;
+short sc=datE->tm_sec;
+short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+  
   // textures
-if(uni_i.at(0,0)%60==0){
-if((uni_i.at(0,0)/60)%2==0){
+if(shaderToySeconds%60==0){
+if((shaderToySeconds/60)%2==0){
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
@@ -535,18 +547,6 @@ glUniform1i(smp_chn[3],0);
 }
 }
   
-  // date/time
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
-short yr=1900+datE->tm_year;
-short mn=1+datE->tm_mon;
-short dy=datE->tm_mday-1;
-short hr=5+datE->tm_hour;
-short mi=datE->tm_min;
-short sc=datE->tm_sec;
-short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
-
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
