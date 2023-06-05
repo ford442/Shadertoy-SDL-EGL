@@ -1,53 +1,11 @@
-#ifndef FALSE
-#define FALSE 0
-#endif
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#pragma pack(1)
-#pragma fenv_access(on)             // enable environment sensitivity
-
-#pragma STDC FP_CONTRACT ON
-
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD -1
-
-#pragma STDC CX_LIMITED_RANGE ON
-
-#define _XOPEN_REALTIME 1
-#define _POSIX_ASYNC_IO 1
-#define _POSIX_PRIO_IO 1
-#define _POSIX_SYNC_IO 1
-#define _XOPEN_SHM 1
-#define _POSIX_PRIORITIZED_IO 1
-#undef _FLT_ROUNDS
-#define _FLT_ROUNDS 1
-#define _POSIX_REGEXP 1
-
+#pragma once
+#include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/combine/intrins.hpp"
-
+#include "../../include/combine/defs.h"
+#include "../../include/combine/boost_defs.h"
 #include <float.h>
 #include <math.h>
 #include <new>
-
-#define BOOST_CHRONO_HEADER_ONLY 1
-#define BOOST_ERROR_CODE_HEADER_ONLY 1
-#define BOOST_UBLAS_MOVE_SEMANTICS
-#define BOOST_UBLAS_TYPE_CHECK 0
-#define BOOST_UBLAS_USE_LONG_DOUBLE
-#define BOOST_NO_EXCEPTIONS 
-
-#include <boost/integer.hpp>
-#include <boost/atomic.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-
-#include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
-
-#include <emscripten.h>
 #include <algorithm>
 #include <string.h>
 #include <stdarg.h>
@@ -56,17 +14,18 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <iostream>
-// #include <locale> // utf-16
-// #include <uchar.h> // utf-16
-// #include <stdfloat>  //  c++23
 #include <time.h>
-// #include <chrono>
-#include "../../include/combine/gl.hpp"
-#include "../../include/combine/egl.hpp"
+#include <boost/integer.hpp>
+#include <boost/atomic.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
+#include "../../include/combine/gl.h"
+#include "../../include/combine/egl.h"
+#include <emscripten.h>
 #include <emscripten/html5.h>
-#include "emscripten/html5_webgpu.h"
-#include "webgpu/webgpu.h"
-#include "webgpu/webgpu_cpp.h"
 
 extern "C"{
   
@@ -79,7 +38,7 @@ class Compile
 
 private:
 
-GLsizei i;
+GLsizei i=0;
 
 public:
 
@@ -98,10 +57,8 @@ return shader;
 
 inline char cm_hdr_src[550]=
 "#version 300 es\n"
-
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
-
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
@@ -145,8 +102,8 @@ inline char frg_ftr_src[350]=
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
@@ -157,8 +114,8 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -176,7 +133,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
@@ -289,7 +246,7 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline unsigned int uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
+inline unsigned int uni_dte,uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
 inline float uni_tme,uni_tme_dlt,uni_mse;
 
 struct{
@@ -305,8 +262,8 @@ unsigned int VBO,EBO,VCO;
 }shad;
 
 inline struct{
-double wi;
-double hi;
+double wi=0.0;
+double hi=0.0;
 }mouse;
 
 boost::atomic<int>Size;
@@ -349,12 +306,12 @@ private:
 
 Compile compile;
 
-int32_t iFps;
-EGLDisplay display;
-EGLSurface surface;
-EGLContext ctxegl;
-EGLConfig eglconfig;
-EGLint config_size,major,minor;
+int32_t iFps=60;
+EGLDisplay display=nullptr;
+EGLSurface surface=nullptr;
+EGLContext ctxegl=nullptr;
+EGLConfig eglconfig=nullptr;
+EGLint config_size=0,major=0,minor=0;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * cm_hdr=cm_hdr_src;
@@ -362,8 +319,8 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+EmscriptenWebGLContextAttributes attr=nullptr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 GPU gpu;
 
@@ -405,7 +362,6 @@ sse.at(0,1)=wasm_f64x2_splat(set);
 f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
-
 
 void uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
@@ -484,6 +440,19 @@ glUniform1f(uni_tme,d_time.at(0,0));
 // nanoPause();
 glUniform1f(uni_tme_dlt,f_time.at(1,0));
 // nanoPause();
+
+    // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday-1;
+short hr=5+datE->tm_hour;
+short mi=datE->tm_min;
+short sc=datE->tm_sec;
+short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
@@ -491,9 +460,9 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<int>(mouse.hi);
+Size=(int)(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(static_cast<float>(mouse.hi));
+u_iSize_set((float)(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -621,9 +590,9 @@ glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=static_cast<int>(mouse.hi);
+Size=(int)(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set(static_cast<float>(Size));
+u_iSize_set((float)(Size));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -684,19 +653,19 @@ glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
 glFrontFace(GL_CW);
-glEnable(GL_CULL_FACE);
+// glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 nanoPause();
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
@@ -729,6 +698,7 @@ glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
+uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
 uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
@@ -753,6 +723,72 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
+
+      // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday-1;
+short hr=5+datE->tm_hour;
+short mi=datE->tm_min;
+short sc=datE->tm_sec;
+short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+  
+    // texture
+GLsizei width=1;
+GLsizei height=1;
+GLuint texture=0,textureb=0,texturec=0,textured=0;
+unsigned char* Colora=new unsigned char[width*height*sizeof(unsigned char)];
+Colora[0]=80;
+Colora[1]=0;
+Colora[2]=130;
+Colora[3]=255;
+glGenTextures(1,&texture);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,texture);
+glUniform1i(smp_chn[0],0);
+unsigned char* Colorb=new unsigned char[width*height*sizeof(unsigned char)];
+Colorb[0]=255;
+Colorb[1]=255;
+Colorb[2]=255;
+Colorb[3]=255;
+glGenTextures(1,&textureb);
+glBindTexture(GL_TEXTURE_2D,textureb);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
+glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,textureb);
+glUniform1i(smp_chn[1],1);
+unsigned char* Colorc=new unsigned char[width*height*sizeof(unsigned char)];
+Colorc[0]=0;
+Colorc[1]=255;
+Colorc[2]=0;
+Colorc[3]=255;
+glGenTextures(1,&texturec);
+glBindTexture(GL_TEXTURE_2D,texturec);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
+glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE2);
+glBindTexture(GL_TEXTURE_2D,texturec);
+glUniform1i(smp_chn[2],2);
+unsigned char* Colord=new unsigned char[width*height*sizeof(unsigned char)];
+Colord[0]=0;
+Colord[1]=0;
+Colord[2]=0;
+Colord[3]=255;
+glGenTextures(1,&textured);
+glBindTexture(GL_TEXTURE_2D,textured);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
+glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE3);
+glBindTexture(GL_TEXTURE_2D,textured);
+glUniform1i(smp_chn[3],3);
+
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
