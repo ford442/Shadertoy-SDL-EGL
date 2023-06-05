@@ -535,14 +535,22 @@ glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
   // textures
 if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
+glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
+glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[1],1);
+glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[2],2);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);
 }else{
+glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[0],1);
+glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[1],2);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[2],3);
+glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[3],0);
 }
 }
