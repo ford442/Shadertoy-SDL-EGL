@@ -1,6 +1,6 @@
 #pragma once
 #include <boost/cstdfloat.hpp>  // must be first include
-#include "../../include/combine/intrins.hpp"
+#include "../../include/combine/intrins.h"
 #include "../../include/combine/defs.h"
 #include "../../include/combine/boost_defs.h"
 #include <float.h>
