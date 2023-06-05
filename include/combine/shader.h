@@ -280,8 +280,8 @@ struct{
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
-boost::chrono::steady_clock::time_point t2;
-boost::chrono::steady_clock::time_point t3;
+boost::chrono::high_resolution_clock::time_point t2;
+boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
@@ -505,7 +505,7 @@ glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/sciss
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
-u_time.t1=boost::chrono::steady_clock::now();
+u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glFlush();
@@ -521,9 +521,9 @@ return;
 static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
-u_time.t2=boost::chrono::steady_clock::now();
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -621,9 +621,9 @@ glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=(int)(mouse.hi);
+Size=int(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set((float)(Size));
+u_iSize_set(float(Size));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -850,10 +850,10 @@ glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePr
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
-u_time.t2=boost::chrono::steady_clock::now();
-u_time.t3=boost::chrono::steady_clock::now();
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.t3=boost::chrono::high_resolution_clock::now();
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glClear(GL_COLOR_BUFFER_BIT);
