@@ -1,15 +1,9 @@
 #pragma once
 #pragma pack(4)
-// #pragma float_control(precise, on)  // enable precise semantics
-
 #pragma fenv_access(on)        // enable environment sensitivity
-
-// #pragma float_control(except, on)   // enable exception semantics
-
 #include <boost/cstdfloat.hpp>  // must be first include
 
-/*
-#undef _FLT_EVAL_METHOD
+// #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT ON
@@ -22,7 +16,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
-*/
+#define _XOPEN_SOURCE 700
 
 #include "../../include/shader/intrins.h"
 #include "boost/tuple/tuple.hpp"
@@ -33,11 +27,8 @@
 using namespace ::boost::tuples;
 
 EM_JS(void,js_main,(),{
- 
 FS.mkdir('/shader');
-
 window.scroll(0,0);
-
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
