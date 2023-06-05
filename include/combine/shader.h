@@ -55,10 +55,39 @@ return shader;
 
 };
 
-inline char cm_hdr_src[550]=
+
+inline char cm_hdr_src[1700]=
 "#version 300 es\n"
+"#extension GL_ARB_gpu_shader5 : enable\n"
+"#extension GL_ARB_gpu_shader_fp64 : enable\n"
+"#extension GL_ARB_vertex_attrib_64bit : enable\n"
+"#extension GL_NV_shader_buffer_load : enable\n"
+"#extension GL_ARB_color_buffer_float : enable\n"
+"#extension GL_ARB_shader_atomic_counters : enable\n"
+"#extension GL_OES_sample_shading : enable\n"
+"#extension GL_OES_vertex_half_float : enable\n"
+"#extension GL_ARB_shading_language_420pack : enable\n"
+"#extension GL_EXT_multisample_compatibility : enable\n"
+"#extension GL_OES_sample_shading : enable\n"
+"#extension GL_ARB_framebuffer_object : enable\n"
+"#extension GL_ARB_framebuffer_sRGB : enable\n"
+"#extension GL_NV_half_float : enable\n"
+"#extension GL_ARB_fragment_program : enable\n"
+"#extension GL_NV_fragment_program_option : enable\n"
+"#extension GL_NV_fragment_program : enable\n"
+"#extension GL_NV_fragment_program2 : enable\n"
+"#extension GL_EXT_sRGB_write_control : enable\n"
+"#extension GL_NV_float_buffer : enable\n"
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
+"#pragma STDGL(precise all)\n"
+"#pragma optionNV(precise all)\n"
+"#pragma STDGL(strict on)\n"
+"#pragma optionNV(strict on)\n"
+"#pragma optionNV(invariant none)\n"
+"#pragma STDGL(invariant none)\n"
+"#pragma optionNV(centroid all)\n"
+"#pragma STDGL(centroid all)\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
@@ -78,6 +107,7 @@ inline char cm_hdr_src[550]=
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
+
 inline char frg_hdr_src[1000]=
 "precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
@@ -85,19 +115,18 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform int iFrame;uniform vec4 iDate;uniform float iChannelTime[4];"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
 "out vec4 fragColor;\n";
 
-inline char frg_ftr_src[350]=
+inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out vec4 O,vec2 U);"
-"int _N=3;void mainImage(out vec4 O,vec2 U){"
-"vec4 o;O=vec4(0);"
-"for (int k=0; k < _N*_N; k++){"
-"mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.6/1.0));}"
+"#define mainImage mainImage0(out dvec4 O,dvec2 U);"
+"int _N=16;void mainImage(out dvec4 O,dvec2 U){"
+"dvec4 o;O=dvec4(0);"
+"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
