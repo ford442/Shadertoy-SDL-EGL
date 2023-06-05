@@ -203,7 +203,6 @@ static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,1};
-static f_tensor f_time=f_tensor{2,1};
 static f_tensor Fi=f_tensor{2,2};
 static d_tensor Di=d_tensor{2,2};
 static i_tensor uni_i=i_tensor{1,1};
@@ -387,7 +386,7 @@ return;
 
 static void u_iTimeDelta_set(float set){
 sse.at(0,1)=wasm_f64x2_splat(set);
-f_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
+d_time.at(1,0)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
@@ -466,7 +465,7 @@ clk_l=true;
 }
 glUniform1f(uni_tme,d_time.at(0,0));
 // nanoPause();
-glUniform1f(uni_tme_dlt,f_time.at(1,0));
+glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
 
     // date/time
@@ -568,7 +567,7 @@ void strt(){
 typedef struct{boost::atomic<float> XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
-::boost::tuples::tie(Fi,f_time,sse);
+::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,iFps,Si,sse3);
 ::boost::tuples::tie(cntx,mms);
 ::boost::tuples::tie(i_size,cntxi);
@@ -614,6 +613,10 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
+  // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
@@ -711,7 +714,17 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
+GLsizei * binLength;
+GLenum * binaryFormat;
+void * GLbin;
+glDetachShader(S1.at(0,0,0),frag);
+glDetachShader(S1.at(0,0,0),vtx);
+glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
+bin.at(0,0)=GLbin;
 nanoPause();
+glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
+nanoPause();
+
 glUseProgram(S1.at(0,0,0));
 nanoPause();
 // glDeleteShader(vtx);
@@ -738,32 +751,7 @@ smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
-glUniform1f(uni_srate,44100.0f);
-nanoPause();
-glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-nanoPause();
-glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-nanoPause();
-iFps=50;
-glUniform1f(uni_fps,iFps);
-nanoPause();
-mms.at(2,0)=t_size.at(0,0)*0.5;
-mms.at(2,1)=t_size.at(0,0)*0.5;
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-nanoPause();
 
-      // date/time
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
-short yr=1900+datE->tm_year;
-short mn=1+datE->tm_mon;
-short dy=datE->tm_mday-1;
-short hr=5+datE->tm_hour;
-short mi=datE->tm_min;
-short sc=datE->tm_sec;
-short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
-  
     // texture
 GLsizei width=1;
 GLsizei height=1;
@@ -816,13 +804,35 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glUniform1i(smp_chn[3],3);
+  
+        // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday-1;
+short hr=5+datE->tm_hour;
+short mi=datE->tm_min;
+short sc=datE->tm_sec;
+short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+
+glUniform1f(uni_srate,44100.0f);
+nanoPause();
+glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+nanoPause();
+glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+nanoPause();
+iFps=60;
+glUniform1f(uni_fps,iFps);
+nanoPause();
+mms.at(2,0)=t_size.at(0,0)*0.5;
+mms.at(2,1)=t_size.at(0,0)*0.5;
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+nanoPause();
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
