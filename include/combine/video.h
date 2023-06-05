@@ -43,12 +43,6 @@ EGLDisplay display_js=nullptr;
 EGLSurface surface_js=nullptr;
 EGLContext ctxegl_js=nullptr;
 
-class Video{
-
-private:
-
-public:
-
 EGLint att_lst2_js[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
@@ -103,7 +97,13 @@ EGL_SAMPLES,8,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
 };
- 
+
+class Video{
+
+private:
+
+public:
+
 union{
 
 static void resetAvg(){
