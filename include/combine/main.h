@@ -153,6 +153,8 @@ setTimeout(function(){
 // Module.ccall('b3');
 },500);
 setTimeout(function(){
+document.getElementById('stat').innerHTML='Sending Start';
+document.getElementById('stat').style.backgroundColor='green';
 Module.ccall('str');
 },300);
 setTimeout(function(){
