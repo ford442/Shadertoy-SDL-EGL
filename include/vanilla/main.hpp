@@ -322,11 +322,23 @@ public:
 
 float rtt(float nm){
 long long timE=time(0);
-
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday;
+short hr=5+datE->tm_hour;
+short mn=30+datE->tm_min;
+short sc=datE->tm_sec;
 setprecision(3);
 std::cout << "--------------------------" << std::endl;
 std::cout << "-----ctime----------------" << std::endl;
 std::cout << "-------" << timE << "----------" << std::endl;
+  std::cout << yr << std::endl;
+  std::cout << mn << std::endl;
+  std::cout << dy << std::endl;
+  std::cout << hr << std::endl;
+  std::cout << mn << std::endl;
+  std::cout << sc << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
