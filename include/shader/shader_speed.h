@@ -532,10 +532,9 @@ short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 
-  
   // textures
-if(d_time.at(0,0)%0.500==0.0){
-if(d_time.at(0,0)%1.000==0.0){
+if(uni_i.at(0,0)%30==0.0){
+if(int(d_time.at(0,0))%2==0){
 if(shaderToySeconds%2==0){
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
@@ -573,7 +572,8 @@ glUniform1i(smp_chn[1],3);
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[2],0);
 glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[3],1);  }
+glUniform1i(smp_chn[3],1); 
+}
 }
 }
 glUniform1i(uni_frm,uni_i.at(0,0));
