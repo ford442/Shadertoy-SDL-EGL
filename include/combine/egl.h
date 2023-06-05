@@ -7,8 +7,8 @@
 #endif
 
 #include <GLES3/gl3.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl32.h>
+// #include <GLES3/gl31.h>
+// #include <GLES3/gl32.h>
 #include <GLES3/gl3platform.h>
 
 #ifndef EGL_EGL_PROTOTYPES 
