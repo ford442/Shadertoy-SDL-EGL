@@ -132,6 +132,10 @@ var looc='video/';
 fxhttp.open('GET',looc,true);
 fxhttp.send();
 }
+  
+function Swap(){
+Module.ccall('str');
+}
 
 function normalResStart(){
 bezl.width=window.innerWidth;
@@ -146,12 +150,11 @@ setTimeout(function(){
 // Module.ccall('b3_egl');
 },100);
 setTimeout(function(){
-Module.ccall('str');
+// Module.ccall('b3');
 },500);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },300);
-
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
@@ -178,7 +181,7 @@ option.value=txxts;
 x.add(option);
 }
 }
- 
+
 function rrun(){
 let shadesNum=$shds[0];
 if(shadesNum>0){
