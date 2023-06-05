@@ -9,7 +9,8 @@
 #include <emscripten.h>
 
 EM_JS(void,js_main,(),{
-"use strict";
+FS.mkdir('/snd');
+FS.mkdir('/shader');
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
 const switchy=document.getElementById('di');
@@ -161,45 +162,58 @@ switchy.click();
 
 function shds(xml){
 const sparser=new DOMParser();
-const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
-const preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
+let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
+let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
 $shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxts=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
+var x=document.getElementById("sh1");
+var option=document.createElement("option");
+option.text=txxts;
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
-};
+option.value=txxts;
+x.add(option);
+}
+}
+ 
+function rrun(){
 let shadesNum=$shds[0];
 if(shadesNum>0){
-var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum]);
+var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
 };
-var shdMenu=document.getElementById('sh1');
+let shdMenu=document.getElementById('sh1');
+var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
 }else{
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
-};
+}
 }else{
 var fle=document.getElementById('path').innerHTML;
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
-};
+}
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
-// ff.withCredentials=false;
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
-ff.onload=function(oEvent){
-const sarrayBuffer=ff.response;
+document.getElementById('stat').innerHTML='Downloading Shader';
+document.getElementById('stat').style.backgroundColor='yellow';
+ff.addEventListener("load",function(){
+let sarrayBuffer=ff.response;
 if(sarrayBuffer){
-const sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader1.toy',sfil);
-setTimeout(function(){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile('/shader/shader.glsl',sfil);
+document.getElementById('stat').innerHTML='Downloaded Shader';
+document.getElementById('stat').style.backgroundColor='blue';
+//setTimeout(function(){
 normalResStart();
-},500);
-};};
+//},350);
+}
+});
 ff.send(null);
 }
 
@@ -303,7 +317,7 @@ scanSongs();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 Module.ccall('swp');
-Module.ccall('str');
+rrun();
 });
 
 document.getElementById('uniDown').addEventListener('click',function(){
@@ -372,8 +386,10 @@ document.getElementById('scanvas').style.height=window.innerHeight;
 });
 
 document.getElementById('startBtn').addEventListener('click',function(){
-scanShaders();
+rrun();
 });
+
+scanShaders();
 
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
