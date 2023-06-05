@@ -1,4 +1,4 @@
-#include "../../include/combine/video.hpp"
+#include "../../include/combine/video.h"
 
 Video video;
 
@@ -23,9 +23,9 @@ EM_JS(void,vid,(),{
 var vv=document.getElementById("mv");
 var sh4d=true;
 var stp,Lstp;
-const stpInc=0.016666;
+const stpInc=0.01666;
 var setTim;
-const timFrm=10.419;
+const timFrm=10.41999;
 var loopLoop;
 var loopPart;
 var mmvv;
@@ -98,7 +98,7 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
@@ -133,10 +133,10 @@ gl.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WE
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-gl.disable(gl.DITHER);
- gl.blendColor(1.0,1.0,1.0,1.0);
- gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
- gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// gl.disable(gl.DITHER);
+gl.blendColor(1.0,1.0,1.0,1.0);
+gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 gl.drawingBufferColorSpace='display-p3';
