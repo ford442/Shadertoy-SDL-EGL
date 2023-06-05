@@ -1,66 +1,13 @@
 #pragma once
-#ifndef FALSE
-#define FALSE 0
-#endif
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#pragma pack(1)
-#pragma fenv_access(on)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD 0
-#pragma STDC CX_LIMITED_RANGE OFF
-#pragma STDC FP_CONTRACT ON
-#define _XOPEN_REALTIME 1
-#define _POSIX_ASYNC_IO 1
-#define _POSIX_PRIO_IO 1
-#define _POSIX_SYNC_IO 1
-#define	_XOPEN_SHM 1
-#define _POSIX_PRIORITIZED_IO 1
-#undef _FLT_ROUNDS
-#define _FLT_ROUNDS 1
-#define _POSIX_REGEXP	1
-
-
-#include <float.h>
-#include <math.h>
-#include <new>
-
-#define BOOST_CHRONO_HEADER_ONLY 1
-#define BOOST_ERROR_CODE_HEADER_ONLY 1
-#define BOOST_UBLAS_MOVE_SEMANTICS
-#define BOOST_UBLAS_TYPE_CHECK 0
-#define BOOST_UBLAS_USE_LONG_DOUBLE
-#define BOOST_NO_EXCEPTIONS 
-
-#include <boost/integer.hpp>
-#include <boost/atomic.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include "../../include/combine/intrins.hpp"
-
-#include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
-
-#include <emscripten.h>
+#include <boost/cstdfloat.hpp>  // must be first include
+#include "../../include/combine/defs.h"
+#include "../../include/combine/boost_defs.h"
+#include "../../include/combine/intrins.h"
+#include "../../include/combine/gl.h"
+#include "../../include/combine/egl.h"
 #include <algorithm>
 #include <string.h>
-// #include <locale> // utf-16
-// #include <uchar.h> // utf-16
-// #include <stdfloat>  //  c++23
 #include <time.h>
-// #include <chrono>
-#include "../../include/shader/gl.h"
-#include "../../include/shader/egl.h"
-#include <emscripten/html5.h>
-#include "emscripten/html5_webgpu.h"
-#include "webgpu/webgpu.h"
-#include "webgpu/webgpu_cpp.h"
-
 #include <cfloat>
 #include <iostream>
 #include <algorithm>
@@ -72,73 +19,29 @@
 #include <cstdlib>
 #include <cfloat>
 #include <climits>
-
-EGLint att_lst2_js[1000]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_NONE,EGL_NONE
-};
-
-EGLint ctx_att_js[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
-// EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-// EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_NONE,EGL_NONE
-};
-
-EGLint att_lst_js[1500]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-// EGL_RENDERABLE_TYPE,EGL_NONE,
-// EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
-// EGL_CONFORMANT,EGL_NONE,
-//  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,(EGLint)32,
-EGL_GREEN_SIZE,(EGLint)32,
-EGL_BLUE_SIZE,(EGLint)32,
-EGL_ALPHA_SIZE,(EGLint)32,
-EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)32,
-EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,EGL_TRUE,
-// EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
-//  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,32,
-// EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
-EGL_NONE,EGL_NONE
-};
+#include <float.h>
+#include <math.h>
+#include <new>
+#include <boost/integer.hpp>
+#include <boost/atomic.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 using avg_tensor=boost::numeric::ublas::tensor<float>;
-
 static avg_tensor avRg=avg_tensor{3,3};
-EmscriptenWebGLContextAttributes attr_js;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
-EGLConfig eglconfig_js;
-double hi_js,wi_js,Size_js;
-EGLint config_size_js,major_js,minor_js;
-EGLDisplay display_js;
-EGLSurface surface_js;
-EGLContext ctxegl_js;
+EmscriptenWebGLContextAttributes attr_js=nullptr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js=0;
+EGLConfig eglconfig_js=nullptr;
+double hi_js=0.0,wi_js=0.0,Size_js=0.0;
+EGLint config_size_js=0,major_js=0,minor_js=0;
+EGLDisplay display_js=nullptr;
+EGLSurface surface_js=nullptr;
+EGLContext ctxegl_js=nullptr;
 
 class Video{
 
@@ -262,7 +165,7 @@ emscripten_webgl_enable_extension(ctx_js,"EGL_EXT_gl_colorspace_display_p3");
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_BLEND);
-glViewport((GLint)0,(GLint)0,Size_js,Size_js);
+glViewport(0,0,Size_js,Size_js);
 // glScissor((GLint)0,(GLint)0,Size_js,Size_js);
 return;
 }
