@@ -555,7 +555,7 @@ glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[3],0);
 }
 }else{
-if(shaderToySeconds%2==0){
+if(shaderToySeconds%2!=0){
 glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[0],3);
 glActiveTexture(GL_TEXTURE1);
