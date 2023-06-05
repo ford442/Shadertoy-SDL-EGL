@@ -321,12 +321,12 @@ public:
 
 
 float rtt(float nm){
-time_t time=time(0);
+long long timE=time(0);
 
 setprecision(3);
 std::cout << "--------------------------" << std::endl;
 std::cout << "-----ctime----------------" << std::endl;
-std::cout << "--------------------------" << std::endl;
+std::cout << "-------" << timE << "----------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
