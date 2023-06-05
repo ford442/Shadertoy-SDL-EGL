@@ -816,14 +816,15 @@ unsigned char* Color=new unsigned char[width*height*sizeof(unsigned char)];
 
   */
   
-GLuint texture,Color[4];
+GLuint texture;
+GLint Color[4];
 Color[0]=0;
 Color[1]=255;
 Color[2]=0;
 Color[3]=255;
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Color);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_INT,Color);
 // glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
