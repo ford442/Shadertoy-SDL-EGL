@@ -17,9 +17,7 @@ return;
 }
 
 EM_JS(void,vid,(),{
-  
 "use strict";
-
 var vv=document.getElementById("mv");
 var sh4d=true;
 var stp,Lstp;
@@ -68,10 +66,10 @@ if(e.code=='KeyX'){
 loopLoop=false;
 vv.play();
 }
-if(e.code=='KeyA'){
+if(e.code=='KeyO'){
 sh4d=true;
 }
-if(e.code=='KeyS'){
+if(e.code=='KeyU'){
 sh4d=false;
 }
 }
