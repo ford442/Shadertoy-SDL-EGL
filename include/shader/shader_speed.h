@@ -440,7 +440,6 @@ d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-
 void uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
@@ -656,6 +655,10 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 eglBindAPI(EGL_OPENGL_API);
 nanoPause();
@@ -804,6 +807,23 @@ smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
+  
+    // texture
+glEnable(GL_TEXTURE);
+glEnable(GL_TEXTURE_2D);
+unsigned char *Color=[0,255,0,255];
+GLuint texture;
+glGenTextures(1,&texture);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB, GL_UNSIGNED_BYTE,Color);
+glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,texture);
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],0);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);
+  
 glUniform1f(uni_srate,44100.0f);
 nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
@@ -820,10 +840,6 @@ nanoPause();
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
