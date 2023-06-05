@@ -26,7 +26,7 @@
 using std::experimental::native_simd;
 using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
-/*
+
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
@@ -35,10 +35,12 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #define _POSIX_SYNC_IO 1
 #define _XOPEN_SHM 1
 #define _POSIX_PRIORITIZED_IO 1
+#define _POSIX_REGEXP 1
+
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
-#define _POSIX_REGEXP 1
-*/
+
+#define _XOPEN_SOURCE 700
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
@@ -319,7 +321,6 @@ tensorVar Aa=tensorVar{2,3};
 
 public:
 
-
 float rtt(float nm){
 long long timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -327,7 +328,7 @@ short yr=1900+datE->tm_year;
 short mn=1+datE->tm_mon;
 short dy=datE->tm_mday;
 short hr=datE->tm_hour;
-short mi=60+datE->tm_min;
+short mi=datE->tm_min;
 short sc=datE->tm_sec;
 setprecision(3);
 std::cout << "--------------------------" << std::endl;
