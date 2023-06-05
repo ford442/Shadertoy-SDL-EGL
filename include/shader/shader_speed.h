@@ -519,6 +519,22 @@ glUniform1f(uni_tme,d_time.at(0,0));
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
+  
+  // textures
+if(uni_i.at(0,0)%60==0){
+if((uni_i.at(0,0)/60)%2==0){
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
+}else{
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],2);
+glUniform1i(smp_chn[2],3);
+glUniform1i(smp_chn[3],0);
+}
+}
+  
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
