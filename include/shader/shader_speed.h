@@ -647,7 +647,7 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -660,7 +660,6 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
-eglBindAPI(EGL_OPENGL_API);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
@@ -811,20 +810,14 @@ smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
     // texture
 GLsizei width=1;
 GLsizei height=1;
-  /*
 unsigned char* Color=new unsigned char[width*height*sizeof(unsigned char)];
-
-  */
-  
-GLuint texture;
-GLint Color[4];
 Color[0]=0;
 Color[1]=255;
 Color[2]=0;
 Color[3]=255;
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_INT,Color);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Color);
 // glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
