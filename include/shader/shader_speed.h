@@ -827,7 +827,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
-  
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -837,8 +837,9 @@ short dy=datE->tm_mday-1;
 short hr=5+datE->tm_hour;
 short mi=datE->tm_min;
 short sc=datE->tm_sec;
-glUniform4i(uni_dte,yr,mn,dy,hr,mi,sc);
-  
+short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+
 glUniform1f(uni_srate,44100.0f);
 nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
