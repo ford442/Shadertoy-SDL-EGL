@@ -823,7 +823,7 @@ smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
     // texture
 GLsizei width=1;
 GLsizei height=1;
-GLuint texture=nullptr,textureb=nullptr,texturec=nullptr,textured=nullptr;
+GLuint texture=0,textureb=0,texturec=0,textured=0;
 unsigned char* Colora=new unsigned char[width*height*sizeof(unsigned char)];
 Colora[0]=80;
 Colora[1]=0;
