@@ -597,8 +597,8 @@ glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+glViewport(0,0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
+glScissor(0,0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -939,11 +939,11 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
-glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
-u_iTime_set(0.0f);
-u_iTimeDelta_set(0.0f);
+u_iTime_set(0.0);
+u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
