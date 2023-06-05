@@ -819,7 +819,7 @@ Color[3]=0;
 Color[4]=255;
   */
   
-GLuint texture,Color[4]=[0,255,0,255];
+GLuint texture,Color[4]={0,255,0,255};
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Color);
