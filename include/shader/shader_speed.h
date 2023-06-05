@@ -809,7 +809,7 @@ smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
   
     // texture
-GLuint Color[4]={0,255,0,255};
+GLint Color[4]={0,255,0,255};
 GLuint texture;
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
