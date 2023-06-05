@@ -868,7 +868,7 @@ Colord[3]=255;
 glGenTextures(1,&textured);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
-// glGenerateMipmap(GL_TEXTURE_2D);
+glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glUniform1i(smp_chn[3],3);
