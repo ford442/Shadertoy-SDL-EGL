@@ -815,7 +815,7 @@ glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
 GLsizei width=1;
 GLsizei height=1;
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGBA,RGBA_UNSIGNED_INTEGER,Color);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Color);
 // glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
