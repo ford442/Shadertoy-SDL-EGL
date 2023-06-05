@@ -313,7 +313,7 @@ scanSongs();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 Module.ccall('swp');
-scanShaders();
+Module.ccall('str');
 });
 
 document.getElementById('uniDown').addEventListener('click',function(){
