@@ -93,6 +93,7 @@ using tV=tensor<v128_t>;
 
 #include <cassert>
 #include <iomanip>
+#include <ctime>
 
 // #define WEBGPU_CPP_IMPLEMENTATION
 // #include "../../include/vanilla/webgpu/emscripten/webgpu.hpp"
@@ -318,8 +319,15 @@ tensorVar Aa=tensorVar{2,3};
 
 public:
 
+
 float rtt(float nm){
+time_t time=time(0);
+
 setprecision(3);
+std::cout << "--------------------------" << std::endl;
+std::cout << "-----ctime----------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
+std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 std::cout << "--------------------------" << std::endl;
 float ppi=3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f;
