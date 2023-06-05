@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <iostream>
-#include <time.h>
+#include <ctime>
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
@@ -137,7 +137,194 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#pragma pack(4)
+#pragma fenv_access(on)             // enable environment sensitivity
+// #pragma float_control(precise, on)  // enable precise semantics
+// #pragma float_control(except, on)   // enable exception semantics
+
+// #undef _FLT_EVAL_METHOD
+// #define _FLT_EVAL_METHOD -1
+#pragma STDC FP_CONTRACT ON
+#pragma STDC CX_LIMITED_RANGE ON
+#define _XOPEN_REALTIME 1
+#define _POSIX_ASYNC_IO 1
+#define _POSIX_PRIO_IO 1
+#define _POSIX_SYNC_IO 1
+#define _XOPEN_SHM 1
+#define _POSIX_PRIORITIZED_IO 1
+#undef _FLT_ROUNDS
+#define _FLT_ROUNDS 1
+#define _POSIX_REGEXP 1
+
+#define _XOPEN_SOURCE 700
+
+#define BOOST_CHRONO_HEADER_ONLY 1
+#define BOOST_ERROR_CODE_HEADER_ONLY 1
+#define BOOST_UBLAS_MOVE_SEMANTICS
+#define BOOST_UBLAS_TYPE_CHECK 0
+#define BOOST_UBLAS_USE_LONG_DOUBLE
+#define BOOST_NO_EXCEPTIONS
+#define BOOST_HAS_FLOAT128
+#define BOOST_HAS_CLOCK_GETTIME 1
+#define BOOST_HAS_NANOSLEEP 1
+#define BOOST_HAS_NRVO 1
+#define BOOST_HAS_STDINT_H 1
+
+#include <boost/cstdfloat.hpp>  // must be first include
+
+#include <float.h>
+#include <math.h>
+#include <new>
+
+#include <boost/integer.hpp>
+#include <boost/atomic.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
+
+#include <algorithm>
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <iostream>
+// #include <locale> // utf-16
+// #include <uchar.h> // utf-16
+// #include <stdfloat>  //  c++23
+#include <time.h>
+// #include <chrono>
+#include "../../include/shader/gl.h"
+#include "../../include/shader/egl.h"
+#include <emscripten/html5.h>
+#include "emscripten/html5_webgpu.h"
+#include "webgpu/webgpu_cpp.h"
+#include "../../include/shader/intrins.h"
+
+#include <emscripten.h>
+
+extern "C"{
+  
+void str();
+  
+}
+
+class Compile
+{
+
+private:
+
+GLsizei i;
+
+public:
+
+unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+GLsizei srclens[nsrc];
+for(i=0;i<nsrc;i++){
+srclens[i]=GLsizei(strlen(src[i]));
+}
+const GLuint shader=glCreateShader(type);
+glShaderSource(shader,nsrc,src,srclens);
+glCompileShader(shader);
+return shader;
+}
+
+};
+
+inline char cm_hdr_src[1700]=
+"#version 300 es\n"
+"#extension GL_ARB_gpu_shader5 : enable\n"
+"#extension GL_ARB_gpu_shader_fp64 : enable\n"
+"#extension GL_ARB_vertex_attrib_64bit : enable\n"
+"#extension GL_NV_shader_buffer_load : enable\n"
+"#extension GL_ARB_color_buffer_float : enable\n"
+"#extension GL_ARB_shader_atomic_counters : enable\n"
+"#extension GL_OES_sample_shading : enable\n"
+"#extension GL_OES_vertex_half_float : enable\n"
+"#extension GL_ARB_shading_language_420pack : enable\n"
+"#extension GL_EXT_multisample_compatibility : enable\n"
+"#extension GL_OES_sample_shading : enable\n"
+"#extension GL_ARB_framebuffer_object : enable\n"
+"#extension GL_ARB_framebuffer_sRGB : enable\n"
+"#extension GL_NV_half_float : enable\n"
+"#extension GL_ARB_fragment_program : enable\n"
+"#extension GL_NV_fragment_program_option : enable\n"
+"#extension GL_NV_fragment_program : enable\n"
+"#extension GL_NV_fragment_program2 : enable\n"
+"#extension GL_EXT_sRGB_write_control : enable\n"
+"#extension GL_NV_float_buffer : enable\n"
+"#pragma STDGL(precision highp uint)\n"
+"#pragma STDGL(precision highp atomic_uint)\n"
+"#pragma STDGL(precise all)\n"
+"#pragma optionNV(precise all)\n"
+"#pragma STDGL(strict on)\n"
+"#pragma optionNV(strict on)\n"
+"#pragma optionNV(invariant none)\n"
+"#pragma STDGL(invariant none)\n"
+"#pragma optionNV(centroid all)\n"
+"#pragma STDGL(centroid all)\n"
+"#pragma STDGL(fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma STDGL(fastprecision off)\n"
+"#pragma optionNV(fastprecision off)\n"
+"#pragma STDGL(unroll all)\n"
+"#pragma optionNV(unroll all)\n"
+"#pragma STDGL(ifcvt none)\n"
+"#pragma optionNV(ifcvt none)\n"
+"#pragma STDGL(inline all)\n"
+"#pragma optionNV(inline all)\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
+"precision highp int;\n"
+"layout(std140)uniform;\n"
+"precision highp float;\n";
+
+inline char vrt_bdy_src[100]=
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+
+inline char frg_hdr_src[1000]=
+"precision mediump sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;"
+"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform int iFrame;uniform vec4 iDate;uniform float iChannelTime[4];"
+"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
+"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"out vec4 fragColor;\n";
+
+inline char frg_ftr_src[420]=
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+"#define mainImage mainImage0(out dvec4 O,dvec2 U);"
+"int _N=16;void mainImage(out dvec4 O,dvec2 U){"
+"dvec4 o;O=dvec4(0);"
+"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
+"void mainImage0\n\0";
+
+EGLint att_lst2[1000]={ 
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -147,8 +334,8 @@ EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE,EGL_NONE
 };
 
@@ -177,7 +364,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,32,
+EGL_SAMPLES,8,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -202,7 +389,7 @@ static v_tensor sse4=v_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
-static d_tensor d_time=d_tensor{2,1};
+static d_tensor d_time=d_tensor{2,2};
 static f_tensor Fi=f_tensor{2,2};
 static d_tensor Di=d_tensor{2,2};
 static i_tensor uni_i=i_tensor{1,1};
@@ -274,12 +461,12 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline unsigned int uni_dte,uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
-inline float uni_tme,uni_tme_dlt,uni_mse;
+inline GLint uni_dte,uni_srate,uni_res,uni_fps,smp_chn_res,smp_chn[4],uni_frm;
+inline GLfloat uni_tme,uni_tme_dlt,uni_mse;
 
 struct{
-boost::chrono::duration<float,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<float,boost::chrono::seconds::period>time_spanb;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<double,boost::chrono::seconds::period>time_spanb;
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::steady_clock::time_point t2;
 boost::chrono::steady_clock::time_point t3;
@@ -488,9 +675,9 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=(int)(mouse.hi);
+Size=int(mouse.hi);
 i_iSize_set(Size);
-u_iSize_set((float)(mouse.hi));
+u_iSize_set(float(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
@@ -504,8 +691,8 @@ mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
-u_iTime_set(0.0f);
-u_iTimeDelta_set(0.0f);
+u_iTime_set(0.0);
+u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::steady_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
@@ -824,7 +1011,6 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
-iFps=60;
 glUniform1f(uni_fps,iFps);
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
