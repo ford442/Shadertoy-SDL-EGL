@@ -519,6 +519,18 @@ glUniform1f(uni_tme,d_time.at(0,0));
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
+  // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+short yr=1900+datE->tm_year;
+short mn=1+datE->tm_mon;
+short dy=datE->tm_mday-1;
+short hr=5+datE->tm_hour;
+short mi=datE->tm_min;
+short sc=datE->tm_sec;
+short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
