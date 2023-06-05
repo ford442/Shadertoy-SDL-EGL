@@ -554,7 +554,6 @@ glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[3],0);
 }
 }
-  
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
@@ -854,11 +853,10 @@ Colora[1]=0;
 Colora[2]=130;
 Colora[3]=255;
 glGenTextures(1,&texture);
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,texture);
 glUniform1i(smp_chn[0],0);
 unsigned char* Colorb=new unsigned char[width*height*sizeof(unsigned char)];
 Colorb[0]=0;
@@ -866,11 +864,10 @@ Colorb[1]=0;
 Colorb[2]=0;
 Colorb[3]=255;
 glGenTextures(1,&textureb);
+glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,textureb);
 glUniform1i(smp_chn[1],1);
 unsigned char* Colorc=new unsigned char[width*height*sizeof(unsigned char)];
 Colorc[0]=0;
@@ -878,11 +875,10 @@ Colorc[1]=255;
 Colorc[2]=0;
 Colorc[3]=255;
 glGenTextures(1,&texturec);
+glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,texturec);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE2);
-glBindTexture(GL_TEXTURE_2D,texturec);
 glUniform1i(smp_chn[2],2);
 unsigned char* Colord=new unsigned char[width*height*sizeof(unsigned char)];
 Colord[0]=255;
@@ -890,11 +886,10 @@ Colord[1]=255;
 Colord[2]=255;
 Colord[3]=255;
 glGenTextures(1,&textured);
+glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE3);
-glBindTexture(GL_TEXTURE_2D,textured);
 glUniform1i(smp_chn[3],3);
 
   // date/time
