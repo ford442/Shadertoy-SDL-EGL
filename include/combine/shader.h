@@ -319,7 +319,7 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 
-EmscriptenWebGLContextAttributes attr=nullptr;
+EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 GPU gpu;
