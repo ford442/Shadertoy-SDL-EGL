@@ -107,7 +107,6 @@ inline char cm_hdr_src[1700]=
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-
 inline char frg_hdr_src[1000]=
 "precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
@@ -122,11 +121,11 @@ inline char frg_hdr_src[1000]=
 
 inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"#define mainImage mainImage0(out dvec4 O,dvec2 U);"
-"int _N=16;void mainImage(out dvec4 O,dvec2 U){"
-"dvec4 o;O=dvec4(0);"
-"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
+"#define mainImage mainImage0(out vec4 O,vec2 U);"
+"int _N=16;void mainImage(out vec4 O,vec2 U){"
+"vec4 o;O=vec4(0);"
+"mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
+"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.077038f/1.0f,2.184228f/1.0,2.449715f/1.0f,1.0f));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
@@ -817,8 +816,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glUniform1i(smp_chn[3],3);
-
-glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
+glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
