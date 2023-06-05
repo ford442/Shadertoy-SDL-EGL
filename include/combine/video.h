@@ -34,7 +34,7 @@
 
 using avg_tensor=boost::numeric::ublas::tensor<float>;
 static avg_tensor avRg=avg_tensor{3,3};
-EmscriptenWebGLContextAttributes attr_js=nullptr;
+EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js=0;
 EGLConfig eglconfig_js=nullptr;
 double hi_js=0.0,wi_js=0.0,Size_js=0.0;
