@@ -6,7 +6,7 @@
 #define TRUE 1
 #endif
 
-#pragma pack(1)
+#pragma pack(4)
 #pragma fenv_access(on)             // enable environment sensitivity
 // #pragma float_control(precise, on)  // enable precise semantics
 // #pragma float_control(except, on)   // enable exception semantics
