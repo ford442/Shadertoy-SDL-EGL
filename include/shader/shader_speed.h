@@ -813,13 +813,14 @@ GLsizei width=1;
 GLsizei height=1;
   /*
 unsigned char* Color=new unsigned char[width*height*sizeof(unsigned char)];
-Color[1]=0;
-Color[2]=255;
-Color[3]=0;
-Color[4]=255;
+
   */
   
-GLuint texture,Color[4]={0,255,0,255};
+GLuint texture,Color[4];
+Color[0]=0;
+Color[1]=255;
+Color[2]=0;
+Color[3]=255;
 glGenTextures(1,&texture);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Color);
