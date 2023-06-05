@@ -4,7 +4,7 @@ SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -fpic -O0 -flto -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
+COMMON_FLAGS += -fpic -O0 -flto -std=gnu17 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
 -fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -mtail-call -msign-ext
 
@@ -57,13 +57,13 @@ b3_shader_speed:
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
-	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
+	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -NDEBUG -BOOST_UBLAS_NDEBUG \
 	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
-	 -sASSERTIONS=0 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
+	 -sASSERTIONS=0 -sINITIAL_MEMORY=2048mb \
 	 -sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
-	 -sEVAL_CTORS=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sUSE_WEBGPU=1 -sWASM=1 \
+	 -sEVAL_CTORS=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sTEXTDECODER=2 -sUSE_WEBGPU=1 -sWASM=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
