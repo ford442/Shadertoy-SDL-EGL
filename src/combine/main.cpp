@@ -22,11 +22,6 @@ return c;
 void(*jss)(){&js_main};
 
 int main(void){
-"use strict";
-EM_ASM({
-FS.mkdir('/snd');
-FS.mkdir('/shader');
-});
 jss();
 return 0;
 }
