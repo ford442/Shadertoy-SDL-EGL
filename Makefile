@@ -1,10 +1,10 @@
-LDFLAGS += -Wl,-O0,--lto-O3,--stack-first
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -fpic -O0 -flto -std=gnu17 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
+COMMON_FLAGS += -O3 -flto -std=gnu17 -std=gnu++2a -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
 -fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -mtail-call -msign-ext
 
@@ -51,9 +51,9 @@ b3_shader_speed:
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
-	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -NDEBUG -BOOST_UBLAS_NDEBUG \
+	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DNDEBUG -BOOST_UBLAS_NDEBUG \
 	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
-	 -sASSERTIONS=0 -sINITIAL_MEMORY=2048mb \
+	 -sASSERTIONS=0 -sINITIAL_MEMORY=2048mb -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
@@ -121,17 +121,17 @@ b3_combine_dev:
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-fpic -O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG
 	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-fpic -O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
 	emcc main.o audio.o -o a3020.js -mllvm -force-vector-width=4 -std=gnu++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
-	-sEVAL_CTORS -fpic -O3 --closure 0 --closureFriendly -Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
+	-sEVAL_CTORS -O3 --closure 0 --closureFriendly -Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
 	-fwhole-program -polly -sUSE_GLFW=0 -DSIMD=AES \
 	-sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt --emit-symbol-map \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 -sSUPPORT_LONGJMP=0 \
@@ -235,7 +235,7 @@ b3_shader_llvm:
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3hd:
-	em++ src/b3ogl.cpp -c -fno-math-errno -fPIC -fexperimental-library \
+	em++ src/b3ogl.cpp -c -fno-math-errno -fexperimental-library \
 	-std=c++2a -stdlib=libc++ -O0 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	-fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -249,14 +249,14 @@ b3hd:
 	-fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	-mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	-ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on
-	em++ src/b3sdl.cpp -c -O0 -std=c++11 -fno-math-errno -fPIC -fexperimental-library \
+	em++ src/b3sdl.cpp -c -O0 -std=c++11 -fno-math-errno -fexperimental-library \
 	-sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
 	-mcpu=bleeding-edge -fwasm-exceptions \
 	-mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
-	em++ src/b3main.cpp -c -O3 -std=c++11 -fno-math-errno -fPIC -fexperimental-library \
+	em++ src/b3main.cpp -c -O3 -std=c++11 -fno-math-errno -fexperimental-library \
 	-mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	-mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
-	emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++11 -fPIC -fexperimental-library -O0 -fno-math-errno \
+	emcc b3main.o b3sdl.o b3ogl.o b3emjs.o -o g3020.js -std=c++11 -fexperimental-library -O0 -fno-math-errno \
 	-msimd128 -sPRECISE_F32=2 -sWASM_BIGINT=0 -mcpu=bleeding-edge -fwasm-exceptions \
 	-DSIMD=AES -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -polly \
@@ -278,7 +278,7 @@ b3_combine:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_test:
-	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ -fpie \
+	 em++ src/combine/main.cpp -c -O0 -std=c++20 -stdlib=libc++ \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/combine/audio.cpp -c -O0 -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
@@ -300,17 +300,17 @@ b3_combine_test:
 	 --extern-pre-js gpujsx.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_llvm:
-	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fpie \
+	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -stdlib=libc++ \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/audio.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fpie -sUSE_SDL=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=on -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/video.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fpie -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/video.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/shader.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fpie -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/shader.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
 	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=gnu++2b -stdlib=libc++ -sUSE_SDL=2 -flto -sTOTAL_STACK=128MB \
@@ -324,7 +324,7 @@ b3_combine_llvm:
 	 --pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --post-js js/module.js
 
 b3_combine_cloud:
-	 em++ src/combine/main.cpp -c -O0 -std=c++2a -fpie \
+	 em++ src/combine/main.cpp -c -O0 -std=c++2a \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
@@ -377,14 +377,14 @@ b3_shader_simd:
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_test:
-	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math \
+	 em++ src/shader/main.cpp -c -O3 -ffast-math \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast
-	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -ffp-contract=on \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -ffp-contract=on \
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -O0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=fast \
+	 emcc main.o shader.o -o s3021.js -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=fast \
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -395,14 +395,14 @@ b3_shader_test:
 	 -sTEXTDECODER=0 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_js:
-	 em++ src/shader/main.cpp -c -O3 -fpie -ffast-math \
+	 em++ src/shader/main.cpp -c -O3 -ffast-math \
 	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/shader/shader.cpp -c -O0 -fpie -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021js.js -O0 -sWASM=0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3021js.js -O0 -sWASM=0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -646,7 +646,7 @@ b3hdm:
 	 --pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 sh4d3:
-	 em++ src/b3ogl_sh4d3.cpp -c -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3ogl_sh4d3.cpp -c -fno-math-errno -fexperimental-library \
 	 -std=c++2a -O0 \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
@@ -654,10 +654,10 @@ sh4d3:
 	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
-	 em++ src/b3main_sh4d3.cpp -c -O3 -std=c++11 -fno-math-errno -fPIC -fexperimental-library \
+	 em++ src/b3main_sh4d3.cpp -c -O3 -std=c++11 -fno-math-errno -fexperimental-library \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ftree-vectorize \
 	 -mbulk-memory -msign-ext -ffast-math -ffp-contract=fast -freciprocal-math
-	 emcc b3main_sh4d3.o b3ogl_sh4d3.o -o s3005.js -std=c++11 -fPIC -fexperimental-library -O0 -mllvm -polly -static -DNDEBUG=1 -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 emcc b3main_sh4d3.o b3ogl_sh4d3.o -o s3005.js -std=c++11 -fexperimental-library -O0 -mllvm -polly -static -DNDEBUG=1 -fno-math-errno -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -msimd128 -sWASMFS=1 -sPRECISE_F32=2 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -sTEXTDECODER=0 -sFETCH_SUPPORT_INDEXEDDB=0 \
 	 -DSIMD=AES -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
