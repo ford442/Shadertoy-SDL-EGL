@@ -362,6 +362,7 @@ char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
+char * cmp_bdy=cmp_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
@@ -812,7 +813,7 @@ unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // compute shader
 unsigned int compute;
 compute=glCreateShader(GL_COMPUTE_SHADER);
-glShaderSource(compute,1,&cmp_src,NULL);
+glShaderSource(compute,1,&cmp_bdy,NULL);
 glCompileShader(compute);
   
 unsigned int shd_prg=glCreateProgram();
