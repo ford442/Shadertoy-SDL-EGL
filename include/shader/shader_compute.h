@@ -693,19 +693,6 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
-
-  // compute texture
-unsigned int Ctexture;
-glGenTextures(1,&Ctexture);
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,Ctexture);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,TEXTURE_WIDTH,TEXTURE_HEIGHT,0,GL_RGBA,GL_FLOAT,NULL);
-glBindImageTexture(0,Ctexture,0,GL_FALSE,0,GL_READ_ONLY,GL_RGBA32F);
-  
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
