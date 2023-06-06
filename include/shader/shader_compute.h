@@ -57,15 +57,6 @@ return shader;
 
 };
 
-class ComputeShader{
-
-public:
-unsigned int ID;
-ComputeShader(const char* computePath)
-{
-...
-}
-}
 inline char cmp_src[1700]=
 "#version 430 core\n"
 "layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;"
@@ -495,7 +486,6 @@ clk_l=true;
 // nanoPause();
   
 // compute shader render loop
-computeShader.use();
 glDispatchCompute((unsigned int)TEXTURE_WIDTH,(unsigned int)TEXTURE_HEIGHT,1);
 // make sure writing to image has finished before read
 glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
