@@ -57,6 +57,8 @@ return shader;
 
 };
 
+const unsigned int TEXTURE_WIDTH = 512, TEXTURE_HEIGHT = 512;
+
 inline char cmp_src[1700]=
 "#version 430 core\n"
 "layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;"
@@ -692,7 +694,6 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glUseProgram(0);
 
   // compute texture
-const unsigned int TEXTURE_WIDTH = 512, TEXTURE_HEIGHT = 512;
 unsigned int Ctexture;
 glGenTextures(1,&Ctexture);
 glActiveTexture(GL_TEXTURE0);
@@ -702,7 +703,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA32F,TEXTURE_WIDTH,TEXTURE_HEIGHT,0,GL_RGBA,GL_FLOAT,NULL);
-glBindImageTexture(0,Ctexture,0,GL_FALSE,0,GL_READ,GL_RGBA32F);
+glBindImageTexture(0,Ctexture,0,GL_FALSE,0,GL_READ_ONLY,GL_RGBA32F);
   
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
