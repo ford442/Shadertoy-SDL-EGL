@@ -873,7 +873,7 @@ unsigned char* Colora=new unsigned char[width*height*sizeof(unsigned char)];
 Colora[0]=80;
 Colora[1]=0;
 Colora[2]=130;
-Colora[3]=200;
+Colora[3]=230;
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
