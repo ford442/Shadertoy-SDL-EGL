@@ -63,6 +63,42 @@ b3_shader_speed:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
+b3_shader_compute:
+	 ###         Shader
+	 @sh clang6.sh; \
+	 em++ src/shader/shader_compute.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
+	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
+	 ###         Main
+	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
+	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
+	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
+	 -Rpass-analysis=loop-vectorize
+	 ###         Link
+	 @sh clang12.sh; \
+	 emcc main.o shader_compute.o -o s3024c.js --emit-symbol-map $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
+	 -sUSE_SDL=0 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
+	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
+	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
+	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
+	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -NDEBUG -BOOST_UBLAS_NDEBUG \
+	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
+	 -sASSERTIONS=0 -sINITIAL_MEMORY=2048mb \
+	 -sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt \
+	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
+	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
+	 -sEVAL_CTORS=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sTEXTDECODER=2 -sWASM=1 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
+
+
 b3_combine_dev:
 	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
