@@ -106,6 +106,7 @@ return shader;
 
 inline char cm_hdr_src[1700]=
 "#version 300 es\n"
+"#extension GL_ARB_gpu_shader4 : enable\n"
 "#extension GL_ARB_gpu_shader5 : enable\n"
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "#extension GL_ARB_vertex_attrib_64bit : enable\n"
@@ -114,6 +115,7 @@ inline char cm_hdr_src[1700]=
 "#extension GL_ARB_shader_atomic_counters : enable\n"
 "#extension GL_OES_sample_shading : enable\n"
 "#extension GL_OES_vertex_half_float : enable\n"
+"#extension GL_ARB_multisample : enable\n"
 "#extension GL_ARB_shading_language_420pack : enable\n"
 "#extension GL_EXT_multisample_compatibility : enable\n"
 "#extension GL_OES_sample_shading : enable\n"
@@ -132,10 +134,10 @@ inline char cm_hdr_src[1700]=
 "#pragma optionNV(precise all)\n"
 "#pragma STDGL(strict on)\n"
 "#pragma optionNV(strict on)\n"
-"#pragma optionNV(invariant none)\n"
 "#pragma STDGL(invariant none)\n"
-"#pragma optionNV(centroid all)\n"
+"#pragma optionNV(invariant none)\n"
 "#pragma STDGL(centroid all)\n"
+"#pragma optionNV(centroid all)\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision off)\n"
@@ -191,7 +193,7 @@ EGL_NONE,EGL_NONE
 
 EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
