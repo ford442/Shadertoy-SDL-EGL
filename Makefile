@@ -44,7 +44,7 @@ b3_shader_speed:
 	 ###         Link
 	 @sh clang12.sh; \
 	 emcc main.o shader_speed.o -o s3024s.js --emit-symbol-map $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
-	 -sUSE_SDL=0 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -79,7 +79,7 @@ b3_shader_compute:
 	 ###         Link
 	 @sh clang12.sh; \
 	 emcc main.o shader_compute.o -o s3024c.js --emit-symbol-map $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
-	 -sUSE_SDL=0 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -112,8 +112,8 @@ b3_combine_dev:
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -lc++abi -flto -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
-	 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -sWASM=1 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
+	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -sWASM=1 -DNDEBUG=1 \
 	 -sEVAL_CTORS=1 -fwhole-program -polly -sFORCE_FILESYSTEM=1 --closure 0 --closureFriendly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sDYNAMIC_EXECUTION=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=8388608 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm","_swp","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
@@ -121,17 +121,17 @@ b3_combine_dev:
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O0 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG
 	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O0 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
 	emcc main.o audio.o -o a3020.js -mllvm -force-vector-width=4 -std=gnu++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
-	-sEVAL_CTORS -O3 --closure 0 --closureFriendly -Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
+	-sEVAL_CTORS -O0 --closure 0 --closureFriendly -Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
 	-fwhole-program -polly -sUSE_GLFW=0 -DSIMD=AES -DEMMALLOC_USE_64BIT_OPS=1 \
 	-sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt --emit-symbol-map \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 -sSUPPORT_LONGJMP=0 \
@@ -141,7 +141,7 @@ b3_audio:
 	-sGLOBAL_BASE=8388608 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -maes -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sASSERTIONS=0 -sTOTAL_STACK=8MB \
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	-Wl,--lto-O3,--stack-first \
+	-Wl,--lto-O3,--stack-first -DNDEBUG=1 \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 
@@ -157,7 +157,7 @@ b3_googleStreetView_dev:
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma -fstrict-vtable-pointers -fwhole-program-vtables -lc++abi \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -maes -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 -sPRECISE_F32=1 --closure 0 --closureFriendly -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sUSE_GLFW=3 -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
