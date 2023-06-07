@@ -939,7 +939,7 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
-glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
