@@ -519,7 +519,7 @@ glUniform1f(uni_tme,d_time.at(0,0));
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
-  
+  /*
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -576,6 +576,7 @@ glUniform1i(smp_chn[3],1);
 }
 }
 }
+  */
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
