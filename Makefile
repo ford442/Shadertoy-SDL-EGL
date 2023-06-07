@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O1,--lto-O3,--stack-first
+LDFLAGS += -Wl,--lto-O3,--stack-first
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
