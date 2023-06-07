@@ -104,7 +104,7 @@ return shader;
 
 };
 
-inline char cm_hdr_src[1700]=
+inline char cm_hdr_src[1800]=
 "#version 300 es\n"
 "#extension GL_ARB_gpu_shader4 : enable\n"
 "#extension GL_ARB_gpu_shader5 : enable\n"
