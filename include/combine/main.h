@@ -147,16 +147,16 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-// Module.ccall('b3_egl');
+Module.ccall('b3_egl');
 },100);
 setTimeout(function(){
-// Module.ccall('b3');
+Module.ccall('b3');
 },500);
 setTimeout(function(){
 document.getElementById('stat').innerHTML='Sending Start';
 document.getElementById('stat').style.backgroundColor='green';
 Module.ccall('str');
-},300);
+},800);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
@@ -319,6 +319,7 @@ loada();
 scanVideos();
 loada();
 scanSongs();
+scanShaders();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 Module.ccall('swp');
@@ -393,8 +394,6 @@ document.getElementById('scanvas').style.height=window.innerHeight;
 document.getElementById('startBtn').addEventListener('click',function(){
 rrun();
 });
-
-scanShaders();
 
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
