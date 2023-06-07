@@ -1,10 +1,10 @@
-LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
+LDFLAGS += -Wl,-O0,--lto-O3,--stack-first
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -O3 -flto -std=gnu17 -std=gnu++2a -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
+COMMON_FLAGS += -O0 -flto -std=gnu17 -std=gnu++2a -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
 -fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -mtail-call -msign-ext
 
