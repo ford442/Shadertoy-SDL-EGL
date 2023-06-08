@@ -534,7 +534,7 @@ clk_l=true;
 
 // glUniform1f(uni_tme,d_time.at(0,0));
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferSubData(GL_UNIFORM_BUFFER,0,4,d_time.at(0,0)); 
+glBufferSubData(GL_UNIFORM_BUFFER,0,4,&d_time.at(0,0)); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 // nanoPause();
