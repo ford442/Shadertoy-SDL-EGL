@@ -11,7 +11,7 @@ COMMON_FLAGS += -O0 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp-c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ src/vanilla/main_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ lib/lib_webgpu_cpp20.cpp lib/lib_webgpu.cpp -static -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
