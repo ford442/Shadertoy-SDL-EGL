@@ -856,7 +856,7 @@ glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_STATIC_DRAW);
-glBindBuffer(GL_UNIFORM_BUFFER,0);
+// glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
 GLsizei * binLength;
