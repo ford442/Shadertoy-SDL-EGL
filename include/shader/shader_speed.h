@@ -826,7 +826,6 @@ gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanoPause();
-
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
@@ -851,7 +850,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,128,NULL,GL_STATIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
-glUniformBlockBinding(S1.at(0,0,0),uniIndex,0);
+glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glBindBufferRange(GL_UNIFORM_BUFFER,0,uniBlock,0,64*sizeof(float));
 
 GLsizei * binLength;
