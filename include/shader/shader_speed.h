@@ -389,6 +389,7 @@ return (EM_BOOL)1;
 static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
+unsigned int uniBlock;
 
 class Run{
 
@@ -411,7 +412,6 @@ char * frg_ftr=frg_ftr_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
-unsigned int uniBlock;
   
 GPU gpu;
 
