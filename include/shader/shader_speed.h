@@ -164,16 +164,16 @@ inline char frg_hdr_src[1000]=
 "precision highp sampler2DArrayShadow;"
 "layout (std140,binding=0) uniform uniBlock{"
 "float iTime;"
-"float iTimeDelta;"
-"float iFrameRate;"
-"int iFrame;"
-"vec4 iDate;"
-"float iChannelTime[4];"
-"vec3 iChannelResolution[4];"
-"vec3 iResolution;"
-"vec4 iMouse;"
-"float iSampleRate;"
 "};"
+"uniform float iTimeDelta;"
+"uniform float iFrameRate;"
+"uniform int iFrame;"
+"uniform vec4 iDate;"
+"uniform float iChannelTime[4];"
+"uniform vec3 iChannelResolution[4];"
+"uniform vec3 iResolution;"
+"uniform vec4 iMouse;"
+"uniform float iSampleRate;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
@@ -847,11 +847,11 @@ glLinkProgram(S1.at(0,0,0));
 unsigned int uniBlock;
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,128,NULL,GL_STATIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_STATIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
-glBindBufferRange(GL_UNIFORM_BUFFER,0,uniBlock,0,64*sizeof(float));
+glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
 GLsizei * binLength;
 GLenum * binaryFormat;
