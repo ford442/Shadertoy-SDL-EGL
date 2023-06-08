@@ -970,7 +970,7 @@ float iRate=44100.0f;
 // glUniform1f(uni_fps,iFps);
   // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
-glBufferSubData(GL_UNIFORM_BUFFER,4,4,iFps); 
+glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
 // glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 nanoPause();
