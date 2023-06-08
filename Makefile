@@ -17,10 +17,10 @@ b3_vanilla_webgpu:
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc src/vanilla/js.c -c -std=gnu17 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main_webgpu.o js.o lib_webgpu_cpp20.o lib_webgpu.o -o w3000.js -mllvm -std=gnu17 -std=gnu++20 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
-	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sINITIAL_MEMORY=16mb \
+	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=16mb -sINITIAL_MEMORY=64mb \
 	 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 -lmath.js -lhtml5.js -lint53.js -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -sABORTING_MALLOC=0 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGPU=1 \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGPU=1 \
 	 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 -sASSERTIONS=1 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js \
@@ -64,8 +64,8 @@ b3_shader_speed:
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DNDEBUG -BOOST_UBLAS_NDEBUG \
 	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
-	 -sASSERTIONS=0 -sINITIAL_MEMORY=2048mb -DEMMALLOC_USE_64BIT_OPS=1 \
-	 -sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt \
+	 -sASSERTIONS=0 -sINITIAL_MEMORY=700mb -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
+	 --memory-init-file 0 -rtlib=compiler-rt -sSUPPORT_LONGJMP=wasm \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
 	 -sEVAL_CTORS=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sTEXTDECODER=2 -sWASM=1 \
