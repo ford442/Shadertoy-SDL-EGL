@@ -842,6 +842,7 @@ PRGin(shd_prg);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
+glLinkProgram(S1.at(0,0,0));
   
       // uni block
 unsigned int uniBlock;
@@ -852,8 +853,6 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),uniIndex,0);
 glBindBufferRange(GL_UNIFORM_BUFFER,0,uniBlock,0,64*sizeof(float));
-  
-glLinkProgram(S1.at(0,0,0));
 
 GLsizei * binLength;
 GLenum * binaryFormat;
