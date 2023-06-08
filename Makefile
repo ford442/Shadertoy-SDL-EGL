@@ -11,19 +11,19 @@ COMMON_FLAGS += -O0 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++17 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ src/vanilla/main_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++2b -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ lib/lib_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++17 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ lib/lib_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++2b -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ lib/lib_webgpu_cpp20.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++17 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ lib/lib_webgpu_cpp20.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++2b -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc src/vanilla/js.c -c -std=gnu17 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
-	 emcc main_webgpu.o js.o lib_webgpu_cpp20.o lib_webgpu.o -o w3000.js -mllvm -std=gnu17 -std=gnu++17 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 emcc main_webgpu.o js.o lib_webgpu_cpp20.o lib_webgpu.o -o w3000.js -mllvm -std=gnu17 -std=gnu++2b -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=1 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -lmath.js -lhtml5.js -lint53.js -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DEMMALLOC_USE_64BIT_OPS=1 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
+	 -sTEXTDECODER=2 -sASSERTIONS=1 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 -sNO_DISABLE_EXCEPTION_CATCHING \
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js \
          --closure-args=--externs=lib/webgpu-closure-externs.js
