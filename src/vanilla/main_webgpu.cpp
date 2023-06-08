@@ -145,7 +145,6 @@ std::cout << "wgpu_buffer_read_mapped_range" << std::endl;
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 std::cout << "output var:" << output << std::endl;
 std::cout << "output var:" << &output << std::endl;
-std::cout << "output var:" << output[0] << std::endl;
 // double * outputd;
 // wgpu_buffer_read_mapped_range(mapBuffer,0,0,&outputd,bufferSize);
 // std::cout << &outputd << std::endl;
