@@ -34,7 +34,7 @@ WGpuQuerySet querySet=0;
 void *userDataA;
 WGpuRequestAdapterOptions options={};
 
-int bufferSize = 64 * sizeof(unsigned int);
+unsigned int bufferSize = 64 * sizeof(unsigned int);
 
 const char *computeShader =
 "@group(0) @binding(0) var<storage,read> inputBuffer: array<u32,64>;"
