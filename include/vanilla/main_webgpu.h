@@ -44,7 +44,7 @@
 
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
-#include <boost/context/fiber.hpp>
+// #include <boost/context/fiber.hpp>
 // #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/random.hpp>
 #include <boost/random/random_device.hpp>
