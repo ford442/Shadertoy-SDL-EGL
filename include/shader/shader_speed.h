@@ -411,12 +411,13 @@ char * frg_ftr=frg_ftr_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
-
+unsigned int uniBlock;
+  
 GPU gpu;
 
 public:
   
-unsigned int uniBlock;
+
 
 static inline void nanoPause(){
 nanosleep(&req2,&rem);
