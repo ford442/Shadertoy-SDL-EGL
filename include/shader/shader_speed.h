@@ -415,6 +415,8 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 GPU gpu;
 
 public:
+  
+unsigned int uniBlock;
 
 static inline void nanoPause(){
 nanosleep(&req2,&rem);
@@ -530,7 +532,7 @@ clk_l=true;
 }
 
 // glUniform1f(uni_tme,d_time.at(0,0));
-glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBindBuffer(GL_UNIFORM_BUFFER,&uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,d_time.at(0,0)); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 
@@ -852,7 +854,6 @@ glLinkProgram(S1.at(0,0,0));
       // uni block
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
-unsigned int uniBlock;
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_STATIC_DRAW);
