@@ -163,17 +163,17 @@ inline char frg_hdr_src[1000]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
 "layout (std140) uniform uniBlock{"
-"float iTime;"
-"};"
-"uniform float iTimeDelta;"
+"uniform float iSampleRate;"
 "uniform float iFrameRate;"
+"};"
+"uniform float iTime;"
+"uniform float iTimeDelta;"
 "uniform int iFrame;"
 "uniform vec4 iDate;"
 "uniform float iChannelTime[4];"
 "uniform vec3 iChannelResolution[4];"
 "uniform vec3 iResolution;"
 "uniform vec4 iMouse;"
-"uniform float iSampleRate;"
 "uniform sampler2D iChannel0;"
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
@@ -530,10 +530,7 @@ else{
 clk_l=true;
 }
 
-// glUniform1f(uni_tme,d_time.at(0,0));
-// glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferSubData(GL_UNIFORM_BUFFER,0,4,&d_time.at(0,0)); 
-// glBindBuffer(GL_UNIFORM_BUFFER,0);
+glUniform1f(uni_tme,d_time.at(0,0));
 
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
@@ -888,10 +885,10 @@ uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
-uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
+// uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
 uni_res=glGetUniformLocation(S1.at(0,0,0),"iResolution");
 uni_mse=glGetUniformLocation(S1.at(0,0,0),"iMouse");
-uni_srate=glGetUniformLocation(S1.at(0,0,0),"iSampleRate");
+// uni_srate=glGetUniformLocation(S1.at(0,0,0),"iSampleRate");
 smp_chn_res=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution");
 smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
@@ -959,14 +956,21 @@ short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 
-glUniform1f(uni_srate,44100.0f);
+// glUniform1f(uni_srate,44100.0f);
+  
 nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
+  
 iFps=60;
-glUniform1f(uni_fps,iFps);
+// glUniform1f(uni_fps,iFps);
+  // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBufferSubData(GL_UNIFORM_BUFFER,0,4,44100.0f); 
+glBufferSubData(GL_UNIFORM_BUFFER,4,4,iFps); 
+// glBindBuffer(GL_UNIFORM_BUFFER,0);
+
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
