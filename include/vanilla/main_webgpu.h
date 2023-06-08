@@ -56,7 +56,7 @@ std::chrono::steady_clock::time_point t2;
 
 #include <iostream>
 
-using namespace std;
+// using namespace std;
 using namespace boost::numeric::ublas;
 using namespace boost::random;
 
