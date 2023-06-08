@@ -82,11 +82,6 @@ using tV=tensor<v128_t>;
 
 constexpr float PI = 3.14159265358979323846f;
 
-using glm::mat4x4;
-using glm::vec4;
-using glm::vec3;
-using glm::vec2;
-
 using namespace std;
 
 #include "../../lib/lib_webgpu.h"
