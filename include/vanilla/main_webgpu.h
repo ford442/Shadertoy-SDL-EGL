@@ -84,22 +84,6 @@ constexpr float PI = 3.14159265358979323846f;
 
 using namespace std;
 
-#include "../../lib/lib_webgpu.h"
-
-WGpuAdapter adapter=0;
-WGpuDevice device=0;
-WGpuBindGroupLayout bindGroupLayout=0;
-WGpuComputePipeline computePipeline=0;
-WGpuQueue queue=0;
-WGpuComputePassDescriptor computePassDescriptor={};
-WGpuBufferDescriptor bufferDescriptorI={};
-WGpuBufferDescriptor bufferDescriptorO={};
-WGpuBufferDescriptor bufferDescriptorM={};
-WGpuBufferBindingLayout bufferBindingLayout1={};
-WGpuBufferBindingLayout bufferBindingLayout2={};
-WGpuBufferBindingLayout bufferBindingLayout3={};
-WGpuBuffer inputBuffer=0;
-WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 void init2(){
 
 }
