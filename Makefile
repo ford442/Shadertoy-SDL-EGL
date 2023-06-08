@@ -17,7 +17,7 @@ b3_vanilla_webgpu:
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 em++ lib/lib_webgpu_cpp20.cpp -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc lib_webgpu_cpp20.o lib_webgpu.o libwebgpu.a 
+	 emcc lib_webgpu_cpp20.o lib_webgpu.o -o libwebgpu.a 
 	 emranlib libwebgpu.a
 	 emcc src/vanilla/js.c -c -std=gnu17 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
 	 emcc main_webgpu.o js.o libwebgpu.a -o w3000.js -mllvm -std=gnu17 -std=gnu++20 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
