@@ -528,7 +528,12 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 else{
 clk_l=true;
 }
-glUniform1f(uni_tme,d_time.at(0,0));
+
+// glUniform1f(uni_tme,d_time.at(0,0));
+glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBufferSubData(GL_UNIFORM_BUFFER,0,4,d_time.at(0,0)); 
+glBindBuffer(GL_UNIFORM_BUFFER,0);
+
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
@@ -590,6 +595,7 @@ glUniform1i(smp_chn[3],1);
 }
 }
   */
+  
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
