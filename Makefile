@@ -23,7 +23,7 @@ b3_vanilla_webgpu:
 	 -g -mllvm -std=gnu17 -std=gnu++20 \
 	 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=16mb \
-	 -sINITIAL_MEMORY=2048mb \
+	 -sINITIAL_MEMORY=1024mb \
 	 -lmath.js -lhtml5.js -lint53.js -msimd128 \
 	 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs \
