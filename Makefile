@@ -29,7 +29,7 @@ b3_vanilla_webgpu:
 	 -sABORTING_MALLOC=0 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -rtlib=compiler-rt -sUSE_SDL=0 -sFILESYSTEM=0 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
-	 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 -sASSERTIONS=2 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 \
+	 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 -sASSERTIONS=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js --js-library lib/lib_webgpu.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js \
