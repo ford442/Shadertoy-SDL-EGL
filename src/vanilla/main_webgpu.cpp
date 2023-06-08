@@ -142,7 +142,7 @@ std::cout << "at computeDoneCall" << std::endl;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 std::cout << "at mapCallback!" << std::endl;
 std::cout << "wgpu_buffer_read_mapped_range" << std::endl;
-float *output=(float*)wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
+float *output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 std::cout << "output var:" << output << std::endl;
 std::cout << "output var:" << &output << std::endl;
 std::cout << "output var:" << output[0] << std::endl;
