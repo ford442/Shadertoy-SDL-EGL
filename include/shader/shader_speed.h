@@ -162,9 +162,9 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-// "layout (std140,binding=0) uniform uniBlock{"
-// "};"
-"uniform float iTime;"
+"layout (std140) uniform uniBlock{"
+"float iTime;"
+"};"
 "uniform float iTimeDelta;"
 "uniform float iFrameRate;"
 "uniform int iFrame;"
@@ -812,7 +812,7 @@ glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
 glFrontFace(GL_CW);
-// glEnable(GL_CULL_FACE);
+glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
@@ -842,7 +842,7 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
-  /*
+
       // uni block
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
@@ -852,7 +852,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_STATIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
-*/
+
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
