@@ -86,7 +86,6 @@ using namespace std;
 
 #include "../../lib/lib_webgpu.h"
 
-
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuBindGroupLayout bindGroupLayout=0;
@@ -268,7 +267,6 @@ void ObtainedWebGpuAdapter(WGpuAdapter result,void *userData){
 adapter=result;
 wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
-
 
 void init1(){
 
