@@ -6,11 +6,12 @@
 #define TRUE 1
 #endif
 
+#define _XOPEN_SOURCE 700
+
 #pragma pack(4)
 #pragma fenv_access(on)             // enable environment sensitivity
 // #pragma float_control(precise, on)  // enable precise semantics
 // #pragma float_control(except, on)   // enable exception semantics
-
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
 #pragma STDC FP_CONTRACT ON
@@ -24,8 +25,6 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP 1
-
-#define _XOPEN_SOURCE 700
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
@@ -163,9 +162,22 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"uniform float iTime;uniform float iTimeDelta;uniform float iFrameRate;uniform int iFrame;uniform vec4 iDate;uniform float iChannelTime[4];"
-"uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
-"uniform vec3 iChannelResolution[4];uniform vec3 iResolution;uniform vec4 iMouse;uniform float iSampleRate;"
+"layout (std140,binding=0) uniform uniBlock{"
+"float iTime;"
+"float iTimeDelta;"
+"float iFrameRate;"
+"int iFrame;"
+"vec4 iDate;"
+"float iChannelTime[4];"
+"vec3 iChannelResolution[4];"
+"vec3 iResolution;"
+"vec4 iMouse;"
+"float iSampleRate;"
+"};"
+"uniform sampler2D iChannel0;"
+"uniform sampler2D iChannel1;"
+"uniform sampler2D iChannel2;"
+"uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
@@ -814,6 +826,8 @@ gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 nanoPause();
+  
+
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
@@ -830,6 +844,16 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
+
+    // uni block
+unsigned int uniBlock;
+glGenBuffers(1, &uniBlock);
+glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBufferData(GL_UNIFORM_BUFFER,128,NULL,GL_STATIC_DRAW);
+glBindBuffer(GL_UNIFORM_BUFFER,0);
+unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
+glUniformBlockBinding(S1.at(0,0,0),uniIndex,0);
+
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
