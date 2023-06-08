@@ -18,7 +18,7 @@ b3_vanilla_webgpu:
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sINITIAL_MEMORY=2048mb \
 	 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 -lmath.js -lhtml5.js -lint53.js -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -sABORTING_MALLOC=0 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DEMMALLOC_USE_64BIT_OPS=1 \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGPU=1 \
 	 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 -sASSERTIONS=1 -sPRECISE_F32=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js \
