@@ -69,7 +69,7 @@ mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 for(int i=0;i<input.size();++i){
-input[i]=4242;
+input[i]=42;
 }
 shaderModuleDescriptor={computeShader,0,NULL};
 std::cout << "wgpu_device_create_shader_module" << std::endl;
@@ -117,11 +117,11 @@ std::cout << "wgpu_compute_pass_encoder_set_pipeline" << std::endl;
 wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);	
 std::cout << "wgpu_encoder_set_bind_group" << std::endl;
 wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
-uint32_t invocationCount=bufferSize/sizeof(float);
+uint32_t invocationCount=bufferSize/sizeof(unsigned int);
 uint32_t workgroupSize=32;
 queue=wgpu_device_get_queue(device);
 std::cout << "filling input buffer" << std::endl;
-wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(float));
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(unsigned int));
 	// This ceils invocationCount / workgroupSize
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 std::cout << "inputBuffer: " << inputBuffer << std::endl;
@@ -141,7 +141,6 @@ WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData)
 std::cout << "at computeDoneCall" << std::endl;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 std::cout << "at mapCallback!" << std::endl;
-// std::vector<double>output(bufferSize/sizeof(float));
 std::cout << "wgpu_buffer_read_mapped_range" << std::endl;
 auto output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 std::cout << &output << std::endl;
