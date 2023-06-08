@@ -844,13 +844,13 @@ glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
   
       // uni block
+unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
+glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 unsigned int uniBlock;
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_STATIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
-unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
-glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
 GLsizei * binLength;
@@ -876,6 +876,8 @@ const GLuint atb_pos=glGetAttribLocation(S1.at(0,0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
+  
+  
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
