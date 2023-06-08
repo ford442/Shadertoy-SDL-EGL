@@ -1,56 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-#include "../../lib/lib_webgpu.h"
-
-WGpuAdapter adapter=0;
-WGpuDevice device=0;
-WGpuBindGroupLayout bindGroupLayout=0;
-WGpuComputePipeline computePipeline=0;
-WGpuQueue queue=0;
-WGpuComputePassDescriptor computePassDescriptor={};
-WGpuBufferDescriptor bufferDescriptorI={};
-WGpuBufferDescriptor bufferDescriptorO={};
-WGpuBufferDescriptor bufferDescriptorM={};
-WGpuBufferBindingLayout bufferBindingLayout1={};
-WGpuBufferBindingLayout bufferBindingLayout2={};
-WGpuBufferBindingLayout bufferBindingLayout3={};
-WGpuBuffer inputBuffer=0;
-WGpuShaderModuleDescriptor shaderModuleDescriptor={};
-WGpuBuffer outputBuffer=0;
-WGpuBuffer mapBuffer=0;
-WGpuBuffer uniBuffer=0;
-WGpuShaderModule cs=0;
-WGpuCommandBufferDescriptor commandBufferDescriptor={};
-WGpuCommandBuffer commandBuffer=0;
-WGpuCommandEncoder encoder=0;
-WGpuComputePassEncoder computePass=0;
-WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
-WGpuBindGroupEntry bindGroupEntry[2]={};
-WGpuBindGroup bindGroup=0;
-WGpuPipelineLayout pipelineLayout=0;
-WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
-WGpuDeviceDescriptor deviceDescriptor={};
-WGpuQuerySet querySet=0;
-void *userDataA;
-WGpuRequestAdapterOptions options={};
-
-float bufferSize=64*sizeof(float);
-
-const char *computeShader =
-"@group(0) @binding(0) var<storage,read> inputBuffer: array<f32,64>;"
-"@group(0) @binding(1) var<storage,read_write> outputBuffer: array<f32,64>;"
-// The function to evaluate for each element of the processed buffer
-"fn f(x: f32) -> f32 {"
-"return 2.0 * x + 0.42;"
-"}"
-"@compute @workgroup_size(32)"
-"fn computeStuff(@builtin(global_invocation_id) global_id: vec3<u32>,@builtin(local_invocation_id) local_id: vec3<u32>) {"
-    // Apply the function f to the buffer element at index id.x:
-// "outputBuffer[global_id.x] = f(inputBuffer[global_id.x]);"
-"outputBuffer[0] = inputBuffer[0];"
-// "mapBuffer[0] = outputBuffer[0];"
-"}";
-
 void raf(WGpuDevice device){
 std::cout << "skipping querySet" << std::endl;
 std::vector<float>input(bufferSize/sizeof(float));
