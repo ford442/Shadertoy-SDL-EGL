@@ -12,7 +12,7 @@ COMMON_FLAGS += -O0 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=gnu++20 -stdlib=libc++ $(BOOST_FLAGS) -lGL
+	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=gnu++20 -stdlib=libc++ $(BOOST_FLAGS)
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
@@ -23,7 +23,7 @@ b3_vanilla_webgpu:
 	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sTEXTDECODER=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js rSlider.js --pre-js slideOut.js  -lGL \
+	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
          --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
