@@ -496,11 +496,8 @@ glUniform1f(uni_chn_tme0,d_time.at(0,0));
 glUniform1f(uni_chn_tme1,d_time.at(0,0));
 glUniform1f(uni_chn_tme2,d_time.at(0,0));
 glUniform1f(uni_chn_tme3,d_time.at(0,0));
-// nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
-// nanoPause();
 
-  // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 short yr=1900+datE->tm_year;
@@ -510,10 +507,10 @@ short hr=5+datE->tm_hour;
 short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-  if(int(d_time.at(0,0))%60==0){
+if(int(d_time.at(0,0))%60==0){
 glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
-  }
-  // textures
+}
+
 if(uni_i.at(0,0)%30==0.0){
 if(int(d_time.at(0,0))%2==0){
 glActiveTexture(GL_TEXTURE0);
@@ -535,7 +532,6 @@ glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[3],2);
 }
 }
-  */
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
