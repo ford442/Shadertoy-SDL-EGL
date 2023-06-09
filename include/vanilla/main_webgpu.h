@@ -73,4 +73,7 @@ const char * computeShader=
 "outputBuffer[0]=1;"
 "outputBuffer[1]=11;"
 "outputBuffer[2]=222;"
+"outputBuffer[3]=11;"
+"outputBuffer[4]=1;"
+"outputBuffer[5]=11;"
 "}";
