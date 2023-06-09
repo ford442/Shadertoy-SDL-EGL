@@ -400,7 +400,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=5;
+int32_t iFps=60;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -983,7 +983,7 @@ nanoPause();
   // uni subdata
 iFps=1;
 float iRate=44100.0f;
-glUniform1f(uni_fps,iFps);
+// glUniform1f(uni_fps,iFps);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
 glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
