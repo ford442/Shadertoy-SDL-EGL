@@ -77,7 +77,7 @@ GLsizei height=256;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
 unsigned int* Colora=new unsigned int[width*height*sizeof(unsigned int)];
 for(int g=0;g<65536;g++){
-Colora[g]=&resulT[g];
+Colora[g]=int(resulT[g]);
 Colora[g+1]=&resulT[g+1];
 Colora[g+2]=&resulT[g+2];
 Colora[g+3]=&resulT[g+3];
