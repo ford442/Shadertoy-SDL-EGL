@@ -93,7 +93,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 GLuint pbo;
 glGenBuffers(1, &pbo);
 glBindBuffer(GL_TEXTURE_BUFFER, pbo);
-glBufferData(GL_TEXTURE_BUFFER, width*height*sizeof(unsigned char), texture, GL_STATIC_READ);
+glBufferData(GL_TEXTURE_BUFFER, width*height*sizeof(unsigned char), &texture, GL_STATIC_READ);
 // get texture image
 // glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)(0));
 // map pixel buffer
