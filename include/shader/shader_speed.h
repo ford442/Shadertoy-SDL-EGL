@@ -854,7 +854,7 @@ unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_STATIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_STATIC_DRAW);
 // glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
@@ -967,7 +967,7 @@ glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
   
   // uni subdata
-iFps=60;
+iFps=5;
 float iRate=44100.0f;
 // glUniform1f(uni_fps,iFps);
   // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
