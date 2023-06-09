@@ -42,9 +42,7 @@ WGpuBindGroupLayout bindGroupLayout=0;
 WGpuComputePipeline computePipeline=0;
 WGpuQueue queue=0;
 WGpuComputePassDescriptor computePassDescriptor={};
-WGpuBufferDescriptor bufferDescriptorI={
-bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST;
-,false};
+WGpuBufferDescriptor bufferDescriptorI={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={};
 WGpuBufferDescriptor bufferDescriptorM={};
 WGpuBufferBindingLayout bufferBindingLayout1={};
