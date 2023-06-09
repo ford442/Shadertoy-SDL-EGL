@@ -34,7 +34,7 @@
 
 #include "../../lib/lib_webgpu.h"
 
-float bufferSize=64*sizeof(float);
+uint64_t bufferSize=64*sizeof(float);
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
