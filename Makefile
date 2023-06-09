@@ -14,20 +14,14 @@ b3_vanilla_webgpu:
 	 em++ src/vanilla/main_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 \
 	 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ lib/lib_webgpu_cpp20.cpp lib/lib_webgpu.cpp -static -sUSE_BOOST_HEADERS=1 \
-	 -std=gnu17 -std=gnu++20 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
-	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc src/vanilla/js.c -c -std=gnu17 -mtail-call -mmultivalue -mbulk-memory \
-	 -mnontrapping-fptoint -msign-ext -msimd128
-	 emcc main_webgpu.o js.o lib_webgpu_cpp20.o lib_webgpu.o -o w3000.js \
+	 em++ lib/lib_webgpu_cpp20.cpp lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 emcc main_webgpu.o lib_webgpu_cpp20.o lib_webgpu.o -o w3001.js \
 	 -g -mllvm -std=gnu17 -std=gnu++20 \
 	 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=16mb \
-	 -sINITIAL_MEMORY=1024mb \
-	 -lmath.js -lhtml5.js -lint53.js -msimd128 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -msimd128 \
 	 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
-	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -rtlib=compiler-rt -sUSE_SDL=0 \
+	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt -sUSE_SDL=0 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
