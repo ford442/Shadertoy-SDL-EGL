@@ -19,9 +19,9 @@
 uint32_t workgroupSize=1;
 uint64_t FbufferSize=64*sizeof(float);
 uint64_t IbufferSize=64*sizeof(int);
-std::vector<float>input(FbufferSize/sizeof(float));
+std::vector<float>input(IbufferSize/sizeof(float));
 const char * Entry="computeStuff";
-uint32_t invocationCount=FbufferSize/sizeof(float);
+uint32_t invocationCount=IbufferSize/sizeof(float);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
 void * resulT;
@@ -61,7 +61,7 @@ WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|W
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char * computeShader=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,64>;"
 "@compute@workgroup_size(1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
