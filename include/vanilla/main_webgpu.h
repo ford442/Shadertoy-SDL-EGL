@@ -19,11 +19,11 @@
 uint32_t workgroupSize=1;
 uint64_t FbufferSize=64*sizeof(float);
 uint64_t IbufferSize=64*sizeof(unsigned int);
-std::vector<float>input(bufferSize/sizeof(float));
+std::vector<float>input(FbufferSize/sizeof(float));
 const char * Entry="computeStuff";
-uint32_t invocationCount=bufferSize/sizeof(float);
+uint32_t invocationCount=FbufferSize/sizeof(float);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(bufferSize/sizeof(unsigned int));
+std::vector<unsigned int>outputd(FbufferSize/sizeof(unsigned int));
 void * resulT;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
@@ -55,9 +55,9 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-WGpuBufferDescriptor bufferDescriptorI={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={FbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={UbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={UbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char * computeShader=
