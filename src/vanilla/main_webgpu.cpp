@@ -1,4 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
+#include <boost/algorithm/hex.hpp>
 
 void raf(WGpuDevice device){
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
