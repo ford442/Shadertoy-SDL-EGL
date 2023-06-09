@@ -862,7 +862,7 @@ glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
   
   // uni non-block
-GLint time_buf_loc=GetUniformLocation(S1.at(0,0,0),"iTime");
+GLint time_buf_loc=glGetUniformLocation(S1.at(0,0,0),"iTime");
 GLint time_buf_siz=GetUniformBufferSizeEXT(S1.at(0,0,0),time_buf_loc);
 GLuint Ubuffer;
 glGenBuffers(1,&Ubuffer);
