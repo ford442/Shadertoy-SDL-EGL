@@ -34,6 +34,8 @@
 
 #include "../../lib/lib_webgpu.h"
 
+float bufferSize=64*sizeof(float);
+
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuBindGroupLayout bindGroupLayout=0;
@@ -67,8 +69,6 @@ WGpuDeviceDescriptor deviceDescriptor={};
 WGpuQuerySet querySet=0;
 void *userDataA;
 WGpuRequestAdapterOptions options={};
-
-float bufferSize=64*sizeof(float);
 
 const char *computeShader =
 "@group(0) @binding(0) var<storage,read> inputBuffer: array<f32,64>;"
