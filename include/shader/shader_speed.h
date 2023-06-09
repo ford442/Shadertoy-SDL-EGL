@@ -129,6 +129,7 @@ inline char cm_hdr_src[1800]=
 "#extension GL_NV_float_buffer : enable\n"
 "#extension GL_EXT_bindable_uniform : enable\n"
 "#extension GL_EXT_geometry_shader4 : enable\n"
+"#extension GL_ARB_enhanced_layouts : enable\n"
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
 "#pragma STDGL(precise all)\n"
@@ -164,11 +165,11 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-// "layout (std140) uniform uniBlock{"
-"uniform float iTime;"
-// "};"
+"layout (std140) uniform uniBlock{"
 "uniform float iSampleRate;"
 "uniform float iFrameRate;"
+"};"
+"uniform float iTime;"
 "uniform float iTimeDelta;"
 "uniform int iFrame;"
 "uniform vec4 iDate;"
@@ -808,7 +809,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
-  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
@@ -854,16 +854,14 @@ glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
   
 glLinkProgram(S1.at(0,0,0));
 
-  /*
       // uni block
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_DYNAMIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_DYNAMIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
-*/
 
 GLsizei * binLength;
 GLenum * binaryFormat;
@@ -889,7 +887,6 @@ glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
   
-  
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
@@ -904,15 +901,16 @@ smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
     
+  /*
   // uni non-block
-
 GLuint Ubuffer;
 glGenBuffers(1,&Ubuffer);
 glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
 glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
-
+*/
+  
     // texture
 GLsizei width=1;
 GLsizei height=1;
@@ -972,9 +970,9 @@ short hr=5+datE->tm_hour;
 short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+// glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 
-glUniform1f(uni_srate,44100.0f);
+// glUniform1f(uni_srate,44100.0f);
   
 nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
@@ -983,13 +981,13 @@ glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
   
   // uni subdata
-// iFps=5;
-// float iRate=44100.0f;
-// glUniform1f(uni_fps,iFps);
-  // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-// glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
-// glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
-// glBindBuffer(GL_UNIFORM_BUFFER,0);
+iFps=1;
+float iRate=44100.0f;
+glUniform1f(uni_fps,iFps);
+glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
+glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
+glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
@@ -997,8 +995,8 @@ mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
-// glEnable(GL_SCISSOR_TEST);
-// glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+glEnable(GL_SCISSOR_TEST);
+glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
