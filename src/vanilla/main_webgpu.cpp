@@ -45,7 +45,7 @@ double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
          
            
            
-std::array<double,1>outP(std::to_array<double,1>({&output}));           
+std::array<double,1>outP(std::to_array<double,1>({output}));           
 std::cout << &output << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 std::cout << &resulT << std::endl;
