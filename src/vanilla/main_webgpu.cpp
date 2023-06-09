@@ -73,14 +73,16 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 emscripten_webgl_make_context_current(ctx);
     // texture
-GLsizei width=1;
-GLsizei height=1;
+GLsizei width=256;
+GLsizei height=256;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
 unsigned char* Colora=new unsigned char[width*height*sizeof(unsigned char)];
-Colora[0]=0;
-Colora[1]=222;
-Colora[2]=0;
-Colora[3]=230;
+for(int g=0;g<65536;g++){
+Colora[g+0]=0;
+Colora[g+1]=222;
+Colora[g+2]=0;
+Colora[g+3]=230;
+}
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
