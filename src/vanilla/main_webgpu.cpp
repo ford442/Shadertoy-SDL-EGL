@@ -71,7 +71,7 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-           
+emscripten_webgl_make_context_current(ctx);
     // texture
 GLsizei width=1;
 GLsizei height=1;
