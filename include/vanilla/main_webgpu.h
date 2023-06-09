@@ -18,12 +18,12 @@
 
 uint32_t workgroupSize=1;
 uint64_t FbufferSize=64*sizeof(float);
-uint64_t IbufferSize=64*sizeof(unsigned int);
+uint64_t IbufferSize=64*sizeof(int);
 std::vector<float>input(FbufferSize/sizeof(float));
 const char * Entry="computeStuff";
 uint32_t invocationCount=FbufferSize/sizeof(float);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(IbufferSize/sizeof(unsigned int));
+std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
 void * resulT;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
@@ -62,9 +62,9 @@ WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false}
 
 const char * computeShader=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,64>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,64>;"
 "@compute@workgroup_size(1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
-"var ff: f32=inputBuffer[0];"
-"outputBuffer[0]=ff;"
+// "var ff: f32=inputBuffer[0];"
+"outputBuffer[0]=42;"
 "}";
