@@ -14,7 +14,8 @@ b3_vanilla_webgpu:
 	 em++ src/vanilla/main_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 \
 	 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ lib/lib_webgpu_cpp20.cpp lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o lib_webgpu_cpp20.o lib_webgpu.o -o w3001.js \
 	 -g -mllvm -std=gnu17 -std=gnu++20 \
 	 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
