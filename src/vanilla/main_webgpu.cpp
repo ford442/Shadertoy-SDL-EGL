@@ -50,8 +50,8 @@ std::cout << &outP << std::endl;
 std::cout << &userData << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 std::cout << &resulT << std::endl;
-           std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
-std::cout << &outP3 << std::endl;
+      //     std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
+std::cout << &resulT << std::endl;
 
            
            
