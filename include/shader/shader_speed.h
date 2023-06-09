@@ -156,7 +156,7 @@ inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 inline char frg_hdr_src[1000]=
-"precision mediump sampler3D;precision highp sampler2D;"
+"precision highp atomic_uint;precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
@@ -803,6 +803,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
