@@ -169,8 +169,9 @@ inline char frg_hdr_src[1000]=
 "uniform float iSampleRate;"
 "uniform float iFrameRate;"
 "uniform int iFrame;"
-"};"
 "uniform float iTime;"
+"};"
+
 "uniform float iTimeDelta;"
 "uniform vec4 iDate;"
 "uniform float iChannelTime[4];"
@@ -533,7 +534,7 @@ else{
 clk_l=true;
 }
 
-glUniform1f(uni_tme,d_time.at(0,0));
+// glUniform1f(uni_tme,d_time.at(0,0));
 
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
@@ -597,9 +598,10 @@ glUniform1i(smp_chn[3],1);
 }
   */
   
-  // buffer frame
+  // buffer frame/time
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
+glBufferSubData(GL_UNIFORM_BUFFER,8,4,&d_time.at(0,0)); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 // glUniform1i(uni_frm,uni_i.at(0,0));
@@ -864,7 +866,7 @@ unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_DYNAMIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,16,NULL,GL_DYNAMIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
@@ -985,15 +987,6 @@ nanoPause();
 glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
   
-  // uni subdata
-iFps=1;
-float iRate=44100.0f;
-// glUniform1f(uni_fps,iFps);
-glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
-glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
-glBufferSubData(GL_UNIFORM_BUFFER,8,4,0); 
-glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
@@ -1012,6 +1005,17 @@ u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>
 u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
+  
+    // uni subdata
+float iRate=44100.0f;
+// glUniform1f(uni_fps,iFps);
+glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
+glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
+glBufferSubData(GL_UNIFORM_BUFFER,8,4,0); 
+glBufferSubData(GL_UNIFORM_BUFFER,12,4,&u_time.time_spana.count()); 
+glBindBuffer(GL_UNIFORM_BUFFER,0);
+
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
