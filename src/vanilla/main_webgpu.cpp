@@ -48,7 +48,7 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
 std::cout << resulT << std::endl;
 std::cout << &resulT << std::endl;
 std::string ouUt=resulT;
-int ouUt2=&resulT;
+int ouUt2=resulT;
            std::cout << ouUt << std::endl;
 std::cout << ouUt2 << std::endl;
 
