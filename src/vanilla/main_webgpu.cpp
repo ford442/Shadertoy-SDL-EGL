@@ -101,6 +101,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
+Module.ccall("startWebGPU");
 });}
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
