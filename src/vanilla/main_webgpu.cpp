@@ -1,13 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
-std::vector<float>input(bufferSize/sizeof(float));
 
 void raf(WGpuDevice device){
-bufferDescriptorO.mappedAtCreation=false;
-bufferDescriptorO.size=bufferSize;
-bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
-bufferDescriptorM.mappedAtCreation=false;
-bufferDescriptorM.size=bufferSize;
-bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
@@ -16,9 +9,6 @@ input[i]=1.01;
 }
 shaderModuleDescriptor={computeShader,0,NULL};
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
-bufferBindingLayout1.type=3;
-bufferBindingLayout2.type=2;
-bufferBindingLayout3.type=2;
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[0].type=1;
