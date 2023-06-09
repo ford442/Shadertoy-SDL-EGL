@@ -61,6 +61,8 @@ WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|W
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char * computeShader=
+"@group(0)@binding(2)  var storageTexture : texture_storage_2d<rgba8unorm,write>;"
+
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,64>;"
 "@compute@workgroup_size(3)"
