@@ -50,7 +50,7 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
            
 std::cout << resulT << std::endl;
            
-std::cout << "Hex 0x2a = " << boost::algorithm::unhex(st) << std::endl;
+std::cout << "Hex 0x2a = " << std::endl << boost::algorithm::unhex(st);
 
            
            
