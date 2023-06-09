@@ -43,16 +43,8 @@ commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
-
-           char st[7]="0x2a00";
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
-           
 std::cout << resulT << std::endl;
-           
-std::cout << "Hex 0x2a = " << std::endl << boost::algorithm::unhex(st);
-
-           
-           
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
 };
