@@ -40,16 +40,21 @@ wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
 commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
-WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
          
            
            
 std::array<double,1>outP(std::to_array<double,1>({output}));           
+std::array<double,1>outP2(std::to_array<double,1>({userData}));           
 std::cout << &output << std::endl;
+std::cout << &outP << std::endl;
+std::cout << &outP2 << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 std::cout << &resulT << std::endl;
-           
+           std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
+std::cout << &outP3 << std::endl;
+
            
            
 };
