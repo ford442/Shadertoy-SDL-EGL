@@ -78,9 +78,9 @@ GLuint texture=0,textureb=0,texturec=0,textured=0;
 unsigned int* Colora=new unsigned int[width*height*sizeof(unsigned int)];
 for(int g=0;g<65536;g++){
 Colora[g]=int(resulT[g]);
-Colora[g+1]=&resulT[g+1];
-Colora[g+2]=&resulT[g+2];
-Colora[g+3]=&resulT[g+3];
+Colora[g+1]=int(resulT[g+1]);
+Colora[g+2]=int(resulT[g+2]);
+Colora[g+3]=int(resulT[g+3]);
 }
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
