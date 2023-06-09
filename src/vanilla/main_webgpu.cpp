@@ -2,9 +2,6 @@
 
 void raf(WGpuDevice device){
 std::vector<float>input(bufferSize/sizeof(float));
-bufferDescriptorI.mappedAtCreation=false;
-bufferDescriptorI.size=bufferSize;
-bufferDescriptorI.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST;
 bufferDescriptorO.mappedAtCreation=false;
 bufferDescriptorO.size=bufferSize;
 bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
