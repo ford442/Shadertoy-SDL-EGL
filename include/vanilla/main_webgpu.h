@@ -36,6 +36,8 @@
 
 uint64_t bufferSize=64*sizeof(float);
 
+std::vector<float>input(bufferSize/sizeof(float));
+
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuBindGroupLayout bindGroupLayout=0;
@@ -43,11 +45,11 @@ WGpuComputePipeline computePipeline=0;
 WGpuQueue queue=0;
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuBufferDescriptor bufferDescriptorI={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={};
-WGpuBufferDescriptor bufferDescriptorM={};
-WGpuBufferBindingLayout bufferBindingLayout1={};
-WGpuBufferBindingLayout bufferBindingLayout2={};
-WGpuBufferBindingLayout bufferBindingLayout3={};
+WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
+WGpuBufferBindingLayout bufferBindingLayout2={2};
+WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBuffer inputBuffer=0;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 WGpuBuffer outputBuffer=0;
