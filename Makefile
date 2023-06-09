@@ -12,7 +12,7 @@ COMMON_FLAGS += -O0 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=gnu++20 -stdlib=libc++ $(BOOST_FLAGS) -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
+	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=gnu++20 -stdlib=libc++ $(BOOST_FLAGS) -lGL
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
