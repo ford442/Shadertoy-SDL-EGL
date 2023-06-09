@@ -41,6 +41,8 @@ const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(float);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 std::vector<double>outputd(bufferSize/sizeof(double));
+void * resulT;
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
@@ -72,7 +74,7 @@ WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuQuerySet querySet=0;
 void *userDataA;
-WGpuRequestAdapterOptions options={};
+WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char *computeShader =
 "@group(0) @binding(0) var<storage,read> inputBuffer: array<f32,64>;"
