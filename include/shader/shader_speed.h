@@ -860,16 +860,7 @@ glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_DYNAMIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
-  
-  // uni non-block
-GLint time_buf_loc=glGetUniformLocation(S1.at(0,0,0),"iTime");
-GLint time_buf_siz=GetUniformBufferSizeEXT(S1.at(0,0,0),time_buf_loc);
-GLuint Ubuffer;
-glGenBuffers(1,&Ubuffer);
-glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
-glBufferData(GL_UNIFORM_BUFFER_EXT,time_buf_siz,NULL,GL_STATIC_READ);
-UniformBufferEXT(S1.at(0,0,0),time_buf_loc,Ubuffer);
-  
+
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
@@ -908,7 +899,16 @@ smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
-  
+    
+  // uni non-block
+
+GLuint Ubuffer;
+glGenBuffers(1,&Ubuffer);
+glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
+glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
+UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
+// glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
+
     // texture
 GLsizei width=1;
 GLsizei height=1;
