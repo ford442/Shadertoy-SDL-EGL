@@ -88,20 +88,7 @@ glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-           
-           // create buffer
-GLuint pbo;
-glGenBuffers(1, &pbo);
-glBindBuffer(GL_PIXEL_PACK_BUFFER,pbo);
-glBufferData(GL_PIXEL_PACK_BUFFER,width*height*sizeof(unsigned char), &texture, GL_STATIC_READ);
-// get texture image
-// glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)(0));
-// map pixel buffer
-void * data_ptr=glMapBufferRange(GL_PIXEL_PACK_BUFFER,0,256,GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_RANGE_BIT);
-std::cout << "tex data -" << std::endl;
-std::cout << &data_ptr << std::endl;
-std::cout << data_ptr << std::endl;
-glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+
            
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
