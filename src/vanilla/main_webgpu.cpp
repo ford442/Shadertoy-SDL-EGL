@@ -98,7 +98,7 @@ glBufferData(GL_PIXEL_PACK_BUFFER, width*height*sizeof(unsigned char), 0, GL_STA
 glBindTexture(GL_TEXTURE_2D, texture);
 glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)(0));
 // map pixel buffer
-void * data_ptr = glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+void * data_ptr = glMapBufferRange (GL_PIXEL_PACK_BUFFER,0,4, GL_MAP_READ_BIT );
 std::cout << "tex data -" << std::endl;
 std::cout << &data_ptr << std::endl;
 std::cout << data_ptr << std::endl;
