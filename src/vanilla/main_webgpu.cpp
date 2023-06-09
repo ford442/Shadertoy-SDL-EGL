@@ -43,11 +43,9 @@ WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData)
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 std::cout << output << std::endl;
-void * resulT;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 std::cout << &resulT << std::endl;
 };
-WGPU_MAP_MODE_FLAGS mode1=0x1;
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
@@ -66,7 +64,6 @@ wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice
 }
 
 void gpuStart(){
-options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 }
 
@@ -87,7 +84,8 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
-});}
+});
+}
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
@@ -146,7 +144,6 @@ document.getElementById('di').click();
 });
     
 int main(void){
-sleep(1);
 js_main();
 return 0;
 }
