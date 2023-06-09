@@ -24,7 +24,7 @@ b3_vanilla_webgpu:
 	 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt -sUSE_SDL=0 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
-	 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 \
+	 -sTEXTDECODER=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js --js-library lib/lib_webgpu.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js \
