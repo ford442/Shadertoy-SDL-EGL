@@ -539,6 +539,10 @@ else{
 clk_l=true;
 }
 glUniform1f(uni_tme,d_time.at(0,0));
+glUniform1f(uni_chn_tme0,d_time.at(0,0));
+glUniform1f(uni_chn_tme1,d_time.at(0,0));
+glUniform1f(uni_chn_tme2,d_time.at(0,0));
+glUniform1f(uni_chn_tme3,d_time.at(0,0));
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
@@ -901,6 +905,10 @@ glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
+uni_chn_tme0=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[0]");
+uni_chn_tme1=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[1]");
+uni_chn_tme2=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[2]");
+uni_chn_tme3=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[3]");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
 uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
 uni_res=glGetUniformLocation(S1.at(0,0,0),"iResolution");
