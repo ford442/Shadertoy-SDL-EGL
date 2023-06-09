@@ -163,10 +163,10 @@ inline char frg_hdr_src[1000]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
 "layout (std140) uniform uniBlock{"
-"uniform float iSampleRate;"
-"uniform float iFrameRate;"
+"float iSampleRate;"
+"float iFrameRate;"
+"float iTime;"
 "};"
-"uniform float iTime;"
 "uniform float iTimeDelta;"
 "uniform int iFrame;"
 "uniform vec4 iDate;"
@@ -397,7 +397,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=60;
+int32_t iFps=5;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -804,6 +804,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
