@@ -897,7 +897,10 @@ uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
 uni_res=glGetUniformLocation(S1.at(0,0,0),"iResolution");
 uni_mse=glGetUniformLocation(S1.at(0,0,0),"iMouse");
 uni_srate=glGetUniformLocation(S1.at(0,0,0),"iSampleRate");
-smp_chn_res=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution");
+smp_chn_res0=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[0]");
+smp_chn_res1=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[1]");
+smp_chn_res2=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[2]");
+smp_chn_res3=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[3]");
 smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
@@ -978,7 +981,10 @@ nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 nanoPause();
   
-glUniform3f(smp_chn_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res0,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res1,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res2,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res3,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 
   nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
