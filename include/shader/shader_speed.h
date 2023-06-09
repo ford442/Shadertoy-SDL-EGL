@@ -599,7 +599,7 @@ glUniform1i(smp_chn[3],1);
   
   // buffer frame
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferSubData(GL_UNIFORM_BUFFER,8,4,uni_i.at(0,0)); 
+glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 // glUniform1i(uni_frm,uni_i.at(0,0));
