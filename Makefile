@@ -23,7 +23,7 @@ b3_vanilla_webgpu:
 	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sTEXTDECODER=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 -jsDWEBGPU_DEBUG=1 --pre-js rSlider.js --pre-js slideOut.js  \
+	 -jsDWEBGPU_DEBUG=0 --pre-js rSlider.js --pre-js slideOut.js  \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
          --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
