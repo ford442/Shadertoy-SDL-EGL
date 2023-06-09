@@ -53,10 +53,10 @@ std::cout << resulT[0] << std::endl;
 std::cout << resulT[1] << std::endl;
 std::cout << resulT[2] << std::endl;
 std::cout << resulT[3] << std::endl;
-std::cout << &resulT[0]*10 << std::endl;
-std::cout << &resulT[1]*10 << std::endl;
-std::cout << &resulT[2]*10 << std::endl;
-std::cout << &resulT[3]*10 << std::endl;
+           int lll=&resulT[0];
+           lll=lll*10;
+std::cout << lll << std::endl;
+
 
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
