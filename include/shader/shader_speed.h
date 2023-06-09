@@ -601,7 +601,7 @@ glUniform1i(smp_chn[3],1);
   // buffer frame/time
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
-glBufferSubData(GL_UNIFORM_BUFFER,8,4,&d_time.at(0,0)); 
+glBufferSubData(GL_UNIFORM_BUFFER,12,4,&d_time.at(0,0)); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 // glUniform1i(uni_frm,uni_i.at(0,0));
