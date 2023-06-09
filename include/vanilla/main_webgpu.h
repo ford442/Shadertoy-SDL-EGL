@@ -63,7 +63,7 @@ const char * computeShader=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
 "@compute@workgroup_size(1)"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
+"f32 computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 "outputBuffer[0]=5.0+inputBuffer[0];"
 "return 42.42;"
 "}";
