@@ -42,7 +42,7 @@ commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(buffer,uint32_t(0),bufferSize);
-double * ptrDouble=output;
+double * ptrDouble=&output;
       
 // std::array<double,1>outP(std::to_array<double,1>({output}));           
 // std::array<double,1>outP2(std::to_array<double,1>({&userData}));           
