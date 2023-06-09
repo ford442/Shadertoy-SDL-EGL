@@ -81,7 +81,7 @@ for(int g=0;g<65536;g++){
 Colora[g+0]=0;
 Colora[g+1]=222;
 Colora[g+2]=0;
-Colora[g+3]=&resulT[g];
+Colora[g+3]=resulT[g];
 }
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
