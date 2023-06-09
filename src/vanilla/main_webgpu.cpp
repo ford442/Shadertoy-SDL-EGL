@@ -1,5 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
-#include <boost/algorithm/hex.hpp>
+// #include <boost/algorithm/hex.hpp>
 
 void raf(WGpuDevice device){
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
@@ -54,7 +54,24 @@ std::cout << resulT[3] << std::endl;
            
 std::cout << &output << std::endl;
 std::cout << output << std::endl;
-
+           
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_TRUE;
+attr.premultipliedAlpha=EM_TRUE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=2;
+attr.minorVersion=0;
+ctx=emscripten_webgl_create_context("#scanvas",&attr);
+           
     // texture
 GLsizei width=1;
 GLsizei height=1;
