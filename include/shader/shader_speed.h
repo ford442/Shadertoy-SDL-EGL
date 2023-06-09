@@ -847,6 +847,7 @@ PRGin(shd_prg);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
+  
 glLinkProgram(S1.at(0,0,0));
 
   /*
@@ -861,13 +862,13 @@ glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
   
   // uni non-block
-GLint time_buf_loc=glGetUniformLocation(S1.at(0,0,0),"iTime");
-GLint time_buf_siz=glGetUniformBufferSize(S1.at(0,0,0),time_buf_loc);
+GLint time_buf_loc=GetUniformLocation(S1.at(0,0,0),"iTime");
+GLint time_buf_siz=GetUniformBufferSizeEXT(S1.at(0,0,0),time_buf_loc);
 GLuint Ubuffer;
 glGenBuffers(1,&Ubuffer);
 glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
 glBufferData(GL_UNIFORM_BUFFER_EXT,time_buf_siz,NULL,GL_STATIC_READ);
-glUniformBufferEXT(S1.at(0,0,0),time_buf_loc,Ubuffer);
+UniformBufferEXT(S1.at(0,0,0),time_buf_loc,Ubuffer);
   
 GLsizei * binLength;
 GLenum * binaryFormat;
