@@ -2,6 +2,7 @@
 #include "../../include/vanilla/defs.h"
 #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
+
 #include <chrono>
 #include <iostream>
 #include <cassert>
