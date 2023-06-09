@@ -59,9 +59,9 @@ long lenG=4.0L;
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),lenG);
 std::cout << output << std::endl;
 std::vector<double>outputd(1/sizeof(double));
-
-wgpu_buffer_read_mapped_range(mapBuffer,output,0,&outputd,lenG);
-std::cout << &outputd << std::endl;
+void * resulT;
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,lenG);
+std::cout << &resulT << std::endl;
 };
 WGPU_MAP_MODE_FLAGS mode1=0x1;
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
