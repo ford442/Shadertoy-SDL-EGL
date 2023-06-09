@@ -162,11 +162,11 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"layout (std140) uniform uniBlock{"
+// "layout (std140) uniform uniBlock{"
+"uniform float iTime;"
+// "};"
 "uniform float iSampleRate;"
 "uniform float iFrameRate;"
-"uniform float iTime;"
-"};"
 "uniform float iTimeDelta;"
 "uniform int iFrame;"
 "uniform vec4 iDate;"
@@ -858,6 +858,14 @@ glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_DYNAMIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
+  // uni non-block
+time_buf_loc=glGetUniformLocation(S1.at(0,0,0),"iTime");
+time_buf_siz=GetUniformBufferSize(S1.at(0,0,0),time_buf_loc);
+glGenBuffers(1,&Ubuffer);
+glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
+glBufferData(GL_UNIFORM_BUFFER_EXT,time_buf_siz,NULL,STATIC_READ);
+glUniformBufferEXT(S1.at(0,0,0),time_buf_loc,Ubuffer);
+  
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
