@@ -67,4 +67,6 @@ const char * computeShader=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 // "var ff: f32=inputBuffer[0];"
 "outputBuffer[0]=inputBuffer[42];"
+"outputBuffer[1]=inputBuffer[43];"
+"outputBuffer[2]=inputBuffer[44];"
 "}";
