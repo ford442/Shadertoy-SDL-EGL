@@ -55,10 +55,12 @@ wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bu
 commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),4);
+long lenG=1.0L;
+double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),lenG);
 std::cout << output << std::endl;
-std::vector<double>outputd(bufferSize/sizeof(float));
-wgpu_buffer_read_mapped_range(mapBuffer,0,0,&outputd,4);
+std::vector<double>outputd(1/sizeof(double));
+
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&outputd,lenG);
 std::cout << &outputd << std::endl;
 };
 WGPU_MAP_MODE_FLAGS mode1=0x1;
