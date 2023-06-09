@@ -1,4 +1,5 @@
 LDFLAGS += -Wl,-O0,--lto-O0,--stack-first
+
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
@@ -11,23 +12,19 @@ COMMON_FLAGS += -O0 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++20 \
-	 -stdlib=libc++ -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
-	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 em++ src/vanilla/main_webgpu.cpp -c-std=gnu17 -std=gnu++20 -stdlib=libc++
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
-	 -g -mllvm -std=gnu17 -std=gnu++20 \
-	 -mtail-call -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
-	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=16mb \
-	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -msimd128 \
-	 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
+	 -mllvm -std=gnu17 -std=gnu++20 \
+	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 -sTOTAL_STACK=16mb \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt -sUSE_SDL=0 \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
+	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sTEXTDECODER=2 -sPRECISE_F32=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js rSlider.js --pre-js slideOut.js --js-library lib/lib_webgpu.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js \
+	 --pre-js rSlider.js --pre-js slideOut.js  \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
          --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
 b3_vanilla_llvm:
