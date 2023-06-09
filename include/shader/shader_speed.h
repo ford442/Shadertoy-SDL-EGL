@@ -499,7 +499,7 @@ glUniform1f(uni_chn_tme3,d_time.at(0,0));
 // nanoPause();
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // nanoPause();
-  /*
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -510,12 +510,12 @@ short hr=5+datE->tm_hour;
 short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+  if(int(d_time.at(0,0))%60==0){
 glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
-
+  }
   // textures
 if(uni_i.at(0,0)%30==0.0){
 if(int(d_time.at(0,0))%2==0){
-if(shaderToySeconds%2==0){
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
@@ -524,16 +524,6 @@ glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[2],2);
 glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);
-}else{
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[0],1);
-glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[1],3);
-glActiveTexture(GL_TEXTURE2);
-glUniform1i(smp_chn[2],2);
-glActiveTexture(GL_TEXTURE0);
-glUniform1i(smp_chn[3],0);
-}
 }else{
 if(shaderToySeconds%2!=0){
 glActiveTexture(GL_TEXTURE3);
@@ -544,16 +534,6 @@ glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[2],1);
 glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[3],2);
-}else{
-glActiveTexture(GL_TEXTURE2);
-glUniform1i(smp_chn[0],2);
-glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[1],3);
-glActiveTexture(GL_TEXTURE0);
-glUniform1i(smp_chn[2],0);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[3],1); 
-}
 }
 }
   */
@@ -684,7 +664,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -703,8 +683,8 @@ eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -792,6 +772,7 @@ glStencilMask(0xFF);
 glFrontFace(GL_CW);
 glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR,SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
@@ -819,10 +800,7 @@ PRGin(shd_prg);
 glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
-  
 glLinkProgram(S1.at(0,0,0));
-
-      // uni block
 unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
@@ -830,7 +808,6 @@ glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_STREAM_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
-
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
@@ -854,7 +831,6 @@ const GLuint atb_pos=glGetAttribLocation(S1.at(0,0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 nanoPause();
 glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
-  
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
@@ -903,7 +879,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
 unsigned char* Colorb=new unsigned char[width*height*sizeof(unsigned char)];
 Colorb[0]=0;
-Colorb[1]=0;
+Colorb[1]=255;
 Colorb[2]=0;
 Colorb[3]=128;
 glGenTextures(1,&textureb);
@@ -945,18 +921,13 @@ short hr=5+datE->tm_hour;
 short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-// glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 // glUniform1f(uni_srate,44100.0f);
-nanoPause();
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-nanoPause();
-  
 glUniform3f(smp_chn_res0,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res1,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res2,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res3,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-
-  nanoPause();
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
@@ -973,18 +944,11 @@ u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>
 u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-  
-    // uni subdata
 float iRate=44100.0f;
-// float startTime=float(u_time.time_spana.count());
-// glUniform1f(uni_fps,iFps);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
 glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
-// glBufferSubData(GL_UNIFORM_BUFFER,8,4,0); 
-// glBufferSubData(GL_UNIFORM_BUFFER,12,4,&startTime); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
-
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
