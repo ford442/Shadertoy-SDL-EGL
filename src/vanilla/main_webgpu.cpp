@@ -75,7 +75,7 @@ emscripten_webgl_make_context_current(ctx);
 GLsizei width=256;
 GLsizei height=256;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
-int* Colora=new int[width*height*sizeof(int)];
+int* Colora[width*height];
 for(int g=0;g<65536;g++){
 Colora[g]=int(resulT[g]);
 Colora[g+1]=int(resulT[g+1]);
