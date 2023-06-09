@@ -29,7 +29,6 @@ bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=outputBuffer;
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=0;
-           
 bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
 encoder=wgpu_device_create_command_encoder(device,0);
 computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
@@ -78,17 +77,16 @@ GLsizei height=256;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
 unsigned int* Colora=new unsigned int[width*height*sizeof(unsigned int)];
 for(int g=0;g<65536;g++){
-Colora[g]=resulT[g];
-Colora[g+1]=resulT[g+1];
-Colora[g+2]=resulT[g+2];
-Colora[g+3]=resulT[g+3];
+Colora[g]=&resulT[g];
+Colora[g+1]=&resulT[g+1];
+Colora[g+2]=&resulT[g+2];
+Colora[g+3]=&resulT[g+3];
 }
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-           
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
 };
