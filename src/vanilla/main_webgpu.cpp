@@ -55,6 +55,21 @@ std::cout << resulT[3] << std::endl;
 std::cout << &output << std::endl;
 std::cout << output << std::endl;
 
+    // texture
+GLsizei width=1;
+GLsizei height=1;
+GLuint texture=0,textureb=0,texturec=0,textured=0;
+unsigned char* Colora=new unsigned char[width*height*sizeof(unsigned char)];
+Colora[0]=0;
+Colora[1]=222;
+Colora[2]=0;
+Colora[3]=230;
+glGenTextures(1,&texture);
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
+           
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
 };
