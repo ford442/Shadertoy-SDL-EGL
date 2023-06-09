@@ -29,6 +29,7 @@ bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=outputBuffer;
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=0;
+           
 bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
 encoder=wgpu_device_create_command_encoder(device,0);
 computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
@@ -46,13 +47,10 @@ double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
            
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
            
-          
 std::cout << resulT[0] << std::endl;
 std::cout << resulT[1] << std::endl;
 std::cout << resulT[2] << std::endl;
 std::cout << resulT[3] << std::endl;
-
-
 
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
