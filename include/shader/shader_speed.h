@@ -127,6 +127,8 @@ inline char cm_hdr_src[1800]=
 "#extension GL_NV_fragment_program2 : enable\n"
 "#extension GL_EXT_sRGB_write_control : enable\n"
 "#extension GL_NV_float_buffer : enable\n"
+"#extension GL_EXT_bindable_uniform : enable\n"
+"#extension GL_EXT_geometry_shader4 : enable\n"
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
 "#pragma STDGL(precise all)\n"
@@ -805,6 +807,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
+  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
