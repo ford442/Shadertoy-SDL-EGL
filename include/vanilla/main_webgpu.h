@@ -17,12 +17,13 @@
 #include "../../lib/lib_webgpu.h"
 
 uint32_t workgroupSize=1;
-uint64_t bufferSize=64*sizeof(float);
+uint64_t FbufferSize=64*sizeof(float);
+uint64_t IbufferSize=64*sizeof(unsigned int);
 std::vector<float>input(bufferSize/sizeof(float));
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(float);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<double>outputd(bufferSize/sizeof(double));
+std::vector<unsigned int>outputd(bufferSize/sizeof(unsigned int));
 void * resulT;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
