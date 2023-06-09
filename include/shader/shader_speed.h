@@ -856,7 +856,7 @@ glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_DYNAMIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
-// glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);  // OpenGL 4.3 =<
+glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
 GLsizei * binLength;
 GLenum * binaryFormat;
