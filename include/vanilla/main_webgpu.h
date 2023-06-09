@@ -70,5 +70,5 @@ const char * computeShader=
 
 "@compute@workgroup_size(256)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
-"outputBuffer[local_id.x]=g%64;"
+"outputBuffer[local_id.x]=local_id.x%64;"
 "}";
