@@ -44,13 +44,13 @@ WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData)
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
 
-           
+    vector<char> Arr = {0x2a00};
            std::string st="0x2a00";
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
            
 std::cout << resulT << std::endl;
            
-std::cout << "Hex 0x2a = " << std::endl << boost::algorithm::unhex(st);
+std::cout << "Hex 0x2a = " << std::endl << boost::algorithm::unhex(Arr);
 
            
            
