@@ -48,7 +48,7 @@ std::cout << output << std::endl;
 // std::cout << userData[0] << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
 std::cout << &resulT << std::endl;
-std::cout << resulT << std::endl;
+std::cout << std::dec << resulT << std::endl;
       //     std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
 
            
