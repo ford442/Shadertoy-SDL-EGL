@@ -168,10 +168,10 @@ inline char frg_hdr_src[1000]=
 "layout (std140) uniform uniBlock{"
 "uniform float iSampleRate;"
 "uniform float iFrameRate;"
+"uniform int iFrame;"
 "};"
 "uniform float iTime;"
 "uniform float iTimeDelta;"
-"uniform int iFrame;"
 "uniform vec4 iDate;"
 "uniform float iChannelTime[4];"
 "uniform vec3 iChannelResolution[4];"
@@ -597,7 +597,12 @@ glUniform1i(smp_chn[3],1);
 }
   */
   
-glUniform1i(uni_frm,uni_i.at(0,0));
+  // buffer frame
+glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+glBufferSubData(GL_UNIFORM_BUFFER,8,4,uni_i.at(0,0)); 
+glBindBuffer(GL_UNIFORM_BUFFER,0);
+
+// glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
@@ -859,7 +864,7 @@ unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_DYNAMIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,12,NULL,GL_DYNAMIC_DRAW);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
@@ -987,6 +992,7 @@ float iRate=44100.0f;
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
 glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
+glBufferSubData(GL_UNIFORM_BUFFER,8,4,0); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 nanoPause();
