@@ -34,9 +34,13 @@
 
 #include "../../lib/lib_webgpu.h"
 
+uint32_t workgroupSize=1;
 uint64_t bufferSize=64*sizeof(float);
-
 std::vector<float>input(bufferSize/sizeof(float));
+const char * Entry="computeStuff";
+uint32_t invocationCount=bufferSize/sizeof(float);
+uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+std::vector<double>outputd(bufferSize/sizeof(double));
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
