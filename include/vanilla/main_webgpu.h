@@ -17,8 +17,8 @@
 #include "../../lib/lib_webgpu.h"
 
 uint32_t workgroupSize=3;
-uint64_t FbufferSize=64*sizeof(float);
-uint64_t IbufferSize=64*sizeof(int);
+uint64_t FbufferSize=65536*sizeof(float);
+uint64_t IbufferSize=65536*sizeof(int);
 std::vector<float>input(IbufferSize/sizeof(float));
 const char * Entry="computeStuff";
 uint32_t invocationCount=IbufferSize/sizeof(float);
@@ -61,12 +61,11 @@ WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|W
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char * computeShader=
+  
+"@group(0)@binding(0)var <storage,read>inputBuffer: array<i32,65536>;"
 
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,64>;"
-  
-// "@group(0)@binding(2)var storageTexture:texture_storage_2d<rgba8unorm,write>;"
-"@group(0)@binding(1)var<texture_storage_2d,read_write>outputBuffer:array<rgba32sint,64>;"
-  
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
+
 "@compute@workgroup_size(3)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 // "outputBuffer[0]=inputBuffer[42];"
