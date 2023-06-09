@@ -96,7 +96,7 @@ glBindBuffer(GL_PIXEL_PACK_BUFFER, pbo);
 glBufferData(GL_PIXEL_PACK_BUFFER, width*height*sizeof(unsigned char), 0, GL_STATIC_READ);
 // get texture image
 glBindTexture(GL_TEXTURE_2D, texture);
-glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)(0));
+glGetTexImage2d(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)(0));
 // map pixel buffer
 void * data_ptr = glMapBufferRange (GL_PIXEL_PACK_BUFFER,0,4, GL_MAP_READ_BIT );
 std::cout << "tex data -" << std::endl;
