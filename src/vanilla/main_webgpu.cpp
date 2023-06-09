@@ -53,9 +53,9 @@ std::cout << resulT[0] << std::endl;
 std::cout << resulT[1] << std::endl;
 std::cout << resulT[2] << std::endl;
 std::cout << resulT[3] << std::endl;
-           int lll=resulT;
-           lll=lll*10;
-std::cout << lll << std::endl;
+           int *lll=resulT[0];
+           llla=&lll;
+std::cout << llla << std::endl;
 
 
 };
