@@ -45,14 +45,12 @@ WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
            
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
-std::cout << &resulT[0] << std::endl;
-std::cout << &resulT[1] << std::endl;
-std::cout << &resulT[2] << std::endl;
-std::cout << &resulT[3] << std::endl;
-std::cout << resulT[0] << std::endl;
-std::cout << resulT[1] << std::endl;
-std::cout << resulT[2] << std::endl;
-std::cout << resulT[3] << std::endl;
+int * stor=&resulT;
+           
+std::cout << stor[0] << std::endl;
+std::cout << stor[1] << std::endl;
+std::cout << stor[2] << std::endl;
+std::cout << stor[3] << std::endl;
 
 
 
