@@ -16,7 +16,7 @@
 
 #include "../../lib/lib_webgpu.h"
 
-uint32_t workgroupSize=65536;
+uint32_t workgroupSize=256;
 uint64_t IbufferSize=65536*sizeof(int);
 std::vector<float>input(IbufferSize/sizeof(int));
 const char * Entry="computeStuff";
@@ -65,7 +65,7 @@ const char * computeShader=
 
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
 
-"@compute@workgroup_size(65536)"
+"@compute@workgroup_size(256,256,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 // "outputBuffer[0]=inputBuffer[42];"
 // "outputBuffer[1]=inputBuffer[43];"
