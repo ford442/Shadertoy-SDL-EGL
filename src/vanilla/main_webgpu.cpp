@@ -52,9 +52,8 @@ std::cout << resulT[1] << std::endl;
 std::cout << resulT[2] << std::endl;
 std::cout << resulT[3] << std::endl;
            
-std::cout << output[3] << std::endl;
-std::cout << output[2] << std::endl;
 std::cout << &output << std::endl;
+std::cout << output << std::endl;
 
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
