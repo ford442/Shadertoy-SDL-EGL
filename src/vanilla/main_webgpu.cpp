@@ -45,13 +45,11 @@ WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
 
            
-           
+           std::string st="0x2a";
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
 std::cout << resulT << std::endl;
-int answeRs;
-boost::algorithm::unhex(answeRs,resulT);
-std::cout << answeRs << std::endl;
-           
+std::cout << "Hex 0x2a = " << boost::algorithm::unhex(st) << std::endl;
+
            
            
 };
