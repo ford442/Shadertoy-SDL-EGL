@@ -81,7 +81,7 @@ for(int g=0;g<65536;g++){
 Colora[g+0]=0;
 Colora[g+1]=222;
 Colora[g+2]=0;
-Colora[g+3]=230;
+Colora[g+3]=resultT[g];
 }
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
@@ -97,7 +97,7 @@ glBufferData(GL_PIXEL_PACK_BUFFER,width*height*sizeof(unsigned char), &texture, 
 // get texture image
 // glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)(0));
 // map pixel buffer
-void * data_ptr[256]=glMapBufferRange(GL_PIXEL_PACK_BUFFER,0,256,GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_RANGE_BIT );
+void * data_ptr=glMapBufferRange(GL_PIXEL_PACK_BUFFER,0,256,GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_RANGE_BIT);
 std::cout << "tex data -" << std::endl;
 std::cout << &data_ptr << std::endl;
 std::cout << data_ptr << std::endl;
