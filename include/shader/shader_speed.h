@@ -602,7 +602,7 @@ glUniform1i(smp_chn[3],1);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
 glBufferSubData(GL_UNIFORM_BUFFER,12,4,&d_time.at(0,0)); 
-glBindBuffer(GL_UNIFORM_BUFFER,0);
+// glBindBuffer(GL_UNIFORM_BUFFER,0);
 
 // glUniform1i(uni_frm,uni_i.at(0,0));
 return;
@@ -867,7 +867,7 @@ glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,16,NULL,GL_DYNAMIC_DRAW);
-glBindBuffer(GL_UNIFORM_BUFFER,0);
+// glBindBuffer(GL_UNIFORM_BUFFER,0);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 
 GLsizei * binLength;
