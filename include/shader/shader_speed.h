@@ -1,7 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
-#include "../../include/shader/ext_boost_defs.h"
 
 #include <float.h>
 #include <math.h>
