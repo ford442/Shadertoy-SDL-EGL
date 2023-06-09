@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main_webgpu.h"
+std::vector<float>input(bufferSize/sizeof(float));
 
 void raf(WGpuDevice device){
-std::vector<float>input(bufferSize/sizeof(float));
 bufferDescriptorO.mappedAtCreation=false;
 bufferDescriptorO.size=bufferSize;
 bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
