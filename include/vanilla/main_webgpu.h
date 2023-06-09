@@ -52,7 +52,7 @@ WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
 WGpuBindGroupEntry bindGroupEntry[2]={};
-WGpuBufferBindingLayout bufferBindingLayout1={2};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferDescriptor bufferDescriptorI={FbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -61,7 +61,7 @@ WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|W
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char * computeShader=
-"@group(0)@binding(0)var<storage,read_write>inputBuffer:array<i32,64>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,64>;"
 "@compute@workgroup_size(3)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
