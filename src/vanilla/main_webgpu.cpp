@@ -50,7 +50,7 @@ std::cout << output << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
 std::cout << &resulT << std::endl;
       int * answeR;
-std::cout << boost::algorithm::unhex(resulT,answeR) << std::endl;
+std::cout << boost::algorithm::unhex(resulT,&answeR) << std::endl;
       //     std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
 
            
