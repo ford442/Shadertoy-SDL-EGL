@@ -76,7 +76,7 @@ emscripten_webgl_make_context_current(ctx);
 GLsizei width=256;
 GLsizei height=256;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
-unsigned char* Colora=new unsigned char[width*height*sizeof(unsigned char)];
+unsigned int* Colora=new unsigned int[width*height*sizeof(unsigned int)];
 for(int g=0;g<65536;g++){
 Colora[g+0]=0;
 Colora[g+1]=222;
@@ -86,7 +86,7 @@ Colora[g+3]=&resulT[g];
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
            
            // create buffer
