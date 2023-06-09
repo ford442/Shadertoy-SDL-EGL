@@ -49,8 +49,10 @@ std::cout << &userData << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
 std::cout << &resulT << std::endl;
 std::cout << resulT << std::endl;
-
-// std::cout << boost::algorithm::unhex(&resulT,answeR) << std::endl;
+unsigned char outT=&resulT;
+int answeRs;
+boost::algorithm::unhex(outT,answeRs);
+std::cout << answeRs << std::endl;
            
            
 };
