@@ -37,20 +37,19 @@ queue=wgpu_device_get_queue(device);
 wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(float));
 wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(2),uint32_t(1),uint32_t(1));
 wgpu_encoder_end(computePass);
-wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,UbufferSize);
 commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double output=wgpu_buffer_get_mapped_range(buffer,uint32_t(0),bufferSize);
-double * ptrDouble=&output;
-      
-// std::array<double,1>outP(std::to_array<double,1>({output}));           
-// std::array<double,1>outP2(std::to_array<double,1>({&userData}));           
-std::cout << &ptrDouble << std::endl;
+double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),UbufferSize);
+
+
 std::cout << output << std::endl;
 // std::cout << userData[0] << std::endl;
-wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,UbufferSize);
 std::cout << &resulT << std::endl;
+std::cout << resulT << std::endl;
+std::cout << resulT[0] << std::endl;
       //     std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
 
            
