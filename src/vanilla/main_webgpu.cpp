@@ -1,94 +1,94 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 void raf(WGpuDevice device){
-    std::vector<float>input(bufferSize/sizeof(float));
-    bufferDescriptorI.mappedAtCreation=false;
-    bufferDescriptorI.size=bufferSize;
-    bufferDescriptorI.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST;
-    bufferDescriptorO.mappedAtCreation=false;
-    bufferDescriptorO.size=bufferSize;
-    bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
-    bufferDescriptorM.mappedAtCreation=false;
-    bufferDescriptorM.size=bufferSize;
-    bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
-    mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
-    inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
-    outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
-    for(int i=0;i<input.size();++i){
-        input[i]=1.01;
-    }
-    shaderModuleDescriptor={computeShader,0,NULL};
-    cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
-    bufferBindingLayout1.type=3;
-    bufferBindingLayout2.type=2;
-    bufferBindingLayout3.type=2;
-    bindGroupLayoutEntries[0].binding=0;
-    bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
-    bindGroupLayoutEntries[0].type=1;
-    bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
-    bindGroupLayoutEntries[1].binding=1;
-    bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
-    bindGroupLayoutEntries[1].type=1;
-    bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
-    bindGroupLayout=wgpu_device_create_bind_group_layout(device,bindGroupLayoutEntries,2);
-    const char * Entry="computeStuff";
-    pipelineLayout=wgpu_device_create_pipeline_layout(device,&bindGroupLayout,1);
-    computePipeline=wgpu_device_create_compute_pipeline(device,cs,Entry,pipelineLayout,NULL,0);
-    bindGroupEntry[0].binding=0;
-    bindGroupEntry[0].resource=inputBuffer;
-    bindGroupEntry[0].bufferBindOffset=0;
-    bindGroupEntry[0].bufferBindSize=0;
-    bindGroupEntry[1].binding=1;
-    bindGroupEntry[1].resource=outputBuffer;
-    bindGroupEntry[1].bufferBindOffset=0;
-    bindGroupEntry[1].bufferBindSize=0;
-    bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
-    encoder=wgpu_device_create_command_encoder(device,0);
-    computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
-    wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
-    wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
-    uint32_t invocationCount=bufferSize/sizeof(float);
-    uint32_t workgroupSize=1;
-    queue=wgpu_device_get_queue(device);
-    wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(float));
-    uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-    wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(2),uint32_t(1),uint32_t(1));
-    wgpu_encoder_end(computePass);
-    wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
-    commandBuffer=wgpu_encoder_finish(encoder);
-    WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
-        WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-            double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
-            std::vector<double>outputd(bufferSize/sizeof(double));
-            wgpu_buffer_read_mapped_range(mapBuffer,0,0,&outputd,bufferSize);
-        };
-        WGPU_MAP_MODE_FLAGS mode1=0x1;
-        wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
-    };
-    wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
-    wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
-    return;
+std::vector<float>input(bufferSize/sizeof(float));
+bufferDescriptorI.mappedAtCreation=false;
+bufferDescriptorI.size=bufferSize;
+bufferDescriptorI.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST;
+bufferDescriptorO.mappedAtCreation=false;
+bufferDescriptorO.size=bufferSize;
+bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
+bufferDescriptorM.mappedAtCreation=false;
+bufferDescriptorM.size=bufferSize;
+bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
+mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
+outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
+for(int i=0;i<input.size();++i){
+input[i]=1.01;
+}
+shaderModuleDescriptor={computeShader,0,NULL};
+cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
+bufferBindingLayout1.type=3;
+bufferBindingLayout2.type=2;
+bufferBindingLayout3.type=2;
+bindGroupLayoutEntries[0].binding=0;
+bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[0].type=1;
+bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
+bindGroupLayoutEntries[1].binding=1;
+bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[1].type=1;
+bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
+bindGroupLayout=wgpu_device_create_bind_group_layout(device,bindGroupLayoutEntries,2);
+const char * Entry="computeStuff";
+pipelineLayout=wgpu_device_create_pipeline_layout(device,&bindGroupLayout,1);
+computePipeline=wgpu_device_create_compute_pipeline(device,cs,Entry,pipelineLayout,NULL,0);
+bindGroupEntry[0].binding=0;
+bindGroupEntry[0].resource=inputBuffer;
+bindGroupEntry[0].bufferBindOffset=0;
+bindGroupEntry[0].bufferBindSize=0;
+bindGroupEntry[1].binding=1;
+bindGroupEntry[1].resource=outputBuffer;
+bindGroupEntry[1].bufferBindOffset=0;
+bindGroupEntry[1].bufferBindSize=0;
+bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
+encoder=wgpu_device_create_command_encoder(device,0);
+computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
+wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
+wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
+uint32_t invocationCount=bufferSize/sizeof(float);
+uint32_t workgroupSize=1;
+queue=wgpu_device_get_queue(device);
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(float));
+uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(2),uint32_t(1),uint32_t(1));
+wgpu_encoder_end(computePass);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
+commandBuffer=wgpu_encoder_finish(encoder);
+WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
+WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void *userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
+std::vector<double>outputd(bufferSize/sizeof(double));
+wgpu_buffer_read_mapped_range(mapBuffer,0,0,&outputd,bufferSize);
+};
+WGPU_MAP_MODE_FLAGS mode1=0x1;
+wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
+};
+wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
+wgpu_queue_submit_one(queue,commandBuffer);
+return;
 }
 
-void ObtainedWebGpuDevice(WGpuDevice result,void *userData){
-    device=result;
-    raf(device);
+void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
+device=result;
+raf(device);
 }
 
-void ObtainedWebGpuAdapter(WGpuAdapter result,void *userData){
-    adapter=result;
-    wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
+void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
+adapter=result;
+wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
 void gpuStart(){
-    options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
-    navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
+navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 }
 
 extern"C"{
 
 void startWebGPU(){
-    gpuStart();
+gpuStart();
 }
 
 }
@@ -161,7 +161,7 @@ document.getElementById('di').click();
 });
     
 int main(void){
-    sleep(1);
-    js_main();
-    return 0;
+sleep(1);
+js_main();
+return 0;
 }
