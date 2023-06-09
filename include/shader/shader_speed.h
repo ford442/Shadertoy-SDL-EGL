@@ -1,78 +1,32 @@
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#define _XOPEN_SOURCE 700
-
-#pragma pack(4)
-#pragma fenv_access(on)             // enable environment sensitivity
-// #pragma float_control(precise, on)  // enable precise semantics
-// #pragma float_control(except, on)   // enable exception semantics
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD -1
-#pragma STDC FP_CONTRACT ON
-#pragma STDC CX_LIMITED_RANGE ON
-#define _XOPEN_REALTIME 1
-#define _POSIX_ASYNC_IO 1
-#define _POSIX_PRIO_IO 1
-#define _POSIX_SYNC_IO 1
-#define _XOPEN_SHM 1
-#define _POSIX_PRIORITIZED_IO 1
-#undef _FLT_ROUNDS
-#define _FLT_ROUNDS 1
-#define _POSIX_REGEXP 1
-
-#define BOOST_CHRONO_HEADER_ONLY 1
-#define BOOST_ERROR_CODE_HEADER_ONLY 1
-#define BOOST_UBLAS_MOVE_SEMANTICS
-#define BOOST_UBLAS_TYPE_CHECK 0
-#define BOOST_UBLAS_USE_LONG_DOUBLE
-#define BOOST_NO_EXCEPTIONS
-#define BOOST_HAS_FLOAT128
-#define BOOST_HAS_CLOCK_GETTIME 1
-#define BOOST_HAS_NANOSLEEP 1
-#define BOOST_HAS_NRVO 1
-#define BOOST_HAS_STDINT_H 1
-
 #include <boost/cstdfloat.hpp>  // must be first include
+#include "../../include/shader/defs.h"
+#include "../../include/shader/boost_defs.h"
+#include "../../include/shader/ext_boost_defs.h"
 
 #include <float.h>
 #include <math.h>
 #include <new>
-
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
-
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
-
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <limits.h>
+#include <climits>
 #include <iostream>
-// #include <locale> // utf-16
-// #include <uchar.h> // utf-16
-// #include <stdfloat>  //  c++23
-#include <time.h>
-// #include <chrono>
+#include <ctime>
 #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
-#include <emscripten/html5.h>
-#include "emscripten/html5_webgpu.h"
-#include "webgpu/webgpu_cpp.h"
 #include "../../include/shader/intrins.h"
 
+#include <emscripten/html5.h>
 #include <emscripten.h>
 
 extern "C"{
@@ -151,7 +105,7 @@ inline char cm_hdr_src[1900]=
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
+"#define HW_PERFORMANCE 1\n"
 "precision highp int;\n"
 "precision highp float;\n";
 
