@@ -75,7 +75,7 @@ emscripten_webgl_make_context_current(ctx);
 GLsizei width=256;
 GLsizei height=256;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
-unsigned int* Colora=new unsigned int[width*height*sizeof(unsigned int)];
+int* Colora=new int[width*height*sizeof(int)];
 for(int g=0;g<65536;g++){
 Colora[g]=int(resulT[g]);
 Colora[g+1]=int(resulT[g+1]);
@@ -85,7 +85,7 @@ Colora[g+3]=int(resulT[g+3]);
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_INT,Colora);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_INT,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
