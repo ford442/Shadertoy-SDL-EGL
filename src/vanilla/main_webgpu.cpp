@@ -44,18 +44,12 @@ WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData)
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
 
-
 std::cout << output << std::endl;
-// std::cout << userData[0] << std::endl;
+std::cout << &userData << std::endl;
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
 std::cout << &resulT << std::endl;
 
-      int answeR=std::string(&resulT);
-      std::cout << answeR << std::endl;
-
 // std::cout << boost::algorithm::unhex(&resulT,answeR) << std::endl;
-      //     std::array<double,1>outP3(std::to_array<double,1>({resulT}));           
-
            
            
 };
