@@ -1,5 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/vanilla/defs.h"
+#include "../../include/vanilla/gl.h"
 #include <chrono>
 #include <iostream>
 #include <cassert>
