@@ -21,12 +21,16 @@
 #include <climits>
 #include <iostream>
 #include <ctime>
+#include <functional>
+
 #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
 #include "../../include/shader/intrins.h"
 
 #include <emscripten/html5.h>
 #include <emscripten.h>
+
+#include "../../lib/lib_webgpu.h"
 
 extern "C"{
   
@@ -55,6 +59,20 @@ return shader;
 }
 
 };
+
+inline char wgl_cmp_src[1000]=
+"@group(0)@binding(0)var <storage,read>inputBuffer: array<i32,65536>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
+"@compute@workgroup_size(256)"
+"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
+"var a:i32=0;{"
+"var i:i32=0;"
+"loop{"
+"if !(i<255){a++;i=0;}if a<255{break;}"
+"continuing{outputBuffer[i+a]=i%64;}"
+"}"
+"}"
+"}";
 
 inline char cm_hdr_src[1900]=
 "#version 300 es\n"
@@ -353,6 +371,48 @@ private:
 
 Compile compile;
 
+uint32_t workgroupSize=256;
+uint64_t IbufferSize=65536*sizeof(int);
+std::vector<float>input(IbufferSize/sizeof(int));
+const char * Entry="computeStuff";
+uint32_t invocationCount=IbufferSize/sizeof(int);
+uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+int * resulT[65536];
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+void * userDataA;
+
+WGpuAdapter adapter=0;
+WGpuDevice device=0;
+WGpuQueue queue=0;
+WGpuBindGroupLayout bindGroupLayout=0;
+WGpuComputePipeline computePipeline=0;
+WGpuBuffer inputBuffer=0;
+WGpuBuffer outputBuffer=0;
+WGpuBuffer mapBuffer=0;
+WGpuBuffer uniBuffer=0;
+WGpuShaderModule cs=0;
+WGpuCommandBuffer commandBuffer=0;
+WGpuCommandEncoder encoder=0;
+WGpuComputePassEncoder computePass=0;
+WGpuBindGroup bindGroup=0;
+WGpuPipelineLayout pipelineLayout=0;
+WGpuQuerySet querySet=0;
+WGpuComputePassDescriptor computePassDescriptor={};
+WGpuShaderModuleDescriptor shaderModuleDescriptor={};
+WGpuCommandBufferDescriptor commandBufferDescriptor={};
+WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
+WGpuDeviceDescriptor deviceDescriptor={};
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
+WGpuBindGroupEntry bindGroupEntry[2]={};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
+WGpuBufferBindingLayout bufferBindingLayout2={2};
+WGpuBufferBindingLayout bufferBindingLayout3={2};
+WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
+
 int32_t iFps=60;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
@@ -365,6 +425,7 @@ char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
+char * cmp_bdy=wgl_cmp_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
@@ -625,6 +686,88 @@ return nullptr;
 
 }procc;
 
+  
+void raf(WGpuDevice device){
+mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
+outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
+for(int i=0;i<input.size();++i){
+input[i]=i;
+}
+shaderModuleDescriptor={cmp_bdy,0,NULL};
+cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
+bindGroupLayoutEntries[0].binding=0;
+bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[0].type=1;
+bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
+bindGroupLayoutEntries[1].binding=1;
+bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[1].type=1;
+bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
+bindGroupLayout=wgpu_device_create_bind_group_layout(device,bindGroupLayoutEntries,2);
+pipelineLayout=wgpu_device_create_pipeline_layout(device,&bindGroupLayout,1);
+computePipeline=wgpu_device_create_compute_pipeline(device,cs,Entry,pipelineLayout,NULL,0);
+bindGroupEntry[0].binding=0;
+bindGroupEntry[0].resource=inputBuffer;
+bindGroupEntry[0].bufferBindOffset=0;
+bindGroupEntry[0].bufferBindSize=0;
+bindGroupEntry[1].binding=1;
+bindGroupEntry[1].resource=outputBuffer;
+bindGroupEntry[1].bufferBindOffset=0;
+bindGroupEntry[1].bufferBindSize=0;
+bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
+encoder=wgpu_device_create_command_encoder(device,0);
+computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
+wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
+wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
+queue=wgpu_device_get_queue(device);
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
+wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t(256),uint32_t(1));
+wgpu_encoder_end(computePass);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,IbufferSize);
+commandBuffer=wgpu_encoder_finish(encoder);
+WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
+WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
+GLsizei width=256;
+GLsizei height=256;
+GLuint wtexture=0;
+int Colora[width*height];
+for(int g=0;g<65536;g++){
+Colora[g]=int(resulT[g]);
+Colora[g+1]=int(resulT[g+1]);
+Colora[g+2]=int(resulT[g+2]);
+Colora[g+3]=int(resulT[g+3]);
+}
+glGenTextures(1,&wtexture);
+glActiveTexture(GL_TEXTURE5);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA_INTEGER,width,height,0,GL_RGBA_INTEGER,GL_INT,Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
+};
+wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
+};
+wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
+wgpu_queue_submit_one(queue,commandBuffer);
+return;
+}
+  
+
+void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
+device=result;
+raf(device);
+}
+
+void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
+adapter=result;
+wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
+}
+
+void gpuStart(){
+navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+}
+  
 void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
