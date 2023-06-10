@@ -295,6 +295,7 @@ WGpuBuffer mapBuffer=0;
 WGpuBufferDescriptor bufferDescriptorM={};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 const char * Entry="computeStuff";
+bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 
 class GPU{
 
@@ -693,7 +694,7 @@ std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
-bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
