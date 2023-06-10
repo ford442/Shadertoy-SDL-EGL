@@ -686,7 +686,6 @@ return results;
 return nullptr;
 }
 
-}procc;
 
 static void raf(WGpuDevice device){
 std::vector<float>input(65536);
@@ -751,7 +750,7 @@ glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
+emscripten_set_main_loop((void(*)())Rend,0,0);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
 };
@@ -771,6 +770,8 @@ adapter=result;
 wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
+}procc;
+  
 void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
