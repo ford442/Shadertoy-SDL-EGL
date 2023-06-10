@@ -372,6 +372,27 @@ private:
 
 Compile compile;
 
+int32_t iFps=60;
+EGLDisplay display=nullptr;
+EGLSurface surface=nullptr;
+EGLContext ctxegl=nullptr;
+EGLConfig eglconfig=nullptr;
+EGLint config_size=0,major,minor=0;
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * src[4];
+char * cm_hdr=cm_hdr_src;
+char * vrt_bdy=vrt_bdy_src;
+char * frg_hdr=frg_hdr_src;
+char * frg_ftr=frg_ftr_src;
+char * cmp_bdy=wgl_cmp_src;
+
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
+  
+GPU gpu;
+
+public:
+
 uint32_t workgroupSize=256;
 uint64_t IbufferSize=65536*sizeof(int);
 std::vector<float>input(IbufferSize/sizeof(int));
@@ -413,27 +434,6 @@ WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WG
 WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-
-int32_t iFps=60;
-EGLDisplay display=nullptr;
-EGLSurface surface=nullptr;
-EGLContext ctxegl=nullptr;
-EGLConfig eglconfig=nullptr;
-EGLint config_size=0,major,minor=0;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-const char * src[4];
-char * cm_hdr=cm_hdr_src;
-char * vrt_bdy=vrt_bdy_src;
-char * frg_hdr=frg_hdr_src;
-char * frg_ftr=frg_ftr_src;
-char * cmp_bdy=wgl_cmp_src;
-
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
-  
-GPU gpu;
-
-public:
 
 static inline void nanoPause(){
 nanosleep(&req2,&rem);
