@@ -75,7 +75,7 @@ inline char wgl_cmp_src[1000]=
 "outputBuffer[i+a+1]=i%32;"
 "outputBuffer[i+a+2]=i%255;"
 "outputBuffer[i+a+3]=255;"
-}"
+"}"
 "}"
 "}"
 "}";
