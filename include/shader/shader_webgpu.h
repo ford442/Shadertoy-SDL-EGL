@@ -749,10 +749,10 @@ GLsizei height=256;
 GLuint wtexture=0;
 int Colora[width*height];
 for(int g=0;g<65536;g++){
-Colora[g]=255 // int(resulT[g]);
-Colora[g+1]=0 // int(resulT[g+1]);
-Colora[g+2]=255 // int(resulT[g+2]);
-Colora[g+3]=255 // int(resulT[g+3]);
+Colora[g]=255; // int(resulT[g]);
+Colora[g+1]=0; // int(resulT[g+1]);
+Colora[g+2]=255; // int(resulT[g+2]);
+Colora[g+3]=255; // int(resulT[g+3]);
 }
 glGenTextures(1,&wtexture);
 glActiveTexture(GL_TEXTURE0);
