@@ -400,13 +400,6 @@ GPU gpu;
 
 public:
 
-uint32_t workgroupSize=256;
-
-std::vector<float>input(IbufferSize/sizeof(int));
-  uint32_t invocationCount=IbufferSize/sizeof(int);
-uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
-
 
 void * userDataA;
 
@@ -695,6 +688,14 @@ return nullptr;
 
   
 void raf(WGpuDevice device){
+  
+uint32_t workgroupSize=256;
+
+std::vector<float>input(IbufferSize/sizeof(int));
+  uint32_t invocationCount=IbufferSize/sizeof(int);
+uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
