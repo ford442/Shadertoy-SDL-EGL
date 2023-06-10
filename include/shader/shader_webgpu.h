@@ -740,7 +740,7 @@ GLsizei height=256;
 GLuint wtexture=0;
 int * Colora=new int[width*height*sizeof(int)];
 // unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
-for(int g=0;g<65536;g++){
+for(int g=0;g<65536;g+=4){
 Colora[g]=255; // int(resulT[g]);
 Colora[g+1]=0; // int(resulT[g+1]);
 Colora[g+2]=255; // int(resulT[g+2]);
