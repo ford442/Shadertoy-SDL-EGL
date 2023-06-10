@@ -40,6 +40,43 @@ b3_vanilla_llvm:
 	 -sEXPORTED_FUNCTIONS='["_main","_wgpu_init1","_wgpu_init2","_wgpu_init3","_wgpu_init4","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js -sUSE_SDL=0 
 
+b3_shader_webgpu:
+	 ###         Shader
+	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
+	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
+	 ###         Main
+	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
+	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
+	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
+	 -Rpass-analysis=loop-vectorize
+	 ###         Link
+	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
+	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
+	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
+	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
+	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DNDEBUG -BOOST_UBLAS_NDEBUG \
+	 -sGLOBAL_BASE=8388608 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
+	 -sSUPPORT_ERRNO=0 -sASSERTIONS=0 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
+	 --memory-init-file 0 -rtlib=compiler-rt -sSUPPORT_LONGJMP=wasm \
+	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
+	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=1 -sALLOW_TABLE_GROWTH=1 \
+	 -sEVAL_CTORS=1 -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sWASM=1 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
+         --memory-init-file 0 --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
+	 
 b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
