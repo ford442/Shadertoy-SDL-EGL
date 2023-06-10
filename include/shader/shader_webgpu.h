@@ -594,6 +594,7 @@ glUniform1i(smp_chn[2],5);
 glActiveTexture(GL_TEXTURE5);
 glUniform1i(smp_chn[3],5);
 }
+}
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
