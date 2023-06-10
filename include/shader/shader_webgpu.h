@@ -738,7 +738,7 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture=0;
-int * Colora[width*height*sizeof(int];
+int * Colora[width*height*sizeof(int)];
 // unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 Colora[g]=255; // int(resulT[g]);
