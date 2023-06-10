@@ -300,13 +300,13 @@ GLuint wtexture=0;
 GLsizei width=256;
 GLsizei height=256;
 
+WGpuBuffer mapBuffer=0;
 //wgpu
 static void raf(WGpuDevice device){
   
-WGpuBuffer mapBuffer=0;
 WGpuBufferDescriptor bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 
-  std::vector<float>input(65536);
+std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
@@ -368,7 +368,7 @@ Colora[g+2]=255; // int(resulT[g+2]);
 Colora[g+3]=255; // int(resulT[g+3]);
 }
 };
-  
+
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
