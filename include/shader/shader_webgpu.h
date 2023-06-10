@@ -758,7 +758,6 @@ wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
 return;
 }
-  
 
 static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
 device=result;
@@ -770,7 +769,13 @@ adapter=result;
 wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
+void WebGPU(){
+navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+}
+  
 }procc;
+  
+
   
 void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -816,7 +821,6 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglBindAPI(EGL_OPENGL_API);
-  
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -1102,7 +1106,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanoPause();
-navigator_gpu_request_adapter_async(&options,Run::procc.ObtainedWebGpuAdapter,0);
+Run::procc.WebGPU();
 return;
 }
   
