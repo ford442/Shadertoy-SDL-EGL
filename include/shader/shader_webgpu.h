@@ -265,10 +265,10 @@ int * resulT[65536];
 void * userDataA;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 uint32_t workgroupSize=256;
-std::vector<float>input(65536);
+
 uint32_t invocationCount=65536;
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(65536);
+
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuDeviceDescriptor deviceDescriptor={};
@@ -692,8 +692,9 @@ return nullptr;
 }procc;
 
 static void raf(WGpuDevice device){
-  
-  char * cmp_bdy=wgl_cmp_src;
+std::vector<float>input(65536);
+std::vector<unsigned int>outputd(65536);
+char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
   
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
