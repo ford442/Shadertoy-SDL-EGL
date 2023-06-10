@@ -252,9 +252,11 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-  WGpuBuffer mapBuffer=0;
+WGpuBuffer mapBuffer=0;
 uint64_t IbufferSize=65536*sizeof(int);
-  int * resulT[65536];
+int * resulT[65536];
+void * userDataA;
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 
 class GPU{
 
@@ -397,14 +399,12 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
   
 const char * Entry="computeStuff";
 
-  WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 
 GPU gpu;
 
 public:
 
 
-void * userDataA;
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
