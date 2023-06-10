@@ -293,7 +293,7 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-
+WGpuBuffer mapBuffer=0;
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 const char * Entry="computeStuff";
@@ -692,7 +692,7 @@ return nullptr;
 
 static void raf(WGpuDevice device){
   WGpuBufferDescriptor bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBuffer mapBuffer=0;
+
 std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
