@@ -276,7 +276,6 @@ WGpuDeviceDescriptor deviceDescriptor={};
 WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuComputePipeline computePipeline=0;
-WGpuBuffer uniBuffer=0;
 WGpuShaderModule cs=0;
 WGpuCommandBuffer commandBuffer=0;
 WGpuCommandEncoder encoder=0;
@@ -293,8 +292,7 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-WGpuBuffer mapBuffer=0;
-WGpuBufferDescriptor bufferDescriptorM={};
+
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 const char * Entry="computeStuff";
 char * cm_hdr=cm_hdr_src;
@@ -304,16 +302,21 @@ GLsizei height=256;
 
 //wgpu
 static void raf(WGpuDevice device){
+WGpuBuffer mapBuffer=0;
+WGpuBufferDescriptor bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
-bufferDescriptorM.size=65536*sizeof(int);
-bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
-bufferDescriptorM.mappedAtCreation=false;
-mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+  
+std::cout << "at create buff1 in" << std::endl;
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
+std::cout << "at create buff2 out" << std::endl;
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
+std::cout << "at create buff3 map" << std::endl;
+mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+
+  
 for(int i=0;i<input.size();++i){
 input[i]=i;
 }
