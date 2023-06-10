@@ -300,10 +300,10 @@ char * cm_hdr=cm_hdr_src;
 GLuint wtexture=0;
 GLsizei width=256;
 GLsizei height=256;
+uint32_t * resulT[];
 
 //wgpu
 static void raf(WGpuDevice device){
-uint32_t * resulT[bufferSize];
 std::vector<int>input(bufferSize);
 std::vector<int>outputd(bufferSize);
 char * cmp_bdy=wgl_cmp_src;
