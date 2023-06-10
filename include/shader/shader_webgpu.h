@@ -259,7 +259,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-uint32_t IbufferSize=65536*sizeof(int);
+uint64_t IbufferSize=65536*sizeof(int);
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBufferDescriptor bufferDescriptorI={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -304,16 +304,16 @@ GLsizei height=256;
 
 //wgpu
 static void raf(WGpuDevice device){
-std::vector<float>input(65536*sizeof(float));
+std::vector<int>input(65536*sizeof(int));
 std::vector<unsigned int>outputd(65536*sizeof(unsigned int));
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 bufferDescriptorM.size=65536*sizeof(int);
 bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
 bufferDescriptorM.mappedAtCreation=false;
-// for(int i=0;i<input.size();++i){
-// input[i]=i;
-// }
+for(int i=0;i<input.size();++i){
+input[i]=i;
+}
 std::cout << "at create buff1 in";
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 std::cout << "at create buff2 out";
