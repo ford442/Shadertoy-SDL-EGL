@@ -302,24 +302,26 @@ GLsizei height=256;
 
 //wgpu
 static void raf(WGpuDevice device){
+  
 WGpuBuffer mapBuffer=0;
 WGpuBufferDescriptor bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-std::vector<float>input(65536);
+
+  std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
   
-std::cout << "at create buff1 in" << std::endl;
+for(int i=0;i<input.size();++i){
+input[i]=i;
+}
+  std::cout << "at create buff1 in" << std::endl;
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 std::cout << "at create buff2 out" << std::endl;
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 std::cout << "at create buff3 map" << std::endl;
+  
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 
-  
-for(int i=0;i<input.size();++i){
-input[i]=i;
-}
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -351,11 +353,12 @@ wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t
 wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,65536*sizeof(int));
 commandBuffer=wgpu_encoder_finish(encoder);
+      // WGpu Compute Done Callback
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
+      // WGpu Buffer Map Callback
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),65536*sizeof(int));
-wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
-
+double output=wgpu_buffer_get_mapped_range(buffer,uint32_t(0),65536*sizeof(int));
+wgpu_buffer_read_mapped_range(buffer,output,0,&resulT,65536*sizeof(int));
 // int * Colora=new int[width*height*sizeof(int)];
 unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
 for(int g=0;g<65536;g=g+4){
@@ -365,6 +368,7 @@ Colora[g+2]=255; // int(resulT[g+2]);
 Colora[g+3]=255; // int(resulT[g+3]);
 }
 };
+  
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
