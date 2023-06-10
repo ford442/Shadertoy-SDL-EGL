@@ -410,7 +410,6 @@ WGpuBindGroupLayout bindGroupLayout=0;
 WGpuComputePipeline computePipeline=0;
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
-WGpuBuffer mapBuffer=0;
 WGpuBuffer uniBuffer=0;
 WGpuShaderModule cs=0;
 WGpuCommandBuffer commandBuffer=0;
@@ -688,7 +687,8 @@ return nullptr;
 
   
 void raf(WGpuDevice device){
-  
+  WGpuBuffer mapBuffer=0;
+
 uint32_t workgroupSize=256;
 
 std::vector<float>input(IbufferSize/sizeof(int));
