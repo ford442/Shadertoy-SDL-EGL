@@ -253,12 +253,11 @@ static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
 uint64_t IbufferSize=65536*sizeof(int);
-WGpuBuffer mapBuffer=0;
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBufferDescriptor bufferDescriptorI={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+
 
 
 int * resulT[65536];
@@ -692,6 +691,8 @@ return nullptr;
 }procc;
 
 static void raf(WGpuDevice device){
+  WGpuBufferDescriptor bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBuffer mapBuffer=0;
 std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
