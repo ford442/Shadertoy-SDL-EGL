@@ -264,7 +264,7 @@ WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBufferDescriptor bufferDescriptorI={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-int * resulT[65536];
+int * resulT[6553665536*sizeof(int)];
 void * userDataA;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 uint32_t workgroupSize=256;
@@ -305,7 +305,7 @@ GLsizei height=256;
 //wgpu
 static void raf(WGpuDevice device){
 std::vector<int>input(65536*sizeof(int));
-std::vector<unsigned int>outputd(65536*sizeof(unsigned int));
+std::vector<int>outputd(65536*sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 bufferDescriptorM.size=65536*sizeof(int);
