@@ -257,6 +257,11 @@ uint64_t IbufferSize=65536*sizeof(int);
 int * resulT[65536];
 void * userDataA;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+uint32_t workgroupSize=256;
+std::vector<float>input(IbufferSize/sizeof(int));
+uint32_t invocationCount=IbufferSize/sizeof(int);
+uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
 
 class GPU{
 
@@ -688,17 +693,7 @@ return nullptr;
 
 }procc;
 
-  
 void raf(WGpuDevice device){
-
-
-uint32_t workgroupSize=256;
-
-std::vector<float>input(IbufferSize/sizeof(int));
-  uint32_t invocationCount=IbufferSize/sizeof(int);
-uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
-
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
@@ -765,12 +760,12 @@ return;
 }
   
 
-void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
+static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
 device=result;
 raf(device);
 }
 
-void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
+static void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
 adapter=result;
 wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
