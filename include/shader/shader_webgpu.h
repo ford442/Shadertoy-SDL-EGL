@@ -262,25 +262,18 @@ WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBufferDescriptor bufferDescriptorI={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-
-
-
 int * resulT[65536];
 void * userDataA;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 uint32_t workgroupSize=256;
-
 uint32_t invocationCount=65536;
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuDeviceDescriptor deviceDescriptor={};
-
 WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuComputePipeline computePipeline=0;
-
 WGpuBuffer uniBuffer=0;
 WGpuShaderModule cs=0;
 WGpuCommandBuffer commandBuffer=0;
@@ -299,7 +292,7 @@ WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBuffer mapBuffer=0;
-  WGpuBufferDescriptor bufferDescriptorM={};
+WGpuBufferDescriptor bufferDescriptorM={};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 const char * Entry="computeStuff";
 
@@ -578,29 +571,28 @@ short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 if(int(d_time.at(0,0))%60==0){
-glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+// glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 }
 
 if(uni_i.at(0,0)%30==0.0){
-if(int(d_time.at(0,0))%2==0){
+if(shaderToySeconds%2==0.0){
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[1],1);
 glActiveTexture(GL_TEXTURE5);
-glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[2],5);
 glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);
 }else{
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE5);
 glUniform1i(smp_chn[0],5);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE5);
 glUniform1i(smp_chn[1],5);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE5);
 glUniform1i(smp_chn[2],5);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE5);
 glUniform1i(smp_chn[3],5);
-}
 }
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
