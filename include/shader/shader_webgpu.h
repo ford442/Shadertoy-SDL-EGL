@@ -265,10 +265,10 @@ int * resulT[65536];
 void * userDataA;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 uint32_t workgroupSize=256;
-std::vector<float>input(IbufferSize/sizeof(int));
-uint32_t invocationCount=IbufferSize/sizeof(int);
+std::vector<float>input(65536);
+uint32_t invocationCount=65536;
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+std::vector<unsigned int>outputd(65536);
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuDeviceDescriptor deviceDescriptor={};
@@ -731,12 +731,12 @@ queue=wgpu_device_get_queue(device);
 wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
 wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t(256),uint32_t(1));
 wgpu_encoder_end(computePass);
-wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,IbufferSize);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,65536*sizeof(int));
 commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),IbufferSize);
-wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,IbufferSize);
+double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),65536*sizeof(int));
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture=0;
@@ -753,7 +753,7 @@ glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA_INTEGER,width,height,0,GL_RGBA_INTEGER,GL_INT,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
 };
-wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),IbufferSize);
+wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
