@@ -253,6 +253,8 @@ static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
   WGpuBuffer mapBuffer=0;
+uint64_t IbufferSize=65536*sizeof(int);
+  int * resulT[65536];
 
 class GPU{
 
@@ -388,12 +390,13 @@ char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 char * cmp_bdy=wgl_cmp_src;
   
-uint64_t IbufferSize=65536*sizeof(int);
+
+  
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
   
 const char * Entry="computeStuff";
-int * resulT[65536];
+
   WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 
 GPU gpu;
