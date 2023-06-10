@@ -293,6 +293,7 @@ WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WG
 WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
+const char * Entry="computeStuff";
 
 class GPU{
 
@@ -427,19 +428,14 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 char * cmp_bdy=wgl_cmp_src;
-  
+shaderModuleDescriptor={cmp_bdy,0,NULL};
 
-  
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
-  
-const char * Entry="computeStuff";
-
 
 GPU gpu;
 
 public:
-
 
 static inline void nanoPause(){
 nanosleep(&req2,&rem);
@@ -700,7 +696,6 @@ outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 for(int i=0;i<input.size();++i){
 input[i]=i;
 }
-shaderModuleDescriptor={cmp_bdy,0,NULL};
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
