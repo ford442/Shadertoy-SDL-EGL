@@ -587,14 +587,14 @@ glUniform1i(smp_chn[2],2);
 glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);
 }else{
-glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[0],3);
-glActiveTexture(GL_TEXTURE0);
-glUniform1i(smp_chn[1],0);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[2],1);
-glActiveTexture(GL_TEXTURE2);
-glUniform1i(smp_chn[3],2);
+glActiveTexture(GL_TEXTURE5);
+glUniform1i(smp_chn[0],5);
+glActiveTexture(GL_TEXTURE5);
+glUniform1i(smp_chn[1],5);
+glActiveTexture(GL_TEXTURE5);
+glUniform1i(smp_chn[2],5);
+glActiveTexture(GL_TEXTURE5);
+glUniform1i(smp_chn[3],5);
 }
 }
   // buffer frame/time
