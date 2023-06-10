@@ -61,7 +61,7 @@ WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WG
 WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
-const char * computeShader=
+inline char computeShaderSrc[1000]=
 "@group(0)@binding(0)var <storage,read>inputBuffer: array<i32,65536>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
 "@compute@workgroup_size(256)"
@@ -74,3 +74,5 @@ const char * computeShader=
 "}"
 "}"
 "}";
+
+char * computeShader=computeShaderSrc;
