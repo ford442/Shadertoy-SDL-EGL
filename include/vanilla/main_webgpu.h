@@ -67,7 +67,7 @@ const char * computeShader=
 "@group(0)@binding(0)var <storage,read>inputBuffer: array<i32,65536>;"
 
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
-"var <storage,read_write>nn:i32;"
+"var <workgroup>nn:i32;"
 
 "@compute@workgroup_size(256)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
