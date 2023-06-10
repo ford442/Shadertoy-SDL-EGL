@@ -295,7 +295,6 @@ WGpuBuffer mapBuffer=0;
 WGpuBufferDescriptor bufferDescriptorM={};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 const char * Entry="computeStuff";
-WGpuBufferDescriptor bufferDescriptorM={};
 
 class GPU{
 
