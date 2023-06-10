@@ -427,8 +427,6 @@ char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
-char * cmp_bdy=wgl_cmp_src;
-shaderModuleDescriptor={cmp_bdy,0,NULL};
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
@@ -690,6 +688,10 @@ return nullptr;
 }procc;
 
 static void raf(WGpuDevice device){
+  
+  char * cmp_bdy=wgl_cmp_src;
+shaderModuleDescriptor={cmp_bdy,0,NULL};
+  
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
