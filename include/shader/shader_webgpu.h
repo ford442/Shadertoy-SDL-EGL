@@ -266,6 +266,34 @@ WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuDeviceDescriptor deviceDescriptor={};
 
+
+WGpuQueue queue=0;
+WGpuBindGroupLayout bindGroupLayout=0;
+WGpuComputePipeline computePipeline=0;
+WGpuBuffer inputBuffer=0;
+WGpuBuffer outputBuffer=0;
+WGpuBuffer uniBuffer=0;
+WGpuShaderModule cs=0;
+WGpuCommandBuffer commandBuffer=0;
+WGpuCommandEncoder encoder=0;
+WGpuComputePassEncoder computePass=0;
+WGpuBindGroup bindGroup=0;
+WGpuPipelineLayout pipelineLayout=0;
+WGpuQuerySet querySet=0;
+WGpuComputePassDescriptor computePassDescriptor={};
+WGpuShaderModuleDescriptor shaderModuleDescriptor={};
+WGpuCommandBufferDescriptor commandBufferDescriptor={};
+WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
+WGpuBindGroupEntry bindGroupEntry[2]={};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
+WGpuBufferBindingLayout bufferBindingLayout2={2};
+WGpuBufferBindingLayout bufferBindingLayout3={2};
+WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
+
 class GPU{
 
 private:
@@ -412,34 +440,6 @@ GPU gpu;
 
 public:
 
-
-
-WGpuQueue queue=0;
-WGpuBindGroupLayout bindGroupLayout=0;
-WGpuComputePipeline computePipeline=0;
-WGpuBuffer inputBuffer=0;
-WGpuBuffer outputBuffer=0;
-WGpuBuffer uniBuffer=0;
-WGpuShaderModule cs=0;
-WGpuCommandBuffer commandBuffer=0;
-WGpuCommandEncoder encoder=0;
-WGpuComputePassEncoder computePass=0;
-WGpuBindGroup bindGroup=0;
-WGpuPipelineLayout pipelineLayout=0;
-WGpuQuerySet querySet=0;
-WGpuComputePassDescriptor computePassDescriptor={};
-WGpuShaderModuleDescriptor shaderModuleDescriptor={};
-WGpuCommandBufferDescriptor commandBufferDescriptor={};
-WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
-WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
-WGpuBindGroupEntry bindGroupEntry[2]={};
-WGpuBufferBindingLayout bufferBindingLayout1={3};
-WGpuBufferBindingLayout bufferBindingLayout2={2};
-WGpuBufferBindingLayout bufferBindingLayout3={2};
-WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 static inline void nanoPause(){
 nanosleep(&req2,&rem);
