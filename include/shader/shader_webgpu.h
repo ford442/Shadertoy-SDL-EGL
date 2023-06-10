@@ -671,7 +671,7 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 
 if(uni_i.at(0,0)%30==0.0){
-if(shaderToySeconds%2==0.0){
+if(i_date.at(1,1)%2==0.0){
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
