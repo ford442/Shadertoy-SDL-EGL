@@ -158,6 +158,7 @@ inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
+"uniform sampler2D iChannel4;"
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
@@ -297,7 +298,10 @@ WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false}
 const char * Entry="computeStuff";
 char * cm_hdr=cm_hdr_src;
 GLuint wtexture=0;
+GLsizei width=256;
+GLsizei height=256;
 
+//wgpu
 static void raf(WGpuDevice device){
 std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
@@ -347,8 +351,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData)
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),65536*sizeof(int));
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
-GLsizei width=256;
-GLsizei height=256;
+
 // int * Colora=new int[width*height*sizeof(int)];
 unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
 for(int g=0;g<65536;g=g+4){
@@ -435,8 +438,9 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLint uni_srate=0,uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res0=0,smp_chn_res1=0,smp_chn_res2=0,smp_chn_res3=0,smp_chn[4],uni_frm=0;
-inline GLfloat uni_chn_tme3=0.0f,uni_chn_tme2=0.0f,uni_chn_tme1=0.0f,uni_chn_tme0=0.0f,uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
+inline GLint uni_srate=0,uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res[4]={},smp_chn[4],uni_frm=0;
+inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
+inline GLfloat uni_chn_tme[4];
 
 struct{
 boost::chrono::duration<double,boost::chrono::seconds::period>time_spana;
@@ -634,10 +638,10 @@ else{
 clk_l=true;
 }
 glUniform1f(uni_tme,d_time.at(0,0));
-glUniform1f(uni_chn_tme0,d_time.at(0,0));
-glUniform1f(uni_chn_tme1,d_time.at(0,0));
-glUniform1f(uni_chn_tme2,d_time.at(0,0));
-glUniform1f(uni_chn_tme3,d_time.at(0,0));
+glUniform1f(uni_chn_tme[0],d_time.at(0,0));
+glUniform1f(uni_chn_tme[1],d_time.at(0,0));
+glUniform1f(uni_chn_tme[2],d_time.at(0,0));
+glUniform1f(uni_chn_tme[3],d_time.at(0,0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 
 const time_t timE=time(0);
@@ -972,19 +976,19 @@ glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
-uni_chn_tme0=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[0]");
-uni_chn_tme1=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[1]");
-uni_chn_tme2=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[2]");
-uni_chn_tme3=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[3]");
+uni_chn_tme[0]=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[0]");
+uni_chn_tme[1]=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[1]");
+uni_chn_tme[2]=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[2]");
+uni_chn_tme[3]=glGetUniformLocation(S1.at(0,0,0),"iChannelTime[3]");
 uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
 uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
 uni_res=glGetUniformLocation(S1.at(0,0,0),"iResolution");
 uni_mse=glGetUniformLocation(S1.at(0,0,0),"iMouse");
 uni_srate=glGetUniformLocation(S1.at(0,0,0),"iSampleRate");
-smp_chn_res0=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[0]");
-smp_chn_res1=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[1]");
-smp_chn_res2=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[2]");
-smp_chn_res3=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[3]");
+smp_chn_res[0]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[0]");
+smp_chn_res[1]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[1]");
+smp_chn_res[2]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[2]");
+smp_chn_res[3]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[3]");
 smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
@@ -1011,7 +1015,7 @@ Colora[1]=222;
 Colora[2]=0;
 Colora[3]=230;
 glGenTextures(1,&texture);
-glActiveTexture(GL_TEXTURE5);
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -1022,7 +1026,7 @@ Colorb[1]=255;
 Colorb[2]=0;
 Colorb[3]=128;
 glGenTextures(1,&textureb);
-glActiveTexture(GL_TEXTURE6);
+glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -1052,7 +1056,7 @@ glUniform1i(smp_chn[3],3);
 
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 glGenTextures(1,&wtexture);
-glActiveTexture(GL_TEXTURE1);
+glActiveTexture(GL_TEXTURE4);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
