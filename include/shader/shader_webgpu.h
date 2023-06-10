@@ -262,6 +262,8 @@ std::vector<float>input(IbufferSize/sizeof(int));
 uint32_t invocationCount=IbufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+WGpuAdapter adapter=0;
+WGpuDevice device=0;
 
 class GPU{
 
@@ -411,8 +413,6 @@ public:
 
 
 
-WGpuAdapter adapter=0;
-WGpuDevice device=0;
 WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuComputePipeline computePipeline=0;
