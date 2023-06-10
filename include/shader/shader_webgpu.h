@@ -571,10 +571,10 @@ return;
 void uniDOWN(){
 t_size.at(0,1)=t_size.at(0,1)*0.99;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res0,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res1,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res2,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res3,t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
 }
@@ -635,8 +635,8 @@ if(ms_l==true){
 retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(clk_l==true){
-const long int xxx=mms2.at(0,0);
-const long int yyy=mms2.at(0,1);
+const long xxx=mms2.at(0,0);
+const long yyy=mms2.at(0,1);
 mms.at(0,0)=float(xxx);
 mms.at(1,0)=float((i_size.at(0,0)-yyy));
 clk_l=false;
@@ -660,13 +660,13 @@ const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
 int mn=1+datE->tm_mon;
-*/
 int dy=datE->tm_mday-1;
 int hr=5+datE->tm_hour;
 int mi=datE->tm_min;
 int sc=datE->tm_sec;
 int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
+*/
 i_date.at(1,1)+=int(d_time.at(0,0));
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 
@@ -676,19 +676,19 @@ glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[1],1);
-glActiveTexture(GL_TEXTURE5);
-glUniform1i(smp_chn[2],5);
+glActiveTexture(GL_TEXTURE2);
+glUniform1i(smp_chn[2],2);
 glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);
 }else{
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[0],1);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[1],1);
+glActiveTexture(GL_TEXTURE3);
+glUniform1i(smp_chn[0],3);
+glActiveTexture(GL_TEXTURE2);
+glUniform1i(smp_chn[1],2);
 glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[2],1);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[3],1);
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[3],0);
 }
 }
   // buffer frame/time
