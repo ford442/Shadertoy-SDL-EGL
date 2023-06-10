@@ -262,9 +262,9 @@ static void_tensor bin=void_tensor{1,1};
 uint32_t bufferSize=65536*sizeof(int);
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
-WGpuBufferDescriptor bufferDescriptorI={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={};
+WGpuBufferDescriptor bufferDescriptorO={};
+WGpuBufferDescriptor bufferDescriptorM={};
 void * userDataA;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 uint32_t workgroupSize=256;
@@ -310,6 +310,14 @@ shaderModuleDescriptor={cmp_bdy,0,NULL};
 for(int i=0;i<input.size();++i){
 input[i]=i;
 }
+bufferDescriptorI.mappedAtCreation=false;
+bufferDescriptorI.size=bufferSize;
+bufferDescriptorI.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST;
+bufferDescriptorO.mappedAtCreation=false;
+bufferDescriptorO.size=bufferSize;
+bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
+bufferDescriptorM.mappedAtCreation=false;
+bufferDescriptorM.size=bufferSize;
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
