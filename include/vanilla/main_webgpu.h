@@ -1,7 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/vanilla/defs.h"
 #include "../../include/shader/gl.h"
-#include "../../include/shader/egl.h"
 
 #include <chrono>
 #include <iostream>
@@ -12,10 +11,10 @@
 #include <cfloat>
 #include <climits>
 #include <math.h>
-#include <emscripten.h>
-#include <emscripten/html5.h>
 #include <unistd.h>
 #include <functional>
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 #include "../../lib/lib_webgpu.h"
 
@@ -46,7 +45,6 @@ WGpuComputePassEncoder computePass=0;
 WGpuBindGroup bindGroup=0;
 WGpuPipelineLayout pipelineLayout=0;
 WGpuQuerySet querySet=0;
-
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
@@ -63,11 +61,8 @@ WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|W
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 const char * computeShader=
-  
 "@group(0)@binding(0)var <storage,read>inputBuffer: array<i32,65536>;"
-
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
-
 "@compute@workgroup_size(256)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 "var a:i32=0;{"
