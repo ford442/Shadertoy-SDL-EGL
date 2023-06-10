@@ -264,6 +264,7 @@ uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
+WGpuDeviceDescriptor deviceDescriptor={};
 
 class GPU{
 
@@ -430,7 +431,6 @@ WGpuComputePassDescriptor computePassDescriptor={};
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
-WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
 WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
@@ -693,7 +693,7 @@ return nullptr;
 
 }procc;
 
-void raf(WGpuDevice device){
+static void raf(WGpuDevice device){
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
