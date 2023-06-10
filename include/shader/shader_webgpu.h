@@ -295,6 +295,86 @@ WGpuBuffer mapBuffer=0;
 WGpuBufferDescriptor bufferDescriptorM={};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 const char * Entry="computeStuff";
+char * cm_hdr=cm_hdr_src;
+GLuint wtexture=0;
+
+static void raf(WGpuDevice device){
+std::vector<float>input(65536);
+std::vector<unsigned int>outputd(65536);
+char * cmp_bdy=wgl_cmp_src;
+shaderModuleDescriptor={cmp_bdy,0,NULL};
+bufferDescriptorM.size=65536*sizeof(int);
+bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
+bufferDescriptorM.mappedAtCreation=false;
+mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
+outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
+for(int i=0;i<input.size();++i){
+input[i]=i;
+}
+cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
+bindGroupLayoutEntries[0].binding=0;
+bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[0].type=1;
+bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
+bindGroupLayoutEntries[1].binding=1;
+bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[1].type=1;
+bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
+bindGroupLayout=wgpu_device_create_bind_group_layout(device,bindGroupLayoutEntries,2);
+pipelineLayout=wgpu_device_create_pipeline_layout(device,&bindGroupLayout,1);
+computePipeline=wgpu_device_create_compute_pipeline(device,cs,Entry,pipelineLayout,NULL,0);
+bindGroupEntry[0].binding=0;
+bindGroupEntry[0].resource=inputBuffer;
+bindGroupEntry[0].bufferBindOffset=0;
+bindGroupEntry[0].bufferBindSize=0;
+bindGroupEntry[1].binding=1;
+bindGroupEntry[1].resource=outputBuffer;
+bindGroupEntry[1].bufferBindOffset=0;
+bindGroupEntry[1].bufferBindSize=0;
+bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
+encoder=wgpu_device_create_command_encoder(device,0);
+computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
+wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
+wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
+queue=wgpu_device_get_queue(device);
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
+wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t(256),uint32_t(1));
+wgpu_encoder_end(computePass);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,65536*sizeof(int));
+commandBuffer=wgpu_encoder_finish(encoder);
+WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
+WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),65536*sizeof(int));
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
+GLsizei width=256;
+GLsizei height=256;
+// int * Colora=new int[width*height*sizeof(int)];
+unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
+for(int g=0;g<65536;g=g+4){
+Colora[g]=255; // int(resulT[g]);
+Colora[g+1]=0; // int(resulT[g+1]);
+Colora[g+2]=255; // int(resulT[g+2]);
+Colora[g+3]=255; // int(resulT[g+3]);
+}
+};
+wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
+};
+wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
+wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
+return;
+}
+  
+
+static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
+device=result;
+raf(device);
+}
+
+static void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
+adapter=result;
+wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
+}
 
 class GPU{
 
@@ -424,7 +504,6 @@ EGLConfig eglconfig=nullptr;
 EGLint config_size=0,major,minor=0;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
-char * cm_hdr=cm_hdr_src;
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
@@ -688,89 +767,6 @@ return nullptr;
 
 }procc;
 
-static void raf(WGpuDevice device){
-std::vector<float>input(65536);
-std::vector<unsigned int>outputd(65536);
-char * cmp_bdy=wgl_cmp_src;
-shaderModuleDescriptor={cmp_bdy,0,NULL};
-bufferDescriptorM.size=65536*sizeof(int);
-bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
-bufferDescriptorM.mappedAtCreation=false;
-mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
-inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
-outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
-for(int i=0;i<input.size();++i){
-input[i]=i;
-}
-cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
-bindGroupLayoutEntries[0].binding=0;
-bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
-bindGroupLayoutEntries[0].type=1;
-bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
-bindGroupLayoutEntries[1].binding=1;
-bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
-bindGroupLayoutEntries[1].type=1;
-bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
-bindGroupLayout=wgpu_device_create_bind_group_layout(device,bindGroupLayoutEntries,2);
-pipelineLayout=wgpu_device_create_pipeline_layout(device,&bindGroupLayout,1);
-computePipeline=wgpu_device_create_compute_pipeline(device,cs,Entry,pipelineLayout,NULL,0);
-bindGroupEntry[0].binding=0;
-bindGroupEntry[0].resource=inputBuffer;
-bindGroupEntry[0].bufferBindOffset=0;
-bindGroupEntry[0].bufferBindSize=0;
-bindGroupEntry[1].binding=1;
-bindGroupEntry[1].resource=outputBuffer;
-bindGroupEntry[1].bufferBindOffset=0;
-bindGroupEntry[1].bufferBindSize=0;
-bindGroup=wgpu_device_create_bind_group(device,bindGroupLayout,bindGroupEntry,2);
-encoder=wgpu_device_create_command_encoder(device,0);
-computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
-wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
-wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
-queue=wgpu_device_get_queue(device);
-wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
-wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t(256),uint32_t(1));
-wgpu_encoder_end(computePass);
-wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,65536*sizeof(int));
-commandBuffer=wgpu_encoder_finish(encoder);
-WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
-WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),65536*sizeof(int));
-wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
-GLsizei width=256;
-GLsizei height=256;
-GLuint wtexture=0;
-// int * Colora=new int[width*height*sizeof(int)];
-unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
-for(int g=0;g<65536;g=g+4){
-Colora[g]=255; // int(resulT[g]);
-Colora[g+1]=0; // int(resulT[g+1]);
-Colora[g+2]=255; // int(resulT[g+2]);
-Colora[g+3]=255; // int(resulT[g+3]);
-}
-glGenTextures(1,&wtexture);
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,wtexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
-glGenerateMipmap(GL_TEXTURE_2D);
-};
-wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
-};
-wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
-wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
-return;
-}
-  
-
-static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
-device=result;
-raf(device);
-}
-
-static void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
-adapter=result;
-wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
-}
 
 void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
@@ -816,7 +812,6 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglBindAPI(EGL_OPENGL_API);
-  
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -1054,8 +1049,14 @@ glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
-navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 
+navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+glGenTextures(1,&wtexture);
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
+  
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
