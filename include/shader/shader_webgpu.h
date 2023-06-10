@@ -1102,7 +1102,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanoPause();
-navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+navigator_gpu_request_adapter_async(&options,Run::procc.ObtainedWebGpuAdapter,0);
 return;
 }
   
