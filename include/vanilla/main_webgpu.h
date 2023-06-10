@@ -1,6 +1,7 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/vanilla/defs.h"
 #include "../../include/shader/gl.h"
+#include "../../include/shader/egl.h"
 
 #include <chrono>
 #include <iostream>
