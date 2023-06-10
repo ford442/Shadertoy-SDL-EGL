@@ -304,8 +304,8 @@ GLsizei height=256;
 
 //wgpu
 static void raf(WGpuDevice device){
-std::vector<float>input(65536);
-std::vector<unsigned int>outputd(65536);
+std::vector<float>input(65536*sizeof(float));
+std::vector<unsigned int>outputd(65536*sizeof(unsigned int));
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 bufferDescriptorM.size=65536*sizeof(int);
