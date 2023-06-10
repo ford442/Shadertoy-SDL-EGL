@@ -252,7 +252,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-
+  WGpuBuffer mapBuffer=0;
 
 class GPU{
 
@@ -687,7 +687,7 @@ return nullptr;
 
   
 void raf(WGpuDevice device){
-  WGpuBuffer mapBuffer=0;
+
 
 uint32_t workgroupSize=256;
 
