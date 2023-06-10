@@ -250,6 +250,7 @@ static f_tensor Fi=f_tensor{2,2};
 static d_tensor Di=d_tensor{2,2};
 static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
+static i_tensor i_date=i_tensor{2,2};
 static f_tensor t_size=f_tensor{1,2};
 static li_tensor i_size=li_tensor{1,2};
 static void_tensor cntx=void_tensor{2,2};
@@ -617,6 +618,17 @@ return;
 union{
 
 static void uni(){
+uni_i.at(0,0)++;
+u_time.t3=u_time.t2;
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_iTime_set(u_time.time_spana.count());
+u_iTimeDelta_set(u_time.time_spanb.count());
+if(ms_l==true){
+mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
+mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
+}
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 if(ms_l==true){
@@ -643,19 +655,20 @@ glUniform1f(uni_chn_tme[1],d_time.at(0,0));
 glUniform1f(uni_chn_tme[2],d_time.at(0,0));
 glUniform1f(uni_chn_tme[3],d_time.at(0,0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
-
+/*
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
-short yr=1900+datE->tm_year;
-short mn=1+datE->tm_mon;
-short dy=datE->tm_mday-1;
-short hr=5+datE->tm_hour;
-short mi=datE->tm_min;
-short sc=datE->tm_sec;
-short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-if(int(d_time.at(0,0))%60==0){
-// glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
-}
+int yr=1900+datE->tm_year;
+int mn=1+datE->tm_mon;
+*/
+int dy=datE->tm_mday-1;
+int hr=5+datE->tm_hour;
+int mi=datE->tm_min;
+int sc=datE->tm_sec;
+int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+i_date.at(1,0)=dy;
+i_date.at(1,1)+=int(d_time.at(0,0));
+glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 
 if(uni_i.at(0,0)%30==0.0){
 if(shaderToySeconds%2==0.0){
@@ -725,17 +738,7 @@ return;
 }
 
 static void Rend(){
-uni_i.at(0,0)++;
-u_time.t3=u_time.t2;
-u_time.t2=boost::chrono::high_resolution_clock::now();
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_iTime_set(u_time.time_spana.count());
-u_iTimeDelta_set(u_time.time_spanb.count());
-if(ms_l==true){
-mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
-mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
-}
+
 uni();
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 // nanoPause();
@@ -1004,7 +1007,6 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
   
-
     // texture
 GLsizei width1=1;
 GLsizei height1=1;
@@ -1015,33 +1017,33 @@ Colora[1]=222;
 Colora[2]=0;
 Colora[3]=230;
 glGenTextures(1,&texture);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[3],3);
 unsigned char* Colorb=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorb[0]=0;
 Colorb[1]=255;
 Colorb[2]=0;
 Colorb[3]=128;
 glGenTextures(1,&textureb);
-glActiveTexture(GL_TEXTURE1);
+glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
 unsigned char* Colorc=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorc[0]=80;
 Colorc[1]=0;
 Colorc[2]=130;
 Colorc[3]=200;
 glGenTextures(1,&texturec);
-glActiveTexture(GL_TEXTURE2);
+glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,texturec);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[1],1);
 unsigned char* Colord=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colord[0]=128;
 Colord[1]=128;
@@ -1052,32 +1054,37 @@ glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[3],3);
+// glUniform1i(smp_chn[3],3);
 
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 glGenTextures(1,&wtexture);
-glActiveTexture(GL_TEXTURE4);
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-  
+glUniform1i(smp_chn[0],0);
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
-short yr=1900+datE->tm_year;
-short mn=1+datE->tm_mon;
-short dy=datE->tm_mday-1;
-short hr=5+datE->tm_hour;
-short mi=datE->tm_min;
-short sc=datE->tm_sec;
-short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
+int yr=1900+datE->tm_year;
+int mn=1+datE->tm_mon;
+int dy=datE->tm_mday-1;
+int hr=5+datE->tm_hour;
+int mi=datE->tm_min;
+int sc=datE->tm_sec;
+int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+i_date.at(0,0)=yr;
+i_date.at(0,1)=mn;
+i_date.at(1,0)=dy;
+i_date.at(1,1)=shaderToySeconds;
+glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 // glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res0,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res1,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res2,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res3,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
