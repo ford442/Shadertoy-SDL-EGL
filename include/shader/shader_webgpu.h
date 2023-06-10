@@ -385,7 +385,7 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 char * cmp_bdy=wgl_cmp_src;
-
+uint64_t IbufferSize=65536*sizeof(int);
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
   
@@ -394,7 +394,7 @@ GPU gpu;
 public:
 
 uint32_t workgroupSize=256;
-uint64_t IbufferSize=65536*sizeof(int);
+
 std::vector<float>input(IbufferSize/sizeof(int));
 const char * Entry="computeStuff";
 uint32_t invocationCount=IbufferSize/sizeof(int);
