@@ -689,13 +689,11 @@ return nullptr;
 }procc;
 
 static void raf(WGpuDevice device){
-bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-
 std::vector<float>input(65536);
 std::vector<unsigned int>outputd(65536);
 char * cmp_bdy=wgl_cmp_src;
 shaderModuleDescriptor={cmp_bdy,0,NULL};
-  
+bufferDescriptorM={65536*sizeof(int),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
@@ -740,7 +738,8 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,65536*sizeof(int));
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture=0;
-int Colora[width*height];
+int * Colora[width*height*sizeof(int];
+// unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 Colora[g]=255; // int(resulT[g]);
 Colora[g+1]=0; // int(resulT[g+1]);
@@ -750,7 +749,7 @@ Colora[g+3]=255; // int(resulT[g+3]);
 glGenTextures(1,&wtexture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA_INTEGER,width,height,0,GL_RGBA_INTEGER,GL_INT,Colora);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA_INTEGER,width,height,0,GL_RGBA_INTEGER,GL_INT,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
