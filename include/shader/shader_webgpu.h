@@ -686,6 +686,7 @@ return results;
 return nullptr;
 }
 
+}procc;
 
 static void raf(WGpuDevice device){
 std::vector<float>input(65536);
@@ -750,7 +751,6 @@ glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-emscripten_set_main_loop((void(*)())Rend,0,0);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),65536*sizeof(int));
 };
@@ -758,6 +758,7 @@ wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
 return;
 }
+  
 
 static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
 device=result;
@@ -769,14 +770,6 @@ adapter=result;
 wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
-void WebGPU(){
-navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
-}
-  
-}procc;
-  
-
-  
 void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
@@ -821,6 +814,7 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglBindAPI(EGL_OPENGL_API);
+  
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -1008,6 +1002,7 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
+  
 
     // texture
 GLsizei width1=1;
@@ -1024,7 +1019,6 @@ glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
-glBindTexture(GL_TEXTURE_2D,0);
 unsigned char* Colorb=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorb[0]=0;
 Colorb[1]=255;
@@ -1036,7 +1030,6 @@ glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[1],1);
-glBindTexture(GL_TEXTURE_2D,0);
 unsigned char* Colorc=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorc[0]=80;
 Colorc[1]=0;
@@ -1048,7 +1041,6 @@ glBindTexture(GL_TEXTURE_2D,texturec);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[2],2);
-glBindTexture(GL_TEXTURE_2D,0);
 unsigned char* Colord=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colord[0]=128;
 Colord[1]=128;
@@ -1060,7 +1052,7 @@ glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
-glBindTexture(GL_TEXTURE_2D,0);
+navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 
   // date/time
 const time_t timE=time(0);
@@ -1106,7 +1098,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 nanoPause();
-Run::procc.WebGPU();
+emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
   
