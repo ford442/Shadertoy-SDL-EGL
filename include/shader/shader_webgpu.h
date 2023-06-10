@@ -16,7 +16,7 @@
 #include <cstring>
 #include <stdarg.h>
 #include <stdio.h>
-#include <stdint.h>
+#include <cstdint>
 #include <stdlib.h>
 #include <climits>
 #include <iostream>
@@ -314,11 +314,8 @@ bufferDescriptorM.mappedAtCreation=false;
 for(int i=0;i<input.size();++i){
 input[i]=i;
 }
-std::cout << "at create buff1 in";
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
-std::cout << "at create buff2 out";
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
-std::cout << "at create buff3 map";
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
 bindGroupLayoutEntries[0].binding=0;
