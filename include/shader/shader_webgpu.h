@@ -259,7 +259,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-uint64_t IbufferSize=65536*sizeof(int);
+uint32_t IbufferSize=65536*sizeof(int);
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBufferDescriptor bufferDescriptorI={65536*sizeof(int),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
