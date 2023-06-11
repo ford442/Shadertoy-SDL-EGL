@@ -340,6 +340,7 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int texCount=0;
+int tfrm=0;
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -717,7 +718,11 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-  int tfrm=(uni_i.at(0,0)%8);
+if(uni_i.at(0,0)%20==0){
+tfrm++
+if(tfrm>4){
+tfrm=0;
+}}
 
 if(uni_i.at(0,0)%90==0){
 if(shaderToySeconds%2==0){
