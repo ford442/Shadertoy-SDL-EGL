@@ -55,21 +55,21 @@ b3_shader_webgpu:
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
-	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
+	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
 	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
-	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=16MB \
-	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -BOOST_UBLAS_NDEBUG \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sTOTAL_STACK=16MB \
+	 -sGLOBAL_BASE=16777216 \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 --memory-init-file 0 -rtlib=compiler-rt -sSUPPORT_LONGJMP=wasm \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
-	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=1 -sALLOW_TABLE_GROWTH=1 \
-	 -jsDWEBGPU_DEBUG=0 -DNDEBUG -sEVAL_CTORS=1 -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sWASM=1 \
+	 -sGL_UNSAFE_OPTS=1 \
+	 -jsDWEBGPU_DEBUG=0 -DNDEBUG -sEVAL_CTORS=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sWASM=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
