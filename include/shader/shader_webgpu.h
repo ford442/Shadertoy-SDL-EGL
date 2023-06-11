@@ -289,7 +289,8 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
+// unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * ColorA[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
