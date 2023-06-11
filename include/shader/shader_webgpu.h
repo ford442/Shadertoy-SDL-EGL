@@ -266,7 +266,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture;
+GLuint wtexture=0;
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
@@ -300,8 +300,17 @@ WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false}
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 std::vector<int>input(bufferSize/sizeof(int));
 std::vector<int>outputd(bufferSize/sizeof(int));
-
 char * cmp_bdy=wgl_cmp_src;
+
+int randomNumber=0,entropySeed=0;
+std::random_device randomizer;
+
+inline int rNd4(int randomMax){
+entropySeed=randomMax*randomizer();
+std::srand(entropySeed);
+randomNumber=std::rand()%randomMax;
+return randomNumber;
+}
 
 //wgpu
 static void raf(WGpuDevice device){
@@ -309,7 +318,7 @@ inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
-int raN=r4nd(255);
+int raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
 // }
