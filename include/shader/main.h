@@ -244,6 +244,8 @@ pnnl.addEventListener('keydown',Key);
 });
 
 static inline void(*jss)(){&js_main};
+int rD=0;
+int Th=0;
 
 class js
 {
@@ -255,8 +257,7 @@ private:
 public:
  
 std::random_device rd;
-int rD=0;
-int Th=0;
+
 // v128_t Dr;
 
 inline int rNd(int Th){
