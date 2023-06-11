@@ -23,6 +23,7 @@
 #include <ctime>
 #include <vector>
 #include <functional>
+#include <cassert>
 
 #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
