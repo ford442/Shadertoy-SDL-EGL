@@ -353,7 +353,7 @@ uint32_t * resulT[bufferSize];
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 
 // int * Colora=new int[width*height*sizeof(int)];
-unsigned char * Colora=new unsigned char[width*height*sizeof(unsigned char)];
+unsigned char * Colora=new unsigned char[256*256*sizeof(unsigned char)];
 for(int g=0;g<65536;g=g+4){
 Colora[g]=255; // int(resulT[g]);
 Colora[g+1]=0; // int(resulT[g+1]);
