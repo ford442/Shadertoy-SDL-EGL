@@ -724,16 +724,22 @@ if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
 gpuStart();
 texCount++;
-glBindTexture(GL_TEXTURE_2D,wtexture);
 
 switch(texCount){
 case 1:
+    glBindTexture(GL_TEXTURE_2D,wtexture);
+
 glActiveTexture(GL_TEXTURE0);
 case 2:
+    glBindTexture(GL_TEXTURE_2D,xtexture);
 glActiveTexture(GL_TEXTURE1);
 case 3:
+    glBindTexture(GL_TEXTURE_2D,ytexture);
+
 glActiveTexture(GL_TEXTURE2);
 case 4:
+    glBindTexture(GL_TEXTURE_2D,ztexture);
+
 glActiveTexture(GL_TEXTURE3);
 default:
 glActiveTexture(GL_TEXTURE0);
