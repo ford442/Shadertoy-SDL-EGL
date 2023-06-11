@@ -266,7 +266,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture=0;
+GLuint wtexture=0,xtexture=0;
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
@@ -699,12 +699,12 @@ glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],1);
 glUniform1i(smp_chn[3],1);
-glBindTexture(GL_TEXTURE_2D,0);
+// glBindTexture(GL_TEXTURE_2D,0);
 }else{
 if(i_date.at(1,1)%5==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,wtexture);
+glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
@@ -716,7 +716,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
-glBindTexture(GL_TEXTURE_2D,0);
+// glBindTexture(GL_TEXTURE_2D,0);
 }
 }
 }
@@ -1108,6 +1108,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 
 gpuStart();
 glGenTextures(1,&wtexture);
+glGenTextures(1,&xtexture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
