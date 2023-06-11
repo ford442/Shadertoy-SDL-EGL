@@ -63,8 +63,8 @@ return shader;
 };
 
 inline char wgl_cmp_src[1000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,65536>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,262144>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 "for (var y=0;y<(256*256);y++){"
@@ -256,11 +256,11 @@ static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
 uint32_t workgroupSize=1;
-uint64_t bufferSize=65536*sizeof(int);
+uint64_t bufferSize=262144*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-int * resulT[65536];
+int * resulT[262144];
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
@@ -349,13 +349,13 @@ uint32_t * resulT[bufferSize];
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 
 // int * Colora=new int[width*height*sizeof(int)];
-unsigned char * Colora=new unsigned char[256*256*sizeof(unsigned char)];
+unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 int hh=g*4;
-Colora[hh]=255; // int(resulT[g]);
-Colora[hh+1]=0; // int(resulT[g+1]);
-Colora[hh+2]=255; // int(resulT[g+2]);
-Colora[hh+3]=255; // int(resulT[g+3]);
+Colora[hh]=resulT[g];
+Colora[hh+1]=resulT[g+1];
+Colora[hh+2]=resulT[g+2];
+Colora[hh+3]=resulT[g+3];
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
