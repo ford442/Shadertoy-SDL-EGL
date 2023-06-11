@@ -289,8 +289,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
-unsigned char * ColorW=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
@@ -400,14 +399,10 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-Colora[hh]=int(resulT[hh]);
-ColorW[hh]=raN-int(resulT[hh]);
-Colora[hh+1]=int(resulT[hh+1]);
-ColorW[hh+1]=raN-int(resulT[hh+2]);
-Colora[hh+2]=int(resulT[hh+2]);
-ColorW[hh+2]=raN-int(resulT[hh+1]);
-Colora[hh+3]=int(resulT[hh+3]);
-ColorW[hh+3]=int(resulT[hh+3]);
+ColorA[hh]=int(resulT[hh]);
+ColorA[hh+1]=int(resulT[hh+1]);
+ColorA[hh+2]=int(resulT[hh+2]);
+ColorA[hh+3]=int(resulT[hh+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
@@ -742,7 +737,7 @@ glActiveTexture(GL_TEXTURE0);
 }
 if(texCount<3){texCount=0;}
 glBindTexture(GL_TEXTURE_2D,wtexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
@@ -767,12 +762,12 @@ glActiveTexture(GL_TEXTURE3);
 default:
 glActiveTexture(GL_TEXTURE0);
 }
-glBindTexture(GL_TEXTURE_2D,xtexture);
+glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorW);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],1);
