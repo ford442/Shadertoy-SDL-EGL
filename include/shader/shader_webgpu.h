@@ -67,11 +67,12 @@ inline char wgl_cmp_src[1000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
 "@compute@workgroup_size(256)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
-"for (var y=0;y<(256*256);y=y+4){"
+"for (var y=0;y<(256*256);){"
 "outputBuffer[y]=y%16;"
 "outputBuffer[y+1]=y%128;"
 "outputBuffer[y+2]=y%255;"
 "outputBuffer[y+3]=255;"
+"y=y+4;"
 "}"
 "}";
 
