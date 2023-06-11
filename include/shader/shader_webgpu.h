@@ -379,6 +379,10 @@ adapter=result;
 wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
+void gpuStart(){
+navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+}
+
 class GPU{
 
 private:
@@ -1056,7 +1060,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,C
 glGenerateMipmap(GL_TEXTURE_2D);
 // glUniform1i(smp_chn[3],3);
 
-navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+gpuStart();
 glGenTextures(1,&wtexture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
