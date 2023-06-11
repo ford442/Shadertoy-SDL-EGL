@@ -305,7 +305,7 @@ static void raf(WGpuDevice device){
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
-wgpu_buffer_unmap(mapBuffer);
+// wgpu_buffer_unmap(mapBuffer);
 //for(int i=0;i<input.size();++i){
 //input[i]=i;
 //}
