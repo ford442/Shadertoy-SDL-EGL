@@ -307,6 +307,7 @@ static void raf(WGpuDevice device){
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+wgpu_buffer_unmap(mapBuffer);
 for(int i=0;i<input.size();++i){
 input[i]=i;
 }
@@ -357,7 +358,6 @@ Colora[hh+1]=int(resulT[g+1]);
 Colora[hh+2]=int(resulT[g+2]);
 Colora[hh+3]=int(resulT[g+3]);
 }
-wgpu_buffer_unmap(mapBuffer);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
