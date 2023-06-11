@@ -21,7 +21,7 @@
 
 uint32_t workgroupSize=256;
 uint64_t IbufferSize=65536*sizeof(int);
-std::vector<float>input(IbufferSize/sizeof(int));
+std::vector<int>input(IbufferSize/sizeof(int));
 const char * Entry="computeStuff";
 uint32_t invocationCount=IbufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
