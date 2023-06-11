@@ -724,7 +724,7 @@ if(tfrm>4){
 tfrm=0;
 }}
 
-if(uni_i.at(0,0)%90==0){
+if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%2==0){
 gpuStart();
 texCount++;
