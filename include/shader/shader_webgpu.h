@@ -254,6 +254,8 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
+unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
+
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
 const char * Entry="computeStuff";
@@ -357,9 +359,6 @@ WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 int * resulT[bufferSize];
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
-
-// int * Colora=new int[width*height*sizeof(int)];
-unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 int hh=g*4;
 Colora[hh]=int(resulT[hh]);
