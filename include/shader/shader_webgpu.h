@@ -312,13 +312,15 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
+int raN=0;
+
 //wgpu
 static void raf(WGpuDevice device){
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
-int raN=rNd4(255);
+raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
 // }
@@ -683,20 +685,28 @@ glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1))
 if(uni_i.at(0,0)%30==0.0){
 if(i_date.at(1,1)%2==0.0){
 gpuStart();
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE1);
+wtexture=0;
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
+}else{
+gpuStart();
+glActiveTexture(GL_TEXTURE1);
+wtexture=0;
+glBindTexture(GL_TEXTURE_2D,wtexture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
+glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
-}else{
-glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[0],3);
-glUniform1i(smp_chn[1],3);
-glUniform1i(smp_chn[2],3);
-glUniform1i(smp_chn[3],3);
 }
 }
 /*
