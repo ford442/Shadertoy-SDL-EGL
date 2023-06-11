@@ -98,7 +98,7 @@ inline char wgl_cmp_src[1000]=
 "outputBuffer[f]=255;"
 "outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=255;"
-"outputBuffer[f+3]=255;
+"outputBuffer[f+3]=255;"
 "}"
 "}"
 "}"
