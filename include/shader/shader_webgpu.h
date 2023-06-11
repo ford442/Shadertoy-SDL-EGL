@@ -62,10 +62,10 @@ return shader;
 inline char wgl_cmp_src[1000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
-"@compute@workgroup_size(64,4,1)"
+"@compute@workgroup_size(64,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let a: u32=global_id.x*global_id.y*4;"
-"for (var e:i32=0;e<64;e++){"
+"let a: u32=global_id.x*4;"
+"for (var e:i32=0;e<256;e++){"
 "var f:i32=e*4;"
 "var g:i32=(255-f)%inputBuffer[0];"
 "outputBuffer[f]=g;"
