@@ -267,7 +267,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture=0,xtexture=0;
+GLuint wtexture,xtexture;
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -682,11 +682,10 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
-if(uni_i.at(0,0)%60==0.0){
+if(uni_i.at(0,0)%90==0.0){
 if(i_date.at(1,1)%2==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
-wtexture=0;
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -704,7 +703,6 @@ glUniform1i(smp_chn[3],1);
 if(i_date.at(1,1)%5==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
-xtexture=0;
 glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
@@ -1061,7 +1059,7 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
     // texture
 GLsizei width1=1;
 GLsizei height1=1;
-GLuint texture=0,textureb=0,texturec=0,textured=0;
+GLuint texture,textureb,texturec,textured;
 unsigned char* Colora=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colora[0]=0;
 Colora[1]=255;
