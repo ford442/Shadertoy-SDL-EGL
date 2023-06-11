@@ -727,20 +727,20 @@ texCount++;
 
 switch(texCount){
 case 1:
+glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D,wtexture);
 
-glActiveTexture(GL_TEXTURE0);
-case 2:
+case 2:glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D,xtexture);
-glActiveTexture(GL_TEXTURE1);
-case 3:
+
+case 3:glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D,ytexture);
 
-glActiveTexture(GL_TEXTURE2);
-case 4:
+
+case 4:glActiveTexture(GL_TEXTURE3);
     glBindTexture(GL_TEXTURE_2D,ztexture);
 
-glActiveTexture(GL_TEXTURE3);
+
 default:
 glActiveTexture(GL_TEXTURE0);
 }
