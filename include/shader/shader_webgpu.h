@@ -684,7 +684,7 @@ i_date.at(1,1)+=secs;
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
-if(secs%3==0.0){
+if(secs%2==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
@@ -1037,7 +1037,9 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
-  
+  glGenTextures(1,&wtexture);
+glGenTextures(1,&xtexture);
+  /*
     // texture
 GLsizei width1=1;
 GLsizei height1=1;
@@ -1085,20 +1087,21 @@ glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
+  
 // glUniform1i(smp_chn[3],3);
 
 gpuStart();
-glGenTextures(1,&wtexture);
-glGenTextures(1,&xtexture);
+
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
+  
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
-
+*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
