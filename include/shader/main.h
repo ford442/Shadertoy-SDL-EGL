@@ -250,12 +250,13 @@ class js
 
 private:
 
+
+
+public:
+ 
 std::random_device rd;
 int rD=0;
 int Th=0;
-
-public:
-
 // v128_t Dr;
 
 inline int rNd(int Th){
