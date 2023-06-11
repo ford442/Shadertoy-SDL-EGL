@@ -251,28 +251,28 @@ class js
 private:
 
 std::random_device rd;
+int rD=0;
+int Th=0;
 
 public:
 
-int32_t rD=0;
-int32_t Th=0;
-v128_t Dr;
+// v128_t Dr;
 
-inline v128_t rNd(int32_t Th){
+inline int rNd(int Th){
 int nm=Th*rd();
 std::srand(nm);
 rD=std::rand()%Th;
-Dr=wasm_i32x4_splat(rD);
-return Dr;
+// Dr=wasm_i32x4_splat(rD);
+return rD;
 }
 
 };
 
 extern"C"{
 
-int32_t c=0;
-v128_t Rg;
-int32_t r4nd(int32_t);
+int TH=0;
+int RG=0;
+int r4nd(int);
 
 }
 
