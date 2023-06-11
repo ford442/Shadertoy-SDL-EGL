@@ -65,9 +65,9 @@ return shader;
 inline char wgl_cmp_src[1000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
-"@compute@workgroup_size(256,256,1)"
+"@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let a: u32=global_id.x*4;"
+"let a: u32=global_id.x*4*global_id.y;"
 "outputBuffer[a]=0;"
 "outputBuffer[a+1]=42;"
 "outputBuffer[a+2]=0;"
@@ -253,7 +253,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-uint32_t workgroupSize=256;
+uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
@@ -337,7 +337,7 @@ wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
 wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
 queue=wgpu_device_get_queue(device);
 wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
-wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t(256),uint32_t(1));
+wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(64),uint32_t(4),uint32_t(1));
 wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
 commandBuffer=wgpu_encoder_finish(encoder);
