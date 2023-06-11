@@ -17,8 +17,7 @@ return RG;
 
 }
 
-int32_t main(void){
+int main(void){
 jss();
-tie(JS.Th,JS.rD,JS.Dr);
 return 0;
 }
