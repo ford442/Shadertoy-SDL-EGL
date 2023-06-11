@@ -736,7 +736,7 @@ case 3:
 glActiveTexture(GL_TEXTURE2);
 case 4:
 glActiveTexture(GL_TEXTURE2);
-case default:
+default:
 glActiveTexture(GL_TEXTURE0);
 }
 
@@ -763,7 +763,7 @@ case 3:
 glActiveTexture(GL_TEXTURE2);
 case 4:
 glActiveTexture(GL_TEXTURE2);
-case default:
+default:
 glActiveTexture(GL_TEXTURE0);
 }
 glActiveTexture(GL_TEXTURE3);
