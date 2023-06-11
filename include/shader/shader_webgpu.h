@@ -724,7 +724,7 @@ if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
 gpuStart();
 texCount++;
-// glBindTexture(GL_TEXTURE_2D,wtexture);
+glBindTexture(GL_TEXTURE_2D,wtexture);
 
 switch(texCount){
 case 1:
