@@ -350,17 +350,18 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 
 // int * Colora=new int[width*height*sizeof(int)];
 unsigned char * Colora=new unsigned char[256*256*sizeof(unsigned char)];
-for(int g=0;g<65536;g=g+4){
-Colora[g]=255; // int(resulT[g]);
-Colora[g+1]=0; // int(resulT[g+1]);
-Colora[g+2]=255; // int(resulT[g+2]);
-Colora[g+3]=255; // int(resulT[g+3]);
+for(int g=0;g<65536;g++){
+int hh=g*4;
+Colora[hh]=255; // int(resulT[g]);
+Colora[hh+1]=0; // int(resulT[g+1]);
+Colora[hh+2]=255; // int(resulT[g+2]);
+Colora[hh+3]=255; // int(resulT[g+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
-wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
+wgpu_queue_submit_one(queue,commandBuffer);
 return;
 }
   
