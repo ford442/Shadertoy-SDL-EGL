@@ -1165,10 +1165,7 @@ glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
 */
-  glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
