@@ -298,7 +298,7 @@ WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGP
 WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
-std::vector<int>input(1/sizeof(int));
+std::vector<int>input(iBufferSize/sizeof(int));
 std::vector<int>outputd(bufferSize/sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
 int randomNumber=0,entropySeed=0;
@@ -350,7 +350,7 @@ computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescript
 wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
 wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
 queue=wgpu_device_get_queue(device);
-wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),1*sizeof(int));
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),iBufferSize);
 wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(64),uint32_t(1),uint32_t(1));
 wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,iBufferSize);
