@@ -59,7 +59,7 @@ return shader;
 
 };
 
-inline char wgl_cmp_src[1000]=
+inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,1,1)"
