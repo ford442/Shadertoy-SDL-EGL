@@ -1232,6 +1232,7 @@ glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
 glGenTextures(1,&ytexture);
 glGenTextures(1,&ztexture);
+  /*
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
@@ -1255,7 +1256,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-
+*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
