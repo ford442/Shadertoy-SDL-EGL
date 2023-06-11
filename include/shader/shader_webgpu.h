@@ -67,13 +67,14 @@ inline char wgl_cmp_src[1000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
-"var g;"
-"for (var y=0;y<(65536);y++){"
+"var g,e;"
+"for (var y=0;y<65536;y++){"
 "g=y*4;"
+"e=255-(g/255);"
 "outputBuffer[g]=0;"
 "outputBuffer[g+1]=255;"
 "outputBuffer[g+2]=0;"
-"outputBuffer[g+3]=255-(g/255);"
+"outputBuffer[g+3]=e;"
 "}"
 "}";
 
@@ -354,10 +355,10 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 int hh=g*4;
-Colora[hh]=uint32_t(resulT[g]);
-Colora[hh+1]=uint32_t(resulT[g+1]);
-Colora[hh+2]=uint32_t(resulT[g+2]);
-Colora[hh+3]=uint32_t(resulT[g+3]);
+Colora[hh]=int(resulT[hh]);
+Colora[hh+1]=int(resulT[hh+1]);
+Colora[hh+2]=int(resulT[hh+2]);
+Colora[hh+3]=int(resulT[hh+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
