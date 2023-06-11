@@ -727,7 +727,7 @@ if(uni_i.at(0,0)%90==0){
 if(shaderToySeconds%2==0){
 gpuStart();
   
-switch(tfrm){
+switch(shaderToySeconds%4){
 case 1:
 glActiveTexture(GL_TEXTURE0);
 case 2:
