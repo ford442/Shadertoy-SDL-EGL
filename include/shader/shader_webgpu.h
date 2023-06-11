@@ -354,10 +354,10 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 int hh=g*4;
-Colora[hh]=uint64_t(resulT[g]);
-Colora[hh+1]=uint64_t(resulT[g+1]);
-Colora[hh+2]=uint64_t(resulT[g+2]);
-Colora[hh+3]=uint64_t(resulT[g+3]);
+Colora[hh]=uint32_t(resulT[g]);
+Colora[hh+1]=uint32_t(resulT[g+1]);
+Colora[hh+2]=uint32_t(resulT[g+2]);
+Colora[hh+3]=uint32_t(resulT[g+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
