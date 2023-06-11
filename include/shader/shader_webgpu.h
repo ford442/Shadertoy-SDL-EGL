@@ -309,9 +309,9 @@ inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
-for(int i=0;i<input.size();++i){
-input[i]=i;
-}
+//for(int i=0;i<input.size();++i){
+//input[i]=i;
+//}
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
 bindGroupLayoutEntries[0].binding=0;
@@ -354,10 +354,10 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 for(int g=0;g<65536;g++){
 int hh=g*4;
-Colora[hh]=int(resulT[g]);
-Colora[hh+1]=int(resulT[g+1]);
-Colora[hh+2]=int(resulT[g+2]);
-Colora[hh+3]=int(resulT[g+3]);
+Colora[hh]=uint64_t(resulT[g]);
+Colora[hh+1]=uint64_t(resulT[g+1]);
+Colora[hh+2]=uint64_t(resulT[g+2]);
+Colora[hh+3]=uint64_t(resulT[g+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
