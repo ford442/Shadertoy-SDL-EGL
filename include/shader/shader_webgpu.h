@@ -309,7 +309,7 @@ inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
-int raN=r4nd4(255);
+int raN=r4nd(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
 // }
