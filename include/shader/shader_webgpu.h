@@ -71,34 +71,34 @@ inline char wgl_cmp_src[2000]=
 "var g:i32=(255-f)%inputBuffer[0];"
 "switch b {"
 "case default: {"
-"outputBuffer[f]=g;"
-"outputBuffer[f+1]=255-inputBuffer[0];"
-"outputBuffer[f+2]=(64*b)-f;"
+"outputBuffer[f]=0;"
+"outputBuffer[f+1]=inputBuffer[0];"
+"outputBuffer[f+2]=0;"
 "outputBuffer[f+3]=255;"
 "}"
 "case 0: {"
-"outputBuffer[f]=g;"
-"outputBuffer[f+1]=255-inputBuffer[0];"
-"outputBuffer[f+2]=(64*b)-f;"
-"outputBuffer[f+3]=255;"
-"}"
-"case 1: {"
-"outputBuffer[f]=g;"
-"outputBuffer[f+1]=inputBuffer[0];"
-"outputBuffer[f+2]=((64*b)/f)*255;"
-"outputBuffer[f+3]=255;"
-"}"
-"case 2: {"
 "outputBuffer[f]=inputBuffer[0];"
 "outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=0;"
 "outputBuffer[f+3]=255;"
 "}"
-"case 3: {"
+"case 1: {"
+"outputBuffer[f]=0;"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=inputBuffer[0];"
+"outputBuffer[f+3]=255;"
+"}"
+"case 2: {"
 "outputBuffer[f]=inputBuffer[0];"
 "outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=inputBuffer[0];"
 "outputBuffer[f+3]=255;"
+"}"
+"case 3: {"
+"outputBuffer[f]=inputBuffer[0];"
+"outputBuffer[f+1]=inputBuffer[0];"
+"outputBuffer[f+2]=inputBuffer[0];"
+"outputBuffer[f+3]=inputBuffer[0];"
 "}"
 "case 4: {"
 "outputBuffer[f]=255;"
@@ -405,8 +405,8 @@ Colora[hh+1]=int(resulT[hh+1]);
 Colorb[hh+1]=raN-int(resulT[hh+2]);
 Colora[hh+2]=int(resulT[hh+2]);
 Colorb[hh+2]=raN-int(resulT[hh+1]);
-Colora[hh+3]=255;
-Colorb[hh+3]=255;
+Colora[hh+3]=int(resulT[hh+3]);
+Colorb[hh+3]=int(resulT[hh+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
@@ -735,8 +735,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
-glUniform1i(smp_chn[2],0);
-glUniform1i(smp_chn[3],0);
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
 // glBindTexture(GL_TEXTURE_2D,0);
 }else{
 // gpuStart();
@@ -750,8 +750,8 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],1);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
 }
