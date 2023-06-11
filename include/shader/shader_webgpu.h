@@ -70,7 +70,7 @@ inline char wgl_cmp_src[1000]=
 "var g:i32=(255-f)%inputBuffer[0];"
 "outputBuffer[f]=g;"
 "outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=255-f;"
+"outputBuffer[f+2]=255-g;"
 "outputBuffer[f+3]=255;"
 "}"
 "}";
