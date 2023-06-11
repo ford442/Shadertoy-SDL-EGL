@@ -504,7 +504,7 @@ static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
 unsigned int uniBlock;
-
+int secs=0;
 class Run{
 
 private:
@@ -526,7 +526,7 @@ char * cm_hdr=cm_hdr_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
-int secs=0;
+
 GPU gpu;
 
 public:
