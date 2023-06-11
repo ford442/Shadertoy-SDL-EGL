@@ -15,7 +15,6 @@
 
 // #include <nmmintrin.h>  //  sse 4.2
 #include <unistd.h>
-#include <unistd.h>
 
 #define __m64i  __m64
 
