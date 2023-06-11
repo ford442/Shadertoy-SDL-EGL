@@ -302,7 +302,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture=0,xtexture=0;
+GLuint wtexture,xtexture,ytexture,ztexture;
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -1161,6 +1161,8 @@ glGenerateMipmap(GL_TEXTURE_2D);
 gpuStart();
 glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
+glGenTextures(1,&ytexture);
+glGenTextures(1,&ztexture);
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
