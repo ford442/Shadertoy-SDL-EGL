@@ -2,7 +2,7 @@
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
 
-#include <float.h>
+#include <cfloat>
 #include <math.h>
 #include <new>
 #include <boost/integer.hpp>
@@ -301,29 +301,20 @@ WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WG
 WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
+std::vector<int>input(bufferSize/sizeof(int));
+std::vector<int>outputd(bufferSize/sizeof(int));
+
+char * cmp_bdy=wgl_cmp_src;
+shaderModuleDescriptor={cmp_bdy,0,NULL};
 
 //wgpu
 static void raf(WGpuDevice device){
-std::vector<int>input(bufferSize/sizeof(int));
-std::vector<int>outputd(bufferSize/sizeof(int));
-char * cmp_bdy=wgl_cmp_src;
-shaderModuleDescriptor={cmp_bdy,0,NULL};
-for(int i=0;i<input.size();++i){
-input[i]=i;
-}
-bufferDescriptorI.size=bufferSize;
-bufferDescriptorI.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST;
-bufferDescriptorI.mappedAtCreation=false;
-bufferDescriptorO.size=bufferSize;
-bufferDescriptorO.usage=WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC;
-bufferDescriptorO.mappedAtCreation=false;
-bufferDescriptorM.size=bufferSize;
-bufferDescriptorM.usage=WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST;
-bufferDescriptorM.mappedAtCreation=false;
-
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
+for(int i=0;i<input.size();++i){
+input[i]=i;
+}
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -350,7 +341,7 @@ computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescript
 wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
 wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
 queue=wgpu_device_get_queue(device);
-// wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
 wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(256),uint32_t(256),uint32_t(1));
 wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
