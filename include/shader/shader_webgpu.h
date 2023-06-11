@@ -188,7 +188,6 @@ inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"uniform sampler2D iChannel4;"
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
@@ -208,14 +207,14 @@ EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)7,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -225,7 +224,7 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint att_lst[1500]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -256,6 +255,7 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
+
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
 using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
@@ -291,7 +291,6 @@ static void_tensor bin=void_tensor{1,1};
 
 // unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char ColorA[262144*sizeof(unsigned char)];
-
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
 uint64_t iBufferSize=1*sizeof(int);
@@ -548,7 +547,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=60;
+int iFps=60;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -692,7 +691,6 @@ clk_l=false;
 mms.at(2,0)=float(mms2.at(0,0));
 mms.at(2,1)=float(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-// nanoPause();
 }
 else{
 clk_l=true;
@@ -703,7 +701,6 @@ glUniform1f(uni_chn_tme[1],d_time.at(0,0));
 glUniform1f(uni_chn_tme[2],d_time.at(0,0));
 glUniform1f(uni_chn_tme[3],d_time.at(0,0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
-
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
@@ -714,16 +711,13 @@ int mi=datE->tm_min;
 int sc=datE->tm_sec;
 int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
-
 i_date.at(1,1)+=int(d_time.at(0,0));
-
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 if(uni_i.at(0,0)%20==0){
 tfrm++;
 if(tfrm>4){
 tfrm=0;
 }}
-
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%2==0){
 gpuStart();
@@ -753,7 +747,6 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 }}else{
-  
 switch(tfrm){
 case 1:
 glActiveTexture(GL_TEXTURE0);
@@ -771,7 +764,6 @@ default:
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 }
-  
 glGenerateMipmap(GL_TEXTURE_2D);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
@@ -779,7 +771,10 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
-  
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
