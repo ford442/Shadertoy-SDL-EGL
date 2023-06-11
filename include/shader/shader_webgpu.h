@@ -255,6 +255,7 @@ static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
@@ -360,12 +361,17 @@ WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 int * resulT[bufferSize];
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
+raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
 Colora[hh]=int(resulT[hh]);
+Colorb[hh]=raN-int(resulT[hh]);
 Colora[hh+1]=int(resulT[hh+1]);
+Colorb[hh+1]=raN-int(resulT[hh]);
 Colora[hh+2]=int(resulT[hh+2]);
+Colorb[hh+2]=raN-int(resulT[hh]);
 Colora[hh+3]=255;
+Colorb[hh+3]=255;
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
@@ -374,7 +380,6 @@ wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
 wgpu_queue_submit_one(queue,commandBuffer);
 return;
 }
-  
 
 static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
 device=result;
@@ -699,14 +704,14 @@ glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
 // glBindTexture(GL_TEXTURE_2D,0);
 }else{
-gpuStart();
+// gpuStart();
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,xtexture);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],1);
@@ -1056,7 +1061,6 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 GLsizei width1=1;
 GLsizei height1=1;
 GLuint texture,textureb,texturec,textured;
-unsigned char* Colora=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colora[0]=0;
 Colora[1]=255;
 Colora[2]=0;
