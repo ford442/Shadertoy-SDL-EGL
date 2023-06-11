@@ -735,11 +735,10 @@ glActiveTexture(GL_TEXTURE1);
 case 3:
 glActiveTexture(GL_TEXTURE2);
 case 4:
-glActiveTexture(GL_TEXTURE2);
+glActiveTexture(GL_TEXTURE3);
 default:
 glActiveTexture(GL_TEXTURE0);
 }
-
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -762,11 +761,10 @@ glActiveTexture(GL_TEXTURE1);
 case 3:
 glActiveTexture(GL_TEXTURE2);
 case 4:
-glActiveTexture(GL_TEXTURE2);
+glActiveTexture(GL_TEXTURE3);
 default:
 glActiveTexture(GL_TEXTURE0);
 }
-glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
