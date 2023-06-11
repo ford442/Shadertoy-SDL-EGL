@@ -719,7 +719,7 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 if(uni_i.at(0,0)%20==0){
-tfrm++
+tfrm++;
 if(tfrm>4){
 tfrm=0;
 }}
