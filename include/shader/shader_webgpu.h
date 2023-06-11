@@ -261,11 +261,9 @@ static void_tensor bin=void_tensor{1,1};
 
 uint32_t workgroupSize=256;
 uint64_t bufferSize=65536*sizeof(int);
-std::vector<float>input(bufferSize/sizeof(int));
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(bufferSize/sizeof(int));
 int * resulT[65536];
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
