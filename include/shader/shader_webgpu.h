@@ -253,7 +253,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-uint32_t workgroupSize=1;
+uint32_t workgroupSize=256;
 uint64_t bufferSize=262144*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
@@ -305,7 +305,7 @@ static void raf(WGpuDevice device){
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
-// wgpu_buffer_unmap(mapBuffer);
+wgpu_buffer_unmap(mapBuffer);
 //for(int i=0;i<input.size();++i){
 //input[i]=i;
 //}
