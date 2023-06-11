@@ -60,7 +60,7 @@ return shader;
 };
 
 inline char wgl_cmp_src[1000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
@@ -69,7 +69,7 @@ inline char wgl_cmp_src[1000]=
 "var f:i32=e*4;"
 "var g:i32=(255-f)%inputBuffer[0];"
 "outputBuffer[f]=g;"
-"outputBuffer[f+1]=0;"
+"outputBuffer[f+1]=255-inputBuffer[0];"
 "outputBuffer[f+2]=f;"
 "outputBuffer[f+3]=255;"
 "}"
@@ -258,6 +258,7 @@ unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
+uint64_t iBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -267,7 +268,6 @@ void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture=0,xtexture=0;
-
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -298,12 +298,12 @@ WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGP
 WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
-std::vector<int>input(bufferSize/sizeof(int));
+std::vector<int>input(1/sizeof(int));
 std::vector<int>outputd(bufferSize/sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
-
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
+int raN=0;
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -312,14 +312,13 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
-int raN=0;
-
 //wgpu
 static void raf(WGpuDevice device){
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
+raN=0;
 raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
@@ -351,7 +350,7 @@ computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescript
 wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
 wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
 queue=wgpu_device_get_queue(device);
-wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
+wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),1*sizeof(int));
 wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(64),uint32_t(1),uint32_t(1));
 wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
