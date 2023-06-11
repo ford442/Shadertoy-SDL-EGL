@@ -357,6 +357,7 @@ Colora[hh+1]=int(resulT[g+1]);
 Colora[hh+2]=int(resulT[g+2]);
 Colora[hh+3]=int(resulT[g+3]);
 }
+wgpu_buffer_unmap(mapBuffer);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
