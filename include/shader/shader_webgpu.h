@@ -70,7 +70,7 @@ inline char wgl_cmp_src[1000]=
 "var g:i32=(255-f)%inputBuffer[0];"
 "outputBuffer[f]=g;"
 "outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=255-g;"
+"outputBuffer[f+2]=f;"
 "outputBuffer[f+3]=255;"
 "}"
 "}";
@@ -366,13 +366,13 @@ int hh=g*4;
 Colora[hh]=int(resulT[hh]);
 Colora[hh+1]=int(resulT[hh+1]);
 Colora[hh+2]=int(resulT[hh+2]);
-Colora[hh+3]=int(resulT[hh+3]);
+Colora[hh+3]=255;
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
-wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
+wgpu_queue_submit_one(queue,commandBuffer);
 return;
 }
   
