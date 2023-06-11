@@ -357,9 +357,9 @@ wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,iB
 commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
+double output=wgpu_buffer_get_mapped_range(mapBuffer,0,size);
 int * resulT[bufferSize];
-wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
+wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,size);
 for(int g=0;g<65536;g++){
 int hh=g*4;
 Colora[hh]=int(resulT[hh]);
@@ -371,7 +371,7 @@ Colora[hh+3]=255;
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
-wgpu_queue_submit_one(queue,commandBuffer);
+wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
 return;
 }
   
