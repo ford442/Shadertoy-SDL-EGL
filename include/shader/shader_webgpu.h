@@ -65,13 +65,14 @@ return shader;
 inline char wgl_cmp_src[1000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,65536>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
-"@compute@workgroup_size(256)"
+"@compute@workgroup_size(1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 "for (var y=0;y<(256*256);y++){"
-"outputBuffer[(4*y)]=y%16;"
-"outputBuffer[(4*y)+1]=y%128;"
-"outputBuffer[(4*y)+2]=y%255;"
-"outputBuffer[(4*y)+3]=255;"
+"var g=y*4;"
+"outputBuffer[g]=y%16;"
+"outputBuffer[g+1]=y%128;"
+"outputBuffer[g+2]=y%255;"
+"outputBuffer[g+3]=255;"
 "}"
 "}";
 
@@ -254,7 +255,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-uint32_t workgroupSize=256;
+uint32_t workgroupSize=1;
 uint64_t bufferSize=65536*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
