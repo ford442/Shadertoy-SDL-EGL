@@ -65,13 +65,42 @@ inline char wgl_cmp_src[1000]=
 "@compute@workgroup_size(64,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let a: u32=global_id.x*4;"
+"let b: i32=255/inputBuffer[0];"
 "for (var e:i32=0;e<256;e++){"
 "var f:i32=e*4;"
 "var g:i32=(255-f)%inputBuffer[0];"
+"switch b {"
+"case 0: {"
 "outputBuffer[f]=g;"
 "outputBuffer[f+1]=255-inputBuffer[0];"
-"outputBuffer[f+2]=f;"
+"outputBuffer[f+2]=(64*b)-f;"
 "outputBuffer[f+3]=255;"
+"}"
+"case 1: {"
+"outputBuffer[f]=g;"
+"outputBuffer[f+1]=inputBuffer[0];"
+"outputBuffer[f+2]=((64*b)/f)*255;"
+"outputBuffer[f+3]=255;"
+"}"
+"case 2: {"
+"outputBuffer[f]=0;"
+"outputBuffer[f+1]=inputBuffer[0];"
+"outputBuffer[f+2]=0;"
+"outputBuffer[f+3]=128;"
+"}"
+"case 3: {"
+"outputBuffer[f]=inputBuffer[0];"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=inputBuffer[0];"
+"outputBuffer[f+3]=255;"
+"}"
+"case 4: {"
+"outputBuffer[f]=255;"
+"outputBuffer[f+1]=255;"
+"outputBuffer[f+2]=255;"
+"outputBuffer[f+3]=255;
+"}"
+"}"
 "}"
 "}";
 
@@ -367,9 +396,9 @@ int hh=g*4;
 Colora[hh]=int(resulT[hh]);
 Colorb[hh]=raN-int(resulT[hh]);
 Colora[hh+1]=int(resulT[hh+1]);
-Colorb[hh+1]=raN-int(resulT[hh]);
+Colorb[hh+1]=raN-int(resulT[hh+2]);
 Colora[hh+2]=int(resulT[hh+2]);
-Colorb[hh+2]=raN-int(resulT[hh]);
+Colorb[hh+2]=raN-int(resulT[hh+1]);
 Colora[hh+3]=255;
 Colorb[hh+3]=255;
 }
