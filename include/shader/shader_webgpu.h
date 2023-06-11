@@ -267,6 +267,9 @@ uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 int * resulT[65536];
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
+GLsizei width=256;
+GLsizei height=256;
+GLuint wtexture;
 
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
@@ -298,7 +301,7 @@ WGpuBufferDescriptor bufferDescriptorI={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGP
 WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-
+WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 std::vector<int>input(bufferSize/sizeof(int));
 std::vector<int>outputd(bufferSize/sizeof(int));
 
