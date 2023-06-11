@@ -69,10 +69,10 @@ inline char wgl_cmp_src[1000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
 "for (var y=0;y<(256*256);y++){"
 "var g=y*4;"
-"outputBuffer[g]=y%16;"
-"outputBuffer[g+1]=y%128;"
-"outputBuffer[g+2]=y%255;"
-"outputBuffer[g+3]=255;"
+"outputBuffer[g]=0;"
+"outputBuffer[g+1]=255;"
+"outputBuffer[g+2]=0;"
+"outputBuffer[g+3]=255%g;"
 "}"
 "}";
 
