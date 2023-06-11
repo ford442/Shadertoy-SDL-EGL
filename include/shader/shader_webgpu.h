@@ -666,7 +666,7 @@ glUniform1f(uni_chn_tme[1],d_time.at(0,0));
 glUniform1f(uni_chn_tme[2],d_time.at(0,0));
 glUniform1f(uni_chn_tme[3],d_time.at(0,0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
-/*
+
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
@@ -677,16 +677,15 @@ int mi=datE->tm_min;
 int sc=datE->tm_sec;
 int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
-*/
+
 i_date.at(1,1)+=int(d_time.at(0,0));
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
 if(uni_i.at(0,0)%60==0){
-if(i_date.at(1,1)%2==0){
+if(shaderToySeconds%2==0){
 gpuStart();
-glActiveTexture(GL_TEXTURE1);
-wtexture=0;
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -694,28 +693,24 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[0],1);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],1);
-// glBindTexture(GL_TEXTURE_2D,0);
-}else{
-if(i_date.at(1,1)%5==0.0){
-gpuStart();
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,xtexture);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
-glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
+// glBindTexture(GL_TEXTURE_2D,0);
+}else{
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,xtexture);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+// glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+// glGenerateMipmap(GL_TEXTURE_2D);
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
 }
@@ -1109,14 +1104,14 @@ glGenerateMipmap(GL_TEXTURE_2D);
 gpuStart();
 glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],0);
-glUniform1i(smp_chn[2],0);
-glUniform1i(smp_chn[3],0);
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
 
   // date/time
 const time_t timE=time(0);
