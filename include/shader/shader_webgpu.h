@@ -339,8 +339,8 @@ char * cmp_bdy=wgl_cmp_src;
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
-int texCount=0;
-int tfrm=0;
+int texCount=1;
+int tfrm=1;
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -717,13 +717,15 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 if(uni_i.at(0,0)%20==0){
 tfrm++;
 if(tfrm>4){
-tfrm=0;
+tfrm=1;
 }}
 
 if(uni_i.at(0,0)%90==0){
 if(shaderToySeconds%2==0){
 gpuStart();
 texCount++;
+  glBindTexture(GL_TEXTURE_2D,wtexture);
+
 switch(texCount){
 case 1:
 glActiveTexture(GL_TEXTURE0);
@@ -737,7 +739,6 @@ default:
 glActiveTexture(GL_TEXTURE0);
 }
 if(texCount<4){texCount=1;}
-glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
