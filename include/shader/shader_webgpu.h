@@ -687,6 +687,7 @@ if(uni_i.at(0,0)%60==0.0){
 if(i_date.at(1,1)%2==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
+wtexture=0;
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -704,6 +705,7 @@ glUniform1i(smp_chn[3],1);
 if(i_date.at(1,1)%5==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
+xtexture=0;
 glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
