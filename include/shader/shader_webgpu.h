@@ -523,7 +523,7 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 char * cm_hdr=cm_hdr_src;
-
+int secs=0;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
@@ -678,12 +678,13 @@ int sc=datE->tm_sec;
 int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
 */
-i_date.at(1,1)+=int(d_time.at(0,0));
+secs=int(d_time.at(0,0);
+i_date.at(1,1)+=secs;
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
-if(int(d_time.at(0,0)%3==0.0){
-if(int(d_time.at(0,0)%2==0.0){
+if(secs%3==0.0){
+if(secs%2==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
@@ -699,8 +700,22 @@ glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
 glBindTexture(GL_TEXTURE_2D,0);
 }else{
-if(int(d_time.at(0,0)%5==0.0){
+if(secs%5==0.0){
 gpuStart();
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,xtexture);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
+glBindTexture(GL_TEXTURE_2D,0);
+}else{
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
