@@ -781,8 +781,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[0],1);
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[1],1);
 glActiveTexture(GL_TEXTURE2);
@@ -794,51 +794,51 @@ glUniform1i(smp_chn[3],3);
 }else{
 switch(tfrm) {
 case 1:
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[0],1);
-glActiveTexture(GL_TEXTURE2);
-glUniform1i(smp_chn[1],2);
 glActiveTexture(GL_TEXTURE0);
-glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[0],0);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[1],1);
 glActiveTexture(GL_TEXTURE2);
-glUniform1i(smp_chn[3],2); 
+glUniform1i(smp_chn[2],2);
+glActiveTexture(GL_TEXTURE3);
+glUniform1i(smp_chn[3],3); 
 break;
 case 2:
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[0],0);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[1],1);
 glActiveTexture(GL_TEXTURE2);
-glUniform1i(smp_chn[0],2);
-glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[1],3);
-glActiveTexture(GL_TEXTURE4);
-glUniform1i(smp_chn[2],4);
+glUniform1i(smp_chn[2],2);
 glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3); 
 break;
 case 3:
-glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[0],3);
-glActiveTexture(GL_TEXTURE4);
-glUniform1i(smp_chn[1],4);
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[0],0);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[1],1);
 glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[2],2);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[3],1); 
+glActiveTexture(GL_TEXTURE3);
+glUniform1i(smp_chn[3],3); 
 break;
 case 4:
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
-glActiveTexture(GL_TEXTURE0);
-glUniform1i(smp_chn[1],0);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[1],1);
+glActiveTexture(GL_TEXTURE2);
+glUniform1i(smp_chn[2],2);
 glActiveTexture(GL_TEXTURE3);
-glUniform1i(smp_chn[2],3);
-glActiveTexture(GL_TEXTURE4);
-glUniform1i(smp_chn[3],4);
+glUniform1i(smp_chn[3],3);
 break;
 default:
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],0);
-glUniform1i(smp_chn[2],0);
-glUniform1i(smp_chn[3],0);}
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);}
 }
   
 /*
