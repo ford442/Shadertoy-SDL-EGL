@@ -65,11 +65,13 @@ return shader;
 inline char wgl_cmp_src[1000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
-"@compute@workgroup_size(1)"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
-"for (var y=0;y<65536;y++){"
-"outputBuffer[g]=42;"
-"}"
+"@compute@workgroup_size(256,256,1)"
+"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
+"let a: u32=global_id.x*4;"
+"outputBuffer[a]=0;"
+"outputBuffer[a+1]=42;"
+"outputBuffer[a+2]=0;"
+"outputBuffer[a+3]=255;"
 "}";
 
 inline char cm_hdr_src[1900]=
