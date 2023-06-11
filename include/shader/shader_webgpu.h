@@ -684,7 +684,7 @@ i_date.at(1,1)+=secs;
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
-if(secs%2==0.0){
+if(secs%2==0){
 gpuStart();
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
