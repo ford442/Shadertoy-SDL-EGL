@@ -260,12 +260,12 @@ static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
 uint32_t workgroupSize=256;
-uint64_t IbufferSize=65536*sizeof(int);
-std::vector<float>input(IbufferSize/sizeof(int));
+uint64_t bufferSize=65536*sizeof(int);
+std::vector<float>input(bufferSize/sizeof(int));
 const char * Entry="computeStuff";
-uint32_t invocationCount=IbufferSize/sizeof(int);
+uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+std::vector<unsigned int>outputd(bufferSize/sizeof(int));
 int * resulT[65536];
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
@@ -296,9 +296,9 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 std::vector<int>input(bufferSize/sizeof(int));
