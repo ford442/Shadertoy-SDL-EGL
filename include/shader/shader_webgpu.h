@@ -678,7 +678,7 @@ int sc=datE->tm_sec;
 int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
 */
-secs=int(d_time.at(0,0);
+secs=int(d_time.at(0,0));
 i_date.at(1,1)+=secs;
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
