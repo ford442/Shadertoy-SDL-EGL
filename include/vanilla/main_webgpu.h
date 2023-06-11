@@ -25,7 +25,7 @@ std::vector<float>input(IbufferSize/sizeof(int));
 const char * Entry="computeStuff";
 uint32_t invocationCount=IbufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+std::vector<int>outputd(IbufferSize/sizeof(int));
 int * resulT[65536];
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
