@@ -760,21 +760,33 @@ glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);  
 break;
 case 2:
+glActiveTexture(GL_TEXTURE4);
 glUniform1i(smp_chn[0],4);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[1],3);
+glActiveTexture(GL_TEXTURE4);
 glUniform1i(smp_chn[2],4);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);  
 break;
 case 3:
+glActiveTexture(GL_TEXTURE4);
 glUniform1i(smp_chn[0],4);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[1],3);
+glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[2],2);
+glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[3],1); 
 break;
 case 4:
+glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[0],1);
+glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[1],2);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[2],3);
+glActiveTexture(GL_TEXTURE4);
 glUniform1i(smp_chn[3],4);  
 break;
 default:
