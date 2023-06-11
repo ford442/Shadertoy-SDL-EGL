@@ -350,7 +350,7 @@ wgpu_compute_pass_encoder_set_pipeline(computePass,computePipeline);
 wgpu_encoder_set_bind_group(computePass,0,bindGroup,0,0);
 queue=wgpu_device_get_queue(device);
 wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),input.size()*sizeof(int));
-wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(64),uint32_t(4),uint32_t(1));
+wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(64),uint32_t(1),uint32_t(1));
 wgpu_encoder_end(computePass);
 wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
 commandBuffer=wgpu_encoder_finish(encoder);
