@@ -259,23 +259,25 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-int bufferSize=65536*sizeof(int);
-WGpuBuffer inputBuffer=0;
-WGpuBuffer outputBuffer=0;
-WGpuBufferDescriptor bufferDescriptorI={};
-WGpuBufferDescriptor bufferDescriptorO={};
-WGpuBufferDescriptor bufferDescriptorM={};
-void * userDataA;
-WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 uint32_t workgroupSize=256;
-uint32_t invocationCount=bufferSize/sizeof(unsigned int);
+uint64_t IbufferSize=65536*sizeof(int);
+std::vector<float>input(IbufferSize/sizeof(int));
+const char * Entry="computeStuff";
+uint32_t invocationCount=IbufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+std::vector<unsigned int>outputd(IbufferSize/sizeof(int));
+int * resulT[65536];
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+void * userDataA;
+
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
-WGpuDeviceDescriptor deviceDescriptor={};
 WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuComputePipeline computePipeline=0;
+WGpuBuffer inputBuffer=0;
+WGpuBuffer outputBuffer=0;
+WGpuBuffer mapBuffer=0;
 WGpuBuffer uniBuffer=0;
 WGpuShaderModule cs=0;
 WGpuCommandBuffer commandBuffer=0;
@@ -288,18 +290,17 @@ WGpuComputePassDescriptor computePassDescriptor={};
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
+WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
 WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-WGpuBuffer mapBuffer=0;
+WGpuBufferDescriptor bufferDescriptorI={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={IbufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={IbufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-const char * Entry="computeStuff";
-char * cm_hdr=cm_hdr_src;
-GLuint wtexture=0;
-GLsizei width=256;
-GLsizei height=256;
+
 
 //wgpu
 static void raf(WGpuDevice device){
