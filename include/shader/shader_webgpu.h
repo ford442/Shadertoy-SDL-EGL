@@ -1193,13 +1193,13 @@ gpuStart();
 glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
 glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,xtexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
 
   // date/time
 const time_t timE=time(0);
