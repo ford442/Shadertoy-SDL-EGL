@@ -1,7 +1,7 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
-
+#include <random>
 #include <cfloat>
 #include <math.h>
 #include <new>
@@ -24,15 +24,12 @@
 #include <vector>
 #include <functional>
 #include <cassert>
-
 #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
 #include "../../include/shader/intrins.h"
-
+#include "../../lib/lib_webgpu.h"
 #include <emscripten/html5.h>
 #include <emscripten.h>
-
-#include "../../lib/lib_webgpu.h"
 
 extern "C"{
   
