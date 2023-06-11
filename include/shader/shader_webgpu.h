@@ -67,10 +67,11 @@ inline char wgl_cmp_src[1000]=
 "let a: u32=global_id.x*global_id.y*4;"
 "for (var e:i32=0;e<64;e++){"
 "var f:i32=e*4;"
-"outputBuffer[f]=0;"
-"outputBuffer[f+1]=42;"
-"outputBuffer[f+2]=0;"
-"outputBuffer[f+3]=255%f;"
+"var g:i32=(255-f)%inputBuffer[0];"
+"outputBuffer[f]=g;"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=255-f;"
+"outputBuffer[f+3]=255;"
 "}"
 "}";
 
@@ -553,7 +554,7 @@ t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 t_size.at(0,1)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
-  
+
 static void i_iSize_set(boost::int_t<32>::exact set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
@@ -679,14 +680,27 @@ i_date.at(1,0)=dy;
 */
 i_date.at(1,1)+=int(d_time.at(0,0));
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
+  
+if(uni_i.at(0,0)%30==0.0){
+if(i_date.at(1,1)%2==0.0){
+gpuStart();
 glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
+glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
+}else{
+glActiveTexture(GL_TEXTURE3);
+glUniform1i(smp_chn[0],3);
+glUniform1i(smp_chn[1],3);
+glUniform1i(smp_chn[2],3);
+glUniform1i(smp_chn[3],3);
+}
+}
 /*
-if(uni_i.at(0,0)%30==0.0){
-if(i_date.at(1,1)%2==0.0){
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
@@ -1029,9 +1043,9 @@ GLsizei height1=1;
 GLuint texture=0,textureb=0,texturec=0,textured=0;
 unsigned char* Colora=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colora[0]=0;
-Colora[1]=222;
+Colora[1]=255;
 Colora[2]=0;
-Colora[3]=230;
+Colora[3]=255;
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,texture);
