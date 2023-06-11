@@ -67,7 +67,7 @@ inline char wgl_cmp_src[1000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let a: u32=global_id.x*4+global_id.y;"
+"let a: u32=global_id.x*global_id.y;"
 "outputBuffer[a]=42;"
 // "outputBuffer[a+1]=42;"
 // "outputBuffer[a+2]=0;"
