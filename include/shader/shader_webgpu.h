@@ -526,11 +526,11 @@ char * cm_hdr=cm_hdr_src;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
-
+int secs=0;
 GPU gpu;
 
 public:
-int secs=0;
+
 static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
