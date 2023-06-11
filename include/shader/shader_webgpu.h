@@ -739,6 +739,7 @@ case 4:
 glBindTexture(GL_TEXTURE_2D,ztexture);
 glActiveTexture(GL_TEXTURE3);
 default:
+glBindTexture(GL_TEXTURE_2D,wtexture);
 glActiveTexture(GL_TEXTURE0);
 }
 if(texCount<4){texCount=1;}
