@@ -720,11 +720,11 @@ if(tfrm>4){
 tfrm=1;
 }}
 
-if(uni_i.at(0,0)%90==0){
+if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
 gpuStart();
 texCount++;
-  glBindTexture(GL_TEXTURE_2D,wtexture);
+// glBindTexture(GL_TEXTURE_2D,wtexture);
 
 switch(texCount){
 case 1:
@@ -750,9 +750,13 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 }else{
 switch(tfrm){
 case 1:
+glActiveTexture(GL_TEXTURE1);
 glUniform1i(smp_chn[0],1);
+glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[1],2);
+glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[2],0);
+glActiveTexture(GL_TEXTURE3);
 glUniform1i(smp_chn[3],3);  
 break;
 case 2:
