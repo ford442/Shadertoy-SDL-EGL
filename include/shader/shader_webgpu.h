@@ -67,6 +67,7 @@ inline char wgl_cmp_src[1000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,65536>;"
 "@compute@workgroup_size(256)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>,@builtin(local_invocation_id)local_id:vec3<u32>){"
+/*
 "let Y:u32=global_id.x;"
 "for (var y:u32=u32(Y-1u32);y<=u32(Y+1u32);y=y+1){"
 "outputBuffer[i+y]=i%16;"
@@ -74,6 +75,7 @@ inline char wgl_cmp_src[1000]=
 "outputBuffer[i+y+2]=i%255;"
 "outputBuffer[i+y+3]=255;"
 "}"
+*/
 "}";
 
 inline char cm_hdr_src[1900]=
