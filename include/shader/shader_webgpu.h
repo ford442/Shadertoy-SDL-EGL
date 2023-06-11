@@ -682,10 +682,10 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
-if(uni_i.at(0,0)%90==0.0){
-if(i_date.at(1,1)%2==0.0){
+if(int(d_time.at(0,0)%3==0.0){
+if(int(d_time.at(0,0)%2==0.0){
 gpuStart();
-glActiveTexture(GL_TEXTURE1);
+glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -693,14 +693,13 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE1);
-glUniform1i(smp_chn[0],1);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],1);
-// glBindTexture(GL_TEXTURE_2D,0);
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],0);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);
+glBindTexture(GL_TEXTURE_2D,0);
 }else{
-if(i_date.at(1,1)%5==0.0){
+if(int(d_time.at(0,0)%5==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,xtexture);
@@ -710,12 +709,11 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-glActiveTexture(GL_TEXTURE0);
-glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],0);
-glUniform1i(smp_chn[2],0);
-glUniform1i(smp_chn[3],0);
-// glBindTexture(GL_TEXTURE_2D,0);
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
+glBindTexture(GL_TEXTURE_2D,0);
 }
 }
 }
