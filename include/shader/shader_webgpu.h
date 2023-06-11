@@ -309,9 +309,10 @@ inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
-//for(int i=0;i<input.size();++i){
-//input[i]=i;
-//}
+int raN=r4nd4(255);
+// for(int i=0;i<input.size();++i){
+input[0]=raN;
+// }
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 cs=wgpu_device_create_shader_module(device,&shaderModuleDescriptor);
 bindGroupLayoutEntries[0].binding=0;
