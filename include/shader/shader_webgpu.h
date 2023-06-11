@@ -353,7 +353,7 @@ queue=wgpu_device_get_queue(device);
 wgpu_queue_write_buffer(queue,inputBuffer,0,input.data(),1*sizeof(int));
 wgpu_compute_pass_encoder_dispatch_workgroups(computePass,uint32_t(64),uint32_t(1),uint32_t(1));
 wgpu_encoder_end(computePass);
-wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,bufferSize);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,outputBuffer,0,mapBuffer,0,iBufferSize);
 commandBuffer=wgpu_encoder_finish(encoder);
 WGpuOnSubmittedWorkDoneCallback onComputeDone=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
