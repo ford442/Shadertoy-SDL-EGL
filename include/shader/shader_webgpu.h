@@ -670,7 +670,12 @@ i_date.at(1,0)=dy;
 */
 i_date.at(1,1)+=int(d_time.at(0,0));
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],0);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);
+/*
 if(uni_i.at(0,0)%30==0.0){
 if(i_date.at(1,1)%2==0.0){
 glActiveTexture(GL_TEXTURE0);
@@ -692,6 +697,7 @@ glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[3],0);
 }
 }
+*/
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
@@ -1022,7 +1028,7 @@ glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[3],3);
+// glUniform1i(smp_chn[3],3);
 unsigned char* Colorb=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorb[0]=0;
 Colorb[1]=255;
@@ -1033,7 +1039,7 @@ glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[2],2);
+// glUniform1i(smp_chn[2],2);
 unsigned char* Colorc=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorc[0]=80;
 Colorc[1]=0;
@@ -1044,7 +1050,7 @@ glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,texturec);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[1],1);
+// glUniform1i(smp_chn[1],1);
 unsigned char* Colord=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colord[0]=128;
 Colord[1]=128;
@@ -1064,6 +1070,9 @@ glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],0);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);
 
   // date/time
 const time_t timE=time(0);
