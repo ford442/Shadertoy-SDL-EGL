@@ -471,7 +471,7 @@ double hi=0.0;
 }mouse;
 
 int Size=0;
-boost::atomic<int>tmm=166666000;
+boost::atomic<int>tmm=16666000;
 boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
@@ -505,6 +505,7 @@ static char * results=NULL;
 static long int length=0;
 unsigned int uniBlock;
 int secs=0;
+
 class Run{
 
 private:
@@ -684,13 +685,12 @@ i_date.at(1,1)+=secs;
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
 if(secs%3==0.0){
-if(secs%2==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -699,39 +699,8 @@ glUniform1i(smp_chn[1],0);
 glUniform1i(smp_chn[2],0);
 glUniform1i(smp_chn[3],0);
 glBindTexture(GL_TEXTURE_2D,0);
-}else{
-if(secs%5==0.0){
-gpuStart();
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,xtexture);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
-glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],1);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],1);
-glBindTexture(GL_TEXTURE_2D,0);
-}else{
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,xtexture);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
-glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],1);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],1);
-glBindTexture(GL_TEXTURE_2D,0);
 }
-}
-}
+
 /*
 glActiveTexture(GL_TEXTURE0);
 glUniform1i(smp_chn[0],0);
