@@ -680,9 +680,10 @@ int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
 */
 i_date.at(1,1)+=int(d_time.at(0,0));
-glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
+
+// glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
   
-if(uni_i.at(0,0)%30==0.0){
+if(uni_i.at(0,0)%60==0.0){
 if(i_date.at(1,1)%2==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
@@ -700,6 +701,7 @@ glUniform1i(smp_chn[2],1);
 glUniform1i(smp_chn[3],1);
 glBindTexture(GL_TEXTURE_2D,0);
 }else{
+if(i_date.at(1,1)%5==0.0){
 gpuStart();
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,wtexture);
