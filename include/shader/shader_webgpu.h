@@ -288,7 +288,6 @@ WGpuBindGroup bindGroup=0;
 WGpuPipelineLayout pipelineLayout=0;
 WGpuQuerySet querySet=0;
 WGpuComputePassDescriptor computePassDescriptor={};
-WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
