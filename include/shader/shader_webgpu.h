@@ -378,8 +378,8 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-int * resultRun[bufferSize];
-int * WGPU_Result_Buffer[bufferSize];
+int * resultRun=new int[bufferSize];
+int * WGPU_Result_Buffer=new int[bufferSize];
 int * resul=new int[bufferSize];
 
 inline int rNd4(int randomMax){
