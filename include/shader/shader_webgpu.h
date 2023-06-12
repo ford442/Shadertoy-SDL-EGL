@@ -418,9 +418,9 @@ static void raf(WGpuDevice device){
   WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
     WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
     WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
-inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),WGPU_BufferDescriptor.at(0,0,0));
-outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),WGPU_BufferDescriptor.at(0,0,1));
-mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),WGPU_BufferDescriptor.at(0,0,2));
+inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
+outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
+mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(1,1,1)=inputBuffer;
 WGPU_Buffers.at(0,0,0)=outputBuffer;
 WGPU_Buffers.at(1,0,1)=mapBuffer;
