@@ -1177,9 +1177,10 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
-unsigned char * Colora=new unsigned char[1*sizeof(unsigned char)];
+  
 
     // texture
+unsigned char * Colora=new unsigned char[1*sizeof(unsigned char)];
 GLsizei width1=1;
 GLsizei height1=1;
 GLuint texture,textureb,texturec,textured;
@@ -1226,7 +1227,7 @@ glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 // glGenerateMipmap(GL_TEXTURE_2D);
  glUniform1i(smp_chn[3],3);
-*/
+
 gpuStart();
 glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
