@@ -434,7 +434,7 @@ input[0]=raN;
 // }
   
 WGPU_ModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
-cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ModuleDesciptor.at(0,0,0));
+cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ModuleDescriptor.at(0,0,0));
 WGPU_ComputeModule.at(0,0,0)=cs;
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
