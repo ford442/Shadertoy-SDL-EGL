@@ -378,7 +378,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-int * resultRun[buffersize];
+int * resultRun[bufferSize];
 int * WGPU_Result_Buffer[buffersize];
 int * resul=new int[bufferSize];
 
