@@ -369,7 +369,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 int * resultRun[262144];
-int * resultStart[262144];
+int * WGPU_Result_Buffer[262144];
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -381,7 +381,7 @@ return randomNumber;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double outputStart=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=outputStart;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&resultStart,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&WGPU_Result_Buffer,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
@@ -797,8 +797,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%3==0){
-WGPUCompute_Run();
-// WGPUCompute_Start();
+// WGPUCompute_Run();
+WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
