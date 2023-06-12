@@ -203,19 +203,19 @@ inline char frg_ftr_src[420]=
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -225,7 +225,7 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint att_lst[1500]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -249,7 +249,7 @@ EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,32,
+EGL_SAMPLES,8,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -263,7 +263,7 @@ using sz_tensor=boost::numeric::ublas::tensor<int>;
 using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
-using i_tensor=boost::numeric::ublas::tensor<intmax_t>;
+using i_tensor=boost::numeric::ublas::tensor<int>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
@@ -289,8 +289,8 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-// unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
-unsigned char ColorA[262144*sizeof(unsigned char)];
+unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
@@ -303,7 +303,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture,xtexture,ytexture,ztexture;
+GLuint wtexture,xtexture;
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -340,8 +340,6 @@ char * cmp_bdy=wgl_cmp_src;
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
-int texCount=0;
-int tfrm=0;
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -356,6 +354,7 @@ inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
 wgpu_buffer_unmap(mapBuffer);
+raN=0;
 raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
@@ -400,16 +399,20 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(resulT[hh]);
-ColorA[hh+1]=int(resulT[hh+1]);
-ColorA[hh+2]=int(resulT[hh+2]);
-ColorA[hh+3]=int(resulT[hh+3]);
+Colora[hh]=int(resulT[hh]);
+Colorb[hh]=raN-int(resulT[hh]);
+Colora[hh+1]=int(resulT[hh+1]);
+Colorb[hh+1]=raN-int(resulT[hh+2]);
+Colora[hh+2]=int(resulT[hh+2]);
+Colorb[hh+2]=raN-int(resulT[hh+1]);
+Colora[hh+3]=int(resulT[hh+3]);
+Colorb[hh+3]=int(resulT[hh+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
-wgpu_queue_submit_one(queue,commandBuffer);
+wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
 return;
 }
 
@@ -508,7 +511,7 @@ double hi=0.0;
 }mouse;
 
 int Size=0;
-boost::atomic<int>tmm=1666666000;
+boost::atomic<int>tmm=166666000;
 boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
@@ -718,40 +721,31 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-if(uni_i.at(0,0)%20==0){
-tfrm++;
-if(tfrm>4){
-tfrm=0;
-}}
+  int tfrm=(uni_i.at(0,0)%4);
 
-if(uni_i.at(0,0)%30==0){
+if(uni_i.at(0,0)%90==0){
 if(shaderToySeconds%2==0){
 gpuStart();
-texCount++;
-switch(texCount){
+  
+switch(shaderToySeconds%4){
 case 1:
 glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
 case 2:
 glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,xtexture);
 case 3:
 glActiveTexture(GL_TEXTURE2);
-glBindTexture(GL_TEXTURE_2D,ytexture);
 case 4:
 glActiveTexture(GL_TEXTURE3);
-glBindTexture(GL_TEXTURE_2D,ztexture);
 default:
 glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
 }
-if(texCount<3){texCount=0;}
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,width,height,0,GL_RGBA8,GL_UNSIGNED_BYTE,&ColorA);
-// glGenerateMipmap(GL_TEXTURE_2D);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+glGenerateMipmap(GL_TEXTURE_2D);
 // glUniform1i(smp_chn[0],0);
 // glUniform1i(smp_chn[1],0);
 // glUniform1i(smp_chn[2],1);
@@ -762,63 +756,83 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 switch(tfrm){
 case 1:
 glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
 case 2:
 glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,xtexture);
 case 3:
 glActiveTexture(GL_TEXTURE2);
-glBindTexture(GL_TEXTURE_2D,ytexture);
 case 4:
 glActiveTexture(GL_TEXTURE3);
-glBindTexture(GL_TEXTURE_2D,ztexture);
 default:
 glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
 }
-glGenerateMipmap(GL_TEXTURE_2D);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+glBindTexture(GL_TEXTURE_2D,xtexture);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-glUniform1i(smp_chn[0],0);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colorb);
+glGenerateMipmap(GL_TEXTURE_2D);
+glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);
+// glBindTexture(GL_TEXTURE_2D,0);
 }
 }else{
 switch(tfrm) {
-case 1:
+  case 1:
+glUniform1i(smp_chn[0],1);
+glUniform1i(smp_chn[1],2);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],3);    break;
+  case 2:
+glUniform1i(smp_chn[0],4);
+glUniform1i(smp_chn[1],3);
+glUniform1i(smp_chn[2],4);
+glUniform1i(smp_chn[3],3);    break;
+      case 3:
+glUniform1i(smp_chn[0],4);
+glUniform1i(smp_chn[1],3);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],1);    break;
+      case 4:
 glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],2);
 glUniform1i(smp_chn[2],3);
-glUniform1i(smp_chn[3],0); 
-break;
-case 2:
-glUniform1i(smp_chn[0],2);
-glUniform1i(smp_chn[1],3);
-glUniform1i(smp_chn[2],0);
-glUniform1i(smp_chn[3],1); 
-break;
-case 3:
-glUniform1i(smp_chn[0],3);
-glUniform1i(smp_chn[1],2);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],0); 
-break;
-case 4:
-glUniform1i(smp_chn[0],1);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],1);
-glUniform1i(smp_chn[3],3);
-break;
-default:
+glUniform1i(smp_chn[3],4);    break;
+  default:
 glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);}
+glUniform1i(smp_chn[1],0);
+glUniform1i(smp_chn[2],0);
+glUniform1i(smp_chn[3],0);}
 }
+  
+/*
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[0],0);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[1],1);
+glActiveTexture(GL_TEXTURE2);
+glUniform1i(smp_chn[2],2);
+glActiveTexture(GL_TEXTURE3);
+glUniform1i(smp_chn[3],3);
+}else{
+glActiveTexture(GL_TEXTURE3);
+glUniform1i(smp_chn[0],3);
+glActiveTexture(GL_TEXTURE2);
+glUniform1i(smp_chn[1],2);
+glActiveTexture(GL_TEXTURE1);
+glUniform1i(smp_chn[2],1);
+glActiveTexture(GL_TEXTURE0);
+glUniform1i(smp_chn[3],0);
+}
+}
+*/
+  // buffer frame/time
+// glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+// glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
+// glBufferSubData(GL_UNIFORM_BUFFER,12,4,&d_time.at(0,0)); 
+// glBindBuffer(GL_UNIFORM_BUFFER,0);
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
@@ -1129,7 +1143,7 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
-  /*
+  
     // texture
 GLsizei width1=1;
 GLsizei height1=1;
@@ -1177,37 +1191,19 @@ glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
 // glUniform1i(smp_chn[3],3);
-*/
+
 gpuStart();
 glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
-glGenTextures(1,&ytexture);
-glGenTextures(1,&ztexture);
-  /*
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-glGenerateMipmap(GL_TEXTURE_2D);
-
-  glActiveTexture(GL_TEXTURE1);
+glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,xtexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-
-  glActiveTexture(GL_TEXTURE2);
-glBindTexture(GL_TEXTURE_2D,ytexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-glGenerateMipmap(GL_TEXTURE_2D);
-
-  glActiveTexture(GL_TEXTURE3);
-glBindTexture(GL_TEXTURE_2D,ztexture);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[0],1);
 glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);
-*/
+glUniform1i(smp_chn[2],1);
+glUniform1i(smp_chn[3],1);
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
