@@ -379,7 +379,7 @@ int raN=0;
 int raND=0;
 
 int * resultRun[bufferSize];
-int * WGPU_Result_Buffer[buffersize];
+int * WGPU_Result_Buffer[bufferSize];
 int * resul=new int[bufferSize];
 
 inline int rNd4(int randomMax){
