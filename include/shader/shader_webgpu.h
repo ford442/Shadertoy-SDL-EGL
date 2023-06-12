@@ -314,10 +314,10 @@ static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 
-unsigned char * Colora[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
-unsigned char * Colorb[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
-unsigned char * ColorA[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
-unsigned char * ColorB[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
+unsigned char Colora[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
+unsigned char Colorb[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
+unsigned char ColorA[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
+unsigned char ColorB[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
