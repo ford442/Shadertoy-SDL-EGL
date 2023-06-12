@@ -267,7 +267,7 @@ using i_tensor=boost::numeric::ublas::tensor<int>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
-using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry>;
+using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -401,6 +401,7 @@ bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[0].type=1;
 bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
+  WGPU_BindGroupLayoutEntries.at(0,0,0)[0]=bindGroupLayoutEntries[0];
 bindGroupLayoutEntries[1].binding=1;
 bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[1].type=1;
