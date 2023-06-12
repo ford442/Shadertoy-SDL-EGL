@@ -858,7 +858,7 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
-  
+  /*
     // texture
 GLsizei width=1;
 GLsizei height=1;
@@ -907,7 +907,7 @@ glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
 // glUniform1i(smp_chn[3],3);
-
+*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
