@@ -352,7 +352,7 @@ return randomNumber;
 
 //wgpu
 static void raf(WGpuDevice device){
-wgpu_buffer_unmap(mapBuffer);
+// wgpu_buffer_unmap(mapBuffer);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
