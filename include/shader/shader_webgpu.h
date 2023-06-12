@@ -429,7 +429,7 @@ ColorA[hh+1]=int(resulT[hh+1]);
 ColorA[hh+2]=int(resulT[hh+2]);
 ColorA[hh+3]=int(resulT[hh+3]);
 }
-wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+// wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 };
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
