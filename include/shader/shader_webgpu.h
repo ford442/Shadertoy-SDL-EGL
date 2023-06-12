@@ -559,7 +559,10 @@ navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0
 
 void WGPUCompute_Run(){
 WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
-navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);class GPU{
+navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);
+}
+  
+class GPU{
 
 private:
 
