@@ -1177,6 +1177,7 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
+unsigned char * Colora=new unsigned char[1*sizeof(unsigned char)];
 
     // texture
 GLsizei width1=1;
