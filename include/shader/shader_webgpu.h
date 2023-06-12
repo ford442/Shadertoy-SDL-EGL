@@ -267,6 +267,7 @@ using i_tensor=boost::numeric::ublas::tensor<int>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
+using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -301,7 +302,7 @@ static i_tensor WGPU_ComputePipelineLayout=i_tensor{1,1,1};
 static i_tensor WGPU_ComputeModule=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
-static i_tensor WGPU_BindGroupLayoutEntries=i_tensor{1,1,1};
+static i_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static i_tensor WGPU_BindGroupEntries=i_tensor{1,1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
