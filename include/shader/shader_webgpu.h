@@ -302,7 +302,7 @@ static i_tensor WGPU_ComputePipelineLayout=i_tensor{1,1,1};
 static i_tensor WGPU_ComputeModule=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
-static i_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
+static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static i_tensor WGPU_BindGroupEntries=i_tensor{1,1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
