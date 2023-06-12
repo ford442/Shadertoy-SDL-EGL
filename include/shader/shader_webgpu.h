@@ -319,6 +319,7 @@ static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
 static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
+static void_tensor WGPU_UserData=void_tensor{1,1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
@@ -392,35 +393,34 @@ return randomNumber;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
-
 WGPU_ResultBuffer.at(0,0,0)=resul;  // WGPU_BufferMappedRange.at(0,0,0)=outputStart;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(resul[hh]);
-ColorA[hh+1]=int(resul[hh+1]);
-ColorA[hh+2]=int(resul[hh+2]);
-ColorA[hh+3]=int(resul[hh+3]);
+ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
+ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
+ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
+ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallback;
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDataA,mode1,0,DbufferSize);
+WGPU_UserData.at(0,0,0)=userDataA;
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,DbufferSize);
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,DbufferSize);
-int * resul=new int[bufferSize];
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,&resul,DbufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,&WGPU_ResultBuffer.at(0,0,0),DbufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(resul[hh]);
-ColorA[hh+1]=int(resul[hh+1]);
-ColorA[hh+2]=int(resul[hh+2]);
-ColorA[hh+3]=int(resul[hh+3]);
+ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
+ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
+ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
+ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 };
 
