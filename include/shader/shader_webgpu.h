@@ -385,10 +385,10 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(resultStart[hh]);
-ColorA[hh+1]=int(resultStart[hh+1]);
-ColorA[hh+2]=int(resultStart[hh+2]);
-ColorA[hh+3]=int(resultStart[hh+3]);
+ColorA[hh]=int(WGPU_Result_Buffer[hh]);
+ColorA[hh+1]=int(WGPU_Result_Buffer[hh+1]);
+ColorA[hh+2]=int(WGPU_Result_Buffer[hh+2]);
+ColorA[hh+3]=int(WGPU_Result_Buffer[hh+3]);
 }
 };
 
