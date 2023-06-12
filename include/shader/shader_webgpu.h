@@ -390,8 +390,8 @@ ColorA[hh+3]=int(resultStart[hh+3]);
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
-WGPU_MapCallback.at(0,0,0)=&mapCallback;
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),&WGPU_MapCallback.at(0,0,0),&userDataA,mode1,uint32_t(0),bufferSize);
+WGPU_MapCallback.at(0,0,0)=mapCallback();
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDataA,mode1,uint32_t(0),bufferSize);
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
@@ -463,9 +463,9 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,iBufferSize);
 commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
-WGPU_ComputeDoneCallback.at(0,0,0)=&onComputeDoneStart;
-WGPU_ComputeDoneCallback.at(0,0,1)=&onComputeDoneRun;
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),&WGPU_ComputeDoneCallback.at(0,0,0),0);
+WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart();
+WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun();
+wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
