@@ -308,8 +308,8 @@ static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
 
-static bge_tensor WGPU_MapCallback=bge_tensor{1,1,1};
-static bmc_tensor WGPU_ComputeDoneCallback=bmc_tensor{1,1,2};
+static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
+static cdc_tensor WGPU_ComputeDoneCallback=cdc_tensor{1,1,2};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
