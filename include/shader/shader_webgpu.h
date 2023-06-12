@@ -396,7 +396,7 @@ ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallback;
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDataA,mode1,uint32_t(0),bufferSize);
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDataA,mode1,0,bufferSize);
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
