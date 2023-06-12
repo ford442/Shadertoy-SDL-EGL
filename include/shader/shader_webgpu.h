@@ -264,6 +264,7 @@ using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
+using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
@@ -314,6 +315,7 @@ static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static d_tensor WGPU_BufferMappedRange=d_tensor{1,1,1};
+static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 unsigned char Colora[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
 unsigned char Colorb[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
@@ -381,14 +383,14 @@ return randomNumber;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double outputStart=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=outputStart;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&WGPU_Result_Buffer,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&WGPU_ResultBuffer.at(0,0,0),bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(WGPU_Result_Buffer[hh]);
-ColorA[hh+1]=int(WGPU_Result_Buffer[hh+1]);
-ColorA[hh+2]=int(WGPU_Result_Buffer[hh+2]);
-ColorA[hh+3]=int(WGPU_Result_Buffer[hh+3]);
+ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
+ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
+ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
+ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 };
 
