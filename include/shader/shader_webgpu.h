@@ -383,7 +383,7 @@ input[0]=raN;
 // }
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&shaderModuleDescriptor);
 WGPU_ComputeModule.at(0,0,0)=cs;
-WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
+WGPU_BindGroupLayoutEntries.at(0,0,0)=&bindGroupLayoutEntries;
   
 WGPU_BindGroupLayoutEntries.at(0,0,0)[0].binding=0;
 WGPU_BindGroupLayoutEntries.at(0,0,0)[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
