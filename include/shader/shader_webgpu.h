@@ -313,6 +313,7 @@ static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
+static d_tensor WGPU_BufferMappedRange=d_tensor{1,1,1};
 
 unsigned char Colora[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
 unsigned char Colorb[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
@@ -379,7 +380,8 @@ return randomNumber;
 
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double outputStart=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputStart,0,&resultStart,bufferSize);
+WGPU_BufferMappedRange.at(0,0,0)=outputStart;
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&resultStart,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
@@ -396,8 +398,7 @@ wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDat
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
-double outputRun=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputRun,0,&resultRun,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&resultRun,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
