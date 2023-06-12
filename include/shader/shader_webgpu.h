@@ -378,8 +378,8 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-int * resultRun[262144];
-int * WGPU_Result_Buffer[262144];
+int * resultRun[buffersize];
+int * WGPU_Result_Buffer[buffersize];
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -393,7 +393,7 @@ double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),Dbu
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 int * resul=new int[bufferSize];
 WGPU_ResultBuffer.at(0,0,0)=&resul;  // WGPU_BufferMappedRange.at(0,0,0)=outputStart;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
