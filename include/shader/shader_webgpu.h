@@ -296,8 +296,6 @@ static i_tensor WGPU_CommandBuffer=i_tensor{1,1,1};
 static i_tensor WGPU_Buffers=i_tensor{1,1,1};
 static i_tensor WGPU_CommandEncoder=i_tensor{1,1,1};
 static i_tensor WGPU_ComputePassCommandEncoder=i_tensor{1,1,1};
-
-
 static i_tensor WGPU_ComputePipeline=i_tensor{1,1,1};
 static i_tensor WGPU_ComputePipelineLayout=i_tensor{1,1,1};
 static i_tensor WGPU_ComputeModule=i_tensor{1,1,1};
@@ -305,7 +303,6 @@ static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayoutEntries=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupEntries=i_tensor{1,1,1};
-
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
@@ -394,7 +391,8 @@ bindGroupLayoutEntries[1].binding=1;
 bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[1].type=1;
 bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
-bindGroupLayout=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),bindGroupLayoutEntries,2);
+WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
+bindGroupLayout=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_BindGroupLayout.at(0,0,0)=bindGroupLayout;
 pipelineLayout=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipelineLayout.at(0,0,0)=pipelineLayout;
@@ -408,7 +406,8 @@ bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=0;
-bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),bindGroupEntry,2);
+WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
+bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_BindGroup.at(0,0,0)=bindGroup;
 encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),0);
 WGPU_CommandEncoder.at(0,0,0)=encoder;
