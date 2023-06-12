@@ -262,6 +262,7 @@ using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
 using sz_tensor=boost::numeric::ublas::tensor<int>;
 using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
+using di_tensor=boost::numeric::ublas::tensor<double_int53_t>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
@@ -314,7 +315,7 @@ static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
-static d_tensor WGPU_BufferMappedRange=d_tensor{1,1,1};
+static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 unsigned char Colora[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
@@ -323,8 +324,8 @@ unsigned char ColorA[262144]; // =new unsigned char[262144*sizeof(unsigned char)
 unsigned char ColorB[262144]; // =new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
-uint64_t bufferSize=262144*sizeof(int);
-uint64_t iBufferSize=1*sizeof(int);
+double_int53_t bufferSize=262144*sizeof(int);
+double_int53_t iBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
