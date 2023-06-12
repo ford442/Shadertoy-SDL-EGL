@@ -299,8 +299,12 @@ static i_tensor WGPU_ComputePassCommandEncoder=i_tensor{1,1,1};
 
 
 static i_tensor WGPU_ComputePipeline=i_tensor{1,1,1};
+static i_tensor WGPU_ComputePipelineLayout=i_tensor{1,1,1};
 static i_tensor WGPU_ComputeModule=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
+static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
+static i_tensor WGPU_BindGroupLayoutEntries=i_tensor{1,1,1};
+static i_tensor WGPU_BindGroupEntries=i_tensor{1,1,1};
 
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
@@ -382,6 +386,7 @@ input[0]=raN;
 // }
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&shaderModuleDescriptor);
+WGPU_ComputeModule.at(0,0,0)=cs;
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[0].type=1;
@@ -391,8 +396,11 @@ bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[1].type=1;
 bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
 bindGroupLayout=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),bindGroupLayoutEntries,2);
-pipelineLayout=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&bindGroupLayout,1);
-computePipeline=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),cs,Entry,pipelineLayout,NULL,0);
+WGPU_BindGroupLayout.at(0,0,0)=bindGroupLayout;
+pipelineLayout=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
+WGPU_ComputePipelineLayout.at(0,0,0)=pipelineLayout;
+computePipeline=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
+WGPU_ComputePipeline.at(0,0,0)=computePipeline;
 bindGroupEntry[0].binding=0;
 bindGroupEntry[0].resource=WGPU_Buffers.at(1,1,1);
 bindGroupEntry[0].bufferBindOffset=0;
@@ -401,13 +409,14 @@ bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=0;
-bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),bindGroupLayout,bindGroupEntry,2);
+bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),bindGroupEntry,2);
+WGPU_BindGroup.at(0,0,0)=bindGroup;
 encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),0);
 WGPU_CommandEncoder.at(0,0,0)=encoder;
 computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
-wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),computePipeline);
-wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,bindGroup,0,0);
+wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
+wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_Queue.at(0,0,0)=queue;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),iBufferSize);
