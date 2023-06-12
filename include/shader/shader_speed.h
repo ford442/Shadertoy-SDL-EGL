@@ -411,7 +411,7 @@ return;
 }
 
 void uniUP(){
-t_size.at(0,1)=t_size.at(0,1)*1.01;
+t_size.at(0,1)=t_size.at(0,1)*1.001;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res0,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res1,t_size.at(0,1),t_size.at(0,1),gpu.gF());
@@ -422,7 +422,7 @@ return;
 }
 
 void uniDOWN(){
-t_size.at(0,1)=t_size.at(0,1)*0.99;
+t_size.at(0,1)=t_size.at(0,1)*0.999;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res0,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 glUniform3f(smp_chn_res1,t_size.at(0,1),t_size.at(0,1),gpu.gF());
