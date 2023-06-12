@@ -62,9 +62,9 @@ return shader;
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
-"@compute@workgroup_size(64,1,1)"
+"@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let a: u32=global_id.x*4;"
+"let a: u32=global_id.x*global_id.y*4;"
 "let b: i32=255/inputBuffer[0];"
 "for (var e:i32=0;e<256;e++){"
 "var f:i32=e*4;"
@@ -411,7 +411,7 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,bindGroup
 queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_Queue.at(0,0,0)=queue;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),iBufferSize);
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),uint32_t(64),uint32_t(1),uint32_t(1));
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),uint32_t(64),uint32_t(4),uint32_t(1));
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,iBufferSize);
 commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
