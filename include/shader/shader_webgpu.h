@@ -316,7 +316,7 @@ static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
-static md_tensor WGPU_ModuleDescriptor=md_tensor{1,1,3};
+static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
 static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
@@ -433,8 +433,8 @@ raN=rNd4(255);
 input[0]=raN;
 // }
   
-WGPU_ModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
-cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ModuleDescriptor.at(0,0,0));
+WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
+cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_ComputeModule.at(0,0,0)=cs;
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
@@ -465,8 +465,8 @@ bindGroupEntry[1].bufferBindSize=0;
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_BindGroup.at(0,0,0)=bindGroup;
-// encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),0);
-encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),NULL);
+// encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=encoder;
 computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
