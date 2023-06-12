@@ -270,7 +270,7 @@ using void_tensor=boost::numeric::ublas::tensor<void *>;
 using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback *>;
-using cdc_tensor=boost::numeric::ublas::tensor<WGPU_ComputeDoneCallback *>;
+using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback *>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -307,8 +307,8 @@ static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
-static void_tensor WGPU_MapCallback=void_tensor{1,1,1};
-static void_tensor WGPU_ComputeDoneCallback=void_tensor{1,1,2};
+static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
+static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
