@@ -853,8 +853,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%3==0){
-// WGPUCompute_Run();
-WGPUCompute_Start();
+WGPUCompute_Run();
+// WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
