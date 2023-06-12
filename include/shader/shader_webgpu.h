@@ -402,12 +402,12 @@ ColorA[hh+1]=int(resulT[hh+1]);
 ColorA[hh+2]=int(resulT[hh+2]);
 ColorA[hh+3]=int(resulT[hh+3]);
 }
-wgpu_buffer_unmap(mapBuffer);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
 wgpu_queue_submit_one(queue,commandBuffer);
+wgpu_buffer_unmap(mapBuffer);
 return;
 }
 
