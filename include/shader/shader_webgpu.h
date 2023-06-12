@@ -395,10 +395,10 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,&resul,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
+ColorA[hh]=int(resul[hh]);
+ColorA[hh+1]=int(resul[hh+1]);
+ColorA[hh+2]=int(resul[hh+2]);
+ColorA[hh+3]=int(resul[hh+3]);
 }
 };
 
@@ -408,15 +408,16 @@ wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDat
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
+auto Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,DbufferSize);
 int * resul=new int[bufferSize];
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&resul,DbufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,&resul,DbufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
+ColorA[hh]=int(resul[hh]);
+ColorA[hh+1]=int(resul[hh+1]);
+ColorA[hh+2]=int(resul[hh+2]);
+ColorA[hh+3]=int(resul[hh+3]);
 }
 };
 
