@@ -308,8 +308,8 @@ static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
 
-static void_tensor WGPU_MapCallback=void_tensor{1,1,1};
-static void_tensor WGPU_ComputeDoneCallback=void_tensor{1,1,2};
+static bge_tensor WGPU_MapCallback=bge_tensor{1,1,1};
+static bmc_tensor WGPU_ComputeDoneCallback=bmc_tensor{1,1,2};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
@@ -377,6 +377,13 @@ return randomNumber;
 
 // wgpu
 
+
+
+
+
+
+static void raf(WGpuDevice device){
+WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double outputStart=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputStart,0,&resultStart,bufferSize);
@@ -389,27 +396,10 @@ ColorA[hh+2]=int(resultStart[hh+2]);
 ColorA[hh+3]=int(resultStart[hh+3]);
 }
 };
-
-WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallback;
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDataA,mode1,uint32_t(0),bufferSize);
 };
-
-WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
-double outputRun=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputRun,0,&resultRun,bufferSize);
-raN=rNd4(255);
-for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorA[hh]=int(resultRun[hh]);
-ColorA[hh+1]=int(resultRun[hh+1]);
-ColorA[hh+2]=int(resultRun[hh+2]);
-ColorA[hh+3]=int(resultRun[hh+3]);
-}
-};
-
-static void raf(WGpuDevice device){
-// wgpu_buffer_unmap(mapBuffer);
+WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorM);
@@ -464,8 +454,6 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,iBufferSize);
 commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
-WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
-WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),onComputeDoneStart,0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
@@ -475,11 +463,24 @@ static void WGPUCompute_Run(){
 raND=rNd4(255);
 raN=rNd4(raND);
 input[0]=raN;
+WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
+double outputRun=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputRun,0,&resultRun,bufferSize);
+raN=rNd4(255);
+for(int g=0;g<65536;g++){
+int hh=g*4;
+ColorA[hh]=int(resultRun[hh]);
+ColorA[hh+1]=int(resultRun[hh+1]);
+ColorA[hh+2]=int(resultRun[hh+2]);
+ColorA[hh+3]=int(resultRun[hh+3]);
+}
+};
+WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),iBufferSize);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,iBufferSize);
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),&WGPU_ComputeDoneCallback.at(0,0,1),0);
+wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 }
 
