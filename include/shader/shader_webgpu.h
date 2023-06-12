@@ -317,8 +317,8 @@ static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
 static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,2};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
-static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,1};
-static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,1};
+static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,2};
+static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
@@ -501,7 +501,7 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
 
-static void WGPUCompute_Run(){
+static void WGPU_Run(WGpuDevice device){
 raND=rNd4(255);
 raN=rNd4(raND);
 input[0]=raN;
@@ -510,7 +510,6 @@ WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(WGPU_Device.
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
-
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
@@ -527,25 +526,40 @@ wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_Compute
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 }
 
-static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
+static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,0)=device;
-raf(device);
+raf(WGPU_Device.at(0,0,0));
 }
 
-static void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
+static void ObtainedWebGpuDeviceRun(WGpuDevice result,void * userData){
+device=result;
+WGPU_Device.at(0,0,0)=device;
+WGPU_Run(raf(WGPU_Device.at(0,0,0));
+}
+
+static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
-WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDevice;
+WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,0),0);
 }
 
+static void ObtainedWebGpuAdapterRun(WGpuAdapter result,void * userData){
+adapter=result;
+WGPU_Adapter.at(0,0,0)=result;
+WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceRun;
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,1),0);
+}
+
 void WGPUCompute_Start(){
-WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapter;
+WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);
 }
 
-class GPU{
+void WGPUCompute_Run(){
+WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
+navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);class GPU{
 
 private:
 
