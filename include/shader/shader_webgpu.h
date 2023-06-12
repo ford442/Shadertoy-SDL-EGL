@@ -919,7 +919,8 @@ glUniform1i(smp_chn[0],0);
 }
 glBindTexture(GL_TEXTURE_2D,0);
 }
-  
+}
+
   /*
   
   else
