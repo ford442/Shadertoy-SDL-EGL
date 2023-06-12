@@ -389,7 +389,7 @@ return randomNumber;
 }
 
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,DbufferSize);
+double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 int * resul=new int[bufferSize];
 WGPU_ResultBuffer.at(0,0,0)=resul;  // WGPU_BufferMappedRange.at(0,0,0)=outputStart;
