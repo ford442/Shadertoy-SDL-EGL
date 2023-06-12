@@ -289,6 +289,8 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
+static i_tensor WGPU_Adapter=i_tensor{1,1,1};
+
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
@@ -428,7 +430,8 @@ raf(device);
 
 static void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
 adapter=result;
-wgpu_adapter_request_device_async(adapter,&deviceDescriptor,ObtainedWebGpuDevice,0);
+WGPU_Adapter.at(0,0,0)=result;
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
 void gpuStart(){
