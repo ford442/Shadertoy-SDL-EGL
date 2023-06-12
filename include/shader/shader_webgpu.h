@@ -334,10 +334,10 @@ unsigned char * ColorB=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 // double_int53_t DbufferSize=262144*sizeof(int);
-uint64_t DbufferSize=262144*sizeof(int);
+uint32_t DbufferSize=262144*sizeof(int);
 uint32_t bufferSize=262144*sizeof(int);
 // double_int53_t DiBufferSize=1*sizeof(int);
-uint64_t DiBufferSize=1*sizeof(int);
+uint32_t DiBufferSize=1*sizeof(int);
 uint32_t iBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
@@ -399,7 +399,7 @@ return randomNumber;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
-WGPU_ResultBuffer.at(0,0,0)=resul;  // WGPU_BufferMappedRange.at(0,0,0)=outputStart;
+WGPU_ResultBuffer.at(0,0,0)=resul;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
@@ -418,16 +418,7 @@ wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_Us
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,DbufferSize);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,&WGPU_ResultBuffer.at(0,0,0),DbufferSize);
-raN=rNd4(255);
-for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,DbufferSize);
 };
 
 static void raf(WGpuDevice device){
@@ -445,7 +436,7 @@ raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
 // }
-  
+
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_ComputeModule.at(0,0,0)=cs;
@@ -478,8 +469,8 @@ bindGroupEntry[1].bufferBindSize=0;
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_BindGroup.at(0,0,0)=bindGroup;
-encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),NULL);
-// encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+// encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),NULL);
+encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=encoder;
 computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
@@ -821,8 +812,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%3==0){
-// WGPUCompute_Run();
-WGPUCompute_Start();
+WGPUCompute_Run();
+// WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
