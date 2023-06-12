@@ -69,28 +69,28 @@ inline char wgl_cmp_src[2000]=
 "for (var e:i32=0;e<256;e++){"
 "var f:i32=e*4;"
 "var g:i32=(255-f)%inputBuffer[0];"
-"switch b {"
+"switch f {"
 "case default: {"
-"outputBuffer[f]=0;"
+"outputBuffer[f]=255;"
 "outputBuffer[f+1]=inputBuffer[0];"
-"outputBuffer[f+2]=0;"
+"outputBuffer[f+2]=255;"
 "outputBuffer[f+3]=255;"
 "}"
 "case 0: {"
 "outputBuffer[f]=inputBuffer[0];"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=0;"
+"outputBuffer[f+1]=255;"
+"outputBuffer[f+2]=255;"
 "outputBuffer[f+3]=255;"
 "}"
 "case 1: {"
-"outputBuffer[f]=0;"
-"outputBuffer[f+1]=0;"
+"outputBuffer[f]=255;"
+"outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=inputBuffer[0];"
 "outputBuffer[f+3]=255;"
 "}"
 "case 2: {"
 "outputBuffer[f]=inputBuffer[0];"
-"outputBuffer[f+1]=0;"
+"outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=inputBuffer[0];"
 "outputBuffer[f+3]=255;"
 "}"
@@ -291,6 +291,8 @@ static void_tensor bin=void_tensor{1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * ColorB=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint64_t bufferSize=262144*sizeof(int);
@@ -350,10 +352,11 @@ return randomNumber;
 
 //wgpu
 static void raf(WGpuDevice device){
+wgpu_buffer_unmap(mapBuffer);
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
-wgpu_buffer_unmap(mapBuffer);
+
 raN=0;
 raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
@@ -399,14 +402,10 @@ wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-Colora[hh]=int(resulT[hh]);
-Colorb[hh]=raN-int(resulT[hh]);
-Colora[hh+1]=int(resulT[hh+1]);
-Colorb[hh+1]=raN-int(resulT[hh+2]);
-Colora[hh+2]=int(resulT[hh+2]);
-Colorb[hh+2]=raN-int(resulT[hh+1]);
-Colora[hh+3]=int(resulT[hh+3]);
-Colorb[hh+3]=int(resulT[hh+3]);
+ColorA[hh]=int(resulT[hh]);
+ColorA[hh+1]=int(resulT[hh+1]);
+ColorA[hh+2]=int(resulT[hh+2]);
+ColorA[hh+3]=int(resulT[hh+3]);
 }
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
@@ -414,6 +413,11 @@ wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferS
 wgpu_queue_set_on_submitted_work_done_callback(queue,onComputeDone,0);
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
 return;
+}
+
+static void WgpuCompute(){
+  
+
 }
 
 static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
@@ -1158,7 +1162,6 @@ glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
 // glUniform1i(smp_chn[3],3);
-unsigned char* Colorb=new unsigned char[width1*height1*sizeof(unsigned char)];
 Colorb[0]=0;
 Colorb[1]=255;
 Colorb[2]=0;
