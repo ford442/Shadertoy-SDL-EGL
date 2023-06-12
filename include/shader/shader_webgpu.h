@@ -394,7 +394,6 @@ WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 int * resulT[bufferSize];
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
-wgpu_buffer_unmap(mapBuffer);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
@@ -403,6 +402,7 @@ ColorA[hh+1]=int(resulT[hh+1]);
 ColorA[hh+2]=int(resulT[hh+2]);
 ColorA[hh+3]=int(resulT[hh+3]);
 }
+wgpu_buffer_unmap(mapBuffer);
 };
 wgpu_buffer_map_async(mapBuffer,mapCallback,&userDataA,mode1,uint32_t(0),bufferSize);
 };
