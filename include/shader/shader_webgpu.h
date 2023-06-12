@@ -271,6 +271,7 @@ using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
+using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout *>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -307,9 +308,9 @@ static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
-
 static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
+static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
@@ -425,14 +426,17 @@ input[0]=raN;
 // }
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&shaderModuleDescriptor);
 WGPU_ComputeModule.at(0,0,0)=cs;
+WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
+WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
+WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[0].type=1;
-bindGroupLayoutEntries[0].layout.buffer=bufferBindingLayout1;
+bindGroupLayoutEntries[0].layout.buffer=WGPU_BufferBindingLayout.at(0,0,1);
 bindGroupLayoutEntries[1].binding=1;
 bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[1].type=1;
-bindGroupLayoutEntries[1].layout.buffer=bufferBindingLayout2;
+bindGroupLayoutEntries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
 bindGroupLayout=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_BindGroupLayout.at(0,0,0)=bindGroupLayout;
