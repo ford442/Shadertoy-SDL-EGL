@@ -269,8 +269,8 @@ using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
-using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback *>;
-using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback *>;
+using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
+using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
