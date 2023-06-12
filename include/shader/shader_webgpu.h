@@ -375,6 +375,7 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
+
 int * resultRun[262144];
 int * WGPU_Result_Buffer[262144];
 
@@ -388,7 +389,8 @@ return randomNumber;
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
-  // WGPU_BufferMappedRange.at(0,0,0)=outputStart;
+int * resul[bufferSize];
+WGPU_ResultBuffer.at(0,0,0)=resul;  // WGPU_BufferMappedRange.at(0,0,0)=outputStart;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&WGPU_ResultBuffer.at(0,0,0),DbufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
@@ -406,6 +408,7 @@ wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&userDat
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
+  
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&resultRun,DbufferSize);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
