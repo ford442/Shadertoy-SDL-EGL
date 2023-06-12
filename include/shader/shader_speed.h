@@ -507,6 +507,7 @@ short hr=5+datE->tm_hour;
 short mi=datE->tm_min;
 short sc=datE->tm_sec;
 short shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+  /*
 if(int(d_time.at(0,0))%60==0){
 glUniform4i(uni_dte,yr,mn,dy,shaderToySeconds);
 }
@@ -531,7 +532,8 @@ glUniform1i(smp_chn[2],1);
 glActiveTexture(GL_TEXTURE2);
 glUniform1i(smp_chn[3],2);
 }
-}
+}*/
+  
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
@@ -871,7 +873,7 @@ glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colora);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
+// glUniform1i(smp_chn[0],0);
 unsigned char* Colorb=new unsigned char[width*height*sizeof(unsigned char)];
 Colorb[0]=0;
 Colorb[1]=255;
@@ -882,7 +884,7 @@ glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[1],1);
+// glUniform1i(smp_chn[1],1);
 unsigned char* Colorc=new unsigned char[width*height*sizeof(unsigned char)];
 Colorc[0]=80;
 Colorc[1]=0;
@@ -893,7 +895,7 @@ glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,texturec);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[2],2);
+// glUniform1i(smp_chn[2],2);
 unsigned char* Colord=new unsigned char[width*height*sizeof(unsigned char)];
 Colord[0]=128;
 Colord[1]=128;
@@ -904,7 +906,7 @@ glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[3],3);
+// glUniform1i(smp_chn[3],3);
 
   // date/time
 const time_t timE=time(0);
