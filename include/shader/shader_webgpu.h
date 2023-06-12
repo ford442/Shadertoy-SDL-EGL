@@ -441,7 +441,8 @@ WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 
 bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_BindGroup.at(0,0,0)=bindGroup;
-encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),0);
+// encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),0);
+encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=encoder;
 computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
@@ -805,8 +806,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%3==0){
-WGPUCompute_Run();
-// WGPUCompute_Start();
+// WGPUCompute_Run();
+WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
