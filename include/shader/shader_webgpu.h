@@ -361,6 +361,7 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
+shaderModuleDescriptor={cmp_bdy,0,NULL};
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -384,7 +385,6 @@ raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
 // }
-shaderModuleDescriptor={cmp_bdy,0,NULL};
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&shaderModuleDescriptor);
 WGPU_ComputeModule.at(0,0,0)=cs;
 bindGroupLayoutEntries[0].binding=0;
