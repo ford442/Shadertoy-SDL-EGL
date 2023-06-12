@@ -188,7 +188,6 @@ inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"uniform sampler2D iChannel4;"
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
@@ -263,7 +262,7 @@ using sz_tensor=boost::numeric::ublas::tensor<int>;
 using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
-using i_tensor=boost::numeric::ublas::tensor<intmax_t>;
+using i_tensor=boost::numeric::ublas::tensor<int>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
@@ -980,7 +979,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -1077,7 +1076,7 @@ glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 glDepthFunc(GL_LESS);
 glEnable(GL_STENCIL_TEST);
@@ -1086,7 +1085,7 @@ glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 glStencilFunc(GL_ALWAYS,1,0xFF);
 glStencilMask(0xFF);
 glFrontFace(GL_CW);
-glEnable(GL_CULL_FACE);
+// glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_DST_COLOR,GL_SRC_COLOR,SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
