@@ -315,11 +315,10 @@ static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
 static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
-static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
+static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,2};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,1};
 static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,1};
-
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
