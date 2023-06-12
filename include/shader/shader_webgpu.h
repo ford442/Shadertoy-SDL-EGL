@@ -356,6 +356,7 @@ char * cmp_bdy=wgl_cmp_src;
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
+int raND=0;
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
@@ -437,9 +438,25 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 return;
 }
 
-static void WgpuCompute(){
-  
-
+static void WGPUCompute_Run(){
+raND=rNd4(255);
+raN=rNd4(raND);
+input[0]=raN;
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),iBufferSize);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),uint32_t(64),uint32_t(1),uint32_t(1));
+wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,iBufferSize);
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+double outputBuff=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
+int * resulTs[bufferSize];
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputBuff,0,&resulTs,bufferSize);
+for(int g=0;g<65536;g++){
+int hh=g*4;
+ColorA[hh]=int(resulT[hh]);
+ColorA[hh+1]=int(resulT[hh+1]);
+ColorA[hh+2]=int(resulT[hh+2]);
+ColorA[hh+3]=int(resulT[hh+3]);
+}
 }
 
 static void ObtainedWebGpuDevice(WGpuDevice result,void * userData){
@@ -454,7 +471,7 @@ WGPU_Adapter.at(0,0,0)=result;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,ObtainedWebGpuDevice,0);
 }
 
-void gpuStart(){
+void WGPUCompute_Start(){
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
 }
 
@@ -753,7 +770,7 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%3==0){
-gpuStart();
+WGPUCompute_Run();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
@@ -1222,8 +1239,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 // glUniform1i(smp_chn[3],3);
 glGenerateMipmap(GL_TEXTURE_2D);
-
-gpuStart();
+WGPUCompute_Start();
 glGenTextures(1,&wtexture);
 glGenTextures(1,&xtexture);
 glActiveTexture(GL_TEXTURE1);
