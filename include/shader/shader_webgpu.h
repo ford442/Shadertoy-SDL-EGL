@@ -548,8 +548,8 @@ wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_
 static void ObtainedWebGpuAdapterRun(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
-WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceRun;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,1),0);
+WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceRun;
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,0),0);
 }
 
 void WGPUCompute_Start(){
@@ -558,7 +558,7 @@ navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0
 }
 
 void WGPUCompute_Run(){
-WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
+WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterRun;
 navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);
 }
   
