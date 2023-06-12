@@ -353,7 +353,6 @@ static void raf(WGpuDevice device){
 inputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorI);
 outputBuffer=wgpu_device_create_buffer(device,&bufferDescriptorO);
 mapBuffer=wgpu_device_create_buffer(device,&bufferDescriptorM);
-wgpu_buffer_unmap(mapBuffer);
 raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
@@ -395,6 +394,7 @@ WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_
 double output=wgpu_buffer_get_mapped_range(mapBuffer,uint32_t(0),bufferSize);
 int * resulT[bufferSize];
 wgpu_buffer_read_mapped_range(mapBuffer,output,0,&resulT,bufferSize);
+wgpu_buffer_unmap(mapBuffer);
 raN=rNd4(255);
 for(int g=0;g<65536;g++){
 int hh=g*4;
