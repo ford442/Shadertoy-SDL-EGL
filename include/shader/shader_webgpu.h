@@ -273,6 +273,9 @@ using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
+
+using oac_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterCallback>;
+using odc_tensor=boost::numeric::ublas::tensor<WGpuRequestDeviceCallback>;
 using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
@@ -314,6 +317,9 @@ static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
 static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
+static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,1};
+static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,1};
+
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
@@ -515,11 +521,13 @@ raf(device);
 static void ObtainedWebGpuAdapter(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,ObtainedWebGpuDevice,0);
+WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDevice;
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,0),0);
 }
 
 void WGPUCompute_Start(){
-navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapter,0);
+WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapter;
+navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);
 }
 
 class GPU{
@@ -813,8 +821,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%3==0){
-WGPUCompute_Run();
-// WGPUCompute_Start();
+// WGPUCompute_Run();
+WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
