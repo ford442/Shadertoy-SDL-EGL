@@ -275,7 +275,7 @@ using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
 using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
-using md_tensor=boost::numeric::ublas::tensor<WGpuModuleDescriptor>;
+using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
