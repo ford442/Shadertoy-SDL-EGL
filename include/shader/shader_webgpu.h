@@ -377,11 +377,6 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
-// wgpu
-
-
-
-
 WGpuBufferMapCallback mapCallback=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double outputStart=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferSize);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),outputStart,0,&resultStart,bufferSize);
@@ -414,9 +409,9 @@ ColorA[hh+3]=int(resultRun[hh+3]);
 };
 
 static void raf(WGpuDevice device){
-  WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
-    WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
-    WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
+WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
+WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
+WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
 inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
 outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
@@ -475,7 +470,7 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),onComputeDoneStart,0);
+wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
