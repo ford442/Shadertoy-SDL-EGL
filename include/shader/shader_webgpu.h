@@ -275,6 +275,7 @@ using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
 using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
+using md_tensor=boost::numeric::ublas::tensor<WGpuModuleDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -315,6 +316,7 @@ static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
+static md_tensor WGPU_ModuleDescriptor=md_tensor{1,1,3};
 static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
@@ -430,7 +432,9 @@ raN=rNd4(255);
 // for(int i=0;i<input.size();++i){
 input[0]=raN;
 // }
-cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&shaderModuleDescriptor);
+  
+WGPU_ModuleDesciptor.at(0,0,0)=shaderModuleDescriptor;
+cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ModuleDesciptor.at(0,0,0));
 WGPU_ComputeModule.at(0,0,0)=cs;
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
