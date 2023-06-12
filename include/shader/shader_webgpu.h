@@ -367,8 +367,8 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
-int * resultRun[bufferSize];
-int * resultStart[bufferSize];
+int * resultRun[262144];
+int * resultStart[262144];
 
 inline int rNd4(int randomMax){
 entropySeed=randomMax*randomizer();
