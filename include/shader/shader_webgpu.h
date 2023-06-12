@@ -272,6 +272,7 @@ using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
 using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
+using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -311,6 +312,7 @@ static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
 static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,1};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
+static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
@@ -413,9 +415,12 @@ ColorA[hh+3]=int(resultRun[hh+3]);
 };
 
 static void raf(WGpuDevice device){
-inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorI);
-outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorO);
-mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorM);
+  WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
+    WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
+    WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
+inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),WGPU_BufferDescriptor.at(0,0,0));
+outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),WGPU_BufferDescriptor.at(0,0,1));
+mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(1,1,1)=inputBuffer;
 WGPU_Buffers.at(0,0,0)=outputBuffer;
 WGPU_Buffers.at(1,0,1)=mapBuffer;
