@@ -554,12 +554,12 @@ wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_
 
 void WGPUCompute_Start(){
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
-navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),0);
+navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 void WGPUCompute_Run(){
 WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
-navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,1),1);
+navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
 }
   
 class GPU{
