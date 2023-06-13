@@ -965,6 +965,7 @@ glUniform1i(smp_chn[0],0);
 }
 // glBindTexture(GL_TEXTURE_2D,0);
 }
+}
 if(uni_i.at(0,0)%10==0){
 raN=rNd4(4);
 switch(raN){
