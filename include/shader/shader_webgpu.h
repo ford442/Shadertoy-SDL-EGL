@@ -886,8 +886,8 @@ glUniform1i(smp_chn[3],3);
   
 if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
-WGPUCompute_Run();
-// WGPUCompute_Start();
+// WGPUCompute_Run();
+WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
