@@ -346,7 +346,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture,xtexture;
+GLuint wtexture,texture,xtexture,texturea,textureb,texturec,textured;
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -1375,7 +1375,6 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
     // texture
 GLsizei width1=1;
 GLsizei height1=1;
-GLuint texture,textureb,texturec,textured;
 Colora[0]=0;
 Colora[1]=255;
 Colora[2]=0;
