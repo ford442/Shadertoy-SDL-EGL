@@ -920,6 +920,7 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%10==0){
 raN=rNd4(4);
+glActiveTexture(GL_TEXTURE0 +raN);
 glUniform1i(smp_chn[raN],raN);
 }
 if(uni_i.at(0,0)%90==0){
