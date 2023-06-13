@@ -505,9 +505,9 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
 
-static void raf2(WGpuDevice device){
+static void raf2(WGpuDevice device,int iFrm){
 raN=0;
-raN=rNd4(1024);
+raN=rNd4(512+(iFrm%512));
 input[0]=raN;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
@@ -623,8 +623,8 @@ WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
-void WGPUCompute_Run(){
-  raf2(WGPU_Device.at(0,0,0));
+void WGPUCompute_Run(int fr){
+  raf2(WGPU_Device.at(0,0,0),fr);
 // WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
 // navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
 }
@@ -921,7 +921,7 @@ int tfrm=(uni_i.at(0,0)%4);
 
 if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%2==0){
-WGPUCompute_Run();
+WGPUCompute_Run(uni_i.at(0,0));
 // WGPUCompute_Start();
 raN=rNd4(3);
 switch(raN){
