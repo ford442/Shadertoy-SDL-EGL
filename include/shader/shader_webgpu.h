@@ -951,7 +951,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 
 if(uni_i.at(0,0)%60==0){
-WGPUCompute_Run(uni_i.at(0,0));
+// WGPUCompute_Run(uni_i.at(0,0));
+WGPUCompute_Start();
 raN=rNd4(3);
 glActiveTexture(GL_TEXTURE0+raN);
 glGenTextures(1,&wtexture);
