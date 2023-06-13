@@ -303,8 +303,8 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-static i_tensor WGPU_Adapter=i_tensor{1,1,1};
-static i_tensor WGPU_Device=i_tensor{1,1,1};
+static i_tensor WGPU_Adapter=i_tensor{1,1,2};
+static i_tensor WGPU_Device=i_tensor{1,1,2};
 static i_tensor WGPU_Queue=i_tensor{1,1,1};
 static i_tensor WGPU_CommandBuffer=i_tensor{1,1,1};
 static i_tensor WGPU_Buffers=i_tensor{1,1,1};
@@ -610,9 +610,9 @@ wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.
 
 static void ObtainedWebGpuAdapterRun(WGpuAdapter result,void * userData){
 adapter=result;
-// WGPU_Adapter.at(0,0,0)=result;
+WGPU_Adapter.at(0,0,1)=result;
 WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceRun;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
 }
 
 void WGPUCompute_Start(){
