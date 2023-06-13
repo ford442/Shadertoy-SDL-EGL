@@ -922,7 +922,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%15==0){
-switch(tfrm){
+raN=rNd4(4);
+switch(raN){
 case 1:
 glActiveTexture(GL_TEXTURE0);
 case 2:
@@ -941,10 +942,10 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[raN],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);
+glUniform1i(smp_chn[3],raN);
 
 }
   
@@ -952,7 +953,19 @@ if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
 WGPUCompute_Run();
 // WGPUCompute_Start();
+raN=rNd4(4);
+switch(raN){
+case 1:
 glActiveTexture(GL_TEXTURE0);
+case 2:
+glActiveTexture(GL_TEXTURE1);
+case 3:
+glActiveTexture(GL_TEXTURE2);
+case 4:
+glActiveTexture(GL_TEXTURE3);
+default:
+glActiveTexture(GL_TEXTURE0);
+}
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -960,7 +973,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glGenerateMipmap(GL_TEXTURE_2D);
-switch(tfrm%5){
+raN=rNd4(4);
+switch(raN){
 case 0:
 glUniform1i(smp_chn[0],0);
 case 1:
