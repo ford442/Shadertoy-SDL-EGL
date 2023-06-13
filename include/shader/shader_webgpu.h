@@ -918,23 +918,29 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
-if(uni_i.at(0,0)%15==0){
+if(uni_i.at(0,0)%30==0){
 raN=rNd4(4);
 switch(raN){
 case 0:
 glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
 glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,texturea);
 case 2:
 glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,textureb);
 case 3:
 glActiveTexture(GL_TEXTURE2);
+glBindTexture(GL_TEXTURE_2D,texturec);
 case 4:
 glActiveTexture(GL_TEXTURE3);
+glBindTexture(GL_TEXTURE_2D,textured);
 default:
 glActiveTexture(GL_TEXTURE0);
-}
 glBindTexture(GL_TEXTURE_2D,wtexture);
+
+}
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
@@ -1385,7 +1391,7 @@ Colorb[1]=255;
 Colorb[2]=0;
 Colorb[3]=128;
 glGenTextures(1,&textureb);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,textureb);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorb);
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -1396,7 +1402,7 @@ Colorc[1]=0;
 Colorc[2]=130;
 Colorc[3]=200;
 glGenTextures(1,&texturec);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,texturec);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colorc);
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -1407,7 +1413,7 @@ Colord[1]=128;
 Colord[2]=128;
 Colord[3]=128;
 glGenTextures(1,&textured);
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
@@ -1424,9 +1430,9 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],0);
-glUniform1i(smp_chn[2],0);
-glUniform1i(smp_chn[3],0);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
 
   // date/time
 const time_t timE=time(0);
