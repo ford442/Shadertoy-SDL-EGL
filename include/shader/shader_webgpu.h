@@ -278,6 +278,7 @@ using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
 using dd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
 using rao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -300,7 +301,7 @@ static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
-static i_tensor WGPU_Adapter=i_tensor{1,1,2};
+static wa_tensor WGPU_Adapter=wa_tensor{1,1,2};
 static i_tensor WGPU_Device=i_tensor{1,1,2};
 static i_tensor WGPU_Queue=i_tensor{1,1,1};
 static i_tensor WGPU_CommandBuffer=i_tensor{1,1,1};
