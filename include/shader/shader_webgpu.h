@@ -67,7 +67,7 @@ inline char wgl_cmp_src[2000]=
 "let a: u32=global_id.x*4*global_id.y;"
 "let b: i32=255/inputBuffer[0];"
 "for (var e:i32=0;e<256;e++){"
-"var f:i32=a;"
+"var f:u32=a;"
 "var g:i32=(255-f)%inputBuffer[0];"
 "switch global_id.y {"
 "case default: {"
