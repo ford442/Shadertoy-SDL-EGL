@@ -927,25 +927,17 @@ raN=rNd4(3);
 switch(raN){
 case 0:
 glActiveTexture(GL_TEXTURE0);
-glGenTextures(1,&wtexture);
-glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
 glActiveTexture(GL_TEXTURE1);
-glGenTextures(1,&texturea);
-glBindTexture(GL_TEXTURE_2D,xtexture);
 case 2:
 glActiveTexture(GL_TEXTURE2);
-glGenTextures(1,&textureb);
-glBindTexture(GL_TEXTURE_2D,textureb);
 case 3:
 glActiveTexture(GL_TEXTURE3);
-glGenTextures(1,&texturec);
-glBindTexture(GL_TEXTURE_2D,texturec);
 default:
 glActiveTexture(GL_TEXTURE0);
+}
 glGenTextures(1,&wtexture);
 glBindTexture(GL_TEXTURE_2D,wtexture);
-}
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
@@ -953,13 +945,12 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
-
 glBindTexture(GL_TEXTURE_2D,0);
   
 }
 if(uni_i.at(0,0)%20==0){
 raN=rNd4(3);
-glActiveTexture(GL_TEXTURE0+raN);
+// glActiveTexture(GL_TEXTURE0+raN);
 glUniform1i(smp_chn[raN],raN);
 }
 }
