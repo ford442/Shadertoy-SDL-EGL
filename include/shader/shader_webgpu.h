@@ -279,6 +279,8 @@ using odc_tensor=boost::numeric::ublas::tensor<WGpuRequestDeviceCallback>;
 using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
+using dd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
+using rao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -325,6 +327,8 @@ static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
 static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,1};
+static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
+static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
@@ -542,24 +546,26 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=adapter;
 WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,0),0);
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 static void ObtainedWebGpuAdapterRun(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=adapter;
-WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceRun;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&deviceDescriptor,WGPU_ObtainedDeviceCallback.at(0,0,1),0);
+WGPU_RequestDeviceDescriptor.at(0,0,0)=deviceDescriptor;
+WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceRun;
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_RequestDeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 void WGPUCompute_Start(){
+WGPU_RequestAdapterOptions.at(0,0,0)=options;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
-navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 void WGPUCompute_Run(){
-WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
-navigator_gpu_request_adapter_async(&options,WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
+WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterRun;
+navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
   
 class GPU{
