@@ -279,6 +279,26 @@ using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
 using dd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
 using rao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
+using cb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
+using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
+using ce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
+
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+/*
+static i_tensor WGPU_ComputePassCommandEncoder=i_tensor{1,1,1};
+static i_tensor WGPU_ComputePipeline=i_tensor{1,1,1};
+static i_tensor WGPU_ComputePipelineLayout=i_tensor{1,1,1};
+static i_tensor WGPU_ComputeModule=i_tensor{1,1,1};
+static i_tensor WGPU_BindGroup=i_tensor{1,1,1};
+static i_tensor WGPU_BindGroupLayout=i_tensor{1,1,1};
+*/
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -302,11 +322,11 @@ static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 
 static wa_tensor WGPU_Adapter=wa_tensor{1,1,2};
-static i_tensor WGPU_Device=i_tensor{1,1,2};
-static i_tensor WGPU_Queue=i_tensor{1,1,1};
-static i_tensor WGPU_CommandBuffer=i_tensor{1,1,1};
-static i_tensor WGPU_Buffers=i_tensor{1,1,1};
-static i_tensor WGPU_CommandEncoder=i_tensor{1,1,1};
+static wd_tensor WGPU_Device=wd_tensor{1,1,2};
+static wq_tensor WGPU_Queue=wq_tensor{1,1,1};
+static cb_tensor WGPU_CommandBuffer=cb_tensor{1,1,1};
+static wb_tensor WGPU_Buffers=wb_tensor{1,1,1};
+static ce_tensor WGPU_CommandEncoder=ce_tensor{1,1,1};
 static i_tensor WGPU_ComputePassCommandEncoder=i_tensor{1,1,1};
 static i_tensor WGPU_ComputePipeline=i_tensor{1,1,1};
 static i_tensor WGPU_ComputePipelineLayout=i_tensor{1,1,1};
