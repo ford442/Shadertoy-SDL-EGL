@@ -447,6 +447,7 @@ ColorD[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 }
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -462,17 +463,20 @@ ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_UserData.at(0,0,0)=userDataA;
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,DbufferSize);
+return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,DbufferSize);
+return;
 };
 
 static void raf(WGpuDevice device){
@@ -528,8 +532,6 @@ computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0
 WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-
-  
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),DiBufferSize);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
@@ -614,12 +616,14 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+return;
 }
 
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,0)=result;
 raf(WGPU_Device.at(0,0,0));
+return;
 }
 
 static void ObtainedWebGpuDeviceRun(WGpuDevice result,void * userData){
@@ -627,6 +631,7 @@ device=result;
 // WGPU_Device.at(0,0,0)=result;
 //   raf2(WGPU_Device.at(0,0,0),  intMissing  );
 // WGPU_Run(WGPU_Device.at(0,0,0));
+return;
 }
 
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
@@ -635,6 +640,7 @@ WGPU_Adapter.at(0,0,0)=result;
 WGPU_DeviceDescriptor.at(0,0,0)=deviceDescriptor;
 WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+return;
 }
 
 static void ObtainedWebGpuAdapterRun(WGpuAdapter result,void * userData){
@@ -642,12 +648,14 @@ adapter=result;
 WGPU_Adapter.at(0,0,1)=result;
 WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceRun;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
+return;
 }
 
 void WGPUCompute_Start(){
 WGPU_RequestAdapterOptions.at(0,0,0)=options;;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+return;
 }
 
 void WGPUCompute_Run(int fr){
@@ -655,6 +663,7 @@ void WGPUCompute_Run(int fr){
   WGPU_Run(WGPU_Device.at(0,0,0),fr);
 // WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
 // navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
+return;
 }
   
 class GPU{
