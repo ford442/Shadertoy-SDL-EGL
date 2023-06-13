@@ -69,19 +69,19 @@ inline char wgl_cmp_src[2000]=
 "switch global_id.y {"
 "case default: {"
 "outputBuffer[f]=130-(inputBuffer[0]/6);"
-"outputBuffer[f+1]=inputBuffer[0]/4;"
+"outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=80;"
 "outputBuffer[f+3]=255;"
 "}"
 "case 1: {"
-"outputBuffer[f]=180-e;"
-"outputBuffer[f+1]=255-e;"
+"outputBuffer[f]=180;"
+"outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=((inputBuffer[0]-e)/4)+e;"
 "outputBuffer[f+3]=255;"
 "}"
 "case 2: {"
 "outputBuffer[f]=(e*4)-(inputBuffer[0]/4);"
-"outputBuffer[f+1]=255-e;"
+"outputBuffer[f+1]=e;"
 "outputBuffer[f+2]=(inputBuffer[0]/4);"
 "outputBuffer[f+3]=128;"
 "}"
@@ -94,7 +94,7 @@ inline char wgl_cmp_src[2000]=
 "case 4: {"
 "outputBuffer[f]=(inputBuffer[0]/256)*64;"
 "outputBuffer[f+1]=255;"
-"outputBuffer[f+2]=(inputBuffer[0]/256)*e;"
+"outputBuffer[f+2]=255;"
 "outputBuffer[f+3]=255-e;"
 "}"
 "}"
@@ -1005,8 +1005,8 @@ if(uni_i.at(0,0)%30==0){
 WGPUCompute_Run(uni_i.at(0,0));
 // WGPUCompute_Start();
 raN=rNd4(4);
-glActiveTexture(GL_TEXTURE0+raN);
 glGenTextures(1,&wtexture[raN]);
+glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
@@ -1035,8 +1035,8 @@ glUniform1i(smp_chn[raN],raN);
 
 if(uni_i.at(0,0)%17==0){
 raN=rNd4(4);
-glActiveTexture(GL_TEXTURE0+raN);
 glGenTextures(1,&wtexture[raN]);
+glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
@@ -1054,7 +1054,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorD);
 }
-if(raN==3){
+if(raN==4){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -1393,7 +1393,7 @@ Colora[3]=255;
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
-  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -1407,7 +1407,7 @@ Colorb[3]=128;
 glGenTextures(1,&textureb);
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,textureb);
-  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -1422,7 +1422,7 @@ Colorc[3]=200;
 glGenTextures(1,&texturec);
 glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,texturec);
-  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -1437,7 +1437,7 @@ Colord[3]=128;
 glGenTextures(1,&textured);
 glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,textured);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -1451,7 +1451,7 @@ glGenTextures(1,&xtexture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
