@@ -932,7 +932,7 @@ glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
 glActiveTexture(GL_TEXTURE1);
 glGenTextures(1,&texturea);
-glBindTexture(GL_TEXTURE_2D,xtexturea);
+glBindTexture(GL_TEXTURE_2D,xtexture);
 case 2:
 glActiveTexture(GL_TEXTURE2);
 glGenTextures(1,&textureb);
