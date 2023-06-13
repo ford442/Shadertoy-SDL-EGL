@@ -980,6 +980,10 @@ if(raN==4){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 glGenerateMipmap(GL_TEXTURE_2D);
+  glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
@@ -1009,6 +1013,11 @@ if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 glGenerateMipmap(GL_TEXTURE_2D);
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
+
 glUniform1i(smp_chn[raN],raN);
 }
   
