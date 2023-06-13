@@ -925,13 +925,13 @@ case 0:
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
-glActiveTexture(GL_TEXTURE0);
+glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,texturea);
 case 2:
-glActiveTexture(GL_TEXTURE1);
+glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,textureb);
 case 3:
-glActiveTexture(GL_TEXTURE2);
+glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,texturec);
 case 4:
 glActiveTexture(GL_TEXTURE3);
@@ -978,23 +978,10 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-  glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
-switch(raN){
-case 0:
-glUniform1i(smp_chn[0],0);
-case 1:
-glUniform1i(smp_chn[1],1);
-case 2:
-glUniform1i(smp_chn[2],2);
-case 3:
-glUniform1i(smp_chn[3],3);
-case 4:
-glUniform1i(smp_chn[3],3);
-default:
-glUniform1i(smp_chn[0],0);
-}
+glUniform1i(smp_chn[raN],raN);
+
 // glBindTexture(GL_TEXTURE_2D,0);
 }
 }
