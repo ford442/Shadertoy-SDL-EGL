@@ -449,7 +449,7 @@ WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 // WGPU_Buffers.at(0,0,0)=outputBuffer;
 // WGPU_Buffers.at(1,0,1)=mapBuffer;
 raN=0;
-raN=rNd4(255);
+raN=rNd4(1024);
 input[0]=raN;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
@@ -507,7 +507,7 @@ return;
 
 static void raf2(WGpuDevice device){
 raN=0;
-raN=rNd4(255);
+raN=rNd4(1024);
 input[0]=raN;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
@@ -564,7 +564,7 @@ return;
 }
 
 static void WGPU_Run(WGpuDevice device){
-raND=rNd4(255);
+raND=rNd4(1024);
 raN=rNd4(raND);
 input[0]=raN;
 WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
