@@ -416,7 +416,7 @@ ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
 ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
 ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
+
 }
 if(raN==0){
 for(int g=0;g<65536;g++){
