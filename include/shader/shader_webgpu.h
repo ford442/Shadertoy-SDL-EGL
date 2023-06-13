@@ -799,6 +799,7 @@ sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
+}
 
 static void u_iTimeDelta_set(double set){
 sse.at(0,1)=wasm_f64x2_splat(set);
@@ -917,6 +918,36 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
+if(uni_i.at(0,0)%10==0){
+raN=rNd4(4);
+switch(raN){
+case 0:
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+case 1:
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,texturea);
+case 2:
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,textureb);
+case 3:
+glActiveTexture(GL_TEXTURE2);
+glBindTexture(GL_TEXTURE_2D,texturec);
+case 4:
+glActiveTexture(GL_TEXTURE3);
+glBindTexture(GL_TEXTURE_2D,textured);
+default:
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,wtexture);
+}
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
+glGenerateMipmap(GL_TEXTURE_2D);
+glUniform1i(smp_chn[raN],raN);
+}
   
 if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
@@ -947,7 +978,8 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
+  glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
+
 glGenerateMipmap(GL_TEXTURE_2D);
 switch(raN){
 case 0:
@@ -964,37 +996,6 @@ default:
 glUniform1i(smp_chn[0],0);
 }
 // glBindTexture(GL_TEXTURE_2D,0);
-}
-}
-if(uni_i.at(0,0)%10==0){
-raN=rNd4(4);
-switch(raN){
-case 0:
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
-case 1:
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,texturea);
-case 2:
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,textureb);
-case 3:
-glActiveTexture(GL_TEXTURE2);
-glBindTexture(GL_TEXTURE_2D,texturec);
-case 4:
-glActiveTexture(GL_TEXTURE3);
-glBindTexture(GL_TEXTURE_2D,textured);
-default:
-glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture);
-}
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
-glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[raN],raN);
 }
 }
 
