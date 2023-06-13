@@ -598,7 +598,7 @@ raf(WGPU_Device.at(0,0,0));
 static void ObtainedWebGpuDeviceRun(WGpuDevice result,void * userData){
 device=result;
 // WGPU_Device.at(0,0,0)=result;
-  raf2(WGPU_Device.at(0,0,0));
+//   raf2(WGPU_Device.at(0,0,0),  intMissing  );
 // WGPU_Run(WGPU_Device.at(0,0,0));
 }
 
