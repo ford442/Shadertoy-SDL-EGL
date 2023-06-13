@@ -492,7 +492,7 @@ ColorD[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorD[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 }
-// wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
@@ -500,7 +500,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_UserData.at(0,0,0)=userDataA;
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,DbufferSize);
-  wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+//   wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
