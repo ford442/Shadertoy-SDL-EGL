@@ -983,10 +983,7 @@ if(raN==4){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 glGenerateMipmap(GL_TEXTURE_2D);
-  glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);
+
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
@@ -1016,11 +1013,6 @@ if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
-glUniform1i(smp_chn[1],1);
-glUniform1i(smp_chn[2],2);
-glUniform1i(smp_chn[3],3);
-
 glUniform1i(smp_chn[raN],raN);
 }
   
@@ -1029,6 +1021,10 @@ glUniform1i(smp_chn[raN],raN);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
 // glBufferSubData(GL_UNIFORM_BUFFER,12,4,&d_time.at(0,0)); 
 // glBindBuffer(GL_UNIFORM_BUFFER,0);
+  glUniform1i(smp_chn[0],0);
+  glUniform1i(smp_chn[1],1);
+  glUniform1i(smp_chn[2],2);
+  glUniform1i(smp_chn[3],3);
   
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
