@@ -960,9 +960,11 @@ glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
 glActiveTexture(GL_TEXTURE1);
+glGenTextures(1,&texturea);
 glBindTexture(GL_TEXTURE_2D,texturea);
 case 2:
 glActiveTexture(GL_TEXTURE2);
+glGenTextures(1,&textureb);
 glBindTexture(GL_TEXTURE_2D,textureb);
 case 3:
 glActiveTexture(GL_TEXTURE3);
