@@ -287,7 +287,7 @@ using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
 using cpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
 using cp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
 using pl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
-using cm_tensor=boost::numeric::ublas::tensor<WGpuComputeModule>;
+using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
 using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
 
