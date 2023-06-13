@@ -283,8 +283,9 @@ using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
 using cb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
 using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
 using ce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
+using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
 
-using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+/*
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
