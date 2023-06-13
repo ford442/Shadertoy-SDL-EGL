@@ -534,6 +534,14 @@ return;
 static void raf2(WGpuDevice device,int iFrm){
 raN=rNd4(1024-(iFrm%384));
 input[0]=raN;
+  
+WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
+WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
+WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
+WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
+WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
+WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
+  
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_ComputeModule.at(0,0,0)=cs;
