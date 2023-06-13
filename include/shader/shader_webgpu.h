@@ -948,9 +948,10 @@ glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
   
 }
-if(uni_i.at(0,0)%20==0){
+if(uni_i.at(0,0)%17==0){
 raN=rNd4(3);
 glActiveTexture(GL_TEXTURE0+raN);
+glBindTexture(GL_TEXTURE_2D,wtexture);
 glUniform1i(smp_chn[raN],raN);
 }
 }
