@@ -965,7 +965,7 @@ int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%60==0){
 WGPUCompute_Run(uni_i.at(0,0));
 // WGPUCompute_Start();
-raN=rNd4(3);
+raN=rNd4(4);
 glActiveTexture(GL_TEXTURE0+raN);
 glGenTextures(1,&wtexture[raN]);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -985,13 +985,16 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorD);
 }
+if(raN==4){
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
+}
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
 
-if(uni_i.at(0,0)%15==0){
-raN=rNd4(3);
+if(uni_i.at(0,0)%37==0){
+raN=rNd4(4);
 glActiveTexture(GL_TEXTURE0+raN);
 // glGenTextures(1,&wtexture[raN]);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -1010,6 +1013,9 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 }
 if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorD);
+}
+if(raN==3){
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
