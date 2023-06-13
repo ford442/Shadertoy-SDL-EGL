@@ -923,7 +923,7 @@ if(uni_i.at(0,0)%30==0){
 if(shaderToySeconds%2==0){
 WGPUCompute_Run();
 // WGPUCompute_Start();
-raN=rNd4(4);
+raN=rNd4(3);
 switch(raN){
 case 0:
 glActiveTexture(GL_TEXTURE0);
@@ -932,7 +932,7 @@ glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
 glActiveTexture(GL_TEXTURE1);
 glGenTextures(1,&texturea);
-glBindTexture(GL_TEXTURE_2D,texturea);
+glBindTexture(GL_TEXTURE_2D,xtexturea);
 case 2:
 glActiveTexture(GL_TEXTURE2);
 glGenTextures(1,&textureb);
@@ -941,10 +941,6 @@ case 3:
 glActiveTexture(GL_TEXTURE3);
 glGenTextures(1,&texturec);
 glBindTexture(GL_TEXTURE_2D,texturec);
-case 4:
-glActiveTexture(GL_TEXTURE3);
-glGenTextures(1,&textured);
-glBindTexture(GL_TEXTURE_2D,textured);
 default:
 glActiveTexture(GL_TEXTURE0);
 glGenTextures(1,&wtexture);
@@ -958,13 +954,13 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
 
- //  glBindTexture(GL_TEXTURE_2D,0);
+glBindTexture(GL_TEXTURE_2D,0);
   
 }
 if(uni_i.at(0,0)%20==0){
-raN=rNd4(4);
+raN=rNd4(3);
 glActiveTexture(GL_TEXTURE0+raN);
-glUniform1i(smp_chn[4],raN);
+glUniform1i(smp_chn[raN],raN);
 }
 }
 
