@@ -329,7 +329,7 @@ static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 
 unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
-unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
+unsigned char * ColorA[4]=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * ColorB=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
@@ -919,23 +919,10 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
 
-if(uni_i.at(0,0)%30==0){
-if(shaderToySeconds%2==0){
+if(uni_i.at(0,0)%60==0){
 WGPUCompute_Run(uni_i.at(0,0));
-// WGPUCompute_Start();
 raN=rNd4(3);
-switch(raN){
-case 0:
-glActiveTexture(GL_TEXTURE0);
-case 1:
-glActiveTexture(GL_TEXTURE1);
-case 2:
-glActiveTexture(GL_TEXTURE2);
-case 3:
-glActiveTexture(GL_TEXTURE3);
-default:
-glActiveTexture(GL_TEXTURE0);
-}
+glActiveTexture(GL_TEXTURE0+raN);
 glGenTextures(1,&wtexture);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
@@ -945,15 +932,9 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
-// glBindTexture(GL_TEXTURE_2D,0);
+glBindTexture(GL_TEXTURE_2D,0);
+}
   
-}
-if(uni_i.at(0,0)%17==0){
-raN=rNd4(3);
-glActiveTexture(GL_TEXTURE0+raN);
-// glBindTexture(GL_TEXTURE_2D,wtexture);
-glUniform1i(smp_chn[1],raN);
-}
 }
 
   /*
