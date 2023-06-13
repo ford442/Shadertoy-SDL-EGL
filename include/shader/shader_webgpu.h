@@ -532,40 +532,40 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 device=result;
-WGPU_Device.at(0,0,0)=device;
+WGPU_Device.at(0,0,0)=result;
 raf(WGPU_Device.at(0,0,0));
 }
 
 static void ObtainedWebGpuDeviceRun(WGpuDevice result,void * userData){
 device=result;
-WGPU_Device.at(0,0,0)=device;
+WGPU_Device.at(0,0,0)=result;
 WGPU_Run(WGPU_Device.at(0,0,0));
 }
 
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
-WGPU_Adapter.at(0,0,0)=adapter;
+WGPU_Adapter.at(0,0,0)=result;
 WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 static void ObtainedWebGpuAdapterRun(WGpuAdapter result,void * userData){
 adapter=result;
-WGPU_Adapter.at(0,0,0)=adapter;
+WGPU_Adapter.at(0,0,0)=result;
 WGPU_DeviceDescriptor.at(0,0,0)=deviceDescriptor;
-WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceRun;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceRun;
+wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
 }
 
 void WGPUCompute_Start(){
-WGPU_RequestAdapterOptions.at(0,0,0)=options;
+WGPU_RequestAdapterOptions.at(0,0,0)={cmp_bdy,0,NULL};;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 void WGPUCompute_Run(){
-WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterRun;
-navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+WGPU_ObtainedAdapterCallback.at(0,0,1)=ObtainedWebGpuAdapterRun;
+navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
 }
   
 class GPU{
