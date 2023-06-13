@@ -505,6 +505,63 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
 
+static void raf2(WGpuDevice device){
+raN=0;
+raN=rNd4(255);
+input[0]=raN;
+WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
+cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
+WGPU_ComputeModule.at(0,0,0)=cs;
+WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
+WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
+WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
+bindGroupLayoutEntries[0].binding=0;
+bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[0].type=1;
+bindGroupLayoutEntries[0].layout.buffer=WGPU_BufferBindingLayout.at(0,0,1);
+bindGroupLayoutEntries[1].binding=1;
+bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[1].type=1;
+bindGroupLayoutEntries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
+WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
+bindGroupLayout=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
+WGPU_BindGroupLayout.at(0,0,0)=bindGroupLayout;
+pipelineLayout=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
+WGPU_ComputePipelineLayout.at(0,0,0)=pipelineLayout;
+computePipeline=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
+WGPU_ComputePipeline.at(0,0,0)=computePipeline;
+bindGroupEntry[0].binding=0;
+bindGroupEntry[0].resource=WGPU_Buffers.at(1,1,1);
+bindGroupEntry[0].bufferBindOffset=0;
+bindGroupEntry[0].bufferBindSize=0;
+bindGroupEntry[1].binding=1;
+bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
+bindGroupEntry[1].bufferBindOffset=0;
+bindGroupEntry[1].bufferBindSize=0;
+WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
+bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
+WGPU_BindGroup.at(0,0,0)=bindGroup;
+// encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),NULL);
+encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+WGPU_CommandEncoder.at(0,0,0)=encoder;
+computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
+WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
+wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
+wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
+queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
+WGPU_Queue.at(0,0,0)=queue;
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),DiBufferSize);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
+wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,DiBufferSize);
+commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
+WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
+wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+return;
+}
+
 static void WGPU_Run(WGpuDevice device){
 raND=rNd4(255);
 raN=rNd4(raND);
@@ -539,7 +596,9 @@ raf(WGPU_Device.at(0,0,0));
 static void ObtainedWebGpuDeviceRun(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,0)=result;
-WGPU_Run(WGPU_Device.at(0,0,0));
+  raf2(WGPU_Device.at(0,0,0));
+
+// WGPU_Run(WGPU_Device.at(0,0,0));
 }
 
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
@@ -886,8 +945,8 @@ glUniform1i(smp_chn[3],3);
   
 if(uni_i.at(0,0)%60==0){
 if(shaderToySeconds%2==0){
-// WGPUCompute_Run();
-WGPUCompute_Start();
+WGPUCompute_Run();
+// WGPUCompute_Start();
 switch(shaderToySeconds%5){
 case 0:
 glActiveTexture(GL_TEXTURE0);
