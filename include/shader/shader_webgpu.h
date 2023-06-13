@@ -69,39 +69,39 @@ inline char wgl_cmp_src[2000]=
 "switch global_id.y {"
 "case default: {"
 "outputBuffer[f]=130;"
-"outputBuffer[f+1]=inputBuffer[0];"
+"outputBuffer[f+1]=inputBuffer[0]/4;"
 "outputBuffer[f+2]=80;"
 "outputBuffer[f+3]=188;"
 "}"
 "case 0: {"
-"outputBuffer[f]=0;"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=0;"
-"outputBuffer[f+3]=128;"
+"outputBuffer[f]=255;"
+"outputBuffer[f+1]=255;"
+"outputBuffer[f+2]=255;"
+"outputBuffer[f+3]=111+e;"
 "}"
 "case 1: {"
 "outputBuffer[f]=180-e;"
 "outputBuffer[f+1]=255-e;"
-"outputBuffer[f+2]=inputBuffer[0];"
+"outputBuffer[f+2]=((inputBuffer[0]-e)/4)+e;"
 "outputBuffer[f+3]=255;"
 "}"
 "case 2: {"
-"outputBuffer[f]=(e*4)-inputBuffer[0];"
+"outputBuffer[f]=(e*4)-(inputBuffer[0]/4);"
 "outputBuffer[f+1]=255-e;"
-"outputBuffer[f+2]=inputBuffer[0];"
+"outputBuffer[f+2]=(inputBuffer[0]/4);"
 "outputBuffer[f+3]=128;"
 "}"
 "case 3: {"
-"outputBuffer[f]=inputBuffer[0];"
-"outputBuffer[f+1]=inputBuffer[0];"
-"outputBuffer[f+2]=inputBuffer[0];"
+"outputBuffer[f]=inputBuffer[0]/4;"
+"outputBuffer[f+1]=inputBuffer[0]/4;"
+"outputBuffer[f+2]=inputBuffer[0]/4;"
 "outputBuffer[f+3]=e;"
 "}"
 "case 4: {"
 "outputBuffer[f]=255;"
 "outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=255;"
-"outputBuffer[f+3]=255;"
+"outputBuffer[f+3]=255-e;"
 "}"
 "}"
 "}"
@@ -1407,7 +1407,7 @@ glGenTextures(1,&textured);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,textured);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 // glUniform1i(smp_chn[3],3);
 glGenerateMipmap(GL_TEXTURE_2D);
@@ -1418,7 +1418,7 @@ glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,xtexture);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Colora);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],0);
