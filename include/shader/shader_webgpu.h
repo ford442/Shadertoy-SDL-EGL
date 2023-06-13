@@ -930,6 +930,7 @@ raN=rNd4(4);
 switch(raN){
 case 0:
 glActiveTexture(GL_TEXTURE0);
+glGenTextures(1,&wtexture);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 case 1:
 glActiveTexture(GL_TEXTURE1);
@@ -941,12 +942,15 @@ glGenTextures(1,&textureb);
 glBindTexture(GL_TEXTURE_2D,textureb);
 case 3:
 glActiveTexture(GL_TEXTURE3);
+glGenTextures(1,&texturec);
 glBindTexture(GL_TEXTURE_2D,texturec);
 case 4:
 glActiveTexture(GL_TEXTURE3);
+glGenTextures(1,&textured);
 glBindTexture(GL_TEXTURE_2D,textured);
 default:
 glActiveTexture(GL_TEXTURE0);
+glGenTextures(1,&wtexture);
 glBindTexture(GL_TEXTURE_2D,wtexture);
 }
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
