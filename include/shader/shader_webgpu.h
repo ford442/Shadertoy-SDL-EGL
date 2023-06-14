@@ -889,7 +889,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorD);
 }
-// glGenerateMipmap(GL_TEXTURE_2D);
+glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
@@ -915,7 +915,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 if(raN==3){
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorD);
 }
-// glGenerateMipmap(GL_TEXTURE_2D);
+glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[raN],raN);
 }
   
