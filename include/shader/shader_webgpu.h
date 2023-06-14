@@ -398,10 +398,10 @@ int * WGPU_Result_Buffer=new int[bufferSize];
 int * resul=new int[bufferSize];
 
 inline int rNd4(int randomMax){
-entropySeed=randomMax*randomizer();
+entropySeed=(randomMax+1)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
-return randomNumber;
+return randomNumber-1;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -1396,6 +1396,7 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 // glUniform1f(uni_srate,44100.0f);
+glUniform3f(uni_res,4096,4096,gpu.gF());
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
   /*
 glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
@@ -1412,6 +1413,7 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
+glViewport((GLint)0,(GLint)0,4096,4096);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
@@ -1424,7 +1426,7 @@ u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>
 u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-float iRate=44100.0f;
+float iRate=96000.0f;
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
 glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
