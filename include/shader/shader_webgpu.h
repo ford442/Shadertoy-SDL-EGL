@@ -421,9 +421,8 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-// double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
-// WGPU_BufferMappedRange.at(0,0,0)=Range;
-WGPU_BufferMappedRange.at(0,0,0)=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
+double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
+WGPU_BufferMappedRange.at(0,0,0)=Range;
 // WGPU_ResultBuffer.at(0,0,0)=resul;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 for(int g=0;g<65536;g++){
@@ -513,8 +512,8 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
 
-static void WGPU_Run(WGpuDevice device,int iFrm){
-raND=rNd4(1025-(iFrm%1024));
+static void WGPU_Run(WGpuDevice device){
+// raND=rNd4(1025-(iFrm%1024));
 raN=rNd4(raND);
 input[0]=raN;
 WGPU_Queue.at(0,0,1)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
