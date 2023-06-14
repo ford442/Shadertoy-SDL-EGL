@@ -869,7 +869,7 @@ int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
 WGPUCompute_Run(uni_i.at(0,0));
 // WGPUCompute_Start();
-raN=rNd4(4);
+raN=rNd4(3);
 glGenTextures(1,&wtexture[raN]);
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -895,7 +895,7 @@ glUniform1i(smp_chn[raN],raN);
 }
 
 if(uni_i.at(0,0)%17==0){
-raN=rNd4(4);
+raN=rNd4(3);
 glGenTextures(1,&wtexture[raN]);
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
