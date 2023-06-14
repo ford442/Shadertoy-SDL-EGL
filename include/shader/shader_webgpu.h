@@ -409,42 +409,12 @@ double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),Dbu
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=resul;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
-raN=rNd4(4);
-if(raN==0){
 for(int g=0;g<65536;g++){
 int hh=g*4;
 ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
 ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
 ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
-}
-if(raN==1){
-for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorB[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorB[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorB[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorB[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
-}
-if(raN==2){
-for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorC[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorC[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorC[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorC[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
-}
-if(raN==3){
-for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorD[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorD[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorD[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorD[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
 }
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
