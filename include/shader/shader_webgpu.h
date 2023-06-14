@@ -148,8 +148,8 @@ inline char cm_hdr_src[1900]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 1\n"
 "precision highp int;\n"
 "precision highp float;\n";
 
