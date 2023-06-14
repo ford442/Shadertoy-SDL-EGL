@@ -527,7 +527,7 @@ wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,1));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,DiBufferSize);
 WGPU_CommandBuffer.at(0,0,1)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
-wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,1));
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,1),WGPU_CommandBuffer.at(0,0,1));
 return;
 }
 
@@ -894,7 +894,7 @@ glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
 
-if(uni_i.at(0,0)%17==0){
+if(uni_i.at(0,0)%37==0){
 raN=rNd4(3);
 glGenTextures(1,&wtexture[raN]);
 glActiveTexture(GL_TEXTURE0+raN);
