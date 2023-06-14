@@ -179,7 +179,7 @@ inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel1;"
 "uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"uniform sampler2D iChannel4;"
+// "uniform sampler2D iChannel4;"
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
@@ -1014,7 +1014,7 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
-glScissor(0,0,i_size.at(0,1),i_size.at(0,1));
+// glScissor(0,0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1289,7 +1289,7 @@ smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
-smp_chn[4]=glGetUniformLocation(S1.at(0,0,0),"iChannel4");
+// smp_chn[4]=glGetUniformLocation(S1.at(0,0,0),"iChannel4");
     
   /*
   // uni non-block
@@ -1311,7 +1311,7 @@ Colora[3]=255;
 glGenTextures(1,&texture);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,texture);
-  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -1325,7 +1325,7 @@ Colorb[3]=128;
 glGenTextures(1,&textureb);
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,textureb);
-  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -1396,17 +1396,24 @@ i_date.at(1,1)=shaderToySeconds;
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 // glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
+  /*
 glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+  */
+glUniform3f(smp_chn_res[0],256,256,gpu.gF());
+glUniform3f(smp_chn_res[1],256,256,gpu.gF());
+glUniform3f(smp_chn_res[2],256,256,gpu.gF());
+glUniform3f(smp_chn_res[3],256,256,gpu.gF());
+  
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
-glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
+// glEnable(GL_SCISSOR_TEST);
+// glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
