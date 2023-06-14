@@ -902,7 +902,7 @@ WGPUCompute_Run(uni_i.at(0,0));
 // WGPUCompute_Start();
 raN=rNd4(4);
 glGenTextures(1,&wtexture[raN]);
-glActiveTexture(GL_TEXTURE0+raN);
+glActiveTexture(GL_TEXTURE0+raN-1);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
@@ -928,13 +928,14 @@ glUniform1i(smp_chn[raN],raN);
 if(uni_i.at(0,0)%17==0){
 raN=rNd4(4);
 glGenTextures(1,&wtexture[raN]);
-glActiveTexture(GL_TEXTURE0+raN);
+glActiveTexture(GL_TEXTURE0+raN-1);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 if(raN==0){
+  
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&ColorA);
 }
 if(raN==1){
