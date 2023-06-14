@@ -1006,10 +1006,12 @@ mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
+/*
 glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),GPU::gF());
 glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),GPU::gF());
 glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),GPU::gF());
 glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),GPU::gF());
+*/
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
