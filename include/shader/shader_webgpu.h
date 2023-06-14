@@ -571,7 +571,7 @@ return;
 }
 
 void WGPUCompute_Run(int fr){
-  WGPU_Run(WGPU_Device.at(0,0,0),fr);
+  WGPU_Run(WGPU_Device.at(0,0,0));
 // navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
 return;
 }
