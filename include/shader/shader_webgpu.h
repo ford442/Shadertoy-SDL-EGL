@@ -453,7 +453,7 @@ ColorD[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorD[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 }
-wgpu_buffer_unmap(WGPU_ResultBuffer.at(0,0,0));
+wgpu_buffer_unmap(&WGPU_ResultBuffer.at(0,0,0));
 return;
 };
 
@@ -506,7 +506,7 @@ ColorD[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorD[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 }
-wgpu_buffer_unmap(WGPU_ResultBuffer.at(0,0,0));
+wgpu_buffer_unmap(&WGPU_ResultBuffer.at(0,0,0));
 return;
 };
 
