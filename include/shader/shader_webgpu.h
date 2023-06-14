@@ -163,7 +163,7 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"layout (shared) uniform uniBlock{"
+"layout (std140) uniform uniBlock{"
 "uniform float iSampleRate;"
 "uniform float iFrameRate;"
 "};"
