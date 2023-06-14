@@ -138,8 +138,8 @@ inline char cm_hdr_src[1900]=
 "#pragma optionNV(invariant none)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma optionNV(centroid all)\n"
-"#pragma STDGL(fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
+"#pragma STDGL(fastmath off)\n"
+"#pragma optionNV(fastmath off)\n"
 "#pragma STDGL(fastprecision off)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma STDGL(unroll all)\n"
@@ -199,8 +199,8 @@ EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -230,17 +230,17 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,(EGLint)32,
-EGL_GREEN_SIZE,(EGLint)32,
-EGL_BLUE_SIZE,(EGLint)32,
-EGL_ALPHA_SIZE,(EGLint)32,
+EGL_RED_SIZE,(EGLint)10,
+EGL_GREEN_SIZE,(EGLint)10,
+EGL_BLUE_SIZE,(EGLint)10,
+EGL_ALPHA_SIZE,(EGLint)10,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)32,
-EGL_BUFFER_SIZE,(EGLint)64,
+EGL_STENCIL_SIZE,(EGLint)10,
+EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,64,
+EGL_SAMPLES,1,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -581,8 +581,7 @@ WGPU_CommandEncoder.at(0,0,1)=wgpu_device_create_command_encoder_simple(WGPU_Dev
 WGPU_ComputePassCommandEncoder.at(0,0,1)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,1),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,1),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,1),0,WGPU_BindGroup.at(0,0,0),0,0);
-  wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,1),WGPU_ComputeDoneCallback.at(0,0,1),0);
-
+wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,1),WGPU_ComputeDoneCallback.at(0,0,1),0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,1),WGPU_Buffers.at(1,1,1),0,input.data(),DiBufferSize);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,1),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,1));
@@ -758,7 +757,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=60;
+int32_t iFps=90;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -802,7 +801,8 @@ t_size.at(0,1)=wasm_f64x2_extract_lane(sse.at(1,0),0);
 return;
 }
 
-static void i_iSize_set(boost::int_t<32>::exact set){
+// static void i_iSize_set(boost::int_t<32>::exact set){
+static void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
@@ -1199,7 +1199,7 @@ glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 glDepthFunc(GL_LESS);
 glEnable(GL_STENCIL_TEST);
@@ -1359,7 +1359,6 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-  
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 // glUniform1i(smp_chn[3],3);
 glGenerateMipmap(GL_TEXTURE_2D);
