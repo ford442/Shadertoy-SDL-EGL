@@ -514,7 +514,7 @@ return;
 
 static void WGPU_Run(WGpuDevice device){
 // raND=rNd4(1025-(iFrm%1024));
-raN=rNd4(raND);
+raN=rNd4(1025);
 input[0]=raN;
 WGPU_Queue.at(0,0,1)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,1)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
