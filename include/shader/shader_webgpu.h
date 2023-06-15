@@ -337,20 +337,20 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 // unsigned char * ColorD=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
-// double_int53_t DbufferSize=262144*sizeof(int);
-uint32_t DbufferSize=262144*sizeof(int);
-uint32_t bufferSize=262144*sizeof(int);
-// double_int53_t DiBufferSize=1*sizeof(int);
-uint32_t DiBufferSize=1*sizeof(int);
-uint32_t iBufferSize=1*sizeof(int);
+// double_int53_t DbufferSize=262144*sizeof(uint32_t);
+uint32_t DbufferSize=262144*sizeof(uint32_t);
+uint32_t bufferSize=262144*sizeof(uint32_t);
+// double_int53_t DiBufferSize=1*sizeof(uint32_t);
+uint32_t DiBufferSize=1*sizeof(uint32_t);
+uint32_t iBufferSize=1*sizeof(uint32_t);
 const char * Entry="computeStuff";
-uint32_t invocationCount=bufferSize/sizeof(int);
+uint32_t invocationCount=bufferSize/sizeof(uint32_t);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture[4],texture,xtexture,texturea,textureb,texturec,textured;
+GLuint wtexture[5],texture,xtexture,texturea,textureb,texturec,textured;
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
