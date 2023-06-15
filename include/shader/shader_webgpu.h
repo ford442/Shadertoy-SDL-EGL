@@ -67,9 +67,9 @@ inline char wgl_cmp_src[2000]=
 "let f:u32=global_id.x*4*global_id.y;"
 "for(var e:u32=0;e<65546;e++){"
 "var m=e*4;"
-"outputBuffer[m]=inputBuffer[0]-global_id.x;"
+"outputBuffer[m]=133;"
 "outputBuffer[m+1]=0;"
-"outputBuffer[m+2]=255-inputBuffer[0]+global_id.x;"
+"outputBuffer[m+2]=80;"
 "outputBuffer[m+3]=222;"
 
 /*
