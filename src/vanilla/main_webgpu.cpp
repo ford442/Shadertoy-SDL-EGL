@@ -115,8 +115,6 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-unsigned int * WGPU_Result_Buffer=new unsigned int[262144];
-    
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
 entropySeed=(randomMax)*randomizer();
@@ -128,6 +126,7 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
+unsigned int * WGPU_Result_Buffer=new unsigned int[262144];
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_Result_Buffer,bufferSize);
 std::cout << "Result Buffer:\n";
