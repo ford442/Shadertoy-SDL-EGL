@@ -28,6 +28,14 @@
 
 #include "../../lib/lib_webgpu.h"
 
+class webgpu{
+
+public:
+
+inline char wgl_cmp_src[2000];
+
+char * cmp_bdy;
+
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
 using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
@@ -65,14 +73,6 @@ using pl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
 using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
 using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
-
-class webgpu{
-
-public:
-
-inline char wgl_cmp_src[2000];
-
-char * cmp_bdy;
 
 static v_tensor sse;
 static v_tensor sse2;
