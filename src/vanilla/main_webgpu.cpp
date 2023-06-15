@@ -1,9 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-static v_tensor sse=v_tensor{2,2};
-static v_tensor sse2=v_tensor{2,2};
-static v_tensor sse3=v_tensor{2,2};
-static v_tensor sse4=v_tensor{1,1};
+
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
