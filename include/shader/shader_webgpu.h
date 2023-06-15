@@ -60,12 +60,12 @@ return shader;
 };
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
-"for(var e:i32=0;e<256;e++){"
+"for(var e:u32=0;e<256;e++){"
 "outputBuffer[f]=80;"
 "outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=80;"
@@ -387,7 +387,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-int * WGPU_Result_Buffer=new int[bufferSize];
+uint32_t * WGPU_Result_Buffer=new uint32_t[bufferSize];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -404,10 +404,10 @@ WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
+ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
+ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
+ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
+ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
@@ -419,10 +419,10 @@ WGPU_BufferMappedRange.at(0,0,0)=Range;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 for(int g=0;g<65536;g++){
 int hh=g*4;
-ColorA[hh]=int(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=int(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=int(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=int(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
+ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
+ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
+ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
+ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 }
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
