@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-webgpu{
+class webgpu{
 private:
 
 public:
