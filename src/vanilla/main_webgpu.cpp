@@ -178,22 +178,6 @@ return;
 };
 
 static void raf(WGpuDevice device){
-
-char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
-"@compute@workgroup_size(64,4,1)"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.x*4*global_id.y;"
-"for(var e:u32=0;e<65546;e++){"
-"var m=e*4;"
-"outputBuffer[m]=133;"
-"outputBuffer[m+1]=0;"
-"outputBuffer[m+2]=80;"
-"outputBuffer[m+3]=222;"
-"}"
-"}";
-    
 WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
 WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
 WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
