@@ -65,11 +65,12 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
-"for(var e:u32=0;e<256;e++){"
-"outputBuffer[f]=80;"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=80;"
-"outputBuffer[f+3]=255;"
+"for(var e:u32=0;e<65546;e++){"
+"var m=e*4;"
+"outputBuffer[m]=inputBuffer[0]-global_id.x;"
+"outputBuffer[m+1]=0;"
+"outputBuffer[m+2]=255-inputBuffer[0]+global_id.x;"
+"outputBuffer[m+3]=222;"
 
 /*
 "switch global_id.y{"
