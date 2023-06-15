@@ -1,5 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
-using namespace wgpu;
+using namespace wgpu::webgpu;
 
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
