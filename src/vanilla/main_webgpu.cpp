@@ -96,8 +96,12 @@ WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
-WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
-WGpuBindGroupEntry bindGroupEntry[2]={};
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2];
+bindGroupLayoutEntries[0]={};
+bindGroupLayoutEntries[1]={};
+WGpuBindGroupEntry bindGroupEntry[2];
+bindGroupLayoutEntries[0]={};
+bindGroupLayoutEntries[1]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
@@ -121,8 +125,8 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
-  int * WGPU_Result_Buffer=new int[bufferSize];
 
+int * WGPU_Result_Buffer=new int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
