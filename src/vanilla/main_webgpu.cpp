@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-class webgpu{
+webgpu{
 private:
 
 public:
@@ -287,7 +287,7 @@ navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_O
 return;
 }
 
-};
+}Webgpu;
 /*
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
@@ -400,11 +400,11 @@ document.getElementById('di').click();
 extern"C"{
 
 void startWebGPU(){
-webgpu::WGPU_Start();
+Webgpu::WGPU_Start();
 }
 
 void runWebGPU(){
-webgpu::WGPU_Run();
+Webgpu::WGPU_Run();
 }
 
 int main(void){
