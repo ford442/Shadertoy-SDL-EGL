@@ -1236,7 +1236,9 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,Colord);
 // glUniform1i(smp_chn[3],3);
 // glGenerateMipmap(GL_TEXTURE_2D);
+*/
 WGPUCompute_Start();
+/*
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&xtexture);
 glActiveTexture(GL_TEXTURE0);
