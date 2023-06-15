@@ -5,11 +5,13 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.x*4*global_id.y;"
-"outputBuffer[f]=133;"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=80;"
-"outputBuffer[f+3]=222;"
+"let f:u32=global_id.x*global_id.y*4;"
+"for(var g:u32=0;g<256;g++){"
+"var h:u32=f*g;"
+"outputBuffer[h]=133;"
+"outputBuffer[h+1]=0;"
+"outputBuffer[h+2]=80;"
+"outputBuffer[h+3]=222;"
 "}";
 
 
