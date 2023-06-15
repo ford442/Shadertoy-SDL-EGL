@@ -78,10 +78,6 @@ wgl_cmp_src[2000]=
 "}";
     
 cmp_bdy=wgl_cmp_src;
-sse=v_tensor{2,2};
-sse2=v_tensor{2,2};
-sse3=v_tensor{2,2};
-sse4=v_tensor{1,1};
 Sh=shad_tensor{3,3};
 S1=prg_tensor{1,1,1};
 Si=sz_tensor{1,1};
