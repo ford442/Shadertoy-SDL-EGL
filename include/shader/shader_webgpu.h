@@ -64,42 +64,39 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f: u32=global_id.x*4*global_id.y;"
-"for (var e:i32=0;e<256;e++){"
-"switch global_id.y {"
-"case default: {"
+"let f:u32=global_id.x*4*global_id.y;"
+"for(var e:i32=0;e<256;e++){"
+"switch global_id.y{"
+"case default:{"
 "outputBuffer[f]=130-(inputBuffer[0]/6);"
 "outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=80;"
 "outputBuffer[f+3]=255;"
 "}"
-"case 1: {"
+"case 1:{"
 "outputBuffer[f]=180;"
 "outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=((inputBuffer[0]-e)/4)+e;"
 "outputBuffer[f+3]=255;"
 "}"
-"case 2: {"
+"case 2:{"
 "outputBuffer[f]=(e*4)-(inputBuffer[0]/4);"
 "outputBuffer[f+1]=e;"
 "outputBuffer[f+2]=(inputBuffer[0]/4);"
 "outputBuffer[f+3]=128;"
 "}"
-"case 3: {"
+"case 3:{"
 "outputBuffer[f]=inputBuffer[0]/4;"
 "outputBuffer[f+1]=111;"
 "outputBuffer[f+2]=inputBuffer[0]/4;"
 "outputBuffer[f+3]=255-e;"
 "}"
-"case 4: {"
+"case 4:{"
 "outputBuffer[f]=(inputBuffer[0]/256)*64;"
 "outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=255;"
 "outputBuffer[f+3]=255-e;"
-"}"
-"}"
-"}"
-"}";
+"}}}}";
 
 inline char cm_hdr_src[1900]=
 "#version 300 es\n"
@@ -163,21 +160,10 @@ inline char frg_hdr_src[1000]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;"
-"layout (std140) uniform uniBlock{"
-"uniform float iSampleRate;"
-"uniform float iFrameRate;"
-"};"
-"uniform int iFrame;"
-"uniform float iTime;"
-"uniform float iTimeDelta;"
-"uniform vec4 iDate;"
-"uniform float iChannelTime[4];"
-"uniform vec3 iChannelResolution[4];"
-"uniform vec3 iResolution;"
-"uniform vec4 iMouse;"
-"uniform sampler2D iChannel0;"
-"uniform sampler2D iChannel1;"
-"uniform sampler2D iChannel2;"
+"layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
+"uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
+"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
+"uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 // "uniform sampler2D iChannel4;"
 "out vec4 fragColor;\n";
@@ -205,8 +191,8 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)5,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -264,7 +250,6 @@ using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
-
 using oac_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterCallback>;
 using odc_tensor=boost::numeric::ublas::tensor<WGpuRequestDeviceCallback>;
 using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
@@ -305,7 +290,6 @@ static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
 static li_tensor mms2=li_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
-
 static wa_tensor WGPU_Adapter=wa_tensor{1,1,2};
 static wd_tensor WGPU_Device=wd_tensor{1,1,2};
 static wq_tensor WGPU_Queue=wq_tensor{1,1,2};
@@ -393,21 +377,20 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-int * resultRun=new int[bufferSize];
 int * WGPU_Result_Buffer=new int[bufferSize];
-int * resul=new int[bufferSize];
 
 inline int rNd4(int randomMax){
-entropySeed=(randomMax+1)*randomizer();
+entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
-randomNumber=std::rand()%randomMax;
-return randomNumber-1;
+randomNumber=std::rand()%randomMax;  //division by zero?
+return randomNumber;
 }
 
+double Range;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
+Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
-WGPU_ResultBuffer.at(0,0,0)=resul;
+WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 for(int g=0;g<65536;g++){
 int hh=g*4;
@@ -423,7 +406,6 @@ return;
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
-// WGPU_ResultBuffer.at(0,0,0)=resul;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 for(int g=0;g<65536;g++){
 int hh=g*4;
@@ -456,7 +438,7 @@ WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
 WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
-raN=rNd4(1025);
+raN=rNd4(1024);
 input[0]=raN;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
@@ -513,7 +495,6 @@ return;
 }
 
 static void WGPU_Run(){
-
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
@@ -673,7 +654,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=90;
+int32_t iFps=120;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -734,10 +715,10 @@ return;
 void uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
 }
@@ -745,10 +726,10 @@ return;
 void uniDOWN(){
 t_size.at(0,1)=t_size.at(0,1)*0.99;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return;
 }
@@ -791,7 +772,7 @@ return;
   
 union{
 
-static void uni(){
+static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -818,7 +799,6 @@ clk_l=false;
 mms.at(2,0)=float(mms2.at(0,0));
 mms.at(2,1)=float(i_size.at(0,0)-mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-// nanoPause();
 }
 else{
 clk_l=true;
@@ -843,11 +823,9 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%30==0){
-// WGPUCompute_Run(uni_i.at(0,0));
-  raN=rNd4(1025);
+raN=rNd4(1025);
 input[0]=raN;
-  WGPU_Run();
-// WGPUCompute_Start();
+  WGPU_Run();   //  launch WebGPU
 raN=rNd4(3);
 glGenTextures(1,&wtexture[raN]);
 glActiveTexture(GL_TEXTURE0+raN);
@@ -875,7 +853,6 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&Co
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
 glUniform1i(smp_chn[raN],raN);
 }
-  
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
@@ -885,8 +862,8 @@ glUniform1i(smp_chn[raN],raN);
   glUniform1i(smp_chn[1],1);
   glUniform1i(smp_chn[2],2);
   glUniform1i(smp_chn[3],3);
-  
 glUniform1i(uni_frm,uni_i.at(0,0));
+  glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
@@ -903,17 +880,11 @@ mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
-/*
-glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-*/
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
-// glScissor(0,0,i_size.at(0,1),i_size.at(0,1));
+glScissor(0,0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -925,15 +896,6 @@ glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
-// nanoPause();
-return;
-}
-
-static void Rend(){
-
-uni();
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-// nanoPause();
 return;
 }
 
@@ -1296,25 +1258,18 @@ i_date.at(1,1)=shaderToySeconds;
 // glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,4096,4096,gpu.gF());
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-  /*
-glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-  */
 glUniform3f(smp_chn_res[0],256,256,gpu.gF());
 glUniform3f(smp_chn_res[1],256,256,gpu.gF());
 glUniform3f(smp_chn_res[2],256,256,gpu.gF());
 glUniform3f(smp_chn_res[3],256,256,gpu.gF());
-  
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
 glViewport((GLint)0,(GLint)0,4096,4096);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
-// glEnable(GL_SCISSOR_TEST);
-// glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
+glEnable(GL_SCISSOR_TEST);
+glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1324,7 +1279,7 @@ u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>
 u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-float iRate=96000.0f;
+float iRate=192000.0f;
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
 glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
@@ -1332,9 +1287,6 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
-glFlush();
-glFinish();
-nanoPause();
 emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
