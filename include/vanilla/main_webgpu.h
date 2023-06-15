@@ -32,6 +32,8 @@ class webgpu{
 
 public:
 
+std::random_device randomizer;
+
 char wgl_cmp_src[2000];
 
 char * cmp_bdy;
