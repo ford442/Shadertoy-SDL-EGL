@@ -1175,6 +1175,7 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 */
   
     // texture
+  /*
 GLsizei width1=1;
 GLsizei height1=1;
 Colora[0]=0;
@@ -1250,7 +1251,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-
+*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
