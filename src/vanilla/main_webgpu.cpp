@@ -121,15 +121,15 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
+  int * WGPU_Result_Buffer=new int[bufferSize];
 
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
-  int * WGPU_Result_Buffer=new int[bufferSize];
 
   //  std::vector<unsigned int>WGPU_Result_Buffer(bufferSize/sizeof(unsigned int));
-WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
+WGPU_ResultBuffer.at(0,0,0)=&WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 std::cout << "Result Buffer:\n";
 std::cout << WGPU_Result_Buffer[0];
