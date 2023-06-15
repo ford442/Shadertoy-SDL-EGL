@@ -1,6 +1,7 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 inline int webgpu::rNd4(int randomMax){
+randomNumber=0,entropySeed=0;
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
@@ -171,8 +172,8 @@ options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<int>input(iBufferSize/sizeof(int));
 std::vector<int>outputd(bufferSize/sizeof(int));
 shaderModuleDescriptor={cmp_bdy,0,NULL};
-randomNumber=0,entropySeed=0;
-std::random_device randomizer;
+
+
 raN=0;
 raND=0;
 
