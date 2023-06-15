@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main_webgpu.h"
 using namespace wgpu;
 
-inline int rNd4(int randomMax){
+inline int webgpu::rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -243,7 +243,7 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
 
-static void WGPU_Run(){
+static void webgpu::WGPU_Run(){
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
@@ -259,14 +259,14 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
 }
 
-static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
+static void webgpu::ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,0)=result;
 raf(WGPU_Device.at(0,0,0));
 return;
 }
 
-static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
+static void webgpu::ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
 WGPU_DeviceDescriptor.at(0,0,0)=deviceDescriptor;
@@ -275,7 +275,7 @@ wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.
 return;
 }
 
-static void WGPU_Start(){
+static void webgpu::WGPU_Start(){
 WGPU_RequestAdapterOptions.at(0,0,0)=options;;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
