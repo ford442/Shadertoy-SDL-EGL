@@ -237,7 +237,7 @@ EGL_BUFFER_SIZE,(EGLint)32,
 EGL_SAMPLE_BUFFERS,EGL_TRUE,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,4,
+EGL_SAMPLES,16,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
