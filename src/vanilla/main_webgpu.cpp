@@ -399,6 +399,8 @@ void runWebGPU(){
 WGPU_Run();
 }
 
+}
+
 int main(void){
 js_main();
 return 0;
