@@ -12,7 +12,7 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[h+1]=0;"
 "outputBuffer[h+2]=80;"
 "outputBuffer[h+3]=222;"
-"}";
+"}}";
 
 
 static shad_tensor Sh=shad_tensor{3,3};
