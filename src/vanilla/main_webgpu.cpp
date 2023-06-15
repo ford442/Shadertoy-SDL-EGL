@@ -6,12 +6,10 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
-"for(var e:u32=0;e<65546;e+=4){"
-"outputBuffer[e]=133;"
-"outputBuffer[e+1]=0;"
-"outputBuffer[e+2]=80;"
-"outputBuffer[e+3]=222;"
-"}"
+"outputBuffer[f]=133;"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=80;"
+"outputBuffer[f+3]=222;"
 "}";
 
 
