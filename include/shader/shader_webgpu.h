@@ -833,7 +833,7 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
-if(uni_i.at(0,0)%30==0){
+if(uni_i.at(0,0)%45==0){
 raN=rNd4(1025);
 input[0]=raN;
   WGPU_Run();   //  launch WebGPU
@@ -851,7 +851,7 @@ glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
 
-if(uni_i.at(0,0)%37==0){
+if(uni_i.at(0,0)%15==0){
 raN=rNd4(3);
 glGenTextures(1,&wtexture[raN]);
 glActiveTexture(GL_TEXTURE0+raN);
@@ -869,10 +869,11 @@ glUniform1i(smp_chn[raN],raN);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
 // glBufferSubData(GL_UNIFORM_BUFFER,12,4,&d_time.at(0,0)); 
 // glBindBuffer(GL_UNIFORM_BUFFER,0);
-  glUniform1i(smp_chn[0],0);
-  glUniform1i(smp_chn[1],1);
-  glUniform1i(smp_chn[2],2);
-  glUniform1i(smp_chn[3],3);
+  
+//  glUniform1i(smp_chn[0],0);
+//  glUniform1i(smp_chn[1],1);
+//  glUniform1i(smp_chn[2],2);
+//  glUniform1i(smp_chn[3],3);
 glUniform1i(uni_frm,uni_i.at(0,0));
   glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
@@ -1249,11 +1250,12 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 // glGenerateMipmap(GL_TEXTURE_2D);
-glUniform1i(smp_chn[0],0);
+
+*/
+  glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
