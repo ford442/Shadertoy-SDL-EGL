@@ -43,7 +43,6 @@ using sz_tensor=boost::numeric::ublas::tensor<int>;
 using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using di_tensor=boost::numeric::ublas::tensor<double_int53_t>;
-using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
@@ -74,10 +73,6 @@ using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
 using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
 
-static v_tensor sse;
-static v_tensor sse2;
-static v_tensor sse3;
-static v_tensor sse4;
 static shad_tensor Sh;
 static prg_tensor S1;
 static sz_tensor Si;
