@@ -102,10 +102,11 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=255;"
 "outputBuffer[f+3]=255-e;"
-"}}"   */
+"}}"  
+*/
 
 "}"
-}";
+"}";
 
 inline char cm_hdr_src[1900]=
 "#version 300 es\n"
