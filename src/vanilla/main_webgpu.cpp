@@ -113,7 +113,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-unsigned int * WGPU_Result_Buffer=new unsigned int[bufferSize/sizeof(unsigned int)];
+unsigned int * WGPU_Result_Buffer=new unsigned int[bufferSize];
     
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
