@@ -29,7 +29,6 @@
 
 #include "../../lib/lib_webgpu.h"
 
-
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
 using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
@@ -112,7 +111,7 @@ static dd_tensor WGPU_DeviceDescriptor;
 
 std::random_device randomizer;
 
-char wgl_cmp_src[2000];
+// char wgl_cmp_src[2000];
 
 char * cmp_bdy;
 
