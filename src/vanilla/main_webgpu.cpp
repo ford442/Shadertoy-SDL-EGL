@@ -62,7 +62,7 @@ return;
 
 static void raf(WGpuDevice device){
 
-wgl_cmp_src[2000]=
+char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
