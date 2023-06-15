@@ -1,8 +1,8 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read_write>inputBuffer:array<i32,1>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
+"@group(0)@binding(0)var<storage,read_write>inputBuffer:array<u32,1>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
@@ -62,15 +62,15 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 // double_int53_t DbufferSize=262144*sizeof(int);
-int DbufferSize=262144*sizeof(int);
-int bufferSize=262144*sizeof(int);
+int DbufferSize=262144*sizeof(unsigned int);
+int bufferSize=262144*sizeof(unsigned int);
 // double_int53_t DiBufferSize=1*sizeof(int);
-int DiBufferSize=1*sizeof(int);
-int iBufferSize=1*sizeof(int);
-uint64_t DescriptorBufferSize=262144*sizeof(int);
-uint64_t iDescriptorBufferSize=1*sizeof(int);
+int DiBufferSize=1*sizeof(unsigned int);
+int iBufferSize=1*sizeof(unsigned int);
+uint64_t DescriptorBufferSize=262144*sizeof(unsigned int);
+uint64_t iDescriptorBufferSize=1*sizeof(unsigned int);
 const char * Entry="computeStuff";
-uint32_t invocationCount=bufferSize/sizeof(int);
+uint32_t invocationCount=bufferSize/sizeof(unsigned int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
@@ -106,8 +106,8 @@ WGpuBufferDescriptor bufferDescriptorI={iDescriptorBufferSize,WGPU_BUFFER_USAGE_
 WGpuBufferDescriptor bufferDescriptorO={DescriptorBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={DescriptorBufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<int>input(iBufferSize/sizeof(int));
-std::vector<int>outputd(bufferSize/sizeof(int));
+std::vector<int>input(iBufferSize/sizeof(unsigned int));
+std::vector<int>outputd(bufferSize/sizeof(unsigned int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -115,7 +115,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-unsigned int * WGPU_Result_Buffer=new unsigned int[bufferSize];
+unsigned int * WGPU_Result_Buffer=new unsigned int[bufferSize/sizeof(unsigned int)];
     
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
