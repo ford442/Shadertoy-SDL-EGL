@@ -1,5 +1,8 @@
 #include "../../include/vanilla/main_webgpu.h"
 
+std::vector<int>input(iBufferSize/sizeof(int));
+std::vector<int>outputd(bufferSize/sizeof(int));
+
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
 entropySeed=(randomMax)*randomizer();
@@ -168,8 +171,7 @@ bufferDescriptorI={iBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_
 bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<int>input(iBufferSize/sizeof(int));
-std::vector<int>outputd(bufferSize/sizeof(int));
+
 shaderModuleDescriptor={cmp_bdy,0,NULL};
 
 raN=0;
