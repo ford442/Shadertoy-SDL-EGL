@@ -32,7 +32,7 @@ class webgpu{
 
 public:
 
-inline char wgl_cmp_src[2000];
+char wgl_cmp_src[2000];
 
 char * cmp_bdy;
 
