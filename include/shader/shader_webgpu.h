@@ -403,13 +403,17 @@ double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),Dbu
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
-/* for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-} */
+raN=rNd4(3);
+glGenTextures(1,&wtexture[raN]);
+glActiveTexture(GL_TEXTURE0+raN);
+glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
+glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
