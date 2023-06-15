@@ -66,6 +66,12 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
 "for(var e:i32=0;e<256;e++){"
+"outputBuffer[f]=80;"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=80;"
+"outputBuffer[f+3]=255;"
+
+/*
 "switch global_id.y{"
 "case default:{"
 "outputBuffer[f]=130-(inputBuffer[0]/6);"
@@ -96,7 +102,10 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[f+1]=255;"
 "outputBuffer[f+2]=255;"
 "outputBuffer[f+3]=255-e;"
-"}}}}";
+"}}"   */
+
+}
+}";
 
 inline char cm_hdr_src[1900]=
 "#version 300 es\n"
