@@ -67,11 +67,11 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 // double_int53_t DbufferSize=262144*sizeof(int);
-uint32_t DbufferSize=262144*sizeof(int);
-uint32_t bufferSize=262144*sizeof(int);
+int DbufferSize=262144*sizeof(int);
+int bufferSize=262144*sizeof(int);
 // double_int53_t DiBufferSize=1*sizeof(int);
-uint32_t DiBufferSize=1*sizeof(int);
-uint32_t iBufferSize=1*sizeof(int);
+int DiBufferSize=1*sizeof(int);
+int iBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
