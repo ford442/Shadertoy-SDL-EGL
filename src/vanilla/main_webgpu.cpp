@@ -1,11 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-class webgpu{
-private:
-
-public:
-
-
 inline int webgpu::rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -130,8 +124,6 @@ WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 
 ColorA=new unsigned char[262144*sizeof(unsigned char)];
-
-
     
 workgroupSize=64;
 // DbufferSize=262144*sizeof(int);
@@ -287,7 +279,6 @@ navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_O
 return;
 }
 
-}Webgpu;
 /*
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
@@ -400,11 +391,11 @@ document.getElementById('di').click();
 extern"C"{
 
 void startWebGPU(){
-Webgpu::WGPU_Start();
+WGPU_Start();
 }
 
 void runWebGPU(){
-Webgpu::WGPU_Run();
+WGPU_Run();
 }
 
 int main(void){
