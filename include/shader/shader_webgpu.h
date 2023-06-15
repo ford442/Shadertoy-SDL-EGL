@@ -337,20 +337,20 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 // unsigned char * ColorD=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
-// double_int53_t DbufferSize=262144*sizeof(uint32_t);
-uint32_t DbufferSize=262144*sizeof(uint32_t);
-uint32_t bufferSize=262144*sizeof(uint32_t);
-// double_int53_t DiBufferSize=1*sizeof(uint32_t);
-uint32_t DiBufferSize=1*sizeof(uint32_t);
-uint32_t iBufferSize=1*sizeof(uint32_t);
+// double_int53_t DbufferSize=262144*sizeof(int);
+uint32_t DbufferSize=262144*sizeof(int);
+uint32_t bufferSize=262144*sizeof(int);
+// double_int53_t DiBufferSize=1*sizeof(int);
+uint32_t DiBufferSize=1*sizeof(int);
+uint32_t iBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
-uint32_t invocationCount=bufferSize/sizeof(uint32_t);
+uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture[5],texture,xtexture,texturea,textureb,texturec,textured;
+GLuint wtexture[4],texture,xtexture,texturea,textureb,texturec,textured;
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -380,8 +380,8 @@ WGpuBufferDescriptor bufferDescriptorI={iBufferSize,WGPU_BUFFER_USAGE_STORAGE|WG
 WGpuBufferDescriptor bufferDescriptorO={bufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={bufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<uint32_t>input(iBufferSize/sizeof(uint32_t));
-std::vector<uint32_t>outputd(bufferSize/sizeof(uint32_t));
+std::vector<int>input(iBufferSize/sizeof(int));
+std::vector<int>outputd(bufferSize/sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -403,17 +403,13 @@ double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),Dbu
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
-raN=rNd4(3);
-glGenTextures(1,&wtexture[raN]);
-glActiveTexture(GL_TEXTURE0+raN);
-glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
-glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
+/* for(int g=0;g<65536;g++){
+int hh=g*4;
+ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
+ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
+ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
+ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
+} */
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
