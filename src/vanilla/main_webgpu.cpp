@@ -1,13 +1,14 @@
 #include "../../include/vanilla/main_webgpu.h"
+using namespace webgpu::;
 
-inline int webgpu::rNd4(int randomMax){
+inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
-using namespace webgpu;
+
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
