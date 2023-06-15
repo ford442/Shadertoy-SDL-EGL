@@ -61,11 +61,11 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 // double_int53_t DbufferSize=262144*sizeof(int);
-unsigned int DbufferSize=262144*sizeof(unsigned int);
-unsigned int bufferSize=262144*sizeof(unsigned int);
+uint32_t DbufferSize=262144*sizeof(unsigned int);
+uint32_t bufferSize=262144*sizeof(unsigned int);
 // double_int53_t DiBufferSize=1*sizeof(int);
-unsigned int DiBufferSize=1*sizeof(unsigned int);
-unsigned int iBufferSize=1*sizeof(unsigned int);
+uint32_t DiBufferSize=1*sizeof(unsigned int);
+uint32_t iBufferSize=1*sizeof(unsigned int);
 uint64_t DescriptorBufferSize=262144*sizeof(unsigned int);
 uint64_t iDescriptorBufferSize=1*sizeof(unsigned int);
 const char * Entry="computeStuff";
@@ -126,7 +126,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 unsigned int * WGPU_Result_Buffer=new unsigned int[262144];
-WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
+// WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_Result_Buffer,bufferSize);
 std::cout << "Result Buffer:\n";
 std::cout << WGPU_Result_Buffer[0];
