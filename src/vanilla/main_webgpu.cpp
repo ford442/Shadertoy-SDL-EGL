@@ -1,5 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
-using namespace wgpu::webgpu;
+using namespace wgpu;
 
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
@@ -61,7 +61,7 @@ wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_Us
 return;
 };
 
-static void raf(WGpuDevice device){
+static void webgpu::raf(WGpuDevice device){
 
 wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
