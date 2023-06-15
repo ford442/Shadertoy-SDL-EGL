@@ -104,7 +104,7 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[f+3]=255-e;"
 "}}"   */
 
-}
+"}"
 }";
 
 inline char cm_hdr_src[1900]=
