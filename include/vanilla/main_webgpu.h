@@ -33,74 +33,6 @@ class webgpu{
 
 public:
 
-std::random_device randomizer;
-
-char wgl_cmp_src[2000];
-
-char * cmp_bdy;
-
-unsigned char * ColorA;
-
-uint32_t workgroupSize;
-// double_int53_t DbufferSize;
-uint32_t DbufferSize;
-uint32_t bufferSize;
-// double_int53_t DiBufferSize;
-uint32_t DiBufferSize;
-uint32_t iBufferSize;
-const char * Entry;
-uint32_t invocationCount;
-uint32_t workgroupCount;
-WGPU_MAP_MODE_FLAGS mode1;
-void * userDataA;
-GLsizei width;
-GLsizei height;
-GLuint wtexture[4];
-WGpuAdapter adapter;
-WGpuDevice device;
-WGpuQueue queue;
-WGpuBindGroupLayout bindGroupLayout;
-WGpuComputePipeline computePipeline;
-WGpuBuffer inputBuffer;
-WGpuBuffer outputBuffer;
-WGpuBuffer mapBuffer;
-WGpuBuffer uniBuffer;
-WGpuShaderModule cs;
-WGpuCommandBuffer commandBuffer;
-WGpuCommandEncoder encoder;
-WGpuComputePassEncoder computePass;
-WGpuBindGroup bindGroup;
-WGpuPipelineLayout pipelineLayout;
-WGpuQuerySet querySet;
-WGpuComputePassDescriptor computePassDescriptor;
-WGpuCommandBufferDescriptor commandBufferDescriptor;
-WGpuCommandEncoderDescriptor commandEncoderDescriptor;
-WGpuDeviceDescriptor deviceDescriptor;
-WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2];
-WGpuBindGroupEntry bindGroupEntry[2];
-WGpuBufferBindingLayout bufferBindingLayout1;
-WGpuBufferBindingLayout bufferBindingLayout2;
-WGpuBufferBindingLayout bufferBindingLayout3;
-WGpuBufferDescriptor bufferDescriptorI;
-WGpuBufferDescriptor bufferDescriptorO;
-WGpuBufferDescriptor bufferDescriptorM;
-WGpuRequestAdapterOptions options;
-WGpuShaderModuleDescriptor shaderModuleDescriptor;
-int randomNumber,entropySeed;
-int raN;
-int raND;
-
-uint32_t * WGPU_Result_Buffer;
-
-inline int rNd4(int randomMax);
-static void raf(WGpuDevice device);
-static void WGPU_Run();
-static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
-static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
-void WGPU_Start();
-
-private:
-
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
 using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
@@ -180,6 +112,74 @@ static uiptr_tensor WGPU_ResultBuffer;
 static void_tensor WGPU_UserData;
 static rao_tensor WGPU_RequestAdapterOptions;
 static dd_tensor WGPU_DeviceDescriptor;
+
+std::random_device randomizer;
+
+char wgl_cmp_src[2000];
+
+char * cmp_bdy;
+
+unsigned char * ColorA;
+
+uint32_t workgroupSize;
+// double_int53_t DbufferSize;
+uint32_t DbufferSize;
+uint32_t bufferSize;
+// double_int53_t DiBufferSize;
+uint32_t DiBufferSize;
+uint32_t iBufferSize;
+const char * Entry;
+uint32_t invocationCount;
+uint32_t workgroupCount;
+WGPU_MAP_MODE_FLAGS mode1;
+void * userDataA;
+GLsizei width;
+GLsizei height;
+GLuint wtexture[4];
+WGpuAdapter adapter;
+WGpuDevice device;
+WGpuQueue queue;
+WGpuBindGroupLayout bindGroupLayout;
+WGpuComputePipeline computePipeline;
+WGpuBuffer inputBuffer;
+WGpuBuffer outputBuffer;
+WGpuBuffer mapBuffer;
+WGpuBuffer uniBuffer;
+WGpuShaderModule cs;
+WGpuCommandBuffer commandBuffer;
+WGpuCommandEncoder encoder;
+WGpuComputePassEncoder computePass;
+WGpuBindGroup bindGroup;
+WGpuPipelineLayout pipelineLayout;
+WGpuQuerySet querySet;
+WGpuComputePassDescriptor computePassDescriptor;
+WGpuCommandBufferDescriptor commandBufferDescriptor;
+WGpuCommandEncoderDescriptor commandEncoderDescriptor;
+WGpuDeviceDescriptor deviceDescriptor;
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2];
+WGpuBindGroupEntry bindGroupEntry[2];
+WGpuBufferBindingLayout bufferBindingLayout1;
+WGpuBufferBindingLayout bufferBindingLayout2;
+WGpuBufferBindingLayout bufferBindingLayout3;
+WGpuBufferDescriptor bufferDescriptorI;
+WGpuBufferDescriptor bufferDescriptorO;
+WGpuBufferDescriptor bufferDescriptorM;
+WGpuRequestAdapterOptions options;
+WGpuShaderModuleDescriptor shaderModuleDescriptor;
+int randomNumber,entropySeed;
+int raN;
+int raND;
+
+uint32_t * WGPU_Result_Buffer;
+
+inline int rNd4(int randomMax);
+static void raf(WGpuDevice device);
+static void WGPU_Run();
+static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
+static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
+void WGPU_Start();
+
+private:
 
 };
 
