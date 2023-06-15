@@ -66,8 +66,8 @@ uint32_t bufferSize=262144*sizeof(unsigned int);
 // double_int53_t DiBufferSize=1*sizeof(int);
 uint32_t DiBufferSize=1*sizeof(unsigned int);
 uint32_t iBufferSize=1*sizeof(unsigned int);
-uint32_t DescriptorBufferSize=262144*sizeof(unsigned int);
-uint32_t iDescriptorBufferSize=1*sizeof(unsigned int);
+GPUSize64 DescriptorBufferSize=262144*sizeof(unsigned int);
+GPUSize64 iDescriptorBufferSize=1*sizeof(unsigned int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(unsigned int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -146,7 +146,7 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),DbufferSize);
+double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),GPUSize64(0),DbufferSize);
 WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 
@@ -170,7 +170,7 @@ return;
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_UserData.at(0,0,0)=userDataA;
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,DbufferSize);
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,uint64_t(0),DbufferSize);
 return;
 };
 
