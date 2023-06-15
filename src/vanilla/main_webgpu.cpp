@@ -58,12 +58,7 @@ static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 
-// unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * ColorB=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * ColorC=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * ColorD=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 // double_int53_t DbufferSize=262144*sizeof(int);
@@ -120,7 +115,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-uint32_t * WGPU_Result_Buffer=new uint32_t[bufferSize];
+uint64_t * WGPU_Result_Buffer=new uint64_t[bufferSize];
     
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
