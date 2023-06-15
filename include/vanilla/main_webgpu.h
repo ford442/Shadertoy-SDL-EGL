@@ -28,7 +28,7 @@
 #include <emscripten/html5.h>
 
 #include "../../lib/lib_webgpu.h"
-
+namespace wgpu{
 class webgpu{
 
 public:
@@ -182,6 +182,7 @@ void WGPU_Start();
 private:
 
 };
+}
 
 extern"C"{
 
