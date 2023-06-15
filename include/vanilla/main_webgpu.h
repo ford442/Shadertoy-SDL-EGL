@@ -28,10 +28,7 @@
 #include <emscripten/html5.h>
 
 #include "../../lib/lib_webgpu.h"
-namespace wgpu{
-class webgpu{
 
-public:
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
@@ -177,12 +174,9 @@ static void raf(WGpuDevice device);
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
+
 void WGPU_Start();
 
-private:
-
-};
-}
 
 extern"C"{
 
