@@ -158,7 +158,7 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
-int * input=new int[bufferSize];
+int * input=new int[bufferSize/sizeof(int)];
 // std::vector<int>input(ibufferSize/sizeof(int));
 int * WGPU_Result_Buffer=new int[bufferSize];
 
