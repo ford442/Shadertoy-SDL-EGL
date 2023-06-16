@@ -159,7 +159,7 @@ randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
 
-int input[1];
+std::vector<int>input(iBufferSize/sizeof(int));
 int * WGPU_Result_Buffer=new int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
