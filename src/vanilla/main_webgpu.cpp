@@ -97,13 +97,13 @@ static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
-uint64_t bufferSize=1048576;
-uint64_t bufferMapSize=1048576;
-uint64_t ibufferMapSize=4;
-uint64_t ibufferSize=4;
-uint64_t DescriptorBufferSize=1048576;
-uint64_t iDescriptorBufferSize=4;
-uint64_t invocationCount=1048576;
+uint32_t bufferSize=1048576;
+uint32_t bufferMapSize=1048576;
+uint32_t ibufferMapSize=4;
+uint32_t ibufferSize=4;
+uint32_t DescriptorBufferSize=1048576;
+uint32_t iDescriptorBufferSize=4;
+uint32_t invocationCount=1048576;
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 const char * Entry="computeStuff";
@@ -164,11 +164,11 @@ int * WGPU_Result_Buffer=new int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 // int * WGPU_Result_Buffer;
-// double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
-double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
-// WGPU_BufferMappedRange.at(0,0,0)=Range;
+double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
+// double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
+WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,U0,&WGPU_Result_Buffer,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),U0,WGPU_ResultBuffer.at(0,0,0),bufferSize);
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 
