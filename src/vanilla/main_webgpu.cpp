@@ -61,11 +61,11 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 int bufferSize=262144*sizeof(int);
-uint64_t bufferMapSize=262144*sizeof(int);
-uint64_t ibufferMapSize=1*sizeof(int);
+uint32_t bufferMapSize=262144*sizeof(int);
+uint32_t ibufferMapSize=1*sizeof(int);
 int ibufferSize=1*sizeof(int);
-uint64_t DescriptorBufferSize=262144*sizeof(int);
-uint64_t iDescriptorBufferSize=1*sizeof(int);
+uint32_t DescriptorBufferSize=262144*sizeof(int);
+uint32_t iDescriptorBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferMapSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
