@@ -158,8 +158,8 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
-
-std::vector<int>input(ibufferSize/sizeof(int));
+int * input=new int[bufferSize];
+// std::vector<int>input(ibufferSize/sizeof(int));
 int * WGPU_Result_Buffer=new int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
