@@ -58,11 +58,11 @@ static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
-uint32_t bufferSize=262144;
-uint32_t bufferMapSize=262144;
+uint32_t bufferSize=262144*sizeof(int);
+uint32_t bufferMapSize=262144*sizeof(int);
 uint32_t ibufferMapSize=1*sizeof(int);
 uint32_t ibufferSize=1*sizeof(int);
-uint64_t DescriptorBufferSize=262144;
+uint64_t DescriptorBufferSize=262144*sizeof(int);
 uint64_t iDescriptorBufferSize=1*sizeof(int);
 uint32_t invocationCount=bufferMapSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -110,7 +110,6 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
-
 
 inline int rNd4(int randomMax){
 randomNumber=0,entropySeed=0;
