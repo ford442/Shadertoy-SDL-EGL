@@ -63,6 +63,7 @@ uint32_t workgroupSize=64;
 // double_int53_t DbufferSize=262144*sizeof(int);
 uint32_t DbufferSize=262144*sizeof(unsigned int);
 uint32_t bufferSize=262144*sizeof(unsigned int);
+uint64_t bufferMapSize=262144*sizeof(unsigned int);
 // double_int53_t DiBufferSize=1*sizeof(int);
 uint32_t DiBufferSize=1*sizeof(unsigned int);
 uint32_t iBufferSize=1*sizeof(unsigned int);
@@ -148,7 +149,7 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint64_t(0),DbufferSize);
+uint64_t WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint64_t(0),bufferMapSize);
 WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 
