@@ -13,6 +13,8 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 
+#include <new>
+#include <stdint.h>
 #include <random>
 #include <iostream>
 #include <cassert>
