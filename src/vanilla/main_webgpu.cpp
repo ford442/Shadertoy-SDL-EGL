@@ -3,8 +3,8 @@
 
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
@@ -164,11 +164,11 @@ int * WGPU_Result_Buffer=new int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 // int * WGPU_Result_Buffer;
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
+auto Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,U0,WGPU_Result_Buffer,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),U0,&WGPU_ResultBuffer.at(0,0,0),bufferSize);
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 
