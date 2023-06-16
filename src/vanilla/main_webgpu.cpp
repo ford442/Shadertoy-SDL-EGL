@@ -125,7 +125,7 @@ unsigned int WGPU_Result_Buffer[1048576];
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),1048576);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_Result_Buffer,1048576);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),1048576);
 std::cout << "GETTING BUFFER\n";
 std::cout << &WGPU_Result_Buffer[0];
     /* 
