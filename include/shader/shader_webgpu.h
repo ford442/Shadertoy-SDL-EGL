@@ -247,7 +247,7 @@ inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
 using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
-using sz_tensor=boost::numeric::ublas::tensor<boost::int<32>::exact>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using di_tensor=boost::numeric::ublas::tensor<uint64_t>;
