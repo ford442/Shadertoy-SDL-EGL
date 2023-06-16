@@ -55,7 +55,7 @@ static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
-static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
+static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 unsigned int bufferSize=1048576;
@@ -120,7 +120,7 @@ return randomNumber;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-int WGPU_Result_Buffer[1048576];
+unsigned int WGPU_Result_Buffer[1048576];
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),262144);
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),1048576);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
