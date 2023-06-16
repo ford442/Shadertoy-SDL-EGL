@@ -383,7 +383,7 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-int * WGPU_Result_Buffer=new int[bufferSize/sizeof(int)];
+int * WGPU_Result_Buffer=new int[bufferSize];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
