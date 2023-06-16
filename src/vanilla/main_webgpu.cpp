@@ -130,18 +130,9 @@ WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_Result_Buffer,1048576);
 std::cout << "GETTING BUFFER\n";
-// std::cout << &WGPU_Result_Buffer[0];
-    /* 
-    for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-} 
-*/
+std::cout << WGPU_Result_Buffer;
+
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
-  //   WGPU_Result_Buffer.del()
 return;
 };
 
