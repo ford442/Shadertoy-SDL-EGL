@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
 #include <emscripten/em_math.h>
+#include <memory.h>
 
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
