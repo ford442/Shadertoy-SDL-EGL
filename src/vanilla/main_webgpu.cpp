@@ -60,17 +60,14 @@ static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
-// double_int53_t DbufferSize=262144*sizeof(int);
-int DbufferSize=262144*sizeof(unsigned int);
-int bufferSize=262144*sizeof(unsigned int);
-uint64_t bufferMapSize=262144*sizeof(unsigned int);
-// double_int53_t DiBufferSize=1*sizeof(int);
-int DiBufferSize=1*sizeof(unsigned int);
-int iBufferSize=1*sizeof(unsigned int);
+int bufferSize=262144*sizeof(int);
+uint64_t bufferMapSize=262144*sizeof(int);
+uint64_t ibufferMapSize=1*sizeof(unsigned int);
+int bufferSize=1*sizeof(unsigned int);
 uint64_t DescriptorBufferSize=262144*sizeof(unsigned int);
 uint64_t iDescriptorBufferSize=1*sizeof(unsigned int);
 const char * Entry="computeStuff";
-uint32_t invocationCount=bufferSize/sizeof(unsigned int);
+uint32_t invocationCount=bufferMapSize/sizeof(unsigned int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
@@ -235,10 +232,10 @@ computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0
 WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),DiBufferSize);
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),bufferMapSize);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,DiBufferSize);
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,bufferMapSize);
 commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
@@ -255,10 +252,10 @@ WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),DiBufferSize);
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,input.data(),bufferMapSize);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,DiBufferSize);
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,bufferMapSize);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
