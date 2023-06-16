@@ -119,11 +119,10 @@ randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
 
-int * WGPU_Result_Buffer=new int[1048576];
-unsigned int input=new unsigned int[1];
+
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-
+int WGPU_Result_Buffer[1048576];
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),262144);
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),1048576);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
@@ -191,7 +190,9 @@ WGPU_Buffers.at(0,0,0)=outputBuffer;
 mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(1,0,1)=mapBuffer;
 raN=rNd4(1024);
+unsigned int input[1];
 input[0]=raN;
+
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 cs=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_ComputeModule.at(0,0,0)=cs;
