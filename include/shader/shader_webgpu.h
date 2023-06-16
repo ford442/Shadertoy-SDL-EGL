@@ -324,10 +324,10 @@ static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
 static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
-static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
+static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
