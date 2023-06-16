@@ -15,7 +15,7 @@ namespace net = boost::asio;        // from <boost/asio.hpp>
 using tcp = net::ip::tcp;           // from <boost/asio/ip/tcp.hpp>
 
 // Performs an HTTP GET and prints the response
-int beast()
+int beasts()
 {
     try
     {
@@ -57,8 +57,8 @@ int beast()
 
         // Write the message to standard out
         std::cout << res << std::endl;
-        std::cout << stream << std::endl;
-        std::cout << buffer << std::endl;
+      //  std::cout << stream << std::endl;
+     //   std::cout << buffer << std::endl;
 
         // Gracefully close the socket
         beast::error_code ec;
@@ -95,7 +95,7 @@ extern "C"{
   
 float js_double(float nem){ 
 
-    beast();
+    beasts();
 
     
 v128_t rtt=Funcs.rnn.double_add(nem);
