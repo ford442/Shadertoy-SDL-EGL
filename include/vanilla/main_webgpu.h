@@ -76,7 +76,6 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
 void WGPU_Start();
 
-
 extern"C"{
 
 void startWebGPU();
