@@ -1,19 +1,57 @@
 #include "../../include/vanilla/main_webgpu.h"
 #include <emscripten/em_math.h>
 
+
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.x*global_id.y*4;"
-"for(var g:u32=0;g<256;g++){"
-"var h:u32=f*g;"
-"outputBuffer[h]=133;"
-"outputBuffer[h+1]=0;"
-"outputBuffer[h+2]=80;"
-"outputBuffer[h+3]=222;"
-"}}";
+"let f:u32=global_id.x*4*global_id.y;"
+"for(var e:u32=0;e<65546;e++){"
+"var m=e*4;"
+"outputBuffer[m]=133;"
+"outputBuffer[m+1]=0;"
+"outputBuffer[m+2]=80;"
+"outputBuffer[m+3]=222;"
+
+/*
+"switch global_id.y{"
+"case default:{"
+"outputBuffer[f]=130-(inputBuffer[0]/6);"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=80;"
+"outputBuffer[f+3]=255;"
+"}"
+"case 1:{"
+"outputBuffer[f]=180;"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=((inputBuffer[0]-e)/4)+e;"
+"outputBuffer[f+3]=255;"
+"}"
+"case 2:{"
+"outputBuffer[f]=(e*4)-(inputBuffer[0]/4);"
+"outputBuffer[f+1]=e;"
+"outputBuffer[f+2]=(inputBuffer[0]/4);"
+"outputBuffer[f+3]=128;"
+"}"
+"case 3:{"
+"outputBuffer[f]=inputBuffer[0]/4;"
+"outputBuffer[f+1]=111;"
+"outputBuffer[f+2]=inputBuffer[0]/4;"
+"outputBuffer[f+3]=255-e;"
+"}"
+"case 4:{"
+"outputBuffer[f]=(inputBuffer[0]/256)*64;"
+"outputBuffer[f+1]=255;"
+"outputBuffer[f+2]=255;"
+"outputBuffer[f+3]=255-e;"
+"}}"  
+*/
+
+"}"
+"}";
+
 
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
