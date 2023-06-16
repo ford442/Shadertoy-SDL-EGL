@@ -96,13 +96,13 @@ static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 // double DbufferSize=1048576;
-uint32_t bufferSize=1048576;
-uint32_t bufferMapSize=1048576;
+uint32_t bufferSize=(1048576)+3)&-4;
+uint32_t bufferMapSize=(1048576)+3)&-4;
 uint32_t ibufferMapSize=4;
 uint32_t ibufferSize=4;
-uint32_t DescriptorBufferSize=1048576;
+uint32_t DescriptorBufferSize=(1048576)+3)&-4;
 uint32_t iDescriptorBufferSize=4;
-uint32_t invocationCount=1048576;
+uint32_t invocationCount=(1048576)+3)&-4;
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 const char * Entry="computeStuff";
@@ -157,15 +157,16 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
+//  output from mapping is int8 and takes 4 X 8bit spaces
 
 int * input=new int[1];
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 // int * WGPU_Result_Buffer;
 
 // std::vector<int>input(ibufferSize/sizeof(int));
-int * WGPU_Result_Buffer=new int[bufferSize/sizeof(int)];
+int * WGPU_Result_Buffer=new int[bufferSize];
     int bufferItems=((bufferSize/sizeof(int))+3)&-4;
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferItems);
+double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
