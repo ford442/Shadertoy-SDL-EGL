@@ -244,11 +244,11 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
-using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+using mouse_tensor=boost::numeric::ublas::tensor<float>;
 using shad_tensor=boost::numeric::ublas::tensor<uint32_t>;
 using prg_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using sz_tensor=boost::numeric::ublas::tensor<int>;
-using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+using f_tensor=boost::numeric::ublas::tensor<float>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
 using di_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
