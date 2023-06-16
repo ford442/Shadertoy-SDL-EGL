@@ -165,13 +165,13 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 // int * WGPU_Result_Buffer;
 
 // std::vector<int>input(ibufferSize/sizeof(int));
-int * WGPU_Result_Buffer=new int[bufferSize];
+int * WGPU_Result_Buffer=new int[bufferSize/sizeof(int)];
     int bufferItems=((bufferSize/sizeof(int))+3)&-4;
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
+double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize/sizeof(int));
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize/sizeof(int));
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
