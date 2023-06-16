@@ -1181,7 +1181,7 @@ GLsizei width1=256;
 GLsizei height1=256;
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
-glBindTextureUnit(0​,wtexture[0]​);
+glBindTextureUnit(GLuint(0)​,wtexture[0]​);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
