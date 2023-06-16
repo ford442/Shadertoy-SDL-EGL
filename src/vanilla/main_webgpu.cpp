@@ -125,7 +125,7 @@ randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
 
-int * WGPU_Result_Buffer=new int[bufferSize/*sizeof(int)];
+int * WGPU_Result_Buffer=new int[bufferSize/sizeof(int)];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 uint64_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint64_t(0),bufferMapSize);
@@ -133,16 +133,18 @@ WGPU_BufferMappedRange.at(0,0,0)=Range;
 
   //  std::vector<unsigned int>WGPU_Result_Buffer(bufferSize/sizeof(unsigned int));
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint64_t(0),&WGPU_Result_Buffer,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint64_t(0),&WGPU_Result_Buffer,bufferMapSize);
 std::cout << "Result Buffer:\n";
 std::cout << WGPU_Result_Buffer[0];
-    /* for(int g=0;g<65536;g++){
+    /* 
+    for(int g=0;g<65536;g++){
 int hh=g*4;
 ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
 ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
 ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-} */
+} 
+*/
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
  //   WGPU_Result_Buffer.del()
 return;
@@ -151,7 +153,7 @@ return;
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 uint64_t WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint64_t(0),bufferMapSize);
 WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),bufferMapSize);
 
     /*
     raN=rNd4(3);
