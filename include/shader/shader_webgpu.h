@@ -245,12 +245,12 @@ EGL_NONE,EGL_NONE
 
 inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
-using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
-using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
+using shad_tensor=boost::numeric::ublas::tensor<uint64_t>;
+using prg_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using sz_tensor=boost::numeric::ublas::tensor<int>;
 using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
-using di_tensor=boost::numeric::ublas::tensor<double_int53_t>;
+using di_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
@@ -329,20 +329,14 @@ static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 
-// unsigned char * Colora=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * Colorb=new unsigned char[262144*sizeof(unsigned char)];
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * ColorB=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * ColorC=new unsigned char[262144*sizeof(unsigned char)];
-// unsigned char * ColorD=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
-// double_int53_t DbufferSize=262144*sizeof(int);
 uint32_t DbufferSize=262144*sizeof(int);
 uint32_t bufferSize=262144*sizeof(int);
-// double_int53_t DiBufferSize=1*sizeof(int);
 uint32_t DiBufferSize=1*sizeof(int);
 uint32_t iBufferSize=1*sizeof(int);
+
 const char * Entry="computeStuff";
 uint32_t invocationCount=bufferSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
