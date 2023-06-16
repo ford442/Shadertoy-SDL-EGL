@@ -95,6 +95,7 @@ static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
+double DbufferSize=1048576;
 uint32_t bufferSize=1048576;
 uint32_t bufferMapSize=1048576;
 uint32_t ibufferMapSize=4;
@@ -164,7 +165,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 
 // std::vector<int>input(ibufferSize/sizeof(int));
 int * WGPU_Result_Buffer=new int[bufferSize/sizeof(int)];
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize);
+double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,DbufferSize);
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
