@@ -67,7 +67,7 @@ int ibufferSize=1*sizeof(int);
 uint64_t DescriptorBufferSize=262144*sizeof(int);
 uint64_t iDescriptorBufferSize=1*sizeof(int);
 const char * Entry="computeStuff";
-uint32_t invocationCount=bufferMapSize/sizeof(unsigned int);
+uint32_t invocationCount=bufferMapSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
@@ -105,8 +105,8 @@ WGpuBufferDescriptor bufferDescriptorI={iDescriptorBufferSize,WGPU_BUFFER_USAGE_
 WGpuBufferDescriptor bufferDescriptorO={DescriptorBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={DescriptorBufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<unsigned int>input(ibufferSize/sizeof(unsigned int));
-std::vector<unsigned int>outputd(bufferSize/sizeof(unsigned int));
+std::vector<unsigned int>input(ibufferSize/sizeof(int));
+std::vector<unsigned int>outputd(bufferSize/sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
