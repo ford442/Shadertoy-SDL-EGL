@@ -142,8 +142,8 @@ ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
 ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
 } 
 */
-wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
- //   WGPU_Result_Buffer.del()
+//  wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+  //   WGPU_Result_Buffer.del()
 return;
 };
 
