@@ -95,9 +95,7 @@ WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2];
-
 WGpuBindGroupEntry bindGroupEntry[2];
-
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
@@ -186,11 +184,11 @@ WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
 WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
 WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
 inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
-WGPU_Buffers.at(1,1,1)=inputBuffer
+WGPU_Buffers.at(1,1,1)=inputBuffer;
 outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
-WGPU_Buffers.at(0,0,0)=outputBuffer
+WGPU_Buffers.at(0,0,0)=outputBuffer;
 mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
-WGPU_Buffers.at(1,0,1)=mapBuffer
+WGPU_Buffers.at(1,0,1)=mapBuffer;
 raN=rNd4(1024);
 input[0]=raN;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
