@@ -692,7 +692,7 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static void PRGin(unsigned int prg){
+static void PRGin(uint64_t prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
