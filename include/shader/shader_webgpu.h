@@ -350,7 +350,7 @@ WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture[4],texture,xtexture,texturea,textureb,texturec,textured;
+GLuint wtexture[4];
 WGpuAdapter adapter=0;
 WGpuDevice device=0;
 WGpuQueue queue=0;
@@ -419,7 +419,6 @@ double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32
 WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize);
 raN=rNd4(3);
-glGenTextures(1,&wtexture[raN]);
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
@@ -1181,7 +1180,7 @@ GLsizei width1=256;
 GLsizei height1=256;
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
-glBindTextureUnit(GLuint(0)​,wtexture[0]​);
+glBindTextureUnit(GLuint(0),wtexture[0]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
