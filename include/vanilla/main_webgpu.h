@@ -13,6 +13,9 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 
+#include <algorithm>
+#include <vector>
+
 #include <new>
 #include <stdint.h>
 #include <random>
