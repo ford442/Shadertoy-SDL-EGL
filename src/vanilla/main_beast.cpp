@@ -15,7 +15,7 @@ namespace net = boost::asio;        // from <boost/asio.hpp>
 using tcp = net::ip::tcp;           // from <boost/asio/ip/tcp.hpp>
 
 // Performs an HTTP GET and prints the response
-int beast()
+int beasts()
 {
     try
     {
@@ -95,7 +95,7 @@ extern "C"{
   
 float js_double(float nem){ 
 
-    beast();
+    beasts();
 
     
 v128_t rtt=Funcs.rnn.double_add(nem);
