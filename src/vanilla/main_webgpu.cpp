@@ -97,13 +97,13 @@ static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 // double DbufferSize=1048576;
-uint32_t bufferSize=(1048576)+3) & -4;
-uint32_t bufferMapSize=(1048576)+3) & -4;
+uint32_t bufferSize=1048576;
+uint32_t bufferMapSize=1048576;
 uint32_t ibufferMapSize=4;
 uint32_t ibufferSize=4;
-uint32_t DescriptorBufferSize=(1048576)+3) & -4;
+uint32_t DescriptorBufferSize=1048576;
 uint32_t iDescriptorBufferSize=4;
-uint32_t invocationCount=(1048576)+3) & -4;
+uint32_t invocationCount=1048576;
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 const char * Entry="computeStuff";
