@@ -122,7 +122,7 @@ return randomNumber;
 }
 
 
-int input=new int[1];
+int input[]=new int[1];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 int * WGPU_Result_Buffer;
