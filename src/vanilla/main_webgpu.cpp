@@ -57,18 +57,17 @@ static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
-unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
-
 uint32_t workgroupSize=64;
-int bufferSize=262144*sizeof(int);
-int bufferMapSize=262144*sizeof(int);
-int ibufferMapSize=1*sizeof(int);
-int ibufferSize=1*sizeof(int);
+uint32_t bufferSize=262144*sizeof(int);
+uint32_t bufferMapSize=262144*sizeof(int);
+uint32_t ibufferMapSize=1*sizeof(int);
+uint32_t ibufferSize=1*sizeof(int);
 uint32_t DescriptorBufferSize=262144*sizeof(int);
 uint32_t iDescriptorBufferSize=1*sizeof(int);
-const char * Entry="computeStuff";
 uint32_t invocationCount=bufferMapSize/sizeof(int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
+const char * Entry="computeStuff";
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
