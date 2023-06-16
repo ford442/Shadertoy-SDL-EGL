@@ -119,7 +119,7 @@ randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
 
-int * WGPU_Result_Buffer=new int[bufferSize];
+int * WGPU_Result_Buffer=new int[262144];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),bufferMapSize);
