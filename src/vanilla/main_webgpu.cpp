@@ -8,7 +8,7 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*global_id.y*4;"
-"outputBuffer[f]=133;"
+"outputBuffer[0]=133;"
 "outputBuffer[f+1]=0;"
 "outputBuffer[f+2]=80;"
 "outputBuffer[f+3]=222;"
@@ -120,12 +120,13 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
+
 //  output from mapping is Uint8 and takes 4 X 8bit spaces
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,sizeof(WGPU_Result_Buffer));
-std::cout << "GETTING BUFFER\n";
+std::cout << "GETTING BUFFER (Start)\n";
 std::cout << WGPU_Result_Buffer[0];
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
@@ -135,9 +136,8 @@ WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_M
 double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
 WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&WGPU_ResultBuffer.at(0,0,0),sizeof(WGPU_Result_Buffer));
-std::cout << "GETTING BUFFER\n";
+std::cout << "GETTING BUFFER (Run)\n";
 std::cout << WGPU_Result_Buffer[0];
-
 
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
@@ -319,7 +319,7 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-           
+
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
@@ -358,7 +358,7 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
-               
+
 document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
