@@ -54,7 +54,7 @@ static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,3};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,3};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
-static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
+static d_tensor WGPU_BufferMappedRange=d_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
@@ -129,11 +129,11 @@ unsigned int * WGPU_Result_Buffer=new unsigned int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 // wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
-//double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
-wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
-// WGPU_BufferMappedRange.at(0,0,0)=Range;
+double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
+// wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
+WGPU_BufferMappedRange.at(0,0,0)=Range;
 // WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,bufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,WGPU_Result_Buffer,bufferSize);
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
