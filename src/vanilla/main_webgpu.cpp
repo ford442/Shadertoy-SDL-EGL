@@ -3,8 +3,8 @@
 #include <memory.h>
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,1>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
@@ -96,14 +96,13 @@ static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
-// double DbufferSize=1048576;
-uint32_t bufferSize=1048576;
-uint32_t bufferMapSize=1048576;
-uint32_t ibufferMapSize=4;
-uint32_t ibufferSize=4;
-uint32_t DescriptorBufferSize=1048576;
-uint32_t iDescriptorBufferSize=4;
-uint32_t invocationCount=1048576;
+uint32_t bufferSize=262144*sizeof(unsigned int);
+uint32_t bufferMapSize=262144*sizeof(unsigned int);
+uint32_t ibufferMapSize=1*sizeof(unsigned int);
+uint32_t ibufferSize=1*sizeof(unsigned int);
+uint32_t DescriptorBufferSize=262144*sizeof(unsigned int);
+uint32_t iDescriptorBufferSize=1*sizeof(unsigned int);
+uint32_t invocationCount=262144*sizeof(unsigned int);
 uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 const char * Entry="computeStuff";
