@@ -63,8 +63,8 @@ static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
 // std::vector<int>input(ibufferSize);
 // std::vector<int>outputd(bufferSize);
 
-int input=new int[1];
-int WGPU_Result_Buffer=new int[262144];
+int input[1];
+int WGPU_Result_Buffer[262144];
 
 uint32_t workgroupSize=64;
 
