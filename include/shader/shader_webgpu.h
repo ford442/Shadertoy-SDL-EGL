@@ -332,9 +332,9 @@ static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
-uint64_t BufferMapSize=262144*sizeof(int);
+uint32_t BufferMapSize=262144*sizeof(int);
 int bufferSize=262144*sizeof(int);
-uint64_t iBufferMapSize=1*sizeof(int);
+uint32_t iBufferMapSize=1*sizeof(int);
 int iBufferSize=1*sizeof(int);
 
 const char * Entry="computeStuff";
