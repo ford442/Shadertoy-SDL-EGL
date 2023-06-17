@@ -161,17 +161,15 @@ return randomNumber;
 //  output from mapping is int8 and takes 4 X 8bit spaces
 
 int * input=new int[1];
-WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-// int * WGPU_Result_Buffer;
-
-// std::vector<int>input(ibufferSize/sizeof(int));
 int * WGPU_Result_Buffer=new int[bufferSize/sizeof(int)];
-    int bufferItems=((bufferSize/sizeof(int))+3)&-4;
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize/sizeof(int));
+
+WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+
+wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize/sizeof(int));
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,uint32_t(0),WGPU_ResultBuffer.at(0,0,0),bufferSize/sizeof(int));
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_ResultBuffer.at(0,0,0),bufferSize/sizeof(int));
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
