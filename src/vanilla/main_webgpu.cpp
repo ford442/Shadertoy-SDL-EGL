@@ -126,7 +126,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,sizeof(WGPU_Result_Buffer));
 std::cout << "GETTING BUFFER\n";
-// std::cout << WGPU_Result_Buffer;
+std::cout << WGPU_Result_Buffer[0];
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
