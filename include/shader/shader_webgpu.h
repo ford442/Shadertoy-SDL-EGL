@@ -833,7 +833,8 @@ int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%45==0){
 raN=rNd4(1025);
 input[0]=raN;
- // WGPU_Run();   //  launch WebGPU
+  
+WGPU_Run();   //  launch WebGPU
 
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
