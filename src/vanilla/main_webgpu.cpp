@@ -7,14 +7,11 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.x*global_id.y;"
-"for(var e:u32=0;e<256;e++){"
-"var m=f*e;"
-"outputBuffer[m]=133;"
-"outputBuffer[m+1]=0;"
-"outputBuffer[m+2]=80;"
-"outputBuffer[m+3]=222;"
-"}"
+"let f:u32=global_id.x*global_id.y*4;"
+"outputBuffer[f]=133;"
+"outputBuffer[f+1]=0;"
+"outputBuffer[f+2]=80;"
+"outputBuffer[f+3]=222;"
 "}";
 
 static shad_tensor Sh=shad_tensor{3,3};
