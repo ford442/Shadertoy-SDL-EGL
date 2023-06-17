@@ -8,7 +8,7 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4*global_id.y;"
-"for(var e:u32=0;e<65546;e++){"
+"for(var e:u32=0;e<256;e++){"
 "var m=e*4;"
 "outputBuffer[m]=133;"
 "outputBuffer[m+1]=0;"
