@@ -100,9 +100,9 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-const * WGpuBufferDescriptor bufferDescriptorI={sizeof(input),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-const * WGpuBufferDescriptor bufferDescriptorO={sizeof(WGPU_Result_Buffer),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-const * WGpuBufferDescriptor bufferDescriptorM={sizeof(WGPU_Result_Buffer),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={sizeof(input),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={sizeof(WGPU_Result_Buffer),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={sizeof(WGPU_Result_Buffer),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
 char * cmp_bdy=wgl_cmp_src;
@@ -160,11 +160,11 @@ static void raf(WGpuDevice device){
 WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
 WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
 WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
-inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),bufferDescriptorI);
+inputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorI);
 WGPU_Buffers.at(1,1,1)=inputBuffer;
-outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),bufferDescriptorO);
+outputBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorO);
 WGPU_Buffers.at(0,0,0)=outputBuffer;
-mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),bufferDescriptorM);
+mapBuffer=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorM);
 WGPU_Buffers.at(1,0,1)=mapBuffer;
 raN=rNd4(1024);
 input[0]=raN;
