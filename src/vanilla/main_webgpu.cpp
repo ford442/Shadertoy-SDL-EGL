@@ -126,7 +126,7 @@ return randomNumber;
 //  output from mapping is Uint8 and takes 4 X 8bit spaces
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer);
+wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,sizeof(WGPU_Result_Buffer));
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
