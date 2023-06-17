@@ -93,7 +93,7 @@ static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
-static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
+static iptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 int bufferSize=262144*sizeof(unsigned int);
@@ -160,15 +160,15 @@ return randomNumber;
 //  output from mapping is Uint8 and takes 4 X 8bit spaces
 
 unsigned int * input=new unsigned int[1];
-
+unsigned int WGPU_Result_Buffer=new unsigned int[bufferSize];
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-unsigned int WGPU_Result_Buffer[bufferSize];
 // wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
-uint32_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
+//double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
+wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
-WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_ResultBuffer.at(0,0,0),bufferSize/sizeof(unsigned int));
+// WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,bufferSize);
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -246,11 +246,11 @@ WGPU_ComputePipeline.at(0,0,0)=computePipeline;
 bindGroupEntry[0].binding=0;
 bindGroupEntry[0].resource=WGPU_Buffers.at(1,1,1);
 bindGroupEntry[0].bufferBindOffset=0;
-bindGroupEntry[0].bufferBindSize=uint32_t(4);
+bindGroupEntry[0].bufferBindSize=ibufferSize;
 bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
-bindGroupEntry[1].bufferBindSize=bufferSize;;
+bindGroupEntry[1].bufferBindSize=bufferSize;
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_BindGroup.at(0,0,0)=bindGroup;
