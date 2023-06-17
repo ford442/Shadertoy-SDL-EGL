@@ -63,8 +63,8 @@ static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
 // std::vector<int>input(ibufferSize);
 // std::vector<int>outputd(bufferSize);
 
-int * input=new int[1];
-int * WGPU_Result_Buffer=new int[262144];
+int input=new int[1];
+int WGPU_Result_Buffer=new int[262144];
 
 uint32_t workgroupSize=64;
 
@@ -98,8 +98,8 @@ WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
-WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2];
-WGpuBindGroupEntry bindGroupEntry[2];
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
+WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
