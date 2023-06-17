@@ -169,7 +169,7 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,bufferSize/sizeof(unsigne
 // double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_ResultBuffer.at(0,0,0),bufferSize/sizeof(unsigned int));
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_ResultBuffer.at(0,0,0),bufferSize/sizeof(unsigned int));
 std::cout << "GETTING BUFFER\n";
 // std::cout << WGPU_Result_Buffer;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
