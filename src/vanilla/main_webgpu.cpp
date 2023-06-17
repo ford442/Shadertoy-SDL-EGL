@@ -223,18 +223,18 @@ return;
 }
 
 static void WGPU_Run(){
-WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
-WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
-WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
-wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
-wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,sizeof(WGPU_Result_Buffer));
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
-wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
-wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
+encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+computePass=wgpu_command_encoder_begin_compute_pass(encoder,&computePassDescriptor);
+wgpu_compute_pass_encoder_set_pipeline(computePass,WGPU_ComputePipeline.at(0,0,0));
+wgpu_encoder_set_bind_group(computePass,0,WGPU_BindGroup.at(0,0,0),0,0);
+wgpu_queue_set_on_submitted_work_done_callback(queue,WGPU_ComputeDoneCallback.at(0,0,1),0);
+wgpu_queue_write_buffer(queue,WGPU_Buffers.at(1,1,1),0,&input,sizeof(WGPU_Result_Buffer));
+wgpu_compute_pass_encoder_dispatch_workgroups(computePass,64,4,1);
+wgpu_encoder_end(computePass);
+wgpu_command_encoder_copy_buffer_to_buffer(encoder,WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
+commandBuffer=wgpu_encoder_finish(computePass);
+wgpu_queue_submit_one(queue,commandBuffer);
 return;
 }
 
