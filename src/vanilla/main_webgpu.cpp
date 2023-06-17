@@ -160,10 +160,10 @@ return randomNumber;
 //  output from mapping is Uint8 and takes 4 X 8bit spaces
 
 unsigned int * input=new unsigned int[1];
-unsigned int * WGPU_Result_Buffer=new unsigned int[bufferSize/sizeof(unsigned int)];
+
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-
+unsigned int * WGPU_Result_Buffer[bufferSize];
 // wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0);
 uint32_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),U0,WGPU_MAX_SIZE);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
