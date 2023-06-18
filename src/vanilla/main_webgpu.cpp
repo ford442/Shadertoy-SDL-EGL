@@ -103,10 +103,10 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-unsigned int uintOutputBufferSize=262144*sizeof(unsigned int);
-int intOutputBufferSize=262144*sizeof(unsigned int);
-unsigned int uintInputBufferSize=262144*sizeof(unsigned int);
-int intInputBufferSize=262144*sizeof(unsigned int);
+unsigned int uintOutputBufferSize=262144;
+int intOutputBufferSize=262144;
+unsigned int uintInputBufferSize=262144;
+int intInputBufferSize=262144;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
