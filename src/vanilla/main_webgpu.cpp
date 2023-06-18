@@ -167,8 +167,8 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
   
    uint64_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
    WGPU_BufferMappedRange.at(0,0,0)=Range;
-   WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
+  //  WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_Result_Buffer,BufferMapSize);
 
   
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
