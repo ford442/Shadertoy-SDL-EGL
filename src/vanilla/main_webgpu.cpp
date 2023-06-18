@@ -163,7 +163,7 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 uint8_t * WGPU_Result_Array=new uint8_t[uintOutputBufferSize];
 uint8_t * WGPU_Input_Array=new uint8_t[uintInputBufferSize];
-// unsigned int * locate=&outputd;
+unsigned int * locate=&WGPU_Result_Array;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -175,12 +175,12 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 
 // NO ARRAY  / NO CRASH
-wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
-
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
+double point=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&locate,uintOutputBufferSize);
 // outpute[0]=outputd[0];
+std::cout << point[0];
+std::cout << WGPU_Result_Array[0];
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
-//  std::cout << outpute[0];
 return;
 };
 
