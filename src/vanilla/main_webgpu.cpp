@@ -106,8 +106,8 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-uint64_t uintOutputBufferSize=1048576;
-uint64_t uintInputBufferSize=1048576;
+uint64_t uintOutputBufferSize=1048576*sizeof(uint8_t);
+uint64_t uintInputBufferSize=1048576*sizeof(uint8_t);
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
@@ -145,9 +145,9 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
-std::vector<uint32_t>input(uintInputBufferSize);
-std::vector<uint32_t>outputd(uintOutputBufferSize);
-std::vector<uint32_t>outpute(uintOutputBufferSize);
+std::vector<uint8_t>input(uintInputBufferSize);
+std::vector<uint8_t>outputd(uintOutputBufferSize);
+std::vector<uint8_t>outpute(uintOutputBufferSize);
 
 WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
