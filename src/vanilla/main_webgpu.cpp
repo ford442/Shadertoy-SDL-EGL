@@ -322,7 +322,7 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
 setTimeout(function(){
-Module.ccall("runWebGPU");
+ // Module.ccall("runWebGPU");
 },1500);
 });
 }
