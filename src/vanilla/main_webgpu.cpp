@@ -157,6 +157,7 @@ int raND=0;
 // int holder[262144];
 // int WGPU_Result_Buffer=new int[262144];
 int * locate=&outputd[0];
+int * tellLocate;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -176,7 +177,7 @@ double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,26214
          std::cout << "before read:" << std::endl;
          std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,262144);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,tellLocate,262144);
          std::cout << outputd[0] << std::endl;
 
       
@@ -195,7 +196,7 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,0);
  //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
   //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
       
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,262144);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,tellLocate,262144);
       //  UNMAP CRASH
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
