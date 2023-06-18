@@ -157,7 +157,7 @@ inline char cm_hdr_src[1900]=
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
 // "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 1\n"
+// "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n";
 
@@ -202,8 +202,8 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)5,
+EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -224,7 +224,7 @@ EGLint att_lst[1500]={
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_RED_SIZE,(EGLint)10,
@@ -234,7 +234,7 @@ EGL_ALPHA_SIZE,(EGLint)10,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)10,
 EGL_BUFFER_SIZE,(EGLint)32,
-EGL_SAMPLE_BUFFERS,EGL_TRUE,
+EGL_SAMPLE_BUFFERS,1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
 EGL_SAMPLES,16,
@@ -662,7 +662,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=120;
+int32_t iFps=70;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -686,7 +686,7 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static void PRGin(uint64_t prg){
+static void PRGin(boost::uint_t<64>::exact prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
@@ -834,7 +834,7 @@ if(uni_i.at(0,0)%45==0){
 raN=rNd4(1025);
 input[0]=raN;
   
-WGPU_Run();   //  launch WebGPU
+// WGPU_Run();   //  launch WebGPU
 
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
@@ -1071,7 +1071,7 @@ glEnable(GL_DEPTH_TEST);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
 // glStencilMask(0xFF);
-// glFrontFace(GL_CW);
+glFrontFace(GL_CW);
 // glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -1214,7 +1214,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
-WGPUCompute_Start();
+// WGPUCompute_Start();
 
   // date/time
 const time_t timE=time(0);
@@ -1242,10 +1242,10 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 nanoPause();
-glViewport((GLint)0,(GLint)0,4096,4096);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
-glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
+// glEnable(GL_SCISSOR_TEST);
+// glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
