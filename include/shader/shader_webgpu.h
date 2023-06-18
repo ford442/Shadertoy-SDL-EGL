@@ -60,7 +60,7 @@ return shader;
 };
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,1>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
@@ -334,8 +334,8 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 uint32_t workgroupSize=64;
 uint32_t BufferMapSize=262144*sizeof(int);
 uint32_t bufferSize=262144*sizeof(int);
-uint32_t iBufferMapSize=1*sizeof(int);
-uint32_t iBufferSize=1*sizeof(int);
+uint32_t iBufferMapSize=262144*sizeof(int);
+uint32_t iBufferSize=262144*sizeof(int);
 
 const char * Entry="computeStuff";
 uint32_t invocationCount=BufferMapSize/sizeof(int);
