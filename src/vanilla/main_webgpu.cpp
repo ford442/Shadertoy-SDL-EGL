@@ -144,8 +144,8 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
-std::vector<unsigned int>input(262144);
-std::vector<unsigned int>outputd(262144);
+std::vector<uint32_t>input(262144);
+std::vector<uint32_t>outputd(262144);
 
 WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
@@ -160,8 +160,8 @@ int raND=0;
 
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
-unsigned int * WGPU_Result_Array=new unsigned int[262144];
-unsigned int * WGPU_Input_Array=new unsigned int[262144];
+uint32_t * WGPU_Result_Array=new uint32_t[262144];
+uint32_t * WGPU_Input_Array=new uint32_t[262144];
 // unsigned int * locate=&outputd;
 // int * tellLocate;
 
