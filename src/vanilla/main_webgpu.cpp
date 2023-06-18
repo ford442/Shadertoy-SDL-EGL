@@ -141,12 +141,12 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={uintOutputBufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={1048576,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={1048576,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={1048576,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<unsigned int>input(uintInputBufferSize/sizeof(unsigned int));
-std::vector<unsigned int>outputd(uintOutputBufferSize/sizeof(unsigned int));
+std::vector<unsigned int>input(1048576);
+std::vector<unsigned int>outputd(1048576);
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -170,7 +170,7 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 
 // NO ARRAY  / NO CRASH
-double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
+double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,1048576);
 //   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,bufferSize);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
@@ -178,7 +178,7 @@ double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintO
     //      std::cout << "before read:" << std::endl;
     //      std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,locate,uintOutputBufferSize);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,locate,1048576);
          std::cout << outputd[0] << std::endl;
 
       
@@ -249,11 +249,11 @@ WGPU_ComputePipeline.at(0,0,0)=computePipeline;
 bindGroupEntry[0].binding=0;
 bindGroupEntry[0].resource=WGPU_Buffers.at(1,1,1);
 bindGroupEntry[0].bufferBindOffset=0;
-bindGroupEntry[0].bufferBindSize=uintInputBufferSize;
+bindGroupEntry[0].bufferBindSize=1048576;
 bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
-bindGroupEntry[1].bufferBindSize=uintOutputBufferSize;
+bindGroupEntry[1].bufferBindSize=1048576;
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_BindGroup.at(0,0,0)=bindGroup;
