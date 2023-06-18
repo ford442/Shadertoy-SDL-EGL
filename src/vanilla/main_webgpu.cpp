@@ -154,7 +154,7 @@ int raN=0;
 int raND=0;
 
 // int * WGPU_Result_Buffer[262144];
-int * WGPU_Result_Buffer=new int[];
+int * WGPU_Result_Buffer[262144*sizeof(int)];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
