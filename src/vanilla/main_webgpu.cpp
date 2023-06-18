@@ -156,7 +156,7 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
 // int WGPU_Result_Buffer=new int[262144];
-int * locate=&outputd[0];
+int * locate=&outputd[];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -176,7 +176,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
          std::cout << "before read:" << std::endl;
          std::cout << locate << std::endl;
  wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,262144*4);
-         std::cout << &locate[0] << std::endl;
+         std::cout << &locate << std::endl;
 
       
       // MEMORY AREA?
