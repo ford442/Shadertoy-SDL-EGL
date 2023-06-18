@@ -47,7 +47,7 @@ inline char wgl_cmp_src[2000]=
 "}}"  
 */
 
-"}"
+//"}"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
