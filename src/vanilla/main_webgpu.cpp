@@ -167,9 +167,9 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 
    uint64_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
-  //  WGPU_BufferMappedRange.at(0,0,0)=Range;
+WGPU_BufferMappedRange.at(0,0,0)=Range;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,uint32_t(0),WGPU_Result_Buffer,BufferMapSize);
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,uint32_t(0),WGPU_Result_Buffer,BufferMapSize);
 
   
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -181,7 +181,7 @@ WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_M
   
    double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
    WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
-   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Map_Range,uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
 
   
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
