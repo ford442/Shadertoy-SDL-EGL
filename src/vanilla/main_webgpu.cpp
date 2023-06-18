@@ -176,7 +176,7 @@ uint32_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
          std::cout << "before read:" << std::endl;
          std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,locate,262144*4);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,locate,262144);
          std::cout << &locate << std::endl;
 
       
