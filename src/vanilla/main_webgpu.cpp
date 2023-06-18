@@ -156,7 +156,7 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
 // int WGPU_Result_Buffer=new int[262144];
-int * locate=&outputd[0];
+int * locate=&outputd;
 int * tellLocate;
 
 inline int rNd4(int randomMax){
@@ -169,7 +169,7 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 
 // NO ARRAY  / NO CRASH
-double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
+double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,0);
 //   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
@@ -177,7 +177,7 @@ double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,26214
          std::cout << "before read:" << std::endl;
          std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,262144);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,0);
          std::cout << outputd[0] << std::endl;
 
       
@@ -196,7 +196,7 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,0);
  //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
   //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
       
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,262144);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,0);
       //  UNMAP CRASH
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
