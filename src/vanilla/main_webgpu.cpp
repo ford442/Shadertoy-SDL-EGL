@@ -142,6 +142,7 @@ WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false}
 
 std::vector<uint32_t>input(262144);
 std::vector<uint32_t>outputd(262144);
+std::vector<uint32_t>outpute(262144);
 
 WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
@@ -172,8 +173,9 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
 
  wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
-      
+outpute[0]=outputd[0];
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+ cout << outpute[0];
 return;
 };
 
