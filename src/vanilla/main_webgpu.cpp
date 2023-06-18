@@ -1,8 +1,8 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<i32,262144>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 // "let f:u32=global_id.x*4*global_id.y;"
@@ -145,8 +145,8 @@ WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_ST
 WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={uintOutputBufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<int>input(intInputBufferSize/sizeof(unsigned int));
-std::vector<int>outputd(intOutputBufferSize/sizeof(unsigned int));
+std::vector<unsigned int>input(uintInputBufferSize/sizeof(unsigned int));
+std::vector<unsigned int>outputd(uintOutputBufferSize/sizeof(unsigned int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
