@@ -103,10 +103,10 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-uint32_t uintOutputBufferSize=262144*sizeof(int);
-int intOutputBufferSize=262144*sizeof(int);
-uint32_t uintInputBufferSize=262144*sizeof(int);
-int intInputBufferSize=262144*sizeof(int);
+uint32_t uintOutputBufferSize=262144*sizeof(unsigned int);
+int intOutputBufferSize=262144*sizeof(unsigned int);
+uint32_t uintInputBufferSize=262144*sizeof(unsigned int);
+int intInputBufferSize=262144*sizeof(unsigned int);
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
@@ -157,7 +157,7 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
 // int WGPU_Result_Buffer=new int[262144];
-// int * locate=&outputd;
+int * locate=&outputd[0];
 int * tellLocate;
 
 inline int rNd4(int randomMax){
