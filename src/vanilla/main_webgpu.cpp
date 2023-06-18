@@ -288,9 +288,9 @@ static void WGPU_Run(){
 queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_Queue.at(0,0,0)=queue;
 encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
-WGPU_CommandEncoder.at(0,0,0)=encoder;
-computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
-WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
+WGPU_CommandEncoder.at(0,0,1)=encoder;
+computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,1),&computePassDescriptor);
+WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,1),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,uintInputBufferSize);
