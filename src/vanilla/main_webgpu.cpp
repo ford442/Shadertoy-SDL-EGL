@@ -161,8 +161,8 @@ int raN=0;
 int raND=0;
 
 // int * WGPU_Result_Buffer[262144];
-uint32_t * WGPU_Result_Array=new uint32_t[uintOutputBufferSize];
-uint32_t * WGPU_Input_Array=new uint32_t[uintInputBufferSize];
+uint8_t * WGPU_Result_Array=new uint8_t[uintOutputBufferSize];
+uint8_t * WGPU_Input_Array=new uint8_t[uintInputBufferSize];
 // unsigned int * locate=&outputd;
 
 inline int rNd4(int randomMax){
