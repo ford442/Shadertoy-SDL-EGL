@@ -172,22 +172,8 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 
 // NO ARRAY  / NO CRASH
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
-//   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,bufferSize);
-// WGPU_BufferMappedRange.at(0,0,0)=Range;
-      //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
-// WGPU_ResultBuffer.at(0,0,0)=&outputd;
-    //      std::cout << "before read:" << std::endl;
-    //      std::cout << locate << std::endl;
-      
+
  wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
-         std::cout << outputd[0] << std::endl;
-         std::cout << outputd[1] << std::endl;
-         std::cout << outputd[2] << std::endl;
-         std::cout << outputd[3] << std::endl;
-
-      
-      // MEMORY AREA?
-
       
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
@@ -197,12 +183,7 @@ WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_M
 
 // GOT ARRAY  / CRASH
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
-   //   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0);
- //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
-  //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
-      
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,uintOutputBufferSize);
-         std::cout << WGPU_Result_Array[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
