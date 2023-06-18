@@ -169,15 +169,15 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 
 // NO ARRAY  / NO CRASH
-double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
-//   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
+double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,bufferSize);
+//   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,bufferSize);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
 // WGPU_ResultBuffer.at(0,0,0)=&outputd;
     //      std::cout << "before read:" << std::endl;
     //      std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,262144);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,bufferSize);
          std::cout << outputd[0] << std::endl;
 
       
@@ -327,9 +327,9 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},1500);
+//setTimeout(function(){
+//Module.ccall("runWebGPU");
+//},1500);
 });
 }
 
