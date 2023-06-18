@@ -144,8 +144,8 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
-std::vector<unsigned int>input(1048576);
-std::vector<unsigned int>outputd(1048576);
+std::vector<unsigned int>input(262144);
+std::vector<unsigned int>outputd(262144);
 
 WGpuBufferDescriptor bufferDescriptorI={262144,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={262144,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
