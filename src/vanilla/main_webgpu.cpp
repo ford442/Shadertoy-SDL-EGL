@@ -162,7 +162,7 @@ int raND=0;
 // int holder[262144];
 unsigned int * WGPU_Result_Array=new unsigned int[262144];
 unsigned int * WGPU_Input_Array=new unsigned int[262144];
-unsigned int * locate=&outputd[0];
+unsigned int * locate=&outputd;
 int * tellLocate;
 
 inline int rNd4(int randomMax){
