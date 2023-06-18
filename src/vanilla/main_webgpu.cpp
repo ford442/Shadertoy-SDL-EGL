@@ -103,7 +103,7 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint32_t BufferMapSize=262144*sizeof(int);
-unsigned int bufferSize=262144*sizeof(int);
+int bufferSize=262144*sizeof(int)*4;
 uint32_t iBufferMapSize=262144*sizeof(int);
 uint32_t iBufferSize=262144*sizeof(int);
 
