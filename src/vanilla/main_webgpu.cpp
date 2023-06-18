@@ -145,7 +145,7 @@ WGpuBufferDescriptor bufferDescriptorO={BufferMapSize,WGPU_BUFFER_USAGE_STORAGE|
 WGpuBufferDescriptor bufferDescriptorM={BufferMapSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<int>input(iBufferSize/sizeof(int));
-// std::vector<int>outputd(bufferSize/sizeof(int));
+std::vector<int>outputd(bufferSize/sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -168,11 +168,11 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 
    
 //   double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
-wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,BufferMapSize);
+wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Buffer,BufferMapSize);
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,BufferMapSize);
 
   
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -186,7 +186,7 @@ WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_M
    wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
  //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
   //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
-   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,outputd.at(0,0,0),BufferMapSize);
 
   
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
