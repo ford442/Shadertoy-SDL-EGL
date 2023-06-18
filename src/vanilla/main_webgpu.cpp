@@ -183,7 +183,7 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
     //      std::cout << "before read:" << std::endl;
     //      std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,outputd,262144);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,262144);
          std::cout << outputd[0] << std::endl;
          std::cout << outputd[1] << std::endl;
          std::cout << outputd[2] << std::endl;
