@@ -178,7 +178,7 @@ double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintO
     //      std::cout << "before read:" << std::endl;
     //      std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,locate,uintOutputBufferSize);
          std::cout << outputd[0] << std::endl;
 
       
