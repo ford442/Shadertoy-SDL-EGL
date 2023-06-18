@@ -30,7 +30,6 @@
 #include <emscripten/html5.h>
 #include "../../lib/lib_webgpu.h"
 
-inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
 using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
