@@ -168,14 +168,15 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
       
 // NO ARRAY  / NO CRASH
-double Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144*4);
+locate=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144*4);
 //   wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
 // WGPU_ResultBuffer.at(0,0,0)=&outputd;
          std::cout << "before read:" << std::endl;
          std::cout << locate << std::endl;
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),&Range,0,locate,262144*4);
+      
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),Range,0,locate,262144*4);
          std::cout << &locate << std::endl;
 
       
