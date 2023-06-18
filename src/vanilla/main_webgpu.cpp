@@ -5,49 +5,13 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<i32,262144>;"
 "@compute@workgroup_size(64,4,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.x*4*global_id.y;"
-// "for(var e:u32=0;e<65546;e++){"
-// "var m=e*4;"
-"outputBuffer[f]=133;"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=80;"
-"outputBuffer[f+3]=222;"
+// "let f:u32=global_id.x*4*global_id.y;"
 
-/*
-"switch global_id.y{"
-"case default:{"
-"outputBuffer[f]=130-(inputBuffer[0]/6);"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=80;"
-"outputBuffer[f+3]=255;"
-"}"
-"case 1:{"
-"outputBuffer[f]=180;"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=((inputBuffer[0]-e)/4)+e;"
-"outputBuffer[f+3]=255;"
-"}"
-"case 2:{"
-"outputBuffer[f]=(e*4)-(inputBuffer[0]/4);"
-"outputBuffer[f+1]=e;"
-"outputBuffer[f+2]=(inputBuffer[0]/4);"
-"outputBuffer[f+3]=128;"
-"}"
-"case 3:{"
-"outputBuffer[f]=inputBuffer[0]/4;"
-"outputBuffer[f+1]=111;"
-"outputBuffer[f+2]=inputBuffer[0]/4;"
-"outputBuffer[f+3]=255-e;"
-"}"
-"case 4:{"
-"outputBuffer[f]=(inputBuffer[0]/256)*64;"
-"outputBuffer[f+1]=255;"
-"outputBuffer[f+2]=255;"
-"outputBuffer[f+3]=255-e;"
-"}}"  
-*/
+"outputBuffer[0]=133;"
+"outputBuffer[0+1]=0;"
+"outputBuffer[0+2]=80;"
+"outputBuffer[0+3]=222;"
 
-//"}"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
@@ -199,27 +163,26 @@ return randomNumber;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-uint64_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
-WGPU_BufferMappedRange.at(0,0,0)=Range;
-WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
-/* for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-} */
+
+  
+   uint64_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
+   WGPU_BufferMappedRange.at(0,0,0)=Range;
+   WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),&WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
+
+  
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
-WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
-raN=rNd4(3);
 
+  
+   double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
+   WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),uint32_t(0),WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
+
+  
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
