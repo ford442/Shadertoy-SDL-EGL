@@ -183,8 +183,11 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
     //      std::cout << "before read:" << std::endl;
     //      std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,262144);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&locate,262144);
          std::cout << outputd[0] << std::endl;
+         std::cout << outputd[1] << std::endl;
+         std::cout << outputd[2] << std::endl;
+         std::cout << outputd[3] << std::endl;
 
       
       // MEMORY AREA?
@@ -202,8 +205,8 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,262144);
  //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
   //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
       
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Array,262144);
-      //  UNMAP CRASH
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,262144);
+         std::cout << WGPU_Result_Array[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
@@ -296,8 +299,8 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_Bind
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,262144);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,262144);
-commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,262144);
+commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
 WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
 WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
