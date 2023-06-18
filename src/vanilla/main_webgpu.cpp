@@ -133,11 +133,10 @@ return;
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double WGPU_Map_Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,sizeof(WGPU_Result_Buffer));
-WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferMappedRange.at(0,0,0),0,&WGPU_ResultBuffer.at(0,0,0),sizeof(WGPU_Result_Buffer));
+// WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Map_Range,0,&WGPU_ResultBuffer.at(0,0,0),sizeof(WGPU_Result_Buffer));
 std::cout << "GETTING BUFFER (Run)\n";
 std::cout << WGPU_Result_Buffer[0];
-
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
