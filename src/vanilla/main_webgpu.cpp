@@ -109,8 +109,8 @@ uint32_t uintInputBufferSize=262144*sizeof(int);
 int intInputBufferSize=262144*sizeof(int);
 
 const char * Entry="computeStuff";
-uint32_t invocationCount=BufferMapSize/sizeof(int);
-uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+// uint32_t invocationCount=BufferMapSize/sizeof(int);
+// uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 GLsizei width=256;
