@@ -147,9 +147,9 @@ WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false}
 std::vector<unsigned int>input(262144);
 std::vector<unsigned int>outputd(262144);
 
-WGpuBufferDescriptor bufferDescriptorI={262144,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={262144,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={262144,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={uintOutputBufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
@@ -160,8 +160,8 @@ int raND=0;
 
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
-unsigned int * WGPU_Result_Array=new unsigned int[1048576];
-unsigned int * WGPU_Input_Array=new unsigned int[1048576];
+unsigned int * WGPU_Result_Array=new unsigned int[262144];
+unsigned int * WGPU_Input_Array=new unsigned int[262144];
 uint32_t * locate=&outputd[0];
 int * tellLocate;
 
