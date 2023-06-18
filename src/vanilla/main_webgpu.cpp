@@ -174,6 +174,8 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
 // WGPU_ResultBuffer.at(0,0,0)=&outputd;
+         std::cout << "before read:" << std::endl;
+         std::cout << locate << std::endl;
  wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,262144);
          std::cout << locate << std::endl;
 
