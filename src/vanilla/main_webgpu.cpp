@@ -145,7 +145,7 @@ WGpuBufferDescriptor bufferDescriptorO={BufferMapSize,WGPU_BUFFER_USAGE_STORAGE|
 WGpuBufferDescriptor bufferDescriptorM={BufferMapSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<int>input(iBufferSize/sizeof(int));
-std::vector<int>outputd(bufferSize);
+std::vector<int>outputd(bufferSize/sizeof(int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -156,8 +156,8 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
 // int WGPU_Result_Buffer=new int[262144];
-double_int53_t * locate;
-locate=&outputd[0];
+double * locate;
+locate=&outputd;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
