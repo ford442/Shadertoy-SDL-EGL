@@ -103,9 +103,9 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-unsigned int uintOutputBufferSize=262144;
+unsigned int uintOutputBufferSize=262144*sizeof(unsigned int);
 int intOutputBufferSize=262144*sizeof(unsigned int);
-unsigned int uintInputBufferSize=262144;
+unsigned int uintInputBufferSize=262144*sizeof(unsigned int);
 int intInputBufferSize=262144*sizeof(unsigned int);
 
 const char * Entry="computeStuff";
@@ -144,7 +144,7 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<unsigned int>input(262144);
-std::vector<unsigned int>outputd(1048576/sizeof(unsigned int));
+std::vector<unsigned int>outputd(262144);
 WGpuBufferDescriptor bufferDescriptorI={sizeof(input.data()),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={sizeof(outputd.data()),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={sizeof(outputd.data()),WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -158,7 +158,7 @@ int raND=0;
 
 // int * WGPU_Result_Buffer[262144];
 // int holder[262144];
-// int WGPU_Result_Buffer=new int[262144];
+unsigned int * WGPU_Result_Buffer=new unsigned int[262144];
 uint32_t * locate=&outputd[0];
 int * tellLocate;
 
@@ -180,7 +180,7 @@ double_int53_t Range=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintO
     //      std::cout << "before read:" << std::endl;
     //      std::cout << locate << std::endl;
       
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,uintOutputBufferSize);
+ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,uintOutputBufferSize);
          std::cout << outputd[0] << std::endl;
 
       
@@ -199,7 +199,7 @@ wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
  //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
   //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
       
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,uintOutputBufferSize);
       //  UNMAP CRASH
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
