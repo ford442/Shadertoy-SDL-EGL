@@ -145,8 +145,8 @@ WGpuBufferDescriptor bufferDescriptorI={uintInputBufferSize,WGPU_BUFFER_USAGE_ST
 WGpuBufferDescriptor bufferDescriptorO={uintOutputBufferSize,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={uintOutputBufferSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-std::vector<int>input(intInputBufferSize/sizeof(int));
-std::vector<int>outputd(intOutputBufferSize/sizeof(int));
+std::vector<int>input(intInputBufferSize);
+std::vector<int>outputd(intOutputBufferSize);
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
