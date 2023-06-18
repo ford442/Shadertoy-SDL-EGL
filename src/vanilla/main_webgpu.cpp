@@ -346,7 +346,6 @@ WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
 }
-  
 
 EM_JS(void,js_main,(),{
 
@@ -357,7 +356,9 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
+setTimeout(function(){
 Module.ccall("runWebGPU");
+},1500);
 });
 }
 
