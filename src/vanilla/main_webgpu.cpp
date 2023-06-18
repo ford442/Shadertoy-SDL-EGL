@@ -171,7 +171,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,BufferMapSize);
 // WGPU_BufferMappedRange.at(0,0,0)=Range;
       //     std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
-// WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
+WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Buffer;
    wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Buffer,BufferMapSize);
 
   
@@ -186,7 +186,7 @@ WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_M
    wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),uint32_t(0),BufferMapSize);
  //  WGPU_BufferMappedRange.at(0,0,0)=WGPU_Map_Range;
   //            std::cout << WGPU_BufferMappedRange.at(0,0,0) << std::endl;
-   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
+   wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_ResultBuffer.at(0,0,0),BufferMapSize);
 
   
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -263,10 +263,9 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 commandBuffer=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_CommandBuffer.at(0,0,0)=commandBuffer;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
+WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-   WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
-
 return;
 }
 
