@@ -32,7 +32,7 @@
 #include <emscripten/html5.h>
 #include "../../lib/lib_webgpu.h"
 
-/*
+
 inline int rNd4(int randomMax);
 static void raf(WGpuDevice device);
 static void WGPU_Run();
@@ -48,4 +48,4 @@ void startWebGPU();
 void runWebGPU();
 
 }
-*/
+
