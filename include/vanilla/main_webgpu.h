@@ -27,11 +27,9 @@
 #include <cfloat>
 #include <math.h>
 #include <new>
-
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "../../lib/lib_webgpu.h"
-
 
 inline int rNd4(int randomMax);
 static void raf(WGpuDevice device);
