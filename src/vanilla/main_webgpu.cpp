@@ -103,7 +103,7 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 uint32_t BufferMapSize=262144*sizeof(int);
-int bufferSize=262144*sizeof(int);
+unsigned int bufferSize=262144*sizeof(unsigned int);
 uint32_t iBufferMapSize=262144*sizeof(int);
 uint32_t iBufferSize=262144*sizeof(int);
 
@@ -145,7 +145,7 @@ WGpuBufferDescriptor bufferDescriptorO={BufferMapSize,WGPU_BUFFER_USAGE_STORAGE|
 WGpuBufferDescriptor bufferDescriptorM={BufferMapSize,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<int>input(iBufferSize/sizeof(int));
-std::vector<int>outputd(bufferSize/sizeof(int));
+std::vector<int>outputd(bufferSize/sizeof(unsigned int));
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
