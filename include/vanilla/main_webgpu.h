@@ -34,14 +34,16 @@
 
 #include "../../lib/lib_webgpu.h"
 
-using mouse_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
-using shad_tensor=boost::numeric::ublas::tensor<unsigned int>;
-using prg_tensor=boost::numeric::ublas::tensor<unsigned int>;
-using sz_tensor=boost::numeric::ublas::tensor<int>;
-using f_tensor=boost::numeric::ublas::tensor<boost::atomic<float>>;
+inline EM_BOOL ms_l,clk_l;
+using mouse_tensor=boost::numeric::ublas::tensor<float>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using f_tensor=boost::numeric::ublas::tensor<float>;
 using d_tensor=boost::numeric::ublas::tensor<double>;
-using di_tensor=boost::numeric::ublas::tensor<double_int53_t>;
-using i_tensor=boost::numeric::ublas::tensor<int>;
+using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
@@ -58,25 +60,25 @@ using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
 using dd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
 using rao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
-using wa_tensor=boost::numeric::ublas::tensor<int>;
-using wq_tensor=boost::numeric::ublas::tensor<int>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
 using cb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
 using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
 using ce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
-using wd_tensor=boost::numeric::ublas::tensor<int>;
+using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
 using cpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
 using cp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
 using pl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
 using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
 using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
-
+/*
 inline int rNd4(int randomMax);
 static void raf(WGpuDevice device);
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
-
+*/
 void WGPU_Start();
 
 extern"C"{
