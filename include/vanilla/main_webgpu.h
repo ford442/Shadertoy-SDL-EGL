@@ -1,10 +1,9 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+#include "../../include/vanilla/avx.h"
 #include "../../include/vanilla/defs.h"
 #include "../../include/vanilla/boost_defs.h"
-
 #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
-
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
@@ -12,10 +11,8 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
-
 #include <algorithm>
 #include <vector>
-
 #include <new>
 #include <stdint.h>
 #include <random>
@@ -31,7 +28,6 @@
 #include <functional>
 #include <emscripten.h>
 #include <emscripten/html5.h>
-
 #include "../../lib/lib_webgpu.h"
 
 inline EM_BOOL ms_l,clk_l;
