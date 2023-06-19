@@ -108,8 +108,9 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-uint64_t uintOutputBufferSize=1048576*sizeof(uint8_t);
-uint64_t uintInputBufferSize=1048576*sizeof(uint8_t);
+uint32_t uintOutputBufferSize=1048576*sizeof(uint8_t);
+uint32_t uintInputBufferSize=1048576*sizeof(uint8_t);
+uint64_t WGPU_InputRangeSize=1048576*sizeof(uint8_t);
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
@@ -165,7 +166,7 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 uint8_t * WGPU_Result_Array=new uint8_t[uintOutputBufferSize];
 uint8_t * WGPU_Input_Array=new uint8_t[uintInputBufferSize];
-// unsigned int * locate=&WGPU_Result_Array;
+uint8_t * locate=&outputd[0];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -181,9 +182,11 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 std::cout << "COMPUTE map callb: " << std::endl;
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
-WGPU_BufferRange.at(0,0,0)=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
+WGPU_BufferRange.at(0,0,0)=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,WGPU_InputRangeSize);
  std::cout << "COMPUTE read range: " << std::endl;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
+ 
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,uintOutputBufferSize);
+ 
   outpute[0]=outputd[0];
 std::cout << "COMPUTE read map: " << std::endl;
 //  std::cout << outputd[0] << std::endl;
