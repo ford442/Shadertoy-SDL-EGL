@@ -305,7 +305,9 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
 setTimeout(function(){
+  for(i=0;i<20;i++){
 Module.ccall("runWebGPU");
+  }
 },2600);
 
 });
