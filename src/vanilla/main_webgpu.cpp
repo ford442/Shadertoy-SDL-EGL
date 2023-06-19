@@ -5,16 +5,8 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.x*4;"
-"let e:u32=global_id.y*4;"
+"let f:u32=global_id.x;"
 "outputBuffer[f]=42;"
-"outputBuffer[f+1]=42;"
-"outputBuffer[f+2]=42;"
-"outputBuffer[f+3]=42;"
-"outputBuffer[e]=42;"
-"outputBuffer[e+1]=42;"
-"outputBuffer[e+2]=42;"
-"outputBuffer[e+3]=42;"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
