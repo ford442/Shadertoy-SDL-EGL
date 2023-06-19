@@ -178,6 +178,17 @@ std::cout << "offset: " << std::endl;
 std::cout << offset << std::endl;
  std::cout << "size: " << std::endl;
 std::cout << size << std::endl;
+ 
+std::cout << WGPU_Result_Array[0] << std::endl;
+  std::cout << "\n" << std::endl;
+std::cout << WGPU_Result_Array[1] << std::endl;
+   std::cout << "\n" << std::endl;
+
+std::cout << WGPU_Result_Array[2] << std::endl;
+   std::cout << "\n" << std::endl;
+
+std::cout << WGPU_Result_Array[3] << std::endl;
+//   std::cout << tst[0] << std::endl;
  std::cout << "COMPUTE get range: " << std::endl;
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 //  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
