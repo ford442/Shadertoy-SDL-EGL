@@ -241,9 +241,9 @@ bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=OutputBufferBytes;
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
-bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
-WGPU_BindGroup.at(0,0,0)=bindGroup;
-  
+// bindGroup=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
+// WGPU_BindGroup.at(0,0,0)=bindGroup;
+  WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 // queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 // WGPU_Queue.at(0,0,0)=queue;
   WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
@@ -321,11 +321,9 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
 setTimeout(function(){
-Module.ccall("runWebGPU");
+// Module.ccall("runWebGPU");
 },600);
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},600);
+
 });
 }
 
