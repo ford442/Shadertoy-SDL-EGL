@@ -176,7 +176,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 std::cout << "COMPUTE map callb: " << std::endl;
 
 // NO ARRAY  / NO CRASH
-double point=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
+uint8_t point=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
  
    uint8_t * pt=&point;
  
