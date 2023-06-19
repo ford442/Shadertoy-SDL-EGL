@@ -336,11 +336,11 @@ Module.ccall("startWebGPU");
 
 setTimeout(function(){
 Module.ccall("runWebGPU");
-},15);
+},1500);
 
   setTimeout(function(){
 Module.ccall("runWebGPU2");
-},15);
+},1500);
 
 
 });
