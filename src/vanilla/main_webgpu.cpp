@@ -154,7 +154,7 @@ int raN=0;
 int raND=0;
 
 uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
-uint8_t * WGPU_Input_Array=new uint8_t[InputBufferBytes];
+uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -164,6 +164,7 @@ return randomNumber;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+  
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,WGPU_Result_Array,size);
