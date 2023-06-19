@@ -304,13 +304,13 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
-setTimeout(function(){
-for(i=0;i<20;i++){
+
 setTimeout(function(){
 Module.ccall("runWebGPU");
-},100);
-}
-},2600);
+},15);
+setTimeout(function(){
+Module.ccall("runWebGPU");
+},15);
 
 });
 }
