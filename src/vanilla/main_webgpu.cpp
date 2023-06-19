@@ -160,7 +160,7 @@ int raN=0;
 int raND=0;
 
 // int * WGPU_Result_Buffer[262144];
-uint8_t * WGPU_Result_Array=new uint8_t[OutputBufferBytes];
+uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint8_t * WGPU_Input_Array=new uint8_t[InputBufferBytes];
 
 inline int rNd4(int randomMax){
