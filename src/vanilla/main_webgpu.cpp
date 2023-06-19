@@ -246,8 +246,10 @@ WGPU_BindGroup.at(0,0,0)=bindGroup;
 queue=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_Queue.at(0,0,0)=queue;
 // encoder=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),NULL);
-encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
-WGPU_CommandEncoder.at(0,0,0)=encoder;
+  
+// encoder=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+// WGPU_CommandEncoder.at(0,0,0)=encoder;
+  WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 // computePass=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 // WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
