@@ -308,7 +308,7 @@ setTimeout(function(){
 for(i=0;i<20;i++){
 setTimeout(function(){
 Module.ccall("runWebGPU");
-},20);
+},100);
 }
 },2600);
 
