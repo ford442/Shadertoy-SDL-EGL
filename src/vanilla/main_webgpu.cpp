@@ -308,9 +308,7 @@ Module.ccall("startWebGPU");
 setTimeout(function(){
 Module.ccall("runWebGPU");
 },15);
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},15);
+
 
 });
 }
