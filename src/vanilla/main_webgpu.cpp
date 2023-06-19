@@ -109,8 +109,8 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-uint8_t uintOutputBufferSize=262144*sizeof(uint8_t);
-uint8_t uintInputBufferSize=262144*sizeof(uint8_t);
+uint32_t uintOutputBufferSize=262144*sizeof(uint8_t);
+uint32_t uintInputBufferSize=262144*sizeof(uint8_t);
 uint64_t WGPU_InputRangeSize=262144*sizeof(uint8_t);
 
 const char * Entry="computeStuff";
