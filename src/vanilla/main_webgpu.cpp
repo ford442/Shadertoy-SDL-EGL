@@ -143,7 +143,6 @@ WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-// double WGPU_Range_Pointer;
 std::vector<uint8_t>input(InputBufferBytes);
 std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
