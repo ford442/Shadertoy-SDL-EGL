@@ -179,7 +179,7 @@ std::cout << "COMPUTE map callb: " << std::endl;
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
  std::cout << "COMPUTE read range: " << std::endl;
 
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array[0],uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Array,uintOutputBufferSize);
  
 std::cout << "COMPUTE read map: " << std::endl;
 std::cout << WGPU_Result_Array[0] << std::endl;
