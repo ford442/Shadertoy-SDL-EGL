@@ -7,14 +7,14 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x*4;"
 "let e:u32=global_id.y*4;"
-"outputBuffer[f]=133;"
-"outputBuffer[f+1]=0;"
-"outputBuffer[f+2]=80;"
-"outputBuffer[f+3]=222;"
-"outputBuffer[e]=133;"
-"outputBuffer[e+1]=0;"
-"outputBuffer[e+2]=80;"
-"outputBuffer[e+3]=222;"
+"outputBuffer[f]=42;"
+"outputBuffer[f+1]=42;"
+"outputBuffer[f+2]=42;"
+"outputBuffer[f+3]=42;"
+"outputBuffer[e]=42;"
+"outputBuffer[e+1]=42;"
+"outputBuffer[e+2]=42;"
+"outputBuffer[e+3]=42;"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
@@ -179,8 +179,8 @@ std::cout << "COMPUTE map callb: " << std::endl;
 double point=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Array,uintOutputBufferSize);
 std::cout << "COMPUTE read map: " << std::endl;
-std::cout << &point << std::endl;
-std::cout << &WGPU_Result_Array[0] << std::endl;
+std::cout << &point[0] << std::endl;
+std::cout << WGPU_Result_Array[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
