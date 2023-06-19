@@ -73,7 +73,7 @@ static wd_tensor WGPU_Device=wd_tensor{1,1,2};
 static wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 static cb_tensor WGPU_CommandBuffer=cb_tensor{1,1,2};
 static wb_tensor WGPU_Buffers=wb_tensor{2,2,2};
-static ce_tensor WGPU_CommandEncoder=ce_tensor{1,1,2};
+static ce_tensor WGPU_CommandEncoder=ce_tensor{1,1,3};
 static cpe_tensor WGPU_ComputePassCommandEncoder=cpe_tensor{1,1,2};
 static cp_tensor WGPU_ComputePipeline=cp_tensor{1,1,1};
 static pl_tensor WGPU_ComputePipelineLayout=pl_tensor{1,1,1};
@@ -82,7 +82,7 @@ static bg_tensor WGPU_BindGroup=bg_tensor{1,1,1};
 static bgl_tensor WGPU_BindGroupLayout=bgl_tensor{1,1,1};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
-static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,2};
+static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,3};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,2};
 static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,2};
@@ -165,7 +165,6 @@ return randomNumber;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),size);
@@ -188,6 +187,14 @@ wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
+WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),size);
+std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+return;
+};
+
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_UserData.at(0,0,0)=userDataA;
@@ -198,6 +205,12 @@ return;
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
+return;
+};
+
+WGpuOnSubmittedWorkDoneCallback onComputeDoneRun2=[](WGpuQueue queue,void *userData){
+WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,2),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
 
