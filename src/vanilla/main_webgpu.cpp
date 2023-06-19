@@ -188,7 +188,7 @@ double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1
 //  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 
  std::cout << "COMPUTE read map: " << std::endl;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,&outpud,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,&outputd,uintOutputBufferSize);
  
  outpute[0]=outputd[0];
 // std::cout << WGPU_Result_Array[0] << std::endl;
