@@ -93,8 +93,8 @@ static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
-static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
-static iptr_tensor WGPU_InputBuffer=iptr_tensor{1,1,1};
+static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
+static uiptr_tensor WGPU_InputBuffer=uiptr_tensor{1,1,1};
 static i53_tensor WGPU_BufferRange=i53_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
