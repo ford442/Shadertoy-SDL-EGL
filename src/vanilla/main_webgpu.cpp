@@ -144,9 +144,9 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 // double WGPU_Range_Pointer;
-std::vector<uint8_t>input(InputBufferUnits);
-std::vector<uint8_t>outputd(OutputBufferUnits);
-std::vector<uint8_t>outpute(OutputBufferUnits);
+std::vector<uint8_t>input(InputBufferBytes);
+std::vector<uint8_t>outputd(OutputBufferBytes);
+std::vector<uint8_t>outpute(OutputBufferBytes);
 
 WGpuBufferDescriptor bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
@@ -179,7 +179,7 @@ std::cout << offset << std::endl;
  std::cout << "size: " << std::endl;
 std::cout << size << std::endl;
  std::cout << "COMPUTE get range: " << std::endl;
-double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,WGPU_InputRangeSize);
+double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,WGPU_InputRangeSize);
 //  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 
  std::cout << "COMPUTE read map: " << std::endl;
