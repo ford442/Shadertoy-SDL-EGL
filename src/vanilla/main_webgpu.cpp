@@ -212,8 +212,9 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
  std::cout << "COMPUTE workdone: " << std::endl;
 
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
+ 
 WGPU_UserData.at(0,0,0)=userDataA;
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,uintOutputBufferSize);
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,uintOutputBufferSize);
 return;
 };
 
