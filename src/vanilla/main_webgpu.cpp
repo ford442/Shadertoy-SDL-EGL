@@ -94,18 +94,13 @@ static void_tensor WGPU_UserData=void_tensor{1,1,1};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
-
 static i53_tensor WGPU_BufferRange=i53_tensor{1,1,1};
 
-unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
-
 uint32_t workgroupSize=64;
-
 uint32_t OutputBufferUnits=262144;
 uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
 uint32_t InputBufferBytes=262144*4;
-
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 
 const char * Entry="computeStuff";
@@ -141,8 +136,8 @@ WGpuBindGroupEntry bindGroupEntry[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
+
 std::vector<uint8_t>input(InputBufferBytes);
 std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
@@ -158,7 +153,6 @@ std::random_device randomizer;
 int raN=0;
 int raND=0;
 
-// int * WGPU_Result_Buffer[262144];
 uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint8_t * WGPU_Input_Array=new uint8_t[InputBufferBytes];
 
@@ -169,51 +163,17 @@ randomNumber=std::rand()%randomMax;  //division by zero?
 return randomNumber;
 }
 
-
-
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-std::cout << "COMPUTE map callback: " << std::endl;
-std::cout << "offset: " << std::endl;
-std::cout << offset << std::endl;
- std::cout << "size: " << std::endl;
-std::cout << size << std::endl;
- 
-std::cout << WGPU_Result_Array[0] << std::endl;
-  std::cout << "\n" << std::endl;
-std::cout << WGPU_Result_Array[1] << std::endl;
-   std::cout << "\n" << std::endl;
-
-std::cout << WGPU_Result_Array[2] << std::endl;
-   std::cout << "\n" << std::endl;
-
-std::cout << WGPU_Result_Array[3] << std::endl;
-//   std::cout << tst[0] << std::endl;
- std::cout << "COMPUTE get range: " << std::endl;
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 //  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
-
-std::cout << WGPU_Result_Array[0] << std::endl;
-  std::cout << "\n" << std::endl;
-std::cout << WGPU_Result_Array[1] << std::endl;
-   std::cout << "\n" << std::endl;
-
-std::cout << WGPU_Result_Array[2] << std::endl;
-   std::cout << "\n" << std::endl;
-
-std::cout << WGPU_Result_Array[3] << std::endl;
-//   std::cout << tst[0] << std::endl;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_Result_Array,size);
-  std::cout << "COMPUTE read map: " << std::endl;
-
 // outpute[0]=outputd[0];
 std::cout << WGPU_Result_Array[0] << std::endl;
-  std::cout << "\n" << std::endl;
+std::cout << "\n" << std::endl;
 std::cout << WGPU_Result_Array[1] << std::endl;
-   std::cout << "\n" << std::endl;
-
+std::cout << "\n" << std::endl;
 std::cout << WGPU_Result_Array[2] << std::endl;
-   std::cout << "\n" << std::endl;
-
+std::cout << "\n" << std::endl;
 std::cout << WGPU_Result_Array[3] << std::endl;
 //   std::cout << tst[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -221,24 +181,16 @@ wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
-
-
-
-
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-
-// GOT ARRAY  / CRASH
-wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,OutputBufferBytes);
+double WGPU_Range_Pointer wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_Result_Array,size);
+std::cout << WGPU_Result_Array[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
- std::cout << "COMPUTE workdone: " << std::endl;
-
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
- 
 WGPU_UserData.at(0,0,0)=userDataA;
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
@@ -301,8 +253,6 @@ WGPU_ComputePassCommandEncoder.at(0,0,0)=computePass;
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,InputBufferBytes);
- std::cout << "COMPUTE write buf size: " << InputBufferBytes << std::endl;
-
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
@@ -368,8 +318,12 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
 setTimeout(function(){
- // Module.ccall("runWebGPU");
-},1500);
+Module.ccall("runWebGPU");
+},600);
+});
+setTimeout(function(){
+Module.ccall("runWebGPU");
+},600);
 });
 }
 
