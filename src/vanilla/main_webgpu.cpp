@@ -230,8 +230,11 @@ bindGroupLayout=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_
 WGPU_BindGroupLayout.at(0,0,0)=bindGroupLayout;
 pipelineLayout=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipelineLayout.at(0,0,0)=pipelineLayout;
-computePipeline=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
-WGPU_ComputePipeline.at(0,0,0)=computePipeline;
+
+  
+// computePipeline=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
+// WGPU_ComputePipeline.at(0,0,0)=computePipeline;
+  WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
 bindGroupEntry[0].binding=0;
 bindGroupEntry[0].resource=WGPU_Buffers.at(1,1,1);
 bindGroupEntry[0].bufferBindOffset=0;
