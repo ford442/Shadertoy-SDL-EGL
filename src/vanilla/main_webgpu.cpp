@@ -166,7 +166,7 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 uint8_t * WGPU_Result_Array=new uint8_t[uintOutputBufferSize];
 uint8_t * WGPU_Input_Array=new uint8_t[uintInputBufferSize];
-uint8_t * locate=&outputd;
+uint8_t * locate=&WGPU_Result_Array;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
