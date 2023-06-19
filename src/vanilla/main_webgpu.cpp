@@ -102,6 +102,8 @@ static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
+static d_tensor WGPU_BufferRange=d_tensor{1,1,1};
+
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
@@ -144,7 +146,7 @@ WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-
+double WGPU_Range_Pointer;
 std::vector<uint8_t>input(uintInputBufferSize);
 std::vector<uint8_t>outputd(uintOutputBufferSize);
 std::vector<uint8_t>outpute(uintOutputBufferSize);
@@ -174,16 +176,19 @@ return randomNumber;
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 std::cout << "COMPUTE map callb: " << std::endl;
-
+WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 // NO ARRAY  / NO CRASH
-wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
+WGPU_BufferRange.at(0,0,0)=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
  std::cout << "COMPUTE read range: " << std::endl;
 
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&outputd,uintOutputBufferSize);
- 
+  outpute[0]=outputd[0];
 std::cout << "COMPUTE read map: " << std::endl;
-// std::cout << outputd[0] << std::endl;
- outpute[0]=outputd[0];
+ std::cout << outputd[0] << std::endl;
+ std::cout << outpute[0] << std::endl;
+ WGPU_BufferRange.at(0,0,0)
+  WGPU_BufferRange.at(0,0,0)[0]
+
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
  std::cout << outpute[0] << std::endl;
 
@@ -191,7 +196,7 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-
+WGPU_BufferRange
 // GOT ARRAY  / CRASH
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,uintOutputBufferSize);
