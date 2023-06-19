@@ -54,6 +54,7 @@ using pl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
 using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
 using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
+using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -102,7 +103,7 @@ static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
 static iptr_tensor WGPU_ResultBuffer=iptr_tensor{1,1,1};
 
-static d_tensor WGPU_BufferRange=d_tensor{1,1,1};
+static i53_tensor WGPU_BufferRange=i53_tensor{1,1,1};
 
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
@@ -179,11 +180,11 @@ return randomNumber;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 std::cout << "COMPUTE map callback: " << std::endl;
 double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,WGPU_InputRangeSize);
- WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
+//  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 
  std::cout << "COMPUTE read range: " << std::endl;
  
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,&outputd,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,&outputd,uintOutputBufferSize);
  
 //   outpute[0]=WGPU_Result_Array[0];
  std::cout << "COMPUTE read map " << std::endl;
