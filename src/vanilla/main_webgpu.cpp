@@ -182,6 +182,16 @@ std::cout << size << std::endl;
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 //  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 
+std::cout << &WGPU_Result_Array[0] << std::endl;
+  std::cout << "\n" << std::endl;
+std::cout << &WGPU_Result_Array[1] << std::endl;
+   std::cout << "\n" << std::endl;
+
+std::cout << &WGPU_Result_Array[2] << std::endl;
+   std::cout << "\n" << std::endl;
+
+std::cout << &WGPU_Result_Array[3] << std::endl;
+//   std::cout << tst[0] << std::endl;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_Result_Array,size);
   std::cout << "COMPUTE read map: " << std::endl;
 
