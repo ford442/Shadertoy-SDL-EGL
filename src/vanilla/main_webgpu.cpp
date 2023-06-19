@@ -189,7 +189,8 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,uintOutputBuffer
  
   outpute[0]=outputd[0];
 std::cout << "COMPUTE read map: " << std::endl;
-//  std::cout << outputd[0] << std::endl;
+ std::cout << &locate << std::endl;
+ std::cout << outputd[0] << std::endl;
  std::cout << outpute[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  std::cout << outpute[0] << std::endl;
