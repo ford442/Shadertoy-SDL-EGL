@@ -177,15 +177,14 @@ return randomNumber;
 
 
 
-
-
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 std::cout << "COMPUTE map callb: " << std::endl;
-WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
-WGPU_BufferRange.at(0,0,0)=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,WGPU_InputRangeSize);
+ WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,WGPU_InputRangeSize);
+ WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
+
  std::cout << "COMPUTE read range: " << std::endl;
  
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&locate,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,outputd,uintOutputBufferSize);
  
   outpute[0]=outputd[0];
 std::cout << "COMPUTE read map: " << std::endl;
