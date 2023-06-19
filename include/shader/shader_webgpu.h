@@ -830,7 +830,9 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 int tfrm=(uni_i.at(0,0)%4);
+   /* 
 if(uni_i.at(0,0)%45==0){
+
 raN=rNd4(1025);
 input[0]=raN;
   
@@ -863,6 +865,7 @@ glUniform1i(smp_chn[raN],raN);
 //  glUniform1i(smp_chn[1],1);
 //  glUniform1i(smp_chn[2],2);
 //  glUniform1i(smp_chn[3],3);
+*/
 glUniform1i(uni_frm,uni_i.at(0,0));
   glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
