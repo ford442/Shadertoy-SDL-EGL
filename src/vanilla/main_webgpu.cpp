@@ -166,7 +166,6 @@ int raND=0;
 // int * WGPU_Result_Buffer[262144];
 uint8_t * WGPU_Result_Array=new uint8_t[uintOutputBufferSize];
 uint8_t * WGPU_Input_Array=new uint8_t[uintInputBufferSize];
-uint8_t * locate=&WGPU_Result_Array;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -184,12 +183,11 @@ std::cout << "COMPUTE map callb: " << std::endl;
 
  std::cout << "COMPUTE read range: " << std::endl;
  
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,locate,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Array,uintOutputBufferSize);
  
-  outpute[0]=outputd[0];
+  outpute[0]=WGPU_Result_Array[0];
 std::cout << "COMPUTE read map: " << std::endl;
- std::cout << &locate << std::endl;
- std::cout << outputd[0] << std::endl;
+ std::cout << WGPU_Result_Array[0] << std::endl;
  std::cout << outpute[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  std::cout << outpute[0] << std::endl;
