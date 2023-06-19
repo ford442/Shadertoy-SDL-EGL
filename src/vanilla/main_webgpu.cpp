@@ -111,7 +111,7 @@ uint32_t workgroupSize=64;
 
 uint32_t uintOutputBufferSize=1048576*sizeof(uint8_t);
 uint32_t uintInputBufferSize=1048576*sizeof(uint8_t);
-uint64_t WGPU_InputRangeSize=1048576*sizeof(uint8_t);
+uint64_t WGPU_InputRangeSize=1048576;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
@@ -148,7 +148,7 @@ WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-double WGPU_Range_Pointer;
+// double WGPU_Range_Pointer;
 std::vector<uint8_t>input(uintInputBufferSize);
 std::vector<uint8_t>outputd(uintOutputBufferSize);
 std::vector<uint8_t>outpute(uintOutputBufferSize);
