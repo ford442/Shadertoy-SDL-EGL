@@ -176,15 +176,14 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 std::cout << "COMPUTE map callb: " << std::endl;
 
 // NO ARRAY  / NO CRASH
-uint8_t point=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
- 
-   uint8_t * pt=&point;
- 
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_Result_Array,uintOutputBufferSize);
+wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
+ std::cout << "COMPUTE read range: " << std::endl;
+
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,uintOutputBufferSize);
  
 std::cout << "COMPUTE read map: " << std::endl;
-std::cout << pt[0] << std::endl;
 std::cout << WGPU_Result_Array[0] << std::endl;
+ 
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
