@@ -109,8 +109,8 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 uint32_t workgroupSize=64;
 
-uint64_t uintOutputBufferSize=1048576*sizeof(uint8_t);
-uint64_t uintInputBufferSize=1048576*sizeof(uint8_t);
+uint32_t uintOutputBufferSize=1048576*sizeof(uint8_t);
+uint32_t uintInputBufferSize=1048576*sizeof(uint8_t);
 uint64_t WGPU_InputRangeSize=1048576*sizeof(uint8_t);
 
 const char * Entry="computeStuff";
@@ -188,12 +188,11 @@ double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1
 //  WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 
  std::cout << "COMPUTE read map: " << std::endl;
- uint8_t * tst[262144];
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,&tst,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,&outpud,uintOutputBufferSize);
  
-//   outpute[0]=WGPU_Result_Array[0];
+ outpute[0]=outputd[0];
 // std::cout << WGPU_Result_Array[0] << std::endl;
- std::cout << tst[0] << std::endl;
+//   std::cout << tst[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  std::cout << outpute[0] << std::endl;
 return;
