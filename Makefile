@@ -22,7 +22,7 @@ b3_vanilla_webgpu:
 	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt -sUSE_SDL=0 \
 	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sTEXTDECODER=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
          --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
