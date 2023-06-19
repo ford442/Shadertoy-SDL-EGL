@@ -196,7 +196,7 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-WGPU_BufferRange
+
 // GOT ARRAY  / CRASH
 wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,uintOutputBufferSize);
