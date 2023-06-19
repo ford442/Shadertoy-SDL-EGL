@@ -103,7 +103,7 @@ uint32_t workgroupSize=64;
 
 uint32_t uintOutputBufferSize=262144;
 uint32_t uintInputBufferSize=262144;
-uint64_t WGPU_InputRangeSize=262144;
+uint64_t WGPU_InputRangeSize=262144*4;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
