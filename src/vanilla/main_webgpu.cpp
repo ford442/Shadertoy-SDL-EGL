@@ -178,7 +178,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 double point=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,uintOutputBufferSize);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,uintOutputBufferSize);
 // outpute[0]=outputd[0];
-std::cout << point[0];
+std::cout << &point;
 std::cout << WGPU_Result_Array[0];
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
