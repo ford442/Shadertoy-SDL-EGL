@@ -182,7 +182,7 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double WGPU_Range_Pointer wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
+double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_Result_Array,size);
 std::cout << WGPU_Result_Array[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -320,7 +320,6 @@ Module.ccall("startWebGPU");
 setTimeout(function(){
 Module.ccall("runWebGPU");
 },600);
-});
 setTimeout(function(){
 Module.ccall("runWebGPU");
 },600);
