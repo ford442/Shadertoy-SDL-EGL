@@ -183,7 +183,7 @@ std::cout << "COMPUTE map callb: " << std::endl;
 
  std::cout << "COMPUTE read range: " << std::endl;
  
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,&WGPU_Result_Array,uintOutputBufferSize);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,&WGPU_Result_Array,uintOutputBufferSize);
  
   outpute[0]=WGPU_Result_Array[0];
 std::cout << "COMPUTE read map: " << std::endl;
