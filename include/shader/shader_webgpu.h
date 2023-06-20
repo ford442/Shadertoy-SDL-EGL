@@ -146,10 +146,10 @@ inline char cm_hdr_src[1900]=
 "#pragma optionNV(invariant none)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma optionNV(centroid all)\n"
-"#pragma STDGL(fastmath off)\n"
-"#pragma optionNV(fastmath off)\n"
-"#pragma STDGL(fastprecision off)\n"
-"#pragma optionNV(fastprecision off)\n"
+"#pragma STDGL(fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma STDGL(fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n"
 "#pragma STDGL(unroll all)\n"
 "#pragma optionNV(unroll all)\n"
 "#pragma STDGL(ifcvt none)\n"
@@ -221,10 +221,10 @@ EGLint att_lst[1500]={
 // EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_RED_SIZE,(EGLint)10,
