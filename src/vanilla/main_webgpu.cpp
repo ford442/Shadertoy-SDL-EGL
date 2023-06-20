@@ -4,7 +4,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 
-"@group(0)@binding(2)var<storage>textureA:texture_storage_2d<r32f,read_write>;"
+"@group(0)@binding(2)var<storage>textureA:texture_storage_2d<r32float,read_write>;"
 
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
