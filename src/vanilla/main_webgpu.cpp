@@ -166,7 +166,7 @@ WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_
 
 // 14 = R32FLOAT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,WGPU_TEXTURE_DIMENSION_2D,WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_USAGE_STORAGE_BINDING};
-WGpuTextureViewDescriptor textureViewDescriptorA={WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_VIEW_DIMENSION_2D};
+WGpuTextureViewDescriptor textureViewDescriptorA={WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_VIEW_DIMENSION_2D,WGPU_TEXTURE_ASPECT_ALL,0,0,1,1};
 
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
