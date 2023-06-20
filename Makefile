@@ -69,7 +69,7 @@ b3_shader_webgpu:
 	 --memory-init-file 0 -rtlib=compiler-rt -sSUPPORT_LONGJMP=wasm \
 	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 \
-	 -DNDEBUG -sEVAL_CTORS=2 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sWASM=1 \
+	 -DNDEBUG -sEVAL_CTORS=2 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sTEXTDECODER=2 -sWASM=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
