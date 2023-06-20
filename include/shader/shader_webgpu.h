@@ -955,17 +955,18 @@ void strt(){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
   
-const Vertex vrt[10]={{
-gpu.gFm5(),gpu.gFm5(),gpu.gF5()},
-{,gpu.gF0(),gpu.gF0(),gpu.gF5()},
+const Vertex vrt[10]={
+{gpu.gFm5(),gpu.gFm5(),gpu.gF5()},
+{gpu.gF0(),gpu.gF0(),gpu.gF5()},
 {gpu.gF5(),gpu.gF5(),gpu.gF()},
 {gpu.gF(),gpu.gF5(),gpu.gFm5()},
-{gpu.gF5(),gpu.gF(),gpu.gF0()}
-,{gpu.gF5(),gpu.gF5(),gpu.gF5()},
+{gpu.gF5(),gpu.gF(),gpu.gF0()},
+{gpu.gF5(),gpu.gF5(),gpu.gF5()},
 {gpu.gF(),gpu.gF(),gpu.gFm5()},
 {gpu.gFm5(),gpu.gF5(),gpu.gF0()},
 {gpu.gF0(),gpu.gFm5(),gpu.gF5()},
-{gpu.gF5(),gpu.gF0(),gpu.gF()}};
+{gpu.gF5(),gpu.gF0(),gpu.gF()}
+};
 
 // const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 // const Vertex vrt[8]={{gpu.gDm1(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gDm1(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()}};
