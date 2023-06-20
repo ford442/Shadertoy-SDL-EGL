@@ -291,7 +291,7 @@ static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
-static f_tensor Fi=f_tensor{2,2};
+static f_tensor Fi=f_tensor{3,3};
 static d_tensor Di=d_tensor{2,2};
 static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
@@ -565,7 +565,9 @@ return;
 
 const void setFloats(){
 Fi.at(0,0)=1.0f;
+Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
+Fi.at(2,0)=-0.5f;
 Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
@@ -577,8 +579,16 @@ static inline float gF(){
 return Fi.at(0,0);
 }
 
+static inline float gF5(){
+return Fi.at(1,2);
+}
+
 static inline float gFm1(){
 return Fi.at(0,1);
+}
+
+static inline float gFm5(){
+return Fi.at(2,0);
 }
 
 static inline float gF0(){
