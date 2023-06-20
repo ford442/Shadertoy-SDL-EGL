@@ -693,30 +693,31 @@ return;
 }
 
 static void u_iTime_set(double set){
-d_time.at(0,0)=set;
-sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
+// d_time.at(0,0)=set;
+// sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
+sse2.at(0,0)=wasm_f64x2_splat(set);
+// d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
 static void u_iSize_set(float set){
-sse.at(1,0)=wasm_f64x2_splat(set);
-t_size.at(0,0)=wasm_f64x2_extract_lane(sse.at(1,0),0);
-t_size.at(0,1)=wasm_f64x2_extract_lane(sse.at(1,0),0);
+sse.at(1,0)=wasm_f32x4_splat(set);
+t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
+t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
 static void i_iSize_set(int set){
-sse3.at(0,0)=wasm_i64x2_splat(set);
-i_size.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
-i_size.at(0,1)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+sse3.at(0,0)=wasm_i32x4_splat(set);
+i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 return;
 }
 
 static void u_iTimeDelta_set(double set){
 sse.at(0,1)=wasm_f64x2_splat(set);
-d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
+// d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
@@ -811,12 +812,16 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 else{
 clk_l=true;
 }
-glUniform1f(uni_tme,d_time.at(0,0));
+// glUniform1f(uni_tme,d_time.at(0,0));
+glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+  
 glUniform1f(uni_chn_tme[0],d_time.at(0,0));
 glUniform1f(uni_chn_tme[1],d_time.at(0,0));
 glUniform1f(uni_chn_tme[2],d_time.at(0,0));
 glUniform1f(uni_chn_tme[3],d_time.at(0,0));
-glUniform1f(uni_tme_dlt,d_time.at(1,1));
+// glUniform1f(uni_tme_dlt,d_time.at(1,1));
+glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0););
+  
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
