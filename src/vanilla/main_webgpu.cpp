@@ -55,7 +55,7 @@ using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
-=;
+
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
