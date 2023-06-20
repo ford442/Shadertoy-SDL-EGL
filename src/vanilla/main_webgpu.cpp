@@ -241,7 +241,8 @@ static void raf(WGpuDevice device){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
-WGPU_TextureView.at(0,0,0)=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
+// WGPU_TextureView.at(0,0,0)=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
+WGPU_TextureView.at(0,0,0)=wgpu_texture_create_view_simple(WGPU_Texture.at(0,0,0));
   
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
