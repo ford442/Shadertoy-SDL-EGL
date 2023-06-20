@@ -50,7 +50,7 @@ using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
 using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
 using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
-using tex_tensor=boost::numeric::ublas::tensor<GPUTexture>;
+using tex_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
@@ -119,7 +119,7 @@ void * userDataA;
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
-GPUTexture texA;
+WGpuTexture textureA;
   WGpuAdapter adapter=0;
   WGpuDevice device=0;
   WGpuQueue queue=0;
@@ -229,7 +229,7 @@ return;
 
 static void raf(WGpuDevice device){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
-WGPU_Texture.at(0,0,0)=createTexture(WGPU_TextureDescriptor.at(0,0,0));
+WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),WGPU_TextureDescriptor.at(0,0,0));
   
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
