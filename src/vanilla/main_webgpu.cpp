@@ -52,6 +52,7 @@ using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
 using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
 using tex_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
+using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -103,6 +104,7 @@ static uiptr_tensor WGPU_InputBuffer=uiptr_tensor{1,1,1};
 static i53_tensor WGPU_BufferRange=i53_tensor{1,1,1};
 static tex_tensor WGPU_Texture=tex_tensor{1,1,1};
 static td_tensor WGPU_TextureDescriptor=td_tensor{1,1,1};
+static stbl_tensor WGPU_StorageTextureBindingLayout=stbl_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
@@ -146,7 +148,8 @@ WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 
-WGpuBufferBindingLayout bufferBindingLayout4={2};
+// WGpuBufferBindingLayout bufferBindingLayout4={2};
+WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,14,2};
 
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 
@@ -247,7 +250,8 @@ WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
 WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
   
-WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
+// WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
+WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayout1;
   
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -261,8 +265,10 @@ bindGroupLayoutEntries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
 bindGroupLayoutEntries[2].binding=2;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=4;
-bindGroupLayoutEntries[2].layout.buffer=WGPU_BufferBindingLayout.at(0,0,3);
-  
+
+// bindGroupLayoutEntries[2].layout.buffer=WGPU_BufferBindingLayout.at(0,0,3);
+bindGroupLayoutEntries[2].layout.storageTexture=WGPU_BufferBindingLayout.at(0,0,3);
+  WGpuStorageTextureBindingLayout
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
@@ -278,8 +284,8 @@ bindGroupEntry[1].bufferBindSize=OutputBufferBytes;
 
 bindGroupEntry[2].binding=2;
 bindGroupEntry[2].resource=WGPU_Texture.at(0,0,0);
-bindGroupEntry[2].bufferBindOffset=0;
-bindGroupEntry[2].bufferBindSize=OutputBufferBytes;
+// bindGroupEntry[2].bufferBindOffset=0;
+// bindGroupEntry[2].bufferBindSize=OutputBufferBytes;
   
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
