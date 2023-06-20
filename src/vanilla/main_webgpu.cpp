@@ -152,7 +152,7 @@ WGpuBindGroupEntry bindGroupEntry[3]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-
+WGPU_TEXTURE_FORMAT * usedFormats={WGPU_TEXTURE_FORMAT_R32FLOAT};
 // WGpuBufferBindingLayout bufferBindingLayout4={2};
 WGpuStorageTextureBindingLayout WGpuStorageTextureBindingLayout1={1,WGPU_TEXTURE_FORMAT_R32FLOAT,2};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
@@ -166,7 +166,7 @@ WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STOR
 WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 
 // 14 = R32FLOAT
-WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,WGPU_TEXTURE_DIMENSION_2D,WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_USAGE_STORAGE_BINDING,1,WGPU_TEXTURE_FORMAT_R32FLOAT};
+WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,WGPU_TEXTURE_DIMENSION_2D,WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_USAGE_STORAGE_BINDING,1,&usedFormats};
 WGpuTextureViewDescriptor textureViewDescriptorA={WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_VIEW_DIMENSION_2D,WGPU_TEXTURE_ASPECT_ALL,0,1,0,1};
 
 char * cmp_bdy=wgl_cmp_src;
