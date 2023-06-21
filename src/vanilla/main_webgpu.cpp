@@ -7,9 +7,9 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
-
-"textureStore(textureA:texture_storage_2d<r32float,write>,vec2<i32>(0,0),vec4<f32>(0.42,0.42,0.42,0.42));"
-
+"let flo = vec4<f32>(0.42,0.42,0.42,0.42);"
+"let coord = vec2<f32>(0.0,0.0);"
+"textureStore(textureA:texture_storage_2d<r32float,write>,coord,flo);"
 "outputBuffer[f]=42;"
 "}";
 
