@@ -9,7 +9,7 @@ inline char wgl_cmp_src[2000]=
 "let f:u32=global_id.x;"
   "let coord:vec2<u32>=vec2<u32>(0,0);"
   // "let flo:vec4f<f32>=vec4f<f32>(0.42,0.0,0.0,1.0);"
-"var clr=textureLoad(textureA,coord,0);"
+"var clr=textureLoad(textureA:texture_storage_2d<f32>,coord,0);"
 // "let flt:u32=u32(clr:f32);"
    // "textureStore(textureA,coord,vec4f(0.42,0.0,0.0,1.0));"
 "outputBuffer[f]=42;"
