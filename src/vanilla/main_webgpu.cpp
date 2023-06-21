@@ -7,11 +7,11 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
-  "let coord:vec2<u32>=vec2<u32>(0,0);"
-  // "let flo:vec4f<f32>=vec4f<f32>(0.42,0.0,0.0,1.0);"
+"let coord:vec2<u32>=vec2<u32>(0,0);"
+"let flo:vec4f<f32>=vec4f<f32>(0.42,0.0,0.0,1.0);"
 // "let clr:f32=textureLoad(textureA:texture_storage_2d<f32>,coord,0).r;"
 // "let flt:u32=u32(clr:f32);"
-"textureStore(textureA,coord,vec4<f32>(0.42,0.0,0.0,1.0));"
+// "textureStore(textureA,coord,vec4<f32>(0.42,0.0,0.0,1.0));"
 "outputBuffer[f]=42;"
 "}";
 
