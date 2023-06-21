@@ -8,9 +8,9 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
   "let coord:vec2<u32>=vec2<u32>(0,0);"
-  "let flo:vec4<f32>=vec4<f32>(0.42,0.0,0.0,1.0);"
+  "let flo:vec4f<f32>=vec4f<f32>(0.42,0.0,0.0,1.0);"
 
-    // "textureStore(textureA,coord,flo);"
+    "textureStore(textureA,coord,flo);"
 "outputBuffer[f]=42;"
 "}";
 
