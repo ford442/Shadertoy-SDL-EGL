@@ -4,12 +4,12 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
-"@compute@workgroup_size(256,1,1)"
+"@compute@workgroup_size(256,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
-"let flo = vec4<f32>(0.42,0.42,0.42,0.42);"
-"let coord = vec2<f32>(0.0,0.0);"
-"textureStore(textureA:texture_storage_2d<r32float,write>,coord,flo);"
+"let flo = vec4(0.42,0.42,0.42,0.42);"
+"let coord = vec2(0.0,0.0);"
+"textureStore(textureA,coord,flo);"
 "outputBuffer[f]=42;"
 "}";
 
