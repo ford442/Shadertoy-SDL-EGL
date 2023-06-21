@@ -24,6 +24,7 @@ using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
+using fptr_tensor=boost::numeric::ublas::tensor<float *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
@@ -111,6 +112,7 @@ static td_tensor WGPU_TextureDescriptor=td_tensor{1,1,1};
 static stbl_tensor WGPU_StorageTextureBindingLayout=stbl_tensor{1,1,1};
 static tvd_tensor WGPU_TextureViewDescriptor=tvd_tensor{1,1,1};
 static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
+static cob_tensor WGPU_ColorBuffer=cob_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
@@ -180,6 +182,7 @@ int raND=0;
 
 uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
+float * WGPU_Color_Input_Array=new float[InputBufferUnits];
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -244,6 +247,7 @@ WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_Te
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
+WGPU_ColorBuffer.at(0,0,0)=WGPU_Color_Input_Array;
 WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
 WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
 WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
@@ -310,7 +314,7 @@ color_input[1]=0.0;
 color_input[2]=0.0;
 color_input[3]=1.0;
   
-  wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Texture.at(0,0,0),&color_input,1024,256,256,256,0);
+  wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Texture.at(0,0,0),&WGPU_ColorBuffer.at(0,0,0),1024,256,256,256,0);
   
   wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
