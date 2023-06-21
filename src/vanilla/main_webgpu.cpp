@@ -4,11 +4,11 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
-"@compute@workgroup_size(256,1,1)\n"
+"@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
-// "let coord: vec2<u32>=vec2<u32>(0,0);"
-"textureStore(textureA:texture_storage_2d<32float,write>,vec2<u32>(f,0),vec4<f32>(0.42,0.0,0.0,1.0));"
+"let coord:vec2<u32>=vec2<u32>(0,0);"
+// "textureStore(textureA:texture_storage_2d<32float,write>,vec2<u32>(f,0),vec4<f32>(0.42,0.0,0.0,1.0));"
 "outputBuffer[f]=42;"
 "}";
 
@@ -382,7 +382,7 @@ Module.ccall("runWebGPU");
 },1500);
 
   setTimeout(function(){
-Module.ccall("runWebGPU2");
+// Module.ccall("runWebGPU2");
 },3500);
 
 
