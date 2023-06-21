@@ -3,12 +3,13 @@
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
-
 "@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
-
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
+
+// "textureStore(textureA,vec2<i32>(0,0),vec4<f32>(0.42,0.42,0.42,1.0));"
+
 "outputBuffer[f]=42;"
 "}";
 
@@ -53,6 +54,8 @@ using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
 using tex_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
+using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
+using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -105,6 +108,8 @@ static i53_tensor WGPU_BufferRange=i53_tensor{1,1,1};
 static tex_tensor WGPU_Texture=tex_tensor{1,1,1};
 static td_tensor WGPU_TextureDescriptor=td_tensor{1,1,1};
 static stbl_tensor WGPU_StorageTextureBindingLayout=stbl_tensor{1,1,1};
+static tvd_tensor WGPU_TextureViewDescriptor=tvd_tensor{1,1,1};
+static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
@@ -162,6 +167,7 @@ WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STOR
 WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 // 14 = R32FLOAT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,WGPU_TEXTURE_DIMENSION_2D,14,WGPU_TEXTURE_USAGE_STORAGE_BINDING};
+WGpuTextureViewDescriptor textureViewDescriptorA={WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_VIEW_DIMENSION_2D};
 
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
@@ -176,7 +182,7 @@ uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
-randomNumber=std::rand()%randomMax;  //division by zero?
+randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
@@ -233,7 +239,8 @@ return;
 static void raf(WGpuDevice device){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
-  
+WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
+
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
 WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
