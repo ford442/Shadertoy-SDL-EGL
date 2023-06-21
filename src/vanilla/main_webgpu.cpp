@@ -258,6 +258,8 @@ WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
     WGPU_Input_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+    WGPU_Input_Buffer.bytesPerRow=4096;
+    WGPU_Input_Buffer.rowsPerImage=256;
 
 raN=rNd4(1024);
 input[0]=raN;
