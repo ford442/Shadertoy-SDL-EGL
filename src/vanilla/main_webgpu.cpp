@@ -112,7 +112,7 @@ static td_tensor WGPU_TextureDescriptor=td_tensor{1,1,1};
 static stbl_tensor WGPU_StorageTextureBindingLayout=stbl_tensor{1,1,1};
 static tvd_tensor WGPU_TextureViewDescriptor=tvd_tensor{1,1,1};
 static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
-static cob_tensor WGPU_ColorBuffer=cob_tensor{1,1,1};
+static fptr_tensor WGPU_ColorBuffer=fptr_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
