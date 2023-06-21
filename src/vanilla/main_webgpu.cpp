@@ -10,7 +10,7 @@ inline char wgl_cmp_src[2000]=
   "let coord:vec2<u32>=vec2<u32>(0,0);"
   "let flo:vec4<f32>=vec4<f32>(0.42,0.0,0.0,1.0);"
 
-     "textureStore(textureA,coord,flo);"
+    // "textureStore(textureA,coord,flo);"
 "outputBuffer[f]=42;"
 "}";
 
@@ -245,7 +245,8 @@ return;
 static void raf(WGpuDevice device){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
-WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
+WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
+  WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
 WGPU_ColorBuffer.at(0,0,0)=WGPU_Color_Input_Array;
