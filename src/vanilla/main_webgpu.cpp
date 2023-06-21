@@ -10,8 +10,8 @@ inline char wgl_cmp_src[2000]=
 "let coord:vec2<u32>=vec2<u32>(0.0,0.0);"
 "let flo:vec4<f32>=vec4<f32>(0.42,0.0,0.0,1.0);"
 "let u0:u32=0;"
-"let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
-"textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
+// "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
+// "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
 "outputBuffer[f]=42;"
 "}";
 
