@@ -7,8 +7,10 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.x;"
-"let coord:vec2<u32>=vec2<u32>(0,0);"
-"textureStore(textureA,coord,vec4<f32>(0.42,0.0,0.0,1.0));"
+  "let coord:vec2<u32>=vec2<u32>(0,0);"
+  "let flo:vec4<f32>=vec4<f32>(0.42,0.0,0.0,1.0);"
+
+     "textureStore(textureA,coord,flo);"
 "outputBuffer[f]=42;"
 "}";
 
@@ -79,7 +81,7 @@ static void_tensor bin=void_tensor{1,1};
 static wa_tensor WGPU_Adapter=wa_tensor{1,1,2};
 static wd_tensor WGPU_Device=wd_tensor{1,1,2};
 static wq_tensor WGPU_Queue=wq_tensor{1,1,2};
-static cb_tensor WGPU_CommandBuffer=cb_tensor{1,1,2};
+static cb_tensor WGPU_CommandBuffer=cb_tensor{1,1,3};
 static wb_tensor WGPU_Buffers=wb_tensor{2,2,2};
 static ce_tensor WGPU_CommandEncoder=ce_tensor{1,1,3};
 static cpe_tensor WGPU_ComputePassCommandEncoder=cpe_tensor{1,1,2};
@@ -322,8 +324,8 @@ wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,Inp
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
-wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+WGPU_CommandBuffer.at(0,0,1)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,1));
 return;
 }
 
@@ -338,8 +340,8 @@ wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,Inp
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,2));
-wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+WGPU_CommandBuffer.at(0,0,2)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,2));
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,2));
 return;
 }
 
@@ -375,15 +377,16 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
+
 Module.ccall("startWebGPU");
 
 setTimeout(function(){
 Module.ccall("runWebGPU");
 },1500);
 
-  setTimeout(function(){
-// Module.ccall("runWebGPU2");
-},3500);
+setTimeout(function(){
+Module.ccall("runWebGPU2");
+},2500);
 
 
 });
