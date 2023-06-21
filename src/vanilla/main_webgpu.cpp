@@ -183,6 +183,7 @@ int raND=0;
 uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
 float * WGPU_Color_Input_Array=new float[InputBufferUnits];
+WGpuImageCopyTexture WGPU_Input_Image={};
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -314,7 +315,7 @@ color_input[1]=0.0;
 color_input[2]=0.0;
 color_input[3]=1.0;
   
-  wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Texture.at(0,0,0),&WGPU_ColorBuffer.at(0,0,0),1024,256,256,256,0);
+  wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,256,256,256,0);
   
   wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
