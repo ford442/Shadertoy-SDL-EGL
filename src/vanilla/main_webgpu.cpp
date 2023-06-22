@@ -231,6 +231,18 @@ return;
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_UserData.at(0,0,0)=userDataA;
+
+double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
+  
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
