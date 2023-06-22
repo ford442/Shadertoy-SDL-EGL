@@ -170,7 +170,7 @@ std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
 WGpuBufferDescriptor bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,true};
+WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,true};
 // 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,WGPU_TEXTURE_DIMENSION_2D,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
@@ -361,6 +361,17 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Bu
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // wgpu_object_destroy(WGPU_Buffers.at(2,0,2));
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+  wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),0,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+std::cout << "Mapped range of result buffer:" << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << &WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << &WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
+
   // WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
