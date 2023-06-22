@@ -432,7 +432,7 @@ return;
 }
 
 static void ObtainedWebGpuAdapterStart2(WGpuAdapter result,void * userData){
-WGPU_Adapter.at(0,0,0)=result;
+WGPU_Adapter.at(0,0,1)=result;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
@@ -458,12 +458,12 @@ WGPU_ComputeDoneCallback.at(0,0,2)=onComputeDoneRun2;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
-// navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
-  WGPU_Adapter.at(0,0,0)=navigator_gpu_request_adapter_sync(&WGPU_RequestAdapterOptions.at(0,0,0));
-  WGPU_Adapter.at(0,0,1)=navigator_gpu_request_adapter_sync(&WGPU_RequestAdapterOptions.at(0,0,0));
-  wgpu_adapter_request_device_sync(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0));
-  wgpu_adapter_request_device_sync(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0));
-  raf();
+ navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+//  WGPU_Adapter.at(0,0,0)=navigator_gpu_request_adapter_sync(&WGPU_RequestAdapterOptions.at(0,0,0));
+//  WGPU_Adapter.at(0,0,1)=navigator_gpu_request_adapter_sync(&WGPU_RequestAdapterOptions.at(0,0,0));
+ // wgpu_adapter_request_device_sync(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0));
+//  wgpu_adapter_request_device_sync(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0));
+ // raf();
 return;
 }
 
@@ -559,6 +559,7 @@ WGPU_Run2();
 
 int main(void){
 js_main();
+  sleep(1);
   WGPU_Start();
 
 return 0;
