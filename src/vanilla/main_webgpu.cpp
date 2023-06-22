@@ -347,10 +347,10 @@ WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_Queue.at(0,0,1)=wgpu_device_get_queue(WGPU_Device.at(0,0,1));
-// WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
-// WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,1));
-WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),&WGPU_CommandEncoderDescriptor.at(0,0,0));
-WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,1),&WGPU_CommandEncoderDescriptor.at(0,0,0));
+WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,1));
+// WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),&WGPU_CommandEncoderDescriptor.at(0,0,0));
+// WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,1),&WGPU_CommandEncoderDescriptor.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
@@ -425,6 +425,7 @@ return;
 static void ObtainedWebGpuDeviceStart2(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,1)=result;
+  wgpu_is_device(WGPU_Device.at(0,0,1));
 raf();
 return;
 }
@@ -432,6 +433,7 @@ return;
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,0)=result;
+  wgpu_is_device(WGPU_Device.at(0,0,0));
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
 }
