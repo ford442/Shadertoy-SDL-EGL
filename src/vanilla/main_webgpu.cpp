@@ -281,8 +281,7 @@ WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
-double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
+
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 // WGPU_Output_Buffer.bytesPerRow=1024;
 // WGPU_Output_Buffer.rowsPerImage=0;
@@ -363,10 +362,11 @@ WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 // WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-     wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 
-// double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-// WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
+  wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+ wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,WGPU_InputRangeSize);
+double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "Mapped range of result buffer:" << std::endl;
 std::cout << "\n" << std::endl;
