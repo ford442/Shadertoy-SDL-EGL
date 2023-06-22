@@ -370,7 +370,7 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 
   
   wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-  wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+ // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 
  // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 
