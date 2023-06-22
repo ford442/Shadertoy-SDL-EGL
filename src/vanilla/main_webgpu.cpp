@@ -475,7 +475,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-Module.ccall("startWebGPU",{async:true});
+// Module.ccall("startWebGPU",{async:true});
 setTimeout(function(){
 // Module.ccall("runWebGPU");
 },1500);
@@ -559,5 +559,7 @@ WGPU_Run2();
 
 int main(void){
 js_main();
+  WGPU_Start();
+
 return 0;
 }
