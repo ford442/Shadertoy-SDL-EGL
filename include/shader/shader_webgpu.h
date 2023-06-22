@@ -109,7 +109,7 @@ inline char wgl_cmp_src[2000]=
 "}"
 "}";
 
-inline char cm_hdr_src[1900]=
+inline char cm_hdr_src[2000]=
 "#version 300 es\n"
 "#extension GL_ARB_gpu_shader4 : enable\n"
 "#extension GL_ARB_gpu_shader5 : enable\n"
