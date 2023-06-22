@@ -222,7 +222,7 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_R
   std::cout << "Output buffer:" << std::endl;
   std::cout << "\n" << std::endl;
   std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-// wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
