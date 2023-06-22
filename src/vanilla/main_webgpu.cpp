@@ -207,7 +207,6 @@ std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
-wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
@@ -370,6 +369,8 @@ return;
 }
 
 static void WGPU_Run(){
+  wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
+
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,1)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,1),&computePassDescriptor);
