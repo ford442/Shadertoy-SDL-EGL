@@ -243,9 +243,9 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),0,0,&WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "Mapped range of result buffer:" << std::endl;
 std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+std::cout << &WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
+std::cout << &WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
 std::cout << "\n" << std::endl;
