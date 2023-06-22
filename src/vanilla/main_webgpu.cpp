@@ -215,7 +215,7 @@ WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_M
 WGPU_BufferSize.at(0,0,0)=size;
   std::cout << "Output buffer size:" << std::endl;
   std::cout << "\n" << std::endl;
-  std::cout << WGPU_BufferSize.at(0,0,0) << std::endl;
+  std::cout << uint32_t(WGPU_BufferSize.at(0,0,0)) << std::endl;
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),size);
   std::cout << "Output buffer:" << std::endl;
