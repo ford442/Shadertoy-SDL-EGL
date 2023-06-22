@@ -59,7 +59,7 @@ using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
 using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
-using ced_tensor=boost::numeric::ublas::tensor<WGpuCommendEncoderDescriptor>;
+using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -165,7 +165,7 @@ WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
-WGpuCommendEncoderDescriptor commendEncoderDescriptor={};
+WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,34,2};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<float>color_input(InputBufferUnits);
@@ -281,7 +281,7 @@ return;
 
 static void raf(){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
-WGPU_CommandEncoderDescriptor.at(0,0,0)=commendEncoderDescriptor;
+WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 // WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 // WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
