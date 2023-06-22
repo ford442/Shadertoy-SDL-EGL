@@ -731,15 +731,15 @@ glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(gF0,gF0,gF0,gF);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
-glDisable(GL_BLEND);
-glDisable(GL_STENCIL_TEST);
-glDisable(GL_SCISSOR_TEST);
+// glDisable(GL_BLEND);
+// glDisable(GL_STENCIL_TEST);
+// glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
