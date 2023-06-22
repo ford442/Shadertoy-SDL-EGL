@@ -201,8 +201,7 @@ double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),size);
 //  wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-
-  std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
 std::cout << "\n" << std::endl;
@@ -214,21 +213,21 @@ return;
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 WGPU_BufferSize.at(0,0,0)=size;
-  std::cout << "Output buffer size:" << std::endl;
-  std::cout << "\n" << std::endl;
-  std::cout << uint32_t(WGPU_BufferSize.at(0,0,0)) << std::endl;
+std::cout << "Output buffer size:" << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << uint32_t(WGPU_BufferSize.at(0,0,0)) << std::endl;
 double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),size);
-  std::cout << "Output buffer:" << std::endl;
-  std::cout << "\n" << std::endl;
-  std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+std::cout << "Output buffer:" << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
 WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "End Buffer:" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "----------" << std::endl;
@@ -279,7 +278,7 @@ return;
 };
 
 static void raf(WGpuDevice device){
-  WGPU_UserData.at(0,0,0)=userDataA;
+WGPU_UserData.at(0,0,0)=userDataA;
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
@@ -297,7 +296,6 @@ WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
-
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 // WGPU_Output_Buffer.bytesPerRow=1024;
 // WGPU_Output_Buffer.rowsPerImage=0;
@@ -306,7 +304,7 @@ WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
 // WGPU_Mapped_Buffer.rowsPerImage=0;
 raN=rNd4(1024);
 input[0]=raN;
-  WGPU_InputBuffer.at(0,0,0)[0]=raN;
+WGPU_InputBuffer.at(0,0,0)[0]=raN;
 std::cout << "Random input int:" << std::endl;
 std::cout << raN << std::endl;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
@@ -328,15 +326,6 @@ bindGroupLayoutEntries[2].binding=2;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=4;
 bindGroupLayoutEntries[2].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
-  
-bindGroupLayoutEntriesB[0].binding=0;
-  // bindGroupLayoutEntriesB[0].visibility=NULL;
-bindGroupLayoutEntriesB[0].type=1;
-bindGroupLayoutEntriesB[0].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
-bindGroupLayoutEntriesB[1].binding=1;
-// bindGroupLayoutEntriesB[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
-bindGroupLayoutEntriesB[1].type=1;
-bindGroupLayoutEntriesB[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,4);
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
@@ -357,7 +346,6 @@ WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
-// WGPU_ComputePassCommandEncoder.at(0,0,1)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,2),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
@@ -374,27 +362,27 @@ WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
   // WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-
-
 return;
 }
 
 static void WGPU_Run(){
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,1)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+/*
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,1),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
-// wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,InputBufferBytes);
-// wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
-  wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-  wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-  //  wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
- WGPU_CommandBuffer.at(0,0,1)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
-  wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,1));
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,InputBufferBytes);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
+WGPU_CommandBuffer.at(0,0,1)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,1));
+*/
 double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
- wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "End Buffer:" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "----------" << std::endl;
@@ -439,9 +427,9 @@ WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
 WGPU_ComputeDoneCallback.at(0,0,2)=onComputeDoneRun2;
-  WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
-  WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
-  WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
+WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
+WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
+WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
 
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
@@ -455,18 +443,13 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-
 Module.ccall("startWebGPU");
-
 setTimeout(function(){
- Module.ccall("runWebGPU");
+Module.ccall("runWebGPU");
 },1500);
-
 setTimeout(function(){
 // Module.ccall("runWebGPU2");
 },2500);
-
-
 });
 }
 
