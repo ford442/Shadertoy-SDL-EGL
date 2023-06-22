@@ -354,7 +354,7 @@ color_input[3]=1.0;
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 
-wgpu_buffer_map_sync(WGPU_Buffers.at(1,0,1),mode1,0,WGPU_InputRangeSize);
+// wgpu_buffer_map_sync(WGPU_Buffers.at(1,0,1),mode1,0,WGPU_InputRangeSize);
 double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
