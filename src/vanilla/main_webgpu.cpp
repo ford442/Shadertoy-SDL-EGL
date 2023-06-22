@@ -238,6 +238,19 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 // WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
+wgpu_buffer_map_sync(WGPU_Buffers.at(1,0,1),mode1,0,WGPU_InputRangeSize);
+double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
+WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+std::cout << "Mapped range of result buffer:" << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
+std::cout << "\n" << std::endl;
+std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 
 
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
@@ -363,19 +376,6 @@ WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
   // WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-wgpu_buffer_map_sync(WGPU_Buffers.at(1,0,1),mode1,0,WGPU_InputRangeSize);
-double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
-WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-std::cout << "Mapped range of result buffer:" << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 
 
 return;
