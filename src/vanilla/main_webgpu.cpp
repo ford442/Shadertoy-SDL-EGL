@@ -6,13 +6,13 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-// "let f:u32=global_id.x;"
+"let f:u32=global_id.x;"
 // "let coord:vec2<u32>=vec2<u32>(0,0);"
 // "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
 // "let u0:u32=0;"
 // "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
 // "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
-"outputBuffer[0]=42;"
+"outputBuffer[f]=42;"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
@@ -336,9 +336,10 @@ color_input[2]=0.0;
 color_input[3]=1.0;
  // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,256,256,256,0);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
-    wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
+      wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,0);
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
