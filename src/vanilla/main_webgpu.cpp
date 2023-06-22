@@ -295,11 +295,11 @@ WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-// WGPU_Output_Buffer.bytesPerRow=1024;
-// WGPU_Output_Buffer.rowsPerImage=0;
+WGPU_Output_Buffer.bytesPerRow=1024;
+WGPU_Output_Buffer.rowsPerImage=0;
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
-// WGPU_Mapped_Buffer.bytesPerRow=1024;
-// WGPU_Mapped_Buffer.rowsPerImage=0;
+WGPU_Mapped_Buffer.bytesPerRow=1024;
+WGPU_Mapped_Buffer.rowsPerImage=0;
 raN=rNd4(1024);
 input[0]=raN;
   WGPU_InputBuffer.at(0,0,0)[0]=raN;
@@ -366,7 +366,7 @@ wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
    wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
- wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,1,1,1);
+// wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,1,1,1);
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // wgpu_object_destroy(WGPU_Buffers.at(2,0,2));
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
