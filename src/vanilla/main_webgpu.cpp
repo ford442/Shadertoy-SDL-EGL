@@ -90,10 +90,10 @@ static cpe_tensor WGPU_ComputePassCommandEncoder=cpe_tensor{1,1,3};
 static cp_tensor WGPU_ComputePipeline=cp_tensor{1,1,1};
 static pl_tensor WGPU_ComputePipelineLayout=pl_tensor{1,1,1};
 static cm_tensor WGPU_ComputeModule=cm_tensor{1,1,1};
-static bg_tensor WGPU_BindGroup=bg_tensor{1,1,1};
-static bgl_tensor WGPU_BindGroupLayout=bgl_tensor{1,1,1};
-static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,1};
-static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,1};
+static bg_tensor WGPU_BindGroup=bg_tensor{1,1,2};
+static bgl_tensor WGPU_BindGroupLayout=bgl_tensor{1,1,2};
+static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,2};
+static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,2};
 static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,3};
 static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
 static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,2};
@@ -135,6 +135,7 @@ WGpuTexture textureA;
   WGpuDevice device=0;
   WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
+WGpuBindGroupLayout bindGroupLayoutB=0;
 WGpuComputePipeline computePipeline=0;
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
@@ -145,6 +146,7 @@ WGpuCommandBuffer commandBuffer=0;
 WGpuCommandEncoder encoder=0;
 WGpuComputePassEncoder computePass=0;
 WGpuBindGroup bindGroup=0;
+WGpuBindGroup bindGroupB=0;
 WGpuPipelineLayout pipelineLayout=0;
 WGpuQuerySet querySet=0;
 WGpuComputePassDescriptor computePassDescriptor={};
@@ -152,21 +154,19 @@ WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[3]={};
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[2]={};
 WGpuBindGroupEntry bindGroupEntry[3]={};
+WGpuBindGroupEntry bindGroupEntryB[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
-
-// WGpuBufferBindingLayout bufferBindingLayout4={2};
+WGpuBufferBindingLayout bufferBindingLayout4={2};
 WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,34,2};
-
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-
 std::vector<float>color_input(InputBufferUnits);
 std::vector<uint8_t>input(InputBufferBytes);
 std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
-
 WGpuBufferDescriptor bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -174,14 +174,12 @@ WGpuBufferDescriptor bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_
 // 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,WGPU_TEXTURE_DIMENSION_2D,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
 WGpuTextureViewDescriptor textureViewDescriptorA={WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_VIEW_DIMENSION_2D};
-
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
-
 uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
 uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
@@ -221,8 +219,8 @@ return;
 };
 
 WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),size);
+double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,size);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),size);
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
@@ -249,13 +247,13 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
-// wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun2=[](WGpuQueue queue,void *userData){
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
-// wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,2),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
+wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,2),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
 
@@ -293,6 +291,7 @@ WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(WGPU_Device.at(0,0
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
 WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
+WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
 WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayout1;
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -306,7 +305,18 @@ bindGroupLayoutEntries[2].binding=2;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=4;
 bindGroupLayoutEntries[2].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
+  
+bindGroupLayoutEntriesB[0].binding=0;
+  // bindGroupLayoutEntriesB[0].visibility=NULL;
+bindGroupLayoutEntriesB[0].type=1;
+bindGroupLayoutEntriesB[0].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
+bindGroupLayoutEntriesB[1].binding=1;
+// bindGroupLayoutEntriesB[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntriesB[1].type=1;
+bindGroupLayoutEntriesB[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,4);
+  
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
+  
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
