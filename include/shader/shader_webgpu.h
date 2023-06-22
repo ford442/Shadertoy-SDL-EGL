@@ -156,21 +156,22 @@ inline char cm_hdr_src[1900]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
-"precision highp float;\n";
-
-inline char vrt_bdy_src[100]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
-
-inline char frg_hdr_src[1000]=
+"precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;"
+"precision highp sampler2DArrayShadow;";
+  
+inline char vrt_bdy_src[100]=
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+
+inline char frg_hdr_src[1000]=
+
 "layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
@@ -213,7 +214,7 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint att_lst[1500]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -223,7 +224,7 @@ EGLint att_lst[1500]={
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
 // EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
@@ -234,10 +235,10 @@ EGL_ALPHA_SIZE,(EGLint)16,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)16,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,1,
+EGL_SAMPLE_BUFFERS,128,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,16,
+EGL_SAMPLES,32,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -884,6 +885,8 @@ glUniform1i(smp_chn[raN],raN);
 //  glUniform1i(smp_chn[3],3);
 */
 glUniform1i(uni_frm,uni_i.at(0,0));
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
   glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
@@ -998,7 +1001,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -1007,8 +1010,8 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-//eglBindAPI(EGL_OPENGL_API);
-eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
@@ -1101,7 +1104,7 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 glDepthFunc(GL_LESS);
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 // glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
@@ -1111,7 +1114,9 @@ glDisable(GL_BLEND);
 glCullFace(GL_FRONT);
 glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+  glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
