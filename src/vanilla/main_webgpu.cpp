@@ -238,7 +238,7 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 // WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
-WGPU_UserData.at(0,0,0)=userDataA;
+
 
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
@@ -264,6 +264,7 @@ return;
 };
 
 static void raf(WGpuDevice device){
+  WGPU_UserData.at(0,0,0)=userDataA;
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
