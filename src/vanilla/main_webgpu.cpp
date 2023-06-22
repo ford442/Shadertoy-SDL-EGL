@@ -165,7 +165,6 @@ WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
-WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,34,2};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<float>color_input(InputBufferUnits);
