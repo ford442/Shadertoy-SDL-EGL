@@ -150,8 +150,8 @@ inline char cm_hdr_src[1900]=
 "#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
 "#pragma optionNV(fastprecision on)\n"
-"#pragma STDGL(unroll all)\n"
-"#pragma optionNV(unroll all)\n"
+"#pragma STDGL(unroll none)\n"
+"#pragma optionNV(unroll none)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
@@ -180,25 +180,24 @@ inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-/*
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=16;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
 "void mainImage0\n\0";
-*/
+
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -228,13 +227,13 @@ EGLint att_lst[1500]={
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,(EGLint)10,
-EGL_GREEN_SIZE,(EGLint)10,
-EGL_BLUE_SIZE,(EGLint)10,
-EGL_ALPHA_SIZE,(EGLint)10,
+EGL_RED_SIZE,(EGLint)16,
+EGL_GREEN_SIZE,(EGLint)16,
+EGL_BLUE_SIZE,(EGLint)16,
+EGL_ALPHA_SIZE,(EGLint)16,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)10,
-EGL_BUFFER_SIZE,(EGLint)32,
+EGL_STENCIL_SIZE,(EGLint)16,
+EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,1,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
@@ -1008,7 +1007,8 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglBindAPI(EGL_OPENGL_API);
+//eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglInitialize(display,&major,&minor);
