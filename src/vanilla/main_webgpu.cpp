@@ -59,6 +59,7 @@ using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
 using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
+using ced_tensor=boost::numeric::ublas::tensor<WGpuCommendEncoderDescriptor>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -115,6 +116,7 @@ static stbl_tensor WGPU_StorageTextureBindingLayout=stbl_tensor{1,1,1};
 static tvd_tensor WGPU_TextureViewDescriptor=tvd_tensor{1,1,1};
 static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
 static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
+static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
@@ -163,6 +165,7 @@ WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
+WGpuCommendEncoderDescriptor commendEncoderDescriptor={};
 WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,34,2};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<float>color_input(InputBufferUnits);
@@ -278,6 +281,7 @@ return;
 
 static void raf(){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
+WGPU_CommandEncoderDescriptor.at(0,0,0)=commendEncoderDescriptor;
 // WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 // WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
@@ -344,8 +348,10 @@ WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_Queue.at(0,0,1)=wgpu_device_get_queue(WGPU_Device.at(0,0,1));
-WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
-WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,1));
+// WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
+// WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,1));
+WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,0),&WGPU_CommandEncoderDescriptor.at(0,0,0));
+WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder(WGPU_Device.at(0,0,1),&WGPU_CommandEncoderDescriptor.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
