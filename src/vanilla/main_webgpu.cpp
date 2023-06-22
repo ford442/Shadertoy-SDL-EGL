@@ -95,7 +95,7 @@ static bgl_tensor WGPU_BindGroupLayout=bgl_tensor{1,1,2};
 static bgle_tensor WGPU_BindGroupLayoutEntries=bgle_tensor{1,1,2};
 static bge_tensor WGPU_BindGroupEntries=bge_tensor{1,1,2};
 static bmc_tensor WGPU_MapCallback=bmc_tensor{1,1,3};
-static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,2};
+static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,3};
 static oac_tensor WGPU_ObtainedAdapterCallback=oac_tensor{1,1,2};
 static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,4};
@@ -227,7 +227,7 @@ return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
-WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
+// WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_UserData.at(0,0,0)=userDataA;
 
 double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
@@ -246,14 +246,13 @@ return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
-WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
+// WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun2=[](WGpuQueue queue,void *userData){
-WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
-  
+// WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
   double WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,WGPU_BufferSize.at(0,0,0));
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),WGPU_BufferSize.at(0,0,0));
 std::cout << "End Buffer:" << std::endl;
@@ -320,9 +319,7 @@ bindGroupLayoutEntriesB[1].binding=1;
 // bindGroupLayoutEntriesB[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntriesB[1].type=1;
 bindGroupLayoutEntriesB[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,4);
-  
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
-  
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(WGPU_Device.at(0,0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
@@ -363,7 +360,7 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_object_destroy(WGPU_Buffers.at(2,0,2));
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 
-WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
+// WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 return;
@@ -391,7 +388,7 @@ WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Dev
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,2),&computePassDescriptor);
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,1),0);
+wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,2),0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,InputBufferBytes);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
@@ -420,7 +417,13 @@ return;
 void WGPU_Start(){
 WGPU_RequestAdapterOptions.at(0,0,0)=options;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
+WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_ComputeDoneCallback.at(0,0,1)=onComputeDoneRun;
+WGPU_ComputeDoneCallback.at(0,0,2)=onComputeDoneRun2;
+  WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
+  WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
+  WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
+
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
 }
