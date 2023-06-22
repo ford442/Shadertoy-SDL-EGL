@@ -84,7 +84,7 @@ static wa_tensor WGPU_Adapter=wa_tensor{1,1,2};
 static wd_tensor WGPU_Device=wd_tensor{1,1,2};
 static wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 static cb_tensor WGPU_CommandBuffer=cb_tensor{1,1,3};
-static wb_tensor WGPU_Buffers=wb_tensor{2,2,2};
+static wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
 static ce_tensor WGPU_CommandEncoder=ce_tensor{1,1,3};
 static cpe_tensor WGPU_ComputePassCommandEncoder=cpe_tensor{1,1,2};
 static cp_tensor WGPU_ComputePipeline=cp_tensor{1,1,1};
@@ -185,7 +185,9 @@ uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
 uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
 WGpuImageCopyTexture WGPU_Input_Image={};
+WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
+WGpuImageCopyBuffer WGPU_Output_Buffer={};
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -246,8 +248,10 @@ return;
 static void raf(WGpuDevice device){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
+WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
-  WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
+WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
+WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
 WGPU_ColorBuffer.at(0,0,0)=WGPU_Color_Input_Array;
@@ -257,10 +261,9 @@ WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
 WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
-    WGPU_Input_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-    WGPU_Input_Buffer.bytesPerRow=4096;
-    WGPU_Input_Buffer.rowsPerImage=256;
-
+WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+WGPU_Output_Buffer.bytesPerRow=4096;
+WGPU_Output_Buffer.rowsPerImage=256;
 raN=rNd4(1024);
 input[0]=raN;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
@@ -268,10 +271,7 @@ WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(WGPU_Device.at(0,0
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
 WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
-  
-// WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
 WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayout1;
-  
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[0].type=1;
@@ -280,14 +280,10 @@ bindGroupLayoutEntries[1].binding=1;
 bindGroupLayoutEntries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[1].type=1;
 bindGroupLayoutEntries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
-  
 bindGroupLayoutEntries[2].binding=2;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=4;
-
-// bindGroupLayoutEntries[2].layout.buffer=WGPU_BufferBindingLayout.at(0,0,3);
 bindGroupLayoutEntries[2].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
-  
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(WGPU_Device.at(0,0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(WGPU_Device.at(0,0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
@@ -300,12 +296,8 @@ bindGroupEntry[1].binding=1;
 bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=OutputBufferBytes;
-
 bindGroupEntry[2].binding=2;
 bindGroupEntry[2].resource=WGPU_Texture.at(0,0,0);
-// bindGroupEntry[2].bufferBindOffset=0;
-// bindGroupEntry[2].bufferBindSize=OutputBufferBytes;
-  
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(WGPU_Device.at(0,0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
@@ -314,20 +306,16 @@ WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
-
-  // void wgpu_queue_write_texture(WGpuQueue queue, const WGpuImageCopyTexture *destination NOTNULL, const void *data NOTNULL, uint32_t bytesPerBlockRow, uint32_t blockRowsPerImage, uint32_t writeWidth, uint32_t writeHeight _WGPU_DEFAULT_VALUE(1), uint32_t writeDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 color_input[0]=0.42;
 color_input[1]=0.0;
 color_input[2]=0.0;
 color_input[3]=1.0;
-  
  // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,256,256,256,0);
-  wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),256,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
-  wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Input_Buffer,&WGPU_Input_Image,256,256,0);
-
-  WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,0);
+WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
