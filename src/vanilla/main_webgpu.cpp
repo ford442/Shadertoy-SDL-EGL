@@ -267,6 +267,7 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[4] << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[5] << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[6] << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[7] << std::endl;
+  sleep(1);
   WGPU_BUFFER_MAP_STATE state=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
  if(state=='mapped'){
 wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -284,6 +285,8 @@ std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
+    sleep(1);
+
     WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
  if(stateb=='mapped'){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
