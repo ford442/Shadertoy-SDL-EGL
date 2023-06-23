@@ -4,15 +4,16 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read_write>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
-"@compute@workgroup_size(256,1,1)"
+"@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"var f:u32=global_id.x;"
+"let f:u32=global_id.z;"
+"let g:u32=global_id.x;"
 // "let coord:vec2<u32>=vec2<u32>(0,0);"
 // "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
 // "let u0:u32=0;"
 // "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
 // "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
-"outputBuffer[f*4]=42;"
+"outputBuffer[f*g]=42;"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
