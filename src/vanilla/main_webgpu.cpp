@@ -6,7 +6,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(256,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.y;"
+"var f:u32=global_id.x;"
 // "let coord:vec2<u32>=vec2<u32>(0,0);"
 // "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
 // "let u0:u32=0;"
