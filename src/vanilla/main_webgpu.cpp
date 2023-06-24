@@ -504,7 +504,10 @@ Module.ccall("runWebGPU");
 },1500);
 setTimeout(function(){
 Module.ccall("runWebGPU");
-},2500);
+},500);
+setTimeout(function(){
+Module.ccall("runWebGPU");
+},500);
 });
 }
 
