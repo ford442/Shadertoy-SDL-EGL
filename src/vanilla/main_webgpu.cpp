@@ -273,8 +273,9 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
 std::cout << "On Run 1" << std::endl;
+  
 double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
+WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), 0 ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "Mapped range of result buffer:" << std::endl;
 std::cout << "\n" << std::endl;
@@ -409,9 +410,9 @@ WGPU_InputBuffer.at(0,0,0)[0]=raN;
 std::cout << "Random input int:" << std::endl;
 std::cout << raN << std::endl;
 WGPU_BUFFER_MAP_STATE statef=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(statef==1){
+// if(statef==1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-}  
+// }  
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
