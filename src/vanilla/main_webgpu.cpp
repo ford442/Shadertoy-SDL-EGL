@@ -494,7 +494,7 @@ document.getElementById('di').click();
 Module.ccall("startWebGPU",{async:true});
 
 // setTimeout(function(){
-Module.ccall("runWebGPU");
+// Module.ccall("runWebGPU");
 // },500);
 
 });
