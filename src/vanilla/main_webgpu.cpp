@@ -253,7 +253,6 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
   std::cout << "userData:" << std::endl;
 std::cout << userData << std::endl;
 std::cout << &userData << std::endl;
-WGPU_BUFFER_MAP_STATE statea=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
   std::cout << "mappedState:" << std::endl;
 std::cout << statea << std::endl;
   wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
@@ -389,12 +388,13 @@ wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
     WGPU_BUFFER_MAP_STATE statec=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 
-if(statec=='mapped'){
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-}
+//if(statec=='mapped'){
+//wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+//}
 
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+WGPU_BUFFER_MAP_STATE statea=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 
   return;
 }
