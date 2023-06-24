@@ -210,42 +210,14 @@ return randomNumber;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
-WGPU_BufferRange.at(0,0,0)=WGPU_Range_Pointer;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),0,0,WGPU_ResultBuffer.at(0,0,0),size);
-std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[1] << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
-wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
-// wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 return;
 };
 
 WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-WGPU_BufferSize.at(0,0,0)=size;
-std::cout << "Output buffer size:" << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << uint32_t(WGPU_BufferSize.at(0,0,0)) << std::endl;
-double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,size);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),size);
-std::cout << "Output buffer:" << std::endl;
-std::cout << "\n" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 return;
 };
 
 WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-std::cout << "End Buffer:" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-std::cout << "----------" << std::endl;
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 return;
 };
 
@@ -276,7 +248,7 @@ std::cout << "On Run 1" << std::endl;
   
 // double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 // WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), 0 ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),  WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "Mapped range of result buffer:" << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
@@ -295,13 +267,6 @@ return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun2=[](WGpuQueue queue,void *userData){
-double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-std::cout << "End Buffer:" << std::endl;
-std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-std::cout << "----------" << std::endl;
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-// wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,2),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
 
@@ -324,9 +289,7 @@ WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
-
-  wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-  
+wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 WGPU_Output_Buffer.bytesPerRow=4096;
 WGPU_Output_Buffer.rowsPerImage=256;
@@ -398,7 +361,7 @@ if(statec==1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
-wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 return;
 }
@@ -409,10 +372,7 @@ input[0]=raN;
 WGPU_InputBuffer.at(0,0,0)[0]=raN;
 std::cout << "Random input int:" << std::endl;
 std::cout << raN << std::endl;
-WGPU_BUFFER_MAP_STATE statef=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-// if(statef==1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-// }  
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&computePassDescriptor);
@@ -426,35 +386,19 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
-WGPU_BUFFER_MAP_STATE statee=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(statee==1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-}
-wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 return;
 }
 
 static void WGPU_Run2(){
-WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
-WGPU_CommandEncoder.at(0,0,2)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
-WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,2),&computePassDescriptor);
-wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
-wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,2),0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&input,InputBufferBytes);
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),64,4,1);
-wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-// wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,2),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
-WGPU_CommandBuffer.at(0,0,2)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,2));
-wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,2));
 return;
 }
 
 static void ObtainedWebGpuDeviceStart2(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,1)=result;
- //  wgpu_is_device(WGPU_Device.at(0,0,1));
 raf();
 return;
 }
@@ -462,7 +406,6 @@ return;
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 device=result;
 WGPU_Device.at(0,0,0)=result;
- //  wgpu_is_device(WGPU_Device.at(0,0,0));
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
 }
@@ -475,8 +418,6 @@ wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
-WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
-WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceStart2;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
 }
@@ -484,6 +425,8 @@ return;
 void WGPU_Start(){
 WGPU_UserData.at(0,0,0)=userDataA;
 WGPU_UserData.at(0,0,1)=userDataB;
+WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
+WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceStart2;
 WGPU_DeviceDescriptor.at(0,0,0)=deviceDescriptor;
 WGPU_RequestAdapterOptions.at(0,0,0)=options;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
@@ -495,11 +438,6 @@ WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
  navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
-//  WGPU_Adapter.at(0,0,0)=navigator_gpu_request_adapter_sync(&WGPU_RequestAdapterOptions.at(0,0,0));
-//  WGPU_Adapter.at(0,0,1)=navigator_gpu_request_adapter_sync(&WGPU_RequestAdapterOptions.at(0,0,0));
- // wgpu_adapter_request_device_sync(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0));
-//  wgpu_adapter_request_device_sync(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0));
- // raf();
 return;
 }
 
@@ -598,6 +536,6 @@ WGPU_Run2();
 
 int main(void){
 js_main();
- // WGPU_Start();
+WGPU_Start();
 return 0;
 }
