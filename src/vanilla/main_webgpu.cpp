@@ -265,10 +265,10 @@ std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(stateb=='mapped'){
-// wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
  }
 //   wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
+// wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
 
