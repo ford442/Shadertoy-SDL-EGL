@@ -492,21 +492,11 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU",{async:true});
-setTimeout(function(){
+
+// setTimeout(function(){
 Module.ccall("runWebGPU");
-},1500);
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},500);
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},500);
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},500);
-setTimeout(function(){
-Module.ccall("runWebGPU");
-},500);
+// },500);
+
 });
 }
 
