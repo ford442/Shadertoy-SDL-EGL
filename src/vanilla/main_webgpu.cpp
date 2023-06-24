@@ -267,6 +267,7 @@ if(stateb==1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
+WGPU_Run();
 return;
 };
 
@@ -300,7 +301,6 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "----------" << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,2),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-WGPU_Run();
 return;
 };
 
