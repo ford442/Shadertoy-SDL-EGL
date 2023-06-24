@@ -429,7 +429,7 @@ WGPU_BUFFER_MAP_STATE statee=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(statee==1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
-wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 return;
 }
