@@ -273,9 +273,9 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
   std::cout << "mappedState:" << std::endl;
 std::cout << stateb << std::endl;
-  // if(stateb=='mapped'){
-// wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-// }
+if(stateb==1){
+wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+}
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
@@ -384,22 +384,17 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
  wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,256,256,1);
- 
-  // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+   // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
  WGPU_BUFFER_MAP_STATE statec=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
   std::cout << "mappedState:" << std::endl;
   std::cout << statec << std::endl;
-
-//if(statec=='mapped'){
-//wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-//}
-
+if(statec==1){
+wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+}
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-  
-//  wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
-
+  wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
   return;
 }
 
