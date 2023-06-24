@@ -229,7 +229,7 @@ std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "\n" << std::endl;
 WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(stateb==1){
+if(stateb==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
@@ -251,7 +251,7 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 WGPU_BUFFER_MAP_STATE statel=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(statel==1){
+if(statel==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
@@ -283,7 +283,7 @@ WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
   
 WGPU_BUFFER_MAP_STATE statebe=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(statebe==1){
+if(statebe==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
@@ -352,13 +352,13 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
    // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,256,256,1);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_BUFFER_MAP_STATE statec=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(statec==1){
+if(statec==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 WGPU_BUFFER_MAP_STATE stater=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(stater==0){
+if(stater!=3){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 }
 return;
