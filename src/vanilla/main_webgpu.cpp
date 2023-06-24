@@ -258,8 +258,8 @@ wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 
   wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);
 double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-// WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), 0 ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "Mapped range of result buffer:" << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
