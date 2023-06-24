@@ -567,7 +567,7 @@ normalResStart();
 });
 
 document.getElementById('startBtn2').addEventListener('click',function(){
-Module.ccall("runWebGPU");
+Module.ccall("runWebGPU",{async:true});
 });
 
 setTimeout(function(){
