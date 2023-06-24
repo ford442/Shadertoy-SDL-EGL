@@ -408,7 +408,7 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 WGPU_CommandBuffer.at(0,0,1)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,1));
 // double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "End Buffer:" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 std::cout << "----------" << std::endl;
