@@ -229,7 +229,7 @@ std::cout << "Output:" << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(stateb==3){
+if(stateb!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_object_destroy(WGPU_Buffers.at(2,0,2));
@@ -253,9 +253,9 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 WGPU_BUFFER_MAP_STATE statel=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-// if(statel==3){
+if(statel==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-// }
+}
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 return;
 };
@@ -417,8 +417,6 @@ wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
-WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
-WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceStart2;
 navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
 }
@@ -426,7 +424,8 @@ return;
 void WGPU_Start(){
 WGPU_UserData.at(0,0,0)=userDataA;
 WGPU_UserData.at(0,0,1)=userDataB;
-
+WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
+WGPU_ObtainedDeviceCallback.at(0,0,1)=ObtainedWebGpuDeviceStart2;
 WGPU_DeviceDescriptor.at(0,0,0)=deviceDescriptor;
 WGPU_RequestAdapterOptions.at(0,0,0)=options;
 WGPU_ObtainedAdapterCallback.at(0,0,0)=ObtainedWebGpuAdapterStart;
@@ -458,7 +457,7 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 
-const myInterval=setInterval(strr,800);
+const myInterval=setInterval(strr,200);
   
 // setTimeout(function(){
 // Module.ccall("runWebGPU");
