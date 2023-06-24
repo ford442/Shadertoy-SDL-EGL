@@ -351,7 +351,7 @@ WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 // WGPU_BUFFER_MAP_STATE statec=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 // if(statec==1){
   
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+// wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
   
 // }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
