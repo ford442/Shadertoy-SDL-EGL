@@ -266,7 +266,7 @@ static void raf(){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
-// WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
+WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
