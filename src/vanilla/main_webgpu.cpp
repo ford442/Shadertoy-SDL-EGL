@@ -548,6 +548,10 @@ document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
+document.getElementById('startBtn2').addEventListener('click',function(){
+Module.ccall("runWebGPU");
+});
+
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
