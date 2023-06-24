@@ -253,7 +253,9 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
   std::cout << "userData:" << std::endl;
 std::cout << userData << std::endl;
 std::cout << &userData << std::endl;
-
+WGPU_BUFFER_MAP_STATE statea=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
+  std::cout << "mappedState:" << std::endl;
+std::cout << statea << std::endl;
   wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 
 double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
@@ -269,7 +271,9 @@ std::cout << WGPU_ResultBuffer.at(0,0,0)[2] << std::endl;
 std::cout << "\n" << std::endl;
 std::cout << WGPU_ResultBuffer.at(0,0,0)[3] << std::endl;
 WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
-// if(stateb=='mapped'){
+  std::cout << "mappedState:" << std::endl;
+std::cout << stateb << std::endl;
+  // if(stateb=='mapped'){
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // }
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
