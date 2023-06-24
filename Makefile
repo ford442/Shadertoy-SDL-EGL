@@ -16,11 +16,11 @@ b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
-	 -jsDWEBGPU_DEBUG=1 -mllvm -std=gnu17 -std=gnu++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -mllvm -std=gnu17 -std=gnu++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt -sUSE_SDL=0 \
-	 -sASYNCIFY=1 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=wgpu_buffer_map_sync,navigator_gpu_request_adapter_sync,wgpu_adapter_request_device_sync -sTEXTDECODER=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
