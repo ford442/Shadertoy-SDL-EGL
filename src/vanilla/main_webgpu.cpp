@@ -17,9 +17,9 @@ inline char wgl_cmp_src[2000]=
 "var i: i32;"
 "loop {"
 "outputBuffer[f*g]=42;"
+"outputBuffer[f*g]=inputBuffer[0];"
 "outputBuffer[f*g]=42;"
-"outputBuffer[f*g]=42;"
-"outputBuffer[f*g]=1;"
+"outputBuffer[f*g]=f;"
 "  i+=4;"
 "  if i == 256 { break; }"
 "}"
@@ -502,6 +502,12 @@ Module.ccall("startWebGPU",{async:true});
 setTimeout(function(){
 Module.ccall("runWebGPU");
 },1500);
+setTimeout(function(){
+Module.ccall("runWebGPU");
+},500);
+setTimeout(function(){
+Module.ccall("runWebGPU");
+},500);
 setTimeout(function(){
 Module.ccall("runWebGPU");
 },500);
