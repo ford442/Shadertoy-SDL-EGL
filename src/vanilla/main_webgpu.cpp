@@ -449,8 +449,17 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-Module.ccall("startWebGPU",{async:true});
 
+const myInterval=setInterval(strr,1000);
+
+function strr(){
+Module.ccall("startWebGPU",{async:true});
+}
+
+function myStopFunction(){
+clearInterval(myInterval);
+}
+  
 // setTimeout(function(){
 // Module.ccall("runWebGPU");
 // },500);
@@ -507,7 +516,8 @@ normalResStart();
 });
 
 document.getElementById('startBtn2').addEventListener('click',function(){
-Module.ccall("runWebGPU",{async:true});
+myStopFunction();
+// Module.ccall("runWebGPU",{async:true});
 });
 
 setTimeout(function(){
@@ -536,6 +546,6 @@ WGPU_Run2();
 
 int main(void){
 js_main();
-WGPU_Start();
+// WGPU_Start();
 return 0;
 }
