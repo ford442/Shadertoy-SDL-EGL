@@ -400,7 +400,6 @@ wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 
 static void WGPU_Run(){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
-
 // WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 // WGPU_CommandEncoder.at(0,0,1)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,1),&computePassDescriptor);
@@ -415,7 +414,6 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Bu
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,1),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 WGPU_CommandBuffer.at(0,0,1)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,1));
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,1));
-*/
 // double_int53_t WGPU_Range_Pointer=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 // wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_Pointer,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 std::cout << "End Buffer:" << std::endl;
