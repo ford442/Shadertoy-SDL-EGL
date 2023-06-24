@@ -252,9 +252,9 @@ return;
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
   WGPU_BUFFER_MAP_STATE stateb=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 
-if(stateb=='mapped'){
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
- }
+//if(stateb=='mapped'){
+//wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+// }
 
   wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);
 double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
