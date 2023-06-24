@@ -14,7 +14,7 @@ inline char wgl_cmp_src[2000]=
 // "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
 // "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
 "let h:u32=f*g;"
-"var i: i32;"
+"var i: u32;"
 "loop {"
 "outputBuffer[f*g]=42;"
 "outputBuffer[f*g]=inputBuffer[0];"
