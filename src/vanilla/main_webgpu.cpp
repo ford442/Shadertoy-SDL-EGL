@@ -257,7 +257,6 @@ document.getElementById('outText').innerHTML=$0
   // std::cout << "Output:" << std::endl;
 // std::cout << "\n" << std::endl;
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
-}
 /*
   std::cout << "Mapped range of result buffer:" << std::endl;
 std::cout << "\n" << std::endl;
