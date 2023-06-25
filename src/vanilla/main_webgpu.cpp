@@ -447,7 +447,7 @@ return;
 EM_JS(void,js_main,(),{
 
 function strr(){
-Module.ccall("runWebGPU",NULL,[],{async:true});
+Module.ccall("runWebGPU",{async:true});
 }
 
 function myStopFunction(){
@@ -455,20 +455,13 @@ clearInterval(myInterval);
 }
 
 function normalResStart(){
-  Module.ccall("startWebGPU",NULL,[],{async:true});
-
+Module.ccall("startWebGPU",{async:true});
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-
 const myInterval=setInterval(strr,1000);
-  
-// setTimeout(function(){
-// Module.ccall("runWebGPU");
-// },500);
-
 });
 }
 
