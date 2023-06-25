@@ -447,7 +447,7 @@ return;
 EM_JS(void,js_main,(),{
 
 function strr(){
-Module.ccall("runWebGPU",{async:true});
+Module.ccall("runWebGPU",NULL,[],{async:true});
 }
 
 function myStopFunction(){
@@ -455,7 +455,7 @@ clearInterval(myInterval);
 }
 
 function normalResStart(){
-  Module.ccall("startWebGPU",{async:true});
+  Module.ccall("startWebGPU",NULL,[],{async:true});
 
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
