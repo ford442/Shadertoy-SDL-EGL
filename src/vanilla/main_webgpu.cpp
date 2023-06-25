@@ -229,8 +229,7 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-
-  EM_ASM({
+EM_ASM({
 document.getElementById('outText').innerHTML=$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 // std::cout << "\n" << std::endl;
@@ -260,7 +259,7 @@ wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 sleep(1);
-// WGPU_Run();
+WGPU_Run();
 return;
 };
 
@@ -549,6 +548,7 @@ WGPU_Run2();
 
 int main(void){
 js_main();
+sleep(1);
 WGPU_Start();
 return 0;
 }
