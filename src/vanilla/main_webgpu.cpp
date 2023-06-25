@@ -231,9 +231,8 @@ WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 
   EM_ASM({
-document.getElementById('outText').innerHTML=$0
+document.getElementById('outText').innerHTML=$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
-  // std::cout << "Output:" << std::endl;
 // std::cout << "\n" << std::endl;
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 }
@@ -252,7 +251,7 @@ double_int53_t WGPU_Range_PointerC=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerC;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),  WGPU_BufferRange.at(0,0,0) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.getElementById('outText').innerHTML=$0
+document.getElementById('outText').innerHTML=$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
@@ -300,8 +299,8 @@ WGPU_Mapped_Buffer.rowsPerImage=256;
 raN=rNd4(256);
 input[0]=raN;
 WGPU_InputBuffer.at(0,0,0)[0]=raN;
-std::cout << "Random input:" << std::endl;
-std::cout << raN << std::endl;
+// std::cout << "Random input:" << std::endl;
+// std::cout << raN << std::endl;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(WGPU_Device.at(0,0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
@@ -373,8 +372,8 @@ static void WGPU_Run(){
 raN=rNd4(256);
 input[0]=raN;
 WGPU_InputBuffer.at(0,0,0)[0]=raN;
-std::cout << "Random input int:" << std::endl;
-std::cout << raN << std::endl;
+// std::cout << "Random input int:" << std::endl;
+// std::cout << raN << std::endl;
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(WGPU_Device.at(0,0,0));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(WGPU_Device.at(0,0,0));
