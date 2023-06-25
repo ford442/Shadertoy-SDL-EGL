@@ -548,7 +548,7 @@ WGPU_Run2();
 
 int main(void){
 js_main();
-sleep(1);
-WGPU_Start();
+// sleep(1);
+// WGPU_Start();
 return 0;
 }
