@@ -56,7 +56,7 @@ b3_shader_webgpu:
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
-	 -jsDWEBGPU_DEBUG=1 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -67,8 +67,7 @@ b3_shader_webgpu:
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sSUPPORT_LONGJMP=wasm \
-	 -fwhole-program -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
-	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 \
+	 -fwhole-program -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -DNDEBUG -sEVAL_CTORS=2 -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=3 -sTEXTDECODER=2 -sWASM=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
