@@ -24,8 +24,7 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config={device,14,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
-config.device=device;
+WGpuCanvasConfiguration config={device,navigator_gpu_get_preferred_canvas_format(),WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
 config.format=navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
@@ -55,8 +54,7 @@ renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment.module=fs;
 renderPipelineDesc.fragment.entryPoint="main";
-WGpuColorTargetState colorTarget={};
-colorTarget.format=14;
+WGpuColorTargetState colorTarget={config.format,0};
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
 renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
