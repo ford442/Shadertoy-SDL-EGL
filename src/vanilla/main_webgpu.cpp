@@ -496,7 +496,7 @@ WGPU_Run();
 }
 
 void runWebGPU2(){
-WGPU_Run2();
+// WGPU_Run2();
 }
 
 }
