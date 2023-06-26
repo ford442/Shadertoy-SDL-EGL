@@ -25,7 +25,6 @@ device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config={device,navigator_gpu_get_preferred_canvas_format(),WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
-config.format=navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
     "@vertex\n"
@@ -54,6 +53,7 @@ renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment.module=fs;
 renderPipelineDesc.fragment.entryPoint="main";
+renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 WGpuColorTargetState colorTarget={config.format,0};
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
