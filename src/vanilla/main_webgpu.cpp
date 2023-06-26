@@ -466,7 +466,7 @@ document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU",{async:true});
 // const myInterval=setInterval(strr,1000);
-},1000);
+},100);
 }
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
