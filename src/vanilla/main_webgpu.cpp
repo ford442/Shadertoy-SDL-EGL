@@ -8,21 +8,6 @@ inline char wgl_cmp_src[2000]=
 "fn main(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
-// "let coord:vec2<u32>=vec2<u32>(0,0);"
-// "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
-// "let u0:u32=0;"
-// "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
-// "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
-// "let h:u32=f*g;"
-// "var i:u32;"
-// "loop{"
-"outputBuffer[0]=inputBuffer[0];"
-// "outputBuffer[(f*g)+1]=inputBuffer[0];"
-// "outputBuffer[(f*g)+2]=inputBuffer[0];"
-// "outputBuffer[(f*g)+3]=inputBuffer[0];"
-// "i+=4;"
-// "if i==256{break;}"
-// "}"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
@@ -187,10 +172,10 @@ std::vector<uint8_t>outpute(OutputBufferBytes);
 WGpuBufferDescriptor bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+// WGpuBufferDescriptor bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 // 14 = R32FLOAT   34 = RGBA32UINT
-WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
-WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
+// WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
+// WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -276,11 +261,11 @@ WGPU_ColorBuffer.at(0,0,0)=WGPU_Color_Input_Array;
 WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
 WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
 WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
-WGPU_BufferDescriptor.at(0,0,3)=bufferDescriptorC;
+// WGPU_BufferDescriptor.at(0,0,3)=bufferDescriptorC;
 WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
-WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
+// WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // WGPU_BUFFER_MAP_STATE statebe=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
@@ -300,7 +285,7 @@ WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(WGPU_Device.at(0,0
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayout2;
 WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
-WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
+// WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
 WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayout1;
 bindGroupLayoutEntries[0].binding=0;
 bindGroupLayoutEntries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -387,27 +372,11 @@ if(WGPU_BufferStatus.at(0,0,0)!=3){
 return;
 }
 
-static void WGPU_Run2(){
-return;
-}
-
-static void ObtainedWebGpuDeviceStart2(WGpuDevice result,void * userData){
-// device=result;
-WGPU_Device.at(0,0,1)=result;
-raf();
-return;
-}
-
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
 // device=result;
 WGPU_Device.at(0,0,0)=result;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
-}
-
-static void ObtainedWebGpuAdapterStart2(WGpuAdapter result,void * userData){
-WGPU_Adapter.at(0,0,1)=result;
-wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 }
 
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
