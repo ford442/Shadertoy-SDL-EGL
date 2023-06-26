@@ -5,7 +5,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
+"fn main(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
 // "let coord:vec2<u32>=vec2<u32>(0,0);"
@@ -130,16 +130,17 @@ static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
 
-// uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
 uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
 uint32_t InputBufferBytes=262144*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 
-const char * Entry="computeStuff";
-// uint32_t invocationCount=BufferMapSize/sizeof(int);
-// uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+const char * Entry="main";
+
+uint32_t workgroupSize=64;
+uint32_t workgroupCount=(InputBufferUnits+workgroupSize-1)/workgroupSize;
+
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 void * userDataB;
@@ -224,15 +225,15 @@ return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)==3){
-double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 }
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)==3){
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 }
 EM_ASM({
 document.getElementById('outText').innerHTML=$0;
@@ -241,15 +242,15 @@ return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneRun=[](WGpuQueue queue,void *userData){
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)==3){
-double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(1,0,1), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 }
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)==3){
-wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 }
 EM_ASM({
 document.getElementById('outText').innerHTML=$0;
@@ -281,9 +282,9 @@ WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_Buf
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // WGPU_BUFFER_MAP_STATE statebe=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
-     wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+     wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 }
 // WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 // WGPU_Output_Buffer.bytesPerRow=4096;
@@ -338,28 +339,28 @@ wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_Input
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),4,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 //     wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 //     wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,256,256,1);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
-     wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+     wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=3){
-     wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
+     wgpu_buffer_map_sync(WGPU_Buffers.at(1,0,1),mode1,0,OutputBufferBytes);  
 }
 return;
 }
 
 static void WGPU_Run(){
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
-     wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+     wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 }
 raN=rNd4(256);
 input[0]=raN;
@@ -371,17 +372,17 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_Bind
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),4,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(1,0,1),0,OutputBufferBytes);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
-     wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+     wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(1,0,1));
 if(WGPU_BufferStatus.at(0,0,0)!=3){
-     wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
+     wgpu_buffer_map_sync(WGPU_Buffers.at(1,0,1),mode1,0,OutputBufferBytes);  
 }
 return;
 }
