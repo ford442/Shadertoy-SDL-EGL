@@ -15,7 +15,7 @@ b3_vanilla_webgpu:
 	 em++ src/vanilla/main_render.cpp -c -std=gnu17 -std=gnu++20 -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
-	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
+	 emcc main_render.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
 	 -mllvm -std=gnu17 -std=gnu++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -jsDWEBGPU_DEBUG=1 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
