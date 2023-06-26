@@ -71,8 +71,19 @@ WGpuDeviceDescriptor deviceDesc={};
 wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,0);
 }
 
-int main(){
+int gpux(){
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
+return 0;
+}
+
+extern"C"{
+
+void startWebGPU(){
+gpux(); 
+}
+
+void runWebGPU();
+
 }
