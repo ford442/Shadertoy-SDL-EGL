@@ -10,9 +10,7 @@ EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device, 0);
 //colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_STORE_OP_STORE,WGPU_LOAD_OP_LOAD};
-WGpuRenderPassDescriptor passDesc={  };
-passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&colorAttachment;
+WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
@@ -25,7 +23,7 @@ return EM_FALSE;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
-canvasContext=wgpu_canvas_get_webgpu_context("scanvas");
+canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config={device,14,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
 config.device=device;
 config.format=navigator_gpu_get_preferred_canvas_format();
