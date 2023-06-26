@@ -130,7 +130,7 @@ static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
 
-uint32_t workgroupSize=64;
+// uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
 uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
@@ -145,26 +145,26 @@ void * userDataA;
 void * userDataB;
 GLsizei width=256;
 GLsizei height=256;
-GLuint wtexture[4];
-WGpuTexture textureA;
+// GLuint wtexture[4];
+// WGpuTexture textureA;
 //  WGpuAdapter adapter=0;
-  WGpuDevice device=0;
-  WGpuQueue queue=0;
+//  WGpuDevice device=0;
+//  WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuBindGroupLayout bindGroupLayoutB=0;
 WGpuComputePipeline computePipeline=0;
-WGpuBuffer inputBuffer=0;
-WGpuBuffer outputBuffer=0;
-WGpuBuffer mapBuffer=0;
-WGpuBuffer uniBuffer=0;
-WGpuShaderModule cs=0;
-WGpuCommandBuffer commandBuffer=0;
-WGpuCommandEncoder encoder=0;
-WGpuComputePassEncoder computePass=0;
-WGpuBindGroup bindGroup=0;
-WGpuBindGroup bindGroupB=0;
-WGpuPipelineLayout pipelineLayout=0;
-WGpuQuerySet querySet=0;
+// WGpuBuffer inputBuffer=0;
+// WGpuBuffer outputBuffer=0;
+// WGpuBuffer mapBuffer=0;
+// WGpuBuffer uniBuffer=0;
+// WGpuShaderModule cs=0;
+// WGpuCommandBuffer commandBuffer=0;
+// WGpuCommandEncoder encoder=0;
+// WGpuComputePassEncoder computePass=0;
+// WGpuBindGroup bindGroup=0;
+// WGpuBindGroup bindGroupB=0;
+// WGpuPipelineLayout pipelineLayout=0;
+// WGpuQuerySet querySet=0;
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
@@ -391,14 +391,14 @@ return;
 }
 
 static void ObtainedWebGpuDeviceStart2(WGpuDevice result,void * userData){
-device=result;
+// device=result;
 WGPU_Device.at(0,0,1)=result;
 raf();
 return;
 }
 
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
-device=result;
+// device=result;
 WGPU_Device.at(0,0,0)=result;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
@@ -431,7 +431,7 @@ WGPU_ComputeDoneCallback.at(0,0,2)=onComputeDoneRun2;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
- navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
 }
 
@@ -506,7 +506,8 @@ normalResStart();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
-Module.ccall("runWebGPU",{async:true});
+// Module.ccall("runWebGPU",{async:true});
+strr();
 });
 
 setTimeout(function(){
@@ -514,7 +515,6 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },500);
-
 });
 
 extern"C"{
