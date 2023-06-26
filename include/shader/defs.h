@@ -1,3 +1,4 @@
+/*
 #ifndef FALSE
 #define FALSE 0
 #endif
@@ -5,7 +6,7 @@
 #ifndef TRUE
 #define TRUE 1
 #endif
-
+*/
 #define _XOPEN_SOURCE 700
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD -1
