@@ -1,4 +1,4 @@
-#include "lib_webgpu.h"
+#include "../../include/vanilla/main_webgpu.h"
 
 WGpuAdapter adapter;
 WGpuCanvasContext canvasContext;
