@@ -17,7 +17,7 @@ b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
 	 -mllvm -std=gnu17 -std=gnu++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
-	 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 \
+	 -jsDWEBGPU_DEBUG=1 -fwhole-program -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt -sUSE_SDL=0 \
 	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
