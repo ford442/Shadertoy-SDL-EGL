@@ -8,7 +8,7 @@ WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device, 0);
-WGpuRenderPassColorAttachment colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
+WGpuRenderPassColorAttachment colorAttachment={};
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassDescriptor passDesc={};
 passDesc.numColorAttachments=1;
@@ -26,7 +26,7 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
+WGpuCanvasConfiguration config={};
 config.device=device;
 config.format=navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext,&config);
@@ -52,12 +52,12 @@ shaderModuleDesc.code=vertexShader;
 WGpuShaderModule vs=wgpu_device_create_shader_module(device,&shaderModuleDesc);
 shaderModuleDesc.code=fragmentShader;
 WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDesc);
-WGpuRenderPipelineDescriptor renderPipelineDesc=WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER;
+WGpuRenderPipelineDescriptor renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment.module=fs;
 renderPipelineDesc.fragment.entryPoint="main";
-WGpuColorTargetState colorTarget=WGPU_COLOR_TARGET_STATE_DEFAULT_INITIALIZER;
+WGpuColorTargetState colorTarget={};
 colorTarget.format=config.format;
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
