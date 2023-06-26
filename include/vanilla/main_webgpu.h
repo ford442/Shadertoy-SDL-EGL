@@ -2,8 +2,6 @@
 #include "../../include/vanilla/avx.h"
 #include "../../include/vanilla/defs.h"
 #include "../../include/vanilla/boost_defs.h"
-#include "../../include/shader/gl.h"
-#include "../../include/shader/egl.h"
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
@@ -36,6 +34,8 @@ static void raf();
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
+
+EM_BOOL raf(double time, void *userData);
 
 static void WGPU_Start();
 
