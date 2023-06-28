@@ -420,8 +420,8 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-// const myInterval=setInterval(strr,1000);
-});
+const myInterval=setInterval(strr,20);
+},2000);
 }
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
