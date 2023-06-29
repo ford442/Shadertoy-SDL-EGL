@@ -1,10 +1,10 @@
 #include "../../include/video/main.hpp"
 
-v128_t rNd(int Th){
+int32_t rNd(int Th){
 std::srand(rd());
 rD=std::rand()%Th;
-Dr=wasm_i32x4_splat(rD);
-return Dr;
+// Dr=wasm_i32x4_splat(rD);
+return rD;
 }
 
 EM_JS(void,js_main,(),{
@@ -192,19 +192,19 @@ normalResStart();
 });
 
 extern"C"{
- 
+int32_t(* RnD)(int){&rNd};
 int r4nd(int tH){
-v128_t(* RnD)(int){&rNd};
 Rg=RnD(tH);
-c=wasm_i32x4_extract_lane(Rg,0);
-return c;
+// c=wasm_i32x4_extract_lane(Rg,0);
+return Rg;
 }
   
 }
 
+void(*jss)(){&js_main};
+
 int main(void){
 
-void(*jss)(){&js_main};
 jss();
 return 0;
 
