@@ -29,7 +29,7 @@ int32_t rNd(int);
 
 extern "C"{
   
-// v128_t Rg;
+int Rg;
 int c;
 int r4nd(int);
 
