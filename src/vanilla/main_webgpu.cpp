@@ -465,7 +465,6 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-const myInterval=setInterval(strr,1000);
 });
 }
 
@@ -518,8 +517,9 @@ normalResStart();
 });
 
 document.getElementById('startBtn2').addEventListener('click',function(){
-myStopFunction();
+// myStopFunction();
 // Module.ccall("runWebGPU",{async:true});
+const myInterval=setInterval(strr,1000);
 });
 
 setTimeout(function(){
