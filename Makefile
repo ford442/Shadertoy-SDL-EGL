@@ -196,24 +196,24 @@ b3_audio:
 b3_video_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
-	 em++ src/video/main.cpp -c -O0 -fpie \
+	 em++ src/video/main.cpp -c \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/video/video_webgpu.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
+	 em++ src/video/video_webgpu.cpp -c -fno-math-errno -std=c++20 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
-	 emcc main.o video_webgpu.o -o b3020w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -mllvm -O0 -static-pie -std=c++20 -fno-math-errno -flto \
-	 -fwasm-exceptions \
+	 emcc main.o video_webgpu.o -o b3020w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -mllvm -O3 -std=c++20 -fno-math-errno -flto \
+	 -fwasm-exceptions -sASYNCIFY -sASSERTIONS=0 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mavxifma \
 	 -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=0 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -sPRECISE_F32=2 -mtune=tigerlake -march=corei7-avx \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
-	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -sUSE_GLFW=1 \
+	 -fwhole-program -polly \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
+	 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_UNSAFE_OPTS=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_b3_egl","_nano","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --post-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
 
