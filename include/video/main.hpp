@@ -23,13 +23,13 @@ std::random_device rd;
 
 // #include "../../include/video/intrins.hpp"
 
-v128_t rNd(int);
+int32_t rNd(int);
 
-v128_t Dr;
+// v128_t Dr;
 
 extern "C"{
   
-v128_t Rg;
+// v128_t Rg;
 int c;
 int r4nd(int);
 
