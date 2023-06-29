@@ -797,7 +797,7 @@ union{
 
 static void Rend(){
 uni_i.at(0,0)++;
-wasm_i64x2_replace_lane(sse2.at(0,1),0,uni_i.at(0,0));
+// wasm_i64x2_replace_lane(sse2.at(0,1),0,uni_i.at(0,0));
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -886,7 +886,7 @@ glUniform1i(smp_chn[raN],raN);
 //  glUniform1i(smp_chn[3],3);
 */
   
-glUniform1i(uni_frm,wasm_f64x2_extract_lane(sse2.at(0,1),0));
+glUniform1i(uni_frm,uni_i.at(0,0));
 
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
