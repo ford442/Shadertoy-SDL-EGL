@@ -2,13 +2,13 @@
 
 #include <emscripten.h>
 
-void avgFrm(short int,int,float *,float *);
+// void avgFrm(short int,int,float *,float *);
 
 extern "C"{
 
-void b3();
+// void b3();
 
-void nano(short int,int,float *,float *);
+// void nano(short int,int,float *,float *);
 
 }
 
@@ -54,12 +54,12 @@ double wi_js,hi_js;
 
 // #include <webgl/webgl2.h>
 
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
+// float max;
+// float min;
+// float sum;
+// float avgSum;
+// float minSum;
+// float maxSum;
 
 // int_fast32_t Size;
 int Size;
@@ -127,7 +127,7 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-void egl();
+// void egl();
 
 #include <emscripten/html5.h>
 
