@@ -28,7 +28,7 @@ void nano(short int,int,float *,float *);
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-#include "../../include/shader/intrins.h"
+// #include "../../include/shader/intrins.h"
 
 double wi_js,hi_js;
 
