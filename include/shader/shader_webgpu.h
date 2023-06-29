@@ -667,7 +667,7 @@ return (EM_BOOL)1;
 static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
-boost::int<32>::exact uniBlock;
+int32_t uniBlock;
 
 class Run{
 
