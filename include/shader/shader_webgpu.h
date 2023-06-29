@@ -46,7 +46,7 @@ GLsizei i;
 
 public:
 
-unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
@@ -156,8 +156,8 @@ inline char cm_hdr_src[2300]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
@@ -287,7 +287,6 @@ static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
 static v_tensor sse4=v_tensor{1,1};
-static v_tensor sse5=v_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
@@ -626,7 +625,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
-unsigned int VBO,EBO,VCO;
+boost::uint_t<32>::exact VBO,EBO,VCO;
 }shad;
 
 inline struct{
@@ -640,7 +639,7 @@ boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-const int ele=36;
+const int32_t ele=36;
 // const int ele=10;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
@@ -668,7 +667,7 @@ return (EM_BOOL)1;
 static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
-unsigned int uniBlock;
+boost::int<32>::exact uniBlock;
 
 class Run{
 
@@ -706,10 +705,10 @@ S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(float set){
+static void u_iTime_set(double set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-wasm_f64x2_replace_lane(sse2.at(0,0),0,set);
+sse2.at(0,0)=wasm_f64x2_splat(set);
 // d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
@@ -722,15 +721,15 @@ return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
-static void i_iSize_set(int set){
+static void i_iSize_set(int32_t set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static void u_iTimeDelta_set(float set){
-wasm_f64x2_replace_lane(sse2.at(0,0),1,set);
+static void u_iTimeDelta_set(double set){
+sse.at(0,1)=wasm_f64x2_splat(set);
 // d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
@@ -797,11 +796,10 @@ union{
 
 static void Rend(){
 uni_i.at(0,0)++;
-// wasm_i64x2_replace_lane(sse2.at(0,1),0,uni_i.at(0,0));
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -829,12 +827,13 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
 glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+  
+glUniform1f(uni_chn_tme[0],d_time.at(0,0));
+glUniform1f(uni_chn_tme[1],d_time.at(0,0));
+glUniform1f(uni_chn_tme[2],d_time.at(0,0));
+glUniform1f(uni_chn_tme[3],d_time.at(0,0));
 // glUniform1f(uni_tme_dlt,d_time.at(1,1));
-glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse2.at(0,0),1));
+glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
   
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -885,11 +884,10 @@ glUniform1i(smp_chn[raN],raN);
 //  glUniform1i(smp_chn[2],2);
 //  glUniform1i(smp_chn[3],3);
 */
-  
 glUniform1i(uni_frm,uni_i.at(0,0));
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+  glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
@@ -993,7 +991,6 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(rem,req,tmm);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
-  sse5.at(0,0)=wasm_i32x4_splat(0);
 clk_l=true;
 const char * frag_body=procc.rd_fl(Fnm);
 std::string frag_body_S=frag_body;
@@ -1126,22 +1123,22 @@ glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_DYNAMIC_DRAW);
 nanoPause();
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
-unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-unsigned int shd_prg=glCreateProgram();
+boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
@@ -1149,7 +1146,7 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
-unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
+boost::uint_t<32>::exact uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
@@ -1293,13 +1290,11 @@ glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/sciss
 // glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
-sse2.at(0,0)=wasm_f64x2_splat(0.0);
-sse2.at(0,1)=wasm_i64x2_splat(0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
-u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 float iRate=192000.0f;
