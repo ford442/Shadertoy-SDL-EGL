@@ -170,11 +170,11 @@ const $BB=Module.HEAPF32.buffer;
 var $S=parseInt(window.innerHeight,10);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var la=h$*w$*8;
-var lab=h$*w$*4;
-var pointa=77*lab;
-var agav=new Float32Array($BB,pointa,300);
-var sz=(h$*w$)/8;
+var la=h$*w$*4;
+// var lab=h$*h$*4;
+var pointa=77*la;
+let agav=new Float32Array($BB,pointa,300);
+let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.000;
 var max=0.000;
@@ -185,9 +185,9 @@ var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float32',
-preferLowPowerToHighPerformance:false,
-logarithmicDepthBuffer:true,
+// colorType:'float32',
+// preferLowPowerToHighPerformance:false,
+// logarithmicDepthBuffer:true,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
@@ -208,6 +208,9 @@ minorVersion:0
 });
 gl.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
 gl.getExtension('EXT_pixel_format_float');
+gl.getExtension('OES_texture_float_linear');
+gl.getExtension('OES_texture_half_float_linear');
+gl.getExtension('EXT_float_blend');
 // gl.getExtension('ARB_blend_func_extended');
 // gl.getExtension('KHR_gl_colorspace');
 // gl.getExtension('EXT_gl_colorspace_scrgb_linear');
@@ -218,12 +221,12 @@ gl.getExtension('EXT_pixel_format_float');
 // gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
-gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+// gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.disable(gl.DITHER);
-// gl.blendColor(1.0,1.0,1.0,1.0);
-// gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+gl.blendColor(1.0,1.0,1.0,1.0);
+gl.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
 // gl.drawingBufferColorSpace='display-p3';
@@ -240,14 +243,14 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 // var minuss=(av$-0.9)*(av$/(av$-0.9));
 // av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,w$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setPipeline(true).setOutput([w$,h$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $amax=this.constants.amax;
@@ -260,16 +263,16 @@ var aveg=Aveg(p[3],ouT);
 // var silvrr=Ave(p[0],p[1],p[2]);
 // this.color(silvrr,silvrr,p[2],aveg);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([h$,w$]);
+}).setTactic("precision").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setGraphical(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
-la=h$*w$*8;
-lab=h$*w$*4;
-sz=(h$*w$)/8;
-pointa=77*lab;
+la=h$*w$*4;
+// lab=h$*w$*4;
+sz=(h$*h$)/8;
+pointa=77*la;
 agav=new Float32Array($BB,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
@@ -294,10 +297,10 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*0.0)/8.0),0);
 $S=parseInt(window.innerHeight,10);
-la=h$*w$*8;
-lab=h$*w$*4;
-sz=(h$*w$)/8;
-pointa=77*lab;
+la=h$*h$*4;
+// lab=h$*w$*4;
+sz=(h$*h$)/8;
+pointa=77*la;
 var agav=new Float32Array($BB,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
