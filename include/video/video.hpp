@@ -1,14 +1,29 @@
 #pragma once
 
 #include <emscripten.h>
+#include <webgl/webgl2.h>
+#include <emscripten/html5.h>
 
-void avgFrm(short int,int,float *,float *);
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <cfloat>
+#include <climits>
+
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
 extern "C"{
 
-void b3();
+// void b3();
 
-void nano(short int,int,float *,float *);
+// void nano(short int,int,float *,float *);
 
 }
 
@@ -127,22 +142,5 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-void egl();
-
-#include <emscripten/html5.h>
-
 EmscriptenWebGLContextAttributes attr_js;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx_js;
-
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <cfloat>
-#include <climits>
