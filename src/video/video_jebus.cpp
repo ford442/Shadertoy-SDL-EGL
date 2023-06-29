@@ -195,8 +195,10 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
@@ -208,6 +210,7 @@ var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var Min=(4.0*(($amax-($favg-$amin))/2.0));
 var ouT=Math.max(Min,alph);
+  /* STONE
   // send p[0],p[1],p[2],ouT => return grr
   var rng=Stone(p[0],p[1],p[2],ouT);
 // var rng=ouT-(ouT*0.5);
@@ -222,9 +225,10 @@ var bb=Stoned(p[2],p[3],rng);
 // var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
 // var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
   var ss=(Ave(rr,gg,bb)-p[3]);
-  var aveg=Aveg(p[3],ouT)+ss;
-
-this.color(rr,gg,bb,aveg);
+  */
+  var aveg=Aveg(p[3],ouT);
+this.color(p[0],p[1],p[2],aveg);
+// this.color(rr,gg,bb,aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -573,8 +577,8 @@ double wi,hi;
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
-// eglBindAPI(EGL_OPENGL_ES_API);
-eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_API);
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
