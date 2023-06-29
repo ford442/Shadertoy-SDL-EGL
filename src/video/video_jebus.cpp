@@ -1,5 +1,23 @@
 #include "../../include/video/video_jebus.hpp"
 
+void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
+avrg=(((avr+(y1y-rlc))/2.0)+alc);
+drk=y1y-(avr-0.5);
+brt=((y1y-rlc)-(alc-0.5));
+glBlendColor(avrg,avrg,avrg,y1y);
+glClearColor(drk,drk,drk,brt);
+return;
+}
+
+extern "C" {
+
+void clr(GLfloat cllr,GLfloat alp,GLfloat avr){
+clrclr(cllr,alp,avr);
+return;
+}
+
+}
+
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
@@ -171,8 +189,8 @@ contx.getExtension('GL_NV_memory_attachment');
   
 //   contx.disable(gl.DITHER);
 
-const g=new GPUX({canvas:bcanvas,webGl:contx});
-const g2=new GPUX();
+const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
+const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
@@ -292,6 +310,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 },16.66);
