@@ -27,8 +27,8 @@ contextegl_js=eglCreateContext(display_js,eglconfig_js,EGL_NO_CONTEXT,anEglCtxAt
 surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,attribut_list_js);
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 emscripten_webgl_enable_extension(ctx_js,"EXT_pixel_format_float");  //  required for float/alpha   -- EGL --
@@ -105,7 +105,7 @@ return;
 
 EM_JS(void,vid,(),{
   
-"use strict";
+// "use strict";
 
 var vv=document.getElementById("mv");
 var sh4d=true;
@@ -351,14 +351,16 @@ T=true;
 
 extern "C" {
 
-void b3_egl(){
 void(*b3e)(){&egl};
-b3e();
+
+void b3_egl(){
+// b3e();
 return;
 }
-  
-void b3(){
+
 void(*B3)(){&vid};
+
+void b3(){
 B3();
 return;
 }
