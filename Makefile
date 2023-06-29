@@ -12,7 +12,7 @@ COMMON_FLAGS += -O3 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
 
 video_resurection_jebus:
-	 em++ resurection_jebus.cpp $(COMMON_FLAGS) $(LDFLAGS) -o b3666.js -sFORCE_FILESYSTEM=1 \
+	 em++ src/video/video_jebus.cpp $(COMMON_FLAGS) $(LDFLAGS) -o b3666.js -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sASSERTIONS=2 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
