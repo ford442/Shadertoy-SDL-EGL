@@ -354,7 +354,7 @@ T=true;
 
 extern "C" {
 
-void(*b3e)(){&egl};
+// void(*b3e)(){&egl};
 
 void b3_egl(){
 // b3e();
