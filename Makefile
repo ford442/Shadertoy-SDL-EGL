@@ -200,11 +200,11 @@ b3_video_webgpu:
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/video/video.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
+	 em++ src/video/video_webgpu.cpp -c -O0 -fpie -fno-math-errno -std=c++20 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fno-math-errno -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -fno-fast-math -ffunction-sections -fdata-sections
-	 emcc main.o video.o -o b3020w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -mllvm -O0 -static-pie -std=c++20 -fno-math-errno -flto \
+	 emcc main.o video_webgpu.o -o b3020w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -mllvm -O0 -static-pie -std=c++20 -fno-math-errno -flto \
 	 -fwasm-exceptions \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mavxifma \
 	 -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
