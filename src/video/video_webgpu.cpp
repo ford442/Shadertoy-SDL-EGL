@@ -1,5 +1,5 @@
 #include "../../include/video/video_webgpu.h"
-
+/*
 void egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
@@ -60,7 +60,7 @@ glViewport((GLint)0,(GLint)0,Size,Size);
 glScissor((GLint)0,(GLint)0,Size,Size);
 return;
 }
-
+*/
 void avgFrm(short int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
