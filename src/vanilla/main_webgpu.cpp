@@ -438,7 +438,9 @@ clearInterval(myInterval);
 }
 
 function normalResStart(){
+setTimeout(function(){ 
 Module.ccall("startWebGPU",{async:true});
+},1000);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
