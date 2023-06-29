@@ -709,7 +709,7 @@ return;
 static void u_iTime_set(float set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-sse2.at(0,0)=wasm_f64x2_replace_lane(0,set);
+wasm_f64x2_replace_lane(sse2.at(0,0),0,set);
 // d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
@@ -730,7 +730,7 @@ return;
 }
 
 static void u_iTimeDelta_set(float set){
-sse2.at(0,0)=wasm_f64x2_replace_lane(1,set);
+wasm_f64x2_replace_lane(sse2.at(0,0),1,set);
 // d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
