@@ -52,7 +52,7 @@ double wi_js,hi_js;
 #include <EGL/eglext.h>
 // #include <EGL/eglplatform.h>
 
-// #include <webgl/webgl2.h>
+#include <webgl/webgl2.h>
 
 // float max;
 // float min;
