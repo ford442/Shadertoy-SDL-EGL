@@ -16,7 +16,7 @@ inline char wgl_cmp_src[2000]=
 // "let h:u32=f*g;"
 // "var i:u32;"
 // "loop{"
-"outputBuffer[0]=inputBuffer[0];"
+"outputBuffer[0]=42;"
 // "outputBuffer[(f*g)+1]=inputBuffer[0];"
 // "outputBuffer[(f*g)+2]=inputBuffer[0];"
 // "outputBuffer[(f*g)+3]=inputBuffer[0];"
