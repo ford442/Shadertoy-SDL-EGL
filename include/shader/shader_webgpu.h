@@ -797,11 +797,11 @@ union{
 
 static void Rend(){
 uni_i.at(0,0)++;
-  sse5.at(0,0)=
+wasm_i64x2_replace_lane(sse2.at(0,1),0,uni_i.at(0,0));
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -886,11 +886,10 @@ glUniform1i(smp_chn[raN],raN);
 //  glUniform1i(smp_chn[3],3);
 */
   
-glUniform1i(uni_frm,uni_i.at(0,0));
-  
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glUniform1i(uni_frm,wasm_f64x2_extract_lane(sse2.at(0,1),0));
 
-  glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
 
@@ -1294,11 +1293,13 @@ glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/sciss
 // glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
+sse2.at(0,0)=wasm_f64x2_splat(0.0);
+sse2.at(0,1)=wasm_i64x2_splat(0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
-u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<float,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 float iRate=192000.0f;
