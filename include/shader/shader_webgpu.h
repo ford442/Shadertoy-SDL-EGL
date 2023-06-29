@@ -287,6 +287,7 @@ static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
 static v_tensor sse4=v_tensor{1,1};
+static v_tensor sse5=v_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
@@ -675,7 +676,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=70;
+int32_t iFps=120;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -705,10 +706,10 @@ S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(double set){
+static void u_iTime_set(float set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-sse2.at(0,0)=wasm_f64x2_splat(set);
+sse2.at(0,0)=wasm_f64x2_replace_lane(0,set);
 // d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
@@ -728,8 +729,8 @@ i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static void u_iTimeDelta_set(double set){
-sse.at(0,1)=wasm_f64x2_splat(set);
+static void u_iTimeDelta_set(float set){
+sse2.at(0,0)=wasm_f64x2_replace_lane(1,set);
 // d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
@@ -796,6 +797,7 @@ union{
 
 static void Rend(){
 uni_i.at(0,0)++;
+  sse5.at(0,0)=
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -827,13 +829,12 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
 glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
-glUniform1f(uni_chn_tme[0],d_time.at(0,0));
-glUniform1f(uni_chn_tme[1],d_time.at(0,0));
-glUniform1f(uni_chn_tme[2],d_time.at(0,0));
-glUniform1f(uni_chn_tme[3],d_time.at(0,0));
+glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 // glUniform1f(uni_tme_dlt,d_time.at(1,1));
-glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
+glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse2.at(0,0),1));
   
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -884,7 +885,9 @@ glUniform1i(smp_chn[raN],raN);
 //  glUniform1i(smp_chn[2],2);
 //  glUniform1i(smp_chn[3],3);
 */
+  
 glUniform1i(uni_frm,uni_i.at(0,0));
+  
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
   glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -991,6 +994,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(rem,req,tmm);
 eglconfig=NULL;
 uni_i.at(0,0)=0;
+  sse5.at(0,0)=wasm_i32x4_splat(0);
 clk_l=true;
 const char * frag_body=procc.rd_fl(Fnm);
 std::string frag_body_S=frag_body;
