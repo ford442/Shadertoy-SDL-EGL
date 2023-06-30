@@ -140,8 +140,8 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-var w$=parseInt(document.getElementById("wid").innerHTML,10);
-var h$=parseInt(document.getElementById("hig").innerHTML,10);
+let w$=parseInt(document.getElementById("wid").innerHTML,10);
+let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var $H=Module.HEAPF32.buffer;
 var la=h$*h$*4;
