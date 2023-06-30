@@ -1,10 +1,12 @@
 #include "../../include/video/video_jebus.hpp"
 
+float avrg,drk,brt;
+
 void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
-avrg=(((avr+(y1y-rlc))/2.0)+alc);
-drk=y1y-(avr-0.5);
-brt=((y1y-rlc)-(alc-0.5));
-glBlendColor(avrg,avrg,avrg,y1y);
+avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
+drk=y1y-(avr-0.5f);
+brt=((1.0f-rlc)-(alc-0.5f));
+glBlendColor(avrg,avrg,avrg,1.0f);
 glClearColor(drk,drk,drk,brt);
 return;
 }
@@ -19,12 +21,12 @@ return;
 }
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+float max=0.0f;
+float min=1.0f;
+float sum=0.0f;
+float avgSum=0.0f;
+float minSum=0.0f;
+float maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
