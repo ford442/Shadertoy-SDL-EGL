@@ -1,32 +1,12 @@
 #include "../../include/video/video_jebus.hpp"
 
-float avrg,drk,brt;
-
-void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
-avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
-drk=1.0f-(avr-0.5f);
-brt=((1.0f-rlc)-(alc-0.5f));
-glBlendColor(avrg,avrg,avrg,1.0f);
-glClearColor(drk,drk,drk,brt);
-return;
-}
-
-extern "C" {
-
-void clr(GLfloat cllr,GLfloat alp,GLfloat avr){
-clrclr(cllr,alp,avr);
-return;
-}
-
-}
-
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0f;
-float min=1.0f;
-float sum=0.0f;
-float avgSum=0.0f;
-float minSum=0.0f;
-float maxSum=0.0f;
+float max=0.0;
+float min=1.0;
+float sum=0.0;
+float avgSum=0.0;
+float minSum=0.0;
+float maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -155,7 +135,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float32',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
@@ -167,6 +147,7 @@ contx.getExtension('EXT_sRGB');
 contx.getExtension('EXT_blend_minmax');
 contx.getExtension('ANGLE_instanced_arrays');
 contx.getExtension('EXT_disjoint_timer_query');
+
 contx.getExtension('EXT_clip_cull_distance');
 contx.getExtension('EXT_disjoint_timer_query_webgl2');
 contx.getExtension('KHR_parallel_shader_compile');
@@ -190,13 +171,12 @@ contx.getExtension('GL_NV_memory_attachment');
   
 //   contx.disable(gl.DITHER);
 
-const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
-const g2=new GPUX({mode:'gpu'});
+const g=new GPUX({canvas:bcanvas,webGl:contx});
+const g2=new GPUX();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
-const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-
+  
 const glslStone=`float Stone(float a,float b,float c,float d){return(max(((a-(d-(d*0.5)))+(b-(d-(d*0.5)))+(c-(d-(d*0.5)))*4.0),0.0));}`;
 const glslStoned=`float Stoned(float a,float b,float c){return(min((a+c),1.0)-((b*0.3)*0.14));}`;
   
@@ -211,7 +191,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setPrecision('signed').setDynamicOutput(true).setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -255,9 +235,9 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-var l=w$*h$*16;
+let l=w$*h$*16;
 la=h$*h$*4;
-var al=w$*h$*8;
+let al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
@@ -312,7 +292,6 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 },16.66);
@@ -342,6 +321,9 @@ T=true;
 #include <chrono>
 #include <unistd.h>
 #include <SDL2/SDL.h>
+
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+static const char8_t *read_file(const char *filename);
   
 extern "C" {
 
@@ -424,6 +406,9 @@ return;
 GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
+
+void uni(float xx,float yy,GLfloat time,EGLint fram);
+GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -631,9 +616,13 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-    attr.premultipliedAlpha=EM_FALSE;
+
+    attr.premultipliedAlpha=EM_TRUE;
+    
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+
+    attr.enableExtensionsByDefault=EM_TRUE;
+
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -651,6 +640,7 @@ emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
+  
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
@@ -669,8 +659,10 @@ emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
+
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
+
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
