@@ -4,7 +4,7 @@ float avrg,drk,brt;
 
 void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
 avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
-drk=y1y-(avr-0.5f);
+drk=1.0f-(avr-0.5f);
 brt=((1.0f-rlc)-(alc-0.5f));
 glBlendColor(avrg,avrg,avrg,1.0f);
 glClearColor(drk,drk,drk,brt);
