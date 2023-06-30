@@ -143,11 +143,11 @@ pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var $H=Module.HEAPF32.buffer;
-var la=h$*h$*4;
+let $H=Module.HEAPF32.buffer;
+let la=h$*h$*4;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-var sz=(h$*h$)/8;
+let agav=new Float32Array($H,pointa,300);
+let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -208,18 +208,18 @@ g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
-var R=g2.createKernel(function(tv){
+let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setPrecision('signed').setDynamicOutput(true).setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
-var t=g.createKernel(function(v){
+let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
-var r=g.createKernel(function(f){
+let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
