@@ -430,17 +430,6 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 double_int53_t WGPU_Range_PointerC=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerC;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),  WGPU_BufferRange.at(0,0,0) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-
-  /*
-for(int g=0;g<65536;g++){
-int hh=g*4;
-ColorA[hh]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh]);
-ColorA[hh+1]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+1]);
-ColorA[hh+2]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+2]);
-ColorA[hh+3]=uint32_t(WGPU_ResultBuffer.at(0,0,0)[hh+3]);
-}
-  */
-  
 raN=rNd4(3);
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -451,7 +440,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
-  
+}
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
