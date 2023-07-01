@@ -5,7 +5,7 @@ SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -O3 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
+COMMON_FLAGS += -O3 -flto=thin -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ffp-contract=fast -fwasm-exceptions \
 -fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -mtail-call -msign-ext
 
@@ -74,7 +74,7 @@ b3_shader_webgpu:
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4194304 \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sTOTAL_STACK=16MB \
 	 -sGLOBAL_BASE=16777216 -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
-	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
+	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sWASM_BIGINT=1 -sGL_ASSERTIONS=1 \
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sSUPPORT_LONGJMP=wasm \
 	 -fwhole-program -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
