@@ -1,5 +1,9 @@
 #include "../../include/vanilla/main_webgpu.h"
 
+#include <xtensor/xarray.hpp>
+#include <xtensor/xio.hpp>
+#include <xtensor/xview.hpp>
+
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
