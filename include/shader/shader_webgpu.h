@@ -907,7 +907,7 @@ glUniform1f(uni_chn_tme[2],d_time.at(0,0));
 glUniform1f(uni_chn_tme[3],d_time.at(0,0));
 // glUniform1f(uni_tme_dlt,d_time.at(1,1));
 glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
-  
+  /*
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
@@ -943,7 +943,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WG
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
 glUniform1i(smp_chn[raN],raN);
 }
-/*
+
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
@@ -1276,7 +1276,7 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 */
 
     // texture
-
+/*
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
 glGenTextures(1,&wtexture[2]);
@@ -1325,7 +1325,8 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,C
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 WGPU_Start();
-
+*/
+  
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
