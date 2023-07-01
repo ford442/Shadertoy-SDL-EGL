@@ -315,13 +315,13 @@ static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
 
-
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
 uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
 uint32_t InputBufferBytes=262144*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
+
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -922,12 +922,8 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 int tfrm=(uni_i.at(0,0)%4);
 
 if(uni_i.at(0,0)%45==0){
-
-raN=rNd4(255);
-input[0]=raN;
-
+raN=rNd4(3);
 WGPU_Run();   //  launch WebGPU
-
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
@@ -1279,6 +1275,7 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 */
 
     // texture
+  /*
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
 glGenTextures(1,&wtexture[2]);
@@ -1327,7 +1324,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,C
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 WGPU_Start();
-
+*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
