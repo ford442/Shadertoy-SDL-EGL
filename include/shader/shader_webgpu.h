@@ -46,7 +46,7 @@ GLsizei i;
 
 public:
 
-boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+unsigned int cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
@@ -156,11 +156,11 @@ inline char cm_hdr_src[2300]=
 "#pragma optionNV(ifcvt none)\n"
 "#pragma STDGL(inline all)\n"
 "#pragma optionNV(inline all)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n"
-"precision mediump sampler3D;precision highp sampler2D;"
+"precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
@@ -625,7 +625,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
-boost::uint_t<32>::exact VBO,EBO,VCO;
+unsigned int VBO,EBO,VCO;
 }shad;
 
 inline struct{
@@ -639,7 +639,7 @@ boost::atomic<int>tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-const int32_t ele=36;
+const int ele=36;
 // const int ele=10;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
@@ -667,7 +667,7 @@ return (EM_BOOL)1;
 static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
-boost::uint_t<32>::exact uniBlock;
+unsigned int uniBlock;
 
 class Run{
 
@@ -675,7 +675,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=120;
+int32_t iFps=70;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -721,7 +721,7 @@ return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
-static void i_iSize_set(int32_t set){
+static void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -1022,7 +1022,7 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1128,17 +1128,17 @@ nanoPause();
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+unsigned int vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
-boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-boost::uint_t<32>::exact shd_prg=glCreateProgram();
+unsigned int frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+unsigned int shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
@@ -1146,11 +1146,11 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
-boost::uint_t<32>::exact uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
+unsigned int uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_DYNAMIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_STREAM_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 GLsizei * binLength;
