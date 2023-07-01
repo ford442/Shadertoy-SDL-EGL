@@ -576,7 +576,7 @@ b3_video_google_llvm:
 	 em++ src/video/video_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main_google_street.o video_google_street.o -o g0003.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
+	 emcc main_google_street.o video_google_street.o -o g0004.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
 	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
