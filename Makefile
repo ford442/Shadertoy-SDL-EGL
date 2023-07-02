@@ -39,10 +39,10 @@ b3_vanilla_webgpu:
          --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++17 -stdlib=libc++ -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++17 -stdlib=libc++ -mmultivalue=false -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc src/vanilla/js.c -c -std=gnu17 -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
-	 emcc main.o js.o -o v3020.js -mllvm -std=gnu17 -std=gnu++17 -mmultivalue -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
+	 emcc src/vanilla/js.c -c -std=gnu17 -mmultivalue=false -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128
+	 emcc main.o js.o -o v3020.js -mllvm -std=gnu17 -std=gnu++17 -mmultivalue=false -mbulk-memory -mnontrapping-fptoint -msign-ext -msimd128 \
 	 -polly -sALLOW_MEMORY_GROWTH=1 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -rtlib=compiler-rt \
@@ -56,18 +56,18 @@ b3_shader_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue=false -fno-stack-protector \
 	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
-	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
+	 -mmultivalue=false -mnontrapping-fptoint -fno-stack-protector \
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue=false -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
          -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
@@ -110,19 +110,19 @@ b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_speed.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue=false -fno-stack-protector \
 	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
-	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
+	 -mmultivalue=false -mnontrapping-fptoint -fno-stack-protector \
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
 	 emcc main.o shader_speed.o -o s3024s.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
-	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue=false -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -145,19 +145,19 @@ b3_shader_compute:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_compute.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue -fno-stack-protector \
+	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue=false -fno-stack-protector \
 	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
-	 -mmultivalue -mnontrapping-fptoint -fno-stack-protector \
+	 -mmultivalue=false -mnontrapping-fptoint -fno-stack-protector \
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
 	 emcc main.o shader_compute.o -o s3024c.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) \
-	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue=false -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -199,12 +199,12 @@ b3_combine_dev:
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue=false \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG
 	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue=false \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
@@ -269,19 +269,19 @@ b3_shader_glsl:
 	 ###         Shader
 	 @sh clang6.sh; \
 	 em++ src/shader/shader_glsl.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue \
+	 -Wno-implicit-function-declaration -fmerge-all-constants -mmultivalue=false \
 	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -Wno-implicit-function-declaration -fmerge-all-constants \
-	 -mmultivalue -mnontrapping-fptoint \
+	 -mmultivalue=false -mnontrapping-fptoint \
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
 	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
-	 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
+	 --use-preload-plugins --closureFriendly -Wno-implicit-function-declaration -mmultivalue=false -mnontrapping-fptoint \
 	 -mllvm -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
@@ -323,14 +323,14 @@ b3_shader_llvm:
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/shader/main.cpp -c -O3 -m32 -ffast-math -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mbulk-memory -mavx -fmerge-all-constants -fno-stack-protector \
-	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto -fstrict-vtable-pointers -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
+	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -flto -fstrict-vtable-pointers -mtail-call -mmultivalue=false -mnontrapping-fptoint -msign-ext \
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -fblocks -ffp-contract=on \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ftree-vectorize -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o shader.o -o s3022.js -m32 -static -flto -mllvm -ffp-contract=on -ftree-vectorize -mbulk-memory -fno-stack-protector -fmerge-all-constants -fwasm-exceptions -force-vector-width=4 -O0 -std=c++2b -stdlib=libc++ -fno-math-errno \
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
 	 -msse -msse2 -msse3 -mssse3 -msse4 --closureFriendly -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -fstrict-vtable-pointers -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=512 \
-	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc++abi -mtail-call -mmultivalue -mnontrapping-fptoint -msign-ext \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc++abi -mtail-call -mmultivalue=false -mnontrapping-fptoint -msign-ext \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -polly -sFORCE_FILESYSTEM=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sGL_UNSAFE_OPTS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
@@ -342,14 +342,14 @@ b3hd:
 	-mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize -ftree-vectorize \
 	-fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	-msimd128 -Dsimd=avx -mavx \
-	-mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
+	-mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	-Xclang -menable-no-nans -Xclang -menable-no-infs \
 	-ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	em++ src/b3emjs.cpp -c -O0 -std=c++2a -stdlib=libc++ \
 	-Dsimd=sse42 \
 	-mcpu=bleeding-edge -fwasm-exceptions -fslp-vectorize -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	-fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	-mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	-mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	-ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=on
 	em++ src/b3sdl.cpp -c -O0 -std=c++11 -fno-math-errno -fexperimental-library \
 	-sUSE_SDL=2 -fslp-vectorize -ftree-vectorize \
@@ -735,7 +735,7 @@ sh4d3:
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -Dsimd=avx \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 em++ src/b3main_sh4d3.cpp -c -O3 -std=c++11 -fno-math-errno -fexperimental-library \
@@ -758,7 +758,7 @@ castle:
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -DSIMD=AES \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 em++ src/b3sdl.cpp -c -O0 \
@@ -769,7 +769,7 @@ castle:
 	 -std=c++2a -DCASTLE2 \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs_castle.o -o g302c.js -O0 -DNDEBUG=1 \
 	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=0 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
@@ -787,7 +787,7 @@ b3php:
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -DSIMD=AES \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 em++ src/b3sdl.cpp -c -O0 \
@@ -798,7 +798,7 @@ b3php:
 	 -std=c++2a \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o g302p.js -O0 -DNDEBUG=1 \
 	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=0 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
@@ -815,7 +815,7 @@ cloud:
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
 	 -fno-math-errno -sUSE_SDL=2 -std=gnu++2b -stdlib=libc++ -matomics \
@@ -825,7 +825,7 @@ cloud:
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs.o -o c3001.js \
 	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
@@ -842,7 +842,7 @@ g00:
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize \
 	 -fapprox-func -mbulk-memory -msign-ext -mmutable-globals -mnontrapping-fptoint \
 	 -msimd128 -mavx -DSIMD=128 \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffast-math -ffp-contract=on
 	 em++ src/b3sdl.cpp -c -O0 \
@@ -853,7 +853,7 @@ g00:
 	 -std=c++2a \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -ftree-vectorize -mmutable-globals -mnontrapping-fptoint \
 	 -fapprox-func -mbulk-memory -msign-ext -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -ffp-contract=on
 	 emcc b3main_g00.o b3ogl.o b3sdl.o b3emjs_g00.o -o g0025.js -O0 -DNDEBUG=1 \
 	 -sASSERTIONS=0 -USE_GLFW=0 -sPRECISE_F32=1 -sWASM_BIGINT=0 -std=c++2a -mcpu=bleeding-edge -fwasm-exceptions \
@@ -870,7 +870,7 @@ txt:
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
 	 -fno-math-errno -sUSE_SDL=2 -std=gnu++2b -stdlib=libc++ -matomics \
@@ -880,7 +880,7 @@ txt:
 	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 emcc b3main.o b3ogl.o b3sdl.o b3emjs_txt.o -o g3017.js \
 	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
@@ -893,7 +893,7 @@ fire:
 	 -std=gnu++2b -fno-fast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujsx.js --post-js pagec.js
@@ -911,7 +911,7 @@ speed:
 	 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 
@@ -920,7 +920,7 @@ cloudxx:
 	 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point \
 	 -fapprox-func -mbulk-memory -msign-ext -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
-	 -mmultivalue -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -mmultivalue=false -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --post-js tilt.js --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujsx.js --post-js pagec.js
