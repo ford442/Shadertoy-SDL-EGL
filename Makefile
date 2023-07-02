@@ -69,8 +69,8 @@ b3_vanilla_llvm:
 b3_shader_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
-	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 emcc main.o shader_webgpu.o -o s3024w.js $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=256mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 -sWASM_BIGINT=0 \
