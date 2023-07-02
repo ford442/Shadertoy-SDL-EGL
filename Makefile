@@ -75,7 +75,7 @@ b3_shader_webgpu:
 	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sPRECISE_F32=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
-	 -sGLOBAL_BASE=16777216 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=0 -sGL_POOL_TEMP_BUFFERS=2gb \
+	 -sGLOBAL_BASE=16777216 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=0 -sGL_POOL_TEMP_BUFFERS=0 \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sWASM_BIGINT=0 -sGL_ASSERTIONS=0 \
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_THROWING=0 \
