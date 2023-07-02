@@ -324,6 +324,7 @@ void * userDataB;
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
+GLuint colorBuffer;
 WGpuTexture textureA;
   WGpuAdapter adapter=0;
   WGpuDevice device=0;
@@ -901,7 +902,6 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
 glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -957,7 +957,6 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[2],2);
  glUniform1i(smp_chn[3],3);
  */
-
   
 glUniform1i(uni_frm,uni_i.at(0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -1170,7 +1169,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
 glEnable(GL_FRAMEBUFFER_SRGB);
-glEnable(GL_COLOR_CONVERSION_SRGB);
+// glEnable(GL_COLOR_CONVERSION_SRGB);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
@@ -1236,8 +1235,13 @@ bin.at(0,0)=GLbin;
 nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 nanoPause();
+glGenRenderbuffers(1,&colorBuffer);
+glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
+glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
 glUseProgram(S1.at(0,0,0));
 nanoPause();
+glUniform1i(glGetUniformLocation(program,"colorBuffer"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
