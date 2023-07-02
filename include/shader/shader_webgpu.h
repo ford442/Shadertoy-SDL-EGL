@@ -325,6 +325,7 @@ GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
 GLuint colorBuffer;
+GLuint srgbTexture;
 GLuint frameBuffer;
 GLuint depthBuffer;
 WGpuTexture textureA;
@@ -1240,28 +1241,31 @@ nanoPause();
 glGenRenderbuffers(1,&colorBuffer);
 glGenFramebuffers(1,&frameBuffer);
 glGenTextures(1, &depthBuffer);
-
-// Initialize the array with values between 0 and 1, where 0 is the closest point and 1 is the furthest point.
-glBindTexture(GL_TEXTURE_2D, depthBuffer);
-glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-
-// Bind the depth buffer object to the depth buffer.
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frameBuffer);
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
-
-// Clear the depth buffer to 0.
-glClearDepth(1.0);
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
   
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,depthBuffer);
+glGenTextures(1, &srgbTexture);
+// Initialize the array with values between 0 and 1, where 0 is the closest point and 1 is the furthest point.
+glBindTexture(GL_TEXTURE_2D, srgbTexture);
+// glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, depthBuffer);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA_8,  wasm_i32x4_extract_lane(sse3.at(0,0),0),  wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+// glClearDepth(1.0);
+  // glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,depthBuffer);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
-glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
-glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
-glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
+glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, srgb_texture, 0);
+glClear(GL_COLOR_BUFFER_BIT);
+glBindFramebuffer(GL_FRAMEBUFFER, 0);
+glClearColor(0.0, 1.0, 0.0, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
+// Present the default framebuffer object.
+glFlush();
+  
+// glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+// glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
 glUseProgram(S1.at(0,0,0));
 nanoPause();
-glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
+// glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
