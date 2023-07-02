@@ -10,7 +10,6 @@ COMMON_FLAGS += -O3 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ff
 -fwhole-program-vtables -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -msign-ext -fno-optimize-sibling-calls
 
-
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 video_resurection_jebus:
@@ -56,19 +55,12 @@ b3_shader_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
 	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants -fno-stack-protector \
-	 -fblocks -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
-	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 -Wno-implicit-function-declaration -fmerge-all-constants \
-	 -mnontrapping-fptoint -fno-stack-protector \
-	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
-	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
-	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mnontrapping-fptoint \
-	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants \
+	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly \
+	 -force-vector-width=4 -mllvm \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
          -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
