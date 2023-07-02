@@ -1239,7 +1239,21 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 nanoPause();
 glGenRenderbuffers(1,&colorBuffer);
 glGenFramebuffers(1,&frameBuffer);
-glGenDepthbuffers(1,&depthBuffer);
+glGenTextures(1, &depthBuffer);
+
+// Initialize the array with values between 0 and 1, where 0 is the closest point and 1 is the furthest point.
+glBindTexture(GL_TEXTURE_2D, depthBuffer);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+
+// Bind the depth buffer object to the depth buffer.
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frameBuffer);
+glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
+
+// Clear the depth buffer to 0.
+glClearDepth(1.0);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,depthBuffer);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
 glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
