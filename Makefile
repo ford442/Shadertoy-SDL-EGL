@@ -68,7 +68,7 @@ b3_shader_webgpu:
 	 ###         Link
 	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mnontrapping-fptoint \
-	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants \
+	 -mllvm -fno-stack-protector -fmerge-all-constants \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
          -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
