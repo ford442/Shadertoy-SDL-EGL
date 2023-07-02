@@ -1244,9 +1244,10 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(ss
 glBindFramebuffer(GL_FRAMEBUFFER,frameBuffer);
   glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
 glUseProgram(S1.at(0,0,0));
+  
 nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
-glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE,GL_FRAMEBUFFER_SRGB,GL_TRUE);
+glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
