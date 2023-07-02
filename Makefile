@@ -7,7 +7,7 @@ STDS += -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=gn
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -fparallel-jobs=2 -O3 $(STDS) -stdlib=libc++ -fmerge-all-constants -ffast-math -ffp-contract=off -mnontrapping-fptoint -fno-stack-protector \
+COMMON_FLAGS += -fparallel-jobs -O3 $(STDS) -stdlib=libc++ -fmerge-all-constants -ffast-math -ffp-contract=off -mnontrapping-fptoint -fno-stack-protector \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
