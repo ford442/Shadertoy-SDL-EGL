@@ -1,5 +1,5 @@
 #pragma once
-#pragma pack(4)
+// #pragma pack(4)
 #pragma fenv_access(on)        // enable environment sensitivity
 #include <boost/cstdfloat.hpp>  // must be first include
 
