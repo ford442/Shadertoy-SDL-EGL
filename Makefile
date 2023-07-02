@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O0,--lto-O0,--stack-first,--lto-jobs=all
+LDFLAGS += -Wl,-O0,--lto-O0,--stack-first
 
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
 
