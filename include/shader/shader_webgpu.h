@@ -1332,7 +1332,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,C
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 WGPU_Start();
-
+usleep(125);
   
   // date/time
 const time_t timE=time(0);
