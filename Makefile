@@ -14,7 +14,7 @@ COMMON_FLAGS += -O3 $(STDS) -stdlib=libc++ -fmerge-all-constants -ffast-math -ff
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS += -sFULL_ES3=1 -sGL_MAX_TEMP_BUFFER_SIZE=2gb -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=1 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sGL_MAX_TEMP_BUFFER_SIZE=2gb -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=1 \
 -sGL_POOL_TEMP_BUFFERS=1 -sGL_ASSERTIONS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
 
 LINK_FLAGS += --use-preload-plugins --closure 0 --closureFriendly -mllvm -exception-model=wasm -mtune=haswell \
