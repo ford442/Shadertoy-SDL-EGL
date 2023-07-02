@@ -78,7 +78,7 @@ b3_shader_webgpu:
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_THROWING=0 \
 	 -fwhole-program -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
-	 -DNDEBUG -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=0 -sTEXTDECODER=2 \
+	 -DNDEBUG -sFULL_ES3=1 -sTEXTDECODER=2 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
