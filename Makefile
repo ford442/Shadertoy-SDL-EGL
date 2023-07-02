@@ -75,12 +75,12 @@ b3_shader_webgpu:
 	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sPRECISE_F32=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
-	 -sGLOBAL_BASE=16777216 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=0 -sGL_POOL_TEMP_BUFFERS=0 \
+	 -sGLOBAL_BASE=16777216 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=0 -sGL_POOL_TEMP_BUFFERS=2gb \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sWASM_BIGINT=0 -sGL_ASSERTIONS=0 \
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_THROWING=0 \
 	 -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
-	 -DNDEBUG -sFULL_ES3=1 -sTEXTDECODER=2 \
+	 -DNDEBUG=1 -sFULL_ES3=1 -sTEXTDECODER=2 -sGL_MAX_TEMP_BUFFER_SIZE=2gb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
@@ -97,7 +97,7 @@ b3_video_google_llvm:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc main_google_street.o video_google_street.o -o g0004.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
 	 -fwhole-program-vtables -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
@@ -286,13 +286,13 @@ b3_shader_glsl:
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
-	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
+	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=2gb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 \
 	 -BOOST_UBLAS_NDEBUG -sINITIAL_MEMORY=2048mb \
 	 -sGLOBAL_BASE=8388608 -sASSERTIONS=2 -fwhole-program-vtables -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
-	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 \
+	 -sGL_UNSAFE_OPTS=1 -sGL_POOL_TEMP_BUFFERS=2gb -sALLOW_TABLE_GROWTH=1 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 -sUSE_WEBGPU=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
