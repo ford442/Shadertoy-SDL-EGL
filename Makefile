@@ -1,15 +1,17 @@
-LDFLAGS += -Wl,-O0,--lto-O0,--stack-first,--thinlto-jobs=all
+LDFLAGS += -Wl,-O0,--lto-O0,--stack-first,--lto-jobs=all
 
 SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AES
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -O3 -flto=thin -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ffp-contract=on \
--fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
--ffunction-sections -fdata-sections -msign-ext -fno-optimize-sibling-calls
+COMMON_FLAGS += -O3 -flto -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ffp-contract=off -funroll-loops \
+-ftree-vectorize -ftree-pre -ftree-vrp -ftree-partial-pre -ftracer -fprofile-arcs -fprofile-generate -fprofile-use \
+-fwhole-program -fwhole-program-vtables -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
+-ffunction-sections -fdata-sections -msign-ext -fno-optimize-sibling-calls -funsafe-loop-optimizations
 
-BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG
+
+BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 video_resurection_jebus:
 	 em++ resurection_jebus.cpp -o b3666.js -sFORCE_FILESYSTEM=1 \
@@ -77,7 +79,7 @@ b3_shader_webgpu:
 	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sWASM_BIGINT=0 -sGL_ASSERTIONS=0 \
 	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_THROWING=0 \
-	 -fwhole-program -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
+	 -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -DNDEBUG -sFULL_ES3=1 -sTEXTDECODER=2 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 --output_eol linux \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
