@@ -1244,8 +1244,8 @@ glGenFramebuffers(1,&frameBuffer);
   //  multisample
 glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
-glBindRenderbuffer(GL_RENDERBUFFER, colorBuffer);
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,16,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
