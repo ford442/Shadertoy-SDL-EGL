@@ -7,7 +7,7 @@ STDS += -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=gn
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -O3 $(STDS) -smodularize=1 -stdlib=libc++ -ffast-math -ffp-contract=off \
+COMMON_FLAGS += -O3 $(STDS) -sMODULARIZE=1 -stdlib=libc++ -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -msign-ext -fno-optimize-sibling-calls
 
