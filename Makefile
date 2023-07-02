@@ -5,7 +5,7 @@ SIMD_FLAGS += -msimd128 -mbulk-memory -msse -msse2 -msse3 -mssse3 -msse4 -msse4.
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AES
 
-COMMON_FLAGS += -O3 -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ffp-contract=fast \
+COMMON_FLAGS += -O3 -flto=thin -std=gnu17 -std=gnu++20 -stdlib=libc++ -ffast-math -ffp-contract=on \
 -fvectorize -fstrict-vtable-pointers -funsafe-math-optimizations -mbulk-memory -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -msign-ext -fno-optimize-sibling-calls
 
@@ -64,7 +64,7 @@ b3_shader_webgpu:
 	 -fblocks -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
-	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
+	 emcc main.o shader_webgpu.o -o s3024w.js -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -sUSE_SDL=0 --use-preload-plugins --closure 0 --closureFriendly -Wno-implicit-function-declaration -mmultivalue -mnontrapping-fptoint \
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
