@@ -143,7 +143,8 @@ inline char frg_ftr_src[420]=
 "int _N=16;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0lf,1.0,1.0lf,1.0lf));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
@@ -156,8 +157,8 @@ EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -1092,10 +1093,10 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1248,7 +1249,7 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(ss
  // glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,frameBuffer);
 glUseProgram(S1.at(0,0,0));
   glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
-  glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
+//  glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
 
 glDeleteShader(vtx);
 glDeleteShader(frag);
