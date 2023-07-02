@@ -104,24 +104,15 @@ inline char cm_hdr_src[2300]=
 "#extension GL_ARB_enhanced_layouts : enable\n"
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
-"#pragma STDGL(precise all)\n"
-"#pragma optionNV(precise all)\n"
-"#pragma STDGL(strict on)\n"
-"#pragma optionNV(strict on)\n"
-"#pragma STDGL(invariant none)\n"
-"#pragma optionNV(invariant none)\n"
+"#pragma STDGL(precise none)\n"
+"#pragma STDGL(strict off)\n"
+"#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
-"#pragma optionNV(centroid all)\n"
 "#pragma STDGL(fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n"
-"#pragma STDGL(unroll none)\n"
-"#pragma optionNV(unroll none)\n"
-"#pragma STDGL(ifcvt none)\n"
-"#pragma optionNV(ifcvt none)\n"
-"#pragma STDGL(inline all)\n"
-"#pragma optionNV(inline all)\n"
+"#pragma STDGL(unroll all)\n"
+// "#pragma STDGL(ifcvt none)\n"
+"#pragma STDGL(inline none)\n"
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
@@ -185,17 +176,17 @@ EGLint att_lst[1500]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
-// EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
+EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
 // EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_TRUE,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
+EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_RED_SIZE,(EGLint)10,
 EGL_GREEN_SIZE,(EGLint)10,
 EGL_BLUE_SIZE,(EGLint)10,
@@ -1178,7 +1169,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
-  
+// glEnable(GL_FRAMEBUFFER_SRGB);
+// glEnable(GL_COLOR_CONVERSION_SRGB);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glClearDepth(Di.at(0,0));
