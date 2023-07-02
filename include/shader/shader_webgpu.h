@@ -1240,8 +1240,9 @@ glGenRenderbuffers(1,&colorBuffer);
 glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
 glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
   glGenFramebuffers(1,&frameBuffer);
+  glBindFramebuffer(GL_FRAMEBUFFER,frameBuffer);
+
   glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,frameBuffer);
-glBindFramebuffer(GL_FRAMEBUFFER,frameBuffer);
   glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
 glUseProgram(S1.at(0,0,0));
   
