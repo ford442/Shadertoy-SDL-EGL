@@ -6,7 +6,7 @@
 #define GL_FRAGMENT_PRECISION_HIGH 1
 #endif
 
-#include <GL/gl3w.h>
+// #include <GL/gl3w.h>
 #include <GL/gl.h>
 
 #ifndef GL_GLEXT_PROTOTYPES
