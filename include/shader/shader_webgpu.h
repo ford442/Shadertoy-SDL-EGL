@@ -901,10 +901,10 @@ clk_l=true;
 // glUniform1f(uni_tme,d_time.at(0,0));
 glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
   
-glUniform1f(uni_chn_tme[0],d_time.at(0,0));
-glUniform1f(uni_chn_tme[1],d_time.at(0,0));
-glUniform1f(uni_chn_tme[2],d_time.at(0,0));
-glUniform1f(uni_chn_tme[3],d_time.at(0,0));
+glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 // glUniform1f(uni_tme_dlt,d_time.at(1,1));
 glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
   /*
