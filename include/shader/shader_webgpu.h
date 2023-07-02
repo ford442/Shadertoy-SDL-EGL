@@ -1241,33 +1241,34 @@ nanoPause();
 glGenRenderbuffers(1,&colorBuffer);
 glGenFramebuffers(1,&frameBuffer);
 glGenTextures(1, &depthBuffer);
+  
+  //  multisample
+glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0));
+  glBindRenderbuffer(GL_RENDERBUFFER, colorBuffer);
+  glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA8, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0));
+// glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+// glBindTexture(GL_TEXTURE_2D,0);
 
   //  sRGB
-glGenTextures(1, &srgbTexture);
+// glGenTextures(1, &srgbTexture);
 // Initialize the array with values between 0 and 1, where 0 is the closest point and 1 is the furthest point.
-glBindTexture(GL_TEXTURE_2D, srgbTexture);
+// glBindTexture(GL_TEXTURE_2D, srgbTexture);
 // glTexImage2D(GL_TEXTURE_2D,0,GL_DEPTH_COMPONENT32F, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, depthBuffer);
-glTexImage2D(GL_TEXTURE_2D,0,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0),0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+// glTexImage2D(GL_TEXTURE_2D,0,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0),0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 // glClearDepth(1.0);
-// glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,depthBuffer);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
-glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, srgbTexture, 0);
+glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,colorBuffer);
+  glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
+// glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, srgbTexture, 0);
 glClear(GL_COLOR_BUFFER_BIT);
 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 glClearColor(0.0, 1.0, 0.0, 1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 // Present the default framebuffer object.
 glFlush();
-
-  //  multisample
-glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0));
-glBindTexture(GL_TEXTURE_2D,colorBuffer);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-// glBindTexture(GL_TEXTURE_2D,0);
-
   
 // glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
