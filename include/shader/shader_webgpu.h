@@ -1266,7 +1266,7 @@ glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0));
 glBindTexture(GL_TEXTURE_2D,colorBuffer);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-glBindTexture(GL_TEXTURE_2D,0);
+// glBindTexture(GL_TEXTURE_2D,0);
 
   
 // glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
