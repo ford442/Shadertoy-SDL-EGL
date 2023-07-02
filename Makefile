@@ -74,8 +74,8 @@ b3_shader_webgpu:
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sPRECISE_F32=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=0 -sGL_POOL_TEMP_BUFFERS=0 \
-	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sWASM_BIGINT=1 -sGL_ASSERTIONS=0 \
-	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
+	 -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sWASM_BIGINT=0 -sGL_ASSERTIONS=0 \
+	 -sSUPPORT_ERRNO=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 --memory-init-file 0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_THROWING=0 \
 	 -fwhole-program -polly -polly-position=before-vectorizer -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 \
 	 -DNDEBUG -sFULL_ES3=1 -sTEXTDECODER=2 \
@@ -179,20 +179,20 @@ b3_combine_dev:
 
 b3_audio:
 	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-O0 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG
 	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AES -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
-	-O0 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
+	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants -mmultivalue \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
 	emcc main.o audio.o -o a3020.js -mllvm -force-vector-width=4 -std=gnu++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
-	-sEVAL_CTORS -O0 --closure 0 --closureFriendly -Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
+	-sEVAL_CTORS -O3 --closure 0 --closureFriendly -Xclang -menable-no-nans -Xclang -menable-no-infs -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
 	-fwhole-program -polly -sUSE_GLFW=0 -DSIMD=AES -DEMMALLOC_USE_64BIT_OPS=1 \
 	-sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
-	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 -sSUPPORT_LONGJMP=0 \
+	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 -sSUPPORT_LONGJMP=wasm \
 	-wasm-enable-eh -exception-model=wasm -sPRECISE_I64_MATH=2 -sUSE_BOOST_HEADERS=1 -Wall -Wextra -pedantic \
 	-fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc++abi \
 	-msimd128 -mavx -mpclmul -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -BOOST_UBLAS_NDEBUG -NDEBUG \
