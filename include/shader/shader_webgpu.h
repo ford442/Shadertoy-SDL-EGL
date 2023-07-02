@@ -918,6 +918,8 @@ glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 // glUniform1f(uni_tme_dlt,d_time.at(1,1));
 glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
 
+  // webgpu
+  /*
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
@@ -953,7 +955,7 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WG
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
 glUniform1i(smp_chn[raN],raN);
 }
-  /*
+
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
@@ -964,6 +966,8 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[2],2);
  glUniform1i(smp_chn[3],3);
  */
+
+  
 glUniform1i(uni_frm,uni_i.at(0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1286,7 +1290,7 @@ UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 */
 
     // texture
-
+/*
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
 glGenTextures(1,&wtexture[2]);
@@ -1353,6 +1357,8 @@ i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
 // glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 // glUniform1f(uni_srate,44100.0f);
+
+  */
 glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[0],256.0f,256.0f,gpu.gF());
