@@ -85,7 +85,25 @@ b3_shader_webgpu:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
          --memory-init-file 0 --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
-	 
+
+b3_video_google_llvm:
+	 em++ src/video/main_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
+	 em++ src/video/video_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
+	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
+	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
+	 emcc main_google_street.o video_google_street.o -o g0004.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
+	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
+	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
+	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
+	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
+	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sEXPORTED_FUNCTIONS='["_main","_b3","_clr","_str","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
+
 b3_shader_speed:
 	 ###         Shader
 	 @sh clang6.sh; \
@@ -568,24 +586,6 @@ b3_audio_test:
 	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
-	
-b3_video_google_llvm:
-	 em++ src/video/main_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
-	 em++ src/video/video_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 \
-	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
-	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main_google_street.o video_google_street.o -o g0004.js -mllvm -flto -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fno-rtti \
-	 -fwhole-program -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -sTEXTDECODER=1 \
-	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
-	 -sPRECISE_F32=1 -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -mavxifma \
-	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sFETCH_SUPPORT_INDEXEDDB=0 \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sEXPORTED_FUNCTIONS='["_main","_b3","_clr","_str","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_youtube_llvm:
 	 em++ src/video/main_google_street.cpp -c -std=c++20 -stdlib=libc++ -fno-math-errno -O0 -fpie \
