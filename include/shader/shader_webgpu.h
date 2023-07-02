@@ -1237,18 +1237,19 @@ nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 nanoPause();
 glGenRenderbuffers(1,&colorBuffer);
+    glGenFramebuffers(1,&frameBuffer);
+
 glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
 glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
-  glGenFramebuffers(1,&frameBuffer);
+   glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
+
   glBindFramebuffer(GL_FRAMEBUFFER,frameBuffer);
-glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
 
   glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,frameBuffer);
-  glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
 glUseProgram(S1.at(0,0,0));
-  
-nanoPause();
-glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
+  glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
+  glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
+
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
