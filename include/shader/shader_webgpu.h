@@ -1243,7 +1243,7 @@ glGenTextures(1, &depthBuffer);
 
 // Initialize the array with values between 0 and 1, where 0 is the closest point and 1 is the furthest point.
 glBindTexture(GL_TEXTURE_2D, depthBuffer);
-glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
 // Bind the depth buffer object to the depth buffer.
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frameBuffer);
