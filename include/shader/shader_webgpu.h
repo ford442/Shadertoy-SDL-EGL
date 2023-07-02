@@ -1168,7 +1168,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
-glEnable(GL_FRAMEBUFFER_SRGB);
+// glEnable(GL_FRAMEBUFFER_SRGB);
 // glEnable(GL_COLOR_CONVERSION_SRGB);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
@@ -1242,6 +1242,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,co
 glUseProgram(S1.at(0,0,0));
 nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
+glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
