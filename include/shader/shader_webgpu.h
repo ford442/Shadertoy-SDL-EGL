@@ -1245,12 +1245,12 @@ glGenTextures(1, &depthBuffer);
 glGenTextures(1, &srgbTexture);
 // Initialize the array with values between 0 and 1, where 0 is the closest point and 1 is the furthest point.
 glBindTexture(GL_TEXTURE_2D, srgbTexture);
-// glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, depthBuffer);
-glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA_8,  wasm_i32x4_extract_lane(sse3.at(0,0),0),  wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+// glTexImage2D(GL_TEXTURE_2D,0,GL_DEPTH_COMPONENT32F, wasm_i32x4_extract_lane(sse3.at(0,0),0), wasm_i32x4_extract_lane(sse3.at(0,0),0), 0, GL_DEPTH_COMPONENT, GL_FLOAT, depthBuffer);
+glTexImage2D(GL_TEXTURE_2D,0,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0),0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 // glClearDepth(1.0);
-  // glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,depthBuffer);
+// glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,depthBuffer);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
 glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, srgbTexture, 0);
 glClear(GL_COLOR_BUFFER_BIT);
