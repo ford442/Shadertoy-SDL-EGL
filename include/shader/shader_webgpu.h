@@ -1237,7 +1237,7 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 nanoPause();
 glGenRenderbuffers(1,&colorBuffer);
 glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
-glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
 glUseProgram(S1.at(0,0,0));
 nanoPause();
