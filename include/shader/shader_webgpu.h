@@ -368,6 +368,10 @@ std::vector<float>color_input(InputBufferUnits);
 std::vector<uint8_t>input(InputBufferBytes);
 std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
+WGpuBufferDescriptor bufferDescriptorI={262144*4,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={262144*4,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorC={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 
 // 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
@@ -446,10 +450,6 @@ return;
 };
 
 static void raf(){
-  WGpuBufferDescriptor bufferDescriptorI={262144*4,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorO={262144*4,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-WGpuBufferDescriptor bufferDescriptorM={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorC={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
@@ -464,10 +464,10 @@ WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
 WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
 WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
 WGPU_BufferDescriptor.at(0,0,3)=bufferDescriptorC;
-WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorI);
-WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorO);
-WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorM);
-WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&bufferDescriptorC);
+WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,0));
+WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,1));
+WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,2));
+WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(WGPU_Device.at(0,0,0),&WGPU_BufferDescriptor.at(0,0,3));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
