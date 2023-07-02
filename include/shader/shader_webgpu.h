@@ -1246,7 +1246,7 @@ glBindFramebuffer(GL_FRAMEBUFFER,frameBuffer);
 glUseProgram(S1.at(0,0,0));
 nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
-glTexParameteri(GL_RENDERBUFFER,GL_FRAMEBUFFER_SRGB,GL_TRUE);
+glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE,GL_FRAMEBUFFER_SRGB,GL_TRUE);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
