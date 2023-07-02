@@ -72,7 +72,7 @@ b3_shader_webgpu:
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
          -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
-	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sPRECISE_F32=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=0 -sGL_POOL_TEMP_BUFFERS=0 \
@@ -126,7 +126,7 @@ b3_shader_speed:
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
-	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -DNDEBUG -BOOST_UBLAS_NDEBUG \
@@ -161,7 +161,7 @@ b3_shader_compute:
 	 -force-vector-width=4 -mllvm -fno-stack-protector -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
-	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=1 -sLEGACY_GL_EMULATION=1 -sWASM_BIGINT=1 -DWORDS_BIGENDIAN=0 -NDEBUG -BOOST_UBLAS_NDEBUG \
@@ -188,7 +188,7 @@ b3_combine_dev:
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -lc++abi -flto -DEMMALLOC_USE_64BIT_OPS=1 \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -flto -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -sWASM=1 -DNDEBUG=1 \
@@ -214,7 +214,7 @@ b3_audio:
 	-sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -sFETCH_SUPPORT_INDEXEDDB=0 -sSUPPORT_LONGJMP=wasm \
 	-wasm-enable-eh -exception-model=wasm -sPRECISE_I64_MATH=2 -sUSE_BOOST_HEADERS=1 -Wall -Wextra -pedantic \
-	-fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma -lc++abi \
+	-fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize --enable-fma \
 	-msimd128 -mavx -mpclmul -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -BOOST_UBLAS_NDEBUG -NDEBUG \
 	-sGLOBAL_BASE=8388608 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -maes -fblocks -mtail-call -mnontrapping-fptoint -msign-ext \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sASSERTIONS=0 -sTOTAL_STACK=8MB \
@@ -257,7 +257,7 @@ b3_googleStreetView_dev:
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main_google_street.o video_google_street.o -o g0003.js -mllvm -O0 -mbulk-memory -fmerge-all-constants -std=c++20 -stdlib=libc++ -sUSE_SDL=2 -flto \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma -fstrict-vtable-pointers -fwhole-program-vtables-vtables -lc++abi \
+	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -mavx -mpclmul -msha -mavxifma -fstrict-vtable-pointers -fwhole-program-vtables-vtables \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -maes -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 \
 	 -sPRECISE_F32=1 --closure 0 --closureFriendly -sWASM_BIGINT=0 -mtune=tigerlake -march=corei7-avx -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -fwhole-program-vtables -polly -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -sUSE_GLFW=3 -DEMMALLOC_USE_64BIT_OPS=1 \
@@ -285,7 +285,7 @@ b3_shader_glsl:
 	 -mllvm -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
 	 -fasynchronous-unwind-tables -Rpass=loop-vectorize -Rpass-missed=loop-vectorize \
-	 -Rpass-analysis=loop-vectorize -lc++abi -Xclang -menable-no-nans -Xclang -menable-no-infs \
+	 -Rpass-analysis=loop-vectorize -Xclang -menable-no-nans -Xclang -menable-no-infs \
 	 -fblocks -sFETCH_SUPPORT_INDEXEDDB=0 -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=4096mb \
 	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=1 -sUSE_BOOST_HEADERS=1 -sTOTAL_STACK=8MB \
 	 -sGL_ASSERTIONS=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -sSUPPORT_LONGJMP=0 -NDEBUG \
@@ -330,7 +330,7 @@ b3_shader_llvm:
 	 -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections -rtlib=compiler-rt -fvectorize -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -Xclang -menable-no-nans -Xclang -menable-no-infs -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -mavxifma \
 	 -msse -msse2 -msse3 -mssse3 -msse4 --closureFriendly -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 -fblocks -fstrict-vtable-pointers -sALLOW_TABLE_GROWTH=1 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=512 \
-	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -lc++abi -mtail-call -mnontrapping-fptoint -msign-ext \
+	 -sDYNAMIC_EXECUTION=0 -sPRECISE_F32=0 -sWASM_BIGINT=0 -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 -mtail-call -mnontrapping-fptoint -msign-ext \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -fwhole-program-vtables -polly -sFORCE_FILESYSTEM=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sGL_UNSAFE_OPTS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sALLOW_TABLE_GROWTH=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sENVIRONMENT=web -sPRECISE_I64_MATH=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
