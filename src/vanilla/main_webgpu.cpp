@@ -259,8 +259,8 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-// sleep(1);
-// WGPU_Run();
+usleep(100);
+WGPU_Run();
 return;
 };
 
@@ -459,10 +459,6 @@ function strr(){
 Module.ccall("runWebGPU",{async:true});
 }
 
-function myStopFunction(){
-clearInterval(myInterval);
-}
-
 function normalResStart(){
 Module.ccall("startWebGPU",{async:true});
 setTimeout(function(){
@@ -523,8 +519,8 @@ normalResStart();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
-// Module.ccall("runWebGPU",{async:true});
-const myInterval=setInterval(strr,16.6);
+Module.ccall("runWebGPU",{async:true});
+// const myInterval=setInterval(strr,16.6);
 });
 
 setTimeout(function(){
