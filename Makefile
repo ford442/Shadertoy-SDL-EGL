@@ -2,7 +2,7 @@ LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
-STDS += -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=gnu++20 -std=gnu++2a -std=gnu++2b
+STDS += -std=c++98 -std=c++03 -std=c++11 -std=c++14 -std=c++17 -std=c++20 -std=c++2a -std=c++2b
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AVX
@@ -32,17 +32,17 @@ video_resurection_jebus:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sASSERTIONS=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
-	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
+	 -std=c++2b -sASYNCIFY -sPRECISE_F32=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js \
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=gnu++20 -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
-	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=c++20 -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
-	 -mllvm -std=gnu17 -std=gnu++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -mllvm -std=gnu17 -std=c++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -jsDWEBGPU_DEBUG=1 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt \
@@ -54,10 +54,10 @@ b3_vanilla_webgpu:
 	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
 b3_vanilla_llvm:
-	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=gnu++17 -stdlib=libc++ -mbulk-memory -mnontrapping-fptoint -msimd128 \
+	 em++ src/vanilla/main.cpp -c -sUSE_BOOST_HEADERS=1 -std=gnu17 -std=c++17 -stdlib=libc++ -mbulk-memory -mnontrapping-fptoint -msimd128 \
 	 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
 	 emcc src/vanilla/js.c -c -std=gnu17 -mbulk-memory -mnontrapping-fptoint -msimd128
-	 emcc main.o js.o -o v3020.js -mllvm -std=gnu17 -std=gnu++17 -mbulk-memory -mnontrapping-fptoint -msimd128 \
+	 emcc main.o js.o -o v3020.js -mllvm -std=gnu17 -std=c++17 -mbulk-memory -mnontrapping-fptoint -msimd128 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -sUSE_BOOST_HEADERS=1 -sUSE_WEBGPU=1 -sINITIAL_MEMORY=2048mb \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -stdlib=libc++ \
 	 -rtlib=compiler-rt \
@@ -67,8 +67,8 @@ b3_vanilla_llvm:
 	 --pre-js rSlider.js --pre-js slideOut.js 
 
 b3_shader_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
-	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
 	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 emcc main.o shader_webgpu.o -o s3024w.js $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
@@ -191,7 +191,7 @@ b3_combine_dev:
 	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_audio:
-	em++ src/audio/main.cpp -c -std=gnu++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AVX -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	em++ src/audio/main.cpp -c -std=c++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AVX -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -mtail-call -mnontrapping-fptoint \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
@@ -201,7 +201,7 @@ b3_audio:
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -mtail-call -mnontrapping-fptoint \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
-	emcc main.o audio.o -o a3020.js -mllvm -force-vector-width=4 -std=gnu++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
+	emcc main.o audio.o -o a3020.js -mllvm -force-vector-width=4 -std=c++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
 	-sEVAL_CTORS -O3 --closure 0 --closureFriendly -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
 	-fwhole-program-vtables -polly -sUSE_GLFW=0 -DSIMD=AVX -DEMMALLOC_USE_64BIT_OPS=1 \
 	-sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
@@ -217,8 +217,8 @@ b3_audio:
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_video_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
-	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=gnu++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
+	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
 	 em++ src/video/main.cpp -c \
 	 -fno-math-errno -std=c++20 -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -293,13 +293,13 @@ b3_shader_glsl:
 	 -sTEXTDECODER=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 	 
 b3_video_shader_llvm:
-	 em++ src/video/main_shader.cpp -c -std=gnu++2b -stdlib=libc++ -flto -fno-math-errno -O3 \
+	 em++ src/video/main_shader.cpp -c -std=c++2b -stdlib=libc++ -flto -fno-math-errno -O3 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on -mcpu=bleeding-edge
-	 em++ src/video/video_shader.cpp -c -std=gnu++2b -stdlib=libc++ -flto -fno-math-errno -O3 \
+	 em++ src/video/video_shader.cpp -c -std=c++2b -stdlib=libc++ -flto -fno-math-errno -O3 \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main_shader.o video_shader.o -o sh001.js -mllvm -flto -std=gnu++2b -stdlib=libc++ -fno-math-errno -O3 \
+	 emcc main_shader.o video_shader.o -o sh001.js -mllvm -flto -std=c++2b -stdlib=libc++ -fno-math-errno -O3 \
 	 -fwhole-program-vtables -polly -DWORDS_BIGENDIAN=0 -DCPU_IS_LITTLE_ENDIAN=1 \
 	 -sTEXTDECODER=1 \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
@@ -359,13 +359,13 @@ b3hd:
 	--pre-js startUp.js --post-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine:
-	 em++ src/combine/main.cpp -c -std=gnu++2a
-	 em++ src/combine/audio.cpp -c -std=gnu++2a -sUSE_SDL=2
-	 em++ src/combine/video.cpp -c -std=gnu++2a \
+	 em++ src/combine/main.cpp -c -std=c++2a
+	 em++ src/combine/audio.cpp -c -std=c++2a -sUSE_SDL=2
+	 em++ src/combine/video.cpp -c -std=c++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 em++ src/combine/shader.cpp -c -std=gnu++2a \
+	 em++ src/combine/shader.cpp -c -std=c++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o audio.o video.o shader.o -o b3hd001.js -std=gnu++2a -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -o b3hd001.js -std=c++2a -sUSE_SDL=2 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -395,20 +395,20 @@ b3_combine_test:
 	 --extern-pre-js gpujsx.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_combine_llvm:
-	 em++ src/combine/main.cpp -c -O0 -std=gnu++2b -stdlib=libc++ \
+	 em++ src/combine/main.cpp -c -O0 -std=c++2b -stdlib=libc++ \
 	 -ffast-math -fno-math-errno -mcpu=bleeding-edge \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=off -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/audio.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c -O0 -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -fno-fast-math \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffp-contract=on -fno-math-errno -mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/video.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/video.cpp -c -O0 -std=c++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 em++ src/combine/shader.cpp -c -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
+	 em++ src/combine/shader.cpp -c -O0 -std=c++2b -stdlib=libc++ -fno-math-errno -mcpu=bleeding-edge \
 	 -fno-fast-math -ffp-contract=on \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=gnu++2b -stdlib=libc++ -sUSE_SDL=2 -flto -sTOTAL_STACK=128MB \
+	 emcc main.o audio.o video.o shader.o -o b3hd002.js -static-pie -mllvm -O0 -std=c++2b -stdlib=libc++ -sUSE_SDL=2 -flto -sTOTAL_STACK=128MB \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -fno-math-errno -mcpu=bleeding-edge -sTEXTDECODER=0 \
 	 -msimd128 -mavx -mpclmul -msha -mavxifma \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -443,19 +443,19 @@ b3_combine_cloud:
 	 --pre-js setUp.js --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js --extern-pre-js fluid.js --extern-pre-js flui.js --pre-js gpujsx.js --pre-js tilt.js
 
 b3_shader:
-	 em++ src/shader/main.cpp -c -std=gnu++2a
-	 em++ src/shader/shader.cpp -c -std=gnu++2a
-	 emcc main.o shader.o -o s3021.js -std=gnu++2a \
+	 em++ src/shader/main.cpp -c -std=c++2a
+	 em++ src/shader/shader.cpp -c -std=c++2a
+	 emcc main.o shader.o -o s3021.js -std=c++2a \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_google:
-	 em++ src/shader/main.cpp -c -std=gnu++2a
-	 em++ src/shader/shader_google_street.cpp -c -std=gnu++2a \
+	 em++ src/shader/main.cpp -c -std=c++2a
+	 em++ src/shader/shader_google_street.cpp -c -std=c++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2
-	 emcc main.o shader_google_street.o -o g0026.js -std=gnu++2a \
+	 emcc main.o shader_google_street.o -o g0026.js -std=c++2a \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
@@ -473,13 +473,13 @@ b3_shader_simd:
 
 b3_shader_test:
 	 em++ src/shader/main.cpp -c -O3 -ffast-math \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=fast
 	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -ffp-contract=on \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -msimd128 -mavx \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021.js -O0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=fast \
+	 emcc main.o shader.o -o s3021.js -O0 -std=c++2b -stdlib=libc++ -fno-math-errno -ffp-contract=fast \
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -493,11 +493,11 @@ b3_shader_js:
 	 em++ src/shader/main.cpp -c -O3 -ffast-math \
 	 -fno-math-errno -std=c++11 -stdlib=libc++ -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -ffp-contract=on
-	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=gnu++2b -fno-fast-math -ffp-contract=off \
+	 em++ src/shader/shader.cpp -c -O0 -fno-math-errno -std=c++2b -fno-fast-math -ffp-contract=off \
 	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -ffunction-sections -fdata-sections
-	 emcc main.o shader.o -o s3021js.js -O0 -sWASM=0 -std=gnu++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
+	 emcc main.o shader.o -o s3021js.js -O0 -sWASM=0 -std=c++2b -stdlib=libc++ -fno-math-errno -ffp-contract=off \
 	 -mcpu=bleeding-edge -ffunction-sections -fdata-sections \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -509,13 +509,13 @@ b3_shader_js:
 
 b3_shader_texture:
 	 em++ src/shader/main_texture.cpp -c -O0 -fpie -ffast-math \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=on
 	 em++ src/shader/shader_texture.cpp -c -O0 -fpie -fno-math-errno -fno-fast-math -ffp-contract=off \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -msimd128 -mavx \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
 	 -fwasm-exceptions -ffunction-sections -fdata-sections
-	 emcc main_texture.o shader_texture.o -o t001.js -flto -mllvm -O0 -fpie -std=gnu++2b -stdlib=libc++ -fno-math-errno \
+	 emcc main_texture.o shader_texture.o -o t001.js -flto -mllvm -O0 -fpie -std=c++2b -stdlib=libc++ -fno-math-errno \
 	 -fwasm-exceptions -mcpu=bleeding-edge -mtune=tigerlake -march=corei7-avx -ffunction-sections -fdata-sections \
 	 -msimd128 -mavx -mpclmul -maes -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 \
 	 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -sFETCH_SUPPORT_INDEXEDDB=0 \
@@ -802,20 +802,20 @@ b3php:
 
 cloud:
 	 em++ src/b3main.cpp -c \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -mavx \
 	 -fapprox-func -mbulk-memory -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
-	 -fno-math-errno -sUSE_SDL=2 -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fno-math-errno -sUSE_SDL=2 -std=c++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs.cpp -c \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point \
 	 -fapprox-func -mbulk-memory -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
@@ -857,20 +857,20 @@ g00:
 
 txt:
 	 em++ src/b3main.cpp -c \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -m32 -matomics -ffast-math -ffp-contract=fast -freciprocal-math
 	 em++ src/b3ogl.cpp -c \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point -mavx \
 	 -fapprox-func -mbulk-memory -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
 	 -ffp-exception-behavior=maytrap -fno-fast-math -ffp-contract=off 
 	 em++ src/b3sdl.cpp -c \
-	 -fno-math-errno -sUSE_SDL=2 -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fno-math-errno -sUSE_SDL=2 -std=c++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions \
 	 -mbulk-memory -m32 -fno-fast-math -ffp-contract=on -freciprocal-math
 	 em++ src/b3emjs_txt.cpp -c \
-	 -fno-math-errno -std=gnu++2b -stdlib=libc++ -matomics \
+	 -fno-math-errno -std=c++2b -stdlib=libc++ -matomics \
 	 -mcpu=bleeding-edge -fwasm-exceptions -ffixed-point \
 	 -fapprox-func -mbulk-memory -m32 -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
@@ -883,7 +883,7 @@ txt:
 
 fire:
 	 em++ h3srgb.cpp -o g3016.js \
-	 -std=gnu++2b -fno-fast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -std=c++2b -fno-fast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point -ffp-exception-behavior=strict -fslp-vectorize -mavx \
 	 -fapprox-func -mbulk-memory -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=off \
@@ -894,14 +894,14 @@ fire:
 fire2:
 	 em++ h3srgb.cpp -o g3016.js \
 	 -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 \
-	 -std=gnu++2b -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -std=c++2b -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 -sPRECISE_F32=2 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js setUp.js --pre-js startUp.js --post-js rSlider.js --post-js slideOut.js --post-js gpujsx.js --post-js pagec.js --pre-js fluid.js --post-js flui.js
 
 speed:
 	 em++ h3speed.cpp -o gs001.js \
-	 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -std=c++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point \
 	 -fapprox-func -mbulk-memory -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast \
@@ -910,7 +910,7 @@ speed:
 
 cloudxx:
 	 em++ h3srgb.cpp -o c3001.js \
-	 -std=gnu++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
+	 -std=c++2b -stdlib=libc++ -ffast-math -ffp-contract=off -matomics -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
 	 -mcpu=bleeding-edge -fwasm-exceptions -fexperimental-library -ffixed-point \
 	 -fapprox-func -mbulk-memory -m32 -msimd128 -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mmutable-globals -mnontrapping-fptoint \
 	 -mextended-const -fno-signed-zeros -freciprocal-math -ffp-contract=fast \
@@ -955,7 +955,7 @@ fire22:
 	 -sMAXIMUM_MEMORY=4096mb -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -std=gnu++20 \
+	 -std=c++20 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_ldd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagegs.js --extern-pre-js cl-gpu.js
 
@@ -964,7 +964,7 @@ crp2:
 	 -sMAXIMUM_MEMORY=4096mb -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=1 -sFULL_ES3=1 \
-	 -std=gnu++20 \
+	 -std=c++20 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUpCrp2.js --extern-post-js pagecrp2.js --extern-pre-js cl-gpu.js
 
@@ -975,7 +975,7 @@ shade:
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
 	 -mcpu=bleeding-edge \
 	 -fno-signed-zeros -freciprocal-math -ffp-contract=off \
-	 -stdlib=libc++ -std=gnu++2a \
+	 -stdlib=libc++ -std=c++2a \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js setUp.js --pre-js startUp.js --post-js pages.js --pre-js rSlider.js --pre-js slideOut.js
 
@@ -984,7 +984,7 @@ paint:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sASSERTIONS=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES2=0 -sFULL_ES3=1 \
-	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
+	 -std=c++2b -sASYNCIFY -sPRECISE_F32=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_stp"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --post-js fluid.js --post-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js gpujsx.js
 
@@ -993,7 +993,7 @@ paint2:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sASSERTIONS=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
-	 -std=gnu++2b -sASYNCIFY -sPRECISE_F32=2 \
+	 -std=c++2b -sASYNCIFY -sPRECISE_F32=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
@@ -1011,7 +1011,7 @@ g3f: g3f.cpp Makefile
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=0 \
 	 -sUSE_SDL=2 -sFULL_ES3=0 -sFULL_ES2=0 \
-	 --closure 1 -g2 -flto -std=gnu++2b \
+	 --closure 1 -g2 -flto -std=c++2b \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --post-js filesys.js --post-js ccall.js --extern-pre-js setUp.js --post-js pagef.js
 
@@ -1020,7 +1020,7 @@ g3i: g3i.cpp Makefile
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=0 -sFULL_ES2=0 \
-	 --closure 1 -g2 -flto -std=gnu++2b \
+	 --closure 1 -g2 -flto -std=c++2b \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --post-js filesys.js --post-js ccall.js --extern-pre-js setUp.js --post-js pagei.js
 
@@ -1031,7 +1031,7 @@ dbl: dbl.cpp Makefile
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	 -DNDEBUG=1=1 -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=0 \
-	 --closure 1 -g2 -std=gnu++2b -flto \
+	 --closure 1 -g2 -std=c++2b -flto \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --post-js filesysdbl.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageg.js
 
@@ -1040,7 +1040,7 @@ g0:
 	-sMAXIMUM_MEMORY=4096mb -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1536mb \
 	-sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
-	-std=gnu++20 \
+	-std=c++20 \
 	-sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--extern-pre-js filesys.js --extern-pre-js ccall.js --extern-pre-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --extern-pre-js pageg0.js --extern-pre-js cl-gpu.js
 
@@ -1051,7 +1051,7 @@ crp:
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	-sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	-sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=0 \
-	--closure 1 -g2 -std=gnu++20 \
+	--closure 1 -g2 -std=c++20 \
 	-sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUpCrp.js --post-js pagecrc.js
 
@@ -1062,7 +1062,7 @@ img: img.cpp Makefile
 	-sUSE_SDL=2 -sFULL_ES3=1 \
 	-DNDEBUG=1 -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	-sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=0 -sWASM_BIGINT=0 \
-	--closure 1 -g2 -std=gnu++2b \
+	--closure 1 -g2 -std=c++2b \
 	-sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--post-js filesys.js --post-js ccall.js --post-js fs.js --extern-pre-js setUp.js --extern-pre-js startUp.js --post-js pageImg.js
 
