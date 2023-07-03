@@ -17,7 +17,7 @@ BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=1 \
 -sGL_POOL_TEMP_BUFFERS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
 
-LINK_FLAGS += --use-preload-plugins --closure 0 --closureFriendly -mllvm -exception-model=wasm -mtune=haswell \
+LINK_FLAGS += $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly -mllvm -exception-model=wasm -mtune=haswell \
 	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux \
@@ -37,15 +37,15 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c -std=gnu17 -std=c++20 -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ lib/lib_webgpu_cpp20.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
-	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
+	 em++ src/vanilla/main_webgpu.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -stdlib=libc++ -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
-	 -mllvm -std=gnu17 -std=c++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -mllvm $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -jsDWEBGPU_DEBUG=1 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt \
-	 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sTEXTDECODER=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
@@ -70,7 +70,7 @@ b3_shader_webgpu:
 	 em++ lib/lib_webgpu.cpp -std=gnu17 -std=c++20 -stdlib=libc++ -static
 	 em++ src/shader/shader_webgpu.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 emcc main.o shader_webgpu.o -o s3024w.js $(LDFLAGS) $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 emcc main.o shader_webgpu.o -o s3024w.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=256mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 -sWASM_BIGINT=0 \
 	 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
