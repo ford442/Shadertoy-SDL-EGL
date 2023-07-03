@@ -16,7 +16,7 @@ inline char wgl_cmp_src[2000]=
 // "let h:u32=f*g;"
 // "var i:u32;"
 // "loop{"
-"outputBuffer[0]=inputBuffer[0];"
+"outputBuffer[global_id.x]=inputBuffer[global_id.x];"
 // "outputBuffer[(f*g)+1]=inputBuffer[0];"
 // "outputBuffer[(f*g)+2]=inputBuffer[0];"
 // "outputBuffer[(f*g)+3]=inputBuffer[0];"
@@ -259,7 +259,7 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-usleep(100);
+usleep(25);
 WGPU_Run();
 return;
 };
