@@ -14,15 +14,14 @@ COMMON_FLAGS += -O3 $(STDS) -stdlib=libc++ -fmerge-all-constants -ffast-math -ff
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=1 \
--sGL_POOL_TEMP_BUFFERS=1 -sGL_ASSERTIONS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=1 \
+-sGL_POOL_TEMP_BUFFERS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
 
 LINK_FLAGS += --use-preload-plugins --closure 0 --closureFriendly -mllvm -exception-model=wasm -mtune=haswell \
 	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
-	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
-	 --memory-init-file 0 -rtlib=compiler-rt -sTEXTDECODER=2 -sPRECISE_I64_MATH=2 -sPOLYFILL=0 \
-	 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1
+	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux \
+	 --memory-init-file 0 -rtlib=compiler-rt
 
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
