@@ -3,14 +3,13 @@
 #include <functional>
 #include <algorithm>
 
-template<class ArgumentType, class ResultType>
-struct unary_function
-{
-    typedef ArgumentType argument_type;
-    typedef ResultType result_type;
+template<class ArgumentType,class ResultType>
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
 };
+
 #include <boost/compute.hpp>
-// #include <boost/compute/interop/opengl.hpp>
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
 #include <random>
@@ -89,38 +88,14 @@ inline char wgl_cmp_src[2000]=
 
 inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-"#extension GL_ARB_precision_hint_nicest : enable\n"
-"#extension GL_ARB_gpu_shader4 : enable\n"
-"#extension GL_ARB_gpu_shader5 : enable\n"
-"#extension GL_ARB_gpu_shader_fp64 : enable\n"
-"#extension GL_ARB_vertex_attrib_64bit : enable\n"
-"#extension GL_NV_shader_buffer_load : enable\n"
-"#extension GL_ARB_color_buffer_float : enable\n"
-"#extension GL_ARB_shader_atomic_counters : enable\n"
-"#extension GL_OES_sample_shading : enable\n"
-"#extension GL_OES_vertex_half_float : enable\n"
-"#extension GL_ARB_multisample : enable\n"
-"#extension GL_ARB_shading_language_420pack : enable\n"
-"#extension GL_EXT_multisample_compatibility : enable\n"
-"#extension GL_OES_sample_shading : enable\n"
-"#extension GL_ARB_framebuffer_object : enable\n"
-"#extension GL_ARB_framebuffer_sRGB : enable\n"
-"#extension GL_NV_half_float : enable\n"
-"#extension GL_ARB_fragment_program : enable\n"
-"#extension GL_NV_fragment_program_option : enable\n"
-"#extension GL_NV_fragment_program : enable\n"
-"#extension GL_NV_fragment_program2 : enable\n"
-"#extension GL_EXT_sRGB_write_control : enable\n"
-"#extension GL_NV_float_buffer : enable\n"
-"#extension GL_EXT_bindable_uniform : enable\n"
-"#extension GL_EXT_geometry_shader4 : enable\n"
-"#extension GL_ARB_enhanced_layouts : enable\n"
+"#pragma STDGL(precision highp double)\n"
 "#pragma STDGL(precision highp uint)\n"
 "#pragma STDGL(precision highp atomic_uint)\n"
 "#pragma STDGL(precise none)\n"
 "#pragma STDGL(strict off)\n"
 "#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
+"#pragma STDGL(sample all)\n"
 "#pragma STDGL(fastmath on)\n"
 "#pragma STDGL(fastprecision on)\n"
 "#pragma STDGL(unroll all)\n"
