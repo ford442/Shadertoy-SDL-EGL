@@ -1220,8 +1220,8 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 
     // Boost Compute / Interop / OpenGL
 boost::compute::device CLdevice=boost::compute::system::default_device();
-boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
-boost::compute::interop::opengl::vertex_array_object vertex_array(CLdevice);
+boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
+boost::compute::vertex_array_object vertex_array(CLdevice);
 vertex_array.bind_buffer(GL_ARRAY_BUFFER,buffer_object);
 vertex_array.set_attribute_pointer(0,4,GL_FLOAT,GL_FALSE,0,0);
 boost::compute::buffer vertex_buffer(CLdevice,sizeof(float)*4);
