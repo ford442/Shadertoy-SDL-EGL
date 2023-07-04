@@ -10,7 +10,9 @@
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
+
 using unary_function=__unary_function;
+
 #include <boost/compute/interop/opengl.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
@@ -744,7 +746,7 @@ mms2.at(0,1)=e->clientY;
 return (EM_BOOL)1;
 }
 
-static char8_t * result=NULL;
+static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
 boost::uint_t<32>::exact uniBlock;
@@ -1016,9 +1018,9 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char *>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
