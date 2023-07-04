@@ -800,7 +800,7 @@ S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(boost::compute::float_<64> set){
+static void u_iTime_set(boost::compute::float_64 set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 sse2.at(0,0)=wasm_f64x2_splat(set);
