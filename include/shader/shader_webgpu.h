@@ -223,10 +223,10 @@ EGL_NONE,EGL_NONE
 inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
 using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
-using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::compute::uint_>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
-using f_tensor=boost::numeric::ublas::tensor<float>;
-using d_tensor=boost::numeric::ublas::tensor<double>;
+using f_tensor=boost::numeric::ublas::tensor<boost::compute::float_>;
+using d_tensor=boost::numeric::ublas::tensor<douboost::compute::double_>;
 using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
@@ -794,13 +794,13 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static void PRGin(boost::uint_t<64>::exact prg){
+static void PRGin(boost::compute::uint_ prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(boost::compute::float_ set){
+static void u_iTime_set(boost::compute::double_ set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 sse2.at(0,0)=wasm_f64x2_splat(set);
