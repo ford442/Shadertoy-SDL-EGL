@@ -130,11 +130,11 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma STDGL(inline none)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
+"precision mediump sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
@@ -160,7 +160,8 @@ inline char frg_ftr_src[420]=
 "int _N=16;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0,2.449715lf/1.0lf,1.0lf));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0lf,1.0,1.0lf,1.0lf));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
@@ -173,8 +174,10 @@ EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT|EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT|EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -221,18 +224,18 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
-using mouse_tensor=boost::numeric::ublas::tensor<float>;
-using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::float_>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::compute::uint_>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::compute::uint_>;
-using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::compute::int_>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::float_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using di_tensor=boost::numeric::ublas::tensor<boost::compute::uint_>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
-using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using i_tensor=boost::numeric::ublas::tensor<boost::compute::int_>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
-using gi_tensor=boost::numeric::ublas::tensor<GLint>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::compute::int_>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
@@ -341,9 +344,9 @@ void * userDataB;
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
-GLuint colorBuffer;
-GLuint srgbTexture;
-GLuint frameBuffer;
+boost::compute::uint_ colorBuffer;
+boost::compute::uint_ srgbTexture;
+boost::compute::uint_ frameBuffer;
 GLuint depthBuffer;
 WGpuTexture textureA;
   WGpuAdapter adapter=0;
