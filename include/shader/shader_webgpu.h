@@ -10,6 +10,7 @@
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
+using std::unary_function=std::__unary_function;
 #include <boost/compute/interop/opengl.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
