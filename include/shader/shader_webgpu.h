@@ -1,4 +1,7 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+
+#include <boost/compute/interop/opengl.hpp>
+
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
 #include <random>
@@ -14,7 +17,6 @@
 #include <boost/numeric/ublas/vector.hpp>
 
 
-#include <boost/compute/interop/opengl.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 #include <algorithm>
