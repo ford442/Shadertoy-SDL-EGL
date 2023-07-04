@@ -1,11 +1,12 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+#include <functional.hpp>
+
 template<class ArgumentType, class ResultType>
-struct std::unary_function
+struct unary_function
 {
     typedef ArgumentType argument_type;
     typedef ResultType result_type;
 };
-#include <boost/functional.hpp>
 
 #include <boost/compute/interop/opengl.hpp>
 
