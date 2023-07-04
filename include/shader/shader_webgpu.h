@@ -1218,7 +1218,7 @@ glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STREAM_DRAW);
 
     // Boost Compute / Interop / OpenGL
     /*
@@ -1238,7 +1238,7 @@ buffer_object.set_data(vertex_buffer);
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 
 // nanoPause();
@@ -1262,7 +1262,7 @@ boost::uint_t<32>::exact uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock"
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_DYNAMIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_STREAM_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 GLsizei * binLength;
