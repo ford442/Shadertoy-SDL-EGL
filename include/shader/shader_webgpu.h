@@ -1220,7 +1220,7 @@ glEnable(GL_STENCIL_TEST);
 // glCullFace(GL_FRONT);
 // glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
@@ -1301,7 +1301,7 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA32UI,wasm_i32x4_extrac
 glBindRenderbuffer(GL_RENDERBUFFER,renderBufferB);
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 glBindRenderbuffer(GL_RENDERBUFFER,renderBufferB);
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_RGBA32UI,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA32UI,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
