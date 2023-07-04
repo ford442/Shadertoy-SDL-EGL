@@ -354,6 +354,7 @@ GLuint wtexture[4];
 GLuint colorBuffer;
 GLuint renderBufferA;
 GLuint renderBufferB;
+GLuint renderBufferC;
 GLuint srgbTexture;
 GLuint frameBuffer;
 GLuint depthBuffer;
@@ -1289,6 +1290,7 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 glGenRenderbuffers(1,&renderBufferA);
 glGenRenderbuffers(1,&renderBufferB);
+glGenRenderbuffers(1,&renderBufferC);
 // glGenRenderbuffers(1,&colorBuffer);
 glGenFramebuffers(1,&frameBuffer);
 
@@ -1303,11 +1305,16 @@ glBindRenderbuffer(GL_RENDERBUFFER,renderBufferB);
 glBindRenderbuffer(GL_RENDERBUFFER,renderBufferB);
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA32UI,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 
+glBindRenderbuffer(GL_RENDERBUFFER,renderBufferC);
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glBindRenderbuffer(GL_RENDERBUFFER,renderBufferC);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA32UI,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,renderBufferA);
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,renderBufferB);
-glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,renderBufferB);
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,renderBufferC);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
 glClear(GL_COLOR_BUFFER_BIT);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
