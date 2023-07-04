@@ -5,7 +5,7 @@
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include <boost/functional>
+#include <boost/functional.hpp>
 
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
