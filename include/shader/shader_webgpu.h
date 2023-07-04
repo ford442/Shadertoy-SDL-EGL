@@ -1,6 +1,12 @@
 #include <boost/cstdfloat.hpp>  // must be first include
-#include <functional>
-// using std::unary_function;
+template<class ArgumentType, class ResultType>
+struct unary_function
+{
+    typedef ArgumentType argument_type;
+    typedef ResultType result_type;
+};
+#include <boost/functional.hpp>
+
 #include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
