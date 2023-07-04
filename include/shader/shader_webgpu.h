@@ -1,6 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include <functional>
-using std::unary_function;
+// using std::unary_function;
 #include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
