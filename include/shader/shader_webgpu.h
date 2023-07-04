@@ -1217,7 +1217,7 @@ gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
     
-boost::interop::opengl::vao vao;
+boost::compute::interop::opengl::vao vao;
 vao.bind();
     
 // nanoPause();
@@ -1225,7 +1225,7 @@ vao.bind();
 // gpu.EBOin(shad.EBO);
 // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 // glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-      boost::interop::opengl::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+      boost::compute::interop::opengl::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 
 // nanoPause();
 src[0]=cm_hdr;
