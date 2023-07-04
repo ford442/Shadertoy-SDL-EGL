@@ -1205,6 +1205,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_precision_hint_nicest");
 // glEnable(GL_FRAMEBUFFER_SRGB);
 // glEnable(GL_COLOR_CONVERSION_SRGB);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
@@ -1213,7 +1214,7 @@ glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
 glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
-glDepthFunc(GL_LESS);
+// glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
@@ -1227,7 +1228,7 @@ glEnable(GL_STENCIL_TEST);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
-// glBlendEquation(GL_FUNC_SUBTRACT);
+glBlendEquation(GL_FUNC_SUBTRACT);
 
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 
