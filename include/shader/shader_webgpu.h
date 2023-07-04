@@ -11,7 +11,6 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 
-using unary_function=__unary_function;
 
 #include <boost/compute/interop/opengl.hpp>
 #include <boost/tuple/tuple.hpp>
