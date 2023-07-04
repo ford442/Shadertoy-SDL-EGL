@@ -1262,7 +1262,7 @@ boost::uint_t<32>::exact uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock"
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_STREAM_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_DYNAMIC_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 GLsizei * binLength;
