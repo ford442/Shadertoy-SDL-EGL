@@ -7,6 +7,7 @@ struct unary_function
     typedef ArgumentType argument_type;
     typedef ResultType result_type;
 };
+#include <boost/compute.hpp>
 
 #include <boost/compute/interop/opengl.hpp>
 
