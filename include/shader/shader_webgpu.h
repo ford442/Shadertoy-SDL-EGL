@@ -920,7 +920,8 @@ else{
 clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
-glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+    boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+// glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -1219,6 +1220,7 @@ glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 
     // Boost Compute / Interop / OpenGL
+    /*
 boost::compute::device CLdevice=boost::compute::system::default_device();
 boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::interop::opengl::vertex_array_object vertex_array(CLdevice);
@@ -1229,12 +1231,13 @@ vertex_buffer.write(
 new float[8]{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},0,sizeof(float)*4);
 buffer_object.bind(GL_ARRAY_BUFFER);
 buffer_object.set_data(vertex_buffer);
-
+*/
+    
 // nanoPause();
-// glGenBuffers((GLsizei)1,&shad.EBO);
-// gpu.EBOin(shad.EBO);
-// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glGenBuffers((GLsizei)1,&shad.EBO);
+gpu.EBOin(shad.EBO);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 
 // nanoPause();
