@@ -793,13 +793,13 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static void PRGin(boost::compute::uint_64 prg){
+static void PRGin(boost::uint_t<64>::exact prg){
 sse4.at(0,0)=wasm_i64x2_splat(prg);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(double set){
+static void u_iTime_set(boost::compute::float_<64> set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 sse2.at(0,0)=wasm_f64x2_splat(set);
