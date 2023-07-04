@@ -96,6 +96,7 @@ inline char wgl_cmp_src[2000]=
 inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_ARB_precision_hint_nicest : require\n"
+"#extension GL_ARB_gpu_shader4 : enable\n"
 "#extension GL_ARB_gpu_shader5 : enable\n"
 "#extension GL_ARB_gpu_shader_fp64 : enable\n"
 "#extension GL_ARB_vertex_attrib_64bit : enable\n"
