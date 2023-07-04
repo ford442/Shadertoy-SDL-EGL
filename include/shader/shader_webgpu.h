@@ -2,8 +2,6 @@
 #include <boost/cstdint.hpp>
 #include <functional>
 #include <algorithm>
- using namespace boost::cstdint;
-
 
 template<class ArgumentType, class ResultType>
 struct unary_function
@@ -225,8 +223,8 @@ EGL_NONE,EGL_NONE
 
 inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using shad_tensor=boost::numeric::ublas::tensor<ulong_long_t>;
-using prg_tensor=boost::numeric::ublas::tensor<ulong_long_t>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::ulong_long_type>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::ulong_long_type>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
