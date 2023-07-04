@@ -1209,16 +1209,24 @@ glEnable(GL_STENCIL_TEST);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
+
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
+
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
+    
+boost::opengl::vao vao;
+vao.bind();
+    
 // nanoPause();
-glGenBuffers((GLsizei)1,&shad.EBO);
-gpu.EBOin(shad.EBO);
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+// glGenBuffers((GLsizei)1,&shad.EBO);
+// gpu.EBOin(shad.EBO);
+// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
+// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+      boost::opengl::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+
 // nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
