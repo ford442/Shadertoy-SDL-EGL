@@ -343,6 +343,8 @@ GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
 GLuint colorBuffer;
+GLuint renderBufferA;
+GLuint renderBufferB;
 GLuint srgbTexture;
 GLuint frameBuffer;
 GLuint depthBuffer;
@@ -1276,18 +1278,27 @@ bin.at(0,0)=GLbin;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
-glGenRenderbuffers(1,&colorBuffer);
+glGenRenderbuffers(1,&renderBufferA);
+glGenRenderbuffers(1,&renderBufferB);
+// glGenRenderbuffers(1,&colorBuffer);
 glGenFramebuffers(1,&frameBuffer);
 
   //  multisample
-glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
-glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
-glBindRenderbuffer(GL_RENDERBUFFER,colorBuffer);
+glBindRenderbuffer(GL_RENDERBUFFER,renderBufferA);
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glBindRenderbuffer(GL_RENDERBUFFER,renderBufferA);
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+
+glBindRenderbuffer(GL_RENDERBUFFER,renderBufferB);
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glBindRenderbuffer(GL_RENDERBUFFER,renderBufferB);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_SRGB8_ALPHA8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
-glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,colorBuffer);
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,renderBufferA);
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,renderBufferB);
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,renderBufferB);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,frameBuffer);
 glClear(GL_COLOR_BUFFER_BIT);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
@@ -1297,7 +1308,7 @@ glFlush();
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
-glUniform1i(glGetUniformLocation(S1.at(0,0,0),"colorBuffer"),0);
+glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBufferA"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
