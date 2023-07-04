@@ -1,6 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 template<class ArgumentType, class ResultType>
-struct unary_function
+struct std::unary_function
 {
     typedef ArgumentType argument_type;
     typedef ResultType result_type;
