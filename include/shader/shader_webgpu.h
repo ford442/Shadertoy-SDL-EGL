@@ -10,24 +10,18 @@ struct unary_function
     typedef ResultType result_type;
 };
 #include <boost/compute.hpp>
-
-#include <boost/compute/interop/opengl.hpp>
-
+// #include <boost/compute/interop/opengl.hpp>
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
 #include <random>
 #include <cfloat>
 #include <math.h>
 #include <new>
-
-
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
-
-
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 #include <algorithm>
@@ -685,23 +679,23 @@ Di.at(1,1)=0.0;
 return;
 }
 
-static inline boost::compute::float_ gF(){
+static inline float gF(){
 return Fi.at(0,0);
 }
 
-static inline boost::compute::float_ gF5(){
+static inline float gF5(){
 return Fi.at(1,2);
 }
 
-static inline boost::compute::float_ gFm1(){
+static inline float gFm1(){
 return Fi.at(0,1);
 }
 
-static inline boost::compute::float_ gFm5(){
+static inline float gFm5(){
 return Fi.at(2,0);
 }
 
-static inline boost::compute::float_ gF0(){
+static inline float gF0(){
 return Fi.at(1,1);
 }
 
