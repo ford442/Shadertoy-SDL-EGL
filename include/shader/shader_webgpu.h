@@ -101,8 +101,8 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma STDGL(inline none)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
@@ -128,11 +128,11 @@ inline char frg_hdr_src[1000]=
 inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
-"int _N=16;void mainImage(out dvec4 O,dvec2 U){"
+"int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0lf,2.449715lf/1.0lf,1.0lf));}"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0f,1.0f,1.0f,1.0f));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228lf/1.0f,2.449715lf/1.0f,1.0f));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0f,1.0f,1.0f,1.0f));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
@@ -147,7 +147,6 @@ EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 EGL_GL_COLORSPACE_SRGB_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
@@ -159,7 +158,7 @@ EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
 EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE,EGL_NONE
@@ -177,7 +176,7 @@ EGL_CONFORMANT,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_TRUE,
 EGL_NATIVE_RENDERABLE,EGL_TRUE,
  // EGL_COLOR_DEPTH_10_BIT_EXT, 10,
