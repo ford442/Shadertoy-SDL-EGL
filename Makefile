@@ -37,14 +37,14 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS) -sMEMORY64=1
+	 em++ src/vanilla/main_webgpu.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
 	 -mllvm $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -jsDWEBGPU_DEBUG=1 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
-	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt -sWASM_BIGINT=1 -sMEMORY64=1 \
+	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sTEXTDECODER=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -190,17 +190,17 @@ b3_combine_dev:
 	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
 
 b3_audio:
-	em++ src/audio/main.cpp -c -std=c++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AVX -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	em++ src/audio/main.cpp -sMEMORY64=1 -c -std=c++20 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AVX -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -mtail-call -mnontrapping-fptoint \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG
-	em++ src/audio/audio.cpp -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AVX -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
+	em++ src/audio/audio.cpp -sMEMORY64=1 -c -std=c++17 -stdlib=libc++ -sUSE_BOOST_HEADERS=1 -DSIMD=AVX -fno-fast-math -fno-math-errno -mbulk-memory -fno-stack-protector \
 	-O3 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -fmerge-all-constants \
 	-mcpu=bleeding-edge -fwasm-exceptions -ffunction-sections -fdata-sections -ffp-contract=off -mtail-call -mnontrapping-fptoint \
 	-fwasm-exceptions -ffunction-sections -fdata-sections -fno-tree-vectorize -fvectorize -Rpass=loop-vectorize \
 	-Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -sUSE_SDL=2 -Wall -Wextra -pedantic -BOOST_UBLAS_NDEBUG 
-	emcc main.o audio.o -o a3020.js -mllvm -force-vector-width=4 -std=c++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
+	emcc main.o audio.o -sMEMORY64=1 -o a3020.js -mllvm -force-vector-width=4 -std=c++17 -stdlib=libc++ -ffp-contract=off -mtune=tigerlake -march=corei7-avx -fno-math-errno \
 	-sEVAL_CTORS -O3 --closure 0 --closureFriendly -sPRECISE_F32=1 -sTEXTDECODER=1 -mcpu=bleeding-edge \
 	-fwhole-program-vtables -polly -sUSE_GLFW=0 -DSIMD=AVX -DEMMALLOC_USE_64BIT_OPS=1 \
 	-sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
@@ -210,7 +210,7 @@ b3_audio:
 	-msimd128 -mavx -mpclmul -mavx2 -msha -mfma -mbmi2 -mpopcnt -mcx16 -msse -msse2 -BOOST_UBLAS_NDEBUG -NDEBUG \
 	-sGLOBAL_BASE=8388608 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavxifma -maes -mtail-call -mnontrapping-fptoint \
 	-sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sASSERTIONS=0 -sTOTAL_STACK=8MB \
-	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=512mb \
+	-sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=512mb \
 	-Wl,--lto-O3,--stack-first -DNDEBUG=1 \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
