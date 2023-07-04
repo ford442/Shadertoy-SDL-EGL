@@ -1111,11 +1111,10 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-// eglBindAPI(EGL_OPENGL_API);
-eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
-    eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
-
+eglChooseConfig(display,att_lst,&eglconfig,(EGLint)1,&config_size);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
