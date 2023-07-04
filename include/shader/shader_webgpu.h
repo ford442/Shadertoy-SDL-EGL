@@ -1219,15 +1219,15 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 
     // Boost Compute / Interop / OpenGL
 boost::compute::device CLdevice=boost::compute::system::default_device();
-boost::compute::interop::opengl::buffer_object_interface cl_buffer_object(CLdevice,GL_ARRAY_BUFFER);
-boost::compute::interop::opengl::vertex_array_object cl_vertex_array(CLdevice);
-cl_vertex_array.bind_buffer(GL_ARRAY_BUFFER,cl_buffer_object);
+boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
+boost::compute::interop::opengl::vertex_array_object vertex_array(CLdevice);
+vertex_array.bind_buffer(GL_ARRAY_BUFFER,buffer_object);
 vertex_array.set_attribute_pointer(0,4,GL_FLOAT,GL_FALSE,0,0);
-boost::compute::buffer cl_vertex_buffer(CLdevice,sizeof(float)*4);
-cl_vertex_buffer.write(
+boost::compute::buffer vertex_buffer(CLdevice,sizeof(float)*4);
+vertex_buffer.write(
 new float[8]{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},0,sizeof(float)*4);
-cl_buffer_object.bind(GL_ARRAY_BUFFER);
-cl_buffer_object.set_data(cl_vertex_buffer);
+buffer_object.bind(GL_ARRAY_BUFFER);
+buffer_object.set_data(vertex_buffer);
 
 // nanoPause();
 // glGenBuffers((GLsizei)1,&shad.EBO);
