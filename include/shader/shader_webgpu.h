@@ -221,12 +221,12 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
-using mouse_tensor=boost::numeric::ublas::tensor<float>;
-using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
-using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::ulong_long_t>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::ulong_long_t>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
-using f_tensor=boost::numeric::ublas::tensor<float>;
-using d_tensor=boost::numeric::ublas::tensor<double>;
+using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
+using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
@@ -800,7 +800,7 @@ S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(boost::compute::float_ set){
+static void u_iTime_set(boost::compute::double_ set){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 sse2.at(0,0)=wasm_f64x2_splat(set);
@@ -808,7 +808,7 @@ sse2.at(0,0)=wasm_f64x2_splat(set);
 return;
 }
 
-static void u_iSize_set(float set){
+static void u_iSize_set(boost::compute::double_ set){
 sse.at(1,0)=wasm_f32x4_splat(set);
 t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
@@ -823,7 +823,7 @@ i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 return;
 }
 
-static void u_iTimeDelta_set(double set){
+static void u_iTimeDelta_set(boost::compute::double_ set){
 sse.at(0,1)=wasm_f64x2_splat(set);
 // d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
@@ -893,8 +893,8 @@ static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 if(ms_l==true){
@@ -1429,8 +1429,8 @@ u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
-u_time.time_spanb=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<double,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 float iRate=192000.0f;
