@@ -1,4 +1,5 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+#include <boost/cstdint.hpp>
 #include <functional>
 #include <algorithm>
  
@@ -222,8 +223,8 @@ EGL_NONE,EGL_NONE
 
 inline EM_BOOL ms_l,clk_l;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using shad_tensor=boost::numeric::ublas::tensor<boost::ulong_long_t>;
-using prg_tensor=boost::numeric::ublas::tensor<boost::ulong_long_t>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::cstdint::ulong_long_t>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::cstdint::ulong_long_t>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
