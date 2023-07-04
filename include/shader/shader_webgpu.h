@@ -1,4 +1,5 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+#include <functional>
 using std::unary_function;
 #include <boost/compute/interop/opengl.hpp>
 
@@ -8,7 +9,7 @@ using std::unary_function;
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include <functional>
+
 
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
