@@ -2,12 +2,12 @@ LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
-STDS += -std=c++98 -std=c++03 -std=c++11 -std=c++14  -std=c++17 -std=c++20 -std=c++2a -std=c++2b
+STDS += -std=c++98 -std=c++03 -std=c++11 -std=c++14 -std=c++17 -std=c++20 -std=c++2a -std=c++2b
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -O3 $(STDS) -fmerge-all-constants -ffast-math -ffp-contract=off -mnontrapping-fptoint -fno-stack-protector \
+COMMON_FLAGS += -O3 $(STDS) -stdlib=libc++ -fmerge-all-constants -ffast-math -ffp-contract=off -mnontrapping-fptoint -fno-stack-protector \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
