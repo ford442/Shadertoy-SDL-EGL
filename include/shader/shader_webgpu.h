@@ -1268,7 +1268,7 @@ glGenRenderbuffers(1,&TX.at(0,0,0));
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glGenRenderbuffers(1,&TX.at(0,0,2));
 // glGenRenderbuffers(1,&colorBuffer);
-glGenFramebuffers(1,&frameBuffer);
+glGenFramebuffers(1,&TX.at(1,0,0));
 
   //  multisample
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
