@@ -1274,7 +1274,7 @@ glGenFramebuffers(1,&frameBuffer);
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGB10_A2,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,10,GL_RGB10_A2,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_STENCIL_INDEX8,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
@@ -1284,7 +1284,7 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_STENCIL_INDEX8,wasm_i32x4_
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,32,GL_DEPTH_COMPONENT32F,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
