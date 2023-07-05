@@ -90,7 +90,7 @@ inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#pragma STDGL(precision highp double)\n"
 "#pragma STDGL(precision highp uint)\n"
-"#pragma STDGL(precision highp atomic_uint)\n"
+"#pragma STDGL(precision highp _uint)\n"
 "#pragma STDGL(precise none)\n"
 "#pragma STDGL(strict off)\n"
 "#pragma STDGL(invariant all)\n"
@@ -713,8 +713,8 @@ boost::compute::double_ hi=0.0;
 }mouse;
 
 int Size=0;
-boost::atomic<int>tmm=166666000;
-boost::atomic<int>tmm2=1000;
+int tmm=166666000;
+int tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
@@ -966,6 +966,7 @@ glUniform1i(smp_chn[raN],raN);
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glClearDepth(1.0);
+glSampleCoverage(1.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
