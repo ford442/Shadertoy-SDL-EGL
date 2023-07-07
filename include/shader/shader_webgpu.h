@@ -1285,7 +1285,7 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_STENCIL_INDEX8,wasm_i32x4_
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,wasm_i32x4_extract_lane(sse3.at(0,0),0),wasm_i32x4_extract_lane(sse3.at(0,0),0));
-
+glClearDepthf(0.0f);
   //  sRGB
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
