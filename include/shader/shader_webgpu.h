@@ -1202,8 +1202,8 @@ glEnable(GL_STENCIL_TEST);
   
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendEquationSeparate(GL_MIN,GL_MAX);
-glBlendEquation(GL_FUNC_SUBTRACT);
+glBlendEquationSeparate(GL_MIN,GL_MAX);
+// glBlendEquation(GL_FUNC_SUBTRACT);
 glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
@@ -1219,9 +1219,8 @@ auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
 // vertex_array.bind_buffer(GL_ARRAY_BUFFER,buffer_object);
 // vertex_array.set_attribute_pointer(0,4,GL_FLOAT,GL_FALSE,0,0);
-boost::compute::buffer vertex_buffer(CLcontext,sizeof(float)*4);
-vertex_buffer.write(
-new float[8]{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},0,sizeof(float)*4);
+// boost::compute::buffer vertex_buffer(CLcontext,sizeof(float)*4);
+// vertex_buffer.write(new float[8]{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},0,sizeof(float)*4);
 // buffer_object.bind(GL_ARRAY_BUFFER);
 // buffer_object.set_data(vertex_buffer);
     
