@@ -1211,12 +1211,11 @@ glEnable(GL_STENCIL_TEST);
 // glCullFace(GL_FRONT);
 // glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-  
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
-glClearColor(Fi.at(1,1),Fi.at(1,1),Fi.at(1,1),Fi.at(0,0));
+glClearColor(1.0f,1.0f,1.0f,1.0f);
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
