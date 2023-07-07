@@ -1311,12 +1311,12 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glClear(GL_COLOR_BUFFER_BIT);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
 glClearColor(1.0,1.0,1.0,1.0);
-// glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 glFlush();
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
-// glUniform1i(glGetUniformLocation(S1.at(0,0,0),"TX.at(0,0,0)"),0);
+glUniform1i(glGetUniformLocation(S1.at(0,0,0),"TX.at(0,0,0)"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -1441,7 +1441,7 @@ mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
 glViewport((GLint)0,(GLint)0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
-glViewport((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));  //  viewport/scissor after UsePrg runs at full resolution
+glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,i_size.at(0,1),i_size.at(0,1));
 u_iTime_set(0.0);
