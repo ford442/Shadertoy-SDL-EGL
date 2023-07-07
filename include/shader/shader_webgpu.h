@@ -973,8 +973,8 @@ glUniform1i(smp_chn[raN],raN);
 
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glClearDepth(1.0);
-// glSampleCoverage(1.0,GL_FALSE);
+  // glClearDepth(1.0);
+  // glSampleCoverage(1.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
@@ -1289,7 +1289,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH32F_STENCIL8,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(0,0),i_size.at(0,0));
 // glClearDepth(1.0f);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 // glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
