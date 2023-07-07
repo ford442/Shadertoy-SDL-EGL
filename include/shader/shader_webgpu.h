@@ -1212,8 +1212,8 @@ glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 
     // Boost Compute / Interop / OpenGL
 boost::compute::device CLdevice=boost::compute::system::default_device();
-boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
-boost::compute::interop::opengl::vertex_array_object vertex_array(CLdevice);
+boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
+boost::compute::vertex_array_object vertex_array(CLdevice);
 auto CLcontext=boost::compute::context(CLdevice);
 auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
