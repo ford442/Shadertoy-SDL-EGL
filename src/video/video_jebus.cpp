@@ -735,10 +735,10 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
 glFrontFace(GL_CW);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
