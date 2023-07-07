@@ -1282,13 +1282,13 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
   //  multisample
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0));
 glGenFramebuffers(1,&TX.at(1,0,0));
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH32F_STENCIL8,i_size.at(0,0),i_size.at(0,0));
 // glClearDepth(1.0f);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
