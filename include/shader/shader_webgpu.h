@@ -1291,7 +1291,7 @@ glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH32F_STENCIL8,i_size.at(0,0),i_size.at(0,0));
 // glClearDepth(1.0f);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 // glStencilMask(1);
 // glClearStencil(1);
 
