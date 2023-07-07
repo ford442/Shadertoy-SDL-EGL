@@ -1317,7 +1317,7 @@ glFlush();
   
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
-// glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBufferA"),0);
+glUniform1i(glGetUniformLocation(S1.at(0,0,0),"TX.at(0,0,0)"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
