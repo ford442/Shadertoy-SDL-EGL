@@ -1090,9 +1090,9 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -1301,10 +1301,12 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBU
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glClear(GL_COLOR_BUFFER_BIT);
+glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
-glClearColor(1.0,1.0,1.0,1.0);
+glClearColor(0.0,0.0,0.0,1.0);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
+glFinish();
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
