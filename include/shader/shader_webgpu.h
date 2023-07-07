@@ -970,7 +970,7 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[2],2);
  glUniform1i(smp_chn[3],3);
  */
-  
+
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glClearDepth(1.0);
@@ -1201,7 +1201,7 @@ glEnable(GL_DEPTH_TEST);
 glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
-glEnable(GL_BLEND);
+//   glEnable(GL_BLEND);
 glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
@@ -1211,11 +1211,11 @@ glEnable(GL_STENCIL_TEST);
 // glCullFace(GL_FRONT);
 // glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+//   glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glBlendEquationSeparate(GL_MIN,GL_MAX);
+//   glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
-glClearColor(1.0f,1.0f,1.0f,1.0f);
+//   glClearColor(1.0f,1.0f,1.0f,1.0f);
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
@@ -1315,7 +1315,7 @@ glFlush();
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
-glUniform1i(glGetUniformLocation(S1.at(0,0,0),"TX.at(0,0,0)"),0);
+// glUniform1i(glGetUniformLocation(S1.at(0,0,0),"TX.at(0,0,0)"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
