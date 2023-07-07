@@ -1299,7 +1299,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBU
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
-glClearColor(1.0,1.0,1.0,1.0);
+glClearColor(1.0f,1.0f,1.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT);
 glFlush();
 
