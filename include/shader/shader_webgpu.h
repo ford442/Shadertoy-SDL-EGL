@@ -1304,7 +1304,7 @@ glStencilMask(0);
 glClearStencil(0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
-  */
+
   //  sRGB
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glClear(GL_COLOR_BUFFER_BIT);
@@ -1313,7 +1313,8 @@ glBindFramebuffer(GL_FRAMEBUFFER,0);
 glClearColor(0.0,1.0,0.0,1.0);
 glClear(GL_COLOR_BUFFER_BIT);
 glFlush();
-
+  */
+  
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
 // glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBufferA"),0);
