@@ -974,7 +974,7 @@ glUniform1i(smp_chn[raN],raN);
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
-glClearDepthf(1.0f);
+glClearDepthf(0.0f);
 // glSampleCoverage(1.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
