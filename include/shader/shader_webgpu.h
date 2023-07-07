@@ -1292,7 +1292,7 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH32F_STENCIL8,i_size.a
 glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
-glStencilMask(0);
+glStencilMask(1);
 glClearStencil(1);
 
   //  sRGB
