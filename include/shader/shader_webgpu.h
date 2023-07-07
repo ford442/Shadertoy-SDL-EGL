@@ -1299,15 +1299,16 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glBindFramebuffer(GL_FRAMEBUFFER,0);
-glClearColor(1.0f,1.0f,1.0f,1.0f);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glClear(GL_COLOR_BUFFER_BIT);
+glBindFramebuffer(GL_FRAMEBUFFER,0);
+glClearColor(1.0,1.0,1.0,1.0);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glFlush();
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
-glUniform1i(glGetUniformLocation(S1.at(0,0,0),"TX.at(0,0,0)"),0);
+glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
