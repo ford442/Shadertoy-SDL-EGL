@@ -42,7 +42,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 extern "C" {
 
 EM_JS(void,ma,(),{
-// "use strict";
+"use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
@@ -52,17 +52,17 @@ intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
-vv.currentTime+=-(0.016);
+vv.currentTime+=-(0.008);
 }
-},16.66);
+},8);
 };
 
 var intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
-vv.currentTime+=-(0.016);
-},16.66);
+vv.currentTime+=-(0.008);
+},8);
 };
 
 var intervalLoop;
@@ -75,11 +75,11 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.016666);
+vv.currentTime+=-(0.01666);
 }else{
 f=false;
 }}else if(vv.currentTime<b){
-vv.currentTime+=(0.016666);
+vv.currentTime+=(0.01666);
 }else{
 f=true;
 }
@@ -169,7 +169,7 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
   
-//   contx.disable(gl.DITHER);
+contx.disable(gl.DITHER);
 
 const g=new GPUX({canvas:bcanvas,webGl:contx});
 const g2=new GPUX();
@@ -195,8 +195,8 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 let r=g.createKernel(function(f){
