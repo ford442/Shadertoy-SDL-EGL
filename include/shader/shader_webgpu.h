@@ -1,6 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include <boost/cstdint.hpp>
-#include <boost/functional.hpp>
+#include <functional>
 #include <algorithm>
 
 template<class ArgumentType,class ResultType>
@@ -11,8 +11,8 @@ typedef ResultType result_type;
 
 #include <boost/compute.hpp>
 // #include <boost/compute/core.hpp>
-#include <boost/compute/interop/opengl.hpp>
-#include <boost/compute/algorithm.hpp>
+// #include <boost/compute/interop/opengl.hpp>
+// #include <boost/compute/algorithm.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
