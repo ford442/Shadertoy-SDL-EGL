@@ -9,9 +9,10 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-// #include <boost/compute/algorithm.hpp>
 
-// #include <boost/compute.hpp>
+#include <boost/compute.hpp>
+#include <boost/compute/algorithm.hpp>
+
 // #include <boost/compute/core.hpp>
 // #include <boost/compute/interop/opengl.hpp>
 
