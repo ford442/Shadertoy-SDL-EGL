@@ -1,6 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include <boost/cstdint.hpp>
-#include <functional>
+#include <boost/functional.hpp>
 #include <algorithm>
 
 template<class ArgumentType,class ResultType>
