@@ -1472,7 +1472,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
-emscripten_set_main_loop_arg((void(*)())Run::procc.Rend,nullptr,0,1);
+emscripten_set_main_loop_arg((void(*)(void *))Run::procc.Rend,nullptr,0,1);
 return;
 }
   
