@@ -9,7 +9,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include "../../include/CL/cl.hpp"
+#include <CL/cl.h>
 #include <boost/compute.hpp>
 #include <boost/compute/algorithm.hpp>
 
