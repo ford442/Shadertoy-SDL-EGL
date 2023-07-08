@@ -1229,8 +1229,8 @@ gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 
-auto CLdevice=boost::compute::system::default_device();
-auto CLcontext=boost::compute::context(CLdevice);
+// auto CLdevice=boost::compute::system::default_device();
+// auto CLcontext=boost::compute::context(CLdevice);
 // auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 
  /*   // Boost Compute / Interop / OpenGL
