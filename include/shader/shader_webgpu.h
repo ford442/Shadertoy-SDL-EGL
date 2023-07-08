@@ -135,8 +135,8 @@ inline char frg_ftr_src[420]=
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228lf/1.0f,2.449715lf/1.0f,1.0f));}"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0f,1.0f,1.0f,1.0f));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0lf,2.449715lf/1.0lf,1.0lf));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0f,1.0f,1.0f,1.0f));}"
 "void mainImage0\n\0";
 
 EGLint att_lst2[1000]={ 
