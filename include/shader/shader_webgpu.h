@@ -762,7 +762,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=120;
+int32_t iFps=70;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
