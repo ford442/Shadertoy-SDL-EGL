@@ -192,7 +192,7 @@ EGL_GREEN_SIZE,(EGLint)10,
 EGL_BLUE_SIZE,(EGLint)10,
 EGL_ALPHA_SIZE,(EGLint)10,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)32,
+EGL_STENCIL_SIZE,(EGLint)0,
 EGL_BUFFER_SIZE,(EGLint)64,
 EGL_SAMPLE_BUFFERS,16,
 EGL_GL_COLORSPACE_KHR, EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
@@ -974,7 +974,7 @@ glUniform1i(smp_chn[raN],raN);
  */
 
 glUniform1i(uni_frm,uni_i.at(0,0));
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glClearDepth(1.0);
 glSampleCoverage(1.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1089,7 +1089,7 @@ const char * frag_body=procc.rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
@@ -1210,7 +1210,8 @@ glDisable(GL_DITHER);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 glDisable(GL_BLEND);
-glEnable(GL_STENCIL_TEST);
+// glEnable(GL_STENCIL_TEST);
+glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
@@ -1320,7 +1321,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
 glClearColor(0.0f,0.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glFlush();
 glFinish();
 
