@@ -13,7 +13,7 @@ typedef ResultType result_type;
 
 // #include <boost/compute.hpp>
 // #include <boost/compute/core.hpp>
-#include <boost/compute/interop/opengl.hpp>
+// #include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
@@ -1228,9 +1228,9 @@ gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
 
-auto CLdevice=boost::compute::system::default_device();
-auto CLcontext=boost::compute::context(CLdevice);
-auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
+// auto CLdevice=boost::compute::system::default_device();
+// auto CLcontext=boost::compute::context(CLdevice);
+// auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 
  /*   // Boost Compute / Interop / OpenGL
 boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
