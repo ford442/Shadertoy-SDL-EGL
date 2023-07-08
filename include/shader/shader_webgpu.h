@@ -1226,9 +1226,10 @@ glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
-/*
-    // Boost Compute / Interop / OpenGL
+  
 boost::compute::device CLdevice=boost::compute::system::default_device();
+
+ /*   // Boost Compute / Interop / OpenGL
 boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::vertex_array_object vertex_array(CLdevice);
 auto CLcontext=boost::compute::interop::opengl::context(CLdevice);
