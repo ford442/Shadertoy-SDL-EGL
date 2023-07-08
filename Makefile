@@ -12,7 +12,7 @@ COMMON_FLAGS += -O3 -stdlib=libc++ -fmerge-all-constants -ffast-math -ffp-contra
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 
-BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -BOOST_COMPUTE_USE_CPP11=1
+BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sGL_TRACK_ERRORS=0 -sGL_UNSAFE_OPTS=1 \
 -sGL_POOL_TEMP_BUFFERS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
