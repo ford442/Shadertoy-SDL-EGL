@@ -14,7 +14,7 @@ typedef ResultType result_type;
 #include <boost/compute/algorithm.hpp>
 
 // #include <boost/compute/core.hpp>
-// #include <boost/compute/interop/opengl.hpp>
+#include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
@@ -1292,11 +1292,21 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // glGenRenderbuffers(1,&colorBuffer);
 
   //  multisample
+glGenFramebuffers(1,&TX.at(1,0,0));
+
+        //  color texture2d
+glGenTexture(1,&TX.at(0,1,1));
+glBindTexture(GL_TEXTURE_2D_MULTISAMPLE,TX.at(0,1,1));
+glTexImage2DMultisample(GL_TEXTURE_2D,8,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0),nullptr);
+glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
+glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_TEXTURE_2D_MULTISAMPLE,TX.at(0,1,1),0);
+glDrawBuffer(GL_COLOR_ATTACHMENT1);
+  
         //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0));
-glGenFramebuffers(1,&TX.at(1,0,0));
+
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
   /*     //  depth32 stencil8 renderbuffer
