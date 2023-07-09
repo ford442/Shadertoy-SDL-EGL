@@ -258,7 +258,7 @@ static v_tensor sse2=v_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
 static v_tensor sse4=v_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
-static shad_tensor TX=shad_tensor{3,3};
+static shad_tensor TX=shad_tensor{3,3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
@@ -1290,17 +1290,29 @@ bin.at(0,0)=GLbin;
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
+glGenFramebuffers(1,&TX.at(2,0,0));
 
+       //  non multisampled color renderbuffer
+glGenRenderbuffers(1,&TX.at(2,1,0));
+glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
+glBindFramebuffer(GL_FRAMEBUFFER,TX.at(2,0,0));
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
+
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
+// glBindRenderbuffer(GL_RENDERBUFFER,0);
+glBindFramebuffer(GL_FRAMEBUFFER,0);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glFlush();
+glFinish();
+  
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
 
-   /*       //  non multisampled color renderbuffer
-glGenRenderbuffers(1,&TX.at(1,1,0));
-glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,1,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
-glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(1,1,0));
-*/
+
         //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
