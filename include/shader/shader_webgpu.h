@@ -978,6 +978,9 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 glClearDepth(1.0);
 glSampleCoverage(1.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 
 return;
 }
