@@ -1295,7 +1295,7 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 glGenFramebuffers(1,&TX.at(1,0,0));
 
         //  color texture2d
-glGenTexture(1,&TX.at(0,1,1));
+glGenTextures(1,&TX.at(0,1,1));
 glBindTexture(GL_TEXTURE_2D_MULTISAMPLE,TX.at(0,1,1));
 glTexImage2DMultisample(GL_TEXTURE_2D,8,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0),nullptr);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
