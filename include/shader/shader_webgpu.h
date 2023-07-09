@@ -1215,7 +1215,7 @@ glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
-// glDisable(GL_BLEND);
+glDisable(GL_BLEND);
 // glEnable(GL_STENCIL_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
