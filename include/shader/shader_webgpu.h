@@ -1089,7 +1089,7 @@ const char * frag_body=procc.rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
@@ -1207,13 +1207,13 @@ glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 // glEnable(GL_STENCIL_TEST);
-glDisable(GL_STENCIL_TEST);
+// glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
@@ -1299,8 +1299,16 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0))
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
 
+glGenRenderbuffers(1,&TX.at(0,0,1));
+glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH32F_STENCIL8,i_size.at(0,0),i_size.at(0,0));
+glClearDepth(1.0);
+glBindFramebuffer(GL_FRAMEBUFFER,TX.at(2,0,0));
+glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
+glStencilMask(1);
+glClearStencil(1);
+  
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glClear(GL_COLOR_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
@@ -1308,10 +1316,10 @@ glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glFlush();
 glFinish();
+
   
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
-
 
         //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
@@ -1336,6 +1344,7 @@ glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 glStencilMask(1);
 glClearStencil(1);
+
   */    //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
@@ -1346,7 +1355,6 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glClear(GL_COLOR_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
