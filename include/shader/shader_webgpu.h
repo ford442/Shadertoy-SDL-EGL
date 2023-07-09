@@ -700,6 +700,7 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
+// const unsigned char indc[24]={gu0,gu1,gu2,gu3,gu2,gu3,gu7,gu6,gu6,gu7,gu5,gu4,gu4,gu5,gu1,gu0,gu5,gu7,gu3,gu1,gu0,gu2,gu6,gu4};
 // const unsigned char indc[10]={gu0,gu1,gu2,gu3,gu4,gu5,gu6,gu7,gu8,gu9};
 inline GLint uni_srate=0,uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res[4]={},smp_chn[5],uni_frm=0;
 inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
@@ -975,16 +976,16 @@ glUniform1i(smp_chn[raN],raN);
 
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 
 glClearDepth(1.0);
 glSampleCoverage(1.0,GL_FALSE);
-glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(2,0,0));
 // glClearDepth(1.0);
 // glSampleCoverage(1.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-  glBindFramebuffer(GL_FRAMEBUFFER,0);
+ // glBindFramebuffer(GL_FRAMEBUFFER,0);
 
 return;
 }
@@ -1071,7 +1072,10 @@ const Vertex vrt[10]={
 {gpu.gF5(),gpu.gF0(),gpu.gF()}
 };
 */
+  // old
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
+  // ai
+// const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gFm1()},{gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF()},gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gFm1()},{gpu.gF(),gpu.gFm1(),gpu.gFm1()},{gpu.gF()},{gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF()},{gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1()}};
 // const Vertex vrt[8]={{gpu.gDm1(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gDm1(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()}};
 ::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,iFps,Si,sse3);
@@ -1319,11 +1323,11 @@ glClearStencil(1);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glClear(GL_COLOR_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
+glBindFramebuffer(GL_FRAMEBUFFER,0);
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
-glBindFramebuffer(GL_FRAMEBUFFER,0);
   
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
@@ -1364,11 +1368,12 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glClear(GL_COLOR_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
+glBindFramebuffer(GL_FRAMEBUFFER,0);
+
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glFlush();
 glFinish();
-glBindFramebuffer(GL_FRAMEBUFFER,0);
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
