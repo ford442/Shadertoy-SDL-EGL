@@ -1298,7 +1298,7 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
 
-   /*    //  non multisampled color renderbuffer
+     //  non multisampled color renderbuffer
 glGenFramebuffers(1,&TX.at(2,0,0));
 
 glGenRenderbuffers(1,&TX.at(2,1,0));
@@ -1323,7 +1323,7 @@ glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
-    */
+   
   
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
