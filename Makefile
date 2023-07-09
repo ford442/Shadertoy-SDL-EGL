@@ -70,7 +70,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu.cpp -stdlib=libc++ -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 emcc $(STDS) -o s3025.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 emcc $(STDS) -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=512mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 -sWASM_BIGINT=0 \
 	 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
