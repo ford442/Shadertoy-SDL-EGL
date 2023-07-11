@@ -1220,6 +1220,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 // glEnable(GL_FRAMEBUFFER_SRGB);
 // glEnable(GL_COLOR_CONVERSION_SRGB);
+  glEnable(GL_MULTISAMPLE_ARB);
+
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
@@ -1341,14 +1343,14 @@ glGenFramebuffers(1,&TX.at(1,0,0));
         //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0));
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
 
           //  alpha renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_SRGB8_ALPHA8,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_SRGB8_ALPHA8,i_size.at(0,0),i_size.at(0,0));
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX.at(0,1,1));
 
@@ -1365,7 +1367,7 @@ glClearStencil(1);
   */    //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
 glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
@@ -1378,7 +1380,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 glBindFramebuffer(GL_FRAMEBUFFER,0);
 
 glClearColor(0.0f,0.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
 
