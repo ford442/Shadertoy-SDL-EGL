@@ -132,7 +132,7 @@ inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
-// "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 "\n\0";
 /*
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
