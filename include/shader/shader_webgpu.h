@@ -729,7 +729,7 @@ int tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-const int32_t ele=36;
+const int ele=36;
 // const int ele=10;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
@@ -811,7 +811,7 @@ return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
-static void i_iSize_set(int32_t set){
+static void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -917,7 +917,7 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
- glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -1211,16 +1211,16 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 // glEnable(GL_FRAMEBUFFER_SRGB);
 // glEnable(GL_COLOR_CONVERSION_SRGB);
-glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-glDepthMask(GL_TRUE);
+// glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+// glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
-glDisable(GL_BLEND);
-// glEnable(GL_STENCIL_TEST);
+// glDisable(GL_BLEND);
+glEnable(GL_STENCIL_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
