@@ -132,6 +132,9 @@ inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 inline char frg_ftr_src[420]=
+// "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+"\n\0";
+/*
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 // "#define mainImage mainImage0(out vec4 O,vec2 U);"
@@ -145,6 +148,7 @@ inline char frg_ftr_src[420]=
 // "O += o;}O /= float(_N*_N);O=pow(O,vec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0f,1.0f,1.0f,1.0f));}"
 "void mainImage0\n\0";
+*/
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
