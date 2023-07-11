@@ -216,6 +216,7 @@ EGL_NONE,EGL_NONE
 };
 
 inline EM_BOOL ms_l,clk_l;
+using gli_tensor=boost::numeric::ublas::tensor<GLsizei>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<GLuint>;
@@ -277,11 +278,11 @@ static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
 static i_tensor i_date=i_tensor{2,2};
 static f_tensor t_size=f_tensor{1,2};
-static li_tensor i_size=li_tensor{1,2};
+static gli_tensor i_size=gli_tensor{1,2};
 static void_tensor cntx=void_tensor{2,2};
 static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
-static li_tensor mms2=li_tensor{2,2};
+static i_tensor mms2=i_tensor{2,2};
 static void_tensor bin=void_tensor{1,1};
 static wa_tensor WGPU_Adapter=wa_tensor{1,1,2};
 static wd_tensor WGPU_Device=wd_tensor{1,1,2};
