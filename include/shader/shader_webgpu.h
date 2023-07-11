@@ -196,20 +196,20 @@ EGL_COLOR_FORMAT_HI,EGL_TRUE,
 EGL_NATIVE_RENDERABLE,EGL_TRUE,
  // EGL_COLOR_DEPTH_10_BIT_EXT, 10,
  // EGL_ALPHA_SIZE_10_BIT_EXT, 10,
-EGL_RED_SIZE,(EGLint)10,
-EGL_GREEN_SIZE,(EGLint)10,
-EGL_BLUE_SIZE,(EGLint)10,
-EGL_ALPHA_SIZE,(EGLint)10,
+EGL_RED_SIZE,(EGLint)16,
+EGL_GREEN_SIZE,(EGLint)16,
+EGL_BLUE_SIZE,(EGLint)16,
+EGL_ALPHA_SIZE,(EGLint)16,
 EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)10,
+EGL_STENCIL_SIZE,(EGLint)16,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,8,
+EGL_SAMPLE_BUFFERS,16,
 EGL_GL_COLORSPACE_KHR, EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 EGL_GL_COLORSPACE_SRGB_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 // EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
 //  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,8,
+EGL_SAMPLES,16,
 // EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
 EGL_NONE,EGL_NONE
@@ -1342,7 +1342,7 @@ glGenFramebuffers(1,&TX.at(1,0,0));
         //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(0,0)*1.33333,i_size.at(0,0)*1.33333);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(0,0)*1.25,i_size.at(0,0)*1.25);
 glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
@@ -1350,7 +1350,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX
           //  alpha renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_SRGB8_ALPHA8,i_size.at(0,0)*1.33333,i_size.at(0,0)*1.33333);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_SRGB8_ALPHA8,i_size.at(0,0)*1.25,i_size.at(0,0)*1.25);
 glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX.at(0,1,1));
@@ -1358,7 +1358,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX
    //  depth32 stencil8 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(0,0)*1.33333,i_size.at(0,0)*1.33333);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(0,0)*1.25,i_size.at(0,0)*1.25);
 glBindRenderbuffer(GL_RENDERBUFFER,0);
 glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
@@ -1369,7 +1369,7 @@ glClearStencil(1);
     //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,i_size.at(0,0)*1.33333,i_size.at(0,0)*1.33333);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,i_size.at(0,0)*1.25,i_size.at(0,0)*1.25);
 glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
