@@ -102,7 +102,7 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma STDGL(sample all)\n"
-"#pragma STDGL(fastmath on)\n"
+// "#pragma STDGL(fastmath on)\n"
 // "#pragma STDGL(fastprecision on)\n"
 "#pragma STDGL(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
@@ -765,7 +765,7 @@ private:
 
 Compile compile;
 
-int32_t iFps=90;
+int32_t iFps=70;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -1520,7 +1520,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
-emscripten_set_main_loop((void(*)())Run::procc.Rend,90,0);
+emscripten_set_main_loop((void(*)())Run::procc.Rend,140,0);
 return;
 }
   
