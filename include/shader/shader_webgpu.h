@@ -225,6 +225,7 @@ using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+using rv_tensor=boost::numeric::ublas::tensor<register v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
@@ -264,9 +265,9 @@ using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 
 static v_tensor sse=v_tensor{2,2};
-static v_tensor sse2=v_tensor{2,2};
+static v_tensor sse2=rv_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
-static v_tensor sse4=v_tensor{1,1};
+static v_tensor sse4=rv_tensor{1,1};
 static shad_tensor Sh=shad_tensor{3,3};
 static shad_tensor TX=shad_tensor{3,3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
@@ -799,16 +800,16 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static void PRGin(boost::uint_t<64>::exact prg){
-sse4.at(0,0)=wasm_i64x2_splat(prg);
+static void PRGin(register boost::uint_t<64>::exact m64){
+sse4.at(0,0)=wasm_i64x2_splat(m64);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
-static void u_iTime_set(boost::compute::double_ set){
+static void u_iTime_set(register boost::compute::double_ m80){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-sse2.at(0,0)=wasm_f64x2_splat(set);
+sse2.at(0,0)=wasm_f64x2_splat(m80);
 // d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
@@ -826,7 +827,7 @@ sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.13;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*4.0;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*2.0;
 return;
 }
 
