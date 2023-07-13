@@ -7,13 +7,13 @@
 #endif
 
 // #include <GL/gl3w.h>
-#include <GL/gl.h>
 
 #ifndef GL_GLEXT_PROTOTYPES
 #define GL_GLEXT_PROTOTYPES 1
 #endif
 
 #include <GL/glext.h>
+#include <GL/gl.h>
 
 // #define GLFW_INCLUDE_GLEXT 1
 // #include <GLFW/glfw3.h>
