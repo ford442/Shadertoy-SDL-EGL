@@ -1064,7 +1064,7 @@ return nullptr;
 
 void strt(){
 float a=77.77;
-__m64 m1 = register __m64 a;
+register __m64i m1=register __m64i a;
 int f1 = _m_to_int_(m1);
 std::cout << f1 << std::endl;
 
