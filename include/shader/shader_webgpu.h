@@ -1063,6 +1063,14 @@ return nullptr;
 }procc;
 
 void strt(){
+  float a=77.77;
+__m256 m1 = register __m256 a;
+float f1 = __builtin_ia32_vextractf128_ps(m1, 0);
+std::cout << f1 << std::endl;
+
+
+
+  
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
