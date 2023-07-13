@@ -101,7 +101,6 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(precision highp atomic_uint)\n"
 // "#pragma STDGL(precise none)\n"
 // "#pragma STDGL(strict off)\n"
-"-DDOUBLE\n"
 "#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma STDGL(sample all)\n"
