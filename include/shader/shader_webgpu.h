@@ -1063,9 +1063,9 @@ return nullptr;
 }procc;
 
 void strt(){
-  float a=77.77;
-__m256 m1 = register __m256 a;
-float f1 = __builtin_ia32_vextractf128_ps(m1, 0);
+float a=77.77;
+__m64 m1 = register __m64 a;
+int f1 = _m_to_int_(m1);
 std::cout << f1 << std::endl;
 
 
