@@ -101,6 +101,7 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(precision highp atomic_uint)\n"
 // "#pragma STDGL(precise none)\n"
 // "#pragma STDGL(strict off)\n"
+"-DDOUBLE\n"
 "#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma STDGL(sample all)\n"
@@ -933,6 +934,7 @@ clk_l=true;
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+// glUniform1d(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
