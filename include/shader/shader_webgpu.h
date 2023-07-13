@@ -1064,8 +1064,9 @@ return nullptr;
 
 void strt(){
 float f=77.77;
-  __m64 m;
-m = _mm_set_ps1(f);
+//  __m64 m;
+// m = _mm_set_ps1(f);
+register __m64 m={a,a};
 
 register __m64 m1=m;
 int f1 = _m_to_int_(m1);
