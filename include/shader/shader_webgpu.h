@@ -3,6 +3,8 @@
 #include <functional>
 #include <algorithm>
 
+#define register
+
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
