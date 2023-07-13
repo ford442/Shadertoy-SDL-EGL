@@ -135,22 +135,12 @@ inline char frg_hdr_src[1000]=
 
 inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-"\n\0";
-/*
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
-// "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
-"#define mainImage mainImage0(out vec4 O,vec2 U);"
-// "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
-"int _N=3;void mainImage(out vec4 O,vec2 U){"
-// "dvec4 o;O=dvec4(0);"
-"vec4 o;O=vec4(0);"
-// "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"mainImage0(o,U+vec2(k%_N-_N/2,k/_N-_N/2)/float(_N));"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0lf,2.449715lf/1.0lf,1.0lf));}"
-"O += o;}O /= float(_N*_N);O=pow(O,vec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.0f,1.0f,1.0f,1.0f));}"
+"#define mainImage mainImage0(out dvec4 O,dvec2 U);"
+"int _N=16;void mainImage(out dvec4 O,dvec2 U){"
+"dvec4 o;O=dvec4(0);"
+"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0,2.184228lf/1.0,2.449715lf/1.0,1.0));}"
 "void mainImage0\n\0";
-*/
 
 EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -1141,9 +1131,9 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
- glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+//  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 // nanoPause();
