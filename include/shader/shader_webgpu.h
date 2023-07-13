@@ -43,8 +43,8 @@ typedef ResultType result_type;
 #include <vector>
 #include <functional>
 #include <cassert>
-#include "../../include/shader/gl.h"
-#include "../../include/shader/egl.h"
+// #include "../../include/shader/gl.h"
+// #include "../../include/shader/egl.h"
 // #include "../../include/shader/intrins.h"
 #include "../../lib/lib_webgpu.h"
 #include <emscripten/html5.h>
