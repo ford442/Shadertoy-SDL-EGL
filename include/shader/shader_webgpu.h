@@ -991,8 +991,6 @@ glUniform1i(smp_chn[raN],raN);
  */
 
 glUniform1i(uni_frm,uni_i.at(0,0));
-glDepthRange(0.0f,1.0f);
-glClearDepthf(1.0f);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -1363,7 +1361,7 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
   
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 // glClearColor(0.0f,0.0f,0.0f,1.0f);
@@ -1414,7 +1412,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 */
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
   
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
