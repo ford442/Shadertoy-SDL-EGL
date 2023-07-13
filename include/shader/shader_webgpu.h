@@ -1069,7 +1069,7 @@ float f=77.77;
 register __m64 m={f,f};
 
 register __m64 m1=m;
-__m128 m2=_mm_castpd_ps(m1);
+register __m128 m2=_mm_castpd_ps(m1.as_double());
 float ff=_mm_cvtps_pd(m2);
 // int f1 = _m_to_int_(m1);
 std::cout << ff << std::endl;
