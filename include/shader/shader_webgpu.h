@@ -932,8 +932,8 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-// glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
+glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+// glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
