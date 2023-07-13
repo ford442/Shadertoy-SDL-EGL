@@ -278,7 +278,7 @@ static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
 static i_tensor i_date=i_tensor{2,2};
 static f_tensor t_size=f_tensor{1,2};
-static gli_tensor i_size=gli_tensor{1,2};
+static gli_tensor i_size=gli_tensor{2,2};
 static void_tensor cntx=void_tensor{2,2};
 static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
@@ -825,6 +825,8 @@ static void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.13;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*4.0;
 return;
 }
 
@@ -1310,7 +1312,7 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
 
- /*    //  non multisampled color renderbuffer
+   //  non multisampled color renderbuffer
 glGenFramebuffers(1,&TX.at(2,0,0));
 
 glGenRenderbuffers(1,&TX.at(2,1,0));
@@ -1318,6 +1320,7 @@ glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
+ /* 
          //  non multisampled depth/stencil renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
@@ -1345,29 +1348,30 @@ glGenFramebuffers(1,&TX.at(1,0,0));
         //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(0,0),i_size.at(0,0));
-glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
+// glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
 
           //  alpha renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA8,i_size.at(0,0),i_size.at(0,0));
-glBindRenderbuffer(GL_COLOR_ATTACHMENT1,TX.at(0,1,1));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGBA8,i_size.at(1,0),i_size.at(1,0));
+// glBindRenderbuffer(GL_COLOR_ATTACHMENT1,TX.at(0,1,1));
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX.at(0,1,1));
 
    //  depth32 stencil8 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(0,0),i_size.at(0,0));
-glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
+// glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 glClearDepth(1.0f);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 glStencilMask(1);
 glClearStencil(1);
+
 /* 
     //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
