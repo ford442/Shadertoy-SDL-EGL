@@ -1069,7 +1069,7 @@ float f=77.77;
 register __m64 m={f,f};
 
 register __m64 m1=m;
-int f1 = _m_to_int(m1);
+int f1 = _m_to_int_(m1);
 std::cout << f1 << std::endl;
 
 
