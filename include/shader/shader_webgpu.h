@@ -1063,8 +1063,11 @@ return nullptr;
 }procc;
 
 void strt(){
-float a=77.77;
-register __m64 m1=a;
+float f=77.77;
+  __m64 m;
+m = _mm_set_ps1(f);
+
+register __m64 m1=m;
 int f1 = _m_to_int_(m1);
 std::cout << f1 << std::endl;
 
