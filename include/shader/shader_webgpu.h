@@ -802,8 +802,8 @@ static inline void nanoPause(){
 nanosleep(&req2,&rem);
 }
 
-static void PRGin(register boost::uint_t<64>::exact m64){
-sse4.at(0,0)=wasm_i64x2_splat(m64);
+static void PRGin(register boost::uint_t<64>::exact m1){
+sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
@@ -833,8 +833,8 @@ i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
 return;
 }
 
-static void u_iTimeDelta_set(register boost::compute::double_ m32){
-sse.at(0,1)=wasm_f64x2_splat(m32);
+static void u_iTimeDelta_set(register boost::compute::double_ m64){
+sse.at(0,1)=wasm_f64x2_splat(m64);
 // d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
@@ -1063,20 +1063,6 @@ return nullptr;
 }procc;
 
 void strt(){
-float f=77.77;
-//  __m64 m;
-// m = _mm_set_ps1(f);
-register __m64 m={f,f};
-
-register __m64 m1=m;
-// register __m128 m2=_mm_castpd_ps(m1.as_double());
-float ff=_mm_extractf128(m1);
-// int f1 = _m_to_int_(m1);
-std::cout << ff << std::endl;
-
-
-
-  
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
