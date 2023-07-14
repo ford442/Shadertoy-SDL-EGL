@@ -1014,7 +1014,7 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
+// glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1113,7 +1113,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -1132,7 +1132,7 @@ cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 //  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+/// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
@@ -1226,13 +1226,13 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
-glEnable(GL_DEPTH_TEST);
-glDisable(GL_DITHER);
+/// glEnable(GL_DEPTH_TEST);
+/// glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
-glEnable(GL_STENCIL_TEST);
+/// glEnable(GL_STENCIL_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
@@ -1336,17 +1336,18 @@ glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFF
 glGenRenderbuffers(1,&TX.at(0,0,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH32F_STENCIL8,i_size.at(1,1),i_size.at(1,1));
-glClearDepth(1.0);
+/// glClearDepth(1.0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
-glStencilMask(1);
-glClearStencil(1);
+/// glStencilMask(1);
+/// glClearStencil(1);
+
   */       //  non multisampled stencil renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,2));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_STENCIL_INDEX8,i_size.at(1,1),i_size.at(1,1));
-glStencilMask(1);
-glClearStencil(1);
+/// glStencilMask(1);
+/// glClearStencil(1);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
   
@@ -1383,19 +1384,19 @@ glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
-glDepthRange(0.0f,1.0f);
-glClearDepthf(1.0f);
+/// glDepthRange(0.0f,1.0f);
+/// glClearDepthf(1.0f);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
-glStencilMask(1);
-glClearStencil(1);
+/// glStencilMask(1);
+/// glClearStencil(1);
 
 /* 
     //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
-glClearDepth(1.0);
+/// glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
 
@@ -1407,7 +1408,7 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 
-glClearColor(0.0f,0.0f,0.0f,1.0f);
+/// glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
@@ -1415,9 +1416,9 @@ glFinish();
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
-// glDeleteShader(vtx);
-// glDeleteShader(frag);
-glReleaseShaderCompiler();
+/// glDeleteShader(vtx);
+/// glDeleteShader(frag);
+/// glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
@@ -1540,8 +1541,8 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
 glViewport((GLint)0,(GLint)0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+// glEnable(GL_SCISSOR_TEST);
+// glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
