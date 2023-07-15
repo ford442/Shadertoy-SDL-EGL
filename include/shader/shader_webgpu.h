@@ -1229,7 +1229,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 // glEnable(GL_FRAMEBUFFER_SRGB);
 // glEnable(GL_COLOR_CONVERSION_SRGB);
-
+glEnable(GL_MULTISAMPLE_EXT);
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
