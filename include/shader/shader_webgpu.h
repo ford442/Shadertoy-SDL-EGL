@@ -983,7 +983,10 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[3],3);
  */
 
+  
 glUniform1i(uni_frm,uni_i.at(0,0));
+  glDisable(GL_SCISSOR_TEST);
+  glDisable(GL_DITHER);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_STENCIL_TEST);
 glSampleCoverage(1.0,GL_FALSE);
@@ -998,8 +1001,10 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glSampleCoverage(4.0,GL_FALSE);
+  glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_STENCIL_TEST);
+  glEnable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
@@ -1021,7 +1026,7 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-// glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
+glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1331,7 +1336,6 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 
   //  non multisampled color renderbuffer
 glGenFramebuffers(1,&TX.at(2,0,0));
-
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(1,1),i_size.at(1,1));
@@ -1339,17 +1343,16 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
 //  glBindFramebuffer(GL_FRAMEBUFFER,0);
 
-  /*       //  non multisampled depth/stencil renderbuffer
+     //  non multisampled depth renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH32F_STENCIL8,i_size.at(1,1),i_size.at(1,1));
-/// glClearDepth(1.0);
+glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,i_size.at(1,1),i_size.at(1,1));
+glDepthRange(0.0f,1.0f);
+glClearDepthf(1.0f);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
-/// glStencilMask(1);
-/// glClearStencil(1);
+glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
 
-  */       //  non multisampled stencil renderbuffer
+      //  non multisampled stencil renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,2));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_STENCIL_INDEX8,i_size.at(1,1),i_size.at(1,1));
@@ -1391,12 +1394,12 @@ glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
-/// glDepthRange(0.0f,1.0f);
-/// glClearDepthf(1.0f);
+glDepthRange(0.0f,1.0f);
+glClearDepthf(1.0f);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
-/// glStencilMask(1);
-/// glClearStencil(1);
+glStencilMask(1);
+glClearStencil(1);
 
 /* 
     //  depth32 renderbuffer
@@ -1548,8 +1551,8 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
 glViewport((GLint)0,(GLint)0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-// glEnable(GL_SCISSOR_TEST);
-// glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+glEnable(GL_SCISSOR_TEST);
+glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
