@@ -814,7 +814,7 @@ return;
 }
 */
 
-boost::function<void(void)> u_iTime_set=[](register boost::compute::double_ m80){
+static boost::function<void(void)> u_iTime_set=[](register boost::compute::double_ m80){
 sse2.at(0,0)=wasm_f64x2_splat(m80);
 };
 
