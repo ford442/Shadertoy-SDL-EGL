@@ -42,7 +42,7 @@ static void WGPU_Start();
 
 #include <iostream>
 
-#include <boost/compute/core.hpp>
+#include <boost/compute.hpp>
 
 // namespace compute = boost::compute;
 
