@@ -1,5 +1,17 @@
 #include "../../include/vanilla/main_webgpu.h"
 
+
+// namespace compute = boost::compute;
+
+int cltest(){
+// get the default device
+boost::compute::device CLdevice = boost::compute::system::default_device();
+// print the device's name and platform
+std::cout << "Hello from " << CLdevice.name();
+std::cout << " (Platform: " << CLdevice.platform().name() << ")" << std::endl;
+return 0;
+}
+
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
@@ -535,6 +547,7 @@ extern"C"{
 
 void startWebGPU(){
 WGPU_Start();
+cltest();
 }
 
 void runWebGPU(){
