@@ -3,6 +3,8 @@
 #include <functional>
 #include <algorithm>
 
+#include <boost/function.hpp>
+
 #define register
 
 template<class ArgumentType,class ResultType>
@@ -890,7 +892,7 @@ return;
 }
   
 union{
-
+/*
 static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
@@ -1008,6 +1010,7 @@ glSampleCoverage(4.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
+*/
 
 static void swap(){
 emscripten_cancel_main_loop();
@@ -1071,6 +1074,76 @@ return nullptr;
 }procc;
 
 void strt(){
+
+boost::function<void(void)> Rend = []() {
+uni_i.at(0,0)++;
+u_time.t3=u_time.t2;
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_iTime_set(u_time.time_spana.count());
+u_iTimeDelta_set(u_time.time_spanb.count());
+if(ms_l==true){
+mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
+mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
+}
+if(ms_l==true){
+if(clk_l==true){
+const long xxx=mms2.at(0,0);
+const long yyy=mms2.at(0,1);
+mms.at(0,0)=float(xxx);
+mms.at(1,0)=float((i_size.at(0,0)-yyy));
+clk_l=false;
+}
+mms.at(2,0)=float(mms2.at(0,0));
+mms.at(2,1)=float(i_size.at(0,0)-mms2.at(0,1));
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+}
+else{
+clk_l=true;
+}
+glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
+int yr=1900+datE->tm_year;
+int mn=1+datE->tm_mon;
+int dy=datE->tm_mday-1;
+int hr=5+datE->tm_hour;
+int mi=datE->tm_min;
+int sc=datE->tm_sec;
+int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+i_date.at(1,0)=dy;
+i_date.at(1,1)+=int(d_time.at(0,0));
+glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
+glUniform1i(uni_frm,uni_i.at(0,0));
+  glDisable(GL_SCISSOR_TEST);
+  glDisable(GL_DITHER);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_STENCIL_TEST);
+glSampleCoverage(1.0,GL_FALSE);
+glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
+glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
+glBlitFramebuffer(0,0,i_size.at(0,0),i_size.at(0,0),0,0,i_size.at(0,0),i_size.at(0,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glSampleCoverage(4.0,GL_FALSE);
+  glEnable(GL_SCISSOR_TEST);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+  glEnable(GL_DITHER);
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+    };
+  
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
@@ -1570,7 +1643,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
-emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
+emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return;
 }
   
