@@ -53,9 +53,9 @@ typedef ResultType result_type;
 #include <emscripten.h>
 
 extern "C"{
-  
+
 void str();
-  
+
 }
 
 class Compile
@@ -821,7 +821,7 @@ sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.13;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.13;
 return;
 }
 
@@ -984,6 +984,8 @@ glUniform1i(smp_chn[raN],raN);
  */
 
 glUniform1i(uni_frm,uni_i.at(0,0));
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_STENCIL_TEST);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -996,6 +998,8 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glSampleCoverage(4.0,GL_FALSE);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
