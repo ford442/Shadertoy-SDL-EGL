@@ -20,7 +20,7 @@ typedef ResultType result_type;
 #include <CL/opencl.h>
 // #include <boost/compute.hpp>
 
-<boost/compute/core.hpp>
+#include <boost/compute/core.hpp>
 using namespace std;
 using namespace boost::compute;
 
