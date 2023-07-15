@@ -804,6 +804,7 @@ S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 }
 
+/*
 static void u_iTime_set(register boost::compute::double_ m80){
 // d_time.at(0,0)=set;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
@@ -811,6 +812,11 @@ sse2.at(0,0)=wasm_f64x2_splat(m80);
 // d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
+*/
+
+boost::function<void(void)> u_iTime_set=[](register boost::compute::double_ m80){
+sse2.at(0,0)=wasm_f64x2_splat(m80);
+};
 
 static void u_iSize_set(boost::compute::double_ set){
 sse.at(1,0)=wasm_f32x4_splat(set);
@@ -951,7 +957,7 @@ int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
 i_date.at(1,1)+=int(d_time.at(0,0));
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-
+/*
 int tfrm=(uni_i.at(0,0)%4);
 
 if(uni_i.at(0,0)%45==0){
@@ -1076,9 +1082,7 @@ return nullptr;
 
 void strt(){
 
-boost::function<void(void)> Rend = []() {
-  
-    };
+
   
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
