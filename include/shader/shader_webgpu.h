@@ -18,7 +18,12 @@ typedef ResultType result_type;
 // #include <SYCL/sycl.hpp>
 
 #include <CL/opencl.h>
-#include <boost/compute.hpp>
+// #include <boost/compute.hpp>
+
+<boost/compute/core.hpp>
+using namespace std;
+using namespace boost::compute;
+
 #include <boost/compute/algorithm.hpp>
 
 // #include <boost/compute/core.hpp>
