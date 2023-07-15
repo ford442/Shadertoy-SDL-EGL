@@ -3,16 +3,16 @@
 #include <functional>
 #include <algorithm>
 using unary_function = std::unary_function;
-
-#include <boost/function.hpp>
-
-#define register
-
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+#include <boost/function.hpp>
+
+#define register
+
+
 
 
 // #include <SYCL/sycl.hpp>
