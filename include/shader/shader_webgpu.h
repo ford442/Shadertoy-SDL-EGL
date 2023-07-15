@@ -2,18 +2,18 @@
 #include <boost/cstdint.hpp>
 #include <functional>
 #include <algorithm>
+
 // using unary_function = std::unary_function;
+
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+
 #include <boost/function.hpp>
 
 #define register
-
-
-
 
 // #include <SYCL/sycl.hpp>
 
@@ -894,7 +894,7 @@ return;
 }
   
 union{
-/*
+
 static void Rend(){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
@@ -1012,7 +1012,6 @@ glSampleCoverage(4.0,GL_FALSE);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
-*/
 
 static void swap(){
 emscripten_cancel_main_loop();
@@ -1078,72 +1077,7 @@ return nullptr;
 void strt(){
 
 boost::function<void(void)> Rend = []() {
-uni_i.at(0,0)++;
-u_time.t3=u_time.t2;
-u_time.t2=boost::chrono::high_resolution_clock::now();
-u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_iTime_set(u_time.time_spana.count());
-u_iTimeDelta_set(u_time.time_spanb.count());
-if(ms_l==true){
-mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,0));
-mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,0));
-}
-if(ms_l==true){
-if(clk_l==true){
-const long xxx=mms2.at(0,0);
-const long yyy=mms2.at(0,1);
-mms.at(0,0)=float(xxx);
-mms.at(1,0)=float((i_size.at(0,0)-yyy));
-clk_l=false;
-}
-mms.at(2,0)=float(mms2.at(0,0));
-mms.at(2,1)=float(i_size.at(0,0)-mms2.at(0,1));
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-}
-else{
-clk_l=true;
-}
-glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
-int yr=1900+datE->tm_year;
-int mn=1+datE->tm_mon;
-int dy=datE->tm_mday-1;
-int hr=5+datE->tm_hour;
-int mi=datE->tm_min;
-int sc=datE->tm_sec;
-int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-i_date.at(1,0)=dy;
-i_date.at(1,1)+=int(d_time.at(0,0));
-glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-glUniform1i(uni_frm,uni_i.at(0,0));
-  glDisable(GL_SCISSOR_TEST);
-  glDisable(GL_DITHER);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_STENCIL_TEST);
-glSampleCoverage(1.0,GL_FALSE);
-glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glBlitFramebuffer(0,0,i_size.at(0,0),i_size.at(0,0),0,0,i_size.at(0,0),i_size.at(0,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(4.0,GL_FALSE);
-  glEnable(GL_SCISSOR_TEST);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_STENCIL_TEST);
-  glEnable(GL_DITHER);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+  
     };
   
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -1200,7 +1134,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -1239,11 +1173,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_multisample");
-  
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_fragment_program");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program2");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_fragment_program");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program2");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_float_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
@@ -1307,9 +1240,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_invalidate_subdata");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
-// glEnable(GL_FRAMEBUFFER_SRGB);
-// glEnable(GL_COLOR_CONVERSION_SRGB);
-glEnable(GL_MULTISAMPLE_EXT);
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
@@ -1431,8 +1361,8 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFE
 glGenRenderbuffers(1,&TX.at(0,1,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,2));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_STENCIL_INDEX8,i_size.at(1,1),i_size.at(1,1));
-/// glStencilMask(1);
-/// glClearStencil(1);
+glStencilMask(1);
+glClearStencil(1);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
   
@@ -1440,10 +1370,10 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-// glClearColor(0.0f,0.0f,0.0f,1.0f);
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glFlush();
-// glFinish();
+glClearColor(0.0f,0.0f,0.0f,1.0f);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glFlush();
+glFinish();
 
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
@@ -1493,7 +1423,7 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 
-/// glClearColor(0.0f,0.0f,0.0f,1.0f);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
@@ -1503,7 +1433,7 @@ glUseProgram(S1.at(0,0,0));
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
 /// glDeleteShader(vtx);
 /// glDeleteShader(frag);
-/// glReleaseShaderCompiler();
+glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
@@ -1645,7 +1575,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
-emscripten_set_main_loop((void(*)())Run::Rend,0,0);
+emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
   
