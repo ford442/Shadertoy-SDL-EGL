@@ -40,6 +40,14 @@ EM_BOOL raf(double time, void *userData);
 
 static void WGPU_Start();
 
+#include <iostream>
+
+#include <boost/compute/core.hpp>
+
+// namespace compute = boost::compute;
+
+int cltest();
+
 extern"C"{
 
 void startWebGPU();
