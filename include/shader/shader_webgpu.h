@@ -2,7 +2,7 @@
 #include <boost/cstdint.hpp>
 #include <functional>
 #include <algorithm>
-using unary_function = std::unary_function;
+// using unary_function = std::unary_function;
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
