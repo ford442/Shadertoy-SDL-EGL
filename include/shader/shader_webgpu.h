@@ -11,7 +11,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <SYCL/sycl.hpp>
+// #include <SYCL/sycl.hpp>
 
 #include <CL/opencl.h>
 #include <boost/compute.hpp>
