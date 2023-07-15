@@ -12,6 +12,8 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+using unary_function = std::unary_function;
+
 
 // #include <SYCL/sycl.hpp>
 
