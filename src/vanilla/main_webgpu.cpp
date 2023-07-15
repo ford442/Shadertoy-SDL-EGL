@@ -1,11 +1,10 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-
 // namespace compute = boost::compute;
 
 int cltest(){
 // get the default device
-boost::compute::device CLdevice = boost::compute::system::default_device();
+device CLdevice = default_device();
 // print the device's name and platform
 std::cout << "Hello from " << CLdevice.name();
 std::cout << " (Platform: " << CLdevice.platform().name() << ")" << std::endl;
