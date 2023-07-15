@@ -202,15 +202,15 @@ EGL_ALPHA_SIZE,(EGLint)16,
 EGL_DEPTH_SIZE,(EGLint)32,
 EGL_STENCIL_SIZE,(EGLint)16,
 EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,4,
-EGL_GL_COLORSPACE_KHR, EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_SAMPLE_BUFFERS,(EGLint)2,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 EGL_GL_COLORSPACE_SRGB_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
-// EGL_COVERAGE_BUFFERS_NV,(EGLint)1, // used to indicate, not set
-//  EGL_COVERAGE_SAMPLES_NV,(EGLint)4, // used to indicate, not set
-EGL_SAMPLES,4,
-// EGL_MIPMAP_LEVEL,(EGLint)1, // used to indicate, not set
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX, // used to indicate, not set
+EGL_COVERAGE_BUFFERS_NV,EGL_COVERAGE_BUFFER_BIT8_NV,
+EGL_COVERAGE_SAMPLES_NV,EGL_COVERAGE_SAMPLES_NV_32_BIT,
+EGL_SAMPLES,(EGLint)2,
+EGL_MIPMAP_LEVEL,(EGLint)2,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_HIGH_QUALITY,
 EGL_NONE,EGL_NONE
 };
 
@@ -1151,10 +1151,10 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-//  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 /// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1239,6 +1239,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_invalidate_subdata");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_buffer_bit");
+   
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
