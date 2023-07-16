@@ -1238,16 +1238,16 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_buffer_bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");  // context angered if not enabled
    
-// glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-// glDepthMask(GL_TRUE);
+glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
-/// glEnable(GL_DEPTH_TEST);
+glEnable(GL_DEPTH_TEST);
 /// glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
-/// glEnable(GL_STENCIL_TEST);
+glEnable(GL_STENCIL_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
