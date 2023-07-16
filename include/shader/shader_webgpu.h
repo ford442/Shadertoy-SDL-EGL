@@ -146,7 +146,7 @@ inline char frg_ftr_src[420]=
 "int _N=16;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0,2.184228lf/1.0,2.449715lf/1.0,1.0));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0,2.184228f/1.0,2.449715f/1.0,1.0));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n\0";
 
