@@ -1350,8 +1350,9 @@ glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFF
 glGenRenderbuffers(1,&TX.at(0,0,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,i_size.at(1,1),i_size.at(1,1));
-glDepthRange(0.0f,1.0f);
-glClearDepthf(1.0f);
+// glDepthRange(0.0f,1.0f);
+// glClearDepthf(1.0f);
+glClearDepth(1.0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
 
@@ -1399,8 +1400,9 @@ glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
-glDepthRange(0.0f,1.0f);
-glClearDepthf(1.0f);
+// glDepthRange(0.0f,1.0f);
+// glClearDepthf(1.0f);
+glClearDepth(1.0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 glStencilMask(1);
