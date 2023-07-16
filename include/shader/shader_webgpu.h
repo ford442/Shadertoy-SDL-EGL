@@ -987,7 +987,7 @@ glUniform1i(smp_chn[raN],raN);
   
 glUniform1i(uni_frm,uni_i.at(0,0));
  //  glDisable(GL_SCISSOR_TEST);
-//  glDisable(GL_DITHER);
+glEnable(GL_DITHER);
 //    glDisable(GL_DEPTH_TEST);
  //   glDisable(GL_STENCIL_TEST);
 glSampleCoverage(1.0,GL_FALSE);
@@ -1005,7 +1005,7 @@ glSampleCoverage(4.0,GL_FALSE);
 //  glEnable(GL_SCISSOR_TEST);
 //    glEnable(GL_DEPTH_TEST);
 //    glEnable(GL_STENCIL_TEST);
-// glEnable(GL_DITHER);
+glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return;
 }
