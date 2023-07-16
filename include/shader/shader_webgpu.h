@@ -728,7 +728,7 @@ boost::compute::double_ wi=0.0;
 boost::compute::double_ hi=0.0;
 }mouse;
 
-int Size=0;
+GLint Size=0;
 int tmm=166666000;
 int tmm2=1000;
 inline struct timespec rem;
@@ -770,7 +770,7 @@ private:
 
 Compile compile;
 
-int iFps=60;
+int iFps=90;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -816,7 +816,7 @@ return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
-static void i_iSize_set(int set){
+static void i_iSize_set(GLint set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -1572,7 +1572,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
-emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
+emscripten_set_main_loop((void(*)())Run::procc.Rend,90,0);
 return;
 }
   
