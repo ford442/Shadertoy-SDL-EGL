@@ -1184,7 +1184,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
