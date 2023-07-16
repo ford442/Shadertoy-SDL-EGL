@@ -112,12 +112,12 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(centroid all)\n"
 "#pragma STDGL(sample all)\n"
 "#pragma STDGL(fastmath on)\n"
-"#pragma STDGL(fastprecision on)\n"
+"#pragma STDGL(fastprecision off)\n"
 "#pragma STDGL(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma STDGL(inline none)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
@@ -146,7 +146,7 @@ inline char frg_ftr_src[420]=
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038lf/1.0lf,2.184228lf/1.0lf,2.449715lf/1.0lf,1.0lf));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n\0";
 
@@ -1564,7 +1564,7 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-float iRate=192000.0f;
+float iRate=44100.0f;
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
 glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
