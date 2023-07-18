@@ -1,12 +1,12 @@
 #include "../../include/video/video_jebus.hpp"
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+float max=0.0f;
+float min=1.0f;
+float sum=0.0f;
+float avgSum=0.0f;
+float minSum=0.0f;
+float maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -136,9 +136,8 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+// contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-
 contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
@@ -171,7 +170,7 @@ contx.getExtension('WEBGL_webcodecs_video_frame');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
-contx.disable(gl.DITHER);
+// contx.disable(gl.DITHER);
 contx.drawingBufferColorMetadata={mode:'extended'};
 contx.drawingBufferColorSpace='display-p3';
 
@@ -183,7 +182,7 @@ const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
 const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
+const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
@@ -216,7 +215,7 @@ var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-var Min=(4.0*(($amax-($favg-$amin))/2.0));
+var Min=(4.0*(($fmax-($favg-$fmin))/2.0));
 var ouT=Math.max(Min,alph);
   /* STONE
   // send p[0],p[1],p[2],ouT => return grr
@@ -404,10 +403,10 @@ return;
 #include <GLES3/gl3.h>
 // #include <GLES3/gl31.h>
 // #include <GLES3/gl32.h>
-// #include <GLES3/gl3platform.h>
+#include <GLES3/gl3platform.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-// #include <EGL/eglplatform.h>
+#include <EGL/eglplatform.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
 
@@ -498,7 +497,7 @@ mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 iFrame++;
 glFinish();
 return;
@@ -544,27 +543,60 @@ return shader;
 
 void strt(){
 emscripten_cancel_main_loop();
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
 GLfloat gF=F;
 GLfloat gF0=F0;
 GLfloat gFm1=Fm1;
+  
 typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
-const char common_shader_header_gles3[]=
-"#version 300 es \n"
-"#undef HW_PERFORMANCE \n"
-"#define HW_PERFORMANCE 0 \n"
-"precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
+
+  const char common_shader_header_gles3[]=
+"#version 300 es\n"
+"#pragma STDGL(precision highp double)\n"
+"#pragma STDGL(precision highp uint)\n"
+"#pragma STDGL(precision highp atomic_uint)\n"
+// "#pragma STDGL(precise none)\n"
+// "#pragma STDGL(strict off)\n"
+"#pragma STDGL(invariant all)\n"
+"#pragma STDGL(centroid all)\n"
+"#pragma STDGL(sample all)\n"
+"#pragma STDGL(fastmath on)\n"
+"#pragma STDGL(fastprecision off)\n"
+"#pragma STDGL(unroll all)\n"
+// "#pragma STDGL(ifcvt none)\n"
+"#pragma STDGL(inline none)\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 0\n"
+"precision highp int;\n"
+"precision highp float;\n"
+"precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;\n";
+  
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+  
 const char fragment_shader_header_gles3[]=
 "\n uniform vec3 iChannelResolution;uniform vec3 iResolution;uniform float iTime;uniform vec4 iMouse;"
 "uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
+  
 const char fragment_shader_footer_gles3[]=
-"\n void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+"#define mainImage mainImage0(out dvec4 O,dvec2 U);"
+"int _N=3;void mainImage(out dvec4 O,dvec2 U){"
+"dvec4 o;O=dvec4(0);"
+"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
+"void mainImage0\n\0";
+  
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -585,19 +617,22 @@ double wi,hi;
 emscripten_get_element_css_size("canvas",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
-eglBindAPI(EGL_OPENGL_ES_API);
-// eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
+  
 const EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 EGL_NONE};
+  
 const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,0,
+EGL_CONTEXT_CLIENT_VERSION,4,
+EGL_CONTEXT_MINOR_VERSION_KHR,6,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
+  
 const EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -613,24 +648,21 @@ EGL_GREEN_SIZE,8,
 EGL_BLUE_SIZE,8,
 EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,0,
+EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,128,
-EGL_SAMPLES,32,
+EGL_SAMPLE_BUFFERS,16,
+EGL_SAMPLES,16,
 EGL_NONE
 };
+  
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-
-    attr.premultipliedAlpha=EM_TRUE;
-    
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-
-    attr.enableExtensionsByDefault=EM_TRUE;
-
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -648,7 +680,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
 emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
 emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
-  
 emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
 emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
 emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
@@ -667,10 +698,8 @@ emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
 emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
 emscripten_webgl_enable_extension(ctx,"OES_single_precision");
-
 emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
 emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
-
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -679,43 +708,44 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
 // glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
 // glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
 // glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
-nanosleep(&req,&rem);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=vertex_shader_body;
 vtx=compile_shader(GL_VERTEX_SHADER,2,sources);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 sources[0]=common_shader_header;
 sources[1]=fragment_shader_header;
 sources[2]=default_fragment_shader;
 sources[3]=fragment_shader_footer;
 frag=compile_shader(GL_FRAGMENT_SHADER,4,sources);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 shd_prg=glCreateProgram();
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glAttachShader(shd_prg,vtx);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glAttachShader(shd_prg,frag);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 atb_pos=0;
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glUseProgram(shd_prg);
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
@@ -736,17 +766,17 @@ uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,1.0);
 glUniform3f(smp_chn_res,S,S,1.0);
 glClearColor(gF0,gF0,gF0,gF);
-glEnable(GL_CULL_FACE);
+// glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 // glDisable(GL_BLEND);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_SCISSOR_TEST);
-glDepthFunc(GL_LESS);
-glFrontFace(GL_CW);
+// glDepthFunc(GL_LESS);
+// glFrontFace(GL_CW);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
