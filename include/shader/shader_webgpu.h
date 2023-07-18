@@ -128,7 +128,7 @@ inline char cm_hdr_src[2300]=
 "precision highp sampler2DArrayShadow;";
   
 inline char vrt_bdy_src[100]=
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 inline char frg_hdr_src[1000]=
 
@@ -148,7 +148,7 @@ inline char frg_ftr_src[420]=
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
-"void mainImage0\n\0";
+"void mainImage0\n";
 
 EGLint att_lst2[1000]={ 
 EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
