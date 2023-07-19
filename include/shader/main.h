@@ -78,9 +78,7 @@ var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum])+5;
 let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
-
 if(shdMenu.value=='Random'){
-
 document.getElementById('path').innerHTML=$shds[randShade];
 }else{
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
@@ -89,16 +87,9 @@ document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMen
 var fle=document.getElementById('path').innerHTML;
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 }
-
 var pth=document.getElementById('path').innerHTML;
-var pth1='https://glsl.1ink.us/shaders/test1';
-var pth2='https://glsl.1ink.us/shaders/test2';
-var pth3='https://glsl.1ink.us/shaders/test3';
-var pth4='https://glsl.1ink.us/shaders/test4';
-var pth5='https://glsl.1ink.us/shaders/test5';
 const ff=new XMLHttpRequest();
-
-ff.open('GET',pth1,true);
+ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
 document.getElementById('stat').innerHTML='Downloading Shader';
 document.getElementById('stat').style.backgroundColor='yellow';
@@ -106,54 +97,13 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader1.glsl',sfil);
-}}
-ff.open('GET',pth2,true);
-ff.responseType='arraybuffer';
-document.getElementById('stat').innerHTML='Downloading Shader';
-document.getElementById('stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader2.glsl',sfil);
-}}
-ff.open('GET',pth3,true);
-ff.responseType='arraybuffer';
-document.getElementById('stat').innerHTML='Downloading Shader';
-document.getElementById('stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader3.glsl',sfil);
-}}
-ff.open('GET',pth4,true);
-ff.responseType='arraybuffer';
-document.getElementById('stat').innerHTML='Downloading Shader';
-document.getElementById('stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader4.glsl',sfil);
-}}
-ff.open('GET',pth5,true);
-ff.responseType='arraybuffer';
-document.getElementById('stat').innerHTML='Downloading Shader';
-document.getElementById('stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader5.glsl',sfil);
+FS.writeFile('/shader/shader.glsl',sfil);
 document.getElementById('stat').innerHTML='Downloaded Shader';
 document.getElementById('stat').style.backgroundColor='blue';
 //setTimeout(function(){
 normalResStart();
 //},350);
-}}
-
+}
 });
 ff.send(null);
 }
@@ -328,4 +278,3 @@ int RG=0;
 int r4nd(int);
 
 }
-
