@@ -10,7 +10,8 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
-using tester=std::experimental::native_simd<float>;
+
+using floaT=std::experimental::native_simd<float>;
 
 #include <boost/function.hpp>
 
@@ -670,23 +671,23 @@ Di.at(1,1)=0.0;
 return;
 }
 
-static inline float gF(){
+static inline floaT gF(){
 return Fi.at(0,0);
 }
 
-static inline float gF5(){
+static inline floaT gF5(){
 return Fi.at(1,2);
 }
 
-static inline float gFm1(){
+static inline floaT gFm1(){
 return Fi.at(0,1);
 }
 
-static inline float gFm5(){
+static inline floaT gFm5(){
 return Fi.at(2,0);
 }
 
-static inline float gF0(){
+static inline floaT gF0(){
 return Fi.at(1,1);
 }
 
