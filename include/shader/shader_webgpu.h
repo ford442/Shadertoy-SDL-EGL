@@ -10,7 +10,7 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
-using tester=std::experimental::simd_abi::scalar<float>;
+using tester=std::experimental::native_simd<float>;
 
 #include <boost/function.hpp>
 
