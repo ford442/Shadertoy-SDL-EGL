@@ -10,7 +10,7 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
-std::experimental::simd_abi::scalar<float> testt=1.0f;
+using tester=std::experimental::simd_abi::scalar<float>;
 
 #include <boost/function.hpp>
 
@@ -19,7 +19,7 @@ std::experimental::simd_abi::scalar<float> testt=1.0f;
 // #include <SYCL/sycl.hpp>
 
 #include <CL/opencl.h>
-#include <boost/compute/all.hpp> 
+#include <boost/compute/core.hpp> 
 
 #include <boost/compute/algorithm.hpp>
 
