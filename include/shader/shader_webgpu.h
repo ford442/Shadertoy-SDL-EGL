@@ -29,7 +29,7 @@ using floaT=std::experimental::native_simd<float>;
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
 #include <random>
-#include <c>
+#include <cfloat>
 #include <math.h>
 #include <new>
 #include <boost/integer.hpp>
@@ -120,7 +120,7 @@ inline char cm_hdr_src[2300]=
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
-"precision highp ;\n"
+"precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
@@ -133,7 +133,7 @@ inline char vrt_bdy_src[100]=
 
 inline char frg_hdr_src[1000]=
 
-"layout (std140) uniform uniBlock{uniform  iSampleRate;uniform float iFrameRate;};"
+"layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
 "uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
