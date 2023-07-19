@@ -2,7 +2,7 @@
 #include <boost/cstdint.hpp>
 #include <functional>
 #include <algorithm>
-
+#include <experimental/simd>
 // using unary_function = std::unary_function;
 
 template<class ArgumentType,class ResultType>
@@ -10,6 +10,7 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+std::experimental::simd_abi::scalar<float> testt=1.0f;
 
 #include <boost/function.hpp>
 
