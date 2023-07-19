@@ -18,12 +18,11 @@ using tester=std::experimental::simd_abi::scalar<float>;
 
 // #include <SYCL/sycl.hpp>
 
-#include <CL/opencl.h>
+#include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp> 
 
 #include <boost/compute/algorithm.hpp>
 
-// #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
