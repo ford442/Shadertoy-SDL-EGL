@@ -1266,13 +1266,13 @@ glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_STATIC_DRAW);
-
+ /* 
 auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
 auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
 
-  /*   // Boost Compute / Interop / OpenGL
+   // Boost Compute / Interop / OpenGL
 boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::vertex_array_object vertex_array(CLdevice);
 vertex_array.bind_buffer(GL_ARRAY_BUFFER,buffer_object);
