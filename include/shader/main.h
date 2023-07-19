@@ -107,7 +107,7 @@ let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.glsl',sfil);
-}
+}}
 ff.open('GET',pth2,true);
 ff.responseType='arraybuffer';
 document.getElementById('stat').innerHTML='Downloading Shader';
@@ -117,7 +117,7 @@ let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader2.glsl',sfil);
-}
+}}
 ff.open('GET',pth3,true);
 ff.responseType='arraybuffer';
 document.getElementById('stat').innerHTML='Downloading Shader';
@@ -127,7 +127,7 @@ let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader3.glsl',sfil);
-}
+}}
 ff.open('GET',pth4,true);
 ff.responseType='arraybuffer';
 document.getElementById('stat').innerHTML='Downloading Shader';
@@ -137,7 +137,7 @@ let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader4.glsl',sfil);
-}
+}}
 ff.open('GET',pth5,true);
 ff.responseType='arraybuffer';
 document.getElementById('stat').innerHTML='Downloading Shader';
@@ -152,7 +152,7 @@ document.getElementById('stat').style.backgroundColor='blue';
 //setTimeout(function(){
 normalResStart();
 //},350);
-}
+}}
 
 });
 ff.send(null);
