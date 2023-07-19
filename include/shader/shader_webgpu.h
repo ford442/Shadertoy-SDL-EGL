@@ -29,7 +29,7 @@ using floaT=std::experimental::native_simd<float>;
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
 #include <random>
-#include <cfloat>
+#include <c>
 #include <math.h>
 #include <new>
 #include <boost/integer.hpp>
@@ -120,7 +120,7 @@ inline char cm_hdr_src[2300]=
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
-"precision highp float;\n"
+"precision highp ;\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
@@ -133,7 +133,7 @@ inline char vrt_bdy_src[100]=
 
 inline char frg_hdr_src[1000]=
 
-"layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
+"layout (std140) uniform uniBlock{uniform  iSampleRate;uniform float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
 "uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
@@ -671,23 +671,23 @@ Di.at(1,1)=0.0;
 return;
 }
 
-static inline floaT gF(){
+static inline float gF(){
 return Fi.at(0,0);
 }
 
-static inline floaT gF5(){
+static inline float gF5(){
 return Fi.at(1,2);
 }
 
-static inline floaT gFm1(){
+static inline float gFm1(){
 return Fi.at(0,1);
 }
 
-static inline floaT gFm5(){
+static inline float gFm5(){
 return Fi.at(2,0);
 }
 
-static inline floaT gF0(){
+static inline float gF0(){
 return Fi.at(1,1);
 }
 
@@ -1073,9 +1073,6 @@ return nullptr;
 }procc;
 
 void strt(){
-
-
-  
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
@@ -1238,7 +1235,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_buffer_bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");  // context angered if not enabled
-   
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
@@ -1272,7 +1268,6 @@ auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
 auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
-
    // Boost Compute / Interop / OpenGL
 boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::vertex_array_object vertex_array(CLdevice);
@@ -1423,9 +1418,7 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
-  
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-
 glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
