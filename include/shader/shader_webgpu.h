@@ -1014,7 +1014,7 @@ return;
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=int(mouse.hi)+1;
+Size=int(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(float(mouse.hi));
 i_view.at(0,0)=0;
@@ -1152,7 +1152,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=int(mouse.hi)+1;
+Size=int(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(mouse.hi);
 i_view.at(0,0)=0;
