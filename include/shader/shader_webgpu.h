@@ -1272,7 +1272,7 @@ auto CLcontext=boost::compute::context(CLdevice);
 auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 
    // Boost Compute / Interop / OpenGL
-boost::compute::interop::opengl::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
+boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::vertex_array_object vertex_array(CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
   /*
