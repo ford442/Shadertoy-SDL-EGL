@@ -6,7 +6,7 @@ WGpuDevice device;
 WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
-EM_BOOL raf(){
+EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_STORE_OP_STORE,WGPU_LOAD_OP_LOAD};
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
@@ -17,7 +17,7 @@ wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
-return;
+return EM_TRUE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
