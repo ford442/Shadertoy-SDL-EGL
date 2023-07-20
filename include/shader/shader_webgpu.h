@@ -1402,7 +1402,7 @@ glClearDepth(1.0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 glStencilMask(1);
-glClearStencil(1);
+glClearStencil(0);
 
 /* 
     //  depth32 renderbuffer
