@@ -26,7 +26,7 @@ queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
       assert(canvasContext);
 
-WGpuCanvasConfiguration config={device,WGPU_TEXTURE_FORMAT_RGBA32FLOAT,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
+WGpuCanvasConfiguration config={device,WGPU_TEXTURE_FORMAT_BGRA8UNORM,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
 
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
