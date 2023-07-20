@@ -1,5 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
-#include <glm/glm.hpp>
+#include "/usr/include/glm/glm.hpp"
 
 WGpuAdapter adapter;
 WGpuCanvasContext canvasContext;
