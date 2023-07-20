@@ -164,10 +164,10 @@ EGL_NONE,EGL_NONE
 };
 
 EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)4,
-EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)6,
-// EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
-// EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
+EGL_CONTEXT_MAJOR_VERSION_KHR,4,
+EGL_CONTEXT_MINOR_VERSION_KHR,6,
+// EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+// EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -191,22 +191,22 @@ EGL_COLOR_FORMAT_HI,EGL_TRUE,
 EGL_NATIVE_RENDERABLE,EGL_TRUE,
  // EGL_COLOR_DEPTH_10_BIT_EXT, 10,
  // EGL_ALPHA_SIZE_10_BIT_EXT, 10,
-EGL_RED_SIZE,(EGLint)16,
-EGL_GREEN_SIZE,(EGLint)16,
-EGL_BLUE_SIZE,(EGLint)16,
-EGL_ALPHA_SIZE,(EGLint)16,
-EGL_DEPTH_SIZE,(EGLint)32,
-EGL_STENCIL_SIZE,(EGLint)16,
-EGL_BUFFER_SIZE,(EGLint)64,
-EGL_SAMPLE_BUFFERS,(EGLint)16,
+EGL_RED_SIZE,16,
+EGL_GREEN_SIZE,16,
+EGL_BLUE_SIZE,16,
+EGL_ALPHA_SIZE,16,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,16,
+EGL_BUFFER_SIZE,64,
+EGL_SAMPLE_BUFFERS,16,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_SRGB_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 EGL_COVERAGE_BUFFERS_NV,8,
 EGL_COVERAGE_SAMPLES_NV,4,
-EGL_SAMPLES,(EGLint)4,
-EGL_MIPMAP_LEVEL,(EGLint)4,
+EGL_SAMPLES,4,
+EGL_MIPMAP_LEVEL,4,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_NONE,EGL_NONE
 };
@@ -271,7 +271,7 @@ static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
 static f_tensor Fi=f_tensor{3,3};
 static d_tensor Di=d_tensor{2,2};
-static gi_tensor uni_i=gi_tensor{1,1};
+static i_tensor uni_i=i_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
 static i_tensor i_date=i_tensor{2,2};
 static f_tensor t_size=f_tensor{1,2};
@@ -730,7 +730,7 @@ boost::compute::double_ wi=0.0;
 boost::compute::double_ hi=0.0;
 }mouse;
 
-GLint Size=0;
+int Size=0;
 int tmm=166666000;
 int tmm2=1000;
 inline struct timespec rem;
@@ -818,7 +818,7 @@ return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
-static void i_iSize_set(GLint set){
+static void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -1550,10 +1550,10 @@ mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // nanoPause();
-glViewport((GLint)0,(GLint)0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
-glViewport((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
+glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,i_size.at(0,0),i_size.at(0,0));
+glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
