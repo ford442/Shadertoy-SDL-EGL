@@ -58,8 +58,8 @@ WGpuColorTargetState colorTarget={config.format,1,WGPU_COLOR_WRITE_ALL};
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
     
-// renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
-// emscripten_request_animation_frame_loop(raf,0);
+renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
+emscripten_request_animation_frame_loop(raf,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
