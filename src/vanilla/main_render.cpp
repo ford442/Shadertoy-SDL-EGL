@@ -57,7 +57,7 @@ renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 WGpuColorTargetState colorTarget={config.format,1,WGPU_COLOR_WRITE_ALL};
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
-renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
+// renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
 // emscripten_request_animation_frame_loop(raf,0);
 }
 
