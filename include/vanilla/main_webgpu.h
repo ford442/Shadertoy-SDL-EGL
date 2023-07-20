@@ -30,6 +30,12 @@
 #include <emscripten/html5.h>
 #include "../../lib/lib_webgpu.h"
 
+template<class ArgumentType,class ResultType>
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 inline int rNd4(int randomMax);
 static void raf();
 static void WGPU_Run();
