@@ -28,6 +28,8 @@
 #include <new>
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include <emscripten/html5_webgpu.h>
+
 #include "../../lib/lib_webgpu.h"
 
 template<class ArgumentType,class ResultType>
