@@ -40,7 +40,6 @@ b3_vanilla_webgpu:
 	 em++ src/vanilla/main_render.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -stdlib=libc++ -static
-	 em++ boost/compute/core.hpp $(STDS) -stdlib=libc++ -static
 	 emcc main_webgpu.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 -mllvm $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -jsDWEBGPU_DEBUG=1 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
