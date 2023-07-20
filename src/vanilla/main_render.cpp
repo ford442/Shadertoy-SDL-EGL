@@ -7,7 +7,7 @@ WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
-WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device, 0);
+WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 //colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_STORE_OP_STORE,WGPU_LOAD_OP_LOAD};
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
@@ -100,6 +100,8 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
+document.getElementById('canvas').height=parseInt(window.innerHeight,10);
+document.getElementById('canvas').width=parseInt(window.innerHeight,10);
 
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
