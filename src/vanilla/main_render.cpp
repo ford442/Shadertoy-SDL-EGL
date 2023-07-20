@@ -54,7 +54,7 @@ renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment.module=fs;
 renderPipelineDesc.fragment.entryPoint="main";
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-WGpuColorTargetState colorTarget={};
+WGpuColorTargetState colorTarget={23};
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
     
