@@ -8,9 +8,10 @@ WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
-WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_STORE_OP_STORE,WGPU_LOAD_OP_CLEAR};
+WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_LOAD_OP_LOAD,WGPU_STORE_OP_STORE,WGPU_TEXTURE_FORMAT_BGRA8UNORM vec4(1.0,1.0,1.0,1.0),};
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
+wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
@@ -24,27 +25,24 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-      assert(canvasContext);
-
 WGpuCanvasConfiguration config={device,WGPU_TEXTURE_FORMAT_BGRA8UNORM,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
-
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
-    "@vertex\n"
-    "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
-      "var pos = array<vec2<f32>, 3>(\n"
-        "vec2<f32>(0.0, 0.5),\n"
-        "vec2<f32>(-0.5, -0.5),\n"
-        "vec2<f32>(0.5, -0.5)\n"
-      ");\n"
-      "return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
-    "}\n";
+"@vertex\n"
+"fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
+"var pos = array<vec2<f32>, 3>(\n"
+"vec2<f32>(0.0,0.5),\n"
+"vec2<f32>(-0.5,-0.5),\n"
+"vec2<f32>(0.5,-0.5)\n"
+");\n"
+"return vec4<f32>(pos[vertexIndex],0.0,1.0);\n"
+"}\n";
 
-const char *fragmentShader =
-    "@fragment\n"
-    "fn main() -> @location(0) vec4<f32> {\n"
-      "return vec4<f32>(1.0, 0.5, 0.3, 1.0);\n"
-    "}\n";
+const char *fragmentShader=
+"@fragment\n"
+"fn main() -> @location(0) vec4<f32> {\n"
+"return vec4<f32>(1.0,0.5,0.3,1.0);\n"
+"}\n";
 
 WGpuShaderModuleDescriptor shaderModuleDesc={};
 shaderModuleDesc.code=vertexShader;
