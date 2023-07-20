@@ -40,7 +40,6 @@ typedef ResultType result_type;
 #include <boost/compute/core.hpp>
 
 inline int rNd4(int randomMax);
-static void raf();
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
