@@ -45,8 +45,6 @@ static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
-EM_BOOL raf(double time, void *userData);
-
 static void WGPU_Start();
 
 #include <iostream>
