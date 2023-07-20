@@ -37,7 +37,7 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_webgpu.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ src/vanilla/main_render.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -stdlib=libc++ -static
 	 em++ boost/compute/core.hpp $(STDS) -stdlib=libc++ -static
