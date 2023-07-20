@@ -24,7 +24,7 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config={device,navigator_gpu_get_preferred_canvas_format(),WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
+WGpuCanvasConfiguration config={device,23,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
 
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
