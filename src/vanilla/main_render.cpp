@@ -24,8 +24,8 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config ={};
-config.format=navigator_gpu_get_preferred_canvas_format();
+WGpuCanvasConfiguration config={};
+config.format=23;
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
     "@vertex\n"
