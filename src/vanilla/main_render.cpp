@@ -17,13 +17,15 @@ wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
-return EM_TRUE;
+return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
+      assert(canvasContext);
+
 WGpuCanvasConfiguration config={device,23,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT};
 
 wgpu_canvas_context_configure(canvasContext,&config);
@@ -57,10 +59,8 @@ renderPipelineDesc.fragment.entryPoint="main";
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 WGpuColorTargetState colorTarget={};
 colorTarget.format=23;
-// colorTarget.blend.operation=WGPU_BLEND_OPERATION_ADD;
 renderPipelineDesc.fragment.numTargets=1;
 renderPipelineDesc.fragment.targets=&colorTarget;
-    
 renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
