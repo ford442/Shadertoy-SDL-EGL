@@ -35,6 +35,7 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+#include <boost/compute/core.hpp>
 
 inline int rNd4(int randomMax);
 static void raf();
