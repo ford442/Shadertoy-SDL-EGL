@@ -27,6 +27,8 @@
 
 using namespace ::boost::tuples;
 
+extern "C"{
+
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 window.scroll(0,0);
@@ -244,16 +246,15 @@ pnnl.addEventListener('keydown',Key);
 
 });
 
+}
+
 static inline void(*jss)(){&js_main};
 int rD=0,Th=0,Rg=0;
-
 
 class js
 {
 
 private:
-
-
 
 public:
  
