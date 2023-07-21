@@ -1,6 +1,6 @@
 #include "../../include/shader/shader_webgpu.h"
 
-tbb::task_group g;
+oneapi::tbb::task_group g;
 
 void nanoPause(){
 nanosleep(&req2,&rem);
