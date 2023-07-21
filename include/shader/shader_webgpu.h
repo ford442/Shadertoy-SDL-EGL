@@ -58,6 +58,7 @@ using floaT=std::experimental::native_simd<float>;
 #include <emscripten/html5.h>
 #include <emscripten.h>
 
+#include "oneapi/tbb.h"
 #include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_group.h"
 #include "oneapi/tbb/global_control.h"
