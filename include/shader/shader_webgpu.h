@@ -62,9 +62,9 @@ using floaT=std::experimental::native_simd<float>;
 #include "oneapi/tbb/task_group.h"
 #include "oneapi/tbb/global_control.h"
 
-#include "level-zero/ze_api.h"
-#include "level-zero/zet_api.h"
-#include "level-zero/loader/ze_loader.h"
+#include "level_zero/ze_api.h"
+#include "level_zero/zet_api.h"
+#include "level_zero/loader/ze_loader.h"
 
 extern "C"{
 
