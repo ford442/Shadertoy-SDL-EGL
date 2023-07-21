@@ -1583,5 +1583,5 @@ return;
 };
 
 void strtt(){
-run::strt();
+Run::strt();
 }
