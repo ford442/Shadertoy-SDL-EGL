@@ -2,10 +2,16 @@
 
 Run run;
 
+void strtr(){
+oneapi::tbb::task_group g;
+g.run(run.strt);
+g.wait();
+}
+
 extern "C" {
 
 void str(){
-run.strt();
+strtr();
 return;
 }
 
