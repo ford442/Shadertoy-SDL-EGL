@@ -4,7 +4,7 @@ Run run;
 
 void strtr(){
 oneapi::tbb::task_group g;
-g.run(run.strt);
+g.run(run.strt());
 g.wait();
 }
 
