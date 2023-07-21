@@ -1582,12 +1582,12 @@ return;
   
 };
 
-void lztest(){
-int fl;
+void strtr(){
+oneapi::tbb::task_group g;
+g.run(Run.strt);
+g.wait();
 }
 
 void nanoPause(){
-oneapi::tbb::task_group g;
-g.run(lztest);
-g.wait();
+
 }
