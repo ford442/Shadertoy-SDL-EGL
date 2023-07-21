@@ -58,10 +58,9 @@ using floaT=std::experimental::native_simd<float>;
 #include <emscripten/html5.h>
 #include <emscripten.h>
 
-// #include "/usr/include/tbb/parallel_for.h"
-// #include "/usr/include/tbb/blocked_range.h"
-#include "/usr/include/tbb/tbb.h"
-#include "/usr/include/tbb/task_group.h"
+#include "oneapi/tbb/tick_count.h"
+#include "oneapi/tbb/task_group.h"
+#include "oneapi/tbb/global_control.h"
 
 extern "C"{
 
