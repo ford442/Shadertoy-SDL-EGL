@@ -5,7 +5,7 @@ Run run;
 extern "C" {
 
 void str(){
-run.strtr();
+run.strt();
 return;
 }
 
