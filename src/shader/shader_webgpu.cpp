@@ -2,6 +2,10 @@
 
 Run run;
 
+void strtt(){
+run.strt();
+}
+
 void strtr(){
 oneapi::tbb::task_group g;
 g.run(strtt);
