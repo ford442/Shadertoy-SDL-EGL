@@ -1582,8 +1582,12 @@ return;
   
 };
 
+void lztest(){
+int fl;
+}
+
 void nanoPause(){
 oneapi::tbb::task_group g;
-g.run(nanosleep(&req2,&rem));
+g.run(lztest);
 g.wait();
 }
