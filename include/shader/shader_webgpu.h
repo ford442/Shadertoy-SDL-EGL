@@ -58,6 +58,8 @@ using floaT=std::experimental::native_simd<float>;
 #include <emscripten/html5.h>
 #include <emscripten.h>
 
+#include <tbb/task_group.h>
+
 extern "C"{
 
 void str();
@@ -404,12 +406,15 @@ WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
+
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
+
+
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
@@ -426,6 +431,8 @@ double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 raN=rNd4(3);
+  
+
   /*
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -766,6 +773,15 @@ static char * results=NULL;
 static long int length=0;
 boost::uint_t<32>::exact uniBlock;
 
+tbb::task_group g;
+
+void nanoPause(){
+nanosleep(&req2,&rem);
+}
+
+g.run(nanoPause);
+g.wait();
+
 class Run{
 
 private:
@@ -791,10 +807,6 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 GPU gpu;
 
 public:
-
-static inline void nanoPause(){
-nanosleep(&req2,&rem);
-}
 
 static void PRGin(register boost::uint_t<64>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
