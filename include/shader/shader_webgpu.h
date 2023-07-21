@@ -60,6 +60,7 @@ using floaT=std::experimental::native_simd<float>;
 
 // #include "/usr/include/tbb/parallel_for.h"
 // #include "/usr/include/tbb/blocked_range.h"
+#include "/usr/include/oneapi/tbb.h"
 #include "/usr/include/tbb/task_group.h"
 
 extern "C"{
