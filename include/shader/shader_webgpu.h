@@ -1582,6 +1582,6 @@ return;
   
 };
 
-void nanoPause(){
-
+void strtt(){
+run::strt();
 }
