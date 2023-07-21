@@ -1,14 +1,5 @@
 #include "../../include/shader/shader_webgpu.h"
 
-oneapi::tbb::task_group g;
-
-void nanoPause(){
-nanosleep(&req2,&rem);
-}
-
-g.run(nanoPause);
-g.wait();
-
 Run run;
 
 extern "C" {
