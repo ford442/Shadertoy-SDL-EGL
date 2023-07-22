@@ -18,7 +18,7 @@ using floaT=std::experimental::native_simd<float>;
 
 #define register
 
-#include <SYCL/sycl.hpp>
+// #include <SYCL/sycl.hpp>
 
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp> 
