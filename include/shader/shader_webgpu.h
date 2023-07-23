@@ -60,6 +60,9 @@ using floaT=std::experimental::native_simd<float>;
 #include <emscripten.h>
 
 #include <tbb/tbb.h>
+#include <tbb/parallel_for.h>
+#include <tbb/parallel_reduce.h>
+#include <tbb/parallel_scan.h>
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
 #include <oneapi/tbb/detail/_export.h>
