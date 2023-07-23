@@ -60,7 +60,6 @@ using floaT=std::experimental::native_simd<float>;
 #include <emscripten.h>
 
 #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_arena.h"
-#include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_group_context.h"
 #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_group.h"
 
 #include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
