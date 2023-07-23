@@ -7,7 +7,7 @@ run.strt();
 }
 
 void strtr(){
-tbb::task_group g;
+// tbb::task_group g;
   //  g.run(strtt);
   //  g.wait();
   strtt();
