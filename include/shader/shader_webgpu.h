@@ -59,7 +59,7 @@ using floaT=std::experimental::native_simd<float>;
 #include <emscripten/html5.h>
 #include <emscripten.h>
 
-#include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/arena.h"
+#include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_arena.h"
 #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_group_context.h"
 #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_group.h"
 
@@ -121,13 +121,13 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma STDGL(sample all)\n"
-"#pragma STDGL(fastmath on)\n"
+"#pragma STDGL(fastmath off)\n"
 "#pragma STDGL(fastprecision off)\n"
 "#pragma STDGL(unroll all)\n"
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma STDGL(inline none)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "precision highp int;\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
