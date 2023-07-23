@@ -33,6 +33,7 @@
 #include "../../lib/lib_webgpu.h"
 
 #include <tbb/tbb.h>
+#include <tbb/task_group.h>
 
 template<class ArgumentType,class ResultType>
 struct unary_function{
