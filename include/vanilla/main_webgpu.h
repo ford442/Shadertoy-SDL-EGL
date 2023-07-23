@@ -37,10 +37,6 @@
 #include <tbb/parallel_reduce.h>
 #include <tbb/parallel_scan.h>
 
-// #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
-#include <oneapi/tbb/detail/_export.h>
-#include <tbb/task_group.h>
-
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
