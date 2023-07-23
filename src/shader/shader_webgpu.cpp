@@ -8,8 +8,9 @@ run.strt();
 
 void strtr(){
 tbb::task_group g;
-g.run(strtt);
-g.wait();
+  //  g.run(strtt);
+  //  g.wait();
+  strtt();
 }
 
 extern "C" {
