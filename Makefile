@@ -40,9 +40,9 @@ b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -stdlib=libc++ -static
 	 em++ /content/RAMDRIVE2/tbb/src/tbb/task_group_context.cpp $(STDS) -stdlib=libc++ -static
-	 em++ src/vanilla/main_render.cpp -c $(STDS) -stdlib=libc++ -pie --experiemental-pic $(BOOST_FLAGS) $(SIMD_FLAGS) -DTASK_GROUP_CONTEXT 
+	 em++ src/vanilla/main_render.cpp -c $(STDS) -stdlib=libc++ -pie -fPIC $(BOOST_FLAGS) $(SIMD_FLAGS) -DTASK_GROUP_CONTEXT 
 	 emcc main_render.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -DTASK_GROUP_CONTEXT -o w3001.js \
-	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) -pie --experiemental-pic \
+	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) -pie -fPIC \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js -stdlib=libc++ \
 	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt \
