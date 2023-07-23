@@ -32,10 +32,12 @@
 
 #include "../../lib/lib_webgpu.h"
 
-#include <tbb/tbb.h>
-#include <tbb/parallel_for.h>
-#include <tbb/parallel_reduce.h>
-#include <tbb/parallel_scan.h>
+#include "oneapi/tbb/detail/_utils.h"
+#include "oneapi/tbb/detail/_template_helpers.h"
+#include "oneapi/tbb/detail/_task.h"
+#include "oneapi/tbb/detail/_machine.h"
+#include "oneapi/tbb/task_group.h"
+#include "oneapi/tbb/cache_aligned_allocator.h"
 
 template<class ArgumentType,class ResultType>
 struct unary_function{
