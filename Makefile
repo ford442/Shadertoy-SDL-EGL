@@ -37,10 +37,10 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
-	 em++ src/vanilla/main_render.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -stdlib=libc++ -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -stdlib=libc++ -static
 	 em++ /content/RAMDRIVE2/tbb/src/tbb/task_group_context.cpp $(STDS) -stdlib=libc++ -static
+	 em++ src/vanilla/main_render.cpp -c $(STDS) -stdlib=libc++ $(BOOST_FLAGS) $(SIMD_FLAGS) -DTASK_GROUP_CONTEXT 
 	 emcc main_render.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -DTASK_GROUP_CONTEXT -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
