@@ -62,8 +62,8 @@ using floaT=std::experimental::native_simd<float>;
 #include "/usr/local/include/tbb/tbb.h"
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
-#include "/usr/local/include/oneapi/tbb/detail/_export.h"
-#include "/usr/local/include/oneapi/tbb/task_group.h"
+#include <oneapi/tbb/detail/_export.h>
+#include <oneapi/tbb/task_group.h>
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
 
