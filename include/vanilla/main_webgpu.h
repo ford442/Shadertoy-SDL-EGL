@@ -32,7 +32,7 @@
 
 #include "../../lib/lib_webgpu.h"
 
-#include "oneapi/tbb/tbb.h"
+#include <tbb/tbb.h>
 
 template<class ArgumentType,class ResultType>
 struct unary_function{
