@@ -61,11 +61,11 @@ using floaT=std::experimental::native_simd<float>;
 
 #include "/content/RAMDRIVE2/tbb/include/tbb/tbb.h"
 
-// #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_arena.h"
-#include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/detail/_export.h"
-#include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/task_group.h"
-// #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/detail/_config.h"
-// #include "/content/RAMDRIVE2/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
+// #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
+#include "/usr/local/include/tbb/include/oneapi/tbb/detail/_export.h"
+#include "/usr/local/include/tbb/include/oneapi/tbb/task_group.h"
+// #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
+// #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
 
 #include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
 #include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
