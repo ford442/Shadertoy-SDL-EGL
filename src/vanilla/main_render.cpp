@@ -79,8 +79,7 @@ navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 }
 
 void WGPU_Start(){
-g.run(WGPU_Start22);
-g.wait();
+
 }
 
 EM_JS(void,js_main,(),{
@@ -186,7 +185,8 @@ void runWebGPU2(){
 
 int main(void){
     tbb::task_group g;
-
+g.run(WGPU_Start22);
+g.wait();
 js_main();
 // sleep(1);
 // WGPU_Start();
