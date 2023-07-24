@@ -1192,9 +1192,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_polygon_offset_clamp");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counter_ops");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
@@ -1250,7 +1247,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_buffer_bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");  // context angered if not enabled
-emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_coverage_sample"); 
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_framebuffer_object"); 
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
+  
   glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
