@@ -26,7 +26,7 @@
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include <emscripten.h>
+#include </content/RAMDRIVE2/emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 
