@@ -15,7 +15,6 @@ typedef ResultType result_type;
 using floaT=std::experimental::native_simd<float>;
 
 #include <boost/function.hpp>
-#include <boost/context/detail/invoke.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/context/fiber.hpp>
 
