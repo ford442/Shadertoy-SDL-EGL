@@ -221,6 +221,7 @@ document.getElementById('di').click();
 });
   
 int main(void){
+icctest();
 sleep(1);
 js_main();
 return 0;
