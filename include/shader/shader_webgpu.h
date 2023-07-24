@@ -12,7 +12,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-using floaT=std::experimental::native_simd<float>;
+// using floaT=std::experimental::native_simd<float>;
 
 #include <boost/function.hpp>
 #include <boost/context/detail/tuple.hpp>
