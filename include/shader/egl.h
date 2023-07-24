@@ -4,6 +4,9 @@
 #include <webgl/webgl2.h>  //  much better performance without
 
 #define GL_GLES_PROTOTYPES 1
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+
 #include <GLES3/gl3platform.h>
 #include <GLES3/gl3.h>
 // #include <GLES3/gl31.h>
