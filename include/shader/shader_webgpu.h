@@ -1420,14 +1420,14 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 glStencilMask(1);
 glClearStencil(0);
-  
-   //  COVERAGE_COMPONENT4_NV  renderbuffer
+
+/*   //  COVERAGE_COMPONENT4_NV  renderbuffer
   glGenRenderbuffers(1,&TX.at(1,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,COVERAGE_COMPONENT4_NV,i_size.at(1,0),i_size.at(1,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
-  
+    */
 /* 
     //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
