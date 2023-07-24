@@ -1250,7 +1250,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_buffer_bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");  // context angered if not enabled
-glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_coverage_sample"); 
+  glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
