@@ -1368,6 +1368,13 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,i_size.at(1,1),i_siz
 glClearDepth(1.0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
+ 
+//  non-multisample COVERAGE_COMPONENT4_NV  renderbuffer
+  glGenRenderbuffers(1,&TX.at(1,0,1));
+glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
+glRenderbufferStorageEXT(GL_RENDERBUFFER,GL_COVERAGE_COMPONENT4_NV,i_size.at(1,1),i_size.at(1,1));
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
+glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
 
 /*  // non multisampled stencil renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,2));
@@ -1421,30 +1428,22 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_REN
 glStencilMask(1);
 glClearStencil(0);
 
-   //  COVERAGE_COMPONENT4_NV  renderbuffer
-  glGenRenderbuffers(1,&TX.at(1,0,1));
-glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_COVERAGE_COMPONENT4_NV,i_size.at(1,0),i_size.at(1,0));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
-   
-/* 
-    //  depth32 renderbuffer
+ /*   //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
 /// glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
-
 */
+
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glClearColor(0.0f,0.0f,0.0f,1.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|COVERAGE_BUFFER_BIT_NV);
 glFlush();
 glFinish();
 
