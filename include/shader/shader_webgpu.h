@@ -15,6 +15,7 @@ typedef ResultType result_type;
 using floaT=std::experimental::native_simd<float>;
 
 #include <boost/function.hpp>
+#include <boost/context/fiber.hpp>
 
 #define register
 
