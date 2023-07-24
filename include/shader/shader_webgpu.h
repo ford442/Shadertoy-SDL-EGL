@@ -1250,7 +1250,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");  // c
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_framebuffer_object"); 
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_NV_coverage_sample");
   
   glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
@@ -1421,13 +1421,13 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_REN
 glStencilMask(1);
 glClearStencil(0);
 
-/*   //  COVERAGE_COMPONENT4_NV  renderbuffer
+   //  COVERAGE_COMPONENT4_NV  renderbuffer
   glGenRenderbuffers(1,&TX.at(1,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,COVERAGE_COMPONENT4_NV,i_size.at(1,0),i_size.at(1,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
-    */
+   
 /* 
     //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
