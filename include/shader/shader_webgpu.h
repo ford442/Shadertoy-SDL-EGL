@@ -1424,9 +1424,9 @@ glClearStencil(0);
    //  COVERAGE_COMPONENT4_NV  renderbuffer
   glGenRenderbuffers(1,&TX.at(1,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,COVERAGE_COMPONENT4_NV,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_COVERAGE_COMPONENT4_NV,i_size.at(1,0),i_size.at(1,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
+glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
    
 /* 
     //  depth32 renderbuffer
