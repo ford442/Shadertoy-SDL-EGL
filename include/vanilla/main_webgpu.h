@@ -32,9 +32,9 @@
 
 #include "../../lib/lib_webgpu.h"
 
-#include "oneapi/tbb/tick_count.h"
-#include "oneapi/tbb/task_group.h"
-#include "oneapi/tbb/global_control.h"
+// #include "oneapi/tbb/tick_count.h"
+// #include "oneapi/tbb/task_group.h"
+// #include "oneapi/tbb/global_control.h"
 
 template<class ArgumentType,class ResultType>
 struct unary_function{
