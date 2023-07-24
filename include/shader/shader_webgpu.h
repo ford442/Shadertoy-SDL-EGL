@@ -1250,9 +1250,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");  // c
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_framebuffer_object"); 
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_NV_coverage_sample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sRGB_framebuffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_sRGB_decode");
   
-  glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
