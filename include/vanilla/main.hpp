@@ -83,10 +83,6 @@ using namespace boost::numeric::ublas;
 // using namespace boost::multiprecision;
 using namespace boost::random;
 
-#include "oneapi/tbb/tick_count.h"
-#include "oneapi/tbb/task_group.h"
-#include "oneapi/tbb/global_control.h"
-
 using tensorVar=tensor<GLfloat>;
 using tF=tensor<GLfloat>;
 using tf=tensor<float>;
