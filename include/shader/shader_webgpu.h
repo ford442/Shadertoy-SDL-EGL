@@ -3,6 +3,7 @@
 #include <functional>
 #include <algorithm>
 #include <experimental/simd>
+// using unary_function = std::unary_function;
 
 template<class ArgumentType,class ResultType>
 
@@ -11,32 +12,25 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <boost/function.hpp>
+// using floaT=std::experimental::native_simd<float>;
 
+#include <boost/function.hpp>
 #include <boost/context/detail/tuple.hpp>
 
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
-
-#include <boost/atomic.hpp>
-
-#include <boost/tuple/tuple.hpp>
-
-#include <boost/compute/cl.hpp> 
-#include <boost/compute/core.hpp> 
-// #include <boost/compute/algorithm.hpp>
-#include <boost/compute/interop/opengl.hpp>
-#include <boost/integer.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/chrono.hpp>
-
-// using unary_function = std::unary_function;
+#include <boost/context/fiber.hpp>
 
 #define register
 
 // #include <SYCL/sycl.hpp>
+
+#include <boost/compute/cl.hpp> 
+#include <boost/compute/core.hpp> 
+
+// #include <boost/compute/algorithm.hpp>
+
+#include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
@@ -44,6 +38,13 @@ typedef ResultType result_type;
 #include <cfloat>
 #include <math.h>
 #include <new>
+#include <boost/integer.hpp>
+#include <boost/atomic.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
 #include <algorithm>
 #include <cstring>
 #include <stdarg.h>
@@ -64,9 +65,9 @@ typedef ResultType result_type;
 #include <emscripten.h>
 
 #include <tbb/tbb.h>
-#include "tbb/task_scheduler_observer.h"
-#include "tbb/task.h"
 #include <tbb/parallel_for.h>
+#include <tbb/parallel_reduce.h>
+#include <tbb/parallel_scan.h>
 #include <tbb/task_arena.h>
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
@@ -74,13 +75,10 @@ typedef ResultType result_type;
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
-#include <tbb/scalable_allocator.h> 
 
 #include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
 #include </content/RAMDRIVE2/level-zero/include/zet_api.h>
 #include </content/RAMDRIVE2/level-zero/include/loader/ze_loader.h>
-
-// const int oneapi::tbb::detail::d1::task_arena_base::automatic;
 
 extern "C"{
 
