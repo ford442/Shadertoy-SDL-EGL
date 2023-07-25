@@ -3,34 +3,10 @@
 #include <functional>
 #include <algorithm>
 #include <experimental/simd>
-// using unary_function = std::unary_function;
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
-
-// using floaT=std::experimental::native_simd<float>;
-
-#include <boost/function.hpp>
-#include <boost/context/detail/tuple.hpp>
-
-#include <boost/lockfree/spsc_queue.hpp>
-#include <boost/atomic.hpp>
-#include <boost/context/fiber.hpp>
 
 #define register
 
 // #include <SYCL/sycl.hpp>
-
-#include <boost/compute/cl.hpp> 
-#include <boost/compute/core.hpp> 
-
-// #include <boost/compute/algorithm.hpp>
-
-#include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
@@ -38,13 +14,6 @@ typedef ResultType result_type;
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include <boost/integer.hpp>
-#include <boost/atomic.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
 #include <algorithm>
 #include <cstring>
 #include <stdarg.h>
