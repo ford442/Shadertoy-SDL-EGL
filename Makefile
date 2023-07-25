@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
+LDFLAGS += -Wl,-O3,--lto-O3
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
@@ -18,8 +18,8 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sUSE_GLFW=3
 -sGL_POOL_TEMP_BUFFERS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
 
 LINK_FLAGS += $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly -mllvm -exception-model=wasm -mtune=haswell \
-	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
-	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
+	 -march=haswell -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
+	 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux \
 	 --memory-init-file 0 -rtlib=compiler-rt
 
