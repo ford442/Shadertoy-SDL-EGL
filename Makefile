@@ -1,14 +1,13 @@
-LDFLAGS += -Wl,-O3,--lto-O3
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
 STDS += -std=c++98 -std=c++03 -std=c++11 -std=c++14 -std=c++17 -std=c++20 -std=c++2a -std=c++2b
-STDS2 += -std=c++98 -std=c++03 -std=c++11 -std=c++14
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes --enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -O3 -nostdlib -fmerge-all-constants -ffast-math -ffp-contract=off -mnontrapping-fptoint -fno-stack-protector \
+COMMON_FLAGS += -O3 -fmerge-all-constants -ffast-math -ffp-contract=off -mnontrapping-fptoint -fno-stack-protector \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
@@ -19,8 +18,8 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sUSE_GLFW=3
 -sGL_POOL_TEMP_BUFFERS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
 
 LINK_FLAGS += $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly -mllvm -exception-model=wasm -mtune=haswell \
-	 -march=haswell -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
-	 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
+	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,node,shell' -sDYNAMIC_EXECUTION=2 \
+	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux \
 	 --memory-init-file 0 -rtlib=compiler-rt
 
@@ -40,8 +39,9 @@ video_resurection_jebus:
 b3_vanilla_webgpu:
 	 emcc lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 emcc lib/lib_webgpu.cpp $(STDS) -static
+	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -fwasm-abi -nostdlib -c -o icc.o src/vanilla/icc.cpp
 	 emcc src/vanilla/main_render.cpp -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc main_render.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc main_render.o icc.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
@@ -71,12 +71,12 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu.cpp -static
 	 em++ $(STDS) include/shader/intrins.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
-	 em++ $(STDS2) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
+	 em++ -std=c++14 -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 emcc $(STDS) -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sASYNCIFY=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -sERROR_ON_UNDEFINED_SYMBOLS=0  \
+	 -sASYNCIFY=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
