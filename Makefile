@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,--no-undefined
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
@@ -39,8 +39,7 @@ video_resurection_jebus:
 b3_vanilla_webgpu:
 	 emcc lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 emcc lib/lib_webgpu.cpp $(STDS) -static
-	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -o icc.ispc src/vanilla/icc.cpp
-	 /content/RAMDRIVE2/ispc-v1.20.0-linux/bin/ispc --target=avx1-i32x16 --arch=x86 -o icc.o icc.ispc
+	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -fwasm-abi -nostdlib -c -o icc.o src/vanilla/icc.cpp
 	 emcc src/vanilla/main_render.cpp -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc main_render.o icc.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
