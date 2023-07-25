@@ -80,6 +80,8 @@ typedef ResultType result_type;
 #include </content/RAMDRIVE2/level-zero/include/zet_api.h>
 #include </content/RAMDRIVE2/level-zero/include/loader/ze_loader.h>
 
+const int oneapi::tbb::detail::d1::task_arena_base::automatic;
+
 extern "C"{
 
 void str();
@@ -1116,7 +1118,6 @@ return nullptr;
 }
 
 }procc;
-const int oneapi::tbb::detail::d1::task_arena_base::automatic;
 
 void strt(){
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
