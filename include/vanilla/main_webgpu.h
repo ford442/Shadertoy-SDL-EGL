@@ -49,7 +49,6 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
 static void WGPU_Start();
 
-
 // #include <boost/compute.hpp>
 // #include <boost/compute/algorithm.hpp>
 
