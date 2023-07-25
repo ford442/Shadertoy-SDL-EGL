@@ -1,6 +1,8 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include <boost/cstdint.hpp>
 #include <functional>
+#include <boost/function.hpp>
+
 #include <algorithm>
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp> 
