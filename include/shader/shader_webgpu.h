@@ -75,6 +75,7 @@ typedef ResultType result_type;
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
+#include <tbb/scalable_allocator.h> 
 
 #include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
 #include </content/RAMDRIVE2/level-zero/include/zet_api.h>
