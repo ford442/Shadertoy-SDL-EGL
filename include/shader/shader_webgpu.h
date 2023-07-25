@@ -1116,9 +1116,9 @@ return nullptr;
 }
 
 }procc;
+const int oneapi::tbb::detail::d1::task_arena_base::automatic;
 
 void strt(){
-const int oneapi::tbb::detail::d1::task_arena_base::automatic;
 tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
   arena.initialize();
 arena.enqueue([&]() {
