@@ -1,9 +1,18 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include <boost/cstdint.hpp>
 #include <functional>
+#include <algorithm>
+#include <experimental/simd>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 #include <boost/function.hpp>
 
-#include <algorithm>
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp> 
 // #include <boost/compute/algorithm.hpp>
@@ -15,15 +24,6 @@
 #include <boost/chrono.hpp>
 
 // using unary_function = std::unary_function;
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
-
-#include <experimental/simd>
 
 #define register
 
