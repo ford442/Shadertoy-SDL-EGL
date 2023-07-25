@@ -1,11 +1,4 @@
-// using unary_function = std::unary_function;
 
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
 
 // using floaT=std::experimental::native_simd<float>;
 
