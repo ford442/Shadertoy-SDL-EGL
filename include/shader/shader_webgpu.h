@@ -71,7 +71,7 @@ typedef ResultType result_type;
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
 // #include <oneapi/tbb/detail/_export.h>
-#include <tbb/task_group.h>
+#include <tbb/task_arena.h>
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
 
@@ -1027,17 +1027,18 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[2],2);
  glUniform1i(smp_chn[3],3);
  */
-
   
 glUniform1i(uni_frm,uni_i.at(0,0));
+eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
-   glDisable(GL_DEPTH_TEST);
- glDisable(GL_STENCIL_TEST);
+glDisable(GL_DEPTH_TEST);
+glDisable(GL_STENCIL_TEST);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+eglBindAPI(EGL_OPENGL_ES_API);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glBlitFramebuffer(0,0,i_size.at(0,0),i_size.at(0,0),0,0,i_size.at(0,0),i_size.at(0,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
