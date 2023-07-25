@@ -1,5 +1,5 @@
 #include <iostream>
 
 void testicc(){
-cout << "Running ICPX compiled object." << endl;
+std::cout << "Running ICPX compiled object." << std::endl;
 }
