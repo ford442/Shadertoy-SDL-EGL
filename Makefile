@@ -73,7 +73,7 @@ b3_shader_webgpu:
 	 em++ -std=c++14 -c src/shader/shader_webgpu.cpp -nostdlib $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 emcc $(STDS) -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
-	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL -ltbb \
+	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL -l/opt/intel/oneapi/tbb/2021.10.0/lib/ia32/gcc4.8/libtbb.so.12 \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -sERROR_ON_UNDEFINED_SYMBOLS=0  \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
