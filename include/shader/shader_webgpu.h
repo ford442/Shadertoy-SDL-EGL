@@ -1120,6 +1120,7 @@ return nullptr;
 void strt(){
 
 tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
+  arena.initialize();
 arena.enqueue([&]() {
     // Do some work.
 std::cout << "Hello world!" << std::endl;
