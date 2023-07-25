@@ -1119,9 +1119,11 @@ return nullptr;
 const int oneapi::tbb::detail::d1::task_arena_base::automatic;
 
 void strt(){
-tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
-  arena.initialize();
-arena.enqueue([&]() {
+tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
+      m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
+
+  m_arena.initialize();
+m_arena.enqueue([&]() {
     // Do some work.
 std::cout << "Hello world!" << std::endl;
 });
