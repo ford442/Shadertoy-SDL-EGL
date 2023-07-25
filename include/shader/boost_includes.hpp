@@ -16,8 +16,7 @@ typedef ResultType result_type;
 #include <boost/atomic.hpp>
 #include <boost/context/fiber.hpp>
 
-
 #include <boost/atomic.hpp>
 
 #include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
+
