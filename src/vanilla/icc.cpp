@@ -6,5 +6,6 @@ std::cout << "Running ICPX compiled object." << std::endl;
 
 int main(){
   // extra main?
+  testicc();
   return 1;
 }
