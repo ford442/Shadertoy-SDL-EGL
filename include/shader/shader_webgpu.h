@@ -80,7 +80,7 @@ typedef ResultType result_type;
 #include </content/RAMDRIVE2/level-zero/include/zet_api.h>
 #include </content/RAMDRIVE2/level-zero/include/loader/ze_loader.h>
 
-const int oneapi::tbb::detail::d1::task_arena_base::automatic;
+// const int oneapi::tbb::detail::d1::task_arena_base::automatic;
 
 extern "C"{
 
@@ -1124,11 +1124,12 @@ tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
  //     m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
 
   m_arena.initialize();
+  /*
 m_arena.enqueue([&]() {
     // Do some work.
 std::cout << "Hello world!" << std::endl;
 });
-
+*/
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
