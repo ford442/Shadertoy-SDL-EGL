@@ -7,6 +7,9 @@
 // #include <boost/compute/algorithm.hpp>
 #include <boost/compute/interop/opengl.hpp>
 #include <boost/integer.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
 
 #include <experimental/simd>
 
