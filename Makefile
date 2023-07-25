@@ -75,7 +75,7 @@ b3_shader_webgpu:
 	 emcc $(STDS) -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sASYNCIFY=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
+	 -sASYNCIFY=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -sERROR_ON_UNDEFINED_SYMBOLS=0  \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
