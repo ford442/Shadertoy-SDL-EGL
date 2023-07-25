@@ -176,9 +176,14 @@ void runWebGPU2(){
 }
 
 int main(void){
-tbb::task_group g;
-g.run(WGPU_Start22);
-g.wait();
+
+tbb::task_arena arena(4);
+tbb::task_group group;
+group.run([&]() {
+WGPU_Start22();
+});
+group.wait();
+
 js_main();
 // sleep(1);
 // WGPU_Start();
