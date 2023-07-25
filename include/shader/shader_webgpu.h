@@ -68,10 +68,11 @@ typedef ResultType result_type;
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_reduce.h>
 #include <tbb/parallel_scan.h>
+#include <tbb/task_arena.h>
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
 // #include <oneapi/tbb/detail/_export.h>
-#include <tbb/task_arena.h>
+
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
 // #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
 
@@ -1117,6 +1118,9 @@ return nullptr;
 }procc;
 
 void strt(){
+
+  tbb::task_arena arena(1);
+  
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
