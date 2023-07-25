@@ -26,7 +26,6 @@
 using std::experimental::native_simd;
 using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>;
 
-
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
 #define _XOPEN_REALTIME 1
@@ -36,7 +35,6 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 #define _XOPEN_SHM 1
 #define _POSIX_PRIORITIZED_IO 1
 #define _POSIX_REGEXP 1
-
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 
@@ -70,6 +68,7 @@ using float_v=std::experimental::simd<float,std::experimental::simd_abi::scalar>
 // #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/random.hpp>
 #include <boost/random/random_device.hpp>
+
 using namespace std::chrono_literals;
 using namespace ::boost::tuples;
 
