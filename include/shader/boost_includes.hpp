@@ -2,7 +2,6 @@
 
 // using floaT=std::experimental::native_simd<float>;
 
-#include <boost/function.hpp>
 #include <boost/context/detail/tuple.hpp>
 
 #include <boost/lockfree/spsc_queue.hpp>
