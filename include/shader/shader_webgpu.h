@@ -1119,7 +1119,7 @@ return nullptr;
 
 void strt(){
 
-  tbb::task_arena arena(1);
+  tbb::task_arena arena(1,1,priority::high);
   
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
