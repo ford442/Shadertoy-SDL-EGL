@@ -69,7 +69,7 @@ WGpuDeviceDescriptor deviceDesc={};
 wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,0);
 }
 
-void WGPU_Start(){
+void WGPU_Start22(){
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
@@ -91,7 +91,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-Module.ccall("startWebGPU",{async:true});
+// Module.ccall("startWebGPU",{async:true});
 // const myInterval=setInterval(strr,1000);
 },100);
 }
@@ -177,8 +177,8 @@ void runWebGPU2(){
 
 int main(void){
 tbb::task_group g;
-// g.run(WGPU_Start22);
-// g.wait();
+g.run(WGPU_Start22);
+g.wait();
 js_main();
 // sleep(1);
 // WGPU_Start();
