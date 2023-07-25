@@ -13,6 +13,16 @@ typedef ResultType result_type;
 
 #include <boost/function.hpp>
 
+#include <boost/context/detail/tuple.hpp>
+
+#include <boost/lockfree/spsc_queue.hpp>
+#include <boost/atomic.hpp>
+#include <boost/context/fiber.hpp>
+
+#include <boost/atomic.hpp>
+
+#include <boost/tuple/tuple.hpp>
+
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp> 
 // #include <boost/compute/algorithm.hpp>
