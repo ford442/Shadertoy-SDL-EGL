@@ -65,9 +65,9 @@ typedef ResultType result_type;
 #include <emscripten.h>
 
 #include <tbb/tbb.h>
+#include "tbb/task_scheduler_observer.h"
+#include "tbb/task.h"
 #include <tbb/parallel_for.h>
-#include <tbb/parallel_reduce.h>
-#include <tbb/parallel_scan.h>
 #include <tbb/task_arena.h>
 
 // #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
