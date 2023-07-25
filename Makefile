@@ -42,7 +42,7 @@ b3_vanilla_webgpu:
 	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -o icc.ispc src/vanilla/icc.cpp
 	 /content/RAMDRIVE2/ispc-v1.20.0-linux/bin/ispc --target=avx1-i32x16 --arch=x86 -o icc.o icc.ispc
 	 emcc src/vanilla/main_render.cpp -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc main_render.o icc.ispc -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc main_render.o icc.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
