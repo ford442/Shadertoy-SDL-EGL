@@ -12,6 +12,15 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/chrono.hpp>
 
+// using unary_function = std::unary_function;
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 #include <experimental/simd>
 
 #define register
