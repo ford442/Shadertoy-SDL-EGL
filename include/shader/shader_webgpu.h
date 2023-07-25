@@ -1124,6 +1124,7 @@ arena.enqueue([&]() {
     // Do some work.
 std::cout << "Hello world!" << std::endl;
 });
+arena.wait();
 
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
