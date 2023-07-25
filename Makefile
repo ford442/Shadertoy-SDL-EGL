@@ -37,10 +37,10 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx src/vanilla/icc.cpp -o icc.o
-	 em++ src/vanilla/main_render.cpp -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc lib/lib_webgpu_cpp20.cpp $(STDS) -static
+	 emcc lib/lib_webgpu.cpp $(STDS) -static
+	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -o icc.o src/vanilla/icc.cpp
+	 emcc src/vanilla/main_render.cpp -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc main_render.o icc.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
