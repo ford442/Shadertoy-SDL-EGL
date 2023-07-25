@@ -1,6 +1,3 @@
-
-
-
 #include "../../include/vanilla/main.hpp"
 
 float cc,pp,uu;
@@ -14,8 +11,6 @@ tens Tens;
 extern "C"{
   
 float js_double(float nem){ 
-
-    
 v128_t rtt=Funcs.rnn.double_add(nem);
 float retrnI=wasm_f32x4_extract_lane(rtt,0);
 float retrnD=wasm_f32x4_extract_lane(rtt,4);
@@ -225,5 +220,4 @@ icctest();
 sleep(1);
 js_main();
 return 0;
-
 }
