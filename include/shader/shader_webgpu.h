@@ -1118,8 +1118,10 @@ return nullptr;
 }procc;
 
 void strt(){
+/*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
-/*     m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
+
+m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
 
  m_arena.initialize();
 
