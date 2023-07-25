@@ -17,7 +17,6 @@
 #include <cstdint>
 #include <stdlib.h>
 #include <climits>
-#include <iostream>
 #include <ctime>
 #include <vector>
 #include <functional>
@@ -29,7 +28,7 @@
 #include </content/RAMDRIVE2/emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
-
+#include <iostream>
 #include "../../lib/lib_webgpu.h"
 
 // #include "oneapi/tbb/tick_count.h"
@@ -50,7 +49,6 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
 static void WGPU_Start();
 
-#include <iostream>
 
 // #include <boost/compute.hpp>
 // #include <boost/compute/algorithm.hpp>
