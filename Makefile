@@ -39,10 +39,8 @@ video_resurection_jebus:
 b3_vanilla_webgpu:
 	 emcc lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 emcc lib/lib_webgpu.cpp $(STDS) -static
-	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -nostdlib -c -o icc.ispc src/vanilla/icc.cpp
-	 /content/RAMDRIVE2/ispc-v1.20.0-linux/bin/ispc --target=avx1-i32x16 --arch=x86 -o icc.o icc.ispc
 	 emcc src/vanilla/main_render.cpp -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc main_render.o icc.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc main_render.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
