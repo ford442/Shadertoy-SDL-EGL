@@ -31,6 +31,7 @@
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
+#include "openvino/c/openvino.h"
 #include "openvino/openvino.hpp"
 #include "openvino/core/model.hpp"
 #include "openvino/core/node.hpp"
