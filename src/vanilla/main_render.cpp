@@ -189,6 +189,7 @@ int main(void){
   init.terminate();
 */
     ov::Core core;
+  core.destroy();
 
 js_main();
 // sleep(1);
