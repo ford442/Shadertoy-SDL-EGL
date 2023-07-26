@@ -70,7 +70,8 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 }
 
 void WGPU_Start(){
-  
+          slog::info << ov::get_openvino_version() << slog::endl;
+
 
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
@@ -188,7 +189,7 @@ int main(void){
   tbb::task::wait();
   init.terminate();
 */
-    ov::Tensor data;
+ //   ov::Tensor data;
 
 js_main();
 // sleep(1);
