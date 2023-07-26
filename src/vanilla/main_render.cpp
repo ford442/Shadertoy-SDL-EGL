@@ -185,7 +185,7 @@ auto create_model = []() {
     return model;
 };
 
-// ov::Core core;
+ov::Core core;
 
 // tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
 
@@ -197,14 +197,14 @@ auto create_model = []() {
 
 int main(void){
               oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
+          std::cout << "Hello from TBB:" << mainStartTime << std::endl;
+
 /*
 arena.initialize();
 
 arena.enqueue([&]() {
     // Do some work.
-std::cout << "Hello world!" << std::endl;
 });
-          
 
   tbb::task_scheduler_init init(1);
   tbb::task::spawn(WGPU_Start22);
