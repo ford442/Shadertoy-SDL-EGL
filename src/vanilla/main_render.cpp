@@ -193,8 +193,6 @@ int main(void){
   init.terminate();
 */
 
-
-
 std::shared_ptr<ov::Model> model = create_model();
 
 js_main();
