@@ -34,7 +34,7 @@
 #include <wasi/api.h>
 extern "C" {
   int fd_close(int fd) {
-    return wasi_fd_close(fd);
+    return __wasi_fd_close(fd);
   }
 }
 #include "openvino/openvino.hpp"
