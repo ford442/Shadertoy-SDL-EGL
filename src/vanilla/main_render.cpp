@@ -71,13 +71,6 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 
 void WGPU_Start(){
           
-auto create_model = []() {
-    std::shared_ptr<ov::Model> model;
-    return model;
-};
-std::shared_ptr<ov::Model> model = create_model();
-compiled_model = core.compile_model(model, "AUTO");
-
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
@@ -194,7 +187,14 @@ int main(void){
   tbb::task::wait();
   init.terminate();
 */
- //   ov::Tensor data;
+ov::Core core;
+
+auto create_model = []() {
+    std::shared_ptr<ov::Model> model;
+    return model;
+};
+std::shared_ptr<ov::Model> model = create_model();
+compiled_model = core.compile_model(model, "AUTO");
 
 js_main();
 // sleep(1);
