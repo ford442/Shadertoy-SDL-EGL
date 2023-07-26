@@ -187,7 +187,6 @@ int main(void){
   tbb::task::wait();
   init.terminate();
 */
-ov::Core core;
 
 auto create_model = []() {
     std::shared_ptr<ov::Model> model;
