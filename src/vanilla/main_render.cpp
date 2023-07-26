@@ -194,7 +194,6 @@ auto create_model = []() {
     return model;
 };
 std::shared_ptr<ov::Model> model = create_model();
-compiled_model = core.compile_model(model, "AUTO");
 
 js_main();
 // sleep(1);
