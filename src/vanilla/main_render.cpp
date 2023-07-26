@@ -91,7 +91,7 @@ document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-// Module.ccall("startWebGPU",{async:true});
+Module.ccall("startWebGPU",{async:true});
 // const myInterval=setInterval(strr,1000);
 },100);
 }
