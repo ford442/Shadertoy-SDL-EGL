@@ -185,7 +185,21 @@ auto create_model = []() {
     return model;
 };
 
+ov::Core core;
+
+tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
+
+// m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
+
+ m_arena.initialize();
+
 int main(void){
+          
+m_arena.enqueue([&]() {
+    // Do some work.
+std::cout << "Hello world!" << std::endl;
+});
+          
 /*
   tbb::task_scheduler_init init(1);
   tbb::task::spawn(WGPU_Start22);
