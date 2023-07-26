@@ -31,12 +31,6 @@
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
-#include <wasi/api.h>
-extern "C" {
-  int fd_close(int fd) {
-    return __wasi_fd_close(fd);
-  }
-}
 #include "openvino/openvino.hpp"
 #include "openvino/core/model.hpp"
 #include "openvino/core/node.hpp"
