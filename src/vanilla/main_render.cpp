@@ -70,6 +70,9 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 }
 
 void WGPU_Start(){
+  
+  ov::Core core;
+
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
@@ -94,6 +97,8 @@ document.getElementById('di').click();
 Module.ccall("startWebGPU",{async:true});
 // const myInterval=setInterval(strr,1000);
 },100);
+  document.getElementById('status').style.backgroundColor="green";
+
 }
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
@@ -102,6 +107,8 @@ document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('canvas').height=parseInt(window.innerHeight,10);
 document.getElementById('canvas').width=parseInt(window.innerHeight,10);
+document.getElementById('status').height=20px;
+document.getElementById('status').width=parseInt(window.innerHeight,10);
 
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
