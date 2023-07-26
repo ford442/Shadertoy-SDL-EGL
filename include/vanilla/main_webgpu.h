@@ -28,7 +28,7 @@
 #include </content/RAMDRIVE2/emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
-// #include <iostream>
+#include <iostream>
 #include "../../lib/lib_webgpu.h"
 
 #include "openvino/openvino.hpp"
