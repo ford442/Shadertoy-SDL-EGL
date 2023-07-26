@@ -192,7 +192,8 @@ auto create_model = []() {
     std::shared_ptr<ov::Model> model;
     return model;
 };
-// std::shared_ptr<ov::Model> model = create_model();
+
+std::shared_ptr<ov::Model> model = create_model();
 
 js_main();
 // sleep(1);
