@@ -31,7 +31,7 @@
 // #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
-#include <openvino.hpp>
+#include <openvino/openvino.hpp>
 
 // #include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_arena.h"
