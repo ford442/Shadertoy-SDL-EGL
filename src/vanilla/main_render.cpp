@@ -191,11 +191,13 @@ ov::Core core;
 
 // m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
 
-tbb::task_group_context context;
-tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
-tbb::task_group group;
+// tbb::task_group_context context;
+// tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
+// tbb::task_group group;
 
 int main(void){
+              oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
+/*
 arena.initialize();
 
 arena.enqueue([&]() {
@@ -203,7 +205,7 @@ arena.enqueue([&]() {
 std::cout << "Hello world!" << std::endl;
 });
           
-/*
+
   tbb::task_scheduler_init init(1);
   tbb::task::spawn(WGPU_Start22);
   tbb::task::wait();
