@@ -197,7 +197,7 @@ ov::Core core;
 
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
-std::cout << "Hello from TBB:" << int(mainStartTime.count()) << std::endl;
+std::cout << "Hello from TBB:" << int(mainStartTime) << std::endl;
 
 /*
 arena.initialize();
