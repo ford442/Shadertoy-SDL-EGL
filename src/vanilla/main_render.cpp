@@ -70,8 +70,13 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 }
 
 void WGPU_Start(){
-          std::cout << ov::get_openvino_version();
-
+          
+auto create_model = []() {
+    std::shared_ptr<ov::Model> model;
+    return model;
+};
+std::shared_ptr<ov::Model> model = create_model();
+compiled_model = core.compile_model(model, "AUTO");
 
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
