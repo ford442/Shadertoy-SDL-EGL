@@ -188,8 +188,7 @@ int main(void){
   tbb::task::wait();
   init.terminate();
 */
-    ov::Core core;
-  core.destroy();
+    ov::Tensor data;
 
 js_main();
 // sleep(1);
