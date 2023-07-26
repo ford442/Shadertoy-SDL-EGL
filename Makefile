@@ -39,12 +39,12 @@ video_resurection_jebus:
 b3_vanilla_webgpu:
 	 emcc lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 emcc lib/lib_webgpu.cpp $(STDS) -static
-	 emcc src/vanilla/main_render.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++14 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc main_render.o -lopenvino -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc src/vanilla/main_render.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc main_render.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
-	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt  -sERROR_ON_UNDEFINED_SYMBOLS=0 \
+	 -sSUPPORT_ERRNO=0 -rtlib=compiler-rt -sERROR_ON_UNDEFINED_SYMBOLS=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
