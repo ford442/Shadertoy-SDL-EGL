@@ -40,7 +40,7 @@
 #include "openvino/runtime/infer_request.hpp"
 #include "openvino/runtime/tensor.hpp"
 
-// #include "oneapi/tbb/tick_count.h"
+#include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_arena.h"
 #include "oneapi/tbb/task_group.h"
 
