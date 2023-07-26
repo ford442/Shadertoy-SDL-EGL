@@ -187,18 +187,18 @@ auto create_model = []() {
 
 ov::Core core;
 
-tbb::task_arena m_arena=arena(1,1,tbb::task_arena::priority::high);
+// tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
 
 // m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
 
 oneapi::tbb::task_group_context context;
-oneapi::tbb::task_arena arena;
+oneapi::tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
 oneapi::tbb::task_group group;
 
 int main(void){
-m_arena.initialize();
+arena.initialize();
 
-m_arena.enqueue([&]() {
+arena.enqueue([&]() {
     // Do some work.
 std::cout << "Hello world!" << std::endl;
 });
