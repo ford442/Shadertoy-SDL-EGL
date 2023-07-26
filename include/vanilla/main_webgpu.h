@@ -32,8 +32,12 @@
 #include "../../lib/lib_webgpu.h"
 
 #include "openvino/openvino.hpp"
+#include "openvino/core/model.hpp"
+#include "openvino/core/node.hpp"
+#include "openvino/core/type/element_type.hpp"
 #include "openvino/runtime/compiled_model.hpp"
 #include "openvino/runtime/infer_request.hpp"
+#include "openvino/runtime/tensor.hpp"
 
 // #include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_arena.h"
