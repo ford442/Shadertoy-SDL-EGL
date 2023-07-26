@@ -105,7 +105,7 @@ document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('canvas').height=parseInt(window.innerHeight,10);
 document.getElementById('canvas').width=parseInt(window.innerHeight,10);
-document.getElementById('status').height=20px;
+document.getElementById('status').height=20;
 document.getElementById('status').width=parseInt(window.innerHeight,10);
 
 const tem=document.getElementById('tim');
