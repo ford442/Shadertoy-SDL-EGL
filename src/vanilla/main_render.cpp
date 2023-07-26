@@ -180,6 +180,11 @@ void runWebGPU2(){
 
 }
 
+auto create_model = []() {
+    std::shared_ptr<ov::Model> model;
+    return model;
+};
+
 int main(void){
 /*
   tbb::task_scheduler_init init(1);
@@ -188,10 +193,7 @@ int main(void){
   init.terminate();
 */
 
-auto create_model = []() {
-    std::shared_ptr<ov::Model> model;
-    return model;
-};
+
 
 std::shared_ptr<ov::Model> model = create_model();
 
