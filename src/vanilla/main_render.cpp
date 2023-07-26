@@ -69,7 +69,7 @@ WGpuDeviceDescriptor deviceDesc={};
 wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,0);
 }
 
-void WGPU_Start22(){
+void WGPU_Start(){
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
@@ -176,14 +176,14 @@ void runWebGPU2(){
 }
 
 int main(void){
-
+/*
   tbb::task_scheduler_init init(1);
   tbb::task::spawn(WGPU_Start22);
   tbb::task::wait();
   init.terminate();
-
+*/
 js_main();
 // sleep(1);
-// WGPU_Start();
+WGPU_Start();
 return 0;
 }
