@@ -71,7 +71,6 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 
 void WGPU_Start(){
   
-  ov::Core core;
 
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
@@ -189,6 +188,8 @@ int main(void){
   tbb::task::wait();
   init.terminate();
 */
+    ov::Core core;
+
 js_main();
 // sleep(1);
 WGPU_Start();
