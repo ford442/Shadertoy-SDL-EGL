@@ -185,7 +185,7 @@ auto create_model = []() {
     return model;
 };
 
-ov::Core core;
+// ov::Core core;
 
 // tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
 
