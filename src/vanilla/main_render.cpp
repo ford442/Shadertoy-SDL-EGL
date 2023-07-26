@@ -70,7 +70,7 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 }
 
 void WGPU_Start(){
-          slog::info << ov::get_openvino_version() << slog::endl;
+          std::cout << ov::get_openvino_version();
 
 
 WGpuRequestAdapterOptions options={};
