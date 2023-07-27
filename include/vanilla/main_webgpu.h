@@ -32,7 +32,13 @@
 #include "../../lib/lib_webgpu.h"
 
 #include "openvino/c/openvino.h"
+#include "openvino/c/cv_core.h"
+#include "openvino/c/cv_model.h"
+#include "openvino/c/cv_node.h"
+#include "openvino/c/cv_infer_request.h"
+#include "openvino/c/cv_tensor.h"
 #include "openvino/openvino.hpp"
+#include "openvino/core/core.hpp"
 #include "openvino/core/model.hpp"
 #include "openvino/core/node.hpp"
 #include "openvino/core/type/element_type.hpp"
