@@ -31,19 +31,10 @@
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
-#include "openvino/c/openvino.h"
-// #include "openvino/c/ov_core.h"
-// #include "openvino/c/ov_model.h"
-// #include "openvino/c/ov_node.h"
-// #include "openvino/c/ov_infer_request.h"
-// #include "openvino/c/ov_tensor.h"
-#include "openvino/openvino.hpp"
-#include "openvino/runtime/core.hpp"
-// #include "openvino/runtime/model.hpp"
-#include "openvino/core/type/element_type.hpp"
-#include "openvino/runtime/compiled_model.hpp"
-#include "openvino/runtime/infer_request.hpp"
-#include "openvino/runtime/tensor.hpp"
+#include <openvino/core/ov.hpp>
+#include <openvino/runtime/inference_engine.hpp>
+
+// #include "openvino/runtime/tensor.hpp"
 
 #include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_arena.h"
