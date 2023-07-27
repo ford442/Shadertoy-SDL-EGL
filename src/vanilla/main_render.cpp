@@ -196,7 +196,7 @@ auto create_model = []() {
 
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
- double scc=         tick_count::interval_t
+// double scc=         tick_count::interval_t
 // std::cout << "Hello from TBB:" << double(mainStartTime.seconds()) << std::endl;
 
 /*
