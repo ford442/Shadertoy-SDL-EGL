@@ -196,7 +196,47 @@ auto create_model = []() {
 
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
+// Initialize the driver
+zeInit(0);
 
+// Discover all the driver instances
+uint32_t driverCount = 0;
+zeDriverGet(&driverCount, nullptr);
+
+ze_driver_handle_t* allDrivers = allocate(driverCount * sizeof(ze_driver_handle_t));
+zeDriverGet(&driverCount, allDrivers);
+
+// Find a driver instance with a GPU device
+ze_driver_handle_t hDriver = nullptr;
+ze_device_handle_t hDevice = nullptr;
+for(i = 0; i < driverCount; ++i) {
+    uint32_t deviceCount = 0;
+    zeDeviceGet(allDrivers[i], &deviceCount, nullptr);
+
+    ze_device_handle_t* allDevices = allocate(deviceCount * sizeof(ze_device_handle_t));
+    zeDeviceGet(allDrivers[i], &deviceCount, allDevices);
+
+    for(d = 0; d < deviceCount; ++d) {
+        ze_device_properties_t device_properties {};
+        device_properties.stype = ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES;
+        zeDeviceGetProperties(allDevices[d], &device_properties);
+
+        if(ZE_DEVICE_TYPE_GPU == device_properties.type) {
+            hDriver = allDrivers[i];
+            hDevice = allDevices[d];
+            break;
+        }
+    }
+
+    free(allDevices);
+    if(nullptr != hDriver) {
+        break;
+    }
+}
+
+free(allDrivers);
+if(nullptr == hDevice)
+          /*
             // Import the OpenVINO C++ API.
   ov::Core core;
   // Create an OpenVINO runtime object.
@@ -218,7 +258,7 @@ oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
   output_tensor.destroy();
   // Destroy the runtime object.
   runtime.destroy();
-
+*/
 js_main();
 // WGPU_Start();
 return 0;
