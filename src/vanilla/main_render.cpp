@@ -213,9 +213,9 @@ arena.enqueue([&]() {
 */
 
 std::shared_ptr<ov::Model> model = create_model();
-          ov::Core core;
+//          ov::Core core;
 
-ov::CompiledModel z_compile_model = core.compile_model(model);
+// ov::CompiledModel z_compile_model = core.compile_model(model);
 
 js_main();
 // sleep(1);
