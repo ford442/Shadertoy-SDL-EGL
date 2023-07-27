@@ -196,29 +196,30 @@ auto create_model = []() {
 
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
-// double scc=         tick_count::interval_t
-// std::cout << "Hello from TBB:" << double(mainStartTime.seconds()) << std::endl;
 
-/*
-arena.initialize();
-
-arena.enqueue([&]() {
-    // Do some work.
-});
-
-  tbb::task_scheduler_init init(1);
-  tbb::task::spawn(WGPU_Start22);
-  tbb::task::wait();
-  init.terminate();
-*/
-
-std::shared_ptr<ov::Model> model = create_model();
-//          ov::Core core;
-
-// ov::CompiledModel z_compile_model = core.compile_model(model);
+            // Import the OpenVINO C++ API.
+  ov::Core core;
+  // Create an OpenVINO runtime object.
+  ov::Runtime runtime;
+  // Load the model into the runtime.
+  ov::Model model = core.read_model("model.onnx");
+  // Create an input tensor for the model.
+  ov::Tensor input_tensor = model.input("input_name");
+  // Set the input data for the model.
+  input_tensor.set_data("input_data");
+  // Create an output tensor for the model.
+  ov::Tensor output_tensor = model.output("output_name");
+  // Run the model inference.
+  ov::InferRequest infer_request = core.create_infer_request(model);
+  // Get the output data from the model.
+  output_tensor.get_data("output_data");
+  // Destroy the input and output tensors.
+  input_tensor.destroy();
+  output_tensor.destroy();
+  // Destroy the runtime object.
+  runtime.destroy();
 
 js_main();
-// sleep(1);
-WGPU_Start();
+// WGPU_Start();
 return 0;
 }
