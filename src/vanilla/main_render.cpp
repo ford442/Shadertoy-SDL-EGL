@@ -185,7 +185,6 @@ auto create_model = []() {
     return model;
 };
 
-ov::Core core;
 
 // tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
 
@@ -197,7 +196,8 @@ ov::Core core;
 
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
-std::cout << "Hello from TBB:" << double(mainStartTime.seconds()) << std::endl;
+ double scc=         tick_count::interval_t
+// std::cout << "Hello from TBB:" << double(mainStartTime.seconds()) << std::endl;
 
 /*
 arena.initialize();
@@ -213,6 +213,9 @@ arena.enqueue([&]() {
 */
 
 std::shared_ptr<ov::Model> model = create_model();
+          ov::Core core;
+
+ov::CompiledModel z_compile_model = core.compile_model(model);
 
 js_main();
 // sleep(1);
