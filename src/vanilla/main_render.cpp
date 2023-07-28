@@ -196,6 +196,8 @@ auto create_model = []() {
 
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
+
+          /*
 // Initialize the driver
 zeInit(0);
 
@@ -236,7 +238,7 @@ for(i = 0; i < driverCount; ++i) {
 
 free(allDrivers);
 if(nullptr == hDevice)
-          /*
+       
             // Import the OpenVINO C++ API.
   ov::Core core;
   // Create an OpenVINO runtime object.
