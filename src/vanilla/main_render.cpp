@@ -16,10 +16,9 @@ WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
 // wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
-          wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800);
+          wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800,0.0,1.0);
 
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
-          wgpu_render_pass_encoder_draw_triangle(pass, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
 
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
