@@ -194,6 +194,12 @@ auto create_model = []() {
 // tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
 // tbb::task_group group;
 
+
+extern"C"{
+void tesrr(){
+zeInit(0);
+}
+}
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
 
@@ -261,8 +267,7 @@ if(nullptr == hDevice)
   // Destroy the runtime object.
   runtime.destroy();
 */
-          zeInit(0);
-
+testrr();
 js_main();
 // WGPU_Start();
 return 0;
