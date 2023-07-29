@@ -11,6 +11,11 @@ WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_LOAD_OP_LOAD,WGPU_STORE_OP_STORE,WGPU_TEXTURE_FORMAT_BGRA8UNORM};
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
+          
+wgpu_canvas_context_clear_color(canvasContext, 0.0, 0.0, 0.0, 1.0);
+wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, canvasContext.width, canvasContext.height);
+wgpu_render_pass_encoder_draw_triangle(pass, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
+
 // wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
