@@ -12,8 +12,7 @@ WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_can
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
           
-wgpu_canvas_context_clear_color(canvasContext, 0.0, 0.0, 0.0, 1.0);
-wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, canvasContext.width, canvasContext.height);
+wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800);
 wgpu_render_pass_encoder_draw_triangle(pass, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
 
 // wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
