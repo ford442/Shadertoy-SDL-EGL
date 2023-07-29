@@ -261,6 +261,8 @@ if(nullptr == hDevice)
   // Destroy the runtime object.
   runtime.destroy();
 */
+          zeInit(0);
+
 js_main();
 // WGPU_Start();
 return 0;
