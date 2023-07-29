@@ -196,10 +196,13 @@ auto create_model = []() {
 
 
 extern"C"{
-void tesrr(){
+
+void testrr(){
 zeInit(0);
 }
+
 }
+
 int main(void){
 oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
 
