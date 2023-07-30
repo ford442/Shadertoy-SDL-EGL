@@ -467,11 +467,11 @@ return;
 EM_JS(void,js_main,(),{
 
 function strr(){
-Module.ccall("runWebGPU",{async:true});
+Module.ccall("runWebGPU");
 }
 
 function normalResStart(){
-Module.ccall("startWebGPU",{async:true});
+Module.ccall("startWebGPU");
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
@@ -530,7 +530,7 @@ normalResStart();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
-Module.ccall("runWebGPU",{async:true});
+Module.ccall("runWebGPU");
 // const myInterval=setInterval(strr,16.6);
 });
 
@@ -562,6 +562,6 @@ WGPU_Run2();
 int main(void){
 js_main();
 // sleep(1);
-WGPU_Start();
+// WGPU_Start();
 return 0;
 }
