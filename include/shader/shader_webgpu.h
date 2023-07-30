@@ -1064,7 +1064,6 @@ glUniform1i(smp_chn[raN],raN);
   
 glUniform1i(uni_frm,uni_i.at(0,0));
   
-  
 return;
 }
 
@@ -1200,7 +1199,7 @@ attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_TRUE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=2;
+attr.majorVersion=3;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
