@@ -4,7 +4,7 @@
 
 int cltest(){
 // get the default device
-device CLdevice = default_device();
+  CLContext* ctx = getCLContext();
 // print the device's name and platform
 std::cout << "Hello from " << CLdevice.name();
 std::cout << " (Platform: " << CLdevice.platform().name() << ")" << std::endl;
