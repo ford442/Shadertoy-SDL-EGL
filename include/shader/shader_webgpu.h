@@ -156,6 +156,8 @@ inline char cm_hdr_src[2300]=
 "#pragma STDGL(precision highp atomic_uint)\n"
 // "#pragma STDGL(precise none)\n"
 // "#pragma STDGL(strict off)\n"
+"#pragma optimize(on)"
+"#pragma debug(on)"
 "#pragma STDGL(invariant all)\n"
 "#pragma STDGL(centroid all)\n"
 "#pragma STDGL(sample all)\n"
@@ -223,7 +225,7 @@ EGL_NONE,EGL_NONE
 
 EGLint att_lst[1500]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
