@@ -945,7 +945,7 @@ union{
 
 static void Rend(){
 
-eglBindAPI(EGL_OPENGL_API);
+ /// eglBindAPI(EGL_OPENGL_API);
   
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
@@ -955,7 +955,7 @@ glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-eglBindAPI(EGL_OPENGL_ES_API);
+ /// eglBindAPI(EGL_OPENGL_ES_API);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glBlitFramebuffer(0,0,i_size.at(0,0),i_size.at(0,0),0,0,i_size.at(0,0),i_size.at(0,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
@@ -1204,7 +1204,7 @@ attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
@@ -1650,6 +1650,8 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
+  eglBindAPI(0);
+
 emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
 }
