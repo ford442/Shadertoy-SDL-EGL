@@ -20,7 +20,7 @@ BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 GL_FLAGS += -sOFFSCREEN_FRAMEBUFFER=1 -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sUSE_GLFW=3 \
 -sGL_POOL_TEMP_BUFFERS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 
 
-LINK_FLAGS += $(LDFLAGS) -sWASMFS=1 -sPTHREAD_POOL_SIZE=2 -sPROXY_TO_PTHREAD=1 -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly -mllvm -mtune=haswell \
+LINK_FLAGS += $(LDFLAGS) -sWASMFS=1 -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly -mllvm -mtune=haswell \
 	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=1 --output_eol linux -sMALLOC=emmalloc \
