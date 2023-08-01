@@ -1316,7 +1316,7 @@ glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
 glEnable(GL_DEPTH_TEST);
-     glDepthFunc(GL_LESS);
+     glDepthFunc(GL_GREATER);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
