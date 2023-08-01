@@ -19,7 +19,7 @@ typedef ResultType result_type;
 
 #include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
-#include <boost/context/fiber.hpp>
+// #include <boost/context/fiber.hpp>
 
 #define register
 
