@@ -1282,6 +1282,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_program5");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_NV_gpu_program_fp64");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_attrib_integer_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_gpu_shader_fp64");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_gpu_shader_int64");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
