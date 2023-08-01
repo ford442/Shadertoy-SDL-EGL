@@ -153,6 +153,8 @@ inline char cm_hdr_src[2300]=
 "#extension GL_ARB_enhanced_layouts : enable\n"
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
+"#pragma (precision highp vec4)\n"
+"#pragma (precision highp mat4)\n"
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp atomic_uint)\n"
 "#pragma (precise none)\n"
@@ -172,23 +174,23 @@ inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 0\n"
-"precision highp int;\n"
+"precision mediump int;\n"
 "precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision mediump sampler3D;precision highp sampler2D;"
+"precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;";
-  
+
 inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 inline char frg_hdr_src[1000]=
 
-"layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
-"uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
-"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
+"layout (std140) uniform uniBlock{uniform mediump float iSampleRate;uniform mediump float iFrameRate;};"
+"uniform int iFrame;uniform float iTime;uniform mediump float iTimeDelta;uniform lowp vec4 iDate;"
+"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform mediump vec3 iResolution;"
 "uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 // "uniform sampler2D iChannel4;"
@@ -1214,9 +1216,9 @@ cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 /// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
