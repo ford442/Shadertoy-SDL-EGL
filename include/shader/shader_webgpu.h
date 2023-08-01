@@ -5,6 +5,8 @@
 #include <experimental/simd>
 // using unary_function = std::unary_function;
 
+#include <wasmedge/wasmedge.h>
+
 template<class ArgumentType,class ResultType>
 
 struct unary_function{
