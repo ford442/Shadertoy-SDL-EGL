@@ -1311,6 +1311,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sRGB_framebuffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_sRGB_decode");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_separate_shader_objects");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_subroutine");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robust_buffer_access_behavior");
  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
