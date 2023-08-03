@@ -1684,6 +1684,7 @@ glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
-    boost::function<int(int)> strt=strtt;
+
+boost::function<void()>strt=strtt;
 
 };
