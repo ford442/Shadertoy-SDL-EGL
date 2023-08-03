@@ -202,6 +202,8 @@ extern"C"{
 
 void testrr(){
 // zeInit(0);
+ov_core_t* core = NULL;
+ov_core_create(&core);
 }
 
 }
