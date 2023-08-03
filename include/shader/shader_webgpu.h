@@ -1685,7 +1685,7 @@ emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
 
-boost::function<void()>strt=[this](){strtt();};
+boost::function<void()>strt=strtt;
 
 };
 
