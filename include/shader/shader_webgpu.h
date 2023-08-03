@@ -895,7 +895,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
   
-std::function<void *()>Rend=[](){
+std::function<static void *()>Rend=[](){
 
 // static void Rend(){
 
