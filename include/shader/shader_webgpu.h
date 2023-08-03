@@ -895,10 +895,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
   
-std::function<static void *()>Rend=[](){
-
-// static void Rend(){
-
+static void Rend(){
  /// eglBindAPI(EGL_OPENGL_API);
   
 // glDisable(GL_SCISSOR_TEST);
@@ -1020,13 +1017,11 @@ glUniform1i(smp_chn[raN],raN);
 glUniform1i(uni_frm,uni_i.at(0,0));
   
 return;
-};
-
-void Rendr(){
-Rend();
 }
 
-static void swap(){
+static std::function<void()>swap=[this](){
+
+// static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
@@ -1056,7 +1051,7 @@ glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
 return;
-}
+};
 
 inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
