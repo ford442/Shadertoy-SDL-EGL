@@ -30,7 +30,7 @@ typedef ResultType result_type;
 
 // #include <boost/compute/algorithm.hpp>
 
-// #include <boost/compute/interop/opengl.hpp>
+#include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
@@ -172,8 +172,8 @@ inline char cm_hdr_src[2300]=
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 0\n"
 "precision mediump int;\n"
 "precision highp float;\n"
 "precision mediump sampler3D;precision highp sampler2D;"
@@ -187,6 +187,7 @@ inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 inline char frg_hdr_src[1000]=
+
 "layout (std140) uniform uniBlock{uniform mediump float iSampleRate;uniform mediump float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform mediump float iTimeDelta;uniform lowp vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform mediump vec3 iResolution;"
@@ -1157,7 +1158,10 @@ cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-
+/// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1251,11 +1255,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_sRGB_decode");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_separate_shader_objects");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_subroutine");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robust_buffer_access_behavior");
-/// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  
  EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
@@ -1684,5 +1683,5 @@ glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
-
+  
 };
