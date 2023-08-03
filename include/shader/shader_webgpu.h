@@ -1052,8 +1052,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return;
 };
 
-std::function<char *(const char *)>rd_fl=[](const char * Fnm){
-// inline char * rd_fl(const char * Fnm){
+inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1080,10 +1079,7 @@ return results;
 return nullptr;
 }
 
-
-
 std::function<void()>strt=[this](){
-
 // void strt(){
 /*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
