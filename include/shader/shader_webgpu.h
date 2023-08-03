@@ -800,9 +800,7 @@ GPU gpu;
 
 public:
 
-const std::function<void(register boost::uint_t<64>::exact)> PRGin{};
-PRGin=[](register boost::uint_t<64>::exact m1){
-// static void PRGin(register boost::uint_t<64>::exact m1){
+static void PRGin(register boost::uint_t<64>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
@@ -899,7 +897,9 @@ return;
   
 union{
 
-static void Rend(){
+static std::function<void()>Rend=[](){
+
+// static void Rend(){
 
  /// eglBindAPI(EGL_OPENGL_API);
   
@@ -1022,7 +1022,7 @@ glUniform1i(smp_chn[raN],raN);
 glUniform1i(uni_frm,uni_i.at(0,0));
   
 return;
-}
+};
 
 static void swap(){
 emscripten_cancel_main_loop();
