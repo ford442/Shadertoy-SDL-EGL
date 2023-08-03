@@ -31,9 +31,7 @@
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
-#include <openvino/core/core.hpp>
-#include <openvino/runtime/runtime.hpp>
-#include <openvino/runtime/infer_request.hpp>
+#include <openvino/c/openvino.h>
 
 // #include "openvino/runtime/tensor.hpp"
 
