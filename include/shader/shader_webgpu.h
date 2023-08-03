@@ -14,7 +14,7 @@ typedef ResultType result_type;
 
 // using floaT=std::experimental::native_simd<float>;
 
-#include <boost/function.hpp>
+// #include <boost/function.hpp>
 #include <boost/context/detail/tuple.hpp>
 
 #include <boost/lockfree/spsc_queue.hpp>
@@ -1078,7 +1078,7 @@ return results;
 return nullptr;
 }
 
-std::function<void()>strtt=[this](){
+std::function<void()>strt=[this](){
 // void strt(){
 /*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
@@ -1685,7 +1685,4 @@ emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
 
-boost::function<void()>strt=strtt;
-
 };
-
