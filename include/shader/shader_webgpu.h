@@ -646,15 +646,17 @@ Sh.at(1,0)=EBO;
 return;
 };
 
-const void VCOin(boost::uint_t<32>::exact VCO){
+std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+// const void VCOin(boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
-}
+};
 
-const void VBOin(boost::uint_t<32>::exact VBO){
+std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+// const void VBOin(boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
-}
+};
 
 std::function<void()>setFloats=[](){
 // const void setFloats(){
@@ -669,35 +671,43 @@ Di.at(1,1)=0.0;
 return;
 };
 
-static inline float gF(){
+std::function<static inline float()>gF=[](){
+// static inline float gF(){
 return Fi.at(0,0);
 }
 
-static inline float gF5(){
+std::function<static inline float()>gF5=[](){
+// static inline float gF5(){
 return Fi.at(1,2);
 }
 
-static inline float gFm1(){
+std::function<static inline float()>gFm1=[](){
+// static inline float gFm1(){
 return Fi.at(0,1);
 }
 
-static inline float gFm5(){
+std::function<static inline float()>gFm5=[](){
+// static inline float gFm5(){
 return Fi.at(2,0);
 }
 
-static inline float gF0(){
+std::function<static inline float()>gF0=[](){
+// static inline float gF0(){
 return Fi.at(1,1);
 }
 
-static inline boost::compute::double_ gD(){
+std::function<boost::compute::double_()>gD=[](){
+// static inline boost::compute::double_ gD(){
 return Di.at(0,0);
 }
 
-static inline boost::compute::double_ gDm1(){
+std::function<boost::compute::double_()>gDm1=[](){
+// static inline boost::compute::double_ gDm1(){
 return Di.at(0,1);
 }
 
-static inline boost::compute::double_ gD0(){
+std::function<boost::compute::double_()>gD0=[](){
+// static inline boost::compute::double_ gD0(){
 return Di.at(1,1);
 }
 
