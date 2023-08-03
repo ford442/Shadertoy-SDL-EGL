@@ -11,6 +11,15 @@ int cltest(){
 return 0;
 }
 
+extern"C"{
+
+void testtr(){
+ov_core_t* core = NULL;
+ov_core_create(&core);
+}
+
+}
+
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
@@ -560,8 +569,7 @@ WGPU_Run2();
 }
 
 int main(void){
-  ov_core_t* core = NULL;
-ov_core_create(&core);
+testtr();
 js_main();
 // sleep(1);
 // WGPU_Start();
