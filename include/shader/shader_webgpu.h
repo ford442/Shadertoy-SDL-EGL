@@ -644,7 +644,7 @@ std::function<const void(boost::uint_t<32>::exact)>setFloats=[](boost::uint_t<32
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
-}
+};
 
 const void VCOin(boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
