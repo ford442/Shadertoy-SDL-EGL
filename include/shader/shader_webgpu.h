@@ -676,37 +676,37 @@ static inline std::function<float()>gF=[](){
 return Fi.at(0,0);
 };
 
-std::function<float()>gF5=[](){
+static inline std::function<float()>gF5=[](){
 // static inline float gF5(){
 return Fi.at(1,2);
 };
 
-std::function<float()>gFm1=[](){
+static inline std::function<float()>gFm1=[](){
 // static inline float gFm1(){
 return Fi.at(0,1);
 };
 
-std::function<float()>gFm5=[](){
+static inline std::function<float()>gFm5=[](){
 // static inline float gFm5(){
 return Fi.at(2,0);
 };
 
-std::function<float()>gF0=[](){
+static inline std::function<float()>gF0=[](){
 // static inline float gF0(){
 return Fi.at(1,1);
 };
 
-std::function<boost::compute::double_()>gD=[](){
+static inline std::function<boost::compute::double_()>gD=[](){
 // static inline boost::compute::double_ gD(){
 return Di.at(0,0);
 };
 
-std::function<boost::compute::double_()>gDm1=[](){
+static inline std::function<boost::compute::double_()>gDm1=[](){
 // static inline boost::compute::double_ gDm1(){
 return Di.at(0,1);
 };
 
-std::function<boost::compute::double_()>gD0=[](){
+static inline std::function<boost::compute::double_()>gD0=[](){
 // static inline boost::compute::double_ gD0(){
 return Di.at(1,1);
 };
