@@ -1022,6 +1022,8 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 };
 
+void *Rendr = static_cast<void (*)()>(Rend);
+
 static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1685,7 +1687,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 eglBindAPI(0);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::Rend,0,0);
+emscripten_set_main_loop((void(*)())Run::Rendr,-1,16);
 return;
 };
   
