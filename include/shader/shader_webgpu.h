@@ -26,7 +26,7 @@ typedef ResultType result_type;
 // #include <SYCL/sycl.hpp>
 
 #include <boost/compute/cl.hpp> 
-#include <boost/compute/core.hpp> 
+// #include <boost/compute/core.hpp> 
 
 // #include <boost/compute/algorithm.hpp>
 
