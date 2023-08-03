@@ -1019,7 +1019,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
-static std::function<void()>swap=[this](){
+std::function<void()>swap=[](){
 
 // static void swap(){
 emscripten_cancel_main_loop();
