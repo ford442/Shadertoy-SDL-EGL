@@ -1315,7 +1315,10 @@ eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
- 
+
+emscripten_webgl_make_context_current(cntxi.at(0,0));
+
+  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
