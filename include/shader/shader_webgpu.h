@@ -1020,7 +1020,6 @@ return;
 }
 
 std::function<void()>swap=[](){
-
 // static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1053,7 +1052,8 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return;
 };
 
-inline char * rd_fl(const char * Fnm){
+inline std::function<char *(const char *)>rd_fl=[](const char * Fnm){
+// inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
