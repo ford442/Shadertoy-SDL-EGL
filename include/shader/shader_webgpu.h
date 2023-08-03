@@ -893,22 +893,23 @@ static void Rend(){
 // glEnable(GL_DITHER);
  glDisable(GL_DEPTH_TEST);
  glDisable(GL_STENCIL_TEST);
-glSampleCoverage(1.0,GL_FALSE);
+// glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
  /// eglBindAPI(EGL_OPENGL_ES_API);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
+  glEnable(GL_DEPTH_TEST);
+glEnable(GL_STENCIL_TEST);
 glBlitFramebuffer(0,0,i_size.at(0,0),i_size.at(0,0),0,0,i_size.at(0,0),i_size.at(0,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(8.0,GL_FALSE);
+// glSampleCoverage(8.0,GL_FALSE);
 //  glEnable(GL_SCISSOR_TEST);
-//  glEnable(GL_DEPTH_TEST);
-//  glEnable(GL_STENCIL_TEST);
+
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 
@@ -1516,6 +1517,7 @@ glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
+ glSampleCoverage(8.0,GL_FALSE);
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
