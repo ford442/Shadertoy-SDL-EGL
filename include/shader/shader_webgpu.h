@@ -640,7 +640,8 @@ private:
 
 public:
 
-const void EBOin(boost::uint_t<32>::exact EBO){
+std::function<const void(boost::uint_t<32>::exact)>setFloats=[](boost::uint_t<32>::exact EBO){
+// const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 }
@@ -656,7 +657,6 @@ return;
 }
 
 std::function<void()>setFloats=[](){
-
 // const void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
