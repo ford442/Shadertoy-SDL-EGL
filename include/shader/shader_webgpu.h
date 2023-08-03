@@ -895,7 +895,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
   
-std::function<void()>Rend=[](){
+std::function<void *()>Rend=[](){
 
 // static void Rend(){
 
@@ -1689,7 +1689,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 eglBindAPI(0);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::Rendr(),-1,16);
+emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
   
