@@ -1070,8 +1070,10 @@ return nullptr;
 }
 
 }procc;
+auto strt=std::function<void()>{};
+strt=[](){
 
-void strt(){
+// void strt(){
 /*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
 
@@ -1673,7 +1675,7 @@ eglBindAPI(0);
 glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
 return;
-}
+};
   
 };
 
