@@ -671,7 +671,7 @@ Di.at(1,1)=0.0;
 return;
 };
 
-std::function<float()>gF=[](){
+static inline std::function<float()>gF=[](){
 // static inline float gF(){
 return Fi.at(0,0);
 };
