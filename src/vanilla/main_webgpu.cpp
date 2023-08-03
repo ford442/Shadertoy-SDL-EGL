@@ -35,7 +35,7 @@ void testtr(){
     ov_layout_t* model_layout = NULL;
     ov_shape_t input_shape;
 
-    ov_core_create(&core);
+    CHECK_STATUS(ov_core_create(&core));
 }
 
 }
