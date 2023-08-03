@@ -34,6 +34,8 @@ void testtr(){
     ov_output_const_port_t* output_port = NULL;
     ov_layout_t* model_layout = NULL;
     ov_shape_t input_shape;
+
+    ov_core_create(&core);
 }
 
 }
