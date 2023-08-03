@@ -1022,7 +1022,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 };
 
-void *Rendr = reinterpret_cast<void (*)()>(Rend);
+void *Rendr=reinterpret_cast<void(*)>(Rend);
 
 static void swap(){
 emscripten_cancel_main_loop();
