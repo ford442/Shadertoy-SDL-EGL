@@ -1052,7 +1052,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return;
 };
 
-inline std::function<char *(const char *)>rd_fl=[](const char * Fnm){
+std::function<char *(const char *)>rd_fl=[](const char * Fnm){
 // inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
