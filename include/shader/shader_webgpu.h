@@ -671,27 +671,27 @@ Di.at(1,1)=0.0;
 return;
 };
 
-std::function<static inline float()>gF=[](){
+std::function<float()>gF=[](){
 // static inline float gF(){
 return Fi.at(0,0);
 };
 
-std::function<static inline float()>gF5=[](){
+std::function<float()>gF5=[](){
 // static inline float gF5(){
 return Fi.at(1,2);
 };
 
-std::function<static inline float()>gFm1=[](){
+std::function<float()>gFm1=[](){
 // static inline float gFm1(){
 return Fi.at(0,1);
 };
 
-std::function<static inline float()>gFm5=[](){
+std::function<float()>gFm5=[](){
 // static inline float gFm5(){
 return Fi.at(2,0);
 };
 
-std::function<static inline float()>gF0=[](){
+std::function<float()>gF0=[](){
 // static inline float gF0(){
 return Fi.at(1,1);
 };
