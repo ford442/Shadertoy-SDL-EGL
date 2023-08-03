@@ -773,7 +773,7 @@ static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
 boost::uint_t<32>::exact uniBlock;
-const PRGin=std::function<void(register boost::uint_t<64>::exact)>{};
+const auto PRGin=std::function<void(register boost::uint_t<64>::exact)>{};
 
 class Run{
 
