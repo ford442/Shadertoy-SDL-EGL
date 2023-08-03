@@ -655,7 +655,9 @@ Sh.at(2,1)=VBO;
 return;
 }
 
-const void setFloats(){
+std::function<void()>setFloats=[](){
+
+// const void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -665,7 +667,7 @@ Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
 return;
-}
+};
 
 static inline float gF(){
 return Fi.at(0,0);
