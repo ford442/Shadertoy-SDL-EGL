@@ -800,7 +800,7 @@ GPU gpu;
 
 public:
 
-static auto PRGin=std::function<void(register boost::uint_t<64>::exact)>;
+static auto PRGin=std::function<void(register boost::uint_t<64>::exact)>{};
 PRGin=[](register boost::uint_t<64>::exact m1){
 // static void PRGin(register boost::uint_t<64>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
