@@ -16,7 +16,6 @@ extern"C"{
 #define CHECK_STATUS(return_status)                                                      \
     if (return_status != OK) {                                                           \
         fprintf(stderr, "[ERROR] return status %d, line %d\n", return_status, __LINE__); \
-        goto err;                                                                        \
     }
 
 void testtr(){
