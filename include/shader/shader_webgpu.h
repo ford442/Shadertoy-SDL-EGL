@@ -774,8 +774,6 @@ static char * results=NULL;
 static long int length=0;
 boost::uint_t<32>::exact uniBlock;
 
-const std::function<void(register boost::uint_t<64>::exact)> PRGin{};
-
 class Run{
 
 private:
@@ -802,6 +800,7 @@ GPU gpu;
 
 public:
 
+const std::function<void(register boost::uint_t<64>::exact)> PRGin{};
 PRGin=[](register boost::uint_t<64>::exact m1){
 // static void PRGin(register boost::uint_t<64>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
