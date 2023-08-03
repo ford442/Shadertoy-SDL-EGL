@@ -30,7 +30,7 @@ typedef ResultType result_type;
 
 // #include <boost/compute/algorithm.hpp>
 
-#include <boost/compute/interop/opengl.hpp>
+// #include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
