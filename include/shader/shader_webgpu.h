@@ -1070,8 +1070,7 @@ return nullptr;
 }
 
 }procc;
-auto strt=std::function<void()>{};
-strt=[](){
+std::function<void()>strt={
 
 // void strt(){
 /*  
