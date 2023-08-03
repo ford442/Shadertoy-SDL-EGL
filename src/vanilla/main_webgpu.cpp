@@ -14,8 +14,26 @@ return 0;
 extern"C"{
 
 void testtr(){
-ov_core_t* core = NULL;
-ov_core_create(&core);
+    unsigned char* img_data = NULL;
+    ov_core_t* core = NULL;
+    ov_model_t* model = NULL;
+    ov_tensor_t* tensor = NULL;
+    ov_preprocess_prepostprocessor_t* preprocess = NULL;
+    ov_preprocess_input_info_t* input_info = NULL;
+    ov_model_t* new_model = NULL;
+    ov_preprocess_input_tensor_info_t* input_tensor_info = NULL;
+    ov_preprocess_preprocess_steps_t* input_process = NULL;
+    ov_preprocess_input_model_info_t* p_input_model = NULL;
+    ov_compiled_model_t* compiled_model = NULL;
+    ov_infer_request_t* infer_request = NULL;
+    ov_tensor_t* output_tensor = NULL;
+    struct infer_result* results = NULL;
+    char* input_tensor_name = NULL;
+    char* output_tensor_name = NULL;
+    ov_output_const_port_t* input_port = NULL;
+    ov_output_const_port_t* output_port = NULL;
+    ov_layout_t* model_layout = NULL;
+    ov_shape_t input_shape;
 }
 
 }
