@@ -1078,7 +1078,7 @@ return results;
 return nullptr;
 }
 
-std::function<void()>strt=[this](){
+std::function<void()>strtt=[this](){
 // void strt(){
 /*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
@@ -1684,6 +1684,8 @@ glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
+
+boost::function<void()>strt=[this](){strtt();};
 
 };
 
