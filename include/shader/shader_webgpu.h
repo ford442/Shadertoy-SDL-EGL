@@ -895,7 +895,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
   
-union{
+
 
 static std::function<void()>Rend=[](){
 
@@ -1083,7 +1083,7 @@ return results;
 return nullptr;
 }
 
-}procc;
+
 
 std::function<void()>strt=[this](){
 
@@ -1145,7 +1145,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=procc.rd_fl(Fnm);
+const char * frag_body=rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
@@ -1687,7 +1687,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 eglBindAPI(0);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::procc.Rend,0,0);
+emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return;
 };
   
