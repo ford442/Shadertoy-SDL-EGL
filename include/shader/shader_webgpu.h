@@ -172,8 +172,8 @@ inline char cm_hdr_src[2300]=
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "precision mediump int;\n"
 "precision highp float;\n"
 "precision mediump sampler3D;precision highp sampler2D;"
@@ -1079,7 +1079,7 @@ return results;
 return nullptr;
 }
 
-std::function<void()>strt=[this](){
+std::function<void()>strtt=[this](){
 // void strt(){
 /*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
@@ -1158,10 +1158,7 @@ cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-/// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+
 glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1255,6 +1252,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_sRGB_decode");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_separate_shader_objects");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_subroutine");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robust_buffer_access_behavior");
+  /// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
  EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
@@ -1683,5 +1684,6 @@ glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::Rend,-1,16);
 return;
 };
-  
+    boost::function<int(int)> strt=strtt;
+
 };
