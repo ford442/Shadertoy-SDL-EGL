@@ -1071,7 +1071,7 @@ return nullptr;
 
 }procc;
 
-std::function<void()>strt=[gpu](){
+std::function<void()>strt=[this](){
 
 // void strt(){
 /*  
