@@ -560,6 +560,8 @@ WGPU_Run2();
 }
 
 int main(void){
+  ov_core_t* core = NULL;
+ov_core_create(&core);
 js_main();
 // sleep(1);
 // WGPU_Start();
