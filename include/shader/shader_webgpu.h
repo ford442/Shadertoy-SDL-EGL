@@ -891,8 +891,8 @@ static void Rend(){
   
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
-// glDisable(GL_DEPTH_TEST);
-// glDisable(GL_STENCIL_TEST);
+ glDisable(GL_DEPTH_TEST);
+ glDisable(GL_STENCIL_TEST);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
