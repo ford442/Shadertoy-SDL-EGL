@@ -176,33 +176,51 @@ contx.getExtension('GL_NV_memory_attachment');
   
 //   contx.disable(gl.DITHER);
 
-const g=new GPUX({canvas:bcanvas,webGl:contx});
-const g2=new GPUX();
+const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
+const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
-const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
-  
+
+// castle way
+// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+// GE way
+const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
+// castle way
+// const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
+// GE way
+const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
+
 const glslStone=`float Stone(float a,float b,float c,float d){return(max(((a-(d-(d*0.5)))+(b-(d-(d*0.5)))+(c-(d-(d*0.5)))*4.0),0.0));}`;
 const glslStoned=`float Stoned(float a,float b,float c){return(min((a+c),1.0)-((b*0.3)*0.14));}`;
   
-g.addNativeFunction('Stone',glslStone,{returnType:'Number'});
-g.addNativeFunction('Stoned',glslStoned,{returnType:'Number'});
+// g.addNativeFunction('Stone',glslStone,{returnType:'Number'});
+// g.addNativeFunction('Stoned',glslStoned,{returnType:'Number'});
   
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
+
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+// GE way
+var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
+var minuss=(av$-0.9)*(av$/(av$-0.9));
+av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+  //castle way
+// var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+// var av$=Ave(P[0],P[1],P[2]);
+// return[P[0],P[1],P[2],av$];
+// }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+
 let r=g.createKernel(function(f){
+ /*   //castle way
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
@@ -228,9 +246,49 @@ var bb=Stoned(p[2],p[3],rng);
 // var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
   var ss=(Ave(rr,gg,bb)-p[3]);
   var aveg=Aveg(p[3],ouT)+ss;
-
 this.color(rr,gg,bb,aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]);
+*/
+  
+// GE way
+var p=f[this.thread.y][this.thread.x];
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $aavg=this.constants.aavg;
+var alph=Alphe($amax,$amin,$aavg,p[3]);
+var Min=(4.0*(($amax-($aavg-$amin))/2.0));
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
+/*
+var rr;
+var gg;
+var bb;
+var der=p[0];
+var neerg=p[1];
+var eulb=p[2];
+
+if(der>0.333){
+ rr=Silver(der);
+}else{
+ rr=GoldR(der);
+ }
+
+if(neerg>0.4){
+gg=Silver(neerg);
+}else{
+gg=GoldG(neerg);
+}
+
+if(eulb>0.5){
+bb=Silver(eulb);
+}else{
+bb=GoldB(eulb);
+}
+this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
+ */
+this.color(p[0],p[1],p[2],aveg);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
+
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
