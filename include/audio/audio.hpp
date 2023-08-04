@@ -123,7 +123,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-std::function<void()>plt=[](){
+std::function<void()>plt=[this](){
 // void plt(){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
