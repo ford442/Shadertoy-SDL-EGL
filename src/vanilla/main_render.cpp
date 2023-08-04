@@ -7,7 +7,6 @@ WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
-
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
 WGpuRenderPassColorAttachment colorAttachment={};
@@ -19,12 +18,10 @@ colorAttachment.clearValue.g=0.0;
 colorAttachment.clearValue.b=1.0;
 colorAttachment.clearValue.a=0.75;
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
-// wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 // wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800,0.0,1.0);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
-// wgpu_render_pass_encoder_draw(pass,3);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
 wgpu_queue_submit_one(queue,commandBuffer);
@@ -40,7 +37,6 @@ config.device = device;
 config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
-
 const char *vertexShader=
 "@vertex\n"
 "fn main_v(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
@@ -51,13 +47,11 @@ const char *vertexShader=
 ");\n"
 "return vec4<f32>(pos[vertexIndex],0.0,1.0);\n"
 "}\n";
-
 const char *fragmentShader=
 "@fragment\n"
 "fn main_f() -> @location(0) vec4<f32> {\n"
 "return vec4<f32>(1.0,0.5,0.3,1.0);\n"
 "}\n";
-
 WGpuShaderModuleDescriptor shaderModuleDescV={};
 WGpuShaderModuleDescriptor shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
@@ -66,7 +60,7 @@ shaderModuleDescF.code=fragmentShader;
 WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-  WGpuVertexState vertState={};
+WGpuVertexState vertState={};
 vertState.module=fs;
 vertState.entryPoint="main_v";
 vertState.numBuffers=0;
@@ -78,10 +72,7 @@ priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRI
 priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
 priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
 priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
-
-    EM_BOOL unclippedDepth; // defaults to EM_FALSE.
-
-  
+priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
 WGpuFragmentState fragState={};
 fragState.module=fs;
 fragState.entryPoint="main_f";
@@ -128,8 +119,7 @@ document.getElementById('di').click();
 Module.ccall("startWebGPU",{async:true});
 // const myInterval=setInterval(strr,1000);
 },100);
-  document.getElementById('status').style.backgroundColor="green";
-
+document.getElementById('status').style.backgroundColor="green";
 }
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
