@@ -15,6 +15,7 @@ setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
 };
+
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('str');},250);
@@ -57,6 +58,7 @@ Self=Self.replace(/1ink.1ink/,'');
 txxt=txxt.replace(Self,'');
 $sngs[i]=Self+'songs/'+txxt;
 }};
+
 function vids(xml){
 const vparser=new DOMParser();
 const htmlDocv=vparser.parseFromString(xml.responseText,'text/html');
@@ -69,6 +71,7 @@ Self=Self.replace(/1ink.1ink/,'');
 txxt=txxt.replace(Self,'');
 $vids[i]=Self+'video/'+txxt;
 }};
+
 function shds(xml){
 const sparser=new DOMParser();
 const htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
@@ -126,16 +129,16 @@ function scanShaders(){
 const dxhttp=new XMLHttpRequest();
 dxhttp.onreadystatechange=function(){
 if(this.readyState==4&&this.status==200){
- console.log(this);
+// console.log(this);
 shds(this);
 }};
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-scanVideos();
-scanShaders();
 scanSongs();
+scanShaders();
+scanVideos();
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
@@ -154,7 +157,9 @@ sng.postMessage({data:songSrc});
 
 document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
-setTimeout(function(){snd();},1450);
+setTimeout(function(){
+snd();
+},1450);
 });
 
 const tem=document.getElementById('tim');
@@ -213,11 +218,10 @@ if(lockVid!=1){
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-// document.getElementById('wid').innerHTML=this.videoWidth;
-// document.getElementById('hig').innerHTML=this.videoHeight;
-document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
- 
+document.getElementById('wid').innerHTML=this.videoWidth;
+document.getElementById('hig').innerHTML=this.videoHeight;
+// document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
@@ -271,6 +275,6 @@ loada();
 },$ldt);
 }
 
-document.getElementById('startBtn').addEventListener('click',function(){
+// document.getElementById('startBtn').addEventListener('click',function(){
 loada();
-});
+// });
