@@ -933,6 +933,8 @@ T=true;
 
 }
 
+}
+
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char *read_file(const char *filename);
   
