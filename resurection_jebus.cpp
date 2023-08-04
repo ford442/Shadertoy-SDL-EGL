@@ -1,8 +1,3 @@
-
-
-
-
-
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
@@ -222,7 +217,7 @@ return[P[0],P[1],P[2],av$];
 // var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 // var av$=Ave(P[0],P[1],P[2]);
 // return[P[0],P[1],P[2],av$];
-// }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+// }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 
 let r=g.createKernel(function(f){
  /*   //castle way
@@ -688,7 +683,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -801,8 +796,7 @@ glPolygonOffset(0.0f,0.0f);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
-
-  glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
