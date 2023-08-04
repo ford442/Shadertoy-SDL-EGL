@@ -690,6 +690,7 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
+if(w$<1){w$=640;h$=640;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
@@ -776,11 +777,13 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,h$]);
+
   //castle way
 // var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 // var av$=Ave(P[0],P[1],P[2]);
 // return[P[0],P[1],P[2],av$];
-// }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
+// }).setTactic("precision").setPrecision('single').setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]);
 
 let r=g.createKernel(function(f){
  /*   //castle way
@@ -850,7 +853,7 @@ bb=GoldB(eulb);
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([$S,$S]);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([h$,h$]);
 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -927,9 +930,7 @@ return()=>{
 T=true;
 };
 }
-})
-
-}
+});
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char *read_file(const char *filename);
