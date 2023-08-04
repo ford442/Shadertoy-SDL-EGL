@@ -26,7 +26,10 @@
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include </content/RAMDRIVE2/emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h>
+
+
+#include <emscripten.h>
+#include <webgl/webgl2.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
@@ -562,11 +565,6 @@ WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
 return;
 }
 
-
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
-#include <webgl/webgl2.h>
 
 // void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
@@ -1343,6 +1341,10 @@ return;
 }
 
 extern "C" {
+
+void startWebGPU(){
+WGPU_Start();
+}
 
 void str(){
 strt();
