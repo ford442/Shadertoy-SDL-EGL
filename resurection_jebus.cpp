@@ -127,6 +127,7 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
+if(w$<1){w$=640;h$=640;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
