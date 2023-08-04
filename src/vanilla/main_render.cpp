@@ -66,6 +66,22 @@ shaderModuleDescF.code=fragmentShader;
 WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+  WGpuVertexState vertState={};
+vertState.module=fs;
+vertState.entryPoint="main_v";
+vertState.numBuffers=0;
+vertState.buffers=nullptr;
+vertState.constantCount = 0;
+vertState.constants = nullptr;
+WGpuPrimitiveState priState={};
+priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
+priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
+priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
+priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
+
+    EM_BOOL unclippedDepth; // defaults to EM_FALSE.
+
+  
 WGpuFragmentState fragState={};
 fragState.module=fs;
 fragState.entryPoint="main_f";
@@ -73,6 +89,7 @@ fragState.numTargets=1;
 fragState.targets=&colorTarget;
 WGpuRenderPipelineDescriptor renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
+renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main_v";
 renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
