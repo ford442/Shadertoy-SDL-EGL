@@ -3,7 +3,7 @@
 
 #include <webgl/webgl2.h>
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
+// void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -47,7 +47,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 extern "C" {
 
 EM_JS(void,ma,(),{
-// "use strict";
+"use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
@@ -173,6 +173,7 @@ contx.getExtension('WEBGL_webcodecs_video_frame');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
+contx.getExtension('EXT_color_buffer_float');
   
 //   contx.disable(gl.DITHER);
 
