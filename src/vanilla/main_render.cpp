@@ -8,12 +8,16 @@ WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
 
-WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
-WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view_simple(wgpu_canvas_context_get_current_texture(canvasContext))};
-colorAttachment.view=wgpu_texture_create_view_simple(wgpu_canvas_context_get_current_texture(canvasContext));
+// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
+WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
+WGpuRenderPassColorAttachment colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
+colorAttachment.view=wgpu_canvas_context_get_current_texture_view(canvasContext); 
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
-colorAttachment.clearValue={1.0,0.0,1.0,1.0};
+colorAttachment.clearValue.r=1.0;
+colorAttachment.clearValue.g=0.0;
+colorAttachment.clearValue.b=1.0;
+colorAttachment.clearValue.a=0.75;
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
 // wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
@@ -31,8 +35,11 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config={device,WGPU_TEXTURE_FORMAT_BGRA8UNORM,WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT,1,nullptr,2,2};
-wgpu_canvas_context_configure(canvasContext,&config);
+WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
+config.device = device;
+config.format = navigator_gpu_get_preferred_canvas_format();
+wgpu_canvas_context_configure(canvasContext, &config);
+
 const char *vertexShader=
 "@vertex\n"
 "fn main_v(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
