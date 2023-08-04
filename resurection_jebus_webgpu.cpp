@@ -1338,6 +1338,10 @@ return;
 
 extern "C" {
 
+void runWebGPU(){
+WGPU_Run();
+}
+
 void startWebGPU(){
 WGPU_Start();
 }
