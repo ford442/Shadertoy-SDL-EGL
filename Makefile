@@ -47,9 +47,9 @@ video_resurection_webgpu:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb -sASSERTIONS=0 -sFORCE_FILESYSTEM=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=1 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"_runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -std=gnu++17 -sPRECISE_F32=1 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
