@@ -23,14 +23,17 @@ Module.ccall("runWebGPU");
 function normalResStart(){
 setTimeout(function(){
 Module.ccall('str');
-Module.ccall("startWebGPU");
 },250);
+setTimeout(function(){
+Module.ccall('startWebGPU');
+},350);
 setTimeout(function(){
 Module.ccall('b3');
 },450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
-bz.postMessage({data:222});},50);
+bz.postMessage({data:222});
+},50);
 }
 
 function pll(){Module.ccall('pl');}
@@ -106,7 +109,7 @@ FS.writeFile('/shader/shader1.toy',sfil);
 },150);
 setTimeout(function(){
 normalResStart();
-},150);
+},350);
 };};
 ff.send(null);
 }
