@@ -37,6 +37,7 @@ queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config={};
 config.device = device;
+config.usage = device;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
 
