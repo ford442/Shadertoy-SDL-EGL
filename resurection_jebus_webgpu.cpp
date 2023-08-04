@@ -561,7 +561,7 @@ WGPU_ComputeDoneCallback.at(0,0,2)=onComputeDoneRun2;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
- navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
 }
 
@@ -918,7 +918,7 @@ Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,poi
 setTimeout(function(){
 M();
 },16.66);
-}
+};
 M();
 document.getElementById("di").onclick=function(){
 T=true;
