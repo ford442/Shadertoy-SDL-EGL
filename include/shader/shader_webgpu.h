@@ -1530,6 +1530,9 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 glFinish();
  glSampleCoverage(8.0,GL_FALSE);
+  
+  glEnable(GL_POLYGON_OFFSET_FILL);
+  glPolygonOffset(0.0f,0.0f);
 
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
