@@ -1,9 +1,8 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 // #include "../../include/vanilla/avx.h"
 #include <immintrin.h> 
-
 #include "../../include/vanilla/defs.h"
-// #include "../../include/vanilla/gl.h"
+#include "../../include/vanilla/gl.h"
 #include "../../include/vanilla/boost_defs.h"
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
