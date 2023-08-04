@@ -22,12 +22,13 @@ Module.ccall("runWebGPU");
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('str');},250);
+Module.ccall('str');
+Module.ccall("startWebGPU");
+},250);
 setTimeout(function(){
 Module.ccall('b3');
 },450);
 setTimeout(function(){
-Module.ccall("startWebGPU");
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
 }
