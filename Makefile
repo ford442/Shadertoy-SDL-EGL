@@ -42,7 +42,7 @@ video_resurection_jebus:
 video_resurection_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ resurection_jebus_webgpu.cpp $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
+	 em++ resurection_jebus_webgpu.cpp $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb -sASSERTIONS=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sUSE_SDL=2 -sFULL_ES3=1 \
@@ -50,6 +50,7 @@ video_resurection_webgpu:
 	 -std=gnu++17 -sPRECISE_F32=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 b3_vanilla_webgpu:
@@ -81,8 +82,8 @@ b3_vanilla_render:
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 --closure 0 
 
 b3_vanilla_webgpu_debug:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
