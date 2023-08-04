@@ -21,7 +21,7 @@ setTimeout(function(){
 Module.ccall('str');},250);
 setTimeout(function(){
 Module.ccall('b3');
-},450);
+},1450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
