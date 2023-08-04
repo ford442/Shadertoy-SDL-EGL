@@ -8,19 +8,18 @@ WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
-WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_LOAD_OP_LOAD,WGPU_STORE_OP_STORE,WGPU_TEXTURE_FORMAT_BGRA8UNORM};
+WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0),NULL,WGPU_LOAD_OP_CLEAR,WGPU_STORE_OP_STORE,WGPU_TEXTURE_FORMAT_BGRA8UNORM};
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
 // wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
-          wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800,0.0,1.0);
-
-wgpu_render_pass_encoder_draw(pass,3,1,0,0);
-
+// wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800,0.0,1.0);
+// wgpu_render_pass_encoder_draw(pass,3,1,0,0);
+wgpu_render_pass_encoder_draw(pass,3);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
-wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
+wgpu_queue_submit_one(queue,commandBuffer);
 return EM_FALSE;
 }
 
@@ -32,7 +31,7 @@ WGpuCanvasConfiguration config={device,WGPU_TEXTURE_FORMAT_BGRA8UNORM,WGPU_TEXTU
 wgpu_canvas_context_configure(canvasContext,&config);
 const char *vertexShader=
 "@vertex\n"
-"fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
+"fn main_v(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 3>(\n"
 "vec2<f32>(0.0,0.5),\n"
 "vec2<f32>(-0.5,-0.5),\n"
@@ -43,25 +42,28 @@ const char *vertexShader=
 
 const char *fragmentShader=
 "@fragment\n"
-"fn main() -> @location(0) vec4<f32> {\n"
+"fn main_f() -> @location(0) vec4<f32> {\n"
 "return vec4<f32>(1.0,0.5,0.3,1.0);\n"
 "}\n";
 
-WGpuShaderModuleDescriptor shaderModuleDesc={};
-shaderModuleDesc.code=vertexShader;
-WGpuShaderModule vs=wgpu_device_create_shader_module(device,&shaderModuleDesc);
-shaderModuleDesc.code=fragmentShader;
-WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDesc);
+WGpuShaderModuleDescriptor shaderModuleDescV={};
+WGpuShaderModuleDescriptor shaderModuleDescF={};
+shaderModuleDescV.code=vertexShader;
+WGpuShaderModule vs=wgpu_device_create_shader_module(device,&shaderModuleDescV);
+shaderModuleDescF.code=fragmentShader;
+WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDescF);
+WGpuColorTargetState colorTarget={};
+colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+WGpuFragmentState fragState={};
+fragState.module=fs;
+fragState.entryPoint="main_f";
+fragState.numTargets=1;
+fragState.targets=&colorTarget;
 WGpuRenderPipelineDescriptor renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
-renderPipelineDesc.vertex.entryPoint="main";
-renderPipelineDesc.fragment.module=fs;
-renderPipelineDesc.fragment.entryPoint="main";
+renderPipelineDesc.vertex.entryPoint="main_v";
+renderPipelineDesc.fragment=&fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-WGpuColorTargetState colorTarget={};
-colorTarget.format=23;
-renderPipelineDesc.fragment.numTargets=1;
-renderPipelineDesc.fragment.targets=&colorTarget;
 renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
@@ -73,7 +75,6 @@ wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,
 }
 
 void WGPU_Start(){
-          
 WGpuRequestAdapterOptions options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
@@ -202,8 +203,8 @@ extern"C"{
 
 void testrr(){
 // zeInit(0);
-ov_core_t* core = NULL;
-ov_core_create(&core);
+// ov_core_t* core = NULL;
+// ov_core_create(&core);
 }
 
 }
