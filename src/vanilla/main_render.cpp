@@ -62,7 +62,7 @@ fragState.targets=&colorTarget;
 WGpuRenderPipelineDescriptor renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main_v";
-renderPipelineDesc.fragment=&fragState;
+renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
@@ -185,8 +185,8 @@ void runWebGPU2(){
 }
 
 auto create_model = []() {
-    std::shared_ptr<ov::Model> model;
-    return model;
+//     std::shared_ptr<ov::Model> model;
+  //   return model;
 };
 
 
