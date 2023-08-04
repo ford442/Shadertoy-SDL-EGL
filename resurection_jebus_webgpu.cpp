@@ -61,6 +61,24 @@
 #include <SDL2/SDL.h>
 
 
+
+#define GL_GLEXT_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+#define GL3_PROTOTYPES 1
+
+#include <GLES3/gl3.h>
+// #include <GLES3/gl31.h>
+// #include <GLES3/gl32.h>
+// #include <GLES3/gl3platform.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+// #include <EGL/eglplatform.h>
+#include <GL/gl.h>
+#include <GL/glext.h>
+
+
+
+
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
@@ -981,20 +999,6 @@ return;
 }
 
 }
-
-#define GL_GLEXT_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
-#define GL3_PROTOTYPES 1
-
-#include <GLES3/gl3.h>
-// #include <GLES3/gl31.h>
-// #include <GLES3/gl32.h>
-// #include <GLES3/gl3platform.h>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-// #include <EGL/eglplatform.h>
-#include <GL/gl.h>
-#include <GL/glext.h>
 
 GLfloat x;
 GLfloat y;
