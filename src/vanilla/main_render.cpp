@@ -7,7 +7,7 @@ WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
-  const clearColor = {0.0, 1.0, 0.0, 1.0}; // Set the clearColor to green
+  const float clearColor =[0.0, 1.0, 0.0, 1.0]; // Set the clearColor to green
 
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 WGpuRenderPassColorAttachment colorAttachment={wgpu_texture_create_view_simple(wgpu_canvas_context_get_current_texture(canvasContext))};
