@@ -79,9 +79,6 @@
 #include <GL/gl.h>
 #include <GL/glext.h>
 
-
-
-
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
@@ -111,10 +108,9 @@ void runWebGPU();
 
 }
 
-
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,262144>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
@@ -229,8 +225,8 @@ static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,2};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
-static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
-static uiptr_tensor WGPU_InputBuffer=uiptr_tensor{1,1,1};
+static fptr_tensor WGPU_ResultBuffer=fptr_tensor{1,1,1};
+static fptr_tensor WGPU_InputBuffer=fptr_tensor{1,1,1};
 static i53_tensor WGPU_BufferRange=i53_tensor{1,1,2};
 static i53_tensor WGPU_BufferSize=i53_tensor{1,1,1};
 static tex_tensor WGPU_Texture=tex_tensor{1,1,1};
@@ -308,8 +304,8 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
-uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
-uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
 uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
 WGpuImageCopyTexture WGPU_Input_Image={};
 WGpuImageCopyTexture WGPU_Output_Image={};
@@ -412,7 +408,7 @@ WGPU_Mapped_Buffer.bytesPerRow=4096;
 WGPU_Mapped_Buffer.rowsPerImage=256;
 raN=rNd4(256);
 input[0]=raN;
-WGPU_InputBuffer.at(0,0,0)[0]=raN;
+WGPU_InputBuffer.at(0,0,0)[0]=float(raN);
 // std::cout << "Random input:" << std::endl;
 // std::cout << raN << std::endl;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
@@ -483,8 +479,8 @@ return;
 
 static void WGPU_Run(){
 raN=rNd4(256);
-input[0]=raN;
-WGPU_InputBuffer.at(0,0,0)[0]=raN;
+// input[0]=raN;
+WGPU_InputBuffer.at(0,0,0)[0]=float(raN);
 // std::cout << "Random input int:" << std::endl;
 // std::cout << raN << std::endl;
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
@@ -565,7 +561,6 @@ navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_O
 return;
 }
 
-
 // void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
@@ -576,6 +571,7 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
 for (int i=0;i<leng;i++){
+WGPU_InputBuffer.at(0,0,0)[0]=ptr[i];
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
