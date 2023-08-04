@@ -22,6 +22,7 @@ void pl();
 
 #include <float.h>
 #include <math.h>
+#include <functional>
 
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
@@ -122,7 +123,8 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-void plt(){
+std::function<void()>plt=[](){
+// void plt(){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
