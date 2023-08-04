@@ -46,7 +46,7 @@ video_resurection_webgpu:
 	 emcc resurection_jebus_webgpu.o -o b3667.js $(STDS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb -sASSERTIONS=0 -sFORCE_FILESYSTEM=1 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=1 \
+	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=1 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -std=gnu++17 -sPRECISE_F32=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
