@@ -49,7 +49,6 @@
 #include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
 #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -62,8 +61,6 @@
 #include <chrono>
 #include <unistd.h>
 #include <SDL2/SDL.h>
-
-
 
 #define GL_GLEXT_PROTOTYPES 1
 #define GL_FRAGMENT_PRECISION_HIGH 1
@@ -116,21 +113,7 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
-// "let coord:vec2<u32>=vec2<u32>(0,0);"
-// "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
-// "let u0:u32=0;"
-// "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
-// "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
-// "let h:u32=f*g;"
-// "var i:u32;"
-// "loop{"
-"outputBuffer[global_id.x]=inputBuffer[global_id.x];"
-// "outputBuffer[(f*g)+1]=inputBuffer[0];"
-// "outputBuffer[(f*g)+2]=inputBuffer[0];"
-// "outputBuffer[(f*g)+3]=inputBuffer[0];"
-// "i+=4;"
-// "if i==256{break;}"
-// "}"
+"outputBuffer[0]+=inputBuffer[global_id.x];"
 "}";
 
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
@@ -357,7 +340,7 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
 double_int53_t WGPU_Range_PointerC=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerC;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),  WGPU_BufferRange.at(0,0,0) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
 document.getElementById('outText').innerHTML=$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
@@ -478,9 +461,9 @@ return;
 }
 
 static void WGPU_Run(){
-raN=rNd4(256);
+// raN=rNd4(256);
 // input[0]=raN;
-WGPU_InputBuffer.at(0,0,0)[0]=float(raN);
+// WGPU_InputBuffer.at(0,0,0)[0]=float(raN);
 // std::cout << "Random input int:" << std::endl;
 // std::cout << raN << std::endl;
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
@@ -567,6 +550,7 @@ void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
 float sum=0.0;
+float Wsum=0.0;
 float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
@@ -576,6 +560,8 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
+WGPU_Run();
+Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
