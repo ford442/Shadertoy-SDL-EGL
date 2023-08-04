@@ -7,11 +7,12 @@ WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
 EM_BOOL raf(double time, void *userData){
+  wgpu_texture_create_view_simple
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
-WGpuRenderPassColorAttachment colorAttachment=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
+WGpuRenderPassColorAttachment colorAttachment=wgpu_texture_create_view_simple(wgpu_canvas_context_get_current_texture(canvasContext));
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
-wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
+// wgpu_command_encoder_set_render_pass_attachment_state(encoder,0,&colorAttachment,NULL);
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 // wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800,0.0,1.0);
