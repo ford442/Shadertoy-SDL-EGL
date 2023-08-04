@@ -130,7 +130,7 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_FALSE;
+attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
@@ -141,7 +141,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // eglBindAPI(EGL_OPENGL_API);
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,(EGLint)1,&config_size);
@@ -158,7 +158,7 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
-// emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
 // emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
 emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
@@ -300,6 +300,7 @@ emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
+emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
 emscripten_webgl_enable_extension(ctx_js,"OES_element_index_uint");
@@ -418,9 +419,9 @@ var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float64',
+colorType:'uint32',
 preferLowPowerToHighPerformance:false,
-logarithmicDepthBuffer:true,
+logarithmicDepthBuffer:false,
 // colorSpace:'display-p3',
 alpha:true,
 depth:true,
@@ -445,8 +446,7 @@ gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('EXT_color_buffer_half_float');
 gl.getExtension('EXT_blend_minmax');
 // gl.getExtension('OES_texture_float_linear');
-
-// gl.disable(gl.DITHER);
+gl.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
 gl.drawingBufferColorMetadata={mode:'extended'};
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
