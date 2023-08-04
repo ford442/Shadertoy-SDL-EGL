@@ -10,7 +10,7 @@ EM_BOOL raf(double time, void *userData){
 
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
-WGpuRenderPassColorAttachment colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
+WGpuRenderPassColorAttachment colorAttachment={};
 colorAttachment.view=wgpu_canvas_context_get_current_texture_view(canvasContext); 
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
@@ -35,7 +35,7 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
+WGpuCanvasConfiguration config={};
 config.device = device;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
