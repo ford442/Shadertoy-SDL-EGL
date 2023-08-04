@@ -271,4 +271,6 @@ loada();
 },$ldt);
 }
 
+document.getElementById('startBtn').addEventListener('click',function(){
 loada();
+});
