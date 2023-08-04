@@ -46,6 +46,21 @@
 #include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
 #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
+
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <unistd.h>
+#include <SDL2/SDL.h>
+
+
 template<class ArgumentType,class ResultType>
 struct unary_function{
 typedef ArgumentType argument_type;
@@ -899,19 +914,6 @@ T=true;
 })
 
 }
-
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <unistd.h>
-#include <SDL2/SDL.h>
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char *read_file(const char *filename);
