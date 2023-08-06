@@ -796,7 +796,7 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
 // glDisable(GL_SCISSOR_TEST);
 glDepthFunc(GL_LESS);
-  glClearDepth(1.0);
+  glClearDepthf(1.0);
 glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset(0.0f,0.0f);
 
