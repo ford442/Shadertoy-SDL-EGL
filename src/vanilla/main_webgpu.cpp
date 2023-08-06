@@ -2,6 +2,7 @@
 // #include "../../include/vanilla/openvino/runtime/runtime.hpp"
 // #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
 #include <functional>
+#include <boost/function.hpp>
 
 // namespace compute = boost::compute;
 
@@ -321,7 +322,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneRun2=[](WGpuQueue queue,void *userD
 return;
 };
 
-static std::function<void()>raf=[](){
+static boost::function<void()>raf=[](){
 // static void raf(){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
