@@ -27,7 +27,7 @@ setTimeout(function(){
 Module.ccall('b3');
 },450);
 setTimeout(function(){
-// Module.ccall('runWebGPU',{async: true});
+Module.ccall('runWebGPU',{async: true});
 },850);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
