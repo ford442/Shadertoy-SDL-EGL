@@ -641,19 +641,19 @@ private:
 
 public:
 
-boost::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 };
 
-boost::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 // const void VCOin(boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 };
 
-boost::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 // const void VBOin(boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
