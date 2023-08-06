@@ -67,7 +67,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-/*
+
 inline int rNd4(int randomMax);
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
@@ -83,7 +83,7 @@ void startWebGPU();
 void runWebGPU();
 
 }
-*/
+
 
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,262144>;"
