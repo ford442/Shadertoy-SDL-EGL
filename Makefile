@@ -40,7 +40,8 @@ video_resurection_jebus:
 video_resurection_edit:
 	 em++ $(STDS) include/shader/intrins.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
-	 em++ $(STDS) video_edit.cpp -o b3668.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) -c src/shader/video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
+	 em++ $(STDS) video_edit.o -o b3668.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sMAXIMUM_MEMORY=4gb -sPRECISE_F32=1 \
 	 -sALLOW_MEMORY_GROWTH=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
