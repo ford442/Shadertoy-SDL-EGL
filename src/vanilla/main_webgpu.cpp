@@ -3,7 +3,7 @@
 // #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
 #include <functional>
 #include <boost/function.hpp>
-#include <boost/throw_exception.hpp>
+// #include <boost/throw_exception.hpp>
     
 // namespace compute = boost::compute;
 
