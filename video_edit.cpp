@@ -468,7 +468,7 @@ GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
 
-void uni(float xx,float yy,GLfloat time,EGLint fram);
+// void uni(float xx,float yy,GLfloat time,EGLint fram);
 
 GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
@@ -512,7 +512,9 @@ struct timespec rem;
 struct timespec req={0,16666000};
 GLuint uni_mse;
 
-void uni(float xx,float yy,GLfloat time,EGLint fram){
+std::function<void(float ,float ,GLfloat ,EGLint )>uni=[](float xx,float yy,GLfloat time,EGLint fram){
+
+// void uni(float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
 if(ms_l==true){
 if(clk_l==true){
