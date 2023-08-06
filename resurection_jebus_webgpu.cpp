@@ -542,7 +542,7 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-runWebGPU();
+// runWebGPU();
 Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
@@ -878,7 +878,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-// Module.ccall('runWebGPU',{async: true});
+Module.ccall('runWebGPU');
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
