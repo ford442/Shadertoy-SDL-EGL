@@ -55,7 +55,7 @@ video_resurection_webgpu:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc resurection_jebus_webgpu.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
-	 -sINITIAL_MEMORY=512mb \
+	 -sINITIAL_MEMORY=512mb -sALLOW_MEMORY_GROWTH=0 \
 	 -sUSE_SDL=2 -sPRECISE_F32=1 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -std=c++17 \
