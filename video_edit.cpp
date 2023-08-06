@@ -36,7 +36,7 @@ maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
 return;
-}
+};
 
 extern "C" {
 
