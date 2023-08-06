@@ -25,7 +25,7 @@
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include </content/RAMDRIVE2/emsdk/upstream/emscripten/cache/sysroot/include/emscripten.h>
+#include <emscripten.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
@@ -53,11 +53,11 @@ typedef ResultType result_type;
 #include <boost/compute/core.hpp>
 
 inline int rNd4(int randomMax);
-static void WGPU_Run();
+// static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
-static void WGPU_Start();
+// static void WGPU_Start();
 
 // #include <boost/compute.hpp>
 // #include <boost/compute/algorithm.hpp>
