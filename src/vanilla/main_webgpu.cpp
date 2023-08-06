@@ -1,7 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
-#include "../../include/vanilla/openvino/runtime/runtime.hpp"
-#include "../../include/vanilla/openvino/runtime/remote_context.hpp"
-
+// #include "../../include/vanilla/openvino/runtime/runtime.hpp"
+// #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
 
 // namespace compute = boost::compute;
 
@@ -23,7 +22,7 @@ extern"C"{
 
 void testtr(){
       // Create an OpenVINO Runtime object.
-  InferenceEngine::Core::InferenceEngineRuntime runtime;
+ //  InferenceEngine::Core::InferenceEngineRuntime runtime;
     
     /*
     unsigned char* img_data = NULL;
