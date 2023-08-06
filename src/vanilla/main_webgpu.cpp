@@ -19,6 +19,7 @@ extern"C"{
     }
 
 void testtr(){
+    /*
     unsigned char* img_data = NULL;
     ov_core_t* core = NULL;
     ov_model_t* model = NULL;
@@ -41,6 +42,7 @@ void testtr(){
     ov_shape_t input_shape;
 
     CHECK_STATUS(ov_core_create(&core));
+    */
 }
 
 }
