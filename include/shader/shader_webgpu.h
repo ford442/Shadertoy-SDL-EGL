@@ -5,7 +5,6 @@
 #include <experimental/simd>
 // using unary_function = std::unary_function;
 
-
 template<class ArgumentType,class ResultType>
 
 struct unary_function{
@@ -642,25 +641,25 @@ private:
 
 public:
 
-std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+boost::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 };
 
-std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+boost::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 // const void VCOin(boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 };
 
-std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+boost::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 // const void VBOin(boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 };
 
-std::function<void()>setFloats=[](){
+boost::function<void()>setFloats=[](){
 // const void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
@@ -673,42 +672,42 @@ Di.at(1,1)=0.0;
 return;
 };
 
-static inline std::function<float()>gF=[](){
+static inline boost::function<float()>gF=[](){
 // static inline float gF(){
 return Fi.at(0,0);
 };
 
-static inline std::function<float()>gF5=[](){
+static inline boost::function<float()>gF5=[](){
 // static inline float gF5(){
 return Fi.at(1,2);
 };
 
-static inline std::function<float()>gFm1=[](){
+static inline boost::function<float()>gFm1=[](){
 // static inline float gFm1(){
 return Fi.at(0,1);
 };
 
-static inline std::function<float()>gFm5=[](){
+static inline boost::function<float()>gFm5=[](){
 // static inline float gFm5(){
 return Fi.at(2,0);
 };
 
-static inline std::function<float()>gF0=[](){
+static inline boost::function<float()>gF0=[](){
 // static inline float gF0(){
 return Fi.at(1,1);
 };
 
-static inline std::function<boost::compute::double_()>gD=[](){
+static inline boost::function<boost::compute::double_()>gD=[](){
 // static inline boost::compute::double_ gD(){
 return Di.at(0,0);
 };
 
-static inline std::function<boost::compute::double_()>gDm1=[](){
+static inline boost::function<boost::compute::double_()>gDm1=[](){
 // static inline boost::compute::double_ gDm1(){
 return Di.at(0,1);
 };
 
-static inline std::function<boost::compute::double_()>gD0=[](){
+static inline boost::function<boost::compute::double_()>gD0=[](){
 // static inline boost::compute::double_ gD0(){
 return Di.at(1,1);
 };
