@@ -5,6 +5,9 @@
 #include <experimental/simd>
 // using unary_function = std::unary_function;
 
+#include <boost/function.hpp>
+#include <boost/throw_exception.hpp>
+
 template<class ArgumentType,class ResultType>
 
 struct unary_function{
