@@ -301,7 +301,7 @@ double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.getElementById('outText').innerHTML=$0;
+// document.getElementById('outText').innerHTML=$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 }
@@ -548,7 +548,7 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-runWebGPU();
+// runWebGPU();
 Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
@@ -884,6 +884,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
+Module.ccall("runWebGPU");
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
@@ -1301,9 +1302,7 @@ glPolygonOffset(0.0f,0.0f);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
-
   glDisable(GL_DITHER);
-  
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
