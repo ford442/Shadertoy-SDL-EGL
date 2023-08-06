@@ -548,7 +548,7 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-runWebGPU();
+// runWebGPU();
 // Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
