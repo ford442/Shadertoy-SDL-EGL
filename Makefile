@@ -45,7 +45,7 @@ video_resurection_edit:
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sMAXIMUM_MEMORY=4gb -sPRECISE_F32=1 \
 	 -sALLOW_MEMORY_GROWTH=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
-	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sPRECISE_F32=1 -sUSE_SDL=2 \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sUSE_SDL=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js \
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
@@ -55,9 +55,9 @@ video_resurection_webgpu:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc resurection_jebus_webgpu.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb -sASSERTIONS=0 -sFORCE_FILESYSTEM=1 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=512mb -sASSERTIONS=0 -sFORCE_FILESYSTEM=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
+	 -sUSE_SDL=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -std=gnu++17 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -75,7 +75,7 @@ b3_vanilla_webgpu:
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_ERRNO=0 -jsDWEBGPU_NO_BW_COMPAT=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
@@ -84,14 +84,15 @@ b3_vanilla_webgpu:
 b3_vanilla_render:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc src/vanilla/main_render.cpp -sUSE_WEBGPU=1 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc main_render.o -sUSE_WEBGPU=1 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc src/vanilla/main_render.cpp \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc main_render.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_ERRNO=0 -jsDWEBGPU_DEBUG=1 -jsDWEBGPU_NO_BW_COMPAT=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
