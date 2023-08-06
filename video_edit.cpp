@@ -461,8 +461,8 @@ return;
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 // #include <EGL/eglplatform.h>
-#include <GL/gl.h>
-#include <GL/glext.h>
+// #include <GL/gl.h>
+// #include <GL/glext.h>
 
 GLfloat x;
 GLfloat y;
