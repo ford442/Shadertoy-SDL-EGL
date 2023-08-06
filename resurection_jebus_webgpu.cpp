@@ -1305,7 +1305,7 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_
   glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
-emscripten_set_main_loop((void(*)())renderFrame,-1,16);
+emscripten_set_main_loop((void(*)())renderFrame,0,16);
 return;
 }
 
