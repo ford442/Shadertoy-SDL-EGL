@@ -21,7 +21,7 @@ setTimeout(function(){
 Module.ccall('str');
 },250);
 setTimeout(function(){
-Module.ccall('startWebGPU');
+Module.ccall('startWebGPU',{async: true});
 },350);
 setTimeout(function(){
 Module.ccall('b3');
