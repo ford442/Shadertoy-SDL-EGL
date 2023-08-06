@@ -503,11 +503,11 @@ return;
 EM_JS(void,js_main,(),{
 
 function strr(){
-Module.ccall("runWebGPU");
+Module.ccall("runWebGPU",{async: true});
 }
 
 function normalResStart(){
-Module.ccall("startWebGPU");
+Module.ccall("startWebGPU",{async: true});
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
