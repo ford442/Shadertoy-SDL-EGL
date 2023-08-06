@@ -330,7 +330,7 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-// usleep(25);
+usleep(15);
 // WGPU_Run();
 return;
 };
@@ -1305,7 +1305,7 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_
   glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop((void(*)())renderFrame,-1,16);
 return;
 }
 
