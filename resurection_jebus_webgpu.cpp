@@ -330,8 +330,8 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-usleep(25);
-WGPU_Run();
+// usleep(25);
+// WGPU_Run();
 return;
 };
 
@@ -540,8 +540,8 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-WGPU_Run();
-Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
+// WGPU_Run();
+// Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
