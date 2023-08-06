@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
 #include <openvino/runtime/runtime.hpp>
-
+#include <openvino/runtime/remote_context.hpp>
 
 
 // namespace compute = boost::compute;
