@@ -312,7 +312,7 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-usleep(25);
+usleep(250);
 runWebGPU();
 return;
 };
@@ -508,7 +508,7 @@ WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
  navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
-}
+};
 
 EM_JS(void,js_main,(),{
 
