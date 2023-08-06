@@ -99,7 +99,7 @@ inline char wgl_cmp_src[2000]=
 // "let h:u32=f*g;"
 // "var i:u32;"
 // "loop{"
-"outputBuffer[global_id.x]=inputBuffer[global_id.x];"
+"outputBuffer[0]+=inputBuffer[global_id.x];"
 // "outputBuffer[(f*g)+1]=inputBuffer[0];"
 // "outputBuffer[(f*g)+2]=inputBuffer[0];"
 // "outputBuffer[(f*g)+3]=inputBuffer[0];"
