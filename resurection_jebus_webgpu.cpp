@@ -322,7 +322,7 @@ double_int53_t WGPU_Range_PointerC=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerC;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,0),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.getElementById('outText').innerHTML=$0;
+// document.getElementById('outText').innerHTML=$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
@@ -543,13 +543,13 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
 for (int i=0;i<leng;i++){
-WGPU_InputBuffer.at(0,0,0)[0]=ptr[i];
+// WGPU_InputBuffer.at(0,0,0)[0]=ptr[i];
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-// runWebGPU();
-Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
+runWebGPU();
+// Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
