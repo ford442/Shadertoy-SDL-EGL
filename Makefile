@@ -55,11 +55,10 @@ video_resurection_webgpu:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc resurection_jebus_webgpu.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=512mb -sASSERTIONS=0 -sFORCE_FILESYSTEM=1 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sPRECISE_F32=1 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=3 \
+	 -sINITIAL_MEMORY=512mb \
+	 -sUSE_SDL=2 -sPRECISE_F32=1 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -std=gnu++17 \
+	 -std=c++17 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
