@@ -540,8 +540,8 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-// WGPU_Run();
-// Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
+WGPU_Run();
+Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
