@@ -27,27 +27,12 @@
 #include <math.h>
 #include <new>
 
-
 #include <emscripten.h>
 #include <webgl/webgl2.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
-
-// #include <openvino/openvino.hpp>
-#include "openvino/c/openvino.h"
-
-// #include "openvino/runtime/tensor.hpp"
-
-#include "oneapi/tbb/tick_count.h"
-#include "oneapi/tbb/task_arena.h"
-#include "oneapi/tbb/task_group.h"
-
-// #include "oneapi/tbb/global_control.h"
-#include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
-#include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
-#include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
 #include <iostream>
 #include <algorithm>
@@ -81,8 +66,8 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
-#include <boost/compute/core.hpp>
 
+/*
 inline int rNd4(int randomMax);
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
@@ -90,12 +75,6 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
 static void WGPU_Start();
 
-// #include <boost/compute.hpp>
-// #include <boost/compute/algorithm.hpp>
-
-// namespace compute = boost::compute;
-
-int cltest();
 
 extern"C"{
 
@@ -104,6 +83,7 @@ void startWebGPU();
 void runWebGPU();
 
 }
+*/
 
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,262144>;"
