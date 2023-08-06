@@ -1,6 +1,7 @@
 #include "../../include/vanilla/main_webgpu.h"
 // #include "../../include/vanilla/openvino/runtime/runtime.hpp"
 // #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
+#include <functional>
 
 // namespace compute = boost::compute;
 
@@ -320,7 +321,8 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneRun2=[](WGpuQueue queue,void *userD
 return;
 };
 
-static void raf(){
+static std::function<void()>raf=[](){
+// static void raf(){
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(WGPU_Device.at(0,0,0),&WGPU_TextureDescriptor.at(0,0,0));
@@ -419,7 +421,7 @@ if(WGPU_BufferStatus.at(0,0,0)!=3){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 }
 return;
-}
+};
 
 static void WGPU_Run(){
 raN=rNd4(256);
