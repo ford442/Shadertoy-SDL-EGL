@@ -5,7 +5,6 @@
 #include <experimental/simd>
 // using unary_function = std::unary_function;
 
-#include <boost/function.hpp>
 
 template<class ArgumentType,class ResultType>
 
@@ -14,9 +13,10 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
+#include <boost/function.hpp>
+
 // using floaT=std::experimental::native_simd<float>;
 
-#include <boost/function.hpp>
 #include <boost/context/detail/tuple.hpp>
 
 #include <boost/lockfree/spsc_queue.hpp>
