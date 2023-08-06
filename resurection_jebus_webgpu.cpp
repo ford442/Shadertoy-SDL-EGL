@@ -526,6 +526,14 @@ return;
 
 // void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
+extern "C" {
+
+void runWebGPU(){
+WGPU_Run();
+}
+
+}
+
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
 float min=1.0;
@@ -1303,10 +1311,6 @@ return;
 }
 
 extern "C" {
-
-void runWebGPU(){
-WGPU_Run();
-}
 
 void startWebGPU(){
 WGPU_Start();
