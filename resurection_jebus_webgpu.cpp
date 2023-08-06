@@ -99,7 +99,7 @@ inline char wgl_cmp_src[2000]=
 // "let h:u32=f*g;"
 // "var i:u32;"
 // "loop{"
-"outputBuffer[0]+=inputBuffer[global_id.x];"
+"outputBuffer[0]=outputBuffer[0]+inputBuffer[global_id.x];"
 // "outputBuffer[(f*g)+1]=inputBuffer[0];"
 // "outputBuffer[(f*g)+2]=inputBuffer[0];"
 // "outputBuffer[(f*g)+3]=inputBuffer[0];"
@@ -567,13 +567,13 @@ float avgSum=0.0;
 float minSum=0.0;
 float maxSum=0.0;
 for (int i=0;i<leng;i++){
-// WGPU_InputBuffer.at(0,0,0)[0]=ptr[i];
+WGPU_InputBuffer.at(0,0,0)[0]=ptr[i];
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
 // runWebGPU();
-// Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
+Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
 aptr[Fnum+100]=min;
