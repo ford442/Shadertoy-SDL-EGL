@@ -1,5 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
-#include <openvino/runtime.hpp>
+#include <openvino/runtime/runtime.hpp>
 
 
 
