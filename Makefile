@@ -7,23 +7,21 @@ STDS += -std=c++98 -std=c++03 -std=c++11 -std=c++14 -std=c++17 -std=c++20 -std=c
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -Og -fmerge-all-constants -ffast-math -ffp-contract=off -fno-stack-protector \
+COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -Og -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
--Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
--mmutable-globals \
--mnontrapping-fptoint \
--msign-ext
+-Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
+-mmutable-globals -mnontrapping-fptoint -msign-ext
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sUSE_GLFW=3 \
 -sGL_POOL_TEMP_BUFFERS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
-LINK_FLAGS += $(LDFLAGS) -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly -mllvm -mtune=haswell \
+LINK_FLAGS += $(LDFLAGS) -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
-	 -sALLOW_MEMORY_GROWTH=1 --output_eol linux -sMALLOC=emmalloc \
+	 -sALLOW_MEMORY_GROWTH=1 --output_eol linux -sMALLOC=emmalloc -mllvm -mtune=haswell \
 	 --memory-init-file 0 -rtlib=compiler-rt -DEMMALLOC_USE_64BIT_OPS=1
 
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
@@ -40,11 +38,13 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 video_resurection_edit:
-	 em++ video_edit.cpp -o b3668.js -sFORCE_FILESYSTEM=1 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sUSE_SDL=2 -sFULL_ES3=1 -sFULL_ES2=1 \
-	 -std=gnu++20 -sPRECISE_F32=1 \
+	 em++ $(STDS) include/shader/intrins.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
+	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
+	 em++ $(STDS) video_edit.cpp -o b3668.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
+	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sMAXIMUM_MEMORY=4gb -sPRECISE_F32=1 \
+	 -sALLOW_MEMORY_GROWTH=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sPRECISE_F32=1 -sUSE_SDL=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js \
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
