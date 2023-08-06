@@ -26,9 +26,11 @@ Module.ccall('startWebGPU',{async: true});
 setTimeout(function(){
 Module.ccall('b3');
 },450);
+  /*
 setTimeout(function(){
 Module.ccall('runWebGPU',{async: true});
 },850);
+*/
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});
