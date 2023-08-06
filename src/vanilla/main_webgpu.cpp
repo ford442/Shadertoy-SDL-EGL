@@ -423,7 +423,8 @@ wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);
 return;
 };
 
-static void WGPU_Run(){
+static std::function<void()>WGPU_Run=[](){
+//static void WGPU_Run(){
 raN=rNd4(256);
 input[0]=raN;
 WGPU_InputBuffer.at(0,0,0)[0]=raN;
@@ -456,7 +457,7 @@ if(WGPU_BufferStatus.at(0,0,0)!=3){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 }
 return;
-}
+};
 
 static void WGPU_Run2(){
 return;
@@ -485,12 +486,12 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData){
 adapter=result;
 WGPU_Adapter.at(0,0,0)=result;
     wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,0),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,0));
-
 // navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
 }
 
-void WGPU_Start(){
+std::function<void()>WGPU_Start=[](){
+// void WGPU_Start(){
 WGPU_UserData.at(0,0,0)=userDataA;
 WGPU_UserData.at(0,0,1)=userDataB;
 WGPU_ObtainedDeviceCallback.at(0,0,0)=ObtainedWebGpuDeviceStart;
