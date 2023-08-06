@@ -6,7 +6,6 @@
 // using unary_function = std::unary_function;
 
 #include <boost/function.hpp>
-#include <boost/throw_exception.hpp>
 
 template<class ArgumentType,class ResultType>
 
@@ -1082,7 +1081,7 @@ return results;
 return nullptr;
 }
 
-std::function<void()>strtt=[this](){
+boost::function<void()>strtt=[this](){
 // void strt(){
 /*  
 tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
