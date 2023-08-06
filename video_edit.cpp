@@ -539,7 +539,8 @@ const char *sources[4];
 GLubyte gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
 
-void renderFrame(){
+std::function<void()>renderFrame=[](){
+// void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -558,7 +559,7 @@ glFlush();
 iFrame++;
 glFinish();
 return;
-}
+};
 
 static const char8_t *read_file(const char *filename){
 char8_t *result=NULL;
