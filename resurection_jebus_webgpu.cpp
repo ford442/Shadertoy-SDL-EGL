@@ -26,14 +26,12 @@
 #include <cfloat>
 #include <math.h>
 #include <new>
-
 #include <emscripten.h>
 #include <webgl/webgl2.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -54,10 +52,10 @@
 #include <GLES3/gl3.h>
 // #include <GLES3/gl31.h>
 // #include <GLES3/gl32.h>
-// #include <GLES3/gl3platform.h>
+#include <GLES3/gl3platform.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-// #include <EGL/eglplatform.h>
+#include <EGL/eglplatform.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
 
@@ -67,14 +65,11 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-
 inline int rNd4(int randomMax);
 static void WGPU_Run();
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
-
 static void WGPU_Start();
-
 
 extern"C"{
 
@@ -83,31 +78,6 @@ void startWebGPU();
 void runWebGPU();
 
 }
-inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
-"@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
-"@compute@workgroup_size(4,1,64)"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let f:u32=global_id.z;"
-"let g:u32=global_id.x;"
-// "let coord:vec2<u32>=vec2<u32>(0,0);"
-// "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
-// "let u0:u32=0;"
-// "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
-// "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
-// "let h:u32=f*g;"
-// "var i:u32;"
-// "loop{"
-"outputBuffer[0]=outputBuffer[0]+inputBuffer[global_id.x];"
-// "outputBuffer[(f*g)+1]=inputBuffer[0];"
-// "outputBuffer[(f*g)+2]=inputBuffer[0];"
-// "outputBuffer[(f*g)+3]=inputBuffer[0];"
-// "i+=4;"
-// "if i==256{break;}"
-// "}"
-"}";
-/*
 
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,262144>;"
@@ -117,9 +87,9 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
-"outputBuffer[0]+=inputBuffer[global_id.x];"
+"outputBuffer[global_id.x]=inputBuffer[global_id.x];"
 "}";
-*/
+
 using mouse_tensor=boost::numeric::ublas::tensor<float>;
 using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
@@ -572,7 +542,7 @@ sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
-// runWebGPU();
+runWebGPU();
 Wsum=WGPU_ResultBuffer.at(0,0,0)[0]/leng;
 sum=sum/leng;
 aptr[Fnum]=sum;
