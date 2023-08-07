@@ -3,8 +3,7 @@
 #define __CL_ENABLE_EXCEPTIONS
 
 int cltest(){
-    
-static const char source[] =
+const char *source = 
     "#if defined(cl_khr_fp64)\n"
     "#  pragma OPENCL EXTENSION cl_khr_fp64: enable\n"
     "#elif defined(cl_amd_fp64)\n"
