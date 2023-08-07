@@ -67,7 +67,7 @@ video_resurection_webgpu:
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/main_webgpu.cpp -O0 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/usr/local/x86_64-linux-gnu/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS -lOpenCL
+	 em++ src/vanilla/main_webgpu.cpp -O0 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/usr/local/x86_64-linux-gnu/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
 	 em++ main_webgpu.o -O0 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js -I/usr/local/x86_64-linux-gnu/ \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=1 \
@@ -78,7 +78,7 @@ b3_vanilla_webgpu:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js  -lOpenCL
+	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
 b3_vanilla_render:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
