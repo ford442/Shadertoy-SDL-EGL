@@ -33,8 +33,7 @@
 
 // #include "../../include/vanilla/openvino/runtime/runtime.hpp"
 // #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
-#include <functional>
-#include <boost/function.hpp>
+
 // #include <boost/throw_exception.hpp>
     
 // namespace compute = boost::compute;
@@ -54,10 +53,14 @@
 // #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
 template<class ArgumentType,class ResultType>
+
 struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+
+#include <functional>
+#include <boost/function.hpp>
 
 #include <CL/opencl.hpp>
 #include <boost/compute/cl.hpp> 
