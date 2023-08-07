@@ -64,9 +64,7 @@ typedef ResultType result_type;
 
 #define __CL_ENABLE_EXCEPTIONS
 
-extern "C" {
-#include <CL/cl.h>
-}
+// #include <CL/cl.h>
 
 #include <CL/opencl.hpp>
 #include <boost/compute/cl.hpp> 
