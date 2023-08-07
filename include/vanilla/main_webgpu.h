@@ -50,7 +50,12 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+
+#include <CL/cl.h>
+#include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp>
+#include <boost/compute/interop/opengl.hpp>
+#include <boost/compute/interop/opencl.hpp>
 
 inline int rNd4(int randomMax);
 // static void WGPU_Run();
