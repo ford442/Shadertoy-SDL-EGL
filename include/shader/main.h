@@ -249,7 +249,8 @@ pnnl.addEventListener('keydown',Key);
 }
 
 static inline void(*jss)(){&js_main};
-int rD=0,Th=0,Rg=0;
+
+int rD=0,Rg=0,nm=0;
 
 class js
 {
@@ -263,7 +264,7 @@ std::random_device rd;
 // v128_t Dr;
 
 inline int rNd(int Th){
-int nm=Th*rd();
+nm=Th*rd();
 std::srand(nm);
 rD=std::rand()%Th;
 // Dr=wasm_i32x4_splat(rD);
