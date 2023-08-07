@@ -31,6 +31,14 @@
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
+// #include "../../include/vanilla/openvino/runtime/runtime.hpp"
+// #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
+#include <functional>
+#include <boost/function.hpp>
+// #include <boost/throw_exception.hpp>
+    
+// namespace compute = boost::compute;
+
 // #include <openvino/openvino.hpp>
 // #include "openvino/c/openvino.h"
 
@@ -51,7 +59,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <CL/cl.h>
+#include <CL/cl.hpp>
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
