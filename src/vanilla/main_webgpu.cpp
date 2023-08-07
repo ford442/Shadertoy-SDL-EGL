@@ -1,6 +1,8 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 
+extern"C"{
+
 int cltest(){
 const char *source = 
     "#if defined(cl_khr_fp64)\n"
@@ -128,7 +130,6 @@ const char *source =
 return 0;
 }
 
-extern"C"{
 
 #define CHECK_STATUS(return_status)                                                      \
     if (return_status != OK) {                                                           \
