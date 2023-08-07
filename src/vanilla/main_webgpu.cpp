@@ -581,9 +581,9 @@ document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
-document.getElementById('startBtn2').addEventListener('click',function(){
+document.getElementById('startBtn2').addEventListener('click',async function(){
 // myStopFunction();
-Module.ccall("runWebGPU",{async: false});
+Module.ccall("runWebGPU",{async: true});
 // const myInterval=setInterval(strr,16.6);
 });
 
