@@ -37,6 +37,14 @@ void pl();
 #include <boost/atomic.hpp>
 #include <boost/tuple/tuple.hpp>
 // #include <boost/integer.hpp>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 #include <boost/function.hpp>
 
 #include <cstdint>
