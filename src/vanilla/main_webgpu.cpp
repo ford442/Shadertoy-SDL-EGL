@@ -11,7 +11,7 @@ static const char source[] =
     "#  error double precision is not supported\n"
     "#endif\n"
     "kernel void add(\n"
-    "       ulong n,\n"
+    "         ulong n,\n"
     "       global const double *a,\n"
     "       global const double *b,\n"
     "       global double *c\n"
@@ -23,8 +23,6 @@ static const char source[] =
     "    }\n"
     "}\n";
 	
-std::string source_string;
-source_string.assign(source, strlen(source));
 
   const size_t N = 1 << 20;
 
@@ -77,7 +75,7 @@ source_string.assign(source, strlen(source));
 
 	// Compile OpenCL program for found device.
 	cl::Program program(context, cl::Program::Sources(
-		    1, std::make_pair(source, strlen(source_string))
+		    1, std::make_pair(source, 420)
 		    ));
 
 //	try {
