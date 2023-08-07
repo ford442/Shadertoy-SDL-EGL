@@ -1,6 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-#define __CL_ENABLE_EXCEPTIONS
 
 int cltest(){
 const char *source = 
