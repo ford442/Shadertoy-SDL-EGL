@@ -2,7 +2,7 @@
 
 int cltest(){
     
-static const std::string source[] =
+static const std::string source=
     "#if defined(cl_khr_fp64)\n"
     "#  pragma OPENCL EXTENSION cl_khr_fp64: enable\n"
     "#elif defined(cl_amd_fp64)\n"
