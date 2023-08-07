@@ -520,11 +520,11 @@ return;
 EM_JS(void,js_main,(),{
 
 function strr(){
-Module.ccall("runWebGPU",{async: true});
+Module.ccall("runWebGPU",async);
 }
 
 function normalResStart(){
-Module.ccall("startWebGPU",{async: true});
+Module.ccall("startWebGPU",async);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
@@ -581,9 +581,9 @@ document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
-document.getElementById('startBtn2').addEventListener('click',async function(){
+document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
-Module.ccall("runWebGPU",{async: true});
+Module.ccall("runWebGPU",async);
 // const myInterval=setInterval(strr,16.6);
 });
 
