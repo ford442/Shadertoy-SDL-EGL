@@ -1,16 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-namespace cl {
-  class Error {
-  public:
-    Error() {}
-    Error(const std::string& message) : message_(message) {}
-    const std::string& message() const { return message_; }
-  private:
-    std::string message_;
-  };
-}
-
 int cltest(){
     
 static const char source[] =
@@ -35,7 +24,7 @@ static const char source[] =
     "}\n";
   const size_t N = 1 << 20;
 
-    try {
+ //   try {
 	// Get list of OpenCL platforms.
 	std::vector<cl::Platform> platform;
 	cl::Platform::get(&platform);
@@ -87,15 +76,15 @@ static const char source[] =
 		    1, std::make_pair(source, strlen(source))
 		    ));
 
-	try {
+//	try {
 	    program.build(device);
-	} catch (const cl::Error&) {
-	    std::cerr
-		<< "OpenCL compilation error" << std::endl
-		<< program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device[0])
-		<< std::endl;
-	    return 1;
-	}
+//	} catch (const cl::Error&) {
+//	    std::cerr
+//		<< "OpenCL compilation error" << std::endl
+//		<< program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device[0])
+//		<< std::endl;
+//	    return 1;
+//	}
 
 	cl::Kernel add(program, "add");
 
@@ -128,13 +117,13 @@ static const char source[] =
 
 	// Should get '3' here.
 	std::cout << c[42] << std::endl;
-    } catch (const cl::Error &err) {
-	std::cerr
-	    << "OpenCL error: "
-	    << err.what() << "(" << err.err() << ")"
-	    << std::endl;
-	return 1;
-    }
+  //  } catch (const cl::Error &err) {
+//	std::cerr
+//	    << "OpenCL error: "
+//	    << err.what() << "(" << err.err() << ")"
+//	    << std::endl;
+//	return 1;
+ //   }
     
 return 0;
 }
