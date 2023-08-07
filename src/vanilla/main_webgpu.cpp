@@ -1,5 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
-using namespace cl;
+using namespace ::cl;
 
 int cltest(){
     
