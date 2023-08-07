@@ -8,11 +8,12 @@
 // namespace compute = boost::compute;
 
 int cltest(){
-// get the default device
-//  CLContext* ctx = getCLContext();
-// print the device's name and platform
-// std::cout << "Hello from " << CLdevice.name();
-// std::cout << " (Platform: " << CLdevice.platform().name() << ")" << std::endl;
+  // Check if the header is included.
+  if (cl_khr_icd) {
+    // The header is included.
+  } else {
+    // The header is not included.
+  }
 return 0;
 }
 
@@ -610,6 +611,7 @@ WGPU_Run2();
 int main(void){
 testtr();
 js_main();
+    cltest();
 // sleep(1);
 // WGPU_Start();
 return 0;
