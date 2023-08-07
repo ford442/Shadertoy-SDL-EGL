@@ -75,9 +75,7 @@ const char *source =
 	cl::CommandQueue queue(context, device[0]);
 
 	// Compile OpenCL program for found device.
-	cl::Program program(context, cl::Program::Sources(
-		    1, std::make_pair(source, strlen(source))
-		    ));
+	cl::Program program(context,source,NULL);
 
 //	try {
 	    program.build(device);
