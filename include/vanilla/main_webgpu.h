@@ -62,7 +62,12 @@ typedef ResultType result_type;
 #include <functional>
 #include <boost/function.hpp>
 
+#define __CL_ENABLE_EXCEPTIONS
+
+extern "C" {
 #include <CL/cl.h>
+}
+
 #include <CL/opencl.hpp>
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp>
