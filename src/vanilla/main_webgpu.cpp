@@ -73,7 +73,7 @@ static const char source[] =
 
 	// Compile OpenCL program for found device.
 	cl::Program program(context, cl::Program::Sources(
-		    1, std::make_pair(source, strlen(source.c_str()))
+		    1, std::make_pair(source, strlen(source))
 		    ));
 
 //	try {
