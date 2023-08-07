@@ -37,6 +37,7 @@ void pl();
 #include <boost/atomic.hpp>
 #include <boost/tuple/tuple.hpp>
 // #include <boost/integer.hpp>
+#include <boost/function.hpp>
 
 #include <cstdint>
 #include <SDL2/SDL.h>
@@ -123,7 +124,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-std::function<void()>plt=[this](){
+boost::function<void()>plt=[this](){
 // void plt(){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
