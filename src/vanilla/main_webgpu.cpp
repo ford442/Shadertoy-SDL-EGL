@@ -22,7 +22,9 @@ static const char source[] =
     "       c[i] = a[i] + b[i];\n"
     "    }\n"
     "}\n";
-
+	
+std::string source_string;
+source_string.assign(source, strlen(source));
 
   const size_t N = 1 << 20;
 
@@ -75,7 +77,7 @@ static const char source[] =
 
 	// Compile OpenCL program for found device.
 	cl::Program program(context, cl::Program::Sources(
-		    1, std::make_pair(source, strlen(source.c_str()))
+		    1, std::make_pair(source, strlen(source_string))
 		    ));
 
 //	try {
