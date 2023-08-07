@@ -70,7 +70,7 @@ b3_vanilla_webgpu:
 	 emcc src/vanilla/main_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc main_webgpu.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
-	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=1 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_ERRNO=0 -jsDWEBGPU_NO_BW_COMPAT=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
