@@ -44,11 +44,11 @@ private:
 
 std::random_device rd;
 v128_t Dr;
-int32_t Th=0,rD=0;
+int rD=0;
 
 public:
 
-inline v128_t rNd(int32_t Th){
+inline v128_t rNd(int Th){
 tie(Th,rD,Dr);
 std::srand(rd());
 rD=std::rand()%Th;
@@ -61,8 +61,8 @@ return Dr;
 extern "C"{
   
 v128_t Rg;
-int32_t c=0;
+int c=0;
 
-int32_t r4nd(int32_t);
+int r4nd(int);
 
 }
