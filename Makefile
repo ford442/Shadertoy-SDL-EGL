@@ -78,7 +78,7 @@ b3_vanilla_webgpu:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
+	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js  -lOpenCL
 
 b3_vanilla_render:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
