@@ -14,6 +14,7 @@ typedef ResultType result_type;
 
 #include <CL/cl.h>
 #include <boost/function.hpp>
+#include <boost/function_equal.hpp>
 
 // using floaT=std::experimental::native_simd<float>;
 
