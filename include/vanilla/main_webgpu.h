@@ -11,7 +11,7 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
 #include <algorithm>
-#include <cstring>
+#include <string>
 #include <stdarg.h>
 #include <stdio.h>
 #include <cstdint>
