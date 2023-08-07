@@ -12,6 +12,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
+#include <CL/cl.h>
 #include <boost/function.hpp>
 
 // using floaT=std::experimental::native_simd<float>;
