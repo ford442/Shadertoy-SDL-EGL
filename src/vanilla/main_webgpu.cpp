@@ -2,7 +2,7 @@
 
 int cltest(){
     
-static const char source[] =
+static  char source[] =
     "#if defined(cl_khr_fp64)\n"
     "#  pragma OPENCL EXTENSION cl_khr_fp64: enable\n"
     "#elif defined(cl_amd_fp64)\n"
