@@ -1,5 +1,16 @@
 #include "../../include/vanilla/main_webgpu.h"
 
+namespace cl {
+  class Error {
+  public:
+    Error() {}
+    Error(const std::string& message) : message_(message) {}
+    const std::string& message() const { return message_; }
+  private:
+    std::string message_;
+  };
+}
+
 int cltest(){
     
 static const char source[] =
