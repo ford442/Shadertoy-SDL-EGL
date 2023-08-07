@@ -83,7 +83,7 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
 // namespace compute = boost::compute;
 
-int cltest();
+// int cltest();
 
 extern"C"{
 
