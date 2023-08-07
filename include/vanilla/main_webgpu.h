@@ -59,7 +59,7 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <CL/cl.hpp>
+#include <CL/cl.h>
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
