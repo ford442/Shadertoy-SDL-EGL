@@ -7,7 +7,7 @@ STDS += -std=gnu17 -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu+
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -wasm-enable-eh -Og -fmerge-all-constants -ffast-math -ffp-contract=off \
+COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -Og -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
@@ -21,7 +21,7 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=128mb -sUSE_GLFW
 LINK_FLAGS += $(LDFLAGS) -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
-	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell \
+	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt
 
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
