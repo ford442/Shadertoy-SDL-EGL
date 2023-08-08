@@ -1,5 +1,12 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 #include <boost/config.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
@@ -21,13 +28,6 @@
 #include <algorithm>
 #include <experimental/simd>
 // using unary_function = std::unary_function;
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
 
 #include <CL/cl.h>
 
