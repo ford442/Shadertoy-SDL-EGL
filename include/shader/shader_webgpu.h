@@ -1,5 +1,8 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/shader/boost_defs.h"
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include "../../include/shader/defs.h"
 
 template<class ArgumentType,class ResultType>
 
@@ -7,6 +10,8 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+
+#define register
 
 #include <boost/config.hpp>
 #include <boost/context/detail/tuple.hpp>
@@ -24,30 +29,13 @@ typedef ResultType result_type;
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
 #include <boost/chrono.hpp>
-
 #include <functional>
 #include <algorithm>
 #include <experimental/simd>
-// using unary_function = std::unary_function;
-
-#include <CL/cl.h>
-
-// using floaT=std::experimental::native_simd<float>;
-
-// #include <boost/context/fiber.hpp>
-
-#define register
-
-// #include <SYCL/sycl.hpp>
-
-// #include <boost/compute/algorithm.hpp>
-
-#include "../../include/shader/defs.h"
 #include <random>
 #include <cfloat>
 #include <math.h>
 #include <new>
-
 #include <algorithm>
 #include <cstring>
 #include <stdarg.h>
@@ -64,24 +52,6 @@ typedef ResultType result_type;
 #include "../../include/shader/egl.h"
 // #include "../../include/shader/intrins.h"
 #include "../../lib/lib_webgpu.h"
-#include <emscripten/html5.h>
-#include <emscripten.h>
-
-#include <tbb/tbb.h>
-#include <tbb/parallel_for.h>
-#include <tbb/parallel_reduce.h>
-#include <tbb/parallel_scan.h>
-#include <tbb/task_arena.h>
-
-// #include "/usr/local/include/tbb/include/oneapi/tbb/task_arena.h"
-// #include <oneapi/tbb/detail/_export.h>
-
-// #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_config.h"
-// #include "/usr/local/include/tbb/include/oneapi/tbb/detail/_namespace_injection.h"
-
-// #include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
-// #include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
-// #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
 extern "C"{
 
@@ -177,7 +147,7 @@ inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump int;\n"
+"precision highp int;\n"
 "precision highp float;\n"
 "precision mediump sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
