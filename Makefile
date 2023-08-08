@@ -69,7 +69,7 @@ b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c $(STDS) $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
 	 em++ main_webgpu.o -O3 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
-	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -I/usr/lib/x86_64-linux/lib/ -llibOpenCL \
+	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -I/usr/lib/x86_64-linux/lib/ \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=1 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_ERRNO=0 -jsDWEBGPU_NO_BW_COMPAT=1 \
