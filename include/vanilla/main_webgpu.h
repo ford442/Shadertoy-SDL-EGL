@@ -71,6 +71,7 @@ typedef ResultType result_type;
 
 #include <CL/opencl.hpp>
 #include <CL/cl_platform.h>
+#include <CL/cl_version.h>
 // #include "../../include/CL/opencl.hpp"
 // #include "../../include/CL/cl_platforms.h"
 
