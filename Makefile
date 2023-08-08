@@ -67,7 +67,7 @@ video_resurection_webgpu:
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ /usr/include/CL/opencl.hpp -std=c++17 -static -DCL_HPP_TARGET_OPENCL_VERSION=2
+	 em++ /usr/include/CL/opencl.hpp -std=c++17 -static -DCL_HPP_TARGET_OPENCL_VERSION=200
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
 	 em++ main_webgpu.o -O3 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -LOPENCL -o w3001.js \
 	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
