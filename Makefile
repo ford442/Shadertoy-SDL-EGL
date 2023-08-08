@@ -7,7 +7,7 @@ STDS += -std=gnu17 -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu+
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -Og -fmerge-all-constants -ffast-math -ffp-contract=off \
+COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
@@ -15,14 +15,14 @@ COMMON_FLAGS += -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -Og -fmerge-all-co
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=4gb -sUSE_GLFW=3 \
--sGL_POOL_TEMP_BUFFERS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=2gb -sUSE_GLFW=3 \
+-sGL_POOL_TEMP_BUFFERS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
 LINK_FLAGS += $(LDFLAGS) -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' -sDYNAMIC_EXECUTION=2 \
+	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
-	 -sALLOW_MEMORY_GROWTH=1 --output_eol linux -sMALLOC=emmalloc -mllvm -mtune=haswell \
-	 --memory-init-file 0 -rtlib=compiler-rt -DEMMALLOC_USE_64BIT_OPS=1
+	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell \
+	 --memory-init-file 0 -rtlib=compiler-rt
 
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
@@ -133,8 +133,8 @@ b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
-	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL -sWASM_MEM_MAX=1024MB -sDEMANGLE_SUPPORT=0 \
-	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sMAXIMUM_MEMORY=4gb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 \
+	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL -sDEMANGLE_SUPPORT=0 \
+	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sPRECISE_F32=1 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
