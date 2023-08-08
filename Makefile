@@ -19,7 +19,7 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=2gb -sUSE_GLFW=3
 -sGL_POOL_TEMP_BUFFERS=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
 LINK_FLAGS += $(LDFLAGS) -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' \
+	 -march=haswell -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' -sDYNAMIC_EXECUTION=2 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell \
 	 --memory-init-file 0 -rtlib=compiler-rt
