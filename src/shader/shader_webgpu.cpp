@@ -7,7 +7,7 @@ Run run;
 // }
 
 boost::function<void()>strtr=[](){
-void strtr(){
+// void strtr(){
 // tbb::task_group g;
   //  g.run(strtt);
   //  g.wait();
