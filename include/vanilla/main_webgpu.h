@@ -62,8 +62,10 @@ typedef ResultType result_type;
 #include <functional>
 #include <boost/function.hpp>
 
-// #define CL_HPP_TARGET_OPENCL_VERSION 300
-// #include <CL/opencl.hpp>
+#define CL_HPP_TARGET_OPENCL_VERSION 300
+#define CL_HPP_MINIMUM_OPENCL_VERSION 300
+#include <CL/opencl.hpp>
+
 // #include <CL/cl.h>
 
 // #include <boost/compute/cl.hpp>
