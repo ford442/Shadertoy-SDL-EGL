@@ -2,16 +2,18 @@
 
 Run run;
 
-void strtt(){
-run.strt();
-}
+// void strtt(){
+// run.strt();
+// }
 
+boost::function<void()>strtr=[](){
 void strtr(){
 // tbb::task_group g;
   //  g.run(strtt);
   //  g.wait();
-  strtt();
-}
+  run.strt();
+//  strtt();
+};
 
 extern "C" {
 
