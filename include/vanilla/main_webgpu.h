@@ -62,8 +62,8 @@ typedef ResultType result_type;
 #include <functional>
 #include <boost/function.hpp>
 
-// #include <CL/opencl.hpp>
-#include <CL/cl.h>
+#include <CL/opencl.hpp>
+// #include <CL/cl.h>
 
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp>
