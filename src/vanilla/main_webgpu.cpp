@@ -1,6 +1,8 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 int cltest(){
+      
+    cl_device_id device_id = NULL;   
 
 }
 
