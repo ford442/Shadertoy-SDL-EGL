@@ -2,7 +2,6 @@
 
 int cltest(){
 
-
 }
 
 extern"C"{
