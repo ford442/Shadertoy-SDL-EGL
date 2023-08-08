@@ -1086,7 +1086,7 @@ return results;
 return nullptr;
 }
 
-  setFloats.reset(new std::pmr::vector<void>());
+ // setFloats.reset(new std::pmr::vector<void>());
 
 boost::function<void()>strtt=[this](){
 
