@@ -1,5 +1,22 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+
+#include <boost/config.hpp>
+#include <boost/context/detail/tuple.hpp>
+#include <boost/function.hpp>
+#include <boost/function_equal.hpp>
+#include <boost/atomic.hpp>
 #include <boost/cstdint.hpp>
+#include <boost/integer.hpp>
+#include <boost/lockfree/spsc_queue.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/compute/cl.hpp>
+#include <boost/compute/core.hpp>
+#include <boost/compute/interop/opengl.hpp>
+#include <boost/chrono.hpp>
+
 #include <functional>
 #include <algorithm>
 #include <experimental/simd>
@@ -13,27 +30,20 @@ typedef ResultType result_type;
 };
 
 #include <CL/cl.h>
-#include <boost/function.hpp>
-#include <boost/function_equal.hpp>
+
 
 // using floaT=std::experimental::native_simd<float>;
 
-#include <boost/context/detail/tuple.hpp>
-
-#include <boost/lockfree/spsc_queue.hpp>
-#include <boost/atomic.hpp>
 // #include <boost/context/fiber.hpp>
 
 #define register
 
 // #include <SYCL/sycl.hpp>
 
-#include <boost/compute/cl.hpp> 
-#include <boost/compute/core.hpp> 
+
 
 // #include <boost/compute/algorithm.hpp>
 
-#include <boost/compute/interop/opengl.hpp>
 
 #include "../../include/shader/defs.h"
 #include "../../include/shader/boost_defs.h"
@@ -41,13 +51,7 @@ typedef ResultType result_type;
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include <boost/integer.hpp>
-#include <boost/atomic.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/tuple/tuple.hpp>
-#include <boost/chrono.hpp>
+
 #include <algorithm>
 #include <cstring>
 #include <stdarg.h>
