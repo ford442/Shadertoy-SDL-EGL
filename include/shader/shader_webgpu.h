@@ -1,4 +1,5 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+#include "../../include/shader/boost_defs.h"
 
 template<class ArgumentType,class ResultType>
 
@@ -31,7 +32,6 @@ typedef ResultType result_type;
 
 #include <CL/cl.h>
 
-
 // using floaT=std::experimental::native_simd<float>;
 
 // #include <boost/context/fiber.hpp>
@@ -40,13 +40,9 @@ typedef ResultType result_type;
 
 // #include <SYCL/sycl.hpp>
 
-
-
 // #include <boost/compute/algorithm.hpp>
 
-
 #include "../../include/shader/defs.h"
-#include "../../include/shader/boost_defs.h"
 #include <random>
 #include <cfloat>
 #include <math.h>
