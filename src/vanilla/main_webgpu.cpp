@@ -1,9 +1,5 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-    #define CL_HPP_TARGET_OPENCL_VERSION 200
-
-
-
 int cltest(){
 const char *source = 
     "#if defined(cl_khr_fp64)\n"
