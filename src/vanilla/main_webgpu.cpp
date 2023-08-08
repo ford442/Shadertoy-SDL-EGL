@@ -1,7 +1,8 @@
 #include "../../include/vanilla/main_webgpu.h"
 
+    #define CL_HPP_TARGET_OPENCL_VERSION 200
 
-extern"C"{
+
 
 int cltest(){
 const char *source = 
@@ -130,6 +131,7 @@ const char *source =
 return 0;
 }
 
+extern"C"{
 
 #define CHECK_STATUS(return_status)                                                      \
     if (return_status != OK) {                                                           \
