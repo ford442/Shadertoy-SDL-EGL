@@ -67,7 +67,7 @@ typedef ResultType result_type;
 #include <CL/opencl.hpp>
 // #include <CL/cl.h>
 
-#include <boost/compute/cl.hpp> 
+// #include <boost/compute/cl.hpp>
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
 
