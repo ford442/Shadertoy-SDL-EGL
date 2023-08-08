@@ -1,21 +1,11 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
-//OpenCL headers
-
 int cltest(){
 
 
 }
 
 extern"C"{
-
-#define CHECK_STATUS(return_status)                                                      \
-    if (return_status != OK) {                                                           \
-        fprintf(stderr, "[ERROR] return status %d, line %d\n", return_status, __LINE__); \
-    }
 
 void testtr(){
       // Create an OpenVINO Runtime object.
