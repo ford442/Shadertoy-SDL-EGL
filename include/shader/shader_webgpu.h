@@ -660,6 +660,7 @@ std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::e
 Sh.at(2,1)=VBO;
 return;
 };
+
 boost::function<void()>setFloats=[](){
 // const void setFloats(){
 Fi.at(0,0)=1.0f;
@@ -1081,8 +1082,9 @@ return results;
 return nullptr;
 }
 
+  setFloats.reset(new std::pmr::vector<void>());
+
 boost::function<void()>strtt=[this](){
-  setFloats.reset(new std::pmr::vector<int>());
 
 // void strt(){
 /*  
