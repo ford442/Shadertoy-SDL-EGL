@@ -62,11 +62,8 @@ typedef ResultType result_type;
 #include <functional>
 #include <boost/function.hpp>
 
-    #define CL_HPP_ENABLE_EXCEPTIONS
-    #define CL_HPP_TARGET_OPENCL_VERSION 200
-
-#include <CL/opencl.hpp>
-// #include <CL/cl.h>
+// #include <CL/opencl.hpp>
+#include <CL/cl.h>
 
 #include <boost/compute/cl.hpp> 
 #include <boost/compute/core.hpp>
