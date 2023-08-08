@@ -71,9 +71,9 @@ typedef ResultType result_type;
 
 #include <CL/opencl.hpp>
 // #include <CL/cl.h>
-#include "../../include/CL/opencl.h"
+// #include "../../include/CL/opencl.h"
 
-#include <CL/cl.h>
+// #include <CL/cl.h>
 
 #include <boost/compute/cl.hpp>
 #include <boost/compute/core.hpp>
