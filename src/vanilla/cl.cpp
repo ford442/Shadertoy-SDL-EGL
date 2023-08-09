@@ -1,6 +1,6 @@
 #include "../../include/vanilla/cl.h"
 
-int main(){
+int testclcl(){
   
 cl_device_id device;
   cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, NULL);
