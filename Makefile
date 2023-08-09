@@ -54,7 +54,7 @@ video_resurection_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc resurection_jebus_webgpu.o -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
+	 emcc resurection_jebus_webgpu.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
 	 -sINITIAL_MEMORY=512mb -sALLOW_MEMORY_GROWTH=0 \
 	 -sUSE_SDL=2 -sPRECISE_F32=1 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
@@ -65,11 +65,11 @@ video_resurection_webgpu:
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
 
 b3_vanilla_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/cl.cpp $(STDS) -static
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -fPIC -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -fPIC -static
+	 em++ src/vanilla/cl.cpp $(STDS) -fPIC -static
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
-	 em++ main_webgpu.o -sDEMANGLE_SUPPORT=0 -O3 -fPIC -fPIE -DCL -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
+	 em++ main_webgpu.o -sDEMANGLE_SUPPORT=0 -O3 -DCL -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
