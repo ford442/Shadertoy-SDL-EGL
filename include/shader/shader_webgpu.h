@@ -51,7 +51,6 @@ typedef ResultType result_type;
 // #include "../../include/shader/intrins.h"
 #include "../../lib/lib_webgpu.h"
 
-
  EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
@@ -67,7 +66,7 @@ EGL_NONE,EGL_NONE
 
 EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,4,
-EGL_CONTEXT_MINOR_VERSION_KHR,7,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -113,7 +112,6 @@ EGL_MIPMAP_LEVEL,4,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_NONE,EGL_NONE
 };
-
 
 extern "C"{
 
@@ -355,7 +353,6 @@ uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
 uint32_t InputBufferBytes=262144*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -682,19 +679,16 @@ return;
 };
 
 std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
-// const void VCOin(boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 };
 
 std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
-// const void VBOin(boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 };
 
 boost::function<void()>setFloats=[](){
-// const void setFloats(){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -707,42 +701,34 @@ return;
 };
 
 static inline boost::function<float()>gF=[](){
-// static inline float gF(){
 return Fi.at(0,0);
 };
 
 static inline boost::function<float()>gF5=[](){
-// static inline float gF5(){
 return Fi.at(1,2);
 };
 
 static inline boost::function<float()>gFm1=[](){
-// static inline float gFm1(){
 return Fi.at(0,1);
 };
 
 static inline boost::function<float()>gFm5=[](){
-// static inline float gFm5(){
 return Fi.at(2,0);
 };
 
 static inline boost::function<float()>gF0=[](){
-// static inline float gF0(){
 return Fi.at(1,1);
 };
 
 static inline boost::function<boost::compute::double_()>gD=[](){
-// static inline boost::compute::double_ gD(){
 return Di.at(0,0);
 };
 
 static inline boost::function<boost::compute::double_()>gDm1=[](){
-// static inline boost::compute::double_ gDm1(){
 return Di.at(0,1);
 };
 
 static inline boost::function<boost::compute::double_()>gD0=[](){
-// static inline boost::compute::double_ gD0(){
 return Di.at(1,1);
 };
 
@@ -750,8 +736,6 @@ return Di.at(1,1);
 
 const inline unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 const unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-// const unsigned char indc[24]={gu0,gu1,gu2,gu3,gu2,gu3,gu7,gu6,gu6,gu7,gu5,gu4,gu4,gu5,gu1,gu0,gu5,gu7,gu3,gu1,gu0,gu2,gu6,gu4};
-// const unsigned char indc[10]={gu0,gu1,gu2,gu3,gu4,gu5,gu6,gu7,gu8,gu9};
 inline GLint uni_srate=0,uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res[4]={},smp_chn[5],uni_frm=0;
 inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
 inline GLfloat uni_chn_tme[4];
@@ -780,7 +764,6 @@ inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
 const int ele=36;
-// const int ele=25;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
@@ -827,7 +810,6 @@ char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 char * cm_hdr=cm_hdr_src;
-
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
@@ -996,7 +978,6 @@ glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
 
   // webgpu
-
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
@@ -1011,16 +992,13 @@ i_date.at(1,1)+=int(d_time.at(0,0));
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 /*
 int tfrm=(uni_i.at(0,0)%4);
-
 if(uni_i.at(0,0)%45==0){
 raN=rNd4(3);
 WGPU_Run();   //  launch WebGPU
 glUniform1i(smp_chn[raN],raN);
 // glBindTexture(GL_TEXTURE_2D,0);
 }
-
 if(uni_i.at(0,0)%15==0){
-  
 raN=rNd4(3);
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -1046,12 +1024,10 @@ glUniform1i(smp_chn[raN],raN);
  */
   
 glUniform1i(uni_frm,uni_i.at(0,0));
-  
 return;
 }
 
 boost::function<void()>swap=[](){
-// static void swap(){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
@@ -1110,48 +1086,14 @@ return results;
 return nullptr;
 }
 
- // setFloats.reset(new std::pmr::vector<void>());
-
 boost::function<void()>strtt=[this](){
-
-// void strt(){
-/*  
-tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
-
-m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
-
- m_arena.initialize();
-
-m_arena.enqueue([&]() {
-    // Do some work.
-std::cout << "Hello world!" << std::endl;
-});
-*/
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
-/*
-const Vertex vrt[10]={
-{gpu.gFm5(),gpu.gFm5(),gpu.gF5()},
-{gpu.gF0(),gpu.gF0(),gpu.gF5()},
-{gpu.gF5(),gpu.gF5(),gpu.gF()},
-{gpu.gF(),gpu.gF5(),gpu.gFm5()},
-{gpu.gF5(),gpu.gF(),gpu.gF0()},
-{gpu.gF5(),gpu.gF5(),gpu.gF5()},
-{gpu.gF(),gpu.gF(),gpu.gFm5()},
-{gpu.gFm5(),gpu.gF5(),gpu.gF0()},
-{gpu.gF0(),gpu.gFm5(),gpu.gF5()},
-{gpu.gF5(),gpu.gF0(),gpu.gF()}
-};
-*/
-  // old
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
-  // ai
-// const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gFm1()},{gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gFm1()},{gpu.gF(),gpu.gFm1(),gpu.gFm1()},{gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1()}};
-// const Vertex vrt[8]={{gpu.gDm1(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gD(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()},{gpu.gDm1(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gDm1(),gpu.gDm1(),gpu.gD()},{gpu.gD(),gpu.gD(),gpu.gDm1(),gpu.gD()},{gpu.gDm1(),gpu.gD(),gpu.gD(),gpu.gD()}};
 ::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,iFps,Si,sse3);
 ::boost::tuples::tie(cntx,mms);
@@ -1185,14 +1127,12 @@ attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=3;
+attr.majorVersion=4;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-
 glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1290,7 +1230,6 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
   /// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  
  eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
@@ -1336,6 +1275,7 @@ auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
 auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
+
    // Boost Compute / Interop / OpenGL
 boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::vertex_array_object vertex_array(CLdevice);
@@ -1353,7 +1293,6 @@ gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
-
 // nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
