@@ -21,6 +21,20 @@
 */
 
 #include "../../include/shader/intrins.h"
+#include <functional>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
+#define register
+
+#include <boost/config.hpp>
+#include <boost/preprocessor.hpp>
+#include <boost/function.hpp>
 #include "boost/tuple/tuple.hpp"
 #include <random>
 #include <cstdlib>
@@ -249,7 +263,8 @@ pnnl.addEventListener('keydown',Key);
 
 }
 
-static inline void(*jss)(){&js_main};
+// static inline void(*jss)(){&js_main};
+static inline boost::function<void()>jss=[](){js_main();};
 
 int rD=0,Rg=0,nm=0;
 
