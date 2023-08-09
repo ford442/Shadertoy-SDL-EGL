@@ -7,7 +7,8 @@ cl_device_id device;
 cl_program program;
 cl_error error;
   cl_kernel kernel = clCreateKernel(program, "add", NULL);
-  // Create an OpenCL buffer to store the input vectors.
+ /*
+// Create an OpenCL buffer to store the input vectors.
   cl_mem input_vector_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_ALLOC_HOST_PTR, sizeof(float) * 2, NULL, &error);
   // Create an OpenCL buffer to store the output vector.
   cl_mem output_vector_buffer = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_ALLOC_HOST_PTR, sizeof(float) * 2, NULL, &error);
@@ -21,6 +22,7 @@ cl_error error;
   // Check for errors.
   if (error != CL_SUCCESS) {
     fprintf(stderr, "Error creating OpenCL context: %d\n", error);
+    */
     return 1;
 }
 
