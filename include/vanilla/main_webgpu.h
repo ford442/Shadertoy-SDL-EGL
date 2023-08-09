@@ -68,6 +68,8 @@ typedef ResultType result_type;
 #include <functional>
 #include <boost/function.hpp>
 
+#include <boost/compute/cl.hpp>
+
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
 
