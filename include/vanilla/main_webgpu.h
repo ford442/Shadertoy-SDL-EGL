@@ -15,7 +15,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <cstdint>
-#include <stdlib.h>
 #include <climits>
 #include <ctime>
 #include <vector>
@@ -30,15 +29,13 @@
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
-/*
+
+#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
-#include <thrust/transform.h>
-#include <thrust/sequence.h>
-#include <thrust/copy.h>
-#include <thrust/fill.h>
-#include <thrust/replace.h>
-*/
+#include <thrust/generate.h>
+#include <thrust/reduce.h>
 #include <thrust/functional.h>
+#include <cstdlib>
 
 // #include "../../include/vanilla/openvino/runtime/runtime.hpp"
 // #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
