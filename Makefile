@@ -65,7 +65,7 @@ video_resurection_webgpu:
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
 
 b3_vanilla_webgpu:
-	 export C_INCLUDE_PATH=/usr/include
+	 export C_INCLUDE_PATH=/usr/include/
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
