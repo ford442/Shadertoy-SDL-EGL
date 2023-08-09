@@ -65,9 +65,9 @@ video_resurection_webgpu:
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
 
 b3_vanilla_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -fPIC -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -fPIC -static
-	 em++ src/vanilla/cl.cpp $(STDS) -fPIC -static
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -static
+	 em++ src/vanilla/cl.cpp $(STDS) -fPIC
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
 	 em++ main_webgpu.o -sDEMANGLE_SUPPORT=0 -O3 -DCL -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
