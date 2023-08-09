@@ -1,6 +1,6 @@
 #include "../../include/vanilla/cl.h"
 
-void testclcla(){
+void testclcl(){
 cl_device_id device;
   cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, NULL);
   // Create an OpenCL kernel.
@@ -26,10 +26,3 @@ cl_error error;
     return;
 }
 
-extern"C"{
-
-void testclcl(){
-testclcla();
-}
-
-}
