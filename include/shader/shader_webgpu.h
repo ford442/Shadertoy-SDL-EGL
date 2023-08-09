@@ -3,6 +3,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include "../../include/shader/defs.h"
+#include <functional>
 
 template<class ArgumentType,class ResultType>
 
@@ -25,18 +26,16 @@ typedef ResultType result_type;
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
-#include <boost/compute/cl.hpp>
-#include <boost/compute/core.hpp>
-#include <boost/compute/interop/opengl.hpp>
+// #include <boost/compute/cl.hpp>
+// #include <boost/compute/core.hpp>
+// #include <boost/compute/interop/opengl.hpp>
 #include <boost/chrono.hpp>
-#include <functional>
 #include <algorithm>
 #include <experimental/simd>
 #include <random>
 #include <cfloat>
 #include <math.h>
 #include <new>
-#include <algorithm>
 #include <cstring>
 #include <stdarg.h>
 #include <stdio.h>
@@ -46,7 +45,6 @@ typedef ResultType result_type;
 #include <iostream>
 #include <ctime>
 #include <vector>
-#include <functional>
 #include <cassert>
 // #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
