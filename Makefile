@@ -15,7 +15,7 @@ COMMON_FLAGS += -flto=thin -mno-tail-call -sDISABLE_EXCEPTION_CATCHING=1 -Og -fm
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sGL_MAX_TEMP_BUFFER_SIZE=128mb -sUSE_GLFW=3 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=3 \
 -sGL_POOL_TEMP_BUFFERS=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
 LINK_FLAGS += $(LDFLAGS) -DISABLE_EXCEPTION_CATCHING=1 --use-preload-plugins --closure 0 --closureFriendly \
@@ -129,11 +129,11 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
 	 em++ $(STDS) lib/lib_webgpu.cpp -static
 	 em++ $(STDS) include/shader/intrins.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
+	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
-	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL -sDEMANGLE_SUPPORT=0 \
+	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGLH -sDEMANGLE_SUPPORT=0 \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb \
 	 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
