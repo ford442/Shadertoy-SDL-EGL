@@ -13,6 +13,11 @@ COMMON_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -Og -fm
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
 -mmutable-globals -mnontrapping-fptoint -msign-ext
 
+STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
+-ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
+-ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
+-fno-stack-protector -mmutable-globals -mnontrapping-fptoint -msign-ext
+
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=3 \
@@ -129,8 +134,8 @@ b3_vanilla_llvm:
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
 	 em++ $(STDS) lib/lib_webgpu.cpp -static
-	 em++ $(STDS) include/shader/intrins.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o glh.o -static
+	 em++ $(STDS) include/shader/intrins.h $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
+	 em++ $(STDS) include/shader/gl.h $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS)  -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o s3026.js main.o shader_webgpu.o $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
