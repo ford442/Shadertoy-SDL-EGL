@@ -23,7 +23,7 @@ cl_error error;
   if (error != CL_SUCCESS) {
     fprintf(stderr, "Error creating OpenCL context: %d\n", error);
     */
-    return 1;
+    return;
 }
 
 extern"C"{
