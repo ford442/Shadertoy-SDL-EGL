@@ -31,13 +31,12 @@
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
 
-#include <thrust/detail/config.h>
 #include <thrust/device_vector.h>
-// #include <thrust/transform.h>
-// #include <thrust/sequence.h>
-// #include <thrust/copy.h>
-// #include <thrust/fill.h>
-// #include <thrust/replace.h>
+#include <thrust/transform.h>
+#include <thrust/sequence.h>
+#include <thrust/copy.h>
+#include <thrust/fill.h>
+#include <thrust/replace.h>
 #include <thrust/functional.h>
 
 // #include "../../include/vanilla/openvino/runtime/runtime.hpp"
