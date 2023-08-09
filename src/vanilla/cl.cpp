@@ -1,5 +1,11 @@
 #include "../../include/vanilla/cl.h"
 
+extern "C" {
+
+void testclcl();
+
+}
+
 void testclcl(){
 cl_device_id device;
   cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, NULL);
