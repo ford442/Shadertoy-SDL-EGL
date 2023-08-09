@@ -68,7 +68,7 @@ b3_vanilla_webgpu:
 	 export C_INCLUDE_PATH=/usr/include/
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
+	 em++ src/vanilla/main_webgpu.cpp -I/usr/include -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
 	 em++ main_webgpu.o -sDEMANGLE_SUPPORT=0 -O3 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=1 \
