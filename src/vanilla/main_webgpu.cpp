@@ -1,10 +1,11 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 int cltest(){
-cl_device device;
+cl_device_id device;
   cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, NULL);
   // Create an OpenCL kernel.
 cl_program program;
+cl_error error;
   cl_kernel kernel = clCreateKernel(program, "add", NULL);
   // Create an OpenCL buffer to store the input vectors.
   cl_mem input_vector_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_ALLOC_HOST_PTR, sizeof(float) * 2, NULL, &error);
