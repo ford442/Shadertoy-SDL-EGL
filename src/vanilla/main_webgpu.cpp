@@ -6,7 +6,7 @@ int cltest(){
   std::generate(h_vec.begin(), h_vec.end(), rand);
   // transfer to device and compute sum
 thrust::device_vector<int> d_vec = h_vec;
- int x = thrust::reduce(d_vec.begin(), d_vec.end(), 0, thrust::plus<int>());
+// int x = thrust::reduce(d_vec.begin(), d_vec.end(), 0, thrust::plus<int>());
   return 0;
 }
 
