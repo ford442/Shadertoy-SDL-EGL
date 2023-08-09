@@ -1,7 +1,6 @@
 #include "../../include/vanilla/cl.h"
 
-int testclcl(){
-  
+void testclcla(){
 cl_device_id device;
   cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, NULL);
   // Create an OpenCL kernel.
@@ -25,4 +24,12 @@ cl_error error;
     fprintf(stderr, "Error creating OpenCL context: %d\n", error);
     */
     return 1;
+}
+
+extern"C"{
+
+void testclcl(){
+testclcla();
+}
+
 }
