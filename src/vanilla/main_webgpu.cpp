@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 int cltest(){
-
+testclcl();
 }
 
 extern"C"{
