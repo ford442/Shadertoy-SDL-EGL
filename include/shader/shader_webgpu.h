@@ -65,7 +65,7 @@ EGL_NONE,EGL_NONE
 
 EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,4,
-EGL_CONTEXT_MINOR_VERSION_KHR,2,
+EGL_CONTEXT_MINOR_VERSION_KHR,6,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -842,8 +842,8 @@ static void i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.13;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.13;
+i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
 return;
 }
 
@@ -1123,7 +1123,7 @@ attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=4;
-attr.minorVersion=2;
+attr.minorVersion=6;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -1223,7 +1223,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_subroutine");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robust_buffer_access_behavior");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
   /// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
  eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
