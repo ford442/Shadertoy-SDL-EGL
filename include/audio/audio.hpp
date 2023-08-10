@@ -24,6 +24,13 @@ void pl();
 #include <math.h>
 #include <functional>
 
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
 #define BOOST_UBLAS_MOVE_SEMANTICS
@@ -37,13 +44,6 @@ void pl();
 #include <boost/atomic.hpp>
 #include <boost/tuple/tuple.hpp>
 // #include <boost/integer.hpp>
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
 
 #include <boost/function.hpp>
 
