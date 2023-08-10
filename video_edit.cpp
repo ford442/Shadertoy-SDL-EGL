@@ -2,10 +2,20 @@
 #include <emscripten/html5.h>
 
 #include <webgl/webgl2.h>
+
 #include <functional>
 
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
+#include <boost/function.hpp>
+
 // void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-std::function<void(int ,int ,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+boost::function<void(int ,int ,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
 
 //void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
@@ -812,6 +822,8 @@ emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
 
+static inline boost::function<void()>jsmain=[](){ma();};
+
 extern "C" {
 
 void str(){
@@ -825,7 +837,7 @@ return;
 }
 
 void b3(){
-ma();
+jsmain();
 return;
 }
 
