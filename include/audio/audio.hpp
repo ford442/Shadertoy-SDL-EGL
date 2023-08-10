@@ -95,7 +95,9 @@ SDL_AudioSpec request;
 
 public:
 
-static void snd_pos(boost::atomic<int> set){
+// static void snd_pos(boost::atomic<int> set){
+  static inline boost::function<boost::atomic<int>()>snd_pos=[](boost::atomic<int> set){
+
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
@@ -139,7 +141,7 @@ boost::function<void()>plt=[this](){
 ::boost::tuples::tie(bfr,request);
 request.freq=44100;
 request.format=AUDIO_S32;
-request.channels=2;
+request.channels=2;y
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
@@ -157,5 +159,5 @@ wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return;
 };
-  
+
 };
