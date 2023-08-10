@@ -95,7 +95,7 @@ SDL_AudioSpec request;
 
 public:
 
-static void snd_pos(boost::atomic<int> set){
+static void snd_pos_func(boost::atomic<int> set){
 // static inline boost::function<boost::atomic<int>>snd_pos_func=[](boost::atomic<int> set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
