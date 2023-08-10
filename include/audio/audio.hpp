@@ -142,7 +142,7 @@ boost::function<void()>plt=[this](){
 ::boost::tuples::tie(bfr,request);
 request.freq=44100;
 request.format=AUDIO_S32;
-request.channels=2;y
+request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 request.freq=44100;
