@@ -97,12 +97,12 @@ SDL_AudioSpec request;
 public:
 
 static void snd_pos_func(boost::atomic<int> set){
-// static inline boost::function<boost::atomic<int>>snd_pos_func=[](boost::atomic<int> set){
+// static inline boost::function<boost::atomic<int>>snd_pos_func=[](boost::atomic<int>(set)){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
-boost::function<void(boost::atomic<int>)>snd_pos=boost::bind(&snd_pos_func,boost::ref(boost::atomic<int>set));
+boost::function<void(boost::atomic<int>)>snd_pos=boost::bind(&snd_pos_func,boost::ref(boost::atomic<int>(set)));
 
 static void snd_lft(long long set){
 sse.at(0,1)=wasm_i64x2_splat(set);
