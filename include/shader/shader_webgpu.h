@@ -167,44 +167,19 @@ inline char wgl_cmp_src[2000]=
 
 inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-"#extension GL_ARB_gpu_shader4 : enable\n"
-"#extension GL_ARB_gpu_shader5 : enable\n"
-"#extension GL_ARB_gpu_shader_fp64 : enable\n"
-"#extension GL_ARB_vertex_attrib_64bit : enable\n"
-"#extension GL_NV_shader_buffer_load : enable\n"
-"#extension GL_ARB_color_buffer_float : enable\n"
-"#extension GL_ARB_shader_atomic_counters : enable\n"
-"#extension GL_OES_sample_shading : enable\n"
-"#extension GL_OES_vertex_half_float : enable\n"
-"#extension GL_ARB_multisample : enable\n"
-"#extension GL_ARB_shading_language_420pack : enable\n"
-"#extension GL_EXT_multisample_compatibility : enable\n"
-"#extension GL_OES_sample_shading : enable\n"
-"#extension GL_ARB_framebuffer_object : enable\n"
-"#extension GL_ARB_framebuffer_sRGB : enable\n"
-"#extension GL_NV_half_float : enable\n"
-"#extension GL_ARB_fragment_program : enable\n"
-"#extension GL_NV_fragment_program_option : enable\n"
-"#extension GL_NV_fragment_program : enable\n"
-"#extension GL_NV_fragment_program2 : enable\n"
-"#extension GL_EXT_sRGB_write_control : enable\n"
-"#extension GL_NV_float_buffer : enable\n"
-"#extension GL_EXT_bindable_uniform : enable\n"
-"#extension GL_EXT_geometry_shader4 : enable\n"
-"#extension GL_ARB_enhanced_layouts : enable\n"
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp atomic_uint)\n"
-"#pragma (precise none)\n"
+// "#pragma (precise none)\n"
 // "#pragma STDGL(strict off)\n"
 "#pragma optimize(on)\n"
 "#pragma debug(off)\n"
-"#pragma (invariant none)\n"
-"#pragma (centroid all)\n"
-"#pragma (sample all)\n"
+// "#pragma (invariant none)\n"
+// "#pragma (centroid all)\n"
+// "#pragma (sample all)\n"
 "#pragma (fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma (fastprecision on)\n"
@@ -215,7 +190,7 @@ inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 0\n"
-"precision mediump int;\n"
+"precision highp int;\n"
 "precision highp float;\n"
 "precision mediump sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
@@ -228,7 +203,6 @@ inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 inline char frg_hdr_src[1000]=
-
 "layout (std140) uniform uniBlock{uniform mediump float iSampleRate;uniform mediump float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform mediump float iTimeDelta;uniform lowp vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform mediump vec3 iResolution;"
@@ -243,8 +217,8 @@ inline char frg_ftr_src[420]=
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n";
 
 inline EM_BOOL ms_l,clk_l;
@@ -1253,7 +1227,6 @@ glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 // glDisable(GL_DITHER);
 glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
-glEnable(ARB_sRGB_framebuffer);
 // glDisable(GL_BLEND);
 glEnable(GL_STENCIL_TEST);
 // glDisable(GL_STENCIL_TEST);
