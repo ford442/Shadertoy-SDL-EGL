@@ -2,17 +2,12 @@
 
 Run run;
 
-// void strtt(){
-// run.strt();
-// }
-
 boost::function<void()>strtr=[](){
-// void strtr(){
-// tbb::task_group g;
-  //  g.run(strtt);
-  //  g.wait();
-  run.strt();
-//  strtt();
+run.strt();
+};
+
+boost::function<void()>swpp=[](){
+run.swap();
 };
 
 extern "C" {
@@ -23,7 +18,7 @@ return;
 }
 
 void swp(){
-run.swap();
+swpp();
 return;
 }
 
