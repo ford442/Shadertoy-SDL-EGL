@@ -38,6 +38,8 @@ typedef ResultType result_type;
 #define BOOST_UBLAS_USE_LONG_DOUBLE
 // #define BOOST_NO_EXCEPTIONS
 
+#include <boost/config.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
