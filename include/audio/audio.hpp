@@ -45,6 +45,7 @@ typedef ResultType result_type;
 #include <boost/tuple/tuple.hpp>
 // #include <boost/integer.hpp>
 
+#include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
 
 #include <cstdint>
