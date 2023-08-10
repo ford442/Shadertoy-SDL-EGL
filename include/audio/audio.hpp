@@ -102,6 +102,7 @@ sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return;
 }
+boost::atomic<int>set{0};
 boost::function<void(boost::atomic<int>)>snd_pos=boost::bind(&snd_pos_func,boost::ref(set));
 
 static void snd_lft(long long set){
