@@ -58,6 +58,8 @@
 // #include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
 // #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
+#include <functional>
+
 template<class ArgumentType,class ResultType>
 
 struct unary_function{
@@ -65,7 +67,6 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <functional>
 #include <boost/function.hpp>
 
 #include <boost/compute/cl.hpp>
