@@ -26,8 +26,10 @@
 #include <avxintrin.h>  // AVX
 
 #include <unistd.h>
-#include <GL/gl.h>
+// #include <GL/gl.h>
 
+#include <boost/config.hpp>
+#include <boost/preprocessor.hpp>
 #include "boost/tuple/tuple.hpp"
 
 using namespace ::boost::tuples;
