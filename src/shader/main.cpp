@@ -18,5 +18,5 @@ return RG;
 
 int main(void){
 jss();
-return 0;
+return;
 }
