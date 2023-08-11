@@ -807,10 +807,10 @@ return;
 };
 
 static void u_iTime_set(register boost::compute::double_ m80){
-// d_time.at(0,0)=set;
-// sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-sse2.at(0,0)=wasm_f64x2_splat(m80);
-// d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
+d_time.at(0,0)=m80;
+sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
+// sse2.at(0,0)=wasm_f64x2_splat(m80);
+d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
@@ -833,7 +833,7 @@ return;
 
 static void u_iTimeDelta_set(register boost::compute::double_ m64){
 sse.at(0,1)=wasm_f64x2_splat(m64);
-// d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
+d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
@@ -949,16 +949,16 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 else{
 clk_l=true;
 }
-// glUniform1f(uni_tme,d_time.at(0,0));
+glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+// glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
 // glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
-// glUniform1f(uni_tme_dlt,d_time.at(1,1));
-glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
+glUniform1f(uni_tme_dlt,d_time.at(1,1));
+// glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
 
   // webgpu
 const time_t timE=time(0);
@@ -971,7 +971,7 @@ int mi=datE->tm_min;
 int sc=datE->tm_sec;
 int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
 i_date.at(1,0)=dy;
-i_date.at(1,1)+=int(d_time.at(0,0));
+i_date.at(1,1)=shaderToySeconds;
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 /*
 int tfrm=(uni_i.at(0,0)%4);
@@ -1516,7 +1516,9 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 WGPU_Start();
 usleep(125);
-  
+
+    */
+ 
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -1531,16 +1533,21 @@ i_date.at(0,0)=yr;
 i_date.at(0,1)=mn;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
-// glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
+glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 // glUniform1f(uni_srate,44100.0f);
 
-  */
+
 glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[0],256.0f,256.0f,gpu.gF());
-glUniform3f(smp_chn_res[1],256.0f,256.0f,gpu.gF());
-glUniform3f(smp_chn_res[2],256.0f,256.0f,gpu.gF());
-glUniform3f(smp_chn_res[3],256.0f,256.0f,gpu.gF());
+glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform1i(smp_chn[0],0);
+glUniform1i(smp_chn[1],1);
+glUniform1i(smp_chn[2],2);
+glUniform1i(smp_chn[3],3);
+
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
