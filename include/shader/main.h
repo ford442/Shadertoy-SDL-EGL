@@ -263,7 +263,10 @@ pnnl.addEventListener('keydown',Key);
 
 }
 
-static inline boost::function<void()>jss=[](){js_main();};
+static inline boost::function<EM_BOOL()>jss=[](){
+js_main();
+return 1;
+};
 
 int rD=0,Rg=0,nm=0;
 
