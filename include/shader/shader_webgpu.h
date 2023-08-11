@@ -14,7 +14,7 @@ typedef ResultType result_type;
 
 #define register
 
-#include <boost/config.hpp>
+// #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
