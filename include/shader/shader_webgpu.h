@@ -115,8 +115,8 @@ EGL_NONE,EGL_NONE
 
 extern "C"{
 
-void str();
-void swp();
+EM_BOOL str(void);
+EM_BOOL swp(void);
 void ud();
 void uu();
 void vd();
@@ -655,23 +655,23 @@ private:
 
 public:
 
-std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+std::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 };
 
-std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+std::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 };
 
-std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+std::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 };
 
-boost::function<void()>setFloats=[](){
+boost::function<EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -800,13 +800,13 @@ GPU gpu;
 
 public:
 
-static void PRGin(register boost::uint_t<32>::exact m1){
+static EM_BOOL PRGin(register boost::uint_t<32>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return;
 };
 
-static void u_iTime_set(register boost::compute::double_ m80){
+static EM_BOOL u_iTime_set(register boost::compute::double_ m80){
 d_time.at(0,0)=m80;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 // sse2.at(0,0)=wasm_f64x2_splat(m80);
@@ -814,7 +814,7 @@ d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return;
 }
 
-static void u_iSize_set(boost::compute::double_ set){
+static EM_BOOL u_iSize_set(boost::compute::double_ set){
 sse.at(1,0)=wasm_f32x4_splat(set);
 t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
@@ -822,7 +822,7 @@ return;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
-static void i_iSize_set(int set){
+static EM_BOOL i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -831,13 +831,13 @@ i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
 return;
 }
 
-static void u_iTimeDelta_set(register boost::compute::double_ m64){
+static EM_BOOL u_iTimeDelta_set(register boost::compute::double_ m64){
 sse.at(0,1)=wasm_f64x2_splat(m64);
 d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return;
 }
 
-void uniUP(){
+EM_BOOL uniUP(){
 t_size.at(0,1)=t_size.at(0,1)*1.01;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
@@ -848,7 +848,7 @@ glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 return;
 }
 
-void uniDOWN(){
+EM_BOOL uniDOWN(){
 t_size.at(0,1)=t_size.at(0,1)*0.99;
 glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
@@ -859,43 +859,43 @@ glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 return;
 }
 
-static void viewUP(){
+static EM_BOOL viewUP(){
 i_size.at(0,1)=i_size.at(0,1)*1.5;
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-static void viewDOWN(){
+static EM_BOOL viewDOWN(){
 i_size.at(0,1)=i_size.at(0,1)/1.5;
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-static void moveDOWN(){
+static EM_BOOL moveDOWN(){
 i_view.at(0,0)=i_view.at(0,0)-1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-static void moveUP(){
+static EM_BOOL moveUP(){
 i_view.at(0,0)=i_view.at(0,0)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-static void moveLEFT(){
+static EM_BOOL moveLEFT(){
 i_view.at(0,1)=i_view.at(0,1)-1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
 
-static void moveRIGHT(){
+static EM_BOOL moveRIGHT(){
 i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return;
 }
   
-static void Rend(){
+static EM_BOOL Rend(){
  /// eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
