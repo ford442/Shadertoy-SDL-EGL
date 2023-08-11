@@ -31,6 +31,16 @@
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
 #include "boost/tuple/tuple.hpp"
+#include <functional>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
+#define register
 
 using namespace ::boost::tuples;
 
