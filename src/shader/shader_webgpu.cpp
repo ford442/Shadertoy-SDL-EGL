@@ -24,42 +24,42 @@ swpp();
 return 1;
 }
 
-EM_BOOL ud(void){
+EM_BOOL ud(){
 run.uniDOWN();
 return 1;
 }
 
-EM_BOOL uu(void){
+EM_BOOL uu(){
 run.uniUP();
 return 1;
 }
 
-EM_BOOL vd(void){
+EM_BOOL vd(){
 run.viewDOWN();
 return 1;
 }
 
-EM_BOOL vu(void){
+EM_BOOL vu(){
 run.viewUP();
 return 1;
 }
 
-EM_BOOL mu(void){
+EM_BOOL mu(){
 run.moveUP();
 return 1;
 }
 
-EM_BOOL md(void){
+EM_BOOL md(){
 run.moveDOWN();
 return 1;
 }
 
-EM_BOOL ml(void){
+EM_BOOL ml(){
 run.moveLEFT();
 return 1;
 }
 
-EM_BOOL mr(void){
+EM_BOOL mr(){
 run.moveRIGHT();
 return 1;
 }
