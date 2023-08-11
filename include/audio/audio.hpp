@@ -117,7 +117,7 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-static EM_BOOL SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
@@ -133,7 +133,7 @@ SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
-return EM_TRUE;
+return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
