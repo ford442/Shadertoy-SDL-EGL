@@ -655,7 +655,7 @@ private:
 
 public:
 
-boost::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
@@ -758,7 +758,7 @@ ms_l=true;
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
 }}
-return(EM_BOOL)1;
+return EM_TRUE;
 }
 
 EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -767,7 +767,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
 mms2.at(0,1)=e->clientY;
 }}
-return (EM_BOOL)1;
+return EM_TRUE;
 }
 
 static char * result=NULL;
