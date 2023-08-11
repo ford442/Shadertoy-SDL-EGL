@@ -3,64 +3,64 @@
 Run run;
 
 boost::function<EM_BOOL(void)>strtr=[](void){
-run.strt();
+run.strt(void);
 return EM_TRUE;
 };
 
 boost::function<EM_BOOL(void)>swpp=[](void){
-run.swap();
+run.swap(void);
 return EM_TRUE;
 };
 
 extern "C" {
 
-EM_BOOL str(){
-strtr();
+EM_BOOL str(void){
+strtr(void);
 return 1;
 }
 
-EM_BOOL swp(){
-swpp();
+EM_BOOL swp(void){
+swpp(void);
 return 1;
 }
 
-EM_BOOL ud(){
-run.uniDOWN();
+EM_BOOL ud(void){
+run.uniDOWN(void);
 return 1;
 }
 
-EM_BOOL uu(){
-run.uniUP();
+EM_BOOL uu(void){
+run.uniUP(void);
 return 1;
 }
 
-EM_BOOL vd(){
-run.viewDOWN();
+EM_BOOL vd(void){
+run.viewDOWN(void);
 return 1;
 }
 
-EM_BOOL vu(){
-run.viewUP();
+EM_BOOL vu(void){
+run.viewUP(void);
 return 1;
 }
 
-EM_BOOL mu(){
-run.moveUP();
+EM_BOOL mu(void){
+run.moveUP(void);
 return 1;
 }
 
-EM_BOOL md(){
-run.moveDOWN();
+EM_BOOL md(void){
+run.moveDOWN(void);
 return 1;
 }
 
-EM_BOOL ml(){
-run.moveLEFT();
+EM_BOOL ml(void){
+run.moveLEFT(void);
 return 1;
 }
 
-EM_BOOL mr(){
-run.moveRIGHT();
+EM_BOOL mr(void){
+run.moveRIGHT(void);
 return 1;
 }
 
