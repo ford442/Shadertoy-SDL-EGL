@@ -54,7 +54,7 @@ run.moveDOWN();
 return 1;
 }
 
-void ml(){
+EM_BOOL ml(){
 run.moveLEFT();
 return 1;
 }
