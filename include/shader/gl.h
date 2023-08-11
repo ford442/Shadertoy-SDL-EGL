@@ -2,15 +2,15 @@
 
 // #define GL_SILENCE_DEPRECATION
 
-// #ifndef GL_FRAGMENT_PRECISION_HIGH
+#ifndef GL_FRAGMENT_PRECISION_HIGH
 #define GL_FRAGMENT_PRECISION_HIGH 1
-// #endif
+#endif
 
 // #include <GL/gl3w.h>
 
-// #ifndef GL_GLEXT_PROTOTYPES
+#ifndef GL_GLEXT_PROTOTYPES
 #define GL_GLEXT_PROTOTYPES 1
-//  #endif
+#endif
 
 #include <GL/gl.h>
 #include <GL/glext.h>
