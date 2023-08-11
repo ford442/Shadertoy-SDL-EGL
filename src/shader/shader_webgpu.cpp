@@ -14,53 +14,53 @@ return EM_TRUE;
 
 extern "C" {
 
-EM_BOOL str(void){
+EM_BOOL str(){
 strtr(void);
 return 1;
 }
 
-EM_BOOL swp(void){
+EM_BOOL swp(){
 swpp(void);
 return 1;
 }
 
 EM_BOOL ud(void){
-run.uniDOWN(void);
+run.uniDOWN();
 return 1;
 }
 
 EM_BOOL uu(void){
-run.uniUP(void);
+run.uniUP();
 return 1;
 }
 
 EM_BOOL vd(void){
-run.viewDOWN(void);
+run.viewDOWN();
 return 1;
 }
 
 EM_BOOL vu(void){
-run.viewUP(void);
+run.viewUP();
 return 1;
 }
 
 EM_BOOL mu(void){
-run.moveUP(void);
+run.moveUP();
 return 1;
 }
 
 EM_BOOL md(void){
-run.moveDOWN(void);
+run.moveDOWN();
 return 1;
 }
 
 EM_BOOL ml(void){
-run.moveLEFT(void);
+run.moveLEFT();
 return 1;
 }
 
 EM_BOOL mr(void){
-run.moveRIGHT(void);
+run.moveRIGHT();
 return 1;
 }
 
