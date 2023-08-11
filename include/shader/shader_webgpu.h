@@ -868,31 +868,31 @@ return 1;
 static EM_BOOL viewDOWN(){
 i_size.at(0,1)=i_size.at(0,1)/1.5;
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
-return;
+return 1;
 }
 
 static EM_BOOL moveDOWN(){
 i_view.at(0,0)=i_view.at(0,0)-1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return;
+return 1;
 }
 
 static EM_BOOL moveUP(){
 i_view.at(0,0)=i_view.at(0,0)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return;
+return 1;
 }
 
 static EM_BOOL moveLEFT(){
 i_view.at(0,1)=i_view.at(0,1)-1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return;
+return 1;
 }
 
 static EM_BOOL moveRIGHT(){
 i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return;
+return 1;
 }
   
 static EM_BOOL Rend(){
@@ -1006,10 +1006,10 @@ glUniform1i(smp_chn[raN],raN);
  */
   
 glUniform1i(uni_frm,uni_i.at(0,0));
-return;
+return 1;
 }
 
-boost::function<void()>swap=[](){
+boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
@@ -1038,7 +1038,7 @@ glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
-return;
+return 1;
 };
 
 inline char * rd_fl(const char * Fnm){
@@ -1068,7 +1068,7 @@ return results;
 return nullptr;
 }
 
-boost::function<void()>strtt=[this](){
+boost::function<EM_BOOL()>strtt=[this](){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1582,9 +1582,9 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
-return;
+return 1;
 };
 
-boost::function<void()>strt=strtt;
+boost::function<EM_BOOL()>strt=strtt;
 
 };
