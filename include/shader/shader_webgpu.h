@@ -167,6 +167,7 @@ inline char wgl_cmp_src[2000]=
 
 inline char cm_hdr_src[2300]=
 "#version 300 es\n"
+"#extension all : enable\n"
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
