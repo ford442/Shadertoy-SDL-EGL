@@ -2,8 +2,9 @@
 
 Run run;
 
-boost::function<void()>strtr=[](){
+boost::function<EM_BOOL()>strtr=[](){
 run.strt();
+return EM_TRUE;
 };
 
 boost::function<void()>swpp=[](){
