@@ -265,7 +265,7 @@ pnnl.addEventListener('keydown',Key);
 
 static inline boost::function<EM_BOOL()>jss=[](){
 js_main();
-return 1;
+return EM_TRUE;
 };
 
 int rD=0,Rg=0,nm=0;
