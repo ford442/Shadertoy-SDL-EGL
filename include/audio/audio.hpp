@@ -33,6 +33,8 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
+#define register
+
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
 #define BOOST_UBLAS_MOVE_SEMANTICS
@@ -83,11 +85,11 @@ v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
 
 struct{
-GLubyte * snd;
-long pos=0;
+register GLubyte * snd;
+register long pos=0;
 SDL_AudioDeviceID dev;
-unsigned int slen=0;
-GLubyte * wptr;
+register unsigned int slen=0;
+register GLubyte * wptr;
 }wave;
 
 class Audio{
