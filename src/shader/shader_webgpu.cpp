@@ -2,53 +2,53 @@
 
 Run run;
 
-boost::function<EM_BOOL()>strtr=[](){
+boost::function<EM_BOOL(void)>strtr=[](void){
 run.strt();
 return EM_TRUE;
 };
 
-boost::function<void()>swpp=[](){
+boost::function<EM_BOOL(void)>swpp=[](void){
 run.swap();
 };
 
 extern "C" {
 
-void str(){
+EM_BOOL str(){
 strtr();
 return;
 }
 
-void swp(){
+EM_BOOL swp(){
 swpp();
 return;
 }
 
-void ud(){
+EM_BOOL ud(){
 run.uniDOWN();
 return;
 }
 
-void uu(){
+EM_BOOL uu(){
 run.uniUP();
 return;
 }
 
-void vd(){
+EM_BOOL vd(){
 run.viewDOWN();
 return;
 }
 
-void vu(){
+EM_BOOL vu(){
 run.viewUP();
 return;
 }
 
-void mu(){
+EM_BOOL mu(){
 run.moveUP();
 return;
 }
 
-void md(){
+EM_BOOL md(){
 run.moveDOWN();
 return;
 }
@@ -58,7 +58,7 @@ run.moveLEFT();
 return;
 }
 
-void mr(){
+EM_BOOL mr(){
 run.moveRIGHT();
 return;
 }
