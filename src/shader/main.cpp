@@ -16,7 +16,7 @@ return RG;
 
 }
 
-int main(void){
+int main(){
 jss();
 return 1;
 }
