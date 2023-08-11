@@ -895,7 +895,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return 1;
 }
   
-static EM_BOOL Rend(){
+static em_callback_func Rend(){
  /// eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
@@ -1581,7 +1581,7 @@ emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((EM_BOOL(*)())Run::Rend,0,0);
+emscripten_set_main_loop((em_callback_func(*)())Run::Rend,0,0);
 return 1;
 };
 
