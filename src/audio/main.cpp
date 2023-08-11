@@ -137,7 +137,7 @@ normalResStart();
 
 static inline void(*jss)(){&js_main};
 
-int main(void){
+int main(){
   
 EM_ASM({
 "use strict";
