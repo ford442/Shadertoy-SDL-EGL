@@ -115,16 +115,16 @@ EGL_NONE,EGL_NONE
 
 extern "C"{
 
-EM_BOOL str(void);
-EM_BOOL swp(void);
-EM_BOOL ud(void);
-EM_BOOL uu(void);
-EM_BOOL vd(void);
-EM_BOOL vu(void);
-EM_BOOL mu(void);
-EM_BOOL md(void);
-EM_BOOL ml(void);
-EM_BOOL mr(void);
+EM_BOOL str();
+EM_BOOL swp();
+EM_BOOL ud();
+EM_BOOL uu();
+EM_BOOL vd();
+EM_BOOL vu();
+EM_BOOL mu();
+EM_BOOL md();
+EM_BOOL ml();
+EM_BOOL mr();
 
 }
 
