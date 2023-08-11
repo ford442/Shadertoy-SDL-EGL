@@ -1,5 +1,8 @@
 #pragma once
 
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 /*
 // #undef _FLT_EVAL_METHOD
@@ -42,13 +45,12 @@ typedef ResultType result_type;
 
 #define register
 
+#include <boost/function.hpp>
 using namespace ::boost::tuples;
 
 #include <cstdlib>
 #include <ctime>
 #include <random>
-#include <emscripten.h>
-#include <emscripten/html5.h>
 
 class song_select{
 
