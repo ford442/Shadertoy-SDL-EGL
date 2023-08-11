@@ -1581,7 +1581,7 @@ emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::Rend,0,0);
+emscripten_set_main_loop((EM_BOOL(*)())Run::Rend,0,0);
 return 1;
 };
 
