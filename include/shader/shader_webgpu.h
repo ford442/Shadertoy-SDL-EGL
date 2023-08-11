@@ -17,7 +17,7 @@ typedef ResultType result_type;
 // #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/context/detail/tuple.hpp>
-#include <boost/functional.hpp>
+// #include <boost/functional.hpp>
 #include <boost/function.hpp>
 #include <boost/function_equal.hpp>
 #include <boost/atomic.hpp>
