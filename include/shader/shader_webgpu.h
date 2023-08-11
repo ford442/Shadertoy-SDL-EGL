@@ -680,7 +680,7 @@ Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
-return 1;
+return EM_TRUE;
 };
 
 static inline boost::function<float()>gF=[](){
@@ -803,7 +803,7 @@ public:
 static EM_BOOL PRGin(register boost::uint_t<32>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
-return 1;
+return EM_TRUE;
 };
 
 static EM_BOOL u_iTime_set(register boost::compute::double_ m80){
@@ -811,14 +811,14 @@ d_time.at(0,0)=m80;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 // sse2.at(0,0)=wasm_f64x2_splat(m80);
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL u_iSize_set(boost::compute::double_ set){
 sse.at(1,0)=wasm_f32x4_splat(set);
 t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
-return 1;
+return EM_TRUE;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
@@ -828,13 +828,13 @@ i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
 i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_ m64){
 sse.at(0,1)=wasm_f64x2_splat(m64);
 d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL uniUP(){
@@ -845,7 +845,7 @@ glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL uniDOWN(){
@@ -856,43 +856,43 @@ glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL viewUP(){
 i_size.at(0,1)=i_size.at(0,1)*1.5;
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL viewDOWN(){
 i_size.at(0,1)=i_size.at(0,1)/1.5;
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL moveDOWN(){
 i_view.at(0,0)=i_view.at(0,0)-1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL moveUP(){
 i_view.at(0,0)=i_view.at(0,0)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL moveLEFT(){
 i_view.at(0,1)=i_view.at(0,1)-1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return 1;
+return EM_TRUE;
 }
 
 static EM_BOOL moveRIGHT(){
 i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
-return 1;
+return EM_TRUE;
 }
   
 static em_callback_func Rend(){
@@ -1006,7 +1006,7 @@ glUniform1i(smp_chn[raN],raN);
  */
   
 glUniform1i(uni_frm,uni_i.at(0,0));
-return 1;
+return EM_TRUE;
 }
 
 boost::function<EM_BOOL(void)>swap=[](void){
@@ -1038,7 +1038,7 @@ glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
 glDeleteVertexArrays(1,&Sh.at(2,0));
-return 1;
+return EM_TRUE;
 };
 
 inline char * rd_fl(const char * Fnm){
@@ -1582,7 +1582,7 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 emscripten_set_main_loop((em_callback_func)Run::Rend,0,0);
-return 1;
+return EM_TRUE;
 };
 
 boost::function<EM_BOOL()>strt=strtt;
