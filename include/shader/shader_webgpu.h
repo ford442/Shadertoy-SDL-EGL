@@ -1006,7 +1006,7 @@ glUniform1i(smp_chn[raN],raN);
  */
   
 glUniform1i(uni_frm,uni_i.at(0,0));
-return 
+return;
 }
 
 boost::function<EM_BOOL()>swap=[](){
