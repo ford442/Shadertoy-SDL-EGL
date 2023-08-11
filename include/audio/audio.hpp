@@ -1,3 +1,5 @@
+#include <emscripten.h>
+
 extern "C"{  
   
 EM_BOOL pl();
@@ -65,7 +67,6 @@ typedef ResultType result_type;
 #include <cfloat>
 #include <climits>
 #include <iostream>
-#include <emscripten.h>
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
