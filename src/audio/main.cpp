@@ -135,10 +135,10 @@ scanSongs();
 normalResStart();
 });
 
-static inline void(*jss)(){&js_main};
+// static inline void(*jss)(){&js_main};
+static inline boost::function<void()>jss=[](){js_main();};
 
 int main(){
-  
 EM_ASM({
 "use strict";
 FS.mkdir('/snd');
