@@ -117,14 +117,14 @@ extern "C"{
 
 EM_BOOL str(void);
 EM_BOOL swp(void);
-void ud();
-void uu();
-void vd();
-void vu();
-void mu();
-void md();
-void ml();
-void mr();
+EM_BOOL ud(void);
+EM_BOOL uu(void);
+EM_BOOL vd(void);
+EM_BOOL vu(void);
+EM_BOOL mu(void);
+EM_BOOL md(void);
+EM_BOOL ml(void);
+EM_BOOL mr(void);
 
 }
 
@@ -1009,7 +1009,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return 1;
 }
 
-boost::function<EM_BOOL()>swap=[](){
+boost::function<EM_BOOL(void)>swap=[](void){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
