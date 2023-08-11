@@ -655,23 +655,23 @@ private:
 
 public:
 
-std::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
 };
 
-std::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return;
 };
 
-std::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return;
 };
 
-boost::function<EM_BOOL()>setFloats=[](){
+boost::function<EM_FLOAT()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -680,7 +680,7 @@ Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
-return;
+return 1.0;
 };
 
 static inline boost::function<float()>gF=[](){
@@ -803,7 +803,7 @@ public:
 static EM_BOOL PRGin(register boost::uint_t<32>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
-return;
+return 1;
 };
 
 static EM_BOOL u_iTime_set(register boost::compute::double_ m80){
@@ -811,14 +811,14 @@ d_time.at(0,0)=m80;
 sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 // sse2.at(0,0)=wasm_f64x2_splat(m80);
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
-return;
+return 1;
 }
 
 static EM_BOOL u_iSize_set(boost::compute::double_ set){
 sse.at(1,0)=wasm_f32x4_splat(set);
 t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
-return;
+return 1;
 }
 
 // static void i_iSize_set(boost::int_t<32>::exact set){
@@ -828,13 +828,13 @@ i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
 i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
-return;
+return 1;
 }
 
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_ m64){
 sse.at(0,1)=wasm_f64x2_splat(m64);
 d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
-return;
+return 1;
 }
 
 EM_BOOL uniUP(){
@@ -845,7 +845,7 @@ glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-return;
+return 1;
 }
 
 EM_BOOL uniDOWN(){
@@ -856,13 +856,13 @@ glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-return;
+return 1;
 }
 
 static EM_BOOL viewUP(){
 i_size.at(0,1)=i_size.at(0,1)*1.5;
 glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
-return;
+return 1;
 }
 
 static EM_BOOL viewDOWN(){
