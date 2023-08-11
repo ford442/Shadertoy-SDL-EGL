@@ -3,24 +3,24 @@
 Run run;
 
 boost::function<EM_BOOL(void)>strtr=[](void){
-run.strt(void);
+run.strt();
 return EM_TRUE;
 };
 
 boost::function<EM_BOOL(void)>swpp=[](void){
-run.swap(void);
+run.swap();
 return EM_TRUE;
 };
 
 extern "C" {
 
 EM_BOOL str(){
-strtr(void);
+strtr();
 return 1;
 }
 
 EM_BOOL swp(){
-swpp(void);
+swpp();
 return 1;
 }
 
