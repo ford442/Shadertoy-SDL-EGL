@@ -655,7 +655,7 @@ private:
 
 public:
 
-std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+boost::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
