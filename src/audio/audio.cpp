@@ -4,9 +4,9 @@ Audio audio;
 
 extern "C" {
 
-void pl(){
+EM_BOOL pl(){
 audio.plt();
-return;
+return EM_TRUE;
 }
   
 }
