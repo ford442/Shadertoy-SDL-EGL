@@ -9,58 +9,59 @@ return EM_TRUE;
 
 boost::function<EM_BOOL(void)>swpp=[](void){
 run.swap();
+return EM_TRUE;
 };
 
 extern "C" {
 
 EM_BOOL str(){
 strtr();
-return;
+return 1;
 }
 
 EM_BOOL swp(){
 swpp();
-return;
+return 1;
 }
 
 EM_BOOL ud(){
 run.uniDOWN();
-return;
+return 1;
 }
 
 EM_BOOL uu(){
 run.uniUP();
-return;
+return 1;
 }
 
 EM_BOOL vd(){
 run.viewDOWN();
-return;
+return 1;
 }
 
 EM_BOOL vu(){
 run.viewUP();
-return;
+return 1;
 }
 
 EM_BOOL mu(){
 run.moveUP();
-return;
+return 1;
 }
 
 EM_BOOL md(){
 run.moveDOWN();
-return;
+return 1;
 }
 
 void ml(){
 run.moveLEFT();
-return;
+return 1;
 }
 
 EM_BOOL mr(){
 run.moveRIGHT();
-return;
+return 1;
 }
 
 }
