@@ -1,5 +1,17 @@
 #pragma once
+
 #include "../../include/shader/boost_defs.h"
+
+#include <functional>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
+#define register
 
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
