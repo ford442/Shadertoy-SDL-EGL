@@ -65,7 +65,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 EGL_NONE,EGL_NONE
 };
 
-EGLint ctx_att[500]={
+static constexpr EGLint ctx_att[500]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,4,
 EGL_CONTEXT_MINOR_VERSION_KHR,3,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,3,
@@ -76,7 +76,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE,EGL_NONE
 };
 
-EGLint att_lst[1500]={
+static constexpr EGLint att_lst[1500]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -150,7 +150,7 @@ return shader;
 
 };
 
-inline char wgl_cmp_src[2000]=
+static constexpr char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
