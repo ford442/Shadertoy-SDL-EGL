@@ -47,59 +47,6 @@ typedef ResultType result_type;
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-
-
-
-/*
-#include <boost/cstdfloat.hpp>  // must be first include
-#include "../../include/shader/boost_defs.h"
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#include "../../include/shader/defs.h"
-#include <functional>
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
-
-#define register
-
-#include <boost/preprocessor.hpp>
-#include <boost/context/detail/tuple.hpp>
-#include <boost/function.hpp>
-#include <boost/function_equal.hpp>
-#include <boost/atomic.hpp>
-#include <boost/cstdint.hpp>
-#include <boost/integer.hpp>
-#include <boost/lockfree/spsc_queue.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/tuple/tuple.hpp>
-// #include <boost/compute/cl.hpp>
-#include <boost/compute/core.hpp>
-// #include <boost/compute/interop/opengl.hpp>
-#include <boost/chrono.hpp>
-#include <algorithm>
-#include <experimental/simd>
-#include <random>
-#include <cfloat>
-#include <math.h>
-#include <new>
-#include <cstring>
-#include <stdarg.h>
-#include <stdio.h>
-#include <cstdint>
-#include <stdlib.h>
-#include <climits>
-#include <iostream>
-#include <ctime>
-#include <vector>
-#include <cassert>
-*/
 // #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
 // #include "../../include/shader/intrins.h"
@@ -108,11 +55,11 @@ typedef ResultType result_type;
 static constexpr EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 EGL_NONE,EGL_NONE
 };
@@ -130,7 +77,7 @@ EGL_NONE,EGL_NONE
 
 static constexpr EGLint att_lst[1500]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
@@ -140,29 +87,21 @@ static constexpr EGLint att_lst[1500]={
 // EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
-// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
- // EGL_COLOR_DEPTH_10_BIT_EXT, 10,
- // EGL_ALPHA_SIZE_10_BIT_EXT, 10,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
+EGL_RED_SIZE,10,
+EGL_GREEN_SIZE,10,
+EGL_BLUE_SIZE,10,
+EGL_ALPHA_SIZE,8,
+EGL_DEPTH_SIZE,24,
+EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
-EGL_SAMPLE_BUFFERS,EGL_TRUE,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_LINEAR_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE_SRGB_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
-EGL_COVERAGE_SAMPLES_NV,2,
-EGL_SAMPLES,2,
-EGL_MIPMAP_LEVEL,2,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
+EGL_COVERAGE_SAMPLES_NV,1,
+EGL_SAMPLES,32,
 EGL_NONE,EGL_NONE
 };
 
