@@ -11,12 +11,12 @@ COMMON_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -Og -fm
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
--mmutable-globals -mnontrapping-fptoint -msign-ext -fgpu-shader-predication -fgpu-shader-jit -fno-omit-frame-pointer
+-mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
--fno-stack-protector -mmutable-globals -mnontrapping-fptoint -msign-ext -fgpu-shader-predication -fgpu-shader-jit -fno-omit-frame-pointer
+-fno-stack-protector -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
