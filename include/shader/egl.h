@@ -3,6 +3,9 @@
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #include <webgl/webgl2.h>  //  much better performance without
 
+#define GLFW_INCLUDE_ES3
+#include <GLFW/glfw3.h>
+
 #define GL_GLES_PROTOTYPES 1
 
 // #include <GLES3/gl3platform.h>
