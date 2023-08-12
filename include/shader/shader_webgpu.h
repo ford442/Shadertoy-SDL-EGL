@@ -791,7 +791,7 @@ EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
 EGLConfig eglconfig=nullptr;
 EGLint config_size=0,major,minor=0;
-constexpr char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+static constexpr char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
