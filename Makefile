@@ -20,7 +20,7 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -O
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=3 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=0 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
 LINK_FLAGS +=  -fno-except $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly \
