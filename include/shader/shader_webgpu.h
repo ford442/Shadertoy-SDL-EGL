@@ -166,7 +166,7 @@ static inline char wgl_cmp_src[2000]=
 "}"
 "}";
 
-inline char cm_hdr_src[2300]=
+static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#pragma (STDGL none)\n"
@@ -201,10 +201,10 @@ inline char cm_hdr_src[2300]=
 "precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 
-inline char vrt_bdy_src[100]=
+static inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
-inline char frg_hdr_src[1000]=
+static inline char frg_hdr_src[1000]=
 "layout (std140) uniform uniBlock{uniform mediump float iSampleRate;uniform mediump float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform mediump float iTimeDelta;uniform lowp vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform mediump vec3 iResolution;"
@@ -213,7 +213,7 @@ inline char frg_hdr_src[1000]=
 // "uniform sampler2D iChannel4;"
 "out vec4 fragColor;\n";
 
-inline char frg_ftr_src[420]=
+static inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
@@ -225,7 +225,7 @@ inline char frg_ftr_src[420]=
 "void mainImage0\n";
 */
 
-inline EM_BOOL ms_l,clk_l;
+EM_BOOL ms_l,clk_l;
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<register GLuint>;
@@ -658,7 +658,7 @@ private:
 
 public:
 
-std::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+boost::function<const void(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 // const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return;
