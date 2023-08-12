@@ -38,7 +38,7 @@ typedef ResultType result_type;
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
-// #include <boost/compute/core.hpp>
+#include <boost/compute/core.hpp>
 // #include <boost/compute/interop/opengl.hpp>
 #include <boost/chrono.hpp>
 #include <algorithm>
