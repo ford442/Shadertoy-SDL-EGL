@@ -14,7 +14,6 @@
 #include <climits>
 
 #include <functional>
-#include <unary_function.h>
 
 template<class ArgumentType,class ResultType>
 
