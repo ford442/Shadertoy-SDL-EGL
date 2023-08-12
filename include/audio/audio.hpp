@@ -42,17 +42,6 @@ typedef ResultType result_type;
 #define BOOST_UBLAS_USE_LONG_DOUBLE
 // #define BOOST_NO_EXCEPTIONS
 
-#include <boost/config.hpp>
-#include <boost/preprocessor.hpp>
-#include <boost/numeric/ublas/tensor.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/atomic.hpp>
-#include <boost/tuple/tuple.hpp>
-// #include <boost/integer.hpp>
-
-#include <boost/bind/bind.hpp>
-#include <boost/function.hpp>
 
 #include <cstdint>
 #include <SDL2/SDL.h>
@@ -69,6 +58,16 @@ typedef ResultType result_type;
 #include <cfloat>
 #include <climits>
 #include <iostream>
+
+#include <boost/preprocessor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/atomic.hpp>
+#include <boost/tuple/tuple.hpp>
+// #include <boost/integer.hpp>
+#include <boost/bind/bind.hpp>
+#include <boost/function.hpp>
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
@@ -88,7 +87,6 @@ struct{
 register GLubyte * snd;
 register long pos=0;
 SDL_AudioDeviceID dev;
-// register unsigned int slen=0;
 register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
@@ -103,7 +101,8 @@ SDL_AudioSpec request;
 
 public:
 
-static EM_BOOL snd_pos(boost::atomic<int> set){
+// static EM_BOOL snd_pos(boost::atomic<int> set){
+static EM_BOOL snd_pos(GLint set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return EM_TRUE;
@@ -141,7 +140,6 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
-// void plt(){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
@@ -150,10 +148,6 @@ request.format=AUDIO_S32;
 request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
-// request.freq=44100;
-// request.format=AUDIO_S32;
-// request.channels=2;
-// request.samples=128;
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
