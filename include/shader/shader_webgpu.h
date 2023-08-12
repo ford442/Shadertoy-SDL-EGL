@@ -158,7 +158,7 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-// "#extension GL_ALL_EXTENSIONS : enable\n"
+"#extension GL_ALL_EXTENSIONS : enable\n"
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
@@ -1116,7 +1116,8 @@ mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
 eglBindAPI(EGL_OPENGL_API);
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+  
 // eglBindAPI(EGL_OPENGL_ES_API);
  ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
