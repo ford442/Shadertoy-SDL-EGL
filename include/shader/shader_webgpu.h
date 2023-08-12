@@ -189,7 +189,7 @@ GLsizei i;
 
 public:
 
-boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+boost::uint_t<32>::fast cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
@@ -282,13 +282,13 @@ using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<register GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<register GLuint>;
-using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<16>::exact>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<16>::fast>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::fast>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using rv_tensor=boost::numeric::ublas::tensor<register v128_t>;
-using i_tensor=boost::numeric::ublas::tensor<boost::int_t<16>::exact>;
+using i_tensor=boost::numeric::ublas::tensor<boost::int_t<16>::fast>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
@@ -710,17 +710,17 @@ private:
 
 public:
 
-boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+boost::function<const EM_BOOL(boost::uint_t<32>::fast)>EBOin=[](boost::uint_t<32>::fast EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+boost::function<const EM_BOOL(boost::uint_t<32>::fast)>VCOin=[](boost::uint_t<32>::fast VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+boost::function<const EM_BOOL(boost::uint_t<32>::fast)>VBOin=[](boost::uint_t<32>::fast VBO){
 Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
@@ -786,7 +786,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
-boost::uint_t<32>::exact VBO,EBO,VCO;
+boost::uint_t<32>::fast VBO,EBO,VCO;
 }shad;
 
 inline struct{
@@ -827,7 +827,7 @@ return EM_TRUE;
 static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
-boost::uint_t<32>::exact uniBlock;
+boost::uint_t<32>::fast uniBlock;
 
 class Run{
 
@@ -854,7 +854,7 @@ GPU gpu;
 
 public:
 
-static EM_BOOL PRGin(register boost::uint_t<32>::exact m1){
+static EM_BOOL PRGin(register boost::uint_t<32>::fast m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return EM_TRUE;
@@ -875,7 +875,7 @@ t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
 return EM_TRUE;
 }
 
-// static void i_iSize_set(boost::int_t<32>::exact set){
+// static void i_iSize_set(boost::int_t<32>::fast set){
 static EM_BOOL i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -1332,13 +1332,13 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 // nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+boost::uint_t<32>::fast vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
-boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-boost::uint_t<32>::exact shd_prg=glCreateProgram();
+boost::uint_t<32>::fast frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+boost::uint_t<32>::fast shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
@@ -1346,7 +1346,7 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
-boost::uint_t<32>::exact uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
+boost::uint_t<32>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
