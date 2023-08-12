@@ -190,7 +190,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 0\n"
-"precision highp int;\n"
+"precision mediump int;\n"
 "precision highp float;\n"
 "precision mediump sampler3D;precision highp sampler2D;"
 "precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
@@ -657,7 +657,6 @@ private:
 public:
 
 boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
-// const void EBOin(boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
@@ -808,9 +807,9 @@ return EM_TRUE;
 };
 
 static EM_BOOL u_iTime_set(register boost::compute::double_ m80){
-d_time.at(0,0)=m80;
-sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
-// sse2.at(0,0)=wasm_f64x2_splat(m80);
+// d_time.at(0,0)=m80;
+// sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
+sse2.at(0,0)=wasm_f64x2_splat(m80);
 d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
@@ -827,8 +826,8 @@ static EM_BOOL i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.05;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.05;
+i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*0.75;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*0.75;
 return EM_TRUE;
 }
 
