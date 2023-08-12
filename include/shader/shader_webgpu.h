@@ -39,7 +39,6 @@ typedef ResultType result_type;
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/compute/core.hpp>
-// #include <boost/compute/interop/opengl.hpp>
 #include <boost/chrono.hpp>
 #include <algorithm>
 #include <experimental/simd>
@@ -1061,12 +1060,7 @@ return results;
 return nullptr;
 }
 
-boost::compute::context context_;
-
 boost::function<EM_BOOL()>strtt=[this](){
-  
-// context_ = boost::compute::opengl_create_shared_context();
-
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
