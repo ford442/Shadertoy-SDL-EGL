@@ -1,7 +1,7 @@
 #pragma once
 
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <webgl/webgl2.h>  //  much better performance without
+// #include <webgl/webgl2.h>  //  much better performance without
 
 #define GLFW_INCLUDE_ES3
 #include <GLFW/glfw3.h>
