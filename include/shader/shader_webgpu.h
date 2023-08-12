@@ -53,7 +53,7 @@ typedef ResultType result_type;
 // #include "../../include/shader/intrins.h"
 #include "../../lib/lib_webgpu.h"
 
- EGLint att_lst2[1000]={ 
+static constexpr EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
