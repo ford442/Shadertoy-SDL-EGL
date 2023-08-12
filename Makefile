@@ -11,16 +11,16 @@ COMMON_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -Og -fm
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
--mmutable-globals -mnontrapping-fptoint -msign-ext
+-mmutable-globals -mnontrapping-fptoint -msign-ext -fgpu-shader-predication -fgpu-shader-jit -fno-omit-frame-pointer
 
 STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
--fno-stack-protector -mmutable-globals -mnontrapping-fptoint -msign-ext
+-fno-stack-protector -mmutable-globals -mnontrapping-fptoint -msign-ext -fgpu-shader-predication -fgpu-shader-jit -fno-omit-frame-pointer
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=0 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=3 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
 LINK_FLAGS +=  -fno-except $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly \
