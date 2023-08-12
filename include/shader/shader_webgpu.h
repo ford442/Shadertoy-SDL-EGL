@@ -1061,11 +1061,11 @@ return results;
 return nullptr;
 }
 
-compute::context context_;
+boost::compute::context context_;
 
 boost::function<EM_BOOL()>strtt=[this](){
   
-context_ = compute::opengl_create_shared_context();
+context_ = boost::compute::opengl_create_shared_context();
 
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
