@@ -664,14 +664,14 @@ Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-std::function<const void(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
-return;
+return EM_TRUE;
 };
 
-std::function<const void(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
-return;
+return EM_TRUE;
 };
 
 boost::function<EM_BOOL()>setFloats=[](){
