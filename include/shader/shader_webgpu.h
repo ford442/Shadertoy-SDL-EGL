@@ -785,13 +785,13 @@ private:
 
 Compile compile;
 
-int iFps=42;
+constexpr int iFps=42;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
 EGLConfig eglconfig=nullptr;
 EGLint config_size=0,major,minor=0;
-static constexpr char * Fnm=reinterpret_cast<constexpr char *>("/shader/shader.glsl");
+static char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
