@@ -1061,6 +1061,8 @@ return results;
 return nullptr;
 }
 
+compute::context context_;
+
 boost::function<EM_BOOL()>strtt=[this](){
   
 context_ = compute::opengl_create_shared_context();
