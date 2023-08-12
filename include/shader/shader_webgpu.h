@@ -955,7 +955,7 @@ static void Rend(){
 // glEnable(GL_DITHER);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
-glSampleCoverage(1.0,GL_FALSE);
+// glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -969,7 +969,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(2.0,GL_FALSE);
+// glSampleCoverage(2.0,GL_FALSE);
 //  glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1266,9 +1266,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robust_buffer_access_behavi
 eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
  ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
@@ -1449,7 +1449,7 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_DEPTH32F_STENCIL8,i_size.a
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
-glClearDepthf(0.0);
+glClearDepthf(1.0f);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 glStencilMask(1);
@@ -1458,7 +1458,7 @@ glClearStencil(0);
  /*   //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH_COMPONENT32F,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_DEPTH_COMPONENT32F,i_size.at(1,0),i_size.at(1,0));
 /// glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
@@ -1576,7 +1576,10 @@ WGPU_Start();
 usleep(125);
 
     */
- 
+glGenTextures(1,&wtexture[0]);
+glActiveTexture(GL_TEXTURE0);
+glBindTexture(GL_TEXTURE_2D,wtexture[0]);
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -1631,8 +1634,8 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
-   glDisable(GL_DEPTH_TEST);
- glDisable(GL_STENCIL_TEST);
+// glDisable(GL_DEPTH_TEST);
+// glDisable(GL_STENCIL_TEST);
 // eglBindAPI(0);
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -1640,7 +1643,7 @@ emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::Rend,0,42.0);
+emscripten_set_main_loop((void(*)())Run::Rend,0,84.0);
 return EM_TRUE;
 };
 
