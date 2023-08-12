@@ -750,7 +750,7 @@ int tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-const int ele=36;
+constexpr int ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
@@ -791,7 +791,7 @@ EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
 EGLConfig eglconfig=nullptr;
 EGLint config_size=0,major,minor=0;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+constexpr char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
