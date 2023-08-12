@@ -89,7 +89,7 @@ register GLubyte * snd;
 register long pos=0;
 SDL_AudioDeviceID dev;
 // register unsigned int slen=0;
-register Gluint slen=0;
+register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
 
