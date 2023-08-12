@@ -1,4 +1,8 @@
 #pragma once
+#include "../../include/shader/boost_defs.h"
+
+#include <boost/compute/core.hpp>
+#include <boost/compute/interop/opengl.hpp>
 
 // #define GL_SILENCE_DEPRECATION
 
