@@ -88,18 +88,18 @@ struct{
 register GLubyte * snd;
 register long pos=0;
 SDL_AudioDeviceID dev;
-register unsigned int slen=0;
+// register unsigned int slen=0;
+register Gluint slen=0;
 register GLubyte * wptr;
 }wave;
 
-constexpr SDL_AudioSpec request={44100,AUDIO_S32,2,128};
 
 class Audio{
 
 private:
 
 GLchar flnm[24];
-// SDL_AudioSpec request;
+SDL_AudioSpec request;
 
 public:
 
@@ -145,10 +145,10 @@ boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
-// request.freq=44100;
-// request.format=AUDIO_S32;
-// request.channels=2;
-// request.samples=128;
+request.freq=44100;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 // request.freq=44100;
 // request.format=AUDIO_S32;
