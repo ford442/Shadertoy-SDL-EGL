@@ -1,5 +1,5 @@
 #include <boost/cstdfloat.hpp>
-
+#include "../../include/shader/defs.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdint>
@@ -24,6 +24,8 @@ typedef ResultType result_type;
 
 #define register
 
+#include "../../include/shader/boost_defs.h"
+
 #include <boost/preprocessor.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
@@ -44,8 +46,7 @@ typedef ResultType result_type;
 #include <random>
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include "../../include/shader/boost_defs.h"
-#include "../../include/shader/defs.h"
+
 
 
 
