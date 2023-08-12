@@ -1,3 +1,56 @@
+#include <boost/cstdfloat.hpp>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstdint>
+#include <stdarg.h>
+#include <new>
+#include <cstring>
+#include <math.h>
+#include <cfloat>
+#include <ctime>
+#include <iostream>
+#include <vector>
+#include <climits>
+
+#include <functional>
+#include <unary_function.h>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
+#define register
+
+#include <boost/preprocessor.hpp>
+#include <boost/context/detail/tuple.hpp>
+#include <boost/function.hpp>
+#include <boost/function_equal.hpp>
+#include <boost/atomic.hpp>
+#include <boost/cstdint.hpp>
+#include <boost/integer.hpp>
+#include <boost/lockfree/spsc_queue.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/compute/core.hpp>
+#include <boost/compute/interop/opengl.hpp>
+#include <boost/chrono.hpp>
+#include <algorithm>
+#include <experimental/simd>
+#include <random>
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include "../../include/shader/boost_defs.h"
+#include "../../include/shader/defs.h"
+
+
+
+/*
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/shader/boost_defs.h"
 #include <emscripten.h>
@@ -46,6 +99,7 @@ typedef ResultType result_type;
 #include <ctime>
 #include <vector>
 #include <cassert>
+*/
 // #include "../../include/shader/gl.h"
 #include "../../include/shader/egl.h"
 // #include "../../include/shader/intrins.h"
