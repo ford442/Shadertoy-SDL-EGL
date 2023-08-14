@@ -3,6 +3,15 @@
 #include "../../include/vanilla/defs.h"
 #include "../../include/vanilla/gl.h"
 #include "../../include/vanilla/boost_defs.h"
+#include <functional>
+
+template<class ArgumentType,class ResultType>
+
+struct unary_function{
+typedef ArgumentType argument_type;
+typedef ResultType result_type;
+};
+
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
@@ -18,7 +27,6 @@
 #include <climits>
 #include <ctime>
 #include <vector>
-#include <functional>
 #include <cassert>
 #include <random>
 #include <cfloat>
