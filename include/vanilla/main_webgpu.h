@@ -54,7 +54,7 @@ typedef ResultType result_type;
 
 // #include "../../include/vanilla/openvino/openvino.hpp"
 
-#include <openvino/openvino.hpp>
+#include "openvino/openvino.hpp"
 // #include "openvino/c/openvino.h"
 
 // #include "openvino/runtime/tensor.hpp"
