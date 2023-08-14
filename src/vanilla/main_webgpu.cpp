@@ -1,7 +1,12 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 int cltest(){
-testclcl();
+  tbb::task_group group;
+
+  // Add tasks to the task_group.
+  group.add([&]() {
+    // Do something.
+  });
 }
 
 extern"C"{
