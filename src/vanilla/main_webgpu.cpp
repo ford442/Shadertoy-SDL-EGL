@@ -1,19 +1,14 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 int cltest(){
-  tbb::task_group group;
 
-  // Add tasks to the task_group.
-  group.add([&]() {
-    // Do something.
-  });
 }
 
 extern"C"{
 
 void testtr(){
       // Create an OpenVINO Runtime object.
- //  InferenceEngine::Core::InferenceEngineRuntime runtime;
+InferenceEngine::Core::InferenceEngineRuntime runtime;
     
     /*
     unsigned char* img_data = NULL;
