@@ -52,7 +52,7 @@ typedef ResultType result_type;
     
 // namespace compute = boost::compute;
 
-#include <usr/include/openvino/openvino.hpp>
+#include "../../include/vanilla/openvino/openvino.hpp"
 
 // #include "openvino/c/openvino.h"
 
