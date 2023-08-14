@@ -1403,7 +1403,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 // glFinish();
 glSampleCoverage(4.0,GL_FALSE);
 glEnable(GL_POLYGON_OFFSET_FILL);
-glPolygonOffset(0.5,1.0);
+glPolygonOffset(1.0,0.5);
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
