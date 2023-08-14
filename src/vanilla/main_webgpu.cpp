@@ -8,7 +8,7 @@ extern"C"{
 
 void testtr(){
       // Create an OpenVINO Runtime object.
-  InferenceEngine::InferenceEngine engine;
+  InferenceEngine::Core::InferenceEngine engine;
     
     /*
     unsigned char* img_data = NULL;
