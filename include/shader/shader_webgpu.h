@@ -1188,9 +1188,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  
-glCoverageMaskNV(GL_TRUE);
-
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
