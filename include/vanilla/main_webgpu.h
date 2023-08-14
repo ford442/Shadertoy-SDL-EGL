@@ -52,8 +52,7 @@ typedef ResultType result_type;
     
 // namespace compute = boost::compute;
 
-// #include <openvino/openvino.hpp>
-#include <openvino/InferenceEngine.hpp>
+#include <openvino/openvino.hpp>
 
 // #include "openvino/c/openvino.h"
 
