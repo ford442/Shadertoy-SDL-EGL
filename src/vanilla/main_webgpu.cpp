@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main_webgpu.h"
 
-int cltest(){
+void cltest(){
 
 }
 
