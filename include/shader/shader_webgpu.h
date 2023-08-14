@@ -1435,13 +1435,11 @@ usleep(125);
 glGenTextures(1,&wtexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,t_size.at(0,0),t_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
 glGenerateMipmap(GL_TEXTURE_2D);
+glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,wtexture[0],0);  
 
-glGenTextures(1,&wtexture[1]);
-glActiveTexture(GL_TEXTURE1);
-glBindTexture(GL_TEXTURE_2D,wtexture[1]);
-glGenerateMipmap(GL_TEXTURE_2D);
-
+  
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
