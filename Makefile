@@ -72,9 +72,8 @@ video_resurection_webgpu:
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/cl.cpp $(STDS) -static
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS
-	 em++ -DCL -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o -sDEMANGLE_SUPPORT=0 -O3 -o w3001.js \
+	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o -sDEMANGLE_SUPPORT=0 -O3 -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
