@@ -66,8 +66,8 @@ EGL_NONE,EGL_NONE
 };
 
 static constexpr EGLint ctx_att[500]={
-EGL_CONTEXT_MAJOR_VERSION_KHR,4,
-EGL_CONTEXT_MINOR_VERSION_KHR,3,
+EGL_CONTEXT_MAJOR_VERSION_KHR,2,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
@@ -1101,8 +1101,8 @@ attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=4;
-attr.minorVersion=3;
+attr.majorVersion=2;
+attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
