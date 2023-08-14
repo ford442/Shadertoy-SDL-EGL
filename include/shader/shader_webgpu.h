@@ -1430,9 +1430,17 @@ WGPU_Start();
 usleep(125);
 
     */
+
+  // initiate textures for Shadertoy Channel
 glGenTextures(1,&wtexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
+glGenerateMipmap(GL_TEXTURE_2D);
+
+glGenTextures(1,&wtexture[1]);
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_2D,wtexture[1]);
+glGenerateMipmap(GL_TEXTURE_2D);
 
   // date/time
 const time_t timE=time(0);
