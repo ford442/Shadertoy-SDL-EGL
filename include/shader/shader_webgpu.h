@@ -773,7 +773,7 @@ private:
 
 Compile compile;
 
-static constexpr int iFps=42;
+static constexpr int iFps=60;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -1120,9 +1120,9 @@ eglBindAPI(EGL_OPENGL_API);
   
 // eglBindAPI(EGL_OPENGL_ES_API);
  ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
@@ -1497,7 +1497,7 @@ emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::Rend,0,50.0);
+emscripten_set_main_loop((void(*)())Run::Rend,0,60.0);
 return EM_TRUE;
 };
 
