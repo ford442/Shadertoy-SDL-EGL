@@ -1,15 +1,18 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 void cltest(){
+  Ort::Env ort_env;
 
 }
 
 extern"C"{
 
 void testtr(){
+        Ort::Env ort_env2;
+
       // Create an OpenVINO Runtime object.
 // InferenceEngine::Core core;
-    ov::Core core;
+ //   ov::Core core;
     /*
     unsigned char* img_data = NULL;
     ov_core_t* core = NULL;
