@@ -47,6 +47,7 @@
 // #include "../../include/vanilla/openvino/openvino.hpp"
 
 #include "/usr/include/openvino/openvino.hpp"
+#include "/usr/include/openvino/core/core.hpp"
 // #include "openvino/c/openvino.h"
 
 // #include "openvino/runtime/tensor.hpp"
