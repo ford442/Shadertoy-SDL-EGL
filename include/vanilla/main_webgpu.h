@@ -46,12 +46,16 @@
 
 // #include "../../include/vanilla/openvino/openvino.hpp"
 
-#include "/usr/include/openvino/openvino.hpp"
-#include "/usr/include/openvino/core/core.hpp"
+// #include "/usr/include/openvino/openvino.hpp"
+// #include "/usr/include/openvino/core/core.hpp"
 // #include "openvino/c/openvino.h"
 
 // #include "openvino/runtime/tensor.hpp"
 
+#include "/content/RAMDRIVE2/onnxruntime/include/onnxruntime/core/session/onnxruntime_c_api.h"
+#include "/content/RAMDRIVE2/onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
+#include "/content/RAMDRIVE2/onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_inline.h"
+    
 #include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_arena.h"
 #include "oneapi/tbb/task_group.h"
