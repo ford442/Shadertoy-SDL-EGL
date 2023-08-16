@@ -25,7 +25,7 @@ std::cout << outputDataPtr[0] << std::endl;
 extern"C"{
 
 void testtr(){
-        Ort::Env ort_env2;
+    //     Ort::Env ort_env2;
 
       // Create an OpenVINO Runtime object.
 // InferenceEngine::Core core;
@@ -520,6 +520,7 @@ return;
 };
 
 EM_JS(void,js_main,(),{
+/*
 var pth='https://wasm.noahcohn.com/b3hd/vae_decoder.onnx';
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -532,7 +533,7 @@ setTimeout(function(){
 FS.writeFile('/model.onnx',sfil);
 },1150);
 }
-
+*/
 function strr(){
 Module.ccall("runWebGPU");
 }
