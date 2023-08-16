@@ -4,7 +4,7 @@ void cltest(){
 Ort::Env ort_env;
 const char model_path[12] = "/model.onnx";
 Ort::Session session(ort_env, model_path, Ort::SessionOptions{ nullptr });
-	
+
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
 /*
@@ -532,7 +532,7 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 setTimeout(function(){
 FS.writeFile('/model.onnx',sfil);
 },1150);
-}
+}}
 
 function strr(){
 Module.ccall("runWebGPU");
