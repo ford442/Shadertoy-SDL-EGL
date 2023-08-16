@@ -2,7 +2,7 @@
 
 void cltest(){
 Ort::Env ort_env;
-char model_path = "/model.onnx";
+const char[12] model_path = "/model.onnx";
 Ort::Session session(ort_env, model_path, Ort::SessionOptions{ nullptr });
 	
 // Load and preprocess the input image to 
