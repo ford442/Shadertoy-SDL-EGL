@@ -81,7 +81,7 @@ b3_vanilla_webgpu:
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js src/vanilla/filesys.js --pre-js rSlider.js --pre-js slideOut.js \
+	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
 
