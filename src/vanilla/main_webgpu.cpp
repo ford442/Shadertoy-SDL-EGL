@@ -3,11 +3,11 @@
 void cltest(){
 Ort::Env ort_env;
 std::string model_path = "/model.onnx";
-Ort::Session session(env, model_path, Ort::SessionOptions{ nullptr });
+Ort::Session session(ort_env, model_path, Ort::SessionOptions{ nullptr });
+	
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
-...
-
+/*
 // Run inference
 std::vector outputTensors =
  session.Run(Ort::RunOptions{nullptr}, 
@@ -19,6 +19,7 @@ std::vector outputTensors =
 
 const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
 std::cout << outputDataPtr[0] << std::endl;
+	*/
 }
 
 extern"C"{
