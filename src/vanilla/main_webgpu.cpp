@@ -520,7 +520,7 @@ return;
 };
 
 EM_JS(void,js_main,(),{
-/*
+FS.mkdir('/');
 var pth='https://wasm.noahcohn.com/b3hd/vae_decoder.onnx';
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -533,7 +533,7 @@ setTimeout(function(){
 FS.writeFile('/model.onnx',sfil);
 },1150);
 }
-*/
+
 function strr(){
 Module.ccall("runWebGPU");
 }
