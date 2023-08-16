@@ -532,7 +532,7 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 setTimeout(function(){
 FS.writeFile('/model.onnx',sfil);
 },1150);
-}}
+}};
 
 function strr(){
 Module.ccall("runWebGPU");
