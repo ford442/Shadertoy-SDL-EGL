@@ -1,8 +1,24 @@
 #include "../../include/vanilla/main_webgpu.h"
 
 void cltest(){
-  Ort::Env ort_env;
+Ort::Env ort_env;
+std::string model_path = "/model.onnx";
+Ort::Session session(env, model_path, Ort::SessionOptions{ nullptr });
+// Load and preprocess the input image to 
+// inputTensor, inputNames, and outputNames
+...
 
+// Run inference
+std::vector outputTensors =
+ session.Run(Ort::RunOptions{nullptr}, 
+ 			inputNames.data(), 
+			&inputTensor, 
+			inputNames.size(), 
+			outputNames.data(), 
+			outputNames.size());
+
+const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
+std::cout << outputDataPtr[0] << std::endl;
 }
 
 extern"C"{
@@ -503,7 +519,18 @@ return;
 };
 
 EM_JS(void,js_main,(),{
-
+var pth='https://wasm.noahcohn.com/b3hd/vae_decoder.onnx';
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+ff.onload=function(oEvent){
+const sarrayBuffer=ff.response;
+if(sarrayBuffer){
+const sfil=new Uint8ClampedArray(sarrayBuffer);
+setTimeout(function(){
+FS.writeFile('/model.onnx',sfil);
+},1150);
+  
 function strr(){
 Module.ccall("runWebGPU");
 }
