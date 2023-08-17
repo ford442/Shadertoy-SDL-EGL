@@ -3,6 +3,10 @@
 
 #include <webgl/webgl2.h>
 
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <GLES3/gl3.h>
+
 #include <functional>
 
 template<class ArgumentType,class ResultType>
@@ -13,6 +17,35 @@ typedef ResultType result_type;
 };
 
 #include <boost/function.hpp>
+
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EGLint config_size,major,minor;
+
+
+static const EGLint attribut_list[]={
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
+EGL_NONE
+};
+
+static const EGLint attribute_list[]={
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_BUFFER_SIZE,32,
+EGL_NONE
+};
 
 // void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 boost::function<void(int ,int ,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
@@ -137,7 +170,7 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
-if(w$<1){w$=1920;h$=1080;}
+if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=w$*h$*4;
@@ -152,8 +185,8 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:false,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-contx.getExtension('WEBGL_color_buffer_float');
-contx.getExtension('WEBGL_color_buffer_half_float');
+// contx.getExtension('WEBGL_color_buffer_float');
+// contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
 contx.getExtension('OES_texture_half_float_linear');
 contx.getExtension('EXT_float_blend');
@@ -171,15 +204,15 @@ contx.getExtension('OES_element_index_uint');
 contx.getExtension('OES_fbo_render_mipmap');
 contx.getExtension('OES_standard_derivatives');
 contx.getExtension('OES_vertex_array_object');
-contx.getExtension('WEBGL_blend_equation_advanced_coherent');
-contx.getExtension('WEBGL_depth_texture');
-contx.getExtension('WEBGL_draw_buffers');
-contx.getExtension('WEBGL_provoking_vertex');
+// contx.getExtension('WEBGL_blend_equation_advanced_coherent');
+// contx.getExtension('WEBGL_depth_texture');
+// contx.getExtension('WEBGL_draw_buffers');
+// contx.getExtension('WEBGL_provoking_vertex');
 contx.getExtension('EXT_framebuffer_sRGB');
 contx.getExtension('OES_depth32');
 contx.getExtension('OES_fixed_point');
 contx.getExtension('OES_shader_multisample_interpolation');
-contx.getExtension('WEBGL_webcodecs_video_frame');
+// contx.getExtension('WEBGL_webcodecs_video_frame');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
@@ -610,10 +643,24 @@ return shader;
 }
 
 std::function<void()>strt=[](){
-
-// void strt(){
-// emscripten_cancel_main_loop();
-// nanosleep(&req,&rem);
+EGLConfig eglconfig=NULL;
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display,&major,&minor);
+if(eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size)==EGL_TRUE && eglconfig!=NULL){
+if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
+}
+  EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_NONE};
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+if(contextegl==EGL_NO_CONTEXT){
+}
+else{
+surface=eglCreateWindowSurface(display,eglconfig,NULL,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
+}}
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
 GLfloat gF=F;
