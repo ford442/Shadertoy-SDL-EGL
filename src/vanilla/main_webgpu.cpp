@@ -617,7 +617,6 @@ WGPU_Run2();
 int main(void){
 testtr();
 js_main();
-    cltest();
 // sleep(1);
 // WGPU_Start();
 return 0;
