@@ -339,7 +339,7 @@ la=w$*h$*4;
 al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
