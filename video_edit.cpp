@@ -23,7 +23,6 @@ EGLContext contextegl;
 EGLSurface surface;
 EGLint config_size,major,minor;
 
-
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
 EGL_NONE
@@ -694,7 +693,6 @@ EGLContext contextegl;
 EGLConfig eglconfig=NULL;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-EGLint config_size,major,minor,atb_pos;
 iFrame=0;
 clk_l=true;
 // Size=EM_ASM_INT({return parseInt(window.innerHeight);});
