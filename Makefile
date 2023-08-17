@@ -70,7 +70,7 @@ video_resurection_webgpu:
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
 
 b3_vanilla_icc:
-	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/ia32/icx -o icc.o -masm=intel src/vanilla/icc.cpp
+	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icx -o icc.o -masm=intel src/vanilla/icc.cpp
 	 ar rcs icc.a icc.o
 	 em++ src/vanilla/main_icc.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
 	 emcc main_icc.o -licc.a -sDEMANGLE_SUPPORT=0 -O3 -o w3003.js \
