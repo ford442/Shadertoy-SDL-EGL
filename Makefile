@@ -2,12 +2,12 @@ LDFLAGS += -Wl,-O3,--lto-O3,--stack-first
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
-STDS += -std=gnu17 -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=gnu++20 -std=gnu++2a -std=gnu++2b
+STDS += -std=gnu17 -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=c++1z -std=gnu++20 -std=gnu++2a -std=gnu++2b -std=gnu++
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1  -fno-rtti -flto=thin -mno-tail-call -O2 -m32 -fPIC -fmerge-all-constants -ffast-math -ffp-contract=off \
+COMMON_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops -fno-rtti -flto=thin -mno-tail-call -O2 -m32 -fPIC -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fno-stack-protector \
@@ -23,7 +23,7 @@ BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 GL_FLAGS += -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
-LINK_FLAGS +=  -fno-except $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly \
+LINK_FLAGS += -fno-except $(LDFLAGS) --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
@@ -145,15 +145,15 @@ b3_vanilla_llvm:
 	 --pre-js rSlider.js --pre-js slideOut.js 
 
 b3_shader_webgpu:
-	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
-	 em++ $(STDS) lib/lib_webgpu.cpp -static
+	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
+	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.h $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o s3026.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) -sDEMANGLE_SUPPORT=0 \
-	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1536mb \
+	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1536mb -Wl,-lgl,ldl,lrt,-lm \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
