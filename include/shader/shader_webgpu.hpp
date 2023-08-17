@@ -104,7 +104,7 @@ EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
 EGL_COVERAGE_SAMPLES_NV,1,
-EGL_SAMPLES,4,
+EGL_SAMPLES,8,
 EGL_NONE,EGL_NONE
 };
 
@@ -911,7 +911,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(4.0,GL_FALSE);
+glSampleCoverage(8.0,GL_FALSE);
 //  glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1283,6 +1283,8 @@ bin.at(0,0)=GLbin;
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
+  
+glSampleCoverage(1.0,GL_FALSE);
 
     // draw framebuffer
 glGenFramebuffers(1,&TX.at(3,0,0));
@@ -1339,6 +1341,8 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
+  
+glSampleCoverage(8.0,GL_FALSE);
 
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
@@ -1346,8 +1350,8 @@ glGenFramebuffers(1,&TX.at(1,0,0));
      //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_R11F_G11F_B10F,i_size.at(1,0),i_size.at(1,0));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_R11F_G11F_B10F,i_size.at(1,0),i_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
@@ -1355,8 +1359,8 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFF
  /*         //  alpha renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_SRGB8_ALPHA8,i_size.at(1,0),i_size.at(1,0));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_SRGB8_ALPHA8,i_size.at(1,0),i_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT1,TX.at(0,1,1));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX.at(0,1,1));
@@ -1364,7 +1368,7 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFF
    //  depth32 stencil8 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
@@ -1377,7 +1381,7 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_REN
  /*   //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH_COMPONENT32F,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH_COMPONENT32F,i_size.at(1,0),i_size.at(1,0));
 /// glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
@@ -1401,7 +1405,6 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glFlush();
 // glFinish();
-glSampleCoverage(4.0,GL_FALSE);
 glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset(1.0,0.5);
 glUseProgram(S1.at(0,0,0));
