@@ -7,7 +7,7 @@ std::cout << "Running ICPX compiled object." << std::endl;
 }
 
 int main(){
-testicc();
+// testicc();
 return 1;
 }
 
