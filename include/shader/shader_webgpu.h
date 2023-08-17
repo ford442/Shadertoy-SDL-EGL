@@ -78,14 +78,14 @@ EGL_NONE,EGL_NONE
 
 static constexpr EGLint att_lst[1500]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -167,6 +167,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma (fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma (fastprecision off)\n"
+"#extension GL_ALL_EXTENSIONS : enable\n"
 "#pragma (STDGL all)\n"
 /*
 "#pragma (precision highp double)\n"
@@ -187,7 +188,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
 */
-"#extension GL_ALL_EXTENSIONS : enable\n"
 "precision highp int;\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
