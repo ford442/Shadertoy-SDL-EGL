@@ -815,7 +815,7 @@ glAttachShader(shd_prg,vtx);
 // nanosleep(&req,&rem);
 glAttachShader(shd_prg,frag);
 // nanosleep(&req,&rem);
-atb_pos=0;
+EGLint atb_pos=0;
 glBindAttribLocation(shd_prg,0,"iPosition");
 glLinkProgram(shd_prg);
 // nanosleep(&req,&rem);
