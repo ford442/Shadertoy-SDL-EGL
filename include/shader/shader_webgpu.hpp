@@ -164,11 +164,12 @@ static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 1\n"
-"#pragma (fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
+"#pragma (fastmath off)\n"
+"#pragma optionNV(fastmath off)\n"
 "#pragma (fastprecision off)\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#pragma (STDGL all)\n"
+"#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
@@ -1122,7 +1123,6 @@ mms.at(1,1)=0.5*t_size.at(0,0);
 eglBindAPI(EGL_OPENGL_API);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
-   
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
