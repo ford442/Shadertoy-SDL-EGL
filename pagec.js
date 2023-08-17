@@ -18,7 +18,7 @@ bz.postMessage({data:222});},50);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('str');},250);
+Module.ccall('str');},550);
 setTimeout(function(){
 Module.ccall('b3');
 },1450);
@@ -98,9 +98,9 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
-setTimeout(function(){
-normalResStart();
-},150);
+// setTimeout(function(){
+// normalResStart();
+// },150);
 };};
 ff.send(null);
 };
@@ -275,6 +275,7 @@ loada();
 },$ldt);
 }
 
-// document.getElementById('startBtn').addEventListener('click',function(){
+document.getElementById('startBtn').addEventListener('click',function(){
 loada();
-// });
+normalResStart();
+});
