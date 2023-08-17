@@ -1,4 +1,4 @@
-#include "../../include/shader/main.h"
+#include "../../include/shader/main.hpp"
 
 js JS;
 
