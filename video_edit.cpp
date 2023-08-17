@@ -143,7 +143,7 @@ let $H=Module.HEAPF32.buffer;
 let la=w$*h$*4;
 var pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
-let sz=(h$*h$)/8;
+let sz=(w$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -567,7 +567,7 @@ glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
 glFlush();
 // nanosleep(&req,&rem);
 iFrame++;
-glFinish();
+// glFinish();
 return;
 }
 
@@ -612,7 +612,7 @@ return shader;
 std::function<void()>strt=[](){
 
 // void strt(){
-emscripten_cancel_main_loop();
+// emscripten_cancel_main_loop();
 // nanosleep(&req,&rem);
 const char *fileloc="/shader/shader1.toy";
 EGLint v0=0,v3=3;
@@ -623,8 +623,9 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
-// "#undef HW_PERFORMANCE \n"
-// "#define HW_PERFORMANCE 0 \n"
+"#pragma (STDGL all)\n"
+"#undef HW_PERFORMANCE \n"
+"#define HW_PERFORMANCE 1 \n"
 "precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
@@ -662,7 +663,7 @@ const EGLint attribut_list[]={
 EGL_NONE};
   
 const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,4,
+EGL_CONTEXT_CLIENT_VERSION,2,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -680,7 +681,6 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
-  
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
@@ -690,7 +690,7 @@ EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,64,
 EGL_SAMPLE_BUFFERS,1,
-EGL_SAMPLES,16,
+EGL_SAMPLES,8,
 EGL_NONE
 };
   
@@ -814,7 +814,7 @@ glPolygonOffset(0.0f,0.0f);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
   glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
