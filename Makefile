@@ -73,7 +73,7 @@ b3_vanilla_icc:
 	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -o icc.o -masm=intel src/vanilla/icc.cpp
 	 ar rcs icc.a icc.o
 	 em++ src/vanilla/main_icc.cpp -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
-	 emcc main_icc.o icc.a -O0 -o w3003.js \
+	 wasm-ld main_icc.o icc.a -O0 -o w3003.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sINITIAL_MEMORY=512mb \
