@@ -20,7 +20,7 @@
 #define _POSIX_REGEXP	1
 */
 
-#include "../../include/shader/intrins.h"
+#include "../../include/shader/intrins.hpp"
 #include <functional>
 
 template<class ArgumentType,class ResultType>
