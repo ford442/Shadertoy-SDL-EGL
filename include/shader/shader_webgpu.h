@@ -162,7 +162,8 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-"#extension GL_ALL_EXTENSIONS : enable\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 0\n"
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
@@ -184,15 +185,14 @@ static inline char cm_hdr_src[2300]=
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 0\n"
-"precision mediump int;\n"
+"#extension GL_ALL_EXTENSIONS : enable\n"
+"precision highp int;\n"
 "precision highp float;\n"
-"precision mediump sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
+"precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 
 static inline char vrt_bdy_src[100]=
@@ -892,16 +892,16 @@ return EM_TRUE;
 }
   
 static void Rend(){
- /// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
-// glSampleCoverage(1.0,GL_FALSE);
+glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
- /// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 //   glEnable(GL_DEPTH_TEST);
@@ -911,7 +911,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-// glSampleCoverage(2.0,GL_FALSE);
+glSampleCoverage(4.0,GL_FALSE);
 //  glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
