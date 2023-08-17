@@ -69,6 +69,20 @@ video_resurection_webgpu:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
 
+b3_vanilla_icc:
+	 icc -o icc.o -masm=intel src/vanilla/icc.cpp
+	 ar rcs icc.a icc.o
+	 em++ src/vanilla/main_icc.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
+	 emcc main_icc.o -licc.a -sDEMANGLE_SUPPORT=0 -O3 -o w3003.js \
+	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sINITIAL_MEMORY=512mb \
+	 -sSUPPORT_ERRNO=0 \
+	 -sPRECISE_F32=1 \
+	 -sEXPORTED_FUNCTIONS='["_main","_icctest"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js rSlider.js --pre-js slideOut.js \
+	 --memory-init-file 0 --closure 0
+
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
