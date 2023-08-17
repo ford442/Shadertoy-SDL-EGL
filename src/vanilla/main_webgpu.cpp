@@ -601,10 +601,10 @@ extern"C"{
 
 void startWebGPU(){
 WGPU_Start();
-cltest();
 }
 
 void runWebGPU(){
+cltest();
 WGPU_Run();
 }
 
