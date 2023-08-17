@@ -164,6 +164,7 @@ static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 1\n"
+/*
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
@@ -185,6 +186,7 @@ static inline char cm_hdr_src[2300]=
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
+*/
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "precision highp int;\n"
 "precision highp float;\n"
