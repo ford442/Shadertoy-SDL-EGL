@@ -9,10 +9,4 @@ int main(){
 return 1;
 }
 
-extern "C"{
 
-void icctest(){
-testicc();
-}
-
-}
