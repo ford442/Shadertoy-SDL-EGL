@@ -1209,6 +1209,7 @@ glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 // glEnable(GL_BLEND);
 glEnable(GL_STENCIL_TEST);
+glEnable(GL_COLOR_PROFILE_DISPLAY_P3_EXT);
 // glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
