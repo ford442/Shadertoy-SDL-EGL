@@ -586,6 +586,7 @@ normalResStart();
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
 Module.ccall("runWebGPU");
+Module.ccall("runWebGPU2");
 // const myInterval=setInterval(strr,16.6);
 });
 
@@ -604,12 +605,12 @@ WGPU_Start();
 }
 
 void runWebGPU(){
-cltest();
 WGPU_Run();
 }
 
 void runWebGPU2(){
 WGPU_Run2();
+cltest();
 }
 
 }
