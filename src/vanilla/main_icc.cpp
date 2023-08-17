@@ -196,6 +196,14 @@ document.getElementById('di').click();
 
 });
 
+extern "C"{
+
+void icctest(){
+testicc();
+}
+
+}
+
 int main(void){
 js_main();
 return 0;
