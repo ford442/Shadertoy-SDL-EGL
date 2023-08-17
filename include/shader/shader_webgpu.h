@@ -894,7 +894,7 @@ return EM_TRUE;
 }
   
 static void Rend(){
-eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
 // glDisable(GL_DEPTH_TEST);
@@ -903,7 +903,7 @@ glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 //   glEnable(GL_DEPTH_TEST);
