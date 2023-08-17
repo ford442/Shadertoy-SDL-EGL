@@ -163,7 +163,7 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 0\n"
+"#define HW_PERFORMANCE 1\n"
 "#pragma (STDGL none)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
