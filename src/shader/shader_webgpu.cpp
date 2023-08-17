@@ -1,4 +1,4 @@
-#include "../../include/shader/shader_webgpu.h"
+#include "../../include/shader/shader_webgpu.hpp"
 
 Run run;
 
