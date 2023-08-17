@@ -1,3 +1,6 @@
+#undef __i386__
+#undef __x86_64__
+
 #include <iostream>
 
 void testicc(){
