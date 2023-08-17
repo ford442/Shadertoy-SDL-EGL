@@ -71,7 +71,7 @@ video_resurection_webgpu:
 
 b3_vanilla_icc:
 	 /opt/intel/oneapi/compiler/2023.2.0/linux/bin/icpx -c -masm=intel src/vanilla/icc.cpp
-	 ar rcs icc.a icc.o
+	 ar rcs icc.o icc.a
 	 em++ src/vanilla/main_icc.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
 	 emcc main_icc.o icc.a -sDEMANGLE_SUPPORT=0 -O3 -o w3003.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
