@@ -79,7 +79,7 @@ b3_vanilla_icc:
 	 -sINITIAL_MEMORY=512mb \
 	 -sSUPPORT_ERRNO=0 \
 	 -sPRECISE_F32=1 \
-	 -sEXPORTED_FUNCTIONS='["_main","_icctest"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_icctest","_js_simd","_js_hello","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --memory-init-file 0 --closure 0
 
