@@ -916,6 +916,7 @@ glSampleCoverage(8.0,GL_FALSE);
 //  glEnable(GL_SCISSOR_TEST);
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glFlush();
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
