@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lm,-lpthread,-lrt,-ldl,--enable-simd
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lm,-lpthread,-lrt,-ldl
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
