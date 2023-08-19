@@ -211,10 +211,10 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
-"#pragma (fastmath off)\n"
-"#pragma optionNV(fastmath off)\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 1\n"
+"#pragma (fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
 "#pragma (fastprecision off)\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#pragma (STDGL all)\n"
@@ -231,7 +231,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma optimize(on)\n"
 "#pragma debug(off)\n"
 "#pragma (invariant none)\n"
-"#pragma (centroid all)\n"
+// "#pragma (centroid all)\n"
 "#pragma (sample all)\n"
 "#pragma (unroll all)\n"
 "#pragma optionNV(unroll all)\n"
