@@ -242,11 +242,11 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision lowp sampler2D;"
-"precision lowp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n";
+"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
+"precision lowp isampler2D;precision highp isampler3D;precision lowp isamplerCube;"
+"precision lowp isampler2DArray;precision lowp usampler2D;precision highp usampler3D;"
+"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
+"precision lowp sampler2DArrayShadow;\n";
 
 static inline char vrt_bdy_src[100]=
 "precision mediump int;\n"
