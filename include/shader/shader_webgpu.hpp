@@ -131,7 +131,7 @@ static void ObtainedWebGpuAdapterStart2(WGpuAdapter,void *);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 void WGPU_Start();
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
-static void Rend();
+void Rend();
 
 extern "C"{
 
@@ -1033,7 +1033,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return EM_TRUE;
 };
 
-static void Rend(){
+void Rend(){
 rendr();
 return;
 }
