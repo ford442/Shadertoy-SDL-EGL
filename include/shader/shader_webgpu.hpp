@@ -917,7 +917,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-boost::function<EM_BOOL()>=[](){
+boost::function<EM_BOOL()>rendr=[](){
 
 eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
