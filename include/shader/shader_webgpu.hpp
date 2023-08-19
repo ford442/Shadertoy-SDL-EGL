@@ -1155,6 +1155,7 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 emscripten_webgl_make_context_current(cntxi.at(0,0));
+emscripten_set_opengl_version(4,6);
 // glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
