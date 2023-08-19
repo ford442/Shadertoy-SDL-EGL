@@ -110,30 +110,55 @@ EGL_NONE,EGL_NONE
 };
 
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
+
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
+
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
+
 boost::function<EM_BOOL()>setFloats;
+
 static inline boost::function<const register float()>gF;
+
 static inline boost::function<const register float()>gF5;
+
 static inline boost::function<const register float()>gFm1;
+
 static inline boost::function<const register float()>gFm5;
+
 static inline boost::function<const register float()>gF0;
+
 static inline boost::function<const register boost::compute::double_()>gD;
+
 static inline boost::function<const register boost::compute::double_()>gDm1;
+
 static inline boost::function<const register boost::compute::double_()>gD0;
+
 // boost::function<EM_BOOL()>rendr;
+
 boost::function<EM_BOOL()>swap;
+
 boost::function<EM_BOOL()>strtt;
+
 boost::function<EM_BOOL()>strt;
+
 static void raf();
+
 static void WGPU_Run();
+
 static void ObtainedWebGpuDeviceStart2(WGpuDevice,void *);
+
 static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
+
 static void ObtainedWebGpuAdapterStart2(WGpuAdapter,void *);
+
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
+
 void WGPU_Start();
+
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
+
 static void Rend();
+
 extern "C"{
 
 EM_BOOL str();
@@ -226,9 +251,9 @@ static inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"layout (std140) uniform uniBlock{uniform mediump float iSampleRate;uniform mediump float iFrameRate;};"
-"uniform int iFrame;uniform float iTime;uniform mediump float iTimeDelta;uniform lowp vec4 iDate;"
-"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform mediump vec3 iResolution;"
+"layout (std140) uniform uniBlock{uniform highp float iSampleRate;uniform highp float iFrameRate;};"
+"uniform int iFrame;uniform float iTime;uniform highp float iTimeDelta;uniform lowp vec4 iDate;"
+"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;"
 "uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 // "uniform sampler2D iChannel4;"
@@ -929,7 +954,7 @@ glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-eglBindAPI(0);
+// eglBindAPI(0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 //   glEnable(GL_DEPTH_TEST);
@@ -1235,7 +1260,7 @@ glDepthMask(GL_TRUE);
 glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 // glEnable(GL_BLEND);
 glEnable(GL_STENCIL_TEST);
