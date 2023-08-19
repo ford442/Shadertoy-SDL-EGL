@@ -22,7 +22,7 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -flto=thin -mno-tail-call -O
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 GL_FLAGS += -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL \
--sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
+-sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
 LINK_FLAGS += -fno-except $(LDFLAGS) -lpthread -sPTHREAD_POOL_SIZE=133 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' \
