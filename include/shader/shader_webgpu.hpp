@@ -120,7 +120,7 @@ static inline boost::function<float()>gF0;
 static inline boost::function<boost::compute::double_()>gD;
 static inline boost::function<boost::compute::double_()>gDm1;
 static inline boost::function<boost::compute::double_()>gD0;
-// boost::function<EM_BOOL()>rendr;
+boost::function<EM_BOOL()>rendr;
 boost::function<EM_BOOL()>swap;
 boost::function<EM_BOOL()>strtt;
 boost::function<EM_BOOL()>strt;
@@ -917,8 +917,8 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-// boost::function<EM_BOOL()>rendr=[](){
-static void Rend(){
+boost::function<EM_BOOL()>rendr=[](){
+// static void Rend(){
 eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
@@ -1030,12 +1030,12 @@ glUniform1i(smp_chn[raN],raN);
  */
   
 glUniform1i(uni_frm,uni_i.at(0,0));
-return;
-}
-// return EM_TRUE;
-// };
+// return;
+// }
+return EM_TRUE;
+};
 
- // boost::function<int()>* Rend = &rendr;
+boost::function<int()>* Rend = &rendr;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
