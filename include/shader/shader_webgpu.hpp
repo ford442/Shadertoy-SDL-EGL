@@ -109,10 +109,10 @@ EGL_SAMPLES,8,
 EGL_NONE,EGL_NONE
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
-boost::function<EM_BOOL()>setFloats;
+inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
+inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
+inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
+inline boost::function<EM_BOOL()>setFloats;
 static inline boost::function<const float()>gF;
 static inline boost::function<float()>gF5;
 static inline boost::function<float()>gFm1;
@@ -679,12 +679,12 @@ private:
 
 public:
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin=[](boost::uint_t<24>::fast EBO){
+inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin=[](boost::uint_t<24>::fast EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin=[](boost::uint_t<24>::fast VCO){
+inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin=[](boost::uint_t<24>::fast VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
@@ -694,7 +694,7 @@ Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-boost::function<EM_BOOL()>setFloats=[](){
+inline boost::function<EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
