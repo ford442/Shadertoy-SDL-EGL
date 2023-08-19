@@ -132,7 +132,6 @@ static void ObtainedWebGpuAdapterStart2(WGpuAdapter,void *);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 void WGPU_Start();
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
-boost::function<int()>*Rend;
 static void Rend();
 extern "C"{
 
