@@ -941,7 +941,7 @@ return EM_TRUE;
 }
 
 static void Rend(){
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
 // glDisable(GL_DEPTH_TEST);
