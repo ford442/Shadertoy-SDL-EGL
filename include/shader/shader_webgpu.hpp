@@ -105,7 +105,7 @@ EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
 EGL_COVERAGE_SAMPLES_NV,1,
-EGL_SAMPLES,8,
+EGL_SAMPLES,16,
 EGL_NONE,EGL_NONE
 };
 
@@ -1165,7 +1165,7 @@ ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-glUseProgram(0);
+// glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
