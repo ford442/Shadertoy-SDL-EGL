@@ -112,14 +112,14 @@ boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
 boost::function<EM_BOOL()>setFloats;
-static inline boost::function<float()>gF);
-static inline boost::function<float()>gF5);
-static inline boost::function<float()>gFm1);
-static inline boost::function<float()>gFm5);
-static inline boost::function<float()>gF0);
-static inline boost::function<boost::compute::double_()>gD);
-static inline boost::function<boost::compute::double_()>gDm1);
-static inline boost::function<boost::compute::double_()>gD0);
+static inline boost::function<float()>gF;
+static inline boost::function<float()>gF5;
+static inline boost::function<float()>gFm1;
+static inline boost::function<float()>gFm5;
+static inline boost::function<float()>gF0;
+static inline boost::function<boost::compute::double_()>gD;
+static inline boost::function<boost::compute::double_()>gDm1;
+static inline boost::function<boost::compute::double_()>gD0;
 // boost::function<EM_BOOL()>rendr;
 boost::function<EM_BOOL()>swap;
 boost::function<EM_BOOL()>strtt;
@@ -706,7 +706,7 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<float()>gF __attribute__ ((const,noexcept))=[](){
+static inline boost::function<float()>gF=[](){
 return Fi.at(0,0);
 };
 
