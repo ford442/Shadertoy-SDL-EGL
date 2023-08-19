@@ -827,7 +827,6 @@ private:
 
 Compile compile;
 
-static int iFps;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
@@ -940,6 +939,8 @@ i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
+
+static int iFps;
 
 static void Rend(){
 eglBindAPI(EGL_OPENGL_API);
