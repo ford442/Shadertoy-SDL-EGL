@@ -917,7 +917,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-boost::function<EM_BOOL()>rendr=[](){
+boost::function<EM_BOOL()>=[](){
 
 eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
@@ -1033,7 +1033,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return EM_TRUE;
 };
 
-  boost::function<void()>* Rend = &rendr;
+  boost::function<int()>* Rend = &rendr;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
