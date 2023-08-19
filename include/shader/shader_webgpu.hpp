@@ -1036,7 +1036,7 @@ return;
 // return EM_TRUE;
 // };
 
-  boost::function<int()>* Rend = &rendr;
+ // boost::function<int()>* Rend = &rendr;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
