@@ -108,6 +108,31 @@ EGL_SAMPLES,8,
 EGL_NONE,EGL_NONE
 };
 
+boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
+boost::function<EM_BOOL()>setFloats;
+static inline boost::function<float()>gF;
+static inline boost::function<float()>gF5;
+static inline boost::function<float()>gFm1;
+static inline boost::function<float()>gFm5;
+static inline boost::function<float()>gF0;
+static inline boost::function<boost::compute::double_()>gD;
+static inline boost::function<boost::compute::double_()>gDm1;
+static inline boost::function<boost::compute::double_()>gD0;
+boost::function<EM_BOOL()>swap;
+boost::function<EM_BOOL()>strtt;
+boost::function<EM_BOOL()>strt;
+static void raf();
+static void WGPU_Run();
+static void ObtainedWebGpuDeviceStart2(WGpuDevice,void *);
+static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
+static void ObtainedWebGpuAdapterStart2(WGpuAdapter,void *);
+static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
+void WGPU_Start();
+static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
+static void Rend();
+
 extern "C"{
 
 EM_BOOL str();
