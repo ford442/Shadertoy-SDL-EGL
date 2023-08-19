@@ -225,6 +225,8 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
 "#pragma (precision highp uint)\n"
+"#pragma (precision highp short)\n"
+"#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
 // "#pragma (precise none)\n"
 // "#pragma STDGL(strict off)\n"
@@ -238,22 +240,23 @@ static inline char cm_hdr_src[2300]=
 // "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-"precision highp int;\n"
 "precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp sampler3D;precision lowp sampler2D;"
+"precision lowp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
 
 static inline char vrt_bdy_src[100]=
+"precision mediump int;\n"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"layout (std140) uniform uniBlock{uniform highp float iSampleRate;uniform highp float iFrameRate;};"
-"uniform int iFrame;uniform float iTime;uniform highp float iTimeDelta;uniform lowp vec4 iDate;"
-"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform highp vec3 iResolution;"
+"precision highp int;\n"
+"layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
+"uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
+"uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
 "uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
 // "uniform sampler2D iChannel4;"
