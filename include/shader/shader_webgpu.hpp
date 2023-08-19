@@ -113,14 +113,14 @@ boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
 boost::function<EM_BOOL()>setFloats;
-static inline boost::function<const float()>gF;
-static inline boost::function<const float()>gF5;
-static inline boost::function<const float()>gFm1;
-static inline boost::function<const float()>gFm5;
-static inline boost::function<const float()>gF0;
-static inline boost::function<const boost::compute::double_()>gD;
-static inline boost::function<const boost::compute::double_()>gDm1;
-static inline boost::function<const boost::compute::double_()>gD0;
+static inline boost::function<const register float()>gF;
+static inline boost::function<const register float()>gF5;
+static inline boost::function<const register float()>gFm1;
+static inline boost::function<const register float()>gFm5;
+static inline boost::function<const register float()>gF0;
+static inline boost::function<const register boost::compute::double_()>gD;
+static inline boost::function<const register boost::compute::double_()>gDm1;
+static inline boost::function<const register boost::compute::double_()>gD0;
 // boost::function<EM_BOOL()>rendr;
 boost::function<EM_BOOL()>swap;
 boost::function<EM_BOOL()>strtt;
@@ -679,12 +679,12 @@ private:
 
 public:
 
-inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin=[](boost::uint_t<24>::fast EBO){
+boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin=[](boost::uint_t<24>::fast EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin=[](boost::uint_t<24>::fast VCO){
+boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin=[](boost::uint_t<24>::fast VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
@@ -694,7 +694,7 @@ Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-inline boost::function<EM_BOOL()>setFloats=[](){
+boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -706,35 +706,35 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const float()>gF=[](){
+static inline boost::function<const register float()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const float()>gF5=[](){
+static inline boost::function<const register float()>gF5=[](){
 return Fi.at(1,2);
 };
 
-static inline boost::function<const float()>gFm1=[](){
+static inline boost::function<const register float()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const float()>gFm5=[](){
+static inline boost::function<const register float()>gFm5=[](){
 return Fi.at(2,0);
 };
 
-static inline boost::function<const float()>gF0=[](){
+static inline boost::function<const register float()>gF0=[](){
 return Fi.at(1,1);
 };
 
-static inline boost::function<const boost::compute::double_()>gD=[](){
+static inline boost::function<const register boost::compute::double_()>gD=[](){
 return Di.at(0,0);
 };
 
-static inline boost::function<const boost::compute::double_()>gDm1=[](){
+static inline boost::function<const register boost::compute::double_()>gDm1=[](){
 return Di.at(0,1);
 };
 
-static inline boost::function<const boost::compute::double_()>gD0=[](){
+static inline boost::function<const register boost::compute::double_()>gD0=[](){
 return Di.at(1,1);
 };
 
