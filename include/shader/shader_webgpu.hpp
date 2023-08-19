@@ -827,7 +827,7 @@ private:
 
 Compile compile;
 
-static int iFps=0;
+static int iFps;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
