@@ -29,7 +29,7 @@ typedef ResultType result_type;
 #include <boost/preprocessor.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
-#include <boost/function_traits.hpp>
+#include <boost/type_traits.hpp>
 #include <boost/function_equal.hpp>
 #include <boost/atomic.hpp>
 #include <boost/cstdint.hpp>
