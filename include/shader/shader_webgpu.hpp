@@ -120,6 +120,7 @@ static inline boost::function<float()>gF0;
 static inline boost::function<boost::compute::double_()>gD;
 static inline boost::function<boost::compute::double_()>gDm1;
 static inline boost::function<boost::compute::double_()>gD0;
+boost::function<EM_BOOL()>rendr;
 boost::function<EM_BOOL()>swap;
 boost::function<EM_BOOL()>strtt;
 boost::function<EM_BOOL()>strt;
@@ -131,7 +132,7 @@ static void ObtainedWebGpuAdapterStart2(WGpuAdapter,void *);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 void WGPU_Start();
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
-void Rend();
+boost::function<int()>*Rend;
 
 extern "C"{
 
