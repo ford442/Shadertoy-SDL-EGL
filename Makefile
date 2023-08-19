@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-pipe,-O3,--lto-O3,--stack-first,-lc,-lc++,-lm,-lpthread,-lrt,-ldl
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lm,-lpthread,-lrt,-ldl
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
@@ -7,7 +7,7 @@ STDS += -std=gnu17 -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu+
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -isystem -fPIC -fPIE -finline-functions -funroll-loops -fno-rtti -flto=thin \
+COMMON_FLAGS += -pipe -sDISABLE_EXCEPTION_CATCHING=1 -isystem -fPIC -fPIE -finline-functions -funroll-loops -fno-rtti -flto=thin \
 -mno-tail-call -O2 -m32 -fPIC -fmerge-all-constants -ffast-math -ffp-contract=off \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
