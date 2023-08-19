@@ -254,12 +254,11 @@ static inline char vrt_bdy_src[100]=
 
 static inline char frg_hdr_src[1000]=
 "precision highp int;\n"
-"layout (std140) uniform uniBlock{uniform float iSampleRate;uniform float iFrameRate;};"
+"layout (std140) uniform uniBlock{uniform float iFrameRate;};"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
-"uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
-"uniform sampler2D iChannel3;"
-// "uniform sampler2D iChannel4;"
+"uniform vec4 iMouse;uniform samplerXX iChannel0;uniform samplerXX iChannel1;uniform samplerXX iChannel2;"
+"uniform samplerXX iChannel3;"
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]=
@@ -770,7 +769,7 @@ return Di.at(1,1);
 
 constexpr unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 constexpr unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLint uni_srate=0,uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res[4]={},smp_chn[5],uni_frm=0;
+inline GLint uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res[4]={},smp_chn[5],uni_frm=0;
 inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
 inline GLfloat uni_chn_tme[4];
 
@@ -1329,7 +1328,7 @@ boost::uint_t<24>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock")
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferData(GL_UNIFORM_BUFFER,8,NULL,GL_DYNAMIC_DRAW);
+glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_DYNAMIC_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 GLsizei * binLength;
@@ -1492,7 +1491,6 @@ uni_frm=glGetUniformLocation(S1.at(0,0,0),"iFrame");
 uni_fps=glGetUniformLocation(S1.at(0,0,0),"iFrameRate");
 uni_res=glGetUniformLocation(S1.at(0,0,0),"iResolution");
 uni_mse=glGetUniformLocation(S1.at(0,0,0),"iMouse");
-uni_srate=glGetUniformLocation(S1.at(0,0,0),"iSampleRate");
 smp_chn_res[0]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[0]");
 smp_chn_res[1]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[1]");
 smp_chn_res[2]=glGetUniformLocation(S1.at(0,0,0),"iChannelResolution[2]");
@@ -1501,7 +1499,6 @@ smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
-// smp_chn[4]=glGetUniformLocation(S1.at(0,0,0),"iChannel4");
     
   /*
   // uni non-block
@@ -1583,7 +1580,6 @@ i_date.at(0,1)=mn;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-// glUniform1f(uni_srate,44100.0f);
 
 
 glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
@@ -1614,10 +1610,8 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-float iRate=44100.0f;
 glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iRate); 
-glBufferSubData(GL_UNIFORM_BUFFER,4,4,&iFps); 
+glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iFps); 
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
