@@ -95,13 +95,13 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,24,
+EGL_GREEN_SIZE,24,
+EGL_BLUE_SIZE,24,
+EGL_ALPHA_SIZE,24,
+EGL_DEPTH_SIZE,24,
+EGL_STENCIL_SIZE,24,
+EGL_BUFFER_SIZE,64,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
 EGL_COVERAGE_SAMPLES_NV,1,
@@ -132,8 +132,6 @@ static inline boost::function<const register boost::compute::double_()>gD;
 static inline boost::function<const register boost::compute::double_()>gDm1;
 
 static inline boost::function<const register boost::compute::double_()>gD0;
-
-// boost::function<EM_BOOL()>rendr;
 
 boost::function<EM_BOOL()>swap;
 
@@ -254,7 +252,8 @@ static inline char vrt_bdy_src[100]=
 
 static inline char frg_hdr_src[1000]=
 "precision highp int;\n"
-"layout (std140) uniform uniBlock{uniform float iFrameRate;};"
+// "layout (std140) uniform uniBlock{uniform float iFrameRate;};"
+"uniform float iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
 "uniform vec4 iMouse;uniform samplerXX iChannel0;uniform samplerXX iChannel1;uniform samplerXX iChannel2;"
@@ -274,6 +273,7 @@ static inline char frg_ftr_src[420]=
 */
 
 EM_BOOL ms_l,clk_l;
+
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<register GLuint>;
@@ -404,9 +404,9 @@ GLuint srgbTexture;
 GLuint frameBuffer;
 GLuint depthBuffer;
 WGpuTexture textureA;
-  WGpuAdapter adapter=0;
-  WGpuDevice device=0;
-  WGpuQueue queue=0;
+WGpuAdapter adapter=0;
+WGpuDevice device=0;
+WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuBindGroupLayout bindGroupLayoutB=0;
 WGpuComputePipeline computePipeline=0;
@@ -444,7 +444,6 @@ WGpuBufferDescriptor bufferDescriptorI={262144*4,WGPU_BUFFER_USAGE_STORAGE|WGPU_
 WGpuBufferDescriptor bufferDescriptorO={262144*4,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 WGpuBufferDescriptor bufferDescriptorM={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorC={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-
 // 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
 WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
@@ -462,7 +461,6 @@ WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
 WGpuImageCopyBuffer WGPU_Output_Buffer={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
-
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 inline int rNd4(int randomMax){
@@ -487,7 +485,6 @@ double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 raN=rNd4(3);
-  
   /*
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
@@ -945,7 +942,6 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-// boost::function<EM_BOOL()>rendr=[](){
 static void Rend(){
 eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
@@ -1011,7 +1007,6 @@ glUniform1f(uni_chn_tme[2],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
-
   // webgpu
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -1045,7 +1040,6 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WG
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
 glUniform1i(smp_chn[raN],raN);
 }
-
   // buffer frame/time
 // glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 // glBufferSubData(GL_UNIFORM_BUFFER,8,4,&uni_i.at(0,0)); 
@@ -1056,14 +1050,9 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[2],2);
  glUniform1i(smp_chn[3],3);
  */
-  
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
-// return EM_TRUE;
-// };
-
-// boost::function<int()>* Rend = &rendr;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
@@ -1289,7 +1278,6 @@ auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
 auto command_queue=boost::compute::command_queue(CLcontext,CLdevice);
 std::cout << "Got OpenCL context:" << CLcontext << '\n'; 
-
    // Boost Compute / Interop / OpenGL
 boost::compute::buffer_object_interface buffer_object(CLdevice,GL_ARRAY_BUFFER);
 boost::compute::vertex_array_object vertex_array(CLdevice);
@@ -1300,7 +1288,6 @@ vertex_buffer.write(new float[8]{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.g
 buffer_object.bind(GL_ARRAY_BUFFER);
 buffer_object.set_data(vertex_buffer);
 */
-     
 // nanoPause();
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
@@ -1324,6 +1311,7 @@ glAttachShader(S1.at(0,0,0),frag);
 glAttachShader(S1.at(0,0,0),vtx);
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
+  /*
 boost::uint_t<24>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
 glGenBuffers(1,&uniBlock);
@@ -1331,6 +1319,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_DYNAMIC_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
+*/
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
@@ -1342,9 +1331,7 @@ bin.at(0,0)=GLbin;
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
-  
 glSampleCoverage(1.0,GL_FALSE);
-
     // draw framebuffer
 glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
@@ -1355,7 +1342,6 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFF
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-
   //  non multisampled color renderbuffer
 glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
@@ -1364,7 +1350,6 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0))
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
 //  glBindFramebuffer(GL_FRAMEBUFFER,0);
-
    //  non multisampled depth renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
@@ -1374,7 +1359,6 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_siz
 /// glClearDepthf(1.0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
- 
 /* //  non-multisample COVERAGE_COMPONENT4_NV  renderbuffer
 glGenRenderbuffers(1,&TX.at(1,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
@@ -1391,7 +1375,6 @@ glClearStencil(1);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,2));
   */
-  
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
@@ -1400,12 +1383,9 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
-  
 glSampleCoverage(4.0,GL_FALSE);
-
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
-
      //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
@@ -1414,7 +1394,6 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_R11F_G11F_B10F,i_size.at(1
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
-
  /*         //  alpha renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
@@ -1436,7 +1415,6 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 /// glStencilMask(1);
 /// glClearStencil(0);
-
  /*   //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
@@ -1445,7 +1423,6 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH_COMPONENT32F,i_size.
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
 */
-
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
  /*   // initiate textures for Shadertoy Channel
@@ -1499,7 +1476,6 @@ smp_chn[0]=glGetUniformLocation(S1.at(0,0,0),"iChannel0");
 smp_chn[1]=glGetUniformLocation(S1.at(0,0,0),"iChannel1");
 smp_chn[2]=glGetUniformLocation(S1.at(0,0,0),"iChannel2");
 smp_chn[3]=glGetUniformLocation(S1.at(0,0,0),"iChannel3");
-    
   /*
   // uni non-block
 GLuint Ubuffer;
@@ -1509,7 +1485,6 @@ glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 */
-
     // texture
 /*
 glGenTextures(1,&wtexture[0]);
@@ -1561,10 +1536,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 WGPU_Start();
 usleep(125);
-
     */
-
- 
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -1580,8 +1552,6 @@ i_date.at(0,1)=mn;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-
-
 glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
 glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
@@ -1592,7 +1562,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-
+glUniform1f(uni_fps,iFps);
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
@@ -1610,9 +1580,9 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
-glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iFps); 
-glBindBuffer(GL_UNIFORM_BUFFER,0);
+//  glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
+//  glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iFps); 
+//  glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT);
 // glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
