@@ -916,8 +916,9 @@ i_view.at(0,1)=i_view.at(0,1)+1;
 glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
-  
-static void Rend(){
+
+boost::function<EM_BOOL()>rendr=[](){
+
 eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
 // glEnable(GL_DITHER);
@@ -1029,6 +1030,11 @@ glUniform1i(smp_chn[raN],raN);
  */
   
 glUniform1i(uni_frm,uni_i.at(0,0));
+return EM_TRUE;
+};
+
+static void Rend(){
+rendr();
 return;
 }
 
