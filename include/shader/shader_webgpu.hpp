@@ -1033,7 +1033,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return EM_TRUE;
 };
 
-void (*Rend)(void) = reinterpret_cast<void (*)(void)>(rendr);
+  boost::function<void()>* Rend = &rendr;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
