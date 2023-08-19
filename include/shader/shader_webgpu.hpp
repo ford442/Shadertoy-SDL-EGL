@@ -940,8 +940,6 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-static int iFps;
-
 static void Rend(){
 eglBindAPI(EGL_OPENGL_API);
 // glDisable(GL_SCISSOR_TEST);
@@ -974,8 +972,7 @@ u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-iFps=u_time.time_spanb.count()/1.0;
-glUniform1i(uni_fps,iFps);
+glUniform1i(uni_fps,u_time.time_spanb.count()/1.0);
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,1));
