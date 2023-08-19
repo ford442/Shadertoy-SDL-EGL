@@ -1,6 +1,6 @@
 LDFLAGS += -Wl,-s,-O3,--lto-O3,--stack-first,-lc,-lc++,-lm,-lpthread,-lrt,-ldl
 
-SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
+SIMD_FLAGS += --enable-simd -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
 STDS += -std=gnu17 -std=gnu++98 -std=gnu++03 -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=c++1z -std=gnu++20 -std=gnu++2a -std=gnu++2b -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
