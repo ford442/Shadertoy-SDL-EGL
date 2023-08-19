@@ -109,11 +109,11 @@ EGL_SAMPLES,8,
 EGL_NONE,EGL_NONE
 };
 
-inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
-inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
-inline boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
-inline boost::function<EM_BOOL()>setFloats;
-static inline boost::function<const float()>gF;
+boost::function<inline const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
+boost::function<inline const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
+boost::function<inline const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
+boost::function<EM_BOOL()>setFloats;
+static inline boost::function<inline const float()>gF;
 static inline boost::function<float()>gF5;
 static inline boost::function<float()>gFm1;
 static inline boost::function<float()>gFm5;
