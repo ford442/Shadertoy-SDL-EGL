@@ -27,6 +27,7 @@ typedef ResultType result_type;
 #include "../../include/shader/boost_defs.hpp"
 #include "../../include/shader/ext_boost_defs.hpp"
 
+#include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
