@@ -942,7 +942,6 @@ return EM_TRUE;
 
 static void Rend(){
 // eglBindAPI(EGL_OPENGL_API);
-glDisable(GL_DEPTH_TEST);
 glDisable(GL_STENCIL_TEST);
 glEnable(GL_SCISSOR_TEST);
 glDisable(GL_DITHER);
@@ -956,7 +955,6 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 // eglBindAPI(0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glEnable(GL_DEPTH_TEST);
 glEnable(GL_STENCIL_TEST);
 glBlitFramebuffer(0,0,i_size.at(1,0),i_size.at(1,0),0,0,i_size.at(0,1),i_size.at(0,1),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
