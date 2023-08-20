@@ -1075,10 +1075,6 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),GPU::gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),GPU::gF());
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
@@ -1086,7 +1082,6 @@ u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-// glUseProgram(0);
 glFlush();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
