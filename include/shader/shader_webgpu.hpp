@@ -121,7 +121,7 @@ boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
 
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
 
-boost::function<EM_BOOL()>setFloats;
+static boost::function<EM_BOOL()>setFloats;
 
 static inline boost::function<const register float()>gF;
 
@@ -723,7 +723,7 @@ Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL()>setFloats=[](){
+static boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
