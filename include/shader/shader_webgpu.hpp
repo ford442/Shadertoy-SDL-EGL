@@ -1153,8 +1153,8 @@ attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=4;
-attr.minorVersion=3;
+attr.majorVersion=3;
+attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -1251,6 +1251,7 @@ glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
  //    glDepthFunc(GL_GREATER);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+// glEnable(BLEND_ADVANCED_COHERENT_NV);
 glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
 // glDepthFunc(GL_LESS);
@@ -1292,6 +1293,7 @@ buffer_object.bind(GL_ARRAY_BUFFER);
 buffer_object.set_data(vertex_buffer);
 */
 // nanoPause();
+  
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
