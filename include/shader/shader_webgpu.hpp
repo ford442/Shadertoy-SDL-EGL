@@ -47,9 +47,7 @@ typedef ResultType result_type;
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-// #include "../../include/shader/gl.h"
-#include "../../include/shader/egl.h"
-// #include "../../include/shader/intrins.h"
+#include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
 
 static constexpr EGLint att_lst2[1000]={ 
