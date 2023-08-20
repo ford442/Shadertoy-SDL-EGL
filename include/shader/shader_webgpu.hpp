@@ -941,7 +941,7 @@ return EM_TRUE;
 }
 
 static void Rend(){
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 glDisable(GL_DITHER);
 glDisable(GL_CULL_FACE);
 glDepthMask(GL_TRUE);
@@ -962,7 +962,7 @@ glDepthMask(GL_FALSE);
 glDepthFunc(GL_LESS);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DITHER);
-eglBindAPI(0);
+// eglBindAPI(0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
 uni_i.at(0,0)++;
