@@ -150,7 +150,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.h $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
+	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o $(STDS) -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
