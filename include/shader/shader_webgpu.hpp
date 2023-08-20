@@ -24,7 +24,7 @@ typedef ResultType result_type;
 
 #define register
 
-#include "../../include/shader/boost_defs.h"
+#include "../../include/shader/boost_defs.hpp"
 
 #include <boost/preprocessor.hpp>
 #include <boost/context/detail/tuple.hpp>
