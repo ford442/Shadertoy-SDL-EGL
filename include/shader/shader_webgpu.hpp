@@ -948,10 +948,7 @@ return EM_TRUE;
 
 static void Rend(){
 // eglBindAPI(EGL_OPENGL_API);
-glDisable(GL_DITHER);
-glDisable(GL_CULL_FACE);
-glDepthMask(GL_TRUE);
-glDepthFunc(GL_LEQUAL);
+
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -971,6 +968,10 @@ glEnable(GL_DITHER);
 // eglBindAPI(0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
+glDisable(GL_DITHER);
+glDisable(GL_CULL_FACE);
+glDepthMask(GL_TRUE);
+glDepthFunc(GL_LEQUAL);
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1002,9 +1003,9 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 else{
 clk_l=true;
 }
-glUniform1f(uni_tme,d_time.at(0,0));
+// glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-// glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
 // glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -1075,6 +1076,10 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
@@ -1082,6 +1087,7 @@ u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
+glUseProgram(0);
 glFlush();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
@@ -1568,7 +1574,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-glUniform1i(uni_fps,0);
+glUniform1i(uni_fps,60);
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
