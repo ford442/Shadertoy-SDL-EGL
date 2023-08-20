@@ -121,6 +121,8 @@ boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
 
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
 
+static boost::function<const EM_BOOL()>setFloats;
+
 static inline boost::function<const register float()>gF;
 
 static inline boost::function<const register float()>gF5;
@@ -705,8 +707,6 @@ class GPU{
 private:
 
 public:
-
-static boost::function<EM_BOOL()>setFloats;
 
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin=[](boost::uint_t<24>::fast EBO){
 Sh.at(1,0)=EBO;
