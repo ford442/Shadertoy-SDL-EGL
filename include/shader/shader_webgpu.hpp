@@ -1442,7 +1442,7 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
 // glFinish();
 glEnable(GL_POLYGON_OFFSET_FILL);
-glPolygonOffset(1.0,0.5);
+glPolygonOffset(0.0,0.0);
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
