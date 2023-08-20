@@ -25,10 +25,16 @@ typedef ResultType result_type;
 #define register
 
 #include "../../include/shader/boost_defs.hpp"
-#include "../../include/shader/ext_boost_defs.hpp"
+// #include "../../include/shader/ext_boost_defs.hpp"
 
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
+
+#include <boost/assert.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/predef/other/endian.h>
+
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
 #include <boost/type_traits.hpp>
