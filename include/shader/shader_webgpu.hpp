@@ -721,7 +721,7 @@ Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL()>setFloats=[](){
+inline boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -1069,10 +1069,14 @@ mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
-glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
+glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),1.0f);
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),1.0f);
+glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),1.0f);
+glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),1.0f);
+glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),1.0f);
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
@@ -1116,6 +1120,7 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
+  
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
