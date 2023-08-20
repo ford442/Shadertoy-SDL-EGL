@@ -1060,7 +1060,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
-boost::function<EM_BOOL()>swap=[](){
+boost::function<EM_BOOL()>swap=[this](){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
