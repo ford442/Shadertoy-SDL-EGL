@@ -141,8 +141,6 @@ static inline boost::function<const register boost::compute::double_()>gD0;
 
 boost::function<EM_BOOL()>swap;
 
-boost::function<EM_BOOL()>strtt;
-
 boost::function<EM_BOOL()>strt;
 
 static void raf();
@@ -1117,7 +1115,7 @@ return results;
 return nullptr;
 }
 
-boost::function<EM_BOOL()>strtt=[this](){
+boost::function<EM_BOOL()>strt=[this](){
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1604,7 +1602,5 @@ glEnableVertexAttribArray(0);
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
-
-boost::function<EM_BOOL()>strt=strtt;
 
 };
