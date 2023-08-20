@@ -948,7 +948,6 @@ return EM_TRUE;
 
 static void Rend(){
 // eglBindAPI(EGL_OPENGL_API);
-
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -1060,7 +1059,7 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
-boost::function<EM_BOOL()>swap=[this](){
+boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 Size=int(mouse.hi);
@@ -1076,10 +1075,10 @@ glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),GPU::gF());
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),GPU::gF());
+glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),GPU::gF());
+glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),GPU::gF());
+glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),GPU::gF());
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 u_iTime_set(0.0);
