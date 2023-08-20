@@ -721,7 +721,7 @@ Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-inline boost::function<const EM_BOOL()>setFloats=[](){
+boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
