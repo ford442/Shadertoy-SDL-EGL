@@ -121,7 +121,7 @@ boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
 
 boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
 
-static boost::function<const EM_BOOL()>setFloats;
+boost::function<const EM_BOOL()>setFloats;
 
 static inline boost::function<const register float()>gF;
 
@@ -723,7 +723,7 @@ Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-static boost::function<const EM_BOOL()>setFloats=[](){
+boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -1119,7 +1119,7 @@ return nullptr;
 
 boost::function<EM_BOOL()>strtt=[this](){
 typedef struct{GLfloat XYZW[4];}Vertex;
-GPU::setFloats();
+gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,Si,sse3);
