@@ -1084,6 +1084,7 @@ u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
+glUseProgram(0);
 glFlush();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
