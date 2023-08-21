@@ -85,7 +85,6 @@ b3_vanilla_icc:
 	 --memory-init-file 0 --closure 0
 
 b3_vanilla_webgpu:
-	 ENV EMCC_CORES=2
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
@@ -147,7 +146,6 @@ b3_vanilla_llvm:
 	 --pre-js rSlider.js --pre-js slideOut.js 
 
 b3_shader_webgpu:
-	 ENV EMCC_CORES=2
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
