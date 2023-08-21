@@ -119,11 +119,11 @@ EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::exact)>EBOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::least)>EBOin;
 
-boost::function<const EM_BOOL(boost::uint_t<24>::exact)>VCOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::least)>VCOin;
 
-boost::function<const EM_BOOL(boost::uint_t<24>::exact)>VBOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::least)>VBOin;
 
 boost::function<const EM_BOOL()>setFloats;
 
@@ -188,7 +188,7 @@ GLsizei i;
 
 public:
 
-boost::uint_t<24>::fast cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+boost::uint_t<24>::least cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
@@ -710,17 +710,17 @@ private:
 
 public:
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin=[](boost::uint_t<24>::fast EBO){
+boost::function<const EM_BOOL(boost::uint_t<24>::least)>EBOin=[](boost::uint_t<24>::least EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin=[](boost::uint_t<24>::fast VCO){
+boost::function<const EM_BOOL(boost::uint_t<24>::least)>VCOin=[](boost::uint_t<24>::least VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin=[](boost::uint_t<24>::fast VBO){
+boost::function<const EM_BOOL(boost::uint_t<24>::least)>VBOin=[](boost::uint_t<24>::least VBO){
 Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
@@ -786,7 +786,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
-boost::uint_t<24>::fast VBO,EBO,VCO;
+boost::uint_t<24>::least VBO,EBO,VCO;
 }shad;
 
 inline struct{
@@ -827,7 +827,7 @@ return EM_TRUE;
 static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
-boost::uint_t<24>::fast uniBlock;
+// boost::uint_t<24>::fast uniBlock;
 
 class Run{
 
@@ -853,7 +853,7 @@ GPU gpu;
 
 public:
 
-static EM_BOOL PRGin(register boost::uint_t<24>::fast m1){
+static EM_BOOL PRGin(register boost::uint_t<24>::least m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return EM_TRUE;
@@ -1311,13 +1311,13 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 // nanoPause();
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-boost::uint_t<24>::fast vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+boost::uint_t<24>::least vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
-boost::uint_t<24>::fast frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-boost::uint_t<32>::exact shd_prg=glCreateProgram();
+boost::uint_t<24>::least frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+boost::uint_t<24>::least shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
