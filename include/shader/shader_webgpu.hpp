@@ -35,6 +35,21 @@ typedef ResultType result_type;
 #include <boost/throw_exception.hpp>
 #include <boost/predef/other/endian.h>
 
+
+#include <boost/algorithm/string.hpp>
+#include <boost/array.hpp>
+#include <boost/bind.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/filesystem/path.hpp>
+#include <boost/random.hpp>
+#include <boost/regex.hpp>
+#include <boost/system/error_code.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/tuple/tuple.hpp>
+
+#define BOOST_HAS_TR1
+#include <boost/tr1/memory.hpp>
+
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
 #include <boost/type_traits.hpp>
