@@ -12,12 +12,12 @@ COMMON_FLAGS += -pipe -pthread -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finli
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
--mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -flto=0 
+-mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
--mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -flto=0
+-mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
