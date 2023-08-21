@@ -161,7 +161,7 @@ b3_shader_webgpu:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 -sUSE_PTHREADS=0 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
+	 --pre-js js/module.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js
 
 b3_shader_wasmedge:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
