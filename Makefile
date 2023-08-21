@@ -45,7 +45,7 @@ video_resurection_jebus:
 
 video_resurection_edit:
 	 em++ $(STDS) include/shader/intrins.hpp $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.h $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
+	 em++ $(STDS) include/shader/gl.hpp $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
 	 em++ $(STDS) -c video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) video_edit.o -o b3668.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
