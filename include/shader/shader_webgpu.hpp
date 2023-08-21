@@ -96,7 +96,7 @@ EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -105,13 +105,13 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_RED_SIZE,24,
-EGL_GREEN_SIZE,24,
-EGL_BLUE_SIZE,24,
-EGL_ALPHA_SIZE,24,
+EGL_RED_SIZE,10,
+EGL_GREEN_SIZE,10,
+EGL_BLUE_SIZE,11,
+EGL_ALPHA_SIZE,10,
 EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,24,
-EGL_BUFFER_SIZE,64,
+EGL_STENCIL_SIZE,16,
+EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
 EGL_COVERAGE_SAMPLES_NV,4,
@@ -119,11 +119,11 @@ EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>EBOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::exact)>EBOin;
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VCOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::exact)>VCOin;
 
-boost::function<const EM_BOOL(boost::uint_t<24>::fast)>VBOin;
+boost::function<const EM_BOOL(boost::uint_t<24>::exact)>VBOin;
 
 boost::function<const EM_BOOL()>setFloats;
 
@@ -285,7 +285,7 @@ using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<register GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<register GLuint>;
-using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<24>::fast>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<24>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<24>::fast>;
@@ -1317,7 +1317,7 @@ src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
 boost::uint_t<24>::fast frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-boost::uint_t<24>::fast shd_prg=glCreateProgram();
+boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
