@@ -35,7 +35,6 @@ typedef ResultType result_type;
 #include <boost/throw_exception.hpp>
 #include <boost/predef/other/endian.h>
 
-
 #include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
@@ -44,8 +43,7 @@ typedef ResultType result_type;
 #include <boost/random.hpp>
 #include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/tuple/tuple.hpp>
+// #include <boost/thread/thread.hpp>
 
 #define BOOST_HAS_TR1
 
