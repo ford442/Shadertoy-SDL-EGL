@@ -141,19 +141,9 @@ boost::function<const EM_BOOL()>setFloats;
 
 static inline boost::function<const register float()>gF;
 
-static inline boost::function<const register float()>gF5;
-
 static inline boost::function<const register float()>gFm1;
 
-static inline boost::function<const register float()>gFm5;
-
 static inline boost::function<const register float()>gF0;
-
-static inline boost::function<const register boost::compute::double_()>gD;
-
-static inline boost::function<const register boost::compute::double_()>gDm1;
-
-static inline boost::function<const register boost::compute::double_()>gD0;
 
 boost::function<EM_BOOL()>swap;
 
@@ -753,32 +743,12 @@ static inline boost::function<const register float()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const register float()>gF5=[](){
-return Fi.at(1,2);
-};
-
 static inline boost::function<const register float()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const register float()>gFm5=[](){
-return Fi.at(2,0);
-};
-
 static inline boost::function<const register float()>gF0=[](){
 return Fi.at(1,1);
-};
-
-static inline boost::function<const register boost::compute::double_()>gD=[](){
-return Di.at(0,0);
-};
-
-static inline boost::function<const register boost::compute::double_()>gDm1=[](){
-return Di.at(0,1);
-};
-
-static inline boost::function<const register boost::compute::double_()>gD0=[](){
-return Di.at(1,1);
 };
 
 };
