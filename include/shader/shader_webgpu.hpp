@@ -44,7 +44,7 @@ typedef ResultType result_type;
 #include <boost/random.hpp>
 #include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
-// #include <boost/thread/thread.hpp>
+#include <boost/thread/thread.hpp>
 
 #define BOOST_HAS_TR1
 
