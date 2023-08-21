@@ -34,6 +34,7 @@ typedef ResultType result_type;
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/predef/other/endian.h>
+#include <boost/lambda/lambda.hpp>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
