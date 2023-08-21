@@ -75,6 +75,19 @@ typedef ResultType result_type;
 #define OPENGL_CORE_PROFILE
 #endif
 
+#define GL_RED_MIN 0.0
+#define GL_RED_MAX 1.0
+#define GL_GREEN_MIN 0.0
+#define GL_GREEN_MAX 1.0
+#define GL_BLUE_MIN 0.0
+#define GL_BLUE_MAX 1.0
+#define GL_ALPHA_MIN 0.0
+#define GL_ALPHA_MAX 1.0
+#define GL_INTENSITY_MIN 0.0
+#define GL_INTENSITY_MAX 1.0
+#define GL_LUMINANCE_MIN 0.0
+#define GL_LUMINANCE_MAX 1.0
+  
 static constexpr EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR,
