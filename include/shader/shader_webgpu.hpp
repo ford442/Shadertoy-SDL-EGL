@@ -48,7 +48,6 @@ typedef ResultType result_type;
 #include <boost/tuple/tuple.hpp>
 
 #define BOOST_HAS_TR1
-#include <boost/tr1/memory.hpp>
 
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
