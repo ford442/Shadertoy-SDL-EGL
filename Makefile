@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lc++abi,-lc++experimental,-lm,-lrt,-ldl,-S
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
@@ -21,7 +21,7 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=3 -Wl,-lEGL,-lGL,-lGLESv1,-lGLESv2 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=3 -Wl,-lEGL,-lEGL_mesa,-lGL,-lGLESv1_CM,-lGLESv2 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
 LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except -sPTHREAD_POOL_SIZE=64 --use-preload-plugins --closure 0 --closureFriendly \
