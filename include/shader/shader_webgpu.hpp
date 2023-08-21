@@ -70,8 +70,6 @@ typedef ResultType result_type;
 #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
 
-emscripten_set_proxying_mode(emscripten_proxying_mode_none);
-
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
 
