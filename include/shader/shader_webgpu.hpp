@@ -67,7 +67,7 @@ typedef ResultType result_type;
 #include <random>
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <emscripten/wasm_worker.h>
+// #include <emscripten/wasm_worker.h>
 
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
