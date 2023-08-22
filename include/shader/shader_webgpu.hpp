@@ -1191,6 +1191,7 @@ mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
 eglBindAPI(EGL_OPENGL_API);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
