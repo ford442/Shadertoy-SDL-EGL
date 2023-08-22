@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
+LDFLAGS += -Wl,-O3,--lto-O3,--stack-first,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-lcrt0,-lOpenCL,-S
 
 SIMD_FLAGS += -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -DSIMD=AVX
 
@@ -25,7 +25,7 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL,-lGLESv2 -sUSE
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
 LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,worker' \
+	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
