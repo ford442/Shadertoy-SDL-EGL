@@ -976,6 +976,7 @@ glEnable(GL_DITHER);
 eglBindAPI(EGL_OPENGL_ES_API);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
+return EM_TRUE;
 };
 
 static void Rend(){
