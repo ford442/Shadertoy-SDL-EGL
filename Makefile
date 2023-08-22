@@ -25,7 +25,7 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL,-lGLESv2 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
 LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,worker' \
+	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,worker' -sIGNORE_MISSING_MAIN=0 \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt
@@ -156,7 +156,7 @@ b3_shader_webgpu:
 	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -o s3026.js $(LINK_SIMD_FLAGS) \
 	 $(WEBGPU_FLAGS) -sDEMANGLE_SUPPORT=0 \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1536mb \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_FUNCTIONS='["_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js \
