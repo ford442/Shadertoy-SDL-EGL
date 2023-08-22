@@ -948,6 +948,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
+struct Rendar{
 static void Rendr(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 eglBindAPI(EGL_OPENGL_API);
@@ -1061,9 +1062,10 @@ glUniform1i(smp_chn[raN],raN);
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
+};
 
 void Rend(){
-auto Rendre = boost::fiber::fiber(Rendr());
+auto Rendre = boost::fiber::fiber(Rendar());
 Rendre.join();
 }
 
