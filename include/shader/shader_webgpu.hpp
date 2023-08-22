@@ -75,7 +75,7 @@ typedef ResultType result_type;
 #include "../../lib/lib_webgpu.h"
 
 #ifndef OPENGL_CORE_PROFILE
-#define OPENGL_CORE_PROFILE
+#define OPENGL_CORE_PROFILE 1
 #endif
 
 #define GL_RED_MIN 0.0
