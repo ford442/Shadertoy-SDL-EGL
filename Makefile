@@ -7,7 +7,7 @@ STDS += -std=gnu17 -std=c2x -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 -std
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -pipe -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops -fno-rtti \
+COMMON_FLAGS += -pipe -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops -fno-rtti \
 -mno-tail-call -O2 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
@@ -19,13 +19,13 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
-BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
+BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=2 -Wl,-lEGL,-lGL,-lGLESv2 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL,-lGLESv2 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
-LINK_FLAGS += $(LDFLAGS) -fno-except --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB \
+LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except -sPTHREAD_POOL_SIZE=64 --use-preload-plugins --closure 0 --closureFriendly \
+	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,webview,node,shell' \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt
@@ -85,6 +85,7 @@ b3_vanilla_icc:
 	 --memory-init-file 0 --closure 0
 
 b3_vanilla_webgpu:
+	 ENV EMCC_CORES=2
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
@@ -159,7 +160,8 @@ b3_shader_webgpu:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --closure-args=--externs=lib/webgpu-closure-externs.js
+	 --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js
 
 b3_shader_wasmedge:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
