@@ -979,7 +979,7 @@ glFlush();
 };
 
 static void Rend(){
-boost::fibers::fiber Rendre=boost::fibers::create_fiber(Rendar);
+boost::fibers::fiber Rendre(Rendar);
 Rendre.join();
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
