@@ -251,6 +251,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(fastmath on)\n"
 "#pragma (fastprecision off)\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
+"#extension OES_standard_derivatives : disable\n"
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
@@ -1198,7 +1199,7 @@ mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
 eglBindAPI(EGL_OPENGL_API);
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
@@ -1261,7 +1262,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
-emscripten_webgl_disable_extension(cntxi.at(0,0),"OES_standard_derivatives");
   
 // eglBindAPI(EGL_OPENGL_ES_API);
  ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
