@@ -948,8 +948,8 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-
-static void Rendar(){
+struct Rendar{
+static void Rndr(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 eglBindAPI(EGL_OPENGL_API);
 glSampleCoverage(1.0,GL_FALSE);
@@ -976,7 +976,7 @@ glDisable(GL_CULL_FACE);
 glDepthMask(GL_TRUE);
 glDepthFunc(GL_LEQUAL);
 }
-
+};
 
 static void Rend(){
 auto Rendre=boost::fibers::fiber(Rendar());
