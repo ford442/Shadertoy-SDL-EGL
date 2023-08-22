@@ -983,7 +983,6 @@ return EM_TRUE;
 
 static void Rend(){
 boost::context::fiber Rendre(Rendar);
-Rendre.join();
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
