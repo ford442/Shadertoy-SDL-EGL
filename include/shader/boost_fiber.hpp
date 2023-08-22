@@ -8,5 +8,5 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <boost/type_traits.hpp>
+#include <boost/context.hpp>
 #include <boost/fiber/all.hpp>
