@@ -24,8 +24,8 @@ BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL,-lGLESv2 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
-LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except -sPTHREAD_POOL_SIZE=64 --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,worker,webview,node,shell' \
+LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except --use-preload-plugins --closure 0 --closureFriendly \
+	 -march=haswell -sWASM=1 -sTOTAL_STACK=16MB -sENVIRONMENT='web,worker' \
 	 -sGLOBAL_BASE=16777216 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt
