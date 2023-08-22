@@ -167,6 +167,8 @@ static inline boost::function<const register float()>gF0;
 
 static inline boost::function<EM_BOOL()>Rendar;
 
+static inline boost::function<EM_BOOL()>Unifrm;
+
 boost::function<EM_BOOL()>swap;
 
 boost::function<EM_BOOL()>strt;
@@ -981,8 +983,8 @@ glFlush();
 return EM_TRUE;
 };
 
-static void Rend(){
-Rendar();
+static inline boost::function<EM_BOOL()>Unifrm=[](){
+
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1068,6 +1070,12 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[3],3);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
+return EM_TRUE
+};
+
+static void Rend(){
+Rendar();
+Unifrm();
 return;
 }
 
