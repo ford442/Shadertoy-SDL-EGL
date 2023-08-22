@@ -1,6 +1,6 @@
 #include <boost/cstdfloat.hpp>
 #include "../../include/shader/defs.hpp"
-#include <stdio.h>
+// #include <stdio.h>
 #include <stdlib.h>
 #include <cstdint>
 #include <stdarg.h>
@@ -9,7 +9,7 @@
 #include <math.h>
 #include <cfloat>
 #include <ctime>
-#include <iostream>
+// #include <iostream>
 #include <vector>
 #include <climits>
 
