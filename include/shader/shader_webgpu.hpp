@@ -947,9 +947,8 @@ return EM_TRUE;
 }
 
 static void Rend(){
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-
-// eglBindAPI(EGL_OPENGL_API);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+eglBindAPI(EGL_OPENGL_API);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -966,7 +965,7 @@ glDepthMask(GL_FALSE);
 glDepthFunc(GL_LESS);
 glEnable(GL_CULL_FACE);
 glEnable(GL_DITHER);
-// eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_ES_API);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
 glDisable(GL_DITHER);
