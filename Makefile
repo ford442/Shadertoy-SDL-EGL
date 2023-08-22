@@ -7,7 +7,7 @@ STDS += -std=gnu17 -std=c2x -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 -std
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
-COMMON_FLAGS += -pthread -pipe -mbulk-memory -matomics -sWASM_WORKERS -sSHARED_MEMORY=1 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops -fno-rtti \
+COMMON_FLAGS += -pthread -pipe -mbulk-memory -matomics -sUSE_ICU=1 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops -fno-rtti \
 -mno-tail-call -O2 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
@@ -21,7 +21,7 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL,-lGLESv2 \
+GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=1 -sUSE_GLFW=0 -Wl,-lEGL,-lGL,-lGLESv2 -sUSE_REGAL=1 \
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 
 
 LINK_FLAGS += $(LDFLAGS) -sWASMFS=0 -sASSERTIONS=0 -fno-except --use-preload-plugins --closure 0 --closureFriendly \
@@ -155,7 +155,7 @@ b3_shader_webgpu:
 	 em++ $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o $(STDS) -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -o s3026.js $(LINK_SIMD_FLAGS) \
 	 $(WEBGPU_FLAGS) -sDEMANGLE_SUPPORT=0 \
-	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1536mb \
+	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=2536mb \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
