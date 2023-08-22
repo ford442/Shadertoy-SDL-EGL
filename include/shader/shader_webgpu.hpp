@@ -948,8 +948,8 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-struct Rendar{
-static void Rendr(){
+
+static void Rendar(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 eglBindAPI(EGL_OPENGL_API);
 glSampleCoverage(1.0,GL_FALSE);
@@ -975,6 +975,12 @@ glDisable(GL_DITHER);
 glDisable(GL_CULL_FACE);
 glDepthMask(GL_TRUE);
 glDepthFunc(GL_LEQUAL);
+}
+
+
+static void Rend(){
+auto Rendre=boost::fibers::fiber(Rendar());
+Rendre.join();
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1061,12 +1067,6 @@ glUniform1i(smp_chn[raN],raN);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
 return;
-}
-};
-
-void Rend(){
-auto Rendre = boost::fibers::fiber(Rendar());
-Rendre.join();
 }
 
 boost::function<EM_BOOL()>swap=[](){
@@ -1616,7 +1616,7 @@ emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-emscripten_set_main_loop((void(*)())Run::Rend(),0,0);
+emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
 
