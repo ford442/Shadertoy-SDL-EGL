@@ -10,7 +10,7 @@
 #include <cfloat>
 #include <ctime>
 // #include <iostream>
-// #include <vector>
+#include <vector>
 #include <climits>
 
 #include <functional>
@@ -162,6 +162,8 @@ static inline boost::function<const register float()>gF;
 static inline boost::function<const register float()>gFm1;
 
 static inline boost::function<const register float()>gF0;
+
+boost::function<EM_BOOL()>Rendar;
 
 boost::function<EM_BOOL()>swap;
 
@@ -948,8 +950,11 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-struct Rendar{
-static void Rndr(){
+boost::function<EM_BOOL()>Rendar=[](){
+glDisable(GL_DITHER);
+glDisable(GL_CULL_FACE);
+glDepthMask(GL_TRUE);
+glDepthFunc(GL_LEQUAL);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 eglBindAPI(EGL_OPENGL_API);
 glSampleCoverage(1.0,GL_FALSE);
@@ -971,15 +976,10 @@ glEnable(GL_DITHER);
 eglBindAPI(EGL_OPENGL_ES_API);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
-glDisable(GL_DITHER);
-glDisable(GL_CULL_FACE);
-glDepthMask(GL_TRUE);
-glDepthFunc(GL_LEQUAL);
-}
 };
 
 static void Rend(){
-auto Rendre=boost::fibers::fiber(Rendar());
+boost::fibers::fiber Rendre=boost::fibers::create_fiber(Rendar);
 Rendre.join();
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
