@@ -45,7 +45,8 @@ typedef ResultType result_type;
 #include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/thread/thread.hpp>
-#include <boost/fiber/fiber.hpp>
+#include <boost/fiber/all.hpp>
+#include <thread>
 
 #define BOOST_HAS_TR1
 
