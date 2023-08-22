@@ -948,7 +948,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-static void Rend(){
+static void Rendr(){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 eglBindAPI(EGL_OPENGL_API);
 glSampleCoverage(1.0,GL_FALSE);
@@ -1062,6 +1062,11 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return;
 }
 
+void Rend(){
+auto Rendre = boost::fiber::fiber(Rendr());
+Rendre.join();
+}
+
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1126,7 +1131,6 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
-  
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
