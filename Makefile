@@ -148,11 +148,12 @@ b3_vanilla_llvm:
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
+	 em++ $(STDS) include/shader/boost_fiber.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o fibr.o -static
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o $(STDS) -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
+	 em++ $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o $(STDS) -DINTRINS $(BOOST_FLAGS) -DFIBR -DGLH -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -o s3026.js $(LINK_SIMD_FLAGS) \
 	 $(WEBGPU_FLAGS) -sDEMANGLE_SUPPORT=0 \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=2536mb \
