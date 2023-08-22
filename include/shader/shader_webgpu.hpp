@@ -1070,7 +1070,7 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[3],3);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
-return EM_TRUE
+return EM_TRUE;
 };
 
 static void Rend(){
