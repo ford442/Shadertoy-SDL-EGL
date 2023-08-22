@@ -163,7 +163,7 @@ static inline boost::function<const register float()>gFm1;
 
 static inline boost::function<const register float()>gF0;
 
-boost::function<EM_BOOL()>Rendar;
+static inline boost::function<EM_BOOL()>Rendar;
 
 boost::function<EM_BOOL()>swap;
 
@@ -950,7 +950,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-boost::function<EM_BOOL()>Rendar=[](){
+static inline boost::function<EM_BOOL()>Rendar=[](){
 glDisable(GL_DITHER);
 glDisable(GL_CULL_FACE);
 glDepthMask(GL_TRUE);
