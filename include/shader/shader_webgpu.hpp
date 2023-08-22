@@ -1175,7 +1175,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -1261,6 +1261,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
+emscripten_webgl_disable_extension(cntxi.at(0,0),"OES_standard_derivatives");
+  
 // eglBindAPI(EGL_OPENGL_ES_API);
  ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
