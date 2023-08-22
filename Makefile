@@ -156,7 +156,7 @@ b3_shader_webgpu:
 	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -o s3026.js $(LINK_SIMD_FLAGS) \
 	 $(WEBGPU_FLAGS) -sDEMANGLE_SUPPORT=0 \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1536mb \
-	 -sEXPORTED_FUNCTIONS='["_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js \
