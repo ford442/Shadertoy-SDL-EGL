@@ -1382,14 +1382,14 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16UI,i_size.at(0,0),i_size.at(0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
 //  glBindFramebuffer(GL_FRAMEBUFFER,0);
    //  non multisampled depth renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT24,i_size.at(0,0),i_size.at(0,0));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
 /// glClearDepthf(1.0);
