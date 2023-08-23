@@ -955,20 +955,9 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-static inline boost::function<EM_BOOL()>Rendar=[](){
-// multisampled
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(2.0,GL_FALSE);
-glEnable(GL_POLYGON_OFFSET_FILL);
-glDepthMask(GL_FALSE);
-glDepthFunc(GL_LEQUAL);
-// glEnable(GL_CULL_FACE);
-glDisable(GL_DITHER);
-// eglBindAPI(EGL_OPENGL_API);
-glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+static inline boost::function<EM_BOOL()>RendarA=[](){
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
 glEnable(GL_DITHER);
 glDisable(GL_POLYGON_OFFSET_FILL);
@@ -976,7 +965,6 @@ glDisable(GL_POLYGON_OFFSET_FILL);
 glDepthMask(GL_TRUE);
 glDepthFunc(GL_LESS);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// eglBindAPI(EGL_OPENGL_ES_API);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -989,8 +977,25 @@ glFlush();
 return EM_TRUE;
 };
 
-static inline boost::function<EM_BOOL()>Unifrm=[](){
+static inline boost::function<EM_BOOL()>RendarB=[](){
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// multisampled
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glSampleCoverage(2.0,GL_FALSE);
+glEnable(GL_POLYGON_OFFSET_FILL);
+glDepthMask(GL_FALSE);
+glDepthFunc(GL_LEQUAL);
+glDisable(GL_DITHER);
+glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+glFlush();
+return EM_TRUE;
+};
 
+static inline boost::function<EM_BOOL()>Unifrm=[](){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1076,12 +1081,14 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[3],3);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
+glFlush();
 return EM_TRUE;
 };
 
 static void Rend(){
-Rendar();
+RendarA();
 Unifrm();
+RendarB();
 return;
 }
 
@@ -1267,8 +1274,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
-  
-// eglBindAPI(EGL_OPENGL_ES_API);
  ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
