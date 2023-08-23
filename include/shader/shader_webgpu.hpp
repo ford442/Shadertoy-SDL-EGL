@@ -780,8 +780,8 @@ return Fi.at(1,1);
 
 constexpr unsigned char gu0=0,gu1=1,gu2=2,gu3=3,gu4=4,gu5=5,gu6=6,gu7=7,gu8=8,gu9=9;
 constexpr unsigned char indc[35]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,gu2,gu1,gu4,gu7,gu6,gu6,gu5,gu4,gu2,gu6,gu6,gu7,gu3,gu0,gu4,gu1,gu1,gu4,gu5};
-inline GLint uni_dte=0,uni_res=0,uni_fps=0,smp_chn_res[4]={},smp_chn[5],uni_frm=0;
-inline GLfloat uni_tme=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
+inline GLint uni_dte=0,uni_res=0,smp_chn_res[4]={},smp_chn[5],uni_frm=0;
+inline GLfloat uni_tme=0.0f,uni_fps=0.0f,uni_tme_dlt=0.0f,uni_mse=0.0f;
 inline GLfloat uni_chn_tme[4];
 
 struct{
@@ -995,7 +995,7 @@ u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
-glUniform1i(uni_fps,u_time.time_spanb.count()/1.0);
+glUniform1f(uni_fps,u_time.time_spanb.count()/1.0f);
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
 mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,1));
@@ -1598,7 +1598,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-glUniform1i(uni_fps,60);
+glUniform1i(uni_fps,60.0);
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
