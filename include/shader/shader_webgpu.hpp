@@ -46,8 +46,8 @@ typedef ResultType result_type;
 #include <boost/system/error_code.hpp>
 #include <boost/thread/thread.hpp>
 
-// #include <boost/context/fiber_fcontext.hpp>
-// #include <boost/fiber/all.hpp>
+#include <boost/context/fiber_fcontext.hpp>
+#include <boost/fiber/all.hpp>
 #include <thread>
 
 #define BOOST_HAS_TR1
@@ -72,7 +72,7 @@ typedef ResultType result_type;
 #include <emscripten.h>
 #include <emscripten/html5.h>
 // #include <emscripten/proxying.h>
-// #include <emscripten/wasm_worker.h>
+#include <emscripten/wasm_worker.h>
 
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
@@ -99,8 +99,8 @@ static constexpr EGLint att_lst2[1000]={
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
