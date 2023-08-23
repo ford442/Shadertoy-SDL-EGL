@@ -956,7 +956,7 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>Rendar=[](){
-glDisable(GL_DITHER);
+glEnable(GL_DITHER);
 glDisable(GL_POLYGON_OFFSET_FILL);
 glDisable(GL_CULL_FACE);
 glDepthMask(GL_TRUE);
@@ -979,7 +979,7 @@ glEnable(GL_POLYGON_OFFSET_FILL);
 glDepthMask(GL_FALSE);
 glDepthFunc(GL_LEQUAL);
 glEnable(GL_CULL_FACE);
-glEnable(GL_DITHER);
+glDisable(GL_DITHER);
 // eglBindAPI(EGL_OPENGL_API);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
