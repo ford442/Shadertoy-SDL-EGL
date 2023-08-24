@@ -36,7 +36,7 @@ queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config={};
 config.device = device;
-// config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
 
@@ -63,7 +63,7 @@ WGpuShaderModule vs=wgpu_device_create_shader_module(device,&shaderModuleDescV);
 shaderModuleDescF.code=fragmentShader;
 WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
-colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+colorTarget.format=config.format;
 WGpuVertexState vertState={};
 vertState.module=fs;
 vertState.entryPoint="main_v";
