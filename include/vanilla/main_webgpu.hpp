@@ -103,3 +103,5 @@ void runWebGPU();
 
 }
 
+using f_tensor=boost::numeric::ublas::tensor<float>;
+static f_tensor sze=f_tensor{2,2};
