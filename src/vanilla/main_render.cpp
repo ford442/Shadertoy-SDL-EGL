@@ -20,7 +20,7 @@ colorAttachment.clearValue.a=0.75;
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
-// wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, 800, 800,0.0,1.0);
+// wgpu_render_pass_encoder_set_viewport(pass, -1.0, -1.0, 2.0, 2.0, 0.0, 1.0);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
