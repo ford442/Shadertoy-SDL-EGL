@@ -36,9 +36,10 @@ queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config={};
 config.device = device;
-config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+// config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
+
 const char *vertexShader=
 "@vertex\n"
 "fn main_v(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
@@ -54,6 +55,7 @@ const char *fragmentShader=
 "fn main_f() -> @location(0) vec4<f32> {\n"
 "return vec4<f32>(1.0,0.5,0.3,1.0);\n"
 "}\n";
+
 WGpuShaderModuleDescriptor shaderModuleDescV={};
 WGpuShaderModuleDescriptor shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
