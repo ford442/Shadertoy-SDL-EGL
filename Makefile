@@ -9,7 +9,7 @@ LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd12
 
 COMMON_FLAGS += -pthread -pipe -mbulk-memory -matomics -sUSE_ICU=1 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
--mno-tail-call -O2 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
+-mno-tail-call -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
@@ -46,10 +46,10 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 video_resurection_edit:
-	 em++ $(STDS) include/shader/intrins.hpp $(COMMON_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.hpp $(COMMON_FLAGS) $(SIMD_FLAGS) -o gl.o -static
-	 em++ $(STDS) -c video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
-	 em++ $(STDS) video_edit.o -o b3668.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) include/shader/intrins.hpp $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) -o intrins.o -static
+	 em++ $(STDS) include/shader/gl.hpp $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) -o gl.o -static
+	 em++ $(STDS) -c video_edit.cpp $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
+	 em++ $(STDS) video_edit.o -o b3668.js $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sMAXIMUM_MEMORY=4gb -sPRECISE_F32=1 \
 	 -sALLOW_MEMORY_GROWTH=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
@@ -152,10 +152,10 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
-	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
-	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
+	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS)-O3 $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o $(STDS) -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
-	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -o s3026.js $(LINK_SIMD_FLAGS) \
+	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -O3 -o s3026.js $(LINK_SIMD_FLAGS) \
 	 $(WEBGPU_FLAGS) -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=256mb \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
@@ -270,15 +270,15 @@ b3_shader_compute:
 
 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants \
+	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
+	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
+	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -fno-fast-math \
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -flto -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
@@ -316,10 +316,10 @@ b3_audio:
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_mk:
-	em++ $(STDS) -c src/audio/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	em++ $(STDS) -c src/audio/audio.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -c src/audio/main.cpp $(COMMON_FLAGS) -O3 $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/audio.cpp $(COMMON_FLAGS) -O3 $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 
-	emcc $(STDS) -o a3020.js main.o audio.o $(COMMON_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
+	emcc $(STDS) -o a3020.js main.o audio.o $(COMMON_FLAGS) -O3 $(LINK_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=256mb \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -370,19 +370,19 @@ b3_googleStreetView_dev:
 b3_shader_glsl:
 	 ###         Shader
 	 @sh clang6.sh; \
-	 em++ src/shader/shader_glsl.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 em++ src/shader/shader_glsl.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -fmerge-all-constants \
 	 -mnontrapping-fptoint -Rpass=loop-vectorize -fasynchronous-unwind-tables \
 	 -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 ###         Main
-	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	 em++ src/shader/main.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	 -fmerge-all-constants \
 	 -mnontrapping-fptoint \
 	 -Rpass=loop-vectorize -fasynchronous-unwind-tables -Rpass-missed=loop-vectorize \
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
+	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) -O2  $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
 	 --use-preload-plugins --closureFriendly -mnontrapping-fptoint \
 	 -mllvm -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
