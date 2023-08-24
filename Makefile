@@ -8,7 +8,7 @@ LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd12
 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -DSIMD=AVX
 
 COMMON_FLAGS += -pthread -pipe -mbulk-memory -matomics -sUSE_ICU=1 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
--fPIC -fpie -finline-functions -funroll-loops \
+-fPIC -fpie -finline-functions -funroll-loops -sDISABLE_EXCEPTION_CATCHING=1 \
 -mno-tail-call -O2 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
@@ -155,7 +155,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o $(STDS) -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 $(COMMON_FLAGS) -o s3026.js $(LINK_SIMD_FLAGS) \
-	 $(WEBGPU_FLAGS) -sHTML5_SUPPORT_DEFERRING_USER_SENSITIVE_REQUESTS=0 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=512mb \
+	 $(WEBGPU_FLAGS) -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=512mb \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
