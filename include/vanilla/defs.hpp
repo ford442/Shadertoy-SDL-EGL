@@ -1,5 +1,6 @@
 #pragma once
 #define _XOPEN_SOURCE 700
+/*
 #define _XOPEN_REALTIME 1
 #define _POSIX_ASYNC_IO 1
 #define _POSIX_PRIO_IO 1
@@ -13,3 +14,4 @@
 #pragma fenv_access(on)
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
+*/
