@@ -16,7 +16,7 @@ colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 colorAttachment.clearValue.r=1.0;
 colorAttachment.clearValue.g=0.0;
 colorAttachment.clearValue.b=1.0;
-colorAttachment.clearValue.a=0.75;
+colorAttachment.clearValue.a=1.0;
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
