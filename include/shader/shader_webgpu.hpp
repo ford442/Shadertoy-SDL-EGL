@@ -1085,7 +1085,7 @@ glFlush();
 return EM_TRUE;
 };
 
-static void Rend(){
+static void Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
