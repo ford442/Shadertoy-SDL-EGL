@@ -107,7 +107,7 @@ b3_vanilla_render:
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) main_render.o -sTOTAL_STACK=256000 -sGLOBAL_BASE=256000 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
-	 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
+	 -sFILESYSTEM=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 -Oz -sDISABLE_EXCEPTION_CATCHING=1 -sDISABLE_EXCEPTION_THROWING=0 -sAUTO_JS_LIBRARIES=0 -sMINIMAL_RUNTIME=2 -sTEXTDECODER=2 -sABORTING_MALLOC=0 -sSUPPORT_ERRNO=0  \
