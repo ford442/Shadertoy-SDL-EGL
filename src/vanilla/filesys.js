@@ -12,7 +12,7 @@ setTimeout(function(){
 console.log("Got ONNX model.");
 FS.writeFile('/model.onnx',sfil);
 },1150);
-}};
+};};
 }
 
 document.getElementById('startBtn3').addEventListener('click',function(){
