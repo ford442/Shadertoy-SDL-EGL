@@ -156,6 +156,7 @@ mX=0.5*S;
 mY=0.5*S;
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
