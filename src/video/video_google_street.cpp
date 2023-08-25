@@ -205,7 +205,7 @@ glDepthFunc(GL_LESS);
 glClearDepth(D);
 glEnable(GL_POLYGON_OFFSET_FILL);
 glPolygonOffset(0.0f,0.0f);
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
@@ -287,7 +287,7 @@ attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
 attr_js.majorVersion=2;
 attr_js.minorVersion=0;
 ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
-// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(EGL_OPENGL_ES_API);
 display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display_js,&major_js,&minor_js);
@@ -299,8 +299,9 @@ eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 emscripten_webgl_make_context_current(ctx_js);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
+emscripten_webgl_enable_extension(ctx_js,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_half_float_linear");
@@ -431,7 +432,7 @@ precision:'highp',
 imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
-premultipliedAlpha:false,
+premultipliedAlpha:true,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
