@@ -1,13 +1,14 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
 void cltest(){
+/*	
 Ort::Env ort_env;
 const char model_path[12] = "/model.onnx";
 Ort::Session session(ort_env, model_path, Ort::SessionOptions{ nullptr });
 
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
-/*
+
 // Run inference
 std::vector outputTensors =
  session.Run(Ort::RunOptions{nullptr}, 
