@@ -36,7 +36,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
     size_t numInputNodes = session.GetInputCount();
     size_t numOutputNodes = session.GetOutputCount();
 
-    auto inputName = session.GetInputNameAllocated(0, allocator);
+    const std::allocator<const char *> inputName = session.GetInputNameAllocated(0, allocator);
 
     Ort::TypeInfo inputTypeInfo = session.GetInputTypeInfo(0);
     auto inputTensorInfo = inputTypeInfo.GetTensorTypeAndShapeInfo();
