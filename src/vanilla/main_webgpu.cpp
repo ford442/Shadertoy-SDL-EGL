@@ -35,7 +35,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
     size_t numInputNodes = session.GetInputCount();
     size_t numOutputNodes = session.GetOutputCount();
 
-    const char* inputName = session.GetInputName(0, allocator);
+    const char* inputName = session.GetInputNameAllocated(0, allocator);
 
     Ort::TypeInfo inputTypeInfo = session.GetInputTypeInfo(0);
     auto inputTensorInfo = inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -50,7 +50,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
         inputDims.at(0) = batchSize;
     }
 
-    const char* outputName = session.GetOutputName(0, allocator);
+    const char* outputName = session.GetOutputNameAllocated(0, allocator);
 
     Ort::TypeInfo outputTypeInfo = session.GetOutputTypeInfo(0);
     auto outputTensorInfo = outputTypeInfo.GetTensorTypeAndShapeInfo();
