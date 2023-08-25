@@ -1,8 +1,8 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
 void cltest(){
-std::vector<std::string> infos=Ort::GetAvailableProviders();
-std::cout << infos << std::endl;
+char * infos=Ort::GetAvailableProviders();
+std::cout << &infos << std::endl;
 
 /*	
 Ort::Env ort_env;
