@@ -96,7 +96,7 @@ b3_vanilla_webgpu:
 	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_ERRNO=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-post-js src/vanilla/filesys.js --extern-post-js rSlider.js --extern-post-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
@@ -110,10 +110,10 @@ b3_vanilla_render:
 	 emcc $(LDFLAGS) main_render.o -sTOTAL_STACK=256000 -sGLOBAL_BASE=256000 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 -sERROR_ON_UNDEFINED_SYMBOLS=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
-	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
 	 -Oz -sDISABLE_EXCEPTION_CATCHING=1 -sDISABLE_EXCEPTION_THROWING=0 -sAUTO_JS_LIBRARIES=0 -sMINIMAL_RUNTIME=2 -sTEXTDECODER=2 -sABORTING_MALLOC=0 -sSUPPORT_ERRNO=0  \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] -sPRECISE_F32=1 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
