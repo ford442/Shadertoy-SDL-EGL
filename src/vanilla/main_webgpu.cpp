@@ -1,5 +1,11 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
+template <typename T>
+
+T vectorProduct(const std::vector<T>& v){
+return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
+}
+
 void cltest(){
 std::vector<std::string> infos=Ort::GetAvailableProviders();
 char* char_array = new char[infos.size() * infos[0].size()];
