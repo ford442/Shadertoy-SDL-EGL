@@ -50,7 +50,7 @@ typedef ResultType result_type;
 #include <boost/fiber/all.hpp>
 #include <thread>
 
-#define BOOST_HAS_TR1
+// #define BOOST_HAS_TR1
 
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
@@ -72,7 +72,7 @@ typedef ResultType result_type;
 #include <emscripten.h>
 #include <emscripten/html5.h>
 // #include <emscripten/proxying.h>
-#include <emscripten/wasm_worker.h>
+// #include <emscripten/wasm_worker.h>
 
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
@@ -93,14 +93,17 @@ typedef ResultType result_type;
 #define GL_INTENSITY_MAX 1.0
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
-  
+
+static constexpr EGLint numSamples=4;
+static constexpr float numSamplesf=4.0f;
+
 static constexpr EGLint att_lst2[1000]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
@@ -144,7 +147,7 @@ EGL_ALPHA_SIZE,24,
 EGL_DEPTH_SIZE,24,
 EGL_STENCIL_SIZE,24,
 EGL_BUFFER_SIZE,32,
-EGL_SAMPLE_BUFFERS,8,
+EGL_SAMPLE_BUFFERS,numSamples,
 EGL_COVERAGE_BUFFERS_NV,16,
 EGL_COVERAGE_SAMPLES_NV,16,
 EGL_SAMPLES,16,
@@ -985,7 +988,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(8.0,GL_FALSE);
+glSampleCoverage(numSamplesf,GL_FALSE);
 glEnable(GL_POLYGON_OFFSET_FILL);
 glDepthMask(GL_FALSE);
 glDepthFunc(GL_LEQUAL);
@@ -1427,13 +1430,13 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
-glSampleCoverage(8.0,GL_FALSE);
+glSampleCoverage(numSamplesf,GL_FALSE);
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
      //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_R11F_G11F_B10F,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,i_size.at(1,0),i_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
@@ -1450,7 +1453,7 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFF
    //  depth32 stencil8 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
