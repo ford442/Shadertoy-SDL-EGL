@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
 void cltest(){
-std::vector<std::string> infos=GetAvailableProviders() 
+std::vector<std::string> infos=Ort::GetAvailableProviders();
 std::cout << infos << std::endl;
 
 /*	
