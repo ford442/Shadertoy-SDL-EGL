@@ -13,7 +13,8 @@ console.log("Got ONNX model.");
 FS.writeFile('/model.onnx',sfil);
 },1150);
 };};
-}
+ff.send(null);
+};
 
 document.getElementById('startBtn3').addEventListener('click',function(){
 rrr();
