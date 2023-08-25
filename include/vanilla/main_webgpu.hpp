@@ -52,9 +52,7 @@
 
 // #include "openvino/runtime/tensor.hpp"
 
-#include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_c_api.h"
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
-// #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_inline.h"
 
 #include "oneapi/tbb/tick_count.h"
 #include "oneapi/tbb/task_arena.h"
