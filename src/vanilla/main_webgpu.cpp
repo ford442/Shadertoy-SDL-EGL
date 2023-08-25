@@ -1,4 +1,4 @@
-#include "../../include/vanilla/main_webgpu.h"
+#include "../../include/vanilla/main_webgpu.hpp"
 
 void cltest(){
 Ort::Env ort_env;
