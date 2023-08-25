@@ -1,5 +1,5 @@
 function rrr(){
-var pth='./model.onnx';
+var pth='https://wasm.noahcohn.com/b3hd/model.onnx';
 console.log("Getting ONNX model...");
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
