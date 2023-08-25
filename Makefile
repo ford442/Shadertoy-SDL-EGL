@@ -93,7 +93,7 @@ b3_vanilla_webgpu:
 	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O3 -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sINITIAL_MEMORY=512mb -lmath.js -lhtml5.js -lint53.js \
+	 -sINITIAL_MEMORY=3gb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_ERRNO=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
@@ -156,7 +156,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/main.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 -o s3026.js $(LINK_SIMD_FLAGS) \
-	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1gb \
+	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=3gb \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
