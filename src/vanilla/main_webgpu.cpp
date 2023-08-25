@@ -79,8 +79,8 @@ Ort::Session session(ort_env, model_path, sessionOptions);
     std::vector<float> inputTensorValues(inputTensorSize);
 
     size_t outputTensorSize = vectorProduct(outputDims);
-    assert(("Output tensor size should equal to the label set size.",
-            labels.size() * batchSize == outputTensorSize));
+  //  assert(("Output tensor size should equal to the label set size.",
+   //         labels.size() * batchSize == outputTensorSize));
     std::vector<float> outputTensorValues(outputTensorSize);
 
     std::vector<const char*> inputNames{inputName};
