@@ -1,8 +1,12 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
 void cltest(){
-// char * infos=Ort::GetAvailableProviders();
-std::cout << Ort::GetAvailableProviders() << std::endl;
+std::vector<std::string> infos=Ort::GetAvailableProviders();
+	  char* char_array = new char[infos.size() * infos[0].size()];
+  for (int i = 0; i < infos.size(); i++) {
+    std::copy(infos[i].begin(), infos[i].end(), char_array + i * infos[0].size());
+  }
+std::cout << char_array << std::endl;
 
 /*	
 Ort::Env ort_env;
