@@ -73,7 +73,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
    // std::cout << "Input Dimensions: " << inputDims << std::endl;
     std::cout << "Output Name: " << outputName << std::endl;
     std::cout << "Output Type: " << outputType << std::endl;
-    std::cout << "Output Dimensions: " << outputDims << std::endl;
+  //  std::cout << "Output Dimensions: " << outputDims << std::endl;
 
     size_t inputTensorSize = vectorProduct(inputDims);
     std::vector<float> inputTensorValues(inputTensorSize);
