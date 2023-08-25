@@ -7,11 +7,12 @@ std::vector<std::string> infos=Ort::GetAvailableProviders();
     std::copy(infos[i].begin(), infos[i].end(), char_array + i * infos[0].size());
   }
 std::cout << char_array << std::endl;
-
-/*	
+	
 Ort::Env ort_env;
 const char model_path[12] = "/model.onnx";
 Ort::Session session(ort_env, model_path, Ort::SessionOptions{ nullptr });
+
+/*	
 
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
