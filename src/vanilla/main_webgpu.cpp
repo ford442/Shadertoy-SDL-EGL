@@ -1,6 +1,9 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
 void cltest(){
+	    
+std::cout << std::vector<std::string> GetAvailableProviders() << std::endl;
+
 /*	
 Ort::Env ort_env;
 const char model_path[12] = "/model.onnx";
