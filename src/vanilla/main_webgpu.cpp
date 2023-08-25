@@ -10,7 +10,85 @@ std::cout << char_array << std::endl;
 Ort::Env ort_env;
 const char model_path[12] = "/model.onnx";
 	
-Ort::Session session(ort_env, model_path, Ort::SessionOptions{ nullptr });
+	 // Sets graph optimization level
+    // Available levels are
+    // ORT_DISABLE_ALL -> To disable all optimizations
+    // ORT_ENABLE_BASIC -> To enable basic optimizations (Such as redundant node
+    // removals) ORT_ENABLE_EXTENDED -> To enable extended optimizations
+    // (Includes level 1 + more complex optimizations like node fusions)
+    // ORT_ENABLE_ALL -> To Enable All possible optimizations
+	
+Ort::SessionOptions sessionOptions;
+sessionOptions.SetIntraOpNumThreads(1);
+sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+
+Ort::Session session(ort_env, model_path, sessionOptions);
+
+    Ort::AllocatorWithDefaultOptions allocator;
+
+    size_t numInputNodes = session.GetInputCount();
+    size_t numOutputNodes = session.GetOutputCount();
+
+    const char* inputName = session.GetInputName(0, allocator);
+
+    Ort::TypeInfo inputTypeInfo = session.GetInputTypeInfo(0);
+    auto inputTensorInfo = inputTypeInfo.GetTensorTypeAndShapeInfo();
+
+    ONNXTensorElementDataType inputType = inputTensorInfo.GetElementType();
+
+    std::vector<int64_t> inputDims = inputTensorInfo.GetShape();
+    if (inputDims.at(0) == -1)
+    {
+        std::cout << "Got dynamic batch size. Setting input batch size to "
+                  << batchSize << "." << std::endl;
+        inputDims.at(0) = batchSize;
+    }
+
+    const char* outputName = session.GetOutputName(0, allocator);
+
+    Ort::TypeInfo outputTypeInfo = session.GetOutputTypeInfo(0);
+    auto outputTensorInfo = outputTypeInfo.GetTensorTypeAndShapeInfo();
+
+    ONNXTensorElementDataType outputType = outputTensorInfo.GetElementType();
+
+    std::vector<int64_t> outputDims = outputTensorInfo.GetShape();
+    if (outputDims.at(0) == -1)
+    {
+        std::cout << "Got dynamic batch size. Setting output batch size to "
+                  << batchSize << "." << std::endl;
+        outputDims.at(0) = batchSize;
+    }
+
+    std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
+    std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
+    std::cout << "Input Name: " << inputName << std::endl;
+    std::cout << "Input Type: " << inputType << std::endl;
+    std::cout << "Input Dimensions: " << inputDims << std::endl;
+    std::cout << "Output Name: " << outputName << std::endl;
+    std::cout << "Output Type: " << outputType << std::endl;
+    std::cout << "Output Dimensions: " << outputDims << std::endl;
+
+    size_t inputTensorSize = vectorProduct(inputDims);
+    std::vector<float> inputTensorValues(inputTensorSize);
+
+    size_t outputTensorSize = vectorProduct(outputDims);
+    assert(("Output tensor size should equal to the label set size.",
+            labels.size() * batchSize == outputTensorSize));
+    std::vector<float> outputTensorValues(outputTensorSize);
+
+    std::vector<const char*> inputNames{inputName};
+    std::vector<const char*> outputNames{outputName};
+    std::vector<Ort::Value> inputTensors;
+    std::vector<Ort::Value> outputTensors;
+
+Ort::MemoryInfo memoryInfo = Ort::MemoryInfo::CreateCpu(
+        OrtAllocatorType::OrtArenaAllocator, OrtMemType::OrtMemTypeDefault);
+    inputTensors.push_back(Ort::Value::CreateTensor<float>(
+        memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
+        inputDims.size()));
+    outputTensors.push_back(Ort::Value::CreateTensor<float>(
+        memoryInfo, outputTensorValues.data(), outputTensorSize,
+        outputDims.data(), outputDims.size()));
 
 /*	
 
