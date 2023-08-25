@@ -13,6 +13,6 @@ FS.writeFile('/model.onnx',sfil);
 }};
 }
 
-document.getElementById('startBtn').addEventListener('click',function(){
+document.getElementById('startBtn3').addEventListener('click',function(){
 rrr();
 });
