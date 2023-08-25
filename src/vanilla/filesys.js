@@ -9,6 +9,7 @@ if(sarrayBuffer){
 const sfil=new Uint8ClampedArray(sarrayBuffer);
 setTimeout(function(){
 FS.writeFile('/model.onnx',sfil);
+console.log("Got ONNX model.");
 },1150);
 }};
 }
