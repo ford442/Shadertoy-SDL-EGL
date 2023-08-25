@@ -9,7 +9,7 @@ LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd12
 
 COMMON_FLAGS += -pthread -pipe -mbulk-memory -matomics -sUSE_ICU=1 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
--mno-tail-call -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
+-m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
@@ -26,7 +26,7 @@ GL_FLAGS += -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=3 -Wl,-lGL,-lGLU,-lEGL,-lGLESv2
 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
 LINK_FLAGS += $(LDFLAGS) -sABORT_ON_WASM_EXCEPTIONS=0 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 \
-	 --use-preload-plugins --closure 0 --closureFriendly -fno-except \
+	 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=128000 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=128000 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=4294967296 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
