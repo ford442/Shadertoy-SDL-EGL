@@ -421,7 +421,7 @@ var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'uint32',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:false,
 // colorSpace:'display-p3',
@@ -432,7 +432,7 @@ precision:'highp',
 imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
-premultipliedAlpha:true,
+premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
@@ -445,6 +445,7 @@ minorVersion:0
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.getExtension('GL_ALL_EXTENSIONS');
+gl.getExtension('EGL_EXT_pixel_format_float');
 gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('EXT_color_buffer_half_float');
 gl.getExtension('EXT_blend_minmax');
