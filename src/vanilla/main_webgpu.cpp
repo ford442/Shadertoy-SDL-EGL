@@ -23,7 +23,8 @@ const char model_path[12] = "/model.onnx";
     // removals) ORT_ENABLE_EXTENDED -> To enable extended optimizations
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
-	
+const int64_t batchSize = 2;
+
 Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
@@ -35,7 +36,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
     size_t numInputNodes = session.GetInputCount();
     size_t numOutputNodes = session.GetOutputCount();
 
-    const char* inputName = session.GetInputNameAllocated(0, allocator);
+    auto inputName = session.GetInputNameAllocated(0, allocator);
 
     Ort::TypeInfo inputTypeInfo = session.GetInputTypeInfo(0);
     auto inputTensorInfo = inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -50,7 +51,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
         inputDims.at(0) = batchSize;
     }
 
-    const char* outputName = session.GetOutputNameAllocated(0, allocator);
+    auto outputName = session.GetOutputNameAllocated(0, allocator);
 
     Ort::TypeInfo outputTypeInfo = session.GetOutputTypeInfo(0);
     auto outputTensorInfo = outputTypeInfo.GetTensorTypeAndShapeInfo();
