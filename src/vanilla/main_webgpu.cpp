@@ -22,7 +22,7 @@ sessionOptions.SetIntraOpNumThreads(1);
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 	
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
-Ort::Session session(ort_env, model_path, sessionOptions);
+Ort::Session session(ort_env,model_path,sessionOptions);
 Ort::AllocatorWithDefaultOptions allocator;
 
 size_t numInputNodes=session.GetInputCount();
@@ -35,11 +35,11 @@ auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
 
 ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 
-std::vector<int64_t> inputDims = inputTensorInfo.GetShape();
+std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to "
 << batchSize << "." << std::endl;
-inputDims.at(0) = batchSize;
+inputDims.at(0)=batchSize;
 }
 
 auto outputName=session.GetOutputNameAllocated(0,allocator);
@@ -50,11 +50,11 @@ auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
 
 ONNXTensorElementDataType outputType=outputTensorInfo.GetElementType();
 
-std::vector<int64_t> outputDims = outputTensorInfo.GetShape();
+std::vector<int64_t> outputDims=outputTensorInfo.GetShape();
 if (outputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting output batch size to "
 << batchSize << "." << std::endl;
-outputDims.at(0) = batchSize;
+outputDims.at(0)=batchSize;
 }
 
 std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
@@ -67,9 +67,9 @@ std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 // std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
 
-size_t inputTensorSize = vectorProduct(inputDims);
-std::vector<int> inputTensorValues(inputTensorSize);
-size_t outputTensorSize = vectorProduct(outputDims);
+size_t inputTensorSize=vectorProduct(inputDims);
+std::vector<float> inputTensorValues(inputTensorSize);
+size_t outputTensorSize=vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
 std::string text_prompt="two birds";
@@ -85,7 +85,7 @@ std::cout << "Establishing memoryInfo" << std::endl;
 	
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
-inputTensors.push_back(Ort::Value::CreateTensor<int>(
+inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
