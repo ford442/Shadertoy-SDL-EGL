@@ -97,7 +97,7 @@ outputDims.data(),outputDims.size()));
 std::cout << "Output tensors updated." << std::endl;
 
 // Ort::RunOptions runOpts;
-
+/*
 // Run inference
 session.Run(Ort::RunOptions{}, 
 inputNames.data(),inputTensors.data(),1,
@@ -110,7 +110,7 @@ float* outputDataPtr2 = outputDataPtr;
 
 std::cout << outputDataPtr2[0] << std::endl;
 std::cout << "Output tensors updated." << std::endl;
-
+*/
 }
 
 extern"C"{
