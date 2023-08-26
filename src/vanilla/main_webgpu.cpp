@@ -28,7 +28,7 @@ Ort::AllocatorWithDefaultOptions allocator;
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
 
-unique_ptr<char, Ort::detail::AllocatedFree>inputName;
+std::unique_ptr<char, Ort::detail::AllocatedFree>inputName;
 inputName=session.GetInputNameAllocated(0, allocator);
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
@@ -42,8 +42,8 @@ std::cout << "Got dynamic batch size. Setting input batch size to "
 << batchSize << "." << std::endl;
 inputDims.at(0) = batchSize;
 }
-unique_ptr<char, Ort::detail::AllocatedFree>outputName;
-unique_ptr<char, Ort::detail::AllocatedFree>outputName2;
+std::unique_ptr<char, Ort::detail::AllocatedFree>outputName;
+std::unique_ptr<char, Ort::detail::AllocatedFree>outputName2;
 
 outputName=session.GetOutputNameAllocated(0, allocator);
 outputName2=session.GetOutputNameAllocated(1, allocator);
