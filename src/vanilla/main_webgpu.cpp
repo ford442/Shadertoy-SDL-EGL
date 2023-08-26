@@ -88,13 +88,10 @@ memoryInfo,outputTensorValues.data(),outputTensorSize,
 outputDims.data(),outputDims.size()));
 std::cout << "Output tensors updated." << std::endl;
 
-	
-
-/*	
-outputTensors =     session.Run(Ort::RunOptions{nullptr}, inputNames.data(),
-                inputTensors.data(), 1 /*Number of inputs*/, outputNames.data(),
-                outputTensors.data(), 1 /*Number of outputs*/);
-
+/*
+// outputTensors =     session.Run(Ort::RunOptions{nullptr}, inputNames.data(),
+//                 inputTensors.data(), 1 /*Number of inputs*/, outputNames.data(),
+ //                outputTensors.data(), 1 /*Number of outputs*/);
 	
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
@@ -110,7 +107,7 @@ std::vector outputTensors =
 
 const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
 std::cout << outputDataPtr[0] << std::endl;
-	*/
+*/
 }
 
 extern"C"{
