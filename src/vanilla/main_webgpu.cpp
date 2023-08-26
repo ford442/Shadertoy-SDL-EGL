@@ -70,8 +70,8 @@ std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
-std::vector<const char*> inputNames{inputName};
-std::vector<const char*> outputNames{outputName};
+// std::vector<const char*> inputNames{inputName};
+// std::vector<const char*> outputNames{outputName};
 
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
@@ -81,10 +81,12 @@ OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
-	
+	std::cout << "Creating CPU link " << std::endl;
+
 outputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,outputTensorValues.data(),outputTensorSize,
 outputDims.data(),outputDims.size()));
+std::cout << "Output tensors updated." << std::endl;
 
 	
 
