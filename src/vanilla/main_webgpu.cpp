@@ -28,7 +28,8 @@ Ort::AllocatorWithDefaultOptions allocator;
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
 
-auto inputName=session.GetInputNameAllocated(0, allocator);
+std::unique_ptr<char[]>inputName(new char[32]);
+inputName=session.GetInputNameAllocated(0, allocator);
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -41,9 +42,11 @@ std::cout << "Got dynamic batch size. Setting input batch size to "
 << batchSize << "." << std::endl;
 inputDims.at(0) = batchSize;
 }
+std::unique_ptr<char[]>outputName(new char[32]);
+std::unique_ptr<char[]>outputName2(new char[32]);
 
-auto outputName=session.GetOutputNameAllocated(0, allocator);
-auto outputName2=session.GetOutputNameAllocated(1, allocator);
+outputName=session.GetOutputNameAllocated(0, allocator);
+outputName2=session.GetOutputNameAllocated(1, allocator);
 
 Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
