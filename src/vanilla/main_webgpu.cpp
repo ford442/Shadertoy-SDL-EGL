@@ -9,9 +9,9 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 Ort::Env ort_env;
 const char model_path[12]="/model.onnx";
-const int64_t batchSize=1;
+const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
-sessionOptions.SetIntraOpNumThreads(1);
+sessionOptions.SetIntraOpNumThreads(2);
 	
 		 // Sets graph optimization level
     // Available levels are
@@ -95,9 +95,11 @@ inputDims.size()));
 std::cout << "Establishing Tensors" << std::endl;
 	
 std::cout << "Creating CPU link " << std::endl;
+
 outputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo,outputTensorValues.data(),outputTensorSize,
-outputDims.data(),outputDims.size()));
+memoryInfo,outputTensorValues.data(),inputTensorSize,
+inputDims.data(),inputDims.size()));
+	
 std::cout << "Output tensors updated." << std::endl;
 
 // Ort::RunOptions runOpts;
@@ -105,7 +107,7 @@ std::cout << "Output tensors updated." << std::endl;
 // Run inference
 session.Run(Ort::RunOptions{}, 
 inputNames.data(),inputTensors.data(),1,
-outputNames.data(),outputTensors.data(),1);
+outputNames.data(),outputTensors.data(),2);
 
 std::cout << "Running inferrence." << std::endl;
 
