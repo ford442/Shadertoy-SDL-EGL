@@ -695,8 +695,9 @@ document.getElementById('di').click();
 extern"C"{
 
 void startWebGPU(){
+WGPU_Start();
+sleep(1);
 cltest();
-// WGPU_Start();
 }
 
 void runWebGPU(){
