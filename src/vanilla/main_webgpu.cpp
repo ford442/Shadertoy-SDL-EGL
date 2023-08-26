@@ -105,7 +105,7 @@ outputNames.data(),outputTensors.data(),2);
 
 std::cout << "Running inferrence." << std::endl;
 
-auto outputDataPtr = outputTensors[0].GetTensorData();
+auto outputDataPtr = outputTensors[0].GetTensorRawData();
 	
 std::cout << outputDataPtr[0] << std::endl;
 std::cout << "Output tensors updated." << std::endl;
