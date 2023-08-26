@@ -105,13 +105,13 @@ std::cout << "Output tensors updated." << std::endl;
 // Run inference
 session.Run(Ort::RunOptions{}, 
 inputNames.data(),inputTensors.data(),1,
-outputNames.data(),outputTensors.data(),2);
+outputNames.data(),outputTensors.data(),1);
 
 std::cout << "Running inferrence." << std::endl;
 
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 
-std::cout << outputDataPtr[0] << std::endl;
+std::cout << outputDataPtr << std::endl;
 std::cout << "Output tensors updated." << std::endl;
 
 }
