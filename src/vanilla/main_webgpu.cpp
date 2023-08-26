@@ -28,7 +28,7 @@ Ort::AllocatorWithDefaultOptions allocator;
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
 
-std::unique_ptr<char, Ort::detail::AllocatedFree>inputName;
+std::unique_ptr()<char, Ort::detail::AllocatedFree>inputName;
 inputName=session.GetInputNameAllocated(0, allocator);
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
