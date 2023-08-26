@@ -98,10 +98,12 @@ outputDims.data(),outputDims.size()));
 std::cout << "Output tensors updated." << std::endl;
 
 Ort::RunOptions runOpts;
+
+/*
+
 outputTensors=session.Run(runOpts,inputNames.data(),
 inputTensors.data(),1,outputNames.data(),outputTensors.data(),2);
 
-/*
 	
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
