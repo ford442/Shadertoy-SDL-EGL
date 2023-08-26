@@ -75,7 +75,7 @@ std::vector<float> outputTensorValues(outputTensorSize);
 		
 std::vector<std::string> inputNames;
 std::vector<std::string> outputNames;
-input_names.emplace_back(inputName);
+inputNames.emplace_back(inputName);
 outputNames.emplace_back(outputName,outputName2);
 
 std::vector<Ort::Value> inputTensors;
