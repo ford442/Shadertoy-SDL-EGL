@@ -68,7 +68,7 @@ std::cout << "Output Type: " << outputType << std::endl;
 // std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
 
 size_t inputTensorSize = vectorProduct(inputDims);
-std::vector<float> inputTensorValues(inputTensorSize);
+std::vector<int> inputTensorValues(inputTensorSize);
 size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
@@ -85,8 +85,8 @@ std::cout << "Establishing memoryInfo" << std::endl;
 	
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
-inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(
-memoryInfo, inputTensorValues.data(),inputTensorSize,inputDims.data(),
+inputTensors.push_back(Ort::Value::CreateTensor<int>(
+memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
