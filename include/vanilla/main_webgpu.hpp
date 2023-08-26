@@ -4,6 +4,8 @@
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
 
+#define __EMCSCRIPTEN__ 1
+
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
