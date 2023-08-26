@@ -60,10 +60,10 @@ std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
-std::cout << "Input Dimensions: " << inputDims << std::endl;
+std::cout << "Input Dimensions: " <<  std::to_string(inputDims) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
-std::cout << "Output Dimensions: " << outputDims << std::endl;
+std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
 
 size_t inputTensorSize = vectorProduct(inputDims);
 std::vector<float> inputTensorValues(inputTensorSize);
