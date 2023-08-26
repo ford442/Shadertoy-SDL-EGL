@@ -111,3 +111,9 @@ void runWebGPU();
 using f_tensor=boost::numeric::ublas::tensor<float>;
 static f_tensor sze=f_tensor{2,2};
 double szh, szw;
+
+template <typename T>
+
+T vectorProduct(const std::vector<T>& v){
+return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
+}
