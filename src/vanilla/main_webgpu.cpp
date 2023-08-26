@@ -77,6 +77,7 @@ std::vector<const char*> inputNames = {"input_ids"};
 std::vector<const char*> outputNames = {"last_hidden_state", "out1"};
 	
 std::vector<Ort::Value> inputTensors;
+std::vector<Ort::Value> outputTensors;
 
 std::cout << "Establishing Tensors" << std::endl;
 
@@ -97,7 +98,7 @@ std::cout << "Creating CPU link " << std::endl;
 // Ort::RunOptions runOpts;
 
 // Run inference
-std::vector outputTensors =
+outputTensors =
 session.Run(Ort::RunOptions{nullptr}, 
 inputNames.data(),&inputTensors,inputNames.size(),
 &outputTensors,outputNames.data(),outputNames.size());
