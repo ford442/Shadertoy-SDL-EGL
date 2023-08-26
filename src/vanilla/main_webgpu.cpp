@@ -75,19 +75,21 @@ std::vector<float> outputTensorValues(outputTensorSize);
 std::vector<const char*>inputNames={"input_ids"};
 std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 
-std::vector<Ort::Value> inputTensors;
-std::vector<Ort::Value> outputTensors;
-
-std::cout << "Establishing Tensors" << std::endl;
-
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(
 OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
 std::cout << "Establishing memoryInfo" << std::endl;
 
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
+memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
+inputDims.size()));
+inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
-
+std::vector<Ort::Value> inputTensors;
+std::vector<Ort::Value> outputTensors;
+std::vector<float> inputTensorValues(inputTensorSize);
+std::cout << "Establishing Tensors" << std::endl;
+	
 std::cout << "Creating CPU link " << std::endl;
  outputTensors.push_back(Ort::Value::CreateTensor<float>(
  memoryInfo,outputTensorValues.data(),outputTensorSize,
@@ -98,8 +100,8 @@ std::cout << "Output tensors updated." << std::endl;
 
 // Run inference
 session.Run(Ort::RunOptions{}, 
-inputNames.data(),inputTensors,inputNames.size(),
-&outputTensors,outputNames.data(),outputNames.size());
+inputNames.data(),inputTensors.data(),1,
+outputNames.data(),outputTensors.data(),2);
 
 std::cout << "Running inferrence." << std::endl;
 
