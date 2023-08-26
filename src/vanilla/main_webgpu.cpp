@@ -72,7 +72,7 @@ std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
-std::u32string text_prompt="two birds";
+std::string text_prompt="two birds";
 std::copy(text_prompt.begin<int32_t>(),text_prompt.end<int32_t>(),inputTensorValues.begin());
 	  std::cout << "Establishing text input" << std::endl;
 
