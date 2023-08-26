@@ -43,6 +43,7 @@ inputDims.at(0) = batchSize;
 }
 
 auto outputName=session.GetOutputNameAllocated(0, allocator);
+auto outputName2=session.GetOutputNameAllocated(1, allocator);
 
 Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -62,6 +63,7 @@ std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 // std::cout << "Input Dimensions: " <<  std::to_string(inputDims) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
+std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 // std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
 
@@ -70,28 +72,37 @@ std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
-// std::vector<const char*> inputNames{inputName};
-// std::vector<const char*> outputNames{outputName};
+		
+std::vector<std::string> inputNames;
+std::vector<std::string> outputNames;
+input_names.emplace_back(inputName);
+outputNames.emplace_back(outputName,outputName2);
 
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
 
+std::cout << "Establishing Tensors" << std::endl;
+
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(
 OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
+std::cout << "Establishing memoryInfo" << std::endl;
+
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
+	
 	std::cout << "Creating CPU link " << std::endl;
-
 outputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,outputTensorValues.data(),outputTensorSize,
 outputDims.data(),outputDims.size()));
 std::cout << "Output tensors updated." << std::endl;
 
-/*
+
 outputTensors =     session.Run(Ort::RunOptions{nullptr}, inputNames.data(),
 inputTensors.data(), 1 , outputNames.data(),
 outputTensors.data(), 1);
+/*
+
 	
 // Load and preprocess the input image to 
 // inputTensor, inputNames, and outputNames
