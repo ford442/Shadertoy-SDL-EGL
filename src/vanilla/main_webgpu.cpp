@@ -77,7 +77,6 @@ std::vector<const char*> inputNames = {"input_ids"};
 const char* outputNames[] = {"last_hidden_state", "out1"};
 	
 std::vector<Ort::Value> inputTensors;
-std::vector<Ort::Value> outputTensors;
 
 std::cout << "Establishing Tensors" << std::endl;
 
