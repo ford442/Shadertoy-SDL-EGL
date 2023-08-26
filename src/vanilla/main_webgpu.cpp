@@ -100,7 +100,7 @@ std::cout << "Creating CPU link " << std::endl;
 std::vector outputTensors =
  session.Run(Ort::RunOptions{nullptr}, 
  			outputNames.data(), 
-			&inputTensor, 
+			&inputTensors, 
 			1, 
 			outputNames.data(), 
 			2);
