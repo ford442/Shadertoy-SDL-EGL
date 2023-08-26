@@ -104,13 +104,13 @@ inputNames.data(),inputTensors.data(),1,
 outputNames.data(),outputTensors.data(),2);
 
 std::cout << "Running inferrence." << std::endl;
-
+*/
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 float* outputDataPtr2 = outputDataPtr;
 
 std::cout << outputDataPtr2[0] << std::endl;
 std::cout << "Output tensors updated." << std::endl;
-*/
+
 }
 
 extern"C"{
