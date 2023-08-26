@@ -73,13 +73,8 @@ size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
 		
-std::vector<char *> inputNames;
-std::vector<char *> outputNames;
-inputNames.emplace_back(inputName);
-outputNames.emplace_back(outputName,outputName2);
-	
- std::vector<const char*> input_names = {"X"};
-  const char* output_names[] = {"out0", "out1"};
+std::vector<const char*> inputNames = {"input_ids"};
+const char* outputNames[] = {"last_hidden_state", "out1"};
 	
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
