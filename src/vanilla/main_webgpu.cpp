@@ -696,8 +696,8 @@ extern"C"{
 
 void startWebGPU(){
 WGPU_Start();
-sleep(1);
-cltest();
+// sleep(1);
+// cltest();
 }
 
 void runWebGPU(){
