@@ -89,10 +89,10 @@ memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
 
 std::cout << "Creating CPU link " << std::endl;
-outputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo,outputTensorValues.data(),outputTensorSize,
-outputDims.data(),outputDims.size()));
-std::cout << "Output tensors updated." << std::endl;
+// outputTensors.push_back(Ort::Value::CreateTensor<float>(
+// memoryInfo,outputTensorValues.data(),outputTensorSize,
+// outputDims.data(),outputDims.size()));
+// std::cout << "Output tensors updated." << std::endl;
 
 // Ort::RunOptions runOpts;
 
