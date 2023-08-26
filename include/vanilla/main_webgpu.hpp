@@ -19,6 +19,7 @@
 #include <climits>
 #include <ctime>
 #include <vector>
+#include <memory>
 
 #include <exception>
 #include <fstream>
