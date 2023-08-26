@@ -81,7 +81,6 @@ std::cout << "Establishing memoryInfo" << std::endl;
 	
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
-std::vector<float> inputTensorValues(inputTensorSize);
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
 inputDims.size()));
