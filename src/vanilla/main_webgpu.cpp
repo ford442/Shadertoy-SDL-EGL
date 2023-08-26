@@ -36,7 +36,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
     size_t numInputNodes = session.GetInputCount();
     size_t numOutputNodes = session.GetOutputCount();
 
- std::shared_ptr <char, Ort::detail::AllocatedFree> inputName = session.GetInputNameAllocated(0, allocator);
+// std::shared_ptr <char, Ort::detail::AllocatedFree> inputName = session.GetInputNameAllocated(0, allocator);
 
     Ort::TypeInfo inputTypeInfo = session.GetInputTypeInfo(0);
     auto inputTensorInfo = inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -51,7 +51,7 @@ Ort::Session session(ort_env, model_path, sessionOptions);
         inputDims.at(0) = batchSize;
     }
 
-    auto outputName = session.GetOutputNameAllocated(0, allocator);
+//    auto outputName = session.GetOutputNameAllocated(0, allocator);
 
     Ort::TypeInfo outputTypeInfo = session.GetOutputTypeInfo(0);
     auto outputTensorInfo = outputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -68,10 +68,10 @@ Ort::Session session(ort_env, model_path, sessionOptions);
 
     std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
     std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
-    std::cout << "Input Name: " << inputName << std::endl;
+  //  std::cout << "Input Name: " << inputName << std::endl;
     std::cout << "Input Type: " << inputType << std::endl;
    // std::cout << "Input Dimensions: " << inputDims << std::endl;
-    std::cout << "Output Name: " << outputName << std::endl;
+ //   std::cout << "Output Name: " << outputName << std::endl;
     std::cout << "Output Type: " << outputType << std::endl;
   //  std::cout << "Output Dimensions: " << outputDims << std::endl;
 
@@ -83,8 +83,8 @@ Ort::Session session(ort_env, model_path, sessionOptions);
    //         labels.size() * batchSize == outputTensorSize));
     std::vector<float> outputTensorValues(outputTensorSize);
 
-    std::vector<const char*> inputNames{inputName};
-    std::vector<const char*> outputNames{outputName};
+ //   std::vector<const char*> inputNames{inputName};
+ //   std::vector<const char*> outputNames{outputName};
     std::vector<Ort::Value> inputTensors;
     std::vector<Ort::Value> outputTensors;
 
