@@ -78,16 +78,17 @@ std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(
 OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
 std::cout << "Establishing memoryInfo" << std::endl;
-
+	
+std::vector<Ort::Value> inputTensors;
+std::vector<Ort::Value> outputTensors;
+std::vector<float> inputTensorValues(inputTensorSize);
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
 inputDims.size()));
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
-std::vector<Ort::Value> inputTensors;
-std::vector<Ort::Value> outputTensors;
-std::vector<float> inputTensorValues(inputTensorSize);
+
 std::cout << "Establishing Tensors" << std::endl;
 	
 std::cout << "Creating CPU link " << std::endl;
