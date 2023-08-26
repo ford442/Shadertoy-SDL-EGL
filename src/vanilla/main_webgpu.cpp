@@ -80,7 +80,8 @@ std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
 
 std::cout << "Establishing Tensors" << std::endl;
-
+	
+/*
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(
 OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
 std::cout << "Establishing memoryInfo" << std::endl;
