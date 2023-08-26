@@ -72,6 +72,10 @@ std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
+std::u32string text_prompt="two birds";
+std::copy(text_prompt.begin<int32_t>(),text_prompt.end<int32_t>(),inputTensorValues.begin());
+	  std::cout << "Establishing text input" << std::endl;
+
 std::vector<const char*>inputNames={"input_ids"};
 std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 
@@ -81,8 +85,8 @@ std::cout << "Establishing memoryInfo" << std::endl;
 	
 std::vector<Ort::Value> inputTensors;
 std::vector<Ort::Value> outputTensors;
-inputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
+inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(
+memoryInfo, inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
@@ -91,26 +95,25 @@ inputDims.size()));
 std::cout << "Establishing Tensors" << std::endl;
 	
 std::cout << "Creating CPU link " << std::endl;
- outputTensors.push_back(Ort::Value::CreateTensor<float>(
- memoryInfo,outputTensorValues.data(),outputTensorSize,
+outputTensors.push_back(Ort::Value::CreateTensor<float>(
+memoryInfo,outputTensorValues.data(),outputTensorSize,
 outputDims.data(),outputDims.size()));
 std::cout << "Output tensors updated." << std::endl;
 
 // Ort::RunOptions runOpts;
-/*
+
 // Run inference
 session.Run(Ort::RunOptions{}, 
 inputNames.data(),inputTensors.data(),1,
 outputNames.data(),outputTensors.data(),2);
 
 std::cout << "Running inferrence." << std::endl;
-*/
-auto outputDataPtr = outputTensors[0].GetTensorRawData();
-float* outputDataPtr2 = outputDataPtr;
 
+auto outputDataPtr = outputTensors[0].GetTensorRawData();
+/*
 std::cout << outputDataPtr2[0] << std::endl;
 std::cout << "Output tensors updated." << std::endl;
-
+*/
 }
 
 extern"C"{
