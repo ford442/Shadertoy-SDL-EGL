@@ -105,7 +105,7 @@ outputNames.data(),outputTensors.data(),2);
 
 std::cout << "Running inferrence." << std::endl;
 
-const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
+const float* outputDataPtr = outputTensors[0].GetTensorData();
 	
 std::cout << outputDataPtr[0] << std::endl;
 std::cout << "Output tensors updated." << std::endl;
