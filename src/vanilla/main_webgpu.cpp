@@ -21,7 +21,7 @@ sessionOptions.SetIntraOpNumThreads(1);
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 	
-sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 Ort::Session session(ort_env,model_path,sessionOptions);
 Ort::AllocatorWithDefaultOptions allocator;
 
@@ -620,7 +620,8 @@ Module.ccall("runWebGPU");
 }
 
 function normalResStart(){
-Module.ccall("startWebGPU");
+// Module.ccall("startWebGPU");
+Module.ccall("runWebGPU2");
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
@@ -680,10 +681,14 @@ normalResStart();
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
 Module.ccall("runWebGPU");
-Module.ccall("runWebGPU2");
+// Module.ccall("runWebGPU2");
 // const myInterval=setInterval(strr,16.6);
 });
 
+document.getElementById('startBtn4').addEventListener('click',function(){
+Module.ccall("startWebGPU");
+});
+	
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -695,9 +700,9 @@ document.getElementById('di').click();
 extern"C"{
 
 void startWebGPU(){
-WGPU_Start();
+// WGPU_Start();
 // sleep(1);
-// cltest();
+cltest();
 }
 
 void runWebGPU(){
@@ -705,13 +710,13 @@ WGPU_Run();
 }
 
 void runWebGPU2(){
-WGPU_Run2();
+WGPU_Start();
 }
 
 }
 
 int main(void){
-testtr();
+// testtr();
 js_main();
 // sleep(1);
 // WGPU_Start();
