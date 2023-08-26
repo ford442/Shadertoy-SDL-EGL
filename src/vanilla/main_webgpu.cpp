@@ -73,8 +73,8 @@ size_t outputTensorSize = vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
 		
-std::vector<const char*> inputNames;
-std::vector<const char*> outputNames;
+std::vector<std::string> inputNames;
+std::vector<std::string> outputNames;
 inputNames.emplace_back(inputName);
 outputNames.emplace_back(outputName,outputName2);
 
