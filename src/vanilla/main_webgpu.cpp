@@ -98,14 +98,11 @@ std::cout << "Creating CPU link " << std::endl;
 
 // Run inference
 std::vector outputTensors =
- session.Run(Ort::RunOptions{nullptr}, 
- 			inputNames.data(), 
-			&inputTensors, 
-			inputNames.size(), 
-			outputNames.data(), 
-			outputNames.size());
+session.Run(Ort::RunOptions{nullptr}, 
+inputNames.data(),&inputTensors,inputNames.size(),
+&OutputTensors,outputNames.data(),outputNames.size());
 
-	std::cout << "Running inferrence." << std::endl;
+std::cout << "Running inferrence." << std::endl;
 
 const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
 	
