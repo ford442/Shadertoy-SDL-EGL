@@ -19,6 +19,12 @@
 #include <climits>
 #include <ctime>
 #include <vector>
+
+#include <exception>
+#include <fstream>
+#include <limits>
+#include <numeric>
+
 #include <cassert>
 #include <random>
 #include <cfloat>
