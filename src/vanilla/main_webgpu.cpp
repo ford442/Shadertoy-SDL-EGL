@@ -99,11 +99,11 @@ std::cout << "Creating CPU link " << std::endl;
 // Run inference
 std::vector outputTensors =
  session.Run(Ort::RunOptions{nullptr}, 
- 			outputNames.data(), 
+ 			inputNames.data(), 
 			&inputTensors, 
-			1, 
+			inputNames.size(), 
 			outputNames.data(), 
-			2);
+			outputNames.size());
 
 	std::cout << "Running inferrence." << std::endl;
 
