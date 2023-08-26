@@ -106,8 +106,12 @@ std::vector outputTensors =
 			outputNames.data(), 
 			outputNames.size());
 
+	std::cout << "Running inferrence." << std::endl;
+
 const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
+	
 std::cout << outputDataPtr[0] << std::endl;
+std::cout << "Output tensors updated." << std::endl;
 
 }
 
