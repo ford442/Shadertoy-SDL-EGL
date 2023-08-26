@@ -90,23 +90,14 @@ std::cout << "Establishing memoryInfo" << std::endl;
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
 inputDims.size()));
-	
+
 std::cout << "Creating CPU link " << std::endl;
 outputTensors.push_back(Ort::Value::CreateTensor<float>(
 memoryInfo,outputTensorValues.data(),outputTensorSize,
 outputDims.data(),outputDims.size()));
 std::cout << "Output tensors updated." << std::endl;
 
-Ort::RunOptions runOpts;
-
-/*
-
-outputTensors=session.Run(runOpts,inputNames.data(),
-inputTensors.data(),1,outputNames.data(),outputTensors.data(),2);
-
-	
-// Load and preprocess the input image to 
-// inputTensor, inputNames, and outputNames
+// Ort::RunOptions runOpts;
 
 // Run inference
 std::vector outputTensors =
@@ -119,7 +110,7 @@ std::vector outputTensors =
 
 const float* outputDataPtr = outputTensors[0].GetTensorMutableData();
 std::cout << outputDataPtr[0] << std::endl;
-*/
+
 }
 
 extern"C"{
