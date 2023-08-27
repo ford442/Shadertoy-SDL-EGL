@@ -12,3 +12,4 @@
 
 #include <GL/gl.h>
 #include <GL/glext.h>
+#include <GL/glew.h>
