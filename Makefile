@@ -46,12 +46,12 @@ video_resurection_jebus:
 	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
 
 video_resurection_edit:
-	 em++ $(STDS) include/shader/intrins.hpp $() -O2 $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.hpp $() -O2 $(SIMD_FLAGS) -o gl.o -static
-	 em++ $(STDS) -c video_edit.cpp $() -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
-	 em++ $(STDS) video_edit.o -o b3668.js $() -O2 $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) -O2 $(SIMD_FLAGS) -o intrins.o -static
+	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) -O2 $(SIMD_FLAGS) -o gl.o -static
+	 em++ $(STDS) -c video_edit.cpp $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
+	 em++ $(STDS) video_edit.o -o b3668.js $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
-	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=1024mb -sMAXIMUM_MEMORY=4gb -sPRECISE_F32=1 \
+	 -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sUSE_SDL=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -156,7 +156,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/main.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 -o s3027.js $(LINK_SIMD_FLAGS) \
-	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=3gb \
+	 -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
