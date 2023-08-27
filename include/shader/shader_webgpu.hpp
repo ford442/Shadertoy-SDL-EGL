@@ -144,11 +144,11 @@ EGL_RED_SIZE,24,
 EGL_GREEN_SIZE,24,
 EGL_BLUE_SIZE,24,
 EGL_ALPHA_SIZE,24,
-EGL_DEPTH_SIZE,24,
+EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,24,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,numSamples,
-EGL_COVERAGE_BUFFERS_NV,numSamples,
+EGL_COVERAGE_BUFFERS_NV,16,
 EGL_COVERAGE_SAMPLES_NV,16,
 EGL_SAMPLES,16,
 EGL_NONE,EGL_NONE
@@ -250,8 +250,8 @@ static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#undef HW_PERFORMANCE\n"
 "#define HW_PERFORMANCE 1\n"
-"#pragma (fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
+"#pragma (fastmath off)\n"
+"#pragma optionNV(fastmath off)\n"
 "#pragma (fastprecision off)\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#extension OES_standard_derivatives : disable\n"
