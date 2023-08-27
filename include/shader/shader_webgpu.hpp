@@ -81,6 +81,10 @@ typedef ResultType result_type;
 #define OPENGL_CORE_PROFILE 1
 #endif
 
+#ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
+#define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
+#endif
+
 #define GL_RED_MIN 0.0
 #define GL_RED_MAX 1.0
 #define GL_GREEN_MIN 0.0
@@ -131,7 +135,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -1219,6 +1223,7 @@ glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
