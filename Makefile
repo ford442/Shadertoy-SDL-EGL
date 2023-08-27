@@ -155,7 +155,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
-	 -DLIB_WEBGPU_CPP20 -o s3026.js $(LINK_SIMD_FLAGS) \
+	 -DLIB_WEBGPU_CPP20 -o s3027.js $(LINK_SIMD_FLAGS) \
 	 -sFORCE_FILESYSTEM=1 -sINITIAL_MEMORY=3gb \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
