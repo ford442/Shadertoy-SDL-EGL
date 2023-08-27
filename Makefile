@@ -151,9 +151,10 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
+	 em++ $(STDS) include/shader/egl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o eglh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DGLH -DLIB_WEBGPU \
+	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DGLH -DEGLH -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 -o s3027.js $(LINK_SIMD_FLAGS) \
 	 -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
