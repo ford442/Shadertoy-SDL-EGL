@@ -74,7 +74,7 @@ typedef ResultType result_type;
 // #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
 
-#include "../../include/shader/egl.hpp"
+// #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
 
 #ifndef OPENGL_CORE_PROFILE
