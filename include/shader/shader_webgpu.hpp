@@ -966,7 +966,7 @@ glEnable(GL_DITHER);
 glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 glDepthMask(GL_TRUE);
-glDepthFunc(GL_LESS);
+glDepthFunc(GL_LEQUAL);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glSampleCoverage(1.0,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
@@ -991,7 +991,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glSampleCoverage(numSamplesf,GL_FALSE);
 glEnable(GL_POLYGON_OFFSET_FILL);
 glDepthMask(GL_FALSE);
-glDepthFunc(GL_LEQUAL);
+glDepthFunc(GL_LESS);
 glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
@@ -1613,7 +1613,6 @@ glUniform1i(uni_fps,60.0);
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-// nanoPause();
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
