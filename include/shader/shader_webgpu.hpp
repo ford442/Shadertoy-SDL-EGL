@@ -74,6 +74,7 @@ typedef ResultType result_type;
 // #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
 
+#include "../../include/shader/intrins.hpp"
 #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
