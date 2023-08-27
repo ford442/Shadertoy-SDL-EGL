@@ -964,8 +964,8 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarA=[](){
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
 /// glEnable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
@@ -986,8 +986,8 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarB=[](){
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // multisampled
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
