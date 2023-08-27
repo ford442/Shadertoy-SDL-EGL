@@ -1204,7 +1204,7 @@ attr.minorVersion=3;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-emscripten_webgl_make_context_current(cntxi.at(0,0));
+// emscripten_webgl_make_context_current(cntxi.at(0,0));
   // glUseProgram(0);
 // nanoPause();
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
@@ -1218,6 +1218,8 @@ mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
  eglMakeCurrent(display,surface,surface,cntx.at(0,0));
+  emscripten_webgl_make_context_current(cntxi.at(0,0));
+
 eglBindAPI(EGL_OPENGL_API);
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
