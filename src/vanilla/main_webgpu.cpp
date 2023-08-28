@@ -132,7 +132,7 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=3;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_make_context_current(cntxi.at(0,0));
+emscripten_webgl_make_context_current(ctx);
 emscripten_get_element_css_size("canvas",&wi,&hi);
 	
 	// Get the shape of the tensor.
