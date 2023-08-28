@@ -5,6 +5,12 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 double wi,hi;
 
+template <typename T>
+T vectorProduct(const std::vector<T>& v)
+{
+    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
+}
+
 void cltest(){
 std::vector<std::string> infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
@@ -42,8 +48,7 @@ ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 
 std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
-std::cout << "Got dynamic batch size. Setting input batch size to "
-<< batchSize << "." << std::endl;
+std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
 inputDims.at(0)=batchSize;
 }
 
@@ -66,7 +71,7 @@ std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
-// std::cout << "Input Dimensions: " <<  std::to_string(inputDims) << std::endl;
+std::cout << "Input Dimensions: " <<  std::to_string(inputDims) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
