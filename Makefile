@@ -87,9 +87,9 @@ b3_vanilla_icc:
 	 --memory-init-file 0 --closure 0
 
 b3_vanilla_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/main_webgpu.cpp -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static -matomics -mbulk-memory -pthread
+	 em++ lib/lib_webgpu.cpp $(STDS) -static -matomics -mbulk-memory -pthread
+	 em++ src/vanilla/main_webgpu.cpp -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -matomics -mbulk-memory -pthread
 	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O0 -g -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -matomics -mbulk-memory -pthread -Wl,-lpthread -sFORCE_FILESYSTEM=1 \
 	 -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
