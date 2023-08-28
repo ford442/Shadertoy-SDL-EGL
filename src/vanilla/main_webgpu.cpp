@@ -75,12 +75,6 @@ std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 // std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
 	
-template <typename T>
-T vectorProduct(const std::vector<T>& v)
-{
-    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
-}
-	
 size_t inputTensorSize=vectorProduct(inputDims);
 std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize=vectorProduct(outputDims);
