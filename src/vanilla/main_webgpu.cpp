@@ -5,7 +5,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 double wi,hi;
 
-void ConvertOutputToImage(const Ort::Tensor& output_tensor, const std::string& output_filename) {
+void ConvertOutputToImage(const Ort::Tensor& output_tensor) {
  emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
@@ -30,18 +30,21 @@ emscripten_get_element_css_size("canvas",&wi,&hi);
   // Copy the data from the tensor to the image.
   output_tensor.CopyTo(image_data);
   // Save the image to a file.
-  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
-  emscripten_save_image(output_filename, data, shape[1], shape[0]);
+std::cout << "Got image data " << image_data << std::endl;
+
+
+//  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
+//  emscripten_save_image(output_filename, data, shape[1], shape[0]);
 
   // Delete the image data.
   delete[] image_data;
 	
-int width = emscripten_get_image_width("output.png");
-int height = emscripten_get_image_height("output.png");
-emscripten_image_data_type* data = emscripten_get_image_data("output.png", width, height);
+int width = 400; // emscripten_get_image_width("output.png");
+int height = 400; // emscripten_get_image_height("output.png");
+// emscripten_image_data_type* data = emscripten_get_image_data("output.png", width, height);
 
 // Display the image.
-emscripten_set_canvas_image_data(data, width, height);
+// emscripten_set_canvas_image_data(data, width, height);
 }
 
 void cltest(){
@@ -157,7 +160,7 @@ std::cout << "Running inferrence." << std::endl;
 
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 
-ConvertOutputToImage(output_tensor, "output.png");
+ConvertOutputToImage(output_tensor);
 std::cout << "Output tensors updated." << std::endl;
 
 }
