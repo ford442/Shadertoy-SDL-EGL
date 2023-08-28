@@ -47,8 +47,8 @@ std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize
 inputDims.at(0)=batchSize;
 }
 
-auto outputName=session.GetOutputNameAllocated(0,allocator);
-auto outputName2=session.GetOutputNameAllocated(1,allocator);
+// auto outputName=session.GetOutputNameAllocated(0,allocator);
+// auto outputName2=session.GetOutputNameAllocated(1,allocator);
 	
     const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
 
