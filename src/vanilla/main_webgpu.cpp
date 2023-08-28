@@ -76,7 +76,12 @@ size_t inputTensorSize=vectorProduct(inputDims);
 std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize=vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
-
+	
+  std::vector<float> text_prompt_vector;
+  for (char c : text_prompt) {
+    text_prompt_vector.push_back(c);
+  }
+	
 std::string text_prompt="two birds";
 // std::copy(text_prompt.begin(),text_prompt.end(),inputTensorValues.begin());
 std::vector<float>::iterator begin = text_prompt.begin();
@@ -88,35 +93,37 @@ std::cout << "Establishing text input" << std::endl;
 std::vector<const char*>inputNames={"input_ids"};
 std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 
-Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(
-OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
-std::cout << "Establishing memoryInfo" << std::endl;
+Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
+// std::cout << "Establishing memoryInfo" << std::endl;
 	
-std::vector<Ort::Value> inputTensors;
-std::vector<Ort::Value> outputTensors;
-inputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
-inputDims.size()));
-inputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.data(),
-inputDims.size()));
+// std::vector<Ort::Value> inputTensors;
+	
+// std::vector<Ort::Value> outputTensors;
+Ort::Value outputTensors; // google gan way
+	
+Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
+memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
+inputDims.size());
 
 std::cout << "Establishing Tensors" << std::endl;
 	
 std::cout << "Creating CPU link " << std::endl;
 
-outputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo,outputTensorValues.data(),inputTensorSize,
-inputDims.data(),inputDims.size()));
-	
-std::cout << "Output tensors updated." << std::endl;
 
 // Ort::RunOptions runOpts;
+  // google colab
+std::cout << "The Run function takes the text prompt and the desired output size as input.\n"
+<< "The output size is the size of the desired image, in pixels.\n"
+<< "The Run function returns an Ort::Value object. \n"
+<< "The Ort::Value object contains the generated image. \n"
+<< "You can use the GetTensor function to get the tensor data from the Ort::Value object. \n"
+<< "The tensor data is a vector of floats that represents the image. \n"
+<< "You can use the cv::Mat class to convert the tensor data to an image.\n"
+<< std::endl;
 
 // Run inference
-session.Run(Ort::RunOptions{}, 
-inputNames.data(),inputTensors.data(),1,
-outputNames.data(),outputTensors.data(),2);
+session.Run(Ort::RunOptions{},inputNames.data(),inputTensor.data(),
+&inputTensor,1,outputNames.data(),&outputTensors,2);
 
 std::cout << "Running inferrence." << std::endl;
 
