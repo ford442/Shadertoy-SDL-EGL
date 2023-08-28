@@ -26,7 +26,7 @@ sessionOptions.SetIntraOpNumThreads(1);
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 	
-sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_EXTENDED);
+sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 Ort::Session session(ort_env,model_path,sessionOptions);
 Ort::AllocatorWithDefaultOptions allocator;
 
@@ -77,14 +77,15 @@ std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std
 std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 	
-size_t inputTensorSize=1;// inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
-std::cout << "setting inputTensorSize " <<  std::endl;
+size_t inputTensorSize=vectorProduct(inputDims);
+std::cout << "setting inputTensorSize" <<  std::endl;
 
 std::vector<int32_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 
-size_t outputTensorSize=768; // vectorProduct(outputDims);
+size_t outputTensorSize=vectorProduct(outputDims);
 std::cout << "setting outputTensorSize " <<  std::endl;
+  //  589824 ?
 
 std::vector<float> outputTensorValues(outputTensorSize);
 std::cout << "setting outputTensorValues " <<  std::endl;
@@ -92,7 +93,7 @@ std::cout << "setting outputTensorValues " <<  std::endl;
 std::string text_prompt="two birds";
 
 std::vector<float> text_prompt_vector;
-for (char c : text_prompt) {
+for(char c : text_prompt){
 text_prompt_vector.push_back(c);
 }
 	
