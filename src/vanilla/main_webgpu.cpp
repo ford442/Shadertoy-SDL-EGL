@@ -14,7 +14,7 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 Ort::Env ort_env;
 const char model_path[12]="/model.onnx";
-const int64_t batchSize=1;
+const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
 	
@@ -26,14 +26,15 @@ sessionOptions.SetIntraOpNumThreads(1);
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 	
-sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_EXTENDED);
 Ort::Session session(ort_env,model_path,sessionOptions);
 Ort::AllocatorWithDefaultOptions allocator;
 
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
 
-auto inputName=session.GetInputNameAllocated(0,allocator);
+// auto inputName=session.GetInputNameAllocated(0,allocator);
+const char* inputName = session.GetInputName(0, allocator);
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -48,6 +49,8 @@ inputDims.at(0)=batchSize;
 
 auto outputName=session.GetOutputNameAllocated(0,allocator);
 auto outputName2=session.GetOutputNameAllocated(1,allocator);
+	
+    const char* outputName = session.GetOutputName(0, allocator);
 
 Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -95,24 +98,26 @@ text_prompt_vector.push_back(c);
 }
 	
 std::cout << "Establishing text input" << std::endl;
+
+// std::vector<const char*>inputNames={"input_ids"};
+std::vector<const char*>inputNames={inputName};
+// std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
+std::vector<const char*>outputNames={outputName};
 	
-std::vector<const char*>inputNames={"input_ids"};
-std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 std::cout << "Establishing tensor names" << std::endl;
 
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeDefault);
 // std::cout << "Establishing memoryInfo" << std::endl;
-	
+
 std::vector<Ort::Value> inputTensors;
 Ort::Value outputTensors{nullptr};
 
 inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(
-memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),1));
+memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
 
 std::cout << "Establishing Tensors" << std::endl;
 
 std::cout << "Creating CPU link " << std::endl;
-
 
 // Ort::RunOptions runOpts;
   // google colab
@@ -126,7 +131,7 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << std::endl;
 
 // Run inference
-session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,2);
+session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
 	
 //   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
 //                     const char* const* output_names, Value* output_values, size_t output_count);
