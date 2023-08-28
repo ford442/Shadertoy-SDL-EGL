@@ -5,10 +5,6 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 double wi,hi;
 
-void ConvertOutputToImage(const Ort::Tensor& output_tensor) {
-
-}
-
 void cltest(){
 std::vector<std::string> infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
