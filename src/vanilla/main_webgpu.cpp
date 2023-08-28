@@ -106,17 +106,15 @@ Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArena
 std::vector<Ort::Value> inputTensors;
 Ort::Value outputTensors{nullptr};
 
-	
 // Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
 // memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
 // inputDims.size());
-	
+
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo, inputTensorValues.data(), inputTensorSize, 2,
-1));
-	
+memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.at(0),1));
+
 std::cout << "Establishing Tensors" << std::endl;
-	
+
 std::cout << "Creating CPU link " << std::endl;
 
 
