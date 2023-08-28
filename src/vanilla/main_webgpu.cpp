@@ -77,17 +77,13 @@ std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize=vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 	
+	std::string text_prompt="two birds";
+
   std::vector<float> text_prompt_vector;
   for (char c : text_prompt) {
     text_prompt_vector.push_back(c);
   }
 	
-std::string text_prompt="two birds";
-// std::copy(text_prompt.begin(),text_prompt.end(),inputTensorValues.begin());
-std::vector<float>::iterator begin = text_prompt.begin();
-std::vector<float>::iterator end = text_prompt.end();
-inputTensorValues.assign(begin, end);
-
 std::cout << "Establishing text input" << std::endl;
 	
 std::vector<const char*>inputNames={"input_ids"};
