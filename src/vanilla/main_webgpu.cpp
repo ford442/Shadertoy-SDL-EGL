@@ -5,6 +5,10 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 double wi,hi;
 
+T vectorProduct(const std::vector<T>& v){
+return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
+}
+
 void cltest(){
 std::vector<std::string> infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
@@ -78,7 +82,7 @@ std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 	
 size_t inputTensorSize=vectorProduct(inputDims);
-std::cout << "setting inputTensorSize" <<  std::endl;
+std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
 
 std::vector<int32_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
