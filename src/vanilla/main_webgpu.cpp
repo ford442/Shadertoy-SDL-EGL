@@ -34,7 +34,7 @@ size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
 
 // auto inputName=session.GetInputNameAllocated(0,allocator);
-const char* inputName = session.GetInputName(0, allocator);
+const char* inputName = session.Ort::detail::GetInputName(0, allocator);
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -50,7 +50,7 @@ inputDims.at(0)=batchSize;
 auto outputName=session.GetOutputNameAllocated(0,allocator);
 auto outputName2=session.GetOutputNameAllocated(1,allocator);
 	
-    const char* outputName = session.GetOutputName(0, allocator);
+    const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
 
 Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
