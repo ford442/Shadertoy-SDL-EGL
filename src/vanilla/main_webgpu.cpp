@@ -94,8 +94,8 @@ Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArena
 	
 // std::vector<Ort::Value> inputTensors;
 	
-// std::vector<Ort::Value> outputTensors;
-Ort::Value outputTensors; // google gan way
+std::vector<Ort::Value> outputTensors;
+// Ort::Value outputTensors; // google gan way
 	
 Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
 memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
