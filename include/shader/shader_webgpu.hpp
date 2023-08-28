@@ -106,6 +106,16 @@ static constexpr float numSamplesf=float(numSamples);
 
 static constexpr EGLint att_lst2[1000]={ 
 EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+
+  // Google Colab
+/*
+If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
+This is because the BT.2020 color space is a non-linear color space, and when it is set to linear,
+the values of the components are directly proportional to the perceived brightness or lightness of the color.
+This means that the colors in the image will be misrepresented,
+and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
+*/
+
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
