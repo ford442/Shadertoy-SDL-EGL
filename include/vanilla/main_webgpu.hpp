@@ -13,25 +13,29 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
-#include <algorithm>
+
+#include <chrono>
+#include <cmath>
+#include <exception>
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <numeric>
 #include <string>
+#include <vector>
+
+#include <algorithm>
 #include <stdarg.h>
 #include <stdio.h>
 #include <cstdint>
-#include <climits>
 #include <ctime>
 #include <vector>
 // #include <memory>
 
-#include <exception>
-#include <fstream>
-#include <limits>
-#include <numeric>
 
 #include <cassert>
 #include <random>
 #include <cfloat>
-#include <math.h>
 #include <new>
 #include <emscripten.h>
 #include <emscripten/html5.h>
