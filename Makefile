@@ -91,7 +91,7 @@ b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 em++ src/vanilla/main_webgpu.cpp -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O0 -g -o w3001.js \
-	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -pthread -Wl,-lpthread -sFORCE_FILESYSTEM=1 \
+	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -matomics -mbulk-memory -pthread -Wl,-lpthread -sFORCE_FILESYSTEM=1 \
 	 -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sINITIAL_MEMORY=3gb -lmath.js -lhtml5.js -lint53.js -sDISABLE_EXCEPTION_CATCHING=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
