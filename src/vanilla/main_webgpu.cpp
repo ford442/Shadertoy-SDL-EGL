@@ -130,9 +130,7 @@ std::vector<int32_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
    for (int64_t i = 0; i < batchSize; ++i)
     {
-        std::copy(ints.begin()<int32_t>,
-                  ints.end()<int32_t>,
-                  inputTensorValues.begin() + i * inputTensorSize);
+        std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
     }
 	
 size_t outputTensorSize=vectorProduct(outputDims);
