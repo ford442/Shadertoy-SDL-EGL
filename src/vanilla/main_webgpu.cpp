@@ -71,9 +71,9 @@ std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
-std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims) << std::endl;
-std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims) << std::endl;
-std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims) << std::endl;
+std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
+std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
+std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 	
 size_t inputTensorSize=2;// inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
 std::cout << "setting inputTensorSize " <<  std::endl;
