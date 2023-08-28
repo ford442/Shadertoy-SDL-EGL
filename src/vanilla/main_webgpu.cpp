@@ -111,7 +111,7 @@ Ort::Value outputTensors{nullptr};
 // inputDims.size());
 
 inputTensors.push_back(Ort::Value::CreateTensor<float>(
-memoryInfo,inputTensorValues.data(),inputTensorSize,inputDims.at(0),1));
+memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),1));
 
 std::cout << "Establishing Tensors" << std::endl;
 
