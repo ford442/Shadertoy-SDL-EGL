@@ -7,9 +7,12 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 double wi,hi;
 
-T vectorProduct(const std::vector<T>& v){
-return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
+template <typename T>
+T vectorProduct(const std::vector<T>& v)
+{
+    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
 }
+
 
 void cltest(){
 std::vector<std::string> infos=Ort::GetAvailableProviders();
