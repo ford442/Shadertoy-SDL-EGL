@@ -6,9 +6,9 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 double wi,hi;
 
 template <typename T>
-T vectorProduct(const std::vector<T>& v)
-{
-    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
+
+T vectorProduct(const std::vector<T>& v){
+return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
 }
 
 void cltest(){
@@ -71,7 +71,7 @@ std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
-std::cout << "Input Dimensions: " <<  std::to_string(inputDims) << std::endl;
+std::cout << "Input Dimensions: " <<  std::to_string(inputDims.at(0)) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
