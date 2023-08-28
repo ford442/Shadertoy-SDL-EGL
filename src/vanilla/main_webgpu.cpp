@@ -46,7 +46,7 @@ vector<string> tokenize(string text) {
   return tokens;
 }
 int max_wordlength=12;
-string text = "two birds";
+string text = "birds";
 vector<string> tokens = tokenize(text);
 vector<int32_t> ints = to_int32(tokens);
 
