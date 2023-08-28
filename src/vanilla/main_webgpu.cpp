@@ -92,15 +92,19 @@ std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemType::OrtMemTypeDefault);
 // std::cout << "Establishing memoryInfo" << std::endl;
 	
-// std::vector<Ort::Value> inputTensors;
+std::vector<Ort::Value> inputTensors;
 	
 std::vector<Ort::Value> outputTensors;
 // Ort::Value outputTensors; // google gan way
 	
-Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
-memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
-inputDims.size());
-
+// Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
+// memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
+// inputDims.size());
+	
+    inputTensors.push_back(Ort::Value::CreateTensor<float>(
+            memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
+            inputDims.size()));
+	
 std::cout << "Establishing Tensors" << std::endl;
 	
 std::cout << "Creating CPU link " << std::endl;
