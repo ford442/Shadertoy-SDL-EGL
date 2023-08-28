@@ -78,9 +78,13 @@ size_t outputTensorSize=vectorProduct(outputDims);
 std::vector<float> outputTensorValues(outputTensorSize);
 
 std::string text_prompt="two birds";
-std::copy(text_prompt.begin(),text_prompt.end(),inputTensorValues.begin());
-	  std::cout << "Establishing text input" << std::endl;
+// std::copy(text_prompt.begin(),text_prompt.end(),inputTensorValues.begin());
+std::vector<float>::iterator begin = text_prompt.begin();
+std::vector<float>::iterator end = text_prompt.end();
+inputTensorValues.assign(begin, end);
 
+std::cout << "Establishing text input" << std::endl;
+	
 std::vector<const char*>inputNames={"input_ids"};
 std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 
