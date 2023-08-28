@@ -17,7 +17,7 @@ ff.addEventListener("progress",function(event){
 if(event.lengthComputable){
 var complete=(event.loaded/event.total*100|0);
 document.getElementById('outText').innerHTML=complete;
-}
+};};);
 ff.send(null);
 };
 
