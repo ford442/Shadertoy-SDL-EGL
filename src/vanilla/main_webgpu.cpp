@@ -120,6 +120,12 @@ std::cout << "The Run function takes the text prompt and the desired output size
 // Run inference
 session.Run(Ort::RunOptions{},inputNames.data(),inputTensor.data(),
 &inputTensor,1,outputNames.data(),&outputTensors,2);
+	
+//   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
+//                     const char* const* output_names, Value* output_values, size_t output_count);
+	
+//   void Run(run_options,input_names,input_values,input_count,
+//                     output_names,output_values,output_count);
 
 std::cout << "Running inferrence." << std::endl;
 
