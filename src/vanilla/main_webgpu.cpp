@@ -37,10 +37,11 @@ vector<string> tokenize(string text) {
       i--;
     }
   }
-  // Lowercase all words.
-  for (int i = 0; i < tokens.size(); i++) {
-    tokens[i] = tolower(tokens[i]);
-  }
+  // Lowercase all words. 
+	// remember to use all lowercase for now
+//  for (int i = 0; i < tokens.size(); i++) {
+//    tokens[i] = tolower(tokens[i]);
+//  }
   return tokens;
 }
 int max_wordlength=12;
