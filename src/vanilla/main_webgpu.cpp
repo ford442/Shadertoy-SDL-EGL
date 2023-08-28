@@ -94,16 +94,14 @@ Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArena
 	
 std::vector<Ort::Value> inputTensors;
 	
-Ort::Value outputTensors{};
-// Ort::Value outputTensors; // google gan way
 	
 // Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
 // memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
 // inputDims.size());
 	
-    inputTensors.push_back(Ort::Value::CreateTensor<float>(
-            memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
-            inputDims.size()));
+inputTensors.push_back(Ort::Value::CreateTensor<float>(
+memoryInfo, inputTensorValues.data(), inputTensorSize, inputDims.data(),
+inputDims.size()));
 	
 std::cout << "Establishing Tensors" << std::endl;
 	
@@ -122,7 +120,7 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << std::endl;
 
 // Run inference
-session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,2);
+auto outputTensors=session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,2);
 	
 //   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
 //                     const char* const* output_names, Value* output_values, size_t output_count);
