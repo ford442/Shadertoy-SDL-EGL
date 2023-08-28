@@ -98,10 +98,10 @@ text_prompt_vector.push_back(c);
 	
 std::cout << "Establishing text input" << std::endl;
 
-// std::vector<const char*>inputNames={"input_ids"};
-std::vector<const char*>inputNames={inputName};
-// std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
-std::vector<const char*>outputNames={outputName};
+std::vector<const char*>inputNames={"input_ids"};
+// std::vector<const char*>inputNames={inputName};
+std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
+// std::vector<const char*>outputNames={outputName};
 	
 std::cout << "Establishing tensor names" << std::endl;
 
