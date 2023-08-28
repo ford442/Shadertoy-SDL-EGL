@@ -136,13 +136,13 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 emscripten_get_element_css_size("canvas",&wi,&hi);
 	
 	// Get the shape of the tensor.
-  std::vector<int64_t> shape = outputTensors.GetShape();
+  std::vector<int64_t> shape = outputTensorInfo.GetShape();
   // Create a new image with the same shape as the tensor.
   unsigned char* image_data = new unsigned char[shape.size()];
   // Copy the data from the tensor to the image.
-  outputTensors.CopyTo(image_data);
+//  outputTensors.CopyTo(image_data);
   // Save the image to a file.
-std::cout << "Got image data " << image_data << std::endl;
+std::cout << "Got data " << outputTensors << std::endl;
 
 
 //  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
