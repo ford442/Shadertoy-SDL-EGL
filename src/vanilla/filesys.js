@@ -8,7 +8,7 @@ ff.addEventListener("progress",function(event){
 if(event.lengthComputable){
 var complete=(event.loaded/event.total*100|0);
 document.getElementById('outText').innerHTML=complete;
-};};);
+};});
 ff.onload=function(oEvent){
 const sarrayBuffer=ff.response;
 if(sarrayBuffer){
@@ -17,7 +17,7 @@ setTimeout(function(){
 console.log("Got ONNX model.");
 FS.writeFile('/model.onnx',sfil);
 },1150);
-};};);
+};};
 ff.send(null);
 };
 
