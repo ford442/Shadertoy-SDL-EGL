@@ -81,7 +81,7 @@ std::cout << "setting inputTensorSize " <<  std::endl;
 std::vector<int32_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 
-size_t outputTensorSize=1536; // vectorProduct(outputDims);
+size_t outputTensorSize=768; // vectorProduct(outputDims);
 std::cout << "setting outputTensorSize " <<  std::endl;
 
 std::vector<float> outputTensorValues(outputTensorSize);
