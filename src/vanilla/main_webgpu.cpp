@@ -65,13 +65,15 @@ std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
-std::cout << "Input Dimensions: " <<  std::to_string(inputDims.at(0)) << std::endl;
+std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
+std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
+std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 // std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
 	
-size_t inputTensorSize=inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
+size_t inputTensorSize=2;// inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
 std::cout << "setting inputTensorSize " <<  std::endl;
 
 std::vector<float> inputTensorValues(inputTensorSize);
