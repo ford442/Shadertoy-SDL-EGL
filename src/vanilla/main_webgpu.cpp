@@ -142,7 +142,7 @@ emscripten_get_element_css_size("canvas",&wi,&hi);
   // Copy the data from the tensor to the image.
 //  outputTensors.CopyTo(image_data);
   // Save the image to a file.
-std::cout << "Got data: " << shape << std::endl;
+std::cout << "Got data. " << std::endl;
 
 
 //  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
