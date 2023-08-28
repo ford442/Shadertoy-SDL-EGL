@@ -78,21 +78,21 @@ std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std
 size_t inputTensorSize=2;// inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
 std::cout << "setting inputTensorSize " <<  std::endl;
 
-std::vector<float> inputTensorValues(inputTensorSize);
-	std::cout << "setting inputTensorValues " <<  std::endl;
+std::vector<int32_t> inputTensorValues(inputTensorSize);
+std::cout << "setting inputTensorValues " <<  std::endl;
 
 size_t outputTensorSize=1536; // vectorProduct(outputDims);
-	std::cout << "setting outputTensorSize " <<  std::endl;
+std::cout << "setting outputTensorSize " <<  std::endl;
 
 std::vector<float> outputTensorValues(outputTensorSize);
-		std::cout << "setting outputTensorValues " <<  std::endl;
+std::cout << "setting outputTensorValues " <<  std::endl;
 
-	std::string text_prompt="two birds";
+std::string text_prompt="two birds";
 
-  std::vector<float> text_prompt_vector;
-  for (char c : text_prompt) {
-    text_prompt_vector.push_back(c);
-  }
+std::vector<float> text_prompt_vector;
+for (char c : text_prompt) {
+text_prompt_vector.push_back(c);
+}
 	
 std::cout << "Establishing text input" << std::endl;
 	
@@ -106,11 +106,7 @@ Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArena
 std::vector<Ort::Value> inputTensors;
 Ort::Value outputTensors{nullptr};
 
-// Ort::Value inputTensor=Ort::Value::CreateTensor<float>(
-// memoryInfo,text_prompt_vector.data(),text_prompt_vector.size(),inputDims.data(),
-// inputDims.size());
-
-inputTensors.push_back(Ort::Value::CreateTensor<float>(
+inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(
 memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),1));
 
 std::cout << "Establishing Tensors" << std::endl;
