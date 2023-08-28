@@ -6,45 +6,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 double wi,hi;
 
 void ConvertOutputToImage(const Ort::Tensor& output_tensor) {
- emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
-attr.depth=EM_FALSE;
-attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=3;
-attr.minorVersion=0;
-ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_make_context_current(cntxi.at(0,0));
-emscripten_get_element_css_size("canvas",&wi,&hi);
-	
-	// Get the shape of the tensor.
-  std::vector<int64_t> shape = output_tensor.GetShape();
-  // Create a new image with the same shape as the tensor.
-  unsigned char* image_data = new unsigned char[shape.size()];
-  // Copy the data from the tensor to the image.
-  output_tensor.CopyTo(image_data);
-  // Save the image to a file.
-std::cout << "Got image data " << image_data << std::endl;
 
-
-//  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
-//  emscripten_save_image(output_filename, data, shape[1], shape[0]);
-
-  // Delete the image data.
-  delete[] image_data;
-	
-int width = 400; // emscripten_get_image_width("output.png");
-int height = 400; // emscripten_get_image_height("output.png");
-// emscripten_image_data_type* data = emscripten_get_image_data("output.png", width, height);
-
-// Display the image.
-// emscripten_set_canvas_image_data(data, width, height);
 }
 
 void cltest(){
@@ -160,8 +122,46 @@ std::cout << "Running inferrence." << std::endl;
 
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 
-ConvertOutputToImage(output_tensor);
-std::cout << "Output tensors updated." << std::endl;
+ emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_FALSE;
+attr.depth=EM_FALSE;
+attr.antialias=EM_TRUE;
+attr.premultipliedAlpha=EM_TRUE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_FALSE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+attr.failIfMajorPerformanceCaveat=EM_FALSE;
+attr.majorVersion=3;
+attr.minorVersion=0;
+ctx=emscripten_webgl_create_context("#scanvas",&attr);
+emscripten_webgl_make_context_current(cntxi.at(0,0));
+emscripten_get_element_css_size("canvas",&wi,&hi);
+	
+	// Get the shape of the tensor.
+  std::vector<int64_t> shape = outputTensors.GetShape();
+  // Create a new image with the same shape as the tensor.
+  unsigned char* image_data = new unsigned char[shape.size()];
+  // Copy the data from the tensor to the image.
+  outputTensors.CopyTo(image_data);
+  // Save the image to a file.
+std::cout << "Got image data " << image_data << std::endl;
+
+
+//  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
+//  emscripten_save_image(output_filename, data, shape[1], shape[0]);
+
+  // Delete the image data.
+  delete[] image_data;
+	
+int width = 400; // emscripten_get_image_width("output.png");
+int height = 400; // emscripten_get_image_height("output.png");
+// emscripten_image_data_type* data = emscripten_get_image_data("output.png", width, height);
+
+// Display the image.
+// emscripten_set_canvas_image_data(data, width, height);
+	std::cout << "Output tensors updated." << std::endl;
 
 }
 
