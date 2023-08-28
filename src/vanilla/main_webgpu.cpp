@@ -1,7 +1,5 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
-template <typename T>
-
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
