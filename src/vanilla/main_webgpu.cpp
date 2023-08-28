@@ -131,7 +131,7 @@ session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputName
 
 std::cout << "Running inferrence." << std::endl;
 
-auto outputDataPtr = outputTensors[0].GetTensorRawData();
+auto outputDataPtr = outputTensors.GetTensorRawData();
 
  emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
