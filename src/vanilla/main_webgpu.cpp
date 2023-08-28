@@ -89,7 +89,7 @@ std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
 inputDims.at(0)=ints.size();
-inputDims.at(1)=max_wordlength();
+inputDims.at(1)=max_wordlength;
 }
 
 auto outputName=session.GetOutputNameAllocated(0,allocator);
