@@ -71,7 +71,13 @@ std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 // std::cout << "Output Dimensions: " <<  std::to_string(outputDims) << std::endl;
-
+	
+template <typename T>
+T vectorProduct(const std::vector<T>& v)
+{
+    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
+}
+	
 size_t inputTensorSize=vectorProduct(inputDims);
 std::vector<float> inputTensorValues(inputTensorSize);
 size_t outputTensorSize=vectorProduct(outputDims);
@@ -151,9 +157,9 @@ emscripten_webgl_make_context_current(ctx);
 emscripten_get_element_css_size("canvas",&wi,&hi);
 	
 	// Get the shape of the tensor.
-  std::vector<int64_t> shape = outputTensorInfo.GetShape();
+//  std::vector<int64_t> shape = outputTensorInfo.GetShape();
   // Create a new image with the same shape as the tensor.
-  unsigned char* image_data = new unsigned char[shape.size()];
+//  unsigned char* image_data = new unsigned char[shape.size()];
   // Copy the data from the tensor to the image.
 //  outputTensors.CopyTo(image_data);
   // Save the image to a file.
@@ -164,10 +170,10 @@ std::cout << "Got data. " << std::endl;
 //  emscripten_save_image(output_filename, data, shape[1], shape[0]);
 
   // Delete the image data.
-  delete[] image_data;
+//  delete[] image_data;
 	
-int width = 400; // emscripten_get_image_width("output.png");
-int height = 400; // emscripten_get_image_height("output.png");
+// int width = 400; // emscripten_get_image_width("output.png");
+// int height = 400; // emscripten_get_image_height("output.png");
 // emscripten_image_data_type* data = emscripten_get_image_data("output.png", width, height);
 
 // Display the image.
