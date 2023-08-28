@@ -33,8 +33,8 @@ Ort::AllocatorWithDefaultOptions allocator;
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
 
-// auto inputName=session.GetInputNameAllocated(0,allocator);
-const char* inputName = session.Ort::detail::GetInputName(0, allocator);
+auto inputName=session.GetInputNameAllocated(0,allocator);
+// const char* inputName = session.Ort::detail::GetInputName(0, allocator);
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -47,10 +47,10 @@ std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize
 inputDims.at(0)=batchSize;
 }
 
-// auto outputName=session.GetOutputNameAllocated(0,allocator);
-// auto outputName2=session.GetOutputNameAllocated(1,allocator);
+auto outputName=session.GetOutputNameAllocated(0,allocator);
+auto outputName2=session.GetOutputNameAllocated(1,allocator);
 	
-    const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
+//   //   const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
 
 Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -72,13 +72,12 @@ std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::
 std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
 // std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
-std::cout << "Output 2 Name: " << outputName2 << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
 std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 	
-size_t inputTensorSize=2;// inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
+size_t inputTensorSize=1;// inputDims.at(0)*inputDims.at(1)*inputDims.at(2); // vectorProduct(inputDims);
 std::cout << "setting inputTensorSize " <<  std::endl;
 
 std::vector<int32_t> inputTensorValues(inputTensorSize);
