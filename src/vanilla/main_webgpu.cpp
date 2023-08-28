@@ -121,13 +121,19 @@ std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std
 std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 	
-size_t inputTensorSize=max_wordlength*inputDims.at(0); // vectorProduct(inputDims);
+size_t inputTensorSize=vectorProduct(inputDims);
 
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
 
 std::vector<int32_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
-
+   for (int64_t i = 0; i < batchSize; ++i)
+    {
+        std::copy(ints.begin<int32_t>(),
+                  ints.end<int32_t>(),
+                  inputTensorValues.begin() + i * inputTensorSize);
+    }
+	
 size_t outputTensorSize=vectorProduct(outputDims);
 std::cout << "setting outputTensorSize " <<  std::endl;
   //  589824 ?
