@@ -6,6 +6,8 @@
 
 #define __EMCSCRIPTEN__ 1
 
+#include <cstdint>
+
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
@@ -27,7 +29,6 @@
 #include <algorithm>
 #include <stdarg.h>
 #include <stdio.h>
-#include <cstdint>
 #include <ctime>
 #include <vector>
 // #include <memory>
