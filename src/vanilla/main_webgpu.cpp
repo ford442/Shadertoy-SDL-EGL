@@ -16,6 +16,7 @@ using namespace std;
 vector<int32_t> to_int32(vector<string> tokens) {
   vector<int32_t> ints;
   for (string token : tokens) {
+std::cout << token << std::endl;
     ints.push_back(stoi(token));
   }
   return ints;
