@@ -11,6 +11,42 @@ T vectorProduct(const std::vector<T>& v)
     return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
 }
 
+using namespace std;
+
+vector<int32_t> to_int32(vector<string> tokens) {
+  vector<int32_t> ints;
+  for (string token : tokens) {
+    ints.push_back(stoi(token));
+  }
+  return ints;
+}
+
+vector<string> tokenize(string text) {
+  vector<string> tokens;
+  // Split the text into words.
+  stringstream ss(text);
+  string word;
+  while (getline(ss, word, ' ')) {
+    tokens.push_back(word);
+  }
+  // Remove punctuation and stop words.
+  vector<string> stop_words = {"the", "of", "and", "to", "is", "was", "were", "be", "am", "are", "has", "have", "had", "that", "this", "it", "its", "with", "for", "by", "on", "at", "in", "to"};
+  for (int i = 0; i < tokens.size(); i++) {
+    if (ispunct(tokens[i][0]) || find(stop_words.begin(), stop_words.end(), tokens[i]) != stop_words.end()) {
+      tokens.erase(tokens.begin() + i);
+      i--;
+    }
+  }
+  // Lowercase all words.
+  for (int i = 0; i < tokens.size(); i++) {
+    tokens[i] = tolower(tokens[i]);
+  }
+  return tokens;
+}
+int max_wordlength=12;
+string text = "two birds";
+vector<string> tokens = tokenize(text);
+vector<int32_t> ints = to_int32(tokens);
 
 void cltest(){
 std::vector<std::string> infos=Ort::GetAvailableProviders();
@@ -51,7 +87,8 @@ ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
-inputDims.at(0)=batchSize;
+inputDims.at(0)=ints.size();
+inputDims.at(1)=max_wordlength();
 }
 
 auto outputName=session.GetOutputNameAllocated(0,allocator);
@@ -84,7 +121,8 @@ std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std
 std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 	
-size_t inputTensorSize=vectorProduct(inputDims);
+size_t inputTensorSize=max_wordlength*inputDims.at(0); // vectorProduct(inputDims);
+
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
 
 std::vector<int32_t> inputTensorValues(inputTensorSize);
