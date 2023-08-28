@@ -120,6 +120,3 @@ double szh, szw;
 
 template <typename T>
 
-T vectorProduct(const std::vector<T>& v){
-return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
-}
