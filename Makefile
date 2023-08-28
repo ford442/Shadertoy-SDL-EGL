@@ -5,27 +5,28 @@ SIMD_FLAGS += -mrelaxed-simd -msimd128 -msse -msse2 -msse3 -mssse3 -msse4 -msse4
 STDS += -std=gnu17 -std=c2x -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msimd128 -msse -msse2 -msse3 -mssse3 \
--msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni
+	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni
 
 COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthread -pipe -mextended-const -mbulk-memory -matomics -sUSE_ICU=1 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
--sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
--m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
--ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
--ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
--Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
--mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
+	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
+	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
+	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
+	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
+	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=fast \
--ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
--ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
--mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
+	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
+	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
 GL_FLAGS += -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lGL,-lGLU,-lEGL,-lGLESv2 -sUSE_REGAL=0 \
--sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS += $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 -sLZ4=1 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
+LINK_FLAGS += $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+	 -sLZ4=1 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=64000 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
@@ -88,11 +89,11 @@ b3_vanilla_icc:
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/main_webgpu.cpp -fignore-exceptions -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -BOOST_NO_EXCEPTIONS 
-	 em++ -fignore-exceptions -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O3 -o w3001.js \
+	 em++ src/vanilla/main_webgpu.cpp -O3 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O3 -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
-	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=1 \
-	 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js -sDISABLE_EXCEPTION_CATCHING=1 \
+	 -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sINITIAL_MEMORY=3gb -lmath.js -lhtml5.js -lint53.js -sDISABLE_EXCEPTION_CATCHING=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
