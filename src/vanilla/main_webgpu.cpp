@@ -14,7 +14,7 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 Ort::Env ort_env;
 const char model_path[12]="/model.onnx";
-const int64_t batchSize=2;
+const int64_t batchSize=1;
 Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
 	
