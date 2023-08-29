@@ -17,7 +17,6 @@ vector<int32_t> to_int32(vector<string> tokens) {
   vector<int32_t> ints;
   for (string token : tokens) {
 std::cout << token << std::endl;
-    ints.push_back(stoi(token));
   }
   return ints;
 }
@@ -31,13 +30,12 @@ vector<string> tokenize(string text) {
     tokens.push_back(word);
   }
   // Remove punctuation and stop words.
-  vector<string> stop_words = {"the", "of", "and", "to", "is", "was", "were", "be", "am", "are", "has", "have", "had", "that", "this", "it", "its", "with", "for", "by", "on", "at", "in", "to"};
-  for (int i = 0; i < tokens.size(); i++) {
-    if (ispunct(tokens[i][0]) || find(stop_words.begin(), stop_words.end(), tokens[i]) != stop_words.end()) {
-      tokens.erase(tokens.begin() + i);
-      i--;
-    }
-  }
+///  vector<string> stop_words = {"the", "of", "and", "to", "is", "was", "were", "be", "am", "are", "has", "have", "had", "that", "this", "it", "its", "with", "for", "by", "on", "at", "in", "to"};
+///  for (int i = 0; i < tokens.size(); i++) {
+///    if (ispunct(tokens[i][0]) || find(stop_words.begin(), stop_words.end(), tokens[i]) != stop_words.end()) {
+///      tokens.erase(tokens.begin() + i);
+///    }
+///  }
   // Lowercase all words. 
 	// remember to use all lowercase for now
 //  for (int i = 0; i < tokens.size(); i++) {
