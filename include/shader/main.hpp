@@ -69,12 +69,12 @@ canvas.style.backgroundColor='black';
 document.getElementById("contain1").appendChild(canvas);
 
 const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
-contxVars.hint(contxVars.FRAGMENT_SHADER_DERIVATIVE_HINT,contxVars.NICEST);
-contxVars.hint(contxVars.GENERATE_MIPMAP_HINT,contxVars.NICEST);
-contxVars.getExtension('GL_ALL_EXTENSIONS');
-contxVars.disable(contxVars.DITHER);
 
 const context = canvas.getContext('webgl2',contxVars);
+context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+context.getExtension('GL_ALL_EXTENSIONS');
+context.disable(gl.DITHER);
 const gpu = new GPUX({ canvas, context });
 
 var $shds=[];
