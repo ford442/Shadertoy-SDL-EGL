@@ -439,7 +439,7 @@ powerPreference:'high-performance',
 antialias:false,
 willReadFrequently:false,
 xrCompatible:false,
-majorVersion:2,
+majorVersion:3,
 minorVersion:0
 });
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
@@ -465,8 +465,9 @@ gl.disable(gl.DITHER);
  
   // gl.drawingBufferColorSpace='display-p3';
  
-var canvas=gpu.createCanvas($S,$S);
-document.getElementById("contain1").appendChild(canvas);
+// // var canvas=gpu.createCanvas($S,$S);
+// // document.getElementById("contain1").appendChild(canvas);
+ 
 const g=new GPUX({mode:'gpu',canvas:canvas,webGl:gl});
 const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
