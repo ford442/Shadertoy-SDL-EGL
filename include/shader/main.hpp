@@ -53,6 +53,7 @@ $high.innerHTML=winSize;
 
 const canvas = document.createElement('canvas');
 canvas.id='zcanvas';
+canvas.imageRendering='auto';
 canvas.width=winSize;
 canvas.height=winSize;
 canvas.zoom=1;
@@ -66,7 +67,7 @@ canvas.style.height='100vh';
 canvas.style.width='100vh';
 canvas.style.backgroundColor='black';
 document.getElementById("contain1").appendChild(canvas);
-const context = canvas.getContext('webgl2', { premultipliedAlpha: false });
+const context = canvas.getContext('webgl2', {});
 const gpu = new GPUX({ canvas, context });
 
 var $shds=[];
