@@ -53,6 +53,8 @@ $high.innerHTML=winSize;
 
 const canvas = document.createElement('canvas');
 canvas.id='zcanvas';
+canvas.width=winSize;
+canvas.height=winSize;
 canvas.zoom=1;
 canvas.scale=1;
 canvas.style.pointerEvents='auto';
