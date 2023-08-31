@@ -1120,9 +1120,9 @@ return;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_cancel_main_loop();
-// emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
-Size=Size;
+emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+// emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
+Size=int(mouse.hi);
 i_iSize_set(Size);
 u_iSize_set(float(Size));
 i_view.at(0,0)=0;
