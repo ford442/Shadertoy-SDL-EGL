@@ -298,18 +298,22 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp samplerCube;"
+  
+  /*
+"precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n";
-
+*/
+  
 static inline char vrt_bdy_src[100]=
-"precision highp int;\n"
+// "precision highp int;\n"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"precision highp int;\n"
+// "precision highp int;\n"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
