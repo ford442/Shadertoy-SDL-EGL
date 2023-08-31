@@ -1230,7 +1230,7 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 // emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 // Size=int(mouse.hi);
-Size=csshi;
+Size=css.csshi;
 i_iSize_set(Size);
 // u_iSize_set(mouse.hi);
 u_iSize_set(Size);
