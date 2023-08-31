@@ -303,7 +303,7 @@ static inline char cm_hdr_src[2300]=
 "precision lowp sampler2DArrayShadow;\n";
 
 static inline char vrt_bdy_src[100]=
-"precision mediump int;\n"
+"precision highp int;\n"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
