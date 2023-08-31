@@ -133,8 +133,8 @@ float max;
 float min;
 float sum;
 float avgSum;
-float minSum=;
-float maxSum=;
+float minSum;
+float maxSum;
 
 extern "C"{
 
