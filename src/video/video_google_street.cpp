@@ -468,7 +468,7 @@ gl.disable(gl.DITHER);
 // // var canvas=gpu.createCanvas($S,$S);
 // // document.getElementById("contain1").appendChild(canvas);
  
-const g=new GPUX({mode:'gpu',canvas:canvas,webGl:gl});
+const g=new GPUX({mode:'gpu',canvas:bCan,webGl:gl});
 const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
