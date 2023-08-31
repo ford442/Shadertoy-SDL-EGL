@@ -298,7 +298,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;"
+"precision highp samplerCube;";
   
   /*
 "precision highp sampler2DArray;precision highp sampler2DShadow;"
