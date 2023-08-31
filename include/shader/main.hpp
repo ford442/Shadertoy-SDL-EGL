@@ -51,6 +51,10 @@ let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 
+var canvas=gpu.createCanvas($S,$S);
+canvas.id='zcanvas';
+document.getElementById("contain1").appendChild(canvas);
+
 var $shds=[];
 
 function normalResStart(){
