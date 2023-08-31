@@ -822,6 +822,11 @@ boost::compute::double_ wi=0.0;
 boost::compute::double_ hi=0.0;
 }mouse;
 
+inline struct{
+int csswi=0;
+int csshi=0;
+}css;
+
 int Size=0;
 int tmm=166666000;
 int tmm2=1000;
@@ -1221,9 +1226,10 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // emscripten_webgl_make_context_current(cntxi.at(0,0));
   // glUseProgram(0);
 // nanoPause();
-  emscripten_get_canvas_element_size("#zcanvas",&mouse.wi,&mouse.hi);
+  emscripten_get_canvas_element_size("#zcanvas",&csswi,&csshi);
 // emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-Size=int(mouse.hi);
+// Size=int(mouse.hi);
+Size=csshi;
 i_iSize_set(Size);
 u_iSize_set(mouse.hi);
 i_view.at(0,0)=0;
