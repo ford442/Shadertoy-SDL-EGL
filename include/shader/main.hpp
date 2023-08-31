@@ -6,7 +6,7 @@
 #define _XOPEN_SOURCE 700
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD -1
-/*
+
 #pragma STDC CX_LIMITED_RANGE ON
 #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME 1
@@ -18,7 +18,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
-*/
+
 
 #include "../../include/shader/intrins.hpp"
 #include <functional>
@@ -69,10 +69,10 @@ canvas.style.backgroundColor='black';
 document.getElementById("contain1").appendChild(canvas);
 
 const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
-contxVars.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-contxVars.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+contxVars.hint(contxVars.FRAGMENT_SHADER_DERIVATIVE_HINT,contxVars.NICEST);
+contxVars.hint(contxVars.GENERATE_MIPMAP_HINT,contxVars.NICEST);
 contxVars.getExtension('GL_ALL_EXTENSIONS');
-contxVars.disable(gl.DITHER);
+contxVars.disable(contxVars.DITHER);
 
 const context = canvas.getContext('webgl2',contxVars);
 const gpu = new GPUX({ canvas, context });
