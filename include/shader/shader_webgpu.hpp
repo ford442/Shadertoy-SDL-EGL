@@ -105,7 +105,7 @@ static constexpr EGLint numSamples=8;
 static constexpr float numSamplesf=float(numSamples);
 
 static constexpr EGLint att_lst2[1000]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 
   // Google Colab
 /*
@@ -142,8 +142,8 @@ EGL_NONE,EGL_NONE
 static constexpr EGLint att_lst[1500]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -153,10 +153,10 @@ EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-// EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
+EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_RED_SIZE,24,
 EGL_GREEN_SIZE,24,
@@ -272,7 +272,7 @@ static inline char cm_hdr_src[2300]=
 "#define HW_PERFORMANCE 1\n"
 "#pragma (fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-"#pragma (fastprecision on)\n"
+"#pragma (fastprecision off)\n"
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
@@ -295,12 +295,12 @@ static inline char cm_hdr_src[2300]=
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
 "precision highp float;\n"
-"precision highp sampler3D;precision lowp sampler2D;"
-"precision lowp samplerCube;precision lowp sampler2DArray;precision lowp sampler2DShadow;"
-"precision lowp isampler2D;precision highp isampler3D;precision lowp isamplerCube;"
-"precision lowp isampler2DArray;precision lowp usampler2D;precision highp usampler3D;"
-"precision lowp usamplerCube;precision lowp usampler2DArray;precision lowp samplerCubeShadow;"
-"precision lowp sampler2DArrayShadow;\n";
+"precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
+"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;\n";
 
 static inline char vrt_bdy_src[100]=
 "precision highp int;\n"
@@ -316,16 +316,15 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-/*
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
+"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
+// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n";
-*/
+
 
 EM_BOOL ms_l,clk_l;
 
