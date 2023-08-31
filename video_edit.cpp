@@ -29,13 +29,13 @@ EGL_NONE
 };
 
 static const EGLint attribute_list[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
@@ -46,16 +46,22 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-// void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-boost::function<void(int ,int ,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
 
-//void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0;
-float min=1.0;
-float sum=0.0;
-float avgSum=0.0;
-float minSum=0.0;
-float maxSum=0.0;
+// void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
+
+boost::function<void(int ,int ,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+max=0.0;
+min=1.0;
+sum=0.0;
+avgSum=0.0;
+minSum=0.0;
+maxSum=0.0;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
@@ -183,9 +189,13 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:false,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
 // contx.getExtension('WEBGL_color_buffer_float');
 // contx.getExtension('WEBGL_color_buffer_half_float');
+
+contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+contx.getExtension('GL_ALL_EXTENSIONS');
 contx.getExtension('OES_texture_float_linear');
 contx.getExtension('OES_texture_half_float_linear');
 contx.getExtension('EXT_float_blend');
@@ -650,8 +660,9 @@ if(eglBindAPI(EGL_OPENGL_ES_API)!=EGL_TRUE){
 }
   EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH,
 EGL_NONE};
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 if(contextegl==EGL_NO_CONTEXT){
@@ -669,7 +680,24 @@ typedef struct{GLfloat XYZW[4];}Vertex;
 Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,gF},{gFm1,gFm1,gFm1,gF},{gF,gFm1,gFm1,gF},{gF,gF,gFm1,gF},{gFm1,gF,gF,gF}};
 const char common_shader_header_gles3[]=
 "#version 300 es \n"
+"#pragma (fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma (fastprecision on)\n"
+"#extension GL_ALL_EXTENSIONS : enable\n"
+"#extension OES_standard_derivatives : disable\n"
 "#pragma (STDGL all)\n"
+"#pragma optionNV(STDGL all)\n"
+"#pragma (precision highp double)\n"
+"#pragma (precision highp vec4)\n"
+"#pragma (precision highp mat4)\n"
+"#pragma (precision highp uint)\n"
+"#pragma (precision highp short)\n"
+"#pragma (precision highp bool)\n"
+"#pragma (precision highp atomic_uint)\n"
+// "#pragma (precise none)\n"
+// "#pragma STDGL(strict off)\n"
+"#pragma optimize(on)\n"
+"#pragma debug(off)\n"
 "#undef HW_PERFORMANCE \n"
 "#define HW_PERFORMANCE 1 \n"
 "precision highp float;precision highp int;precision highp sampler3D;precision highp sampler2D;\n";
@@ -704,10 +732,12 @@ const EGLint attribut_list[]={
 EGL_NONE};
   
 const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,2,
+EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+  EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH,
+
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE};
