@@ -91,8 +91,8 @@ document.getElementById('stat').innerHTML='Sending Start';
 document.getElementById('stat').style.backgroundColor='green';
 Module.ccall('str');
 },100);
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
+// document.getElementById('scanvas').width=window.innerHeight;
+// document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('di').click();
 }
 
