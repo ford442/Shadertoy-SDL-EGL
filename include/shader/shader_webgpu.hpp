@@ -1,6 +1,6 @@
 #include <boost/cstdfloat.hpp>
 
-// #include "../../include/shader/defs.hpp"
+#include "../../include/shader/defs.hpp"
 
 // #include <stdio.h>
 #include <stdlib.h>
@@ -1223,7 +1223,7 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=4;
 attr.minorVersion=3;
-ctx=emscripten_webgl_create_context("#scanvas",&attr);
+ctx=emscripten_webgl_create_context("#zcanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // emscripten_webgl_make_context_current(cntxi.at(0,0));
@@ -1235,7 +1235,7 @@ Size=int(mouse.hi);
 // Size=css.csshi;
 i_iSize_set(Size);
 // u_iSize_set(mouse.hi);
-u_iSize_set(float(mouse.hi));
+u_iSize_set(mouse.hi);
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
 mms.at(0,0)=0.5*t_size.at(0,0);
