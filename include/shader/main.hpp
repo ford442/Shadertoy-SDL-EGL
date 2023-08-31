@@ -50,9 +50,9 @@ window.scroll(0,0);
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-const gpu = new GPUX();
+const gpu=new GPUX();
 
-var canvas=gpu.createCanvas($S,$S);
+var canvas=gpu.createCanvas(winSize,winSize);
 canvas.id='zcanvas';
 document.getElementById("contain1").appendChild(canvas);
 
