@@ -66,11 +66,11 @@ scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='black';
-document.getElementById("contain1").appendChild(canvas);
+document.getElementById("contain1").appendChild(scanvas);
 
 const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
 
-const context = canvas.getContext('webgl2',contxVars);
+const context = scanvas.getContext('webgl2',contxVars);
 /*
 context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
