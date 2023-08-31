@@ -228,7 +228,7 @@ contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
   
 contx.disable(gl.DITHER);
-const gpu = new GPU();
+const gpu = new GPUX();
 var Canvas=gpu.createCanvas($S,$S);
 document.getElementById("contain1").appendChild(canvas);
 const g=new GPUX({mode:'gpu',canvas:Canvas,webGl:contx});
