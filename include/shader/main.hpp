@@ -52,9 +52,11 @@ let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 const gpu=new GPUX();
 
-var canvas=gpu.createCanvas(winSize,winSize);
+const canvas = document.createElement('canvas');
 canvas.id='zcanvas';
 document.getElementById("contain1").appendChild(canvas);
+const context = canvas.getContext('webgl2', { premultipliedAlpha: false });
+const gpu = new GPU({ canvas, context });
 
 var $shds=[];
 
