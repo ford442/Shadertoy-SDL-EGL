@@ -51,21 +51,21 @@ let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 
-const canvas = document.createElement('canvas');
-canvas.id='zcanvas';
-canvas.imageRendering='auto';
-canvas.width=winSize;
-canvas.height=winSize;
-canvas.zoom=1;
-canvas.scale=1;
-canvas.style.pointerEvents='auto';
-canvas.style.display='block';
-canvas.style.position='absolute';
-canvas.style.zIndex='1';
-canvas.style.top='0';
-canvas.style.height='100vh';
-canvas.style.width='100vh';
-canvas.style.backgroundColor='black';
+const scanvas = document.createElement('canvas');
+scanvas.id='zcanvas';
+scanvas.imageRendering='auto';
+scanvas.width=winSize;
+scanvas.height=winSize;
+scanvas.zoom=1;
+scanvas.scale=1;
+scanvas.style.pointerEvents='auto';
+scanvas.style.display='block';
+scanvas.style.position='absolute';
+scanvas.style.zIndex='1';
+scanvas.style.top='0';
+scanvas.style.height='100vh';
+scanvas.style.width='100vh';
+scanvas.style.backgroundColor='black';
 document.getElementById("contain1").appendChild(canvas);
 
 const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
@@ -77,7 +77,7 @@ context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 context.getExtension('GL_ALL_EXTENSIONS');
 context.disable(gl.DITHER);
 */
-const gpu = new GPUX({ canvas, context });
+const gpu = new GPUX({mode:'webgl2', canvas:scanvas, webGl:context });
 
 var $shds=[];
 
