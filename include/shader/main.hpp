@@ -53,6 +53,14 @@ $high.innerHTML=winSize;
 
 const canvas = document.createElement('canvas');
 canvas.id='zcanvas';
+canvas.style.pointer-events='auto';
+canvas.style.display='block';
+canvas.style.position='absolute';
+canvas.style.zIndex='1';
+canvas.style.top='0';
+canvas.style.height='100vh';
+canvas.style.width='100vh';
+canvas.style.backgroundColor='black';
 document.getElementById("contain1").appendChild(canvas);
 const context = canvas.getContext('webgl2', { premultipliedAlpha: false });
 const gpu = new GPUX({ canvas, context });
