@@ -53,7 +53,7 @@ $high.innerHTML=winSize;
 
 const canvas = document.createElement('canvas');
 canvas.id='zcanvas';
-canvas.style.pointer-events='auto';
+canvas.style.pointerEvents='auto';
 canvas.style.display='block';
 canvas.style.position='absolute';
 canvas.style.zIndex='1';
