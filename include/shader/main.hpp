@@ -50,13 +50,12 @@ window.scroll(0,0);
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-const gpu=new GPUX();
 
 const canvas = document.createElement('canvas');
 canvas.id='zcanvas';
 document.getElementById("contain1").appendChild(canvas);
 const context = canvas.getContext('webgl2', { premultipliedAlpha: false });
-const gpu = new GPU({ canvas, context });
+const gpu = new GPUX({ canvas, context });
 
 var $shds=[];
 
