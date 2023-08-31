@@ -127,7 +127,7 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-void avgFrm(int,int,float *,float *);
+// void avgFrm(int,int,float *,float *);
 
 float max;
 float min;
@@ -140,7 +140,7 @@ extern "C"{
 
 void b3();
 
-void nano(short int,int,float *,float *);
+// void nano(short int,int,float *,float *);
 
 }
 
