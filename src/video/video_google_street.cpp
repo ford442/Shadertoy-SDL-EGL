@@ -482,7 +482,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setOutput([sz]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
