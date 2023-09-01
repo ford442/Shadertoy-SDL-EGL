@@ -192,9 +192,9 @@ static inline boost::function<EM_BOOL()>Rendar;
 
 static inline boost::function<EM_BOOL()>Unifrm;
 
-boost::function<EM_BOOL()>swap;
+boost::function<EM_BOOL(void)>swap;
 
-boost::function<EM_BOOL()>strt;
+boost::function<EM_BOOL(void)>strt;
 
 static void raf();
 
