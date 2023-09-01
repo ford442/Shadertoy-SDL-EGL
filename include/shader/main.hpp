@@ -49,8 +49,7 @@ window.scroll(0,0);
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
-
-const scanvas = document.createElement('canvas');
+const scanvas=document.createElement('canvas');
 scanvas.id='zcanvas';
 scanvas.imageRendering='auto';
 scanvas.width=winSize;
@@ -66,16 +65,10 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
-
-const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
-
+const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
 context.getExtension('GL_ALL_EXTENSIONS');
-
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
-// gpu.hint(gpu.FRAGMENT_SHADER_DERIVATIVE_HINT,gpu.NICEST);
-// gpu.hint(gpu.GENERATE_MIPMAP_HINT,gpu.NICEST);
-// gpu.disable(gpu.DITHER);
 
 var $shds=[];
 
@@ -294,7 +287,7 @@ js_main();
 return EM_TRUE;
 };
 
-int rD=0,Rg=0,nm=0;
+int rD,Rg,nm;
 
 int r4nd4(int);
 
@@ -321,8 +314,8 @@ return rD;
 
 extern"C"{
 
-int TH=0;
-int RG=0;
+int TH;
+int RG;
 int r4nd(int);
 
 }
