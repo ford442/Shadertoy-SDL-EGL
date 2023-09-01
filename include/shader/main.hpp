@@ -65,7 +65,7 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
-const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
+const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
 context.getExtension('GL_ALL_EXTENSIONS');
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
