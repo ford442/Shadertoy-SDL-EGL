@@ -76,7 +76,7 @@ context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 context.getExtension('GL_ALL_EXTENSIONS');
 context.disable(gl.DITHER);
 */
-const gpu = new GPUX({mode:'webgl2', canvas:scanvas, webGl:context });
+const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
 
 var $shds=[];
 
