@@ -16,12 +16,12 @@ extern "C" {
 
 EM_BOOL str(){
 strtr();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL swp(){
 swpp();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL ud(){
@@ -31,7 +31,7 @@ return 1;
 
 EM_BOOL uu(){
 run.uniUP();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL vd(){
@@ -41,27 +41,27 @@ return 1;
 
 EM_BOOL vu(){
 run.viewUP();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL mu(){
 run.moveUP();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL md(){
 run.moveDOWN();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL ml(){
 run.moveLEFT();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL mr(){
 run.moveRIGHT();
-return 1;
+return EM_TRUE;
 }
 
 }
