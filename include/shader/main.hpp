@@ -19,7 +19,6 @@
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
 
-
 #include "../../include/shader/intrins.hpp"
 #include <functional>
 
@@ -65,7 +64,7 @@ scanvas.style.zIndex='1';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='black';
+scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
 
 const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
