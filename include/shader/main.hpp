@@ -70,11 +70,11 @@ document.getElementById("contain1").appendChild(scanvas);
 const contxVars={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
 
 const context = scanvas.getContext('webgl2',contxVars);
+context.getExtension('GL_ALL_EXTENSIONS');
 
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
 // gpu.hint(gpu.FRAGMENT_SHADER_DERIVATIVE_HINT,gpu.NICEST);
 // gpu.hint(gpu.GENERATE_MIPMAP_HINT,gpu.NICEST);
-gpu.getExtension('GL_ALL_EXTENSIONS');
 // gpu.disable(gpu.DITHER);
 
 var $shds=[];
