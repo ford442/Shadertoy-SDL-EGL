@@ -102,7 +102,7 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr EGLint numSamples=2;
+static constexpr EGLint numSamples=4;
 
 static constexpr float numSamplesf=float(numSamples);
 
@@ -829,17 +829,17 @@ boost::compute::double_ hi=0.0;
 }mouse;
 
 inline struct{
-int csswi=0;
-int csshi=0;
+short int csswi=0;
+short int csshi=0;
 }css;
 
-int Size=0;
+short int Size=0;
 int tmm=166666000;
 int tmm2=1000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
 inline struct timespec req2={0,tmm2};
-static constexpr int ele=36;
+static constexpr short int ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
@@ -914,7 +914,7 @@ return EM_TRUE;
 }
 
 // static void i_iSize_set(boost::int_t<24>::fast set){
-static EM_BOOL i_iSize_set(int set){
+static EM_BOOL i_iSize_set(short int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
