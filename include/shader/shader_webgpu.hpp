@@ -106,7 +106,7 @@ static constexpr EGLint numSamples=4;
 
 static constexpr float numSamplesf=float(numSamples);
 
-static constexpr EGLint att_lst2[1000]={ 
+static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
 
   // Google Colab
@@ -130,7 +130,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 EGL_NONE,EGL_NONE
 };
 
-static constexpr EGLint ctx_att[500]={
+static constexpr EGLint ctx_att[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_MAJOR_VERSION_KHR,3,
@@ -141,7 +141,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 EGL_NONE,EGL_NONE
 };
 
-static constexpr EGLint att_lst[1500]={
+static constexpr EGLint att_lst[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
