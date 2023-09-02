@@ -43,7 +43,7 @@ EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
-EGL_NONE
+EGL_NONE,EGL_NONE
 };
 
 float max;
@@ -55,7 +55,7 @@ float maxSum;
 
 // void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
-boost::function<void(short int ,int ,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+boost::function<void(short int,int,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
 max=0.0;
 min=1.0;
 sum=0.0;
@@ -95,7 +95,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 EM_JS(void,ma,(),{
-"use strict";
+// "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
@@ -178,10 +178,10 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-let la=w$*h$*4;
+let la=h$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-let sz=(w$*h$)/8;
+let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -259,7 +259,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 // GE way
@@ -351,7 +351,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-let l=w$*h$*16;
+let l=w$*h$*4;
 la=w$*h$*4;
 let al=w$*h$*8;
 sz=(h$*h$)/8;
@@ -378,8 +378,8 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-l=w$*h$*16;
-la=w$*h$*4;
+l=w$*h$*4;
+la=h$*h$*4;
 al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
