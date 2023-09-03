@@ -151,7 +151,7 @@ static constexpr EGLint att_lst[]={
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
@@ -270,11 +270,11 @@ static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#extension OES_standard_derivatives : disable\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
+// "#undef HW_PERFORMANCE\n"
+// "#define HW_PERFORMANCE 1\n"
 "#pragma (fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-"#pragma (fastprecision off)\n"
+"#pragma (fastprecision on)\n"
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 /*
