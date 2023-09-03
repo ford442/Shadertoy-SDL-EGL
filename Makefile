@@ -156,7 +156,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) include/shader/egl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o eglh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=2 -Wl,-lGLU,-lEGL,-lGLESv2 -sUSE_REGAL=1 \
+	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lEGL -sUSE_REGAL=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824\
 	 main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 -o s3027.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
