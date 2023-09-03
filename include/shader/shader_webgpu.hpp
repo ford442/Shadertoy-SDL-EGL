@@ -1117,11 +1117,11 @@ glFlush();
 return EM_TRUE;
 };
 
-static void Rend()noexcept{
+static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
-return;
+return EM_TRUE;
 }
 
 boost::function<EM_BOOL()>swap=[](){
