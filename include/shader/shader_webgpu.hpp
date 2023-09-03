@@ -102,7 +102,7 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr EGLint numSamples=4;
+static constexpr EGLint numSamples=2;
 
 static constexpr float numSamplesf=float(numSamples);
 
@@ -918,8 +918,8 @@ static EM_BOOL i_iSize_set(short int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*2.0;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*2.0;
+i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
 return EM_TRUE;
 }
 
