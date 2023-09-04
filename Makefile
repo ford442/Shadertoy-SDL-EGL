@@ -155,7 +155,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) include/shader/egl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o eglh.o -static
-	 em++ $(STDS) -c -DDOUBLE src/shader/shader_webgpu.cpp -Wl,-lboost_fiber $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c -DDOUBLE src/shader/shader_webgpu.cpp -Wl,-lstdc++fs $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lEGL -sUSE_REGAL=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824 \
