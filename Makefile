@@ -173,7 +173,7 @@ b3_cropcircle:
 	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) -DDOUBLE $(BOOST_FLAGS) \
 	 -o cc001.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 --extern-pre-js gpujsx.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js cropcircle.o
+	 --extern-pre-js gpujsx.js cropcircle.o
 
 b3_shader_wasmedge:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
