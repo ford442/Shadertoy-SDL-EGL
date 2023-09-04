@@ -1,6 +1,27 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
 EM_JS(void, ma, (), {
+const scanvas=document.createElement('canvas');
+scanvas.id='zimag';
+scanvas.imageRendering='auto';
+scanvas.width=winSize;
+scanvas.height=winSize;
+scanvas.zoom=1;
+scanvas.scale=1;
+scanvas.style.pointerEvents='auto';
+scanvas.style.display='block';
+scanvas.style.position='absolute';
+scanvas.style.zIndex='1';
+scanvas.style.top='0';
+scanvas.style.height='100vh';
+scanvas.style.width='100vh';
+scanvas.style.backgroundColor='rgba(255,255,255,0)';
+document.getElementById("contain1").appendChild(scanvas);
+const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,willReadFrequently:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
+const context = scanvas.getContext('webgl2',contxVars);
+context.getExtension('GL_ALL_EXTENSIONS');
+const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
+
   let dis = set();
   if (dis) dis();dis = set();
   var $, $r, z, w, R, h, ww, o, l, r, m, rotm, rotmb, rottm, kna, knab, knb, knbb, knc, kncb, knd, kndb, rott, rottb, rottc;
@@ -12,7 +33,7 @@ EM_JS(void, ma, (), {
     let cnP = document.getElementById("cp");
     let flP = document.getElementById("flip");
     let vd = document.getElementById("myvideo");
-    var c = document.getElementById("imag");
+    var c = document.getElementById("zimag");
     var ctx = c.getContext("2d");
     ctx.drawImage(vd, 0, 0, ww, h);
     var imgData = ctx.getImageData(0, 0, ww, h);
