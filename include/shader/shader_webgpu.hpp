@@ -1325,6 +1325,7 @@ eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
+eglSwapBuffers(display,surface)
 // eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
@@ -1680,8 +1681,6 @@ emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
-   eglMakeCurrent(display,surface,surface,cntx.at(0,0));
-
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
