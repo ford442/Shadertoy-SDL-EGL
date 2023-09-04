@@ -1114,7 +1114,7 @@ glUniform1i(smp_chn[raN],raN);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
 glFlush();
-  eglSwapBuffers(display,surface);
+  eglSwapBuffers(run.display,run.surface);
 
 return EM_TRUE;
 };
