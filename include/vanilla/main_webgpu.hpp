@@ -67,7 +67,7 @@
 // #include "openvino/runtime/tensor.hpp"
 
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
-#include "../../pytorch/aten/src/ATen/ATen.h"
+#include <ATen/ATen.h>
 
 // #include "oneapi/tbb/tick_count.h"
 // #include "oneapi/tbb/task_arena.h"
