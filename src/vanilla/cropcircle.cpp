@@ -1,6 +1,7 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
 EM_JS(void, ma, (), {
+let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 scanvas.id='zimag';
 scanvas.imageRendering='auto';
