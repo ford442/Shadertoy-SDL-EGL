@@ -1132,12 +1132,6 @@ static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
- boost::fibers::fiber f([]() {
-    // Do something in the fiber.
-  });
-
-  // Wait for the fiber to finish.
-  f.join();
 return EM_TRUE;
 }
 
