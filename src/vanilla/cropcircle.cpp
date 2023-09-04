@@ -18,6 +18,8 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("cp").appendChild(scanvas);
+let c = document.getElementById("zimag");
+
 const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,willReadFrequently:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
 context.getExtension('GL_ALL_EXTENSIONS');
@@ -34,7 +36,7 @@ const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
     let cnP = document.getElementById("cp");
     let flP = document.getElementById("flip");
     let vd = document.getElementById("myvideo");
-    var c = document.getElementById("zimag");
+  //  var c = document.getElementById("zimag");
     var ctx = c.getContext("2d");
     ctx.drawImage(vd, 0, 0, ww, h);
     var imgData = ctx.getImageData(0, 0, ww, h);
