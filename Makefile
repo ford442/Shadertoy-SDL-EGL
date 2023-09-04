@@ -166,6 +166,15 @@ b3_shader_webgpu:
 	 --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-pre-js gpujsx.js --extern-post-js rSlider.js --extern-post-js slideOut.js main.o shader_webgpu.o
 
+
+b3_cropcircle:
+	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
+	 em++ $(STDS) -c -DDOUBLE src/shader/cropcircle.cpp $(COMMON_FLAGS) $(SIMD_FLAGS)
+	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) -DDOUBLE $(BOOST_FLAGS) \
+	 -o cc001.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
+	 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --extern-pre-js gpujsx.js --extern-post-js rSlider.js --extern-post-js slideOut.js cropcircle.o
+
 b3_shader_wasmedge:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
 	 em++ $(STDS) lib/lib_webgpu.cpp -static
