@@ -52,6 +52,8 @@ typedef ResultType result_type;
 #include <boost/fiber/all.hpp>
 #include <thread>
 
+#include <complex>
+
 // #define BOOST_HAS_TR1
 
 #include <boost/context/detail/tuple.hpp>
@@ -1065,7 +1067,10 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+  
+glUniform1f(uni_tme,std::real(std::complex<double>(wasm_f64x2_extract_lane(sse2.at(0,0),0),0.0)));
+// glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
+  
 // glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
