@@ -270,6 +270,7 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
+"#extension all_spir_v_extensions : enable\n"
 "#extension OES_standard_derivatives : disable\n"
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 1\n"
@@ -1265,6 +1266,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
