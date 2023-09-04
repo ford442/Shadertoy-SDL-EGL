@@ -18,7 +18,7 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("cp").appendChild(scanvas);
-let c = document.getElementById("zimag");
+let c = document.getElementById("imag");
 
 const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,willReadFrequently:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
