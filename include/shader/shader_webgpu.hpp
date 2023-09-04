@@ -1114,13 +1114,14 @@ glUniform1i(smp_chn[raN],raN);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
 glFlush();
+  eglSwapBuffers(display,surface);
+
 return EM_TRUE;
 };
 
 static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
-eglSwapBuffers(display,surface);
 RendarB();
 return EM_TRUE;
 }
