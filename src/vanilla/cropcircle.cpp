@@ -20,17 +20,50 @@ EM_JS(void, ma, (), {
     var rgbd = rgbdat.data;
     var imgg = imgData.data;
     var i;
+
+    var E=.2126*R[y]+.7152*R[y+1]+.0722*R[y+2];Math.floor((R[y]+R[y+1]+R[y+2])/6),Math.floor((R[y]+R[y+1]+R[y+2])/3);
+    E>126?E>209?(_[y]=255,_[y+1]=128,_[y+2]=0,_[y+3]=255):E>193?(_[y]=255,_[y+1]=0,_[y+2]=0,_[y+3]=128):E>177?(_[y]=0,_[y+1]=255,_[y+2]=255,_[y+3]=255):E>161?(_[y]=0,_[y+1]=0,_[y+2]=255,_[y+3]=128):E>145?(_[y]=0,_[y+1]=255,_[y+2]=0,_[y+3]=255):E>128&&(_[y]=255,_[y+1]=255,_[y+2]=0,_[y+3]=128):(_[y]=110,_[y+1]=110,_[y+2]=110,_[y+3]=0)}f.putImageData(M,0,0),i=document.getElementById("rra"),r
+
+      
     for (i = 0; i < (ww * h * 4); i = i + 4) {
       var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
-      if (rgb > 128) {
-        rgbd[i] = 0;
+        if (rgb > 126) {
+		  if (rgb > 209) {
+        rgbd[i] = 255;
+        rgbd[i + 1] = 128;
+        rgbd[i + 2] = 0;
+        rgbd[i + 3] = 255;
+		  }
+		  else if(rgb > 193){
+    rgbd[i] = 255;
+        rgbd[i + 1] = 0;
+        rgbd[i + 2] = 0;
+        rgbd[i + 3] = 255;
+		  }else if(rgb > 177){
+    rgbd[i] = 0;
+        rgbd[i + 1] = 255;
+        rgbd[i + 2] = 255;
+        rgbd[i + 3] = 255;
+		  }  else if(rgb > 161){
+    rgbd[i] = 0;
+        rgbd[i + 1] = 0;
+        rgbd[i + 2] = 255;
+        rgbd[i + 3] = 255;
+		  }  else if(rgb > 145){
+    rgbd[i] = 0;
         rgbd[i + 1] = 255;
         rgbd[i + 2] = 0;
         rgbd[i + 3] = 255;
-      } else {
-        rgbd[i] = 255;
+		  } else if(rgb > 128){
+    rgbd[i] =255;
         rgbd[i + 1] = 255;
-        rgbd[i + 2] = 255;
+        rgbd[i + 2] = 0;
+        rgbd[i + 3] = 128;
+		  }
+      } else {
+        rgbd[i] = 0;
+        rgbd[i + 1] = 0;
+        rgbd[i + 2] = 0;
         rgbd[i + 3] = 255;
       }
     }
