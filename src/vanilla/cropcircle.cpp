@@ -17,7 +17,7 @@ scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
-document.getElementById("contain1").appendChild(scanvas);
+document.getElementById("cp").appendChild(scanvas);
 const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,willReadFrequently:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
 context.getExtension('GL_ALL_EXTENSIONS');
