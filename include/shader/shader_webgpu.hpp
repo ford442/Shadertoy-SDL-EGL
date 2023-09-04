@@ -868,17 +868,19 @@ static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
 
+EGLDisplay display=nullptr;
+EGLSurface surface=nullptr;
+EGLContext ctxegl=nullptr;
+EGLConfig eglconfig=nullptr;
+EGLint config_size,major,minor;
+
 class Run{
 
 private:
 
 Compile compile;
 
-EGLDisplay display=nullptr;
-EGLSurface surface=nullptr;
-EGLContext ctxegl=nullptr;
-EGLConfig eglconfig=nullptr;
-EGLint config_size=0,major,minor=0;
+
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * vrt_bdy=vrt_bdy_src;
