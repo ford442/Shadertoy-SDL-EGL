@@ -21,7 +21,7 @@ document.getElementById("cp").appendChild(scanvas);
 let c = document.getElementById("imag");
 
 const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,willReadFrequently:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
-const ctx = scanvas.getContext('2d');
+const ctx = scanvas.getContext('2d',contxVars);
 // ctx.getExtension('GL_ALL_EXTENSIONS');
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
 
