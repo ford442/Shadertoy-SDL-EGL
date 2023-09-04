@@ -1120,6 +1120,7 @@ return EM_TRUE;
 static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
+eglSwapBuffers(display,surface);
 RendarB();
 return EM_TRUE;
 }
