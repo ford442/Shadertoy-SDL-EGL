@@ -1253,7 +1253,7 @@ mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
   
 //  eglMakeCurrent(display,surface,surface,cntx.at(0,0));
-  emscripten_webgl_make_context_current(cntxi.at(0,0));
+//  emscripten_webgl_make_context_current(cntxi.at(0,0));
 
 eglBindAPI(EGL_OPENGL_ES_API);
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
