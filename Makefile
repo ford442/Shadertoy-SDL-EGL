@@ -91,7 +91,7 @@ b3_vanilla_icc:
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ src/vanilla/main_webgpu.cpp -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ src/vanilla/main_webgpu.cpp -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) -I../pytorch/aten/src/
 	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O0 -g -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -polly -sALLOW_MEMORY_GROWTH=1 -sDISABLE_EXCEPTION_THROWING=0 \
