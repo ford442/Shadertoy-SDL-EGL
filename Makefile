@@ -92,8 +92,7 @@ b3_vanilla_icc:
 b3_vanilla_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 vpath %.h ../pytorch
-	 em++ -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)  src/vanilla/main_webgpu.cpp 
+	 em++ -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) src/vanilla/main_webgpu.cpp 
 	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O0 -g -o w3001.js \
 	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -polly -sALLOW_MEMORY_GROWTH=1 -sDISABLE_EXCEPTION_THROWING=0 \
@@ -156,17 +155,17 @@ b3_shader_webgpu:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o glh.o -static
 	 em++ $(STDS) include/shader/egl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o eglh.o -static
-	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
+	 em++ $(STDS) -c -DDOUBLE src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lEGL -sUSE_REGAL=1 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824\
-	 main.o shader_webgpu.o -DINTRINS $(BOOST_FLAGS) -DLIB_WEBGPU \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824 \
+	 -DDOUBLE -DINTRINS $(BOOST_FLAGS) -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 -o s3027.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --extern-pre-js gpujsx.js --extern-post-js rSlider.js --extern-post-js slideOut.js
+	 --extern-pre-js gpujsx.js --extern-post-js rSlider.js --extern-post-js slideOut.js main.o shader_webgpu.o
 
 b3_shader_wasmedge:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static
