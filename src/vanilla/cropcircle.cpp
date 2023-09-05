@@ -89,7 +89,7 @@ let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,la,1);
 var rgbd = new Uint32Array(imgg);
   var agavF=new Float32Array($H,pointb,la);
-agavF.set(rgbd);
+// agavF.set(rgbd);
 // Module.HEAPF32.set(rgbd);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
