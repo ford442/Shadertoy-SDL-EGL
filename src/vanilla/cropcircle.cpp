@@ -109,10 +109,10 @@ var i;
 let la=h*ww*4;
 var pointa=la*2.0;
  var pointb=0.0;
-//   let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF32.buffer;
 //   var agav=new Float32Array($H,la,1);
 // var rgbd = new Uint32Array(imgData.data);
-//   var agavF=new Float32Array($H,pointb,la);
+// var agavF=new Float32Array($H,pointb,la);
 // agavF.set(rgbd);
 Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointb,pointa]);
@@ -160,9 +160,11 @@ rgbd[i + 2] = 0;
 rgbd[i + 3] =255- (rgb-128)*16;
 }
 }
-ctx.putImageData(rgbdat, 0, 0);
+ Module.HEAPF32.set(rgbdat);
+
+ctx.putImageData(new Float32Array($H,pointb,la), 0, 0);
 // ctxB.putImageData(rgbdat, 0, 0);
-  
+
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
 cnP.setAttribute("style", "transform: scaleY(1);");
