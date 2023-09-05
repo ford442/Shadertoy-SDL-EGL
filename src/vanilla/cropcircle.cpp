@@ -67,39 +67,39 @@ if (rgb > 209) {    // orange
 rgbd[i] = 255;
 rgbd[i + 1] = 128;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = (rgb-209)*16;
+rgbd[i + 3] = 255-(rgb-209)*16;
 }
 else if(rgb > 193){   // red
 rgbd[i] = 255;
 rgbd[i + 1] = 0;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = (rgb-193)*16;
+rgbd[i + 3] = 255-(rgb-193)*16;
 }else if(rgb > 177){   // light blue
 rgbd[i] = 0;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 255;
-rgbd[i + 3] = (rgb-177)*16;
+rgbd[i + 3] =255- (rgb-177)*16;
 }  else if(rgb > 161){  //  blue
 rgbd[i] = 0;
 rgbd[i + 1] = 0;
 rgbd[i + 2] = 255;
-rgbd[i + 3] = (rgb-161)*16;
+rgbd[i + 3] =255- (rgb-161)*16;
 }  else if(rgb > 145){  // green
 rgbd[i] = 0;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = (rgb-145)*16;
+rgbd[i + 3] =255- (rgb-145)*16;
 } else if(rgb > 128){  // yellow
 rgbd[i] =255;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = (rgb-128)*16;
+rgbd[i + 3] =255- (rgb-128)*16;
 }
 } else {
 rgbd[i] = 255;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 255;
-rgbd[i + 3] = (rgb-128)*16;
+rgbd[i + 3] =255- (rgb-128)*16;
 }
 }
 ctx.putImageData(rgbdat, 0, 0);
