@@ -61,38 +61,39 @@ var i;
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
+var rgbm=255-rgb;
 if (rgb > 126) {
 if (rgb > 209) {    // orange
 rgbd[i] = 255;
 rgbd[i + 1] = 128;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = 255-rgb;
+rgbd[i + 3] = 255-rgbm;
 }
 else if(rgb > 193){   // red
 rgbd[i] = 255;
 rgbd[i + 1] = 0;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = 255-rgb;
+rgbd[i + 3] = 255-rgbm;
 }else if(rgb > 177){   // light blue
 rgbd[i] = 0;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 255;
-rgbd[i + 3] = 255-rgb;
+rgbd[i + 3] = 255-rgbm;
 }  else if(rgb > 161){  //  blue
 rgbd[i] = 0;
 rgbd[i + 1] = 0;
 rgbd[i + 2] = 255;
-rgbd[i + 3] = 255-rgb;
+rgbd[i + 3] = 255-rgbm;
 }  else if(rgb > 145){  // green
 rgbd[i] = 0;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = 255-rgb;
+rgbd[i + 3] = 255-rgbm;
 } else if(rgb > 128){  // yellow
 rgbd[i] =255;
 rgbd[i + 1] = 255;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = 255-rgb;
+rgbd[i + 3] = 255-rgbm;
 }
 } else {
 rgbd[i] = 0;
