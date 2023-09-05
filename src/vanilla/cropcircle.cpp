@@ -109,7 +109,7 @@ var i;
 let la=h*ww*4;
 var pointa=la*2;
  var pointb=0;
-let $H=Module.HEAPF32.buffer;
+ // let $H=Module.HEAPF32.buffer;
 //   var agav=new Float32Array($H,la,1);
 // var rgbd = new Uint32Array(imgData.data);
 // var agavF=new Float32Array($H,pointb,la);
