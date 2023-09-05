@@ -1,6 +1,7 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
-boost::function<void(int,float *,float *)>avgFrm=[](int leng,float *ptr,float *aptr){
+boost::function<void(int,float *)>avgFrm=[](int leng,float *aptr){
+float * ptr=0.0;
 max=0.0;
 min=255.0;
 sum=0.0;
@@ -21,8 +22,8 @@ return;
 
 extern "C" {
 
-void nano(int leng,float *ptr,float *aptr){
-avgFrm(leng,ptr,aptr);
+void nano(int leng,float *aptr){
+avgFrm(leng,aptr);
 }
 
 }
@@ -107,12 +108,14 @@ var imgg = imgData.data;
 var pointb=0.0;
 var i;
 let la=h*ww*4;
+var pointa=la*2.0;
 //   let $H=Module.HEAPF32.buffer;
 //   var agav=new Float32Array($H,la,1);
 // var rgbd = new Uint32Array(imgData.data);
 //   var agavF=new Float32Array($H,pointb,la);
 // agavF.set(rgbd);
 Module.HEAPF32.set(imgData.data);
+Module.ccall("nano",null,["Number","Number"],[la,pointa]);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
