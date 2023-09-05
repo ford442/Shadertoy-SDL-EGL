@@ -9,7 +9,7 @@ scanvas.width=winSize;
 scanvas.height=winSize;
 scanvas.zoom=1;
 scanvas.scale=1;
-scanvas.style.pointerEvents='auto';
+scanvas.style.pointerEvents='none';
 scanvas.style.display='block';
 scanvas.style.position='absolute';
 scanvas.style.zIndex='1';
@@ -25,9 +25,9 @@ const contxVars={
 // precision:'highp',
 // preferLowPowerToHighPerformance:false,
 alpha:true,
-depth:false,
-stencil:false,
-preserveDrawingBuffer:false,
+depth:true,
+stencil:true,
+preserveDrawingBuffer:true,
 premultipliedAlpha:false,
 imageSmoothingEnabled:false,
 willReadFrequently:true,
@@ -61,7 +61,7 @@ var i;
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
-var rgbm=255-rgb;
+var rgbm=128-rgb;
 if (rgb > 126) {
 if (rgb > 209) {    // orange
 rgbd[i] = 255;
