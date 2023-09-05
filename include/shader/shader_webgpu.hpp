@@ -326,7 +326,8 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+/*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
@@ -334,7 +335,7 @@ static inline char frg_ftr_src[420]=
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n";
-
+*/
 EM_BOOL ms_l,clk_l;
 
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
