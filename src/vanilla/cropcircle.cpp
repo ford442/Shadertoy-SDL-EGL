@@ -43,7 +43,7 @@ scanvas.style.zIndex='999995';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,128)';
+scanvas.style.backgroundColor='rgba(0,0,0,128)';
 
   const zcanvas=document.createElement('canvas');
 zcanvas.id='zimag';
@@ -59,10 +59,10 @@ zcanvas.style.zIndex='999994';
 zcanvas.style.top='0';
 zcanvas.style.height='100vh';
 zcanvas.style.width='100vh';
-zcanvas.style.backgroundColor='rgba(255,255,255,128)';
+zcanvas.style.backgroundColor='rgba(0,0,0,128)';
 document.getElementById("cpB").appendChild(zcanvas);
   
-let c = document.getElementById("imag");
+// let c = document.getElementById("imag");
 
 const contxVars={
 // colorType:'float32',
@@ -71,8 +71,8 @@ const contxVars={
 alpha:true,
 depth:true,
 stencil:true,
-preserveDrawingBuffer:true,
-premultipliedAlpha:true,
+preserveDrawingBuffer:false,
+premultipliedAlpha:false,
 imageSmoothingEnabled:false,
 willReadFrequently:true,
 lowLatency:true,
@@ -102,7 +102,6 @@ var imgData = ctx.getImageData(0, 0, ww, h);
 var rgbdat = ctx.createImageData(ww, h);
 var rgbd = rgbdat.data;
 var imgg = imgData.data;
-  
 var pointb=0.0;
 var i;
 let la=h*ww*4;
