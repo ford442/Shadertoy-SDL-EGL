@@ -1,7 +1,8 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
 boost::function<void(int,float *)>avgFrm=[](int leng,float *aptr){
-float * ptr=0.0f;
+float r=0.0f;
+float * ptr=r;
 max=0.0f;
 min=255.0f;
 sum=0.0f;
