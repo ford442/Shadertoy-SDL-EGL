@@ -5,7 +5,7 @@ extern "C"{
 EM_BOOL pl();
   
 }
-/*
+
 // #undef _FLT_EVAL_METHOD
 // #define _FLT_EVAL_METHOD 0
 #pragma STDC CX_LIMITED_RANGE ON
@@ -20,7 +20,6 @@ EM_BOOL pl();
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
-*/
 
 #include <float.h>
 #include <math.h>
@@ -70,7 +69,7 @@ typedef ResultType result_type;
 #include <boost/function.hpp>
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<short int>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -101,8 +100,8 @@ SDL_AudioSpec request;
 
 public:
 
-// static EM_BOOL snd_pos(boost::atomic<int> set){
-static EM_BOOL snd_pos(GLint set){
+// static EM_BOOL snd_pos(boost::atomic<short int> set){
+static EM_BOOL snd_pos(boost::atomic<short int> set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return EM_TRUE;
