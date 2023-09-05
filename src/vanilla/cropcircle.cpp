@@ -46,7 +46,7 @@ scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(0,0,0,128)';
 
 const zcanvas=document.createElement('canvas');
-zcanvas.id='zimag';
+zcanvas.id='jimag';
 zcanvas.imageRendering='pixelated';
 zcanvas.width=winSize;
 zcanvas.height=winSize;
