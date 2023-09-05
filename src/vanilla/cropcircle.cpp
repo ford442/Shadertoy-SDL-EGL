@@ -21,7 +21,7 @@ document.getElementById("cp").appendChild(scanvas);
 let c = document.getElementById("imag");
 
 const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:true,willReadFrequently:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
-const ctx = scanvas.getContext('2d',contxVars);
+const ctx = scanvas.getContext('webgl2',contxVars);
 // ctx.getExtension('GL_ALL_EXTENSIONS');
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
 
@@ -81,10 +81,10 @@ const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
         rgbd[i + 3] = 128;
 		  }
       } else {
-        rgbd[i] = 255;
-        rgbd[i + 1] = 255;
-        rgbd[i + 2] = 255;
-        rgbd[i + 3] = 255;
+        rgbd[i] = 42;
+        rgbd[i + 1] = 42;
+        rgbd[i + 2] = 42;
+        rgbd[i + 3] = 128;
       }
     }
         ctx.putImageData(rgbdat, 0, 0);
