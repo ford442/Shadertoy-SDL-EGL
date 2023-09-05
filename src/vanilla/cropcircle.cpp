@@ -19,10 +19,32 @@ aptr[2]=max;
 return;
 };
 
+boost::function<void(int,int,float *)>rotateFrame=[](int angle,int leng,float *Fptr){
+for (int y = 0; y < leng; y++) {
+for (int x = 0; x < leng; x++) {
+int index = 4 * (y * leng + x);
+unsigned char red = Fptr[index];
+unsigned char green = Fptr[index + 1];
+unsigned char blue = Fptr[index + 2];
+int new_x = x - (leng / 2) * tan(angle / 2);
+int new_y = y - (leng / 2);
+int new_index = 4 * (new_y * leng + new_x);
+Fptr[new_index] = red;
+Fptr[new_index + 1] = green;
+Fptr[new_index + 2] = blue;
+}
+}
+return;
+};
+
 extern "C" {
 
 void nano(int leng,float *ptr,float *aptr){
 avgFrm(leng,ptr,aptr);
+}
+
+void rotat(int angle,int leng,float *Fptr){
+rotateFrame(angle,leng,Fptr);
 }
 
 }
