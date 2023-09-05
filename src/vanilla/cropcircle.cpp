@@ -149,9 +149,9 @@ rgbd[i + 2] = 0;
 rgbd[i + 3] =255- (rgb-128)*16;
 }
 } else {
-rgbd[i] = 255;
-rgbd[i + 1] = 255;
-rgbd[i + 2] = 255;
+rgbd[i] = 0;
+rgbd[i + 1] = 0;
+rgbd[i + 2] = 0;
 rgbd[i + 3] =255- (rgb-128)*16;
 }
 }
