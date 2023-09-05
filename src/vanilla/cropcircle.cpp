@@ -81,9 +81,9 @@ const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
         rgbd[i + 3] = 128;
 		  }
       } else {
-        rgbd[i] = 0;
-        rgbd[i + 1] = 0;
-        rgbd[i + 2] = 0;
+        rgbd[i] = 255;
+        rgbd[i + 1] = 255;
+        rgbd[i + 2] = 255;
         rgbd[i + 3] = 255;
       }
     }
