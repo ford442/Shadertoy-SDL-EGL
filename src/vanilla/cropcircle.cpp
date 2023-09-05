@@ -43,7 +43,7 @@ scanvas.style.zIndex='1';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(0,0,0,0)';
+scanvas.style.backgroundColor='rgba(255,255,255,255)';
 document.getElementById("cp").appendChild(scanvas);
 let c = document.getElementById("imag");
 
