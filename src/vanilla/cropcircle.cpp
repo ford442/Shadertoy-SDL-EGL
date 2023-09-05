@@ -45,7 +45,7 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(0,0,0,128)';
 
-  const zcanvas=document.createElement('canvas');
+const zcanvas=document.createElement('canvas');
 zcanvas.id='zimag';
 zcanvas.imageRendering='pixelated';
 zcanvas.width=winSize;
@@ -60,7 +60,7 @@ zcanvas.style.top='0';
 zcanvas.style.height='100vh';
 zcanvas.style.width='100vh';
 zcanvas.style.backgroundColor='rgba(0,0,0,128)';
-// document.getElementById("cpB").appendChild(zcanvas);
+document.getElementById("cpB").appendChild(zcanvas);
   
 // let c = document.getElementById("imag");
 
@@ -80,9 +80,9 @@ powerPreference:'high-performance',
 antialias:false
 };
 const ctx = scanvas.getContext('2d',contxVars);
-// const ctxB = zcanvas.getContext('2d',contxVars);
+const ctxB = zcanvas.getContext('2d',contxVars);
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
-// const gpuB = new GPUX({mode:'gpu', canvas:zcanvas, webGl:ctxB });
+const gpuB = new GPUX({mode:'gpu', canvas:zcanvas, webGl:ctxB });
 let dis = set();
 if (dis) dis();dis = set();
 var $, $r, z, w, R, h, ww, o, l, r, m, rotm, rotmb, rottm, kna, knab, knb, knbb, knc, kncb, knd, kndb, rott, rottb, rottc;
@@ -156,17 +156,17 @@ rgbd[i + 3] =255- (rgb-128)*16;
 }
 }
 ctx.putImageData(rgbdat, 0, 0);
-// ctxB.putImageData(rgbdat, 0, 0);
+ctxB.putImageData(rgbdat, 0, 0);
   
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
 cnP.setAttribute("style", "transform: scaleY(1);");
-// cnPB.setAttribute("style", "transform: scaleY(-1);");
+cnPB.setAttribute("style", "transform: scaleY(-1);");
 }
 function Rb() {
 flP.setAttribute("style", "transform: scaleX(-1);");
 cnP.setAttribute("style", "transform: scaleY(-1);");
-// cnPB.setAttribute("style", "transform: scaleY(1);");
+cnPB.setAttribute("style", "transform: scaleY(1);");
 }
 knb = document.getElementById("rra");
 kna = document.getElementById("mainr");
@@ -187,15 +187,15 @@ return;
 }
 function rrra(rta) {
 cnP.setAttribute("style", "transform: rotate(" + rta + "deg);");
-// cnPB.setAttribute("style", "transform: rotate(" + rta + "deg);");
+cnPB.setAttribute("style", "transform: rotate(" + rta + "deg);");
 }
 function rrrb(rtb) {
 cnP.setAttribute("style", "transform:rotate(" + rtb + "deg);");
-// cnPB.setAttribute("style", "transform:rotate(" + rtb + "deg);");
+cnPB.setAttribute("style", "transform:rotate(" + rtb + "deg);");
 }
 function rrrc(rtc) {
 cnP.setAttribute("style", "transform: rotate(" + rtc + "deg);");
-// cnPB.setAttribute("style", "transform: rotate(" + rtc + "deg);");
+cnPB.setAttribute("style", "transform: rotate(" + rtc + "deg);");
 }
 if ((rott - knd.innerHTML) < 0) {
 rott = (rott + 360 - knd.innerHTML);
