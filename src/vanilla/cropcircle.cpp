@@ -79,7 +79,6 @@ let vd = document.getElementById("myvideo");
   //  var ctx = c.getContext("2d");
 ctx.drawImage(vd, 0, 0, ww, h);
 var imgData = ctx.getImageData(0, 0, ww, h);
-var imgData2 = ctx.getImageData(0, 0, ww, h);
 var rgbdat = ctx.createImageData(ww, h);
 var rgbd = rgbdat.data;
 var imgg = imgData.data;
@@ -89,9 +88,9 @@ var i;
 let la=h*ww*4;
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,la,1);
-var rgbd = new Uint32Array(imgData2.data);
+// var rgbd = new Uint32Array(imgData.data);
 var agavF=new Float32Array($H,pointb,la);
-agavF.set(rgbd);
+// agavF.set(rgbd);
 // Module.HEAPF32.set(rgbd);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
