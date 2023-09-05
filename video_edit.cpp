@@ -178,10 +178,10 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-let la=h$*h$*4;
+let la=w$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,300);
-let sz=(h$*h$)/8;
+let sz=(w$*h$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -259,7 +259,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").optimizeFloatMemory(true).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 // GE way
@@ -268,7 +268,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([h$,h$]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([w$,h$]);
 
   //castle way
 // var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
@@ -344,7 +344,7 @@ bb=GoldB(eulb);
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([h$,h$]);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([w$,h$]);
 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
@@ -354,7 +354,7 @@ var nblank$=Math.max((((h$-w$)*0)/8),0);
 let l=w$*h$*4;
 la=w$*h$*4;
 let al=w$*h$*8;
-sz=(h$*h$)/8;
+sz=(w$*h$)/8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
@@ -381,7 +381,7 @@ var nblank$=Math.max((((h$-w$)*0)/8),0);
 l=w$*h$*4;
 la=h$*h$*4;
 al=w$*h$*8;
-sz=(h$*h$)/8;
+sz=(w$*h$)/8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
