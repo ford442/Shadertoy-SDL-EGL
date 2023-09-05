@@ -99,12 +99,12 @@ var imgg = imgData.data;
 
   
 var i;
-let $H=Module.HEAPF32.buffer;
+// let $H=Module.HEAPF32.buffer;
 let la=h*ww*4;
 var pointa=2*la;
-var agav=new Float32Array($H,pointa,1);
-  var rgbd = new Uint32Array(imgData.data);
-Module.HEAPF32.set(rgbd);
+// var agav=new Float32Array($H,pointa,1);
+//   var rgbd = new Uint32Array(imgData.data);
+// Module.HEAPF32.set(rgbd);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
