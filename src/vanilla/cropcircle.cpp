@@ -195,7 +195,7 @@ cnP.setAttribute("style", "transform:rotate(" + rtb + "deg);");
 }
 function rrrc(rtc) {
 cnP.setAttribute("style", "transform: rotate(" + rtc + "deg);");
-/ /cnPB.setAttribute("style", "transform: rotate(" + rtc + "deg);");
+// cnPB.setAttribute("style", "transform: rotate(" + rtc + "deg);");
 }
 if ((rott - knd.innerHTML) < 0) {
 rott = (rott + 360 - knd.innerHTML);
