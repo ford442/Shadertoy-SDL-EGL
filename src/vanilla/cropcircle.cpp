@@ -1,13 +1,13 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
 boost::function<void(int,float *)>avgFrm=[](int leng,float *aptr){
-float * ptr=0.0;
-max=0.0;
-min=255.0;
-sum=0.0;
-avgSum=0.0;
-minSum=0.0;
-maxSum=0.0;
+float * ptr=0.0f;
+max=0.0f;
+min=255.0f;
+sum=0.0f;
+avgSum=0.0f;
+minSum=0.0f;
+maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
