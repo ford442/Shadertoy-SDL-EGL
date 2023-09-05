@@ -188,15 +188,15 @@ return;
 }
 function rrra(rta) {
 cnP.setAttribute("style", "transform: rotate(" + rta + "deg);");
-cnPB.setAttribute("style", "transform: rotate(" + rta/2 + "deg);");
+cnPB.setAttribute("style", "transform: rotate(" + rta + "deg);");
 }
 function rrrb(rtb) {
 cnP.setAttribute("style", "transform:rotate(" + rtb + "deg);");
-cnPB.setAttribute("style", "transform:rotate(" + rtb/2 + "deg);");
+cnPB.setAttribute("style", "transform:rotate(" + rtb + "deg);");
 }
 function rrrc(rtc) {
 cnP.setAttribute("style", "transform: rotate(" + rtc + "deg);");
-cnPB.setAttribute("style", "transform: rotate(" + rtc/2 + "deg);");
+cnPB.setAttribute("style", "transform: rotate(" + rtc + "deg);");
 }
 if ((rott - knd.innerHTML) < 0) {
 rott = (rott + 360 - knd.innerHTML);
