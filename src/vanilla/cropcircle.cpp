@@ -13,9 +13,9 @@ if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
 sum=sum/leng;
-// aptr[0]=sum;
-// aptr[1]=min;
-// aptr[2]=max;
+aptr[0]=sum;
+aptr[1]=min;
+aptr[2]=max;
 return;
 };
 
@@ -95,7 +95,7 @@ var agav=new Float32Array($H,pointa,4);
 var rgbd = new Float32Array(imgData.data);
 Module.HEAPF32.set(rgbd);
 var pointb=0.0;
-Module.ccall("nano",null,["Number","Number","Number"],[la,pointb,pointa]);
+// Module.ccall("nano",null,["Number","Number","Number"],[la,pointb,pointa]);
 // agav=new Float32Array($H,pointa,1);
 //  console.log(agav);
 for (i = 0; i < (ww * h * 4); i = i + 4) {
