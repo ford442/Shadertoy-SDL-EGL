@@ -44,7 +44,24 @@ scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,255)';
-document.getElementById("cp").appendChild(scanvas);
+
+  const zcanvas=document.createElement('canvas');
+zcanvas.id='zimag';
+zcanvas.imageRendering='pixelated';
+zcanvas.width=winSize;
+zcanvas.height=winSize;
+zcanvas.zoom=1;
+zcanvas.scale=1;
+zcanvas.style.pointerEvents='none';
+zcanvas.style.display='block';
+zcanvas.style.position='absolute';
+zcanvas.style.zIndex='999994';
+zcanvas.style.top='0';
+zcanvas.style.height='100vh';
+zcanvas.style.width='100vh';
+zcanvas.style.backgroundColor='rgba(0,0,0,255)';
+document.getElementById("cp").appendChild(zcanvas);
+  
 let c = document.getElementById("imag");
 
 const contxVars={
@@ -63,7 +80,9 @@ powerPreference:'high-performance',
 antialias:false
 };
 const ctx = scanvas.getContext('2d',contxVars);
+const ctxB = zcanvas.getContext('2d',contxVars);
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
+const gpuB = new GPUX({mode:'gpu', canvas:zcanvas, webGl:ctxB });
 let dis = set();
 if (dis) dis();dis = set();
 var $, $r, z, w, R, h, ww, o, l, r, m, rotm, rotmb, rottm, kna, knab, knb, knbb, knc, kncb, knd, kndb, rott, rottb, rottc;
@@ -137,6 +156,8 @@ rgbd[i + 3] =255- (rgb-128)*16;
 }
 }
 ctx.putImageData(rgbdat, 0, 0);
+ctxB.putImageData(rgbdat, 0, 0);
+  
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
 cnP.setAttribute("style", "transform: scaleY(1);");
