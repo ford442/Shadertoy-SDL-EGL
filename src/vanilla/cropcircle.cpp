@@ -60,7 +60,7 @@ zcanvas.style.top='0';
 zcanvas.style.height='100vh';
 zcanvas.style.width='100vh';
 zcanvas.style.backgroundColor='rgba(0,0,0,255)';
-document.getElementById("cp").appendChild(zcanvas);
+document.getElementById("cpB").appendChild(zcanvas);
   
 let c = document.getElementById("imag");
 
@@ -92,6 +92,7 @@ h = document.getElementById("ihig").innerHTML;
 ow = document.getElementById("wid").innerHTML;
 oh = document.getElementById("hig").innerHTML;
 let cnP = document.getElementById("cp");
+let cnPB = document.getElementById("cpB");
 let flP = document.getElementById("flip");
 let vd = document.getElementById("myvideo");
   //  var c = document.getElementById("zimag");
@@ -161,10 +162,12 @@ ctxB.putImageData(rgbdat, 0, 0);
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
 cnP.setAttribute("style", "transform: scaleY(1);");
+cnPB.setAttribute("style", "transform: scaleY(-1);");
 }
 function Rb() {
 flP.setAttribute("style", "transform: scaleX(-1);");
 cnP.setAttribute("style", "transform: scaleY(-1);");
+cnPB.setAttribute("style", "transform: scaleY(1);");
 }
 knb = document.getElementById("rra");
 kna = document.getElementById("mainr");
@@ -185,12 +188,15 @@ return;
 }
 function rrra(rta) {
 cnP.setAttribute("style", "transform: rotate(" + rta + "deg);");
+cnPB.setAttribute("style", "transform: rotate(" + rtb + "deg);");
 }
 function rrrb(rtb) {
 cnP.setAttribute("style", "transform:rotate(" + rtb + "deg);");
+cnPB.setAttribute("style", "transform:rotate(" + rtc + "deg);");
 }
 function rrrc(rtc) {
 cnP.setAttribute("style", "transform: rotate(" + rtc + "deg);");
+cnPB.setAttribute("style", "transform: rotate(" + rta + "deg);");
 }
 if ((rott - knd.innerHTML) < 0) {
 rott = (rott + 360 - knd.innerHTML);
