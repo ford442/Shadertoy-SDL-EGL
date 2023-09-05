@@ -65,8 +65,8 @@ antialias:false
 
 const ctx = scanvas.getContext('2d',contxVars);
 // ctx.getExtension('GL_ALL_EXTENSIONS');
-ctx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-ctx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+ctx.hint(ctx.FRAGMENT_SHADER_DERIVATIVE_HINT,ctx.NICEST);
+ctx.hint(ctx.GENERATE_MIPMAP_HINT,ctx.NICEST);
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
 let dis = set();
 if (dis) dis();dis = set();
