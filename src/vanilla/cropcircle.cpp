@@ -21,8 +21,8 @@ document.getElementById("cp").appendChild(scanvas);
 let c = document.getElementById("imag");
 
 const contxVars={
-colorType:'float32',
-precision:'highp',
+// colorType:'float32',
+// precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:false,
