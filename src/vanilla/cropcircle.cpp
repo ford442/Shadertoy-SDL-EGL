@@ -31,7 +31,7 @@ EM_JS(void, ma, (), {
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 scanvas.id='zimag';
-scanvas.imageRendering='auto';
+scanvas.imageRendering='pixelated';
 scanvas.width=winSize;
 scanvas.height=winSize;
 scanvas.zoom=1;
