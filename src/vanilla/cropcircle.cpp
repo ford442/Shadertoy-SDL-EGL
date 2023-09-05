@@ -135,7 +135,7 @@ let $H=Module.HEAPF32.buffer;
 //   var agav=new Float32Array($H,la,1);
 // var rgbd = new Uint32Array(imgData.data);
 var agavF=new Float32Array($H,pointb,la);
-// agavF.set(rgbd);
+agavF.set(imgData.data);
 // Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointb,pointa]);
 
