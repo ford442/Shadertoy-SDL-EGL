@@ -290,37 +290,34 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
-*/
-// "#pragma (precise none)\n"
-// "#pragma STDGL(strict off)\n"
-"#pragma optimize(on)\n"
-"#pragma debug(off)\n"
-"#pragma (invariant none)\n"
-// "#pragma (centroid all)\n"
+"#pragma (precise none)\n"
+ "#pragma STDGL(strict off)\n"
+ "#pragma optimize(on)\n"
+ "#pragma debug(off)\n"
+ "#pragma (invariant none)\n"
+ "#pragma (centroid all)\n"
 "#pragma (sample all)\n"
 "#pragma (unroll all)\n"
 "#pragma optionNV(unroll all)\n"
-// "#pragma STDGL(ifcvt none)\n"
+"#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-"precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;";
-  
-  /*
-"precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n";
 */
-  
+"precision highp float;\n"
+"precision mediump sampler3D;precision highp sampler2D;"
+"precision mediump samplerCube;"
+"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
+
 static inline char vrt_bdy_src[100]=
-// "precision highp int;\n"
+"precision mediump int;\n"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-// "precision highp int;\n"
+"precision mediump int;\n"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
