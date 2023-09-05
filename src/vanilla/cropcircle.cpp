@@ -1,8 +1,8 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
-boost::function<void(short int,int,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+boost::function<void(int,float *,float *)>avgFrm=[](int leng,float *ptr,float *aptr){
 max=0.0;
-min=1.0;
+min=255.0;
 sum=0.0;
 avgSum=0.0;
 minSum=0.0;
@@ -13,28 +13,16 @@ if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
 }
 sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-}
-aptr[0]=avgSum/32;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-}
-aptr[100]=minSum/32;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-}
-aptr[200]=maxSum/32;
+aptr[0]=sum;
+aptr[1]=min;
+aptr[2]=max;
 return;
 };
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
+void nano(int leng,float *ptr,float *aptr){
+avgFrm(leng,ptr,aptr);
 }
 
 }
@@ -74,7 +62,7 @@ lowLatency:true,
 powerPreference:'high-performance',
 antialias:false
 };
-
+let $H=Module.HEAPF32.buffer;
 const ctx = scanvas.getContext('2d',contxVars);
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
 let dis = set();
@@ -95,16 +83,13 @@ var imgData = ctx.getImageData(0, 0, ww, h);
 var rgbdat = ctx.createImageData(ww, h);
 var rgbd = rgbdat.data;
 var imgg = imgData.data;
-
-
   
 var i;
-// let $H=Module.HEAPF32.buffer;
 let la=h*ww*4;
 var pointa=2*la;
 // var agav=new Float32Array($H,pointa,1);
-//   var rgbd = new Uint32Array(imgData.data);
-// Module.HEAPF32.set(rgbd);
+var rgbd = new Uint32Array(imgg);
+$H.set(rgbd);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
