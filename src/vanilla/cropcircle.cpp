@@ -114,7 +114,7 @@ var pointa=la*2;
 // var rgbd = new Uint32Array(imgData.data);
 // var agavF=new Float32Array($H,pointb,la);
 // agavF.set(rgbd);
-Module.HEAPF32.set(imgData.data);
+// Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointb,pointa]);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
