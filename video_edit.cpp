@@ -55,7 +55,7 @@ float maxSum;
 
 // void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
-boost::function<void(short int,int,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+boost::function<void(short int,int,float *,float *)>avgFrm=[](short int Fnum,int leng,float *ptr,float *aptr){
 max=0.0;
 min=1.0;
 sum=0.0;
