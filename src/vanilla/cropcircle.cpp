@@ -43,7 +43,7 @@ scanvas.style.zIndex='999995';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,255)';
+scanvas.style.backgroundColor='rgba(255,255,255,128)';
 
   const zcanvas=document.createElement('canvas');
 zcanvas.id='zimag';
@@ -59,7 +59,7 @@ zcanvas.style.zIndex='999994';
 zcanvas.style.top='0';
 zcanvas.style.height='100vh';
 zcanvas.style.width='100vh';
-zcanvas.style.backgroundColor='rgba(0,0,0,255)';
+zcanvas.style.backgroundColor='rgba(255,255,255,128)';
 document.getElementById("cpB").appendChild(zcanvas);
   
 let c = document.getElementById("imag");
