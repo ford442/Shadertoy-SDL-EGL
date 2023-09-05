@@ -99,7 +99,7 @@ rgbd[i + 3] = 255-rgbm;
 rgbd[i] = 0;
 rgbd[i + 1] = 0;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = 0;
+rgbd[i + 3] = rgbm;
 }
 }
 ctx.putImageData(rgbdat, 0, 0);
