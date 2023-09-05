@@ -16,7 +16,7 @@ scanvas.style.zIndex='1';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,0)';
+scanvas.style.backgroundColor='rgba(0,0,0,0)';
 document.getElementById("cp").appendChild(scanvas);
 let c = document.getElementById("imag");
 
@@ -98,7 +98,7 @@ rgbd[i + 3] = 128;
 rgbd[i] = 0;
 rgbd[i + 1] = 0;
 rgbd[i + 2] = 0;
-rgbd[i + 3] = 255;
+rgbd[i + 3] = 0;
 }
 }
 ctx.putImageData(rgbdat, 0, 0);
