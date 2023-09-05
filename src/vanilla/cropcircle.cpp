@@ -23,7 +23,7 @@ let c = document.getElementById("imag");
 const contxVars={
 // colorType:'float32',
 // precision:'highp',
-preferLowPowerToHighPerformance:false,
+// preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:false,
 stencil:false,
