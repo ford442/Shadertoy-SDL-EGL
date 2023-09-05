@@ -180,7 +180,7 @@ vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=w$*h$*4;
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
+var agav=new Float32Array($H,pointa,304);
 let sz=(w$*h$)/8;
 var avag=0.750;
 var min=1.0;
@@ -356,7 +356,7 @@ la=w$*h$*4;
 let al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
-agav=new Float32Array($H,pointa,300);
+agav=new Float32Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -383,7 +383,7 @@ la=h$*h$*4;
 al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
-agav=new Float32Array($H,pointa,300);
+agav=new Float32Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
