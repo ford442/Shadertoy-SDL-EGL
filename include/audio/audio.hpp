@@ -69,7 +69,7 @@ typedef ResultType result_type;
 #include <boost/function.hpp>
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<short int>>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -101,7 +101,7 @@ SDL_AudioSpec request;
 public:
 
 // static EM_BOOL snd_pos(boost::atomic<short int> set){
-static EM_BOOL snd_pos(boost::atomic<short int> set){
+static EM_BOOL snd_pos(GLint set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return EM_TRUE;
