@@ -112,7 +112,7 @@ let la=h*ww*4;
 // var rgbd = new Uint32Array(imgData.data);
 //   var agavF=new Float32Array($H,pointb,la);
 // agavF.set(rgbd);
-// Module.HEAPF32.set(rgbd);
+Module.HEAPF32.set(imgData.data);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
