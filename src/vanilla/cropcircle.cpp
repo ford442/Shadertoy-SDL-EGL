@@ -82,12 +82,13 @@ var imgData = ctx.getImageData(0, 0, ww, h);
 var rgbdat = ctx.createImageData(ww, h);
 var rgbd = rgbdat.data;
 var imgg = imgData.data;
+  
 var pointb=0.0;
 var i;
 let la=h*ww*4;
 let $H=Module.HEAPF32.buffer;
 var agav=new Float32Array($H,la,1);
-var rgbd = new Uint32Array(imgg);
+var rgbd = new Uint32Array(imgData.data);
   var agavF=new Float32Array($H,pointb,la);
 // agavF.set(rgbd);
 // Module.HEAPF32.set(rgbd);
