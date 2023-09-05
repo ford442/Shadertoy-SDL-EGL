@@ -62,7 +62,6 @@ lowLatency:true,
 powerPreference:'high-performance',
 antialias:false
 };
-let $H=Module.HEAPF32.buffer;
 const ctx = scanvas.getContext('2d',contxVars);
 const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
 let dis = set();
@@ -87,9 +86,10 @@ var imgg = imgData.data;
 var i;
 let la=h*ww*4;
 var pointa=2*la;
-// var agav=new Float32Array($H,pointa,1);
+let $H=Module.HEAPF32.buffer;
+var agav=new Float32Array($H,pointa,1);
 var rgbd = new Uint32Array(imgg);
-$H.set(rgbd);
+Module.HEAPF32.set(rgbd);
 
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
