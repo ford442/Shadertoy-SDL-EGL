@@ -33,7 +33,7 @@ imageSmoothingEnabled:false,
 willReadFrequently:true,
 lowLatency:true,
 powerPreference:'high-performance',
-antialias:true
+antialias:false
 };
 
 const ctx = scanvas.getContext('2d',contxVars);
