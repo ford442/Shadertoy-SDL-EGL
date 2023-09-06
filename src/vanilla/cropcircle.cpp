@@ -185,7 +185,7 @@ rgbd[i + 3] =255- (rgb-128)*16;
 // Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
 
-ctx.putImageData(new Float32Array($H,pointb,la), 0, 0);
+ctx.putImageData(agavF, 0, 0);
 // ctx.putImageData(rgbdat, 0, 0);
 
 function Ra() {
