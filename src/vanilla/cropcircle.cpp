@@ -197,7 +197,7 @@ Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww
 var rtt =new ImageData(ww,h);
  ImageData.data=new Float32Array($H,pointb,la);
 
-ctx.putImageData(ImageData, 0, 0);
+ctx.putImageData(ImageData.data, 0, 0);
 /*
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
