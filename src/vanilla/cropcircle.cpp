@@ -144,7 +144,6 @@ var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
 // Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
-
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for (i = 0; i < (ww * h * 4); i = i + 4) {
@@ -195,7 +194,7 @@ agavF.set(rgbdat.data);
 var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 var rtt =ctx.createImageData(ww,h);
-rtt.data=new Float32Array($H,pointb,la);
+rtt.data=agavNF;
 ctx.putImageData(rtt, 0, 0);
 /*
 function Ra() {
