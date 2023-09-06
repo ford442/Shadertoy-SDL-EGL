@@ -187,7 +187,6 @@ rgbd[i + 2] = 0;
 rgbd[i + 3] =255- (rgb-128)*16;
 }
 }
-// Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
 var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
@@ -293,7 +292,7 @@ EGL_NONE,EGL_NONE
 };
 
 static const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 EGL_NONE,EGL_NONE
 };
 
@@ -336,6 +335,9 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 
 ma();
  ctx=emscripten_webgl_create_context("#zimag",&attr);
+ emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
+ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
+
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
