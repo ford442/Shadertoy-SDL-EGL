@@ -128,7 +128,9 @@ var rgbd = rgbdat.data;
 var imgg = imgData.data;
 var pointb=0.0;
 var i;
-let la=h*ww;
+ 
+let l=h*ww;
+let la=h*ww*4;
 var pointa=la*2.0;
 var pointb=la*1.0;
 let $H=Module.HEAPF32.buffer;
