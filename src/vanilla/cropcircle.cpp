@@ -282,7 +282,11 @@ dsd = true;
 });
 
 int main() {
- 
+ EGLConfig eglconfig=NULL;
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EGLint config_size,major,minor;
 const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
