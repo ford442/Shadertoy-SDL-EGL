@@ -216,7 +216,6 @@ function $rn() {
 if (dsd) {
 return;
 }
- /*
 function rrra(rta) {
 cnP.setAttribute("style", "transform: rotate(" + rta + "deg);");
 // cnPB.setAttribute("style", "transform: rotate(" + rta + "deg);");
@@ -258,7 +257,6 @@ $rn();
 }, rate);
 }
 $rn();
-  */
 document.getElementById("di").onclick = function() {
 dsd = true;
 set();
