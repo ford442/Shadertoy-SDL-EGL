@@ -195,7 +195,7 @@ agavF.set(rgbdat.data);
   var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 var rtt =new ImageData(ww,h);
- ImageData.data=agavNF;
+ ImageData.data=new Float32Array($H,pointb,la);
 
 ctx.putImageData(ImageData, 0, 0);
 /*
