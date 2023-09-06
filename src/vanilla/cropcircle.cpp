@@ -25,7 +25,7 @@ for(int x=0;x<wid;x++){
 int index=4*(y*hig+x);
 unsigned char red=Fptr[index];
 unsigned char green=Fptr[index+1];
-unsigned char blue = Fptr[index+2];
+unsigned char blue=Fptr[index+2];
 int newX=x*cos(angle)-y*sin(angle);
 int newY=x*sin(angle)+y*cos(angle);
 if (newX>=0&&newX<hig&&newY>=0&&newY<wid){
@@ -37,7 +37,6 @@ NFptr[newIndex+3]=255;
 }
 }
 }
- 
 return;
 };
 
@@ -110,7 +109,6 @@ attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
- 
 ctx=emscripten_webgl_create_context("#zimag",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
@@ -216,46 +214,46 @@ Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
-var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
+var rgb=(imgg[i]*0.2126*agav[0])+(imgg[i+1]*0.7152*agav[0])+(imgg[i+2]*0.0722*agav[0]);
 var rgbm=(128-rgb)/2;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
 rgbd[i+1]=128;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-209)*16;
+rgbd[i+3]=255-(rgb-209)*8;
 }
 else if(rgb>193){   // red
 rgbd[i]=255;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-193)*16;
+rgbd[i+3]=255-(rgb-193)*8;
 }else if(rgb>177){   // light blue
 rgbd[i]=0;
 rgbd[i+1]=255;
 rgbd[i+2]=255;
-rgbd[i+3]=255-(rgb-177)*16;
+rgbd[i+3]=255-(rgb-177)*8;
 }else if(rgb>161){  //  blue
 rgbd[i]=0;
 rgbd[i+1]=0;
 rgbd[i+2]=255;
-rgbd[i+3]=255-(rgb-161)*16;
+rgbd[i+3]=255-(rgb-161)*8;
 }else if(rgb>145){  // green
 rgbd[i]=0;
 rgbd[i+1]=255;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-145)*16;
+rgbd[i+3]=255-(rgb-145)*8;
 }else if(rgb>128){  // yellow
 rgbd[i]=255;
 rgbd[i+1]=255;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-128)*16;
+rgbd[i+3]=255-(rgb-128)*8;
 }
 }else{
 rgbd[i]=0;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-128)*16;
+rgbd[i+3]=255-(rgb-128)*8;
 }
 }
 agavF.set(rgbdat.data);
