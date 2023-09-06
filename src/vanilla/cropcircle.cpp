@@ -8,12 +8,12 @@ EGL_CONTEXT_MINOR_VERSION_KHR,0,
   EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
-EGL_NONE};
-
+EGL_NONE,EGL_NONE
+};
 
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
-EGL_NONE
+EGL_NONE,EGL_NONE
 };
 
 static const EGLint attribute_list[]={
@@ -55,7 +55,7 @@ return;
 
 boost::function<void(int,int,int,float *,float *)>rotateFrame=[](int angle,int wid,int hig,float *Fptr,float *NFptr){
 EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 emscripten_get_element_css_size("zimag",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
@@ -74,37 +74,6 @@ attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#zimag",&attr);
-emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
-emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_half_float");
-emscripten_webgl_enable_extension(ctx,"OES_texture_float_linear");
-emscripten_webgl_enable_extension(ctx,"OES_texture_half_float_linear");
-emscripten_webgl_enable_extension(ctx,"EXT_float_blend");
-emscripten_webgl_enable_extension(ctx,"EXT_frag_depth");
-emscripten_webgl_enable_extension(ctx,"EXT_shader_texture_lod");
-emscripten_webgl_enable_extension(ctx,"EXT_sRGB");
-emscripten_webgl_enable_extension(ctx,"EXT_blend_minmax");
-emscripten_webgl_enable_extension(ctx,"ANGLE_instanced_arrays");
-emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query");
-emscripten_webgl_enable_extension(ctx,"EXT_clip_cull_distance");
-emscripten_webgl_enable_extension(ctx,"EXT_disjoint_timer_query_webgl2");
-emscripten_webgl_enable_extension(ctx,"KHR_parallel_shader_compile");
-emscripten_webgl_enable_extension(ctx,"OES_draw_buffers_indexed");
-emscripten_webgl_enable_extension(ctx,"OES_element_index_uint");
-emscripten_webgl_enable_extension(ctx,"OES_fbo_render_mipmap");
-emscripten_webgl_enable_extension(ctx,"OES_standard_derivatives");
-emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
-emscripten_webgl_enable_extension(ctx,"WEBGL_blend_equation_advanced_coherent");
-emscripten_webgl_enable_extension(ctx,"WEBGL_depth_texture");
-emscripten_webgl_enable_extension(ctx,"WEBGL_draw_buffers");
-emscripten_webgl_enable_extension(ctx,"WEBGL_provoking_vertex");
-emscripten_webgl_enable_extension(ctx,"EXT_framebuffer_sRGB");
-emscripten_webgl_enable_extension(ctx,"OES_depth32");
-emscripten_webgl_enable_extension(ctx,"OES_fixed_point");
-emscripten_webgl_enable_extension(ctx,"OES_shader_multisample_interpolation");
-emscripten_webgl_enable_extension(ctx,"WEBGL_webcodecs_video_frame");
-emscripten_webgl_enable_extension(ctx,"OES_single_precision");
-emscripten_webgl_enable_extension(ctx,"GL_EXT_texture_shadow_lod");
-emscripten_webgl_enable_extension(ctx,"GL_NV_memory_attachment");
 // display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // eglInitialize(display,&v3,&v0);
 // eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
