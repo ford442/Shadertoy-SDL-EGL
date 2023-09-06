@@ -19,21 +19,21 @@ aptr[2]=max;
 return;
 };
 
-boost::function<void(int,int,float *,float *)>rotateFrame=[](int angle,int leng,float *Fptr,float *NFptr){
-for (int y = 0; y < leng; y++) {
-for (int x = 0; x < leng; x++) {
-int index = 4 * (y * x);
+boost::function<void(int,int,int,float *,float *)>rotateFrame=[](int angle,int wid,int hig,float *Fptr,float *NFptr){
+for (int y = 0; y < hig; y++) {
+for (int x = 0; x < wid; x++) {
+int index = 4 * (y * hig + x);
 unsigned char red = Fptr[index];
 unsigned char green = Fptr[index + 1];
 unsigned char blue = Fptr[index + 2];
 int newX = x * cos(angle) - y * sin(angle);
 int newY = x * sin(angle) + y * cos(angle);
-if (newX >= 0 && newX < leng && newY >= 0 && newY < leng) {
-int newIndex = 4 * (newY * newX);
+if (newX >= 0 && newX < hig && newY >= 0 && newY < wid) {
+int newIndex = 4 * (y * wid + x);
 NFptr[newIndex]=red;
 NFptr[newIndex + 1]=green;
- NFptr[newIndex + 2]=blue;
- NFptr[newIndex + 3]=255;
+NFptr[newIndex + 2]=blue;
+NFptr[newIndex + 3]=255;
 }
 }
 }
@@ -46,8 +46,8 @@ void nano(int leng,float *ptr,float *aptr){
 avgFrm(leng,ptr,aptr);
 }
 
-void rotat(int angle,int leng,float *Fptr,float *NFptr){
-rotateFrame(angle,leng,Fptr,NFptr);
+void rotat(int angle,int wd,int hi,float *Fptr,float *NFptr){
+rotateFrame(angle,wd,hi,Fptr,NFptr);
 }
 
 }
@@ -145,7 +145,7 @@ agavF.set(imgData.data);
 // Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
   var ang=45;
-Module.ccall("rotat",null,["Number","Number","Number","Number"],[ang,la,pointa,pointb]);
+Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 
 var agav=new Float32Array($H,pointa,1);
 console.log(agav[0]);
