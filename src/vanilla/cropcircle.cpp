@@ -140,7 +140,7 @@ agavF.set(imgData.data);
 // Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
   var ang=45;
-Module.ccall("rotat",null,["Number","Number","Number"],[ang,la,pointa,pointb]);
+Module.ccall("rotat",null,["Number","Number","Number","Number"],[ang,la,pointa,pointb]);
 
 var agav=new Float32Array($H,pointa,1);
 console.log(agav[0]);
