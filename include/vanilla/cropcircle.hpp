@@ -1,6 +1,6 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <webgl/webgl2.h>
+// #include <webgl/webgl2.h>
 #include <functional>
 
 #define GL_FRAGMENT_PRECISION_HIGH 1
