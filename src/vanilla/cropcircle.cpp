@@ -80,7 +80,9 @@ ctx=emscripten_webgl_create_context("#zimag",&attr);
 // contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 // surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 // eglMakeCurrent(display,surface,surface,contextegl);
-emscripten_webgl_make_context_current(ctx);
+  
+// emscripten_webgl_make_context_current(ctx);
+  
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glDisable(GL_DITHER);
 // glViewport(0,0,GLint(Size),GLint(Size));
