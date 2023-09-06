@@ -215,7 +215,7 @@ var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
-var lightDark=(Math.abs(agav[0]-128))/2;
+var lightDark=(Math.abs(agav[0]-128));
  rgb+=lightDark;
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
