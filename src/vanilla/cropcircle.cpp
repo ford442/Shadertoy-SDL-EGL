@@ -122,9 +122,9 @@ emscripten_webgl_make_context_current(ctx);
 // emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
 // emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
  // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glDisable(GL_DITHER);
-glViewport(0,0,GLint(Size),GLint(Size));
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glDisable(GL_DITHER);
+// glViewport(0,0,GLint(Size),GLint(Size));
 }
 
 }
