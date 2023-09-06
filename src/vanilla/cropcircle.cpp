@@ -29,7 +29,10 @@ unsigned char blue = Fptr[index + 2];
 int newX = x * cos(angle) - y * sin(angle);
 int newY = x * sin(angle) + y * cos(angle);
 if (newX >= 0 && newX < leng && newY >= 0 && newY < leng) {
-NFptr[newY][newX] = Fptr[y][x];
+int newIndex = 4 * (newY * leng + newX);
+NFptr[newIndex]=red;
+NFptr[newIndex + 1]=green;
+ NFptr[newIndex + 2]=blue;
 }
 }
 }
