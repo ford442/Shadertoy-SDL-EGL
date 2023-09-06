@@ -185,7 +185,7 @@ rgbd[i + 3] =255- (rgb-128)*16;
 // Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
  var ang=45;
-Module.ccall("rotat",null,["Number","Number"],[ang,la,pointb]);
+// Module.ccall("rotat",null,["Number","Number"],[ang,la,pointb]);
 
 rgbdat.data=new Float32Array($H,pointb,la);
 ctx.putImageData(rgbdat, 0, 0);
