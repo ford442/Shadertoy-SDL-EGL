@@ -19,7 +19,7 @@ aptr[2]=max;
 return;
 };
 
-boost::function<void(int,int,float *)>rotateFrame=[](int angle,int leng,float *Fptr,float *NFptr){
+boost::function<void(int,int,float *,float *)>rotateFrame=[](int angle,int leng,float *Fptr,float *NFptr){
 for (int y = 0; y < leng; y++) {
 for (int x = 0; x < leng; x++) {
 int index = 4 * (y * leng + x);
@@ -29,7 +29,7 @@ unsigned char blue = Fptr[index + 2];
 int newX = x * cos(angle) - y * sin(angle);
 int newY = x * sin(angle) + y * cos(angle);
 if (newX >= 0 && newX < leng && newY >= 0 && newY < leng) {
-NFptr[newY][newX] = image[y][x];
+NFptr[newY][newX] = Fptr[y][x];
 }
 }
 }
