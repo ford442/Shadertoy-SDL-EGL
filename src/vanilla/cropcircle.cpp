@@ -339,7 +339,7 @@ attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 ctx=emscripten_webgl_create_context("#zimag",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,3,0);
+eglInitialize(display,&majorVersion,&minorVersion);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
