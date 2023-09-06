@@ -213,6 +213,7 @@ rottb = 0;
 rottc = 0;
 let dur = document.getElementById("temptime").innerHTML / 10;
 let dsd = false;
+/*
 function $rn() {
 if (dsd) {
 return;
@@ -265,7 +266,8 @@ set();
 return () => {
 dsd = true;
 };
- rn();
+ */
+
 }
 });
 
