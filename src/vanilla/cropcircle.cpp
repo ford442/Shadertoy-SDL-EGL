@@ -144,10 +144,8 @@ var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
 // Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
-  var ang=45;
-Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 
-var agav=new Float32Array($H,pointa,1);
+var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
@@ -194,10 +192,12 @@ rgbd[i + 3] =255- (rgb-128)*16;
 }
 // Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
+  var ang=45;
+Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 
-// rgbdat.data=new Float32Array($H,pointb,la);
+rgbdat.data=new Float32Array($H,pointb,la);
 ctx.putImageData(rgbdat, 0, 0);
-
+/*
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
 cnP.setAttribute("style", "transform: scaleY(1);");
@@ -267,6 +267,7 @@ $rn();
 }, rate);
 }
 $rn();
+ */
 document.getElementById("di").onclick = function() {
 dsd = true;
 set();
