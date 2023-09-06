@@ -214,7 +214,7 @@ var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
-var lightDark=128+=((Math.abs(agav[0]-128))/1.55);
+var lightDark=128+((Math.abs(agav[0]-128))/1.55);
 rgb=rgb+lightDark/2;
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
@@ -230,7 +230,6 @@ rgb=rgb+lightDark/2;
  // perhaps 0-32 difference possible +/-
  // perhaps half 0-16 difference possible +/-
  
- var rgbm=(128-rgb)/2;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
