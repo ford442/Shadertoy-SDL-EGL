@@ -127,6 +127,7 @@ emscripten_webgl_make_context_current(ctx);
 }
 
 EM_JS(void,ma,(),{
+"use strict";
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 scanvas.id='zimag';
