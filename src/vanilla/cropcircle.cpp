@@ -215,13 +215,23 @@ var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
-
+var lightDark=(Math.abs(agav[0]-128))/2;
+ rgb+=lightDark;
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
- //  so the pixel that should be checked would be darker by an amount
+ //  so the pixel that should be checked would be darker by an amount 0.302 < 0.500
+ //  |0|-|64|-|128|-|192|-|255|
  //  
+ //  or pixel is 110/255 or 0.431  ->  avg is 177/255 or 0.695
+ //  so the pixel that should be checked would be lighter  0.500 < 0.695   
+ //
+ //  0.302 < 0.500 is 40% of total B->W range
+ //  0.302 < 0.500 is 20% of possible B->W difference
+//
+ // perhaps 0-32 difference possible +/-
+ // perhaps half 0-16 difference possible +/-
  
-var rgbm=(128-rgb)/2;
+ var rgbm=(128-rgb)/2;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
