@@ -214,8 +214,9 @@ var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
-var lightDark=128+((Math.abs(agav[0]-128))/3);
+var lightDark=128+((Math.abs(agav[0]-128))/2);
 rgb=rgb+lightDark/2;
+ 
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
  //  so the pixel that should be checked would be darker by an amount 0.302 < 0.500
@@ -270,9 +271,9 @@ rgbd[i+2]=0;
 rgbd[i+3]=255-(rgb-128)*8;
 }
 }
-agavF.set(rgbdat.data);
+// agavF.set(rgbdat.data);
 var ang=45;
-Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
+// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1);");
