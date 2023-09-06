@@ -56,12 +56,12 @@ float maxSum;
 // void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
 boost::function<void(short int,int,float *,float *)>avgFrm=[](short int Fnum,int leng,float *ptr,float *aptr){
-max=0.0;
-min=1.0;
-sum=0.0;
-avgSum=0.0;
-minSum=0.0;
-maxSum=0.0;
+max=0.0f;
+min=1.0f;
+sum=0.0f;
+avgSum=0.0f;
+minSum=0.0f;
+maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
