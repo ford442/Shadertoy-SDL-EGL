@@ -131,20 +131,16 @@ var imgData = ctx.getImageData(0, 0, ww, h);
 var rgbdat = ctx.createImageData(ww, h);
 var rgbd = rgbdat.data;
 var imgg = imgData.data;
-var pointb=0.0;
 var i;
- 
 let l=h*ww;
 let la=h*ww*4;
 var pointa=la*2.0;
 var pointb=la*3.0;
 var pointc=la*4.0;
 let $H=Module.HEAPF32.buffer;
-// var rgbd = new Uint32Array(imgData.data);
 var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
-// Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
@@ -195,8 +191,6 @@ rgbd[i + 3] =255- (rgb-128)*16;
 agavF.set(rgbdat.data);
 var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-// var rtt =ctx.createImageData(ww,h);
-// rtt.data=agavNF;
 ctx.putImageData(rgbdat,0,0);
 
 function Ra() {
@@ -291,20 +285,21 @@ const EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-  EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+//   EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
 EGL_NONE,EGL_NONE
 };
 
 static const EGLint attribut_list[]={
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB,
 EGL_NONE,EGL_NONE
 };
 
 static const EGLint attribute_list[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -332,15 +327,12 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glDisable(GL_DITHER);
-// glViewport(0,0,GLint(Size),GLint(Size));
 
 ma();
  ctx=emscripten_webgl_create_context("#zimag",&attr);
@@ -351,6 +343,8 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
-  
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glDisable(GL_DITHER);
+// glViewport(0,0,GLint(Size),GLint(Size));
 return 1;
 }
