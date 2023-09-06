@@ -282,7 +282,7 @@ dsd = true;
 });
 
 int main() {
- EGLConfig eglconfig=NULL;
+EGLConfig eglconfig=NULL;
 EGLDisplay display;
 EGLContext contextegl;
 EGLSurface surface;
@@ -337,7 +337,13 @@ attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-ctx=emscripten_webgl_create_context("#zimag",&attr);
+
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glDisable(GL_DITHER);
+// glViewport(0,0,GLint(Size),GLint(Size));
+
+ma();
+ ctx=emscripten_webgl_create_context("#zimag",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
@@ -346,10 +352,5 @@ surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
   
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glDisable(GL_DITHER);
-// glViewport(0,0,GLint(Size),GLint(Size));
-
-ma();
 return 1;
 }
