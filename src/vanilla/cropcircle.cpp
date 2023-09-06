@@ -184,8 +184,7 @@ rgbd[i + 3] =255- (rgb-128)*16;
 }
 // Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
-
-ctx.putImageData(agavF, 0, 0);
+ctx.drawImage(agavF, 0, 0, ww, h);
 // ctx.putImageData(rgbdat, 0, 0);
 
 function Ra() {
