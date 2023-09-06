@@ -192,12 +192,11 @@ rgbd[i + 3] =255- (rgb-128)*16;
 }
 // Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
-  var ang=45;
+var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-var rtt =new ImageData(ww,h);
- ImageData.data=new Float32Array($H,pointb,la);
-
-ctx.putImageData(ImageData.data, 0, 0);
+var rtt =ctx.createImageData(ww,h);
+rtt.data=new Float32Array($H,pointb,la);
+ctx.putImageData(rtt, 0, 0);
 /*
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
