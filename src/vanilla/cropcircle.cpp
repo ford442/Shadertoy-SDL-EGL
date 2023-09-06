@@ -22,17 +22,18 @@ return;
 boost::function<void(int,int,float *,float *)>rotateFrame=[](int angle,int leng,float *Fptr,float *NFptr){
 for (int y = 0; y < leng; y++) {
 for (int x = 0; x < leng; x++) {
-int index = 4 * (y * leng + x);
+int index = 4 * (y * x);
 unsigned char red = Fptr[index];
 unsigned char green = Fptr[index + 1];
 unsigned char blue = Fptr[index + 2];
 int newX = x * cos(angle) - y * sin(angle);
 int newY = x * sin(angle) + y * cos(angle);
 if (newX >= 0 && newX < leng && newY >= 0 && newY < leng) {
-int newIndex = 4 * (newY * leng + newX);
+int newIndex = 4 * (newY * newX);
 NFptr[newIndex]=red;
 NFptr[newIndex + 1]=green;
  NFptr[newIndex + 2]=blue;
+ NFptr[newIndex + 3]=255;
 }
 }
 }
