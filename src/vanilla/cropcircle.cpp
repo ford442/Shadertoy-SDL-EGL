@@ -128,17 +128,17 @@ var rgbd = rgbdat.data;
 var imgg = imgData.data;
 var pointb=0.0;
 var i;
-let la=h*ww*4;
+let la=h*ww;
 var pointa=la*2.0;
 var pointb=la*1.0;
 let $H=Module.HEAPF32.buffer;
-//   var agav=new Float32Array($H,la,1);
 // var rgbd = new Uint32Array(imgData.data);
 var agavF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
 // Module.HEAPF32.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointb,pointa]);
-
+var agav=new Float32Array($H,pointa,1);
+console.log(agav[0]);
 for (i = 0; i < (ww * h * 4); i = i + 4) {
 var rgb = (imgg[i] * 0.2126) + (imgg[i + 1] * 0.7152) + (imgg[i + 2] * 0.0722);
 var rgbm=128-rgb;
@@ -185,7 +185,7 @@ rgbd[i + 3] =255- (rgb-128)*16;
 // Module.HEAPF32.set(rgbdat.data);
 agavF.set(rgbdat.data);
  var ang=45;
-// Module.ccall("rotat",null,["Number","Number"],[ang,la,pointb]);
+Module.ccall("rotat",null,["Number","Number"],[ang,la,pointb]);
 
 rgbdat.data=new Float32Array($H,pointb,la);
 ctx.putImageData(rgbdat, 0, 0);
