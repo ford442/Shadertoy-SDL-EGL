@@ -51,6 +51,82 @@ void rotat(int angle,int wd,int hi,float *Fptr,float *NFptr){
 rotateFrame(angle,wd,hi,Fptr,NFptr);
 }
 
+
+void emsc(){
+
+EGLConfig eglconfig=NULL;
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EGLint config_size,major,minor;
+
+const EGLint anEglCtxAttribs2[]={
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+//   EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+EGL_NONE,EGL_NONE
+};
+
+static const EGLint attribut_list[]={
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_NONE,EGL_NONE
+};
+
+static const EGLint attribute_list[]={
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
+// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,32,
+EGL_BUFFER_SIZE,32,
+EGL_NONE,EGL_NONE
+};
+
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+emscripten_get_element_css_size("zimag",&wi,&hi);
+Size=(int)hi;
+S=(GLfloat)Size;
+eglBindAPI(EGL_OPENGL_API);
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_FALSE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+ 
+ctx=emscripten_webgl_create_context("#zimag",&attr);
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display,&major,&minor);
+eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
+emscripten_webgl_make_context_current(ctx);
+// emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
+// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
+ // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glDisable(GL_DITHER);
+glViewport(0,0,GLint(Size),GLint(Size));
+}
+
 }
 
 EM_JS(void,ma,(),{
@@ -266,76 +342,8 @@ dsd=true;
 
 int main(){
 
-EGLConfig eglconfig=NULL;
-EGLDisplay display;
-EGLContext contextegl;
-EGLSurface surface;
-EGLint config_size,major,minor;
-
-const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,0,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-//   EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
-EGL_NONE,EGL_NONE
-};
-
-static const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-EGL_NONE,EGL_NONE
-};
-
-static const EGLint attribute_list[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-// EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,32,
-EGL_NONE,EGL_NONE
-};
-
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-emscripten_get_element_css_size("zimag",&wi,&hi);
-Size=(int)hi;
-S=(GLfloat)Size;
-eglBindAPI(EGL_OPENGL_API);
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
-attr.depth=EM_TRUE;
-attr.antialias=EM_FALSE;
-attr.premultipliedAlpha=EM_TRUE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 ma();
-ctx=emscripten_webgl_create_context("#zimag",&attr);
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&major,&minor);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-emscripten_webgl_make_context_current(ctx);
-// emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
- // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-glDisable(GL_DITHER);
-glViewport(0,0,GLint(Size),GLint(Size));
+emsc();
+ 
 return 1;
 }
