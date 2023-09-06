@@ -29,7 +29,7 @@ unsigned char blue = Fptr[index + 2];
 int newX = x * cos(angle) - y * sin(angle);
 int newY = x * sin(angle) + y * cos(angle);
 if (newX >= 0 && newX < leng && newY >= 0 && newY < leng) {
-rotatedImage[newY][newX] = image[y][x];
+NFptr[newY][newX] = image[y][x];
 }
 }
 }
