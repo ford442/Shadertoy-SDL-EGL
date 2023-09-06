@@ -194,7 +194,7 @@ rgbd[i + 3] =255- (rgb-128)*16;
 agavF.set(rgbdat.data);
   var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-var rtt new ImageData(ww,h);
+var rtt =new ImageData(ww,h);
  ImageData.data=agavNF;
 
 ctx.putImageData(ImageData, 0, 0);
