@@ -50,7 +50,6 @@ void rotat(int angle,int wd,int hi,float *Fptr,float *NFptr){
 rotateFrame(angle,wd,hi,Fptr,NFptr);
 }
 
-
 void emsc(){
 
 EGLConfig eglconfig=NULL;
@@ -215,8 +214,8 @@ var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
-var lightDark=(Math.abs(agav[0]-128))/3;
- rgb+=lightDark;
+var lightDark=128+=((Math.abs(agav[0]-128))/1.55);
+rgb=rgb+lightDark/2;
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
  //  so the pixel that should be checked would be darker by an amount 0.302 < 0.500
