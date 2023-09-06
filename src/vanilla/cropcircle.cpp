@@ -193,10 +193,10 @@ rgbd[i + 3] =255- (rgb-128)*16;
 agavF.set(rgbdat.data);
 var ang=45;
 Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-var rtt =ctx.createImageData(ww,h);
-rtt.data=agavNF;
-ctx.putImageData(rtt, 0, 0);
-/*
+// var rtt =ctx.createImageData(ww,h);
+// rtt.data=agavNF;
+ctx.putImageData(rgbdat,0,0);
+
 function Ra() {
 flP.setAttribute("style", "transform: scaleX(1);");
 cnP.setAttribute("style", "transform: scaleY(1);");
@@ -266,7 +266,7 @@ $rn();
 }, rate);
 }
 $rn();
- */
+
 document.getElementById("di").onclick = function() {
 dsd = true;
 set();
