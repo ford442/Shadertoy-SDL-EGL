@@ -326,17 +326,15 @@ rott=(rott+360-knd.innerHTML);
 }else{
 rott=rott-knd.innerHTML;
 }
-rrra(rott);
+rrra(rottc);
 if((rottb-knc.innerHTML)<0){
 rottb=(rottb+360-knc.innerHTML);
 }else{
 rottb=(rottb-knc.innerHTML);
 }
 setTimeout(function(){
-rrrb(rottb);
-},rate);
-setTimeout(function(){
 Rb();
+rrrb(rottb);
 },rate*2);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
@@ -344,7 +342,7 @@ rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
-rrrc(rottc);
+rrrc(rott);
 },rate*3);
 setTimeout(function(){
 $rn();
@@ -357,7 +355,7 @@ set();
 };
 return()=>{
 dsd=true;
-};
+}
 }
 });
 
