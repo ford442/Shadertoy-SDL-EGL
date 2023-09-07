@@ -281,13 +281,14 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
+ 
 function Ra(){
-flP.setAttribute("style","transform:scaleX(1);");
+flP.setAttribute("style","transform:scaleX(-1);");
 cnP.setAttribute("style","transform:scaleY(1);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(-1);");
+flP.setAttribute("style","transform: scaleX(1);");
 cnP.setAttribute("style","transform: scaleY(-1);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
