@@ -334,23 +334,25 @@ rottb=(rottb+360-knc.innerHTML);
 rottb=(rottb-knc.innerHTML);
 }
 
-setTimeout(function(){
-setTimeout(function(){
-setTimeout(function(){
+// setTimeout(function(){
+// setTimeout(function(){
+// setTimeout(function(){
+  sleep(rate);
 Rb();
 rrrb(rottb);
-},rate);
+// },rate);
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
+  sleep(rate);
 Ra();
 rrrc(rottc);
-},rate);
- 
+// },rate);
+ sleep(rate);
 $rn();
-},rate);
+// },rate);
  
 }
 $rn();
