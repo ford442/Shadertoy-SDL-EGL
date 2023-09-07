@@ -295,7 +295,7 @@ var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
 function sleep(){
-Module.ccall('slep',{async:false});
+Module.ccall('slep',{async:true});
 }
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1);");
