@@ -40,7 +40,22 @@ NFptr[newIndex+3]=255;
 return;
 };
 
+boost::atomic<int>tmm=166666000;
+boost::atomic<int>tmm2=1000;
+inline struct timespec rem;
+inline struct timespec req={0,tmm};
+inline struct timespec req2={0,tmm2};
+
+static inline boost::function<EM_BOOL()>sllp=[](){
+nanosleep(&req,&rem);
+return EM_TRUE;
+};
+
 extern "C" {
+
+void slep(){
+sllp();
+}
 
 void nano(int leng,float *ptr,float *aptr){
 avgFrm(leng,ptr,aptr);
@@ -178,10 +193,10 @@ willReadFrequently:true,
 // powerPreference:'high-performance',
 // antialias:false
 };
-const ctx = scanvas.getContext('2d',contxVars);
-// const ctxB = zcanvas.getContext('2d',contxVars);
-const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:ctx });
-// const gpuB = new GPUX({mode:'gpu', canvas:zcanvas, webGl:ctxB });
+const ctx=scanvas.getContext('2d',contxVars);
+// const ctxB=zcanvas.getContext('2d',contxVars);
+const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+// const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
 dis=set();
@@ -236,7 +251,7 @@ rgb=rgb+lightDark/2;
  //  range to the next color giving further color depth as well as 
  // keeping a darker range from having few different colors of gradient
  //
- var diff=(agav[0]/255)*16;
+var diff=(agav[0]/255)*16;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
@@ -281,7 +296,9 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
- 
+function sleep(){
+Module.ccall('slep',{async:false});
+}
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1);");
 flP.setAttribute("style","transform:scaleY(1);");
@@ -322,7 +339,7 @@ if(dsd){
 return;
 }
  flP.setAttribute("style","transform:scaleX(-1);");
-
+sleep();
 if((rott-knd.innerHTML)<0){
 rott=(rott+360-knd.innerHTML);
 }else{
@@ -334,25 +351,32 @@ rottb=(rottb+360-knc.innerHTML);
 }else{
 rottb=(rottb-knc.innerHTML);
 }
-setTimeout(function(){
+// setTimeout(function(){
+ sleep();
 rrrb(rottb);
-},rate);
-setTimeout(function(){
+// },rate);
+// setTimeout(function(){
+  sleep();
+
  flP.setAttribute("style","transform:scaleX(1);");
 // Rb();
-},rate);
-setTimeout(function(){
+// },rate);
+// setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
+   sleep();
+
 rrrc(rottc);
-},rate);
-setTimeout(function(){
+// },rate);
+// setTimeout(function(){
+   sleep();
+
 $rn();
  
-},rate);
+// },rate);
  
 }
 $rn();
