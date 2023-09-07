@@ -173,7 +173,7 @@ stencil:false,
 // preserveDrawingBuffer:false,
 // premultipliedAlpha:false,
 // imageSmoothingEnabled:false,
-// willReadFrequently:true,
+willReadFrequently:true,
 // lowLatency:true,
 // powerPreference:'high-performance',
 // antialias:false
@@ -337,9 +337,12 @@ rottb=(rottb-knc.innerHTML);
 
 setTimeout(function(){
 Rb();
+
+},rate);
+ setTimeout(function(){
+
 rrrb(rottb);
 },rate);
- 
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
@@ -347,9 +350,10 @@ rottc=((rottc+knb.innerHTML)-360);
 rottc=(rottc+knb.innerHTML);
 }
 Ra();
+},rate);
+ setTimeout(function(){
 rrrc(rottc);
 },rate);
- 
 setTimeout(function(){
 $rn();
 },rate);
