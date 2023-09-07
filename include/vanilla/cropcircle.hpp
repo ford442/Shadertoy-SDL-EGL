@@ -3,6 +3,7 @@
 // #include <webgl/webgl2.h>
 #include <functional>
 #include <chrono>
+#include <ctime>
 
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
