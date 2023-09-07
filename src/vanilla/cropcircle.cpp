@@ -283,12 +283,12 @@ var ang=45;
 ctx.putImageData(rgbdat,0,0);
  
 function Ra(){
-flP.setAttribute("style","transform:scaleX(-1);");
+flP.setAttribute("style","transform:scaleX(1);");
 cnP.setAttribute("style","transform:scaleY(1);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(1);");
+flP.setAttribute("style","transform: scaleX(-1);");
 cnP.setAttribute("style","transform: scaleY(-1);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
@@ -327,11 +327,15 @@ rott=(rott+360-knd.innerHTML);
 rott=rott-knd.innerHTML;
 }
 rrra(rott);
+ 
 if((rottb-knc.innerHTML)<0){
 rottb=(rottb+360-knc.innerHTML);
 }else{
 rottb=(rottb-knc.innerHTML);
 }
+
+setTimeout(function(){
+setTimeout(function(){
 setTimeout(function(){
 Rb();
 rrrb(rottb);
@@ -341,13 +345,13 @@ rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
-setTimeout(function(){
 Ra();
 rrrc(rottc);
 },rate);
-setTimeout(function(){
+ 
 $rn();
 },rate);
+ 
 }
 $rn();
 document.getElementById("di").onclick=function(){
