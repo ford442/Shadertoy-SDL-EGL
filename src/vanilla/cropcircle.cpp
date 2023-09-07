@@ -337,7 +337,7 @@ rrrb(rottb);
 },rate);
 setTimeout(function(){
 Rb();
-},rate);
+},rate*2);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
@@ -345,10 +345,10 @@ rottc=((rottc+knb.innerHTML)-360);
 rottc=(rottc+knb.innerHTML);
 }
 rrrc(rottc);
-},rate);
+},rate*3);
 setTimeout(function(){
 $rn();
-},rate);
+},rate*4);
 }
 $rn();
 document.getElementById("di").onclick=function(){
