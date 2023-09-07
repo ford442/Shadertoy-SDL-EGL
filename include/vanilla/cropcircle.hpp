@@ -2,6 +2,7 @@
 #include <emscripten/html5.h>
 // #include <webgl/webgl2.h>
 #include <functional>
+#include <chrono>
 
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
