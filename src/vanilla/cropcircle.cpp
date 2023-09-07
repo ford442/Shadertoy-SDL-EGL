@@ -231,45 +231,50 @@ rgb=rgb+lightDark/2;
 //
  // perhaps 0-32 difference possible +/-
  // perhaps half 0-16 difference possible +/-
- 
+ //
+ //  new idea - have the average have effect on each color's gradient 
+ //  range to the next color giving further color depth as well as 
+ // keeping a darker range from having few different colors of gradient
+ //
+ var diff=(agav[0]/255)*16;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
-rgbd[i+1]=128;
+rgbd[i+1]=128+diff;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-209)*8;
+rgbd[i+3]=255-((rgb-209)*diff);
 }
 else if(rgb>193){   // red
-rgbd[i]=255;
+rgbd[i]=255-diff;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-193)*8;
+rgbd[i+3]=255-((rgb-193)*diff);
 }else if(rgb>177){   // light blue
 rgbd[i]=0;
-rgbd[i+1]=255;
+rgbd[i+1]=255-diff;
 rgbd[i+2]=255;
-rgbd[i+3]=255-(rgb-177)*8;
+rgbd[i+3]=255-((rgb-177)*diff);
 }else if(rgb>161){  //  blue
 rgbd[i]=0;
 rgbd[i+1]=0;
-rgbd[i+2]=255;
-rgbd[i+3]=255-(rgb-161)*8;
+rgbd[i+2]=255-diff;
+rgbd[i+3]=255-((rgb-161)*diff);
 }else if(rgb>145){  // green
 rgbd[i]=0;
-rgbd[i+1]=255;
+rgbd[i+1]=255-diff;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-145)*8;
+rgbd[i+3]=255-((rgb-145)*diff);
 }else if(rgb>128){  // yellow
 rgbd[i]=255;
-rgbd[i+1]=255;
+rgbd[i+1]=255-diff;
 rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-128)*8;
+rgbd[i+3]=255-((rgb-128)*diff);
 }
 }else{
-rgbd[i]=0;
-rgbd[i+1]=0;
-rgbd[i+2]=0;
-rgbd[i+3]=255-(rgb-128)*8;
+rgbd[i]=0+diff;
+rgbd[i+1]=0+diff;
+rgbd[i+2]=0+diff;
+rgbd[i+3]=255-((rgb-128)*diff);
 }
 }
 // agavF.set(rgbdat.data);
