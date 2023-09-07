@@ -40,11 +40,9 @@ NFptr[newIndex+3]=255;
 return;
 };
 
-boost::atomic<int>tmm=166666000;
-boost::atomic<int>tmm2=1000;
+int tmm=166666000;
 inline struct timespec rem;
 inline struct timespec req={0,tmm};
-inline struct timespec req2={0,tmm2};
 
 static inline boost::function<EM_BOOL()>sllp=[](){
 nanosleep(&req,&rem);
