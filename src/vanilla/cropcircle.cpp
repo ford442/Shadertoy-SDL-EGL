@@ -334,21 +334,23 @@ rottb=(rottb+360-knc.innerHTML);
 rottb=(rottb-knc.innerHTML);
 }
 
-setTimeout(function() {
-  Rb();
-  rrrb(rottb);
-}, rate);
-
-if ((rottc + knb.innerHTML) > 360) {
-  rottc = ((rottc + knb.innerHTML) - 360);
-} else {
-  rottc = (rottc + knb.innerHTML);
+setTimeout(function(){
+setTimeout(function(){
+setTimeout(function(){
+Rb();
+rrrb(rottb);
+},rate);
+if((rottc+knb.innerHTML)>360){
+rottc=((rottc+knb.innerHTML)-360);
+}else{
+rottc=(rottc+knb.innerHTML);
 }
-
 Ra();
 rrrc(rottc);
-
+},rate);
+ 
 $rn();
+},rate);
  
 }
 $rn();
