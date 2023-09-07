@@ -45,7 +45,8 @@ inline struct timespec rem;
 inline struct timespec req={0,tmm};
 
 static inline boost::function<EM_BOOL()>sllp=[](){
-nanosleep(&req,&rem);
+// nanosleep(&req,&rem);
+ usleep(16000);
 return EM_TRUE;
 };
 
