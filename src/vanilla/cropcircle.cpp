@@ -321,6 +321,7 @@ function $rn(){
 if(dsd){
 return;
 }
+ flP.setAttribute("style","transform:scaleX(-1);");
 
 if((rott-knd.innerHTML)<0){
 rott=(rott+360-knd.innerHTML);
@@ -337,7 +338,8 @@ setTimeout(function(){
 rrrb(rottb);
 },rate);
 setTimeout(function(){
-Rb();
+ flP.setAttribute("style","transform:scaleX(1);");
+// Rb();
 },rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
@@ -345,13 +347,11 @@ rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
-Ra();
-},rate);
- setTimeout(function(){
 rrrc(rottc);
 },rate);
 setTimeout(function(){
 $rn();
+ 
 },rate);
  
 }
