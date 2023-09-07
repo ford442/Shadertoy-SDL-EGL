@@ -292,6 +292,18 @@ flP.setAttribute("style","transform: scaleX(1);");
 cnP.setAttribute("style","transform: scaleY(-1);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
+ function rrra(rta){
+cnP.setAttribute("style","transform: rotate("+rta+"deg);");
+// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
+}
+function rrrb(rtb){
+cnP.setAttribute("style","transform:rotate("+rtb+"deg);");
+// cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
+}
+function rrrc(rtc) {
+cnP.setAttribute("style","transform:rotate("+rtc+"deg);");
+// cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
+}
 knb=document.getElementById("rra");
 kna=document.getElementById("mainr");
 knc=document.getElementById("rrb");
@@ -309,18 +321,7 @@ function $rn(){
 if(dsd){
 return;
 }
-function rrra(rta){
-cnP.setAttribute("style","transform: rotate("+rta+"deg);");
-// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
-}
-function rrrb(rtb){
-cnP.setAttribute("style","transform:rotate("+rtb+"deg);");
-// cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
-}
-function rrrc(rtc) {
-cnP.setAttribute("style","transform:rotate("+rtc+"deg);");
-// cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
-}
+
 if((rott-knd.innerHTML)<0){
 rott=(rott+360-knd.innerHTML);
 }else{
