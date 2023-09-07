@@ -328,20 +328,16 @@ rott=(rott+360-knd.innerHTML);
 rott=rott-knd.innerHTML;
 }
 rrra(rott);
- 
 if((rottb-knc.innerHTML)<0){
 rottb=(rottb+360-knc.innerHTML);
 }else{
 rottb=(rottb-knc.innerHTML);
 }
-
+setTimeout(function(){
+rrrb(rottb);
+},rate);
 setTimeout(function(){
 Rb();
-
-},rate);
- setTimeout(function(){
-
-rrrb(rottb);
 },rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
