@@ -168,15 +168,15 @@ const contxVars={
 // precision:'highp',
 // preferLowPowerToHighPerformance:false,
 alpha:true,
-depth:true,
-stencil:true,
-preserveDrawingBuffer:false,
-premultipliedAlpha:false,
-imageSmoothingEnabled:false,
-willReadFrequently:true,
-lowLatency:true,
-powerPreference:'high-performance',
-antialias:false
+depth:false,
+stencil:false,
+// preserveDrawingBuffer:false,
+// premultipliedAlpha:false,
+// imageSmoothingEnabled:false,
+// willReadFrequently:true,
+// lowLatency:true,
+// powerPreference:'high-performance',
+// antialias:false
 };
 const ctx = scanvas.getContext('2d',contxVars);
 // const ctxB = zcanvas.getContext('2d',contxVars);
