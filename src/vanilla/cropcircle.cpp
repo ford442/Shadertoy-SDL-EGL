@@ -334,25 +334,24 @@ rottb=(rottb+360-knc.innerHTML);
 rottb=(rottb-knc.innerHTML);
 }
 
-// setTimeout(function(){
-// setTimeout(function(){
-// setTimeout(function(){
-  sleep(rate);
+setTimeout(function(){
 Rb();
 rrrb(rottb);
-// },rate);
+},rate);
+ 
+setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
-  sleep(rate);
 Ra();
 rrrc(rottc);
-// },rate);
- sleep(rate);
+},rate);
+ 
+setTimeout(function(){
 $rn();
-// },rate);
+},rate);
  
 }
 $rn();
