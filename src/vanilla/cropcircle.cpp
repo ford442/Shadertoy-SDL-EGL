@@ -283,13 +283,13 @@ var ang=45;
 ctx.putImageData(rgbdat,0,0);
  
 function Ra(){
-flP.setAttribute("style","transform:scaleX(-1);");
-cnP.setAttribute("style","transform:scaleY(1);");
+flP.setAttribute("style","transform:scaleX(1);");
+flP.setAttribute("style","transform:scaleY(1);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(1);");
-cnP.setAttribute("style","transform: scaleY(-1);");
+flP.setAttribute("style","transform: scaleX(-1);");
+flP.setAttribute("style","transform: scaleY(-1);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
  function rrra(rta){
