@@ -105,7 +105,7 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr EGLint numSamples=2;
+static constexpr EGLint numSamples=8;
 
 static constexpr float numSamplesf=float(numSamples);
 
