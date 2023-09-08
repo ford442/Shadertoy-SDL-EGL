@@ -1336,6 +1336,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES2_compatibility");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_direct_state_access");
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
