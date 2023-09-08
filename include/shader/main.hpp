@@ -68,7 +68,7 @@ document.getElementById("contain1").appendChild(scanvas);
 const contxVars={alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
 context.getExtension('GL_ALL_EXTENSIONS');
-const gpu = new GPUX({mode:'gpu', canvas:scanvas, webGl:context });
+const gpu = new GPUX({mode:'gpu',webGl:context });
 
 var $shds=[];
 
