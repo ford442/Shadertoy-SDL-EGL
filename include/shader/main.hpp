@@ -67,10 +67,14 @@ scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
 const contxVars={colorType:'float64',precision:'highp',preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
+context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 context.getExtension('GL_ALL_EXTENSIONS');
 context.getExtension('GL_KHR_no_error');
 context.getExtension('GL_REGAL_enable');
 context.getExtension('GL_ARB_spirv_extensions');
+context.disable(gl.DITHER);
+
 const gpu=new GPUX({mode:'gpu',webGl:context });
 var $shds=[];
 
