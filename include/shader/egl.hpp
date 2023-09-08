@@ -8,16 +8,17 @@
 // #include <GLFW/glfw3.h>
 
 #define GL_GLES_PROTOTYPES 1
+#define EGL_EGL_PROTOTYPES 1
+#define GL_GLEXT_PROTOTYPES
+#define EGL_EGLEXT_PROTOTYPES
 #include <GLES3/gl3.h>
 
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 
 // #include <GLES3/gl3platform.h>
-// #include <GLES3/gl31.h>
+#include <GLES3/gl31.h>
 // #include <GLES3/gl32.h>
-// #define EGL_EGL_PROTOTYPES 1
-// #define EGL_EGLEXT_PROTOTYPES 1
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 // #include <EGL/eglplatform.h>
