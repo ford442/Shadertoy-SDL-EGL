@@ -347,6 +347,8 @@ ctx1.putImageData(rgbdat,0,0);
              //    speed 1
              //    topmost
              //    yellow/green
+ for(i=0;i<(ww*h*4);i=i+4){
+
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
@@ -395,6 +397,8 @@ ctx2.putImageData(rgbdat,0,0);
              //    speed 2
              //    middle zindex
              //    orange/red
+ for(i=0;i<(ww*h*4);i=i+4){
+
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
@@ -439,6 +443,7 @@ rgbd[i+3]=0;
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx3.putImageData(rgbdat,0,0);
+for(i=0;i<(ww*h*4);i=i+4){
 
         //        circle 4
              //    speed 3
