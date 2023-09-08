@@ -8,8 +8,6 @@
 #define GL_CONTEXT_COMPATIBILITY_PROFILE_BIT 0x00000002
 #define GL_CONTEXT_CORE_PROFILE_BIT 0x00000001
 
-
-
 #define GL_GLES_PROTOTYPES 1
 #define EGL_EGL_PROTOTYPES 1
 #define GL_GLEXT_PROTOTYPES
@@ -34,7 +32,7 @@
 
 // #define GLFW_INCLUDE_GLEXT 1
 // #define GLFW_INCLUDE_ES3
-#include <GLFW/glfw3.h>
+// #include <GLFW/glfw3.h>
 
 
 //
