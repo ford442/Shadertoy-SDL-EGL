@@ -68,8 +68,10 @@ document.getElementById("contain1").appendChild(scanvas);
 const contxVars={colorType:'float64',precision:'highp',preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:true,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
 context.getExtension('GL_ALL_EXTENSIONS');
-const gpu = new GPUX({mode:'gpu',webGl:context });
-
+context.getExtension('GL_KHR_no_error');
+context.getExtension('GL_REGAL_enable');
+context.getExtension('GL_ARB_spirv_extensions');
+const gpu=new GPUX({mode:'gpu',webGl:context });
 var $shds=[];
 
 function normalResStart(){
