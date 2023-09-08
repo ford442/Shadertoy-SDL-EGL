@@ -265,9 +265,9 @@ agavF.set(imgData1.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
-for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
 var lightDark=128+((Math.abs(agav[0]-128))/2);
+var diff=(agav[0]/255)*16;
 // rgb=rgb+lightDark/2;
  
  //  but run past a lighter pixel if the avg is darker 
@@ -288,11 +288,13 @@ var lightDark=128+((Math.abs(agav[0]-128))/2);
  //  range to the next color giving further color depth as well as 
  // keeping a darker range from having few different colors of gradient
  //
-var diff=(agav[0]/255)*16;
+ 
+
                       //  circle 1
                       //  non-rotating 
                        //  bottom zindex
                     // black / white
+for(i=0;i<(ww*h*4);i=i+4){
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd1[i]=255;
@@ -333,39 +335,30 @@ rgbd1[i+2]=255;
 rgbd1[i+3]=255-((rgb-128)*diff);
 }
 }
-// agavF.set(rgbdat.data);
-var ang=45;
-// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx1.putImageData(rgbdat1,0,0);
 
               //        circle 2
              //    speed 1
              //    topmost
              //    yellow/green
- for(i=0;i<(ww*h*4);i=i+4){
-
+for(i=0;i<(ww*h*4);i=i+4){
 if(rgb>126){
 if(rgb>209){    // orange
-rgbd2[i]=255;
-rgbd2[i+1]=128+diff;
-rgbd2[i+2]=0;
-rgbd2[i+3]=0;
+rgbd3[i]=255;
+rgbd3[i+1]=128+diff;
+rgbd3[i+2]=0;
+rgbd3[i+3]=0;
 }
 else if(rgb>193){   // red
-rgbd2[i]=255-diff;
-rgbd2[i+1]=0;
-rgbd2[i+2]=0;
-rgbd2[i+3]=0;
+rgbd3[i]=255-diff;
+rgbd3[i+1]=0;
+rgbd3[i+2]=0;
+rgbd3[i+3]=0;
 }else if(rgb>177){   // light blue
-rgbd2[i]=0;
-rgbd2[i+1]=255-diff;
-rgbd2[i+2]=255;
-rgbd2[i+3]=0;
-}else if(rgb>161){  //  blue
-rgbd2[i]=0;
-rgbd2[i+1]=0;
-rgbd2[i+2]=255-diff;
-rgbd2[i+3]=0;
+rgbd3[i]=0;
+rgbd3[i+1]=255-diff;
+rgbd3[i+2]=255;
+rgbd3[i+3]=0;
 }else if(rgb>145){  // green
 rgbd2[i]=0;
 rgbd2[i+1]=255-diff;
@@ -384,16 +377,13 @@ rgbd2[i+2]=0+diff;
 rgbd2[i+3]=0;
 }
 }
-// agavF.set(rgbdat.data);
-var ang=45;
-// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx2.putImageData(rgbdat2,0,0);
+ 
          //        circle 3
              //    speed 2
              //    middle zindex
              //    orange/red
- for(i=0;i<(ww*h*4);i=i+4){
-
+for(i=0;i<(ww*h*4);i=i+4){
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd3[i]=255;
@@ -484,28 +474,23 @@ rgbd4[i+2]=0+diff;
 rgbd4[i+3]=0;
 }
 }
-// agavF.set(rgbdat.data);
-var ang=45;
-// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx4.putImageData(rgbdat4,0,0);
 
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1)");
 flP.setAttribute("style","transform:scaleY(1)");
-// cnPB.setAttribute("style","transform:scaleY(-1)");
 }
 function Rb(){
 flP.setAttribute("style","transform: scaleX(-1)");
 flP.setAttribute("style","transform: scaleY(-1)");
-// cnPB.setAttribute("style","transform: scaleY(1)");
 }
- function rrra(rta){
+function rrra(rta){
 cnP2.setAttribute("style","transform: rotate("+rta+"deg)");
 }
-  function rrrb(rtb){
+function rrrb(rtb){
 cnP3.setAttribute("style","transform: rotate("+rtb+"deg)");
 }
-  function rrrc(rtc){
+function rrrc(rtc){
 cnP4.setAttribute("style","transform: rotate("+rtc+"deg)");
 }
 
@@ -539,12 +524,10 @@ rottb=(rottb+360-knc.innerHTML);
 rottb=(rottb-knc.innerHTML);
 }
 setTimeout(function(){
- setTimeout(function(){
 setTimeout(function(){
-
+setTimeout(function(){
 // Rb();
 rrrb(rottb);
- 
 },rate*2);
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
