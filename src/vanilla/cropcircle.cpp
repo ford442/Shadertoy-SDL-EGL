@@ -509,11 +509,11 @@ cnP2.setAttribute("style","transform: rotate("+rta+"deg);");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
   function rrrb(rtb){
-cnP3.setAttribute("style","transform: rotate("+rta+"deg);");
+cnP3.setAttribute("style","transform: rotate("+rtb+"deg);");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
   function rrrc(rtc){
-cnP4.setAttribute("style","transform: rotate("+rta+"deg);");
+cnP4.setAttribute("style","transform: rotate("+rtc+"deg);");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 
