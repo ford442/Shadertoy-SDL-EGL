@@ -39,6 +39,7 @@ typedef ResultType result_type;
 #include <random>
 #include <cstdlib>
 #include <emscripten.h>
+#include <emscripten/html5.h>
 
 using namespace ::boost::tuples;
 
