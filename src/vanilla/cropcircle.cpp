@@ -129,22 +129,70 @@ emscripten_webgl_make_context_current(ctx);
 EM_JS(void,ma,(),{
 "use strict";
 let winSize=parseInt(window.innerHeight,10);
-const scanvas=document.createElement('canvas');
-scanvas.id='zimag';
-scanvas.imageRendering='pixelated';
-scanvas.width=winSize;
-scanvas.height=winSize;
-scanvas.zoom=1;
-scanvas.scale=1;
-scanvas.style.pointerEvents='none';
-scanvas.style.display='block';
-scanvas.style.position='absolute';
-scanvas.style.zIndex='999995';
-scanvas.style.top='0';
-scanvas.style.height='100vh';
-scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(0,0,0,128)';
-document.getElementById("cp").appendChild(scanvas);
+const scanvas1=document.createElement('canvas');
+scanvas1.id='zimag1';
+scanvas1.imageRendering='pixelated';
+scanvas1.width=winSize;
+scanvas1.height=winSize;
+scanvas1.zoom=1;
+scanvas1.scale=1;
+scanvas1.style.pointerEvents='none';
+scanvas1.style.display='block';
+scanvas1.style.position='absolute';
+scanvas1.style.zIndex='999991';
+scanvas1.style.top='0';
+scanvas1.style.height='100vh';
+scanvas1.style.width='100vh';
+scanvas1.style.backgroundColor='rgba(0,0,0,128)';
+document.getElementById("cp1").appendChild(scanvas1);
+const scanvas2=document.createElement('canvas');
+scanvas2.id='zimag2';
+scanvas2.imageRendering='pixelated';
+scanvas2.width=winSize;
+scanvas2.height=winSize;
+scanvas2.zoom=1;
+scanvas2.scale=1;
+scanvas2.style.pointerEvents='none';
+scanvas2.style.display='block';
+scanvas2.style.position='absolute';
+scanvas2.style.zIndex='999992';
+scanvas2.style.top='0';
+scanvas2.style.height='100vh';
+scanvas2.style.width='100vh';
+scanvas2.style.backgroundColor='rgba(0,0,0,128)';
+document.getElementById("cp2").appendChild(scanvas2);
+const scanvas3=document.createElement('canvas');
+scanvas3.id='zimag3';
+scanvas3.imageRendering='pixelated';
+scanvas3.width=winSize;
+scanvas3.height=winSize;
+scanvas3.zoom=1;
+scanvas3.scale=1;
+scanvas3.style.pointerEvents='none';
+scanvas3.style.display='block';
+scanvas3.style.position='absolute';
+scanvas3.style.zIndex='999993';
+scanvas3.style.top='0';
+scanvas3.style.height='100vh';
+scanvas3.style.width='100vh';
+scanvas3.style.backgroundColor='rgba(0,0,0,128)';
+document.getElementById("cp3").appendChild(scanvas3);
+const scanvas4=document.createElement('canvas');
+scanvas4.id='zimag4';
+scanvas4.imageRendering='pixelated';
+scanvas4.width=winSize;
+scanvas4.height=winSize;
+scanvas4.zoom=1;
+scanvas4.scale=1;
+scanvas4.style.pointerEvents='none';
+scanvas4.style.display='block';
+scanvas4.style.position='absolute';
+scanvas4.style.zIndex='999994';
+scanvas4.style.top='0';
+scanvas4.style.height='100vh';
+scanvas4.style.width='100vh';
+scanvas4.style.backgroundColor='rgba(0,0,0,128)';
+document.getElementById("cp4").appendChild(scanvas4);
 /*
 const zcanvas=document.createElement('canvas');
 zcanvas.id='jimag';
@@ -178,9 +226,15 @@ willReadFrequently:true,
 // powerPreference:'high-performance',
 // antialias:false
 };
-const ctx=scanvas.getContext('2d',contxVars);
+const ctx1=scanvas1.getContext('2d',contxVars);
+const ctx2=scanvas2.getContext('2d',contxVars);
+const ctx3=scanvas3.getContext('2d',contxVars);
+const ctx4=scanvas4.getContext('2d',contxVars);
 // const ctxB=zcanvas.getContext('2d',contxVars);
-const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+const gpu1=new GPUX({mode:'gpu',canvas:scanvas1,webGl:ctx1 });
+const gpu2=new GPUX({mode:'gpu',canvas:scanvas2,webGl:ctx2 });
+const gpu3=new GPUX({mode:'gpu',canvas:scanvas3,webGl:ctx3 });
+const gpu4=new GPUX({mode:'gpu',canvas:scanvas4,webGl:ctx4 });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -191,7 +245,10 @@ ww=document.getElementById("iwid").innerHTML;
 h=document.getElementById("ihig").innerHTML;
 ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
-let cnP=document.getElementById("cp");
+let cnP1=document.getElementById("cp1");
+let cnP2=document.getElementById("cp2");
+let cnP3=document.getElementById("cp3");
+let cnP4=document.getElementById("cp4");
 let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
@@ -216,7 +273,7 @@ console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
 var lightDark=128+((Math.abs(agav[0]-128))/2);
-rgb=rgb+lightDark/2;
+// rgb=rgb+lightDark/2;
  
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
@@ -237,6 +294,107 @@ rgb=rgb+lightDark/2;
  // keeping a darker range from having few different colors of gradient
  //
 var diff=(agav[0]/255)*16;
+                      //  circle 1
+                      //  non-rotating 
+                       //  bottom zindex
+                    // black / white
+if(rgb>126){
+if(rgb>209){    // orange
+rgbd[i]=255;
+rgbd[i+1]=128+diff;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}
+else if(rgb>193){   // red
+rgbd[i]=255-diff;
+rgbd[i+1]=0;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}else if(rgb>177){   // light blue
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=255;
+rgbd[i+3]=0;
+}else if(rgb>161){  //  blue
+rgbd[i]=0;
+rgbd[i+1]=0;
+rgbd[i+2]=255-diff;
+rgbd[i+3]=0;
+}else if(rgb>145){  // green
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-145)*diff);
+}else if(rgb>128){  // yellow
+rgbd[i]=255;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}
+}else{
+rgbd[i]=255;
+rgbd[i+1]=255;
+rgbd[i+2]=255;
+rgbd[i+3]=255-((rgb-128)*diff);
+}
+}
+// agavF.set(rgbdat.data);
+var ang=45;
+// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
+ctx1.putImageData(rgbdat,0,0);
+
+              //        circle 2
+             //    speed 1
+             //    topmost
+             //    yellow/green
+if(rgb>126){
+if(rgb>209){    // orange
+rgbd[i]=255;
+rgbd[i+1]=128+diff;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}
+else if(rgb>193){   // red
+rgbd[i]=255-diff;
+rgbd[i+1]=0;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}else if(rgb>177){   // light blue
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=255;
+rgbd[i+3]=0;
+}else if(rgb>161){  //  blue
+rgbd[i]=0;
+rgbd[i+1]=0;
+rgbd[i+2]=255-diff;
+rgbd[i+3]=0;
+}else if(rgb>145){  // green
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-145)*diff);
+}else if(rgb>128){  // yellow
+rgbd[i]=255;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-128)*diff);
+}
+}else{
+rgbd[i]=0+diff;
+rgbd[i+1]=0+diff;
+rgbd[i+2]=0+diff;
+rgbd[i+3]=0;
+}
+}
+// agavF.set(rgbdat.data);
+var ang=45;
+// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
+ctx2.putImageData(rgbdat,0,0);
+         //        circle 3
+             //    speed 2
+             //    middle zindex
+             //    orange/red
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
@@ -258,41 +416,99 @@ rgbd[i+3]=255-((rgb-177)*diff);
 rgbd[i]=0;
 rgbd[i+1]=0;
 rgbd[i+2]=255-diff;
-rgbd[i+3]=255-((rgb-161)*diff);
+rgbd[i+3]=0;
 }else if(rgb>145){  // green
 rgbd[i]=0;
 rgbd[i+1]=255-diff;
 rgbd[i+2]=0;
-rgbd[i+3]=255-((rgb-145)*diff);
+rgbd[i+3]=0;
 }else if(rgb>128){  // yellow
 rgbd[i]=255;
 rgbd[i+1]=255-diff;
 rgbd[i+2]=0;
-rgbd[i+3]=255-((rgb-128)*diff);
+rgbd[i+3]=0;
 }
 }else{
 rgbd[i]=0+diff;
 rgbd[i+1]=0+diff;
 rgbd[i+2]=0+diff;
-rgbd[i+3]=255-((rgb-128)*diff);
+rgbd[i+3]=0;
 }
 }
 // agavF.set(rgbdat.data);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-ctx.putImageData(rgbdat,0,0);
+ctx3.putImageData(rgbdat,0,0);
+
+        //        circle 4
+             //    speed 3
+             //    bottom zindex
+             //    blue/light blue
+if(rgb>126){
+if(rgb>209){    // orange
+rgbd[i]=255;
+rgbd[i+1]=128+diff;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}
+else if(rgb>193){   // red
+rgbd[i]=255-diff;
+rgbd[i+1]=0;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}else if(rgb>177){   // light blue
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=255;
+rgbd[i+3]=255-((rgb-177)*diff);
+}else if(rgb>161){  //  blue
+rgbd[i]=0;
+rgbd[i+1]=0;
+rgbd[i+2]=255-diff;
+rgbd[i+3]=255-((rgb-161)*diff);
+}else if(rgb>145){  // green
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}else if(rgb>128){  // yellow
+rgbd[i]=255;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=0;
+}
+}else{
+rgbd[i]=0+diff;
+rgbd[i+1]=0+diff;
+rgbd[i+2]=0+diff;
+rgbd[i+3]=0;
+}
+}
+// agavF.set(rgbdat.data);
+var ang=45;
+// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
+ctx4.putImageData(rgbdat,0,0);
+
 function Ra(){
-flP.setAttribute("style","transform:scaleX(-1);");
+flP.setAttribute("style","transform:scaleX(1);");
 flP.setAttribute("style","transform:scaleY(1);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(1);");
+flP.setAttribute("style","transform: scaleX(-1);");
 flP.setAttribute("style","transform: scaleY(-1);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
  function rrra(rta){
-cnP.setAttribute("style","transform: rotate("+rta+"deg);");
+cnP2.setAttribute("style","transform: rotate("+rta+"deg);");
+// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
+}
+  function rrrb(rtb){
+cnP3.setAttribute("style","transform: rotate("+rta+"deg);");
+// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
+}
+  function rrrc(rtc){
+cnP4.setAttribute("style","transform: rotate("+rta+"deg);");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 
@@ -313,13 +529,13 @@ function $rn(){
 if(dsd){
 return;
 }
-Ra();
+// Ra();
 if((rott-knd.innerHTML)<0){
 rott=(rott+360-knd.innerHTML);
 }else{
 rott=rott-knd.innerHTML;
 }
-rrra(rottc);
+rrra(rott);
 if((rottb-knc.innerHTML)<0){
 rottb=(rottb+360-knc.innerHTML);
 }else{
@@ -329,8 +545,8 @@ setTimeout(function(){
  setTimeout(function(){
 setTimeout(function(){
 
-Rb();
-rrra(rottb);
+// Rb();
+rrrb(rottb);
  
 },rate*2);
 if((rottc+knb.innerHTML)>360){
@@ -338,7 +554,7 @@ rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
-rrra(rott);
+rrrc(rottc);
 },rate*3);
 $rn();
 },rate*4);
