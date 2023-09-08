@@ -424,16 +424,14 @@ rgbd3[i+2]=0+diff;
 rgbd3[i+3]=0;
 }
 }
-// agavF.set(rgbdat3.data);
-var ang=45;
-// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx3.putImageData(rgbdat3,0,0);
-for(i=0;i<(ww*h*4);i=i+4){
+
 
         //        circle 4
              //    speed 3
              //    bottom zindex
              //    blue/light blue
+for(i=0;i<(ww*h*4);i=i+4){
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd4[i]=255;
@@ -523,17 +521,18 @@ rottb=(rottb+360-knc.innerHTML);
 }else{
 rottb=(rottb-knc.innerHTML);
 }
+if((rottc+knb.innerHTML)>360){
+rottc=((rottc+knb.innerHTML)-360);
+}else{
+rottc=(rottc+knb.innerHTML);
+}
 setTimeout(function(){
 setTimeout(function(){
 setTimeout(function(){
 // Rb();
 rrrb(rottb);
 },rate*2);
-if((rottc+knb.innerHTML)>360){
-rottc=((rottc+knb.innerHTML)-360);
-}else{
-rottc=(rottc+knb.innerHTML);
-}
+
 rrrc(rottc);
 },rate*3);
 $rn();
@@ -551,9 +550,7 @@ dsd=true;
 });
 
 int main(){
-
 ma();
 emsc();
- 
 return 1;
 }
