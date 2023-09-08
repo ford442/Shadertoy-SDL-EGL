@@ -350,7 +350,7 @@ rgbd1[i+3]=255-((rgb-128)*diff);
 // agavF.set(rgbdat.data);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-ctx1.putImageData(rgbdat,0,0);
+ctx1.putImageData(rgbdat1,0,0);
 
               //        circle 2
              //    speed 1
@@ -401,7 +401,7 @@ rgbd2[i+3]=0;
 // agavF.set(rgbdat.data);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-ctx2.putImageData(rgbdat,0,0);
+ctx2.putImageData(rgbdat2,0,0);
          //        circle 3
              //    speed 2
              //    middle zindex
@@ -448,10 +448,10 @@ rgbd3[i+2]=0+diff;
 rgbd3[i+3]=0;
 }
 }
-// agavF.set(rgbdat.data);
+// agavF.set(rgbdat3.data);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-ctx3.putImageData(rgbdat,0,0);
+ctx3.putImageData(rgbdat3,0,0);
 for(i=0;i<(ww*h*4);i=i+4){
 
         //        circle 4
@@ -501,7 +501,7 @@ rgbd4[i+3]=0;
 // agavF.set(rgbdat.data);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
-ctx4.putImageData(rgbdat,0,0);
+ctx4.putImageData(rgbdat4,0,0);
 
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1);");
