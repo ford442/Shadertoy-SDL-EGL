@@ -155,7 +155,7 @@ scanvas2.scale=1;
 scanvas2.style.pointerEvents='none';
 scanvas2.style.display='block';
 scanvas2.style.position='absolute';
-scanvas2.style.zIndex='999992';
+scanvas2.style.zIndex='999994';
 scanvas2.style.top='0';
 scanvas2.style.height='100vh';
 scanvas2.style.width='100vh';
@@ -187,7 +187,7 @@ scanvas4.scale=1;
 scanvas4.style.pointerEvents='none';
 scanvas4.style.display='block';
 scanvas4.style.position='absolute';
-scanvas4.style.zIndex='999994';
+scanvas4.style.zIndex='999992';
 scanvas4.style.top='0';
 scanvas4.style.height='100vh';
 scanvas4.style.width='100vh';
@@ -316,7 +316,7 @@ rgbd1[i+3]=0;
 rgbd1[i]=0;
 rgbd1[i+1]=255-diff;
 rgbd1[i+2]=0;
-rgbd1[i+3]=255-((rgb-145)*diff);
+rgbd1[i+3]=0;
 }else if(rgb>128){  // yellow
 rgbd1[i]=255;
 rgbd1[i+1]=255-diff;
@@ -407,7 +407,7 @@ rgbd3[i+3]=255-((rgb-193)*diff);
 rgbd3[i]=0;
 rgbd3[i+1]=255-diff;
 rgbd3[i+2]=255;
-rgbd3[i+3]=255-((rgb-177)*diff);
+rgbd3[i+3]=0;
 }else if(rgb>161){  //  blue
 rgbd3[i]=0;
 rgbd3[i+1]=0;
@@ -487,26 +487,23 @@ var ang=45;
 ctx4.putImageData(rgbdat4,0,0);
 
 function Ra(){
-flP.setAttribute("style","transform:scaleX(1);");
-flP.setAttribute("style","transform:scaleY(1);");
-// cnPB.setAttribute("style","transform:scaleY(-1);");
+flP.setAttribute("style","transform:scaleX(1)");
+flP.setAttribute("style","transform:scaleY(1)");
+// cnPB.setAttribute("style","transform:scaleY(-1)");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(-1);");
-flP.setAttribute("style","transform: scaleY(-1);");
-// cnPB.setAttribute("style","transform: scaleY(1);");
+flP.setAttribute("style","transform: scaleX(-1)");
+flP.setAttribute("style","transform: scaleY(-1)");
+// cnPB.setAttribute("style","transform: scaleY(1)");
 }
  function rrra(rta){
-cnP2.setAttribute("style","transform: rotate("+rta+"deg);");
-// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
+cnP2.setAttribute("style","transform: rotate("+rta+"deg)");
 }
   function rrrb(rtb){
-cnP3.setAttribute("style","transform: rotate("+rtb+"deg);");
-// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
+cnP3.setAttribute("style","transform: rotate("+rtb+"deg)");
 }
   function rrrc(rtc){
-cnP4.setAttribute("style","transform: rotate("+rtc+"deg);");
-// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
+cnP4.setAttribute("style","transform: rotate("+rtc+"deg)");
 }
 
 knb=document.getElementById("rra");
