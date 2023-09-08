@@ -107,7 +107,8 @@ typedef ResultType result_type;
 
 static constexpr EGLint numSamples=2;
 
-static constexpr float numSamplesf=float(numSamples);
+// static constexpr float numSamplesf=float(numSamples);
+static constexpr float numSamplesf=8;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
