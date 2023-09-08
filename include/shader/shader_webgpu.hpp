@@ -278,6 +278,7 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#extension all_spir_v_extensions : enable\n"
 "#extension OES_standard_derivatives : disable\n"
+// "#pragma STDC(FP_CONTRACT ON)\n"
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 1\n"
 "#pragma (fastmath on)\n"
