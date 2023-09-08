@@ -129,71 +129,40 @@ emscripten_webgl_make_context_current(ctx);
 EM_JS(void,ma,(),{
 "use strict";
 let winSize=parseInt(window.innerHeight,10);
-const scanvas1=document.createElement('canvas');
-scanvas1.id='zimag1';
-scanvas1.imageRendering='pixelated';
-scanvas1.width=winSize;
-scanvas1.height=winSize;
-scanvas1.zoom=1;
-scanvas1.scale=1;
-scanvas1.style.pointerEvents='none';
-scanvas1.style.display='block';
-scanvas1.style.position='absolute';
-scanvas1.style.zIndex='999991';
-scanvas1.style.top='0';
-scanvas1.style.height='100vh';
-scanvas1.style.width='100vh';
-scanvas1.style.backgroundColor='rgba(0,0,0,0)';
-document.getElementById("cp1").appendChild(scanvas1);
-const scanvas2=document.createElement('canvas');
-scanvas2.id='zimag2';
-scanvas2.imageRendering='pixelated';
-scanvas2.width=winSize;
-scanvas2.height=winSize;
-scanvas2.zoom=1;
-scanvas2.scale=1;
-scanvas2.style.pointerEvents='none';
-scanvas2.style.display='block';
-scanvas2.style.position='absolute';
-scanvas2.style.zIndex='999994';
-scanvas2.style.top='0';
-scanvas2.style.height='100vh';
-scanvas2.style.width='100vh';
-scanvas2.style.backgroundColor='rgba(0,0,0,0)';
-document.getElementById("cp2").appendChild(scanvas2);
-const scanvas3=document.createElement('canvas');
-scanvas3.id='zimag3';
-scanvas3.imageRendering='pixelated';
-scanvas3.width=winSize;
-scanvas3.height=winSize;
-scanvas3.zoom=1;
-scanvas3.scale=1;
-scanvas3.style.pointerEvents='none';
-scanvas3.style.display='block';
-scanvas3.style.position='absolute';
-scanvas3.style.zIndex='999993';
-scanvas3.style.top='0';
-scanvas3.style.height='100vh';
-scanvas3.style.width='100vh';
-scanvas3.style.backgroundColor='rgba(0,0,0,0)';
-document.getElementById("cp3").appendChild(scanvas3);
-const scanvas4=document.createElement('canvas');
-scanvas4.id='zimag4';
-scanvas4.imageRendering='pixelated';
-scanvas4.width=winSize;
-scanvas4.height=winSize;
-scanvas4.zoom=1;
-scanvas4.scale=1;
-scanvas4.style.pointerEvents='none';
-scanvas4.style.display='block';
-scanvas4.style.position='absolute';
-scanvas4.style.zIndex='999992';
-scanvas4.style.top='0';
-scanvas4.style.height='100vh';
-scanvas4.style.width='100vh';
-scanvas4.style.backgroundColor='rgba(0,0,0,0)';
-document.getElementById("cp4").appendChild(scanvas4);
-
+const scanvas=document.createElement('canvas');
+scanvas.id='zimag';
+scanvas.imageRendering='pixelated';
+scanvas.width=winSize;
+scanvas.height=winSize;
+scanvas.zoom=1;
+scanvas.scale=1;
+scanvas.style.pointerEvents='none';
+scanvas.style.display='block';
+scanvas.style.position='absolute';
+scanvas.style.zIndex='999995';
+scanvas.style.top='0';
+scanvas.style.height='100vh';
+scanvas.style.width='100vh';
+scanvas.style.backgroundColor='rgba(0,0,0,128)';
+document.getElementById("cp").appendChild(scanvas);
+/*
+const zcanvas=document.createElement('canvas');
+zcanvas.id='jimag';
+zcanvas.imageRendering='pixelated';
+zcanvas.width=winSize;
+zcanvas.height=winSize;
+zcanvas.zoom=1;
+zcanvas.scale=1;
+zcanvas.style.pointerEvents='none';
+zcanvas.style.display='block';
+zcanvas.style.position='absolute';
+zcanvas.style.zIndex='999994';
+zcanvas.style.top='0';
+zcanvas.style.height='100vh';
+zcanvas.style.width='100vh';
+zcanvas.style.backgroundColor='rgba(0,0,0,128)';
+// document.getElementById("cpB").appendChild(zcanvas);
+  */
 const contxVars={
 // colorType:'float32',
 // precision:'highp',
@@ -209,15 +178,9 @@ willReadFrequently:true,
 // powerPreference:'high-performance',
 // antialias:false
 };
-const ctx1=scanvas1.getContext('2d',contxVars);
-const ctx2=scanvas2.getContext('2d',contxVars);
-const ctx3=scanvas3.getContext('2d',contxVars);
-const ctx4=scanvas4.getContext('2d',contxVars);
+const ctx=scanvas.getContext('2d',contxVars);
 // const ctxB=zcanvas.getContext('2d',contxVars);
-const gpu1=new GPUX({mode:'gpu',canvas:scanvas1,webGl:ctx1 });
-const gpu2=new GPUX({mode:'gpu',canvas:scanvas2,webGl:ctx2 });
-const gpu3=new GPUX({mode:'gpu',canvas:scanvas3,webGl:ctx3 });
-const gpu4=new GPUX({mode:'gpu',canvas:scanvas4,webGl:ctx4 });
+const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -228,30 +191,15 @@ ww=document.getElementById("iwid").innerHTML;
 h=document.getElementById("ihig").innerHTML;
 ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
-let cnP1=document.getElementById("cp1");
-let cnP2=document.getElementById("cp2");
-let cnP3=document.getElementById("cp3");
-let cnP4=document.getElementById("cp4");
+let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
-ctx1.drawImage(vd,0,0,ww,h);
-ctx2.drawImage(vd,0,0,ww,h);
-ctx3.drawImage(vd,0,0,ww,h);
-ctx4.drawImage(vd,0,0,ww,h);
-var imgData1=ctx1.getImageData(0,0,ww,h);
-var imgData2=ctx2.getImageData(0,0,ww,h);
-var imgData3=ctx3.getImageData(0,0,ww,h);
-var imgData4=ctx4.getImageData(0,0,ww,h);
-var rgbdat1=ctx1.createImageData(ww,h);
-var rgbdat2=ctx2.createImageData(ww,h);
-var rgbdat3=ctx3.createImageData(ww,h);
-var rgbdat4=ctx4.createImageData(ww,h);
-var rgbd1=rgbdat1.data;
-var rgbd2=rgbdat2.data;
-var rgbd3=rgbdat3.data;
-var rgbd4=rgbdat4.data;
-var imgg=imgData1.data;
+ctx.drawImage(vd,0,0,ww,h);
+var imgData=ctx.getImageData(0,0,ww,h);
+var rgbdat=ctx.createImageData(ww,h);
+var rgbd=rgbdat.data;
+var imgg=imgData.data;
 var i;
 let l=h*ww;
 let la=h*ww*4;
@@ -261,14 +209,14 @@ var pointc=la*4.0;
 let $H=Module.HEAPF32.buffer;
 var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
-agavF.set(imgData1.data);
+agavF.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
+for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
 var lightDark=128+((Math.abs(agav[0]-128))/2);
-var diff=(agav[0]/255)*16;
-// rgb=rgb+lightDark/2;
+rgb=rgb+lightDark/2;
  
  //  but run past a lighter pixel if the avg is darker 
  //  i.e.  pixel is 110/255 or 0.431  ->  avg is 77/255 or 0.302
@@ -288,210 +236,73 @@ var diff=(agav[0]/255)*16;
  //  range to the next color giving further color depth as well as 
  // keeping a darker range from having few different colors of gradient
  //
- 
-
-                      //  circle 1
-                      //  non-rotating 
-                       //  bottom zindex
-                    // black / white
-for(i=0;i<(ww*h*4);i=i+4){
+var diff=(agav[0]/255)*16;
 if(rgb>126){
 if(rgb>209){    // orange
-rgbd1[i]=255;
-rgbd1[i+1]=128+diff;
-rgbd1[i+2]=0;
-rgbd1[i+3]=0;
+rgbd[i]=255;
+rgbd[i+1]=128+diff;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-209)*diff);
 }
 else if(rgb>193){   // red
-rgbd1[i]=255-diff;
-rgbd1[i+1]=0;
-rgbd1[i+2]=0;
-rgbd1[i+3]=0;
+rgbd[i]=255-diff;
+rgbd[i+1]=0;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-193)*diff);
 }else if(rgb>177){   // light blue
-rgbd1[i]=0;
-rgbd1[i+1]=255-diff;
-rgbd1[i+2]=255;
-rgbd1[i+3]=0;
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=255;
+rgbd[i+3]=255-((rgb-177)*diff);
 }else if(rgb>161){  //  blue
-rgbd1[i]=0;
-rgbd1[i+1]=0;
-rgbd1[i+2]=255-diff;
-rgbd1[i+3]=0;
+rgbd[i]=0;
+rgbd[i+1]=0;
+rgbd[i+2]=255-diff;
+rgbd[i+3]=255-((rgb-161)*diff);
 }else if(rgb>145){  // green
-rgbd1[i]=0;
-rgbd1[i+1]=255-diff;
-rgbd1[i+2]=0;
-rgbd1[i+3]=0;
+rgbd[i]=0;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-145)*diff);
 }else if(rgb>128){  // yellow
-rgbd1[i]=255;
-rgbd1[i+1]=255-diff;
-rgbd1[i+2]=0;
-rgbd1[i+3]=0;
+rgbd[i]=255;
+rgbd[i+1]=255-diff;
+rgbd[i+2]=0;
+rgbd[i+3]=255-((rgb-128)*diff);
 }
 }else{
-rgbd1[i]=255;
-rgbd1[i+1]=255;
-rgbd1[i+2]=255;
-rgbd1[i+3]=255-((rgb-128)*diff);
+rgbd[i]=0+diff;
+rgbd[i+1]=0+diff;
+rgbd[i+2]=0+diff;
+rgbd[i+3]=255-((rgb-128)*diff);
 }
 }
-ctx1.putImageData(rgbdat1,0,0);
-
-              //        circle 2
-             //    speed 1
-             //    topmost
-             //    yellow/green
-for(i=0;i<(ww*h*4);i=i+4){
-if(rgb>126){
-if(rgb>209){    // orange
-rgbd3[i]=255;
-rgbd3[i+1]=128+diff;
-rgbd3[i+2]=0;
-rgbd3[i+3]=0;
-}
-else if(rgb>193){   // red
-rgbd3[i]=255-diff;
-rgbd3[i+1]=0;
-rgbd3[i+2]=0;
-rgbd3[i+3]=0;
-}else if(rgb>177){   // light blue
-rgbd3[i]=0;
-rgbd3[i+1]=255-diff;
-rgbd3[i+2]=255;
-rgbd3[i+3]=0;
-}else if(rgb>145){  // green
-rgbd2[i]=0;
-rgbd2[i+1]=255-diff;
-rgbd2[i+2]=0;
-rgbd2[i+3]=255-((rgb-145)*diff);
-}else if(rgb>128){  // yellow
-rgbd2[i]=255;
-rgbd2[i+1]=255-diff;
-rgbd2[i+2]=0;
-rgbd2[i+3]=255-((rgb-128)*diff);
-}
-}else{
-rgbd2[i]=0+diff;
-rgbd2[i+1]=0+diff;
-rgbd2[i+2]=0+diff;
-rgbd2[i+3]=0;
-}
-}
-ctx2.putImageData(rgbdat2,0,0);
- 
-         //        circle 3
-             //    speed 2
-             //    middle zindex
-             //    orange/red
-for(i=0;i<(ww*h*4);i=i+4){
-if(rgb>126){
-if(rgb>209){    // orange
-rgbd3[i]=255;
-rgbd3[i+1]=128+diff;
-rgbd3[i+2]=0;
-rgbd3[i+3]=255-((rgb-209)*diff);
-}
-else if(rgb>193){   // red
-rgbd3[i]=255-diff;
-rgbd3[i+1]=0;
-rgbd3[i+2]=0;
-rgbd3[i+3]=255-((rgb-193)*diff);
-}else if(rgb>177){   // light blue
-rgbd3[i]=0;
-rgbd3[i+1]=255-diff;
-rgbd3[i+2]=255;
-rgbd3[i+3]=0;
-}else if(rgb>161){  //  blue
-rgbd3[i]=0;
-rgbd3[i+1]=0;
-rgbd3[i+2]=255-diff;
-rgbd3[i+3]=0;
-}else if(rgb>145){  // green
-rgbd3[i]=0;
-rgbd3[i+1]=255-diff;
-rgbd3[i+2]=0;
-rgbd3[i+3]=0;
-}else if(rgb>128){  // yellow
-rgbd3[i]=255;
-rgbd3[i+1]=255-diff;
-rgbd3[i+2]=0;
-rgbd3[i+3]=0;
-}
-}else{
-rgbd3[i]=0+diff;
-rgbd3[i+1]=0+diff;
-rgbd3[i+2]=0+diff;
-rgbd3[i+3]=0;
-}
-}
-ctx3.putImageData(rgbdat3,0,0);
-
-
-        //        circle 4
-             //    speed 3
-             //    bottom zindex
-             //    blue/light blue
-for(i=0;i<(ww*h*4);i=i+4){
-if(rgb>126){
-if(rgb>209){    // orange
-rgbd4[i]=255;
-rgbd4[i+1]=128+diff;
-rgbd4[i+2]=0;
-rgbd4[i+3]=0;
-}
-else if(rgb>193){   // red
-rgbd4[i]=255-diff;
-rgbd4[i+1]=0;
-rgbd4[i+2]=0;
-rgbd4[i+3]=0;
-}else if(rgb>177){   // light blue
-rgbd4[i]=0;
-rgbd4[i+1]=255-diff;
-rgbd4[i+2]=255;
-rgbd4[i+3]=255-((rgb-177)*diff);
-}else if(rgb>161){  //  blue
-rgbd4[i]=0;
-rgbd4[i+1]=0;
-rgbd4[i+2]=255-diff;
-rgbd4[i+3]=255-((rgb-161)*diff);
-}else if(rgb>145){  // green
-rgbd4[i]=0;
-rgbd4[i+1]=255-diff;
-rgbd4[i+2]=0;
-rgbd4[i+3]=0;
-}else if(rgb>128){  // yellow
-rgbd4[i]=255;
-rgbd4[i+1]=255-diff;
-rgbd4[i+2]=0;
-rgbd4[i+3]=0;
-}
-}else{
-rgbd4[i]=0+diff;
-rgbd4[i+1]=0+diff;
-rgbd4[i+2]=0+diff;
-rgbd4[i+3]=0;
-}
-}
-ctx4.putImageData(rgbdat4,0,0);
-
+// agavF.set(rgbdat.data);
+var ang=45;
+// Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
+ctx.putImageData(rgbdat,0,0);
 function Ra(){
-flP.setAttribute("style","transform:scaleX(1)");
-flP.setAttribute("style","transform:scaleY(1)");
+flP.setAttribute("style","transform:scaleX(-1);");
+flP.setAttribute("style","transform:scaleY(1);");
+// cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(-1)");
-flP.setAttribute("style","transform: scaleY(-1)");
+flP.setAttribute("style","transform: scaleX(1);");
+flP.setAttribute("style","transform: scaleY(-1);");
+// cnPB.setAttribute("style","transform: scaleY(1);");
 }
-function rrra(rta){
-cnP2.setAttribute("style","transform: rotate("+rta+"deg)");
+ function rrra(rta){
+cnP.setAttribute("style","transform: rotate("+rta+"deg);");
+// cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 function rrrb(rtb){
-cnP3.setAttribute("style","transform: rotate("+rtb+"deg)");
+cnP.setAttribute("style","transform:rotate("+rtb+"deg);");
+// cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 }
-function rrrc(rtc){
-cnP4.setAttribute("style","transform: rotate("+rtc+"deg)");
+function rrrc(rtc) {
+cnP.setAttribute("style","transform:rotate("+rtc+"deg);");
+// cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
-
 knb=document.getElementById("rra");
 kna=document.getElementById("mainr");
 knc=document.getElementById("rrb");
@@ -509,7 +320,7 @@ function $rn(){
 if(dsd){
 return;
 }
-// Ra();
+Ra();
 if((rott-knd.innerHTML)<0){
 rott=(rott+360-knd.innerHTML);
 }else{
@@ -521,22 +332,23 @@ rottb=(rottb+360-knc.innerHTML);
 }else{
 rottb=(rottb-knc.innerHTML);
 }
+setTimeout(function(){
+rrrb(rottb);
+},rate);
+setTimeout(function(){
+Rb();
+},rate);
+setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
 }else{
 rottc=(rottc+knb.innerHTML);
 }
-setTimeout(function(){
-setTimeout(function(){
-setTimeout(function(){
-// Rb();
-rrrb(rottb);
-},rate*2);
-
 rrrc(rottc);
-},rate*3);
+},rate);
+setTimeout(function(){
 $rn();
-},rate*4);
+},rate);
 }
 $rn();
 document.getElementById("di").onclick=function(){
@@ -545,12 +357,14 @@ set();
 };
 return()=>{
 dsd=true;
-}
+};
 }
 });
 
 int main(){
+
 ma();
 emsc();
+ 
 return 1;
 }
