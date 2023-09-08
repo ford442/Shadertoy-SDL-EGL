@@ -143,7 +143,7 @@ scanvas1.style.zIndex='999991';
 scanvas1.style.top='0';
 scanvas1.style.height='100vh';
 scanvas1.style.width='100vh';
-scanvas1.style.backgroundColor='rgba(0,0,0,128)';
+scanvas1.style.backgroundColor='rgba(0,0,0,0)';
 document.getElementById("cp1").appendChild(scanvas1);
 const scanvas2=document.createElement('canvas');
 scanvas2.id='zimag2';
@@ -159,7 +159,7 @@ scanvas2.style.zIndex='999992';
 scanvas2.style.top='0';
 scanvas2.style.height='100vh';
 scanvas2.style.width='100vh';
-scanvas2.style.backgroundColor='rgba(0,0,0,128)';
+scanvas2.style.backgroundColor='rgba(0,0,0,0)';
 document.getElementById("cp2").appendChild(scanvas2);
 const scanvas3=document.createElement('canvas');
 scanvas3.id='zimag3';
@@ -175,7 +175,7 @@ scanvas3.style.zIndex='999993';
 scanvas3.style.top='0';
 scanvas3.style.height='100vh';
 scanvas3.style.width='100vh';
-scanvas3.style.backgroundColor='rgba(0,0,0,128)';
+scanvas3.style.backgroundColor='rgba(0,0,0,0)';
 document.getElementById("cp3").appendChild(scanvas3);
 const scanvas4=document.createElement('canvas');
 scanvas4.id='zimag4';
@@ -191,26 +191,9 @@ scanvas4.style.zIndex='999994';
 scanvas4.style.top='0';
 scanvas4.style.height='100vh';
 scanvas4.style.width='100vh';
-scanvas4.style.backgroundColor='rgba(0,0,0,128)';
+scanvas4.style.backgroundColor='rgba(0,0,0,0)';
 document.getElementById("cp4").appendChild(scanvas4);
-/*
-const zcanvas=document.createElement('canvas');
-zcanvas.id='jimag';
-zcanvas.imageRendering='pixelated';
-zcanvas.width=winSize;
-zcanvas.height=winSize;
-zcanvas.zoom=1;
-zcanvas.scale=1;
-zcanvas.style.pointerEvents='none';
-zcanvas.style.display='block';
-zcanvas.style.position='absolute';
-zcanvas.style.zIndex='999994';
-zcanvas.style.top='0';
-zcanvas.style.height='100vh';
-zcanvas.style.width='100vh';
-zcanvas.style.backgroundColor='rgba(0,0,0,128)';
-// document.getElementById("cpB").appendChild(zcanvas);
-  */
+
 const contxVars={
 // colorType:'float32',
 // precision:'highp',
