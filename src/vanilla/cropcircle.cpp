@@ -164,7 +164,7 @@ zcanvas.style.backgroundColor='rgba(0,0,0,128)';
 // document.getElementById("cpB").appendChild(zcanvas);
   */
 const contxVars={
-colorType:'float32',
+// colorType:'float32',
 // precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
@@ -179,6 +179,12 @@ powerPreference:'high-performance',
 // antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
+ctx.getExtension('GL_ALL_EXTENSIONS');
+ctx.getExtension('GL_KHR_no_error');
+ctx.getExtension('GL_REGAL_enable');
+ctx.getExtension('GL_ARB_spirv_extensions');
+ctx.getExtension('GL_ARB_ES2_compatibility');
+ctx.getExtension('GL_ARB_direct_state_access');
 // const ctxB=zcanvas.getContext('2d',contxVars);
 const gpu=new GPUX({mode:'gpu',webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
