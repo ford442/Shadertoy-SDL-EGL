@@ -116,6 +116,7 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
+ /*
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(ctx,"EGL_HI_colorformats");
@@ -128,6 +129,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_direct_state_access");
+*/
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glDisable(GL_DITHER);
