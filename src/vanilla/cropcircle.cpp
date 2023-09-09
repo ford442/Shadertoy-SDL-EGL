@@ -223,12 +223,13 @@ var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
- ctx.getExtension('GL_ALL_EXTENSIONS');
+/* ctx.getExtension('GL_ALL_EXTENSIONS');
 ctx.getExtension('GL_KHR_no_error');
 ctx.getExtension('GL_REGAL_enable');
 ctx.getExtension('GL_ARB_spirv_extensions');
 ctx.getExtension('GL_ARB_ES2_compatibility');
 ctx.getExtension('GL_ARB_direct_state_access');
+ */
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
