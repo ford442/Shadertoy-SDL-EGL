@@ -143,7 +143,7 @@ scanvas.style.zIndex='999995';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(0,0,0,128)';
+scanvas.style.backgroundColor='rgba(0,0,0,0)';
 document.getElementById("cp").appendChild(scanvas);
 /*
 const zcanvas=document.createElement('canvas');
@@ -164,23 +164,23 @@ zcanvas.style.backgroundColor='rgba(0,0,0,128)';
 // document.getElementById("cpB").appendChild(zcanvas);
   */
 const contxVars={
-// colorType:'float32',
+colorType:'float32',
 // precision:'highp',
-// preferLowPowerToHighPerformance:false,
+preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:false,
 stencil:false,
 // preserveDrawingBuffer:false,
-// premultipliedAlpha:false,
+premultipliedAlpha:false,
 // imageSmoothingEnabled:false,
 willReadFrequently:true,
-// lowLatency:true,
-// powerPreference:'high-performance',
+lowLatency:true,
+powerPreference:'high-performance',
 // antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
 // const ctxB=zcanvas.getContext('2d',contxVars);
-const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+const gpu=new GPUX({mode:'gpu',webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
