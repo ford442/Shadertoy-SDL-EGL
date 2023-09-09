@@ -1,5 +1,5 @@
 function rrr(){
-var pth='https://1ink.us/files/model.onnx';
+var pth='https://1ink.us/files/OverNet.onnx';
 console.log("Getting ONNX model...");
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
