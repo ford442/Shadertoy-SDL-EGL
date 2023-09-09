@@ -97,7 +97,7 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 emscripten_get_element_css_size("zimag",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
-eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(0);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -116,11 +116,21 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
-// emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
-// emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
- // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-// glDisable(GL_DITHER);
+emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_scrgb");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_HI_colorformats");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES2_compatibility");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_direct_state_access");
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glDisable(GL_DITHER);
 // glViewport(0,0,GLint(Size),GLint(Size));
 }
 
@@ -179,14 +189,10 @@ powerPreference:'high-performance',
 // antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
-ctx.getExtension('GL_ALL_EXTENSIONS');
-ctx.getExtension('GL_KHR_no_error');
-ctx.getExtension('GL_REGAL_enable');
-ctx.getExtension('GL_ARB_spirv_extensions');
-ctx.getExtension('GL_ARB_ES2_compatibility');
-ctx.getExtension('GL_ARB_direct_state_access');
+
 // const ctxB=zcanvas.getContext('2d',contxVars);
 const gpu=new GPUX({mode:'gpu',webGl:ctx });
+
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -217,6 +223,12 @@ var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
 Module.ccall("nano",null,["Number","Number","Number"],[la,pointa,pointc]);
+ ctx.getExtension('GL_ALL_EXTENSIONS');
+ctx.getExtension('GL_KHR_no_error');
+ctx.getExtension('GL_REGAL_enable');
+ctx.getExtension('GL_ARB_spirv_extensions');
+ctx.getExtension('GL_ARB_ES2_compatibility');
+ctx.getExtension('GL_ARB_direct_state_access');
 var agav=new Float32Array($H,pointc,1);
 console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
