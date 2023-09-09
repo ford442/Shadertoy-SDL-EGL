@@ -108,8 +108,7 @@ std::cout << "Got dynamic batch size. Setting output batch size to "
 outputDims.at(0)=batchSize;
 }
 
-std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
-std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
+
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
@@ -120,7 +119,9 @@ std::cout << "Output Type: " << outputType << std::endl;
 std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
 std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
-	
+std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
+std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
+
 size_t inputTensorSize=vectorProduct(inputDims);
 
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
