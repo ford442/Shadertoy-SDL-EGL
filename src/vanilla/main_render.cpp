@@ -235,7 +235,7 @@ void testrr(){
 // oneapi::tbb::task_arena t_arena;
 
 int main(void){
-oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
+// oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
 
           /*
 // Initialize the driver
