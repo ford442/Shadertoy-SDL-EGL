@@ -106,14 +106,6 @@ navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 
 EM_JS(void,js_main,(),{
 
-function strr(){
-Module.ccall("runWebGPU",{async:true});
-}
-
-function myStopFunction(){
-clearInterval(myInterval);
-}
-
 function normalResStart(){
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -178,12 +170,6 @@ document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
-document.getElementById('startBtn2').addEventListener('click',function(){
-// myStopFunction();
-// Module.ccall("runWebGPU",{async:true});
-strr();
-});
-
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -197,112 +183,12 @@ void startWebGPU(){
 WGPU_Start();
 }
 
-void runWebGPU(){
-// WGPU_Run();
 }
 
-void runWebGPU2(){
-// WGPU_Run2();
-}
-
-}
-
-auto create_model = []() {
-//     std::shared_ptr<ov::Model> model;
-  //   return model;
-};
 
 
-// tbb::task_arena m_arena(1,1,tbb::task_arena::priority::high);
-
-// m_arena = std::make_unique<tbb::task_arena>(int(tbb::task_arena::automatic), 0);
-
-// tbb::task_group_context context;
-// tbb::task_arena arena(1,1,tbb::task_arena::priority::high);
-// tbb::task_group group;
-
-
-extern"C"{
-
-void testrr(){
-// zeInit(0);
-// ov_core_t* core = NULL;
-// ov_core_create(&core);
-}
-
-}
-
-// oneapi::tbb::task_arena t_arena;
 
 int main(void){
-// oneapi::tbb::tick_count mainStartTime = oneapi::tbb::tick_count::now();
-
-          /*
-// Initialize the driver
-zeInit(0);
-
-// Discover all the driver instances
-uint32_t driverCount = 0;
-zeDriverGet(&driverCount, nullptr);
-
-ze_driver_handle_t* allDrivers = allocate(driverCount * sizeof(ze_driver_handle_t));
-zeDriverGet(&driverCount, allDrivers);
-
-// Find a driver instance with a GPU device
-ze_driver_handle_t hDriver = nullptr;
-ze_device_handle_t hDevice = nullptr;
-for(i = 0; i < driverCount; ++i) {
-    uint32_t deviceCount = 0;
-    zeDeviceGet(allDrivers[i], &deviceCount, nullptr);
-
-    ze_device_handle_t* allDevices = allocate(deviceCount * sizeof(ze_device_handle_t));
-    zeDeviceGet(allDrivers[i], &deviceCount, allDevices);
-
-    for(d = 0; d < deviceCount; ++d) {
-        ze_device_properties_t device_properties {};
-        device_properties.stype = ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES;
-        zeDeviceGetProperties(allDevices[d], &device_properties);
-
-        if(ZE_DEVICE_TYPE_GPU == device_properties.type) {
-            hDriver = allDrivers[i];
-            hDevice = allDevices[d];
-            break;
-        }
-    }
-
-    free(allDevices);
-    if(nullptr != hDriver) {
-        break;
-    }
-}
-
-free(allDrivers);
-if(nullptr == hDevice)
-       
-            // Import the OpenVINO C++ API.
-  ov::Core core;
-  // Create an OpenVINO runtime object.
-  ov::Runtime runtime;
-  // Load the model into the runtime.
-  ov::Model model = core.read_model("model.onnx");
-  // Create an input tensor for the model.
-  ov::Tensor input_tensor = model.input("input_name");
-  // Set the input data for the model.
-  input_tensor.set_data("input_data");
-  // Create an output tensor for the model.
-  ov::Tensor output_tensor = model.output("output_name");
-  // Run the model inference.
-  ov::InferRequest infer_request = core.create_infer_request(model);
-  // Get the output data from the model.
-  output_tensor.get_data("output_data");
-  // Destroy the input and output tensors.
-  input_tensor.destroy();
-  output_tensor.destroy();
-  // Destroy the runtime object.
-  runtime.destroy();
-*/
-testrr();
 js_main();
-// WGPU_Start();
 return 0;
 }
