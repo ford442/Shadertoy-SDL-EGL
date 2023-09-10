@@ -332,8 +332,10 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+// static inline char frg_ftr_src[420]=
+// "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+static inline char frg_ftr_src[420]=r"v0g0n(void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";)v0g0n";
+
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
