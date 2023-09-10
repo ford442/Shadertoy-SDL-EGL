@@ -30,10 +30,9 @@
 
 // #include <emscripten/html5_webgl.h>
 
-// #define GLFW_INCLUDE_GLEXT 1
-// #define GLFW_INCLUDE_ES3
-// #include <GLFW/glfw3.h>
-
+#define GLFW_INCLUDE_GLEXT 1
+#define GLFW_INCLUDE_ES3
+#include <GLFW/glfw3.h>
 
 //
 // Copyright 2017 The ANGLE Project Authors. All rights reserved.
