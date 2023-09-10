@@ -324,7 +324,7 @@ static inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"precision mediump int;\n"
+"precision highp int;\n"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
@@ -1676,6 +1676,8 @@ glUniform1i(smp_chn[3],3);
 WGPU_Start();
 usleep(125);
     */
+glActiveTexture(GL_TEXTURE0);
+
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
