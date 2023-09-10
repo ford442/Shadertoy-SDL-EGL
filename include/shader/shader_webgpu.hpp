@@ -75,7 +75,6 @@ typedef ResultType result_type;
 #include <experimental/simd>
 #include <random>
 #include <emscripten.h>
-#include <emscripten/html5.h>
 // #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
 
@@ -83,6 +82,10 @@ typedef ResultType result_type;
 // #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
+
+extern "C"{
+#include <emscripten/html5.h>
+}
 
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
