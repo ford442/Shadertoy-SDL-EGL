@@ -1344,7 +1344,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multitexture");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_color_buffer_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_texture_norm16");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_half_float");
-     
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
+
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
