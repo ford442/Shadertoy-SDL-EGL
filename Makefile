@@ -109,17 +109,17 @@ b3_vanilla_render:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LDFLAGS) main_render.o -sTOTAL_STACK=256000 -sGLOBAL_BASE=256000 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc $(LDFLAGS) -sTOTAL_STACK=256000 -sGLOBAL_BASE=256000 -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 -sERROR_ON_UNDEFINED_SYMBOLS=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
-	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
 	 -Oz -sDISABLE_EXCEPTION_CATCHING=1 -sDISABLE_EXCEPTION_THROWING=0 -sAUTO_JS_LIBRARIES=0 -sMINIMAL_RUNTIME=2 -sTEXTDECODER=2 -sABORTING_MALLOC=0 -sSUPPORT_ERRNO=0  \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js rSlider.js --pre-js slideOut.js \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 --closure 0 
+	 --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0 main_render.o 
 
 b3_vanilla_webgpu_debug:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
