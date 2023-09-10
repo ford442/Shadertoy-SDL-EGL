@@ -140,8 +140,8 @@ static constexpr EGLint ctx_att[]={
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE,EGL_NONE
 };
 
@@ -149,7 +149,7 @@ static constexpr EGLint att_lst[]={
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -166,13 +166,13 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
-EGL_LUMINANCE_SIZE,12,
-EGL_RED_SIZE,12,
-EGL_GREEN_SIZE,12,
-EGL_BLUE_SIZE,12,
-EGL_ALPHA_SIZE,12,
+EGL_LUMINANCE_SIZE,32,
+EGL_RED_SIZE,24,
+EGL_GREEN_SIZE,24,
+EGL_BLUE_SIZE,24,
+EGL_ALPHA_SIZE,24,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,12,
+EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,64,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
@@ -308,8 +308,8 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 */
 "precision highp float;\n"
-"precision mediump sampler3D;precision highp sampler2D;"
-"precision mediump samplerCube;"
+"precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;"
 "precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
@@ -321,7 +321,7 @@ static inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"precision mediump int;\n"
+"precision highp int;\n"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
