@@ -156,7 +156,7 @@ std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 std::cout << "Establishing tensor names" << std::endl;
 
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
-// std::cout << "Establishing memoryInfo" << std::endl;
+std::cout << "Establishing memoryInfo" << std::endl;
 
 std::vector<Ort::Value> inputTensors;
 Ort::Value outputTensors{nullptr};
