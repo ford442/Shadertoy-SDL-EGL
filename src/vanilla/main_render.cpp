@@ -29,7 +29,7 @@ return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
-emscripten_get_element_css_size("canvas",&szw,&szh);
+emscripten_get_element_css_size("zcanvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 device=result;
 queue=wgpu_device_get_queue(device);
@@ -120,7 +120,7 @@ scanvas.style.zIndex='999995';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(0,0,0,0)';
+scanvas.style.backgroundColor='rgba(0,0,0,255)';
 document.getElementById("contain1").appendChild(scanvas);
 
 const contxVars={
