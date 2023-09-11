@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <ctime>
 #include <vector>
-// #include <memory>
+#include <memory>
 
 
 #include <cassert>
