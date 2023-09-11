@@ -33,7 +33,7 @@ emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 device=result;
 queue=wgpu_device_get_queue(device);
-canvasContext=wgpu_canvas_get_webgpu_context("canvas");
+canvasContext=wgpu_canvas_get_webgpu_context("zcanvas");
 WGpuCanvasConfiguration config={};
 config.device = device;
 config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -105,14 +105,50 @@ navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 }
 
 EM_JS(void,js_main,(),{
+let winSize=parseInt(window.innerHeight,10);
+const scanvas=document.createElement('canvas');
+scanvas.id='zcanvas';
+scanvas.imageRendering='pixelated';
+scanvas.width=winSize;
+scanvas.height=winSize;
+scanvas.zoom=1;
+scanvas.scale=1;
+scanvas.style.pointerEvents='none';
+scanvas.style.display='block';
+scanvas.style.position='absolute';
+scanvas.style.zIndex='999995';
+scanvas.style.top='0';
+scanvas.style.height='100vh';
+scanvas.style.width='100vh';
+scanvas.style.backgroundColor='rgba(0,0,0,0)';
+document.getElementById("contain1").appendChild(scanvas);
+
+const contxVars={
+// colorType:'float32',
+// precision:'highp',
+preferLowPowerToHighPerformance:false,
+alpha:true,
+depth:false,
+stencil:false,
+// preserveDrawingBuffer:false,
+premultipliedAlpha:false,
+// imageSmoothingEnabled:false,
+willReadFrequently:true,
+lowLatency:true,
+powerPreference:'high-performance',
+// antialias:false
+};
+const ctx=scanvas.getContext('webgl2',contxVars);
+const gpu=new GPUX({mode:'gpu',webGl:ctx });
 
 function normalResStart(){
 setTimeout(function(){
+  
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-Module.ccall("startWebGPU",{async:true});
+Module.ccall("startWebGPU");
 // const myInterval=setInterval(strr,1000);
 },100);
 document.getElementById('status').style.backgroundColor="green";
@@ -184,9 +220,6 @@ WGPU_Start();
 }
 
 }
-
-
-
 
 int main(void){
 js_main();
