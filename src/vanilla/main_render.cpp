@@ -29,11 +29,11 @@ return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
-emscripten_get_element_css_size("zcanvas",&szw,&szh);
+emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 device=result;
 queue=wgpu_device_get_queue(device);
-canvasContext=wgpu_canvas_get_webgpu_context("zcanvas");
+canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config={};
 config.device = device;
 config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
