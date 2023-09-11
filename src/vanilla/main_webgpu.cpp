@@ -70,7 +70,7 @@ sessionOptions.SetIntraOpNumThreads(1);
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 	
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
-Ort::Session session(ort_env,model_path,sessionOptions);
+Ort::Session session(ort_env,model_path,Ort::SessionOptions{nullptr});
 Ort::AllocatorWithDefaultOptions allocator;
 
 size_t numInputNodes=session.GetInputCount();
@@ -156,7 +156,7 @@ std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 	
 std::cout << "Establishing tensor names" << std::endl;
 
-Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeDefault);
+Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
 // std::cout << "Establishing memoryInfo" << std::endl;
 
 std::vector<Ort::Value> inputTensors;
@@ -167,7 +167,7 @@ memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
 
 std::cout << "Establishing Tensors" << std::endl;
 
-std::cout << "Creating CPU link " << std::endl;
+// std::cout << "Creating CPU link " << std::endl;
 
 // Ort::RunOptions runOpts;
   // google colab
@@ -181,7 +181,7 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << std::endl;
 
 // Run inference
-session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
+// session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
 	
 //   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
 //                     const char* const* output_names, Value* output_values, size_t output_count);
@@ -189,9 +189,9 @@ session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputName
 //   void Run(run_options,input_names,input_values,input_count,
 //                     output_names,output_values,output_count);
 
-std::cout << "Running inferrence." << std::endl;
+// std::cout << "Running inferrence." << std::endl;
 
-auto outputDataPtr = outputTensors.GetTensorRawData();
+// auto outputDataPtr = outputTensors.GetTensorRawData();
 
  emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
