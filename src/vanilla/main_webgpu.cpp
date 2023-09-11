@@ -92,7 +92,6 @@ inputDims.at(1)=max_wordlength;
 }
 
 auto outputName=session.GetOutputNameAllocated(0,allocator);
-auto outputName2=session.GetOutputNameAllocated(1,allocator);
 	
 //   //   const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
 
