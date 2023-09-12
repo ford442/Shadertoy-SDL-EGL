@@ -28,6 +28,7 @@
 #include <unistd.h>
 
 #include <emscripten.h>
+
 #include <emscripten/html5.h>
 
 #define GL_FRAGMENT_PRECISION_HIGH 1
@@ -127,7 +128,7 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-// void avgFrm(int,int,float *,float *);
+void avgFrm(int,int,float *,float *);
 
 float max;
 float min;
