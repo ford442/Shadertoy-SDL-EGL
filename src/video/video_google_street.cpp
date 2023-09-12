@@ -1,9 +1,9 @@
 #include "../../include/video/video_google_street.hpp"
 
 void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
-avrg=(((avr+(y1y-rlc))/2.0)+alc);
-drk=y1y-(avr-0.5);
-brt=((y1y-rlc)-(alc-0.5));
+avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
+drk=y1y-(avr-0.5f);
+brt=((y1y-rlc)-(alc-0.5f));
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
 return;
@@ -80,7 +80,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 glClear(GL_DEPTH_BUFFER_BIT);
 glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFinish();
 return;
 }
 
@@ -213,11 +213,11 @@ glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
 glClearColor(gF,gF,gF,gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 // nanosleep(&req,&rem);
 glGenBuffers((GLsizei)1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 // nanosleep(&req,&rem);
 GLchar * default_fragment_shader=(GLchar *)read_file(fileloc);
 // nanosleep(&req,&rem);
@@ -297,7 +297,7 @@ surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,at
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 // eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
 emscripten_webgl_make_context_current(ctx_js);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
@@ -346,12 +346,12 @@ return;
 }
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-max=0.0;
-min=1.0;
-sum=0.0;
-avgSum=0.0;
-minSum=0.0;
-maxSum=0.0;
+max=0.0f;
+min=1.0f;
+sum=0.0f;
+avgSum=0.0f;
+minSum=0.0f;
+maxSum=0.0f;
 for(int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];
@@ -632,8 +632,10 @@ return;
 }
  
 void b3(){
-egl();
 vid();
+ sleep(1);
+ egl();
+
 return;
 }
 
