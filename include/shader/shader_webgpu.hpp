@@ -83,9 +83,7 @@ typedef ResultType result_type;
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
 
-extern "C"{
 #include <emscripten/html5.h>
-}
 
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
@@ -111,7 +109,7 @@ extern "C"{
 static constexpr EGLint numSamples=2;
 
 // static constexpr float numSamplesf=float(numSamples);
-static constexpr float numSamplesf=8.0f;
+static constexpr float numSamplesf=4.0f;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -176,10 +174,10 @@ EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
-EGL_COVERAGE_SAMPLES_NV,8,
+EGL_COVERAGE_SAMPLES_NV,4,
 EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
@@ -281,12 +279,17 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_ALL_EXTENSIONS : enable\n"
 "#extension all_spir_v_extensions : enable\n"
 "#extension OES_standard_derivatives : disable\n"
+"#extension GL_KHR_no_error : enable\n"
+"#extension GL_REGAL_enable : enable\n"
+"#extension EGL_ANGLE_platform_angle : enable\n"
+"#extension GL_ARB_spirv_extensions : enable\n"
+"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
 // "#pragma STDC(FP_CONTRACT ON)\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 1\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 1\n"
 "#pragma (fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
-"#pragma (fastprecision on)\n"
+"#pragma (fastprecision off)\n"
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 /*
@@ -324,7 +327,7 @@ static inline char vrt_bdy_src[100]=
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"precision highp int;\n"
+"precision mediump int;\n"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
@@ -334,7 +337,6 @@ static inline char frg_hdr_src[1000]=
 
 static inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
@@ -344,12 +346,13 @@ static inline char frg_ftr_src[420]=
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n";
 */
+
 EM_BOOL ms_l,clk_l;
 
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using shad_tensor=boost::numeric::ublas::tensor<register GLuint>;
-using prg_tensor=boost::numeric::ublas::tensor<register GLuint>;
+using shad_tensor=boost::numeric::ublas::tensor<register unsigned int>;
+using prg_tensor=boost::numeric::ublas::tensor<register unsigned int>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<24>::least>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
