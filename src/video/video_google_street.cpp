@@ -632,9 +632,9 @@ return;
 }
  
 void b3(){
-egl();
 sleep(1);
 vid();
+egl();
 return;
 }
 
