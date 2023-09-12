@@ -29,10 +29,8 @@ document.getElementById('bcanvas').width=window.innerHeight;
 document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
-setTimeout(function(){
-setTimeout(function(){
 Module.ccall('str');
-},100);
+setTimeout(function(){
 Module.ccall('b3');
 },700);
 setTimeout(function(){
