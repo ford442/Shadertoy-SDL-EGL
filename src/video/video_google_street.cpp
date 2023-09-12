@@ -342,6 +342,7 @@ emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
 glViewport((GLint)0,(GLint)0,Size_js,Size_js);
 glScissor((GLint)0,(GLint)0,Size_js,Size_js);
+ emscripten_webgl_make_context_current(ctx);
 return;
 }
 
