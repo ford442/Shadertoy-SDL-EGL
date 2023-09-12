@@ -182,11 +182,11 @@ EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::least)>EBOin;
+boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin;
 
-boost::function<const EM_BOOL(boost::uint_t<24>::least)>VCOin;
+boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin;
 
-boost::function<const EM_BOOL(boost::uint_t<24>::least)>VBOin;
+boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin;
 
 boost::function<const EM_BOOL()>setFloats;
 
@@ -352,7 +352,7 @@ EM_BOOL ms_l,clk_l;
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
-using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
