@@ -154,8 +154,8 @@ Size=(int)hi;
 S=(float)Size;
 mX=0.5*S;
 mY=0.5*S;
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(ctx,"IMG_context_priority");
@@ -297,8 +297,8 @@ surface_js=eglCreateWindowSurface(display_js,eglconfig_js,(NativeWindowType)0,at
 eglMakeCurrent(display_js,surface_js,surface_js,contextegl_js);
 // eglSurfaceAttrib(display_js,surface_js,EGL_MIPMAP_LEVEL,(EGLint)1);
 emscripten_webgl_make_context_current(ctx_js);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
 glEnable(GL_SCISSOR_TEST);
 emscripten_webgl_enable_extension(ctx_js,"GL_ALL_EXTENSIONS");
@@ -632,10 +632,9 @@ return;
 }
  
 void b3(){
+egl();
+sleep(1);
 vid();
- sleep(1);
- egl();
-
 return;
 }
 
