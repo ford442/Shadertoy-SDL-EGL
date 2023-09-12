@@ -56,7 +56,7 @@ typedef ResultType result_type;
 #include <complex>
 
 // #define BOOST_HAS_TR1
-
+#include <boost/multiprecision/cpp_int/cpp_int.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
 #include <boost/type_traits.hpp>
@@ -351,8 +351,8 @@ EM_BOOL ms_l,clk_l;
 
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using shad_tensor=boost::numeric::ublas::tensor<boost::uint_leastp_t>;
-using prg_tensor=boost::numeric::ublas::tensor<boost::uint_leastp_t>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::uint128_t>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::uint128_t>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<24>::least>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
