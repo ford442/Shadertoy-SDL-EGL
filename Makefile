@@ -288,11 +288,11 @@ b3_fire:
 
 vanilla_test:
 	 emcc src/vanilla/main.cpp -o v3001test.js \
-	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 vanilla_test_gpujs:
 	 emcc src/vanilla/main_gpujs.cpp -o v3001test.js \
-	 --extern-pre-js js/gpujsx.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js
+	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 castle:
 	 em++ src/b3main.cpp -c -O3 \
