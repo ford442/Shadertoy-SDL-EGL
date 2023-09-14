@@ -286,11 +286,13 @@ b3_fire:
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
 
-b3_vanilla:
-	 em++ src/vanilla/main.cpp -c -std=c++2a
-	 emcc main.o -o v3020.js -std=c++2a \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 --pre-js rSlider.js --pre-js slideOut.js
+vanilla_test:
+	 emcc src/vanilla/main.cpp -o v3001test.js \
+	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js
+
+vanilla_test_gpujs:
+	 emcc src/vanilla/main_gpujs.cpp -o v3001test.js \
+	 --extern-pre-js js/gpujsx.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js
 
 castle:
 	 em++ src/b3main.cpp -c -O3 \
