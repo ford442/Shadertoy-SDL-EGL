@@ -1,4 +1,4 @@
-#include "../../include/vanilla/main.hpp"
+#include "../../include/vanilla/main_oldtest.hpp"
 
 float cc,pp,uu;
 float cc2,pp2,uu2;
