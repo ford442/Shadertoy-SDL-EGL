@@ -291,7 +291,9 @@ vanilla_test:
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 vanilla_test_gpujs:
-	 emcc src/vanilla/main_gpujs.cpp -o v3001test.js \
+	 NAMESTAMP := v3001test-DTE.js
+	 NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
+	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 castle:
