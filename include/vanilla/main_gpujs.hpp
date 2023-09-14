@@ -6,4 +6,3 @@
 
 // #include "../../include/vanilla/gl.hpp"
 
-};
