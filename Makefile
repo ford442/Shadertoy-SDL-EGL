@@ -41,6 +41,16 @@ LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS
 WEBGPU_FLAGS := -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
 
+vanilla_test:
+	 emcc src/vanilla/main.cpp -o v3001test.js \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
+
+NAMESTAMP := v3001test-DTE.js
+NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
+vanilla_test_gpujs:
+	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
+	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
+
 video_resurection_edit:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o gl.o -static
@@ -285,16 +295,6 @@ b3_fire:
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js
-
-vanilla_test:
-	 emcc src/vanilla/main.cpp -o v3001test.js \
-	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
-
-vanilla_test_gpujs:
-	 NAMESTAMP := v3001test-DTE.js
-	 NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
-	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
-	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 castle:
 	 em++ src/b3main.cpp -c -O3 \
