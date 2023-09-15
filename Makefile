@@ -45,8 +45,8 @@ vanilla_test:
 	 emcc src/vanilla/main.cpp -o v3001test.js \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
-	 NAMESTAMP := v3001test-DTE.js
-	 NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
+NAMESTAMP := v3001test-DTE.js
+NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
 vanilla_test_gpujs:
 	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
