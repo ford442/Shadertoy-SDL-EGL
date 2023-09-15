@@ -1,6 +1,6 @@
 TIMESTAMP := $(shell date +%m%y)
 
-LDFLAGS := -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
+LDFLAGS := -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
 
 SIMD_FLAGS := -mrelaxed-simd -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -msimd128 
 
@@ -10,7 +10,7 @@ STDS := -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c
 LINK_SIMD_FLAGS := -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -msse2 -msse3 -mssse3 \
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
-COMMON_FLAGS := -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthread -pipe -mextended-const -mbulk-memory -matomics \
+COMMON_FLAGS := -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pipe -mextended-const -mbulk-memory -matomics \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
