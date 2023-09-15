@@ -48,7 +48,7 @@ var la=h$*h$*4;
 var pointa=77*la;
 const bcanvas=document.getElementById("zcanvas");
 const gl=bcanvas.getContext("webgl2",{colorType:'float32',preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:false,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
-const g=new GPU({canvas:bcanvas,webGl:gl});
+const g=new GPUX({canvas:bcanvas,webGl:gl});
 const t=g.createKernel(function(v){
 const P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 return[P[0],P[1],P[2],P[3]];
