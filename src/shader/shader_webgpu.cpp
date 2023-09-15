@@ -2,12 +2,12 @@
 
 Run run;
 
-boost::function<EM_BOOL(void)>strtr=[](void){
+boost::function<EM_BOOL()>strtr=[](){
 run.strt();
 return EM_TRUE;
 };
 
-boost::function<EM_BOOL(void)>swpp=[](void){
+boost::function<EM_BOOL()>swpp=[](){
 run.swap();
 return EM_TRUE;
 };
