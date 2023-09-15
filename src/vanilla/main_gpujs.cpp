@@ -71,14 +71,14 @@ var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var $F=1;
-var $Bu=33;
+var $Bu=17;
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<33;i++){
 var j=i+1;
-var mem=(Math.floor((j*la)/65536)+1)*65536;var mem=((Math.floor(mem/4))+1)*4;
-
+var mem=(Math.floor((j*la)/65536)+1)*65536;
+var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
@@ -89,11 +89,11 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 // la=h$*h$;
 for(var i=0;i<33;i++){
 var j=i+1;
-var mem=(Math.floor((j*la)/65536)+1)*65536;var mem=((Math.floor(mem/4))+1)*4;
-
+var mem=(Math.floor((j*la)/65536)+1)*65536;
+var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
-pointb=66*la;
+pointb=33*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
