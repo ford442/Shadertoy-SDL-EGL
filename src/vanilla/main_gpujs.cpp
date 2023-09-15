@@ -63,12 +63,12 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*1)/2),0);
 var nblank$=Math.max((((h$-w$)*1)/2),0);
-// la=h$*h$;
+la=h$*h$;
 for(var i=0;i<33;i++){
-var j=i+1;
-var mem=(Math.floor((j*la)/65536)+1)*65536;
+// var j=i+1;
+var mem=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+i+"=mem;var $"+i+"=new Float32Array($H,point"+i+",la);");
 };
 var $F=1;
 var $Bu=17;
