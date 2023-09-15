@@ -11,7 +11,8 @@ document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
 setTimeout(function(){
-Module.ccall('b3');},650);
+Module.ccall('b3');
+},650);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
@@ -19,7 +20,8 @@ bz.postMessage({data:222});},50);
 
 function normalResStart(){
 setTimeout(function(){
-// Module.ccall('str');},550);
+// Module.ccall('str');
+},550);
 setTimeout(function(){
 Module.ccall('b3');
 },1450);
