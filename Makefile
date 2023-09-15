@@ -41,15 +41,6 @@ LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS
 WEBGPU_FLAGS := -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
 
-vanilla_test:
-	 emcc src/vanilla/main.cpp -o v3001test.js \
-	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
-
-NAMESTAMP := v3001test-DTE.js
-NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
-vanilla_test_gpujs:
-	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
-	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
@@ -65,6 +56,17 @@ b3_shader_webgpu:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-pre-js js/gpujsx.js --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o shader_webgpu.o
+
+
+vanilla_test:
+	 emcc src/vanilla/main.cpp -o v3001test.js \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
+
+NAMESTAMP := v3001test-DTE.js
+NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
+vanilla_test_gpujs:
+	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
+	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_cropcircle:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
