@@ -811,12 +811,6 @@ static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
 
-EGLDisplay display=nullptr;
-EGLSurface surface=nullptr;
-EGLContext ctxegl=nullptr;
-EGLConfig eglconfig=nullptr;
-EGLint config_size,major,minor;
-
 class Run{
 
 private:
