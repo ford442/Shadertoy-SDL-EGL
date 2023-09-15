@@ -27,7 +27,9 @@ const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
 };
 
-function pll(){Module.ccall('pl');}
+function pll(){
+  // Module.ccall('pl');
+}
 
 const fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=>{
@@ -136,7 +138,7 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-scanSongs();
+// scanSongs();
 scanShaders();
 scanVideos();
 
