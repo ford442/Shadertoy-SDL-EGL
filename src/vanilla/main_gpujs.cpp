@@ -65,10 +65,10 @@ var blank$=Math.max((((w$-h$)*1)/2),0);
 var nblank$=Math.max((((h$-w$)*1)/2),0);
 la=h$*h$;
 for(var i=0;i<33;i++){
-// var j=i+1;
+var j=i;
 var mem=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
-eval("var point"+i+"=mem;var $"+i+"=new Float32Array($H,point"+i+",la);");
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 var $F=1;
 var $Bu=17;
@@ -76,7 +76,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<33;i++){
-var j=i+1;
+var j=i;
 var mem=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
@@ -88,7 +88,7 @@ var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 // la=h$*h$;
 for(var i=0;i<33;i++){
-var j=i+1;
+var j=i;
 var mem=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
