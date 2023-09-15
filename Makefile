@@ -1,6 +1,8 @@
 TIMESTAMP := $(shell date +%m%y)
 
-LDFLAGS := -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
+LD_FLAGS := -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
+
+THREAD_FLAGS := -Wl,-lpthread -pthread
 
 SIMD_FLAGS := -mrelaxed-simd -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -msimd128 
 
@@ -28,7 +30,7 @@ BOOST_FLAGS := -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 GL_FLAGS := -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=0 -Wl,-lEGL -sUSE_REGAL=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824
 
-LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS := $(LD_FLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
@@ -56,7 +58,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) \
+	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(THREAD_FLAGS) $(GL_FLAGS) \
 	 -DINTRINS $(BOOST_FLAGS) -DLIB_WEBGPU \
 	 -DLIB_WEBGPU_CPP20 -o s3027test.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
@@ -130,7 +132,7 @@ b3_vanilla_render:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LDFLAGS) -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc $(LD_FLAGS) -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 -sERROR_ON_UNDEFINED_SYMBOLS=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
@@ -185,7 +187,7 @@ b3_shader_glsl:
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) -O2  $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
+	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) -O2  $(LINK_SIMD_FLAGS) $(LD_FLAGS) $(BOOST_FLAGS) \
 	 --use-preload-plugins --closureFriendly -mnontrapping-fptoint \
 	 -mllvm -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
