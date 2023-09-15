@@ -1,6 +1,6 @@
 TIMESTAMP := $(shell date +%m%y)
 
-LD_FLAGS := -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
+LD_FLAGS := -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-S
 
 THREAD_FLAGS := -Wl,-lpthread -pthread
 
