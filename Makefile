@@ -83,7 +83,7 @@ video_resurection_edit:
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 --pre-js js/module.js \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sUSE_SDL=2 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_r4nd","_b3","_b3_egl","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js \
 	 --extern-post-js js/pagec.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js
 
