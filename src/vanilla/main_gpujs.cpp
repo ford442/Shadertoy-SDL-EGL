@@ -79,7 +79,8 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
+var mem=Math.floor((j*la)/65536)+1;
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -92,7 +93,8 @@ al=w$*h$*8;
 pointa=77*la;
 for(var i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+var mem=Math.floor((j*la)/65536)+1;
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
