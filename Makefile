@@ -51,7 +51,7 @@ vanilla_test_gpujs:
 	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
-b3_shader_webgpu:=
+b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
