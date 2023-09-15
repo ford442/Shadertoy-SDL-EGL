@@ -5,7 +5,8 @@ document.getElementById('scanvas').height=window.innerHeight;//*1.333;
 document.getElementById('scanvas').width=window.innerHeight;//*1.333;
 document.getElementById('pmhig').innerHTML=window.innerHeight;//*1.333;
 setTimeout(function(){
-// Module.ccall('str');},250);
+// Module.ccall('str');
+},250);
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('pmhig').innerHTML=window.innerHeight;
