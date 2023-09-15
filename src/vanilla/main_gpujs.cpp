@@ -41,6 +41,8 @@ context.getExtension('GL_ARB_ES2_compatibility');
 context.getExtension('GL_ARB_direct_state_access');
 */
 var vv=document.getElementById("mv");
+document.getElementById("wid").innerHTML=winSize;
+document.getElementById("hig").innerHTML=winSize;
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF32.buffer;
