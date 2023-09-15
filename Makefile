@@ -76,7 +76,7 @@ b3_cropcircle:
 video_resurection_edit:
 	 em++ $(STDS) -c src/combine/video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) video_edit.o -o b3670test.js $(COMMON_FLAGS) $(THREAD_FLAGS) $(LINK_SIMD_FLAGS) \
-	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) \
+	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=2 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano","_pl"]' \
 	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js \
