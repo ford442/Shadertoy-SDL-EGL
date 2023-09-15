@@ -80,11 +80,11 @@ video_resurection_edit:
 	 em++ $(STDS) -c src/video/video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
 	 em++ $(STDS) video_edit.o -o b3670test.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
-	 -sFORCE_FILESYSTEM=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
+	 -sFORCE_FILESYSTEM=1 --pre-js js/module.js \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sUSE_SDL=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js \
-	 --extern-post-js pagec.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js
+	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js \
+	 --extern-post-js js/pagec.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js
 
 video_resurection_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
