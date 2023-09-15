@@ -17374,8 +17374,7 @@ __MAIN_RESULT__;
             }
 
             initContext() {
-                const settings={alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,powerPreference:'high-performance',antialias:true,majorVersion:2,minorVersion:0};
-
+                const settings={alpha:true,depth:true,stencil:true,powerPreference:'high-performance',antialias:true};
                 return this.canvas.getContext('webgl2', settings);
             }
 
