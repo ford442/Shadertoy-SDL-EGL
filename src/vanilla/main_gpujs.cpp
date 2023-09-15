@@ -109,9 +109,6 @@ if(locb>32){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
-if($F%4==0){
-var $bb=R(vv);
-};
 setTimeout(function(){
 M();
 },16.66)};
