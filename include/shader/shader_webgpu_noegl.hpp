@@ -857,8 +857,8 @@ static EM_BOOL i_iSize_set(short int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
+i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*2.0;
+i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*2.0;
 return EM_TRUE;
 }
 
