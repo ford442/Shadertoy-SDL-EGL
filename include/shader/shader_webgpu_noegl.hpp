@@ -106,10 +106,10 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr int numSamples=4;
+static constexpr int numSamples=8;
 
 // static constexpr float numSamplesf=float(numSamples);
-static constexpr float numSamplesf=4.0f;
+static constexpr float numSamplesf=8.0f;
 
 boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin;
 
