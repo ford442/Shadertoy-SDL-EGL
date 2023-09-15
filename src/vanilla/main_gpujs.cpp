@@ -28,7 +28,7 @@ scanvas.style.zIndex='1';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,0)';
+scanvas.style.backgroundColor='rgba(222,5,211,255)';
 document.getElementById("contain1").appendChild(scanvas);
 const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
 const context = scanvas.getContext('webgl2',contxVars);
