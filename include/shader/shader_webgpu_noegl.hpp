@@ -80,7 +80,7 @@ typedef ResultType result_type;
 
 #include "../../include/shader/intrins.hpp"
 // #include "../../include/shader/gl.hpp"
-#include "../../include/shader/egl.hpp"
+#include "../../include/shader/noegl.hpp"
 #include "../../lib/lib_webgpu.h"
 
 #include <emscripten/html5.h>
