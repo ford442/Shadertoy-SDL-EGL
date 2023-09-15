@@ -30,7 +30,7 @@
 
 // #include <emscripten/html5_webgl.h>
 
-#define GLFW_INCLUDE_GLEXT 1
-#define GLFW_INCLUDE_ES3
-#include <GLFW/glfw3.h>
+// #define GLFW_INCLUDE_GLEXT 1
+// #define GLFW_INCLUDE_ES3
+// #include <GLFW/glfw3.h>
 
