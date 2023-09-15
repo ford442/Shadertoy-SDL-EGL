@@ -147,7 +147,7 @@ EGL_NONE,EGL_NONE
 };
 
 static constexpr EGLint att_lst[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
@@ -1077,10 +1077,8 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 glUniform1f(uni_tme,std::real(std::complex<double>(wasm_f64x2_extract_lane(sse2.at(0,0),0),0.0)));
 // glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 // glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -1267,11 +1265,9 @@ mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
-  
 // eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-
-eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(0);
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
