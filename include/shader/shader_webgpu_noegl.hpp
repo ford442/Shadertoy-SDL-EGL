@@ -1054,7 +1054,6 @@ glUniform1i(smp_chn[raN],raN);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glFlush();
-eglSwapBuffers(display,surface);
 return EM_TRUE;
 };
 
@@ -1141,9 +1140,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(mouse.hi,mouse.wi,d_time);
 ::boost::tuples::tie(u_time.t1,u_time.t2,u_time.t3);
 ::boost::tuples::tie(shad.EBO,shad.VBO,shad.VCO,sse4);
-::boost::tuples::tie(config_size,major,minor);
-::boost::tuples::tie(display,surface,eglconfig);
-::boost::tuples::tie(attr,ctxegl,ctx);
+::boost::tuples::tie(attr,ctx);
 ::boost::tuples::tie(cm_hdr_src,vrt_bdy_src,frg_hdr_src,frg_ftr_src);
 ::boost::tuples::tie(vrt,indc,ele);
 ::boost::tuples::tie(retCl,retMu,retMd,retMv);
@@ -1151,7 +1148,6 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 ::boost::tuples::tie(ms_l,clk_l);
 ::boost::tuples::tie(u_time.time_spana,u_time.time_spanb);
 ::boost::tuples::tie(rem,req,tmm);
-eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
 const char * frag_body=rd_fl(Fnm);
@@ -1277,9 +1273,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_cuda_event");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
-cntx.at(0,0)=ctxegl;
-// eglSwapBuffers(display,surface);
-// eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 // emscripten_webgl_make_context_current(cntxi.at(0,0));
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
