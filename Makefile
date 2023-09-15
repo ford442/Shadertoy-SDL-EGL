@@ -10,16 +10,16 @@ STDS := -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c
 LINK_SIMD_FLAGS := -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -msse2 -msse3 -mssse3 \
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
-COMMON_FLAGS := -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthread -pipe -mextended-const -mbulk-memory -matomics \
+COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthread -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
-	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off \
+	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
 
-STATIC_LINK_FLAGS := -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
+STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
@@ -27,13 +27,13 @@ STATIC_LINK_FLAGS := -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 BOOST_FLAGS := -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
 GL_FLAGS += -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=0 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824
 
-LINK_FLAGS := $(LD_FLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS += $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 -sSTRICT_JS=1 \
+	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3221225472 --output_eol linux -mllvm -mtune=haswell -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
@@ -131,7 +131,7 @@ b3_vanilla_render:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LD_FLAGS) -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
+	 emcc $(LDFLAGS) -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 -sERROR_ON_UNDEFINED_SYMBOLS=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
@@ -186,7 +186,7 @@ b3_shader_glsl:
 	 -Rpass-analysis=loop-vectorize
 	 ###         Link
 	 @sh clang12.sh; \
-	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) -O2  $(LINK_SIMD_FLAGS) $(LD_FLAGS) $(BOOST_FLAGS) \
+	 emcc main.o shader_glsl.o -o gl001.js $(COMMON_FLAGS) -O2  $(LINK_SIMD_FLAGS) $(LDFLAGS) $(BOOST_FLAGS) \
 	 --use-preload-plugins --closureFriendly -mnontrapping-fptoint \
 	 -mllvm -fmerge-all-constants -wasm-enable-eh \
 	 -exception-model=wasm -rtlib=compiler-rt -mtune=tigerlake -march=corei7-avx \
