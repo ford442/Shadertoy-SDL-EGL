@@ -93,8 +93,6 @@ var mem=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
-pointb=33*la;
-var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
