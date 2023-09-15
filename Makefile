@@ -26,7 +26,7 @@ STATIC_LINK_FLAGS := -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS := -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS := -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=0 -Wl -sUSE_REGAL=0 \
+GL_FLAGS := -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_GLFW=0 -Wl,-lEGL -sUSE_REGAL=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824
 
 LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
@@ -75,10 +75,11 @@ b3_cropcircle:
 	 --extern-pre-js gpujsx.js cropcircle.o
 
 video_resurection_edit:
-	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
-	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o gl.o -static
-	 em++ $(STDS) -c src/video/video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
-	 em++ $(STDS) video_edit.o -o b3670test.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -static
+	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -static
+	 em++ $(STDS) -c src/video/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/video/video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) main.o video_edit.o -o b3670test.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 --pre-js js/module.js \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sUSE_SDL=2 \
