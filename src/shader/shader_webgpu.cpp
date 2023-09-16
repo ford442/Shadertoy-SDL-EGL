@@ -1,4 +1,4 @@
-#include "../../include/shader/shader_webgpu_noegl.hpp"
+#include "../../include/shader/shader_webgpu.hpp"
 
 Run run;
 
