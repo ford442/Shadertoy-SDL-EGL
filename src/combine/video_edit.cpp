@@ -95,6 +95,9 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 EM_JS(void,ma,(),{
+document.getElementById("wid").innerHTML=window.innerHeight;
+document.getElementById("hig").innerHTML=window.innerHeight;
+  
 // "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
