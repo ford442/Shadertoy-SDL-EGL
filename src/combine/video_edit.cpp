@@ -178,8 +178,12 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+
+// let w$=parseInt(document.getElementById("wid").innerHTML,10);
+// let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let w$=1920;
+let h$=1080;
+
 if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
