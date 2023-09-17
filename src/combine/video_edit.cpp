@@ -193,8 +193,6 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
 
 let winSize=parseInt(window.innerHeight,10);
 window.scroll(0,0);
@@ -216,6 +214,10 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
+
+const bcanvas=document.getElementById("zcanvas");
+const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
+
 const g=new GPUX({mode:'gpu',canvas:scanvas,webGl:contx});
 const g2=new GPUX({mode:'gpu'});
 // contx.getExtension('WEBGL_color_buffer_float');
