@@ -230,6 +230,8 @@ contx.getExtension('EXT_color_buffer_float');
 contx.disable(gl.DITHER);
 const gpu = new GPUX();
 let winSize=parseInt(window.innerHeight,10);
+window.scroll(0,0);
+let $high=document.getElementById('canvasSize');
 $high.innerHTML=winSize;
 const scanvas=document.createElement('canvas');
 scanvas.id='zcanvas';
