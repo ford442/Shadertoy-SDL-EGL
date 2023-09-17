@@ -11,7 +11,6 @@ LINK_SIMD_FLAGS := -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -m
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
 COMMON_FLAGS := -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pipe -mextended-const -mbulk-memory \
-	 -sWASM_WORKERS=0 -sSHARED_MEMORY=0 \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
@@ -30,8 +29,7 @@ GL_FLAGS := -sFULL_ES3=1 -sUSE_GLFW=2 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0 -sGL_MAX_TEMP_BUFFER_SIZE=1073741824
 
 LINK_FLAGS := $(LDFLAGS) -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
-	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
-	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
+	 -sASSERTIONS=2 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
