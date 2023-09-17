@@ -71,7 +71,7 @@ b3_cropcircle:
 	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) -DDOUBLE $(BOOST_FLAGS) \
 	 -o cc001tst.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_nano","_rotat"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js gpujsx.js cropcircle.o
+	 --extern-pre-js js/gpujsx.js cropcircle.o
 
 video_resurection_edit:
 	 em++ $(STDS) -c src/combine/video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
