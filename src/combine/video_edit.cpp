@@ -187,7 +187,7 @@ let h$=1080;
 if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-let la=w$*h$*4;
+let la=w$*h$;
 la=((Math.floor(la/4.0))+1.0)*4.0;
 
 var pointa=77*la;
@@ -386,7 +386,7 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
 let l=w$*h$;
-la=w$*h$*4;
+la=w$*h$;
 la=((Math.floor(la/4.0))+1.0)*4.0;
 
 let al=w$*h$*8;
