@@ -375,6 +375,8 @@ var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
 let l=w$*h$;
 la=w$*h$;
+la=((Math.floor(la/4))+1)*4;
+
 let al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
@@ -402,6 +404,8 @@ var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
 l=w$*h$;
 la=h$*h$*4;
+  la=((Math.floor(la/4))+1)*4;
+
 al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
