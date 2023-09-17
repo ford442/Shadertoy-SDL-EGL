@@ -182,7 +182,7 @@ if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=w$*h$;
-var la=((Math.floor(la/4))+1)*4;
+la=((Math.floor(la/4))+1)*4;
 
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,304);
