@@ -24,7 +24,7 @@ Module.ccall('str');
 },550);
 setTimeout(function(){
 Module.ccall('b3');
-},1450);
+},2450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
