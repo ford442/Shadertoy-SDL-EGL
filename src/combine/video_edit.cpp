@@ -255,8 +255,11 @@ contx.getExtension('OES_shader_multisample_interpolation');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
-contx.getExtension('EXT_color_buffer_float');
-  
+
+  contx.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha   -- WEBGL2 --
+contx.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
+contx.getExtension('EXT_color_buffer_half_float');
+
 contx.disable(gl.DITHER);
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 
