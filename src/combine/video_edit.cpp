@@ -214,7 +214,7 @@ scanvas.style.zIndex='2';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,0)';
+scanvas.style.backgroundColor='rgba(255,255,255,0.0)';
 document.getElementById("contain1").appendChild(scanvas);
 
 const bcanvas=document.getElementById("zcanvas");
@@ -376,8 +376,8 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([w$,h$]);
 
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+// w$=parseInt(document.getElementById("wid").innerHTML,10);
+// h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
@@ -406,8 +406,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+// w$=parseInt(document.getElementById("wid").innerHTML,10);
+// h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
 l=w$*h$;
