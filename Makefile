@@ -159,7 +159,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) \
 	 -DDOUBLE -DINTRINS $(BOOST_FLAGS) -DLIB_WEBGPU \
-	 -DLIB_WEBGPU_CPP20 -o s3027dev.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
+	 -DLIB_WEBGPU_CPP20 -o s3028dev.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
