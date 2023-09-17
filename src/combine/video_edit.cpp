@@ -100,7 +100,7 @@ EM_JS(void,ma,(),{
 document.getElementById("wid").innerHTML=1920.0;
 document.getElementById("hig").innerHTML=1080.0;
   
-// "use strict";
+"use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
