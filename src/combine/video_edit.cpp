@@ -228,7 +228,6 @@ contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
   
 contx.disable(gl.DITHER);
-const gpu = new GPUX();
 let winSize=parseInt(window.innerHeight,10);
 window.scroll(0,0);
 let $high=document.getElementById('canvasSize');
