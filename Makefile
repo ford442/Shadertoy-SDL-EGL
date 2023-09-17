@@ -1,6 +1,6 @@
 TIMESTAMP := $(shell date +%m%y)
 
-LDFLAGS := -Wl,-lc,-lc++,-lc++abi,-lm
+LDFLAGS := -Wl,-lc,-lc++,-lc++abi
 
 SIMD_FLAGS := -mrelaxed-simd -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -msimd128 
 
