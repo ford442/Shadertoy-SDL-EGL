@@ -249,7 +249,7 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
-const g=new GPUX({mode:'gpu',canvas:Canvas,webGl:contx});
+const g=new GPUX({mode:'gpu',canvas:scanvas,webGl:contx});
 const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 
