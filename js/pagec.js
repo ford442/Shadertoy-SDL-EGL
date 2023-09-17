@@ -104,7 +104,7 @@ setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
 setTimeout(function(){
-normalResStart();
+// normalResStart();
 },150);
 };};
 ff.send(null);
@@ -141,7 +141,7 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-// scanSongs();
+scanSongs();
 scanShaders();
 scanVideos();
 
