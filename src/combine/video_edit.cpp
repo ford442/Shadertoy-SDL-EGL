@@ -95,12 +95,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 EM_JS(void,ma,(),{
-// document.getElementById("wid").innerHTML=window.innerHeight;
-// document.getElementById("hig").innerHTML=window.innerHeight;
-// document.getElementById("wid").innerHTML=1920.0;
-// document.getElementById("hig").innerHTML=1080.0;
-  
-"use strict";
+// "use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
@@ -178,18 +173,12 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-
-// let w$=parseInt(document.getElementById("wid").innerHTML,10);
-// let h$=parseInt(document.getElementById("hig").innerHTML,10);
-let w$=1920;
-let h$=1080;
-
+let w$=parseInt(document.getElementById("wid").innerHTML,10);
+let h$=parseInt(document.getElementById("hig").innerHTML,10);
 if(w$<1){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-let la=w$*h$;
-la=((Math.floor(la/4.0))+1.0)*4.0;
-
+let la=w$*h$*4;
 var pointa=77*la;
 var agav=new Float32Array($H,pointa,304);
 let sz=(w$*h$)/8;
@@ -199,33 +188,8 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-
-let winSize=parseInt(window.innerHeight,10);
-window.scroll(0,0);
-let $high=document.getElementById('canvasSize');
-$high.innerHTML=winSize;
-const scanvas=document.createElement('canvas');
-scanvas.id='zcanvas';
-scanvas.imageRendering='auto';
-scanvas.width=winSize;
-scanvas.height=winSize;
-scanvas.zoom=1;
-scanvas.scale=1;
-scanvas.style.pointerEvents='none';
-scanvas.style.display='block';
-scanvas.style.position='absolute';
-scanvas.style.zIndex='2';
-scanvas.style.top='0';
-scanvas.style.height='100vh';
-scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,0.0)';
-document.getElementById("contain1").appendChild(scanvas);
-
-const bcanvas=document.getElementById("zcanvas");
+const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
-
-const g=new GPUX({mode:'gpu',canvas:scanvas,webGl:contx});
-const g2=new GPUX({mode:'gpu'});
 // contx.getExtension('WEBGL_color_buffer_float');
 // contx.getExtension('WEBGL_color_buffer_half_float');
 
@@ -261,12 +225,12 @@ contx.getExtension('OES_shader_multisample_interpolation');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
-
-  contx.getExtension('EGL_EXT_pixel_format_float');  //  required for float/alpha   -- WEBGL2 --
-contx.getExtension('EXT_color_buffer_float');  //  required for float/alpha   -- WEBGL2 --
-contx.getExtension('EXT_color_buffer_half_float');
-
+contx.getExtension('EXT_color_buffer_float');
+  
 contx.disable(gl.DITHER);
+
+const g=new GPUX({mode:'gpu',canvas:Canvas,webGl:contx});
+const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 
 // castle way
@@ -293,7 +257,7 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").optimizeFloatMemory(true).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 // GE way
@@ -380,15 +344,13 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([w$,h$]);
 
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
-// h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-let l=w$*h$;
-la=w$*h$;
-la=((Math.floor(la/4.0))+1.0)*4.0;
-
+let l=w$*h$*4;
+la=w$*h$*4;
 let al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
@@ -410,14 +372,12 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-// w$=parseInt(document.getElementById("wid").innerHTML,10);
-// h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(document.getElementById("wid").innerHTML,10);
+h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-l=w$*h$;
+l=w$*h$*4;
 la=h$*h$*4;
-  la=((Math.floor(la/4.0))+1.0)*4.0;
-
 al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
