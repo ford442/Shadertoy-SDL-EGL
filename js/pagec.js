@@ -20,7 +20,7 @@ bz.postMessage({data:222});},50);
 
 function normalResStart(){
 setTimeout(function(){
-// Module.ccall('str');
+Module.ccall('str');
 },550);
 setTimeout(function(){
 Module.ccall('b3');
@@ -31,7 +31,7 @@ bz.postMessage({data:222});},50);
 };
 
 function pll(){
-  // Module.ccall('pl');
+Module.ccall('pl');
 }
 
 const fll=new BroadcastChannel('file');
@@ -196,8 +196,8 @@ $w=wi*r$;
 const $ihigB=document.getElementById('ihid');
 const $ihig=document.getElementById('ihig');
 $hg=hii+'px';
-$ihig.innerHTML=1080; // parseInt(window.innerHeight,10);
-$iwid.innerHTML=1920; // parseInt($w,10);
+// $ihig.innerHTML=1080; // parseInt(window.innerHeight,10);
+// $iwid.innerHTML=1920; // parseInt($w,10);
 document.getElementById('wrap').style.lineheight=$hg;
 document.getElementById('wrap').style.pointerEvents='auto';
 document.getElementById('isrc').innerHTML=adr;
