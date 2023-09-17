@@ -26,7 +26,7 @@ return EM_TRUE;
 
 EM_BOOL ud(){
 run.uniDOWN();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL uu(){
@@ -36,7 +36,7 @@ return EM_TRUE;
 
 EM_BOOL vd(){
 run.viewDOWN();
-return 1;
+return EM_TRUE;
 }
 
 EM_BOOL vu(){
