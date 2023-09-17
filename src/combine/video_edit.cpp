@@ -195,6 +195,29 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
+
+let winSize=parseInt(window.innerHeight,10);
+window.scroll(0,0);
+let $high=document.getElementById('canvasSize');
+$high.innerHTML=winSize;
+const scanvas=document.createElement('canvas');
+scanvas.id='zcanvas';
+scanvas.imageRendering='auto';
+scanvas.width=winSize;
+scanvas.height=winSize;
+scanvas.zoom=1;
+scanvas.scale=1;
+scanvas.style.pointerEvents='none';
+scanvas.style.display='block';
+scanvas.style.position='absolute';
+scanvas.style.zIndex='2';
+scanvas.style.top='0';
+scanvas.style.height='100vh';
+scanvas.style.width='100vh';
+scanvas.style.backgroundColor='rgba(255,255,255,0)';
+document.getElementById("contain1").appendChild(scanvas);
+const g=new GPUX({mode:'gpu',canvas:scanvas,webGl:contx});
+const g2=new GPUX({mode:'gpu'});
 // contx.getExtension('WEBGL_color_buffer_float');
 // contx.getExtension('WEBGL_color_buffer_half_float');
 
@@ -233,28 +256,6 @@ contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
   
 contx.disable(gl.DITHER);
-let winSize=parseInt(window.innerHeight,10);
-window.scroll(0,0);
-let $high=document.getElementById('canvasSize');
-$high.innerHTML=winSize;
-const scanvas=document.createElement('canvas');
-scanvas.id='zcanvas';
-scanvas.imageRendering='auto';
-scanvas.width=winSize;
-scanvas.height=winSize;
-scanvas.zoom=1;
-scanvas.scale=1;
-scanvas.style.pointerEvents='none';
-scanvas.style.display='block';
-scanvas.style.position='absolute';
-scanvas.style.zIndex='2';
-scanvas.style.top='0';
-scanvas.style.height='100vh';
-scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(255,255,255,0)';
-document.getElementById("contain1").appendChild(scanvas);
-const g=new GPUX({mode:'gpu',canvas:scanvas,webGl:contx});
-const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 
 // castle way
