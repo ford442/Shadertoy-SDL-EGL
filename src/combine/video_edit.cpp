@@ -229,7 +229,7 @@ contx.getExtension('EXT_color_buffer_float');
   
 contx.disable(gl.DITHER);
 
-const g=new GPUX({mode:'gpu',canvas:Canvas,webGl:contx});
+const g=new GPUX({mode:'gpu',webGl:contx});
 const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 
