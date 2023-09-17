@@ -5,7 +5,7 @@ document.getElementById('scanvas').height=window.innerHeight;//*1.333;
 document.getElementById('scanvas').width=window.innerHeight;//*1.333;
 document.getElementById('pmhig').innerHTML=window.innerHeight;//*1.333;
 setTimeout(function(){
-// Module.ccall('str');
+Module.ccall('str');
 },250);
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('scanvas').width=window.innerHeight;
@@ -103,9 +103,9 @@ const sfil=new Uint8ClampedArray(sarrayBuffer);
 setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
-// setTimeout(function(){
-// normalResStart();
-// },150);
+setTimeout(function(){
+normalResStart();
+},150);
 };};
 ff.send(null);
 };
