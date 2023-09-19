@@ -176,14 +176,14 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
  // var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
- var halfFloatTexType=gl.FLOAT;
+ var halfFloatTexType=gl.UNSIGNED_BYTE;
  let formatRGBA;
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,halfFloatTexType);
+ formatRG=getSupportedFormat(gl,gl.RG32UI,gl.RG,halfFloatTexType);
+ formatR=getSupportedFormat(gl,gl.R32UI,gl.RED,halfFloatTexType);
  }else{
  formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
@@ -198,10 +198,10 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 function getSupportedFormat(gl,internalFormat,format,type){
  if(!supportRenderTextureFormat(gl,internalFormat,format,type)){
  switch(internalFormat){
- case gl.R32F:
- return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
- case gl.RG32F:
- return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
+ case gl.R32UI:
+ return getSupportedFormat(gl,gl.RG32UI,gl.RG,type);
+ case gl.RG32UI:
+ return getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,type);
  default:
  return null;
  }
@@ -321,7 +321,7 @@ function captureScreenshot(){
 function framebufferToTexture(target){
  gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
  let length=target.width*target.height*4;
- let texture=new Float32Array(length);
+ let texture=new Uint32Array(length);
  gl.readPixels(0,0,target.width,target.height,gl.RGBA,gl.FLOAT,texture);
  return texture;
 }
