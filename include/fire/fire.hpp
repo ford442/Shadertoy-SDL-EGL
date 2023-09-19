@@ -3,6 +3,8 @@
 
 #include <functional>
 
+#include <GLES3/gl3.h>
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
