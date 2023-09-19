@@ -1,6 +1,18 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
+#include <webgl/webgl2.h>  //  much better performance without
+
+#ifndef GL_FRAGMENT_PRECISION_HIGH
+#define GL_FRAGMENT_PRECISION_HIGH 1
+#endif
+
+#ifndef GL_GLEXT_PROTOTYPES
+#define GL_GLEXT_PROTOTYPES 1
+#endif
+
+#include <GL/gl.h>
+#include <GL/glext.h>
 #include <functional>
 
 #include <GLES3/gl3.h>
