@@ -146,6 +146,7 @@ extern "C" {
 void str(){
 fl();
 fi();
+em_ctx();
 return;
 }
 
