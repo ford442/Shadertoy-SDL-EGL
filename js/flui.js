@@ -125,8 +125,8 @@ gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
-gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
+gl.getExtension('OES_texture_half_float_linear');
 // // // gl.getExtension('WEBGL_blend_equation_advanced_coherent');
 supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 }else{
@@ -177,8 +177,8 @@ function getSupportedFormat(gl,internalFormat,format,type){
 function supportRenderTextureFormat(gl,internalFormat,format,type){
  let texture=gl.createTexture();
  gl.bindTexture(gl.TEXTURE_2D,texture);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  gl.texImage2D(gl.TEXTURE_2D,0,internalFormat,4,4,0,format,type,null);
@@ -885,8 +885,8 @@ function createFBO(w,h,internalFormat,format,type,param){
  gl.activeTexture(gl.TEXTURE0);
  let texture=gl.createTexture();
  gl.bindTexture(gl.TEXTURE_2D,texture);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,param);
- gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,param);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  gl.texImage2D(gl.TEXTURE_2D,0,internalFormat,w,h,0,format,type,null);
