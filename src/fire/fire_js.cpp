@@ -1,6 +1,5 @@
 #include "../../include/fire/fire.hpp"
 
-
 boost::function<EM_BOOL()>em_ctx=[](){
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
@@ -122,6 +121,7 @@ eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 eglMakeCurrent(display,surface,surface,ctxegl);
+emscripten_webgl_make_context_current(ctx);
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
 // glEnable(GL_DEPTH_TEST);
