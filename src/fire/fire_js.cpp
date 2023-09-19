@@ -15,7 +15,7 @@ scanvas.scale=1;
 scanvas.style.pointerEvents='auto';
 scanvas.style.display='block';
 scanvas.style.position='absolute';
-scanvas.style.zIndex='1';
+scanvas.style.zIndex='3100';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
@@ -169,7 +169,7 @@ return EM_TRUE;
 };
 
 EM_JS(void,fi,(),{
-document.getElementById('acanvas').style.zIndex=3100;
+// document.getElementById('acanvas').style.zIndex=3100;
 });
 
 extern "C" {
