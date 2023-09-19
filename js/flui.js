@@ -913,7 +913,7 @@ function initSunraysFramebuffers(){
  let res=getResolution(config.SUNRAYS_RESOLUTION);
  const texType=ext.halfFloatTexType;
  const r=ext.formatR;
- const filtering=ext.supportLinearFiltering?gl.LINEAR:gl.NEAREST;
+ const filtering=gl.LINEAR;
  sunrays=createFBO(res.width,res.height,r.internalFormat,r.format,texType,filtering);
  sunraysTemp=createFBO(res.width,res.height,r.internalFormat,r.format,texType,filtering);
 }
