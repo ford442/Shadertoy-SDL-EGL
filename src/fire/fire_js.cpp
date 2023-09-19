@@ -1373,7 +1373,7 @@ function hashCode(s){
 };
 });
 
-boost::function<EM_BOOL()>em_ctx=[this](){
+boost::function<EM_BOOL()>em_ctx=[](){
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -1391,9 +1391,11 @@ ctx=emscripten_webgl_create_context("#zcanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // emscripten_webgl_make_context_current(ctx);
 //   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
-emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("acanvas",mouse.hi,mouse.hi);
-Size=(short int)mouse.hi;
+double sz;
+double wd;
+emscripten_get_element_css_size("canvas",&wd,&sz);
+emscripten_set_element_css_size("acanvas",sz,sz);
+int Size=(short int)sz;
 // eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(ctx);
 eglBindAPI(EGL_OPENGL_ES_API);
