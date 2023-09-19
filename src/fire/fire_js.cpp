@@ -127,10 +127,10 @@ emscripten_webgl_make_context_current(ctx);
 glEnable(GL_BLEND);
 // glEnable(GL_STENCIL_TEST);
 // glFrontFace(GL_CW);
-// glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
-// glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-// glEnable(GL_SCISSOR_TEST);
-// glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
+glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
+glViewport(0,0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
+glEnable(GL_SCISSOR_TEST);
+glScissor(0,0,Size,Size);
 return EM_TRUE;
 };
 
