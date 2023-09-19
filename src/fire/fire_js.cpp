@@ -17,7 +17,7 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=3;
 attr.minorVersion=0;
-ctx=emscripten_webgl_create_context("#zcanvas",&attr);
+ctx=emscripten_webgl_create_context("#acanvas",&attr);
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // emscripten_webgl_make_context_current(ctx);
 //   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
