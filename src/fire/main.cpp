@@ -67,10 +67,10 @@ document.getElementById('di').click();
 });
   
 int main(){
-"use strict";
+fl();
 EM_ASM({
+"use strict";
 console.log('fire.. heh heh..');});
 js_main();
 return 0;
-
 }
