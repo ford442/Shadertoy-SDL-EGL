@@ -140,7 +140,8 @@ halfFloat=gl.getExtension('OES_texture_half_float');
 supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
- var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
+ // var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
+ var halfFloatTexType=gl.FLOAT;
  let formatRGBA;
  let formatRG;
  let formatR;
