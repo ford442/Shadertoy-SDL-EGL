@@ -112,8 +112,6 @@ EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
 
-boost::function<EM_BOOL(void)>em_ctx;
-
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
