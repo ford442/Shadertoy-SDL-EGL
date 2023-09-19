@@ -309,7 +309,7 @@ function isMobile(){
 }
 function captureScreenshot(){
  let res=getResolution(config.CAPTURE_RESOLUTION);
- let target=createFBO(res.width,res.height,ext.formatRGBA.internalFormat,ext.formatRGBA.format,ext.halfFloatTexType,gl.NEAREST);
+ let target=createFBO(res.width,res.height,ext.formatRGBA.internalFormat,ext.formatRGBA.format,ext.halfFloatTexType,gl.LINEAR);
  render(target);
  let texture=framebufferToTexture(target);
  texture=normalizeTexture(texture,target.width,target.height);
@@ -888,9 +888,9 @@ function initFramebuffers(){
  gl.disable(gl.BLEND);
  if(dye == null) dye=createDoubleFBO(dyeRes.width,dyeRes.height,rgba.internalFormat,rgba.format,texType,filtering); else dye=resizeDoubleFBO(dye,dyeRes.width,dyeRes.height,rgba.internalFormat,rgba.format,texType,filtering);
  if(velocity == null) velocity=createDoubleFBO(simRes.width,simRes.height,rg.internalFormat,rg.format,texType,filtering); else velocity=resizeDoubleFBO(velocity,simRes.width,simRes.height,rg.internalFormat,rg.format,texType,filtering);
- divergence=createFBO(simRes.width,simRes.height,r.internalFormat,r.format,texType,gl.NEAREST);
- curl=createFBO(simRes.width,simRes.height,r.internalFormat,r.format,texType,gl.NEAREST);
- pressure=createDoubleFBO(simRes.width,simRes.height,r.internalFormat,r.format,texType,gl.NEAREST);
+ divergence=createFBO(simRes.width,simRes.height,r.internalFormat,r.format,texType,gl.LINEAR);
+ curl=createFBO(simRes.width,simRes.height,r.internalFormat,r.format,texType,gl.LINEAR);
+ pressure=createDoubleFBO(simRes.width,simRes.height,r.internalFormat,r.format,texType,gl.LINEAR);
  initBloomFramebuffers();
  initSunraysFramebuffers();
 }
@@ -898,7 +898,7 @@ function initBloomFramebuffers(){
  let res=getResolution(config.BLOOM_RESOLUTION);
  const texType=ext.halfFloatTexType;
  const rgba=ext.formatRGBA;
- const filtering=ext.supportLinearFiltering?gl.LINEAR:gl.NEAREST;
+ const filtering=gl.LINEAR;
  bloom=createFBO(res.width,res.height,rgba.internalFormat,rgba.format,texType,filtering);
  bloomFramebuffers.length=0;
  for(let i=0; i<config.BLOOM_ITERATIONS; i++){
