@@ -146,7 +146,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGB10_A2,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
  formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
  }else{
