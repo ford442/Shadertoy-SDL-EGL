@@ -1374,6 +1374,7 @@ function hashCode(s){
 });
 
 EM_JS(void,fi,(),{
+document.getElementById('acanvas').style.zIndex=4200;
 });
 
 extern "C" {
