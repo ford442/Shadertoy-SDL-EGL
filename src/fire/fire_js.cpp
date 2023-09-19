@@ -124,17 +124,16 @@ eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 eglMakeCurrent(display,surface,surface,ctxegl);
-glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-glDepthMask(GL_TRUE);
-glEnable(GL_DEPTH_TEST);
-glEnable(GL_STENCIL_TEST);
-glFrontFace(GL_CW);
+// glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+// glDepthMask(GL_TRUE);
+// glEnable(GL_DEPTH_TEST);
+// glEnable(GL_STENCIL_TEST);
+// glFrontFace(GL_CW);
 // glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 // glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 // glEnable(GL_SCISSOR_TEST);
 // glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
 return EM_TRUE;
-
 };
 
 EM_JS(void,fi,(),{
