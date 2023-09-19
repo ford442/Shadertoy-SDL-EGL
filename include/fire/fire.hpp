@@ -3,6 +3,9 @@
 
 #include <functional>
 
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
 template<class ArgumentType,class ResultType>
 
 struct unary_function{
