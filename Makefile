@@ -70,12 +70,13 @@ vanilla_test_gpujs:
 
 b3_fire_test:
 	 em++ src/fire/main.cpp -c -std=c++2a
-	 em++ src/fire/fire.cpp -c -std=c++2a
-	 em++ main.o fire.o -o $(NAMESTAMP) -std=c++2a \
+	 em++ src/fire/fire_js.cpp -c -std=c++2a
+	 em++ main.o fire_js.o -o $(NAMESTAMP) -std=c++2a \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
+	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js
 
 b3_cropcircle:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
