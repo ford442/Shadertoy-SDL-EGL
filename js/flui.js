@@ -141,14 +141,14 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
  // var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
- var halfFloatTexType=gl.FLOAT;
+ var halfFloatTexType=gl.UNSIGNED_INT;
  let formatRGBA;
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,halfFloatTexType);
+ formatRG=getSupportedFormat(gl,gl.RG32UI,gl.RG,halfFloatTexType);
+ formatR=getSupportedFormat(gl,gl.R32UI,gl.RED,halfFloatTexType);
  }else{
  formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
@@ -846,7 +846,7 @@ function initFramebuffers(){
  let simRes=getResolution(config.SIM_RESOLUTION);
  let dyeRes=getResolution(config.DYE_RESOLUTION);
  const texType=ext.halfFloatTexType;
- const rgba=ext.formatRGBA;
+ const rgba=ext.BA;
  const rg=ext.formatRG;
  const r=ext.formatR;
  const filtering=ext.supportLinearFiltering?gl.LINEAR:gl.NEAREST;
