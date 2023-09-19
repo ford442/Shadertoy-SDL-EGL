@@ -147,10 +147,10 @@ EGL_NONE,EGL_NONE
 };
 
 static constexpr EGLint att_lst[]={
-EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -160,8 +160,8 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-//   EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-//   EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
@@ -1143,10 +1143,10 @@ return EM_TRUE;
 }
 
 boost::function<EM_BOOL()>swap=[](){
-emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+  // emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+emscripten_get_canvas_element_size("#zcanvas",&mouse.hi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
-// emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 Size=(short int)mouse.hi;
 i_iSize_set(Size);
 u_iSize_set(float(mouse.hi));
@@ -1388,8 +1388,8 @@ glEnable(GL_STENCIL_TEST);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
 // glStencilMask(0xFF);
 glFrontFace(GL_CW);
-// glCullFace(GL_BACK);
-// glEnable(GL_CULL_FACE);
+glCullFace(GL_BACK);
+glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -1585,9 +1585,9 @@ glFlush();
 glUseProgram(S1.at(0,0,0));
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
+// glDeleteShader(vtx);
+// glDeleteShader(frag);
+// glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
