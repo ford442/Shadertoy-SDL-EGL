@@ -75,7 +75,7 @@ b3_fire_test:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_cropcircle:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
