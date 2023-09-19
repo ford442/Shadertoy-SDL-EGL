@@ -123,7 +123,7 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-// eglMakeCurrent(display,surface,surface,ctxegl);
+eglMakeCurrent(display,surface,surface,ctxegl);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 glEnable(GL_DEPTH_TEST);
