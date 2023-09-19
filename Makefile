@@ -75,7 +75,7 @@ b3_fire_test:
 	 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
-	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js
+	 --extern-pre-js js/fluid.js --extern-post-js js/flui.js
 
 b3_cropcircle:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
