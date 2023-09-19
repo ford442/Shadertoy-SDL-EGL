@@ -176,14 +176,14 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 }
  gl.clearColor(Math.random(),Math.random(),Math.random(),1.0);
  // var halfFloatTexType=isWebGL2?gl.FLOAT:halfFloat.FLOAT_OES;
- var halfFloatTexType=gl.UNSIGNED_BYTE;
+ var halfFloatTexType=gl.FLOAT;
  let formatRGBA;
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,halfFloatTexType);
- formatRG=getSupportedFormat(gl,gl.RG32UI,gl.RG,halfFloatTexType);
- formatR=getSupportedFormat(gl,gl.R32UI,gl.RED,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
+ formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
+ formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
  }else{
  formatRGBA=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RGBA,gl.RGBA,halfFloatTexType);
@@ -198,10 +198,10 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 function getSupportedFormat(gl,internalFormat,format,type){
  if(!supportRenderTextureFormat(gl,internalFormat,format,type)){
  switch(internalFormat){
- case gl.R32UI:
- return getSupportedFormat(gl,gl.RG32UI,gl.RG,type);
- case gl.RG32UI:
- return getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,type);
+ case gl.R32F:
+ return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
+ case gl.RG32F:
+ return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
  default:
  return null;
  }
@@ -321,8 +321,8 @@ function captureScreenshot(){
 function framebufferToTexture(target){
  gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
  let length=target.width*target.height*4;
- let texture=new Uint32Array(length);
- gl.readPixels(0,0,target.width,target.height,gl.RGBA,gl.UNSIGNED_BYTE,texture);
+ let texture=new Float32Array(length);
+ gl.readPixels(0,0,target.width,target.height,gl.RGBA,gl.FLOAT,texture);
  return texture;
 }
 function normalizeTexture(texture,width,height){
@@ -825,10 +825,10 @@ const gradientSubtractShader=compileShader(gl.FRAGMENT_SHADER,`
 `);
 const blit=(() => {
  gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());
- gl.bufferData(gl.ARRAY_BUFFER,new Uint32Array([-1,-1,-1,1,1,1,1,-1]),gl.STATIC_DRAW);
+ gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,-1,1,1,1,1,-1]),gl.STATIC_DRAW);
  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,gl.createBuffer());
  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array([0,1,2,0,2,3]),gl.STATIC_DRAW);
- gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,0,0);
+ gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
  gl.enableVertexAttribArray(0);
  return (target,clear=false) => {
  if(target == null){
