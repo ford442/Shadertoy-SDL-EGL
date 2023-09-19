@@ -31,8 +31,7 @@ context.getExtension('GL_ARB_direct_state_access');
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-const gpu=new GPUX({mode:'gpu',webGl:context });
-
+const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:context });
 
 const promoPopup=document.getElementsByClassName('promo')[0];
 const promoPopupClose=document.getElementsByClassName('promo-close')[0];
