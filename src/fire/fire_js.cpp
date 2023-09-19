@@ -175,7 +175,7 @@ EM_JS(void,fi,(),{
 extern "C" {
 
 void str(){
-fl();
+// fl();
 fi();
 em_ctx();
 return;
