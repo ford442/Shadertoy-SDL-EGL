@@ -884,7 +884,7 @@ function initFramebuffers(){
  const rgba=ext.formatRGBA;
  const rg=ext.formatRG;
  const r=ext.formatR;
- const filtering=ext.supportLinearFiltering?gl.LINEAR:gl.NEAREST;
+ const filtering=gl.LINEAR;
  gl.disable(gl.BLEND);
  if(dye == null) dye=createDoubleFBO(dyeRes.width,dyeRes.height,rgba.internalFormat,rgba.format,texType,filtering); else dye=resizeDoubleFBO(dye,dyeRes.width,dyeRes.height,rgba.internalFormat,rgba.format,texType,filtering);
  if(velocity == null) velocity=createDoubleFBO(simRes.width,simRes.height,rg.internalFormat,rg.format,texType,filtering); else velocity=resizeDoubleFBO(velocity,simRes.width,simRes.height,rg.internalFormat,rg.format,texType,filtering);
