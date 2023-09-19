@@ -68,7 +68,7 @@ for(var i=0;i<33;i++){
 var j=i;
 var mem=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",mem);");  //
 };
 var $F=1;
 var $Bu=17;
@@ -79,7 +79,7 @@ for (i=0;i<33;i++){
 var j=i;
 var mem=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",mem);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -91,7 +91,7 @@ for(var i=0;i<33;i++){
 var j=i;
 var mem=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",mem);");  //
 };
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
