@@ -124,7 +124,7 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 emscripten_webgl_make_context_current(ctx);
 // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // glDepthMask(GL_TRUE);
-// glEnable(GL_DEPTH_TEST);
+glEnable(GL_BLEND);
 // glEnable(GL_STENCIL_TEST);
 // glFrontFace(GL_CW);
 // glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
