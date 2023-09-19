@@ -146,7 +146,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGB32UI,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RG32UI,gl.RG,halfFloatTexType);
  formatR=getSupportedFormat(gl,gl.R32UI,gl.RED,halfFloatTexType);
  }else{
@@ -163,10 +163,10 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
 function getSupportedFormat(gl,internalFormat,format,type){
  if(!supportRenderTextureFormat(gl,internalFormat,format,type)){
  switch(internalFormat){
- case gl.R32F:
- return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
- case gl.RG32F:
- return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
+ case gl.R32UI:
+ return getSupportedFormat(gl,gl.RG32UI,gl.RG,type);
+ case gl.RG32UI:
+ return getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,type);
  default:
  return null;
  }
