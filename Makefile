@@ -287,11 +287,11 @@ b3_video_youtube:
 b3_fire:
 	 em++ src/fire/main.cpp -c -std=c++2a
 	 em++ src/fire/fire.cpp -c -std=c++2a
-	 emcc main.o fire.o -o f3020.js -std=c++2a \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb \
-	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 em++ main.o fire.o -o f3020test.js -std=c++2a \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js rSlider.js --pre-js slideOut.js
+	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js
 
 castle:
 	 em++ src/b3main.cpp -c -O3 \
