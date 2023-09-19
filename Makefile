@@ -69,11 +69,10 @@ vanilla_test_gpujs:
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_fire_test:
-	 em++ src/fire/main.cpp -c -std=c++2a
-	 em++ src/fire/fire_js.cpp -c -std=c++2a
-	 em++ main.o fire_js.o -o $(NAMESTAMP) -std=c++2a \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 em++ $(STDS) src/fire/main.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) src/fire/fire_js.cpp -c $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) main.o fire_js.o -o $(NAMESTAMP) \
+	 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js
