@@ -68,6 +68,15 @@ vanilla_test_gpujs:
 	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
+b3_fire_test:
+	 em++ src/fire/main.cpp -c -std=c++2a
+	 em++ src/fire/fire.cpp -c -std=c++2a
+	 em++ main.o fire.o -o $(NAMESTAMP) -std=c++2a \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js
+
 b3_cropcircle:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) -c -DDOUBLE src/vanilla/cropcircle.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
@@ -284,14 +293,6 @@ b3_video_youtube:
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_nano","_str","_clr"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js startUp.js --extern-pre-js gpujsx.js --pre-js rSlider.js --pre-js slideOut.js
 
-b3_fire:
-	 em++ src/fire/main.cpp -c -std=c++2a
-	 em++ src/fire/fire.cpp -c -std=c++2a
-	 em++ main.o fire.o -o f3020test.js -std=c++2a \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js rSlider.js --extern-pre-js slideOut.js
 
 castle:
 	 em++ src/b3main.cpp -c -O3 \
