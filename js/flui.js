@@ -114,7 +114,13 @@ if(!isWebGL2) gl=canvas.getContext('webgl',params) || canvas.getContext('experim
 let halfFloat;
 let supportLinearFiltering;
 if(isWebGL2){
+gl.getExtension('GL_ALL_EXTENSIONS');
+gl.getExtension('GL_KHR_no_error');
+gl.getExtension('GL_REGAL_enable');
+gl.getExtension('EGL_ANGLE_platform_angle');
+gl.getExtension('GL_ARB_spirv_extensions');
 gl.getExtension('EXT_color_buffer_float');
+gl.getExtension('EXT_color_buffer_half_float');
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // gl.disable(gl.DITHER);
