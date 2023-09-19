@@ -67,7 +67,7 @@ if(!ext.supportLinearFiltering){
 startGUI();
 function getWebGLContext(canvas){
 const params={
-colorType:'float32',
+colorType:'float64',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
 logarithmicDepthBuffer:true,
@@ -88,7 +88,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
 var gl=canvas.getContext('webgl2',{
-colorType:'float32',
+colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
@@ -146,7 +146,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_half_float_linear');
  let formatRG;
  let formatR;
  if(isWebGL2){
- formatRGBA=getSupportedFormat(gl,gl.RGB32F,gl.RGBA,halfFloatTexType);
+ formatRGBA=getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,halfFloatTexType);
  formatRG=getSupportedFormat(gl,gl.RG32F,gl.RG,halfFloatTexType);
  formatR=getSupportedFormat(gl,gl.R32F,gl.RED,halfFloatTexType);
  }else{
@@ -166,7 +166,7 @@ function getSupportedFormat(gl,internalFormat,format,type){
  case gl.R32F:
  return getSupportedFormat(gl,gl.RG32F,gl.RG,type);
  case gl.RG32F:
- return getSupportedFormat(gl,gl.RGBA32UI,gl.RGBA,type);
+ return getSupportedFormat(gl,gl.RGBA32F,gl.RGBA,type);
  default:
  return null;
  }
@@ -846,7 +846,7 @@ function initFramebuffers(){
  let simRes=getResolution(config.SIM_RESOLUTION);
  let dyeRes=getResolution(config.DYE_RESOLUTION);
  const texType=ext.halfFloatTexType;
- const rgba=ext.BA;
+ const rgba=ext.formatRGBA;
  const rg=ext.formatRG;
  const r=ext.formatR;
  const filtering=ext.supportLinearFiltering?gl.LINEAR:gl.NEAREST;
