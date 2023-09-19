@@ -76,14 +76,14 @@ alpha:true,
 depth:true,
 stencil:true,
 imageSmoothingEnabled:true,
-// imageSmoothingQuality:'high',
+imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
-willReadFrequently:false,
+willReadFrequently:true,
 xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
@@ -97,14 +97,14 @@ alpha:true,
 depth:true,
 stencil:true,
 imageSmoothingEnabled:true,
-// imageSmoothingQuality:'high',
+imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
 antialias:true,
-willReadFrequently:false,
+willReadFrequently:true,
 xrCompatible:false,
 majorVersion:2,
 minorVersion:0
@@ -123,7 +123,7 @@ gl.getExtension('EXT_color_buffer_float');
 gl.getExtension('EXT_color_buffer_half_float');
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// gl.disable(gl.DITHER);
+gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
