@@ -321,7 +321,7 @@ function captureScreenshot(){
 function framebufferToTexture(target){
  gl.bindFramebuffer(gl.FRAMEBUFFER,target.fbo);
  let length=target.width*target.height*4;
- let texture=new Float64Array(length);
+ let texture=new Float32Array(length);
  gl.readPixels(0,0,target.width,target.height,gl.RGBA,gl.FLOAT,texture);
  return texture;
 }
@@ -825,7 +825,7 @@ const gradientSubtractShader=compileShader(gl.FRAGMENT_SHADER,`
 `);
 const blit=(() => {
  gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());
- gl.bufferData(gl.ARRAY_BUFFER,new Float64Array([-1,-1,-1,1,1,1,1,-1]),gl.STATIC_DRAW);
+ gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,-1,1,1,1,1,-1]),gl.STATIC_DRAW);
  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,gl.createBuffer());
  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array([0,1,2,0,2,3]),gl.STATIC_DRAW);
  gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
