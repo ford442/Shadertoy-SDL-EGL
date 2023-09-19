@@ -66,8 +66,7 @@ var nblank$=Math.max((((h$-w$)*1)/2),0);
 la=h$*h$;
 for(var i=0;i<33;i++){
 var j=i;
-var mem=(Math.floor((i*la)/65536)+1)*65536;
-var memr=((Math.floor(mem/4))+1);
+var memr=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);");  //
 };
@@ -78,8 +77,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<33;i++){
 var j=i;
-var mem=(Math.floor((j*la)/65536)+1)*65536;
-var memr=((Math.floor(mem/4))+1);
+var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);$"+j+".set($$1);");
 };
@@ -91,8 +89,7 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 // la=h$*h$;
 for(var i=0;i<33;i++){
 var j=i;
-var mem=(Math.floor((j*la)/65536)+1)*65536;
-var memr=((Math.floor(mem/4))+1);
+var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(mem/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);");  //
 };
