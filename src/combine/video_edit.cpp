@@ -95,7 +95,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 EM_JS(void,ma,(),{
- "use strict";
+"use strict";
 const pnnl=document.body;
 var vv=document.getElementById("mv");
 var intervalBackward;
@@ -192,7 +192,6 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
-
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 contx.getExtension('GL_ALL_EXTENSIONS');
@@ -598,10 +597,7 @@ t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
-ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
-ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+
 mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
@@ -652,6 +648,7 @@ return shader;
 }
 
 std::function<void()>strt=[](){
+ 
 EGLConfig eglconfig=NULL;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
@@ -817,6 +814,7 @@ contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_webgl_make_context_current(ctx);
+ 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
@@ -884,11 +882,14 @@ glPolygonOffset(0.0f,0.0f);
 // glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-  glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
+glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
 glDisable(GL_DITHER);
-  
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
+ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
+ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
 };
