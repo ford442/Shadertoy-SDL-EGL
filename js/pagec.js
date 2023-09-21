@@ -20,11 +20,11 @@ bz.postMessage({data:222});},50);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },550);
 setTimeout(function(){
-Module.ccall('str');
-},2450);
+Module.ccall('b3');
+},1450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
 bz.postMessage({data:222});},50);
