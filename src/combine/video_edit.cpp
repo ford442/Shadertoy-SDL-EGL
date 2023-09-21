@@ -228,6 +228,8 @@ contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
   
+contx.getExtension('EGL_HI_colorformats');
+contx.getExtension('EGL_EXT_pixel_format_float');
 contx.disable(gl.DITHER);
 
 const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
