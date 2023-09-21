@@ -179,7 +179,7 @@ b3_audio_test:
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	--extern-post-js rSlider.js --extern-post-js slideOut.js
+	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js
 
 b3_shader_glsl:
 	 ###         Shader
