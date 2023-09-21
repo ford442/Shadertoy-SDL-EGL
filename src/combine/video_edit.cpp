@@ -18,6 +18,8 @@ typedef ResultType result_type;
 
 #include <boost/function.hpp>
 
+EMSCRIPTEN_RESULT ret;
+
 EGLDisplay display;
 EGLContext contextegl;
 EGLSurface surface;
@@ -592,7 +594,6 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 
 // std::function<void()>renderFrame=[](){
 void renderFrame(){
-EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
