@@ -227,11 +227,9 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
-  
 contx.getExtension('EGL_HI_colorformats');
 contx.getExtension('EGL_EXT_pixel_format_float');
 contx.disable(gl.DITHER);
-
 const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
 const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
@@ -260,7 +258,8 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+// }).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 // GE way
