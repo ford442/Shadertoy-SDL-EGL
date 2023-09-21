@@ -20,10 +20,10 @@ bz.postMessage({data:222});},50);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('str');
+Module.ccall('b3');
 },550);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('str');
 },2450);
 setTimeout(function(){
 const bz=new BroadcastChannel('bez');
