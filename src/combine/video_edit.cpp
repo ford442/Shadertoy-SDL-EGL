@@ -180,20 +180,14 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 if(w$<1.0){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-if(h$==0){
-h$=1080;
-w$=1080;
+la=h$*h$;
+if(la&4!==0){
+var amount=la&4;
+la+=amount;
 }
-let la=h$*h$;
-var na=la/4;
-na=na+1;
-la=na*4;
 var pointa=77*la;
-na=pointa/4;
-na=na+1;
-pointa=na*4;
 var agav=new Float32Array($H,pointa,304);
-let sz=(w$*h$)/8.0;
+let sz=(h$*h$)/4;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -280,8 +274,8 @@ g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
-// }).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
-}).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+}).setTactic("speed").setOptimizeFloatMemory(true).setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
+// }).setTactic("speed").setDynamicOutput(true).setArgumentTypes(["HTMLVideo"]).setOutput([sz]);
 
 let t=g.createKernel(function(v){
 // GE way
@@ -374,11 +368,12 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
 la=h$*h$;
-sz=(w$*h$)/8.0;
+if(la&4!==0){
+var amount=la&4;
+la+=amount;
+}
+sz=(h$*h$)/4;
 pointa=77*la;
-na=pointa/4;
-na=na+1;
-pointa=na*4;
 agav=new Float32Array($H,pointa,304);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
@@ -401,8 +396,12 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-la=h$*h$*4;
-sz=(w$*h$)/8;
+la=h$*h$;
+if(la&4!==0){
+var amount=la&4;
+la+=amount;
+}
+sz=(h$*h$)/4;
 pointa=77*la;
 agav=new Float32Array($H,pointa,304);
 R.setOutput([sz]);
