@@ -48,9 +48,9 @@ extern "C"{
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 window.scroll(0,0);
-let $high=document.getElementById('canvasSize');
+let Shigh=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
-$high.innerHTML=winSize;
+Shigh.innerHTML=winSize;
 const scanvas=document.createElement('canvas');
 scanvas.id='zcanvas';
 scanvas.imageRendering='auto';
@@ -83,7 +83,7 @@ context.getExtension('ARB_texture_half_float');
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 const gpu=new GPUX({mode:'gpu',webGl:context });
-var $shds=[];
+var Sshds=[];
 
 function normalResStart(){
 document.getElementById('shut').innerHTML=2;
@@ -104,7 +104,7 @@ function shds(xml){
 const sparser=new DOMParser();
 let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
 let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
-$shds[0]=preList.length;
+Sshds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxts=preList[i].href;
 var Self=location.href;
@@ -113,14 +113,14 @@ txxts=txxts.replace(Self,"");
 var x=document.getElementById("sh1");
 var option=document.createElement("option");
 option.text=txxts;
-$shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
+Sshds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 option.value=txxts;
 x.add(option);
 }
 }
  
 function rrun(){
-let shadesNum=$shds[0];
+let shadesNum=Sshds[0];
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum],{async:true})+5;
 };
@@ -128,7 +128,7 @@ let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
-document.getElementById('path').innerHTML=$shds[randShade];
+document.getElementById('path').innerHTML=Sshds[randShade];
 }else{
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
 }
@@ -170,20 +170,20 @@ dxhttp.send();
 let tem=document.getElementById('tim');
 let ban=document.getElementById('menuBtn');
 let sfr=document.getElementById('slideframe');
-var $lt;
-function grab$lt(){$lt=Math.round($lt);}
-$lt=tem.innerHTML;grab$lt();
+var Slt;
+function grabSlt(){Slt=Math.round(Slt);}
+Slt=tem.innerHTML;grabSlt();
 let slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
-grab$lt();var slt=$lt/1000;slt=Math.round(slt);
+grabSlt();var slt=Slt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
 let tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
 step:[0.25],labels:false,tooltip:true,scale:false,});
-grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
+grabSlt();slt=(Slt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
 document.getElementById('menu').addEventListener('click',function(){
-var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
+var Sll=tsl.getValue();Sll=Sll*100;Sll=Math.round(Sll);Sll=Sll/100;Sll=(Sll*1000);tem.innerHTML=Sll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 const pnnl=document.body;
