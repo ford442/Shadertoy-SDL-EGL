@@ -380,7 +380,7 @@ for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=77*la;
+var pointb=80*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
