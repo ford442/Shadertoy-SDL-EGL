@@ -2,7 +2,7 @@
 // #pragma pack(4)
 // #pragma fenv_access(on)        // enable environment sensitivity
 #include <boost/cstdfloat.hpp>  // must be first include
-
+/*
 #define _XOPEN_SOURCE 700
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD -1
@@ -18,7 +18,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
-
+*/
 #include "../../include/shader/intrins.hpp"
 #include "../../include/shader/gl.hpp"
 #include <functional>
@@ -78,8 +78,8 @@ context.getExtension('REGAL_enable');
 context.getExtension('ARB_spirv_extensions');
 context.getExtension('ARB_ES2_compatibility');
 context.getExtension('ARB_direct_state_access');
-context.getExtension('ARB_color_buffer_float');
-context.getExtension('ARB_color_buffer_half_float');
+context.getExtension('EXT_color_buffer_float');
+// context.getExtension('ARB_color_buffer_half_float');
 context.getExtension('ARB_texture_float');
 context.getExtension('ARB_texture_half_float');
 // context.disable(gl.DITHER);
