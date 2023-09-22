@@ -1286,7 +1286,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float"); // Co
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
-  /*
+
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
@@ -1363,7 +1363,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_swap_buffers_with_damag
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_cuda_event");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
-        */
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
