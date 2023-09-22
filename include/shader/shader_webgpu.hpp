@@ -1277,11 +1277,11 @@ eglBindAPI(0);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ALL_EXTENSIONS");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_spirv_extensions");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float"); // Colab AI: "EXT_color_buffer_float is deprecated. Use ARB_color_buffer_float instead."
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
