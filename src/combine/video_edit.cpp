@@ -186,7 +186,7 @@ var amount=la&4;
 la+=amount;
 }
 var pointa=77*la;
-var agav=new Float32Array($H,pointa,304);
+var agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/4;
 var avag=0.750;
 var min=1.0;
@@ -374,7 +374,7 @@ la+=amount;
 }
 sz=(h$*h$)/4;
 pointa=77*la;
-agav=new Float32Array($H,pointa,304);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -403,7 +403,7 @@ la+=amount;
 }
 sz=(h$*h$)/4;
 pointa=77*la;
-agav=new Float32Array($H,pointa,304);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
