@@ -180,6 +180,10 @@ let h$=parseInt(document.getElementById("hig").innerHTML,10);
 if(w$<1.0){w$=window.innerHeight;h$=window.innerHeight;}
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
+if(h$==0){
+h$=1080;
+w$=1080;
+}
 let la=h$*h$;
 var na=la/4;
 na=na+1;
@@ -369,12 +373,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-let l=w$*h$*4;
 la=h$*h$;
-var na=la/4;
-na=na+1;
-la=na*4;
-let al=w$*h$*8;
 sz=(w$*h$)/8.0;
 pointa=77*la;
 na=pointa/4;
@@ -402,9 +401,7 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/8),0);
 var nblank$=Math.max((((h$-w$)*0)/8),0);
-l=w$*h$*4;
 la=h$*h$*4;
-al=w$*h$*8;
 sz=(w$*h$)/8;
 pointa=77*la;
 agav=new Float32Array($H,pointa,304);
