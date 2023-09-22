@@ -69,6 +69,9 @@ scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
 const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
 const context = scanvas.getContext('webgl2',contxVars);
+console.log(context.getParameter(gl.VERSION));
+console.log(context.getParameter(gl.SHADING_LANGUAGE_VERSION));
+
 context.getExtension('ALL_EXTENSIONS');
 context.getExtension('KHR_no_error');
 context.getExtension('REGAL_enable');
