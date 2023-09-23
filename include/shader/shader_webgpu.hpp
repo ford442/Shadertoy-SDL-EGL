@@ -1272,7 +1272,7 @@ mms.at(1,1)=0.5*t_size.at(0,0);
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 
 // eglBindAPI(EGL_OPENGL_ES_API);
-eglBindAPI(0);
+// eglBindAPI(0);
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
@@ -1354,7 +1354,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_half_float"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_base");
