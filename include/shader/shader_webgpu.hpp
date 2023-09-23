@@ -1277,15 +1277,12 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ALL_EXTENSIONS");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"REGAL_enable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_spirv_extensions");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float"); // Colab AI: "EXT_color_buffer_float is deprecated. Use ARB_color_buffer_float instead."
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_color_buffer_float");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
@@ -1305,8 +1302,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_variables");
@@ -1354,6 +1353,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_half_float"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_base");
@@ -1362,6 +1362,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_swap_buffers_with_damag
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_cuda_event");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
+        
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
