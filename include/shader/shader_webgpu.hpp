@@ -1283,10 +1283,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float"); // Colab AI: "EXT_color_buffer_float is deprecated. Use ARB_color_buffer_float instead."
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
-
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
@@ -1306,8 +1305,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_variables");
