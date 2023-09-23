@@ -78,10 +78,12 @@ context.getExtension('REGAL_enable');
 context.getExtension('ARB_spirv_extensions');
 context.getExtension('ARB_ES2_compatibility');
 context.getExtension('ARB_direct_state_access');
+/*
 context.getExtension('EXT_color_buffer_float');
 // context.getExtension('ARB_color_buffer_half_float');
 context.getExtension('ARB_texture_float');
 context.getExtension('ARB_texture_half_float');
+*/
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
