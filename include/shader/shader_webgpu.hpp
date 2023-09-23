@@ -138,7 +138,7 @@ EGL_NONE,EGL_NONE
 static constexpr EGLint ctx_att[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
-EGL_CONTEXT_MAJOR_VERSION_KHR,2,
+EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -1004,16 +1004,16 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarA=[](){
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
 // glEnable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glSampleCoverage(1.0f,GL_FALSE);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1026,20 +1026,20 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarB=[](){
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // multisampled
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-// glSampleCoverage(numSamplesf,GL_FALSE);
+glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-// glFlush();
+glFlush();
 return EM_TRUE;
 };
 
@@ -1149,18 +1149,18 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
 // emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
-Size=(EGLint)mouse.hi;
+Size=(short int)mouse.hi;
 i_iSize_set(Size);
 u_iSize_set(float(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
-mms.at(0,0)=float(0.5*float(t_size.at(0,0)));
-mms.at(0,1)=float(0.5*float(t_size.at(0,0)));
-mms.at(1,0)=float(0.5*float(t_size.at(0,0)));
-mms.at(1,1)=float(0.5*float(t_size.at(0,0)));
+mms.at(0,0)=0.5*t_size.at(0,0);
+mms.at(0,1)=0.5*t_size.at(0,0);
+mms.at(1,0)=0.5*t_size.at(0,0);
+mms.at(1,1)=0.5*t_size.at(0,0);
 // glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),1.0f);
-mms.at(2,0)=float(t_size.at(0,0)*0.5);
-mms.at(2,1)=float(t_size.at(0,0)*0.5);
+mms.at(2,0)=t_size.at(0,0)*0.5;
+mms.at(2,1)=t_size.at(0,0)*0.5;
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 // glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),1.0f);
 // glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),1.0f);
@@ -1246,7 +1246,7 @@ attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=2;
+attr.majorVersion=3;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#zcanvas",&attr);
 cntxi.at(0,0)=ctx;
@@ -1256,27 +1256,28 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 //   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
-Size=(EGLint)mouse.hi;
+Size=(short int)mouse.hi;
 // Size=css.csshi;
 i_iSize_set(Size);
 // u_iSize_set(mouse.hi);
 u_iSize_set(float(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
-mms.at(0,0)=float(0.5*float(t_size.at(0,0)));
-mms.at(0,1)=float(0.5*float(t_size.at(0,0)));
-mms.at(1,0)=float(0.5*float(t_size.at(0,0)));
-mms.at(1,1)=float(0.5*float(t_size.at(0,0)));
+mms.at(0,0)=0.5*t_size.at(0,0);
+mms.at(0,1)=0.5*t_size.at(0,0);
+mms.at(1,0)=0.5*t_size.at(0,0);
+mms.at(1,1)=0.5*t_size.at(0,0);
   
 // eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 
 // eglBindAPI(EGL_OPENGL_ES_API);
-// eglBindAPI(0);
+eglBindAPI(0);
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+  
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
@@ -1703,7 +1704,7 @@ glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-glUniform1i(uni_fps,40.0);
+glUniform1i(uni_fps,60.0);
 mms.at(2,0)=t_size.at(0,0)*0.5;
 mms.at(2,1)=t_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
