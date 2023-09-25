@@ -39,6 +39,14 @@ LINK_FLAGS += $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
 
+TIMESTAMP := $(shell date +%m%y)
+NAMESTAMP := v3001test-DTE.js
+NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
+vanilla_test_gpujs:
+	 em++ src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
+	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
+
+
 video_resurection_jebus:
 	 em++ resurection_jebus.cpp -o b3666.js -sFORCE_FILESYSTEM=1 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb \
