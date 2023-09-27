@@ -41,7 +41,7 @@ context.getExtension('GL_ARB_ES2_compatibility');
 context.getExtension('GL_ARB_direct_state_access');
 */
 var vv=document.getElementById("mv");
-vv.play();
+document.getElementById("mv").play();
 document.getElementById("wid").innerHTML=winSize;
 document.getElementById("hig").innerHTML=winSize;
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
