@@ -84,8 +84,7 @@ var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);$"+j+".set($$1);");
 };
   
-// var d=S();if(d)d();d=S();function S(){
-var d=S();function S(){
+var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
@@ -123,7 +122,9 @@ S();
 };
 return()=>{
 T=true;
-}};
+}
+S();
+};
 }
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
