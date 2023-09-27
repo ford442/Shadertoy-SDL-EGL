@@ -7,7 +7,7 @@ extern "C"{
 EM_JS(void,js_main,(),{
 // FS.mkdir('/video');
 
-"use strict";
+// "use strict";
 
 function normalResStart(){
 window.scroll(0,0);
