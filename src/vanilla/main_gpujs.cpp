@@ -116,7 +116,7 @@ eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu
 };
 setTimeout(function(){
 M();
-},16.66)};
+},16.66)}
 M();
 document.getElementById("di").onclick=function(){
 T=true;
