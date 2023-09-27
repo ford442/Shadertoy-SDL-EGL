@@ -81,7 +81,7 @@ for (i=0;i<33;i++){
 var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);$"+j+".set($$1);");
+eval("point"+j+"=mem;$"+j+"=new Float32Array($H,point"+j+",memr);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
