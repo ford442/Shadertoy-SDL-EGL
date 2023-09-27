@@ -42,10 +42,7 @@ context.getExtension('GL_ARB_direct_state_access');
 */
 
 
-var d=S();if(d)d();d=S();function S(){
-
   var vv=document.getElementById("mv");
-document.getElementById("mv").play();
 document.getElementById("wid").innerHTML=winSize;
 document.getElementById("hig").innerHTML=winSize;
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -79,6 +76,9 @@ var $F=1;
 var $Bu=17;
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
+var d=S();if(d)d();d=S();function S(){
+
+document.getElementById("mv").play();
 
 var $$1=t(vv);
 for (i=0;i<33;i++){
@@ -125,8 +125,6 @@ S();
 return()=>{
 T=true;
 }};
-S();
-
 }
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
