@@ -46,6 +46,9 @@ vanilla_test_gpujs:
 	 em++ src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
+vanilla_opt_gpujs:
+	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
+	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 video_resurection_jebus:
 	 em++ resurection_jebus.cpp -o b3666.js -sFORCE_FILESYSTEM=1 \
