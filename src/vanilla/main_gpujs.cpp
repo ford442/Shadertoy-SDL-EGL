@@ -64,18 +64,18 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*1)/2),0);
 var nblank$=Math.max((((h$-w$)*1)/2),0);
 la=h$*h$;
-for(var i=0;i<33;i++){
+for(var i=0;i<8;i++){
 var j=i;
 var memr=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Uint8Array($H,point"+j+",memr);");  //
 };
 var $F=1;
-var $Bu=17;
+var $Bu=5;
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
-for (i=0;i<33;i++){
+for (i=0;i<8;i++){
 var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
@@ -87,7 +87,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 // la=h$*h$;
-for(var i=0;i<33;i++){
+for(var i=0;i<7;i++){
 var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
@@ -101,11 +101,11 @@ vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){return;}
-for(var i=32;i>0;i--){
+for(var i=8;i>0;i--){
 var loca=$F+1;
-if(loca>32){loca=1;}
+if(loca>8){loca=1;}
 var locb=$Bu+1;
-if(locb>32){locb=1;}
+if(locb>8){locb=1;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
