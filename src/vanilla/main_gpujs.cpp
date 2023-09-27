@@ -121,6 +121,7 @@ S();
 return()=>{
 T=true;
 }};
+S();
 }
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
