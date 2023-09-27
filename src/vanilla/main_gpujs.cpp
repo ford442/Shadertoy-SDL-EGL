@@ -70,7 +70,7 @@ for(var i=0;i<33;i++){
 var j=i;
 var memr=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);");  //
+eval("let point"+j+"=mem;let $"+j+"=new Float32Array($H,point"+j+",memr);");  //
 };
 var $F=1;
 var $Bu=17;
