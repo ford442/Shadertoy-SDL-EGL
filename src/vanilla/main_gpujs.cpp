@@ -93,7 +93,7 @@ for(var i=0;i<33;i++){
 var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
-eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);");  //
+eval("point"+j+"=mem;$"+j+"=new Float32Array($H,point"+j+",memr);");  //
 };
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
