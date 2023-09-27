@@ -111,6 +111,7 @@ eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
 setTimeout(function(){
+console.log("frame");
 M();
 },16.66)};
 M();
