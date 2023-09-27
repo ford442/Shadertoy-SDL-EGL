@@ -7,7 +7,7 @@ extern "C"{
 EM_JS(void,js_main,(),{
 // FS.mkdir('/video');
 
-"use strict";
+// "use strict";
 
 function normalResStart(){
 window.scroll(0,0);
@@ -40,7 +40,11 @@ context.getExtension('GL_ARB_spirv_extensions');
 context.getExtension('GL_ARB_ES2_compatibility');
 context.getExtension('GL_ARB_direct_state_access');
 */
-var vv=document.getElementById("mv");
+
+
+var d=S();if(d)d();d=S();function S(){
+
+  var vv=document.getElementById("mv");
 document.getElementById("mv").play();
 document.getElementById("wid").innerHTML=winSize;
 document.getElementById("hig").innerHTML=winSize;
@@ -83,8 +87,6 @@ var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Uint8Array($H,point"+j+",memr);$"+j+".set($$1);");
 };
-
-var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
