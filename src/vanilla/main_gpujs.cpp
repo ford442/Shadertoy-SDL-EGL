@@ -101,11 +101,11 @@ vv=document.getElementById("mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){return;}
-for(var i=8;i>0;i--){
+for(var i=7;i>0;i--){
 var loca=$F+1;
-if(loca>8){loca=1;}
+if(loca>7){loca=0;}
 var locb=$Bu+1;
-if(locb>8){locb=1;}
+if(locb>7){locb=0;}
 eval("if ($F=="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");}");
 eval("if ($F=="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 };
