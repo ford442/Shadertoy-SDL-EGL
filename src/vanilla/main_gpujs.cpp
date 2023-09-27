@@ -42,14 +42,14 @@ context.getExtension('GL_ARB_direct_state_access');
 */
 var vv=document.getElementById("mv");
 document.getElementById("mv").play();
-  document.getElementById("di").click();
+document.getElementById("di").click();
 document.getElementById("wid").innerHTML=winSize;
 document.getElementById("hig").innerHTML=winSize;
 var w$=parseInt(document.getElementById("wid").innerHTML,10);
 var h$=parseInt(document.getElementById("hig").innerHTML,10);
 const $H=Module.HEAPF32.buffer;
 var la=h$*h$;
-const bcanvas=document.getElementById("zcanvas");
+const bcanvas=document.getElementById("bcanvas");
 const gl=bcanvas.getContext("webgl2",{preferLowPowerToHighPerformance:false,precision:'highp',logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:false,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:true,majorVersion:2,minorVersion:0});
 const g=new GPUX({canvas:bcanvas,webGl:gl});
 const t=g.createKernel(function(v){
