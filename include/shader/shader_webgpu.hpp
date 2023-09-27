@@ -293,7 +293,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma (fastprecision off)\n"
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
-
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
@@ -302,11 +301,11 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
 "#pragma (precise none)\n"
- "#pragma STDGL(strict off)\n"
- "#pragma optimize(on)\n"
- "#pragma debug(off)\n"
- "#pragma (invariant none)\n"
- "#pragma (centroid all)\n"
+"#pragma STDGL(strict off)\n"
+"#pragma optimize(on)\n"
+"#pragma debug(off)\n"
+"#pragma (invariant none)\n"
+"#pragma (centroid all)\n"
 "#pragma (sample all)\n"
 "#pragma (unroll all)\n"
 "#pragma optionNV(unroll all)\n"
@@ -1005,8 +1004,8 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarA=[](){
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
 // glEnable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
@@ -1014,7 +1013,7 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glSampleCoverage(1.0f,GL_FALSE);
+// glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1027,20 +1026,20 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarB=[](){
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // multisampled
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(numSamplesf,GL_FALSE);
+// glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
 // glDisable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFlush();
+// glFlush();
 return EM_TRUE;
 };
 
@@ -1284,7 +1283,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_spirv_extensions");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
