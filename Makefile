@@ -48,7 +48,7 @@ vanilla_test_gpujs:
 
 vanilla_opt_gpujs:
 	 em++ $(STDS) $(COMMON_FLAGS) src/vanilla/main_gpujs.cpp -c
-	 emcc $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) src/vanilla/main_gpujs.o -o $(NAMESTAMP) \
+	 emcc $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) main_gpujs.o -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 video_resurection_jebus:
