@@ -75,7 +75,7 @@ var $F=1;
 var $Bu=17;
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-  /*
+
 var $$1=t(vv);
 for (i=0;i<33;i++){
 var j=i;
@@ -83,7 +83,7 @@ var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Uint8Array($H,point"+j+",memr);$"+j+".set($$1);");
 };
-  */
+
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
