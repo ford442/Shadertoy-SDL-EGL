@@ -7,7 +7,7 @@ extern "C"{
 EM_JS(void,js_main,(),{
 // FS.mkdir('/video');
 
-"use strict";
+// "use strict";
 
 function normalResStart(){
 window.scroll(0,0);
@@ -70,7 +70,7 @@ for(var i=0;i<33;i++){
 var j=i;
 var memr=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
-eval("let point"+j+"=mem;let $"+j+"=new Float32Array($H,point"+j+",memr);");  //
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);");  //
 };
 var $F=1;
 var $Bu=17;
@@ -81,7 +81,7 @@ for (i=0;i<33;i++){
 var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
-eval("point"+j+"=mem;$"+j+"=new Float32Array($H,point"+j+",memr);$"+j+".set($$1);");
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);$"+j+".set($$1);");
 };
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
@@ -93,7 +93,7 @@ for(var i=0;i<33;i++){
 var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
-eval("point"+j+"=mem;$"+j+"=new Float32Array($H,point"+j+",memr);");  //
+eval("var point"+j+"=mem;var $"+j+"=new Float32Array($H,point"+j+",memr);");  //
 };
 r.setConstants({nblnk:nblank$,blnk:blank$});
 t.setConstants({nblnk:nblank$,blnk:blank$});
