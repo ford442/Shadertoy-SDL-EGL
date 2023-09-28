@@ -10443,7 +10443,7 @@ return 1;
                         STACKGL_resize_drawingbuffer: testContext.getExtension('STACKGL_resize_drawingbuffer'),
                         STACKGL_destroy_context: testContext.getExtension('STACKGL_destroy_context'),
                         OES_texture_float: testContext.getExtension('OES_texture_float'),
-                        OES_texture_float_linear: testContext.getExtension('OES_texture_float_linear'),
+                        ARB_texture_float_linear: testContext.getExtension('ARB_texture_float_linear'),
                         OES_element_index_uint: testContext.getExtension('OES_element_index_uint'),
                         WEBGL_draw_buffers: testContext.getExtension('WEBGL_draw_buffers'),
                         WEBGL_color_buffer_float: testContext.getExtension('WEBGL_color_buffer_float'),
@@ -10507,7 +10507,7 @@ return 1;
                     STACKGL_resize_drawingbuffer: this.context.getExtension('STACKGL_resize_drawingbuffer'),
                     STACKGL_destroy_context: this.context.getExtension('STACKGL_destroy_context'),
                     OES_texture_float: this.context.getExtension('OES_texture_float'),
-                    OES_texture_float_linear: this.context.getExtension('OES_texture_float_linear'),
+                    ARB_texture_float_linear: this.context.getExtension('ARB_texture_float_linear'),
                     OES_element_index_uint: this.context.getExtension('OES_element_index_uint'),
                     WEBGL_draw_buffers: this.context.getExtension('WEBGL_draw_buffers'),
                 };
@@ -10524,7 +10524,7 @@ return 1;
                 this.extensions.STACKGL_resize_drawingbuffer = null;
                 this.extensions.STACKGL_destroy_context = null;
                 this.extensions.OES_texture_float = null;
-                this.extensions.OES_texture_float_linear = null;
+                this.extensions.ARB_texture_float_linear = null;
                 this.extensions.OES_element_index_uint = null;
                 this.extensions.WEBGL_draw_buffers = null;
             }
@@ -14534,7 +14534,7 @@ __MAIN_RESULT__;
                 if (!testContext || !testContext.getExtension) return;
                 testExtensions = {
                     OES_texture_float: testContext.getExtension('OES_texture_float'),
-                    OES_texture_float_linear: testContext.getExtension('OES_texture_float_linear'),
+                    ARB_texture_float_linear: testContext.getExtension('ARB_texture_float_linear'),
                     OES_element_index_uint: testContext.getExtension('OES_element_index_uint'),
                     WEBGL_draw_buffers: testContext.getExtension('WEBGL_draw_buffers'),
                 };
@@ -14673,7 +14673,7 @@ __MAIN_RESULT__;
             initExtensions() {
                 this.extensions = {
                     OES_texture_float: this.context.getExtension('OES_texture_float'),
-                    OES_texture_float_linear: this.context.getExtension('OES_texture_float_linear'),
+                    ARB_texture_float_linear: this.context.getExtension('ARB_texture_float_linear'),
                     OES_element_index_uint: this.context.getExtension('OES_element_index_uint'),
                     WEBGL_draw_buffers: this.context.getExtension('WEBGL_draw_buffers'),
                     WEBGL_color_buffer_float: this.context.getExtension('WEBGL_color_buffer_float'),
@@ -15908,7 +15908,7 @@ return number - (divisor * floor(divWithIntCheck(number, divisor)));
 
             destroyExtensions() {
                 this.extensions.OES_texture_float = null;
-                this.extensions.OES_texture_float_linear = null;
+                this.extensions.ARB_texture_float_linear = null;
                 this.extensions.OES_element_index_uint = null;
                 this.extensions.WEBGL_draw_buffers = null;
             }
@@ -17305,8 +17305,8 @@ __MAIN_RESULT__;
                 testContext = testCanvas.getContext('webgl2');
                 if (!testContext || !testContext.getExtension) return;
                 testExtensions = {
-                //    EXT_color_buffer_float: testContext.getExtension('EXT_color_buffer_float'),
-                //    OES_texture_float_linear: testContext.getExtension('OES_texture_float_linear'),
+                    ARB_color_buffer_float: testContext.getExtension('ARB_color_buffer_float'),
+                    ARB_texture_float_linear: testContext.getExtension('ARB_texture_float_linear'),
                 };
                 features = this.getFeatures();
             }
@@ -17381,8 +17381,8 @@ __MAIN_RESULT__;
 
             initExtensions() {
                 this.extensions = {
-               //     EXT_color_buffer_float: this.context.getExtension('EXT_color_buffer_float'),
-               //     OES_texture_float_linear: this.context.getExtension('OES_texture_float_linear'),
+                    ARB_color_buffer_float: this.context.getExtension('ARB_color_buffer_float'),
+                    ARB_texture_float_linear: this.context.getExtension('ARB_texture_float_linear'),
                 };
             }
 
@@ -17828,8 +17828,8 @@ __MAIN_RESULT__;
             }
 
             destroyExtensions() {
-            //    this.extensions.EXT_color_buffer_float = null;
-           //     this.extensions.OES_texture_float_linear = null;
+                this.extensions.ARB_color_buffer_float = null;
+                this.extensions.ARB_texture_float_linear = null;
             }
 
             toJSON() {
