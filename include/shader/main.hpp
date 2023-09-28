@@ -4,6 +4,7 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 
 #define _XOPEN_SOURCE 700
+/*
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD -1
 
@@ -18,6 +19,7 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
+*/
 
 #include "../../include/shader/intrins.hpp"
 #include "../../include/shader/gl.hpp"
@@ -67,7 +69,7 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
-const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
+const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
 const context = scanvas.getContext('webgl2',contxVars);
 console.log(context.getParameter(context.VERSION));
 console.log(context.getParameter(context.SHADING_LANGUAGE_VERSION));
@@ -78,12 +80,12 @@ context.getExtension('REGAL_enable');
 context.getExtension('ARB_spirv_extensions');
 context.getExtension('ARB_ES2_compatibility');
 context.getExtension('ARB_direct_state_access');
-/*
 context.getExtension('EXT_color_buffer_float');
-// context.getExtension('ARB_color_buffer_half_float');
+context.getExtension('ARB_color_buffer_float');
+context.getExtension('ARB_color_buffer_half_float');
 context.getExtension('ARB_texture_float');
 context.getExtension('ARB_texture_half_float');
-*/
+
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
