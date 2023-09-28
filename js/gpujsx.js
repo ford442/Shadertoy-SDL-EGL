@@ -17305,8 +17305,8 @@ __MAIN_RESULT__;
                 testContext = testCanvas.getContext('webgl2');
                 if (!testContext || !testContext.getExtension) return;
                 testExtensions = {
-                    EXT_color_buffer_float: testContext.getExtension('EXT_color_buffer_float'),
-                    OES_texture_float_linear: testContext.getExtension('OES_texture_float_linear'),
+                //    EXT_color_buffer_float: testContext.getExtension('EXT_color_buffer_float'),
+                //    OES_texture_float_linear: testContext.getExtension('OES_texture_float_linear'),
                 };
                 features = this.getFeatures();
             }
@@ -17381,8 +17381,8 @@ __MAIN_RESULT__;
 
             initExtensions() {
                 this.extensions = {
-                    EXT_color_buffer_float: this.context.getExtension('EXT_color_buffer_float'),
-                    OES_texture_float_linear: this.context.getExtension('OES_texture_float_linear'),
+               //     EXT_color_buffer_float: this.context.getExtension('EXT_color_buffer_float'),
+               //     OES_texture_float_linear: this.context.getExtension('OES_texture_float_linear'),
                 };
             }
 
@@ -17828,8 +17828,8 @@ __MAIN_RESULT__;
             }
 
             destroyExtensions() {
-                this.extensions.EXT_color_buffer_float = null;
-                this.extensions.OES_texture_float_linear = null;
+            //    this.extensions.EXT_color_buffer_float = null;
+           //     this.extensions.OES_texture_float_linear = null;
             }
 
             toJSON() {
