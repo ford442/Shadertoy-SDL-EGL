@@ -1363,7 +1363,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_swap_buffers_with_damag
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_cuda_event");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
         
+  
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
