@@ -1283,7 +1283,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_spirv_extensions");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
