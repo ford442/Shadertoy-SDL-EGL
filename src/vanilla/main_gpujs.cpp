@@ -114,6 +114,10 @@ T=true;
 
 extern "C"{
 
+void gpu_js{
+setup_js();
+}
+
 }
 
 EM_JS(void,js_main,(),{
