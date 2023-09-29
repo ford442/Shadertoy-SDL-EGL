@@ -164,7 +164,7 @@ slt=tem.innerHTML;
 },16)
 ;});
 document.getElementById('startBtn').addEventListener('click',function(){
-normalResStart();
+ccall("gpu_js");
 });
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
