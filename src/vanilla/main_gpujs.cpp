@@ -67,7 +67,7 @@ var blank$=Math.max((((w$-h$)*1)/2),0);
 var nblank$=Math.max((((h$-w$)*1)/2),0);
 la=h$*h$;
 for(var i=0;i<33;i++){
-var j=i;
+var j=i+1;
 var memr=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Uint8Array($H,point"+j+",memr);");  //
@@ -82,7 +82,7 @@ document.getElementById("mv").play();
 
 var $$1=t(vv);
 for (i=0;i<33;i++){
-var j=i;
+var j=i+1;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Uint8Array($H,point"+j+",memr);$"+j+".set($$1);");
@@ -93,7 +93,7 @@ var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 // la=h$*h$;
 for(var i=0;i<33;i++){
-var j=i;
+var j=i+1;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;var $"+j+"=new Uint8Array($H,point"+j+",memr);");  //
