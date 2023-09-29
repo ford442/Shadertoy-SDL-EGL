@@ -49,7 +49,7 @@ var blankS=Math.max((((wS-hS)*1)/2),0);
 var nblankS=Math.max((((hS-wS)*1)/2),0);
 la=hS*hS;
 for(var i=0;i<33;i++){
-var j=i+1;
+var j=i;
 var memr=(Math.floor((i*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;let bfS"+j+"=new Uint8Array(SzH,point"+j+",memr);");  //
@@ -63,7 +63,7 @@ var d=S();if(d)d();d=S();function S(){
 document.getElementById("mv").play();
 var SS1=t(vv);
 for (i=0;i<33;i++){
-var j=i+1;
+var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;bfS"+j+"=new Uint8Array(SzH,point"+j+",memr);bfS"+j+".set(SS1);");
@@ -74,7 +74,7 @@ var blankS=Math.max((((wS-hS)*0)/2),0);
 var nblankS=Math.max((((hS-wS)*0)/2),0);
 // la=hS*hS;
 for(var i=0;i<33;i++){
-var j=i+1;
+var j=i;
 var memr=(Math.floor((j*la)/65536)+1)*65536;
 var mem=((Math.floor(memr/4))+1)*4;
 eval("var point"+j+"=mem;bfS"+j+"=new Uint8Array(SzH,point"+j+",memr);");  //
