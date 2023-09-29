@@ -847,11 +847,11 @@ boost::compute::double_ hi=0.0;
 }mouse;
 
 inline struct{
-short int csswi=0;
-short int csshi=0;
+int csswi=0;
+int csshi=0;
 }css;
 
-short int Size=0;
+int Size=0;
 int tmm=166666000;
 int tmm2=1000;
 inline struct timespec rem;
@@ -934,7 +934,7 @@ return EM_TRUE;
 }
 
 // static void i_iSize_set(boost::int_t<24>::fast set){
-static EM_BOOL i_iSize_set(short int set){
+static EM_BOOL i_iSize_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
 i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
@@ -1153,7 +1153,7 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
 // emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
-Size=(short int)mouse.hi;
+Size=(int)mouse.hi;
 i_iSize_set(Size);
 u_iSize_set(float(mouse.hi));
 i_view.at(0,0)=0;
@@ -1260,7 +1260,7 @@ display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 //   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
-Size=(short int)mouse.hi;
+Size=(int)mouse.hi;
 // Size=css.csshi;
 i_iSize_set(Size);
 // u_iSize_set(mouse.hi);
