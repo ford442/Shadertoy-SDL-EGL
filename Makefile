@@ -45,7 +45,7 @@ NAMESTAMP := $(subst DTE,$(TIMESTAMP),$(NAMESTAMP))
 vanilla_test_gpujs:
 	 em++ src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3221225472 \
-	 -sEXPORTED_FUNCTIONS=["_main","_gpu_js"] \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_gpu_js"] \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 vanilla_opt_gpujs:
