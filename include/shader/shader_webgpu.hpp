@@ -1461,15 +1461,15 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
-glDetachShader(S1.at(0,0,0),frag);
-glDetachShader(S1.at(0,0,0),vtx);
+// glDetachShader(S1.at(0,0,0),frag);
+// glDetachShader(S1.at(0,0,0),vtx);
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
 bin.at(0,0)=GLbin;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
-glSampleCoverage(1.0f,GL_FALSE);
+// glSampleCoverage(1.0f,GL_FALSE);
     // draw framebuffer
 glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
@@ -1488,7 +1488,6 @@ glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,i_size.at(0,0),i_size.at(0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
-
     //  non multisampled color renderbuffer (12,12,12,12 bit?)
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
@@ -1496,8 +1495,6 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_RGB10_A2UI,i_size.at(0,0),i_size.at(0,0
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT4,GL_RENDERBUFFER,TX.at(2,2,0));
-
-  
 //  glBindFramebuffer(GL_FRAMEBUFFER,0);
    //  non multisampled depth renderbuffer  (GL_DEPTH_COMPONENT24)
 glGenRenderbuffers(1,&TX.at(0,0,2));
@@ -1539,7 +1536,7 @@ glGenFramebuffers(1,&TX.at(1,0,0));
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,i_size.at(1,0),i_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGBA32F,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,i_size.at(1,0),i_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
