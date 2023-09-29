@@ -114,7 +114,7 @@ T=true;
 
 extern "C"{
 
-void gpu_js{
+void gpu_js(){
 setup_js();
 }
 
