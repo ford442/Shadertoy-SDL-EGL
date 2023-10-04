@@ -841,7 +841,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
-boost::uint_t<16>::least VBO,EBO,VCO;
+boost::uint_t<24>::least VBO,EBO,VCO;
 }shad;
 
 inline struct{
