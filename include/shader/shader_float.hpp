@@ -177,7 +177,7 @@ EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1,
-EGL_COVERAGE_SAMPLES_NV,4,
+EGL_COVERAGE_SAMPLES_NV,8,
 EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
@@ -277,20 +277,17 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_ALL_EXTENSIONS : enable\n"
-"#extension all_spir_v_extensions : enable\n"
+"#extension GL_all_spir_v_extensions : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
 "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-
-"#pragma (fastmath off)\n"
-"#pragma optionNV(fastmath off)\n"
-
-"#pragma (fastprecision off)\n"
-"#pragma optionNV(fastprecision off)\n"
-
+"#pragma (fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma (fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n";
 /*
 "#pragma STDC(FP_CONTRACT ON)\n"
 "#undef HW_PERFORMANCE\n"
@@ -316,22 +313,28 @@ static inline char cm_hdr_src[2300]=
 "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-*/
 "precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
+"precision highp sampler3D;"
+"precision highp sampler2D;"
 "precision highp samplerCube;"
 "precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
 "precision mediump sampler2DArrayShadow;\n";
+*/
 
 static inline char vrt_bdy_src[100]=
-"precision mediump int;\n"
+"precision highp float;\n"
+"precision highp int;\n"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
 "precision mediump int;\n"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
