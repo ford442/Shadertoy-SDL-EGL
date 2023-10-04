@@ -324,7 +324,7 @@ static inline char cm_hdr_src[2300]=
 "precision mediump sampler2DArrayShadow;\n";
 */
 
-static inline char vrt_bdy_src[100]=
+static inline char vrt_bdy_src[420]=
 "precision highp float;\n"
 "precision highp int;\n"
 "precision lowp sampler2D;"
