@@ -1151,8 +1151,8 @@ return EM_TRUE;
 }
 
 boost::function<EM_BOOL()>swap=[](){
-  // emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_get_canvas_element_size("#zcanvas",&mouse.wi,&mouse.hi);
+emscripten_get_element_css_size("zcanvas",&mouse.wi,&mouse.hi);
+  // emscripten_get_canvas_element_size("#zcanvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
 Size=(int)mouse.hi;
