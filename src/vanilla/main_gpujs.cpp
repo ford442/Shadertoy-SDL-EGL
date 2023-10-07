@@ -2,7 +2,7 @@
 
 EM_JS(void,setup_js,(),{
   
-// "use strict";
+"use strict";
 
 window.scroll(0,0);
 let Shigh=document.getElementById('canvasSize');
