@@ -901,7 +901,6 @@ private:
 
 Compile compile;
 
-
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
 char * vrt_bdy=vrt_bdy_src;
@@ -1152,10 +1151,10 @@ return EM_TRUE;
 }
 
 boost::function<EM_BOOL()>swap=[](){
-emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+  // emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
+emscripten_get_canvas_element_size("#zcanvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
-// emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 Size=(int)mouse.hi;
 i_iSize_set(Size);
 u_iSize_set(float(mouse.hi));
