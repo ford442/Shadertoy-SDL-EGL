@@ -51,6 +51,8 @@ vanilla_test_gpujs:
 vanilla_opt_gpujs:
 	 em++ $(STDS) $(COMMON_FLAGS) src/vanilla/main_gpujs.cpp -c
 	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) main_gpujs.o -o $(NAMESTAMP) \
+	 -sDEFAULT_LIBRARY_FUNCS_TO_INCLUDE='$ccall' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_gpu_js"] \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 video_resurection_jebus:
