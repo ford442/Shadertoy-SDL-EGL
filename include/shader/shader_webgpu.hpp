@@ -1277,7 +1277,8 @@ mms.at(1,1)=0.5*t_size.at(0,0);
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 
 // eglBindAPI(EGL_OPENGL_ES_API);
-// eglBindAPI(0);
+// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(0);
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
