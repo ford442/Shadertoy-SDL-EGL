@@ -355,7 +355,8 @@ EM_BOOL ms_l,clk_l;
 
 using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<16>::least>;
+// using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using shad_tensor=boost::numeric::ublas::tensor<GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
