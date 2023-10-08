@@ -324,7 +324,6 @@ static inline char cm_hdr_src[2300]=
 */
 
 static inline char vrt_bdy_src[420]=
-"precision highp float;\n"
 "precision highp int;\n"
 "precision lowp sampler2D;"
 "precision lowp samplerCube;"
