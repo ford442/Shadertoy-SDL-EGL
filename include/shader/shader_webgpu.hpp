@@ -339,7 +339,7 @@ static inline char frg_hdr_src[1000]=
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
 "uniform vec4 iMouse;uniform sampler2D iChannel0;uniform sampler2D iChannel1;uniform sampler2D iChannel2;"
 "uniform sampler2D iChannel3;"
-"out vec4 fragColor;\n";
+"flat out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
