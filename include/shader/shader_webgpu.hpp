@@ -221,8 +221,6 @@ void WGPU_Start();
 
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
 
-static void Rend();
-
 extern "C"{
 
 EM_BOOL str();
