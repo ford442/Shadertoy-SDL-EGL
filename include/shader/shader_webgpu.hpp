@@ -1047,10 +1047,7 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return EM_TRUE;
 };
 
-static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
-static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
-
-static inline boost::function<EM_BOOL()>Unifrm=[](){
+static inline boost::function<EM_BOOL()>Unifrmb=[](){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1084,10 +1081,8 @@ clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 glUniform1f(uni_tme,std::real(std::complex<double>(wasm_f64x2_extract_lane(sse2.at(0,0),0),0.0)));
 // glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 // glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -1144,12 +1139,18 @@ eglSwapBuffers(display,surface);
 return EM_TRUE;
 };
 
-static EM_BOOL Rend()noexcept{
+static EM_BOOL Rendb()noexcept{
 RendarA();
 Unifrm();
 RendarB();
 return EM_TRUE;
 }
+
+static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
+static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
+static inline boost::function<EM_BOOL()>Rend=boost_swap_impl::bind_front(Rendb);
+static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
+
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
