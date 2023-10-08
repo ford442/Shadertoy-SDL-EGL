@@ -283,13 +283,10 @@ static inline char cm_hdr_src[2300]=
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-
-"#pragma (fastmath off)\n"
-"#pragma optionNV(fastmath off)\n"
-
-"#pragma (fastprecision off)\n"
-"#pragma optionNV(fastprecision off)\n"
-
+"#pragma (fastmath on)\n"
+"#pragma optionNV(fastmath on)\n"
+"#pragma (fastprecision on)\n"
+"#pragma optionNV(fastprecision on)\n";
 /*
 "#pragma STDC(FP_CONTRACT ON)\n"
 "#undef HW_PERFORMANCE\n"
@@ -315,7 +312,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-*/
 "precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;"
@@ -324,13 +320,19 @@ static inline char cm_hdr_src[2300]=
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
 "precision mediump sampler2DArrayShadow;\n";
+*/
 
-static inline char vrt_bdy_src[100]=
-"precision mediump int;\n"
+static inline char vrt_bdy_src[420]=
+"precision highp float;\n"
+"precision highp int;\n"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
 "precision mediump int;\n"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
