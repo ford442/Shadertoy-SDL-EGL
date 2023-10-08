@@ -286,7 +286,9 @@ static inline char cm_hdr_src[2300]=
 "#pragma (fastmath on)\n"
 "#pragma optionNV(fastmath on)\n"
 "#pragma (fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n";
+"#pragma optionNV(fastprecision on)\n"
+"precision highp float;\n";
+
 /*
 "#pragma STDC(FP_CONTRACT ON)\n"
 "#undef HW_PERFORMANCE\n"
@@ -312,7 +314,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-"precision highp float;\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;"
 "precision mediump sampler2DArray;precision mediump sampler2DShadow;"
