@@ -174,7 +174,7 @@ EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,24,
 EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
-EGL_SAMPLE_BUFFERS,1,
+EGL_SAMPLE_BUFFERS,4,
 // EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
 EGL_COVERAGE_SAMPLES_NV,4,
 EGL_SAMPLES,4,
@@ -195,7 +195,9 @@ static inline boost::function<const register float()>gFm1;
 
 static inline boost::function<const register float()>gF0;
 
-static inline boost::function<EM_BOOL()>Rendar;
+static inline boost::function<EM_BOOL()>RendarA;
+static inline boost::function<EM_BOOL()>RendarB;
+static inline boost::function<EM_BOOL()>Rend;
 
 static inline boost::function<EM_BOOL()>Unifrm;
 
@@ -1007,7 +1009,7 @@ glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
 return EM_TRUE;
 }
 
-static inline boost::function<EM_BOOL()>RendarA=[](){
+static inline boost::function<EM_BOOL()>RendarAb=[](){
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
@@ -1029,7 +1031,7 @@ glBlitFramebuffer(0,0,i_size.at(1,0),i_size.at(1,0),0,0,i_size.at(0,1),i_size.at
 return EM_TRUE;
 };
 
-static inline boost::function<EM_BOOL()>RendarB=[](){
+static inline boost::function<EM_BOOL()>RendarBb=[](){
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // multisampled
@@ -1046,6 +1048,9 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 // glFlush();
 return EM_TRUE;
 };
+
+static inline boost::function<EM_BOOL()>RendarA=boost::bind_front(RendarAb);
+static inline boost::function<EM_BOOL()>RendarB=boost::bind_front(RendarBb);
 
 static inline boost::function<EM_BOOL()>Unifrm=[](){
 uni_i.at(0,0)++;
