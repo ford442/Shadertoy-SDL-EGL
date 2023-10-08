@@ -206,7 +206,7 @@ h=document.getElementById("ihig").innerHTML;
 ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
 let cnP=document.getElementById("cp");
-let cnPB=document.getElementById("cpB");
+// let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
@@ -303,13 +303,13 @@ var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
 function Ra(){
-flP.setAttribute("style","transform:scaleX(-1);");
-flP.setAttribute("style","transform:scaleY(1);");
+flP.setAttribute("style","transform:scaleX(1);");
+cnP.setAttribute("style","transform:scaleY(1);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-flP.setAttribute("style","transform: scaleX(1);");
-flP.setAttribute("style","transform: scaleY(-1);");
+flP.setAttribute("style","transform: scaleX(-1);");
+cnP.setAttribute("style","transform: scaleY(-1);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
  function rrra(rta){
