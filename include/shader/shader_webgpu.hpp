@@ -1047,8 +1047,8 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 return EM_TRUE;
 };
 
-static inline boost::function<EM_BOOL()>RendarA=boost::bind_front(RendarAb);
-static inline boost::function<EM_BOOL()>RendarB=boost::bind_front(RendarBb);
+static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
+static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
 
 static inline boost::function<EM_BOOL()>Unifrm=[](){
 uni_i.at(0,0)++;
