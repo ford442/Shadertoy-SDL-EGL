@@ -4,7 +4,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 
 #define _XOPEN_SOURCE 700
-
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD -1
 
@@ -19,7 +18,6 @@
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
 #define _POSIX_REGEXP	1
-
 
 #include "../../include/shader/intrins.hpp"
 #include "../../include/shader/gl.hpp"
@@ -50,11 +48,11 @@ extern "C"{
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 window.scroll(0,0);
-let Shigh=document.getElementById('canvasSize');
+let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
-Shigh.innerHTML=winSize;
+$high.innerHTML=winSize;
 const scanvas=document.createElement('canvas');
-scanvas.id='zcanvas';
+scanvas.id='gcanvas';
 scanvas.imageRendering='auto';
 scanvas.width=winSize;
 scanvas.height=winSize;
@@ -69,28 +67,20 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
-const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
+const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
 const context = scanvas.getContext('webgl2',contxVars);
-console.log(context.getParameter(context.VERSION));
-console.log(context.getParameter(context.SHADING_LANGUAGE_VERSION));
-
-context.getExtension('ALL_EXTENSIONS');
-context.getExtension('KHR_no_error');
-context.getExtension('REGAL_enable');
-context.getExtension('ARB_spirv_extensions');
-context.getExtension('ARB_ES2_compatibility');
-context.getExtension('ARB_direct_state_access');
-context.getExtension('EXT_color_buffer_float');
-context.getExtension('ARB_color_buffer_float');
-context.getExtension('ARB_color_buffer_half_float');
-context.getExtension('ARB_texture_float');
-context.getExtension('ARB_texture_half_float');
-
+context.getExtension('GL_ALL_EXTENSIONS');
+context.getExtension('GL_KHR_no_error');
+context.getExtension('GL_REGAL_enable');
+context.getExtension('GL_ARB_spirv_extensions');
+context.getExtension('GL_ARB_ES2_compatibility');
+context.getExtension('GL_ARB_direct_state_access');
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+
 const gpu=new GPUX({mode:'gpu',webGl:context });
-var Sshds=[];
+var $shds=[];
 
 function normalResStart(){
 document.getElementById('shut').innerHTML=2;
@@ -111,7 +101,7 @@ function shds(xml){
 const sparser=new DOMParser();
 let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
 let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
-Sshds[0]=preList.length;
+$shds[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxts=preList[i].href;
 var Self=location.href;
@@ -120,14 +110,14 @@ txxts=txxts.replace(Self,"");
 var x=document.getElementById("sh1");
 var option=document.createElement("option");
 option.text=txxts;
-Sshds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
+$shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
 option.value=txxts;
 x.add(option);
 }
 }
  
 function rrun(){
-let shadesNum=Sshds[0];
+let shadesNum=$shds[0];
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum],{async:true})+5;
 };
@@ -135,7 +125,7 @@ let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
-document.getElementById('path').innerHTML=Sshds[randShade];
+document.getElementById('path').innerHTML=$shds[randShade];
 }else{
 document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
 }
@@ -177,20 +167,20 @@ dxhttp.send();
 let tem=document.getElementById('tim');
 let ban=document.getElementById('menuBtn');
 let sfr=document.getElementById('slideframe');
-var Slt;
-function grabSlt(){Slt=Math.round(Slt);}
-Slt=tem.innerHTML;grabSlt();
+var $lt;
+function grab$lt(){$lt=Math.round($lt);}
+$lt=tem.innerHTML;grab$lt();
 let slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
-grabSlt();var slt=Slt/1000;slt=Math.round(slt);
+grab$lt();var slt=$lt/1000;slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
 let tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
 step:[0.25],labels:false,tooltip:true,scale:false,});
-grabSlt();slt=(Slt/1000);slt=slt*100;slt=Math.round(slt);
+grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
 slt=slt/100;tsl.setValues(slt);
 document.getElementById('menu').addEventListener('click',function(){
-var Sll=tsl.getValue();Sll=Sll*100;Sll=Math.round(Sll);Sll=Sll/100;Sll=(Sll*1000);tem.innerHTML=Sll;
+var $ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
 });
 setTimeout(function(){slt=tem.innerHTML;},8);},16);});
 const pnnl=document.body;
