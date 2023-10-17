@@ -69,12 +69,19 @@ scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
 const contxVars={preferLowPowerToHighPerformance:false,logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,lowLatency:true,powerPreference:'high-performance',antialias:false};
 const context = scanvas.getContext('webgl2',contxVars);
-context.getExtension('GL_ALL_EXTENSIONS');
+
+context.getExtension('ALL_EXTENSIONS');
 context.getExtension('GL_KHR_no_error');
 context.getExtension('GL_REGAL_enable');
 context.getExtension('GL_ARB_spirv_extensions');
 context.getExtension('GL_ARB_ES2_compatibility');
 context.getExtension('GL_ARB_direct_state_access');
+context.getExtension('GL_EXT_color_buffer_float');
+context.getExtension('GL_ARB_color_buffer_float');
+context.getExtension('GL_ARB_color_buffer_half_float');
+context.getExtension('GL_ARB_texture_float');
+context.getExtension('GL_ARB_texture_half_float');
+
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
