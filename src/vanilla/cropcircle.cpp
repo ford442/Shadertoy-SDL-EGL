@@ -143,11 +143,11 @@ EM_JS(void,ma,(),{
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 scanvas.id='zimag';
-scanvas.imageRendering='pixelated';
+scanvas.imageRendering='auto';
 scanvas.width=winSize;
 scanvas.height=winSize;
 scanvas.zoom=1;
-scanvas.scale=1;
+scanvas.scale=1.0;
 scanvas.style.pointerEvents='none';
 scanvas.style.display='block';
 scanvas.style.position='absolute';
@@ -155,7 +155,7 @@ scanvas.style.zIndex='999995';
 scanvas.style.top='0';
 scanvas.style.height='100vh';
 scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(0,0,0,0)';
+scanvas.style.backgroundColor='rgba(0,0,0,0.0)';
 document.getElementById("cp").appendChild(scanvas);
 /*
 const zcanvas=document.createElement('canvas');
@@ -188,12 +188,12 @@ premultipliedAlpha:false,
 willReadFrequently:true,
 lowLatency:true,
 powerPreference:'high-performance',
-// antialias:false
+antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
 
 // const ctxB=zcanvas.getContext('2d',contxVars);
-const gpu=new GPUX({mode:'gpu',webGl:ctx });
+const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
@@ -312,7 +312,7 @@ flP.setAttribute("style","transform: scaleX(-1.0)");
 cnP.setAttribute("style","transform: scaleY(-1.0)");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
- function rrra(rta){
+function rrra(rta){
 cnP.setAttribute("style","transform: rotate("+rta+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
@@ -366,7 +366,7 @@ rottc=((rottc+knb.innerHTML)-360);
 rottc=(rottc+knb.innerHTML);
 }
 rrrc(rottc);
-},rate);
+},rate);// 
 setTimeout(function(){
 $rn();
 },rate);
