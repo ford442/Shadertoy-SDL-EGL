@@ -12,6 +12,8 @@
 #include <EGL/eglext.h>
 #include <GLES3/gl3.h>
 
+#include "include/shader/intrins.hpp"
+
 template<class ArgumentType,class ResultType>
 
 struct unary_function{
