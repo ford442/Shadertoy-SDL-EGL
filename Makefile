@@ -12,7 +12,7 @@ COMMON_FLAGS += -sSIMD=1 -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthrea
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast \
-	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
@@ -31,7 +31,7 @@ LINK_FLAGS += $(LDFLAGS) -sMALLOC=emmalloc -sOFFSCREENCANVAS_SUPPORT=1 -sTEXTDEC
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 -sSUPPORT_BIG_ENDIAN=1 \
 	 --use-preload-plugins --closure 0 --closureFriendly \
-	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
+	 -march=native -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=4294967296 -sINITIAL_MEMORY=3221225472 --output_eol linux -mllvm -mtune=intel -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
