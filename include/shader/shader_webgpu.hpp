@@ -1277,10 +1277,8 @@ mms.at(0,0)=0.5*t_size.at(0,0);
 mms.at(0,1)=0.5*t_size.at(0,0);
 mms.at(1,0)=0.5*t_size.at(0,0);
 mms.at(1,1)=0.5*t_size.at(0,0);
-  
 // eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-
 // eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(0);
@@ -1288,7 +1286,6 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
@@ -1365,10 +1362,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_half_float"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
-  
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_render_shared_exponent");
-   
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_base");
@@ -1379,11 +1374,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
-        
-  
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
+eglBindAPI(EGL_OPENGL_ES_API);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
