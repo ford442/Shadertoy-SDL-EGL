@@ -85,9 +85,8 @@ typedef ResultType result_type;
 
 #include <emscripten/html5.h>
 
-#include "../../glslang/glslang/Public/glslang.h"
+#include "../../glslang/glslang/Public/ShaderLang.h"
 #include "../../glslang/glslang/Include/glslang_c_interface.h"
-
 
 
 #ifndef OPENGL_CORE_PROFILE
@@ -241,7 +240,7 @@ EM_BOOL ml();
 EM_BOOL mr();
 
 }
-using namespace glslang
+
 class Compile{
 
 private:
