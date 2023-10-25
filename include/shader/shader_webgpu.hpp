@@ -276,7 +276,7 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-"#extension GL_ALL_EXTENSIONS : enable\n"
+"#extension GL_EXTENSIONS : enable\n"
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
