@@ -292,7 +292,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp uint)\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
 "#pragma (STDGL all)\n"
-"#pragma optimize("sse4.2");";
+"#pragma optimize(sse4.2)";
 /*
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
