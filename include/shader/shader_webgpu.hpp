@@ -1440,15 +1440,15 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
 // nanoPause();
 eglBindAPI(EGL_OPENGL_API);
   
-glslang::TProgram program;
-glslang::TShader vertexShader(EShLanguage::EShLangVertex);
-glslang::TShader fragmentShader(EShLanguage::EShLangFragment);
+// glslang::TProgram program;
+// glslang::TShader vertexShader(EShLanguage::EShLangVertex);
+// glslang::TShader fragmentShader(EShLanguage::EShLangFragment);
 
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
   
-vertexShader.setStrings(src,2);
+// vertexShader.setStrings(src,2);
 //  vertexShader.compile();
 
 src[0]=cm_hdr;
@@ -1457,7 +1457,7 @@ src[2]=frag_body;
 src[3]=frg_ftr;
   
 boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-fragmentShader.setStrings(src,4);
+// fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 
     eglBindAPI(EGL_OPENGL_ES_API);
