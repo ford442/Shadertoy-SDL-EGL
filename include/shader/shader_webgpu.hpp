@@ -251,11 +251,7 @@ public:
 
 boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 
-    glslang::TProgram program;
-  glslang::TShader vertexShader(EShLanguage::EShLangVertex);
-  vertexShader.setStrings(src);
-  vertexShader.compile();
-  
+
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
@@ -1382,6 +1378,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
+
+
+  
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
@@ -1446,17 +1445,26 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 // nanoPause();
   eglBindAPI(EGL_OPENGL_API);
+        glslang::TProgram program;
+  glslang::TShader vertexShader(EShLanguage::EShLangVertex);
+  glslang::TShader fragmentShader(EShLanguage::EShLangFragment);
 
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+  
+    vertexShader.setStrings(src,2);
+  vertexShader.compile();
+
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
   
 boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-  
+      fragmentShader.setStrings(src,4);
+  fragmentShader.compile();
+
     eglBindAPI(EGL_OPENGL_ES_API);
 
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
