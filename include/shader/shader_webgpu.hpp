@@ -283,17 +283,15 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
-"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-"#pragma (fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
-"#pragma (fastprecision on)\n"
-"#pragma optionNV(fastprecision on)\n"
-"precision highp float;\n";
-
+"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#pragma optionNV(fastmath off)\n"
+"#pragma optionNV(fastprecision off)\n"
+"precision highp float;\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 1\n";
 /*
 "#pragma STDC(FP_CONTRACT ON)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
+
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
