@@ -250,6 +250,12 @@ GLsizei i;
 public:
 
 boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+
+    glslang::TProgram program;
+  glslang::TShader vertexShader(glslang::EShLangVertex);
+  vertexShader.setString(src);
+  vertexShader.compile();
+  
 GLsizei srclens[nsrc];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
