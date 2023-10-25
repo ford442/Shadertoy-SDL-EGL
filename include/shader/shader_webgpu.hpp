@@ -252,7 +252,7 @@ public:
 boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
 
     glslang::TProgram program;
-  glslang::TShader vertexShader(glslang::EShLanguage::EShLangVertex);
+  glslang::TShader vertexShader(EShLanguage::EShLangVertex);
   vertexShader.setString(src);
   vertexShader.compile();
   
