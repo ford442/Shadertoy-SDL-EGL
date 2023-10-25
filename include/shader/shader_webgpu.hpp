@@ -288,16 +288,15 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(fastprecision off)\n"
 "precision highp float;\n"
 "#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n";
+"#define HW_PERFORMANCE 1\n"
+"#pragma (precision highp uint)\n"
+"#pragma STDC(FP_CONTRACT OFF)\n"
+"#pragma (STDGL all)\n";
 /*
-"#pragma STDC(FP_CONTRACT ON)\n"
-
-"#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
-"#pragma (precision highp uint)\n"
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
