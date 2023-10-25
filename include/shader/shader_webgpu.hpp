@@ -355,10 +355,9 @@ static inline char frg_ftr_src[420]=
 
 EM_BOOL ms_l,clk_l;
 
-using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-// using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
-using shad_tensor=boost::numeric::ublas::tensor<GLuint>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+// using shad_tensor=boost::numeric::ublas::tensor<GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
@@ -369,7 +368,8 @@ using rv_tensor=boost::numeric::ublas::tensor<register v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
-using gi_tensor=boost::numeric::ublas::tensor<GLint>;
+// using gi_tensor=boost::numeric::ublas::tensor<GLint>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::int_t<16>::exact>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
