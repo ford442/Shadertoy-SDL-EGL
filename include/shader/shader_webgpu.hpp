@@ -85,8 +85,8 @@ typedef ResultType result_type;
 
 #include <emscripten/html5.h>
 
-#include "glslang/glslang/Include/glslang_c_interface.h"
-#include "glslang/glslang/Public/resource_limits_c.h"
+#include "../../glslang/glslang/Include/glslang_c_interface.h"
+#include "../../glslang/glslang/Public/resource_limits_c.h"
 
 
 #ifndef OPENGL_CORE_PROFILE
