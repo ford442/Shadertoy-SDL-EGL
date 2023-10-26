@@ -1769,7 +1769,7 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glClear(GL_STENCIL_BUFFER_BIT);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
-// eglBindAPI(0);
+eglBindAPI(0);
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
