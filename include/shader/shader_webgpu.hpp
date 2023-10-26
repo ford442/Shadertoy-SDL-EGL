@@ -146,7 +146,7 @@ static constexpr EGLint ctx_att[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,0,
+EGL_CONTEXT_MINOR_VERSION_KHR,2,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -172,7 +172,7 @@ EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 // GL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
+EGL_NATIVE_RENDERABLE,EGL_TRUE,
 // EGL_COLOR_BUFFER_TYPE,EGL_RGBAF_BUFFER,
 // EGL_LUMINANCE_SIZE,32, // available in OpenGL
 EGL_RED_SIZE,32,
@@ -204,7 +204,9 @@ static inline boost::function<const register float()>gFm1;
 static inline boost::function<const register float()>gF0;
 
 static inline boost::function<EM_BOOL()>RendarA;
+
 static inline boost::function<EM_BOOL()>RendarB;
+
 static inline boost::function<EM_BOOL()>Rend;
 
 static inline boost::function<EM_BOOL()>Unifrm;
@@ -299,7 +301,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp uint)\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
 "#pragma (STDGL all)\n"
-"#pragma optimize(sse4.2)";
+"#pragma optimize(avx)";
 /*
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
