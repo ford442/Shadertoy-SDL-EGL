@@ -1209,7 +1209,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-inline char8_t * rd_fl(const char * Fnm){
+const inline char8_t * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
