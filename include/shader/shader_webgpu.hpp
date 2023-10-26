@@ -1163,7 +1163,7 @@ static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
-glFinsh();
+glFinish();
 return EM_TRUE;
 }
 
