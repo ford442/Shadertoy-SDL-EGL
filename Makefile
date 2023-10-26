@@ -24,8 +24,8 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=0 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0 -sGL_MAX_TEMP_BUFFER_SIZE=262144
+GL_FLAGS += -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=3 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=1 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
 LINK_FLAGS += $(LDFLAGS) -sMALLOC=emmalloc -sOFFSCREENCANVAS_SUPPORT=1 -sTEXTDECODER=2 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
@@ -47,13 +47,12 @@ b3_shader_webgpu:
 	 em++ $(STDS) include/shader/egl.cpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o eglh.o -static
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) \
-	 -DINTRINS $(BOOST_FLAGS) -DLIB_WEBGPU \
-	 -DLIB_WEBGPU_CPP20 -o s3029dev.js $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
+	 em++ $(STDS) -o s3029dev.js -DEGLH -DLIB_WEBGPU -DINTRINS -DLIB_WEBGPU_CPP20 \
+	 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --extern-pre-js js/gpujsx.js --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o shader_webgpu.o
 
 b3_shader_2d:
