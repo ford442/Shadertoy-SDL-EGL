@@ -1024,6 +1024,7 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
+eglBindAPI(0);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
@@ -1046,6 +1047,7 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
+eglBindAPI(EGL_OPENGL_API);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // multisampled
