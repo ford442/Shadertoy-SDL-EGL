@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 
 // #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 // #include <webgl/webgl2.h>  //  much better performance without
