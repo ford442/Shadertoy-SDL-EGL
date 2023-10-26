@@ -1717,7 +1717,6 @@ glUniform1i(smp_chn[3],3);
 // WGPU_Start();
 // usleep(125);
 
-
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -1733,7 +1732,7 @@ i_date.at(0,1)=mn;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
+glUniform3f(uni_res,8192.0f,8192.0f,gpu.gF());
 glUniform3f(uni_res,float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[0],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[1],float_size.at(0,0),float_size.at(0,0),gpu.gF());
