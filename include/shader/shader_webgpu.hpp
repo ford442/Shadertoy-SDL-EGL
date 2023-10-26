@@ -156,8 +156,8 @@ EGL_NONE,EGL_NONE
 static constexpr EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
@@ -167,12 +167,12 @@ EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
+// EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 // GL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-EGL_NATIVE_RENDERABLE,EGL_TRUE,
+// EGL_NATIVE_RENDERABLE,EGL_TRUE,
 // EGL_COLOR_BUFFER_TYPE,EGL_RGBAF_BUFFER,
 // EGL_LUMINANCE_SIZE,32, // available in OpenGL
 EGL_RED_SIZE,32,
@@ -301,7 +301,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp uint)\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
 "#pragma (STDGL all)\n"
-"#pragma optimize(avx)";
+"#pragma optimize(avx)\n";
 /*
 "#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
@@ -335,7 +335,7 @@ static inline char vrt_bdy_src[420]=
 "precision highp int;\n"
 "precision lowp sampler2D;"
 "precision lowp samplerCube;"
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 static inline char frg_hdr_src[1000]=
 "precision mediump int;\n"
@@ -1048,8 +1048,8 @@ return EM_TRUE;
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
 eglBindAPI(EGL_OPENGL_API);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -1158,7 +1158,9 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
+
 static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
+
 static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
 
 static EM_BOOL Rend()noexcept{
@@ -1207,7 +1209,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-inline char * rd_fl(const char * Fnm){
+inline char8_t * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1222,9 +1224,9 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char *>(malloc((length+1)*sizeof(char)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
