@@ -1260,7 +1260,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=rd_fl(Fnm);
+const char * frag_body=(char*)rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
