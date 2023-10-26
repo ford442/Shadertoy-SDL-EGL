@@ -1143,17 +1143,16 @@ eglSwapBuffers(display,surface);
 return EM_TRUE;
 };
 
+static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
+static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
+static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
+
 static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
 return EM_TRUE;
 }
-
-static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
-static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
-static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
-
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
