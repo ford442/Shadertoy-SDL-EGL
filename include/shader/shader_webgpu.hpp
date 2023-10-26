@@ -85,9 +85,8 @@ typedef ResultType result_type;
 
 #include <emscripten/html5.h>
 
-#include "../../glslang/glslang/Public/ShaderLang.h"
-#include "../../glslang/glslang/Include/glslang_c_interface.h"
-
+// #include "../../glslang/glslang/Public/ShaderLang.h"
+// #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
