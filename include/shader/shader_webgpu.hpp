@@ -1163,7 +1163,7 @@ static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
-// glFlush();
+glFinsh();
 return EM_TRUE;
 }
 
@@ -1197,7 +1197,7 @@ u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUseProgram(0);
-glFlush();
+// glFlush();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
@@ -1342,7 +1342,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_create_context_robustness");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
