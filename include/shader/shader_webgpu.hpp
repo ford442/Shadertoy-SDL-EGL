@@ -1,7 +1,5 @@
 #include <boost/cstdfloat.hpp>
-
 #include "../../include/shader/defs.hpp"
-
 // #include <stdio.h>
 #include <stdlib.h>
 #include <cstdint>
@@ -28,16 +26,13 @@ typedef ResultType result_type;
 
 #include "../../include/shader/boost_defs.hpp"
 // #include "../../include/shader/ext_boost_defs.hpp"
-
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
-
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/predef/other/endian.h>
 #include <boost/lambda/lambda.hpp>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
@@ -47,14 +42,11 @@ typedef ResultType result_type;
 #include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/thread/thread.hpp>
-
 // #include <boost/context/fiber_fcontext.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/fiber/all.hpp>
 #include <thread>
-
 #include <complex>
-
 // #define BOOST_HAS_TR1
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/context/detail/tuple.hpp>
@@ -77,14 +69,11 @@ typedef ResultType result_type;
 #include <emscripten.h>
 // #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
-
 #include "../../include/shader/intrins.hpp"
 // #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
-
 #include <emscripten/html5.h>
-
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
@@ -110,7 +99,6 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MAX 1.0
 
 static constexpr EGLint numSamples=4;
-
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=4.0f;
 static constexpr float multisampleFramef=1.0f;
@@ -120,7 +108,6 @@ static constexpr float renderf=1.0f;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-
   // Google Colab
 /*
 If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
@@ -129,7 +116,6 @@ the values of the components are directly proportional to the perceived brightne
 This means that the colors in the image will be misrepresented,
 and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
 */
-
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
@@ -162,25 +148,25 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-// EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
+EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
 // EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 // GL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
-// EGL_COLOR_BUFFER_TYPE,EGL_RGBAF_BUFFER,
+// EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 // EGL_LUMINANCE_SIZE,32, // available in OpenGL
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,8,
+EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 // EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
@@ -286,24 +272,27 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
+"#pragma (STDGL all)\n"
+"#pragma optionNV(STDGL all)\n"
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
 "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
+"#extension EGL_HI_colorformats : enable\n"
+"#extension EGL_KHR_gl_colorspace : enable\n"
 "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
-"#pragma optionNV(fastmath off)\n"
-"#pragma optionNV(fastprecision off)\n"
+"#extension EGL_EXT_pixel_format_float : enable\n"
 "precision highp float;\n"
 "#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
-"#pragma (precision highp uint)\n"
-"#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma (STDGL all)\n"
-"#pragma optimize(avx)\n";
+"#define HW_PERFORMANCE 1\n";
 /*
-"#pragma optionNV(STDGL all)\n"
+"#pragma optionNV(fastmath off)\n"
+"#pragma optionNV(fastprecision off)\n"
+"#pragma (precision highp uint)\n"
+"#pragma optimize(avx)\n"
+"#pragma STDC(FP_CONTRACT OFF)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
