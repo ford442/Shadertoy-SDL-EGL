@@ -119,7 +119,7 @@ and the image will not be as accurate as it would be if it were in the original 
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
@@ -158,9 +158,9 @@ EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 // GL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
-// EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
-// EGL_LUMINANCE_SIZE,32, // available in OpenGL
+EGL_NATIVE_RENDERABLE,EGL_TRUE,
+EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
+EGL_LUMINANCE_SIZE,0, // available in OpenGL
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
@@ -1256,7 +1256,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -1381,6 +1381,16 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
+
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_wait_sync");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_OES_texture_external");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_image_native_buffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_recordable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_framebuffer_target");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_blob_cache");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_fence_sync");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync");
+    
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
