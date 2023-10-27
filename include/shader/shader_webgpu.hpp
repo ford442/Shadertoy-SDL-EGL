@@ -283,7 +283,8 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
-"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "precision highp float;\n"
 "#undef HW_PERFORMANCE\n"
@@ -1342,6 +1343,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_lin
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_gl_colorspace_display_p3_passthrough");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader5");
