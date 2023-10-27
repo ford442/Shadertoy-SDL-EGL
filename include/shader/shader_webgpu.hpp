@@ -1676,7 +1676,7 @@ glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
 glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
-*/
+
     // texture
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
@@ -1727,7 +1727,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 // WGPU_Start();
 // usleep(125);
-
+*/
   // date/time
 const time_t timE=time(0);
 struct tm *datE=localtime(&timE);
@@ -1749,10 +1749,12 @@ glUniform3f(smp_chn_res[0],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[1],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[2],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),gpu.gF());
+  /*
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
+  */
 glUniform1i(uni_fps,60.0);
 mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=float_size.at(0,0)*0.5;
