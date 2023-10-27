@@ -276,6 +276,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma (STDGL all)\n"
 "#pragma optionNV(STDGL all)\n"
 "#extension all_spir_v_extensions : enable\n"
+"#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
 "#extension GL_REGAL_enable : enable\n"
@@ -1384,7 +1385,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
-
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_wait_sync");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_OES_texture_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_image_native_buffer");
@@ -1393,7 +1393,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_framebuffer_target"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_blob_cache");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_fence_sync");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync");
-    
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_YUV_target");
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
