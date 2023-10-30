@@ -108,7 +108,9 @@ static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
 static constexpr float renderf=1.0f;
 
-gbm_device *device = gbm_create_device(NULL);
+static struct gbm_device *gbmDevice;
+static struct gbm_surface *gbmSurface;
+
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -1233,6 +1235,7 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
+
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1281,6 +1284,8 @@ emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
 emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 Size=(int)mouse.hi;
 // Size=css.csshi;
+gbm_device *GBMdevice=gbm_create_device(NULL);
+gbmSurface=gbm_surface_create(gbmDevice,Size,Size,GBM_FORMAT_ARGB8888,GBM_BO_USE_RENDERING|GBM_BO_USE_LINEAR);
 int_size_set(Size);
 // float_size_set(mouse.hi);
 float_size_set(float(mouse.hi));
