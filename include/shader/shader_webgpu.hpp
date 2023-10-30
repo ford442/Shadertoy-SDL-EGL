@@ -77,7 +77,7 @@ typedef ResultType result_type;
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
-#include <gbm.h>
+#include "/usr/include/gbm.h"
 
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
