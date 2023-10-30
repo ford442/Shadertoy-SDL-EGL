@@ -77,6 +77,8 @@ typedef ResultType result_type;
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
+#include <gbm.h>
+
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
 #endif
@@ -105,6 +107,8 @@ static constexpr float multisampleFramef=1.0f;
 static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
 static constexpr float renderf=1.0f;
+
+gbm_device *device = gbm_create_device(NULL);
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
