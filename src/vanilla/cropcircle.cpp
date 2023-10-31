@@ -58,18 +58,37 @@ EGLContext contextegl;
 EGLSurface surface;
 EGLint config_size,major,minor;
 
-const EGLint anEglCtxAttribs2[]={
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,0,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
+static constexpr EGLint ctx_att[]={
+// EGL_CONTEXT_MAJOR_VERSION_KHR,2,
+// EGL_CONTEXT_MINOR_VERSION_KHR,0,
+EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,2,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-//   EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE,EGL_NONE
 };
 
-static const EGLint attribut_list[]={
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+
+static constexpr EGLint att_lst2[]={ 
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+  // Google Colab
+/*
+If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
+This is because the BT.2020 color space is a non-linear color space, and when it is set to linear,
+the values of the components are directly proportional to the perceived brightness or lightness of the color.
+This means that the colors in the image will be misrepresented,
+and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
+*/
+// EGL_GL_COLORSPACE_LINEAR_KHR, 
+// EGL_GL_COLORSPACE_SRGB_KHR,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
+// EGL_GL_COLORSPACE_KHR,EGL_BACK_BUFFER,
 EGL_NONE,EGL_NONE
 };
 
@@ -384,8 +403,8 @@ dsd=true;
 
 int main(){
 
-ma();
+
 emsc();
- 
+ ma();
 return 1;
 }
