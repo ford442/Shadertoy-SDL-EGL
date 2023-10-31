@@ -203,11 +203,12 @@ emscripten_webgl_enable_extension(ctx,"EGL_ANDROID_native_fence_sync");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(ctx,"OES_EGL_image_external");
 emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
   */
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+
 glDisable(GL_DITHER);
 GLuint buffer,Rbuffer,Fbuffer;
 glGenFramebuffers(1,&Fbuffer);
