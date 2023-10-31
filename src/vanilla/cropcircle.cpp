@@ -1,10 +1,7 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
 EGLConfig eglconfig=NULL;
-EGLDisplay display;
-EGLContext contextegl;
-EGLSurface surface;
-EGLint config_size,major,minor;
+
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EmscriptenWebGLContextAttributes attr;
 
@@ -194,7 +191,7 @@ glBindBuffer(GL_RENDERBUFFER, 0);
 glViewport(0,0,GLint(Size),GLint(Size));
 }
 
-void emscA(int leng,float *ptr){
+void emscA(){
 emscripten_get_element_css_size("zimag",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
