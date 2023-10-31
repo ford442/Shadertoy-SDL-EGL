@@ -43,7 +43,7 @@ b3_cropcircle:
 	 em++ $(STDS) -c src/vanilla/cropcircle.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o cc001.js $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
 	 $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
-	 -sEXPORTED_FUNCTIONS='["_main","_nano","_rotat"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_nano","_rotat","_emem"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js gpujsx.js cropcircle.o
 
 all: b3_cropcircle
