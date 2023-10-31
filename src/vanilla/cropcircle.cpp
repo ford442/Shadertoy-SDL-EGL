@@ -195,7 +195,7 @@ void emscA(){
 emscripten_get_element_css_size("zimag",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
-eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_API);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
