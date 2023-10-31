@@ -58,7 +58,7 @@ EGLContext contextegl;
 EGLSurface surface;
 EGLint config_size,major,minor;
 
-static constexpr EGLint ctx_att[]={
+static constexpr EGLint anEglCtxAttribs2[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
@@ -70,7 +70,7 @@ EGL_NONE,EGL_NONE
 };
 
 
-static constexpr EGLint att_lst2[]={ 
+static constexpr EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
   // Google Colab
 /*
