@@ -1,3 +1,5 @@
+#include <boost/cstdfloat.hpp>
+
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgl.h>
