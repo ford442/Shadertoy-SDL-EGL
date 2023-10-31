@@ -205,11 +205,12 @@ emscripten_webgl_enable_extension(ctx,"OES_EGL_image_external");
 emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glDisable(GL_DITHER);
   */
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 
-glDisable(GL_DITHER);
+
 GLuint buffer,Rbuffer,Fbuffer;
 glGenFramebuffers(1,&Fbuffer);
 glGenRenderbuffers(1,&Rbuffer);
