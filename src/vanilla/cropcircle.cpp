@@ -101,6 +101,7 @@ eglInitialize(display,&major,&minor);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
 emscripten_webgl_make_context_current(ctx);
+  /*
 emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
@@ -202,6 +203,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_ANDROID_native_fence_sync");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(ctx,"OES_EGL_image_external");
 emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
+  */
 surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
 eglMakeCurrent(display,surface,surface,contextegl);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
