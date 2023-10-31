@@ -1625,8 +1625,7 @@ glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,float_size.at(0,0),float_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
 glGenerateMipmap(GL_TEXTURE_2D);
-glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,wtexture[0],0);  
-
+glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,wtexture[0],0);  
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
@@ -1634,7 +1633,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_COVERAGE_BUFFER_BIT_NV);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
-// glFinish();
+glFinish();
 // glPolygonOffset(-1.0,-1.0);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 glUseProgram(S1.at(0,0,0));
