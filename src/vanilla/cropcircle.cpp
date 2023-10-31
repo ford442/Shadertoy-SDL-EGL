@@ -1,56 +1,6 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
-boost::function<void(int,float *,float *)>avgFrm=[](int leng,float *ptr,float *aptr){
-max=0.0f;
-min=255.0f;
-sum=0.0f;
-avgSum=0.0f;
-minSum=0.0f;
-maxSum=0.0f;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-}
-sum=sum/leng;
-aptr[0]=sum;
-aptr[1]=min;
-aptr[2]=max;
-return;
-};
-
-boost::function<void(int,int,int,float *,float *)>rotateFrame=[](int angle,int wid,int hig,float *Fptr,float *NFptr){
-for(int y=0;y<hig;y++){
-for(int x=0;x<wid;x++){
-int index=4*(y*hig+x);
-unsigned char red=Fptr[index];
-unsigned char green=Fptr[index+1];
-unsigned char blue=Fptr[index+2];
-int newX=x*cos(angle)-y*sin(angle);
-int newY=x*sin(angle)+y*cos(angle);
-if (newX>=0&&newX<hig&&newY>=0&&newY<wid){
-int newIndex=4*(newY*wid+newX);
-NFptr[newIndex]=red;
-NFptr[newIndex+1]=green;
-NFptr[newIndex+2]=blue;
-NFptr[newIndex+3]=255;
-}
-}
-}
-return;
-};
-
-extern "C" {
-
-void nano(int leng,float *ptr,float *aptr){
-avgFrm(leng,ptr,aptr);
-}
-
-void rotat(int angle,int wd,int hi,float *Fptr,float *NFptr){
-rotateFrame(angle,wd,hi,Fptr,NFptr);
-}
-
-void emsc(){
+void emsc(int leng,float *ptr){
 
 EGLConfig eglconfig=NULL;
 EGLDisplay display;
@@ -257,7 +207,69 @@ eglMakeCurrent(display,surface,surface,contextegl);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glDisable(GL_DITHER);
-// glViewport(0,0,GLint(Size),GLint(Size));
+GLuint buffer,Rbuffer,Fbuffer;
+glGenFramebuffers(1,&Fbuffer);
+glGenRenderbuffers(1,&Rbuffer);
+glGenBuffers(1, &buffer);
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,Size,Size);
+glBindBuffer(GL_RENDERBUFFER, buffer);
+glBufferData(GL_RENDERBUFFER, sizeof(ptr), ptr, GL_STATIC_DRAW);
+glBindBuffer(GL_RENDERBUFFER, 0);
+glViewport(0,0,GLint(Size),GLint(Size));
+}
+
+boost::function<void(int,float *,float *)>avgFrm=[](int leng,float *ptr,float *aptr){
+max=0.0f;
+min=255.0f;
+sum=0.0f;
+avgSum=0.0f;
+minSum=0.0f;
+maxSum=0.0f;
+for (int i=0;i<leng;i++){
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+}
+sum=sum/leng;
+aptr[0]=sum;
+aptr[1]=min;
+aptr[2]=max;
+return;
+};
+
+boost::function<void(int,int,int,float *,float *)>rotateFrame=[](int angle,int wid,int hig,float *Fptr,float *NFptr){
+for(int y=0;y<hig;y++){
+for(int x=0;x<wid;x++){
+int index=4*(y*hig+x);
+unsigned char red=Fptr[index];
+unsigned char green=Fptr[index+1];
+unsigned char blue=Fptr[index+2];
+int newX=x*cos(angle)-y*sin(angle);
+int newY=x*sin(angle)+y*cos(angle);
+if (newX>=0&&newX<hig&&newY>=0&&newY<wid){
+int newIndex=4*(newY*wid+newX);
+NFptr[newIndex]=red;
+NFptr[newIndex+1]=green;
+NFptr[newIndex+2]=blue;
+NFptr[newIndex+3]=255;
+}
+}
+}
+return;
+};
+
+extern "C" {
+
+void nano(int leng,float *ptr,float *aptr){
+avgFrm(leng,ptr,aptr);
+}
+
+void rotat(int angle,int wd,int hi,float *Fptr,float *NFptr){
+rotateFrame(angle,wd,hi,Fptr,NFptr);
+}
+
+void emem(int leng,float *ptr){
+emsc(leng,ptr);
 }
 
 }
@@ -315,10 +327,8 @@ powerPreference:'high-performance',
 antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
-
 // const ctxB=zcanvas.getContext('2d',contxVars);
 const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
-
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -426,6 +436,8 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
+  Module.ccall("emem",null,["Number","Number"],[la,pointa]);
+
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1.0)");
 cnP.setAttribute("style","transform:scaleY(1.0)");
