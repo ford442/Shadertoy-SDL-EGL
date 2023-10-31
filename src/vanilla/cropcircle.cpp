@@ -520,6 +520,5 @@ dsd=true;
 
 int main(){
 ma();
-emsc();
 return 1;
 }
