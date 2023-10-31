@@ -434,7 +434,7 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
-Module.ccall("emem",null,["Number","Number"],[la,pointa]);
+// Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
 flP.setAttribute("style","transform:scaleX(1.0)");
