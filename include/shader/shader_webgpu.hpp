@@ -1167,9 +1167,9 @@ return EM_TRUE;
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
+emscripten_set_element_css_size("scanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
-// emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
+// emscripten_get_canvas_element_size("#scanvas",&css.csswi,&css.csshi);
 Size=(int)mouse.hi;
 int_size_set(Size);
 float_size_set(float(mouse.hi));
@@ -1274,9 +1274,9 @@ cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // emscripten_webgl_make_context_current(cntxi.at(0,0));
 // nanoPause();
-//   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
+//   emscripten_get_canvas_element_size("#scanvas",&css.csswi,&css.csshi);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
+emscripten_set_element_css_size("scanvas",mouse.hi,mouse.hi);
 Size=(int)mouse.hi;
 // Size=css.csshi;
 int_size_set(Size);
