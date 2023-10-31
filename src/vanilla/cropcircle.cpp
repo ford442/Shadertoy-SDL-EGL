@@ -1,12 +1,12 @@
 #include "../../include/vanilla/cropcircle.hpp"
 
-void emsc(int leng,float *ptr){
-
 EGLConfig eglconfig=NULL;
 EGLDisplay display;
 EGLContext contextegl;
 EGLSurface surface;
 EGLint config_size,major,minor;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
+EmscriptenWebGLContextAttributes attr;
 
 static constexpr EGLint anEglCtxAttribs2[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
@@ -18,7 +18,6 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE,EGL_NONE
 };
-
 
 static constexpr EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -73,35 +72,13 @@ EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
-// EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
+EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
 EGL_COVERAGE_SAMPLES_NV,16,
 EGL_SAMPLES,8,
 EGL_NONE,EGL_NONE
 };
 
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-emscripten_get_element_css_size("zimag",&wi,&hi);
-Size=(int)hi;
-S=(GLfloat)Size;
-eglBindAPI(0);
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
-attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-ctx=emscripten_webgl_create_context("#zimag",&attr);
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&major,&minor);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-emscripten_webgl_make_context_current(ctx);
-  /*
+void emsc(int leng,float *ptr){
 emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
@@ -206,11 +183,6 @@ emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glDisable(GL_DITHER);
-  */
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-
-
 GLuint buffer,Rbuffer,Fbuffer;
 glGenFramebuffers(1,&Fbuffer);
 glGenRenderbuffers(1,&Rbuffer);
@@ -220,6 +192,31 @@ glBindBuffer(GL_RENDERBUFFER, buffer);
 glBufferData(GL_RENDERBUFFER, sizeof(ptr), ptr, GL_STATIC_DRAW);
 glBindBuffer(GL_RENDERBUFFER, 0);
 glViewport(0,0,GLint(Size),GLint(Size));
+}
+
+void emscA(int leng,float *ptr){
+emscripten_get_element_css_size("zimag",&wi,&hi);
+Size=(int)hi;
+S=(GLfloat)Size;
+eglBindAPI(0);
+emscripten_webgl_init_context_attributes(&attr);
+attr.alpha=EM_TRUE;
+attr.stencil=EM_TRUE;
+attr.depth=EM_TRUE;
+attr.antialias=EM_TRUE;
+attr.premultipliedAlpha=EM_TRUE;
+attr.preserveDrawingBuffer=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
+ctx=emscripten_webgl_create_context("#zimag",&attr);
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display,&major,&minor);
+eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+emscripten_webgl_make_context_current(ctx);
+surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
 }
 
 boost::function<void(int,float *,float *)>avgFrm=[](int leng,float *ptr,float *aptr){
@@ -523,6 +520,7 @@ dsd=true;
 });
 
 int main(){
+emscA();
 ma();
 return 1;
 }
