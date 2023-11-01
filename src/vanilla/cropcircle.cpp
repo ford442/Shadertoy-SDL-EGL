@@ -477,7 +477,7 @@ ctxc.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
-flP.setAttribute("style","transform:scaleX(-1.0);");
+flP.setAttribute("style","transform:scaleX(1.0);");
 ///  cnP.setAttribute("style","transform:scaleY(1.0);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
@@ -495,7 +495,7 @@ cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 // cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 }
 function rrrc(rtc) {
-cnPC.setAttribute("style","transform:rotate("+rtc+"deg);");
+cnPC.setAttribute("style","transform:rotate("+rtc+"deg)");
 // cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
 knb=document.getElementById("rra");
