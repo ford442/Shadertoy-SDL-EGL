@@ -346,8 +346,8 @@ var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
 la=hS*hS;
 if(la&4!==0){
-var amount=la&4;
-la+=amount;
+var amount=la/4;
+la+=(amount+1)*4;
 }
 sz=(hS*hS)/4;
 pointa=80*la;
