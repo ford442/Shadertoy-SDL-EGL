@@ -1483,7 +1483,7 @@ boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
