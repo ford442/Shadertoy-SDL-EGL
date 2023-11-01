@@ -164,12 +164,12 @@ EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
 EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
-EGL_RED_SIZE,8,
-EGL_GREEN_SIZE,8,
-EGL_BLUE_SIZE,8,
-EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,24,
-EGL_STENCIL_SIZE,8,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
+EGL_DEPTH_SIZE,32,
+EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
@@ -328,14 +328,14 @@ static inline char cm_hdr_src[2300]=
 
 static inline char vrt_bdy_src[420]=
 "precision highp int;\n"
-"precision lowp sampler2D;"
-"precision lowp samplerCube;"
+"precision mediump sampler2D;"
+"precision mediump samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 static inline char frg_hdr_src[1000]=
 "precision mediump int;\n"
-"precision lowp sampler2D;"
-"precision lowp samplerCube;"
+"precision mediump sampler2D;"
+"precision mediump samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
