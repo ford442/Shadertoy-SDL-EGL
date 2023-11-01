@@ -1041,7 +1041,7 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
-eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_ES_API);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
