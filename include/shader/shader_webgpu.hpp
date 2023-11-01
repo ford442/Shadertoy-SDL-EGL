@@ -290,8 +290,9 @@ static inline char cm_hdr_src[2300]=
 "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "precision highp float;\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n";
+//  "#undef HW_PERFORMANCE\n"
+//  "#define HW_PERFORMANCE 1\n";
+//  "#define HW_PERFORMANCE 0\n";
 /*
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
