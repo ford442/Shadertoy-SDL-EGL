@@ -329,14 +329,14 @@ static inline char cm_hdr_src[2300]=
 
 static inline char vrt_bdy_src[420]=
 "precision highp int;\n"
-"precision mediump sampler2D;"
-"precision mediump samplerCube;"
+"precision highp sampler2D;"
+"precision highp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 static inline char frg_hdr_src[1000]=
-"precision mediump int;\n"
-"precision mediump sampler2D;"
-"precision mediump samplerCube;"
+"precision highp int;\n"
+"precision highp sampler2D;"
+"precision highp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
