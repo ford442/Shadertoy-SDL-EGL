@@ -310,7 +310,7 @@ mcanvas.style.width='100vh';
 mcanvas.style.backgroundColor='rgba(0,0,0,0.0)';
 document.getElementById("cpB").appendChild(mcanvas);
 const vcanvas=document.createElement('canvas');
-vcanvas.opacity=0.333;
+vcanvas.opacity=0.133;
 vcanvas.id='vimag';
 vcanvas.imageRendering='auto';
 vcanvas.width=winSize;
