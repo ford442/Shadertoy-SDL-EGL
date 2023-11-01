@@ -1018,7 +1018,7 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
@@ -1041,7 +1041,7 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
@@ -1483,7 +1483,7 @@ boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 
-    eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
@@ -1783,7 +1783,7 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
 // eglBindAPI(0);
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
