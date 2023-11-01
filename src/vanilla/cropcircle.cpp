@@ -201,9 +201,9 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 ctx=emscripten_webgl_create_context("#zimag",&attr);
@@ -310,7 +310,7 @@ zcanvas.style.backgroundColor='rgba(0,0,0,128)';
 // document.getElementById("cpB").appendChild(zcanvas);
   */
 const contxVars={
-// colorType:'float32',
+colorType:'float64',
 // precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
@@ -322,7 +322,7 @@ premultipliedAlpha:false,
 willReadFrequently:true,
 lowLatency:true,
 powerPreference:'high-performance',
-antialias:false
+antialias:true
 };
 const ctx=scanvas.getContext('2d',contxVars);
 // const ctxB=zcanvas.getContext('2d',contxVars);
