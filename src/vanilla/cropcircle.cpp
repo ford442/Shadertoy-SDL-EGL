@@ -376,7 +376,7 @@ ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
 let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
-let cnPC=document.getElementById("cpB");
+let cnPC=document.getElementById("cpC");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
