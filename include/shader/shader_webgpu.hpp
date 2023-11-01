@@ -1313,6 +1313,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_fragment_program");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
