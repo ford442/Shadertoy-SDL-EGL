@@ -1,11 +1,4 @@
-#include <emscripten.h>
-#include <emscripten/html5.h>
-
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-#include <GLES3/gl3.h>
-
-#include <functional>
+#include "../../include/video/video_test.hpp"
 
 template<class ArgumentType,class ResultType>
 
@@ -14,14 +7,6 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <boost/function.hpp>
-
-EMSCRIPTEN_RESULT ret;
-
-EGLDisplay display;
-EGLContext contextegl;
-EGLSurface surface;
-EGLint config_size,major,minor;
 
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
@@ -46,12 +31,6 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE,EGL_NONE
 };
 
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
 
 // void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
