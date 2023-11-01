@@ -1402,7 +1402,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync")
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
-PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBHIPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
+PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 EGLint colorFormat = EGL_PIXEL_FORMAT_RGBA_8888_HI;
 
   surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
