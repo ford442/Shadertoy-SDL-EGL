@@ -1,4 +1,4 @@
-#include "../../include/video/video.hpp"
+#include "../../include/video/video_test.hpp"
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0;
