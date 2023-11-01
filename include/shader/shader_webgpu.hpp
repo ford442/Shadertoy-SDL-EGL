@@ -156,20 +156,20 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
-// GL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
+EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
 EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
+EGL_DEPTH_SIZE,24,
+EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
@@ -1402,7 +1402,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync")
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
+EGLint colorFormat = EGL_PIXEL_FORMAT_RGBA_8888_HI;
+
+  surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 // eglBindAPI(EGL_OPENGL_API);
