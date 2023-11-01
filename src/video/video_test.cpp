@@ -1,3 +1,4 @@
+#include "../../include/video/video_test.hpp"
 
 template<class ArgumentType,class ResultType>
 
