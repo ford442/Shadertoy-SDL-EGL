@@ -1403,9 +1403,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
-EGLint colorFormat = EGL_PIXEL_FORMAT_RGBA_8888_HI;
-
-  surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
+EGLint colorFormat=EGL_COLOR_FORMAT_HI;
+surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 // eglBindAPI(EGL_OPENGL_API);
