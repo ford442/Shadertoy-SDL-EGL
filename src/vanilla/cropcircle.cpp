@@ -278,6 +278,7 @@ EM_JS(void,ma,(),{
 "use strict";
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
+const icanvas=document.getElementById('imag');
 scanvas.id='zimag';
 scanvas.imageRendering='auto';
 scanvas.width=winSize;
@@ -326,7 +327,23 @@ lowLatency:true,
 powerPreference:'high-performance',
 antialias:false
 };
+  const contxVarsB={
+colorType:'float64',
+precision:'highp',
+preferLowPowerToHighPerformance:false,
+alpha:true,
+depth:true,
+stencil:true,
+// preserveDrawingBuffer:false,
+premultipliedAlpha:true,
+imageSmoothingEnabled:true,
+willReadFrequently:true,
+lowLatency:true,
+powerPreference:'high-performance',
+antialias:true
+};
 const ctx=scanvas.getContext('2d',contxVars);
+const ctxB=icanvas.getContext('2d',contxVarsB);
 // const ctxB=zcanvas.getContext('2d',contxVars);
 // const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
@@ -344,6 +361,7 @@ let cnP=document.getElementById("cp");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
+ctxB.drawImage(vd,0,0,ww,h);
 var imgData=ctx.getImageData(0,0,ww,h);
 var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
