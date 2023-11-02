@@ -17,16 +17,16 @@
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#include <EGL/eglplatform.h>
-#include <KHR/khrplatform.h>
+// #include <EGL/eglplatform.h>  included by egl.h
+// #include <KHR/khrplatform.h>  included by egl.h
 
 #include <GLES3/gl3.h>
 
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+// #include <GLES2/gl2.h>
+// #include <GLES2/gl2ext.h>
 
-#include <GLES/gl.h>
-#include <GLES/glext.h>
+// #include <GLES/gl.h>
+// #include <GLES/glext.h>
 
 // #include <GLES3/gl3platform.h>
 // #include <GLES3/gl31.h>
