@@ -279,8 +279,7 @@ EM_JS(void,ma,(),{
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 const icanvas=document.getElementById('imag2');
-icanvas.setAttribute("style","transform:scaleX(-1.0)");
-icanvas.setAttribute("style","transform:scaleY(1.0);");
+icanvas.setAttribute("style","opacity:0.422;");
 scanvas.id='zimag';
 scanvas.imageRendering='auto';
 scanvas.width=winSize;
