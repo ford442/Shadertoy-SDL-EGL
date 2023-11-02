@@ -279,6 +279,7 @@ EM_JS(void,ma,(),{
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 const icanvas=document.getElementById('imag2');
+const bcanvas=document.getElementById('imag3');
 // icanvas.setAttribute("style","opacity:0.422");
 scanvas.id='zimag';
 scanvas.imageRendering='auto';
@@ -345,6 +346,7 @@ antialias:true
 };
 const ctx=scanvas.getContext('2d',contxVars);
 const ctxB=icanvas.getContext('2d',contxVarsB);
+const ctxC=bcanvas.getContext('2d',contxVarsB);
 // const ctxB=zcanvas.getContext('2d',contxVars);
 // const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
@@ -363,6 +365,7 @@ let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
 ctxB.drawImage(vd,0,0,ww,h);
+ctxC.drawImage(vd,0,0,ww,h);
 var imgData=ctx.getImageData(0,0,ww,h);
 var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
@@ -455,6 +458,7 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
+ctxC.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
