@@ -278,7 +278,7 @@ EM_JS(void,ma,(),{
 "use strict";
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
-const icanvas=document.getElementById('imag');
+const icanvas=document.getElementById('imag2');
 scanvas.id='zimag';
 scanvas.imageRendering='auto';
 scanvas.width=winSize;
