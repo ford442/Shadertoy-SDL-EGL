@@ -457,13 +457,13 @@ ctx.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
-// flP.setAttribute("style","transform:scaleY(-1.0)");
-cnP.setAttribute("style","transform:scaleX(1.0);");
+flP.setAttribute("style","transform:scaleX(1.0)");
+cnP.setAttribute("style","transform:scaleY(1.0);");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-// flP.setAttribute("style","transform: scaleY(1.0)");
-cnP.setAttribute("style","transform: scaleX(-1.0);");
+flP.setAttribute("style","transform: scaleX(-1.0)");
+cnP.setAttribute("style","transform: scaleY(-1.0);");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
 function rrra(rta){
