@@ -47,6 +47,7 @@ typedef ResultType result_type;
 #include <boost/fiber/all.hpp>
 #include <thread>
 #include <complex>
+#include <time.h>
 
 #define BOOST_HAS_TR1
 
@@ -1114,6 +1115,7 @@ int sc=datE->tm_sec;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=(hr*3600)+(mi*60)+(sc);
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
+  
 /*
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%45==0){
@@ -1742,8 +1744,12 @@ glUniform1i(smp_chn[3],3);
 // usleep(125);
 */
   // date/time
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
+
+time_t timE=time(0);
+struct tm * datE;
+time(&timE);
+datE=localtime(&timE);
+  
 int yr=1900+datE->tm_year;
 int mn=1+datE->tm_mon;
 int dy=datE->tm_mday-1;
