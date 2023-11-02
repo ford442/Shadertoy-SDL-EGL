@@ -385,7 +385,7 @@ ctx.getExtension('GL_ARB_ES2_compatibility');
 ctx.getExtension('GL_ARB_direct_state_access');
  */
 var agav=new Float32Array($H,pointc,1);
-console.log(agav[0]);
+// console.log(agav[0]);
 for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
 var lightDark=128+((Math.abs(agav[0]-128))/2);
