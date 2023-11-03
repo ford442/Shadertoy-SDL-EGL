@@ -1038,7 +1038,7 @@ static inline boost::function<EM_BOOL()>RendarAb=[](){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
@@ -1057,7 +1057,7 @@ static inline boost::function<EM_BOOL()>RendarBb=[](){
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
