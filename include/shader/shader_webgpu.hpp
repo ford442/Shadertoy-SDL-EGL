@@ -297,6 +297,13 @@ static inline char cm_hdr_src[2300]=
 "#pragma STDC(FP_CONTRACT OFF)\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
+"#pragma omp (OpenMP)\n"
+"#pragma clang loop vectorize(enable)\n"
+"#pragma clang loop interleave(enable)\n"
+"#pragma clang loop unroll(enable)\n"
+"#pragma clang loop tile(enable)\n"
+"#pragma clang loop distribute(enable)\n"
+"#extension GL_EXT_shader_image_load_store : enable\n"
 "precision highp float;\n";
 /*
 "#pragma (precision highp uint)\n"
@@ -1020,8 +1027,8 @@ return EM_TRUE;
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
 // eglBindAPI(EGL_OPENGL_API);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
 // glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
@@ -1029,34 +1036,35 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glSampleCoverage(1.0f,GL_FALSE);
+glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(0,1),int_size.at(0,1),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
 // end
-glFlush();
+// glFlush();
 return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
 // eglBindAPI(EGL_OPENGL_ES_API);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
+// eglBindAPI(0);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-// glSampleCoverage(numSamplesf,GL_FALSE);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
 // glEnable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFlush();
+// glFlush();
 return EM_TRUE;
 };
 
