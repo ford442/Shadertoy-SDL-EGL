@@ -1054,10 +1054,10 @@ static inline boost::function<EM_BOOL()>RendarBb=[](){
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
