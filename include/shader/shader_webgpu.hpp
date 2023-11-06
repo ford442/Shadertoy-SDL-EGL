@@ -148,7 +148,7 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
@@ -1241,7 +1241,7 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
-eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_BIT);
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1436,16 +1436,20 @@ glDisable(GL_DITHER);
 // glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_ALWAYS);
 glEnable(GL_BLEND);
+glBlendFunc(GL_ONE,GL_ONE);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_STENCIL_TEST);
-// glDisable(GL_STENCIL_TEST);
+glStencilFunc(GL_ALWAYS,0,0xFF);
+glStencilOp(GL_KEEP,GL_KEEP,GL_KEEP);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
-// glStencilMask(0xFF);
+glStencilMask(0xFF);
+glDisable(GL_CULL_FACE);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
-// glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -1504,7 +1508,7 @@ boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 
-eglBindAPI(0);
+ // eglBindAPI(0);
 
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
