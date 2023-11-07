@@ -18,7 +18,7 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
   
-  const timestampQuerySet = device.createQuerySet({ 
+  const timestampQuerySet = createQuerySet({ 
   type: "timestamp", 
   count: 2 
 });
