@@ -29,7 +29,7 @@ const WGpuRenderPassTimestampWrite timestampWrite = {
   _end: 1
 };
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
-  passDesc.timestampWrites = timestampWrite;
+  passDesc.timestampWrites = &timestampWrite;
 
 
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
