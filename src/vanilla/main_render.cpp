@@ -18,12 +18,12 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
   
-  const timestampQuerySet = createQuerySet({ 
+  timestampQuerySet = createQuerySet({ 
   type: "timestamp", 
   count: 2 
 });
 
-const WGpuRenderPassTimestampWrite timestampWrite = {
+WGpuRenderPassTimestampWrite timestampWrite = {
   querySet: timestampQuerySet,
   _start: 0,
   _end: 1
