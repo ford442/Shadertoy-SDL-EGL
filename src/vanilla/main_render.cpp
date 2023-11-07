@@ -23,7 +23,7 @@ colorAttachment.clearValue.a=1.0f;
   count: 2 
 });
 
-const WGpuRenderPassTimestampWrites timestampWrite = {
+const WGpuRenderPassTimestampWrite timestampWrite = {
   querySet: timestampQuerySet,
   _start: 0,
   _end: 1
