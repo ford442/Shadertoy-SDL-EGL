@@ -17,11 +17,10 @@ colorAttachment.clearValue.r=1.0f;
 colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
-
-
-WGpuRenderPassTimestampWrite timestampWrite = {};
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
-  passDesc.timestampWrites = &timestampWrite;
+
+  WGPUComputePassTimestampWrites timestampWrites = {};
+passDesc.timestampWrites = &timestampWrites;
 
 
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
