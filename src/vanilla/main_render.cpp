@@ -17,7 +17,21 @@ colorAttachment.clearValue.r=1.0f;
 colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
+  
+  const timestampQuerySet = device.createQuerySet({ 
+  type: "timestamp", 
+  count: 2 
+});
+
+const timestampWrite = {
+  querySet: timestampQuerySet,
+  _start: 0,
+  _end: 1
+};
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
+  passDesc.timestamp = timestampWrite;
+
+
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(0,0), sze.at(0,0), 0.0, 1.0);
@@ -48,7 +62,7 @@ const char *vertexShader=
 "vec2<f32>(-0.5,-0.5),\n"
 "vec2<f32>(0.5,-0.5)\n"
 ");\n"
-"return vec4<f32>(pos[vertexIndex],0.0,1.0);\n"
+"return vec4<f32>(pos[vertexIndex] * vec2<f32>(2.0, 2.0) - vec2<f32>(1.0, 1.0), 0.0, 1.0);\n" // map positions to range [-1, 1]
 "}\n";
 const char *fragmentShader=
 "@fragment\n"
