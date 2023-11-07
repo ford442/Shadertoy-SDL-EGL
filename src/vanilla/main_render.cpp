@@ -24,7 +24,7 @@ WGpuRenderPassTimestampWrite renderPassTimestampWrite;
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
 WGpuRenderPassTimestampWrite *ptrRenderPassTimestampWrite = &renderPassTimestampWrite;
 
-passDesc.timestampWrites = (WGPU_RENDER_PASS_TIMESTAMP_WRITE_NEXT)ptrTimestampWrites;
+passDesc.timestampWrites = (WGPU_RENDER_PASS_TIMESTAMP_LOCATION)ptrTimestampWrites;
 
 
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
