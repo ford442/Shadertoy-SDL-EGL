@@ -17,17 +17,9 @@ colorAttachment.clearValue.r=1.0f;
 colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
-  
-  timestampQuerySet = createQuerySet({ 
-  type: "timestamp", 
-  count: 2 
-});
 
-WGpuRenderPassTimestampWrite timestampWrite = {
-  querySet: timestampQuerySet,
-  _start: 0,
-  _end: 1
-};
+
+WGpuRenderPassTimestampWrite timestampWrite = {};
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
   passDesc.timestampWrites = &timestampWrite;
 
