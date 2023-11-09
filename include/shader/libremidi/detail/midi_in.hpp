@@ -1,6 +1,6 @@
 #pragma once
-#include <libremidi/detail/midi_api.hpp>
-#include <libremidi/input_configuration.hpp>
+#include "midi_api.hpp"
+#include "../input_configuration.hpp"
 
 namespace libremidi
 {
