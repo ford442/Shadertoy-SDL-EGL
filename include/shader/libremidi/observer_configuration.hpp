@@ -1,6 +1,6 @@
 #pragma once
-#include <libremidi/config.hpp>
-#include <libremidi/error.hpp>
+#include "config.hpp"
+#include "error.hpp"
 
 #include <compare>
 #include <string>
