@@ -1,7 +1,7 @@
 #pragma once
 #include "config.hpp"
 
-#include <span>
+#include <span.h>
 
 namespace libremidi
 {
