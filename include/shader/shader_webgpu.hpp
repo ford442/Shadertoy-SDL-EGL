@@ -306,15 +306,14 @@ static inline char cm_hdr_src[2300]=
 "#pragma clang loop distribute(enable)\n"
 "#pragma optimize(on)\n"
 "#pragma optimize(avx)\n"
+"precision highp float;\n";
 
+/*
 "precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n"
-"precision highp float;\n";
-
-/*
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
