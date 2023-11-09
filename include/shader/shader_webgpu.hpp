@@ -377,7 +377,7 @@ using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
-using gf_tensor=boost::numeric::ublas::tensor<glclampf>;
+using gf_tensor=boost::numeric::ublas::tensor<GLclampf>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using uint_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -829,15 +829,15 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const register glclampf()>gF=[](){
+static inline boost::function<const register GLclampf()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const register glclampf()>gFm1=[](){
+static inline boost::function<const register GLclampf()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const register glclampf()>gF0=[](){
+static inline boost::function<const register GLclampf()>gF0=[](){
 return Fi.at(1,1);
 };
 
