@@ -1557,7 +1557,7 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(1,1),int_size.at(1,
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+glPixelStorei(GL_UNPACK_ALIGNMENT,4);
 //  //  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
   //  non multisampled color renderbuffer
