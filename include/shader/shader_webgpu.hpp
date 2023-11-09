@@ -376,7 +376,7 @@ using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 // using shad_tensor=boost::numeric::ublas::tensor<GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
-using f_tensor=boost::numeric::ublas::tensor<float>;
+using f_tensor=boost::numeric::ublas::tensor<glclampf>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using uint_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -828,15 +828,15 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const register float()>gF=[](){
+static inline boost::function<const register glclampf()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const register float()>gFm1=[](){
+static inline boost::function<const register glclampf()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const register float()>gF0=[](){
+static inline boost::function<const register glclampf()>gF0=[](){
 return Fi.at(1,1);
 };
 
@@ -1253,11 +1253,6 @@ boost::function<EM_BOOL()>strt=[this](){
 eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{GLclampf XYZW[4];}Vertex;
 gpu.setFloats();
-GLint maxSize;
-glGetIntegerv(GL_MAX_ARRAY_TEXTURE_LAYERS,&maxSize);
-  EM_ASM({
-console.log($0);
-},maxSize);
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,Si,sse3);
