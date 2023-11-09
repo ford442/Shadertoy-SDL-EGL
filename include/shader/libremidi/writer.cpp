@@ -24,7 +24,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #if !defined(LIBREMIDI_HEADER_ONLY)
-  #include <libremidi/writer.hpp>
+  #include "writer.hpp"
 #endif
 #include <numeric>
 #include <ostream>
