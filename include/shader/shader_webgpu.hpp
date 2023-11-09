@@ -105,9 +105,9 @@ static constexpr EGLint numSamples=8;
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=8.0f;
 static constexpr float multisampleFramef=1.0f;
-static constexpr float multisampleRenderf=1.0f;
+static constexpr float multisampleRenderf=0.666f;
 static constexpr float framef=1.0f;
-static constexpr float renderf=1.0f;
+static constexpr float renderf=1.333f;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -962,10 +962,10 @@ int_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 int_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 int_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 int_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-int_size.at(2,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*framef;
-int_size.at(2,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*renderf;
-int_size.at(2,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleFramef;
-int_size.at(1,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleRenderf;
+int_size.at(2,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*framef;
+int_size.at(2,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*renderf;
+int_size.at(1,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleFramef;
+int_size.at(2,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleRenderf;
 return EM_TRUE;
 }
 
@@ -1542,7 +1542,7 @@ GLenum * binaryFormat;
 void * GLbin;
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
-glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
+glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*48,binLength,binaryFormat,&GLbin);
 bin.at(0,0)=GLbin;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
@@ -1553,7 +1553,7 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(1,1),int_size.at(1,1));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
@@ -1618,7 +1618,7 @@ glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,int_size.at(1,0),int_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(2,2),int_size.at(2,2));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
@@ -1635,7 +1635,7 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFF
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,int_size.at(2,2),int_size.at(2,2));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
