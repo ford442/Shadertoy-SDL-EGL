@@ -1,7 +1,7 @@
 #pragma once
-#include <libremidi/backends/emscripten/config.hpp>
-#include <libremidi/backends/emscripten/helpers.hpp>
-#include <libremidi/detail/midi_out.hpp>
+#include "config.hpp"
+#include "helpers.hpp"
+#include "../../detail/midi_out.hpp"
 
 namespace libremidi
 {
