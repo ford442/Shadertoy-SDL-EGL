@@ -105,9 +105,9 @@ static constexpr EGLint numSamples=8;
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=8.0f;
 static constexpr float multisampleFramef=1.0f;
-static constexpr float multisampleRenderf=0.666f;
+static constexpr float multisampleRenderf=0.5f;
 static constexpr float framef=1.0f;
-static constexpr float renderf=1.333f;
+static constexpr float renderf=2.0f;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
