@@ -1,5 +1,5 @@
 #pragma once
-#include <libremidi/config.hpp>
+#include "config.hpp"
 
 #include <functional>
 #include <stdexcept>
