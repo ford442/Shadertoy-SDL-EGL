@@ -292,11 +292,11 @@ static inline char cm_hdr_src[2300]=
 // "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 1\n"
+//  "#undef HW_PERFORMANCE\n"
+//  "#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma optionNV(fastmath on)\n"
+"#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma omp (OpenMP)\n"
 "#pragma clang loop vectorize(enable)\n"
@@ -305,15 +305,9 @@ static inline char cm_hdr_src[2300]=
 "#pragma clang loop tile(enable)\n"
 "#pragma clang loop distribute(enable)\n"
 "#pragma optimize(on)\n"
-"#pragma optimize(avx)\n"
+"#pragma optimize(sse4.2)\n"
 "precision highp float;\n";
-
 /*
-"precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n"
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
@@ -334,6 +328,11 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;"
+"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
 */
 
 static inline char vrt_bdy_src[420]=
