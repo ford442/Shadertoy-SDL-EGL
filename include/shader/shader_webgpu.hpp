@@ -296,7 +296,7 @@ static inline char cm_hdr_src[2300]=
 //  "#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma optionNV(fastmath off)\n"
+"#pragma optionNV(fastmath on)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma omp (OpenMP)\n"
 "#pragma clang loop vectorize(enable)\n"
@@ -306,16 +306,16 @@ static inline char cm_hdr_src[2300]=
 "#pragma clang loop distribute(enable)\n"
 "#pragma optimize(on)\n"
 "#pragma optimize(sse4.2)\n"
-
-"precision highp float;\n";
-/*
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
-// "#pragma (precision highp short)\n"
-// "#pragma (precision highp bool)\n"
-// "#pragma (precision highp atomic_uint)\n"
+"#pragma (precision highp short)\n"
+"#pragma (precision highp bool)\n"
+"#pragma (precision highp atomic_uint)\n"
+"precision highp float;\n";
+/*
+
 
 "#pragma (precise none)\n"
 "#pragma STDGL(strict off)\n"
