@@ -356,7 +356,8 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[1420]=
-"void main(){vec2 fragCoord=gl_FragCoord.xy;vec4 fragColor;mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.5)*contrastAmount+0.5;}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);    fragColor.rgb = (fragColor.rgb - 0.5) * 2.0 + 0.5;
+}\n\0";
 
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
