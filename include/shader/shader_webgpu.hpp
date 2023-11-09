@@ -313,7 +313,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
-
 "precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
@@ -357,7 +356,7 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.5)*contrastAmount+0.5;}\n\0";
 
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
