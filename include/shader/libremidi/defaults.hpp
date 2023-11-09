@@ -1,9 +1,9 @@
 #pragma once
-#include <libremidi/api.hpp>
-#include <libremidi/config.hpp>
-#include <libremidi/input_configuration.hpp>
-#include <libremidi/observer_configuration.hpp>
-#include <libremidi/output_configuration.hpp>
+#include "api.hpp"
+#include "config.hpp"
+#include "input_configuration.hpp"
+#include "observer_configuration.hpp"
+#include "output_configuration.hpp"
 
 #include <any>
 #include <optional>
