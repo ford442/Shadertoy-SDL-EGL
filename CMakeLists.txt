@@ -21,28 +21,28 @@ if(LIBREMIDI_HEADER_ONLY)
   set(_public INTERFACE)
   target_compile_definitions(libremidi ${_public} LIBREMIDI_HEADER_ONLY)
 else()
-  add_library(libremidi
-    include/libremidi/detail/alsa.hpp
-    include/libremidi/detail/coreaudio.hpp
-    include/libremidi/detail/dummy.hpp
-    include/libremidi/detail/emscripten.hpp
-    include/libremidi/detail/emscripten_api.hpp
-    include/libremidi/detail/jack.hpp
-    include/libremidi/detail/midi_api.hpp
-    include/libremidi/detail/raw_alsa.hpp
-    include/libremidi/detail/raw_alsa_helpers.hpp
-    include/libremidi/detail/semaphore.hpp
-    include/libremidi/detail/winmm.hpp
-    include/libremidi/detail/winuwp.hpp
+  add_library(
+    include/shader/libremidi/detail/alsa.hpp
+    include/shader/libremidi/detail/coreaudio.hpp
+    include/shader/libremidi/detail/dummy.hpp
+    include/shader/libremidi/detail/emscripten.hpp
+    include/shader/libremidi/detail/emscripten_api.hpp
+    include/shader/libremidi/detail/jack.hpp
+    include/shader/libremidi/detail/midi_api.hpp
+    include/shader/libremidi/detail/raw_alsa.hpp
+    include/shader/libremidi/detail/raw_alsa_helpers.hpp
+    include/shader/libremidi/detail/semaphore.hpp
+    include/shader/libremidi/detail/winmm.hpp
+    include/shader/libremidi/detail/winuwp.hpp
 
-    include/libremidi/message.hpp
-    include/libremidi/reader.hpp
-    include/libremidi/writer.hpp
-    include/libremidi/libremidi.hpp
+    include/shader/libremidi/message.hpp
+    include/shader/libremidi/reader.hpp
+    include/shader/libremidi/writer.hpp
+    include/shader/libremidi/libremidi.hpp
 
-    include/libremidi/libremidi.cpp
-    include/libremidi/reader.cpp
-    include/libremidi/writer.cpp
+    include/shader/libremidi/libremidi.cpp
+    include/shader/libremidi/reader.cpp
+    include/shader/libremidi/writer.cpp
   )
   set(_public PUBLIC)
 endif()
@@ -179,7 +179,7 @@ if(LIBREMIDI_EXAMPLES)
   add_executable(midiout tests/midiout.cpp)
   target_link_libraries(midiout PRIVATE libremidi)
 
-  set(CMAKE_REQUIRED_FLAGS -std=c++2a)
+  set(CMAKE_REQUIRED_FLAGS -std=c++20)
   check_cxx_source_compiles("#include <thread>\nint main() { std::jthread t; }" HAS_STD_JTHREAD)
 
   if(HAS_STD_JTHREAD)
@@ -210,7 +210,6 @@ endif()
 find_package(Catch2 QUIET)
 if(TARGET Catch2::Catch2 AND Catch2_FOUND)
   message(STATUS "libremidi : compiling tests")
-  target_compile_features(libremidi ${_public} cxx_std_20)
 
   add_executable(midiin_test tests/unit/midi_in.cpp)
   target_link_libraries(midiin_test PRIVATE libremidi Catch2::Catch2)
