@@ -2,10 +2,10 @@
 
 #if defined(__EMSCRIPTEN__)
 
-  #include <libremidi/backends/emscripten/config.hpp>
-  #include <libremidi/backends/emscripten/midi_in.hpp>
-  #include <libremidi/backends/emscripten/midi_out.hpp>
-  #include <libremidi/backends/emscripten/observer.hpp>
+  #include "emscripten/config.hpp"
+  #include "emscripten/midi_in.hpp"
+  #include "emscripten/midi_out.hpp"
+  #include "emscripten/observer.hpp"
 
 namespace libremidi
 {
