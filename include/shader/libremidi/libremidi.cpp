@@ -1,9 +1,9 @@
 #if !defined(LIBREMIDI_HEADER_ONLY)
-  #include <libremidi/libremidi.hpp>
+  #include "libremidi.hpp"
 #endif
 
-#include <libremidi/backends.hpp>
-#include <libremidi/detail/midi_api.hpp>
+#include "backends.hpp"
+#include "detail/midi_api.hpp"
 
 #include <cmath>
 
