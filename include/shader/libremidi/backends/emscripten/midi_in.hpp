@@ -1,7 +1,7 @@
 #pragma once
-#include "include/shader/libremidi/backends/emscripten/config.hpp>
-#include "include/shader/libremidi/backends/emscripten/helpers.hpp>
-#include "include/shader/libremidi/detail/midi_in.hpp>
+#include "include/shader/libremidi/backends/emscripten/config.hpp"
+#include "include/shader/libremidi/backends/emscripten/helpers.hpp"
+#include "include/shader/libremidi/detail/midi_in.hpp"
 
 namespace libremidi
 {
