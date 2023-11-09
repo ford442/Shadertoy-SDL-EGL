@@ -67,9 +67,9 @@ b3_audio:
 
 b3_audio_mk:
 	em++ $(STDS) -c src/audio/main.cpp $(COMMON_FLAGS) -O3 $(SIMD_FLAGS) $(BOOST_FLAGS)
-	em++ $(STDS) -c src/audio/audio.cpp $(COMMON_FLAGS) -O0 $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -c src/audio/audio.cpp $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 
-	em++ $(STDS) -o a3020.js main.o audio.o $(COMMON_FLAGS) -O0 $(LINK_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o a3020.js main.o audio.o $(COMMON_FLAGS) -O2 $(LINK_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_MIXER=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
