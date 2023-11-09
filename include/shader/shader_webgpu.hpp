@@ -310,9 +310,9 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
-"#pragma (precision highp short)\n"
-"#pragma (precision highp bool)\n"
-"#pragma (precision highp atomic_uint)\n"
+// "#pragma (precision highp short)\n"
+// "#pragma (precision highp bool)\n"
+// "#pragma (precision highp atomic_uint)\n"
 
 "precision highp float;\n";
 /*
