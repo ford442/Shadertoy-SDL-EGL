@@ -1437,7 +1437,6 @@ eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
- glEnable(GL_ALPHA_TEST);
 // glClearDepth(Di.at(0,0));
  //    glDepthFunc(GL_GREATER);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1474,7 +1473,7 @@ glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 
 // glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*4,vrt,GL_STATIC_DRAW);
 // glBufferData(GL_ARRAY_BUFFER,len(vrt)*4,vrt,GL_STREAM_DRAW);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*24,vrt,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*48,vrt,GL_DYNAMIC_DRAW);
  /* 
 auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
