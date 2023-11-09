@@ -296,7 +296,7 @@ static inline char cm_hdr_src[2300]=
 //  "#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma optionNV(fastmath on)\n"
+"#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma omp (OpenMP)\n"
 "#pragma clang loop vectorize(enable)\n"
