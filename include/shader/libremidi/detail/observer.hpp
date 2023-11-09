@@ -1,7 +1,7 @@
 #pragma once
-#include <libremidi/api.hpp>
-#include <libremidi/config.hpp>
-#include <libremidi/observer_configuration.hpp>
+#include "../api.hpp"
+#include "../config.hpp"
+#include "../observer_configuration.hpp"
 
 #include <memory>
 #include <vector>
