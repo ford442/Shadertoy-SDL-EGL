@@ -168,12 +168,6 @@ if(LIBREMIDI_EXAMPLES)
   add_executable(cmidiin tests/cmidiin.cpp)
   target_link_libraries(cmidiin PRIVATE libremidi)
 
-  add_executable(midiclock_in tests/midiclock_in.cpp)
-  target_link_libraries(midiclock_in PRIVATE libremidi)
-
-  add_executable(midiclock_out tests/midiclock_out.cpp)
-  target_link_libraries(midiclock_out PRIVATE libremidi)
-
   add_executable(midiout tests/midiout.cpp)
   target_link_libraries(midiout PRIVATE libremidi)
 
@@ -184,15 +178,6 @@ if(LIBREMIDI_EXAMPLES)
     add_executable(multithread_midiout tests/multithread_midiout.cpp)
     target_link_libraries(multithread_midiout PRIVATE libremidi)
   endif()
-
-  add_executable(midiprobe tests/midiprobe.cpp)
-  target_link_libraries(midiprobe PRIVATE libremidi)
-
-  add_executable(qmidiin tests/qmidiin.cpp)
-  target_link_libraries(qmidiin PRIVATE libremidi)
-
-  add_executable(sysextest tests/sysextest.cpp)
-  target_link_libraries(sysextest PRIVATE libremidi)
 
   add_executable(midi2 tests/midi2.cpp)
   target_link_libraries(midi2 PRIVATE libremidi)
