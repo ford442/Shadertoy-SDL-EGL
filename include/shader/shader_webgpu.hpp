@@ -1493,7 +1493,7 @@ buffer_object.set_data(vertex_buffer);
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*12,indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 // nanoPause();
 eglBindAPI(EGL_OPENGL_API);
