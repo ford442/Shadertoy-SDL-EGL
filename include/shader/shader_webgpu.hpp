@@ -1253,6 +1253,11 @@ boost::function<EM_BOOL()>strt=[this](){
 eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{GLclampf XYZW[4];}Vertex;
 gpu.setFloats();
+GLint maxSize;
+glGetIntegerv(GL_MAX_ARRAY_TEXTURE_LAYERS,&maxSize);
+  EM_ASM({
+console.log($0);
+},maxSize);
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,Si,sse3);
