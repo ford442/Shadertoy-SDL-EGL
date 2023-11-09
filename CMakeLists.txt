@@ -21,8 +21,8 @@ if(LIBREMIDI_HEADER_ONLY)
   set(_public INTERFACE)
   target_compile_definitions(libremidi ${_public} LIBREMIDI_HEADER_ONLY)
 else()
-  add_library(
-    ./include/shader/libremidi/detail/alsa.hpp
+  add_library(libremidi 
+    include/shader/libremidi/detail/alsa.hpp
     include/shader/libremidi/detail/coreaudio.hpp
     include/shader/libremidi/detail/dummy.hpp
     include/shader/libremidi/detail/emscripten.hpp
