@@ -46,10 +46,10 @@
 #endif
 
 #if defined(LIBREMIDI_EMSCRIPTEN)
-  #include <libremidi/backends/emscripten.hpp>
+  #include "backends/emscripten.hpp"
 #endif
 
-#include <libremidi/backends/dummy.hpp>
+#include "backends/dummy.hpp"
 
 namespace libremidi
 {
