@@ -1,7 +1,7 @@
 #pragma once
-#include <libremidi/cmidi2.hpp>
-#include <libremidi/detail/midi_api.hpp>
-#include <libremidi/output_configuration.hpp>
+#include "../cmidi2.hpp"
+#include "midi_api.hpp"
+#include "../output_configuration.hpp"
 
 #include <string_view>
 
