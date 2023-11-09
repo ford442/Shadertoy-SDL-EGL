@@ -41,8 +41,6 @@ else()
     include/shader/libremidi/libremidi.hpp
 
     include/shader/libremidi/libremidi.cpp
-    include/shader/libremidi/reader.cpp
-    include/shader/libremidi/writer.cpp
   )
   set(_public PUBLIC)
 endif()
