@@ -24,9 +24,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #if !defined(LIBREMIDI_HEADER_ONLY)
-  #include <libremidi/reader.hpp>
+  #include "reader.hpp"
 #endif
-#include <libremidi/message.hpp>
+#include "message.hpp"
 
 #include <algorithm>
 #include <iostream>
