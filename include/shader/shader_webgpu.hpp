@@ -80,9 +80,9 @@ typedef ResultType result_type;
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
-#ifndef OPENGL_CORE_PROFILE
-#define OPENGL_CORE_PROFILE 1
-#endif
+// #ifndef OPENGL_CORE_PROFILE
+// #define OPENGL_CORE_PROFILE 1
+// #endif
 
 #ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
 #define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
@@ -159,7 +159,7 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
@@ -292,11 +292,11 @@ static inline char cm_hdr_src[2300]=
 // "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
-//  "#undef HW_PERFORMANCE\n"
-//  "#define HW_PERFORMANCE 1\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma optionNV(fastmath off)\n"
+"#pragma optionNV(fastmath on)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma omp (OpenMP)\n"
 "#pragma clang loop vectorize(enable)\n"
@@ -305,16 +305,24 @@ static inline char cm_hdr_src[2300]=
 "#pragma clang loop tile(enable)\n"
 "#pragma clang loop distribute(enable)\n"
 "#pragma optimize(on)\n"
-"#pragma optimize(sse4.2)\n"
-"precision highp float;\n";
-/*
+"#pragma optimize(avx)\n"
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
+"#pragma (precision highp vec3)\n"
+"#pragma (precision highp mat3)\n"
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
+"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n"
+"precision highp float;\n";
+
+/*
 "#pragma (precise none)\n"
 "#pragma STDGL(strict off)\n"
 "#pragma debug(off)\n"
@@ -328,11 +336,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;"
-"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;\n";
 */
 
 static inline char vrt_bdy_src[420]=
@@ -352,8 +355,9 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+static inline char frg_ftr_src[420]=
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+/*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
@@ -361,7 +365,7 @@ static inline char frg_ftr_src[1420]=
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n\0";
-
+*/
 EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
