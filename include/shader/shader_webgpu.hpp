@@ -310,16 +310,14 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
-"#pragma (precision highp vec3)\n"
-"#pragma (precision highp mat3)\n"
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
-"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;\n"
+"precision highp sampler2DArray;precision highp sampler2DShadow;"
+"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
+"precision highp sampler2DArrayShadow;\n"
 "precision highp float;\n";
 
 /*
@@ -356,7 +354,7 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
