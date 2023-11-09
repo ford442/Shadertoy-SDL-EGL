@@ -57,12 +57,12 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <libremidi/api.hpp>
-#include <libremidi/defaults.hpp>
-#include <libremidi/input_configuration.hpp>
-#include <libremidi/message.hpp>
-#include <libremidi/observer_configuration.hpp>
-#include <libremidi/output_configuration.hpp>
+#include "api.hpp"
+#include "defaults.hpp"
+#include "input_configuration.hpp"
+#include "message.hpp"
+#include "observer_configuration.hpp"
+#include "output_configuration.hpp"
 
 #include <any>
 #include <optional>
