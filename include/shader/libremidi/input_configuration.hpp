@@ -1,8 +1,8 @@
 #pragma once
-#include <libremidi/config.hpp>
-#include <libremidi/error.hpp>
-#include <libremidi/message.hpp>
-#include <libremidi/ump.hpp>
+#include "config.hpp"
+#include "error.hpp"
+#include "message.hpp"
+#include "ump.hpp"
 
 #include <functional>
 #include <string>
