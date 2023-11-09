@@ -47,8 +47,6 @@ else()
   set(_public PUBLIC)
 endif()
 
-target_compile_features(libremidi ${_public} cxx_std_2a)
-
 find_package(Threads)
 target_link_libraries(libremidi ${_public} ${CMAKE_THREAD_LIBS_INIT})
 
