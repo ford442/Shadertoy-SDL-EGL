@@ -478,14 +478,17 @@ cnP.setAttribute("style","transform: scaleY(-1.0)");
 // cnPB.setAttribute("style","transform: scaleY(1);");
 }
 function rrra(rta){
+scanvas.setAttribute("style","opacity:0.333");
 cnP.setAttribute("style","transform: rotate("+rta+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 function rrrb(rtb){
+scanvas.setAttribute("style","opacity:1.0");
 cnP.setAttribute("style","transform:rotate("+rtb+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 }
 function rrrc(rtc) {
+scanvas.setAttribute("style","opacity:0.666");
 cnP.setAttribute("style","transform:rotate("+rtc+"deg)");
 // cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
