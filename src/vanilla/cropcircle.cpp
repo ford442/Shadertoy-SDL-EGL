@@ -455,7 +455,7 @@ rgbd[i]=0+diff;
 rgbd[i+1]=0+diff;
 rgbd[i+2]=0+diff;
 // rgbd[i+3]=255-((rgb-128)*diff);
-rgbd[i+3]=0;
+rgbd[i+3]=255;
 }
 }
 // agavF.set(rgbdat.data);
