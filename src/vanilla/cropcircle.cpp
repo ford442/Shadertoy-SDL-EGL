@@ -287,7 +287,7 @@ scanvas.width=winSize;
 scanvas.height=winSize;
 scanvas.zoom=1;
 scanvas.scale=1.0;
-scanvas.style.opacity=0.77;
+scanvas.style.opacity=0.95;
 scanvas.style.pointerEvents='none';
 scanvas.style.display='block';
 scanvas.style.position='absolute';
@@ -466,6 +466,7 @@ ctxC.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
+bgPicA.setAttribute("style","position:absolute");
 bgPicA.setAttribute("style","z-index:999990");
 bgPicB.setAttribute("style","z-index:999991");
 flP.setAttribute("style","transform:scaleX(-1.0)");
