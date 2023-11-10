@@ -77,7 +77,7 @@ EGL_NONE,EGL_NONE
 };
 
 void emsc(int leng,float *ptr){
-eglBindAPI(0);
+// eglBindAPI(0);
 emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
@@ -188,7 +188,7 @@ glGenRenderbuffers(1,&Rbuffer);
 glGenBuffers(1, &buffer);
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,Size,Size);
 glBindBuffer(GL_RENDERBUFFER, buffer);
-glBufferData(GL_RENDERBUFFER, sizeof(ptr), ptr, GL_STATIC_DRAW);
+glBufferData(GL_RENDERBUFFER, sizeof(ptr), ptr, GL_DYNAMIC_DRAW);
 glBindBuffer(GL_RENDERBUFFER, 0);
 glViewport(0,0,GLint(Size),GLint(Size));
 }
@@ -202,8 +202,8 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.antialias=EM_FALSE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -315,7 +315,7 @@ zcanvas.style.backgroundColor='rgba(0,0,0,128)';
 // document.getElementById("cpB").appendChild(zcanvas);
   */
 const contxVars={
-colorType:'float64',
+// colorType:'float64',
 // precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
@@ -330,8 +330,8 @@ powerPreference:'high-performance',
 antialias:false
 };
   const contxVarsB={
-colorType:'float64',
-precision:'highp',
+// colorType:'float64',
+// precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
@@ -458,7 +458,7 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
-ctxC.putImageData(rgbdat,0,0);
+// ctxC.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
