@@ -15,6 +15,9 @@
 #define GL_GLEXT_PROTOTYPES
 #define EGL_EGLEXT_PROTOTYPES
 
+#define GL_ANISOTROPIC_FILTER 0x3000
+
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 // #include <EGL/eglplatform.h>  included by egl.h
