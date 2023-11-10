@@ -466,16 +466,17 @@ ctxC.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
-bgPicA.setAttribute("style","position:absolute");
-bgPicA.setAttribute("style","z-index:999990");
-bgPicB.setAttribute("style","z-index:999991");
+bgPicA.setAttribute("style","position:absolute;");
+bgPicA.setAttribute("style","z-index:999990;");
+bgPicB.setAttribute("style","z-index:999991;");
 flP.setAttribute("style","transform:scaleX(-1.0)");
 cnP.setAttribute("style","transform:scaleY(1.0)");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-bgPicA.setAttribute("style","z-index:999991");
-bgPicB.setAttribute("style","z-index:999990");
+bgPicA.setAttribute("style","position:absolute;");
+bgPicA.setAttribute("style","z-index:999991;");
+bgPicB.setAttribute("style","z-index:999990;");
 flP.setAttribute("style","transform: scaleX(1.0)");
 cnP.setAttribute("style","transform: scaleY(-1.0)");
 // cnPB.setAttribute("style","transform: scaleY(1);");
