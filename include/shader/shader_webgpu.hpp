@@ -1050,8 +1050,8 @@ glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glFlush();
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_ANISOTROPIC_FILTER);
-// glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_LINEAR_MIPMAP_LINEAR);
+// glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_ANISOTROPIC_FILTER);
+glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_LINEAR_MIPMAP_LINEAR);
 // end
 glFlush();
 return EM_TRUE;
@@ -1423,6 +1423,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync")
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
+
+  
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 EGLint colorFormat=EGL_COLOR_FORMAT_HI;
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
@@ -1565,7 +1568,8 @@ glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(0,0),int_size.at(0,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(0,0),int_size.at(0,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(0,0),int_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_ALPHA32F_ARB,int_size.at(2,0),int_size.at(2,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
     //  non multisampled color renderbuffer (12,12,12,12 bit?)
