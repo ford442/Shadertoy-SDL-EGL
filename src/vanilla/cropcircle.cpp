@@ -416,7 +416,7 @@ rgb=rgb+lightDark/2;
  //  range to the next color giving further color depth as well as 
  // keeping a darker range from having few different colors of gradient
  //
-var diff=(agav[0]/255)*16;
+var diff=(agav[0]/255)*8;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
@@ -451,9 +451,9 @@ rgbd[i+2]=0;
 rgbd[i+3]=255-((rgb-128)*diff);
 }
 }else{
-rgbd[i]=255-diff;
-rgbd[i+1]=255-diff;
-rgbd[i+2]=255-diff;
+rgbd[i]=0;
+rgbd[i+1]=0;
+rgbd[i+2]=0;
 // rgbd[i+3]=255-((rgb-128)*diff);
 rgbd[i+3]=255;
 }
