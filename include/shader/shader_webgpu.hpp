@@ -1033,7 +1033,7 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
@@ -1058,7 +1058,7 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(0);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
@@ -1450,7 +1450,8 @@ glDisable(GL_DITHER);
 // glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_ALWAYS);
-glEnable(GL_BLEND);
+// glEnable(GL_BLEND);
+glDisable(GL_BLEND);
 glBlendFunc(GL_ONE,GL_ONE);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_STENCIL_TEST);
@@ -1677,7 +1678,7 @@ glFinish();
 // glPolygonOffset(-1.0,-1.0);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 glUseProgram(S1.at(0,0,0));
-eglBindAPI(EGL_OPENGL_ES_BIT);
+// eglBindAPI(EGL_OPENGL_ES_BIT);
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
 glDeleteShader(vtx);
