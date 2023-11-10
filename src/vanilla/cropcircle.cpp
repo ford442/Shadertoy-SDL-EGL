@@ -347,6 +347,8 @@ antialias:true
 const ctx=scanvas.getContext('2d',contxVars);
 const ctxB=icanvas.getContext('2d',contxVarsB);
 const ctxC=bcanvas.getContext('2d',contxVarsB);
+const bgPicA=document.getElementById('imgA');
+const bgPicB=document.getElementById('imgB');
 // const ctxB=zcanvas.getContext('2d',contxVars);
 // const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
@@ -462,11 +464,15 @@ ctx.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
+bgPicA.setAttribute("style","z-index:999990");
+bgPicB.setAttribute("style","z-index:999991");
 flP.setAttribute("style","transform:scaleX(-1.0)");
 cnP.setAttribute("style","transform:scaleY(1.0)");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
+bgPicA.setAttribute("style","z-index:999991");
+bgPicB.setAttribute("style","z-index:999990");
 flP.setAttribute("style","transform: scaleX(1.0)");
 cnP.setAttribute("style","transform: scaleY(-1.0)");
 // cnPB.setAttribute("style","transform: scaleY(1);");
