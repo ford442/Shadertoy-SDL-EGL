@@ -346,12 +346,12 @@ powerPreference:'high-performance',
 antialias:true
 };
 const ctx=scanvas.getContext('2d',contxVars);
-// const ctxB=icanvas.getContext('2d',contxVarsB);
-// const ctxC=bcanvas.getContext('2d',contxVarsB);
+const ctxB=icanvas.getContext('2d',contxVarsB);
+const ctxC=bcanvas.getContext('2d',contxVarsB);
 const bgPicA=document.getElementById('imgA');
 const bgPicB=document.getElementById('imgB');
-// const ctxB=zcanvas.getContext('2d',contxVars);
-// const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+const ctxB=zcanvas.getContext('2d',contxVars);
+const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
