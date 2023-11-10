@@ -450,7 +450,7 @@ rgbd[i+1]=255-diff;
 rgbd[i+2]=0;
 rgbd[i+3]=255-((rgb-128)*diff);
 }
-}else{
+}else{           // black / blank
 rgbd[i]=0;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
