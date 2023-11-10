@@ -77,7 +77,7 @@ EGL_NONE,EGL_NONE
 };
 
 void emsc(int leng,float *ptr){
-// eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_API);
 emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
@@ -197,7 +197,7 @@ void emscA(){
 emscripten_get_element_css_size("zimag",&wi,&hi);
 Size=(int)hi;
 S=(GLfloat)Size;
-eglBindAPI(0);
+// eglBindAPI(0);
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
@@ -364,8 +364,8 @@ let cnP=document.getElementById("cp");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
-ctxB.drawImage(vd,0,0,ww,h);
-ctxC.drawImage(vd,0,0,ww,h);
+// ctxB.drawImage(vd,0,0,ww,h);
+// ctxC.drawImage(vd,0,0,ww,h);
 var imgData=ctx.getImageData(0,0,ww,h);
 var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
