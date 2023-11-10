@@ -278,8 +278,8 @@ EM_JS(void,ma,(),{
 "use strict";
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
-// const icanvas=document.getElementById('imag2');
-// const bcanvas=document.getElementById('imag3');
+const icanvas=document.getElementById('imag2');
+const bcanvas=document.getElementById('imag3');
 // icanvas.setAttribute("style","opacity:0.422");
 scanvas.id='zimag';
 scanvas.imageRendering='pixelated';
@@ -363,12 +363,12 @@ h=document.getElementById("ihig").innerHTML;
 ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
 let cnP=document.getElementById("cp");
-// let cnPB=document.getElementById("cpB");
+let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
-// ctxB.drawImage(vd,0,0,ww,h);
-// ctxC.drawImage(vd,0,0,ww,h);
+ctxB.drawImage(vd,0,0,ww,h);
+ctxC.drawImage(vd,0,0,ww,h);
 var imgData=ctx.getImageData(0,0,ww,h);
 var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
@@ -461,7 +461,7 @@ rgbd[i+3]=255-((rgb-128)*diff);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
-// ctxC.putImageData(rgbdat,0,0);
+ctxC.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
