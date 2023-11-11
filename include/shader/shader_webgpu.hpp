@@ -1667,7 +1667,7 @@ glBindTexture(GL_TEXTURE_2D,ftexture[0]);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,float_size.at(0,0),float_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
 // glTexImage2DMultisampleEXT(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
 // glGenerateMipmap(GL_TEXTURE_2D);
-//  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_SAMPLES,1);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,4);
 glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,ftexture[0],0);  
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
@@ -1811,7 +1811,7 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,16);
+glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,16.0f);
 glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
