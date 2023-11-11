@@ -1,5 +1,7 @@
 #include <boost/cstdfloat.hpp>
+
 #include "../../include/shader/defs.hpp"
+
 // #include <stdio.h>
 #include <stdlib.h>
 #include <cstdint>
@@ -26,13 +28,16 @@ typedef ResultType result_type;
 
 #include "../../include/shader/boost_defs.hpp"
 // #include "../../include/shader/ext_boost_defs.hpp"
+
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
+
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/predef/other/endian.h>
 #include <boost/lambda/lambda.hpp>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
@@ -42,15 +47,15 @@ typedef ResultType result_type;
 #include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/thread/thread.hpp>
+
 // #include <boost/context/fiber_fcontext.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/fiber/all.hpp>
 #include <thread>
+
 #include <complex>
-#include <time.h>
 
-#define BOOST_HAS_TR1
-
+// #define BOOST_HAS_TR1
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
@@ -72,11 +77,14 @@ typedef ResultType result_type;
 #include <emscripten.h>
 // #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
+
 #include "../../include/shader/intrins.hpp"
 // #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
+
 #include <emscripten/html5.h>
+
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
@@ -101,9 +109,10 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr EGLint numSamples=8;
+static constexpr EGLint numSamples=4;
+
 // static constexpr float numSamplesf=float(numSamples);
-static constexpr float numSamplesf=8.0f;
+static constexpr float numSamplesf=4.0f;
 static constexpr float multisampleFramef=1.0f;
 static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
@@ -111,6 +120,7 @@ static constexpr float renderf=1.0f;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
+
   // Google Colab
 /*
 If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
@@ -119,10 +129,11 @@ the values of the components are directly proportional to the perceived brightne
 This means that the colors in the image will be misrepresented,
 and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
 */
+
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
@@ -134,49 +145,47 @@ EGL_NONE,EGL_NONE
 static constexpr EGLint ctx_att[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
-EGL_CONTEXT_CLIENT_VERSION,3,
-// EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-// EGL_CONTEXT_MINOR_VERSION_KHR,2,
+EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_NONE
+EGL_NONE,EGL_NONE
 };
 
 static constexpr EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT,
+// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
-EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
+// GL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
-EGL_LUMINANCE_SIZE,0, // available in OpenGL
+// EGL_NATIVE_RENDERABLE,EGL_TRUE,
+// EGL_COLOR_BUFFER_TYPE,EGL_RGBAF_BUFFER,
+// EGL_LUMINANCE_SIZE,32, // available in OpenGL
 EGL_RED_SIZE,32,
 EGL_GREEN_SIZE,32,
 EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,128,
+EGL_STENCIL_SIZE,8,
+EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
-EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
-EGL_COVERAGE_SAMPLES_NV,16,
-EGL_SAMPLES,8,
+// EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
+EGL_COVERAGE_SAMPLES_NV,8,
+EGL_SAMPLES,4,
 EGL_NONE,EGL_NONE
 };
 
@@ -195,9 +204,7 @@ static inline boost::function<const register float()>gFm1;
 static inline boost::function<const register float()>gF0;
 
 static inline boost::function<EM_BOOL()>RendarA;
-
 static inline boost::function<EM_BOOL()>RendarB;
-
 static inline boost::function<EM_BOOL()>Rend;
 
 static inline boost::function<EM_BOOL()>Unifrm;
@@ -277,38 +284,24 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
-"#pragma (STDGL all)\n"
-"#pragma optionNV(STDGL all)\n"
 "#extension all_spir_v_extensions : enable\n"
-"#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
 "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
-"#extension EGL_HI_colorformats : enable\n"
-// "#extension EGL_KHR_gl_colorspace : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
-// "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
-"#extension EGL_EXT_pixel_format_float : enable\n"
-"#extension GL_EXT_shader_image_load_store : enable\n"
-//  "#undef HW_PERFORMANCE\n"
-//  "#define HW_PERFORMANCE 1\n"
-//  "#define HW_PERFORMANCE 0\n"
-"#pragma STDC(FP_CONTRACT OFF)\n"
+"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 "#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
-"#pragma omp (OpenMP)\n"
-"#pragma clang loop vectorize(enable)\n"
-"#pragma clang loop interleave(enable)\n"
-"#pragma clang loop unroll(enable)\n"
-"#pragma clang loop tile(enable)\n"
-"#pragma clang loop distribute(enable)\n"
-"#pragma optimize(on)\n"
-"#pragma optimize(sse4.2)\n"
-"precision highp float;\n";
-/*
+"precision highp float;\n"
+"#undef HW_PERFORMANCE\n"
+"#define HW_PERFORMANCE 1\n"
 "#pragma (precision highp uint)\n"
+"#pragma STDC(FP_CONTRACT OFF)\n"
+"#pragma (STDGL all)\n"
+"#pragma optimize(sse4.2)";
+/*
+"#pragma optionNV(STDGL all)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
@@ -317,6 +310,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp atomic_uint)\n"
 "#pragma (precise none)\n"
 "#pragma STDGL(strict off)\n"
+"#pragma optimize(on)\n"
 "#pragma debug(off)\n"
 "#pragma (invariant none)\n"
 "#pragma (centroid all)\n"
@@ -337,14 +331,14 @@ static inline char cm_hdr_src[2300]=
 
 static inline char vrt_bdy_src[420]=
 "precision highp int;\n"
-"precision highp sampler2D;"
-"precision highp samplerCube;"
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
+"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
-"precision highp int;\n"
-"precision highp sampler2D;"
-"precision highp samplerCube;"
+"precision mediump int;\n"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
@@ -352,15 +346,17 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+static inline char frg_ftr_src[420]=
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+/*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
 "mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
-"void mainImage0\n\0";
+"void mainImage0\n";
+*/
 
 EM_BOOL ms_l,clk_l;
 
@@ -378,7 +374,7 @@ using i_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 // using gi_tensor=boost::numeric::ublas::tensor<GLint>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::int_t<16>::exact>;
 using li_tensor=boost::numeric::ublas::tensor<long>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
@@ -893,7 +889,7 @@ mms2.at(0,1)=e->clientY;
 return EM_TRUE;
 }
 
-static char8_t * result=NULL;
+static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
@@ -1026,11 +1022,10 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
-// eglBindAPI(EGL_OPENGL_API);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
-// glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
@@ -1038,7 +1033,7 @@ static inline boost::function<EM_BOOL()>RendarAb=[](){
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-// glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
@@ -1049,12 +1044,10 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
-// eglBindAPI(EGL_OPENGL_ES_API);
-// eglBindAPI(0);
-// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
-// glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 // multisampled
-// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
@@ -1062,7 +1055,7 @@ glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
-// glEnable(GL_DITHER);
+glEnable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
 // glFlush();
 return EM_TRUE;
@@ -1123,7 +1116,6 @@ int sc=datE->tm_sec;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=(hr*3600)+(mi*60)+(sc);
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-  
 /*
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%45==0){
@@ -1162,24 +1154,22 @@ return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
-
 static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
-
 static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
 
 static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
-glFinish();
+// glFlush();
 return EM_TRUE;
 }
 
 boost::function<EM_BOOL()>swap=[](){
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("scanvas",mouse.hi,mouse.hi);
+emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
-// emscripten_get_canvas_element_size("#scanvas",&css.csswi,&css.csshi);
+// emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 Size=(int)mouse.hi;
 int_size_set(Size);
 float_size_set(float(mouse.hi));
@@ -1205,7 +1195,7 @@ u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUseProgram(0);
-// glFlush();
+glFlush();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
@@ -1213,7 +1203,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-const inline char8_t * rd_fl(const char * Fnm){
+inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1228,21 +1218,19 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char *>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-// results=reinterpret_cast<char *>(result);
-return result;
+results=reinterpret_cast<char *>(result);
+return results;
 }
 return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
-  // eglBindAPI(EGL_OPENGL_BIT);
-eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1266,30 +1254,29 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=(char*)rd_fl(Fnm);
+const char * frag_body=rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
-// attr.renderViaOffscreenBackBuffer=EM_FALSE;
-// attr.explicitSwapControl=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
-ctx=emscripten_webgl_create_context("#scanvas",&attr);
+ctx=emscripten_webgl_create_context("#zcanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 // emscripten_webgl_make_context_current(cntxi.at(0,0));
 // nanoPause();
-//   emscripten_get_canvas_element_size("#scanvas",&css.csswi,&css.csshi);
+//   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("scanvas",mouse.hi,mouse.hi);
+emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
 Size=(int)mouse.hi;
 // Size=css.csshi;
 int_size_set(Size);
@@ -1322,7 +1309,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_fragment_program");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
@@ -1354,15 +1340,13 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_gl_colorspace_display_p3_passthrough");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader5");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_buffer_unified_memory");
@@ -1385,12 +1369,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multitexture");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_color_buffer_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_norm16");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_texture_norm16");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_multi_draw");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_render_shared_exponent");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
@@ -1403,25 +1386,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_wait_sync");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_external");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_image_native_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_recordable");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_framebuffer_target");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_blob_cache");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_fence_sync");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
-PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
-EGLint colorFormat=EGL_COLOR_FORMAT_HI;
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
-// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-// eglBindAPI(0);
 cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
@@ -1437,20 +1406,16 @@ glDisable(GL_DITHER);
 // glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
-// glDepthFunc(GL_ALWAYS);
 glEnable(GL_BLEND);
-glBlendFunc(GL_ONE,GL_ONE);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glEnable(GL_STENCIL_TEST);
-glStencilFunc(GL_ALWAYS,0,0xFF);
-glStencilOp(GL_KEEP,GL_KEEP,GL_KEEP);
+// glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
-glStencilMask(0xFF);
-glDisable(GL_CULL_FACE);
+// glStencilMask(0xFF);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
+glEnable(GL_CULL_FACE);
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -1460,11 +1425,7 @@ glCullFace(GL_BACK);
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
-  std::size_t len = std::size(vrt);
-
-// glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*4,vrt,GL_STATIC_DRAW);
-// glBufferData(GL_ARRAY_BUFFER,len(vrt)*4,vrt,GL_STREAM_DRAW);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*12,vrt,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_DYNAMIC_DRAW);
  /* 
 auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
@@ -1509,7 +1470,7 @@ boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 
- // eglBindAPI(0);
+    eglBindAPI(EGL_OPENGL_ES_API);
 
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
@@ -1555,8 +1516,8 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(0,0),int_size.at(0,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(0,0),int_size.at(0,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(0,0),int_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(0,0),int_size.at(0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
     //  non multisampled color renderbuffer (12,12,12,12 bit?)
@@ -1597,7 +1558,7 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-glClearColor(0.0f,0.0f,0.0f,1.0f);
+////  glClearColor(0.0f,0.0f,0.0f,1.0f);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
@@ -1609,8 +1570,8 @@ glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,int_size.at(1,0),int_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,0),int_size.at(1,0));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_RGBA32F,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
@@ -1625,8 +1586,8 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFF
 */  //  depth32 stencil8 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,4,GL_DEPTH32F_STENCIL8,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
@@ -1645,26 +1606,25 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 */
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-   // initiate textures for Shadertoy Channel
+ /*   // initiate textures for Shadertoy Channel
 glGenTextures(1,&wtexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
-// glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,float_size.at(0,0),float_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
-// glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
-// glGenerateMipmap(GL_TEXTURE_2D_MULTISAMPLE);
-// glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D_MULTISAMPLE,wtexture[0],0);  
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,float_size.at(0,0),float_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+glGenerateMipmap(GL_TEXTURE_2D);
+glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,wtexture[0],0);  
+*/
+//// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 //// glClearColor(0.0f,0.0f,0.0f,1.0f);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_COVERAGE_BUFFER_BIT_NV);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glFlush();
-glFinish();
+// glFinish();
 // glPolygonOffset(-1.0,-1.0);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 glUseProgram(S1.at(0,0,0));
-   eglBindAPI(EGL_OPENGL_ES_BIT);
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
 glDeleteShader(vtx);
@@ -1677,7 +1637,7 @@ glBindVertexArray(Sh.at(2,0));
 const GLuint atb_pos=glGetAttribLocation(S1.at(0,0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 // nanoPause();
-   glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
+glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
@@ -1705,7 +1665,7 @@ glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
 glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
-
+*/
     // texture
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
@@ -1756,14 +1716,11 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 // WGPU_Start();
 // usleep(125);
-*/
-  // date/time
 
-time_t timE=time(0);
-struct tm * datE;
-time(&timE);
-datE=localtime(&timE);
-  
+
+  // date/time
+const time_t timE=time(0);
+struct tm *datE=localtime(&timE);
 int yr=1900+datE->tm_year;
 int mn=1+datE->tm_mon;
 int dy=datE->tm_mday-1;
@@ -1776,18 +1733,16 @@ i_date.at(0,1)=mn;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=shaderToySeconds;
 glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-glUniform3f(uni_res,8192.0f,8192.0f,gpu.gF());
+glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
 glUniform3f(uni_res,float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[0],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[1],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[2],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),gpu.gF());
-  /*
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-  */
 glUniform1i(uni_fps,60.0);
 mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=float_size.at(0,0)*0.5;
@@ -1795,7 +1750,7 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
+glScissor(0,0,int_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1814,7 +1769,6 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
 // eglBindAPI(0);
-// eglBindAPI(EGL_OPENGL_API);
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
