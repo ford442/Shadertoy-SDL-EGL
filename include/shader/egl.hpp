@@ -16,7 +16,8 @@
 #define EGL_EGLEXT_PROTOTYPES
 
 #define GL_ANISOTROPIC_FILTER 0x3000
-
+#define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
+#define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
