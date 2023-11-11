@@ -1426,6 +1426,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
   
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 EGLint colorFormat=EGL_COLOR_FORMAT_HI;
@@ -1659,15 +1660,15 @@ glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
 */
   //  sRGB
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
   // textures for Shadertoy Channels
 glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,ftexture[0]);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(1,0),int_size.at(1,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
-// glTexImage2DMultisampleEXT(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
+// glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
 // glGenerateMipmap(GL_TEXTURE_2D);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,ftexture[0],0);  
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
