@@ -494,6 +494,7 @@ void * userDataB;
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
+GLuint ftexture[1];
 GLuint colorBuffer;
 GLuint renderBufferA;
 GLuint renderBufferB;
@@ -1659,14 +1660,14 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.
 */
   //  sRGB
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-   // initiate textures for Shadertoy Channel
-glGenTextures(1,&wtexture[0]);
+  // textures for Shadertoy Channels
+glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture[0]);
+glBindTexture(GL_TEXTURE_2D,ftexture[0]);
 // glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,float_size.at(0,0),float_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
-// glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
-// glGenerateMipmap(GL_TEXTURE_2D_MULTISAMPLE);
-// glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D_MULTISAMPLE,wtexture[0],0);  
+glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
+glGenerateMipmap(GL_TEXTURE_2D_MULTISAMPLE);
+glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D_MULTISAMPLE,ftexture[0],0);  
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
@@ -1719,7 +1720,7 @@ glBindBuffer(GL_UNIFORM_BUFFER_EXT,Ubuffer);
 glBufferData(GL_UNIFORM_BUFFER_EXT,4,NULL,GL_DYNAMIC_DRAW);
 UniformBufferEXT(S1.at(0,0,0),uni_tme,Ubuffer);
 // glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
-
+*/
     // texture
 glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
@@ -1770,7 +1771,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 // WGPU_Start();
 // usleep(125);
-*/
+
   // date/time
 
 time_t timE=time(0);
