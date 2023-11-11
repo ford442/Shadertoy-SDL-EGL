@@ -80,9 +80,9 @@ typedef ResultType result_type;
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
-// #ifndef OPENGL_CORE_PROFILE
-// #define OPENGL_CORE_PROFILE 1
-// #endif
+#ifndef OPENGL_CORE_PROFILE
+#define OPENGL_CORE_PROFILE 1
+#endif
 
 #ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
 #define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
@@ -105,9 +105,9 @@ static constexpr EGLint numSamples=8;
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=8.0f;
 static constexpr float multisampleFramef=1.0f;
-static constexpr float multisampleRenderf=0.5f;
+static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
-static constexpr float renderf=2.0f;
+static constexpr float renderf=1.0f;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -147,7 +147,7 @@ static constexpr EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -159,7 +159,7 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-// EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
@@ -296,7 +296,7 @@ static inline char cm_hdr_src[2300]=
 //  "#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
 "#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma optionNV(fastmath on)\n"
+"#pragma optionNV(fastmath off)\n"
 "#pragma optionNV(fastprecision off)\n"
 "#pragma omp (OpenMP)\n"
 "#pragma clang loop vectorize(enable)\n"
@@ -305,7 +305,9 @@ static inline char cm_hdr_src[2300]=
 "#pragma clang loop tile(enable)\n"
 "#pragma clang loop distribute(enable)\n"
 "#pragma optimize(on)\n"
-"#pragma optimize(sse4.2|avx)\n"
+"#pragma optimize(sse4.2)\n"
+"precision highp float;\n";
+/*
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
@@ -313,15 +315,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
-"precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision highp usampler2DArray;precision mediump samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n"
-"precision highp float;\n";
-/*
-
-
 "#pragma (precise none)\n"
 "#pragma STDGL(strict off)\n"
 "#pragma debug(off)\n"
@@ -335,7 +328,11 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;"
-
+"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
 */
 
 static inline char vrt_bdy_src[420]=
@@ -356,9 +353,7 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.42)*1.111111+0.42;}\n\0";
-
-/*
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
@@ -366,7 +361,6 @@ static inline char frg_ftr_src[1420]=
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n\0";
-*/
 
 EM_BOOL ms_l,clk_l;
 
@@ -376,7 +370,6 @@ using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
-using gf_tensor=boost::numeric::ublas::tensor<GLclampf>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using uint_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -429,7 +422,7 @@ static shad_tensor TX=shad_tensor{3,3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
-static gf_tensor Fi=gf_tensor{3,3};
+static f_tensor Fi=f_tensor{3,3};
 static d_tensor Di=d_tensor{2,2};
 static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
@@ -828,15 +821,15 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const register GLclampf()>gF=[](){
+static inline boost::function<const register float()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const register GLclampf()>gFm1=[](){
+static inline boost::function<const register float()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const register GLclampf()>gF0=[](){
+static inline boost::function<const register float()>gF0=[](){
 return Fi.at(1,1);
 };
 
@@ -961,10 +954,10 @@ int_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 int_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 int_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
 int_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-int_size.at(2,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*framef;
-int_size.at(2,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*renderf;
-int_size.at(1,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleFramef;
-int_size.at(2,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleRenderf;
+int_size.at(2,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*framef;
+int_size.at(2,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*renderf;
+int_size.at(2,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleFramef;
+int_size.at(1,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleRenderf;
 return EM_TRUE;
 }
 
@@ -1033,11 +1026,11 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
@@ -1047,17 +1040,16 @@ glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFlush();
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(0,1),int_size.at(0,1),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
 // end
-glFlush();
+// glFlush();
 return EM_TRUE;
 };
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(0);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
@@ -1070,9 +1062,9 @@ glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
-glEnable(GL_DITHER);
+// glEnable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFlush();
 return EM_TRUE;
 };
 
@@ -1251,7 +1243,7 @@ return nullptr;
 boost::function<EM_BOOL()>strt=[this](){
   // eglBindAPI(EGL_OPENGL_BIT);
 eglBindAPI(EGL_OPENGL_ES_API);
-typedef struct{GLclampf XYZW[4];}Vertex;
+typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
@@ -1472,7 +1464,7 @@ glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
 
 // glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*4,vrt,GL_STATIC_DRAW);
 // glBufferData(GL_ARRAY_BUFFER,len(vrt)*4,vrt,GL_STREAM_DRAW);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*48,vrt,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*12,vrt,GL_DYNAMIC_DRAW);
  /* 
 auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
@@ -1492,7 +1484,7 @@ buffer_object.set_data(vertex_buffer);
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*48,indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 // nanoPause();
 eglBindAPI(EGL_OPENGL_API);
@@ -1541,7 +1533,7 @@ GLenum * binaryFormat;
 void * GLbin;
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
-glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*48,binLength,binaryFormat,&GLbin);
+glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
 bin.at(0,0)=GLbin;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
@@ -1552,11 +1544,11 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(1,1),int_size.at(1,1));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glPixelStorei(GL_UNPACK_ALIGNMENT,4);
+glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 //  //  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
   //  non multisampled color renderbuffer
@@ -1617,7 +1609,7 @@ glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,int_size.at(1,0),int_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(2,2),int_size.at(2,2));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,0),int_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
@@ -1634,7 +1626,7 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFF
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,int_size.at(2,2),int_size.at(2,2));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
@@ -1667,12 +1659,12 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 //// glClearColor(0.0f,0.0f,0.0f,1.0f);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_COVERAGE_BUFFER_BIT_NV);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-// glFlush();
+glFlush();
 glFinish();
 // glPolygonOffset(-1.0,-1.0);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 glUseProgram(S1.at(0,0,0));
-eglBindAPI(EGL_OPENGL_ES_BIT);
+   eglBindAPI(EGL_OPENGL_ES_BIT);
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
 glDeleteShader(vtx);
@@ -1685,7 +1677,7 @@ glBindVertexArray(Sh.at(2,0));
 const GLuint atb_pos=glGetAttribLocation(S1.at(0,0,0),"iPosition");
 glEnableVertexAttribArray(atb_pos);
 // nanoPause();
-glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
+   glVertexAttribPointer(atb_pos,4,GL_FLOAT,GL_FALSE,0,(GLvoid*)0);
 uni_dte=glGetUniformLocation(S1.at(0,0,0),"iDate");
 uni_tme=glGetUniformLocation(S1.at(0,0,0),"iTime");
 uni_tme_dlt=glGetUniformLocation(S1.at(0,0,0),"iTimeDelta");
