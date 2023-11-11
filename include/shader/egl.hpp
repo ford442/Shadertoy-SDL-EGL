@@ -31,8 +31,8 @@
 // #include <GLES/gl.h>
 // #include <GLES/glext.h>
 
-#include <GL/gl.h>
-#include <GL/glext.h>
+// #include <GL/gl.h>
+// #include <GL/glext.h>
 
 // #include <GLES3/gl3platform.h>
 // #include <GLES3/gl31.h>
