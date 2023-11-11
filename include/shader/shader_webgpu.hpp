@@ -1660,7 +1660,7 @@ glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
 */
   //  sRGB
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
   // textures for Shadertoy Channels
 glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
