@@ -1808,7 +1808,7 @@ glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,8.0f);
 glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
 u_iTime_set(0.0);
 u_iTimeDelta_set(0.0);
