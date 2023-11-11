@@ -1,4 +1,3 @@
-# @title
 #include <boost/cstdfloat.hpp>
 #include "../../include/shader/defs.hpp"
 // #include <stdio.h>
