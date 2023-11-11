@@ -128,7 +128,7 @@ and the image will not be as accurate as it would be if it were in the original 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_BACK_BUFFER,
-EGL_NONE,EGL_NONE
+EGL_NONE
 };
 
 static constexpr EGLint ctx_att[]={
@@ -177,7 +177,7 @@ EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
 EGL_COVERAGE_SAMPLES_NV,16,
 EGL_SAMPLES,8,
-EGL_NONE,EGL_NONE
+EGL_NONE
 };
 
 boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin;
@@ -277,8 +277,8 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
-"#pragma (STDGL all)\n"
-"#pragma optionNV(STDGL all)\n"
+"#pragma (STDGL,all)\n"
+"#pragma optionNV(STDGL,all)\n"
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
@@ -295,9 +295,10 @@ static inline char cm_hdr_src[2300]=
 //  "#undef HW_PERFORMANCE\n"
 //  "#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
-"#pragma STDC(FP_CONTRACT OFF)\n"
-"#pragma optionNV(fastmath on)\n"
-"#pragma optionNV(fastprecision off)\n"
+"#pragma STDC(FENV_ACCESS,ON)\n"
+"#pragma STDC(FP_CONTRACT,OFF)\n"
+"#pragma optionNV(fastmath,on)\n"
+"#pragma optionNV(fastprecision,off)\n"
 "#pragma omp (OpenMP)\n"
 "#pragma clang loop vectorize(enable)\n"
 "#pragma clang loop interleave(enable)\n"
@@ -320,7 +321,6 @@ static inline char cm_hdr_src[2300]=
 "precision highp sampler2DArrayShadow;\n"
 "precision highp float;\n";
 /*
-
 
 "#pragma (precise none)\n"
 "#pragma STDGL(strict off)\n"
@@ -1569,8 +1569,8 @@ glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(0,0),int_size.at(0,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_ALPHA32F_ARB,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_ALPHA32F_ARB,int_size.at(1,0),int_size.at(1,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
     //  non multisampled color renderbuffer (12,12,12,12 bit?)
