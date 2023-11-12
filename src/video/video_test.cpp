@@ -273,7 +273,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([hS,hS]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([1024,1024]);
 
   //castle way
 // var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
@@ -309,7 +309,7 @@ var bb=Stoned(p[2],p[3],rng);
   var ss=(Ave(rr,gg,bb)-p[3]);
   var aveg=Aveg(p[3],ouT)+ss;
 this.color(rr,gg,bb,aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([wS,hS]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([1024,1024]);
 */
   
 // GE way
@@ -349,7 +349,7 @@ bb=GoldB(eulb);
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([hS,hS]);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([1024,1024]);
 
 wS=parseInt(document.getElementById("wid").innerHTML,10);
 hS=parseInt(document.getElementById("hig").innerHTML,10);
