@@ -853,5 +853,7 @@ int main(void){
 EM_ASM({
 FS.mkdir("/shader");
 });
+  Sleep(1000);
+
 return 1;
 }
