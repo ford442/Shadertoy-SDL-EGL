@@ -152,12 +152,12 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-let wS=parseInt(document.getElementById("wid").innerHTML,10);
-let hS=parseInt(document.getElementById("hig").innerHTML,10);
-if(wS<1.0){wS=window.innerHeight;hS=window.innerHeight;}
 vv=document.getElementById("mv");
+let wS=vv.width; // parseInt(document.getElementById("wid").innerHTML,10);
+let hS=vv.height; // parseInt(document.getElementById("hig").innerHTML,10);
+if(wS<1.0){wS=window.innerHeight;hS=window.innerHeight;}
 let $H=Module.HEAPF32.buffer;
-la=hS*hS;
+la=hS*wS;
 if(la&4!==0){
 var amount=la&4;
 la+=amount;
@@ -273,7 +273,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([1024,1024]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([wS,hS]);
 
   //castle way
 // var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
@@ -309,7 +309,7 @@ var bb=Stoned(p[2],p[3],rng);
   var ss=(Ave(rr,gg,bb)-p[3]);
   var aveg=Aveg(p[3],ouT)+ss;
 this.color(rr,gg,bb,aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([1024,1024]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([wS,hS]);
 */
   
 // GE way
@@ -349,10 +349,9 @@ bb=GoldB(eulb);
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([1024,1024]);
-
-wS=parseInt(document.getElementById("wid").innerHTML,10);
-hS=parseInt(document.getElementById("hig").innerHTML,10);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([wS,hS]);
+wS=vv.width; // parseInt(document.getElementById("wid").innerHTML,10);
+hS=vv.height; // parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
@@ -381,8 +380,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-wS=parseInt(document.getElementById("wid").innerHTML,10);
-hS=parseInt(document.getElementById("hig").innerHTML,10);
+wS=vv.width; // parseInt(document.getElementById("wid").innerHTML,10);
+hS=vv.height; // parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
 la=hS*hS;
