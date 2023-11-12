@@ -151,9 +151,8 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 vv=document.getElementById("mv");
-let wS=parseInt(vv.width,10);
-let hS=parseInt(vv.height,10);
-if(wS<5){wS=window.innerHeight;hS=window.innerHeight;}
+let wS=parseInt(document.getElementById("wid").innerHTML,10);
+let hS=parseInt(document.getElementById("hig").innerHTML,10);
 let $H=Module.HEAPF32.buffer;
 la=hS*wS;
 if(la&4!==0){
@@ -348,8 +347,8 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([wS,hS]);
-wS=vv.width; // parseInt(document.getElementById("wid").innerHTML,10);
-hS=vv.height; // parseInt(document.getElementById("hig").innerHTML,10);
+wS=parseInt(document.getElementById("wid").innerHTML,10);
+hS=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
@@ -378,8 +377,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-wS=vv.width; // parseInt(document.getElementById("wid").innerHTML,10);
-hS=vv.height; // parseInt(document.getElementById("hig").innerHTML,10);
+wS=parseInt(document.getElementById("wid").innerHTML,10);
+hS=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
 la=hS*hS;
