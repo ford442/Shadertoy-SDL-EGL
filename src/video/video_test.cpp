@@ -228,7 +228,7 @@ contx.getExtension('OES_shader_multisample_interpolation');
 contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
-// contx.getExtension('EXT_color_buffer_float');
+contx.getExtension('EXT_color_buffer_float');
 contx.getExtension('EGL_HI_colorformats');
 contx.getExtension('EGL_EXT_pixel_format_float');
 // contx.disable(gl.DITHER);
@@ -271,7 +271,7 @@ var av$=Ave(P[0],P[1],P[2]);
 var minuss=(av$-0.9)*(av$/(av$-0.9));
 av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([wS,hS]);
+}).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([hS,hS]);
 
   //castle way
 // var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
@@ -307,7 +307,7 @@ var bb=Stoned(p[2],p[3],rng);
   var ss=(Ave(rr,gg,bb)-p[3]);
   var aveg=Aveg(p[3],ouT)+ss;
 this.color(rr,gg,bb,aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([wS,hS]);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([hS,hS]);
 */
   
 // GE way
