@@ -154,7 +154,7 @@ vv=document.getElementById("mv");
 let wS=parseInt(document.getElementById("wid").innerHTML,10);
 let hS=parseInt(document.getElementById("hig").innerHTML,10);
 let $H=Module.HEAPF32.buffer;
-la=hS*wS;
+let la=hS*wS;
 if(la&4!==0){
 var amount=la&4;
 la+=amount;
