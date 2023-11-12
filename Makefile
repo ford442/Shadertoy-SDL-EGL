@@ -70,21 +70,6 @@ video_resurection_webgpu:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
 
-b3_vanilla_webgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 em++ -O0 -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) src/vanilla/main_webgpu.cpp 
-	 em++ -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 main_webgpu.o libonnxruntime_webassembly.a -O0 -g -o w3001.js \
-	 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
-	 -polly -sALLOW_MEMORY_GROWTH=1 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sINITIAL_MEMORY=1gb -lmath.js -lhtml5.js -lint53.js -sDISABLE_EXCEPTION_CATCHING=0 \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-post-js src/vanilla/filesys.js --extern-post-js rSlider.js --extern-post-js slideOut.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js
-
 b3_video_google_llvm:
 	 em++ src/video/main_google_street.cpp -c -std=c++20 -fno-math-errno -O0 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
