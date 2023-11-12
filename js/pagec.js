@@ -223,8 +223,8 @@ if(lockVid!=1){
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
+// document.getElementById('wid').innerHTML=this.videoWidth;
+// document.getElementById('hig').innerHTML=this.videoHeight;
 // document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
 // document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
 var $sc=this.duration;
