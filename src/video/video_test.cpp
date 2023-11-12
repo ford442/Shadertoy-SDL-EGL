@@ -1,5 +1,5 @@
 #include "../../include/video/video_test.hpp"
-#include <boost/predef/os/windows.hpp>
+#include <boost/predef/os/windows.h>
 
 template<class ArgumentType,class ResultType>
 
