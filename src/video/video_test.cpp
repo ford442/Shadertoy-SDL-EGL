@@ -155,8 +155,8 @@ let wS=parseInt(document.getElementById("wid").innerHTML,10);
 let hS=parseInt(document.getElementById("hig").innerHTML,10);
 let $H=Module.HEAPF32.buffer;
 let la=hS*wS;
-if(la&4!==0){
-var amount=la&4;
+if(la%4!==0){
+let amount=4-(la%4);
 la+=amount;
 }
 var pointa=80*la;
@@ -353,8 +353,8 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
 la=hS*hS;
-if(la&4!==0){
-var amount=la&4;
+if(la%4!==0){
+let amount=4-(la%4);
 la+=amount;
 }
 sz=(hS*wS)/8;
@@ -382,8 +382,8 @@ hS=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
 la=hS*hS;
-if(la&4!==0){
-var amount=la&4;
+if(la%4!==0){
+let amount=4-(la%4);
 la+=amount;
 }
 sz=(hS*wS)/8;
