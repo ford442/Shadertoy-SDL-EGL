@@ -25,12 +25,12 @@ STATIC_LINK_FLAGS := -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS := -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
-GL_FLAGS := -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=2 -sUSE_REGAL=1 \
+GL_FLAGS := -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=0 -sUSE_REGAL=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
-LINK_FLAGS := $(LDFLAGS) -sENVIRONMENT='web' -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
-	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
+	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
@@ -48,8 +48,8 @@ vanilla_test_gpujs:
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 video_test:
-	 em++ $(STDS) -c src/video/video_test.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o b3671test.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) -c src/video/video_test.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -o b3671test.js $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano"]' \
