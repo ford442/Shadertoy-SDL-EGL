@@ -20,7 +20,7 @@ bz.postMessage({data:222});},50);
 
 function normalResStart(){
 setTimeout(function(){
-Module.ccall('b3');
+// Module.ccall('b3');
 },2550);
 setTimeout(function(){
 Module.ccall('str');
