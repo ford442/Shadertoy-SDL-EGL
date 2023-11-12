@@ -122,7 +122,7 @@ and the image will not be as accurate as it would be if it were in the original 
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
@@ -153,7 +153,7 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
@@ -287,8 +287,8 @@ static inline char cm_hdr_src[2300]=
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
-// "#extension EGL_KHR_gl_colorspace : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#extension EGL_KHR_gl_colorspace : enable\n"
+"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
@@ -335,7 +335,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(inline all)\n"
 "precision highp sampler3D;precision highp sampler2D;"
 "precision highp samplerCube;"
-
 */
 
 static inline char vrt_bdy_src[420]=
@@ -1427,15 +1426,14 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
-  
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 EGLint colorFormat=EGL_COLOR_FORMAT_HI;
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
-// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_API);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-// eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_ES_API);
 cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
@@ -1524,7 +1522,7 @@ boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 
- // eglBindAPI(0);
+eglBindAPI(EGL_OPENGL_ES_API);
 
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
