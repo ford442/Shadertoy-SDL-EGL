@@ -152,8 +152,8 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 vv=document.getElementById("mv");
-let wS=parseInt(document.getElementById("wid").innerHTML,10);
-let hS=parseInt(document.getElementById("hig").innerHTML,10);
+let wS=document.getElementById("wid").innerHTML;
+let hS=document.getElementById("hig").innerHTML;
 let $H=Module.HEAPF32.buffer;
 let la=hS*wS;
 if(la%4!==0){
@@ -171,7 +171,7 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{
-colorType:'float32',
+// colorType:'float32',
 preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
@@ -348,8 +348,8 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([hS,wS]);
-wS=parseInt(document.getElementById("wid").innerHTML,10);
-hS=parseInt(document.getElementById("hig").innerHTML,10);
+wS=document.getElementById("wid").innerHTML;
+hS=document.getElementById("hig").innerHTML;
 vv=document.getElementById("mv");
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
@@ -378,8 +378,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-wS=parseInt(document.getElementById("wid").innerHTML,10);
-hS=parseInt(document.getElementById("hig").innerHTML,10);
+wS=document.getElementById("wid").innerHTML;
+hS=document.getElementById("hig").innerHTML;
 var blank$=Math.max((((wS-hS)*0)/8),0);
 var nblank$=Math.max((((hS-wS)*0)/8),0);
 la=hS*hS;
