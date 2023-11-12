@@ -347,7 +347,7 @@ bb=GoldB(eulb);
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([wS,hS]);
+}).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([hS,hS]);
 wS=parseInt(document.getElementById("wid").innerHTML,10);
 hS=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
