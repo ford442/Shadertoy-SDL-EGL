@@ -7,7 +7,6 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
 EGL_NONE
@@ -30,7 +29,6 @@ EGL_STENCIL_SIZE,32,
 EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
-
 
 // void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
 
@@ -153,9 +151,9 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 vv=document.getElementById("mv");
-let wS=vv.width; // parseInt(document.getElementById("wid").innerHTML,10);
-let hS=vv.height; // parseInt(document.getElementById("hig").innerHTML,10);
-if(wS<1.0){wS=window.innerHeight;hS=window.innerHeight;}
+let wS=parseInt(vv.width,10);
+let hS=parseInt(vv.height,10);
+if(wS<5){wS=window.innerHeight;hS=window.innerHeight;}
 let $H=Module.HEAPF32.buffer;
 la=hS*wS;
 if(la&4!==0){
