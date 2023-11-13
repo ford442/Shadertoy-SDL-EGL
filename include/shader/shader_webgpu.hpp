@@ -1320,13 +1320,12 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
-  emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
-
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
@@ -1405,10 +1404,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initi
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_multi_draw");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_render_shared_exponent");
-  
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_query");
-
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_device");
@@ -1647,7 +1644,7 @@ glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH32F_STENCIL8,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
-glDepthRange(0.0f,1.0f);
+// glDepthRange(0.0f,1.0f);
 glClearDepthf(1.0f);
 /// glClearDepthf(1.0f);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
