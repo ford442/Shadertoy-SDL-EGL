@@ -1037,6 +1037,7 @@ static inline boost::function<EM_BOOL()>RendarAb=[](){
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
+eglSwapBuffers(display,surface);
 glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
@@ -1167,7 +1168,6 @@ glUniform1i(smp_chn[raN],raN);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
 // glFlush();
-eglSwapBuffers(display,surface);
 return EM_TRUE;
 };
 
@@ -1834,7 +1834,7 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glClear(GL_STENCIL_BUFFER_BIT);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
-// eglBindAPI(0);
+eglBindAPI(0);
 // eglBindAPI(EGL_OPENGL_API);
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
