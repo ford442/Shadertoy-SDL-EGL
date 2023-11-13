@@ -1216,6 +1216,9 @@ u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUseProgram(0);
 // glFlush();
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
@@ -1251,11 +1254,10 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
-  // eglBindAPI(EGL_OPENGL_BIT);
+// eglBindAPI(EGL_OPENGL_BIT);
+boost::uint_t<32>::exact vtx;
+boost::uint_t<32>::exact frag;
 eglBindAPI(EGL_OPENGL_ES_API);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
 typedef struct{GLclampf XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1293,8 +1295,8 @@ attr.enableExtensionsByDefault=EM_FALSE;
 // attr.explicitSwapControl=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=2;
-attr.minorVersion=0;
+// attr.majorVersion=2;
+// attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -1513,17 +1515,18 @@ eglBindAPI(EGL_OPENGL_API);
 
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
-  
+// boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+Sh.at(0,1)=vtx;
 // vertexShader.setStrings(src,2);
 //  vertexShader.compile();
-
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
-  
-boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+// boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+Sh.at(1,1)=frag;
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 glClearDepth(Di.at(0,0));
@@ -1532,8 +1535,8 @@ boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
-glAttachShader(S1.at(0,0,0),frag);
-glAttachShader(S1.at(0,0,0),vtx);
+glAttachShader(S1.at(0,0,0),Sh.at(1,1));
+glAttachShader(S1.at(0,0,0),Sh.at(0,1));
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
 glLinkProgram(S1.at(0,0,0));
   /*
@@ -1833,7 +1836,7 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glClear(GL_STENCIL_BUFFER_BIT);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
-eglBindAPI(0);
+eglBindAPI(EGL_NONE);
 // eglBindAPI(EGL_OPENGL_API);
 emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
