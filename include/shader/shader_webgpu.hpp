@@ -564,6 +564,9 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 boost::uint_t<32>::exact vtx;
 boost::uint_t<32>::exact frag;
 boost::uint_t<64>::exact shd_prg;
+GLsizei * binLength;
+GLenum * binaryFormat;
+void * GLbin;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -1532,7 +1535,7 @@ Sh.at(1,1)=frag;
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 glClearDepth(Di.at(0,0));
-// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 // boost::uint_t<32>::exact shd_prg=glCreateProgram();
 shd_prg=glCreateProgram();
 PRGin(shd_prg);
@@ -1551,9 +1554,6 @@ glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_DYNAMIC_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
-GLsizei * binLength;
-GLenum * binaryFormat;
-void * GLbin;
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*64,binLength,binaryFormat,&GLbin);
