@@ -1261,8 +1261,8 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
-// eglBindAPI(EGL_OPENGL_BIT);
-eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_BIT);
+// eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{GLclampf XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1443,9 +1443,9 @@ EGLint colorFormat=EGL_COLOR_FORMAT_HI;
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
@@ -1512,7 +1512,7 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*64,indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 // nanoPause();
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
   
 // glslang::TProgram program;
 // glslang::TShader vertexShader(EShLanguage::EShLangVertex);
@@ -1535,7 +1535,7 @@ Sh.at(1,1)=frag;
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 glClearDepth(Di.at(0,0));
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 // boost::uint_t<32>::exact shd_prg=glCreateProgram();
 shd_prg=glCreateProgram();
 PRGin(shd_prg);
