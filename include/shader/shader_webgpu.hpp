@@ -1253,6 +1253,9 @@ return nullptr;
 boost::function<EM_BOOL()>strt=[this](){
   // eglBindAPI(EGL_OPENGL_BIT);
 eglBindAPI(EGL_OPENGL_ES_API);
+glDeleteShader(vtx);
+glDeleteShader(frag);
+glReleaseShaderCompiler();
 typedef struct{GLclampf XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1523,9 +1526,8 @@ src[3]=frg_ftr;
 boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
-
+glClearDepth(Di.at(0,0));
 eglBindAPI(EGL_OPENGL_ES_API);
-
 boost::uint_t<32>::exact shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
@@ -1684,9 +1686,9 @@ glUseProgram(S1.at(0,0,0));
 // eglBindAPI(EGL_OPENGL_ES_BIT);
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
-glDeleteShader(vtx);
-glDeleteShader(frag);
-glReleaseShaderCompiler();
+// glDeleteShader(vtx);
+// glDeleteShader(frag);
+// glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
