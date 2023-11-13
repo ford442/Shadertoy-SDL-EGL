@@ -561,6 +561,9 @@ WGpuImageCopyBuffer WGPU_Output_Buffer={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
+boost::uint_t<32>::exact vtx;
+boost::uint_t<32>::exact frag;
+
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -1255,8 +1258,6 @@ return nullptr;
 
 boost::function<EM_BOOL()>strt=[this](){
 // eglBindAPI(EGL_OPENGL_BIT);
-boost::uint_t<32>::exact vtx;
-boost::uint_t<32>::exact frag;
 eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{GLclampf XYZW[4];}Vertex;
 gpu.setFloats();
