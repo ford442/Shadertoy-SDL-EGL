@@ -1320,11 +1320,13 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+  emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
+
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
@@ -1344,9 +1346,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_polygon_offset_clamp");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counter_ops");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
@@ -1403,7 +1405,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initi
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_multi_draw");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_render_shared_exponent");
+  
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_query");
+
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_device");
