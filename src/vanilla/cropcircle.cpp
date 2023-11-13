@@ -43,23 +43,23 @@ static constexpr EGLint attribute_list[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT|EGL_OPENGL_ES3_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
-// EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 // EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX,
+EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
+EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
 EGL_RED_SIZE,32,
@@ -83,6 +83,7 @@ emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"KHR_no_error");
 emscripten_webgl_enable_extension(ctx,"GL_REGAL_enable");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(ctx,"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_float");
@@ -90,6 +91,7 @@ emscripten_webgl_enable_extension(ctx,"ARB_sample_shading");
 emscripten_webgl_enable_extension(ctx,"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(ctx,"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(ctx,"NV_half_float");
+emscripten_webgl_enable_extension(ctx,"OES_texture_half_float");
 emscripten_webgl_enable_extension(ctx,"ARB_fragment_program");
 emscripten_webgl_enable_extension(ctx,"NV_fragment_program_option");
 emscripten_webgl_enable_extension(ctx,"NV_fragment_program");
@@ -101,9 +103,9 @@ emscripten_webgl_enable_extension(ctx,"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(ctx,"EXT_polygon_offset_clamp");
 emscripten_webgl_enable_extension(ctx,"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(ctx,"ARB_shader_atomic_counter_ops");
+emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(ctx,"EGL_NV_quadruple_buffer");
-emscripten_webgl_enable_extension(ctx,"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(ctx,"NV_depth_buffer_float");
 emscripten_webgl_enable_extension(ctx,"ARB_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"ARB_color_buffer_half_float");
@@ -129,6 +131,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_display_p3_linear");
 emscripten_webgl_enable_extension(ctx,"EXT_gl_colorspace_display_p3_passthrough");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_gl_colorspace_bt2020_linear");
+emscripten_webgl_enable_extension(ctx,"OES_texture_float");
 emscripten_webgl_enable_extension(ctx,"NV_gpu_shader4");
 emscripten_webgl_enable_extension(ctx,"NV_gpu_shader5");
 emscripten_webgl_enable_extension(ctx,"NV_vertex_buffer_unified_memory");
@@ -156,9 +159,11 @@ emscripten_webgl_enable_extension(ctx,"EXT_color_buffer_half_float");
 emscripten_webgl_enable_extension(ctx,"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(ctx,"EGL_ANGLE_direct3d_display");
 emscripten_webgl_enable_extension(ctx,"EGL_ANGLE_robust_resource_initialization");
+emscripten_webgl_enable_extension(ctx,"WEBGL_multi_draw");
 emscripten_webgl_enable_extension(ctx,"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(ctx,"WEBGL_render_shared_exponent");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_device_base");
+emscripten_webgl_enable_extension(ctx,"EGL_EXT_device_query");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_platform_base");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_platform_device");
@@ -179,6 +184,8 @@ emscripten_webgl_enable_extension(ctx,"EGL_ANDROID_native_fence_sync");
 emscripten_webgl_enable_extension(ctx,"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(ctx,"OES_EGL_image_external");
 emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
+emscripten_webgl_enable_extension(ctx,"GL_ARB_texture_rgb10_a2ui");
+emscripten_webgl_enable_extension(ctx,"ARB_texture_multisample");
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glDisable(GL_DITHER);
@@ -203,7 +210,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -338,7 +345,7 @@ alpha:true,
 depth:true,
 stencil:false,
 // preserveDrawingBuffer:false,
-premultipliedAlpha:true,
+premultipliedAlpha:false,
 // imageSmoothingEnabled:true,
 willReadFrequently:true,
 lowLatency:true,
