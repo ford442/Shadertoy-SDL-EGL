@@ -78,6 +78,9 @@ EGL_NONE
 
 void emsc(int leng,float *ptr){
 eglBindAPI(EGL_OPENGL_API);
+
+  
+glDisable(GL_DITHER);
   glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility");
@@ -188,8 +191,6 @@ emscripten_webgl_enable_extension(ctx,"OES_EGL_image_external");
 emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(ctx,"ARB_texture_multisample");
-
-glDisable(GL_DITHER);
 GLuint buffer,Rbuffer,Fbuffer;
 glGenFramebuffers(1,&Fbuffer);
 glGenRenderbuffers(1,&Rbuffer);
@@ -210,7 +211,7 @@ emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
-attr.antialias=EM_TRUE;
+attr.antialias=EM_FALSE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_TRUE;
