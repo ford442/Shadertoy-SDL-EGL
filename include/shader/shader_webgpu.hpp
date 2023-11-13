@@ -563,6 +563,7 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 boost::uint_t<32>::exact vtx;
 boost::uint_t<32>::exact frag;
+boost::uint_t<64>::exact shd_prg;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -933,7 +934,7 @@ GPU gpu;
 
 public:
 
-static EM_BOOL PRGin(register boost::uint_t<32>::exact m1){
+static EM_BOOL PRGin(register boost::uint_t<64>::exact m1){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 return EM_TRUE;
@@ -1531,8 +1532,9 @@ Sh.at(1,1)=frag;
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 glClearDepth(Di.at(0,0));
-eglBindAPI(EGL_OPENGL_ES_API);
-boost::uint_t<32>::exact shd_prg=glCreateProgram();
+// eglBindAPI(EGL_OPENGL_ES_API);
+// boost::uint_t<32>::exact shd_prg=glCreateProgram();
+shd_prg=glCreateProgram();
 PRGin(shd_prg);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
