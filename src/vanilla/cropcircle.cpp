@@ -78,6 +78,8 @@ EGL_NONE
 
 void emsc(int leng,float *ptr){
 eglBindAPI(EGL_OPENGL_API);
+  glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
@@ -186,8 +188,7 @@ emscripten_webgl_enable_extension(ctx,"OES_EGL_image_external");
 emscripten_webgl_enable_extension(ctx,"EXT_YUV_target");
 emscripten_webgl_enable_extension(ctx,"GL_ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(ctx,"ARB_texture_multisample");
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+
 glDisable(GL_DITHER);
 GLuint buffer,Rbuffer,Fbuffer;
 glGenFramebuffers(1,&Fbuffer);
