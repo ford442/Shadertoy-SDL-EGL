@@ -390,24 +390,16 @@ let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
-let vdff=0;
-let hdff=0;
-if(ww>h){
-hdff=h-ww;
-}
-if(h>ww){
-vdff=h-ww;
-}
-ctx.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,ww,h);
-ctxB.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,ww,h);
-ctxC.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,ww,h);
-var imgData=ctx.getImageData(0,0,winSize,winSize);
-var rgbdat=ctx.createImageData(winSize,winSize);
+ctx.drawImage(vd,0,0,ww,h);
+ctxB.drawImage(vd,0,0,ww,h);
+ctxC.drawImage(vd,0,0,ww,h);
+var imgData=ctx.getImageData(0,0,ww,h);
+var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
 var imgg=imgData.data;
 var i;
-let l=winSize*winSize;
-let la=winSize*winSize*4;
+let l=h*ww;
+let la=h*ww*4;
 var pointa=la*2.0;
 var pointb=la*3.0;
 var pointc=la*4.0;
@@ -425,7 +417,7 @@ ctx.getExtension('GL_ARB_direct_state_access');
  */
 var agav=new Float32Array($H,pointc,1);
 // console.log(agav[0]);
-for(i=0;i<(winSize*winSize*4);i=i+4){
+for(i=0;i<(ww*h*4);i=i+4){
 var rgb=(imgg[i]*0.2126)+(imgg[i+1]*0.7152)+(imgg[i+2]*0.0722);
 var lightDark=128+((Math.abs(agav[0]-128))/2);
 rgb=rgb+lightDark/2;
