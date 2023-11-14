@@ -493,7 +493,7 @@ ctx.putImageData(rgbdat,0,0);
 
 function Ra(){
 // bgPicA.hidden=false;
-if(bgPicB.hidden=true){
+if(bgPicB.hidden==true){
 bgPicB.hidden=false;
 }else{
 bgPicB.hidden=true;
