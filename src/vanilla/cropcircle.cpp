@@ -300,7 +300,7 @@ emsc(leng,ptr);
 
 EM_JS(void,ma,(),{
 "use strict";
-var winSize=parseInt(window.innerHeight,10);
+let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 const icanvas=document.getElementById('imag2');
 const bcanvas=document.getElementById('imag3');
@@ -354,7 +354,7 @@ lowLatency:false,
 powerPreference:'high-performance',
 antialias:false
 };
-const contxVarsB={
+  const contxVarsB={
 colorType:'float32',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
@@ -370,12 +370,12 @@ powerPreference:'high-performance',
 antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
-// const ctxB=icanvas.getContext('2d',contxVarsB);
-// const ctxC=bcanvas.getContext('2d',contxVarsB);
+const ctxB=icanvas.getContext('2d',contxVarsB);
+const ctxC=bcanvas.getContext('2d',contxVarsB);
 const bgPicA=document.getElementById('imgA');
 const bgPicB=document.getElementById('imgB');
 // const ctxB=zcanvas.getContext('2d',contxVars);
-var gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -390,21 +390,20 @@ let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
-var maxDimension=Math.max(ww,h);
-ctx.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
-// ctxB.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
-// ctxC.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
-var imgData=ctx.getImageData(0,0,winSize,winSize);
-var rgbdat=ctx.createImageData(winSize,winSize);
+ctx.drawImage(vd,0,0,ww,h);
+ctxB.drawImage(vd,0,0,ww,h);
+ctxC.drawImage(vd,0,0,ww,h);
+var imgData=ctx.getImageData(0,0,ww,h);
+var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
 var imgg=imgData.data;
 var i;
-var l=winSize*winSize;
-var la=winSize*winSize*4;
+let l=h*ww;
+let la=h*ww*4;
 var pointa=la*2.0;
 var pointb=la*3.0;
 var pointc=la*4.0;
-var $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF32.buffer;
 var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
