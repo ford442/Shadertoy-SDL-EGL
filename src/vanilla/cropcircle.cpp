@@ -370,8 +370,8 @@ powerPreference:'high-performance',
 antialias:false
 };
 const ctx=scanvas.getContext('2d',contxVars);
-const ctxB=icanvas.getContext('2d',contxVarsB);
-const ctxC=bcanvas.getContext('2d',contxVarsB);
+// const ctxB=icanvas.getContext('2d',contxVarsB);
+// const ctxC=bcanvas.getContext('2d',contxVarsB);
 const bgPicA=document.getElementById('imgA');
 const bgPicB=document.getElementById('imgB');
 // const ctxB=zcanvas.getContext('2d',contxVars);
@@ -392,8 +392,8 @@ let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 const maxDimension=Math.max(ww,h);
 ctx.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
-ctxB.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
-ctxC.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
+// ctxB.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
+// ctxC.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
 var imgData=ctx.getImageData(0,0,maxDimension,maxDimension);
 var rgbdat=ctx.createImageData(maxDimension,maxDimension);
 var rgbd=rgbdat.data;
