@@ -1335,7 +1335,7 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 // eglBindAPI(EGL_OPENGL_API);
-ctxegl=eglCreateContext(display,eglconfig,cntxi.at(0,0),ctx_att);
+ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 // eglBindAPI(EGL_OPENGL_ES_API);
 cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
