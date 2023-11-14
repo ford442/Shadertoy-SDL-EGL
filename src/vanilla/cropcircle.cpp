@@ -542,9 +542,7 @@ rott=(rott+360-knd.innerHTML);
 }else{
 rott=rott-knd.innerHTML;
 }
-setTimeout(function(){
 rrra(rott);
-},16);
 if((rottb-knc.innerHTML)<0){
 rottb=(rottb+360-knc.innerHTML);
 }else{
@@ -552,10 +550,10 @@ rottb=(rottb-knc.innerHTML);
 }
 setTimeout(function(){
 rrrb(rottb);
-},32);
+},rate);
 setTimeout(function(){
 Rb();
-},64);
+},rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
@@ -563,10 +561,10 @@ rottc=((rottc+knb.innerHTML)-360);
 rottc=(rottc+knb.innerHTML);
 }
 rrrc(rottc);
-},32);
+},rate);
 setTimeout(function(){
 $rn();
-},8);
+},rate);
 }
 $rn();
 document.getElementById("di").onclick=function(){
