@@ -495,8 +495,10 @@ function Ra(){
 // bgPicA.hidden=false;
 if(bgPicB.hidden==true){
 bgPicB.hidden=false;
+bgPicA.hidden=true;
 }else{
 bgPicB.hidden=true;
+bgPicA.hidden=false;
 }
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
