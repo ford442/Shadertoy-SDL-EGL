@@ -276,44 +276,44 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-"#extension GL_EXTENSIONS : enable\n"
+"#extension GL_EXTENSIONS : require\n"
 "#pragma (STDGL,all)\n"
 "#pragma optionNV(STDGL,all)\n"
-"#extension all_spir_v_extensions : enable\n"
+"#extension GL_SPIRV_EXTENSIONS : enable\n"
 "#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
-"#extension GL_KHR_no_error : enable\n"
-"#extension GL_REGAL_enable : enable\n"
-"#extension EGL_ANGLE_platform_angle : enable\n"
-"#extension GL_ARB_spirv_extensions : enable\n"
-"#extension EGL_HI_colorformats : enable\n"
-"#extension EGL_KHR_gl_colorspace : enable\n"
-"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
-// "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
-"#extension EGL_EXT_pixel_format_float : enable\n"
-"#extension GL_EXT_shader_image_load_store : enable\n"
+"#extension GL_KHR_no_error : require\n"
+// "#extension GL_REGAL_enable : require\n"
+"#extension EGL_ANGLE_platform_angle : require\n"
+"#extension GL_ARB_spirv_extensions : require\n"
+"#extension EGL_HI_colorformats : require\n"
+"#extension EGL_KHR_gl_colorspace : require\n"
+"#extension EGL_EXT_gl_colorspace_scrgb : require\n"
+// "#extension EXT_gl_colorspace_display_p3_passthrough : require\n"
+"#extension EGL_EXT_pixel_format_float : require\n"
+"#extension GL_EXT_shader_image_load_store : require\n"
 //  "#undef HW_PERFORMANCE\n"
 //  "#define HW_PERFORMANCE 1\n"
 //  "#define HW_PERFORMANCE 0\n"
-"#pragma STDC(FENV_ACCESS,ON)\n"
-"#pragma STDC(FP_CONTRACT,OFF)\n"
+"#pragma STDC(fenv_access,on)\n"
+"#pragma STDC(fp_contract,fast)\n"
 "#pragma optionNV(fastmath,on)\n"
 "#pragma optionNV(fastprecision,off)\n"
-"#pragma omp (OpenMP)\n"
-"#pragma clang loop vectorize(enable)\n"
-"#pragma clang loop interleave(enable)\n"
-"#pragma clang loop unroll(enable)\n"
-"#pragma clang loop tile(enable)\n"
-"#pragma clang loop distribute(enable)\n"
-"#pragma optimize(on)\n"
-"#pragma optimize(sse4.2|avx)\n"
-"#pragma (precision highp uint)\n"
-"#pragma (precision highp double)\n"
-"#pragma (precision highp vec4)\n"
-"#pragma (precision highp mat4)\n"
-"#pragma (precision highp short)\n"
-"#pragma (precision highp bool)\n"
-"#pragma (precision highp atomic_uint)\n"
+"#pragma omp(OpenMP)\n"
+"#pragma clang loop(vectorize(enable))\n"
+"#pragma clang loop(interleave(enable)\n"
+"#pragma clang loop(unroll(enable))\n"
+"#pragma clang loop(tile(enable))\n"
+"#pragma clang loop(distribute(enable))\n"
+"#pragma optimize(O3)\n"
+"#pragma optimize(avx)\n"
+"#pragma (precision highp,uint)\n"
+"#pragma (precision highp,double)\n"
+"#pragma (precision highp,vec4)\n"
+"#pragma (precision highp,mat4)\n"
+"#pragma (precision highp,short)\n"
+"#pragma (precision highp,bool)\n"
+"#pragma (precision highp,atomic_uint)\n"
 "precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
@@ -1397,7 +1397,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program2");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_float_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_polygon_offset_clamp");
@@ -1426,11 +1425,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_gl_colorspace_display_p3_passthrough");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_gl_colorspace_display_p3_passthrough");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader5");
@@ -1487,6 +1486,26 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_SMPTE2086_metadata");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multisample_texture");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_cube_map_array");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_buffer_object");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_storage_buffer_object");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_compute_shader");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_tessellation_shader");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_draw_elements_base_vertex");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_provoking_vertex");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_seamless_cube_map_per_texture");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_compression_rgtc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_compression_bptc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_compression_astc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_filter_minmax");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_depth_texture");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_objects");
+
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
