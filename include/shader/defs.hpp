@@ -10,7 +10,8 @@
 #define _XOPEN_SOURCE 700
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD_OPTIMIZED 
-
+// #define _FLT_EVAL_METHOD_INLINE
+  
 // #pragma STDC CX_LIMITED_RANGE ON
 // #pragma STDC FP_CONTRACT ON
 #define _XOPEN_REALTIME
@@ -19,7 +20,7 @@
 #define _POSIX_SYNC_IO
 #define	_XOPEN_SHM
 #define _POSIX_PRIORITIZED_IO 1
-#undef _FLT_ROUNDS
+#undef _FLT_ROUNDS_NEAREST
 #define _FLT_ROUNDS_ZERO
 #define _POSIX_REGEXP
 
