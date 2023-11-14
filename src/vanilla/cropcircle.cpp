@@ -300,7 +300,7 @@ emsc(leng,ptr);
 
 EM_JS(void,ma,(),{
 "use strict";
-let winSize=parseInt(window.innerHeight,10);
+var winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 const icanvas=document.getElementById('imag2');
 const bcanvas=document.getElementById('imag3');
@@ -354,7 +354,7 @@ lowLatency:false,
 powerPreference:'high-performance',
 antialias:false
 };
-  const contxVarsB={
+const contxVarsB={
 colorType:'float32',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
@@ -375,7 +375,7 @@ const ctx=scanvas.getContext('2d',contxVars);
 const bgPicA=document.getElementById('imgA');
 const bgPicB=document.getElementById('imgB');
 // const ctxB=zcanvas.getContext('2d',contxVars);
-const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+var gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -390,7 +390,7 @@ let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
-const maxDimension=Math.max(ww,h);
+var maxDimension=Math.max(ww,h);
 ctx.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
 // ctxB.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
 // ctxC.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
@@ -399,12 +399,12 @@ var rgbdat=ctx.createImageData(winSize,winSize);
 var rgbd=rgbdat.data;
 var imgg=imgData.data;
 var i;
-let l=winSize*winSize;
-let la=winSize*winSize*4;
+var l=winSize*winSize;
+var la=winSize*winSize*4;
 var pointa=la*2.0;
 var pointb=la*3.0;
 var pointc=la*4.0;
-let $H=Module.HEAPF32.buffer;
+var $H=Module.HEAPF32.buffer;
 var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
