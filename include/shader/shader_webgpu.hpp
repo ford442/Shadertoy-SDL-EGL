@@ -1884,22 +1884,6 @@ EM_ASM({
 console.log("EGL_RENDER_BUFFER: ");
 console.log($0);
 },respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_RED_SIZE,&respon);
-EM_ASM({
-console.log("EGL_CONTEXT_RED_SIZE: ");
-console.log($0);
-},&respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_ALPHA_SIZE,&respon);
-EM_ASM({
-console.log("EGL_CONTEXT_ALPHA_SIZE: ");
-console.log($0);
-},respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_DEPTH_SIZE,&respon);
-EM_ASM({
-console.log("EGL_CONTEXT_DEPTH_SIZE: ");
-console.log($0);
-},respon);
-
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
