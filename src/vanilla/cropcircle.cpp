@@ -398,9 +398,9 @@ hdff=h-ww;
 if(h>ww){
 vdff=h-ww;
 }
-ctx.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
-ctxB.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
-ctxC.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
+ctx.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize);
+ctxB.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize);
+ctxC.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize);
 var imgData=ctx.getImageData(0,0,winSize,winSize);
 var rgbdat=ctx.createImageData(winSize,winSize);
 var rgbd=rgbdat.data;
