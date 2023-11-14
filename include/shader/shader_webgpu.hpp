@@ -1865,6 +1865,9 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
 EM_ASM({
+  __EMSCRIPTEN_ASM_MODULE_EXPORT__(Module.version);
+  __EMSCRIPTEN_ASM_MODULE_EXPORT__(Module.context);
+
 console.log("Emscripten compiler: "+Module.version);
 console.log("Emscripten context: "+Module.context);
 });
