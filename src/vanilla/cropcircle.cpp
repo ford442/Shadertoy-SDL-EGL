@@ -346,11 +346,12 @@ preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
 stencil:false,
-// preserveDrawingBuffer:false,
+preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 // imageSmoothingEnabled:false,
 willReadFrequently:true,
 lowLatency:false,
+desynchronized:true,
 powerPreference:'high-performance',
 antialias:false
 };
@@ -361,11 +362,12 @@ preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
 stencil:false,
-// preserveDrawingBuffer:false,
+preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 // imageSmoothingEnabled:true,
 willReadFrequently:true,
 lowLatency:false,
+desynchronized:true,
 powerPreference:'high-performance',
 antialias:false
 };
@@ -540,7 +542,9 @@ rott=(rott+360-knd.innerHTML);
 }else{
 rott=rott-knd.innerHTML;
 }
+setTimeout(function(){
 rrra(rott);
+},16);
 if((rottb-knc.innerHTML)<0){
 rottb=(rottb+360-knc.innerHTML);
 }else{
@@ -548,10 +552,10 @@ rottb=(rottb-knc.innerHTML);
 }
 setTimeout(function(){
 rrrb(rottb);
-},8);
+},32);
 setTimeout(function(){
 Rb();
-},16);
+},64);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
@@ -562,7 +566,7 @@ rrrc(rottc);
 },32);
 setTimeout(function(){
 $rn();
-},rate);
+},8);
 }
 $rn();
 document.getElementById("di").onclick=function(){
