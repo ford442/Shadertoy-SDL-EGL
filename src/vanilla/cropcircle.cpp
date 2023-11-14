@@ -555,9 +555,9 @@ rottb=(rottb-knc.innerHTML);
 setTimeout(function(){
 rrrb(rottb);
 },rate);
-setTimeout(function(){
+// setTimeout(function(){
 Rb();
-},rate);
+// },rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
