@@ -1264,7 +1264,7 @@ return nullptr;
 boost::function<EM_BOOL()>strt=[this](){
 // eglBindAPI(EGL_OPENGL_BIT);
 eglBindAPI(EGL_OPENGL_ES_API);
-typedef struct{__float80 XYZW[4];}Vertex;
+typedef struct{register float XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
