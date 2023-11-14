@@ -492,7 +492,7 @@ ctx.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
-bgPicA.hidden=false;
+// bgPicA.hidden=false;
 bgPicB.hidden=true;
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
@@ -502,7 +502,6 @@ cnP.setAttribute("style","transform:scaleY(1.0)");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999991;");
 // bgPicB.setAttribute("style","z-index:999990;");
@@ -565,7 +564,7 @@ rottc=(rottc+knb.innerHTML);
 }
 rrrc(rottc);
 },rate);
-  bgPicA.hidden=true;
+//  bgPicA.hidden=true;
 bgPicB.hidden=false;
 setTimeout(function(){
 $rn();
