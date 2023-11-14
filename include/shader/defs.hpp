@@ -22,7 +22,7 @@
 #define _POSIX_PRIORITIZED_IO 1
 #undef _FLT_ROUNDS_NEAREST
 #define _FLT_ROUNDS_ZERO
-#define _POSIX_REGEXP
+// #define _POSIX_REGEXP
 
 // #pragma pack(4)
 // #pragma fenv_access(on)             // enable environment sensitivity
