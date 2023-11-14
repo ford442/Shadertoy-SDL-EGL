@@ -104,9 +104,9 @@ typedef ResultType result_type;
 static constexpr EGLint numSamples=8;
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=8.0f;
-static constexpr float multisampleFramef=1.0f;
-static constexpr float multisampleRenderf=1.0f;
-static constexpr float framef=2.0f;
+static constexpr float multisampleFramef=1.25f;
+static constexpr float multisampleRenderf=1.50f;
+static constexpr float framef=1.25f;
 static constexpr float renderf=2.0f;
 
 static constexpr EGLint att_lst2[]={ 
@@ -1060,7 +1060,7 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 // glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT,GL_ANISOTROPIC_FILTER);
 // glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT,GL_LINEAR_MIPMAP_LINEAR);
-glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT,GL_LINEAR);
+glBlitFramebuffer(0,0,int_size.at(1,2),int_size.at(1,2),0,0,int_size.at(1,2),int_size.at(1,2),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT,GL_LINEAR);
 // end
 glFlush();
 return EM_TRUE;
@@ -1655,7 +1655,7 @@ glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,int_size.at(1,0),int_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,3),int_size.at(1,3));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
@@ -1672,7 +1672,7 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFF
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT32F,int_size.at(1,0),int_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT32F,int_size.at(1,3),int_size.at(1,3));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
 glClearDepthf(1.0f);
@@ -1695,7 +1695,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,ftexture[0]);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(1,0),int_size.at(1,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(1,3),int_size.at(1,3),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
 // glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
 glGenerateMipmap(GL_TEXTURE_2D);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
