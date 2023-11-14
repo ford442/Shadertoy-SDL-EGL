@@ -351,7 +351,7 @@ premultipliedAlpha:false,
 // imageSmoothingEnabled:false,
 willReadFrequently:true,
 lowLatency:false,
-desynchronized:true,
+desynchronized:false,
 powerPreference:'high-performance',
 antialias:false
 };
@@ -367,7 +367,7 @@ premultipliedAlpha:false,
 // imageSmoothingEnabled:true,
 willReadFrequently:true,
 lowLatency:false,
-desynchronized:true,
+desynchronized:false,
 powerPreference:'high-performance',
 antialias:false
 };
