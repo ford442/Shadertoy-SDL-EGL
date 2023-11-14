@@ -1040,7 +1040,7 @@ return EM_TRUE;
 }
 
 static inline boost::function<EM_BOOL()>RendarAb=[](){
-eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_API);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
@@ -1068,7 +1068,7 @@ return EM_TRUE;
 
 static inline boost::function<EM_BOOL()>RendarBb=[](){
 // eglBindAPI(EGL_OPENGL_ES_API);
-eglBindAPI(EGL_NONE);
+// eglBindAPI(EGL_NONE);
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
@@ -1261,8 +1261,8 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
-eglBindAPI(EGL_OPENGL_BIT);
-// eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_BIT);
+eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
