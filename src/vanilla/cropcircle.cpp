@@ -306,7 +306,7 @@ const icanvas=document.getElementById('imag2');
 const bcanvas=document.getElementById('imag3');
 // icanvas.setAttribute("style","opacity:0.422");
 scanvas.id='zimag';
-scanvas.imageRendering='pixelated';
+scanvas.imageRendering='auto';
 scanvas.width=winSize;
 scanvas.height=winSize;
 scanvas.zoom=1;
@@ -478,15 +478,15 @@ rgbd[i+3]=255-((rgb-128)*diff);
 rgbd[i]=0;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
-// rgbd[i+3]=255-((rgb-128)*diff);
-rgbd[i+3]=255;
+rgbd[i+3]=255-((rgb-128)*diff);
+// rgbd[i+3]=255;
 }
 }
 // agavF.set(rgbdat.data);
 var ang=45;
 // Module.ccall("rotat",null,["Number","Number","Number","Number","Number"],[ang,ww,h,pointa,pointb]);
 ctx.putImageData(rgbdat,0,0);
-ctxC.putImageData(rgbdat,0,0);
+// ctxC.putImageData(rgbdat,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
 
 function Ra(){
