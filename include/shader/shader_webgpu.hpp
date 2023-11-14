@@ -138,7 +138,7 @@ static constexpr EGLint ctx_att[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
 EGL_CONTEXT_CLIENT_VERSION,3,
-// EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 // EGL_CONTEXT_MINOR_VERSION_KHR,2,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -1335,7 +1335,7 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
 // eglBindAPI(EGL_OPENGL_API);
-ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
+ctxegl=eglCreateContext(display,eglconfig,cntxi.at(0,0),ctx_att);
 // eglBindAPI(EGL_OPENGL_ES_API);
 cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
