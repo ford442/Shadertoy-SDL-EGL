@@ -175,7 +175,7 @@ context.getExtension('EXT_YUV_target');
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-const gpu=new GPUX({mode:'gpu',webGl:context });
+// const gpu=new GPUX({mode:'gpu',webGl:context });
 
 var $shds=[];
 
