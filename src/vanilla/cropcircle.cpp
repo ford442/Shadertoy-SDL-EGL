@@ -391,8 +391,6 @@ let cnPB=document.getElementById("cpB");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 const maxDimension=Math.max(ww,h);
-ctx.drawImage(bitmap, (maxDimension - width) / 2, (maxDimension - height) / 2, width, height);
-
 ctx.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
 ctxB.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
 ctxC.drawImage(vd,(maxDimension-ww)/2,(maxDimension-h)/2,ww,h);
