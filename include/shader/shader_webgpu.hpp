@@ -110,6 +110,8 @@ static constexpr float multisampleRenderf=1.50f;
 static constexpr float framef=1.25f;
 static constexpr float renderf=2.0f;
 
+EGLint * respon;
+
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
   // Google Colab
@@ -1862,6 +1864,10 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
+eglQueryContext(display,cntx.at(0,0),EGL_CONFIG_ID,&respon);
+EM_ASM({
+console.log($0);
+},respon);
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
