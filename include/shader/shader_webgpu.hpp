@@ -1486,9 +1486,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
-  EGL_EXT_surface_SMPTE2086_metadata
-
-  
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_SMPTE2086_metadata");
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
