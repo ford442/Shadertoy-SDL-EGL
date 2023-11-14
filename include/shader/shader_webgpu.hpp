@@ -1378,7 +1378,7 @@ glCullFace(GL_BACK);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
 //   glClearColor(1.0f,1.0f,1.0f,1.0f);
-emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility"); // limits to WebGL 1.0
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
@@ -1450,7 +1450,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_geometry_shader4");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility"); // limits to OpenGL ES 2.0
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multitexture");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_color_buffer_half_float");
