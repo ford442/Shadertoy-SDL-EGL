@@ -110,7 +110,7 @@ static constexpr float multisampleRenderf=1.50f;
 static constexpr float framef=1.25f;
 static constexpr float renderf=2.0f;
 
-EGLint * respon;
+EGLint respon;
 
 static constexpr EGLint att_lst2[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -1864,32 +1864,37 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_CLIENT_TYPE,respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONFIG_ID,&respon);
+EM_ASM({
+console.log("EGL_CONFIG_ID: ");
+console.log($0);
+},respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_CLIENT_TYPE,&respon);
 EM_ASM({
 console.log("EGL_CONTEXT_CLIENT_TYPE: ");
 console.log($0);
 },respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_CLIENT_VERSION,respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_CLIENT_VERSION,&respon);
 EM_ASM({
 console.log("EGL_CONTEXT_CLIENT_VERSION: ");
 console.log($0);
 },respon);
-eglQueryContext(display,cntx.at(0,0),EGL_RENDER_BUFFER,respon);
+eglQueryContext(display,cntx.at(0,0),EGL_RENDER_BUFFER,&respon);
 EM_ASM({
 console.log("EGL_RENDER_BUFFER: ");
 console.log($0);
 },respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_RED_SIZE,respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_RED_SIZE,&respon);
 EM_ASM({
 console.log("EGL_CONTEXT_RED_SIZE: ");
 console.log($0);
-},respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_ALPHA_SIZE,respon);
+},&respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_ALPHA_SIZE,&respon);
 EM_ASM({
 console.log("EGL_CONTEXT_ALPHA_SIZE: ");
 console.log($0);
 },respon);
-eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_DEPTH_SIZE,respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_DEPTH_SIZE,&respon);
 EM_ASM({
 console.log("EGL_CONTEXT_DEPTH_SIZE: ");
 console.log($0);
