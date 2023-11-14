@@ -1864,13 +1864,11 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
+      EGLContextAttributes attributes2;
+    emscripten_webgl_get_context_attributes(cntxi.at(0,0), &attributes2);
 EM_ASM({
-  __EMSCRIPTEN_ASM_MODULE_EXPORT__(Module.version);
-  __EMSCRIPTEN_ASM_MODULE_EXPORT__(Module.context);
-
-console.log("Emscripten compiler: "+Module.version);
-console.log("Emscripten context: "+Module.context);
-});
+console.log($0);
+},attributes2);
 
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
