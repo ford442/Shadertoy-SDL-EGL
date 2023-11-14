@@ -1864,8 +1864,14 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
-eglQueryContext(display,cntx.at(0,0),EGL_CONFIG_ID,respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_CLIENT_TYPE,respon);
 EM_ASM({
+console.log("EGL_CONTEXT_CLIENT_TYPE: ");
+console.log($0);
+},respon);
+eglQueryContext(display,cntx.at(0,0),EGL_CONTEXT_CLIENT_VERSION,respon);
+EM_ASM({
+console.log("EGL_CONTEXT_CLIENT_VERSION: ");
 console.log($0);
 },respon);
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
