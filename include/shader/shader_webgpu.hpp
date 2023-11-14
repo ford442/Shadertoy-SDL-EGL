@@ -1051,18 +1051,18 @@ glDisable(GL_DITHER);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-glSampleCoverage(1.0f,GL_FALSE);
+// glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFlush();
+// glFlush();
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 // glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT,GL_ANISOTROPIC_FILTER);
 // glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT,GL_LINEAR_MIPMAP_LINEAR);
 glBlitFramebuffer(0,0,int_size.at(2,0),int_size.at(2,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT,GL_NEAREST);
 // end
-glFlush();
+// glFlush();
 return EM_TRUE;
 };
 
@@ -1076,7 +1076,7 @@ static inline boost::function<EM_BOOL()>RendarBb=[](){
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(numSamplesf,GL_FALSE);
+// glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_LESS);
@@ -1216,8 +1216,8 @@ mms.at(2,1)=float_size.at(0,0)*0.5;
 // glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),1.0f);
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
-u_iTime_set(0.0);
-u_iTimeDelta_set(0.0);
+u_iTime_set(0.0f);
+u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
@@ -1295,7 +1295,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 // attr.renderViaOffscreenBackBuffer=EM_FALSE;
 // attr.explicitSwapControl=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -1338,13 +1338,10 @@ cntx.at(0,0)=ctxegl;
 // eglSwapBuffers(display,surface);
 eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-
-
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 glDepthMask(GL_TRUE);
 // glClearDepth(Di.at(0,0));
@@ -1803,14 +1800,11 @@ glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 // WGPU_Start();
 // usleep(125);
-
-  // date/time
-
+    // date/time
 time_t timE=time(0);
 struct tm * datE;
 time(&timE);
 datE=localtime(&timE);
-  
 int yr=1900+datE->tm_year;
 int mn=1+datE->tm_mon;
 int dy=datE->tm_mday-1;
@@ -1829,23 +1823,21 @@ glUniform3f(smp_chn_res[0],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[1],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[2],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),gpu.gF());
-
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-
-glUniform1i(uni_fps,60.0);
+// glUniform1i(uni_fps,60.0);
 mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=float_size.at(0,0)*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,16.0f);
+glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,8.0f);
 glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
-u_iTime_set(0.0);
-u_iTimeDelta_set(0.0);
+u_iTime_set(0.0f);
+u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
@@ -1856,8 +1848,8 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 //  glBindBuffer(GL_UNIFORM_BUFFER,uniBlock);
 //  glBufferSubData(GL_UNIFORM_BUFFER,0,4,&iFps); 
 //  glBindBuffer(GL_UNIFORM_BUFFER,0);
-// glClear(GL_COLOR_BUFFER_BIT);
-// glClear(GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
