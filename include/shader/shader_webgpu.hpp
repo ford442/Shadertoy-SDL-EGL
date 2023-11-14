@@ -375,7 +375,7 @@ using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
-using gf_tensor=boost::numeric::ublas::tensor<GLclampf>;
+using gf_tensor=boost::numeric::ublas::tensor<GLfloat>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using uint_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -835,15 +835,15 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const register GLclampf()>gF=[](){
+static inline boost::function<const register GLfloat()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const register GLclampf()>gFm1=[](){
+static inline boost::function<const register GLfloat()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const register GLclampf()>gF0=[](){
+static inline boost::function<const register GLfloat()>gF0=[](){
 return Fi.at(1,1);
 };
 
@@ -1263,7 +1263,7 @@ return nullptr;
 boost::function<EM_BOOL()>strt=[this](){
 eglBindAPI(EGL_OPENGL_BIT);
 // eglBindAPI(EGL_OPENGL_ES_API);
-typedef struct{GLclampf XYZW[4];}Vertex;
+typedef struct{GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
@@ -1486,6 +1486,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
+  EGL_EXT_surface_SMPTE2086_metadata
+
   
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
