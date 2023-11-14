@@ -300,8 +300,8 @@ emsc(leng,ptr);
 
 EM_JS(void,ma,(),{
 "use strict";
-let winSize=parseInt(window.innerHeight,10);
-const scanvas=document.createElement('canvas');
+var winSize=parseInt(window.innerHeight,10);
+var scanvas=document.createElement('canvas');
 const icanvas=document.getElementById('imag2');
 const bcanvas=document.getElementById('imag3');
 // icanvas.setAttribute("style","opacity:0.422");
@@ -339,7 +339,7 @@ zcanvas.style.width='100vh';
 zcanvas.style.backgroundColor='rgba(0,0,0,128)';
 // document.getElementById("cpB").appendChild(zcanvas);
   */
-const contxVars={
+var contxVars={
 colorType:'float32',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
@@ -354,7 +354,7 @@ lowLatency:false,
 powerPreference:'high-performance',
 antialias:false
 };
-  const contxVarsB={
+  var contxVarsB={
 colorType:'float32',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
@@ -369,13 +369,13 @@ lowLatency:false,
 powerPreference:'high-performance',
 antialias:false
 };
-const ctx=scanvas.getContext('2d',contxVars);
+var ctx=scanvas.getContext('2d',contxVars);
 const ctxB=icanvas.getContext('2d',contxVarsB);
 const ctxC=bcanvas.getContext('2d',contxVarsB);
 const bgPicA=document.getElementById('imgA');
 const bgPicB=document.getElementById('imgB');
 // const ctxB=zcanvas.getContext('2d',contxVars);
-const gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+var gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
@@ -398,12 +398,12 @@ var rgbdat=ctx.createImageData(ww,h);
 var rgbd=rgbdat.data;
 var imgg=imgData.data;
 var i;
-let l=h*ww;
-let la=h*ww*4;
+var l=h*ww;
+var la=h*ww*4;
 var pointa=la*2.0;
 var pointb=la*3.0;
 var pointc=la*4.0;
-let $H=Module.HEAPF32.buffer;
+var $H=Module.HEAPF32.buffer;
 var agavF=new Float32Array($H,pointa,la);
 var agavNF=new Float32Array($H,pointb,la);
 agavF.set(imgData.data);
