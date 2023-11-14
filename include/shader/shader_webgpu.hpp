@@ -283,7 +283,7 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
-// "#extension GL_REGAL_enable : enable\n"
+"#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
