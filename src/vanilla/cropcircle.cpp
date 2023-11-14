@@ -548,10 +548,10 @@ rottb=(rottb-knc.innerHTML);
 }
 setTimeout(function(){
 rrrb(rottb);
-},rate);
+},8);
 setTimeout(function(){
 Rb();
-},rate);
+},16);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
@@ -559,7 +559,7 @@ rottc=((rottc+knb.innerHTML)-360);
 rottc=(rottc+knb.innerHTML);
 }
 rrrc(rottc);
-},rate);// 
+},32);
 setTimeout(function(){
 $rn();
 },rate);
