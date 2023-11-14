@@ -70,6 +70,9 @@ scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
 const contxVars={preferLowPowerToHighPerformance:false,alpha:true,depth:true,stencil:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
+
+// const gpu=new GPUX({mode:'gpu',webGl:context });
+
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -199,9 +202,6 @@ context.getExtension('ARB_depth_texture');
 context.getExtension('ARB_multisample');
 context.getExtension('ARB_framebuffer_multisample');
 context.getExtension('ARB_shader_objects');
-
-const gpu=new GPUX({mode:'gpu',webGl:context });
-
 var $shds=[];
 
 function normalResStart(){
