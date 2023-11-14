@@ -398,8 +398,6 @@ hdff=h-ww;
 if(h>ww){
 vdff=h-ww;
 }
-drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
-    
 ctx.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
 ctxB.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
 ctxC.drawImage(vd,0,0,ww,h,0.5*hdff,0.5*vdff,winSize,winSize)
