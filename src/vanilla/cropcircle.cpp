@@ -502,8 +502,7 @@ cnP.setAttribute("style","transform:scaleY(1.0)");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
-bgPicA.hidden=true;
-bgPicB.hidden=false;
+
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999991;");
 // bgPicB.setAttribute("style","z-index:999990;");
@@ -555,9 +554,9 @@ rottb=(rottb-knc.innerHTML);
 setTimeout(function(){
 rrrb(rottb);
 },rate);
-// setTimeout(function(){
+setTimeout(function(){
 Rb();
-// },rate);
+},rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
@@ -566,6 +565,8 @@ rottc=(rottc+knb.innerHTML);
 }
 rrrc(rottc);
 },rate);
+  bgPicA.hidden=true;
+bgPicB.hidden=false;
 setTimeout(function(){
 $rn();
 },rate);
