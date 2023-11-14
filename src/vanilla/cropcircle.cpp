@@ -493,7 +493,7 @@ ctx.putImageData(rgbdat,0,0);
 
 function Ra(){
 // bgPicA.hidden=false;
-bgPicB.hidden=true;
+
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
 // bgPicB.setAttribute("style","z-index:999991;");
@@ -553,6 +553,7 @@ rottb=(rottb-knc.innerHTML);
 setTimeout(function(){
 rrrb(rottb);
 },rate);
+  bgPicB.hidden=true;
 setTimeout(function(){
 Rb();
 },rate);
