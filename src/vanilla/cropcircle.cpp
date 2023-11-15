@@ -512,11 +512,15 @@ bgPicB.hidden=false;
 bgPicA.hidden=true;
 flP.setAttribute("style","transform:scaleX(-1.0)");
 cnP.setAttribute("style","transform:scaleY(1.0)");
+cnPB.setAttribute("style","transform:scaleY(1.0)");
+cnPC.setAttribute("style","transform:scaleY(1.0)");
 }else{
 bgPicB.hidden=true;
 bgPicA.hidden=false;
 flP.setAttribute("style","transform:scaleX(1.0)");
 cnP.setAttribute("style","transform:scaleY(-1.0)");
+cnPB.setAttribute("style","transform:scaleY(-1.0)");
+cnPC.setAttribute("style","transform:scaleY(-1.0)");
 }
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
