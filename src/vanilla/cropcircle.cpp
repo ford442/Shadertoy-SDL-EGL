@@ -389,8 +389,8 @@ h=document.getElementById("ihig").innerHTML;
 ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
 let cnP=document.getElementById("cp");
-let cnPB=document.getElementById("cpB");
-let cnPC=document.getElementById("cpC");
+// let cnPB=document.getElementById("cpB");
+// let cnPC=document.getElementById("cpC");
 let flP=document.getElementById("flip");
 let flPB=document.getElementById("flipB");
 let vd=document.getElementById("myvideo");
@@ -513,19 +513,17 @@ bgPicB.hidden=false;
 bgPicA.hidden=true;
 flP.setAttribute("style","transform:scaleX(-1.0)");
 flPB.setAttribute("style","transform:scaleX(-1.0)");
-
 }else{
 bgPicB.hidden=true;
 bgPicA.hidden=false;
 flP.setAttribute("style","transform:scaleX(1.0)");
 flPB.setAttribute("style","transform:scaleY(-1.0)");
-
 }
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
 // bgPicB.setAttribute("style","z-index:999991;");
-flP.setAttribute("style","transform: scaleX(-1.0)");
-cnP.setAttribute("style","transform: scaleY(1.0)");
+// flP.setAttribute("style","transform: scaleX(-1.0)");
+// cnP.setAttribute("style","transform: scaleY(1.0)");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
@@ -541,11 +539,11 @@ cnP.setAttribute("style","transform: rotate("+rta+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 function rrrb(rtb){
-cnPB.setAttribute("style","transform: rotate("+rtb+"deg)");
+cnP.setAttribute("style","transform: rotate("+rtb+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 }
 function rrrc(rtc) {
-cnPC.setAttribute("style","transform: rotate("+rtc+"deg)");
+cnP.setAttribute("style","transform: rotate("+rtc+"deg)");
 // cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
 knb=document.getElementById("rra");
