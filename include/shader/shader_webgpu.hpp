@@ -83,6 +83,7 @@ typedef ResultType result_type;
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
 #define float GLfloat
+#define int GLint
 
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
