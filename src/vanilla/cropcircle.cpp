@@ -446,7 +446,7 @@ var diff=(agav[0]/255)*16;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
-rgbd[i+1]=128+diff;
+rgbd[i+1]=128-diff;
 rgbd[i+2]=0;
 rgbd[i+3]=255;// -((rgb-209)*diff);
 }
@@ -455,9 +455,9 @@ rgbd[i]=255-diff;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
 rgbd[i+3]=255;// -((rgb-193)*diff);
-}else if(rgb>177){   // light blue
-rgbd[i]=0;
-rgbd[i+1]=255-diff;
+}else if(rgb>177){   // violet
+rgbd[i]=128-diff;
+rgbd[i+1]=0;
 rgbd[i+2]=255;
 rgbd[i+3]=255;// -((rgb-177)*diff);
 }else if(rgb>161){  //  blue
