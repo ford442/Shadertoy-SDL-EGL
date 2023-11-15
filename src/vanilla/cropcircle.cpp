@@ -71,7 +71,7 @@ EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
-EGL_COVERAGE_SAMPLES_NV,16,
+EGL_COVERAGE_SAMPLES_NV,8,
 EGL_SAMPLES,8,
 EGL_NONE
 };
@@ -227,8 +227,8 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
-attr.premultipliedAlpha=EM_TRUE;
-attr.preserveDrawingBuffer=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
+attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -346,8 +346,8 @@ preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
 stencil:false,
-preserveDrawingBuffer:true,
-premultipliedAlpha:true,
+preserveDrawingBuffer:false,
+premultipliedAlpha:false,
 // imageSmoothingEnabled:false,
 willReadFrequently:true,
 lowLatency:false,
@@ -362,8 +362,8 @@ preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
 stencil:false,
-preserveDrawingBuffer:true,
-premultipliedAlpha:true,
+preserveDrawingBuffer:false,
+premultipliedAlpha:false,
 // imageSmoothingEnabled:true,
 willReadFrequently:true,
 lowLatency:false,
@@ -377,7 +377,7 @@ const ctxC=bcanvas.getContext('2d',contxVarsB);
 const bgPicA=document.getElementById('imgA');
 const bgPicB=document.getElementById('imgB');
 // const ctxB=zcanvas.getContext('2d',contxVars);
-var gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
+// var gpu=new GPUX({mode:'gpu',canvas:scanvas,webGl:ctx });
 // const gpuB=new GPUX({mode:'gpu',canvas:zcanvas,webGl:ctxB });
 let dis=set();
 if(dis){dis();}
