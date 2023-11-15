@@ -26,7 +26,7 @@ WGPURenderPassTimestampWrites timestampWrites={};
 WGpuRenderPassTimestampWrite renderPassTimestampWrite;
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
 WGpuRenderPassTimestampWrite *ptrRenderPassTimestampWrite = &renderPassTimestampWrite;
-timestampWrites.querySet=TquerySet;
+timestampWrites.querySet=&timestampWrites;
 timestampWrites.beginningOfPassWriteIndex=0;
 timestampWrites.endOfPassWriteIndex=0;
   passDesc.timestampWrites = &ptrTimestampWrites;
