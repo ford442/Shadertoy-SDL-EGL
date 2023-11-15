@@ -21,7 +21,7 @@ WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
   WGpuQuerySetDescriptor qdesc;
 WGpuQuerySet querySet=wgpu_device_create_query_set(device,&qdesc);
 
-WGPURenderPassTimestampWrites timestampWrites={querySet,0,0};
+WGPURenderPassTimestampWrites timestampWrites={};
   
 WGpuRenderPassTimestampWrite renderPassTimestampWrite;
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
