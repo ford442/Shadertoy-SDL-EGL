@@ -18,14 +18,18 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
-WGPUQuerySet querySet;
+  WGpuQuerySetDescriptor qdesc;
+WGPUQuerySet querySet=wgpu_device_create_query_set(device,&qdesc);
+
 WGPURenderPassTimestampWrites timestampWrites={querySet,0,0};
+  
 WGpuRenderPassTimestampWrite renderPassTimestampWrite;
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
 WGpuRenderPassTimestampWrite *ptrRenderPassTimestampWrite = &renderPassTimestampWrite;
-
+timestampWrites.querySet=querySet;
+timestampWrites.beginningOfPassWriteIndex=0;
+timestampWrites.endOfPassWriteIndex=0;
 passDesc.timestampWrites = ptrRenderPassTimestampWrite;
-
 
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
