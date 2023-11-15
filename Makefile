@@ -12,7 +12,7 @@ COMMON_FLAGS += -fopenmp -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthrea
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 STATIC_LINK_FLAGS += -DQUAD -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
