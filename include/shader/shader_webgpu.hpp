@@ -1,4 +1,4 @@
-#define float GLfloat
+
 #include <boost/cstdfloat.hpp>
 #include "../../include/shader/defs.hpp"
 // #include <stdio.h>
@@ -81,6 +81,8 @@ typedef ResultType result_type;
 #include <emscripten/html5.h>
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
+
+#define float GLfloat
 
 #ifndef OPENGL_CORE_PROFILE
 #define OPENGL_CORE_PROFILE 1
