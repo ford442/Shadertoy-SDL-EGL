@@ -1,6 +1,6 @@
 LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
-SIMD_FLAGS += -DSIMD=2 -mrelaxed-simd -mavx 
+SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx 
 
 STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
@@ -42,8 +42,8 @@ WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigat
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
-	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -c src/shader/main.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o s3029dev.js -O2 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
