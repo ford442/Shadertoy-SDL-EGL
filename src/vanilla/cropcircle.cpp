@@ -442,7 +442,7 @@ rgb=rgb+lightDark/2;
  //  range to the next color giving further color depth as well as 
  // keeping a darker range from having few different colors of gradient
  //
-var diff=(agav[0]/255)*16;
+var diff=(agav[0]/255)*32;
 if(rgb>126){
 if(rgb>209){    // orange
 rgbd[i]=255;
