@@ -23,10 +23,10 @@ WGpuQuerySet TquerySet=wgpu_device_create_query_set(device,&qdesc);
 
 WGPURenderPassTimestampWrites timestampWrites={};
   
-WGpuRenderPassTimestampWrite renderPassTimestampWrite;
+WGpuRenderPassTimestampWrite renderPassTimestampWrite={};
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
 WGpuRenderPassTimestampWrite *ptrRenderPassTimestampWrite = &renderPassTimestampWrite;
-timestampWrites.querySet=&timestampWrites;
+timestampWrites.querySet=&renderPassTimestampWrite;
 timestampWrites.beginningOfPassWriteIndex=0;
 timestampWrites.endOfPassWriteIndex=0;
   passDesc.timestampWrites = &ptrTimestampWrites;
