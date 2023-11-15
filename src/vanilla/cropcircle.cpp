@@ -227,7 +227,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_FALSE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -347,7 +347,7 @@ alpha:true,
 depth:true,
 stencil:false,
 preserveDrawingBuffer:true,
-premultipliedAlpha:false,
+premultipliedAlpha:true,
 // imageSmoothingEnabled:false,
 willReadFrequently:true,
 lowLatency:false,
@@ -363,7 +363,7 @@ alpha:true,
 depth:true,
 stencil:false,
 preserveDrawingBuffer:true,
-premultipliedAlpha:false,
+premultipliedAlpha:true,
 // imageSmoothingEnabled:true,
 willReadFrequently:true,
 lowLatency:false,
