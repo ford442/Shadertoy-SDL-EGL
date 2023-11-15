@@ -524,8 +524,8 @@ flPB.setAttribute("style","transform:scaleY(-1.0)");
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
 // bgPicB.setAttribute("style","z-index:999991;");
-flP.setAttribute("style","transform:scaleX(-1.0)");
-cnP.setAttribute("style","transform:scaleY(1.0)");
+flP.setAttribute("style","transform: scaleX(-1.0)");
+cnP.setAttribute("style","transform: scaleY(1.0)");
 // cnPB.setAttribute("style","transform:scaleY(-1);");
 }
 function Rb(){
@@ -541,11 +541,11 @@ cnP.setAttribute("style","transform: rotate("+rta+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 function rrrb(rtb){
-cnPB.setAttribute("style","transform:rotate("+rtb+"deg)");
+cnPB.setAttribute("style","transform: rotate("+rtb+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 }
 function rrrc(rtc) {
-cnPC.setAttribute("style","transform:rotate("+rtc+"deg)");
+cnPC.setAttribute("style","transform: rotate("+rtc+"deg)");
 // cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
 knb=document.getElementById("rra");
@@ -581,9 +581,9 @@ setTimeout(function(){
 rrrb(rottb);
 },rate);
 //  bgPicB.hidden=true;
-setTimeout(function(){
+// setTimeout(function(){
 // Rb();
-},rate);
+// },rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
 rottc=((rottc+knb.innerHTML)-360);
