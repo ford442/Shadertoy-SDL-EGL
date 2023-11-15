@@ -496,9 +496,13 @@ function Ra(){
 if(bgPicB.hidden==true){
 bgPicB.hidden=false;
 bgPicA.hidden=true;
+flP.setAttribute("style","transform:scaleX(-1.0)");
+cnP.setAttribute("style","transform:scaleY(1.0)");
 }else{
 bgPicB.hidden=true;
 bgPicA.hidden=false;
+flP.setAttribute("style","transform:scaleX(1.0)");
+cnP.setAttribute("style","transform:scaleY(-1.0)");
 }
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
@@ -561,7 +565,7 @@ rrrb(rottb);
 },rate);
 //  bgPicB.hidden=true;
 setTimeout(function(){
-Rb();
+// Rb();
 },rate);
 setTimeout(function(){
 if((rottc+knb.innerHTML)>360){
