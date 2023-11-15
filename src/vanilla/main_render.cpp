@@ -18,7 +18,7 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 WGpuRenderPassDescriptor passDesc={1,&colorAttachment};
-WGpuQuerySet querySet;
+WGPUQuerySet querySet;
 WGPURenderPassTimestampWrites timestampWrites={querySet,0,0};
 WGpuRenderPassTimestampWrite renderPassTimestampWrite;
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
