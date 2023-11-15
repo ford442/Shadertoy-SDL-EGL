@@ -390,6 +390,7 @@ ow=document.getElementById("wid").innerHTML;
 oh=document.getElementById("hig").innerHTML;
 let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
+let cnPC=document.getElementById("cpC");
 let flP=document.getElementById("flip");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
@@ -481,9 +482,15 @@ rgbd3[i+2]=0;
 rgbd3[i+3]=255;// -((rgb-128)*diff);
 }
 }else{           // black / blank
-rgbd[i]=0;
-rgbd[i+1]=0;
-rgbd[i+2]=0;
+rgbd[i]=255;
+rgbd[i+1]=255;
+rgbd[i+2]=255;
+  rgbd2[i]=255;
+rgbd2[i+1]=255;
+rgbd2[i+2]=255;
+  rgbd3[i]=255;
+rgbd3[i+1]=255;
+rgbd3[i+2]=255;
 // rgbd[i+3]=255-((rgb-128)*diff);
 rgbd[i+3]=0;
 rgbd2[i+3]=0;
@@ -531,11 +538,11 @@ cnP.setAttribute("style","transform: rotate("+rta+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rta+"deg);");
 }
 function rrrb(rtb){
-cnP.setAttribute("style","transform:rotate("+rtb+"deg)");
+cnPB.setAttribute("style","transform:rotate("+rtb+"deg)");
 // cnPB.setAttribute("style","transform:rotate("+rtb+"deg);");
 }
 function rrrc(rtc) {
-cnP.setAttribute("style","transform:rotate("+rtc+"deg)");
+cnPC.setAttribute("style","transform:rotate("+rtc+"deg)");
 // cnPB.setAttribute("style","transform: rotate("+rtc+"deg);");
 }
 knb=document.getElementById("rra");
