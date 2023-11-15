@@ -505,6 +505,8 @@ ctx.putImageData(rgbdat,0,0);
 ctxB.putImageData(rgbdat2,0,0);
 ctxC.putImageData(rgbdat3,0,0);
 // Module.ccall("emem",null,["Number","Number"],[la,pointa]);
+icanvas.setAttribute("style","transform: rotate(130deg)");
+bcanvas.setAttribute("style","transform: rotate(230deg)");
 
 function Ra(){
 // bgPicA.hidden=false;
