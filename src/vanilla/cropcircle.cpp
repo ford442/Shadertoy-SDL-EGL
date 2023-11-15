@@ -392,6 +392,7 @@ let cnP=document.getElementById("cp");
 let cnPB=document.getElementById("cpB");
 let cnPC=document.getElementById("cpC");
 let flP=document.getElementById("flip");
+let flPB=document.getElementById("flipB");
 let vd=document.getElementById("myvideo");
 ctx.drawImage(vd,0,0,ww,h);
 // ctxB.drawImage(vd,0,0,ww,h);
@@ -511,16 +512,14 @@ if(bgPicB.hidden==true){
 bgPicB.hidden=false;
 bgPicA.hidden=true;
 flP.setAttribute("style","transform:scaleX(-1.0)");
-cnP.setAttribute("style","transform:scaleY(1.0)");
-cnPB.setAttribute("style","transform:scaleY(1.0)");
-cnPC.setAttribute("style","transform:scaleY(1.0)");
+flPB.setAttribute("style","transform:scaleX(-1.0)");
+
 }else{
 bgPicB.hidden=true;
 bgPicA.hidden=false;
 flP.setAttribute("style","transform:scaleX(1.0)");
-cnP.setAttribute("style","transform:scaleY(-1.0)");
-cnPB.setAttribute("style","transform:scaleY(-1.0)");
-cnPC.setAttribute("style","transform:scaleY(-1.0)");
+flPB.setAttribute("style","transform:scaleY(-1.0)");
+
 }
 // bgPicA.setAttribute("style","position:absolute;");
 // bgPicA.setAttribute("style","z-index:999990;");
