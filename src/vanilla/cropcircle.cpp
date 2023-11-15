@@ -480,8 +480,8 @@ rgbd[i+3]=255;// -((rgb-128)*diff);
 rgbd[i]=0;
 rgbd[i+1]=0;
 rgbd[i+2]=0;
-rgbd[i+3]=255-((rgb-128)*diff);
-// rgbd[i+3]=0;
+// rgbd[i+3]=255-((rgb-128)*diff);
+rgbd[i+3]=0;
 }
 }
 // agavF.set(rgbdat.data);
