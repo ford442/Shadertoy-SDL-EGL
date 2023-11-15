@@ -26,10 +26,10 @@ WGPURenderPassTimestampWrites timestampWrites={};
 WGpuRenderPassTimestampWrite renderPassTimestampWrite={};
 WGPURenderPassTimestampWrites *ptrTimestampWrites = &timestampWrites;
 WGpuRenderPassTimestampWrite *ptrRenderPassTimestampWrite = &renderPassTimestampWrite;
-timestampWrites.querySet=&renderPassTimestampWrite;
-timestampWrites.beginningOfPassWriteIndex=0;
-timestampWrites.endOfPassWriteIndex=0;
-  passDesc.timestampWrites = &ptrTimestampWrites;
+renderPassTimestampWrite.querySet=&TquerySet;
+renderPassTimestampWrite.beginningOfPassWriteIndex=0;
+renderPassTimestampWrite.endOfPassWriteIndex=0;
+  passDesc.timestampWrites = &renderPassTimestampWrite;
 
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
