@@ -106,9 +106,9 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr EGLint numSamples=8;
+static constexpr EGLint numSamples=4;
 // static constexpr float numSamplesf=float(numSamples);
-static constexpr float numSamplesf=8.0f;
+static constexpr float numSamplesf=4.0f;
 static constexpr float multisampleFramef=1.25f;
 static constexpr float multisampleRenderf=1.50f;
 static constexpr float framef=1.25f;
@@ -182,8 +182,8 @@ EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
-EGL_COVERAGE_SAMPLES_NV,8,
-EGL_SAMPLES,8,
+EGL_COVERAGE_SAMPLES_NV,4,
+EGL_SAMPLES,4,
 EGL_NONE
 };
 
@@ -1148,7 +1148,6 @@ int sc=datE->tm_sec;
 i_date.at(1,0)=dy;
 i_date.at(1,1)=(hr*3600)+(mi*60)+(sc);
 glUniform4i(uni_dte,yr,mn,i_date.at(1,0),i_date.at(1,1));
-  
 /*
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%45==0){
