@@ -66,7 +66,7 @@
 
 // #include "openvino/runtime/tensor.hpp"
 
-#include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
+// #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
 // #include <ATen/ATen.h>
 
 // #include "oneapi/tbb/tick_count.h"
@@ -79,13 +79,6 @@
 // #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
 
 #include <functional>
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
 
 #include <boost/function.hpp>
 
@@ -119,5 +112,3 @@ void runWebGPU();
 using f_tensor=boost::numeric::ublas::tensor<float>;
 static f_tensor sze=f_tensor{2,2};
 double szh, szw;
-
-
