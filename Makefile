@@ -63,7 +63,7 @@ b3_vanilla_render:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --extern-pre-js js/gpujsx.js --memory-init-file 0 --closure 0 main_render.o 
+	 --memory-init-file 0 main_render.o 
 
 vanilla_opt_gpujs:
 	 em++ $(STDS) $(COMMON_FLAGS) src/vanilla/main_gpujs.cpp -c
