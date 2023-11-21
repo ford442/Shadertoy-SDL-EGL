@@ -51,7 +51,7 @@ vanilla_test_gpujs:
 b3_vanilla_render:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static -o lib/libcpp20.a
 	 em++ lib/lib_webgpu.cpp -std=c++20 -static -o lib/libcpp.a
-	 emar rcs lib/libwebgpu.a cpp.a cpp20.a
+	 emar rcs lib/libwebgpu.a lib/cpp.a lib/cpp20.a
 	 ranlib lib/libwebgpu.a
 	 emcc src/vanilla/main_render.c \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
