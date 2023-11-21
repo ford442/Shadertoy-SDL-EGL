@@ -38,7 +38,7 @@
 #include <random>
 #include <cfloat>
 #include <new>
-#include <emscripten.h>
+#include <emscripten/emscripten.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
