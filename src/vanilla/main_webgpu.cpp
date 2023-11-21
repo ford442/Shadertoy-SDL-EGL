@@ -1,15 +1,4 @@
 #include "../../include/vanilla/main_webgpu.hpp"
-template<>
-class std::string::_Rep {
-public:
-  // ...
-};
-template<>
-class std::__2::basic_string<char, std::__2::char_traits<char>, std::__2::allocator<char>>::_Rep {
-public:
-  // ...
-};
-extern "C" void std::__2::basic_string<char, std::__2::char_traits<char>, std::__2::allocator<char>>::__grow_by(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long);
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
