@@ -8,7 +8,7 @@
 
 // #include <cstdint>
 
-#include <boost/integer.hpp>
+// #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
