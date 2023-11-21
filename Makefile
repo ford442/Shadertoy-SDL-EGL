@@ -54,7 +54,7 @@ b3_vanilla_render:
 	 emar rcs lib/libwebgpu.a lib/libcpp.a lib/libcpp20.a
 	 ranlib lib/libwebgpu.a
 	 emcc src/vanilla/main_render.c \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -Llib -lwebgpu -DCOMPUTE -o w3001.js \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
