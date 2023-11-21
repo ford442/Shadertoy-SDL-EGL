@@ -7,23 +7,6 @@ double wi,hi;
 
 using namespace std;
 
-emscripten_webgl_init_context_attributes(&attr);
-attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
-attr.depth=EM_FALSE;
-attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
-attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
-attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
-attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=3;
-attr.minorVersion=0;
-ctx=emscripten_webgl_create_context("#scanvas",&attr);
-emscripten_webgl_make_context_current(ctx);
-emscripten_get_element_css_size("canvas",&wi,&hi);
-
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
@@ -171,9 +154,9 @@ GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
 WGpuTexture textureA;
-  WGpuAdapter adapter=0;
-  WGpuDevice device=0;
-  WGpuQueue queue=0;
+WGpuAdapter adapter=0;
+WGpuDevice device=0;
+WGpuQueue queue=0;
 WGpuBindGroupLayout bindGroupLayout=0;
 WGpuBindGroupLayout bindGroupLayoutB=0;
 WGpuComputePipeline computePipeline=0;
