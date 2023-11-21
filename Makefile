@@ -51,13 +51,13 @@ vanilla_test_gpujs:
 b3_vanilla_render:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc src/vanilla/main_render.cpp \
+	 emcc src/vanilla/main_render.cpp -fno-exceptions \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
 	 -sERROR_ON_UNDEFINED_SYMBOLS=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
-	 -sDISABLE_EXCEPTION_CATCHING=0 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=1 \
+	 -sDISABLE_EXCEPTION_CATCHING=1 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
