@@ -25,16 +25,16 @@ qdesc.type=WGPU_QUERY_TYPE_TIMESTAMP;
 qdesc.count=1;
 qdesc.pipelineStatistics=0;
 WGpuQuerySet TquerySet=wgpu_device_create_query_set(device,&qdesc);
-WGpuRenderPassTimestampWrite renderPassTimestampWrite={};
-renderPassTimestampWrite.querySet=TquerySet;
-passDesc.timestampWrites=&renderPassTimestampWrite;
+WGpuRenderPassTimestampWrites renderPassTimestampWrites={};
+renderPassTimestampWrites.querySet=TquerySet;
+passDesc.timestampWrites=&renderPassTimestampWrites;
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(0,0), sze.at(0,0), 0.0, 1.0);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
-wgpu_queue_submit_one(queue,commandBuffer);
+wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
 return EM_FALSE;
 }
 
