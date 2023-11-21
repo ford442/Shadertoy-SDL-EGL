@@ -151,7 +151,7 @@ powerPreference:'high-performance',
 // antialias:false
 };
 const ctx=scanvas.getContext('webgl2',contxVars);
-const gpu=new GPUX({mode:'gpu',webGl:ctx });
+// const gpu=new GPUX({mode:'gpu',webGl:ctx });
 
 function normalResStart(){
 setTimeout(function(){
