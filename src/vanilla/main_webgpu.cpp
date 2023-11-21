@@ -5,12 +5,9 @@ EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
 
 double wi,hi;
 
-
-
 using namespace std;
 
-
- emscripten_webgl_init_context_attributes(&attr);
+emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_FALSE;
