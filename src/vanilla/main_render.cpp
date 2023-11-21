@@ -23,11 +23,8 @@ passDesc.colorAttachments=&colorAttachment;
 WGpuQuerySetDescriptor qdesc={2,1};
 WGpuQuerySet TquerySet=wgpu_device_create_query_set(device,&qdesc);
 WGpuRenderPassTimestampWrite renderPassTimestampWrite={};
-WGpuRenderPassTimestampWrites timestampWrites={};
-timestampWrites.querySet=TquerySet;
 renderPassTimestampWrite.querySet=TquerySet;
-passDesc.timestampWrites=&timestampWrites;
-
+passDesc.timestampWrites=&renderPassTimestampWrite;
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(0,0), sze.at(0,0), 0.0, 1.0);
