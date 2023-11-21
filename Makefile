@@ -87,7 +87,7 @@ b3_vanilla_icc:
 
 b3_vanilla_webgpu:
 	 em++ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) src/vanilla/main_webgpu.cpp 
-	 em++ -o w3001.js -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
+	 em++ -o w3001.js -O2 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -polly -sALLOW_MEMORY_GROWTH=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sINITIAL_MEMORY=1gb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
