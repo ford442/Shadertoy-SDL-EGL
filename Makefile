@@ -49,8 +49,8 @@ vanilla_test_gpujs:
 	 --pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_vanilla_render:
-	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static -o lib/cpp20.a
-	 em++ lib/lib_webgpu.cpp -std=c++20 -static -o lib/cpp.a
+	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static -o lib/libcpp20.a
+	 em++ lib/lib_webgpu.cpp -std=c++20 -static -o lib/libcpp.a
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -Llib -lcpp -lcpp20 -DCOMPUTE -o w3001.js \
