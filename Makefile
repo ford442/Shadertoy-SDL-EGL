@@ -52,7 +52,6 @@ b3_vanilla_render:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static -o lib/libcpp20.a
 	 em++ lib/lib_webgpu.cpp -std=c++20 -static -o lib/libcpp.a
 	 emar rcs lib/webgpu.a cpp.a cpp20.a
-	 emar ra lib/webgpu.a lib/libwebgpu.a
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -Llib -lwebgpu -DCOMPUTE -o w3001.js \
