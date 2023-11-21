@@ -23,6 +23,7 @@ passDesc.colorAttachments=&colorAttachment;
 WGpuQuerySetDescriptor qdesc={};
 qdesc.type=WGPU_QUERY_TYPE_TIMESTAMP;
 qdesc.count=1;
+qdesc.pipelineStatistics=WGPU_PIPELINE_STATISTIC_NAME_TIMESTAMP‎;
 WGpuQuerySet TquerySet=wgpu_device_create_query_set(device,&qdesc);
 WGpuRenderPassTimestampWrites renderPassTimestampWrites={};
 renderPassTimestampWrites.querySet=TquerySet;
