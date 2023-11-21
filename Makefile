@@ -49,12 +49,12 @@ vanilla_test_gpujs:
 	 --pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_vanilla_render:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
+	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static -o cpp20.a
+	 em++ lib/lib_webgpu.cpp -std=c++20 -static -o cpp.a
 	 emcc src/vanilla/main_render.cpp \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -DCOMPUTE -o w3001.js \
-	 -sERROR_ON_UNDEFINED_SYMBOLS=0 $(STDS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
+	 -std=c++20 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
