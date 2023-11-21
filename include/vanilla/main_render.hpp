@@ -1,4 +1,4 @@
-// #include <boost/cstdfloat.hpp>  // must be first include
+#include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/vanilla/avx.hpp"
 #include "../../include/vanilla/defs.hpp"
 #include "../../include/vanilla/gl.hpp"
@@ -6,9 +6,9 @@
 
 #define __EMCSCRIPTEN__ 1
 
-// #include <cstdint>
+#include <cstdint>
 
-// #include <boost/integer.hpp>
+#include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
@@ -35,7 +35,7 @@
 
 #include <cassert>
 #include <random>
-// #include <cfloat>
+#include <cfloat>
 #include <new>
 #include <emscripten.h>
 #include <emscripten/html5.h>
