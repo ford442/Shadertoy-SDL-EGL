@@ -26,7 +26,7 @@ qdesc.count=1;
 WGpuQuerySet TquerySet=wgpu_device_create_query_set(device,&qdesc);
 WGpuRenderPassTimestampWrites renderPassTimestampWrites={};
 renderPassTimestampWrites.querySet=TquerySet;
-passDesc.timestampWrites=&renderPassTimestampWrites;
+passDesc.timestampWrites=renderPassTimestampWrites;
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(0,0), sze.at(0,0), 0.0, 1.0);
