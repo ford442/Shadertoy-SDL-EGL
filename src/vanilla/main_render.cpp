@@ -5,11 +5,13 @@ static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
 static wcb_tensor wcb=wcb_tensor{2,2};
 static wd_tensor wd=wd_tensor{2,2};
+static wq_tensor wq=wq_tensor{2,2};
+static wa_tensor wa=wa_tensor{2,2};
+static wcc_tensor wcc=wcc_tensor{2,2};
+static wrp_tensor wrp=wrp_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
-// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(wd.at(0,0),0);
-// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -22,7 +24,7 @@ passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
-wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),renderPipeline);
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),rpp.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
@@ -31,19 +33,18 @@ wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,666,666,0.0,1.0);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
-wgpu_queue_submit_one_and_destroy(queue,wcb.at(0,0));
+wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
-queue=wgpu_device_get_queue(wd.at(0,0));
+wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
-config.device = wd.at(0,0);
-// config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
-config.format = navigator_gpu_get_preferred_canvas_format();
-wgpu_canvas_context_configure(canvasContext, &config);
+config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
+config.device=wd.at(0,0);
+config.format=navigator_gpu_get_preferred_canvas_format();
+wgpu_canvas_context_configure(canvasContext,&config);
 
 const char *vertexShader =
 "@vertex\n"
@@ -95,14 +96,14 @@ renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipeline=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
+rpp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-adapter=result;
+wa.at(0,0)=result;
 WGpuDeviceDescriptor deviceDesc={};
-wgpu_adapter_request_device_async(adapter,&deviceDesc,ObtainedWebGpuDeviceStart,0);
+wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
 }
 
 void WGPU_Start(){
