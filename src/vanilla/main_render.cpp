@@ -49,6 +49,9 @@ passDesc.colorAttachments=&colorAttachment;
 // passDesc.timestampWrites=0;
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
+emscripten_get_element_css_size("canvas",&szw,&szh);
+sze.at(0,0)=float(szh);
+sze.at(0,1)=float(szw);
 wgpu_render_pass_encoder_set_viewport(pass,0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
@@ -140,6 +143,7 @@ navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 }
 
 EM_JS(void,js_main,(),{
+/*
 let winSize=parseInt(window.innerHeight,10);
 const scanvas=document.createElement('canvas');
 scanvas.id='zcanvas';
@@ -175,10 +179,10 @@ powerPreference:'high-performance',
 };
 const ctx=scanvas.getContext('webgl2',contxVars);
 // const gpu=new GPUX({mode:'gpu',webGl:ctx });
-
+ */
+  
 function normalResStart(){
 setTimeout(function(){
-  
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
@@ -193,8 +197,8 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('canvas').height=parseInt(window.innerHeight,10);
-document.getElementById('canvas').width=parseInt(window.innerHeight,10);
+// document.getElementById('canvas').height=parseInt(window.innerHeight,10);
+// document.getElementById('canvas').width=parseInt(window.innerHeight,10);
 document.getElementById('status').height=20;
 document.getElementById('status').width=parseInt(window.innerHeight,10);
 
