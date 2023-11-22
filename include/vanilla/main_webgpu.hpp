@@ -173,7 +173,6 @@ WGpuBufferDescriptor bufferDescriptorC;
 WGpuTextureDescriptor textureDescriptor;
 WGpuTextureViewDescriptor textureViewDescriptor;
 WGpuShaderModuleDescriptor shaderModuleDescriptor;
-shaderModuleDescriptor;
 int randomNumber,entropySeed,raN,raND;
 uint32_t * WGPU_Result_Array;
 uint32_t * WGPU_Input_Array;
