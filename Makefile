@@ -24,7 +24,7 @@ STATIC_LINK_FLAGS += -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-c
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES3=1  -Wl,-lGL,-lEGL \
+GL_FLAGS += -sFULL_ES3=1 -Wl,-lGL,-lEGL \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
 LINK_FLAGS += $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
@@ -49,7 +49,7 @@ vanilla_test_gpujs:
 	 --pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
 b3_vanilla_render:
-	 emar rcs lib/lib_webgpu_cpp20.cpp lib/lib_webgpu.cpp -static -o libwebgpu.a
+	 ar rcs lib/lib_webgpu_cpp20.cpp lib/lib_webgpu.cpp -static -o libwebgpu.a
 	 emcc src/vanilla/main_render.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -L./ -lwebgpu -fPIC -fPIE -DCOMPUTE -o w3001.js \
