@@ -83,6 +83,7 @@ WGpuDevice device;
 WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 WGpuRenderPassColorAttachment colorAttachment;
+WGpuRenderPassDescriptor passDesc;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
