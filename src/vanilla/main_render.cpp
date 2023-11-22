@@ -1,27 +1,8 @@
 #include "../../lib/lib_webgpu_cpp20.cpp"
-#include "../../include/vanilla/main_render.hpp"
 
-
-/*
-const WGpuCanvasConfiguration WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER = {
-  .usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT,
-  .colorSpace = HTML_PREDEFINED_COLOR_SPACE_SRGB,
-  .alphaMode = WGPU_CANVAS_ALPHA_MODE_OPAQUE,
-};
-
-extern const WGpuRenderPassColorAttachment WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER = {
-  .storeOp = WGPU_STORE_OP_STORE,
-  .loadOp = WGPU_LOAD_OP_LOAD,
-  .clearValue = (WGpuColor) {
-    .r = 0.0,
-    .g = 0.0,
-    .b = 0.0,
-    .a = 1.0,
-  }
-};
-*/
 EM_BOOL raf(double time, void *userData){
-WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
+wce.at(0,0)=wgpu_device_create_command_encoder(device,0);
+// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
 WGpuRenderPassColorAttachment colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
@@ -44,7 +25,7 @@ passDesc.colorAttachments=&colorAttachment;
 // renderPassTimestampWrites.endOfPassWriteIndex=-1;
 // passDesc.timestampWrites=renderPassTimestampWrites;
 // passDesc.timestampWrites=0;
-WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
+WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
@@ -53,7 +34,7 @@ sze.at(0,1)=float(szw);
 wgpu_render_pass_encoder_set_viewport(pass,0.0,0.0,666,666,0.0,1.0);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
-WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
+WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
   EM_ASM({
   console.log("test");
