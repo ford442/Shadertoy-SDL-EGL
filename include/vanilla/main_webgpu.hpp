@@ -49,13 +49,9 @@
 #include <cstdlib>
 
 // #include <boost/throw_exception.hpp>
-    
 #include <functional>
-
 #include <boost/function.hpp>
-
 #include <boost/compute/cl.hpp>
-
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
 
@@ -74,7 +70,6 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 extern"C"{
 
 void startWebGPU();
-
 void runWebGPU();
 
 }
@@ -125,65 +120,3 @@ using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
-
-
-static f_tensor sze=f_tensor{2,2};
-double szh,szw,wi,hi;
-uint32_t workgroupSize;
-uint32_t OutputBufferUnits;
-uint32_t OutputBufferBytes;
-uint32_t InputBufferUnits;
-uint32_t InputBufferBytes;
-uint64_t WGPU_InputRangeSize;
-WGPU_MAP_MODE_FLAGS mode1;
-GLsizei width;
-GLsizei height;
-WGpuTexture textureA;
-
-
-WGpuBindGroupLayout bindGroupLayout;
-WGpuBindGroupLayout bindGroupLayoutB;
-WGpuComputePipeline computePipeline;
-WGpuBuffer inputBuffer;
-WGpuBuffer outputBuffer;
-WGpuBuffer mapBuffer;
-WGpuBuffer uniBuffer;
-WGpuShaderModule cs;
-WGpuCommandBuffer commandBuffer;
-WGpuCommandEncoder encoder;
-WGpuComputePassEncoder computePass;
-WGpuBindGroup bindGroup;
-WGpuBindGroup bindGroupB;
-WGpuPipelineLayout pipelineLayout;
-WGpuQuerySet querySet;
-WGpuComputePassDescriptor computePassDescriptor;
-WGpuCommandBufferDescriptor commandBufferDescriptor;
-WGpuCommandEncoderDescriptor commandEncoderDescriptor;
-WGpuDeviceDescriptor deviceDescriptor;
-WGpuBufferBindingLayout bufferBindingLayout1;
-WGpuBufferBindingLayout bufferBindingLayout2;
-WGpuBufferBindingLayout bufferBindingLayout3;
-WGpuBufferBindingLayout bufferBindingLayout4;
-WGpuStorageTextureBindingLayout storageTextureBindingLayout1;
-WGpuRequestAdapterOptions options;
-WGpuBufferDescriptor bufferDescriptorI;
-WGpuBufferDescriptor bufferDescriptorO;
-WGpuBufferDescriptor bufferDescriptorM;
-WGpuBufferDescriptor bufferDescriptorC;
-WGpuTextureDescriptor textureDescriptor;
-WGpuTextureViewDescriptor textureViewDescriptor;
-WGpuShaderModuleDescriptor shaderModuleDescriptor;
-int randomNumber,entropySeed,raN,raND;
-uint32_t * WGPU_Result_Array;
-uint32_t * WGPU_Input_Array;
-uint32_t * WGPU_Color_Input_Array;
-WGpuImageCopyTexture WGPU_Input_Image;
-WGpuImageCopyTexture WGPU_Output_Image;
-WGpuImageCopyBuffer WGPU_Input_Buffer;
-WGpuImageCopyBuffer WGPU_Output_Buffer;
-WGpuImageCopyBuffer WGPU_Mapped_Buffer;
-
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-
-using namespace std;
