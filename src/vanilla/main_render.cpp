@@ -16,7 +16,7 @@ EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
 WGpuRenderPassColorAttachment colorAttachment={};
-colorAttachment.view=wgpu_canvas_context_get_current_texture_view(canvasContext); 
+colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 colorAttachment.clearValue.r=1.0f;
