@@ -1,3 +1,4 @@
+#include "../../lib/lib_webgpu_cpp20.cpp"
 #include "../../include/vanilla/main_render.hpp"
 
 WGpuAdapter adapter;
@@ -6,6 +7,7 @@ WGpuDevice device;
 WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
+/*
 const WGpuCanvasConfiguration WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER = {
   .usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT,
   .colorSpace = HTML_PREDEFINED_COLOR_SPACE_SRGB,
@@ -22,7 +24,7 @@ extern const WGpuRenderPassColorAttachment WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEF
     .a = 1.0,
   }
 };
-
+*/
 EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
