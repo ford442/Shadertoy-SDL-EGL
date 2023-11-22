@@ -24,7 +24,7 @@ passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
-wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),rpp.at(0,0));
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
@@ -40,7 +40,7 @@ return EM_FALSE;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
-canvasContext=wgpu_canvas_get_webgpu_context("canvas");
+wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
