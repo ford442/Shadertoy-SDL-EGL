@@ -63,34 +63,34 @@ const char *fragmentShader =
 "return vec4<f32>(1.0, 0.0, 0.73, 1.0);\n"
 "}\n";
 
-WGpuShaderModuleDescriptor shaderModuleDescV={};
-WGpuShaderModuleDescriptor shaderModuleDescF={};
+shaderModuleDescV={};
+shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
-WGpuShaderModule vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
+vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=fragmentShader;
-WGpuShaderModule fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
+fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
-WGpuVertexState vertState={};
+vertState={};
 vertState.module=fs;
 vertState.entryPoint="main";
 vertState.numBuffers=0;
 vertState.buffers=nullptr;
 vertState.numConstants=0;
 vertState.constants=nullptr;
-WGpuPrimitiveState priState={};
+priState={};
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
 // priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
 priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
 priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
 priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
-WGpuFragmentState fragState={};
+fragState={};
 fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-WGpuRenderPipelineDescriptor renderPipelineDesc={};
+renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
@@ -102,18 +102,17 @@ emscripten_request_animation_frame_loop(raf,0);
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
-WGpuDeviceDescriptor deviceDesc={};
+deviceDesc={};
 wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
 }
 
 void WGPU_Start(){
-WGpuRequestAdapterOptions options={};
+options={};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 }
 
 EM_JS(void,js_main,(),{
-  
 function normalResStart(){
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -124,7 +123,6 @@ Module.ccall("startWebGPU");
 },100);
 document.getElementById('status').style.backgroundColor="green";
 }
-
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
@@ -133,16 +131,13 @@ document.getElementById('canvas').height=parseInt(window.innerHeight,10);
 document.getElementById('canvas').width=parseInt(window.innerHeight,10);
 document.getElementById('status').height=20;
 document.getElementById('status').width=parseInt(window.innerHeight,10);
-
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
 var $lt=tem.innerHTML;
-
 function grab$lt(){
 $lt=Math.round($lt);
 }
-
 $lt=tem.innerHTML;
 grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
@@ -172,11 +167,9 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
-
 document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
-
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
