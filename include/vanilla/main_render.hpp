@@ -87,6 +87,9 @@ WGpuRenderPassDescriptor passDesc;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
+using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
+using wcb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
+using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
 
 double szh, szw;
 
