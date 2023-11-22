@@ -80,7 +80,6 @@ void startWebGPU();
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDescriptor passDesc;
 WGpuCanvasConfiguration config;
-WGpuDeviceDescriptor deviceDesc;
 WGpuShaderModuleDescriptor shaderModuleDescV;
 WGpuShaderModuleDescriptor shaderModuleDescF;
 WGpuShaderModule vs;
