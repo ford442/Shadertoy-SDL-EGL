@@ -8,7 +8,7 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
-// "let coord:vec2<u32>=vec2<u32>(0,0);"
+// "let coord:vec2<u32>=vec2<eu32>(0,0);"
 // "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
 // "let u0:u32=0;"
 // "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
@@ -84,12 +84,6 @@ static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
 static f_tensor sze=f_tensor{2,2};
 
-workgroupSize=64;
-OutputBufferUnits=262144;
-OutputBufferBytes=262144*4;
-InputBufferUnits=262144;
-InputBufferBytes=262144*4;
-WGPU_InputRangeSize=OutputBufferBytes;
 double szh,szw,wi,hi;
 uint32_t workgroupSize;
 uint32_t OutputBufferUnits;
@@ -102,6 +96,12 @@ GLsizei width;
 GLsizei height;
 WGpuTexture textureA;
 
+workgroupSize=64;
+OutputBufferUnits=262144;
+OutputBufferBytes=262144*4;
+InputBufferUnits=262144;
+InputBufferBytes=262144*4;
+WGPU_InputRangeSize=OutputBufferBytes;
 
 WGpuBindGroupLayout bindGroupLayout;
 WGpuBindGroupLayout bindGroupLayoutB;
