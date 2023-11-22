@@ -1,11 +1,6 @@
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include "../../include/vanilla/main_render.hpp"
 
-WGpuAdapter adapter;
-WGpuCanvasContext canvasContext;
-WGpuDevice device;
-WGpuQueue queue;
-WGpuRenderPipeline renderPipeline;
 
 /*
 const WGpuCanvasConfiguration WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER = {
@@ -110,8 +105,8 @@ vertState.module=fs;
 vertState.entryPoint="main";
 vertState.numBuffers=0;
 vertState.buffers=nullptr;
-vertState.numConstants = 0;
-vertState.constants = nullptr;
+vertState.numConstants=0;
+vertState.constants=nullptr;
 WGpuPrimitiveState priState={};
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
 // priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
