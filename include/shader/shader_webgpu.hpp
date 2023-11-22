@@ -109,10 +109,10 @@ typedef ResultType result_type;
 static constexpr EGLint numSamples=4;
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=4.0f;
-static constexpr float multisampleFramef=1.25f;
+static constexpr float multisampleFramef=1.0f;
 static constexpr float multisampleRenderf=1.50f;
-static constexpr float framef=1.25f;
-static constexpr float renderf=2.0f;
+static constexpr float framef=1.0f;
+static constexpr float renderf=1.0f;
 
 EGLint respon;
 
@@ -182,7 +182,7 @@ EGL_STENCIL_SIZE,0,
 EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
-EGL_COVERAGE_SAMPLES_NV,4,
+EGL_COVERAGE_SAMPLES_NV,16,
 EGL_SAMPLES,4,
 EGL_NONE
 };
