@@ -50,9 +50,9 @@ sze.at(0,1)=float(szw);
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
-WGpuCanvasConfiguration config={};
+WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device = device;
-config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+// config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
 
