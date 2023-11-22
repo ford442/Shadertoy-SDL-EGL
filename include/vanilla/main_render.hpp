@@ -77,19 +77,23 @@ void startWebGPU();
 
 }
 
-WGpuAdapter adapter;
-WGpuCanvasContext canvasContext;
-WGpuDevice device;
-WGpuQueue queue;
-WGpuRenderPipeline renderPipeline;
+
+
+ renderPipeline;
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDescriptor passDesc;
+WGpuCanvasConfiguration config;
+WGpuDeviceDescriptor deviceDesc;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
 using wcb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
 using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
+using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wcc_tensor=boost::numeric::ublas::tensor<WGpuCanvasContext>;
+using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 
 double szh, szw;
 
