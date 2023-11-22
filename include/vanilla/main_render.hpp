@@ -77,9 +77,6 @@ void startWebGPU();
 
 }
 
-
-
- renderPipeline;
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDescriptor passDesc;
 WGpuCanvasConfiguration config;
