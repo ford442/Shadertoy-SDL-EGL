@@ -3,6 +3,7 @@
 #include "../../include/vanilla/defs.hpp"
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
+#include "../../include/vanilla/main_render.hpp"
 
 #define __EMCSCRIPTEN__ 1
 
@@ -83,6 +84,8 @@ WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
+using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 static f_tensor sze=f_tensor{2,2};
+static wce_tensor wce=wce_tensor{2,2};
 double szh, szw;
 
