@@ -2,11 +2,14 @@
 
 static f_tensor sze=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
+static wrpe_tensor wrpe=wrpe_tensor{2,2};
+static wcb_tensor wcb=wcb_tensor{2,2};
+static wd_tensor wd=wd_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
-wce.at(0,0)=wgpu_device_create_command_encoder(device,0);
-// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
-// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
+wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
+// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(wd.at(0,0),0);
+// WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -18,42 +21,26 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
-// WGpuQuerySetDescriptor qdesc={};
-// qdesc.type=WGPU_QUERY_TYPE_TIMESTAMP;
-// qdesc.count=0;
-// WGpuQuerySet TquerySet=wgpu_device_create_query_set(device,&qdesc);
-// WGpuRenderPassTimestampWrites renderPassTimestampWrites={};
-// renderPassTimestampWrites.querySet=TquerySet;
-// renderPassTimestampWrites.beginningOfPassWriteIndex=-1;
-// renderPassTimestampWrites.endOfPassWriteIndex=-1;
-// passDesc.timestampWrites=renderPassTimestampWrites;
-// passDesc.timestampWrites=0;
-WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
-wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
+wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),renderPipeline);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
-// wgpu_render_pass_encoder_set_viewport(pass,0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
-wgpu_render_pass_encoder_set_viewport(pass,0.0,0.0,666,666,0.0,1.0);
-wgpu_render_pass_encoder_draw(pass,3,1,0,0);
-wgpu_render_pass_encoder_end(pass);
-WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(wce.at(0,0));
-wgpu_queue_submit_one_and_destroy(queue,commandBuffer);
-  EM_ASM({
-  console.log("test");
-});
+// wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,666,666,0.0,1.0);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
+wgpu_render_pass_encoder_end(wrpe.at(0,0));
+wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
+wgpu_queue_submit_one_and_destroy(queue,wcb.at(0,0));
 return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
-emscripten_get_element_css_size("canvas",&szw,&szh);
-sze.at(0,0)=float(szh);
-sze.at(0,1)=float(szw);
-device=result;
-queue=wgpu_device_get_queue(device);
+wd.at(0,0)=result;
+queue=wgpu_device_get_queue(wd.at(0,0));
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
 WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
-config.device = device;
+config.device = wd.at(0,0);
 // config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
@@ -78,9 +65,9 @@ const char *fragmentShader =
 WGpuShaderModuleDescriptor shaderModuleDescV={};
 WGpuShaderModuleDescriptor shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
-WGpuShaderModule vs=wgpu_device_create_shader_module(device,&shaderModuleDescV);
+WGpuShaderModule vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=fragmentShader;
-WGpuShaderModule fs=wgpu_device_create_shader_module(device,&shaderModuleDescF);
+WGpuShaderModule fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
@@ -108,7 +95,7 @@ renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipeline=wgpu_device_create_render_pipeline(device,&renderPipelineDesc);
+renderPipeline=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
 
@@ -125,43 +112,6 @@ navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 }
 
 EM_JS(void,js_main,(),{
-/*
-let winSize=parseInt(window.innerHeight,10);
-const scanvas=document.createElement('canvas');
-scanvas.id='zcanvas';
-scanvas.imageRendering='pixelated';
-scanvas.width=winSize;
-scanvas.height=winSize;
-scanvas.zoom=1;
-scanvas.scale=1;
-scanvas.style.pointerEvents='none';
-scanvas.style.display='block';
-scanvas.style.position='absolute';
-scanvas.style.zIndex='999995';
-scanvas.style.top='0';
-scanvas.style.height='100vh';
-scanvas.style.width='100vh';
-scanvas.style.backgroundColor='rgba(0,0,0,255)';
-document.getElementById("contain1").appendChild(scanvas);
-
-const contxVars={
-// colorType:'float32',
-// precision:'highp',
-preferLowPowerToHighPerformance:false,
-alpha:true,
-depth:false,
-stencil:false,
-// preserveDrawingBuffer:false,
-premultipliedAlpha:false,
-// imageSmoothingEnabled:false,
-willReadFrequently:true,
-lowLatency:true,
-powerPreference:'high-performance',
-// antialias:false
-};
-const ctx=scanvas.getContext('webgl2',contxVars);
-// const gpu=new GPUX({mode:'gpu',webGl:ctx });
- */
   
 function normalResStart(){
 setTimeout(function(){
@@ -170,7 +120,6 @@ document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 Module.ccall("startWebGPU");
-// const myInterval=setInterval(strr,1000);
 },100);
 document.getElementById('status').style.backgroundColor="green";
 }
