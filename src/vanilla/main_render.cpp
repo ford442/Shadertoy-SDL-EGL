@@ -32,7 +32,7 @@ passDesc.colorAttachments=&colorAttachment;
 // passDesc.timestampWrites=0;
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
-wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(0,0), sze.at(0,0), 0.0, 1.0);
+wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(1,0), sze.at(0,0), 0.0, 1.0);
 wgpu_render_pass_encoder_draw(pass,3,1,0,0);
 wgpu_render_pass_encoder_end(pass);
 WGpuCommandBuffer commandBuffer=wgpu_command_encoder_finish(encoder);
@@ -46,6 +46,7 @@ return EM_FALSE;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
+sze.at(0,1)=float(szw);
 device=result;
 queue=wgpu_device_get_queue(device);
 canvasContext=wgpu_canvas_get_webgpu_context("canvas");
