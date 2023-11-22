@@ -82,6 +82,7 @@ WGpuCanvasContext canvasContext;
 WGpuDevice device;
 WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
+WGpuRenderPassColorAttachment colorAttachment;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
