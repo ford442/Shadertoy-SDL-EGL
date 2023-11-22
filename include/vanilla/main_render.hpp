@@ -85,7 +85,6 @@ WGpuRenderPipeline renderPipeline;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
-static f_tensor sze=f_tensor{2,2};
-static wce_tensor wce=wce_tensor{2,2};
+
 double szh, szw;
 
