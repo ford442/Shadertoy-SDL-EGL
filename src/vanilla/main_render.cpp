@@ -29,7 +29,7 @@ WGpuRenderPassTimestampWrites renderPassTimestampWrites={};
 renderPassTimestampWrites.querySet=TquerySet;
 // renderPassTimestampWrites.beginningOfPassWriteIndex=-1;
 // renderPassTimestampWrites.endOfPassWriteIndex=-1;
-// passDesc.timestampWrites=renderPassTimestampWrites;
+passDesc.timestampWrites=renderPassTimestampWrites;
 WGpuRenderPassEncoder pass=wgpu_command_encoder_begin_render_pass(encoder,&passDesc);
 wgpu_render_pass_encoder_set_pipeline(pass,renderPipeline);
 wgpu_render_pass_encoder_set_viewport(pass, 0.0, 0.0, sze.at(0,0), sze.at(0,0), 0.0, 1.0);
