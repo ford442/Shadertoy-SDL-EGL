@@ -44,7 +44,7 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
-wgpu_canvas_context_configure(canvasContext,&config);
+wgpu_canvas_context_configure(wcc.at(0,0),&config);
 
 const char *vertexShader =
 "@vertex\n"
@@ -96,7 +96,7 @@ renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-rpp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
+wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
 
