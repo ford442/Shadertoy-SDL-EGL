@@ -1,4 +1,7 @@
-#include "../../lib/lib_webgpu_cpp20.cpp"
+#include "../../include/vanilla/main_render.hpp"
+
+static f_tensor sze=f_tensor{2,2};
+static wce_tensor wce=wce_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
 wce.at(0,0)=wgpu_device_create_command_encoder(device,0);
