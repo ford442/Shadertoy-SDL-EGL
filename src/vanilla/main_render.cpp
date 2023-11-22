@@ -56,20 +56,21 @@ config.usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.format = navigator_gpu_get_preferred_canvas_format();
 wgpu_canvas_context_configure(canvasContext, &config);
 
-const char *vertexShader=
+const char *vertexShader =
 "@vertex\n"
-"fn main_v(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
+"fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 3>(\n"
-"vec2<f32>(0.0,0.5),\n"
-"vec2<f32>(-0.5,-0.5),\n"
-"vec2<f32>(0.5,-0.5)\n"
+"vec2<f32>(0.0, 0.5),\n"
+"vec2<f32>(-0.5, -0.5),\n"
+"vec2<f32>(0.5, -0.5)\n"
 ");\n"
-"return vec4<f32>(pos[vertexIndex] * vec2<f32>(2.0, 2.0) - vec2<f32>(1.0, 1.0), 0.0, 1.0);\n" // map positions to range [-1, 1]
+"return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
 "}\n";
-const char *fragmentShader=
+
+const char *fragmentShader =
 "@fragment\n"
-"fn main_f() -> @location(0) vec4<f32> {\n"
-"return vec4<f32>(1.0,0.5,0.3,1.0);\n"
+"fn main() -> @location(0) vec4<f32> {\n"
+"return vec4<f32>(1.0, 0.5, 0.3, 1.0);\n"
 "}\n";
 
 WGpuShaderModuleDescriptor shaderModuleDescV={};
