@@ -81,6 +81,16 @@ WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDescriptor passDesc;
 WGpuCanvasConfiguration config;
 WGpuDeviceDescriptor deviceDesc;
+WGpuShaderModuleDescriptor shaderModuleDescV;
+WGpuShaderModuleDescriptor shaderModuleDescF;
+WGpuShaderModule vs;
+WGpuShaderModule fs;
+WGpuVertexState vertState;
+WGpuPrimitiveState priState;
+WGpuFragmentState fragState;
+WGpuRenderPipelineDescriptor renderPipelineDesc;
+WGpuDeviceDescriptor deviceDesc;
+WGpuRequestAdapterOptions options;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
