@@ -6,6 +6,12 @@ WGpuDevice device;
 WGpuQueue queue;
 WGpuRenderPipeline renderPipeline;
 
+const WGpuCanvasConfiguration WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER = {
+  .usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT,
+  .colorSpace = HTML_PREDEFINED_COLOR_SPACE_SRGB,
+  .alphaMode = WGPU_CANVAS_ALPHA_MODE_OPAQUE,
+};
+
 EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
