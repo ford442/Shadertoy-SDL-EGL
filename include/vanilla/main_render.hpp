@@ -76,6 +76,12 @@ void startWebGPU();
 
 }
 
+WGpuAdapter adapter;
+WGpuCanvasContext canvasContext;
+WGpuDevice device;
+WGpuQueue queue;
+WGpuRenderPipeline renderPipeline;
+
 using f_tensor=boost::numeric::ublas::tensor<float>;
 static f_tensor sze=f_tensor{2,2};
 double szh, szw;
