@@ -12,10 +12,21 @@ const WGpuCanvasConfiguration WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER = {
   .alphaMode = WGPU_CANVAS_ALPHA_MODE_OPAQUE,
 };
 
+extern const WGpuRenderPassColorAttachment WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER = {
+  .storeOp = WGPU_STORE_OP_STORE,
+  .loadOp = WGPU_LOAD_OP_LOAD,
+  .clearValue = (WGpuColor) {
+    .r = 0.0,
+    .g = 0.0,
+    .b = 0.0,
+    .a = 1.0,
+  }
+};
+
 EM_BOOL raf(double time, void *userData){
 WGpuCommandEncoder encoder=wgpu_device_create_command_encoder(device,0);
 // WGpuCommandEncoder encoder=wgpu_device_create_command_encoder_simple(device);
-WGpuRenderPassColorAttachment colorAttachment={};
+WGpuRenderPassColorAttachment colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(canvasContext),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
