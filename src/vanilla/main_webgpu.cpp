@@ -1,5 +1,12 @@
 #include "../../include/vanilla/main_webgpu.hpp"
 
+EmscriptenWebGLContextAttributes attr;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
+
+double wi,hi;
+
+using namespace std;
+
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
@@ -8,7 +15,7 @@ inline char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
-// "let coord:vec2<u32>=vec2<eu32>(0,0);"
+// "let coord:vec2<u32>=vec2<u32>(0,0);"
 // "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
 // "let u0:u32=0;"
 // "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
@@ -24,6 +31,53 @@ inline char wgl_cmp_src[2000]=
 // "if i==256{break;}"
 // "}"
 "}";
+
+using mouse_tensor=boost::numeric::ublas::tensor<float>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using f_tensor=boost::numeric::ublas::tensor<float>;
+using d_tensor=boost::numeric::ublas::tensor<double>;
+using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using iptr_tensor=boost::numeric::ublas::tensor<int *>;
+using fptr_tensor=boost::numeric::ublas::tensor<float *>;
+using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
+using gi_tensor=boost::numeric::ublas::tensor<GLint>;
+using li_tensor=boost::numeric::ublas::tensor<long>;
+using void_tensor=boost::numeric::ublas::tensor<void *>;
+using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
+using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
+using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
+using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
+using oac_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterCallback>;
+using odc_tensor=boost::numeric::ublas::tensor<WGpuRequestDeviceCallback>;
+using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
+using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
+using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
+using dd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
+using rao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
+using cb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
+using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
+using ce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
+using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
+using cpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
+using cp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
+using pl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
+using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
+using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
+using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
+using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
+using tex_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
+using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
+using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
+using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
+using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
+using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
+using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=v_tensor{2,2};
@@ -82,125 +136,81 @@ static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
 static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
-static f_tensor sze=f_tensor{2,2};
 
-double szh,szw,wi,hi;
-uint32_t workgroupSize;
-uint32_t OutputBufferUnits;
-uint32_t OutputBufferBytes;
-uint32_t InputBufferUnits;
-uint32_t InputBufferBytes;
-uint64_t WGPU_InputRangeSize;
-WGPU_MAP_MODE_FLAGS mode1;
-GLsizei width;
-GLsizei height;
-WGpuTexture textureA;
-
-workgroupSize=64;
-OutputBufferUnits=262144;
-OutputBufferBytes=262144*4;
-InputBufferUnits=262144;
-InputBufferBytes=262144*4;
-WGPU_InputRangeSize=OutputBufferBytes;
-
-WGpuBindGroupLayout bindGroupLayout;
-WGpuBindGroupLayout bindGroupLayoutB;
-WGpuComputePipeline computePipeline;
-WGpuBuffer inputBuffer;
-WGpuBuffer outputBuffer;
-WGpuBuffer mapBuffer;
-WGpuBuffer uniBuffer;
-WGpuShaderModule cs;
-WGpuCommandBuffer commandBuffer;
-WGpuCommandEncoder encoder;
-WGpuComputePassEncoder computePass;
-WGpuBindGroup bindGroup;
-WGpuBindGroup bindGroupB;
-WGpuPipelineLayout pipelineLayout;
-WGpuQuerySet querySet;
-WGpuComputePassDescriptor computePassDescriptor;
-WGpuCommandBufferDescriptor commandBufferDescriptor;
-WGpuCommandEncoderDescriptor commandEncoderDescriptor;
-WGpuDeviceDescriptor deviceDescriptor;
-WGpuBufferBindingLayout bufferBindingLayout1;
-WGpuBufferBindingLayout bufferBindingLayout2;
-WGpuBufferBindingLayout bufferBindingLayout3;
-WGpuBufferBindingLayout bufferBindingLayout4;
-WGpuStorageTextureBindingLayout storageTextureBindingLayout1;
-WGpuRequestAdapterOptions options;
-WGpuBufferDescriptor bufferDescriptorI;
-WGpuBufferDescriptor bufferDescriptorO;
-WGpuBufferDescriptor bufferDescriptorM;
-WGpuBufferDescriptor bufferDescriptorC;
-WGpuTextureDescriptor textureDescriptor;
-WGpuTextureViewDescriptor textureViewDescriptor;
-WGpuShaderModuleDescriptor shaderModuleDescriptor;
-int randomNumber,entropySeed,raN,raND;
-uint32_t * WGPU_Result_Array;
-uint32_t * WGPU_Input_Array;
-uint32_t * WGPU_Color_Input_Array;
-WGpuImageCopyTexture WGPU_Input_Image;
-WGpuImageCopyTexture WGPU_Output_Image;
-WGpuImageCopyBuffer WGPU_Input_Buffer;
-WGpuImageCopyBuffer WGPU_Output_Buffer;
-WGpuImageCopyBuffer WGPU_Mapped_Buffer;
-
-EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
-
-using namespace std;
+uint32_t workgroupSize=64;
+uint32_t OutputBufferUnits=262144;
+uint32_t OutputBufferBytes=262144*4;
+uint32_t InputBufferUnits=262144;
+uint32_t InputBufferBytes=262144*4;
+uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
-mode1=0x1; // READ MODE
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 void * userDataB;
-width=256;
-height=256;
+GLsizei width=256;
+GLsizei height=256;
 GLuint wtexture[4];
-// WGpuAdapter adapter=0;
-// WGpuDevice device=0;
-// WGpuQueue queue=0;
-computePassDescriptor={};
-commandBufferDescriptor={};
-commandEncoderDescriptor={};
-deviceDescriptor={};
+WGpuTexture textureA;
+WGpuAdapter adapter=0;
+WGpuDevice device=0;
+WGpuQueue queue=0;
+WGpuBindGroupLayout bindGroupLayout=0;
+WGpuBindGroupLayout bindGroupLayoutB=0;
+WGpuComputePipeline computePipeline=0;
+WGpuBuffer inputBuffer=0;
+WGpuBuffer outputBuffer=0;
+WGpuBuffer mapBuffer=0;
+WGpuBuffer uniBuffer=0;
+WGpuShaderModule cs=0;
+WGpuCommandBuffer commandBuffer=0;
+WGpuCommandEncoder encoder=0;
+WGpuComputePassEncoder computePass=0;
+WGpuBindGroup bindGroup=0;
+WGpuBindGroup bindGroupB=0;
+WGpuPipelineLayout pipelineLayout=0;
+WGpuQuerySet querySet=0;
+WGpuComputePassDescriptor computePassDescriptor={};
+WGpuCommandBufferDescriptor commandBufferDescriptor={};
+WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
+WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[3]={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
 WGpuBindGroupEntry bindGroupEntry[3]={};
 WGpuBindGroupEntry bindGroupEntryB[2]={};
-bufferBindingLayout1={3};
-bufferBindingLayout2={2};
-bufferBindingLayout3={2};
-bufferBindingLayout4={2};
-storageTextureBindingLayout1={1,34,2};
-options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
+WGpuBufferBindingLayout bufferBindingLayout2={2};
+WGpuBufferBindingLayout bufferBindingLayout3={2};
+WGpuBufferBindingLayout bufferBindingLayout4={2};
+WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,34,2};
+WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 std::vector<float>color_input(InputBufferUnits);
 std::vector<uint8_t>input(InputBufferBytes);
 std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
-bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
-bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
-bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 // 14 = R32FLOAT   34 = RGBA32UINT
-textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
-textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
+WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
+WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
 char * cmp_bdy=wgl_cmp_src;
-shaderModuleDescriptor={cmp_bdy,0,NULL};
+WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
-WGPU_Result_Array=new uint32_t[OutputBufferBytes];
-WGPU_Input_Array=new uint32_t[InputBufferBytes];
-WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
-WGPU_Input_Image={};
-WGPU_Output_Image={};
-WGPU_Input_Buffer={};
-WGPU_Output_Buffer={};
-WGPU_Mapped_Buffer={};
+uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
+uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
+uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
+WGpuImageCopyTexture WGPU_Input_Image={};
+WGpuImageCopyTexture WGPU_Output_Image={};
+WGpuImageCopyBuffer WGPU_Input_Buffer={};
+WGpuImageCopyBuffer WGPU_Output_Buffer={};
+WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -353,8 +363,10 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,256,256,1);
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+    WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+
+    WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
@@ -389,8 +401,9 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,256,256,1);
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+    WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+
+    WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
@@ -416,7 +429,7 @@ return;
 }
 
 static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData){
-// device=result;
+device=result;
 WGPU_Device.at(0,0,0)=result;
 wgpu_adapter_request_device_async(WGPU_Adapter.at(0,0,1),&WGPU_DeviceDescriptor.at(0,0,0),WGPU_ObtainedDeviceCallback.at(0,0,1),&WGPU_UserData.at(0,0,1));
 return;
@@ -451,7 +464,7 @@ WGPU_ComputeDoneCallback.at(0,0,2)=onComputeDoneRun2;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 WGPU_MapCallback.at(0,0,1)=mapCallbackRun;
 WGPU_MapCallback.at(0,0,2)=mapCallbackRun2;
-navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
+ navigator_gpu_request_adapter_async(&WGPU_RequestAdapterOptions.at(0,0,0),WGPU_ObtainedAdapterCallback.at(0,0,0),&WGPU_UserData.at(0,0,0));
 return;
 };
 
@@ -476,13 +489,16 @@ document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
 document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
+
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
 var $lt=tem.innerHTML;
+
 function grab$lt(){
 $lt=Math.round($lt);
 }
+
 $lt=tem.innerHTML;
 grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
@@ -512,23 +528,28 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
+
 document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
+
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
 Module.ccall("runWebGPU");
 // Module.ccall("runWebGPU2");
 // const myInterval=setInterval(strr,16.6);
 });
+
 document.getElementById('startBtn4').addEventListener('click',function(){
 Module.ccall("startWebGPU");
 });
+	
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
 },500);
+
 });
 
 extern"C"{
