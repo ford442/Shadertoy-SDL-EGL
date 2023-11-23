@@ -90,6 +90,7 @@ WGpuFragmentState fragState;
 WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuDeviceDescriptor deviceDesc;
 WGpuRequestAdapterOptions options;
+WGpuMultisampleState multiSamp;
 
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
