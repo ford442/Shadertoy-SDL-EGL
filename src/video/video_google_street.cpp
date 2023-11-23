@@ -76,7 +76,7 @@ std::chrono::steady_clock::time_point t3;
 struct timespec rem;
 struct timespec req={0,16666666};
 
-GLclampf avrg,drk,brt;
+// GLclampf avrg,drk,brt;
 GLclampf mX,mY;
 GLclampf mm,nn;
 GLuint atb_pos;
@@ -120,13 +120,6 @@ GLchar * common_shader_header=common_shader_header_gles3;
 GLchar * vertex_shader_body=vertex_shader_body_gles3;
 GLchar * fragment_shader_header=fragment_shader_header_gles3;
 GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
-
-float max;
-float min;
-float sum;
-float avgSum;
-float minSum;
-float maxSum;
 
 int Size_js;
 double wi_js,hi_js;
@@ -204,9 +197,9 @@ EGL_NONE
 };
 
 void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
-avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
-drk=y1y-(avr-0.5f);
-brt=((y1y-rlc)-(alc-0.5f));
+float avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
+float drk=y1y-(avr-0.5f);
+float brt=((y1y-rlc)-(alc-0.5f));
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
 return;
@@ -550,12 +543,12 @@ return;
 }
 
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-max=0.0f;
-min=1.0f;
-sum=0.0f;
-avgSum=0.0f;
-minSum=0.0f;
-maxSum=0.0f;
+float max=0.0f;
+float min=1.0f;
+float sum=0.0f;
+float avgSum=0.0f;
+float minSum=0.0f;
+float maxSum=0.0f;
 for(int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];
