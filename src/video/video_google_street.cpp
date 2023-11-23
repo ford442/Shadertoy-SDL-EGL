@@ -329,7 +329,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_TRUE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -399,14 +399,14 @@ emscripten_webgl_enable_extension(ctx,"KHR_gl_colorspace");
 glEnable(GL_DEPTH_TEST);
 glDepthFunc(GL_LESS);
 glClearDepth(D);
-glEnable(GL_POLYGON_OFFSET_FILL);
-glPolygonOffset(0.0f,0.0f);
+// glEnable(GL_POLYGON_OFFSET_FILL);
+// glPolygonOffset(0.0f,0.0f);
 glDisable(GL_DITHER);
-glEnable(GL_CULL_FACE);
+// glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-// glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
-// glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-// glClearColor(gF,gF,gF,gF);
+glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glClearColor(gF,gF,gF,gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
@@ -458,8 +458,8 @@ glUniform1f(uni_srate,44100.0f);
 glUniform3f(uni_res,S,S,gF);
 glUniform3f(smp_chn_res,S,S,gF);
 glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs at full resolution
-glEnable(GL_SCISSOR_TEST);
-glScissor((GLint)0,(GLint)0,Size,Size);
+// glEnable(GL_SCISSOR_TEST);
+// glScissor((GLint)0,(GLint)0,Size,Size);
 auto t1=std::chrono::steady_clock::now();
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
 return;
@@ -476,7 +476,7 @@ attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_FALSE;
 attr_js.preserveDrawingBuffer=EM_TRUE;
-attr_js.enableExtensionsByDefault=EM_TRUE;
+attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
@@ -496,7 +496,7 @@ emscripten_webgl_make_context_current(ctx_js);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glDisable(GL_DITHER);
-glEnable(GL_SCISSOR_TEST);
+// glEnable(GL_SCISSOR_TEST);
 emscripten_webgl_enable_extension(ctx_js,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx_js,"EXT_color_buffer_float");
 // emscripten_webgl_enable_extension(ctx_js,"OES_texture_float_linear");
@@ -537,7 +537,7 @@ emscripten_webgl_enable_extension(ctx_js,"KHR_gl_colorspace");
 // emscripten_webgl_enable_extension(ctx_js,"OES_gpu_shader5");
 // emscripten_webgl_enable_extension(ctx_js,"EXT_texture_filter_anisotropic");
 glViewport((GLint)0,(GLint)0,Size_js,Size_js);
-glScissor((GLint)0,(GLint)0,Size_js,Size_js);
+// glScissor((GLint)0,(GLint)0,Size_js,Size_js);
  emscripten_webgl_make_context_current(ctx);
 return;
 }
@@ -618,7 +618,7 @@ let blank$=Math.max((((w$-h$)*1.0)/8.0),0);
 let nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-// colorType:'float32',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 // logarithmicDepthBuffer:false,
 // colorSpace:'display-p3',
@@ -788,7 +788,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointa,pointb]);
-// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
