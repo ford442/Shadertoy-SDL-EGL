@@ -46,10 +46,20 @@ var txxts=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
+var x=document.getElementById("sh1");
+var option=document.createElement("option");
+option.text=txxts;
 $shds[i+1]='https://glsl.1ink.us/shaders/'+txxts;
+option.value=txxts;
+x.add(option);
 }
-var randShade=Math.random();
-randShade=Math.floor($shds[0]*randShade)+5;
+}
+ 
+function rrun(){
+let shadesNum=$shds[0];
+if(shadesNum>0){
+var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum],{async:true})+5;
+};
 let shdMenu=document.getElementById('sh1');
 var path;
 if(shdMenu.value!='Default'){
@@ -66,24 +76,29 @@ var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
-ff.onload=function(oEvent){
+document.getElementById('stat').innerHTML='Downloading Shader';
+document.getElementById('stat').style.backgroundColor='yellow';
+ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
-setTimeout(function(){
+document.getElementById('stat').innerHTML='Downloaded Shader';
+document.getElementById('stat').style.backgroundColor='blue';
+//setTimeout(function(){
 normalResStart();
-},450);
-}};
+//},350);
+}
+});
 ff.send(null);
 }
+
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-dxhttp.withCredentials=false;
-dxhttp.onreadystatechange=function(){
-if(this.readyState==4&&this.status==200){
+// dxhttp.withCredentials=false;
+dxhttp.addEventListener("load",function(){
 shds(this);
-}};
+});
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
