@@ -3,6 +3,7 @@
 #include "../../include/vanilla/defs.hpp"
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
+#include "../../lib/lib_webgpu_cpp20.cpp"
 
 #define __EMCSCRIPTEN__ 1
 
@@ -51,39 +52,14 @@
 #include <thrust/functional.h>
 #include <cstdlib>
 
-// #include "../../include/vanilla/openvino/runtime/runtime.hpp"
-// #include "../../include/vanilla/openvino/runtime/remote_context.hpp"
-
 // #include <boost/throw_exception.hpp>
     
 // namespace compute = boost::compute;
 
-// #include "../../include/vanilla/openvino/openvino.hpp"
-
-// #include "/usr/include/openvino/openvino.hpp"
-// #include "/usr/include/openvino/core/core.hpp"
-// #include "openvino/c/openvino.h"
-
-// #include "openvino/runtime/tensor.hpp"
-
-// #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
-// #include <ATen/ATen.h>
-
-// #include "oneapi/tbb/tick_count.h"
-// #include "oneapi/tbb/task_arena.h"
-// #include "oneapi/tbb/task_group.h"
-
-// #include "oneapi/tbb/global_control.h"
-// #include "/content/RAMDRIVE2/level-zero/include/ze_api.h"
-// #include "/content/RAMDRIVE2/level-zero/include/zet_api.h"
-// #include "/content/RAMDRIVE2/level-zero/include/loader/ze_loader.h"
-
 #include <functional>
 
 #include <boost/function.hpp>
-
 #include <boost/compute/cl.hpp>
-
 #include <boost/compute/core.hpp>
 #include <boost/compute/interop/opengl.hpp>
 
@@ -96,19 +72,59 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 
 // #include <boost/compute.hpp>
 // #include <boost/compute/algorithm.hpp>
-
 // namespace compute = boost::compute;
-
 // int cltest();
 
 extern"C"{
 
 void startWebGPU();
-
 void runWebGPU();
 
 }
 
+using mouse_tensor=boost::numeric::ublas::tensor<float>;
+using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
-static f_tensor sze=f_tensor{2,2};
-double szh, szw;
+using d_tensor=boost::numeric::ublas::tensor<double>;
+using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using iptr_tensor=boost::numeric::ublas::tensor<int *>;
+using fptr_tensor=boost::numeric::ublas::tensor<float *>;
+using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
+using gi_tensor=boost::numeric::ublas::tensor<GLint>;
+using li_tensor=boost::numeric::ublas::tensor<long>;
+using void_tensor=boost::numeric::ublas::tensor<void *>;
+using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
+using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
+using bmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
+using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
+using oac_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterCallback>;
+using odc_tensor=boost::numeric::ublas::tensor<WGpuRequestDeviceCallback>;
+using bbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
+using bd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
+using md_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
+using dd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
+using rao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
+using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
+using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
+using cb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
+using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
+using ce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
+using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
+using cpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
+using cp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
+using pl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
+using cm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
+using bg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
+using bgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
+using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
+using tex_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
+using td_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
+using stbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
+using tv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
+using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
+using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
+using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
