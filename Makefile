@@ -48,6 +48,18 @@ vanilla_test_gpujs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_gpu_js"] \
 	 --pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
+b3_vanilla_webgpu:
+	 em++ -c src/vanilla/main_webgpu.cpp -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS) 
+	 emcc $(LDFLAGS) -o w3001.js $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -fPIC -fPIE -DCOMPUTE \
+	 -polly -sALLOW_MEMORY_GROWTH=1 -sDISABLE_EXCEPTION_THROWING=0 -sFILESYSTEM=0 \
+	 -sINITIAL_MEMORY=1gb -lmath.js -lhtml5.js -lint53.js -sAUTO_JS_LIBRARIES=0 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sASYNCIFY=2 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-post-js src/vanilla/filesys.js --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
+	 --memory-init-file 0 --closure-args=--externs=lib/webgpu-closure-externs.js main_webgpu.o
+
 b3_vanilla_render:
 	 emcc src/vanilla/main_render.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
@@ -82,18 +94,6 @@ b3_vanilla_icc:
 	 -sEXPORTED_FUNCTIONS='["_main","_icctest","_js_simd","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
 	 --memory-init-file 0 --closure 0
-
-b3_vanilla_webgpu:
-	 em++ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS) src/vanilla/main_webgpu.cpp 
-	 em++ -o w3001.js -O2 -std=c++17 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
-	 -polly -sALLOW_MEMORY_GROWTH=1 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sINITIAL_MEMORY=1gb -lmath.js -lhtml5.js -lint53.js \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-	 -sASYNCIFY=2 -sASYNCIFY_IMPORTS=['startWebGPU','runWebGPU','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-post-js src/vanilla/filesys.js --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --memory-init-file 0 --closure 0 --closure-args=--externs=lib/webgpu-closure-externs.js main_webgpu.o
 
 b3_vanilla_webgpu_debug:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
