@@ -63,6 +63,7 @@ const char *fragmentShader =
 "return vec4<f32>(1.0, 0.0, 0.73, 1.0);\n"
 "}\n";
 
+multiSamp={};
 multiSamp.count=4;
 shaderModuleDescV={};
 shaderModuleDescF={};
