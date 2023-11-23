@@ -65,6 +65,7 @@ const char *fragmentShader =
 
 multiSamp={};
 multiSamp.count=4;
+multiSamp.mask=1;
 shaderModuleDescV={};
 shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
