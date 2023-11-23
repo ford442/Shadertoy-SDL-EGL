@@ -1,9 +1,7 @@
 #include "../../include/video/main.hpp"
 
 EM_JS(void,js_main,(),{
-
 "use strict";
-
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
 const switchy=document.getElementById('di');
@@ -16,10 +14,8 @@ $high.innerHTML=winSize;
 bezl.height=winSize;
 bezl.width=parseInt(window.innerWidth,10);
 switchy.click();
-
 var $shds=[];
 var $vids=[];
-
 function normalResStart(){
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
@@ -40,7 +36,6 @@ bezl.height=window.innerHeight;
 switchy.click();
 },900);
 }
-  
 function shds(xml){
 const sparser=new DOMParser();
 let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
@@ -77,12 +72,11 @@ if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader1.toy',sfil);
 setTimeout(function(){
-   normalResStart();
+normalResStart();
 },450);
 }};
 ff.send(null);
 }
-
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
 dxhttp.withCredentials=false;
@@ -93,12 +87,10 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
-
 const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
 const sfr=document.getElementById('slideframe');
 var $lt;
-
 function grab$lt(){
 $lt=Math.round($lt);
 }
@@ -128,20 +120,15 @@ $ll=Math.round($ll);
 $ll=$ll/100;$ll=($ll*1000);
 tem.innerHTML=$ll;
 });setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 });
-
 });
 
 int main(void){
-"use strict";
-
 EM_ASM({
 FS.mkdir("/shader");
 });
-
 js_main();
 return 0;
 }
