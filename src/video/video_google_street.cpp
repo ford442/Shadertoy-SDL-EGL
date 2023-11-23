@@ -148,7 +148,7 @@ EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB_KHR,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,EGL_GL_COLORSPACE_BT2020_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-EGL_NONE,EGL_NONE
+EGL_NONE
 };
 
 EGLint const anEglCtxAttribs2_js[]={
@@ -159,7 +159,7 @@ EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_ROBUST_ACCESS_BIT_KHR,
-EGL_NONE,EGL_NONE
+EGL_NONE
 };
 
 EGLint const attribute_list_js[]={
@@ -197,11 +197,11 @@ EGL_NONE
 };
 
 void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
-float avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
-float drk=y1y-(avr-0.5f);
-float brt=((y1y-rlc)-(alc-0.5f));
+GLfloat avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
+GLfloat drk=y1y-(avr-0.5f);
+GLfloat brt=((y1y-rlc)-(alc-0.5f));
 glBlendColor(avrg,avrg,avrg,y1y);
-glClearColor(drk,drk,drk,brt);
+// glClearColor(drk,drk,drk,brt);
 return;
 }
 
