@@ -404,9 +404,9 @@ glPolygonOffset(0.0f,0.0f);
 glDisable(GL_DITHER);
 glEnable(GL_CULL_FACE);
 glFrontFace(GL_CW);
-glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glClearColor(gF,gF,gF,gF);
+// glBlendEquationSeparate(GL_FUNC_REVERSE_SUBTRACT,GL_MAX);
+// glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+// glClearColor(gF,gF,gF,gF);
 glGenBuffers((GLsizei)1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
 glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
@@ -686,8 +686,8 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
-var minuss=(av$-0.9)*(av$/(av$-0.9));
-av$=av$-(minuss*(av$*0.01));
+// var minuss=(av$-0.9)*(av$/(av$-0.9));
+// av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setDynamicOutput(true).setPipeline(true).setOutput([$S,$S]);
 let r=g.createKernel(function(f){
@@ -788,7 +788,7 @@ $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
+// Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
 M();
 if(loopLoop==true){
