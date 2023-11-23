@@ -37,13 +37,9 @@ LINK_FLAGS += -DQUAD $(LDFLAGS) -sWASM_BIGINT=0 -sLEGALIZE_JS_FFI=0 -sOFFSCREENC
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 b3_video_google_mk:
-	 em++ $(STDS) src/video/main_google_street.cpp -c $(COMMON_FLAGS) -O2 \
-	 $(SIMD_FLAGS) \
-	 em++ $(STDS) src/video/video_google_street.cpp -c -O2 \
-	 $(SIMD_FLAGS)
-	 emcc $(STDS) -o g0004.js $(LINK_FLAGS) -O2 \
-	 $(SIMD_FLAGS) \
-	 -sFORCE_FILESYSTEM=1 \
+	 em++ $(STDS) src/video/main_google_street.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS)
+	 em++ $(STDS) src/video/video_google_street.cpp -c -O2 $(SIMD_FLAGS)
+	 emcc $(STDS) -o g0004.js $(LINK_FLAGS) -O2 $(SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_clr","_str","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js gpujsx.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js main_google_street.o video_google_street.o
 
