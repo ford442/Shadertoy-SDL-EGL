@@ -473,9 +473,9 @@ emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
 attr_js.stencil=EM_FALSE;
 attr_js.depth=EM_TRUE;
-attr_js.antialias=EM_FALSE;
+attr_js.antialias=EM_TRUE;
 attr_js.premultipliedAlpha=EM_TRUE;
-attr_js.preserveDrawingBuffer=EM_FALSE;
+attr_js.preserveDrawingBuffer=EM_TRUE;
 attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -588,8 +588,8 @@ EM_JS(void,vid,(),{
 
 "use strict";
 
-var vv=document.getElementById("mv");
-var sh4d=true;
+let vv=document.getElementById("mv");
+let sh4d=true;
 var stp,Lstp;
 const stpInc=0.016;
 var setTim;
@@ -598,37 +598,37 @@ var loopLoop;
 var loopPart;
 var mmvv;
 var revv;
-var $bb;
-const $H=Module.HEAPF32.buffer;
-var inh=window.innerHeight;
-var $S=parseInt(inh,10);
-var w$=parseInt(inh,10);
-var h$=parseInt(inh,10);
+let $bb;
+let $H=Module.HEAPF32.buffer;
+let inh=window.innerHeight;
+let $S=parseInt(inh,10);
+let w$=parseInt(inh,10);
+let h$=parseInt(inh,10);
 let la=h$*h$*4;
 let pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-var sz=(h$*w$)/8;
-var avag=0.750;
-var min=1.000;
-var max=0.000;
+let agav=new Float32Array($H,pointa,300);
+let sz=(h$*w$)/8;
+let avag=0.750;
+let min=1.000;
+let max=0.000;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
+let blank$=Math.max((((w$-h$)*1.0)/8.0),0);
+let nblank$=Math.max((((h$-w$)*1.0)/8.0),0);
 let bCan=document.getElementById("bcanvas");
 let gl=bCan.getContext("webgl2",{
-colorType:'float32',
+// colorType:'float32',
 preferLowPowerToHighPerformance:false,
-logarithmicDepthBuffer:false,
+// logarithmicDepthBuffer:false,
 // colorSpace:'display-p3',
 alpha:true,
 depth:true,
 stencil:false,
-precision:'highp',
-imageSmoothingEnabled:false,
-imageSmoothingQuality:'medium',
-preserveDrawingBuffer:false,
+// precision:'highp',
+// imageSmoothingEnabled:false,
+// imageSmoothingQuality:'medium',
+preserveDrawingBuffer:true,
 premultipliedAlpha:true,
 desynchronized:false,
 lowLatency:true,
@@ -649,9 +649,7 @@ gl.getExtension('EXT_blend_minmax');
 // gl.getExtension('OES_texture_float_linear');
 gl.disable(gl.DITHER);
 // gl.renderbufferStorage(gl.RENDERBUFFER,gl.RGBAF32,bCan.height,bCan.height);
- 
   // gl.drawingBufferColorMetadata={mode:'extended'};
- 
 // gl.enable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE);  // <- crazy effect!
 // gl.blendColor(1.0,1.0,1.0,1.0);
@@ -659,9 +657,7 @@ gl.disable(gl.DITHER);
 // gl.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 // gl.enable(gl.BLEND);  //  webgl2 messed up effect
 // gl.unpackColorSpace='display-p3';  // very slow
- 
   // gl.drawingBufferColorSpace='display-p3';
- 
 // // var canvas=gpu.createCanvas($S,$S);
 // // document.getElementById("contain1").appendChild(canvas);
  
@@ -710,25 +706,21 @@ var bb;
 var der=p[0];
 var neerg=p[1];
 var eulb=p[2];
-
 if(der>0.333){
  rr=Silver(der);
 }else{
  rr=GoldR(der);
  }
-
 if(neerg>0.4){
 gg=Silver(neerg);
 }else{
 gg=GoldG(neerg);
 }
-
 if(eulb>0.5){
 bb=Silver(eulb);
 }else{
 bb=GoldB(eulb);
 }
-  
 this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
  */
 this.color(p[0],p[1],p[2],aveg);
@@ -749,35 +741,35 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 pointb=77*la;
 $B=new Float32Array($H,pointb,sz);
-var $F=1;
-var $Bu=33;
+let $F=1;
+let $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 for(var i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);var $$1=t(vv);$"+j+".set($$1);");
 };
-var d=S();if(d)d();d=S();function S(){
+let d=S();if(d)d();d=S();function S(){
 vv=document.getElementById("mv");
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
-var nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
+blank$=Math.max((((w$-h$)*1.0)/8.0),0.0);
+nblank$=Math.max((((h$-w$)*1.0)/8.0),0.0);
 $S=parseInt(window.innerHeight,10);
 la=h$*h$*4;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float32Array($H,pointa,300);  // has to var?
+let agav=new Float32Array($H,pointa,300);  // has to var?
 R.setOutput([sz]);
 for(var i=0;i<65;i++){
 j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 };
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);  // has to var?
+$B=new Float32Array($H,pointb,sz);  // has to var?
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
-var T=false;
+let T=false;
 function M(){
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -794,7 +786,7 @@ eval("$r"+i+"=t($"+i+");r($r"+i+");$$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+",0,la);
 };};
 $bb=R(vv);
 $B.set($bb,0,sz);
-var pointb=66*la;  // has to revar?
+pointb=66*la;  // has to revar?
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 Module.ccall("clr",null,["Number","Number","Number"],[agav[200],agav[100],agav[0]]);
 setTimeout(function(){
