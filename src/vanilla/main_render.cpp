@@ -63,6 +63,7 @@ const char *fragmentShader =
 "return vec4<f32>(1.0, 0.0, 0.73, 1.0);\n"
 "}\n";
 
+multiSamp.count=4;
 shaderModuleDescV={};
 shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
@@ -96,6 +97,7 @@ renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
+renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
