@@ -201,7 +201,7 @@ GLfloat avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
 GLfloat drk=y1y-(avr-0.5f);
 GLfloat brt=((y1y-rlc)-(alc-0.5f));
 glBlendColor(avrg,avrg,avrg,y1y);
-// glClearColor(drk,drk,drk,brt);
+glClearColor(drk,drk,drk,brt);
 return;
 }
 
