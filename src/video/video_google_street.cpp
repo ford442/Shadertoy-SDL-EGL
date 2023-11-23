@@ -331,16 +331,16 @@ iFrame=0;
 clk_l=true;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_TRUE;
+attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
-attr.enableExtensionsByDefault=EM_FALSE;
+attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=3;
+attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // eglBindAPI(EGL_OPENGL_API);
@@ -478,20 +478,20 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_TRUE;
+attr_js.stencil=EM_FALSE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_FALSE;
-attr_js.premultipliedAlpha=EM_FALSE;
+attr_js.premultipliedAlpha=EM_TRUE;
 attr_js.preserveDrawingBuffer=EM_FALSE;
-attr_js.enableExtensionsByDefault=EM_FALSE;
+attr_js.enableExtensionsByDefault=EM_TRUE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr_js.failIfMajorPerformanceCaveat=EM_FALSE;
-attr_js.majorVersion=3;
+attr_js.majorVersion=2;
 attr_js.minorVersion=0;
 ctx_js=emscripten_webgl_create_context("#bcanvas",&attr_js);
-eglBindAPI(EGL_OPENGL_API);
-// eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
 display_js=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display_js,&major_js,&minor_js);
 eglChooseConfig(display_js,attribute_list_js,&eglconfig_js,(EGLint)1,&config_size_js);
@@ -631,19 +631,19 @@ logarithmicDepthBuffer:false,
 // colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:true,
+stencil:false,
 precision:'highp',
 imageSmoothingEnabled:false,
 imageSmoothingQuality:'medium',
 preserveDrawingBuffer:false,
-premultipliedAlpha:false,
+premultipliedAlpha:true,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
-antialias:false,
+antialias:true,
 willReadFrequently:false,
 xrCompatible:false,
-majorVersion:3,
+majorVersion:2,
 minorVersion:0
 });
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
@@ -836,7 +836,7 @@ return;
 }
  
 void b3(){
-sleep(1);
+// sleep(1);
 vid();
 egl();
 return;
