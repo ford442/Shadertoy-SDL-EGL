@@ -1508,6 +1508,10 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_depth_texture");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_objects");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_array_object");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_s3tc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_etc");
+  
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
