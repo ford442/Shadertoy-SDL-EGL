@@ -577,7 +577,7 @@ return;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr){
+void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 return;
 }
