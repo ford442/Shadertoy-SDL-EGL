@@ -116,7 +116,7 @@ static constexpr EGLint numSamples=8;
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=8.0f;
 static constexpr float multisampleFramef=1.0f;
-static constexpr float multisampleRenderf=1.05f;
+static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
 static constexpr float renderf=1.0f;
 
