@@ -134,8 +134,8 @@ and the image will not be as accurate as it would be if it were in the original 
 */
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
 // / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
@@ -145,11 +145,9 @@ EGL_NONE
 };
 
 static constexpr EGLint ctx_att[]={
-// EGL_CONTEXT_MAJOR_VERSION_KHR,2,
-// EGL_CONTEXT_MINOR_VERSION_KHR,0,
-EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_CLIENT_VERSION,EGL_OPENGL_ES_API,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-// EGL_CONTEXT_MINOR_VERSION_KHR,2,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -159,36 +157,37 @@ EGL_NONE
 static constexpr EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NV_FLOAT,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
-// EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 // EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
-//  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // "...the context will only support OpenGL ES 3.0 and later features."
+//  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // EGL 1.5 "...the context will only support OpenGL ES 3.0 and later features."
 EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
-EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
+EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,0,
-EGL_BUFFER_SIZE,64,
-// EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
+EGL_BUFFER_SIZE,32,
+EGL_COVERAGE_BUFFERS_NV,EGL_TRUE, // available in GLES 3.1
 EGL_COVERAGE_SAMPLES_NV,numSamples,
-EGL_SAMPLE_BUFFERS,1,
+EGL_SAMPLE_BUFFERS,EGL_TRUE,
 EGL_SAMPLES,numSamples,
 EGL_NONE
 };
@@ -1543,6 +1542,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_array_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_s3tc");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_etc");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_blend_func_extended");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_swap_behavior");
+   
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
@@ -1594,7 +1595,8 @@ frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 Sh.at(1,1)=frag;
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
-glClearDepth(Di.at(0,0));
+// glClearDepth(Di.at(0,0));
+glClearDepth(Fi.at(0,0));
 // eglBindAPI(EGL_OPENGL_ES_API);
 // boost::uint_t<32>::exact shd_prg=glCreateProgram();
 shd_prg=glCreateProgram();
@@ -1638,8 +1640,8 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(0,0),int_size.at(0,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16F,int_size.at(2,0),int_size.at(2,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16F,int_size.at(2,0),int_size.at(2,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_ALPHA32F_ARB,int_size.at(1,0),int_size.at(1,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
@@ -1698,22 +1700,14 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
-/*        //  alpha renderbuffer
-glGenRenderbuffers(1,&TX.at(0,1,1));
-glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_SRGB8_ALPHA8,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_ALPHA32F_ARB,int_size.at(1,0),int_size.at(1,0));
-// glBindRenderbuffer(GL_COLOR_ATTACHMENT1,TX.at(0,1,1));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX.at(0,1,1));
-*/  //  depth32 renderbuffer
+ //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT32F,int_size.at(1,3),int_size.at(1,3));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 // glDepthRange(0.0f,1.0f);
-glClearDepthf(1.0f);
+glClearDepthf(Fi.at(0,0));
 /// glClearDepthf(1.0f);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
