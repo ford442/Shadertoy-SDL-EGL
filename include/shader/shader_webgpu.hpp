@@ -79,8 +79,8 @@ typedef ResultType result_type;
 #include "../../lib/lib_webgpu.h"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include <emscripten/html5.h>
-// #include "../../glslang/glslang/Public/ShaderLang.h"
-// #include "../../glslang/glslang/Include/glslang_c_interface.h"
+#include "../../glslang/glslang/Public/ShaderLang.h"
+#include "../../glslang/glslang/Include/glslang_c_interface.h"
 
 // #define GLfloat float 
 // #define GLint int
