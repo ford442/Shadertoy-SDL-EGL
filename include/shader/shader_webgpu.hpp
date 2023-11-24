@@ -318,6 +318,7 @@ static inline char cm_hdr_src[2300]=
 // "#pragma optionNV(enable_shared)\n"
 "#pragma optionNV(enable_constant)\n"
 "#extension all_spir_v_extensions : enable\n"
+"#extension GL_EXT_sRGB : enable\n"
 "#extension GL_EXT_YUV_target : enable\n"
 // "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
@@ -1543,6 +1544,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_s3tc")
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_etc");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_blend_func_extended");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_swap_behavior");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB");
    
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
