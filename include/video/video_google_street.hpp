@@ -1,16 +1,9 @@
 #pragma once
 
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+// #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-#define _XOPEN_SOURCE 700
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD -1
-
-#include <wasm_simd128.h>
-#include <xmmintrin.h>
-#include <immintrin.h> 
-#include <nmmintrin.h>
-#include <unistd.h>
+#include "../../include/video/defs.hpp"
+#include "../../include/video/intrins.hpp"
 
 #include <iostream>
 #include <algorithm>
@@ -31,27 +24,7 @@
 
 #include <emscripten/html5.h>
 
-#define GL_FRAGMENT_PRECISION_HIGH 1
-#define GL3_PROTOTYPES 1
-#define GL4_PROTOTYPES 1 //maybe??
-
-#include <webgl/webgl2.h>
-
-#define GL_GLEXT_PROTOTYPES 1
-#include <GL/gl.h>
-#include <GL/glext.h>
-
-#define GL_GLES_PROTOTYPES 1
-#include <GLES3/gl3.h>
-// #include <GLES3/gl31.h>
-// #include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
-
-#define EGL_EGL_PROTOTYPES 1
-#include <EGL/egl.h>
-#define EGL_EGLEXT_PROTOTYPES
-#include <EGL/eglext.h>
-// #include <EGL/eglplatform.h>
+#include "../../include/video/egl.hpp"
 
 void avgFrm(int,int,float *,float *);
 
@@ -59,7 +32,7 @@ extern "C"{
 
 void b3();
 
-void nano(short int,int,float *,float *);
+void nano(int,int,float *,float *);
 
 }
 
