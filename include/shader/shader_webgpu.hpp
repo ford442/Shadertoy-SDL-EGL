@@ -14,7 +14,6 @@
 #include <vector>
 #include <climits>
 #include <cfenv>
-
 #include <functional>
 
 template<class ArgumentType,class ResultType>
@@ -78,6 +77,7 @@ typedef ResultType result_type;
 // #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
+#include "../../lib/lib_webgpu_cpp20.cpp"
 #include <emscripten/html5.h>
 // #include "../../glslang/glslang/Public/ShaderLang.h"
 // #include "../../glslang/glslang/Include/glslang_c_interface.h"
