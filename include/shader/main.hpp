@@ -397,6 +397,7 @@ return EM_TRUE;
 };
 
 int r4nd4(int);
+int rD,Rg,nm;
 
 class js
 {
