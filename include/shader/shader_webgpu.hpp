@@ -341,7 +341,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma clang loop tile(enable)\n"
 "#pragma clang loop distribute(enable)\n"
 "#pragma optimize(on)\n"
-"#pragma optimize(avx)\n"
+"#pragma optimize(sse4.2|avx)\n"
 "#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
