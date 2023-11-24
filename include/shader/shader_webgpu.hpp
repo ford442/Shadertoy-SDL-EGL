@@ -284,7 +284,6 @@ static inline char wgl_cmp_src[2000]=
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
-/*
 "#pragma target(glsl_es)\n"
 "#pragma enable_bitfield_ops\n"
 "#pragma enable_matrix_dot\n"
@@ -313,7 +312,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma enable_int64\n"
 // "#pragma optionNV(enable_shared)\n"
 "#pragma optionNV(enable_constant)\n"
-*/
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
