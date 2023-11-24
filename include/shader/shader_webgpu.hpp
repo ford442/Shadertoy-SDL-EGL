@@ -301,7 +301,6 @@ static inline char cm_hdr_src[2300]=
 "#pragma optionNV(STDGL,all)\n"
 "#pragma optionNV(optimize,full)\n"
 // "#pragma optionNV(debug,on)\n"
-"#pragma target "nv40"\n"
 "#pragma depth_textures\n"
 "#pragma multisample\n"
 "#pragma enable_scrgb\n"
