@@ -1,4 +1,3 @@
-
 #include <boost/cstdfloat.hpp>
 #include "../../include/shader/defs.hpp"
 // #include <stdio.h>
@@ -1292,6 +1291,7 @@ return nullptr;
 }
 
 boost::function<EM_BOOL()>strt=[this](){
+  glslang_initialize();
 // eglBindAPI(EGL_OPENGL_BIT);
 eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{register float XYZW[4];}Vertex;
