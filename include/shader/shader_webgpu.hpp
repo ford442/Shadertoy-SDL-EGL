@@ -179,11 +179,11 @@ EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,0,
-EGL_BUFFER_SIZE,32,
+EGL_BUFFER_SIZE,64,
+// EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
+EGL_COVERAGE_SAMPLES_NV,numSamples,
 EGL_SAMPLE_BUFFERS,1,
-EGL_COVERAGE_BUFFERS_NV,1, // available in GLES 3.1
-EGL_COVERAGE_SAMPLES_NV,16,
-EGL_SAMPLES,4,
+EGL_SAMPLES,numSamples,
 EGL_NONE
 };
 
@@ -1299,15 +1299,15 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_FALSE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
-// attr.renderViaOffscreenBackBuffer=EM_FALSE;
-// attr.explicitSwapControl=EM_FALSE;
+attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.explicitSwapControl=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-// attr.majorVersion=2;
-// attr.minorVersion=0;
+attr.majorVersion=2;
+attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -1356,7 +1356,7 @@ glDepthMask(GL_TRUE);
 // glEnable(BLEND_ADVANCED_COHERENT_NV);
 glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL);
-// glDepthFunc(GL_LESS);
+glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_ALWAYS);
