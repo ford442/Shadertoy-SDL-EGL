@@ -83,7 +83,7 @@ typedef ResultType result_type;
 #include <memory>
 
 #include "../../glslang/glslang/Public/ShaderLang.h"
-#include "../../glslang/glslang/Include/glslang_c_interface.h"
+#include "../../glslang/CInterface/glslang_c_interface.cpp"
 #include "../../glslang/SPIRV/GlslangToSpv.h"
 
 // using namespace ::glslang;
