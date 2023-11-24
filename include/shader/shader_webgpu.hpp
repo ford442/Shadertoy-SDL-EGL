@@ -1571,8 +1571,8 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*128,indc,GL_DYNAMIC_DRAW);
 // glslang::TShader vertexShader(EShLanguage::EShLangVertex);
 // glslang::TShader fragmentShader(EShLanguage::EShLangFragment);
   
-glslang::InitializeProcess();
-glslang::FinalizeProcess();
+ShInitialize();
+ShFinalize();
   
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
