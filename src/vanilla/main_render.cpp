@@ -23,7 +23,6 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
-  sample_count
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
