@@ -9,7 +9,7 @@ COMMON_FLAGS_LINK += -fopenmp -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mexte
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast \
-	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno -ffp-constant-folding \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
