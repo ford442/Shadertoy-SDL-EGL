@@ -1,4 +1,4 @@
-LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
+LDFLAGS += -Wl,-O3,--lto-O3,-lm,
 
 SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx 
 
