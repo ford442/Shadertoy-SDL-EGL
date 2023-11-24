@@ -1,7 +1,7 @@
 #include "../../include/shader/main.hpp"
 
 js JS;
-int rD,Rg,nm;
+extern int rD,Rg,nm;
 
 int r4nd4(int tH){
 Rg=JS.rNd(tH);
