@@ -81,7 +81,7 @@ typedef ResultType result_type;
 #include "../../glslang/glslang/Public/ShaderLang.h"
 #include "../../glslang/glslang/Include/glslang_c_interface.h"
 
-using namespace ::glslang
+using namespace ::glslang;
 
 // #define GLfloat float 
 // #define GLint int
