@@ -4,6 +4,7 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 
 #include "../../include/shader/defs.hpp"
+#include "../../include/shader/boost_defs.hpp"
 #include "../../include/shader/intrins.hpp"
 #include "../../include/shader/egl.hpp"
 
@@ -35,6 +36,7 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 
 window.scroll(0,0);
+/*
 let $high=document.getElementById('canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
@@ -54,11 +56,9 @@ scanvas.style.height='100vh';
 scanvas.style.width='100vh';
 scanvas.style.backgroundColor='rgba(255,255,255,0)';
 document.getElementById("contain1").appendChild(scanvas);
-const contxVars={preferLowPowerToHighPerformance:false,alpha:true,depth:true,stencil:false,lowLatency:true,powerPreference:'high-performance',antialias:true};
+const contxVars={preferLowPowerToHighPerformance:false,alpha:true,depth:true,stencil:false,lowLatency:false,powerPreference:'high-performance',antialias:true};
 const context = scanvas.getContext('webgl2',contxVars);
-
 // const gpu=new GPUX({mode:'gpu',webGl:context });
-
 // context.disable(gl.DITHER);
 // context.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 // context.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -188,6 +188,8 @@ context.getExtension('ARB_depth_texture');
 context.getExtension('ARB_multisample');
 context.getExtension('ARB_framebuffer_multisample');
 context.getExtension('ARB_shader_objects');
+*/
+
 var $shds=[];
 
 function normalResStart(){
@@ -203,8 +205,6 @@ Module.ccall('str',{async:true});
 document.getElementById('scanvas').width=window.innerHeight;
 document.getElementById('scanvas').height=window.innerHeight;
 document.getElementById('di').click();
-
- 
 }
 
 function shds(xml){
@@ -395,8 +395,6 @@ static inline boost::function<EM_BOOL()>jss=[](){
 js_main();
 return EM_TRUE;
 };
-
-int rD,Rg,nm;
 
 int r4nd4(int);
 
