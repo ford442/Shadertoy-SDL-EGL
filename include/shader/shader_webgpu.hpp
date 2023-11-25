@@ -134,13 +134,12 @@ and the image will not be as accurate as it would be if it were in the original 
 */
 // EGL_GL_COLORSPACE_LINEAR_KHR, 
 // EGL_GL_COLORSPACE_SRGB_KHR,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_BACK_BUFFER,
+// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
+EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SCRGB_EXT,
+// / EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
+// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
 EGL_NONE
 };
 
@@ -159,7 +158,7 @@ static constexpr EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT|EGL_OPENGL_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
@@ -321,14 +320,14 @@ static inline char cm_hdr_src[2300]=
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_EXT_sRGB : enable\n"
 "#extension GL_EXT_YUV_target : enable\n"
-// "#extension GL_OES_standard_derivatives : disable\n"
+"#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
 // "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
-// "#extension EGL_KHR_gl_colorspace : enable\n"
-// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#extension EGL_KHR_gl_colorspace : enable\n"
+"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 // "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
