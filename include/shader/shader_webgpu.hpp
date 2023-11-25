@@ -334,7 +334,7 @@ static inline char cm_hdr_src[2300]=
 // "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
-"#undef HW_PERFORMANCE\n"
+// "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 1\n"
  "#define HW_PERFORMANCE 0\n"
 // "#pragma STDC(FENV_ACCESS,ON)\n"
