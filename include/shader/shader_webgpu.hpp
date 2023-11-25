@@ -1081,7 +1081,7 @@ static inline boost::function<EM_BOOL()>RendarAb=[](){
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 // glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
