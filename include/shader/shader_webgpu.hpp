@@ -1929,7 +1929,7 @@ emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
-   // glEnableVertexAttribArray(0);
+glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
 glFinish();
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
