@@ -394,7 +394,7 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.4)*1.111+0.4;}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.4)*1.111+0.4;gl_DepthMask(GL_TRUE);}\n\0";
 
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
@@ -1300,7 +1300,7 @@ return nullptr;
 
 boost::function<EM_BOOL()>strt=[this](){
 // eglBindAPI(EGL_OPENGL_BIT);
-eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{register float XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
