@@ -289,7 +289,7 @@ static inline char wgl_cmp_src[2000]=
 "}"
 "}";
 
-static inline char cm_hdr_src[2300]=
+static inline char cm_hdr_src[3300]=
 "#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
 "#pragma target(glsl_es)\n"
@@ -386,8 +386,9 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb = (fragColor.rgb - vec3(0.4)) * 1.111 + vec3(0.4);}\n"
+static inline char frg_ftr_src[2420]=
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb = (fragColor.rgb - vec3(0.4)) * 1.111 + vec3(0.4);}\n";
+/*
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
 "int _N=3;void mainImage(out vec4 O,vec2 U){\n"
 "vec4 o;O=vec4(0.0);\n"
@@ -396,7 +397,7 @@ static inline char frg_ftr_src[1420]=
 "O /= float(_N * _N);O = pow(O, vec4(1.077038, 1.184228, 1.449715, 1.0));}\n"
 "void mainImage0(out vec4 O, vec2 U){\n"
 "O = vec4(1.0, 1.0, 1.0, 1.0);}\n\0";
-
+*/
 EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
