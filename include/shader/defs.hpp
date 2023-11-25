@@ -13,7 +13,7 @@
 // #define _FLT_EVAL_METHOD_INLINE
   
 // #pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT OFF
+  // #pragma STDC FP_CONTRACT OFF
 // #define _XOPEN_REALTIME
 // #define _POSIX_ASYNC_IO
 // #define _POSIX_PRIO_IO
