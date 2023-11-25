@@ -1727,7 +1727,7 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-glClearColor(0.0f,0.0f,0.0f,1.0f);
+// glClearColor(0.0f,0.0f,0.0f,1.0f);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
