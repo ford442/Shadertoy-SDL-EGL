@@ -160,7 +160,7 @@ EGL_NONE
 static constexpr EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
@@ -323,7 +323,7 @@ static inline char cm_hdr_src[2300]=
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_EXT_sRGB : enable\n"
 "#extension GL_EXT_YUV_target : enable\n"
-"#extension GL_OES_standard_derivatives : disable\n"
+// "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
 // "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
@@ -336,7 +336,7 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_EXT_shader_image_load_store : enable\n"
 // "#undef HW_PERFORMANCE\n"
 // "#define HW_PERFORMANCE 1\n"
- "#define HW_PERFORMANCE 0\n"
+// "#define HW_PERFORMANCE 0\n"
 // "#pragma STDC(FENV_ACCESS,ON)\n"
 "#pragma STDC(FP_CONTRACT,OFF)\n"
 "#pragma optionNV(fastmath,on)\n"
@@ -1938,7 +1938,7 @@ emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms
 emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
 emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // glBindVertexArray(0);
-glEnableVertexAttribArray(0);
+   // glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
 glFinish();
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
