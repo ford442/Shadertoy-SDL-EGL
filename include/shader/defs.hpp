@@ -13,15 +13,17 @@
 // #define _FLT_EVAL_METHOD_INLINE
   
 // #pragma STDC CX_LIMITED_RANGE ON
-// #pragma STDC FP_CONTRACT ON
+#pragma STDC FP_CONTRACT OFF
 // #define _XOPEN_REALTIME
 // #define _POSIX_ASYNC_IO
 // #define _POSIX_PRIO_IO
 // #define _POSIX_SYNC_IO
 // #define	_XOPEN_SHM
 // #define _POSIX_PRIORITIZED_IO 1
-#undef _FLT_ROUNDS_NEAREST
-#define _FLT_ROUNDS_ZERO
+  
+// #undef _FLT_ROUNDS_NEAREST
+// #define _FLT_ROUNDS_ZERO
+  
 // #define _POSIX_REGEXP
 
 // #pragma pack(8)
