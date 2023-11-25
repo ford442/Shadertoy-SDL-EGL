@@ -299,7 +299,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma enable_control_flow\n"
 "#pragma (STGLSL_ESSL30,all)\n"
 "#pragma STDGL(strict off)\n"
-"#pragma optionNV(STGLSL_ESSL30,all)\n"
+//"#pragma optionNV(STGLSL_ESSL30,all)\n"
 "#pragma optionNV(optimize,full)\n"
 "#pragma depth_textures\n"
 "#pragma multisample\n"
@@ -315,7 +315,7 @@ static inline char cm_hdr_src[2300]=
 "#pragma enable_int16\n"
 "#pragma optionNV(enable_int64)\n"
 "#pragma enable_int64\n"
-"#pragma optionNV(enable_shared)\n"
+// "#pragma optionNV(enable_shared)\n"
 "#pragma optionNV(enable_constant)\n"
 "#extension all_spir_v_extensions : enable\n"
 "#extension GL_EXT_sRGB : enable\n"
@@ -329,7 +329,7 @@ static inline char cm_hdr_src[2300]=
 "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
-"#pragma STDC(FP_CONTRACT,OFF)\n"
+// "#pragma STDC(FP_CONTRACT,OFF)\n"
 "#pragma optionNV(fastmath,on)\n"
 "#pragma optionNV(fastprecision,off)\n"
 "#pragma omp (OpenMP)\n"
@@ -353,7 +353,6 @@ static inline char cm_hdr_src[2300]=
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n"
 "precision highp float;\n";
-
 /*
 
 "#pragma (precise none)\n"
