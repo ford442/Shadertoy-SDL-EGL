@@ -16,7 +16,7 @@ COMMON_FLAGS += -fopenmp -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-
 
 COMMON_FLAGS_LINK += -sDEFAULT_TO_CXX=0 $(COMMON_FLAGS)
 
-STATIC_LINK_FLAGS += -DQUAD -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
+STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
@@ -46,7 +46,7 @@ b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) --emconfig egl_version=1.5 -o s3029dev.js -O2 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
+	 em++ $(STDS) --emconfig "egl_version=1.5" -o s3029dev.js -O2 -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 \
 	 $(COMMON_FLAGS_LINK) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
