@@ -291,7 +291,6 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[2300]=
 "#version 300 es\n"
-/*
 "#extension GL_EXTENSIONS : enable\n"
 "#pragma target(glsl_es)\n"
 "#pragma enable_bitfield_ops\n"
@@ -299,16 +298,12 @@ static inline char cm_hdr_src[2300]=
 "#pragma enable_vector_relational\n"
 "#pragma enable_control_flow\n"
 "#pragma (STGLSL_ESSL30,all)\n"
-// "#pragma (STDGL,all)\n"
 "#pragma STDGL(strict off)\n"
-// "#pragma optionNV(STDGL,all)\n"
 "#pragma optionNV(STGLSL_ESSL30,all)\n"
 "#pragma optionNV(optimize,full)\n"
-// "#pragma optionNV(debug,on)\n"
 "#pragma depth_textures\n"
 "#pragma multisample\n"
 "#pragma enable_scrgb\n"
-// "#pragma enable_display_p3_linear\n"
 "#pragma use_srgb\n"
 "#pragma sample_frequency_fragment(16)\n"
 "#pragma sample_frequency_vertex(16)\n"
@@ -327,19 +322,13 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_EXT_YUV_target : enable\n"
 "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
-// "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
 "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
-// "#extension EXT_gl_colorspace_display_p3_passthrough : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
-// "#undef HW_PERFORMANCE\n"
-// "#define HW_PERFORMANCE 1\n"
-// "#define HW_PERFORMANCE 0\n"
-// "#pragma STDC(FENV_ACCESS,ON)\n"
 "#pragma STDC(FP_CONTRACT,OFF)\n"
 "#pragma optionNV(fastmath,on)\n"
 "#pragma optionNV(fastprecision,off)\n"
@@ -358,13 +347,13 @@ static inline char cm_hdr_src[2300]=
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
-*/
 "precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n"
 "precision highp float;\n";
+
 /*
 
 "#pragma (precise none)\n"
@@ -407,7 +396,6 @@ static inline char frg_ftr_src[1420]=
 "mainImage0(o, U + vec2(float(k % _N - _N/2), float(k / _N - _N/2)) / float(_N));O += o;}\n"
 "O /= float(_N * _N);O = pow(O, vec4(1.077038, 1.184228, 1.449715, 1.0));}\n"
 "void mainImage0(out vec4 O, vec2 U){\n"
-    // Add your custom image processing logic here
 "O = vec4(1.0, 1.0, 1.0, 1.0);}\n\0";
 
 EM_BOOL ms_l,clk_l;
