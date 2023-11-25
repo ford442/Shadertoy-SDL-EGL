@@ -1082,13 +1082,13 @@ static inline boost::function<EM_BOOL()>RendarAb=[](){
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
 eglSwapBuffers(display,surface);
-glDisable(GL_DITHER);
+// glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
-// glDepthFunc(GL_LEQUAL);
+glDepthFunc(GL_LEQUAL);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-// glSampleCoverage(1.0f,GL_FALSE);
+glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1113,13 +1113,13 @@ static inline boost::function<EM_BOOL()>RendarBb=[](){
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-// glSampleCoverage(numSamplesf,GL_FALSE);
+glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
-// glDepthFunc(GL_LESS);
-glEnable(GL_DITHER);
+glDepthFunc(GL_LESS);
+// glEnable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFinish();
+// glFinish();
 return EM_TRUE;
 };
 
@@ -1210,7 +1210,7 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[3],3);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
-// glFlush();
+// glFinish();
 return EM_TRUE;
 };
 
@@ -1932,6 +1932,7 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_c
 // glBindVertexArray(0);
 glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
+glFinish();
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
