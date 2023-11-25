@@ -323,7 +323,7 @@ static inline char cm_hdr_src[2300]=
 "#extension GL_EXT_YUV_target : enable\n"
 // "#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
-"#extension GL_REGAL_enable : enable\n"
+// "#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
@@ -394,7 +394,7 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[1420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.4)*1.111+0.4;gl_DepthMask(GL_TRUE);}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.rgb=(fragColor.rgb-0.4)*1.111+0.4;}\n\0";
 
 /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
@@ -1419,7 +1419,7 @@ glDisable(GL_CULL_FACE);
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
@@ -1477,7 +1477,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
