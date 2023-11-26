@@ -1039,13 +1039,13 @@ static inline boost::function<EM_BOOL()>RendarAb=[](){
 // glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
-// eglSwapBuffers(display,surface);
+eglSwapBuffers(display,surface);
 // glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
 glDepthFunc(GL_LEQUAL);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
