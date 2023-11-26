@@ -1127,8 +1127,8 @@ u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUniform1f(uni_fps,u_time.time_spanb.count()/1.0f);
 if(ms_l==true){
-mms.at(0,1)=round(mms2.at(0,0)/int_size.at(0,1));
-mms.at(1,1)=round((mms2.at(0,1))/int_size.at(0,1));
+mms.at(0,1)=round(mms2.at(0,0)/(float)int_size.at(0,1));
+mms.at(1,0)=round((mms2.at(0,1))/(float)int_size.at(0,1));
 }
 // retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -1138,13 +1138,13 @@ if(ms_l==true){
 if(clk_l==true){
 const long xxx=mms2.at(0,0);
 const long yyy=mms2.at(0,1);
-mms.at(0,0)=float(xxx);
-mms.at(1,0)=float((int_size.at(0,1)-yyy));
+mms.at(0,1)=float(xxx);
+mms.at(1,0)=float((yyy-(float)int_size.at(0,1)));
 clk_l=false;
 }
 mms.at(2,0)=float(mms2.at(0,0));
-mms.at(2,1)=float(int_size.at(0,1)-mms2.at(0,1));
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+mms.at(2,1)=float((float)int_size.at(0,1)-mms2.at(0,1));
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 }
 else{
 clk_l=true;
@@ -1900,7 +1900,7 @@ glUniform1i(smp_chn[3],3);
 // glUniform1i(uni_fps,60.0);
 mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=float_size.at(0,0)*0.5;
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
