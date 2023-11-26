@@ -115,8 +115,8 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-EGLint numSamples=4;
-EGLint numSamplesNV=4;
+EGLint numSamples;
+EGLint numSamplesNV;
 
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=4.0f;
@@ -1257,7 +1257,7 @@ return nullptr;
 boost::function<EM_BOOL()>strt=[this](){
 eglGetConfigAttrib(eglDisplay,config,EGL_SAMPLES,&numSamples);
 eglGetConfigAttrib(eglDisplay,config,EGL_COVERAGE_BUFFERS_NV,&numSamplesNV);
-static constexpr EGLint att_lst[]={
+static EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
