@@ -1139,7 +1139,7 @@ if(clk_l==true){
 const long xxx=mms2.at(0,0);
 const long yyy=mms2.at(0,1);
 mms.at(0,1)=float(xxx);
-mms.at(1,0)=float(yyy-(yyy-(float)int_size.at(0,1)/2));
+mms.at(1,0)=float((float)int_size.at(0,1)-((yyy-int_size.at(0,1))/2));
 clk_l=false;
 }
 mms.at(2,0)=float(mms2.at(0,0));
