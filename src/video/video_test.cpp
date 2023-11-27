@@ -8,6 +8,20 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
+EMSCRIPTEN_RESULT ret;
+
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EGLint config_size,major,minor;
+
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
 static const EGLint attribut_list[]={
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
 EGL_NONE
