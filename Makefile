@@ -12,7 +12,7 @@ STDS := -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c
 LINK_SIMD_FLAGS := -DSIMD=2 -msimd128 -mavx
 
 COMMON_FLAGS += -fopenmp -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const -mbulk-memory -matomics \
-	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
+	 -sWASM_WORKERS=0 -sSHARED_MEMORY=0 -stdlib=libc++ \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
@@ -62,8 +62,8 @@ video_test:
 	 --extern-post-js js/pagec.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js video_test.o
 
 video_test2:
-	 em++ $(STDS) -c src/video/video_test.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) -c src/video/video_test.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS) -O0 $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano"]' \
