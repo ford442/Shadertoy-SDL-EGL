@@ -37,7 +37,7 @@ FS.mkdir('/shader');
 
 window.scroll(0,0);
 /*
-let $high=document.getElementById('canvasSize');
+let $high=document.querySelector('#canvasSize');
 let winSize=parseInt(window.innerHeight,10);
 $high.innerHTML=winSize;
 const scanvas=document.createElement('canvas');
@@ -193,18 +193,18 @@ context.getExtension('ARB_shader_objects');
 var $shds=[];
 
 function normalResStart(){
-document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
+document.querySelector('#shut').innerHTML=2;
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
 setTimeout(function(){
-document.getElementById('stat').innerHTML='Sending Start';
-document.getElementById('stat').style.backgroundColor='green';
+document.querySelector('#stat').innerHTML='Sending Start';
+document.querySelector('#stat').style.backgroundColor='green';
 Module.ccall('str',{async:true});
 },100);
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('di').click();
+document.querySelector('#scanvas').width=window.innerHeight;
+document.querySelector('#scanvas').height=window.innerHeight;
+document.querySelector('#di').click();
 }
 
 function shds(xml){
@@ -231,31 +231,31 @@ let shadesNum=$shds[0];
 if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum],{async:true})+5;
 };
-let shdMenu=document.getElementById('sh1');
+let shdMenu=document.querySelector('#sh1');
 var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
-document.getElementById('path').innerHTML=$shds[randShade];
+document.querySelector('#path').innerHTML=$shds[randShade];
 }else{
-document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
+document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
 }
 }else{
-var fle=document.getElementById('path').innerHTML;
-document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
+var fle=document.querySelector('#path').innerHTML;
+document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
 }
-var pth=document.getElementById('path').innerHTML;
+var pth=document.querySelector('#path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
-document.getElementById('stat').innerHTML='Downloading Shader';
-document.getElementById('stat').style.backgroundColor='yellow';
+document.querySelector('#stat').innerHTML='Downloading Shader';
+document.querySelector('#stat').style.backgroundColor='yellow';
 ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader.glsl',sfil);
-document.getElementById('stat').innerHTML='Downloaded Shader';
-document.getElementById('stat').style.backgroundColor='blue';
+document.querySelector('#stat').innerHTML='Downloaded Shader';
+document.querySelector('#stat').style.backgroundColor='blue';
 //setTimeout(function(){
 normalResStart();
 //},350);
@@ -274,116 +274,116 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-let tem=document.getElementById('tim');
-let ban=document.getElementById('menuBtn');
-let sfr=document.getElementById('slideframe');
+let tem=document.querySelector('#tim');
+let ban=document.querySelector('#menuBtn');
+let sfr=document.querySelector('#slideframe');
 var $lt;
 function grab$lt(){$lt=Math.round($lt);}
 $lt=tem.innerHTML;grab$lt();
-let slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
+let slo=new Slideout({'panel':document.querySelector('#panel'),'menu':document.querySelector('#menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";});
 const pnnl=document.body;
 
-document.getElementById('startBtn2').addEventListener('click',function(){
+document.querySelector('#startBtn2').addEventListener('click',function(){
 Module.ccall('swp',{async:true});
 rrun();
 });
 
-document.getElementById('uniDown').addEventListener('click',function(){
+document.querySelector('#uniDown').addEventListener('click',function(){
 Module.ccall('ud',{async:true});
 });
 
-document.getElementById('viewDown').addEventListener('click',function(){
+document.querySelector('#viewDown').addEventListener('click',function(){
 Module.ccall('vd',{async:true});
 });
 
-document.getElementById('uniUp').addEventListener('click',function(){
+document.querySelector('#uniUp').addEventListener('click',function(){
 Module.ccall('uu',{async:true});
 });
 
-document.getElementById('viewUp').addEventListener('click',function(){
+document.querySelector('#viewUp').addEventListener('click',function(){
 Module.ccall('vu',{async:true});
 });
 
-document.getElementById('moveUp').addEventListener('click',function(){
+document.querySelector('#moveUp').addEventListener('click',function(){
 Module.ccall('mu',{async:true});
 
-});document.getElementById('moveDown').addEventListener('click',function(){
+});document.querySelector('#moveDown').addEventListener('click',function(){
 Module.ccall('md',{async:true});
 
-});document.getElementById('moveLeft').addEventListener('click',function(){
+});document.querySelector('#moveLeft').addEventListener('click',function(){
 Module.ccall('ml',{async:true});
 
-});document.getElementById('moveRight').addEventListener('click',function(){
+});document.querySelector('#moveRight').addEventListener('click',function(){
 Module.ccall('mr',{async:true});
 });
 
-document.getElementById('sizeUp').addEventListener('click',function(){
-// document.getElementById('scanvas').style.width=window.innerHeight*1.01;
-// document.getElementById('scanvas').style.height=window.innerHeight*1.01;
-// document.getElementById('scanvas').width=window.innerHeight*1.01;
-//document.getElementById('scanvas').height=window.innerHeight*1.01;
+document.querySelector('#sizeUp').addEventListener('click',function(){
+// document.querySelector('#scanvas').style.width=window.innerHeight*1.01;
+// document.querySelector('#scanvas').style.height=window.innerHeight*1.01;
+// document.querySelector('#scanvas').width=window.innerHeight*1.01;
+//document.querySelector('#scanvas').height=window.innerHeight*1.01;
 // Module.ccall('vu');
 setTimeout(function(){
 Module.ccall('uu',{async:true});
 },100);
 setTimeout(function(){
-// document.getElementById('scanvas').style.width=window.innerHeight;
-// document.getElementById('scanvas').style.height=window.innerHeight;
-// document.getElementById('scanvas').width=window.innerHeight;
-//document.getElementById('scanvas').height=window.innerHeight;
+// document.querySelector('#scanvas').style.width=window.innerHeight;
+// document.querySelector('#scanvas').style.height=window.innerHeight;
+// document.querySelector('#scanvas').width=window.innerHeight;
+//document.querySelector('#scanvas').height=window.innerHeight;
 },200);
 // Module.ccall('vd');
 });
  
-document.getElementById('sizeDown').addEventListener('click',function(){
-// document.getElementById('scanvas').style.width=window.innerHeight*0.99;
-// document.getElementById('scanvas').style.height=window.innerHeight*0.99;
-// document.getElementById('scanvas').width=window.innerHeight*0.99;
-//document.getElementById('scanvas').height=window.innerHeight*0.99;
+document.querySelector('#sizeDown').addEventListener('click',function(){
+// document.querySelector('#scanvas').style.width=window.innerHeight*0.99;
+// document.querySelector('#scanvas').style.height=window.innerHeight*0.99;
+// document.querySelector('#scanvas').width=window.innerHeight*0.99;
+//document.querySelector('#scanvas').height=window.innerHeight*0.99;
 // Module.ccall('vd');
 setTimeout(function(){
 Module.ccall('ud',{async:true});
 },100);
 setTimeout(function(){
-// document.getElementById('scanvas').style.width=window.innerHeight;
-// document.getElementById('scanvas').style.height=window.innerHeight;
-// document.getElementById('scanvas').width=window.innerHeight;
-//document.getElementById('scanvas').height=window.innerHeight;
+// document.querySelector('#scanvas').style.width=window.innerHeight;
+// document.querySelector('#scanvas').style.height=window.innerHeight;
+// document.querySelector('#scanvas').width=window.innerHeight;
+//document.querySelector('#scanvas').height=window.innerHeight;
 },200);
 // Module.ccall('vu',{async:true});
 });
 
-document.getElementById('startBtn').addEventListener('click',function(){
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
-document.getElementById('stat').innerHTML='Scanning Shaders';
-document.getElementById('stat').style.backgroundColor='yellow';
+document.querySelector('#startBtn').addEventListener('click',function(){
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
+document.querySelector('#stat').innerHTML='Scanning Shaders';
+document.querySelector('#stat').style.backgroundColor='yellow';
 rrun();
 });
 
 scanShaders();
 
 setTimeout(function(){
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
 },100);
 
 function Key(e){
-if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
-if(e.code=='KeyE'){document.getElementById('startBtn2').click();};
-if(e.code=='KeyD'){document.getElementById('uniUp').click();};
-if(e.code=='KeyA'){document.getElementById('uniDown').click();};
-if(e.code=='KeyW'){document.getElementById('viewUp').click();};
-if(e.code=='KeyS'){document.getElementById('viewDown').click();};
-if(e.code=='KeyJ'){document.getElementById('moveLeft').click();};
-if(e.code=='KeyK'){document.getElementById('moveRight').click();};
-if(e.code=='KeyI'){document.getElementById('moveDown').click();};
-if(e.code=='KeyM'){document.getElementById('moveUp').click();};
-if(e.code=='Digit1'){document.getElementById('sizeDown').click();};
-if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
+if(e.code=='KeyQ'){document.querySelector('#startBtn').click();};
+if(e.code=='KeyE'){document.querySelector('#startBtn2').click();};
+if(e.code=='KeyD'){document.querySelector('#uniUp').click();};
+if(e.code=='KeyA'){document.querySelector('#uniDown').click();};
+if(e.code=='KeyW'){document.querySelector('#viewUp').click();};
+if(e.code=='KeyS'){document.querySelector('#viewDown').click();};
+if(e.code=='KeyJ'){document.querySelector('#moveLeft').click();};
+if(e.code=='KeyK'){document.querySelector('#moveRight').click();};
+if(e.code=='KeyI'){document.querySelector('#moveDown').click();};
+if(e.code=='KeyM'){document.querySelector('#moveUp').click();};
+if(e.code=='Digit1'){document.querySelector('#sizeDown').click();};
+if(e.code=='Digit3'){document.querySelector('#sizeUp').click();};
 }
 pnnl.addEventListener('keydown',Key);
 
