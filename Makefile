@@ -8,26 +8,26 @@ STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -msse2 -msse3 -mssse3 \
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
-COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const -mbulk-memory -matomics \
+COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthread -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
-	 -sDISABLE_EXCEPTION_CATCHING=0 -fPIC -fpie -finline-functions -funroll-loops \
-	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off \
+	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
+	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
 
-STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
+STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=fast \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=1 \
+GL_FLAGS += -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=2 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS += $(LDFLAGS) -sDEFAULT_TO_CXX=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS += $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=2 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
@@ -53,7 +53,7 @@ video_resurection_edit:
 	 em++ $(STDS) include/shader/intrins.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o intrins.o -static
 	 em++ $(STDS) include/shader/gl.hpp $(STATIC_LINK_FLAGS) $(SIMD_FLAGS) -o gl.o -static
 	 em++ $(STDS) -c video_edit.cpp $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) -DDOUBLE
-	 em++ $(STDS) video_edit.o -o b3768.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) video_edit.o -o b3668.js $(COMMON_FLAGS) $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(WEBGPU_FLAGS) $(BOOST_FLAGS) -DINTRINS -DGL \
 	 -sFORCE_FILESYSTEM=1 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' -sUSE_SDL=2 \
@@ -66,20 +66,6 @@ video_resurection_webgpu:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc resurection_jebus_webgpu.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
-	 -sINITIAL_MEMORY=512mb -sALLOW_MEMORY_GROWTH=0 \
-	 -sUSE_SDL=2 -sPRECISE_F32=1 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -std=c++17 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js fluid.js --extern-pre-js flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js -lmath.js -lhtml5.js -lint53.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --extern-post-js pagec_webgpu.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
-
-video_resurection_nowebgpu:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc resurection_jebus_nowebgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc resurection_jebus_nowebgpu.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
 	 -sINITIAL_MEMORY=512mb -sALLOW_MEMORY_GROWTH=0 \
 	 -sUSE_SDL=2 -sPRECISE_F32=1 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
@@ -295,21 +281,21 @@ b3_shader_compute:
 
 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants \
+	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector \
+	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) -std=c++20 -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector \
+	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -sUSE_SDL_MIXER=2 -fno-fast-math \
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o audio.o video.o shader.o -o b3hd003.js -std=c++20 $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -o b3hd003.js $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -DEMMALLOC_USE_64BIT_OPS=1 \
+	 -flto -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -sWASM=1 -DNDEBUG=1 \
-	 -fwhole-program-vtables -polly -sFORCE_FILESYSTEM=1 --closure 0 --closureFriendly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sDYNAMIC_EXECUTION=0 -sGL_UNSAFE_OPTS=0 \
+	 -sEVAL_CTORS=1 -fwhole-program-vtables -polly -sFORCE_FILESYSTEM=1 --closure 0 --closureFriendly -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2048mb -sDYNAMIC_EXECUTION=0 -sGL_UNSAFE_OPTS=0 \
 	 -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sPRECISE_I64_MATH=2 -sGL_MAX_TEMP_BUFFER_SIZE=64mb -sGLOBAL_BASE=8388608 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_b3_egl","_nano","_clr","_r4nd","_frm","_swp","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --pre-js js/module.js --pre-js rSlider.js --pre-js slideOut.js --pre-js gpujsx.js --extern-post-js fluid.js --extern-post-js flui.js
