@@ -6,11 +6,11 @@ if(isMobile()){
  promoPopup.style.display='table';
  },20000);
 }
-var appleLink=document.getElementById('apple_link');
-var googleLink=document.getElementById('google_link');
+var appleLink=document.querySelector('#apple_link');
+var googleLink=document.querySelector('#google_link');
 
 // const canvas=document.getElementsByTagName('canvas')[0];
-var canvas=document.getElementById('acanvas');
+var canvas=document.querySelector('#acanvas');
 
 resizeCanvas();
 let config={
@@ -305,7 +305,7 @@ function textureToCanvas(texture,width,height){
 
 
 // let captureCanvas=document.createElement('canvas');
- let captureCanvas=document.getElementById('acanvas');
+ let captureCanvas=document.querySelector('#acanvas');
  
  
  let ctx=captureCanvas.getContext('2d');
