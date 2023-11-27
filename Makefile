@@ -11,8 +11,8 @@ STDS := -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c
 
 LINK_SIMD_FLAGS := -DSIMD=2 -msimd128 -mavx
 
-COMMON_FLAGS := -fopenmp -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pipe -mextended-const -mbulk-memory -matomics \
-	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
+COMMON_FLAGS := -fopenmp -sSUPPORT_LONGJMP=emscripten -pipe -mextended-const -mbulk-memory -matomics \
+	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIC -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
@@ -31,7 +31,7 @@ GL_FLAGS += -sFULL_ES3=1 -sUSE_SDL=0 -sLEGACY_GL_EMULATION=0 -lGL -lGLESv2 -lEGL
 	 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS := $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sDEFAULT_TO_CXX=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 \
 	 -sTEXTDECODER=1 --use-preload-plugins --closure 0 --closureFriendly \
