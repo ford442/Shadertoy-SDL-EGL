@@ -63,7 +63,7 @@ video_test:
 
 video_test2:
 	 em++ $(STDS) -c src/video/video_test.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS) -O0 $(LINK_SIMD_FLAGS) \
+	 emcc $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS) -O0 $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano"]' \
