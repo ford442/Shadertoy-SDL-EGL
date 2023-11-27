@@ -11,20 +11,20 @@ LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -m
 COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=0 -sSHARED_MEMORY=0 \
 	 -sDISABLE_EXCEPTION_CATCHING=0 -fPIC -fpie -finline-functions -funroll-loops \
-	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=fast \
+	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
 
-STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=fast \
+STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno -mcpu=bleeding-edge \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sFULL_ES2=0 -sFULL_ES3=1 -sUSE_GLFW=2 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=1 \
+GL_FLAGS += -sFULL_ES2=1 -sFULL_ES3=1 -sUSE_GLFW=0 -Wl,-lGL,-lEGL,-lGLESv2 -sUSE_REGAL=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
 LINK_FLAGS += $(LDFLAGS) -sDEFAULT_TO_CXX=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
@@ -303,7 +303,7 @@ b3_combine_dev:
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -fno-fast-math \
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 emcc main.o audio.o video.o shader.o -o b3hd003.js -std=c++20 $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
+	 emcc main.o audio.o video.o shader.o -o b3hd003.js -std=c++20 $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
