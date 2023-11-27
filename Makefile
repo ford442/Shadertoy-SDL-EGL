@@ -1,8 +1,8 @@
-BIN_NAME += c0-001-avx2.js
+BIN_NAME += c0-001-sse.js
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lm
 
-SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx2
+SIMD_FLAGS += -DSIMD=2 -msimd128 -sse4.2
 
 STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
