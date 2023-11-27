@@ -171,7 +171,7 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{
-// colorType:'float32',
+colorType:'float32',
 preferLowPowerToHighPerformance:false,
 alpha:true,
 depth:true,
@@ -229,8 +229,8 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
-contx.getExtension('EGL_HI_colorformats');
-contx.getExtension('EGL_EXT_pixel_format_float');
+// contx.getExtension('EGL_HI_colorformats');
+// contx.getExtension('EGL_EXT_pixel_format_float');
 // contx.disable(gl.DITHER);
 
 const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
