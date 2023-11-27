@@ -295,17 +295,17 @@ b3_shader_compute:
 
 
 b3_combine_dev:
-	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants \
+	 em++ src/combine/main.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
+	 em++ src/combine/video.cpp -c  $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) -std=c++20 -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fmerge-all-constants -fno-stack-protector \
+	 em++ src/combine/shader.cpp -c $(COMMON_FLAGS) -std=c++20 -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fmerge-all-constants -fno-stack-protector \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
-	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -flto -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -fno-fast-math \
+	 em++ src/combine/audio.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) -fno-stack-protector -fmerge-all-constants -sUSE_SDL=2 -fno-fast-math \
 	 -ffp-contract=off -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 	 emcc main.o audio.o video.o shader.o -o b3hd003.js -std=c++20 $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -fno-stack-protector -mllvm -fmerge-all-constants -sUSE_SDL=2 \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -flto -DEMMALLOC_USE_64BIT_OPS=1 \
+	 -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sFETCH_SUPPORT_INDEXEDDB=0 -force-vector-width=4 -sGL_POOL_TEMP_BUFFERS=0 \
 	 -sPRECISE_F32=1 -sWASM_BIGINT=1 -wasm-enable-eh -exception-model=wasm -sPOLYFILL=0 -sFAST_UNROLLED_MEMCPY_AND_MEMSET=1 -sUSE_GLFW=3 -mtune=tigerlake -march=corei7-avx \
 	 -sASSERTIONS=0 -s DYLINK_DEBUG=0 -sWASM=1 -DNDEBUG=1 \
