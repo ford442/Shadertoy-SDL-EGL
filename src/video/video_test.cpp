@@ -75,7 +75,7 @@ avgFrm(Fnum,leng,ptr,aptr);
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-var vv=document.getElementById("mv");
+var vv=document.querySelector("#mv");
 var intervalBackward;
 
 function back(){
@@ -134,14 +134,14 @@ var Mov=1;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
-if(Mov==1){vv=document.getElementById("mv");Mov=0;vv.pause();}
-else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
+if(Mov==1){vv=document.querySelector("#mv");Mov=0;vv.pause();}
+else if(Mov==0){vv=document.querySelector("#mv");Mov=1;vv.play();}
 }
-if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
-if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
+if (e.code=='KeyW'){vv=document.querySelector("#mv");Mov=1;vv.pause();forward();}
+if (e.code=='KeyS'){vv=document.querySelector("#mv");Mov=1;vv.pause();back();}
+if (e.code=='KeyZ'){vv=document.querySelector("#mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
 backForth(stp);}
-if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
+if (e.code=='KeyX'){vv=document.querySelector("#mv");stpBackForth();vv.play();}
 }
 
 function doKeyUp(e){
@@ -151,10 +151,10 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let w$=parseInt(document.querySelector("#wid").innerHTML,10);
+let h$=parseInt(document.querySelector("#hig").innerHTML,10);
 if(w$<1){w$=640;h$=640;}
-vv=document.getElementById("mv");
+vv=document.querySelector("#mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*4;
 var pointa=77*la;
@@ -166,7 +166,7 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-const bcanvas=document.getElementById("bcanvas");
+const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:false,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
@@ -318,9 +318,9 @@ this.color(GoldR(p[0]),GoldG(p[1]),GoldB(p[2]),aveg);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setDynamicOutput(true).setGraphical(true).setOutput([h$,h$]);
 
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
+w$=parseInt(document.querySelector("#wid").innerHTML,10);
+h$=parseInt(document.querySelector("#hig").innerHTML,10);
+vv=document.querySelector("#mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 let l=w$*h$*16;
@@ -346,8 +346,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(document.querySelector("#wid").innerHTML,10);
+h$=parseInt(document.querySelector("#hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
@@ -367,7 +367,7 @@ r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:a
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
-vv=document.getElementById("mv");
+vv=document.querySelector("#mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
@@ -386,7 +386,7 @@ M();
 },16.66);
 };
 M();
-document.getElementById("di").onclick=function(){
+document.querySelector("#di").onclick=function(){
   Module.ccall('startWebGPU',{async: true});
 T=true;
 S();
