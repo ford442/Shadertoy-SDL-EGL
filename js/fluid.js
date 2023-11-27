@@ -202,12 +202,12 @@
  for (var t=0; t < e.__preset_select.length; t++) e.__preset_select[t].innerHTML=e.__preset_select[t].value;
  e.preset=this.value;
  }),t.appendChild(s),t.appendChild(n),t.appendChild(o),t.appendChild(i),t.appendChild(r),ae) {
- var a=document.getElementById("dg-local-explain"),l=document.getElementById("dg-local-storage");
- document.getElementById("dg-save-locally").style.display="block","true" === localStorage.getItem(m(e,"isLocal")) && l.setAttribute("checked","checked"),b(e,a),X.bind(l,"change",function () {
+ var a=document.querySelector("#dg-local-explain"),l=document.querySelector("#dg-local-storage");
+ document.querySelector("#dg-save-locally").style.display="block","true" === localStorage.getItem(m(e,"isLocal")) && l.setAttribute("checked","checked"),b(e,a),X.bind(l,"change",function () {
  e.useLocalStorage=!e.useLocalStorage,b(e,a);
  });
  }
- var d=document.getElementById("dg-new-constructor");
+ var d=document.querySelector("#dg-new-constructor");
  X.bind(d,"keydown",function (e) {
  !e.metaKey || 67 !== e.which && 67 !== e.keyCode || le.hide();
  }),X.bind(n,"click",function () {
