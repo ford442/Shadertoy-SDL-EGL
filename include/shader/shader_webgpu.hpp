@@ -118,6 +118,15 @@ typedef ResultType result_type;
 EGLint numSamples;
 EGLint numSamplesNV;
 
+EGLint numGreen;
+EGLint numRed;
+EGLint numBlue;
+EGLint numAlpha;
+EGLint numDepth;
+EGLint numStencil;
+EGLint numBuffer;
+EGLint numMBuffers;
+
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=4.0f;
 static constexpr float multisampleFramef=1.0f;
@@ -1301,6 +1310,14 @@ cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglGetConfigAttrib(display,eglconfig,EGL_SAMPLES,&numSamples);
 eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numSamplesNV);
+eglGetConfigAttrib(display,eglconfig,EGL_SAMPLE_BUFFERS,&numMBuffers);
+eglGetConfigAttrib(display,eglconfig,EGL_RED_SIZE,&numRed);
+eglGetConfigAttrib(display,eglconfig,EGL_GREEN_SIZE,&numGreen);
+eglGetConfigAttrib(display,eglconfig,EGL_BLUE_SIZE,&numBlue);
+eglGetConfigAttrib(display,eglconfig,EGL_ALPHA_SIZE,&numAlpha);
+eglGetConfigAttrib(display,eglconfig,EGL_DEPTH_SIZE,&numDepth);
+eglGetConfigAttrib(display,eglconfig,EGL_STENCIL_SIZE,&numStencil);
+eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
 static EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
@@ -1325,16 +1342,16 @@ EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
-EGL_RED_SIZE,10,
-EGL_GREEN_SIZE,10,
-EGL_BLUE_SIZE,10,
-EGL_ALPHA_SIZE,8,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,8,
-EGL_BUFFER_SIZE,32,
+EGL_RED_SIZE,numRed,
+EGL_GREEN_SIZE,numGreen,
+EGL_BLUE_SIZE,numBlue,
+EGL_ALPHA_SIZE,numAlpha,
+EGL_DEPTH_SIZE,numDepth,
+EGL_STENCIL_SIZE,numStencil,
+EGL_BUFFER_SIZE,numBuffer,
 EGL_COVERAGE_BUFFERS_NV,EGL_TRUE, // available in GLES 3.1
 EGL_COVERAGE_SAMPLES_NV,numSamplesNV,
-EGL_SAMPLE_BUFFERS,1,
+EGL_SAMPLE_BUFFERS,numMBuffers,
 EGL_SAMPLES,numSamples,
 EGL_NONE
 };
