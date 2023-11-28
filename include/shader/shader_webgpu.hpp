@@ -1243,7 +1243,7 @@ return result;
 return nullptr;
 }
 
-boost::function<EM_BOOL()>strt=[this](){
+const boost::function<EM_BOOL()>strt=[this](){
 // eglBindAPI(EGL_OPENGL_BIT);
 // eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{register float XYZW[4];}Vertex;
