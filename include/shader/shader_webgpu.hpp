@@ -1581,7 +1581,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_with_mod
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_attachment");
-  
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
