@@ -563,7 +563,7 @@ GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
 
-inline int rNd4(int randomMax){
+inline int rNd4(int& randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
@@ -803,22 +803,22 @@ private:
 
 public:
 
-boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact& EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact& VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact& VBO){
 Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL()>setFloats=[](){
+const boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -830,15 +830,15 @@ Di.at(1,1)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const register GLfloat()>gF=[](){
+const static inline boost::function<const register GLfloat()>gF=[](){
 return Fi.at(0,0);
 };
 
-static inline boost::function<const register GLfloat()>gFm1=[](){
+const static inline boost::function<const register GLfloat()>gFm1=[](){
 return Fi.at(0,1);
 };
 
-static inline boost::function<const register GLfloat()>gF0=[](){
+const static inline boost::function<const register GLfloat()>gF0=[](){
 return Fi.at(1,1);
 };
 
@@ -882,7 +882,7 @@ static constexpr short int ele=36;
 
 inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
 
-EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+const EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
 ms_l=true;
@@ -893,7 +893,7 @@ ms_l=false;
 return EM_TRUE;
 }
 
-EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+const EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 mms2.at(0,0)=e->clientX;
