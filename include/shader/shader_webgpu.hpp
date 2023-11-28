@@ -563,7 +563,7 @@ GLsizei * binLength;
 GLenum * binaryFormat;
 void * GLbin;
 
-inline int rNd4(int& randomMax){
+inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
@@ -803,12 +803,12 @@ private:
 
 public:
 
-const boost::function<const EM_BOOL(boost::uint_t::exact)>EBOin=[](boost::uint_t::exact& EBO){
+const boost::function<const EM_BOOL(boost::uint_t::exact<32>)>EBOin=[](boost::uint_t::exact<32> EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-const boost::function<const EM_BOOL(boost::uint_t::exact)>VCOin=[](boost::uint_t::exact& VCO){
+const boost::function<const EM_BOOL(boost::uint_t::exact<32>)>VCOin=[](boost::uint_t::exact<32> VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
