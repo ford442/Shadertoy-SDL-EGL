@@ -117,7 +117,6 @@ typedef ResultType result_type;
 
 EGLint numSamples;
 EGLint numSamplesNV;
-
 EGLint numGreen;
 EGLint numRed;
 EGLint numBlue;
@@ -1300,7 +1299,7 @@ eglGetConfigAttrib(display,eglconfig,EGL_DEPTH_SIZE,&numDepth);
 eglGetConfigAttrib(display,eglconfig,EGL_STENCIL_SIZE,&numStencil);
 eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
-static constexpr EGLint att_lst2[]={ 
+static EGLint att_lst2[]={ 
 /*
   Google Colab
 If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
