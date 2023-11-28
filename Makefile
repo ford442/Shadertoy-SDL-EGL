@@ -1,4 +1,4 @@
-BIN_NAME += c0-001.js
+BIN_NAME += c0-002.js
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lm
 
