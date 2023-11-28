@@ -102,25 +102,25 @@ SDL_AudioSpec request;
 public:
 
 // static EM_BOOL snd_pos(boost::atomic<short int> set){
-static EM_BOOL snd_pos(GLint set){
+const static EM_BOOL snd_pos(GLint set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return EM_TRUE;
 }
 
-static EM_BOOL snd_lft(long long set){
+const static EM_BOOL snd_lft(long long set){
 sse.at(0,1)=wasm_i64x2_splat(set);
 sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 return EM_TRUE;
 }
 
-static EM_BOOL snd_pos_u(unsigned long long set){
+const static EM_BOOL snd_pos_u(unsigned long long set){
 sse2.at(0,0)=wasm_u64x2_splat(set);
 sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+const static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
@@ -139,7 +139,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-boost::function<EM_BOOL()>plt=[this](){
+const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
