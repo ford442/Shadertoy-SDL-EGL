@@ -126,6 +126,7 @@ EGLint numStencil;
 EGLint numBuffer;
 EGLint numMBuffers;
 EGLint colorSpace;
+EGLint colorFormat;
 
 
 // static constexpr float numSamplesf=float(numSamples);
@@ -1278,7 +1279,7 @@ attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_TRUE;
-attr.enableExtensionsByDefault=EM_TRUE;
+attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.explicitSwapControl=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -1299,6 +1300,7 @@ eglGetConfigAttrib(display,eglconfig,EGL_DEPTH_SIZE,&numDepth);
 eglGetConfigAttrib(display,eglconfig,EGL_STENCIL_SIZE,&numStencil);
 eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
+eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
 static EGLint att_lst2[]={ 
 /*
   Google Colab
@@ -1330,7 +1332,7 @@ EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
 EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // EGL 1.5 "...the context will only support OpenGL ES 3.0 and later features."
-EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI, //  available in OpenGL
+EGL_COLOR_FORMAT_HI,colorFormat, //  available in OpenGL
 // EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
@@ -1370,7 +1372,6 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 // eglBindAPI(EGL_OPENGL_API);
 // eglBindAPI(0);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
-EGLint colorFormat=EGL_COLOR_FORMAT_HI;
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 eglInitialize(display,&major,&minor);
