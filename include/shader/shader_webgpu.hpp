@@ -126,6 +126,8 @@ EGLint numDepth;
 EGLint numStencil;
 EGLint numBuffer;
 EGLint numMBuffers;
+EGLint colorSpace;
+
 
 // static constexpr float numSamplesf=float(numSamples);
 static constexpr float numSamplesf=4.0f;
@@ -135,27 +137,6 @@ static constexpr float framef=1.0f;
 static constexpr float renderf=1.0f;
 
 EGLint respon;
-
-static constexpr EGLint att_lst2[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-  // Google Colab
-/*
-If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
-This is because the BT.2020 color space is a non-linear color space, and when it is set to linear,
-the values of the components are directly proportional to the perceived brightness or lightness of the color.
-This means that the colors in the image will be misrepresented,
-and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
-*/
-// EGL_GL_COLORSPACE_LINEAR_KHR, 
-// EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SRGB,
-EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SCRGB_EXT,
-// / EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
-EGL_NONE
-};
 
 static constexpr EGLint ctx_att[]={
 EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
@@ -1318,6 +1299,19 @@ eglGetConfigAttrib(display,eglconfig,EGL_ALPHA_SIZE,&numAlpha);
 eglGetConfigAttrib(display,eglconfig,EGL_DEPTH_SIZE,&numDepth);
 eglGetConfigAttrib(display,eglconfig,EGL_STENCIL_SIZE,&numStencil);
 eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
+eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
+static constexpr EGLint att_lst2[]={ 
+/*
+  Google Colab
+If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
+This is because the BT.2020 color space is a non-linear color space, and when it is set to linear,
+the values of the components are directly proportional to the perceived brightness or lightness of the color.
+This means that the colors in the image will be misrepresented,
+and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
+*/
+EGL_GL_COLORSPACE_KHR,colorSpace,
+EGL_NONE
+};
 static EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
