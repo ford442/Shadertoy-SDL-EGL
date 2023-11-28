@@ -803,17 +803,17 @@ private:
 
 public:
 
-const boost::function<const EM_BOOL(boost::uint_t::exact<32>)>EBOin=[](boost::uint_t::exact<32> EBO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-const boost::function<const EM_BOOL(boost::uint_t::exact<32>)>VCOin=[](boost::uint_t::exact<32> VCO){
+const boost::function<const EM_BOOL(boost::uint_t::exact<32>)>VCOin=[](boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
 
-const boost::function<const EM_BOOL(boost::uint_t::exact)>VBOin=[](boost::uint_t::exact& VBO){
+const boost::function<const EM_BOOL(boost::uint_t::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
