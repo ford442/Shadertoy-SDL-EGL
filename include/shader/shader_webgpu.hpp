@@ -1781,7 +1781,7 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,ftexture[0]);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+glTexImage2D(GL_TEXTURE_2D,0,SRGB_EXT,int_size.at(2,0),int_size.at(2,0),0,SRGB_EXT,GL_UNSIGNED_BYTE,NULL);
 // glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
 glGenerateMipmap(GL_TEXTURE_2D);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
