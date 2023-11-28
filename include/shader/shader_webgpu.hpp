@@ -1559,6 +1559,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_etc");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_blend_func_extended");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_swap_behavior");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_buffer_storage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_multisample_interpolation");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage_multisample");
