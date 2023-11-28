@@ -808,12 +808,12 @@ Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-const boost::function<const EM_BOOL(boost::uint_t::exact<32>)>VCOin=[](boost::uint_t<32>::exact VCO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
 
-const boost::function<const EM_BOOL(boost::uint_t::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
