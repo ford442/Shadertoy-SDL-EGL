@@ -148,11 +148,11 @@ const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 // ::boost::tuples::tie(bfr,request);
-// request.freq=44100;
-// request.format=AUDIO_S32;
-// request.channels=2;
-// request.samples=128;
-// SDL_memset(&request,0,sizeof(request));
+request.freq=44100;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=128;
+SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
@@ -160,11 +160,16 @@ SDL_Init(SDL_INIT_AUDIO);
 sound.at(0,1,0)=Mix_LoadMUS(flnm);
 // soundp.at(0,1,0)=Mix_LoadMUS(flnm);
 snd_pos_u(wave.slen);
-// request.callback=bfr;
+request.callback=NULL;
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,NULL,SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_SAMPLES_CHANGE);
-Mix_PlayMusic(sound.at(0,1,0),1);
-  
+Mix_PlayMusic(music,1);
+  while (Mix_PlayingMusic()) {
+    SDL_Delay(100);
+}
+
+Mix_FreeMusic(music);
+Mix_Quit();
 //  SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
