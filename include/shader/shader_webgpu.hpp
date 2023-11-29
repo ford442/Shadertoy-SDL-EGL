@@ -1209,7 +1209,7 @@ u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUseProgram(0);
-// glFlush();
+glFinish();
 glDeleteShader(vtx);
 glDeleteShader(frag);
 glReleaseShaderCompiler();
