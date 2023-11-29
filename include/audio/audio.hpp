@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_audio.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
@@ -47,7 +48,6 @@ typedef ResultType result_type;
 #define BOOST_UBLAS_TYPE_CHECK 0
 
 #include <cstdint>
-#include <SDL2/SDL.h>
 #include <GL/gl.h>
 
 #include <iostream>
