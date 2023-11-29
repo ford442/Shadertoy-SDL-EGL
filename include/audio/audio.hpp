@@ -160,7 +160,7 @@ sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,NULL,SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_SAMPLES_CHANGE);
+wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,0,SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_SAMPLES_CHANGE);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
