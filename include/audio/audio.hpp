@@ -155,7 +155,7 @@ snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-Mix_Music *music = Mix_LoadWAV(flnm);
+Mix_Music *music = Mix_LoadMUS(flnm);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
