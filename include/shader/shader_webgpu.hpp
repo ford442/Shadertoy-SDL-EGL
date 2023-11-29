@@ -28,7 +28,6 @@ typedef ResultType result_type;
 #define register
 
 #include "../../include/shader/boost_defs.hpp"
-// #include "../../include/shader/ext_boost_defs.hpp"
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/assert.hpp>
@@ -99,6 +98,10 @@ typedef ResultType result_type;
 #define OPENGL_CORE_PROFILE 1
 #endif
 
+#ifndef OPENGL_COMPATIBILITY_PROFILE
+#define OPENGL_COMPATIBILITY_PROFILE 1
+#endif
+
 #ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
 #define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
 #endif
@@ -118,6 +121,7 @@ typedef ResultType result_type;
 
 EGLint numSamples;
 EGLint numSamplesNV;
+EGLint numBuffersNV;
 EGLint numGreen;
 EGLint numRed;
 EGLint numBlue;
@@ -253,11 +257,11 @@ static inline char cm_hdr_src[3300]=
 "#pragma enable_control_flow\n"
 "#pragma (STGLSL_ESSL30,all)\n"
 "#pragma STDGL(strict off)\n"
-//"#pragma optionNV(STGLSL_ESSL30,all)\n"
+"#pragma optionNV(STGLSL_ESSL30,all)\n"
 "#pragma optionNV(optimize,full)\n"
 "#pragma depth_textures\n"
 "#pragma multisample\n"
-"#pragma enable_scrgb\n"
+// "#pragma enable_scrgb\n"
 "#pragma use_srgb\n"
 "#pragma sample_frequency_fragment(16)\n"
 "#pragma sample_frequency_vertex(16)\n"
@@ -280,7 +284,7 @@ static inline char cm_hdr_src[3300]=
 "#extension GL_ARB_spirv_extensions : enable\n"
 "#extension EGL_HI_colorformats : enable\n"
 "#extension EGL_KHR_gl_colorspace : enable\n"
-"#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
 "#extension EGL_EXT_pixel_format_float : enable\n"
 "#extension GL_EXT_shader_image_load_store : enable\n"
 // "#pragma STDC(FP_CONTRACT,OFF)\n"
@@ -1248,8 +1252,6 @@ return nullptr;
 }
 
 const boost::function<EM_BOOL()>strt=[this](){
-// eglBindAPI(EGL_OPENGL_BIT);
-// eglBindAPI(EGL_OPENGL_ES_API);
 typedef struct{register float XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
@@ -1289,7 +1291,6 @@ attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
 attr.minorVersion=0;
-  
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 eglInitialize(display,&major,&minor);
@@ -1304,6 +1305,8 @@ eglGetConfigAttrib(display,eglconfig,EGL_ALPHA_SIZE,&numAlpha);
 eglGetConfigAttrib(display,eglconfig,EGL_DEPTH_SIZE,&numDepth);
 eglGetConfigAttrib(display,eglconfig,EGL_STENCIL_SIZE,&numStencil);
 eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
+eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
+  
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
 eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
 static EGLint att_lst2[]={ 
