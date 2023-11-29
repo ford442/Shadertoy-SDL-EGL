@@ -164,7 +164,7 @@ request.callback=NULL;
 Mix_VolumeMusic(128);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,NULL,NULL);
-Mix_PlayMusic(music,1);
+int strt=Mix_PlayMusic(music,1);
 while (Mix_PlayingMusic()) {
 SDL_Delay(100);
 }
