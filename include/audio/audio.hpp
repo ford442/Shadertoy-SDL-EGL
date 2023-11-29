@@ -148,7 +148,7 @@ request.freq=44100;
 request.format=SDL_AUDIO_FORMAT_S32LE;
 request.channels=2;
 request.samples=128;
-request.format = (spec.format & SDL_AUDIO_FORMAT_MASK) | SDL_AUDIO_BITSIZE(24);
+request.format = (request.format & SDL_AUDIO_FORMAT_MASK) | SDL_AUDIO_BITSIZE(24);
 
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
