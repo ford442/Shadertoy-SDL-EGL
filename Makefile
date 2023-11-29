@@ -30,7 +30,7 @@ GL_FLAGS += -sFULL_ES3=1 -sUSE_SDL=0 -sLEGACY_GL_EMULATION=0 -lGL -lGLESv2 -lEGL
 	 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS += -DQUAD $(LDFLAGS) -sDEFAULT_TO_CXX=0 -sLEGALIZE_JS_FFI=0 -sOFFSCREENCANVAS_SUPPORT=0 \
+LINK_FLAGS += --target=wasm32 -DQUAD $(LDFLAGS) -sDEFAULT_TO_CXX=0 -sLEGALIZE_JS_FFI=0 -sOFFSCREENCANVAS_SUPPORT=0 \
 	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
@@ -40,14 +40,14 @@ LINK_FLAGS += -DQUAD $(LDFLAGS) -sDEFAULT_TO_CXX=0 -sLEGALIZE_JS_FFI=0 -sOFFSCRE
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
-WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['js_main','wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
 
 b3_shader_webgpu:
-	 em++ $(STDS_B) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS_B) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS_B) -o $(BIN_NAME) --target=wasm32 -O2 \
-	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) $(WEBGPU_FLAGS) \
+	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -o $(BIN_NAME) -O2 \
+	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
