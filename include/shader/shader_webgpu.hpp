@@ -55,7 +55,6 @@ typedef ResultType result_type;
 #define BOOST_HAS_TR1
 
 #include <boost/multiprecision/cpp_int.hpp>
-#include <boost/multiprecision/float128.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
 #include <boost/type_traits.hpp>
