@@ -1114,17 +1114,20 @@ glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
   // webgpu
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
+time_t timE=time(0);
+struct tm * datE=localtime(&timE);
 int yr=1900+datE->tm_year;
 int mn=1+datE->tm_mon;
 int dy=datE->tm_mday-1;
 int hr=5+datE->tm_hour;
 int mi=datE->tm_min;
 int sc=datE->tm_sec;
+int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
+i_date.at(0,0)=yr;
+i_date.at(0,1)=mn;
 i_date.at(1,0)=dy;
-i_date.at(1,1)=(hr*3600)+(mi*60)+(sc);
-glUniform4i(uni_dte,yr,mn,i_date.at(1,0),i_date.at(1,1));
+i_date.at(1,1)=shaderToySeconds;
+glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
 /*
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%45==0){
@@ -1890,8 +1893,7 @@ glUniform1i(smp_chn[3],3);
 // usleep(125);
     // date/time
 time_t timE=time(0);
-struct tm * datE;
-datE=localtime(&timE);
+struct tm * datE=localtime(&timE);
 int yr=1900+datE->tm_year;
 int mn=1+datE->tm_mon;
 int dy=datE->tm_mday-1;
