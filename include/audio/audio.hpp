@@ -144,10 +144,12 @@ const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
 request.freq=44100;
-request.bits=24;
-request.format=AUDIO_S32;
+// request.format=AUDIO_S32;
+request.format=SDL_AUDIO_FORMAT_S32LE;
 request.channels=2;
 request.samples=128;
+request.format = (spec.format & SDL_AUDIO_FORMAT_MASK) | SDL_AUDIO_BITSIZE(24);
+
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
