@@ -74,7 +74,7 @@ typedef ResultType result_type;
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
-using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
+using ub_tensor=boost::numeric::ublas::tensor<Mix_Music>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
