@@ -66,7 +66,7 @@ b3_audio:
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_mk:
-	em++ $(STDS) -c src/audio/main.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	em++ $(STDS) -c src/audio/audio.cpp -O2 $(COMMON_FLAGS) -Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 -sUSE_OGG=0 -sUSE_VORBIS=0
 	em++ $(STDS) -o $(BIN_NAME) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
