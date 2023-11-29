@@ -161,8 +161,9 @@ Mix_Music *music =Mix_LoadMUS(flnm);
 // soundp.at(0,1,0)=Mix_LoadMUS(flnm);
 snd_pos_u(wave.slen);
 request.callback=NULL;
+Mix_VolumeMusic(128);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,NULL,SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_SAMPLES_CHANGE);
+wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,NULL,NULL);
 Mix_PlayMusic(music,1);
   while (Mix_PlayingMusic()) {
     SDL_Delay(100);
