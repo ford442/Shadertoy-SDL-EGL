@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_audio.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL_mixer.h>
 
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
