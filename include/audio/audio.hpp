@@ -1,3 +1,4 @@
+#include <SDL2/SDL.h>
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
 
