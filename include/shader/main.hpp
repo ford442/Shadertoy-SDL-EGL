@@ -27,7 +27,6 @@ typedef ResultType result_type;
 #include <cstdlib>
 #include <emscripten.h>
 #include <emscripten/html5.h>
-#include <emscripten/em_types.h>
 
 using namespace ::boost::tuples;
 
