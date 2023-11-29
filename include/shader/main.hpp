@@ -27,12 +27,13 @@ typedef ResultType result_type;
 #include <cstdlib>
 #include <emscripten.h>
 #include <emscripten/html5.h>
+// #include <emscripten/em_js.h>
 
 using namespace ::boost::tuples;
 
 extern "C"{
 
-EM_JS(void,js_main,(),{
+EM_ASYNC_JS(void,js_main,(),{
 FS.mkdir('/shader');
 
 window.scroll(0,0);
