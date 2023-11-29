@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_audio.h>
-#include <SDL_mixer.h>
+#include "/content/RAMDRIVE2/emsdk/upstream/emscripten/cache/ports/sdl2_mixer/SDL_mixer-release-2.0.4/SDL_mixer.h"
 
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
