@@ -87,7 +87,7 @@ v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
 
 struct{
-register GLubyte * snd;
+register Mix_Music * snd;
 register long pos=0;
 SDL_AudioDeviceID dev;
 register GLuint slen=0;
