@@ -162,7 +162,7 @@ soundp.at(0,1,0)=&sound.at(0,1,0);
 snd_pos_u(wave.slen);
 // request.callback=bfr;
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,bfr(),SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_SAMPLES_CHANGE);
+wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,bfr,SDL_AUDIO_ALLOW_FORMAT_CHANGE|SDL_AUDIO_ALLOW_SAMPLES_CHANGE);
 Mix_PlayMusic(sound.at(0,1,0),1);
   
 //  SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
