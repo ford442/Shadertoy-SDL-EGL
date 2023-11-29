@@ -1,6 +1,6 @@
 BIN_NAME += c0-002.js
 
-LDFLAGS += -Wl,-O3,--lto-O3
+LDFLAGS += -Wl,-O3,--lto-O3,-lquadmath
 
 SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx
 
