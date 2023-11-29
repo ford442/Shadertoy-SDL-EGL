@@ -1,6 +1,6 @@
 BIN_NAME += a0-001.js
 
-LDFLAGS += -Wl,-O3,--lto-O3,-lm,-llibc++-noexcept,-lregal-mt
+LDFLAGS += -Wl,-O3,--lto-O3,-lm
 
 SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx
 
