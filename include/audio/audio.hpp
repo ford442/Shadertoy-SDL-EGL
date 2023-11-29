@@ -146,22 +146,19 @@ const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
 request.freq=44100;
-// request.format=AUDIO_S32;
-request.format=SDL_AUDIO_FORMAT_S32LE;
+request.format=AUDIO_S32;
 request.channels=2;
 request.samples=128;
-request.format = (request.format & SDL_AUDIO_FORMAT_MASK) | SDL_AUDIO_BITSIZE(24);
-
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
+Mix_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
-wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
+wave.dev=Mix_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+Mix_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
 
