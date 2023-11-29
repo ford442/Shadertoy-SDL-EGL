@@ -1645,7 +1645,7 @@ Sh.at(1,1)=frag;
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 // glClearDepth(Di.at(0,0));
-glClearDepth(Fi.at(0,0));
+// glClearDepth(Di.at(0,0));
 // eglBindAPI(EGL_OPENGL_ES_API);
 // boost::uint_t<32>::exact shd_prg=glCreateProgram();
 shd_prg=glCreateProgram();
