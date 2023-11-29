@@ -81,6 +81,7 @@ typedef ResultType result_type;
 #include "../../lib/lib_webgpu.h"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include <emscripten/html5.h>
+#include <emscripten/heap.h>
 
 #include <cstdio>
 #include <memory>
