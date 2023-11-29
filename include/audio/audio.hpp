@@ -165,13 +165,8 @@ Mix_VolumeMusic(128);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 wave.dev=Mix_OpenAudioDevice(request.freq,request.format,request.channels,request.samples,NULL,NULL);
 Mix_PlayMusic(music,1);
-  while (Mix_PlayingMusic()) {
-    SDL_Delay(100);
-}
 
-Mix_FreeMusic(music);
-Mix_Quit();
-//  SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
+SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
 
