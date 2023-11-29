@@ -75,10 +75,12 @@ typedef ResultType result_type;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<Mix_Music *>;
+using wptr_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,1,1};
+wptr_tensor soundp=wptr_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
@@ -125,14 +127,14 @@ return EM_TRUE;
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 ::boost::tuples::tie(stm,len);
-wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
+wave.wptr=soundp.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
-wave.wptr=sound.at(0,1,0);
+wave.wptr=soundp.at(0,1,0);
 snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
 SDL_LockAudioDevice(wave.dev);
@@ -155,8 +157,8 @@ snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-sound.at(0,1,0) = Mix_LoadMUS(flnm);
-// sound.at(0,1,0)=music;
+sound.at(0,1,0)=Mix_LoadMUS(flnm);
+soundp.at(0,1,0)=sound.at(0,1,0);
 snd_pos_u(wave.slen);
 // request.callback=bfr;
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
