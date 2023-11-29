@@ -129,7 +129,7 @@ EGLint colorSpace;
 EGLint colorFormat;
 
 // static constexpr float numSamplesf=float(numSamples);
-static constexpr float numSamplesf;
+static float numSamplesf;
 static constexpr float multisampleFramef=1.0f;
 static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
