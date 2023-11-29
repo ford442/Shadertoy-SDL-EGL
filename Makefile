@@ -7,6 +7,8 @@ SIMD_FLAGS += -DSIMD=2 -msimd128 -msse4.2
 STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
+STDS_B += -std=gnu++20
+
 COMMON_FLAGS += -fopenmp -lquadmath -sSUPPORT_LONGJMP=wasm -pthread -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops \
@@ -42,9 +44,9 @@ WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigat
 	 -lmath.js -lhtml5.js -lint53.js
 
 b3_shader_webgpu:
-	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o $(BIN_NAME) -O2 \
+	 em++ $(STDS_B) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS_B) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS_B) -o $(BIN_NAME) -O2 \
 	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
