@@ -143,7 +143,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 */
-const boost::function<EM_BOOL()>plc=[this](){
+const static  boost::function<EM_BOOL()>plc=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 // ::boost::tuples::tie(bfr,request);
@@ -167,7 +167,7 @@ if(Mix_PlayingMusic()==0){
 Mix_VolumeMusic(128);
 wave.dev=Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
 //Play the music
-Mix_PlayMusic(&music,1);
+Mix_PlayMusic(music,1);
 }
 // SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
