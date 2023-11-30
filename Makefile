@@ -11,7 +11,7 @@ STDS_B += -std=gnu++20
 
 COMMON_FLAGS += -fopenmp-simd -sSUPPORT_LONGJMP=wasm -pthread -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
-	 -sDISABLE_EXCEPTION_CATCHING=0 -fPIC -fPIE -finline-functions -funroll-loops \
+	 -fPIC -fPIE -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
