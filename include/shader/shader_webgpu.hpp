@@ -1464,8 +1464,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
@@ -1492,7 +1492,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_geometry_shader4");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility"); // limits to OpenGL ES 2.0
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility"); // limits to OpenGL ES 2.0?
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES3_compatibility"); 
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multitexture");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_color_buffer_half_float");
