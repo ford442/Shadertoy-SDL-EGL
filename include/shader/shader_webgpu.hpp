@@ -1393,7 +1393,6 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-
  //    glDepthFunc(GL_GREATER);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 // glEnable(BLEND_ADVANCED_COHERENT_NV);
@@ -1401,8 +1400,8 @@ glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL); // Bard says
 glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
-glDepthMask(GL_TRUE);
-glClearDepthf(Fi.at(0,0));
+// glDepthMask(GL_TRUE);
+// glClearDepthf(Fi.at(0,0));
 glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_ALWAYS);
  // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
