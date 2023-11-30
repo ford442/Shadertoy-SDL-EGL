@@ -143,7 +143,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 */
-const static  boost::function<EM_BOOL()>plc=[this](){
+boost::function<EM_BOOL()>plc=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 // ::boost::tuples::tie(bfr,request);
@@ -173,7 +173,8 @@ Mix_PlayMusic(music,1);
 return EM_TRUE;
 };
 
-static inline boost::function<void()>plt=[](){emscripten_set_main_loop((void(*)())plc(),0,0);
+boost::function<void()>plt=[](){emscripten_set_main_loop((void(*)())plc(),0,0);
+
 };
 
 };
