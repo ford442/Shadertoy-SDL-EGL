@@ -30,16 +30,15 @@ LINK_FLAGS += -DQUAD $(LDFLAGS) -sWASM_BIGINT=0 -sLEGALIZE_JS_FFI=0 -sOFFSCREENC
 	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 -sSUPPORT_BIG_ENDIAN=1 \
-	 --use-preload-plugins --closure 0 --closureFriendly \
+	 --use-preload-plugins --closure 0 --closureFriendly --typed-function-references --enable-reference-types \
 	 -march=native -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 b3_video_google_mk:
-	 em++ $(STDS) src/video/main_google_street.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS)
-	 em++ $(STDS) src/video/video_google_street.cpp -c -O2 $(SIMD_FLAGS)
-	 emcc $(STDS) -o g0004.js $(LINK_FLAGS) -O2 $(SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
+	 em++ $(STDS) src/video/video_google_street.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS)
+	 emcc $(STDS) -o g0004.js $(LINK_FLAGS) -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) -sFORCE_FILESYSTEM=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_clr","_str","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js gpujsx.js --extern-pre-js rSlider.js --extern-pre-js slideOut.js main_google_street.o video_google_street.o
 
