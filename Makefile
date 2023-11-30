@@ -7,9 +7,9 @@ SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx
 STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
-COMMON_FLAGS += -fopenmp-simd -sSUPPORT_LONGJMP=wasm -pthread -pipe -mextended-const -mbulk-memory -matomics \
+COMMON_FLAGS += -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
-	 -sDISABLE_EXCEPTION_CATCHING=0 -fPIC -fPIE -finline-functions -funroll-loops \
+	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno  \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
