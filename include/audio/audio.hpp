@@ -149,7 +149,8 @@ const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(wave,sse,sse2);
 // ::boost::tuples::tie(bfr,request);
 request.freq=44100;
-request.format=AUDIO_S32;
+// request.format=AUDIO_S32;
+request.format=MIX_DEFAULT_FORMAT;
 request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
