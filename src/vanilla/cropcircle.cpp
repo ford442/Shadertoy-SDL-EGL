@@ -5,6 +5,23 @@ EGLConfig eglconfig=NULL;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 EmscriptenWebGLContextAttributes attr;
 
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
+EGLDisplay display;
+EGLContext contextegl;
+EGLSurface surface;
+EGLint config_size,major,minor;
+
+double wi,hi;
+
+int Size;
+GLfloat S;
+
 static constexpr EGLint anEglCtxAttribs2[]={
 // EGL_CONTEXT_MAJOR_VERSION_KHR,2,
 // EGL_CONTEXT_MINOR_VERSION_KHR,0,
