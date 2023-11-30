@@ -92,14 +92,6 @@ typedef ResultType result_type;
 // #define GLfloat float 
 // #define GLint int
 
-#ifndef OPENGL_CORE_PROFILE
-#define OPENGL_CORE_PROFILE 1
-#endif
-
-#ifndef OPENGL_COMPATIBILITY_PROFILE
-#define OPENGL_COMPATIBILITY_PROFILE 1
-#endif
-
 #ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
 #define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
 #endif
@@ -1432,6 +1424,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_fragment_precision_high");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
