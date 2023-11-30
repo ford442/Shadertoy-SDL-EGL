@@ -2,7 +2,7 @@ BIN_NAME += v0-001.js
 
 TIMESTAMP := $(shell date +%m%y)
 
-LDFLAGS += -Wl,-O3,--lto-O3,-lm
+LDFLAGS += -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
 SIMD_FLAGS := -DSIMD=2 -msimd128 -mavx 
 
@@ -39,7 +39,7 @@ GL_FLAGS += -sFULL_ES2=1 -sUSE_SDL=0 -sLEGACY_GL_EMULATION=0 -lGL -lGLESv2 -lEGL
 LINK_FLAGS += -DQUAD $(LDFLAGS) -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 \
 	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
-	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 \
+	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
 	 --use-preload-plugins --closure 0 --closureFriendly \
 	 -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
@@ -72,7 +72,7 @@ video_test:
 
 video_test2:
 	 em++ $(STDS) -c src/video/video_test.cpp -O0 $(COMMON_FLAGS_safe) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 emcc $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS_safe) -O0 $(SIMD_FLAGS) \
+	 em++ $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS_safe) -O0 $(SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS_safe) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano"]' \
