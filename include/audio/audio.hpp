@@ -165,7 +165,7 @@ snd_pos_u(wave.slen);
 request.callback=NULL;
 Mix_VolumeMusic(128);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-wave.dev=Mix_OpenAudioDevice(44100,MIX_DEFAULT_FORMAT,2,request.2048);
+wave.dev=Mix_OpenAudioDevice(44100,MIX_DEFAULT_FORMAT,2,2048);
 if(Mix_PlayingMusic()==0){
 //Play the music
 Mix_PlayMusic(music,1);
