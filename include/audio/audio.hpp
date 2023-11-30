@@ -173,7 +173,7 @@ Mix_PlayMusic(music,1);
 return EM_TRUE;
 };
 
-boost::function<void()>plt=[](){emscripten_set_main_loop((void(*)())plc(),0,0);
+boost::function<void()>plt=[this](){emscripten_set_main_loop((void(*)())plc(),0,0);
 
 };
 
