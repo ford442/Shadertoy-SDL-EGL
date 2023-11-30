@@ -1,7 +1,5 @@
 #include <boost/cstdfloat.hpp>
 
-#include "/usr/include/aubio/aubio.h"
-
 #include "../../include/shader/defs.hpp"
 // #include <stdio.h>
 #include <stdlib.h>
