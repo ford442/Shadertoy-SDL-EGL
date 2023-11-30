@@ -7,7 +7,7 @@ SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx
 STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
-COMMON_FLAGS += -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pthread -pipe -mextended-const \
+COMMON_FLAGS += -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const \
 	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ -mbulk-memory -matomics \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off \
@@ -28,7 +28,7 @@ GL_FLAGS += -sFULL_ES3=1 -sUSE_SDL=0 -sLEGACY_GL_EMULATION=0 -lGL -lEGL -sUSE_GL
 	 -sOFFSCREENCANVAS_SUPPORT=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS += -DQUAD $(LDFLAGS) -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS += -DQUAD $(LDFLAGS) -sDEFAULT_TO_CXX=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sWASM_BIGINT=0 -sLEGALIZE_JS_FFI=0 -sOFFSCREENCANVAS_SUPPORT=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
