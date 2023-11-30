@@ -1527,6 +1527,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_framebuffer_target"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_blob_cache");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_fence_sync");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
@@ -1592,6 +1593,8 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_with_mod
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_attachment");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_storage");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_float");
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
@@ -1678,7 +1681,7 @@ glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(2,0),int_size.at(2,0));
 glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
@@ -1902,7 +1905,7 @@ struct tm * datE=localtime(&timE);
 float yr=1900.0f+datE->tm_year;
 float mn=1.0f+datE->tm_mon;
 float dy=datE->tm_mday-1.0f;
-float hr=5.0f+datE->tm_hour;
+float hr=5.0f+datE->tm_hour+7; // +7 for PST
 float mi=datE->tm_min;
 float sc=datE->tm_sec;
 float shaderToySeconds=(hr*3600.0f)+(mi*60.0f)+(sc);
