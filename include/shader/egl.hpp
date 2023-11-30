@@ -4,6 +4,21 @@
 // #include <webgl/webgl2.h>  //  much better performance without
 // #include <webgl/webgl2_ext.h>  //  much better performance without
 
+#include <GL/gl.h>
+#include <GL/glext.h>
+#include <GLES3/gl32.h>
+#include <GLES3/gl31.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#include <GLES3/gl3.h>
+// #include <GLES/gl.h>
+// #include <GLES/glext.h>
+// #include <GLES3/gl3platform.h>
+#include <emscripten/html5_webgl.h>
+// #define GLFW_INCLUDE_GLEXT 1
+// #define GLFW_INCLUDE_ES3
+// #include <GLFW/glfw3.h>
+
 #define GL_FRAGMENT_PRECISION_HIGH 1
 
 #define GL_CONTEXT_PROFILE_MASK 0x9126
@@ -25,25 +40,7 @@
 // #include <EGL/eglplatform.h>  included by egl.h
 // #include <KHR/khrplatform.h>  included by egl.h
 
-#include <GLES3/gl32.h>
-#include <GLES3/gl31.h>
-#include <GLES3/gl3.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
 
-// #include <GLES/gl.h>
-// #include <GLES/glext.h>
-
-#include <GL/gl.h>
-#include <GL/glext.h>
-
-// #include <GLES3/gl3platform.h>
-
-#include <emscripten/html5_webgl.h>
-
-// #define GLFW_INCLUDE_GLEXT 1
-// #define GLFW_INCLUDE_ES3
-// #include <GLFW/glfw3.h>
 
 //
 // Copyright 2017 The ANGLE Project Authors. All rights reserved.
