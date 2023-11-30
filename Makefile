@@ -65,7 +65,7 @@ b3_audio:
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--pre-js rSlider.js --pre-js slideOut.js
 
-b3_audio_mk:
+b3_audio_sdl:
 	em++ $(STDS) -c src/audio/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(COMMON_FLAGS) -Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL_MIXER=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
@@ -74,6 +74,16 @@ b3_audio_mk:
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o 
+
+b3_audio_test:
+	em++ $(STDS) -c src/audio/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/audio.cpp -O2 $(COMMON_FLAGS) -Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	-sUSE_SDL_MIXER=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
+	em++ $(STDS) -o $(BIN_NAME) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) $(BOOST_FLAGS) \
+	-sUSE_SDL_MIXER=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
+	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
+	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio.o 
 
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
