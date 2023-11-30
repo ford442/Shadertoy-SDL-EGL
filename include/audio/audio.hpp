@@ -2,6 +2,8 @@
 #include <SDL2/SDL_audio.h>
 #include "/content/RAMDRIVE2/emsdk/upstream/emscripten/cache/ports/sdl2_mixer/SDL_mixer-release-2.0.4/SDL_mixer.h"
 
+#include "/usr/include/aubio/aubio.h"
+
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
 
