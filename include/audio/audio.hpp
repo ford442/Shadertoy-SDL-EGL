@@ -73,7 +73,7 @@ typedef ResultType result_type;
 #include <boost/function.hpp>
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<int>>;
 using ub_tensor=boost::numeric::ublas::tensor<Mix_Music *>;
 using wptr_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
@@ -95,7 +95,6 @@ SDL_AudioDeviceID dev;
 register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
-
 
 class Audio{
 
@@ -165,7 +164,7 @@ snd_pos_u(wave.slen);
 request.callback=NULL;
 Mix_VolumeMusic(128);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-wave.dev=Mix_OpenAudioDevice(44100,MIX_DEFAULT_FORMAT,2,2048);
+wave.dev=Mix_OpenAudioDevice(44100,MIX_DEFAULT_FORMAT,2,2048,NULL,NULL);
 if(Mix_PlayingMusic()==0){
 //Play the music
 Mix_PlayMusic(music,1);
