@@ -1029,7 +1029,7 @@ eglSwapBuffers(display,surface);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_DEPTH_BUFFER_BIT);
 // glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
@@ -1420,7 +1420,7 @@ glDisable(GL_CULL_FACE);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
-glClearColor(0.0f,0.0f,0.0f,1.0f);
+  // glClearColor(0.0f,0.0f,0.0f,1.0f);
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility"); // limits to WebGL 1.0
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
