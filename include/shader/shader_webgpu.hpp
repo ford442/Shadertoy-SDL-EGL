@@ -1389,8 +1389,8 @@ glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 // glEnable(BLEND_ADVANCED_COHERENT_NV);
 glDisable(GL_DITHER);
-// glDepthFunc(GL_LEQUAL); // Bard says
-glDepthFunc(GL_GEQUAL); // Bard says
+glDepthFunc(GL_LEQUAL); // Bard says
+// glDepthFunc(GL_GEQUAL);
 // glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 // glDepthMask(GL_TRUE);
