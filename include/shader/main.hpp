@@ -237,7 +237,7 @@ if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
 document.querySelector('#path').innerHTML=$shds[randShade];
 }else{
-document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
+document.querySelector('#path').innerHTML='https://glsl.1ink.us/shadersALL/'+shdMenu.value;
 }
 }else{
 var fle=document.querySelector('#path').innerHTML;
