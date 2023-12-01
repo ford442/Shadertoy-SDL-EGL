@@ -56,7 +56,7 @@ if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
 }else{
-document.getElementById('path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
+document.getElementById('path').innerHTML='https://glsl.1ink.us/shadersALL/'+shdMenu.value;
 }
 }else{
 var fle=document.getElementById('path').innerHTML;
