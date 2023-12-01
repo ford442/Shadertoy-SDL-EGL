@@ -239,6 +239,7 @@ static inline char wgl_cmp_src[2000]=
 
 static inline char cm_hdr_src[3300]=
 "#version 300 es\n"
+/*
 "#extension GL_EXTENSIONS : enable\n"
 "#pragma target(glsl_es)\n"
 "#pragma enable_bitfield_ops\n"
@@ -300,6 +301,7 @@ static inline char cm_hdr_src[3300]=
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n"
+*/
 "precision highp float;\n";
 /*
 
