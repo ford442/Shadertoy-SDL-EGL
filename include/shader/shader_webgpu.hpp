@@ -136,7 +136,7 @@ static constexpr EGLint ctx_att[]={
 EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,1,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -1030,7 +1030,7 @@ eglSwapBuffers(display,surface);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glSampleCoverage(1.0f,GL_FALSE);
+// glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 // glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
@@ -1055,7 +1055,7 @@ const static inline boost::function<EM_BOOL()>RendarBb=[](){
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(numSamplesf,GL_FALSE);
+// glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
 // glDepthFunc(GL_GEQUAL);
