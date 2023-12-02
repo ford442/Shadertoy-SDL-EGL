@@ -18,5 +18,6 @@ return RG;
 
 int main(){
 jss();
+js_main();
 return 1;
 }
