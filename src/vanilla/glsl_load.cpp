@@ -54,7 +54,7 @@ wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 return EM_FALSE;
 }
 
-void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
@@ -121,16 +121,16 @@ wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
 }
 
-void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
+void ObtainedWebGpuAdapterStartR(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={};
-wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
+wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStartR,0);
 }
 
 void WGPU_StartR(){
 optionsR={};
 optionsR.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
-navigator_gpu_request_adapter_async(&optionsR,ObtainedWebGpuAdapterStart,0);
+navigator_gpu_request_adapter_async(&optionsR,ObtainedWebGpuAdapterStartR,0);
 }
 
 EM_JS(void,js_main,(),{
