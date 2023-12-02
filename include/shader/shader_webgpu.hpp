@@ -324,7 +324,7 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[2420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xyz);}\n\0";
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 /*
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
 "int _N=3;void mainImage(out vec4 O,vec2 U){\n"
@@ -396,7 +396,7 @@ static shad_tensor TX=shad_tensor{3,3,3};
 static prg_tensor S1=prg_tensor{1,1,1};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
-static gf_tensor Fi=gf_tensor{3,3};
+static f_tensor Fi=f_tensor{3,3};
 static d_tensor Di=d_tensor{2,2};
 static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
