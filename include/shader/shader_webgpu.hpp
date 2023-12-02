@@ -1400,7 +1400,7 @@ glEnable(GL_DEPTH_TEST);
  // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ZERO);
-glEnable(GL_BLEND);
+// glEnable(GL_BLEND);
 // glDisable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE);
 glStencilFunc(GL_ALWAYS,0,0xFF);
