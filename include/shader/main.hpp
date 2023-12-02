@@ -194,8 +194,8 @@ var $shds=[];
 
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
-document.querySelector('#scanvas').width=window.innerWidth*1.333;
-document.querySelector('#scanvas').height=window.innerHeight*1.333;
+document.querySelector('#scanvas').width=window.innerWidth*2;
+document.querySelector('#scanvas').height=window.innerHeight*2;
 document.querySelector('#di').click();
 setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
