@@ -132,17 +132,6 @@ static constexpr float renderf=1.0f;
 
 EGLint respon;
 
-static constexpr EGLint ctx_att[]={
-EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,1,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_NONE
-};
-
 boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin;
 
 boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin;
@@ -1298,6 +1287,16 @@ eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
 eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
 eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
+static EGLint ctx_att[]={
+EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,1,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_NONE
+};
 static EGLint att_lst2[]={ 
 /*
   Google Colab
@@ -1311,7 +1310,7 @@ EGL_GL_COLORSPACE_KHR,colorSpace,
 EGL_NONE
 };
 static EGLint att_lst[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
@@ -1330,7 +1329,7 @@ EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT
 EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 //  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // EGL 1.5 "...the context will only support OpenGL ES 3.0 and later features."
 EGL_COLOR_FORMAT_HI,colorFormat, //  available in OpenGL
-// EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
+EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
@@ -1683,9 +1682,9 @@ glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(2,0),int_size.at(2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
@@ -1696,9 +1695,9 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(2,0),int_size.at(2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
 // glRenderbufferStorage(GL_RENDERBUFFER,GL_ALPHA32F_ARB,int_size.at(1,0),int_size.at(1,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
@@ -1752,9 +1751,9 @@ glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,int_size.at(1,0),int_size.at(1,0));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,int_size.at(1,0),int_size.at(1,0));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,3),int_size.at(1,3));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(1,3),int_size.at(1,3));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA16_EXT,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA16_EXT,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
