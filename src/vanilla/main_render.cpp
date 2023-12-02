@@ -1,5 +1,22 @@
 #include "../../include/vanilla/main_render.hpp"
 
+WGpuRenderPassColorAttachment colorAttachment;
+WGpuRenderPassDescriptor passDesc;
+WGpuCanvasConfiguration config;
+WGpuShaderModuleDescriptor shaderModuleDescV;
+WGpuShaderModuleDescriptor shaderModuleDescF;
+WGpuShaderModule vs;
+WGpuShaderModule fs;
+WGpuVertexState vertState;
+WGpuPrimitiveState priState;
+WGpuFragmentState fragState;
+WGpuRenderPipelineDescriptor renderPipelineDesc;
+WGpuDeviceDescriptor deviceDesc;
+WGpuRequestAdapterOptions options;
+WGpuMultisampleState multiSamp;
+
+double szh, szw;
+
 static f_tensor sze=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
