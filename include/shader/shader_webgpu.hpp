@@ -1421,20 +1421,29 @@ glDisable(GL_CULL_FACE);
 // glBlendEquation(GL_FUNC_SUBTRACT);
   // glClearColor(0.0f,0.0f,0.0f,1.0f);
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility"); // limits to WebGL 1.0
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_fragment_precision_high");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_fragment_precision_high"); // deprecated
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float"); // GLES float
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_half_float"); // GLES half-float
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_blend"); // GLES float
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_blend_equation_separate");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_blend_func_separate");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_blend_subtract");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float"); // OpenGL 1.5/2.0
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float"); // OpenGL 1.5/2.0
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_fragment_program");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
@@ -1450,13 +1459,13 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float"); // non-ES
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float"); // non-ES
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_variables");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_shader_multisample_interpolation");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_get_program_binary");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_external");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_filter_anisotropic");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_depth_nonlinear");
@@ -1464,7 +1473,9 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness"); // OpenGL 1.1
+emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_robustness"); // GLES
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_robustness"); // old GLES 1.1/2.0
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
@@ -1481,23 +1492,20 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_attrib_integer_64bit"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary"); // OpenGL 3.0 / 3.2 compat
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_geometry_shader4");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility"); // limits to OpenGL ES 2.0?
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES3_compatibility"); 
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility"); // limits to OpenGL ES 2.0?
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES3_compatibility"); 
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multitexture");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_color_buffer_half_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_color_buffer_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_norm16");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_create_context_extensions_enabled");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
@@ -1521,7 +1529,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_wait_sync");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_external");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_image_native_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_recordable");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_framebuffer_target");
@@ -1529,10 +1536,11 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_blob_cache");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_fence_sync");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external_essl3");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_texture_rgb10_a2ui");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_rgb10_a2ui");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_SMPTE2086_metadata");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
@@ -1595,7 +1603,6 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_storage");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_float");
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
