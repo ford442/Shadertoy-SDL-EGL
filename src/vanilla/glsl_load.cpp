@@ -235,3 +235,8 @@ return EM_TRUE;
 }
 
 }
+
+int main(){
+js_mainR();
+return 1;
+}
