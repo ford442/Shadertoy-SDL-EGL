@@ -1,4 +1,4 @@
-BIN_NAME += c0-004.js
+BIN_NAME += c0-eye.js
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
