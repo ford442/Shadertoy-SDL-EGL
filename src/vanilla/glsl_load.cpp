@@ -168,6 +168,8 @@ void startWebGPU(){
 WGPU_StartR();
 }
 
+void gl_js(){
+js_mainR();
 }
 
 Run run;
@@ -234,9 +236,4 @@ run.moveRIGHT();
 return EM_TRUE;
 }
 
-}
-
-int main(){
-js_mainR();
-return 1;
 }
