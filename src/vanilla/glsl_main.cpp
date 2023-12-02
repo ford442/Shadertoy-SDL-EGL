@@ -17,6 +17,7 @@ return RG;
 }
 
 int main(){
+gl_js();
 jss();
 return 1;
 }
