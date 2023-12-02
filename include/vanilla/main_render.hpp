@@ -77,21 +77,6 @@ void startWebGPU();
 
 }
 
-WGpuRenderPassColorAttachment colorAttachment;
-WGpuRenderPassDescriptor passDesc;
-WGpuCanvasConfiguration config;
-WGpuShaderModuleDescriptor shaderModuleDescV;
-WGpuShaderModuleDescriptor shaderModuleDescF;
-WGpuShaderModule vs;
-WGpuShaderModule fs;
-WGpuVertexState vertState;
-WGpuPrimitiveState priState;
-WGpuFragmentState fragState;
-WGpuRenderPipelineDescriptor renderPipelineDesc;
-WGpuDeviceDescriptor deviceDesc;
-WGpuRequestAdapterOptions options;
-WGpuMultisampleState multiSamp;
-
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
@@ -101,6 +86,3 @@ using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
 using wcc_tensor=boost::numeric::ublas::tensor<WGpuCanvasContext>;
 using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
-
-double szh, szw;
-
