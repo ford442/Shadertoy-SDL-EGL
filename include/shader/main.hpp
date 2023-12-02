@@ -192,11 +192,28 @@ context.getExtension('ARB_shader_objects');
 
 var $shds=[];
 
+function highResStart(){
+document.querySelector('#shut').innerHTML=2;
+document.querySelector('#scanvas').width=window.innerWidth*1.333;
+document.querySelector('#scanvas').height=window.innerHeight*1.333;
+// document.querySelector('#di').click();
+setTimeout(function(){
+document.querySelector('#stat').innerHTML='Sending Start';
+document.querySelector('#stat').style.backgroundColor='green';
+Module.ccall('str',{async:true});
+},100);
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#scanvas').width=window.innerHeight;
+document.querySelector('#scanvas').height=window.innerHeight;
+document.querySelector('#di').click();
+}
+
 function normalResStart(){
 document.querySelector('#shut').innerHTML=2;
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
-document.querySelector('#di').click();
+// document.querySelector('#di').click();
 setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
 document.querySelector('#stat').style.backgroundColor='green';
@@ -204,7 +221,7 @@ Module.ccall('str',{async:true});
 },100);
 document.querySelector('#scanvas').width=window.innerHeight;
 document.querySelector('#scanvas').height=window.innerHeight;
-document.querySelector('#di').click();
+// document.querySelector('#di').click();
 }
 
 function shds(xml){
@@ -232,6 +249,7 @@ if(shadesNum>0){
 var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum],{async:true})+5;
 };
 let shdMenu=document.querySelector('#sh1');
+let highRes=document.querySelector('#resMode').value;
 var path;
 if(shdMenu.value!='Default'){
 if(shdMenu.value=='Random'){
@@ -256,9 +274,10 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader.glsl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
-//setTimeout(function(){
-normalResStart();
-//},350);
+setTimeout(function(){
+if (highRes==true){}else{
+normalResStart();}
+},150);
 }
 });
 ff.send(null);
