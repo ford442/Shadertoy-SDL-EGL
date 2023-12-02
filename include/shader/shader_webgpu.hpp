@@ -1,4 +1,4 @@
-// #include <boost/cstdfloat.hpp>
+#include <boost/cstdfloat.hpp>
 
 #include "../../include/shader/defs.hpp"
 // #include <stdio.h>
@@ -1429,7 +1429,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_fragment_precision_high");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
-// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
@@ -1449,7 +1449,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float"); // non-ES
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
