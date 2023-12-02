@@ -90,6 +90,38 @@ b3_vanilla_render:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --memory-init-file 0 main_render.o 
 
+b3_vanilla_render2:
+	 emcc src/vanilla/main_render.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o w3001.js \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 main_render.o 
+
+b3_glsl_render:
+	 emcc src/vanilla/glsl_load.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o w001.js \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 glsl_load.o glsl_main.o
+
 vanilla_opt_gpujs:
 	 em++ $(STDS) $(COMMON_FLAGS) src/vanilla/main_gpujs.cpp -c
 	 em++ $(STDS) $(COMMON_FLAGS) $(LINK_FLAGS) main_gpujs.o -o $(NAMESTAMP) \
