@@ -145,7 +145,6 @@ using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 // #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
-#include "../../lib/lib_webgpu_cpp20.cpp"
 #include <emscripten/html5.h>
 #include <emscripten/heap.h>
 
