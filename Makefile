@@ -106,9 +106,9 @@ b3_vanilla_render2:
 	 --memory-init-file 0 main_render.o 
 
 b3_glsl_render:
-	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -pthread -fPIC -fPIE -DCOMPUTE -o w001.js \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
