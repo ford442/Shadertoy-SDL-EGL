@@ -133,7 +133,7 @@ optionsR.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&optionsR,ObtainedWebGpuAdapterStartR,0);
 }
 
-EM_JS(void,js_main,(),{
+EM_JS(void,js_mainR,(),{
 function normalResStart(){
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
