@@ -196,7 +196,7 @@ function highResStart(){
 document.querySelector('#shut').innerHTML=2;
 document.querySelector('#scanvas').width=window.innerWidth*1.333;
 document.querySelector('#scanvas').height=window.innerHeight*1.333;
-// document.querySelector('#di').click();
+document.querySelector('#di').click();
 setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
 document.querySelector('#stat').style.backgroundColor='green';
@@ -206,14 +206,14 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#scanvas').width=window.innerHeight;
 document.querySelector('#scanvas').height=window.innerHeight;
-document.querySelector('#di').click();
+// document.querySelector('#di').click();
 }
 
 function normalResStart(){
 document.querySelector('#shut').innerHTML=2;
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
-// document.querySelector('#di').click();
+document.querySelector('#di').click();
 setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
 document.querySelector('#stat').style.backgroundColor='green';
