@@ -62,7 +62,8 @@ ubinr=wubin.at(0,0);
 spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()),binr.size());
 spirv_cross::ShaderResources resources=glsl.get_shader_resources();
 // tint::Program Tprogram =tint::reader::spirv::Parse(std::vector<uint32_t>(ubinr.data(), ubinr.data() + ubinr.size()));
-tint::Program* Tprogram_ptr = std::make_unique<tint::Program>(tint::reader::spirv::Parse(ubinr.data())).get();
+.. tint::Program* Tprogram_ptr = std::make_unique<tint::Program>(tint::reader::spirv::Parse(ubinr.data())).get();
+tint::Program Tprogram = std::make_unique<tint::Program>(tint::reader::spirv::Parse(std::vector<uint32_t>(ubinr.data(), ubinr.data() + ubinr.size())));
 
 // tint::Module module = tint::Parser.ParseSpirv(ubinr);
 // tint::Program program = tint::Program::FromModule(module);
