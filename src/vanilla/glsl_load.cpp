@@ -55,7 +55,7 @@ return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
-std::vector<GLchar> binr(binarySize);
+std::vector<GLchar> binr(wbin_size.at(0,0));
 binr=wbin.at(0,0);
 spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()), binr.size());
 wd.at(0,0)=result;
