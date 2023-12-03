@@ -168,6 +168,8 @@ void startWebGPU(){
 WGPU_StartR();
 }
 
+}
+
 void gl_js(){
 js_mainR();
 }
