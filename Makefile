@@ -122,8 +122,8 @@ b3_glsl_render:
 	 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['startWebGPU'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_str","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --memory-init-file 0 glsl_main.o glsl_load.o
 
