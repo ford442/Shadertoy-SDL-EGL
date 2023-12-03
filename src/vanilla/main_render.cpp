@@ -40,7 +40,7 @@ static wbg_tensor wbg=wbg_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
 wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
-wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0),0,0);
+wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
