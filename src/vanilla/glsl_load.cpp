@@ -57,8 +57,27 @@ return EM_FALSE;
 void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
 std::vector<GLchar> binr(wbin_size.at(0,0));
 binr=wbin.at(0,0);
-spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()), binr.size());
-wd.at(0,0)=result;
+spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()),binr.size());
+spirv_cross::ShaderResources resources=glsl.get_shader_resources();
+std::string wgslFrag=glsl.get_shader_code(spv::ShaderStage::Fragment);
+std::string wgslVert=glsl.get_shader_code(spv::ShaderStage::Vertex);
+
+	/*
+ for (auto &resource : resources.sampled_images)
+	{
+		unsigned set = glsl.get_decoration(resource.id, spv::DecorationDescriptorSet);
+		unsigned binding = glsl.get_decoration(resource.id, spv::DecorationBinding);
+		printf("Image %s at set = %u, binding = %u\n", resource.name.c_str(), set, binding);
+
+		// Modify the decoration to prepare it for GLSL.
+		glsl.unset_decoration(resource.id, spv::DecorationDescriptorSet);
+
+		// Some arbitrary remapping if we want.
+		glsl.set_decoration(resource.id, spv::DecorationBinding, set * 16 + binding);
+	}
+  */
+  
+  wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
