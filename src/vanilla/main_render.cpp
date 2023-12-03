@@ -270,7 +270,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-float iTime;
+uint64_t iTime;
 WGpuBufferDescriptor bufferDescriptorU={iTime,WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,false};
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 layout_entry.binding=0;
