@@ -109,9 +109,9 @@ b3_vanilla_render2:
 
 b3_glsl_render:
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS) -sWASM_WORKERS=1 -sSHARED_MEMORY=1 
 	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS) -sWASM_WORKERS=1 -sSHARED_MEMORY=1 
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -pthread -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
