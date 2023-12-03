@@ -158,6 +158,8 @@ using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 #include "include/tint/tint.h"
 #include <utility>
 
+tint::Parser parser;
+
 // using namespace ::glslang;
 
 // #define GLfloat float 
