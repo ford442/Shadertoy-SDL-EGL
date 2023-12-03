@@ -1719,6 +1719,7 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*64,indc,GL_DYNAMIC_DRAW);
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
 // boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+  
 vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
 Sh.at(0,1)=vtx;
 // vertexShader.setStrings(src,2);
