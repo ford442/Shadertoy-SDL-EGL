@@ -22,7 +22,14 @@ typedef ResultType result_type;
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/function.hpp>
-#include "boost/tuple/tuple.hpp"
+#include <boost/integer.hpp>
+#include <boost/atomic.hpp>
+#include <boost/numeric/ublas/tensor.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/tuple/tuple.hpp>
+#include <boost/chrono.hpp>
+
 #include <random>
 #include <cstdlib>
 #include <emscripten.h>
