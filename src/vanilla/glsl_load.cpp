@@ -55,7 +55,12 @@ return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
+  uint8_t* spirvData = loadSPIRVData();
+size_t spirvDataSize = getSPIRVDataSize();
+
 spirv_cross::Compiler compiler;
+  compiler.load(spirvData, spirvDataSize);
+
 wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
