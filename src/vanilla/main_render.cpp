@@ -38,8 +38,7 @@ static wrp_tensor wrp=wrp_tensor{2,2};
 static wb_tensor wb=wb_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
-    wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
-
+wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -51,7 +50,7 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),8,&iTime,8);
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&iTime,8);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
