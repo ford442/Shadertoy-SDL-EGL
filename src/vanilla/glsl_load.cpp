@@ -55,8 +55,9 @@ return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
-spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binary.data()), binary.size());
-
+std::vector<GLchar> binr(binarySize);
+binr=wbin.at(0,0);
+spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()), binr.size());
 wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
