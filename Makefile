@@ -114,7 +114,9 @@ b3_glsl_render:
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc src/vanilla/glsl_load.cpp -std=c++17 \
-	 -I /content/RAMDRIVE2/b3/include/vanilla/ -O0 -I /content/RAMDRIVE2/b3/tint/ -I /content/RAMDRIVE2/b3/SPIRV-Tools/include/ -I /content/RAMDRIVE2/b3/SPIRV-Cross/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 -I /content/RAMDRIVE2/b3/include/vanilla/ -O0 -I /content/RAMDRIVE2/b3/tint/ \
+	 -I /content/RAMDRIVE2/b3/SPIRV-Tools/include/ -I /content/RAMDRIVE2/b3/SPIRV-Cross/ \
+	 -I /content/RAMDRIVE2/b3/SPIRV-Headers/include/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc $(LDFLAGS) -O0 -std=c++17 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
