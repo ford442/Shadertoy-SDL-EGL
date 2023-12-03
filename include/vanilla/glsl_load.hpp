@@ -1750,7 +1750,7 @@ bin.at(0,0)=GLbin;
 glGetProgramBinary(S1.at(0,0,0), binarySize, NULL, binaryFormat, binary.data());
   
   
-wbin.at(0,0)=binary.data();
+// wbin.at(0,0)=binary.data();
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
 // nanoPause();
