@@ -24,7 +24,10 @@ WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 double szh,szw;
+
+struct WGpuUniform{
 uint64_t iTime;
+};
 
 static f_tensor sze=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -276,7 +279,10 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-WGpuBufferDescriptor bufferDescriptorU={8,WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorU={};
+bufferDescriptorU.size=sizeof(Wuniform);
+bufferDescriptorU.usage=WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST
+bufferDescriptorU.mappedAtCreation=EM_TRUE;
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 wb.at(0,0)=uniBuffer;
 bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
