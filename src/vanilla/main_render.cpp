@@ -10,11 +10,18 @@ WGpuShaderModule fs;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
+
+WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;
+WGpuPipelineLayout pipeline_layout;
+WGpuBindGroupLayout bindgroup_layout;
+WGpuBindGroupLayoutEntry layout_entry;
+WGpuBindGroupEntry bindgroup_entry;
 WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuDeviceDescriptor deviceDesc;
 WGpuRequestAdapterOptions options;
 WGpuMultisampleState multiSamp;
-
+WGpuBuffer uniBuffer;
+WGpuBufferBindingLayout bufferBindingLayout1={1};
 double szh, szw;
 
 static f_tensor sze=f_tensor{2,2};
@@ -263,12 +270,23 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
+float iTime;
+WGpuBufferDescriptor bufferDescriptorU={iTime,WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,false};
+uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
+layout_entry.binding=0;
+layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
+layout_entry.type=1;
+layout_entry.layout.buffer=bufferBindingLayout1;
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),layout_entry,1);
+pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
+
 renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
-renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
+// renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
+renderPipelineDesc.layout=pipeline_layout;
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
