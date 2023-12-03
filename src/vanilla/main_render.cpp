@@ -22,7 +22,7 @@ WGpuDeviceDescriptor deviceDesc;
 WGpuRequestAdapterOptions options;
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
-WGpuBufferBindingLayout bufferBindingLayout1={};
+WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 double szh,szw;
 uint64_t iTime;
 
