@@ -61,11 +61,10 @@ binr=wbin.at(0,0);
 ubinr=wubin.at(0,0);
 spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()),binr.size());
 spirv_cross::ShaderResources resources=glsl.get_shader_resources();
-// tint::Program Tprogram = std::make_unique<tint::Program>(tint::reader::spirv::Parse(ubinr.data()));
+tint::Program Tprogram = std::make_unique<tint::Program>(tint::reader::spirv::Parse(ubinr.data()));
 
-tint::Module module = tint::Parser.ParseSpirv(ubinr);
-tint::Program program = tint::Program::FromModule(module);
- 
+// tint::Module module = tint::Parser.ParseSpirv(ubinr);
+// tint::Program program = tint::Program::FromModule(module);
 
 wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
