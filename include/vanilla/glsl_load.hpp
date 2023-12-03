@@ -162,6 +162,7 @@ using result_of_t = decltype(std::is_same<T, void>::value);
 
 #include "include/tint/tint.h"
 #include "src/reader/reader.h"
+#include "src/reader/spirv/parser.h"
 #include <utility>
 
 // using namespace ::glslang;
