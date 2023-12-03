@@ -55,7 +55,7 @@ return EM_FALSE;
 }
 
 void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
-spirv_cross::CompilerGLSL glsl(std::move(binary.data()));
+spirv_cross::CompilerGLSL glsl(std::move(binary));
 
 wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
