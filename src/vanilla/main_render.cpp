@@ -54,6 +54,8 @@ passDesc.colorAttachments=&colorAttachment;
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&iTime,8);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
+  wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
+
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
@@ -68,7 +70,6 @@ return EM_FALSE;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
-wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
@@ -285,13 +286,7 @@ bindgroup_layout_entry.binding=0;
 bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry.layout.buffer=bufferBindingLayout1;
-bindgroup_entry={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
-bindgroup_entry.binding=0;
-bindgroup_entry.resource=wb.at(0,0);
-bindgroup_entry.bufferBindOffset=0;
-bindgroup_entry.bufferBindSize=8;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_entry,1);
+  bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
 wbg.at(0,0)=bindgroup;
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
 renderPipelineDesc={};
@@ -303,8 +298,14 @@ renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.layout=pipeline_layout;
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
+  bindgroup_entry={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+  bindgroup_entry.binding=0;
+bindgroup_entry.resource=wb.at(0,0);
+bindgroup_entry.bufferBindOffset=0;
+bindgroup_entry.bufferBindSize=8;
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_entry,1);
+  wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
   wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
-wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
 emscripten_request_animation_frame_loop(raf,0);
 }
 
