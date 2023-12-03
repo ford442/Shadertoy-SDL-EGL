@@ -164,8 +164,6 @@ using result_of_t = decltype(std::is_same<T, void>::value);
 #include "src/reader/reader.h"
 #include <utility>
 
-tint::Parser parser;
-
 // using namespace ::glslang;
 
 // #define GLfloat float 
