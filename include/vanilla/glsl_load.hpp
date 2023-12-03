@@ -4,6 +4,7 @@
 #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
+#include "../../include/vanilla/common.hpp"
 
 #define __EMCSCRIPTEN__ 1
 
