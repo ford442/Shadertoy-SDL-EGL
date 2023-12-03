@@ -118,7 +118,7 @@ b3_glsl_render:
 	 emcc $(LDFLAGS) -std=c++17 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
-	 -sINITIAL_MEMORY=1024mb -lspirv-cross -lmath.js -lhtml5.js -lint53.js \
+	 -sINITIAL_MEMORY=1024mb -lspirv-cross -ltint -ltint_utils_io -ltint_val -lmath.js -lhtml5.js -lint53.js \
 	 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['startWebGPU'] \
