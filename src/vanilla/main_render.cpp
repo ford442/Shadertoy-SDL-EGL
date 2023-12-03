@@ -74,7 +74,8 @@ const char *vertexShader =
 "return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
 "}\n";
 
-const char *vertexShader2="var<private> iPosition : vec4<f32>;\n"
+const char *vertexShader2=
+"var<private> iPosition : vec4<f32>;\n"
 "var<private> gl_Position : vec4<f32>;\n"
 "fn main_1() {\n"
 "let x_15 : vec4<f32> = iPosition;\n"
@@ -237,7 +238,7 @@ multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShader2;
+shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=fragmentShader2;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
