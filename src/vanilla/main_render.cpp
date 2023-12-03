@@ -261,7 +261,7 @@ colorTarget.writeMask=15;
 vertState={};
 vertState.module=fs;
 vertState.entryPoint="main";
-vertState.numBuffers=1;
+vertState.numBuffers=0;
 vertState.buffers=nullptr;
 vertState.numConstants=0;
 vertState.constants=nullptr;
@@ -287,10 +287,10 @@ bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry.layout.buffer=bufferBindingLayout1;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
-renderPipelineDesc={};
+renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex.module=vs;
-renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
+renderPipelineDesc.primitive=priState;
 renderPipelineDesc.fragment=fragState;
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.layout=pipeline_layout;
@@ -300,7 +300,7 @@ bindgroup_entry={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entry.binding=0;
 bindgroup_entry.resource=wb.at(0,0);
 bindgroup_entry.bufferBindOffset=0;
-bindgroup_entry.bufferBindSize=8;
+bindgroup_entry.bufferBindSize=0;
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_entry,1);
 wbg.at(0,0)=bindgroup;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
@@ -310,12 +310,12 @@ emscripten_request_animation_frame_loop(raf,0);
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
-deviceDesc={};
+deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
 }
 
 void WGPU_Start(){
-options={};
+options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
 }
