@@ -61,7 +61,7 @@ binr=wbin.at(0,0);
 ubinr=reinterpret_cast<const uint32_t*>(binr.data());
 spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()),binr.size());
 spirv_cross::ShaderResources resources=glsl.get_shader_resources();
-  reinterpret_cast<const uint32_t*>(binr.data())
+  reinterpret_cast<const uint32_t*>(binr.data());
     tint::Program program = tint::Program::FromSpirv(ubinr);
   std::string wgsl_code = program.GenerateWgsl();
   std::cout << wgsl_code << std::endl;
