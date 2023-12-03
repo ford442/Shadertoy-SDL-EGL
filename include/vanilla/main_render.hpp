@@ -83,6 +83,7 @@ using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
 using wcb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
 using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
 using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
+using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
 using wcc_tensor=boost::numeric::ublas::tensor<WGpuCanvasContext>;
 using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
