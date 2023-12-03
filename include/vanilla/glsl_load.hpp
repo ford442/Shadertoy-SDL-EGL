@@ -152,6 +152,9 @@ using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 #include "../../glslang/SPIRV/GlslangToSpv.h"
 #include "../../SPIRV-Cross/spirv_cross.hpp"
 #include "../../SPIRV-Cross/spirv_glsl.hpp"
+#include "spirv-tools/libspirv.hpp"
+#include "src/utils/io/command.h"
+#include "src/val/val.h"
 #include "include/tint/tint.h"
 #include <utility>
 
