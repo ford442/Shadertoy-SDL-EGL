@@ -39,8 +39,7 @@ static wb_tensor wb=wb_tensor{2,2};
 static wbg_tensor wbg=wbg_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
-wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
-wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
+
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -299,9 +298,11 @@ renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipelineDesc.layout=&pipeline_layout;
+renderPipelineDesc.layout=pipeline_layout;
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
+  wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
+wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
 emscripten_request_animation_frame_loop(raf,0);
 }
 
