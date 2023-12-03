@@ -95,9 +95,9 @@ b3_vanilla_render:
 	 --memory-init-file 0 main_render.o 
 
 b3_vanilla_render2:
-	 emcc src/vanilla/main_render.cpp -std=c++20 $(COMMON_FLAGS) \
+	 emcc src/vanilla/main_render.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LDFLAGS) $(COMMON_FLAGS) --js-library lib/lib_webgpu.js $(LINK_FLAGS) \
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js \
 	 -DCOMPUTE -o w3001.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
