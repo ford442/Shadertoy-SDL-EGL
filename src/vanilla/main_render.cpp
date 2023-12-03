@@ -41,8 +41,16 @@ static wrp_tensor wrp=wrp_tensor{2,2};
 static wb_tensor wb=wb_tensor{2,2};
 static wbg_tensor wbg=wbg_tensor{2,2};
 
+using namespace boost::chrono;
+
+uint64_t get_current_time_in_milliseconds(){
+system_clock::time_point now=system_clock::now();
+milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
+return ms.count();
+}
+
 EM_BOOL raf(double time, void *userData){
-WGpuUniform wTime={2.2f};
+WGpuUniform wTime={get_current_time_in_milliseconds()};
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -54,7 +62,7 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,wTime,8);
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,wTime,sizeof(uint64_t));
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wce.at(0,0),0,NULL,0,0);
