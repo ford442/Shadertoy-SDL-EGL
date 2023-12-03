@@ -120,7 +120,10 @@ using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 #include <thread>
 #include <complex>
 #include <time.h>
+
 #include <type_traits>
+template <typename T>
+using result_of_t = decltype(std::is_same<T, void>::value);
 
 #define BOOST_HAS_TR1
 
