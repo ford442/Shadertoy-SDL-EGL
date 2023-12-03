@@ -11,7 +11,7 @@ WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
 
-WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;
+// WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 WGpuPipelineLayout pipeline_layout;
 WGpuBindGroupLayout bindgroup_layout;
 WGpuBindGroupLayoutEntry layout_entry;
