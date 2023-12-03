@@ -417,7 +417,6 @@ using rv_tensor=boost::numeric::ublas::tensor<register v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
-// using gi_tensor=boost::numeric::ublas::tensor<GLint>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using li_tensor=boost::numeric::ublas::tensor<int>;
 // using void_tensor=boost::numeric::ublas::tensor<void *>; // moved to common.hpp
@@ -1743,16 +1742,20 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
- 
+
+  
 glGetProgramiv(S1.at(0,0,0), GL_PROGRAM_BINARY_LENGTH, &binarySize);
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*64,binLength,binaryFormat,&GLbin);
 bin.at(0,0)=GLbin;
-glGetProgramBinary(S1.at(0,0,0), binarySize, NULL, binaryFormat, binary.data());
-  
-  
-// wbin.at(0,0)=binary.data();
+GLint binarySize;
+std::vector<GLchar> binary(binarySize);
+glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,binaryFormat,binary.data());
+wbin.at(0,0)=binary;
+wbin_size.at(0,0)=binarySize;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
+
+  
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
 // glSampleCoverage(1.0f,GL_FALSE);
