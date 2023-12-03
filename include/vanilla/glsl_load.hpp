@@ -5,8 +5,6 @@
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 
-using namespace boost;
-
 #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
@@ -122,6 +120,7 @@ using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 #include <thread>
 #include <complex>
 #include <time.h>
+#include <type_traits>
 
 #define BOOST_HAS_TR1
 
@@ -157,6 +156,7 @@ using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 #include "spirv-tools/libspirv.hpp"
 // #include "src/tint/utils/command/command.h"
 // #include "src/val/val.h"
+
 #include "include/tint/tint.h"
 #include "src/reader/reader.h"
 #include <utility>
