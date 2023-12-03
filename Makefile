@@ -109,11 +109,11 @@ b3_vanilla_render2:
 
 b3_glsl_render:
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS) -sWASM_WORKERS=1 -sSHARED_MEMORY=1 
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS) -sWASM_WORKERS=0 -sSHARED_MEMORY=0 
 	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS) -sWASM_WORKERS=1 -sSHARED_MEMORY=1 
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS) -sWASM_WORKERS=0 -sSHARED_MEMORY=0 
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -pthread -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
-	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) -sWASM_WORKERS=0 -sSHARED_MEMORY=0 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
