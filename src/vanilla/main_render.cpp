@@ -23,6 +23,7 @@ WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={1};
 double szh, szw;
+uint64_t iTime;
 
 static f_tensor sze=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -33,6 +34,7 @@ static wq_tensor wq=wq_tensor{2,2};
 static wa_tensor wa=wa_tensor{2,2};
 static wcc_tensor wcc=wcc_tensor{2,2};
 static wrp_tensor wrp=wrp_tensor{2,2};
+static wb_tensor wb=wb_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -47,6 +49,8 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,iTime,sizeof(iTime));
+
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
@@ -270,16 +274,15 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-uint64_t iTime;
 WGpuBufferDescriptor bufferDescriptorU={iTime,WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,false};
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
+wb.at(0,0)=uniBuffer;
 layout_entry.binding=0;
 layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 layout_entry.type=1;
 layout_entry.layout.buffer=bufferBindingLayout1;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&layout_entry,1);
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
-
 renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.primitive=priState;
