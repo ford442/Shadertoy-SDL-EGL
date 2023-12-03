@@ -288,7 +288,7 @@ bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=8;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_entry,1);
-// wgpu_encoder_set_bind_group(wce.at(0,0),0,bindgroup,0,0);
+wgpu_encoder_set_bind_group(wce.at(0,0),0,&bindgroup,0,0);
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
 renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
