@@ -62,7 +62,7 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,wTime,sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime,sizeof(uint64_t));
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wce.at(0,0),0,NULL,0,0);
