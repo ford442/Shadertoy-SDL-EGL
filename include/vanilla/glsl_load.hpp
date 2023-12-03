@@ -157,12 +157,12 @@ using result_of_t = decltype(std::is_same<T, void>::value);
 #include "../../SPIRV-Cross/spirv_cross.hpp"
 #include "../../SPIRV-Cross/spirv_glsl.hpp"
 #include "spirv-tools/libspirv.hpp"
-// #include "src/tint/utils/command/command.h"
-// #include "src/val/val.h"
+#include "src/utils/io/command.h"
+#include "src/val/val.h"
 
 #include "include/tint/tint.h"
 #include "src/reader/reader.cc"
-#include "spirv/unified1/spirv.hpp"
+// #include "spirv/unified1/spirv.hpp"
 #include <utility>
 
 // using namespace ::glslang;
