@@ -201,12 +201,14 @@ setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
 document.querySelector('#stat').style.backgroundColor='green';
 Module.ccall('str',{async:true});
-},100);
+},50);
+setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#scanvas').width=window.innerHeight;
 document.querySelector('#scanvas').height=window.innerHeight;
-// document.querySelector('#di').click();
+document.querySelector('#di').click();
+},50);
 }
 
 function normalResStart(){
@@ -221,7 +223,7 @@ Module.ccall('str',{async:true});
 },100);
 document.querySelector('#scanvas').width=window.innerHeight;
 document.querySelector('#scanvas').height=window.innerHeight;
-// document.querySelector('#di').click();
+document.querySelector('#di').click();
 }
 
 function shds(xml){
