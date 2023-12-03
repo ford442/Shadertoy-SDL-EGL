@@ -62,14 +62,13 @@ ubinr=wubin.at(0,0);
 spirv_cross::CompilerGLSL glsl(reinterpret_cast<const uint32_t*>(binr.data()),binr.size());
 spirv_cross::ShaderResources resources=glsl.get_shader_resources();
 // tint::Parser parser;
-program = std::make_unique<tint::Program>(tint::reader::spirv::Parse(data));
+tint::Program Tprogram = std::make_unique<tint::Program>(tint::reader::spirv::Parse(ubinr.data()));
 
   tint::Module module = tint::Parser.ParseSpirv(ubinr);
   tint::Program program = tint::Program::FromModule(module);
  
-  std::cout << wgsl_code << std::endl;
 
-  wd.at(0,0)=result;
+wd.at(0,0)=result;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
