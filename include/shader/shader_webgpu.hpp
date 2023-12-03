@@ -1632,7 +1632,7 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
 glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*64,indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 // nanoPause();
-// eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_API);
   
 // glslang::TProgram program;
 // glslang::TShader vertexShader(EShLanguage::EShLangVertex);
@@ -1677,10 +1677,11 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
-glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*64,binLength,binaryFormat,&GLbin);
+glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*64,&binLength,&binaryFormat,&GLbin);
 bin.at(0,0)=GLbin;
 // nanoPause();
-glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
+glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),binLength);
+eglBindAPI(EGL_OPENGL_ES_API);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
 // glSampleCoverage(1.0f,GL_FALSE);
