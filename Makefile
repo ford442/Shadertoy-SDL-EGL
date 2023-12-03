@@ -111,11 +111,11 @@ b3_vanilla_render2:
 	 --memory-init-file 0 main_render.o 
 
 b3_glsl_render:
-	 emcc src/vanilla/glsl_main.cpp -std=c++20 -pthread \
+	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
+	 emcc src/vanilla/glsl_load.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -pthread -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
