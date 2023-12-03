@@ -1677,7 +1677,11 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
-glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*64,binLength,binaryFormat,&GLbin);
+  
+GLint binarySize;
+glGetProgramiv(S1.at(0,0,0), GL_PROGRAM_BINARY_LENGTH, &binarySize);
+glGetProgramBinary(S1.at(0,0,0),binarySize,binLength,binaryFormat,&GLbin);
+// glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,GL_SHADER_BINARY_SPIRV,&GLbin);
 bin.at(0,0)=GLbin;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
