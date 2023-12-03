@@ -1,3 +1,5 @@
+WGL_BIN_NAME += w0-001.js
+
 LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
 
 SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx
@@ -110,7 +112,7 @@ b3_glsl_render:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -pthread -fPIC -fPIE -DCOMPUTE -o w001.js \
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js -pthread -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
