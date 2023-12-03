@@ -40,7 +40,7 @@ static wbg_tensor wbg=wbg_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
 wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
-// wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
+wgpu_render_pass_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0));
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -283,7 +283,7 @@ wb.at(0,0)=uniBuffer;
 bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bindgroup_layout_entry[0].binding=0;
 bindgroup_layout_entry[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
-bindgroup_layout_entry[0].type=1;
+bindgroup_layout_entry[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry[0].layout.buffer=bufferBindingLayout1;
 bindgroup_entry[0].binding=0;
 bindgroup_entry[0].resource=wb.at(0,0);
@@ -298,8 +298,8 @@ renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.fragment=fragState;
-renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-// renderPipelineDesc.layout=pipeline_layout;
+// renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
+renderPipelineDesc.layout=pipeline_layout;
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 emscripten_request_animation_frame_loop(raf,0);
