@@ -42,7 +42,7 @@ static wb_tensor wb=wb_tensor{2,2};
 static wbg_tensor wbg=wbg_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
-WGpuUniform wTime=2.2f;
+WGpuUniform wTime={2.2f};
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
