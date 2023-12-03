@@ -12,12 +12,12 @@ WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
 
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
-WGpuPipelineLayout pipeline_layout;
+// WGpuPipelineLayout pipeline_layout;
 WGpuBindGroupLayout bindgroup_layout;
 WGpuBindGroupLayoutEntry bindgroup_layout_entry;
 WGpuBindGroupEntry bindgroup_entry;
 WGpuBindGroup bindgroup;
-WGpuRenderPipelineDescriptor renderPipelineDesc;
+// WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuDeviceDescriptor deviceDesc;
 WGpuRequestAdapterOptions options;
 WGpuMultisampleState multiSamp;
@@ -286,8 +286,8 @@ bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry.layout.buffer=bufferBindingLayout1;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
-pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
-renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
+WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
+WGpuRenderPipelineDescriptor renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=priState;
