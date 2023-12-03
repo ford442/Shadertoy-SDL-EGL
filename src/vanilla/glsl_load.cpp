@@ -27,6 +27,8 @@ static wa_tensor wa=wa_tensor{2,2};
 static wcc_tensor wcc=wcc_tensor{2,2};
 static wrp_tensor wrp=wrp_tensor{2,2};
 
+spirv_cross::Compiler compiler;
+
 EM_BOOL raf(double time, void *userData){
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
