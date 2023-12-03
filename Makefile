@@ -11,7 +11,7 @@ LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -m
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
 COMMON_FLAGS += -openmp-simd -pthread -sSUPPORT_LONGJMP=emscripten -pipe -mextended-const -mbulk-memory -matomics \
-	 -sWASM_WORKERS=0 -sSHARED_MEMORY=0 \
+	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
 	 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
