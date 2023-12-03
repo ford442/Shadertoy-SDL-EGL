@@ -38,6 +38,8 @@ static wrp_tensor wrp=wrp_tensor{2,2};
 static wb_tensor wb=wb_tensor{2,2};
 
 EM_BOOL raf(double time, void *userData){
+    wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
+
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -286,8 +288,7 @@ bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(iTime);
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_entry,1);
-wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
-wgpu_encoder_set_bind_group(wce.at(0,0),0,bindgroup,0,0);
+// wgpu_encoder_set_bind_group(wce.at(0,0),0,bindgroup,0,0);
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
 renderPipelineDesc={};
 renderPipelineDesc.vertex.module=vs;
