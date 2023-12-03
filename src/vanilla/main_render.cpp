@@ -282,7 +282,7 @@ layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 layout_entry.type=1;
 layout_entry.layout.buffer=bufferBindingLayout1;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&layout_entry,1);
-WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,layout_entry,1);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,layout_entry,1);
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wgpu_encoder_set_bind_group(wce.at(0,0),0,bindgroup,0,0);
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
