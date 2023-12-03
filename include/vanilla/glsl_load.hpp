@@ -1224,16 +1224,16 @@ glUniform1i(uni_frm,uni_i.at(0,0));
 return EM_TRUE;
 };
 
-const static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
+// const static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
 
-const static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
+// const static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
 
-const static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
+// const static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
 
 const static EM_BOOL Rend()noexcept{
-RendarA();
-Unifrm();
-RendarB();
+RendarAb();
+Unifrmb();
+RendarBb();
 // glFinish();
 return EM_TRUE;
 }
