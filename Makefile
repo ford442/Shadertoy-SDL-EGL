@@ -125,7 +125,7 @@ b3_glsl_render:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 program.cc.o glsl_main.o glsl_load.o
+	 --memory-init-file 0 glsl_main.o glsl_load.o
 
 b3_glsl_render2:
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
