@@ -50,7 +50,6 @@ passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&colorAttachment;
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&iTime,sizeof(iTime));
-
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
@@ -277,7 +276,6 @@ fragState.targets=&colorTarget;
 WGpuBufferDescriptor bufferDescriptorU={iTime,WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,false};
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 wb.at(0,0)=uniBuffer;
-
 bindgroup_layout_entry.binding=0;
 bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=1;
@@ -287,7 +285,7 @@ bindgroup_entry.resource=wb.at(0,0);
 bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(iTime);
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&bindgroup_layout_entry,1);
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_entry,1);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),&bindgroup_layout,&bindgroup_entry,1);
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wgpu_encoder_set_bind_group(wce.at(0,0),0,bindgroup,0,0);
 pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&bindgroup_layout,1);
