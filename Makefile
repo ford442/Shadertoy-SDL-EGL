@@ -1,6 +1,6 @@
 WGL_BIN_NAME += w0-001.js
 
-LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-lrt,-ldl,-S
+LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-pthread,-lc++abi,-lm,-lrt,-ldl,-S
 
 SIMD_FLAGS += -DSIMD=2 -msimd128 -mavx
 
@@ -10,7 +10,7 @@ STDS += -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c
 LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -msse2 -msse3 -mssse3 \
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
-COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pipe -mextended-const -mbulk-memory -matomics \
+COMMON_FLAGS += -pthread -sSUPPORT_LONGJMP=emscripten -sDEFAULT_TO_CXX=0 -pipe -mextended-const -mbulk-memory -matomics \
 	 -sWASM_WORKERS=0 -sSHARED_MEMORY=0 \
 	 -fPIC -fpie -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast \
