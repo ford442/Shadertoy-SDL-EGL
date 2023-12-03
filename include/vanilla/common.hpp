@@ -9,4 +9,6 @@ static void_tensor bin=void_tensor{1,1};
 static wuint_tensor wbin=wuint_tensor{1,1};
 
 void gl_js();
+ 
+GLint binarySize;
 std::vector<GLchar> binary(binarySize);
