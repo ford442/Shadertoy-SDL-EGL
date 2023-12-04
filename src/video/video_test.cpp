@@ -191,8 +191,8 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:false,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-contx.getExtension('WEBGL_color_buffer_float');
+const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
+// contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
 contx.getExtension('OES_texture_half_float_linear');
@@ -230,7 +230,6 @@ contx.getExtension('EXT_color_buffer_float');
 const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
 const g2=new GPUX({mode:'gpu'});
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
-
 // castle way
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 // GE way
@@ -239,13 +238,10 @@ const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0
 // const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 // GE way
 const glslAveg=`float Aveg(float a,float b){return(0.999-(((a)-(b))*((a)*(0.999/(0.999-b)))));}`;
-
 const glslStone=`float Stone(float a,float b,float c,float d){return(max(((a-(d-(d*0.5)))+(b-(d-(d*0.5)))+(c-(d-(d*0.5)))*4.0),0.0));}`;
 const glslStoned=`float Stoned(float a,float b,float c){return(min((a+c),1.0)-((b*0.3)*0.14));}`;
-  
 // g.addNativeFunction('Stone',glslStone,{returnType:'Number'});
 // g.addNativeFunction('Stoned',glslStoned,{returnType:'Number'});
-  
 g.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 g.addNativeFunction('Alphe',glslAlphe,{returnType:'Number'});
 g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
@@ -347,9 +343,7 @@ h$=parseInt(document.querySelector("#hig").innerHTML,10);
 vv=document.querySelector("#mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-let l=w$*h$*16;
 la=h$*w$*4;
-let al=w$*h$*8;
 sz=(h$*w$)/8;
 pointa=nextPowerOf2(77*la);
 agav=new Float64Array($H,pointa,320);
@@ -374,9 +368,8 @@ w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
-l=w$*h$*16;
+l=w$*h$*4;
 la=h$*w$*4;
-al=w$*h$*8;
 sz=(h$*w$)/8;
 pointa=nextPowerOf2(77*la);
 var agav=new Float64Array($H,pointa,320);
