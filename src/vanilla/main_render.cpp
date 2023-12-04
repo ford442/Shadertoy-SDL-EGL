@@ -323,7 +323,7 @@ passDesc.colorAttachments=&colorAttachment;
 wrpd.at(0,0)=passDesc;
 wrpca.at(0,0)=colorAttachment;
 // emscripten_request_animation_frame_loop(raf,0);
-emscripten_set_main_loop((void(*)())raf,0,0);
+emscripten_set_main_loop((EM_BOOL(*)())raf,0,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
