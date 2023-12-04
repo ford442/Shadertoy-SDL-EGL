@@ -182,11 +182,10 @@ loada();
 },$ldt);
 }
 
-loada();
-scanVideos();
-
 document.getElementById('startBtn').addEventListener('click',function(){
+scanVideos();
 normalResStart();
+loada();
 });
 
 });
