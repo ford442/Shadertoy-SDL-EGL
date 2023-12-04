@@ -29,6 +29,9 @@ struct WGpuUniform{
 uint64_t iTime;
 };
 
+WGpuUniform wTime;
+uint64_t tme;
+
 static f_tensor sze=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
@@ -40,6 +43,8 @@ static wcc_tensor wcc=wcc_tensor{2,2};
 static wrp_tensor wrp=wrp_tensor{2,2};
 static wb_tensor wb=wb_tensor{2,2};
 static wbg_tensor wbg=wbg_tensor{2,2};
+static wrpd_tensor wrpd=wrpd_tensor{2,2};
+static wrpca_tensor wrpca=wrpca_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -49,21 +54,10 @@ milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
 return ms.count();
 }
 
-EM_BOOL raf(double time, void *userData){
-uint64_t tme=get_current_time_in_milliseconds();
-WGpuUniform wTime={tme};
-colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
-colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
-colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-colorAttachment.clearValue.r=1.0f;
-colorAttachment.clearValue.g=0.0f;
-colorAttachment.clearValue.b=1.0f;
-colorAttachment.clearValue.a=1.0f;
-passDesc={};
-passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&colorAttachment;
-wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&passDesc);
+EM_BOOL raf(double time,void *userData){
+tme=get_current_time_in_milliseconds();
+wTime={tme};
+wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime,sizeof(uint64_t));
@@ -315,6 +309,19 @@ bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_e
 wbg.at(0,0)=bindgroup;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
+colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
+colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
+colorAttachment.storeOp=WGPU_STORE_OP_STORE;
+colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+colorAttachment.clearValue.r=1.0f;
+colorAttachment.clearValue.g=0.0f;
+colorAttachment.clearValue.b=1.0f;
+colorAttachment.clearValue.a=1.0f;
+passDesc={};
+passDesc.numColorAttachments=1;
+passDesc.colorAttachments=&colorAttachment;
+wrpd.at(0,0)=passDesc;
+wrpca.at(0,0)=colorAttachment;
 // emscripten_request_animation_frame_loop(raf,0);
 emscripten_set_main_loop((void(*)())raf,0,0);
 }
