@@ -69,12 +69,12 @@ video_test:
 video_test2:
 	 em++ -std=c++20 -c src/video/main.cpp -O2 $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ -std=c++20 -c src/video/video_test.cpp -O2 $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ -std=c++20 -o $(BIN_NAME) -O2 $(SIMD_FLAGS) \
+	 emcc -std=c++20 -o $(BIN_NAME) -O2 $(SIMD_FLAGS) \
 	 $(GL_FLAGS) $(WEBGPU_FLAGS) -sALLOW_MEMORY_GROWTH=0 $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano","r4nd"]' \
 	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js \
-	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js main.o video_test.o
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js video_test.o main.o 
 
 video_test3:
 	 em++ $(STDS) -c src/video/main.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
