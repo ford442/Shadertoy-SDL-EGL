@@ -15,6 +15,10 @@
 // #define GLFW_INCLUDE_GLEXT 1
 // #define GLFW_INCLUDE_ES3
 // #include <GLFW/glfw3.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+// #include <EGL/eglplatform.h>  included by egl.h
+// #include <KHR/khrplatform.h>  included by egl.h
 
 #include <functional>
 
