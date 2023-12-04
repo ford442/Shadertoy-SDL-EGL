@@ -871,7 +871,7 @@ mms2.at(0,1)=e->clientY;
 return EM_TRUE;
 }
 
-static char32_t * result=NULL;
+static GLchar * result=NULL;
 static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
@@ -1199,7 +1199,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-const inline char32_t * rd_fl(const char * Fnm){
+const inline GLchar * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1214,13 +1214,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
+result=static_cast<GLchar *>(malloc((length+1)*sizeof(GLchar)));
 if(result){
-size_t actual_length=fread(result,sizeof(char32_t),length,file);
+size_t actual_length=fread(result,sizeof(GLchar),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-// results=reinterpret_cast<char32_t *>(result);
+// results=reinterpret_cast<GLchar *>(result);
 return result;
 }
 return nullptr;
@@ -1250,7 +1250,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char32_t * frag_body=(char32_t*)rd_fl(Fnm);
+const GLchar * frag_body=(GLchar*)rd_fl(Fnm);
 std::wstring frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
