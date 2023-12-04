@@ -86,10 +86,10 @@ document.getElementById('bcanvas').height=window.innerHeight;
 document.getElementById('acanvas').width=window.innerHeight;
 document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
-// Module.ccall('b3_egl');
+Module.ccall('b3');
 },250);
 setTimeout(function(){
-Module.ccall('b3');
+Module.ccall('b3_egl');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -183,9 +183,9 @@ loada();
 }
   
 scanVideos();
-loada();
-document.getElementById('startBtn').addEventListener('click',function(){
+// loada();
 
+document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
 });
 
@@ -204,8 +204,6 @@ return Rg;
 void(*jss)(){&js_main};
 
 int main(void){
-
 jss();
 return 0;
-
 }
