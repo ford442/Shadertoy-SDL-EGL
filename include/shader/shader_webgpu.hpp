@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <stdarg.h>
 #include <new>
-#include <cstring>
+#include <string>
 #include <math.h>
 #include <cfloat>
 #include <ctime>
@@ -1255,7 +1255,7 @@ eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
 const char * frag_body=(char*)rd_fl(Fnm);
-std::string frag_body_S=frag_body;
+std::wstring frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
