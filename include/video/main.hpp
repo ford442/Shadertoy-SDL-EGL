@@ -1,5 +1,7 @@
 #pragma once
-
+#include <cstdlib>
+#include <ctime>
+#include <cfloat>
 #include <emscripten.h>
 
 #include <random>
@@ -27,12 +29,12 @@ int32_t rNd(int);
 
 extern "C"{
 
+int Rg;
+int c;
 int r4nd(int);
 
 }
 
-#include <cstdlib>
-#include <ctime>
-#include <cfloat>
-
 // #include <emscripten/html5.h>
+
+int Th,rD;
