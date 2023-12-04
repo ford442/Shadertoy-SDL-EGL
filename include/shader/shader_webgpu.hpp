@@ -226,7 +226,7 @@ static inline char wgl_cmp_src[2000]="@group(0)@binding(0)var<storage,read>input
 "}"
 "}";
 
-static inline wchar_t cm_hdr_src[3300]=u"#version 300 es\n"
+static inline wchar_t cm_hdr_src[3300]="#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
 "#pragma target(glsl_es)\n"
 "#pragma enable_bitfield_ops\n"
@@ -305,12 +305,12 @@ static inline wchar_t cm_hdr_src[3300]=u"#version 300 es\n"
 "precision highp samplerCube;"
 */
 
-static inline wchar_t vrt_bdy_src[420]=u"precision highp int;\n"
+static inline wchar_t vrt_bdy_src[420]="precision highp int;\n"
 "precision highp sampler2D;"
 "precision highp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-static inline wchar_t frg_hdr_src[1000]=u"precision highp int;\n"
+static inline wchar_t frg_hdr_src[1000]="precision highp int;\n"
 "precision highp sampler2D;"
 "precision highp samplerCube;"
 "uniform int iFrameRate;"
@@ -320,7 +320,7 @@ static inline wchar_t frg_hdr_src[1000]=u"precision highp int;\n"
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline wchar_t frg_ftr_src[2420]=u"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+static inline wchar_t frg_ftr_src[2420]="void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 /*
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
 "int _N=3;void mainImage(out vec4 O,vec2 U){\n"
