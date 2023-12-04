@@ -38,6 +38,7 @@ const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
 
 var $vids=[];
+var $shds=[];
 
 function vids(xml){
 const vparser=new DOMParser();
