@@ -92,9 +92,9 @@ typedef ResultType result_type;
 // #define GLfloat float 
 // #define GLint int
 
-#ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
-#define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
-#endif
+// #ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
+// #define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
+// #endif
 
 #define GL_RED_MIN 0.0
 #define GL_RED_MAX 1.0
@@ -875,7 +875,7 @@ mms2.at(0,1)=e->clientY;
 return EM_TRUE;
 }
 
-static char8_t * result=NULL;
+static char32_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
@@ -1203,7 +1203,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-const inline char8_t * rd_fl(const char * Fnm){
+const inline char32_t * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1218,9 +1218,9 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char32_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
@@ -1291,7 +1291,7 @@ static EGLint ctx_att[]={
 EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,1,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -1313,7 +1313,7 @@ static EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
