@@ -45,9 +45,9 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-// void avgFrm(short int Fnum,int leng,float *ptr,float *aptr);
+// void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
 
-boost::function<void(short int,int,float *,float *)>avgFrm=[](short int Fnum,int leng,float *ptr,float *aptr){
+boost::function<void(int,int,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
 max=0.0f;
 min=1.0f;
 sum=0.0f;
@@ -80,7 +80,7 @@ return;
 
 extern "C" {
 
-void nano(short int Fnum,int leng,float *ptr,float *aptr){
+void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
