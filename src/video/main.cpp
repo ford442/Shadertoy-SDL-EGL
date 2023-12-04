@@ -89,7 +89,7 @@ setTimeout(function(){
 Module.ccall('b3');
 },250);
 setTimeout(function(){
-// Module.ccall('b3_egl');
+Module.ccall('b3_egl');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -129,11 +129,9 @@ var nn=window.innerHeight;
 var vvh=this.videoHeight;
 var vvw=this.videoWidth;
 document.getElementById('ldv').height=parseInt(nn,10);
-// document.getElementById('ldv').width=this.videoWidth;
-  
+document.getElementById('ldv').width=this.videoWidth;
 document.getElementById('wid').innerHTML=window.innerHeight;
 document.getElementById('hig').innerHTML=window.innerHeight;
-  
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 if(mic>0){
