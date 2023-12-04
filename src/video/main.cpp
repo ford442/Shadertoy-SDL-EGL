@@ -88,15 +88,15 @@ document.getElementById('acanvas').height=window.innerHeight;
 setTimeout(function(){
 Module.ccall('b3');
 },250);
-setTimeout(function(){
-Module.ccall('b3_egl');
-},750);
+// setTimeout(function(){
+// Module.ccall('b3_egl');
+// },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 bezl.width=window.innerWidth;
 bezl.height=window.innerHeight;
 switchy.click();
-},850);
+},450);
 }
   
 const tem=document.getElementById('tim');
