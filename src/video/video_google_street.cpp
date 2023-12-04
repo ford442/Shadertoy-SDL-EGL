@@ -15,6 +15,7 @@ EGL_NONE,EGL_NONE
 EGLint anEglCtxAttribs2[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
@@ -154,6 +155,7 @@ EGL_NONE
 EGLint const anEglCtxAttribs2_js[]={
 EGL_CONTEXT_CLIENT_VERSION,(EGLint)3,
 EGL_CONTEXT_MAJOR_VERSION_KHR,(EGLint)3,
+EGL_CONTEXT_MINOR_VERSION_KHR,(EGLint)0,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT, 
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -324,11 +326,11 @@ iFrame=0;
 clk_l=true;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
-attr.stencil=EM_FALSE;
+attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
-attr.preserveDrawingBuffer=EM_TRUE;
+attr.premultipliedAlpha=EM_TRUE;
+attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -553,11 +555,11 @@ emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(GLsizei)hi_js;
 emscripten_webgl_init_context_attributes(&attr_js);
 attr_js.alpha=EM_TRUE;
-attr_js.stencil=EM_FALSE;
+attr_js.stencil=EM_TRUE;
 attr_js.depth=EM_TRUE;
 attr_js.antialias=EM_TRUE;
-attr_js.premultipliedAlpha=EM_FALSE;
-attr_js.preserveDrawingBuffer=EM_TRUE;
+attr_js.premultipliedAlpha=EM_TRUE;
+attr_js.preserveDrawingBuffer=EM_FALSE;
 attr_js.enableExtensionsByDefault=EM_FALSE;
 attr_js.renderViaOffscreenBackBuffer=EM_FALSE;
 attr_js.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -793,12 +795,12 @@ preferLowPowerToHighPerformance:false,
 // colorSpace:'display-p3',
 alpha:true,
 depth:true,
-stencil:false,
+stencil:true,
 // precision:'highp',
 // imageSmoothingEnabled:false,
 // imageSmoothingQuality:'medium',
-preserveDrawingBuffer:true,
-premultipliedAlpha:false,
+preserveDrawingBuffer:false,
+premultipliedAlpha:true,
 desynchronized:false,
 lowLatency:true,
 powerPreference:'high-performance',
