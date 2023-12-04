@@ -226,7 +226,7 @@ static inline char wgl_cmp_src[2000]="@group(0)@binding(0)var<storage,read>input
 "}"
 "}";
 
-static inline wchar_t cm_hdr_src[3300]="#version 300 es\n"
+static inline char cm_hdr_src[3300]="#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
 "#pragma target(glsl_es)\n"
 "#pragma enable_bitfield_ops\n"
@@ -305,12 +305,12 @@ static inline wchar_t cm_hdr_src[3300]="#version 300 es\n"
 "precision highp samplerCube;"
 */
 
-static inline wchar_t vrt_bdy_src[420]="precision highp int;\n"
+static inline char vrt_bdy_src[420]="precision highp int;\n"
 "precision highp sampler2D;"
 "precision highp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-static inline wchar_t frg_hdr_src[1000]="precision highp int;\n"
+static inline char frg_hdr_src[1000]="precision highp int;\n"
 "precision highp sampler2D;"
 "precision highp samplerCube;"
 "uniform int iFrameRate;"
@@ -320,7 +320,7 @@ static inline wchar_t frg_hdr_src[1000]="precision highp int;\n"
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline wchar_t frg_ftr_src[2420]="void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+static inline char frg_ftr_src[2420]="void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 /*
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
 "int _N=3;void mainImage(out vec4 O,vec2 U){\n"
@@ -448,7 +448,7 @@ uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
 uint32_t InputBufferBytes=262144*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-const char32_t * Entry="computeStuff";
+const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
@@ -509,7 +509,7 @@ WGpuBufferDescriptor bufferDescriptorC={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU
 // 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
 WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
-char32_t * cmp_bdy=wgl_cmp_src;
+char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
@@ -872,7 +872,7 @@ return EM_TRUE;
 }
 
 static char32_t * result=NULL;
-static char32_t * results=NULL;
+static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
 
@@ -888,12 +888,12 @@ private:
 
 Compile compile;
 
-const char32_t * Fnm=reinterpret_cast<const char32_t *>("/shader/shader.glsl");
-const char32_t * src[4];
-char32_t * vrt_bdy=vrt_bdy_src;
-char32_t * frg_hdr=frg_hdr_src;
-char32_t * frg_ftr=frg_ftr_src;
-char32_t * cm_hdr=cm_hdr_src;
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const GLchar * src[4];
+char * vrt_bdy=vrt_bdy_src;
+char * frg_hdr=frg_hdr_src;
+char * frg_ftr=frg_ftr_src;
+char * cm_hdr=cm_hdr_src;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
