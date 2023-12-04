@@ -1,25 +1,27 @@
 #include <emscripten.h>
+#include "../../include/shader/intrins.hpp"
 
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+  
 extern "C"{  
   
 EM_BOOL pl();
   
 }
 
-// #undef _FLT_EVAL_METHOD
-// #define _FLT_EVAL_METHOD 0
-#pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT ON
+#undef _FLT_EVAL_METHOD
+#define _FLT_EVAL_METHOD_OPTIMIZED 
+// #pragma STDC CX_LIMITED_RANGE ON
+#pragma STDC FP_CONTRACT OFF
 
-#define _XOPEN_REALTIME 1
-#define _POSIX_ASYNC_IO 1
-#define _POSIX_PRIO_IO 1
-#define _POSIX_SYNC_IO 1
-#define _XOPEN_SHM 1
-#define _POSIX_PRIORITIZED_IO 1
-#undef _FLT_ROUNDS
-#define _FLT_ROUNDS 1
-#define _POSIX_REGEXP	1
+// #undef _FLT_ROUNDS
+// #define _FLT_ROUNDS 1
 
 #include <float.h>
 #include <math.h>
@@ -34,13 +36,12 @@ typedef ResultType result_type;
 
 #define register
 
+#define BOOST_UBLAS_USE_LONG_DOUBLE 1
+// #define BOOST_NO_EXCEPTIONS
 #define BOOST_CHRONO_HEADER_ONLY 1
 #define BOOST_ERROR_CODE_HEADER_ONLY 1
-#define BOOST_UBLAS_MOVE_SEMANTICS
+#define BOOST_UBLAS_MOVE_SEMANTICS 1
 #define BOOST_UBLAS_TYPE_CHECK 0
-#define BOOST_UBLAS_USE_LONG_DOUBLE
-// #define BOOST_NO_EXCEPTIONS
-
 
 #include <cstdint>
 #include <SDL2/SDL.h>
@@ -101,19 +102,19 @@ SDL_AudioSpec request;
 public:
 
 // static EM_BOOL snd_pos(boost::atomic<short int> set){
-static EM_BOOL snd_pos(GLint set){
+const static EM_BOOL snd_pos(GLint set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
 return EM_TRUE;
 }
 
-static EM_BOOL snd_lft(long long set){
+const static EM_BOOL snd_lft(long long set){
 sse.at(0,1)=wasm_i64x2_splat(set);
 sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
 return EM_TRUE;
 }
 
-static EM_BOOL snd_pos_u(unsigned long long set){
+const static EM_BOOL snd_pos_u(unsigned long long set){
 sse2.at(0,0)=wasm_u64x2_splat(set);
 sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
@@ -138,7 +139,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-boost::function<EM_BOOL()>plt=[this](){
+const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
