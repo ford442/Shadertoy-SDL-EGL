@@ -50,7 +50,8 @@ return ms.count();
 }
 
 EM_BOOL raf(double time, void *userData){
-WGpuUniform wTime={get_current_time_in_milliseconds()};
+uint64_t tme=get_current_time_in_milliseconds()
+WGpuUniform wTime={tme};
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -314,7 +315,8 @@ bindgroup=wgpu_device_create_bind_group(wd.at(0,0),bindgroup_layout,&bindgroup_e
 wbg.at(0,0)=bindgroup;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wce.at(0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
-emscripten_request_animation_frame_loop(raf,0);
+// emscripten_request_animation_frame_loop(raf,0);
+emscripten_set_main_loop((void(*)())raf,0,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
