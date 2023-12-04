@@ -75,7 +75,7 @@ video_test2:
 	 em++ $(STDS) -c src/video/video_test.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o $(BIN_NAME) $(LINK_FLAGS) $(COMMON_FLAGS) -O3 $(SIMD_FLAGS) \
 	 $(GL_FLAGS) -sALLOW_MEMORY_GROWTH=0 $(BOOST_FLAGS) -sUSE_SDL=0 \
-	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano"]' \
 	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js main.o video_test.o
