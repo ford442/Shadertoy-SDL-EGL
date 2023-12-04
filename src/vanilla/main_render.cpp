@@ -10,7 +10,7 @@ WGpuShaderModule fs;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
-WGpuBufferDescriptor bufferDescriptorU={sizeof(WGpuUniform),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+WGpuBufferDescriptor bufferDescriptorU={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
@@ -50,7 +50,7 @@ return ms.count();
 }
 
 EM_BOOL raf(double time, void *userData){
-uint64_t tme=get_current_time_in_milliseconds()
+uint64_t tme=get_current_time_in_milliseconds();
 WGpuUniform wTime={tme};
 colorAttachment=WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
