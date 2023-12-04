@@ -62,7 +62,7 @@ $vids[i]=ar2;
 
 function scanVideos(){
 const fxhttp=new XMLHttpRequest();
-fxhttp.withCredentials=false;
+// fxhttp.withCredentials=false;
 fxhttp.addEventListener("load",function(){
 vids(this);
 });
