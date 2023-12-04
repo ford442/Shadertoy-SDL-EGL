@@ -175,15 +175,15 @@ return n;
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-let w$=parseInt(document.querySelector("#wid").innerHTML,10);
-let h$=parseInt(document.querySelector("#hig").innerHTML,10);
+var w$=parseInt(document.querySelector("#wid").innerHTML,10);
+var h$=parseInt(document.querySelector("#hig").innerHTML,10);
 if(w$<1){w$=640;h$=640;}
 vv=document.querySelector("#mv");
-let $H=Module.HEAPF64.buffer;
-let la=h$*w$*4;
+var $H=Module.HEAPF64.buffer;
+var la=h$*w$*4;
 var pointa=nextPowerOf2(77*la);
 var agav=new Float64Array($H,pointa,320);
-let sz=(h$*w$)/8;
+var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.0;
 var max=0.0;
