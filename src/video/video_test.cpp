@@ -411,7 +411,7 @@ M();
 };
 M();
 document.querySelector("#di").onclick=function(){
-  Module.ccall('startWebGPU',{async: true});
+//   Module.ccall('startWebGPU',{async: true});
 T=true;
 S();
 };
