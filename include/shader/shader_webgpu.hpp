@@ -197,7 +197,7 @@ GLsizei i;
 
 public:
 
-boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
+boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char32_t ** src){
 GLsizei srclens[4];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
@@ -210,7 +210,7 @@ return shader;
 
 };
 
-static inline char wgl_cmp_src[2000]=
+static inline char32_t wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
@@ -226,7 +226,7 @@ static inline char wgl_cmp_src[2000]=
 "}"
 "}";
 
-static inline char cm_hdr_src[3300]=
+static inline char32_t cm_hdr_src[3300]=
 "#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
 "#pragma target(glsl_es)\n"
@@ -306,13 +306,13 @@ static inline char cm_hdr_src[3300]=
 "precision highp samplerCube;"
 */
 
-static inline char vrt_bdy_src[420]=
+static inline char32_t vrt_bdy_src[420]=
 "precision highp int;\n"
 "precision highp sampler2D;"
 "precision highp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
-static inline char frg_hdr_src[1000]=
+static inline char32_t frg_hdr_src[1000]=
 "precision highp int;\n"
 "precision highp sampler2D;"
 "precision highp samplerCube;"
@@ -323,7 +323,7 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[2420]=
+static inline char32_t frg_ftr_src[2420]=
 "void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 /*
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
@@ -452,7 +452,7 @@ uint32_t OutputBufferBytes=262144*4;
 uint32_t InputBufferUnits=262144;
 uint32_t InputBufferBytes=262144*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-const char * Entry="computeStuff";
+const char32_t * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
@@ -513,7 +513,7 @@ WGpuBufferDescriptor bufferDescriptorC={262144*4,WGPU_BUFFER_USAGE_MAP_READ|WGPU
 // 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={256,256,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
 WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
-char * cmp_bdy=wgl_cmp_src;
+char32_t * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
@@ -876,7 +876,7 @@ return EM_TRUE;
 }
 
 static char32_t * result=NULL;
-static char * results=NULL;
+static char32_t * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
 
@@ -892,12 +892,12 @@ private:
 
 Compile compile;
 
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-const char * src[4];
-char * vrt_bdy=vrt_bdy_src;
-char * frg_hdr=frg_hdr_src;
-char * frg_ftr=frg_ftr_src;
-char * cm_hdr=cm_hdr_src;
+const char32_t * Fnm=reinterpret_cast<const char32_t *>("/shader/shader.glsl");
+const char32_t * src[4];
+char32_t * vrt_bdy=vrt_bdy_src;
+char32_t * frg_hdr=frg_hdr_src;
+char32_t * frg_ftr=frg_ftr_src;
+char32_t * cm_hdr=cm_hdr_src;
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
@@ -1203,7 +1203,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-const inline char32_t * rd_fl(const char * Fnm){
+const inline char32_t * rd_fl(const char32_t * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1224,7 +1224,7 @@ size_t actual_length=fread(result,sizeof(char32_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-// results=reinterpret_cast<char *>(result);
+// results=reinterpret_cast<char32_t *>(result);
 return result;
 }
 return nullptr;
@@ -1254,7 +1254,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=(char*)rd_fl(Fnm);
+const char32_t * frag_body=(char32_t*)rd_fl(Fnm);
 std::wstring frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
