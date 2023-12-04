@@ -71,9 +71,9 @@ video_test:
 	 --extern-post-js js/pagec.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js video_test.o
 
 video_test2:
-	 em++ $(STDS) -c src/video/main.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -c src/video/video_test.cpp -O3 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o $(BIN_NAME) $(LINK_FLAGS) $(COMMON_FLAGS) -O3 $(SIMD_FLAGS) \
+	 em++ $(STDS) -c src/video/main.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/video/video_test.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -o $(BIN_NAME) $(LINK_FLAGS) $(COMMON_FLAGS) -O0 $(SIMD_FLAGS) \
 	 $(GL_FLAGS) -sALLOW_MEMORY_GROWTH=0 $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano"]' \
