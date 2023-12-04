@@ -197,7 +197,7 @@ GLsizei i;
 
 public:
 
-boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const char32_t ** src){
+boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
 GLsizei srclens[4];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
