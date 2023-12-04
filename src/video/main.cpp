@@ -89,7 +89,7 @@ setTimeout(function(){
 Module.ccall('b3');
 },250);
 setTimeout(function(){
-Module.ccall('b3_egl');
+// Module.ccall('b3_egl');
 },750);
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
