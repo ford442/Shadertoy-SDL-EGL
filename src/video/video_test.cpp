@@ -820,17 +820,9 @@ return;
 
 static inline boost::function<void()>jsmain=[](){ma();};
 
-void shadedir(){
-EM_ASM({
-FS.mkdir("/shader");
-});
-return;
-}
-
 extern "C" {
 
 void str(){
-shadedir();
 strt();
 return;
 }
