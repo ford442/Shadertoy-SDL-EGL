@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <stdarg.h>
 #include <new>
+#include <cwchar>
 #include <string>
 #include <math.h>
 #include <cfloat>
