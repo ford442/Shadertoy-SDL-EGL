@@ -7,10 +7,18 @@ rD=std::rand()%Th;
 return rD;
 }
 
+extern"C"{
+int32_t(* RnD)(int){&rNd};
+int r4nd(int tH){
+Rg=RnD(tH);
+// c=wasm_i32x4_extract_lane(Rg,0);
+return Rg;
+}
+  
+}
+
 EM_JS(void,js_main,(),{
-
-// "use strict";
-
+"use strict";
 const bezl=document.getElementById('circle');
 window.scroll(0,0);
 const switchy=document.getElementById('di');
@@ -232,16 +240,6 @@ loada();
 });
 
 });
-
-extern"C"{
-int32_t(* RnD)(int){&rNd};
-int r4nd(int tH){
-Rg=RnD(tH);
-// c=wasm_i32x4_extract_lane(Rg,0);
-return Rg;
-}
-  
-}
 
 void(*jss)(){&js_main};
 
