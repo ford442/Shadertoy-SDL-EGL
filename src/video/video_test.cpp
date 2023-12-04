@@ -169,10 +169,10 @@ let w$=parseInt(document.querySelector("#wid").innerHTML,10);
 let h$=parseInt(document.querySelector("#hig").innerHTML,10);
 if(w$<1){w$=640;h$=640;}
 vv=document.querySelector("#mv");
-let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF64.buffer;
 let la=h$*w$*4;
 var pointa=77*la;
-let agav=new Float32Array($H,pointa,400);
+let agav=new Float64Array($H,pointa,400);
 let sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.0;
@@ -342,14 +342,14 @@ la=h$*w$*4;
 let al=w$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-agav=new Float32Array($H,pointa,400);
+agav=new Float64Array($H,pointa,400);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -369,14 +369,14 @@ la=h$*w$*4;
 al=w$*h$*8;
 sz=(h$*w$)/8;
 pointa=77*la;
-var agav=new Float32Array($H,pointa,400);
+var agav=new Float64Array($H,pointa,400);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
