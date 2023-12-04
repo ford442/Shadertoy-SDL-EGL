@@ -1251,7 +1251,7 @@ eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
 const GLchar * frag_body=(GLchar*)rd_fl(Fnm);
-std::wstring frag_body_S=frag_body;
+std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
