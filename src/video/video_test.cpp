@@ -162,19 +162,16 @@ function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
 if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 }
-function nextPowerOf2(n) {
-  // Check if n is a power of 2
-  if (n & (n - 1)) {
-    // If n is not a power of 2, find the next highest power of 2
-    var m = n;
-    while (m & (m - 1)) {
-      m = m | (m >> 1);
-    }
-    return m;
-  } else {
-    // If n is already a power of 2, return n
-    return n;
-  }
+function nextPowerOf2(n){
+if (n & (n - 1)) {
+var m = n;
+while (m & (m - 1)) {
+m = m | (m >> 1);
+}
+return m;
+} else {
+return n;
+}
 }
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
@@ -184,12 +181,12 @@ if(w$<1){w$=640;h$=640;}
 vv=document.querySelector("#mv");
 let $H=Module.HEAPF64.buffer;
 let la=h$*w$*4;
-let pointa=nextPowerOf2(77*la);
-let agav=new Float64Array($H,pointa,320);
+var pointa=nextPowerOf2(77*la);
+var agav=new Float64Array($H,pointa,320);
 let sz=(h$*w$)/8;
-let avag=0.750;
-let min=1.0;
-let max=0.0;
+var avag=0.750;
+var min=1.0;
+var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
