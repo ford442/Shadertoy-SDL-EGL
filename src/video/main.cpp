@@ -103,7 +103,7 @@ setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
 setTimeout(function(){
-// normalResStart();
+normalResStart();
 },150);
 };};
 ff.send(null);
@@ -227,7 +227,6 @@ loada();
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 scanVideos();
-normalResStart();
 loada();
 });
 
