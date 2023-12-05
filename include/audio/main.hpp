@@ -52,15 +52,23 @@ using namespace ::boost::tuples;
 #include <ctime>
 #include <random>
 
-class song_select{
+class util{
 
 private:
 
+v128_t Rg;
+int c=0;
 std::random_device rd;
 v128_t Dr;
 int rD=0;
 
 public:
+
+int r4nd0(int tH){
+Rg=song.rNd(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
+}
 
 inline v128_t rNd(int Th){
 tie(Th,rD,Dr);
@@ -71,12 +79,3 @@ return Dr;
 }
 
 };
-
-extern "C"{
-  
-v128_t Rg;
-int c=0;
-
-int r4nd(int);
-
-}
