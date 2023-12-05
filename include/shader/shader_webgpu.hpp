@@ -110,20 +110,6 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-EGLint numSamples;
-EGLint numSamplesNV;
-EGLint numBuffersNV;
-EGLint numGreen;
-EGLint numRed;
-EGLint numBlue;
-EGLint numAlpha;
-EGLint numDepth;
-EGLint numStencil;
-EGLint numBuffer;
-EGLint numMBuffers;
-EGLint colorSpace;
-EGLint colorFormat;
-
 // static constexpr float numSamplesf=float(numSamples);
 static float numSamplesf;
 static constexpr float multisampleFramef=1.0f;
@@ -441,6 +427,7 @@ static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
 static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
+static f_tensor samp=f_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
@@ -886,6 +873,20 @@ class Run{
 
 private:
 
+EGLint numSamples;
+EGLint numSamplesNV;
+EGLint numBuffersNV;
+EGLint numGreen;
+EGLint numRed;
+EGLint numBlue;
+EGLint numAlpha;
+EGLint numDepth;
+EGLint numStencil;
+EGLint numBuffer;
+EGLint numMBuffers;
+EGLint colorSpace;
+EGLint colorFormat;
+
 Compile compile;
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -1269,7 +1270,7 @@ attr.minorVersion=0;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 eglInitialize(display,&major,&minor);
-numSamplesf=(float)numSamples;
+samp.at(0,0,0)=(float)numSamples;
 eglGetConfigAttrib(display,eglconfig,EGL_SAMPLES,&numSamples);
 eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numSamplesNV);
 eglGetConfigAttrib(display,eglconfig,EGL_SAMPLE_BUFFERS,&numMBuffers);
@@ -1750,7 +1751,7 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
-glSampleCoverage(numSamplesf,GL_FALSE);
+glSampleCoverage(samp.at(0,0,0),GL_FALSE);
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
      //  color renderbuffer
