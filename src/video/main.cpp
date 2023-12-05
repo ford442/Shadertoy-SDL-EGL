@@ -1,12 +1,9 @@
 #include "../../include/video/main.hpp"
 
-std::random_device rd;
-
-
-
 extern "C"{
 
 int rNd(int Th){
+std::random_device rd;
 std::srand(rd());
 int rD=std::rand()%Th;
 return rD;
