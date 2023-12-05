@@ -1,17 +1,5 @@
 #include "../../include/audio/main.hpp"
 
-song_select song;
-
-extern"C"{
-
-int r4nd(int tH){
-Rg=song.rNd(tH);
-c=wasm_i32x4_extract_lane(Rg,0);
-return c;
-}
-  
-}
-
 EM_JS(void,js_main,(),{
 
 'use strict';
@@ -37,11 +25,11 @@ const shutDown=new BroadcastChannel('shutDown');
   
 setTimeout(function(){
 window.open('./flac');
-},500);
+},250);
   
-setTimeout(function(){
-shutDown.postMessage({data:222});
-},4000);
+// setTimeout(function(){
+// shutDown.postMessage({data:222});
+// },4000);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
@@ -49,7 +37,7 @@ FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
 pll();
-},100);
+},250);
 });
 
 var $iwid=document.getElementById('iwid');
@@ -135,8 +123,18 @@ scanSongs();
 normalResStart();
 });
 
-// static inline void(*jss)(){&js_main};
 static inline boost::function<void()>jss=[](){js_main();};
+
+util song;
+
+extern"C"{
+
+int r4nd(int tH){
+Rg=song.r4nd0(tH);
+return Rg;
+}
+  
+}
 
 int main(){
 EM_ASM({
