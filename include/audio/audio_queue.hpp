@@ -94,7 +94,6 @@ private:
 
 char flnm[24];
 SDL_AudioSpec request;
-std::string devName;
 
 public:
 
@@ -132,25 +131,25 @@ SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
-devName=SDL_GetAudioDeviceName(1,SDL_FALSE);
+const char * devName=SDL_GetAudioDeviceName(1,SDL_FALSE);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
 while(true){
   // Retrieve audio data chunk
-Uint8 *chunk=audioData;
+Uint8 *chunk=sound.at(0,1,0);
 remaining=chunkSize;
   // Feed audio data to the device
 while(remaining>0){
-status=SDL_GetAudioDeviceStatus(device);
+status=SDL_GetAudioDeviceStatus(dv.at(0,0));
 if(status==SDL_AUDIO_STOPPED){
       // Playback has ended
       // Pause audio device
-SDL_PauseAudioDevice(device,true);
+SDL_PauseAudioDevice(dv.at(0,0),true);
       // Handle playback completion
       // ...
 break;
 }
-queued=SDL_QueueAudio(device,chunk,remaining);
+queued=SDL_QueueAudio(dv.at(0,0),chunk,remaining);
 if(queued<=0){
       // Audio device is full, wait for some space
 SDL_Delay(10);
