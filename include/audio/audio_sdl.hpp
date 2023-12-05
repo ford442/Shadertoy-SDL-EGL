@@ -1,13 +1,5 @@
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
-
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-#ifndef TRUE
-#define TRUE 1
-#endif
   
 extern "C"{  
   
@@ -46,7 +38,6 @@ typedef ResultType result_type;
 #include <cstdint>
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -58,7 +49,6 @@ typedef ResultType result_type;
 #include <cfloat>
 #include <climits>
 #include <iostream>
-
 #include <boost/preprocessor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
@@ -85,9 +75,9 @@ v_tensor sse3=v_tensor{1,1};
 
 struct{
 register GLubyte * snd;
-register long pos=0;
+register long pos;
 SDL_AudioDeviceID dev;
-register GLuint slen=0;
+register GLuint slen;
 register GLubyte * wptr;
 }wave;
 
@@ -134,6 +124,10 @@ SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
+EM_ASM({
+document.getElementById('musicBtn').click();
+});
+SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 return;
 }
 
