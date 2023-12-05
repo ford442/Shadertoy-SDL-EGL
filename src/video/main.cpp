@@ -1,5 +1,7 @@
 #include "../../include/video/main.hpp"
 
+std::random_device rd;
+
 int rD;
 
 int rNd(int Th){
