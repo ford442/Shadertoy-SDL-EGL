@@ -52,6 +52,8 @@ using namespace ::boost::tuples;
 #include <ctime>
 #include <random>
 
+v128_t Rg;
+
 class util{
 
 private:
@@ -62,8 +64,6 @@ v128_t Dr;
 int rD=0;
 
 public:
-
-v128_t Rg;
 
 inline v128_t rNd(int Th){
 tie(Th,rD,Dr);
