@@ -158,7 +158,7 @@ const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
 wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
 dv.at(0,0)=wave.dev;
 SDL_PauseAudioDevice(dv.at(0,0),false);
-emscripten_set_main_loop((void(*)())pLoop(),0,0);
+emscripten_set_main_loop((void(*)())pLoop,0,0);
 return EM_TRUE;
 };
 
