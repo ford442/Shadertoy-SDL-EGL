@@ -73,6 +73,7 @@ lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
+dv_tensor dv=dv_tensor{1,1};
 
 struct{
 register GLubyte * snd;
