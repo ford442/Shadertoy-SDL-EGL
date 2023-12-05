@@ -87,7 +87,7 @@ private:
 
 GLchar flnm[24];
 SDL_AudioSpec request;
-SDL_AudioDeviceStatus status;
+SDL_AudioStatus status;
 
 public:
 
