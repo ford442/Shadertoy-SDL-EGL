@@ -14,10 +14,8 @@ int(* RnD)(int){&rNd};
 
 extern "C"{
 
-int Rg;
-
 int r4nd(int tH){
-Rg=RnD(tH);
+int Rg=RnD(tH);
 return Rg;
 }
   
