@@ -200,9 +200,9 @@ static inline boost::function<EM_BOOL()>Rendar;
 
 static inline boost::function<EM_BOOL()>Unifrm;
 
-boost::function<EM_BOOL(void)>swap;
+boost::function<EM_BOOL()>swap;
 
-boost::function<EM_BOOL(void)>strt;
+boost::function<EM_BOOL()>strt;
 
 static void raf();
 
@@ -220,7 +220,7 @@ void WGPU_Start();
 
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
 
-static void Rend();
+static EM_BOOL Rend();
 
 extern "C"{
 
