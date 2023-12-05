@@ -132,7 +132,7 @@ snd_pos(sound_pos.at(0,0)+len);
 // EM_ASM({
 // document.getElementById('musicBtn').click();
 // });
-}
+// }
 return;
 }
 
