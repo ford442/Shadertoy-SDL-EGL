@@ -1,5 +1,7 @@
 #include "../../include/video/main.hpp"
 
+int32_t rD;
+
 int32_t rNd(int Th){
 std::srand(rd());
 rD=std::rand()%Th;
