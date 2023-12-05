@@ -134,6 +134,7 @@ snd_pos_u(wave.slen);
 const char * devName=SDL_GetAudioDeviceName(1,SDL_FALSE);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
+SDL_PauseAudioDevice(dv.at(0,0),false);
 while(true){
   // Retrieve audio data chunk
 Uint8 *chunk=sound.at(0,1,0);
@@ -144,7 +145,7 @@ status=SDL_GetAudioDeviceStatus(dv.at(0,0));
 if(status==SDL_AUDIO_STOPPED){
       // Playback has ended
       // Pause audio device
-SDL_PauseAudioDevice(dv.at(0,0),true);
+// SDL_PauseAudioDevice(dv.at(0,0),true);
       // Handle playback completion
       // ...
 break;
