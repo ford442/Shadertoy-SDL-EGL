@@ -811,12 +811,12 @@ static inline boost::function<EM_BOOL()>jsmain=[](){ma();return EM_TRUE;};
 extern "C" {
 
 EM_BOOL str(){
-strt();
+// strt();
 return EM_TRUE;
 }
 
 EM_BOOL b3(){
-jsmain();
+// jsmain();
 return EM_TRUE;
 }
 
