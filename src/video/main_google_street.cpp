@@ -125,7 +125,7 @@ scanShaders();
 });
 });
 
-int main(void){
+int main(){
 EM_ASM({
 FS.mkdir("/shader");
 });
