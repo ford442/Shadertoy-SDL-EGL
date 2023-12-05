@@ -75,15 +75,6 @@ using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
-class Audio{
-
-private:
-
-GLchar flnm[24];
-SDL_AudioSpec request;
-
-public:
-
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
@@ -100,7 +91,15 @@ register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
 
-// static EM_BOOL snd_pos(boost::atomic<short int> set){
+class Audio{
+
+private:
+
+GLchar flnm[24];
+SDL_AudioSpec request;
+
+public:
+
 const static EM_BOOL snd_pos(GLint set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
@@ -119,7 +118,7 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+static EM_BOOL SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
@@ -135,7 +134,7 @@ SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
-return;
+return EM_TRUE;
 }
 
 const boost::function<EM_BOOL()>plt=[this](){
