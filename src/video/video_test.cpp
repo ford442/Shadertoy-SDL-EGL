@@ -1,5 +1,4 @@
 #include "../../include/video/video_test.hpp"
-// #include <boost/predef/os/windows.h>
 
 template<class ArgumentType,class ResultType>
 
@@ -45,9 +44,7 @@ EGL_BUFFER_SIZE,32,
 EGL_NONE
 };
 
-// void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
-
-boost::function<void(int,int,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
+boost::function<EM_BOOL(int,int,float *,float *)>avgFrm=[](int Fnum,int leng,float *ptr,float *aptr){
 max=0.0f;
 min=1.0f;
 sum=0.0f;
@@ -75,13 +72,14 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
-return;
+return EM_TRUE;
 };
 
 extern "C" {
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
+EM_BOOL nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+return EM_TRUE;
 }
 
 }
@@ -426,16 +424,9 @@ T=true;
 #include <chrono>
 #include <unistd.h>
 
-EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-static const char8_t *read_file(const char *filename);
-
 GLfloat x;
 GLfloat y;
 EM_BOOL ms_l;
-
-// void uni(float xx,float yy,GLfloat time,EGLint fram);
-
-GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -449,7 +440,7 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-return 0;
+return EM_TRUE;
 }
 
 using namespace std;
@@ -477,9 +468,7 @@ struct timespec rem;
 struct timespec req={0,16666000};
 GLuint uni_mse;
 
-std::function<void(float ,float ,GLfloat ,EGLint )>uni=[](float xx,float yy,GLfloat time,EGLint fram){
-
-// void uni(float xx,float yy,GLfloat time,EGLint fram){
+std::function<EM_BOOL(float,float,GLfloat,EGLint)>uni=[](float xx,float yy,GLfloat time,EGLint fram){
 GLfloat mX,mY;
 if(ms_l==true){
 if(clk_l==true){
@@ -497,7 +486,7 @@ clk_l=true;
 }
 glUniform1f(uni_tme,time);
 glUniform1i(uni_frm,fram);
-return;
+return EM_TRUE;
 };
 
 const char *sources[4];
@@ -559,8 +548,7 @@ glCompileShader(shader);
 return shader;
 }
 
-std::function<void()>strt=[](){
- 
+std::function<EM_BOOL()>strt=[](){
 EGLConfig eglconfig=NULL;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&major,&minor);
@@ -815,21 +803,21 @@ ret=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_c
 ret=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 ret=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
-return;
+return EM_TRUE;
 };
 
-static inline boost::function<void()>jsmain=[](){ma();};
+static inline boost::function<EM_BOOL()>jsmain=[](){ma();return EM_TRUE;};
 
 extern "C" {
 
-void str(){
+EM_BOOL str(){
 strt();
-return;
+return EM_TRUE;
 }
 
-void b3(){
+EM_BOOL b3(){
 jsmain();
-return;
+return EM_TRUE;
 }
 
 }
