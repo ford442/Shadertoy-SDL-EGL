@@ -5,7 +5,7 @@
 #include <emscripten.h>
 
 #include <random>
-std::random_device rd;
+
 /*
 #pragma STDC FP_CONTRACT ON
 #undef _FLT_EVAL_METHOD
