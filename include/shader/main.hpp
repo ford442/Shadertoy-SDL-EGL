@@ -30,8 +30,6 @@ typedef ResultType result_type;
 
 using namespace ::boost::tuples;
 
-static inline boost::function<EM_BOOL()>jss;
-
 int r4nd4(int);
 int rD,Rg,nm;
 
