@@ -94,6 +94,7 @@ private:
 
 GLchar flnm[24];
 SDL_AudioSpec request;
+std::string devName;
 
 public:
 
@@ -130,8 +131,9 @@ SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV_RW(flnm,1,&request,&wave.snd,&wave.slen);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
+devName=SDL_GetAudioDeviceName();
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-dv.at(0,0)=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
 while(true){
   // Retrieve audio data chunk
 Uint8 *chunk=audioData;
