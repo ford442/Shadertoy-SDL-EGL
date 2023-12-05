@@ -181,7 +181,7 @@ if(w$<1){w$=640;h$=640;}
 vv=document.querySelector("#mv");
 var $H=Module.HEAPF32.buffer;
 var la=h$*w$*4;
-var pointa=nextPowerOf2(77*la);
+var pointa=77*la;// pointa=nextPowerOf2(77*la);
 var agav=new Float32Array($H,pointa,320);
 var sz=(h$*w$)/8;
 var avag=0.750;
@@ -346,7 +346,7 @@ var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 la=h$*w$*4;
 sz=(h$*w$)/8;
-pointa=nextPowerOf2(77*la);
+pointa=77*la;// pointa=nextPowerOf2(77*la);
 agav=new Float32Array($H,pointa,320);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
@@ -372,7 +372,7 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*4;
 la=h$*w$*4;
 sz=(h$*w$)/8;
-pointa=nextPowerOf2(77*la);
+pointa=77*la;// pointa=nextPowerOf2(77*la);
 var agav=new Float32Array($H,pointa,320);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
@@ -396,7 +396,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=nextPowerOf2(66*la);
+pointb=66*la;// pointb=nextPowerOf2(66*la);
 // Module.ccall('runWebGPU',{async: true});
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
