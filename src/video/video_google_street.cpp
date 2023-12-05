@@ -755,7 +755,7 @@ return EM_TRUE;
 
 }
 
-EM_JS(EM_BOOL,vid,(),{
+EM_JS(void,vid,(),{
 
 "use strict";
 
