@@ -23,4 +23,3 @@ std::random_device rd;
 */
 // #include "../../include/video/intrins.hpp"
 
-int32_t rNd(int);
