@@ -24,15 +24,3 @@ std::random_device rd;
 // #include "../../include/video/intrins.hpp"
 
 int32_t rNd(int);
-
-// v128_t Dr;
-
-extern "C"{
-
-int r4nd(int);
-
-}
-
-// #include <emscripten/html5.h>
-
-int Th,rD;
