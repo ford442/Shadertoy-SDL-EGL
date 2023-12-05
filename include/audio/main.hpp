@@ -52,12 +52,11 @@ using namespace ::boost::tuples;
 #include <ctime>
 #include <random>
 
-v128_t Rg;
-
 class util{
 
 private:
 
+v128_t Rg;
 int c=0;
 std::random_device rd;
 v128_t Dr;
