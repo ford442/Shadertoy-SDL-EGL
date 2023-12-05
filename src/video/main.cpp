@@ -235,6 +235,10 @@ loada();
 },$ldt);
 }
 
+scanShaders();
+scanVideos();
+loada();
+
 document.getElementById('startBtn').addEventListener('click',function(){
 scanShaders();
 scanVideos();
