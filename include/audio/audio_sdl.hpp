@@ -81,13 +81,14 @@ register GLuint slen;
 register GLubyte * wptr;
 }wave;
 
+SDL_AudioStatus status;
+
 class Audio{
 
 private:
 
 GLchar flnm[24];
 SDL_AudioSpec request;
-SDL_AudioStatus status;
 
 public:
 
