@@ -109,7 +109,7 @@ return EM_TRUE;
 }
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-::boost::tuples::tie(stm,len);
+// ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
@@ -124,10 +124,12 @@ SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
+if(sound_lft.at(0,0)==0){
+SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 EM_ASM({
 document.getElementById('musicBtn').click();
 });
-SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+}
 return;
 }
 
