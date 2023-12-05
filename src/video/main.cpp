@@ -1,19 +1,20 @@
 #include "../../include/video/main.hpp"
 
-extern "C"{
+std::random_device rd;
 
 int rNd(int Th){
-  std::random_device rd;
-  std::srand(rd());
-  int rD=std::rand()%Th;
-  return rD;
+std::srand(rd());
+int rD=std::rand()%Th;
+return rD;
 }
+
+extern "C"{
 
 int(* RnD)(int){&rNd};
 
 int r4nd(int tH){
-  int Rg=(*RnD)(tH);
-  return Rg;
+int Rg=(*RnD)(tH);
+return Rg;
 }
 
 }
