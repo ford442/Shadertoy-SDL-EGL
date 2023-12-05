@@ -47,6 +47,29 @@ if(e.code=='KeyX'){lockVid=0;};
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
 
+function normalResStart(){
+bezl.width=window.innerWidth;
+bezl.height=window.innerHeight;
+document.getElementById('scanvas').width=window.innerHeight;
+document.getElementById('scanvas').height=window.innerHeight;
+document.getElementById('bcanvas').width=window.innerHeight;
+document.getElementById('bcanvas').height=window.innerHeight;
+document.getElementById('acanvas').width=window.innerHeight;
+document.getElementById('acanvas').height=window.innerHeight;
+setTimeout(function(){
+Module.ccall('b3');
+},250);
+// setTimeout(function(){
+// Module.ccall('b3_egl');
+// },750);
+setTimeout(function(){
+document.getElementById('shut').innerHTML=2;
+bezl.width=window.innerWidth;
+bezl.height=window.innerHeight;
+switchy.click();
+},450);
+}
+
 var $vids=[];
 var $shds=[];
 
@@ -114,8 +137,8 @@ setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
 setTimeout(function(){
-// normalResStart();
-},150);
+normalResStart();
+},250);
 };};
 ff.send(null);
 };
@@ -129,29 +152,6 @@ shds(this);
 }};
 dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
-}
-
-function normalResStart(){
-bezl.width=window.innerWidth;
-bezl.height=window.innerHeight;
-document.getElementById('scanvas').width=window.innerHeight;
-document.getElementById('scanvas').height=window.innerHeight;
-document.getElementById('bcanvas').width=window.innerHeight;
-document.getElementById('bcanvas').height=window.innerHeight;
-document.getElementById('acanvas').width=window.innerHeight;
-document.getElementById('acanvas').height=window.innerHeight;
-setTimeout(function(){
-Module.ccall('b3');
-},250);
-// setTimeout(function(){
-// Module.ccall('b3_egl');
-// },750);
-setTimeout(function(){
-document.getElementById('shut').innerHTML=2;
-bezl.width=window.innerWidth;
-bezl.height=window.innerHeight;
-switchy.click();
-},450);
 }
   
 const tem=document.getElementById('tim');
@@ -235,14 +235,10 @@ loada();
 },$ldt);
 }
 
-scanShaders();
-scanVideos();
-loada();
-
 document.getElementById('startBtn').addEventListener('click',function(){
-scanShaders();
 scanVideos();
 loada();
+scanShaders();
 });
 
 });
