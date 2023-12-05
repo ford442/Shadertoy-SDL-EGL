@@ -22,5 +22,5 @@ std::random_device rd;
 #define _POSIX_REGEXP	1
 */
 // #include "../../include/video/intrins.hpp"
-#include "../../include/video/common.hpp"
+// #include "../../include/video/common.hpp"
 
