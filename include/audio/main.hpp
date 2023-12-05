@@ -56,13 +56,14 @@ class util{
 
 private:
 
-v128_t Rg;
 int c=0;
 std::random_device rd;
 v128_t Dr;
 int rD=0;
 
 public:
+
+v128_t Rg;
 
 inline v128_t rNd(int Th){
 tie(Th,rD,Dr);
