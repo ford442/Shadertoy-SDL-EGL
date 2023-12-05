@@ -400,5 +400,5 @@ return EM_TRUE;
 
 int main(){
 jss();
-return 1;
+return 0;
 }
