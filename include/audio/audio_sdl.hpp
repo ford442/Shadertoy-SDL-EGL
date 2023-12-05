@@ -75,6 +75,15 @@ using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
+class Audio{
+
+private:
+
+GLchar flnm[24];
+SDL_AudioSpec request;
+
+public:
+
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
@@ -90,16 +99,6 @@ SDL_AudioDeviceID dev;
 register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
-
-
-class Audio{
-
-private:
-
-GLchar flnm[24];
-SDL_AudioSpec request;
-
-public:
 
 // static EM_BOOL snd_pos(boost::atomic<short int> set){
 const static EM_BOOL snd_pos(GLint set){
