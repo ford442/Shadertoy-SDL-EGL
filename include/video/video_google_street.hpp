@@ -128,7 +128,7 @@ EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
 EGL_NONE
 };
 
-void avgFrm(int,int,float *,float *);
+EM_BOOL avgFrm(int,int,float *,float *);
 
 float max;
 float min;
@@ -139,9 +139,9 @@ float maxSum;
 
 extern "C"{
 
-void b3();
+EM_BOOL b3();
 
-void nano(short int,int,float *,float *);
+EM_BOOL nano(short int,int,float *,float *);
 
 }
 
@@ -204,13 +204,13 @@ GLchar * vertex_shader_body=vertex_shader_body_gles3;
 GLchar * fragment_shader_header=fragment_shader_header_gles3;
 GLchar * fragment_shader_footer=fragment_shader_footer_gles3;
 
-void uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
+EM_BOOL uni(GLfloat,GLfloat,GLfloat,GLint,GLfloat);
 
 GLuint compile_shader(GLenum,GLsizei,const GLchar **);
 
 char32_t * read_file(const GLchar *);
 
-void renderFrame();
+EM_BOOL renderFrame();
 
 EGLint attribut_list[]={ 
 // EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT|EGL_GL_COLORSPACE_BT2020_PQ_EXT,
@@ -278,12 +278,12 @@ EM_BOOL mouse_call_click(int,const EmscriptenMouseEvent *,void *);
 
 static EM_BOOL mouse_call_move(int,const EmscriptenMouseEvent *,void *);
 
-void clrclr(GLfloat,GLfloat,GLfloat);
+EM_BOOL clrclr(GLfloat,GLfloat,GLfloat);
 
 extern "C"{
 
-void clr(GLfloat,GLfloat,GLfloat);
+EM_BOOL clr(GLfloat,GLfloat,GLfloat);
 
-void str();
+EM_BOOL str();
 
 }
