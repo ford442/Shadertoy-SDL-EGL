@@ -129,9 +129,11 @@ util song;
 
 extern"C"{
 
+int Rgi;
+
 int r4nd(int tH){
-Rg=song.r4nd0(tH);
-return Rg;
+Rgi=song.r4nd0(tH);
+return Rgi;
 }
   
 }
