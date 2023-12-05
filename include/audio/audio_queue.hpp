@@ -131,7 +131,7 @@ SDL_Init(SDL_INIT_AUDIO);
 SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
-const char * devName=SDL_GetAudioDeviceName(1,SDL_FALSE);
+const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(dv.at(0,0),false);
