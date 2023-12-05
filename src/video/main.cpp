@@ -3,15 +3,17 @@
 int32_t rNd(int Th){
 std::srand(rd());
 rD=std::rand()%Th;
-// Dr=wasm_i32x4_splat(rD);
 return rD;
 }
 
-extern"C"{
 int32_t(* RnD)(int){&rNd};
+
+extern"C"{
+
+int Rg;
+
 int r4nd(int tH){
 Rg=RnD(tH);
-// c=wasm_i32x4_extract_lane(Rg,0);
 return Rg;
 }
   
