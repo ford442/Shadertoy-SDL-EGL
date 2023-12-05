@@ -87,6 +87,7 @@ private:
 
 GLchar flnm[24];
 SDL_AudioSpec request;
+SDL_AudioDeviceStatus status;
 
 public:
 
@@ -110,6 +111,7 @@ return EM_TRUE;
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 // ::boost::tuples::tie(stm,len);
+status=SDL_GetAudioDeviceStatus(wave.dev);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
