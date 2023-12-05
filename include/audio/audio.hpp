@@ -153,7 +153,7 @@ request.freq=44100;
 // request.format=AUDIO_S32;
 request.format=MIX_DEFAULT_FORMAT;
 request.channels=2;
-request.samples=128;
+request.samples=4096;
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
@@ -163,15 +163,15 @@ Mix_Music * music=NULL;
 music=Mix_LoadMUS(flnm);
 // soundp.at(0,1,0)=Mix_LoadMUS(flnm);
 snd_pos_u(wave.slen);
-request.callback=NULL;
+request.callback=nullptr;
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 if(Mix_PlayingMusic()==0){
 Mix_VolumeMusic(128);
-wave.dev=Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
+wave.dev=Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,4096);
 //Play the music
 Mix_PlayMusic(music,1);
 }
-// SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
+SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
 
