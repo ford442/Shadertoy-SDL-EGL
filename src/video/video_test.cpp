@@ -182,7 +182,7 @@ vv=document.querySelector("#mv");
 var $H=Module.HEAPF32.buffer;
 var la=h$*w$*4;
 var pointa=77*la;// pointa=nextPowerOf2(77*la);
-var agav=new Float32Array($H,pointa,320);
+var agav=new Float32Array($H,pointa,300);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.0;
@@ -347,7 +347,7 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 la=h$*w$*4;
 sz=(h$*w$)/8;
 pointa=77*la;// pointa=nextPowerOf2(77*la);
-agav=new Float32Array($H,pointa,320);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -373,7 +373,7 @@ l=w$*h$*4;
 la=h$*w$*4;
 sz=(h$*w$)/8;
 pointa=77*la;// pointa=nextPowerOf2(77*la);
-var agav=new Float32Array($H,pointa,320);
+var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -814,7 +814,7 @@ static inline boost::function<EM_BOOL()>jsmain=[](){ma();return EM_TRUE;};
 extern "C" {
 
 EM_BOOL str(){
-// strt();
+strt();
 return EM_TRUE;
 }
 
