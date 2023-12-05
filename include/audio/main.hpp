@@ -64,18 +64,18 @@ int rD=0;
 
 public:
 
-int r4nd0(int tH){
-Rg=song.rNd(tH);
-c=wasm_i32x4_extract_lane(Rg,0);
-return c;
-}
-
 inline v128_t rNd(int Th){
 tie(Th,rD,Dr);
 std::srand(rd());
 rD=std::rand()%Th;
 Dr=wasm_i32x4_splat(rD);
 return Dr;
+}
+
+int r4nd0(int tH){
+Rg=rNd(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
 }
 
 };
