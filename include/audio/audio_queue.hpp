@@ -59,7 +59,7 @@ typedef ResultType result_type;
 #include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
 
-using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDevice *device>;
+using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID *device>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
