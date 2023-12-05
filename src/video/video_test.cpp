@@ -160,6 +160,7 @@ function doKeyUp(e){
 if (e.code=='KeyS'){Mov=0;stpBack();vv.pause();}
 if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 }
+
 function nextPowerOf2(n){
 if (n & (n - 1)) {
 var m = n;
@@ -171,6 +172,7 @@ return m;
 return n;
 }
 }
+
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 var w$=parseInt(document.querySelector("#wid").innerHTML,10);
@@ -189,8 +191,9 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true});
-// contx.getExtension('WEBGL_color_buffer_float');
+const contx=bcanvas.getContext("webgl2",{alpha:true,depth:true,stencil:true,premultipliedAlpha:true,lowLatency:false,powerPreference:'high-performance',antialias:true});
+/*
+contx.getExtension('WEBGL_color_buffer_float');
 contx.getExtension('WEBGL_color_buffer_half_float');
 contx.getExtension('OES_texture_float_linear');
 contx.getExtension('OES_texture_half_float_linear');
@@ -222,7 +225,7 @@ contx.getExtension('OES_single_precision');
 contx.getExtension('GL_EXT_texture_shadow_lod');
 contx.getExtension('GL_NV_memory_attachment');
 contx.getExtension('EXT_color_buffer_float');
-  
+  */
 // contx.disable(gl.DITHER);
 
 const g=new GPUX({mode:'gpu',canvas:bcanvas,webGl:contx});
