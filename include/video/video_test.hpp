@@ -1,5 +1,6 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
+#include <random>
 
 #include <GL/gl.h>
 #include <GL/glext.h>
