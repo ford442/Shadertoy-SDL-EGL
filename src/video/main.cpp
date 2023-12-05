@@ -2,17 +2,15 @@
 
 std::random_device rd;
 
-int rD;
-
 int rNd(int Th){
 std::srand(rd());
-rD=std::rand()%Th;
+int rD=std::rand()%Th;
 return rD;
 }
 
-int(* RnD)(int){&rNd};
-
 extern "C"{
+
+int(* RnD)(int){&rNd};
 
 int r4nd(int tH){
 int Rg=RnD(tH);
