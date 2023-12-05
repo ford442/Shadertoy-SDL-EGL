@@ -116,9 +116,6 @@ return EM_TRUE;
 }
 
 static void pLoop(){
-  // Retrieve audio data chunk
-Uint8 *chunk=sound.at(0,1,0);
-remaining=chunkSize;
   // Feed audio data to the device
 while(remaining>0){
 status=SDL_GetAudioDeviceStatus(dv.at(0,0));
@@ -130,13 +127,13 @@ if(status==SDL_AUDIO_STOPPED){
       // ...
 break;
 }
-queued=SDL_QueueAudio(dv.at(0,0),chunk,remaining);
+queued=SDL_QueueAudio(dv.at(0,0),sound.at(0,1,0),remaining);
 if(queued<=0){
       // Audio device is full, wait for some space
 SDL_Delay(10);
 }else{
 remaining-=queued;
-chunk+=queued;
+sound.at(0,1,0)+=queued;
 }
 }
 }
@@ -157,6 +154,7 @@ SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
 const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
 wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
 dv.at(0,0)=wave.dev;
+remaining=chunkSize;
 SDL_PauseAudioDevice(dv.at(0,0),false);
 emscripten_set_main_loop((void(*)())pLoop,0,0);
 return EM_TRUE;
