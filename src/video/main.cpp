@@ -3,19 +3,19 @@
 extern "C"{
 
 int rNd(int Th){
-std::random_device rd;
-std::srand(rd());
-int rD=std::rand()%Th;
-return rD;
+  std::random_device rd;
+  std::srand(rd());
+  int rD=std::rand()%Th;
+  return rD;
 }
 
-// int(* RnD)(int){&rNd};
+int(* RnD)(int){&rNd};
 
 int r4nd(int tH){
-int Rg=rNd(tH);
-return Rg;
+  int Rg=(*RnD)(tH);
+  return Rg;
 }
-  
+
 }
 
 EM_JS(void,js_main,(),{
