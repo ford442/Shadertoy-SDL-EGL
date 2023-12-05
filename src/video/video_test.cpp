@@ -177,10 +177,10 @@ var w$=parseInt(document.querySelector("#wid").innerHTML,10);
 var h$=parseInt(document.querySelector("#hig").innerHTML,10);
 if(w$<1){w$=640;h$=640;}
 vv=document.querySelector("#mv");
-var $H=Module.HEAPF64.buffer;
+var $H=Module.HEAPF32.buffer;
 var la=h$*w$*4;
 var pointa=nextPowerOf2(77*la);
-var agav=new Float64Array($H,pointa,320);
+var agav=new Float32Array($H,pointa,320);
 var sz=(h$*w$)/8;
 var avag=0.750;
 var min=1.0;
@@ -344,14 +344,14 @@ var nblank$=Math.max((((h$-w$)*0)/2),0);
 la=h$*w$*4;
 sz=(h$*w$)/8;
 pointa=nextPowerOf2(77*la);
-agav=new Float64Array($H,pointa,320);
+agav=new Float32Array($H,pointa,320);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=77*la;
-var $B=new Float64Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -370,14 +370,14 @@ l=w$*h$*4;
 la=h$*w$*4;
 sz=(h$*w$)/8;
 pointa=nextPowerOf2(77*la);
-var agav=new Float64Array($H,pointa,320);
+var agav=new Float32Array($H,pointa,320);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float64Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
@@ -655,7 +655,7 @@ EGL_BLUE_SIZE,32,
 EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,64,
+EGL_BUFFER_SIZE,32,
 EGL_SAMPLE_BUFFERS,1,
 EGL_SAMPLES,8,
 EGL_NONE
