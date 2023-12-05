@@ -24,8 +24,8 @@
 
 #include <boost/function.hpp>
 
-EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
-static const char8_t *read_file(const char *);
-GLuint compile_shader(GLenum,GLsizei,const char **);
+// EM_BOOL mouse_call(int,const EmscriptenMouseEvent *,void *);
+// static const char8_t *read_file(const char *);
+// GLuint compile_shader(GLenum,GLsizei,const char **);
 
 // #include "../../include/video/common.hpp"
