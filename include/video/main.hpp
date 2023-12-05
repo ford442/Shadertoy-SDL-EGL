@@ -29,8 +29,6 @@ int32_t rNd(int);
 
 extern "C"{
 
-int Rg;
-int c;
 int r4nd(int);
 
 }
