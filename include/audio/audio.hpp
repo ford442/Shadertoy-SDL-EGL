@@ -150,8 +150,8 @@ boost::function<EM_BOOL()>plc=[this](){
 ::boost::tuples::tie(wave,sse,sse2);
 // ::boost::tuples::tie(bfr,request);
 request.freq=44100;
-// request.format=AUDIO_S32;
-request.format=MIX_DEFAULT_FORMAT;
+request.format=AUDIO_S32;
+// request.format=MIX_DEFAULT_FORMAT;
 request.channels=2;
 request.samples=4096;
 SDL_memset(&request,0,sizeof(request));
@@ -165,12 +165,12 @@ music=Mix_LoadMUS(flnm);
 snd_pos_u(wave.slen);
 request.callback=nullptr;
 // wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-if(Mix_PlayingMusic()==0){
-Mix_VolumeMusic(128);
-wave.dev=Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,4096);
+// if(Mix_PlayingMusic()==0){
+Mix_VolumeMusic(SDL_MIX_MAXVOLUME);
+wave.dev=Mix_OpenAudio(44100,AUDIO_S32,2,4096);
 //Play the music
 Mix_PlayMusic(music,1);
-}
+// }
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
