@@ -1,1 +1,5 @@
-int32_t rNd(int);
+extern "C"{
+
+int r4nd(int);
+
+}
