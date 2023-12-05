@@ -162,7 +162,7 @@ SDL_Init(SDL_INIT_AUDIO);
 const char * fln="/snd/sample.wav";
 SDL_RWops *rw=SDL_RWFromFile(fln,"rb");
 Mix_Music * music=NULL;
-music=Mix_LoadMUS_RW(rw);
+music=Mix_LoadMUS_RW(rw,1);
 // soundp.at(0,1,0)=Mix_LoadMUS(flnm);
 snd_pos_u(wave.slen);
 request.callback=nullptr;
