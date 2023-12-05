@@ -115,27 +115,7 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-const boost::function<EM_BOOL()>plt=[this](){
-::boost::tuples::tie(sound,sound_pos,sound_pos_u);
-::boost::tuples::tie(wave,sse,sse2);
-::boost::tuples::tie(request);
-request.freq=44100;
-request.format=AUDIO_S32;
-request.channels=2;
-request.samples=4096;
-request.callback=nullptr;
-snd_pos(0);
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-SDL_RWops *rw=SDL_RWFromFile(flnm,"rb");
-SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
-sound.at(0,1,0)=wave.snd;
-snd_pos_u(wave.slen);
-const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
-// wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
-SDL_PauseAudioDevice(dv.at(0,0),false);
-while(true){
+void plLoop(){
   // Retrieve audio data chunk
 Uint8 *chunk=sound.at(0,1,0);
 remaining=chunkSize;
@@ -160,6 +140,25 @@ chunk+=queued;
 }
 }
 }
+
+const boost::function<EM_BOOL()>plt=[this](){
+::boost::tuples::tie(sound,sound_pos,sound_pos_u);
+::boost::tuples::tie(wave,sse,sse2);
+::boost::tuples::tie(request);
+request.freq=44100;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=4096;
+request.callback=nullptr;
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+SDL_RWops *rw=SDL_RWFromFile(flnm,"rb");
+SDL_Init(SDL_INIT_AUDIO);
+SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
+const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
+wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
+dv.at(0,0)=wave.dev;
+SDL_PauseAudioDevice(dv.at(0,0),false);
+emscripten_set_main_loop((void(*)())pLoop,0,0);
 return EM_TRUE;
 };
 
