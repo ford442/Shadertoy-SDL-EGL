@@ -124,7 +124,7 @@ SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
-if(sound_lft.at(0,0)==0){
+if(status==SDL_AUDIO_STOPPED){
 SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 EM_ASM({
 document.getElementById('musicBtn').click();
