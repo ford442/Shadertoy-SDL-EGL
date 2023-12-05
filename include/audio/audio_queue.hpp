@@ -115,7 +115,7 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-void pLoop(){
+static void pLoop(){
   // Retrieve audio data chunk
 Uint8 *chunk=sound.at(0,1,0);
 remaining=chunkSize;
