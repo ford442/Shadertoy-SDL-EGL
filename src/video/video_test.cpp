@@ -811,7 +811,7 @@ static inline boost::function<EM_BOOL()>jsmain=[](){ma();return EM_TRUE;};
 extern "C" {
 
 EM_BOOL str(){
-// strt();
+strt();
 return EM_TRUE;
 }
 
