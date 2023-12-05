@@ -128,7 +128,7 @@ request.callback=nullptr;
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV_RW(flnm,1,&request,&wave.snd,&wave.slen);
+SDL_LoadWAV_RW((flnm,"rb"),1,&request,&wave.snd,&wave.slen);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
 devName=SDL_GetAudioDeviceName(1,SDL_FALSE);
