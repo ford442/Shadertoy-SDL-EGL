@@ -9,12 +9,6 @@
 #define TRUE 1
 #endif
   
-extern "C"{  
-  
-EM_BOOL pl();
-  
-}
-
 #undef _FLT_EVAL_METHOD
 #define _FLT_EVAL_METHOD_OPTIMIZED 
 // #pragma STDC CX_LIMITED_RANGE ON
@@ -22,6 +16,21 @@ EM_BOOL pl();
 
 // #undef _FLT_ROUNDS
 // #define _FLT_ROUNDS 1
+
+#define register
+
+#define BOOST_UBLAS_USE_LONG_DOUBLE 1
+// #define BOOST_NO_EXCEPTIONS
+#define BOOST_CHRONO_HEADER_ONLY 1
+#define BOOST_ERROR_CODE_HEADER_ONLY 1
+#define BOOST_UBLAS_MOVE_SEMANTICS 1
+#define BOOST_UBLAS_TYPE_CHECK 0
+
+extern "C"{  
+  
+EM_BOOL pl();
+  
+}
 
 #include <float.h>
 #include <math.h>
@@ -34,19 +43,9 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#define register
-
-#define BOOST_UBLAS_USE_LONG_DOUBLE 1
-// #define BOOST_NO_EXCEPTIONS
-#define BOOST_CHRONO_HEADER_ONLY 1
-#define BOOST_ERROR_CODE_HEADER_ONLY 1
-#define BOOST_UBLAS_MOVE_SEMANTICS 1
-#define BOOST_UBLAS_TYPE_CHECK 0
-
 #include <cstdint>
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -91,7 +90,6 @@ register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
 
-
 class Audio{
 
 private:
@@ -101,7 +99,6 @@ SDL_AudioSpec request;
 
 public:
 
-// static EM_BOOL snd_pos(boost::atomic<short int> set){
 const static EM_BOOL snd_pos(GLint set){
 sse3.at(0,0)=wasm_i64x2_splat(set);
 sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
