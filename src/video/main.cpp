@@ -10,7 +10,7 @@ return rD;
 
 int32_t(* RnD)(int){&rNd};
 
-extern"C"{
+extern "C"{
 
 int Rg;
 
