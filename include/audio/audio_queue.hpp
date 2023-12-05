@@ -1,10 +1,10 @@
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
-  
-extern "C"{  
-  
+
+extern "C"{
+
 EM_BOOL pl();
-  
+
 }
 
 #undef _FLT_EVAL_METHOD
