@@ -59,6 +59,7 @@ typedef ResultType result_type;
 #include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
 
+using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
@@ -116,14 +117,14 @@ static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
-SDL_UnlockAudioDevice(wave.dev);
+SDL_UnlockAudioDevice(dv.at(0,0));
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
 wave.wptr=sound.at(0,1,0);
 snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
-SDL_LockAudioDevice(wave.dev);
+SDL_LockAudioDevice(dv.at(0,0));
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
@@ -153,10 +154,9 @@ SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
 sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
 request.callback=bfr;
-    const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
-// wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-// dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
-wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
+const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
+dv.at(0,0)=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
+// wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
