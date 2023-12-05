@@ -252,5 +252,5 @@ EM_ASM({
 FS.mkdir("/shader");
 });
 jss();
-return 1;
+return 0;
 }
