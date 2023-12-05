@@ -81,7 +81,7 @@ register GLuint slen;
 register GLubyte * wptr;
 }wave;
 
-SDL_AudioStatus status;
+// SDL_AudioStatus status;
 
 class Audio{
 
@@ -112,7 +112,7 @@ return EM_TRUE;
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 // ::boost::tuples::tie(stm,len);
-status=SDL_GetAudioDeviceStatus(wave.dev);
+// status=SDL_GetAudioDeviceStatus(wave.dev);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
@@ -127,11 +127,11 @@ SDL_LockAudioDevice(wave.dev);
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
-if(status==SDL_AUDIO_STOPPED){
-SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
-EM_ASM({
-document.getElementById('musicBtn').click();
-});
+//  if(status==SDL_AUDIO_STOPPED){
+// SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+// EM_ASM({
+// document.getElementById('musicBtn').click();
+// });
 }
 return;
 }
