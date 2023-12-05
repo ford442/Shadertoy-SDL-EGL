@@ -92,7 +92,7 @@ class Audio{
 
 private:
 
-GLchar flnm[24];
+char flnm[24];
 SDL_AudioSpec request;
 std::string devName;
 
