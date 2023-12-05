@@ -198,20 +198,20 @@ EGL_SAMPLES,(EGLint)4,
 EGL_NONE
 };
 
-void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
+EM_BOOL clrclr(GLfloat rlc,GLfloat alc,GLfloat avr){
 GLfloat avrg=(((avr+(1.0f-rlc))/2.0f)+alc);
 GLfloat drk=y1y-(avr-0.5f);
 GLfloat brt=((y1y-rlc)-(alc-0.5f));
 glBlendColor(avrg,avrg,avrg,y1y);
 glClearColor(drk,drk,drk,brt);
-return;
+return EM_TRUE;
 }
 
 extern "C" {
 
-void clr(GLfloat cllr,GLfloat alp,GLfloat avr){
+EM_BOOL clr(GLfloat cllr,GLfloat alp,GLfloat avr){
 clrclr(cllr,alp,avr);
-return;
+return EM_TRUE;
 }
 
 }
@@ -224,7 +224,7 @@ ms_l=true;
 if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
 ms_l=false;
 }}
-return(EM_BOOL)1;
+return EM_TRUE;
 }
 
 static EM_BOOL mouse_call_move(int eventType,const EmscriptenMouseEvent * e,void * userData){
@@ -233,10 +233,10 @@ if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
 x=e->clientX;
 y=e->clientY;
 }}
-return (EM_BOOL)1;
+return EM_TRUE;
 }
 
-void uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
+EM_BOOL uni(GLfloat xx,GLfloat yy,GLfloat stime,GLint fram,GLfloat delt){
 retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,mouse_call_click);
 iFps=60.0/delt;
@@ -260,10 +260,10 @@ glUniform1f(uni_tme,stime);
 glUniform1f(uni_tme_dlt,delt);
 glUniform1f(uni_fps,iFps);
 glUniform1i(uni_frm,fram);
-return;
+return EM_TRUE;
 }
 
-void renderFrame(){
+EM_BOOL renderFrame(){
 auto t3=t2;
 auto t2=std::chrono::steady_clock::now();
 std::chrono::duration<float>time_spanb=duration_cast<std::chrono::duration<float>>(t2-t3);
@@ -279,7 +279,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 // glClear(GL_STENCIL_BUFFER_BIT);
 glDrawElements(GL_TRIANGLES,(GLsizei)36,GL_UNSIGNED_BYTE,indc);
 // glFinish();
-return;
+return EM_TRUE;
 }
 
 char32_t * read_file(const GLchar * filename){
@@ -320,7 +320,7 @@ glCompileShader(shader);
 return shader;
 }
 
-void strt(){
+EM_BOOL strt(){
 eglconfig=NULL;
 iFrame=0;
 clk_l=true;
@@ -545,11 +545,11 @@ glViewport((GLint)0,(GLint)0,Size,Size);  //  viewport/scissor after UsePrg runs
 // glEnable(GL_SCISSOR_TEST);
 // glScissor((GLint)0,(GLint)0,Size,Size);
 auto t1=std::chrono::steady_clock::now();
-emscripten_set_main_loop((void(*)())renderFrame,0,0);
-return;
+emscripten_set_main_loop((EM_BOOL(*)())renderFrame,0,0);
+return EM_TRUE;
 }
 
-void egl(){
+EM_BOOL egl(){
 eglconfig_js=NULL;
 emscripten_get_element_css_size("canvas",&wi_js,&hi_js);
 Size_js=(GLsizei)hi_js;
@@ -710,10 +710,10 @@ emscripten_webgl_enable_extension(ctx_js,"ARB_shader_objects");
 glViewport((GLint)0,(GLint)0,Size_js,Size_js);
 // glScissor((GLint)0,(GLint)0,Size_js,Size_js);
  emscripten_webgl_make_context_current(ctx);
-return;
+return EM_TRUE;
 }
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
+EM_BOOL avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0f;
 float min=1.0f;
 float sum=0.0f;
@@ -743,19 +743,19 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
-return;
+return EM_TRUE;
 }
 
 extern "C" {
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
+EM_BOOL nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-return;
+return EM_TRUE;
 }
 
 }
 
-EM_JS(void,vid,(),{
+EM_JS(EM_BOOL,vid,(),{
 
 "use strict";
 
@@ -982,20 +982,20 @@ T=true;
 
 });
 
-void(*St)(){&strt};
+EM_BOOL(*St)(){&strt};
 
 extern "C" {
 
-void str(){
+EM_BOOL str(){
 St();
-return;
+return EM_TRUE;
 }
  
-void b3(){
+EM_BOOL b3(){
 // sleep(1);
 vid();
 egl();
-return;
+return EM_TRUE;
 }
 
 }
