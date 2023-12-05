@@ -17,10 +17,8 @@ return RG;
 
 }
 
-
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
-
 window.scroll(0,0);
 /*
 let $high=document.querySelector('#canvasSize');
@@ -175,7 +173,6 @@ context.getExtension('ARB_multisample');
 context.getExtension('ARB_framebuffer_multisample');
 context.getExtension('ARB_shader_objects');
 */
-
 var $shds=[];
 
 function highResStart(){
