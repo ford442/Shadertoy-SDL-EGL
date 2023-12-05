@@ -27,9 +27,9 @@ setTimeout(function(){
 window.open('./flac');
 },250);
   
-// setTimeout(function(){
-// shutDown.postMessage({data:222});
-// },4000);
+setTimeout(function(){
+shutDown.postMessage({data:222});
+},2000);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
