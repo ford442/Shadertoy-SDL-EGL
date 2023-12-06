@@ -517,7 +517,7 @@ boost::uint_t<32>::exact frag;
 boost::uint_t<64>::exact shd_prg;
 boost::uint_t<64>::exact shd_prg2;
 
-// GLsizei * binLength;
+GLsizei * binLength;
 // GLenum * binaryFormat;
 // void * GLbin;
 
@@ -1689,7 +1689,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 glGetProgramiv(S1.at(1,1,1),GL_PROGRAM_BINARY_LENGTH,&binarySize);
 binary=new GLchar[binarySize];
 
-glGetProgramBinary(S1.at(1,1,1),binarySize,&binLength,&binaryFormat,&GLbin);
+glGetProgramBinary(S1.at(1,1,1),binarySize,&binLength,&binaryFormat,&binary);
 // glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
 bin.at(0,0)=binary;
 // nanoPause();
