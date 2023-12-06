@@ -25,7 +25,7 @@ scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/a0-001.1ijs";
+scr.src="https://wasm.noahcohn.com/b3hd/w3001.1ijs";
 document.body.appendChild(scr);
 });
 
