@@ -79,7 +79,7 @@ int r4nd(int);
 }
 
 
-EM_JS(void,js_main,(),{
+EM_JS(void,js_audio,(),{
 
 'use strict';
 
@@ -201,3 +201,12 @@ pnnl.addEventListener('keydown',spKey);
 scanSongs();
 normalResStart();
 });
+
+extern "C"{
+
+EM_BOOL jssa(){
+js_amain();
+return EM_TRUE;
+}
+
+}
