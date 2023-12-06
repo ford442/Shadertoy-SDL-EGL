@@ -397,7 +397,7 @@ return EM_TRUE;
 
 extern"C"{
 
-int r4nd(int tH){
+int r4nd0(int tH){
 Rg=song.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
