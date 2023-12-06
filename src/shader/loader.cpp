@@ -1,8 +1,6 @@
 #include "../../include/shader/loader.hpp"
 
 EM_JS(void,js_main,(),{
-window.open('https://test.1ink.us/r3b1/');
-var sr=document.getElementById('sourc').innerHTML;
 
 var longString="
 
@@ -172,13 +170,23 @@ scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
 scr.src='https://wasm.noahcohn.com/b3hd/";
+  
+window.open('https://test.1ink.us/r3b1/');
+window.open('https://test.1ink.us/r3b2/');
+var srcA=document.getElementById('sourcA').innerHTML;
+var srcB=document.getElementById('sourcB').innerHTML;
 
-var longString=longString+sr+".1ijs';document.body.appendChild(scr);";
+var longStringA=longString+srcA+".1ijs';document.body.appendChild(src);";
+var longStringB=longString+srcB+".1ijs';document.body.appendChild(src);";
 const serializedString = JSON.stringify(longString);
-const setupChannel=new BroadcastChannel('setup');
+const setupChannelA=new BroadcastChannel('setupA');
+const setupChannelB=new BroadcastChannel('setupB');
 setTimeout(function(){
-setupChannel.postMessage({data:serializedString});
-},3000);
+setupChannelA.postMessage({data:serializedStringA});
+},1500);
+setTimeout(function(){
+setupChannelB.postMessage({data:serializedStringB});
+},2500);
 });
 
 int main(){
