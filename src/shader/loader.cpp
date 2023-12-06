@@ -17,6 +17,11 @@ inputElement.style='background-color:black;position:absolute;display:block;left:
 document.body.appendChild(inputElement);
 var inputElement=document.createElement('input');
 inputElement.type='button';
+inputElement.id='startBtn2';
+inputElement.style='background-color:blue;position:absolute;display:block;left:12%;top:9%;z-index:3200;border:4px solid #e7e7e7;border-radius:17%;';
+document.body.appendChild(inputElement);
+var inputElement=document.createElement('input');
+inputElement.type='button';
 inputElement.id='startBtn';
 inputElement.style='background-color:gold;position:absolute;display:block;left:6%;top:9%;z-index:3200;border:4px solid #e7e7e7;border-radius:17%;';
 document.body.appendChild(inputElement);
