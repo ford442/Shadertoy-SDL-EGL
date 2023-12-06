@@ -1,4 +1,4 @@
-BIN_NAME += c0-004a.js
+BIN_NAME += c0-004b.js
 AUDIO_BIN_NAME += c0-a001.js
 LOADER_BIN_NAME += l0-001.js
 WASM_BIN_NAME += c0-w001.wasm
