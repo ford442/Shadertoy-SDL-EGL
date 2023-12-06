@@ -400,8 +400,6 @@ return EM_TRUE;
 
 song_select song;
 
-static inline boost::function<void()>jss=[](){js_main();};
-
 int main(){
 EM_ASM({
 "use strict";
