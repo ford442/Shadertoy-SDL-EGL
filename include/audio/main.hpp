@@ -87,12 +87,12 @@ var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
 
 function normalResStart(){
 document.getElementById('di').click();
-// setTimeout(function(){
+setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-// },100);
+},50);
 }
 
 function pll(){
@@ -104,19 +104,19 @@ const shutDown=new BroadcastChannel('shutDown');
   
 setTimeout(function(){
 window.open('./flac');
-},500);
+},250);
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},4000);
+},1700);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
-shutDown.postMessage({data:222});
 pll();
-},100);
+shutDown.postMessage({data:222});
+},50);
 });
 
 var $iwid=document.getElementById('iwid');
