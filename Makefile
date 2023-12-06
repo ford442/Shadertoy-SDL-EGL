@@ -60,7 +60,7 @@ b3_shader_audio:
 	 em++ $(STDS) -c src/shader/main_audio.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 emcc $(STDS) -o $(AUDIO_BIN_NAME) -O2 $(COMMON_FLAGS) -sUSE_SDL=2 \
 	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_pl","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
