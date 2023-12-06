@@ -1,68 +1,10 @@
-#pragma once
-
-#include <emscripten.h>
-#include "../../include/shader/intrins.hpp"
-
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-  
-#undef _FLT_EVAL_METHOD
-#define _FLT_EVAL_METHOD_OPTIMIZED 
-// #pragma STDC CX_LIMITED_RANGE ON
-#pragma STDC FP_CONTRACT OFF
-
-// #undef _FLT_ROUNDS
-// #define _FLT_ROUNDS 1
-
-#define register
-
-#define BOOST_UBLAS_USE_LONG_DOUBLE 1
-// #define BOOST_NO_EXCEPTIONS
-#define BOOST_CHRONO_HEADER_ONLY 1
-#define BOOST_ERROR_CODE_HEADER_ONLY 1
-#define BOOST_UBLAS_MOVE_SEMANTICS 1
-#define BOOST_UBLAS_TYPE_CHECK 0
-
 extern "C"{  
   
 EM_BOOL pl();
   
 }
 
-#include <float.h>
-#include <math.h>
-
-#ifndef UNARY_FUNC
-#define UNARY_FUNC
-#include <functional>
-
-template<class ArgumentType,class ResultType>
-
-struct unary_function{
-typedef ArgumentType argument_type;
-typedef ResultType result_type;
-};
-#endif
-
-#include <cstdint>
 #include <SDL2/SDL.h>
-#include <GL/gl.h>
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <cfloat>
-#include <climits>
-#include <iostream>
 
 #include <boost/preprocessor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
