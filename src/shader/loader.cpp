@@ -6,9 +6,11 @@ var sr=document.getElementById('sourc').innerHTML;
 
 var longString="
 
+var mnu=document.getElementsByTagName('nav')
+var unem=mnu[0];
 var selectElement=document.createElement('select');
 selectElement.id='sh1';
-document.document.querySelctor('#menu-sections').appendChild(selectElement);
+unem.appendChild(selectElement);
 var optionElement=document.createElement('option');
 optionElement.text='Random';
 optionElement.value='Random';
