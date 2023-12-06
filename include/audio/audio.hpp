@@ -16,15 +16,14 @@ EM_BOOL pl();
 #include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
 
-using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
+using igi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
-gi_tensor sound_lft=gi_tensor{1,1};
+igi_tensor sound_lft=igi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
