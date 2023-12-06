@@ -25,9 +25,6 @@ ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 igi_tensor sound_lft=igi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
-v_tensor sse=v_tensor{1,2};
-v_tensor sse2=v_tensor{1,1};
-v_tensor sse3=v_tensor{1,1};
 
 struct{
 register GLubyte * snd;
@@ -47,20 +44,20 @@ SDL_AudioSpec request;
 public:
 
 const static EM_BOOL snd_pos(GLint set){
-sse3.at(0,0)=wasm_i64x2_splat(set);
-sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+sse3.at(1,1)=wasm_i64x2_splat(set);
+sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(1,1),0);
 return EM_TRUE;
 }
 
 const static EM_BOOL snd_lft(long long set){
-sse.at(0,1)=wasm_i64x2_splat(set);
-sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
+sse.at(1,1)=wasm_i64x2_splat(set);
+sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(1,1),0);
 return EM_TRUE;
 }
 
 const static EM_BOOL snd_pos_u(unsigned long long set){
-sse2.at(0,0)=wasm_u64x2_splat(set);
-sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+sse2.at(1,1)=wasm_u64x2_splat(set);
+sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(1,1),0);
 return EM_TRUE;
 }
 
