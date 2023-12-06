@@ -372,10 +372,10 @@ using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=rv_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
-static v_tensor sse4=rv_tensor{1,1};
+static v_tensor sse4=rv_tensor{2,2};
 static shad_tensor Sh=shad_tensor{3,3};
 static shad_tensor TX=shad_tensor{3,3,3};
-static prg_tensor S1=prg_tensor{1,1,1};
+static prg_tensor S1=prg_tensor{2,2,2};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
 static f_tensor Fi=f_tensor{3,3};
@@ -515,9 +515,16 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 boost::uint_t<32>::exact vtx;
 boost::uint_t<32>::exact frag;
 boost::uint_t<64>::exact shd_prg;
-GLsizei * binLength;
-GLenum * binaryFormat;
-void * GLbin;
+boost::uint_t<64>::exact shd_prg2;
+
+// GLsizei * binLength;
+// GLenum * binaryFormat;
+// void * GLbin;
+
+GLsizei binarySize;
+GLenum binaryFormat;
+GLchar *binary;
+
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -904,9 +911,11 @@ GPU gpu;
 
 public:
 
-const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1){
+const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
+sse4.at(1,1)=wasm_i64x2_splat(m1);
+S1.at(1,1,1)=wasm_i64x2_extract_lane(sse4.at(1,1),0);
 return EM_TRUE;
 };
 
@@ -1658,13 +1667,14 @@ Sh.at(1,1)=frag;
 // eglBindAPI(EGL_OPENGL_ES_API);
 // boost::uint_t<32>::exact shd_prg=glCreateProgram();
 shd_prg=glCreateProgram();
-PRGin(shd_prg);
+shd_prg2=glCreateProgram();
+PRGin(shd_prg,shd_prg2);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
-glAttachShader(S1.at(0,0,0),Sh.at(1,1));
-glAttachShader(S1.at(0,0,0),Sh.at(0,1));
+glAttachShader(S1.at(1,1,1),Sh.at(1,1));
+glAttachShader(S1.at(1,1,1),Sh.at(0,1));
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
-glLinkProgram(S1.at(0,0,0));
+glLinkProgram(S1.at(1,1,1));
   /*
 boost::uint_t<24>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
@@ -1676,12 +1686,13 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
-glProgramParameteri(S1.at(0,0,0),PROGRAM_BINARY_RETRIEVABLE_HINT,GL_TRUE)
-glGetProgramBinary(S1.at(0,0,0),binarySize,&binLength,&binaryFormat,&GLbin);
-// glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,GL_SHADER_BINARY_SPIRV,&GLbin);
-bin.at(0,0)=GLbin;
+glGetProgramiv(S1.at(1,1,1),GL_PROGRAM_BINARY_LENGTH,&binarySize);
+binary=new GLchar[binarySize];
+
+glGetProgramBinary(S1.at(1,1,1),binarySize,&binLength,&binaryFormat,&GLbin);
+// glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
+bin.at(0,0)=binary;
 // nanoPause();
-//   glGetProgramiv(bin.at(0,0),GL_PROGRAM_BINARY_LENGTH,&binarySize);
 
 glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),binLength);
 eglBindAPI(EGL_OPENGL_ES_API);
