@@ -886,6 +886,8 @@ EGLint numBuffer;
 EGLint numMBuffers;
 EGLint colorSpace;
 EGLint colorFormat;
+ 
+GLint binarySize;
 
 Compile compile;
 
@@ -1674,9 +1676,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
-  
-GLint binarySize;
-glGetProgramiv(S1.at(0,0,0), GL_PROGRAM_BINARY_LENGTH, &binarySize);
+glGetProgramiv(S1.at(0,0,0),GL_PROGRAM_BINARY_SIZE,&binarySize);
 glGetProgramBinary(S1.at(0,0,0),binarySize,binLength,binaryFormat,&GLbin);
 // glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,GL_SHADER_BINARY_SPIRV,&GLbin);
 bin.at(0,0)=GLbin;
