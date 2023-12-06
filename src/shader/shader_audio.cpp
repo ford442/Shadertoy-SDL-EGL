@@ -1,15 +1,4 @@
-#include "../../include/audio/audio.hpp"
 
-Audio audio;
-
-extern "C" {
-
-EM_BOOL pl(){
-audio.plt();
-return EM_TRUE;
-}
-  
-}
 #include "../../include/shader/shader_webgpu.hpp"
 
 Run run;
@@ -23,6 +12,10 @@ boost::function<EM_BOOL(void)>swpp=[](void){
 run.swap();
 return EM_TRUE;
 };
+
+#include "../../include/audio/audio.hpp"
+
+Audio audio;
 
 extern "C" {
 
@@ -73,6 +66,12 @@ return EM_TRUE;
 
 EM_BOOL mr(){
 run.moveRIGHT();
+return EM_TRUE;
+}
+
+
+EM_BOOL pl(){
+audio.plt();
 return EM_TRUE;
 }
 
