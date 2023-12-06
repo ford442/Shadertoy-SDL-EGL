@@ -3,7 +3,20 @@
 EM_JS(void,js_main,(),{
 window.open('https://test.1ink.us/r3b1/');
 var sr=document.getElementById('sourc').innerHTML;
+
 var longString="
+
+var selectElement=document.createElement('select');
+selectElement.id='sh1';
+document.document.getElementById('menu').appendChild(selectElement);
+var optionElement=document.createElement('option');
+optionElement.text='Random';
+optionElement.value='Random';
+selectElement.appendChild(optionElement);
+var optionElement=document.createElement('option');
+optionElement.text='Default';
+optionElement.value='Default';
+selectElement.appendChild(optionElement);
 var divElement=document.createElement('div');
 divElement.id='shut';
 divElement.innerHTML='1';
