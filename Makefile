@@ -1,4 +1,5 @@
 BIN_NAME += c0-004.js
+AUDIO_BIN_NAME += c0-a001.js
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
@@ -25,7 +26,7 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sGL_ENABLE_GET_PROC_ADDRESS -sFULL_ES3=1 -sFULL_ES2=0 -sUSE_SDL=0 -sLEGACY_GL_EMULATION=0 -sUSE_GLFW=0 -sUSE_REGAL=0 \
+GL_FLAGS += -sGL_ENABLE_GET_PROC_ADDRESS -sFULL_ES3=1 -sFULL_ES2=0 -sLEGACY_GL_EMULATION=0 -sUSE_GLFW=0 -sUSE_REGAL=0 \
 	 -sGL_SUPPORT_AUTOMATIC_ENABLE_EXTENSIONS=1 -sGL_SUPPORT_SIMPLE_ENABLE_EXTENSIONS=1 -sGL_MAX_TEMP_BUFFER_SIZE=33177600 \
 	 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 -lGL -lEGL \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
@@ -44,15 +45,26 @@ WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigat
 	 -lmath.js -lhtml5.js -lint53.js
 
 b3_shader_webgpu:
-	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(GL_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 emcc $(STDS) -o $(BIN_NAME) -O2 $(COMMON_FLAGS) \
-	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
+	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
+
+b3_shader_audio:
+	 em++ $(STDS) -c src/shader/shader_audio.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/main_audio.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 emcc $(STDS) -o $(AUDIO_BIN_NAME) -O2 $(COMMON_FLAGS) -sUSE_SDL=2 \
+	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
+	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
+	 --post-js js/slideOut.js main_audio.o shader_audio.o
 
 all: b3_shader_webgpu
 	echo 'Built 1ink.us Shaders.'
