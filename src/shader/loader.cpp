@@ -1,7 +1,9 @@
 #include "../../include/shader/loader.hpp"
 
+EM_JS(void,js_main,(),{
 // Fetch the WebAssembly module binary
-fetch('https://example.com/myModule.wasm')
+var sr=document.getElementById('sourc').innerHTML;
+fetch(sr)
   .then(response => response.arrayBuffer())
   .then(buffer => {
     // Instantiate the WebAssembly module
@@ -16,3 +18,9 @@ fetch('https://example.com/myModule.wasm')
         console.error('Failed to instantiate WebAssembly module:', error);
       });
   });
+});
+
+int main(){
+js_main();
+return 1;
+}
