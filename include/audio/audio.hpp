@@ -37,8 +37,8 @@ EM_BOOL pl();
 #include <float.h>
 #include <math.h>
 
-#ifndef UNARY_FUNCTION_H
-#define UNARY_FUNCTION_H
+#ifndef UNARY_FUNC
+#define UNARY_FUNC
 #include <functional>
 
 template<class ArgumentType,class ResultType>
