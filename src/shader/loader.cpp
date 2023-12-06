@@ -70,7 +70,7 @@ const serializedString = JSON.stringify(longString);
 const setupChannel=new BroadcastChannel('setup');
 setTimeout(function(){
 setupChannel.postMessage({data:serializedString});
-},1000);
+},3000);
 });
 
 int main(){
