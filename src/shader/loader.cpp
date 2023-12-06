@@ -8,7 +8,7 @@ var longString="
 
 var selectElement=document.createElement('select');
 selectElement.id='sh1';
-document.document.querrySelctor('#menu').appendChild(selectElement);
+document.document.querySelctor('#menu').appendChild(selectElement);
 var optionElement=document.createElement('option');
 optionElement.text='Random';
 optionElement.value='Random';
