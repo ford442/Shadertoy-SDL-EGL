@@ -74,9 +74,6 @@ return Dr;
 
 extern "C"{
   
-v128_t Rg;
-int c=0;
-
 int r4nd(int);
 
 }
