@@ -48,7 +48,7 @@ Module.ccall('pl');
 
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutDown');
-  
+  /*
 setTimeout(function(){
 window.open('./flac');
 },250);
@@ -56,7 +56,7 @@ window.open('./flac');
 setTimeout(function(){
 shutDown.postMessage({data:222});
 },1700);
-  
+  */
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
@@ -111,37 +111,14 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1300);
+},2000);
 });
 
-const tem=document.getElementById('tim');
 const ban=document.getElementById('menuBtn');
-const sfr=document.getElementById('slideframe');
-function grab$lt(){$lt=Math.round($lt);}
-$lt=tem.innerHTML;
+
 grab$lt();
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
-ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
-setTimeout(function(){
-grab$lt();slt=$lt/1000;slt=Math.round(slt);
-sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
-step:[0.25],labels:false,tooltip:true,scale:false,});
-grab$lt();slt=($lt/1000);slt=slt*100;slt=Math.round(slt);
-slt=slt/100;tsl.setValues(slt);
-document.getElementById('menu').addEventListener('click',function(){
-$ll=tsl.getValue();$ll=$ll*100;$ll=Math.round($ll);$ll=$ll/100;$ll=($ll*1000);tem.innerHTML=$ll;
-});
-setTimeout(function(){slt=tem.innerHTML;},8);},16);});
-
-function spKey(e){
-if(e.code=='KeyQ'){
-window.open('./flac');
-setTimeout(function(){
-snd();
-},2000);
-};
-}
+ban.addEventListener('click',function(){slo.toggle();});
 
 const pnnl=document.body;
 pnnl.addEventListener('keydown',spKey);
