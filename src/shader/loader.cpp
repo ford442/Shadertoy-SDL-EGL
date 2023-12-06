@@ -136,7 +136,7 @@ divElement.id='pmhig';
 divElement.hidden=true;
 document.body.appendChild(divElement);
 var divElement=document.createElement('div');
-divElement.id='ihig';
+divElement.id='path';
 divElement.hidden=true;
 document.body.appendChild(divElement);
 var divElement=document.createElement('div');
