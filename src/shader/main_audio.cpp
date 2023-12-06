@@ -395,6 +395,11 @@ js_main();
 return EM_TRUE;
 };
 
+
+#include "../../include/audio/main.hpp"
+
+song_select song;
+
 extern"C"{
 
 int r4nd0(int tH){
@@ -404,10 +409,6 @@ return c;
 }
   
 }
-
-#include "../../include/audio/main.hpp"
-
-song_select song;
 
 static inline boost::function<void()>jss=[](){js_main();};
 
