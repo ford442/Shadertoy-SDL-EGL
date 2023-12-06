@@ -6,7 +6,7 @@ var sr=document.getElementById('sourc').innerHTML;
 
 var longString="
 
-var mnu=document.getElementsByTagName('nav')
+var mnu=document.getElementsByTagName('nav');
 var unem=mnu[0];
 var selectElement=document.createElement('select');
 selectElement.id='sh1';
