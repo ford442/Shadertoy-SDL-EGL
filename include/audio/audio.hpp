@@ -36,6 +36,9 @@ EM_BOOL pl();
 
 #include <float.h>
 #include <math.h>
+
+#ifndef UNARY_FUNCTION_H
+#define UNARY_FUNCTION_H
 #include <functional>
 
 template<class ArgumentType,class ResultType>
@@ -44,6 +47,7 @@ struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
+#endif
 
 #include <cstdint>
 #include <SDL2/SDL.h>
