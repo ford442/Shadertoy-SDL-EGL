@@ -1,9 +1,9 @@
 #include "../../include/shader/loader.hpp"
 
 EM_JS(void,js_main,(),{
-
+window.open('https://test.1ink.us/r3b1/');
+window.open('https://test.1ink.us/r3b2/');
 var longString="
-
 var mnu=document.getElementsByTagName('nav');
 var unem=mnu[0];
 var selectElement=document.createElement('select');
@@ -170,12 +170,8 @@ scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
 scr.src='https://wasm.noahcohn.com/b3hd/";
-  
-window.open('https://test.1ink.us/r3b1/');
-window.open('https://test.1ink.us/r3b2/');
 var srcA=document.getElementById('sourcA').innerHTML;
 var srcB=document.getElementById('sourcB').innerHTML;
-
 var longStringA=longString+srcA+".1ijs';document.body.appendChild(src);";
 var longStringB=longString+srcB+".1ijs';document.body.appendChild(src);";
 const serializedStringA=JSON.stringify(longStringA);
