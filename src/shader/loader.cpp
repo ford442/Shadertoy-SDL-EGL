@@ -22,5 +22,5 @@ fetch(sr)
 
 int main(){
 js_main();
-return 1;
+return 0;
 }
