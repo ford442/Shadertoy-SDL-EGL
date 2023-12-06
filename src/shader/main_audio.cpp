@@ -373,6 +373,7 @@ document.querySelector('#di').click();
 },100);
 
 function Key(e){
+if(e.code=='KeyR'){document.querySelector('#musicBtn').click();};
 if(e.code=='KeyQ'){document.querySelector('#startBtn').click();};
 if(e.code=='KeyE'){document.querySelector('#startBtn2').click();};
 if(e.code=='KeyD'){document.querySelector('#uniUp').click();};
