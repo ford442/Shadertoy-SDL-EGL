@@ -1,3 +1,5 @@
+#pragma once
+
 #include <emscripten.h>
 #include "../../include/shader/intrins.hpp"
 
