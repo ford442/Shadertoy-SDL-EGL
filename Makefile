@@ -1,7 +1,7 @@
 BIN_NAME += c0-004.js
 AUDIO_BIN_NAME += c0-a001.js
 LOADER_BIN_NAME += l0-001.js
-WASM_BIN_NAME += w0-001.js
+WASM_BIN_NAME += c0-w001.wasm
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
