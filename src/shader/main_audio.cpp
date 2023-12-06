@@ -417,5 +417,6 @@ EM_ASM({
 FS.mkdir('/snd');
 });
 jss();
+jssa();
 return 0;
 }
