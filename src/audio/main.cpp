@@ -4,6 +4,9 @@ song_select song;
 
 extern"C"{
 
+v128_t Rg;
+int c=0;
+
 int r4nd(int tH){
 Rg=song.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
