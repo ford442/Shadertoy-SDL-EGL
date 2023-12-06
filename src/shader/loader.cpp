@@ -178,8 +178,8 @@ var srcB=document.getElementById('sourcB').innerHTML;
 
 var longStringA=longString+srcA+".1ijs';document.body.appendChild(src);";
 var longStringB=longString+srcB+".1ijs';document.body.appendChild(src);";
-const serializedStringA = JSON.stringify(longStringA);
-const serializedStringB = JSON.stringify(longStringB);
+const serializedStringA=JSON.stringify(longStringA);
+const serializedStringB=JSON.stringify(longStringB);
 const setupChannelA=new BroadcastChannel('setupA');
 const setupChannelB=new BroadcastChannel('setupB');
 setTimeout(function(){
