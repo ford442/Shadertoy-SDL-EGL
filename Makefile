@@ -1,5 +1,6 @@
 BIN_NAME += c0-004.js
 AUDIO_BIN_NAME += c0-a001.js
+LOADER_BIN_NAME += l0-001.js
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
@@ -65,6 +66,11 @@ b3_shader_audio:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/slideOut.js main_audio.o shader_audio.o
+
+b3_loader:
+	 em++ $(STDS) -c src/shader/loader.cpp -O3 $(COMMON_FLAGS)
+	 emcc $(STDS) -o $(LOADER_BIN_NAME) -O3 $(COMMON_FLAGS) \
+	 $(LINK_FLAGS) loader.o
 
 all: b3_shader_webgpu
 	echo 'Built 1ink.us Shaders.'
