@@ -119,8 +119,6 @@ const ban=document.getElementById('menuBtn');
 const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();});
 
-const pnnl=document.body;
-pnnl.addEventListener('keydown',spKey);
 scanSongs();
 normalResStart();
 });
