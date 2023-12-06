@@ -278,14 +278,11 @@ dxhttp.open('GET','https://glsl.1ink.us/shaders/',true);
 dxhttp.send();
 }
 
-let tem=document.querySelector('#tim');
 let ban=document.querySelector('#menuBtn');
-let sfr=document.querySelector('#slideframe');
-var $lt;
-function grab$lt(){$lt=Math.round($lt);}
-$lt=tem.innerHTML;grab$lt();
+
 let slo=new Slideout({'panel':document.querySelector('#panel'),'menu':document.querySelector('#menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
-ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";});
+ban.addEventListener('click',function(){slo.toggle();});
+
 const pnnl=document.body;
 
 document.querySelector('#startBtn2').addEventListener('click',function(){
