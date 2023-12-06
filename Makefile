@@ -1,6 +1,7 @@
 BIN_NAME += c0-004.js
 AUDIO_BIN_NAME += c0-a001.js
 LOADER_BIN_NAME += l0-001.js
+WASM_BIN_NAME += w0-001.js
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
@@ -44,6 +45,17 @@ LINK_FLAGS += --target=wasm32 -sMALLOC=emmalloc $(LDFLAGS) -sDEFAULT_TO_CXX=1 -s
 
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
+
+b3_shader_wasm:
+	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(GL_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 emcc $(STDS) -o $(WASM_BIN_NAME) -O2 $(COMMON_FLAGS) \
+	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
+	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
+	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
 
 b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(GL_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
