@@ -1523,7 +1523,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_program_cache_control
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_create_context_client_arrays");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_CHROMIUM_create_context_bind_generates_resource");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_multi_draw");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_render_shared_exponent");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_query");
