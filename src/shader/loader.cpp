@@ -3,6 +3,7 @@
 EM_JS(void,js_main,(),{
 window.open('https://test.1ink.us/r3b1/');
 window.open('https://test.1ink.us/r3b2/');
+window.open('https://test.1ink.us/r3b3/');
 var longString="
 var mnu=document.getElementsByTagName('nav');
 var unem=mnu[0];
@@ -111,7 +112,19 @@ var inputElement=document.createElement('input');
 inputElement.type='button';
 inputElement.id='startBtn3';
 inputElement.style='background-color:yellow;position:absolute;display:block;left:3%;top:9%;z-index:3200;border:4px solid #e7e7e7;border-radius:17%;';
+var inputElement=document.createElement('input');
+inputElement.type='button';
+inputElement.id='reloadBtn';
+inputElement.style='background-color:cyan;position:absolute;display:block;left:3%;top:12%;z-index:3200;border:4px solid #e7e7e7;border-radius:17%;';
 document.body.appendChild(inputElement);
+var divElement=document.createElement('div');
+divElement.style='background-color:white;position:absolute;display:block;left:5%;top:9%;z-index:3200;border:6px solid #e7e7e7;border-radius:20%;';
+divElement.innerHTML='LOAD';
+document.body.appendChild(divElement);
+var divElement=document.createElement('div');
+divElement.style='background-color:white;position:absolute;display:block;left:5%;top:12%;z-index:3200;border:6px solid #e7e7e7;border-radius:20%;';
+divElement.innerHTML='HARD RELOAD';
+document.body.appendChild(divElement);
 var divElement=document.createElement('div');
 divElement.style='background-color:white;position:absolute;display:block;left:8%;top:9%;z-index:3200;border:6px solid #e7e7e7;border-radius:20%;';
 divElement.innerHTML='START';
@@ -148,43 +161,62 @@ divElement.hidden=true;
 document.body.appendChild(divElement);
 var divElement=document.createElement('div');
 divElement.id='slideframe';
-document.getElementById('menu').appendChild(divElement);
+document.querySelector('#menu').appendChild(divElement);
 var canvasElement=document.createElement('canvas');
 canvasElement.id='canvas';
-document.getElementById('contain1').appendChild(canvasElement);
+document.querySelector('#contain1').appendChild(canvasElement);
 var divElement=document.createElement('div');
 divElement.id='status';
 document.body.appendChild(divElement);
 var divElement=document.createElement('div');
 divElement.id='stat';
 document.body.appendChild(divElement);
-var audioElement=document.createElement('div');
+var audioElement=document.createElement('audio');
 audioElement.id='track';
 audioElement.preload='none';
 audioElement.hidden=true;
 audioElement.crossorigin=true;
 audioElement.style='pointer-events:none;';
 document.body.appendChild(audioElement);
+document.querySelector('#startBtn3').addEventListener('click',function(){
 var scr=document.createElement('script');
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
 scr.src='https://wasm.noahcohn.com/b3hd/";
-var srcA=document.getElementById('sourcA').innerHTML;
-var srcB=document.getElementById('sourcB').innerHTML;
-var longStringA=longString+srcA+".1ijs';document.body.appendChild(src);";
-var longStringB=longString+srcB+".1ijs';document.body.appendChild(src);";
+
+//  === end long string ===  //
+
+var srcA=document.querySelector('#sourc').innerHTML;
+let Rlod=false;
+var longStringA=longString+srcA+"a.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
+var longStringB=longString+srcA+"b.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
+var longStringC=longString+srcA+"c.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});document.querySelector('#reloadBtn').click();";
+var longStringD=longString+srcA+"c.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
 const serializedStringA=JSON.stringify(longStringA);
 const serializedStringB=JSON.stringify(longStringB);
+const serializedStringC=JSON.stringify(longStringC);
+const serializedStringD=JSON.stringify(longStringD);
 const setupChannelA=new BroadcastChannel('setupA');
 const setupChannelB=new BroadcastChannel('setupB');
+const setupChannelC=new BroadcastChannel('setupC');
 setTimeout(function(){
 setupChannelA.postMessage({data:serializedStringA});
-},1500);
-setTimeout(function(){
 setupChannelB.postMessage({data:serializedStringB});
-},2500);
+setupChannelC.postMessage({data:serializedStringC});
+},2000);
+setupChannelA.onmessage=function(event){
+setupChannelA.postMessage({data:serializedStringA});
+};
+setupChannelB.onmessage=function(event){
+setupChannelB.postMessage({data:serializedStringB});
+};
+setupChannelC.onmessage=function(event){
+if(Rlod==true){
+setupChannelC.postMessage({data:serializedStringD});
+}else{Rlod=true;setupChannelC.postMessage({data:serializedStringC});
+}};
 });
 
 int main(){
