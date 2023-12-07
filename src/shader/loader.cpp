@@ -2,8 +2,7 @@
 
 EM_JS(void,js_main,(),{
 
-var longString=`
-var mnu=document.getElementsByTagName('nav');
+var longString=`var mnu=document.getElementsByTagName('nav');
 var unem=mnu[0];
 var selectElement=document.createElement('select');
 selectElement.id='sh1';
@@ -182,8 +181,7 @@ var scr=document.createElement('script');
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
-scr.defer=true;
-`;
+scr.defer=true;`;
   
 //  === end long string ===  //
   
