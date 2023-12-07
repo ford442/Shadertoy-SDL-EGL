@@ -1,9 +1,8 @@
 #include "../../include/shader/loader.hpp"
 
 EM_JS(void,js_main,(),{
-window.open('https://test.1ink.us/r3b1/');
-window.open('https://test.1ink.us/r3b2/');
-window.open('https://test.1ink.us/r3b3/');
+document.querySelector('#di').click();
+
 var longString="
 var mnu=document.getElementsByTagName('nav');
 var unem=mnu[0];
@@ -187,9 +186,11 @@ scr.defer=true;
 scr.src='https://wasm.noahcohn.com/b3hd/";
 
 //  === end long string ===  //
-
+  
+const setupChannel=new BroadcastChannel('setup');
 var srcA=document.querySelector('#sourc').innerHTML;
 let Rlod=false;
+let testNum=0;
 var longStringA=longString+srcA+"a.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
 var longStringB=longString+srcA+"b.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
 var longStringC=longString+srcA+"c.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});document.querySelector('#reloadBtn').click();";
@@ -198,25 +199,35 @@ const serializedStringA=JSON.stringify(longStringA);
 const serializedStringB=JSON.stringify(longStringB);
 const serializedStringC=JSON.stringify(longStringC);
 const serializedStringD=JSON.stringify(longStringD);
-const setupChannelA=new BroadcastChannel('setupA');
-const setupChannelB=new BroadcastChannel('setupB');
-const setupChannelC=new BroadcastChannel('setupC');
-setTimeout(function(){
-setupChannelA.postMessage({data:serializedStringA});
-setupChannelB.postMessage({data:serializedStringB});
-setupChannelC.postMessage({data:serializedStringC});
-},2000);
-setupChannelA.onmessage=function(event){
-setupChannelA.postMessage({data:serializedStringA});
+
+document.querySelector('#startBtn').addEventListener(function(){
+testNum++;
+if(testNum==1){
+window.open('https://test.1ink.us/r3b1/');
+document.querySelector('#shut').innerHTML='2';
+document.querySelector('#di').click();
+setupChannel.onmessage=function(event){
+setupChannel.postMessage({data:serializedStringA});
+document.querySelector('#startBtn').click();
 };
-setupChannelB.onmessage=function(event){
-setupChannelB.postMessage({data:serializedStringB});
+}else if(testNum==2){
+window.open('https://test.1ink.us/r3b1/');
+setupChannel.onmessage=function(event){
+setupChannel.postMessage({data:serializedStringB});
+document.querySelector('#startBtn').click();
 };
-setupChannelC.onmessage=function(event){
-if(Rlod==true){
-setupChannelC.postMessage({data:serializedStringD});
-}else{Rlod=true;setupChannelC.postMessage({data:serializedStringC});
-}};
+}else if(testNum==3){
+window.open('https://test.1ink.us/r3b1/');
+setupChannel.onmessage=function(event){
+setupChannel.postMessage({data:serializedStringC});
+document.querySelector('#startBtn').click();
+};
+}else if(testNum==4){
+setupChannel.onmessage=function(event){
+setupChannel.postMessage({data:serializedStringD});
+};
+}
+};
 });
 
 int main(){
