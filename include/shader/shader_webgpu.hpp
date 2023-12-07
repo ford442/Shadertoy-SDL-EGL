@@ -551,9 +551,14 @@ raN=rNd4(3);
   /*
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
+// GL_MIRROR_CLAMP_TO_EDGE
+// GL_TEXTURE_WRAP_S does not respond to MIRRORED or REPEAT
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+// GL_TEXTURE_WRAP_T does not respond to REPEAT
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_MIRRORED_REPEAT);
+//
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE); // silver ball
+
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
