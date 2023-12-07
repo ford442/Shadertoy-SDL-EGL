@@ -67,10 +67,15 @@ b3_shader:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
-b3_shader_webgpu: b3_shader += -o $(BIN_NAME).js
-b3_shader_webgpu_a: b3_shader += -o $(BIN_NAME)a.js
-b3_shader_webgpu_b: b3_shader += -o $(BIN_NAME)b.js
-b3_shader_webgpu_c: b3_shader += -o $(BIN_NAME)c.js
+
+b3_shader_webgpu:
+	 b3_shader += -o $(BIN_NAME).js
+b3_shader_webgpu_a:
+	 b3_shader += -o $(BIN_NAME)a.js
+b3_shader_webgpu_b:
+	 b3_shader += -o $(BIN_NAME)b.js
+b3_shader_webgpu_c:
+	 b3_shader += -o $(BIN_NAME)c.js
 
 b3_shader_au:
 	 em++ $(STDS) -c src/shader/shader_audio.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
