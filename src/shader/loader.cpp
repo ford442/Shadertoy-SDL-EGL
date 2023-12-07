@@ -7,18 +7,25 @@ let longString="var mnu=document.getElementsByTagName('nav'); var unem=mnu[0]; v
 //  === end long string ===  //
   
 const setupChannel=new BroadcastChannel('setup');
+const setupChannelA=new BroadcastChannel('setupA');
+const setupChannelB=new BroadcastChannel('setupB');
+const setupChannelC=new BroadcastChannel('setupC');
 var srcA=document.querySelector('#sourc').innerHTML;
 let Rlod=false;
 let testNum=0;
-var longStringA=longString+srcA+"a.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
-var longStringB=longString+srcA+"b.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
-var longStringC=longString+srcA+"c.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});document.querySelector('#reloadBtn').click();";
-var longStringD=longString+srcA+"c.1ijs';document.body.appendChild(src);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
+var msgA="const setupchannelA=new BroadcastChannel('setupA');setupchannelA.addEventListener('message',ea=>{const deserializedString=JSON.parse(ea.data.data);eval(deserializedString);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
+var msgB="const setupchannelB=new BroadcastChannel('setupB');setupchannelB.addEventListener('message',ea=>{const deserializedString=JSON.parse(ea.data.data);eval(deserializedString);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
+var msgC="const setupchannelC=new BroadcastChannel('setupC');setupchannelC.addEventListener('message',ea=>{const deserializedString=JSON.parse(ea.data.data);eval(deserializedString);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
+var msgPart="setupChannel.onmessage=function(){};";
+var longStringA=longString+srcA+"a.1ijs';document.body.appendChild(src);});"+msgA+msgPart;
+var longStringB=longString+srcA+"b.1ijs';document.body.appendChild(src);});"+msgB+msgPart;
+var longStringC=longString+srcA+"c.1ijs';document.body.appendChild(src);});"+msgC+msgPart;
 const serializedStringA=JSON.stringify(longStringA);
 const serializedStringB=JSON.stringify(longStringB);
 const serializedStringC=JSON.stringify(longStringC);
-const serializedStringD=JSON.stringify(longStringD);
-
+setupChannelA.onmessage(function(){});
+setupChannelB.onmessage(function(){});
+setupChannelC.onmessage(function(){});
 document.querySelector('#startBtn').addEventListener('click',function(){
 testNum++;
 if(testNum==1){
@@ -39,13 +46,13 @@ document.querySelector('#startBtn').click();
 window.open('https://test.1ink.us/r3b1/');
 setupChannel.onmessage=function(event){
 setupChannel.postMessage({data:serializedStringC});
-document.querySelector('#startBtn').click();
 };
 }else if(testNum==4){
 setupChannel.onmessage=function(event){
 setupChannel.postMessage({data:serializedStringD});
 };
 }
+document.querySelector('#startBtn').click();
 });
 });
 
