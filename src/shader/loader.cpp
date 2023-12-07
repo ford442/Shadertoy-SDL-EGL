@@ -23,9 +23,7 @@ var longStringC=longString+srcA+"c.1ijs';document.body.appendChild(src);});"+msg
 const serializedStringA=JSON.stringify(longStringA);
 const serializedStringB=JSON.stringify(longStringB);
 const serializedStringC=JSON.stringify(longStringC);
-setupChannelA.onmessage(function(){});
-setupChannelB.onmessage(function(){});
-setupChannelC.onmessage(function(){});
+
 document.querySelector('#startBtn').addEventListener('click',function(){
 testNum++;
 if(testNum==1){
