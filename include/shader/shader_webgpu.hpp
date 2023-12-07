@@ -1199,7 +1199,7 @@ mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
 // glUniform3f(smp_chn_res[2],float_size.at(0,0),float_size.at(0,0),1.0f);
 // glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),1.0f);
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-// glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
+glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1968,10 +1968,10 @@ mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-// glEnable(GL_SCISSOR_TEST);
-glDisable(GL_SCISSOR_TEST);
+glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
+glEnable(GL_SCISSOR_TEST);
+// glDisable(GL_SCISSOR_TEST);
 glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,8.0f);
-// glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
