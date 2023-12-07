@@ -19,7 +19,7 @@ const serializedStringB=JSON.stringify(longStringB);
 const serializedStringC=JSON.stringify(longStringC);
 const serializedStringD=JSON.stringify(longStringD);
 
-document.querySelector('#startBtn').addEventListener('click'function(){
+document.querySelector('#startBtn').addEventListener('click',function(){
 testNum++;
 if(testNum==1){
 window.open('https://test.1ink.us/r3b1/');
