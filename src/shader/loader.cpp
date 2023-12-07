@@ -1,9 +1,8 @@
 #include "../../include/shader/loader.hpp"
 
 EM_JS(void,js_main,(),{
-document.querySelector('#di').click();
 
-var longString="
+let longString={"
 var mnu=document.getElementsByTagName('nav');
 var unem=mnu[0];
 var selectElement=document.createElement('select');
@@ -183,7 +182,7 @@ scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src='https://wasm.noahcohn.com/b3hd/";
+scr.src='https://wasm.noahcohn.com/b3hd/"};
 
 //  === end long string ===  //
   
