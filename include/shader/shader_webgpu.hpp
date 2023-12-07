@@ -84,9 +84,9 @@ typedef ResultType result_type;
 #include <cstdio>
 #include <memory>
 
-#include "../../glslang/glslang/Public/ShaderLang.h"
-#include "../../glslang/glslang/CInterface/glslang_c_interface.cpp"
-#include "../../glslang/SPIRV/GlslangToSpv.h"
+#include "../../../glslang/glslang/Public/ShaderLang.h"
+#include "../../../glslang/glslang/CInterface/glslang_c_interface.cpp"
+#include "../../../glslang/SPIRV/GlslangToSpv.h"
 
 // using namespace ::glslang;
 
