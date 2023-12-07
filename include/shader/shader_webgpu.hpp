@@ -1402,14 +1402,14 @@ glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 // glEnable(BLEND_ADVANCED_COHERENT_NV);
 glDisable(GL_DITHER);
-// glDepthFunc(GL_LEQUAL); // Bard says
+glDepthFunc(GL_LEQUAL); // Bard says
 // glDepthFunc(GL_GEQUAL);
-glDepthFunc(GL_LESS);
+// glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 // glDepthMask(GL_TRUE);
 // glClearDepthf(Fi.at(0,0));
-// glEnable(GL_DEPTH_TEST);
-glDisable(GL_DEPTH_TEST);
+glEnable(GL_DEPTH_TEST);
+// glDisable(GL_DEPTH_TEST);
 // glDepthFunc(GL_ALWAYS);
  // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
@@ -1420,8 +1420,8 @@ glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ZERO);
 glStencilFunc(GL_ALWAYS,0,0xFF);
 glStencilOp(GL_KEEP,GL_KEEP,GL_KEEP);
 glStencilMask(0x00);
-// glEnable(GL_STENCIL_TEST);
-glDisable(GL_STENCIL_TEST);
+glEnable(GL_STENCIL_TEST);
+// glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
@@ -1472,6 +1472,7 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counter_ops")
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_depth_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float"); // non-ES
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float"); // non-ES
@@ -1789,9 +1790,11 @@ glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(1,0),int_size.at(1,0));
 glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT32F,int_size.at(1,3),int_size.at(1,3));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
-// glDepthRange(0.0f,1.0f);
-glClearDepthf(Fi.at(0,0));
-/// glClearDepthf(1.0f);
+
+  // glDepthRange(0.0f,1.0f);
+// glClearDepthf(Fi.at(0,0));
+glClearDepth(Di.at(0,0));
+  
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 /// glStencilMask(1);
