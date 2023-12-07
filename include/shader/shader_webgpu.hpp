@@ -560,7 +560,7 @@ glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE); // silver ball may depend on R GL_CLAMP_TO_EDGE
  // GL_TEXTURE_MIN_FILTER,GL_LINEAR broken gl textures without
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-// GL_TEXTURE_MAG_FILTER , GL_NEAREST fails
+//
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
