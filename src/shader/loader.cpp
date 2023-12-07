@@ -46,12 +46,7 @@ window.open('https://test.1ink.us/r3b1/');
 setupChannel.onmessage=function(event){
 setupChannel.postMessage({data:serializedStringC});
 };
-}else if(testNum==4){
-setupChannel.onmessage=function(event){
-setupChannel.postMessage({data:serializedStringD});
-};
 }
-document.querySelector('#startBtn').click();
 });
 });
 
