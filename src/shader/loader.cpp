@@ -227,7 +227,7 @@ setupChannel.onmessage=function(event){
 setupChannel.postMessage({data:serializedStringD});
 };
 }
-};
+});
 });
 
 int main(){
