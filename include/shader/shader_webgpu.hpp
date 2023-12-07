@@ -899,7 +899,7 @@ EGLint numBuffer;
 EGLint numMBuffers;
 EGLint colorSpace;
 EGLint colorFormat;
- 
+GLfloat numAniso;
 GLint binarySize;
 
 Compile compile;
@@ -1967,11 +1967,12 @@ mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
-glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
+glViewport(0,0,int_size.at(2,0),int_size.at(2,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
+glScissor(0,0,int_size.at(2,0),int_size.at(2,0));
 // glDisable(GL_SCISSOR_TEST);
-glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,8.0f);
+glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&numAniso);
+glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,numAniso);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -1990,10 +1991,10 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
 // eglBindAPI(EGL_OPENGL_API);
-emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
-emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_mv);
+emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
 // glBindVertexArray(0);
   //  glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
