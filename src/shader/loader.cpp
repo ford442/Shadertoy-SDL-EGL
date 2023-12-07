@@ -17,7 +17,7 @@ let testNum=0;
 var msgA="const setupChannelA=new BroadcastChannel('setupA');setupChannelA.addEventListener('message',ea=>{const deserializedString=JSON.parse(ea.data.data);eval(deserializedString);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
 var msgB="const setupChannelB=new BroadcastChannel('setupB');setupChannelB.addEventListener('message',ea=>{const deserializedString=JSON.parse(ea.data.data);eval(deserializedString);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
 var msgC="const setupChannelC=new BroadcastChannel('setupC');setupChannelC.addEventListener('message',ea=>{const deserializedString=JSON.parse(ea.data.data);eval(deserializedString);});document.querySelector('#reloadBtn').addEventListener('click',function(){window.location.reload(true);});";
-var msgPart="const setupChannel=new BroadcastChannel('setup');setupChannel.onmessage=function(){};";
+var msgPart="document.querySelector('#setup').remove();";
 var longStringA=longString+"scr.src='https://wasm.noahcohn.com/b3hd/"+srcA+"a.1ijs';document.body.appendChild(src);});"+msgA+msgPart;
 var longStringB=longString+"scr.src='https://wasm.noahcohn.com/b3hd/"+srcA+"b.1ijs';document.body.appendChild(src);});"+msgB+msgPart;
 var longStringC=longString+"scr.src='https://wasm.noahcohn.com/b3hd/"+srcA+"c.1ijs';document.body.appendChild(src);});"+msgC+msgPart;
