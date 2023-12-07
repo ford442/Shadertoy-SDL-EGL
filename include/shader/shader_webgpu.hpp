@@ -554,7 +554,7 @@ glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE); // silver ball
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
@@ -581,7 +581,7 @@ glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
@@ -1135,7 +1135,7 @@ glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
@@ -1804,6 +1804,10 @@ glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,ftexture[0]);
 /*
+// Bard // Consider trying other minification filters like GL_LINEAR or GL_NEAREST_MIPMAP_NEAREST if available.
+// Khrono // The initial value of GL_TEXTURE_MAG_FILTER is GL_LINEAR.
+          // The initial value of GL_TEXTURE_MIN_FILTER is GL_NEAREST_MIPMAP_LINEAR.
+                              //  GL_TEXTURE_MIN_FILTER,   GL_NEAREST breaks textures
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
@@ -1815,7 +1819,6 @@ glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(0,0),int_size.at(0,0),0,GL_RGBA
 glGenerateMipmap(GL_TEXTURE_2D);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,ftexture[0],0);  
-
  // glClearStencil(1);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
@@ -1880,26 +1883,22 @@ GLsizei height1=int_size.at(2,0);
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
 // glBindTextureUnit(GLuint(0),wtexture[0]);
-
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,wtexture[1]);
 // glBindTextureUnit(GLuint(1),wtexture[1]);
-
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[1],1);
