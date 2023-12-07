@@ -1,4 +1,4 @@
-BIN_NAME += c0-004
+# BIN_NAME += c0-004
 AUDIO_BIN_NAME += c0-a001
 LOADER_BIN_NAME += l0-001.js
 WASM_BIN_NAME += c0-w001.wasm
@@ -57,25 +57,16 @@ b3_shader_wasm:
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
 
-b3_SHADER +=
+b3_shader_webgpu:
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 emcc $(STDS) -O2 $(COMMON_FLAGS) \
+	 emcc $(STDS) -o $(BIN_NAME).js -O2 $(COMMON_FLAGS) \
 	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
-
-b3_shader_webgpu:
-	 $(b3_SHADER) += -o $(BIN_NAME).js
-b3_shader_webgpu_a:
-	 $(b3_SHADER) += -o $(BIN_NAME)a.js
-b3_shader_webgpu_b:
-	 $(b3_SHADER) += -o $(BIN_NAME)b.js
-b3_shader_webgpu_c:
-	 $(b3_SHADER) += -o $(BIN_NAME)c.js
 
 b3_shader_au:
 	 em++ $(STDS) -c src/shader/shader_audio.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
