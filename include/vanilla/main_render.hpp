@@ -100,5 +100,6 @@ using wbbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using wbd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using wao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
 using wdd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
-
+using u64_tensor=boost::numeric::ublas::tensor<uint64_t>;
+ 
 
