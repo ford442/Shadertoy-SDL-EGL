@@ -116,13 +116,13 @@ const char *vertexShader3=
 "return main_out(gl_Position);\n"
 "}\n";
 
-const char *fragmentShader =
+const char *fragmentShader2 =
 "@fragment\n"
 "fn main() -> @location(0) vec4<f32> {\n"
 "return vec4<f32>(1.0, 0.0, 0.73, 1.0);\n"
 "}\n";
   
-const char *fragmentShader2 =
+const char *fragmentShader =
 "@group(0)@binding(0)var<uniform>iTime:u32;"
 "var<private> fragColor_1 : vec4<f32>;\n"
 "var<private> gl_FragCoord : vec4<f32>;\n"
@@ -313,9 +313,9 @@ multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShader2;
+shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
-shaderModuleDescF.code=fragmentShader2;
+shaderModuleDescF.code=fragmentShader;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
