@@ -359,8 +359,8 @@ u64_uni.at(3,3)=0;
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
-u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t1);
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
 }
