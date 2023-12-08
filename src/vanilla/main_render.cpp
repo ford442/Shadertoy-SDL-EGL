@@ -99,6 +99,8 @@ return 1;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+    EM_ASM({console.log('WGpuDevice.');});
+
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
@@ -340,11 +342,13 @@ bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
+EM_ASM({console.log('emscripten_set_main_loop.');});
 emscripten_request_animation_frame_loop(raf,0);
 // emscripten_set_main_loop((void(*)())raf,0,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
+EM_ASM({console.log('WGpuAdapter.');});
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
