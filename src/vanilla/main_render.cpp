@@ -145,7 +145,7 @@ const char *fragmentShader =
 "}\n";
   
 const char *fragmentShader2 =
-"@group(0)@binding(0)var<read>iTime:u32;"
+"@group(0)@binding(0)var<storage,read>iTime:u32;"
 "var<private> fragColor_1 : vec4<f32>;\n"
 "var<private> gl_FragCoord : vec4<f32>;\n"
 "fn bas_vf3_(x : ptr<function, vec3<f32>>) -> vec3<f32> {\n"
