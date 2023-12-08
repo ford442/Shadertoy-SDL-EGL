@@ -309,7 +309,6 @@ uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 wb.at(0,0)=uniBuffer;
 bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
-bufferBindingLayout1.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bufferBindingLayout1.size=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
 bindgroup_layout_entry={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
