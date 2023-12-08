@@ -81,7 +81,8 @@ passDesc.colorAttachments=&wrpca.at(0,0);
 wrpd.at(0,0)=passDesc;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
-wgpu_encoder_set_bind_group(wce.at(0,0),0,wbg.at(0,0),0,0);
+wgpu_encoder_set_bind_group(wce.at(0,0),1,wbg.at(0,0),_WGPU_DEFAULT_VALUE(0),_WGPU_DEFAULT_VALUE(0));
+
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime,sizeof(uint64_t));
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
