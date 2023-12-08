@@ -22,7 +22,7 @@ WGpuDeviceDescriptor deviceDesc={};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
-WGpuBufferBindingLayout bufferBindingLayout1={1};
+WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 double szh,szw;
 
 struct WGpuUniform{
@@ -50,6 +50,7 @@ static wbgl_tensor wbgl=wbgl_tensor{2,2};
 static wbg_tensor wbg=wbg_tensor{2,2};
 static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
+static wbbl_tensor wbbl=wbbl_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -306,11 +307,16 @@ fragState.numTargets=1;
 fragState.targets=&colorTarget;
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 wb.at(0,0)=uniBuffer;
+bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
+bufferBindingLayout1.hasDynamicOffset=0,
+bufferBindingLayout1.visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bufferBindingLayout1.size=sizeof(uint64_t);
+wbbl.at(0,0)=bufferBindingLayout1;
 bindgroup_layout_entry={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entry.binding=0;
 bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-bindgroup_layout_entry.layout.buffer=bufferBindingLayout1;
+bindgroup_layout_entry.layout.buffer=wbbl.at(0,0);
 wbgle.at(0,0)=bindgroup_layout_entry;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
 wbgl.at(0,0)=bindgroup_layout;
