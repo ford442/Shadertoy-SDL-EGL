@@ -63,8 +63,7 @@ milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
 return ms.count();
 }
 
-// EM_BOOL raf(double time,void *userData){
-int raf(){
+int raf(double time,void *userData){
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 u64_uni.at(0,0)=get_current_time_in_milliseconds();
