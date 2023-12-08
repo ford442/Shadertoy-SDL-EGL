@@ -1,4 +1,4 @@
-WGL_BIN_NAME += w0-001.js
+WGL_BIN_NAME += w0-001
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl,-S
 
@@ -82,7 +82,49 @@ b3_vanilla_webgpu2:
 b3_vanilla_render:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o w3002.js \
+	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME).js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=0 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 main_render.o 
+
+b3_vanilla_render_a:
+	 em++ src/vanilla/main_render.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)a.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=0 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 main_render.o 
+
+b3_vanilla_render_b:
+	 em++ src/vanilla/main_render.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)b.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=0 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 main_render.o 
+
+b3_vanilla_render_c:
+	 em++ src/vanilla/main_render.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)c.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=0 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
@@ -116,7 +158,7 @@ b3_glsl_render:
 	 -I /content/RAMDRIVE2/b3/include/vanilla/ -O0 -I /content/RAMDRIVE2/b3/tint/ \
 	 -I /content/RAMDRIVE2/b3/SPIRV-Tools/include/ -I /content/RAMDRIVE2/b3/SPIRV-Cross/ \
 	 -I /content/RAMDRIVE2/b3/SPIRV-Headers/include/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc $(LDFLAGS) -O0 -std=c++17 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME) \
+	 emcc $(LDFLAGS) -O0 -std=c++17 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME).js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lspirv-cross -lmath.js -lhtml5.js -lint53.js \
@@ -133,7 +175,7 @@ b3_glsl_render2:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(COMMON_FLAGS) $(BOOST_FLAGS) $(SIMD_FLAGS) 
 	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(COMMON_FLAGS)  $(BOOST_FLAGS) $(SIMD_FLAGS) 
-	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js $(COMMON_FLAGS) $(LINK_FLAGS) -o $(WGL_BIN_NAME) \
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js $(COMMON_FLAGS) $(LINK_FLAGS) -o $(WGL_BIN_NAME).js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
