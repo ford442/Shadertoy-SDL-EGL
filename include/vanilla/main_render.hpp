@@ -1,7 +1,7 @@
 #include <boost/cstdfloat.hpp>  // must be first include
 #include "../../include/vanilla/avx.hpp"
 #include "../../include/vanilla/defs.hpp"
-#include "../../include/vanilla/gl.hpp"
+// #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 
