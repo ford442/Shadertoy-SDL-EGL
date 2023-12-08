@@ -62,9 +62,10 @@ milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
 return ms.count();
 }
 
-EM_BOOL raf(double time,void *userData){
+// EM_BOOL raf(double time,void *userData){
+EM_BOOL raf(){
 tme=get_current_time_in_milliseconds();
-wTime={tme+1};
+wTime.iTime={tme+1};
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -86,7 +87,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 // fixed
 // set bind ground needs WGPU Render Pass Encoder - not CommandEncoder
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime,sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime.iTime,sizeof(uint64_t));
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
 // wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,777,777,0.0,1.0);
