@@ -89,6 +89,13 @@ const char *vertexShader =
 "}\n";
 
 const char *vertexShader2=
+"@vertex\n"
+"fn main(@location(0) position : vec4<f32>) -> @builtin(position) vec4<f32> {\n"
+"gl_Position = position;\n"
+"return gl_Position;\n"
+"}\n";
+  
+const char *vertexShader3=
 "var<private> iPosition : vec4<f32>;\n"
 "var<private> gl_Position : vec4<f32>;\n"
 "fn main_1() {\n"
