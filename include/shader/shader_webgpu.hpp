@@ -1094,7 +1094,7 @@ mms.at(1,0)=float((float)int_size.at(0,1)-((yyy-int_size.at(0,1))/2));
 clk_l=false;
 }
 mms.at(2,0)=float(mms2.at(0,0));
-mms.at(2,1)=float((float)int_size.at(0,1)*mms2.at(0,1));
+mms.at(2,1)=float(mms2.at(0,1));
 glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 }
 else{
