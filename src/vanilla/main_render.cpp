@@ -225,6 +225,7 @@ static wbd_tensor wbd=wbd_tensor{2,2};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
 static u64_tensor u64_uni=u64_tensor{2,2};
+static tp_tensor tp=tp_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -238,7 +239,6 @@ int raf(double time,void *userData){
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-u64_uni.at(0,0)+=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -267,6 +267,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
+u64_uni.at(0,0)=duration_cast<milliseconds>(tp.at(0,0).time_since_epoch());
 return 0;
 }
 
@@ -344,6 +345,9 @@ wbge.at(0,0)=bindgroup_entry;
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
+system_clock::time_point now=system_clock::now();
+tp.at(0,0)=now;
+u64_uni.at(0,0)=0;
 // emscripten_set_main_loop((void(*)())raf,0,0);
 emscripten_request_animation_frame_loop(raf,0);
 }
