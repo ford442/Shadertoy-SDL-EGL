@@ -227,8 +227,6 @@ static wdd_tensor wdd=wdd_tensor{2,2};
 static u64_tensor u64_uni=u64_tensor{2,2};
 static tp_tensor tp=tp_tensor{2,2};
 
-using namespace boost::chrono;
-
 uint64_t get_current_time_in_milliseconds(){
 system_clock::time_point now=system_clock::now();
 milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
