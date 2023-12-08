@@ -1078,8 +1078,8 @@ u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUniform1f(uni_fps,u_time.time_spanb.count()/1.0f);
 if(ms_l==true){
-mms.at(0,1)=round(mms2.at(0,0)/(float)int_size.at(0,1));
-mms.at(1,0)=round((mms2.at(0,1))/(float)int_size.at(0,1));
+mms.at(0,1)=round(mms2.at(0,0)*(float)int_size.at(0,1));
+mms.at(1,0)=round((mms2.at(0,1))*(float)int_size.at(0,1));
 }
 // retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
