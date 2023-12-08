@@ -40,8 +40,12 @@ static wd_tensor wd=wd_tensor{2,2};
 static wq_tensor wq=wq_tensor{2,2};
 static wa_tensor wa=wa_tensor{2,2};
 static wcc_tensor wcc=wcc_tensor{2,2};
+static wccf_tensor wccf=wccf_tensor{2,2};
 static wrp_tensor wrp=wrp_tensor{2,2};
 static wb_tensor wb=wb_tensor{2,2};
+static wbgle_tensor wbgle=wbgle_tensor{2,2};
+static wbge_tensor wbge=wbge_tensor{2,2};
+static wbgl_tensor wbgl=wbgl_tensor{2,2};
 static wbg_tensor wbg=wbg_tensor{2,2};
 static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
@@ -79,7 +83,8 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
-wgpu_canvas_context_configure(wcc.at(0,0),&config);
+wccf.at(0,0)=config;
+wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 
 const char *vertexShader =
 "@vertex\n"
