@@ -73,10 +73,10 @@ const char *vertexShader =
 // "vec2<f32>(0.5, -0.5)\n"
 // ");\n"
 "var pos = array<vec2<f32>, 4>("
+"vec2<f32>(-1.0, 1.0),"
 "vec2<f32>(-1.0, -1.0),"
 "vec2<f32>(1.0, -1.0),"
-"vec2<f32>(1.0, 1.0),"
-"vec2<f32>(-1.0, -1.0)"
+"vec2<f32>(1.0, 1.0)"
 ");"
 "return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
 "}\n";
