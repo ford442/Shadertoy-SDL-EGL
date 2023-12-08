@@ -344,7 +344,8 @@ wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
-emscripten_request_animation_frame_loop(raf,0);
+emscripten_set_main_loop((void(*)())raf,0,0);
+// emscripten_request_animation_frame_loop(raf,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
