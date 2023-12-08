@@ -1397,7 +1397,6 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-  glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
   
 glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
  //    glDepthFunc(GL_GREATER);
@@ -1717,7 +1716,9 @@ glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glPixelStorei(GL_UNPACK_ALIGNMENT,4);
+  
+  glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+  
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
   //  non multisampled color renderbuffer
