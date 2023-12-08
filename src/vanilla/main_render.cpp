@@ -53,7 +53,7 @@ static wbbl_tensor wbbl=wbbl_tensor{2,2};
 static wbd_tensor wbd=wbd_tensor{2,2};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
-static f_uni_tensor f_uni=f_uni_tensor{2,2};
+static u64_tensor u64_uni=u64_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -67,7 +67,7 @@ return ms.count();
 EM_BOOL raf(){
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-f_uni(0,0)=get_current_time_in_milliseconds();
+u64_uni(0,0)=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -89,7 +89,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 // fixed
 // set bind ground needs WGPU Render Pass Encoder - not CommandEncoder
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f_uni(0,0),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
 // wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,777,777,0.0,1.0);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
