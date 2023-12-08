@@ -62,7 +62,7 @@ return ms.count();
 
 int raf(double time,void *userData){
 tme=get_current_time_in_milliseconds();
-wTime={tme+0.1};
+wTime={tme+1};
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
