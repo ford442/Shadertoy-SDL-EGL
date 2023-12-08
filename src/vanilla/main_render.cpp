@@ -61,7 +61,6 @@ return ms.count();
 }
 
 int raf(double time,void *userData){
-  EM_ASM({console.log('frame.');});
 tme=get_current_time_in_milliseconds();
 wTime={tme+1};
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1);
@@ -82,10 +81,10 @@ passDesc.colorAttachments=&wrpca.at(0,0);
 wrpd.at(0,0)=passDesc;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime,sizeof(uint64_t));
 // fixed
 // set bind ground needs WGPU Render Pass Encoder - not CommandEncoder
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime,sizeof(uint64_t));
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
@@ -99,8 +98,6 @@ return 1;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
-    EM_ASM({console.log('WGpuDevice.');});
-
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
@@ -342,13 +339,10 @@ bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
-EM_ASM({console.log('emscripten_set_main_loop.');});
 emscripten_request_animation_frame_loop(raf,0);
-// emscripten_set_main_loop((void(*)())raf,0,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-EM_ASM({console.log('WGpuAdapter.');});
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
