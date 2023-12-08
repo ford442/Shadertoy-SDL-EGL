@@ -284,6 +284,7 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
+config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
