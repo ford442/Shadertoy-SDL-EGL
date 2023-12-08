@@ -19,7 +19,6 @@ WGpuBindGroupEntry bindgroup_entry={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuDeviceDescriptor deviceDesc={};
-WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
@@ -52,6 +51,8 @@ static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
 static wbbl_tensor wbbl=wbbl_tensor{2,2};
 static wbd_tensor wbd=wbd_tensor{2,2};
+static wao_tensor wao=wao_tensor{2,2};
+static wdd_tensor wdd=wdd_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -349,13 +350,17 @@ emscripten_request_animation_frame_loop(raf,0);
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
-wgpu_adapter_request_device_async(wa.at(0,0),&deviceDesc,ObtainedWebGpuDeviceStart,0);
+wdd.at(0,0)=deviceDesc;
+wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
 void WGPU_Start(){
+WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
-navigator_gpu_request_adapter_async(&options,ObtainedWebGpuAdapterStart,0);
+options.forceFallbackAdapter=EM_FALSE;
+wao.at(0,0)=options;
+navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
 EM_JS(void,js_main,(),{
