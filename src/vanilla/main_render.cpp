@@ -233,8 +233,8 @@ milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
 return ms.count();
 }
 
-// int raf(double time,void *userData){
-void raf(){
+int raf(double time,void *userData){
+// void raf(){
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
@@ -267,8 +267,7 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 u64_uni.at(0,0)=duration_cast<milliseconds>(tp.at(0,0).time_since_epoch()).count();
-return;
-// return 0;
+return 0;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
@@ -348,8 +347,8 @@ sze.at(0,1)=float(szw);
 system_clock::time_point now=system_clock::now();
 tp.at(0,0)=now;
 u64_uni.at(0,0)=0;
-emscripten_set_main_loop((void(*)())raf,0,0);
-// emscripten_request_animation_frame_loop(raf,0);
+// emscripten_set_main_loop((void(*)())raf,0,0);
+emscripten_request_animation_frame_loop(raf,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
