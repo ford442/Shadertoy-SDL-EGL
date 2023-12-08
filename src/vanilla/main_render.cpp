@@ -28,8 +28,44 @@ struct WGpuUniform{
 uint64_t iTime;
 };
 
+struct{
+boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spanb;
+boost::chrono::high_resolution_clock::time_point t1;
+boost::chrono::high_resolution_clock::time_point t2;
+boost::chrono::high_resolution_clock::time_point t3;
+}u_time;
+
+
+
+
 WGpuUniform wTime;
 uint64_t tme;
+
+static f_tensor sze=f_tensor{2,2};
+static wce_tensor wce=wce_tensor{2,2};
+static wrpe_tensor wrpe=wrpe_tensor{2,2};
+static wcb_tensor wcb=wcb_tensor{2,2};
+static wd_tensor wd=wd_tensor{2,2};
+static wq_tensor wq=wq_tensor{2,2};
+static wa_tensor wa=wa_tensor{2,2};
+static wcc_tensor wcc=wcc_tensor{2,2};
+static wccf_tensor wccf=wccf_tensor{2,2};
+static wrp_tensor wrp=wrp_tensor{2,2};
+static wrpl_tensor wrpl=wrpl_tensor{2,2};
+static wb_tensor wb=wb_tensor{2,2};
+static wbgle_tensor wbgle=wbgle_tensor{2,2};
+static wbge_tensor wbge=wbge_tensor{2,2};
+static wbgl_tensor wbgl=wbgl_tensor{2,2};
+static wbg_tensor wbg=wbg_tensor{2,2};
+static wrpd_tensor wrpd=wrpd_tensor{2,2};
+static wrpca_tensor wrpca=wrpca_tensor{2,2};
+static wbbl_tensor wbbl=wbbl_tensor{2,2};
+static wbd_tensor wbd=wbd_tensor{2,2};
+static wao_tensor wao=wao_tensor{2,2};
+static wdd_tensor wdd=wdd_tensor{2,2};
+static u64_tensor u64_uni=u64_tensor{4,4};
+static tp_tensor tp=tp_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
@@ -60,7 +96,6 @@ const char *vertexShader2=
 "main_1();\n"
 "return main_out(gl_Position);\n"
 "}\n";
-  
 
 const char *fragmentShader =
 "@fragment\n"
@@ -202,31 +237,6 @@ const char *fragmentShader2 =
 "return main_out(fragColor_1);\n"
 "}\n\0";
   
-static f_tensor sze=f_tensor{2,2};
-static wce_tensor wce=wce_tensor{2,2};
-static wrpe_tensor wrpe=wrpe_tensor{2,2};
-static wcb_tensor wcb=wcb_tensor{2,2};
-static wd_tensor wd=wd_tensor{2,2};
-static wq_tensor wq=wq_tensor{2,2};
-static wa_tensor wa=wa_tensor{2,2};
-static wcc_tensor wcc=wcc_tensor{2,2};
-static wccf_tensor wccf=wccf_tensor{2,2};
-static wrp_tensor wrp=wrp_tensor{2,2};
-static wrpl_tensor wrpl=wrpl_tensor{2,2};
-static wb_tensor wb=wb_tensor{2,2};
-static wbgle_tensor wbgle=wbgle_tensor{2,2};
-static wbge_tensor wbge=wbge_tensor{2,2};
-static wbgl_tensor wbgl=wbgl_tensor{2,2};
-static wbg_tensor wbg=wbg_tensor{2,2};
-static wrpd_tensor wrpd=wrpd_tensor{2,2};
-static wrpca_tensor wrpca=wrpca_tensor{2,2};
-static wbbl_tensor wbbl=wbbl_tensor{2,2};
-static wbd_tensor wbd=wbd_tensor{2,2};
-static wao_tensor wao=wao_tensor{2,2};
-static wdd_tensor wdd=wdd_tensor{2,2};
-static u64_tensor u64_uni=u64_tensor{2,2};
-static tp_tensor tp=tp_tensor{2,2};
-
 uint64_t get_current_time_in_milliseconds(){
 system_clock::time_point now=system_clock::now();
 milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
@@ -235,6 +245,14 @@ return ms.count();
 
 int raf(double time,void *userData){
 // void raf(){
+u64_uni.at(3,3)++;
+u_time.t3=u_time.t2;
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u64_uni.at(0,0)=u_time.time_spana.count();
+u64_uni.at(1,1)=u_time.time_spanb.count();
+u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
@@ -266,7 +284,6 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-u64_uni.at(0,0)=duration_cast<milliseconds>(tp.at(0,0).time_since_epoch()).count();
 return 0;
 }
 
@@ -347,6 +364,11 @@ sze.at(0,1)=float(szw);
 system_clock::time_point now=system_clock::now();
 tp.at(0,0)=now;
 u64_uni.at(0,0)=0;
+u_time.t1=boost::chrono::high_resolution_clock::now();
+u_time.t2=boost::chrono::high_resolution_clock::now();
+u_time.t3=boost::chrono::high_resolution_clock::now();
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 // emscripten_set_main_loop((void(*)())raf,0,0);
 emscripten_request_animation_frame_loop(raf,0);
 }
