@@ -77,6 +77,8 @@ void startWebGPU();
 
 }
 
+using namespace boost::chrono;
+
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
