@@ -53,6 +53,7 @@ static wbbl_tensor wbbl=wbbl_tensor{2,2};
 static wbd_tensor wbd=wbd_tensor{2,2};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
+static f_uni_tensor f_uni=f_uni_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -64,8 +65,9 @@ return ms.count();
 
 // EM_BOOL raf(double time,void *userData){
 EM_BOOL raf(){
-tme=get_current_time_in_milliseconds();
-wTime.iTime={tme+1};
+// tme=get_current_time_in_milliseconds();
+// wTime.iTime=get_current_time_in_milliseconds();
+f_uni(0,0)=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -87,8 +89,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 // fixed
 // set bind ground needs WGPU Render Pass Encoder - not CommandEncoder
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&wTime.iTime,sizeof(uint64_t));
-
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f_uni(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
 // wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,777,777,0.0,1.0);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
@@ -145,7 +146,7 @@ const char *fragmentShader =
 "}\n";
   
 const char *fragmentShader2 =
-"@group(0)@binding(0)var<storage,read>iTime:f32;"
+"@group(0)@binding(0)var<read>iTime:u64;"
 "var<private> fragColor_1 : vec4<f32>;\n"
 "var<private> gl_FragCoord : vec4<f32>;\n"
 "fn bas_vf3_(x : ptr<function, vec3<f32>>) -> vec3<f32> {\n"
@@ -222,7 +223,7 @@ const char *fragmentShader2 =
 "param_6 = (vec3<f32>(0.20092695951461791992f, 0.13512679934501647949f, 0.14187219738960266113f) - (vec3<f32>(x_128.y, x_128.x, x_128.y) * 0.00400000018998980522f));\n"
 "let x_135 : vec3<f32> = swayRandomized_vf3_vf3_(&(param_5), &(param_6));\n"
 "uv = ((x_117 * 0.10000000149011611938f) + (vec2<f32>(x_135.x, x_135.y) * 42.0f));\n"
-"aTime = 0.08124999701976776123f;\n"
+"aTime = f32(iTime/1000);\n"
 "adj = vec3<f32>(-1.11000001430511474609f, 1.40999996662139892578f, 1.61000001430511474609f);\n"
 "let x_153 : f32 = aTime;\n"
 "let x_154 : vec3<f32> = adj;\n"
@@ -291,7 +292,7 @@ WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
 vertState={};
-vertState.module=fs;
+vertState.module=vs;
 vertState.entryPoint="main";
 vertState.numBuffers=0;
 vertState.buffers=nullptr;
@@ -308,7 +309,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-bufferDescriptorU={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptorU={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorU;
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 wb.at(0,0)=uniBuffer;
