@@ -36,9 +36,6 @@ boost::chrono::high_resolution_clock::time_point t2;
 boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
-
-
-
 WGpuUniform wTime;
 uint64_t tme;
 
@@ -237,14 +234,8 @@ const char *fragmentShader2 =
 "return main_out(fragColor_1);\n"
 "}\n\0";
   
-uint64_t get_current_time_in_milliseconds(){
-system_clock::time_point now=system_clock::now();
-milliseconds ms=duration_cast<milliseconds>(now.time_since_epoch());
-return ms.count();
-}
-
-int raf(double time,void *userData){
-// void raf(){
+// int raf(double time,void *userData){
+void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -252,7 +243,7 @@ u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u64_uni.at(0,0)=u_time.time_spana.count();
 u64_uni.at(1,1)=u_time.time_spanb.count();
-u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
+// u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
@@ -284,7 +275,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-return 0;
+return;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
@@ -369,8 +360,8 @@ u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-// emscripten_set_main_loop((void(*)())raf,0,0);
-emscripten_request_animation_frame_loop(raf,0);
+emscripten_set_main_loop((void(*)())raf,0,0);
+// emscripten_request_animation_frame_loop(raf,0);
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
