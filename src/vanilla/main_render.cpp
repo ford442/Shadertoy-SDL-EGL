@@ -85,7 +85,7 @@ const char *vertexShader =
 "vec2<f32>(-0.5, 0.5),\n"
 "vec2<f32>(0.5, 0.5)\n"
 ");\n"
-"return vec4<f32>(posCW[vertexIndex], 0.0, 1.0);\n"
+"return vec4<f32>(posCCW[vertexIndex], 0.0, 1.0);\n"
 "}\n";
 
 const char *vertexShader2=
