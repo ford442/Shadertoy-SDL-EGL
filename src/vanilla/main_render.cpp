@@ -178,7 +178,7 @@ const char *fragmentShader2 =
 "param_6 = (vec3<f32>(0.20092695951461791992f, 0.13512679934501647949f, 0.14187219738960266113f) - (vec3<f32>(x_128.y, x_128.x, x_128.y) * 0.00400000018998980522f));\n"
 "let x_135 : vec3<f32> = swayRandomized_vf3_vf3_(&(param_5), &(param_6));\n"
 "uv = ((x_117 * 0.10000000149011611938f) + (vec2<f32>(x_135.x, x_135.y) * 42.0f));\n"
-"aTime = f32(iTime);\n"
+"aTime = f32(iTime/1000);\n"
 "adj = vec3<f32>(-1.11000001430511474609f, 1.40999996662139892578f, 1.61000001430511474609f);\n"
 "let x_153 : f32 = aTime;\n"
 "let x_154 : vec3<f32> = adj;\n"
@@ -239,8 +239,8 @@ void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
-u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t1);
+u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t3);
 u64_uni.at(0,0)=u_time.time_spana.count();
 u64_uni.at(1,1)=u_time.time_spanb.count();
 // u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
