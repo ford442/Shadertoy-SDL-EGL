@@ -89,7 +89,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 // fixed
 // set bind ground needs WGPU Render Pass Encoder - not CommandEncoder
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni(0,0),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
 // wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,777,777,0.0,1.0);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
