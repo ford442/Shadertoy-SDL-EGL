@@ -96,5 +96,6 @@ using wbgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry>;
 using wbge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry>;
 using wrpd_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDescriptor>;
 using wrpca_tensor=boost::numeric::ublas::tensor<WGpuRenderPassColorAttachment>;
+using wbbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 
 
