@@ -1832,7 +1832,7 @@ glGenerateMipmap(GL_TEXTURE_2D);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,ftexture[0],0);  
  // glClearStencil(1);
-glClearColorf(0.0f,0.0f,0.0f,1.0f);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
