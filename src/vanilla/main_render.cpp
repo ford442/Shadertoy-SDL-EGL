@@ -68,10 +68,10 @@ const char *vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 4>(\n"
-"vec2<f32>(0.0, 0.5),\n"
-"vec2<f32>(-0.5, -0.5),\n"
+"vec2<f32>(-5.0, 0.5),\n"
 "vec2<f32>(0.5, -0.5),\n"
-"vec2<f32>(0.5, 0.5)\n"
+"vec2<f32>(0.5, 0.5),\n"
+"vec2<f32>(-0.5, 0.5)\n"
 ");\n"
 "return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
 "}\n";
