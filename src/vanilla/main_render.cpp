@@ -77,7 +77,7 @@ const char *vertexShader =
 "vec2<f32>(-1.0, -1.0),\n"
 "vec2<f32>(1.0, -1.0),\n"
 "vec2<f32>(1.0, 1.0),\n"
-"vec2<f32>(-1.0, 1.0)\n"
+"vec2<f32>(-1.0, 1.0),\n"
 "vec2<f32>(-1.0, -1.0)\n"
 ");\n"
 "var posCW = array<vec2<f32>, 4>(\n"
