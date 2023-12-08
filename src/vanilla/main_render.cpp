@@ -10,7 +10,7 @@ WGpuShaderModule fs;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
-WGpuBufferDescriptor bufferDescriptorU={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+WGpuBufferDescriptor bufferDescriptorU={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
@@ -51,6 +51,7 @@ static wbg_tensor wbg=wbg_tensor{2,2};
 static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
 static wbbl_tensor wbbl=wbbl_tensor{2,2};
+static wbd_tensor wbd=wbd_tensor{2,2};
 
 using namespace boost::chrono;
 
@@ -305,6 +306,8 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
+bufferDescriptorU={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+wbd.at(0,0)=bufferDescriptorU;
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
 wb.at(0,0)=uniBuffer;
 bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
