@@ -1,6 +1,7 @@
 #include "../../include/vanilla/main_render.hpp"
 
 WGpuRenderPassColorAttachment colorAttachment;
+WGpuRenderPassColorAttachment depthAttachment;
 WGpuRenderPassDescriptor passDesc={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
@@ -285,9 +286,19 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 passDesc={};
+depthAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+depthAttachment.view=depth_texture_view,
+depthAttachment.depth_clear_value=1.0f;
+depthAttachment.stencil_clear_value=0;
+depthAttachment.depth_load_op=WGPU_LOAD_OP_CLEAR,
+depthAttachment.depth_store_op=WGPU_STORE_OP_STORE,
+depthAttachment.stencil_load_op=WGPU_LOAD_OP_CLEAR,
+depthAttachment.stencil_store_op=WGPU_STORE_OP_STORE,
 wrpca.at(0,0)=colorAttachment;
+wrpca.at(1,1)=depthAttachment;
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
+passDesc.depth_stencil_attachment=&wrpca.at(1,1);
 wrpd.at(0,0)=passDesc;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
