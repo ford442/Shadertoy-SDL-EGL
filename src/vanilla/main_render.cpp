@@ -211,7 +211,7 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
-multiSamp.count=4;
+multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
@@ -285,7 +285,9 @@ bindgroup_entry.resource=wb.at(0,0);
 bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
+  
 renderBundleEncoderDescriptor.sampleCount=1;
+  
 renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 wrbed.at(0,0)=renderBundleEncoderDescriptor;
 renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
