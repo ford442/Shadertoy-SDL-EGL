@@ -108,3 +108,5 @@ using wrbed_tensor=boost::numeric::ublas::tensor<WGpuRenderBundleEncoderDescript
 using wrpdsa_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDepthStencilAttachment>;
 using u64_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
+using wtd_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
+using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
