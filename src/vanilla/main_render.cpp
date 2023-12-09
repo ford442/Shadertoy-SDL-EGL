@@ -1,8 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
-WGpuTextureView depthTextureView;
-WGpuTextureViewDescriptor depthTextureViewDescriptor={};
+
 WGpuRenderPassColorAttachment colorAttachment;
-WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDescriptor passDesc={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
@@ -12,7 +10,6 @@ WGpuShaderModule fs;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
-WGpuDepthStencilState depthState={};
 WGpuBufferDescriptor bufferDescriptorU={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
@@ -23,6 +20,7 @@ WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
+
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
@@ -70,7 +68,6 @@ static u64_tensor u64_uni=u64_tensor{4,4};
 static tp_tensor tp=tp_tensor{2,2};
 static wrbe_tensor wrbe=wrbe_tensor{2,2};
 static wrbed_tensor wrbed=wrbed_tensor{2,2};
-static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
@@ -288,20 +285,9 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 passDesc={};
-depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
-
-depthAttachment.view=wgpu_texture_create_view(depthTextureView,&depthTextureViewDescriptor);
-depthAttachment.depthClearValue=1.0f;
-depthAttachment.stencilClearValue=0;
-depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR,
-depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE,
-depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR,
-depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE,
 wrpca.at(0,0)=colorAttachment;
-// wrpdsa.at(0,0)=depthAttachment;
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
-passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -324,7 +310,6 @@ config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
-// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
@@ -339,8 +324,6 @@ fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
-depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
-depthState.depthWriteEnabled=1;
 vertState={};
 vertState.module=vs;
 vertState.entryPoint="main";
@@ -382,7 +365,6 @@ renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.fragment=fragState;
-renderPipelineDesc.depthStencil=depthState;
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=multiSamp;
