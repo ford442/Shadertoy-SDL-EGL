@@ -85,9 +85,12 @@ static wtv_tensor wtv=wtv_tensor{2,2};
 const char *vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
-"var pos = array<vec2<f32>, 3>(\n"
+"var pos = array<vec2<f32>, 6>(\n"
 "vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, 1.0f),\n"
+"vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
@@ -322,7 +325,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
