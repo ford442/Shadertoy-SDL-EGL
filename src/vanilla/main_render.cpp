@@ -276,8 +276,6 @@ bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1)
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 
-
-
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
   
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
@@ -333,7 +331,7 @@ config.device=wd.at(0,0);
 config.format=canvasFormat;
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 config.numViewFormats=1;
-config.viewFormats=canvasViewFormats;
+// config.viewFormats=canvasViewFormats;
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
