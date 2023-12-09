@@ -279,8 +279,12 @@ wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-// colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
-// wtv.at(1,1)=colorTextureView;
+colorTexture=wgpu_device_create_texture(wd.at(1,1),&wtd.at(1,1));
+colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0))
+wt.at(1,1)=colorTexture;
+colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
+wtv.at(1,1)=colorTextureView;
+  
 colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 // colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -463,8 +467,7 @@ colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
-colorTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
-wt.at(1,1)=colorTexture;
+
   
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
