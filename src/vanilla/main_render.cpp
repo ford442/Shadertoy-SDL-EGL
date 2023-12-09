@@ -314,6 +314,7 @@ depthTexture=wgpu_device_create_texture(wd.at(0,0),&depthTextureDescriptor);
 depthAttachment.view=wgpu_texture_create_view(depthTexture,&depthTextureViewDescriptor);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
+depthAttachment.depthReadOnly=0;
 depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
