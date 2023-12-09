@@ -111,3 +111,4 @@ using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using wtd_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 using wtf_tensor=boost::numeric::ublas::tensor<WGPU_TEXTURE_FORMAT>;
+using wtv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
