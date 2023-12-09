@@ -325,7 +325,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-  WGPU_TEXTURE_FORMAT canvasViewFormats[1]={WGPU_TEXTURE_FORMAT_BGRA8UNORM|WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
+WGPU_TEXTURE_FORMAT canvasViewFormats[2]={WGPU_TEXTURE_FORMAT_BGRA8UNORM|WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
