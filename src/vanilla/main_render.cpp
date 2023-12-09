@@ -403,7 +403,7 @@ renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.fragment=fragState;
   
- renderPipelineDesc.depthStencil=depthState;
+// renderPipelineDesc.depthStencil=depthState;
 
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=multiSamp;
