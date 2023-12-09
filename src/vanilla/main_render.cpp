@@ -345,6 +345,7 @@ config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+config.numViewFormats=2;
 config.viewFormats=WGPU_TEXTURE_FORMAT_BGRA8UNORM|WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
