@@ -177,7 +177,7 @@ b3_glsl_render2:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(COMMON_FLAGS) $(BOOST_FLAGS) $(SIMD_FLAGS) 
 	 emcc src/vanilla/glsl_load.cpp -std=c++20 -pthread \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(COMMON_FLAGS)  $(BOOST_FLAGS) $(SIMD_FLAGS) 
-	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js $(COMMON_FLAGS) $(LINK_FLAGS) -o $(WGL_BIN_NAME).js \
+	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js $(COMMON_FLAGS) $(LINK_FLAGS) -o $(WGL_BIN_NAME)a.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
