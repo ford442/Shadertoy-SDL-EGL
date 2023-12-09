@@ -1,7 +1,7 @@
 #include "../../include/vanilla/main_render.hpp"
 
 WGpuRenderPassColorAttachment colorAttachment;
-WGpuRenderPassColorAttachment depthAttachment;
+WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuRenderPassDescriptor passDesc={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
@@ -11,6 +11,7 @@ WGpuShaderModule fs;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
+WGpuDepthStencilState depthState={};
 WGpuBufferDescriptor bufferDescriptorU={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
@@ -21,7 +22,6 @@ WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
-
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
@@ -69,6 +69,7 @@ static u64_tensor u64_uni=u64_tensor{4,4};
 static tp_tensor tp=tp_tensor{2,2};
 static wrbe_tensor wrbe=wrbe_tensor{2,2};
 static wrbed_tensor wrbed=wrbed_tensor{2,2};
+static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
@@ -288,17 +289,17 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 depthAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 depthAttachment.view=depth_texture_view,
-depthAttachment.depth_clear_value=1.0f;
-depthAttachment.stencil_clear_value=0;
-depthAttachment.depth_load_op=WGPU_LOAD_OP_CLEAR,
-depthAttachment.depth_store_op=WGPU_STORE_OP_STORE,
-depthAttachment.stencil_load_op=WGPU_LOAD_OP_CLEAR,
-depthAttachment.stencil_store_op=WGPU_STORE_OP_STORE,
+depthAttachment.depthClearValue=1.0f;
+depthAttachment.stencilClearValue=0;
+depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR,
+depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE,
+depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR,
+depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE,
 wrpca.at(0,0)=colorAttachment;
-wrpca.at(1,1)=depthAttachment;
+wrpdsa.at(0,0)=depthAttachment;
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
-passDesc.depth_stencil_attachment=&wrpca.at(1,1);
+passDesc.depth_stencil_attachment=&wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -335,6 +336,8 @@ fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
+depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthState.depthWriteEnabled=1;
 vertState={};
 vertState.module=vs;
 vertState.entryPoint="main";
@@ -376,6 +379,7 @@ renderPipelineDesc.vertex.module=vs;
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.fragment=fragState;
+renderPipelineDesc.depthStencil=depthState;
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=multiSamp;
@@ -388,8 +392,8 @@ bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
 renderBundleEncoderDescriptor.sampleCount=4;
 wrbed.at(0,0)=renderBundleEncoderDescriptor;
-// renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
-// wrbe.at(0,0)=renderBundleEncoder;
+renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
+wrbe.at(0,0)=renderBundleEncoder;
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
