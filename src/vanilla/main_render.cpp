@@ -285,8 +285,7 @@ colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
 
-depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
-wt.at(0,0)=depthTexture;
+
   
 depthAttachment={};
 depthAttachment.view=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
@@ -305,7 +304,6 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-  
   
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -428,7 +426,8 @@ depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(0,0)=depthTextureDescriptor;
 
-
+depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
+wt.at(0,0)=depthTexture;
   
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
