@@ -80,25 +80,12 @@ static wtvd_tensor wtvd=wtvd_tensor{2,2};
 const char *vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
-"var pos = array<vec2<f32>, 4>(\n"
-"vec2<f32>(-5.0, 0.5),\n"
-"vec2<f32>(0.5, -0.5),\n"
-"vec2<f32>(0.5, 0.5),\n"
-"vec2<f32>(-0.5, 0.5)\n"
-");\n"
-"var posCCW = array<vec2<f32>, 4>(\n"
-"vec2<f32>(-1.0, -1.0),\n"
-"vec2<f32>(1.0, -1.0),\n"
-"vec2<f32>(1.0, 1.0),\n"
-"vec2<f32>(-1.0, 1.0)\n"
-");\n"
-"var posCW = array<vec2<f32>, 4>(\n"
+"var pos = array<vec2<f32>, 3>(\n"
 "vec2<f32>(1.0, 1.0),\n"
 "vec2<f32>(1.0, -1.0),\n"
-"vec2<f32>(-1.0, -1.0),\n"
-"vec2<f32>(-1.0, 1.0)\n"
+"vec2<f32>(-1.0, -1.0)\n"
 ");\n"
-"return vec4<f32>(posCW[vertexIndex], 0.0, 1.0);\n"
+"return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
 "}\n";
 
 const char *vertexShader2=
@@ -286,16 +273,7 @@ bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),&wbge.at(0,0),1)
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 
-colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
-colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-colorAttachment.clearValue.r=1.0f;
-colorAttachment.clearValue.g=0.0f;
-colorAttachment.clearValue.b=1.0f;
-colorAttachment.clearValue.a=1.0f;
-wrpca.at(0,0)=colorAttachment;
-  
+
 
 
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
@@ -326,7 +304,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),4,1,0,0);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -439,6 +417,17 @@ depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(0,0)=depthTextureDescriptor;
+
+  colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
+colorAttachment.storeOp=WGPU_STORE_OP_STORE;
+colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+colorAttachment.clearValue.r=1.0f;
+colorAttachment.clearValue.g=0.0f;
+colorAttachment.clearValue.b=1.0f;
+colorAttachment.clearValue.a=1.0f;
+wrpca.at(0,0)=colorAttachment;
+
   
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
