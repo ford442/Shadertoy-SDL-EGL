@@ -267,6 +267,7 @@ const char *fragmentShader =
 "}\n\0";
   
 // int raf(double time,void *userData){
+
 void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
@@ -290,20 +291,28 @@ colorAttachment.clearValue.r=1.0f;
 colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
-depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+
+  
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
 depthTextureViewDescriptor.mipLevelCount=1;
 depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
+
+  
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
+
+  
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
+
+  
 depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&depthTextureDescriptor);
@@ -359,7 +368,7 @@ WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
 depthState={};
-depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 depthState.depthWriteEnabled=1;
 vertState={};
 vertState.module=vs;
