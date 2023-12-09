@@ -1,5 +1,4 @@
 #include "../../include/vanilla/main_render.hpp"
-WGPU_TEXTURE_FORMAT 
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
