@@ -477,7 +477,7 @@ wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
 wdd.at(0,0)=deviceDesc;
-wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
+wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStartR,0);
 }
 
 void WGPU_StartR(){
@@ -486,7 +486,7 @@ options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
-navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
+navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStartR,0);
 }
 
 EM_JS(void,js_mainR,(),{
