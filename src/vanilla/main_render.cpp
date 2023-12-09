@@ -375,7 +375,7 @@ bindgroup_entry.resource=wb.at(0,0);
 bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
-renderBundleEncoder=createRenderBundleEncoder(&renderBundleEncoderDescriptor);
+renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&renderBundleEncoderDescriptor);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
