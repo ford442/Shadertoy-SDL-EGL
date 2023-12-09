@@ -265,7 +265,7 @@ const char *fragmentShader =
   
 // int raf(double time,void *userData){
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-char * frg_hdr=frg_hdr_src;
+
 static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
