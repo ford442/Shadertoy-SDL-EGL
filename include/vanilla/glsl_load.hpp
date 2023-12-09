@@ -77,16 +77,40 @@ void startWebGPU();
 
 }
 
+using namespace boost::chrono;
+
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
 using wcb_tensor=boost::numeric::ublas::tensor<WGpuCommandBuffer>;
 using wd_tensor=boost::numeric::ublas::tensor<WGpuDevice>;
 using wq_tensor=boost::numeric::ublas::tensor<WGpuQueue>;
+using wb_tensor=boost::numeric::ublas::tensor<WGpuBuffer>;
 using wa_tensor=boost::numeric::ublas::tensor<WGpuAdapter>;
 using wcc_tensor=boost::numeric::ublas::tensor<WGpuCanvasContext>;
+using wccf_tensor=boost::numeric::ublas::tensor<WGpuCanvasConfiguration>;
 using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
-
+using wrpl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
+using wbg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
+using wbgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
+using wbgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry>;
+using wbgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry>;
+using wbge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry>;
+using wrpd_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDescriptor>;
+using wrpca_tensor=boost::numeric::ublas::tensor<WGpuRenderPassColorAttachment>;
+using wbbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
+using wbd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
+using wao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
+using wdd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
+using wrbe_tensor=boost::numeric::ublas::tensor<WGpuRenderBundleEncoder>;
+using wrbed_tensor=boost::numeric::ublas::tensor<WGpuRenderBundleEncoderDescriptor>;
+using wrpdsa_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDepthStencilAttachment>;
+using u64_tensor=boost::numeric::ublas::tensor<uint64_t>;
+using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
+using wtd_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
+using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
+using wtf_tensor=boost::numeric::ublas::tensor<WGPU_TEXTURE_FORMAT>;
+using wtv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 
 #include <stdlib.h>
 #include <cstring>
