@@ -18,6 +18,9 @@ WGpuBindGroupLayoutEntry bindgroup_layout_entry={};
 WGpuBindGroupEntry bindgroup_entry={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
+WGpuRenderBundleEncoder renderBundleEncoder;
+WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
+
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
@@ -63,6 +66,8 @@ static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
 static u64_tensor u64_uni=u64_tensor{4,4};
 static tp_tensor tp=tp_tensor{2,2};
+static wrb_tensor wrb=wrb_tensor{2,2};
+static wrbd_tensor wrbd=wrbd_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
@@ -370,6 +375,7 @@ bindgroup_entry.resource=wb.at(0,0);
 bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
+renderBundleEncoder=createRenderBundleEncoder(&renderBundleEncoderDescriptor);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
