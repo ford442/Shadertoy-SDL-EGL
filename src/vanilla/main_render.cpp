@@ -6,7 +6,7 @@ WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuDepthStencilState depthState={};
 WGpuTexture depthTexture;
-WGpuTextureDescriptor depthTextureDescriptor={}
+WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
