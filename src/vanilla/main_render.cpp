@@ -264,7 +264,7 @@ textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout.multisampled=1;
   
-bindgroup_layout_entry.layout.texture=wbbl.at(0,0);
+bindgroup_layout_entry.layout.texture=textureBindingLayout;
   
 wbgle.at(0,0)=bindgroup_layout_entry;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
