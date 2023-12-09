@@ -336,7 +336,7 @@ WGPU_TEXTURE_FORMAT canvasViewFormats[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=canvasFormat;
-config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 // config.numViewFormats=1;
 // config.viewFormats=canvasViewFormats;
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
@@ -441,7 +441,7 @@ wtvd.at(1,1)=colorTextureViewDescriptor;
   
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
-depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
