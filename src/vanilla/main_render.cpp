@@ -294,19 +294,19 @@ colorAttachment.clearValue.a=1.0f;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-depthTextureViewDescriptor.baseMipLevel=1; // default = 0
+depthTextureViewDescriptor.baseMipLevel=0; // default = 0
 depthTextureViewDescriptor.mipLevelCount=1;
-depthTextureViewDescriptor.baseArrayLayer=1; // default = 0
+depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
   
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
-depthTextureDescriptor.width=sze.at(0,1);
+depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers = 1;
 depthTextureDescriptor.mipLevelCount= 1;
-depthTextureDescriptor.sampleCount = 1;
+depthTextureDescriptor.sampleCount = 4;
 depthTextureDescriptor.dimension= WGPU_TEXTURE_DIMENSION_2D;
 
   
@@ -332,7 +332,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
   
-  wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0f,1.0f);
+  wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
   
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),4,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
