@@ -66,8 +66,8 @@ static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
 static u64_tensor u64_uni=u64_tensor{4,4};
 static tp_tensor tp=tp_tensor{2,2};
-static wrb_tensor wrb=wrb_tensor{2,2};
-static wrbd_tensor wrbd=wrbd_tensor{2,2};
+static wrbe_tensor wrbe=wrbe_tensor{2,2};
+static wrbed_tensor wrbed=wrbed_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
