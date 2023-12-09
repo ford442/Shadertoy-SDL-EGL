@@ -31,8 +31,8 @@ WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
-WGpuBuffer uniBuffer;
-WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuBuffer uniBufferR;
+WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 double szh,szw;
 
 struct WGpuUniform{
@@ -378,12 +378,12 @@ fragState.numTargets=1;
 fragState.targets=&colorTarget;
 bufferDescriptorU={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorU;
-uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
-wb.at(0,0)=uniBuffer;
-bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
-bufferBindingLayout1.hasDynamicOffset=0,
-bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
-wbbl.at(0,0)=bufferBindingLayout1;
+uniBufferR=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorU);
+wb.at(0,0)=uniBufferR;
+bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
+bufferBindingLayoutR.hasDynamicOffset=0,
+bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
+wbbl.at(0,0)=bufferBindingLayoutR;
 bindgroup_layout_entry={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entry.binding=0;
 bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
