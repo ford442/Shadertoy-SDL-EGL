@@ -175,7 +175,8 @@ b3_glsl_render:
 b3_glsl_render2:
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(COMMON_FLAGS) $(BOOST_FLAGS) $(SIMD_FLAGS) 
-	 emcc src/vanilla/glsl_load.cpp -I /content/RAMDRIVE2/b3/SPIRV-Tools/include/ -std=c++20 -pthread \
+	 emcc src/vanilla/glsl_load.cpp -I /content/RAMDRIVE2/b3/SPIRV-Tools/include/ -I /content/RAMDRIVE2/b3/SPIRV-Cross/ \
+	 -I /content/RAMDRIVE2/b3/SPIRV-Headers/include -std=c++20 -pthread \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(COMMON_FLAGS)  $(BOOST_FLAGS) $(SIMD_FLAGS) 
 	 emcc $(LDFLAGS) --js-library lib/lib_webgpu.js $(COMMON_FLAGS) $(LINK_FLAGS) -o $(WGL_BIN_NAME)a.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) \
