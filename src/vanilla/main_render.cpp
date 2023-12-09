@@ -264,6 +264,38 @@ const char *fragmentShader =
 "}\n\0";
   
 // int raf(double time,void *userData){
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+char * frg_hdr=frg_hdr_src;
+static char * result=NULL;
+static char * results=NULL;
+static long int length=0;
+
+const inline char * rd_fl(const char * Fnm){
+FILE * file=fopen(Fnm,"r");
+::boost::tuples::tie(result,results,file);
+if(file){
+int32_t stat=fseek(file,(int32_t)0,SEEK_END);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+stat=fseek(file,(int32_t)0,SEEK_SET);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+result=static_cast<char *>(malloc((length+1)*sizeof(char)));
+if(result){
+size_t actual_length=fread(result,sizeof(char),length,file);
+result[actual_length++]={'\0'};
+}
+fclose(file);
+// results=reinterpret_cast<char *>(result);
+return result;
+}
+return nullptr;
+}
 
 void raf(){
 // u64_uni.at(3,3)++;
@@ -333,6 +365,10 @@ return;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+
+  
+  const char * frag_body=(char*)rd_fl(Fnm);
+
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
   
@@ -356,7 +392,8 @@ shaderModuleDescV={};
 shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
-shaderModuleDescF.code=fragmentShader;
+shaderModuleDescF.code=frag_body;
+// shaderModuleDescF.code=fragmentShader;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 // colorTarget.format=wtf.at(0,0);
