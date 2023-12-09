@@ -275,9 +275,19 @@ wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 
 
 
+colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
+colorAttachment.storeOp=WGPU_STORE_OP_STORE;
+colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+colorAttachment.clearValue.r=1.0f;
+colorAttachment.clearValue.g=0.0f;
+colorAttachment.clearValue.b=1.0f;
+colorAttachment.clearValue.a=1.0f;
+wrpca.at(0,0)=colorAttachment;
 
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
+  
 depthAttachment={};
 depthAttachment.view=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 depthAttachment.depthClearValue=1.0f;
@@ -418,15 +428,6 @@ depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(0,0)=depthTextureDescriptor;
 
-  colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
-colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-colorAttachment.clearValue.r=1.0f;
-colorAttachment.clearValue.g=0.0f;
-colorAttachment.clearValue.b=1.0f;
-colorAttachment.clearValue.a=1.0f;
-wrpca.at(0,0)=colorAttachment;
 
   
 u64_uni.at(0,0)=0;
