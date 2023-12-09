@@ -301,7 +301,7 @@ wrpca.at(0,0)=colorAttachment;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
-passDesc.depth_stencil_attachment=&wrpdsa.at(0,0);
+passDesc.depthStencilAttachment=&wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
