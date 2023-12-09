@@ -207,7 +207,7 @@ config.device=wd.at(0,0);
 config.format=canvasFormat;
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 config.numViewFormats=1;
-config.viewFormats=canvasViewFormat;
+config.viewFormats=&canvasViewFormat;
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
