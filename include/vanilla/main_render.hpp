@@ -110,3 +110,4 @@ using u64_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using wtd_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
+using wtf_tensor=boost::numeric::ublas::tensor<WGPU_TEXTURE_FORMAT>;
