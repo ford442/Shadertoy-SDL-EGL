@@ -85,12 +85,12 @@ const char *vertexShader =
 "vec2<f32>(-1.0, 1.0)\n"
 ");\n"
 "var posCW = array<vec2<f32>, 4>(\n"
-"vec2<f32>(0.5, -0.5),\n"
-"vec2<f32>(-0.5, -0.5),\n"
-"vec2<f32>(-0.5, 0.5),\n"
-"vec2<f32>(0.5, 0.5)\n"
+"vec2<f32>(1.0, 1.0),\n"
+"vec2<f32>(1.0, -1.0),\n"
+"vec2<f32>(-1.0, -1.0),\n"
+"vec2<f32>(-1.0, 1.0)\n"
 ");\n"
-"return vec4<f32>(posCCW[vertexIndex], 0.0, 1.0);\n"
+"return vec4<f32>(posCW[vertexIndex], 0.0, 1.0);\n"
 "}\n";
 
 const char *vertexShader2=
@@ -296,7 +296,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,1),sze.at(0,0),0.0,1.0);
-wgpu_render_pass_encoder_draw(wrbe.at(0,0),5,0,0,0);
+wgpu_render_pass_encoder_draw(wce.at(0,0),4,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -377,8 +377,8 @@ bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
 renderBundleEncoderDescriptor.sampleCount=4;
 wrbed.at(0,0)=renderBundleEncoderDescriptor;
-renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
-wrbe.at(0,0)=renderBundleEncoder;
+// renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
+// wrbe.at(0,0)=renderBundleEncoder;
 emscripten_get_element_css_size("canvas",&szw,&szh);
 sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
