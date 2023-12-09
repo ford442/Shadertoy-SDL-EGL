@@ -5,7 +5,8 @@ WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuDepthStencilState depthState={};
-
+WGpuTexture depthTexture;
+WGpuTextureDescriptor depthTextureDescriptor={}
 WGpuRenderPassDescriptor passDesc={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
@@ -291,7 +292,8 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
-depthAttachment.view=wgpu_texture_create_view(depthTextureView,&depthTextureViewDescriptor);
+depthTexture=wgpu_device_create_texture(wd.at(0,0),&depthTextureDescriptor);
+depthAttachment.view=wgpu_texture_create_view(depthTexture,&depthTextureViewDescriptor);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
 depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR;
