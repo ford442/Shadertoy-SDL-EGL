@@ -1780,9 +1780,10 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
+binary=new GLchar[binarySize];
 
 GLint binarySize;
-glGetProgramiv(S1.at(0,0,0),GL_PROGRAM_BINARY_LENGTH,&binarySize);
+// glGetProgramiv(S1.at(0,0,0),GL_PROGRAM_BINARY_LENGTH,&binarySize);
 glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin)*64,binLength,binaryFormat,&GLbin);
 bin.at(0,0)=GLbin;
 std::vector<GLchar>binary(binarySize);
