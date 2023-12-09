@@ -294,9 +294,9 @@ colorAttachment.clearValue.a=1.0f;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-depthTextureViewDescriptor.baseMipLevel=1; // default = 0
+depthTextureViewDescriptor.baseMipLevel=0; // default = 0
 depthTextureViewDescriptor.mipLevelCount=1;
-depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
+depthTextureViewDescriptor.baseArrayLayer=1; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
   
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
@@ -407,7 +407,7 @@ renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=priState;
 renderPipelineDesc.fragment=fragState;
   
-//  renderPipelineDesc.depthStencil=depthState;
+ renderPipelineDesc.depthStencil=depthState;
 
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.layout=wrpl.at(0,0);
