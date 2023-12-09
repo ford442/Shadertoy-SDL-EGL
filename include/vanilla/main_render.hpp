@@ -103,5 +103,7 @@ using wbbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using wbd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using wao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
 using wdd_tensor=boost::numeric::ublas::tensor<WGpuDeviceDescriptor>;
+using wrbe_tensor=boost::numeric::ublas::tensor<GPURenderBundleEncoder>;
+using wrbed_tensor=boost::numeric::ublas::tensor<GPURenderBundleEncoderDescriptor>;
 using u64_tensor=boost::numeric::ublas::tensor<uint64_t>;
 using tp_tensor=boost::numeric::ublas::tensor<system_clock::time_point>;
