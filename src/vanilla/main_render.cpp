@@ -413,7 +413,7 @@ vertState.constants=nullptr;
 priState={};
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
 // priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
-priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
+priState.frontFace=WGPU_FRONT_FACE_CW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
 priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
 priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
 fragState={};
@@ -531,7 +531,7 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 void WGPU_Start(){
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
-options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
+options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_POWER;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
