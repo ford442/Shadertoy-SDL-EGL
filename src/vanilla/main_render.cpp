@@ -86,11 +86,11 @@ const char *vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 3>(\n"
-"vec2<f32>(1.0, 1.0),\n"
-"vec2<f32>(1.0, -1.0),\n"
-"vec2<f32>(-1.0, -1.0)\n"
+"vec2<f32>(1.0f, 1.0f),\n"
+"vec2<f32>(1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
-"return vec4<f32>(pos[vertexIndex], 0.0, 1.0);\n"
+"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
 "}\n";
 
 const char *vertexShader2=
