@@ -418,13 +418,14 @@ depthTextureViewDescriptor.mipLevelCount=1;
 depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(0,0)=depthTextureViewDescriptor;
-colorTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_R32UINT;
+colorTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 colorTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 colorTextureViewDescriptor.baseMipLevel=0; // default = 0
 colorTextureViewDescriptor.mipLevelCount=1;
 colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
+depthTextureDescriptor.viewFormats=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtvd.at(1,1)=colorTextureViewDescriptor;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -435,11 +436,12 @@ depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+depthTextureDescriptor.viewFormats=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-colorTextureDescriptor.format=WGPU_TEXTURE_FORMAT_R32UINT;
+colorTextureDescriptor.format=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
