@@ -33,6 +33,7 @@ WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuTextureBindingLayout textureBindingLayout={};
 double szh,szw;
 
 struct WGpuUniform{
@@ -178,6 +179,7 @@ passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
+  
 wrpd.at(0,0)=passDesc;
 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -257,6 +259,13 @@ bindgroup_layout_entry.binding=0;
 bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry.layout.buffer=wbbl.at(0,0);
+  
+textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
+textureBindingLayout.multisampled=1;
+  
+bindgroup_layout_entry.layout.texture=wbbl.at(0,0);
+  
 wbgle.at(0,0)=bindgroup_layout_entry;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
 wbgl.at(0,0)=bindgroup_layout;
@@ -304,8 +313,6 @@ WGPU_TEXTURE_FORMAT colorViewFormats[1]={wtf.at(0,0)};
 depthTextureDescriptor.viewFormats=colorViewFormats;
 wtvd.at(1,1)=colorTextureViewDescriptor;
 
-
-  
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -313,7 +320,7 @@ depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
-depthTextureDescriptor.sampleCount=4;
+depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
 depthTextureDescriptor.viewFormats=depthViewFormats;
