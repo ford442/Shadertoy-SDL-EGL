@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
-
+WGpuTextureView depthTextureView;
+WGpuTextureViewDescripteor depthTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDescriptor passDesc={};
@@ -287,7 +288,9 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 passDesc={};
-depthAttachment.view=depth_texture_view,
+depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+
+depthAttachment.view=wgpu_texture_create_view(&depthTextureViewDescriptor);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
 depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR,
@@ -321,6 +324,7 @@ config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=navigator_gpu_get_preferred_canvas_format();
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+config.alphaMode=2;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
