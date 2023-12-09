@@ -424,7 +424,7 @@ colorTextureViewDescriptor.baseMipLevel=0; // default = 0
 colorTextureViewDescriptor.mipLevelCount=1;
 colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
-GPUTextureFormat colorViewFormats[1]={WGPU_TEXTURE_FORMAT_RGBA16FLOAT};
+WGPUTextureFormat colorViewFormats[1]={WGPU_TEXTURE_FORMAT_RGBA16FLOAT};
 depthTextureDescriptor.viewFormats=&colorViewFormats;
 wtvd.at(1,1)=colorTextureViewDescriptor;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
@@ -436,7 +436,7 @@ depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-GPUTextureFormat depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
+WGPUTextureFormat depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
 depthTextureDescriptor.viewFormats=&depthViewFormats;
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
