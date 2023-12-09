@@ -207,7 +207,7 @@ config.device=wd.at(0,0);
 config.format=canvasFormat;
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 // config.numViewFormats=1;
-config.viewFormats=&canvasViewFormat[1];
+config.viewFormats=&canvasViewFormat[0];
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
@@ -310,10 +310,7 @@ colorTextureViewDescriptor.baseMipLevel=0; // default = 0
 colorTextureViewDescriptor.mipLevelCount=1;
 colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
-WGPU_TEXTURE_FORMAT colorViewFormats[1]={wtf.at(0,0)};
-colorTextureViewDescriptor.viewFormats=&colorViewFormats[1];
 wtvd.at(1,1)=colorTextureViewDescriptor;
-
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -324,7 +321,7 @@ depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
-depthTextureDescriptor.viewFormats=depthViewFormats[1];
+depthTextureDescriptor.viewFormats=depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
@@ -338,8 +335,6 @@ colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
-
-  
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
 u_time.t1=boost::chrono::high_resolution_clock::now();
