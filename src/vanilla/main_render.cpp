@@ -4,7 +4,6 @@ WGpuTextureView depthTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
-WGpuDepthStencilState depthState={};
 WGpuTexture depthTexture;
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
@@ -13,6 +12,7 @@ WGpuShaderModuleDescriptor shaderModuleDescV={};
 WGpuShaderModuleDescriptor shaderModuleDescF={};
 WGpuShaderModule vs;
 WGpuShaderModule fs;
+WGpuDepthStencilState depthState;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
@@ -26,7 +26,6 @@ WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
-
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
@@ -298,18 +297,15 @@ depthTextureViewDescriptor.baseMipLevel=0; // default = 0
 depthTextureViewDescriptor.mipLevelCount=1;
 depthTextureViewDescriptor.baseArrayLayer=1; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
-  
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
-depthTextureDescriptor.depthOrArrayLayers = 1;
-depthTextureDescriptor.mipLevelCount= 1;
-depthTextureDescriptor.sampleCount = 4;
-depthTextureDescriptor.dimension= WGPU_TEXTURE_DIMENSION_2D;
-
-  
+depthTextureDescriptor.depthOrArrayLayers=1;
+depthTextureDescriptor.mipLevelCount=1;
+depthTextureDescriptor.sampleCount=1;
+depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&depthTextureDescriptor);
 depthAttachment.view=wgpu_texture_create_view(depthTexture,&depthTextureViewDescriptor);
 depthAttachment.depthClearValue=1.0f;
@@ -321,7 +317,6 @@ depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 passDesc={};
 wrpca.at(0,0)=colorAttachment;
 wrpdsa.at(0,0)=depthAttachment;
-
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 wrpd.at(0,0)=passDesc;
@@ -331,9 +326,9 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 // set bind ground needs WGPU Render Pass Encoder - not CommandEncoder
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-  
+
   wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-  
+
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),4,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -363,6 +358,7 @@ fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 colorTarget.writeMask=15;
+depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthState.depthWriteEnabled=1;
 vertState={};
@@ -409,7 +405,6 @@ renderPipelineDesc.fragment=fragState;
   
  renderPipelineDesc.depthStencil=depthState;
 
-// renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
