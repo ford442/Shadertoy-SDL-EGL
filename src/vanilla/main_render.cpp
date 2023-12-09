@@ -80,6 +80,7 @@ static wt_tensor wt=wt_tensor{2,2};
 static wtd_tensor wtd=wtd_tensor{2,2};
 static wtvd_tensor wtvd=wtvd_tensor{2,2};
 static wtf_tensor wtf=wtf_tensor{2,2};
+static wtv_tensor wtv=wtv_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
@@ -278,9 +279,10 @@ wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-  
+colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
+wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
-colorAttachment.view=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
+colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 colorAttachment.clearValue.r=1.0f;
@@ -288,9 +290,11 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
-  
 depthAttachment={};
-depthAttachment.view=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
+  
+depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
+wtv.at(0,0)=depthTextureView;
+depthAttachment.view=wtv.at(0,0);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
 depthAttachment.depthReadOnly=0;
@@ -432,6 +436,9 @@ colorTextureViewDescriptor.arrayLayerCount=1;
 WGPU_TEXTURE_FORMAT colorViewFormats[1]={wtf.at(0,0)};
 depthTextureDescriptor.viewFormats=colorViewFormats;
 wtvd.at(1,1)=colorTextureViewDescriptor;
+
+
+  
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH16UNORM;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
