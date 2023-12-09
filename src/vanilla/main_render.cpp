@@ -501,6 +501,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
 EM_JS(void,js_main,(),{
+FS.mkdir('/shader');
 function normalResStart(){
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
@@ -556,8 +557,26 @@ slt=tem.innerHTML;
 },16);
 });
 document.getElementById('startBtn').addEventListener('click',function(){
+// var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
+var pth="https://test.1ink.us/3arth/galaxy.wgsl";
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+document.querySelector('#stat').innerHTML='Downloading Shader';
+document.querySelector('#stat').style.backgroundColor='yellow';
+ff.addEventListener("load",function(){
+let sarrayBuffer=ff.response;
+if(sarrayBuffer){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile('/shader/shader.glsl',sfil);
+document.querySelector('#stat').innerHTML='Downloaded Shader';
+document.querySelector('#stat').style.backgroundColor='blue';
 normalResStart();
+}
 });
+ff.send(null);
+});
+  
 setTimeout(function(){
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
