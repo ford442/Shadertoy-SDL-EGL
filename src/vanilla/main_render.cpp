@@ -292,6 +292,13 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL
+depthTextureViewDescriptor.baseMipLevel=1; // default = 0
+depthTextureViewDescriptor.mipLevelCount=1;
+depthTextureViewDescriptor.baseArrayLayer=1; // default = 0
+depthTextureViewDescriptor.arrayLayerCount=1;
+  
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
