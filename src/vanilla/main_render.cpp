@@ -595,7 +595,9 @@ slt=tem.innerHTML;
 });
 document.getElementById('startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
-var pth="https://test.1ink.us/3arth/melt.wgsl";
+  var pth=document.querySelector('#path').innerHTML;
+
+// var pth="https://test.1ink.us/3arth/melt.wgsl";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
