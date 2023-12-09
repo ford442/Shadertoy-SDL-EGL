@@ -1,6 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
 WGpuTextureView depthTextureView;
-WGpuTextureViewDescripteor depthTextureViewDescriptor={};
+WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDescriptor passDesc={};
