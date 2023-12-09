@@ -127,7 +127,7 @@ b3_vanilla_render_c:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)c.js \
-	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=0 \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFILESYSTEM=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
