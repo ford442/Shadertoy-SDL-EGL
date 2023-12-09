@@ -175,9 +175,9 @@ using result_of_t = decltype(std::is_same<T, void>::value);
 
 #include <cstdio>
 
-#include "../../glslang/glslang/Public/ShaderLang.h"
-#include "../../glslang/glslang/CInterface/glslang_c_interface.cpp"
-#include "../../glslang/SPIRV/GlslangToSpv.h"
+#include "../../../glslang/glslang/Public/ShaderLang.h"
+#include "../../../glslang/glslang/CInterface/glslang_c_interface.cpp"
+#include "../../../glslang/SPIRV/GlslangToSpv.h"
 #include "../../SPIRV-Cross/spirv_cross.hpp"
 #include "../../SPIRV-Cross/spirv_glsl.hpp"
 #include "spirv-tools/libspirv.hpp"
