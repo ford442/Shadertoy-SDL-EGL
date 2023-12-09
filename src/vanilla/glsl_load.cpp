@@ -39,14 +39,6 @@ struct WGpuUniform{
 uint64_t iTime;
 };
 
-struct{
-boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spanb;
-boost::chrono::high_resolution_clock::time_point t1;
-boost::chrono::high_resolution_clock::time_point t2;
-boost::chrono::high_resolution_clock::time_point t3;
-}u_time;
-
 WGpuUniform wTime;
 uint64_t tme;
 
@@ -263,9 +255,9 @@ const char *fragmentShader =
 "return main_out(fragColor_1);\n"
 "}\n\0";
   
-// int raf(double time,void *userData){
+int raf(double time,void *userData){
 
-void raf(){
+// void raf(){
 // u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -329,10 +321,10 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-return;
+return 0;
 }
 
-void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+void ObtainedWebGpuDeviceStartR(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
   
@@ -476,11 +468,11 @@ u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-emscripten_set_main_loop((void(*)())raf,0,0);
-// emscripten_request_animation_frame_loop(raf,0);
+// emscripten_set_main_loop((void(*)())raf,0,0);
+emscripten_request_animation_frame_loop(raf,0);
 }
 
-void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
+void ObtainedWebGpuAdapterStartR(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
@@ -488,7 +480,7 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-void WGPU_Start(){
+void WGPU_StartR(){
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_LOW_POWER;
