@@ -290,7 +290,7 @@ colorAttachment.clearValue.a=1.0f;
 passDesc={};
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 
-depthAttachment.view=wgpu_texture_create_view(&depthTextureViewDescriptor);
+depthAttachment.view=wgpu_texture_create_view(depthTextureView,&depthTextureViewDescriptor);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
 depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR,
