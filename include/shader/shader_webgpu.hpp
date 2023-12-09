@@ -519,7 +519,7 @@ boost::uint_t<64>::exact shd_prg2;
 
 GLsizei * binLength;
 // GLenum * binaryFormat;
-// void * GLbin;
+void * GLbin;
 
 GLsizei binarySize;
 GLenum binaryFormat;
@@ -900,7 +900,7 @@ EGLint numMBuffers;
 EGLint colorSpace;
 EGLint colorFormat;
 GLfloat numAniso;
-GLint binarySize;
+GLsizei binarySize;
 
 Compile compile;
 
@@ -1699,12 +1699,16 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 // glDetachShader(S1.at(0,0,0),frag);
 // glDetachShader(S1.at(0,0,0),vtx);
    // glGetProgramiv(S1.at(1,1,1),GL_PROGRAM_BINARY_LENGTH,&binarySize);
-//  binary=new GLchar[binarySize];
-glGetProgramBinary(S1.at(1,1,1),binarySize,binLength,&binaryFormat,&GLbin);
+//  
+  //  32MB buffer per program
+glGetProgramBinary(S1.at(1,1,1),32000000,binLength,&binaryFormat,&GLbin);
+// glGetProgramBinary(S1.at(1,1,1),sizeof(GLbin)*128,binLength,&binaryFormat,&GLbin);
+// binary=new GLchar[binarySize];
 // glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
 bin.at(0,0)=GLbin;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),*binLength);
+
 eglBindAPI(EGL_OPENGL_ES_API);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
