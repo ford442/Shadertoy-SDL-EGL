@@ -260,11 +260,10 @@ bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry.layout.buffer=wbbl.at(0,0);
   
-textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
-textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
-textureBindingLayout.multisampled=1;
-  
-bindgroup_layout_entry.layout.texture=textureBindingLayout;
+// textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+// textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
+// textureBindingLayout.multisampled=1;
+// bindgroup_layout_entry.layout.texture=textureBindingLayout;
   
 wbgle.at(0,0)=bindgroup_layout_entry;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
