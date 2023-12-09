@@ -79,6 +79,7 @@ static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
 static wt_tensor wt=wt_tensor{2,2};
 static wtd_tensor wtd=wtd_tensor{2,2};
 static wtvd_tensor wtvd=wtvd_tensor{2,2};
+static wtf_tensor wtf=wtf_tensor{2,2};
 
 const char *vertexShader =
 "@vertex\n"
@@ -325,7 +326,9 @@ wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
   
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
-WGPU_TEXTURE_FORMAT canvasViewFormats[1]={navigator_gpu_get_preferred_canvas_format()};
+wtf.at(0,0)=canvasFormat;
+  
+WGPU_TEXTURE_FORMAT canvasViewFormats[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=canvasFormat;
@@ -345,7 +348,8 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=fragmentShader;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
-colorTarget.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+// colorTarget.format=wtf.at(0,0);
+colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -418,14 +422,14 @@ depthTextureViewDescriptor.mipLevelCount=1;
 depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(0,0)=depthTextureViewDescriptor;
-colorTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+colorTextureViewDescriptor.format=wtf.at(0,0);
 colorTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 colorTextureViewDescriptor.baseMipLevel=0; // default = 0
 colorTextureViewDescriptor.mipLevelCount=1;
 colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
-WGPU_TEXTURE_FORMAT colorViewFormats[1]={WGPU_TEXTURE_FORMAT_BGRA8UNORM};
+WGPU_TEXTURE_FORMAT colorViewFormats[1]={wtf.at(0,0)};
 depthTextureDescriptor.viewFormats=colorViewFormats;
 wtvd.at(1,1)=colorTextureViewDescriptor;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
@@ -443,7 +447,7 @@ wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-colorTextureDescriptor.format=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
