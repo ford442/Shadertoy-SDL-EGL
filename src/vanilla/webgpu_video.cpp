@@ -6,7 +6,7 @@ WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuTexture depthTexture;
-WGpuTexture colorTexture;
+WGpuTexture videoTexture;
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor colorTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
@@ -81,7 +81,7 @@ static wt_tensor wt=wt_tensor{2,2};
 static wtd_tensor wtd=wtd_tensor{2,2};
 static wtvd_tensor wtvd=wtvd_tensor{2,2};
 static wtf_tensor wtf=wtf_tensor{2,2};
-static wtv_tensor wtv=wtv_tensor{2,2};
+static wtv_tensor wtv=wtv_tensor{3,3};
 
 const char *vertexShader =
 "@vertex\n"
@@ -259,12 +259,10 @@ bindgroup_layout_entry.binding=0;
 bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entry.layout.buffer=wbbl.at(0,0);
-  
 // textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 // textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 // textureBindingLayout.multisampled=1;
 // bindgroup_layout_entry.layout.texture=textureBindingLayout;
-  
 wbgle.at(0,0)=bindgroup_layout_entry;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
 wbgl.at(0,0)=bindgroup_layout;
@@ -285,9 +283,7 @@ bindgroup_entry.resource=wb.at(0,0);
 bindgroup_entry.bufferBindOffset=0;
 bindgroup_entry.bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entry;
-  
 renderBundleEncoderDescriptor.sampleCount=1;
-  
 renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 wrbed.at(0,0)=renderBundleEncoderDescriptor;
 renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
@@ -323,8 +319,20 @@ depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
-depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
-wt.at(0,0)=depthTexture;
+videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+videoTextureDescriptor.format=wtf.at(0,0);
+videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+videoTextureDescriptor.width=sze.at(0,0);
+videoTextureDescriptor.height=sze.at(0,0); // default = 1;
+videoTextureDescriptor.depthOrArrayLayers=1;
+videoTextureDescriptor.mipLevelCount=1;
+videoTextureDescriptor.sampleCount=1;
+videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
+videoTextureDescriptor.viewFormats=&depthViewFormats[0];
+wtd.at(2,2)=videoTextureDescriptor;
+videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
+wt.at(2,2)=videoTexture;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
