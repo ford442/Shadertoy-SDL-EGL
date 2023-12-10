@@ -10,6 +10,7 @@ WGpuTexture colorTexture;
 WGpuTexture videoTexture;
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor colorTextureDescriptor={};
+WGpuTextureDescriptor videoTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
