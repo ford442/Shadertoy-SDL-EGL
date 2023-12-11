@@ -459,8 +459,8 @@ FS.mkdir('/shader');
 function videoFrames(){
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
-let ctx=cnv.getContext('2d'{willReadFrequently:true});
-    let H=Module.HEAPU8.buffer;
+let ctx=cnv.getContext('2d',{willReadFrequently:true});
+let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*4;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
