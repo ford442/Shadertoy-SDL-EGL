@@ -85,7 +85,7 @@ b3_vanilla_render_a:
 b3_vanilla_render_b:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(LDFLAGS) -sSUPPORT_LONGJMP=wasm -openmp-simd -pthread -lpthread -O0 --js-library lib/lib_webgpu.js \
+	 em++ $(LDFLAGS) -sSUPPORT_LONGJMP=emscripten -openmp-simd -pthread -lpthread -O0 --js-library lib/lib_webgpu.js \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)b.js -ffp-contract=off -ffast-math \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -rtlib=compiler-rt-mt \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
