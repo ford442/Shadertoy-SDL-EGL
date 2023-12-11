@@ -41,7 +41,7 @@ WGpuBuffer uni_iFrame_Buffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout={};
 double szh,szw;
-uint32_t szhI,szwI;
+int szhI,szwI;
 
 struct WGpuUniform{
 uint64_t iTime;
@@ -95,10 +95,10 @@ const char *vertexShader =
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 6>(\n"
 "vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(-1.0f, 1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(1.0f, 1.0f),\n"
+"vec2<f32>(1.0f, -1.0f),\n"
 "vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
