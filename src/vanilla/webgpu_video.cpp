@@ -314,7 +314,7 @@ bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
   
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
-wbbl.at(1,1)=samplerBindingLayout;
+wsbl.at(1,1)=samplerBindingLayout;
   
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[0].binding=0;
