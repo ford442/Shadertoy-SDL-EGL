@@ -445,8 +445,8 @@ ctx.drawImage(vv,0,0);
 let H=Module.HEAPU8.buffer;
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
 let pixelData=new Uint8ClampedArray(imageData.data);
-let heapArray=new Uint8ClampedArray(H);
-heapArray.set(pixelData,0,0);
+let heapArray=new Uint8ClampedArray(H,0,imageData.data);
+heapArray.set(pixelData);
 Module.ccall("frm",null,["Number"],[0]);
 },16);
 }
