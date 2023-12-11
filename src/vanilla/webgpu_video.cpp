@@ -91,6 +91,8 @@ static wtf_tensor wtf=wtf_tensor{2,2};
 static wtv_tensor wtv=wtv_tensor{3,3};
 static wicb_tensor wicb=wicb_tensor{3,3};
 static wicei_tensor wicei=wicei_tensor{2,2};
+static js_tensor js_data=js_tensor{2,2};
+static u64_tensor u64_bfrSze=u64_tensor{4,4};
 
 const char *vertexShader =
 "@vertex\n"
@@ -261,8 +263,9 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-WGpuBufferDescriptor bufferDescriptorIn={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
-WGpuBufferDescriptor bufferDescriptorOut={OutputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
+u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
+WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
 wbd.at(4,4)=bufferDescriptorOut;
 wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
