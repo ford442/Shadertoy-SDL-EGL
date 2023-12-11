@@ -23,8 +23,8 @@ WGpuBufferDescriptor bufferDescriptorU={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
-WGpuBindGroupLayoutEntry bindgroup_layout_entry={};
-WGpuBindGroupEntry bindgroup_entry={};
+WGpuBindGroupLayoutEntry bindgroup_layout_entries[1]={};
+WGpuBindGroupEntry bindgroup_entries[1]={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
@@ -254,18 +254,18 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
-bindgroup_layout_entry={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
-bindgroup_layout_entry.binding=0;
-bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
-bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-bindgroup_layout_entry.layout.buffer=wbbl.at(0,0);
+bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[0].binding=0;
+bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[0].layout.buffer=wbbl.at(0,0);
   
 // textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 // textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 // textureBindingLayout.multisampled=1;
 // bindgroup_layout_entry.layout.texture=textureBindingLayout;
   
-wbgle.at(0,0)=bindgroup_layout_entry;
+wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
@@ -279,12 +279,12 @@ renderPipelineDesc.depthStencil=depthState;
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
-bindgroup_entry={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
-bindgroup_entry.binding=0;
-bindgroup_entry.resource=wb.at(0,0);
-bindgroup_entry.bufferBindOffset=0;
-bindgroup_entry.bufferBindSize=sizeof(uint64_t);
-wbge.at(0,0)=bindgroup_entry;
+bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[0].binding=0;
+bindgroup_entries[0].resource=wb.at(0,0);
+bindgroup_entries[0].bufferBindOffset=0;
+bindgroup_entries[0].bufferBindSize=sizeof(uint64_t);
+wbge.at(0,0)=bindgroup_entries;
   
 renderBundleEncoderDescriptor.sampleCount=1;
   
