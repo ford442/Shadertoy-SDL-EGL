@@ -283,7 +283,7 @@ sze.at(0,0)=float(szh);
 sze.at(0,1)=float(szw);
 multiSamp={};
 multiSamp.count=1;
-multiSamp.mask=1;
+multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
 shaderModuleDescV.code=vertexShader;
@@ -392,7 +392,7 @@ wbbl.at(0,0)=bufferBindingLayout1;
   
 textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
-textureBindingLayout1.multisampled=1;
+textureBindingLayout1.multisampled=0;
   
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
