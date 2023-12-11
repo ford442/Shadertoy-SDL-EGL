@@ -296,7 +296,7 @@ videoFrm.flipY=EM_FALSE;
 
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
-uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorUni);
+uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(0,0));
 wb.at(0,0)=uniBuffer;
 bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
