@@ -41,7 +41,7 @@ WGpuBuffer uni_iFrame_Buffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout={};
 double szh,szw;
-double szhI,szwI;
+uint32_t szhI,szwI;
 
 struct WGpuUniform{
 uint64_t iTime;
