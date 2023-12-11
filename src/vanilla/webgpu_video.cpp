@@ -8,6 +8,8 @@ WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuTexture depthTexture;
 WGpuTexture colorTexture;
 WGpuTexture videoTexture;
+WGpuSampler vChannel={};
+WGpuSamplerDescriptor videoSamplerDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor colorTextureDescriptor={};
 WGpuTextureDescriptor videoTextureDescriptor={};
@@ -197,9 +199,9 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-  
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
-  
+
+wgpu_queue_write_texture(wq.at(0,0),&wtd.at(2,2),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -390,6 +392,19 @@ colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
+videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.lodMinClamp=0;
+videoSamplerDescriptor.lodMaxClamp=32;
+// videoSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
+videoSamplerDescriptor.maxAnisotropy=1;
+wsd.at(0,0)=videoSamplerDescriptor;
+videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
+ws.at(0,0)=videoSampler;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
 u_time.t1=boost::chrono::high_resolution_clock::now();
@@ -442,7 +457,7 @@ FS.mkdir('/shader');
 function videoFrames(){
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
-let ctx=cnv.getContext('2d');
+let ctx=cnv.getContext('2d'{willReadFrequently:true});
     let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*4;
 setInterval(function(){
