@@ -198,7 +198,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
   
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
   
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -285,7 +285,8 @@ videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
-uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(0,0));
+  
+uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorUni);
 wb.at(0,0)=uniBuffer;
 bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
