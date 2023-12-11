@@ -230,7 +230,7 @@ const char * frag_body=
 "fn main(in: FragmentInput) -> @location(0) vec4<f32> {\n"
 "  let color = textureSample(image_texture, image_sampler, in.tex_coord);\n"
 "  // ...\n"
-}\n";
+"}\n";
 
   
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
