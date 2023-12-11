@@ -441,15 +441,15 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let ctx=cnv.getContext('2d');
     let H=Module.HEAPU8.buffer;
-
+let dataSize=cnv.width*cnv.height*4;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 
   
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
 let pixelData=new Uint8ClampedArray(imageData.data);
-let heapArray=new Uint8ClampedArray(H,0,imageData.data.byteLength);
-heapArray.set(pixelData,0,imageData.data.byteLength);
+let heapArray=new Uint8ClampedArray(H,0,dataSize);
+heapArray.set(pixelData,0,dataSize);
 Module.ccall("frm",null,["Number"],[0]);
 },16);
 }
