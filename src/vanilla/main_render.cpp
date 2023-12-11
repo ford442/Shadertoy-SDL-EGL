@@ -1,6 +1,7 @@
 #include "../../include/vanilla/main_render.hpp"
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
+WGpuTextureView colorTextureView2;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
@@ -90,7 +91,7 @@ static wt_tensor wt=wt_tensor{3,3};
 static wtd_tensor wtd=wtd_tensor{2,2};
 static wtvd_tensor wtvd=wtvd_tensor{2,2};
 static wtf_tensor wtf=wtf_tensor{2,2};
-static wtv_tensor wtv=wtv_tensor{2,2};
+static wtv_tensor wtv=wtv_tensor{3,3};
 
 const char *vertexShader =
 "@vertex\n"
@@ -159,11 +160,12 @@ colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
 wt.at(2,2)=colorTexture2;
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
+colorTextureView2=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
+wtv.at(2,2)=colorTextureView2;
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-colorAttachment.resolveTarget=wt.at(2,2);
+colorAttachment.resolveTarget=wtv.at(2,2);
 colorAttachment.view=wtv.at(1,1);
-  
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 colorAttachment.clearValue.r=1.0f;
