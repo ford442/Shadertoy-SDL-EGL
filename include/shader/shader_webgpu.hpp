@@ -276,7 +276,7 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
 "precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
 "precision highp sampler2DArrayShadow;\n"
-"precision highp float;\n";
+"precision highp float;varying vec4 gl_FragCoord;\n";
 /*
 
 "#pragma (precise none)\n"
