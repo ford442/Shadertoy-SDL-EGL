@@ -269,6 +269,8 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
+"precision highp sampler3D;precision highp sampler2D;"
+"precision highp samplerCube;"
 "precision highp sampler2DArray;precision highp sampler2DShadow;"
 "precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
 "precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
@@ -287,20 +289,22 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;"
+
 */
 
-static inline char vrt_bdy_src[420]="precision highp int;\n"
-"precision highp sampler2D;"
-"precision highp sampler3D;"
-"precision highp samplerCube;"
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
+static inline char vrt_bdy_src[420]=
+// "precision highp int;\n"
+// "precision highp sampler2D;"
+// "precision highp sampler3D;"
+// "precision highp samplerCube;"
+"layout(location=0)in vec4 iPosition;"
+void main(){gl_Position=iPosition;}\n\0";
 
-static inline char frg_hdr_src[1000]="precision highp int;\n"
-"precision highp sampler2D;"
-"precision highp sampler3D;"
-"precision highp samplerCube;"
+static inline char frg_hdr_src[1000]=
+// "precision highp int;\n"
+// "precision highp sampler2D;"
+// "precision highp sampler3D;"
+// "precision highp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
@@ -1227,7 +1231,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-const inline GLchar * rd_fl(const char * Fnm){
+const inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1278,7 +1282,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const GLchar * frag_body=(GLchar*)rd_fl(Fnm);
+const char * frag_body=(char*)rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
