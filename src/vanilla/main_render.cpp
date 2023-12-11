@@ -227,7 +227,7 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
-multiSamp.count=4;
+multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
