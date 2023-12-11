@@ -84,6 +84,7 @@ static wbg_tensor wbg=wbg_tensor{2,2};
 static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
 static wbbl_tensor wbbl=wbbl_tensor{2,2};
+static wsbl_tensor wsbl=wsbl_tensor{2,2};
 static wbd_tensor wbd=wbd_tensor{5,5};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
@@ -325,7 +326,7 @@ bindgroup_layout_entries[1]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZE
 bindgroup_layout_entries[1].binding=1;
 bindgroup_layout_entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
-bindgroup_layout_entries[1].layout.sampler=wbbl.at(1,1);
+bindgroup_layout_entries[1].layout.sampler=wsbl.at(1,1);
   
 // textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 // textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
