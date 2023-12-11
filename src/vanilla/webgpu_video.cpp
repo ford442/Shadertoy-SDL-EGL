@@ -155,11 +155,12 @@ const char * vertexShader=
 "};\n";
 
 const char * frag_body=
+"@group(0) @binding(0) var <uniform>iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d<f32>;\n"
-"struct VertexOutput {\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>,\n"
+"@fragment\n"
+"fn frag_main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
+"  return textureSample(myTexture, mySampler, fragUV);\n"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
