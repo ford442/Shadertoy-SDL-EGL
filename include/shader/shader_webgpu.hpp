@@ -1419,7 +1419,7 @@ emscripten_webgl_make_context_current(cntxi.at(0,0));
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
   
-glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+// glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
  //    glDepthFunc(GL_GREATER);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 // glEnable(BLEND_ADVANCED_COHERENT_NV);
