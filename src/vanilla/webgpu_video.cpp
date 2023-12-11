@@ -148,11 +148,7 @@ const char * vertexShader=
 "output.Position = vec4(pos[VertexIndex], 0.0, 1.0);\n"
 "output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
-"}\n"
-"struct VertexOutput {\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>,\n"
-"};\n";
+"}\n";
 
 const char * frag_body=
 "@group(0) @binding(0) var <uniform>iTime : u32;\n"
