@@ -427,7 +427,7 @@ return EM_TRUE;
 extern "C"{
 
 void frm(unsigned int * h){
-framm(h);
+// framm(h);
 return;
 }
 
