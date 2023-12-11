@@ -58,7 +58,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static u32_tensor sze=u32_tensor{2,2};
+static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
 static wcb_tensor wcb=wcb_tensor{2,2};
