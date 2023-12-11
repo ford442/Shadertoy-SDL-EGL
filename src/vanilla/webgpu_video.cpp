@@ -8,7 +8,7 @@ WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuTexture depthTexture;
 WGpuTexture colorTexture;
 WGpuTexture videoTexture;
-WGpuSampler vSampler={};
+WGpuSampler videoSampler={};
 WGpuSamplerDescriptor videoSamplerDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor colorTextureDescriptor={};
