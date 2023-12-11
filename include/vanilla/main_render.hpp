@@ -115,3 +115,4 @@ using wtv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 using js_tensor=boost::numeric::ublas::tensor<unsigned int *>;
 using wicb_tensor=boost::numeric::ublas::tensor<WGPUImageCopyBuffer>;
 using wicei_tensor=boost::numeric::ublas::tensor<WGpuImageCopyExternalImage>;
+using wict_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTexture>;
