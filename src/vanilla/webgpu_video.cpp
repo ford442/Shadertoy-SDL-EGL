@@ -440,13 +440,16 @@ function videoFrames(){
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let ctx=cnv.getContext('2d');
+    let H=Module.HEAPU8.buffer;
+
 setInterval(function(){
 ctx.drawImage(vv,0,0);
-let H=Module.HEAPU8.buffer;
+
+  
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
 let pixelData=new Uint8ClampedArray(imageData.data);
-let heapArray=new Uint8ClampedArray(H,0,imageData.data);
-heapArray.set(pixelData);
+let heapArray=new Uint8ClampedArray(H,0,imageData.length);
+heapArray.set(pixelData,0,imageData.length);
 Module.ccall("frm",null,["Number"],[0]);
 },16);
 }
