@@ -127,7 +127,7 @@ const char * vertexShader=
 "@location(0) fragUV : vec2<f32>,\n"
 "};\n"
 "@vertex\n"
-"fn vert_main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
 "const pos = array(\n"
 "vec2( 1.0,  1.0),\n"
 "vec2( 1.0, -1.0),\n"
@@ -155,7 +155,7 @@ const char * frag_body=
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d<f32>;\n"
 "@fragment\n"
-"fn frag_main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
+"fn main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
 "  return textureSample(myTexture, mySampler, fragUV);\n"
 "}\n";
 
