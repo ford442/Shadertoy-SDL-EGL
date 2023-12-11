@@ -293,11 +293,13 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 
 static inline char vrt_bdy_src[420]="precision highp int;\n"
 "precision highp sampler2D;"
+"precision highp sampler3D;"
 "precision highp samplerCube;"
 "layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n\0";
 
 static inline char frg_hdr_src[1000]="precision highp int;\n"
 "precision highp sampler2D;"
+"precision highp sampler3D;"
 "precision highp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
