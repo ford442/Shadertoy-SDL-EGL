@@ -95,6 +95,7 @@ static wicb_tensor wicb=wicb_tensor{3,3};
 static wicei_tensor wicei=wicei_tensor{2,2};
 static js_tensor js_data_pointer=js_tensor{2,2};
 static u64_tensor u64_bfrSze=u64_tensor{4,4};
+static wict_tensor wict=wict_tensor{4,4};
 
 const char *vertexShader =
 "@vertex\n"
@@ -197,8 +198,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
   
-// wgpu_queue_write_texture(wq.at(0,0),   sze.at(0,0),sze.at(0,0),1);
-// wgpu_queue_copy_external_image_to_texture
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
   
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -265,6 +265,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
+  
 u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
@@ -274,18 +275,7 @@ srcBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 dstBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(3,3)=srcBuffer;
 wb.at(4,4)=dstBuffer;
-  
-// videoFrmBfrSrc.offset=0;
-// videoFrmBfrSrc.bytesPerRow=sze.at(0,0);
-// videoFrmBfrSrc.rowsPerImage=sze.at(0,0);
-videoFrmBfrSrc.buffer=srcBuffer;
-// videoFrmBfrSrc._explicitPaddingFor8BytesAlignedSize;
-wicb.at(0,0)=videoFrmBfrSrc;
-// videoFrmBfrDst.offset=0;
-// videoFrmBfrDst.bytesPerRow=sze.at(0,0);
-// videoFrmBfrDst.rowsPerImage=sze.at(0,0);
-videoFrmBfrDst.buffer=dstBuffer;
-// videoFrmBfrDest._explicitPaddingFor8BytesAlignedSize;
+
 wicb.at(1,1)=videoFrmBfrDst;
 WGpuOrigin2D xy={};
 xy.x=0;
@@ -293,7 +283,6 @@ xy.y=0;
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
-
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(0,0));
@@ -378,6 +367,16 @@ videoTextureDescriptor.viewFormats=&videoViewFormats[0];
 wtd.at(2,2)=videoTextureDescriptor;
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=videoTexture;
+WGpuOrigin3D xyz={};
+xyz.x=0;
+xyz.y=0;
+xyz.z=0;
+WGpuImageCopyTexture videoTextureCopy;
+videoTextureCopy.texture=wt.at(2,2);
+videoTextureCopy.mipLevel=1;
+videoTextureCopy.origin=xyz;
+videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
+wict.at(0,0)=videoTextureCopy;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
