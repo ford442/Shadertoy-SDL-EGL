@@ -36,6 +36,8 @@ WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
+WGpuBuffer srcBuffer;
+WGpuBuffer dstBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
@@ -268,8 +270,11 @@ WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_ST
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
 wbd.at(4,4)=bufferDescriptorOut;
-wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
-wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
+srcBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
+dstBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
+wb.at(3,3)=srcBuffer;
+wb.at(4,4)=dstBuffer;
+  
 // videoFrmBfrSrc.offset=0;
 // videoFrmBfrSrc.bytesPerRow=sze.at(0,0);
 // videoFrmBfrSrc.rowsPerImage=sze.at(0,0);
