@@ -298,7 +298,7 @@ static inline char vrt_bdy_src[420]=
 // "precision highp sampler3D;"
 // "precision highp samplerCube;"
 "layout(location=0)in vec4 iPosition;"
-void main(){gl_Position=iPosition;}\n\0";
+"void main(){gl_Position=iPosition;}\n\0";
 
 static inline char frg_hdr_src[1000]=
 // "precision highp int;\n"
