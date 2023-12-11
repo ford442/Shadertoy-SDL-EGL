@@ -325,7 +325,7 @@ using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
-using gf_tensor=boost::numeric::ublas::tensor<GLfloat>;
+using glf_tensor=boost::numeric::ublas::tensor<GLfloat>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using uint_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
@@ -369,6 +369,7 @@ using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 
+static glf_tensor glf=glf_tensor{3,3};
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=rv_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
@@ -796,19 +797,25 @@ Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
+glf.at(0,0)=1.0f;
+glf.at(1,1)=-1.0f;
+glf.at(2,2)=0.0f;
 return EM_TRUE;
 };
 
 const static inline boost::function<const register GLfloat()>gF=[](){
-return Fi.at(0,0);
+// return Fi.at(0,0);
+return glf.at(0,0);
 };
 
 const static inline boost::function<const register GLfloat()>gFm1=[](){
-return Fi.at(0,1);
+// return Fi.at(0,1);
+return glf.at(1,1);
 };
 
 const static inline boost::function<const register GLfloat()>gF0=[](){
-return Fi.at(1,1);
+// return Fi.at(1,1);
+return glf.at(2,2);
 };
 
 };
