@@ -275,7 +275,6 @@ srcBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 dstBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(3,3)=srcBuffer;
 wb.at(4,4)=dstBuffer;
-
 wicb.at(1,1)=videoFrmBfrDst;
 WGpuOrigin2D xy={};
 xy.x=0;
@@ -283,6 +282,7 @@ xy.y=0;
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
+  
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
   
@@ -358,7 +358,7 @@ depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(0,0);
-videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
