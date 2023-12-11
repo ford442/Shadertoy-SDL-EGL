@@ -355,7 +355,7 @@ videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
 videoTextureDescriptor.sampleCount=1;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT videoViewFormats[1]={wtf.at(0,0)};
+WGPU_TEXTURE_FORMAT videoViewFormats[1]={WGPU_TEXTURE_FORMAT_R32FLOAT};
 videoTextureDescriptor.viewFormats=&videoViewFormats[0];
 wtd.at(2,2)=videoTextureDescriptor;
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
@@ -390,7 +390,7 @@ bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
   
-textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout1.multisampled=0;
   
