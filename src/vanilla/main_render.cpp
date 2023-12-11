@@ -266,7 +266,7 @@ bindgroup_layout_entries[0].layout.buffer=wbbl.at(0,0);
 // bindgroup_layout_entry.layout.texture=textureBindingLayout;
   
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),1);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
