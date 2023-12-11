@@ -31,7 +31,7 @@ WGpuBufferDescriptor bufferDescriptorDst={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
-WGpuBindGroupLayoutEntry bindgroup_layout_entries[2]={};
+WGpuBindGroupLayoutEntry bindgroup_layout_entries[3]={};
 WGpuBindGroupEntry bindgroup_entry={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
@@ -43,7 +43,7 @@ WGpuBuffer uniBuffer;
 WGpuBuffer srcBuffer;
 WGpuBuffer dstBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
-WGpuTextureBindingLayout textureBindingLayout={};
+WGputextureBindingLayout textureBindingLayout1={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
@@ -105,6 +105,7 @@ static wict_tensor wict=wict_tensor{4,4};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 
+/*
 const char *vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
@@ -117,6 +118,48 @@ const char *vertexShader =
 "vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
+"}\n";
+*/
+
+const char * vertexShader=
+"struct VertexOutput {\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>,\n"
+"};\n"
+"@vertex\n"
+"fn vert_main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"const pos = array(\n"
+"vec2( 1.0,  1.0),\n"
+"vec2( 1.0, -1.0),\n"
+"vec2(-1.0, -1.0),\n"
+"vec2( 1.0,  1.0),\n"
+"vec2(-1.0, -1.0),\n"
+"vec2(-1.0,  1.0),\n"
+");\n"
+"const uv = array(\n"
+"vec2(1.0, 0.0),\n"
+"vec2(1.0, 1.0),\n"
+"vec2(0.0, 1.0),\n"
+"vec2(1.0, 0.0),\n"
+"vec2(0.0, 1.0),\n"
+"vec2(0.0, 0.0),\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position = vec4(pos[VertexIndex], 0.0, 1.0);\n"
+"output.fragUV = uv[VertexIndex];\n"
+"return output;\n"
+"}\n"
+"struct VertexOutput {\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>,\n"
+"};\n";
+
+const char * frag_body=
+"@group(0) @binding(1) var mySampler : sampler;\n"
+"@group(0) @binding(2) var myTexture : texture_2d<f32>;\n"
+"struct VertexOutput {\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>,\n"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -226,14 +269,6 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
   
 // const char * frag_body=(char*)rd_fl(Fnm);
   
-const char * frag_body=
-"  @fragment\n"
-"fn main(in: FragmentInput) -> @location(0) vec4<f32> {\n"
-"  let color = textureSample(image_texture, image_sampler, in.tex_coord);\n"
-"  // ...\n"
-"}\n";
-
-  
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM_SRGB;
@@ -302,7 +337,51 @@ xy.y=0;
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
-  
+videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.lodMinClamp=0;
+videoSamplerDescriptor.lodMaxClamp=32;
+// videoSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
+videoSamplerDescriptor.maxAnisotropy=1;
+wsd.at(0,0)=videoSamplerDescriptor;
+videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
+ws.at(0,0)=videoSampler;
+videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+videoTextureDescriptor.format=wtf.at(0,0);
+videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
+videoTextureDescriptor.width=sze.at(0,0);
+videoTextureDescriptor.height=sze.at(0,0); // default = 1;
+videoTextureDescriptor.depthOrArrayLayers=1;
+videoTextureDescriptor.mipLevelCount=1;
+videoTextureDescriptor.sampleCount=1;
+videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+WGPU_TEXTURE_FORMAT videoViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
+videoTextureDescriptor.viewFormats=&videoViewFormats[0];
+wtd.at(2,2)=videoTextureDescriptor;
+videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
+wt.at(2,2)=videoTexture;
+videoTextureViewDescriptor.format=wtf.at(0,0);
+videoTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+videoTextureViewDescriptor.baseMipLevel=0; // default = 0
+videoTextureViewDescriptor.mipLevelCount=1;
+videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
+videoTextureViewDescriptor.arrayLayerCount=1;
+wtvd.at(2,2)=videoTextureViewDescriptor;
+WGpuOrigin3D xyz={};
+xyz.x=0;
+xyz.y=0;
+xyz.z=0;
+WGpuImageCopyTexture videoTextureCopy;
+videoTextureCopy.texture=wt.at(2,2);
+videoTextureCopy.mipLevel=0;
+videoTextureCopy.origin=xyz;
+videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
+wict.at(0,0)=videoTextureCopy;
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
   
@@ -312,6 +391,10 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
+  
+textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout1.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
+textureBindingLayout1.multisampled=1;
   
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
@@ -328,13 +411,14 @@ bindgroup_layout_entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 bindgroup_layout_entries[1].layout.sampler=wsbl.at(1,1);
   
-// textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
-// textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
-// textureBindingLayout.multisampled=1;
-// bindgroup_layout_entries[2].layout.texture=textureBindingLayout;
+bindgroup_layout_entries[2]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[2].binding=2;
+bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+bindgroup_layout_entries[2].layout.texture=textureBindingLayout1;
   
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),2);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -388,38 +472,6 @@ depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
-videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-videoTextureDescriptor.format=wtf.at(0,0);
-videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-videoTextureDescriptor.width=sze.at(0,0);
-videoTextureDescriptor.height=sze.at(0,0); // default = 1;
-videoTextureDescriptor.depthOrArrayLayers=1;
-videoTextureDescriptor.mipLevelCount=1;
-videoTextureDescriptor.sampleCount=1;
-videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT videoViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
-videoTextureDescriptor.viewFormats=&videoViewFormats[0];
-wtd.at(2,2)=videoTextureDescriptor;
-videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
-wt.at(2,2)=videoTexture;
-videoTextureViewDescriptor.format=wtf.at(0,0);
-videoTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-videoTextureViewDescriptor.baseMipLevel=0; // default = 0
-videoTextureViewDescriptor.mipLevelCount=1;
-videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureViewDescriptor.arrayLayerCount=1;
-wtvd.at(2,2)=videoTextureViewDescriptor;
-WGpuOrigin3D xyz={};
-xyz.x=0;
-xyz.y=0;
-xyz.z=0;
-WGpuImageCopyTexture videoTextureCopy;
-videoTextureCopy.texture=wt.at(2,2);
-videoTextureCopy.mipLevel=0;
-videoTextureCopy.origin=xyz;
-videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
-wict.at(0,0)=videoTextureCopy;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -430,19 +482,7 @@ colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
-videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
-videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
-videoSamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_NEAREST;
-videoSamplerDescriptor.lodMinClamp=0;
-videoSamplerDescriptor.lodMaxClamp=32;
-// videoSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
-videoSamplerDescriptor.maxAnisotropy=1;
-wsd.at(0,0)=videoSamplerDescriptor;
-videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
-ws.at(0,0)=videoSampler;
+
   
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
