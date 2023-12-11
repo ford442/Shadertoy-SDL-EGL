@@ -91,7 +91,7 @@ static wtf_tensor wtf=wtf_tensor{2,2};
 static wtv_tensor wtv=wtv_tensor{3,3};
 static wicb_tensor wicb=wicb_tensor{3,3};
 static wicei_tensor wicei=wicei_tensor{2,2};
-static js_tensor js_data=js_tensor{2,2};
+static js_tensor js_data_pointer=js_tensor{2,2};
 static u64_tensor u64_bfrSze=u64_tensor{4,4};
 
 const char *vertexShader =
@@ -270,22 +270,22 @@ wbd.at(3,3)=bufferDescriptorIn;
 wbd.at(4,4)=bufferDescriptorOut;
 wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
-videoFrmBfrSrc.offset=0;
-videoFrmBfrSrc.bytesPerRow=sze.at(0,0);
-videoFrmBfrSrc.rowsPerImage=sze.at(0,0);
-videoFrmBfrSrc.buffer=wb.at(3,3);
+// videoFrmBfrSrc.offset=0;
+// videoFrmBfrSrc.bytesPerRow=sze.at(0,0);
+// videoFrmBfrSrc.rowsPerImage=sze.at(0,0);
+videoFrmBfrSrc.buffer=&wb.at(3,3);
 // videoFrmBfrSrc._explicitPaddingFor8BytesAlignedSize;
 wicb.at(0,0)=videoFrmBfrSrc;
-videoFrmBfrDst.offset=0;
-videoFrmBfrDst.bytesPerRow=sze.at(0,0);
-videoFrmBfrDst.rowsPerImage=sze.at(0,0);
-videoFrmBfrDst.buffer=wb.at(4,4);
+// videoFrmBfrDst.offset=0;
+// videoFrmBfrDst.bytesPerRow=sze.at(0,0);
+// videoFrmBfrDst.rowsPerImage=sze.at(0,0);
+videoFrmBfrDst.buffer=&wb.at(4,4);
 // videoFrmBfrDest._explicitPaddingFor8BytesAlignedSize;
 wicb.at(1,1)=videoFrmBfrDst;
 WGpuOrigin2D xy={};
 xy.x=0;
 xy.y=0;
-videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
+// videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
 
