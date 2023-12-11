@@ -333,12 +333,12 @@ xy.y=0;
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
-videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
+videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
-videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
-videoSamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_NEAREST;
 videoSamplerDescriptor.lodMinClamp=0;
 videoSamplerDescriptor.lodMaxClamp=32;
 // videoSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
@@ -504,7 +504,7 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
-deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
+deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH_CLIP_CONTROL|WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_SHADER_F16|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE|WGPU_FEATURE_FLOAT32_FILTERABLE;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
