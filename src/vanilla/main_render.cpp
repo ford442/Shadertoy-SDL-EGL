@@ -235,13 +235,13 @@ WGpuColorTargetState colorTarget={};
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 depthState={};
-depthState.format=WGPU_TEXTURE_FORMAT_DEPTH16UNORM;
+depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8
 depthState.depthWriteEnabled=1;
-depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
+depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS;
 vertState={};
 vertState.module=vs;
 vertState.entryPoint="main";
