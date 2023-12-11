@@ -236,8 +236,7 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-  
+wtv.at(2,2)=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
@@ -369,6 +368,8 @@ videoTextureViewDescriptor.mipLevelCount=1;
 videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
 videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
+videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+wtv.at(2,2)=videoTextureView;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
@@ -440,7 +441,7 @@ bindgroup_entries[1].resource=ws.at(0,0);
   
 bindgroup_entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[2].binding=2;
-bindgroup_entries[2].resource=wt.at(2,2);
+bindgroup_entries[2].resource=wtv.at(2,2);
   
 wbge.at(0,0)=bindgroup_entries;
 renderBundleEncoderDescriptor.sampleCount=1;
