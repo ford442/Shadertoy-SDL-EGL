@@ -438,7 +438,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
 
-EM_BOOL framm(unsigned int * em){
+EM_BOOL framm(uint8_t * em){
 js_data_pointer.at(0,0)=em;
 return EM_TRUE;
 }
@@ -446,7 +446,7 @@ return EM_TRUE;
 
 extern "C"{
 
-void frm(unsigned int * h){
+void frm(uint8_t * h){
 // framm(h);
 return;
 }
