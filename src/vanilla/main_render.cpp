@@ -234,7 +234,7 @@ shaderModuleDescF.code=frag_body;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=wtf.at(0,0);
-colorTarget.writeMask=15;
+colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
