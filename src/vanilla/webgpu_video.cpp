@@ -376,7 +376,7 @@ xyz.y=0;
 xyz.z=0;
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
-videoTextureCopy.mipLevel=1;
+videoTextureCopy.mipLevel=0;
 videoTextureCopy.origin=xyz;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
