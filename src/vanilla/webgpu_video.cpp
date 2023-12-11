@@ -1,8 +1,10 @@
 #include "../../include/vanilla/main_render.hpp"
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
+WGpuTextureView videoTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
+WGpuTextureViewDescriptor videoTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuTexture depthTexture;
@@ -29,7 +31,7 @@ WGpuBufferDescriptor bufferDescriptorDst={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
-WGpuBindGroupLayoutEntry bindgroup_layout_entry={};
+WGpuBindGroupLayoutEntry bindgroup_layout_entries[2]={};
 WGpuBindGroupEntry bindgroup_entry={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
@@ -42,6 +44,7 @@ WGpuBuffer srcBuffer;
 WGpuBuffer dstBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout={};
+WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
 WGPUImageCopyBuffer videoFrmBfrDst={};
@@ -90,7 +93,7 @@ static wrbed_tensor wrbed=wrbed_tensor{2,2};
 static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
 static wt_tensor wt=wt_tensor{2,2};
 static wtd_tensor wtd=wtd_tensor{2,2};
-static wtvd_tensor wtvd=wtvd_tensor{2,2};
+static wtvd_tensor wtvd=wtvd_tensor{3,3};
 static wtf_tensor wtf=wtf_tensor{2,2};
 static wtv_tensor wtv=wtv_tensor{3,3};
 static wicb_tensor wicb=wicb_tensor{3,3};
@@ -192,6 +195,8 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
+videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+  
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
@@ -217,7 +222,17 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 js_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-const char * frag_body=(char*)rd_fl(Fnm);
+  
+// const char * frag_body=(char*)rd_fl(Fnm);
+  
+const char * frag_body=
+"  @fragment\n"
+"fn main(in: FragmentInput) -> @location(0) vec4<f32> {\n"
+"  let color = textureSample(image_texture, image_sampler, in.tex_coord);\n"
+"  // ...\n"
+}\n";
+
+  
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM_SRGB;
@@ -296,17 +311,29 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
-bindgroup_layout_entry={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
-bindgroup_layout_entry.binding=0;
-bindgroup_layout_entry.visibility=WGPU_SHADER_STAGE_FRAGMENT;
-bindgroup_layout_entry.type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-bindgroup_layout_entry.layout.buffer=wbbl.at(0,0);
+  
+samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
+wbbl.at(1,1)=samplerBindingLayout;
+  
+bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[0].binding=0;
+bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[0].layout.buffer=wbbl.at(0,0);
+  
+bindgroup_layout_entries[1]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[1].binding=1;
+bindgroup_layout_entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
+bindgroup_layout_entries[1].layout.sampler=wbbl.at(1,1);
+  
 // textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 // textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 // textureBindingLayout.multisampled=1;
-// bindgroup_layout_entry.layout.texture=textureBindingLayout;
-wbgle.at(0,0)=bindgroup_layout_entry;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),1);
+// bindgroup_layout_entries[2].layout.texture=textureBindingLayout;
+  
+wbgle.at(0,0)=bindgroup_layout_entries;
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),&wbgle.at(0,0),2);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -374,6 +401,14 @@ videoTextureDescriptor.viewFormats=&videoViewFormats[0];
 wtd.at(2,2)=videoTextureDescriptor;
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=videoTexture;
+videoTextureViewDescriptor.format=wtf.at(0,0);
+videoTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+videoTextureViewDescriptor.baseMipLevel=0; // default = 0
+videoTextureViewDescriptor.mipLevelCount=1;
+videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
+videoTextureViewDescriptor.arrayLayerCount=1;
+wtvd.at(2,2)=videoTextureViewDescriptor;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
@@ -407,6 +442,7 @@ videoSamplerDescriptor.maxAnisotropy=1;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 ws.at(0,0)=videoSampler;
+  
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
 u_time.t1=boost::chrono::high_resolution_clock::now();
