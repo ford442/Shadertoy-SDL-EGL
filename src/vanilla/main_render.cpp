@@ -241,7 +241,7 @@ depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8
 depthState.depthWriteEnabled=1;
-depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS;
+depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 vertState={};
 vertState.module=vs;
 vertState.entryPoint="main";
