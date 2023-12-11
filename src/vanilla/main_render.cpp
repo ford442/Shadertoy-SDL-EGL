@@ -81,6 +81,7 @@ static wbd_tensor wbd=wbd_tensor{8,8};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
 static u64_tensor u64_uni=u64_tensor{8,8};
+static u64_tensor u64_siz=u64_tensor{1,1};
 static wrbe_tensor wrbe=wrbe_tensor{2,2};
 static wrbed_tensor wrbed=wrbed_tensor{2,2};
 static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
