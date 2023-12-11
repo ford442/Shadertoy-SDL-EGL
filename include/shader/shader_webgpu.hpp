@@ -269,14 +269,15 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
-"precision highp sampler3D;precision highp sampler2D;"
+"precision highp float;\n"
+"precision highp sampler3D;"
+"precision highp sampler2D;"
 "precision highp samplerCube;"
-"precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n"
-"precision highp float;varying vec4 gl_FragCoord;\n";
+"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
 /*
 
 "#pragma (precise none)\n"
@@ -293,14 +294,18 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 */
 
 static inline char vrt_bdy_src[420]=
-// "precision highp int;\n"
-// "precision highp sampler2D;"
+"precision highp float;\n"
+"precision highp int;\n"
+"precision lowp sampler2D;"
 // "precision highp sampler3D;"
-// "precision highp samplerCube;"
+"precision lowp samplerCube;"
 "layout(location=0)in vec4 iPosition;"
-"void main(){gl_Position=iPosition;}\n\0";
+"void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
+"precision mediump int;\n"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;"
 // "precision highp int;\n"
 // "precision highp sampler2D;"
 // "precision highp sampler3D;"
@@ -312,7 +317,7 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[2420]="void main(){mainImage(fragColor,gl_FragCoord.xyz);}\n\0";
+static inline char frg_ftr_src[420]="void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
 /*
 "#define mainImage mainImage0(out vec4 O, vec2 U);\n"
 "int _N=3;void mainImage(out vec4 O,vec2 U){\n"
