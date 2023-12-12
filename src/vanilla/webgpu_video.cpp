@@ -49,6 +49,8 @@ WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
 WGPUImageCopyBuffer videoFrmBfrDst={};
 double szh,szw;
+int szhI,szwI;
+static i_tensor sze=i_tensor{2,2};
 
 struct WGpuUniform{
 uint64_t iTime;
@@ -449,6 +451,11 @@ renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH32FLOA
 wrbed.at(0,0)=renderBundleEncoderDescriptor;
 renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 wrbe.at(0,0)=renderBundleEncoder;
+emscripten_get_element_css_size("canvas",&szw,&szh);
+emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
+u64_siz.at(0,0)=szhI;
+sze.at(0,0)=szh;
+sze.at(0,1)=szw;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
