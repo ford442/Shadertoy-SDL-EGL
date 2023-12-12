@@ -272,14 +272,13 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 "precision highp float;\n"
 "precision highp sampler3D;"
 "precision highp sampler2D;"
-"precision highp samplerCube;"
+"precision highp samplerCube;";
+/*
 "precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
 "precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
 "precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
 "precision mediump sampler2DArrayShadow;\n";
-/*
-
 "#pragma (precise none)\n"
 "#pragma debug(off)\n"
 "#pragma (invariant none)\n"
