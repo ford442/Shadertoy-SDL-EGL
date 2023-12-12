@@ -318,7 +318,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-  
+  /*
 u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
@@ -335,6 +335,7 @@ xy.y=0;
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
+  */
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_REPEAT;
