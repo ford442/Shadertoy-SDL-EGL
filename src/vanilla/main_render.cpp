@@ -91,7 +91,7 @@ static wtvd_tensor wtvd=wtvd_tensor{2,2};
 static wtf_tensor wtf=wtf_tensor{2,2};
 static wtv_tensor wtv=wtv_tensor{2,2};
 
-const char *vertexShader =
+const char * vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 6>(\n"
@@ -103,25 +103,6 @@ const char *vertexShader =
 "vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
-"}\n";
-
-const char * vertexShader2 =
-"var<private> iPosition : vec4<f32>;\n"
-"var<private> gl_Position : vec4<f32>;\n"
-"fn main_1() {\n"
-"let x_15 : vec4<f32> = iPosition;\n"
-"gl_Position = x_15;\n"
-"return;\n"
-"}\n"
-"struct main_out {\n"
-"@builtin(position)\n"
-"gl_Position : vec4<f32>,\n"
-"}\n"
-"@vertex\n"
-"fn main(@location(0) iPosition_param : vec4<f32>) -> main_out {\n"
-"iPosition = iPosition_param;\n"
-"main_1();\n"
-"return main_out(gl_Position);\n"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -245,7 +226,7 @@ multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShader2;
+shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.code=fragmentShader;
