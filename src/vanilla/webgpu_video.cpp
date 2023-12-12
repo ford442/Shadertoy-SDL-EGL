@@ -50,7 +50,6 @@ WGPUImageCopyBuffer videoFrmBfrSrc={};
 WGPUImageCopyBuffer videoFrmBfrDst={};
 double szh,szw;
 int szhI,szwI;
-static i_tensor sze=i_tensor{2,2};
 
 struct WGpuUniform{
 uint64_t iTime;
@@ -67,7 +66,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static f_tensor sze=f_tensor{2,2};
+static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
 static wcb_tensor wcb=wcb_tensor{2,2};
@@ -91,6 +90,7 @@ static wbd_tensor wbd=wbd_tensor{5,5};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
 static u64_tensor u64_uni=u64_tensor{4,4};
+static u64_tensor u64_siz=u64_tensor{4,4};
 static wrbe_tensor wrbe=wrbe_tensor{2,2};
 static wrbed_tensor wrbed=wrbed_tensor{2,2};
 static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
