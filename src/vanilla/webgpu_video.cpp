@@ -511,7 +511,7 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
-deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH_CLIP_CONTROL|WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_SHADER_F16|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE|WGPU_FEATURE_FLOAT32_FILTERABLE;
+deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
