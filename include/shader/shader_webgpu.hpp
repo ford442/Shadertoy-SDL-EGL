@@ -1822,8 +1822,8 @@ glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT24
 // glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT32F,int_size.at(2,0),int_size.at(2,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
 
-glDepthRangef(0.0f,1.0f);
-glClearDepthf(Fi.at(0,0));
+//      glDepthRangef(0.0f,1.0f);
+//       glClearDepthf(Fi.at(0,0));
 // glDepthRange(-1.0,1.0);
 // glClearDepth(Di.at(0,0));
   
