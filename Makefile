@@ -11,8 +11,7 @@ LINK_SIMD_FLAGS += -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -m
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
 
 COMMON_FLAGS += -openmp-simd -pthread -pipe -mextended-const -mbulk-memory -matomics \
-	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 \
-	 -fPIC -fPIE -finline-functions -funroll-loops \
+	 -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -fPIC -fPIE -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
@@ -63,8 +62,8 @@ b3_vanilla_video_a:
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --memory-init-file 0 webgpu_video.o 
 
