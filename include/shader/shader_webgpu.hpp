@@ -2008,8 +2008,8 @@ glViewport(0,0,int_size.at(2,0),int_size.at(2,0));  //  viewport/scissor after U
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,int_size.at(2,0),int_size.at(2,0));
 // glDisable(GL_SCISSOR_TEST);
-glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&numAniso);
-glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,numAniso);
+   // glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&numAniso);
+   // glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,numAniso);
 u_iTime_set(0.0f);
 u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
