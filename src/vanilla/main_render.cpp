@@ -40,6 +40,7 @@ WGpuBuffer uni_iResolution_Buffer;
 WGpuBuffer uni_iFrame_Buffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout={};
+WGpuTextureBindingLayout textureBindingLayout2={};
 double szh,szw;
 int szhI,szwI;
 
@@ -279,6 +280,9 @@ wbbl.at(0,0)=bufferBindingLayout1;
   textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout.multisampled=1;
+    textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
+textureBindingLayout2.viewDimension=WGPU_TEXTURE_DIMENSION_3D;
+textureBindingLayout2.multisampled=1;
   
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[0].binding=0;
@@ -302,7 +306,7 @@ bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZE
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-bindgroup_layout_entries[3].layout.texture=textureBindingLayout;
+bindgroup_layout_entries[3].layout.texture=textureBindingLayout2;
 
 bindgroup_layout_entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[4].binding=4;
