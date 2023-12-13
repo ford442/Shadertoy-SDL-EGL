@@ -78,6 +78,7 @@ static wbg_tensor wbg=wbg_tensor{2,2};
 static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
 static wbbl_tensor wbbl=wbbl_tensor{2,2};
+static wtbl_tensor wtbl=wtbl_tensor{2,2};
 static wbd_tensor wbd=wbd_tensor{8,8};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
@@ -277,13 +278,17 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
+  
   textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout.multisampled=1;
+  wtbl.at(0,0)=textureBindingLayout;
+
     textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
 textureBindingLayout2.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout2.multisampled=1;
-  
+  wtbl.at(1,1)=textureBindingLayout2;
+
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[0].binding=0;
 bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
@@ -306,13 +311,13 @@ bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZE
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-bindgroup_layout_entries[3].layout.texture=textureBindingLayout2;
+bindgroup_layout_entries[3].layout.texture=wtbl.at(1,1);
 
 bindgroup_layout_entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[4].binding=4;
 bindgroup_layout_entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-bindgroup_layout_entries[4].layout.texture=textureBindingLayout;
+bindgroup_layout_entries[4].layout.texture=wtbl.at(0,0);
   
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),5);
