@@ -383,7 +383,7 @@ renderPipelineDesc2.multisample=wms.at(0,0);
   wrpid.at(1,1)=renderPipelineDesc2;
   
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(0,0));
-wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
+// wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
   
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
