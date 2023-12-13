@@ -21,6 +21,7 @@ WGpuDepthStencilState depthState2;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
+WGpuFragmentState fragState2;
 WGpuBufferDescriptor bufferDescriptor_iTime={};
 WGpuBufferDescriptor bufferDescriptor_iResolution={};
 WGpuBufferDescriptor bufferDescriptor_iFrame={};
@@ -47,6 +48,9 @@ WGpuBuffer uni_iResolution_Buffer;
 WGpuBuffer uni_iFrame_Buffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout={};
+WGpuColorTargetState colorTarget={};
+WGpuColorTargetState colorTarget2={};
+
 double szh,szw;
 int szhI,szwI;
 
@@ -105,6 +109,7 @@ static wvs_tensor wvs=wvs_tensor{2,2};
 static wps_tensor wps=wps_tensor{2,2};
 static wfs_tensor wfs=wfs_tensor{2,2};
 static wrpid_tensor wrpid=wrpid_tensor{2,2};
+static cts_tensor cts=cts_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
@@ -258,12 +263,13 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.code=fragmentShader;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
-    wsm.at(1,1)=fs;
-
-WGpuColorTargetState colorTarget={};
+wsm.at(1,1)=fs;
+wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
-  wcts.at(0,0)=colorTarget;
+wcts.at(0,0)=colorTarget;
+colorTarget2.format=wtf.at(1,1);
+wcts.at(1,1)=colorTarget2;
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
@@ -299,6 +305,13 @@ fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&wcts.at(0,0);
   wfs.at(0,0)=fragState;
+  fragState2={};
+fragState2.module=wsm.at(1,1);
+fragState2.entryPoint="main";
+fragState2.numTargets=1;
+fragState2.targets=&wcts.at(1,1);
+wfs.at(1,1)=fragState;
+  
 bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptor_iTime;
 uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iTime);
@@ -349,8 +362,8 @@ wbgl.at(1,1)=bindgroup_layout2;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
   
-  WGpuPipelineLayout pipeline_layout2=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(1,1),1);
-wrpl.at(1,1)=pipeline_layout2;
+//  WGpuPipelineLayout pipeline_layout2=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(1,1),1);
+// wrpl.at(1,1)=pipeline_layout2;
   
 renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex=wvs.at(0,0);
@@ -366,7 +379,7 @@ renderPipelineDesc.multisample=wms.at(0,0);
 renderPipelineDesc2.vertex=wvs.at(0,0);
 renderPipelineDesc2.vertex.entryPoint="main";
 renderPipelineDesc2.primitive=wps.at(0,0);
-renderPipelineDesc2.fragment=wfs.at(0,0);
+renderPipelineDesc2.fragment=wfs.at(1,1);
 renderPipelineDesc2.depthStencil=wdss.at(1,1);
 renderPipelineDesc2.layout=wrpl.at(0,0);
 renderPipelineDesc2.multisample=wms.at(0,0);
