@@ -272,19 +272,19 @@ wcts.at(0,0)=colorTarget;
 colorTarget2.format=wtf.at(1,1);
 wcts.at(1,1)=colorTarget2;
 depthState={};
-depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
+depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+depthState.depthWriteEnabled=1;
+depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
+wdss.at(0,0)=depthState;
+depthState2={};
+depthState2.format=WGPU_TEXTURE_FORMAT_INVALID;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
-depthState.depthWriteEnabled=0;
-depthState.depthCompare=WGPU_COMPARE_FUNCTION_INVALID;
-wdss.at(1,1)=depthState;
-depthState2={};
-depthState2.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
-depthState2.depthWriteEnabled=1;
-depthState2.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
-wdss.at(0,0)=depthState2;
+depthState2.depthWriteEnabled=0;
+depthState2.depthCompare=WGPU_COMPARE_FUNCTION_INVALID;
+wdss.at(1,1)=depthState2;
 vertState={};
 vertState.module=wsm.at(0,0);
 vertState.entryPoint="main";
