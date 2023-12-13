@@ -5,6 +5,7 @@ WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
+WGpuRenderPassDepthStencilAttachment depthAttachment2;
 WGpuTexture depthTexture;
 WGpuTexture colorTexture;
 WGpuTextureDescriptor depthTextureDescriptor={};
@@ -168,6 +169,7 @@ wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
+wce.at(1,1)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(1,1),&wtd.at(1,1));
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
@@ -196,7 +198,7 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
   
-  depthAttachment2.view=wtv.at(0,0);
+//  depthAttachment2.view=wtv.at(0,0);
 depthAttachment2.depthClearValue=1.0f;
 depthAttachment2.stencilClearValue=0;
 depthAttachment2.depthReadOnly=0;
@@ -218,16 +220,6 @@ passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
 
   
-wce.at(1,1)=wgpu_device_create_command_encoder(wd.at(0,0),0);
-wq.at(1,1)=wgpu_device_get_queue(wd.at(0,0));
-wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
-wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
-wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
-wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
-wgpu_render_pass_encoder_end(wrpe.at(1,1));
-wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
-wgpu_queue_submit_one_and_destroy(wq.at(1,1),wcb.at(1,1));
-  
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -240,6 +232,15 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
   
+wq.at(1,1)=wgpu_device_get_queue(wd.at(0,0));
+wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
+wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
+wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
+wgpu_render_pass_encoder_end(wrpe.at(1,1));
+wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
+wgpu_queue_submit_one_and_destroy(wq.at(1,1),wcb.at(1,1));
+    
 return;
 }
 
