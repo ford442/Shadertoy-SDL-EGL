@@ -275,7 +275,7 @@ depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthState.depthWriteEnabled=1;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
-wdss.at(0,0)=depthState;
+wdss.at(1,1)=depthState;
 depthState2={};
 depthState2.format=WGPU_TEXTURE_FORMAT_INVALID;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
@@ -284,7 +284,7 @@ depthState2.format=WGPU_TEXTURE_FORMAT_INVALID;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
 depthState2.depthWriteEnabled=0;
 depthState2.depthCompare=WGPU_COMPARE_FUNCTION_INVALID;
-wdss.at(1,1)=depthState2;
+wdss.at(0,0)=depthState2;
 vertState={};
 vertState.module=wsm.at(0,0);
 vertState.entryPoint="main";
