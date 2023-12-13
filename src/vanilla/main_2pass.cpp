@@ -114,8 +114,6 @@ static wrpid_tensor wrpid=wrpid_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
-"var iPosition_out : vec4<f32>;"
-"var fragColor_out : vec4<f32>;"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 "var pos = array<vec2<f32>, 6>(\n"
 "vec2<f32>(1.0f, 1.0f),\n"
