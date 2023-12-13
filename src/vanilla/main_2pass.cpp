@@ -256,19 +256,21 @@ wms.at(0,0)=multiSamp;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 wcts.at(0,0)=colorTarget;
-wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
+// wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
+wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 colorTarget2.format=wtf.at(1,1);
+colorTarget2.writeMask=15;
+  
 wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
 shaderModuleDescF={};
+shaderModuleDescF.code=frag_body;
 shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
   wsm.at(0,0)=vs;
-shaderModuleDescF.code=frag_body;
-// shaderModuleDescF.code=fragmentShader;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 wsm.at(1,1)=fs;
-
+  
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
