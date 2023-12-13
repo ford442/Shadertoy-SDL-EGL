@@ -29,13 +29,9 @@ WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
-WGpuBindGroupLayout bindgroup_layout2=0;
 WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
-WGpuBindGroupLayoutEntry bindgroup_layout_entries2[0]={};
 WGpuBindGroupEntry bindgroup_entries[8]={};
-WGpuBindGroupEntry bindgroup_entries2[0]={};
 WGpuBindGroup bindgroup=0;
-WGpuBindGroup bindgroup2=0;
 WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderPipelineDescriptor renderPipelineDesc2;
 WGpuRenderBundleEncoder renderBundleEncoder;
@@ -199,6 +195,18 @@ depthAttachment.depthLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
+  
+  depthAttachment2.view=wtv.at(0,0);
+depthAttachment2.depthClearValue=1.0f;
+depthAttachment2.stencilClearValue=0;
+depthAttachment2.depthReadOnly=0;
+depthAttachment2.stencilReadOnly=0;
+depthAttachment2.depthLoadOp=WGPU_LOAD_OP_LOAD;
+depthAttachment2.depthStoreOp=WGPU_STORE_OP_STORE;
+depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_LOAD;
+depthAttachment2.stencilStoreOp=WGPU_STORE_OP_STORE;
+
+  
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
 passDesc.numColorAttachments=1;
@@ -270,6 +278,7 @@ colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 wcts.at(0,0)=colorTarget;
 colorTarget2.format=wtf.at(1,1);
+colorTarget2.writeMask=15;
 wcts.at(1,1)=colorTarget2;
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -355,17 +364,8 @@ bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
-  wbgle.at(1,1)=bindgroup_layout_entries2;
-
-  bindgroup_layout2=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(1,1),0);
-wbgl.at(1,1)=bindgroup_layout2;
-
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
-  
-//  WGpuPipelineLayout pipeline_layout2=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(1,1),1);
-// wrpl.at(1,1)=pipeline_layout2;
-  
 renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex=wvs.at(0,0);
 renderPipelineDesc.vertex.entryPoint="main";
@@ -374,15 +374,14 @@ renderPipelineDesc.fragment=wfs.at(0,0);
 renderPipelineDesc.depthStencil=wdss.at(0,0);
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=wms.at(0,0);
-  wrpid.at(0,0)=renderPipelineDesc;
-  
-  renderPipelineDesc2={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
+wrpid.at(0,0)=renderPipelineDesc;
+renderPipelineDesc2={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc2.vertex=wvs.at(0,0);
 renderPipelineDesc2.vertex.entryPoint="main";
 renderPipelineDesc2.primitive=wps.at(0,0);
 renderPipelineDesc2.fragment=wfs.at(1,1);
 renderPipelineDesc2.depthStencil=wdss.at(1,1);
-renderPipelineDesc2.layout=wrpl.at(0,0);
+renderPipelineDesc2.layout=WGPU_AUTO_LAYOUT_MODE_AUTO; // wrpl.at(0,0);
 renderPipelineDesc2.multisample=wms.at(0,0);
   wrpid.at(1,1)=renderPipelineDesc2;
   
@@ -405,7 +404,6 @@ bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entries;
-wbge.at(1,1)=bindgroup_entries2;
   
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
