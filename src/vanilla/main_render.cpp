@@ -235,11 +235,11 @@ WGpuColorTargetState colorTarget={};
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 depthState={};
-depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24_STENCIL8;
+depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT
-           //  WGPU_TEXTURE_FORMAT_DEPTH24_STENCIL8
+           //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
 depthState.depthWriteEnabled=1;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 vertState={};
@@ -330,7 +330,7 @@ bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
-// renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24_STENCIL8;
+// renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 // wrbed.at(0,0)=renderBundleEncoderDescriptor;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
@@ -339,7 +339,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szh;
 sze.at(0,1)=szw;
-depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24_STENCIL8;
+depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
@@ -356,7 +356,7 @@ colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(1,1)=colorTextureViewDescriptor;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24_STENCIL8;
+depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
@@ -364,7 +364,7 @@ depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=0;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24_STENCIL8};
+WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
