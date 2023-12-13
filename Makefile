@@ -53,6 +53,20 @@ vanilla_test_gpujs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_gpu_js"] \
 	 --pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
+b3_vanilla_2pass:
+	 em++ src/vanilla/main_2pass.cpp -std=c++20 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)2p.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --memory-init-file 0 main_2pass.o 
+
 b3_vanilla_video_a:
 	 em++ src/vanilla/webgpu_video.cpp -std=c++20 \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
