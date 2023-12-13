@@ -16,6 +16,7 @@ WGpuShaderModuleDescriptor shaderModuleDescF={};
 WGpuShaderModule vs;
 WGpuShaderModule fs;
 WGpuDepthStencilState depthState;
+WGpuDepthStencilState depthState2;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
