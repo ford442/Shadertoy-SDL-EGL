@@ -353,16 +353,9 @@ bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
-  wbgle.at(1,1)=bindgroup_layout_entries2;
-
-  bindgroup_layout2=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(1,1),0);
-wbgl.at(1,1)=bindgroup_layout2;
 
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
-  
-//  WGpuPipelineLayout pipeline_layout2=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(1,1),1);
-// wrpl.at(1,1)=pipeline_layout2;
   
 renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex=wvs.at(0,0);
