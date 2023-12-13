@@ -270,13 +270,13 @@ wcts.at(0,0)=colorTarget;
 colorTarget2.format=wtf.at(1,1);
 wcts.at(1,1)=colorTarget2;
 depthState={};
-depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
            //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
 depthState.depthWriteEnabled=0;
-depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
+depthState.depthCompare=WGPU_COMPARE_FUNCTION_INVALID;
 wdss.at(1,1)=depthState;
 depthState2={};
 depthState2.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -369,7 +369,7 @@ renderPipelineDesc.vertex=wvs.at(0,0);
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=wps.at(0,0);
 renderPipelineDesc.fragment=wfs.at(0,0);
-renderPipelineDesc.depthStencil=0; // wdss.at(0,0);
+renderPipelineDesc.depthStencil=wdss.at(0,0);
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=wms.at(0,0);
   wrpid.at(0,0)=renderPipelineDesc;
