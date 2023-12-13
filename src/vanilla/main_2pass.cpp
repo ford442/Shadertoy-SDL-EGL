@@ -109,7 +109,6 @@ static wvs_tensor wvs=wvs_tensor{2,2};
 static wps_tensor wps=wps_tensor{2,2};
 static wfs_tensor wfs=wfs_tensor{2,2};
 static wrpid_tensor wrpid=wrpid_tensor{2,2};
-static wcts_tensor wcts=wcts_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
