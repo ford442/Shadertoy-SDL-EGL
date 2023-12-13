@@ -150,7 +150,7 @@ u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),5);
 wbg.at(0,0)=bindgroup;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
@@ -222,7 +222,7 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
-multiSamp.count=0;
+multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
@@ -276,6 +276,10 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
+  textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
+textureBindingLayout.multisampled=1;
+  
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[0].binding=0;
 bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
@@ -294,13 +298,20 @@ bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
   
-// textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
-// textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
-// textureBindingLayout.multisampled=1;
-// bindgroup_layout_entry.layout.texture=textureBindingLayout;
+bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[3].binding=3;
+bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[3].layout.texture=textureBindingLayout;
+
+bindgroup_layout_entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[4].binding=4;
+bindgroup_layout_entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[4].layout.texture=textureBindingLayout;
   
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),5);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -328,6 +339,15 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
+  
+bindgroup_entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[3].binding=3;
+bindgroup_entries[3].resource=wt.at(0,0);
+
+bindgroup_entries[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[4].binding=4;
+bindgroup_entries[4].resource=wt.at(1,1);
+  
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -362,7 +382,7 @@ depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
-depthTextureDescriptor.sampleCount=1;
+depthTextureDescriptor.sampleCount=4;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
@@ -376,7 +396,7 @@ colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
-colorTextureDescriptor.sampleCount=1;
+colorTextureDescriptor.sampleCount=4;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT colorViewFormat[1]={wtf.at(0,0)};
 colorTextureDescriptor.viewFormats=&colorViewFormat[0];
