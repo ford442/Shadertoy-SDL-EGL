@@ -377,7 +377,9 @@ renderPipelineDesc2.vertex.entryPoint="main";
 renderPipelineDesc2.primitive=wps.at(0,0);
 renderPipelineDesc2.fragment=wfs.at(1,1);
 renderPipelineDesc2.depthStencil=wdss.at(1,1);
-renderPipelineDesc2.layout=wrpl.at(0,0);
+// renderPipelineDesc2.layout=wrpl.at(0,0);
+renderPipelineDesc2.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
+  
 renderPipelineDesc2.multisample=wms.at(0,0);
 wrpid.at(1,1)=renderPipelineDesc2;
 renderPipeline2=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
