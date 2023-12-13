@@ -126,7 +126,7 @@ const char * vertexShader =
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
 "}\n";
 
-const char * fragEntry[1]="main_1";
+const char * fragEntry="main_1";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 
@@ -276,7 +276,7 @@ colorTarget2.format=wtf.at(1,1);
 wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
 shaderModuleDescF={};
-fragHint.entryPointName=&fragEntry;
+fragHint.entryPointName=fragEntry;
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.hint=fragHint;
 shaderModuleDescV.code=vertexShader;
