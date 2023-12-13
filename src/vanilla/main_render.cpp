@@ -281,7 +281,7 @@ wbbl.at(0,0)=bufferBindingLayout1;
 textureBindingLayout.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout.multisampled=1;
     textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
-textureBindingLayout2.viewDimension=WGPU_TEXTURE_DIMENSION_3D;
+textureBindingLayout2.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
 textureBindingLayout2.multisampled=1;
   
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
