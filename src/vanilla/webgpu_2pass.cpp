@@ -90,6 +90,13 @@ static wtd_tensor wtd=wtd_tensor{2,2};
 static wtvd_tensor wtvd=wtvd_tensor{2,2};
 static wtf_tensor wtf=wtf_tensor{2,2};
 static wtv_tensor wtv=wtv_tensor{2,2};
+wms_tensor wms=wms_tensor{2,2};
+wsm_tensor wsm=wsm_tensor{2,2};
+wcts_tensor wcts=wsm_tensor{2,2};
+wdss_tensor wdss=wsm_tensor{2,2};
+wvs_tensor wvs=wsm_tensor{2,2};
+wps_tensor wps=wsm_tensor{2,2};
+wfs_tensor wfs=wsm_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
