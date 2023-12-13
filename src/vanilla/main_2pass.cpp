@@ -10,6 +10,7 @@ WGpuTexture colorTexture;
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor colorTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
+WGpuRenderPassDescriptor passDesc2={};
 WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
 WGpuShaderModuleDescriptor shaderModuleDescF={};
@@ -27,10 +28,15 @@ WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
+WGpuBindGroupLayout bindgroup_layout2=0;
 WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
+WGpuBindGroupLayoutEntry bindgroup_layout_entries2[0]={};
 WGpuBindGroupEntry bindgroup_entries[8]={};
+WGpuBindGroupEntry bindgroup_entries2[0]={};
 WGpuBindGroup bindgroup=0;
-// WGpuRenderPipelineDescriptor renderPipelineDesc;
+WGpuBindGroup bindgroup2=0;
+WGpuRenderPipelineDescriptor renderPipelineDesc;
+WGpuRenderPipelineDescriptor renderPipelineDesc2;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDesc={};
@@ -98,6 +104,7 @@ static wdss_tensor wdss=wdss_tensor{2,2};
 static wvs_tensor wvs=wvs_tensor{2,2};
 static wps_tensor wps=wps_tensor{2,2};
 static wfs_tensor wfs=wfs_tensor{2,2};
+static wrpid_tensor wrpid=wrpid_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
@@ -323,7 +330,7 @@ bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
-WGpuRenderPipelineDescriptor renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
+renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex=wvs.at(0,0);
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=wps.at(0,0);
@@ -331,8 +338,8 @@ renderPipelineDesc.fragment=wfs.at(0,0);
 renderPipelineDesc.depthStencil=wdss.at(1,1);
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=wms.at(0,0);
-  
-wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
+  wrpid.at(0,0)=renderPipelineDesc;
+wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(0,0));
   
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
