@@ -259,7 +259,7 @@ multiSamp2.count=4;
 multiSamp2.mask=-1;
 wms.at(1,1)=multiSamp2;
 colorTarget.format=wtf.at(0,0);
-colorTarget.writeMask=15;
+colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
            /*
 colorTarget.blend.color.operation=
 colorTarget.blend.color.srcFactor=
@@ -272,7 +272,7 @@ wcts.at(0,0)=colorTarget;
 wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 colorTarget2.format=wtf.at(1,1);
-// colorTarget2.writeMask=15;
+// colorTarget2.writeMask=WGPU_COLOR_WRITE_ALL;
 wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
 shaderModuleDescF={};
@@ -311,7 +311,6 @@ priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
 wps.at(0,0)=priState;
 fragState={};
 fragState.module=wsm.at(1,1);
-           
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&wcts.at(0,0);
