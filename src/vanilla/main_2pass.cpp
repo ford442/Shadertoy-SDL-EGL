@@ -307,7 +307,7 @@ wfs.at(0,0)=fragState;
 fragState2={};
 fragState2.module=wsm.at(1,1);
 fragState2.entryPoint="main";
-fragState2.numTargets=1;
+fragState2.numTargets=0;
 fragState2.targets=&wcts.at(1,1);
 wfs.at(1,1)=fragState;
   
