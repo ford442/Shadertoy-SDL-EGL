@@ -202,7 +202,7 @@ wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 
-wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
+wrbe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrbd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrbe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrbe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_draw(wrbe.at(0,0),6,1,0,0);
