@@ -356,7 +356,7 @@ videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
-videoTextureDescriptor.sampleCount=1;
+videoTextureDescriptor.sampleCount=0;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT videoViewFormats[1]={WGPU_TEXTURE_FORMAT_R32FLOAT};
 videoTextureDescriptor.viewFormats=&videoViewFormats[0];
@@ -447,7 +447,9 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wtv.at(2,2);
   
 wbge.at(0,0)=bindgroup_entries;
-renderBundleEncoderDescriptor.sampleCount=1;
+  
+renderBundleEncoderDescriptor.sampleCount=4;
+  
 renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 wrbed.at(0,0)=renderBundleEncoderDescriptor;
 renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
@@ -480,7 +482,7 @@ depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
-depthTextureDescriptor.sampleCount=1;
+depthTextureDescriptor.sampleCount=0;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
@@ -494,7 +496,7 @@ colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
-colorTextureDescriptor.sampleCount=1;
+colorTextureDescriptor.sampleCount=0;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
 u64_uni.at(0,0)=0;
