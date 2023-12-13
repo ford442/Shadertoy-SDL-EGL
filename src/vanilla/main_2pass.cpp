@@ -123,7 +123,7 @@ const char * vertexShader =
 "vec2<f32>(1.0f, -1.0f),\n"
 "vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
-"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f, 1.0f);"
+"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);"
 "}\n";
 
 const char * fragEntry="main_1";
