@@ -92,7 +92,6 @@ using wcc_tensor=boost::numeric::ublas::tensor<WGpuCanvasContext>;
 using wccf_tensor=boost::numeric::ublas::tensor<WGpuCanvasConfiguration>;
 using wrp_tensor=boost::numeric::ublas::tensor<WGpuRenderPipeline>;
 using wrpid_tensor=boost::numeric::ublas::tensor<WGpuRenderPipelineDescriptor>;
-
 using wrpl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
 using wbg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using wbgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
@@ -129,3 +128,4 @@ using wdss_tensor=boost::numeric::ublas::tensor<WGpuDepthStencilState>;
 using wvs_tensor=boost::numeric::ublas::tensor<WGpuVertexState>;
 using wps_tensor=boost::numeric::ublas::tensor<WGpuPrimitiveState>;
 using wfs_tensor=boost::numeric::ublas::tensor<WGpuFragmentState>;
+using wcts_tensor=boost::numeric::ublas::tensor<WGpuColorTargetState>;
