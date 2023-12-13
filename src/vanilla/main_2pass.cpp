@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
 
+WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
@@ -124,6 +125,8 @@ const char * vertexShader =
 ");\n"
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
 "}\n";
+
+const char * fragEntry[1]="main_1";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 
@@ -273,7 +276,9 @@ colorTarget2.format=wtf.at(1,1);
 wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
 shaderModuleDescF={};
+fragHint.entryPointName=&fragEntry;
 shaderModuleDescF.code=frag_body;
+shaderModuleDescF.hint=fragHint;
 shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 wsm.at(0,0)=vs;
@@ -306,6 +311,7 @@ priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
 wps.at(0,0)=priState;
 fragState={};
 fragState.module=wsm.at(1,1);
+           
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&wcts.at(0,0);
