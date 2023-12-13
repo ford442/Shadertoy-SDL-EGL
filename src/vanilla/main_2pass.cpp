@@ -226,7 +226,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
-wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
+wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 
 return;
