@@ -199,8 +199,11 @@ wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
-passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
+passDesc2={};
+passDesc2.numColorAttachments=0;
+passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
+wrpd.at(1,1)=passDesc2;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -259,12 +262,12 @@ depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
            //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
 depthState.depthWriteEnabled=0;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
-wdss.at(0,0)=depthState;
+wdss.at(1,1)=depthState;
 depthState2={};
 depthState2.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthState2.depthWriteEnabled=1;
 depthState2.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
-wdss.at(1,1)=depthState2;
+wdss.at(0,0)=depthState2;
 vertState={};
 vertState.module=wsm.at(0,0);
 vertState.entryPoint="main";
@@ -328,18 +331,39 @@ bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
+  wbgle.at(1,1)=bindgroup_layout_entries2;
+
+  bindgroup_layout2=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(1,1),0);
+wbgl.at(1,1)=bindgroup_layout2;
+
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
+  
+  WGpuPipelineLayout pipeline_layout2=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(1,1),1);
+wrpl.at(1,1)=pipeline_layout2;
+  
 renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 renderPipelineDesc.vertex=wvs.at(0,0);
 renderPipelineDesc.vertex.entryPoint="main";
 renderPipelineDesc.primitive=wps.at(0,0);
 renderPipelineDesc.fragment=wfs.at(0,0);
-renderPipelineDesc.depthStencil=wdss.at(1,1);
+renderPipelineDesc.depthStencil=wdss.at(0,0);
 renderPipelineDesc.layout=wrpl.at(0,0);
 renderPipelineDesc.multisample=wms.at(0,0);
   wrpid.at(0,0)=renderPipelineDesc;
+  
+  renderPipelineDesc2={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
+renderPipelineDesc2.vertex=wvs.at(0,0);
+renderPipelineDesc2.vertex.entryPoint="main";
+renderPipelineDesc2.primitive=wps.at(0,0);
+renderPipelineDesc2.fragment=wfs.at(0,0);
+renderPipelineDesc2.depthStencil=wdss.at(1,1);
+renderPipelineDesc2.layout=wrpl.at(1,1);
+renderPipelineDesc2.multisample=wms.at(0,0);
+  wrpid.at(1,1)=renderPipelineDesc2;
+  
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(0,0));
+wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
   
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
@@ -357,11 +381,14 @@ bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entries;
-renderBundleEncoderDescriptor.sampleCount=1;
-renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
-wrbed.at(0,0)=renderBundleEncoderDescriptor;
-renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
-wrbe.at(0,0)=renderBundleEncoder;
+wbge.at(1,1)=bindgroup_entries2;
+  
+// renderBundleEncoderDescriptor.sampleCount=1;
+// renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+// wrbed.at(0,0)=renderBundleEncoderDescriptor;
+// renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
+// wrbe.at(0,0)=renderBundleEncoder;
+  
 emscripten_get_element_css_size("canvas",&szw,&szh);
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 u64_siz.at(0,0)=szhI;
@@ -417,8 +444,7 @@ u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-
-  emscripten_set_main_loop((void(*)())raf,0,0);
+emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
 }
 
