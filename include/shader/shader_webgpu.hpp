@@ -295,10 +295,11 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 static inline char vrt_bdy_src[420]=
 "precision highp float;\n"
 "precision highp int;\n"
-"precision lowp sampler2D;"
+"precision highp sampler2D;"
 // "precision highp sampler3D;"
-"precision lowp samplerCube;"
-"layout(location=0)in vec4 iPosition;"
+"precision highp samplerCube;"
+"layout(location=0)in vec4 fragColor;"
+"layout(location=1)in vec4 iPosition;"
 "void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
