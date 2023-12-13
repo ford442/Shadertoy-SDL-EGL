@@ -257,10 +257,10 @@ wms.at(0,0)=multiSamp;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 wcts.at(0,0)=colorTarget;
-wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
+wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 // wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 colorTarget2.format=wtf.at(1,1);
-// colorTarget2.writeMask=15;
+colorTarget2.writeMask=15;
   
 wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
@@ -310,8 +310,8 @@ wfs.at(0,0)=fragState;
 fragState2={};
 fragState2.module=wsm.at(1,1);
 fragState2.entryPoint="main";
-fragState2.numTargets=0;
-// fragState2.targets=&wcts.at(1,1);
+fragState2.numTargets=1;
+fragState2.targets=&wcts.at(1,1);
 wfs.at(1,1)=fragState;
   
 bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
