@@ -358,7 +358,7 @@ renderPipelineDesc2.vertex.entryPoint="main";
 renderPipelineDesc2.primitive=wps.at(0,0);
 renderPipelineDesc2.fragment=wfs.at(0,0);
 renderPipelineDesc2.depthStencil=wdss.at(1,1);
-renderPipelineDesc2.layout=wrpl.at(1,1);
+renderPipelineDesc2.layout=wrpl.at(0,0);
 renderPipelineDesc2.multisample=wms.at(0,0);
   wrpid.at(1,1)=renderPipelineDesc2;
   
