@@ -310,7 +310,7 @@ fragState2={};
 fragState2.module=wsm.at(1,1);
 fragState2.entryPoint="main";
 fragState2.numTargets=1;
-fragState2.targets=&wcts.at(1,1);
+fragState2.targets=[];
 wfs.at(1,1)=fragState;
   
 bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
