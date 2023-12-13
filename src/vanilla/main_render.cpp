@@ -301,13 +301,13 @@ bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
-bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[3].layout.texture=textureBindingLayout;
 
 bindgroup_layout_entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[4].binding=4;
 bindgroup_layout_entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
-bindgroup_layout_entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[4].layout.texture=textureBindingLayout;
   
 wbgle.at(0,0)=bindgroup_layout_entries;
