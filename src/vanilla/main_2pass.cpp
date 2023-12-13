@@ -33,6 +33,8 @@ WGpuBindGroupLayout bindgroup_layout2=0;
 WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
 WGpuBindGroupEntry bindgroup_entries[8]={};
 WGpuBindGroup bindgroup=0;
+WGpuRenderPipeline renderPipeline1;
+WGpuRenderPipeline renderPipeline2;
 WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderPipelineDescriptor renderPipelineDesc2;
 WGpuRenderBundleEncoder renderBundleEncoder;
@@ -254,10 +256,10 @@ wms.at(0,0)=multiSamp;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 wcts.at(0,0)=colorTarget;
-// wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
-wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
+wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
+// wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 colorTarget2.format=wtf.at(1,1);
-colorTarget2.writeMask=15;
+// colorTarget2.writeMask=15;
   
 wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
@@ -307,7 +309,7 @@ wfs.at(0,0)=fragState;
 fragState2={};
 fragState2.module=wsm.at(1,1);
 fragState2.entryPoint="main";
-fragState2.numTargets=0;
+fragState2.numTargets=1;
 fragState2.targets=&wcts.at(1,1);
 wfs.at(1,1)=fragState;
   
@@ -375,11 +377,11 @@ renderPipelineDesc2.fragment=wfs.at(1,1);
 renderPipelineDesc2.depthStencil=wdss.at(1,1);
 renderPipelineDesc2.layout=wrpl.at(0,0);
 renderPipelineDesc2.multisample=wms.at(0,0);
-  wrpid.at(1,1)=renderPipelineDesc2;
-  
-wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(0,0));
-wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
-  
+wrpid.at(1,1)=renderPipelineDesc2;
+renderPipeline1=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(0,0));
+wrp.at(0,0)=renderPipeline1;
+renderPipeline2=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
+wrp.at(1,1)=renderPipeline2;
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
 bindgroup_entries[0].resource=wb.at(0,0);
