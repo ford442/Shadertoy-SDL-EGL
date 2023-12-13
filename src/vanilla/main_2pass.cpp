@@ -100,7 +100,7 @@ static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
 static wt_tensor wt=wt_tensor{2,2};
 static wtd_tensor wtd=wtd_tensor{2,2};
 static wtvd_tensor wtvd=wtvd_tensor{2,2};
-static wtf_tensor wtf=wtf_tensor{2,2};
+static wtf_tensor wtf=wtf_tensor{4,4};
 static wtv_tensor wtv=wtv_tensor{2,2};
 static wms_tensor wms=wms_tensor{2,2};
 static wsm_tensor wsm=wsm_tensor{2,2};
@@ -246,7 +246,6 @@ config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=canvasFormat;
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
-// config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 wccf.at(0,0)=config;
@@ -270,7 +269,7 @@ colorTarget.blend.color.dstFactor=
 */
 wcts.at(0,0)=colorTarget;
 wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
-// wtf.at(1,1)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
+wtf.at(2,2)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 colorTarget2.format=wtf.at(1,1);
 // colorTarget2.writeMask=15;
 wcts.at(1,1)=colorTarget2;
@@ -284,15 +283,11 @@ fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 wsm.at(1,1)=fs;
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
-           //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS
-           //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
-           //  WGPU_TEXTURE_FORMAT_DEPTH32FLOAT
-           //  WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8
 depthState.depthWriteEnabled=0;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_INVALID;
 wdss.at(0,0)=depthState;
 depthState2={};
-depthState2.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+depthState2.format=wtf.at(2,2);
 depthState2.depthWriteEnabled=1;
 depthState2.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 wdss.at(1,1)=depthState2;
@@ -403,7 +398,7 @@ bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
-// renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+// renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
 // wrbed.at(0,0)=renderBundleEncoderDescriptor;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
@@ -412,7 +407,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szh;
 sze.at(0,1)=szw;
-depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+depthTextureViewDescriptor.format=wtf.at(2,2);
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
@@ -429,7 +424,7 @@ colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(1,1)=colorTextureViewDescriptor;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-depthTextureDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+depthTextureDescriptor.format=wtf.at(2,2);
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
@@ -437,7 +432,7 @@ depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=4;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
+WGPU_TEXTURE_FORMAT depthViewFormats[1]={wtf.at(2,2)};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
@@ -469,7 +464,7 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
-deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
+deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
