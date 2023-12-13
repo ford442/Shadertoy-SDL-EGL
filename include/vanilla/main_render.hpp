@@ -120,4 +120,10 @@ using wicei_tensor=boost::numeric::ublas::tensor<WGpuImageCopyExternalImage>;
 using wict_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTexture>;
 using ws_tensor=boost::numeric::ublas::tensor<WGpuSampler>;
 using wsd_tensor=boost::numeric::ublas::tensor<WGpuSamplerDescriptor>;
-
+using wms_tensor=boost::numeric::ublas::tensor<WGpuMultisampleState>;
+using wsm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
+using wcts_tensor=boost::numeric::ublas::tensor<WGpuColorTargetState>;
+using wcts_tensor=boost::numeric::ublas::tensor<WGpuDepthStencilState>;
+using wvs_tensor=boost::numeric::ublas::tensor<WGpuVertexState>;
+using wps_tensor=boost::numeric::ublas::tensor<WGpuPrimitiveState>;
+using wfs_tensor=boost::numeric::ublas::tensor<WGpuFragmentState>;
