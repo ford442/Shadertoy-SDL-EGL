@@ -889,8 +889,8 @@ mms2.at(0,1)=e->clientY;
 return EM_TRUE;
 }
 
-static GLchar * result=NULL;
-static char * results=NULL;
+static char8_t * result=NULL;
+static char8_t * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
 
@@ -923,7 +923,7 @@ GLsizei binarySize;
 Compile compile;
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-const GLchar * src[4];
+const char * src[4];
 char * vrt_bdy=vrt_bdy_src;
 char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
@@ -1251,13 +1251,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<GLchar *>(malloc((length+1)*sizeof(GLchar)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(GLchar),length,file);
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-// results=reinterpret_cast<GLchar *>(result);
+// results=reinterpret_cast<char *>(result);
 return result;
 }
 return nullptr;
