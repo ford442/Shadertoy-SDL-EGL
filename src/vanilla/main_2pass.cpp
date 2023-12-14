@@ -130,7 +130,7 @@ const char * fragEntry="main_1";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 
-static char * result=NULL;
+static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
 
