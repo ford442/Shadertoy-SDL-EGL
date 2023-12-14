@@ -248,8 +248,8 @@ config.device=wd.at(0,0);
 config.format=canvasFormat;
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 config.viewFormats=&canvasViewFormat[0];
-// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
-config.alphaMode=WGPU_CANVAS_ALPHA_MODE_OPAQUE;
+config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
+// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_OPAQUE;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 multiSamp={};
@@ -261,14 +261,14 @@ multiSamp2.mask=-1;
 wms.at(1,1)=multiSamp2;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
-           /*
-colorTarget.blend.color.operation=
-colorTarget.blend.color.srcFactor=
-colorTarget.blend.color.dstFactor=
-colorTarget.blend.color.operation=
-colorTarget.blend.color.srcFactor=
-colorTarget.blend.color.dstFactor=
-*/
+      
+colorTarget.blend.color.operation=WGPU_BLEND_OPERATION_ADD;
+colorTarget.blend.color.srcFactor=WGPU_BLEND_FACTOR_SRC_ALPHA;
+colorTarget.blend.color.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+colorTarget.blend.alpha.operation=WGPU_BLEND_OPERATION_ADD;
+colorTarget.blend.alpha.srcFactor=WGPU_BLEND_FACTOR_SRC_ALPHA;
+colorTarget.blend.alpha.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+
 wcts.at(0,0)=colorTarget;
 wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
