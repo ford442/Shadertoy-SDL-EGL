@@ -395,7 +395,7 @@ wbbl.at(0,0)=bufferBindingLayout1;
   
 textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
-textureBindingLayout1.multisampled=1;
+textureBindingLayout1.multisampled=0;
   
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
