@@ -270,9 +270,9 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
 "precision highp float;\n"
-"precision highp sampler3D;"
-"precision highp sampler2D;"
-"precision highp samplerCube;";
+"precision lowp sampler3D;"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;";
 /*
 "precision mediump sampler2DArray;precision mediump sampler2DShadow;"
 "precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
@@ -295,20 +295,20 @@ static inline char cm_hdr_src[3300]="#version 300 es\n"
 static inline char vrt_bdy_src[420]=
 "precision highp float;\n"
 "precision highp int;\n"
-"precision highp sampler2D;"
+// "precision highp sampler2D;"
 // "precision highp sampler3D;"
-"precision highp samplerCube;"
+// "precision highp samplerCube;"
 "layout(location=0)in vec4 fragColor;"
 "layout(location=1)in vec4 iPosition;"
 "void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
 "precision mediump int;\n"
-"precision lowp sampler2D;"
-"precision lowp samplerCube;"
+// "precision lowp sampler2D;"
+// "precision lowp samplerCube;"
 // "precision highp int;\n"
 // "precision highp sampler2D;"
-// "precision highp sampler3D;"
+// "precision lowp sampler3D;"
 // "precision highp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
