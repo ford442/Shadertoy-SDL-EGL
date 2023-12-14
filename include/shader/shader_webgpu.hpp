@@ -890,7 +890,7 @@ return EM_TRUE;
 }
 
 static char8_t * result=NULL;
-static char8_t * results=NULL;
+static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
 
@@ -1257,8 +1257,8 @@ size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
-// results=reinterpret_cast<char *>(result);
-return result;
+results=reinterpret_cast<char *>(result);
+return results;
 }
 return nullptr;
 }
