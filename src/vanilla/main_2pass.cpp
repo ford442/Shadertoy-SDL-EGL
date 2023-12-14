@@ -262,11 +262,11 @@ wms.at(1,1)=multiSamp2;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
       
-colorTarget.blend.color.operation=WGPU_BLEND_OPERATION_ADD;
+colorTarget.blend.color.operation=WGPU_BLEND_FACTOR_ONE;
 colorTarget.blend.color.srcFactor=WGPU_BLEND_FACTOR_SRC_ALPHA;
 colorTarget.blend.color.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
 colorTarget.blend.alpha.operation=WGPU_BLEND_OPERATION_ADD;
-colorTarget.blend.alpha.srcFactor=WGPU_BLEND_FACTOR_SRC_ALPHA;
+colorTarget.blend.alpha.srcFactor=WGPU_BLEND_FACTOR_ONE;
 colorTarget.blend.alpha.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
 
 wcts.at(0,0)=colorTarget;
