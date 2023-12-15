@@ -147,7 +147,7 @@ const char * vertexShader=
 "vec2(0.0f, 0.0f),\n"
 ");\n"
 "var output : VertexOutput;\n"
-"output.Position = vec4(pos[VertexIndex], 0.0, 1.0);\n"
+"output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
 "output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
@@ -158,7 +158,7 @@ const char * frag_body=
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
-"  return textureSample(myTexture, mySampler, fragUV);\n"
+"return textureSample(myTexture, mySampler, fragUV);\n"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -249,6 +249,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(1,1)*8,sze.at(0,0),sze.at(1,1),sze.at(0,0),1);
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(1,1)*8,sze.at(0,0),sze.at(1,1),sze.at(0,0),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(1,1),sze.at(0,0),0.0f,1.0f);
@@ -394,7 +395,7 @@ bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
   
 textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
-textureBindingLayout1.viewDimension=WGPU_TEXTURE_DIMENSION_2D;
+textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayout1.multisampled=0;
   
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
@@ -457,10 +458,10 @@ wrbe.at(0,0)=renderBundleEncoder;
 emscripten_get_element_css_size("canvas",&szw,&szh);
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 u64_siz.at(0,0)=szhI;
-sze.at(0,0)=szh;
-sze.at(1,1)=szw;
+sze.at(0,0)=szhI;
+sze.at(1,1)=szhI;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
-depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
 depthTextureViewDescriptor.mipLevelCount=1;
