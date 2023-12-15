@@ -549,6 +549,7 @@ return;
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 function videoFrames(){
+  let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 // let currentTime = vv.getCurrentTime();
@@ -556,15 +557,18 @@ let cnv=document.getElementById('bcanvas');
 let ctx=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
+let dataSize2=SiZ*SiZ;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
   console.log('imageData.size:',imageData.size);
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
+  console.log('dataSize2:',dataSize2);
+  
 let pixelData=new Uint8ClampedArray(imageData.data);
-let heapArray=new Uint8ClampedArray(H,0,imageData.length);
-heapArray.set(pixelData,0,imageData.length);
+let heapArray=new Uint8ClampedArray(H,0,dataSize2);
+heapArray.set(pixelData,0,dataSize2);
 //   Module.HEAPU8.set(0,pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
 },1500);
