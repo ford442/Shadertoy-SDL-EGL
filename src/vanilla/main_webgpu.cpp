@@ -540,7 +540,13 @@ document.getElementById('startBtn2').addEventListener('click',function(){
 // Module.ccall("runWebGPU");
 	
 // Module.ccall("runWebGPU2");
-const myInterval=setInterval(strr,42);
+for(var i=0;i<420;i++){
+setTimeout(function(){
+strr();
+},42);
+}
+	
+// const myInterval=setInterval(strr,42);
 });
 
 document.getElementById('startBtn4').addEventListener('click',function(){
