@@ -55,6 +55,11 @@ WGpuColorTargetState colorTarget2={};
 WGpuCommandEncoder wceA={};
 WGpuCommandEncoder wceB={};
 
+WGPU_TEXTURE_FORMAT canvasViewFormat[1];
+WGPU_TEXTURE_FORMAT colorViewFormat[1];
+WGPU_TEXTURE_FORMAT depthViewFormat[1];
+WGPU_TEXTURE_FORMAT canvasFormat;
+
 double szh,szw;
 int szhI,szwI;
 
@@ -245,7 +250,7 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 const char * frag_body=(char*)rd_fl(Fnm);
-WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
+canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
@@ -254,7 +259,7 @@ WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
-WGPU_TEXTURE_FORMAT canvasViewFormat[1]={wtf.at(0,0)};
+canvasViewFormat[0]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=canvasFormat;
@@ -449,7 +454,7 @@ depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
 depthTextureDescriptor.sampleCount=4;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT depthViewFormats[1]={wtf.at(2,2)};
+depthViewFormats[0]={wtf.at(2,2)};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
@@ -463,7 +468,7 @@ colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT colorViewFormat[1]={wtf.at(0,0)};
+colorViewFormat[0]={wtf.at(0,0)};
 colorTextureDescriptor.viewFormats=&colorViewFormat[0];
 wtd.at(1,1)=colorTextureDescriptor;
 u64_uni.at(0,0)=0;
