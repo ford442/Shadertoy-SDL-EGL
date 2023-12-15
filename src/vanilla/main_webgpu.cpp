@@ -478,13 +478,13 @@ Module.ccall("startWebGPU",{async:true});
 
 function normalResStart(){
 // Module.ccall("startWebGPU");
-Module.ccall("runWebGPU2");
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
 document.getElementById('di').click();
-});
+Module.ccall("runWebGPU2");
+},150);
 }
 
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
@@ -537,7 +537,7 @@ normalResStart();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
-// Module.ccall("runWebGPU");
+Module.ccall("runWebGPU");
 	
 // Module.ccall("runWebGPU2");
 for(var i=0;i<420;i++){
