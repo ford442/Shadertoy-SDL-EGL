@@ -425,7 +425,7 @@ u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szh;
 sze.at(0,1)=szw;
 depthTextureViewDescriptor.format=wtf.at(2,2);
-depthTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
 depthTextureViewDescriptor.mipLevelCount=1;
@@ -433,7 +433,7 @@ depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(0,0)=depthTextureViewDescriptor;
 colorTextureViewDescriptor.format=wtf.at(0,0);
-colorTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+colorTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 colorTextureViewDescriptor.baseMipLevel=0; // default = 0
 colorTextureViewDescriptor.mipLevelCount=1;
