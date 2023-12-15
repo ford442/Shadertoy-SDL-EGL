@@ -1228,7 +1228,7 @@ glUseProgram(0);
 glFinish();
 glDeleteShader(vtx);
 glDeleteShader(frag);
-glReleaseShaderCompiler();
+// glReleaseShaderCompiler();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
@@ -1745,10 +1745,10 @@ glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
   
-//  glPixelStorei(GL_UNPACK_ALIGNMENT,8);
-//  glPixelStorei(GL_PACK_ALIGNMENT,8);
+glPixelStorei(GL_UNPACK_ALIGNMENT,8);
+glPixelStorei(GL_PACK_ALIGNMENT,8);
   
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
   //  non multisampled color renderbuffer
 glGenFramebuffers(1,&TX.at(2,0,0));
@@ -1880,7 +1880,7 @@ glUseProgram(S1.at(0,0,0));
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
 // glDeleteShader(vtx);
 // glDeleteShader(frag);
-// glReleaseShaderCompiler();
+glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
 glBindVertexArray(Sh.at(2,0));
