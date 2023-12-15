@@ -51,7 +51,9 @@ WGpuBuffer uni_iTimeDelta_Buffer;
 WGpuBuffer uni_iResolution_Buffer;
 WGpuBuffer uni_iFrame_Buffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
-WGpuTextureBindingLayout textureBindingLayout={};
+WGpuTextureBindingLayout textureBindingLayout1={};
+WGpuTextureBindingLayout textureBindingLayout2={};
+WGpuTextureBindingLayout textureBindingLayout3={};
 WGpuColorTargetState colorTarget={};
 WGpuColorTargetState colorTarget2={};
 WGpuCommandEncoder wceA={};
@@ -120,6 +122,7 @@ static wvs_tensor wvs=wvs_tensor{2,2};
 static wps_tensor wps=wps_tensor{2,2};
 static wfs_tensor wfs=wfs_tensor{2,2};
 static wrpid_tensor wrpid=wrpid_tensor{2,2};
+static wtbl_tensor wtbl=wtbl_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
@@ -354,6 +357,17 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
+textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout1.multisampled=1;
+wtbl.at(0,0)=textureBindingLayout1;
+textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
+textureBindingLayout2.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout2.multisampled=1;
+wtbl.at(1,1)=textureBindingLayout2;
+textureBindingLayout3.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
+textureBindingLayout3.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout3.multisampled=1;
+wtbl.at(2,2)=textureBindingLayout3;
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[0].binding=0;
 bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
@@ -369,6 +383,7 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
+      
 // textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 // textureBindingLayout.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 // textureBindingLayout.multisampled=1;
