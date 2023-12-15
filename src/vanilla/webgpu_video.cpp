@@ -549,6 +549,7 @@ return;
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
+  
 function videoFrames(){
   let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
@@ -561,12 +562,14 @@ let dataSize=cnv.width*cnv.height;
 let dataSize2=SiZ*SiZ*4;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
-let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
+let imageData=ctx.getImageData(0,0,cnv.width,cnv.height).data;
+// Create a new typed array from the image data
+const typedArray=new Uint8Array(imageData);
+// let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
   console.log('imageData.size:',imageData.size);
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
-  
 let pixelData=new Uint8ClampedArray(imageData.data);
 let heapArray=new Uint8ClampedArray(H,0,dataSize2);
 heapArray.set(pixelData,0,dataSize2);
