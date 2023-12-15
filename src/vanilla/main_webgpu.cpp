@@ -471,7 +471,8 @@ return;
 EM_JS(void,js_main,(),{
 
 function strr(){
-Module.ccall("runWebGPU2");
+// Module.ccall("runWebGPU2");
+Module.ccall("startWebGPU");
 }
 
 function normalResStart(){
@@ -535,7 +536,8 @@ normalResStart();
 
 document.getElementById('startBtn2').addEventListener('click',function(){
 // myStopFunction();
-Module.ccall("runWebGPU");
+// Module.ccall("runWebGPU");
+	
 // Module.ccall("runWebGPU2");
 const myInterval=setInterval(strr,32);
 });
