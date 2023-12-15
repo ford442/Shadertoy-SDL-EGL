@@ -211,6 +211,7 @@ WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
 WGpuImageCopyBuffer WGPU_Output_Buffer={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
+double_int53_t WGPU_Range_PointerB;
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -233,7 +234,7 @@ return;
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
-double_int53_t WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2), WGPU_BufferRange.at(0,0,1) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
