@@ -271,6 +271,11 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
+emscripten_get_element_css_size("canvas",&szw,&szh);
+emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
+u64_siz.at(0,0)=szhI;
+sze.at(0,0)=szhI;
+sze.at(0,1)=szhI;
 multiSamp={};
 multiSamp.count=1;
 multiSamp.mask=-1;
@@ -384,7 +389,6 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
-      /*
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
@@ -400,7 +404,6 @@ bindgroup_layout_entries[5].binding=5;
 bindgroup_layout_entries[5].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[5].layout.texture=wtbl.at(2,2);
-      */
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
@@ -502,7 +505,7 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
-      /*
+
 bindgroup_entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[3].binding=3;
 bindgroup_entries[3].resource=wt.at(1,1);
@@ -512,18 +515,14 @@ bindgroup_entries[4].resource=wt.at(2,2);
 bindgroup_entries[5]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[5].binding=5;
 bindgroup_entries[5].resource=wt.at(0,0);
-*/
+
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
 // wrbed.at(0,0)=renderBundleEncoderDescriptor;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
-emscripten_get_element_css_size("canvas",&szw,&szh);
-emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
-u64_siz.at(0,0)=szhI;
-sze.at(0,0)=szhI;
-sze.at(0,1)=szhI;
+
 
 wt.at(2,2)=__128bit_Texture__;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
