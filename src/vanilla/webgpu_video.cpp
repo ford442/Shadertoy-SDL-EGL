@@ -559,12 +559,15 @@ let dataSize=cnv.width*cnv.height;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
+  console.log('imageData.size:',imageData.size);
+  console.log('imageData.length:',imageData.length);
+  console.log('dataSize:',dataSize);
 let pixelData=new Uint8ClampedArray(imageData.data);
-let heapArray=new Uint8ClampedArray(H,0,dataSize);
-heapArray.set(pixelData,0,dataSize);
+let heapArray=new Uint8ClampedArray(H,0,imageData.length);
+heapArray.set(pixelData,0,imageData.length);
 //   Module.HEAPU8.set(0,pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
-},500);
+},1500);
 }
   
 function normalResStart(){
