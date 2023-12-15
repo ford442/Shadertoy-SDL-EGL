@@ -247,9 +247,8 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=canvasFormat;
-      
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
+wtf.at(0,1)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
@@ -432,7 +431,7 @@ depthTextureViewDescriptor.mipLevelCount=1;
 depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(0,0)=depthTextureViewDescriptor;
-colorTextureViewDescriptor.format=wtf.at(0,0);
+colorTextureViewDescriptor.format=wtf.at(0,1);
 colorTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 colorTextureViewDescriptor.baseMipLevel=0; // default = 0
@@ -455,7 +454,7 @@ wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-colorTextureDescriptor.format=wtf.at(0,0);
+colorTextureDescriptor.format=wtf.at(0,1);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
@@ -463,7 +462,7 @@ colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT colorViewFormat[1]={wtf.at(0,0)};
+WGPU_TEXTURE_FORMAT colorViewFormat[1]={wtf.at(0,1)};
 colorTextureDescriptor.viewFormats=&colorViewFormat[0];
 wtd.at(1,1)=colorTextureDescriptor;
 u64_uni.at(0,0)=0;
