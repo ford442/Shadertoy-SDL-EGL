@@ -559,7 +559,7 @@ let cnv=document.getElementById('bcanvas');
 let ctx=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
-let dataSize2=SiZ*SiZ*4;
+let dataSize2=imageData.length;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height).data;
