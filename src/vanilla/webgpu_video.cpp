@@ -364,7 +364,7 @@ wtd.at(2,2)=videoTextureDescriptor;
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=videoTexture;
 videoTextureViewDescriptor.format=wtf.at(0,0);
-videoTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 videoTextureViewDescriptor.baseMipLevel=0; // default = 0
 videoTextureViewDescriptor.mipLevelCount=1;
@@ -468,7 +468,7 @@ depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(0,0)=depthTextureViewDescriptor;
 colorTextureViewDescriptor.format=wtf.at(0,0);
-colorTextureViewDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+colorTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 colorTextureViewDescriptor.baseMipLevel=0; // default = 0
 colorTextureViewDescriptor.mipLevelCount=1;
