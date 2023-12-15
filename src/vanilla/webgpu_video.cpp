@@ -570,7 +570,7 @@ const typedArray=new Uint8Array(imageData);
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
-let pixelData=new Uint8ClampedArray(imageData.data);
+let pixelData=new Uint8ClampedArray(imageData);
 let heapArray=new Uint8ClampedArray(H,0,dataSize2);
 heapArray.set(pixelData,0,dataSize2);
 //   Module.HEAPU8.set(0,pixelData);
