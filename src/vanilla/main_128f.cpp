@@ -101,6 +101,7 @@ static wbg_tensor wbg=wbg_tensor{2,2};
 static wrpd_tensor wrpd=wrpd_tensor{2,2};
 static wrpca_tensor wrpca=wrpca_tensor{2,2};
 static wbbl_tensor wbbl=wbbl_tensor{2,2};
+static wtbl_tensor wtbl=wtbl_tensor{2,2};
 static wbd_tensor wbd=wbd_tensor{8,8};
 static wao_tensor wao=wao_tensor{2,2};
 static wdd_tensor wdd=wdd_tensor{2,2};
