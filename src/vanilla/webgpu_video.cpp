@@ -553,7 +553,7 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 // let currentTime = vv.getCurrentTime();
 // let frameData = new Uint8Array(cc.getFrameData(currentTime));
-// let ctx=cnv.getContext('2d',{willReadFrequently:true});
+let ctx=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*8;
 setInterval(function(){
