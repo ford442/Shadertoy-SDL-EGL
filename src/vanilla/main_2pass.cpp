@@ -238,6 +238,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
+wgpu_canvas_context_present(wcc.at(0,0));
 const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=canvasFormat;
@@ -263,11 +264,11 @@ wms.at(1,1)=multiSamp2;
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
       
-colorTarget.blend.color.operation=WGPU_BLEND_FACTOR_ONE;
-colorTarget.blend.color.srcFactor=WGPU_BLEND_FACTOR_SRC_ALPHA;
+colorTarget.blend.color.operation=WGPU_BLEND_OPERATION_ADD;
+colorTarget.blend.color.srcFactor=WGPU_BLEND_FACTOR_ZERO;
 colorTarget.blend.color.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
 colorTarget.blend.alpha.operation=WGPU_BLEND_OPERATION_ADD;
-colorTarget.blend.alpha.srcFactor=WGPU_BLEND_FACTOR_ONE;
+colorTarget.blend.alpha.srcFactor=WGPU_BLEND_FACTOR_ZERO;
 colorTarget.blend.alpha.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
 
 wcts.at(0,0)=colorTarget;
