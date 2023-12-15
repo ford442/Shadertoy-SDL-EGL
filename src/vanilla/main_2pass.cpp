@@ -177,8 +177,6 @@ wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
 wbg.at(0,0)=bindgroup;
-  
-
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(1,1),&wtd.at(1,1));
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
@@ -248,11 +246,11 @@ wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
-wtf.at(0,0)=canvasFormat;
+// wtf.at(0,0)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG16FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
