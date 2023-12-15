@@ -1,4 +1,4 @@
-WGL_BIN_NAME += w0-001
+WGL_BIN_NAME += w0-002
 
 LDFLAGS += -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl,-S
 
