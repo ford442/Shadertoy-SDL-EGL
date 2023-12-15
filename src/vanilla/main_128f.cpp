@@ -179,7 +179,16 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
 // u64_uni.at(4,4)=u_time.time_spanb.count()/1.0f;
+   
+colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
+wt.at(1,1)=colorTexture;
+      
+colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
+wtv.at(1,1)=colorTextureView;
 
+depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
+wtv.at(0,0)=depthTextureView;
+      
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -319,27 +328,52 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
-bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout1.multisampled=1;
+wtbl.at(0,0)=textureBindingLayout1;
+textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
+textureBindingLayout2.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout2.multisampled=1;
+wtbl.at(1,1)=textureBindingLayout2;
+textureBindingLayout3.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
+textureBindingLayout3.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout3.multisampled=1;
+wtbl.at(2,2)=textureBindingLayout3;
+
+bindgroup_layout_entries[0]={};
 bindgroup_layout_entries[0].binding=0;
 bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[0].layout.buffer=wbbl.at(0,0);
-bindgroup_layout_entries[1]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[1]={};
 bindgroup_layout_entries[1].binding=1;
 bindgroup_layout_entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[1].layout.buffer=wbbl.at(0,0);
-bindgroup_layout_entries[2]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[2]={};
 bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
-// textureBindingLayout.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
-// textureBindingLayout.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-// textureBindingLayout.multisampled=1;
-// bindgroup_layout_entry.layout.texture=textureBindingLayout;
+      
+bindgroup_layout_entries[3]={};
+bindgroup_layout_entries[3].binding=3;
+bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+bindgroup_layout_entries[3].layout.texture=wbbl.at(0,0);
+bindgroup_layout_entries[4]={};
+bindgroup_layout_entries[4].binding=4;
+bindgroup_layout_entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+bindgroup_layout_entries[4].layout.texture=wbbl.at(1,1);
+bindgroup_layout_entries[5]={};
+bindgroup_layout_entries[5].binding=5;
+bindgroup_layout_entries[5].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+bindgroup_layout_entries[5].layout.texture=wbbl.at(2,2);
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),5);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -381,6 +415,15 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
+bindgroup_entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[3].binding=3;
+bindgroup_entries[3].resource=wt.at(0,0);
+bindgroup_entries[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[4].binding=4;
+bindgroup_entries[4].resource=wt.at(1,1);
+bindgroup_entries[5]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[5].binding=5;
+bindgroup_entries[5].resource=wt.at(2,2);
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
@@ -451,18 +494,14 @@ wt.at(2,2)=__128bit_Texture__;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),5);
 wbg.at(0,0)=bindgroup;
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(1,1),&wtd.at(1,1));
-
-      
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
-      
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
-      
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -472,11 +511,9 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=0.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
-
-depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
-      
+depthAttachment={};
 depthAttachment.view=wtv.at(0,0);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
@@ -487,7 +524,6 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
-      
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
@@ -496,9 +532,6 @@ passDesc2={};
 passDesc2.numColorAttachments=0;
 passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
-
-
-      
 u64_uni.at(0,0)=0;
 u64_uni.at(1,1)=0;
 u64_uni.at(2,2)=u64_siz.at(0,0);
