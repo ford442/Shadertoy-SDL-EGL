@@ -473,7 +473,7 @@ EM_JS(void,js_main,(),{
 
 function strr(){
 // Module.ccall("runWebGPU2");
-Module.ccall("startWebGPU");
+Module.ccall("startWebGPU",{async:true});
 }
 
 function normalResStart(){
