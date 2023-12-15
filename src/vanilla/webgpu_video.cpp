@@ -559,10 +559,10 @@ let cnv=document.getElementById('bcanvas');
 let ctx=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
-let dataSize2=imageData.length;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height).data;
+let dataSize2=imageData.length;
 // Create a new typed array from the image data
 const typedArray=new Uint8Array(imageData);
 // let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
