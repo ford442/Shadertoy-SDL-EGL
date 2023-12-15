@@ -543,7 +543,7 @@ document.getElementById('startBtn2').addEventListener('click',function(){
 for(var i=0;i<420;i++){
 setTimeout(function(){
 strr();
-},42);
+},420);
 }
 	
 // const myInterval=setInterval(strr,42);
