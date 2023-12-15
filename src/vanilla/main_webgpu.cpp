@@ -211,7 +211,7 @@ WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
 WGpuImageCopyBuffer WGPU_Output_Buffer={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
-
+uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
@@ -260,15 +260,16 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerC=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,0)=WGPU_Range_PointerC;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),  WGPU_BufferRange.at(0,0,0) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-EM_ASM({
-document.getElementById('outText').innerHTML=$0;
-},WGPU_ResultBuffer.at(0,0,0)[0]);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,0) ,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+outP=WGPU_ResultBuffer.at(0,0,0)[0];
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
+EM_ASM({
+document.getElementById('outText').innerHTML=$0;
+},outP);
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),WGPU_MapCallback.at(0,0,1),&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
 // usleep(42000);
 // runWebGPU();
