@@ -563,7 +563,7 @@ let pixelData=new Uint8ClampedArray(imageData.data);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
 heapArray.set(pixelData,0,dataSize);
 //   Module.HEAPU8.set(0,pixelData);
-Module.ccall("frm",null,["Number"],[0]);
+// Module.ccall("frm",null,["Number"],[0]);
 },500);
 }
   
