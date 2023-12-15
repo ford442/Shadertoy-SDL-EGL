@@ -555,7 +555,7 @@ let cnv=document.getElementById('bcanvas');
 // let frameData = new Uint8Array(cc.getFrameData(currentTime));
 let ctx=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*8;
+let dataSize=cnv.width*cnv.height;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
