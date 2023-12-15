@@ -559,7 +559,7 @@ let dataSize=cnv.width*cnv.height*8;
 setInterval(function(){
 ctx.drawImage(vv,0,0);
 let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
-let pixelData=new Uint8ClampedArray(frameData.data);
+let pixelData=new Uint8ClampedArray(imageData.data);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
 heapArray.set(pixelData,0,dataSize);
 //   Module.HEAPU8.set(0,pixelData);
