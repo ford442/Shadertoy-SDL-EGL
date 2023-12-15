@@ -238,7 +238,6 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-wgpu_canvas_context_present(wcc.at(0,0));
 const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=canvasFormat;
