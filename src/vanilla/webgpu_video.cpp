@@ -551,14 +551,14 @@ FS.mkdir('/shader');
 function videoFrames(){
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
-let currentTime = vv.getCurrentTime();
-let frameData = new Uint8Array(cc.getFrameData(currentTime));
+// let currentTime = vv.getCurrentTime();
+// let frameData = new Uint8Array(cc.getFrameData(currentTime));
 // let ctx=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*4;
+let dataSize=cnv.width*cnv.height*8;
 setInterval(function(){
-// ctx.drawImage(vv,0,0);
-// let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
+ctx.drawImage(vv,0,0);
+let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
 let pixelData=new Uint8ClampedArray(frameData.data);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
 heapArray.set(pixelData,0,dataSize);
