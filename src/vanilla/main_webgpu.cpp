@@ -539,7 +539,7 @@ document.getElementById('startBtn2').addEventListener('click',function(){
 // Module.ccall("runWebGPU");
 	
 // Module.ccall("runWebGPU2");
-const myInterval=setInterval(strr,200);
+const myInterval=setInterval(strr,42);
 });
 
 document.getElementById('startBtn4').addEventListener('click',function(){
