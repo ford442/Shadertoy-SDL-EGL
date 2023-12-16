@@ -556,7 +556,7 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 // let currentTime = vv.getCurrentTime();
 // let frameData = new Uint8Array(cc.getFrameData(currentTime));
-var gl=cnv.getContext('2d',{willReadFrequently:true});
+var gl=cnv.getContext('webgl2',{willReadFrequently:true});
   
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
