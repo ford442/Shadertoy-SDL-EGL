@@ -561,34 +561,83 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
+window.scroll(0,0);
+function highResStart(){
+document.querySelector('#shut').innerHTML=2;
+document.querySelector('#scanvas').width=window.innerWidth*2;
+document.querySelector('#scanvas').height=window.innerHeight*2;
+document.querySelector('#di').click();
+setTimeout(function(){
+document.querySelector('#stat').innerHTML='Sending Start';
+document.querySelector('#stat').style.backgroundColor='green';
+Module.ccall('str',{async:true});
+},50);
+setTimeout(function(){
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#scanvas').width=window.innerHeight;
+document.querySelector('#scanvas').height=window.innerHeight;
+document.querySelector('#di').click();
+},50);
+}
 function normalResStart(){
 setTimeout(function(){
-document.getElementById('shut').innerHTML=2;
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
-Module.ccall("startWebGPU");
+document.querySelector('#shut').innerHTML=2;
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
+Module.ccall("startWebGPU",{async:true});
 },100);
-document.getElementById('status').style.backgroundColor="green";
+document.querySelector('#status').style.backgroundColor="green";
 }
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').height=parseInt(window.innerHeight,10);
-document.getElementById('scanvas').width=parseInt(window.innerHeight,10);
-document.getElementById('canvas').height=parseInt(window.innerHeight,10);
-document.getElementById('canvas').width=parseInt(window.innerHeight,10);
-document.getElementById('status').height=20;
-document.getElementById('status').width=parseInt(window.innerHeight,10);
-const tem=document.getElementById('tim');
-const ban=document.getElementById('menuBtn');
-const sfr=document.getElementById('slideframe');
+
+function shds(xml){
+const sparser=new DOMParser();
+let htmlDoch=sparser.parseFromString(xml.responseText,'text/html');
+let preList=htmlDoch.getElementsByTagName('pre')[0].getElementsByTagName('a');
+$shds[0]=preList.length;
+for(var i=1;i<preList.length;i++){
+var txxts=preList[i].href;
+var Self=location.href;
+Self=Self.replace(/1ink.1ink/,"");
+txxts=txxts.replace(Self,"");
+var x=document.getElementById("sh1");
+var option=document.createElement("option");
+option.text=txxts;
+$shds[i+1]='https://glsl.1ink.us/wgsl/'+txxts;
+option.value=txxts;
+x.add(option);
+}
+}
+
+function scanShaders(){
+const dxhttp=new XMLHttpRequest();
+// dxhttp.withCredentials=false;
+dxhttp.addEventListener("load",function(){
+shds(this);
+});
+dxhttp.open('GET','https://glsl.1ink.us/wgsl/',true);
+dxhttp.send();
+}
+      
+document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
+document.querySelector('#scanvas').height=parseInt(window.innerHeight,10);
+document.querySelector('#scanvas').width=parseInt(window.innerHeight,10);
+document.querySelector('#canvas').height=parseInt(window.innerHeight,10);
+document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
+document.querySelector('#status').height=20;
+document.querySelector('#status').width=parseInt(window.innerHeight,10);
+const tem=document.querySelector('#tim');
+const ban=document.querySelector('#menuBtn');
+const sfr=document.querySelector('#slideframe');
 var $lt=tem.innerHTML;
 function grab$lt(){
 $lt=Math.round($lt);
 }
 $lt=tem.innerHTML;
 grab$lt();
-const slo=new Slideout({'panel':document.getElementById('panel'),'menu':document.getElementById('menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
+const slo=new Slideout({'panel':document.querySelector('#panel'),'menu':document.querySelector('#menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();
@@ -603,7 +652,7 @@ slt=slt*100;
 slt=Math.round(slt);
 slt=slt/100;
 tsl.setValues(slt);
-document.getElementById('menu').addEventListener('click',function(){
+document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
 $ll=$ll*100;
 $ll=Math.round($ll);
@@ -615,10 +664,12 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
-document.getElementById('startBtn').addEventListener('click',function(){
+document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
   var pth=document.querySelector('#path').innerHTML;
-
+let shdMenu=document.querySelector('#sh1');
+let highRes=document.querySelector('#resMode').value;
+document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
 // var pth="https://test.1ink.us/3arth/melt.wgsl";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -639,9 +690,9 @@ ff.send(null);
 });
   
 setTimeout(function(){
-document.getElementById('circle').width=window.innerWidth;
-document.getElementById('circle').height=window.innerHeight;
-document.getElementById('di').click();
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
 },500);
 });
 
