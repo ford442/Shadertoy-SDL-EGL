@@ -556,30 +556,30 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 // let currentTime = vv.getCurrentTime();
 // let frameData = new Uint8Array(cc.getFrameData(currentTime));
-let ctx=cnv.getContext('2d',{willReadFrequently:true});
+var gl=cnv.getContext('2d',{willReadFrequently:true});
   
-      var texture = ctx.createTexture();
-    ctx.bindTexture(ctx.TEXTURE_2D, texture);
+      var texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
 
     // Set the parameters so we can render any size image.
-    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_S, ctx.CLAMP_TO_EDGE);
-    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_T, ctx.CLAMP_TO_EDGE);
-    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MIN_FILTER, ctx.NEAREST);
-    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MAG_FILTER, ctx.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 
     // Upload the image into the texture.
-    ctx.texImage2D(ctx.TEXTURE_2D, 0, ctx.RGBA, ctx.RGBA, ctx.UNSIGNED_BYTE, vv);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
 
   
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
 setInterval(function(){
-ctx.drawImage(vv,0,0);
-let imageData=ctx.getImageData(0,0,cnv.width,cnv.height).data;
+gl.drawImage(vv,0,0);
+let imageData=gl.getImageData(0,0,cnv.width,cnv.height).data;
 let dataSize2=imageData.length;
 // Create a new typed array from the image data
 const typedArray=new Uint8Array(imageData);
-// let imageData=ctx.getImageData(0,0,cnv.width,cnv.height);
+// let imageData=gl.getImageData(0,0,cnv.width,cnv.height);
   console.log('imageData.size:',imageData.size);
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
