@@ -559,7 +559,7 @@ let cnv=document.getElementById('bcanvas');
 var gl2=cnv.getContext('2d',{willReadFrequently:true});
   
   var gl=cnv.getContext('webgl2',{willReadFrequently:true});
-
+/*
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
 
@@ -571,7 +571,7 @@ var gl2=cnv.getContext('2d',{willReadFrequently:true});
 
     // Upload the image into the texture.
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
-
+*/
   
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
