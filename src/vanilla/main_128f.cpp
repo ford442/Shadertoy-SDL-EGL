@@ -671,7 +671,7 @@ document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
 let shdMenu=document.querySelector('#sh1');
 let highRes=document.querySelector('#resMode').value;
-document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
+document.querySelector('#path').innerHTML='https://glsl.1ink.us/wgsl/'+shdMenu.value;
 var pth=document.querySelector('#path').innerHTML;
 // var pth="https://test.1ink.us/3arth/melt.wgsl";
 const ff=new XMLHttpRequest();
