@@ -83,7 +83,7 @@ b3_vanilla_128:
 	 --memory-init-file 0 main_128f.o 
 
 b3_vanilla_video_a:
-	 em++ src/vanilla/webgpu_video.cpp -std=c++20 \
+	 em++ src/vanilla/webgpu_video.cpp -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)va.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
