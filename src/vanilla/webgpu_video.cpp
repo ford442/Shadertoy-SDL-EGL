@@ -551,24 +551,18 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
   
 function videoFrames(){
-  let SiZ=parseInt(window.innerHeight);
+let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
-// let currentTime = vv.getCurrentTime();
-// let frameData = new Uint8Array(cc.getFrameData(currentTime));
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
-  
-  let gl=cnv.getContext('webgl2',{willReadFrequently:true});
 /*
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
-
     // Set the parameters so we can render any size image.
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-
     // Upload the image into the texture.
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
 */
@@ -577,11 +571,10 @@ let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
 setInterval(function(){
 gl2.drawImage(vv,0,0);
+var gl=cnv.getContext('webgl2',{willReadFrequently:true});
 let imageData=gl.getImageData(0,0,cnv.width,cnv.height).data;
 let dataSize2=imageData.length;
-// Create a new typed array from the image data
 const typedArray=new Uint8Array(imageData);
-// let imageData=gl.getImageData(0,0,cnv.width,cnv.height);
   console.log('imageData.size:',imageData.size);
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
@@ -589,7 +582,6 @@ const typedArray=new Uint8Array(imageData);
 let pixelData=new Uint8ClampedArray(imageData);
 let heapArray=new Uint8ClampedArray(H,0,dataSize2);
 heapArray.set(pixelData,0,dataSize2);
-//   Module.HEAPU8.set(0,pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
 },1500);
 }
