@@ -590,6 +590,7 @@ Module.ccall("startWebGPU",{async:true});
 },100);
 document.querySelector('#status').style.backgroundColor="green";
 }
+var $shds=[];
 
 function shds(xml){
 const sparser=new DOMParser();
