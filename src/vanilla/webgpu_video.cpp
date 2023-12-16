@@ -556,8 +556,10 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 // let currentTime = vv.getCurrentTime();
 // let frameData = new Uint8Array(cc.getFrameData(currentTime));
-var gl=cnv.getContext('webgl2',{willReadFrequently:true});
+var gl2=cnv.getContext('2d',{willReadFrequently:true});
   
+  var gl=cnv.getContext('webgl2',{willReadFrequently:true});
+
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
 
@@ -574,7 +576,7 @@ var gl=cnv.getContext('webgl2',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
 setInterval(function(){
-gl.drawImage(vv,0,0);
+gl2.drawImage(vv,0,0);
 let imageData=gl.getImageData(0,0,cnv.width,cnv.height).data;
 let dataSize2=imageData.length;
 // Create a new typed array from the image data
