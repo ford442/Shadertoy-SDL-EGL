@@ -570,9 +570,9 @@ let gl2=cnv.getContext('2d',{willReadFrequently:true});
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
 setInterval(function(){
+  
 gl2.drawImage(vv,0,0);
-var gla=cnv.getContext('webgl2',{willReadFrequently:true});
-let imageData=gla.getImageData(0,0,cnv.width,cnv.height).data;
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height).data;
 let dataSize2=imageData.length;
 const typedArray=new Uint8Array(imageData);
   console.log('imageData.size:',imageData.size);
