@@ -619,7 +619,8 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/wgsl/',true);
 dxhttp.send();
 }
-      
+scanShaders();
+
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#scanvas').height=parseInt(window.innerHeight,10);
@@ -664,6 +665,7 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
+
 document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
   var pth=document.querySelector('#path').innerHTML;
