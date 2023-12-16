@@ -1437,7 +1437,7 @@ glDisable(GL_DEPTH_TEST);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ZERO);
 // glEnable(GL_BLEND);
-// glDisable(GL_BLEND);
+glDisable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE);
 glStencilFunc(GL_ALWAYS,0,0xFF);
 glStencilOp(GL_KEEP,GL_KEEP,GL_KEEP);
@@ -1456,7 +1456,7 @@ glDisable(GL_CULL_FACE);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
-  // glClearColor(0.0f,0.0f,0.0f,1.0f);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility"); // limits to WebGL 1.0
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
