@@ -557,6 +557,20 @@ let cnv=document.getElementById('bcanvas');
 // let currentTime = vv.getCurrentTime();
 // let frameData = new Uint8Array(cc.getFrameData(currentTime));
 let ctx=cnv.getContext('2d',{willReadFrequently:true});
+  
+      var texture = ctx.createTexture();
+    ctx.bindTexture(ctx.TEXTURE_2D, texture);
+
+    // Set the parameters so we can render any size image.
+    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_S, ctx.CLAMP_TO_EDGE);
+    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_T, ctx.CLAMP_TO_EDGE);
+    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MIN_FILTER, ctx.NEAREST);
+    ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MAG_FILTER, ctx.NEAREST);
+
+    // Upload the image into the texture.
+    ctx.texImage2D(ctx.TEXTURE_2D, 0, ctx.RGBA, ctx.RGBA, ctx.UNSIGNED_BYTE, vv);
+
+  
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height;
 setInterval(function(){
