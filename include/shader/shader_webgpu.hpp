@@ -1443,6 +1443,7 @@ glEnable(GL_STENCIL_TEST);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
 glDisable(GL_CULL_FACE);
+  /*
   for (int i = 0; i < 262144 * 3; i += 3) {
 int r = rand() % 256;
 int g = rand() % 256;
@@ -1451,6 +1452,7 @@ ColorA[i] = r;
 ColorA[i + 1] = g;
 ColorA[i + 2] = b;
 }
+*/
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
