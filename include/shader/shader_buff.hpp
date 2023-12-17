@@ -1296,7 +1296,7 @@ eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
 const char * frag_body=(char*)rd_fl(Fnm);
-const char * frag_bodyBfrA=(char*)rd_fl(FnmBfA);
+// const char * frag_bodyBfrA=(char*)rd_fl(FnmBfA);
 // const char * frag_bodyCm=(char*)rd_fl(FnmCm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
