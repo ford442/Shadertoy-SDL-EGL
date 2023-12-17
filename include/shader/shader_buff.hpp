@@ -1711,6 +1711,7 @@ src[3]=frg_ftr;
 // boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 Sh.at(1,1)=frag;
+ /*
  glReleaseShaderCompiler();
 
  src[0]=cm_hdr;
@@ -1720,7 +1721,7 @@ src[3]=frg_ftr;
 // boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 fragA=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
  Sh.at(0,0)=fragA;
-
+*/
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 // glClearDepth(Di.at(0,0));
