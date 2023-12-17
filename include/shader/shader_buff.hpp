@@ -937,11 +937,11 @@ public:
 const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2,register boost::uint_t<64>::exact m3,register boost::uint_t<64>::exact m4){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
-sse4.at(1,1)=wasm_i64x2_splat(m2);
+sse4.at(1,1)=wasm_i64x2_splat(m1);
 S1.at(1,1,1)=wasm_i64x2_extract_lane(sse4.at(1,1),0);
-sse4.at(0,1)=wasm_i64x2_splat(m3);
+sse4.at(0,1)=wasm_i64x2_splat(m1);
 S1.at(0,0,1)=wasm_i64x2_extract_lane(sse4.at(0,1),0);
-sse4.at(1,0)=wasm_i64x2_splat(m3);
+sse4.at(1,0)=wasm_i64x2_splat(m1);
 S1.at(0,1,1)=wasm_i64x2_extract_lane(sse4.at(1,0),0);
 return EM_TRUE;
 };
