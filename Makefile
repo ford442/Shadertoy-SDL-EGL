@@ -28,23 +28,34 @@ STATIC_LINK_FLAGS += -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-a
 
 BOOST_FLAGS += -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
 
-GL_FLAGS += -sGL_ENABLE_GET_PROC_ADDRESS -sFULL_ES3=1 -sFULL_ES2=0 \
+GL_FLAGS += -sGL_ENABLE_GET_PROC_ADDRESS=1 -sFULL_ES3=1 -sFULL_ES2=0 -sLEGACY_GL_EMULATION=0 -sUSE_GLFW=0 -sUSE_REGAL=0 \
 	 -sGL_SUPPORT_AUTOMATIC_ENABLE_EXTENSIONS=1 -sGL_SUPPORT_SIMPLE_ENABLE_EXTENSIONS=1 -sGL_MAX_TEMP_BUFFER_SIZE=131072 \
-	 -lGL -lEGL \
-	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=1
+	 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 -lGL -lEGL \
+	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS += --target=wasm32 $(LDFLAGS) -sDEFAULT_TO_CXX=1 \
-	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS += --target=wasm32 $(LDFLAGS) -sDEFAULT_TO_CXX=1 -sWASM_BIGINT=0 -sLEGALIZE_JS_FFI=0 -sOFFSCREENCANVAS_SUPPORT=0 \
+	 -sTEXTDECODER=1 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
 	 --use-preload-plugins --closure 0 --closureFriendly -lpthread \
-	 -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' \
+	 -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
 	 --memory-init-file 0 -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt
 
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
+
+b3_shader_buff:
+	 em++ $(STDS) -c src/shader/shader_buff.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 emcc $(STDS) -o $(BIN_NAME)bf.js -O2 $(COMMON_FLAGS) \
+	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
+	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
+	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_buff.o
 
 b3_shader_wasm:
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(GL_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
@@ -67,17 +78,6 @@ b3_shader_webgpu:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
-
-b3_shader_buff:
-	 em++ $(STDS) -c src/shader/shader_buff.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -c src/shader/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 emcc $(STDS) -o $(BIN_NAME)bf.js -O2 $(COMMON_FLAGS) \
-	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
-	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
-	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_buff.o
 
 b3_shader_webgpu_a:
 	 em++ $(STDS) -c src/shader/shader_webgpu.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
