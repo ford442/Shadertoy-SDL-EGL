@@ -935,14 +935,18 @@ GPU gpu;
 
 public:
 
-const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2,register boost::uint_t<64>::exact m3,register boost::uint_t<64>::exact m4){
+const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
 sse4.at(1,1)=wasm_i64x2_splat(m1);
 S1.at(1,1,1)=wasm_i64x2_extract_lane(sse4.at(1,1),0);
-sse4.at(0,1)=wasm_i64x2_splat(m3);
+return EM_TRUE;
+};
+
+const static EM_BOOL PRGin2(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2){
+sse4.at(0,1)=wasm_i64x2_splat(m1);
 S2.at(0,0,1)=wasm_i64x2_extract_lane(sse4.at(0,1),0);
-sse4.at(1,0)=wasm_i64x2_splat(m3);
+sse4.at(1,0)=wasm_i64x2_splat(m1);
 S2.at(0,1,1)=wasm_i64x2_extract_lane(sse4.at(1,0),0);
 return EM_TRUE;
 };
@@ -1725,7 +1729,8 @@ shd_prg=glCreateProgram();
 shd_prg2=glCreateProgram();
 shd_prgA=glCreateProgram();
 shd_prgA2=glCreateProgram();
-PRGin(shd_prg,shd_prg2,shd_prgA,shd_prgA2);
+PRGin(shd_prg,shd_prg2);
+PRGin2(shd_prgA,shd_prgA2);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
 glAttachShader(S1.at(1,1,1),Sh.at(1,1));
