@@ -1751,7 +1751,7 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 //  
   //  32MB buffer per program
 glGetProgramBinary(S1.at(1,1,1),32000000,binLength,&binaryFormat,&GLbin);
-glGetProgramBinary(S1.at(0,0,1),32000000,binLengthA,&binaryFormat,&GLbinA);
+   //  glGetProgramBinary(S1.at(0,0,1),32000000,binLengthA,&binaryFormat,&GLbinA);
 // glGetProgramBinary(S1.at(1,1,1),sizeof(GLbin)*128,binLength,&binaryFormat,&GLbin);
 // binary=new GLchar[binarySize];
 // glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
@@ -1759,7 +1759,7 @@ bin.at(0,0)=GLbin;
 bin.at(1,1)=GLbinA;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),*binLength);
-glProgramBinary(S1.at(0,1,1),binaryFormat,bin.at(1,1),*binLengthA);
+   //  glProgramBinary(S1.at(0,1,1),binaryFormat,bin.at(1,1),*binLengthA);
 
 eglBindAPI(EGL_OPENGL_ES_API);
 // nanoPause();
