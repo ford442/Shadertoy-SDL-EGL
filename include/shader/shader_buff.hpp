@@ -1,20 +1,20 @@
 #include <boost/cstdfloat.hpp>
 
 #include "../../include/shader/defs.hpp"
-
 // #include <stdio.h>
 #include <stdlib.h>
 #include <cstdint>
 #include <stdarg.h>
 #include <new>
-#include <cstring>
+#include <cwchar>
+#include <string>
 #include <math.h>
 #include <cfloat>
 #include <ctime>
 // #include <iostream>
 #include <vector>
 #include <climits>
-
+#include <cfenv>
 #include <functional>
 
 template<class ArgumentType,class ResultType>
@@ -27,17 +27,13 @@ typedef ResultType result_type;
 #define register
 
 #include "../../include/shader/boost_defs.hpp"
-// #include "../../include/shader/ext_boost_defs.hpp"
-
 #include <boost/config.hpp>
 #include <boost/preprocessor.hpp>
-
 #include <boost/assert.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/predef/other/endian.h>
 #include <boost/lambda/lambda.hpp>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
@@ -47,15 +43,15 @@ typedef ResultType result_type;
 #include <boost/regex.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/thread/thread.hpp>
-
 // #include <boost/context/fiber_fcontext.hpp>
 #include <boost/context/fiber.hpp>
 #include <boost/fiber/all.hpp>
 #include <thread>
-
 #include <complex>
+#include <time.h>
 
-// #define BOOST_HAS_TR1
+#define BOOST_HAS_TR1
+
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/context/detail/tuple.hpp>
 #include <boost/function.hpp>
@@ -77,21 +73,29 @@ typedef ResultType result_type;
 #include <emscripten.h>
 // #include <emscripten/proxying.h>
 // #include <emscripten/wasm_worker.h>
-
 #include "../../include/shader/intrins.hpp"
 // #include "../../include/shader/gl.hpp"
 #include "../../include/shader/egl.hpp"
 #include "../../lib/lib_webgpu.h"
-
+#include "../../lib/lib_webgpu_cpp20.cpp"
 #include <emscripten/html5.h>
+#include <emscripten/heap.h>
 
-#ifndef OPENGL_CORE_PROFILE
-#define OPENGL_CORE_PROFILE 1
-#endif
+#include <cstdio>
+#include <memory>
 
-#ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
-#define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
-#endif
+#include "../../../glslang/glslang/Public/ShaderLang.h"
+#include "../../../glslang/glslang/CInterface/glslang_c_interface.cpp"
+#include "../../../glslang/SPIRV/GlslangToSpv.h"
+
+// using namespace ::glslang;
+
+// #define GLfloat float 
+// #define GLint int
+
+// #ifndef GL_CONTEXT_FLAG_NO_ERROR_BIT
+// #define GL_CONTEXT_FLAG_NO_ERROR_BIT 1
+// #endif
 
 #define GL_RED_MIN 0.0
 #define GL_RED_MAX 1.0
@@ -106,81 +110,14 @@ typedef ResultType result_type;
 #define GL_LUMINANCE_MIN 0.0
 #define GL_LUMINANCE_MAX 1.0
 
-static constexpr EGLint numSamples=2;
-
 // static constexpr float numSamplesf=float(numSamples);
-static constexpr float numSamplesf=4.0f;
+static float numSamplesf;
+static constexpr float multisampleFramef=1.0f;
+static constexpr float multisampleRenderf=1.0f;
+static constexpr float framef=1.0f;
+static constexpr float renderf=1.0f;
 
-static constexpr EGLint att_lst2[]={ 
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_BT2020_PQ_EXT,
-
-  // Google Colab
-/*
-If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
-This is because the BT.2020 color space is a non-linear color space, and when it is set to linear,
-the values of the components are directly proportional to the perceived brightness or lightness of the color.
-This means that the colors in the image will be misrepresented,
-and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
-*/
-
-// EGL_GL_COLORSPACE_LINEAR_KHR, 
-// EGL_GL_COLORSPACE_SRGB_KHR,
-// EGL_GL_COLORSPACE,EGL_GL_COLORSPACE_SRGB,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_EXT,
-// / EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
-EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT,
-// EGL_GL_COLORSPACE_KHR,EGL_BACK_BUFFER,
-EGL_NONE,EGL_NONE
-};
-
-static constexpr EGLint ctx_att[]={
-// EGL_CONTEXT_MAJOR_VERSION_KHR,2,
-// EGL_CONTEXT_MINOR_VERSION_KHR,0,
-EGL_CONTEXT_MAJOR_VERSION_KHR,3,
-EGL_CONTEXT_MINOR_VERSION_KHR,0,
-// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
-// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
-EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
-EGL_NONE,EGL_NONE
-};
-
-static constexpr EGLint att_lst[]={
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
-// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_NONE,
-// EGL_RENDERABLE_TYPE,EGL_NONE,
-// EGL_CONFORMANT,EGL_OPENGL_BIT,
-// EGL_CONFORMANT,EGL_NONE,
-//  EGL_CONFIG_CAVEAT,EGL_NONE,
-EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
-// EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
-EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
-//   EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
-//   EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
-EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_COLOR_FORMAT_HI,EGL_COLOR_RGBA_HI,
-EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
-// EGL_NATIVE_RENDERABLE,EGL_TRUE,
-EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
-EGL_LUMINANCE_SIZE,32,
-EGL_RED_SIZE,32,
-EGL_GREEN_SIZE,32,
-EGL_BLUE_SIZE,32,
-EGL_ALPHA_SIZE,32,
-EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,32,
-EGL_BUFFER_SIZE,32,
-EGL_SAMPLE_BUFFERS,1,
-EGL_COVERAGE_BUFFERS_NV,1,
-EGL_COVERAGE_SAMPLES_NV,4,
-EGL_SAMPLES,4,
-EGL_NONE,EGL_NONE
-};
+EGLint respon;
 
 boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin;
 
@@ -196,7 +133,11 @@ static inline boost::function<const register float()>gFm1;
 
 static inline boost::function<const register float()>gF0;
 
-static inline boost::function<EM_BOOL()>Rendar;
+static inline boost::function<EM_BOOL()>RendarA;
+
+static inline boost::function<EM_BOOL()>RendarB;
+
+static inline boost::function<EM_BOOL()>Rend;
 
 static inline boost::function<EM_BOOL()>Unifrm;
 
@@ -219,8 +160,6 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 void WGPU_Start();
 
 static EM_BOOL u_iTimeDelta_set(register boost::compute::double_);
-
-static void Rend();
 
 extern "C"{
 
@@ -245,8 +184,8 @@ GLsizei i;
 
 public:
 
-boost::uint_t<24>::least cmpl_shd(GLenum type,GLsizei nsrc,const char ** src){
-GLsizei srclens[nsrc];
+boost::uint_t<32>::exact cmpl_shd(GLenum type,GLsizei nsrc,const GLchar ** src){
+GLsizei srclens[4];
 for(i=0;i<nsrc;i++){
 srclens[i]=GLsizei(strlen(src[i]));
 }
@@ -258,8 +197,7 @@ return shader;
 
 };
 
-static inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
+static inline char wgl_cmp_src[2000]="@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
@@ -274,60 +212,104 @@ static inline char wgl_cmp_src[2000]=
 "}"
 "}";
 
-static inline char cm_hdr_src[2300]=
-"#version 300 es\n"
-"#extension GL_ALL_EXTENSIONS : enable\n"
+static inline char cm_hdr_src[3300]="#version 300 es\n"
+"#extension GL_EXTENSIONS : enable\n"
+"#pragma target(glsl_es)\n"
+"#pragma enable_bitfield_ops\n"
+"#pragma enable_matrix_dot\n"
+"#pragma enable_vector_relational\n"
+"#pragma enable_control_flow\n"
+"#pragma (STGLSL_ESSL30,all)\n"
+"#pragma STDGL(strict off)\n"
+"#pragma optionNV(STGLSL_ESSL30,all)\n"
+"#pragma optionNV(optimize,full)\n"
+"#pragma depth_textures\n"
+"#pragma multisample\n"
+// "#pragma enable_scrgb\n"
+"#pragma use_srgb\n"
+"#pragma sample_frequency_fragment(16)\n"
+"#pragma sample_frequency_vertex(16)\n"
+"#pragma enable_fp16\n"
+"#pragma optionNV(enable_fp16)\n"
+"#pragma enable_int8\n"
+"#pragma optionNV(enable_int8)\n"
+"#pragma optionNV(enable_int16)\n"
+"#pragma enable_int16\n"
+"#pragma optionNV(enable_int64)\n"
+"#pragma enable_int64\n"
+// "#pragma optionNV(enable_shared)\n"
+"#pragma optionNV(enable_constant)\n"
 "#extension all_spir_v_extensions : enable\n"
-"#extension OES_standard_derivatives : disable\n"
+"#extension GL_EXT_sRGB : enable\n"
+"#extension GL_EXT_YUV_target : enable\n"
+"#extension GL_OES_standard_derivatives : disable\n"
 "#extension GL_KHR_no_error : enable\n"
-"#extension GL_REGAL_enable : enable\n"
 "#extension EGL_ANGLE_platform_angle : enable\n"
 "#extension GL_ARB_spirv_extensions : enable\n"
-"#extension EGL_EXT_gl_colorspace_display_p3_linear : enable\n"
-// "#pragma STDC(FP_CONTRACT ON)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
-"#pragma (fastmath on)\n"
-"#pragma optionNV(fastmath on)\n"
-"#pragma (fastprecision off)\n"
-"#pragma (STDGL all)\n"
-"#pragma optionNV(STDGL all)\n"
-/*
+"#extension EGL_HI_colorformats : enable\n"
+"#extension EGL_KHR_gl_colorspace : enable\n"
+// "#extension EGL_EXT_gl_colorspace_scrgb : enable\n"
+"#extension EGL_EXT_pixel_format_float : enable\n"
+"#extension GL_EXT_shader_image_load_store : enable\n"
+// "#pragma STDC(FP_CONTRACT,OFF)\n"
+"#pragma optionNV(fastmath,on)\n"
+"#pragma optionNV(fastprecision,off)\n"
+"#pragma omp (OpenMP)\n"
+"#pragma clang loop vectorize(enable)\n"
+"#pragma clang loop interleave(enable)\n"
+"#pragma clang loop unroll(enable)\n"
+"#pragma clang loop tile(enable)\n"
+"#pragma clang loop distribute(enable)\n"
+"#pragma optimize(on)\n"
+"#pragma optimize(sse4.2|avx)\n"
+"#pragma (precision highp uint)\n"
 "#pragma (precision highp double)\n"
 "#pragma (precision highp vec4)\n"
 "#pragma (precision highp mat4)\n"
-"#pragma (precision highp uint)\n"
 "#pragma (precision highp short)\n"
 "#pragma (precision highp bool)\n"
 "#pragma (precision highp atomic_uint)\n"
+"precision highp float;\n"
+"precision lowp sampler3D;"
+"precision lowp sampler2D;"
+"precision lowp samplerCube;";
+/*
+"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
+"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
+"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
+"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
+"precision mediump sampler2DArrayShadow;\n";
 "#pragma (precise none)\n"
- "#pragma STDGL(strict off)\n"
- "#pragma optimize(on)\n"
- "#pragma debug(off)\n"
- "#pragma (invariant none)\n"
- "#pragma (centroid all)\n"
+"#pragma debug(off)\n"
+"#pragma (invariant none)\n"
+"#pragma (centroid all)\n"
 "#pragma (sample all)\n"
 "#pragma (unroll all)\n"
 "#pragma optionNV(unroll all)\n"
 "#pragma STDGL(ifcvt none)\n"
 "#pragma (inline all)\n"
 "#pragma optionNV(inline all)\n"
-*/
-"precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;"
-"precision mediump sampler2DArray;precision mediump sampler2DShadow;"
-"precision mediump isampler2D;precision mediump isampler3D;precision mediump isamplerCube;"
-"precision mediump isampler2DArray;precision mediump usampler2D;precision mediump usampler3D;"
-"precision mediump usamplerCube;precision mediump usampler2DArray;precision mediump samplerCubeShadow;"
-"precision mediump sampler2DArrayShadow;\n";
 
-static inline char vrt_bdy_src[100]=
-"precision mediump int;\n"
-"layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
+*/
+
+static inline char vrt_bdy_src[420]=
+"precision highp float;\n"
+"precision highp int;\n"
+// "precision highp sampler2D;"
+// "precision highp sampler3D;"
+// "precision highp samplerCube;"
+"layout(location=0)in vec4 fragColor;"
+"layout(location=1)in vec4 iPosition;"
+"void main(){gl_Position=iPosition;}\n";
 
 static inline char frg_hdr_src[1000]=
 "precision mediump int;\n"
+// "precision lowp sampler2D;"
+// "precision lowp samplerCube;"
+// "precision highp int;\n"
+// "precision highp sampler2D;"
+// "precision lowp sampler3D;"
+// "precision highp samplerCube;"
 "uniform int iFrameRate;"
 "uniform int iFrame;uniform float iTime;uniform float iTimeDelta;uniform vec4 iDate;"
 "uniform float iChannelTime[4];uniform vec3 iChannelResolution[4];uniform vec3 iResolution;"
@@ -336,34 +318,27 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-/*
-"#define mainImage mainImage0(out dvec4 O,dvec2 U);"
-"int _N=3;void mainImage(out dvec4 O,dvec2 U){"
-"dvec4 o;O=dvec4(0);"
-"mainImage0(o,U+dvec2(k%_N-_N/2,k/_N-_N/2)/double(_N));"
-"O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
-// "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
-"void mainImage0\n";
-*/
+"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.w=1.0f;}\n";
 
 EM_BOOL ms_l,clk_l;
 
-using gli_tensor=boost::numeric::ublas::tensor<GLint>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using shad_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+// using shad_tensor=boost::numeric::ublas::tensor<GLuint>;
 using prg_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using sz_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
-using f_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
+using f_tensor=boost::numeric::ublas::tensor<float>;
+using glf_tensor=boost::numeric::ublas::tensor<GLfloat>;
 using d_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
-using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
+using uint_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using rv_tensor=boost::numeric::ublas::tensor<register v128_t>;
 using i_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
 using iptr_tensor=boost::numeric::ublas::tensor<int *>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using gi_tensor=boost::numeric::ublas::tensor<GLint>;
-using li_tensor=boost::numeric::ublas::tensor<long>;
+// using gi_tensor=boost::numeric::ublas::tensor<boost::int_t<32>::exact>;
+using li_tensor=boost::numeric::ublas::tensor<int>;
 using void_tensor=boost::numeric::ublas::tensor<void *>;
 using bgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using bge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
@@ -397,22 +372,23 @@ using tvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 using ced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 using bms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 
+static glf_tensor glf=glf_tensor{3,3};
 static v_tensor sse=v_tensor{2,2};
 static v_tensor sse2=rv_tensor{2,2};
 static v_tensor sse3=v_tensor{2,2};
-static v_tensor sse4=rv_tensor{1,1};
+static v_tensor sse4=rv_tensor{2,2};
 static shad_tensor Sh=shad_tensor{3,3};
 static shad_tensor TX=shad_tensor{3,3,3};
-static prg_tensor S1=prg_tensor{1,1,1};
+static prg_tensor S1=prg_tensor{2,2,2};
 static sz_tensor Si=sz_tensor{1,1};
 static d_tensor d_time=d_tensor{2,2};
 static f_tensor Fi=f_tensor{3,3};
 static d_tensor Di=d_tensor{2,2};
 static gi_tensor uni_i=gi_tensor{1,1};
 static i_tensor i_view=i_tensor{1,2};
-static i_tensor i_date=i_tensor{2,2};
-static f_tensor t_size=f_tensor{1,2};
-static di_tensor i_size=di_tensor{2,2};
+static f_tensor f_date=f_tensor{2,2};
+static f_tensor float_size=f_tensor{3,3};
+static sz_tensor int_size=sz_tensor{3,3};
 static void_tensor cntx=void_tensor{3,3};
 static i_tensor cntxi=i_tensor{2,2};
 static mouse_tensor mms=mouse_tensor{2,2};
@@ -439,7 +415,7 @@ static odc_tensor WGPU_ObtainedDeviceCallback=odc_tensor{1,1,2};
 static bbl_tensor WGPU_BufferBindingLayout=bbl_tensor{1,1,4};
 static bd_tensor WGPU_BufferDescriptor=bd_tensor{1,1,4};
 static md_tensor WGPU_ShaderModuleDescriptor=md_tensor{1,1,3};
-static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
+static uint_tensor WGPU_BufferMappedRange=uint_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,2};
 static rao_tensor WGPU_RequestAdapterOptions=rao_tensor{1,1,1};
 static dd_tensor WGPU_DeviceDescriptor=dd_tensor{1,1,1};
@@ -455,6 +431,7 @@ static tv_tensor WGPU_TextureView=tv_tensor{1,1,1};
 static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static ced_tensor WGPU_CommandEncoderDescriptor=ced_tensor{1,1,1};
 static bms_tensor WGPU_BufferStatus=bms_tensor{1,1,1};
+static f_tensor samp=f_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
@@ -471,6 +448,7 @@ void * userDataB;
 GLsizei width=256;
 GLsizei height=256;
 GLuint wtexture[4];
+GLuint ftexture[1];
 GLuint colorBuffer;
 GLuint renderBufferA;
 GLuint renderBufferB;
@@ -538,6 +516,20 @@ WGpuImageCopyBuffer WGPU_Output_Buffer={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
+boost::uint_t<32>::exact vtx;
+boost::uint_t<32>::exact frag;
+boost::uint_t<64>::exact shd_prg;
+boost::uint_t<64>::exact shd_prg2;
+
+GLsizei * binLength;
+// GLenum * binaryFormat;
+void * GLbin;
+
+GLsizei binarySize;
+GLenum binaryFormat;
+GLchar *binary;
+
+
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -563,10 +555,16 @@ raN=rNd4(3);
   /*
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+// GL_MIRROR_CLAMP_TO_EDGE
+// GL_TEXTURE_WRAP_S does not respond to MIRRORED or REPEAT or MIRROR_CLAMP only GL_CLAMP_TO_EDGE
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+// GL_TEXTURE_WRAP_T does not respond to MIRRORED or REPEAT or MIRROR_CLAMP only GL_CLAMP_TO_EDGE
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+// GL_TEXTURE_WRAP_R does not respond to MIRRORED or REPEAT or MIRROR_CLAMP only GL_CLAMP_TO_EDGE
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE); // silver ball may depend on R GL_CLAMP_TO_EDGE
+ // GL_TEXTURE_MIN_FILTER,GL_LINEAR broken gl textures without
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+//
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
@@ -590,10 +588,10 @@ rndm=rNd4(3);
   /*
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
@@ -778,22 +776,22 @@ private:
 
 public:
 
-boost::function<const EM_BOOL(boost::uint_t<24>::least)>EBOin=[](boost::uint_t<24>::least EBO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>EBOin=[](boost::uint_t<32>::exact EBO){
 Sh.at(1,0)=EBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::least)>VCOin=[](boost::uint_t<24>::least VCO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VCOin=[](boost::uint_t<32>::exact VCO){
 Sh.at(2,0)=VCO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL(boost::uint_t<24>::least)>VBOin=[](boost::uint_t<24>::least VBO){
+const boost::function<const EM_BOOL(boost::uint_t<32>::exact)>VBOin=[](boost::uint_t<32>::exact VBO){
 Sh.at(2,1)=VBO;
 return EM_TRUE;
 };
 
-boost::function<const EM_BOOL()>setFloats=[](){
+const boost::function<const EM_BOOL()>setFloats=[](){
 Fi.at(0,0)=1.0f;
 Fi.at(1,2)=0.5f;
 Fi.at(0,1)=-1.0f;
@@ -802,19 +800,25 @@ Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
+glf.at(0,0)=1.0;
+glf.at(1,1)=-1.0;
+glf.at(2,2)=0.0;
 return EM_TRUE;
 };
 
-static inline boost::function<const register float()>gF=[](){
-return Fi.at(0,0);
+const static inline boost::function<const register GLfloat()>gF=[](){
+// return Fi.at(0,0);
+return glf.at(0,0);
 };
 
-static inline boost::function<const register float()>gFm1=[](){
-return Fi.at(0,1);
+const static inline boost::function<const register GLfloat()>gFm1=[](){
+// return Fi.at(0,1);
+return glf.at(1,1);
 };
 
-static inline boost::function<const register float()>gF0=[](){
-return Fi.at(1,1);
+const static inline boost::function<const register GLfloat()>gF0=[](){
+// return Fi.at(1,1);
+return glf.at(2,2);
 };
 
 };
@@ -834,7 +838,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
 union{
-boost::uint_t<24>::least VBO,EBO,VCO;
+boost::uint_t<32>::exact VBO,EBO,VCO;
 }shad;
 
 inline struct{
@@ -843,11 +847,11 @@ boost::compute::double_ hi=0.0;
 }mouse;
 
 inline struct{
-short int csswi=0;
-short int csshi=0;
+int csswi=0;
+int csshi=0;
 }css;
 
-short int Size=0;
+int Size=0;
 int tmm=166666000;
 int tmm2=1000;
 inline struct timespec rem;
@@ -877,7 +881,7 @@ mms2.at(0,1)=e->clientY;
 return EM_TRUE;
 }
 
-static char * result=NULL;
+static char8_t * result=NULL;
 static char * results=NULL;
 static long int length=0;
 // boost::uint_t<24>::fast uniBlock;
@@ -892,8 +896,23 @@ class Run{
 
 private:
 
-Compile compile;
+EGLint numSamples;
+EGLint numSamplesNV;
+EGLint numBuffersNV;
+EGLint numGreen;
+EGLint numRed;
+EGLint numBlue;
+EGLint numAlpha;
+EGLint numDepth;
+EGLint numStencil;
+EGLint numBuffer;
+EGLint numMBuffers;
+EGLint colorSpace;
+EGLint colorFormat;
+GLfloat numAniso;
+GLsizei binarySize;
 
+Compile compile;
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
 const char * src[4];
@@ -902,19 +921,21 @@ char * frg_hdr=frg_hdr_src;
 char * frg_ftr=frg_ftr_src;
 char * cm_hdr=cm_hdr_src;
 EmscriptenWebGLContextAttributes attr;
-EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx=0;
+EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
 
 GPU gpu;
 
 public:
 
-static EM_BOOL PRGin(register boost::uint_t<24>::least m1){
+const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
+sse4.at(1,1)=wasm_i64x2_splat(m1);
+S1.at(1,1,1)=wasm_i64x2_extract_lane(sse4.at(1,1),0);
 return EM_TRUE;
 };
 
-static EM_BOOL u_iTime_set(register boost::compute::double_ m80){
+const static EM_BOOL u_iTime_set(register boost::compute::double_ m80){
 // d_time.at(0,0)=m80;
 // sse2.at(0,0)=wasm_f64x2_splat(d_time.at(0,0));
 sse2.at(0,0)=wasm_f64x2_splat(m80);
@@ -922,128 +943,143 @@ d_time.at(0,0)=wasm_f64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-static EM_BOOL u_iSize_set(boost::compute::double_ set){
+const static EM_BOOL float_size_set(float set){
 sse.at(1,0)=wasm_f32x4_splat(set);
-t_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
-t_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0),0);
+float_size.at(0,0)=wasm_f32x4_extract_lane(sse.at(1,0),0);
+float_size.at(0,1)=wasm_f32x4_extract_lane(sse.at(1,0)*framef,0);
+float_size.at(1,1)=wasm_f32x4_extract_lane(sse.at(1,0)*renderf,0);
+float_size.at(1,2)=wasm_f32x4_extract_lane(sse.at(1,0)*multisampleFramef,0);
+float_size.at(1,3)=wasm_f32x4_extract_lane(sse.at(1,0)*multisampleRenderf,0);
 return EM_TRUE;
 }
 
-// static void i_iSize_set(boost::int_t<24>::fast set){
-static EM_BOOL i_iSize_set(short int set){
+// static void int_size_set(boost::int_t<24>::fast set){
+const static EM_BOOL int_size_set(int set){
 sse3.at(0,0)=wasm_i32x4_splat(set);
-i_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-i_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
-i_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
-i_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*1.25;
+int_size.at(0,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+int_size.at(0,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+int_size.at(1,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+int_size.at(1,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0);
+int_size.at(2,1)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*framef;
+int_size.at(2,0)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*renderf;
+int_size.at(1,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleFramef;
+int_size.at(2,2)=wasm_i32x4_extract_lane(sse3.at(0,0),0)*multisampleRenderf;
 return EM_TRUE;
 }
 
-static EM_BOOL u_iTimeDelta_set(register boost::compute::double_ m64){
+const static EM_BOOL u_iTimeDelta_set(register boost::compute::double_ m64){
 sse.at(0,1)=wasm_f64x2_splat(m64);
 d_time.at(1,1)=wasm_f64x2_extract_lane(sse.at(0,1),0);
 return EM_TRUE;
 }
 
-EM_BOOL uniUP(){
-t_size.at(0,1)=t_size.at(0,1)*1.01;
-glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+const EM_BOOL uniUP(){
+float_size.at(0,1)=float_size.at(0,1)*1.01;
+glUniform3f(uni_res,float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[0],float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[1],float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[2],float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[3],float_size.at(0,1),float_size.at(0,1),gpu.gF());
 //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return EM_TRUE;
 }
 
-EM_BOOL uniDOWN(){
-t_size.at(0,1)=t_size.at(0,1)*0.99;
-glUniform3f(uni_res,t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[0],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[1],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[2],t_size.at(0,1),t_size.at(0,1),gpu.gF());
-// glUniform3f(smp_chn_res[3],t_size.at(0,1),t_size.at(0,1),gpu.gF());
+const EM_BOOL uniDOWN(){
+float_size.at(0,1)=float_size.at(0,1)*0.99;
+glUniform3f(uni_res,float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[0],float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[1],float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[2],float_size.at(0,1),float_size.at(0,1),gpu.gF());
+// glUniform3f(smp_chn_res[3],float_size.at(0,1),float_size.at(0,1),gpu.gF());
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
 return EM_TRUE;
 }
 
-static EM_BOOL viewUP(){
-i_size.at(0,1)=i_size.at(0,1)*1.5;
-glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
+const static EM_BOOL viewUP(){
+int_size.at(0,1)=int_size.at(0,1)*1.5;
+glViewport(0,0,int_size.at(0,1),int_size.at(0,1));
 return EM_TRUE;
 }
 
-static EM_BOOL viewDOWN(){
-i_size.at(0,1)=i_size.at(0,1)/1.5;
-glViewport(0,0,i_size.at(0,1),i_size.at(0,1));
+const static EM_BOOL viewDOWN(){
+int_size.at(0,1)=int_size.at(0,1)/1.5;
+glViewport(0,0,int_size.at(0,1),int_size.at(0,1));
 return EM_TRUE;
 }
 
-static EM_BOOL moveDOWN(){
+const static EM_BOOL moveDOWN(){
 i_view.at(0,0)=i_view.at(0,0)-1;
-glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+glViewport(i_view.at(0,0),i_view.at(0,1),int_size.at(0,1),int_size.at(0,1));
 return EM_TRUE;
 }
 
-static EM_BOOL moveUP(){
+const static EM_BOOL moveUP(){
 i_view.at(0,0)=i_view.at(0,0)+1;
-glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+glViewport(i_view.at(0,0),i_view.at(0,1),int_size.at(0,1),int_size.at(0,1));
 return EM_TRUE;
 }
 
-static EM_BOOL moveLEFT(){
+const static EM_BOOL moveLEFT(){
 i_view.at(0,1)=i_view.at(0,1)-1;
-glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+glViewport(i_view.at(0,0),i_view.at(0,1),int_size.at(0,1),int_size.at(0,1));
 return EM_TRUE;
 }
 
-static EM_BOOL moveRIGHT(){
+const static EM_BOOL moveRIGHT(){
 i_view.at(0,1)=i_view.at(0,1)+1;
-glViewport(i_view.at(0,0),i_view.at(0,1),i_size.at(0,1),i_size.at(0,1));
+glViewport(i_view.at(0,0),i_view.at(0,1),int_size.at(0,1),int_size.at(0,1));
 return EM_TRUE;
 }
 
-static inline boost::function<EM_BOOL()>RendarA=[](){
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+const static inline boost::function<EM_BOOL()>RendarAb=[](){
+// eglBindAPI(EGL_OPENGL_API);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // non multisampled
-glEnable(GL_DITHER);
+eglSwapBuffers(display,surface);
+// glDisable(GL_DITHER);
 // glDisable(GL_POLYGON_OFFSET_FILL);
 // glDisable(GL_CULL_FACE);
 // glDepthMask(GL_TRUE);
 // glDepthFunc(GL_LEQUAL);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glSampleCoverage(1.0f,GL_FALSE);
+glClear(GL_COLOR_BUFFER_BIT);
+// glSampleCoverage(1.0f,GL_FALSE);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
-glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
+// glFlush();
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-glBlitFramebuffer(0,0,i_size.at(1,0),i_size.at(1,0),0,0,i_size.at(0,1),i_size.at(0,1),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
+// glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT,GL_ANISOTROPIC_FILTER);
+// glBlitFramebuffer(0,0,int_size.at(1,0),int_size.at(1,0),0,0,int_size.at(1,0),int_size.at(1,0),GL_COLOR_BUFFER_BIT,GL_NEAREST_MIPMAP_NEAREST);
+glBlitFramebuffer(0,0,int_size.at(2,0),int_size.at(2,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT,GL_NEAREST);
+// glBlitFramebuffer(0,0,int_size.at(2,0),int_size.at(2,0),0,0,int_size.at(2,0),int_size.at(2,0),GL_COLOR_BUFFER_BIT,GL_LINEAR);
 // end
 // glFlush();
 return EM_TRUE;
 };
 
-static inline boost::function<EM_BOOL()>RendarB=[](){
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+const static inline boost::function<EM_BOOL()>RendarBb=[](){
+// eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_NONE);
+// glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_DONT_CARE);
+// glHint(GL_GENERATE_MIPMAP_HINT,GL_DONT_CARE);
 // multisampled
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+// glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-glSampleCoverage(numSamplesf,GL_FALSE);
+// glSampleCoverage(numSamplesf,GL_FALSE);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 // glDepthMask(GL_FALSE);
-// glDepthFunc(GL_LESS);
-glDisable(GL_DITHER);
+// glDepthFunc(GL_GEQUAL);
+// glEnable(GL_DITHER);
 glDrawElements(GL_TRIANGLES,ele,GL_UNSIGNED_BYTE,indc);
-glFlush();
+// glFinish();
 return EM_TRUE;
 };
 
-static inline boost::function<EM_BOOL()>Unifrm=[](){
+const static inline boost::function<EM_BOOL()>Unifrmb=[](){
 uni_i.at(0,0)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1053,8 +1089,8 @@ u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUniform1f(uni_fps,u_time.time_spanb.count()/1.0f);
 if(ms_l==true){
-mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
-mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,1));
+mms.at(0,1)=round(mms2.at(0,0)*(float)int_size.at(0,1));
+mms.at(1,0)=round((mms2.at(0,1))*(float)int_size.at(0,1));
 }
 // retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -1064,23 +1100,21 @@ if(ms_l==true){
 if(clk_l==true){
 const long xxx=mms2.at(0,0);
 const long yyy=mms2.at(0,1);
-mms.at(0,0)=float(xxx);
-mms.at(1,0)=float((i_size.at(0,1)-yyy));
+mms.at(0,1)=float(xxx);
+mms.at(1,0)=float((float)int_size.at(0,1)-((yyy-int_size.at(0,1))/2));
 clk_l=false;
 }
-mms.at(2,0)=float(mms2.at(0,0));
-mms.at(2,1)=float(i_size.at(0,1)-mms2.at(0,1));
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+mms.at(2,0)=float((float)int_size.at(0,1)-mms2.at(0,0));
+mms.at(2,1)=float((float)int_size.at(0,1)-mms2.at(0,1));
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 }
 else{
 clk_l=true;
 }
 // glUniform1f(uni_tme,d_time.at(0,0));
  //   boost::compute::interop::opengl::set_uniform(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 glUniform1f(uni_tme,std::real(std::complex<double>(wasm_f64x2_extract_lane(sse2.at(0,0),0),0.0)));
 // glUniform1f(uni_tme,wasm_f64x2_extract_lane(sse2.at(0,0),0));
-  
 // glUniform1d(uni_tme,double(wasm_f64x2_extract_lane(sse2.at(0,0),0)));
 glUniform1f(uni_chn_tme[0],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_chn_tme[1],wasm_f64x2_extract_lane(sse2.at(0,0),0));
@@ -1089,17 +1123,20 @@ glUniform1f(uni_chn_tme[3],wasm_f64x2_extract_lane(sse2.at(0,0),0));
 glUniform1f(uni_tme_dlt,d_time.at(1,1));
 // glUniform1f(uni_tme_dlt,wasm_f64x2_extract_lane(sse.at(0,1),0));
   // webgpu
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
-int yr=1900+datE->tm_year;
-int mn=1+datE->tm_mon;
-int dy=datE->tm_mday-1;
-int hr=5+datE->tm_hour;
-int mi=datE->tm_min;
-int sc=datE->tm_sec;
-i_date.at(1,0)=dy;
-i_date.at(1,1)=(hr*3600)+(mi*60)+(sc);
-glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
+time_t timE=time(0);
+struct tm * datE=localtime(&timE);
+float yr=1900.0f+datE->tm_year;
+float mn=1.0f+datE->tm_mon;
+float dy=datE->tm_mday-1.0f;
+float hr=5.0f+datE->tm_hour;
+float mi=datE->tm_min;
+float sc=datE->tm_sec;
+float shaderToySeconds=(hr*3600.0f)+(mi*60.0f)+(sc);
+f_date.at(0,0)=yr;
+f_date.at(0,1)=mn;
+f_date.at(1,0)=dy;
+f_date.at(1,1)=shaderToySeconds;
+glUniform4f(uni_dte,f_date.at(0,0),f_date.at(0,1),f_date.at(1,0),f_date.at(1,1));
 /*
 int tfrm=(uni_i.at(0,0)%4);
 if(uni_i.at(0,0)%45==0){
@@ -1112,10 +1149,10 @@ if(uni_i.at(0,0)%15==0){
 raN=rNd4(3);
 glActiveTexture(GL_TEXTURE0+raN);
 glBindTexture(GL_TEXTURE_2D,wtexture[raN]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
 // glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,&WGPU_ResultBuffer.at(0,0,0));
 glGenerateMipmap(GL_TEXTURE_2D); // broken gl textures without
@@ -1132,49 +1169,58 @@ glUniform1i(smp_chn[raN],raN);
  glUniform1i(smp_chn[3],3);
  */
 glUniform1i(uni_frm,uni_i.at(0,0));
-// glFlush();
-eglSwapBuffers(display,surface);
+// glFinish();
 return EM_TRUE;
 };
 
-static EM_BOOL Rend()noexcept{
+const static inline boost::function<EM_BOOL()>RendarA=boost_swap_impl::bind_front(RendarAb);
+
+const static inline boost::function<EM_BOOL()>RendarB=boost_swap_impl::bind_front(RendarBb);
+
+const static inline boost::function<EM_BOOL()>Unifrm=boost_swap_impl::bind_front(Unifrmb);
+
+const static EM_BOOL Rend()noexcept{
 RendarA();
 Unifrm();
 RendarB();
+// glFinish();
 return EM_TRUE;
 }
 
-boost::function<EM_BOOL()>swap=[](){
+const boost::function<EM_BOOL()>swap=[](){
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
+emscripten_set_element_css_size("scanvas",mouse.hi,mouse.hi);
 emscripten_cancel_main_loop();
-// emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
-Size=(short int)mouse.hi;
-i_iSize_set(Size);
-u_iSize_set(float(mouse.hi));
+// emscripten_get_canvas_element_size("#scanvas",&css.csswi,&css.csshi);
+Size=(int)mouse.hi;
+int_size_set(Size);
+float_size_set(float(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
-mms.at(0,0)=0.5*t_size.at(0,0);
-mms.at(0,1)=0.5*t_size.at(0,0);
-mms.at(1,0)=0.5*t_size.at(0,0);
-mms.at(1,1)=0.5*t_size.at(0,0);
-// glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),1.0f);
-mms.at(2,0)=t_size.at(0,0)*0.5;
-mms.at(2,1)=t_size.at(0,0)*0.5;
-// glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-// glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),1.0f);
-// glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),1.0f);
-// glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),1.0f);
-// glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),1.0f);
-glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
-glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
-u_iTime_set(0.0);
-u_iTimeDelta_set(0.0);
+mms.at(0,0)=0.5*float_size.at(0,0);
+mms.at(0,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
+mms.at(1,0)=0.5*float_size.at(0,0);
+mms.at(1,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
+glUniform3f(uni_res,float_size.at(0,0),float_size.at(0,0),1.0f);
+mms.at(2,0)=float_size.at(0,0)*0.5;
+mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+glUniform3f(smp_chn_res[0],float_size.at(0,0),float_size.at(0,0),1.0f);
+glUniform3f(smp_chn_res[1],float_size.at(0,0),float_size.at(0,0),1.0f);
+glUniform3f(smp_chn_res[2],float_size.at(0,0),float_size.at(0,0),1.0f);
+glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),1.0f);
+glViewport(0,0,int_size.at(0,0),int_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
+glScissor(0,0,int_size.at(0,0),int_size.at(0,0));
+u_iTime_set(0.0f);
+u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_iTime_set(u_time.time_spana.count());
 u_iTimeDelta_set(u_time.time_spanb.count());
 glUseProgram(0);
-glFlush();
+glFinish();
+glDeleteShader(vtx);
+glDeleteShader(frag);
+// glReleaseShaderCompiler();
 glDeleteProgram(S1.at(0,0,0));
 glDeleteBuffers(1,&Sh.at(2,1));
 glDeleteBuffers(1,&Sh.at(1,0));
@@ -1182,7 +1228,7 @@ glDeleteVertexArrays(1,&Sh.at(2,0));
 return EM_TRUE;
 };
 
-inline char * rd_fl(const char * Fnm){
+const inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -1197,9 +1243,9 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char *>(malloc((length+1)*sizeof(char)));
+result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char),length,file);
+size_t actual_length=fread(result,sizeof(char8_t),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
@@ -1209,14 +1255,14 @@ return results;
 return nullptr;
 }
 
-boost::function<EM_BOOL()>strt=[this](){
-typedef struct{GLfloat XYZW[4];}Vertex;
+const boost::function<EM_BOOL()>strt=[this](){
+typedef struct{register GLfloat XYZW[4];}Vertex;
 gpu.setFloats();
 const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()},{gpu.gFm1(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gFm1(),gpu.gFm1(),gpu.gF()},{gpu.gF(),gpu.gF(),gpu.gFm1(),gpu.gF()},{gpu.gFm1(),gpu.gF(),gpu.gF(),gpu.gF()}};
 ::boost::tuples::tie(Fi,sse);
 ::boost::tuples::tie(uni_i,Si,sse3);
 ::boost::tuples::tie(cntx,mms);
-::boost::tuples::tie(i_size,cntxi);
+::boost::tuples::tie(int_size,cntxi);
 ::boost::tuples::tie(mouse.hi,mouse.wi,d_time);
 ::boost::tuples::tie(u_time.t1,u_time.t2,u_time.t3);
 ::boost::tuples::tie(shad.EBO,shad.VBO,shad.VCO,sse4);
@@ -1233,7 +1279,7 @@ const Vertex vrt[8]={{gpu.gFm1(),gpu.gFm1(),gpu.gF(),gpu.gF()},{gpu.gF(),gpu.gFm
 eglconfig=NULL;
 uni_i.at(0,0)=0;
 clk_l=true;
-const char * frag_body=rd_fl(Fnm);
+const char * frag_body=(char*)rd_fl(Fnm);
 std::string frag_body_S=frag_body;
 emscripten_webgl_init_context_attributes(&attr);
 attr.alpha=EM_TRUE;
@@ -1244,47 +1290,186 @@ attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
+attr.explicitSwapControl=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
-attr.majorVersion=3;
+attr.majorVersion=2;
 attr.minorVersion=0;
-ctx=emscripten_webgl_create_context("#zcanvas",&attr);
-cntxi.at(0,0)=ctx;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
+eglInitialize(display,&major,&minor);
+samp.at(0,0,0)=(float)numSamples;
+eglGetConfigAttrib(display,eglconfig,EGL_SAMPLES,&numSamples);
+eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numSamplesNV);
+eglGetConfigAttrib(display,eglconfig,EGL_SAMPLE_BUFFERS,&numMBuffers);
+eglGetConfigAttrib(display,eglconfig,EGL_RED_SIZE,&numRed);
+eglGetConfigAttrib(display,eglconfig,EGL_GREEN_SIZE,&numGreen);
+eglGetConfigAttrib(display,eglconfig,EGL_BLUE_SIZE,&numBlue);
+eglGetConfigAttrib(display,eglconfig,EGL_ALPHA_SIZE,&numAlpha);
+eglGetConfigAttrib(display,eglconfig,EGL_DEPTH_SIZE,&numDepth);
+eglGetConfigAttrib(display,eglconfig,EGL_STENCIL_SIZE,&numStencil);
+eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
+eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
+eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
+eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
+static EGLint ctx_att[]={
+EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
+EGL_CONTEXT_CLIENT_VERSION,3,
+EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+EGL_CONTEXT_MINOR_VERSION_KHR,0,
+// EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
+EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
+// EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
+EGL_NONE
+};
+static EGLint att_lst2[]={ 
+/*
+  Google Colab
+If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
+This is because the BT.2020 color space is a non-linear color space, and when it is set to linear,
+the values of the components are directly proportional to the perceived brightness or lightness of the color.
+This means that the colors in the image will be misrepresented,
+and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
+*/
+EGL_GL_COLORSPACE_KHR,colorSpace,
+EGL_NONE
+};
+static EGLint att_lst[]={
+EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
+// EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR|EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+// EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
+// EGL_RENDERABLE_TYPE,EGL_NONE,
+// EGL_CONFORMANT,EGL_OPENGL_BIT,
+// EGL_CONFORMANT,EGL_NONE,
+//  EGL_CONFIG_CAVEAT,EGL_NONE,
+EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_NO_ERROR_KHR,EGL_TRUE,
+// EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
+// EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
+EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
+// EGL_SURFACE_TYPE,EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
+EGL_SURFACE_TYPE,EGL_SWAP_BEHAVIOR_PRESERVED_BIT|EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
+EGL_MULTISAMPLE_RESOLVE,EGL_MULTISAMPLE_RESOLVE_BOX,
+//  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE, // EGL 1.5 "...the context will only support OpenGL ES 3.0 and later features."
+EGL_COLOR_FORMAT_HI,colorFormat, //  available in OpenGL
+// EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY,EGL_NO_RESET_NOTIFICATION,
+// EGL_NATIVE_RENDERABLE,EGL_TRUE,
+EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
+EGL_LUMINANCE_SIZE,0, // available in OpenGL
+EGL_RED_SIZE,numRed,
+EGL_GREEN_SIZE,numGreen,
+EGL_BLUE_SIZE,numBlue,
+EGL_ALPHA_SIZE,numAlpha,
+EGL_DEPTH_SIZE,numDepth,
+EGL_STENCIL_SIZE,numStencil,
+EGL_BUFFER_SIZE,numBuffer,
+EGL_COVERAGE_BUFFERS_NV,numBuffersNV, // available in GLES 3.1
+EGL_COVERAGE_SAMPLES_NV,numSamplesNV,
+EGL_SAMPLE_BUFFERS,numMBuffers,
+EGL_SAMPLES,numSamples,
+EGL_NONE
+};
+eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
+ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
+surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
+eglBindAPI(EGL_OPENGL_ES_API);
+ctx=emscripten_webgl_create_context("#scanvas",&attr);
+cntxi.at(0,0)=ctx;
 // emscripten_webgl_make_context_current(cntxi.at(0,0));
 // nanoPause();
-//   emscripten_get_canvas_element_size("#zcanvas",&css.csswi,&css.csshi);
+//   emscripten_get_canvas_element_size("#scanvas",&css.csswi,&css.csshi);
 emscripten_get_element_css_size("canvas",&mouse.wi,&mouse.hi);
-emscripten_set_element_css_size("zcanvas",mouse.hi,mouse.hi);
-Size=(short int)mouse.hi;
+emscripten_set_element_css_size("scanvas",mouse.hi,mouse.hi);
+Size=(int)mouse.hi;
 // Size=css.csshi;
-i_iSize_set(Size);
-// u_iSize_set(mouse.hi);
-u_iSize_set(float(mouse.hi));
+int_size_set(Size);
+// float_size_set(mouse.hi);
+float_size_set(float(mouse.hi));
 i_view.at(0,0)=0;
 i_view.at(0,1)=0;
-mms.at(0,0)=0.5*t_size.at(0,0);
-mms.at(0,1)=0.5*t_size.at(0,0);
-mms.at(1,0)=0.5*t_size.at(0,0);
-mms.at(1,1)=0.5*t_size.at(0,0);
-  
+mms.at(0,0)=0.5*float_size.at(0,0);
+// mms.at(0,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
+mms.at(0,1)=0.5*float_size.at(0,0);
+mms.at(1,0)=0.5*float_size.at(0,0);
+mms.at(1,1)=0.5*float_size.at(0,0);
+// mms.at(1,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
 // eglMakeCurrent(display,surface,surface,cntx.at(0,0));
 emscripten_webgl_make_context_current(cntxi.at(0,0));
-
 // eglBindAPI(EGL_OPENGL_ES_API);
-eglBindAPI(0);
+// eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(0);
+// eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
+  // eglSwapBuffers(display,surface);
+cntx.at(0,0)=ctxegl;
+eglMakeCurrent(display,surface,surface,cntx.at(0,0));
+emscripten_webgl_make_context_current(cntxi.at(0,0));
 ///glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_FASTEST);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 // glHint(GL_GENERATE_MIPMAP_HINT,GL_FASTEST);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
   
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_no_error");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+// glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
+ //    glDepthFunc(GL_GREATER);
+// // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+// glEnable(BLEND_ADVANCED_COHERENT_NV);
+  // glDisable(GL_DITHER);
+// glDepthFunc(GL_LEQUAL); // Bard says
+// glDepthFunc(GL_GEQUAL);
+// glDepthFunc(GL_LESS);
+// glDisable(GL_BLEND);
+// glDepthMask(GL_TRUE);
+// glClearDepthf(Fi.at(0,0));
+// glEnable(GL_DEPTH_TEST);
+glDisable(GL_DEPTH_TEST);
+// glDepthFunc(GL_ALWAYS);
+ // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
+glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ZERO);
+// glEnable(GL_BLEND);
+glDisable(GL_BLEND);
+// glBlendFunc(GL_ONE,GL_ONE);
+glStencilFunc(GL_ALWAYS,0,0xFF);
+glStencilOp(GL_KEEP,GL_KEEP,GL_KEEP);
+glStencilMask(0x00);
+// glEnable(GL_STENCIL_TEST);
+glDisable(GL_STENCIL_TEST);
+// glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+// glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
+// glStencilFunc(GL_ALWAYS,1,0xFF);
+// glStencilMask(0xFF);
+glFrontFace(GL_CW);
+glCullFace(GL_BACK);
+glDisable(GL_CULL_FACE);
+// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+// glBlendEquationSeparate(GL_MIN,GL_MAX);
+// glBlendEquation(GL_FUNC_SUBTRACT);
+glClearColor(0.0f,0.0f,0.0f,1.0f);
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility"); // limits to WebGL 1.0
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
+  // emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_fragment_precision_high"); // deprecated
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_platform_angle");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_spirv_extensions");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_float"); // GLES float
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_half_float"); // GLES half-float
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_blend"); // GLES float
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_blend_equation_separate");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_blend_func_separate");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_blend_subtract");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float"); // OpenGL 1.5/2.0
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float"); // OpenGL 1.5/2.0
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_shader_multisample_interpolation");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_object");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_sRGB");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_half_float");
@@ -1293,24 +1478,24 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program_option");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_fragment_program2");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_float_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gl_spirv");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_spirv_extensions");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_polygon_offset_clamp");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counter_ops");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample_resolve");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_quadruple_buffer");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_coverage_sample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_depth_buffer_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_depth_buffer_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_element_index_uint");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_float"); // non-ES
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_color_buffer_half_float"); // non-ES
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_variables");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_shader_multisample_interpolation");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_get_program_binary");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_texture_external");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_IMG_context_priority");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_filter_anisotropic");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_context_priority_realtime");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_depth_nonlinear");
@@ -1318,14 +1503,17 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_HI_colorformats");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_pixel_format_float");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_gl_colorspace");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_robustness");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_create_context_robustness");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_robustness"); // OpenGL 1.1
+emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_robustness"); // GLES
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_robustness"); // old GLES 1.1/2.0
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_robustness");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_scrgb_linear");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_pq");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_display_p3_linear");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_gl_colorspace_display_p3_passthrough");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_gl_colorspace_bt2020_linear");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader4");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_gpu_shader5");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_buffer_unified_memory");
@@ -1334,75 +1522,126 @@ emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_vertex_attrib_integer_64bit"
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_gpu_shader_fp64");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_vertex_attrib_64bit");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB_write_control");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_sample_shading");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_half_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_multisample_compatibility");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"NV_framebuffer_multisample");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_layouts");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shading_language_420pack");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_get_program_binary"); // OpenGL 3.0 / 3.2 compat
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_atomic_counters");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_bindable_uniform");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_geometry_shader4");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_ES2_compatibility");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ARB_direct_state_access");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_geometry_shader4");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES2_compatibility"); // limits to OpenGL ES 2.0?
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_ES3_compatibility"); 
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_direct_state_access");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multitexture");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_KHR_color_buffer_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_texture_norm16");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_color_buffer_half_float");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXT_color_buffer_half_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_color_buffer_half_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_norm16");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_create_context_extensions_enabled");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_d3d_texture_client_buffer");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_direct3d_display");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_robust_resource_initialization");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_create_context_no_error");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_program_cache_control");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANGLE_create_context_client_arrays");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_CHROMIUM_create_context_bind_generates_resource");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_multi_draw");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_color_buffer_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_render_shared_exponent");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_base");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_device_query");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_output_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_base");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_platform_device");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_swap_buffers_with_damage");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_cuda_event");
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_device_cuda");
-emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
-        
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
-eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
-eglInitialize(display,&major,&minor);
-ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-cntx.at(0,0)=ctxegl;
-// eglSwapBuffers(display,surface);
-eglMakeCurrent(display,surface,surface,cntx.at(0,0));
-emscripten_webgl_make_context_current(cntxi.at(0,0));
-glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
-glDepthMask(GL_TRUE);
-// glClearDepth(Di.at(0,0));
- //    glDepthFunc(GL_GREATER);
-// // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-// glEnable(BLEND_ADVANCED_COHERENT_NV);
-// glDisable(GL_DITHER);
-// glDepthFunc(GL_LEQUAL);
-// glDepthFunc(GL_LESS);
-// glDisable(GL_BLEND);
-glEnable(GL_DEPTH_TEST);
-// glEnable(GL_BLEND);
-glEnable(GL_STENCIL_TEST);
-// glDisable(GL_STENCIL_TEST);
-// glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-// glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
-// glStencilFunc(GL_ALWAYS,1,0xFF);
-// glStencilMask(0xFF);
-glFrontFace(GL_CW);
-// glCullFace(GL_BACK);
-// glEnable(GL_CULL_FACE);
-// glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
- // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glBlendEquationSeparate(GL_MIN,GL_MAX);
-// glBlendEquation(GL_FUNC_SUBTRACT);
-//   glClearColor(1.0f,1.0f,1.0f,1.0f);
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_NV_robustness_video_memory_purge");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_float_32_packed_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_wait_sync");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_image_native_buffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_recordable");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_framebuffer_target");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_blob_cache");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_fence_sync");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_ANDROID_native_fence_sync");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_image_base");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_EGL_image_external_essl3");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_YUV_target");
+// emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_rgb10_a2ui");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_SMPTE2086_metadata");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multisample_texture");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_cube_map_array");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_buffer_object");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_view");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_storage_buffer_object");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_compute_shader");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_tessellation_shader");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_draw_elements_base_vertex");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_provoking_vertex");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_seamless_cube_map_per_texture");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_compression_rgtc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_compression_bptc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_compression_astc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_filter_minmax");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_depth_texture");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_framebuffer_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_objects");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_vertex_array_object");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_s3tc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compressed_texture_etc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_blend_func_extended");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_KHR_swap_behavior");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_sRGB");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_sRGB");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_buffer_storage");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_enhanced_multisample_interpolation");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_storage_multisample");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_lod_bias");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_image_load_store");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_bit_arithmetic");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_texture_adodge");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_texture_lod");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_shader_subroutine");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_buffer_age");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_multisample_swap_control");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_texture_format_2D_lock");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_texture_share_group");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_texture_surface");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_filter_minmax_hq");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_compression_astc");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_texture_gather");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_buffer");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_swap_request");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_image_transform");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_orientation");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_pixel_format_float");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_surface_with_modifiers");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_pipeline_statistics_query");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_occlusion_query2");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_timer_query");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"ARB_transform_feedback3");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_shader_framebuffer_fetch_nonms");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_swap_buffers_with_damage");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_context_with_modifiers");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_request_priority");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_create_surface_from_window");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_surface_attachment");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"EXT_texture_storage");
 glGenBuffers((GLsizei)1,&shad.VBO);
 gpu.VBOin(shad.VBO);
 glBindBuffer(GL_ARRAY_BUFFER,Sh.at(2,1));
-glBufferData(GL_ARRAY_BUFFER,sizeof(vrt),vrt,GL_DYNAMIC_DRAW);
+  std::size_t len = std::size(vrt);
+// glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*4,vrt,GL_STATIC_DRAW);
+// glBufferData(GL_ARRAY_BUFFER,len(vrt)*4,vrt,GL_STREAM_DRAW);
+  
+glBufferData(GL_ARRAY_BUFFER,32000000,vrt,GL_DYNAMIC_DRAW);
+// glBufferData(GL_ARRAY_BUFFER,sizeof(vrt)*64,vrt,GL_DYNAMIC_DRAW);
  /* 
 auto CLdevice=boost::compute::system::default_device();
 auto CLcontext=boost::compute::context(CLdevice);
@@ -1419,29 +1658,48 @@ buffer_object.bind(GL_ARRAY_BUFFER);
 buffer_object.set_data(vertex_buffer);
 */
 // nanoPause();
-  
 glGenBuffers((GLsizei)1,&shad.EBO);
 gpu.EBOin(shad.EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Sh.at(1,0));
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,32000000,indc,GL_DYNAMIC_DRAW);
+// glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc)*64,indc,GL_DYNAMIC_DRAW);
   //    boost::compute::buffer index_buffer(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STATIC_DRAW);
 // nanoPause();
+eglBindAPI(EGL_OPENGL_API);
+  
+// glslang::TProgram program;
+// glslang::TShader vertexShader(EShLanguage::EShLangVertex);
+// glslang::TShader fragmentShader(EShLanguage::EShLangFragment);
+  
 src[0]=cm_hdr;
 src[1]=vrt_bdy;
-boost::uint_t<24>::least vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+// boost::uint_t<32>::exact vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+vtx=compile.cmpl_shd(GL_VERTEX_SHADER,2,src);
+Sh.at(0,1)=vtx;
+// vertexShader.setStrings(src,2);
+//  vertexShader.compile();
 src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_body;
 src[3]=frg_ftr;
-boost::uint_t<24>::least frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
-boost::uint_t<24>::least shd_prg=glCreateProgram();
-PRGin(shd_prg);
+// boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+Sh.at(1,1)=frag;
+// fragmentShader.setStrings(src,4);
+//  fragmentShader.compile();
+// glClearDepth(Di.at(0,0));
+// glClearDepth(Di.at(0,0));
+// eglBindAPI(EGL_OPENGL_ES_API);
+// boost::uint_t<32>::exact shd_prg=glCreateProgram();
+shd_prg=glCreateProgram();
+shd_prg2=glCreateProgram();
+PRGin(shd_prg,shd_prg2);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
-glAttachShader(S1.at(0,0,0),frag);
-glAttachShader(S1.at(0,0,0),vtx);
+glAttachShader(S1.at(1,1,1),Sh.at(1,1));
+glAttachShader(S1.at(1,1,1),Sh.at(0,1));
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
-glLinkProgram(S1.at(0,0,0));
+glLinkProgram(S1.at(1,1,1));
   /*
 boost::uint_t<24>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
@@ -1451,51 +1709,62 @@ glBufferData(GL_UNIFORM_BUFFER,4,NULL,GL_DYNAMIC_DRAW);
 glBindBufferBase(GL_UNIFORM_BUFFER,0,uniBlock);
 glBindBuffer(GL_UNIFORM_BUFFER,0);
 */
-GLsizei * binLength;
-GLenum * binaryFormat;
-void * GLbin;
-glDetachShader(S1.at(0,0,0),frag);
-glDetachShader(S1.at(0,0,0),vtx);
-glGetProgramBinary(S1.at(0,0,0),sizeof(GLbin),binLength,binaryFormat,&GLbin);
+// glDetachShader(S1.at(0,0,0),frag);
+// glDetachShader(S1.at(0,0,0),vtx);
+   // glGetProgramiv(S1.at(1,1,1),GL_PROGRAM_BINARY_LENGTH,&binarySize);
+//  
+  //  32MB buffer per program
+glGetProgramBinary(S1.at(1,1,1),32000000,binLength,&binaryFormat,&GLbin);
+// glGetProgramBinary(S1.at(1,1,1),sizeof(GLbin)*128,binLength,&binaryFormat,&GLbin);
+// binary=new GLchar[binarySize];
+// glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
 bin.at(0,0)=GLbin;
 // nanoPause();
-glProgramBinary(S1.at(0,0,0),*binaryFormat,bin.at(0,0),*binLength);
+glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),*binLength);
+
+eglBindAPI(EGL_OPENGL_ES_API);
 // nanoPause();
 // glGenRenderbuffers(1,&colorBuffer);
-glSampleCoverage(1.0f,GL_FALSE);
+// glSampleCoverage(1.0f,GL_FALSE);
     // draw framebuffer
 glGenFramebuffers(1,&TX.at(3,0,0));
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT3,GL_RENDERBUFFER,TX.at(2,2,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(3,0,0));
-//  //  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+  
+glPixelStorei(GL_UNPACK_ALIGNMENT,8);
+glPixelStorei(GL_PACK_ALIGNMENT,8);
+  
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-  //  non multisampled color renderbuffer (32UI bit?)
+  //  non multisampled color renderbuffer
 glGenFramebuffers(1,&TX.at(2,0,0));
 glGenRenderbuffers(1,&TX.at(2,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,1,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,i_size.at(0,0),i_size.at(0,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA16_EXT,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_ALPHA32F_ARB,int_size.at(1,0),int_size.at(1,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT2,GL_RENDERBUFFER,TX.at(2,1,0));
-
-    //  non multisampled color renderbuffer (12,12,12,12 bit?)
+/*    //  non multisampled color renderbuffer (12,12,12,12 bit?)
 glGenRenderbuffers(1,&TX.at(2,2,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(2,2,0));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_RGB10_A2UI,i_size.at(0,0),i_size.at(0,0));
-// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_RGB10_A2,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_RGBA32UI,int_size.at(0,0),int_size.at(0,0));
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER,GL_COLOR_ATTACHMENT4,GL_RENDERBUFFER,TX.at(2,2,0));
-
-  
 //  glBindFramebuffer(GL_FRAMEBUFFER,0);
-   //  non multisampled depth renderbuffer  (GL_DEPTH_COMPONENT24)
+*/   //  non multisampled depth renderbuffer  (GL_DEPTH_COMPONENT24)
 glGenRenderbuffers(1,&TX.at(0,0,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,2));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT24,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT24,int_size.at(0,0),int_size.at(0,0));
+// glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT32F,int_size.at(2,0),int_size.at(2,0));
 // glDepthRange(0.0f,1.0f);
 // glClearDepthf(1.0f);
 /// glClearDepthf(1.0);
@@ -1504,14 +1773,14 @@ glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFE
 /* //  non-multisample COVERAGE_COMPONENT4_NV  renderbuffer
 glGenRenderbuffers(1,&TX.at(1,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(1,0,1));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_COVERAGE_COMPONENT4_NV,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_COVERAGE_COMPONENT4_NV,int_size.at(0,0),int_size.at(0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COVERAGE_ATTACHMENT_NV,GL_RENDERBUFFER,TX.at(1,0,1));
 */
 /*  // non multisampled stencil renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,2));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,2));
-glRenderbufferStorage(GL_RENDERBUFFER,GL_STENCIL_INDEX8,i_size.at(0,0),i_size.at(0,0));
+glRenderbufferStorage(GL_RENDERBUFFER,GL_STENCIL_INDEX8,int_size.at(0,0),int_size.at(0,0));
 glStencilMask(1);
 glClearStencil(1);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
@@ -1521,75 +1790,88 @@ glBindFramebuffer(GL_READ_FRAMEBUFFER,TX.at(2,0,0));
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_READ_FRAMEBUFFER,0);
-////  glClearColor(0.0f,0.0f,0.0f,1.0f);
+// glClearColor(0.0f,0.0f,0.0f,1.0f);
 //// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 //// glFlush();
 //// glFinish();
-glSampleCoverage(numSamplesf,GL_FALSE);
+glSampleCoverage(samp.at(0,0,0),GL_FALSE);
   //  multisample
 glGenFramebuffers(1,&TX.at(1,0,0));
      //  color renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,0));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,i_size.at(1,0),i_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGBA32F_EXT,i_size.at(1,0),i_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_R11F_G11F_B10F,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_RGB9_E5,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGBA32F,int_size.at(2,0),int_size.at(2,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA32UI,int_size.at(1,0),int_size.at(1,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_RGBA16_EXT,int_size.at(1,0),int_size.at(1,0));
 // glBindRenderbuffer(GL_COLOR_ATTACHMENT0,TX.at(0,0,0));
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_RENDERBUFFER,TX.at(0,0,0));
-/*        //  alpha renderbuffer
-glGenRenderbuffers(1,&TX.at(0,1,1));
-glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,1));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_SRGB8_ALPHA8,i_size.at(1,0),i_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_RGB10_A2,i_size.at(1,0),i_size.at(1,0));
-// glBindRenderbuffer(GL_COLOR_ATTACHMENT1,TX.at(0,1,1));
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT1,GL_RENDERBUFFER,TX.at(0,1,1));
-*/  //  depth32 stencil8 renderbuffer
+ //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,0,1));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,0,1));
-// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT24,i_size.at(1,0),i_size.at(1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,8,GL_DEPTH32F_STENCIL8,i_size.at(1,0),i_size.at(1,0));
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,0,GL_DEPTH_COMPONENT24,int_size.at(2,0),int_size.at(2,0));
+// glRenderbufferStorageMultisample(GL_RENDERBUFFER,numSamples,GL_DEPTH_COMPONENT32F,int_size.at(2,0),int_size.at(2,0));
 // glBindRenderbuffer(GL_DEPTH_STENCIL_ATTACHMENT,TX.at(0,0,1));
-// glDepthRange(0.0f,1.0f);
-// glClearDepthf(1.0f);
-/// glClearDepthf(1.0f);
+
+//      glDepthRangef(0.0f,1.0f);
+//       glClearDepthf(Fi.at(0,0));
+// glDepthRange(-1.0,1.0);
+// glClearDepth(Di.at(0,0));
+  
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
-glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_STENCIL_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
+glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,0,1));
 /// glStencilMask(1);
 /// glClearStencil(0);
  /*   //  depth32 renderbuffer
 glGenRenderbuffers(1,&TX.at(0,1,0));
 glBindRenderbuffer(GL_RENDERBUFFER,TX.at(0,1,0));
-glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_DEPTH_COMPONENT32F,i_size.at(1,0),i_size.at(1,0));
-/// glClearDepth(1.0);
+glRenderbufferStorageMultisample(GL_RENDERBUFFER,2,GL_DEPTH_COMPONENT32F,int_size.at(1,0),int_size.at(1,0));
+glClearDepth(1.0);
 glBindFramebuffer(GL_FRAMEBUFFER,TX.at(1,0,0));
 glFramebufferRenderbuffer(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER,TX.at(0,1,0));
 */
   //  sRGB
-glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(1,0,0));
- /*   // initiate textures for Shadertoy Channel
-glGenTextures(1,&wtexture[0]);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER,TX.at(2,0,0));
+  // textures for Shadertoy Channels
+glGenTextures(1,&ftexture[0]);
 glActiveTexture(GL_TEXTURE0);
-glBindTexture(GL_TEXTURE_2D,wtexture[0]);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,t_size.at(0,0),t_size.at(0,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
-glGenerateMipmap(GL_TEXTURE_2D);
-glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,wtexture[0],0);  
+glBindTexture(GL_TEXTURE_2D,ftexture[0]);
+/*
+// Bard // Consider trying other minification filters like GL_LINEAR or GL_NEAREST_MIPMAP_NEAREST if available.
+// Khrono // The initial value of GL_TEXTURE_MAG_FILTER is GL_LINEAR.
+          // The initial value of GL_TEXTURE_MIN_FILTER is GL_NEAREST_MIPMAP_LINEAR.
+                              //  GL_TEXTURE_MIN_FILTER,   GL_NEAREST breaks textures
+
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 */
-//// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+// glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE,8,GL_RGBA,float_size.at(0,0),float_size.at(0,0),GL_TRUE);
+glGenerateMipmap(GL_TEXTURE_2D);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,ftexture[0],0);  
+ // glClearStencil(1);
+  //  glClearColor(0.0f,0.0f,0.0f,1.0f);
+  //  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 // glBindRenderbuffer(GL_RENDERBUFFER,0);
 glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-//// glClearColor(0.0f,0.0f,0.0f,1.0f);
 // glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_COVERAGE_BUFFER_BIT_NV);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
-glFlush();
+// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+// glFlush();
 // glFinish();
 // glPolygonOffset(-1.0,-1.0);
 // glEnable(GL_POLYGON_OFFSET_FILL);
 glUseProgram(S1.at(0,0,0));
+// eglBindAPI(EGL_OPENGL_ES_BIT);
 // nanoPause();
 glUniform1i(glGetUniformLocation(S1.at(0,0,0),"renderBuffer"),0);
-glDeleteShader(vtx);
-glDeleteShader(frag);
+// glDeleteShader(vtx);
+// glDeleteShader(frag);
 glReleaseShaderCompiler();
 glGenVertexArrays((GLsizei)1,&shad.VCO);
 gpu.VCOin(shad.VCO);
@@ -1632,88 +1914,99 @@ glGenTextures(1,&wtexture[0]);
 glGenTextures(1,&wtexture[1]);
 glGenTextures(1,&wtexture[2]);
 glGenTextures(1,&wtexture[3]);
-GLsizei width1=256;
-GLsizei height1=256;
+GLsizei width1=int_size.at(2,0);
+GLsizei height1=int_size.at(2,0);
+/*
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D,wtexture[0]);
 // glBindTextureUnit(GLuint(0),wtexture[0]);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[0],0);
+  */
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D,wtexture[1]);
 // glBindTextureUnit(GLuint(1),wtexture[1]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[1],1);
 glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D,wtexture[2]);
 // glBindTextureUnit(GLuint(2),wtexture[2]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);	
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[2],2);
 glGenTextures(1,&wtexture[3]);
 glActiveTexture(GL_TEXTURE3);
 glBindTexture(GL_TEXTURE_2D,wtexture[3]);
 // glBindTextureUnit(GLuint(3),wtexture[3]);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);	
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);	
+// glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_R,GL_CLAMP_TO_EDGE);
+  // The initial value of GL_TEXTURE_MIN_FILTER is GL_NEAREST_MIPMAP_LINEAR.
+glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR); 
+  // The initial value of GL_TEXTURE_MAG_FILTER is GL_LINEAR.
 glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width1,height1,0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
+glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,int_size.at(2,0),int_size.at(2,0),0,GL_RGBA,GL_UNSIGNED_BYTE,ColorA);
 glGenerateMipmap(GL_TEXTURE_2D);
 glUniform1i(smp_chn[3],3);
 // WGPU_Start();
 // usleep(125);
-
-
-  // date/time
-const time_t timE=time(0);
-struct tm *datE=localtime(&timE);
-int yr=1900+datE->tm_year;
-int mn=1+datE->tm_mon;
-int dy=datE->tm_mday-1;
-int hr=5+datE->tm_hour;
-int mi=datE->tm_min;
-int sc=datE->tm_sec;
-int shaderToySeconds=(hr*3600)+(mi*60)+(sc);
-i_date.at(0,0)=yr;
-i_date.at(0,1)=mn;
-i_date.at(1,0)=dy;
-i_date.at(1,1)=shaderToySeconds;
-glUniform4i(uni_dte,i_date.at(0,0),i_date.at(0,1),i_date.at(1,0),i_date.at(1,1));
-glUniform3f(uni_res,4096.0f,4096.0f,gpu.gF());
-glUniform3f(uni_res,t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[0],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[1],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[2],t_size.at(0,0),t_size.at(0,0),gpu.gF());
-glUniform3f(smp_chn_res[3],t_size.at(0,0),t_size.at(0,0),gpu.gF());
+    // date/time
+time_t timE=time(0);
+struct tm * datE=localtime(&timE);
+float yr=1900.0f+datE->tm_year;
+float mn=1.0f+datE->tm_mon;
+float dy=datE->tm_mday-1.0f;
+float hr=5.0f+datE->tm_hour+7; // +7 for PST
+float mi=datE->tm_min;
+float sc=datE->tm_sec;
+float shaderToySeconds=(hr*3600.0f)+(mi*60.0f)+(sc);
+f_date.at(0,0)=yr;
+f_date.at(0,1)=mn;
+f_date.at(1,0)=dy;
+f_date.at(1,1)=shaderToySeconds;
+glUniform4f(uni_dte,f_date.at(0,0),f_date.at(0,1),f_date.at(1,0),f_date.at(1,1));
+glUniform3f(uni_res,8192.0f,8192.0f,8192.0f);
+// glUniform3f(uni_res,8192.0f,8192.0f,gpu.gF());
+glUniform3f(uni_res,float_size.at(0,0),float_size.at(0,0),float_size.at(0,0));
+// glUniform3f(uni_res,float_size.at(0,0),float_size.at(0,0),float_size.at(0,0));
+glUniform3f(smp_chn_res[0],float_size.at(0,0),float_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[1],float_size.at(0,0),float_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[2],float_size.at(0,0),float_size.at(0,0),gpu.gF());
+glUniform3f(smp_chn_res[3],float_size.at(0,0),float_size.at(0,0),gpu.gF());
 glUniform1i(smp_chn[0],0);
 glUniform1i(smp_chn[1],1);
 glUniform1i(smp_chn[2],2);
 glUniform1i(smp_chn[3],3);
-glUniform1i(uni_fps,60.0);
-mms.at(2,0)=t_size.at(0,0)*0.5;
-mms.at(2,1)=t_size.at(0,0)*0.5;
-glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+// glUniform1i(uni_fps,60.0);
+mms.at(2,0)=float_size.at(0,0)*0.5;
+mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
+glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
-glViewport(0,0,i_size.at(0,0),i_size.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
+glViewport(0,0,int_size.at(2,0),int_size.at(2,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
-glScissor(0,0,i_size.at(0,0),i_size.at(0,0));
-u_iTime_set(0.0);
-u_iTimeDelta_set(0.0);
+glScissor(0,0,int_size.at(2,0),int_size.at(2,0));
+// glDisable(GL_SCISSOR_TEST);
+   // glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&numAniso);
+   // glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,numAniso);
+u_iTime_set(0.0f);
+u_iTimeDelta_set(0.0f);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
@@ -1729,13 +2022,15 @@ u_iTimeDelta_set(u_time.time_spanb.count());
 // glClear(GL_STENCIL_BUFFER_BIT);
 // glDisable(GL_DEPTH_TEST);
 // glDisable(GL_STENCIL_TEST);
-// eglBindAPI(0);
-emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
-emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
-emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+// eglBindAPI(EGL_OPENGL_API);
+emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_mv);
+emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
 // glBindVertexArray(0);
-glEnableVertexAttribArray(0);
+  //  glEnableVertexAttribArray(0);
+// eglBindAPI(EGL_NONE);
+glFinish();
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
 return EM_TRUE;
 };
