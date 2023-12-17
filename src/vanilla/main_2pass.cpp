@@ -481,8 +481,8 @@ u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 // emscripten_set_main_loop_timing(2,1);
-// emscripten_set_main_loop((void(*)())raf,90,1);
-emscripten_set_main_loop((void(*)())raf,90,0);
+emscripten_set_main_loop((void(*)())raf,90,1);
+// emscripten_set_main_loop((void(*)())raf,90,0);
 // emscripten_request_animation_frame_loop(raf,0);
 }
 
