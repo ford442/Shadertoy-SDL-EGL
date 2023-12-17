@@ -1711,6 +1711,8 @@ src[3]=frg_ftr;
 // boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 Sh.at(1,1)=frag;
+ glReleaseShaderCompiler();
+
  src[0]=cm_hdr;
 src[1]=frg_hdr;
 src[2]=frag_bodyBfrA;
@@ -1730,18 +1732,18 @@ shd_prg2=glCreateProgram();
 shd_prgA=glCreateProgram();
 shd_prgA2=glCreateProgram();
 PRGin(shd_prg,shd_prg2);
-PRGin2(shd_prgA,shd_prgA2);
+// PRGin2(shd_prgA,shd_prgA2);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
 glAttachShader(S1.at(1,1,1),Sh.at(1,1));
 glAttachShader(S1.at(1,1,1),Sh.at(0,1));
- glAttachShader(S2.at(0,0,1),Sh.at(0,0));
-glAttachShader(S2.at(0,0,1),Sh.at(0,1));
+//  glAttachShader(S2.at(0,0,1),Sh.at(0,0));
+// glAttachShader(S2.at(0,0,1),Sh.at(0,1));
  
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
-glBindAttribLocation(S2.at(0,1,1),0,"iPosition");
+// glBindAttribLocation(S2.at(0,1,1),0,"iPosition");
 glLinkProgram(S1.at(1,1,1));
-glLinkProgram(S2.at(0,0,1));
+// glLinkProgram(S2.at(0,0,1));
   /*
 boost::uint_t<24>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
@@ -1762,9 +1764,9 @@ glGetProgramBinary(S1.at(1,1,1),32000000,binLength,&binaryFormat,&GLbin);
 // binary=new GLchar[binarySize];
 // glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
 bin.at(0,0)=GLbin;
-bin.at(1,1)=GLbinA;
+// bin.at(1,1)=GLbinA;
 // nanoPause();
-glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),*binLength);
+glProgramBinary(S1.at(1,1,1),binaryFormat,bin.at(0,0),*binLength);
    //  glProgramBinary(S1.at(0,1,1),binaryFormat,bin.at(1,1),*binLengthA);
 
 eglBindAPI(EGL_OPENGL_ES_API);
