@@ -518,12 +518,17 @@ unsigned char * ColorA=new unsigned char[262144*sizeof(unsigned char)];
 
 boost::uint_t<32>::exact vtx;
 boost::uint_t<32>::exact frag;
+boost::uint_t<32>::exact fragA;
 boost::uint_t<64>::exact shd_prg;
 boost::uint_t<64>::exact shd_prg2;
+boost::uint_t<64>::exact shd_prgA;
+boost::uint_t<64>::exact shd_prgA2;
 
 GLsizei * binLength;
+GLsizei * binLengthA;
 // GLenum * binaryFormat;
 void * GLbin;
+void * GLbinA;
 
 GLsizei binarySize;
 GLenum binaryFormat;
@@ -929,11 +934,15 @@ GPU gpu;
 
 public:
 
-const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2){
+const static EM_BOOL PRGin(register boost::uint_t<64>::exact m1,register boost::uint_t<64>::exact m2,register boost::uint_t<64>::exact m3,register boost::uint_t<64>::exact m4){
 sse4.at(0,0)=wasm_i64x2_splat(m1);
 S1.at(0,0,0)=wasm_i64x2_extract_lane(sse4.at(0,0),0);
-sse4.at(1,1)=wasm_i64x2_splat(m1);
+sse4.at(1,1)=wasm_i64x2_splat(m2);
 S1.at(1,1,1)=wasm_i64x2_extract_lane(sse4.at(1,1),0);
+sse4.at(0,1)=wasm_i64x2_splat(m3);
+S1.at(0,0,1)=wasm_i64x2_extract_lane(sse4.at(0,1),0);
+sse4.at(1,0)=wasm_i64x2_splat(m3);
+S1.at(0,1,1)=wasm_i64x2_extract_lane(sse4.at(1,0),0);
 return EM_TRUE;
 };
 
@@ -1697,6 +1706,14 @@ src[3]=frg_ftr;
 // boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
 Sh.at(1,1)=frag;
+ src[0]=cm_hdr;
+src[1]=frg_hdr;
+src[2]=frag_bodyBfrA;
+src[3]=frg_ftr;
+// boost::uint_t<32>::exact frag=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+fragA=compile.cmpl_shd(GL_FRAGMENT_SHADER,4,src);
+ Sh.at(0,0)=fragA;
+
 // fragmentShader.setStrings(src,4);
 //  fragmentShader.compile();
 // glClearDepth(Di.at(0,0));
@@ -1705,13 +1722,20 @@ Sh.at(1,1)=frag;
 // boost::uint_t<32>::exact shd_prg=glCreateProgram();
 shd_prg=glCreateProgram();
 shd_prg2=glCreateProgram();
-PRGin(shd_prg,shd_prg2);
+shd_prgA=glCreateProgram();
+shd_prgA2=glCreateProgram();
+PRGin(shd_prg,shd_prg2,shd_prgA,shd_prgA2);
 ::boost::tuples::tie(Sh,shd_prg);
 ::boost::tuples::tie(frag,vtx);
 glAttachShader(S1.at(1,1,1),Sh.at(1,1));
 glAttachShader(S1.at(1,1,1),Sh.at(0,1));
+ glAttachShader(S1.at(0,0,1),Sh.at(0,0));
+glAttachShader(S1.at(0,0,1),Sh.at(0,1));
+ 
 glBindAttribLocation(S1.at(0,0,0),0,"iPosition");
+glBindAttribLocation(S1.at(0,1,1),0,"iPosition");
 glLinkProgram(S1.at(1,1,1));
+glLinkProgram(S1.at(0,0,1));
   /*
 boost::uint_t<24>::fast uniIndex=glGetUniformBlockIndex(S1.at(0,0,0),"uniBlock");   
 glUniformBlockBinding(S1.at(0,0,0),0,uniIndex);
@@ -1727,12 +1751,15 @@ glBindBuffer(GL_UNIFORM_BUFFER,0);
 //  
   //  32MB buffer per program
 glGetProgramBinary(S1.at(1,1,1),32000000,binLength,&binaryFormat,&GLbin);
+glGetProgramBinary(S1.at(0,0,1),32000000,binLengthA,&binaryFormat,&GLbinA);
 // glGetProgramBinary(S1.at(1,1,1),sizeof(GLbin)*128,binLength,&binaryFormat,&GLbin);
 // binary=new GLchar[binarySize];
 // glGetProgramBinary(S1.at(0,0,0),binarySize,NULL,&binaryFormat,binary);
 bin.at(0,0)=GLbin;
+bin.at(1,1)=GLbinA;
 // nanoPause();
 glProgramBinary(S1.at(0,0,0),binaryFormat,bin.at(0,0),*binLength);
+glProgramBinary(S1.at(0,1,1),binaryFormat,bin.at(1,1),*binLengthA);
 
 eglBindAPI(EGL_OPENGL_ES_API);
 // nanoPause();
