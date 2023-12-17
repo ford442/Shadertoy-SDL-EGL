@@ -317,9 +317,17 @@ static inline char frg_hdr_src[1000]=
 "uniform sampler2D iChannel3;"
 "out vec4 fragColor;\n";
 
-static inline char frg_ftr_src[420]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.w=1.0f;}\n";
-
+static inline char frg_ftr_src[420]="void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
+/*
+"#define mainImage mainImage0(out vec4 O, vec2 U);\n"
+"int _N=3;void mainImage(out vec4 O,vec2 U){\n"
+"vec4 o;O=vec4(0.0);\n"
+"for (int k = 0; k < _N * _N; k++) {\n"
+"mainImage0(o, U + vec2(float(k % _N - _N/2), float(k / _N - _N/2)) / float(_N));O += o;}\n"
+"O /= float(_N * _N);O = pow(O, vec4(1.077038, 1.184228, 1.449715, 1.0));}\n"
+"void mainImage0(out vec4 O, vec2 U){\n"
+"O = vec4(1.0, 1.0, 1.0, 1.0);}\n\0";
+*/
 EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
@@ -800,9 +808,9 @@ Fi.at(1,1)=0.0f;
 Di.at(0,0)=1.0;
 Di.at(0,1)=-1.0;
 Di.at(1,1)=0.0;
-glf.at(0,0)=1.0;
-glf.at(1,1)=-1.0;
-glf.at(2,2)=0.0;
+glf.at(0,0)=1.0f;
+glf.at(1,1)=-1.0f;
+glf.at(2,2)=0.0f;
 return EM_TRUE;
 };
 
@@ -1286,7 +1294,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_FALSE;
+attr.premultipliedAlpha=EM_TRUE;
 attr.preserveDrawingBuffer=EM_FALSE;
 attr.enableExtensionsByDefault=EM_FALSE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -1415,27 +1423,27 @@ glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
  //    glDepthFunc(GL_GREATER);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 // glEnable(BLEND_ADVANCED_COHERENT_NV);
-  // glDisable(GL_DITHER);
+glDisable(GL_DITHER);
 // glDepthFunc(GL_LEQUAL); // Bard says
 // glDepthFunc(GL_GEQUAL);
 // glDepthFunc(GL_LESS);
 // glDisable(GL_BLEND);
 // glDepthMask(GL_TRUE);
 // glClearDepthf(Fi.at(0,0));
-// glEnable(GL_DEPTH_TEST);
-glDisable(GL_DEPTH_TEST);
+glEnable(GL_DEPTH_TEST);
+// glDisable(GL_DEPTH_TEST);
 // glDepthFunc(GL_ALWAYS);
  // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glBlendEquationSeparate(GL_FUNC_ADD,GL_FUNC_ADD);
 glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ZERO);
 // glEnable(GL_BLEND);
-glDisable(GL_BLEND);
+// glDisable(GL_BLEND);
 // glBlendFunc(GL_ONE,GL_ONE);
 glStencilFunc(GL_ALWAYS,0,0xFF);
 glStencilOp(GL_KEEP,GL_KEEP,GL_KEEP);
 glStencilMask(0x00);
-// glEnable(GL_STENCIL_TEST);
-glDisable(GL_STENCIL_TEST);
+glEnable(GL_STENCIL_TEST);
+// glDisable(GL_STENCIL_TEST);
 // glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
 // glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
 // glStencilFunc(GL_ALWAYS,1,0xFF);
@@ -1448,19 +1456,11 @@ glDisable(GL_CULL_FACE);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendEquationSeparate(GL_MIN,GL_MAX);
 // glBlendEquation(GL_FUNC_SUBTRACT);
-glClearColor(0.0f,0.0f,0.0f,1.0f);
-for (int i = 0; i < 262144 * 3; i += 3) {
-int r = rand() % 256;
-int g = rand() % 256;
-int b = rand() % 256;
-ColorA[i] = r;
-ColorA[i + 1] = g;
-ColorA[i + 2] = b;
-}
+  // glClearColor(0.0f,0.0f,0.0f,1.0f);
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"WEBGL_compatibility"); // limits to WebGL 1.0
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_EXTENSIONS");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_ALL_EXTENSIONS");
-  // emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
+emscripten_webgl_enable_extension(cntxi.at(0,0),"KHR_no_error");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"GL_REGAL_enable");
 // emscripten_webgl_enable_extension(cntxi.at(0,0),"OES_fragment_precision_high"); // deprecated
 emscripten_webgl_enable_extension(cntxi.at(0,0),"EGL_EXT_client_extensions");
