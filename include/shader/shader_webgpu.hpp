@@ -318,16 +318,8 @@ static inline char frg_hdr_src[1000]=
 "out vec4 fragColor;\n";
 
 static inline char frg_ftr_src[420]="void main(){mainImage(fragColor,gl_FragCoord.xy);}\n\0";
-/*
-"#define mainImage mainImage0(out vec4 O, vec2 U);\n"
-"int _N=3;void mainImage(out vec4 O,vec2 U){\n"
-"vec4 o;O=vec4(0.0);\n"
-"for (int k = 0; k < _N * _N; k++) {\n"
-"mainImage0(o, U + vec2(float(k % _N - _N/2), float(k / _N - _N/2)) / float(_N));O += o;}\n"
-"O /= float(_N * _N);O = pow(O, vec4(1.077038, 1.184228, 1.449715, 1.0));}\n"
-"void mainImage0(out vec4 O, vec2 U){\n"
-"O = vec4(1.0, 1.0, 1.0, 1.0);}\n\0";
-*/
+// "void main(){mainImage(fragColor,gl_FragCoord.xy);fragColor.w=1.0f;}\n\0";
+
 EM_BOOL ms_l,clk_l;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
@@ -1451,6 +1443,14 @@ glEnable(GL_STENCIL_TEST);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
 glDisable(GL_CULL_FACE);
+  for (int i = 0; i < 262144 * 3; i += 3) {
+int r = rand() % 256;
+int g = rand() % 256;
+int b = rand() % 256;
+ColorA[i] = r;
+ColorA[i + 1] = g;
+ColorA[i + 2] = b;
+}
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
