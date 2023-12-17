@@ -83,15 +83,10 @@ var randShade=Module.ccall('r4nd','Number',['Number'],[shadesNum],{async:true})+
 let shdMenu=document.querySelector('#sh1');
 let highRes=document.querySelector('#resMode').value;
 var path;
-
 if(shdMenu.value=='Random'){
 document.querySelector('#path').innerHTML=$shds[randShade];
 }else{
 document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+shdMenu.value;
-}
-}else{
-document.querySelector('#path').innerHTML='https://glsl.1ink.us/shaders/'+fle;
-var fle=document.querySelector('#path').innerHTML;
 }
 var pth=document.querySelector('#path').innerHTML;
 var pthA=pth+'A';
@@ -109,7 +104,7 @@ document.querySelector('#stat').innerHTML='Downloaded Image Shader';
 }
 });
 ff.send(null);
-
+/*
 ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
@@ -122,6 +117,7 @@ document.querySelector('#stat').innerHTML='Downloaded BufferA Shader';
 }
 });
 ff.send(null);
+*/
 document.querySelector('#stat').style.backgroundColor='blue';
 setTimeout(function(){
 if (highRes==true){
