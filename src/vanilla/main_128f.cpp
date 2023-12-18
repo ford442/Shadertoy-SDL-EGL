@@ -623,6 +623,7 @@ x.add(option);
 let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
 let strng="testing from codeMessage.";
+strng=unescape(encodeURIComponent(strng));
 let ar=new Array(strng.length);
 let cfil=new Uint8Array(ar);
 cfil.set(strng);
