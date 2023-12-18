@@ -140,7 +140,7 @@ const char * vertexShader =
 
 const char * fragHeader=
 "fn unpack_uint8(u32Value: u32) -> f32 {"
-"return f32((u32Value & 0xff) / 255.0);"
+"return f32((u32Value & 0xff)) / 255.0;"
 "}"
 "@group(0)@binding(0)var<uniform> Time : u32;"
 "@group(0)@binding(1)var<uniform> iFrame : u32;"
