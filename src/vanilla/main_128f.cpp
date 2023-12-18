@@ -620,9 +620,6 @@ x.add(option);
 }
 }
 
-let codeMessage= new BroadcastChannel('codeMessage');
-codeMessage.addEventListener('message',function(){
-
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
 
