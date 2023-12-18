@@ -725,7 +725,7 @@ return;
 extern"C"{
 
 void sndCode(char * st){
-getCode(st);
+getCode(&st);
 return;
 }
 
