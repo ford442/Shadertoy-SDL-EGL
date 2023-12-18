@@ -628,7 +628,7 @@ strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
 let ar=new Array(strng.length);
 let cfil=new Uint8Array(ar);
-cfil.set(strng);
+cfil.set(strng,0);
 console.log('String Uint8Array: ',cfil);
 FS.writeFile('/shader/shader.wgsl',cfil);
 Module.ccall("sndCode");
