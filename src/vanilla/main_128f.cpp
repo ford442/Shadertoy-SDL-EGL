@@ -624,7 +624,7 @@ let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
 let strng="testing from codeMessage.";
 let ar=new Array(strng.length);
-let cfil=new Uint8Array(ar);
+let cfil=new Uint8ClampedArray(ar);
 cfil.set(strng);
 FS.writeFile('/shader/shader.wgsl',ar);
 Module.ccall("sndCode");
