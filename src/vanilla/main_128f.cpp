@@ -725,16 +725,20 @@ document.querySelector('#di').click();
 
 void getCode(){
 char * wgsl_body=(char*)rd_fl(FnmB);
+
 code_text.at(0,0)=wgsl_body;
+
 EM_ASM({
-console.log(Pointer_stringify($0));
+var str = UTF8ToString(code_text.at(0,0), 25);
+
+console.log($0);
 },code_text.at(0,0));
 EM_ASM({
 console.log($0);
 },wgsl_body);
 EM_ASM({
 console.log($0);
-},&wgsl_body);
+},str);
 return;
 }
 
