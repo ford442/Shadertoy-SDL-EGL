@@ -727,6 +727,7 @@ void getCode(){
 char * wgsl_body=(char*)rd_fl(FnmB);
 for (int i=0;i<25;){
 code_text.at(0,0)[i]=wgsl_body[i];
+i++;
 }
 
 EM_ASM({
