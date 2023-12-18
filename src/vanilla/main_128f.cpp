@@ -146,7 +146,7 @@ const char * fragHeader=
 "return f32((Time & 0xff)) / 255.0;\n"
 "}\n"
 "fn unpack_iResolution() -> vec3<f32> {\n"
-"return vec3<f32>(Resolution,Resolution,1);\n"
+"return vec3<f32>(f32(Resolution), f32(Resolution), 1.0);\n"
 "}\n"
 "var<private> iTime: f32 = unpack_iTime();\n"
 "var<private> iResolution: vec3<f32> = unpack_iResolution();\n";
