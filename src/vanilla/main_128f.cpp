@@ -621,10 +621,8 @@ x.add(option);
 }
 
 let codeMessage=new BroadcastChannel('codeMessage');
-codeMessage.addEventListener('message',function(){
-
-let strng="@group(0)@binding(0)var<uniform>iTime:u32; @group(0)@binding(1)var<uniform>iFrame:u32; @group(0)@binding(2)var<uniform>iResolution:u32; var<private> fragColor_1 : vec4<f32>; var<private> gl_FragCoord : vec4<f32>; fn mainImage_vf4_vf2_(fragColor : ptr<function, vec4<f32>>, fragCoord : ptr<function, vec2<f32>>) { var uv : vec2<f32>; var pos : vec2<f32>; var cir : vec2<f32>; var circles : f32; let x_17 : vec2<f32> = *(fragCoord); let x_21 : vec3<f32> = vec3<f32>(vec3<u32>(iResolution)); uv = (x_17 / vec2<f32>(x_21.x, x_21.y)); let x_25 : vec2<f32> = uv; pos = (x_25 - vec2<f32>(0.5f, 0.5f)); let x_30 : vec2<f32> = pos; let x_31 : vec2<f32> = pos; let x_37 : f32 = uv.x; let x_42 : f32 = f32(iTime)/1000.0f; let x_49 : f32 = uv.y; let x_52 : f32 = f32(iTime)/1000.0f; let x_59 : f32 = (((sin(((x_37 * 18.0f) + x_42)) / 25.0f) * sin(((x_49 * 7.0f) + (x_52 * 1.5f)))) / 1.0f); let x_63 : f32 = uv.x; let x_64 : f32 = f32(iTime)/1000.0f; let x_68 : f32 = ((x_63 * sin(x_64)) / 16.0f); let x_72 : f32 = uv.y; let x_73 : f32 = f32(iTime)/1000.0f; let x_78 : f32 = ((x_72 * sin((x_73 * 1.20000004768371582031f))) / 16.0f); cir = ((((x_30 * x_31) + vec2<f32>(x_59, x_59)) + vec2<f32>(x_68, x_68)) + vec2<f32>(x_78, x_78)); let x_83 : f32 = cir.x; let x_85 : f32 = cir.y; circles = (sqrt((abs((x_83 + (x_85 * 0.5f))) * 25.0f)) * 5.0f); let x_93 : f32 = circles; let x_99 : f32 = circles; let x_103 : f32 = circles; let x_107 : f32 = circles; *(fragColor) = vec4<f32>(sin(((x_93 * 1.25f) + 2.0f)), abs((sin(((x_99 * 1.0f) - 1.0f)) - sin(x_103))), abs((sin(x_107) * 1.0f)), 1.0f); return; } fn main_1() { var param : vec4<f32>; var param_1 : vec2<f32>; let x_118 : vec4<f32> = gl_FragCoord; param_1 = vec2<f32>(x_118.x, x_118.y); mainImage_vf4_vf2_(&(param), &(param_1)); let x_121 : vec4<f32> = param; fragColor_1 = x_121; return; } struct main_out { @location(0) fragColor_1_1 : vec4<f32>, } @fragment fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out { gl_FragCoord = gl_FragCoord_param; main_1(); return main_out(fragColor_1); };";
-
+codeMessage.addEventListener('message',function(event){
+let strng=event.data;
 console.log('String: ',strng);
 strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
