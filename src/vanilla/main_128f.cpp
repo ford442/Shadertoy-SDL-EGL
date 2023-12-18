@@ -635,7 +635,7 @@ cfil[i] = strng.charCodeAt(i);
 console.log('String Uint8Array: ',cfil);
 FS.writeFile('/shader/shader.wgsl',cfil);
 Module.ccall("sndCode");
-document.querySelector('#startBtn').
+document.querySelector('#startBtn').click();
 });
 
 function scanShaders(){
