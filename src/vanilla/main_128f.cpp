@@ -715,7 +715,7 @@ document.querySelector('#di').click();
 
 void getCode(char * str){
 code_text.at(0,0)=str;
-EM_JS({
+EM_ASM({
 console.log($0);
 },code_text);
 }
