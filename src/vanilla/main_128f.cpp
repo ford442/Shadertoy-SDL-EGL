@@ -623,8 +623,10 @@ x.add(option);
 let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
 let strng="testing from codeMessage.";
-let cfil=new Uint8Array.of(strng);
-FS.writeFile('/shader/shader.wgsl',cfil);
+let ar=new Array(strng.length);
+let cfil=new Uint8Array(ar);
+cfil.set(strng);
+FS.writeFile('/shader/shader.wgsl',ar);
 Module.ccall("sndCode");
 });
 
