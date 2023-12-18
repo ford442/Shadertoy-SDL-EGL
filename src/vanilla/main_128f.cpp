@@ -138,14 +138,14 @@ const char * vertexShader =
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);"
 "}\n";
 
-const char * fragHeader =
-"# define UNPACK_UINT8(u32Value) ((u32Value & 0xff) / 255.0)\n"
-"@group(0)@binding(0)var<uniform>Time : u32;"
-"@group(0)@binding(1)var<uniform>iFrame : u32;"
-"@group(0)@binding(2)var<uniform>Resolution : u32;"
-"var<private> iTime: f32 = UNPACK_UINT8(Time);"
-"var<private> iResolution: vec3<f32> = vec3<f32>(vec2<f32>(UNPACK_UINT8(Resolution)),1.0f);";
-
+const char * fragHeader=
+"fn unpack_uint8(u32Value: u32) -> f32 {"
+"return f32((u32Value & 0xff) / 255.0);"
+}"@group(0)@binding(0)var<uniform> Time : u32;"
+"@group(0)@binding(1)var<uniform> iFrame : u32;"
+"@group(0)@binding(2)var<uniform> Resolution : u32;"
+"var<private> iTime: f32 = unpack_uint8(Time);"
+"var<private> iResolution: vec3<f32> = vec3<f32>(vec2<u32>(unpack_uint8(Resolution)),1.0);";
 
 const char * fragEntry="main_1";
 
