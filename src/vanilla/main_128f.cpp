@@ -628,7 +628,7 @@ console.log('String: ',strng);
 console.log('String encodeURIComponent: ',strng);
 let cfil=new Uint8ClampedArray(strng.length);
 for(let i=0;i<strng.length;){
-cfil[i]=strng[i];
+cfil[i] = strng.charCodeAt(i);
 i++;
 }
 console.log('String Uint8Array: ',cfil);
