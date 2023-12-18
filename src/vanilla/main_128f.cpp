@@ -624,7 +624,7 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 let strng=event.data;
 console.log('String: ',strng);
-strng=unescape(encodeURIComponent(strng));
+// strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
 let bff=new ArrayBuffer(strng.length);
 let cfil=new Uint8Array(bff);
@@ -635,8 +635,9 @@ console.log('String Uint8Array: ',cfil);
 let gr=new DataView(bff);
 console.log('String DataView: ',gr);
 let zfil=new Uint8Array(gr);
+console.log('String ArrayBuffer: ',bff);
 
-FS.writeFile('/shader/shader.wgsl',zfil);
+FS.writeFile('/shader/shader.wgsl',bff);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
