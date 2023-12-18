@@ -714,10 +714,11 @@ document.querySelector('#di').click();
 });
 
 void getCode(char * str){
-code_text.at(0,0)=str;
+strcpy(code_text.at(0,0),str);
+// code_text.at(0,0)=str;
 EM_ASM({
 console.log($0);
-},&str);
+},code_text.at(0,0));
 }
 
 extern"C"{
