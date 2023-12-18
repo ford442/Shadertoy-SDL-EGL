@@ -626,7 +626,7 @@ let strng=event.data;
 console.log('String: ',strng);
 strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
-let cfil=new Uint8Array(strng.length);
+let cfil=new Uint8ClampedArray(strng.length);
 for (let i = 0; i < strng.length; i++) {
 cfil[i] = strng.charCodeAt(i);
 }
