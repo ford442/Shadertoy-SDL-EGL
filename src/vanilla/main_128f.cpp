@@ -139,10 +139,10 @@ const char * vertexShader =
 "}\n";
 
 const char * fragHeader =
-"#define UNPACK_UINT8(u32Value) ((u32Value & 0xff) / 255.0)\n"
-"@group(0)@binding(0)var<uniform>Time:u32;"
-"@group(0)@binding(1)var<uniform>iFrame:u32;"
-"@group(0)@binding(2)var<uniform>Resolution:u32;"
+"# define UNPACK_UINT8(u32Value) ((u32Value & 0xff) / 255.0)\n"
+"@group(0)@binding(0)var<uniform>Time : u32;"
+"@group(0)@binding(1)var<uniform>iFrame : u32;"
+"@group(0)@binding(2)var<uniform>Resolution : u32;"
 "var<private> iTime: f32 = UNPACK_UINT8(Time);"
 "var<private> iResolution: vec3<f32> = vec3<f32>(vec2<f32>(UNPACK_UINT8(Resolution)),1.0f);";
 
