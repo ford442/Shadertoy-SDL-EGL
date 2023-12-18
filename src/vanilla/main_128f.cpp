@@ -624,7 +624,7 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 let strng=event.data;
 console.log('String: ',strng);
-strng=unescape(encodeURIComponent(strng));
+// strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
 let cfil=new Uint8ClampedArray(strng.length);
 for (let i = 0; i < strng.length; i++) {
