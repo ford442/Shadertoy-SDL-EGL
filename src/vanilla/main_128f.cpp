@@ -622,8 +622,7 @@ x.add(option);
 
 let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
-let strng=
-"@group(0)@binding(0)var<uniform>iTime:u32;\n"
+let strng="@group(0)@binding(0)var<uniform>iTime:u32;\n"
 "@group(0)@binding(1)var<uniform>iFrame:u32;\n"
 "@group(0)@binding(2)var<uniform>iResolution:u32;\n"
 "var<private> fragColor_1 : vec4<f32>;\n"
