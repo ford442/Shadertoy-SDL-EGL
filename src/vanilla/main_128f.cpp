@@ -623,8 +623,7 @@ x.add(option);
 let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
 let strng="testing from codeMessage.";
-// stringToUTF8(strng, 0, myString.length + 1);
-let cfil=new Uint8ClampedArray(strng);
+let cfil=new Uint8Array.of(strng);
 FS.writeFile('/shader/shader.wgsl',cfil);
 Module.ccall("sndCode");
 });
