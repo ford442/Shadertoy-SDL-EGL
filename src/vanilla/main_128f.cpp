@@ -138,18 +138,7 @@ const char * vertexShader =
 "return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);"
 "}\n";
 
-const char * fragHeader=
-"@binding(0)@group(0)var<uniform> Time : u32;\n"
-"@binding(2)@group(0)var<uniform> Resolution : u32;\n"
-"@binding(1)@group(0)var<uniform> Frame : u32;\n"
-"fn unpack_iTime() -> f32 {\n"
-"return f32((Time & 0xff)) / 255.0;\n"
-"}\n"
-"fn unpack_iResolution() -> vec3<f32> {\n"
-"return vec3<f32>(f32(Resolution), f32(Resolution), 1.0);\n"
-"}\n"
-"var<private> iTime: f32 = unpack_iTime();\n"
-"var<private> iResolution: vec3<f32> = unpack_iResolution();\n";
+const char * fragHeader="";
 
 const char * fragEntry="main_1";
 
@@ -628,6 +617,12 @@ option.value=txxts;
 x.add(option);
 }
 }
+
+let codeMessage= new BroadcastChannel('codeMessage');
+codeMessage.addEventListener('message',function(){
+let strng="testing from codeMessage.";
+Module.ccall("sndCode",null,["String"],[strng]);
+});
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
