@@ -624,13 +624,12 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 let strng=event.data;
 console.log('String: ',strng);
-// strng=unescape(encodeURIComponent(strng));
+strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
-let cfil=new Uint8Array(strng);
-// for(let i=0;i<strng.length;){
-// cfil[i] = strng.charCodeAt(i);
-// i++;
-// }
+let cfil=new Uint8Array(strng.length);
+for (let i = 0; i < strng.length; i++) {
+cfil[i] = strng.charCodeAt(i);
+}
 console.log('String Uint8Array: ',cfil);
 FS.writeFile('/shader/shader.wgsl',cfil);
 Module.ccall("sndCode");
