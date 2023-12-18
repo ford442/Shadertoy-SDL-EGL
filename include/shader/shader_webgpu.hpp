@@ -2044,8 +2044,9 @@ emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk
   //  glEnableVertexAttribArray(0);
 // eglBindAPI(EGL_NONE);
 glFinish();
-emscripten_set_main_loop_timing(2,1);
 emscripten_set_main_loop((void(*)())Run::Rend,0,0);
+  emscripten_set_main_loop_timing(2,1);
+
 return EM_TRUE;
 };
 
