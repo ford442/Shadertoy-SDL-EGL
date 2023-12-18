@@ -724,6 +724,12 @@ code_text.at(0,0)=wgsl_body;
 EM_ASM({
 console.log($0);
 },code_text.at(0,0));
+EM_ASM({
+console.log($0);
+},wgsl_body);
+EM_ASM({
+console.log($0);
+},&wgsl_body);
 return;
 }
 
