@@ -123,6 +123,7 @@ static wps_tensor wps=wps_tensor{2,2};
 static wfs_tensor wfs=wfs_tensor{2,2};
 static wrpid_tensor wrpid=wrpid_tensor{2,2};
 static wtbl_tensor wtbl=wtbl_tensor{2,2};
+static c_tensor code_text=c_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
@@ -712,7 +713,18 @@ document.querySelector('#di').click();
 },500);
 });
 
+void getCode(char * str){
+code_text.at(0,0)=str;
+EM_JS({
+console.log($0);
+},code_text);
+}
+
 extern"C"{
+
+void sndCode(char * st){
+getCode(st);
+}
 
 void startWebGPU(){
 WGPU_Start();
