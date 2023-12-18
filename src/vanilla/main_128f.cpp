@@ -632,7 +632,9 @@ for (let i = 0; i < strng.length; i++) {
 cfil[i] = strng.charCodeAt(i);
 }
 console.log('String Uint8Array: ',cfil);
-FS.writeFile('/shader/shader.wgsl',strng);
+let gr=new DataView(cfil);
+console.log('String DataView: ',gr);
+FS.writeFile('/shader/shader.wgsl',gr);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
