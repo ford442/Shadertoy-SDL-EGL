@@ -624,7 +624,7 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 let strng=event.data;
 console.log('String: ',strng);
-let cfil=new Int8Array(strng.byteLength);
+let cfil=new Int8Array(strng);
 for (let i = 0; i < strng.length; i++) {
 cfil[i] = strng.charCodeAt(i);
 }
