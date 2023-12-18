@@ -626,15 +626,13 @@ let strng=event.data;
 console.log('String: ',strng);
 // strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
-let buffer = new ArrayBuffer(strng.length);
-let cfil=new Uint8ClampedArray(buffer);
-for (let i = 0; i < strng.length; i++) {
-cfil[i] = strng.charCodeAt(i);
+let cfil=new Uint8ClampedArray(strng);
+for(let i=0;i<strng.length;){
+cfil[i]=strng.charCodeAt(i);
+i++;
 }
 console.log('String Uint8Array: ',cfil);
-console.log('String ArrayBuffer: ',buffer);
-console.log('String ArrayBuffer.buffer: ',buffer.buffer);
-FS.writeFile('/shader/shader.wgsl',buffer.buffer);
+FS.writeFile('/shader/shader.wgsl',cfil.data);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
