@@ -253,7 +253,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-const char * frag_body=(char*)rd_fl(Fnm);
+const char * frag_body=(char*)rd_fl(FnmB);
       #include <string.h>
 char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
 strcpy(full_frag_body, fragHeader);
@@ -622,7 +622,67 @@ x.add(option);
 
 let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
-let strng="testing from codeMessage.";
+let strng=
+"@group(0)@binding(0)var<uniform>iTime:u32;\n"
+"@group(0)@binding(1)var<uniform>iFrame:u32;\n"
+"@group(0)@binding(2)var<uniform>iResolution:u32;\n"
+"var<private> fragColor_1 : vec4<f32>;\n"
+"var<private> gl_FragCoord : vec4<f32>;\n"
+"fn mainImage_vf4_vf2_(fragColor : ptr<function, vec4<f32>>, fragCoord : ptr<function, vec2<f32>>) {\n"
+"var uv : vec2<f32>;\n"
+"var pos : vec2<f32>;\n"
+"var cir : vec2<f32>;\n"
+"var circles : f32;\n"
+"let x_17 : vec2<f32> = *(fragCoord);\n"
+"let x_21 : vec3<f32> = vec3<f32>(vec3<u32>(iResolution));\n"
+"uv = (x_17 / vec2<f32>(x_21.x, x_21.y));\n"
+"let x_25 : vec2<f32> = uv;\n"
+"pos = (x_25 - vec2<f32>(0.5f, 0.5f));\n"
+"let x_30 : vec2<f32> = pos;\n"
+"let x_31 : vec2<f32> = pos;\n"
+"let x_37 : f32 = uv.x;\n"
+"let x_42 : f32 = f32(iTime)/1000.0f;\n"
+"let x_49 : f32 = uv.y;\n"
+"let x_52 : f32 = f32(iTime)/1000.0f;\n"
+"let x_59 : f32 = (((sin(((x_37 * 18.0f) + x_42)) / 25.0f) * sin(((x_49 * 7.0f) + (x_52 * 1.5f)))) / 1.0f);\n"
+"let x_63 : f32 = uv.x;\n"
+"let x_64 : f32 = f32(iTime)/1000.0f;\n"
+"let x_68 : f32 = ((x_63 * sin(x_64)) / 16.0f);\n"
+"let x_72 : f32 = uv.y;\n"
+"let x_73 : f32 = f32(iTime)/1000.0f;\n"
+"let x_78 : f32 = ((x_72 * sin((x_73 * 1.20000004768371582031f))) / 16.0f);\n"
+"cir = ((((x_30 * x_31) + vec2<f32>(x_59, x_59)) + vec2<f32>(x_68, x_68)) + vec2<f32>(x_78, x_78));\n"
+"let x_83 : f32 = cir.x;\n"
+"let x_85 : f32 = cir.y;\n"
+"circles = (sqrt((abs((x_83 + (x_85 * 0.5f))) * 25.0f)) * 5.0f);\n"
+"let x_93 : f32 = circles;\n"
+"let x_99 : f32 = circles;\n"
+"let x_103 : f32 = circles;\n"
+"let x_107 : f32 = circles;\n"
+"*(fragColor) = vec4<f32>(sin(((x_93 * 1.25f) + 2.0f)), abs((sin(((x_99 * 1.0f) - 1.0f)) - sin(x_103))), abs((sin(x_107) * 1.0f)), 1.0f);\n"
+"return;\n"
+"}\n"
+"fn main_1() {\n"
+"var param : vec4<f32>;\n"
+"var param_1 : vec2<f32>;\n"
+"let x_118 : vec4<f32> = gl_FragCoord;\n"
+"param_1 = vec2<f32>(x_118.x, x_118.y);\n"
+"mainImage_vf4_vf2_(&(param), &(param_1));\n"
+"let x_121 : vec4<f32> = param;\n"
+"fragColor_1 = x_121;\n"
+"return;\n"
+"}\n"
+"struct main_out {\n"
+"@location(0)\n"
+"fragColor_1_1 : vec4<f32>,\n"
+"}\n"
+"@fragment\n"
+"fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {\n"
+"gl_FragCoord = gl_FragCoord_param;\n"
+"main_1();\n"
+"return main_out(fragColor_1);\n"
+"}\n";
+
 console.log('String: ',strng);
 strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
@@ -633,6 +693,7 @@ cfil[i] = strng.charCodeAt(i);
 console.log('String Uint8Array: ',cfil);
 FS.writeFile('/shader/shader.wgsl',cfil);
 Module.ccall("sndCode");
+document.querySelector('#startBtn').
 });
 
 function scanShaders(){
@@ -724,21 +785,7 @@ document.querySelector('#di').click();
 });
 
 void getCode(){
-char * wgsl_body=(char*)rd_fl(FnmB);
-for (int i=0;i<25;){
-code_text.at(0,0)[i]=wgsl_body[i];
-i++;
-}
-
-EM_ASM({
-var str = UTF8ToString($0, 25);
-console.log(str);
-},code_text.at(0,0));
-
-EM_ASM({
-console.log($0);
-},wgsl_body);
-
+code_text.at(0,0)=(char*)rd_fl(FnmB);
 return;
 }
 
