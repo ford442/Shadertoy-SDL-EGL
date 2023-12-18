@@ -144,6 +144,7 @@ const char * fragHeader="";
 const char * fragEntry="main_1";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
 static char8_t * result=NULL;
 static char * results=NULL;
@@ -622,7 +623,10 @@ x.add(option);
 let codeMessage= new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(){
 let strng="testing from codeMessage.";
-Module.ccall("sndCode",null,["String"],[strng]);
+// stringToUTF8(strng, 0, myString.length + 1);
+let cfil=new Uint8ClampedArray(strng);
+FS.writeFile('/shader/shader.wgsl',cfil);
+Module.ccall("sndCode");
 });
 
 function scanShaders(){
@@ -713,22 +717,19 @@ document.querySelector('#di').click();
 },500);
 });
 
-void getCode(char * str){
-// strcpy(code_text.at(0,0),str);
-code_text.at(0,0)=str;
+void getCode(){
+const char * wgsl_body=(char*)rd_fl(FnmB);
+code_text.at(0,0)=wgsl_body;
 EM_ASM({
 console.log($0);
 },code_text.at(0,0));
-EM_ASM({
-console.log($0);
-},str);
 return;
 }
 
 extern"C"{
 
-void sndCode(char * st){
-getCode(st);
+void sndCode(){
+getCode();
 return;
 }
 
