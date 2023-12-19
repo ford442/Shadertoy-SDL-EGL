@@ -259,10 +259,10 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
-      #include <string.h>
-char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
-strcpy(full_frag_body, fragHeader);
-strcat(full_frag_body, frag_body);
+//      #include <string.h>
+//char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
+//strcpy(full_frag_body, fragHeader);
+//strcat(full_frag_body, frag_body);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
