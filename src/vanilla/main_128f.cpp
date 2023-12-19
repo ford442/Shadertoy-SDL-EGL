@@ -626,12 +626,12 @@ let strng=event.data;
 console.log('String: ',strng);
 let strng2=unescape(encodeURIComponent(event.data));
 // console.log('String encodeURIComponent: ',strng2);
-let cfil=new Uint8Array(strng.length);
+let cfil=new Uint8ClampedArray(strng.length);
 for (var i = 0; i < strng.length;) {
-cfil[i] = strng.charCodeAt(i);
+cfil[i] = event.data.charCodeAt(i);
 i++;
 }
-FS.writeFile('/shader/shader.wgsl',new Uint8Array(cfil));
+FS.writeFile('/shader/shader.wgsl',new Uint8ClampedArray(cfil));
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
