@@ -179,8 +179,8 @@ return results;
 return nullptr;
 }
 
-void loadProg(char * Fn){
-const char * frag_body=(char*)rd_fl(Fn);
+void loadProg(const char * Fn){
+const char * frag_body=(char *)rd_fl(Fn);
 return;
 }
 
@@ -790,7 +790,7 @@ return;
 }
 
 void startWebGPU(){
-char * FnmC="/shader/shader.wgsl";
+const char * FnmC=reinterpret_cast<const char *>("/shader/shader.wgsl");
 loadProg(FnmC);
 WGPU_Start();
 return;
