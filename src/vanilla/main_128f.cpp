@@ -623,7 +623,7 @@ x.add(option);
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 
-const blob = new Blob([yourString], { type: 'text/javascript' });
+const blob = new Blob([event.data], { type: 'text/javascript' });
 const url = URL.createObjectURL(blob);
 console.log('BASE64 BLOB URL:');
 console.log(url);
