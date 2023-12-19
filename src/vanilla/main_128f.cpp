@@ -315,7 +315,7 @@ wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
 shaderModuleDescF={};
 fragHint.entryPointName=fragEntry;
-shaderModuleDescF.code=full_frag_body;
+shaderModuleDescF.code=wgsl.at(0,0);
 // shaderModuleDescF.hint=fragHint;
 shaderModuleDescV.code=vertexShader;
 wsmd.at(0,0)=shaderModuleDescV;
@@ -520,7 +520,6 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
-
 bindgroup_entries[3]={};
 bindgroup_entries[3].binding=3;
 bindgroup_entries[3].resource=wt.at(1,1);
@@ -530,7 +529,6 @@ bindgroup_entries[4].resource=wt.at(2,2);
 bindgroup_entries[5]={};
 bindgroup_entries[5].binding=5;
 bindgroup_entries[5].resource=wt.at(0,0);
-
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
@@ -553,7 +551,7 @@ u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
-if(on.at(0,0)=1){emscripten_cancel_main_loop();}
+if(on.at(0,0)==1){emscripten_cancel_main_loop();}
 emscripten_set_main_loop_timing(2,1);
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
