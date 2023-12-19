@@ -638,10 +638,10 @@ for (var i = 0; i < flDat.length; i++) {
 }
 console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
-Module.ccall("startWebGPUb");
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
-},2000);
+Module.ccall("startWebGPUb");
+},1000);
 });
 
 function scanShaders(){
