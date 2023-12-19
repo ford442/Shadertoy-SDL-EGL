@@ -621,8 +621,8 @@ x.add(option);
 }
 
 let codeMessage=new BroadcastChannel('codeMessage');
-codeMessage.addEventListener('message',ea=>{
-const flle=new Uint8Array(ea.data.data);
+codeMessage.addEventListener('message',event=>{
+const flle=new Uint8Array(event.data.data, 0, dataLength);
 FS.writeFile('/shader/shader.wgsl',flle);
 console.log(flle);
 Module.ccall("sndCode");
