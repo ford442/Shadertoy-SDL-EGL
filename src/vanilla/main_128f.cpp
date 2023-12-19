@@ -637,7 +637,7 @@ console.log('targetBuffer data: ',targetBuffer);
 // const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
 // console.log('TextEncoder data: ',encodedData);
 // const writtenBytes = encodedData.written;
-const flle=new Uint8Array(event.data, 0, writtenBytes);
+const flle=new Uint8Array(event.data, 0, dataLength);
 FS.writeFile('/shader/shader.wgsl',flle);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
