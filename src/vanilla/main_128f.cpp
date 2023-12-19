@@ -625,13 +625,13 @@ codeMessage.addEventListener('message',function(event){
 let strng=event.data;
 console.log('String: ',strng);
 let strng2=unescape(encodeURIComponent(event.data));
-console.log('String encodeURIComponent: ',strng2);
+// console.log('String encodeURIComponent: ',strng2);
 let cfil=new Uint8Array(strng2.length);
 for (var i = 0; i < strng2.length;) {
 cfil[i] = strng2.charCodeAt(i);
 i++;
 }
-FS.writeFile('/shader/shader.wgsl',cfil);
+FS.writeFile('/shader/shader.wgsl',new Uint8Array(cfil));
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
