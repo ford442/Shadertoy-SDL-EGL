@@ -624,11 +624,11 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 let strng=event.data;
 console.log('String: ',strng);
-// strng=unescape(encodeURIComponent(strng));
-console.log('String encodeURIComponent: ',strng);
-let cfil=new Uint8Array(strng.length);
-for (let i = 0; i < strng.length;) {
-cfil[i] = strng.charCodeAt(i);
+var strng2=unescape(encodeURIComponent(strng));
+console.log('String encodeURIComponent: ',strng2);
+let cfil=new Uint8Array(strng2.length);
+for (let i = 0; i < strng2.length;) {
+cfil[i] = strng2.charCodeAt(i);
 i++;
 }
 console.log('String Uint8Array: ',cfil);
