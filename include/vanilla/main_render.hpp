@@ -124,6 +124,7 @@ using ws_tensor=boost::numeric::ublas::tensor<WGpuSampler>;
 using wsd_tensor=boost::numeric::ublas::tensor<WGpuSamplerDescriptor>;
 using wms_tensor=boost::numeric::ublas::tensor<WGpuMultisampleState>;
 using wsm_tensor=boost::numeric::ublas::tensor<WGpuShaderModule>;
+using wsmd_tensor=boost::numeric::ublas::tensor<WGpuShaderModuleDescriptor>;
 using wcts_tensor=boost::numeric::ublas::tensor<WGpuColorTargetState>;
 using wdss_tensor=boost::numeric::ublas::tensor<WGpuDepthStencilState>;
 using wvs_tensor=boost::numeric::ublas::tensor<WGpuVertexState>;
