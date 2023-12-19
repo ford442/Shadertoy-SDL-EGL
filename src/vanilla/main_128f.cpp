@@ -82,6 +82,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
+static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
@@ -124,7 +125,7 @@ static wps_tensor wps=wps_tensor{2,2};
 static wfs_tensor wfs=wfs_tensor{2,2};
 static wrpid_tensor wrpid=wrpid_tensor{2,2};
 static wtbl_tensor wtbl=wtbl_tensor{2,2};
-static c_tensor code_text=c_tensor{2,2};
+static c_tensor wgsl=c_tensor{2,2};
 
 const char * vertexShader =
 "@vertex\n"
@@ -178,8 +179,8 @@ return results;
 return nullptr;
 }
 
-void loadProg(){
-      
+void loadProg(char * Fn){
+const char * frag_body=(char*)rd_fl(Fn);
 return;
 }
 
@@ -257,7 +258,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-const char * frag_body=(char*)rd_fl(Fnm);
+// const char * frag_body=(char*)rd_fl(Fnm);
       #include <string.h>
 char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
 strcpy(full_frag_body, fragHeader);
@@ -552,9 +553,11 @@ u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
+if(on.at(0,0)=1){emscripten_cancel_main_loop();}
 emscripten_set_main_loop_timing(2,1);
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
+on.at(0,0)=1;
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
@@ -636,9 +639,9 @@ for (var i = 0; i < flDat.length; i++) {
 }
 console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
+Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 setTimeout(function(){
-Module.ccall("sndCode");
 },2000);
 });
 
@@ -755,10 +758,8 @@ document.querySelector('#di').click();
 },500);
 });
 
-void getCode(){
-code_text.at(0,0)=(char*)rd_fl(FnmB);
-wsm.at(1,1).code=code_text.at(0,0);
-wsm.at(1,1)=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
+void getCode(Fnm){
+wgsl.at(0,0)=(char*)rd_fl(Fnm);
 return;
 }
 
@@ -775,7 +776,8 @@ return;
 extern"C"{
 
 void sndCode(){
-getCode();
+getCode(FnmB);
+WGPU_Start();
 return;
 }
 
@@ -790,6 +792,7 @@ return;
 }
 
 void startWebGPU(){
+getCode(Fnm);
 WGPU_Start();
 return;
 }
@@ -797,6 +800,7 @@ return;
 }
 
 int main(void){
+on.at(0,0)=0;
 js_main();
 return 0;
 }
