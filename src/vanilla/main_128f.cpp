@@ -180,7 +180,7 @@ return nullptr;
 }
 
 void getCode(const char * Fnm){
-const char * frag_body=(char *)rd_fl(Fn);
+const char * frag_body=(char *)rd_fl(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
 }
