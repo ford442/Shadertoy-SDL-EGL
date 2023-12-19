@@ -145,8 +145,8 @@ const char * fragHeader="";
 
 const char * fragEntry="main_1";
 
-char * Fnm=reinterpret_cast<char *>("/shader/shader.glsl");
-char * FnmB=reinterpret_cast<char *>("/shader/shader.wgsl");
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
 static char8_t * result=NULL;
 static char * results=NULL;
@@ -790,7 +790,8 @@ return;
 }
 
 void startWebGPU(){
-loadProg(Fnm);
+const char * FnmC=reinterpret_cast<const char *>("/shader/shader.wgsl");
+loadProg(FnmC);
 WGPU_Start();
 return;
 }
