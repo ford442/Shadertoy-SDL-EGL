@@ -622,16 +622,8 @@ x.add(option);
 
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
-let strng=event.data;
-console.log('String: ',strng);
-let strng2=unescape(encodeURIComponent(event.data));
-// console.log('String encodeURIComponent: ',strng2);
-let cfil=new Uint8ClampedArray(strng.length);
-for (var i = 0; i < strng.length;) {
-cfil[i] = event.data.charCodeAt(i);
-i++;
-}
-FS.writeFile('/shader/shader.wgsl',new Uint8ClampedArray(event.data));
+const encodedData = new TextEncoder().encodeInto('utf-8', event.data);
+FS.writeFile('/shader/shader.wgsl', new Uint8Array(encodedData));
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
