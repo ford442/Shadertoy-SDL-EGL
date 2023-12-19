@@ -627,13 +627,13 @@ console.log('String: ',strng);
 let strng2=unescape(encodeURIComponent(event.data));
 console.log('String encodeURIComponent: ',strng2);
 let cfil=new Uint8Array(strng2.length);
-for (let i = 0; i < strng2.length;) {
+for (var i = 0; i < strng2.length;) {
 cfil[i] = strng2.charCodeAt(i);
 i++;
 }
 console.log('String Uint8Array: ',cfil);
 let cfil2=new Uint8Array(cfil.length);
-for (let i = 0; i < cfil.length;) {
+for (var i = 0; i < cfil.length;) {
 cfil2[i] = cfil.charCodeAt(i);
 i++;
 }console.log('String Uint8Array 2: ',cfil2);
