@@ -632,7 +632,7 @@ const dataLength = event.data.length * 4;
 let $H=Module.HEAPF32.buffer;
 const targetBuffer = new Uint8Array($H,0,dataLength);
 const dataBuffer = new Uint8Array(dataLength);
-dataBuffer.set(event.data,0);
+dataBuffer.set(event,0);
 console.log('event data: ',event.data);
 console.log('dataBuffer data: ',dataBuffer);
 // const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
