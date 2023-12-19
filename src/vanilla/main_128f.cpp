@@ -750,13 +750,13 @@ code_text.at(0,0)=(char*)rd_fl(FnmB);
 return;
 }
 
-void resUp(){
-u64_uni.at(2,2)=u64_uni.at(2,2)*1.05;
+void uniUp(){
+u64_uni.at(2,2)=int(u64_uni.at(2,2)*1.05);
 return;
 }
 
-void resDown(){
-u64_uni.at(2,2)=u64_uni.at(2,2)*0.95;
+void uniDown(){
+u64_uni.at(2,2)=int(u64_uni.at(2,2)*0.95);
 return;
 }
 
@@ -767,13 +767,13 @@ getCode();
 return;
 }
 
-void uniUp(){
-resUp();
+void resUp(){
+uniUp();
 return;
 }
 
-void uniDown(){
-resDown();
+void resDown(){
+uniDown();
 return;
 }
 
