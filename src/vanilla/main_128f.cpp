@@ -631,8 +631,10 @@ for (var i = 0; i < flDat.length; i++) {
 }
 console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
-Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
+setTimeout(function(){
+Module.ccall("sndCode");
+},2000);
 });
 
 function scanShaders(){
