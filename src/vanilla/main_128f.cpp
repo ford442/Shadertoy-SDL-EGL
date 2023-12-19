@@ -623,10 +623,11 @@ x.add(option);
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 let strng=event.data;
-// strng=unescape(encodeURIComponent(strng));
+console.log('String: ',strng);
+strng=unescape(encodeURIComponent(strng));
+console.log('String encodeURIComponent: ',strng);
 
-// console.log('String: ',strng);
-let cfil=new Uint8ClampedArray(strng);
+let cfil=new Uint8Array(strng.length);
 // for (let i = 0; i < strng.length;) {
 // cfil[i] = strng.charCodeAt(i);
 // i++;
