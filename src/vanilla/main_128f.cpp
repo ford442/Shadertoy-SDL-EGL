@@ -790,7 +790,7 @@ return;
 }
 
 void startWebGPU(){
-const char * FnmC=reinterpret_cast<const char *>("/shader/shader.wgsl");
+char * FnmC="/shader/shader.wgsl";
 loadProg(FnmC);
 WGPU_Start();
 return;
