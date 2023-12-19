@@ -622,6 +622,12 @@ x.add(option);
 
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
+
+const blob = new Blob([yourString], { type: 'text/javascript' });
+const url = URL.createObjectURL(blob);
+console.log('BASE64 BLOB URL:');
+console.log(url);
+                                     
 const dataLength = event.data.length * 4;
 let $H=Module.HEAPF32.buffer;
 const targetBuffer = new Uint8Array($H,0,dataLength);
@@ -629,7 +635,7 @@ const dataBuffer = new Uint8Array(dataLength);
 dataBuffer.set(event.data,0);
 console.log('event data: ',event.data);
 console.log('dataBuffer data: ',dataBuffer);
-const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
+// const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
 console.log('TextEncoder data: ',encodedData);
 const writtenBytes = encodedData.written;
 const flle=new Uint8Array(targetBuffer, 0, writtenBytes);
