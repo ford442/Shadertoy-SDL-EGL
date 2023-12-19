@@ -629,8 +629,7 @@ const blob = new Blob([event.data], { type: 'text/javascript' });
 // console.log(url);
                                      
 const dataLength = event.data.length;
-let $H=Module.HEAPU8.buffer;
-const targetBuffer = new Uint8Array($H,0,dataLength);
+const targetBuffer = new Uint8Array(dataLength);
 // const dataBuffer = new Uint8Array(dataLength);
 // dataBuffer.set(event,0);
 console.log('event data: ',event.data);
@@ -638,7 +637,7 @@ console.log('targetBuffer data: ',targetBuffer);
 // const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
 // console.log('TextEncoder data: ',encodedData);
 // const writtenBytes = encodedData.written;
-const flle=new Uint8Array(targetBuffer, 0, writtenBytes);
+const flle=new Uint8Array(event.data, 0, writtenBytes);
 FS.writeFile('/shader/shader.wgsl',flle);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
