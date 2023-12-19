@@ -623,7 +623,8 @@ x.add(option);
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 const dataLength = event.data.length * 4;
-const targetBuffer = new Uint8Array(dataLength);
+let $H=Module.HEAPF32.buffer;
+const targetBuffer = new Uint8Array($H,0,dataLength);
 const dataBuffer = new Uint8Array(dataLength);
 dataBuffer.set(event.data,0);
 console.log('dataBuffer data: ',dataBuffer);
