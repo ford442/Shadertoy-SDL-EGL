@@ -628,7 +628,7 @@ const blob = new Blob([event.data], { type: 'text/javascript' });
  // console.log('BASE64 BLOB URL:');
 // console.log(url);
                                      
-const dataLength = event.data.length * 4;
+const dataLength = event.data.length;
 let $H=Module.HEAPU8.buffer;
 const targetBuffer = new Uint8Array($H,0,dataLength);
 // const dataBuffer = new Uint8Array(dataLength);
