@@ -145,7 +145,7 @@ const char * fragHeader="";
 
 const char * fragEntry="main_1";
 
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
 static char8_t * result=NULL;
@@ -741,7 +741,7 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader.glsl',sfil);
+FS.writeFile('/shader/shader.wgsl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
 normalResStart();
@@ -780,7 +780,7 @@ return;
 }
 
 void startWebGPU(){
-const char * FnmC=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * FnmC=reinterpret_cast<const char *>("/shader/shader.wgsl");
 getCode(FnmC);
 WGPU_Start();
 return;
