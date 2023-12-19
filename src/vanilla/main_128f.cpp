@@ -632,8 +632,8 @@ cfil[i] = strng2.charCodeAt(i);
 i++;
 }
 console.log('String Uint8Array: ',cfil);
-let cfil2=new Uint8Array(cfil.data.length);
-for (let i = 0; i < cfil.data.length;) {
+let cfil2=new Uint8Array(cfil.length);
+for (let i = 0; i < cfil.length;) {
 cfil2[i] = cfil.charCodeAt(i);
 i++;
 }console.log('String Uint8Array 2: ',cfil2);
