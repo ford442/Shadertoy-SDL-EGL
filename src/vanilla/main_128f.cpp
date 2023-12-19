@@ -625,6 +625,7 @@ codeMessage.addEventListener('message',event=>{
 const flle=new Uint8Array(event.data.data, 0, dataLength);
 FS.writeFile('/shader/shader.wgsl',flle);
 console.log(flle);
+console.log(flle.buffer);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
