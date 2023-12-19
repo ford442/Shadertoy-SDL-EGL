@@ -107,7 +107,7 @@ b3_shader_webgpu_c:
 	 emcc $(STDS) -o $(BIN_NAME)c.js -O2 $(COMMON_FLAGS) \
 	 $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' \
-	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --post-js js/rSlider.js --post-js js/slideOut.js main.o shader_webgpu.o
