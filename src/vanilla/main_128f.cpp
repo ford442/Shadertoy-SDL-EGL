@@ -621,23 +621,8 @@ x.add(option);
 }
 
 let codeMessage=new BroadcastChannel('codeMessage');
-codeMessage.addEventListener('message',function(event){
-
-const blob = new Blob([event.data], { type: 'text/javascript' });
-/// const url = URL.createObjectURL(blob);
- // console.log('BASE64 BLOB URL:');
-// console.log(url);
-                                     
-const dataLength = event.data.length;
-const targetBuffer = new Uint8Array(dataLength);
-// const dataBuffer = new Uint8Array(dataLength);
-// dataBuffer.set(event,0);
-console.log('event data: ',event.data);
-console.log('targetBuffer data: ',targetBuffer);
-// const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
-// console.log('TextEncoder data: ',encodedData);
-// const writtenBytes = encodedData.written;
-const flle=new Uint8Array(event.data, 0, dataLength);
+codeMessage.addEventListener('message',event=>{
+const flle=new Uint8Array(event.data.data);
 FS.writeFile('/shader/shader.wgsl',flle);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
