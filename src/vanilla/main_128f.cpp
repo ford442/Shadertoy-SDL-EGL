@@ -627,12 +627,17 @@ console.log('String: ',strng);
 // strng=unescape(encodeURIComponent(strng));
 console.log('String encodeURIComponent: ',strng);
 let cfil=new Uint8Array(strng.length);
-// for (let i = 0; i < strng.length;) {
-// cfil[i] = strng.charCodeAt(i);
-// i++;
-// }
+for (let i = 0; i < strng.length;) {
+cfil[i] = strng.charCodeAt(i);
+i++;
+}
 console.log('String Uint8Array: ',cfil);
-FS.writeFile('/shader/shader.wgsl',cfil);
+let cfil2=new Uint8Array(cfil.data.length);
+for (let i = 0; i < cfil.data.length;) {
+cfil2[i] = cfil.charCodeAt(i);
+i++;
+}console.log('String Uint8Array 2: ',cfil2);
+FS.writeFile('/shader/shader.wgsl',cfil2);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
