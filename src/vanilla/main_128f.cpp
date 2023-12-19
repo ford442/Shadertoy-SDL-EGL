@@ -622,8 +622,12 @@ x.add(option);
 
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
-const encodedData = new TextEncoder().encodeInto('utf-8', event.data);
-FS.writeFile('/shader/shader.wgsl', new Uint8Array(encodedData));
+ const dataLength = event.data.length * 4; // assuming UTF-8 encoding
+  const targetBuffer = new Uint8Array(dataLength);
+  const encodedData = new TextEncoder().encodeInto(targetBuffer, event.data);
+  const writtenBytes = encodedData.written; // Get the actual number of bytes written
+  FS.writeFile('/shader/shader.wgsl', new Uint8Array(targetBuffer, 0, writtenBytes));
+ 
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
