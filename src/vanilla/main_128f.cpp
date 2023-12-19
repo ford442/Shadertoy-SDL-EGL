@@ -145,8 +145,8 @@ const char * fragHeader="";
 
 const char * fragEntry="main_1";
 
-char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
-char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
+char * Fnm=reinterpret_cast<char *>("/shader/shader.glsl");
+char * FnmB=reinterpret_cast<char *>("/shader/shader.wgsl");
 
 static char8_t * result=NULL;
 static char * results=NULL;
