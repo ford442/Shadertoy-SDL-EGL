@@ -623,11 +623,13 @@ x.add(option);
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',event=>{
 let flDat=event.data.data;
-let flArr=new Uint8Array(event.data.data.length);
-flArr.set(event.data.data,0);
-FS.writeFile('/shader/shader.wgsl',flArr);
-console.log(flArr);
-console.log(flArr.buffer);
+var buffer = new ArrayBuffer(flDat.length*2);
+var bufferView = new Uint16Array(buffer);
+for (var i = 0; i < flDat.length; i++) {
+    bufferView[i] = flDat.charCodeAt(i);
+}
+console.log(bufferView);
+FS.writeFile('/shader/shader.wgsl',bufferView);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
