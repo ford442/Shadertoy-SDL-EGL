@@ -624,7 +624,7 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',event=>{
 let flDat=event.data.data;
 let flArr=new Uint8Array(event.data.data.length);
-flArr.set(flDat,0);
+flArr.set(event.data.data,0);
 FS.writeFile('/shader/shader.wgsl',flArr);
 console.log(flArr);
 console.log(flArr.buffer);
