@@ -624,20 +624,20 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',function(event){
 
 const blob = new Blob([event.data], { type: 'text/javascript' });
-const url = URL.createObjectURL(blob);
-console.log('BASE64 BLOB URL:');
-console.log(url);
+/// const url = URL.createObjectURL(blob);
+ // console.log('BASE64 BLOB URL:');
+// console.log(url);
                                      
 const dataLength = event.data.length * 4;
-let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPU8.buffer;
 const targetBuffer = new Uint8Array($H,0,dataLength);
-const dataBuffer = new Uint8Array(dataLength);
-dataBuffer.set(event,0);
+// const dataBuffer = new Uint8Array(dataLength);
+// dataBuffer.set(event,0);
 console.log('event data: ',event.data);
-console.log('dataBuffer data: ',dataBuffer);
+console.log('targetBuffer data: ',targetBuffer);
 // const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
-console.log('TextEncoder data: ',encodedData);
-const writtenBytes = encodedData.written;
+// console.log('TextEncoder data: ',encodedData);
+// const writtenBytes = encodedData.written;
 const flle=new Uint8Array(targetBuffer, 0, writtenBytes);
 FS.writeFile('/shader/shader.wgsl',flle);
 Module.ccall("sndCode");
