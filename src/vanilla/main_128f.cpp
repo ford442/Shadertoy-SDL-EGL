@@ -638,7 +638,7 @@ for (var i = 0; i < flDat.length; i++) {
 }
 console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
-Module.ccall("sndCodeA");
+// Module.ccall("sndCodeA");
 document.querySelector('#startBtn').click();
 setTimeout(function(){
 },2000);
