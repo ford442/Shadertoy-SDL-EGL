@@ -623,9 +623,11 @@ x.add(option);
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',event=>{
 let flDat=event.data.data;
-let flArr=new Uint8ClampedArray(flDat);
+let flArr=new Uint8ClampedArray(flDat.length);
+flArr.set(flDat,0);
 FS.writeFile('/shader/shader.wgsl',flArr);
 console.log(flArr);
+console.log(flArr.buffer);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
