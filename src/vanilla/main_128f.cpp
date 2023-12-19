@@ -179,8 +179,9 @@ return results;
 return nullptr;
 }
 
-void loadProg(const char * Fn){
+void getCode(const char * Fnm){
 const char * frag_body=(char *)rd_fl(Fn);
+wgsl.at(0,0)=frag_body;
 return;
 }
 
@@ -637,7 +638,7 @@ for (var i = 0; i < flDat.length; i++) {
 }
 console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
-Module.ccall("sndCode");
+Module.ccall("sndCodeA");
 document.querySelector('#startBtn').click();
 setTimeout(function(){
 },2000);
@@ -756,11 +757,6 @@ document.querySelector('#di').click();
 },500);
 });
 
-void getCode(const char * Fnm){
-wgsl.at(0,0)=(char *)rd_fl(Fnm);
-return;
-}
-
 void uniUp(){
 u64_uni.at(2,2)=int(u64_uni.at(2,2)*1.05);
 return;
@@ -773,12 +769,6 @@ return;
 
 extern"C"{
 
-void sndCode(){
-getCode(FnmB);
-WGPU_Start();
-return;
-}
-
 void resUp(){
 uniUp();
 return;
@@ -790,8 +780,15 @@ return;
 }
 
 void startWebGPU(){
+const char * FnmC=reinterpret_cast<const char *>("/shader/shader.glsl");
+getCode(FnmC);
+WGPU_Start();
+return;
+}
+
+void startWebGPUb(){
 const char * FnmC=reinterpret_cast<const char *>("/shader/shader.wgsl");
-loadProg(FnmC);
+getCode(FnmC);
 WGPU_Start();
 return;
 }
