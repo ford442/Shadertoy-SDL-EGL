@@ -626,12 +626,12 @@ const dataLength = event.data.length * 4;
 const targetBuffer = new Uint8Array(dataLength);
 const dataBuffer = new Uint8Array(dataLength);
 dataBuffer.set(event.data,0);
- const encodedData = new TextEncoder().encodeInto(targetBuffer,dataBuffer);
+console.log('dataBuffer data: ',dataBuffer);
+const encodedData = new TextEncoder().encodeInto(dataBuffer,targetBuffer);
 console.log('TextEncoder data: ',encodedData);
-  const writtenBytes = encodedData.written;
+const writtenBytes = encodedData.written;
 const flle=new Uint8Array(targetBuffer, 0, writtenBytes);
 FS.writeFile('/shader/shader.wgsl',flle);
- 
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
