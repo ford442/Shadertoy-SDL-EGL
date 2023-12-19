@@ -178,6 +178,11 @@ return results;
 return nullptr;
 }
 
+void loadProg(){
+      
+return;
+}
+
 void raf(){
 u64_uni.at(1,1)++;
 u_time.t3=u_time.t2;
@@ -752,6 +757,7 @@ document.querySelector('#di').click();
 
 void getCode(){
 code_text.at(0,0)=(char*)rd_fl(FnmB);
+wsm.at(1,1).code=code_text.at(0,0);
 wsm.at(1,1)=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 return;
 }
