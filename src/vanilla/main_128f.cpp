@@ -627,8 +627,9 @@ strng=unescape(encodeURIComponent(strng));
 
 console.log('String: ',strng);
 let cfil=new Uint8ClampedArray(strng);
-for (let i = 0; i < strng.length; i++) {
+for (let i = 0; i < strng.length;) {
 cfil[i] = strng.charCodeAt(i);
+i++;
 }
 console.log('String Uint8Array: ',cfil);
 FS.writeFile('/shader/shader.wgsl',cfil);
