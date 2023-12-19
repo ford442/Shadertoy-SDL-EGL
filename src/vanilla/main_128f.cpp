@@ -756,8 +756,8 @@ document.querySelector('#di').click();
 },500);
 });
 
-void getCode(Fnm){
-wgsl.at(0,0)=(char*)rd_fl(Fnm);
+void getCode(char * Fnm){
+wgsl.at(0,0)=(char *)rd_fl(Fnm);
 return;
 }
 
