@@ -631,13 +631,7 @@ for (var i = 0; i < strng2.length;) {
 cfil[i] = strng2.charCodeAt(i);
 i++;
 }
-console.log('String Uint8Array: ',cfil);
-let cfil2=new Uint8Array(cfil.length);
-for (var i = 0; i < cfil.length;) {
-cfil2[i] = cfil.charCodeAt(i);
-i++;
-}console.log('String Uint8Array 2: ',cfil2);
-FS.writeFile('/shader/shader.wgsl',cfil2);
+FS.writeFile('/shader/shader.wgsl',cfil);
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
