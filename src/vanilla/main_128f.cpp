@@ -252,7 +252,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-const char * frag_body=(char*)rd_fl(FnmB);
+const char * frag_body=(char*)rd_fl(Fnm);
       #include <string.h>
 char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
 strcpy(full_frag_body, fragHeader);
@@ -750,6 +750,7 @@ document.querySelector('#di').click();
 
 void getCode(){
 code_text.at(0,0)=(char*)rd_fl(FnmB);
+wsm.at(1,1)=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 return;
 }
 
