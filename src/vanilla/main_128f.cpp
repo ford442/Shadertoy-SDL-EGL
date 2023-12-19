@@ -625,6 +625,7 @@ codeMessage.addEventListener('message',function(event){
  const dataLength = event.data.length * 4; // assuming UTF-8 encoding
   const targetBuffer = new Uint8Array(dataLength);
   const encodedData = new TextEncoder().encodeInto(targetBuffer, event.data);
+console.log('TextEncoder data: ',encodedData);
   const writtenBytes = encodedData.written; // Get the actual number of bytes written
   FS.writeFile('/shader/shader.wgsl', new Uint8Array(targetBuffer, 0, writtenBytes));
  
