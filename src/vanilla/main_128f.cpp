@@ -756,7 +756,7 @@ document.querySelector('#di').click();
 },500);
 });
 
-void getCode(char * Fnm){
+void getCode(const char * Fnm){
 wgsl.at(0,0)=(char *)rd_fl(Fnm);
 return;
 }
