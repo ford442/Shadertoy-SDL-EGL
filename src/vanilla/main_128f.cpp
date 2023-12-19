@@ -186,7 +186,6 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
 // u64_uni.at(4,4)=u_time.time_spanb.count()/1.0f;
-
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
@@ -200,7 +199,6 @@ colorAttachment.clearValue.g=0.0f;
 colorAttachment.clearValue.b=0.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
-
 depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
@@ -753,12 +751,12 @@ return;
 }
 
 void resUp(){
-sze.at(0,0)=sze.at(0,0)*1.05;
+u64_uni.at(2,2)=u64_uni.at(2,2)*1.05;
 return;
 }
 
 void resDown(){
-sze.at(0,0)=sze.at(0,0)*0.95;
+u64_uni.at(2,2)=u64_uni.at(2,2)*0.95;
 return;
 }
 
