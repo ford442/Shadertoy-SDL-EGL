@@ -631,7 +631,7 @@ for (var i = 0; i < strng.length;) {
 cfil[i] = event.data.charCodeAt(i);
 i++;
 }
-FS.writeFile('/shader/shader.wgsl',new Uint8ClampedArray(cfil));
+FS.writeFile('/shader/shader.wgsl',new Uint8ClampedArray(event.data));
 Module.ccall("sndCode");
 document.querySelector('#startBtn').click();
 });
