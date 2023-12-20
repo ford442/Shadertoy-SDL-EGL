@@ -25,11 +25,11 @@ const shutDown=new BroadcastChannel('shutDown');
   
 setTimeout(function(){
 window.open('./flac');
-},250);
+},150);
   
 setTimeout(function(){
 shutDown.postMessage({data:222});
-},2000);
+},3000);
   
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
