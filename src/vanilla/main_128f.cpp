@@ -581,8 +581,8 @@ FS.mkdir('/shader');
 window.scroll(0,0);
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
-document.querySelector('#scanvas').width=window.innerWidth*2;
-document.querySelector('#scanvas').height=window.innerHeight*2;
+document.querySelector('#scanvas').width=window.innerWidth*4;
+document.querySelector('#scanvas').height=window.innerHeight*4;
 document.querySelector('#di').click();
 setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
@@ -595,7 +595,7 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#scanvas').width=window.innerHeight;
 document.querySelector('#scanvas').height=window.innerHeight;
 document.querySelector('#di').click();
-},50);
+},150);
 }
 function normalResStart(){
 setTimeout(function(){
