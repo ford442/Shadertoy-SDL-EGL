@@ -630,16 +630,21 @@ x.add(option);
 
 let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',event=>{
+document.querySelector('#status').style.backgroundColor="blue";
 let flDat=event.data.data;
 var buffer = new ArrayBuffer(flDat.length*2);
 var bufferView = new Uint16Array(buffer);
 for (var i = 0; i < flDat.length; i++) {
     bufferView[i] = flDat.charCodeAt(i);
 }
-console.log(bufferView);
+// console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
+document.querySelector('#status').style.backgroundColor="green";
 Module.ccall("startWebGPUb");
 },1000);
 });
@@ -758,12 +763,12 @@ document.querySelector('#di').click();
 });
 
 void uniUp(){
-u64_uni.at(2,2)=int(u64_uni.at(2,2)*1.05);
+u64_uni.at(2,2)=int(u64_uni.at(2,2)*1.01);
 return;
 }
 
 void uniDown(){
-u64_uni.at(2,2)=int(u64_uni.at(2,2)*0.95);
+u64_uni.at(2,2)=int(u64_uni.at(2,2)*0.99);
 return;
 }
 
