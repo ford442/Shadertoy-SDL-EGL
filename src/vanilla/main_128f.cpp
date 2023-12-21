@@ -277,7 +277,7 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // canvasFormat=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
    //   WGPU_TEXTURE_FORMAT_BGRA8UNORM
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
+wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 canvasViewFormats[0]={wtf.at(3,3)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
