@@ -58,6 +58,10 @@ WGpuColorTargetState colorTarget={};
 WGpuColorTargetState colorTarget2={};
 WGpuCommandEncoder wceA={};
 WGpuCommandEncoder wceB={};
+WGpuSampler iChannel0Sampler={};
+WGpuSamplerBindingLayout samplerBindingLayout={};
+WGpuSamplerDescriptor iChannel0SamplerDescriptor={};
+
 
 WGPU_TEXTURE_FORMAT canvasViewFormats[1];
 WGPU_TEXTURE_FORMAT colorViewFormats[1];
@@ -126,6 +130,9 @@ static wfs_tensor wfs=wfs_tensor{2,2};
 static wrpid_tensor wrpid=wrpid_tensor{2,2};
 static wtbl_tensor wtbl=wtbl_tensor{2,2};
 static c_tensor wgsl=c_tensor{2,2};
+static wsd_tensor wsd=wsd_tensor{2,2};
+static ws_tensor ws=ws_tensor{2,2};
+
 
 const char * vertexShader =
 "@vertex\n"
@@ -362,6 +369,22 @@ fragState2.entryPoint="main";
 fragState2.numTargets=0;
 // fragState2.targets=&wcts.at(1,1);
 wfs.at(1,1)=fragState;
+iChannel0SamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+iChannel0SamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+iChannel0SamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+iChannel0SamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
+iChannel0SamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+iChannel0SamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_LINEAR;
+iChannel0SamplerDescriptor.lodMinClamp=0;
+iChannel0SamplerDescriptor.lodMaxClamp=32;
+// iChannel0SamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
+iChannel0SamplerDescriptor.maxAnisotropy=1;
+wsd.at(0,0)=iChannel0SamplerDescriptor;
+iChannel0Sampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
+ws.at(0,0)=iChannel0Sampler;
+samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
+wsbl.at(1,1)=samplerBindingLayout;
+  
 bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptor_iTime;
 uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iTime);
@@ -420,6 +443,13 @@ bindgroup_layout_entries[5].binding=5;
 bindgroup_layout_entries[5].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[5].layout.texture=wtbl.at(2,2);
+
+bindgroup_layout_entries[6]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[6].binding=6;
+bindgroup_layout_entries[6].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
+bindgroup_layout_entries[6].layout.texture=wsbl.at(0,0);
+      
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
@@ -530,6 +560,11 @@ bindgroup_entries[4].resource=wt.at(2,2);
 bindgroup_entries[5]={};
 bindgroup_entries[5].binding=5;
 bindgroup_entries[5].resource=wt.at(0,0);
+
+bindgroup_entries[6]={};
+bindgroup_entries[6].binding=6;
+bindgroup_entries[6].resource=wt.at(0,0);
+      
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
