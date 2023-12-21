@@ -479,7 +479,7 @@ renderPipelineDesc2.multisample=wms.at(1,1);
 wrpid.at(1,1)=renderPipelineDesc2;
 renderPipeline2=wgpu_device_create_render_pipeline(wd.at(0,0),&wrpid.at(1,1));
 wrp.at(1,1)=renderPipeline2;
-depthTextureViewDescriptor.format=wtf.at(2,2);
+depthTextureViewDescriptor.format=wtf.at(0,0);
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
