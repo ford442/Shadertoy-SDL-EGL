@@ -273,11 +273,12 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 //strcpy(full_frag_body, fragHeader);
 //strcat(full_frag_body, frag_body);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
-canvasFormat=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
-   //   WGPU_TEXTURE_FORMAT_RGBA8UNORM
+// canvasFormat=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM
    //   WGPU_TEXTURE_FORMAT_BGRA8UNORM
-wtf.at(0,0)=canvasFormat;
-canvasViewFormats[0]={wtf.at(0,0)};
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+wtf.at(3,3)=canvasFormat;
+canvasViewFormats[0]={wtf.at(3,3)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=canvasFormat;
@@ -285,8 +286,8 @@ config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BIN
 config.viewFormats=&canvasViewFormats[0];
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 // config.alphaMode=WGPU_CANVAS_ALPHA_MODE_OPAQUE;
-config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_SRGB;
-// config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+// config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_SRGB;
+config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
