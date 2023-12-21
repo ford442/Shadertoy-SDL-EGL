@@ -527,7 +527,7 @@ colorTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(1,1));
 wt.at(1,1)=colorTexture;
 highbitTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 highbitTextureDescriptor.format=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
-highbitTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
+highbitTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 highbitTextureDescriptor.width=sze.at(0,0);
 highbitTextureDescriptor.height=sze.at(0,0); // default = 1;
 highbitTextureDescriptor.depthOrArrayLayers=1;
