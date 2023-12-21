@@ -274,7 +274,7 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 //strcat(full_frag_body, frag_body);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // canvasFormat=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
-canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+canvasFormat=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
    //   WGPU_TEXTURE_FORMAT_BGRA8UNORM
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(3,3)=canvasFormat;
