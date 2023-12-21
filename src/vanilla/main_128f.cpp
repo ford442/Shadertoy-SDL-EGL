@@ -518,7 +518,7 @@ colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
-colorTextureDescriptor.sampleCount=1;
+colorTextureDescriptor.sampleCount=4;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorViewFormats[0]={wtf.at(0,0)};
 colorTextureDescriptor.viewFormats=&colorViewFormats[0];
