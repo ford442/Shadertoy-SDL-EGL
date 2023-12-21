@@ -132,11 +132,15 @@ static wtbl_tensor wtbl=wtbl_tensor{2,2};
 static c_tensor wgsl=c_tensor{2,2};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
+static wsbl_tensor wsbl=wsbl_tensor{2,2};
 
 
 const char * vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
+"out.iChannel0Texture = iChannel0;\n"
+"out.iChannel0Sampler = iChannel0Sampler;\n"
+    
 "var pos = array<vec2<f32>, 6>(\n"
 "vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(-1.0f, 1.0f),\n"
