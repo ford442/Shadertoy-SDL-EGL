@@ -62,7 +62,6 @@ WGpuSampler iChannel0Sampler={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuSamplerDescriptor iChannel0SamplerDescriptor={};
 
-
 WGPU_TEXTURE_FORMAT canvasViewFormats[1];
 WGPU_TEXTURE_FORMAT colorViewFormats[1];
 WGPU_TEXTURE_FORMAT depthViewFormats[1];
@@ -133,7 +132,6 @@ static c_tensor wgsl=c_tensor{2,2};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
-
 
 const char * vertexShader =
 "@vertex\n"
@@ -387,7 +385,6 @@ iChannel0Sampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 ws.at(0,0)=iChannel0Sampler;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
-  
 bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptor_iTime;
 uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iTime);
@@ -532,7 +529,7 @@ highbitTextureDescriptor.width=sze.at(0,0);
 highbitTextureDescriptor.height=sze.at(0,0); // default = 1;
 highbitTextureDescriptor.depthOrArrayLayers=1;
 highbitTextureDescriptor.mipLevelCount=1;
-highbitTextureDescriptor.sampleCount=1;
+highbitTextureDescriptor.sampleCount=4;
 highbitTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorViewFormats[0]={WGPU_TEXTURE_FORMAT_RGBA32FLOAT};
 highbitTextureDescriptor.viewFormats=&colorViewFormats[0];
