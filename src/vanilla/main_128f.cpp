@@ -529,7 +529,7 @@ highbitTextureDescriptor.width=sze.at(0,0);
 highbitTextureDescriptor.height=sze.at(0,0); // default = 1;
 highbitTextureDescriptor.depthOrArrayLayers=1;
 highbitTextureDescriptor.mipLevelCount=1;
-highbitTextureDescriptor.sampleCount=4;
+highbitTextureDescriptor.sampleCount=1;
 highbitTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorViewFormats[0]={WGPU_TEXTURE_FORMAT_RGBA32FLOAT};
 highbitTextureDescriptor.viewFormats=&colorViewFormats[0];
