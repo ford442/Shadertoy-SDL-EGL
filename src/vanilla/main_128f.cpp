@@ -306,7 +306,7 @@ multiSamp2={};
 multiSamp2.count=4;
 multiSamp2.mask=-1;
 wms.at(1,1)=multiSamp2;
-colorTarget.format=wtf.at(3,3);
+colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
       /*
 colorTarget.blend.color.operation=WGPU_BLEND_OPERATION_ADD;
