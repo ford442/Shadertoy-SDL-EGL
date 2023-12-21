@@ -273,14 +273,9 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 //strcpy(full_frag_body, fragHeader);
 //strcat(full_frag_body, frag_body);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-// canvasFormat=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-// canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
-canvasFormat=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
-// canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+canvasFormat=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+   //   WGPU_TEXTURE_FORMAT_RGBA8UNORM
+   //   WGPU_TEXTURE_FORMAT_BGRA8UNORM
 wtf.at(0,0)=canvasFormat;
 canvasViewFormats[0]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
