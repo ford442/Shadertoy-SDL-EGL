@@ -451,7 +451,7 @@ bindgroup_layout_entries[6]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZE
 bindgroup_layout_entries[6].binding=6;
 bindgroup_layout_entries[6].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
-bindgroup_layout_entries[6].layout.texture=wsbl.at(0,0);
+bindgroup_layout_entries[6].layout.sampler=wsbl.at(0,0);
       
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
