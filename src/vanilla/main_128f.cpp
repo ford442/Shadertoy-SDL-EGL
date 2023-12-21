@@ -272,9 +272,9 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 //char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
 //strcpy(full_frag_body, fragHeader);
 //strcat(full_frag_body, frag_body);
-canvasFormat=navigator_gpu_get_preferred_canvas_format();
+// canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
+canvasFormat=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM_SRGB;
@@ -560,11 +560,9 @@ bindgroup_entries[4].resource=wt.at(2,2);
 bindgroup_entries[5]={};
 bindgroup_entries[5].binding=5;
 bindgroup_entries[5].resource=wt.at(0,0);
-
 bindgroup_entries[6]={};
 bindgroup_entries[6].binding=6;
 bindgroup_entries[6].resource=wt.at(0,0);
-
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
@@ -599,6 +597,8 @@ wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
+WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
+deviceDesc.requiredFeatures=ftr;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
