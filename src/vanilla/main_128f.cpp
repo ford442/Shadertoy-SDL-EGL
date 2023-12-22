@@ -263,8 +263,7 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
 // u64_uni.at(4,4)=u_time.time_spanb.count()/1.0f;
-colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
-wt.at(1,1)=colorTexture;
+
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
@@ -565,7 +564,7 @@ depthTextureViewDescriptor.mipLevelCount=1;
 depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(0,0)=depthTextureViewDescriptor;
-colorTextureViewDescriptor.format=wtf.at(3,3);
+colorTextureViewDescriptor.format=wtf.at(0,0);
 colorTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 colorTextureViewDescriptor.baseMipLevel=0; // default = 0
@@ -615,6 +614,10 @@ highbitTextureDescriptor.viewFormats=&colorViewFormats[0];
 wtd.at(2,2)=highbitTextureDescriptor;
 __128bit_Texture__=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=__128bit_Texture__;
+
+      colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
+wt.at(1,1)=colorTexture;
+      
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
 bindgroup_entries[0].resource=wb.at(0,0);
