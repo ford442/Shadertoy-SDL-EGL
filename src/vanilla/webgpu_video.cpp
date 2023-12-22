@@ -155,7 +155,7 @@ const char * vertexShader=
 const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
-"@group(0) @binding(2) var myTexture : texture_2d <u32>;\n"
+"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
 "return textureSample(myTexture, mySampler, fragUV);\n"
@@ -265,12 +265,13 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
   
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
-wtf.at(0,0)=canvasFormat;
+// wtf.at(0,0)=canvasFormat;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
-config.format=canvasFormat;
+config.format=wtf.at(0,0);
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
@@ -388,7 +389,7 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
-textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayout1.multisampled=1;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
