@@ -133,6 +133,38 @@ static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
 
+/*
+static mouse_tensor mms=mouse_tensor{2,2};
+static mouse_tensor mms2=mouse_tensor{2,2};
+
+inline struct{
+boost::compute::double_ wi=0.0;
+boost::compute::double_ hi=0.0;
+}mouse;
+
+inline EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
+
+EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}}
+return EM_TRUE;
+}
+
+EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+mms2.at(0,0)=e->clientX;
+mms2.at(0,1)=e->clientY;
+}}
+return EM_TRUE;
+}
+*/
+
 const char * vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
@@ -194,6 +226,35 @@ return;
 }
 
 void raf(){
+      
+/*
+if(ms_l==true){
+mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
+mms.at(1,1)=round((mms2.at(0,1))/i_size.at(0,1));
+}
+// retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+// retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(ms_l==true){
+// retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
+// retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(clk_l==true){
+const long xxx=mms2.at(0,0);
+const long yyy=mms2.at(0,1);
+mms.at(0,0)=float(xxx);
+mms.at(1,0)=float((i_size.at(0,1)-yyy));
+clk_l=false;
+}
+mms.at(2,0)=float(mms2.at(0,0));
+mms.at(2,1)=float(i_size.at(0,1)-mms2.at(0,1));
+      
+  //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
+      
+}
+else{
+clk_l=true;
+}
+*/
+      
 u64_uni.at(1,1)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -210,9 +271,9 @@ wtv.at(1,1)=colorTextureView;
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-colorAttachment.clearValue.r=0.0f;
-colorAttachment.clearValue.g=0.0f;
-colorAttachment.clearValue.b=0.0f;
+colorAttachment.clearValue.r=1.0f;
+colorAttachment.clearValue.g=1.0f;
+colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
 depthAttachment={};
@@ -222,11 +283,11 @@ depthAttachment.view=wtv.at(0,0);
 depthAttachment.depthClearValue=1.0f;
 depthAttachment.stencilClearValue=0;
 depthAttachment.depthReadOnly=0;
-depthAttachment.stencilReadOnly=1;
+depthAttachment.stencilReadOnly=0;
 depthAttachment.depthLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
-depthAttachment.stencilLoadOp=WGPU_LOAD_OP_UNDEFINED; // WGPU_LOAD_OP_LOAD;
-depthAttachment.stencilStoreOp=WGPU_LOAD_OP_UNDEFINED; // WGPU_STORE_OP_STORE;
+depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
+depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
 passDesc.numColorAttachments=1;
@@ -272,6 +333,17 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 //char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
 //strcpy(full_frag_body, fragHeader);
 //strcat(full_frag_body, frag_body);
+
+      /*
+clk_l=true;
+mms.at(0,0)=0.5*float_size.at(0,0);
+// mms.at(0,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
+mms.at(0,1)=0.5*float_size.at(0,0);
+mms.at(1,0)=0.5*float_size.at(0,0);
+mms.at(1,1)=0.5*float_size.at(0,0);
+// mms.at(1,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
+
+      */
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
@@ -318,7 +390,7 @@ colorTarget.blend.alpha.dstFactor=WGPU_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
 */
 wcts.at(0,0)=colorTarget;
 wtf.at(1,1)=WGPU_TEXTURE_FORMAT_INVALID;
-wtf.at(2,2)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
+wtf.at(2,2)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 colorTarget2.format=wtf.at(1,1);
 // colorTarget2.writeMask=WGPU_COLOR_WRITE_ALL;
 wcts.at(1,1)=colorTarget2;
@@ -444,13 +516,11 @@ bindgroup_layout_entries[5].binding=5;
 bindgroup_layout_entries[5].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[5].layout.texture=wtbl.at(2,2);
-
 bindgroup_layout_entries[6]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[6].binding=6;
 bindgroup_layout_entries[6].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 bindgroup_layout_entries[6].layout.sampler=wsbl.at(0,0);
-      
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
@@ -561,11 +631,9 @@ bindgroup_entries[4].resource=wt.at(2,2);
 bindgroup_entries[5]={};
 bindgroup_entries[5].binding=5;
 bindgroup_entries[5].resource=wt.at(0,0);
-
 bindgroup_entries[6]={};
 bindgroup_entries[6].binding=6;
 bindgroup_entries[6].resource=wt.at(0,0);
-
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
