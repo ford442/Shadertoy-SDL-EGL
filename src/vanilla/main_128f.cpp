@@ -376,6 +376,9 @@ wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_element_css_size("canvas",&szw,&szh);
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
+      EM_ASM({
+console.log('css: ',$0,' canvas: ',$1);
+},szh,szhI);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szhI;
 sze.at(0,1)=szhI;
@@ -616,8 +619,6 @@ highbitTextureDescriptor.viewFormats=&colorViewFormats[0];
 wtd.at(2,2)=highbitTextureDescriptor;
 __128bit_Texture__=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=__128bit_Texture__;
-
- 
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
 bindgroup_entries[0].resource=wb.at(0,0);
