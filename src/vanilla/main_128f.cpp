@@ -374,8 +374,8 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
-emscripten_get_element_css_size("canvas",&szw,&szh);
-emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
+emscripten_get_element_css_size("canvas",&szh,&szw);
+emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
       EM_ASM({
 console.log('css: ',$0,' canvas: ',$1);
 },szh,szhI);
@@ -460,7 +460,7 @@ iChannel0SamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 iChannel0SamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 iChannel0SamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
 iChannel0SamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
-iChannel0SamplerDescriptor.mipmapFilter= WGPU_MIPMAP_FILTER_MODE_LINEAR;
+iChannel0SamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 iChannel0SamplerDescriptor.lodMinClamp=0;
 iChannel0SamplerDescriptor.lodMaxClamp=32;
 // iChannel0SamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
