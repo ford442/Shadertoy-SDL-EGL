@@ -565,14 +565,13 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height).data;
 let dataSize2=imageData.length;
-const typedArray=new Uint8Array(imageData);
-  console.log('imageData.size:',imageData.size);
+  console.log('imageData.data.length:',imageData.data.length);
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8ClampedArray(imageData);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
-heapArray.set(pixelData,0);
+heapArray.set(pixelData,0,dataSize);
 // Module.ccall("frm",null,["Number"],[0]);
 },1500);
 }
