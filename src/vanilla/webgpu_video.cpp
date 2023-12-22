@@ -571,8 +571,8 @@ const typedArray=new Uint8Array(imageData);
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8ClampedArray(imageData);
-let heapArray=new Uint8ClampedArray(H,0,dataSize2);
-heapArray.set(pixelData,0,dataSize2);
+let heapArray=new Uint8ClampedArray(H,0,dataSize);
+heapArray.set(pixelData,0,dataSize);
 // Module.ccall("frm",null,["Number"],[0]);
 },1500);
 }
