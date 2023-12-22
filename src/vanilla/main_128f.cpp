@@ -61,12 +61,10 @@ WGpuCommandEncoder wceB={};
 WGpuSampler iChannel0Sampler={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuSamplerDescriptor iChannel0SamplerDescriptor={};
-
 WGPU_TEXTURE_FORMAT canvasViewFormats[1];
 WGPU_TEXTURE_FORMAT colorViewFormats[1];
 WGPU_TEXTURE_FORMAT depthViewFormats[1];
 WGPU_TEXTURE_FORMAT canvasFormat;
-
 double szh,szw;
 int szhI,szwI;
 
@@ -226,7 +224,6 @@ return;
 }
 
 void raf(){
-      
 /*
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
@@ -246,15 +243,13 @@ clk_l=false;
 }
 mms.at(2,0)=float(mms2.at(0,0));
 mms.at(2,1)=float(i_size.at(0,1)-mms2.at(0,1));
-      
   //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,0),mms.at(1,0));
-      
 }
 else{
 clk_l=true;
 }
 */
-      
+
 u64_uni.at(1,1)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -263,9 +258,8 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
 // u64_uni.at(4,4)=u_time.time_spanb.count()/1.0f;
-      colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
+colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
-
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
@@ -334,7 +328,6 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 //char full_frag_body[strlen(fragHeader) + strlen(frag_body) + 1];
 //strcpy(full_frag_body, fragHeader);
 //strcat(full_frag_body, frag_body);
-
       /*
 clk_l=true;
 mms.at(0,0)=0.5*float_size.at(0,0);
@@ -348,7 +341,6 @@ mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
   //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
       */
-      
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
@@ -374,11 +366,8 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
-emscripten_get_element_css_size("canvas",&szh,&szw);
+// emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
-      EM_ASM({
-console.log('css: ',$0,' canvas: ',$1);
-},szh,szhI);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szhI;
 sze.at(0,1)=szhI;
@@ -386,7 +375,7 @@ multiSamp={};
 multiSamp.count=1;
 multiSamp.mask=-1;
 multiSamp2={};
-multiSamp2.count=4;
+multiSamp2.count=1; // 4;
 multiSamp2.mask=-1;
 wms.at(1,1)=multiSamp2;
 colorTarget.format=wtf.at(0,0);
@@ -584,7 +573,7 @@ depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
-depthTextureDescriptor.sampleCount=4;
+depthTextureDescriptor.sampleCount=1; // 4;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthViewFormats[0]={wtf.at(2,2)};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
@@ -598,7 +587,7 @@ colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
-colorTextureDescriptor.sampleCount=4;
+colorTextureDescriptor.sampleCount=1; // 4;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorViewFormats[0]={wtf.at(4,4)};
 colorTextureDescriptor.viewFormats=&colorViewFormats[0];
@@ -645,14 +634,13 @@ bindgroup_entries[5].binding=5;
 bindgroup_entries[5].resource=wt.at(0,0);
 bindgroup_entries[6]={};
 bindgroup_entries[6].binding=6;
-bindgroup_entries[6].resource=wt.at(0,0);
+bindgroup_entries[6].resource=wt.at(2,2);
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
 // wrbed.at(0,0)=renderBundleEncoderDescriptor;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
-wt.at(2,2)=__128bit_Texture__;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
