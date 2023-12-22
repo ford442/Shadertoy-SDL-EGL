@@ -343,7 +343,11 @@ mms.at(1,0)=0.5*float_size.at(0,0);
 mms.at(1,1)=0.5*float_size.at(0,0);
 // mms.at(1,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
 
+mms.at(2,0)=float_size.at(0,0)*0.5;
+mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
+  //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
       */
+      
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGB10A2UNORM;
