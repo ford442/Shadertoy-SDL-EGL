@@ -559,20 +559,20 @@ let gl2=cnv.getContext('2d',{willReadFrequently:true});
 */
   
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height;
+let dataSize=cnv.width*cnv.height*4;
 setInterval(function(){
   
 gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,cnv.width,cnv.height).data;
-let dataSize2=imageData.length;
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+let dataSize2=imageData.data.length;
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8ClampedArray(imageData);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
-heapArray.set(pixelData,0,dataSize);
+heapArray.set(pixelData,dataSize2);
 // Module.ccall("frm",null,["Number"],[0]);
-},1500);
+},250);
 }
   
 function normalResStart(){
