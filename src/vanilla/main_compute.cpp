@@ -530,9 +530,9 @@ WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
-WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
+const WGpuImageCopyTexture WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 wict.at(0,0)=WGPU_Input_Image;
-WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
+const WGpuImageCopyTexture WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 wict.at(1,1)=WGPU_Output_Image;
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
@@ -550,13 +550,21 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
-WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+ /* 
+WGPU_Output_Buffer.offset=0;
 WGPU_Output_Buffer.bytesPerRow=4096;
 WGPU_Output_Buffer.rowsPerImage=256;
+WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+*/
+const WGpuImageCopyBuffer WGPU_Output_Buffer={0,4096,256,WGPU_Buffers.at(0,0,0)};
 wicb.at(0,0)=WGPU_Output_Buffer;
-WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
+  /*
+WGPU_Mapped_Buffer.offset=0;
 WGPU_Mapped_Buffer.bytesPerRow=4096;
 WGPU_Mapped_Buffer.rowsPerImage=256;
+WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
+*/
+const WGpuImageCopyBuffer WGPU_Mapped_Buffer={0,4096,256,WGPU_Buffers.at(2,0,2)};
 wicb.at(1,1)=WGPU_Mapped_Buffer;
 raN=rNd4(256);
 input[0]=raN;
