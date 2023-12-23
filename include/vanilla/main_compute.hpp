@@ -84,6 +84,14 @@ void runWebGPU();
 using namespace std;
 using namespace boost::chrono;
 
+using wcpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
+using wcp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
+using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
+using wstbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
+using wbms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
+using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
+using void_tensor=boost::numeric::ublas::tensor<void *>;
+
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using c_tensor=boost::numeric::ublas::tensor<const char *>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
