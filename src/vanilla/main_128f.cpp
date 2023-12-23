@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
 
+
 WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
