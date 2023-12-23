@@ -57,9 +57,6 @@
 template<class ArgumentType,class ResultType>
 
 #include <boost/function.hpp>
-#include <boost/compute/cl.hpp>
-#include <boost/compute/core.hpp>
-#include <boost/compute/interop/opengl.hpp>
 
 struct unary_function{
 typedef ArgumentType argument_type;
@@ -68,10 +65,10 @@ typedef ResultType result_type;
 
 #include <boost/function.hpp>
 
-inline int rNd4(int randomMax);
+inline int rNd4(int);
 // static void WGPU_Run();
-static void ObtainedWebGpuDeviceStart(WGpuDevice result,void * userData);
-static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
+static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
+static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 
 // static void WGPU_Start();
 
