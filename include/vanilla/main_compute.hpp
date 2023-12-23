@@ -85,6 +85,7 @@ using namespace std;
 using namespace boost::chrono;
 
 using wcpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
+using wpl_tensor=boost::numeric::ublas::tensor<WGpuComputePipelineLayout>;
 using wcp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
 using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
 using wstbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
