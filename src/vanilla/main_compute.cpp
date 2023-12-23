@@ -363,15 +363,6 @@ wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 return;
 };
 
-static boost::function<void()>raf=[](){
-
-
-  
-  
-return;
-};
-
-
 const inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
