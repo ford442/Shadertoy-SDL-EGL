@@ -50,7 +50,7 @@ WGpuBuffer uni_iTime_Buffer;
 WGpuBuffer uni_iTimeDelta_Buffer;
 WGpuBuffer uni_iResolution_Buffer;
 WGpuBuffer uni_iFrame_Buffer;
-WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout1={};
 WGpuTextureBindingLayout textureBindingLayout2={};
 WGpuTextureBindingLayout textureBindingLayout3={};
@@ -770,10 +770,10 @@ bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BU
 wbd.at(2,2)=bufferDescriptor_iResolution;
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
 wb.at(2,2)=uni_iResolution_Buffer;
-bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
-bufferBindingLayout1.hasDynamicOffset=0,
-bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
-wbbl.at(0,0)=bufferBindingLayout1;
+bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
+bufferBindingLayoutR.hasDynamicOffset=0,
+bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
+wbbl.at(0,0)=bufferBindingLayoutR;
 textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayout1.multisampled=1;
