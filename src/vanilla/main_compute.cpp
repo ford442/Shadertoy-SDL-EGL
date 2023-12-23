@@ -128,7 +128,7 @@ static wrpid_tensor wrpid=wrpid_tensor{2,2};
 static wtbl_tensor wtbl=wtbl_tensor{2,2};
 static c_tensor wgsl=c_tensor{2,2};
 static wsd_tensor wsd=wsd_tensor{2,2};
-static ws_tensor ws=ws_tensor{2,2};
+static ws_tensor wgpu_sampler=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
 
 /*
@@ -741,7 +741,7 @@ iChannel0SamplerDescriptor.lodMaxClamp=32;
 iChannel0SamplerDescriptor.maxAnisotropy=1;
 wsd.at(0,0)=iChannel0SamplerDescriptor;
 iChannel0Sampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
-ws.at(0,0)=iChannel0Sampler;
+wgpu_sampler.at(0,0)=iChannel0Sampler;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
 bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
