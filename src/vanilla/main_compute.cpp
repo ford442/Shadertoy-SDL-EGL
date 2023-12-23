@@ -317,11 +317,13 @@ int raND=0;
 uint32_t * WGPU_Result_Array=new uint32_t[OutputBufferBytes];
 uint32_t * WGPU_Input_Array=new uint32_t[InputBufferBytes];
 uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
+/*
 const WGpuImageCopyTexture WGPU_Input_Image={};
 const WGpuImageCopyTexture WGPU_Output_Image={};
 const WGpuImageCopyBuffer WGPU_Input_Buffer={};
 const WGpuImageCopyBuffer WGPU_Output_Buffer={};
 const WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
+*/
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
