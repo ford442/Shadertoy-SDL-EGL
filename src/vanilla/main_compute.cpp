@@ -247,8 +247,8 @@ static wtv_tensor WGPU_TextureView=wtv_tensor{1,1,1};
 static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 static wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 static wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
-static wict_tensor WGPU_ImageCopyTexture=wict_tensor{3,3};
-static wicb_tensor WGPU_ImageCopyBuffer=wicb_tensor{3,3};
+static wict_tensor wict=wict_tensor{3,3};
+static wicb_tensor wicb=wicb_tensor{3,3};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=262144;
