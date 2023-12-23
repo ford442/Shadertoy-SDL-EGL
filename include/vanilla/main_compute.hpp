@@ -84,6 +84,7 @@ void runWebGPU();
 using namespace std;
 using namespace boost::chrono;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
+using wced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 
 using wbmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wcpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
