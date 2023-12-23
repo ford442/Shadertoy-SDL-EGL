@@ -56,6 +56,11 @@
 
 template<class ArgumentType,class ResultType>
 
+#include <boost/function.hpp>
+#include <boost/compute/cl.hpp>
+#include <boost/compute/core.hpp>
+#include <boost/compute/interop/opengl.hpp>
+
 struct unary_function{
 typedef ArgumentType argument_type;
 typedef ResultType result_type;
@@ -75,9 +80,11 @@ static void ObtainedWebGpuAdapterStart(WGpuAdapter result,void * userData);
 extern"C"{
 
 void startWebGPU();
+void runWebGPU();
 
 }
 
+using namespace std;
 using namespace boost::chrono;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
@@ -100,6 +107,7 @@ using wbgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
 using wbgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
 using wbge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using wrpd_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDescriptor>;
+using wcpd_tensor=boost::numeric::ublas::tensor<WGpuComputePassDescriptor>;
 using wrpca_tensor=boost::numeric::ublas::tensor<WGpuRenderPassColorAttachment>;
 using wbbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using wtbl_tensor=boost::numeric::ublas::tensor<WGpuTextureBindingLayout>;
@@ -112,6 +120,7 @@ using wrbed_tensor=boost::numeric::ublas::tensor<WGpuRenderBundleEncoderDescript
 using wrpdsa_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDepthStencilAttachment>;
 using u64_tensor=boost::numeric::ublas::tensor<uint32_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
+// using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using wtd_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
