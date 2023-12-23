@@ -558,7 +558,7 @@ WGPU_Output_Buffer.bytesPerRow=4096;
 WGPU_Output_Buffer.rowsPerImage=256;
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 */
-const WGpuImageCopyBuffer WGPU_Output_Buffer={0,4096,256,WGPU_Buffers.at(0,0,0)};
+WGpuImageCopyBuffer WGPU_Output_Buffer={0,4096,256,WGPU_Buffers.at(0,0,0)};
 wicb.at(0,0)=WGPU_Output_Buffer;
   /*
 WGPU_Mapped_Buffer.offset=0;
@@ -566,7 +566,7 @@ WGPU_Mapped_Buffer.bytesPerRow=4096;
 WGPU_Mapped_Buffer.rowsPerImage=256;
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
 */
-const WGpuImageCopyBuffer WGPU_Mapped_Buffer={0,4096,256,WGPU_Buffers.at(2,0,2)};
+WGpuImageCopyBuffer WGPU_Mapped_Buffer={0,4096,256,WGPU_Buffers.at(2,0,2)};
 wicb.at(1,1)=WGPU_Mapped_Buffer;
 raN=rNd4(256);
 input[0]=raN;
