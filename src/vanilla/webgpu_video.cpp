@@ -551,7 +551,7 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 
     
-function async videoFrames(){
+async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
