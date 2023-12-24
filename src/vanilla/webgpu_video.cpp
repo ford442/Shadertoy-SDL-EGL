@@ -578,7 +578,7 @@ let dataSize2=imageData.data.length;
   console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8Array(imageData);
 
-const heap8Pointer = HEAP8U.subarray(pixelData.byteOffset, pixelData.byteOffset + pixelData.byteLength);
+const heap8Pointer = Module.HEAP8U.subarray(pixelData.byteOffset, pixelData.byteOffset + pixelData.byteLength);
 Module.ccall('frm', 'number', ['array'], [heap8Pointer]);
 
     
