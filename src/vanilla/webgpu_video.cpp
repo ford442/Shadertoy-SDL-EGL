@@ -570,7 +570,7 @@ let dataSize=cnv.width*cnv.height*16;
 setInterval(function(){
   
 gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,cnv.width,cnv.height*16);
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 let dataSize2=imageData.data.length;
   console.log('imageData.length:',imageData.length);
   console.log('dataSize:',dataSize);
