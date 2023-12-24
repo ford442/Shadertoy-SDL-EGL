@@ -588,6 +588,7 @@ let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 let dataSize2=imageData.data.length;
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
+let pixelData=new Uint8ClampedArray(imageData);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
 heapArray.set(pixelData,dataSize2);
 // Module.ccall("frm",null,["Number"],[0]);
