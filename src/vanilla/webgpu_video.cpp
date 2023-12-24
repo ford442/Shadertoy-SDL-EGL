@@ -570,17 +570,15 @@ let gl2=cnv.getContext('2d',{willReadFrequently:true});
 // let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*32;
 setInterval(function(){
-  
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 let dataSize2=imageData.data.length;
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
 let uint8Array=new Uint8Array(imageData);
-
 const rawPointer = uint8Array.buffer.byteOffset + uint8Array.byteOffset;
 const cPointer = new Uint8Array(Module.HEAPU8.buffer, rawPointer, uint8Array.byteLength);
-Module.ccall('myCFunction', 'number', ['Number'], [cPointer]);
+Module.ccall('frm', 'number', ['Number'], [cPointer]);
     
 // let heapArray=new Uint8ClampedArray(H,0,dataSize);
 // heapArray.set(pixelData,dataSize2);
