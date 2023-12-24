@@ -580,7 +580,7 @@ let uint8Array=new Uint8Array(imageData);
 
 const rawPointer = uint8Array.buffer.byteOffset + uint8Array.byteOffset;
 const cPointer = new Uint8Array(Module.HEAPU8.buffer, rawPointer, uint8Array.byteLength);
-Module.ccall('myCFunction', 'number', ['pointer'], [cPointer]);
+Module.ccall('myCFunction', 'number', ['Number'], [cPointer]);
     
 // let heapArray=new Uint8ClampedArray(H,0,dataSize);
 // heapArray.set(pixelData,dataSize2);
