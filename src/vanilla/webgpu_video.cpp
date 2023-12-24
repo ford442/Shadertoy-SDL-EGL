@@ -584,23 +584,25 @@ console.log(device);
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*4;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
-setInterval(function(){
-gl2.drawImage(vv,0,0);
+   gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
    
-// const bytesPerRow = cnv.width * 4;
-//  const rowsPerImage = imageData.data.length / bytesPerRow;
-
-    
-//  img = tf.image.decode_jpeg(img)
-    
-// console.log('rowsPerImage:');
-// console.log(rowsPerImage);
-//     console.log('bytesPerRow:');
-// console.log(bytesPerRow);
-//     console.log('size:');
-// console.log(cnv.width);
+const bytesPerRow = cnv.width * 4;
+const rowsPerImage = imageData.data.length / bytesPerRow;
+console.log('rowsPerImage:');
+console.log(rowsPerImage);
+console.log('bytesPerRow:');
+console.log(bytesPerRow);
+console.log('size:');
+console.log(cnv.width);
 let dataSize2=imageData.data.length;
+console.log('dataSize:',dataSize);
+console.log('dataSize2:',dataSize2);
+    
+setInterval(function(){
+gl2.drawImage(vv,0,0);
+imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+dataSize2=imageData.data.length;
 //  console.log('dataSize:',dataSize);
 //  console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8ClampedArray(imageData);
