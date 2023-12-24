@@ -252,7 +252,7 @@ wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,
 
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),buffer_ptr,sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
     */
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*32,sze.at(0,0)*32,sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
