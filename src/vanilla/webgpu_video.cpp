@@ -597,7 +597,10 @@ let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
     
  console.log('rowsPerImage:');
  console.log(rowsPerImage);
-    
+     console.log('bytesPerRow:');
+ console.log(bytesPerRow);
+     console.log('size:');
+ console.log(cnv.width);
 let dataSize2=imageData.data.length;
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
