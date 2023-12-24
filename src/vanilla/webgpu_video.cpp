@@ -554,7 +554,11 @@ function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
-let gl2=cnv.getContext('2d',{willReadFrequently:true});
+    
+const adapter = await navigator.gpu.requestAdapter();
+const device = await adapter.requestDevice();
+console.log('WGPU?');
+console.log(adapter,device);
 /*
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -565,25 +569,30 @@ let gl2=cnv.getContext('2d',{willReadFrequently:true});
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     // Upload the image into the texture.
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
-*/
+
   
 // let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*32;
+let gl2=cnv.getContext('2d',{willReadFrequently:true});
+
 setInterval(function(){
+    
+
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 let dataSize2=imageData.data.length;
+    
   console.log('dataSize:',dataSize);
   console.log('dataSize2:',dataSize2);
-let uint8Array=new Uint8Array(imageData);
-const rawPointer = uint8Array.buffer.byteOffset + uint8Array.byteOffset;
-const cPointer = new Uint8Array(Module.HEAPU8.buffer, rawPointer, uint8Array.byteLength);
-// Module.ccall('frm', null, ['Number'], [cPointer]);
-    
+
 // let heapArray=new Uint8ClampedArray(H,0,dataSize);
 // heapArray.set(pixelData,dataSize2);
 // Module.ccall("frm",null,["Number"],[0]);
+    
 },250);
+
+*/
+    
 }
   
 function normalResStart(){
