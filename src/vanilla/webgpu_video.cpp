@@ -240,7 +240,18 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
+
+    std::vector<uint8_t> data(2000);
+   for (int i = 0; i < 2000; i += 4) {
+        data[i] = 24;
+        data[i + 1] = 244;
+        data[i + 2] = 24;
+        data[i + 3] = 255;
+    }
+      uint8_t* buffer_ptr = data.data();
+
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),buffer_ptr,sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
