@@ -549,13 +549,8 @@ return;
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
-  
-function videoFrames(){
-let SiZ=parseInt(window.innerHeight);
-let vv=document.getElementById('mv');
-let cnv=document.getElementById('bcanvas');
-    
- const adapter = await navigator.gpu.requestAdapter();
+
+const adapter = await navigator.gpu.requestAdapter();
   if (!adapter) {
     throw Error('Couldn\'t request WebGPU adapter.');
   }
@@ -570,6 +565,13 @@ setTimeout(function(){
 
 console.log(device);
 },250);
+    
+function videoFrames(){
+let SiZ=parseInt(window.innerHeight);
+let vv=document.getElementById('mv');
+let cnv=document.getElementById('bcanvas');
+    
+ 
 
 /*
       var texture = gl.createTexture();
