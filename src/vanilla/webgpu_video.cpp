@@ -580,7 +580,7 @@ console.log(device);
 */
   
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*32;
+let dataSize=cnv.width*cnv.height*4;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
 setInterval(function(){
 gl2.drawImage(vv,0,0);
