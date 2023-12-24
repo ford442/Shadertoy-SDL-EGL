@@ -555,15 +555,15 @@ let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
     
-const adapter =  navigator.gpu.requestAdapter();
+const devAdapter =  navigator.gpu.requestAdapter().requestDevice();
     
     
 console.log('WGPU?');
     
-setInterval(function(){
-    const device =  adapter.requestDevice();
+setTimeout(function(){
+  //  const device =  adapter.requestDevice();
 
-console.log(adapter,device);
+console.log(devAdapter);
 },250);
 
 /*
