@@ -556,9 +556,16 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
     
 const adapter =  navigator.gpu.requestAdapter();
-const device =  adapter.requestDevice();
+    
+    
 console.log('WGPU?');
+    
+setInterval(function(){
+    const device =  adapter.requestDevice();
+
 console.log(adapter,device);
+},250);
+
 /*
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
