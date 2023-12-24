@@ -555,8 +555,8 @@ let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
     
-const adapter = await navigator.gpu.requestAdapter();
-const device = await adapter.requestDevice();
+const adapter =  navigator.gpu.requestAdapter();
+const device =  adapter.requestDevice();
 console.log('WGPU?');
 console.log(adapter,device);
 /*
