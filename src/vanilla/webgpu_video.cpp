@@ -616,16 +616,16 @@ setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
 document.getElementById('circle').width=window.innerWidth;
 document.getElementById('circle').height=window.innerHeight;
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('canvas').height=parseInt(window.innerHeight,10);
+document.getElementById('canvas').width=parseInt(window.innerHeight,10);
 document.getElementById('di').click();
 videoFrames();
 Module.ccall("startWebGPU");
 },100);
 document.getElementById('status').style.backgroundColor="green";
 }
-document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('ihig').innerHTML=parseInt(window.innerHeight,10);
-document.getElementById('canvas').height=parseInt(window.innerHeight,10);
-document.getElementById('canvas').width=parseInt(window.innerHeight,10);
 document.getElementById('status').height=20;
 document.getElementById('status').width=parseInt(window.innerHeight,10);
 const tem=document.getElementById('tim');
@@ -702,7 +702,7 @@ WGPU_Start();
 
 }
 
-int main(void){
+int main(){
 js_main();
 return 0;
 }
