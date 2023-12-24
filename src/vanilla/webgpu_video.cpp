@@ -440,7 +440,8 @@ bindgroup_entries[1].binding=1;
 bindgroup_entries[1].resource=ws.at(0,0);
 bindgroup_entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[2].binding=2;
-bindgroup_entries[2].resource=wtv.at(2,2);
+// bindgroup_entries[2].resource=wtv.at(2,2);
+bindgroup_entries[2].resource=wt.at(2,2);
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=4;
 // renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -566,7 +567,7 @@ let gl2=cnv.getContext('2d',{willReadFrequently:true});
 */
   
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*16;
+let dataSize=cnv.width*cnv.height*4;
 setInterval(function(){
   
 gl2.drawImage(vv,0,0);
