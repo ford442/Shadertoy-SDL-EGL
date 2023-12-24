@@ -252,7 +252,7 @@ wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,
 
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),buffer_ptr,sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
     */
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*sze.at(0,0)/1024/4),(sze.at(0,0)*sze.at(0,0)/1024),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*sze.at(0,0)/1024),(sze.at(0,0)*sze.at(0,0)/1024/4),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -587,28 +587,27 @@ let gl2=cnv.getContext('2d',{willReadFrequently:true});
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-
-    
- const bytesPerRow = cnv.width * 4;
-  const rowsPerImage = imageData.data.length / bytesPerRow;
+   
+// const bytesPerRow = cnv.width * 4;
+//  const rowsPerImage = imageData.data.length / bytesPerRow;
 
     
 //  img = tf.image.decode_jpeg(img)
     
- console.log('rowsPerImage:');
- console.log(rowsPerImage);
-     console.log('bytesPerRow:');
- console.log(bytesPerRow);
-     console.log('size:');
- console.log(cnv.width);
+// console.log('rowsPerImage:');
+// console.log(rowsPerImage);
+//     console.log('bytesPerRow:');
+// console.log(bytesPerRow);
+//     console.log('size:');
+// console.log(cnv.width);
 let dataSize2=imageData.data.length;
-  console.log('dataSize:',dataSize);
-  console.log('dataSize2:',dataSize2);
+//  console.log('dataSize:',dataSize);
+//  console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8ClampedArray(imageData);
 let heapArray=new Uint8ClampedArray(H,0,dataSize);
 heapArray.set(pixelData,dataSize2);
 // Module.ccall("frm",null,["Number"],[0]);
-},250);
+},50);
 }
   
 function normalResStart(){
