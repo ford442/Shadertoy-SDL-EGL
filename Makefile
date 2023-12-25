@@ -40,7 +40,7 @@ WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigat
 	 -lmath.js -lhtml5.js -lint53.js
 
 b3_m1d1:
-	 em++ $(STDS) -c include/shader/libremidi/src/main.cpp -O2 -sUSE_SDL=2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -c include/shader/libremidi/src/main.cpp -L./lib/ -llibremidi -O2 -sUSE_SDL=2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o mi-001.js -O2 -sUSE_SDL=2 -L./lib/ -llibremidi \
 	 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' \
