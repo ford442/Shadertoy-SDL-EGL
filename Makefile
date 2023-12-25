@@ -39,6 +39,15 @@ LINK_FLAGS += $(LDFLAGS) -sMALLOC=emmalloc -sOFFSCREENCANVAS_SUPPORT=1 -sTEXTDEC
 WEBGPU_FLAGS += -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
 
+b3_m1d1:
+	 em++ $(STDS) -c include/shader/libremidi/src/main.cpp -O2 -sUSE_SDL=2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -o mi-001.js -O2 -sUSE_SDL=2 -L./lib/ -llibremidi \
+	 $(COMMON_FLAGS) $(LINK_FLAGS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
+	 --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o
+
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
