@@ -1,5 +1,5 @@
 
-#include "include/shader/libremidi/libremidi.hpp"
+#include "../../libremidi/libremidi.hpp"
 #include <emscripten/html5.h>
 #include <emscripten/key_codes.h>
 #include <emscripten.h>
