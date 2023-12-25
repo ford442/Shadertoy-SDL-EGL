@@ -124,6 +124,8 @@ const char *vertexShader =
 */
 
 const char * vertexShader=
+"@group(0) @binding(1) var mySampler : sampler;\n"
+"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
 "@location(0) fragUV : vec2<f32>,\n"
@@ -214,7 +216,8 @@ wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+// colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 wrpca.at(0,0)=colorAttachment;
 depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
@@ -282,9 +285,10 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
-emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
-sze.at(0,0)=szhI;
-sze.at(0,1)=szhI;
+// emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
+emscripten_get_element_css_size("canvas",&szh,&szw);
+sze.at(0,0)=szh;
+sze.at(0,1)=szh;
 multiSamp={};
 multiSamp.count=1;
 multiSamp.mask=-1;
