@@ -107,9 +107,7 @@ static wict_tensor wict=wict_tensor{4,4};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 
-const char * vertexShader=
-"@group(0) @binding(1) var mySampler : sampler;\n"
-"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
+const char * vertexShader =
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
 "@location(0) fragUV : vec2<f32>,\n"
@@ -118,11 +116,11 @@ const char * vertexShader=
 "fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
 "const pos = array<vec2<f32>, 6>(\n"
 "vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
+"vec2<f32>(1.0f, -1.0f),\n"
 "vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f)\n"
+"vec2<f32>(-1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, 1.0f),\n"
 ");\n"
 "const uv = array<vec2<f32>, 6>(\n"
 "vec2(1.0f, 0.0f),\n"
