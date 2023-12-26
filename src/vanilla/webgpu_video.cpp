@@ -134,7 +134,7 @@ const char * vertexShader=
 "fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
 "const pos = array<vec2<f32>, 6>(\n"
 "vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
+"vec2<f32>(-1.0f, 0.5f),\n"
 "vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(1.0f, -1.0f),\n"
