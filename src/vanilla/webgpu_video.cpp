@@ -253,7 +253,7 @@ wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,
 
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),buffer_ptr,sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
     */
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*4),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*4),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -372,7 +372,7 @@ videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 videoTextureViewDescriptor.baseMipLevel=0; // default = 0
 videoTextureViewDescriptor.mipLevelCount=1;
 videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureViewDescriptor.arrayLayerCount=2;
+videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
