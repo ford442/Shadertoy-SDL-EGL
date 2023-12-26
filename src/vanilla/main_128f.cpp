@@ -410,11 +410,11 @@ fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
 
 frontState.compare=WGPU_STENCIL_OPERATION_KEEP;
-// frontState.failOp=
+frontState.failOp=WGPU_STENCIL_OPERATION_INVALID;
 // frontState.depthFailOp=
 // frontState.passOp=
 backState.compare=WGPU_STENCIL_OPERATION_KEEP;
-// backState.failOp=
+backState.failOp=WGPU_STENCIL_OPERATION_INVALID;
 // backState.depthFailOp=
 // backState.passOp=
 
