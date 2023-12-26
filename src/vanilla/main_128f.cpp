@@ -1,6 +1,7 @@
 #include "../../include/vanilla/main_render.hpp"
 
-
+WGpuStencilFaceState frontState={};
+WGpuStencilFaceState backState={};
 WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
@@ -407,16 +408,36 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
 wsm.at(0,0)=vs;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
-depthState={};
+
+frontState.compare=WGPU_STENCIL_OPERATION_KEEP;
+// frontState.failOp=
+// frontState.depthFailOp=
+// frontState.passOp=
+backState.compare=WGPU_STENCIL_OPERATION_KEEP;
+// backState.failOp=
+// backState.depthFailOp=
+// backState.passOp=
+
+    depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
 depthState.depthWriteEnabled=0;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_INVALID;
+// depthState.stencilReadMask=
+// depthState.stencilWriteMask=
+// depthState.depthBias=
+// depthState.depthBiasSlopeScale=
+// depthState.depthBiasClamp=
+depthState.stencilFront=frontState;
+depthState.stencilBack=backState;
+// depthState.clampDepth=;
 wdss.at(0,0)=depthState;
 depthState2={};
 depthState2.format=wtf.at(2,2);
 depthState2.depthWriteEnabled=1;
 // depthState2.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 // depthState2.depthCompare=WGPU_COMPARE_FUNCTION_ALWAYS;
+depthState2.stencilFront=frontState;
+depthState2.stencilBack=backState;
 wdss.at(1,1)=depthState2;
 vertState={};
 vertState.module=wsm.at(0,0);
