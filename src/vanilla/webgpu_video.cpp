@@ -214,7 +214,8 @@ wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+// colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 wrpca.at(0,0)=colorAttachment;
 depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
@@ -253,7 +254,7 @@ wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,
 
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),buffer_ptr,sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
     */
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*4*sizeof(unsigned char)),(sze.at(0,0)*sze.at(0,0)*4*sizeof(unsigned char)),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*4*sizeof(float)),(sze.at(0,0)*sze.at(0,0)*4*sizeof(float)),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -272,7 +273,7 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // wtf.at(0,0)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA8UINT;
+wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
