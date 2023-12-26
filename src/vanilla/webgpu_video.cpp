@@ -396,8 +396,8 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
-textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
-// textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
+// textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
+textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
 // textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayout1.multisampled=1;
@@ -495,7 +495,7 @@ colorTextureDescriptor.mipLevelCount=1;
 colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
-  wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
+wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
@@ -512,7 +512,6 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
 }
 
-
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
@@ -520,7 +519,6 @@ deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
-
 
 void WGPU_Start(){
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
@@ -531,12 +529,10 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-
 EM_BOOL framm(uint8_t * em){
 js_data_pointer.at(0,0)=em;
 return EM_TRUE;
 }
-
 
 extern "C"{
 
@@ -547,10 +543,8 @@ return;
 
 }
 
-
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
-
     
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
@@ -579,13 +573,11 @@ console.log(device);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
 
 */
-    
-
-    
+        
 let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*4;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
-   gl2.drawImage(vv,0,0);
+gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
    
 const bytesPerRow = cnv.width * 4;
