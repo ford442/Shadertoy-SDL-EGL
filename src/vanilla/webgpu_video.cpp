@@ -194,7 +194,6 @@ return result;
 return nullptr;
 }
 
-
 void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
@@ -362,8 +361,8 @@ videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
 videoTextureDescriptor.sampleCount=1;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT videoViewFormats[2]={wtf.at(0,0),wtf.at(2,2)};
-videoTextureDescriptor.viewFormats=&videoViewFormats;
+WGPU_TEXTURE_FORMAT videoViewFormats[1]={wtf.at(0,0)|wtf.at(2,2)};
+videoTextureDescriptor.viewFormats=&videoViewFormats[0];
 wtd.at(2,2)=videoTextureDescriptor;
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=videoTexture;
