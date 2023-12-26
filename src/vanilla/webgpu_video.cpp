@@ -136,7 +136,7 @@ const char * vertexShader=
 "vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f)\n"
+"vec2<f32>(-1.0f, -1.0f),\n"
 ");\n"
 "const uv = array<vec2<f32>, 6>(\n"
 "vec2(1.0f, 0.0f),\n"
