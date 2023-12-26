@@ -107,6 +107,21 @@ static wict_tensor wict=wict_tensor{4,4};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 
+/*
+const char *vertexShader =
+"@vertex\n"
+"fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
+"var pos = array<vec2<f32>, 6>(\n"
+"vec2<f32>(1.0f, 1.0f),\n"
+"vec2<f32>(1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, 1.0f),\n"
+"vec2<f32>(1.0f, 1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f)\n"
+");\n"
+"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
+"}\n";
+*/
 
 const char * vertexShader=
 "struct VertexOutput {\n"
@@ -121,7 +136,7 @@ const char * vertexShader=
 "vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
 "const uv = array<vec2<f32>, 6>(\n"
 "vec2(1.0f, 0.0f),\n"
@@ -200,11 +215,6 @@ wtv.at(1,1)=colorTextureView;
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-// colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
-colorAttachment.clearValue.r=0.7;
-colorAttachment.clearValue.g=0.0;
-colorAttachment.clearValue.b=0.8;
-colorAttachment.clearValue.a=1.0;
 wrpca.at(0,0)=colorAttachment;
 depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
@@ -220,8 +230,6 @@ depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 wtv.at(2,2)=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
@@ -244,7 +252,7 @@ wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,
 
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),buffer_ptr,sze.at(0,0)*16,sze.at(0,0)*16,sze.at(0,0),sze.at(0,0),1);
     */
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*4*sizeof(unsigned int)),(sze.at(0,0)*sze.at(0,0)*4*sizeof(unsigned int)),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),(sze.at(0,0)*4),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -274,10 +282,9 @@ config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
-// emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
-emscripten_get_element_css_size("canvas",&szh,&szw);
-sze.at(0,0)=szh;
-sze.at(0,1)=szh;
+emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
+sze.at(0,0)=szhI;
+sze.at(0,1)=szhI;
 multiSamp={};
 multiSamp.count=1;
 multiSamp.mask=-1;
@@ -290,7 +297,7 @@ shaderModuleDescF.code=frag_body;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget={};
 colorTarget.format=wtf.at(0,0);
-colorTarget.writeMask=WGPU_COLOR_WRITE_ALL;
+colorTarget.writeMask=15;
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthState.depthWriteEnabled=1;
@@ -305,7 +312,7 @@ vertState.constants=nullptr;
 priState={};
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
 // priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
-priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
+priState.frontFace=WGPU_FRONT_FACE_CW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
 priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
 priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
 fragState={};
@@ -442,10 +449,10 @@ wbge.at(0,0)=bindgroup_entries;
 // wrbed.at(0,0)=renderBundleEncoderDescriptor;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
-// emscripten_get_element_css_size("canvas",&szh,&szw);
+emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
-u64_siz.at(0,0)=szhI;
-// sze.at(0,0)=int(szh);
+u64_siz.at(0,0)=int(szh);
+sze.at(0,0)=int(szh);
 // sze.at(1,1)=szhI;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
@@ -574,32 +581,34 @@ console.log(device);
     
 
     
-var H=Module.HEAPU8.buffer;
-var dataSize=cnv.width*cnv.height*4;
-var gl2=cnv.getContext('2d',{willReadFrequently:true});
-gl2.drawImage(vv,0,0);
-var imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-var bytesPerRow = cnv.width * 4;
-var rowsPerImage = imageData.data.length / bytesPerRow;
+let H=Module.HEAPU8.buffer;
+let dataSize=cnv.width*cnv.height*4;
+let gl2=cnv.getContext('2d',{willReadFrequently:true});
+   gl2.drawImage(vv,0,0);
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+   
+const bytesPerRow = cnv.width * 4;
+const rowsPerImage = imageData.data.length / bytesPerRow;
 console.log('rowsPerImage:');
 console.log(rowsPerImage);
 console.log('bytesPerRow:');
 console.log(bytesPerRow);
 console.log('size:');
 console.log(cnv.width);
-var dataSize2=imageData.data.length;
+let dataSize2=imageData.data.length;
 console.log('dataSize:',dataSize);
 console.log('dataSize2:',dataSize2);
+    
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 dataSize2=imageData.data.length;
 //  console.log('dataSize:',dataSize);
 //  console.log('dataSize2:',dataSize2);
-var pixelData=new Uint8ClampedArray(imageData);
-var heapArray=new Uint8ClampedArray(H,0,dataSize);
+let pixelData=new Uint8ClampedArray(imageData);
+let heapArray=new Uint8ClampedArray(H,0,dataSize);
 heapArray.set(pixelData,dataSize2);
-Module.ccall("frm",null,["Number"],[0]);
+// Module.ccall("frm",null,["Number"],[0]);
 },50);
 }
   
