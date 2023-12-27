@@ -5,7 +5,7 @@ rand rnnd;
 extern"C"{
 
 int r4nd(int tH){
-Rg=song.rNd(tH);
+Rg=rand.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
