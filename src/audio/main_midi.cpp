@@ -66,6 +66,7 @@ normalResStart();
 static inline boost::function<void()>jss=[](){js_main();};
 
 int main(){
+emscripten_run_script(./test.js);
 tie(jss,js_main);
 jss();
 return 0;
