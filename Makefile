@@ -48,6 +48,15 @@ b3_m1d1:
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o
 
+b3_m1d1_2:
+	 em++ $(STDS) -c src/audio/main_midi.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	 em++ $(STDS) -o mi-001.js -O2 \
+	 $(COMMON_FLAGS) $(LINK_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
+	 --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main_midi.o
+
 b3_shader_webgpu:
 	 em++ $(STDS) lib/lib_webgpu_cpp20.cpp -static $(STATIC_LINK_FLAGS)
 	 em++ $(STDS) lib/lib_webgpu.cpp -static $(STATIC_LINK_FLAGS)
