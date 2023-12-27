@@ -1,6 +1,6 @@
 #include "../../include/audio/main_midi.hpp"
 
-rand rnnd;
+rnnd rnnd;
 
 extern"C"{
 
