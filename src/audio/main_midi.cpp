@@ -5,7 +5,7 @@ rnnd rnnd;
 extern"C"{
 
 int r4nd(int tH){
-Rg=rand.rNd(tH);
+Rg=rnnd.rNd(tH);
 c=wasm_i32x4_extract_lane(Rg,0);
 return c;
 }
