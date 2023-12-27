@@ -50,7 +50,7 @@ b3_m1d1:
 	 --closure-args=--externs=lib/webgpu-closure-externs.js -sFORCE_FILESYSTEM=1 \
 	 --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o
 
-b3_m1d1_2:
+b3_midi_2:
 	 em++ $(STDS) -c src/audio/main_midi.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -o $(BIN_NAME)-wm.js -O2 \
 	 $(COMMON_FLAGS) $(LINK_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
