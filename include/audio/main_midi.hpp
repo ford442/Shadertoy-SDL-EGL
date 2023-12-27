@@ -41,7 +41,7 @@ using namespace ::boost::tuples;
 #include <ctime>
 #include <random>
 
-class rand{
+class rnnd{
 
 private:
 
