@@ -69,7 +69,7 @@ b3_compute:
 	 --memory-init-file 0 main_compute.o
 
 b3_webgpu_default:
-	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_default.cpp -std=c++20 -ffp-contract=off \
+	 em++ -D__EMSCRIPTEN__ -fopenmp-simd src/vanilla/webgpu_default.cpp -std=c++20 -ffp-contract=off \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -O2 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-df.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off \
