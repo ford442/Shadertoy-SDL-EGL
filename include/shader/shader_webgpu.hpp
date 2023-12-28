@@ -214,6 +214,7 @@ static inline char wgl_cmp_src[2000]="@group(0)@binding(0)var<storage,read>input
 
 static inline char cm_hdr_src[3300]="#version 300 es\n"
 "#extension GL_EXTENSIONS : enable\n"
+"#extension all : enable\n"
 "#pragma target(glsl_es)\n"
 "#pragma enable_bitfield_ops\n"
 "#pragma enable_matrix_dot\n"
