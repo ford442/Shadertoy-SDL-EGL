@@ -589,12 +589,12 @@ console.log(device);
 */
         
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*4;
+let dataSize=cnv.width*cnv.height*32;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
 gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,vv.width,vv.height);
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
    
-const bytesPerRow = vv.width * 4;
+const bytesPerRow = cnv.width * 4;
 const rowsPerImage = imageData.data.length / bytesPerRow;
 console.log('rowsPerImage:');
 console.log(rowsPerImage);
