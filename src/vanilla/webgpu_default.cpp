@@ -257,13 +257,8 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
 // u64_uni.at(4,4)=u_time.time_spanb.count()/1.0f;
-  // colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
-  // wt.at(1,1)=colorTexture;
-  // colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
-  // wtv.at(1,1)=colorTextureView;
-// colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
- wtv.at(1,1)=wtv.at(1,1)=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
-
+colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
+wt.at(1,1)=colorTexture;
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -576,13 +571,10 @@ bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
 wbg.at(0,0)=bindgroup;
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(1,1));
-  colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
-  wt.at(1,1)=colorTexture;
   
-wtv.at(1,1)=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
-  
-//    wtv.at(1,1)=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
-
+colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
+wtv.at(1,1)=colorTextureView;
+// colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
