@@ -126,7 +126,7 @@ const char *vertexShader =
 const char * vertexShader=
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>,\n"
+"@location(0) fragUV : vec2<f32>\n"
 "};\n"
 "@vertex\n"
 "fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
@@ -136,7 +136,7 @@ const char * vertexShader=
 "vec2<f32>(-1.0f, -1.0f),\n"
 "vec2<f32>(1.0f, 1.0f),\n"
 "vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
+"vec2<f32>(-1.0f, -1.0f)\n"
 ");\n"
 "const uv = array<vec2<f32>, 6>(\n"
 "vec2(1.0f, 0.0f),\n"
@@ -144,7 +144,7 @@ const char * vertexShader=
 "vec2(0.0f, 1.0f),\n"
 "vec2(1.0f, 0.0f),\n"
 "vec2(0.0f, 1.0f),\n"
-"vec2(0.0f, 0.0f),\n"
+"vec2(0.0f, 0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
 "output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
@@ -240,7 +240,6 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -255,11 +254,11 @@ wd.at(0,0)=result;
 js_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
-// WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
+WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=canvasFormat;
-// wtf.at(0,0)=canvasFormat;
+wtf.at(0,0)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
@@ -268,8 +267,8 @@ config.format=wtf.at(0,0);
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
-config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
-config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
+// config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
@@ -348,7 +347,7 @@ videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
-videoTextureDescriptor.sampleCount=4;
+videoTextureDescriptor.sampleCount=1;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT videoViewFormats[1]={wtf.at(0,0)};
 videoTextureDescriptor.viewFormats=&videoViewFormats[0];
@@ -434,15 +433,15 @@ bindgroup_entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wtv.at(2,2);
 wbge.at(0,0)=bindgroup_entries;
-// renderBundleEncoderDescriptor.sampleCount=4;
+// renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 // wrbed.at(0,0)=renderBundleEncoderDescriptor;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
-// emscripten_get_element_css_size("canvas",&szh,&szw);
+emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 u64_siz.at(0,0)=szhI;
-// sze.at(0,0)=int(szh);
+sze.at(0,0)=szh;
 // sze.at(1,1)=szhI;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
@@ -467,7 +466,7 @@ depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
-depthTextureDescriptor.sampleCount=4;
+depthTextureDescriptor.sampleCount=1;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats[1]={WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
@@ -481,7 +480,7 @@ colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
-colorTextureDescriptor.sampleCount=4;
+colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
