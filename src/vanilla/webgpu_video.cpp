@@ -275,7 +275,7 @@ emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 sze.at(0,0)=szhI;
 sze.at(0,1)=szhI;
 multiSamp={};
-multiSamp.count=1;
+multiSamp.count=0;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
@@ -360,7 +360,7 @@ videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 videoTextureViewDescriptor.baseMipLevel=0; // default = 0
 videoTextureViewDescriptor.mipLevelCount=1;
 videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureViewDescriptor.arrayLayerCount=2;
+videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
@@ -388,7 +388,7 @@ wbbl.at(0,0)=bufferBindingLayout1;
 textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
 // textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout1.multisampled=1;
+textureBindingLayout1.multisampled=0;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 // samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_NON_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
