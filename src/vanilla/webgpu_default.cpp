@@ -611,7 +611,7 @@ WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
 deviceDesc.requiredFeatures=ftr;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
-deviceDesc.requiredLimits=ftr;
+deviceDesc.requiredLimits=lmts;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
