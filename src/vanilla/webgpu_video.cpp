@@ -172,7 +172,7 @@ const char * vertexShader=
 "vec2(-1.0f, 1.0f),\n"
 ");\n"
 "var output : VertexOutput;\n"
-"output.Position = vec4(pos[VertexIndex], 1.0f, 1.0f);\n"
+"output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
 "output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
@@ -589,7 +589,7 @@ console.log(device);
 */
         
 let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*32;
+let dataSize=cnv.width*cnv.height*8;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
