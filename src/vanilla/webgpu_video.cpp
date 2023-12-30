@@ -614,7 +614,7 @@ dataSize2=imageData.data.length;
 //  console.log('dataSize:',dataSize);
 //  console.log('dataSize2:',dataSize2);
 let pixelData=new Uint8Array(imageData);
-let heapArray=new Uint8Array(H,0,dataSize);
+let heapArray=new Uint8Array(H,0,dataSize2);
 heapArray.set(pixelData,dataSize2);
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
