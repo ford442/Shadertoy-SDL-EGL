@@ -262,7 +262,7 @@ u64_uni.at(3,3)=u_time.time_spanb.count()*1000;
   // colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
   // wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
-
+ wtv.at(1,1)=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
