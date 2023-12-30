@@ -148,7 +148,7 @@ const char * vertexShader=
 "vec2(0.0f, 0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
-"output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
+"output.Position = vec4(pos[VertexIndex], 1.0f, 1.0f);\n"
 "output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
