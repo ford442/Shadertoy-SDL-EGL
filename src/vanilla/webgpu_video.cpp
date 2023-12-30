@@ -123,7 +123,7 @@ const char *vertexShader =
 "}\n";
 */
 
-/*
+
 const char * vertexShader=
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
@@ -148,35 +148,10 @@ const char * vertexShader=
 "vec2(0.0f, 0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
-"output.Position = vec4(pos[VertexIndex], 0.0f, 0.0f);\n"
-"output.fragUV = uv[VertexIndex];\n"
-"return output;\n"
-"}\n";
-*/
-
-const char * vertexShader=
-"struct VertexOutput {\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>\n"
-"};\n"
-"@vertex\n"
-"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
-"const pos = array<vec2<f32>, 3>(\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(1.0f, 1.0f)\n"
-");\n"
-"const uv = array<vec2<f32>, 3>(\n"
-"vec2(1.0f, 1.0f),\n"
-"vec2(1.0f, -1.0f),\n"
-"vec2(-1.0f, 1.0f),\n"
-");\n"
-"var output : VertexOutput;\n"
 "output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
 "output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
-
 
 const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
@@ -239,8 +214,8 @@ wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-// colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
+colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+// colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 wrpca.at(0,0)=colorAttachment;
 depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
@@ -266,14 +241,13 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),reinterpret_cast<uint8_t*>(js_data_pointer.at(0,0)),sze.at(0,0)*4*sizeof(float),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4*sizeof(float),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 return;
 }
-
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
@@ -282,7 +256,7 @@ wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=canvasFormat;
-wtf.at(0,0)=canvasFormat;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
