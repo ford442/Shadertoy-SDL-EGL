@@ -377,7 +377,7 @@ videoTextureDescriptor.format=wtf.at(0,0);
 videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
-videoTextureDescriptor.depthOrArrayLayers=2;
+videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
 videoTextureDescriptor.sampleCount=1;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
@@ -392,7 +392,7 @@ videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 videoTextureViewDescriptor.baseMipLevel=0; // default = 0
 videoTextureViewDescriptor.mipLevelCount=1;
 videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureViewDescriptor.arrayLayerCount=2;
+videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
@@ -598,9 +598,9 @@ let H=Module.HEAPU8.buffer;
 let dataSize=cnv.width*cnv.height*4;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
 gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+let imageData=gl2.getImageData(0,0,vv.width,vv.height);
    
-const bytesPerRow = cnv.width * 4;
+const bytesPerRow = vv.width * 4;
 const rowsPerImage = imageData.data.length / bytesPerRow;
 console.log('rowsPerImage:');
 console.log(rowsPerImage);
