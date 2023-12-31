@@ -214,7 +214,7 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var alph=Alphe($amax,$amin,$aavg,p[3]);
 var Min=(4.0*(($fmax-($favg-$fmin))/2.0));
 var ouT=Math.max(Min,alph);
   /* STONE
